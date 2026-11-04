@@ -25,6 +25,8 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 
 ## Bring your friends
 
+The in-game scorecard keeps earlier rounds, finishing orders and public action totals throughout the match. Switch rounds, filter players or download the whole public match log; held cards are excluded. Completed rounds also travel with seat recovery.
+
 1. Enter a nickname and create a room.
 2. Pick a seat and copy the invitation link.
 3. Friends open the link and take their seats. The host starts the game.

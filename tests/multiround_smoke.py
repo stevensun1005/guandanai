@@ -33,7 +33,11 @@ snapshot = """()=>({round:G.round,phase:G.phase,L:G.L,
  levels:[G.levels[NET.off%2],G.levels[(NET.off+1)%2]],
  hands:Array.from({length:4},(_,seat)=>G.hands[toLocal(seat)].concat((G.rest||[]).filter(rest=>rest.p===toLocal(seat)).flatMap(rest=>rest.cards)).map(card=>card.id).sort((a,b)=>a-b)),
  log:G.log.map(entry=>({p:toAbs(entry.p),cards:entry.cards?.map(card=>card.id).sort((a,b)=>a-b)||null})),
- out:G.out.map(toAbs)})"""
+ out:G.out.map(toAbs),
+ history:(G.roundHistory||[]).map(record=>({round:record.round,L:record.L,
+ levels:[record.levels[NET.off%2],record.levels[(NET.off+1)%2]],
+ result:{team:(record.result.team+NET.off)%2,order:record.result.order.map(toAbs),up:record.result.up},
+ log:record.log.map(entry=>({p:toAbs(entry.p),cards:entry.cards?.map(card=>card.id)||null}))}))})"""
 status = """()=>{
  const all=G.hands.flat().map(card=>card.id).concat((G.log||[]).flatMap(entry=>entry.cards?.map(card=>card.id)||[]),(G.rest||[]).flatMap(rest=>rest.cards.map(card=>card.id)));
  return {phase:G.phase,round:G.round,turn:G.turn,log:G.log?.length||0,count:all.length,unique:new Set(all).size,syncs:NET.syncCount||0};
@@ -201,6 +205,7 @@ window.Worker=class extends BaseWorker {
                 )
             snaps = [page.evaluate(snapshot) for page in pages]
             assert all(snap == snaps[0] for snap in snaps[1:]), ("round divergence", snaps)
+            assert len(snaps[0]["history"]) == min(snaps[0]["round"], 200)
             rounds += 1
             reports.append(
                 {
@@ -208,6 +213,7 @@ window.Worker=class extends BaseWorker {
                     "moves": len(snaps[0]["log"]),
                     "levels": snaps[0]["levels"],
                     "allClientsEqual": True,
+                    "archivedRounds": len(snaps[0]["history"]),
                 }
             )
             print(json.dumps(reports[-1]), flush=True)

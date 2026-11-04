@@ -9,6 +9,7 @@ import { forgetSeat } from '../network/rejoin-storage.js';
 import { practiceFinish, practiceSave } from '../replay/import-export.js';
 import { practiceView } from '../replay/viewer.js';
 import { $ } from './cards.js';
+import { showPublicHistory } from './history-dialog.js';
 
 let nextDone;
 
@@ -56,14 +57,14 @@ export function showResult() {
     `<h2>${head}</h2>${body}
     ${waitHtml()}
     ${runtime.reviewMode ? '<p class="muted">点桌上的任意一手牌，回到当时所有人的牌，可以接着写评语；写完了点“导出本局复盘”。</p>' : ''}
-    <div class="btns">${runtime.reviewMode ? '<button class="btn" id="replayBtn">回放</button><button class="btn" id="doneBtn">导出本局复盘</button>' : ''}${nextBtnHtml()}</div>`,
+    <div class="btns">${runtime.reviewMode ? '<button class="btn" id="replayBtn">回放</button><button class="btn" id="doneBtn">导出本局复盘</button>' : '<button class="btn" id="resultHistoryBtn">整场战况</button>'}${nextBtnHtml()}</div>`,
     true,
   );
   $('#panel').dataset.kind = 'result';
   if (runtime.reviewMode) {
     $('#replayBtn').onclick = () => practiceView(runtime.TREC.rounds.length - 1, 0, true);
     $('#doneBtn').onclick = practiceFinish;
-  }
+  } else $('#resultHistoryBtn').onclick = () => showPublicHistory(true, $('#resultHistoryBtn'));
   const nb = $('#nextBtn');
   if (nb) {
     nb.onclick = askNext;

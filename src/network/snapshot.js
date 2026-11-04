@@ -63,6 +63,19 @@ export function rotateSnapshot(source, offset) {
     game.result.aTeam = team(game.result.aTeam);
     game.result.order = seats(game.result.order);
   }
+  if (game.roundHistory)
+    game.roundHistory = game.roundHistory.map((record) => ({
+      ...record,
+      names: Array.from({ length: 4 }, (_, local) => record.names[(local + offset) % 4]),
+      levels: offset % 2 ? record.levels.slice().reverse() : record.levels,
+      log: records(record.log, ['p']),
+      result: {
+        ...record.result,
+        team: team(record.result.team),
+        aTeam: team(record.result.aTeam),
+        order: seats(record.result.order),
+      },
+    }));
   return game;
 }
 

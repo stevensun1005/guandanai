@@ -35,6 +35,7 @@ export function resetGame() {
     ready: [],
     aFails: [0, 0],
     nextReady: [],
+    roundHistory: [],
   };
 }
 
@@ -47,29 +48,12 @@ export function newGame() {
   }
 }
 
-// the host shuffles: the deck order, who cuts and (first round) who leads all travel in the event. Before it goes out
-// the host quietly looks at the four hands it would make (every fourth card, as they are dealt): if any hand would
-// hold six or more cards of one rank, or all four jokers, the deck is shuffled once more and dealt as it comes
+// The host sends one uniformly shuffled deck. Large bombs and four jokers remain valid random deals.
 export function roundEvt(reset) {
   const cutter =
     !reset && runtime.game.prevOut ? toAbs(runtime.game.prevOut[0]) : (Math.random() * 4) | 0;
-  let deck = shuffle(makeDeck());
-  if (lopsided(deck)) deck = shuffle(makeDeck());
+  const deck = shuffle(makeDeck());
   return { k: 'round', reset, deck: deck.map((c) => c.id), cutter, first: (Math.random() * 4) | 0 };
-}
-
-function lopsided(deck) {
-  for (let h = 0; h < 4; h++) {
-    const n = {};
-    let jokers = 0;
-    deck.forEach((c, i) => {
-      if (i % 4 !== h) return;
-      if (c.r >= 16) jokers++;
-      else n[c.r] = (n[c.r] || 0) + 1;
-    });
-    if (jokers === 4 || Object.values(n).some((k) => k >= 6)) return true;
-  }
-  return false;
 }
 
 export function initialize() {

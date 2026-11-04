@@ -7,6 +7,7 @@
   color: var(--ink);
   background: var(--felt-deep);
   font-family: var(--font-ui);
+  overflow: auto;
 }
 .public-history[open] {
   display: flex;
@@ -50,7 +51,7 @@
 }
 .public-history ol {
   flex: 1;
-  min-height: 0;
+  min-height: 90px;
   overflow: auto;
   margin: 0;
   padding: 0 4px 0 30px;
@@ -92,4 +93,51 @@
 }
 body.practice #historyBtn {
   display: none;
+}
+.public-match-summary {
+  font-size: 13px;
+}
+.public-match-summary summary {
+  cursor: pointer;
+  color: var(--gold);
+  padding: 5px 0;
+}
+#publicMatchBody {
+  max-height: min(220px, 30dvh);
+  overflow: auto;
+  padding: 8px 0;
+}
+#publicMatchBody table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-variant-numeric: tabular-nums;
+}
+#publicMatchBody caption {
+  caption-side: bottom;
+  text-align: left;
+  color: var(--muted);
+  font-size: 11px;
+  padding-top: 6px;
+}
+#publicMatchBody th,
+#publicMatchBody td {
+  padding: 6px 3px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+#publicMatchBody th:first-child {
+  text-align: left;
+  max-width: 110px;
+  overflow-wrap: anywhere;
+}
+.match-round-result {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.match-round-result span {
+  color: var(--muted);
+  overflow-wrap: anywhere;
 }

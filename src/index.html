@@ -77,6 +77,12 @@
       <p id="publicHistorySummary"></p>
       <div class="public-history-tools">
         <label
+          >局数
+          <select id="publicHistoryRound">
+            <option value="">当前局</option>
+          </select></label
+        >
+        <label
           >查看
           <select id="publicHistoryFilter">
             <option value="all">全部玩家</option>
@@ -88,7 +94,12 @@
         >
         <button class="link" id="publicHistoryCopy">复制牌谱</button
         ><button class="link" id="publicHistorySave">下载牌谱</button>
+        <button class="link" id="publicMatchSave">下载整场</button>
       </div>
+      <details class="public-match-summary" id="publicMatchSummary">
+        <summary id="publicMatchLabel">整场战况</summary>
+        <div id="publicMatchBody"></div>
+      </details>
       <ol id="publicHistoryList" aria-label="公开出牌记录"></ol>
       <small id="publicHistoryNotice" role="status">查看期间对局计时继续。</small>
     </dialog>
@@ -108,7 +119,7 @@
           ><span class="optwrap"
             ><button class="link" id="optBtn" aria-expanded="false">选项</button
             ><span class="optmenu" id="optMenu" hidden
-              ><button class="link" id="historyBtn">本局牌谱</button
+              ><button class="link" id="historyBtn">牌谱与战况</button
               ><button class="link tog" id="sfxBtn" aria-pressed="true">音效</button
               ><button class="link" id="cardBackBtn" title="点一下换牌背：大雁、枫叶、花纹">
                 牌背：<span id="backName">大雁</span></button

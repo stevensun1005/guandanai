@@ -7,6 +7,7 @@ import { miniMode } from '../input/actions.js';
 import { handEl } from '../input/pointer.js';
 import { practicePlays } from '../replay/inspector.js';
 import { practiceRoundEnd } from '../replay/session.js';
+import { rememberPublicRound } from '../replay/match-record.js';
 import { $ } from '../ui/cards.js';
 import { renderClocks } from '../ui/clocks.js';
 import { showResult } from '../ui/overlays.js';
@@ -176,6 +177,7 @@ function finishRound() {
   runtime.game.prevOut = runtime.game.out.slice();
   runtime.game.lvlTeam = team;
   runtime.game.phase = win || draw ? 'over' : 'roundEnd';
+  if (!runtime.reviewMode) rememberPublicRound(runtime.game, runtime.names, runtime.nickname);
   runtime.game.turn = -1;
   runtime.game.reveal = k0;
   render();
