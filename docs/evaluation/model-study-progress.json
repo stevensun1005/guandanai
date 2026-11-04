@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "reportGeneratorSHA256": "95e1aa5dacae1d3375be50a1aa968609ca5b21de66fe7877690d4d5a9bd05d5a",
+  "reportGeneratorSHA256": "e4b7674583982909644813e7cd7edfc19c457f9860dec095175c675faf47abed",
   "metric": "Whole-match team wins / all matches; draws included",
   "finalHeldoutCompleted": false,
   "target80Validated": false,
@@ -34499,34 +34499,36 @@
         "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
       },
       "startedAt": "2026-11-04T19:24:41.516Z",
-      "updatedAt": "2026-11-04T19:25:41.634Z",
+      "updatedAt": "2026-11-04T19:42:41.872Z",
       "stoppedAt": null,
       "stopReason": null,
-      "elapsedSeconds": 60.118,
+      "elapsedSeconds": 1080.356,
       "totals": {
-        "matches": 321,
-        "decisions": 158220,
-        "rows": 158220
+        "matches": 5570,
+        "decisions": 2719544,
+        "rows": 2719544
       },
       "learner": {
         "pid": 51572,
-        "state": "waiting-for-data",
-        "step": 196,
-        "version": "v000000000",
-        "buffer": 100598,
-        "ingestedRows": 100598,
-        "trainedRows": 401408,
-        "lossEMA": 3.3777205470752563,
-        "replayRatio": 3.9902184934094116,
-        "stepsPerSecond": 3.558250340172236,
-        "updatedAt": "2026-11-04T19:25:40Z"
+        "state": "training",
+        "step": 5145,
+        "version": "v000002931",
+        "buffer": 2000000,
+        "ingestedRows": 2667842,
+        "trainedRows": 10536960,
+        "lossEMA": 3.3526388636965656,
+        "replayRatio": 3.9496192053352486,
+        "stepsPerSecond": 4.782023475936644,
+        "updatedAt": "2026-11-04T19:42:40Z"
       },
       "latest": {
-        "version": "v000000000",
-        "file": "v000000000.onnx",
-        "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
-        "step": 0,
-        "publishedAt": "2026-11-04T19:24:41.506Z"
+        "version": "v000002931",
+        "file": "v000002931.onnx",
+        "sha256": "7fcf354c9c1f2cafe471f052d6a1df104059218016ff1f190d4e1b4f57e8559a",
+        "step": 2931,
+        "trainedRows": 6002688,
+        "ingestedRows": 1516831,
+        "publishedAt": "2026-11-04T19:34:49Z"
       },
       "champion": {
         "version": "v000000000",
@@ -34567,9 +34569,813 @@
         "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
         "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
       },
-      "statusSHA256": "82d662472e2d295399ec8e2c1743a01ead3764e51d30d160e7d75a8b5200d9c7",
-      "eventsSHA256": "41f2e17f9d3a4b0c93ba68a3a006b3d495d94fc959b5f864a176800f10c5b435",
-      "gates": [],
+      "statusSHA256": "e76b23fb9ceff12391182e694166a5fad37123b1b041f32dafcabb66410ec9a5",
+      "eventsSHA256": "ce2e61ae7e75b72cea0799858dcfecbb2c5727f6386254e8666e99e2275f16a6",
+      "gates": [
+        {
+          "role": "development monitoring; not held-out acceptance",
+          "kind": "gate",
+          "status": "running",
+          "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+          "rules": {
+            "tribute": true,
+            "aFail": "draw",
+            "from": 2,
+            "through": "A"
+          },
+          "metric": "Team match score: win 1, draw 0.5, loss 0",
+          "challenger": {
+            "version": "v000002931",
+            "file": "D:\\vibecoding\\guandan\\work\\continuous\\main\\league\\v000002931.onnx",
+            "sha256": "7fcf354c9c1f2cafe471f052d6a1df104059218016ff1f190d4e1b4f57e8559a"
+          },
+          "champion": {
+            "version": "v000000000",
+            "file": "D:\\vibecoding\\guandan\\work\\continuous\\main\\gate\\champion-0.onnx",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+          },
+          "pairs": 183,
+          "matches": 366,
+          "wins": 154,
+          "losses": 169,
+          "draws": 43,
+          "seedRange": [3500000000, 3500000182],
+          "meanScore": 0.47950819672131145,
+          "clusterHoeffding95CI": [0.3791144438662002, 0.5799019495764227],
+          "llr": -2.1842480878455164,
+          "decision": null,
+          "settings": {
+            "alpha": 0.05,
+            "beta": 0.05,
+            "mu0": 0.5,
+            "mu1": 0.53,
+            "minPairs": 100,
+            "maxPairs": 1000
+          },
+          "sourceSHA256": {
+            "scripts/continuous/supervisor.mjs": "632905b49396228856d6e554fa7adb8a5e89bea35425881fe992dfa16f77a67e",
+            "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+            "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+            "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+            "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+            "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+            "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+            "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+            "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+            "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+          },
+          "recordsSHA256": "91d07891e64d403252bc71412b761ae348e6de3b5031d3e301ca30f48c4e43cc",
+          "recordsFile": "gate/gate-00000.json",
+          "seedResults": [
+            {
+              "seed": 3500000000,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000001,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000002,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000003,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000004,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000005,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000006,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000007,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000008,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000009,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000010,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000011,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000012,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000013,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000014,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000015,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000016,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000017,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000018,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000019,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000020,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000021,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000022,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000023,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000024,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000025,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000026,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000027,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000028,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000029,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000030,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000031,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000032,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000033,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000034,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000035,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000036,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000037,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000038,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000039,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000040,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000041,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000042,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000043,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000044,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000045,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000046,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000047,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000048,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000049,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000050,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000051,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000052,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000053,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000054,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000055,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000056,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000057,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000058,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000059,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000060,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000061,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000062,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000063,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000064,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000065,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000066,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000067,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000068,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3500000069,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000070,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000071,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000072,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000073,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000074,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000075,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000076,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000077,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000078,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3500000079,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000080,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000081,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000082,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000083,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000084,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000085,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000086,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000087,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000088,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000089,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000090,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000091,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000092,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000093,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000094,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000095,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000096,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000097,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000098,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000099,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000100,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000101,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000102,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000103,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000104,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000105,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000106,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000107,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000108,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000109,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000110,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000111,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000112,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000113,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000114,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000115,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000116,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000117,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000118,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000119,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000120,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000121,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000122,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000123,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000124,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000125,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000126,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000127,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000128,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000129,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000130,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000131,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000132,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000133,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000134,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000135,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000136,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000137,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000138,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000139,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000140,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000141,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000142,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000143,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000144,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000145,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000146,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000147,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000148,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000149,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000150,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000151,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000152,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000153,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3500000154,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000155,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000156,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000157,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000158,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000159,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000160,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000161,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000162,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000163,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000164,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000165,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000166,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000167,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000168,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000169,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000170,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000171,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000172,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000173,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000174,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000175,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000176,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000177,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000178,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000179,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000180,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000181,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000182,
+              "scores": [1, 0]
+            }
+          ]
+        }
+      ],
       "anchorChecks": [],
       "anchorRegressionStreak": 0,
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
@@ -36014,6 +36820,6 @@
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
     }
   },
-  "fingerprint": "98882c7aeb8eca756e5e566d13f10ac9a54f943310bd276892a8b818a95ba97f",
-  "observedUTC": "2026-11-04T19:25:57.428960+00:00"
+  "fingerprint": "d7ae1994e7da569fcd8a83078e6689b0bc44def723b370f1c5d03d16bbbbdc09",
+  "observedUTC": "2026-11-04T19:43:10.670144+00:00"
 }
