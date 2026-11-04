@@ -25,6 +25,7 @@ def baseline_model():
 
 def main():
     url=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765/'
+    url+=('&' if '?' in url else '?')+'test=1'
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True,channel='chrome');context=browser.new_context()
         context.route('**/models/benchmark-baseline.onnx',lambda route:route.fulfill(body=baseline_model(),content_type='application/octet-stream'))

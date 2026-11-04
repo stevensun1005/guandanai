@@ -1,15 +1,27 @@
 {
   "name": "guandanai",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "type": "module",
   "private": true,
+  "engines": {
+    "node": ">=20.19"
+  },
   "description": "Online four-player GuanDan with browser-local policy inference",
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test tests/encoding.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "format": "prettier --write \"src/**/*.{js,mjs,css,html}\" \"scripts/*.mjs\" \"tests/*.mjs\" \"docs/**/*.md\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
+    "format:check": "prettier --check \"src/**/*.{js,mjs,css,html}\" \"scripts/*.mjs\" \"tests/*.mjs\" \"docs/**/*.md\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json"
   },
   "dependencies": {
     "onnxruntime-web": "1.31.1",
     "peerjs": "1.5.4"
+  },
+  "devDependencies": {
+    "acorn": "^8.19.0",
+    "esbuild": "^0.28.2",
+    "eslint-scope": "^9.1.2",
+    "prettier": "^3.9.10"
   }
 }

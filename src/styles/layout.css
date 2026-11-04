@@ -1,0 +1,58 @@
+.lobby-box {
+  padding: 28px;
+  box-sizing: border-box;
+  width: min(500px, 100%);
+  border: 1px solid rgba(221, 176, 80, 0.2);
+  border-radius: 24px;
+  background: rgba(10, 33, 27, 0.45);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  gap: 12px;
+}
+.lobby-title {
+  font-size: 62px;
+}
+.lobby-felt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 24px;
+  font-family: var(--font-display);
+  opacity: 0.65;
+}
+@media (max-width: 560px) {
+  .lobby-box {
+    padding: 20px 16px;
+    gap: 9px;
+  }
+  .lobby-title {
+    font-size: 50px;
+  }
+  .rule-row {
+    grid-template-columns: 100px;
+    gap: 5px;
+  }
+  .rule-k {
+    font-size: 15px;
+  }
+  .rule-btn {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .lobby-testbox {
+    top: 12px;
+    right: 20px;
+  }
+  .lobby-test {
+    font-size: 11px;
+  }
+}
+@media (max-height: 780px) and (min-width: 561px) {
+  .lobby-box {
+    padding: 18px 24px;
+    gap: 8px;
+  }
+  .lobby-title {
+    font-size: 50px;
+  }
+}

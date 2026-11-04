@@ -1,71 +1,115 @@
-# GuandanAI · 掼蛋朋友局
+<div align="center">
 
-四人组队的在线掼蛋游戏。支持单人练习、房间邀请、进还贡、升级、手机操作和语音。
+# GuandanAI
 
-**在线玩：https://stevensun1005.github.io/guandanai/**
+### 掼蛋朋友局 · 打开网页，就坐一桌
 
-## 和朋友一起玩
+四人组队、房间邀请、浏览器内智能对手。电脑和手机都能玩。
 
-1. 打开网址，输入昵称。
-2. 一个人选择「开房间」、选座位，把「复制邀请链接」得到的链接发给朋友。
-3. 朋友打开链接，输入昵称、点「进入」并选座位。
-4. 房主点「开始」。空位和掉线座位由电脑接管。
+[![Deploy](https://github.com/stevensun1005/guandanai/actions/workflows/pages.yml/badge.svg)](https://github.com/stevensun1005/guandanai/actions/workflows/pages.yml)
+[![Version](https://img.shields.io/github/package-json/v/stevensun1005/guandanai?color=ddb050)](CHANGELOG.md)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES_Modules-f7df1e?logo=javascript&logoColor=black)
+![Runtime](https://img.shields.io/badge/Runtime-Browser_%2B_WebAssembly-4a7c59)
 
-电脑默认使用强化学习策略网络，在浏览器后台推理。界面不显示模型选择、名称或运行状态。首次加载需要下载游戏资源；如果加载失败，可以重试，不会悄悄切换成另一种电脑策略。
+**[立即开局](https://stevensun1005.github.io/guandanai/) · [玩法指南](docs/PLAYING.md) · [开发指南](CONTRIBUTING.md) · [更新记录](CHANGELOG.md)**
 
-朋友无需安装任何软件。房主的网页负责推进游戏，因此对局期间请保持房主页面打开。
+</div>
 
-## 本地开发
+![实际对局画面](docs/media/table-desktop.png)
 
-需要 Node.js 20+：
+## 一张链接，一桌朋友
 
-```powershell
+1. 打开游戏，输入昵称，选择 **开房间**。
+2. 选择自己的座位，点 **复制邀请链接** 发给朋友。
+3. 朋友打开链接、输入昵称、选择座位。房主点 **开始**。
+
+没人坐的座位由电脑接管，一个人也能直接开局。对局期间请保持房主页面打开。
+
+## 已经能做什么
+
+| 体验     | 内容                                                 |
+| -------- | ---------------------------------------------------- |
+| 四人掼蛋 | 两副牌、百搭、同花顺、进还贡、接风、升级打 A         |
+| 朋友房间 | 邀请链接、房间号、座位选择、掉线座位接管             |
+| 智能电脑 | 强化学习策略在浏览器后台运行，不需要 AI 服务器或密钥 |
+| 手牌操作 | 拖动、扫选、成组、拆组、横式／竖式／手持布局         |
+| 出牌辅助 | 合法出牌提示、同花顺查找、可选二次确认               |
+| 对局氛围 | 音效、全屏、可选语音、出牌动画与结果展示             |
+| 静态部署 | GitHub Pages 自动发布，所有模型资源随网页部署        |
+
+不同电脑风格和进一步的理牌改进正在迭代，进度见 [Roadmap](docs/ROADMAP.md)。已实现功能和计划内容会分别记录。
+
+## 为浏览器而做
+
+玩家无需安装 Node.js、Python 或桌面客户端。页面加载后，电脑出牌由 Web Worker 和 WebAssembly 在房主浏览器中计算。模型只接收自己的手牌、公开出牌、剩余张数和级数。
+
+首次下载包含推理组件和模型，需要稍等片刻。资源加载失败时会给出重试入口，不会悄悄切换成另一种电脑策略。
+
+## 本地运行
+
+准备 Node.js **20.19+**；项目 CI 使用 Node.js 24。
+
+```bash
+git clone https://github.com/stevensun1005/guandanai.git
+cd guandanai
 npm ci
 npm run build
 npm run dev
 ```
 
-打开 http://127.0.0.1:8765 ，或双击 `启动预览.cmd`。
+打开 **http://127.0.0.1:8765/**。修改源文件后重新构建，再刷新页面。
 
-## GitHub Pages 发布
+```bash
+npm test              # 规则、输入校验、模型特征和模块边界
+npm run format:check  # 代码与文档格式
+npm run build         # 完整生产构建
+```
 
-项目使用 `.github/workflows/pages.yml` 自动构建和发布。向 `main` 推送代码后，GitHub Actions 会安装依赖、构建 `dist` 并部署到 GitHub Pages。仓库 Settings → Pages 的 Source 设为 **GitHub Actions**。
+Python 仅用于模型导出和开发验证，普通玩家与静态部署都不需要。详见 [验证指南](docs/TESTING.md)。
 
-发布目录包含页面、联机组件、推理运行库和模型，不需要 Python 服务器或 API 密钥。资源使用相对路径，支持 `/guandanai/` 这样的项目网址。
-
-## 目录
+## 看得懂，也改得动
 
 ```text
-src/game.html          游戏源文件
-src/table-bot.js       电脑出牌与后台推理接入
-src/layout.css         页面布局
-src/ai/               策略输入编码与 Worker
-ai/policy.onnx        浏览器使用的策略网络
-ai/policy.ckpt        模型参数
-ai/reference/         独立数值验证
+src/
+  index.html          页面结构，不放游戏程序
+  app.js              功能装配与初始化
+  core/               无 DOM 依赖的牌、牌型、出牌生成和校验
+  game/               发牌、进还贡、回合、计时、事件与结算
+  hand/               理牌、提示、手牌视图与布局
+  input/              玩家操作、拖动与快捷键
+  ai/                 电脑控制、策略评估、特征编码与 Worker
+  network/            房间、消息协议、重连与语音
+  lobby/              大厅与座位
+  ui/                 牌面、牌桌、计时与弹层
+  replay/             对局记录、回看与导入导出
+  audio/ effects/     声音与动画
+  styles/ assets/     按功能拆分的样式和图片
+ai/                   策略模型与数值验证工具
 scripts/              构建、预览、模型导出和打包
-tests/                编码、推理及双浏览器联机检查
-dist/                 构建后的网页
+tests/                Node 单元检查与真实浏览器验证
+docs/                 玩法、架构、机器人与迭代路线
 ```
 
-## 验证
+源代码采用 ES Modules。生产构建负责打包、资源处理与版本标识；`dist` 是构建结果，不是开发入口。模块约定见 [架构文档](docs/ARCHITECTURE.md)。
 
-### 1.1 模型推理优化
+## 发布你自己的版本
 
-模型局面输入与候选动作输入分离，每批复用局面特征，避免为每个候选动作重复复制和计算同一局面。网络参数未重新训练；此版本优化推理性能，保持既有强化学习策略。模型和后台脚本使用页面版本作为缓存标识，模型更新后会加载对应资源。
+向 `main` 推送后，GitHub Actions 会执行检查、构建并发布到 GitHub Pages。Pages 的 Source 选择 **GitHub Actions**。
 
-本机 Chrome 中，对同一组 166 个候选动作进行 32 轮交替测量（前 4 轮预热）：耗时中位数由 15.5 ms 降至 11.1 ms；128 动作批次的输入量减少 89.8%。这组测量的输出最大差异为 0。性能结果会随设备、浏览器和手牌变化。
+也可以把 `npm run build` 生成的 `dist` 目录完整上传到静态网站。请保留 `assets/` 与 `models/` 的相对位置，不要只上传 `index.html`。
 
-玩家无需 Python；开发验证和模型导出可使用 Python、NumPy、ONNX 和 Playwright：
+## 常见问题
 
-```powershell
-python -m pip install numpy onnx playwright
-npm test
-python tests/check_encoding.py
-python tests/browser_smoke.py
-python tests/benchmark_model.py
-```
+**房主能关闭页面吗？** 房主页面负责推进游戏。关闭后，其他人可以在本机选择由电脑继续打，但不会自动产生新的联机房主。
 
-浏览器测试需要已安装 Chrome，并先启动本地预览。也可传入已发布网址，验证项目路径下的模型加载、开房、邀请链接、双端出牌同步、掉线接管和手机布局。
+**为什么朋友偶尔连不上？** 联机使用 WebRTC 与公共信令，双方的网络、NAT 和防火墙都会影响连接。双方刷新为相同页面版本后重试。
 
-联机使用浏览器 WebRTC 和公共信令服务，连接情况会受双方网络影响。
+**模型有没有偷偷看其他人的手牌？** 模型输入仅包含当前座位自己的牌和公开信息。房主浏览器承担整桌游戏状态，这与模型的输入范围是两件事。
+
+**支持哪些设备？** 主要验证现代 Chrome 桌面环境与手机尺寸布局；不同浏览器和真实设备的表现仍欢迎反馈。
+
+## 一起把这一桌做好
+
+欢迎带着可复现的场景提 [Issue](https://github.com/stevensun1005/guandanai/issues)，或提交小而明确的改进。UI 变化请附截图，牌型和策略变化请附具体牌局及验证结果。
+
+[贡献流程](CONTRIBUTING.md) · [机器人设计](docs/BOTS.md) · [测试与评估](docs/TESTING.md)

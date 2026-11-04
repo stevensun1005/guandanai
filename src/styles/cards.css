@@ -1,0 +1,563 @@
+/* card face */
+.card {
+  width: var(--cw);
+  height: calc(var(--cw) * var(--cr, 1.4));
+  background: var(--card);
+  border: 1px solid var(--card-edge);
+  border-radius: calc(var(--cw) * 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  color: var(--card-ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  flex: none;
+  overflow: hidden;
+}
+.card.red {
+  color: var(--red);
+}
+/* a phone: every card face, in the hand and on the table, is cut down to its corner (rank over suit) so the cards
+   take less room; the jokers read 大王 / 小王 there, and the hand is always laid out flat (no 手持) */
+html.phone body:not(.test) {
+  --cr: 0.86;
+}
+html.phone body:not(.test) .card .pip,
+html.phone body:not(.test) .card .tag.crown {
+  display: none;
+}
+html.phone body:not(.test) .card.joker .idx {
+  display: none;
+}
+.card .jw {
+  display: none;
+}
+html.phone body:not(.test) .card.joker .jw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: calc(var(--cw) * 0.05);
+  top: calc(var(--cw) * 0.08);
+  width: calc(var(--cw) * 0.36);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: calc(var(--cw) * 0.3);
+  line-height: 1.08;
+}
+html.phone #fanBtn {
+  display: none;
+}
+/* a phone keeps the table as clear as it can: the shuffle / cut and done-sorting buttons, the sorting sign and the
+   clocks at about half size; no card back by the names, no level disc in the middle (the level is in the corner) and
+   no line saying who played what; the cards on the table as large as they fit */
+html.phone body:not(.test) #deckBtn,
+html.phone body:not(.test) #readyBtn {
+  --d: 46px !important;
+  font-size: 13px !important;
+}
+html.phone body:not(.test) .stack,
+html.phone body:not(.test) .flick {
+  width: calc(var(--cw) * 0.5);
+  height: calc(var(--cw) * 0.7);
+  margin: calc(var(--cw) * -0.35) 0 0 calc(var(--cw) * -0.25);
+}
+html.phone body:not(.test) .prepbig #prepL {
+  font-size: clamp(14px, 2.2vh, 20px);
+  padding: 3px 9px 3px 11px;
+  border-radius: 9px;
+}
+html.phone body:not(.test) .prepbig .bigclock {
+  font-size: clamp(12px, 1.9vh, 17px);
+}
+html.phone body:not(.test) .clock {
+  font-size: 10px;
+}
+html.phone body:not(.test) #myClock {
+  font-size: 11px;
+}
+.who .back {
+  display: none;
+}
+html.phone body:not(.test) .fx-act {
+  font-size: 13px;
+}
+body:not(.test) .emblem {
+  visibility: hidden;
+}
+html.phone body:not(.test) #lastPlay {
+  display: none;
+}
+html.phone body:not(.test) #pile {
+  --cw: clamp(54px, min(18vw, 15vh), 88px);
+}
+/* a computer or tablet: a player's count of cards left stands under their plate, clear of the cards they play */
+html:not(.phone) .seat .cnt {
+  position: absolute;
+  top: calc(100% + 6px);
+}
+html:not(.phone) #seat3 .cnt {
+  left: 0;
+}
+html:not(.phone) #seat1 .cnt {
+  right: 0;
+}
+html:not(.phone) #seat2 .cnt {
+  left: 50%;
+  translate: -50% 0;
+}
+/* a computer or tablet's score: each side's level as a white number on its colour, the side being played ringed in gold */
+html:not(.phone) .score .tn {
+  display: none;
+}
+html:not(.phone) .score > span {
+  background: var(--team-fill);
+  color: #fff;
+  border-color: var(--team);
+  min-width: 2.6em;
+}
+html:not(.phone) .score > span b,
+html:not(.phone) .score > span.playing b {
+  color: #fff;
+  margin-left: 0;
+}
+html:not(.phone) .score > span.playing {
+  border-color: #ffe08a;
+  box-shadow:
+    0 0 0 2px #ffe08a,
+    0 0 16px var(--team);
+}
+/* the score: a red box and a blue box holding each side's level, the side being played filled with its colour */
+html.phone body:not(.test) .score .tn {
+  display: none;
+}
+html.phone body:not(.test) .score > span {
+  border-color: var(--team);
+  min-width: 2.4em;
+}
+html.phone body:not(.test) .score > span b,
+html.phone body:not(.test) .score > span.playing b {
+  margin-left: 0;
+}
+html.phone body:not(.test) .score {
+  flex-direction: row !important;
+  gap: 6px;
+}
+#rotateTip {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--felt-deep);
+  color: var(--ink);
+  text-align: center;
+}
+#rotateTip[hidden] {
+  display: none;
+}
+#rotateTip b {
+  font-size: 56px;
+  line-height: 1;
+  animation: turnUp 1.6s ease-in-out infinite;
+}
+#rotateTip p {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+}
+#rotateTip small {
+  font-size: 14px;
+  color: var(--muted);
+}
+@keyframes turnUp {
+  0%,
+  30% {
+    transform: rotate(90deg);
+  }
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+}
+#tribBox {
+  position: fixed;
+  z-index: 30;
+  transform: translateX(-50%);
+  pointer-events: none;
+  padding: 8px 18px;
+  border-radius: 12px;
+  text-align: center;
+  background: rgba(19, 54, 41, 0.92);
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+#tribBox[hidden] {
+  display: none;
+}
+#tribBox .trib {
+  font-size: clamp(17px, 2.2vw, 23px);
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+html.phone body:not(.test) #tribBox {
+  padding: 6px 10px;
+}
+html.phone body:not(.test) #tribBox .trib {
+  font-size: 14px;
+}
+/* the table: every card framed in its player's side colour (red or blue), the newest play's frame thicker and flashing */
+.pc.tr {
+  --tc: var(--red-team);
+}
+.pc.tb {
+  --tc: var(--blue-team);
+}
+.pc.tr .card,
+.pc.tb .card {
+  box-shadow:
+    0 0 0 2px var(--tc),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.pc.cur.tr .card,
+.pc.cur.tb .card {
+  box-shadow:
+    0 0 0 4px var(--tc),
+    0 0 14px 3px var(--tc),
+    0 4px 12px rgba(0, 0, 0, 0.45);
+  animation: tcBlink 1.1s ease-in-out infinite;
+}
+@keyframes tcBlink {
+  50% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--tc) 25%, transparent),
+      0 0 3px 1px color-mix(in srgb, var(--tc) 20%, transparent),
+      0 4px 12px rgba(0, 0, 0, 0.45);
+  }
+}
+/* on its side the tribute line stands to the right of the score, clear of the left-hand player's plate */
+html.phone.side body:not(.test) .tribinfo {
+  position: absolute;
+  grid-area: auto;
+  left: 120px;
+  top: 34px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+html.phone.side body:not(.test) .tribinfo .ct {
+  font-size: 13px;
+}
+/* the play buttons at half size; upright they stand in one row over 复原 (the hand keeps its last row clear of
+   them), on its side two by two over 两排 / 复原 (placed by placeActionBtns) */
+html.phone body:not(.test) #btns {
+  --d: 32px !important;
+  gap: 6px;
+}
+html.phone body:not(.test) #btns .btn {
+  font-size: 12px;
+}
+html.phone.rows body:not(.test) #btns {
+  position: absolute;
+  right: 0;
+  margin: 0;
+  z-index: 6;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  --d: 48px !important;
+}
+html.phone.rows body:not(.test) #btns .btn {
+  font-size: 15px;
+}
+html.phone.side body:not(.test) #btns {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+html.phone.rows body:not(.test) #hand {
+  --cw: clamp(48px, 15vw, 64px);
+}
+html.phone.side body:not(.test) #hand {
+  --cw: clamp(48px, 14vh, 60px);
+}
+/* a phone's hand takes as many rows as its cards need, so the rows button has nothing to offer; its groups lie in
+   the rows themselves (no frame, no tags), each card of a group with a gold edge along the top, and 成组 stands
+   beside 同花顺 */
+html.phone body:not(.test) #rowsBtn {
+  display: none;
+}
+html.phone body:not(.test) #fixZone,
+html.phone body:not(.test) #fixTags {
+  display: none !important;
+}
+html.phone body:not(.test) #hand .card.grp {
+  border-top: 3px solid var(--gold);
+}
+body:not(.test) #fixBtn {
+  position: static !important;
+}
+/* upright: the name row keeps clear of the column of play buttons, which may reach up beside it; your own status tag
+   is left out there (the lit plate, the clock and the play buttons say the same), and the row's buttons are a little
+   smaller, so it stays on one line */
+html.phone.rows body:not(.test) .mebar {
+  padding-right: 56px;
+  gap: 6px;
+}
+html.phone.rows body:not(.test) .mebar .stat {
+  display: none;
+}
+html.phone.rows body:not(.test) .mebar .link {
+  font-size: 13px;
+  padding: 3px 8px;
+}
+html.phone.rows body:not(.test) .mebar .left {
+  gap: 6px;
+}
+/* the finishing places at half size; your partner's beside the plate rather than under it, where their cards lie */
+html.phone body:not(.test) .place {
+  font-size: 14px;
+  padding: 3px 7px 3px 9px;
+  border-radius: 7px;
+}
+html.phone body:not(.test) #seat2 .place {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  margin: 0 0 0 8px;
+}
+html.phone body:not(.test) #myPlace {
+  margin-bottom: 2px;
+}
+.card .idx {
+  position: absolute;
+  left: calc(var(--cw) * 0.05);
+  top: calc(var(--cw) * 0.06);
+  width: calc(var(--cw) * 0.36);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  font-size: calc(var(--cw) * 0.34);
+}
+.card .idx .rk.ten {
+  letter-spacing: -0.08em;
+  font-size: 0.9em;
+}
+.card .idx .su {
+  font-size: 0.82em;
+  margin-top: 0.08em;
+}
+.card .pip {
+  position: absolute;
+  right: 10%;
+  bottom: 7%;
+  font-size: calc(var(--cw) * 0.52);
+  line-height: 1;
+}
+/* jokers carry the usual vertical JOKER index: the big joker in red, the small one in black */
+.card.joker .idx {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: calc(var(--cw) * 0.19);
+  line-height: 1.02;
+  gap: 0;
+  letter-spacing: 0;
+}
+.card.joker .pip {
+  font-size: calc(var(--cw) * 0.46);
+}
+/* wild cards (red hearts of the level rank): a gold face, a heavy gold frame, a crown under the index and a star in the corner */
+.card .tag.crown {
+  background: none;
+  padding: 0;
+  color: var(--wild-ink);
+  width: 1.15em;
+  line-height: 0;
+}
+.card .tag.crown svg {
+  width: 100%;
+  height: auto;
+  fill: currentColor;
+  display: block;
+}
+.card .tag {
+  margin-top: 0.2em;
+  font-size: 0.95em;
+  line-height: 1;
+  background: var(--wild-ink);
+  color: var(--wild-face);
+  border-radius: 0.18em;
+  padding: 0.1em 0.12em;
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+.card.wild {
+  background: linear-gradient(160deg, var(--wild-face) 0%, var(--wild-face-b) 100%);
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 0 2px var(--wild-ink),
+    0 0 12px 2px var(--gold),
+    0 1px 3px rgba(0, 0, 0, 0.35);
+}
+.card.wild::after {
+  content: '★';
+  position: absolute;
+  right: 6%;
+  top: 4%;
+  font-size: calc(var(--cw) * 0.24);
+  line-height: 1;
+  color: var(--wild-ink);
+}
+/* the other cards of the level being played: a lilac patch behind the rank and suit, a "级" badge in the corner and a
+   light that sweeps across now and then, so the level stays in mind */
+.card.lvl .idx {
+  background: #e8d9ff;
+  border-radius: calc(var(--cw) * 0.07);
+  padding: calc(var(--cw) * 0.03) 0;
+  box-shadow: 0 0 0 1px #c9adf2;
+}
+.card.lvl::after {
+  content: '级';
+  position: absolute;
+  right: 5%;
+  top: 4%;
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: calc(var(--cw) * 0.2);
+  line-height: 1;
+  color: #fff;
+  background: #7d4cc9;
+  border-radius: calc(var(--cw) * 0.05);
+  padding: 0.12em 0.16em;
+}
+.card.lvl::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 65%
+  );
+  animation: lvlShine 3.4s ease-in-out infinite;
+}
+@keyframes lvlShine {
+  0%,
+  55% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+/* overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px;
+}
+.panel {
+  background: var(--felt-deep);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  padding: 22px 24px;
+  width: min(440px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 27px;
+  text-wrap: balance;
+}
+.panel p,
+.panel li {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+.panel ul {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.panel .muted {
+  color: var(--muted);
+}
+.panel .wait {
+  font-size: 18px;
+  color: var(--gold);
+  line-height: 1.6;
+}
+/* bottom-right, clear of the table centre and of your own plate at bottom-left */
+/* docked panels sit at the bottom centre, over the (empty) hand, leaving the action spot on the right free */
+.overlay.dock {
+  background: transparent;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+.overlay.dock .panel {
+  pointer-events: auto;
+  width: min(440px, calc(50vw - 72px));
+  gap: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+}
+.overlay.dock .panel h2 {
+  font-size: 23px;
+}
+.places {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.places span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 4px;
+  border-radius: 8px;
+  background: var(--shade);
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+.places b {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.places small {
+  font-size: 11px;
+  color: var(--muted);
+}
+.places .ours {
+  border-color: var(--gold);
+}
+.places .ours small {
+  color: var(--gold);
+}
+.panel .btns {
+  justify-content: flex-end;
+}

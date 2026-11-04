@@ -1,0 +1,1163 @@
+/* the test version: every hand face up (the computer's in the groups it has arranged), and every play numbered in a
+   record down the right-hand side, which can be stepped back through and replayed */
+.lobby-testbox {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.lobby-testbox .lobby-join {
+  width: auto;
+}
+.lobby-testbox .lobby-nick {
+  width: 150px;
+  flex: none;
+}
+body.test {
+  --tside-w: 340px;
+}
+body.test #app {
+  max-width: none;
+  margin: 0;
+}
+body.test #fanBtn,
+body.test #rowsBtn {
+  display: none;
+}
+#tsBtn,
+#fsBtn {
+  display: none;
+}
+body.test #tsBtn {
+  display: inline-flex;
+}
+.tcb {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold);
+  background: none;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 3px 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tcb.on {
+  color: var(--on-gold);
+  background: var(--gold);
+}
+/* the card counter: a small table over the table, moved by its title bar */
+.tcount {
+  position: fixed;
+  z-index: 110;
+  left: 16px;
+  top: 120px;
+  width: min(620px, calc(100vw - 32px));
+  max-height: 76vh;
+  overflow: auto;
+  --mcw: 36px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--felt-deep);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: var(--ink);
+  font-size: 13px;
+}
+.tcount h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  cursor: move;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.tcount h3 button {
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+.tcount table {
+  border-collapse: collapse;
+}
+.tcount th,
+.tcount td {
+  border: 1px solid var(--line);
+  padding: 2px 3px;
+  text-align: center;
+  line-height: 1.25;
+  font-size: 12px;
+}
+.tcount td {
+  max-width: 4.4em;
+  word-break: break-all;
+}
+.tcount th {
+  white-space: nowrap;
+}
+.tcount th {
+  color: var(--gold);
+  font-weight: 700;
+}
+.tcount td.nm {
+  font-weight: 700;
+  text-align: left;
+}
+.tcount td .r {
+  color: var(--red);
+}
+.tcount tr.left td {
+  background: rgba(221, 176, 80, 0.12);
+  font-weight: 700;
+}
+.tcount tr.left td small {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: -0.05em;
+}
+.tcount .tcv {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.tcount .tcv span {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+.tcount .tcv span.on {
+  color: var(--on-gold);
+  background: var(--gold);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+.tcount .tcr {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+  border-top: 1px dashed var(--line);
+}
+.tcount .tcr > b {
+  min-width: 3.6em;
+  color: var(--gold);
+  font-size: 15px;
+  padding-top: 8px;
+}
+.tcount .tcr > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+.tcount .tcr .tcp {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tcount .tcr .tcp > i {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.2;
+}
+.tcount .tcr .cn {
+  font-size: 13px;
+  color: var(--muted);
+  align-self: center;
+}
+.tcount .tcsum {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+body.test #tsBtn.on {
+  color: var(--on-gold);
+  background: var(--gold);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+body.test.fsok #fsBtn {
+  display: inline-flex;
+}
+/* the test version has its own 全屏 button in the header, so the one in 选项 stays out of the way */
+body.test #fsOptBtn {
+  display: none;
+}
+body.test.fsok:not(.fs) #fsBtn {
+  color: var(--on-gold);
+  background: var(--gold);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+/* one card size for all four hands and the table (--tcw, worked out from the screen), with the side hands' columns as
+   wide as the hands */
+body.test #hand,
+body.test .peek,
+body.test .tvmid {
+  --cw: var(--tcw, 40px);
+}
+body.test #pile {
+  --cw: calc(var(--tcw, 40px) * 0.9);
+}
+body.test .table {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+@media (min-width: 561px) {
+  body.test #btns {
+    flex-direction: row;
+  }
+}
+/* the cards thrown on the table, the level disc and the line under it give way to each player's framed box of plays */
+body.test #pile .pc,
+body.test #pile .ktag {
+  visibility: hidden;
+}
+body.test .emblem {
+  visibility: hidden;
+}
+body.test #lastPlay {
+  display: none;
+}
+/* 极简出牌区 (an option on a computer or tablet): the same framed box of plays in the middle of the table */
+body.mini #pile .pc,
+body.mini #pile .ktag {
+  visibility: hidden;
+}
+body.mini #lastPlay {
+  display: none;
+}
+/* a play of several cards is laid close, like the 横式 hand: each card over the one before it, its rank and suit at the left
+   corner, so only a strip of every card but the last shows */
+/* the test version has no time limits: no alarm clocks, no countdown numbers */
+body.test .clock,
+body.test #prepR {
+  display: none !important;
+}
+.tstep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.tstep .btn {
+  padding: 4px 12px;
+  min-height: 0;
+  font-size: 14px;
+}
+body.mini .tpb {
+  overflow-x: hidden;
+  overflow-y: auto;
+  pointer-events: auto;
+  scrollbar-width: thin;
+}
+/* a pass: a solid frame like the plays, its 过 in the middle with no dashed frame of its own */
+body.mini .tq.pass {
+  border-style: solid;
+}
+body.mini .pchip {
+  border: 0;
+  width: auto;
+  align-self: stretch;
+  min-width: calc(var(--mcw) * 1.2);
+}
+body.mini .mcs {
+  gap: 0;
+}
+body.mini .mc {
+  align-items: flex-start;
+  padding-left: calc(var(--mcw) * 0.1);
+  box-sizing: border-box;
+}
+body.mini .mc + .mc {
+  margin-left: calc(var(--mcw) * -0.34);
+}
+body:not(.test) .tq {
+  pointer-events: none;
+  cursor: default;
+}
+body:not(.test) .tq:hover {
+  outline: none;
+}
+body.test #miniBtn,
+html.phone #miniBtn {
+  display: none;
+}
+#tplays {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.tpb {
+  position: absolute;
+  --mcw: 30px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.16);
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-end;
+  gap: calc(var(--mcw) * 0.2) calc(var(--mcw) * 0.22);
+  overflow: hidden;
+}
+/* a played card on the table: just its rank and suit, on a white tile */
+.mcs {
+  display: flex;
+  gap: calc(var(--mcw) * 0.06);
+}
+.mc {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--mcw);
+  height: calc(var(--mcw) * 1.28);
+  border-radius: calc(var(--mcw) * 0.12);
+  background: var(--card);
+  border: 1px solid var(--card-edge);
+  color: var(--card-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--mcw) * 0.5);
+  line-height: 1.02;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.mc i {
+  font-style: normal;
+}
+.mc i.ten {
+  letter-spacing: -0.08em;
+  font-size: 0.88em;
+}
+.mc.red {
+  color: var(--red);
+}
+.mc.jk {
+  font-family: var(--font-ui);
+  font-size: calc(var(--mcw) * 0.42);
+}
+.mc.wild {
+  background: linear-gradient(160deg, var(--wild-face) 0%, var(--wild-face-b) 100%);
+  border: 2px solid var(--gold);
+}
+.mc.lvl {
+  background: #ece0ff;
+  border-color: #b48ae8;
+}
+/* one turn: who and its number above, the cards in that player's colour of frame */
+.tq {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  padding: 2px 3px 3px;
+  border: 2px solid var(--pc);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0.85;
+}
+/* above the cards: the turn's number on the left, the player's number on the right */
+.tq > b {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(var(--mcw) * 0.35);
+  font-size: max(11px, calc(var(--mcw) * 0.34));
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.tq > b span {
+  color: var(--ink);
+}
+.tq:not(.rest) > b span,
+.tlist .no {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 700;
+}
+.tq:not(.rest) > b span {
+  font-size: 1.15em;
+}
+.tq > b em {
+  font-style: normal;
+  color: var(--pc);
+}
+.tq.cur {
+  opacity: 1;
+}
+.tq:hover {
+  outline: 2px dashed var(--ink);
+  outline-offset: 2px;
+}
+.tq.noted > b span::after {
+  content: ' 评';
+  color: #ffe08a;
+}
+.tq.pass {
+  border-style: dashed;
+}
+.tq.rest {
+  border-style: dashed;
+  opacity: 1;
+}
+.tq.last {
+  opacity: 1;
+  outline: 4px solid #ff8a00;
+  outline-offset: 3px;
+  animation: lastBlink 0.9s ease-in-out infinite;
+}
+.tsep {
+  align-self: stretch;
+  width: 2px;
+  margin: 0 calc(var(--mcw) * 0.06);
+  background: var(--line-strong);
+  border-radius: 1px;
+}
+.tpb > b {
+  position: absolute;
+  left: 8px;
+  top: 1px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--team);
+}
+.tpl {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0.85;
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tpl:hover {
+  outline: 2px dashed var(--ink);
+  outline-offset: 2px;
+}
+.tpl.noted i::after {
+  content: ' 评';
+  color: #ffe08a;
+  font-weight: 700;
+}
+.tpl i {
+  font-style: normal;
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--muted);
+}
+.tpl.cur {
+  opacity: 1;
+}
+.tpl.cur .card {
+  box-shadow: 0 0 0 1.5px var(--latest);
+}
+.tpl.last .card {
+  box-shadow:
+    0 0 0 2.5px var(--latest),
+    0 0 10px var(--latest-glow);
+}
+.tpl.last i {
+  color: var(--latest);
+  font-weight: 700;
+}
+/* the latest play of all: a thick bright orange frame that blinks, so it is found at a glance */
+.tpl.last {
+  outline: 4px solid #ff8a00;
+  outline-offset: 3px;
+  border-radius: 6px;
+  animation: lastBlink 0.9s ease-in-out infinite;
+}
+.tpl.last i {
+  color: #ffb347;
+}
+@keyframes lastBlink {
+  0%,
+  100% {
+    outline-color: #ff8a00;
+    box-shadow: 0 0 18px 4px rgba(255, 138, 0, 0.75);
+  }
+  50% {
+    outline-color: rgba(255, 138, 0, 0.15);
+    box-shadow: 0 0 0 0 rgba(255, 138, 0, 0);
+  }
+}
+.tpl.rest .grp {
+  outline: 2px dashed var(--muted);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.pchip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mcw);
+  height: calc(var(--mcw) * 1.28);
+  border: 1.5px dashed var(--muted);
+  border-radius: calc(var(--mcw) * 0.12);
+  font-size: calc(var(--mcw) * 0.42);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.tlist li.tp.pass .tw {
+  font-weight: 400;
+  color: var(--muted);
+}
+/* a computer's hand can be rearranged while sorting: its cards are picked like yours */
+.peek.edit .card {
+  cursor: pointer;
+}
+.peek .card.sel {
+  transform: translateY(-16%);
+  box-shadow:
+    0 0 0 2.5px var(--latest),
+    0 0 12px 2px var(--latest-glow);
+}
+.pwb {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+/* the sorting buttons of all four hands, one size */
+.pbody {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.tgrp {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: none;
+}
+.tgrp.low {
+  margin-top: calc(var(--cw) * 0.9);
+}
+.tgbtn:disabled,
+body.test #splitBtn:disabled,
+body.test #sortBtn:disabled,
+body.test #undoBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+  background: var(--felt-deep);
+  color: var(--gold);
+}
+.tgbtn,
+body.test #fixBtn,
+body.test #splitBtn,
+body.test #sortBtn,
+body.test #undoBtn {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 4.4em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--gold);
+  background: var(--felt-deep);
+  border: 1.5px solid var(--gold);
+  line-height: 1.2;
+  text-align: center;
+}
+.tgbtn:not(:disabled),
+body.test #fixBtn:not(:disabled),
+body.test #splitBtn:not(:disabled),
+body.test #sortBtn:not(:disabled),
+body.test #undoBtn:not(:disabled) {
+  color: var(--on-gold);
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(221, 176, 80, 0.5);
+}
+body.test #fixBtn:disabled {
+  opacity: 0.4;
+}
+body.test #goBtn {
+  position: absolute;
+  margin: 0;
+  z-index: 7;
+  pointer-events: auto;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--on-gold);
+  background: var(--gold);
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 0 14px rgba(221, 176, 80, 0.6);
+  white-space: nowrap;
+}
+body.test #goBtn[hidden] {
+  display: none;
+}
+body.test #fixBtn,
+body.test #splitBtn,
+body.test #sortBtn,
+body.test #undoBtn {
+  position: absolute;
+  margin: 0;
+  z-index: 7;
+  pointer-events: auto;
+}
+#splitBtn {
+  display: none;
+}
+body.test #splitBtn {
+  display: inline-block;
+}
+.peek.edit {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#hand .card.hot,
+.peek .card.hot {
+  box-shadow:
+    0 0 0 3px var(--gold),
+    0 0 14px var(--gold);
+}
+.tghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  pointer-events: none;
+  transform: translate(-50%, -60%) rotate(-3deg);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+}
+.pwb .link {
+  font-size: 13px;
+  padding: 1px 9px;
+}
+/* the look-back view also holds the comment strip: its hands a little smaller (all four still alike), the trick smaller still */
+body.test .tview .peek {
+  --cw: calc(var(--tcw, 40px) * 0.9);
+}
+body.test .tview .tvmid {
+  --cw: calc(var(--tcw, 40px) * 0.72);
+}
+.peek {
+  --cw: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: auto;
+}
+#seat2 .peek {
+  align-items: center;
+}
+#seat1 .peek {
+  align-items: flex-end;
+}
+.peek .pw {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.2;
+}
+.peek .pw:empty {
+  display: none;
+}
+.peek .pw .sfi {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.prows {
+  display: flex;
+  flex-direction: column;
+}
+.prow {
+  display: flex;
+  gap: calc(var(--cw) * 0.22);
+}
+.prow + .prow {
+  margin-top: calc(var(--cw) * -0.58);
+}
+.grp {
+  display: flex;
+  flex: none;
+}
+.grp .card {
+  position: relative;
+}
+.grp .card + .card {
+  margin-left: calc(var(--cw) * -0.58);
+}
+.tside {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--tside-w);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--felt-deep);
+  border-left: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.tsh {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tsh b {
+  font-size: 18px;
+}
+.tsh span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.tsb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tsb .link {
+  font-size: 15px;
+  padding: 3px 10px;
+}
+.tlist {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.tlist li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+.tlist li.tp {
+  cursor: pointer;
+}
+.tlist li.tp:hover {
+  background: var(--shade);
+}
+.tlist li.on {
+  background: rgba(221, 176, 80, 0.22);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+.tlist .no {
+  min-width: 2.2em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold);
+  font-weight: 700;
+}
+.tlist .tw {
+  font-weight: 700;
+}
+.tlist .lt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.tlist .lt {
+  white-space: nowrap;
+}
+.tlist .tc {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.tlist .ct {
+  font-size: 13px;
+  padding: 0 3px;
+  margin: 0;
+}
+.tlist li.tpass {
+  color: var(--muted);
+  padding-left: 3.2em;
+}
+.tlist li.tend {
+  color: var(--muted);
+  font-size: 12px;
+  padding-left: 3.2em;
+}
+.tlist li.thead {
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 6px;
+}
+.tlist li.tnote {
+  display: block;
+  color: #ffe08a;
+  font-size: 13px;
+  padding-left: 3.2em;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+.tlist li.tnote:hover {
+  text-decoration: underline;
+}
+.tlist li.tchg {
+  display: block;
+  color: #9ad7ff;
+  font-size: 13px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.tlist .tedit {
+  margin-left: auto;
+  font: inherit;
+  font-size: 12px;
+  color: var(--gold);
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+/* writing a comment on one play: a small box over the table */
+.tnbox {
+  position: fixed;
+  z-index: 140;
+  right: 16px;
+  bottom: 16px;
+  width: min(460px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--felt-deep);
+  border: 1px solid var(--gold);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  color: var(--ink);
+}
+.tnbox h3 {
+  margin: 0;
+  font-size: 16px;
+  cursor: move;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed var(--line-strong);
+}
+.tname {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  user-select: all;
+  -webkit-user-select: all;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.ttoast {
+  position: fixed;
+  z-index: 150;
+  left: 50%;
+  top: 14px;
+  translate: -50% 0;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--on-gold);
+  font-weight: 700;
+  font-size: 15px;
+  pointer-events: none;
+}
+.tnbox h3 .ct {
+  font-size: 14px;
+  padding: 0 4px;
+}
+.tnbox textarea {
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 5.5em;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 8px;
+  resize: vertical;
+}
+.tnbox textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.tnbox .btns {
+  justify-content: flex-end;
+}
+.tnbox .btn {
+  font-size: 16px;
+  padding: 6px 18px;
+}
+.tshint {
+  font-size: 12px;
+  color: var(--muted);
+}
+.mypw {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tvcm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.tvcm label {
+  font-size: 14px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.tvcm textarea {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 6px 8px;
+  resize: vertical;
+}
+.tvcm textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+#trecFile {
+  font: inherit;
+  font-size: 14px;
+  color: var(--muted);
+}
+.tview {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  background: radial-gradient(ellipse at 50% 40%, var(--felt) 0%, var(--felt-deep) 100%);
+}
+.tvh {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.tvh .tvi {
+  font-size: 17px;
+  font-weight: 700;
+  margin-right: auto;
+}
+.tvh .tvi small {
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 8px;
+}
+.tvh select {
+  font: inherit;
+  font-size: 15px;
+  background: var(--felt-deep);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 3px 6px;
+}
+.tvh .link.on {
+  color: var(--on-gold);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.tvb {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.tvt {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: 12px 16px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto;
+  align-content: space-between;
+  grid-template-areas: 'top top top' 'left mid right' 'me me me';
+}
+.tvs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tvs[data-p='2'] {
+  grid-area: top;
+  align-items: center;
+}
+.tvs[data-p='3'] {
+  grid-area: left;
+  justify-content: center;
+}
+.tvs[data-p='1'] {
+  grid-area: right;
+  justify-content: center;
+  align-items: flex-end;
+}
+.tvs[data-p='0'] {
+  grid-area: me;
+  align-items: center;
+}
+.tvs[data-p='1'] .peek {
+  align-items: flex-end;
+}
+.tvs[data-p='0'] .peek,
+.tvs[data-p='2'] .peek {
+  align-items: center;
+}
+.tvn {
+  font-size: 16px;
+  font-weight: 700;
+}
+.tvn small {
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.tvmid {
+  grid-area: mid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.tvp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.tvp .tw {
+  min-width: 5.5em;
+  text-align: right;
+  font-weight: 700;
+}
+.tvp small {
+  white-space: nowrap;
+}
+.tvp .no {
+  color: var(--gold);
+  font-weight: 700;
+}
+.tvp.pass {
+  color: var(--muted);
+}
+.tvp.cur {
+  background: rgba(54, 201, 255, 0.12);
+  box-shadow: 0 0 0 2px var(--latest);
+}
+.tvnote {
+  font-size: 14px;
+  color: var(--muted);
+}
+.tvbrk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  margin-top: 6px;
+  padding: 6px 8px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 10px;
+  max-width: 100%;
+}
+.tvbh {
+  font-size: 13px;
+  color: var(--muted);
+}
+.tvbv {
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+}
+.tvbv.broke {
+  color: #ffb347;
+}
+.tvl {
+  width: var(--tside-w, 340px);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--line);
+  padding: 8px 10px;
+}
+.trec textarea {
+  width: 100%;
+  height: 50vh;
+  font:
+    13px/1.5 ui-monospace,
+    Consolas,
+    monospace;
+  background: var(--felt-deep);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 8px;
+}
+/* the record opens over the table from the 出牌记录 button, so the cards get the whole screen */
+body.test .tside {
+  width: min(var(--tside-w), 92vw);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.5);
+}
+body.test .tside:not(.open) {
+  display: none;
+}
+@media (max-width: 1279px) {
+  .tvl {
+    display: none;
+  }
+}

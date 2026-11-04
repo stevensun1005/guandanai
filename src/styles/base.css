@@ -1,0 +1,86 @@
+html,
+body {
+  margin: 0;
+}
+[hidden] {
+  display: none !important;
+}
+/* Layout: one-screen felt table. Partner on top, opponents left and right, your hand along the bottom edge. */
+:root {
+  --felt: #1c4a3b;
+  --felt-deep: #133629;
+  --line: rgba(236, 232, 218, 0.14);
+  --line-strong: rgba(236, 232, 218, 0.32);
+  --ink: #ece8da;
+  --muted: #9fbcae;
+  --card: #fbf8f0;
+  --card-edge: #d6cfbf;
+  --card-ink: #1d2421;
+  --red: #c2313a;
+  --gold: #ddb050;
+  --wild-face: #fff3cf;
+  --wild-face-b: #f1d27e;
+  --wild-ink: #8a5a00;
+  --latest: #36c9ff;
+  --latest-glow: rgba(54, 201, 255, 0.55);
+  --on-gold: #1d2421;
+  --warn: #f08a7a;
+  /* the two sides: north and south in red, east and west in blue (text / border tone, and a deeper fill) */
+  --red-team: #f06464;
+  --red-team-fill: #c8343d;
+  --blue-team: #5ea4ff;
+  --blue-team-fill: #2d6cd0;
+  --back-a: #7b2b30;
+  --back-b: #933a3f;
+  /* the back of every face-down card: the original red stripes, or (switched on by default) the goose photo */
+  --back: repeating-linear-gradient(45deg, var(--back-a) 0 3px, var(--back-b) 3px 6px);
+  --shade: rgba(0, 0, 0, 0.2);
+  --scrim: rgba(8, 22, 17, 0.72);
+  --font-display: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --font-ui: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  color-scheme: dark;
+}
+:root.back-goose {
+  --back: url('../assets/cards/card-back-1.jpg') center/cover no-repeat #c9ccd0;
+}
+/* the maple-leaf back: red across the top and bottom, white between, the flag's leaf upright in the middle */
+:root.back-maple {
+  --back: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20250%20350%22%3E%3Crect%20width%3D%22250%22%20height%3D%22350%22%20fill%3D%22%23d52b1e%22%2F%3E%3Crect%20y%3D%2250%22%20width%3D%22250%22%20height%3D%22250%22%20fill%3D%22%23fff%22%2F%3E%3Csvg%20x%3D%220%22%20y%3D%2250%22%20width%3D%22250%22%20height%3D%22250%22%20viewBox%3D%22-2400%20-2400%204800%204800%22%3E%3Cpath%20fill%3D%22%23d52b1e%22%20d%3D%22m-90%202030%2045-863a95%2095%200%200%200-111-98l-859%20151%20116-320a65%2065%200%200%200-20-73l-941-762%20212-99a65%2065%200%200%200%2034-79l-186-572%20542%20115a65%2065%200%200%200%2073-38l105-247%20423%20454a65%2065%200%200%200%20111-57l-204-1052%20327%20189a65%2065%200%200%200%2091-27l332-652%20332%20652a65%2065%200%200%200%2091%2027l327-189-204%201052a65%2065%200%200%200%20111%2057l423-454%20105%20247a65%2065%200%200%200%2073%2038l542-115-186%20572a65%2065%200%200%200%2034%2079l212%2099-941%20762a65%2065%200%200%200-20%2073l116%20320-859-151a95%2095%200%200%200-111%2098l45%20863z%22%2F%3E%3C%2Fsvg%3E%3C%2Fsvg%3E')
+    center/cover no-repeat #d52b1e;
+}
+html,
+body {
+  height: 100%;
+}
+/* taps on a tablet are always taps: no double-tap zoom that could swallow a quick second tap on a button */
+html {
+  touch-action: manipulation;
+}
+body {
+  font-size: 17px;
+}
+body {
+  background:
+    radial-gradient(ellipse at 50% 40%, var(--felt) 0%, var(--felt-deep) 100%) fixed,
+    var(--felt-deep);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  overflow: hidden;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+#app {
+  height: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 8px;
+}

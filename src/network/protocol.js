@@ -1,0 +1,20 @@
+import { lobbyStatus } from '../lobby/lobby.js';
+import { $ } from '../ui/cards.js';
+
+export let ROOM_PREFIX;
+export let VERSION;
+export let OLD_PAGE;
+export let peerReady;
+
+export function initialize() {
+  /* ---------- connections (PeerJS: browsers talk to each other directly, matched by the room number) ---------- */
+  ROOM_PREFIX = 'guandanai-room-';
+  VERSION = __BUILD_VERSION__;
+  $('#verTag').textContent = VERSION === 'dev' ? '' : '版本 ' + VERSION;
+  OLD_PAGE = '页面版本和房主不同，请刷新页面（电脑按 Ctrl+F5）后重新加入';
+  peerReady = () => {
+    if (window.Peer && /^https?:$/.test(location.protocol)) return true;
+    lobbyStatus('联机请通过发布后的网页网址打开');
+    return false;
+  };
+}

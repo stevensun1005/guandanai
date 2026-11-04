@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 import sys
+from urllib.parse import urlsplit,urlunsplit,parse_qsl,urlencode
 import numpy as np
 from playwright.sync_api import sync_playwright
 
@@ -11,6 +12,8 @@ from ai.reference.numpy_engine import PolicyNetwork,encode,cards_array
 OUT=ROOT/'work/validation/browser-release'
 OUT.mkdir(parents=True,exist_ok=True)
 URL=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765'
+parts=urlsplit(URL);query=dict(parse_qsl(parts.query));query['test']='1'
+URL=urlunsplit((parts.scheme,parts.netloc,parts.path,urlencode(query),parts.fragment))
 
 def main():
     model=PolicyNetwork()

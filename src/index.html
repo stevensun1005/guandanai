@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="app-version" content="__APP_VERSION__" />
+    <title>掼蛋 · 朋友局</title>
+    <meta name="description" content="和朋友在线打掼蛋。四人组队，开房邀请，打开网页即可玩。" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23133629'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='44' fill='%23ddb050'%3E掼%3C/text%3E%3C/svg%3E"
+    />
+    <!-- added to a phone's home screen, the page opens full screen, without the browser's bars (the way an iPhone gets it) -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&display=swap"
+    />
+    <!-- the lobby's 掼蛋 in brush calligraphy: only those two characters are fetched -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&text=%E6%8E%BC%E8%9B%8B&display=swap"
+    />
+
+    <link rel="stylesheet" href="./assets/app.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="bar">
+        <span class="brand">掼蛋</span>
+        <span class="score"
+          ><span class="ours" id="team0" title=""
+            ><span class="tn" id="tn0">我方</span><b id="lv0">2</b
+            ><small class="lvx" id="lvx0"></small></span
+          ><span id="team1" title=""
+            ><span class="tn" id="tn1">对方</span><b id="lv1">2</b
+            ><small class="lvx" id="lvx1"></small></span
+        ></span>
+        <div class="tribinfo" id="tribInfo"></div>
+        <span class="acts"
+          ><span class="optwrap"
+            ><button class="link" id="optBtn" aria-expanded="false">选项</button
+            ><span class="optmenu" id="optMenu" hidden
+              ><button class="link tog" id="sfxBtn" aria-pressed="true">音效</button
+              ><button class="link" id="cardBackBtn" title="点一下换牌背：大雁、枫叶、花纹">
+                牌背：<span id="backName">大雁</span></button
+              ><button
+                class="link tog"
+                id="confirmBtn"
+                aria-pressed="false"
+                title="选好牌点出牌后，牌先放大，再点确认才出"
+              >
+                出牌需确认</button
+              ><button
+                class="link tog"
+                id="miniBtn"
+                aria-pressed="false"
+                title="已出的牌像测试版那样，按出牌顺序排在桌面中间的一个框里（只有电脑和 iPad）"
+              >
+                极简出牌区</button
+              ><button
+                class="link tog"
+                id="fsOptBtn"
+                aria-pressed="false"
+                hidden
+                title="让游戏占满整个屏幕，再点一下退出"
+              >
+                全屏
+              </button></span
+            ></span
+          ><button
+            class="link tog"
+            id="micBtn"
+            aria-pressed="false"
+            hidden
+            title="开麦后同桌的人能听到你说话"
+          >
+            闭麦</button
+          ><button class="link" id="rulesBtn">规则</button
+          ><button class="link" id="pauseBtn">暂停</button
+          ><button class="link" id="tsBtn">出牌记录</button
+          ><button class="link" id="fsBtn">全屏</button
+          ><button class="link" id="quitBtn">退出</button></span
+        >
+      </header>
+
+      <main class="table" id="table">
+        <section class="seat" id="seat2">
+          <div class="whorow">
+            <div class="who">
+              <span class="back"></span><span class="name">对家</span><span class="vc"></span
+              ><span class="place"></span><span class="stat"></span><span class="clock"></span>
+            </div>
+            <span class="cnt"></span>
+          </div>
+        </section>
+        <section class="seat" id="seat3">
+          <div class="whorow">
+            <div class="who">
+              <span class="back"></span><span class="name">上家</span><span class="vc"></span
+              ><span class="place"></span><span class="stat"></span><span class="clock"></span>
+            </div>
+            <span class="cnt"></span>
+          </div>
+        </section>
+        <div class="mid">
+          <div class="emblem t-red" title="本局打的级"><span class="r" id="curLv">2</span></div>
+        </div>
+        <div id="pile" aria-hidden="true"><div class="probe"></div></div>
+        <div class="lastplay" id="lastPlay"></div>
+        <div class="prepbig" id="prepBig" hidden>
+          <b id="prepL">理牌</b
+          ><span class="clock bigclock" id="prepR"
+            ><b><span id="prepBigNum">90</span></b></span
+          >
+        </div>
+        <section class="seat" id="seat1">
+          <div class="whorow">
+            <span class="cnt"></span>
+            <div class="who">
+              <span class="clock"></span><span class="stat"></span><span class="place"></span
+              ><span class="vc"></span><span class="name">下家</span><span class="back"></span>
+            </div>
+          </div>
+        </section>
+        <section class="seat" id="seat0">
+          <span class="place" id="myPlace"></span>
+          <div class="prep" id="prep" hidden>
+            <span class="pt" id="prepText">你先出</span
+            ><button class="btn primary round" id="readyBtn">理牌<br />结束</button>
+          </div>
+          <button class="btn primary round" id="deckBtn" hidden>洗牌</button>
+          <div class="msg" id="msg"></div>
+        </section>
+      </main>
+
+      <div class="mebar" id="mebar">
+        <div class="left">
+          <div class="whorow">
+            <div class="meinfo">
+              <span id="myName">你</span><span class="vc" id="myVc"></span><span class="stat"></span
+              ><span class="clock" id="myClock"></span>
+            </div>
+            <span class="cnt" id="myCnt"></span>
+          </div>
+          <button class="link" id="sfBtn" title="依次选出手里所有能组成的同花顺（包括用百搭）">
+            同花顺
+          </button>
+        </div>
+      </div>
+      <div class="handwrap">
+        <div class="btns" id="btns">
+          <button class="btn primary round" id="playBtn">出牌</button>
+          <button class="btn primary round" id="returnBtn" hidden>还贡</button>
+          <button class="btn round" id="hintBtn">提示</button>
+          <button class="btn round" id="passBtn">过</button>
+          <button class="btn round" id="clearBtn">重选</button>
+        </div>
+        <div id="hand"></div>
+        <div class="handtools">
+          <button class="link" id="fixBtn" title="把选中的牌放进左边的成组区，作为你拟定的一组牌">
+            成组</button
+          ><span class="toolgap"></span><button class="link" id="fanBtn">手持</button
+          ><button class="link" id="rowsBtn" title="改成两排">两排</button
+          ><button class="link" id="sortBtn" title="恢复成按大小排好的样子">复原</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay" hidden><div class="panel" id="panel"></div></div>
+
+    <div class="lobby" id="lobby" hidden>
+      <div class="lobby-box">
+        <h1 class="lobby-title">掼蛋</h1>
+        <div class="lobby-name">
+          <label class="lobby-label" for="nick">玩家昵称</label
+          ><input
+            class="lobby-nick"
+            id="nick"
+            maxlength="8"
+            autocomplete="off"
+            placeholder="输入你的昵称"
+          />
+        </div>
+        <div class="lobby-modes">
+          <button class="mode-btn on" data-mode="solo">单人</button>
+          <button class="mode-btn" data-mode="host">开房间</button>
+          <button class="mode-btn" data-mode="join">进房间</button>
+        </div>
+        <div class="lobby-rules" id="rulesBox">
+          <div class="rule-row">
+            <span class="rule-k">进贡</span
+            ><button class="rule-btn" data-rule="trib" data-val="1">进贡</button
+            ><button class="rule-btn" data-rule="trib" data-val="0">不进贡</button>
+          </div>
+          <div class="rule-row">
+            <span class="rule-k">三次打A不过</span
+            ><button class="rule-btn" data-rule="aFail" data-val="draw">平局</button
+            ><button class="rule-btn" data-rule="aFail" data-val="reset">从2打</button
+            ><button class="rule-btn" data-rule="aFail" data-val="keep">一直打</button>
+          </div>
+          <div class="rule-note" id="rulesNote"></div>
+        </div>
+        <div class="lobby-join" id="joinRow" hidden>
+          <input
+            class="lobby-nick"
+            id="roomCode"
+            inputmode="numeric"
+            maxlength="4"
+            autocomplete="off"
+            placeholder="请输入房间号"
+          />
+          <button class="btn primary" id="joinBtn">进入</button>
+        </div>
+        <div class="lobby-room" id="roomInfo" hidden>
+          <span>房间号</span><b id="roomCodeShow">----</b
+          ><button class="link" id="shareRoomBtn" type="button">复制邀请链接</button>
+        </div>
+        <div class="lobby-status" id="lobbyStatus"></div>
+        <div class="lobby-table" id="lobbyTable">
+          <button class="seat-btn t-red" data-seat="N" style="grid-area: n">
+            <b>北</b><span>空位</span>
+          </button>
+          <button class="seat-btn t-blue" data-seat="W" style="grid-area: w">
+            <b>西</b><span>空位</span>
+          </button>
+          <div class="lobby-felt" style="grid-area: c" aria-hidden="true">掼</div>
+          <button class="seat-btn t-blue" data-seat="E" style="grid-area: e">
+            <b>东</b><span>空位</span>
+          </button>
+          <button class="seat-btn t-red" data-seat="S" style="grid-area: s">
+            <b>南</b><span>空位</span>
+          </button>
+        </div>
+        <button class="btn primary lobby-go" id="sitBtn" disabled>坐下开始</button>
+        <div class="lobby-ver" id="verTag"></div>
+      </div>
+      <div class="lobby-testbox">
+        <button class="link lobby-test" id="testBtn">测试版</button>
+        <div class="lobby-join" id="testRow" hidden>
+          <input
+            class="lobby-nick"
+            id="testPw"
+            type="password"
+            inputmode="numeric"
+            maxlength="8"
+            autocomplete="off"
+            placeholder="密码"
+          />
+          <button class="btn primary" id="testGo">进入</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PeerJS: browser-to-browser connections for playing with friends (room codes) -->
+    <script src="./assets/vendor/peerjs.min.js"></script>
+    <script type="module" src="./assets/app.js"></script>
+  </body>
+</html>

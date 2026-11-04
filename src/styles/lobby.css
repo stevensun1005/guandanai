@@ -1,0 +1,386 @@
+/* the lobby: a nickname, then a seat at a square table */
+.lobby {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  background: radial-gradient(ellipse at 50% 40%, var(--felt) 0%, var(--felt-deep) 100%);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 10px;
+}
+/* everything fits on one screen, a laptop or a phone, without scrolling */
+.lobby-box {
+  width: min(440px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  text-align: center;
+  margin: auto 0;
+}
+/* the name in large gold brush strokes, with a small signature under it */
+.lobby-title {
+  margin: 0;
+  line-height: 1;
+  font-family: 'Ma Shan Zheng', var(--font-display);
+  font-weight: 400;
+  font-size: 68px;
+  letter-spacing: 0.12em;
+  padding-left: 0.12em;
+  color: var(--gold);
+  background: linear-gradient(180deg, #fbe7a6 0%, var(--gold) 55%, #b8862e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+}
+.lobby-by {
+  margin: -4px 0 4px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.lobby-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lobby-name .lobby-nick {
+  flex: 1;
+  min-width: 0;
+}
+.lobby-label {
+  font-size: 18px;
+  color: var(--muted);
+  text-align: left;
+  white-space: nowrap;
+}
+.lobby-nick {
+  font: inherit;
+  font-size: 22px;
+  padding: 7px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--felt-deep);
+  color: var(--ink);
+  text-align: center;
+}
+.lobby-nick:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(221, 176, 80, 0.25);
+}
+.lobby-modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.mode-btn {
+  font: inherit;
+  font-size: 19px;
+  padding: 7px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--shade);
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+}
+.mode-btn.on {
+  background: var(--gold);
+  color: var(--on-gold);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+.lobby-join {
+  display: flex;
+  gap: 8px;
+}
+.lobby-join .lobby-nick {
+  flex: 1;
+  min-width: 0;
+  letter-spacing: 0.3em;
+}
+.lobby-join .btn {
+  font-size: 20px;
+  padding: 6px 22px;
+}
+.lobby-room {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+  color: var(--muted);
+}
+.lobby-room b {
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+}
+.lobby-status {
+  min-height: 1.3em;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.3;
+}
+/* a seat someone has taken is filled with its side's colour, for everyone to see */
+.seat-btn.taken {
+  border-style: solid;
+  border-color: var(--team);
+  background: var(--team-fill);
+  cursor: default;
+}
+.seat-btn.taken b,
+.seat-btn.taken span {
+  color: #fff;
+}
+.lobby-table {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 6px;
+  grid-template-areas: '. n .' 'w c e' '. s .';
+  margin: 0;
+}
+.lobby-felt {
+  border-radius: 14px;
+  background: var(--felt);
+  border: 2px solid var(--line-strong);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+}
+/* a seat: the direction and who sits there side by side on one short button */
+.seat-btn {
+  font: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--shade);
+  color: var(--ink);
+  border: 2px dashed var(--line-strong);
+  min-height: 48px;
+  align-self: center;
+  white-space: nowrap;
+}
+.seat-btn b {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--team);
+}
+.seat-btn span {
+  font-size: 17px;
+  color: var(--muted);
+}
+.seat-btn {
+  border-color: color-mix(in srgb, var(--team) 55%, transparent);
+}
+.seat-btn:hover:not(:disabled) {
+  border-color: var(--team);
+}
+.seat-btn.mine {
+  border: 2px solid var(--team);
+  background: var(--team-fill);
+  box-shadow: 0 0 18px var(--team);
+}
+.seat-btn.mine b,
+.seat-btn.mine span {
+  color: #fff;
+}
+.seat-btn.bot {
+  border-style: solid;
+  border-color: var(--line);
+}
+.seat-btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.lobby-ver {
+  font-size: 13px;
+  color: var(--muted);
+  opacity: 0.7;
+}
+.lobby-go {
+  font-size: 23px;
+  padding: 10px 20px;
+  border-radius: 14px;
+}
+/* the table rules: chosen by whoever plays alone or opens the room, shown greyed to friends who join */
+.lobby-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--shade);
+}
+.rule-row {
+  display: grid;
+  grid-template-columns: 116px;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+.rule-k {
+  font-size: 18px;
+  color: var(--muted);
+  text-align: left;
+  white-space: nowrap;
+}
+.rule-btn {
+  font: inherit;
+  font-size: 17px;
+  padding: 6px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+}
+.rule-btn.on {
+  background: var(--gold);
+  color: var(--on-gold);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+.rule-btn:disabled {
+  cursor: default;
+}
+/* entering someone's room: 进房间 itself and the host's choices show on a dull gold, and the choices cannot be changed */
+.rule-btn:disabled.on {
+  background: #7a6630;
+  border-color: #7a6630;
+  color: #e9dfbf;
+}
+.mode-btn.on[data-mode='join'] {
+  background: #7a6630;
+  border-color: #7a6630;
+  color: #e9dfbf;
+}
+/* the room code box calls for the number until the room is entered; 进入 dims once pressed */
+#roomCode.call {
+  animation: codeCall 1s ease-in-out infinite;
+}
+@keyframes codeCall {
+  50% {
+    border-color: var(--gold);
+    box-shadow:
+      0 0 0 3px rgba(221, 176, 80, 0.35),
+      0 0 18px var(--gold);
+  }
+}
+#joinBtn:disabled {
+  background: #7a6630;
+  border-color: #7a6630;
+  color: #e9dfbf;
+  opacity: 1;
+  cursor: default;
+}
+/* the message that matters right now (seated, waiting for the host) in large gold, gently pulsing */
+.lobby-status.hot {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(221, 176, 80, 0.6);
+  animation: lpPulse 1.4s ease-in-out infinite;
+}
+.rule-btn:disabled:not(.on) {
+  opacity: 0.4;
+}
+.rule-note {
+  font-size: 15px;
+  color: var(--muted);
+}
+.rule-note:empty {
+  display: none;
+}
+/* tries left at A, next to a side's level */
+.lvx {
+  font-size: 14px;
+  color: var(--warn);
+  margin-left: 3px;
+  font-weight: 700;
+}
+.lvx:empty {
+  display: none;
+}
+.lobby-go:disabled {
+  opacity: 0.35;
+}
+
+@media (max-width: 560px) {
+  .overlay.dock .panel {
+    width: 100%;
+  }
+  #btns {
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  .table {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+  .emblem {
+    width: 84px;
+    height: 84px;
+  }
+  .emblem .r {
+    font-size: 50px;
+  }
+  .lastplay {
+    font-size: 14px;
+  }
+  .lastplay .ct {
+    font-size: 13px;
+    padding: 0 3px;
+    margin: 0 1px;
+  }
+  .who {
+    font-size: 15px;
+    gap: 6px;
+  }
+  .btn {
+    padding: 8px 14px;
+  }
+  .score {
+    gap: 8px;
+  }
+}
+/* a narrow screen (a phone held upright): the header sits above the table, so keep its buttons on one line and
+   the top player's count badge no taller than their plate, with a little room between them */
+@media (max-width: 699px) {
+  .bar .acts {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .bar .link {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+  .link .long {
+    display: none;
+  }
+  .table {
+    margin-top: 8px;
+  }
+  .cnt {
+    font-size: 20px;
+    padding: 2px 6px 1px;
+  }
+  .cnt small {
+    font-size: 12px;
+  }
+}
