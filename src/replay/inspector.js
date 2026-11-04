@@ -265,6 +265,7 @@ export function practicePeeks() {
         : '';
     el.classList.toggle('edit', edit);
     const pwEl = el.querySelector('.pw');
+    pwEl.hidden = !edit;
     pwEl.textContent = pw;
     // what 同花顺 found: in this heading, over the cards, while the cards it picked are still the ones picked
     if (runtime.TSFI && runtime.TSFI.p === p && runtime.TSFI.k === [...picked].join()) {
@@ -282,6 +283,18 @@ export function practicePeeks() {
     const old = el.querySelector('.tgrp');
     if (old) old.remove();
     if (btns) el.querySelector('.pbody').insertAdjacentHTML('beforeend', btns);
+  }
+  const partner = $('#seat2');
+  if (['play', 'roundEnd', 'over'].includes(runtime.game.phase)) {
+    const key = [runtime.game.round, innerWidth, innerHeight].join('|');
+    if (runtime.practicePartnerSize?.key !== key) {
+      partner.style.minHeight = '';
+      runtime.practicePartnerSize = { key, height: partner.offsetHeight };
+    }
+    partner.style.minHeight = runtime.practicePartnerSize.height + 'px';
+  } else {
+    partner.style.minHeight = '';
+    runtime.practicePartnerSize = null;
   }
   if (moved && runtime.pileGroups.length) pileRefit();
 }
@@ -332,6 +345,10 @@ export function practicePlays() {
     .join('|');
   if (box.dataset.k === key) return;
   box.dataset.k = key;
+  const progress = `${runtime.game.round}|${runtime.game.log.length}`,
+    follow = box.dataset.progress !== progress,
+    scrollTop = box.firstElementChild?.scrollTop || 0;
+  box.dataset.progress = progress;
   // the trick on the table now: from its lead on (none once it has been taken in)
   let from = Infinity;
   if ((runtime.game.trickPlays || []).length)
@@ -371,11 +388,15 @@ export function practicePlays() {
   // the cards as large as will still fit (in 极简出牌区 never smaller than 24 wide: past that the box scrolls, to the
   // newest play)
   const b = box.firstElementChild;
-  for (let w = 72; w >= (runtime.reviewMode ? 12 : 24); w -= 2) {
-    b.style.setProperty('--mcw', w + 'px');
-    if (b.scrollHeight <= b.clientHeight + 1 && b.scrollWidth <= b.clientWidth + 1) break;
+  if (runtime.reviewMode) {
+    b.style.setProperty('--mcw', Math.max(24, Math.min(40, tcwNow())) + 'px');
+  } else {
+    for (let w = 72; w >= 24; w -= 2) {
+      b.style.setProperty('--mcw', w + 'px');
+      if (b.scrollHeight <= b.clientHeight + 1 && b.scrollWidth <= b.clientWidth + 1) break;
+    }
   }
-  if (!runtime.reviewMode) b.scrollTop = b.scrollHeight;
+  b.scrollTop = follow ? b.scrollHeight : scrollTop;
 }
 
 function miniBoxRect(g) {
@@ -451,10 +472,10 @@ export function practiceNoteEdit(k) {
   $('#tnText').focus();
 }
 
-// the box opens where you last left it, at first in the bottom-right corner beside your hand, clear of the played cards;
+// The box starts in the lower-left corner and remembers a dragged position.
 // dragging its title bar moves it
 function practiceNoteMove(b) {
-  practiceDragBox(b, 'guandan-tnbox');
+  practiceDragBox(b, 'guandan-practice-note-position-v2');
 }
 
 function practiceDragBox(b, store) {

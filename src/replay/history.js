@@ -25,7 +25,8 @@ export function syncUndo() {
     go.hidden = !(runtime.game && runtime.game.phase === 'play' && runtime.game.stepWait != null);
     if (!go.hidden) {
       const who = runtime.names[runtime.game.stepWait];
-      go.textContent = `继续 · ${who}`;
+      go.textContent = '继续';
+      go.setAttribute('aria-label', `继续，下一步由${who}行动`);
       go.title = `下一步：${who}。也可以按空格继续。`;
     }
   }
