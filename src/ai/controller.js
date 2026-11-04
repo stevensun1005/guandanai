@@ -3,6 +3,7 @@ import { beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 import { decisionContext, policyState } from './observation.js';
 import { endgameRequest } from './endgame.js';
+import { MODELS } from './models.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost } from '../game/session.js';
 import { showError } from '../input/controls.js';
@@ -100,11 +101,18 @@ export function initialize() {
       const style = runtime.botStyles?.[(p + runtime.network.off) % 4] || 'balanced';
       const input = state(p, plays);
       input.profile = style;
-      if (style !== 'balanced') {
-        input.context = decisionContext(runtime.game, p);
+      if (style !== 'balanced') input.context = decisionContext(runtime.game, p);
+      if (style !== 'balanced' || MODELS.policy.extraFeatures === 53) {
         input.actionShapes = plays.map(
           (play) => play && { type: play.type, value: play.value, n: play.n, wu: play.wu },
         );
+      }
+      if (MODELS.policy.extraFeatures === 53) {
+        const trick = runtime.game.trick;
+        input.trick = trick && {
+          player: trick.player,
+          play: { type: trick.play.type, value: trick.play.value, n: trick.play.n },
+        };
       }
       input.endgame = endgameRequest(runtime.game, p, plays);
       const result = await request('decide', input);

@@ -116,3 +116,5 @@ Validation covers desktop Chrome, simulated phone layouts, public PeerJS signali
 For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include the device, browser, page version and steps. Rule or bot issues benefit from a concrete hand and the public actions leading to it. UI changes benefit from screenshots.
 
 [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md)
+
+Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). Experimental policies have not reached the 80% win-rate target against the existing rule bots.

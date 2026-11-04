@@ -1,0 +1,44 @@
+{
+  "protocol": "Paired same uniform deals swapped team; first-out team win; random-level independent rounds, no tribute",
+  "seedRange": [
+    21300104,
+    21303103
+  ],
+  "baseline": {
+    "rounds": 6000,
+    "deals": 3000,
+    "wins": 3354,
+    "winRate": 0.559,
+    "winRate95CI": [
+      0.5479868904535163,
+      0.5700131095464838
+    ],
+    "model": {
+      "path": "ai/policy.onnx",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+    }
+  },
+  "trained": {
+    "rounds": 6000,
+    "deals": 3000,
+    "wins": 3506,
+    "winRate": 0.5843333333333334,
+    "winRate95CI": [
+      0.5734546744212664,
+      0.5952119922454003
+    ],
+    "model": {
+      "path": "work/learning/ppo-k4-extended/cycle-12/model/ppo.npz",
+      "sha256": "06e2463e98ee4d6b66d53f72a9324b57025b33aff730e910593296b00f462598"
+    }
+  },
+  "winRateDifference": 0.025333333333333333,
+  "winRateDifference95CI": [
+    0.011687890325943688,
+    0.03897877634072298
+  ],
+  "targetWinRate": 0.8,
+  "targetMet": false,
+  "modelSelectedBeforeHeldout": true,
+  "modelExportSHA256": "17807ade41156ab5eeb3e40a55d834ff984264d6d2e068a0773be1294a51e23d"
+}

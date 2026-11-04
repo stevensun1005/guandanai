@@ -1,6 +1,7 @@
 """JSON-lines CPU inference helper for development self-play, never a web service."""
 
 import json
+import os
 from pathlib import Path
 import sys
 import numpy as np
@@ -14,7 +15,9 @@ options = ort.SessionOptions()
 options.intra_op_num_threads = 1
 options.inter_op_num_threads = 1
 engine = ort.InferenceSession(
-    str(ROOT / "ai/policy.onnx"), sess_options=options, providers=["CPUExecutionProvider"]
+    os.environ.get("GUANDAN_POLICY_MODEL", str(ROOT / "ai/policy.onnx")),
+    sess_options=options,
+    providers=["CPUExecutionProvider"],
 )
 for line in sys.stdin:
     try:

@@ -128,3 +128,5 @@ docs/                 玩法、架构、机器人与迭代路线
 欢迎带着可复现的场景提 [Issue](https://github.com/stevensun1005/guandanai/issues)，或提交小而明确的改进。UI 变化请附截图，牌型和策略变化请附具体牌局及验证结果。
 
 [贡献流程](CONTRIBUTING.md) · [机器人设计](docs/BOTS.md) · [模型训练](docs/MODEL_TRAINING.md) · [测试与评估](docs/TESTING.md)
+
+训练进展与复现：[主策略训练记录](docs/TRAINING_RUN.md)。当前实验尚未达到对原规则机器人 80% 的胜率目标。

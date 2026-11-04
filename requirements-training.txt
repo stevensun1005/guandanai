@@ -1,0 +1,3 @@
+# CPU training also works on machines without an NVIDIA GPU.
+-r requirements-models.txt
+torch==2.15.0

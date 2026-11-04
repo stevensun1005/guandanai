@@ -1,5 +1,5 @@
 import * as ort from './vendor/ort.wasm.min.mjs';
-import { encode, cardsArray } from './encoding.mjs';
+import { inferPolicy } from './policy-inference.mjs';
 import { solvePublicEndgame } from './endgame.js';
 import { MODELS } from './models.mjs';
 import { profileId, selectProfileAction, usesResponseModel } from './profiles.js';
@@ -31,40 +31,13 @@ function shapedPlays(state) {
 }
 
 async function decide(state) {
-  const engine = await session(),
-    features = encode(state);
+  const engine = await session();
   const started = performance.now();
-  let best = -Infinity,
-    index = 0;
+  const inferred = await inferPolicy(ort, engine, state, MODELS.policy);
+  let best = inferred.value,
+    index = inferred.index;
   const style = profileId(state.profile);
-  const scores = state.includeValues || state.endgame || style !== 'balanced' ? [] : null;
-  const stateTensor = new ort.Tensor('float32', features, [1, 513]);
-  try {
-    for (let first = 0; first < state.actions.length; first += 128) {
-      const chunk = state.actions.slice(first, first + 128);
-      const batch = new Float32Array(chunk.length * 54);
-      for (let i = 0; i < chunk.length; i++) batch.set(cardsArray(chunk[i]), i * 54);
-      const actionTensor = new ort.Tensor('float32', batch, [chunk.length, 54]);
-      let output;
-      try {
-        output = await engine.run({ state: stateTensor, actions: actionTensor });
-        const values = output.values.data;
-        for (let i = 0; i < values.length; i++) {
-          if (!Number.isFinite(values[i])) throw Error('Invalid model output');
-          if (scores) scores.push(values[i]);
-          if (values[i] > best) {
-            best = values[i];
-            index = first + i;
-          }
-        }
-      } finally {
-        actionTensor.dispose();
-        if (output) for (const tensor of Object.values(output)) tensor.dispose();
-      }
-    }
-  } finally {
-    stateTensor.dispose();
-  }
+  const scores = inferred.values;
   const endgame = state.endgame ? solvePublicEndgame(state, scores) : null;
   let responseRisks = null;
   if (endgame) index = endgame.index;
