@@ -47,10 +47,10 @@ python scripts/train_response.py work/learning/dataset work/learning/candidate
 
 我们也试过直接把应牌概率加到出／过评分上，这种用法在留出对局中没有优势，因而没有发布。条件概率适用于比较已决定打出的牌，不足以单独决定是否该过。
 
-最终用法在 3,000 组交换双方、共 6,000 局的留出种子 `20300104` 上检查，对手为未使用第二模型的观察型，双方均启用精确残局。胜率 50.23%；配对升级分均值 +0.02733，95% 区间 [-0.01208, 0.06674]。**区间包含零，尚不能宣称棋力提升。**默认均衡型保持不变。
+最终用法在 3,000 组交换双方、共 6,000 局的留出种子 `20300104` 上检查，对手为未使用第二模型的观察型，双方均启用当时上限为 16 张的精确残局。胜率 50.23%；配对升级分均值 +0.02733，95% 区间 [-0.01208, 0.06674]。**区间包含零，尚不能宣称棋力提升。**默认均衡型保持不变。
 
 ```bash
-node scripts/evaluate-response.mjs --pairs=3000 --seed=20300104 --output=work/validation/response
+node scripts/evaluate-response.mjs --pairs=3000 --seed=20300104 --endgame-cards=16 --output=work/validation/response
 ```
 
 [对局结果](evaluation/response-policy-1.7.0.json)。这是随机级牌的独立单局，不包括跨局进还贡与整场打 A。新模型进入默认策略前，仍需新的留出局、更多对手和设备验证。

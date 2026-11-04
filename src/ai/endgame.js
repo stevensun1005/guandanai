@@ -3,6 +3,7 @@ import { analyze, beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 
 const deck = makeDeck();
+export const ENDGAME_MAX_CARDS = 24;
 const cardKey = (hand) =>
   hand
     .map((card) => card.r + card.s)
@@ -18,7 +19,7 @@ export function endgameRequest(game, player, plays) {
     active.length !== 2 ||
     !active.includes(player) ||
     active[0] % 2 === active[1] % 2 ||
-    game.hands.reduce((sum, hand) => sum + hand.length, 0) > 16
+    game.hands.reduce((sum, hand) => sum + hand.length, 0) > ENDGAME_MAX_CARDS
   )
     return null;
   return {
@@ -59,7 +60,7 @@ export function solvePublicEndgame(state, values, { maxNodes = 40000, maxMs = 80
   if (
     !state.endgame ||
     state.hand.length + state.counts.reduce((sum, n, seat) => sum + (seat === state.p ? 0 : n), 0) >
-      16
+      ENDGAME_MAX_CARDS
   )
     return null;
   const other = inferLastOpponent(state);

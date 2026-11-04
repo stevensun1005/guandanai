@@ -12,6 +12,7 @@ import { handEl } from '../input/pointer.js';
 import { render } from '../ui/table.js';
 
 let tribChoice;
+const giving = new WeakMap();
 export let owesReturn;
 
 export function doTribute() {
@@ -136,21 +137,28 @@ async function handOver(x, tok) {
 
 // hand over queued cards one at a time, face up across the table, then carry on with the returns
 export async function runGives() {
-  runtime.game.phase = 'tribute';
-  render();
-  const tok = runtime.game.tok;
-  while (runtime.game.gives.length) {
-    if (!(await handOver(runtime.game.gives[0], tok))) return;
-    runtime.game.gives.shift();
+  const game = runtime.game,
+    tok = game.tok;
+  if (giving.get(game) === tok) return;
+  giving.set(game, tok);
+  try {
+    runtime.game.phase = 'tribute';
     render();
+    while (runtime.game.gives.length) {
+      if (!(await handOver(runtime.game.gives[0], tok))) return;
+      runtime.game.gives.shift();
+      render();
+    }
+    // the tribute is in: sort your cards first (whoever leads is known now), the returns follow
+    if (runtime.game.afterTrib) {
+      runtime.game.afterTrib = false;
+      startPrep(runtime.game.leader);
+      return;
+    }
+    processReturns();
+  } finally {
+    if (giving.get(game) === tok) giving.delete(game);
   }
-  // the tribute is in: sort your cards first (whoever leads is known now), the returns follow
-  if (runtime.game.afterTrib) {
-    runtime.game.afterTrib = false;
-    startPrep(runtime.game.leader);
-    return;
-  }
-  processReturns();
 }
 
 export function processReturns() {
@@ -173,6 +181,8 @@ export function retWait() {
     .filter((x) => runtime.game.retPick[x.from] == null)
     .map((x) => x.from);
   if (!left.length) {
+    // Enter the transfer phase before deferring its animation: duplicate ready messages must not start play.
+    runtime.game.phase = 'tribute';
     runtime.game.clock = null;
     runtime.game.gives = runtime.game.returns.map((x) => ({
       from: x.from,

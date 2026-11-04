@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { simulateRound } from './lib/simulation.mjs';
 import { createPolicyInference } from './lib/policy-inference.mjs';
 import { selectProfileAction, BOT_PROFILES, usesResponseModel } from '../src/ai/profiles.js';
-import { solvePublicEndgame } from '../src/ai/endgame.js';
+import { ENDGAME_MAX_CARDS, solvePublicEndgame } from '../src/ai/endgame.js';
 import { encodeResponse } from '../src/ai/response-features.mjs';
 import { responseCandidates } from '../src/ai/response.mjs';
 
@@ -23,6 +23,9 @@ if (
 )
   throw Error('Invalid style');
 const output = option('output', 'work/learning/response-evaluation-development');
+const endgameCards = Number(option('endgame-cards', String(ENDGAME_MAX_CARDS)));
+if (!Number.isInteger(endgameCards) || endgameCards < 0 || endgameCards > ENDGAME_MAX_CARDS)
+  throw Error('Invalid endgame card limit');
 mkdirSync(output, { recursive: true });
 const policy = createPolicyInference(),
   response = createPolicyInference({
@@ -35,7 +38,7 @@ function ending(context, plays, values) {
   const active = context.counts
     .map((count, seat) => (count ? seat : -1))
     .filter((seat) => seat >= 0);
-  if (active.length !== 2 || context.counts.reduce((a, b) => a + b, 0) > 16) return null;
+  if (active.length !== 2 || context.counts.reduce((a, b) => a + b, 0) > endgameCards) return null;
   let passes = 0;
   if (context.trick)
     for (let index = context.log.length - 1; index >= 0 && !context.log[index].cards; index--)
@@ -118,6 +121,7 @@ try {
   const report = {
     testedStyle,
     opponentStyle,
+    endgameCards,
     pairs,
     seed,
     rounds: rounds.length,

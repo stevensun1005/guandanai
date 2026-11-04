@@ -97,8 +97,16 @@ function advance() {
     }
     runtime.game.turn = -1;
     runtime.game.nextLeader = leader;
+    const count = runtime.game.log.length;
     render();
     later(() => {
+      if (
+        runtime.game.phase !== 'play' ||
+        runtime.game.turn !== -1 ||
+        runtime.game.nextLeader !== leader ||
+        runtime.game.log.length !== count
+      )
+        return;
       pileSweep();
       runtime.game.heapN += runtime.game.trickPlays.reduce((s, t) => s + t.play.cards.length, 0);
       runtime.game.trickPlays = [];

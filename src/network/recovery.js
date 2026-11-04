@@ -56,6 +56,52 @@ export function peerList() {
   return peers;
 }
 
+function sendSnapshot(info, sync = false) {
+  info.conn.send({
+    t: 'resume',
+    sync,
+    game: structuredClone(runtime.game),
+    humans: [...runtime.network.humans],
+    names: runtime.network.names,
+    hostDir: runtime.network.hostDir,
+    you: info.dir,
+    name: info.name,
+    rules: runtime.rules,
+    botStyles: runtime.botStyles,
+    peers: peerList(),
+  });
+}
+
+export function receiveSync(conn, message) {
+  if (message.t !== 'sync') return false;
+  const info = runtime.network.conns.get(conn.peer);
+  if (
+    !info?.dir ||
+    !runtime.network.started ||
+    info.syncing ||
+    message.ver !== VERSION ||
+    Date.now() - (info.lastSync || 0) < 8000
+  )
+    return true;
+  info.syncing = true;
+  info.lastSync = Date.now();
+  const deadline = Date.now() + 20000;
+  const send = () => {
+    if (!conn.open || runtime.network.conns.get(conn.peer) !== info || Date.now() > deadline) {
+      info.syncing = false;
+      return;
+    }
+    if (!canResume(runtime.game)) {
+      setTimeout(send, 100);
+      return;
+    }
+    info.syncing = false;
+    sendSnapshot(info, true);
+  };
+  send();
+  return true;
+}
+
 /** Possession of an opaque tab-local credential restores only its original seat. */
 export function receiveHello(conn, message) {
   if (message.t !== 'hello') return false;
@@ -111,18 +157,7 @@ export function receiveHello(conn, message) {
     act({ k: 'humans', list: humans, names: runtime.network.names, joined: seat });
     reserveSeat(info);
     const peers = peerList();
-    conn.send({
-      t: 'resume',
-      game: structuredClone(runtime.game),
-      humans,
-      names: runtime.network.names,
-      hostDir: runtime.network.hostDir,
-      you: info.dir,
-      name: info.name,
-      rules: runtime.rules,
-      botStyles: runtime.botStyles,
-      peers,
-    });
+    sendSnapshot(info);
     broadcast({ t: 'peers', peers });
     VC.start(peers);
     setMsg(`${info.name}已回到原座位`);
@@ -169,6 +204,10 @@ export function receiveRecovery(message) {
   }
   if (message.t !== 'resume') return false;
   clearTimeout(retryTimer);
+  const order = message.sync
+    ? { myOrder: runtime.game.myOrder || [], fixed: runtime.game.fixed || [] }
+    : { myOrder: [], fixed: [] };
+  const selected = message.sync ? [...runtime.selection] : [];
   const tok = (runtime.game?.tok || 0) + 1;
   runtime.direction = message.you;
   runtime.nickname = message.name;
@@ -180,8 +219,7 @@ export function receiveRecovery(message) {
   runtime.game = rotateSnapshot(message.game, runtime.network.off);
   Object.assign(runtime.game, {
     tok,
-    myOrder: [],
-    fixed: [],
+    ...order,
     fresh: [],
     queuedPlay: false,
     notice: '',
@@ -191,7 +229,8 @@ export function receiveRecovery(message) {
   runtime.network.pending = false;
   runtime.network.gone = false;
   runtime.network.refused = false;
-  runtime.selection = new Set();
+  const held = new Set(runtime.game.hands[0].map((card) => card.id));
+  runtime.selection = new Set(selected.filter((id) => held.has(id)));
   runtime.confirmation = null;
   setHumans(message.humans.map(toLocal), message.names);
   hideOverlay();
@@ -205,7 +244,8 @@ export function receiveRecovery(message) {
   if (runtime.game.paused) setPaused(true, runtime.game.pausedBy);
   else if (['roundEnd', 'over'].includes(runtime.game.phase)) showResult();
   VC.start(message.peers);
-  setMsg('已恢复原座位，继续打牌');
+  if (message.sync) runtime.network.syncCount = (runtime.network.syncCount || 0) + 1;
+  setMsg(message.sync ? '牌桌已重新同步，继续打牌' : '已恢复原座位，继续打牌');
   return true;
 }
 
@@ -250,4 +290,23 @@ export function showReconnectPanel(message = '正在尝试恢复原座位；等�
     forgetSeat();
     location.reload();
   };
+}
+
+export function initialize() {
+  let head = null,
+    since = 0,
+    requested = 0;
+  setInterval(() => {
+    const network = runtime.network;
+    const first =
+      network.mode === 'guest' && !network.gone && network.hostConn?.open ? network.inbox[0] : null;
+    if (first !== head) {
+      head = first;
+      since = Date.now();
+    }
+    if (head && Date.now() - since > 8000 && Date.now() - requested > 12000) {
+      requested = Date.now();
+      network.hostConn.send({ t: 'sync', ver: VERSION });
+    }
+  }, 500);
 }

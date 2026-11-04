@@ -47,6 +47,7 @@ import * as replayExport from './replay/import-export.js';
 import * as protocol from './network/protocol.js';
 import * as voice from './network/voice.js';
 import * as rooms from './network/rooms.js';
+import * as recovery from './network/recovery.js';
 import * as startup from './app/startup.js';
 import { runtime } from './app/runtime.js';
 
@@ -92,6 +93,7 @@ replayExport.initialize();
 protocol.initialize();
 voice.initialize();
 rooms.initialize();
+recovery.initialize();
 startup.initialize();
 
 if (new URLSearchParams(location.search).get('test') === '1') {

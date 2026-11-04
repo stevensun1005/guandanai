@@ -10,7 +10,7 @@
 
 复盘练习：`python tests/practice_smoke.py` 验证明牌练习、出牌、评语、导出与跨浏览器导入、旧记录迁移、损坏数据和本机保存失败提示。记录格式边界与限制见 [复盘指南](PRACTICE.md)。
 
-残局检查：Node 测试使用独立的实体牌子集穷举对照；`python tests/endgame_browser_smoke.py` 将真实自对弈中记录的 8 个残局交给浏览器 Worker，并检查风格不会覆盖已证明路线。
+残局检查：Node 测试使用独立的实体牌子集穷举对照；`python tests/endgame_browser_smoke.py` 将真实自对弈中记录的 15 个残局（包含 7 个 17–24 张局面）交给浏览器 Worker，并检查风格不会覆盖已证明路线。
 
 电脑配置检查：`python tests/bot_setup_smoke.py`，覆盖三个窗口尺寸、四种玩家座位与本机偏好保存。`browser_smoke.py` 还检查房主风格同步及真实 Worker 风格决策。批量棋力与行为验证见 [电脑对手](BOTS.md)。
 
@@ -90,3 +90,19 @@ python tests/multiround_smoke.py http://127.0.0.1:8765/ 3 2 --rejoin
 第一项用实际 Worker 延迟回复，检查玩家回来后不会收到旧电脑落牌；第二项验证换人、房主占位和主动退出后的旧凭据失效。连续对局分别覆盖三个客人视角、结算恢复和观察／融合双模型电脑。报告与边界见 [房间指南](ROOMS.md)。
 
 Python 开发工具的已验证依赖保存在 `requirements-dev.txt`，模型训练依赖独立放在 `requirements-models.txt`。使用 Python 3.11+；本轮在 3.13 上执行。格式检查：`python -m ruff format --check scripts tests ai/reference`。普通玩家和生产构建不需要这些 Python 包。
+
+## 阶段竞态与整场检查
+
+`python tests/ready_transition_smoke.py` 重放重复的准备消息，并并发调用交换流程，检查两笔还贡只执行一次、最终每家 27 张、旧的同局等待不能改回出牌权。`python tests/resync_smoke.py` 人为阻塞客人的事件队列，核对同一连接恢复后的手牌、记录与房主计时。
+
+完整打 A 的自动检查：
+
+```bash
+python tests/multiround_smoke.py http://127.0.0.1:8765/ 50 2 --match --auto
+```
+
+它在整场结束时停止，最多运行 50 局或 60 分钟。所有出牌用缩短倒计时触发真实学习策略托管，准备和进还贡仍通过实际页面按钮；这不是模拟真人思考时间的测量。检查跨端每张牌的归属、公开记录、升级与最终结果。停滞时将完整测试局面与最近回合写入 `work/validation/full-match`，用于复现，不能把尚未跑完的检查写成通过。
+
+### 首次整场结果
+
+阶段竞态修复后的版本 `5c154081ef` 已完成一整场：9 局、736 手、543 次实际模型评分，两端升级、归属和结算一致，页面错误为零。[结果 JSON](evaluation/full-match-phaseguard-1.10.0.json)。这场在自动队列同步加入前执行，能单独检查阶段与回调修复；自动同步另用阻塞队列专项检查验证。倒计时经过加速，运行时间约 9.4 分钟，不代表真人一场的时长。

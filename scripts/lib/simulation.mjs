@@ -3,7 +3,7 @@ import { candidates } from '../../src/ai/candidates.js';
 import { beats } from '../../src/core/combinations.js';
 import { decisionContext, policyState } from '../../src/ai/observation.js';
 import { selectProfileAction } from '../../src/ai/profiles.js';
-import { endgameRequest, solvePublicEndgame } from '../../src/ai/endgame.js';
+import { ENDGAME_MAX_CARDS, endgameRequest, solvePublicEndgame } from '../../src/ai/endgame.js';
 
 export function seededRandom(seed) {
   return () => {
@@ -97,7 +97,12 @@ export async function simulateRound(
   seed,
   styles,
   infer,
-  { onDecision = () => {}, onAction = null, selectAction = selectProfileAction } = {},
+  {
+    onDecision = () => {},
+    onAction = null,
+    selectAction = selectProfileAction,
+    maxEndgameCards = ENDGAME_MAX_CARDS,
+  } = {},
 ) {
   const game = createRound(seed);
   const stats = {
@@ -137,7 +142,10 @@ export async function simulateRound(
       );
       selected = await selectAction(plays, values, style, decisionContext(game, player));
       if (style === 'endgame') {
-        state.endgame = endgameRequest(game, player, plays);
+        state.endgame =
+          game.hands.reduce((sum, hand) => sum + hand.length, 0) <= maxEndgameCards
+            ? endgameRequest(game, player, plays)
+            : null;
         if (state.endgame) {
           stats.endgameCalls++;
           const started = performance.now();

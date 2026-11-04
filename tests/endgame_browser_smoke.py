@@ -7,7 +7,11 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8765/"
 URL += ("&" if "?" in URL else "?") + "test=1"
-fixtures = json.loads((ROOT / "tests/fixtures/endgame-positions.json").read_text(encoding="utf-8"))
+fixtures = json.loads(
+    (ROOT / "tests/fixtures/endgame-positions.json").read_text(encoding="utf-8")
+) + json.loads(
+    (ROOT / "tests/fixtures/endgame-expanded-positions.json").read_text(encoding="utf-8")
+)
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, channel="chrome")
     page = browser.new_page()
@@ -30,6 +34,8 @@ with sync_playwright() as p:
         )
         assert result["endgame"]["winning"], result
         assert result["index"] == expected, (result, expected)
+        if "values" in fixture:
+            assert max(abs(a - b) for a, b in zip(result["values"], fixture["values"])) < 2e-4
         # A style must not replace a proved continuation with a losing close-score action.
         chosen = page.evaluate(
             """async ({state,style})=>{
@@ -45,7 +51,7 @@ with sync_playwright() as p:
           const play=await TableBot.decide(state.p);
           return play ? {ids:play.cards.map(card=>card.id).sort((a,b)=>a-b),type:play.type,value:play.value} : null;
         }""",
-            {"state": state, "style": "aggressive"},
+            {"state": state, "style": "adaptive" if sum(state["counts"]) > 16 else "aggressive"},
         )
         assert chosen["ids"] == sorted(state["actions"][expected])
         assert chosen["type"] == state["endgame"]["shapes"][expected]["type"]

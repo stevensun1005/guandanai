@@ -1,0 +1,104 @@
+{
+  "clients": 2,
+  "completedMatch": true,
+  "acceleratedTurnTimeouts": true,
+  "policyDecisions": 543,
+  "pageVersion": "5c154081ef",
+  "bots": 2,
+  "botStyles": [
+    "observant",
+    "adaptive"
+  ],
+  "hostDirection": "W",
+  "rounds": [
+    {
+      "round": 1,
+      "moves": 85,
+      "levels": [
+        2,
+        3
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 2,
+      "moves": 79,
+      "levels": [
+        2,
+        6
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 3,
+      "moves": 68,
+      "levels": [
+        2,
+        8
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 4,
+      "moves": 68,
+      "levels": [
+        5,
+        8
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 5,
+      "moves": 88,
+      "levels": [
+        5,
+        9
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 6,
+      "moves": 109,
+      "levels": [
+        5,
+        10
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 7,
+      "moves": 93,
+      "levels": [
+        5,
+        13
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 8,
+      "moves": 73,
+      "levels": [
+        5,
+        14
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 9,
+      "moves": 73,
+      "levels": [
+        5,
+        14
+      ],
+      "allClientsEqual": true
+    }
+  ],
+  "cardConservation": true,
+  "realGuestActions": true,
+  "hostTimeoutUsedLearnedPolicy": true,
+  "guestsAvoidModelDownload": true,
+  "rejoins": [],
+  "auxiliaryModelLoaded": true,
+  "pageErrors": [],
+  "elapsedSeconds": 566.6105754000018
+}

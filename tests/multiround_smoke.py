@@ -23,6 +23,11 @@ OUT = ROOT / (
     if HUMANS == 2
     else "work/validation/multiround"
 )
+specified_output = next(
+    (arg.split("=", 1)[1] for arg in sys.argv[4:] if arg.startswith("--output=")), None
+)
+if specified_output:
+    OUT = ROOT / specified_output
 OUT.mkdir(parents=True, exist_ok=True)
 snapshot = """()=>({round:G.round,phase:G.phase,L:G.L,
  levels:[G.levels[NET.off%2],G.levels[(NET.off+1)%2]],
@@ -31,7 +36,7 @@ snapshot = """()=>({round:G.round,phase:G.phase,L:G.L,
  out:G.out.map(toAbs)})"""
 status = """()=>{
  const all=G.hands.flat().map(card=>card.id).concat((G.log||[]).flatMap(entry=>entry.cards?.map(card=>card.id)||[]),(G.rest||[]).flatMap(rest=>rest.cards.map(card=>card.id)));
- return {phase:G.phase,round:G.round,turn:G.turn,log:G.log?.length||0,count:all.length,unique:new Set(all).size};
+ return {phase:G.phase,round:G.round,turn:G.turn,log:G.log?.length||0,count:all.length,unique:new Set(all).size,syncs:NET.syncCount||0};
 }"""
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, channel="chrome")
@@ -52,7 +57,11 @@ with sync_playwright() as p:
         page.on("pageerror", lambda error: errors.append(str(error)))
         pages.append(page)
     contexts[0].add_init_script(
-        """const BaseWorker=Worker;window.policyDecisions=0;window.Worker=class extends BaseWorker {postMessage(data,...rest){if(data.type==='decide')window.policyDecisions++;return super.postMessage(data,...rest)}};"""
+        """const BaseWorker=Worker;window.policyDecisions=0;window.lastPolicyInput=null;window.lastPolicyMessage=null;
+window.Worker=class extends BaseWorker {
+ constructor(...args){super(...args);this.addEventListener('message',event=>window.lastPolicyMessage=event.data)}
+ postMessage(data,...rest){if(data.type==='decide'){window.policyDecisions++;window.lastPolicyInput=structuredClone(data.state)}return super.postMessage(data,...rest)}
+};"""
     )
     host = pages[0]
     host.on(
@@ -88,8 +97,69 @@ with sync_playwright() as p:
     started = time.monotonic()
     last_progress = started
     match_finished = False
+    last_action = None
+    last_action_at = started
+    latest_clients = []
     while rounds < TARGET and time.monotonic() - started < (3600 if MATCH else 900):
+        for page in pages:
+            page.evaluate(
+                """()=>{if(window.tracedGame===G)return;window.tracedGame=G;window.turnTrace=[];const game=G;let value=G.turn;Object.defineProperty(G,'turn',{enumerable:true,configurable:true,get(){return value},set(next){window.turnTrace.push({from:value,to:next,log:game.log?.length,phase:game.phase,stack:Error().stack});if(window.turnTrace.length>120)window.turnTrace.shift();value=next}})}"""
+            )
         states = [page.evaluate(status) for page in pages]
+        action = (states[0]["round"], states[0]["phase"], states[0]["log"])
+        if action != last_action:
+            last_action = action
+            last_action_at = time.monotonic()
+        if (
+            errors
+            or time.monotonic() - last_action_at > 35
+            or host.locator("#retryTableBtn").is_visible()
+        ):
+            diagnostic = host.evaluate(
+                """()=>({game:G,policyInput:lastPolicyInput,policyMessage:lastPolicyMessage,clock:G.clock,paused:G.paused,panel:document.querySelector('#panel').textContent,error:localStorage.getItem('guandan-lastError'),ready:TableBot.ready,humans:[...NET.humans],mode:NET.mode})"""
+            )
+            diagnostic["clients"] = [
+                page.evaluate(
+                    """()=>({game:G,inbox:NET.inbox,off:NET.off,mode:NET.mode,gone:NET.gone,pending:NET.pending,error:localStorage.getItem('guandan-lastError'),panel:document.querySelector('#panel').textContent,turnTrace:window.turnTrace})"""
+                )
+                for page in pages
+            ]
+            (OUT / "stalled-position.json").write_text(
+                json.dumps(diagnostic, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            host.screenshot(path=str(OUT / "stalled.png"))
+            raise AssertionError(
+                {
+                    "stalled": states,
+                    "clock": diagnostic["clock"],
+                    "error": diagnostic["error"],
+                    "panel": diagnostic["panel"],
+                }
+            )
+        if len({state["round"] for state in states}) == 1 and all(
+            state["phase"] in ["play", "roundEnd", "over"] for state in states
+        ):
+            owners = [
+                page.evaluate(
+                    """()=>Array.from({length:4},(_,seat)=>{const p=toLocal(seat);return G.hands[p].concat(G.log.filter(entry=>entry.p===p).flatMap(entry=>entry.cards||[]),(G.rest||[]).filter(entry=>entry.p===p).flatMap(entry=>entry.cards)).map(card=>card.id).sort((a,b)=>a-b)})"""
+                )
+                for page in pages
+            ]
+            if any(owner != owners[0] for owner in owners[1:]):
+                diagnostic = {
+                    "states": states,
+                    "owners": owners,
+                    "clients": [
+                        page.evaluate(
+                            """()=>({game:G,inbox:NET.inbox,off:NET.off,error:localStorage.getItem('guandan-lastError'),turnTrace:window.turnTrace})"""
+                        )
+                        for page in pages
+                    ],
+                }
+                (OUT / "ownership-divergence.json").write_text(
+                    json.dumps(diagnostic, ensure_ascii=False, indent=2), encoding="utf-8"
+                )
+                raise AssertionError("dealt/returned ownership diverged")
         for state in states:
             if state["phase"] not in ["start", "shuffle", "cut", "deal"]:
                 assert state["count"] == 108 and state["unique"] == 108, (
@@ -211,6 +281,7 @@ with sync_playwright() as p:
         "completedMatch": match_finished,
         "acceleratedTurnTimeouts": AUTO,
         "policyDecisions": host.evaluate("policyDecisions"),
+        "automaticStateResyncs": [page.evaluate("NET.syncCount||0") for page in pages],
         "pageVersion": host.locator("meta[name=app-version]").get_attribute("content"),
         "bots": 4 - HUMANS,
         "botStyles": ["observant", "adaptive"] if HUMANS == 2 else [],

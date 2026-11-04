@@ -3,6 +3,7 @@ import { performance } from 'node:perf_hooks';
 import { simulateRound } from './lib/simulation.mjs';
 import { createPolicyInference } from './lib/policy-inference.mjs';
 import { BOT_PROFILES } from '../src/ai/profiles.js';
+import { ENDGAME_MAX_CARDS } from '../src/ai/endgame.js';
 
 const option = (name, fallback) =>
   process.argv
@@ -12,6 +13,9 @@ const option = (name, fallback) =>
     .join('=') || fallback;
 const pairs = Number(option('pairs', '100'));
 const seed = Number(option('seed', '20261104'));
+const endgameCards = Number(option('endgame-cards', String(ENDGAME_MAX_CARDS)));
+if (!Number.isInteger(endgameCards) || endgameCards < 0 || endgameCards > ENDGAME_MAX_CARDS)
+  throw Error('Invalid endgame card limit');
 const styles = option('styles', 'aggressive,conservative,observant').split(',');
 const output = option('output', 'work/validation/profiles');
 const captureLimit = Number(option('capture-endgame', '0'));
@@ -53,6 +57,7 @@ try {
           seat % 2 === side ? style : 'balanced',
         );
         const result = await simulateRound(seed + pair, profiles, infer, {
+          maxEndgameCards: endgameCards,
           onDecision: (decision) => {
             if (
               captured.length < captureLimit &&
@@ -88,6 +93,7 @@ try {
       Math.max(1, pairs - 1);
     const report = {
       style,
+      endgameCards,
       pairs,
       rounds: rounds.length,
       wins,

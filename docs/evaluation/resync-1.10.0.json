@@ -1,0 +1,8 @@
+{
+  "blockedQueueResynchronized": true,
+  "sameConnection": true,
+  "hostClockNotExtended": true,
+  "matchingHandsAndLog": true,
+  "guestAvoidsModelDownload": true,
+  "pageErrors": []
+}

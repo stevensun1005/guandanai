@@ -66,8 +66,17 @@ export function startPlay(leader) {
     runtime.game.turn = -1;
     runtime.game.nextLeader = leader;
     runtime.game.tribHold = true;
+    const count = runtime.game.log.length;
     render();
     later(() => {
+      if (
+        runtime.game.phase !== 'play' ||
+        runtime.game.turn !== -1 ||
+        runtime.game.nextLeader !== leader ||
+        !runtime.game.tribHold ||
+        runtime.game.log.length !== count
+      )
+        return;
       runtime.game.tribHold = false;
       runtime.game.turn = leader;
       startTurn();
@@ -86,9 +95,10 @@ export function nextActive(i) {
 }
 
 export function later(fn, ms) {
-  const t = runtime.game.tok;
+  const game = runtime.game,
+    t = game.tok;
   setTimeout(() => {
-    if (runtime.game.tok === t) fn();
+    if (runtime.game === game && game.tok === t) fn();
   }, ms);
 }
 

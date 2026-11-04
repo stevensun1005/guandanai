@@ -1,0 +1,9 @@
+{
+  "duplicateReadyIsIdempotent": true,
+  "returnPhaseCommittedBeforeAnimation": true,
+  "concurrentTransferRunsOnce": true,
+  "eachHand27": true,
+  "physicalCards108": true,
+  "staleHoldCannotResetLead": true,
+  "pageErrors": []
+}

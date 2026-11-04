@@ -101,7 +101,8 @@ function applyEvt(e) {
     }
     case 'ready':
       if (runtime.game.phase !== 'prep') return false;
-      if (!runtime.game.ready.includes(p)) runtime.game.ready.push(p);
+      if (runtime.game.ready.includes(p)) return true;
+      runtime.game.ready.push(p);
       if ([...runtime.network.humans].every((h) => runtime.game.ready.includes(h))) beginPlay();
       else render();
       return true;

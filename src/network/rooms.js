@@ -18,6 +18,7 @@ import {
   confirmReservations,
   receiveHello,
   receiveRecovery,
+  receiveSync,
   reconnect,
   releaseSeat,
   reserveSeat,
@@ -121,6 +122,7 @@ function hostOnData(conn, d) {
   info.seen = Date.now();
   if (d.t === 'hello') info.version = d.ver;
   if (receiveHello(conn, d)) return;
+  if (receiveSync(conn, d)) return;
   if (d.t === 'bye') {
     hostOnClose(conn, 'quit');
     try {

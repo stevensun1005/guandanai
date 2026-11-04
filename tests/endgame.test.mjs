@@ -139,3 +139,18 @@ test('an exhausted node budget preserves the model choice', () => {
     null,
   );
 });
+
+test('public search includes a 24-card ending and rejects a 25-card request', () => {
+  const own = deck.filter((card) => card.r === 9).slice(0, 4);
+  const other = deck.filter((card) => !own.includes(card)).slice(0, 20);
+  const { state, plays } = fixture(own, other);
+  assert(state.endgame);
+  const finish = plays.findIndex((play) => play?.cards.length === own.length);
+  const answer = solvePublicEndgame(
+    state,
+    plays.map((_, index) => (index === finish ? 1 : 0)),
+  );
+  assert.equal(answer.index, finish);
+  const larger = fixture(own, deck.filter((card) => !own.includes(card)).slice(0, 21));
+  assert.equal(larger.state.endgame, null);
+});
