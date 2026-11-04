@@ -34416,6 +34416,650 @@
     }
   },
   "continuousRuns": {
+    "gpu-main": {
+      "role": "development training and monitoring; not held-out acceptance",
+      "status": "running",
+      "config": {
+        "schema": 1,
+        "initial": "ai/policy.onnx",
+        "actors": 8,
+        "actorSeedOffset": 1000000,
+        "evaluationBlockOffset": 100,
+        "actorMix": {
+          "self": 0.5,
+          "league": 0.3,
+          "rule": 0.2
+        },
+        "exploration": {
+          "type": "softmax",
+          "temperature": 0.02
+        },
+        "shardRows": 16384,
+        "shardSeconds": 120,
+        "learner": {
+          "device": "cuda:0",
+          "threads": 1,
+          "batch": 2048,
+          "learningRate": 1e-5,
+          "gradClip": 1,
+          "capacity": 2000000,
+          "minSamples": 100000,
+          "replayRatio": 4,
+          "exportSeconds": 600,
+          "targetMatchWeight": 0,
+          "anchorWeight": 0,
+          "keepVersions": 6,
+          "seed": 20261104
+        },
+        "snapshotMinutes": 60,
+        "leagueSize": 24,
+        "gate": {
+          "alpha": 0.05,
+          "beta": 0.05,
+          "mu0": 0.5,
+          "mu1": 0.53,
+          "minPairs": 100,
+          "maxPairs": 1000
+        },
+        "anchor": {
+          "intervalHours": 3,
+          "pairs": 150,
+          "regressionLimit": 2
+        },
+        "restarts": {
+          "limit": 5,
+          "windowMinutes": 10
+        },
+        "diskLimitGB": 20,
+        "initialSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "createdAt": "2026-11-04T20:40:54.512Z",
+        "sourceSHA256": {
+          "scripts/continuous/supervisor.mjs": "da339667ade0fb3c39a1525bf8ebb354911e0dd856515acdc6fecfd8ae8b3f8c",
+          "scripts/continuous/actor.mjs": "9ec411f0d792045ea5161209f092b1047e96e4cdecfe8245a28113f98c475602",
+          "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+          "scripts/continuous/lib.mjs": "548a28e0b8954294c731c06a4b75b3b21e999aaed2544b45cc36f44620e01edf",
+          "scripts/continuous/learner.py": "4b180586f43f5cf37760cd38ada8e52a568c72429c184167e9e9aae3757b1e9f",
+          "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+          "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+          "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+          "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+          "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+          "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+          "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+          "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+          "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+          "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+          "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+          "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+          "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+          "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+          "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+          "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+          "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+          "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+          "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+        },
+        "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
+      },
+      "startedAt": "2026-11-04T20:40:54.522Z",
+      "updatedAt": "2026-11-04T20:55:54.899Z",
+      "stoppedAt": null,
+      "stopReason": null,
+      "elapsedSeconds": 900.377,
+      "totals": {
+        "matches": 5779,
+        "decisions": 2864222,
+        "rows": 2864222
+      },
+      "learner": {
+        "pid": 31896,
+        "device": "cuda:0",
+        "deviceName": "AMD Radeon RX 7800 XT",
+        "torch": "2.9.1+rocmsdk20260116",
+        "hip": "7.2.26024-f6f897bd3d",
+        "gpuAllocatedBytes": 168534016,
+        "state": "training",
+        "step": 5443,
+        "version": "v000003646",
+        "buffer": 2000000,
+        "ingestedRows": 2803233,
+        "trainedRows": 11147264,
+        "lossEMA": 3.347536784124281,
+        "replayRatio": 3.9765741912998314,
+        "stepsPerSecond": 6.078163735370988,
+        "updatedAt": "2026-11-04T20:55:54Z"
+      },
+      "latest": {
+        "version": "v000003646",
+        "file": "v000003646.onnx",
+        "sha256": "1bcfdeb77546ca7f22697164a40bfd859bb27f51a5cf210efaa4167711ce2ca0",
+        "step": 3646,
+        "trainedRows": 7467008,
+        "ingestedRows": 1882888,
+        "publishedAt": "2026-11-04T20:51:04Z"
+      },
+      "champion": {
+        "version": "v000000000",
+        "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "since": "2026-11-04T20:40:54.512Z",
+        "history": [
+          {
+            "version": "v000000000",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+            "at": "2026-11-04T20:40:54.512Z",
+            "reason": "initial"
+          }
+        ]
+      },
+      "sourceSHA256": {
+        "scripts/continuous/supervisor.mjs": "da339667ade0fb3c39a1525bf8ebb354911e0dd856515acdc6fecfd8ae8b3f8c",
+        "scripts/continuous/actor.mjs": "9ec411f0d792045ea5161209f092b1047e96e4cdecfe8245a28113f98c475602",
+        "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+        "scripts/continuous/lib.mjs": "548a28e0b8954294c731c06a4b75b3b21e999aaed2544b45cc36f44620e01edf",
+        "scripts/continuous/learner.py": "4b180586f43f5cf37760cd38ada8e52a568c72429c184167e9e9aae3757b1e9f",
+        "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+        "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+        "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+        "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+        "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+        "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+        "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+        "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+        "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+        "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+        "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+        "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+        "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+        "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+        "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+        "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+        "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+        "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+        "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+      },
+      "statusSHA256": "73f27e95c79233d5b6f557b34970ace2045683b111fdff0cc64c54137be1c6cf",
+      "eventsSHA256": "09744097007b1d61d872b627476ecdebe88b477d8d50c58c43842028eb00f93c",
+      "gates": [
+        {
+          "role": "development monitoring; not held-out acceptance",
+          "kind": "gate",
+          "status": "running",
+          "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+          "rules": {
+            "tribute": true,
+            "aFail": "draw",
+            "from": 2,
+            "through": "A"
+          },
+          "metric": "Team match score: win 1, draw 0.5, loss 0",
+          "challenger": {
+            "version": "v000003646",
+            "file": "D:\\vibecoding\\guandan\\work\\continuous\\gpu-main\\league\\v000003646.onnx",
+            "sha256": "1bcfdeb77546ca7f22697164a40bfd859bb27f51a5cf210efaa4167711ce2ca0"
+          },
+          "champion": {
+            "version": "v000000000",
+            "file": "D:\\vibecoding\\guandan\\work\\continuous\\gpu-main\\gate\\champion-100.onnx",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+          },
+          "pairs": 101,
+          "matches": 202,
+          "wins": 94,
+          "losses": 92,
+          "draws": 16,
+          "seedRange": [3510000000, 3510000100],
+          "meanScore": 0.504950495049505,
+          "clusterHoeffding95CI": [0.36981434342525765, 0.6400866466737523],
+          "llr": -0.33842640990371414,
+          "decision": null,
+          "settings": {
+            "alpha": 0.05,
+            "beta": 0.05,
+            "mu0": 0.5,
+            "mu1": 0.53,
+            "minPairs": 100,
+            "maxPairs": 1000
+          },
+          "sourceSHA256": {
+            "scripts/continuous/supervisor.mjs": "da339667ade0fb3c39a1525bf8ebb354911e0dd856515acdc6fecfd8ae8b3f8c",
+            "scripts/continuous/actor.mjs": "9ec411f0d792045ea5161209f092b1047e96e4cdecfe8245a28113f98c475602",
+            "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+            "scripts/continuous/lib.mjs": "548a28e0b8954294c731c06a4b75b3b21e999aaed2544b45cc36f44620e01edf",
+            "scripts/continuous/learner.py": "4b180586f43f5cf37760cd38ada8e52a568c72429c184167e9e9aae3757b1e9f",
+            "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+            "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+            "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+            "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+            "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+          },
+          "recordsSHA256": "e7d40d9bca7e574ffc98160f647c1ab977dfbe8d5ed4cb44e42d26e370bde68b",
+          "recordsFile": "gate/gate-00100.json",
+          "seedResults": [
+            {
+              "seed": 3510000000,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000001,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000002,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000003,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000004,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000005,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000006,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000007,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000008,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000009,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000010,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000011,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000012,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000013,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000014,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000015,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000016,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000017,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000018,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000019,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000020,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000021,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000022,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000023,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000024,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000025,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000026,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000027,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000028,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000029,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000030,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000031,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000032,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000033,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3510000034,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000035,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000036,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000037,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000038,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000039,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000040,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000041,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000042,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000043,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000044,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000045,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000046,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000047,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000048,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000049,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000050,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000051,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000052,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000053,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000054,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000055,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000056,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3510000057,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000058,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000059,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000060,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000061,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000062,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000063,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000064,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000065,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000066,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000067,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000068,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000069,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000070,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000071,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000072,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000073,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000074,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000075,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000076,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000077,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000078,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000079,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000080,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000081,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000082,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000083,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000084,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000085,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000086,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000087,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000088,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000089,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000090,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000091,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000092,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000093,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000094,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000095,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000096,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000097,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000098,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000099,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000100,
+              "scores": [0.5, 0]
+            }
+          ]
+        }
+      ],
+      "anchorChecks": [],
+      "anchorRegressionStreak": 0,
+      "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
+    },
     "main": {
       "role": "development training and monitoring; not held-out acceptance",
       "status": "stopped",
@@ -37591,6 +38235,6 @@
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
     }
   },
-  "fingerprint": "f52a8b388e3d373430e235167db8f9e1e0c6718fc104198ee0a10e509240be68",
-  "observedUTC": "2026-11-04T20:38:11.331910+00:00"
+  "fingerprint": "9659121583e5c1f211120b7b891e31dd249e24caa748ba0854fe37045ab4e026",
+  "observedUTC": "2026-11-04T20:56:17.944717+00:00"
 }
