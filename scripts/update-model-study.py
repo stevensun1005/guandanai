@@ -350,6 +350,38 @@ def experiments_finished(data):
     )
 
 
+def publication_signal(workspace):
+    """Read small completion records; avoid rehashing all historical checkpoints every minute."""
+    signal = {}
+    for name, relative in RUNS.items():
+        path = workspace / "work/learning" / relative / "run.json"
+        if path.exists():
+            run = read(path)
+            signal[name] = {
+                "status": run["status"],
+                "completed": [c["cycle"] for c in run["cycles"] if c["status"] == "complete"],
+            }
+    continuous = workspace / "work/continuous"
+    if continuous.exists():
+        for directory in sorted(continuous.iterdir()):
+            if not directory.is_dir() or not (directory / "config.json").exists():
+                continue
+            status = read(directory / "status.json") if (directory / "status.json").exists() else {}
+            champion = read(directory / "champion/champion.json")
+            completed = []
+            for kind in ("gate", "anchor"):
+                for path in sorted((directory / kind).glob(f"{kind}-*.json")):
+                    if read(path)["status"] in ("complete", "stopped"):
+                        completed.append((kind, path.name, digest(path)))
+            signal[f"continuous/{directory.name}"] = {
+                "stoppedAt": status.get("stoppedAt"),
+                "stopReason": status.get("stopReason"),
+                "champion": [champion.get("version"), champion.get("sha256")],
+                "completed": completed,
+            }
+    return signal
+
+
 def progress(data):
     lines = [
         "## 11. 自动同步的完整比赛进展",
@@ -525,9 +557,22 @@ if __name__ == "__main__":
     if not 30 <= args.interval_seconds <= 3600:
         raise ValueError("Report interval must be bounded to 30..3600 seconds")
     deadline = time.monotonic() + args.watch_minutes * 60
+    last_signal = None
+    last_update = float("-inf")
+    finished = False
     while True:
         try:
-            changed, finished = update(args.workspace.resolve(), args.publish)
+            signal = publication_signal(args.workspace.resolve()) if args.watch_minutes else None
+            now = time.monotonic()
+            if (
+                not args.watch_minutes
+                or signal != last_signal
+                or now - last_update >= args.interval_seconds
+                or now >= deadline
+            ):
+                changed, finished = update(args.workspace.resolve(), args.publish)
+                last_signal = signal
+                last_update = time.monotonic()
         except (json.JSONDecodeError, FileNotFoundError) as error:
             if not args.watch_minutes:
                 raise
@@ -539,4 +584,4 @@ if __name__ == "__main__":
             if args.watch_minutes and not finished:
                 raise SystemExit("Watch deadline reached; some experiments are still pending")
             break
-        time.sleep(args.interval_seconds)
+        time.sleep(min(60, args.interval_seconds, max(0, deadline - time.monotonic())))

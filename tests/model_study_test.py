@@ -13,6 +13,34 @@ spec.loader.exec_module(study)
 
 
 class ModelStudyTests(unittest.TestCase):
+    def test_publication_signal_ignores_sampling_ticks_and_triggers_on_completed_results(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            workspace = Path(temporary)
+            directory = workspace / "work/continuous/main"
+            directory.mkdir(parents=True)
+            report, target = self.continuous_fixture(directory)
+            report["status"] = "running"
+            target.write_text(json.dumps(report))
+            initial = study.publication_signal(workspace)
+            status_path = directory / "status.json"
+            status = json.loads(status_path.read_text())
+            status["totals"]["matches"] += 100
+            status["learner"]["step"] += 50
+            status_path.write_text(json.dumps(status))
+            self.assertEqual(study.publication_signal(workspace), initial)
+            report["status"] = "complete"
+            target.write_text(json.dumps(report))
+            completed = study.publication_signal(workspace)
+            self.assertNotEqual(completed, initial)
+            self.assertEqual(study.publication_signal(workspace), completed)
+            report["status"] = "stopped"
+            target.write_text(json.dumps(report))
+            interrupted = study.publication_signal(workspace)
+            self.assertNotEqual(interrupted, completed)
+            status.update(stoppedAt="2026-11-04T01:00:00Z", stopReason="anchor-regression")
+            status_path.write_text(json.dumps(status))
+            self.assertNotEqual(study.publication_signal(workspace), interrupted)
+
     def continuous_fixture(self, directory):
         for child in ("gate", "anchor", "champion"):
             (directory / child).mkdir()

@@ -144,7 +144,9 @@ python scripts/update-model-study.py --workspace D:/vibecoding/guandan
 python scripts/update-model-study.py --workspace D:/vibecoding/guandan --publish --watch-minutes=1500 --interval-seconds=3600
 ```
 
-第二条命令只能在专用干净工作树运行。每小时汇总已完成的采样、训练步数、门控及锚点的逐种子结果与指纹，运行 `npm test`、`npm run format:check` 和相关 Python 测试后正常推送 `HEAD:main`。遇到其他修改、远端分叉、报告器源码变化或推送竞争就停止；不强推，不暂存其他文件，不发布权重。观察窗口至多 25 小时，定时汇报本身不代表 24 小时训练已完成。
+第二条命令只能在专用干净工作树运行。报告器每至多 60 秒检查新完成的门控、锚点评测、有限实验周期及停机记录，发现变化即汇总并开始发布检查；检查与推送本身另需时间。没有新结论时，`--interval-seconds=3600` 表示每小时同步一次训练进展，不会因采样计数不断增加而每分钟提交。仅检测完成事件时读取小记录，不反复散列全部历史训练权重。
+
+每次汇总保留实际采样、训练步数、门控及锚点的逐种子结果与指纹，运行 `npm test`、`npm run format:check` 和相关 Python 测试后正常推送 `HEAD:main`。遇到其他修改、远端分叉、报告器源码变化或推送竞争就停止；不强推，不暂存其他文件，不发布权重。观察窗口至多 25 小时，定时汇报本身不代表 24 小时训练已完成。
 
 每局发牌种子由比赛种子派生，不同比赛种子在极少数情况下可能得到相同的某一局发牌；这只影响单局牌面，不影响种子区间的用途划分。
 

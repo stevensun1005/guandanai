@@ -424,7 +424,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout
 python scripts/update-model-study.py --workspace /path/to/training-checkout --publish --watch-minutes=120
 ```
 
-`--publish` 只应在专用、干净的发布工作树运行。脚本只快进同步远端，运行 Node、格式及相关 Python 检查后，仅暂存本文和 `docs/evaluation/model-study-progress.json`，再正常推送；不再复制或提交权重。遇到其他修改、分叉、报告器源码变化或推送竞争就停止，不强推，也不自动合并用户的修改。观察期限至多 1,500 分钟，报告间隔可设为 3,600 秒；后续新训练任务需要重新启动监视。
+`--publish` 只应在专用、干净的发布工作树运行。脚本只快进同步远端，运行 Node、格式及相关 Python 检查后，仅暂存本文和 `docs/evaluation/model-study-progress.json`，再正常推送；不再复制或提交权重。遇到其他修改、分叉、报告器源码变化或推送竞争就停止，不强推，也不自动合并用户的修改。观察期限至多 1,500 分钟；每至多 60 秒检测新完成的门控、锚点、有限周期及停机事件，发现变化即开始检查与发布。没有新完成结果时，按配置间隔（可设为 3,600 秒）同步运行进度；不断增加的采样计数不触发每分钟提交。后续新训练任务需要重新启动监视。
 
 训练代码与成果统一从 `main` 访问：[本轮检查点](../ai/experiments/README.md)及[历史权重目录与下载校验](evaluation/model-artifacts.json)。大量历史权重通过 GitHub 实验附件保存，目录和 SHA 留在 `main`；被拒绝的权重同样存档。成果入库与网页默认部署分开。
 
