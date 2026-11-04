@@ -11,7 +11,6 @@ import {
   sendSit,
   startOnline,
 } from '../network/rooms.js';
-import { fsOn, testFull } from '../replay/session.js';
 import { $ } from '../ui/cards.js';
 import { render } from '../ui/table.js';
 import { loadBotPreferences, prepareBotStyles, renderBotSetup } from './bot-setup.js';
@@ -23,7 +22,6 @@ export let lobbyStatus;
 let nickMax;
 export let nickNow;
 let ruleBtns;
-let phoneFull;
 
 function syncNickMax() {
   const n = $('#nick');
@@ -188,9 +186,6 @@ export function initialize() {
   $('#nick').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !$('#sitBtn').disabled && !$('#sitBtn').hidden) $('#sitBtn').click();
   });
-  phoneFull = () => {
-    if (isPhone() && !fsOn()) testFull(true);
-  };
   seatBtns.forEach((b) =>
     b.addEventListener('click', () => {
       if (!nickNow()) {
@@ -198,7 +193,6 @@ export function initialize() {
         $('#nick').focus();
         return;
       }
-      phoneFull();
       const d = b.dataset.seat;
       Sound.unlock();
       Sound.play('select');
@@ -218,7 +212,6 @@ export function initialize() {
   $('#sitBtn').onclick = () => {
     runtime.nickname = nickNow();
     if (!runtime.nickname || !runtime.direction) return;
-    phoneFull();
     try {
       localStorage.setItem('guandan-nick', runtime.nickname);
     } catch (_) {}

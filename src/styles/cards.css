@@ -17,20 +17,20 @@
 }
 /* a phone: every card face, in the hand and on the table, is cut down to its corner (rank over suit) so the cards
    take less room; the jokers read 大王 / 小王 there, and the hand is always laid out flat (no 手持) */
-html.phone body:not(.test) {
+html.phone body:not(.practice) {
   --cr: 0.86;
 }
-html.phone body:not(.test) .card .pip,
-html.phone body:not(.test) .card .tag.crown {
+html.phone body:not(.practice) .card .pip,
+html.phone body:not(.practice) .card .tag.crown {
   display: none;
 }
-html.phone body:not(.test) .card.joker .idx {
+html.phone body:not(.practice) .card.joker .idx {
   display: none;
 }
 .card .jw {
   display: none;
 }
-html.phone body:not(.test) .card.joker .jw {
+html.phone body:not(.practice) .card.joker .jw {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,44 +49,44 @@ html.phone #fanBtn {
 /* a phone keeps the table as clear as it can: the shuffle / cut and done-sorting buttons, the sorting sign and the
    clocks at about half size; no card back by the names, no level disc in the middle (the level is in the corner) and
    no line saying who played what; the cards on the table as large as they fit */
-html.phone body:not(.test) #deckBtn,
-html.phone body:not(.test) #readyBtn {
+html.phone body:not(.practice) #deckBtn,
+html.phone body:not(.practice) #readyBtn {
   --d: 46px !important;
   font-size: 13px !important;
 }
-html.phone body:not(.test) .stack,
-html.phone body:not(.test) .flick {
+html.phone body:not(.practice) .stack,
+html.phone body:not(.practice) .flick {
   width: calc(var(--cw) * 0.5);
   height: calc(var(--cw) * 0.7);
   margin: calc(var(--cw) * -0.35) 0 0 calc(var(--cw) * -0.25);
 }
-html.phone body:not(.test) .prepbig #prepL {
+html.phone body:not(.practice) .prepbig #prepL {
   font-size: clamp(14px, 2.2vh, 20px);
   padding: 3px 9px 3px 11px;
   border-radius: 9px;
 }
-html.phone body:not(.test) .prepbig .bigclock {
+html.phone body:not(.practice) .prepbig .bigclock {
   font-size: clamp(12px, 1.9vh, 17px);
 }
-html.phone body:not(.test) .clock {
+html.phone body:not(.practice) .clock {
   font-size: 10px;
 }
-html.phone body:not(.test) #myClock {
+html.phone body:not(.practice) #myClock {
   font-size: 11px;
 }
 .who .back {
   display: none;
 }
-html.phone body:not(.test) .fx-act {
+html.phone body:not(.practice) .fx-act {
   font-size: 13px;
 }
-body:not(.test) .emblem {
+body:not(.practice) .emblem {
   visibility: hidden;
 }
-html.phone body:not(.test) #lastPlay {
+html.phone body:not(.practice) #lastPlay {
   display: none;
 }
-html.phone body:not(.test) #pile {
+html.phone body:not(.practice) #pile {
   --cw: clamp(54px, min(18vw, 15vh), 88px);
 }
 /* a computer or tablet: a player's count of cards left stands under their plate, clear of the cards they play */
@@ -126,18 +126,18 @@ html:not(.phone) .score > span.playing {
     0 0 16px var(--team);
 }
 /* the score: a red box and a blue box holding each side's level, the side being played filled with its colour */
-html.phone body:not(.test) .score .tn {
+html.phone body:not(.practice) .score .tn {
   display: none;
 }
-html.phone body:not(.test) .score > span {
+html.phone body:not(.practice) .score > span {
   border-color: var(--team);
   min-width: 2.4em;
 }
-html.phone body:not(.test) .score > span b,
-html.phone body:not(.test) .score > span.playing b {
+html.phone body:not(.practice) .score > span b,
+html.phone body:not(.practice) .score > span.playing b {
   margin-left: 0;
 }
-html.phone body:not(.test) .score {
+html.phone body:not(.practice) .score {
   flex-direction: row !important;
   gap: 6px;
 }
@@ -162,10 +162,10 @@ html.phone body:not(.test) .score {
   line-height: 1.6;
   white-space: nowrap;
 }
-html.phone body:not(.test) #tribBox {
+html.phone body:not(.practice) #tribBox {
   padding: 6px 10px;
 }
-html.phone body:not(.test) #tribBox .trib {
+html.phone body:not(.practice) #tribBox .trib {
   font-size: 14px;
 }
 /* the table: every card framed in its player's side colour (red or blue), the newest play's frame thicker and flashing */
@@ -198,7 +198,7 @@ html.phone body:not(.test) #tribBox .trib {
   }
 }
 /* on its side the tribute line stands to the right of the score, clear of the left-hand player's plate */
-html.phone.side body:not(.test) .tribinfo {
+html.phone.side body:not(.practice) .tribinfo {
   position: absolute;
   grid-area: auto;
   left: 120px;
@@ -206,19 +206,19 @@ html.phone.side body:not(.test) .tribinfo {
   font-size: 13px;
   white-space: nowrap;
 }
-html.phone.side body:not(.test) .tribinfo .ct {
+html.phone.side body:not(.practice) .tribinfo .ct {
   font-size: 13px;
 }
 /* the play buttons at half size; upright they stand in one row over 复原 (the hand keeps its last row clear of
    them), on its side two by two over 两排 / 复原 (placed by placeActionBtns) */
-html.phone body:not(.test) #btns {
+html.phone body:not(.practice) #btns {
   --d: 32px !important;
   gap: 6px;
 }
-html.phone body:not(.test) #btns .btn {
+html.phone body:not(.practice) #btns .btn {
   font-size: 12px;
 }
-html.phone.rows body:not(.test) #btns {
+html.phone.rows body:not(.practice) #btns {
   position: absolute;
   right: 0;
   margin: 0;
@@ -227,65 +227,65 @@ html.phone.rows body:not(.test) #btns {
   flex-wrap: nowrap;
   --d: 48px !important;
 }
-html.phone.rows body:not(.test) #btns .btn {
+html.phone.rows body:not(.practice) #btns .btn {
   font-size: 15px;
 }
-html.phone.side body:not(.test) #btns {
+html.phone.side body:not(.practice) #btns {
   display: grid;
   grid-template-columns: repeat(2, auto);
 }
-html.phone.rows body:not(.test) #hand {
+html.phone.rows body:not(.practice) #hand {
   --cw: clamp(48px, 15vw, 64px);
 }
-html.phone.side body:not(.test) #hand {
+html.phone.side body:not(.practice) #hand {
   --cw: clamp(48px, 14vh, 60px);
 }
 /* a phone's hand takes as many rows as its cards need, so the rows button has nothing to offer; its groups lie in
    the rows themselves (no frame, no tags), each card of a group with a gold edge along the top, and 成组 stands
    beside 同花顺 */
-html.phone body:not(.test) #rowsBtn {
+html.phone body:not(.practice) #rowsBtn {
   display: none;
 }
-html.phone body:not(.test) #fixZone,
-html.phone body:not(.test) #fixTags {
+html.phone body:not(.practice) #fixZone,
+html.phone body:not(.practice) #fixTags {
   display: none !important;
 }
-html.phone body:not(.test) #hand .card.grp {
+html.phone body:not(.practice) #hand .card.grp {
   border-top: 3px solid var(--gold);
 }
-body:not(.test) #fixBtn {
+body:not(.practice) #fixBtn {
   position: static !important;
 }
 /* upright: the name row keeps clear of the column of play buttons, which may reach up beside it; your own status tag
    is left out there (the lit plate, the clock and the play buttons say the same), and the row's buttons are a little
    smaller, so it stays on one line */
-html.phone.rows body:not(.test) .mebar {
+html.phone.rows body:not(.practice) .mebar {
   padding-right: 56px;
   gap: 6px;
 }
-html.phone.rows body:not(.test) .mebar .stat {
+html.phone.rows body:not(.practice) .mebar .stat {
   display: none;
 }
-html.phone.rows body:not(.test) .mebar .link {
+html.phone.rows body:not(.practice) .mebar .link {
   font-size: 13px;
   padding: 3px 8px;
 }
-html.phone.rows body:not(.test) .mebar .left {
+html.phone.rows body:not(.practice) .mebar .left {
   gap: 6px;
 }
 /* the finishing places at half size; your partner's beside the plate rather than under it, where their cards lie */
-html.phone body:not(.test) .place {
+html.phone body:not(.practice) .place {
   font-size: 14px;
   padding: 3px 7px 3px 9px;
   border-radius: 7px;
 }
-html.phone body:not(.test) #seat2 .place {
+html.phone body:not(.practice) #seat2 .place {
   top: 50%;
   left: 100%;
   transform: translateY(-50%);
   margin: 0 0 0 8px;
 }
-html.phone body:not(.test) #myPlace {
+html.phone body:not(.practice) #myPlace {
   margin-bottom: 2px;
 }
 .card .idx {

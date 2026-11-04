@@ -74,7 +74,7 @@ export function handCost(hand, L) {
 
 export function initialize() {
   /* ---------- hand evaluation: roughly how many turns of control the hand still needs ---------- */
-  // every number the computer players weigh; tuned by self-play in the 07-guandan-ai training folder
+  // Parameters used by hand arrangement and rule-based hints.
   AIP = {
     // hand evaluation: a single, pair or three counts 1 turn, less for big cards; runs, bombs and wild cards
     ucTop: 0.25,
@@ -124,7 +124,6 @@ export function initialize() {
     // no bomb when the partner, still to play, can most likely beat it (the unseen cards dealt at random this many times)
     mateBeatProb: 0.8,
     mateSamples: 40,
-    // from the player's comments on the test version (07-guandan-ai/第1局评语分析.txt):
     // a small card is 10 or below
     smallMax: 10,
     // an opponent's bomb, bombed back or not by how many bombs you hold (straight flushes and the four jokers count), how

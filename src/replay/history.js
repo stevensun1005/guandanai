@@ -1,14 +1,13 @@
 import { runtime } from '../app/runtime.js';
-import { aiDecide } from '../ai/rule-policy.js';
 import { startTurn } from '../game/turns.js';
 import { curRec } from './inspector.js';
-import { testStore } from './storage.js';
-import { testView } from './viewer.js';
+import { practiceStore } from './storage.js';
+import { practiceView } from './viewer.js';
 import { $ } from '../ui/cards.js';
 import { pileRebuild } from '../ui/table-pile.js';
 import { render } from '../ui/table.js';
 
-export function testSnap() {
+export function practiceSnap() {
   const top = runtime.TSNAP[runtime.TSNAP.length - 1];
   if (top && top.log.length === runtime.game.log.length) return; // the stop and the start of the same turn are one step
   try {
@@ -18,36 +17,21 @@ export function testSnap() {
   }
 }
 
-function testDecide(who) {
-  const sig =
-    runtime.game.round +
-    '#' +
-    runtime.game.log
-      .map((e) => e.p + ':' + (e.cards ? e.cards.map((c) => c.id).join('.') : 'p'))
-      .join('|');
-  const hit = runtime.TDEC.get(sig);
-  if (hit && hit.p === who) {
-    if (!hit.ids) return null;
-    const cards = hit.ids.map((id) => runtime.game.hands[who].find((c) => c.id === id));
-    if (cards.every(Boolean)) return { ...hit.rest, cards };
-  }
-  const pl = aiDecide(who);
-  if (pl) {
-    const { cards, ...rest } = pl;
-    runtime.TDEC.set(sig, { p: who, ids: cards.map((c) => c.id), rest });
-  } else runtime.TDEC.set(sig, { p: who, ids: null });
-  return pl;
-}
-
 export function syncUndo() {
   const b = $('#undoBtn');
   if (b) b.disabled = !(runtime.game && runtime.game.phase === 'play' && runtime.TSNAP.length >= 2);
   const go = $('#goBtn');
-  if (go)
+  if (go) {
     go.hidden = !(runtime.game && runtime.game.phase === 'play' && runtime.game.stepWait != null);
+    if (!go.hidden) {
+      const who = runtime.names[runtime.game.stepWait];
+      go.textContent = `继续 · ${who}`;
+      go.title = `下一步：${who}。也可以按空格继续。`;
+    }
+  }
 }
 
-export function testUndo() {
+export function practiceUndo() {
   if (
     !runtime.reviewMode ||
     !runtime.game ||
@@ -66,7 +50,7 @@ export function testUndo() {
     rec.log = runtime.game.log;
     for (const k of Object.keys(rec.notes)) if (+k > runtime.game.log.length) delete rec.notes[k];
     rec.nv++;
-    testStore();
+    practiceStore();
   }
   runtime.selection = new Set();
   runtime.hints = [];
@@ -78,15 +62,14 @@ export function testUndo() {
 }
 
 // 上一步 (the look-back): the table as it stands after the latest play, with how that play was made (the view's own 上一步 goes further back)
-export function testBack() {
+export function practiceBack() {
   const rec = curRec();
   if (!rec) return;
-  testView(runtime.TREC.rounds.length - 1, rec.log.length, false);
+  practiceView(runtime.TREC.rounds.length - 1, rec.log.length, false);
 }
 
 export function initialize() {
   runtime.TSNAP = [];
   // a computer's move is remembered by how the round had gone to that point: taking a step back and going on plays the same
   // move again (a different move of yours before it makes the position a new one, and it is thought out afresh)
-  runtime.TDEC = new Map();
 }

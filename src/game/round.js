@@ -5,8 +5,8 @@ import { celebrate, jieFeng, victory } from '../effects/celebrations.js';
 import { active, later, nextActive, startTurn } from './turns.js';
 import { miniMode } from '../input/actions.js';
 import { handEl } from '../input/pointer.js';
-import { testPlays } from '../replay/inspector.js';
-import { testRoundEnd } from '../replay/session.js';
+import { practicePlays } from '../replay/inspector.js';
+import { practiceRoundEnd } from '../replay/session.js';
 import { $ } from '../ui/cards.js';
 import { renderClocks } from '../ui/clocks.js';
 import { showResult } from '../ui/overlays.js';
@@ -164,7 +164,7 @@ function finishRound() {
     aTeam,
     playedLevel: runtime.game.L,
   };
-  if (runtime.reviewMode) testRoundEnd();
+  if (runtime.reviewMode) practiceRoundEnd();
   runtime.game.prevOut = runtime.game.out.slice();
   runtime.game.lvlTeam = team;
   runtime.game.phase = win || draw ? 'over' : 'roundEnd';
@@ -179,7 +179,7 @@ function finishRound() {
     runtime.game.heapN += runtime.game.trickPlays.reduce((s, t) => s + t.play.cards.length, 0);
     runtime.game.trickPlays = [];
     runtime.game.last = [null, null, null, null];
-    if (miniMode()) testPlays();
+    if (miniMode()) practicePlays();
   }, END_SHOW_MS);
   // places already earned during play are on the plates; the rest (always including last place) are called out now
   const dbl = runtime.game.out[0] % 2 === runtime.game.out[1] % 2;

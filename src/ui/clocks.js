@@ -20,7 +20,7 @@ function placePrepBig() {
   let lx = e.left + e.width / 2 - w / 2,
     rx = lx + lw + 12,
     y = cy;
-  // the test version's face-up hands take the room around the disc: the two sit together in the middle of the open table
+  // the practice table's face-up hands take the room around the disc: the two sit together in the middle of the open table
   if (runtime.reviewMode) {
     const g = pileGeo(),
       w = lw + rw + 12;
@@ -42,8 +42,8 @@ function placePrepBig() {
   syncTribBox();
 }
 
-// the test version's step: after a move the game waits here; the next turn begins with the space bar or 继续
-export function testStepGo() {
+// the practice table's step: after a move the game waits here; the next turn begins with the space bar or 继续
+export function practiceStepGo() {
   if (
     !runtime.reviewMode ||
     !runtime.game ||

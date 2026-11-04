@@ -2,7 +2,7 @@ import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { fxEl } from './celebrations.js';
 import { layoutHand } from '../hand/layout.js';
-import { testPeeks } from '../replay/inspector.js';
+import { practicePeeks } from '../replay/inspector.js';
 import { $, cardHTML } from '../ui/cards.js';
 
 export let reduceMotion;
@@ -114,7 +114,7 @@ export function dealView(p, c) {
   if (p === 0) {
     $('#hand').insertAdjacentHTML('beforeend', cardHTML(c, runtime.game.L));
     layoutHand();
-  } else if (runtime.reviewMode) testPeeks();
+  } else if (runtime.reviewMode) practicePeeks();
 }
 
 // a count is only announced once a hand is down to 10 or fewer (never while dealing)

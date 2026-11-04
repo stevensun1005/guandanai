@@ -27,7 +27,7 @@ let HEAP_SC;
 export function pileGeo() {
   const L = pileEl().getBoundingClientRect(),
     R = (q) => $(q).getBoundingClientRect();
-  // a player's plate, and in the test version the face-up hand beside it, which the table's cards keep clear of too
+  // a player's plate, and in the practice table the face-up hand beside it, which the table's cards keep clear of too
   const P = (p) => {
     // (with the count of cards under the plate, where a computer shows it)
     let a = R('#seat' + p + ' .whorow');

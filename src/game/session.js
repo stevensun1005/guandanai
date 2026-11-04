@@ -73,7 +73,7 @@ export function initialize() {
   /* ---------- game state ---------- */
   runtime.game = null;
   runtime.selection = new Set();
-  // the test version (entered from the lobby with a password): every hand face up, every play numbered; TV is its look-back view
+  // the practice table (entered explicitly from the lobby): every hand face up, every play numbered; TV is its look-back view
   runtime.reviewMode = false;
   runtime.replayView = { open: false };
   // Who sits where. Seat 0 is always you: every player's view is turned so they sit at the bottom.

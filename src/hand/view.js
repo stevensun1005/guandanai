@@ -1,7 +1,7 @@
 import { runtime } from '../app/runtime.js';
 import { cmpCards, sortHand, val } from '../core/cards.js';
 import { isPhone, layoutHand } from './layout.js';
-import { testArrangeMine, testGrouped, testMine } from '../replay/session.js';
+import { practiceArrangeMine, practiceGrouped, practiceMine } from '../replay/session.js';
 import { $, cardHTML } from '../ui/cards.js';
 import { renderControls } from '../ui/table.js';
 
@@ -31,8 +31,8 @@ export function orderedHand() {
     }
   }
   runtime.game.myOrder = ord;
-  // the test version keeps every card in a group: a card that arrives (a tribute or return) is a group of its own
-  if (testGrouped() && ord.length) {
+  // the practice table keeps every card in a group: a card that arrives (a tribute or return) is a group of its own
+  if (practiceGrouped() && ord.length) {
     runtime.game.fixed.push(...ord.map((id) => [id]));
     runtime.game.myOrder = [];
     return runtime.game.fixed.flat().map((id) => byId.get(id));
@@ -55,7 +55,7 @@ export function renderHand() {
     runtime.mv.dirty = true;
     return;
   } // never rebuild the hand under a card being dragged
-  if (runtime.reviewMode) testArrangeMine();
+  if (runtime.reviewMode) practiceArrangeMine();
   const el = $('#hand'),
     now = performance.now();
   const fresh = new Set(runtime.game.fresh);
@@ -78,7 +78,7 @@ export function renderHand() {
   }
   layoutHand();
   renderControls();
-  if (runtime.reviewMode) testMine();
+  if (runtime.reviewMode) practiceMine();
 }
 
 export function initialize() {

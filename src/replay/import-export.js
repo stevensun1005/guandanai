@@ -8,25 +8,26 @@ import {
   passedOn,
   recName,
   recUnits,
-  testChanges,
-  testCopy1,
-  testList,
+  practiceChanges,
+  practiceCopy1,
+  practiceList,
 } from './inspector.js';
 import { esc, playName, powerText, roundName, trickEnd } from './session.js';
-import { recIn, recOut, testDbPut, testStore } from './storage.js';
+import { recIn, recOut, practiceStore } from './storage.js';
+import { parseRecordText, RECORD_MARKER } from './record-schema.js';
 import { $, displayOrder } from '../ui/cards.js';
 import { hideOverlay, showPanel, showResult } from '../ui/overlays.js';
 
 let TDATA;
-let testBackToGame;
+let practiceBackToGame;
 
 /* the record as text, to save, copy, and bring back in */
 // for each round the hands as play began (the computer's as arranged, yours as you grouped them), then every play in
 // order with the computer's arrangement just before it and your comment, the passes, how each trick ended, what was left
 // and the result; at the end the same rounds as data, for 导入
-export function testText(rounds = runtime.TREC.rounds) {
+export function practiceText(rounds = runtime.TREC.rounds) {
   const out = [
-    '掼蛋测试版出牌记录',
+    'GuandanAI 复盘记录',
     `保存时间：${new Date().toLocaleString()}　页面版本：${VERSION}`,
     '你和对家一方，下家和上家一方。牌后带 * 的是逢人配（红桃级牌）。[ ] 里是配好的一组一组（电脑的是它的配牌，你的是你理好的牌）。',
     '每一次轮到谁（出牌或者过）都算一手，按顺序编号。',
@@ -68,7 +69,7 @@ export function testText(rounds = runtime.TREC.rounds) {
         );
       else out.push('    ' + shown(r.hands[p], p, p !== 0 || !!mine));
     }
-    const ch = testChanges(r);
+    const ch = practiceChanges(r);
     if (ch.length) out.push('', '理牌改动：', ...ch.map((t) => '  ' + t));
     if (r.notes[0]) out.push(`  开局评语：${r.notes[0]}`);
     out.push('', '出牌：');
@@ -122,36 +123,15 @@ export function testText(rounds = runtime.TREC.rounds) {
   return out.join('\r\n');
 }
 
-// 生成记录交给 Claude: the latest round with its comments. In the claude.ai viewer it goes into this page's own store
-// (collection "rounds", one document per round), where Claude reads it; anywhere else it is saved as a text file (on a
-// computer, into the Downloads folder, where Claude can read it too)
-export async function testFinish() {
+// Export the current annotated round as a portable text record.
+export async function practiceFinish() {
   const r = curRec();
   if (!r) {
-    testSay('还没有打过的局');
+    practiceSay('还没有打过的局');
     return;
   }
   const n = Object.keys(r.notes).length,
-    text = testText([r]);
-  const db =
-    window.claude && window.claude.use ? await window.claude.use('db').catch(() => null) : null;
-  if (db) {
-    r.done = true;
-    try {
-      await (runtime.dbBusy = runtime.dbBusy.then(() => testDbPut(r)));
-      testSay(
-        `“${recName(r)}”（${n} 条评语）已经交给 Claude。把这个名字发给 Claude，或者说“去分析”就行。`,
-        recName(r),
-      );
-    } catch (e) {
-      testSay(
-        '没能交给 Claude（' + ((e && e.code) || '出错') + '），请改用“复制”，把记录贴给 Claude。',
-      );
-    }
-    return;
-  }
-  const d = new Date(),
-    z = (x) => String(x).padStart(2, '0');
+    text = practiceText([r]);
   const name = recName(r) + '.txt';
   try {
     const a = document.createElement('a');
@@ -161,70 +141,28 @@ export async function testFinish() {
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
-    testSay(
-      `已保存为“${name}”（${n} 条评语），在下载文件夹里。把这个文件名发给 Claude 就行。`,
-      name,
-    );
+    practiceSay(`已保存为“${name}”（${n} 条评语），可在其他设备导入继续复盘。`, name);
   } catch (_) {
-    testCopy();
+    practiceCopy();
   }
 }
 
 // a short message in a panel, back to the game (or the result) when closed
-function testSay(t, copy) {
+function practiceSay(t, copy) {
   showPanel(`<h2>出牌记录</h2><p>${esc(t)}</p>${copy ? `<p class="tname">${esc(copy)}</p>` : ''}
     <div class="btns">${copy ? '<button class="btn primary" id="trecName">复制名字</button>' : ''}<button class="btn${copy ? '' : ' primary'}" id="trecClose">知道了</button></div>`);
-  if (copy) $('#trecName').onclick = () => testCopy1(copy);
-  $('#trecClose').onclick = testBackToGame;
+  if (copy) $('#trecName').onclick = () => practiceCopy1(copy);
+  $('#trecClose').onclick = practiceBackToGame;
 }
 
-// in the claude.ai viewer the rounds handed over earlier (on this or another device) come back into the record
-export async function testDbLoad() {
-  const db =
-    window.claude && window.claude.use ? await window.claude.use('db').catch(() => null) : null;
-  if (!db) return;
-  try {
-    const snap = await db.collection('rounds').get(),
-      have = new Set(runtime.TREC.rounds.map((r) => r.uid)),
-      add = [];
-    for (const d of snap.docs) {
-      const o = d.data();
-      if (o && o.data && !have.has(o.uid))
-        try {
-          add.push(recIn(o.data));
-        } catch (_) {}
-    }
-    if (!add.length) return;
-    const live = curRec() && curRec().live ? runtime.TREC.rounds.pop() : null,
-      taken = new Set(runtime.TREC.rounds.map((r) => r.no));
-    let no = Math.max(0, ...runtime.TREC.rounds.map((r) => r.no), ...add.map((r) => r.no));
-    for (const r of add) {
-      if (taken.has(r.no)) r.no = ++no;
-      taken.add(r.no);
-    }
-    runtime.TREC.rounds = runtime.TREC.rounds.concat(add).sort((a, b) => a.no - b.no);
-    if (live) {
-      if (taken.has(live.no)) live.no = ++no;
-      runtime.TREC.rounds.push(live);
-    }
-    testStore();
-    testList();
-  } catch (_) {}
-}
-
-export function testSave() {
-  // the claude.ai viewer (window.claude) does not let a page hand over a file: the record is shown to copy instead
-  if (window.claude) {
-    testCopy();
-    return;
-  }
+export function practiceSave() {
   const d = new Date(),
     z = (x) => String(x).padStart(2, '0');
-  const name = `掼蛋测试记录-${d.getFullYear()}${z(d.getMonth() + 1)}${z(d.getDate())}-${z(d.getHours())}${z(d.getMinutes())}.txt`;
+  const name = `掼蛋复盘记录-${d.getFullYear()}${z(d.getMonth() + 1)}${z(d.getDate())}-${z(d.getHours())}${z(d.getMinutes())}.txt`;
   try {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(
-      new Blob(['﻿' + testText()], { type: 'text/plain;charset=utf-8' }),
+      new Blob(['﻿' + practiceText()], { type: 'text/plain;charset=utf-8' }),
     );
     a.download = name;
     document.body.appendChild(a);
@@ -232,16 +170,16 @@ export function testSave() {
     a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
   } catch (_) {
-    testCopy();
+    practiceCopy();
   }
 }
 
 // the record in a box to copy from, for where a file cannot be saved (and to paste straight into a message)
-export function testCopy() {
+export function practiceCopy() {
   showPanel(`<h2>出牌记录</h2><div class="trec"><textarea id="trecText" readonly></textarea></div>
     <div class="btns"><button class="btn primary" id="trecCopy">复制</button><button class="btn" id="trecClose">关闭</button></div>`);
   const t = $('#trecText');
-  t.value = testText();
+  t.value = practiceText();
   t.focus();
   t.select();
   $('#trecCopy').onclick = () => {
@@ -263,11 +201,11 @@ export function testCopy() {
       } catch (_) {}
     }
   };
-  $('#trecClose').onclick = testBackToGame;
+  $('#trecClose').onclick = practiceBackToGame;
 }
 
 // 导入: a saved record (the file, or its text pasted in) brings its rounds into this browser, after the ones kept here
-export function testImport() {
+export function practiceImport() {
   showPanel(`<h2>导入记录</h2><p class="muted">选一个保存的记录文件，或者把记录的全文粘贴到下面。</p>
     <input type="file" id="trecFile" accept=".txt,text/plain">
     <div class="trec"><textarea id="trecText" placeholder="把记录的全文粘贴到这里"></textarea></div>
@@ -275,20 +213,21 @@ export function testImport() {
     <div class="btns"><button class="btn primary" id="trecGo">导入</button><button class="btn" id="trecClose">关闭</button></div>`);
   $('#trecFile').onchange = (e) => {
     const f = e.target.files[0];
+    if (f?.size > 8 * 1024 * 1024) {
+      $('#trecMsg').textContent = '记录文件过大，最多支持 8 MB';
+      return;
+    }
     if (f)
       f.text().then((t) => {
         $('#trecText').value = t;
       });
   };
   $('#trecGo').onclick = () => {
-    const t = $('#trecText').value,
-      i = t.lastIndexOf(TDATA);
-    let list = null;
+    let list, rejected;
     try {
-      list = JSON.parse(t.slice(i + TDATA.length).split(/\r?\n/)[0]);
-    } catch (_) {}
-    if (i < 0 || !Array.isArray(list)) {
-      $('#trecMsg').textContent = '没找到记录的数据（文件最后一行），请用“保存记录”存的完整文件';
+      ({ records: list, rejected } = parseRecordText($('#trecText').value));
+    } catch (error) {
+      $('#trecMsg').textContent = error.message;
       return;
     }
     // a round keeps its number unless one here has it already; a replay keeps pointing at the round it replays
@@ -304,6 +243,7 @@ export function testImport() {
         const r = recIn(o);
         if (taken.has(r.no)) renum.set(r.no, (r.no = ++no));
         taken.add(r.no);
+        have.add(r.uid);
         add.push(r);
         k++;
       } catch (_) {}
@@ -312,34 +252,37 @@ export function testImport() {
     const live = curRec() && curRec().live ? runtime.TREC.rounds.pop() : null;
     runtime.TREC.rounds = runtime.TREC.rounds.concat(add).sort((a, b) => a.no - b.no);
     if (live) runtime.TREC.rounds.push(live);
-    testStore();
+    practiceStore();
     $('#tsList').dataset.k = '-';
-    testList();
-    $('#trecMsg').textContent = k
-      ? `导入了 ${k} 局，可以在“上一步”的画面里选着看、重打`
-      : '这些局已经都在了';
+    practiceList();
+    $('#trecMsg').textContent =
+      (k
+        ? `导入了 ${k} 局，可以在“上一步”的画面里选着看、重打`
+        : list.length
+          ? '这些局已经都在了'
+          : '未导入有效记录') + (rejected ? `；跳过 ${rejected} 局损坏记录` : '');
   };
-  $('#trecClose').onclick = testBackToGame;
+  $('#trecClose').onclick = practiceBackToGame;
 }
 
 // 清空: forget the rounds kept in this browser (the one being played stays)
-export function testClear() {
-  showPanel(`<h2>清空记录？</h2><p class="muted">这个浏览器里保存的测试记录都会删掉（正在打的这一局留着）。要留着请先“保存记录”。</p>
+export function practiceClear() {
+  showPanel(`<h2>清空记录？</h2><p class="muted">这个浏览器里保存的复盘记录都会删掉（正在打的这一局留着）。要留着请先“保存记录”。</p>
     <div class="btns"><button class="btn" id="trecClose">不清空</button><button class="btn primary" id="trecGo">清空</button></div>`);
   $('#trecGo').onclick = () => {
     const r = curRec();
     runtime.TREC.rounds = r && r.live && !r.result ? [r] : [];
-    testStore();
+    practiceStore();
     $('#tsList').dataset.k = '-';
-    testList();
-    testBackToGame();
+    practiceList();
+    practiceBackToGame();
   };
-  $('#trecClose').onclick = testBackToGame;
+  $('#trecClose').onclick = practiceBackToGame;
 }
 
 export function initialize() {
-  TDATA = '#DATA ';
-  testBackToGame = () => {
+  TDATA = RECORD_MARKER;
+  practiceBackToGame = () => {
     hideOverlay();
     if (runtime.game.phase === 'roundEnd' || runtime.game.phase === 'over') showResult();
   };

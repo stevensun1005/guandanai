@@ -7,7 +7,7 @@ ort.env.wasm.proxy = false;
 ort.env.wasm.wasmPaths = new URL('./vendor/', import.meta.url).href;
 let sessionPromise;
 const modelURL = new URL('../models/policy.onnx', import.meta.url);
-modelURL.search = self.location.search;
+modelURL.searchParams.set('v', __MODEL_VERSION__);
 const session = () =>
   (sessionPromise ||= ort.InferenceSession.create(modelURL.href, {
     executionProviders: ['wasm'],

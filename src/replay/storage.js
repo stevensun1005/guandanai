@@ -1,77 +1,56 @@
 import { runtime } from '../app/runtime.js';
 import { makeDeck } from '../core/cards.js';
-import { testText } from './import-export.js';
-import { curRec, recName } from './inspector.js';
+import { MAX_RECORDS, readSavedRecord } from './record-schema.js';
 
 let TKEY;
 let DECK;
 export let recOut;
 export let recIn;
-
-// every turn has its number, a 过 as much as a play; records kept before then numbered the plays alone
-function notesIn(o) {
-  if (o.nk === 'all' || !o.notes) return o.notes || {};
-  const m = {};
-  let c = 0;
-  if (o.notes[0] != null) m[0] = o.notes[0];
-  o.log.forEach((e, i) => {
-    if (e.c && o.notes[++c] != null) m[i + 1] = o.notes[c];
-  });
-  return m;
+const statusListeners = new Set();
+export function onRecordStorageStatus(listener) {
+  statusListeners.add(listener);
+  return () => statusListeners.delete(listener);
 }
 
-export function testStore() {
+export function practiceStore() {
   clearTimeout(runtime.storeT);
   runtime.storeT = setTimeout(() => {
     try {
-      localStorage.setItem(TKEY, JSON.stringify(runtime.TREC.rounds.slice(-200).map(recOut)));
-    } catch (_) {}
+      localStorage.setItem(
+        TKEY,
+        JSON.stringify(runtime.TREC.rounds.slice(-MAX_RECORDS).map(recOut)),
+      );
+      localStorage.removeItem('guandan-test-records');
+      for (const listener of statusListeners) listener({ saved: true });
+    } catch (_) {
+      for (const listener of statusListeners) listener({ saved: false });
+    }
   }, 300);
-  testDbSoon();
 }
 
-function testDbSoon() {
-  if (!window.claude || !window.claude.use) return;
-  clearTimeout(runtime.dbT);
-  runtime.dbT = setTimeout(() => {
-    const r = curRec();
-    if (r) runtime.dbBusy = runtime.dbBusy.then(() => testDbPut(r)).catch(() => {});
-  }, 4000);
-}
-
-export async function testDbPut(r) {
-  const db = await window.claude.use('db').catch(() => null);
-  if (!db) return false;
-  await db
-    .collection('rounds')
-    .doc(r.uid)
-    .set({
-      uid: r.uid,
-      no: r.no,
-      name: recName(r),
-      at: r.at || '',
-      result: r.result || '',
-      done: !!r.done,
-      notes: Object.keys(r.notes).length,
-      saved: new Date().toLocaleString(),
-      text: testText([r]),
-      data: recOut(r),
-    });
-  return true;
-}
-
-export function testLoad() {
+export function practiceLoad() {
   try {
-    return JSON.parse(localStorage.getItem(TKEY) || '[]').map(recIn);
+    const saved = JSON.parse(
+      localStorage.getItem(TKEY) || localStorage.getItem('guandan-test-records') || '[]',
+    );
+    if (!Array.isArray(saved)) return [];
+    return saved.slice(-MAX_RECORDS).flatMap((record) => {
+      try {
+        return [recIn(record)];
+      } catch (_) {
+        return [];
+      }
+    });
   } catch (_) {
     return [];
   }
 }
 
 export function initialize() {
-  TKEY = 'guandan-test-records';
+  TKEY = 'guandan-practice-records';
   DECK = makeDeck();
   recOut = (r) => ({
+    schemaVersion: 1,
     uid: r.uid,
     no: r.no,
     at: r.at,
@@ -103,24 +82,25 @@ export function initialize() {
       n: e.n,
     })),
   });
-  recIn = (o) => ({
-    ...o,
-    nv: 0,
-    notes: notesIn(o),
-    nk: 'all',
-    userGroups: o.userGroups || {},
-    userPower: o.userPower || {},
-    hands: o.hands.map((h) => h.map((id) => DECK[id])),
-    log: o.log.map((e) => ({
-      p: e.p,
-      cards: e.c ? e.c.map((id) => DECK[id]) : null,
-      lead: e.lead,
-      type: e.type,
-      value: e.value,
-      n: e.n,
-    })),
-  });
+  recIn = (source) => {
+    const o = readSavedRecord(source);
+    return {
+      ...o,
+      nv: 0,
+      notes: o.notes,
+      nk: 'all',
+      userGroups: o.userGroups || {},
+      userPower: o.userPower || {},
+      hands: o.hands.map((h) => h.map((id) => DECK[id])),
+      log: o.log.map((e) => ({
+        p: e.p,
+        cards: e.c ? e.c.map((id) => DECK[id]) : null,
+        lead: e.lead,
+        type: e.type,
+        value: e.value,
+        n: e.n,
+      })),
+    };
+  };
   runtime.storeT = 0;
-  runtime.dbT = 0;
-  runtime.dbBusy = Promise.resolve();
 }

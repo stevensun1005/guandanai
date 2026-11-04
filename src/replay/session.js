@@ -1,24 +1,21 @@
 import { runtime } from '../app/runtime.js';
-import { AIP } from '../ai/hand-value.js';
 import { Sound } from '../audio/sound.js';
 import { PLACE, TYPE_NAME, cardText, isWild, rankName, sortHand, val } from '../core/cards.js';
 import { analyze, isBomb, power } from '../core/combinations.js';
 import { setHumans } from '../game/events.js';
 import { newGame } from '../game/session.js';
 import { armPlaysRaw, armScore, handPower, scorePower, unitScore } from '../hand/arrangement.js';
-import { isPhone, layoutHand, syncPhone } from '../hand/layout.js';
+import { layoutHand, syncPhone } from '../hand/layout.js';
 import { orderedHand, renderHand } from '../hand/view.js';
 import { straightFlushes } from '../input/controls.js';
 import { cardEl, handEl } from '../input/pointer.js';
-import { lobbyStatus, nickNow, setMode } from '../lobby/lobby.js';
-import { testBack, testUndo } from './history.js';
+import { practiceBack, practiceUndo } from './history.js';
 import {
-  testClear,
-  testCopy,
-  testDbLoad,
-  testFinish,
-  testImport,
-  testSave,
+  practiceClear,
+  practiceCopy,
+  practiceFinish,
+  practiceImport,
+  practiceSave,
 } from './import-export.js';
 import {
   T_ORDER,
@@ -26,30 +23,27 @@ import {
   handUnits,
   recName,
   rowsOf,
-  testCounterNext,
-  testList,
-  testNoteEdit,
-  testPeeks,
-  testPlays,
+  practiceCounterNext,
+  practiceList,
+  practiceNoteEdit,
+  practicePeeks,
+  practicePlays,
 } from './inspector.js';
-import { testLoad, testStore } from './storage.js';
-import { testView, tvClick, tvDraw, tvNote, tvPlay, tvStop } from './viewer.js';
+import { practiceLoad, practiceStore, onRecordStorageStatus } from './storage.js';
+import { practiceView, tvClick, tvDraw, tvNote, tvPlay, tvStop } from './viewer.js';
 import { $, cardHTML, displayOrder } from '../ui/cards.js';
-import { testStepGo } from '../ui/clocks.js';
+import { practiceStepGo } from '../ui/clocks.js';
 import { kangHtml } from '../ui/table.js';
+import { syncFullscreen } from '../ui/fullscreen.js';
 
-let TEST_PW;
-export let fsOn;
-let fsMark;
-let testResize;
+let practiceResize;
 export let pcol;
-let tierNum;
 export let powerText;
 export let playName;
 export let esc;
 export let trickEnd;
 export let roundName;
-export let testGrouped;
+export let practiceGrouped;
 let myCards;
 export let uaOf;
 export let rawPower;
@@ -58,16 +52,16 @@ let setLocks;
 let sfIdxP;
 let hotOff;
 
-function enterTest() {
+export function enterPractice() {
   runtime.reviewMode = true;
-  document.body.classList.add('test');
+  document.body.classList.add('practice');
   syncPhone();
   runtime.TREC.started = new Date();
-  runtime.TREC.rounds = testLoad();
+  runtime.TREC.rounds = practiceLoad();
   runtime.network.mode = 'solo';
   runtime.network.off = 0;
   setHumans([0]);
-  testNames();
+  practiceNames();
   $('#lobby').hidden = true;
   for (const p of [1, 2, 3]) {
     const e = document.createElement('div');
@@ -77,13 +71,13 @@ function enterTest() {
     e.onclick = (ev) => {
       const b = ev.target.closest('button[data-a]');
       if (b) {
-        if (b.dataset.a === 'reset') testCompReset(p);
-        else if (b.dataset.a === 'sf') testCompSF(p);
-        else testCompGroup(p, b.dataset.a === 'split');
+        if (b.dataset.a === 'reset') practiceCompReset(p);
+        else if (b.dataset.a === 'sf') practiceCompSF(p);
+        else practiceCompGroup(p, b.dataset.a === 'split');
         return;
       }
     };
-    testPeekDrag(e, p);
+    practicePeekDrag(e, p);
     $('#seat' + p).appendChild(e);
   }
   $('#mebar .whorow').insertAdjacentHTML('beforeend', '<span class="mypw" id="myPw"></span>');
@@ -93,30 +87,31 @@ function enterTest() {
   );
   $('#splitBtn').onclick = () => {
     const have = new Set(runtime.game.hands[0].map((c) => c.id));
-    testRegroup(
+    practiceRegroup(
       [...runtime.selection].filter((id) => have.has(id)),
       true,
     );
   };
   $('#sortBtn').insertAdjacentHTML(
     'afterend',
-    '<button class="link" id="undoBtn" title="撤销刚才这一手，回到它之前（游戏画面不变）" disabled>上一步</button>',
+    '<button class="link" id="undoBtn" title="撤回当前练习的上一手，恢复当时牌局" disabled>撤回一步</button>',
   );
-  $('#undoBtn').onclick = testUndo;
+  $('#undoBtn').onclick = practiceUndo;
   $('#undoBtn').insertAdjacentHTML(
     'afterend',
     '<button class="link" id="goBtn" title="走下一步（空格，或点屏幕空白处）" hidden>继续</button>',
   );
-  $('#goBtn').onclick = testStepGo;
+  $('#goBtn').onclick = practiceStepGo;
   $('#fixBtn').title = '选中的牌组成一组';
-  $('#sortBtn').title = '改回电脑自己的配法';
+  $('#sortBtn').title = '重新按建议牌型分组';
   const s = document.createElement('aside');
   s.className = 'tside';
   s.id = 'tside';
   s.innerHTML = `<div class="tsh"><b>出牌记录</b><span id="tsRound"></span></div>
-    <div class="tsb"><button class="link" id="tsDone" title="这一局和评语都写完了：生成记录，交给 Claude 读">生成记录交给 Claude</button><button class="link" id="tsClose">关闭</button></div>
-    <div class="tsb"><button class="link" id="tsPrev" title="看上一手牌打出后桌上的样子（键盘 ←）">上一步</button><button class="link" id="tsReplay">回放</button><button class="link" id="tsSave">保存记录</button><button class="link" id="tsCopy">复制</button><button class="link" id="tsLoad">导入</button><button class="link" id="tsClear">清空</button></div>
+    <div class="tsb"><button class="link" id="tsDone" title="导出这一局的出牌与评语">导出本局复盘</button><button class="link" id="tsClose">关闭</button></div>
+    <div class="tsb"><button class="link" id="tsPrev" title="查看上一手的牌桌（键盘 ←）">看上一手</button><button class="link" id="tsReplay">回放</button><button class="link" id="tsSave">导出全部</button><button class="link" id="tsCopy">复制全部</button><button class="link" id="tsLoad">导入</button><button class="link" id="tsClear">清空</button></div>
     <div class="tshint">点桌上或这里的任意一手牌旁的“评”写评语；点一手牌看当时四家的牌、重打这一局</div>
+    <p id="practiceStorageNotice" class="practice-storage-notice" role="status" hidden>本机空间不足，当前记录尚未保存。请先导出备份。</p>
     <ol class="tlist" id="tsList"></ol>`;
   document.body.appendChild(s);
   const v = document.createElement('div');
@@ -139,24 +134,24 @@ function enterTest() {
   v.addEventListener('focusin', (e) => {
     if (e.target.id === 'tvNote') tvStop();
   });
-  $('#tsPrev').onclick = testBack;
+  $('#tsPrev').onclick = practiceBack;
   $('#tsReplay').onclick = () => {
-    if (runtime.TREC.rounds.length) testView(runtime.TREC.rounds.length - 1, 0, true);
+    if (runtime.TREC.rounds.length) practiceView(runtime.TREC.rounds.length - 1, 0, true);
   };
-  $('#tsSave').onclick = testSave;
-  $('#tsCopy').onclick = testCopy;
-  $('#tsLoad').onclick = testImport;
-  $('#tsClear').onclick = testClear;
+  $('#tsSave').onclick = practiceSave;
+  $('#tsCopy').onclick = practiceCopy;
+  $('#tsLoad').onclick = practiceImport;
+  $('#tsClear').onclick = practiceClear;
   $('#tsList').onclick = (e) => {
     const ed = e.target.closest('.tedit,.tnote,.tchg');
     if (ed) {
-      testNoteEdit(+(ed.closest('li').dataset.k || 0));
+      practiceNoteEdit(+(ed.closest('li').dataset.k || 0));
       return;
     }
     const li = e.target.closest('li.tp');
-    if (li) testView(runtime.TREC.rounds.length - 1, +li.dataset.k, false);
+    if (li) practiceView(runtime.TREC.rounds.length - 1, +li.dataset.k, false);
   };
-  $('#tsDone').onclick = testFinish;
+  $('#tsDone').onclick = practiceFinish;
   $('#tsClose').onclick = () => {
     s.classList.remove('open');
     $('#tsBtn').classList.remove('on');
@@ -167,10 +162,9 @@ function enterTest() {
     const t = e.target.closest('#tplays .tq[data-k]');
     if (!t) return;
     if (['roundEnd', 'over'].includes(runtime.game.phase) && runtime.TREC.rounds.length)
-      testView(runtime.TREC.rounds.length - 1, +t.dataset.k, false);
-    else testNoteEdit(+t.dataset.k);
+      practiceView(runtime.TREC.rounds.length - 1, +t.dataset.k, false);
+    else practiceNoteEdit(+t.dataset.k);
   });
-  testDbLoad();
   // a 记牌器 button beside each name
   for (let q = 0; q < 4; q++) {
     const at = q ? $('#seat' + q + ' .name') : $('#myName');
@@ -183,56 +177,42 @@ function enterTest() {
     const b = e.target.closest('.tcb[data-p]');
     if (b) {
       e.stopPropagation();
-      testCounterNext(+b.dataset.p);
+      practiceCounterNext(+b.dataset.p);
     }
   });
   $('#tsBtn').onclick = () => {
     s.classList.toggle('open');
     $('#tsBtn').classList.toggle('on', s.classList.contains('open'));
     $('#tsList').dataset.k = '';
-    testList();
+    practiceList();
   };
   document.body.classList.toggle(
     'fsok',
     !!(document.fullscreenEnabled || document.webkitFullscreenEnabled),
   );
-  $('#fsBtn').onclick = testFull;
-  testFull(true);
-  fsMark();
-  testSize();
+  syncFullscreen();
+  practiceSize();
   // the boxes of plays follow the table when it changes size (the hand below it getting shorter, say)
   let t = 0;
   if (window.ResizeObserver)
     new ResizeObserver(() => {
       clearTimeout(t);
-      t = setTimeout(testPlays, 120);
+      t = setTimeout(practicePlays, 120);
     }).observe($('#table'));
   newGame();
-}
-
-export function testFull(on) {
-  const d = document.documentElement;
-  try {
-    if (on !== true && fsOn())
-      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-    else if (!fsOn()) {
-      const r = (d.requestFullscreen || d.webkitRequestFullscreen).call(d);
-      if (r && r.catch) r.catch(() => {});
-    }
-  } catch (_) {}
 }
 
 // the one card size for every hand: the side hands in five rows are about 5.5 cards wide (each further card shows 0.42 of
 // one), with the table about 6 between them; upright, your partner's and your three rows (about 3 cards high each), the
 // side hands' five (about 4.7) and the plates, buttons and margins (about 250px)
-function testSize() {
+function practiceSize() {
   if (!runtime.reviewMode) return;
   const w = (innerWidth - 48) / 17,
     h = (innerHeight - 250) / 11;
   document.body.style.setProperty('--tcw', Math.round(Math.max(28, Math.min(w, h, 100))) + 'px');
 }
 
-function testNames() {
+function practiceNames() {
   for (let p = 0; p < 4; p++) runtime.names[p] = `${p + 1}号`;
   for (let q = 1; q < 4; q++) {
     const e = $('#seat' + q + ' .name');
@@ -291,7 +271,7 @@ function sortGroups(groups, by, L) {
     .map((x) => x.gr);
 }
 
-function testSortMine() {
+function practiceSortMine() {
   runtime.game.fixed = sortGroups(runtime.game.fixed, myCards(), runtime.game.L);
 }
 
@@ -304,7 +284,7 @@ function tidyIds(ids, hand) {
   );
 }
 
-export function testArm(hand, L) {
+export function practiceArm(hand, L) {
   if (!runtime.reviewMode || !runtime.game) return null;
   for (const p of [1, 2, 3]) {
     if (hand !== runtime.game.hands[p] || !uaOf(p)) continue;
@@ -354,7 +334,7 @@ function lockJoin(locks, groups, ids, target, hand) {
   return untouched(locks, join).concat([tidyIds(join, hand)]);
 }
 
-function testCompSel(p, id) {
+function practiceCompSel(p, id) {
   if (runtime.game.phase !== 'prep') return;
   if (runtime.TSEL.p !== p) {
     runtime.TSEL.p = p;
@@ -362,11 +342,11 @@ function testCompSel(p, id) {
   }
   if (runtime.TSEL.ids.has(id)) runtime.TSEL.ids.delete(id);
   else runtime.TSEL.ids.add(id);
-  testPeeks();
+  practicePeeks();
   Sound.play('select');
 }
 
-function testCompSF(p) {
+function practiceCompSF(p) {
   if (runtime.game.phase !== 'prep') return;
   const list = straightFlushes(runtime.game.hands[p]);
   if (!list.length) {
@@ -375,7 +355,7 @@ function testCompSF(p) {
       k: runtime.TSEL.p === p ? [...runtime.TSEL.ids].join() : '',
       text: '这手牌组不成同花顺',
     };
-    testPeeks();
+    practicePeeks();
     return;
   }
   const k = (sfIdxP[p] || 0) % list.length,
@@ -389,11 +369,11 @@ function testCompSF(p) {
     k: [...runtime.TSEL.ids].join(),
     text: `同花顺 ${k + 1}/${list.length}：${displayOrder({ type: 'sflush', value: f.s, cards: f.cards }, runtime.game.L).map(cardText).join(' ')}`,
   };
-  testPeeks();
+  practicePeeks();
   Sound.play('select');
 }
 
-function testCompGroup(p, split) {
+function practiceCompGroup(p, split) {
   if (
     runtime.game.phase !== 'prep' ||
     runtime.TSEL.p !== p ||
@@ -404,12 +384,12 @@ function testCompGroup(p, split) {
     locks = uaOf(p) || [];
   setLocks(p, split ? lockSingles(locks, ids) : lockGroup(locks, ids, runtime.game.hands[p]));
   runtime.TSEL.ids = new Set();
-  testPeeks();
+  practicePeeks();
   Sound.play('play');
 }
 
 // your own cards follow the pointer; the group under it lights up
-export function testDragMove(e) {
+export function practiceDragMove(e) {
   if (!runtime.mv.active) {
     if (Math.hypot(e.clientX - runtime.mv.x0, e.clientY - runtime.mv.y0) < 6) return;
     runtime.mv.ids =
@@ -456,7 +436,7 @@ export function testDragMove(e) {
 }
 
 // dropped on a group: they join it; on a gap in your hand: a group of their own; anywhere else: back where they were
-export function testDropMine(m) {
+export function practiceDropMine(m) {
   hotOff(handEl);
   for (const id of m.ids) {
     const c = cardEl(id);
@@ -477,7 +457,7 @@ export function testDropMine(m) {
 }
 
 // a computer's cards while sorting: a tap picks a card, a drag carries it (or the picked cards) the same way as yours
-function testPeekDrag(el, p) {
+function practicePeekDrag(el, p) {
   let d = null;
   el.addEventListener('pointerdown', (e) => {
     if (runtime.game.phase !== 'prep') return;
@@ -540,33 +520,33 @@ function testPeekDrag(el, p) {
     d = null;
     if (m.ghost) m.ghost.remove();
     if (!m.on) {
-      if (!cancel) testCompSel(p, m.id);
+      if (!cancel) practiceCompSel(p, m.id);
       return;
     }
     if (cancel || (m.out && m.tid == null)) {
       el.dataset.k = '';
-      testPeeks();
+      practicePeeks();
       return;
     }
     setLocks(p, lockJoin(uaOf(p) || [], seatGroups(p), m.ids, m.tid, runtime.game.hands[p]));
     runtime.TSEL.ids = new Set();
-    testPeeks();
+    practicePeeks();
     Sound.play('play');
   };
   el.addEventListener('pointerup', () => end(false));
   el.addEventListener('pointercancel', () => end(true));
 }
 
-function testCompReset(p) {
+function practiceCompReset(p) {
   if (runtime.game.ua && runtime.game.ua.r === runtime.game.round) delete runtime.game.ua.lock[p];
   runtime.TSEL.ids = new Set();
-  testPeeks();
+  practicePeeks();
   Sound.play('shuffle');
 }
 
 // your hand: the groups you set (G.tgLock) stay, the rest is arranged again the computer's way whenever the hand or your
 // groups change
-export function testArrangeMine() {
+export function practiceArrangeMine() {
   if (
     !runtime.game ||
     ['start', 'shuffle', 'cut', 'deal'].includes(runtime.game.phase) ||
@@ -594,7 +574,7 @@ export function testArrangeMine() {
 }
 
 // 成组 / 拆开 on your own cards
-export function testRegroup(ids, split) {
+export function practiceRegroup(ids, split) {
   if (ids.length < (split ? 1 : 2)) return;
   runtime.game.tgLock = split
     ? lockSingles(runtime.game.tgLock, ids)
@@ -605,7 +585,7 @@ export function testRegroup(ids, split) {
 }
 
 // your groups laid out like the computer's: in three rows, a small gap between groups
-export function testGeo() {
+export function practiceGeo() {
   const el = $('#hand'),
     probe = el.firstElementChild,
     W = el.clientWidth,
@@ -646,7 +626,7 @@ export function testGeo() {
 }
 
 // beside your name: the 牌力 of your groups (and of the computer's arrangement, when it differs); during play, as play began
-export function testMine() {
+export function practiceMine() {
   const el = $('#myPw');
   if (!el) return;
   let t = '';
@@ -655,7 +635,7 @@ export function testMine() {
     t =
       `开局${powerText(rec.myPower)}` +
       (rec.myPower !== rec.power[0] ? `　电脑配牌 ${rec.power[0]}` : '');
-  else if (testGrouped() && runtime.game.hands[0].length) {
+  else if (practiceGrouped() && runtime.game.hands[0].length) {
     const mine = scorePower(armScore(myUnits())),
       pc = handPower(runtime.game.hands[0], runtime.game.L);
     t =
@@ -669,13 +649,12 @@ export function testMine() {
 /* the record of each round */
 // a round's record starts when play starts (the tribute and returns done): the four hands, each one's 牌力 (yours also as
 // you grouped it), the log, the comments; numbered on from the rounds already kept in this browser
-export function testRoundStart() {
+export function practiceRoundStart() {
   runtime.TSNAP.length = 0;
-  runtime.TDEC.clear();
   const L = runtime.game.L,
     rp = runtime.game.replay;
   runtime.game.replay = null;
-  const mine = testGrouped() ? runtime.game.fixed.map((gr) => gr.slice()) : null;
+  const mine = practiceGrouped() ? runtime.game.fixed.map((gr) => gr.slice()) : null;
   const power = runtime.game.hands.map((h) => rawPower(h, L)),
     ug = {},
     up = {};
@@ -725,10 +704,10 @@ export function testRoundStart() {
     replayOf: rp ? rp.of : null,
   });
   recName(curRec());
-  testStore();
+  practiceStore();
 }
 
-export function testRoundEnd() {
+export function practiceRoundEnd() {
   const rec = curRec();
   if (!rec || !rec.live || rec.g !== runtime.game.round) return;
   const r = runtime.game.result,
@@ -743,73 +722,36 @@ export function testRoundEnd() {
         : r.before === r.after
           ? `${side(r.team)}在 A 级，没能打过`
           : `${side(r.team)}升 ${r.up} 级（${rankName(r.before)} → ${rankName(r.after)}）`);
-  testStore();
+  practiceStore();
 }
 
 export function initialize() {
-  /* ---------- the test version: a solo game for checking how the computer plays ---------- */
-  // Behind a password in the lobby. Every hand is face up and arranged the computer's way: the computer's are the very
-  // arrangement it plays from, yours is a suggestion you can change (成组 / 拆开 / 复原), and its 牌力 follows your groups.
+  runtime.TREC = { started: null, rounds: [] };
+  onRecordStorageStatus(({ saved }) => {
+    const notice = $('#practiceStorageNotice');
+    if (notice) notice.hidden = saved;
+  });
+  /* ---------- the practice table: a solo game for checking how the computer plays ---------- */
+  // Every hand is face up. Grouping and its reference score help inspect combinations;
+  // the learned policy still evaluates its own hand independently.
   // Every play gets a number and goes into the record down the right-hand side; 上一步 (or the ← key) opens a view of the
   // table as it stood after any earlier play, where each play can be given a comment, 回放 plays a round through again,
   // and 重打这一局 deals the same hands again to see whether the computer now plays it better. The records stay in this
   // browser, and save as a text file (which can be brought back in with 导入).
-  TEST_PW = '985';
-  runtime.TREC = { started: null, rounds: [] };
-  $('#testBtn').onclick = () => {
-    const r = $('#testRow');
-    r.hidden = !r.hidden;
-    if (!r.hidden) $('#testPw').focus();
-  };
-  $('#testPw').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') $('#testGo').click();
-  });
-  $('#testGo').onclick = () => {
-    if ($('#testPw').value !== TEST_PW) {
-      lobbyStatus('测试版密码不对');
-      $('#testPw').select();
-      return;
-    }
-    if (runtime.lobbyMode !== 'solo') setMode('solo');
-    runtime.nickname = nickNow() || '测试';
-    runtime.direction = 'S';
-    Sound.unlock();
-    enterTest();
-  };
-  fsOn = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
-  fsMark = () => {
-    // full screen on a phone also holds the screen upright, where the browser allows it
-    if (fsOn() && isPhone())
-      try {
-        const r =
-          screen.orientation && screen.orientation.lock && screen.orientation.lock('portrait');
-        if (r && r.catch) r.catch(() => {});
-      } catch (_) {}
-    $('#fsBtn').textContent = fsOn() ? '退出全屏' : '回到全屏';
-    document.body.classList.toggle('fs', fsOn());
-    $('#fsOptBtn').textContent = fsOn() ? '退出全屏' : '全屏';
-    $('#fsOptBtn').setAttribute('aria-pressed', fsOn());
-  };
-  // 全屏 in 选项: only where the page may take the whole screen (not the claude.ai viewer, not an iPhone)
-  $('#fsOptBtn').hidden = !(document.fullscreenEnabled || document.webkitFullscreenEnabled);
-  $('#fsOptBtn').onclick = () => testFull();
-  for (const ev of ['fullscreenchange', 'webkitfullscreenchange'])
-    document.addEventListener(ev, fsMark);
-  runtime.testWH = '';
-  testResize = () => {
+  runtime.practiceWH = '';
+  practiceResize = () => {
     const k = innerWidth + 'x' + innerHeight;
-    if (runtime.reviewMode && k !== runtime.testWH) {
-      runtime.testWH = k;
-      testSize();
+    if (runtime.reviewMode && k !== runtime.practiceWH) {
+      runtime.practiceWH = k;
+      practiceSize();
       layoutHand();
-      setTimeout(testPlays, 200);
+      setTimeout(practicePlays, 200);
     }
   };
-  addEventListener('resize', testResize);
-  if (window.ResizeObserver) new ResizeObserver(testResize).observe(document.documentElement);
+  addEventListener('resize', practiceResize);
+  if (window.ResizeObserver) new ResizeObserver(practiceResize).observe(document.documentElement);
   pcol = (p) => (p % 2 ? 'var(--blue-team)' : 'var(--red-team)');
-  tierNum = (pw) => (pw >= AIP.tier1 ? 1 : pw >= AIP.tier2 ? 2 : pw >= AIP.tier3 ? 3 : 4);
-  powerText = (pw) => `牌力 ${pw}（第 ${tierNum(pw)} 档）`;
+  powerText = (pw) => `理牌参考 ${pw}`;
   playName = (e) => (e.type === 'bomb' ? e.n + '张炸弹' : TYPE_NAME[e.type]);
   esc = (s) =>
     String(s).replace(
@@ -821,7 +763,7 @@ export function initialize() {
       ? `${runtime.names[w]}收回出牌权`
       : `${runtime.names[w]}出完，${runtime.names[lead]}接风`;
   roundName = (r) => `第 ${r.no} 局${r.replayOf ? `（重打第 ${r.replayOf} 局）` : ''}`;
-  testGrouped = () =>
+  practiceGrouped = () =>
     runtime.reviewMode &&
     !!runtime.game &&
     runtime.game.tgRound === runtime.game.round &&

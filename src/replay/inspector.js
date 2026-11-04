@@ -22,11 +22,11 @@ import {
   rawPower,
   readGroup,
   seatGroups,
-  testMine,
+  practiceMine,
   trickEnd,
   uaOf,
 } from './session.js';
-import { testStore } from './storage.js';
+import { practiceStore } from './storage.js';
 import { $, cardHTML, displayOrder } from '../ui/cards.js';
 import { pileGeo, pileRefit } from '../ui/table-pile.js';
 import { cardTag } from '../ui/table.js';
@@ -39,7 +39,7 @@ let TCV;
 let TC;
 let rankLabel;
 let KIND_ORDER;
-export let testMidHalf;
+export let practiceMidHalf;
 let tcwNow;
 
 export function handUnits(cards, L, grouped) {
@@ -108,16 +108,16 @@ export function rowsOf(units, k = 3) {
   return rows;
 }
 
-export function testRender() {
-  testPeeks();
-  testMine();
-  testList();
-  testPlays();
-  testCounter();
+export function practiceRender() {
+  practicePeeks();
+  practiceMine();
+  practiceList();
+  practicePlays();
+  practiceCounter();
   syncUndo();
 }
 
-export function testCounterNext(p) {
+export function practiceCounterNext(p) {
   let w = $('#tc' + p);
   if (!w) {
     w = document.createElement('div');
@@ -127,7 +127,7 @@ export function testCounterNext(p) {
     w.style.left = 16 + p * 36 + 'px';
     w.style.top = 90 + p * 36 + 'px';
     document.body.appendChild(w);
-    testDragBox(w, 'guandan-tc' + p);
+    practiceDragBox(w, 'guandan-tc' + p);
     w.addEventListener('click', (e) => {
       if (e.target.closest('.tcClose')) {
         w.hidden = true;
@@ -138,7 +138,7 @@ export function testCounterNext(p) {
       if (t) {
         TC[p] = +t.dataset.v;
         w.dataset.k = '';
-        testCounter();
+        practiceCounter();
       }
     });
   }
@@ -146,7 +146,7 @@ export function testCounterNext(p) {
   w.hidden = false;
   document.querySelector(`.tcb[data-p="${p}"]`).classList.add('on');
   w.dataset.k = '';
-  testCounter();
+  practiceCounter();
 }
 
 // cards in rank groups, largest first: each rank's label, its cards, how many
@@ -167,7 +167,7 @@ function rankRows(cards, L) {
     .join('');
 }
 
-function testCounter() {
+function practiceCounter() {
   if (!runtime.reviewMode || !runtime.game) return;
   const L = runtime.game.L;
   for (let p = 0; p < 4; p++) {
@@ -221,7 +221,7 @@ function testCounter() {
 }
 
 // the three computer hands, face up beside their plates; arranged once the cards are all dealt
-export function testPeeks() {
+export function practicePeeks() {
   if (!runtime.reviewMode || !runtime.game) return;
   const grouped = !['start', 'shuffle', 'cut', 'deal'].includes(runtime.game.phase),
     rec = curRec(),
@@ -286,7 +286,7 @@ export function testPeeks() {
   if (moved && runtime.pileGroups.length) pileRefit();
 }
 
-export function testPlays() {
+export function practicePlays() {
   if (!(runtime.reviewMode || miniMode()) || !runtime.game) return;
   let box = $('#tplays');
   if (!box) {
@@ -307,7 +307,7 @@ export function testPlays() {
     return;
   }
   const g = pileGeo();
-  // in 极简出牌区 the box keeps one place and size (see miniBoxRect); the test version's follows the table's middle
+  // in 极简出牌区 the box keeps one place and size (see miniBoxRect); the practice table's follows the table's middle
   const R = runtime.reviewMode
     ? {
         left: g.left + 6,
@@ -410,7 +410,7 @@ function miniCard(c) {
 
 // a comment on the k-th play of the round being played (or just finished): written in a small box over the table, kept
 // with the record at once; the game waits meanwhile
-export function testNoteEdit(k) {
+export function practiceNoteEdit(k) {
   const rec = curRec();
   if (!rec) return;
   const e = k ? rec.log[k - 1] : null;
@@ -421,7 +421,7 @@ export function testNoteEdit(k) {
     b.id = 'tnbox';
     b.className = 'tnbox';
     document.body.appendChild(b);
-    testNoteMove(b);
+    practiceNoteMove(b);
   }
   b.innerHTML = `<h3 class="tnh" title="拖这里可以移动">${k ? `第 ${k} 手：${turnHTML(rec, k)}` : '开局（理牌）的评语'}</h3>
     <textarea id="tnText" placeholder="${!k ? '比如：这手牌应该这样理，因为…' : e.cards ? '比如：这里应该出…，因为…' : '比如：这里不该过，应该出…，因为…'}">${esc(rec.notes[k] || '')}</textarea>
@@ -436,9 +436,9 @@ export function testNoteEdit(k) {
     if (t) rec.notes[k] = t;
     else delete rec.notes[k];
     rec.nv++;
-    testStore();
-    testList();
-    testPlays();
+    practiceStore();
+    practiceList();
+    practicePlays();
     close();
   };
   $('#tnOk').onclick = () => put($('#tnText').value.trim());
@@ -453,11 +453,11 @@ export function testNoteEdit(k) {
 
 // the box opens where you last left it, at first in the bottom-right corner beside your hand, clear of the played cards;
 // dragging its title bar moves it
-function testNoteMove(b) {
-  testDragBox(b, 'guandan-tnbox');
+function practiceNoteMove(b) {
+  practiceDragBox(b, 'guandan-tnbox');
 }
 
-function testDragBox(b, store) {
+function practiceDragBox(b, store) {
   let at = null;
   try {
     at = JSON.parse(localStorage.getItem(store) || 'null');
@@ -506,9 +506,9 @@ export function recName(r) {
 }
 
 // a name to the clipboard, with a word to say so
-export function testCopy1(t) {
-  const ok = () => testToast(`已复制：${t}`),
-    no = () => testToast('没能复制，请手动选中');
+export function practiceCopy1(t) {
+  const ok = () => practiceToast(`已复制：${t}`),
+    no = () => practiceToast('没能复制，请手动选中');
   try {
     navigator.clipboard.writeText(t).then(ok, no);
   } catch (_) {
@@ -516,7 +516,7 @@ export function testCopy1(t) {
   }
 }
 
-function testToast(t) {
+function practiceToast(t) {
   let e = $('#ttoast');
   if (!e) {
     e = document.createElement('div');
@@ -534,7 +534,7 @@ function testToast(t) {
 
 // what was changed in the sorting, seat by seat: the groups of the computer's own arrangement taken apart, the groups
 // made instead, and the 牌力 before and after
-export function testChanges(rec) {
+export function practiceChanges(rec) {
   const out = [];
   for (const p of [0, 1, 2, 3]) {
     const after = p ? rec.userGroups && rec.userGroups[p] : rec.myGroups,
@@ -593,7 +593,7 @@ export function recListHTML(rec, on) {
       `<li class="thead">重打第 ${rec.replayOf} 局${o && o.result ? `；原来：${o.result}` : ''}</li>`,
     );
   }
-  for (const t of testChanges(rec))
+  for (const t of practiceChanges(rec))
     out.push(`<li class="tchg" data-k="0">理牌改动：${esc(t)}</li>`);
   out.push(note(0));
   rec.log.forEach((e, i) => {
@@ -616,14 +616,14 @@ export function recListHTML(rec, on) {
   return out.join('');
 }
 
-export function testList() {
+export function practiceList() {
   const el = $('#tsList');
   if (!el) return;
   const rec = curRec(),
     key = rec ? rec.uid + '|' + rec.log.length + '|' + rec.result + '|' + rec.nv : '';
   // a new play is kept at once, so a closed page loses nothing
   if (rec && rec.live && runtime.TREC.kept !== key) {
-    if (runtime.TREC.kept) testStore();
+    if (runtime.TREC.kept) practiceStore();
     runtime.TREC.kept = key;
   }
   // the list itself is built only while it is open
@@ -683,7 +683,7 @@ export function initialize() {
     'sflush',
     'jokers',
   ];
-  testMidHalf = 0.17;
+  practiceMidHalf = 0.17;
   tcwNow = () => parseFloat(getComputedStyle(document.body).getPropertyValue('--tcw')) || 50;
   runtime.miniRect = null;
 }

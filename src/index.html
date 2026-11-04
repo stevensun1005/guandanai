@@ -26,7 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&text=%E6%8E%BC%E8%9B%8B&display=swap"
     />
 
-    <link rel="stylesheet" href="./assets/app.css" />
+    <link rel="stylesheet" href="./assets/app.css?v=__APP_VERSION__" />
   </head>
   <body>
     <div id="app">
@@ -265,27 +265,25 @@
           <button class="link" id="mixedBotsBtn" type="button">来一桌不同性格</button>
           <p id="botSetupNote"></p>
         </details>
+        <button class="link practice-entry" type="button" id="practiceBtn">
+          复盘练习 · 四家明牌与出牌记录
+        </button>
         <div class="lobby-ver" id="verTag"></div>
       </div>
-      <div class="lobby-testbox">
-        <button class="link lobby-test" id="testBtn">测试版</button>
-        <div class="lobby-join" id="testRow" hidden>
-          <input
-            class="lobby-nick"
-            id="testPw"
-            type="password"
-            inputmode="numeric"
-            maxlength="8"
-            autocomplete="off"
-            placeholder="密码"
-          />
-          <button class="btn primary" id="testGo">进入</button>
-        </div>
-      </div>
     </div>
+    <dialog id="practiceDialog" class="practice-dialog" aria-labelledby="practiceTitle">
+      <h2 id="practiceTitle">复盘练习</h2>
+      <p>四家明牌，逐步推进。看清牌型、比较出法，也可以保存带评语的复盘记录。</p>
+      <p class="muted">这是单机练习桌。分组估分仅供理牌参考，电脑仍按学习策略出牌。</p>
+      <p id="practiceRoomNote" class="muted" hidden>进入练习会离开当前朋友房间。</p>
+      <form method="dialog" class="btns">
+        <button class="btn" value="cancel">返回</button>
+        <button class="btn primary" type="button" id="practiceStart">进入明牌练习</button>
+      </form>
+    </dialog>
 
     <!-- PeerJS: browser-to-browser connections for playing with friends (room codes) -->
     <script src="./assets/vendor/peerjs.min.js"></script>
-    <script type="module" src="./assets/app.js"></script>
+    <script type="module" src="./assets/app.js?v=__APP_VERSION__"></script>
   </body>
 </html>

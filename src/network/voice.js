@@ -131,7 +131,7 @@ export function initialize() {
       else waiting.push(call);
     }
     function start(p) {
-      if (window.claude || !window.Peer || !runtime.network.peer || !p) return;
+      if (!window.Peer || !runtime.network.peer || !p) return;
       peers = p;
       active = Object.keys(peers).length > 1;
       if (!active) return;

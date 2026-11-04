@@ -2,9 +2,9 @@ import { runtime } from '../app/runtime.js';
 import { PLACE, cardText, isWild, makeDeck, rankName, sortHand } from '../core/cards.js';
 import { removeDeck } from '../effects/deck.js';
 import { startPrep } from '../game/turns.js';
-import { recListHTML, recUnits, rowsHTML, testList, testPlays } from './inspector.js';
+import { recListHTML, recUnits, rowsHTML, practiceList, practicePlays } from './inspector.js';
 import { esc, playName, powerText, readGroup, roundName, trickEnd } from './session.js';
-import { testStore } from './storage.js';
+import { practiceStore } from './storage.js';
 import { $, cardHTML, displayOrder } from '../ui/cards.js';
 import { hideOverlay, setPaused } from '../ui/overlays.js';
 import { pileRebuild } from '../ui/table-pile.js';
@@ -12,7 +12,7 @@ import { pileRebuild } from '../ui/table-pile.js';
 let tvRec;
 let tvCount;
 
-export function testView(ri, step, play) {
+export function practiceView(ri, step, play) {
   runtime.replayView.open = true;
   runtime.replayView.ri = ri;
   runtime.replayView.step = step;
@@ -64,9 +64,9 @@ export function tvNote(text) {
   rec.nv++;
   const l = $('#tview .tvl .tlist');
   if (l) l.innerHTML = recListHTML(rec, runtime.replayView.step);
-  testList();
-  testStore();
-  testPlays();
+  practiceList();
+  practiceStore();
+  practicePlays();
 }
 
 export function tvClick(e) {
@@ -99,7 +99,7 @@ export function tvClick(e) {
       b.textContent = '放弃当前这局，确定重打？';
       return;
     }
-    testReplay(tvRec());
+    practiceReplay(tvRec());
     return;
   }
   const n = tvCount();
@@ -241,7 +241,7 @@ export function tvDraw() {
 
 // 重打这一局: the same four hands (as play began, after the tribute), the same level and the same first player; you sort
 // and play again, the computer plays with the rules it has now
-function testReplay(rec) {
+function practiceReplay(rec) {
   tvClose();
   hideOverlay();
   if (runtime.game.paused) setPaused(false);

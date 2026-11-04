@@ -5,8 +5,8 @@ import { cmpVert, fanMode, renderHand, vertMode } from './view.js';
 import { miniMode } from '../input/actions.js';
 import { syncHandBtns } from '../input/controls.js';
 import { handEl } from '../input/pointer.js';
-import { testPlays } from '../replay/inspector.js';
-import { testGeo, testGrouped } from '../replay/session.js';
+import { practicePlays } from '../replay/inspector.js';
+import { practiceGeo, practiceGrouped } from '../replay/session.js';
 import { $, displayOrder } from '../ui/cards.js';
 import { phoneRefit, pileRebuild, pileRefit } from '../ui/table-pile.js';
 import { placeLastPlay, render } from '../ui/table.js';
@@ -27,7 +27,7 @@ let phoneSwitch;
 export let handKeys;
 
 export function handGeo(n, keys) {
-  if (testGrouped()) return testGeo();
+  if (practiceGrouped()) return practiceGeo();
   if (isPhone()) return phoneHandGeo(n, keys);
   const el = $('#hand'),
     probe = el.firstElementChild,
@@ -92,7 +92,7 @@ export function handGeo(n, keys) {
               ? Math.max(Math.round(cw * 1.84 + FIX_TAG), Math.round(side - bw - FIX_GAP))
               : 30,
       ));
-  // (the test version has no fixed zone: its groups are made with 成组 and 拆开)
+  // (the practice table has no fixed zone: its groups are made with 成组 and 拆开)
   const x0 = runtime.reviewMode ? side : Math.max(side, fw + bw + FIX_GAP),
     W = Wall - side - x0;
   // (while dealing there are no ranks to stack yet: 竖式 lays the cards out flat until they are all in)
@@ -209,7 +209,7 @@ export function drawFixZone(g) {
     const b = $(id);
     if (b) b.hidden = false;
   }
-  // the test version's groups need no frame: its 成组, 拆开 and 复原 stand in a column just right of the cards (clear
+  // the practice table's groups need no frame: its 成组, 拆开 and 复原 stand in a column just right of the cards (clear
   // of every row), like the computer's
   if (g.test) {
     z.hidden = t.hidden = true;
@@ -275,7 +275,7 @@ export function syncPhone() {
   el.classList.toggle('phone', on);
   el.classList.toggle('rows', phoneRows());
   el.classList.toggle('side', on && !phoneRows());
-  // 成组 stands beside 同花顺; in the test version it stays at the left end of the hand tools
+  // 成组 stands beside 同花顺; in the practice table it stays at the left end of the hand tools
   const fb = $('#fixBtn');
   if (!runtime.reviewMode && fb.previousElementSibling !== $('#sfBtn')) {
     $('#sfBtn').after(fb);
@@ -583,7 +583,7 @@ export function layoutHand() {
   placeButtons(g);
   syncHandBtns();
   // (the hand's height moves the table's lower edge, and the box of plays with it)
-  if (!runtime.reviewMode && miniMode()) testPlays();
+  if (!runtime.reviewMode && miniMode()) practicePlays();
 }
 
 // the button column hugs the right edge of the cards, centred on the hand's height
@@ -606,7 +606,7 @@ export function placeActionBtns() {
     if (!phoneRows()) b.style.bottom = '';
     if (!(on && isPhone())) b.style.columnGap = '';
   }
-  // the test version's side hands fill the table's sides, so the buttons stand in a row beside your hand instead
+  // the practice table's side hands fill the table's sides, so the buttons stand in a row beside your hand instead
   if (on && runtime.reviewMode) {
     const b = $('#btns'),
       top = h.height - b.offsetHeight - 6 + 'px';

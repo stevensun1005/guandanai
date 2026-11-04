@@ -16,7 +16,7 @@ import { orderedHand, renderHand, vertMode } from '../hand/view.js';
 import { changeOrder } from '../hand/ordering.js';
 import { onPlay } from './actions.js';
 import { clearPicked } from './controls.js';
-import { testDragMove, testDropMine, testGrouped } from '../replay/session.js';
+import { practiceDragMove, practiceDropMine, practiceGrouped } from '../replay/session.js';
 import { $ } from '../ui/cards.js';
 import { renderControls } from '../ui/table.js';
 
@@ -200,7 +200,7 @@ function dropCards() {
     return;
   }
   if (m.test) {
-    testDropMine(m);
+    practiceDropMine(m);
     return;
   }
   if (!m.cancel) {
@@ -324,7 +324,7 @@ export function initialize() {
       runtime.mv &&
       !runtime.mv.active &&
       !runtime.selection.has(runtime.mv.id) &&
-      !testGrouped()
+      !practiceGrouped()
     ) {
       if (Math.hypot(e.clientX - runtime.mv.x0, e.clientY - runtime.mv.y0) < 6) return;
       const id = runtime.mv.id,
@@ -343,9 +343,9 @@ export function initialize() {
       setSel(id, on);
       Sound.play('select');
     }
-    // the test version's groups: dragged onto another group to join it, or onto a gap to make one of their own
+    // the practice table's groups: dragged onto another group to join it, or onto a gap to make one of their own
     if (runtime.mv) {
-      if (testGrouped()) testDragMove(e);
+      if (practiceGrouped()) practiceDragMove(e);
       else moveCards(e);
       return;
     }

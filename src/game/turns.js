@@ -8,8 +8,8 @@ import { isHost, isHumanSeat } from './session.js';
 import { processReturns, returnNow } from './tribute.js';
 import { sortHints } from '../hand/follow-hints.js';
 import { onPlay } from '../input/actions.js';
-import { testSnap } from '../replay/history.js';
-import { testRoundStart } from '../replay/session.js';
+import { practiceSnap } from '../replay/history.js';
+import { practiceRoundStart } from '../replay/session.js';
 import { renderClocks } from '../ui/clocks.js';
 import { render } from '../ui/table.js';
 
@@ -21,7 +21,7 @@ export function startPrep(leader) {
   runtime.game.turn = leader;
   runtime.game.ready = [];
   runtime.game.retPick = {};
-  // the test version gives ten minutes, to sort the computer's hands too
+  // the practice table gives ten minutes, to sort the computer's hands too
   runtime.game.clock = {
     who: 'prep',
     left: runtime.reviewMode ? 600000 : PREP_MS,
@@ -56,7 +56,7 @@ export function startPlay(leader) {
   runtime.game.phase = 'play';
   runtime.game.turn = leader;
   runtime.game.clock = null;
-  if (runtime.reviewMode) testRoundStart();
+  if (runtime.reviewMode) practiceRoundStart();
   if ((runtime.game.trib && runtime.game.trib.length) || runtime.game.kang) {
     runtime.game.turn = -1;
     runtime.game.nextLeader = leader;
@@ -90,7 +90,7 @@ export function later(fn, ms) {
 export function startTurn() {
   runtime.hints = [];
   runtime.hintIdx = 0;
-  // the test version stops before every turn, yours as much as a computer's, until the space bar (or 继续) is pressed,
+  // the practice table stops before every turn, yours as much as a computer's, until the space bar (or 继续) is pressed,
   // so each step can be looked at and commented on before the next one is made
   // (your own turn needs no stop: after 4号 the game goes straight to you; a copy of the game is kept at its start all the same)
   if (runtime.reviewMode && runtime.game.phase === 'play' && runtime.game.turn >= 0) {
@@ -99,11 +99,11 @@ export function startTurn() {
       runtime.game.turn = -1;
       runtime.game.nextLeader = -1;
       runtime.game.clock = null;
-      testSnap();
+      practiceSnap();
       render();
       return;
     }
-    if (runtime.game.turn === 0) testSnap();
+    if (runtime.game.turn === 0) practiceSnap();
   }
   runtime.game.stepGo = false;
   render();
@@ -132,7 +132,7 @@ export function startTurn() {
     return;
   }
   // once you are out the computers stop pretending to think so long; only the host's computers actually move
-  // the test version gives the computer more time, so each play can be followed
+  // the practice table gives the computer more time, so each play can be followed
   const think = runtime.reviewMode
     ? 0
     : active(0)

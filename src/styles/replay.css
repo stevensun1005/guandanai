@@ -1,37 +1,28 @@
-/* the test version: every hand face up (the computer's in the groups it has arranged), and every play numbered in a
+/* the practice table: every hand face up (the computer's in the groups it has arranged), and every play numbered in a
    record down the right-hand side, which can be stepped back through and replayed */
-.lobby-testbox {
-  position: absolute;
-  top: max(12px, env(safe-area-inset-top, 0px));
-  right: max(16px, env(safe-area-inset-right, 0px));
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
+.practice-storage-notice {
+  color: var(--warn);
+  font-size: 13px;
+  padding: 8px 12px;
+  margin: 0;
+  line-height: 1.5;
 }
-.lobby-testbox .lobby-join {
-  width: auto;
-}
-.lobby-testbox .lobby-nick {
-  width: 150px;
-  flex: none;
-}
-body.test {
+body.practice {
   --tside-w: 340px;
 }
-body.test #app {
+body.practice #app {
   max-width: none;
   margin: 0;
 }
-body.test #fanBtn,
-body.test #rowsBtn {
+body.practice #fanBtn,
+body.practice #rowsBtn {
   display: none;
 }
 #tsBtn,
 #fsBtn {
   display: none;
 }
-body.test #tsBtn {
+body.practice #tsBtn {
   display: inline-flex;
 }
 .tcb {
@@ -188,20 +179,20 @@ body.test #tsBtn {
   color: var(--muted);
   margin-top: 4px;
 }
-body.test #tsBtn.on {
+body.practice #tsBtn.on {
   color: var(--on-gold);
   background: var(--gold);
   border-color: var(--gold);
   font-weight: 700;
 }
-body.test.fsok #fsBtn {
+body.practice.fsok #fsBtn {
   display: inline-flex;
 }
-/* the test version has its own 全屏 button in the header, so the one in 选项 stays out of the way */
-body.test #fsOptBtn {
+/* the practice table has its own 全屏 button in the header, so the one in 选项 stays out of the way */
+body.practice #fsOptBtn {
   display: none;
 }
-body.test.fsok:not(.fs) #fsBtn {
+body.practice.fsok:not(.fs) #fsBtn {
   color: var(--on-gold);
   background: var(--gold);
   border-color: var(--gold);
@@ -209,31 +200,31 @@ body.test.fsok:not(.fs) #fsBtn {
 }
 /* one card size for all four hands and the table (--tcw, worked out from the screen), with the side hands' columns as
    wide as the hands */
-body.test #hand,
-body.test .peek,
-body.test .tvmid {
+body.practice #hand,
+body.practice .peek,
+body.practice .tvmid {
   --cw: var(--tcw, 40px);
 }
-body.test #pile {
+body.practice #pile {
   --cw: calc(var(--tcw, 40px) * 0.9);
 }
-body.test .table {
+body.practice .table {
   grid-template-columns: auto minmax(0, 1fr) auto;
 }
 @media (min-width: 561px) {
-  body.test #btns {
+  body.practice #btns {
     flex-direction: row;
   }
 }
 /* the cards thrown on the table, the level disc and the line under it give way to each player's framed box of plays */
-body.test #pile .pc,
-body.test #pile .ktag {
+body.practice #pile .pc,
+body.practice #pile .ktag {
   visibility: hidden;
 }
-body.test .emblem {
+body.practice .emblem {
   visibility: hidden;
 }
-body.test #lastPlay {
+body.practice #lastPlay {
   display: none;
 }
 /* 极简出牌区 (an option on a computer or tablet): the same framed box of plays in the middle of the table */
@@ -246,9 +237,9 @@ body.mini #lastPlay {
 }
 /* a play of several cards is laid close, like the 横式 hand: each card over the one before it, its rank and suit at the left
    corner, so only a strip of every card but the last shows */
-/* the test version has no time limits: no alarm clocks, no countdown numbers */
-body.test .clock,
-body.test #prepR {
+/* the practice table has no time limits: no alarm clocks, no countdown numbers */
+body.practice .clock,
+body.practice #prepR {
   display: none !important;
 }
 .tstep {
@@ -292,14 +283,14 @@ body.mini .mc {
 body.mini .mc + .mc {
   margin-left: calc(var(--mcw) * -0.34);
 }
-body:not(.test) .tq {
+body:not(.practice) .tq {
   pointer-events: none;
   cursor: default;
 }
-body:not(.test) .tq:hover {
+body:not(.practice) .tq:hover {
   outline: none;
 }
-body.test #miniBtn,
+body.practice #miniBtn,
 html.phone #miniBtn {
   display: none;
 }
@@ -558,9 +549,9 @@ html.phone #miniBtn {
   margin-top: calc(var(--cw) * 0.9);
 }
 .tgbtn:disabled,
-body.test #splitBtn:disabled,
-body.test #sortBtn:disabled,
-body.test #undoBtn:disabled {
+body.practice #splitBtn:disabled,
+body.practice #sortBtn:disabled,
+body.practice #undoBtn:disabled {
   opacity: 0.4;
   cursor: default;
   box-shadow: none;
@@ -568,10 +559,10 @@ body.test #undoBtn:disabled {
   color: var(--gold);
 }
 .tgbtn,
-body.test #fixBtn,
-body.test #splitBtn,
-body.test #sortBtn,
-body.test #undoBtn {
+body.practice #fixBtn,
+body.practice #splitBtn,
+body.practice #sortBtn,
+body.practice #undoBtn {
   font: inherit;
   font-size: 15px;
   font-weight: 700;
@@ -586,18 +577,18 @@ body.test #undoBtn {
   text-align: center;
 }
 .tgbtn:not(:disabled),
-body.test #fixBtn:not(:disabled),
-body.test #splitBtn:not(:disabled),
-body.test #sortBtn:not(:disabled),
-body.test #undoBtn:not(:disabled) {
+body.practice #fixBtn:not(:disabled),
+body.practice #splitBtn:not(:disabled),
+body.practice #sortBtn:not(:disabled),
+body.practice #undoBtn:not(:disabled) {
   color: var(--on-gold);
   background: var(--gold);
   box-shadow: 0 0 12px rgba(221, 176, 80, 0.5);
 }
-body.test #fixBtn:disabled {
+body.practice #fixBtn:disabled {
   opacity: 0.4;
 }
-body.test #goBtn {
+body.practice #goBtn {
   position: absolute;
   margin: 0;
   z-index: 7;
@@ -614,13 +605,13 @@ body.test #goBtn {
   box-shadow: 0 0 14px rgba(221, 176, 80, 0.6);
   white-space: nowrap;
 }
-body.test #goBtn[hidden] {
+body.practice #goBtn[hidden] {
   display: none;
 }
-body.test #fixBtn,
-body.test #splitBtn,
-body.test #sortBtn,
-body.test #undoBtn {
+body.practice #fixBtn,
+body.practice #splitBtn,
+body.practice #sortBtn,
+body.practice #undoBtn {
   position: absolute;
   margin: 0;
   z-index: 7;
@@ -629,7 +620,7 @@ body.test #undoBtn {
 #splitBtn {
   display: none;
 }
-body.test #splitBtn {
+body.practice #splitBtn {
   display: inline-block;
 }
 .peek.edit {
@@ -657,10 +648,10 @@ body.test #splitBtn {
   padding: 1px 9px;
 }
 /* the look-back view also holds the comment strip: its hands a little smaller (all four still alike), the trick smaller still */
-body.test .tview .peek {
+body.practice .tview .peek {
   --cw: calc(var(--tcw, 40px) * 0.9);
 }
-body.test .tview .tvmid {
+body.practice .tview .tvmid {
   --cw: calc(var(--tcw, 40px) * 0.72);
 }
 .peek {
@@ -1149,11 +1140,11 @@ body.test .tview .tvmid {
   padding: 8px;
 }
 /* the record opens over the table from the 出牌记录 button, so the cards get the whole screen */
-body.test .tside {
+body.practice .tside {
   width: min(var(--tside-w), 92vw);
   box-shadow: -12px 0 32px rgba(0, 0, 0, 0.5);
 }
-body.test .tside:not(.open) {
+body.practice .tside:not(.open) {
   display: none;
 }
 @media (max-width: 1279px) {

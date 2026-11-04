@@ -80,8 +80,8 @@ export function initialize() {
       runtime.replayView.open ||
       runtime.replayView.edit
     )
-      return; // paused, a solo game with a panel open, or looking back or writing a comment in the test version
-    if (runtime.reviewMode && c.think == null) return; // the test version has no time limits: nobody is hurried, nothing runs out
+      return; // paused, a solo game with a panel open, or looking back or writing a comment in the practice table
+    if (runtime.reviewMode && c.think == null) return; // the practice table has no time limits: nobody is hurried, nothing runs out
     const before = c.left;
     c.left -= dt;
     if (

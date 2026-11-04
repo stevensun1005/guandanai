@@ -2,7 +2,7 @@ import { runtime } from '../app/runtime.js';
 import { AIP, UNIT_SCORE } from '../ai/hand-value.js';
 import { SUITS, isWild, val } from '../core/cards.js';
 import { analyze, isBomb } from '../core/combinations.js';
-import { testArm } from '../replay/session.js';
+import { practiceArm } from '../replay/session.js';
 
 let isSeq;
 export let isCtrl;
@@ -153,9 +153,9 @@ function arrange(hand, L) {
   return armWilds(best);
 }
 
-// the test version lets the player rearrange a computer's hand while sorting, and the computer then plays from that
+// Practice groupings are a visible analysis aid; the learned policy receives the seat's hand independently.
 export function armPlays(hand, L) {
-  return (typeof testArm === 'function' && testArm(hand, L)) || armPlaysRaw(hand, L);
+  return (typeof practiceArm === 'function' && practiceArm(hand, L)) || armPlaysRaw(hand, L);
 }
 
 export function armPlaysRaw(hand, L) {

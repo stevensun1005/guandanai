@@ -1,5 +1,7 @@
 # 验证与复现
 
+复盘练习：`python tests/practice_smoke.py` 验证明牌练习、出牌、评语、导出与跨浏览器导入、旧记录迁移、损坏数据和本机保存失败提示。记录格式边界与限制见 [复盘指南](PRACTICE.md)。
+
 残局检查：Node 测试使用独立的实体牌子集穷举对照；`python tests/endgame_browser_smoke.py` 将真实自对弈中记录的 8 个残局交给浏览器 Worker，并检查风格不会覆盖已证明路线。
 
 电脑配置检查：`python tests/bot_setup_smoke.py`，覆盖三个窗口尺寸、四种玩家座位与本机偏好保存。`browser_smoke.py` 还检查房主风格同步及真实 Worker 风格决策。批量棋力与行为验证见 [电脑对手](BOTS.md)。

@@ -32,6 +32,8 @@ import * as pointer from './input/pointer.js';
 import * as controls from './input/controls.js';
 import * as restore from './app/restore.js';
 import * as lobby from './lobby/lobby.js';
+import * as practice from './lobby/practice.js';
+import * as fullscreen from './ui/fullscreen.js';
 import * as botSetup from './lobby/bot-setup.js';
 import * as botProfiles from './ai/profiles.js';
 import * as replaySession from './replay/session.js';
@@ -71,10 +73,12 @@ celebrations.initialize();
 overlays.initialize();
 pointer.initialize();
 controls.initialize();
+fullscreen.initialize();
 handTools.initialize();
 lobby.initialize();
 botSetup.initialize();
 replaySession.initialize();
+practice.initialize();
 replayStorage.initialize();
 replayInspector.initialize();
 replayHistory.initialize();
@@ -180,15 +184,12 @@ if (new URLSearchParams(location.search).get('test') === '1') {
     lobbyMode: 'lobbyMode',
     botStyles: 'botStyles',
     TREC: 'TREC',
-    testWH: 'testWH',
+    practiceWH: 'practiceWH',
     TSEL: 'TSEL',
     TSFI: 'TSFI',
     storeT: 'storeT',
-    dbT: 'dbT',
-    dbBusy: 'dbBusy',
     miniRect: 'miniRect',
     TSNAP: 'TSNAP',
-    TDEC: 'TDEC',
   };
   for (const [name, key] of Object.entries(aliases))
     Object.defineProperty(window, name, {

@@ -39,13 +39,6 @@
     font-size: 15px;
     white-space: nowrap;
   }
-  .lobby-testbox {
-    top: 12px;
-    right: 20px;
-  }
-  .lobby-test {
-    font-size: 11px;
-  }
 }
 @media (max-height: 780px) and (min-width: 561px) {
   .lobby-box {

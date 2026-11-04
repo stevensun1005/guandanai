@@ -34,6 +34,7 @@ const browser = new Set([
   'Worker',
   'self',
   '__BUILD_VERSION__',
+  '__MODEL_VERSION__',
 ]);
 const standard = new Set(Object.getOwnPropertyNames(globalThis));
 

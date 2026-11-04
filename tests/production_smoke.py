@@ -13,6 +13,8 @@ with sync_playwright() as p:
       window.Worker=class extends NativeWorker{postMessage(data,...rest){if(data.type==='decide')window.policyTurns++;return super.postMessage(data,...rest)}};""")
     page.goto(URL,wait_until='networkidle')
     assert page.evaluate('typeof G')=='undefined'
+    version=page.locator('meta[name="app-version"]').get_attribute('content')
+    assert page.locator('#verTag').inner_text().endswith(version)
     page.locator('#nick').fill('试玩')
     page.locator('[data-seat="S"]').click();page.locator('#sitBtn').click()
     for _ in range(250):

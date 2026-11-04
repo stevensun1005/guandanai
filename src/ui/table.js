@@ -10,8 +10,8 @@ import { isPhone, placeActionBtns, sideBtns } from '../hand/layout.js';
 import { renderHand } from '../hand/view.js';
 import { selKey, selectedCards, syncCfmShow, syncMini } from '../input/actions.js';
 import { DIRS } from '../lobby/lobby.js';
-import { testMidHalf, testPlays, testRender } from '../replay/inspector.js';
-import { testGrouped } from '../replay/session.js';
+import { practiceMidHalf, practicePlays, practiceRender } from '../replay/inspector.js';
+import { practiceGrouped } from '../replay/session.js';
 import { $, displayOrder } from './cards.js';
 import { renderClocks } from './clocks.js';
 import { syncPauseBtn } from './overlays.js';
@@ -97,10 +97,10 @@ export function render() {
   renderHand();
   renderMsg();
   renderClocks();
-  if (runtime.reviewMode) testRender();
+  if (runtime.reviewMode) practiceRender();
   else {
     syncMini();
-    testPlays();
+    practicePlays();
   }
 }
 
@@ -136,7 +136,7 @@ export function placeLastPlay() {
           120,
           (() => {
             const q = pileGeo();
-            return Math.round((q.right - q.left) * testMidHalf * 2) - 8;
+            return Math.round((q.right - q.left) * practiceMidHalf * 2) - 8;
           })(),
         )
       : Math.max(120, g ? g.right - g.left - 8 : $('.mid').offsetWidth)) + 'px';
@@ -230,12 +230,12 @@ export function renderControls() {
   $('#sortBtn').textContent = runtime.reviewMode ? '复原' : '理牌';
   $('#sortBtn').disabled = !runtime.game.hands[0].length;
   fb.disabled = !picked || !runtime.game.hands[0].length;
-  fb.textContent = testGrouped()
+  fb.textContent = practiceGrouped()
     ? '成组'
     : picked && [...runtime.selection].every((id) => fixedNow.has(id))
       ? '放回'
       : '成组';
-  if (testGrouped()) {
+  if (practiceGrouped()) {
     fb.disabled = runtime.selection.size < 2;
     const sp = $('#splitBtn');
     if (sp) {
@@ -281,9 +281,6 @@ function renderMsg() {
       t += `<div class="trib">还一张 10 或以下的牌给${runtime.names[runtime.game.returns.find((x) => x.from === 0).to]}</div>`;
   } else if (runtime.game.phase === 'play') {
     t = runtime.game.notice ? `<div>${runtime.game.notice}</div>` : '';
-    // the test version waiting between two steps
-    if (runtime.reviewMode && runtime.game.stepWait != null)
-      t += `<div class="tstep">下一步：${runtime.game.stepWait === 0 ? '你' : runtime.names[runtime.game.stepWait]}　点“继续”、按空格或点屏幕空白处继续</div>`;
   }
   m.innerHTML = t;
   syncTribBox();

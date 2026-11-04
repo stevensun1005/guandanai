@@ -13,11 +13,11 @@ import { miniMode, onHint, onPass, onPlay, onReturn, syncMini } from './actions.
 import { fixCards, handEl, reflowHand, unfixCards } from './pointer.js';
 import { VERSION } from '../network/protocol.js';
 import { VC } from '../network/voice.js';
-import { testBack } from '../replay/history.js';
-import { testPlays } from '../replay/inspector.js';
-import { testGrouped, testRegroup } from '../replay/session.js';
+import { practiceBack } from '../replay/history.js';
+import { practicePlays } from '../replay/inspector.js';
+import { practiceGrouped, practiceRegroup } from '../replay/session.js';
 import { $, displayOrder } from '../ui/cards.js';
-import { testStepGo } from '../ui/clocks.js';
+import { practiceStepGo } from '../ui/clocks.js';
 import { askQuit, showRules } from '../ui/overlays.js';
 import { centerRank, pileRebuild, pileRefit } from '../ui/table-pile.js';
 import { placeLastPlay, renderControls, setMsg } from '../ui/table.js';
@@ -168,8 +168,8 @@ export function initialize() {
     const have = new Set(runtime.game.hands[0].map((c) => c.id)),
       ids = [...runtime.selection].filter((id) => have.has(id));
     if (!ids.length) return;
-    if (testGrouped()) {
-      testRegroup(ids, false);
+    if (practiceGrouped()) {
+      practiceRegroup(ids, false);
       return;
     }
     const fixed = new Set((runtime.game.fixed || []).flat());
@@ -238,13 +238,13 @@ export function initialize() {
     } catch (_) {}
     syncMini();
     if (runtime.game) {
-      testPlays();
+      practicePlays();
       pileRefit();
     }
   };
   if (window.ResizeObserver)
     new ResizeObserver(() => {
-      if (runtime.game && miniMode()) testPlays();
+      if (runtime.game && miniMode()) practicePlays();
     }).observe($('#table'));
   $('#confirmBtn').setAttribute('aria-pressed', runtime.confirmPlay);
   $('#confirmBtn').onclick = () => {
@@ -342,14 +342,14 @@ export function initialize() {
     if (e.target.closest('#handToolsMenu') || e.ctrlKey || e.metaKey || e.altKey) return;
     if (runtime.reviewMode && e.key === 'ArrowLeft') {
       e.preventDefault();
-      testBack();
+      practiceBack();
       return;
     }
-    // the test version's steps: the space bar lets the game go on to the next turn
+    // the practice table's steps: the space bar lets the game go on to the next turn
     if (runtime.reviewMode && e.key === ' ' && runtime.game && runtime.game.stepWait != null) {
       e.preventDefault();
       if (document.activeElement) document.activeElement.blur();
-      testStepGo();
+      practiceStepGo();
       return;
     }
     if (e.key === 'Enter') {
@@ -364,7 +364,7 @@ export function initialize() {
       onPass();
     } else if (e.key === 'h' || e.key === 'H') onHint();
   });
-  // the test version's steps: a tap on the empty table lets the game go on too (not on a button, a card, a plate, the hands'
+  // the practice table's steps: a tap on the empty table lets the game go on too (not on a button, a card, a plate, the hands'
   // area or any panel that is open)
   document.addEventListener('click', (e) => {
     if (
@@ -381,7 +381,7 @@ export function initialize() {
       )
     )
       return;
-    testStepGo();
+    practiceStepGo();
   });
   runtime.resizeT = 0;
   window.addEventListener('resize', () => {

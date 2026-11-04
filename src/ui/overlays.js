@@ -5,8 +5,8 @@ import { toAbs } from '../game/session.js';
 import { placeActionBtns } from '../hand/layout.js';
 import { askNext } from '../input/controls.js';
 import { broadcast } from '../network/rooms.js';
-import { testFinish, testSave } from '../replay/import-export.js';
-import { testView } from '../replay/viewer.js';
+import { practiceFinish, practiceSave } from '../replay/import-export.js';
+import { practiceView } from '../replay/viewer.js';
 import { $ } from './cards.js';
 
 let nextDone;
@@ -54,14 +54,14 @@ export function showResult() {
   showPanel(
     `<h2>${head}</h2>${body}
     ${waitHtml()}
-    ${runtime.reviewMode ? '<p class="muted">点桌上的任意一手牌，回到当时所有人的牌，可以接着写评语；写完了点“生成记录交给 Claude”。</p>' : ''}
-    <div class="btns">${runtime.reviewMode ? '<button class="btn" id="replayBtn">回放</button><button class="btn" id="doneBtn">生成记录交给 Claude</button>' : ''}${nextBtnHtml()}</div>`,
+    ${runtime.reviewMode ? '<p class="muted">点桌上的任意一手牌，回到当时所有人的牌，可以接着写评语；写完了点“导出本局复盘”。</p>' : ''}
+    <div class="btns">${runtime.reviewMode ? '<button class="btn" id="replayBtn">回放</button><button class="btn" id="doneBtn">导出本局复盘</button>' : ''}${nextBtnHtml()}</div>`,
     true,
   );
   $('#panel').dataset.kind = 'result';
   if (runtime.reviewMode) {
-    $('#replayBtn').onclick = () => testView(runtime.TREC.rounds.length - 1, 0, true);
-    $('#doneBtn').onclick = testFinish;
+    $('#replayBtn').onclick = () => practiceView(runtime.TREC.rounds.length - 1, 0, true);
+    $('#doneBtn').onclick = practiceFinish;
   }
   const nb = $('#nextBtn');
   if (nb) {
@@ -160,7 +160,7 @@ export function askQuit() {
           : '这一场的级数和牌都不会保存。';
   showPanel(`<h2>退出游戏？</h2><p class="muted">${why}</p>
   <div class="btns"><button class="btn" id="stayBtn">${runtime.game && runtime.game.paused ? '返回' : '继续打'}</button>${runtime.reviewMode ? '<button class="btn" id="quitSave">保存记录</button>' : ''}<button class="btn primary" id="quitYes">退出</button></div>`);
-  if (runtime.reviewMode) $('#quitSave').onclick = testSave;
+  if (runtime.reviewMode) $('#quitSave').onclick = practiceSave;
   $('#stayBtn').onclick = () => {
     hideOverlay();
     if (runtime.game.paused) setPaused(true, runtime.game.pausedBy);

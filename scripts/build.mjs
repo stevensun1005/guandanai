@@ -23,10 +23,9 @@ for (const file of await sourceFiles('src')) {
     /\.(js|mjs|css|html)$/.test(file) ? await read(file) : await readFile(path.join(root, file)),
   );
 }
-const version = hash
-  .update(await readFile(path.join(root, 'ai/policy.onnx')))
-  .digest('hex')
-  .slice(0, 10);
+const modelBytes = await readFile(path.join(root, 'ai/policy.onnx'));
+const modelVersion = createHash('sha256').update(modelBytes).digest('hex').slice(0, 16);
+const version = hash.update(modelBytes).digest('hex').slice(0, 10);
 const html = (await read('src/index.html')).replaceAll('__APP_VERSION__', version);
 for (const dir of ['dist/assets/vendor', 'dist/models'])
   await mkdir(path.join(root, dir), { recursive: true });
@@ -65,6 +64,7 @@ await build({
   sourcemap: 'external',
   charset: 'utf8',
   external: ['./vendor/*'],
+  define: { __MODEL_VERSION__: JSON.stringify(modelVersion) },
 });
 for (const [from, to] of Object.entries(copies))
   await copyFile(path.join(root, from), path.join(root, to));
