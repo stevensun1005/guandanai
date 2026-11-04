@@ -83,6 +83,15 @@ python tests/benchmark_model.py
 
 本机 v1.1 测量：166 个候选动作，32 轮交替计算，前 4 轮预热；中位数从 15.5 ms 变为 11.1 ms，批次输入减少 89.8%，该组输出最大差异为 0。这不是所有设备的保证。
 
+## 持续训练
+
+```bash
+node --test tests/continuous-training.test.mjs
+python tests/continuous_learner_test.py
+```
+
+Node 部分随 `npm test` 运行，覆盖种子区间、探索规则、PFSP、SPRT，以及一场真实比赛的标签与 int8 分片往返。Python 部分检查 P0 载入再导出与原 ONNX 输出逐位一致、重放缓冲、目标混合、一次真实更新与续跑。端到端运行方式见[持续训练指南](CONTINUOUS_TRAINING.md)。这些检查只说明流程与数据正确，不说明训练有效。
+
 ## 浏览器检查的边界
 
 - 桌面 Chrome 与手机尺寸模拟不等于所有真实手机验收。

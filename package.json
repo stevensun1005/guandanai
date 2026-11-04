@@ -16,7 +16,9 @@
     "format:check": "prettier --check \"src/**/*.{js,mjs,css,html}\" \"scripts/**/*.mjs\" \"tests/*.mjs\" \"docs/**/*.md\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
     "eval:response": "node scripts/evaluate-response.mjs",
     "eval:endgame": "node scripts/evaluate-endgame.mjs",
-    "eval:table": "node scripts/evaluate-table.mjs"
+    "eval:table": "node scripts/evaluate-table.mjs",
+    "train:continuous": "node scripts/continuous/supervisor.mjs",
+    "train:status": "node scripts/continuous/status.mjs"
   },
   "dependencies": {
     "onnxruntime-web": "1.31.1",
@@ -26,6 +28,7 @@
     "acorn": "^8.19.0",
     "esbuild": "^0.28.2",
     "eslint-scope": "^9.1.2",
+    "onnxruntime-node": "1.31.1",
     "prettier": "^3.9.10"
   }
 }

@@ -1,0 +1,41 @@
+/** Print a short human-readable summary of a continuous training run. */
+import { option, readJSON, runPaths } from './lib.mjs';
+
+const paths = runPaths(option('run', 'work/continuous/main'));
+const status = readJSON(paths.status);
+if (!status) throw Error(`No status at ${paths.status}`);
+const learner = status.learner || {};
+const champion = status.champion || {};
+const league = readJSON(paths.leagueMeta, { members: [], stats: {} });
+const pct = (a, b) => (b ? `${((100 * a) / b).toFixed(1)}%` : '-');
+const lines = [
+  `运行目录      ${paths.root}`,
+  `更新时间      ${status.updatedAt}${status.stoppedAt ? `（已停止 ${status.stoppedAt}）` : ''}`,
+  `运行中进程    ${(status.running || []).join(', ') || '无'}`,
+  `采样          ${status.totals?.matches ?? 0} 场整场，${status.totals?.decisions ?? 0} 个决策，约 ${status.decisionsPerSecond ?? '-'} 决策/秒`,
+  `训练          第 ${learner.step ?? 0} 步，缓冲 ${learner.buffer ?? 0} 行，重放比 ${learner.replayRatio?.toFixed?.(2) ?? '-'}，损失 ${learner.lossEMA?.toFixed?.(4) ?? '-'}（${learner.state ?? '-'}）`,
+  `最新模型      ${status.latest?.version ?? '-'}`,
+  `冠军          ${champion.version ?? '-'}（更替 ${Math.max(0, (champion.history?.length || 1) - 1)} 次）`,
+  `磁盘          ${status.diskGB ?? '-'} GB`,
+  '',
+  '最近 30 秒的对局（含 ε 探索，仅供监控，不是评测）：',
+];
+for (const [mode, s] of Object.entries(status.recent?.byMode || {}))
+  lines.push(
+    `  ${mode.padEnd(7)} ${s.wins}/${s.matches} 胜 ${s.draws} 平（${pct(s.wins, s.matches)}）`,
+  );
+lines.push('', '联赛对手（最新模型对其近期胜率，指数遗忘）：');
+for (const member of league.members) {
+  const s = league.stats[member.id];
+  lines.push(
+    `  ${member.id.padEnd(12)} ${member.pinned ? '固定' : '    '} ${s ? `${s.wins.toFixed(1)}/${s.games.toFixed(1)}（${pct(s.wins, s.games)}）` : '暂无对局'}`,
+  );
+}
+lines.push('', '门控记录（开发集，非留出验收）：');
+for (const g of (status.gates || []).slice(-10))
+  lines.push(
+    `  #${g.index} ${g.challenger} 对 ${g.champion}: ${g.decision ?? '未完成'}，${g.pairs} 对，胜/负/平 ${g.wins}/${g.losses}/${g.draws}`,
+  );
+const gateFiles = (status.gates || []).length;
+if (!gateFiles) lines.push('  暂无');
+console.log(lines.join('\n'));

@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "purpose": "Pipeline smoke and protocol measurements for the continuous training system; development only, no strength claim",
+  "machine": "Ryzen 7 7800X3D, 32 GB, CPU only, Windows 11, Node 24.19.0, onnxruntime-node 1.31.1, Python 3.13.5, PyTorch 2.15.0",
+  "initialModelSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+  "smoke": {
+    "durationMinutes": 12,
+    "config": {
+      "schema": 1,
+      "initial": "ai/policy.onnx",
+      "actors": 3,
+      "actorMix": {
+        "self": 0.5,
+        "league": 0.3,
+        "rule": 0.2
+      },
+      "epsilon": 0.01,
+      "shardRows": 16384,
+      "shardSeconds": 20,
+      "learner": {
+        "threads": 4,
+        "batch": 2048,
+        "learningRate": 1e-5,
+        "gradClip": 1,
+        "capacity": 200000,
+        "minSamples": 5000,
+        "replayRatio": 4,
+        "exportSeconds": 60,
+        "targetMatchWeight": 0,
+        "anchorWeight": 0,
+        "keepVersions": 6,
+        "seed": 20261104
+      },
+      "snapshotMinutes": 2,
+      "leagueSize": 24,
+      "gate": {
+        "alpha": 0.05,
+        "beta": 0.05,
+        "mu0": 0.5,
+        "mu1": 0.53,
+        "minPairs": 4,
+        "maxPairs": 8
+      },
+      "restarts": {
+        "limit": 5,
+        "windowMinutes": 10
+      },
+      "diskLimitGB": 20,
+      "initialSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "createdAt": "2026-11-04T18:15:09.961Z"
+    },
+    "note": "Smoke parameters (small buffer, 60 s exports, 2 min snapshots, 4-8 gate pairs) are not the defaults. This run used the earlier uniform epsilon=0.01 exploration; for the last ~7 minutes four exploration probes shared the CPU.",
+    "matchesCompleted": 2101,
+    "matchErrors": 0,
+    "decisionsRecorded": 981053,
+    "trainingSeedRange": [1000000000, 1100000711],
+    "learner": {
+      "step": 1867,
+      "ingestedRows": 955973,
+      "trainedRows": 3823616,
+      "lossEMA": 3.4091278456246927,
+      "replayRatio": 3.9997112889171555,
+      "stepsPerSecond": 2.597458750787666
+    },
+    "gates": [
+      {
+        "firstSeed": 3500000000,
+        "wins": 10,
+        "losses": 6,
+        "draws": 0,
+        "decision": "inconclusive",
+        "pairs": 8,
+        "challengerSHA256": "872b010b3cab607971e0947c960e826eb5dd4f0c98c57898e54859cd16a6cf01",
+        "championSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "llr": 0.21120000000000017
+      },
+      {
+        "firstSeed": 3500100000,
+        "wins": 7,
+        "losses": 0,
+        "draws": 1,
+        "decision": "accept",
+        "pairs": 4,
+        "challengerSHA256": "fb116ad8c01466ec941204cd035d9e30bb7cf458a3e84cedca70668cabebacca",
+        "championSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "llr": 3.244800000000003
+      },
+      {
+        "firstSeed": 3500200000,
+        "wins": 8,
+        "losses": 7,
+        "draws": 1,
+        "decision": "inconclusive",
+        "pairs": 8,
+        "challengerSHA256": "fc10179bfb4848aabedadb346ca58e165d3582ea8cd1fe778a87753c5eb17abc",
+        "championSHA256": "fb116ad8c01466ec941204cd035d9e30bb7cf458a3e84cedca70668cabebacca",
+        "llr": 0.04921690140845071
+      },
+      {
+        "firstSeed": 3500300000,
+        "wins": 8,
+        "losses": 8,
+        "draws": 0,
+        "decision": "inconclusive",
+        "pairs": 8,
+        "challengerSHA256": "b4228a744dd1bf0c4db94c25bdc53e85de8bfe6e3940aa20ef559bcfb04bc800",
+        "championSHA256": "fb116ad8c01466ec941204cd035d9e30bb7cf458a3e84cedca70668cabebacca",
+        "llr": -0.025200000000000045
+      },
+      {
+        "firstSeed": 3500400000,
+        "wins": 7,
+        "losses": 8,
+        "draws": 1,
+        "decision": "inconclusive",
+        "pairs": 8,
+        "challengerSHA256": "f574cfffbae386711b9035b401d279d8ab5c6a7503f289d1fbd1a2f6a0cbd07a",
+        "championSHA256": "fb116ad8c01466ec941204cd035d9e30bb7cf458a3e84cedca70668cabebacca",
+        "llr": -0.0736711111111112
+      },
+      {
+        "firstSeed": 3500500000,
+        "wins": 8,
+        "losses": 7,
+        "draws": 1,
+        "decision": "inconclusive",
+        "pairs": 8,
+        "challengerSHA256": "c43b732d5a4a32d1367bb260a115b8ad4b7d9d485ee76597b84439d2804e8e7a",
+        "championSHA256": "fb116ad8c01466ec941204cd035d9e30bb7cf458a3e84cedca70668cabebacca",
+        "llr": 0.03392621359223301
+      }
+    ],
+    "championHistory": [
+      {
+        "version": "v000000000",
+        "at": "2026-11-04T18:15:09.961Z",
+        "reason": "initial"
+      },
+      {
+        "version": "v000000494",
+        "at": "2026-11-04T18:18:49.296Z",
+        "gate": 1
+      }
+    ],
+    "shutdown": "time limit reached; all processes exited and published a final version"
+  },
+  "explorationCost": {
+    "protocol": "Exploring team and greedy opponent both use ai/policy.onnx; 150 seeds from 3400000000, sides swapped; draw 0.5",
+    "results": [
+      {
+        "exploration": {
+          "type": "greedy"
+        },
+        "model": "ai/policy.onnx",
+        "pairs": 150,
+        "firstSeed": 3400000000,
+        "matches": 300,
+        "wins": 141,
+        "draws": 18,
+        "meanScore": 0.5,
+        "nonGreedyDecisionRate": 0,
+        "seconds": 377.437
+      },
+      {
+        "exploration": {
+          "type": "epsilon",
+          "epsilon": 0.01
+        },
+        "model": "ai/policy.onnx",
+        "pairs": 150,
+        "firstSeed": 3400000000,
+        "matches": 300,
+        "wins": 113,
+        "draws": 27,
+        "meanScore": 0.4216666666666667,
+        "nonGreedyDecisionRate": 0.007792481678705119,
+        "seconds": 362.402
+      },
+      {
+        "exploration": {
+          "type": "softmax",
+          "temperature": 0.02
+        },
+        "model": "ai/policy.onnx",
+        "pairs": 150,
+        "firstSeed": 3400000000,
+        "matches": 300,
+        "wins": 140,
+        "draws": 30,
+        "meanScore": 0.5166666666666667,
+        "nonGreedyDecisionRate": 0.10336985525996605,
+        "seconds": 379.643
+      },
+      {
+        "exploration": {
+          "type": "softmax",
+          "temperature": 0.05
+        },
+        "model": "ai/policy.onnx",
+        "pairs": 150,
+        "firstSeed": 3400000000,
+        "matches": 300,
+        "wins": 95,
+        "draws": 24,
+        "meanScore": 0.3566666666666667,
+        "nonGreedyDecisionRate": 0.19080099738290024,
+        "seconds": 370.347
+      }
+    ],
+    "decision": "Default exploration changed to softmax temperature 0.02"
+  },
+  "smokeModelVsInitial": {
+    "protocol": "scripts/continuous/gate.mjs, greedy network play, fixed 150 pairs (no early stop)",
+    "firstSeed": 3505000000,
+    "pairs": 150,
+    "challengerSHA256": "72049004a0d030c8d56cf703c52a01ff23f2e033981a05f8d4b2b3f4096b3aae",
+    "championSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "wins": 126,
+    "losses": 147,
+    "draws": 27,
+    "meanScore": 0.465,
+    "normal95": [0.4191064328273561, 0.5108935671726439],
+    "interpretation": "No significant difference from the initial model after 12 minutes / 1,867 updates; point estimate below 0.5"
+  }
+}
