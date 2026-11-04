@@ -169,6 +169,7 @@ function hostGuestAct(seat, e) {
         !isReturnCard(
           runtime.game.hands[seat].find((card) => card.id === e.id),
           runtime.game.L,
+          runtime.game.hands[seat],
         )
       )
         return false;

@@ -1,14 +1,16 @@
 import { TYPE_NAME } from '../core/cards.js';
 import { analyze, beats, strength } from '../core/combinations.js';
 import { isReturnCard } from '../core/validation.js';
+import { returnInstruction } from '../core/tribute.js';
 
 export function selectionFeedback(
   cards,
   level,
-  { mode = 'wait', current = null, tributeIds = [], confirm = false } = {},
+  { mode = 'wait', current = null, tributeIds = [], confirm = false, hand = null } = {},
 ) {
   const count = cards.length;
   const result = (message, tone = 'neutral') => ({ message, tone, count });
+  if (!count && mode === 'return' && hand) return result(returnInstruction(hand, level));
   if (!count)
     return result(
       {
@@ -21,9 +23,12 @@ export function selectionFeedback(
     );
   const prefix = `已选 ${count} 张`;
   if (mode === 'return')
-    return count === 1 && isReturnCard(cards[0], level)
+    return count === 1 && isReturnCard(cards[0], level, hand)
       ? result(`${prefix} · 可以还贡`, 'ready')
-      : result(`${prefix} · 还贡需一张 10 或以下的非百搭牌`, 'invalid');
+      : result(
+          `${prefix} · ${hand ? returnInstruction(hand, level) : '还贡需一张 10 或以下的非百搭牌'}`,
+          'invalid',
+        );
   if (mode === 'tribute')
     return count === 1 && tributeIds.includes(cards[0].id)
       ? result(`${prefix} · 可以进贡`, 'ready')

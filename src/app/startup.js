@@ -1,5 +1,4 @@
 import { runtime } from './runtime.js';
-import { TableBot } from '../ai/controller.js';
 import { boot } from './restore.js';
 import { lobbyStatus, setMode } from '../lobby/lobby.js';
 import { $ } from '../ui/cards.js';
@@ -19,7 +18,6 @@ export function initialize() {
       lobbyStatus('邀请链接：' + url.href);
     }
   };
-  TableBot.init();
   boot();
   invitedRoom = new URLSearchParams(location.search).get('room');
   if (/^\d{4}$/.test(invitedRoom || '')) {

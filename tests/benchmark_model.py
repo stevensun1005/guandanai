@@ -29,7 +29,7 @@ def main():
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True,channel='chrome');context=browser.new_context()
         context.route('**/models/benchmark-baseline.onnx',lambda route:route.fulfill(body=baseline_model(),content_type='application/octet-stream'))
-        page=context.new_page();page.goto(url,wait_until='networkidle');page.wait_for_function('TableBot.ready',timeout=90000)
+        page=context.new_page();page.goto(url,wait_until='networkidle');page.evaluate('TableBot.check()');page.wait_for_function('TableBot.ready',timeout=90000)
         state=page.evaluate("""() => {
           resetGame();G.L=2;G.levels=[2,2];G.log=[];
           const deck=makeDeck();let seed=9183;

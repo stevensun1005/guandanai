@@ -9,7 +9,7 @@ fixtures=json.loads((ROOT/'tests/fixtures/endgame-positions.json').read_text(enc
 with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,channel='chrome')
     page=browser.new_page();errors=[];page.on('pageerror',lambda error:errors.append(str(error)))
-    page.goto(URL,wait_until='networkidle');page.wait_for_function('TableBot.ready',timeout=90000)
+    page.goto(URL,wait_until='networkidle');page.evaluate('TableBot.check()');page.wait_for_function('TableBot.ready',timeout=90000)
     reports=[]
     for fixture in fixtures:
         state=fixture['state'];expected=fixture['expectedIndex']

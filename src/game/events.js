@@ -65,6 +65,7 @@ function applyEvt(e) {
         !isReturnCard(
           runtime.game.hands[p].find((c) => c.id === e.id),
           runtime.game.L,
+          runtime.game.hands[p],
         )
       )
         return false;

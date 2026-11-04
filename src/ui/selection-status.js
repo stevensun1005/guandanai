@@ -11,7 +11,7 @@ export function renderSelectionStatus(options) {
     !['prep', 'play', 'return', 'tribPick'].includes(game.phase);
   if (row.hidden) return;
   const cards = game.hands[0].filter((card) => runtime.selection.has(card.id));
-  const feedback = selectionFeedback(cards, game.L, options);
+  const feedback = selectionFeedback(cards, game.L, { ...options, hand: game.hands[0] });
   const status = $('#selectionStatus');
   if (status.textContent !== feedback.message) status.textContent = feedback.message;
   status.dataset.tone = feedback.tone;

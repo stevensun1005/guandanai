@@ -28,6 +28,8 @@ def main():
         host.on('pageerror',lambda error:errors.append(str(error)))
         host.on('request',lambda request:api.append(request.url) if '/api/' in request.url else None)
         host.goto(URL,wait_until='networkidle')
+        assert not host.evaluate('TableBot.ready')
+        host.evaluate('TableBot.check()')
         host.wait_for_function("TableBot.ready",timeout=90000)
         assert host.locator('#aiStatus,#aiTableStatus,[data-ai-mode],.ai-panel').count()==0
         assert 'AI' not in host.locator('#lobby').inner_text()
@@ -64,6 +66,8 @@ def main():
         invite=host.evaluate('navigator.clipboard.readText()')
         assert f'room={code}' in invite
         guest_context=browser.new_context(viewport={'width':1280,'height':800})
+        guest_models=[]
+        guest_context.on('request',lambda request:guest_models.append(request.url) if '/models/' in request.url else None)
         guest=guest_context.new_page();guest.on('pageerror',lambda error:errors.append(str(error)))
         guest.goto(invite,wait_until='networkidle')
         assert guest.locator('#roomCode').input_value()==code
@@ -79,6 +83,8 @@ def main():
         guest.wait_for_function("NET.mode==='guest'")
         assert host.evaluate('botStyles')==['balanced','aggressive','balanced','conservative']
         assert guest.evaluate('botStyles')==host.evaluate('botStyles')
+        assert not guest.evaluate('TableBot.ready')
+        assert not guest_models,guest_models
         assert guest.locator('#aiTableStatus,[data-ai-mode]').count()==0
         # Normal shuffle/cut/deal, including a human's action crossing the connection.
         for _ in range(250):
@@ -107,6 +113,7 @@ def main():
         host.wait_for_function('NET.humans.size===1',timeout=25000)
         mobile=browser.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
         mobile.goto(URL,wait_until='networkidle')
+        mobile.evaluate('TableBot.check()')
         mobile.wait_for_function("TableBot.ready",timeout=60000)
         mobile.screenshot(path=str(OUT/'lobby-mobile.png'))
         assert not mobile.evaluate('document.documentElement.scrollWidth>innerWidth')
@@ -136,6 +143,7 @@ def main():
                 'guestDisconnectHandled':True,'legacySettingIgnored':True,'modelRetryWithoutFallback':True,
                 'hiddenModelControls':True,'pageErrors':errors}
         report['botProfilesSynchronized']=True
+        report['guestAvoidsModelDownload']=True
         report['learnedStyleDecisions']=host.evaluate('styleDecisions')
         (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
         print(json.dumps(report));browser.close()

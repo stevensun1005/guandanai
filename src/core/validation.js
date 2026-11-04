@@ -1,5 +1,6 @@
 import { isWild } from './cards.js';
 import { analyze, beats, strength } from './combinations.js';
+import { returnOptions } from './tribute.js';
 
 /** Resolve a proposed card selection to a legal, canonical play. */
 export function readPlay(hand, proposal, current, level) {
@@ -22,6 +23,7 @@ export function canPass(current) {
   return current != null;
 }
 
-export function isReturnCard(card, level) {
-  return !!card && card.r <= 10 && !isWild(card, level);
+export function isReturnCard(card, level, hand = null) {
+  if (!card || isWild(card, level)) return false;
+  return hand ? returnOptions(hand, level).some((option) => option.id === card.id) : card.r <= 10;
 }

@@ -1,5 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { BASE_NAMES, makeDeck, shuffle } from '../core/cards.js';
+import { TableBot } from '../ai/controller.js';
 import { act } from './events.js';
 import { render } from '../ui/table.js';
 
@@ -40,7 +41,10 @@ export function resetGame() {
 export function newGame() {
   resetGame();
   render();
-  if (isHost()) act(roundEvt(true));
+  if (isHost()) {
+    if (runtime.network.humans.size < 4) TableBot.init();
+    act(roundEvt(true));
+  }
 }
 
 // the host shuffles: the deck order, who cuts and (first round) who leads all travel in the event. Before it goes out

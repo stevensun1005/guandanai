@@ -1,5 +1,7 @@
 import { runtime } from '../app/runtime.js';
-import { TYPE_NAME, isWild } from '../core/cards.js';
+import { TYPE_NAME } from '../core/cards.js';
+import { isReturnCard } from '../core/validation.js';
+import { returnInstruction } from '../core/tribute.js';
 import { analyze, beats, strength } from '../core/combinations.js';
 import { act, playEvt } from '../game/events.js';
 import { toAbs } from '../game/session.js';
@@ -164,12 +166,12 @@ export function onReturn() {
   if (!owesReturn(0)) return;
   const cards = selectedCards();
   if (cards.length !== 1) {
-    setMsg('选一张 10 或以下的牌还贡', true);
+    setMsg(returnInstruction(runtime.game.hands[0], runtime.game.L), true);
     return;
   }
   const c = cards[0];
-  if (c.r > 10 || isWild(c, runtime.game.L)) {
-    setMsg('还贡的牌要在 10 或以下，且不能是百搭', true);
+  if (!isReturnCard(c, runtime.game.L, runtime.game.hands[0])) {
+    setMsg(returnInstruction(runtime.game.hands[0], runtime.game.L), true);
     return;
   }
   act({ k: 'return', p: toAbs(0), id: c.id });

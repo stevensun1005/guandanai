@@ -1,4 +1,5 @@
 import { runtime } from '../app/runtime.js';
+import { returnOptions, tributeOptions } from '../core/tribute.js';
 import { AIP, handCost } from './hand-value.js';
 import { isWild, makeDeck, val } from '../core/cards.js';
 import { analyze, beats, isBomb, power } from '../core/combinations.js';
@@ -469,10 +470,9 @@ function aiChoose(p) {
 }
 
 export function aiReturnCard(hand, L) {
-  let pool = hand.filter((c) => c.r <= 10 && !isWild(c, L) && c.r !== L);
-  if (!pool.length) pool = hand.filter((c) => c.r <= 10 && !isWild(c, L));
-  if (!pool.length) pool = hand.filter((c) => !isWild(c, L) && c.r < 16);
-  if (!pool.length) pool = hand.slice();
+  const legal = returnOptions(hand, L);
+  let pool = legal.filter((card) => card.r !== L);
+  if (!pool.length) pool = legal;
   let best = null,
     bs = 1e9;
   for (const c of pool) {
@@ -507,6 +507,5 @@ export function initialize() {
     const n = runtime.game.hands.map((h) => h.length);
     return n.some((k) => k <= 10) ? 'late' : n.every((k) => k >= 16) ? 'early' : 'mid';
   };
-  tributeCard = (hand, L) =>
-    hand.filter((c) => !isWild(c, L)).reduce((m, c) => (!m || val(c, L) > val(m, L) ? c : m), null);
+  tributeCard = (hand, L) => tributeOptions(hand, L)[0];
 }

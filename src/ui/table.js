@@ -1,6 +1,7 @@
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { TYPE_NAME, cardText, rankName } from '../core/cards.js';
+import { returnInstruction } from '../core/tribute.js';
 import { analyze, beats } from '../core/combinations.js';
 import { showCount } from '../effects/dealing.js';
 import { isHumanSeat } from '../game/session.js';
@@ -278,7 +279,8 @@ function renderMsg() {
   if (runtime.game.phase === 'return') {
     const mine = runtime.game.returns.find((x) => x.from === 0);
     t = tribHtml();
-    if (owesReturn(0)) t += `<div>还一张 10 或以下的牌给${runtime.names[mine.to]}</div>`;
+    if (owesReturn(0))
+      t += `<div>${returnInstruction(runtime.game.hands[0], runtime.game.L)}给${runtime.names[mine.to]}</div>`;
     const wait = runtime.game.returns.filter(
       (x) => x.from !== 0 && runtime.game.retPick[x.from] == null,
     );
@@ -293,7 +295,7 @@ function renderMsg() {
     t = runtime.game.notice ? `<div>${runtime.game.notice}</div>` : '';
     // done sorting and owing a return: it can go now, without waiting for the others to finish sorting
     if (owesReturn(0))
-      t += `<div class="trib">还一张 10 或以下的牌给${runtime.names[runtime.game.returns.find((x) => x.from === 0).to]}</div>`;
+      t += `<div class="trib">${returnInstruction(runtime.game.hands[0], runtime.game.L)}给${runtime.names[runtime.game.returns.find((x) => x.from === 0).to]}</div>`;
   } else if (runtime.game.phase === 'play') {
     t = runtime.game.notice ? `<div>${runtime.game.notice}</div>` : '';
   }

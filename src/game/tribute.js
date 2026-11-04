@@ -1,7 +1,8 @@
 import { runtime } from '../app/runtime.js';
 import { aiReturnCard, tributeCard } from '../ai/rule-policy.js';
 import { Sound } from '../audio/sound.js';
-import { isWild, sortHand, val } from '../core/cards.js';
+import { sortHand, val } from '../core/cards.js';
+import { tributeOptions } from '../core/tribute.js';
 import { giveAnim, kangAnim } from '../effects/dealing.js';
 import { RET_MS, TRIB_MS } from './clock.js';
 import { isHumanSeat } from './session.js';
@@ -52,9 +53,7 @@ export function doTribute() {
 
 // the largest cards a payer may give (never a wild card); with several of that rank in different suits, they choose
 export function tribOptions(p) {
-  const h = runtime.game.hands[p].filter((c) => !isWild(c, runtime.game.L)),
-    m = Math.max(...h.map((c) => val(c, runtime.game.L)));
-  return h.filter((c) => val(c, runtime.game.L) === m);
+  return tributeOptions(runtime.game.hands[p], runtime.game.L);
 }
 
 export function tribWait() {
@@ -115,21 +114,22 @@ async function handOver(x, tok) {
       start = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
     }
   }
+  // Commit both hands before the cosmetic flight: readying during an animation must not lose a card.
   runtime.game.hands[x.from] = runtime.game.hands[x.from].filter((c) => c !== card);
+  runtime.game.hands[x.to].push(card);
+  sortHand(runtime.game.hands[x.to], runtime.game.L);
+  if (x.label === '进贡') runtime.game.trib.push({ g: x.from, r: x.to, tc: card });
+  else {
+    const tribute = runtime.game.trib.find((tribute) => tribute.r === x.from && tribute.g === x.to);
+    if (tribute) tribute.rc = card;
+  }
   runtime.selection.delete(card.id);
   render();
   await giveAnim(x.from, x.to, card, x.label, start);
   if (runtime.game.tok !== tok) return false;
-  runtime.game.hands[x.to].push(card);
-  sortHand(runtime.game.hands[x.to], runtime.game.L);
-  if (x.to === 0) {
+  if (x.to === 0 && runtime.game.hands[0].some((held) => held.id === card.id)) {
     runtime.game.fresh.push(card.id);
     arrivals.set(card.id, performance.now());
-  }
-  if (x.label === '进贡') runtime.game.trib.push({ g: x.from, r: x.to, tc: card });
-  else {
-    const t = runtime.game.trib.find((t) => t.r === x.from && t.g === x.to);
-    if (t) t.rc = card;
   }
   return true;
 }
