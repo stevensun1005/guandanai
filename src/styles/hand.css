@@ -1,4 +1,41 @@
 /* hand */
+.selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 28px;
+  flex: none;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.selection-bar output {
+  min-width: 0;
+  text-align: center;
+}
+.selection-bar output[data-tone='ready'] {
+  color: #c8ecb8;
+}
+.selection-bar output[data-tone='invalid'] {
+  color: #f0bc99;
+}
+.selection-bar .link {
+  font-size: 12px;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+#hand .card:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+  z-index: 2000 !important;
+}
+@media (max-height: 500px) {
+  .selection-bar {
+    min-height: 24px;
+    font-size: 12px;
+  }
+}
 .hand-menu {
   position: fixed;
   z-index: 90;

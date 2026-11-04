@@ -37,9 +37,25 @@ function setSel(id, on, lazy) {
     const el = handEl.querySelector(`.card[data-id="${id}"]`);
     if (el) el.classList.toggle('sel', runtime.selection.has(id));
   };
+  cardEl(id)?.setAttribute('aria-pressed', String(runtime.selection.has(id)));
   if (lazy && !on) setTimeout(show, 360);
   else show();
   renderControls();
+}
+
+export function toggleCardSelection(id) {
+  runtime.lastDown = null;
+  if (!runtime.game.hands[0].some((card) => card.id === id)) return;
+  const picked = !runtime.selection.has(id);
+  for (const member of groupOf(id)) setSel(member, picked, false);
+  Sound.play('select');
+}
+
+export function cancelHandDrag() {
+  runtime.sweep = null;
+  if (!runtime.mv) return;
+  runtime.mv.cancel = true;
+  dropCards();
 }
 
 // picking up a selected card carries the whole selection with it, so a combination can be moved as one block
@@ -193,6 +209,14 @@ function dropCards() {
   if (lm) lm.remove();
   if (!m.active) {
     if (!m.cancel) {
+      if (m.doubleTap && performance.now() - m.t0 < 350) {
+        runtime.selection = new Set(m.previousSelection);
+        for (const id of groupOf(m.id)) runtime.selection.add(id);
+        runtime.lastDown = null;
+        renderHand();
+        if (runtime.game.phase === 'play') onPlay();
+        return;
+      }
       const on = !runtime.selection.has(m.id);
       for (const id of groupOf(m.id)) setSel(id, on, true);
       Sound.play('select');
@@ -297,21 +321,22 @@ export function initialize() {
       return;
     }
     e.preventDefault();
+    el.focus({ preventScroll: true });
     const id = +el.dataset.id,
       t = performance.now();
-    if (runtime.lastDown && runtime.lastDown.id === id && t - runtime.lastDown.t < 350) {
-      // double tap: undo the first tap's toggle, keep this card (or its whole group) in the selection, then play it
-      // (paying or returning a tribute card is never done by a double tap: the card is picked and the button pressed)
-      runtime.selection = new Set(runtime.lastDown.prev);
-      for (const x of groupOf(id)) runtime.selection.add(x);
-      runtime.lastDown = null;
-      renderHand();
-      if (runtime.game.phase === 'play') onPlay();
-      return;
-    }
-    runtime.lastDown = { id, t, prev: [...runtime.selection] };
+    const previous = runtime.lastDown;
+    const doubleTap = !!previous && previous.id === id && t - previous.t < 350;
+    runtime.lastDown = doubleTap ? null : { id, t, prev: [...runtime.selection] };
     // nothing happens until we know what the press is: a tap selects, a drag moves cards
-    runtime.mv = { id, x0: e.clientX, y0: e.clientY, t0: t, active: false };
+    runtime.mv = {
+      id,
+      x0: e.clientX,
+      y0: e.clientY,
+      t0: t,
+      active: false,
+      doubleTap,
+      previousSelection: doubleTap ? previous.prev : null,
+    };
     try {
       handEl.setPointerCapture(e.pointerId);
     } catch (_) {}

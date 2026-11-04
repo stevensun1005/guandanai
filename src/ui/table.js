@@ -14,6 +14,7 @@ import { practiceMidHalf, practicePlays, practiceRender } from '../replay/inspec
 import { practiceGrouped } from '../replay/session.js';
 import { $, displayOrder } from './cards.js';
 import { renderClocks } from './clocks.js';
+import { renderSelectionStatus } from './selection-status.js';
 import { syncPauseBtn } from './overlays.js';
 import {
   PASS_Y,
@@ -251,6 +252,20 @@ export function renderControls() {
   $('#deckBtn').hidden = !deckTurn || !!runtime.game.busy;
   $('#deckBtn').textContent = runtime.game.phase === 'cut' ? '切牌' : '洗牌';
   placeActionBtns();
+  renderSelectionStatus({
+    mode: pay
+      ? 'tribute'
+      : ret
+        ? 'return'
+        : runtime.game.phase === 'prep'
+          ? 'prep'
+          : my || soon
+            ? 'play'
+            : 'wait',
+    current: soon ? null : runtime.game.trick?.play,
+    tributeIds: pay ? tribOptions(0).map((card) => card.id) : [],
+    confirm: !!runtime.confirmation,
+  });
 }
 
 // the table speaks for itself: only things you could not otherwise see get a line here

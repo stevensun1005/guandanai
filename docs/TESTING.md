@@ -1,5 +1,7 @@
 # 验证与复现
 
+选牌与键盘：`python tests/selection_smoke.py` 在三个窗口尺寸操作方向键、选牌、取消、提示和 P 出牌；检查手牌空格不会过牌，桌面 Esc 能取消拖动。Node 同时覆盖牌型、进还贡与等待回合的反馈规则。
+
 复盘练习：`python tests/practice_smoke.py` 验证明牌练习、出牌、评语、导出与跨浏览器导入、旧记录迁移、损坏数据和本机保存失败提示。记录格式边界与限制见 [复盘指南](PRACTICE.md)。
 
 残局检查：Node 测试使用独立的实体牌子集穷举对照；`python tests/endgame_browser_smoke.py` 将真实自对弈中记录的 8 个残局交给浏览器 Worker，并检查风格不会覆盖已证明路线。

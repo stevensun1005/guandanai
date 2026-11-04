@@ -1,5 +1,5 @@
 import { runtime } from '../app/runtime.js';
-import { cmpCards, sortHand, val } from '../core/cards.js';
+import { cardText, cmpCards, isWild, sortHand, val } from '../core/cards.js';
 import { isPhone, layoutHand } from './layout.js';
 import { practiceArrangeMine, practiceGrouped, practiceMine } from '../replay/session.js';
 import { $, cardHTML } from '../ui/cards.js';
@@ -58,6 +58,8 @@ export function renderHand() {
   if (runtime.reviewMode) practiceArrangeMine();
   const el = $('#hand'),
     now = performance.now();
+  const hadFocus = el.contains(document.activeElement);
+  const focusId = hadFocus ? document.activeElement.closest('.card')?.dataset.id : null;
   const fresh = new Set(runtime.game.fresh);
   for (const [id, t] of arrivals) if (now - t > ARRIVE_MS) arrivals.delete(id);
   el.innerHTML = orderedHand()
@@ -71,6 +73,20 @@ export function renderHand() {
       ),
     )
     .join('');
+  const buttons = [...el.children];
+  const focus = buttons.find((card) => card.dataset.id === focusId) || buttons[0];
+  const byId = new Map(runtime.game.hands[0].map((card) => [card.id, card]));
+  for (const button of buttons) {
+    const card = byId.get(+button.dataset.id);
+    button.setAttribute('role', 'button');
+    button.setAttribute(
+      'aria-label',
+      cardText(card) + (isWild(card, runtime.game.L) ? '，逢人配' : ''),
+    );
+    button.setAttribute('aria-pressed', String(runtime.selection.has(card.id)));
+    button.tabIndex = button === focus ? 0 : -1;
+  }
+  if (hadFocus) focus?.focus({ preventScroll: true });
   // a rebuilt hand picks the flashing up where it had got to, rather than starting it again
   for (const [id, t] of arrivals) {
     const c = el.querySelector(`.card[data-id="${id}"]`);

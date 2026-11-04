@@ -10,7 +10,7 @@ import { fanMode, renderHand, vertMode } from '../hand/view.js';
 import { changeOrder } from '../hand/ordering.js';
 import { toggleHandTools, undoHandOrder } from '../hand/tools.js';
 import { miniMode, onHint, onPass, onPlay, onReturn, syncMini } from './actions.js';
-import { fixCards, handEl, reflowHand, unfixCards } from './pointer.js';
+import { cancelHandDrag, fixCards, handEl, reflowHand, unfixCards } from './pointer.js';
 import { VERSION } from '../network/protocol.js';
 import { VC } from '../network/voice.js';
 import { practiceBack } from '../replay/history.js';
@@ -98,6 +98,7 @@ export function startNextIfReady() {
 }
 
 export function clearPicked() {
+  runtime.lastDown = null;
   if (runtime.selection.size) {
     runtime.selection = new Set();
     runtime.hintIdx = 0;
@@ -340,6 +341,13 @@ export function initialize() {
       return;
     }
     if (e.target.closest('#handToolsMenu') || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'Escape' && !runtime.reviewMode) {
+      if (!$('#handToolsMenu').hidden) return;
+      cancelHandDrag();
+      clearPicked();
+      e.preventDefault();
+      return;
+    }
     if (runtime.reviewMode && e.key === 'ArrowLeft') {
       e.preventDefault();
       practiceBack();
@@ -352,7 +360,7 @@ export function initialize() {
       practiceStepGo();
       return;
     }
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key.toLowerCase() === 'p') {
       e.preventDefault();
       runtime.game.phase === 'return' || runtime.game.phase === 'tribPick' || owesReturn(0)
         ? onReturn()

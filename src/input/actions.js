@@ -24,6 +24,10 @@ export function onPlay() {
       setMsg('先选几张牌', true);
       return;
     }
+    if (!analyze(selectedCards(), runtime.game.L).length) {
+      setMsg('这几张牌不成牌型', true);
+      return;
+    }
     if (askConfirm()) return;
     runtime.game.queuedPlay = true;
     setMsg('这一轮的牌收起后马上出');
@@ -96,7 +100,11 @@ export function syncCfmShow() {
     document.body.appendChild(box);
   }
   const cards = selectedCards(),
-    r = analyze(cards, runtime.game.L)[0],
+    current =
+      runtime.game.turn === -1 && runtime.game.nextLeader === 0 ? null : runtime.game.trick?.play,
+    r = analyze(cards, runtime.game.L)
+      .filter((shape) => beats(shape, current))
+      .sort((a, b) => strength(b) - strength(a))[0],
     shown = r ? displayOrder({ ...r, cards }, runtime.game.L) : cards,
     n = shown.length;
   const t = $('#table').getBoundingClientRect(),

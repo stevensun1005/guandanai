@@ -152,6 +152,12 @@
           </button>
         </div>
       </div>
+      <div class="selection-bar" id="selectionBar" hidden>
+        <output id="selectionStatus" aria-live="polite" aria-atomic="true"></output>
+        <button class="link" id="selectionClear" type="button" title="取消选择（Esc）" hidden>
+          取消选择
+        </button>
+      </div>
       <div class="handwrap">
         <div class="btns" id="btns">
           <button class="btn primary round" id="playBtn">出牌</button>
@@ -160,7 +166,7 @@
           <button class="btn round" id="passBtn">过</button>
           <button class="btn round" id="clearBtn">重选</button>
         </div>
-        <div id="hand"></div>
+        <div id="hand" role="group" aria-label="你的手牌：左右键浏览，空格或回车选牌，P 出牌"></div>
         <div class="handtools">
           <button class="link" id="fixBtn" title="把选中的牌放进左边的成组区，作为你拟定的一组牌">
             成组</button
