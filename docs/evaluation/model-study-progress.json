@@ -34499,16 +34499,28 @@
         "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
       },
       "startedAt": "2026-11-04T19:24:41.516Z",
-      "updatedAt": "2026-11-04T19:24:46.640Z",
+      "updatedAt": "2026-11-04T19:25:41.634Z",
       "stoppedAt": null,
       "stopReason": null,
-      "elapsedSeconds": 5.124,
+      "elapsedSeconds": 60.118,
       "totals": {
-        "matches": 22,
-        "decisions": 11159,
-        "rows": 11159
+        "matches": 321,
+        "decisions": 158220,
+        "rows": 158220
       },
-      "learner": null,
+      "learner": {
+        "pid": 51572,
+        "state": "waiting-for-data",
+        "step": 196,
+        "version": "v000000000",
+        "buffer": 100598,
+        "ingestedRows": 100598,
+        "trainedRows": 401408,
+        "lossEMA": 3.3777205470752563,
+        "replayRatio": 3.9902184934094116,
+        "stepsPerSecond": 3.558250340172236,
+        "updatedAt": "2026-11-04T19:25:40Z"
+      },
       "latest": {
         "version": "v000000000",
         "file": "v000000000.onnx",
@@ -34555,7 +34567,7 @@
         "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
         "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
       },
-      "statusSHA256": "4bfaee4023fd138e623cbe86fb81decaf3096054c42ae380d6379056ebe7982a",
+      "statusSHA256": "82d662472e2d295399ec8e2c1743a01ead3764e51d30d160e7d75a8b5200d9c7",
       "eventsSHA256": "41f2e17f9d3a4b0c93ba68a3a006b3d495d94fc959b5f864a176800f10c5b435",
       "gates": [],
       "anchorChecks": [],
@@ -36002,6 +36014,6 @@
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
     }
   },
-  "fingerprint": "fce37f5f4158ba20822100d32435639410dbd1c1283a871de7dcd45bb7983001",
-  "observedUTC": "2026-11-04T19:24:57.974148+00:00"
+  "fingerprint": "98882c7aeb8eca756e5e566d13f10ac9a54f943310bd276892a8b818a95ba97f",
+  "observedUTC": "2026-11-04T19:25:57.428960+00:00"
 }
