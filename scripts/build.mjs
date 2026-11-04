@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const read = name => readFile(path.join(root, name), 'utf8');
+const read = async name => (await readFile(path.join(root, name), 'utf8')).replace(/\r\n/g, '\n');
 let html = await read('src/game.html');
 const css = await read('src/layout.css'), bridge = await read('src/table-bot.js');
 const version = createHash('sha256').update(html + css + bridge + await read('src/ai/encoding.mjs') + await read('src/ai/worker.mjs')).digest('hex').slice(0, 10);
