@@ -93,7 +93,12 @@ export function advanceRound(game, play) {
   return null;
 }
 
-export async function simulateRound(seed, styles, infer, onDecision = () => {}) {
+export async function simulateRound(
+  seed,
+  styles,
+  infer,
+  { onDecision = () => {}, onAction = null, selectAction = selectProfileAction } = {},
+) {
   const game = createRound(seed);
   const stats = {
     decisions: 0,
@@ -130,7 +135,7 @@ export async function simulateRound(seed, styles, infer, onDecision = () => {}) 
         'balanced',
         decisionContext(game, player),
       );
-      selected = selectProfileAction(plays, values, style, decisionContext(game, player));
+      selected = await selectAction(plays, values, style, decisionContext(game, player));
       if (style === 'endgame') {
         state.endgame = endgameRequest(game, player, plays);
         if (state.endgame) {
@@ -166,6 +171,7 @@ export async function simulateRound(seed, styles, infer, onDecision = () => {}) 
         if (['bomb', 'sflush', 'jokers'].includes(play.type)) stats.bombs++;
       }
     }
+    if (onAction) onAction({ context: decisionContext(game, player), play });
     const result = advanceRound(game, play);
     if (result) return { ...result, turns: turn + 1, stats };
   }

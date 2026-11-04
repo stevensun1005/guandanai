@@ -2,6 +2,8 @@
 
 跨局联机：`python tests/multiround_smoke.py` 用同机四个独立 Chrome 上下文和公共 PeerJS 信令连续操作三局，包含非南位房主、升级、进还贡与一次模型超时托管。[已记录结果](evaluation/multiplayer-1.6.1.json) 共 232 手，四端结算一致。它不替代不同设备与不同网络的长时间比赛。
 
+真人与电脑混合：`python tests/multiround_smoke.py http://127.0.0.1:8765/ 3 2` 连续三局，两个独立玩家端加观察、稳健电脑，共 247 手；[记录](evaluation/multiplayer-mixed-1.7.0.json) 检查跨局交换、同步和加入者不下载模型。
+
 交换牌：`python tests/tribute_smoke.py` 同时覆盖普通手牌、全高牌、电脑合法还贡和动画中立即开打，检查两端逻辑交换后仍有完整的 108 张实体牌。
 
 选牌与键盘：`python tests/selection_smoke.py` 在三个窗口尺寸操作方向键、选牌、取消、提示和 P 出牌；检查手牌空格不会过牌，桌面 Esc 能取消拖动。Node 同时覆盖牌型、进还贡与等待回合的反馈规则。
@@ -13,6 +15,8 @@
 电脑配置检查：`python tests/bot_setup_smoke.py`，覆盖三个窗口尺寸、四种玩家座位与本机偏好保存。`browser_smoke.py` 还检查房主风格同步及真实 Worker 风格决策。批量棋力与行为验证见 [电脑对手](BOTS.md)。
 
 理牌操作可单独验证：`python tests/hand_tools_smoke.py`。它在 1440×1000、390×844 和 844×390 三种窗口内操作理牌菜单，检查手动成组保留、实体牌完整、撤销与弹层边界。
+
+双模型检查：`python tests/response_browser_smoke.py` 核对 24 个实际局面中的主策略、第二网络概率、控制器最终选牌与应牌模型资源失败重试。Node 覆盖条件模型不改变出／过、不读取其他家隐藏牌及张量释放。训练与批量对战命令见 [模型训练](MODEL_TRAINING.md)。
 
 ## 日常检查
 
@@ -35,7 +39,7 @@ Node 检查不要求 Python：
 先启动本地预览，另开终端：
 
 ```bash
-python -m pip install numpy onnx playwright
+python -m pip install numpy onnx onnxruntime playwright
 python tests/production_smoke.py
 python tests/browser_smoke.py
 ```

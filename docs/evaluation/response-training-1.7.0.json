@@ -1,0 +1,850 @@
+{
+  "dataset": {
+    "featureVersion": 1,
+    "features": 253,
+    "rowFloats": 255,
+    "rows": 167659,
+    "games": 5000,
+    "seed": 20270104,
+    "positives": 77700,
+    "positiveRate": 0.46344067422566043,
+    "split": "gameIndex % 10: test 0, validation 1, training 2..9",
+    "teacherPolicySHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "profileSHA256": "8876890e9235d0b5b989f502757463258cd509f36066af93c8bc0f009dae5562",
+    "featureSHA256": "17070a8bdbd23dcf83f772242d72a2a36860e9e7f9e1fd45b9efb96d7a253908",
+    "elapsedSeconds": 509.0515072
+  },
+  "seed": 74291,
+  "splitGames": {
+    "train": 4000,
+    "validation": 500,
+    "test": 500
+  },
+  "constantBaselineTest": {
+    "rows": 16769,
+    "positiveRate": 0.46252012252807617,
+    "brier": 0.24859532907987933,
+    "logLoss": 0.6903352025092211,
+    "auc": 0.5,
+    "accuracy": 0.5374798735762418,
+    "calibration": [
+      {
+        "count": 16769,
+        "predicted": 0.46278470754623413,
+        "observed": 0.46252012252807617
+      }
+    ]
+  },
+  "models": {
+    "response-linear": {
+      "architecture": [
+        253,
+        1
+      ],
+      "bestEpoch": 60,
+      "elapsedSeconds": 1.9125511000020197,
+      "history": [
+        {
+          "epoch": 1,
+          "validationLogLoss": 0.6153888702392578,
+          "validationBrier": 0.21303319931030273
+        },
+        {
+          "epoch": 2,
+          "validationLogLoss": 0.5775678753852844,
+          "validationBrier": 0.19613751769065857
+        },
+        {
+          "epoch": 3,
+          "validationLogLoss": 0.5565488934516907,
+          "validationBrier": 0.18742358684539795
+        },
+        {
+          "epoch": 4,
+          "validationLogLoss": 0.5438913702964783,
+          "validationBrier": 0.1823558658361435
+        },
+        {
+          "epoch": 5,
+          "validationLogLoss": 0.5353615283966064,
+          "validationBrier": 0.17917533218860626
+        },
+        {
+          "epoch": 6,
+          "validationLogLoss": 0.5292174220085144,
+          "validationBrier": 0.17683276534080505
+        },
+        {
+          "epoch": 7,
+          "validationLogLoss": 0.5243493318557739,
+          "validationBrier": 0.17494580149650574
+        },
+        {
+          "epoch": 8,
+          "validationLogLoss": 0.5206779837608337,
+          "validationBrier": 0.17355726659297943
+        },
+        {
+          "epoch": 9,
+          "validationLogLoss": 0.5178267955780029,
+          "validationBrier": 0.1725654900074005
+        },
+        {
+          "epoch": 10,
+          "validationLogLoss": 0.5153341889381409,
+          "validationBrier": 0.17155766487121582
+        },
+        {
+          "epoch": 11,
+          "validationLogLoss": 0.5132811069488525,
+          "validationBrier": 0.17081917822360992
+        },
+        {
+          "epoch": 12,
+          "validationLogLoss": 0.5113697648048401,
+          "validationBrier": 0.17004714906215668
+        },
+        {
+          "epoch": 13,
+          "validationLogLoss": 0.5099111199378967,
+          "validationBrier": 0.16953855752944946
+        },
+        {
+          "epoch": 14,
+          "validationLogLoss": 0.5088469982147217,
+          "validationBrier": 0.16909626126289368
+        },
+        {
+          "epoch": 15,
+          "validationLogLoss": 0.5076645016670227,
+          "validationBrier": 0.16867651045322418
+        },
+        {
+          "epoch": 16,
+          "validationLogLoss": 0.506744921207428,
+          "validationBrier": 0.16832800209522247
+        },
+        {
+          "epoch": 17,
+          "validationLogLoss": 0.5059711933135986,
+          "validationBrier": 0.16802501678466797
+        },
+        {
+          "epoch": 18,
+          "validationLogLoss": 0.5062289237976074,
+          "validationBrier": 0.16804955899715424
+        },
+        {
+          "epoch": 19,
+          "validationLogLoss": 0.5045634508132935,
+          "validationBrier": 0.167592391371727
+        },
+        {
+          "epoch": 20,
+          "validationLogLoss": 0.5038819909095764,
+          "validationBrier": 0.16732777655124664
+        },
+        {
+          "epoch": 21,
+          "validationLogLoss": 0.5035297870635986,
+          "validationBrier": 0.16714949905872345
+        },
+        {
+          "epoch": 22,
+          "validationLogLoss": 0.5029779076576233,
+          "validationBrier": 0.16700159013271332
+        },
+        {
+          "epoch": 23,
+          "validationLogLoss": 0.502408504486084,
+          "validationBrier": 0.16676358878612518
+        },
+        {
+          "epoch": 24,
+          "validationLogLoss": 0.5021520853042603,
+          "validationBrier": 0.16668201982975006
+        },
+        {
+          "epoch": 25,
+          "validationLogLoss": 0.5020462274551392,
+          "validationBrier": 0.16658249497413635
+        },
+        {
+          "epoch": 26,
+          "validationLogLoss": 0.5014785528182983,
+          "validationBrier": 0.16646811366081238
+        },
+        {
+          "epoch": 27,
+          "validationLogLoss": 0.5011061429977417,
+          "validationBrier": 0.16630753874778748
+        },
+        {
+          "epoch": 28,
+          "validationLogLoss": 0.5014126300811768,
+          "validationBrier": 0.16635921597480774
+        },
+        {
+          "epoch": 29,
+          "validationLogLoss": 0.5004962086677551,
+          "validationBrier": 0.16612206399440765
+        },
+        {
+          "epoch": 30,
+          "validationLogLoss": 0.500251829624176,
+          "validationBrier": 0.16600151360034943
+        },
+        {
+          "epoch": 31,
+          "validationLogLoss": 0.5002887845039368,
+          "validationBrier": 0.16597501933574677
+        },
+        {
+          "epoch": 32,
+          "validationLogLoss": 0.4998372495174408,
+          "validationBrier": 0.16586685180664062
+        },
+        {
+          "epoch": 33,
+          "validationLogLoss": 0.5001725554466248,
+          "validationBrier": 0.16592110693454742
+        },
+        {
+          "epoch": 34,
+          "validationLogLoss": 0.4995170533657074,
+          "validationBrier": 0.16574257612228394
+        },
+        {
+          "epoch": 35,
+          "validationLogLoss": 0.4992813169956207,
+          "validationBrier": 0.16571044921875
+        },
+        {
+          "epoch": 36,
+          "validationLogLoss": 0.4991535246372223,
+          "validationBrier": 0.16575215756893158
+        },
+        {
+          "epoch": 37,
+          "validationLogLoss": 0.4988941252231598,
+          "validationBrier": 0.16554057598114014
+        },
+        {
+          "epoch": 38,
+          "validationLogLoss": 0.49878618121147156,
+          "validationBrier": 0.16551968455314636
+        },
+        {
+          "epoch": 39,
+          "validationLogLoss": 0.49868348240852356,
+          "validationBrier": 0.16546645760536194
+        },
+        {
+          "epoch": 40,
+          "validationLogLoss": 0.4985620379447937,
+          "validationBrier": 0.1654214709997177
+        },
+        {
+          "epoch": 41,
+          "validationLogLoss": 0.4984845221042633,
+          "validationBrier": 0.16537347435951233
+        },
+        {
+          "epoch": 42,
+          "validationLogLoss": 0.49841228127479553,
+          "validationBrier": 0.165335550904274
+        },
+        {
+          "epoch": 43,
+          "validationLogLoss": 0.4982805848121643,
+          "validationBrier": 0.16531231999397278
+        },
+        {
+          "epoch": 44,
+          "validationLogLoss": 0.4980008006095886,
+          "validationBrier": 0.16522322595119476
+        },
+        {
+          "epoch": 45,
+          "validationLogLoss": 0.49810606241226196,
+          "validationBrier": 0.16523702442646027
+        },
+        {
+          "epoch": 46,
+          "validationLogLoss": 0.4979589283466339,
+          "validationBrier": 0.16518808901309967
+        },
+        {
+          "epoch": 47,
+          "validationLogLoss": 0.4976429045200348,
+          "validationBrier": 0.16514624655246735
+        },
+        {
+          "epoch": 48,
+          "validationLogLoss": 0.4975561797618866,
+          "validationBrier": 0.16508062183856964
+        },
+        {
+          "epoch": 49,
+          "validationLogLoss": 0.4973946511745453,
+          "validationBrier": 0.16506017744541168
+        },
+        {
+          "epoch": 50,
+          "validationLogLoss": 0.49740880727767944,
+          "validationBrier": 0.16503608226776123
+        },
+        {
+          "epoch": 51,
+          "validationLogLoss": 0.4972527027130127,
+          "validationBrier": 0.16497768461704254
+        },
+        {
+          "epoch": 52,
+          "validationLogLoss": 0.4973125755786896,
+          "validationBrier": 0.1650722622871399
+        },
+        {
+          "epoch": 53,
+          "validationLogLoss": 0.49711570143699646,
+          "validationBrier": 0.16492760181427002
+        },
+        {
+          "epoch": 54,
+          "validationLogLoss": 0.4971178472042084,
+          "validationBrier": 0.16492855548858643
+        },
+        {
+          "epoch": 55,
+          "validationLogLoss": 0.49713659286499023,
+          "validationBrier": 0.1649160236120224
+        },
+        {
+          "epoch": 56,
+          "validationLogLoss": 0.49693629145622253,
+          "validationBrier": 0.16487139463424683
+        },
+        {
+          "epoch": 57,
+          "validationLogLoss": 0.49686166644096375,
+          "validationBrier": 0.16485492885112762
+        },
+        {
+          "epoch": 58,
+          "validationLogLoss": 0.4976041615009308,
+          "validationBrier": 0.1650349497795105
+        },
+        {
+          "epoch": 59,
+          "validationLogLoss": 0.49709466099739075,
+          "validationBrier": 0.164886474609375
+        },
+        {
+          "epoch": 60,
+          "validationLogLoss": 0.49666109681129456,
+          "validationBrier": 0.1647791862487793
+        }
+      ],
+      "splits": {
+        "train": {
+          "rows": 134125,
+          "positiveRate": 0.46278470754623413,
+          "brier": 0.16355976462364197,
+          "logLoss": 0.4951346814632416,
+          "auc": 0.8377782791703173,
+          "accuracy": 0.7572190121155639,
+          "calibration": [
+            {
+              "count": 17387,
+              "predicted": 0.050938207656145096,
+              "observed": 0.06964974105358124
+            },
+            {
+              "count": 14231,
+              "predicted": 0.14997218549251556,
+              "observed": 0.1445436030626297
+            },
+            {
+              "count": 14244,
+              "predicted": 0.24963916838169098,
+              "observed": 0.2333614081144333
+            },
+            {
+              "count": 14035,
+              "predicted": 0.34981870651245117,
+              "observed": 0.32668328285217285
+            },
+            {
+              "count": 14078,
+              "predicted": 0.45017457008361816,
+              "observed": 0.4308140277862549
+            },
+            {
+              "count": 13692,
+              "predicted": 0.548826277256012,
+              "observed": 0.5476190447807312
+            },
+            {
+              "count": 12503,
+              "predicted": 0.6500052213668823,
+              "observed": 0.6384067535400391
+            },
+            {
+              "count": 12506,
+              "predicted": 0.7496832609176636,
+              "observed": 0.7659523487091064
+            },
+            {
+              "count": 12012,
+              "predicted": 0.8493956923484802,
+              "observed": 0.8842824101448059
+            },
+            {
+              "count": 9437,
+              "predicted": 0.9389040470123291,
+              "observed": 0.9693758487701416
+            }
+          ]
+        },
+        "validation": {
+          "rows": 16765,
+          "positiveRate": 0.4696092903614044,
+          "brier": 0.1647791862487793,
+          "logLoss": 0.49666109681129456,
+          "auc": 0.8359572387312098,
+          "accuracy": 0.751744706233224,
+          "calibration": [
+            {
+              "count": 2146,
+              "predicted": 0.050417352467775345,
+              "observed": 0.0661696195602417
+            },
+            {
+              "count": 1797,
+              "predicted": 0.14882290363311768,
+              "observed": 0.1424596607685089
+            },
+            {
+              "count": 1762,
+              "predicted": 0.25006622076034546,
+              "observed": 0.24347332119941711
+            },
+            {
+              "count": 1696,
+              "predicted": 0.3506443202495575,
+              "observed": 0.35141509771347046
+            },
+            {
+              "count": 1827,
+              "predicted": 0.449063241481781,
+              "observed": 0.4521072804927826
+            },
+            {
+              "count": 1674,
+              "predicted": 0.5492660403251648,
+              "observed": 0.5471923351287842
+            },
+            {
+              "count": 1527,
+              "predicted": 0.6502171158790588,
+              "observed": 0.6339226961135864
+            },
+            {
+              "count": 1596,
+              "predicted": 0.7497922778129578,
+              "observed": 0.7669172883033752
+            },
+            {
+              "count": 1553,
+              "predicted": 0.8499179482460022,
+              "observed": 0.881519615650177
+            },
+            {
+              "count": 1187,
+              "predicted": 0.9388062357902527,
+              "observed": 0.9663016200065613
+            }
+          ]
+        },
+        "test": {
+          "rows": 16769,
+          "positiveRate": 0.46252012252807617,
+          "brier": 0.16334490478038788,
+          "logLoss": 0.4935765564441681,
+          "auc": 0.8383240568162188,
+          "accuracy": 0.7575287733317431,
+          "calibration": [
+            {
+              "count": 2164,
+              "predicted": 0.050767745822668076,
+              "observed": 0.06700554490089417
+            },
+            {
+              "count": 1864,
+              "predicted": 0.15058092772960663,
+              "observed": 0.14484979212284088
+            },
+            {
+              "count": 1694,
+              "predicted": 0.24990347027778625,
+              "observed": 0.22904367744922638
+            },
+            {
+              "count": 1773,
+              "predicted": 0.35024553537368774,
+              "observed": 0.3310772776603699
+            },
+            {
+              "count": 1756,
+              "predicted": 0.4488922357559204,
+              "observed": 0.4339407682418823
+            },
+            {
+              "count": 1705,
+              "predicted": 0.5483844876289368,
+              "observed": 0.5501466393470764
+            },
+            {
+              "count": 1588,
+              "predicted": 0.6497572064399719,
+              "observed": 0.6473551392555237
+            },
+            {
+              "count": 1559,
+              "predicted": 0.750350296497345,
+              "observed": 0.7543296813964844
+            },
+            {
+              "count": 1511,
+              "predicted": 0.8500769138336182,
+              "observed": 0.885506272315979
+            },
+            {
+              "count": 1155,
+              "predicted": 0.9386594295501709,
+              "observed": 0.9731601476669312
+            }
+          ]
+        }
+      },
+      "exportMaxError": 1.7881393432617188e-07,
+      "modelSHA256": "8d2d69b8338e148b406cd2d4559a5417e5a9ba968db37f8b419940136b73cf34"
+    },
+    "response-small": {
+      "architecture": [
+        253,
+        64,
+        32,
+        1
+      ],
+      "bestEpoch": 16,
+      "elapsedSeconds": 4.637228900006448,
+      "history": [
+        {
+          "epoch": 1,
+          "validationLogLoss": 0.5065906643867493,
+          "validationBrier": 0.16827775537967682
+        },
+        {
+          "epoch": 2,
+          "validationLogLoss": 0.49385491013526917,
+          "validationBrier": 0.16394458711147308
+        },
+        {
+          "epoch": 3,
+          "validationLogLoss": 0.48681190609931946,
+          "validationBrier": 0.16153724491596222
+        },
+        {
+          "epoch": 4,
+          "validationLogLoss": 0.4846526086330414,
+          "validationBrier": 0.1607000082731247
+        },
+        {
+          "epoch": 5,
+          "validationLogLoss": 0.4767760932445526,
+          "validationBrier": 0.1577315777540207
+        },
+        {
+          "epoch": 6,
+          "validationLogLoss": 0.4734806716442108,
+          "validationBrier": 0.15640459954738617
+        },
+        {
+          "epoch": 7,
+          "validationLogLoss": 0.47224703431129456,
+          "validationBrier": 0.15596692264080048
+        },
+        {
+          "epoch": 8,
+          "validationLogLoss": 0.47339707612991333,
+          "validationBrier": 0.156575545668602
+        },
+        {
+          "epoch": 9,
+          "validationLogLoss": 0.46916499733924866,
+          "validationBrier": 0.15497757494449615
+        },
+        {
+          "epoch": 10,
+          "validationLogLoss": 0.46770384907722473,
+          "validationBrier": 0.1544427126646042
+        },
+        {
+          "epoch": 11,
+          "validationLogLoss": 0.473900705575943,
+          "validationBrier": 0.15675665438175201
+        },
+        {
+          "epoch": 12,
+          "validationLogLoss": 0.4652572274208069,
+          "validationBrier": 0.15352468192577362
+        },
+        {
+          "epoch": 13,
+          "validationLogLoss": 0.4663808047771454,
+          "validationBrier": 0.15386806428432465
+        },
+        {
+          "epoch": 14,
+          "validationLogLoss": 0.46559908986091614,
+          "validationBrier": 0.15382353961467743
+        },
+        {
+          "epoch": 15,
+          "validationLogLoss": 0.465706467628479,
+          "validationBrier": 0.15381424129009247
+        },
+        {
+          "epoch": 16,
+          "validationLogLoss": 0.4650595486164093,
+          "validationBrier": 0.1533208042383194
+        },
+        {
+          "epoch": 17,
+          "validationLogLoss": 0.4661928713321686,
+          "validationBrier": 0.15405821800231934
+        },
+        {
+          "epoch": 18,
+          "validationLogLoss": 0.46657201647758484,
+          "validationBrier": 0.15408745408058167
+        },
+        {
+          "epoch": 19,
+          "validationLogLoss": 0.4653524160385132,
+          "validationBrier": 0.15379305183887482
+        },
+        {
+          "epoch": 20,
+          "validationLogLoss": 0.46550795435905457,
+          "validationBrier": 0.15377120673656464
+        },
+        {
+          "epoch": 21,
+          "validationLogLoss": 0.4656888544559479,
+          "validationBrier": 0.15385720133781433
+        },
+        {
+          "epoch": 22,
+          "validationLogLoss": 0.4733913540840149,
+          "validationBrier": 0.1570432037115097
+        },
+        {
+          "epoch": 23,
+          "validationLogLoss": 0.4668179154396057,
+          "validationBrier": 0.15438497066497803
+        },
+        {
+          "epoch": 24,
+          "validationLogLoss": 0.46582987904548645,
+          "validationBrier": 0.1539793610572815
+        }
+      ],
+      "splits": {
+        "train": {
+          "rows": 134125,
+          "positiveRate": 0.46278470754623413,
+          "brier": 0.1468738615512848,
+          "logLoss": 0.44880789518356323,
+          "auc": 0.8696530129392658,
+          "accuracy": 0.7824790307548928,
+          "calibration": [
+            {
+              "count": 19700,
+              "predicted": 0.05173955112695694,
+              "observed": 0.033908627927303314
+            },
+            {
+              "count": 14432,
+              "predicted": 0.14798833429813385,
+              "observed": 0.11717017740011215
+            },
+            {
+              "count": 13040,
+              "predicted": 0.2499849498271942,
+              "observed": 0.21342024207115173
+            },
+            {
+              "count": 13113,
+              "predicted": 0.3501385450363159,
+              "observed": 0.3268512189388275
+            },
+            {
+              "count": 12890,
+              "predicted": 0.44950205087661743,
+              "observed": 0.4437548518180847
+            },
+            {
+              "count": 11845,
+              "predicted": 0.549513578414917,
+              "observed": 0.544786810874939
+            },
+            {
+              "count": 10619,
+              "predicted": 0.6493039727210999,
+              "observed": 0.648460328578949
+            },
+            {
+              "count": 9984,
+              "predicted": 0.75033038854599,
+              "observed": 0.7521033883094788
+            },
+            {
+              "count": 11439,
+              "predicted": 0.8519725203514099,
+              "observed": 0.8551446795463562
+            },
+            {
+              "count": 17063,
+              "predicted": 0.9524417519569397,
+              "observed": 0.9548731446266174
+            }
+          ]
+        },
+        "validation": {
+          "rows": 16765,
+          "positiveRate": 0.4696092903614044,
+          "brier": 0.1533208042383194,
+          "logLoss": 0.4650595486164093,
+          "auc": 0.8581355894483038,
+          "accuracy": 0.7688040560691918,
+          "calibration": [
+            {
+              "count": 2422,
+              "predicted": 0.051436323672533035,
+              "observed": 0.041701074689626694
+            },
+            {
+              "count": 1775,
+              "predicted": 0.14727236330509186,
+              "observed": 0.13239437341690063
+            },
+            {
+              "count": 1615,
+              "predicted": 0.2492871880531311,
+              "observed": 0.22600619494915009
+            },
+            {
+              "count": 1671,
+              "predicted": 0.35044217109680176,
+              "observed": 0.3596648573875427
+            },
+            {
+              "count": 1577,
+              "predicted": 0.4501132369041443,
+              "observed": 0.4565630853176117
+            },
+            {
+              "count": 1431,
+              "predicted": 0.5495392084121704,
+              "observed": 0.5206149816513062
+            },
+            {
+              "count": 1366,
+              "predicted": 0.6509156823158264,
+              "observed": 0.6398243308067322
+            },
+            {
+              "count": 1259,
+              "predicted": 0.7504655122756958,
+              "observed": 0.7347100973129272
+            },
+            {
+              "count": 1418,
+              "predicted": 0.8522419929504395,
+              "observed": 0.8448519110679626
+            },
+            {
+              "count": 2231,
+              "predicted": 0.9511626958847046,
+              "observed": 0.9453160166740417
+            }
+          ]
+        },
+        "test": {
+          "rows": 16769,
+          "positiveRate": 0.46252012252807617,
+          "brier": 0.15320561826229095,
+          "logLoss": 0.4650387763977051,
+          "auc": 0.8578492675784855,
+          "accuracy": 0.7716023615003876,
+          "calibration": [
+            {
+              "count": 2530,
+              "predicted": 0.051460132002830505,
+              "observed": 0.041897233575582504
+            },
+            {
+              "count": 1847,
+              "predicted": 0.14836116135120392,
+              "observed": 0.13589604198932648
+            },
+            {
+              "count": 1536,
+              "predicted": 0.25008776783943176,
+              "observed": 0.25390625
+            },
+            {
+              "count": 1637,
+              "predicted": 0.34910479187965393,
+              "observed": 0.3304826021194458
+            },
+            {
+              "count": 1625,
+              "predicted": 0.44953837990760803,
+              "observed": 0.43569231033325195
+            },
+            {
+              "count": 1466,
+              "predicted": 0.5478881001472473,
+              "observed": 0.5354706645011902
+            },
+            {
+              "count": 1329,
+              "predicted": 0.6505262851715088,
+              "observed": 0.6440932750701904
+            },
+            {
+              "count": 1254,
+              "predicted": 0.7499964833259583,
+              "observed": 0.7320573925971985
+            },
+            {
+              "count": 1419,
+              "predicted": 0.8517670035362244,
+              "observed": 0.8393234610557556
+            },
+            {
+              "count": 2126,
+              "predicted": 0.9520362019538879,
+              "observed": 0.9454374313354492
+            }
+          ]
+        }
+      },
+      "exportMaxError": 1.7881393432617188e-07,
+      "modelSHA256": "fbfc15062dc7ad03886f3b066e1646ed89a6de61885d1976d78c5a047548d2fc"
+    }
+  }
+}

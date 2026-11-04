@@ -23,7 +23,7 @@ def main():
         context=browser.new_context(viewport={'width':1440,'height':1000},permissions=['clipboard-read','clipboard-write'])
         context.add_init_script("localStorage.setItem('guandan-ai','rules')")
         context.add_init_script("""const NativeWorker=Worker;window.styleDecisions=0;
-          window.Worker=class extends NativeWorker{postMessage(data,...rest){if(data.type==='decide'&&data.state?.includeValues)window.styleDecisions++;return super.postMessage(data,...rest)}};""")
+          window.Worker=class extends NativeWorker{postMessage(data,...rest){if(data.type==='decide'&&data.state?.profile&&data.state.profile!=='balanced')window.styleDecisions++;return super.postMessage(data,...rest)}};""")
         host=context.new_page();errors=[];api=[]
         host.on('pageerror',lambda error:errors.append(str(error)))
         host.on('request',lambda request:api.append(request.url) if '/api/' in request.url else None)

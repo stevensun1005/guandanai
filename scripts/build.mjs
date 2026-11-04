@@ -3,6 +3,7 @@ import { build } from 'esbuild';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { MODELS } from '../src/ai/models.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = async (name) => (await readFile(path.join(root, name), 'utf8')).replace(/\r\n/g, '\n');
@@ -23,9 +24,13 @@ for (const file of await sourceFiles('src')) {
     /\.(js|mjs|css|html)$/.test(file) ? await read(file) : await readFile(path.join(root, file)),
   );
 }
-const modelBytes = await readFile(path.join(root, 'ai/policy.onnx'));
-const modelVersion = createHash('sha256').update(modelBytes).digest('hex').slice(0, 16);
-const version = hash.update(modelBytes).digest('hex').slice(0, 10);
+const modelVersions = {};
+for (const [key, model] of Object.entries(MODELS)) {
+  const bytes = await readFile(path.join(root, 'ai', model.file));
+  modelVersions[key] = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
+  hash.update(key).update(bytes);
+}
+const version = hash.digest('hex').slice(0, 10);
 const html = (await read('src/index.html')).replaceAll('__APP_VERSION__', version);
 for (const dir of ['dist/assets/vendor', 'dist/models'])
   await mkdir(path.join(root, dir), { recursive: true });
@@ -45,7 +50,6 @@ await build({
 });
 const copies = {
   'src/ai/encoding.mjs': 'dist/assets/encoding.mjs',
-  'ai/policy.onnx': 'dist/models/policy.onnx',
   'node_modules/peerjs/dist/peerjs.min.js': 'dist/assets/vendor/peerjs.min.js',
   'node_modules/onnxruntime-web/dist/ort.wasm.min.mjs': 'dist/assets/vendor/ort.wasm.min.mjs',
   'node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.mjs':
@@ -64,8 +68,9 @@ await build({
   sourcemap: 'external',
   charset: 'utf8',
   external: ['./vendor/*'],
-  define: { __MODEL_VERSION__: JSON.stringify(modelVersion) },
+  define: { __MODEL_VERSIONS__: JSON.stringify(modelVersions) },
 });
+for (const model of Object.values(MODELS)) copies['ai/' + model.file] = 'dist/models/' + model.file;
 for (const [from, to] of Object.entries(copies))
   await copyFile(path.join(root, from), path.join(root, to));
 await writeFile(path.join(root, 'dist/.nojekyll'), '');

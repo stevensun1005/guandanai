@@ -2,7 +2,6 @@ import { runtime } from '../app/runtime.js';
 import { beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 import { decisionContext, policyState } from './observation.js';
-import { selectProfileAction } from './profiles.js';
 import { endgameRequest } from './endgame.js';
 import { act, playEvt } from '../game/events.js';
 import { isHost } from '../game/session.js';
@@ -100,17 +99,19 @@ export function initialize() {
       if (plays.length === 1) return plays[0];
       const style = runtime.botStyles?.[(p + runtime.network.off) % 4] || 'balanced';
       const input = state(p, plays);
-      input.includeValues = style !== 'balanced';
+      input.profile = style;
+      if (style !== 'balanced') {
+        input.context = decisionContext(runtime.game, p);
+        input.actionShapes = plays.map(
+          (play) => play && { type: play.type, value: play.value, n: play.n, wu: play.wu },
+        );
+      }
       input.endgame = endgameRequest(runtime.game, p, plays);
       const result = await request('decide', input);
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)
         throw new Error('invalid-action');
-      const index =
-        input.includeValues && !result.endgame?.winning
-          ? selectProfileAction(plays, result.values, style, decisionContext(runtime.game, p))
-          : result.index;
-      const pl = plays[index];
+      const pl = plays[result.index];
       if (
         pl &&
         (!pl.cards.every((c) => runtime.game.hands[p].includes(c)) ||

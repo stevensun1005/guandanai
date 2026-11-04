@@ -31,7 +31,7 @@ export const BOT_PROFILES = Object.freeze([
 export const profileId = (value) =>
   BOT_PROFILES.some((profile) => profile.id === value) ? value : 'balanced';
 
-function preference(play, style, context, observed) {
+function preference(play, style, context, observed, responseRisk = null) {
   const { p, hand, counts, level, trick } = context;
   const mate = (p + 2) % 4;
   const opponents = [(p + 1) % 4, (p + 3) % 4].filter((seat) => counts[seat] > 0);
@@ -67,7 +67,7 @@ function preference(play, style, context, observed) {
       score += (0.018 * (bucket.passes - bucket.responds)) / (total + 6);
     }
   if (partnerLeading && counts[mate] <= 3) score -= 0.012;
-  return score;
+  return score + (Number.isFinite(responseRisk) ? 0.025 * (0.5 - responseRisk) : 0);
 }
 
 /** Styles only choose among actions close to the learned policy's best value. */
@@ -93,6 +93,20 @@ export function selectProfileAction(plays, values, requestedStyle, context) {
     if (candidate > score) {
       score = candidate;
       chosen = index;
+    }
+  }
+  // A conditional response prediction cannot tell us whether passing is better.
+  if (style === 'observant' && plays[chosen] && context.responseRisks) {
+    score = -Infinity;
+    for (let index = 0; index < plays.length; index++) {
+      if (!plays[index] || values[index] < floor) continue;
+      const candidate =
+        values[index] +
+        preference(plays[index], style, context, observed, context.responseRisks[index]);
+      if (candidate > score) {
+        score = candidate;
+        chosen = index;
+      }
     }
   }
   return chosen;

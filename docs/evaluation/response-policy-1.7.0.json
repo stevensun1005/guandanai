@@ -1,0 +1,20 @@
+{
+  "pairs": 3000,
+  "seed": 20300104,
+  "rounds": 6000,
+  "wins": 3014,
+  "losses": 2986,
+  "winRate": 0.5023333333333333,
+  "pairedPointsMean": 0.027333333333333334,
+  "pairedPoints95CI": [
+    -0.012078274542707747,
+    0.06674494120937441
+  ],
+  "stats": {
+    "responseCalls": 33101,
+    "changedFromOldObserver": 1439,
+    "decisions": 99510,
+    "proved": 5988
+  },
+  "elapsedSeconds": 651.2828298
+}

@@ -1,0 +1,11 @@
+{
+  "metric": "Brier reduction: linear minus neural",
+  "testGames": 500,
+  "testRows": 16769,
+  "meanReduction": 0.010139284655451775,
+  "wholeGameBootstrap95CI": [
+    0.008513209885445929,
+    0.011834981458080623
+  ],
+  "replicates": 2000
+}

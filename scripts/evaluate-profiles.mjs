@@ -1,8 +1,7 @@
-import { spawn } from 'node:child_process';
-import { createInterface } from 'node:readline';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { performance } from 'node:perf_hooks';
 import { simulateRound } from './lib/simulation.mjs';
+import { createPolicyInference } from './lib/policy-inference.mjs';
 import { BOT_PROFILES } from '../src/ai/profiles.js';
 
 const option = (name, fallback) =>
@@ -25,30 +24,8 @@ if (
 )
   throw Error('Invalid style');
 await mkdir(output, { recursive: true });
-const python = spawn(option('python', 'python'), ['-u', 'scripts/eval_inference.py'], {
-  stdio: ['pipe', 'pipe', 'inherit'],
-  windowsHide: true,
-});
-const pending = [];
-createInterface({ input: python.stdout }).on('line', (line) => {
-  const waiter = pending.shift();
-  if (!waiter) return;
-  try {
-    const result = JSON.parse(line);
-    if (result.error) waiter.reject(Error(result.error));
-    else waiter.resolve(result.values);
-  } catch (error) {
-    waiter.reject(error);
-  }
-});
-python.on('exit', (code) => {
-  for (const waiter of pending.splice(0)) waiter.reject(Error(`Inference exited ${code}`));
-});
-const infer = (state) =>
-  new Promise((resolve, reject) => {
-    pending.push({ resolve, reject });
-    python.stdin.write(JSON.stringify(state) + '\n');
-  });
+const engine = createPolicyInference({ python: option('python', 'python') });
+const infer = engine.infer;
 const reports = [];
 const started = performance.now();
 try {
@@ -75,17 +52,19 @@ try {
         const profiles = Array.from({ length: 4 }, (_, seat) =>
           seat % 2 === side ? style : 'balanced',
         );
-        const result = await simulateRound(seed + pair, profiles, infer, (decision) => {
-          if (
-            captured.length < captureLimit &&
-            decision.style === 'endgame' &&
-            decision.selected !== decision.baseline
-          )
-            captured.push({
-              state: decision.state,
-              expectedIndex: decision.selected,
-              baselineIndex: decision.baseline,
-            });
+        const result = await simulateRound(seed + pair, profiles, infer, {
+          onDecision: (decision) => {
+            if (
+              captured.length < captureLimit &&
+              decision.style === 'endgame' &&
+              decision.selected !== decision.baseline
+            )
+              captured.push({
+                state: decision.state,
+                expectedIndex: decision.selected,
+                baselineIndex: decision.baseline,
+              });
+          },
         });
         const signed = (result.winner === side ? 1 : -1) * result.points;
         outcomes.push({ winner: result.winner, points: signed, turns: result.turns });
@@ -145,6 +124,5 @@ try {
     ),
   );
 } finally {
-  python.stdin.end();
-  python.kill();
+  engine.close();
 }

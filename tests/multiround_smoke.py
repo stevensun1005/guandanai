@@ -6,6 +6,9 @@ ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'work/validation/multiround';O
 URL=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765/'
 URL+=('&' if '?' in URL else '?')+'test=1'
 TARGET=int(sys.argv[2]) if len(sys.argv)>2 else 3
+HUMANS=int(sys.argv[3]) if len(sys.argv)>3 else 4
+if HUMANS not in (2,4):raise ValueError("Use two or four human clients")
+OUT=ROOT/("work/validation/multiround-mixed" if HUMANS==2 else "work/validation/multiround");OUT.mkdir(parents=True,exist_ok=True)
 snapshot="""()=>({round:G.round,phase:G.phase,L:G.L,
  levels:[G.levels[NET.off%2],G.levels[(NET.off+1)%2]],
  hands:Array.from({length:4},(_,seat)=>G.hands[toLocal(seat)].concat((G.rest||[]).filter(rest=>rest.p===toLocal(seat)).flatMap(rest=>rest.cards)).map(card=>card.id).sort((a,b)=>a-b)),
@@ -18,7 +21,7 @@ status="""()=>{
 with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,channel='chrome')
     contexts=[];pages=[];errors=[];reports=[]
-    for _ in range(4):
+    for _ in range(HUMANS):
         context=browser.new_context(viewport={'width':1280,'height':850},permissions=['clipboard-read','clipboard-write'])
         contexts.append(context);page=context.new_page();page.on('pageerror',lambda error:errors.append(str(error)));pages.append(page)
     host=pages[0];host.goto(URL,wait_until='networkidle');host.locator('#nick').fill('房主')
@@ -28,9 +31,13 @@ with sync_playwright() as p:
         page.goto(URL+'&room='+code,wait_until='networkidle');page.locator('#nick').fill(name);page.locator('#joinBtn').click()
         page.wait_for_function('NET.hostConn?.open',timeout=30000);page.locator(f'[data-seat="{direction}"]').click()
         host.wait_for_function('NET.lobby.'+direction+'!==null')
+    if HUMANS==2:
+        host.locator('#botStyleBox summary').click()
+        host.locator('[data-bot-seat=E]').select_option('observant')
+        host.locator('[data-bot-seat=N]').select_option('conservative')
     host.locator('#sitBtn').click()
     for page in pages:page.wait_for_function("NET.started||NET.mode==='guest'",timeout=15000)
-    assert not host.evaluate('TableBot.ready'),'four human seats should not predownload the model'
+    if HUMANS==4:assert not host.evaluate('TableBot.ready'),'four human seats should not predownload the model'
     forced=False;timeout_completed=False;rounds=0;started=time.monotonic();last_progress=started
     while rounds<TARGET and time.monotonic()-started<900:
         states=[page.evaluate(status) for page in pages]
@@ -82,6 +89,6 @@ with sync_playwright() as p:
     assert not errors,errors
     for page in pages[1:]:assert not page.evaluate('TableBot.ready')
     host.screenshot(path=str(OUT/'final-host.png'))
-    report={'clients':4,'hostDirection':'W','rounds':reports,'cardConservation':True,'realGuestActions':True,'hostTimeoutUsedLearnedPolicy':timeout_completed,'guestsAvoidModelDownload':True,'pageErrors':errors,'elapsedSeconds':time.monotonic()-started}
+    report={'clients':HUMANS,'bots':4-HUMANS,'botStyles':['observant','conservative'] if HUMANS==2 else [],'hostDirection':'W','rounds':reports,'cardConservation':True,'realGuestActions':True,'hostTimeoutUsedLearnedPolicy':timeout_completed,'guestsAvoidModelDownload':True,'pageErrors':errors,'elapsedSeconds':time.monotonic()-started}
     (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report),flush=True)
     browser.close()

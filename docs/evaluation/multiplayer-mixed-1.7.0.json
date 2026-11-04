@@ -1,0 +1,44 @@
+{
+  "clients": 2,
+  "bots": 2,
+  "botStyles": [
+    "observant",
+    "conservative"
+  ],
+  "hostDirection": "W",
+  "rounds": [
+    {
+      "round": 1,
+      "moves": 71,
+      "levels": [
+        3,
+        2
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 2,
+      "moves": 86,
+      "levels": [
+        3,
+        3
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 3,
+      "moves": 90,
+      "levels": [
+        3,
+        5
+      ],
+      "allClientsEqual": true
+    }
+  ],
+  "cardConservation": true,
+  "realGuestActions": true,
+  "hostTimeoutUsedLearnedPolicy": true,
+  "guestsAvoidModelDownload": true,
+  "pageErrors": [],
+  "elapsedSeconds": 266.28642879999825
+}
