@@ -3,6 +3,11 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - 'scripts/update-model-study.py'
+      - 'tests/model_study_test.py'
   workflow_dispatch:
 
 permissions:
