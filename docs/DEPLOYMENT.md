@@ -24,6 +24,8 @@ npm run dev
 
 ## 部署包含什么
 
+不修改源码时，可以直接从 [GitHub Releases](https://github.com/stevensun1005/guandanai/releases/latest) 下载 `guandan-web.zip`，解压到静态 HTTP(S) 服务。它包含完整网页和两份模型，无需先安装 Node.js 或 Python。请通过服务地址访问，直接双击 `index.html` 的文件地址不能正常加载 Worker 与模型。随包提供的 `SHA256SUMS.txt` 可校验下载文件。
+
 - 页面、模块打包结果、样式与图片。
 - 同源的浏览器推理运行库和模型。
 - 同源的房间连接库。

@@ -13,7 +13,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES_Modules-f7df1e?logo=javascript&logoColor=black)
 ![Runtime](https://img.shields.io/badge/Runtime-Browser_%2B_WebAssembly-4a7c59)
 
-**[立即开局](https://stevensun1005.github.io/guandanai/) · [玩法指南](docs/PLAYING.md) · [开发指南](CONTRIBUTING.md) · [更新记录](CHANGELOG.md)**
+**[立即开局](https://stevensun1005.github.io/guandanai/) · [玩法指南](docs/PLAYING.md) · [下载发布包](https://github.com/stevensun1005/guandanai/releases/latest) · [开发指南](CONTRIBUTING.md) · [更新记录](CHANGELOG.md)**
 
 </div>
 

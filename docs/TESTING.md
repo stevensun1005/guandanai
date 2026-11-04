@@ -12,7 +12,7 @@
 
 残局检查：Node 测试使用独立的实体牌子集穷举对照；`python tests/endgame_browser_smoke.py` 将真实自对弈中记录的 15 个残局（包含 7 个 17–24 张局面）交给浏览器 Worker，并检查风格不会覆盖已证明路线。
 
-电脑配置检查：`python tests/bot_setup_smoke.py`，覆盖三个窗口尺寸、四种玩家座位与本机偏好保存。`browser_smoke.py` 还检查房主风格同步及真实 Worker 风格决策。批量棋力与行为验证见 [电脑对手](BOTS.md)。
+电脑配置检查：`python tests/bot_setup_smoke.py`，覆盖三个窗口尺寸、四种玩家座位与本机偏好保存，同时核对模式、桌规和座位的辅助技术选择状态。`browser_smoke.py` 还检查房主风格同步及真实 Worker 风格决策。批量棋力与行为验证见 [电脑对手](BOTS.md)。
 
 理牌操作可单独验证：`python tests/hand_tools_smoke.py`。它在 1440×1000、390×844 和 844×390 三种窗口内操作理牌菜单，检查手动成组保留、实体牌完整、撤销与弹层边界。
 

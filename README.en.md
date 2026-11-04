@@ -10,7 +10,7 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 [![Version](https://img.shields.io/github/package-json/v/stevensun1005/guandanai?color=ddb050)](CHANGELOG.md)
 ![Runtime](https://img.shields.io/badge/Runtime-Browser_%2B_WebAssembly-4a7c59)
 
-**[Play now](https://stevensun1005.github.io/guandanai/) · [简体中文](README.md) · [Contributing](CONTRIBUTING.md)**
+**[Play now](https://stevensun1005.github.io/guandanai/) · [Download a release](https://github.com/stevensun1005/guandanai/releases/latest) · [简体中文](README.md) · [Contributing](CONTRIBUTING.md)**
 
 </div>
 
