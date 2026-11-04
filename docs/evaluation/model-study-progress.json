@@ -34502,14 +34502,14 @@
         "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
       },
       "startedAt": "2026-11-04T20:40:54.522Z",
-      "updatedAt": "2026-11-04T20:55:54.899Z",
+      "updatedAt": "2026-11-04T20:59:54.953Z",
       "stoppedAt": null,
       "stopReason": null,
-      "elapsedSeconds": 900.377,
+      "elapsedSeconds": 1140.431,
       "totals": {
-        "matches": 5779,
-        "decisions": 2864222,
-        "rows": 2864222
+        "matches": 7308,
+        "decisions": 3627719,
+        "rows": 3627719
       },
       "learner": {
         "pid": 31896,
@@ -34518,16 +34518,16 @@
         "torch": "2.9.1+rocmsdk20260116",
         "hip": "7.2.26024-f6f897bd3d",
         "gpuAllocatedBytes": 168534016,
-        "state": "training",
-        "step": 5443,
+        "state": "waiting-for-data",
+        "step": 6971,
         "version": "v000003646",
         "buffer": 2000000,
-        "ingestedRows": 2803233,
-        "trainedRows": 11147264,
-        "lossEMA": 3.347536784124281,
-        "replayRatio": 3.9765741912998314,
-        "stepsPerSecond": 6.078163735370988,
-        "updatedAt": "2026-11-04T20:55:54Z"
+        "ingestedRows": 3569459,
+        "trainedRows": 14276608,
+        "lossEMA": 3.3547208249880827,
+        "replayRatio": 3.999655970274487,
+        "stepsPerSecond": 6.14083014178392,
+        "updatedAt": "2026-11-04T20:59:54Z"
       },
       "latest": {
         "version": "v000003646",
@@ -34577,13 +34577,13 @@
         "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
         "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
       },
-      "statusSHA256": "73f27e95c79233d5b6f557b34970ace2045683b111fdff0cc64c54137be1c6cf",
-      "eventsSHA256": "09744097007b1d61d872b627476ecdebe88b477d8d50c58c43842028eb00f93c",
+      "statusSHA256": "457368842991a140340ce239c5796a206188abb13bf3baf20569b03b8901244f",
+      "eventsSHA256": "581f9be32d3a0da29f10328af42b578704be128bc52c6757d3132917952ffbd5",
       "gates": [
         {
           "role": "development monitoring; not held-out acceptance",
           "kind": "gate",
-          "status": "running",
+          "status": "complete",
           "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
           "rules": {
             "tribute": true,
@@ -34602,16 +34602,16 @@
             "file": "D:\\vibecoding\\guandan\\work\\continuous\\gpu-main\\gate\\champion-100.onnx",
             "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
           },
-          "pairs": 101,
-          "matches": 202,
-          "wins": 94,
-          "losses": 92,
-          "draws": 16,
-          "seedRange": [3510000000, 3510000100],
-          "meanScore": 0.504950495049505,
-          "clusterHoeffding95CI": [0.36981434342525765, 0.6400866466737523],
-          "llr": -0.33842640990371414,
-          "decision": null,
+          "pairs": 178,
+          "matches": 356,
+          "wins": 151,
+          "losses": 173,
+          "draws": 32,
+          "seedRange": [3510000000, 3510000177],
+          "meanScore": 0.4691011235955056,
+          "clusterHoeffding95CI": [0.367307111303415, 0.5708951358875962],
+          "llr": -2.950189340974221,
+          "decision": "reject",
           "settings": {
             "alpha": 0.05,
             "beta": 0.05,
@@ -34646,7 +34646,7 @@
             "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
             "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
           },
-          "recordsSHA256": "e7d40d9bca7e574ffc98160f647c1ab977dfbe8d5ed4cb44e42d26e370bde68b",
+          "recordsSHA256": "00239ce996b585852e350125998b954df367cc0f17d51c676671146170fee345",
           "recordsFile": "gate/gate-00100.json",
           "seedResults": [
             {
@@ -35052,6 +35052,314 @@
             {
               "seed": 3510000100,
               "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000101,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000102,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000103,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000104,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000105,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000106,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000107,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000108,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000109,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000110,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000111,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000112,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000113,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000114,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000115,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000116,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000117,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000118,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000119,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000120,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000121,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000122,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000123,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000124,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3510000125,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000126,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000127,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3510000128,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000129,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000130,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000131,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3510000132,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000133,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000134,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000135,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000136,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000137,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000138,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000139,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000140,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000141,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000142,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000143,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000144,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3510000145,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000146,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000147,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000148,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3510000149,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000150,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000151,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000152,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000153,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000154,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000155,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000156,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3510000157,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000158,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000159,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000160,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000161,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000162,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000163,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000164,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000165,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000166,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000167,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000168,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000169,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000170,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000171,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3510000172,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000173,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3510000174,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3510000175,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3510000176,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3510000177,
+              "scores": [0, 0]
             }
           ]
         }
@@ -38235,6 +38543,6 @@
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
     }
   },
-  "fingerprint": "9659121583e5c1f211120b7b891e31dd249e24caa748ba0854fe37045ab4e026",
-  "observedUTC": "2026-11-04T20:56:17.944717+00:00"
+  "fingerprint": "39970ca177196090fa8a3b877f47605b995dd80e79f767035f1fc944142b8bbc",
+  "observedUTC": "2026-11-04T20:59:55.487744+00:00"
 }
