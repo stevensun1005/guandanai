@@ -20,6 +20,9 @@ with sync_playwright() as playwright:
     assert page.locator("#steps").inner_text() != "—"
     assert page.locator("#connection").is_hidden()
     assert "第 1 / 6 步" in page.locator("body").inner_text()
+    tasks = page.locator('#research-roadmap li')
+    assert tasks.count() == 5
+    assert all('待开始' in text for text in tasks.all_inner_texts())
     live = page.request.get(url.rstrip('/') + '/api/status').json()
     if live.get('device', '').startswith('cuda'):
         assert 'GPU 加速' in page.locator('#task').inner_text()

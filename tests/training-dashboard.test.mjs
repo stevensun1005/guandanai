@@ -52,7 +52,10 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     assert.equal((await fetch(base + '/api/status', { method: 'POST' })).status, 405);
     assert.equal((await fetch(base + '/config.json')).status, 404);
     assert.equal((await fetch(base + '/%2e%2e%2fconfig.json')).status, 404);
-    assert.match(await (await fetch(base)).text(), /训练进行到哪了/);
+    const html = await (await fetch(base)).text();
+    assert.match(html, /训练进行到哪了/);
+    assert.match(html, /交接新增的研究任务/);
+    for (const task of ['D1', 'D2', 'D3', 'D4', 'D5']) assert(html.includes(task));
     assert.equal(readFileSync(join(directory, 'status.json'), 'utf8'), before);
     save('actors/actor-0.json', { pid: process.pid, matches: 130, decisions: 900, rows: 900 });
     const live = await (await fetch(base + '/api/status')).json();
