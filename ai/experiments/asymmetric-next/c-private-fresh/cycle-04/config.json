@@ -1,0 +1,7 @@
+{
+  "kind": "full-actor-asymmetric-ppo",
+  "privilegedCritic": true,
+  "temperature": 0.03,
+  "anchor": "ai/experiments/asymmetric-next/anchor/policy.onnx",
+  "anchorSHA256": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25"
+}
