@@ -1,5 +1,6 @@
 import { encode, cardsArray } from './encoding.mjs';
 import { encodePolicyExtrasBatch, POLICY_EXTRA_FEATURES } from './policy-features.mjs';
+import { encodeMatchFeatures } from './match-features.mjs';
 
 /** Accumulate the entire candidate list before restricting a learned actor's choices. */
 export function selectPolicyScores(proposals, logits, counts, config = {}) {
@@ -22,7 +23,7 @@ export async function inferPolicy(ort, engine, state, config = {}) {
   if (!state.actions?.length) throw Error('No policy actions');
   const extraFeatures = config.extraFeatures || 0;
   const rerank = config.rerankCandidates || 0;
-  if (extraFeatures && extraFeatures !== POLICY_EXTRA_FEATURES)
+  if (extraFeatures && ![POLICY_EXTRA_FEATURES, POLICY_EXTRA_FEATURES + 8].includes(extraFeatures))
     throw Error('Unsupported policy feature layout');
   if (
     rerank &&
@@ -32,7 +33,19 @@ export async function inferPolicy(ort, engine, state, config = {}) {
       config.temperature <= 0)
   )
     throw Error('Unsupported policy reranking configuration');
-  const extras = extraFeatures ? encodePolicyExtrasBatch(state) : null;
+  let extras = extraFeatures ? encodePolicyExtrasBatch(state) : null;
+  if (extraFeatures === POLICY_EXTRA_FEATURES + 8) {
+    const progress = encodeMatchFeatures(state),
+      combined = new Float32Array(state.actions.length * extraFeatures);
+    for (let i = 0; i < state.actions.length; i++) {
+      combined.set(
+        extras.subarray(i * POLICY_EXTRA_FEATURES, (i + 1) * POLICY_EXTRA_FEATURES),
+        i * extraFeatures,
+      );
+      combined.set(progress, i * extraFeatures + POLICY_EXTRA_FEATURES);
+    }
+    extras = combined;
+  }
   const proposals = [],
     logits = [];
   const stateTensor = new ort.Tensor('float32', encode(state), [1, 513]);

@@ -106,6 +106,7 @@ def sha(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True)
+    parser.add_argument("--complete-match", action="store_true")
     parser.add_argument("--output", default="work/validation/candidate-browser")
     args = parser.parse_args()
     model = Path(args.model).resolve()
@@ -124,13 +125,32 @@ def main():
         encoding="utf-8",
     )
     fixtures = json.loads(generated.stdout)
+    if args.complete_match:
+        for fixture in fixtures:
+            state = fixture["state"]
+            level = state["level"]
+            state["match"] = {
+                "levels": [level, level],
+                "lvlTeam": 0,
+                "aFails": [0, 0],
+                "round": 2 * (level - 2) + 1,
+                "previousOrder": [0, 2, 1, 3] if level > 2 else None,
+            }
+
     fixtures_path = output / "positions.json"
     fixtures_path.write_text(json.dumps(fixtures), encoding="utf-8")
     shutil.copy2(model, harness / "policy.onnx")
     for name in ("ort.wasm.min.mjs", "ort-wasm-simd-threaded.mjs", "ort-wasm-simd-threaded.wasm"):
         shutil.copy2(ROOT / "node_modules/onnxruntime-web/dist" / name, vendor / name)
-    native = RolloutEngine(model)
-    runtime_config = {"extraFeatures": 53} if native.has_extras else {}
+    if args.complete_match:
+        from full_learning import FullEngine
+
+        native = FullEngine(model)
+        runtime_config = {"extraFeatures": 61}
+    else:
+        native = RolloutEngine(model)
+        runtime_config = {"extraFeatures": 53} if native.has_extras else {}
+
     entry = (
         WORKER.replace(
             "__POLICY_MODULE__", json.dumps((ROOT / "src/ai/policy-inference.mjs").as_posix())
@@ -185,7 +205,7 @@ def main():
                 page.wait_for_function("typeof window.evaluatePolicy==='function'")
                 for index, fixture in enumerate(fixtures):
                     state = fixture["state"]
-                    expected, _, _ = native.score(state)
+                    expected = native.score(state)[0]
                     extra = encode_policy_extras_batch(state)
                     actual = page.evaluate("state=>window.evaluatePolicy(state)", state)
                     values = np.array(actual["values"], dtype=np.float32)
