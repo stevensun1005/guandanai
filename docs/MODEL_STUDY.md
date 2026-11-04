@@ -297,7 +297,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 
 ## 11. 自动同步的完整比赛进展
 
-证据快照更新时间：2026-11-04T16:31:33.880531+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
+证据快照更新时间：2026-11-04T16:37:56.837184+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
 
 **以下全部为开发集，不是独立验收。** 模型挑选反复使用这些种子，不能据此认定已经达到 80% 或有泛化提升。
 
@@ -306,7 +306,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 | `ppo-rule`      |  16 / 16 |               2048 |   656735 |     107450 | `complete`                 |
 | `ppo-mixed`     |  16 / 16 |               2048 |   832216 |     141259 | `complete`                 |
 | `full-rejected` |   3 / 16 |                576 |   245715 |      56398 | `stopped_arena_regression` |
-| `full-guarded`  |  11 / 16 |               2112 |   902709 |     171046 | `running`                  |
+| `full-guarded`  |  12 / 16 |               2304 |   982112 |     186250 | `running`                  |
 
 ### 11.1 全部已完成的开发评测
 
@@ -340,6 +340,8 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 | `full-guarded` / 08  | full        | snapshot               |  65 / 128 |   10 | 50.78% | `rolled_back_to_champion` |
 | `full-guarded` / 10  | full        | rule                   |  91 / 128 |    6 | 71.09% | `rolled_back_to_champion` |
 | `full-guarded` / 10  | full        | snapshot               |  56 / 128 |   11 | 43.75% | `rolled_back_to_champion` |
+| `full-guarded` / 12  | full        | rule                   |  90 / 128 |   13 | 70.31% | `rolled_back_to_champion` |
+| `full-guarded` / 12  | full        | snapshot               |  61 / 128 |   13 | 47.66% | `rolled_back_to_champion` |
 
 表中的 `snapshot` 指该实验冻结的历史对手；各实验的历史对手不保证相同，不能横向直接比较。`ppo-rule` 早期未标记贪心评测的结果保留为旧协议记录，不纳入同协议排名。
 
