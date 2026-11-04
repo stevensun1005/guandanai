@@ -19,6 +19,7 @@ const browser = new Set([
   'navigator',
   'location',
   'localStorage',
+  'sessionStorage',
   'indexedDB',
   'requestAnimationFrame',
   'getComputedStyle',

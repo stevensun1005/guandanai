@@ -1,0 +1,47 @@
+name: 问题反馈
+description: 用具体场景复现牌型、联机、手牌操作或显示问题。
+title: '[问题] '
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: 出现在哪一部分？
+      options:
+        - 选牌、理牌或出牌
+        - 朋友房间或座位恢复
+        - 牌型、进还贡或升级
+        - 电脑出牌
+        - 复盘与记录
+        - 页面显示或声音
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 设备和浏览器
+      placeholder: 例如 Windows 11 / Chrome，或 iPhone / Safari
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 页面版本
+      description: 大厅底部的“版本”标识。
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 怎样重现？
+      description: 写出操作步骤；牌型问题请列出手牌和桌面牌。
+      placeholder: |
+        1. 进入朋友房间
+        2. ……
+        3. ……
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 预期和实际结果
+      description: 可以附截图，或只包含公开动作的本局牌谱。
+    validations:
+      required: true

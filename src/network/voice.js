@@ -133,6 +133,7 @@ export function initialize() {
     function start(p) {
       if (!window.Peer || !runtime.network.peer || !p) return;
       peers = p;
+      for (const [seat, line] of lines) if (line.call.peer !== peers[seat]) drop(seat);
       active = Object.keys(peers).length > 1;
       if (!active) return;
       for (const c of waiting.splice(0)) answer(c);

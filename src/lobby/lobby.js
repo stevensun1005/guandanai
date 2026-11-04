@@ -14,6 +14,8 @@ import {
 import { $ } from '../ui/cards.js';
 import { render } from '../ui/table.js';
 import { loadBotPreferences, prepareBotStyles, renderBotSetup } from './bot-setup.js';
+import { forgetSeat } from '../network/rejoin-storage.js';
+import { VERSION, versionsMatch } from '../network/protocol.js';
 
 export let DIRS;
 export let absOf;
@@ -113,7 +115,10 @@ export function renderLobby() {
   go.hidden = runtime.lobbyMode === 'join';
   go.textContent = runtime.lobbyMode === 'host' ? '开始' : '坐下开始';
   go.disabled =
-    !nick || !runtime.direction || (runtime.lobbyMode === 'host' && !runtime.network.peerOpen);
+    !nick ||
+    !runtime.direction ||
+    (runtime.lobbyMode === 'host' &&
+      (!runtime.network.peerOpen || !versionsMatch(runtime.network.conns.values(), VERSION)));
 }
 
 export function initialize() {
@@ -171,7 +176,10 @@ export function initialize() {
   );
   document.querySelectorAll('.mode-btn').forEach((b) =>
     b.addEventListener('click', () => {
-      if (runtime.lobbyMode !== b.dataset.mode) setMode(b.dataset.mode);
+      if (runtime.lobbyMode !== b.dataset.mode) {
+        forgetSeat();
+        setMode(b.dataset.mode);
+      }
     }),
   );
   $('#nick').addEventListener('input', () => {
@@ -218,6 +226,7 @@ export function initialize() {
     Sound.unlock();
     if (runtime.lobbyMode === 'host') startOnline();
     else {
+      forgetSeat();
       runtime.network.mode = 'solo';
       runtime.network.off = 0;
       prepareBotStyles();

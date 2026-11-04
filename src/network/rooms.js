@@ -10,10 +10,22 @@ import { beginPlay, startTurn } from '../game/turns.js';
 import { DIRS, absOf, lobbyStatus, nickNow, renderLobby } from '../lobby/lobby.js';
 import { normalizeBotPreferences, prepareBotStyles } from '../lobby/bot-setup.js';
 import { profileId } from '../ai/profiles.js';
-import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady } from './protocol.js';
+import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady, versionsMatch } from './protocol.js';
 import { VC } from './voice.js';
+import { forgetSeat } from './rejoin-storage.js';
+import {
+  connectionFailed,
+  confirmReservations,
+  receiveHello,
+  receiveRecovery,
+  reconnect,
+  releaseSeat,
+  reserveSeat,
+  resetReservations,
+  showReconnectPanel,
+} from './recovery.js';
 import { $ } from '../ui/cards.js';
-import { hideOverlay, showPanel, showResult } from '../ui/overlays.js';
+import { hideOverlay, showResult } from '../ui/overlays.js';
 import { render, setMsg } from '../ui/table.js';
 
 let SILENT_MS;
@@ -34,6 +46,7 @@ export function leaveNet() {
 // the host: claims a free room number and keeps the seat list
 export function openRoom() {
   if (!peerReady()) return;
+  resetReservations();
   const code = String(1000 + ((Math.random() * 9000) | 0));
   const peer = new Peer(ROOM_PREFIX + code);
   runtime.network.peer = peer;
@@ -59,12 +72,18 @@ export function openRoom() {
   peer.on('call', (c) => VC.incoming(c));
   peer.on('connection', (conn) => {
     conn.on('open', () => {
+      runtime.network.conns.set(conn.peer, { conn, dir: '', name: '', seen: Date.now() });
+      conn.send({ t: 'hello', ver: VERSION });
       if (runtime.network.started) {
-        conn.send({ t: 'full' });
-        setTimeout(() => conn.close(), 500);
+        setTimeout(() => {
+          const info = runtime.network.conns.get(conn.peer);
+          if (info && !info.dir && !info.resuming) {
+            conn.send({ t: 'full' });
+            conn.close();
+          }
+        }, 5000);
         return;
       }
-      runtime.network.conns.set(conn.peer, { conn, dir: '', name: '', seen: Date.now() });
       conn.send({
         t: 'lobby',
         seats: runtime.network.lobby,
@@ -100,6 +119,8 @@ function hostOnData(conn, d) {
   const info = runtime.network.conns.get(conn.peer);
   if (!info || !d) return;
   info.seen = Date.now();
+  if (d.t === 'hello') info.version = d.ver;
+  if (receiveHello(conn, d)) return;
   if (d.t === 'bye') {
     hostOnClose(conn, 'quit');
     try {
@@ -119,11 +140,13 @@ function hostOnData(conn, d) {
     if (!DIRS.includes(d.dir) || (runtime.network.lobby[d.dir] && info.dir !== d.dir)) return;
     if (info.dir) runtime.network.lobby[info.dir] = null;
     info.dir = d.dir;
+    info.version = d.ver;
     info.name =
       String(d.name || '')
         .replace(/[<>&"']/g, '')
         .slice(0, 8) || '玩家';
     runtime.network.lobby[d.dir] = info.name;
+    reserveSeat(info);
     broadcastLobby();
     renderLobby();
     if (d.ver && d.ver !== VERSION)
@@ -206,6 +229,7 @@ function hostOnClose(conn, how = 'drop') {
   const info = runtime.network.conns.get(conn.peer);
   if (!info) return;
   runtime.network.conns.delete(conn.peer);
+  if (how === 'quit') releaseSeat(info);
   if (!runtime.network.started) {
     if (info.dir) runtime.network.lobby[info.dir] = null;
     broadcastLobby();
@@ -239,6 +263,11 @@ function hostOnClose(conn, how = 'drop') {
 
 // the host starts: everyone learns where everyone sits, then the first deal goes out
 export function startOnline() {
+  if (!versionsMatch(runtime.network.conns.values(), VERSION)) {
+    lobbyStatus('大家的页面版本需要一致，请刷新后重新入座。');
+    return;
+  }
+  confirmReservations();
   prepareBotStyles();
   runtime.network.started = true;
   runtime.network.hostDir = runtime.direction;
@@ -263,7 +292,7 @@ export function startOnline() {
   VC.start(peers);
 }
 
-function enterOnline(mode, hostDir, names) {
+export function enterOnline(mode, hostDir, names) {
   runtime.network.mode = mode;
   runtime.network.off = absOf(runtime.direction, hostDir);
   setHumans(
@@ -293,7 +322,9 @@ export function joinRoom(code) {
       $('#roomInfo').hidden = false;
       renderLobby();
     });
-    conn.on('data', guestOnData);
+    conn.on('data', (data) => {
+      if (runtime.network.hostConn === conn) guestOnData(data);
+    });
     // (only the current line's closing counts: an old one closed on the way back in must not start another round)
     conn.on('close', () => {
       if (runtime.network.hostConn === conn) hostGone();
@@ -301,6 +332,14 @@ export function joinRoom(code) {
   });
   peer.on('error', (err) => {
     if (runtime.network.peer !== peer) return;
+    if (runtime.network.mode === 'guest') {
+      connectionFailed(
+        err.type === 'peer-unavailable'
+          ? '暂时联系不上房主，请确认房主页面仍然打开。'
+          : '连接失败，请检查网络后重试。',
+      );
+      return;
+    }
     lobbyStatus(
       err.type === 'peer-unavailable' ? '没有这个房间，请核对房间号' : '连接失败，请检查网络后重试',
     );
@@ -317,6 +356,7 @@ export function sendSit(d) {
 function guestOnData(d) {
   if (!d) return;
   runtime.network.hostSeen = Date.now();
+  if (receiveRecovery(d)) return;
   if (d.t === 'ping') {
     runtime.network.hostConn &&
       runtime.network.hostConn.open &&
@@ -324,7 +364,8 @@ function guestOnData(d) {
     return;
   }
   if (d.t === 'bye') {
-    hostGone();
+    forgetSeat();
+    hostGone(false);
     return;
   }
   if (d.t === 'mics') {
@@ -379,17 +420,21 @@ function guestOnData(d) {
   }
 }
 
-function hostGone() {
+function hostGone(automatic = true) {
   if (runtime.network.gone) return;
   VC.stop();
   if (runtime.network.mode === 'guest') {
     runtime.network.gone = true;
-    showPanel(`<h2>房主退出了游戏</h2><p class="muted">可以和电脑继续打完这一场，也可以退出。</p>
-      <div class="btns"><button class="btn primary" id="soloOnBtn">和电脑继续打</button><button class="btn" id="backBtn">退出游戏</button></div>`);
-    $('#soloOnBtn').onclick = goSolo;
-    $('#backBtn').onclick = () => location.reload();
+    showReconnectPanel(automatic ? undefined : '房主已退出。你可以和电脑继续打完，或退出游戏。');
+    if (automatic)
+      setTimeout(() => {
+        if (runtime.network.gone && runtime.network.mode === 'guest') reconnect();
+      }, 1500);
   } else if (runtime.lobbyMode === 'join') {
-    if (runtime.network.refused) return;
+    if (runtime.network.refused) {
+      renderLobby();
+      return;
+    }
     // the line to the room broke while waiting (the phone switched to another app, say): the page goes straight back
     // in and takes the same seat again, a few times at most, before asking the player to enter again
     if (runtime.network.lastCode && (runtime.network.rejoinTries || 0) < 3) {
@@ -411,7 +456,7 @@ function hostGone() {
 }
 
 // the host left: this table carries on alone from wherever the game stood, the computer taking every other seat
-function goSolo() {
+export function goSolo() {
   runtime.botStyles = Array.from({ length: 4 }, (_, index) =>
     profileId(runtime.botStyles?.[(index + runtime.network.off) % 4]),
   );

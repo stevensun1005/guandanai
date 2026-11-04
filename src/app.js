@@ -33,7 +33,6 @@ import * as controls from './input/controls.js';
 import * as handKeyboard from './input/hand-keyboard.js';
 import * as selectionStatus from './ui/selection-status.js';
 import * as publicHistory from './ui/history-dialog.js';
-import * as restore from './app/restore.js';
 import * as lobby from './lobby/lobby.js';
 import * as practice from './lobby/practice.js';
 import * as fullscreen from './ui/fullscreen.js';
@@ -127,7 +126,6 @@ if (new URLSearchParams(location.search).get('test') === '1') {
     overlays,
     pointer,
     controls,
-    restore,
     lobby,
     botSetup,
     botProfiles,

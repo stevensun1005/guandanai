@@ -5,6 +5,7 @@ import { toAbs } from '../game/session.js';
 import { placeActionBtns } from '../hand/layout.js';
 import { askNext } from '../input/controls.js';
 import { broadcast } from '../network/rooms.js';
+import { forgetSeat } from '../network/rejoin-storage.js';
 import { practiceFinish, practiceSave } from '../replay/import-export.js';
 import { practiceView } from '../replay/viewer.js';
 import { $ } from './cards.js';
@@ -171,6 +172,7 @@ export function askQuit() {
 }
 
 function quitGame() {
+  forgetSeat();
   try {
     if (runtime.network.mode === 'host') broadcast({ t: 'bye' });
     if (
@@ -191,11 +193,18 @@ export function playerLeft(name, how) {
   <div class="btns"><button class="btn primary" id="goOnBtn">继续打</button><button class="btn" id="leaveBtn">退出游戏</button></div>`,
     true,
   );
+  $('#panel').dataset.kind = 'left';
   $('#goOnBtn').onclick = () => {
     hideOverlay();
     if (runtime.game.phase === 'roundEnd' || runtime.game.phase === 'over') showResult();
   };
   $('#leaveBtn').onclick = askQuit;
+}
+
+export function playerReturned() {
+  if ($('#panel').dataset.kind !== 'left') return;
+  hideOverlay();
+  if (['roundEnd', 'over'].includes(runtime.game.phase)) showResult();
 }
 
 export function initialize() {

@@ -69,7 +69,7 @@
 ## 开发者评估
 
 ```bash
-python -m pip install numpy onnxruntime
+python -m pip install -r requirements-models.txt
 npm run eval:profiles -- --pairs=600 --seed=20261104
 ```
 

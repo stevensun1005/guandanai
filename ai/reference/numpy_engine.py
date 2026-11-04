@@ -1,5 +1,7 @@
 """CPU reference for model export and browser inference validation."""
+
 import os
+
 os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("OMP_NUM_THREADS", "1")
 from pathlib import Path
@@ -10,8 +12,10 @@ import numpy as np
 
 CHECKPOINT = Path(__file__).resolve().parents[1] / "policy.ckpt"
 
+
 class WeightReader(pickle.Unpickler):
     """Only the NumPy array constructors in the supplied checkpoint are allowed."""
+
     def find_class(self, module, name):
         core = np._core if hasattr(np, "_core") else np.core
         allowed = {
@@ -51,17 +55,20 @@ def universal_flags(hand, level):
     res[0] = 1
     for suit in range(4):
         for start in range(8):
-            window = [hand[suit + j * 4] if suit + j * 4 != wild else 0
-                      for j in range(start, start + 5)]
+            window = [
+                hand[suit + j * 4] if suit + j * 4 != wild else 0 for j in range(start, start + 5)
+            ]
             if window.count(0) <= 1:
                 res[1] = 1
                 break
         if res[1]:
             break
-    counts = [sum(hand[suit + rank * 4] != 0 and suit + rank * 4 != wild
-                  for suit in range(4)) for rank in range(13)]
+    counts = [
+        sum(hand[suit + rank * 4] != 0 and suit + rank * 4 != wild for suit in range(4))
+        for rank in range(13)
+    ]
     maximum = max(counts)
-    res[8 - max(1, min(maximum, 6)):8] = 1
+    res[8 - max(1, min(maximum, 6)) : 8] = 1
     tail = 0
     for i, count in enumerate(counts):
         if not count:
@@ -75,10 +82,12 @@ def universal_flags(hand, level):
             elif count == 2 and prev == 2:
                 res[11] = 1
         if i >= 2:
-            a, b = counts[i - 2:i]
-            if ((a == 1 and b >= 2 and count >= 2)
-                    or (a >= 2 and b == 1 and count >= 2)
-                    or (a >= 2 and b >= 2 and count == 1)):
+            a, b = counts[i - 2 : i]
+            if (
+                (a == 1 and b >= 2 and count >= 2)
+                or (a >= 2 and b == 1 and count >= 2)
+                or (a >= 2 and b >= 2 and count == 1)
+            ):
                 res[10] = 1
     if tail >= 4:
         res[8] = 1
@@ -155,11 +164,13 @@ def validate(state):
                 raise ValueError("Repeated physical card")
             seen.add(card)
     counts = state["counts"]
-    if (not isinstance(counts, list) or len(counts) != 4
-            or any(type(n) is not int or not 0 <= n <= 27 for n in counts)):
+    if (
+        not isinstance(counts, list)
+        or len(counts) != 4
+        or any(type(n) is not int or not 0 <= n <= 27 for n in counts)
+    ):
         raise ValueError("Invalid remaining counts")
-    expected = [27 - sum(len(e["cards"] or []) for e in log if e["p"] == seat)
-                for seat in range(4)]
+    expected = [27 - sum(len(e["cards"] or []) for e in log if e["p"] == seat) for seat in range(4)]
     if counts != expected or counts[p] != len(hand):
         raise ValueError("History and remaining counts disagree")
     for name in ("level", "selfLevel", "opponentLevel"):
@@ -170,9 +181,13 @@ def validate(state):
         raise ValueError("Invalid candidate count")
     holding = set(hand)
     for action in actions:
-        if (not isinstance(action, list) or len(action) > 10
-                or any(type(c) is not int for c in action)
-                or len(set(action)) != len(action) or not set(action) <= holding):
+        if (
+            not isinstance(action, list)
+            or len(action) > 10
+            or any(type(c) is not int for c in action)
+            or len(set(action)) != len(action)
+            or not set(action) <= holding
+        ):
             raise ValueError("Candidate uses cards outside hand")
         if not action and not state.get("canPass", False):
             raise ValueError("Cannot pass when leading")
@@ -187,8 +202,13 @@ def encode(state):
     histories, sequence, out, _ = replay(log)
     mate = (p + 2) % 4
     last_mate = histories[mate][-1] if histories[mate] and mate not in out else [-1]
-    parts = [hand, universal_flags(hand, state["level"]), unseen,
-             cards_array(sequence[-1] if sequence else [-1]), cards_array(last_mate)]
+    parts = [
+        hand,
+        universal_flags(hand, state["level"]),
+        unseen,
+        cards_array(sequence[-1] if sequence else [-1]),
+        cards_array(last_mate),
+    ]
     for offset in (1, 2, 3):
         played = [c for e in log if e["p"] == (p + offset) % 4 for c in e["cards"] or []]
         parts.append(cards_array(played))
@@ -210,10 +230,15 @@ class PolicyNetwork:
             raise ValueError("Expected the supplied PolicyNetwork DMC checkpoint")
         self.layers = []
         for i, (inputs, outputs) in enumerate(zip(dims, dims[1:])):
-            w, b = weights[2 * i:2 * i + 2]
-            if (w.shape != (inputs, outputs) or b.shape != (outputs,)
-                    or w.dtype != np.float32 or b.dtype != np.float32
-                    or not np.isfinite(w).all() or not np.isfinite(b).all()):
+            w, b = weights[2 * i : 2 * i + 2]
+            if (
+                w.shape != (inputs, outputs)
+                or b.shape != (outputs,)
+                or w.dtype != np.float32
+                or b.dtype != np.float32
+                or not np.isfinite(w).all()
+                or not np.isfinite(b).all()
+            ):
                 raise ValueError("Unexpected checkpoint layer")
             self.layers.append((w, b))
         self.lock = threading.Lock()
@@ -234,7 +259,7 @@ class PolicyNetwork:
         with self.lock:
             # Bound memory without discarding suit variants or truncating candidates.
             for first in range(0, len(actions), 256):
-                chunk = actions[first:first + 256]
+                chunk = actions[first : first + 256]
                 batch = np.empty((len(chunk), 567), dtype=np.float32)
                 batch[:, :513] = features
                 batch[:, 513:] = [cards_array(action) for action in chunk]
@@ -242,6 +267,10 @@ class PolicyNetwork:
         if not np.isfinite(scores).all():
             raise ValueError("Nonfinite model output")
         best = int(np.argmax(scores))
-        return {"index": best, "value": scores[best], "candidates": len(actions),
-                "elapsedMs": round((time.perf_counter() - start) * 1000), "engine": "PolicyNetwork DMC"}
-
+        return {
+            "index": best,
+            "value": scores[best],
+            "candidates": len(actions),
+            "elapsedMs": round((time.perf_counter() - start) * 1000),
+            "engine": "PolicyNetwork DMC",
+        }

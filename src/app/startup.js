@@ -1,7 +1,7 @@
 import { runtime } from './runtime.js';
-import { boot } from './restore.js';
-import { lobbyStatus, setMode } from '../lobby/lobby.js';
+import { lobbyStatus, setMode, showStart } from '../lobby/lobby.js';
 import { $ } from '../ui/cards.js';
+import { savedSeat } from '../network/rejoin-storage.js';
 
 let invitedRoom;
 
@@ -18,11 +18,18 @@ export function initialize() {
       lobbyStatus('邀请链接：' + url.href);
     }
   };
-  boot();
+  showStart();
   invitedRoom = new URLSearchParams(location.search).get('room');
+  const previous = savedSeat(invitedRoom);
+  if (!invitedRoom && previous) invitedRoom = previous.code;
   if (/^\d{4}$/.test(invitedRoom || '')) {
     setMode('join');
     $('#roomCode').value = invitedRoom;
     lobbyStatus('输入昵称，然后点「进入」加入朋友的牌桌');
+    if (previous) {
+      $('#nick').value = previous.name;
+      $('#joinBtn').click();
+      lobbyStatus('正在恢复原来的座位…');
+    }
   }
 }

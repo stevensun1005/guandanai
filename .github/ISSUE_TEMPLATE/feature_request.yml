@@ -1,0 +1,28 @@
+name: 改进建议
+description: 从实际牌局中的一个需求开始。
+title: '[建议] '
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 在什么场景下需要？
+      description: 先描述你遇到的问题或多余操作。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 希望怎样改善？
+      description: 可以附操作示例、草图或具体牌局。
+    validations:
+      required: true
+  - type: dropdown
+    id: focus
+    attributes:
+      label: 主要影响
+      options:
+        - 日常打牌体验
+        - 联机与恢复
+        - 电脑策略
+        - 复盘练习
+        - 开发与文档

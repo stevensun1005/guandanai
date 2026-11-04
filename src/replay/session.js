@@ -35,6 +35,8 @@ import { $, cardHTML, displayOrder } from '../ui/cards.js';
 import { practiceStepGo } from '../ui/clocks.js';
 import { kangHtml } from '../ui/table.js';
 import { syncFullscreen } from '../ui/fullscreen.js';
+import { leaveNet } from '../network/rooms.js';
+import { forgetSeat } from '../network/rejoin-storage.js';
 
 let practiceResize;
 export let pcol;
@@ -53,6 +55,8 @@ let sfIdxP;
 let hotOff;
 
 export function enterPractice() {
+  leaveNet();
+  forgetSeat();
   runtime.reviewMode = true;
   document.body.classList.add('practice');
   syncPhone();

@@ -6,6 +6,10 @@ export let VERSION;
 export let OLD_PAGE;
 export let peerReady;
 
+export function versionsMatch(clients, version) {
+  return [...clients].every((info) => !info.dir || info.version === version);
+}
+
 export function initialize() {
   /* ---------- connections (PeerJS: browsers talk to each other directly, matched by the room number) ---------- */
   ROOM_PREFIX = 'guandanai-room-';

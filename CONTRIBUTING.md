@@ -29,6 +29,8 @@ npm run build
 
 UI 改动附实际截图并检查手机宽度；规则改动加入具体手牌用例；联机改动跑双浏览器检查；模型改动记录数值一致性、耗时和真实对战结果。
 
+模型和浏览器验证使用 Python 3.11+，可用 `python -m pip install -r requirements-dev.txt` 安装已验证依赖。Python 工具通过 `python -m ruff format scripts tests ai/reference` 格式化；其依赖不进入浏览器生产环境。
+
 ## 提交与 PR
 
 一个提交处理一件完整的事。PR 描述先说明玩家遇到什么问题、改完后的行为，再写验证方法。避免只有「优化」「修复一些问题」这样的标题。

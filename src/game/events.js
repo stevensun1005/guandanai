@@ -1,16 +1,17 @@
 import { runtime } from '../app/runtime.js';
+import { TableBot } from '../ai/controller.js';
 import { BASE_NAMES } from '../core/cards.js';
 import { readPlay, canPass, isReturnCard } from '../core/validation.js';
 import { doCut, doShuffle, startRound } from './dealing.js';
 import { doPlay } from './round.js';
 import { toAbs, toLocal } from './session.js';
 import { owesReturn, retWait, returnNow, tribWait } from './tribute.js';
-import { beginPlay } from './turns.js';
+import { beginPlay, startTurn } from './turns.js';
 import { startNextIfReady } from '../input/controls.js';
 import { broadcast } from '../network/rooms.js';
 import { VC } from '../network/voice.js';
 import { $ } from '../ui/cards.js';
-import { playerLeft, setPaused, showResult } from '../ui/overlays.js';
+import { playerLeft, playerReturned, setPaused, showResult } from '../ui/overlays.js';
 import { render } from '../ui/table.js';
 
 /* ---------- events: every move goes through the host, which applies it and passes it on ---------- */
@@ -124,6 +125,13 @@ function applyEvt(e) {
       return true;
     case 'humans':
       setHumans(e.list.map(toLocal), e.names);
+      if (e.joined != null) {
+        playerReturned();
+        if (runtime.game.phase === 'play' && runtime.game.turn === toLocal(e.joined)) {
+          TableBot.cancelTurn();
+          startTurn();
+        }
+      }
       if (e.left) playerLeft(e.left, e.how);
       setTimeout(startNextIfReady, 0);
       return true;

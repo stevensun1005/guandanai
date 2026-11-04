@@ -39,7 +39,7 @@ Node 检查不要求 Python：
 先启动本地预览，另开终端：
 
 ```bash
-python -m pip install numpy onnx onnxruntime playwright
+python -m pip install -r requirements-dev.txt
 python tests/production_smoke.py
 python tests/browser_smoke.py
 ```
@@ -77,3 +77,16 @@ python tests/benchmark_model.py
 ## 公开牌谱
 
 `python tests/public_history_smoke.py` 在桌面、手机横竖屏检查查看入口、按玩家筛选、实时记录更新、复制与下载一致、名字作为纯文本呈现、弹窗内快捷键隔离与 Esc 关闭。纯文本牌谱和四家明牌的复盘文件是不同用途；前者不包含隐藏手牌，也不能直接作为明牌练习导入。
+
+## 刷新与断线恢复
+
+```bash
+python tests/rejoin_smoke.py
+python tests/seat_credentials_smoke.py
+python tests/multiround_smoke.py http://127.0.0.1:8765/ 3 4 --rejoin
+python tests/multiround_smoke.py http://127.0.0.1:8765/ 3 2 --rejoin
+```
+
+第一项用实际 Worker 延迟回复，检查玩家回来后不会收到旧电脑落牌；第二项验证换人、房主占位和主动退出后的旧凭据失效。连续对局分别覆盖三个客人视角、结算恢复和观察／融合双模型电脑。报告与边界见 [房间指南](ROOMS.md)。
+
+Python 开发工具的已验证依赖保存在 `requirements-dev.txt`，模型训练依赖独立放在 `requirements-models.txt`。使用 Python 3.11+；本轮在 3.13 上执行。格式检查：`python -m ruff format --check scripts tests ai/reference`。普通玩家和生产构建不需要这些 Python 包。

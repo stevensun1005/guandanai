@@ -1,0 +1,15 @@
+{
+  "hostDirection": "W",
+  "guestDirection": "S",
+  "refreshDuringPrep": true,
+  "refreshDuringInFlightPolicy": true,
+  "stalePolicyCancelled": true,
+  "realGuestActionAfterReturn": true,
+  "dataChannelAutomaticRecovery": true,
+  "unknownSeatRejected": true,
+  "sameCredential": true,
+  "guestAvoidsModelDownload": true,
+  "hostExitOffersSoloContinuation": true,
+  "soloContinuationLoadsLearnedPolicy": true,
+  "pageErrors": []
+}

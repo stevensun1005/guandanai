@@ -179,6 +179,9 @@ export function initialize() {
       check,
       decide,
       playTurn,
+      cancelTurn() {
+        generation++;
+      },
       candidates,
       state,
       get ready() {

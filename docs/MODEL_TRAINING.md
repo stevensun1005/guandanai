@@ -20,7 +20,7 @@
 训练采用固定随机种子、NumPy Adam 和二元交叉熵，另训练一个线性预测基线。可复现脚本不启动网络服务，也不自动覆盖已发布权重。
 
 ```bash
-python -m pip install numpy onnx onnxruntime
+python -m pip install -r requirements-models.txt
 node scripts/collect-responses.mjs --games=5000 --seed=20270104 --output=work/learning/dataset
 python scripts/train_response.py work/learning/dataset work/learning/candidate
 ```

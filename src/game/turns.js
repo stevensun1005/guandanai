@@ -4,8 +4,9 @@ import { Sound } from '../audio/sound.js';
 import { beats } from '../core/combinations.js';
 import { genPlays } from '../core/moves.js';
 import { AI_THINK_MAX, AI_THINK_MIN, PLAY_MS, PREP_MS } from './clock.js';
-import { isHost, isHumanSeat } from './session.js';
-import { processReturns, returnNow } from './tribute.js';
+import { isHost, isHumanSeat, toAbs } from './session.js';
+import { act } from './events.js';
+import { processReturns } from './tribute.js';
 import { sortHints } from '../hand/follow-hints.js';
 import { onPlay } from '../input/actions.js';
 import { practiceSnap } from '../replay/history.js';
@@ -29,13 +30,17 @@ export function startPrep(leader) {
   };
   render();
   // the computer players return their card early in the sorting minute, one after the other
-  (runtime.game.returns || [])
+  (isHost() ? runtime.game.returns || [] : [])
     .filter((x) => !isHumanSeat(x.from))
     .forEach((x, i) =>
       later(
         () => {
           if (runtime.game.phase === 'prep' && runtime.game.returns.includes(x))
-            returnNow(x.from, aiReturnCard(runtime.game.hands[x.from], runtime.game.L).id);
+            act({
+              k: 'return',
+              p: toAbs(x.from),
+              id: aiReturnCard(runtime.game.hands[x.from], runtime.game.L).id,
+            });
         },
         1500 + i * 1200,
       ),

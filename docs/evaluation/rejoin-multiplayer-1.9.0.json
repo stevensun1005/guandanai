@@ -1,0 +1,64 @@
+{
+  "clients": 4,
+  "bots": 0,
+  "botStyles": [],
+  "hostDirection": "W",
+  "rounds": [
+    {
+      "round": 1,
+      "moves": 73,
+      "levels": [
+        2,
+        3
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 2,
+      "moves": 89,
+      "levels": [
+        2,
+        4
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 3,
+      "moves": 92,
+      "levels": [
+        3,
+        4
+      ],
+      "allClientsEqual": true
+    }
+  ],
+  "cardConservation": true,
+  "realGuestActions": true,
+  "hostTimeoutUsedLearnedPolicy": true,
+  "guestsAvoidModelDownload": true,
+  "rejoins": [
+    {
+      "round": 1,
+      "offset": 1,
+      "phase": "prep"
+    },
+    {
+      "round": 1,
+      "offset": 3,
+      "phase": "roundEnd"
+    },
+    {
+      "round": 2,
+      "offset": 2,
+      "phase": "prep"
+    },
+    {
+      "round": 3,
+      "offset": 3,
+      "phase": "prep"
+    }
+  ],
+  "auxiliaryModelLoaded": false,
+  "pageErrors": [],
+  "elapsedSeconds": 175.6080793000001
+}
