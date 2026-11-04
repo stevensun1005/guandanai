@@ -50,6 +50,12 @@ dist/                 构建后的网页
 
 ## 验证
 
+### 1.1 模型推理优化
+
+模型局面输入与候选动作输入分离，每批复用局面特征，避免为每个候选动作重复复制和计算同一局面。网络参数未重新训练；此版本优化推理性能，保持既有强化学习策略。模型和后台脚本使用页面版本作为缓存标识，模型更新后会加载对应资源。
+
+本机 Chrome 中，对同一组 166 个候选动作进行 32 轮交替测量（前 4 轮预热）：耗时中位数由 15.5 ms 降至 11.1 ms；128 动作批次的输入量减少 89.8%。这组测量的输出最大差异为 0。性能结果会随设备、浏览器和手牌变化。
+
 玩家无需 Python；开发验证和模型导出可使用 Python、NumPy、ONNX 和 Playwright：
 
 ```powershell
@@ -57,6 +63,7 @@ python -m pip install numpy onnx playwright
 npm test
 python tests/check_encoding.py
 python tests/browser_smoke.py
+python tests/benchmark_model.py
 ```
 
 浏览器测试需要已安装 Chrome，并先启动本地预览。也可传入已发布网址，验证项目路径下的模型加载、开房、邀请链接、双端出牌同步、掉线接管和手机布局。

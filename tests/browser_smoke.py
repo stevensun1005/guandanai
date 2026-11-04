@@ -99,7 +99,7 @@ def main():
         assert not mobile.evaluate('document.documentElement.scrollWidth>innerWidth')
         # Failed resource loading waits for a retry instead of changing bot strategy.
         failure_context=browser.new_context()
-        failure_context.route('**/models/policy.onnx',lambda route:route.abort())
+        failure_context.route('**/models/policy.onnx*',lambda route:route.abort())
         failure=failure_context.new_page()
         failure.on('pageerror',lambda error:errors.append(str(error)))
         failure.goto(URL,wait_until='networkidle')
@@ -113,7 +113,7 @@ def main():
         }""")
         failure.locator('#retryTableBtn').wait_for(state='visible',timeout=25000)
         assert failure.evaluate('G.log.length')==0
-        failure_context.unroute('**/models/policy.onnx')
+        failure_context.unroute('**/models/policy.onnx*')
         failure.locator('#retryTableBtn').click()
         failure.wait_for_function('G.log.length>=1',timeout=60000)
         failure_context.close()

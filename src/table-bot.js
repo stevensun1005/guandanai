@@ -12,7 +12,8 @@ const TableBot = (() => {
   function request(type, state) {
     return new Promise((resolve, reject) => {
       if (!worker) {
-        worker = new Worker(new URL('./assets/ai-worker.mjs', document.baseURI), {type:'module'});
+        const url=new URL('./assets/ai-worker.mjs', document.baseURI);url.searchParams.set('v',VERSION);
+        worker = new Worker(url, {type:'module'});
         worker.onmessage = ({data}) => {
           const item = pending.get(data.id); if (!item) return;
           pending.delete(data.id); clearTimeout(item.timer);

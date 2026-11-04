@@ -7,7 +7,8 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const read = async name => (await readFile(path.join(root, name), 'utf8')).replace(/\r\n/g, '\n');
 let html = await read('src/game.html');
 const css = await read('src/layout.css'), bridge = await read('src/table-bot.js');
-const version = createHash('sha256').update(html + css + bridge + await read('src/ai/encoding.mjs') + await read('src/ai/worker.mjs')).digest('hex').slice(0, 10);
+const version = createHash('sha256').update(html + css + bridge + await read('src/ai/encoding.mjs') + await read('src/ai/worker.mjs'))
+  .update(await readFile(path.join(root,'ai/policy.onnx'))).digest('hex').slice(0, 10);
 html = html.replace('<link rel="stylesheet" href="layout.css">', `<style>\n${css}\n</style>`)
   .replace('<script src="table-bot.js"></script>', `<script>\n${bridge}\n</script>`)
   .replace("const VERSION='dev';", `const VERSION='${version}';`)
