@@ -19,30 +19,40 @@ async function decide(state) {
   const started = performance.now();
   let best = -Infinity,
     index = 0;
+  const scores = state.includeValues ? [] : null;
   const stateTensor = new ort.Tensor('float32', features, [1, 513]);
-  for (let first = 0; first < state.actions.length; first += 128) {
-    const chunk = state.actions.slice(first, first + 128),
-      batch = new Float32Array(chunk.length * 54);
-    for (let i = 0; i < chunk.length; i++) batch.set(cardsArray(chunk[i]), i * 54);
-    const actionTensor = new ort.Tensor('float32', batch, [chunk.length, 54]);
-    const output = await engine.run({ state: stateTensor, actions: actionTensor });
-    const values = output.values.data;
-    for (let i = 0; i < values.length; i++) {
-      if (!Number.isFinite(values[i])) throw Error('Invalid model output');
-      if (values[i] > best) {
-        best = values[i];
-        index = first + i;
+  try {
+    for (let first = 0; first < state.actions.length; first += 128) {
+      const chunk = state.actions.slice(first, first + 128);
+      const batch = new Float32Array(chunk.length * 54);
+      for (let i = 0; i < chunk.length; i++) batch.set(cardsArray(chunk[i]), i * 54);
+      const actionTensor = new ort.Tensor('float32', batch, [chunk.length, 54]);
+      let output;
+      try {
+        output = await engine.run({ state: stateTensor, actions: actionTensor });
+        const values = output.values.data;
+        for (let i = 0; i < values.length; i++) {
+          if (!Number.isFinite(values[i])) throw Error('Invalid model output');
+          if (scores) scores.push(values[i]);
+          if (values[i] > best) {
+            best = values[i];
+            index = first + i;
+          }
+        }
+      } finally {
+        actionTensor.dispose();
+        if (output) for (const tensor of Object.values(output)) tensor.dispose();
       }
     }
-    actionTensor.dispose();
-    for (const tensor of Object.values(output)) tensor.dispose();
+  } finally {
+    stateTensor.dispose();
   }
-  stateTensor.dispose();
   return {
     index,
     value: best,
     candidates: state.actions.length,
     elapsedMs: Math.round(performance.now() - started),
+    ...(scores ? { values: scores } : {}),
   };
 }
 let queue = Promise.resolve();

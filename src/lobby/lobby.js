@@ -14,6 +14,7 @@ import {
 import { fsOn, testFull } from '../replay/session.js';
 import { $ } from '../ui/cards.js';
 import { render } from '../ui/table.js';
+import { loadBotPreferences, prepareBotStyles, renderBotSetup } from './bot-setup.js';
 
 export let DIRS;
 export let absOf;
@@ -64,6 +65,7 @@ function renderRules() {
 export function setMode(m) {
   leaveNet();
   loadRules();
+  loadBotPreferences();
   runtime.lobbyMode = m;
   runtime.direction = '';
   runtime.network.lastCode = null;
@@ -108,6 +110,7 @@ export function renderLobby() {
           : '空位';
   }
   renderRules();
+  renderBotSetup();
   const go = $('#sitBtn');
   go.hidden = runtime.lobbyMode === 'join';
   go.textContent = runtime.lobbyMode === 'host' ? '开始' : '坐下开始';
@@ -224,6 +227,7 @@ export function initialize() {
     else {
       runtime.network.mode = 'solo';
       runtime.network.off = 0;
+      prepareBotStyles();
       setHumans([0]);
       $('#myName').textContent = runtime.nickname;
       $('#lobby').hidden = true;

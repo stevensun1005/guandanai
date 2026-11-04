@@ -32,6 +32,8 @@ import * as pointer from './input/pointer.js';
 import * as controls from './input/controls.js';
 import * as restore from './app/restore.js';
 import * as lobby from './lobby/lobby.js';
+import * as botSetup from './lobby/bot-setup.js';
+import * as botProfiles from './ai/profiles.js';
 import * as replaySession from './replay/session.js';
 import * as replayStorage from './replay/storage.js';
 import * as replayInspector from './replay/inspector.js';
@@ -71,6 +73,7 @@ pointer.initialize();
 controls.initialize();
 handTools.initialize();
 lobby.initialize();
+botSetup.initialize();
 replaySession.initialize();
 replayStorage.initialize();
 replayInspector.initialize();
@@ -116,6 +119,8 @@ if (new URLSearchParams(location.search).get('test') === '1') {
     controls,
     restore,
     lobby,
+    botSetup,
+    botProfiles,
     replaySession,
     replayStorage,
     replayInspector,
@@ -173,6 +178,7 @@ if (new URLSearchParams(location.search).get('test') === '1') {
     myNick: 'nickname',
     myDir: 'direction',
     lobbyMode: 'lobbyMode',
+    botStyles: 'botStyles',
     TREC: 'TREC',
     testWH: 'testWH',
     TSEL: 'TSEL',

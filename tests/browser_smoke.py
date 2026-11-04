@@ -22,6 +22,8 @@ def main():
         browser=pw.chromium.launch(headless=True,channel='chrome')
         context=browser.new_context(viewport={'width':1440,'height':1000},permissions=['clipboard-read','clipboard-write'])
         context.add_init_script("localStorage.setItem('guandan-ai','rules')")
+        context.add_init_script("""const NativeWorker=Worker;window.styleDecisions=0;
+          window.Worker=class extends NativeWorker{postMessage(data,...rest){if(data.type==='decide'&&data.state?.includeValues)window.styleDecisions++;return super.postMessage(data,...rest)}};""")
         host=context.new_page();errors=[];api=[]
         host.on('pageerror',lambda error:errors.append(str(error)))
         host.on('request',lambda request:api.append(request.url) if '/api/' in request.url else None)
@@ -55,6 +57,9 @@ def main():
         code=host.locator('#roomCodeShow').inner_text()
         host.evaluate("() => {aiDecide=()=>{throw Error('Unexpected classic decision')}}")
         host.locator('[data-seat="S"]').click()
+        host.locator('#botStyleBox summary').click()
+        host.locator('[data-bot-seat="E"]').select_option('aggressive')
+        host.locator('[data-bot-seat="W"]').select_option('conservative')
         host.locator('#shareRoomBtn').click()
         invite=host.evaluate('navigator.clipboard.readText()')
         assert f'room={code}' in invite
@@ -65,11 +70,15 @@ def main():
         guest.locator('#nick').fill('朋友')
         guest.locator('#joinBtn').click()
         guest.wait_for_function("NET.hostConn&&NET.hostConn.open",timeout=25000)
+        guest.wait_for_function("document.querySelector('[data-bot-seat=E]').value==='aggressive'")
+        assert guest.locator('[data-bot-seat="E"]').is_disabled()
         guest.locator('[data-seat="N"]').click()
         host.wait_for_function("NET.lobby.N==='朋友'",timeout=10000)
         host.locator('#sitBtn').click()
         host.wait_for_function("NET.mode==='host'")
         guest.wait_for_function("NET.mode==='guest'")
+        assert host.evaluate('botStyles')==['balanced','aggressive','balanced','conservative']
+        assert guest.evaluate('botStyles')==host.evaluate('botStyles')
         assert guest.locator('#aiTableStatus,[data-ai-mode]').count()==0
         # Normal shuffle/cut/deal, including a human's action crossing the connection.
         for _ in range(250):
@@ -88,6 +97,7 @@ def main():
             host.evaluate("if(G.clock&&typeof G.clock.who==='number'&&G.clock.think==null)G.clock.left=1")
             host.wait_for_timeout(100)
         assert host.evaluate('G.log.length>=12')
+        assert host.evaluate('styleDecisions')>0
         host.wait_for_timeout(350)
         host_log=host.evaluate('JSON.stringify(G.log.map(e=>({p:e.p,cards:e.cards?.map(c=>c.id)||null})))')
         guest_log=guest.evaluate('JSON.stringify(G.log.map(e=>({p:toAbs(e.p),cards:e.cards?.map(c=>c.id)||null})))')
@@ -125,6 +135,8 @@ def main():
                 'roomCreated':True,'inviteLink':True,'twoClientsPlayed':True,'logsSynchronized':True,
                 'guestDisconnectHandled':True,'legacySettingIgnored':True,'modelRetryWithoutFallback':True,
                 'hiddenModelControls':True,'pageErrors':errors}
+        report['botProfilesSynchronized']=True
+        report['learnedStyleDecisions']=host.evaluate('styleDecisions')
         (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
         print(json.dumps(report));browser.close()
 

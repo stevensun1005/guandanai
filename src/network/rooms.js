@@ -8,6 +8,8 @@ import { isHumanSeat, newGame, resetGame, toLocal } from '../game/session.js';
 import { owesReturn, retWait, tribOptions, tribWait } from '../game/tribute.js';
 import { beginPlay, startTurn } from '../game/turns.js';
 import { DIRS, absOf, lobbyStatus, nickNow, renderLobby } from '../lobby/lobby.js';
+import { normalizeBotPreferences, prepareBotStyles } from '../lobby/bot-setup.js';
+import { profileId } from '../ai/profiles.js';
 import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady } from './protocol.js';
 import { VC } from './voice.js';
 import { $ } from '../ui/cards.js';
@@ -68,6 +70,7 @@ export function openRoom() {
         seats: runtime.network.lobby,
         you: '',
         rules: runtime.rules,
+        botPreferences: runtime.botPreferences,
         ver: VERSION,
       });
     });
@@ -88,6 +91,7 @@ export function broadcastLobby() {
         seats: runtime.network.lobby,
         you: v.dir,
         rules: runtime.rules,
+        botPreferences: runtime.botPreferences,
         ver: VERSION,
       });
 }
@@ -234,6 +238,7 @@ function hostOnClose(conn, how = 'drop') {
 
 // the host starts: everyone learns where everyone sits, then the first deal goes out
 export function startOnline() {
+  prepareBotStyles();
   runtime.network.started = true;
   runtime.network.hostDir = runtime.direction;
   const names = {};
@@ -244,7 +249,14 @@ export function startOnline() {
   const peers = { 0: runtime.network.peer.id };
   for (const v of runtime.network.conns.values())
     if (v.dir && runtime.network.lobby[v.dir]) peers[absOf(v.dir, runtime.direction)] = v.conn.peer;
-  broadcast({ t: 'start', hostDir: runtime.direction, names, rules: runtime.rules, peers });
+  broadcast({
+    t: 'start',
+    hostDir: runtime.direction,
+    names,
+    rules: runtime.rules,
+    peers,
+    botStyles: runtime.botStyles,
+  });
   enterOnline('host', runtime.direction, names);
   newGame();
   VC.start(peers);
@@ -341,6 +353,7 @@ function guestOnData(d) {
       sendSit(r);
     }
     if (d.rules) Object.assign(runtime.rules, d.rules);
+    runtime.botPreferences = normalizeBotPreferences(d.botPreferences);
     if (d.ver && d.ver !== VERSION) lobbyStatus(OLD_PAGE);
     else
       lobbyStatus(runtime.direction ? '已坐下，等待房主开始' : '选一个空座位', !!runtime.direction);
@@ -355,6 +368,7 @@ function guestOnData(d) {
       localStorage.setItem('guandan-nick', runtime.nickname);
     } catch (_) {}
     if (d.rules) Object.assign(runtime.rules, d.rules);
+    runtime.botStyles = Array.from({ length: 4 }, (_, index) => profileId(d.botStyles?.[index]));
     enterOnline('guest', d.hostDir, d.names);
     resetGame();
     render();
@@ -397,6 +411,9 @@ function hostGone() {
 
 // the host left: this table carries on alone from wherever the game stood, the computer taking every other seat
 function goSolo() {
+  runtime.botStyles = Array.from({ length: 4 }, (_, index) =>
+    profileId(runtime.botStyles?.[(index + runtime.network.off) % 4]),
+  );
   VC.stop();
   try {
     runtime.network.peer && runtime.network.peer.destroy();

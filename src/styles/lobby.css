@@ -4,13 +4,67 @@
   inset: 0;
   z-index: 120;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: auto;
   background: radial-gradient(ellipse at 50% 40%, var(--felt) 0%, var(--felt-deep) 100%);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 10px;
+}
+.bot-setup {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+  padding: 10px 12px;
+  background: #ffffff04;
+}
+.bot-setup summary {
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 15px;
+}
+.bot-setup summary span {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 6px;
+}
+.bot-setup-row {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.bot-setup-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+.bot-setup select {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--felt-deep);
+  color: var(--ink);
+  font: inherit;
+}
+.bot-setup .human-seat {
+  opacity: 0.55;
+}
+.bot-setup p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+.bot-setup .link {
+  margin-top: 12px;
+  color: var(--gold);
 }
 /* everything fits on one screen, a laptop or a phone, without scrolling */
 .lobby-box {
