@@ -1,3 +1,4 @@
+import { roundOutcome } from '../core/match.js';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { isBomb } from '../core/combinations.js';
@@ -132,47 +133,11 @@ function finishRound() {
     const j = (i + k) % 4;
     if (!runtime.game.out.includes(j)) runtime.game.out.push(j);
   }
-  const first = runtime.game.out[0],
-    team = first % 2,
-    mate = (first + 2) % 4;
-  const pos = runtime.game.out.indexOf(mate);
-  const up = pos === 1 ? 3 : pos === 2 ? 2 : 1;
-  const before = runtime.game.levels[team];
-  let win = false;
-  const aTeam = runtime.game.lvlTeam,
-    atA = runtime.game.L === 14;
-  if (runtime.game.lvlTeam === team && before === 14 && pos <= 2) win = true;
-  else runtime.game.levels[team] = Math.min(14, before + up);
-  const after = runtime.game.levels[team];
-  // each side gets three tries at A: after the third miss the match is drawn, or that side starts again from 2
-  let aTry = 0,
-    draw = false,
-    reset = false;
-  if (atA && !win && runtime.rules.aFail !== 'keep') {
-    const f = runtime.game.aFails || (runtime.game.aFails = [0, 0]);
-    aTry = ++f[aTeam];
-    if (aTry >= 3) {
-      if (runtime.rules.aFail === 'draw') draw = true;
-      else {
-        runtime.game.levels[aTeam] = 2;
-        f[aTeam] = 0;
-        reset = true;
-      }
-    }
-  }
-  runtime.game.result = {
-    order: runtime.game.out.slice(),
-    team,
-    up,
-    before,
-    after,
-    win,
-    draw,
-    reset,
-    aTry,
-    aTeam,
-    playedLevel: runtime.game.L,
-  };
+  const outcome = roundOutcome(runtime.game, runtime.game.out, runtime.rules.aFail);
+  runtime.game.levels = outcome.levels;
+  runtime.game.aFails = outcome.aFails;
+  runtime.game.result = outcome.result;
+  const { team, win, draw } = outcome.result;
   if (runtime.reviewMode) practiceRoundEnd();
   runtime.game.prevOut = runtime.game.out.slice();
   runtime.game.lvlTeam = team;

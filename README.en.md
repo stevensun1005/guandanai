@@ -117,4 +117,4 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 
 [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md)
 
-Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). Experimental policies have not reached the 80% win-rate target against the existing rule bots.
+Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). The clarified objective is team victory over a complete match from 2 through A; historical single-round results remain auxiliary, and the match-level policy is still being trained and validated.

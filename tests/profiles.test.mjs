@@ -95,31 +95,3 @@ test('blended preferences respond to public urgency, partner lead and accumulate
   }
   assert.equal(selectProfileAction([single, bomb], [0.8, 0.6], 'adaptive', context), 0);
 });
-
-test('personality cannot promote a close early bomb, but preserves model bombs and urgent defense', () => {
-  const early = {
-    ...context,
-    counts: [27, 22, 27, 27],
-    hand: deck.slice(0, 27),
-    trick: { player: 1, play: { type: 'full', value: 13, n: 5 } },
-  };
-  for (const style of ['aggressive']) {
-    assert.equal(selectProfileAction([null, bomb], [0.51, 0.5], style, early), 0);
-    assert.equal(selectProfileAction([single, bomb], [0.51, 0.5], style, early), 0);
-  }
-  assert.equal(selectProfileAction([null, bomb], [0.5, 0.54], 'aggressive', early), 1);
-  assert.equal(
-    selectProfileAction([null, bomb], [0.51, 0.5], 'aggressive', {
-      ...early,
-      counts: [27, 3, 27, 27],
-    }),
-    1,
-  );
-  assert.equal(
-    selectProfileAction([null, bomb], [0.51, 0.5], 'aggressive', {
-      ...early,
-      hand: deck.slice(0, 8),
-    }),
-    1,
-  );
-});

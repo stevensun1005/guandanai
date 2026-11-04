@@ -126,19 +126,10 @@ export function selectProfileAction(plays, values, requestedStyle, context) {
   const observed = usesResponseModel(style) ? observeResponses(context.log) : null;
   const blend = style === 'adaptive' ? adaptiveWeights(context) : null;
   const floor = values[best] - 0.055;
-  // Personality alone must not spend a control bomb while everyone is far from finishing.
-  const preserveBomb =
-    style === 'aggressive' &&
-    !(plays[best] && isBomb(plays[best])) &&
-    context.hand.length > 10 &&
-    [(context.p + 1) % 4, (context.p + 3) % 4].every(
-      (seat) => context.counts[seat] === 0 || context.counts[seat] > 5,
-    );
   let chosen = best,
     score = -Infinity;
   for (let index = 0; index < plays.length; index++) {
     if (values[index] < floor) continue;
-    if (preserveBomb && plays[index] && isBomb(plays[index])) continue;
     const candidate =
       values[index] + preference(plays[index], style, context, observed, null, blend);
     if (candidate > score) {
@@ -151,7 +142,6 @@ export function selectProfileAction(plays, values, requestedStyle, context) {
     score = -Infinity;
     for (let index = 0; index < plays.length; index++) {
       if (!plays[index] || values[index] < floor) continue;
-      if (preserveBomb && plays[index] && isBomb(plays[index])) continue;
       const candidate =
         values[index] +
         preference(plays[index], style, context, observed, context.responseRisks[index], blend);

@@ -13,14 +13,18 @@ import numpy as np
 import torch
 from torch import nn
 
-from ppo_learning import FEATURES, PARAMETERS, file_sha, load_actor, save_actor
+from ppo_learning import PARAMETERS, file_sha, load_actor, save_actor
 
 
 class ActorCritic(nn.Module):
     def __init__(self, weights):
         super().__init__()
-        self.actor = nn.Sequential(nn.Linear(FEATURES, 64), nn.Tanh(), nn.Linear(64, 1))
-        self.critic = nn.Sequential(nn.Linear(FEATURES, 64), nn.Tanh(), nn.Linear(64, 1))
+        self.actor = nn.Sequential(
+            nn.Linear(weights["actor_w0"].shape[0], 64), nn.Tanh(), nn.Linear(64, 1)
+        )
+        self.critic = nn.Sequential(
+            nn.Linear(weights["actor_w0"].shape[0], 64), nn.Tanh(), nn.Linear(64, 1)
+        )
         with torch.no_grad():
             for branch in ("actor", "critic"):
                 network = getattr(self, branch)
@@ -133,6 +137,15 @@ class Rollouts:
             ):
                 if file_sha(source) != expected:
                     raise ValueError("PPO proposal or feature source changed")
+            if config.get("objective") == "full-match":
+                root = Path(__file__).resolve().parents[1]
+                for name, source in [
+                    ("matchEncoderSHA256", root / "scripts/match_learning.py"),
+                    ("matchRulesSHA256", root / "src/core/match.js"),
+                    ("matchSimulationSHA256", root / "scripts/lib/match-simulation.mjs"),
+                ]:
+                    if name in config and file_sha(source) != config[name]:
+                        raise ValueError("Full-match rules or encoding changed")
             collection = metadata["collection"]
             games = collection.get("options", {}).get("games")
             seed = collection.get("seed")
@@ -161,16 +174,16 @@ class Rollouts:
             if (
                 not isinstance(rows, int)
                 or rows <= 0
-                or metadata["features"] != FEATURES
+                or metadata["features"] != config["features"]
                 or metadata["auxFloats"] != 3 * k + 5
             ):
                 raise ValueError("Invalid PPO buffer dimensions")
-            if (path / "features.f32").stat().st_size != rows * k * FEATURES * 4 or (
+            if (path / "features.f32").stat().st_size != rows * k * config["features"] * 4 or (
                 path / "aux.f32"
             ).stat().st_size != rows * (3 * k + 5) * 4:
                 raise ValueError("Truncated PPO rollout files")
             features = np.memmap(
-                path / "features.f32", dtype="<f4", mode="r", shape=(rows, k, FEATURES)
+                path / "features.f32", dtype="<f4", mode="r", shape=(rows, k, config["features"])
             )
             for start in range(0, rows, 8192):
                 if not np.isfinite(features[start : start + 8192]).all():
@@ -200,7 +213,11 @@ class Rollouts:
                 or np.any((episodes < 0) | (episodes >= games))
                 or not np.isin(seats, [0, 1, 2, 3]).all()
                 or not np.isin(
-                    np.round(np.abs(targets), 1), np.array([1.1, 1.2, 1.3], np.float32)
+                    np.round(np.abs(targets), 1),
+                    np.array(
+                        [0, 1] if config.get("objective") == "full-match" else [1.1, 1.2, 1.3],
+                        np.float32,
+                    ),
                 ).all()
             ):
                 raise ValueError("Invalid PPO episode IDs, seats or team returns")
@@ -229,7 +246,7 @@ class Rollouts:
         self.sample_weights = np.ones(self.rows, np.float32)
 
     def get_features(self, indices):
-        batch = np.empty((len(indices), self.config["k"], FEATURES), np.float32)
+        batch = np.empty((len(indices), self.config["k"], self.config["features"]), np.float32)
         for first, last, features in self.parts:
             selected = (indices >= first) & (indices < last)
             batch[selected] = features[indices[selected] - first]

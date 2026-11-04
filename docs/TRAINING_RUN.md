@@ -93,3 +93,20 @@ python tests/ppo_browser_smoke.py --checkpoint=work/learning/example-ppo/cycle-0
 [机器可读报告](evaluation/policy-training-heldout-2026-11-04.json)。每局是两名学习策略队友对两名原规则机器人，头游所在队获胜；不是完整打 A 的整场胜率。
 
 下一批本地训练已启动：24 次更新、每次 2,000 局，输出 `work/learning/ppo-k4-next/run.json`。这是运行计划，不是已完成局数；只有每次更新完成后写入的对战报告才属于实际成绩。后续模型需另选新验收牌局，不能重复使用本次验收集选模。
+
+## 目标修正：按完整比赛学习团队配合
+
+根据玩家进一步明确的目标，先前的“80% 单把头游队胜率”已被替换。新的主指标是**从打 2 到通过 A 的整场队伍胜率**；平局单列，并计入总场次数，不能只统计分出胜负的比赛。历史单把成绩不改写，也不能直接与新指标比较。
+
+训练环境现在完整推进升级、队友名次、下一把进还贡、抗贡和打 A 的失败次数，结算直接使用网页同一份 `src/core/match.js`。终局团队获胜、失败、规则定义的平局分别回填 +1、-1、0。没有把“少拆对子”“一定送队友”或“弱牌不能炸”做成策略禁令，也没有为这些具体打法手工加分。它们的好坏由实际后续整场结果体现。
+
+模型在头游出现后继续决策和学习；有机会一次出完时，也保留合法替代动作参与选择。首批 64 场完整训练含 691 把、20,514 条学习决策，其中 3,321 条发生在头游之后。已用这些样本完成参数更新；这是流程与参数更新验证，不是整场棋力提升证明。
+
+```bash
+node scripts/collect-matches.mjs --matches=64 --seed=31100104 --output=work/learning/full-match-example/data
+python scripts/train_ppo.py work/learning/full-match-example/data --output=work/learning/full-match-example/model
+```
+
+目前整场 Actor 仍使用神经网络提案的前四个候选，训练没有覆盖所有合法动作；模型能力不能理解为已掌握玩家提出的全部战术。新检查点包含额外的公开整场信息，禁止使用旧的单把导出器直接发布。
+
+旧的额外 48,000 把单把训练已停止，已有数据与参数保留。新的持续训练计划为 16 次更新，每次 128 场完整比赛，记录在 `work/learning/full-match-training/run.json`。其中只有已标记完成的部分属于实际训练量。

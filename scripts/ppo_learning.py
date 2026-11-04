@@ -43,7 +43,10 @@ def initialize_weights(seed=765013):
 
 
 def validate_weights(weights):
-    shapes = ((FEATURES, 64), (64,), (64, 1), (1,)) * 2
+    width = weights["actor_w0"].shape[0]
+    if width not in (FEATURES, FEATURES + 8):
+        raise ValueError("Unsupported PPO feature width")
+    shapes = ((width, 64), (64,), (64, 1), (1,)) * 2
     if set(weights) != set(PARAMETERS):
         raise ValueError("Invalid PPO weight names")
     for name, shape in zip(PARAMETERS, shapes):
@@ -80,7 +83,7 @@ def load_actor(path):
     config = metadata["config"]
     if metadata.get("kind") != "guandan-ppo" or metadata.get("schema") != 1:
         raise ValueError("Unsupported PPO checkpoint")
-    if config.get("features") != FEATURES or config.get("k") not in (2, 4):
+    if config.get("features") != weights["actor_w0"].shape[0] or config.get("k") not in (2, 4):
         raise ValueError("Incompatible PPO features or candidate count")
     if not np.isfinite(config["temperature"]) or config["temperature"] <= 0:
         raise ValueError("Invalid PPO temperature")
@@ -268,7 +271,7 @@ class PPOEngine:
             "status": "complete" if complete else "collecting",
             "rows": self.rows,
             "games": self.games,
-            "features": FEATURES,
+            "features": self.config["features"],
             "k": self.config["k"],
             "auxFloats": 3 * self.config["k"] + 5,
             "auxLayout": [

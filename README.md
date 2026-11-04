@@ -129,4 +129,4 @@ docs/                 玩法、架构、机器人与迭代路线
 
 [贡献流程](CONTRIBUTING.md) · [机器人设计](docs/BOTS.md) · [模型训练](docs/MODEL_TRAINING.md) · [测试与评估](docs/TESTING.md)
 
-训练进展与复现：[主策略训练记录](docs/TRAINING_RUN.md)。当前实验尚未达到对原规则机器人 80% 的胜率目标。
+训练进展与复现：[主策略训练记录](docs/TRAINING_RUN.md)。当前训练目标已明确为赢下从打 2 到打 A 的完整比赛；历史单把成绩只作辅助对照，整场策略仍在训练验证。

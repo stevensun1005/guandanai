@@ -14,6 +14,10 @@ from ppo_learning import ROOT, file_sha, load_actor
 def export_ppo(checkpoint, destination):
     checkpoint, destination = Path(checkpoint).resolve(), Path(destination).resolve()
     weights, config, actor = load_actor(checkpoint)
+    if config.get("features") != 565:
+        raise ValueError(
+            "Full-match checkpoints require the match-aware export path; legacy export is not compatible"
+        )
     proposal = Path(config["proposalPath"]).resolve()
     for path, expected in (
         (proposal, config["proposalSHA256"]),
