@@ -85,6 +85,7 @@ export function enterPractice() {
     $('#seat' + p).appendChild(e);
   }
   $('#mebar .whorow').insertAdjacentHTML('beforeend', '<span class="mypw" id="myPw"></span>');
+  $('.meinfo').appendChild($('#myPlace'));
   $('#fixBtn').insertAdjacentHTML(
     'afterend',
     '<button class="link" id="splitBtn" title="选中的牌拆成单张">拆开</button>',
@@ -592,7 +593,7 @@ export function practiceRegroup(ids, split) {
 export function practiceGeo() {
   const el = $('#hand'),
     probe = el.firstElementChild,
-    W = el.clientWidth,
+    W = Math.max(probe.offsetWidth * 4, el.clientWidth - 246),
     cw = probe.offsetWidth,
     ch = probe.offsetHeight;
   const rows = rowsOf(runtime.game.fixed.map((gr) => ({ cards: gr })));
@@ -633,6 +634,7 @@ export function practiceGeo() {
 export function practiceMine() {
   const el = $('#myPw');
   if (!el) return;
+  el.hidden = runtime.game.phase !== 'prep';
   let t = '';
   const rec = curRec();
   if (runtime.game.phase === 'play' && rec && rec.live && rec.g === runtime.game.round)

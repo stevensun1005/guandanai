@@ -198,7 +198,10 @@ export function renderControls() {
   // once your hand is empty (out, or the round is over) the play buttons have nothing left to do
   // while you are sorting, the "done sorting" button takes the play buttons' place
   $('#btns').hidden =
-    (!ret && runtime.game.phase !== 'deal' && !runtime.game.hands[0].length) ||
+    (!runtime.reviewMode &&
+      !ret &&
+      runtime.game.phase !== 'deal' &&
+      !runtime.game.hands[0].length) ||
     (sideBtns() &&
       runtime.game.phase === 'prep' &&
       !ret &&

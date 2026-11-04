@@ -256,31 +256,39 @@ body.practice #prepR {
   min-height: 0;
   font-size: 14px;
 }
-body.mini .tpb {
+body.mini .tpb,
+body.practice .tpb {
   overflow-x: hidden;
   overflow-y: auto;
   pointer-events: auto;
-  scrollbar-width: thin;
+  scrollbar-width: auto;
+  scrollbar-color: var(--gold) var(--felt-deep);
+  overscroll-behavior: contain;
 }
 /* a pass: a solid frame like the plays, its 过 in the middle with no dashed frame of its own */
-body.mini .tq.pass {
+body.mini .tq.pass,
+body.practice .tq.pass {
   border-style: solid;
 }
-body.mini .pchip {
+body.mini .pchip,
+body.practice .pchip {
   border: 0;
   width: auto;
   align-self: stretch;
   min-width: calc(var(--mcw) * 1.2);
 }
-body.mini .mcs {
+body.mini .mcs,
+body.practice .tpb .mcs {
   gap: 0;
 }
-body.mini .mc {
+body.mini .mc,
+body.practice .tpb .mc {
   align-items: flex-start;
   padding-left: calc(var(--mcw) * 0.1);
   box-sizing: border-box;
 }
-body.mini .mc + .mc {
+body.mini .mc + .mc,
+body.practice .tpb .mc + .mc {
   margin-left: calc(var(--mcw) * -0.34);
 }
 body:not(.practice) .tq {
@@ -413,6 +421,16 @@ html.phone #miniBtn {
 .tq.rest {
   border-style: dashed;
   opacity: 1;
+  max-width: 100%;
+}
+.tpb .tq.rest .mcs {
+  flex-wrap: wrap;
+  gap: 3px;
+}
+body.practice .tpb .tq.rest .mc,
+body.mini .tpb .tq.rest .mc {
+  flex: none;
+  margin-left: 0;
 }
 .tq.last {
   opacity: 1;
@@ -589,7 +607,7 @@ body.practice #fixBtn:disabled {
   opacity: 0.4;
 }
 body.practice #goBtn {
-  position: absolute;
+  position: fixed;
   margin: 0;
   z-index: 7;
   pointer-events: auto;
@@ -612,7 +630,7 @@ body.practice #fixBtn,
 body.practice #splitBtn,
 body.practice #sortBtn,
 body.practice #undoBtn {
-  position: absolute;
+  position: fixed;
   margin: 0;
   z-index: 7;
   pointer-events: auto;
@@ -622,6 +640,156 @@ body.practice #undoBtn {
 }
 body.practice #splitBtn {
   display: inline-block;
+}
+/* A stable three-by-three dock: finishing sorting, advancing and the next deal share its last slot. */
+body.practice #fixBtn,
+body.practice #splitBtn,
+body.practice #sortBtn,
+body.practice #undoBtn,
+body.practice #goBtn,
+body.practice #btns .btn,
+body.practice #seat0 #deckBtn.atcol,
+body.practice #seat0 #readyBtn.atcol,
+body.practice #nextBtn.atcol {
+  position: fixed;
+  box-sizing: border-box;
+  width: 72px;
+  height: 36px;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0 4px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  animation: none;
+}
+body.practice #readyBtn br {
+  display: none;
+}
+body.practice .cnt {
+  font-size: 18px;
+  animation: none;
+  width: 52px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+html body.practice #seat1 .cnt,
+html body.practice #seat2 .cnt,
+html body.practice #seat3 .cnt {
+  position: static;
+  translate: none;
+  margin: 0;
+}
+body.practice .cnt:empty {
+  display: inline-flex;
+  visibility: hidden;
+}
+body.practice .cnt small {
+  font-size: 11px;
+}
+body.practice #mebar .left {
+  position: relative;
+}
+body.practice #mebar #sfBtn {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+body.practice .place {
+  font-size: 18px;
+  padding: 4px 8px;
+}
+body.practice .place:not(:empty),
+body.practice .tq.last {
+  animation: none;
+}
+body.practice #seat2 .place,
+body.practice #myPlace {
+  position: absolute;
+  top: 50%;
+  left: auto;
+  right: calc(100% + 8px);
+  transform: translateY(-50%);
+  margin: 0;
+}
+body.practice #seat1 .place,
+body.practice #seat3 .place {
+  top: auto;
+  bottom: calc(100% + 6px);
+  left: auto;
+  right: 0;
+  transform: none;
+  margin: 0;
+}
+body.practice .who:has(.place:not(:empty)) .stat,
+body.practice .meinfo:has(.place:not(:empty)) .stat {
+  display: none;
+}
+body.practice .overlay.dock {
+  justify-content: flex-start;
+  padding: 8px;
+}
+body.practice .overlay.dock .panel {
+  box-sizing: border-box;
+  width: min(240px, calc(100vw - 16px));
+  max-height: min(240px, 36dvh);
+  padding: 10px 12px;
+  gap: 6px;
+}
+body.practice .overlay.dock .panel h2 {
+  font-size: 16px;
+}
+body.practice .overlay.dock .panel p {
+  font-size: 13px;
+  line-height: 1.4;
+}
+body.practice .overlay.dock .panel .btns {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+body.practice .overlay.dock .panel .btn:not(.round) {
+  min-height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+}
+@media (min-width: 561px) {
+  body.practice .bar .acts {
+    display: grid;
+    grid-template-columns: repeat(3, 44px);
+    gap: 4px;
+  }
+  body.practice .bar .acts > .link,
+  body.practice .bar .acts > .optwrap > .link {
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    padding: 2px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: normal;
+    text-wrap: balance;
+    justify-content: center;
+  }
+}
+@media (pointer: coarse) {
+  body.practice #fixBtn,
+  body.practice #splitBtn,
+  body.practice #sortBtn,
+  body.practice #undoBtn,
+  body.practice #goBtn,
+  body.practice #btns .btn,
+  body.practice #seat0 #deckBtn.atcol,
+  body.practice #seat0 #readyBtn.atcol,
+  body.practice #nextBtn.atcol {
+    height: 44px;
+  }
 }
 .peek.edit {
   touch-action: none;
@@ -842,13 +1010,16 @@ body.practice .tview .tvmid {
 .tnbox {
   position: fixed;
   z-index: 140;
-  right: 16px;
-  bottom: 16px;
-  width: min(460px, calc(100vw - 32px));
+  left: 8px;
+  bottom: 8px;
+  width: min(240px, calc(100vw - 16px));
+  box-sizing: border-box;
+  max-height: calc(100dvh - 16px);
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 14px 16px;
+  gap: 6px;
+  padding: 10px 12px;
   border-radius: 12px;
   background: var(--felt-deep);
   border: 1px solid var(--gold);
@@ -857,7 +1028,7 @@ body.practice .tview .tvmid {
 }
 .tnbox h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   cursor: move;
   user-select: none;
   -webkit-user-select: none;
@@ -897,7 +1068,7 @@ body.practice .tview .tvmid {
   font: inherit;
   font-size: 16px;
   line-height: 1.5;
-  min-height: 5.5em;
+  min-height: 3em;
   background: rgba(0, 0, 0, 0.25);
   color: var(--ink);
   border: 1px solid var(--line-strong);
@@ -913,8 +1084,9 @@ body.practice .tview .tvmid {
   justify-content: flex-end;
 }
 .tnbox .btn {
-  font-size: 16px;
-  padding: 6px 18px;
+  font-size: 13px;
+  padding: 4px 10px;
+  min-height: 32px;
 }
 .tshint {
   font-size: 12px;

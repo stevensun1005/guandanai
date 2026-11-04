@@ -49,6 +49,8 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 
 The personalities share the RL value policy. Observant and adaptive bots can additionally use a separately trained **supervised response classifier**. They are five playing styles, not five independently trained RL agents. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
 
+The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](docs/PRACTICE.md).
+
 [Bot behavior and evidence](docs/BOTS.md) · [Reproducible model training](docs/MODEL_TRAINING.md)
 
 ## Run locally

@@ -119,7 +119,8 @@ export function dealView(p, c) {
 
 // a count is only announced once a hand is down to 10 or fewer (never while dealing)
 export function showCount(el, n) {
-  const v = runtime.game.phase !== 'deal' && n > 0 && n <= 10 ? String(n) : '';
+  const v =
+    runtime.game.phase !== 'deal' && n > 0 && (runtime.reviewMode || n <= 10) ? String(n) : '';
   if (el.dataset.n === v) return;
   el.dataset.n = v;
   el.innerHTML = v ? `${v}<small>张</small>` : '';

@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "viewport": [1440, 1000],
+      "touch": false,
+      "learnedTurns": 6,
+      "sameActionSlot": true,
+      "readableScrollablePlays": true,
+      "finishedPlayerControls": true,
+      "compactNotesAndResults": true
+    },
+    {
+      "viewport": [1280, 720],
+      "touch": false,
+      "learnedTurns": 6,
+      "sameActionSlot": true,
+      "readableScrollablePlays": true,
+      "finishedPlayerControls": true,
+      "compactNotesAndResults": true
+    },
+    {
+      "viewport": [1024, 768],
+      "touch": true,
+      "learnedTurns": 6,
+      "sameActionSlot": true,
+      "readableScrollablePlays": true,
+      "finishedPlayerControls": true,
+      "compactNotesAndResults": true
+    }
+  ],
+  "pageErrors": [],
+  "fixtureScope": "Overflow, finished-player and result geometry use synthetic display states; six opening turns per viewport use the real learned policy."
+}

@@ -196,7 +196,11 @@ export function drawFixZone(g) {
   }
   const on = !!g;
   z.hidden = t.hidden = $('#fixBtn').hidden = !on;
-  if (!on) return;
+  if (!on) {
+    if (runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(runtime.game?.phase))
+      $('#undoBtn').hidden = false;
+    return;
+  }
   if (runtime.reviewMode && !g.test) {
     z.hidden = t.hidden = true;
     for (const id of ['#fixBtn', '#splitBtn', '#sortBtn', '#undoBtn']) {
@@ -209,36 +213,9 @@ export function drawFixZone(g) {
     const b = $(id);
     if (b) b.hidden = false;
   }
-  // the practice table's groups need no frame: its 成组, 拆开 and 复原 stand in a column just right of the cards (clear
-  // of every row), like the computer's
+  // Practice controls have a fixed viewport dock, independent of the remaining hand.
   if (g.test) {
     z.hidden = t.hidden = true;
-    const tb = $('#fixBtn').parentNode;
-    const col = ['#fixBtn', '#splitBtn', '#sortBtn', '#undoBtn'].map((id) => $(id)).filter(Boolean);
-    // the column starts level with the first row of cards, but no lower than will keep its last button on the hand's area
-    const total = col.reduce((s, b) => s + b.offsetHeight + 6, -6),
-      limit = handEl.offsetTop + handEl.offsetHeight - tb.offsetTop;
-    let y = Math.min(handEl.offsetTop + g.lift - tb.offsetTop, limit - total);
-    // 继续 stands to the right of the column, level with its first button
-    const go = $('#goBtn');
-    if (go) {
-      go.style.left =
-        handEl.offsetLeft +
-        g.right +
-        14 -
-        tb.offsetLeft +
-        Math.max(...col.map((b) => b.offsetWidth)) +
-        12 +
-        'px';
-      go.style.top = y + 'px';
-    }
-    for (const id of ['#fixBtn', '#splitBtn', '#sortBtn', '#undoBtn']) {
-      const b = $(id);
-      if (!b) continue;
-      b.style.left = handEl.offsetLeft + g.right + 14 - tb.offsetLeft + 'px';
-      b.style.top = y + 'px';
-      y += b.offsetHeight + 6;
-    }
     return;
   }
   const L = handEl.offsetLeft,
@@ -549,7 +526,8 @@ export function layoutHand() {
       runtime.game.phase === 'shuffle' ||
       runtime.game.phase === 'cut');
   if (!n && !dealing) {
-    el.style.height = '';
+    if (!(runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(runtime.game.phase)))
+      el.style.height = '';
     drawFixZone(null);
     placeActionBtns();
     return;
@@ -567,6 +545,11 @@ export function layoutHand() {
     dealing ? 27 : act.length,
     dealing ? null : handKeys(act.map((c) => +c.dataset.id)),
   );
+  if (runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(runtime.game.phase)) {
+    const key = [runtime.game.round, innerWidth, innerHeight].join('|');
+    if (runtime.practiceHandSize?.key !== key) runtime.practiceHandSize = { key, height: g.height };
+    g.height = Math.max(g.height, runtime.practiceHandSize.height);
+  } else runtime.practiceHandSize = null;
   if (probe) probe.remove();
   act.forEach((c, i) => placeCard(c, g.slots[i], 100 + i));
   cards
@@ -607,21 +590,38 @@ export function placeActionBtns() {
     if (!(on && isPhone())) b.style.columnGap = '';
   }
   // the practice table's side hands fill the table's sides, so the buttons stand in a row beside your hand instead
-  if (on && runtime.reviewMode) {
-    const b = $('#btns'),
-      top = h.height - b.offsetHeight - 6 + 'px';
-    b.style.setProperty('--d', '64px');
-    b.style.left = h.width - b.offsetWidth + 'px';
-    if (b.style.top !== top) {
-      b.style.top = top;
-      if (runtime.pileGroups.length && !b.hidden) pileRefit();
-    }
-    for (const id of ['#deckBtn', '#readyBtn', '#nextBtn']) {
-      const e = $(id);
+  if (runtime.reviewMode) {
+    if (!$('#goBtn')) return; // Practice initialization lays out the table before adding its controls.
+    const size = getComputedStyle($('#goBtn')),
+      width = parseFloat(size.width),
+      height = parseFloat(size.height),
+      gap = 6,
+      left = innerWidth - 16 - width * 3 - gap * 2,
+      top = innerHeight - 16 - height * 3 - gap * 2;
+    const slots = [
+      'fixBtn',
+      'splitBtn',
+      'sortBtn',
+      'undoBtn',
+      'hintBtn',
+      'clearBtn',
+      'playBtn',
+      'passBtn',
+      'goBtn',
+    ];
+    for (const [slot, id] of [
+      ...slots.entries(),
+      [6, 'returnBtn'],
+      [8, 'deckBtn'],
+      [8, 'readyBtn'],
+      [8, 'nextBtn'],
+    ]) {
+      const e = $('#' + id);
       if (!e) continue;
-      e.classList.add('atcol');
-      e.style.left = h.right - 70 + 'px';
-      e.style.top = h.bottom - 90 + 'px';
+      if (slot === 8 && id !== 'goBtn') e.classList.add('atcol');
+      e.style.left = left + (slot % 3) * (width + gap) + 'px';
+      e.style.top = top + Math.floor(slot / 3) * (height + gap) + 'px';
+      e.style.transform = 'none';
     }
     return;
   }
