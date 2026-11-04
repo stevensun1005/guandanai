@@ -43,7 +43,7 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 | Five personalities  | Balanced, aggressive, conservative, observant and adaptive                                    |
 | Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
 | Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
-| Public scorecards   | Filter public plays by player, copy or download the current round                             |
+| Public scorecards   | Select earlier rounds, filter public actions and export a round or the match                  |
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
@@ -121,6 +121,18 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 
 [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md)
 
-Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). The complete 1.37-million-parameter actor is now also tested with public or privileged training-only critics and repeated opening problems, targeting team victory from 2 through A. Research code, evidence and checkpoint access are merged into `main`; replacing the default web model still requires independent match acceptance tests.
+## Model research status
+
+The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and the default web weights have not been replaced. The [research report](docs/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
 
 `npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](docs/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength.
+
+## Documentation
+
+| Task                                  | Start here                                                                                                                                            |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Play, arrange cards or replay         | [Playing](docs/PLAYING.md) · [Practice](docs/PRACTICE.md)                                                                                             |
+| Invite friends or recover a seat      | [Rooms](docs/ROOMS.md)                                                                                                                                |
+| Develop, validate or deploy           | [Contributing](CONTRIBUTING.md) · [Architecture](docs/ARCHITECTURE.md) · [Testing](docs/TESTING.md) · [Deployment](docs/DEPLOYMENT.md)                |
+| Understand bots or reproduce training | [Bots](docs/BOTS.md) · [Training entry points](docs/MODEL_TRAINING.md) · [Historical training log](docs/TRAINING_RUN.md)                              |
+| Review evidence and planned work      | [Research report](docs/MODEL_STUDY.md) · [Improvement proposals and implementation status](docs/IMPROVEMENT_PROPOSAL.md) · [Roadmap](docs/ROADMAP.md) |

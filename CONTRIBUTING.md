@@ -6,7 +6,7 @@
 
 Node.js 20.19+，推荐与 CI 一致的 Node.js 24。克隆仓库后运行 `npm ci`、`npm run build`、`npm run dev`。
 
-源码在 `src`，构建结果在 `dist`。不要直接修改 `dist`；不要把浏览器缓存、模型实验临时文件或本机配置提交到仓库。
+源码在 `src`，构建结果在 `dist`。不要直接修改 `dist`；不要把浏览器缓存、临时训练缓冲区或本机配置提交到仓库。已完成的实验报告、成果索引和研究检查点依照 [AGENTS.md](AGENTS.md) 归档，与网页默认权重分开。
 
 ## 文件放对地方
 
@@ -22,14 +22,22 @@ Node.js 20.19+，推荐与 CI 一致的 Node.js 24。克隆仓库后运行 `npm 
 ## 提交前
 
 ```bash
-npm run format
+npm run format:check
 npm test
 npm run build
 ```
 
+格式需要调整时，对实际修改的文件运行 `npx prettier --write 文件路径`，避免顺带重写其他人的进行中改动。纯文档变更检查格式、链接、引用和事实一致性即可，不需要为文字修改重跑模型训练或整场对局。
+
 UI 改动附实际截图并检查手机宽度；规则改动加入具体手牌用例；联机改动跑双浏览器检查；模型改动记录数值一致性、耗时和真实对战结果。
 
-模型和浏览器验证使用 Python 3.11+，可用 `python -m pip install -r requirements-dev.txt` 安装已验证依赖。Python 工具通过 `python -m ruff format scripts tests ai/reference` 格式化；其依赖不进入浏览器生产环境。
+浏览器 CI 使用 Python 3.13。开发验证依赖见 `requirements-dev.txt`，模型导出与应牌训练依赖见 `requirements-models.txt`，完整主网训练还需 `requirements-training.txt`。例如 `python -m pip install -r requirements-training.txt` 会安装完整主网训练所需的 PyTorch；这些依赖不进入浏览器生产环境。Python 格式调整同样只针对本次修改的文件。
+
+## 文档的职责
+
+README 负责开局与开发入口；玩法、房间、练习和部署指南说明各自的操作边界。`MODEL_STUDY.md` 负责当前研究方法与证据结论，`TRAINING_RUN.md` 保留训练过程和历史协议，`IMPROVEMENT_PROPOSAL.md` 保留审查建议及实施状态，`ROADMAP.md` 只汇总已完成内容和下一步方向。
+
+过时的进行时应按实际结果更新；历史负结果、原始评测和曾使用的协议继续保留。没有被 Markdown 链接引用，不等于文件无用，例如 GitHub 自动读取的 PR 模板和文件夹 README。
 
 ## 提交与 PR
 

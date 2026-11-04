@@ -2,9 +2,11 @@
 
 主站：[stevensun1005.github.io/guandanai](https://stevensun1005.github.io/guandanai/)。网站由 GitHub Pages 托管，发布流程在 `.github/workflows/pages.yml`。
 
-## 推送即发布
+## 检查与发布触发
 
-向 `main` 推送后，Actions 依次执行安装依赖、规则与数据检查、格式检查和生产构建，再上传 `dist` 到 Pages。检查失败时不会继续部署。
+PR 会运行 Node 测试、格式检查、生产构建，以及 Chromium 中的实际出牌和恶意牌谱导入检查，但不会部署。向 `main` 推送相关改动或手动运行工作流时，通过相同检查后上传 `dist` 并部署到 Pages；检查失败时不会继续部署。
+
+仅文档、实验检查点归档及工作流中明确忽略的报告维护文件变化，不触发主分支自动部署。完整触发范围以[工作流](../.github/workflows/pages.yml)为准。需要主动重新部署时，可在 Actions 的 **Deploy GitHub Pages → Run workflow** 中选择 `main`。
 
 仓库 Pages 使用 **GitHub Actions** 作为发布来源。部署是否完成，以该次 Actions 的 `deploy` 成功状态为准；本地构建成功不等于线上已经更新。
 
@@ -24,14 +26,14 @@ npm run dev
 
 ## 部署包含什么
 
-不修改源码时，可以直接从 [GitHub Releases](https://github.com/stevensun1005/guandanai/releases/latest) 下载 `guandan-web.zip`，解压到静态 HTTP(S) 服务。它包含完整网页和两份模型，无需先安装 Node.js 或 Python。请通过服务地址访问，直接双击 `index.html` 的文件地址不能正常加载 Worker 与模型。随包提供的 `SHA256SUMS.txt` 可校验下载文件。
+不修改源码时，可以从提供网页附件的 [GitHub Release](https://github.com/stevensun1005/guandanai/releases) 下载 `guandan-web.zip`，解压到静态 HTTP(S) 服务。发布包与 `main`、Pages 可能不同步，请先核对该 Release 的版本和说明；训练检查点附件不属于网页发布包。网页包包含完整页面和默认模型，无需先安装 Node.js 或 Python。请通过服务地址访问，直接双击 `index.html` 的文件地址不能正常加载 Worker 与模型。随包提供的 `SHA256SUMS.txt` 可校验下载文件。
 
 - 页面、模块打包结果、样式与图片。
 - 同源的浏览器推理运行库和模型。
 - 同源的房间连接库。
 - `.nojekyll`，让静态资源按原目录发布。
 
-模型计算在负责电脑的浏览器里运行，网页不依赖 Python 推理服务。只加入朋友房间的浏览器不会预先下载模型。Python 的模型导出、训练和批量评估工具属于开发流程。
+模型计算在负责电脑的浏览器里运行，网页不依赖 Python 推理服务。只加入朋友房间的浏览器不会预先下载模型。构建只复制 `src/ai/models.mjs` 注册的默认模型，`ai/experiments/` 研究检查点和训练用 Critic 不进入网页包。Python 的模型导出、训练和批量评估工具属于开发流程。
 
 ## 更新与缓存
 

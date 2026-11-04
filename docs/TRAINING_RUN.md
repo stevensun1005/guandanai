@@ -2,7 +2,24 @@
 
 这轮训练的目标是让新策略对项目原有规则机器人达到 **80% 以上的胜率**。这是待验证的目标，不是当前模型的成绩。
 
-**当前验收按赢下从打 2 到通过 A 的完整比赛计算，平局也计入总场次。**完整主网正进行三进程自对弈和逐层解冻训练；只有新的留出整场对战确认提升，才会更新默认网页权重。下文前半部分保留早期单把实验，最新状态见「完整主网络的逐步解冻」，两种胜率不能直接比较。
+**当前验收按赢下从打 2 到通过 A 的完整比赛计算，平局也计入总场次。**本文保留各阶段的训练入口、历史协议和已记录结果；当前方法与结论以[模型研究报告](MODEL_STUDY.md)为准，完成量以[机器可读进展](evaluation/model-study-progress.json)为准。只有新的独立整场对战确认提升，才考虑更换默认网页权重。早期单把成绩不能直接与整场胜率比较。
+
+## 已公开的有限实验状态
+
+下表对应已合入 `main` 的实验记录，不描述其他工作树中尚未公开的进行中开发。训练量表示实际用于已完成更新的整场轨迹，包含自对弈及有意重复的开局，不等于独立牌副数或独立验收场数。
+
+| 实验                                | 完成更新 | 整场训练轨迹 | 状态                                 |
+| ----------------------------------- | -------: | -----------: | ------------------------------------ |
+| 整场 PPO／规则对手                  |       16 |        2,048 | 完成                                 |
+| 整场 PPO／混合对手                  |       16 |        2,048 | 完成                                 |
+| 首轮完整主网                        |        3 |          576 | 因开发对战退步停止；第四次更新未完成 |
+| 带保持约束的完整主网                |       16 |        3,072 | 完成                                 |
+| 公开／明牌评价 × 新题／重打，小试验 |   每组 4 |   四组共 256 | 完成                                 |
+| 相同四组的扩大试验                  |   每组 8 | 四组共 1,024 | 完成                                 |
+
+以上候选均未通过新的独立整场发布验收，默认网页权重未替换。流程检查和历史单把实验另列，不混入本表。检查点入口见[实验成果目录](../ai/experiments/README.md)及[历史权重索引](evaluation/model-artifacts.json)。
+
+文中的 `work/learning/` 是原训练机器的本地路径，不随克隆自动出现。复现时需按相应脚本重新采样，或根据成果索引取得匹配的检查点；不要把缺少本地文件当成网页运行依赖。
 
 ## 早期单把实验口径（已被整场目标替代）
 
@@ -15,7 +32,7 @@
 
 开发对局使用 `21200104` 起的种子；最终验收预留 `21300104` 起的种子，在模型及参数选定之前不读取其结果。训练从 `21100104`、`21110104`、`21120104` 三段互不重叠的种子开始。最终报告必须列出实际模型校验值、对手代码校验值、局数和区间。
 
-## 这次真正训练什么
+## 早期单把残差价值训练
 
 冻结现有主网络的特征提取层，在其最后一层的 512 维表示后接入 53 维公开信息，训练 `565 → 128 → 1` 的残差价值网络。补充输入明确表示当前需要压过的牌、墩主、候选牌型与大小，以及出牌后的手牌结构。
 
@@ -25,11 +42,11 @@
 
 预测误差下降不等于胜率提高。候选残差强度必须通过另行运行的开发对局选择，并与原主模型单独对战检查退步。只有最终独立对局达标，才可以把“80%”写成模型成绩。
 
-## 当前基准
+## 早期单把开发基准
 
 首轮 100 副交换牌局、共 200 局：原主网络获胜 116 局，胜率 **58.0%**，按牌副分组的近似 95% 区间为 **52.30%–63.70%**。这是小规模开发基准，不能替代最终验收。
 
-训练产物先写入忽略提交的 `work/learning/`，不自动覆盖网站权重。新的模型、浏览器数值一致性、对局报告和发布状态将在完成后补充。
+训练产物先写入忽略提交的 `work/learning/`，不自动覆盖网站权重。已完成的训练、浏览器数值、对战与发布状态已记录在下文及研究主报告，原始临时缓冲区仍留在本地。
 
 ## 本地实测进展（2026-11-04）
 
@@ -94,7 +111,7 @@ python tests/ppo_browser_smoke.py --checkpoint=work/learning/example-ppo/cycle-0
 
 [机器可读报告](evaluation/policy-training-heldout-2026-11-04.json)。每局是两名学习策略队友对两名原规则机器人，头游所在队获胜；不是完整打 A 的整场胜率。
 
-下一批本地训练已启动：24 次更新、每次 2,000 局，输出 `work/learning/ppo-k4-next/run.json`。这是运行计划，不是已完成局数；只有每次更新完成后写入的对战报告才属于实际成绩。后续模型需另选新验收牌局，不能重复使用本次验收集选模。
+随后曾启动额外单把训练，计划 24 次更新、每次 2,000 局，记录在 `work/learning/ppo-k4-next/run.json`；该计划在转向整场目标后停止，不能把计划的 48,000 局记为完成量。已有结果保留，后续模型需另选新验收牌局，不能重复使用本次验收集选模。
 
 ## 目标修正：按完整比赛学习团队配合
 
@@ -109,9 +126,9 @@ node scripts/collect-matches.mjs --matches=64 --seed=31100104 --output=work/lear
 python scripts/train_ppo.py work/learning/full-match-example/data --output=work/learning/full-match-example/model
 ```
 
-目前整场 Actor 仍使用神经网络提案的前四个候选，训练没有覆盖所有合法动作；模型能力不能理解为已掌握玩家提出的全部战术。新检查点包含额外的公开整场信息，禁止使用旧的单把导出器直接发布。
+这一阶段的整场 Actor 使用神经网络提案的前四个候选，训练没有覆盖所有合法动作；后续完整主网与公开／明牌评价实验改为对生成器提供的全部候选评分。两者不能混为一种训练方法，模型能力也不表示已掌握玩家提出的全部战术。整场检查点包含额外的公开比赛信息，禁止使用旧的单把导出器直接发布。
 
-旧的额外 48,000 把单把训练已停止，已有数据与参数保留。新的持续训练计划为 16 次更新，每次 128 场完整比赛，记录在 `work/learning/full-match-training/run.json`。其中只有已标记完成的部分属于实际训练量。
+旧的额外单把训练已停止，已有数据与参数保留。整场规则对抗阶段在 `work/learning/full-match-training/run.json` 记录了 16 次完成更新、每次 128 场，共 2,048 条整场训练轨迹。
 
 ## 四席自对弈与历史版本对抗
 
@@ -125,7 +142,7 @@ python scripts/train_ppo.py work/learning/full-match-example/data --output=work/
 python scripts/run-policy-training.py --output=work/learning/match-selfplay-example --proposal=work/learning/policy-cycle1/model/policy-0.25.onnx --actor=work/learning/full-match-training/cycle-04/model/ppo.npz --objective=full-match --opponent=mixed --opponent-model=work/learning/full-match-training/cycle-02/model/ppo.npz --cycles=16 --games=128 --seed=34100104 --eval-every=2 --eval-pairs=64 --eval-seed=35110104
 ```
 
-当前实际运行记录为 `work/learning/match-selfplay-training/run.json`。计划 16 次更新，每次 128 场；每两次更新后在另一组固定牌局中对原规则机器人评测。计划量 2,048 场不等于已完成量。
+该混合对抗阶段的记录为 `work/learning/match-selfplay-training/run.json`，已完成 16 次更新、每次 128 场，共 2,048 条整场训练轨迹；每两次更新后在另一组固定开发牌局中对原规则机器人评测。实际各周期结果及指纹见研究报告的证据快照。
 
 ## 完整主网络的逐步解冻
 
@@ -177,7 +194,7 @@ python tests/policy_browser_smoke.py --complete-match --model=work/learning/comp
 
 ## 明牌评价与开局重打的四组对照
 
-`scripts/run-team-study.py` 训练公开信息的完整 Actor，并比较公开／明牌 Critic 与是否重打开局。正式小试验在 `work/learning/asymmetric-pilot/`，四组各 4 周期、每周期 16 场，计划共 256 场；流程检查另有 48 场，不能当作胜率证据。每两周期使用另一组种子，对规则与冻结历史模型分别评测。具体架构、超参数、边界及真实完成量见[研究报告](MODEL_STUDY.md)。
+`scripts/run-team-study.py` 训练公开信息的完整 Actor，并比较公开／明牌 Critic 与是否重打开局。正式小试验在 `work/learning/asymmetric-pilot/`，已完成四组各 4 周期、每周期 16 场，共 256 条训练轨迹；扩大试验 `asymmetric-next/` 已完成四组各 8 周期、每周期 32 场，共 1,024 条训练轨迹。流程检查另有 48 场，不能当作胜率证据。每两周期使用与训练分开的开发种子，对规则与冻结历史模型分别评测。具体架构、超参数、正负结果与统计边界见[研究报告](MODEL_STUDY.md#76-明牌评价与重打首次小试验)。
 
 ```bash
 python scripts/run-team-study.py --output=work/learning/asymmetric-pilot --initial=work/learning/complete-network/initial --opponent-model=work/learning/match-selfplay-training/cycle-14/model/ppo.npz --cycles=4 --games=16 --epochs=2 --seed=61000104 --eval-seed=62000104 --eval-pairs=16
