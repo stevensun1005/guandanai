@@ -30,5 +30,27 @@
     "replayResultEscaped": true,
     "pageErrors": []
   },
-  "scope": "Local verification; no new playing-strength or cross-device claim; GitHub workflow result tracked separately"
+  "scope": "Local unit, browser and multiplayer checks plus successful GitHub build/deployment; no new playing-strength or cross-device claim",
+  "responseBrowser": {
+    "positions": 72,
+    "changedChoices": 34,
+    "browserResponseMaxError": 2.086162567138672e-07,
+    "mainPolicyMaxError": "<0.0002",
+    "controllerMatchesWorker": true,
+    "responseFailureRetry": true,
+    "pageErrors": []
+  },
+  "endgameBrowser": {
+    "provedEndings": 15,
+    "protectedFromStyleOverride": true,
+    "pageErrors": []
+  },
+  "githubPages": {
+    "run": "https://github.com/stevensun1005/guandanai/actions/runs/41881511936",
+    "commit": "ada8c23728ee6ea96876727173658589488c8a41",
+    "conclusion": "success",
+    "liveVersion": "d0a65ee184",
+    "liveCSPVerified": true,
+    "liveSharedDecisionWorkerVerified": true
+  }
 }
