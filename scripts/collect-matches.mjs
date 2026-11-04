@@ -17,6 +17,12 @@ if (!Number.isInteger(games) || games < 1 || !Number.isInteger(seed))
 mkdirSync(output, { recursive: true });
 const opponent = option('opponent', 'rule');
 const snapshot = option('opponent-model', '');
+const evaluateOpponent = option('evaluate-opponent', 'rule');
+if (
+  !['rule', 'snapshot'].includes(evaluateOpponent) ||
+  (evaluate && evaluateOpponent === 'snapshot' && !snapshot)
+)
+  throw Error('Invalid evaluation opponent');
 if (!['rule', 'self', 'mixed'].includes(opponent)) throw Error('Invalid opponent mode');
 const hash = (path) => createHash('sha256').update(readFileSync(path)).digest('hex');
 const manifest = {
@@ -26,6 +32,7 @@ const manifest = {
   seed,
   objective: 'Whole match from 2 through A; team victory, draw and defeat',
   evaluate,
+  evaluateOpponent,
   opponent,
   opponentModel: snapshot || null,
   opponentSHA256: snapshot ? hash(snapshot) : null,
@@ -48,10 +55,12 @@ const manifest = {
   ),
 };
 const save = () => writeFileSync(`${output}/rollout.json`, JSON.stringify(manifest, null, 2));
-const engine = createPolicyInference({ script: resolve('scripts/match_learning.py') });
+const inferenceScript = option('inference-script', 'scripts/match_learning.py');
+const opponentScript = option('opponent-script', 'scripts/match_learning.py');
+const engine = createPolicyInference({ script: resolve(inferenceScript) });
 const past = snapshot
   ? createPolicyInference({
-      script: resolve('scripts/match_learning.py'),
+      script: resolve(opponentScript),
       env: { PPO_ACTOR: undefined, GUANDAN_POLICY_MODEL: resolve(snapshot) },
     })
   : null;
@@ -70,7 +79,7 @@ try {
   });
   for (let episode = 0; episode < games; episode++) {
     const mode = evaluate
-      ? 'rule'
+      ? evaluateOpponent
       : opponent === 'mixed'
         ? ['self', snapshot ? 'snapshot' : 'self', 'rule'][episode % 3]
         : opponent;

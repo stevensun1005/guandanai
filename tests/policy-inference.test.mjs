@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { inferPolicy, selectPolicyScores } from '../src/ai/policy-inference.mjs';
+import { encodeMatchFeatures } from '../src/ai/match-features.mjs';
 
 function state(count = 130) {
   return {
@@ -60,6 +61,28 @@ function runtime(proposals, logits = null, failure = null) {
 
 const ppo = { extraFeatures: 53, rerankCandidates: 4, temperature: 0.15 };
 const disposedOnce = (mock) => assert.ok(mock.tensors.every((tensor) => tensor.disposed === 1));
+
+test('complete policy receives public match progress for every action across batches', async () => {
+  const input = state(130);
+  input.match = {
+    levels: [14, 8],
+    aFails: [2, 0],
+    lvlTeam: 0,
+    round: 18,
+    previousOrder: [1, 3, 0, 2],
+  };
+  const expected = encodeMatchFeatures(input);
+  const mock = runtime(Array(130).fill(0.4));
+  await inferPolicy(mock.ort, mock.engine, input, { extraFeatures: 61 });
+  for (const call of mock.calls) {
+    assert.equal(call.extras.dims[1], 61);
+    for (let i = 0; i < call.extras.dims[0]; i++)
+      assert.deepEqual(call.extras.data.slice(i * 61 + 53, i * 61 + 61), expected);
+  }
+  assert.deepEqual(expected, new Float32Array([1, 8 / 14, 2 / 3, 0, 1, 0.18, 0, 1]));
+  disposedOnce(mock);
+  assert.throws(() => encodeMatchFeatures({ ...input, match: null }), /Missing/);
+});
 
 test('legacy policy needs no supplemental fields and preserves scores and stable ties across batches', async () => {
   const input = state(257);

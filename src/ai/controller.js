@@ -96,25 +96,35 @@ export function initialize() {
         runtime.game.trick && runtime.game.trick.play,
       );
       const finish = plays.find((pl) => pl && pl.cards.length === runtime.game.hands[p].length);
-      if (finish) return finish;
+      if (finish && !MODELS.policy.learnFinishingDecisions) return finish;
       if (plays.length === 1) return plays[0];
       const style = runtime.botStyles?.[(p + runtime.network.off) % 4] || 'balanced';
       const input = state(p, plays);
       input.profile = style;
       if (style !== 'balanced') input.context = decisionContext(runtime.game, p);
-      if (style !== 'balanced' || MODELS.policy.extraFeatures === 53) {
+      if (style !== 'balanced' || MODELS.policy.extraFeatures) {
         input.actionShapes = plays.map(
           (play) => play && { type: play.type, value: play.value, n: play.n, wu: play.wu },
         );
       }
-      if (MODELS.policy.extraFeatures === 53) {
+      if (MODELS.policy.extraFeatures) {
         const trick = runtime.game.trick;
         input.trick = trick && {
           player: trick.player,
           play: { type: trick.play.type, value: trick.play.value, n: trick.play.n },
         };
+        if (MODELS.policy.extraFeatures === 61) {
+          input.match = {
+            levels: game.levels.slice(),
+            aFails: (game.aFails || [0, 0]).slice(),
+            lvlTeam: game.lvlTeam,
+            round: game.round,
+            previousOrder: game.prevOut?.slice() || null,
+          };
+        }
       }
-      input.endgame = endgameRequest(runtime.game, p, plays);
+      input.endgame =
+        MODELS.policy.publicEndgame === false ? null : endgameRequest(runtime.game, p, plays);
       const result = await request('decide', input);
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)
