@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>掼蛋 AI · 实时训练进度</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">GUANDAN / MODEL LAB</p>
+        <div class="title">
+          <h1>训练进行到哪了</h1>
+          <span id="state" role="status">正在连接</span>
+        </div>
+        <p class="muted">读取本机真实训练记录 · 每 5 秒刷新 · 无需手动询问</p>
+      </header>
+      <div id="connection" class="notice" role="alert" hidden></div>
+      <section class="panel">
+        <p class="eyebrow">当前任务 · 交接第 1 / 6 步</p>
+        <h2 id="task">默认配置的长期自对弈训练</h2>
+        <p id="description">
+          6 个采样进程收集完整比赛，训练进程更新整个价值网络。每 3
+          小时与初始模型检查，连续两次明显退步会自动停止。
+        </p>
+        <div class="spread">
+          <strong id="elapsed">等待读取</strong><span id="fraction" class="muted">24 小时计划</span>
+        </div>
+        <progress id="progress" max="100" value="0" aria-label="本次计划运行时间进度"></progress>
+        <p class="muted small">进度条仅代表已运行时间，不代表棋力、胜率或整个项目的完成比例。</p>
+      </section>
+      <section class="metrics" aria-label="实际完成的数据">
+        <article class="panel">
+          <span class="muted">完成整场比赛</span><strong id="matches">—</strong
+          ><small id="decisions">— 个学习决策</small>
+        </article>
+        <article class="panel">
+          <span class="muted">全网络更新</span><strong id="steps">—</strong
+          ><small id="buffer">— 行缓冲样本</small>
+        </article>
+        <article class="panel">
+          <span class="muted">采样速度</span><strong id="rate">—</strong
+          ><small>学习决策 / 秒</small>
+        </article>
+        <article class="panel">
+          <span class="muted">训练数据占用</span><strong id="disk">—</strong
+          ><small>全部保存在 D 盘</small>
+        </article>
+      </section>
+      <section class="panel">
+        <h2>现在正在做的事</h2>
+        <p id="learner">等待读取训练进程</p>
+        <div id="processes" class="chips"></div>
+        <dl>
+          <dt>最近保存的模型</dt>
+          <dd id="latest">—</dd>
+          <dt>门控冠军</dt>
+          <dd id="champion">—</dd>
+          <dt>下一次锚点检查</dt>
+          <dd id="anchor">—</dd>
+          <dt>报告同步</dt>
+          <dd id="publication">—</dd>
+          <dt>状态更新时间</dt>
+          <dd id="updated">—</dd>
+        </dl>
+        <p class="muted small">
+          参数在内存中持续更新，约每 10
+          分钟保存一个模型；冠军只有通过门控后才更替。网页默认模型保持不变。
+        </p>
+      </section>
+      <section class="panel">
+        <h2>实际对战检查</h2>
+        <p class="muted small">
+          这里是开发筛选。得分 = 胜 1 / 平 0.5 / 负 0，不等于胜率；尚未完成独立留出验收。
+        </p>
+        <div id="evaluations"><p>读取中</p></div>
+      </section>
+      <section class="panel">
+        <h2>接下来按这个顺序做</h2>
+        <ol class="roadmap">
+          <li class="current">
+            <strong>长期训练与自动报告</strong><span id="roadmap-state">进行中</span>
+          </li>
+          <li>锁定留出种子与冠军验收脚本<span>待开始</span></li>
+          <li>门控并行化<span>待开始</span></li>
+          <li>整场目标与势函数对照<span>待开始</span></li>
+          <li>全部候选的约束对照<span>待开始</span></li>
+          <li>验收现有最强候选<span>待开始</span></li>
+        </ol>
+      </section>
+      <section class="panel">
+        <h2>最近事件</h2>
+        <ul id="events" class="events"></ul>
+      </section>
+      <footer>
+        <p id="run" class="small muted"></p>
+        <a
+          href="https://github.com/stevensun1005/guandanai/blob/main/docs/MODEL_STUDY.md"
+          target="_blank"
+          rel="noreferrer"
+          >查看已推送的研究报告 ↗</a
+        >
+        <p class="small muted">训练在后台独立运行；关闭本面板不会停止训练。本面板仅限本机访问。</p>
+      </footer>
+    </main>
+  </body>
+</html>
