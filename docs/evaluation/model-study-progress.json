@@ -21330,6 +21330,259 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 5,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 337,
+          "decisions": 13529,
+          "afterFirstOutDecisions": 2377,
+          "trainingReportSHA256": "3939d1f8325fda2230623dc6519070bb7ee31043fe7fb84343f145ca1da5907c",
+          "trainingSelection": null,
+          "evaluations": {},
+          "checkpointSHA256": "9d9661f34b8007f6f2c759154e0ca88a2755923b3998705e1fb713af46a80949",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "8d8123875f9ce7339bf18d310624c014352fc3573f0b2c7806f8a7b27c42ea81",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 0,
+          "openingProblems": [
+            {
+              "seed": 61010232,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210232
+            },
+            {
+              "seed": 61010233,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210233
+            },
+            {
+              "seed": 61010234,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210234
+            },
+            {
+              "seed": 61010235,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210235
+            },
+            {
+              "seed": 61010236,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210236
+            },
+            {
+              "seed": 61010237,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210237
+            },
+            {
+              "seed": 61010238,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210238
+            },
+            {
+              "seed": 61010239,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210239
+            },
+            {
+              "seed": 61010240,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210240
+            },
+            {
+              "seed": 61010241,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210241
+            },
+            {
+              "seed": 61010242,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210242
+            },
+            {
+              "seed": 61010243,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210243
+            },
+            {
+              "seed": 61010244,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210244
+            },
+            {
+              "seed": 61010245,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210245
+            },
+            {
+              "seed": 61010246,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210246
+            },
+            {
+              "seed": 61010247,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210247
+            },
+            {
+              "seed": 61010248,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210248
+            },
+            {
+              "seed": 61010249,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210249
+            },
+            {
+              "seed": 61010250,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210250
+            },
+            {
+              "seed": 61010251,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210251
+            },
+            {
+              "seed": 61010252,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210252
+            },
+            {
+              "seed": 61010253,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210253
+            },
+            {
+              "seed": 61010254,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210254
+            },
+            {
+              "seed": 61010255,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210255
+            },
+            {
+              "seed": 61010256,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210256
+            },
+            {
+              "seed": 61010257,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210257
+            },
+            {
+              "seed": 61010258,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210258
+            },
+            {
+              "seed": 61010259,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210259
+            },
+            {
+              "seed": 61010260,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210260
+            },
+            {
+              "seed": 61010261,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210261
+            },
+            {
+              "seed": 61010262,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210262
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210263
+            }
+          ],
+          "criticSHA256": "a382facac1be518bef73ec98a1453e0a2d24c8cf1e52740f0380189f04dc4c57",
+          "actionRows": 542569,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410232,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318959,
+            "b0": 512,
+            "w1": 262137,
+            "b1": 512,
+            "w2": 262140,
+            "b2": 512,
+            "w3": 262133,
+            "b3": 512,
+            "w4": 262140,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
@@ -23198,6 +23451,259 @@
             "w3": 262138,
             "b3": 512,
             "w4": 262139,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
+        },
+        {
+          "cycle": 5,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 352,
+          "decisions": 11921,
+          "afterFirstOutDecisions": 2354,
+          "trainingReportSHA256": "e48ae9c2e3f76efe9b13c603d0d021260473b4c231d1b7f0c46f41e7ed0f2f83",
+          "trainingSelection": null,
+          "evaluations": {},
+          "checkpointSHA256": "6bf4139ff9fe16bd52fe57c3f6870e7e9c10f2397f4d57c184ca8c7856b14bdb",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "6d25973173127e9541d248a2dde251a9bd94302c888d4577c901424d6981f058",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 16,
+          "openingProblems": [
+            {
+              "seed": 61010231,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210232
+            },
+            {
+              "seed": 61010233,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210233
+            },
+            {
+              "seed": 61010229,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210234
+            },
+            {
+              "seed": 61010235,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210235
+            },
+            {
+              "seed": 61010225,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210236
+            },
+            {
+              "seed": 61010237,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210237
+            },
+            {
+              "seed": 61010223,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210238
+            },
+            {
+              "seed": 61010239,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210239
+            },
+            {
+              "seed": 61010207,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210240
+            },
+            {
+              "seed": 61010241,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210241
+            },
+            {
+              "seed": 61010205,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210242
+            },
+            {
+              "seed": 61010243,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210243
+            },
+            {
+              "seed": 61010201,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210244
+            },
+            {
+              "seed": 61010245,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210245
+            },
+            {
+              "seed": 61010199,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210246
+            },
+            {
+              "seed": 61010247,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210247
+            },
+            {
+              "seed": 61010187,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210248
+            },
+            {
+              "seed": 61010249,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210249
+            },
+            {
+              "seed": 61010187,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210250
+            },
+            {
+              "seed": 61010251,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210251
+            },
+            {
+              "seed": 61010185,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210252
+            },
+            {
+              "seed": 61010253,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210253
+            },
+            {
+              "seed": 61010185,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210254
+            },
+            {
+              "seed": 61010255,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210255
+            },
+            {
+              "seed": 61010181,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210256
+            },
+            {
+              "seed": 61010257,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210257
+            },
+            {
+              "seed": 61010181,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210258
+            },
+            {
+              "seed": 61010259,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210259
+            },
+            {
+              "seed": 61010179,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210260
+            },
+            {
+              "seed": 61010261,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210261
+            },
+            {
+              "seed": 61010179,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210262
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210263
+            }
+          ],
+          "criticSHA256": "a3c934c4e7648c15da585e73374b73a51e1c9bff1596c213c3fbb526d09e48a4",
+          "actionRows": 476026,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410232,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318954,
+            "b0": 512,
+            "w1": 262131,
+            "b1": 512,
+            "w2": 262134,
+            "b2": 512,
+            "w3": 262139,
+            "b3": 512,
+            "w4": 262135,
             "b4": 512,
             "w5": 512,
             "b5": 1
@@ -25074,6 +25580,259 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 5,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 359,
+          "decisions": 13807,
+          "afterFirstOutDecisions": 2528,
+          "trainingReportSHA256": "1a6255bc6506cd67880e0aa7e7f364459560448985f9ab119c489850d0b2dc41",
+          "trainingSelection": null,
+          "evaluations": {},
+          "checkpointSHA256": "5dfa2d3f67ea30f57d0b8a336575f92135076f788e65d33600fb4005bf45d8eb",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "53f0e50e11defd935cc3779d9dcfc86309edb6c559783d2ac5083ebbe1d190dd",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 0,
+          "openingProblems": [
+            {
+              "seed": 61010232,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210232
+            },
+            {
+              "seed": 61010233,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210233
+            },
+            {
+              "seed": 61010234,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210234
+            },
+            {
+              "seed": 61010235,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210235
+            },
+            {
+              "seed": 61010236,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210236
+            },
+            {
+              "seed": 61010237,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210237
+            },
+            {
+              "seed": 61010238,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210238
+            },
+            {
+              "seed": 61010239,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210239
+            },
+            {
+              "seed": 61010240,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210240
+            },
+            {
+              "seed": 61010241,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210241
+            },
+            {
+              "seed": 61010242,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210242
+            },
+            {
+              "seed": 61010243,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210243
+            },
+            {
+              "seed": 61010244,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210244
+            },
+            {
+              "seed": 61010245,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210245
+            },
+            {
+              "seed": 61010246,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210246
+            },
+            {
+              "seed": 61010247,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210247
+            },
+            {
+              "seed": 61010248,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210248
+            },
+            {
+              "seed": 61010249,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210249
+            },
+            {
+              "seed": 61010250,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210250
+            },
+            {
+              "seed": 61010251,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210251
+            },
+            {
+              "seed": 61010252,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210252
+            },
+            {
+              "seed": 61010253,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210253
+            },
+            {
+              "seed": 61010254,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210254
+            },
+            {
+              "seed": 61010255,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210255
+            },
+            {
+              "seed": 61010256,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210256
+            },
+            {
+              "seed": 61010257,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210257
+            },
+            {
+              "seed": 61010258,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210258
+            },
+            {
+              "seed": 61010259,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210259
+            },
+            {
+              "seed": 61010260,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210260
+            },
+            {
+              "seed": 61010261,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210261
+            },
+            {
+              "seed": 61010262,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210262
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210263
+            }
+          ],
+          "criticSHA256": "e7b6d4b2092e3d705f49dbc798ca2522440a1a37d255722c696837f2386280fe",
+          "actionRows": 590635,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410232,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318953,
+            "b0": 512,
+            "w1": 262134,
+            "b1": 512,
+            "w2": 262134,
+            "b2": 512,
+            "w3": 262136,
+            "b3": 511,
+            "w4": 262139,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
@@ -26946,11 +27705,264 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 5,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 326,
+          "decisions": 10792,
+          "afterFirstOutDecisions": 1988,
+          "trainingReportSHA256": "fa99f3536aef044a7746321078cbc0b714c56fa53560fe62b1ea080e0cc0e51b",
+          "trainingSelection": null,
+          "evaluations": {},
+          "checkpointSHA256": "8968b66316bec205f14d1df399bdbcf38f33bb4f3884b725e40a08fa6d352507",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "c5ea0c8146c70b05da43c78f771f10978b51b240f082b6612f6d5609c19fe09b",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 16,
+          "openingProblems": [
+            {
+              "seed": 61010231,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210232
+            },
+            {
+              "seed": 61010233,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210233
+            },
+            {
+              "seed": 61010229,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210234
+            },
+            {
+              "seed": 61010235,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210235
+            },
+            {
+              "seed": 61010225,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210236
+            },
+            {
+              "seed": 61010237,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210237
+            },
+            {
+              "seed": 61010223,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210238
+            },
+            {
+              "seed": 61010239,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210239
+            },
+            {
+              "seed": 61010219,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210240
+            },
+            {
+              "seed": 61010241,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210241
+            },
+            {
+              "seed": 61010217,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210242
+            },
+            {
+              "seed": 61010243,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210243
+            },
+            {
+              "seed": 61010207,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210244
+            },
+            {
+              "seed": 61010245,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210245
+            },
+            {
+              "seed": 61010205,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210246
+            },
+            {
+              "seed": 61010247,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210247
+            },
+            {
+              "seed": 61010201,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210248
+            },
+            {
+              "seed": 61010249,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210249
+            },
+            {
+              "seed": 61010199,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210250
+            },
+            {
+              "seed": 61010251,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210251
+            },
+            {
+              "seed": 61010199,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210252
+            },
+            {
+              "seed": 61010253,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210253
+            },
+            {
+              "seed": 61010193,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210254
+            },
+            {
+              "seed": 61010255,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210255
+            },
+            {
+              "seed": 61010193,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210256
+            },
+            {
+              "seed": 61010257,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210257
+            },
+            {
+              "seed": 61010191,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210258
+            },
+            {
+              "seed": 61010259,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210259
+            },
+            {
+              "seed": 61010187,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210260
+            },
+            {
+              "seed": 61010261,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210261
+            },
+            {
+              "seed": 61010187,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210262
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210263
+            }
+          ],
+          "criticSHA256": "20efd61abae3072500d8343907b4b889efa1253d2c16ac102772ef9bc3f20a0e",
+          "actionRows": 441418,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410232,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318956,
+            "b0": 512,
+            "w1": 262134,
+            "b1": 512,
+            "w2": 262129,
+            "b2": 512,
+            "w3": 262135,
+            "b3": 512,
+            "w4": 262135,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
     }
   },
-  "fingerprint": "996302739bc1f809c17907b24588872fd9b40a5d0fc23cc5b10384e8f01b50fa",
-  "observedUTC": "2026-11-04T17:33:21.068408+00:00"
+  "fingerprint": "ec4b0237bec0550b239fcc765543e92178ab041256b0735c1ae7c159fbbfb5d7",
+  "observedUTC": "2026-11-04T17:36:37.807556+00:00"
 }
