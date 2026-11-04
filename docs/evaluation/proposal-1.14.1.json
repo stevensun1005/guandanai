@@ -1,0 +1,34 @@
+{
+  "buildVersion": "d0a65ee184",
+  "nodeTestsPassed": 83,
+  "pythonTestsPassed": 25,
+  "browser": {
+    "browserModelParityPositions": 17,
+    "maxValueError": "< 0.0002",
+    "inferenceApiRequests": 0,
+    "roomCreated": true,
+    "inviteLink": true,
+    "twoClientsPlayed": true,
+    "logsSynchronized": true,
+    "guestDisconnectHandled": true,
+    "legacySettingIgnored": true,
+    "modelRetryWithoutFallback": true,
+    "hiddenModelControls": true,
+    "pageErrors": [],
+    "botProfilesSynchronized": true,
+    "guestAvoidsModelDownload": true,
+    "learnedStyleDecisions": 5
+  },
+  "productionSmoke": {
+    "productionGlobalsHidden": true,
+    "policyTurns": 2,
+    "pageErrors": []
+  },
+  "replaySecuritySmoke": {
+    "importedResultEscaped": true,
+    "priorResultEscaped": true,
+    "replayResultEscaped": true,
+    "pageErrors": []
+  },
+  "scope": "Local verification; no new playing-strength or cross-device claim; GitHub workflow result tracked separately"
+}

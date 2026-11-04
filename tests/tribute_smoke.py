@@ -45,7 +45,7 @@ with sync_playwright() as p:
         assert page.evaluate("G.hands.map(hand=>hand.length)") == [27, 27, 27, 27]
         assert page.evaluate("new Set(G.hands.flat().map(card=>card.id)).size") == 108
         page.locator("#readyBtn").click()
-        page.wait_for_function("G.phase==='play'")
+        page.wait_for_function("() => (G.phase==='play')")
         assert page.evaluate("G.hands.map(hand=>hand.length)") == [27, 27, 27, 27]
         page.wait_for_timeout(2100)
         assert page.evaluate("new Set(G.hands.flat().map(card=>card.id)).size") == 108

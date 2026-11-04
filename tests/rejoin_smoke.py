@@ -28,16 +28,16 @@ with sync_playwright() as p:
     host.goto(URL, wait_until="networkidle")
     host.locator("#nick").fill("房主")
     host.locator("[data-mode=host]").click()
-    host.wait_for_function("NET.peerOpen", timeout=30000)
+    host.wait_for_function('() => (NET.peerOpen)', timeout=30000)
     code = host.locator("#roomCodeShow").inner_text()
     host.locator("[data-seat=W]").click()
     guest.goto(URL + "&room=" + code, wait_until="networkidle")
     guest.locator("#nick").fill("朋友")
     guest.locator("#joinBtn").click()
-    guest.wait_for_function("NET.hostConn?.open", timeout=30000)
+    guest.wait_for_function('() => (NET.hostConn?.open)', timeout=30000)
     guest.locator("[data-seat=S]").click()
-    host.wait_for_function("NET.lobby.S==='朋友'")
-    guest.wait_for_function("sessionStorage.getItem('guandan-rejoin-seat')!==null")
+    host.wait_for_function("() => (NET.lobby.S==='朋友')")
+    guest.wait_for_function("() => (sessionStorage.getItem('guandan-rejoin-seat')!==null)")
     credential = guest.evaluate("JSON.parse(sessionStorage.getItem('guandan-rejoin-seat'))")
     host.locator("#sitBtn").click()
     for _ in range(250):
@@ -50,8 +50,8 @@ with sync_playwright() as p:
         host.wait_for_timeout(100)
     assert host.evaluate("G.phase==='prep'")
     guest.reload(wait_until="networkidle")
-    guest.wait_for_function("NET.mode==='guest'&&G.phase==='prep'&&!NET.gone", timeout=30000)
-    host.wait_for_function("NET.humans.size===2", timeout=10000)
+    guest.wait_for_function("() => (NET.mode==='guest'&&G.phase==='prep'&&!NET.gone)", timeout=30000)
+    host.wait_for_function('() => (NET.humans.size===2)', timeout=10000)
     assert guest.evaluate("NET.off") == 1
     assert host.evaluate(SNAP) == guest.evaluate(SNAP)
     assert (
@@ -60,7 +60,7 @@ with sync_playwright() as p:
     )
     host.locator("#readyBtn").click()
     guest.locator("#readyBtn").click()
-    host.wait_for_function("G.phase==='play'")
+    host.wait_for_function("() => (G.phase==='play')")
     # Reach the guest's actual turn using normal human UI actions.
     for _ in range(300):
         if host.evaluate("G.phase==='play'&&G.turn===1&&!!G.clock"):
@@ -73,11 +73,11 @@ with sync_playwright() as p:
                 host.locator("#passBtn").click()
         host.wait_for_timeout(80)
     host.evaluate("delayNextReply=true;G.clock.left=1")
-    host.wait_for_function("awaitingReply", timeout=20000)
+    host.wait_for_function('() => (awaitingReply)', timeout=20000)
     before = host.evaluate("G.log.length")
     guest.reload(wait_until="networkidle")
-    guest.wait_for_function("NET.mode==='guest'&&G.phase==='play'&&!NET.gone", timeout=30000)
-    host.wait_for_function("NET.humans.has(1)", timeout=10000)
+    guest.wait_for_function("() => (NET.mode==='guest'&&G.phase==='play'&&!NET.gone)", timeout=30000)
+    host.wait_for_function('() => (NET.humans.has(1))', timeout=10000)
     host.wait_for_timeout(2600)
     assert (
         host.evaluate("G.log.length") == before
@@ -92,23 +92,23 @@ with sync_playwright() as p:
     host.wait_for_function("before=>G.log.length>before", arg=before, timeout=10000)
     # A real data channel close also restores without reloading the page.
     guest.evaluate("NET.hostConn.close()")
-    guest.wait_for_function("NET.gone", timeout=10000)
-    guest.wait_for_function("NET.mode==='guest'&&!NET.gone&&NET.hostConn?.open", timeout=35000)
-    host.wait_for_function("NET.humans.size===2", timeout=10000)
+    guest.wait_for_function('() => (NET.gone)', timeout=10000)
+    guest.wait_for_function("() => (NET.mode==='guest'&&!NET.gone&&NET.hostConn?.open)", timeout=35000)
+    host.wait_for_function('() => (NET.humans.size===2)', timeout=10000)
     # An unrelated tab has no credential and cannot take any occupied or bot seat mid-game.
     outsider = browser.new_context()
     page = outsider.new_page()
     page.goto(URL + "&room=" + code, wait_until="networkidle")
     page.locator("#nick").fill("访客")
     page.locator("#joinBtn").click()
-    page.wait_for_function("NET.refused", timeout=15000)
+    page.wait_for_function('() => (NET.refused)', timeout=15000)
     assert page.evaluate("NET.mode==='solo'&&G.phase==='start'")
     assert host.evaluate("NET.humans.size") == 2
     assert not guest_models, guest_models
     host.locator("#quitBtn").click()
     host.locator("#quitYes").click()
     guest.wait_for_function(
-        "document.querySelector('#reconnectMessage')?.textContent.includes('房主已退出')",
+        "() => (document.querySelector('#reconnectMessage')?.textContent.includes('房主已退出'))",
         timeout=15000,
     )
     assert guest.locator("#reconnectBtn").is_disabled()

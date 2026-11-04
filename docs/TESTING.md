@@ -1,5 +1,23 @@
 # 验证与复现
 
+## PR 自动检查与网页流程评测
+
+PR 自动执行 `npm test`、格式检查、构建、`production_smoke.py` 与 `replay_security_smoke.py`。浏览器在实际产物上加载模型并出牌，另从文件导入恶意结果文本，验证列表、重打原结果和回放只显示文字。PR 不发布网站；主分支推送或手动运行通过检查后才部署 GitHub Pages。CI 使用安装的 Chromium，本地默认使用 Chrome，可通过 `BROWSER_CHANNEL` 更换。
+
+严格 CSP 禁止页面动态执行字符串脚本，仍允许模型 WebAssembly、同源模块 Worker、字体和 PeerJS 信令。浏览器测试的轮询应传 `() => 条件` 函数；不要为测试加入 `unsafe-eval`。
+
+```bash
+npm run eval:table -- --pairs=2 --seed=73000104 --styles=balanced,aggressive,conservative,observant,adaptive
+npm run eval:table -- --pairs=1000 --seed=73010104 --styles=balanced --opponent=rule
+npm run eval:table -- --pairs=1000 --seed=73020104 --styles=observant --opponent=balanced
+```
+
+首条是流程检查，后两条是较大规模的开发评测入口，不代表已完成这些场数。默认输出 `work/validation/table-evaluation.json`，可用 `--output=` 指定文件。它运行与网页相同的决策准备和 Worker 函数，包含直接出完、风格、跨局公开习惯、条件应牌推理和确定性残局。对手可选当前规则电脑或当前均衡网页流程。模拟进还贡仍由现有自动策略处理；浏览器 UI／网络、跨机器一致性与棋力验收仍需各自检查。
+
+`--policy=` 可以指定候选 ONNX；若输入布局不同，还须用 `--config=` 指定符合 `MODELS.policy` 格式的部署元数据（例如 `extraFeatures`），不能把训练器的优化参数文件直接当作部署配置。候选模型默认使用当前网页的后处理；若要比较其他部署配置，需在报告中保留完整配置并单独验证。
+
+每个种子交换阵营两次，统计单位为种子簇，平局进入整场胜率分母。报告带原始结算、模型和源码指纹、推理计数、真实耗时及区间。普通顺子修复改变了当前规则对手，旧基线成绩不能直接与新协议比较。已完成的 20 场及额外 2 场均只是[流程证据](MODEL_STUDY.md#77-共享网页流程的检查不作棋力结论)，不证明风格更强或目标胜率达标。
+
 跨局联机：`python tests/multiround_smoke.py` 用同机四个独立 Chrome 上下文和公共 PeerJS 信令连续操作三局，包含非南位房主、升级、进还贡与一次模型超时托管。[已记录结果](evaluation/multiplayer-1.6.1.json) 共 232 手，四端结算一致。它不替代不同设备与不同网络的长时间比赛。
 
 真人与电脑混合：`python tests/multiround_smoke.py http://127.0.0.1:8765/ 3 2` 连续三局，两个独立玩家端加观察、稳健电脑，共 247 手；[记录](evaluation/multiplayer-mixed-1.7.0.json) 检查跨局交换、同步和加入者不下载模型。

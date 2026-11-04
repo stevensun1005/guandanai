@@ -58,7 +58,7 @@ with sync_playwright() as p:
         assert ready and ready["height"] >= (44 if touch else 36)
         assert page.locator(".cnt").all_text_contents() == ["27张"] * 4
         page.locator("#readyBtn").click()
-        page.wait_for_function("G.phase==='play'")
+        page.wait_for_function("() => (G.phase==='play')")
         saw_continue = False
         for _ in range(300):
             if page.evaluate("G.log.length>=6"):

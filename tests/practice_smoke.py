@@ -21,7 +21,7 @@ with sync_playwright() as p:
     assert page.locator("#practiceDialog").is_hidden()
     page.locator("#practiceBtn").click()
     page.locator("#practiceStart").click()
-    page.wait_for_function("TEST===true")
+    page.wait_for_function('() => (TEST===true)')
     for _ in range(250):
         if page.locator("#readyBtn").is_visible():
             break
@@ -60,7 +60,7 @@ with sync_playwright() as p:
     assert data[0]["log"]
     assert text.startswith("GuandanAI 复盘记录")
     page.screenshot(path=str(OUT / "practice-desktop.png"))
-    page.wait_for_function("localStorage.getItem('guandan-practice-records')?.includes('保留对子')")
+    page.wait_for_function("() => (localStorage.getItem('guandan-practice-records')?.includes('保留对子'))")
     # A fresh browser imports the exported annotated record and refuses a damaged one.
     imported = browser.new_page(viewport={"width": 1440, "height": 1000})
     imported.on("pageerror", lambda error: errors.append(str(error)))
@@ -70,7 +70,7 @@ with sync_playwright() as p:
     imported.locator("#tsBtn").click()
     imported.locator("#tsLoad").click()
     imported.locator("#trecFile").set_input_files(str(OUT / "practice-record.txt"))
-    imported.wait_for_function("document.querySelector('#trecText').value.includes('#DATA ')")
+    imported.wait_for_function("() => (document.querySelector('#trecText').value.includes('#DATA '))")
     imported.locator("#trecGo").click()
     assert "导入了 1 局" in imported.locator("#trecMsg").inner_text()
     assert imported.evaluate("TREC.rounds.length") == 1
@@ -96,7 +96,7 @@ with sync_playwright() as p:
     assert legacy.evaluate("TREC.rounds.length") == 1
     legacy.evaluate("practiceStore()")
     legacy.wait_for_function(
-        "localStorage.getItem('guandan-practice-records')!==null&&localStorage.getItem('guandan-test-records')===null"
+        "() => (localStorage.getItem('guandan-practice-records')!==null&&localStorage.getItem('guandan-test-records')===null)"
     )
     assert not errors, errors
     print(

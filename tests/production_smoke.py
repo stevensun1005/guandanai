@@ -2,13 +2,14 @@
 
 from pathlib import Path
 import sys
+import os
 from playwright.sync_api import sync_playwright
 
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8765/"
 OUT = Path(__file__).resolve().parents[1] / "work/validation/production"
 OUT.mkdir(parents=True, exist_ok=True)
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True, channel="chrome")
+    browser = p.chromium.launch(headless=True, channel=os.environ.get("BROWSER_CHANNEL", "chrome"))
     page = browser.new_page(viewport={"width": 1440, "height": 1000})
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
@@ -37,7 +38,7 @@ with sync_playwright() as p:
             if page.locator("#playBtn").is_enabled():
                 page.locator("#playBtn").click()
         page.wait_for_timeout(100)
-    page.wait_for_function("window.policyTurns>0", timeout=30000)
+    page.wait_for_function('() => (window.policyTurns>0)', timeout=30000)
     page.wait_for_timeout(1200)
     assert not errors, errors
     page.screenshot(path=str(OUT / "table.png"))

@@ -192,7 +192,7 @@ def main():
                 page = context.new_page()
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto(f"http://127.0.0.1:{server.server_port}/", wait_until="networkidle")
-                page.wait_for_function("typeof window.evaluatePolicy==='function'")
+                page.wait_for_function("() => (typeof window.evaluatePolicy==='function')")
                 for index, fixture in enumerate(fixtures):
                     state = fixture["state"]
                     expected = reference.score(state)

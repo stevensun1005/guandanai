@@ -15,12 +15,14 @@ export async function playMatch({
   evaluate = false,
   initialDealSeed = null,
   trainingCritic = false,
+  tablePolicy = null,
 }) {
   if (!['rule', 'self', 'snapshot'].includes(mode) || ![0, 1].includes(team))
     throw Error('Invalid match lineup');
   if (mode === 'snapshot' && !snapshotInfer) throw Error('Missing frozen opponent');
   let match = { levels: [2, 2], lvlTeam: 0, aFails: [0, 0], round: 1, previousOrder: null };
   const history = [],
+    publicHistory = [],
     stats = {
       rounds: 0,
       decisions: 0,
@@ -39,12 +41,23 @@ export async function playMatch({
         : (Math.imul(seed, 1009) + r) >>> 0;
     const game = createMatchRound(roundSeed, match),
       rule = createRuleBaseline(roundSeed ^ 0x6a09e667);
+    if (tablePolicy) {
+      game.roundHistory = publicHistory;
+      Object.assign(game, {
+        aFails: match.aFails,
+        lvlTeam: match.lvlTeam,
+        round: match.round,
+        prevOut: match.previousOrder,
+      });
+    }
     let result = null;
     for (let turn = 0; turn < 1000; turn++) {
       const p = game.turn,
         opponent = p % 2 !== team;
       let play;
       if (opponent && mode === 'rule') play = rule(game, p);
+      else if (tablePolicy && evaluate && !(opponent && mode === 'snapshot'))
+        play = await tablePolicy(game, p);
       else {
         const plays = candidates(game.hands[p], game.L, game.trick?.play);
         let index = 0;
@@ -84,6 +97,7 @@ export async function playMatch({
     }
     if (!result) throw Error('Round failed to terminate');
     const next = advanceMatch(match, game, result, 'draw');
+    if (tablePolicy) publicHistory.push({ log: game.log });
     history.push({ round: match.round, level: game.L, ...next.result });
     stats.rounds++;
     if (result.order[0] % 2 === result.order[1] % 2)

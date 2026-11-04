@@ -211,7 +211,7 @@ export function tvDraw() {
     )
     .join('')}${
     k ? '' : `<div class="tvnote">${runtime.names[rec.leader]}先出</div>`
-  }${k === n && rec.result ? `<div class="tvnote">${rec.result}</div>` : ''}${tvBreak(rec, plays, cur)}</div>`;
+  }${k === n && rec.result ? `<div class="tvnote">${esc(rec.result)}</div>` : ''}${tvBreak(rec, plays, cur)}</div>`;
   const cm = `<div class="tvcm"><label for="tvNote">${k ? `对第 ${k} 手的评语` : '对这一局开局（配牌）的评语'}</label>
       <textarea id="tvNote" rows="2" placeholder="${!k ? '比如：这手牌应该配成…' : cur.cards ? '比如：这里应该出…，因为…' : '比如：这里不该过，应该出…，因为…'}">${esc(rec.notes[k] || '')}</textarea></div>`;
   const v = $('#tview');

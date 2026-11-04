@@ -19,7 +19,7 @@ with sync_playwright() as p:
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(URL, wait_until="networkidle")
     page.evaluate("TableBot.check()")
-    page.wait_for_function("TableBot.ready", timeout=90000)
+    page.wait_for_function('() => (TableBot.ready)', timeout=90000)
     reports = []
     for fixture in fixtures:
         state = fixture["state"]

@@ -70,11 +70,11 @@ with sync_playwright() as p:
     page.evaluate("G.turn=1;G.clock=null")
     page.locator("#rulesBtn").click()
     page.evaluate("void TableBot.playTurn({who:1})")
-    page.wait_for_function("TableBot.ready", timeout=60000)
+    page.wait_for_function('() => (TableBot.ready)', timeout=60000)
     page.wait_for_timeout(500)
     assert page.evaluate("G.log.length") == 0
     page.locator("#helpClose").click()
-    page.wait_for_function("G.log.length>0", timeout=15000)
+    page.wait_for_function('() => (G.log.length>0)', timeout=15000)
     page.evaluate(SETUP)
     page.evaluate("NET.mode='host'")
     page.locator("#rulesBtn").click()

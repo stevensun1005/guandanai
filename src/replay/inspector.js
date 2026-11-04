@@ -611,7 +611,7 @@ export function recListHTML(rec, on) {
   if (rec.replayOf) {
     const o = runtime.TREC.rounds.find((r) => r.no === rec.replayOf);
     out.push(
-      `<li class="thead">重打第 ${rec.replayOf} 局${o && o.result ? `；原来：${o.result}` : ''}</li>`,
+      `<li class="thead">重打第 ${rec.replayOf} 局${o && o.result ? `；原来：${esc(o.result)}` : ''}</li>`,
     );
   }
   for (const t of practiceChanges(rec))
@@ -633,7 +633,7 @@ export function recListHTML(rec, on) {
       note(k),
     );
   });
-  if (rec.result) out.push(`<li class="thead">${rec.result}</li>`);
+  if (rec.result) out.push(`<li class="thead">${esc(rec.result)}</li>`);
   return out.join('');
 }
 

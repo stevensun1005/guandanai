@@ -40,9 +40,10 @@ def main():
             "request", lambda request: api.append(request.url) if "/api/" in request.url else None
         )
         host.goto(URL, wait_until="networkidle")
+        host.wait_for_function("() => (typeof TableBot==='object')")
         assert not host.evaluate("TableBot.ready")
         host.evaluate("TableBot.check()")
-        host.wait_for_function("TableBot.ready", timeout=90000)
+        host.wait_for_function('() => (TableBot.ready)', timeout=90000)
         assert host.locator("#aiStatus,#aiTableStatus,[data-ai-mode],.ai-panel").count() == 0
         assert "AI" not in host.locator("#lobby").inner_text()
         host.screenshot(path=str(OUT / "lobby-desktop.png"))
@@ -71,7 +72,7 @@ def main():
         host.locator("#nick").fill("房主")
         host.locator('[data-mode="host"]').click()
         try:
-            host.wait_for_function("NET.peerOpen===true", timeout=25000)
+            host.wait_for_function('() => (NET.peerOpen===true)', timeout=25000)
         except Exception:
             status = host.locator("#lobbyStatus").inner_text()
             raise AssertionError("PeerJS room creation failed: " + status)
@@ -99,14 +100,14 @@ def main():
         assert guest.locator("#roomCode").input_value() == code
         guest.locator("#nick").fill("朋友")
         guest.locator("#joinBtn").click()
-        guest.wait_for_function("NET.hostConn&&NET.hostConn.open", timeout=25000)
-        guest.wait_for_function("document.querySelector('[data-bot-seat=E]').value==='aggressive'")
+        guest.wait_for_function('() => (NET.hostConn&&NET.hostConn.open)', timeout=25000)
+        guest.wait_for_function("() => (document.querySelector('[data-bot-seat=E]').value==='aggressive')")
         assert guest.locator('[data-bot-seat="E"]').is_disabled()
         guest.locator('[data-seat="N"]').click()
-        host.wait_for_function("NET.lobby.N==='朋友'", timeout=10000)
+        host.wait_for_function("() => (NET.lobby.N==='朋友')", timeout=10000)
         host.locator("#sitBtn").click()
-        host.wait_for_function("NET.mode==='host'")
-        guest.wait_for_function("NET.mode==='guest'")
+        host.wait_for_function("() => (NET.mode==='host')")
+        guest.wait_for_function("() => (NET.mode==='guest')")
         assert host.evaluate("botStyles") == ["balanced", "aggressive", "balanced", "conservative"]
         assert guest.evaluate("botStyles") == host.evaluate("botStyles")
         assert not guest.evaluate("TableBot.ready")
@@ -124,8 +125,8 @@ def main():
         assert host.evaluate("G.phase==='prep'"), host.evaluate("G.phase")
         host.locator("#readyBtn").click()
         guest.locator("#readyBtn").click()
-        host.wait_for_function("G.phase==='play'", timeout=15000)
-        guest.wait_for_function("G.phase==='play'", timeout=15000)
+        host.wait_for_function("() => (G.phase==='play')", timeout=15000)
+        guest.wait_for_function("() => (G.phase==='play')", timeout=15000)
         # Trigger human timeouts in this smoke game; bots use their real worker.
         for _ in range(180):
             if host.evaluate("G.log.length>=12"):
@@ -147,13 +148,14 @@ def main():
         host.screenshot(path=str(OUT / "multiplayer-host.png"))
         guest.screenshot(path=str(OUT / "multiplayer-guest.png"))
         guest_context.close()
-        host.wait_for_function("NET.humans.size===1", timeout=25000)
+        host.wait_for_function('() => (NET.humans.size===1)', timeout=25000)
         mobile = browser.new_page(
             viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True
         )
         mobile.goto(URL, wait_until="networkidle")
+        mobile.wait_for_function("() => (typeof TableBot==='object')")
         mobile.evaluate("TableBot.check()")
-        mobile.wait_for_function("TableBot.ready", timeout=60000)
+        mobile.wait_for_function('() => (TableBot.ready)', timeout=60000)
         mobile.screenshot(path=str(OUT / "lobby-mobile.png"))
         assert not mobile.evaluate("document.documentElement.scrollWidth>innerWidth")
         # Failed resource loading waits for a retry instead of changing bot strategy.
@@ -162,6 +164,7 @@ def main():
         failure = failure_context.new_page()
         failure.on("pageerror", lambda error: errors.append(str(error)))
         failure.goto(URL, wait_until="networkidle")
+        failure.wait_for_function("() => (typeof startPlay==='function')")
         failure.evaluate("""() => {
           aiDecide=()=>{throw Error('Unexpected classic decision')};
           hideOverlay();$('#lobby').hidden=true;resetGame();
@@ -174,7 +177,7 @@ def main():
         assert failure.evaluate("G.log.length") == 0
         failure_context.unroute("**/models/policy.onnx*")
         failure.locator("#retryTableBtn").click()
-        failure.wait_for_function("G.log.length>=1", timeout=60000)
+        failure.wait_for_function('() => (G.log.length>=1)', timeout=60000)
         failure_context.close()
         assert not errors, errors
         report = {

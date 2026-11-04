@@ -60,7 +60,22 @@ export function genPlays(hand, L) {
         nat = nat.concat(g.slice(0, k));
         wu += need - k;
       }
-      if (wu <= w) sets.push(nat.concat(W(wu)));
+      if (wu <= w) {
+        sets.push(nat.concat(W(wu)));
+        // A first-card selection may be a flush even though a mixed-suit run is held.
+        if (need === 1 && new Set(nat.map((c) => c.s)).size === 1) {
+          const suit = nat[0].s;
+          for (let i = 0; i < nat.length; i++) {
+            const alternate = by[nat[i].r]?.find((c) => c.s !== suit);
+            if (alternate) {
+              const mixed = nat.slice();
+              mixed[i] = alternate;
+              sets.push(mixed.concat(W(wu)));
+              break;
+            }
+          }
+        }
+      }
     }
   }
   // straight flushes

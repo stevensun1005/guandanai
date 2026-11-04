@@ -74,14 +74,14 @@ window.Worker=class extends BaseWorker {
     host.goto(URL, wait_until="networkidle")
     host.locator("#nick").fill("房主")
     host.locator('[data-mode="host"]').click()
-    host.wait_for_function("NET.peerOpen", timeout=30000)
+    host.wait_for_function('() => (NET.peerOpen)', timeout=30000)
     code = host.locator("#roomCodeShow").inner_text()
     host.locator('[data-seat="W"]').click()
     for page, direction, name in zip(pages[1:], ["S", "E", "N"], ["一号", "二号", "三号"]):
         page.goto(URL + "&room=" + code, wait_until="networkidle")
         page.locator("#nick").fill(name)
         page.locator("#joinBtn").click()
-        page.wait_for_function("NET.hostConn?.open", timeout=30000)
+        page.wait_for_function('() => (NET.hostConn?.open)', timeout=30000)
         page.locator(f'[data-seat="{direction}"]').click()
         host.wait_for_function("NET.lobby." + direction + "!==null")
     if HUMANS == 2:
@@ -90,7 +90,7 @@ window.Worker=class extends BaseWorker {
         host.locator("[data-bot-seat=N]").select_option("adaptive")
     host.locator("#sitBtn").click()
     for page in pages:
-        page.wait_for_function("NET.started||NET.mode==='guest'", timeout=15000)
+        page.wait_for_function("() => (NET.started||NET.mode==='guest')", timeout=15000)
     if HUMANS == 4:
         assert not host.evaluate(
             "TableBot.ready"
@@ -175,7 +175,7 @@ window.Worker=class extends BaseWorker {
             returning = pages[index]
             returning.reload(wait_until="networkidle")
             returning.wait_for_function(
-                "NET.mode==='guest'&&!NET.gone&&G.phase!=='start'", timeout=35000
+                "() => (NET.mode==='guest'&&!NET.gone&&G.phase!=='start')", timeout=35000
             )
             host.wait_for_function("count=>NET.humans.size===count", arg=HUMANS, timeout=15000)
             refreshed.add(states[0]["round"])
@@ -192,7 +192,7 @@ window.Worker=class extends BaseWorker {
                 returning = pages[-1]
                 returning.reload(wait_until="networkidle")
                 returning.wait_for_function(
-                    "NET.mode==='guest'&&!NET.gone&&['roundEnd','over'].includes(G.phase)",
+                    "() => (NET.mode==='guest'&&!NET.gone&&['roundEnd','over'].includes(G.phase))",
                     timeout=35000,
                 )
                 host.wait_for_function("count=>NET.humans.size===count", arg=HUMANS, timeout=15000)
@@ -224,7 +224,7 @@ window.Worker=class extends BaseWorker {
                 page.locator("#nextBtn").wait_for(state="visible", timeout=15000)
                 if page.locator("#nextBtn").is_enabled():
                     page.locator("#nextBtn").click()
-            host.wait_for_function("!['roundEnd','over'].includes(G.phase)", timeout=15000)
+            host.wait_for_function("() => (!['roundEnd','over'].includes(G.phase))", timeout=15000)
             continue
         for page, state in zip(pages, states):
             button = page.locator("#deckBtn")

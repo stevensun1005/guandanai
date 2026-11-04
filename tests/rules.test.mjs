@@ -85,3 +85,32 @@ test('generated moves use unique held cards and have a valid legal reading', () 
     }
   }
 });
+
+test('mixed-suit straights survive when first representatives form a straight flush', () => {
+  for (const ranks of [
+    [3, 4, 5, 6, 7],
+    [14, 2, 3, 4, 5],
+    [10, 11, 12, 13, 14],
+  ]) {
+    const suited = ranks.map((rank) => one(rank));
+    const alternate = one(ranks[2], 'D');
+    for (const hand of [
+      suited.concat(alternate),
+      suited.filter((_, i) => i !== 1).concat(one(9, 'H'), alternate),
+    ]) {
+      const moves = genPlays(hand, 9);
+      assert(moves.some((play) => play.type === 'sflush'));
+      assert(moves.some((play) => play.type === 'straight' && play.cards.includes(alternate)));
+      for (const play of moves)
+        assert(
+          analyze(play.cards, 9).some(
+            (shape) => shape.type === play.type && shape.value === play.value,
+          ),
+        );
+    }
+    assert.equal(
+      genPlays(suited, 9).some((play) => play.type === 'straight'),
+      false,
+    );
+  }
+});

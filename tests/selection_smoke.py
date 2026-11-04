@@ -104,7 +104,7 @@ with sync_playwright() as p:
             assert page.evaluate("G.log.length") == prior
             assert "再次出牌确认" in page.locator("#selectionStatus").inner_text()
         page.keyboard.press("p")
-        page.wait_for_function("G.log.length>3")
+        page.wait_for_function('() => (G.log.length>3)')
         assert page.evaluate("G.log[3].p") == 0
         assert not page.evaluate("document.documentElement.scrollWidth>innerWidth")
         assert not errors, errors

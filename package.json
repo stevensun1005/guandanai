@@ -1,6 +1,6 @@
 {
   "name": "guandanai",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "type": "module",
   "private": true,
   "engines": {
@@ -15,7 +15,8 @@
     "format": "prettier --write \"src/**/*.{js,mjs,css,html}\" \"scripts/**/*.mjs\" \"tests/*.mjs\" \"docs/**/*.md\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
     "format:check": "prettier --check \"src/**/*.{js,mjs,css,html}\" \"scripts/**/*.mjs\" \"tests/*.mjs\" \"docs/**/*.md\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
     "eval:response": "node scripts/evaluate-response.mjs",
-    "eval:endgame": "node scripts/evaluate-endgame.mjs"
+    "eval:endgame": "node scripts/evaluate-endgame.mjs",
+    "eval:table": "node scripts/evaluate-table.mjs"
   },
   "dependencies": {
     "onnxruntime-web": "1.31.1",

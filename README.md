@@ -111,7 +111,7 @@ docs/                 玩法、架构、机器人与迭代路线
 
 ## 发布你自己的版本
 
-向 `main` 推送后，GitHub Actions 会执行检查、构建并发布到 GitHub Pages。Pages 的 Source 选择 **GitHub Actions**。
+PR 会执行测试、格式、构建和真实浏览器出牌／牌谱导入检查；向 `main` 推送并通过检查后发布到 GitHub Pages。Pages 的 Source 选择 **GitHub Actions**。文档和实验检查点的归档推送不触发网站部署。
 
 也可以把 `npm run build` 生成的 `dist` 目录完整上传到静态网站。请保留 `assets/` 与 `models/` 的相对位置，不要只上传 `index.html`。
 
@@ -134,3 +134,5 @@ docs/                 玩法、架构、机器人与迭代路线
 [贡献流程](CONTRIBUTING.md) · [机器人设计](docs/BOTS.md) · [模型训练](docs/MODEL_TRAINING.md) · [测试与评估](docs/TESTING.md)
 
 训练进展与复现：[主策略训练记录](docs/TRAINING_RUN.md)。137 万参数的完整主网已进行逐层解冻训练，并继续开展明牌评价与难局重打的四组对照，以整场团队胜利为目标。代码、记录和研究检查点统一从 `main` 访问；实验权重是否替换网页默认模型，仍需新的独立比赛验收。
+
+开发评测可运行 `npm run eval:table -- --pairs=1000 --opponent=rule`：它复用网页真实决策模块，覆盖风格、公开记忆、直接出完和残局。实际已完成的样本、统计边界与复现命令见[研究报告](docs/MODEL_STUDY.md#54-网页决策流程的整场评测)，不把流程检查当作棋力进步。

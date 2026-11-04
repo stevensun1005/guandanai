@@ -17,7 +17,7 @@ with sync_playwright() as p:
  }""")
     assert queued == {"phase": "tribute", "gives": 2, "returns": 0}, queued
     page.evaluate("Promise.all([runGives(),runGives()])")
-    page.wait_for_function("G.phase==='play'&&G.turn===0&&G.clock?.who===0", timeout=10000)
+    page.wait_for_function("() => (G.phase==='play'&&G.turn===0&&G.clock?.who===0)", timeout=10000)
     counts = page.evaluate("G.hands.map(hand=>hand.length)")
     assert counts == [27] * 4, counts
     assert page.evaluate("new Set(G.hands.flat().map(card=>card.id)).size") == 108
@@ -25,7 +25,7 @@ with sync_playwright() as p:
     page.evaluate(
         "G.trib=[{g:2,r:0,tc:G.hands[0][0]}];startPlay(0);setTimeout(()=>startPlay(1),100)"
     )
-    page.wait_for_function("G.turn===1&&G.clock?.who===1", timeout=6000)
+    page.wait_for_function('() => (G.turn===1&&G.clock?.who===1)', timeout=6000)
     page.wait_for_timeout(500)
     assert page.evaluate("G.turn") == 1
     assert not errors, errors

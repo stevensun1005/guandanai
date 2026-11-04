@@ -15,7 +15,7 @@ with sync_playwright() as p:
     host.goto(URL, wait_until="networkidle")
     host.locator("#nick").fill("房主")
     host.locator("[data-mode=host]").click()
-    host.wait_for_function("NET.peerOpen", timeout=30000)
+    host.wait_for_function('() => (NET.peerOpen)', timeout=30000)
     code = host.locator("#roomCodeShow").inner_text()
     host.locator("[data-seat=S]").click()
 
@@ -26,13 +26,13 @@ with sync_playwright() as p:
         page.goto(URL + "&room=" + code, wait_until="networkidle")
         page.locator("#nick").fill(name)
         page.locator("#joinBtn").click()
-        page.wait_for_function("NET.hostConn?.open", timeout=30000)
+        page.wait_for_function('() => (NET.hostConn?.open)', timeout=30000)
         page.locator(f"[data-seat={direction}]").click()
         host.wait_for_function(
             "({direction,name})=>NET.lobby[direction]===name",
             arg={"direction": direction, "name": name},
         )
-        page.wait_for_function("sessionStorage.getItem('guandan-rejoin-seat')!==null")
+        page.wait_for_function("() => (sessionStorage.getItem('guandan-rejoin-seat')!==null)")
         return (
             context,
             page,
@@ -41,19 +41,19 @@ with sync_playwright() as p:
 
     old, _, old_token = join("旧玩家", "E")
     old.close()
-    host.wait_for_function("NET.lobby.E===null", timeout=30000)
+    host.wait_for_function('() => (NET.lobby.E===null)', timeout=30000)
     current, guest, current_token = join("新玩家", "E")
     guest.evaluate("NET.hostConn.send({t:'sit',dir:'E',name:'新玩家',ver:'old-build'})")
-    host.wait_for_function("document.querySelector('#sitBtn').disabled")
+    host.wait_for_function("() => (document.querySelector('#sitBtn').disabled)")
     guest.evaluate("sendSit('E')")
-    host.wait_for_function("!document.querySelector('#sitBtn').disabled")
+    host.wait_for_function("() => (!document.querySelector('#sitBtn').disabled)")
     temporary, _, host_seat_token = join("临时", "N")
     temporary.close()
-    host.wait_for_function("NET.lobby.N===null", timeout=30000)
+    host.wait_for_function('() => (NET.lobby.N===null)', timeout=30000)
     host.locator("[data-seat=N]").click()
     host.locator("#sitBtn").click()
-    host.wait_for_function("NET.mode==='host'", timeout=15000)
-    guest.wait_for_function("NET.mode==='guest'", timeout=15000)
+    host.wait_for_function("() => (NET.mode==='host')", timeout=15000)
+    guest.wait_for_function("() => (NET.mode==='guest')", timeout=15000)
 
     def rejected(credential):
         context = browser.new_context()
@@ -65,7 +65,7 @@ with sync_playwright() as p:
         page = context.new_page()
         page.goto(URL + "&room=" + code, wait_until="networkidle")
         try:
-            page.wait_for_function("NET.refused", timeout=30000)
+            page.wait_for_function('() => (NET.refused)', timeout=30000)
         except Exception as error:
             raise AssertionError(
                 {
@@ -86,9 +86,9 @@ with sync_playwright() as p:
     guest.locator("#quitBtn").click()
     guest.locator("#quitYes").click()
     guest.wait_for_function(
-        "document.querySelector('#lobby')&&!document.querySelector('#lobby').hidden", timeout=15000
+        "() => (document.querySelector('#lobby')&&!document.querySelector('#lobby').hidden)", timeout=15000
     )
-    host.wait_for_function("NET.humans.size===1", timeout=15000)
+    host.wait_for_function('() => (NET.humans.size===1)', timeout=15000)
     assert guest.evaluate("sessionStorage.getItem('guandan-rejoin-seat')") == None
     rejected(current_token)
     assert host.evaluate("NET.humans.size") == 1

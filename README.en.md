@@ -103,7 +103,7 @@ Production assets are bundled into `dist/`; edit `src/`, not the build output. R
 
 ## Publish
 
-Push to `main` to run checks and deploy through GitHub Actions. Configure Pages to use **GitHub Actions** as its source. All inference resources are included in the static deployment.
+Pull requests run unit checks, formatting, the build and real browser play/import smoke tests without deploying. Push to `main` to deploy after those checks pass. Documentation and experimental checkpoint archival pushes do not trigger deployment. Configure Pages to use **GitHub Actions** as its source. All inference resources are included in the static deployment.
 
 The application uses relative asset URLs and supports repository subpaths. See the [deployment guide](docs/DEPLOYMENT.md).
 
@@ -122,3 +122,5 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md)
 
 Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). The complete 1.37-million-parameter actor is now also tested with public or privileged training-only critics and repeated opening problems, targeting team victory from 2 through A. Research code, evidence and checkpoint access are merged into `main`; replacing the default web model still requires independent match acceptance tests.
+
+`npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](docs/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength.
