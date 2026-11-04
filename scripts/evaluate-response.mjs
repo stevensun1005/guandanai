@@ -3,7 +3,8 @@ import { fileURLToPath } from 'node:url';
 import { simulateRound } from './lib/simulation.mjs';
 import { createPolicyInference } from './lib/policy-inference.mjs';
 import { selectProfileAction, BOT_PROFILES, usesResponseModel } from '../src/ai/profiles.js';
-import { ENDGAME_MAX_CARDS, solvePublicEndgame } from '../src/ai/endgame.js';
+import { ENDGAME_MAX_CARDS } from '../src/ai/endgame.js';
+import { publicEnding } from './lib/public-ending.mjs';
 import { encodeResponse } from '../src/ai/response-features.mjs';
 import { responseCandidates } from '../src/ai/response.mjs';
 
@@ -34,40 +35,14 @@ const policy = createPolicyInference(),
 const results = [];
 const stats = { responseCalls: 0, responseChangedChoices: 0, decisions: 0, proved: 0 };
 const started = performance.now();
-function ending(context, plays, values) {
-  const active = context.counts
-    .map((count, seat) => (count ? seat : -1))
-    .filter((seat) => seat >= 0);
-  if (active.length !== 2 || context.counts.reduce((a, b) => a + b, 0) > endgameCards) return null;
-  let passes = 0;
-  if (context.trick)
-    for (let index = context.log.length - 1; index >= 0 && !context.log[index].cards; index--)
-      passes++;
-  const state = {
-    p: context.p,
-    hand: context.hand.map((card) => card.id),
-    counts: context.counts,
-    log: context.log.map((entry) => ({
-      p: entry.p,
-      cards: entry.cards?.map((card) => card.id) || null,
-    })),
-    level: context.level,
-    actions: plays.map((play) => play?.cards.map((card) => card.id) || []),
-    endgame: {
-      trick: context.trick,
-      passes,
-      shapes: plays.map((play) => play && { type: play.type, n: play.n, value: play.value }),
-    },
-  };
-  return solvePublicEndgame(state, values);
-}
+
 try {
   for (let pair = 0; pair < pairs; pair++) {
     const outcomes = [];
     for (const side of [0, 1]) {
       const result = await simulateRound(seed + pair, Array(4).fill('observant'), policy.infer, {
         selectAction: async (plays, values, _style, context) => {
-          const solved = ending(context, plays, values);
+          const solved = publicEnding(context, plays, values, endgameCards);
           if (solved) {
             stats.proved++;
             return solved.index;

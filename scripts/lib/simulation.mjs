@@ -102,9 +102,13 @@ export async function simulateRound(
     onAction = null,
     selectAction = selectProfileAction,
     maxEndgameCards = ENDGAME_MAX_CARDS,
+    roundHistory = [],
+    onFinish = null,
+    legacyHabits = false,
   } = {},
 ) {
   const game = createRound(seed);
+  game.roundHistory = roundHistory;
   const stats = {
     decisions: 0,
     changed: 0,
@@ -134,13 +138,10 @@ export async function simulateRound(
       const state = policyState(game, player, 0, plays);
       const values = await infer(state);
       const style = styles[player];
-      const baseline = selectProfileAction(
-        plays,
-        values,
-        'balanced',
-        decisionContext(game, player),
-      );
-      selected = await selectAction(plays, values, style, decisionContext(game, player));
+      const context = decisionContext(game, player);
+      if (legacyHabits) delete context.habits;
+      const baseline = selectProfileAction(plays, values, 'balanced', context);
+      selected = await selectAction(plays, values, style, context);
       if (style === 'endgame') {
         state.endgame =
           game.hands.reduce((sum, hand) => sum + hand.length, 0) <= maxEndgameCards
@@ -181,7 +182,10 @@ export async function simulateRound(
     }
     if (onAction) onAction({ context: decisionContext(game, player), play });
     const result = advanceRound(game, play);
-    if (result) return { ...result, turns: turn + 1, stats };
+    if (result) {
+      if (onFinish) onFinish(game, result);
+      return { ...result, turns: turn + 1, stats };
+    }
   }
   throw Error('Round did not terminate within 1000 turns');
 }

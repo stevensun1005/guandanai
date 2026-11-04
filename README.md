@@ -20,9 +20,9 @@
 ![实际对局画面](docs/media/table-desktop.png)
 
 <details>
-<summary>更多界面：电脑性格与手机操作帮助</summary>
+<summary>更多界面：电脑性格、操作帮助与整场战况</summary>
 
-<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="每个电脑座位独立选择性格" /> <img src="docs/media/help-mobile.png" width="280" alt="手机上的操作帮助" /></p>
+<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="每个电脑座位独立选择性格" /> <img src="docs/media/help-mobile.png" width="280" alt="手机上的操作帮助" /> <img src="docs/media/match-history-mobile.png" width="280" alt="手机上的整场战况与公开牌谱" /></p>
 
 </details>
 
@@ -41,7 +41,7 @@
 | 四人掼蛋 | 两副牌、百搭、同花顺、进还贡、接风、升级打 A               |
 | 朋友房间 | 邀请链接、房间号、座位选择、掉线接管与原标签页恢复         |
 | 智能电脑 | 强化学习主策略与独立应牌网络，全部在浏览器后台推理         |
-| 手牌操作 | 拖动、扫选、成组、智能理牌、按花色排序、理牌撤销、三种布局 |
+| 手牌操作 | 拖动、扫选、成组、智能理牌、按花色排序、撤销重做、三种布局 |
 | 出牌辅助 | 合法出牌提示、同花顺查找、可选二次确认、跨局牌谱与整场战况 |
 | 对局氛围 | 音效、全屏、可选语音、出牌动画与结果展示                   |
 | 静态部署 | GitHub Pages 自动发布，所有模型资源随网页部署              |

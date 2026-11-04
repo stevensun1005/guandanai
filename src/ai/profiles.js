@@ -25,7 +25,7 @@ export const BOT_PROFILES = Object.freeze([
     id: 'observant',
     name: '观察',
     summary: '读牌应对',
-    description: '结合公开出牌与过牌倾向调整选择',
+    description: '结合本场近期公开出牌与过牌倾向调整选择',
   },
   {
     id: 'adaptive',
@@ -47,7 +47,13 @@ export function adaptiveWeights(context) {
   const pressure = opponents.length ? Math.max(0, 1 - Math.min(...opponents) / 8) : 0;
   const closing = Math.max(0, 1 - context.hand.length / 12);
   const partnerLeading = context.trick?.player === (context.p + 2) % 4;
-  const evidence = Math.min(12, context.log.filter((entry) => !entry.lead).length) / 12;
+  const evidence =
+    Math.min(
+      12,
+      context.habits
+        ? context.habits.reduce((sum, seat) => sum + seat.responses, 0)
+        : context.log.filter((entry) => !entry.lead).length,
+    ) / 12;
   const raw = {
     aggressive: 0.6 + 1.8 * pressure + 0.8 * closing,
     conservative: 1.4 - 0.9 * pressure + (partnerLeading ? 0.7 : 0),
@@ -93,7 +99,9 @@ function preference(play, style, context, observed, responseRisk = null, blend =
   // Sample-weighted evidence stays weak when a seat has barely responded.
   if (!trick)
     for (const seat of opponents) {
-      const bucket = observed[seat].bySize[play.cards.length];
+      const bucket = context.habits
+        ? context.habits[seat].byType[`${play.type}:${play.cards.length}`]
+        : observed[seat].bySize[play.cards.length];
       if (!bucket) continue;
       const total = bucket.passes + bucket.responds;
       score += (0.018 * (bucket.passes - bucket.responds)) / (total + 6);

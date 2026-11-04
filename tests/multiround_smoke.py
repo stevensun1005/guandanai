@@ -61,10 +61,10 @@ with sync_playwright() as p:
         page.on("pageerror", lambda error: errors.append(str(error)))
         pages.append(page)
     contexts[0].add_init_script(
-        """const BaseWorker=Worker;window.policyDecisions=0;window.lastPolicyInput=null;window.lastPolicyMessage=null;
+        """const BaseWorker=Worker;window.policyDecisions=0;window.policyMemoryDecisions=0;window.lastPolicyInput=null;window.lastPolicyMessage=null;
 window.Worker=class extends BaseWorker {
  constructor(...args){super(...args);this.addEventListener('message',event=>window.lastPolicyMessage=event.data)}
- postMessage(data,...rest){if(data.type==='decide'){window.policyDecisions++;window.lastPolicyInput=structuredClone(data.state)}return super.postMessage(data,...rest)}
+ postMessage(data,...rest){if(data.type==='decide'){window.policyDecisions++;if(data.state.context?.habits)window.policyMemoryDecisions++;window.lastPolicyInput=structuredClone(data.state)}return super.postMessage(data,...rest)}
 };"""
     )
     host = pages[0]
@@ -281,13 +281,22 @@ window.Worker=class extends BaseWorker {
         assert any(
             "response.onnx" in url for url in models
         ), "mixed game did not exercise the auxiliary network"
+        if TARGET >= 2:
+            assert host.evaluate("policyMemoryDecisions>0")
     host.screenshot(path=str(OUT / "final-host.png"))
+    host.locator("#resultHistoryBtn").wait_for(state="visible", timeout=15000)
+    host.locator("#resultHistoryBtn").click()
+    host.screenshot(path=str(OUT / "match-history-desktop.png"))
+    host.set_viewport_size({"width": 390, "height": 844})
+    host.screenshot(path=str(OUT / "match-history-mobile.png"))
+    host.keyboard.press("Escape")
     report = {
         "clients": HUMANS,
         "completedMatch": match_finished,
         "finalResult": host.evaluate("G.result"),
         "acceleratedTurnTimeouts": AUTO,
         "policyDecisions": host.evaluate("policyDecisions"),
+        "policyMemoryDecisions": host.evaluate("policyMemoryDecisions"),
         "automaticStateResyncs": [page.evaluate("NET.syncCount||0") for page in pages],
         "pageVersion": host.locator("meta[name=app-version]").get_attribute("content"),
         "bots": 4 - HUMANS,

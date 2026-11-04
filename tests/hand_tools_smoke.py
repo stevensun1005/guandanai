@@ -54,6 +54,25 @@ with sync_playwright() as p:
         page.locator('[data-hand-tool="undo"]').click()
         assert page.evaluate("JSON.stringify(G.fixed)") == group
         page.locator("#sortBtn").click()
+        assert page.locator("#handRedoOrder").is_enabled()
+        page.locator("#handRedoOrder").click()
+        assert page.evaluate("G.fixed.length") == 0
+        page.keyboard.press("Control+z")
+        assert page.evaluate("JSON.stringify(G.fixed)") == group
+        page.keyboard.press("Control+Shift+z")
+        assert page.evaluate("G.fixed.length") == 0
+        page.keyboard.press("Control+z")
+        assert page.evaluate("JSON.stringify(G.fixed)") == group
+        page.locator("#sortBtn").click()
+        assert page.locator("#handRedoOrder").is_enabled()
+        page.keyboard.press("Control+y")
+        assert page.locator("#handRedoOrder").is_disabled()
+        assert page.locator("#handUndoOrder").is_enabled()
+        page.keyboard.press("Escape")
+        assert page.evaluate("G.fixed.length") == 0
+        page.keyboard.press("Control+z")
+        assert page.evaluate("JSON.stringify(G.fixed)") == group
+        page.locator("#sortBtn").click()
         page.keyboard.press("Escape")
         assert page.locator("#handToolsMenu").is_hidden()
         assert page.locator("#sortBtn").get_attribute("aria-expanded") == "false"
@@ -67,6 +86,7 @@ with sync_playwright() as p:
                 "sorts": 3,
                 "groupPreserved": True,
                 "undo": True,
+                "redoAndShortcuts": True,
                 "pageErrors": errors,
             }
         )

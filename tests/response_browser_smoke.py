@@ -10,6 +10,7 @@ URL += ("&" if "?" in URL else "?") + "test=1"
 fixtures = json.loads((ROOT / "tests/fixtures/response-positions.json").read_text()) + json.loads(
     (ROOT / "tests/fixtures/adaptive-positions.json").read_text()
 )
+fixtures += json.loads((ROOT / "tests/fixtures/habit-positions.json").read_text(encoding="utf-8"))
 WORKER = """state=>new Promise((resolve,reject)=>{
  const w=new Worker(new URL('./assets/ai-worker.mjs',document.baseURI),{type:'module'});
  w.onmessage=({data})=>{w.terminate();data.error?reject(Error(data.error)):resolve(data.result)};
@@ -24,6 +25,7 @@ RESTORE = """state=>{
  G.L=state.level;G.levels=[state.selfLevel,state.opponentLevel];if(state.p%2)G.levels.reverse();
  G.log=state.context.log.map(e=>({...e,cards:e.cards?.map(card=>deck[card.id])||null}));
  G.trick=state.context.trick;G.phase='play';G.turn=state.p;G.clock=null;G.round=1;G.myOrder=[];G.fixed=[];G.pw=[];G.seen=[];G.rest=[];
+ G.roundHistory=state.roundHistory||[];
  botStyles=Array(4).fill(state.profile);NET.mode='solo';NET.off=0;
 }"""
 with sync_playwright() as p:

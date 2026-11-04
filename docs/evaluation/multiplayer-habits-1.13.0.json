@@ -1,0 +1,97 @@
+{
+  "clients": 2,
+  "completedMatch": false,
+  "finalResult": {
+    "order": [
+      1,
+      3,
+      0,
+      2
+    ],
+    "team": 1,
+    "up": 3,
+    "before": 6,
+    "after": 9,
+    "win": false,
+    "draw": false,
+    "reset": false,
+    "aTry": 0,
+    "aTeam": 1,
+    "playedLevel": 6
+  },
+  "acceleratedTurnTimeouts": false,
+  "policyDecisions": 89,
+  "policyMemoryDecisions": 56,
+  "automaticStateResyncs": [
+    0,
+    0
+  ],
+  "pageVersion": "85cc00f19d",
+  "bots": 2,
+  "botStyles": [
+    "observant",
+    "adaptive"
+  ],
+  "hostDirection": "W",
+  "rounds": [
+    {
+      "round": 1,
+      "moves": 96,
+      "levels": [
+        2,
+        4
+      ],
+      "allClientsEqual": true,
+      "archivedRounds": 1
+    },
+    {
+      "round": 2,
+      "moves": 92,
+      "levels": [
+        2,
+        6
+      ],
+      "allClientsEqual": true,
+      "archivedRounds": 2
+    },
+    {
+      "round": 3,
+      "moves": 68,
+      "levels": [
+        2,
+        9
+      ],
+      "allClientsEqual": true,
+      "archivedRounds": 3
+    }
+  ],
+  "cardConservation": true,
+  "realGuestActions": true,
+  "hostTimeoutUsedLearnedPolicy": true,
+  "guestsAvoidModelDownload": true,
+  "rejoins": [
+    {
+      "round": 1,
+      "offset": 1,
+      "phase": "prep"
+    },
+    {
+      "round": 1,
+      "offset": 1,
+      "phase": "roundEnd"
+    },
+    {
+      "round": 2,
+      "offset": 1,
+      "phase": "prep"
+    },
+    {
+      "round": 3,
+      "offset": 1,
+      "phase": "prep"
+    }
+  ],
+  "auxiliaryModelLoaded": true,
+  "pageErrors": [],
+  "elapsedSeconds": 262.7080028000055
+}

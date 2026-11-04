@@ -17,9 +17,9 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 ![An actual game](docs/media/table-desktop.png)
 
 <details>
-<summary>More views: bot personalities and mobile help</summary>
+<summary>More views: bot personalities, mobile help and match history</summary>
 
-<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="Per-seat bot personalities" /> <img src="docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /></p>
+<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="Per-seat bot personalities" /> <img src="docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /> <img src="docs/media/match-history-mobile.png" width="280" alt="Match results and public scorecard on mobile" /></p>
 
 </details>
 
@@ -35,17 +35,17 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 
 ## What is included
 
-| Feature             | In the game                                                                              |
-| ------------------- | ---------------------------------------------------------------------------------------- |
-| Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                |
-| Friend rooms        | Invitations, seat selection, temporary bot takeover and original-tab recovery            |
-| Local inference     | An RL value policy and an independent response network in a Web Worker                   |
-| Five personalities  | Balanced, aggressive, conservative, observant and adaptive                               |
-| Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo |
-| Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                   |
-| Public scorecards   | Filter public plays by player, copy or download the current round                        |
-| Practice            | An explicit face-up solo table with notes, step-by-step play and portable records        |
-| Static deployment   | GitHub Pages; no inference server or API key required                                    |
+| Feature             | In the game                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                     |
+| Friend rooms        | Invitations, seat selection, temporary bot takeover and original-tab recovery                 |
+| Local inference     | An RL value policy and an independent response network in a Web Worker                        |
+| Five personalities  | Balanced, aggressive, conservative, observant and adaptive                                    |
+| Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
+| Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
+| Public scorecards   | Filter public plays by player, copy or download the current round                             |
+| Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
+| Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
 The personalities share the RL value policy. Observant and adaptive bots can additionally use a separately trained **supervised response classifier**. They are five playing styles, not five independently trained RL agents. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
 

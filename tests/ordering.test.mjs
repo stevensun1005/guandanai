@@ -7,6 +7,8 @@ import {
   changeOrder,
   canUndoOrder,
   undoOrder,
+  canRedoOrder,
+  redoOrder,
 } from '../src/hand/ordering.js';
 
 const hand = () => makeDeck().filter((_, i) => i % 4 === 0);
@@ -70,4 +72,51 @@ test('no-op actions do not use undo history', () => {
     false,
   );
   assert(!canUndoOrder(game));
+});
+
+test('redo restores undone groups, preserves no-ops and clears after a new edit or hand change', () => {
+  const game = { hands: [hand(), []], round: 1, L: 2, myOrder: [], fixed: [] };
+  changeOrder(game, () => {
+    game.fixed = [[0, 4]];
+  });
+  const grouped = normalizeOrder(game.hands[0], game, 2);
+  assert(undoOrder(game));
+  assert(canRedoOrder(game));
+  assert.equal(
+    changeOrder(game, () => {}),
+    false,
+  );
+  game.hands[1] = makeDeck().slice(1, 2);
+  assert(redoOrder(game));
+  assert.deepEqual(normalizeOrder(game.hands[0], game, 2), grouped);
+  assert(undoOrder(game));
+  changeOrder(game, () => {
+    game.fixed = [[8, 12]];
+  });
+  assert(!canRedoOrder(game));
+  assert(!redoOrder(game));
+  assert(undoOrder(game));
+  game.hands[0] = game.hands[0].filter((card) => card.id !== 0);
+  assert(!canRedoOrder(game));
+  assert(!redoOrder(game));
+});
+
+test('undo and redo stay within thirty complete hand operations', () => {
+  const game = { hands: [hand()], round: 1, L: 2, myOrder: [], fixed: [] };
+  for (let index = 0; index < 40; index++)
+    changeOrder(game, () => {
+      const order = normalizeOrder(game.hands[0], game, 2).myOrder;
+      game.myOrder = order.slice(1).concat(order[0]);
+    });
+  const final = game.myOrder.slice();
+  let undo = 0,
+    redo = 0;
+  while (undoOrder(game)) undo++;
+  while (redoOrder(game)) redo++;
+  assert.equal(undo, 30);
+  assert.equal(redo, 30);
+  assert.deepEqual(game.myOrder, final);
+  game.round++;
+  assert(!canUndoOrder(game));
+  assert(!canRedoOrder(game));
 });

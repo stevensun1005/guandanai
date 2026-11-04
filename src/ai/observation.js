@@ -1,3 +1,5 @@
+import { observeOpponentHabits } from './habits.js';
+
 /** Only this seat's private cards and information visible at the table. */
 export function policyState(game, player, offset, plays) {
   return {
@@ -22,6 +24,9 @@ export function decisionContext(game, player) {
     hand: game.hands[player],
     counts: game.hands.map((hand) => hand.length),
     log: game.log.map(({ p, cards, type, value, n, lead }) => ({ p, cards, type, value, n, lead })),
+    ...(game.roundHistory?.length
+      ? { habits: observeOpponentHabits(game.roundHistory, game.log) }
+      : {}),
     level: game.L,
     trick: game.trick && {
       player: game.trick.player,

@@ -1,7 +1,15 @@
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { armPlaysRaw } from './arrangement.js';
-import { canUndoOrder, changeOrder, normalizeOrder, sortActive, undoOrder } from './ordering.js';
+import {
+  canUndoOrder,
+  canRedoOrder,
+  changeOrder,
+  normalizeOrder,
+  sortActive,
+  undoOrder,
+  redoOrder,
+} from './ordering.js';
 import { renderHand, vertMode } from './view.js';
 import { syncHandBtns } from '../input/controls.js';
 import { $ } from '../ui/cards.js';
@@ -13,11 +21,25 @@ function closeTools(focus = false) {
   if (focus) $('#sortBtn').focus();
 }
 
+function syncHistoryButtons() {
+  $('#handUndoOrder').disabled = !canUndoOrder(runtime.game);
+  $('#handRedoOrder').disabled = !canRedoOrder(runtime.game);
+}
+
 export function undoHandOrder() {
   if (!runtime.game || runtime.reviewMode || !undoOrder(runtime.game)) return;
   runtime.selection.clear();
   renderHand();
+  syncHistoryButtons();
   setMsg('已撤销上次理牌');
+}
+
+export function redoHandOrder() {
+  if (!runtime.game || runtime.reviewMode || !redoOrder(runtime.game)) return;
+  runtime.selection.clear();
+  renderHand();
+  syncHistoryButtons();
+  setMsg('已重做上次理牌');
 }
 
 function applyTool(mode) {
@@ -25,6 +47,10 @@ function applyTool(mode) {
   if (!game?.hands[0]?.length) return;
   if (mode === 'undo') {
     undoHandOrder();
+    return;
+  }
+  if (mode === 'redo') {
+    redoHandOrder();
     return;
   }
   changeOrder(game, () => {
@@ -65,7 +91,7 @@ export function toggleHandTools() {
     return;
   }
   if (!runtime.game?.hands[0]?.length) return;
-  $('#handUndoOrder').disabled = !canUndoOrder(runtime.game);
+  syncHistoryButtons();
   $('#handReleaseGroups').disabled = !runtime.game.fixed?.length;
   menu.hidden = false;
   const anchor = $('#sortBtn').getBoundingClientRect();

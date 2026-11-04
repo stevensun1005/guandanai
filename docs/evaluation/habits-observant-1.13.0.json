@@ -1,0 +1,30 @@
+{
+  "style": "observant",
+  "baseline": "same style with current-round size-only observations",
+  "seed": 20410104,
+  "pairs": 600,
+  "blockRounds": 5,
+  "rounds": 6000,
+  "habitRounds": 4,
+  "habitDecay": 0.6,
+  "winRate": 0.4985,
+  "pairedPointsPerRoundMean": -0.009333333333333334,
+  "pairedPointsPerRound95CI": [
+    -0.028382344043922002,
+    0.009715677377255332
+  ],
+  "confidenceUnit": "paired block; correlated rounds are kept together",
+  "stats": {
+    "decisions": 340891,
+    "memoryDecisions": 136391,
+    "preferenceChanges": 261,
+    "responseCalls": 65459,
+    "proved": 8463
+  },
+  "hashes": {
+    "ai/policy.onnx": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "ai/response.onnx": "fbfc15062dc7ad03886f3b066e1646ed89a6de61885d1976d78c5a047548d2fc",
+    "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579"
+  },
+  "elapsedSeconds": 699.9291539
+}

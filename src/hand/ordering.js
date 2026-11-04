@@ -36,31 +36,48 @@ function history(game) {
   let entry = histories.get(game);
   const current = key(game);
   if (!entry || entry.key !== current) {
-    entry = { key: current, steps: [] };
+    entry = { key: current, steps: [], redo: [] };
     histories.set(game, entry);
   }
-  return entry.steps;
+  return entry;
 }
 
 /** Record one user operation, including a whole drag, as one undo step. */
 export function changeOrder(game, mutate) {
-  const steps = history(game);
+  const entry = history(game);
+  const steps = entry.steps;
   const before = snapshot(game);
   mutate();
   Object.assign(game, snapshot(game));
   if (JSON.stringify(before) === JSON.stringify(snapshot(game))) return false;
+  entry.redo.length = 0;
   steps.push(before);
   if (steps.length > 30) steps.shift();
   return true;
 }
 
 export function canUndoOrder(game) {
-  return !!game?.hands?.[0] && history(game).length > 0;
+  return !!game?.hands?.[0] && history(game).steps.length > 0;
 }
 
 export function undoOrder(game) {
-  const previous = history(game).pop();
+  const entry = history(game);
+  const previous = entry.steps.pop();
   if (!previous) return false;
+  entry.redo.push(snapshot(game));
   Object.assign(game, previous);
+  return true;
+}
+
+export function canRedoOrder(game) {
+  return !!game?.hands?.[0] && history(game).redo.length > 0;
+}
+
+export function redoOrder(game) {
+  const entry = history(game);
+  const next = entry.redo.pop();
+  if (!next) return false;
+  entry.steps.push(snapshot(game));
+  Object.assign(game, next);
   return true;
 }

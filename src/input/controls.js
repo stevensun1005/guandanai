@@ -8,7 +8,7 @@ import { owesReturn } from '../game/tribute.js';
 import { layoutHand } from '../hand/layout.js';
 import { fanMode, renderHand, vertMode } from '../hand/view.js';
 import { changeOrder } from '../hand/ordering.js';
-import { toggleHandTools, undoHandOrder } from '../hand/tools.js';
+import { toggleHandTools, undoHandOrder, redoHandOrder } from '../hand/tools.js';
 import { miniMode, onHint, onPass, onPlay, onReturn, syncMini } from './actions.js';
 import { cancelHandDrag, fixCards, handEl, reflowHand, unfixCards } from './pointer.js';
 import { VERSION } from '../network/protocol.js';
@@ -334,11 +334,13 @@ export function initialize() {
     if (
       !runtime.reviewMode &&
       (e.ctrlKey || e.metaKey) &&
-      !e.shiftKey &&
-      e.key.toLowerCase() === 'z'
+      !e.altKey &&
+      ['z', 'y'].includes(e.key.toLowerCase())
     ) {
       e.preventDefault();
-      undoHandOrder();
+      cancelHandDrag();
+      if (e.shiftKey || e.key.toLowerCase() === 'y') redoHandOrder();
+      else undoHandOrder();
       return;
     }
     if (e.target.closest('#handToolsMenu') || e.ctrlKey || e.metaKey || e.altKey) return;
