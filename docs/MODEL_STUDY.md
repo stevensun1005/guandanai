@@ -345,7 +345,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 
 ## 11. 自动同步的完整比赛进展
 
-证据快照更新时间：2026-11-04T17:23:30.424576+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
+证据快照更新时间：2026-11-04T17:32:08.425980+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
 
 **以下全部为开发集，不是独立验收。** 模型挑选反复使用这些种子，不能据此认定已经达到 80% 或有泛化提升。
 
@@ -359,10 +359,10 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 | `team-b-public-review`           |    4 / 4 |                 64 |    23470 |       4220 | `complete`                 |
 | `team-c-private-fresh`           |    4 / 4 |                 64 |    27581 |       5342 | `complete`                 |
 | `team-d-private-review`          |    4 / 4 |                 64 |    23702 |       4291 | `complete`                 |
-| `team-extended-a-public-fresh`   |    2 / 8 |                 64 |    26712 |       5036 | `running`                  |
-| `team-extended-b-public-review`  |    2 / 8 |                 64 |    24674 |       4726 | `running`                  |
-| `team-extended-c-private-fresh`  |    2 / 8 |                 64 |    26712 |       5036 | `running`                  |
-| `team-extended-d-private-review` |    2 / 8 |                 64 |    24674 |       4726 | `running`                  |
+| `team-extended-a-public-fresh`   |    3 / 8 |                 96 |    40097 |       7534 | `running`                  |
+| `team-extended-b-public-review`  |    3 / 8 |                 96 |    36559 |       6969 | `running`                  |
+| `team-extended-c-private-fresh`  |    3 / 8 |                 96 |    40510 |       7701 | `running`                  |
+| `team-extended-d-private-review` |    3 / 8 |                 96 |    35859 |       6827 | `running`                  |
 
 ### 11.1 全部已完成的开发评测
 
