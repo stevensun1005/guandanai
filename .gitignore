@@ -1,0 +1,7 @@
+node_modules/
+archive/
+work/
+outputs/
+__pycache__/
+*.pyc
+dist/
