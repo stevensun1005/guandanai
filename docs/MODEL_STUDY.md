@@ -345,7 +345,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 
 ## 11. 自动同步的完整比赛进展
 
-证据快照更新时间：2026-11-04T17:36:37.807556+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
+证据快照更新时间：2026-11-04T17:44:01.274551+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
 
 **以下全部为开发集，不是独立验收。** 模型挑选反复使用这些种子，不能据此认定已经达到 80% 或有泛化提升。
 
@@ -359,10 +359,10 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 | `team-b-public-review`           |    4 / 4 |                 64 |    23470 |       4220 | `complete`                 |
 | `team-c-private-fresh`           |    4 / 4 |                 64 |    27581 |       5342 | `complete`                 |
 | `team-d-private-review`          |    4 / 4 |                 64 |    23702 |       4291 | `complete`                 |
-| `team-extended-a-public-fresh`   |    5 / 8 |                160 |    67565 |      12628 | `running`                  |
-| `team-extended-b-public-review`  |    5 / 8 |                160 |    60605 |      11498 | `running`                  |
-| `team-extended-c-private-fresh`  |    5 / 8 |                160 |    68570 |      12669 | `running`                  |
-| `team-extended-d-private-review` |    5 / 8 |                160 |    58461 |      11028 | `running`                  |
+| `team-extended-a-public-fresh`   |    6 / 8 |                192 |    80326 |      15140 | `running`                  |
+| `team-extended-b-public-review`  |    6 / 8 |                192 |    72127 |      13562 | `running`                  |
+| `team-extended-c-private-fresh`  |    6 / 8 |                192 |    80396 |      14985 | `running`                  |
+| `team-extended-d-private-review` |    6 / 8 |                192 |    69964 |      13077 | `running`                  |
 
 ### 11.1 全部已完成的开发评测
 
@@ -422,18 +422,26 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 | `team-extended-a-public-fresh` / 02   | full-public-actor | snapshot               |   26 / 64 |    4 | 40.62% | `无自动筛选记录`          |
 | `team-extended-a-public-fresh` / 04   | full-public-actor | rule                   |   43 / 64 |    5 | 67.19% | `无自动筛选记录`          |
 | `team-extended-a-public-fresh` / 04   | full-public-actor | snapshot               |   30 / 64 |    4 | 46.88% | `无自动筛选记录`          |
+| `team-extended-a-public-fresh` / 06   | full-public-actor | rule                   |   46 / 64 |    7 | 71.88% | `无自动筛选记录`          |
+| `team-extended-a-public-fresh` / 06   | full-public-actor | snapshot               |   34 / 64 |    2 | 53.12% | `无自动筛选记录`          |
 | `team-extended-b-public-review` / 02  | full-public-actor | rule                   |   41 / 64 |    3 | 64.06% | `无自动筛选记录`          |
 | `team-extended-b-public-review` / 02  | full-public-actor | snapshot               |   31 / 64 |    3 | 48.44% | `无自动筛选记录`          |
 | `team-extended-b-public-review` / 04  | full-public-actor | rule                   |   43 / 64 |    8 | 67.19% | `无自动筛选记录`          |
 | `team-extended-b-public-review` / 04  | full-public-actor | snapshot               |   27 / 64 |    1 | 42.19% | `无自动筛选记录`          |
+| `team-extended-b-public-review` / 06  | full-public-actor | rule                   |   46 / 64 |    5 | 71.88% | `无自动筛选记录`          |
+| `team-extended-b-public-review` / 06  | full-public-actor | snapshot               |   25 / 64 |    7 | 39.06% | `无自动筛选记录`          |
 | `team-extended-c-private-fresh` / 02  | full-public-actor | rule                   |   39 / 64 |    4 | 60.94% | `无自动筛选记录`          |
 | `team-extended-c-private-fresh` / 02  | full-public-actor | snapshot               |   25 / 64 |    4 | 39.06% | `无自动筛选记录`          |
 | `team-extended-c-private-fresh` / 04  | full-public-actor | rule                   |   42 / 64 |    7 | 65.62% | `无自动筛选记录`          |
 | `team-extended-c-private-fresh` / 04  | full-public-actor | snapshot               |   25 / 64 |    8 | 39.06% | `无自动筛选记录`          |
+| `team-extended-c-private-fresh` / 06  | full-public-actor | rule                   |   44 / 64 |    4 | 68.75% | `无自动筛选记录`          |
+| `team-extended-c-private-fresh` / 06  | full-public-actor | snapshot               |   28 / 64 |    4 | 43.75% | `无自动筛选记录`          |
 | `team-extended-d-private-review` / 02 | full-public-actor | rule                   |   42 / 64 |    5 | 65.62% | `无自动筛选记录`          |
 | `team-extended-d-private-review` / 02 | full-public-actor | snapshot               |   29 / 64 |    4 | 45.31% | `无自动筛选记录`          |
 | `team-extended-d-private-review` / 04 | full-public-actor | rule                   |   52 / 64 |    3 | 81.25% | `无自动筛选记录`          |
 | `team-extended-d-private-review` / 04 | full-public-actor | snapshot               |   32 / 64 |    6 | 50.00% | `无自动筛选记录`          |
+| `team-extended-d-private-review` / 06 | full-public-actor | rule                   |   43 / 64 |    8 | 67.19% | `无自动筛选记录`          |
+| `team-extended-d-private-review` / 06 | full-public-actor | snapshot               |   28 / 64 |    7 | 43.75% | `无自动筛选记录`          |
 
 表中的 `snapshot` 指该实验冻结的历史对手；各实验的历史对手不保证相同，不能横向直接比较。`ppo-rule` 早期未标记贪心评测的结果保留为旧协议记录，不纳入同协议排名。
 
