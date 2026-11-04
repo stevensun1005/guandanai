@@ -146,6 +146,9 @@ function initialize() {
   }
   if (!Number.isInteger(config.actors) || config.actors < 1 || config.actors > MAX_ACTORS)
     throw Error('Invalid actor count');
+  const evaluationOffset = config.evaluationBlockOffset ?? 0;
+  if (!Number.isInteger(evaluationOffset) || evaluationOffset < 0 || evaluationOffset >= 1000)
+    throw Error('Invalid evaluation seed block offset');
   if (config.sourceSHA256 && JSON.stringify(config.sourceSHA256) !== JSON.stringify(sourcesAtStart))
     throw Error('Run source changed; use a new run directory to keep protocols separate');
   return config;
@@ -153,11 +156,11 @@ function initialize() {
 
 const config = initialize();
 const state = readJSON(paths.status, {}) || {};
-state.gateIndex ??= 0;
+state.gateIndex ??= config.evaluationBlockOffset ?? 0;
 state.lastSnapshotAt ??= 0;
 state.gates ??= [];
 state.resultOffsets ??= {};
-state.anchorIndex ??= 0;
+state.anchorIndex ??= config.evaluationBlockOffset ?? 0;
 state.anchorChecks ??= [];
 state.anchorRegressionStreak ??= 0;
 state.lastAnchorAt ??= Date.now();

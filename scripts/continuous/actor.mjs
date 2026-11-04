@@ -39,11 +39,12 @@ const status = {
   decisions: previous.decisions || 0,
   rows: previous.rows || 0,
   shardSequence: previous.shardSequence || 0,
-  nextSeed: previous.nextSeed || 0,
+  nextSeed: previous.nextSeed ?? config.actorSeedOffset ?? 0,
   failures: previous.failures || 0,
   recent: { since: Date.now(), decisions: 0, matches: 0 },
 };
-if (status.nextSeed >= TRAIN_SEED_SPAN) throw Error('Actor seed block exhausted');
+if (!Number.isInteger(status.nextSeed) || status.nextSeed < 0 || status.nextSeed >= TRAIN_SEED_SPAN)
+  throw Error('Actor seed block exhausted or invalid');
 const writer = new ShardWriter(
   paths.shards,
   `a${String(slot).padStart(2, '0')}`,

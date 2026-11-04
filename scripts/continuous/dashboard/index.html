@@ -50,6 +50,15 @@
           ><small>全部保存在 D 盘</small>
         </article>
       </section>
+      <section class="panel" id="gpu-panel" hidden>
+        <p class="eyebrow">GPU 训练 · 与 CPU 基线分开记录</p>
+        <h2>显卡正在参与的训练</h2>
+        <div id="gpu-runs"></div>
+        <p class="muted small">
+          显卡负责网络训练，牌局模拟仍由 CPU 执行。以下是独立运行的实际数据，尚不代表棋力优于 CPU
+          基线。
+        </p>
+      </section>
       <section class="panel">
         <h2>现在正在做的事</h2>
         <p id="learner">等待读取训练进程</p>

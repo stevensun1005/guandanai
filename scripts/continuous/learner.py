@@ -78,6 +78,11 @@ class Learner:
         if not self.config:
             raise SystemExit(f"Missing {self.run / 'config.json'}")
         self.settings = self.config["learner"]
+        self.device = torch.device(self.settings.get("device", "cpu"))
+        if self.device.type not in ("cpu", "cuda"):
+            raise ValueError("Supported learner devices are cpu and cuda (including AMD ROCm)")
+        if self.device.type == "cuda" and not torch.cuda.is_available():
+            raise RuntimeError("GPU requested but this Python has no usable CUDA/ROCm device")
         torch.set_num_threads(int(self.settings["threads"]))
         torch.manual_seed(int(self.settings["seed"]))
         self.models = self.run / "models"
@@ -95,16 +100,16 @@ class Learner:
         self.started = time.time()
         latest = read_json(self.models / "latest.json")
         initial = self.models / latest["file"]
-        self.net = ValueNet(load_onnx_weights(initial))
+        self.net = ValueNet(load_onnx_weights(initial)).to(self.device)
         self.optimizer = torch.optim.Adam(
             self.net.parameters(), lr=float(self.settings["learningRate"])
         )
         self.anchor = None
         if float(self.settings["anchorWeight"]) > 0:
-            self.anchor = ValueNet(load_onnx_weights(self.run / "models" / "anchor.onnx"))
+            self.anchor = ValueNet(load_onnx_weights(self.run / "models" / "anchor.onnx")).to(self.device)
             self.anchor.requires_grad_(False)
         if self.checkpoint.exists():
-            saved = torch.load(self.checkpoint, weights_only=False)
+            saved = torch.load(self.checkpoint, weights_only=False, map_location=self.device)
             self.net.load_state_dict(saved["model"])
             self.optimizer.load_state_dict(saved["optimizer"])
             self.step = saved["step"]
@@ -119,6 +124,9 @@ class Learner:
                 "step": self.step,
                 "initial": latest,
                 "resumed": self.checkpoint.exists(),
+                "device": str(self.device),
+                "torch": torch.__version__,
+                "hip": torch.version.hip,
             }
         )
 
@@ -168,8 +176,8 @@ class Learner:
 
     def train_step(self):
         x, raw = self.replay.batch(int(self.settings["batch"]))
-        features = torch.from_numpy(x.astype(np.float32))
-        goal = torch.from_numpy(target(raw, float(self.settings["targetMatchWeight"])))
+        features = torch.from_numpy(x.astype(np.float32)).to(self.device)
+        goal = torch.from_numpy(target(raw, float(self.settings["targetMatchWeight"]))).to(self.device)
         prediction = self.net(features)
         loss = torch.mean((prediction - goal) ** 2)
         if self.anchor is not None:
@@ -187,7 +195,7 @@ class Learner:
         self.optimizer.step()
         self.step += 1
         self.trained_rows += len(x)
-        value = float(loss.detach())
+        value = float(loss.detach().cpu())
         self.loss_ema = value if self.loss_ema is None else 0.99 * self.loss_ema + 0.01 * value
 
     def publish(self):
@@ -230,6 +238,11 @@ class Learner:
             self.state_dir / "status.json",
             {
                 "pid": os.getpid(),
+                "device": str(self.device),
+                "deviceName": torch.cuda.get_device_name(self.device) if self.device.type == "cuda" else "CPU",
+                "torch": torch.__version__,
+                "hip": torch.version.hip,
+                "gpuAllocatedBytes": torch.cuda.memory_allocated(self.device) if self.device.type == "cuda" else None,
                 "state": state,
                 "step": self.step,
                 "version": self.version,

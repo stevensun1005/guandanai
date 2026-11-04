@@ -118,6 +118,38 @@ function render(data) {
     time(data.updatedAt) + ' · ' + Math.max(0, Math.round(data.heartbeatAge)) + ' 秒前',
   );
   set('run', data.run);
+  element('gpu-panel').hidden = !data.deviceRuns?.length;
+  element('gpu-runs').replaceChildren(
+    ...(data.deviceRuns || []).map((run) => {
+      const box = child('div', '', 'evaluation');
+      box.append(child('strong', run.deviceName + ' · ' + run.name));
+      box.append(
+        child(
+          'p',
+          (run.phase === 'running' ? '运行中' : run.phase === 'stopped' ? '已停止' : '状态待确认') +
+            ` · ${run.actorCount} 个采样进程 · 实际运行 ${(run.elapsedSeconds / 3600).toFixed(2)} 小时`,
+        ),
+      );
+      box.append(
+        child('p', `完成 ${number(run.totals.matches)} 场 · ${number(run.step)} 次全网络更新`),
+      );
+      box.append(
+        child(
+          'p',
+          (run.learnerState === 'waiting-for-data'
+            ? '等待新样本'
+            : run.learnerState === 'training'
+              ? '正在更新参数'
+              : '等待训练状态') +
+            (run.gpuAllocatedBytes == null
+              ? ''
+              : ` · 张量分配显存 ${(run.gpuAllocatedBytes / 2 ** 20).toFixed(0)} MiB`),
+          'muted small',
+        ),
+      );
+      return box;
+    }),
+  );
   const evaluations = data.evaluations.map((record) => {
     const box = child('div', '', 'evaluation');
     box.append(

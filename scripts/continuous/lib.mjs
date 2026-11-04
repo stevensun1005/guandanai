@@ -28,12 +28,15 @@ export const DEFAULT_CONFIG = Object.freeze({
   schema: 1,
   initial: 'ai/policy.onnx',
   actors: 6,
+  actorSeedOffset: 0,
+  evaluationBlockOffset: 0,
   actorMix: { self: 0.5, league: 0.3, rule: 0.2 },
   // Measured: uniform epsilon 0.01 cost about 8 points of match score, softmax 0.02 none detectable.
   exploration: { type: 'softmax', temperature: 0.02 },
   shardRows: 16384,
   shardSeconds: 120,
   learner: {
+    device: 'cpu',
     threads: 4,
     batch: 2048,
     learningRate: 1e-5,

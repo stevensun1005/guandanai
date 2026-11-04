@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { spawn } from 'node:child_process';
+import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -9,6 +9,7 @@ import * as ort from 'onnxruntime-node';
 import { playMatch } from '../scripts/lib/match-rollout.mjs';
 import {
   FEATURES,
+  DEFAULT_CONFIG,
   GATE_SEED_BASE,
   ANCHOR_SEED_BASE,
   ANCHOR_SEED_LIMIT,
@@ -20,17 +21,54 @@ import {
   anchorRegression,
   createModelPool,
   encodeSample,
+  ensureDirs,
   explore,
   evaluationSeedStart,
   labelMatch,
   pfspWeights,
   pairedScoreSummary,
+  runPaths,
   sprt,
+  writeJSON,
 } from '../scripts/continuous/lib.mjs';
 
 test('training and gate seeds never enter the study evaluation range', () => {
   assert.ok(TRAIN_SEED_BASE >= 1e9);
   assert.ok(GATE_SEED_BASE >= TRAIN_SEED_BASE + 40 * 50_000_000);
+});
+
+test('an isolated run starts at its reserved training offset and resumes the next unused seed', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'guandan-seed-offset-'));
+  const paths = runPaths(directory);
+  ensureDirs(paths);
+  writeJSON(paths.config, { ...DEFAULT_CONFIG, actors: 1, actorSeedOffset: 1_000_000 });
+  copyFileSync('ai/policy.onnx', join(paths.models, 'initial.onnx'));
+  writeJSON(paths.latest, { version: 'initial', file: 'initial.onnx' });
+  writeJSON(paths.leagueMeta, { members: [], stats: {} });
+  try {
+    for (const matches of [1, 2]) {
+      const child = spawnSync(
+        process.execPath,
+        ['scripts/continuous/actor.mjs', `--run=${directory}`, `--matches=${matches}`],
+        {
+          cwd: fileURLToPath(new URL('..', import.meta.url)),
+          windowsHide: true,
+          timeout: 20_000,
+        },
+      );
+      assert.equal(child.status, 0, child.stderr.toString());
+    }
+    const rows = readFileSync(join(paths.actors, 'results-0.jsonl'), 'utf8')
+      .trim()
+      .split('\n')
+      .map(JSON.parse);
+    assert.deepEqual(
+      rows.map((r) => r.seed),
+      [1_001_000_000, 1_001_000_001],
+    );
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test('gate and anchor blocks are disjoint and never wrap into another purpose', () => {

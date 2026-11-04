@@ -8,6 +8,7 @@ import { createDashboardServer, dashboardSnapshot } from '../scripts/continuous/
 
 test('dashboard is read-only, reports real counts and flags stale training without claiming completion', async () => {
   const directory = mkdtempSync(join(tmpdir(), 'guandan-dashboard-'));
+  mkdirSync(join(directory, 'work/continuous'), { recursive: true });
   const save = (name, value) => writeFileSync(join(directory, name), JSON.stringify(value));
   for (const name of ['gate', 'anchor', 'learner', 'actors']) mkdirSync(join(directory, name));
   save('config.json', { actors: 1, anchor: { intervalHours: 3 } });
@@ -22,6 +23,14 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     lastAnchorAt: Date.now(),
   };
   save('status.json', state);
+  mkdirSync(join(directory, 'work/continuous/gpu-main/learner'), { recursive: true });
+  save('work/continuous/gpu-main/config.json', { actors: 2, learner: { device: 'cuda:0' } });
+  save('work/continuous/gpu-main/status.json', { ...state, totals: { matches: 12 } });
+  save('work/continuous/gpu-main/learner/status.json', {
+    step: 34,
+    deviceName: 'Test GPU',
+    device: 'cuda:0',
+  });
   const server = createDashboardServer({ run: directory, workspace: directory });
   try {
     server.listen(0, '127.0.0.1');
@@ -33,6 +42,9 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.equal(data.phase, 'running');
     assert.equal(data.totals.matches, 123);
+    assert.equal(data.deviceRuns[0].totals.matches, 12);
+    assert.equal(data.deviceRuns[0].step, 34);
+    assert.equal(data.deviceRuns[0].deviceName, 'Test GPU');
     assert.equal(data.learner.step, 789);
     assert.equal(data.plannedHours, 24);
     assert.deepEqual(data.evaluations, []);

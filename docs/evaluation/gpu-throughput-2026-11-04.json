@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "role": "development performance and numerical compatibility; no match-strength conclusion",
+  "cpuProductionRuntime": {
+    "schema": 1,
+    "completedUTC": "2026-11-04T20:28:25.470042+00:00",
+    "role": "development throughput only; not match strength or held-out acceptance",
+    "protocol": "Real copied training rows; float32, Adam 1e-5, gradient clipping 1; includes minibatch sampling, host-to-device transfer and loss synchronization; excludes disk ingestion and ONNX export",
+    "caveat": "Existing six-actor CPU training continues concurrently; results describe this shared machine load, not an isolated hardware limit",
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "torch": "2.15.0+cpu",
+    "hip": null,
+    "policySHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "datasetSHA256": "e82908e294657285719718db0bbe138b2cf31b50889d32dee8b483f3c62af256",
+    "scriptSHA256": "817b5b6fa51e7828a3c26871c599e1f17c1e0fe250340a27e2d4d88eeb6e9c5b",
+    "batch": 2048,
+    "warmup": 5,
+    "stepsPerRepeat": 30,
+    "repeats": 3,
+    "results": {
+      "cpu": {
+        "device": "cpu",
+        "name": "CPU",
+        "cpuThreads": 4,
+        "runs": [
+          {
+            "seconds": 3.4140882000065176,
+            "steps": 30,
+            "stepsPerSecond": 8.787119207975566,
+            "lastLoss": 3.1773102283477783,
+            "forwardMaxAbsError": 0.0,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": null
+          },
+          {
+            "seconds": 3.351423000000068,
+            "steps": 30,
+            "stepsPerSecond": 8.951421530495969,
+            "lastLoss": 3.1773102283477783,
+            "forwardMaxAbsError": 0.0,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": null
+          },
+          {
+            "seconds": 2.651363199998741,
+            "steps": 30,
+            "stepsPerSecond": 11.314934144071339,
+            "lastLoss": 3.1773102283477783,
+            "forwardMaxAbsError": 0.0,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": null
+          }
+        ],
+        "medianStepsPerSecond": 8.951421530495969,
+        "medianRowsPerSecond": 18332.511294455744
+      }
+    }
+  },
+  "amdRuntime": {
+    "schema": 1,
+    "completedUTC": "2026-11-04T20:26:42.923532+00:00",
+    "role": "development throughput only; not match strength or held-out acceptance",
+    "protocol": "Real copied training rows; float32, Adam 1e-5, gradient clipping 1; includes minibatch sampling, host-to-device transfer and loss synchronization; excludes disk ingestion and ONNX export",
+    "caveat": "Existing six-actor CPU training continues concurrently; results describe this shared machine load, not an isolated hardware limit",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "policySHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "datasetSHA256": "e82908e294657285719718db0bbe138b2cf31b50889d32dee8b483f3c62af256",
+    "scriptSHA256": "817b5b6fa51e7828a3c26871c599e1f17c1e0fe250340a27e2d4d88eeb6e9c5b",
+    "batch": 2048,
+    "warmup": 5,
+    "stepsPerRepeat": 30,
+    "repeats": 3,
+    "results": {
+      "cpu": {
+        "device": "cpu",
+        "name": "CPU",
+        "cpuThreads": 4,
+        "runs": [
+          {
+            "seconds": 38.87150210000982,
+            "steps": 30,
+            "stepsPerSecond": 0.7717736228153741,
+            "lastLoss": 3.1773102283477783,
+            "forwardMaxAbsError": 0.0,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": null
+          },
+          {
+            "seconds": 38.2257086999889,
+            "steps": 30,
+            "stepsPerSecond": 0.7848121335160154,
+            "lastLoss": 3.1773102283477783,
+            "forwardMaxAbsError": 0.0,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": null
+          },
+          {
+            "seconds": 35.5386104999925,
+            "steps": 30,
+            "stepsPerSecond": 0.8441523058422987,
+            "lastLoss": 3.1773102283477783,
+            "forwardMaxAbsError": 0.0,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": null
+          }
+        ],
+        "medianStepsPerSecond": 0.7848121335160154,
+        "medianRowsPerSecond": 1607.2952494407996
+      },
+      "cuda:0": {
+        "device": "cuda:0",
+        "name": "AMD Radeon RX 7800 XT",
+        "cpuThreads": 1,
+        "runs": [
+          {
+            "seconds": 0.3418314000009559,
+            "steps": 30,
+            "stepsPerSecond": 87.76256364955387,
+            "lastLoss": 3.1773104667663574,
+            "forwardMaxAbsError": 1.430511474609375e-6,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": 198352896
+          },
+          {
+            "seconds": 0.3283361999929184,
+            "steps": 30,
+            "stepsPerSecond": 91.36976063147178,
+            "lastLoss": 3.1773104667663574,
+            "forwardMaxAbsError": 1.430511474609375e-6,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": 198092800
+          },
+          {
+            "seconds": 0.3310146000003442,
+            "steps": 30,
+            "stepsPerSecond": 90.63044349091794,
+            "lastLoss": 3.1773104667663574,
+            "forwardMaxAbsError": 1.430511474609375e-6,
+            "allLayerWeightsChanged": true,
+            "peakGPUAllocatedBytes": 198092800
+          }
+        ],
+        "medianStepsPerSecond": 90.63044349091794,
+        "medianRowsPerSecond": 185611.14826939994
+      }
+    }
+  },
+  "copiedTrainingData": {
+    "role": "throughput and numerical compatibility only; copied training rows, no held-out data",
+    "run": "D:\\vibecoding\\guandan\\work\\continuous\\main",
+    "manifest": "a03-000000089.json",
+    "rows": 16631,
+    "datasetSHA256": "e82908e294657285719718db0bbe138b2cf31b50889d32dee8b483f3c62af256",
+    "sourceSHA256": {
+      "scripts/continuous/supervisor.mjs": "632905b49396228856d6e554fa7adb8a5e89bea35425881fe992dfa16f77a67e",
+      "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+      "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+      "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+      "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+      "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+      "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+      "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+      "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+      "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+      "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+      "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+      "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+      "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+      "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+      "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+    }
+  },
+  "crossRuntimeMedianRatio": 10.124698427188962,
+  "crossRuntimeCaveat": "Both device and PyTorch/Python runtime differ. CPU and GPU short tests are not an end-to-end self-play speed comparison. Existing six-actor training remained active."
+}

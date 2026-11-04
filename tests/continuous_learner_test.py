@@ -60,6 +60,44 @@ def write_run(directory, rows=600):
 
 
 class ContinuousLearnerTests(unittest.TestCase):
+    def test_unsupported_device_fails_instead_of_silently_using_cpu(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = write_run(directory)
+            config = json.loads((run / "config.json").read_text())
+            config["learner"]["device"] = "meta"
+            (run / "config.json").write_text(json.dumps(config))
+            with self.assertRaisesRegex(ValueError, "Supported learner devices"):
+                Learner(run)
+
+    @unittest.skipUnless(torch.cuda.is_available(), "Requires actual CUDA or AMD ROCm GPU")
+    def test_gpu_updates_all_layers_exports_and_resumes_optimizer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = write_run(directory)
+            config = json.loads((run / "config.json").read_text())
+            config["learner"].update(device="cuda:0", anchorWeight=0.1)
+            (run / "config.json").write_text(json.dumps(config))
+            shutil.copy(ROOT / "ai/policy.onnx", run / "models/anchor.onnx")
+            learner = Learner(run)
+            self.assertEqual(next(learner.net.parameters()).device.type, "cuda")
+            self.assertEqual(next(learner.anchor.parameters()).device.type, "cuda")
+            before = learner.net.weights()
+            learner.loop(max_steps=5)
+            self.assertTrue(all(not np.array_equal(a, b) for a, b in zip(before[::2], learner.net.weights()[::2])))
+            resumed = Learner(run)
+            self.assertEqual(resumed.step, 5)
+            resumed.ingest()
+            resumed.train_step()
+            resumed.publish()
+            self.assertEqual(resumed.step, 6)
+            self.assertEqual(resumed.ingested_rows, 600)
+            latest = json.loads((run / "models/latest.json").read_text())
+            exported = load_onnx_weights(run / "models" / latest["file"])
+            for expected, actual in zip(resumed.net.weights(), exported):
+                np.testing.assert_array_equal(expected, actual)
+            state = json.loads((run / "learner/status.json").read_text())
+            self.assertEqual(state["device"], "cuda:0")
+            self.assertIn("deviceName", state)
+
     def test_export_reproduces_deployed_policy(self):
         weights = load_onnx_weights(ROOT / "ai/policy.onnx")
         with tempfile.TemporaryDirectory() as directory:

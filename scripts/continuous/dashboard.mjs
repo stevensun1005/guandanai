@@ -35,7 +35,32 @@ export function dashboardSnapshot(run, workspace = project) {
   const heartbeatAge = (Date.now() - Date.parse(status.updatedAt)) / 1000;
   const supervisorAlive = alive(status.pid);
   const reporter = readJSON(join(workspace, 'work/continuous/reporter-launcher.json'), {});
-  const evidence = readJSON(join(workspace, 'docs/evaluation/model-study-progress.json'), {});
+  const evidence =
+    readJSON(join(workspace, 'work/model-study/docs/evaluation/model-study-progress.json')) ||
+    readJSON(join(workspace, 'docs/evaluation/model-study-progress.json'), {});
+  const deviceRuns = [];
+  const continuousRoot = join(workspace, 'work/continuous');
+  for (const directory of readdirSync(continuousRoot, { withFileTypes: true })) {
+    if (!directory.isDirectory()) continue;
+    const root = join(continuousRoot, directory.name);
+    const otherConfig = readJSON(join(root, 'config.json'));
+    if (!otherConfig?.learner.device || otherConfig.learner.device === 'cpu') continue;
+    const other = readJSON(join(root, 'status.json'), {});
+    const learning = readJSON(join(root, 'learner/status.json'), {});
+    const fresh = Date.now() - Date.parse(other.updatedAt) < 90_000;
+    deviceRuns.push({
+      name: directory.name,
+      device: learning.device || otherConfig.learner.device,
+      deviceName: learning.deviceName || '等待设备状态',
+      phase: other.stoppedAt ? 'stopped' : alive(other.pid) && fresh ? 'running' : 'unconfirmed',
+      elapsedSeconds: other.elapsedSeconds || 0,
+      totals: other.totals || {},
+      step: learning.step || 0,
+      learnerState: learning.state,
+      gpuAllocatedBytes: learning.gpuAllocatedBytes,
+      actorCount: otherConfig.actors,
+    });
+  }
   const publications = text(join(workspace, 'work/continuous/reporter.stdout.log'))
     .split('\n')
     .filter((line) => line.startsWith('{'))
@@ -88,6 +113,7 @@ export function dashboardSnapshot(run, workspace = project) {
     plannedHours: launcher.hours || null,
     totals: status.totals || {},
     actorCount: config.actors,
+    deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,
     decisionsPerSecond: status.decisionsPerSecond,
     processes: (status.running || []).map((name) => {
@@ -160,9 +186,8 @@ export function createDashboardServer({ run, workspace = project }) {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const port = Number(option('port', '8766'));
-  createDashboardServer({ run: option('run', 'work/continuous/main') }).listen(
-    port,
-    '127.0.0.1',
-    () => console.log(`Training dashboard: http://127.0.0.1:${port}`),
-  );
+  createDashboardServer({
+    run: option('run', 'work/continuous/main'),
+    workspace: resolve(option('workspace', project)),
+  }).listen(port, '127.0.0.1', () => console.log(`Training dashboard: http://127.0.0.1:${port}`));
 }
