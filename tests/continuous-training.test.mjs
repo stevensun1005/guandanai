@@ -1,28 +1,75 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 import * as ort from 'onnxruntime-node';
 import { playMatch } from '../scripts/lib/match-rollout.mjs';
 import {
   FEATURES,
   GATE_SEED_BASE,
+  ANCHOR_SEED_BASE,
+  ANCHOR_SEED_LIMIT,
+  PROBE_SEED_BASE,
   TARGETS,
   TRAIN_SEED_BASE,
   ShardWriter,
   argmax,
+  anchorRegression,
   createModelPool,
   encodeSample,
   explore,
+  evaluationSeedStart,
   labelMatch,
   pfspWeights,
+  pairedScoreSummary,
   sprt,
 } from '../scripts/continuous/lib.mjs';
 
 test('training and gate seeds never enter the study evaluation range', () => {
   assert.ok(TRAIN_SEED_BASE >= 1e9);
   assert.ok(GATE_SEED_BASE >= TRAIN_SEED_BASE + 40 * 50_000_000);
+});
+
+test('gate and anchor blocks are disjoint and never wrap into another purpose', () => {
+  assert(PROBE_SEED_BASE < GATE_SEED_BASE);
+  assert.equal(evaluationSeedStart('gate', 0, 150), GATE_SEED_BASE);
+  assert.equal(evaluationSeedStart('anchor', 0, 150), ANCHOR_SEED_BASE);
+  assert(evaluationSeedStart('gate', 999, 150) + 100_000 <= ANCHOR_SEED_BASE);
+  assert(evaluationSeedStart('anchor', 999, 150) + 100_000 <= ANCHOR_SEED_LIMIT);
+  for (const kind of ['gate', 'anchor']) {
+    assert.throws(() => evaluationSeedStart(kind, 1000, 150), /exhausted/);
+    assert.throws(() => evaluationSeedStart(kind, -1, 150));
+  }
+});
+
+test('anchor stop needs two complete 150-pair regressions and resets on recovery or interruption', () => {
+  const pairs = Array.from({ length: 150 }, (_, i) => ({
+    seed: ANCHOR_SEED_BASE + i,
+    scores: [0, 0],
+  }));
+  const report = { kind: 'anchor', status: 'complete', pairs };
+  const summary = pairedScoreSummary(pairs);
+  assert.equal(summary.meanScore, 0);
+  assert(summary.clusterHoeffding95CI[1] > 0 && summary.clusterHoeffding95CI[1] < 0.5);
+  assert.deepEqual(anchorRegression(0, report), { streak: 1, stop: false });
+  assert.deepEqual(anchorRegression(1, report), { streak: 2, stop: true });
+  assert.deepEqual(anchorRegression(1, { ...report, status: 'stopped' }), {
+    streak: 0,
+    stop: false,
+  });
+  assert.deepEqual(anchorRegression(1, { ...report, pairs: pairs.slice(0, 2) }), {
+    streak: 0,
+    stop: false,
+  });
+  assert.deepEqual(
+    anchorRegression(1, { ...report, pairs: pairs.map((p) => ({ ...p, scores: [1, 1] })) }),
+    { streak: 0, stop: false },
+  );
+  assert.throws(() => pairedScoreSummary([{ seed: 1, scores: [0] }]));
+  assert.throws(() => pairedScoreSummary([pairs[0], pairs[0]]));
 });
 
 test('SPRT accepts a clearly stronger challenger and rejects a weaker one', () => {
@@ -33,6 +80,41 @@ test('SPRT accepts a clearly stronger challenger and rejects a weaker one', () =
   assert.equal(sprt(weak, settings).decision, 'reject');
   assert.equal(sprt([1], settings).decision, null);
   assert.equal(sprt([1, 1, 0.75, 1], settings).decision, null, 'four lucky pairs are not proof');
+});
+
+test('STOP before the first polling tick shuts down without restarting finished children', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'guandan-stop-'));
+  const child = spawn(
+    process.execPath,
+    ['scripts/continuous/supervisor.mjs', `--run=${directory}`, '--config={"actors":1}'],
+    { cwd: fileURLToPath(new URL('..', import.meta.url)), windowsHide: true },
+  );
+  let output = '';
+  let errors = '';
+  child.stderr.on('data', (chunk) => (errors += chunk));
+  child.stdout.on('data', (chunk) => {
+    output += chunk;
+    if (output.includes('"kind":"start"')) writeFileSync(join(directory, 'STOP'), '{}');
+  });
+  const timeout = setTimeout(() => child.kill(), 25_000);
+  try {
+    const code = await new Promise((resolve, reject) => {
+      child.on('exit', resolve);
+      child.on('error', reject);
+    });
+    assert.equal(code, 0, errors || output);
+    const events = readFileSync(join(directory, 'events.jsonl'), 'utf8')
+      .trim()
+      .split('\n')
+      .map(JSON.parse);
+    assert(!events.some((event) => event.kind === 'process-exit'), output);
+    const status = JSON.parse(readFileSync(join(directory, 'status.json'), 'utf8'));
+    assert.equal(status.stopReason, 'operator-stop');
+    assert.deepEqual(status.running, []);
+  } finally {
+    clearTimeout(timeout);
+    rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test('exploration rules stay greedy at their limits and only sample near-best softmax moves', () => {

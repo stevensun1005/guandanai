@@ -19,6 +19,9 @@ export const TRAIN_SEED_SPAN = 50_000_000;
 export const PROBE_SEED_BASE = 3_400_000_000;
 export const GATE_SEED_BASE = 3_500_000_000;
 export const GATE_SEED_SPAN = 100_000;
+export const ANCHOR_SEED_BASE = 3_600_000_000;
+export const ANCHOR_SEED_SPAN = 100_000;
+export const ANCHOR_SEED_LIMIT = 3_700_000_000;
 export const MAX_ACTORS = 40;
 
 export const DEFAULT_CONFIG = Object.freeze({
@@ -47,6 +50,7 @@ export const DEFAULT_CONFIG = Object.freeze({
   snapshotMinutes: 60,
   leagueSize: 24,
   gate: { alpha: 0.05, beta: 0.05, mu0: 0.5, mu1: 0.53, minPairs: 100, maxPairs: 1000 },
+  anchor: { intervalHours: 3, pairs: 150, regressionLimit: 2 },
   restarts: { limit: 5, windowMinutes: 10 },
   diskLimitGB: 20,
 });
@@ -72,11 +76,21 @@ export function runPaths(run) {
     actors: join(root, 'actors'),
     learner: join(root, 'learner'),
     gate: join(root, 'gate'),
+    anchor: join(root, 'anchor'),
   };
 }
 
 export function ensureDirs(paths) {
-  for (const key of ['models', 'champion', 'league', 'shards', 'actors', 'learner', 'gate'])
+  for (const key of [
+    'models',
+    'champion',
+    'league',
+    'shards',
+    'actors',
+    'learner',
+    'gate',
+    'anchor',
+  ])
     mkdirSync(paths[key], { recursive: true });
 }
 
@@ -264,3 +278,53 @@ export function sprt(scores, { alpha, beta, mu0, mu1 }) {
 }
 
 export const matchScore = (winner, team) => (winner === null ? 0.5 : winner === team ? 1 : 0);
+
+/** Reserve separate finite blocks; indices are persisted before an evaluation starts. */
+export function evaluationSeedStart(kind, index, pairs) {
+  if (
+    !['gate', 'anchor'].includes(kind) ||
+    !Number.isSafeInteger(index) ||
+    index < 0 ||
+    !Number.isSafeInteger(pairs) ||
+    pairs < 1 ||
+    pairs > GATE_SEED_SPAN
+  )
+    throw Error('Invalid evaluation seed allocation');
+  const base = kind === 'anchor' ? ANCHOR_SEED_BASE : GATE_SEED_BASE;
+  const limit = kind === 'anchor' ? ANCHOR_SEED_LIMIT : ANCHOR_SEED_BASE;
+  const start = base + index * GATE_SEED_SPAN;
+  if (start + GATE_SEED_SPAN > limit) throw Error(`${kind} seed range exhausted`);
+  return start;
+}
+
+/** Paired-seed uncertainty; correlated swapped matches are never counted as independent. */
+export function pairedScoreSummary(pairs) {
+  if (
+    !pairs.length ||
+    new Set(pairs.map((p) => p.seed)).size !== pairs.length ||
+    pairs.some(
+      (p) =>
+        !Number.isSafeInteger(p.seed) ||
+        p.scores?.length !== 2 ||
+        p.scores.some((s) => ![0, 0.5, 1].includes(s)),
+    )
+  )
+    throw Error('Invalid paired scores');
+  const scores = pairs.map((p) => (p.scores[0] + p.scores[1]) / 2);
+  const meanScore = scores.reduce((sum, value) => sum + value, 0) / scores.length;
+  const radius = Math.sqrt(Math.log(40) / (2 * scores.length));
+  return {
+    meanScore,
+    clusterHoeffding95CI: [Math.max(0, meanScore - radius), Math.min(1, meanScore + radius)],
+  };
+}
+
+/** Only complete, fixed 150-pair checks can contribute to the operational stop heuristic. */
+export function anchorRegression(streak, report, limit = 2) {
+  if (!Number.isInteger(limit) || limit < 2) throw Error('Invalid anchor regression limit');
+  const valid =
+    report?.kind === 'anchor' && report.status === 'complete' && report.pairs?.length === 150;
+  const summary = valid ? pairedScoreSummary(report.pairs) : null;
+  const next = summary?.clusterHoeffding95CI[1] < 0.5 ? streak + 1 : 0;
+  return { streak: next, stop: next >= limit };
+}

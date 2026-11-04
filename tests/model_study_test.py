@@ -13,6 +13,99 @@ spec.loader.exec_module(study)
 
 
 class ModelStudyTests(unittest.TestCase):
+    def continuous_fixture(self, directory):
+        for child in ("gate", "anchor", "champion"):
+            (directory / child).mkdir()
+        config = {
+            "createdAt": "2026-11-04T00:00:00Z",
+            "initialSHA256": "a" * 64,
+            "sourceSHA256": {"encoder": "b" * 64},
+        }
+        (directory / "config.json").write_text(json.dumps(config))
+        (directory / "status.json").write_text(
+            json.dumps(
+                {
+                    "running": ["learner"],
+                    "elapsedSeconds": 60,
+                    "totals": {"matches": 7, "decisions": 99},
+                    "learner": {"step": 3},
+                }
+            )
+        )
+        (directory / "champion/champion.json").write_text(
+            json.dumps(
+                {
+                    "version": "v0",
+                    "sha256": "a" * 64,
+                    "history": [{"version": "v0", "reason": "initial"}],
+                }
+            )
+        )
+        pairs = [{"seed": 3_600_000_000 + i, "scores": [0, 0.5]} for i in range(150)]
+        report = {
+            "kind": "anchor",
+            "status": "complete",
+            "pairs": pairs,
+            "firstSeed": 3_600_000_000,
+            "wins": 0,
+            "losses": 150,
+            "draws": 150,
+            "protocol": "greedy paired network",
+            "settings": {"minPairs": 150, "maxPairs": 150},
+            "challenger": {"file": "candidate.onnx", "sha256": "c" * 64},
+            "champion": {"file": "anchor.onnx", "sha256": "a" * 64},
+            "decision": "regression",
+        }
+        target = directory / "anchor/anchor-00000.json"
+        target.write_text(json.dumps(report))
+        return report, target
+
+    def test_continuous_snapshot_reports_real_counts_hashes_and_nonacceptance_role(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            self.continuous_fixture(directory)
+            run = study.continuous_snapshot(directory)
+            check = run["anchorChecks"][0]
+            self.assertEqual((check["wins"], check["losses"], check["draws"]), (0, 150, 150))
+            self.assertEqual(check["meanScore"], 0.25)
+            self.assertEqual(len(check["recordsSHA256"]), 64)
+            self.assertEqual(len(check["seedResults"]), 150)
+            self.assertEqual(run["champion"]["history"][0]["sha256"], "a" * 64)
+            self.assertFalse(
+                study.experiments_finished({"runs": {}, "continuousRuns": {"main": run}})
+            )
+            text = study.progress(
+                {"runs": {}, "continuousRuns": {"main": run}, "observedUTC": "unit fixture"}
+            )
+            self.assertIn("11.2", text)
+            self.assertIn("开发用途", text)
+            self.assertIn("0/150/150", text)
+
+    def test_continuous_corrupt_counts_wrong_seed_purpose_and_half_pairs_are_rejected(self):
+        for mutation in (
+            lambda r: r.update(wins=1),
+            lambda r: r.update(firstSeed=3_500_000_000),
+            lambda r: r["pairs"][0].update(scores=[0]),
+            lambda r: r["pairs"].pop(),
+        ):
+            with tempfile.TemporaryDirectory() as temporary:
+                directory = Path(temporary)
+                report, target = self.continuous_fixture(directory)
+                mutation(report)
+                target.write_text(json.dumps(report))
+                with self.assertRaises(ValueError):
+                    study.continuous_evaluation(target, "anchor")
+
+    def test_interrupted_monitor_is_not_a_complete_anchor_result(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            report, target = self.continuous_fixture(directory)
+            report.update(status="stopped", pairs=report["pairs"][:1], wins=0, losses=1, draws=1)
+            target.write_text(json.dumps(report))
+            check = study.continuous_evaluation(target, "anchor")
+            self.assertEqual(check["status"], "stopped")
+            self.assertIsNone(check["decision"])
+
     def write(self, path, rows, **overrides):
         manifest = {
             "status": "complete",

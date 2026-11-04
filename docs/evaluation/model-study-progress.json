@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "reportGeneratorSHA256": "93dd05774016dff01d9cb16bccf32449a6543dae348b71405f5c8f2653bc9ea1",
+  "reportGeneratorSHA256": "95e1aa5dacae1d3375be50a1aa968609ca5b21de66fe7877690d4d5a9bd05d5a",
   "metric": "Whole-match team wins / all matches; draws included",
   "finalHeldoutCompleted": false,
   "target80Validated": false,
@@ -34415,6 +34415,1447 @@
       "plannedCycles": 8
     }
   },
-  "fingerprint": "b98c4b3651b30b9fd2c52e9cf92da16cef45e5f0d70b395384a2b3cc130a0013",
-  "observedUTC": "2026-11-04T17:55:04.873061+00:00"
+  "continuousRuns": {
+    "step1-smoke": {
+      "role": "development training and monitoring; not held-out acceptance",
+      "status": "stopped",
+      "config": {
+        "schema": 1,
+        "initial": "ai/policy.onnx",
+        "actors": 1,
+        "actorMix": {
+          "self": 0.5,
+          "league": 0.3,
+          "rule": 0.2
+        },
+        "exploration": {
+          "type": "softmax",
+          "temperature": 0.02
+        },
+        "shardRows": 128,
+        "shardSeconds": 2,
+        "learner": {
+          "threads": 1,
+          "batch": 64,
+          "learningRate": 1e-5,
+          "gradClip": 1,
+          "capacity": 8192,
+          "minSamples": 128,
+          "replayRatio": 4,
+          "exportSeconds": 3,
+          "targetMatchWeight": 0,
+          "anchorWeight": 0,
+          "keepVersions": 6,
+          "seed": 20261104
+        },
+        "snapshotMinutes": 0.05,
+        "leagueSize": 24,
+        "gate": {
+          "alpha": 0.05,
+          "beta": 0.05,
+          "mu0": 0.5,
+          "mu1": 0.53,
+          "minPairs": 100,
+          "maxPairs": 100
+        },
+        "anchor": {
+          "intervalHours": 0.008333333333333333,
+          "pairs": 150,
+          "regressionLimit": 2
+        },
+        "restarts": {
+          "limit": 5,
+          "windowMinutes": 10
+        },
+        "diskLimitGB": 20,
+        "initialSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "createdAt": "2026-11-04T18:49:54.607Z",
+        "sourceSHA256": {
+          "scripts/continuous/supervisor.mjs": "d7259e0e79ac5a63a5ea6a0bf2312adcc2e23191fb1686f2f5a37a0314ca256f",
+          "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+          "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+          "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+          "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+          "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+          "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+          "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+          "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+          "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+          "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+          "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+          "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+          "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+          "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+          "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+          "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+          "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+          "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+          "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+          "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+          "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+          "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+          "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+        },
+        "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
+      },
+      "startedAt": "2026-11-04T18:49:54.618Z",
+      "updatedAt": "2026-11-04T18:52:24.704Z",
+      "stoppedAt": "2026-11-04T19:01:44.283Z",
+      "stopReason": "operator-stop",
+      "elapsedSeconds": 571.677,
+      "totals": {
+        "matches": 675,
+        "decisions": 273533,
+        "rows": 273533
+      },
+      "learner": {
+        "pid": 60732,
+        "state": "stopped",
+        "step": 16855,
+        "version": "v000016855",
+        "buffer": 0,
+        "ingestedRows": 272583,
+        "trainedRows": 1078720,
+        "lossEMA": null,
+        "replayRatio": 3.9574001313361435,
+        "stepsPerSecond": 0,
+        "updatedAt": "2026-11-04T19:01:43Z"
+      },
+      "latest": {
+        "version": "v000016855",
+        "file": "v000016855.onnx",
+        "sha256": "f79b1c01e5448d7215ad8244153a723eb1026b05a0b96cfad6ec4b0bdc1cb136",
+        "step": 16855,
+        "trainedRows": 1078720,
+        "ingestedRows": 272583,
+        "publishedAt": "2026-11-04T19:01:15Z"
+      },
+      "champion": {
+        "version": "v000000000",
+        "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "since": "2026-11-04T18:49:54.607Z",
+        "history": [
+          {
+            "version": "v000000000",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+            "at": "2026-11-04T18:49:54.607Z",
+            "reason": "initial"
+          }
+        ]
+      },
+      "sourceSHA256": {
+        "scripts/continuous/supervisor.mjs": "d7259e0e79ac5a63a5ea6a0bf2312adcc2e23191fb1686f2f5a37a0314ca256f",
+        "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+        "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+        "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+        "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+        "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+        "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+        "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+        "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+        "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+        "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+        "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+        "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+        "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+        "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+        "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+        "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+        "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+        "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+        "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+        "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+        "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+        "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+        "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+      },
+      "statusSHA256": "8d171dc23613483834b662848e2336599aef1b6d42c40c1fd03a5200f1d450e0",
+      "eventsSHA256": "647ca8a5c32962182d0358b754abaaf1df4dcac5b778b89661eb97e4583c4296",
+      "gates": [
+        {
+          "role": "development monitoring; not held-out acceptance",
+          "kind": "gate",
+          "status": "stopped",
+          "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+          "rules": {
+            "tribute": true,
+            "aFail": "draw",
+            "from": 2,
+            "through": "A"
+          },
+          "metric": "Team match score: win 1, draw 0.5, loss 0",
+          "challenger": {
+            "version": "v000014903",
+            "file": "C:\\Users\\Admin\\Desktop\\guandan\\work\\continuous\\step1-smoke\\league\\v000014903.onnx",
+            "sha256": "ac924e707ca67a28410d0f9fbf313b819fa4070667d6c29645e873e69f13b378"
+          },
+          "champion": {
+            "version": "v000000000",
+            "file": "C:\\Users\\Admin\\Desktop\\guandan\\work\\continuous\\step1-smoke\\gate\\champion-0.onnx",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+          },
+          "pairs": 40,
+          "matches": 80,
+          "wins": 2,
+          "losses": 76,
+          "draws": 2,
+          "seedRange": [3500000000, 3500000039],
+          "meanScore": 0.0375,
+          "clusterHoeffding95CI": [0, 0.2522347041733688],
+          "llr": -11.460000000000012,
+          "decision": null,
+          "settings": {
+            "alpha": 0.05,
+            "beta": 0.05,
+            "mu0": 0.5,
+            "mu1": 0.53,
+            "minPairs": 100,
+            "maxPairs": 100
+          },
+          "sourceSHA256": {
+            "scripts/continuous/supervisor.mjs": "d7259e0e79ac5a63a5ea6a0bf2312adcc2e23191fb1686f2f5a37a0314ca256f",
+            "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+            "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+            "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+            "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+            "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+            "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+            "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+            "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+            "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+          },
+          "recordsSHA256": "64af8e3a86f2b25015f369c6a9107e6b47305ce880144a907de2cc51ed874339",
+          "recordsFile": "gate/gate-00000.json",
+          "seedResults": [
+            {
+              "seed": 3500000000,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000001,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000002,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000003,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000004,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000005,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000006,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000007,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000008,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000009,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000010,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000011,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000012,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000013,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000014,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000015,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000016,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000017,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000018,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000019,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000020,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000021,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000022,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000023,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000024,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000025,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000026,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000027,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000028,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000029,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000030,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000031,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000032,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000033,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000034,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000035,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000036,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000037,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000038,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000039,
+              "scores": [0, 0]
+            }
+          ]
+        }
+      ],
+      "anchorChecks": [
+        {
+          "role": "development monitoring; not held-out acceptance",
+          "kind": "anchor",
+          "status": "stopped",
+          "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+          "rules": {
+            "tribute": true,
+            "aFail": "draw",
+            "from": 2,
+            "through": "A"
+          },
+          "metric": "Team match score: win 1, draw 0.5, loss 0",
+          "challenger": {
+            "version": "v000000666",
+            "file": "C:\\Users\\Admin\\Desktop\\guandan\\work\\continuous\\step1-smoke\\anchor\\challenger-0.onnx",
+            "sha256": "31db6cad0cdf746aa97cc2c6df7d64f863aaa1f95d9bf6c1b66f7c0de43239a5"
+          },
+          "champion": {
+            "version": "P0-anchor",
+            "file": "C:\\Users\\Admin\\Desktop\\guandan\\work\\continuous\\step1-smoke\\models\\anchor.onnx",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+          },
+          "pairs": 76,
+          "matches": 152,
+          "wins": 56,
+          "losses": 83,
+          "draws": 13,
+          "seedRange": [3600000000, 3600000075],
+          "meanScore": 0.41118421052631576,
+          "clusterHoeffding95CI": [0.25539928257413747, 0.5669691384784941],
+          "llr": -3.0408564586561515,
+          "decision": null,
+          "settings": {
+            "alpha": 0.05,
+            "beta": 0.05,
+            "mu0": 0.5,
+            "mu1": 0.53,
+            "minPairs": 150,
+            "maxPairs": 150
+          },
+          "sourceSHA256": {
+            "scripts/continuous/supervisor.mjs": "d7259e0e79ac5a63a5ea6a0bf2312adcc2e23191fb1686f2f5a37a0314ca256f",
+            "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+            "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+            "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+            "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+            "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+            "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+            "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+            "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+            "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+          },
+          "recordsSHA256": "b03f06156021fae1f9f74a0777cc8f3cdabcb47ccd31f1207a33c817bb2050d7",
+          "recordsFile": "anchor/anchor-00000.json",
+          "seedResults": [
+            {
+              "seed": 3600000000,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3600000001,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000002,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3600000003,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000004,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000005,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000006,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000007,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000008,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600000009,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000010,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000011,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000012,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000013,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3600000014,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000015,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000016,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000017,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000018,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000019,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000020,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000021,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000022,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000023,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000024,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000025,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000026,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000027,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000028,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600000029,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3600000030,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600000031,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000032,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000033,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000034,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000035,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3600000036,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000037,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000038,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000039,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000040,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3600000041,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000042,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3600000043,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3600000044,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000045,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3600000046,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600000047,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000048,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000049,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600000050,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000051,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000052,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000053,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000054,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600000055,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000056,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000057,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000058,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000059,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000060,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000061,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000062,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000063,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000064,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000065,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3600000066,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000067,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000068,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000069,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600000070,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000071,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000072,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3600000073,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600000074,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600000075,
+              "scores": [1, 0]
+            }
+          ]
+        },
+        {
+          "role": "development monitoring; not held-out acceptance",
+          "kind": "anchor",
+          "status": "complete",
+          "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+          "rules": {
+            "tribute": true,
+            "aFail": "draw",
+            "from": 2,
+            "through": "A"
+          },
+          "metric": "Team match score: win 1, draw 0.5, loss 0",
+          "challenger": {
+            "version": "v000005394",
+            "file": "C:\\Users\\Admin\\Desktop\\guandan\\work\\continuous\\step1-smoke\\anchor\\challenger-1.onnx",
+            "sha256": "5822b72812d5611253c5f3d390c95f5e6b459a915a9ffc914400df631aeee235"
+          },
+          "champion": {
+            "version": "P0-anchor",
+            "file": "C:\\Users\\Admin\\Desktop\\guandan\\work\\continuous\\step1-smoke\\models\\anchor.onnx",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+          },
+          "pairs": 150,
+          "matches": 300,
+          "wins": 18,
+          "losses": 268,
+          "draws": 14,
+          "seedRange": [3600100000, 3600100149],
+          "meanScore": 0.08333333333333333,
+          "clusterHoeffding95CI": [0, 0.19422185774883116],
+          "llr": -38.85000000000004,
+          "decision": "regression",
+          "settings": {
+            "alpha": 0.05,
+            "beta": 0.05,
+            "mu0": 0.5,
+            "mu1": 0.53,
+            "minPairs": 150,
+            "maxPairs": 150
+          },
+          "sourceSHA256": {
+            "scripts/continuous/supervisor.mjs": "d7259e0e79ac5a63a5ea6a0bf2312adcc2e23191fb1686f2f5a37a0314ca256f",
+            "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+            "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+            "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+            "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+            "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+            "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+            "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+            "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+            "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+          },
+          "recordsSHA256": "549f0b5a1ef3797df52227fbdc0a84739b7e12d7f88138a912bd70a49b0e084a",
+          "recordsFile": "anchor/anchor-00001.json",
+          "seedResults": [
+            {
+              "seed": 3600100000,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100001,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100002,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100003,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100004,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100005,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100006,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100007,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100008,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100009,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100010,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100011,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600100012,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600100013,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100014,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100015,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100016,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100017,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100018,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100019,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100020,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100021,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100022,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600100023,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100024,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600100025,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100026,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100027,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100028,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100029,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100030,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100031,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100032,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100033,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100034,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100035,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100036,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100037,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100038,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100039,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100040,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100041,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100042,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100043,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600100044,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100045,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100046,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100047,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100048,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100049,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100050,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100051,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100052,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100053,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100054,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100055,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100056,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100057,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100058,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100059,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100060,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100061,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100062,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100063,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100064,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100065,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100066,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100067,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100068,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100069,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100070,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100071,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100072,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100073,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600100074,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100075,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100076,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100077,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100078,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100079,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100080,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100081,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100082,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100083,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100084,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100085,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100086,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100087,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100088,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100089,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100090,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100091,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100092,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100093,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100094,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100095,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100096,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100097,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100098,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100099,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100100,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100101,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100102,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100103,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100104,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100105,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100106,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100107,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100108,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100109,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100110,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100111,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100112,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600100113,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100114,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100115,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3600100116,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600100117,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100118,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100119,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100120,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100121,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100122,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100123,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100124,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100125,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100126,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100127,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100128,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100129,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100130,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100131,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100132,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100133,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100134,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100135,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100136,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3600100137,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100138,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3600100139,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100140,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100141,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100142,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100143,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100144,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100145,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100146,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3600100147,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100148,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3600100149,
+              "scores": [0, 0]
+            }
+          ]
+        }
+      ],
+      "anchorRegressionStreak": 1,
+      "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
+    }
+  },
+  "fingerprint": "1a62ee9613be2196e02aff6df7eb5bc5b5ec01e97ac5987d60e549100a4d306b",
+  "observedUTC": "2026-11-04T19:23:43.561758+00:00"
 }

@@ -3,11 +3,11 @@ import { existsSync } from 'node:fs';
 import * as ort from 'onnxruntime-node';
 import { playMatch } from '../lib/match-rollout.mjs';
 import {
-  GATE_SEED_BASE,
-  GATE_SEED_SPAN,
   createModelPool,
+  evaluationSeedStart,
   matchScore,
   option,
+  pairedScoreSummary,
   readJSON,
   runPaths,
   sha256,
@@ -19,24 +19,33 @@ const paths = runPaths(option('run', 'work/continuous/main'));
 const challenger = option('challenger', '');
 const champion = option('champion', '');
 const index = Number(option('index', '0'));
+const kind = option('kind', 'gate');
 const output = option('output', '');
 const config = readJSON(paths.config);
 const settings = { ...config.gate, ...JSON.parse(option('settings', '{}')) };
 if (!challenger || !champion || !output || !Number.isInteger(index) || index < 0)
   throw Error('Usage: gate.mjs --run --challenger --champion --index --output');
-const firstSeed = GATE_SEED_BASE + index * GATE_SEED_SPAN;
-if (firstSeed + settings.maxPairs > 2 ** 32 || settings.maxPairs > GATE_SEED_SPAN)
-  throw Error('Gate seed range exhausted');
+if (kind === 'anchor' && (settings.minPairs !== 150 || settings.maxPairs !== 150))
+  throw Error('Anchor checks require exactly 150 pairs');
+const firstSeed = evaluationSeedStart(kind, index, settings.maxPairs);
 
 const pool = await createModelPool(ort, { threads: 1 });
 const infer = (file) => (state) => pool.values(file, state);
 const report = {
   schema: 1,
-  purpose: 'development gate (not a held-out acceptance)',
+  kind,
+  purpose: `development ${kind} (not a held-out acceptance)`,
+  metric: 'Team match score: win 1, draw 0.5, loss 0; uncertainty clustered by seed',
+  rules: { tribute: true, aFail: 'draw', from: 2, through: 'A' },
+  sourceSHA256: config.sourceSHA256 || {},
   protocol:
     'Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5',
-  challenger: { file: challenger, sha256: sha256(challenger) },
-  champion: { file: champion, sha256: sha256(champion) },
+  challenger: {
+    version: option('challenger-version', null),
+    file: challenger,
+    sha256: sha256(challenger),
+  },
+  champion: { version: option('champion-version', null), file: champion, sha256: sha256(champion) },
   settings,
   firstSeed,
   status: 'running',
@@ -70,22 +79,27 @@ for (let pair = 0; pair < settings.maxPairs && !existsSync(paths.stop); pair++) 
     else report.draws++;
   }
   report.pairs.push({ seed, scores });
+  Object.assign(report, pairedScoreSummary(report.pairs));
   report.test = sprt(
     report.pairs.map((p) => (p.scores[0] + p.scores[1]) / 2),
     settings,
   );
   writeJSON(output, report);
-  if (report.pairs.length >= settings.minPairs && report.test.decision) break;
+  if (kind === 'gate' && report.pairs.length >= settings.minPairs && report.test.decision) break;
 }
 report.status = existsSync(paths.stop) ? 'stopped' : 'complete';
 report.decision =
   report.status !== 'complete'
     ? null
-    : report.test?.decision === 'accept'
-      ? 'accept'
-      : report.test?.decision === 'reject'
-        ? 'reject'
-        : 'inconclusive';
+    : kind === 'anchor'
+      ? report.clusterHoeffding95CI[1] < 0.5
+        ? 'regression'
+        : 'no-regression'
+      : report.test?.decision === 'accept'
+        ? 'accept'
+        : report.test?.decision === 'reject'
+          ? 'reject'
+          : 'inconclusive';
 report.finishedAt = new Date().toISOString();
 writeJSON(output, report);
 await pool.close();

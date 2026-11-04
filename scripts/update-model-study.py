@@ -7,8 +7,8 @@ import hashlib
 import json
 import math
 from pathlib import Path
-import shutil
 import subprocess
+import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +38,125 @@ def digest(path):
 
 def read(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def continuous_evaluation(path, kind):
+    """Audit real paired outcomes, including partial runs, before summarizing them."""
+    report = read(path)
+    if report.get("kind", kind) != kind:
+        raise ValueError("Continuous evaluation kind mismatch")
+    pairs = report["pairs"]
+    first = report["firstSeed"]
+    low, high = (
+        (3_600_000_000, 3_700_000_000) if kind == "anchor" else (3_500_000_000, 3_600_000_000)
+    )
+    if not isinstance(first, int) or not low <= first < high or first + len(pairs) > high:
+        raise ValueError("Continuous evaluation seed purpose mismatch")
+    scores = []
+    for index, pair in enumerate(pairs):
+        if (
+            pair["seed"] != first + index
+            or len(pair["scores"]) != 2
+            or any(isinstance(score, bool) or score not in (0, 0.5, 1) for score in pair["scores"])
+        ):
+            raise ValueError("Continuous evaluation needs complete swapped seed pairs")
+        scores.extend(pair["scores"])
+    wins, losses, draws = (scores.count(value) for value in (1, 0, 0.5))
+    if (wins, losses, draws) != tuple(report[key] for key in ("wins", "losses", "draws")):
+        raise ValueError("Continuous aggregate differs from paired outcomes")
+    complete = report["status"] == "complete"
+    if complete and (not pairs or (kind == "anchor" and len(pairs) != 150)):
+        raise ValueError("Incomplete fixed-size anchor check")
+    mean = (wins + draws * 0.5) / len(scores) if scores else None
+    radius = math.sqrt(math.log(40) / (2 * len(pairs))) if pairs else None
+    for model in ("challenger", "champion"):
+        value = report[model]["sha256"]
+        if len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
+            raise ValueError("Invalid continuous model fingerprint")
+    return {
+        "role": "development monitoring; not held-out acceptance",
+        "kind": kind,
+        "status": report["status"],
+        "protocol": report["protocol"],
+        "rules": report.get("rules", {"tribute": True, "aFail": "draw"}),
+        "metric": "Team match score: win 1, draw 0.5, loss 0",
+        "challenger": report["challenger"],
+        "champion": report["champion"],
+        "pairs": len(pairs),
+        "matches": len(scores),
+        "wins": wins,
+        "losses": losses,
+        "draws": draws,
+        "seedRange": [first, first + len(pairs) - 1] if pairs else None,
+        "meanScore": mean,
+        "clusterHoeffding95CI": [max(0, mean - radius), min(1, mean + radius)] if pairs else None,
+        "llr": (report.get("test") or {}).get("llr"),
+        "decision": report.get("decision") if complete else None,
+        "settings": report["settings"],
+        "sourceSHA256": report.get("sourceSHA256", {}),
+        "recordsSHA256": digest(path),
+        "recordsFile": f"{kind}/{path.name}",
+        "seedResults": pairs,
+    }
+
+
+def continuous_snapshot(directory):
+    config = read(directory / "config.json")
+    status = read(directory / "status.json") if (directory / "status.json").exists() else {}
+    champion = read(directory / "champion/champion.json")
+    gates = [
+        continuous_evaluation(p, "gate") for p in sorted((directory / "gate").glob("gate-*.json"))
+    ]
+    anchors = [
+        continuous_evaluation(p, "anchor")
+        for p in sorted((directory / "anchor").glob("anchor-*.json"))
+    ]
+    history = []
+    for entry in champion.get("history", []):
+        gate = next(
+            (g for g in gates if Path(g["recordsFile"]).stem == f"gate-{entry.get('gate', -1):05}"),
+            None,
+        )
+        history.append(
+            {
+                **entry,
+                "sha256": entry.get("sha256")
+                or (
+                    gate["challenger"]["sha256"]
+                    if gate
+                    else config["initialSHA256"]
+                    if entry.get("reason") == "initial"
+                    else None
+                ),
+            }
+        )
+    return {
+        "role": "development training and monitoring; not held-out acceptance",
+        "status": "stopped"
+        if status.get("stoppedAt")
+        else "running"
+        if status.get("running")
+        else "initializing",
+        "config": config,
+        "startedAt": status.get("startedAt", config["createdAt"]),
+        "updatedAt": status.get("updatedAt"),
+        "stoppedAt": status.get("stoppedAt"),
+        "stopReason": status.get("stopReason"),
+        "elapsedSeconds": status.get("elapsedSeconds"),
+        "totals": status.get("totals", {}),
+        "learner": status.get("learner", {}),
+        "latest": status.get("latest"),
+        "champion": {**champion, "history": history},
+        "sourceSHA256": config.get("sourceSHA256", {}),
+        "statusSHA256": digest(directory / "status.json") if status else None,
+        "eventsSHA256": digest(directory / "events.jsonl")
+        if (directory / "events.jsonl").exists()
+        else None,
+        "gates": gates,
+        "anchorChecks": anchors,
+        "anchorRegressionStreak": status.get("anchorRegressionStreak", 0),
+        "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents",
+    }
 
 
 def evaluation(directory):
@@ -118,6 +237,7 @@ def snapshot(workspace):
             for name in ["policy.onnx", "response.onnx"]
         },
         "runs": {},
+        "continuousRuns": {},
     }
     for name, relative in RUNS.items():
         directory = workspace / "work/learning" / relative
@@ -216,7 +336,18 @@ def snapshot(workspace):
                 record["evaluations"]["rule"] = evaluation(cycle / "evaluation")
             item["cycles"].append(record)
         result["runs"][name] = item
+    continuous = workspace / "work/continuous"
+    if continuous.exists():
+        for directory in sorted(continuous.iterdir()):
+            if directory.is_dir() and (directory / "config.json").exists():
+                result["continuousRuns"][directory.name] = continuous_snapshot(directory)
     return result
+
+
+def experiments_finished(data):
+    return all(r["status"] != "running" for r in data["runs"].values()) and all(
+        r["status"] == "stopped" for r in data.get("continuousRuns", {}).values()
+    )
 
 
 def progress(data):
@@ -260,13 +391,75 @@ def progress(data):
         "",
         "原始逐场记录的 SHA-256、检查点与训练报告 SHA-256、种子范围及聚类区间见[机器可读快照](evaluation/model-study-progress.json)。研究权重见[成果目录](evaluation/model-artifacts.json)和 `ai/experiments/`；原始大型缓冲区仍在本地 `work/`，不能把检查点公开等同于全部训练数据公开。",
         "",
-        "自动更新同时保存已完成周期的检查点到 `ai/experiments/asymmetric-pilot/` 和 `ai/experiments/asymmetric-next/`，不修改网页默认模型清单。新留出测试完成后须人工审核结论；脚本不会把开发集峰值自动改写成通过验收。",
+        "自动更新只写研究报告和证据 JSON，不再复制或提交权重。历史已归档检查点保留；新权重留在本地，需要公开时通过 Release 附件及 SHA-256 索引归档。网页默认模型清单不变。",
     ]
+    if data.get("continuousRuns"):
+        lines += [
+            "",
+            "### 11.2 持续训练与锚点监控（开发用途）",
+            "",
+            "胜／负／平按实际完成的成对比赛统计；得分为胜 1、平 0.5、负 0，不等于胜率。未完成检查不用于冠军晋升或连续退步停止。区间按种子簇计算，不提供反复监控的整体误报保证。",
+            "",
+        ]
+        for name, run in data["continuousRuns"].items():
+            totals, learner = run["totals"], run["learner"] or {}
+            hours = (
+                f"{run['elapsedSeconds'] / 3600:.3f}"
+                if run["elapsedSeconds"] is not None
+                else "尚无累计计时"
+            )
+            lines += [
+                f"#### `{name}`",
+                "",
+                f"状态 `{run['status']}`；累计运行 {hours} 小时；采样 {totals.get('matches', 0)} 场、{totals.get('decisions', 0)} 个决策；学习器 {learner.get('step', 0)} 步。停止原因：`{run['stopReason'] or '无'}`。",
+                "",
+                f"当前冠军 `{run['champion']['version']}`，SHA-256 `{run['champion']['sha256']}`；含初始版本共 {len(run['champion']['history'])} 条冠军历史，完整指纹与配置见 JSON。",
+                "",
+                "| 类型 | 挑战者／对手 SHA | 完成状态 | 对数 | 胜／负／平 | 得分 | 种子簇 95% 区间 | LLR | 结论 |",
+                "| --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- |",
+            ]
+            for kind, checks in [("门控", run["gates"]), ("锚点", run["anchorChecks"])]:
+                for check in checks:
+                    score = f"{check['meanScore']:.4f}" if check["meanScore"] is not None else "—"
+                    ci = check["clusterHoeffding95CI"]
+                    bounds = f"[{ci[0]:.4f}, {ci[1]:.4f}]" if ci else "—"
+                    identities = " / ".join(
+                        f"`{check[side].get('version') or Path(check[side]['file']).stem}` ({check[side]['sha256'][:12]})"
+                        for side in ("challenger", "champion")
+                    )
+                    lines.append(
+                        f"| {kind} | {identities} | `{check['status']}` | {check['pairs']} | {check['wins']}/{check['losses']}/{check['draws']} | {score} | {bounds} | {check['llr'] if check['llr'] is not None else '—'} | `{check['decision'] or '未完成'}` |"
+                    )
+            lines += [
+                "",
+                "最新模型与初始 P0 的锚点检查固定 150 对；连续两次完整检查的 Hoeffding 区间上限低于 0.5 时停止。采样含探索，对局统计不能当作棋力验收。",
+                "",
+            ]
     return "\n".join(lines)
 
 
 def git(*args):
     return subprocess.check_output(["git", *args], cwd=ROOT, text=True).strip()
+
+
+def publication_checks():
+    npm = "npm.cmd" if __import__("os").name == "nt" else "npm"
+    for command in (
+        [npm, "test"],
+        [npm, "run", "format:check"],
+        [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "model_study_test.py"],
+        [sys.executable, "tests/continuous_learner_test.py"],
+    ):
+        subprocess.run(command, cwd=ROOT, check=True, capture_output=True)
+    allowed = {PAPER.as_posix(), EVIDENCE.as_posix()}
+    if set(git("diff", "--name-only").splitlines()) - allowed or git(
+        "ls-files", "--others", "--exclude-standard"
+    ):
+        raise RuntimeError("Publication checks found unrelated changes; refusing to stage them")
+    if any((ROOT / file).stat().st_size > 5_000_000 for file in (PAPER, EVIDENCE)):
+        raise RuntimeError(
+            "Evidence is too large for automatic Git publication; archive raw records separately"
+        )
 
 
 def update(workspace, publish=False):
@@ -281,7 +474,7 @@ def update(workspace, publish=False):
     fingerprint = hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()
     previous = read(ROOT / EVIDENCE) if (ROOT / EVIDENCE).exists() else {}
     if previous.get("fingerprint") == fingerprint:
-        return False, all(r["status"] != "running" for r in data["runs"].values())
+        return False, experiments_finished(data)
     paper = (ROOT / PAPER).read_text(encoding="utf-8")
     for artifact in data["onlineModels"].values():
         if artifact["sha256"] not in paper:
@@ -291,34 +484,6 @@ def update(workspace, publish=False):
     if paper.count(START) != 1 or paper.count(END) != 1:
         raise ValueError("Paper must contain exactly one generated progress section")
     data.update(fingerprint=fingerprint, observedUTC=datetime.now(timezone.utc).isoformat())
-    artifacts = []
-    for name, run in data["runs"].items():
-        if not name.startswith("team-"):
-            continue
-        for cycle in run["cycles"]:
-            source = (
-                workspace / "work/learning" / RUNS[name] / f"cycle-{cycle['cycle']:02}" / "model"
-            )
-            destination = Path("ai/experiments") / RUNS[name] / f"cycle-{cycle['cycle']:02}"
-            (ROOT / destination).mkdir(parents=True, exist_ok=True)
-            for file in ["actor.npz", "critic.npz", "policy.onnx"]:
-                shutil.copy2(source / file, ROOT / destination / file)
-                artifacts.append(str(destination / file))
-            (ROOT / destination / "training.json").write_bytes(
-                (source / "training.json").read_text(encoding="utf-8").encode("utf-8")
-            )
-            artifacts.append(str(destination / "training.json"))
-            config = read(source / "config.json")
-            anchor = Path("ai/experiments") / Path(RUNS[name]).parent / "anchor/policy.onnx"
-            (ROOT / anchor).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(config["anchor"], ROOT / anchor)
-            if digest(ROOT / anchor) != config["anchorSHA256"]:
-                raise ValueError("Experimental anchor changed")
-            config["anchor"] = anchor.as_posix()
-            (ROOT / destination / "config.json").write_bytes(
-                (json.dumps(config, indent=2) + "\n").encode("utf-8")
-            )
-            artifacts.extend([str(anchor), str(destination / "config.json")])
     (ROOT / EVIDENCE).write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     before, tail = paper.split(START)
     _, after = tail.split(END)
@@ -338,13 +503,14 @@ def update(workspace, publish=False):
         capture_output=True,
     )
     if publish:
-        git("add", str(PAPER), str(EVIDENCE), *artifacts)
+        publication_checks()
+        git("add", str(PAPER), str(EVIDENCE))
         git("commit", "-m", "docs: update completed model experiment evidence")
         git("push", "origin", "HEAD:main")
     print(
         json.dumps({"updated": True, "fingerprint": fingerprint, "published": publish}), flush=True
     )
-    return True, all(r["status"] != "running" for r in data["runs"].values())
+    return True, experiments_finished(data)
 
 
 if __name__ == "__main__":
@@ -352,9 +518,12 @@ if __name__ == "__main__":
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--publish", action="store_true")
     parser.add_argument("--watch-minutes", type=int, default=0)
+    parser.add_argument("--interval-seconds", type=int, default=60)
     args = parser.parse_args()
-    if not 0 <= args.watch_minutes <= 180:
-        raise ValueError("Watch duration must be bounded to 0..180 minutes")
+    if not 0 <= args.watch_minutes <= 1500:
+        raise ValueError("Watch duration must be bounded to 0..1500 minutes")
+    if not 30 <= args.interval_seconds <= 3600:
+        raise ValueError("Report interval must be bounded to 30..3600 seconds")
     deadline = time.monotonic() + args.watch_minutes * 60
     while True:
         try:
@@ -370,4 +539,4 @@ if __name__ == "__main__":
             if args.watch_minutes and not finished:
                 raise SystemExit("Watch deadline reached; some experiments are still pending")
             break
-        time.sleep(60)
+        time.sleep(args.interval_seconds)

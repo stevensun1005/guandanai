@@ -3,6 +3,7 @@ import { option, readJSON, runPaths } from './lib.mjs';
 
 const paths = runPaths(option('run', 'work/continuous/main'));
 const status = readJSON(paths.status);
+const config = readJSON(paths.config);
 if (!status) throw Error(`No status at ${paths.status}`);
 const learner = status.learner || {};
 const champion = status.champion || {};
@@ -12,13 +13,14 @@ const lines = [
   `运行目录      ${paths.root}`,
   `更新时间      ${status.updatedAt}${status.stoppedAt ? `（已停止 ${status.stoppedAt}）` : ''}`,
   `运行中进程    ${(status.running || []).join(', ') || '无'}`,
+  `累计运行      ${status.elapsedSeconds == null ? '尚无累计计时' : (status.elapsedSeconds / 3600).toFixed(3) + ' 小时'}；停止原因 ${status.stopReason || '无'}`,
   `采样          ${status.totals?.matches ?? 0} 场整场，${status.totals?.decisions ?? 0} 个决策，约 ${status.decisionsPerSecond ?? '-'} 决策/秒`,
   `训练          第 ${learner.step ?? 0} 步，缓冲 ${learner.buffer ?? 0} 行，重放比 ${learner.replayRatio?.toFixed?.(2) ?? '-'}，损失 ${learner.lossEMA?.toFixed?.(4) ?? '-'}（${learner.state ?? '-'}）`,
   `最新模型      ${status.latest?.version ?? '-'}`,
   `冠军          ${champion.version ?? '-'}（更替 ${Math.max(0, (champion.history?.length || 1) - 1)} 次）`,
   `磁盘          ${status.diskGB ?? '-'} GB`,
   '',
-  '最近 30 秒的对局（含 ε 探索，仅供监控，不是评测）：',
+  `最近 30 秒的对局（${config.exploration?.type || '探索'}，仅供监控，不是评测）：`,
 ];
 for (const [mode, s] of Object.entries(status.recent?.byMode || {}))
   lines.push(
@@ -38,4 +40,12 @@ for (const g of (status.gates || []).slice(-10))
   );
 const gateFiles = (status.gates || []).length;
 if (!gateFiles) lines.push('  暂无');
+lines.push(
+  '',
+  `锚点检查（固定 150 对，开发监控；连续退步 ${status.anchorRegressionStreak || 0} 次）：`,
+);
+for (const check of (status.anchorChecks || []).slice(-5))
+  lines.push(
+    `  #${check.index} ${check.challenger}: ${check.status}，${check.pairs} 对，胜/负/平 ${check.wins}/${check.losses}/${check.draws}，得分 ${check.meanScore ?? '-'}，95% 区间 ${JSON.stringify(check.clusterHoeffding95CI)}`,
+  );
 console.log(lines.join('\n'));
