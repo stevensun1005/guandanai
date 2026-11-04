@@ -34499,36 +34499,36 @@
         "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
       },
       "startedAt": "2026-11-04T19:24:41.516Z",
-      "updatedAt": "2026-11-04T19:42:41.872Z",
+      "updatedAt": "2026-11-04T19:49:41.963Z",
       "stoppedAt": null,
       "stopReason": null,
-      "elapsedSeconds": 1080.356,
+      "elapsedSeconds": 1500.447,
       "totals": {
-        "matches": 5570,
-        "decisions": 2719544,
-        "rows": 2719544
+        "matches": 7667,
+        "decisions": 3739349,
+        "rows": 3739349
       },
       "learner": {
         "pid": 51572,
         "state": "training",
-        "step": 5145,
-        "version": "v000002931",
+        "step": 7131,
+        "version": "v000005759",
         "buffer": 2000000,
-        "ingestedRows": 2667842,
-        "trainedRows": 10536960,
-        "lossEMA": 3.3526388636965656,
-        "replayRatio": 3.9496192053352486,
-        "stepsPerSecond": 4.782023475936644,
-        "updatedAt": "2026-11-04T19:42:40Z"
+        "ingestedRows": 3683698,
+        "trainedRows": 14604288,
+        "lossEMA": 3.3551519350248413,
+        "replayRatio": 3.964572557250893,
+        "stepsPerSecond": 4.783697042326092,
+        "updatedAt": "2026-11-04T19:49:35Z"
       },
       "latest": {
-        "version": "v000002931",
-        "file": "v000002931.onnx",
-        "sha256": "7fcf354c9c1f2cafe471f052d6a1df104059218016ff1f190d4e1b4f57e8559a",
-        "step": 2931,
-        "trainedRows": 6002688,
-        "ingestedRows": 1516831,
-        "publishedAt": "2026-11-04T19:34:49Z"
+        "version": "v000005759",
+        "file": "v000005759.onnx",
+        "sha256": "6956225d22355292908530eb1a0a69ad30cca7e529b6ff1300d385f388ec77d6",
+        "step": 5759,
+        "trainedRows": 11794432,
+        "ingestedRows": 2984047,
+        "publishedAt": "2026-11-04T19:44:49Z"
       },
       "champion": {
         "version": "v000000000",
@@ -34569,13 +34569,13 @@
         "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
         "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
       },
-      "statusSHA256": "e76b23fb9ceff12391182e694166a5fad37123b1b041f32dafcabb66410ec9a5",
-      "eventsSHA256": "ce2e61ae7e75b72cea0799858dcfecbb2c5727f6386254e8666e99e2275f16a6",
+      "statusSHA256": "81ab02b5a12298d72e9f83864ca09fc08ec1d7b96d9cd63465871a9ddba0459c",
+      "eventsSHA256": "2500e1721bce0d653d0a2abffdead00713f0da831f719528c3007355fdb2d1a3",
       "gates": [
         {
           "role": "development monitoring; not held-out acceptance",
           "kind": "gate",
-          "status": "running",
+          "status": "complete",
           "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
           "rules": {
             "tribute": true,
@@ -34594,16 +34594,16 @@
             "file": "D:\\vibecoding\\guandan\\work\\continuous\\main\\gate\\champion-0.onnx",
             "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
           },
-          "pairs": 183,
-          "matches": 366,
-          "wins": 154,
-          "losses": 169,
-          "draws": 43,
-          "seedRange": [3500000000, 3500000182],
-          "meanScore": 0.47950819672131145,
-          "clusterHoeffding95CI": [0.3791144438662002, 0.5799019495764227],
-          "llr": -2.1842480878455164,
-          "decision": null,
+          "pairs": 313,
+          "matches": 626,
+          "wins": 269,
+          "losses": 286,
+          "draws": 71,
+          "seedRange": [3500000000, 3500000312],
+          "meanScore": 0.48642172523961663,
+          "clusterHoeffding95CI": [0.4096572889380766, 0.5631861615411566],
+          "llr": -3.0302507884657013,
+          "decision": "reject",
           "settings": {
             "alpha": 0.05,
             "beta": 0.05,
@@ -34638,7 +34638,7 @@
             "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
             "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
           },
-          "recordsSHA256": "91d07891e64d403252bc71412b761ae348e6de3b5031d3e301ca30f48c4e43cc",
+          "recordsSHA256": "fa85bf7a49da83b6ccf476fb8c5baf58d37f98e27b393586aa9ef358b91f646f",
           "recordsFile": "gate/gate-00000.json",
           "seedResults": [
             {
@@ -35372,6 +35372,526 @@
             {
               "seed": 3500000182,
               "scores": [1, 0]
+            },
+            {
+              "seed": 3500000183,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000184,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000185,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000186,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000187,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000188,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000189,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000190,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000191,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000192,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000193,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000194,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000195,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000196,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000197,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000198,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000199,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000200,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000201,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000202,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000203,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3500000204,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000205,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000206,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000207,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000208,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000209,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000210,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000211,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000212,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3500000213,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000214,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000215,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000216,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000217,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000218,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000219,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000220,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000221,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000222,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000223,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000224,
+              "scores": [0.5, 0.5]
+            },
+            {
+              "seed": 3500000225,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000226,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000227,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000228,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000229,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000230,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000231,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000232,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000233,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000234,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000235,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000236,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000237,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000238,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000239,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000240,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000241,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000242,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000243,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000244,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000245,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000246,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000247,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000248,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000249,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000250,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000251,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000252,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000253,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000254,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000255,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000256,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000257,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000258,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500000259,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000260,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000261,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000262,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000263,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000264,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000265,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000266,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000267,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000268,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500000269,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000270,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000271,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000272,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000273,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000274,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500000275,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000276,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000277,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000278,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000279,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000280,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000281,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000282,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000283,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000284,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000285,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000286,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000287,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000288,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000289,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000290,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000291,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000292,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000293,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000294,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000295,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000296,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000297,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000298,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500000299,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000300,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000301,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000302,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000303,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000304,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000305,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500000306,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000307,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000308,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500000309,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500000310,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000311,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500000312,
+              "scores": [0, 0]
             }
           ]
         }
@@ -36820,6 +37340,6 @@
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
     }
   },
-  "fingerprint": "d7ae1994e7da569fcd8a83078e6689b0bc44def723b370f1c5d03d16bbbbdc09",
-  "observedUTC": "2026-11-04T19:43:10.670144+00:00"
+  "fingerprint": "98bcc3a4e509b5ad33f1016a516d3932113aeec0e64ba4078bf9beb60a5cde16",
+  "observedUTC": "2026-11-04T19:49:42.355957+00:00"
 }
