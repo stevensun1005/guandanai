@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "observedUTC": "2026-11-04T17:02:44.295737+00:00",
+  "observedUTC": "2026-11-04T20:59:43.542074+00:00",
   "classification": "Archived experimental artifacts, including rejected and smoke checkpoints; not proof of improvement",
   "archive": {
     "filename": "models-2026-11-04.zip",
@@ -2843,5 +2843,21 @@
     }
   ],
   "excludedWhileIncomplete": [],
-  "scope": "Weight files only. Raw training buffers and duplicate serialized rollout behavior checkpoints are not bundled."
+  "scope": "Weight files only. Raw training buffers and duplicate serialized rollout behavior checkpoints are not bundled.",
+  "localArchives": [
+    {
+      "id": "cpu-main-2026-11-04-step-20923",
+      "role": "retained paused development run; not deployed and not inherited by the current GPU run",
+      "path": "work/archives/cpu-main-2026-11-04-step-20923",
+      "manifest": "docs/evaluation/cpu-main-retention-2026-11-04.json",
+      "files": 415,
+      "bytes": 1266434569,
+      "checkpointSHA256": "e84f0ba24a5487b59a68ceffda69e19fdce7dc543992ab1070b95e2bc896c5a4",
+      "policySHA256": "18f2e377a8ea747b9d7c54d5ff35743ee8d8b2ec71e2619d57d41a9b93ed7dea",
+      "retainedShardRows": 2037717,
+      "allHistoricalRawRowsRetained": false,
+      "download": null,
+      "gradientUpdatesInRestoreChecks": 0
+    }
+  ]
 }
