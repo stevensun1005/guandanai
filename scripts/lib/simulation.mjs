@@ -3,6 +3,7 @@ import { candidates } from '../../src/ai/candidates.js';
 import { beats } from '../../src/core/combinations.js';
 import { decisionContext, policyState } from '../../src/ai/observation.js';
 import { selectProfileAction } from '../../src/ai/profiles.js';
+import { endgameRequest, solvePublicEndgame } from '../../src/ai/endgame.js';
 
 export function seededRandom(seed) {
   return () => {
@@ -106,6 +107,9 @@ export async function simulateRound(seed, styles, infer, onDecision = () => {}) 
     bombDelta: 0,
     cardDelta: 0,
     valueLoss: 0,
+    endgameCalls: 0,
+    endgameProofs: 0,
+    endgameMs: 0,
   };
   for (let turn = 0; turn < 1000; turn++) {
     const player = game.turn;
@@ -127,6 +131,19 @@ export async function simulateRound(seed, styles, infer, onDecision = () => {}) 
         decisionContext(game, player),
       );
       selected = selectProfileAction(plays, values, style, decisionContext(game, player));
+      if (style === 'endgame') {
+        state.endgame = endgameRequest(game, player, plays);
+        if (state.endgame) {
+          stats.endgameCalls++;
+          const started = performance.now();
+          const solved = solvePublicEndgame(state, values);
+          stats.endgameMs += performance.now() - started;
+          if (solved) {
+            selected = solved.index;
+            stats.endgameProofs++;
+          }
+        }
+      }
       if (style !== 'balanced') {
         stats.decisions++;
         if (selected !== baseline) stats.changed++;

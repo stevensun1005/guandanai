@@ -1,5 +1,6 @@
 import * as ort from './vendor/ort.wasm.min.mjs';
 import { encode, cardsArray } from './encoding.mjs';
+import { solvePublicEndgame } from './endgame.js';
 
 ort.env.wasm.numThreads = 1;
 ort.env.wasm.proxy = false;
@@ -19,7 +20,7 @@ async function decide(state) {
   const started = performance.now();
   let best = -Infinity,
     index = 0;
-  const scores = state.includeValues ? [] : null;
+  const scores = state.includeValues || state.endgame ? [] : null;
   const stateTensor = new ort.Tensor('float32', features, [1, 513]);
   try {
     for (let first = 0; first < state.actions.length; first += 128) {
@@ -47,12 +48,18 @@ async function decide(state) {
   } finally {
     stateTensor.dispose();
   }
+  const endgame = state.endgame ? solvePublicEndgame(state, scores) : null;
+  if (endgame) {
+    index = endgame.index;
+    best = scores[index];
+  }
   return {
     index,
     value: best,
     candidates: state.actions.length,
     elapsedMs: Math.round(performance.now() - started),
-    ...(scores ? { values: scores } : {}),
+    ...(state.includeValues ? { values: scores } : {}),
+    ...(endgame ? { endgame } : {}),
   };
 }
 let queue = Promise.resolve();

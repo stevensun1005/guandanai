@@ -45,7 +45,6 @@ await build({
   assetNames: 'images/[name]-[hash]',
 });
 const copies = {
-  'src/ai/worker.mjs': 'dist/assets/ai-worker.mjs',
   'src/ai/encoding.mjs': 'dist/assets/encoding.mjs',
   'ai/policy.onnx': 'dist/models/policy.onnx',
   'node_modules/peerjs/dist/peerjs.min.js': 'dist/assets/vendor/peerjs.min.js',
@@ -57,6 +56,16 @@ const copies = {
   'third_party/ONNXRUNTIME-LICENSE.txt': 'dist/assets/vendor/ONNXRUNTIME-LICENSE.txt',
   'node_modules/peerjs/LICENSE': 'dist/assets/vendor/PEERJS-LICENSE.txt',
 };
+await build({
+  entryPoints: [path.join(root, 'src/ai/worker.mjs')],
+  outfile: path.join(root, 'dist/assets/ai-worker.mjs'),
+  bundle: true,
+  format: 'esm',
+  target: 'es2022',
+  sourcemap: 'external',
+  charset: 'utf8',
+  external: ['./vendor/*'],
+});
 for (const [from, to] of Object.entries(copies))
   await copyFile(path.join(root, from), path.join(root, to));
 await writeFile(path.join(root, 'dist/.nojekyll'), '');

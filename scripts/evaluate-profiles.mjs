@@ -15,8 +15,14 @@ const pairs = Number(option('pairs', '100'));
 const seed = Number(option('seed', '20261104'));
 const styles = option('styles', 'aggressive,conservative,observant').split(',');
 const output = option('output', 'work/validation/profiles');
+const captureLimit = Number(option('capture-endgame', '0'));
+const captured = [];
 if (!Number.isInteger(pairs) || pairs < 1 || pairs > 100000) throw Error('Invalid pair count');
-if (styles.some((style) => !BOT_PROFILES.some((profile) => profile.id === style)))
+if (
+  styles.some(
+    (style) => style !== 'endgame' && !BOT_PROFILES.some((profile) => profile.id === style),
+  )
+)
   throw Error('Invalid style');
 await mkdir(output, { recursive: true });
 const python = spawn(option('python', 'python'), ['-u', 'scripts/eval_inference.py'], {
@@ -59,6 +65,9 @@ try {
       bombDelta: 0,
       cardDelta: 0,
       valueLoss: 0,
+      endgameCalls: 0,
+      endgameProofs: 0,
+      endgameMs: 0,
     };
     for (let pair = 0; pair < pairs; pair++) {
       const outcomes = [];
@@ -66,7 +75,18 @@ try {
         const profiles = Array.from({ length: 4 }, (_, seat) =>
           seat % 2 === side ? style : 'balanced',
         );
-        const result = await simulateRound(seed + pair, profiles, infer);
+        const result = await simulateRound(seed + pair, profiles, infer, (decision) => {
+          if (
+            captured.length < captureLimit &&
+            decision.style === 'endgame' &&
+            decision.selected !== decision.baseline
+          )
+            captured.push({
+              state: decision.state,
+              expectedIndex: decision.selected,
+              baselineIndex: decision.baseline,
+            });
+        });
         const signed = (result.winner === side ? 1 : -1) * result.points;
         outcomes.push({ winner: result.winner, points: signed, turns: result.turns });
         for (const key of Object.keys(totals)) totals[key] += result.stats[key];
@@ -101,10 +121,14 @@ try {
       ],
       totals,
       changeRate: totals.changed / Math.max(1, totals.decisions),
+      positivePairs: results.filter((result) => result.points > 0).length,
+      negativePairs: results.filter((result) => result.points < 0).length,
       results,
     };
     reports.push(report);
     await writeFile(`${output}/${style}.json`, JSON.stringify(report, null, 2));
+    if (captured.length)
+      await writeFile(`${output}/endgame-positions.json`, JSON.stringify(captured));
     console.log(JSON.stringify({ ...report, results: undefined }));
   }
   await writeFile(

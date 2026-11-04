@@ -3,6 +3,7 @@ import { beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 import { decisionContext, policyState } from './observation.js';
 import { selectProfileAction } from './profiles.js';
+import { endgameRequest } from './endgame.js';
 import { act, playEvt } from '../game/events.js';
 import { isHost } from '../game/session.js';
 import { showError } from '../input/controls.js';
@@ -100,13 +101,15 @@ export function initialize() {
       const style = runtime.botStyles?.[(p + runtime.network.off) % 4] || 'balanced';
       const input = state(p, plays);
       input.includeValues = style !== 'balanced';
+      input.endgame = endgameRequest(runtime.game, p, plays);
       const result = await request('decide', input);
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)
         throw new Error('invalid-action');
-      const index = input.includeValues
-        ? selectProfileAction(plays, result.values, style, decisionContext(runtime.game, p))
-        : result.index;
+      const index =
+        input.includeValues && !result.endgame?.winning
+          ? selectProfileAction(plays, result.values, style, decisionContext(runtime.game, p))
+          : result.index;
       const pl = plays[index];
       if (
         pl &&

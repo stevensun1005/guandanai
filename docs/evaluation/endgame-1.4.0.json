@@ -1,0 +1,38 @@
+{
+  "seed": 20263104,
+  "pairs": 2000,
+  "elapsedSeconds": 412.4182203,
+  "reports": [
+    {
+      "style": "endgame",
+      "pairs": 2000,
+      "rounds": 4000,
+      "wins": 2000,
+      "losses": 2000,
+      "winRate": 0.5,
+      "pairedPointsMean": 0.076,
+      "pairedPoints95CI": [
+        0.06438304101461872,
+        0.08761695898538127
+      ],
+      "totals": {
+        "decisions": 115954,
+        "changed": 335,
+        "passes": 89426,
+        "bombs": 11661,
+        "cards": 199987,
+        "actions": 162847,
+        "passDelta": -154,
+        "bombDelta": 5,
+        "cardDelta": 220,
+        "valueLoss": 142.3897075690329,
+        "endgameCalls": 3175,
+        "endgameProofs": 2294,
+        "endgameMs": 3001.0687999996235
+      },
+      "changeRate": 0.0028890767028304327,
+      "positivePairs": 152,
+      "negativePairs": 0
+    }
+  ]
+}

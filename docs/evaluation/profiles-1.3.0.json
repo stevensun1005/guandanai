@@ -1,0 +1,85 @@
+{
+  "seed": 20261104,
+  "pairs": 600,
+  "elapsedSeconds": 370.0816623,
+  "reports": [
+    {
+      "style": "aggressive",
+      "pairs": 600,
+      "rounds": 1200,
+      "wins": 612,
+      "losses": 588,
+      "winRate": 0.51,
+      "pairedPointsMean": 0.045,
+      "pairedPoints95CI": [
+        -0.10330883845448098,
+        0.193308838454481
+      ],
+      "totals": {
+        "decisions": 34110,
+        "changed": 947,
+        "passes": 26642,
+        "bombs": 3574,
+        "cards": 59825,
+        "actions": 48727,
+        "passDelta": -730,
+        "bombDelta": 508,
+        "cardDelta": 2807,
+        "valueLoss": 17.503312554210424
+      },
+      "changeRate": 0.02776311931984755
+    },
+    {
+      "style": "conservative",
+      "pairs": 600,
+      "rounds": 1200,
+      "wins": 601,
+      "losses": 599,
+      "winRate": 0.5008333333333334,
+      "pairedPointsMean": 0.05333333333333334,
+      "pairedPoints95CI": [
+        -0.08476872813009637,
+        0.19143539479676305
+      ],
+      "totals": {
+        "decisions": 35595,
+        "changed": 831,
+        "passes": 26918,
+        "bombs": 3462,
+        "cards": 59831,
+        "actions": 48921,
+        "passDelta": 626,
+        "bombDelta": -399,
+        "cardDelta": -1914,
+        "valueLoss": 11.517155203968287
+      },
+      "changeRate": 0.02334597555836494
+    },
+    {
+      "style": "observant",
+      "pairs": 600,
+      "rounds": 1200,
+      "wins": 603,
+      "losses": 597,
+      "winRate": 0.5025,
+      "pairedPointsMean": 0.025,
+      "pairedPoints95CI": [
+        -0.06203125977529345,
+        0.11203125977529346
+      ],
+      "totals": {
+        "decisions": 35153,
+        "changed": 327,
+        "passes": 26962,
+        "bombs": 3520,
+        "cards": 59788,
+        "actions": 48997,
+        "passDelta": 89,
+        "bombDelta": 37,
+        "cardDelta": 84,
+        "valueLoss": 3.998892731964588
+      },
+      "changeRate": 0.00930219326942224
+    }
+  ]
+}
