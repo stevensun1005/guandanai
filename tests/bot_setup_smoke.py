@@ -20,11 +20,25 @@ with sync_playwright() as p:
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(URL, wait_until="networkidle")
         assert page.evaluate("typeof G") == "undefined"
+        assert page.locator('.mode-btn[aria-pressed="true"]').get_attribute("data-mode") == "solo"
+        assert page.locator("#lobbyStatus").get_attribute("role") == "status"
+        for value in ["0", "1"]:
+            page.locator(f'.rule-btn[data-rule="trib"][data-val="{value}"]').click()
+            assert (
+                page.locator('.rule-btn[data-rule="trib"][aria-pressed="true"]').get_attribute(
+                    "data-val"
+                )
+                == value
+            )
         page.locator("#nick").fill("牌友")
         page.locator("#botStyleBox summary").click()
         directions = ["S", "E", "N", "W"]
         for index, direction in enumerate(directions):
             page.locator(f'[data-seat="{direction}"]').click()
+            assert (
+                page.locator('.seat-btn[aria-pressed="true"]').get_attribute("data-seat")
+                == direction
+            )
             page.locator("#mixedBotsBtn").click()
             expected = {
                 directions[(index + step) % 4]: style
@@ -39,6 +53,7 @@ with sync_playwright() as p:
         assert not page.evaluate("document.documentElement.scrollWidth>innerWidth")
         page.screenshot(path=str(OUT / f"lobby-{width}.png"), full_page=True)
         page.reload(wait_until="networkidle")
+        assert page.locator('.seat-btn[aria-pressed="true"]').count() == 0
         for seat, style in expected.items():
             assert page.locator(f'[data-bot-seat="{seat}"]').input_value() == style
         assert not errors, errors
