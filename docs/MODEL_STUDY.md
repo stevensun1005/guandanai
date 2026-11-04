@@ -297,7 +297,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 
 ## 11. 自动同步的完整比赛进展
 
-证据快照更新时间：2026-11-04T16:37:56.837184+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
+证据快照更新时间：2026-11-04T16:39:03.042179+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
 
 **以下全部为开发集，不是独立验收。** 模型挑选反复使用这些种子，不能据此认定已经达到 80% 或有泛化提升。
 
@@ -306,7 +306,7 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout --pu
 | `ppo-rule`      |  16 / 16 |               2048 |   656735 |     107450 | `complete`                 |
 | `ppo-mixed`     |  16 / 16 |               2048 |   832216 |     141259 | `complete`                 |
 | `full-rejected` |   3 / 16 |                576 |   245715 |      56398 | `stopped_arena_regression` |
-| `full-guarded`  |  12 / 16 |               2304 |   982112 |     186250 | `running`                  |
+| `full-guarded`  |  13 / 16 |               2496 |  1065404 |     201705 | `running`                  |
 
 ### 11.1 全部已完成的开发评测
 

@@ -13175,11 +13175,72 @@
             "w5": 0,
             "b5": 0
           }
+        },
+        {
+          "cycle": 13,
+          "stage": "full",
+          "matchesUsed": 192,
+          "rounds": 2089,
+          "decisions": 83292,
+          "afterFirstOutDecisions": 15455,
+          "trainingReportSHA256": "0a04953a5ff078a157a0d0afa4e9d7a8dcfdd46f0c6bf61a66828a936a9a35d7",
+          "trainingSelection": null,
+          "evaluations": {},
+          "checkpointSHA256": "31ef2a0e177b3e19ac023612ac1fc83d3e431edc2f3fcd2375dd4c1cfe744fa0",
+          "trainableParameters": 1373185,
+          "hyperparameters": {
+            "anchor_weight": 50.0,
+            "stage": "full",
+            "epochs": 2,
+            "batch": 256,
+            "learning_rate": 1e-6,
+            "extra_learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 76001
+          },
+          "collectionSeeds": [
+            {
+              "start": 37202408,
+              "matches": 64
+            },
+            {
+              "start": 37202472,
+              "matches": 64
+            },
+            {
+              "start": 37202536,
+              "matches": 64
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "196a5dd41d83de4972b7e6fa94cb3f2f5c35b530bfd94fd95977777377852f79"
+          },
+          "parameterChanges": {
+            "w0": 318949,
+            "b0": 512,
+            "w1": 262133,
+            "b1": 512,
+            "w2": 262136,
+            "b2": 512,
+            "w3": 262125,
+            "b3": 512,
+            "w4": 262140,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 16
     }
   },
-  "fingerprint": "4420c771969d21be2ecc82fa35c03b451c1270afa972bbfa180e2c5f4829c3c4",
-  "observedUTC": "2026-11-04T16:37:56.837184+00:00"
+  "fingerprint": "6ff42f628a867f69a765f6b08d338eb45014d9095ddcad76ebc73e99a0052aa6",
+  "observedUTC": "2026-11-04T16:39:03.042179+00:00"
 }
