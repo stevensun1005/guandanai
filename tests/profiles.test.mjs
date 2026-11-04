@@ -30,7 +30,10 @@ test('balanced preserves the learned argmax and unsupported profile names are no
 test('aggressive contests a close decision while conservative preserves its bomb', () => {
   const plays = [null, bomb],
     values = [0.51, 0.5];
-  assert.equal(selectProfileAction(plays, values, 'aggressive', context), 1);
+  assert.equal(
+    selectProfileAction(plays, values, 'aggressive', { ...context, counts: [20, 2, 20, 20] }),
+    1,
+  );
   assert.equal(selectProfileAction(plays, values, 'conservative', context), 0);
   assert.equal(selectProfileAction(plays, [0.8, 0.5], 'aggressive', context), 0);
 });
@@ -91,4 +94,32 @@ test('blended preferences respond to public urgency, partner lead and accumulate
     assert(Math.abs(Object.values(weights).reduce((sum, weight) => sum + weight, 0) - 1) < 1e-12);
   }
   assert.equal(selectProfileAction([single, bomb], [0.8, 0.6], 'adaptive', context), 0);
+});
+
+test('personality cannot promote a close early bomb, but preserves model bombs and urgent defense', () => {
+  const early = {
+    ...context,
+    counts: [27, 22, 27, 27],
+    hand: deck.slice(0, 27),
+    trick: { player: 1, play: { type: 'full', value: 13, n: 5 } },
+  };
+  for (const style of ['aggressive']) {
+    assert.equal(selectProfileAction([null, bomb], [0.51, 0.5], style, early), 0);
+    assert.equal(selectProfileAction([single, bomb], [0.51, 0.5], style, early), 0);
+  }
+  assert.equal(selectProfileAction([null, bomb], [0.5, 0.54], 'aggressive', early), 1);
+  assert.equal(
+    selectProfileAction([null, bomb], [0.51, 0.5], 'aggressive', {
+      ...early,
+      counts: [27, 3, 27, 27],
+    }),
+    1,
+  );
+  assert.equal(
+    selectProfileAction([null, bomb], [0.51, 0.5], 'aggressive', {
+      ...early,
+      hand: deck.slice(0, 8),
+    }),
+    1,
+  );
 });
