@@ -110,3 +110,17 @@ python scripts/train_ppo.py work/learning/full-match-example/data --output=work/
 目前整场 Actor 仍使用神经网络提案的前四个候选，训练没有覆盖所有合法动作；模型能力不能理解为已掌握玩家提出的全部战术。新检查点包含额外的公开整场信息，禁止使用旧的单把导出器直接发布。
 
 旧的额外 48,000 把单把训练已停止，已有数据与参数保留。新的持续训练计划为 16 次更新，每次 128 场完整比赛，记录在 `work/learning/full-match-training/run.json`。其中只有已标记完成的部分属于实际训练量。
+
+## 四席自对弈与历史版本对抗
+
+新增 `--opponent=self`：四个席位都由同一份冻结的当前模型按各自信息出牌，各队按最终整场结果获得学习标签。一个模型不能看到其他席位的私牌。
+
+`--opponent=mixed --opponent-model=历史检查点` 按三种对手轮换：当前模型自身、冻结的历史版本、原规则机器人。对历史模型的决策不写入当前模型的学习缓冲区；对规则对手的独立评测也不会用于梯度更新。指标记录双上／双下、孤立头游及头游后决策数量，这些只是分析统计，没有变成打法禁令或手工奖励。
+
+6 场流程检查覆盖三种对手各 2 场，共 69 把、2,566 条决策。已逐条核对整场胜负标签：自对弈中四席均有样本；历史／规则对抗仅当前模型一队的两席有样本，随后完成两轮参数更新。这不属于胜率提升报告。
+
+```bash
+python scripts/run-policy-training.py --output=work/learning/match-selfplay-example --proposal=work/learning/policy-cycle1/model/policy-0.25.onnx --actor=work/learning/full-match-training/cycle-04/model/ppo.npz --objective=full-match --opponent=mixed --opponent-model=work/learning/full-match-training/cycle-02/model/ppo.npz --cycles=16 --games=128 --seed=34100104 --eval-every=2 --eval-pairs=64 --eval-seed=35110104
+```
+
+当前实际运行记录为 `work/learning/match-selfplay-training/run.json`。计划 16 次更新，每次 128 场；每两次更新后在另一组固定牌局中对原规则机器人评测。计划量 2,048 场不等于已完成量。

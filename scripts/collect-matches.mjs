@@ -1,11 +1,9 @@
 import { mkdirSync, writeFileSync, appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { candidates } from '../src/ai/candidates.js';
-import { policyState, decisionContext } from '../src/ai/observation.js';
-import { advanceRound } from './lib/simulation.mjs';
-import { createMatchRound, advanceMatch } from './lib/match-simulation.mjs';
-import { createRuleBaseline } from './lib/rule-baseline.mjs';
+import { playMatch } from './lib/match-rollout.mjs';
 import { createPolicyInference } from './lib/policy-inference.mjs';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const option = (name, fallback) =>
   process.argv.find((x) => x.startsWith(`--${name}=`))?.slice(name.length + 3) || fallback;
@@ -17,88 +15,98 @@ const model = resolve(option('model', 'work/learning/ppo-k4-extended/cycle-12/mo
 if (!Number.isInteger(games) || games < 1 || !Number.isInteger(seed))
   throw Error('Invalid match collection plan');
 mkdirSync(output, { recursive: true });
+const opponent = option('opponent', 'rule');
+const snapshot = option('opponent-model', '');
+if (!['rule', 'self', 'mixed'].includes(opponent)) throw Error('Invalid opponent mode');
+const hash = (path) => createHash('sha256').update(readFileSync(path)).digest('hex');
 const manifest = {
   status: 'collecting',
   games,
   completedGames: 0,
   seed,
   objective: 'Whole match from 2 through A; team victory, draw and defeat',
+  evaluate,
+  opponent,
+  opponentModel: snapshot || null,
+  opponentSHA256: snapshot ? hash(snapshot) : null,
   aFail: 'draw',
   tribute: true,
   rounds: 0,
   decisions: 0,
   afterFirstOutDecisions: 0,
+  finishingChoices: 0,
   wins: 0,
   draws: 0,
+  selfMatches: 0,
+  snapshotMatches: 0,
+  ruleMatches: 0,
+  doubleWins: 0,
+  doubleLosses: 0,
+  isolatedFirsts: 0,
+  sourceSHA256: Object.fromEntries(
+    ['scripts/collect-matches.mjs', 'scripts/lib/match-rollout.mjs'].map((p) => [p, hash(p)]),
+  ),
 };
 const save = () => writeFileSync(`${output}/rollout.json`, JSON.stringify(manifest, null, 2));
 const engine = createPolicyInference({ script: resolve('scripts/match_learning.py') });
+const past = snapshot
+  ? createPolicyInference({
+      script: resolve('scripts/match_learning.py'),
+      env: { PPO_ACTOR: undefined, GUANDAN_POLICY_MODEL: resolve(snapshot) },
+    })
+  : null;
 try {
-  await engine.request({ op: 'init', model, output, seed, options: { games, opponent: 'rule' } });
+  await engine.request({
+    op: 'init',
+    model,
+    output,
+    seed,
+    options: {
+      games,
+      opponent,
+      opponentSHA256: manifest.opponentSHA256,
+      sourceSHA256: manifest.sourceSHA256,
+    },
+  });
   for (let episode = 0; episode < games; episode++) {
-    const team = episode % 2;
-    let match = { levels: [2, 2], lvlTeam: 0, aFails: [0, 0], round: 1, previousOrder: null };
-    const history = [];
-    for (let r = 0; r < 200; r++) {
-      const matchSeed = seed + (evaluate ? Math.floor(episode / 2) : episode);
-      const roundSeed = (Math.imul(matchSeed, 1009) + r) >>> 0;
-      const game = createMatchRound(roundSeed, match),
-        rule = createRuleBaseline(roundSeed ^ 0x6a09e667);
-      let result = null;
-      for (let turn = 0; turn < 1000; turn++) {
-        const p = game.turn;
-        let play;
-        if (p % 2 !== team) play = rule(game, p);
-        else {
-          const plays = candidates(game.hands[p], game.L, game.trick?.play);
-          let index = 0;
-          if (plays.length > 1) {
-            const state = policyState(game, p, 0, plays);
-            state.context = decisionContext(game, p);
-            state.trick = state.context.trick;
-            state.actionShapes = plays.map((x) => x && { type: x.type, value: x.value, n: x.n });
-            state.match = match;
-            if (evaluate) {
-              const values = await engine.infer(state);
-              index = values.reduce((best, v, i) => (v > values[best] ? i : best), 0);
-            } else {
-              const answer = await engine.request({ op: 'decide', episode, seat: p, state });
-              index = answer.index;
-            }
-            if (!Number.isInteger(index) || index < 0 || index >= plays.length)
-              throw Error('Invalid learned action');
-            manifest.decisions++;
-            if (game.out.length) manifest.afterFirstOutDecisions++;
-          }
-          play = plays[index];
-        }
-        result = advanceRound(game, play);
-        if (result) break;
-      }
-      if (!result) throw Error('Round failed to terminate');
-      const next = advanceMatch(match, game, result, 'draw');
-      history.push({ round: match.round, level: game.L, ...next.result });
-      manifest.rounds++;
-      match = next;
-      if (next.result.win || next.result.draw) {
-        const winner = next.result.draw ? null : next.result.team;
-        await engine.request({ op: 'finish', episode, winner, points: 0 });
-        appendFileSync(
-          `${output}/matches.jsonl`,
-          JSON.stringify({ episode, seed: seed + episode, neuralTeam: team, winner, history }) +
-            '\n',
-        );
-        if (winner === null) manifest.draws++;
-        else if (winner === team) manifest.wins++;
-        break;
-      }
-      if (r === 199) throw Error('Match truncated: no terminal training label assigned');
-    }
+    const mode = evaluate
+      ? 'rule'
+      : opponent === 'mixed'
+        ? ['self', snapshot ? 'snapshot' : 'self', 'rule'][episode % 3]
+        : opponent;
+    const matchSeed = seed + (evaluate ? Math.floor(episode / 2) : episode);
+    const result = await playMatch({
+      seed: matchSeed,
+      team: episode % 2,
+      mode,
+      evaluate,
+      decide: (state) => engine.request({ op: 'decide', episode, seat: state.p, state }),
+      infer: engine.infer,
+      snapshotInfer: past?.infer,
+    });
+    await engine.request({ op: 'finish', episode, winner: result.winner, points: 0 });
+    appendFileSync(`${output}/matches.jsonl`, JSON.stringify({ episode, ...result }) + '\n');
+    for (const key of [
+      'rounds',
+      'decisions',
+      'afterFirstOutDecisions',
+      'finishingChoices',
+      'doubleWins',
+      'doubleLosses',
+      'isolatedFirsts',
+    ])
+      manifest[key] += result.stats[key];
+    manifest[
+      mode === 'self' ? 'selfMatches' : mode === 'snapshot' ? 'snapshotMatches' : 'ruleMatches'
+    ]++;
+    if (result.winner === null) manifest.draws++;
+    else if (result.winner === episode % 2) manifest.wins++;
     manifest.completedGames++;
     save();
     console.log(
       JSON.stringify({
         matches: manifest.completedGames,
+        mode,
         rounds: manifest.rounds,
         decisions: manifest.decisions,
         afterFirstOut: manifest.afterFirstOutDecisions,
@@ -114,4 +122,5 @@ try {
   throw error;
 } finally {
   engine.close();
+  past?.close();
 }

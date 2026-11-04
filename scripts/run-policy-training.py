@@ -22,6 +22,7 @@ def main():
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--k", type=int, choices=[2, 4], default=2)
     parser.add_argument("--temperature", type=float, default=0.15)
+    parser.add_argument("--opponent-model")
     parser.add_argument("--opponent", choices=["rule", "mixed", "self"], default="rule")
     parser.add_argument("--eval-every", type=int, default=2)
     parser.add_argument("--eval-pairs", type=int, default=300)
@@ -83,6 +84,7 @@ def main():
                     "node",
                     "scripts/collect-matches.mjs",
                     f"--matches={args.games}",
+                    f"--opponent={args.opponent}",
                     f"--seed={entry['seed']}",
                     f"--model={proposal}",
                     f"--output={directory / 'data'}",
@@ -99,6 +101,8 @@ def main():
                     f"--model={proposal}",
                     f"--output={directory / 'data'}",
                 ]
+            if args.objective == "full-match" and args.opponent_model:
+                collect.append(f"--opponent-model={Path(args.opponent_model).resolve()}")
             run(collect, directory / "collection.log", env)
             entry["status"] = "updating"
             save()
