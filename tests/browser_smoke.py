@@ -50,7 +50,7 @@ def main():
             status=host.locator('#lobbyStatus').inner_text()
             raise AssertionError('PeerJS room creation failed: '+status)
         code=host.locator('#roomCodeShow').inner_text()
-        host.evaluate("aiDecide=()=>{throw Error('Unexpected classic decision')}")
+        host.evaluate("() => {aiDecide=()=>{throw Error('Unexpected classic decision')}}")
         host.locator('[data-seat="S"]').click()
         host.locator('#shareRoomBtn').click()
         invite=host.evaluate('navigator.clipboard.readText()')
