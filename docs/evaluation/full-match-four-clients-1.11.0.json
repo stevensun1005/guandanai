@@ -1,0 +1,134 @@
+{
+  "clients": 4,
+  "completedMatch": true,
+  "acceleratedTurnTimeouts": true,
+  "policyDecisions": 672,
+  "automaticStateResyncs": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "pageVersion": "fe1e70512d",
+  "bots": 0,
+  "botStyles": [],
+  "hostDirection": "W",
+  "rounds": [
+    {
+      "round": 1,
+      "moves": 69,
+      "levels": [
+        2,
+        5
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 2,
+      "moves": 93,
+      "levels": [
+        4,
+        5
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 3,
+      "moves": 79,
+      "levels": [
+        4,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 4,
+      "moves": 94,
+      "levels": [
+        7,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 5,
+      "moves": 78,
+      "levels": [
+        10,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 6,
+      "moves": 88,
+      "levels": [
+        13,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 7,
+      "moves": 75,
+      "levels": [
+        14,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 8,
+      "moves": 85,
+      "levels": [
+        14,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 9,
+      "moves": 80,
+      "levels": [
+        14,
+        10
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 10,
+      "moves": 76,
+      "levels": [
+        14,
+        13
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 11,
+      "moves": 73,
+      "levels": [
+        14,
+        13
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 12,
+      "moves": 63,
+      "levels": [
+        14,
+        14
+      ],
+      "allClientsEqual": true
+    }
+  ],
+  "cardConservation": true,
+  "realGuestActions": true,
+  "hostTimeoutUsedLearnedPolicy": true,
+  "guestsAvoidModelDownload": true,
+  "rejoins": [],
+  "auxiliaryModelLoaded": false,
+  "pageErrors": [],
+  "elapsedSeconds": 717.5130757000006
+}

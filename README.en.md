@@ -71,6 +71,8 @@ npm run build
 
 Python is a developer tool for model export, training and browser validation. Players and the static build do not need it. Tested Python dependencies are recorded in `requirements-dev.txt` and `requirements-models.txt`.
 
+Validation includes three viewport sizes, numerical checks for both models, recovery races and three complete automated matches: **37 rounds and 2,957 actions** across two- and four-client sessions. See the [validation scope and reports](docs/TESTING.md).
+
 ## A project with clear boundaries
 
 ```text
