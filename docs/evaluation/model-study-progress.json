@@ -34418,7 +34418,7 @@
   "continuousRuns": {
     "main": {
       "role": "development training and monitoring; not held-out acceptance",
-      "status": "running",
+      "status": "stopped",
       "config": {
         "schema": 1,
         "initial": "ai/policy.onnx",
@@ -34499,36 +34499,36 @@
         "sourceHashConvention": "UTF-8 text with CRLF normalized to LF"
       },
       "startedAt": "2026-11-04T19:24:41.516Z",
-      "updatedAt": "2026-11-04T19:49:41.963Z",
-      "stoppedAt": null,
-      "stopReason": null,
-      "elapsedSeconds": 1500.447,
+      "updatedAt": "2026-11-04T20:37:12.171Z",
+      "stoppedAt": "2026-11-04T20:37:12.171Z",
+      "stopReason": "operator-stop",
+      "elapsedSeconds": 4350.652,
       "totals": {
-        "matches": 7667,
-        "decisions": 3739349,
-        "rows": 3739349
+        "matches": 22411,
+        "decisions": 10808111,
+        "rows": 10808111
       },
       "learner": {
         "pid": 51572,
-        "state": "training",
-        "step": 7131,
-        "version": "v000005759",
+        "state": "stopped",
+        "step": 20923,
+        "version": "v000020923",
         "buffer": 2000000,
-        "ingestedRows": 3683698,
-        "trainedRows": 14604288,
-        "lossEMA": 3.3551519350248413,
-        "replayRatio": 3.964572557250893,
-        "stepsPerSecond": 4.783697042326092,
-        "updatedAt": "2026-11-04T19:49:35Z"
+        "ingestedRows": 10737903,
+        "trainedRows": 42850304,
+        "lossEMA": 3.31110188147368,
+        "replayRatio": 3.990565383203778,
+        "stepsPerSecond": 4.814856935573063,
+        "updatedAt": "2026-11-04T20:37:10Z"
       },
       "latest": {
-        "version": "v000005759",
-        "file": "v000005759.onnx",
-        "sha256": "6956225d22355292908530eb1a0a69ad30cca7e529b6ff1300d385f388ec77d6",
-        "step": 5759,
-        "trainedRows": 11794432,
-        "ingestedRows": 2984047,
-        "publishedAt": "2026-11-04T19:44:49Z"
+        "version": "v000020923",
+        "file": "v000020923.onnx",
+        "sha256": "18f2e377a8ea747b9d7c54d5ff35743ee8d8b2ec71e2619d57d41a9b93ed7dea",
+        "step": 20923,
+        "trainedRows": 42850304,
+        "ingestedRows": 10737903,
+        "publishedAt": "2026-11-04T20:37:10Z"
       },
       "champion": {
         "version": "v000000000",
@@ -34569,8 +34569,8 @@
         "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
         "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
       },
-      "statusSHA256": "81ab02b5a12298d72e9f83864ca09fc08ec1d7b96d9cd63465871a9ddba0459c",
-      "eventsSHA256": "2500e1721bce0d653d0a2abffdead00713f0da831f719528c3007355fdb2d1a3",
+      "statusSHA256": "04f06b31fe7f97f1cefb3c237c3f71f51f1f1914e12a71f9463a6d66d9f46b43",
+      "eventsSHA256": "3e794e352b71b716aa78f2134001f8186a1aa58764d02dea07f3afce8f0c9af4",
       "gates": [
         {
           "role": "development monitoring; not held-out acceptance",
@@ -35892,6 +35892,257 @@
             {
               "seed": 3500000312,
               "scores": [0, 0]
+            }
+          ]
+        },
+        {
+          "role": "development monitoring; not held-out acceptance",
+          "kind": "gate",
+          "status": "stopped",
+          "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+          "rules": {
+            "tribute": true,
+            "aFail": "draw",
+            "from": 2,
+            "through": "A"
+          },
+          "metric": "Team match score: win 1, draw 0.5, loss 0",
+          "challenger": {
+            "version": "v000017620",
+            "file": "D:\\vibecoding\\guandan\\work\\continuous\\main\\league\\v000017620.onnx",
+            "sha256": "30dc5730b436e286c46dcf16284ffb1fbefc2d61f33ddc0c08a7eaa01038f321"
+          },
+          "champion": {
+            "version": "v000000000",
+            "file": "D:\\vibecoding\\guandan\\work\\continuous\\main\\gate\\champion-1.onnx",
+            "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+          },
+          "pairs": 45,
+          "matches": 90,
+          "wins": 55,
+          "losses": 25,
+          "draws": 10,
+          "seedRange": [3500100000, 3500100044],
+          "meanScore": 0.6666666666666666,
+          "clusterHoeffding95CI": [0.4642128460305649, 0.8691204873027684],
+          "llr": 2.485241379310347,
+          "decision": null,
+          "settings": {
+            "alpha": 0.05,
+            "beta": 0.05,
+            "mu0": 0.5,
+            "mu1": 0.53,
+            "minPairs": 100,
+            "maxPairs": 1000
+          },
+          "sourceSHA256": {
+            "scripts/continuous/supervisor.mjs": "632905b49396228856d6e554fa7adb8a5e89bea35425881fe992dfa16f77a67e",
+            "scripts/continuous/actor.mjs": "b72b53bf04f47b25c01c4b8779ce5e3f4a2df1cff2395b280a554c7e89c5366f",
+            "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+            "scripts/continuous/lib.mjs": "4981cc9115f2cf77089f8823bf9283498b300e724778ad7f7d37a698b20a3ad4",
+            "scripts/continuous/learner.py": "4a6c7d1e853043d404af6fbd21dd2097ac2d8df86b37bf10574390614cb8c00b",
+            "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+            "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+            "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+            "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+            "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+          },
+          "recordsSHA256": "1368b4afb4b7e1700da1699c659331af97e72738ecf3749db9c2cfa323418426",
+          "recordsFile": "gate/gate-00001.json",
+          "seedResults": [
+            {
+              "seed": 3500100000,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100001,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100002,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100003,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100004,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100005,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100006,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100007,
+              "scores": [0.5, 0]
+            },
+            {
+              "seed": 3500100008,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500100009,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100010,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100011,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100012,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100013,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500100014,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500100015,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100016,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100017,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100018,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100019,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500100020,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100021,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500100022,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100023,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100024,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100025,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100026,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100027,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100028,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100029,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100030,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500100031,
+              "scores": [1, 0.5]
+            },
+            {
+              "seed": 3500100032,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100033,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100034,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100035,
+              "scores": [0, 0.5]
+            },
+            {
+              "seed": 3500100036,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100037,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100038,
+              "scores": [1, 0]
+            },
+            {
+              "seed": 3500100039,
+              "scores": [1, 1]
+            },
+            {
+              "seed": 3500100040,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100041,
+              "scores": [0.5, 1]
+            },
+            {
+              "seed": 3500100042,
+              "scores": [0, 0]
+            },
+            {
+              "seed": 3500100043,
+              "scores": [0, 1]
+            },
+            {
+              "seed": 3500100044,
+              "scores": [0.5, 1]
             }
           ]
         }
@@ -37340,6 +37591,6 @@
       "rawEvidence": "Per-seed records remain under the ignored run directory; hashes above identify their exact contents"
     }
   },
-  "fingerprint": "98bcc3a4e509b5ad33f1016a516d3932113aeec0e64ba4078bf9beb60a5cde16",
-  "observedUTC": "2026-11-04T19:49:42.355957+00:00"
+  "fingerprint": "f52a8b388e3d373430e235167db8f9e1e0c6718fc104198ee0a10e509240be68",
+  "observedUTC": "2026-11-04T20:38:11.331910+00:00"
 }
