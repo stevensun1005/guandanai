@@ -54,6 +54,8 @@ test('response estimates preserve the original play/pass decision and the learne
   assert.equal(selectProfileAction(plays, [0.5, 0.49, 0.6], 'observant', biased), 2);
   assert.equal(selectProfileAction(plays, [0.8, 0.49, 0.4], 'observant', biased), 0);
   assert.equal(selectProfileAction(plays, [0.5, 0.49, 0.4], 'balanced', biased), 0);
+  assert.equal(selectProfileAction(plays, [0.5, 0.49, 0.6], 'adaptive', biased), 2);
+  assert.equal(selectProfileAction(plays, [0.8, 0.49, 0.4], 'adaptive', biased), 0);
 });
 
 test('response inference disposes tensors even when the model returns invalid probabilities', async () => {

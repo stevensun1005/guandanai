@@ -27,11 +27,43 @@ export const BOT_PROFILES = Object.freeze([
     summary: '读牌应对',
     description: '结合公开出牌与过牌倾向调整选择',
   },
+  {
+    id: 'adaptive',
+    name: '融合',
+    summary: '随局而变',
+    description: '融合争先、留牌与公开观察，随局势调整偏好',
+  },
 ]);
 export const profileId = (value) =>
   BOT_PROFILES.some((profile) => profile.id === value) ? value : 'balanced';
 
-function preference(play, style, context, observed, responseRisk = null) {
+export const usesResponseModel = (style) => style === 'observant' || style === 'adaptive';
+
+/** Public urgency, finishing distance and evidence determine the blended preferences. */
+export function adaptiveWeights(context) {
+  const opponents = [(context.p + 1) % 4, (context.p + 3) % 4]
+    .map((seat) => context.counts[seat])
+    .filter((count) => count > 0);
+  const pressure = opponents.length ? Math.max(0, 1 - Math.min(...opponents) / 8) : 0;
+  const closing = Math.max(0, 1 - context.hand.length / 12);
+  const partnerLeading = context.trick?.player === (context.p + 2) % 4;
+  const evidence = Math.min(12, context.log.filter((entry) => !entry.lead).length) / 12;
+  const raw = {
+    aggressive: 0.6 + 1.8 * pressure + 0.8 * closing,
+    conservative: 1.4 - 0.9 * pressure + (partnerLeading ? 0.7 : 0),
+    observant: 1.3 + 0.8 * evidence,
+  };
+  const total = Object.values(raw).reduce((sum, value) => sum + value, 0);
+  return Object.fromEntries(Object.entries(raw).map(([style, value]) => [style, value / total]));
+}
+
+function preference(play, style, context, observed, responseRisk = null, blend = null) {
+  if (style === 'adaptive')
+    return Object.entries(blend).reduce(
+      (score, [part, weight]) =>
+        score + weight * preference(play, part, context, observed, responseRisk),
+      0,
+    );
   const { p, hand, counts, level, trick } = context;
   const mate = (p + 2) % 4;
   const opponents = [(p + 1) % 4, (p + 3) % 4].filter((seat) => counts[seat] > 0);
@@ -83,26 +115,28 @@ export function selectProfileAction(plays, values, requestedStyle, context) {
     if (values[index] > values[best]) best = index;
   const style = profileId(requestedStyle);
   if (style === 'balanced') return best;
-  const observed = style === 'observant' ? observeResponses(context.log) : null;
+  const observed = usesResponseModel(style) ? observeResponses(context.log) : null;
+  const blend = style === 'adaptive' ? adaptiveWeights(context) : null;
   const floor = values[best] - 0.055;
   let chosen = best,
     score = -Infinity;
   for (let index = 0; index < plays.length; index++) {
     if (values[index] < floor) continue;
-    const candidate = values[index] + preference(plays[index], style, context, observed);
+    const candidate =
+      values[index] + preference(plays[index], style, context, observed, null, blend);
     if (candidate > score) {
       score = candidate;
       chosen = index;
     }
   }
   // A conditional response prediction cannot tell us whether passing is better.
-  if (style === 'observant' && plays[chosen] && context.responseRisks) {
+  if (usesResponseModel(style) && plays[chosen] && context.responseRisks) {
     score = -Infinity;
     for (let index = 0; index < plays.length; index++) {
       if (!plays[index] || values[index] < floor) continue;
       const candidate =
         values[index] +
-        preference(plays[index], style, context, observed, context.responseRisks[index]);
+        preference(plays[index], style, context, observed, context.responseRisks[index], blend);
       if (candidate > score) {
         score = candidate;
         chosen = index;

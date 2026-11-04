@@ -2,7 +2,7 @@ import * as ort from './vendor/ort.wasm.min.mjs';
 import { encode, cardsArray } from './encoding.mjs';
 import { solvePublicEndgame } from './endgame.js';
 import { MODELS } from './models.mjs';
-import { profileId, selectProfileAction } from './profiles.js';
+import { profileId, selectProfileAction, usesResponseModel } from './profiles.js';
 import { responseCandidates, predictResponses } from './response.mjs';
 
 ort.env.wasm.numThreads = 1;
@@ -71,7 +71,7 @@ async function decide(state) {
   else if (style !== 'balanced') {
     const plays = shapedPlays(state);
     index = selectProfileAction(plays, scores, style, state.context);
-    if (style === 'observant') {
+    if (usesResponseModel(style)) {
       const options = responseCandidates(plays, scores, state.context, index);
       if (options) {
         responseRisks = await predictResponses(

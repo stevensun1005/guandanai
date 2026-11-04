@@ -29,6 +29,29 @@
     <link rel="stylesheet" href="./assets/app.css?v=__APP_VERSION__" />
   </head>
   <body>
+    <dialog id="publicHistory" class="public-history" aria-labelledby="publicHistoryTitle">
+      <header>
+        <h2 id="publicHistoryTitle">本局牌谱</h2>
+        <button class="link" id="publicHistoryClose" autofocus>返回牌桌</button>
+      </header>
+      <p id="publicHistorySummary"></p>
+      <div class="public-history-tools">
+        <label
+          >查看
+          <select id="publicHistoryFilter">
+            <option value="all">全部玩家</option>
+            <option value="0">你</option>
+            <option value="1">下家</option>
+            <option value="2">对家</option>
+            <option value="3">上家</option>
+          </select></label
+        >
+        <button class="link" id="publicHistoryCopy">复制牌谱</button
+        ><button class="link" id="publicHistorySave">下载牌谱</button>
+      </div>
+      <ol id="publicHistoryList" aria-label="公开出牌记录"></ol>
+      <small id="publicHistoryNotice" role="status">查看期间对局计时继续。</small>
+    </dialog>
     <div id="app">
       <header class="bar">
         <span class="brand">掼蛋</span>
@@ -45,6 +68,7 @@
           ><span class="optwrap"
             ><button class="link" id="optBtn" aria-expanded="false">选项</button
             ><span class="optmenu" id="optMenu" hidden
+              ><button class="link" id="historyBtn">本局牌谱</button
               ><button class="link tog" id="sfxBtn" aria-pressed="true">音效</button
               ><button class="link" id="cardBackBtn" title="点一下换牌背：大雁、枫叶、花纹">
                 牌背：<span id="backName">大雁</span></button
@@ -59,7 +83,7 @@
                 class="link tog"
                 id="miniBtn"
                 aria-pressed="false"
-                title="已出的牌像测试版那样，按出牌顺序排在桌面中间的一个框里（只有电脑和 iPad）"
+                title="已出的牌按出牌顺序排列在桌面中间（适合电脑和平板）"
               >
                 极简出牌区</button
               ><button

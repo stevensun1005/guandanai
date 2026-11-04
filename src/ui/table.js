@@ -16,6 +16,7 @@ import { practiceGrouped } from '../replay/session.js';
 import { $, displayOrder } from './cards.js';
 import { renderClocks } from './clocks.js';
 import { renderSelectionStatus } from './selection-status.js';
+import { renderPublicHistory } from './history-dialog.js';
 import { syncPauseBtn } from './overlays.js';
 import {
   PASS_Y,
@@ -32,6 +33,7 @@ export let cardTag;
 export let phoneSignTop;
 
 export function render() {
+  renderPublicHistory();
   phoneRefit();
   syncPauseBtn();
   for (let p = 0; p < 4; p++) {

@@ -3,7 +3,12 @@ import assert from 'node:assert/strict';
 import { makeDeck } from '../src/core/cards.js';
 import { candidates } from '../src/ai/candidates.js';
 import { decisionContext, observeResponses, policyState } from '../src/ai/observation.js';
-import { profileId, selectProfileAction } from '../src/ai/profiles.js';
+import {
+  adaptiveWeights,
+  profileId,
+  selectProfileAction,
+  usesResponseModel,
+} from '../src/ai/profiles.js';
 
 const deck = makeDeck();
 const context = {
@@ -66,4 +71,24 @@ test('model and style observations do not change when hidden opponent cards chan
   game.hands[3] = deck.slice(78, 90);
   assert.deepEqual(policyState(game, 0, 0, plays), features);
   assert.deepEqual(decisionContext(game, 0), view);
+});
+
+test('blended preferences respond to public urgency, partner lead and accumulated evidence', () => {
+  assert.equal(profileId('adaptive'), 'adaptive');
+  assert(usesResponseModel('adaptive'));
+  const normal = adaptiveWeights(context);
+  const urgent = adaptiveWeights({ ...context, counts: [20, 1, 20, 20] });
+  const partner = adaptiveWeights({ ...context, trick: { ...context.trick, player: 2 } });
+  const observed = adaptiveWeights({
+    ...context,
+    log: Array.from({ length: 12 }, () => ({ p: 1, cards: null })),
+  });
+  assert(urgent.aggressive > normal.aggressive);
+  assert(partner.conservative > normal.conservative);
+  assert(observed.observant > normal.observant);
+  for (const weights of [normal, urgent, partner, observed]) {
+    assert(Object.values(weights).every((weight) => weight > 0));
+    assert(Math.abs(Object.values(weights).reduce((sum, weight) => sum + weight, 0) - 1) < 1e-12);
+  }
+  assert.equal(selectProfileAction([single, bomb], [0.8, 0.6], 'adaptive', context), 0);
 });

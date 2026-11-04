@@ -1,0 +1,22 @@
+{
+  "testedStyle": "adaptive",
+  "opponentStyle": "observant",
+  "pairs": 600,
+  "seed": 20330104,
+  "rounds": 1200,
+  "wins": 599,
+  "losses": 601,
+  "winRate": 0.49916666666666665,
+  "pairedPointsMean": -0.01,
+  "pairedPoints95CI": [
+    -0.1086219109189223,
+    0.08862191091892231
+  ],
+  "stats": {
+    "responseCalls": 13225,
+    "responseChangedChoices": 435,
+    "decisions": 39558,
+    "proved": 1375
+  },
+  "elapsedSeconds": 125.17812180000001
+}

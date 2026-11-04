@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 URL=(sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765/')
 URL+=('&' if '?' in URL else '?')+'test=1'
-fixtures=json.loads((ROOT/'tests/fixtures/response-positions.json').read_text())
+fixtures=json.loads((ROOT/'tests/fixtures/response-positions.json').read_text())+json.loads((ROOT/'tests/fixtures/adaptive-positions.json').read_text())
 WORKER="""state=>new Promise((resolve,reject)=>{
  const w=new Worker(new URL('./assets/ai-worker.mjs',document.baseURI),{type:'module'});
  w.onmessage=({data})=>{w.terminate();data.error?reject(Error(data.error)):resolve(data.result)};
@@ -20,7 +20,7 @@ RESTORE="""state=>{
  G.L=state.level;G.levels=[state.selfLevel,state.opponentLevel];if(state.p%2)G.levels.reverse();
  G.log=state.context.log.map(e=>({...e,cards:e.cards?.map(card=>deck[card.id])||null}));
  G.trick=state.context.trick;G.phase='play';G.turn=state.p;G.clock=null;G.round=1;G.myOrder=[];G.fixed=[];G.pw=[];G.seen=[];G.rest=[];
- botStyles=Array(4).fill('observant');NET.mode='solo';NET.off=0;
+ botStyles=Array(4).fill(state.profile);NET.mode='solo';NET.off=0;
 }"""
 with sync_playwright() as p:
  browser=p.chromium.launch(headless=True,channel='chrome');page=browser.new_page();errors=[]

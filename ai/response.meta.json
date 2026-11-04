@@ -31,7 +31,7 @@
     ],
     "meaning": "probability the next active opponent follows a played action under the sampled teacher policies"
   },
-  "scope": "observant profile only; rank close non-pass plays after original play/pass choice; never override a proved endgame",
+  "scope": "observant and adaptive profiles; rank close non-pass plays after original play/pass choice; never override a proved endgame",
   "dataset": {
     "games": 5000,
     "rows": 167659,

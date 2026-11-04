@@ -1,0 +1,95 @@
+.public-history {
+  width: min(560px, calc(100vw - 24px));
+  height: min(720px, calc(100dvh - 24px));
+  padding: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  color: var(--ink);
+  background: var(--felt-deep);
+  font-family: var(--font-ui);
+}
+.public-history[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.public-history::backdrop {
+  background: var(--scrim);
+  backdrop-filter: blur(3px);
+}
+.public-history h2,
+.public-history p {
+  margin: 0;
+}
+.public-history h2 {
+  color: var(--gold);
+  font-size: 22px;
+}
+.public-history header,
+.public-history-tools,
+.public-history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.public-history-tools {
+  flex-wrap: wrap;
+}
+.public-history-tools label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.public-history select {
+  background: var(--felt);
+  color: var(--ink);
+  font: inherit;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 6px;
+}
+.public-history ol {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  margin: 0;
+  padding: 0 4px 0 30px;
+  overscroll-behavior: contain;
+}
+.public-history li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.public-history li::marker {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.public-history-row span {
+  font-size: 12px;
+}
+.public-history-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-top: 8px;
+}
+.public-history-cards span {
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--card-ink);
+  font-weight: 600;
+}
+.public-history-cards .red {
+  color: var(--red);
+}
+.public-history small,
+#publicHistorySummary {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+body.practice #historyBtn {
+  display: none;
+}

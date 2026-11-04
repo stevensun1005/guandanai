@@ -327,7 +327,7 @@ export function initialize() {
       runtime.replayView.edit ||
       !$('#overlay').hidden ||
       !$('#lobby').hidden ||
-      e.target.closest('input,textarea,select,[contenteditable="true"]')
+      e.target.closest('dialog,input,textarea,select,[contenteditable="true"]')
     )
       return;
     if (

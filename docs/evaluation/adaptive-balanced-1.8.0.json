@@ -1,0 +1,22 @@
+{
+  "testedStyle": "adaptive",
+  "opponentStyle": "balanced",
+  "pairs": 600,
+  "seed": 20320104,
+  "rounds": 1200,
+  "wins": 604,
+  "losses": 596,
+  "winRate": 0.5033333333333333,
+  "pairedPointsMean": 0.04,
+  "pairedPoints95CI": [
+    -0.07043772955412836,
+    0.15043772955412837
+  ],
+  "stats": {
+    "responseCalls": 6644,
+    "decisions": 19826,
+    "proved": 1334,
+    "responseChangedChoices": 148
+  },
+  "elapsedSeconds": 123.85425620000001
+}
