@@ -1,0 +1,554 @@
+{
+  "objective": "Complete match from 2 through A, team victory; draws included in denominator",
+  "datasetRole": "Development only; reused for model selection, not final acceptance",
+  "targetOpponent": "Unmodified project rule bots",
+  "targetWinRate": 0.8,
+  "targetAchieved": false,
+  "modelSHA256": "ffe0b4fce3b4ee6e831c0969440fabd2f233aec465a5c7f2fc024df517812752",
+  "initialSHA256": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25",
+  "trainingMatches": 192,
+  "parameters": 1373185,
+  "training": "All layers optimized with terminal match returns and output anchoring",
+  "evaluations": {
+    "rule": {
+      "seedStart": 38100104,
+      "seedEnd": 38100167,
+      "pairs": 64,
+      "matches": 128,
+      "wins": 95,
+      "winRate": 0.7421875,
+      "initialWins": 92,
+      "initialWinRate": 0.71875,
+      "pairedGain": 0.0234375,
+      "pairedGain95CI": [-0.05947295045794221, 0.10634795045794221]
+    },
+    "snapshot": {
+      "seedStart": 38100104,
+      "seedEnd": 38100167,
+      "pairs": 64,
+      "matches": 128,
+      "wins": 61,
+      "winRate": 0.4765625,
+      "initialWins": 67,
+      "initialWinRate": 0.5234375,
+      "pairedGain": -0.046875,
+      "pairedGain95CI": [-0.1413070100066121, 0.0475570100066121]
+    }
+  },
+  "deployed": false,
+  "browser": {
+    "model": "C:\\Users\\Admin\\Desktop\\guandan\\work\\learning\\complete-network\\guarded-pilot\\policy.onnx",
+    "modelSHA256": "ffe0b4fce3b4ee6e831c0969440fabd2f233aec465a5c7f2fc024df517812752",
+    "fixturesSHA256": "e6c63210c4eff53015230291d648ab1f500a0fc9c5587eb5728af3c5d4508558",
+    "fixturePolicySHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "productionRuntimeSHA256": "d6ff91a5d402215c13e2e8666ac05370f73098060b1b2606db5acb9fc2bd8894",
+    "runtimeConfig": {
+      "extraFeatures": 61
+    },
+    "featureSHA256": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "nativeFeatureSHA256": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+    "wasmSHA256": "4b884c203b0fa48d057be3332c65513ff85aa3c5bddd6946acc0fab7ecda001d",
+    "testSHA256": "1481ec077581835e13fe8d46731d9603a36224341732207f301523b821951599",
+    "browser": "156.0.8078.80",
+    "backend": "Chrome dedicated Worker, ONNX Runtime Web WASM, one thread",
+    "positions": 48,
+    "actions": 7922,
+    "maxError": 6.109476089477539e-7,
+    "exactArgmax": 48,
+    "tieOnlyMismatches": 0,
+    "featureRowsExact": true,
+    "pageErrors": [],
+    "productionBuildTouched": false,
+    "serverClosed": true,
+    "elapsedSeconds": 5.852120800002012,
+    "checks": [
+      {
+        "position": 0,
+        "category": "wide",
+        "actions": 300,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 29,
+        "browserIndex": 29,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 1,
+        "category": "follow",
+        "actions": 15,
+        "maxError": 1.7881393432617188e-7,
+        "nativeIndex": 9,
+        "browserIndex": 9,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 2,
+        "category": "follow",
+        "actions": 13,
+        "maxError": 2.682209014892578e-7,
+        "nativeIndex": 12,
+        "browserIndex": 12,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 3,
+        "category": "afterPass",
+        "actions": 13,
+        "maxError": 2.086162567138672e-7,
+        "nativeIndex": 12,
+        "browserIndex": 12,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 4,
+        "category": "afterPass",
+        "actions": 8,
+        "maxError": 1.4901161193847656e-7,
+        "nativeIndex": 7,
+        "browserIndex": 7,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 5,
+        "category": "wide",
+        "actions": 218,
+        "maxError": 4.023313522338867e-7,
+        "nativeIndex": 12,
+        "browserIndex": 12,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 6,
+        "category": "follow",
+        "actions": 23,
+        "maxError": 3.129243850708008e-7,
+        "nativeIndex": 5,
+        "browserIndex": 5,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 7,
+        "category": "follow",
+        "actions": 4,
+        "maxError": 1.6391277313232422e-7,
+        "nativeIndex": 3,
+        "browserIndex": 3,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 8,
+        "category": "afterPass",
+        "actions": 2,
+        "maxError": 5.960464477539063e-8,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 9,
+        "category": "afterPass",
+        "actions": 3,
+        "maxError": 1.1920928955078125e-7,
+        "nativeIndex": 2,
+        "browserIndex": 2,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 10,
+        "category": "lead",
+        "actions": 124,
+        "maxError": 2.086162567138672e-7,
+        "nativeIndex": 120,
+        "browserIndex": 120,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 11,
+        "category": "follow",
+        "actions": 8,
+        "maxError": 1.4901161193847656e-7,
+        "nativeIndex": 7,
+        "browserIndex": 7,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 12,
+        "category": "afterPass",
+        "actions": 12,
+        "maxError": 2.682209014892578e-7,
+        "nativeIndex": 11,
+        "browserIndex": 11,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 13,
+        "category": "afterPass",
+        "actions": 11,
+        "maxError": 2.384185791015625e-7,
+        "nativeIndex": 0,
+        "browserIndex": 0,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 14,
+        "category": "afterPass",
+        "actions": 4,
+        "maxError": 1.4901161193847656e-7,
+        "nativeIndex": 3,
+        "browserIndex": 3,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 15,
+        "category": "lead",
+        "actions": 105,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 97,
+        "browserIndex": 97,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 16,
+        "category": "follow",
+        "actions": 7,
+        "maxError": 1.4901161193847656e-7,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 17,
+        "category": "follow",
+        "actions": 37,
+        "maxError": 3.5762786865234375e-7,
+        "nativeIndex": 27,
+        "browserIndex": 27,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 18,
+        "category": "follow",
+        "actions": 2,
+        "maxError": 2.086162567138672e-7,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 19,
+        "category": "afterPass",
+        "actions": 2,
+        "maxError": 1.4901161193847656e-7,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 20,
+        "category": "alias",
+        "actions": 717,
+        "maxError": 4.6193599700927734e-7,
+        "nativeIndex": 9,
+        "browserIndex": 9,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 21,
+        "category": "lead",
+        "actions": 12,
+        "maxError": 3.5762786865234375e-7,
+        "nativeIndex": 3,
+        "browserIndex": 3,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 22,
+        "category": "lead",
+        "actions": 122,
+        "maxError": 2.682209014892578e-7,
+        "nativeIndex": 43,
+        "browserIndex": 43,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 23,
+        "category": "lead",
+        "actions": 113,
+        "maxError": 3.2782554626464844e-7,
+        "nativeIndex": 10,
+        "browserIndex": 10,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 24,
+        "category": "lead",
+        "actions": 104,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 7,
+        "browserIndex": 7,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 25,
+        "category": "alias",
+        "actions": 64,
+        "maxError": 3.2782554626464844e-7,
+        "nativeIndex": 57,
+        "browserIndex": 57,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 26,
+        "category": "lead",
+        "actions": 24,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 16,
+        "browserIndex": 16,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 27,
+        "category": "afterFirstOut",
+        "actions": 2,
+        "maxError": 2.9802322387695312e-8,
+        "nativeIndex": 0,
+        "browserIndex": 0,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 28,
+        "category": "afterFirstOut",
+        "actions": 12,
+        "maxError": 1.7881393432617188e-7,
+        "nativeIndex": 7,
+        "browserIndex": 7,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 29,
+        "category": "afterFirstOut",
+        "actions": 2,
+        "maxError": 2.086162567138672e-7,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 30,
+        "category": "afterFirstOut",
+        "actions": 2,
+        "maxError": 2.9802322387695312e-8,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 31,
+        "category": "afterFirstOut",
+        "actions": 11,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 10,
+        "browserIndex": 10,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 32,
+        "category": "wide",
+        "actions": 412,
+        "maxError": 3.5762786865234375e-7,
+        "nativeIndex": 12,
+        "browserIndex": 12,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 33,
+        "category": "lead",
+        "actions": 122,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 0,
+        "browserIndex": 0,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 34,
+        "category": "wide",
+        "actions": 161,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 9,
+        "browserIndex": 9,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 35,
+        "category": "wide",
+        "actions": 160,
+        "maxError": 3.2782554626464844e-7,
+        "nativeIndex": 159,
+        "browserIndex": 159,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 36,
+        "category": "alias",
+        "actions": 384,
+        "maxError": 4.172325134277344e-7,
+        "nativeIndex": 7,
+        "browserIndex": 7,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 37,
+        "category": "afterFirstOut",
+        "actions": 6,
+        "maxError": 5.960464477539063e-8,
+        "nativeIndex": 5,
+        "browserIndex": 5,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 38,
+        "category": "afterFirstOut",
+        "actions": 6,
+        "maxError": 1.1920928955078125e-7,
+        "nativeIndex": 2,
+        "browserIndex": 2,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 39,
+        "category": "afterFirstOut",
+        "actions": 3,
+        "maxError": 1.7881393432617188e-7,
+        "nativeIndex": 1,
+        "browserIndex": 1,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 40,
+        "category": "alias",
+        "actions": 2148,
+        "maxError": 5.438923835754395e-7,
+        "nativeIndex": 1296,
+        "browserIndex": 1296,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 41,
+        "category": "wide",
+        "actions": 177,
+        "maxError": 2.8312206268310547e-7,
+        "nativeIndex": 115,
+        "browserIndex": 115,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 42,
+        "category": "alias",
+        "actions": 126,
+        "maxError": 6.109476089477539e-7,
+        "nativeIndex": 107,
+        "browserIndex": 107,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 43,
+        "category": "wide",
+        "actions": 219,
+        "maxError": 3.8743019104003906e-7,
+        "nativeIndex": 19,
+        "browserIndex": 19,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 44,
+        "category": "wide",
+        "actions": 173,
+        "maxError": 2.980232238769531e-7,
+        "nativeIndex": 80,
+        "browserIndex": 80,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 45,
+        "category": "alias",
+        "actions": 561,
+        "maxError": 3.5762786865234375e-7,
+        "nativeIndex": 275,
+        "browserIndex": 275,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 46,
+        "category": "alias",
+        "actions": 223,
+        "maxError": 3.8743019104003906e-7,
+        "nativeIndex": 35,
+        "browserIndex": 35,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      },
+      {
+        "position": 47,
+        "category": "alias",
+        "actions": 945,
+        "maxError": 5.066394805908203e-7,
+        "nativeIndex": 0,
+        "browserIndex": 0,
+        "exactArgmax": true,
+        "nativeValueGap": 0.0
+      }
+    ]
+  },
+  "conclusion": "Rule improvement is inconclusive; historical-opponent win rate decreased. Not selected for deployment.",
+  "stoppedExperiment": {
+    "trainingMatches": 384,
+    "evaluationMatchesPerOpponent": 128,
+    "winsPerOpponent": 0,
+    "status": "Stopped, weights rejected; lower validation MSE did not predict match strength"
+  }
+}

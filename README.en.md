@@ -53,6 +53,8 @@ The practice table keeps its action grid in one place, including after your hand
 
 [Bot behavior and evidence](docs/BOTS.md) · [Reproducible model training](docs/MODEL_TRAINING.md)
 
+The **[model research report](docs/MODEL_STUDY.md)** documents the shared networks, actual learning algorithms, full-match objective, positive and negative results, and evidence limits. Completed experiments are updated with checkpoint hashes and seed-level outcomes; development peaks are kept separate from independent acceptance tests.
+
 ## Run locally
 
 Node.js **20.19+** is required; CI uses Node.js 24.
