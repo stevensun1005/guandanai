@@ -19463,7 +19463,7 @@
       "plannedCycles": 4
     },
     "team-extended-a-public-fresh": {
-      "status": "running",
+      "status": "complete",
       "cycles": [
         {
           "cycle": 1,
@@ -22516,12 +22516,692 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 8,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 361,
+          "decisions": 13806,
+          "afterFirstOutDecisions": 2669,
+          "trainingReportSHA256": "14ab24e43e6546942d32b07c3b24223ae3b6e1370adf5f95fc840cd332a5ddba",
+          "trainingSelection": null,
+          "evaluations": {
+            "rule": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 46,
+              "draws": 6,
+              "losses": 12,
+              "winRate": 0.71875,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.4786693021700198, 0.9588306978299802],
+              "manifestSHA256": "5d12bff43139331b27df1f4402d921c435ef09948581148359cc86ac595f957e",
+              "recordsSHA256": "6f17c4b0165a0fc66ea151b364de59bdf8042002e6c88e400adcd08b0f294b30",
+              "opponentSHA256": null,
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                }
+              ]
+            },
+            "snapshot": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 30,
+              "draws": 7,
+              "losses": 27,
+              "winRate": 0.46875,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.22866930217001982, 0.7088306978299802],
+              "manifestSHA256": "17982c8aba57950f28983069a4fe36fa81c9472dfaee2d25b4e99621bcdbce50",
+              "recordsSHA256": "28e0b1a74a6beb729df4086688fd0492e4848180958617a837c9545aae931968",
+              "opponentSHA256": "33161cbcdf13600f4e4e8a9d0dd122d28fcc94974d916b31af93338a7ecadbeb",
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                }
+              ]
+            }
+          },
+          "checkpointSHA256": "2c82da85402f7af037722687e035fedf347c1055e389ee044335836d4f1cbacd",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "4358063d3849be5ffcd76b3e3796ef8463df2cc2dad6fd77e55ad390e0bb6ae0",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 0,
+          "openingProblems": [
+            {
+              "seed": 61010328,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210328
+            },
+            {
+              "seed": 61010329,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210329
+            },
+            {
+              "seed": 61010330,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210330
+            },
+            {
+              "seed": 61010331,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210331
+            },
+            {
+              "seed": 61010332,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210332
+            },
+            {
+              "seed": 61010333,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210333
+            },
+            {
+              "seed": 61010334,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210334
+            },
+            {
+              "seed": 61010335,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210335
+            },
+            {
+              "seed": 61010336,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210336
+            },
+            {
+              "seed": 61010337,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210337
+            },
+            {
+              "seed": 61010338,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210338
+            },
+            {
+              "seed": 61010339,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210339
+            },
+            {
+              "seed": 61010340,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210340
+            },
+            {
+              "seed": 61010341,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210341
+            },
+            {
+              "seed": 61010342,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210342
+            },
+            {
+              "seed": 61010343,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210343
+            },
+            {
+              "seed": 61010344,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210344
+            },
+            {
+              "seed": 61010345,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210345
+            },
+            {
+              "seed": 61010346,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210346
+            },
+            {
+              "seed": 61010347,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210347
+            },
+            {
+              "seed": 61010348,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210348
+            },
+            {
+              "seed": 61010349,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210349
+            },
+            {
+              "seed": 61010350,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210350
+            },
+            {
+              "seed": 61010351,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210351
+            },
+            {
+              "seed": 61010352,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210352
+            },
+            {
+              "seed": 61010353,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210353
+            },
+            {
+              "seed": 61010354,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210354
+            },
+            {
+              "seed": 61010355,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210355
+            },
+            {
+              "seed": 61010356,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210356
+            },
+            {
+              "seed": 61010357,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210357
+            },
+            {
+              "seed": 61010358,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210358
+            },
+            {
+              "seed": 61010359,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210359
+            }
+          ],
+          "criticSHA256": "5e9db2d206ac8a06d9cd8331caf510f6e0721e843e99cacfd6f217e266733c8f",
+          "actionRows": 559047,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410328,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318953,
+            "b0": 512,
+            "w1": 262134,
+            "b1": 512,
+            "w2": 262132,
+            "b2": 512,
+            "w3": 262133,
+            "b3": 512,
+            "w4": 262134,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
     },
     "team-extended-b-public-review": {
-      "status": "running",
+      "status": "complete",
       "cycles": [
         {
           "cycle": 1,
@@ -25574,12 +26254,692 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 8,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 336,
+          "decisions": 11314,
+          "afterFirstOutDecisions": 2346,
+          "trainingReportSHA256": "37de0cdc9dcba2086aa5f12a2ec0d4ff6b4d2b308b1b0213da027c4548431751",
+          "trainingSelection": null,
+          "evaluations": {
+            "rule": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 43,
+              "draws": 4,
+              "losses": 17,
+              "winRate": 0.671875,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.4317943021700198, 0.9119556978299802],
+              "manifestSHA256": "5e2659854fa8fa52636d76bd27b32f1154269228a1575a9bd54d7ea5f2ed67a0",
+              "recordsSHA256": "9a5cf0e20d06127b27f6d0fe6bb41ed247ac21716c8fc80a15892431c98adfc0",
+              "opponentSHA256": null,
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                }
+              ]
+            },
+            "snapshot": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 28,
+              "draws": 7,
+              "losses": 29,
+              "winRate": 0.4375,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.19741930217001982, 0.6775806978299802],
+              "manifestSHA256": "4781f6d436206972189c0281ce5755fb34c907433b01712e936d7e38a5f916b9",
+              "recordsSHA256": "cf42abd8722ecaba56c7a260857dc75706e417a63ef6438ce7cfc876a59962ac",
+              "opponentSHA256": "33161cbcdf13600f4e4e8a9d0dd122d28fcc94974d916b31af93338a7ecadbeb",
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 2
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                }
+              ]
+            }
+          },
+          "checkpointSHA256": "d5161fcc3d2160f219e534a9a9978a2bb6ffd60de1d2797191a35d577074a1cd",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "cdb1936596dbae54bf646bb92c466e6287e273f203ad9c72a0b939f1f55af036",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 16,
+          "openingProblems": [
+            {
+              "seed": 61010327,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210328
+            },
+            {
+              "seed": 61010329,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210329
+            },
+            {
+              "seed": 61010321,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210330
+            },
+            {
+              "seed": 61010331,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210331
+            },
+            {
+              "seed": 61010313,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210332
+            },
+            {
+              "seed": 61010333,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210333
+            },
+            {
+              "seed": 61010307,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210334
+            },
+            {
+              "seed": 61010335,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210335
+            },
+            {
+              "seed": 61010295,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210336
+            },
+            {
+              "seed": 61010337,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210337
+            },
+            {
+              "seed": 61010295,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210338
+            },
+            {
+              "seed": 61010339,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210339
+            },
+            {
+              "seed": 61010289,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210340
+            },
+            {
+              "seed": 61010341,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210341
+            },
+            {
+              "seed": 61010277,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210342
+            },
+            {
+              "seed": 61010343,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210343
+            },
+            {
+              "seed": 61010271,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210344
+            },
+            {
+              "seed": 61010345,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210345
+            },
+            {
+              "seed": 61010265,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210346
+            },
+            {
+              "seed": 61010347,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210347
+            },
+            {
+              "seed": 61010265,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210348
+            },
+            {
+              "seed": 61010349,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210349
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210350
+            },
+            {
+              "seed": 61010351,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210351
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210352
+            },
+            {
+              "seed": 61010353,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210353
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210354
+            },
+            {
+              "seed": 61010355,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210355
+            },
+            {
+              "seed": 61010257,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210356
+            },
+            {
+              "seed": 61010357,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210357
+            },
+            {
+              "seed": 61010257,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210358
+            },
+            {
+              "seed": 61010359,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210359
+            }
+          ],
+          "criticSHA256": "f77762a87a840ba828b609532c9713dd28ed011bce2b05e0148c13f35becc7c0",
+          "actionRows": 468587,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410328,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318952,
+            "b0": 512,
+            "w1": 262133,
+            "b1": 512,
+            "w2": 262136,
+            "b2": 512,
+            "w3": 262137,
+            "b3": 512,
+            "w4": 262137,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
     },
     "team-extended-c-private-fresh": {
-      "status": "running",
+      "status": "complete",
       "cycles": [
         {
           "cycle": 1,
@@ -28632,12 +29992,692 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 8,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 327,
+          "decisions": 12784,
+          "afterFirstOutDecisions": 2419,
+          "trainingReportSHA256": "a4ec6b1bc1b5d8deb7429847f79a34247346ff0343768eb4066f9e28308bd2c2",
+          "trainingSelection": null,
+          "evaluations": {
+            "rule": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 46,
+              "draws": 7,
+              "losses": 11,
+              "winRate": 0.71875,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.4786693021700198, 0.9588306978299802],
+              "manifestSHA256": "a69116df4369b5c35a47c4172c1fd0cf9b7176c80b95a4a62ff6ccecf6772b54",
+              "recordsSHA256": "1bb787051eab14c9e53d3c55fa748a63ad44e9f0b80348c21e95335853aa952c",
+              "opponentSHA256": null,
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 2
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 2
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                }
+              ]
+            },
+            "snapshot": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 28,
+              "draws": 4,
+              "losses": 32,
+              "winRate": 0.4375,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.19741930217001982, 0.6775806978299802],
+              "manifestSHA256": "6f38e730805a96d0ad3c66b8584f9c9cb4a651749f185dfc573ea7ab713e86ab",
+              "recordsSHA256": "6c5013af1d55189de60b068924ad02be3c1c1749b2feb0f2cbb4c7968ad2ae71",
+              "opponentSHA256": "33161cbcdf13600f4e4e8a9d0dd122d28fcc94974d916b31af93338a7ecadbeb",
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 2
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                }
+              ]
+            }
+          },
+          "checkpointSHA256": "72734694bee98630f4fd2ed7fbbbbb5933732d229be6dc039458bae34d23047f",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "a403d930e08a7a3f404f1ad572ee0a73be898adcc3eaf150668f3dd9d86b4117",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 0,
+          "openingProblems": [
+            {
+              "seed": 61010328,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210328
+            },
+            {
+              "seed": 61010329,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210329
+            },
+            {
+              "seed": 61010330,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210330
+            },
+            {
+              "seed": 61010331,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210331
+            },
+            {
+              "seed": 61010332,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210332
+            },
+            {
+              "seed": 61010333,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210333
+            },
+            {
+              "seed": 61010334,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210334
+            },
+            {
+              "seed": 61010335,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210335
+            },
+            {
+              "seed": 61010336,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210336
+            },
+            {
+              "seed": 61010337,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210337
+            },
+            {
+              "seed": 61010338,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210338
+            },
+            {
+              "seed": 61010339,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210339
+            },
+            {
+              "seed": 61010340,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210340
+            },
+            {
+              "seed": 61010341,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210341
+            },
+            {
+              "seed": 61010342,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210342
+            },
+            {
+              "seed": 61010343,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210343
+            },
+            {
+              "seed": 61010344,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210344
+            },
+            {
+              "seed": 61010345,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210345
+            },
+            {
+              "seed": 61010346,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210346
+            },
+            {
+              "seed": 61010347,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210347
+            },
+            {
+              "seed": 61010348,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210348
+            },
+            {
+              "seed": 61010349,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210349
+            },
+            {
+              "seed": 61010350,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210350
+            },
+            {
+              "seed": 61010351,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210351
+            },
+            {
+              "seed": 61010352,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210352
+            },
+            {
+              "seed": 61010353,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210353
+            },
+            {
+              "seed": 61010354,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210354
+            },
+            {
+              "seed": 61010355,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210355
+            },
+            {
+              "seed": 61010356,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210356
+            },
+            {
+              "seed": 61010357,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210357
+            },
+            {
+              "seed": 61010358,
+              "team": 0,
+              "review": false,
+              "continuationSeed": 61210358
+            },
+            {
+              "seed": 61010359,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210359
+            }
+          ],
+          "criticSHA256": "b4452ffd5d5a213b0ed2be1c7b53087f6ac1b37518cb077e710d065eda6a5630",
+          "actionRows": 512351,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410328,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318955,
+            "b0": 512,
+            "w1": 262136,
+            "b1": 512,
+            "w2": 262134,
+            "b2": 512,
+            "w3": 262140,
+            "b3": 512,
+            "w4": 262136,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
     },
     "team-extended-d-private-review": {
-      "status": "running",
+      "status": "complete",
       "cycles": [
         {
           "cycle": 1,
@@ -31690,11 +33730,691 @@
             "w5": 512,
             "b5": 1
           }
+        },
+        {
+          "cycle": 8,
+          "stage": "full-public-actor",
+          "matchesUsed": 32,
+          "rounds": 355,
+          "decisions": 11915,
+          "afterFirstOutDecisions": 2173,
+          "trainingReportSHA256": "029a917dc3fedc7081f977ae0609bf379886e87ff385f8962fbe98a531a08655",
+          "trainingSelection": null,
+          "evaluations": {
+            "rule": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 46,
+              "draws": 6,
+              "losses": 12,
+              "winRate": 0.71875,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.4786693021700198, 0.9588306978299802],
+              "manifestSHA256": "a0d9c1a33b07741d0625483b61d9ca0c85e2edd4aa4a8db47ce77a0334fd8f54",
+              "recordsSHA256": "9fa9c12d253ac63fe1b1589eded78c926e209e7510d29c20be9329630f517593",
+              "opponentSHA256": null,
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 2
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                }
+              ]
+            },
+            "snapshot": {
+              "role": "development; repeatedly reused for selection",
+              "greedyProtocol": true,
+              "matches": 64,
+              "pairs": 32,
+              "wins": 25,
+              "draws": 8,
+              "losses": 31,
+              "winRate": 0.390625,
+              "seedRange": [62100104, 62100135],
+              "clusterHoeffding95CI": [0.15054430217001982, 0.6307056978299802],
+              "manifestSHA256": "70b5bd9169c97cfb9617b3bc203cb0a1508111eded6541333ed457c779934d99",
+              "recordsSHA256": "5cfe1010272c38f56f386b0c24f6ba45d11212f6f4442165fc9d4e5e8abeb565",
+              "opponentSHA256": "33161cbcdf13600f4e4e8a9d0dd122d28fcc94974d916b31af93338a7ecadbeb",
+              "sourceSHA256": {
+                "scripts/collect-matches.mjs": "3be99473ea68725680e6fd8efb2614a803785fb6cc7e8971d8befa085df32f20",
+                "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084"
+              },
+              "seedResults": [
+                {
+                  "seed": 62100104,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100105,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100106,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100107,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100108,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100109,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100110,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100111,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100112,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100113,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100114,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100115,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100116,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100117,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100118,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100119,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100120,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100121,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100122,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100123,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100124,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100125,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100126,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100127,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100128,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100129,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100130,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100131,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100132,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100133,
+                  "matches": 2,
+                  "wins": 0,
+                  "draws": 1
+                },
+                {
+                  "seed": 62100134,
+                  "matches": 2,
+                  "wins": 2,
+                  "draws": 0
+                },
+                {
+                  "seed": 62100135,
+                  "matches": 2,
+                  "wins": 1,
+                  "draws": 0
+                }
+              ]
+            }
+          },
+          "checkpointSHA256": "4cc4e26b4d845b6aadf39748512fbfecc067600724c99040c476e76ca79d9105",
+          "trainableParameters": 1581314,
+          "publishedTrainingReportSHA256": "5378d4156e7afe097c40568410c93c564fc780cc46fc8a73f1d28feb5164a103",
+          "actorParameters": 1373185,
+          "criticParameters": 208129,
+          "reviewMatches": 16,
+          "openingProblems": [
+            {
+              "seed": 61010321,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210328
+            },
+            {
+              "seed": 61010329,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210329
+            },
+            {
+              "seed": 61010319,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210330
+            },
+            {
+              "seed": 61010331,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210331
+            },
+            {
+              "seed": 61010315,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210332
+            },
+            {
+              "seed": 61010333,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210333
+            },
+            {
+              "seed": 61010313,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210334
+            },
+            {
+              "seed": 61010335,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210335
+            },
+            {
+              "seed": 61010309,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210336
+            },
+            {
+              "seed": 61010337,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210337
+            },
+            {
+              "seed": 61010307,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210338
+            },
+            {
+              "seed": 61010339,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210339
+            },
+            {
+              "seed": 61010301,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210340
+            },
+            {
+              "seed": 61010341,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210341
+            },
+            {
+              "seed": 61010295,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210342
+            },
+            {
+              "seed": 61010343,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210343
+            },
+            {
+              "seed": 61010295,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210344
+            },
+            {
+              "seed": 61010345,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210345
+            },
+            {
+              "seed": 61010289,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210346
+            },
+            {
+              "seed": 61010347,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210347
+            },
+            {
+              "seed": 61010289,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210348
+            },
+            {
+              "seed": 61010349,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210349
+            },
+            {
+              "seed": 61010277,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210350
+            },
+            {
+              "seed": 61010351,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210351
+            },
+            {
+              "seed": 61010275,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210352
+            },
+            {
+              "seed": 61010353,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210353
+            },
+            {
+              "seed": 61010275,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210354
+            },
+            {
+              "seed": 61010355,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210355
+            },
+            {
+              "seed": 61010271,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210356
+            },
+            {
+              "seed": 61010357,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210357
+            },
+            {
+              "seed": 61010263,
+              "team": 1,
+              "review": true,
+              "continuationSeed": 61210358
+            },
+            {
+              "seed": 61010359,
+              "team": 1,
+              "review": false,
+              "continuationSeed": 61210359
+            }
+          ],
+          "criticSHA256": "e01996ccdd0441b559f26c285fecffa1420e72e427928411475114fa493e5c77",
+          "actionRows": 498472,
+          "hyperparameters": {
+            "epochs": 2,
+            "batch": 8,
+            "learning_rate": 1e-6,
+            "threads": 4,
+            "seed": 61004
+          },
+          "collectionSeeds": [
+            {
+              "start": 61410328,
+              "matches": 32
+            }
+          ],
+          "sourceSHA256": {
+            "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+            "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+            "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+            "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+            "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+            "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+            "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+            "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+            "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+            "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+            "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be"
+          },
+          "parameterChanges": {
+            "w0": 318956,
+            "b0": 512,
+            "w1": 262123,
+            "b1": 511,
+            "w2": 262135,
+            "b2": 512,
+            "w3": 262138,
+            "b3": 512,
+            "w4": 262139,
+            "b4": 512,
+            "w5": 512,
+            "b5": 1
+          }
         }
       ],
       "plannedCycles": 8
     }
   },
-  "fingerprint": "c12b0a5e44b43594649aad585f76b6cf00a82daee479716160fa0d5eba30765c",
-  "observedUTC": "2026-11-04T17:48:20.477148+00:00"
+  "fingerprint": "b98c4b3651b30b9fd2c52e9cf92da16cef45e5f0d70b395384a2b3cc130a0013",
+  "observedUTC": "2026-11-04T17:55:04.873061+00:00"
 }
