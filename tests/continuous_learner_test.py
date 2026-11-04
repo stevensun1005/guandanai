@@ -6,6 +6,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 import onnxruntime as ort
@@ -13,7 +14,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "continuous"))
-from learner import Learner, Replay, target  # noqa: E402
+from learner import Learner, Replay, target, write_json  # noqa: E402
 from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
 
 
@@ -60,6 +61,25 @@ def write_run(directory, rows=600):
 
 
 class ContinuousLearnerTests(unittest.TestCase):
+    def test_atomic_status_write_retries_a_short_sharing_lock(self):
+        import os
+        original = os.replace
+        attempts = []
+        def replace(*args):
+            attempts.append(args)
+            if len(attempts) < 3:
+                raise PermissionError("temporary sharing lock")
+            return original(*args)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "status.json"
+            with patch("learner.os.replace", side_effect=replace):
+                write_json(path, {"step": 123})
+            self.assertEqual(len(attempts), 3)
+            self.assertEqual(json.loads(path.read_text())["step"], 123)
+            with patch("learner.os.replace", side_effect=PermissionError("persistent lock")):
+                with self.assertRaises(PermissionError):
+                    write_json(path, {})
+
     def test_unsupported_device_fails_instead_of_silently_using_cpu(self):
         with tempfile.TemporaryDirectory() as directory:
             run = write_run(directory)

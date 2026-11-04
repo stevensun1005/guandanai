@@ -86,14 +86,14 @@ npm run train:dashboard
 学习器默认使用 CPU。显卡运行需要对应的 PyTorch 环境；AMD ROCm 同样使用 `cuda:0` 设备接口。本机已经验证 RX 7800 XT 可用，GPU 环境位于 `D:\vibecoding\guandan\work\gpu-runtime\Scripts\python.exe`。该环境从本机已有的 Python 3.12 ROCm 安装创建，不要用 CPU 版 `requirements-training.txt` 覆盖其中的 PyTorch。
 
 ```bash
-npm run train:continuous -- --run=D:/vibecoding/guandan/work/continuous/gpu-main --hours=24 --python=D:/vibecoding/guandan/work/gpu-runtime/Scripts/python.exe --config='{"actors":2,"actorSeedOffset":1000000,"evaluationBlockOffset":100,"learner":{"device":"cuda:0","threads":1}}'
+npm run train:continuous -- --run=D:/vibecoding/guandan/work/continuous/gpu-main --hours=24 --python=D:/vibecoding/guandan/work/gpu-runtime/Scripts/python.exe --config='{"actors":8,"actorSeedOffset":1000000,"evaluationBlockOffset":100,"learner":{"device":"cuda:0","threads":1}}'
 ```
 
-此示例应在支持 GPU 的最新源码工作树执行。当前 CPU 基线源码冻结在原工作树，GPU 对照工作树为 `D:\vibecoding\guandan\work\gpu-training`；实际运行使用绝对的 `--run=D:/vibecoding/guandan/work/continuous/gpu-main`，使报告器能同时看到两组记录。运行中的 `config.json` 不得改写；更换后端须开新运行目录。显卡不可用会报错，不以 CPU 冒充 GPU。
+此示例应在最新 `main` 源码执行，实际主工作目录为 `D:\vibecoding\guandan`。原纯 CPU 基线已按用户要求暂停，采样与学习进程均退出，旧检查点和证据保留；它未运行满 24 小时，不算交接第 1 步已经完成。当前 GPU 主运行使用上述绝对路径，报告器能同时看到旧结果和新进展。运行中的 `config.json` 不得改写；更换后端须开新运行目录。显卡不可用会报错，不以 CPU 冒充 GPU。CPU 仍负责为 GPU 生成自对弈牌局与执行规则。
 
 `actorSeedOffset` 默认 0，在各采样槽的训练种子块内设置起点；恢复仍优先使用保存的下一种子。`evaluationBlockOffset` 默认 0，只改变首次分配的门控／锚点块序号，后续持久化和耗尽保护不变。这两个偏移不改变训练、门控、锚点及留出的用途边界。
 
-进度面板另列 GPU 运行的设备名称、实际场数、更新次数和张量分配显存。设备短测见研究报告第 7.9 节；约 10.12 倍是不同运行库下训练计算的短测比值，整场采样效率和棋力提升仍需另测。原 CPU 24 小时基线不被这项对照替代。
+进度面板和 `npm run train:status` 在本机存在 `work/continuous/gpu-main/config.json` 时优先查看 GPU 主运行，可用 `--run` 覆盖。面板显示设备名称、实际场数、更新次数与已暂停 CPU 基线。每 5 秒请求最新状态，场数直接聚合各采样进程逐场写入的计数；学习器状态在训练时约每 10 秒、等待样本时约每 2 秒更新，调度心跳约每 30 秒更新，二者不混为面板刷新时间。保存模型仍约每 10 分钟一次。设备短测见研究报告第 7.9 节；约 10.12 倍是不同运行库下训练计算的短测比值，初期端到端观测约为 1.32 倍（第 7.11 节），尚不能推断长期效率和棋力提升。
 
 网络结构与网页的 P0 完全相同（$567\to512\times5\to1$），导出的 ONNX 与 `ai/policy.onnx` 使用同一输入输出，网页 Worker 和 `npm run eval:table -- --policy=<文件>` 都能直接加载。
 

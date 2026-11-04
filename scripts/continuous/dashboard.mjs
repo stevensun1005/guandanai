@@ -1,6 +1,6 @@
 /** Read-only local dashboard; independent of the frozen training processes. */
 import { createServer } from 'node:http';
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { option, readJSON, runPaths } from './lib.mjs';
@@ -34,6 +34,19 @@ export function dashboardSnapshot(run, workspace = project) {
   const learner = readJSON(join(paths.learner, 'status.json'), status.learner || {});
   const heartbeatAge = (Date.now() - Date.parse(status.updatedAt)) / 1000;
   const supervisorAlive = alive(status.pid);
+  const running =
+    !status.stoppedAt && supervisorAlive && Number.isFinite(heartbeatAge) && heartbeatAge < 90;
+  const actors = Array.from({ length: config.actors || 0 }, (_, slot) =>
+    readJSON(join(paths.actors, `actor-${slot}.json`)),
+  ).filter(Boolean);
+  const liveTotals = actors.length
+    ? Object.fromEntries(
+        ['matches', 'decisions', 'rows'].map((key) => [
+          key,
+          actors.reduce((sum, actor) => sum + (actor[key] || 0), 0),
+        ]),
+      )
+    : status.totals || {};
   const reporter = readJSON(join(workspace, 'work/continuous/reporter-launcher.json'), {});
   const evidence =
     readJSON(join(workspace, 'work/model-study/docs/evaluation/model-study-progress.json')) ||
@@ -43,8 +56,9 @@ export function dashboardSnapshot(run, workspace = project) {
   for (const directory of readdirSync(continuousRoot, { withFileTypes: true })) {
     if (!directory.isDirectory()) continue;
     const root = join(continuousRoot, directory.name);
+    if (resolve(root) === paths.root) continue;
     const otherConfig = readJSON(join(root, 'config.json'));
-    if (!otherConfig?.learner.device || otherConfig.learner.device === 'cpu') continue;
+    if (!otherConfig?.learner?.device || otherConfig.learner.device === 'cpu') continue;
     const other = readJSON(join(root, 'status.json'), {});
     const learning = readJSON(join(root, 'learner/status.json'), {});
     const fresh = Date.now() - Date.parse(other.updatedAt) < 90_000;
@@ -109,9 +123,14 @@ export function dashboardSnapshot(run, workspace = project) {
     startedAt: status.startedAt,
     stoppedAt: status.stoppedAt || null,
     stopReason: status.stopReason || null,
-    elapsedSeconds: status.elapsedSeconds || 0,
+    elapsedSeconds: (status.elapsedSeconds || 0) + (running ? Math.max(0, heartbeatAge) : 0),
     plannedHours: launcher.hours || null,
-    totals: status.totals || {},
+    totals: liveTotals,
+    device: config.learner?.device || 'cpu',
+    cpuBaseline:
+      resolve(join(continuousRoot, 'main')) !== paths.root
+        ? readJSON(join(continuousRoot, 'main/status.json'))
+        : null,
     actorCount: config.actors,
     deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,
@@ -186,8 +205,11 @@ export function createDashboardServer({ run, workspace = project }) {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const port = Number(option('port', '8766'));
+  const primary = existsSync('work/continuous/gpu-main/config.json')
+    ? 'work/continuous/gpu-main'
+    : 'work/continuous/main';
   createDashboardServer({
-    run: option('run', 'work/continuous/main'),
+    run: option('run', primary),
     workspace: resolve(option('workspace', project)),
   }).listen(port, '127.0.0.1', () => console.log(`Training dashboard: http://127.0.0.1:${port}`));
 }

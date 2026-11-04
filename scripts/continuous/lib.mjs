@@ -103,7 +103,15 @@ export const readJSON = (file, fallback = null) =>
 export function writeJSON(file, value) {
   const temporary = `${file}.${process.pid}.tmp`;
   writeFileSync(temporary, JSON.stringify(value, null, 2));
-  renameSync(temporary, file);
+  for (let attempt = 0; ; attempt++) {
+    try {
+      renameSync(temporary, file);
+      break;
+    } catch (error) {
+      if (attempt >= 5 || !['EPERM', 'EACCES', 'EBUSY'].includes(error.code)) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10 * (attempt + 1));
+    }
+  }
 }
 
 export const sha256 = (file) => createHash('sha256').update(readFileSync(file)).digest('hex');

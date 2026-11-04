@@ -19,6 +19,7 @@
         <p class="muted">读取本机真实训练记录 · 每 5 秒刷新 · 无需手动询问</p>
       </header>
       <div id="connection" class="notice" role="alert" hidden></div>
+      <aside id="baseline-note" class="panel muted small" hidden></aside>
       <section class="panel">
         <p class="eyebrow">当前任务 · 交接第 1 / 6 步</p>
         <h2 id="task">默认配置的长期自对弈训练</h2>
@@ -64,6 +65,12 @@
         <p id="learner">等待读取训练进程</p>
         <div id="processes" class="chips"></div>
         <dl>
+          <dt>网络训练设备</dt>
+          <dd id="device">—</dd>
+          <dt>张量占用显存</dt>
+          <dd id="gpu-memory">—</dd>
+          <dt>更新速度</dt>
+          <dd id="update-rate">—</dd>
           <dt>最近保存的模型</dt>
           <dd id="latest">—</dd>
           <dt>门控冠军</dt>
@@ -72,7 +79,9 @@
           <dd id="anchor">—</dd>
           <dt>报告同步</dt>
           <dd id="publication">—</dd>
-          <dt>状态更新时间</dt>
+          <dt>面板读取时间</dt>
+          <dd id="observed">—</dd>
+          <dt>调度心跳时间</dt>
           <dd id="updated">—</dd>
         </dl>
         <p class="muted small">

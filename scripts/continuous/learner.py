@@ -33,7 +33,14 @@ def write_json(path, value):
     temporary = f"{path}.{os.getpid()}.tmp"
     with open(temporary, "w", encoding="utf-8") as stream:
         json.dump(value, stream, indent=2)
-    os.replace(temporary, path)
+    for attempt in range(6):
+        try:
+            os.replace(temporary, path)
+            break
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(0.01 * (attempt + 1))
 
 
 def target(raw, match_weight):

@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import fs from 'node:fs';
+import { syncBuiltinESMExports } from 'node:module';
 import { spawn, spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -35,6 +37,37 @@ import {
 test('training and gate seeds never enter the study evaluation range', () => {
   assert.ok(TRAIN_SEED_BASE >= 1e9);
   assert.ok(GATE_SEED_BASE >= TRAIN_SEED_BASE + 40 * 50_000_000);
+});
+
+test('atomic status writes retry short Windows sharing locks and still surface real failures', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'guandan-status-retry-'));
+  const original = fs.renameSync;
+  let attempts = 0;
+  try {
+    fs.renameSync = (...args) => {
+      if (++attempts <= 2) throw Object.assign(Error('temporary sharing lock'), { code: 'EPERM' });
+      return original(...args);
+    };
+    syncBuiltinESMExports();
+    const path = join(directory, 'status.json');
+    writeJSON(path, { step: 123 });
+    assert.equal(attempts, 3);
+    assert.equal(JSON.parse(readFileSync(path, 'utf8')).step, 123);
+    fs.renameSync = () => {
+      throw Object.assign(Error('persistent sharing lock'), { code: 'EPERM' });
+    };
+    syncBuiltinESMExports();
+    assert.throws(() => writeJSON(path, {}), /persistent sharing lock/);
+    fs.renameSync = () => {
+      throw Object.assign(Error('disk failure'), { code: 'EIO' });
+    };
+    syncBuiltinESMExports();
+    assert.throws(() => writeJSON(path, {}), /disk failure/);
+  } finally {
+    fs.renameSync = original;
+    syncBuiltinESMExports();
+    rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test('an isolated run starts at its reserved training offset and resumes the next unused seed', () => {

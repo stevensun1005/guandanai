@@ -54,6 +54,14 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     assert.equal((await fetch(base + '/%2e%2e%2fconfig.json')).status, 404);
     assert.match(await (await fetch(base)).text(), /训练进行到哪了/);
     assert.equal(readFileSync(join(directory, 'status.json'), 'utf8'), before);
+    save('actors/actor-0.json', { pid: process.pid, matches: 130, decisions: 900, rows: 900 });
+    const live = await (await fetch(base + '/api/status')).json();
+    assert.equal(
+      live.totals.matches,
+      130,
+      'Counts read current actors instead of waiting for the supervisor tick',
+    );
+    assert.equal(JSON.parse(before).totals.matches, 123);
     save('status.json', { ...state, updatedAt: '2000-01-01T00:00:00Z' });
     assert.equal(dashboardSnapshot(directory, directory).phase, 'unconfirmed');
     save('status.json', {

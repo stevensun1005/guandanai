@@ -40,6 +40,31 @@ const child = (tag, content, className) => {
 };
 
 function render(data) {
+  const gpu = data.device?.startsWith('cuda');
+  set(
+    'device',
+    (data.learner.deviceName || (gpu ? 'GPU 初始化中' : 'CPU')) + (gpu ? ' · GPU 反向传播' : ''),
+  );
+  set('observed', time(data.observedAt));
+  set(
+    'gpu-memory',
+    data.learner.gpuAllocatedBytes == null
+      ? '—'
+      : (data.learner.gpuAllocatedBytes / 2 ** 20).toFixed(0) + ' MiB（不含驱动及其他进程）',
+  );
+  set(
+    'update-rate',
+    data.learner.stepsPerSecond == null
+      ? '—'
+      : data.learner.stepsPerSecond.toFixed(2) + ' 次/秒（本进程均值）',
+  );
+  const cpuPaused = data.cpuBaseline?.stoppedAt;
+  element('baseline-note').hidden = !cpuPaused;
+  if (cpuPaused)
+    set(
+      'baseline-note',
+      `纯 CPU 基线已停止，占用已释放。最后完成 ${number(data.cpuBaseline.totals?.matches)} 场、${number(data.cpuBaseline.learner?.step)} 次更新，检查点保留。以下主视图显示 GPU 运行。`,
+    );
   set(
     'description',
     `${data.actorCount} 个采样进程收集完整比赛，训练进程更新整个价值网络。每 ${data.anchorHours} 小时与初始模型检查，连续两次明显退步会自动停止。`,
@@ -49,7 +74,14 @@ function render(data) {
   ];
   set('state', phase);
   element('state').dataset.phase = data.phase;
-  set('task', data.phase === 'stopped' ? '本次训练已停止' : '默认配置的长期自对弈训练');
+  set(
+    'task',
+    data.phase === 'stopped'
+      ? '本次训练已停止'
+      : gpu
+        ? 'GPU 加速的长期自对弈训练'
+        : '默认配置的长期自对弈训练',
+  );
   set(
     'roadmap-state',
     data.phase === 'running'

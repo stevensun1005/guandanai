@@ -1,7 +1,11 @@
 /** Print a short human-readable summary of a continuous training run. */
+import { existsSync } from 'node:fs';
 import { option, readJSON, runPaths } from './lib.mjs';
 
-const paths = runPaths(option('run', 'work/continuous/main'));
+const primary = existsSync('work/continuous/gpu-main/config.json')
+  ? 'work/continuous/gpu-main'
+  : 'work/continuous/main';
+const paths = runPaths(option('run', primary));
 const status = readJSON(paths.status);
 const config = readJSON(paths.config);
 if (!status) throw Error(`No status at ${paths.status}`);
@@ -11,6 +15,7 @@ const league = readJSON(paths.leagueMeta, { members: [], stats: {} });
 const pct = (a, b) => (b ? `${((100 * a) / b).toFixed(1)}%` : '-');
 const lines = [
   `运行目录      ${paths.root}`,
+  `网络训练设备  ${learner.deviceName || config.learner?.device || 'CPU'}`,
   `更新时间      ${status.updatedAt}${status.stoppedAt ? `（已停止 ${status.stoppedAt}）` : ''}`,
   `运行中进程    ${(status.running || []).join(', ') || '无'}`,
   `累计运行      ${status.elapsedSeconds == null ? '尚无累计计时' : (status.elapsedSeconds / 3600).toFixed(3) + ' 小时'}；停止原因 ${status.stopReason || '无'}`,

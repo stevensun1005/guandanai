@@ -20,6 +20,12 @@ with sync_playwright() as playwright:
     assert page.locator("#steps").inner_text() != "—"
     assert page.locator("#connection").is_hidden()
     assert "第 1 / 6 步" in page.locator("body").inner_text()
+    live = page.request.get(url.rstrip('/') + '/api/status').json()
+    if live.get('device', '').startswith('cuda'):
+        assert 'GPU 加速' in page.locator('#task').inner_text()
+        assert live['learner']['deviceName'] in page.locator('#device').inner_text()
+        if (live.get('cpuBaseline') or {}).get('stoppedAt'):
+            assert page.locator('#baseline-note').is_visible()
     previous = page.locator("#updated").inner_text()
     page.wait_for_function("previous => document.querySelector('#updated').textContent !== previous", arg=previous)
     page.screenshot(path=str(output / "desktop.png"), full_page=True)
