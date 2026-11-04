@@ -1,0 +1,35 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "lobbyHelp": true,
+      "tabsAndKeyboard": true,
+      "soloClockPaused": true,
+      "responsive": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "lobbyHelp": true,
+      "tabsAndKeyboard": true,
+      "soloClockPaused": true,
+      "responsive": true,
+      "pageErrors": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "lobbyHelp": true,
+      "tabsAndKeyboard": true,
+      "soloClockPaused": true,
+      "responsive": true,
+      "pageErrors": []
+    }
+  ],
+  "pendingPolicyWaitsForHelpClose": true,
+  "currentHouseRulesShown": true,
+  "multiplayerClockContinues": true,
+  "practiceHelpDoesNotAdvanceTurn": true
+}

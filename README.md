@@ -19,6 +19,13 @@
 
 ![实际对局画面](docs/media/table-desktop.png)
 
+<details>
+<summary>更多界面：电脑性格与手机操作帮助</summary>
+
+<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="每个电脑座位独立选择性格" /> <img src="docs/media/help-mobile.png" width="280" alt="手机上的操作帮助" /></p>
+
+</details>
+
 ## 一张链接，一桌朋友
 
 1. 打开游戏，输入昵称，选择 **开房间**。

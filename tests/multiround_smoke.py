@@ -279,6 +279,7 @@ window.Worker=class extends BaseWorker {
     report = {
         "clients": HUMANS,
         "completedMatch": match_finished,
+        "finalResult": host.evaluate("G.result"),
         "acceleratedTurnTimeouts": AUTO,
         "policyDecisions": host.evaluate("policyDecisions"),
         "automaticStateResyncs": [page.evaluate("NET.syncCount||0") for page in pages],

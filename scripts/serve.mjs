@@ -12,6 +12,10 @@ const mime = {
   '.onnx': 'application/octet-stream',
   '.css': 'text/css',
   '.json': 'application/json',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
   '.md': 'text/plain; charset=utf-8',
 };
 const port = Number(process.env.PORT || 8765);

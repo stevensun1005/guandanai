@@ -1,0 +1,128 @@
+.help-dialog {
+  width: min(660px, calc(100vw - 24px));
+  height: min(780px, calc(100dvh - 24px));
+  padding: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--felt-deep);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+.help-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.help-dialog::backdrop {
+  background: var(--scrim);
+  backdrop-filter: blur(3px);
+}
+.help-dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.help-dialog h2 {
+  color: var(--gold);
+  font-size: 23px;
+  margin: 0;
+}
+.help-dialog header .link {
+  min-height: 40px;
+  padding: 8px 12px;
+}
+.help-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.help-tabs button {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font: inherit;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+.help-tabs button[aria-selected='true'] {
+  color: var(--on-gold);
+  background: var(--gold);
+  border-color: var(--gold);
+  font-weight: 650;
+}
+.help-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 7px;
+}
+.help-content section {
+  padding: 4px 0 14px;
+}
+.help-content [role='tabpanel'] {
+  padding-inline: 3px;
+}
+.help-content [role='tabpanel']:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+.help-content section + section {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.help-content h3 {
+  color: var(--ink);
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+.help-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 6px 0;
+}
+.help-keys {
+  display: grid;
+  grid-template-columns: minmax(100px, auto) 1fr;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.help-keys dt {
+  color: var(--ink);
+}
+.help-keys dd {
+  margin: 0;
+  color: var(--muted);
+}
+.help-keys kbd {
+  font: inherit;
+  font-size: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  padding: 2px 4px;
+  background: #ffffff06;
+  white-space: nowrap;
+}
+.help-dialog small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 420px) {
+  .help-dialog {
+    padding: 16px;
+  }
+  .help-keys {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .help-keys dd {
+    margin-bottom: 10px;
+  }
+}

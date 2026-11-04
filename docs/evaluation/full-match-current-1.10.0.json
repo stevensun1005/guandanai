@@ -1,0 +1,171 @@
+{
+  "clients": 2,
+  "completedMatch": true,
+  "acceleratedTurnTimeouts": true,
+  "policyDecisions": 946,
+  "automaticStateResyncs": [
+    0,
+    0
+  ],
+  "pageVersion": "e2ea25eeef",
+  "bots": 2,
+  "botStyles": [
+    "observant",
+    "adaptive"
+  ],
+  "hostDirection": "W",
+  "rounds": [
+    {
+      "round": 1,
+      "moves": 96,
+      "levels": [
+        4,
+        2
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 2,
+      "moves": 89,
+      "levels": [
+        4,
+        3
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 3,
+      "moves": 101,
+      "levels": [
+        5,
+        3
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 4,
+      "moves": 79,
+      "levels": [
+        7,
+        3
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 5,
+      "moves": 70,
+      "levels": [
+        7,
+        4
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 6,
+      "moves": 52,
+      "levels": [
+        7,
+        7
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 7,
+      "moves": 77,
+      "levels": [
+        7,
+        9
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 8,
+      "moves": 88,
+      "levels": [
+        10,
+        9
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 9,
+      "moves": 72,
+      "levels": [
+        13,
+        9
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 10,
+      "moves": 81,
+      "levels": [
+        14,
+        9
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 11,
+      "moves": 67,
+      "levels": [
+        14,
+        10
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 12,
+      "moves": 95,
+      "levels": [
+        14,
+        10
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 13,
+      "moves": 88,
+      "levels": [
+        14,
+        11
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 14,
+      "moves": 67,
+      "levels": [
+        14,
+        13
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 15,
+      "moves": 68,
+      "levels": [
+        14,
+        13
+      ],
+      "allClientsEqual": true
+    },
+    {
+      "round": 16,
+      "moves": 78,
+      "levels": [
+        14,
+        14
+      ],
+      "allClientsEqual": true
+    }
+  ],
+  "cardConservation": true,
+  "realGuestActions": true,
+  "hostTimeoutUsedLearnedPolicy": true,
+  "guestsAvoidModelDownload": true,
+  "rejoins": [],
+  "auxiliaryModelLoaded": true,
+  "pageErrors": [],
+  "elapsedSeconds": 1037.1397393999941
+}

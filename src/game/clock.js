@@ -76,7 +76,7 @@ export function initialize() {
     if (
       !c ||
       runtime.game.paused ||
-      (runtime.network.mode === 'solo' && !$('#overlay').hidden) ||
+      (runtime.network.mode === 'solo' && (!$('#overlay').hidden || $('#rulesDialog').open)) ||
       runtime.replayView.open ||
       runtime.replayView.edit
     )

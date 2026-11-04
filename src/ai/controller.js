@@ -159,7 +159,7 @@ export function initialize() {
         (runtime.game.paused ||
           runtime.replayView.open ||
           runtime.replayView.edit ||
-          (runtime.network.mode === 'solo' && !$('#overlay').hidden))
+          (runtime.network.mode === 'solo' && (!$('#overlay').hidden || $('#rulesDialog').open)))
       ) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }

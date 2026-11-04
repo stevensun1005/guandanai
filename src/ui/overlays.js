@@ -94,31 +94,6 @@ function dblText(r) {
     : `末游${runtime.names[o[3]]}要向头游进贡。`;
 }
 
-export function showRules() {
-  showPanel(`<h2>掼蛋规则速览</h2>
-  <ul>
-    <li>四人两队，你和对家一队。两副牌共 108 张，每人 27 张，轮流按逆时针出牌。</li>
-    <li>牌的大小：大王（红色 JOKER）&gt; 小王（黑色 JOKER）&gt; 级牌 &gt; A &gt; K … &gt; 2。本局打几，几就是级牌。</li>
-    <li>红心级牌是百搭（标一个皇冠），可以当除大小王外的任意牌用。</li>
-    <li>牌型：单张、对子、三张、三带二、顺子（5 张）、连对（3 对）、钢板（2 个连续三张）。顺子里 A 可作 1，不能带王。</li>
-    <li>炸弹从小到大：4 张 &lt; 5 张 &lt; 同花顺 &lt; 6 张 &lt; 7 张 … &lt; 四个王（天王炸）。炸弹可以压任何非炸弹牌型。</li>
-    <li>头游一方升级：队友二游升 3 级，三游升 2 级，末游升 1 级。打到 A 并且队友不是末游，赢下整场。</li>
-    <li>${runtime.rules.trib ? '从第二局起进贡：末游把最大的牌给头游，头游还一张 10 或以下的非百搭牌；没有符合条件的低牌时还最小的非百搭牌。双下则两人都进贡。要进贡的一方合起来有两张大王（一人两张，或双下时两人各一张）就可以抗贡：这一局不进贡、不还贡，由头游先出。' : '本场不进贡：每局由上一局的头游先出。'}</li>
-    <li>${runtime.rules.aFail === 'keep' ? '打 A 不限次数，一直打到打过为止。' : `每一方打 A 有三次机会，三次都没打过${runtime.rules.aFail === 'draw' ? '，本场算平局' : '，这一方从 2 重新打'}。`}</li>
-    <li>出完牌后若其他人都不要，由队友接风出牌。</li>
-    <li>“手持”模式下手牌像握在手里一样分两排或三排展开成弧形（按钮上写的是点一下会变成的排数）。平铺模式也可以在一排、两排、三排之间切换，同样大小的牌不会被分到两排。理牌方式按钮每点一下，依次换成“横式”、“竖式”、“手持”，按钮上写的是现在用的方式。“竖式”按牌的大小从左到右排，同样点数的牌从下往上按红心、黑桃、方块、梅花叠成一列，一眼就能看出每个点数有几张。按住没选中的牌滑过几张，是连选这些牌；从选中的牌上按住拖动，是把选中的牌一起挪到别处（也可以拖进左边的成组区）。平铺模式也一样。“复原”恢复成按大小排好的样子。</li>
-    <li>每局开始先洗牌、切牌：上一局头游的上家洗牌，头游切牌（第一局随机）。轮到你时点“洗牌”或“切牌”。</li>
-    <li>发完牌先进贡（最大的牌有几种花色时，自己选进贡哪一张，限时 30 秒），有抗贡也在这时亮出；然后有 90 秒理牌时间（理好了点“理牌结束”），理完再还贡（限时 20 秒）。每次出牌限时 60 秒，最后 5 秒倒计时会闪烁，超时由电脑代你出牌。</li>
-  </ul>
-  <p class="muted">点选牌，双击任意一张牌直接出牌，“提示”会依次给出能出的牌，“过”是这一轮不要。</p>
-  <div class="btns"><button class="btn primary" id="closeBtn">知道了</button></div>`);
-  $('#closeBtn').onclick = () => {
-    hideOverlay();
-    if (runtime.game.phase === 'roundEnd' || runtime.game.phase === 'over') showResult();
-  };
-  $('#closeBtn').focus();
-}
-
 // leaving the table, after a confirmation; the others are told and can carry on with the computer in that seat
 // pausing: the turn clocks, the computer players' thinking and the sorting minute all stop until the player who
 // paused resumes (G.pausedBy, a local seat); the others can only wait or leave the game

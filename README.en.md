@@ -16,6 +16,13 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 
 ![An actual game](docs/media/table-desktop.png)
 
+<details>
+<summary>More views: bot personalities and mobile help</summary>
+
+<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="Per-seat bot personalities" /> <img src="docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /></p>
+
+</details>
+
 ## Bring your friends
 
 1. Enter a nickname and create a room.

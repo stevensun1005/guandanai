@@ -18,7 +18,8 @@ import { practicePlays } from '../replay/inspector.js';
 import { practiceGrouped, practiceRegroup } from '../replay/session.js';
 import { $, displayOrder } from '../ui/cards.js';
 import { practiceStepGo } from '../ui/clocks.js';
-import { askQuit, showRules } from '../ui/overlays.js';
+import { askQuit } from '../ui/overlays.js';
+import { showRules } from '../ui/rules-dialog.js';
 import { centerRank, pileRebuild, pileRefit } from '../ui/table-pile.js';
 import { placeLastPlay, renderControls, setMsg } from '../ui/table.js';
 

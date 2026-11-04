@@ -29,6 +29,46 @@
     <link rel="stylesheet" href="./assets/app.css?v=__APP_VERSION__" />
   </head>
   <body>
+    <dialog id="rulesDialog" class="help-dialog" aria-labelledby="helpTitle">
+      <header>
+        <h2 id="helpTitle">上桌指南</h2>
+        <button class="link" id="helpClose" autofocus>返回牌桌</button>
+      </header>
+      <nav class="help-tabs" id="helpTabs" role="tablist" aria-label="帮助内容">
+        <button
+          id="rulesTab"
+          type="button"
+          role="tab"
+          data-help-tab="rules"
+          aria-controls="rulesPane"
+          aria-selected="true"
+        >
+          打牌规则
+        </button>
+        <button
+          id="operationsTab"
+          type="button"
+          role="tab"
+          data-help-tab="operations"
+          aria-controls="operationsPane"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          操作方法
+        </button>
+      </nav>
+      <div class="help-content">
+        <div id="rulesPane" role="tabpanel" aria-labelledby="rulesTab" tabindex="0"></div>
+        <div
+          id="operationsPane"
+          role="tabpanel"
+          aria-labelledby="operationsTab"
+          tabindex="0"
+          hidden
+        ></div>
+      </div>
+      <small id="helpTiming"></small>
+    </dialog>
     <dialog id="publicHistory" class="public-history" aria-labelledby="publicHistoryTitle">
       <header>
         <h2 id="publicHistoryTitle">本局牌谱</h2>
@@ -104,7 +144,8 @@
             title="开麦后同桌的人能听到你说话"
           >
             闭麦</button
-          ><button class="link" id="rulesBtn">规则</button
+          ><button class="link" id="rulesBtn" aria-haspopup="dialog" aria-controls="rulesDialog">
+            帮助</button
           ><button class="link" id="pauseBtn">暂停</button
           ><button class="link" id="tsBtn">出牌记录</button
           ><button class="link" id="fsBtn">全屏</button
@@ -297,6 +338,9 @@
         </details>
         <button class="link practice-entry" type="button" id="practiceBtn">
           复盘练习 · 四家明牌与出牌记录
+        </button>
+        <button class="link practice-entry" type="button" id="lobbyHelpBtn">
+          第一次玩？查看玩法与操作
         </button>
         <div class="lobby-ver" id="verTag"></div>
       </div>
