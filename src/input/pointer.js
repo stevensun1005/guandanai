@@ -13,6 +13,7 @@ import {
   tidyGroup,
 } from '../hand/layout.js';
 import { orderedHand, renderHand, vertMode } from '../hand/view.js';
+import { changeOrder } from '../hand/ordering.js';
 import { onPlay } from './actions.js';
 import { clearPicked } from './controls.js';
 import { testDragMove, testDropMine, testGrouped } from '../replay/session.js';
@@ -203,22 +204,24 @@ function dropCards() {
     return;
   }
   if (!m.cancel) {
-    if (m.t === 'fix') fixCards(m.ids, m.row);
-    else if (m.t === 'vert') {
-      const f = new Set(runtime.game.fixed.flat()),
-        back = m.ids.filter((id) => f.has(id));
-      if (back.length) unfixCards(back);
-    } else if (m.t != null) {
-      // dropped among the active cards: out of any group, and several cards land tidied as a combination reads
-      unfixCards(m.ids);
-      runtime.game.myOrder = m.order;
-      if (m.ids.length > 1) {
-        const tidy = tidyGroup(m.ids),
-          at = runtime.game.myOrder.indexOf(m.ids[0]);
-        const rest = runtime.game.myOrder.filter((id) => !m.ids.includes(id));
-        runtime.game.myOrder = [...rest.slice(0, at), ...tidy, ...rest.slice(at)];
+    changeOrder(runtime.game, () => {
+      if (m.t === 'fix') fixCards(m.ids, m.row);
+      else if (m.t === 'vert') {
+        const f = new Set(runtime.game.fixed.flat()),
+          back = m.ids.filter((id) => f.has(id));
+        if (back.length) unfixCards(back);
+      } else if (m.t != null) {
+        // dropped among the active cards: out of any group, and several cards land tidied as a combination reads
+        unfixCards(m.ids);
+        runtime.game.myOrder = m.order;
+        if (m.ids.length > 1) {
+          const tidy = tidyGroup(m.ids),
+            at = runtime.game.myOrder.indexOf(m.ids[0]);
+          const rest = runtime.game.myOrder.filter((id) => !m.ids.includes(id));
+          runtime.game.myOrder = [...rest.slice(0, at), ...tidy, ...rest.slice(at)];
+        }
       }
-    }
+    });
   }
   for (const id of m.ids) runtime.selection.delete(id);
   const z = $('#fixZone');

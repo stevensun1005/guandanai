@@ -22,7 +22,6 @@ let COARSE_MQ;
 let phoneDevice;
 let heldSideways;
 export let isPhone;
-let phoneSideways;
 export let phoneRows;
 let phoneSwitch;
 export let handKeys;
@@ -268,17 +267,6 @@ export function drawFixZone(g) {
       return `<span class="fzt${!a ? ' loose' : isBomb(a) ? ' boom' : ''}" style="left:${r.x}px;top:${r.y + 3}px">${name}</span>`;
     })
     .join('');
-}
-
-function syncRotateTip() {
-  let t = $('#rotateTip');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'rotateTip';
-    t.innerHTML = '<b>📱</b><p>请把手机竖过来玩</p><small>手机上只支持竖屏</small>';
-    document.body.appendChild(t);
-  }
-  t.hidden = !phoneSideways();
 }
 
 export function syncPhone() {
@@ -729,12 +717,9 @@ export function initialize() {
     else w.after(c);
   }
   $('#mebar .meinfo').after($('#myClock'));
-  phoneSideways = () => !runtime.reviewMode && phoneDevice() && heldSideways();
   phoneRows = () => isPhone() && (phoneDevice() ? !heldSideways() : innerHeight > innerWidth);
   syncPhone();
-  syncRotateTip();
   phoneSwitch = () => {
-    syncRotateTip();
     const was = document.documentElement.className;
     syncPhone();
     if (document.documentElement.className !== was && runtime.game) {

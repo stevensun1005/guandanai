@@ -166,12 +166,34 @@
             成组</button
           ><span class="toolgap"></span><button class="link" id="fanBtn">手持</button
           ><button class="link" id="rowsBtn" title="改成两排">两排</button
-          ><button class="link" id="sortBtn" title="恢复成按大小排好的样子">复原</button>
+          ><button
+            class="link"
+            id="sortBtn"
+            title="按大小、花色或牌型理牌，也可撤销"
+            aria-expanded="false"
+            aria-controls="handToolsMenu"
+          >
+            理牌
+          </button>
         </div>
       </div>
     </div>
 
     <div class="overlay" id="overlay" hidden><div class="panel" id="panel"></div></div>
+    <section id="handToolsMenu" class="hand-menu" aria-label="理牌工具" hidden>
+      <div class="hand-menu-heading">理牌工具 <span>保留你的手动成组</span></div>
+      <button type="button" data-hand-tool="rank"><b>按大小</b><span>级牌与百搭优先</span></button>
+      <button type="button" data-hand-tool="suit"><b>按花色</b><span>更容易找同花顺</span></button>
+      <button type="button" data-hand-tool="smart">
+        <b>智能理牌</b><span>把顺子、对子等排在一起</span>
+      </button>
+      <button type="button" data-hand-tool="release" id="handReleaseGroups">
+        <b>拆开所有组</b><span>重新按大小排列</span>
+      </button>
+      <button type="button" data-hand-tool="undo" id="handUndoOrder">
+        <b>撤销上次理牌</b><kbd>Ctrl / ⌘ Z</kbd>
+      </button>
+    </section>
 
     <div class="lobby" id="lobby" hidden>
       <div class="lobby-box">

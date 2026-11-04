@@ -1,4 +1,66 @@
 /* hand */
+.hand-menu {
+  position: fixed;
+  z-index: 90;
+  width: min(296px, calc(100vw - 16px));
+  padding: 8px;
+  border: 1px solid #728b70;
+  border-radius: 14px;
+  background: #132f29;
+  color: #f6f1df;
+  box-shadow: 0 12px 42px #0008;
+  max-height: calc(100dvh - 16px);
+  overflow-y: auto;
+}
+.hand-menu-heading {
+  padding: 8px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.hand-menu-heading span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #adc1b1;
+}
+.hand-menu button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.hand-menu button:hover,
+.hand-menu button:focus-visible {
+  background: #ffffff12;
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+.hand-menu button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.hand-menu button span,
+.hand-menu kbd {
+  color: #adc1b1;
+  font:
+    12px system-ui,
+    sans-serif;
+}
+.hand-menu button:last-child {
+  margin-top: 4px;
+  border-top: 1px solid #ffffff20;
+  border-radius: 0 0 8px 8px;
+}
 /* z-index:0 keeps the cards' own stacking order inside the hand, below panels and flying cards */
 #hand {
   --cw: clamp(48px, min(7.6vw, 12.5vh), 86px);

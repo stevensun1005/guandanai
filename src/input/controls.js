@@ -7,6 +7,8 @@ import { isHost, newGame, roundEvt, toAbs } from '../game/session.js';
 import { owesReturn } from '../game/tribute.js';
 import { layoutHand } from '../hand/layout.js';
 import { fanMode, renderHand, vertMode } from '../hand/view.js';
+import { changeOrder } from '../hand/ordering.js';
+import { toggleHandTools, undoHandOrder } from '../hand/tools.js';
 import { miniMode, onHint, onPass, onPlay, onReturn, syncMini } from './actions.js';
 import { fixCards, handEl, reflowHand, unfixCards } from './pointer.js';
 import { VERSION } from '../network/protocol.js';
@@ -151,13 +153,15 @@ export function initialize() {
   syncHandBtns();
   // 复原 sorts the active cards back by rank; the fixed groups stay as they are
   $('#sortBtn').onclick = () => {
-    runtime.game.myOrder = [];
     if (runtime.reviewMode) {
+      runtime.game.myOrder = [];
       runtime.game.tgLock = [];
       runtime.game.tgKey = '';
+      renderHand();
+      Sound.play('shuffle');
+    } else {
+      toggleHandTools();
     }
-    renderHand();
-    Sound.play('shuffle');
   };
   // 固定: the picked cards go to the fixed zone as one group; when every picked card is already there, 放回 puts them back
   $('#fixBtn').onclick = () => {
@@ -169,8 +173,10 @@ export function initialize() {
       return;
     }
     const fixed = new Set((runtime.game.fixed || []).flat());
-    if (ids.every((id) => fixed.has(id))) unfixCards(ids);
-    else fixCards(ids, -1);
+    changeOrder(runtime.game, () => {
+      if (ids.every((id) => fixed.has(id))) unfixCards(ids);
+      else fixCards(ids, -1);
+    });
     runtime.selection = new Set();
     reflowHand();
     Sound.play('play');
@@ -320,9 +326,20 @@ export function initialize() {
       runtime.replayView.edit ||
       !$('#overlay').hidden ||
       !$('#lobby').hidden ||
-      e.target.closest('input,textarea')
+      e.target.closest('input,textarea,select,[contenteditable="true"]')
     )
       return;
+    if (
+      !runtime.reviewMode &&
+      (e.ctrlKey || e.metaKey) &&
+      !e.shiftKey &&
+      e.key.toLowerCase() === 'z'
+    ) {
+      e.preventDefault();
+      undoHandOrder();
+      return;
+    }
+    if (e.target.closest('#handToolsMenu') || e.ctrlKey || e.metaKey || e.altKey) return;
     if (runtime.reviewMode && e.key === 'ArrowLeft') {
       e.preventDefault();
       testBack();

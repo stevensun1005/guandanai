@@ -141,47 +141,6 @@ html.phone body:not(.test) .score {
   flex-direction: row !important;
   gap: 6px;
 }
-#rotateTip {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: var(--felt-deep);
-  color: var(--ink);
-  text-align: center;
-}
-#rotateTip[hidden] {
-  display: none;
-}
-#rotateTip b {
-  font-size: 56px;
-  line-height: 1;
-  animation: turnUp 1.6s ease-in-out infinite;
-}
-#rotateTip p {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--gold);
-}
-#rotateTip small {
-  font-size: 14px;
-  color: var(--muted);
-}
-@keyframes turnUp {
-  0%,
-  30% {
-    transform: rotate(90deg);
-  }
-  60%,
-  100% {
-    transform: rotate(0);
-  }
-}
 #tribBox {
   position: fixed;
   z-index: 30;
