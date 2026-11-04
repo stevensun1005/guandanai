@@ -1,0 +1,262 @@
+{
+  "role": "Development, multiple comparisons; descriptive bootstrap intervals, not confirmatory acceptance",
+  "seed": 67104,
+  "bootstrapReplicates": 5000,
+  "target80Validated": false,
+  "evaluations": {
+    "cycle-02-rule": {
+      "control": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.71875,
+        "winRate95CI": [0.5932248531169949, 0.8442751468830051],
+        "drawRate": 0.125
+      },
+      "arms": {
+        "a-public-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.71875,
+            "winRate95CI": [0.5932248531169949, 0.8442751468830051],
+            "drawRate": 0.125
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [0.0, 0.0]
+        },
+        "b-public-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.65625,
+            "winRate95CI": [0.4837321869100662, 0.8287678130899339],
+            "drawRate": 0.0625
+          },
+          "gainVsPublicFresh": -0.0625,
+          "pairedBootstrap95CI": [-0.28125, 0.15625]
+        },
+        "c-private-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.71875,
+            "winRate95CI": [0.5932248531169949, 0.8442751468830051],
+            "drawRate": 0.0625
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [-0.125, 0.125]
+        },
+        "d-private-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.71875,
+            "winRate95CI": [0.5646075469465556, 0.8728924530534444],
+            "drawRate": 0.03125
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [-0.1875, 0.1875]
+        }
+      },
+      "initialPolicy": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.65625,
+        "winRate95CI": [0.5389651792998486, 0.7735348207001514],
+        "drawRate": 0.125
+      }
+    },
+    "cycle-04-rule": {
+      "control": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.625,
+        "winRate95CI": [0.4352238160358366, 0.8147761839641634],
+        "drawRate": 0.15625
+      },
+      "arms": {
+        "a-public-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.625,
+            "winRate95CI": [0.4352238160358366, 0.8147761839641634],
+            "drawRate": 0.15625
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [0.0, 0.0]
+        },
+        "b-public-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.6875,
+            "winRate95CI": [0.4899746851666855, 0.8850253148333145],
+            "drawRate": 0.0625
+          },
+          "gainVsPublicFresh": 0.0625,
+          "pairedBootstrap95CI": [-0.15625, 0.28125]
+        },
+        "c-private-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.75,
+            "winRate95CI": [0.623482544023891, 0.876517455976109],
+            "drawRate": 0.0625
+          },
+          "gainVsPublicFresh": 0.125,
+          "pairedBootstrap95CI": [-0.125, 0.375]
+        },
+        "d-private-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.78125,
+            "winRate95CI": [0.6271075469465556, 0.9353924530534444],
+            "drawRate": 0.09375
+          },
+          "gainVsPublicFresh": 0.15625,
+          "pairedBootstrap95CI": [-0.09375, 0.375]
+        }
+      },
+      "initialPolicy": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.65625,
+        "winRate95CI": [0.5389651792998486, 0.7735348207001514],
+        "drawRate": 0.125
+      }
+    },
+    "cycle-02-snapshot": {
+      "control": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.46875,
+        "winRate95CI": [0.32818603176252226, 0.6093139682374777],
+        "drawRate": 0.09375
+      },
+      "arms": {
+        "a-public-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.46875,
+            "winRate95CI": [0.32818603176252226, 0.6093139682374777],
+            "drawRate": 0.09375
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [0.0, 0.0]
+        },
+        "b-public-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.5625,
+            "winRate95CI": [0.41081089909511187, 0.7141891009048882],
+            "drawRate": 0.09375
+          },
+          "gainVsPublicFresh": 0.09375,
+          "pairedBootstrap95CI": [-0.0625, 0.25]
+        },
+        "c-private-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.5,
+            "winRate95CI": [0.373482544023891, 0.626517455976109],
+            "drawRate": 0.0625
+          },
+          "gainVsPublicFresh": 0.03125,
+          "pairedBootstrap95CI": [-0.0625, 0.125]
+        },
+        "d-private-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.46875,
+            "winRate95CI": [0.32818603176252226, 0.6093139682374777],
+            "drawRate": 0.03125
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [-0.15625, 0.1875]
+        }
+      },
+      "initialPolicy": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.46875,
+        "winRate95CI": [0.360330002613294, 0.5771699973867059],
+        "drawRate": 0.09375
+      }
+    },
+    "cycle-04-snapshot": {
+      "control": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.5,
+        "winRate95CI": [0.3450483946517494, 0.6549516053482506],
+        "drawRate": 0.03125
+      },
+      "arms": {
+        "a-public-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.5,
+            "winRate95CI": [0.3450483946517494, 0.6549516053482506],
+            "drawRate": 0.03125
+          },
+          "gainVsPublicFresh": 0.0,
+          "pairedBootstrap95CI": [0.0, 0.0]
+        },
+        "b-public-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.53125,
+            "winRate95CI": [0.422830002613294, 0.6396699973867059],
+            "drawRate": 0.03125
+          },
+          "gainVsPublicFresh": 0.03125,
+          "pairedBootstrap95CI": [-0.125, 0.1875]
+        },
+        "c-private-fresh": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.59375,
+            "winRate95CI": [0.4604931208780074, 0.7270068791219926],
+            "drawRate": 0.03125
+          },
+          "gainVsPublicFresh": 0.09375,
+          "pairedBootstrap95CI": [-0.09375, 0.28125]
+        },
+        "d-private-review": {
+          "result": {
+            "matches": 32,
+            "pairs": 16,
+            "winRate": 0.40625,
+            "winRate95CI": [0.2457485072758927, 0.5667514927241073],
+            "drawRate": 0.0
+          },
+          "gainVsPublicFresh": -0.09375,
+          "pairedBootstrap95CI": [-0.28125, 0.09375]
+        }
+      },
+      "initialPolicy": {
+        "matches": 32,
+        "pairs": 16,
+        "winRate": 0.46875,
+        "winRate95CI": [0.360330002613294, 0.5771699973867059],
+        "drawRate": 0.09375
+      }
+    }
+  },
+  "initialTrajectorySHA256": {
+    "a-public-fresh": "0d82db7c0197984d0e5d55f4eff066d771c5b5bd461ecd0279d7a60da0b120f1",
+    "b-public-review": "0d82db7c0197984d0e5d55f4eff066d771c5b5bd461ecd0279d7a60da0b120f1",
+    "c-private-fresh": "0d82db7c0197984d0e5d55f4eff066d771c5b5bd461ecd0279d7a60da0b120f1",
+    "d-private-review": "0d82db7c0197984d0e5d55f4eff066d771c5b5bd461ecd0279d7a60da0b120f1"
+  }
+}

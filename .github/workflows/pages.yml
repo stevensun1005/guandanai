@@ -8,6 +8,7 @@ on:
       - '**/*.md'
       - 'scripts/update-model-study.py'
       - 'tests/model_study_test.py'
+      - 'ai/experiments/**'
   workflow_dispatch:
 
 permissions:

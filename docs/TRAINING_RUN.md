@@ -150,7 +150,7 @@ python scripts/full_model.py --initialize=work/learning/complete-example/initial
 python scripts/run_full_training.py --output=work/learning/complete-example/training --initial=work/learning/complete-example/initial --opponent-model=work/learning/full-match-training/cycle-04/model/ppo.npz --cycles=16 --matches=192 --workers=3 --seed=37100104 --eval-seed=38100104 --eval-pairs=64 --eval-every=2
 ```
 
-首轮目录 `work/learning/complete-network/training/` 已在完成 384 场采样和两次更新后停止：虽然验证均方误差下降，更新后的网络在两组各 128 场的开发对战中均未获胜。导出与本地推理数值一致，因此没有用降低预测误差代替实战验收，也没有发布这些权重。
+首轮目录 `work/learning/complete-network/training/` 在首次两次更新、384 场训练后的回测出现退步：虽然验证均方误差下降，更新后的网络对两种对手的各 128 场开发比赛均未获胜。停止目录实际保留三次完成更新、使用 576 场；第四次更新未完成，不计入完成训练。导出与本地推理数值一致，因此没有用较低预测误差代替对战验收，也没有把这些权重设为默认模型。
 
 后续全层试验降低更新步幅，并增加对初始网络输出的保持约束。保持约束参与损失计算，不限制任何合法出法；整场团队胜负仍是学习标签。在已有 192 场训练样本上，全部 1,373,185 个参数参与优化，每一层的权重均实际改变。
 
@@ -158,7 +158,7 @@ python scripts/run_full_training.py --output=work/learning/complete-example/trai
 
 对冻结历史模型的另外 128 场，候选获胜 61 场（47.66%），初始网络获胜 67 场（52.34%）。因此该候选没有被选为发布版本。[完整开发报告](evaluation/full-network-development-2026-11-04.json)保留对手、种子、模型校验值和区间。
 
-新的实际运行目录为 `work/learning/complete-network/training-guarded/`。计划 16 次更新、每次 192 场完整比赛，分三个独立采样进程；每次模型更新前，三个进程使用同一份固定权重。3,072 场是计划量，以 `run.json` 和各采样进程的完成记录为准。新训练种子从 `37200104` 开始，不重复已停止实验的训练牌局。
+后续目录 `work/learning/complete-network/training-guarded/` 已完成 16 次更新、每次 192 场，共 3,072 场完整比赛，分三个采样进程。训练种子从 `37200104` 开始，不重复已停止实验的训练牌局。全部开发结果见研究报告自动生成区，尚未通过新的独立整场验收。
 
 每两轮对两种固定对手分别回测：原规则机器人及冻结的历史模型。各用同牌交换双方，并按独立牌局种子计算区间，和初始化模型在同一批牌局的成绩比较。评测牌局与训练种子分开。
 
@@ -174,3 +174,13 @@ python tests/policy_browser_smoke.py --complete-match --model=work/learning/comp
 ```
 
 逐层冻结／解冻、实际梯度更新、损坏数据拒绝和 ONNX 导出已检查。浏览器通过生产推理模块核对 48 个牌局位置、7,922 个动作，选择全部一致，最大数值误差小于 0.000001；这证明运行兼容，不是胜率报告。
+
+## 明牌评价与开局重打的四组对照
+
+`scripts/run-team-study.py` 训练公开信息的完整 Actor，并比较公开／明牌 Critic 与是否重打开局。正式小试验在 `work/learning/asymmetric-pilot/`，四组各 4 周期、每周期 16 场，计划共 256 场；流程检查另有 48 场，不能当作胜率证据。每两周期使用另一组种子，对规则与冻结历史模型分别评测。具体架构、超参数、边界及真实完成量见[研究报告](MODEL_STUDY.md)。
+
+```bash
+python scripts/run-team-study.py --output=work/learning/asymmetric-pilot --initial=work/learning/complete-network/initial --opponent-model=work/learning/match-selfplay-training/cycle-14/model/ppo.npz --cycles=4 --games=16 --epochs=2 --seed=61000104 --eval-seed=62000104 --eval-pairs=16
+```
+
+所有训练代码、实验记录与本轮完成的检查点合入 `main`。历史权重较多，通过[成果目录](evaluation/model-artifacts.json)连接到 GitHub 实验附件；网页只加载默认清单，不加载研究 Critic 或未验收候选。

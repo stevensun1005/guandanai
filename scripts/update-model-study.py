@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import shutil
 import subprocess
 import time
 
@@ -20,6 +21,14 @@ RUNS = {
     "ppo-mixed": "match-selfplay-training",
     "full-rejected": "complete-network/training",
     "full-guarded": "complete-network/training-guarded",
+    **{
+        f"team-{arm}": f"asymmetric-pilot/{arm}"
+        for arm in ["a-public-fresh", "b-public-review", "c-private-fresh", "d-private-review"]
+    },
+    **{
+        f"team-extended-{arm}": f"asymmetric-next/{arm}"
+        for arm in ["a-public-fresh", "b-public-review", "c-private-fresh", "d-private-review"]
+    },
 }
 
 
@@ -100,6 +109,7 @@ def evaluation(directory):
 def snapshot(workspace):
     result = {
         "schema": 1,
+        "reportGeneratorSHA256": SCRIPT_SHA256,
         "metric": "Whole-match team wins / all matches; draws included",
         "finalHeldoutCompleted": False,
         "target80Validated": False,
@@ -133,12 +143,42 @@ def snapshot(workspace):
                 "trainingSelection": entry.get("trainingSelection"),
                 "evaluations": {},
             }
-            checkpoint = cycle / ("model/full.npz" if name.startswith("full-") else "model/ppo.npz")
+            team = name.startswith("team-")
+            checkpoint = cycle / (
+                "model/actor.npz"
+                if team
+                else "model/full.npz"
+                if name.startswith("full-")
+                else "model/ppo.npz"
+            )
             record["checkpointSHA256"] = digest(checkpoint)
             expected = training.get("checkpointSHA256") or training.get("model", {}).get("sha256")
             if not expected or expected != record["checkpointSHA256"]:
                 raise ValueError(f"Checkpoint changed after training: {checkpoint}")
             record["trainableParameters"] = training["trainableParameters"]
+            if team:
+                record["publishedTrainingReportSHA256"] = hashlib.sha256(
+                    (cycle / "model/training.json").read_text(encoding="utf-8").encode("utf-8")
+                ).hexdigest()
+                record.update(
+                    actorParameters=training["actorParameters"],
+                    criticParameters=training["criticParameters"],
+                    reviewMatches=sum(m["reviewMatches"] for m in manifests),
+                )
+                rows = [
+                    json.loads(s) for s in (cycle / "data/matches.jsonl").read_text().splitlines()
+                ]
+                record["openingProblems"] = [
+                    {
+                        "seed": r["problemSeed"],
+                        "team": r["neuralTeam"],
+                        "review": r["review"],
+                        "continuationSeed": r["seed"],
+                    }
+                    for r in rows
+                ]
+                record["criticSHA256"] = training["criticSHA256"]
+                record["actionRows"] = read(sources[0].with_name("metadata.json"))["actionRows"]
             record["hyperparameters"] = {
                 k: v
                 for k, v in training.get("args", {}).items()
@@ -166,7 +206,7 @@ def snapshot(workspace):
                 "sourceSHA256",
                 {k: v for k, v in metadata.get("config", {}).items() if k.endswith("SHA256")},
             )
-            if name.startswith("full-"):
+            if name.startswith("full-") or team:
                 record["parameterChanges"] = {
                     k: v["changed"] for k, v in training["parameterUpdates"].items()
                 }
@@ -218,9 +258,9 @@ def progress(data):
         "",
         "表中的 `snapshot` 指该实验冻结的历史对手；各实验的历史对手不保证相同，不能横向直接比较。`ppo-rule` 早期未标记贪心评测的结果保留为旧协议记录，不纳入同协议排名。",
         "",
-        "原始逐场记录的 SHA-256、模型检查点 SHA-256、训练报告 SHA-256、种子范围和按种子聚类的保守区间见[机器可读快照](evaluation/model-study-progress.json)。原始缓冲区和实验权重保存在本地 `work/`，未随此文公开，因此快照支持核对记录身份，不等于已公开全部训练数据。",
+        "原始逐场记录的 SHA-256、检查点与训练报告 SHA-256、种子范围及聚类区间见[机器可读快照](evaluation/model-study-progress.json)。研究权重见[成果目录](evaluation/model-artifacts.json)和 `ai/experiments/`；原始大型缓冲区仍在本地 `work/`，不能把检查点公开等同于全部训练数据公开。",
         "",
-        "自动更新只发布文档与证据，不复制权重、不修改网页模型清单。新留出测试完成后，须人工审核第 7 节与结论；脚本不会把开发集峰值自动改写成通过验收。",
+        "自动更新同时保存已完成周期的检查点到 `ai/experiments/asymmetric-pilot/` 和 `ai/experiments/asymmetric-next/`，不修改网页默认模型清单。新留出测试完成后须人工审核结论；脚本不会把开发集峰值自动改写成通过验收。",
     ]
     return "\n".join(lines)
 
@@ -251,6 +291,34 @@ def update(workspace, publish=False):
     if paper.count(START) != 1 or paper.count(END) != 1:
         raise ValueError("Paper must contain exactly one generated progress section")
     data.update(fingerprint=fingerprint, observedUTC=datetime.now(timezone.utc).isoformat())
+    artifacts = []
+    for name, run in data["runs"].items():
+        if not name.startswith("team-"):
+            continue
+        for cycle in run["cycles"]:
+            source = (
+                workspace / "work/learning" / RUNS[name] / f"cycle-{cycle['cycle']:02}" / "model"
+            )
+            destination = Path("ai/experiments") / RUNS[name] / f"cycle-{cycle['cycle']:02}"
+            (ROOT / destination).mkdir(parents=True, exist_ok=True)
+            for file in ["actor.npz", "critic.npz", "policy.onnx"]:
+                shutil.copy2(source / file, ROOT / destination / file)
+                artifacts.append(str(destination / file))
+            (ROOT / destination / "training.json").write_bytes(
+                (source / "training.json").read_text(encoding="utf-8").encode("utf-8")
+            )
+            artifacts.append(str(destination / "training.json"))
+            config = read(source / "config.json")
+            anchor = Path("ai/experiments") / Path(RUNS[name]).parent / "anchor/policy.onnx"
+            (ROOT / anchor).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(config["anchor"], ROOT / anchor)
+            if digest(ROOT / anchor) != config["anchorSHA256"]:
+                raise ValueError("Experimental anchor changed")
+            config["anchor"] = anchor.as_posix()
+            (ROOT / destination / "config.json").write_bytes(
+                (json.dumps(config, indent=2) + "\n").encode("utf-8")
+            )
+            artifacts.extend([str(anchor), str(destination / "config.json")])
     (ROOT / EVIDENCE).write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     before, tail = paper.split(START)
     _, after = tail.split(END)
@@ -270,7 +338,7 @@ def update(workspace, publish=False):
         capture_output=True,
     )
     if publish:
-        git("add", str(PAPER), str(EVIDENCE))
+        git("add", str(PAPER), str(EVIDENCE), *artifacts)
         git("commit", "-m", "docs: update completed model experiment evidence")
         git("push", "origin", "HEAD:main")
     print(

@@ -164,6 +164,35 @@ $$
 
 自对弈中两队共用同一模型，因此自身对抗的胜率不用于证明绝对棋力。定期评测分别对规则与冻结历史模型；开发集上对规则胜率提高、且对历史不下降，才把候选保留为后续训练起点。这是开发筛选，不是发布验收。
 
+### 4.4 新实验：公开出牌网络、明牌评价与开局重打
+
+本轮新增四组对照，均从同一初始化出牌网络开始，并使用相同的完整网络 PPO 优化设置：
+
+这里的“公开／暗牌”简写指出牌者的合法信息，包含本人的手牌与公开记录；“明牌评价”才额外包含其他三席的当前手牌。
+
+| 组别 | 出牌网络可见信息   | 训练评价网络 | 开局题目       |
+| ---- | ------------------ | ------------ | -------------- |
+| A    | 本人手牌与公开信息 | 公开信息     | 全新           |
+| B    | 本人手牌与公开信息 | 公开信息     | 全新＋难题重打 |
+| C    | 本人手牌与公开信息 | 当前四家牌   | 全新           |
+| D    | 本人手牌与公开信息 | 当前四家牌   | 全新＋难题重打 |
+
+出牌 Actor 为完整的 1,373,185 参数网络，所有层参与优化。评价 Critic 是单独的 $683\to256\to128\to1$ tanh MLP，共 208,129 参数。683 维由 513 维公开出牌观察、8 维公开整场进度及其他三席各 54 维当前手牌组成。A／B 保持相同 Critic 结构，但后 162 维填零；C／D 才使用真实当前手牌，以匹配网络容量。
+
+Actor 的采样分布来自全部候选分数除以温度 0.03 后的 softmax。只有 Critic 接收另一个 `criticOnly` 参数，Actor 输入构造不读取私牌列。部署导出只需要公开 Actor；Critic 不加入网页模型清单。当前实现通过状态价值基线辅助策略梯度，没有训练一个明牌最优出牌教师，也不把某次明牌动作硬编码成学生答案。
+
+四组使用 Adam：Actor 学习率 $10^{-6}$，Critic 学习率 $3\times10^{-4}$，每周期 2 个 epoch，batch 8 个决策，PPO 裁剪 0.1，Critic 损失权重 0.5、熵权重 0.001、初始化策略 KL 权重 0.05。相对旧策略的批次 KL 超过 0.02 时提前停止；Actor 与 Critic 分别裁剪梯度范数到 1。优势使用已存储的旧 Critic 值，按缓冲区归一化。目标仍为整场 $+1/-1/0$，没有额外战术奖励。
+
+重打只固定第一把的发牌种子、本队阵营及对手模式；后续发牌序列、动作探索随机数重新生成。难题从该组此前训练对局的失利或平局中筛选，排除四席共用同一模型的自对弈结果。每周期最多一半场次重打，其余使用新开局；无难题则全用新题。候选历史池上限 1,000 项，不代表已经完成 1,000 副训练。整场失利也不能证明该开局某一步一定有错，这只是采样课程的筛选信号。
+
+同一开局及其重打版本只进入训练，开发评测使用另外的种子，最终留出再独立预留。输入不包含种子，明牌评价不提前读取未来尚未发出的牌。这是在预算内改进策略，不是声称求出完整四人掼蛋的最优解。
+
+流程检查已完成四组各 12 场、共 48 场。四组第一批轨迹 SHA-256 完全一致，符合相同初始策略与随机条件下 Actor 不受私牌 Critic 输入影响的预期；参数差分显示所有 Actor 层均有更新。流程检查的每种对手仅 4 场，不能据此排名。正式小试验计划每组 4 周期、每周期 16 场，共 256 场训练；每两周期对规则和历史对手各评测 32 场。实际量与结果由第 11 节记录。
+
+这组对照匹配初始权重、场数及优化设置，不保证相同候选数、决策数或计算量；实际开销需一起报告。不能把 D 与旧蒙特卡洛训练直接相比，便把差异都归因于明牌信息，因为优化算法也发生了变化。各周期接续本组权重，但重新初始化 Adam 优化器，不延续上一周期动量。
+
+正式小试验完成后，扩大对照已在 `asymmetric-next/` 启动：每组 8 周期、每周期 32 场，计划四组共 1,024 场训练。扩大试验重新使用共同初始化，避免把小试验选模的偏差混入四组起点；单次试验内部仍持续接续权重。新训练种子从 `61010104` 开始，开发评测从 `62100104` 开始，与小试验分开；这仍是开发实验，不是最终留出验收。
+
 ## 5. 实验协议与统计
 
 ### 5.1 主要与辅助指标
@@ -197,7 +226,7 @@ $$
 
 当前本地训练环境为 Ryzen 7 7800X3D、32 GB 内存、Python 3.13.5、PyTorch 2.15.0 CPU、ONNX Runtime 1.31.1。优化器使用 4 个 CPU 线程，单个原生推理会话使用 1 个线程；没有在本轮报告 GPU 训练结果。三个采样进程不应表述成三张 GPU 或三个独立大模型。
 
-论文式结论必须绑定模型 SHA、规则／编码指纹、随机种子和检查点。仅给出训练次数或设备型号不足以复现实验。原始大型缓冲区和实验权重未随 Git 公开，当前公开证据的可复现性受此限制；新机器可按命令重新采样，但不同软件／硬件下不保证逐位重现权重。
+论文式结论必须绑定模型 SHA、规则／编码指纹、随机种子和检查点。仅给出训练次数或设备型号不足以复现实验。研究权重已按成果目录存档，原始大型缓冲区仍未完整公开，可复现性仍受此限制；新机器可按命令重新采样，但不同软件／硬件下不保证逐位重现权重。
 
 ## 7. 已记录的实验结果
 
@@ -250,6 +279,22 @@ $$
 
 已完成的混合对手小 Actor 训练中，第 14 周期在反复使用的 128 场开发牌局中为 106 胜、6 平（82.81%）；第 16 周期为 102 胜、3 平（79.69%）。82.81% 是开发峰值，不是新的独立验收，也没有与完整网络试验使用同一组开发种子。全部周期在第 11 节公开，避免只报告最好的一次。
 
+### 7.6 明牌评价与重打：首次小试验
+
+四组各完成 64 场整场训练，共 256 条整场训练轨迹，包含有意重复的开局，不应称为 256 副独立新牌。第四周期的开发评测每种对手为 16 个配对种子、32 场：
+
+| 模型                  |  对规则机器人胜场 | 对冻结历史模型胜场 |
+| --------------------- | ----------------: | -----------------: |
+| 共同初始化策略        | 21 / 32（65.63%） |  15 / 32（46.88%） |
+| A：公开评价、全新开局 | 20 / 32（62.50%） |  16 / 32（50.00%） |
+| B：公开评价、开局重打 | 22 / 32（68.75%） |  17 / 32（53.13%） |
+| C：明牌评价、全新开局 | 24 / 32（75.00%） |  19 / 32（59.38%） |
+| D：明牌评价、开局重打 | 25 / 32（78.13%） |  13 / 32（40.63%） |
+
+以种子为簇重采样 5,000 次，相对 A 的胜率差，C 对规则为 +12.50 个百分点，描述性 95% Bootstrap 区间 [-12.50, 37.50]；C 对历史为 +9.38 个百分点，区间 [-9.38, 28.13]。D 对规则为 +15.63 个百分点，区间 [-9.38, 37.50]；D 对历史为 -9.38 个百分点，区间 [-28.13, 9.38]。[逐组报告](evaluation/asymmetric-pilot-2026-11-04.json)包含其他周期与完整口径。
+
+全部区间包含零；样本较小、开发集重复使用且多重比较未校正，不能认定哪项方法有效。D 的规则对手点估计较高，却在历史对手上下降，尤其不适合据此直接部署。C 的两个点估计方向较好，只能作为继续扩大样本的线索。没有候选通过独立整场验收，网页默认权重不变。
+
 ## 8. 正确性证据与能力证据的边界
 
 完整网络受保护候选已在浏览器 Worker 中对 48 个真实牌局位置、7,922 个候选核对原生与 WASM 推理：48 个位置的最大值动作一致，最大数值误差约 $6.11\times10^{-7}$，页面错误为零。这证明该检查点在这些位置的数值兼容，不证明胜率提高。
@@ -267,7 +312,8 @@ $$
 - PPO 前四候选限制探索空间；全候选实验消除了这项限制，但仍依赖候选生成器与样本覆盖。
 - 进还贡决策、风格偏好和部分网页结束捷径尚未联合训练；实验直接评分与线上完整决策管线必须分开验证。
 - 规则机器人与固定历史对手池覆盖有限，反复在同一开发集选择可能过拟合。
-- 原始预训练过程、全部训练缓冲区与实验检查点尚未完整公开；第三方复核仍有材料缺口。
+- 原始预训练过程和完整训练缓冲区仍未公开；已公开的研究权重不能弥补这些材料缺口。
+- 新 Critic 即使获得当前全牌，也只使用压缩后的公开观察，并非完整世界状态表示；它的预测仍会有误差，不能当作最优解标签。
 
 下一步可比较序列编码、可学习的风格条件输入、更丰富的历史对手池，以及不依赖实际隐藏牌的公开信息推断。它们目前是**待检验假设**，不是已经实现或已经优于当前系统的能力。任何新方法都应有相同牌规、相同对手、匹配种子和独立留出的对照实验。
 
@@ -279,7 +325,7 @@ $$
 | 应牌训练、固定教师与验证 | [训练指南](MODEL_TRAINING.md)、[训练脚本](../scripts/train_response.py)                                                                                                                                                                                                                             |
 | PPO 与整场回报           | [PPO 优化器](../scripts/train_ppo.py)、[整场引擎](../scripts/match_learning.py)                                                                                                                                                                                                                     |
 | 完整网络实验源码         | [固定实验提交的网络](https://github.com/stevensun1005/guandanai/blob/d699bf7/scripts/full_model.py)、[优化器](https://github.com/stevensun1005/guandanai/blob/d699bf7/scripts/train_full_policy.py)、[运行器](https://github.com/stevensun1005/guandanai/blob/d699bf7/scripts/run_full_training.py) |
-| 历史过程与命令           | [训练日志](TRAINING_RUN.md)；实验源码位于 `training/full-network` 分支                                                                                                                                                                                                                              |
+| 历史过程与命令           | [训练日志](TRAINING_RUN.md)；实验源码已合入 `main`                                                                                                                                                                                                                                                  |
 | 持续证据生成             | [更新脚本](../scripts/update-model-study.py)、[本仓库更新约定](../AGENTS.md)                                                                                                                                                                                                                        |
 
 文档每次进展更新必须满足：实际完成的实验才记入；保留失败、负结果和协议变化；记录对手、模型 SHA、种子、实际场数、平局和指标；明确开发／验证／留出及是否上线。若修正旧结果，保留修正原因，不静默覆盖结论。
@@ -291,63 +337,101 @@ python scripts/update-model-study.py --workspace /path/to/training-checkout
 python scripts/update-model-study.py --workspace /path/to/training-checkout --publish --watch-minutes=120
 ```
 
-`--publish` 只应在专用、干净的文档工作树运行。脚本只快进同步远端、暂存两个指定文档、正常推送；遇到其他修改、分叉或推送竞争就停止，不强推，也不自动合并用户的修改。观察期限有上限，后续新训练任务需要重新启动监视；本文不会声称一次后台进程能无限期维护未来所有实验。
+`--publish` 只应在专用、干净的发布工作树运行。脚本只快进同步远端，暂存指定文档及本轮四组实验已完成周期的指定检查点，再正常推送；遇到其他修改、分叉或推送竞争就停止，不强推，也不自动合并用户的修改。观察期限有上限，后续新训练任务需要重新启动监视。
+
+训练代码与成果统一从 `main` 访问：[本轮检查点](../ai/experiments/README.md)及[历史权重目录与下载校验](evaluation/model-artifacts.json)。大量历史权重通过 GitHub 实验附件保存，目录和 SHA 留在 `main`；被拒绝的权重同样存档。成果入库与网页默认部署分开。
 
 <!-- experiment-progress:start -->
 
 ## 11. 自动同步的完整比赛进展
 
-证据快照更新时间：2026-11-04T16:39:03.042179+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
+证据快照更新时间：2026-11-04T17:23:30.424576+00:00。下表仅统计已完成更新；采样中、更新中或评测未结束的周期不计入。
 
 **以下全部为开发集，不是独立验收。** 模型挑选反复使用这些种子，不能据此认定已经达到 80% 或有泛化提升。
 
-| 实验            | 完成更新 | 用于更新的完整比赛 | 学习决策 | 头游后决策 | 运行状态                   |
-| --------------- | -------: | -----------------: | -------: | ---------: | -------------------------- |
-| `ppo-rule`      |  16 / 16 |               2048 |   656735 |     107450 | `complete`                 |
-| `ppo-mixed`     |  16 / 16 |               2048 |   832216 |     141259 | `complete`                 |
-| `full-rejected` |   3 / 16 |                576 |   245715 |      56398 | `stopped_arena_regression` |
-| `full-guarded`  |  13 / 16 |               2496 |  1065404 |     201705 | `running`                  |
+| 实验                             | 完成更新 | 用于更新的完整比赛 | 学习决策 | 头游后决策 | 运行状态                   |
+| -------------------------------- | -------: | -----------------: | -------: | ---------: | -------------------------- |
+| `ppo-rule`                       |  16 / 16 |               2048 |   656735 |     107450 | `complete`                 |
+| `ppo-mixed`                      |  16 / 16 |               2048 |   832216 |     141259 | `complete`                 |
+| `full-rejected`                  |   3 / 16 |                576 |   245715 |      56398 | `stopped_arena_regression` |
+| `full-guarded`                   |  16 / 16 |               3072 |  1314028 |     248467 | `complete`                 |
+| `team-a-public-fresh`            |    4 / 4 |                 64 |    26401 |       5054 | `complete`                 |
+| `team-b-public-review`           |    4 / 4 |                 64 |    23470 |       4220 | `complete`                 |
+| `team-c-private-fresh`           |    4 / 4 |                 64 |    27581 |       5342 | `complete`                 |
+| `team-d-private-review`          |    4 / 4 |                 64 |    23702 |       4291 | `complete`                 |
+| `team-extended-a-public-fresh`   |    2 / 8 |                 64 |    26712 |       5036 | `running`                  |
+| `team-extended-b-public-review`  |    2 / 8 |                 64 |    24674 |       4726 | `running`                  |
+| `team-extended-c-private-fresh`  |    2 / 8 |                 64 |    26712 |       5036 | `running`                  |
+| `team-extended-d-private-review` |    2 / 8 |                 64 |    24674 |       4726 | `running`                  |
 
 ### 11.1 全部已完成的开发评测
 
-| 实验／周期           | 更新阶段    | 对手                   |  胜／总场 | 平局 |   胜率 | 后续训练选择              |
-| -------------------- | ----------- | ---------------------- | --------: | ---: | -----: | ------------------------- |
-| `ppo-rule` / 02      | small-actor | rule（旧协议，非贪心） |   51 / 64 |    5 | 79.69% | `无自动筛选记录`          |
-| `ppo-rule` / 04      | small-actor | rule（旧协议，非贪心） |   44 / 64 |    7 | 68.75% | `无自动筛选记录`          |
-| `ppo-rule` / 06      | small-actor | rule                   |   47 / 64 |    7 | 73.44% | `无自动筛选记录`          |
-| `ppo-rule` / 08      | small-actor | rule                   |   44 / 64 |    4 | 68.75% | `无自动筛选记录`          |
-| `ppo-rule` / 10      | small-actor | rule                   |   49 / 64 |    5 | 76.56% | `无自动筛选记录`          |
-| `ppo-rule` / 12      | small-actor | rule                   |   45 / 64 |    9 | 70.31% | `无自动筛选记录`          |
-| `ppo-rule` / 14      | small-actor | rule                   |   42 / 64 |    7 | 65.62% | `无自动筛选记录`          |
-| `ppo-rule` / 16      | small-actor | rule                   |   46 / 64 |    3 | 71.88% | `无自动筛选记录`          |
-| `ppo-mixed` / 02     | small-actor | rule                   |  90 / 128 |   11 | 70.31% | `无自动筛选记录`          |
-| `ppo-mixed` / 04     | small-actor | rule                   | 101 / 128 |    8 | 78.91% | `无自动筛选记录`          |
-| `ppo-mixed` / 06     | small-actor | rule                   |  87 / 128 |   13 | 67.97% | `无自动筛选记录`          |
-| `ppo-mixed` / 08     | small-actor | rule                   |  94 / 128 |   12 | 73.44% | `无自动筛选记录`          |
-| `ppo-mixed` / 10     | small-actor | rule                   |  97 / 128 |   11 | 75.78% | `无自动筛选记录`          |
-| `ppo-mixed` / 12     | small-actor | rule                   |  95 / 128 |    4 | 74.22% | `无自动筛选记录`          |
-| `ppo-mixed` / 14     | small-actor | rule                   | 106 / 128 |    6 | 82.81% | `无自动筛选记录`          |
-| `ppo-mixed` / 16     | small-actor | rule                   | 102 / 128 |    3 | 79.69% | `无自动筛选记录`          |
-| `full-rejected` / 02 | tail        | rule                   |   0 / 128 |    2 |  0.00% | `无自动筛选记录`          |
-| `full-rejected` / 02 | tail        | snapshot               |   0 / 128 |    0 |  0.00% | `无自动筛选记录`          |
-| `full-guarded` / 02  | tail        | rule                   |  91 / 128 |   13 | 71.09% | `rolled_back_to_champion` |
-| `full-guarded` / 02  | tail        | snapshot               |  60 / 128 |   14 | 46.88% | `rolled_back_to_champion` |
-| `full-guarded` / 04  | middle      | rule                   |  91 / 128 |   10 | 71.09% | `rolled_back_to_champion` |
-| `full-guarded` / 04  | middle      | snapshot               |  59 / 128 |   20 | 46.09% | `rolled_back_to_champion` |
-| `full-guarded` / 06  | full        | rule                   |  85 / 128 |   14 | 66.41% | `rolled_back_to_champion` |
-| `full-guarded` / 06  | full        | snapshot               |  65 / 128 |   19 | 50.78% | `rolled_back_to_champion` |
-| `full-guarded` / 08  | full        | rule                   |  84 / 128 |   11 | 65.62% | `rolled_back_to_champion` |
-| `full-guarded` / 08  | full        | snapshot               |  65 / 128 |   10 | 50.78% | `rolled_back_to_champion` |
-| `full-guarded` / 10  | full        | rule                   |  91 / 128 |    6 | 71.09% | `rolled_back_to_champion` |
-| `full-guarded` / 10  | full        | snapshot               |  56 / 128 |   11 | 43.75% | `rolled_back_to_champion` |
-| `full-guarded` / 12  | full        | rule                   |  90 / 128 |   13 | 70.31% | `rolled_back_to_champion` |
-| `full-guarded` / 12  | full        | snapshot               |  61 / 128 |   13 | 47.66% | `rolled_back_to_champion` |
+| 实验／周期                            | 更新阶段          | 对手                   |  胜／总场 | 平局 |   胜率 | 后续训练选择              |
+| ------------------------------------- | ----------------- | ---------------------- | --------: | ---: | -----: | ------------------------- |
+| `ppo-rule` / 02                       | small-actor       | rule（旧协议，非贪心） |   51 / 64 |    5 | 79.69% | `无自动筛选记录`          |
+| `ppo-rule` / 04                       | small-actor       | rule（旧协议，非贪心） |   44 / 64 |    7 | 68.75% | `无自动筛选记录`          |
+| `ppo-rule` / 06                       | small-actor       | rule                   |   47 / 64 |    7 | 73.44% | `无自动筛选记录`          |
+| `ppo-rule` / 08                       | small-actor       | rule                   |   44 / 64 |    4 | 68.75% | `无自动筛选记录`          |
+| `ppo-rule` / 10                       | small-actor       | rule                   |   49 / 64 |    5 | 76.56% | `无自动筛选记录`          |
+| `ppo-rule` / 12                       | small-actor       | rule                   |   45 / 64 |    9 | 70.31% | `无自动筛选记录`          |
+| `ppo-rule` / 14                       | small-actor       | rule                   |   42 / 64 |    7 | 65.62% | `无自动筛选记录`          |
+| `ppo-rule` / 16                       | small-actor       | rule                   |   46 / 64 |    3 | 71.88% | `无自动筛选记录`          |
+| `ppo-mixed` / 02                      | small-actor       | rule                   |  90 / 128 |   11 | 70.31% | `无自动筛选记录`          |
+| `ppo-mixed` / 04                      | small-actor       | rule                   | 101 / 128 |    8 | 78.91% | `无自动筛选记录`          |
+| `ppo-mixed` / 06                      | small-actor       | rule                   |  87 / 128 |   13 | 67.97% | `无自动筛选记录`          |
+| `ppo-mixed` / 08                      | small-actor       | rule                   |  94 / 128 |   12 | 73.44% | `无自动筛选记录`          |
+| `ppo-mixed` / 10                      | small-actor       | rule                   |  97 / 128 |   11 | 75.78% | `无自动筛选记录`          |
+| `ppo-mixed` / 12                      | small-actor       | rule                   |  95 / 128 |    4 | 74.22% | `无自动筛选记录`          |
+| `ppo-mixed` / 14                      | small-actor       | rule                   | 106 / 128 |    6 | 82.81% | `无自动筛选记录`          |
+| `ppo-mixed` / 16                      | small-actor       | rule                   | 102 / 128 |    3 | 79.69% | `无自动筛选记录`          |
+| `full-rejected` / 02                  | tail              | rule                   |   0 / 128 |    2 |  0.00% | `无自动筛选记录`          |
+| `full-rejected` / 02                  | tail              | snapshot               |   0 / 128 |    0 |  0.00% | `无自动筛选记录`          |
+| `full-guarded` / 02                   | tail              | rule                   |  91 / 128 |   13 | 71.09% | `rolled_back_to_champion` |
+| `full-guarded` / 02                   | tail              | snapshot               |  60 / 128 |   14 | 46.88% | `rolled_back_to_champion` |
+| `full-guarded` / 04                   | middle            | rule                   |  91 / 128 |   10 | 71.09% | `rolled_back_to_champion` |
+| `full-guarded` / 04                   | middle            | snapshot               |  59 / 128 |   20 | 46.09% | `rolled_back_to_champion` |
+| `full-guarded` / 06                   | full              | rule                   |  85 / 128 |   14 | 66.41% | `rolled_back_to_champion` |
+| `full-guarded` / 06                   | full              | snapshot               |  65 / 128 |   19 | 50.78% | `rolled_back_to_champion` |
+| `full-guarded` / 08                   | full              | rule                   |  84 / 128 |   11 | 65.62% | `rolled_back_to_champion` |
+| `full-guarded` / 08                   | full              | snapshot               |  65 / 128 |   10 | 50.78% | `rolled_back_to_champion` |
+| `full-guarded` / 10                   | full              | rule                   |  91 / 128 |    6 | 71.09% | `rolled_back_to_champion` |
+| `full-guarded` / 10                   | full              | snapshot               |  56 / 128 |   11 | 43.75% | `rolled_back_to_champion` |
+| `full-guarded` / 12                   | full              | rule                   |  90 / 128 |   13 | 70.31% | `rolled_back_to_champion` |
+| `full-guarded` / 12                   | full              | snapshot               |  61 / 128 |   13 | 47.66% | `rolled_back_to_champion` |
+| `full-guarded` / 14                   | full              | rule                   |  92 / 128 |   13 | 71.88% | `rolled_back_to_champion` |
+| `full-guarded` / 14                   | full              | snapshot               |  63 / 128 |   12 | 49.22% | `rolled_back_to_champion` |
+| `full-guarded` / 16                   | full              | rule                   |  98 / 128 |   13 | 76.56% | `rolled_back_to_champion` |
+| `full-guarded` / 16                   | full              | snapshot               |  60 / 128 |   13 | 46.88% | `rolled_back_to_champion` |
+| `team-a-public-fresh` / 02            | full-public-actor | rule                   |   23 / 32 |    4 | 71.88% | `无自动筛选记录`          |
+| `team-a-public-fresh` / 02            | full-public-actor | snapshot               |   15 / 32 |    3 | 46.88% | `无自动筛选记录`          |
+| `team-a-public-fresh` / 04            | full-public-actor | rule                   |   20 / 32 |    5 | 62.50% | `无自动筛选记录`          |
+| `team-a-public-fresh` / 04            | full-public-actor | snapshot               |   16 / 32 |    1 | 50.00% | `无自动筛选记录`          |
+| `team-b-public-review` / 02           | full-public-actor | rule                   |   21 / 32 |    2 | 65.62% | `无自动筛选记录`          |
+| `team-b-public-review` / 02           | full-public-actor | snapshot               |   18 / 32 |    3 | 56.25% | `无自动筛选记录`          |
+| `team-b-public-review` / 04           | full-public-actor | rule                   |   22 / 32 |    2 | 68.75% | `无自动筛选记录`          |
+| `team-b-public-review` / 04           | full-public-actor | snapshot               |   17 / 32 |    1 | 53.12% | `无自动筛选记录`          |
+| `team-c-private-fresh` / 02           | full-public-actor | rule                   |   23 / 32 |    2 | 71.88% | `无自动筛选记录`          |
+| `team-c-private-fresh` / 02           | full-public-actor | snapshot               |   16 / 32 |    2 | 50.00% | `无自动筛选记录`          |
+| `team-c-private-fresh` / 04           | full-public-actor | rule                   |   24 / 32 |    2 | 75.00% | `无自动筛选记录`          |
+| `team-c-private-fresh` / 04           | full-public-actor | snapshot               |   19 / 32 |    1 | 59.38% | `无自动筛选记录`          |
+| `team-d-private-review` / 02          | full-public-actor | rule                   |   23 / 32 |    1 | 71.88% | `无自动筛选记录`          |
+| `team-d-private-review` / 02          | full-public-actor | snapshot               |   15 / 32 |    1 | 46.88% | `无自动筛选记录`          |
+| `team-d-private-review` / 04          | full-public-actor | rule                   |   25 / 32 |    3 | 78.12% | `无自动筛选记录`          |
+| `team-d-private-review` / 04          | full-public-actor | snapshot               |   13 / 32 |    0 | 40.62% | `无自动筛选记录`          |
+| `team-extended-a-public-fresh` / 02   | full-public-actor | rule                   |   46 / 64 |    4 | 71.88% | `无自动筛选记录`          |
+| `team-extended-a-public-fresh` / 02   | full-public-actor | snapshot               |   26 / 64 |    4 | 40.62% | `无自动筛选记录`          |
+| `team-extended-b-public-review` / 02  | full-public-actor | rule                   |   41 / 64 |    3 | 64.06% | `无自动筛选记录`          |
+| `team-extended-b-public-review` / 02  | full-public-actor | snapshot               |   31 / 64 |    3 | 48.44% | `无自动筛选记录`          |
+| `team-extended-c-private-fresh` / 02  | full-public-actor | rule                   |   39 / 64 |    4 | 60.94% | `无自动筛选记录`          |
+| `team-extended-c-private-fresh` / 02  | full-public-actor | snapshot               |   25 / 64 |    4 | 39.06% | `无自动筛选记录`          |
+| `team-extended-d-private-review` / 02 | full-public-actor | rule                   |   42 / 64 |    5 | 65.62% | `无自动筛选记录`          |
+| `team-extended-d-private-review` / 02 | full-public-actor | snapshot               |   29 / 64 |    4 | 45.31% | `无自动筛选记录`          |
 
 表中的 `snapshot` 指该实验冻结的历史对手；各实验的历史对手不保证相同，不能横向直接比较。`ppo-rule` 早期未标记贪心评测的结果保留为旧协议记录，不纳入同协议排名。
 
-原始逐场记录的 SHA-256、模型检查点 SHA-256、训练报告 SHA-256、种子范围和按种子聚类的保守区间见[机器可读快照](evaluation/model-study-progress.json)。原始缓冲区和实验权重保存在本地 `work/`，未随此文公开，因此快照支持核对记录身份，不等于已公开全部训练数据。
+原始逐场记录的 SHA-256、检查点与训练报告 SHA-256、种子范围及聚类区间见[机器可读快照](evaluation/model-study-progress.json)。研究权重见[成果目录](evaluation/model-artifacts.json)和 `ai/experiments/`；原始大型缓冲区仍在本地 `work/`，不能把检查点公开等同于全部训练数据公开。
 
-自动更新只发布文档与证据，不复制权重、不修改网页模型清单。新留出测试完成后，须人工审核第 7 节与结论；脚本不会把开发集峰值自动改写成通过验收。
+自动更新同时保存已完成周期的检查点到 `ai/experiments/asymmetric-pilot/` 和 `ai/experiments/asymmetric-next/`，不修改网页默认模型清单。新留出测试完成后须人工审核结论；脚本不会把开发集峰值自动改写成通过验收。
 
 <!-- experiment-progress:end -->
 

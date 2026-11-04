@@ -13,6 +13,8 @@ export async function playMatch({
   infer,
   snapshotInfer = null,
   evaluate = false,
+  initialDealSeed = null,
+  trainingCritic = false,
 }) {
   if (!['rule', 'self', 'snapshot'].includes(mode) || ![0, 1].includes(team))
     throw Error('Invalid match lineup');
@@ -31,7 +33,10 @@ export async function playMatch({
     };
   const seats = new Set();
   for (let r = 0; r < 200; r++) {
-    const roundSeed = (Math.imul(seed, 1009) + r) >>> 0;
+    const roundSeed =
+      r === 0 && initialDealSeed !== null
+        ? initialDealSeed >>> 0
+        : (Math.imul(seed, 1009) + r) >>> 0;
     const game = createMatchRound(roundSeed, match),
       rule = createRuleBaseline(roundSeed ^ 0x6a09e667);
     let result = null;
@@ -55,7 +60,14 @@ export async function playMatch({
               throw Error('Invalid match scores');
             index = values.reduce((best, v, i) => (v > values[best] ? i : best), 0);
           } else {
-            index = (await decide(state)).index;
+            index = (
+              await decide(
+                state,
+                trainingCritic
+                  ? { hands: game.hands.map((hand) => hand.map((card) => card.id)) }
+                  : null,
+              )
+            ).index;
             stats.decisions++;
             seats.add(p);
             if (game.out.length) stats.afterFirstOutDecisions++;

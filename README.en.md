@@ -121,4 +121,4 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 
 [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md)
 
-Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). The complete 1.37-million-parameter network uses progressive unfreezing and three parallel sampling processes, targeting team victory from 2 through A. Historical single-round results remain auxiliary. Improved match strength still requires new held-out tests; experimental weights have not replaced the default web model.
+Training progress and reproducible commands: [policy training log](docs/TRAINING_RUN.md). The complete 1.37-million-parameter actor is now also tested with public or privileged training-only critics and repeated opening problems, targeting team victory from 2 through A. Research code, evidence and checkpoint access are merged into `main`; replacing the default web model still requires independent match acceptance tests.

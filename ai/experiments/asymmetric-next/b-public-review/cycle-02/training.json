@@ -1,0 +1,104 @@
+{
+  "algorithm": "All-candidate full-actor PPO with separate training-only critic",
+  "trainableParameters": 1581314,
+  "actorParameters": 1373185,
+  "criticParameters": 208129,
+  "rows": 11351,
+  "games": 32,
+  "checkpointSHA256": "99fb5484edf13054079f3c1646d5a8f9e3df53fd7dcb06755c5fbf1fbe237db0",
+  "criticSHA256": "7b7b2415c990d382574a026444072571b972bd43d6307a5af778bcc110a44ff3",
+  "modelSHA256": "62b1b5f9af75eaff00cad1b7b6a8ee240c9da83a1415209c89c886e01699153a",
+  "bufferSHA256": {
+    "states.f32": "ac2bbadb44c3b0a4412bdf4feb8a99bff9a80d131e850f07757c9966867abe59",
+    "actions.f32": "a9a7e3201aa48c9982d1eaf5af67dbf8a4b561e18f0090319a0a5ec35d656df3",
+    "decisions.jsonl": "688cfdcd46df3c6f2b74dcade2fac13a35f4b689eb268b61ba3de740551f818b",
+    "metadata.json": "f04de42432ea5c3e8111d5d6f9c9eece966ce223388ca0186bab82e338ea3dae"
+  },
+  "sourceSHA256": {
+    "scripts/full_model.py": "d06fd0dbe90e15420f15e9e84c52dae3b5e529aea99aa1683508fd7224acc388",
+    "scripts/full_learning.py": "a359c58f86222a04e56374fc75a61d6fb497d95c908990e73ff2400f2af16327",
+    "scripts/match_learning.py": "ff4f17bc04b4a76dad2898038feb8803f03b19df5fb122ad999a08aabe37cc1d",
+    "scripts/policy_features.py": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+    "ai/reference/numpy_engine.py": "c5c31d1942b7df6f0813b9c2e0544122297a88cf8203e248f10c0e6a0ca47946",
+    "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+    "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+    "scripts/lib/match-rollout.mjs": "3ffa05436372d4a022fdf7f8944d1de026639964a829e09d591dfd580e4ce084",
+    "scripts/team_model.py": "0168be3eec05927a5a1c74d951441ddb214b9d1be6eac15e4bd110d3f66b80ec",
+    "scripts/team_learning.py": "a9fd6f096abd005ba3c39835f9560898ca6cc7fef4f30e710ac9c661855d4ad2",
+    "scripts/collect-team.mjs": "438dd06790f6b19454ae82f6e8c5d5ce5dcbd9ed092542c0fb10760fcc6c27be",
+    "scripts/train_team.py": "1e0fcde3792a25106cf0e815617c17f4dde1b425ac21372cb6c0230939c15743"
+  },
+  "parameterUpdates": {
+    "w0": {
+      "changed": 318953
+    },
+    "b0": {
+      "changed": 512
+    },
+    "w1": {
+      "changed": 262133
+    },
+    "b1": {
+      "changed": 512
+    },
+    "w2": {
+      "changed": 262132
+    },
+    "b2": {
+      "changed": 512
+    },
+    "w3": {
+      "changed": 262134
+    },
+    "b3": {
+      "changed": 511
+    },
+    "w4": {
+      "changed": 262139
+    },
+    "b4": {
+      "changed": 512
+    },
+    "w5": {
+      "changed": 512
+    },
+    "b5": {
+      "changed": 1
+    }
+  },
+  "behaviorAudit": {
+    "maxLogProbabilityError": 9.34600830078125e-05,
+    "maxCriticValueError": 2.384185791015625e-07
+  },
+  "config": {
+    "kind": "full-actor-asymmetric-ppo",
+    "privilegedCritic": false,
+    "temperature": 0.03,
+    "anchor": "C:\\Users\\Admin\\Desktop\\guandan\\work\\learning\\complete-network\\initial\\policy.onnx",
+    "anchorSHA256": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25"
+  },
+  "args": {
+    "data": "C:\\Users\\Admin\\Desktop\\guandan\\work\\learning\\asymmetric-next\\b-public-review\\cycle-02\\data",
+    "output": "C:\\Users\\Admin\\Desktop\\guandan\\work\\learning\\asymmetric-next\\b-public-review\\cycle-02\\model",
+    "epochs": 2,
+    "batch": 8,
+    "learning_rate": 1e-06,
+    "threads": 4,
+    "seed": 61004
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "meanLoss": 0.3101242380260609,
+      "maxOldKL": 0.00650930218398571,
+      "earlyStop": false
+    },
+    {
+      "epoch": 2,
+      "meanLoss": 0.17530791362896206,
+      "maxOldKL": 0.01742425002157688,
+      "earlyStop": false
+    }
+  ],
+  "publication": "Experimental checkpoint; no match improvement inferred from optimization loss"
+}
