@@ -3503,6 +3503,16 @@
       "policySHA256": "38eca94f2482d5ccc93d9f68e83cbb4abb4577f38d07dc92ceb70929779cd246",
       "checkpointSHA256": "384eba33d5e80a917a398af151b485eb64d1f4d7b333003e0d8709cfd6a021c1",
       "download": null
+    },
+    {
+      "id": "mac-startup-memory-stop-step-682742",
+      "path": "ai/danMCai/runs/mac-20261105/startup-memory-stop",
+      "role": "Saved MPS checkpoint and Adam before Mac memory-accounting compatibility recovery; not a deployment decision",
+      "step": 682742,
+      "policySHA256": "6c5d42cda98c2730e6cb1c2a2d744b5b04a393125b057aed438ddbae321fec03",
+      "checkpointSHA256": "7bb319e32f686108b3e96374e0bc7e3111abe3bf004f750d0463e3fbd699ce5a",
+      "evidence": "ai/research/evaluation/mac-continuation-20261105.json",
+      "download": null
     }
   ],
   "webModels": {

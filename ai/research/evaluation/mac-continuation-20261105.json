@@ -1,0 +1,977 @@
+{
+  "schema": 1,
+  "kind": "Mac continuation startup and compatibility evidence",
+  "observedAtUTC": "2026-11-05T22:03:35.101615+00:00",
+  "scope": {
+    "dataUse": "exploratory self-play and development gates; not held-out acceptance",
+    "full24HoursCompleted": false,
+    "independentStrengthMatches": 0,
+    "target80Validated": false,
+    "webDefaultChanged": false,
+    "windowsRestarted": false,
+    "otherMachineGuanZeroModified": false
+  },
+  "host": {
+    "chip": "Apple M1 Pro",
+    "cpuCores": 10,
+    "gpuCores": 14,
+    "memoryGiB": 32,
+    "model": "MacBookPro18,3",
+    "architecture": "arm64",
+    "rosetta": false,
+    "macOS": "27.2",
+    "preImportFreeDiskGiB": 69,
+    "power": "AC power; idle sleep prevented by caffeinate -i; lid must remain open",
+    "node": "24.15.0",
+    "python": "3.12.2",
+    "packages": {
+      "torch": "2.15.0",
+      "numpy": "2.3.5",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.31.1"
+    },
+    "pipFreezeSHA256": "96be47f64ac6bf1b2885c24410ae1a7d2f9c66cc5bbdd6c652b597dba4a9b929"
+  },
+  "transfer": {
+    "archiveName": "danMCai-windows-gpu-main-20261105.zip",
+    "archiveSHA256": "edebd10bad4f36f61f96e5386abda6dfe782d1cd9132765e5c371dcbce62fe2a",
+    "archiveBytes": 320471038,
+    "verifiedFiles": 516,
+    "manifestSHA256": "f99170967a5af3077859f7d3c7a0d66c9de9a02f9a5cec96f3852e08b9cde979",
+    "snapshotFilesStillUnchanged": true,
+    "retainedReplayShards": 122,
+    "retainedReplayRows": 2012555,
+    "historicallyEvictedRowsRestored": false,
+    "checkpointSHA256": "727c59aab7d8eb37125592a0a7df45eb6f7f40e23dec7892d6a9e16266bb10c4",
+    "latest": {
+      "version": "v000682654",
+      "file": "v000682654.onnx",
+      "sha256": "90590eb30e101d0444708e96fdb5c5ca272069ae3be013f38a8226499e56cca9",
+      "step": 682654,
+      "trainedRows": 1398075392,
+      "ingestedRows": 349519139,
+      "publishedAt": "2026-11-05T20:41:13Z"
+    },
+    "champion": {
+      "version": "v000293055",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "since": "2026-11-05T08:11:50.077Z",
+      "history": [
+        {
+          "version": "v000000000",
+          "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+          "at": "2026-11-04T20:40:54.512Z",
+          "reason": "initial"
+        },
+        {
+          "version": "v000023473",
+          "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+          "at": "2026-11-04T22:08:59.123Z",
+          "gate": 101
+        },
+        {
+          "version": "v000046476",
+          "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+          "at": "2026-11-04T23:03:24.799Z",
+          "gate": 102
+        },
+        {
+          "version": "v000068679",
+          "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+          "at": "2026-11-05T00:04:51.045Z",
+          "gate": 103
+        },
+        {
+          "version": "v000091092",
+          "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+          "at": "2026-11-05T01:06:47.980Z",
+          "gate": 104
+        },
+        {
+          "version": "v000293055",
+          "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "at": "2026-11-05T08:11:50.077Z",
+          "gate": 112
+        }
+      ]
+    },
+    "sourceChampionAccept": {
+      "file": "windows-gpu-main/gate/gate-00112.json",
+      "sha256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7",
+      "decision": "accept",
+      "challenger": {
+        "version": "v000293055",
+        "file": "D:\\vibecoding\\guandan\\work\\continuous\\gpu-main\\league\\v000293055.onnx",
+        "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb"
+      }
+    }
+  },
+  "schedule": {
+    "startUTC": "2026-11-05T21:58:13.414Z",
+    "deadlineUTC": "2026-11-06T21:58:13.414Z",
+    "durationHours": 24,
+    "restartExtendsDeadline": false,
+    "sha256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+    "unchangedAfterCompatibilityRecovery": true,
+    "TorontoStart": "2026-11-05 16:58:13.414 -05:00",
+    "TorontoDeadline": "2026-11-06 16:58:13.414 -05:00",
+    "dailyRestartInstalled": false
+  },
+  "initialProbe": {
+    "kind": "test",
+    "device": "mps",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "torch": "2.15.0",
+    "strengthMatches": 0,
+    "probeUpdatesDiscarded": 20,
+    "sourceStep": 682654,
+    "checkpointSHA256": "727c59aab7d8eb37125592a0a7df45eb6f7f40e23dec7892d6a9e16266bb10c4",
+    "optimizerRestored": true,
+    "initialWeightsMatchExport": true,
+    "backendMaxAbsoluteError": 9.238719940185547e-07,
+    "onnxMaxAbsoluteError": 1.3709068298339844e-06,
+    "sourceCheckpointUnchanged": true,
+    "elapsedSeconds": 1.88
+  },
+  "recoveryProbe": {
+    "kind": "test",
+    "device": "mps",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "torch": "2.15.0",
+    "strengthMatches": 0,
+    "probeUpdatesDiscarded": 20,
+    "sourceStep": 682742,
+    "checkpointSHA256": "7bb319e32f686108b3e96374e0bc7e3111abe3bf004f750d0463e3fbd699ce5a",
+    "optimizerRestored": true,
+    "initialWeightsMatchExport": true,
+    "backendMaxAbsoluteError": 1.430511474609375e-06,
+    "onnxMaxAbsoluteError": 1.996755599975586e-06,
+    "sourceCheckpointUnchanged": true,
+    "elapsedSeconds": 1.14
+  },
+  "startupInterruption": {
+    "reason": "Raw free pages caused both CPU samplers to pause although inactive cache was reclaimable",
+    "firstSourceCommit": "af640a8ea90699ed4654b439fd92d30c587840d6",
+    "observed": {
+      "observedAtUTC": "2026-11-05T21:59:29.926850+00:00",
+      "reason": "macOS raw free pages incorrectly used as available memory; both samplers paused with reclaimable inactive cache",
+      "schedule": {
+        "startUTC": "2026-11-05T21:58:13.414Z",
+        "deadlineUTC": "2026-11-06T21:58:13.414Z",
+        "durationHours": 24,
+        "restartExtendsDeadline": false
+      },
+      "status": {
+        "elapsedSeconds": 60.011,
+        "gates": [],
+        "anchorChecks": [],
+        "gateIndex": 301,
+        "anchorIndex": 300,
+        "lastAnchorAt": 1793915889359,
+        "lastSnapshotAt": 1793915889359,
+        "resultOffsets": {
+          "results-1.jsonl": 1713,
+          "results-0.jsonl": 4952
+        },
+        "anchorRegressionStreak": 0,
+        "startedAt": "2026-11-05T21:58:13.461Z",
+        "pid": 73757,
+        "updatedAt": "2026-11-05T21:59:13.473Z",
+        "recent": {
+          "matches": 0,
+          "decisions": 0,
+          "byMode": {}
+        },
+        "resources": {
+          "reserveGB": 4,
+          "resumeGB": 5,
+          "freeGB": 0.8021087646484375,
+          "pausedActors": [
+            "actor-1",
+            "actor-0"
+          ],
+          "updatedAt": "2026-11-05T21:59:28.494Z"
+        },
+        "running": [
+          "learner",
+          "gate"
+        ],
+        "diskGB": 1.36,
+        "decisionsPerSecond": 0,
+        "totals": {
+          "matches": 39,
+          "decisions": 17036,
+          "rows": 17036
+        },
+        "latest": {
+          "version": "v000682654",
+          "file": "v000682654.onnx",
+          "sha256": "90590eb30e101d0444708e96fdb5c5ca272069ae3be013f38a8226499e56cca9",
+          "step": 682654,
+          "trainedRows": 1398075392,
+          "ingestedRows": 349519139,
+          "publishedAt": "2026-11-05T20:41:13Z"
+        },
+        "champion": {
+          "version": "v000293055",
+          "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "since": "2026-11-05T08:11:50.077Z",
+          "history": [
+            {
+              "version": "v000000000",
+              "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+              "at": "2026-11-04T20:40:54.512Z",
+              "reason": "initial"
+            },
+            {
+              "version": "v000023473",
+              "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+              "at": "2026-11-04T22:08:59.123Z",
+              "gate": 101
+            },
+            {
+              "version": "v000046476",
+              "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+              "at": "2026-11-04T23:03:24.799Z",
+              "gate": 102
+            },
+            {
+              "version": "v000068679",
+              "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+              "at": "2026-11-05T00:04:51.045Z",
+              "gate": 103
+            },
+            {
+              "version": "v000091092",
+              "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+              "at": "2026-11-05T01:06:47.980Z",
+              "gate": 104
+            },
+            {
+              "version": "v000293055",
+              "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+              "at": "2026-11-05T08:11:50.077Z",
+              "gate": 112
+            }
+          ]
+        },
+        "learner": {
+          "pid": 73759,
+          "device": "mps",
+          "deviceName": "Apple MPS",
+          "torch": "2.15.0",
+          "hip": null,
+          "gpuAllocatedBytes": 21545984,
+          "state": "waiting-for-data",
+          "step": 682742,
+          "version": "v000682654",
+          "buffer": 2000000,
+          "ingestedRows": 349564395,
+          "trainedRows": 1398255616,
+          "lossEMA": 3.256802459107767,
+          "replayRatio": 3.999994381578822,
+          "stepsPerSecond": 1.5289695494556401,
+          "updatedAt": "2026-11-05T21:59:11Z"
+        }
+      },
+      "learner": {
+        "pid": 73759,
+        "device": "mps",
+        "deviceName": "Apple MPS",
+        "torch": "2.15.0",
+        "hip": null,
+        "gpuAllocatedBytes": 21545984,
+        "state": "waiting-for-data",
+        "step": 682742,
+        "version": "v000682654",
+        "buffer": 2000000,
+        "ingestedRows": 349564395,
+        "trainedRows": 1398255616,
+        "lossEMA": 3.256802459107767,
+        "replayRatio": 3.999994381578822,
+        "stepsPerSecond": 1.1955724475948148,
+        "updatedAt": "2026-11-05T21:59:27Z"
+      }
+    },
+    "savedLearner": {
+      "pid": 73759,
+      "device": "mps",
+      "deviceName": "Apple MPS",
+      "torch": "2.15.0",
+      "hip": null,
+      "gpuAllocatedBytes": 21545984,
+      "state": "stopped",
+      "step": 682742,
+      "version": "v000682742",
+      "buffer": 2000000,
+      "ingestedRows": 349564395,
+      "trainedRows": 1398255616,
+      "lossEMA": 3.256802459107767,
+      "replayRatio": 3.999994381578822,
+      "stepsPerSecond": 1.1626857664547825,
+      "updatedAt": "2026-11-05T21:59:30Z"
+    },
+    "savedModel": {
+      "version": "v000682742",
+      "file": "v000682742.onnx",
+      "sha256": "6c5d42cda98c2730e6cb1c2a2d744b5b04a393125b057aed438ddbae321fec03",
+      "step": 682742,
+      "trainedRows": 1398255616,
+      "ingestedRows": 349564395,
+      "publishedAt": "2026-11-05T21:59:30Z"
+    },
+    "checkpointSHA256": "7bb319e32f686108b3e96374e0bc7e3111abe3bf004f750d0463e3fbd699ce5a",
+    "stop": {
+      "reason": "mac-memory-accounting-compatibility",
+      "at": "2026-11-05T21:59:30.449Z",
+      "deadlineUnchanged": true,
+      "code": 0
+    },
+    "gate300": {
+      "schema": 1,
+      "kind": "gate",
+      "purpose": "development gate (not a held-out acceptance)",
+      "metric": "Team match score: win 1, draw 0.5, loss 0; uncertainty clustered by seed",
+      "rules": {
+        "tribute": true,
+        "aFail": "draw",
+        "from": 2,
+        "through": "A"
+      },
+      "sourceSHA256": {
+        "ai/danMCai/training/continuous/supervisor.mjs": "6ca4765cdaa6f4f38a7275d462897a33247a30897f3664e75090e0c5ffaa763a",
+        "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+        "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+        "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+        "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+        "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+        "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+        "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+        "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+        "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+        "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+        "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+        "ai/danMCai/training/continuous/resources.mjs": "f88f8403480d17250faadfacceba87075504ed011c4000e17be560fc098bc319",
+        "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+        "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+        "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+        "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+        "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+        "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+        "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+        "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+        "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+        "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+        "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+        "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+        "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+        "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+        "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+        "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+        "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+        "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+        "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+        "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+        "ai/danMCai/training/continuous/mac-24h.mjs": "bcf33270c971bb6aca41fc8abc61fc8dca52becdcac866522925e51b67f657f0"
+      },
+      "protocol": "Greedy network play, no web styles/endgame; each seed played twice with sides swapped; draws 0.5",
+      "challenger": {
+        "version": "v000668538",
+        "file": "/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-training-20261105/ai/danMCai/runs/mac-20261105/league/v000668538.onnx",
+        "sha256": "8ddb5278b83f5d0f37e5f8b0eaddb1a72130cd1fcdec316fcddba8ce4d61ebdc"
+      },
+      "champion": {
+        "version": "v000293055",
+        "file": "/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-training-20261105/ai/danMCai/runs/mac-20261105/gate/champion-300.onnx",
+        "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb"
+      },
+      "settings": {
+        "alpha": 0.05,
+        "beta": 0.05,
+        "mu0": 0.5,
+        "mu1": 0.53,
+        "minPairs": 100,
+        "maxPairs": 1000
+      },
+      "firstSeed": 3530000000,
+      "status": "stopped",
+      "pairs": [
+        {
+          "seed": 3530000000,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000001,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000002,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000003,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000004,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000005,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000006,
+          "scores": [
+            1,
+            0.5
+          ]
+        },
+        {
+          "seed": 3530000007,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000008,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000009,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000010,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000011,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000012,
+          "scores": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "seed": 3530000013,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000014,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000015,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000016,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000017,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000018,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000019,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000020,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000021,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000022,
+          "scores": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "seed": 3530000023,
+          "scores": [
+            0,
+            0.5
+          ]
+        },
+        {
+          "seed": 3530000024,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000025,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000026,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000027,
+          "scores": [
+            0,
+            0
+          ]
+        },
+        {
+          "seed": 3530000028,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000029,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000030,
+          "scores": [
+            1,
+            0
+          ]
+        },
+        {
+          "seed": 3530000031,
+          "scores": [
+            0,
+            1
+          ]
+        },
+        {
+          "seed": 3530000032,
+          "scores": [
+            1,
+            1
+          ]
+        },
+        {
+          "seed": 3530000033,
+          "scores": [
+            1,
+            0
+          ]
+        }
+      ],
+      "wins": 32,
+      "losses": 32,
+      "draws": 4,
+      "test": {
+        "n": 34,
+        "mean": 0.5,
+        "variance": 0.12121212121212122,
+        "llr": -0.1262250000000005,
+        "lower": -2.9444389791664403,
+        "upper": 2.9444389791664403,
+        "decision": null
+      },
+      "startedAt": "2026-11-05T21:58:18.564Z",
+      "meanScore": 0.5,
+      "clusterHoeffding95CI": [
+        0.2670875115705871,
+        0.7329124884294129
+      ],
+      "decision": null,
+      "finishedAt": "2026-11-05T21:59:30.418Z"
+    },
+    "archive": "ai/danMCai/runs/mac-20261105/startup-memory-stop"
+  },
+  "recovery": {
+    "sourceCommit": "aac0bbd9062b67b3c28d866aab5a0b077f413bd6",
+    "sourceRoot": "ai/danMCai/workspace/mac-training-20261105-r2",
+    "physicalRun": "ai/danMCai/workspace/mac-training-20261105/ai/danMCai/runs/mac-20261105",
+    "canonicalRun": "ai/danMCai/runs/mac-20261105",
+    "trackedSourceChanges": [],
+    "expectedUntrackedDependencyLink": "node_modules",
+    "sourceSHA256": {
+      "ai/danMCai/training/continuous/supervisor.mjs": "39066cda321854ef992488adf4155ef37f36242083d1318b585e69b173fbdfb0",
+      "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+      "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+      "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+      "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+      "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+      "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+      "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+      "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+      "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+      "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+      "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+      "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+      "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+      "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+      "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+      "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+      "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+      "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+      "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+      "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+      "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+      "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+      "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+      "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+      "ai/danMCai/training/continuous/mac-24h.mjs": "fe55ae263ccf75b0cfabf6dc4218915228c2950c381523bf3837e97503ebe272"
+    },
+    "protocolHistory": [
+      {
+        "at": "2026-11-05T22:01:23.978Z",
+        "reason": "Mac startup compatibility: count free plus inactive pages for available headroom; preserve 4/5 GiB budget, weights, Adam, seed cursors and original deadline",
+        "elapsedSecondsBefore": 77.489,
+        "totalsBefore": {
+          "matches": 39,
+          "decisions": 17036,
+          "rows": 17036
+        },
+        "learnerStepBefore": 682742,
+        "previous": {
+          "sourceSHA256": {
+            "ai/danMCai/training/continuous/supervisor.mjs": "6ca4765cdaa6f4f38a7275d462897a33247a30897f3664e75090e0c5ffaa763a",
+            "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+            "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+            "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+            "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+            "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+            "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+            "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+            "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+            "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+            "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+            "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+            "ai/danMCai/training/continuous/resources.mjs": "f88f8403480d17250faadfacceba87075504ed011c4000e17be560fc098bc319",
+            "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+            "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+            "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+            "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+            "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+            "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+            "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+            "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+            "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+            "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+            "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+            "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+            "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+            "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+            "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+            "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+            "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+            "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+            "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+            "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+            "ai/danMCai/training/continuous/mac-24h.mjs": "bcf33270c971bb6aca41fc8abc61fc8dca52becdcac866522925e51b67f657f0"
+          },
+          "actors": 2,
+          "resourceBudget": {
+            "reserveGB": 4,
+            "resumeGB": 5
+          },
+          "actorImplementation": "fast",
+          "fastActor": {
+            "games": 8,
+            "provider": "cpu"
+          }
+        },
+        "settings": {},
+        "changedSources": [
+          "ai/danMCai/training/continuous/supervisor.mjs",
+          "ai/danMCai/training/continuous/resources.mjs",
+          "ai/danMCai/training/continuous/mac-24h.mjs"
+        ]
+      }
+    ],
+    "samePhysicalRun": true,
+    "manualConfigFingerprintBypass": false,
+    "memoryDefinition": "macOS vm_stat (free + inactive) * actual page size; conservative raw-free fallback with error recorded",
+    "memorySource": "https://github.com/giampaolo/psutil/blob/release-7.2.2/psutil/_psosx.py#L81-L95"
+  },
+  "protocol": {
+    "network": "unchanged P0 full network",
+    "encoding": "513 state + 54 action features",
+    "learnerDevice": "mps",
+    "samplerProvider": "cpu",
+    "actors": 2,
+    "gamesPerActor": 8,
+    "learner": {
+      "device": "mps",
+      "threads": 1,
+      "batch": 2048,
+      "learningRate": 1e-05,
+      "gradClip": 1,
+      "capacity": 2000000,
+      "minSamples": 100000,
+      "replayRatio": 4,
+      "exportSeconds": 600,
+      "targetMatchWeight": 0,
+      "anchorWeight": 0,
+      "keepVersions": 6,
+      "seed": 20261105
+    },
+    "actorMix": {
+      "self": 0.5,
+      "league": 0.3,
+      "rule": 0.2
+    },
+    "exploration": {
+      "type": "softmax",
+      "temperature": 0.02
+    },
+    "ruleOpponent": "historical original baseline, not Clint",
+    "resourceBudget": {
+      "reserveGB": 4,
+      "resumeGB": 5
+    },
+    "actorSeedOffset": 3000000,
+    "evaluationBlockOffset": 300,
+    "randomStateAndRingLayoutBitwisePreserved": false
+  },
+  "inheritedCounters": {
+    "step": 682654,
+    "ingestedRows": 349519139,
+    "trainedRows": 1398075392
+  },
+  "observed": {
+    "learner": {
+      "pid": 74411,
+      "device": "mps",
+      "deviceName": "Apple MPS",
+      "torch": "2.15.0",
+      "hip": null,
+      "gpuAllocatedBytes": 21545984,
+      "state": "waiting-for-data",
+      "step": 682939,
+      "version": "v000682742",
+      "buffer": 2000000,
+      "ingestedRows": 349664833,
+      "trainedRows": 1398659072,
+      "lossEMA": 3.294623472402085,
+      "replayRatio": 3.9999992564308005,
+      "stepsPerSecond": 1.517851673527045,
+      "updatedAt": "2026-11-05T22:03:34Z"
+    },
+    "supervisorUpdatedAt": "2026-11-05T22:03:23.995Z",
+    "samplerTotals": {
+      "matches": 313,
+      "decisions": 144882,
+      "rows": 144882
+    },
+    "resources": {
+      "reserveGB": 4,
+      "resumeGB": 5,
+      "freeGB": 13.140609741210938,
+      "rawFreeGB": 0.1243743896484375,
+      "measurement": "vm_stat free + inactive",
+      "measurementError": null,
+      "pausedActors": [],
+      "updatedAt": "2026-11-05T22:03:34.040Z"
+    },
+    "processes": "74390     1   0.0  51408 02:14 /Users/stevensun/.nvm/versions/node/v24.15.0/bin/node\n74409 74390   0.0  59824 02:12 /Users/stevensun/.nvm/versions/node/v24.15.0/bin/node\n74411 74409   0.0 1735952 02:12 /Users/stevensun/Desktop/guandanai/ai/danMCai/environment/mac/bin/python\n74412 74409 122.7 712672 02:12 /Users/stevensun/.nvm/versions/node/v24.15.0/bin/node\n74413 74409 125.5 758112 02:12 /Users/stevensun/.nvm/versions/node/v24.15.0/bin/node\n",
+    "running": [
+      "learner",
+      "actor-0",
+      "actor-1",
+      "gate"
+    ],
+    "latestSaved": {
+      "version": "v000682742",
+      "file": "v000682742.onnx",
+      "sha256": "6c5d42cda98c2730e6cb1c2a2d744b5b04a393125b057aed438ddbae321fec03",
+      "step": 682742,
+      "trainedRows": 1398255616,
+      "ingestedRows": 349564395,
+      "publishedAt": "2026-11-05T21:59:30Z"
+    },
+    "champion": {
+      "version": "v000293055",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "since": "2026-11-05T08:11:50.077Z",
+      "history": [
+        {
+          "version": "v000000000",
+          "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+          "at": "2026-11-04T20:40:54.512Z",
+          "reason": "initial"
+        },
+        {
+          "version": "v000023473",
+          "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+          "at": "2026-11-04T22:08:59.123Z",
+          "gate": 101
+        },
+        {
+          "version": "v000046476",
+          "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+          "at": "2026-11-04T23:03:24.799Z",
+          "gate": 102
+        },
+        {
+          "version": "v000068679",
+          "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+          "at": "2026-11-05T00:04:51.045Z",
+          "gate": 103
+        },
+        {
+          "version": "v000091092",
+          "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+          "at": "2026-11-05T01:06:47.980Z",
+          "gate": 104
+        },
+        {
+          "version": "v000293055",
+          "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "at": "2026-11-05T08:11:50.077Z",
+          "gate": 112
+        }
+      ]
+    },
+    "additionalMacUpdates": 285,
+    "additionalIngestedRowsIncludingSavedTail": 145694,
+    "additionalTrainedRows": 583680,
+    "initialSavedTailRows": 28220,
+    "shortObservationStart": {
+      "observedAtEpoch": 1793916140.011171,
+      "learner": {
+        "pid": 74411,
+        "device": "mps",
+        "deviceName": "Apple MPS",
+        "torch": "2.15.0",
+        "hip": null,
+        "gpuAllocatedBytes": 21545984,
+        "state": "waiting-for-data",
+        "step": 682807,
+        "version": "v000682742",
+        "buffer": 2000000,
+        "ingestedRows": 349597569,
+        "trainedRows": 1398388736,
+        "lossEMA": 3.215891595795324,
+        "replayRatio": 3.9999955949350436,
+        "stepsPerSecond": 1.1843405668630889,
+        "updatedAt": "2026-11-05T22:02:19Z"
+      },
+      "totals": {
+        "matches": 154,
+        "decisions": 71778,
+        "rows": 71778
+      }
+    },
+    "shortTermSupervisorDecisionsPerSecond": 970.2,
+    "throughputCaveat": "Short startup observation, includes waiting at the inherited replay-ratio ceiling; not 24h performance or strength evidence"
+  },
+  "validation": {
+    "node": {
+      "passed": 174,
+      "failed": 0
+    },
+    "pythonDanMCai": {
+      "total": 35,
+      "passed": 34,
+      "skipped": 1,
+      "skippedReason": "CUDA unavailable; real MPS test passed"
+    },
+    "pythonResearch": {
+      "passed": 9
+    },
+    "format": "passed",
+    "build": "dc9e641f73",
+    "dashboard": {
+      "url": "http://127.0.0.1:8766/",
+      "actualMPSLabel": true,
+      "cpuSamplerLabel": true,
+      "fixedDeadlineShown": true,
+      "memoryHeadroomShown": true,
+      "actualBrowserObserved": true
+    },
+    "initialRestrictedChecks": {
+      "nodeFailures": "local HTTP listen EPERM in sandbox; rerun natively passed",
+      "buildFailure": "sandbox DNS ENOTFOUND github.com; rerun with network passed"
+    }
+  }
+}

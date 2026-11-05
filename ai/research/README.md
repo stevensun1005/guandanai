@@ -32,4 +32,4 @@
 
 [Top 5 与独立完整牌面推演](evaluation/coach-top5-private-20261105.json)：记录普通评分、主机／队友／对手分支隔离、数据排除和浏览器兼容性，详见主报告第 24 节。没有新增训练或完整强度比赛，不能据此声称胜率提高。
 
-[MacBook 24 小时交接](MAC_HANDOFF.md) · [迁移与恢复证据](evaluation/mac-handoff-20261105.json)：Windows 正常停机、完整现存运行快照与 Adam 恢复已在 Windows 侧验证，MPS 真机执行与性能仍待 Mac 实测。新增方法、继承计数和本次限时授权见主报告第 26 节。
+[MacBook 24 小时交接](MAC_HANDOFF.md) · [迁移与恢复证据](evaluation/mac-handoff-20261105.json)：Windows 正常停机、完整现存运行快照与 Adam 恢复已在 Windows 侧验证，这是 Windows 准备阶段的历史记录。后续 [Mac 真机启动证据](evaluation/mac-continuation-20261105.json)记录 M1 Pro 上的 MPS／Adam／ONNX 实测、内存计数负结果和同一窗口恢复；方法与继承计数见主报告第 26、28 节，完整 24 小时尚未完成。

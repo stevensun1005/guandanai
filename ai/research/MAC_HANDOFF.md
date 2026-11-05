@@ -2,6 +2,25 @@
 
 这份交接只授权 **Mac 首次正式启动后的一个 24 小时窗口**，用于所有者在 Windows 上正常使用电脑期间继续 danMCai 训练。环境准备和兼容性预检不计时；首次通过预检后保存固定截止时刻。中断后只跑剩余时间，到期不自动续约、不每日重启、不同时重启 Windows 训练。请在本次 2026-11-05 晚间接手；若隔日才看到交接，先核对所有者最新时间要求。
 
+## 当前 Mac 执行入口（2026-11-05）
+
+迁移包已从 Downloads 完整校验并恢复 516 个文件。原生 M1 Pro、32 GiB、macOS 27.2、Node 24.15.0、Python 3.12.2、PyTorch 2.15.0 已实际完成 MPS 检查点／Adam 恢复、临时更新和 ONNX 预检。正式运行从 682,654 步继承，**首次窗口为 `2026-11-05T21:58:13.414Z` 至 `2026-11-06T21:58:13.414Z`**，即 Toronto 11 月 5 日 16:58:13 至 11 月 6 日 16:58:13；恢复后逐字节核对 schedule 未变。
+
+首个冻结检出 `mac-training-20261105`（`af640a8`）因 macOS 原始空闲页口径暂停采样，正常保存至 682,742 步后原样保留。当前执行源码在新冻结检出 **`ai/danMCai/workspace/mac-training-20261105-r2`（`aac0bbd`）**，通过具名协议恢复同一物理运行；原检查点、Adam、累计量和种子游标继承。主项目 `ai/danMCai/runs/mac-20261105` 仍链接到原检出内的物理数据，新冻结检出也链接到同一数据。不要在旧冻结检出重新启动或新建第二个运行。
+
+只在确认当前启动器和调度器均已退出、且原截止尚未到时，才在主项目根目录恢复：
+
+```bash
+mac_project="$PWD"
+cd "$mac_project/ai/danMCai/workspace/mac-training-20261105-r2"
+nohup node ai/danMCai/training/continuous/mac-24h.mjs \
+  --snapshot="$mac_project/ai/danMCai/workspace/mac-import" \
+  --python="$mac_project/ai/danMCai/environment/mac/bin/python" \
+  >> ai/publishing/cache/mac-24h.log 2>&1 &
+```
+
+此命令读取既有 schedule，不重新计时；没有每日重启任务。实时只读面板为 <http://127.0.0.1:8766/>。已完成的预检与首次兼容性停机见[本次证据](evaluation/mac-continuation-20261105.json)和主报告第 28 节。完整窗口尚未完成，没有新增独立棋力验收，网页冠军不变。下文的首次建立工作树命令保留为准备流程，当前 Mac 不要重复执行。
+
 ## 给 Mac 上的 Codex
 
 先读 `AGENTS.md`、本文件、`CONTINUOUS_TRAINING.md`、`CODEX_HANDOFF.md` 和 `STRUCTURE_MIGRATION.md`。这次先完成迁移、MPS 实测与续训，不在 24 小时窗口内插入 LSTM、改奖励、改对手池或重新从零训练等新实验。保护已有草稿，直接提交推送 main；训练用独立冻结检出，报告与网页发布使用另外的工作树。
