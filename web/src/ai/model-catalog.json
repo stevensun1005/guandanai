@@ -198,6 +198,25 @@
         "step": 61045,
         "registeredAt": "2026-11-05T17:15:32.032Z"
       }
+    },
+    {
+      "id": "011",
+      "file": "bot-011.onnx",
+      "sha256": "3cb8d3672bb014399cf8500940f6d27506eba0ede9540b46df7c5ac60c4f87a0",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-011/bot-011.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-gpubatch",
+        "version": "model-000000078087",
+        "status": "experimental-not-heldout-accepted",
+        "step": 78087,
+        "registeredAt": "2026-11-05T21:44:57.015Z"
+      }
     }
   ],
   "selection": {

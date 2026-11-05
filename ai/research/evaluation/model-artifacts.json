@@ -3642,6 +3642,18 @@
           "step": 61045,
           "registeredAt": "2026-11-05T17:15:32.032Z"
         }
+      },
+      {
+        "id": "011",
+        "sha256": "3cb8d3672bb014399cf8500940f6d27506eba0ede9540b46df7c5ac60c4f87a0",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-011/bot-011.onnx",
+        "source": {
+          "run": "guanzero-adp-gpubatch",
+          "version": "model-000000078087",
+          "status": "experimental-not-heldout-accepted",
+          "step": 78087,
+          "registeredAt": "2026-11-05T21:44:57.015Z"
+        }
       }
     ]
   },
@@ -3658,6 +3670,14 @@
       "winRate": 0.788,
       "target80Supported": false,
       "scope": "Only two model-006 seats versus two unchanged original rule seats; no old-model improvement or promotion claim"
+    }
+  ],
+  "guanzeroDevelopmentEvidence": [
+    {
+      "file": "ai/research/evaluation/guanzero-legacy-block-0003-20261105.json",
+      "reportSHA256": "cc3a30c318c18ff8b62039918c2297b3792f339d24dfb63f7d3f4045f29b87d4",
+      "protocol": "legacy-200",
+      "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737"
     }
   ]
 }

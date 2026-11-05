@@ -5,7 +5,7 @@
 | 顺序 | 当前选项                                                 | 来源                                        |
 | ---- | -------------------------------------------------------- | ------------------------------------------- |
 | 1    | Clint规则机器人                                          | 独立 rules-v2，不使用神经网络               |
-| 2–3  | guanzero-adp-gpubatch-61045／guanzero-adp-gpubatch-44752 | GuanZero 最近两代，归档 010／007            |
+| 2–3  | guanzero-adp-gpubatch-78087／guanzero-adp-gpubatch-61045 | GuanZero 最近两代，归档 011／010            |
 | 4    | danMCai-v000000000                                       | 原始 P0，归档 001                           |
 | 5–6  | danMCai-v000293055／danMCai-v000091092                   | danMCai 最近两代实际门控冠军，归档 009／008 |
 

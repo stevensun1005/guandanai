@@ -1,0 +1,199 @@
+{
+  "observedAt": "2026-11-05T21:45:02.033Z",
+  "defaultId": "009",
+  "model": {
+    "id": "011",
+    "file": "bot-011.onnx",
+    "sha256": "3cb8d3672bb014399cf8500940f6d27506eba0ede9540b46df7c5ac60c4f87a0",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-011/bot-011.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-gpubatch",
+      "version": "model-000000078087",
+      "status": "experimental-not-heldout-accepted",
+      "step": 78087,
+      "registeredAt": "2026-11-05T21:44:57.015Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "frozenSnapshot": {
+    "frozenAt": "2026-11-05T21:44:04.843551+00:00",
+    "run": "guanzero-adp-gpubatch",
+    "checkpoint": "model-000000078087",
+    "step": 78087,
+    "sha256": "3cb8d3672bb014399cf8500940f6d27506eba0ede9540b46df7c5ac60c4f87a0",
+    "bytes": 6346014,
+    "latest": {
+      "file": "model-000000078087.onnx",
+      "version": 78087,
+      "updatedAt": 1793915026.2753866
+    },
+    "expectedId": "011",
+    "preservedDefaultId": "009",
+    "preservedSelection": {
+      "mode": "champions-v1",
+      "danMCaiChampions": [
+        "009",
+        "008"
+      ]
+    },
+    "baseCommit": "ee42ceebf52be27f86260141ca937a64b976a606",
+    "trainingConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+    "alreadyRegistered": []
+  },
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "positions": 16,
+      "values": 49,
+      "maxAbsoluteError": 4.76837158203125e-07,
+      "actionMismatches": 0
+    },
+    "checks": {
+      "nodeTests": 170,
+      "pythonGuanZeroTests": 8,
+      "format": "passed",
+      "build": "fe4e37a33b"
+    },
+    "menu": {
+      "ids": [
+        "clint-rule",
+        "011",
+        "010",
+        "001",
+        "009",
+        "008"
+      ],
+      "guanzeroNames": [
+        "guanzero-adp-gpubatch-78087",
+        "guanzero-adp-gpubatch-61045"
+      ],
+      "defaultId": "009",
+      "danMCaiChampions": [
+        "009",
+        "008"
+      ],
+      "localBrowserVerified": true
+    },
+    "integratedDocumentationCommit": "02c0c9115abb1dcefbef5a8935166630fa92cd30"
+  },
+  "developmentEvidence": {
+    "newLegacyBlock": {
+      "file": "guanzero-legacy-block-0003-20261105.json",
+      "reportSHA256": "cc3a30c318c18ff8b62039918c2297b3792f339d24dfb63f7d3f4045f29b87d4",
+      "protocol": "legacy-200-not-development-500",
+      "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+      "seedStart": 3700300000,
+      "seedEnd": 3700300099,
+      "pairs": 100,
+      "completedAt": "2026-11-05T21:34:22.394Z",
+      "results": {
+        "random": {
+          "matches": 200,
+          "wins": 200,
+          "losses": 0,
+          "draws": 0,
+          "matchWinRate": 1,
+          "matchScore": 1,
+          "rounds": 1009,
+          "roundWins": 1007,
+          "roundWinRate": 0.998017839444995,
+          "averageUpgradePoints": 2.9841427155599605,
+          "confidence95": {
+            "matchWinRate": [
+              1,
+              1
+            ],
+            "matchScore": [
+              1,
+              1
+            ],
+            "roundWinRate": [
+              0.995049504950495,
+              1
+            ],
+            "averageUpgradePoints": [
+              2.9712871287128713,
+              2.99403578528827
+            ]
+          }
+        },
+        "rule": {
+          "matches": 200,
+          "wins": 33,
+          "losses": 147,
+          "draws": 20,
+          "matchWinRate": 0.165,
+          "matchScore": 0.215,
+          "rounds": 2052,
+          "roundWins": 680,
+          "roundWinRate": 0.3313840155945419,
+          "averageUpgradePoints": -0.7266081871345029,
+          "confidence95": {
+            "matchWinRate": [
+              0.12,
+              0.22
+            ],
+            "matchScore": [
+              0.165,
+              0.27
+            ],
+            "roundWinRate": [
+              0.30720545277507305,
+              0.3559077809798271
+            ],
+            "averageUpgradePoints": [
+              -0.844946025515211,
+              -0.6041666666666666
+            ]
+          }
+        },
+        "p0": {
+          "matches": 200,
+          "wins": 0,
+          "losses": 196,
+          "draws": 4,
+          "matchWinRate": 0,
+          "matchScore": 0.01,
+          "rounds": 1585,
+          "roundWins": 289,
+          "roundWinRate": 0.18233438485804415,
+          "averageUpgradePoints": -1.7066246056782335,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0.0025,
+              0.02
+            ],
+            "roundWinRate": [
+              0.16276041666666666,
+              0.200609756097561
+            ],
+            "averageUpgradePoints": [
+              -1.7979002624671916,
+              -1.6183810103469263
+            ]
+          }
+        }
+      },
+      "ruleVersion": "original"
+    },
+    "new500ReportsAtFreeze": [],
+    "existing500ReportsAlreadyArchived": true,
+    "scope": "Separate model snapshots; none are strength acceptance of the published 78087 model"
+  }
+}
