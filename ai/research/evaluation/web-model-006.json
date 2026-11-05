@@ -1,0 +1,191 @@
+{
+  "observedAt": "2026-11-05T12:55:22.408Z",
+  "defaultId": "006",
+  "model": {
+    "id": "006",
+    "file": "bot-006.onnx",
+    "sha256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-006/bot-006.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "gpu-main",
+      "version": "v000481076",
+      "step": 481076,
+      "exportedAt": "2026-11-05T12:51:36Z",
+      "expectedSHA256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+      "status": "experimental-not-heldout-accepted",
+      "registeredAt": "2026-11-05T12:55:17.396Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "trainingExportMetadata": {
+    "version": "v000481076",
+    "file": "v000481076.onnx",
+    "sha256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+    "step": 481076,
+    "trainedRows": 985243648,
+    "ingestedRows": 246327313,
+    "publishedAt": "2026-11-05T12:51:36Z"
+  },
+  "trainingRunConfigSHA256": "61d1118662bc5259b72d73e995b82b703b87ea7622a95c7cdd9942c5360f379e",
+  "trainingSourceSHA256": {
+    "scripts/continuous/supervisor.mjs": "916fc3eafb641d98e086977aa1764e5c64b3d5a16daebf0c45e301c7f30f7fcf",
+    "scripts/continuous/actor.mjs": "9ec411f0d792045ea5161209f092b1047e96e4cdecfe8245a28113f98c475602",
+    "scripts/continuous/gate.mjs": "20ab55acd561e53f308a21029c3f42d20960be086d3097026575d5d1cd404eae",
+    "scripts/continuous/lib.mjs": "548a28e0b8954294c731c06a4b75b3b21e999aaed2544b45cc36f44620e01edf",
+    "scripts/continuous/learner.py": "4b180586f43f5cf37760cd38ada8e52a568c72429c184167e9e9aae3757b1e9f",
+    "scripts/continuous/value_net.py": "088dc86465638ea5ac77c5744e1b653319194f60fa5783fe15d1597a9b21f0b2",
+    "scripts/continuous/fast-actor.mjs": "5faf7fa538ed5c6bc551c4859e0a7126e69074772d209f76bc130f98032658db",
+    "scripts/continuous/batch-inference.mjs": "6ac67462facf46cc572eafa0e8361d1b1e51250ffda05e78b491bc0a3f6a4771",
+    "scripts/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "scripts/continuous/fast-candidates.mjs": "5068cb392b0b9f4baaf5d8c788ff0a5182f5dd607711bccf2c1bc1b72314ff82",
+    "scripts/continuous/fast-rollout.mjs": "a79ab297ed3d155886fcce56888d99f6aff7e4c5894f1e3458bd1388a9603dc3",
+    "scripts/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "scripts/continuous/resources.mjs": "f88f8403480d17250faadfacceba87075504ed011c4000e17be560fc098bc319",
+    "scripts/continuous/remote.mjs": "7172ffd079f67e503790fb7638ae80ff9d208ad8473de5f308bb6eb1425f25a9",
+    "scripts/lib/match-rollout.mjs": "7a7711101ea2f8a619185528dcda06492f1d98732065e9793416ce12a427d84b",
+    "scripts/lib/match-simulation.mjs": "b186b7558192abf5bd9e603594b149f8eb14df8c1da74b642b82c75ec96255fc",
+    "scripts/lib/simulation.mjs": "e1a7900eb8d4938ea70681354b880eac3be682e7573afa53642d8e23bf8e85ba",
+    "scripts/lib/rule-baseline.mjs": "d8fdda40cdea86e9e3b0f4000880f0baf05b809e0f64bb646aadaaa6a04759ef",
+    "src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "src/core/match.js": "7f5b73d20c3dee850177ba113b1388366eb14f77abdb283c7f8f7d5496067286",
+    "src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "src/ai/encoding.mjs": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+    "src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "a059dc2f5015ace1d731e943d0bae75f2bac18efbbef184cf067fbd1a55c3f6b"
+  },
+  "trainingSourceHashConvention": "UTF-8 text with CRLF normalized to LF",
+  "sourceCapture": "Latest complete export frozen at the start of the publication cycle; live run left unchanged",
+  "compatibility": {
+    "observedAtUTC": "2026-11-05T12:57:43.082449+00:00",
+    "testedSourceBaseCommit": "ee8e7b4d4e4cccaed34032e2e1f608b44a51ac6e",
+    "isolatedWorktreeWithoutOwnerDrafts": true,
+    "buildVersion": "82b29b0ca5",
+    "nodeTests": {
+      "passed": 119,
+      "failed": 0
+    },
+    "python": {
+      "localPassed": 27,
+      "gpuOnlySkipped": 1,
+      "guanZeroPassed": 8,
+      "modelStudyPassed": 9
+    },
+    "formatCheck": true,
+    "build": true,
+    "onnxIO": {
+      "modelSHA256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+      "inputs": {
+        "state": [
+          1,
+          513
+        ],
+        "actions": [
+          "dynamic",
+          54
+        ]
+      },
+      "checks": [
+        {
+          "candidates": 1,
+          "valuesShape": [
+            1,
+            1
+          ],
+          "finite": true
+        },
+        {
+          "candidates": 3,
+          "valuesShape": [
+            3,
+            1
+          ],
+          "finite": true
+        },
+        {
+          "candidates": 129,
+          "valuesShape": [
+            129,
+            1
+          ],
+          "finite": true
+        }
+      ],
+      "trainingBrowserEncoding": {
+        "positions": 48,
+        "all513StateFeaturesExact": true,
+        "trainingEncoderSHA256": "e47446db72129d8e61bc23540cf2f56cc6ae6578a491d406f3f8529df05b7d51",
+        "browserEncoderSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+        "hashConvention": "UTF-8 with CRLF normalized to LF"
+      }
+    },
+    "browserNumerical": {
+      "evidence": "ai/research/evaluation/web-model-006-browser.json",
+      "positions": 48,
+      "candidates": 7922,
+      "exactArgmax": 48,
+      "maxAbsoluteValueError": 1.8477439880371094e-06,
+      "pageErrors": []
+    },
+    "productionBrowser": {
+      "productionGlobalsHidden": true,
+      "policyTurns": 2,
+      "successfulModelIds": [
+        "001",
+        "006"
+      ],
+      "pageErrors": []
+    },
+    "modelPicker": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      }
+    ],
+    "replayImportEscaping": {
+      "importedResultEscaped": true,
+      "priorResultEscaped": true,
+      "replayResultEscaped": true,
+      "pageErrors": []
+    },
+    "historicalModelIdsRetained": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005"
+    ],
+    "independentStrengthMatchesAdded": 0
+  }
+}

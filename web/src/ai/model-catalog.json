@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "defaultId": "005",
+  "defaultId": "006",
   "models": [
     {
       "id": "001",
@@ -91,6 +91,26 @@
         "status": "experimental-not-heldout-accepted",
         "step": 27771,
         "registeredAt": "2026-11-05T09:17:33.468Z"
+      }
+    },
+    {
+      "id": "006",
+      "file": "bot-006.onnx",
+      "sha256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-006/bot-006.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "gpu-main",
+        "version": "v000481076",
+        "step": 481076,
+        "exportedAt": "2026-11-05T12:51:36Z",
+        "expectedSHA256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+        "status": "experimental-not-heldout-accepted",
+        "registeredAt": "2026-11-05T12:55:17.396Z"
       }
     }
   ]
