@@ -1,6 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { analyze, beats, strength } from '../core/combinations.js';
-import { TYPE_NAME, makeDeck, cardText } from '../core/cards.js';
+import { TYPE_NAME, BASE_NAMES, makeDeck, cardText } from '../core/cards.js';
 import { VERSION } from '../network/protocol.js';
 import { $ } from '../ui/cards.js';
 import { layoutHand } from '../hand/layout.js';
@@ -122,6 +122,8 @@ function startSnapshot(game) {
         s.actions = r.actions;
         s.search = r.search;
         r.actions.forEach((ids, i) => s.scores.set(actionKey(ids), r.values[i]));
+        // Private-table rollouts return the moves they assumed; show them so a ranking can be checked.
+        s.lines = new Map((r.lines || []).map((line, i) => [actionKey(r.actions[i]), line]));
         s.ranked = rankedCoachActions(s.actions, s.values, game.L, 5, s.observation.trick?.play);
       })
       .catch(() => {
@@ -150,6 +152,7 @@ function grade(s, action) {
       void request({ ...s.observation, onlyAction: action.ids })
         .then((r) => {
           s.scores.set(key, r.values[0]);
+          if (r.lines?.[0]) s.lines?.set(key, r.lines[0]);
           s.values.push(r.values[0]);
           s.actions.push(r.actions[0]);
           if (s.search) {
@@ -282,6 +285,14 @@ function renderTop5(s, game) {
       name.textContent = `${index + 1}. ${row.ids.length ? TYPE_NAME[row.shape?.type] || '出牌' : '过牌'}`;
       const score = document.createElement('b');
       score.textContent = `${relativeRating(s.values, row.value).percent}%`;
+      if (index > 0) {
+        // The percentage is rescaled within this turn; the raw gap shows whether it really matters.
+        const gap = document.createElement('small');
+        gap.className = 'coach-gap';
+        gap.textContent = `差 ${(row.value - top[0].value).toFixed(2)}`;
+        gap.title = '与第一名的模型值差（约等于升级分），越接近 0 差别越小';
+        score.append(' ', gap);
+      }
       heading.append(name, score);
       button.append(heading);
       const cards = document.createElement('span');
@@ -296,6 +307,19 @@ function renderTop5(s, game) {
       }
       if (!row.ids.length) cards.textContent = '本轮不跟牌';
       button.append(cards);
+      const line = s.lines?.get(actionKey(row.ids));
+      if (line?.length) {
+        const steps = document.createElement('span');
+        steps.className = 'coach-line';
+        const shown = line
+          .slice(0, 4)
+          .map(
+            (step) =>
+              `${BASE_NAMES[step.p]} ${step.cards?.length ? step.cards.map((id) => cardText(deck[id])).join('') : '过'}`,
+          );
+        steps.textContent = `推演：${shown.join(' → ')}${line.length > 4 ? ' …' : ''}`;
+        button.append(steps);
+      }
       button.onclick = () => {
         if (!enabled || !available() || !sameTurn(s, runtime.game) || runtime.game.turn !== 0)
           return;

@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { makeDeck } from '../src/core/cards.js';
 import { rankedCoachActions, coachReading } from '../src/coach/evaluation.mjs';
 import { scoreOracle } from '../src/coach/oracle.mjs';
+import { candidates } from '../src/ai/candidates.js';
+import { advanceRound, createRound, seededRandom } from '../../ai/shared/simulation/simulation.mjs';
 import {
   privateEligible,
   privateActive,
@@ -117,4 +119,96 @@ test('Ambiguous wild cards use the actual UI legal reading for the current trick
   assert.equal(play.value, 3);
   const rows = rankedCoachActions([ids], [1], 7, 5, trick);
   assert.equal(rows[0].shape.type, 'pairs3');
+});
+
+// Replays a scored branch and returns whose turn it is at the leaf (null when the round ended).
+function leafTurn(observation, rootIds, line) {
+  const game = {
+    hands: observation.hands.map((hand) => hand.map((id) => deck[id])),
+    L: observation.level,
+    levels: observation.levels.slice(),
+    turn: observation.player,
+    log: observation.log.map((e) => ({ p: e.p, cards: e.cards?.map((id) => deck[id]) || null })),
+    trick: observation.trick && structuredClone(observation.trick),
+    passes: observation.passes,
+    out: observation.out.slice(),
+  };
+  const pick = (p, ids) =>
+    ids?.length
+      ? candidates(game.hands[p], game.L, game.trick?.play).find(
+          (play) =>
+            play &&
+            play.cards.length === ids.length &&
+            play.cards.every((card) => ids.includes(card.id)),
+        )
+      : null;
+  let result = advanceRound(game, pick(observation.player, rootIds));
+  for (const step of line) {
+    assert.equal(step.p, game.turn, 'each rollout step is played by the seat to move');
+    result = advanceRound(game, pick(step.p, step.cards));
+  }
+  return result ? null : game.turn;
+}
+
+test('Every unfinished branch is scored at the advising seat, even after 接风 hands the lead to an opponent', async () => {
+  // Seat 1 led its last card and is out; seats 2 and 3 passed. If seat 0 also passes, 接风 gives
+  // the lead to seat 3, an opponent, so a fixed four-move horizon would end on an opponent's turn.
+  const id = (suit, rank) => ({ S: 0, H: 13, C: 26, D: 39 })[suit] + rank - 2;
+  const game = {
+    hands: [
+      [id('S', 3), id('S', 4), id('H', 3), id('H', 14), id('S', 8)],
+      [],
+      [id('C', 3), id('C', 4), id('C', 7)],
+      [id('D', 2), id('D', 3), id('D', 4), id('D', 5), id('D', 9)],
+    ].map((hand) => hand.map((n) => deck[n])),
+    L: 10,
+    levels: [10, 10],
+    turn: 0,
+    log: [
+      { p: 1, cards: [deck[id('S', 6)]], lead: true },
+      { p: 2, cards: null },
+      { p: 3, cards: null },
+    ],
+    out: [1],
+    trick: { player: 1, play: { type: 'single', value: 6, n: 1 } },
+    passes: 2,
+    phase: 'play',
+  };
+  const observation = oracleObservation(game);
+  const result = await scoreOracle(observation, infer, { horizon: 4, maxMs: 10000 });
+  assert.equal(result.search.mismatchedLeaves, 0);
+  assert.equal(result.lines.length, result.actions.length);
+  for (const [i, ids] of result.actions.entries()) {
+    const turn = leafTurn(observation, ids, result.lines[i]);
+    if (turn !== null) assert.equal(turn, 0, `branch ${i} must end on the advising seat`);
+  }
+  const pass = result.actions.findIndex((ids) => !ids.length);
+  assert(pass >= 0, 'passing to a partner is always evaluated');
+  assert(result.lines[pass].length > 3, 'the pass branch continues past the four-move horizon');
+});
+
+test('Random mid-round positions never compare leaves from different seats', async () => {
+  const random = seededRandom(91);
+  let checked = 0;
+  for (let seed = 0; seed < 6; seed++) {
+    const game = createRound(4_100_000 + seed);
+    game.phase = 'play';
+    for (let move = 0; move < 30 + seed * 7; move++) {
+      const plays = candidates(game.hands[game.turn], game.L, game.trick?.play);
+      if (advanceRound(game, plays[Math.floor(random() * plays.length)])) break;
+    }
+    if (!game.hands[game.turn]?.length || game.out.length >= 2) continue;
+    const observation = oracleObservation(game, game.turn);
+    const result = await scoreOracle(observation, infer, { horizon: 4, maxRoots: 3, maxMs: 10000 });
+    for (const [i, ids] of result.actions.entries()) {
+      const turn = leafTurn(observation, ids, result.lines[i]);
+      if (turn === null || result.lines[i].length >= 4 + 8 - 1) continue;
+      const evaluator = game.hands[observation.player].length
+        ? observation.player
+        : (observation.player + 2) % 4;
+      assert([observation.player, evaluator, (observation.player + 2) % 4].includes(turn));
+      checked++;
+    }
+  }
+  assert(checked > 0);
 });
