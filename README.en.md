@@ -51,6 +51,7 @@ Online rounds with at least two people are archived as structured, pseudonymous 
 | Training versions   | GuanZero run-version names and gate-verified danMCai champions                                |
 | Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
 | Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
+| Table emotes        | Preset emoji and quick phrases (no free text) shown beside the sender's seat                  |
 | Public scorecards   | Select earlier rounds, filter public actions and export a round or the match                  |
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |

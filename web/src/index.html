@@ -163,6 +163,15 @@
             title="开麦后同桌的人能听到你说话"
           >
             闭麦</button
+          ><button
+            class="link"
+            id="emoteBtn"
+            aria-haspopup="dialog"
+            aria-controls="emotePanel"
+            aria-expanded="false"
+            title="给同桌发表情或快捷语"
+          >
+            表情</button
           ><button class="link" id="rulesBtn" aria-haspopup="dialog" aria-controls="rulesDialog">
             帮助</button
           ><button class="link" id="pauseBtn">暂停</button
@@ -222,6 +231,15 @@
           <div class="msg" id="msg"></div>
         </section>
       </main>
+
+      <div class="emote-panel" id="emotePanel" role="dialog" aria-label="发送表情和快捷语" hidden>
+        <div class="emote-grid" id="emoteGrid"></div>
+        <div class="emote-phrases" id="emotePhrases"></div>
+        <label class="emote-mute"
+          ><input type="checkbox" id="emoteMute" /> 不显示其他人的表情</label
+        >
+      </div>
+      <div class="emote-live" id="emoteLive" aria-live="polite"></div>
 
       <div class="mebar" id="mebar">
         <div class="left">

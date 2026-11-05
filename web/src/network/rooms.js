@@ -8,6 +8,7 @@ import { isHumanSeat, newGame, resetGame, toLocal } from '../game/session.js';
 import { owesReturn, retWait, tribOptions, tribWait } from '../game/tribute.js';
 import { beginPlay, startTurn } from '../game/turns.js';
 import { DIRS, absOf, lobbyStatus, nickNow, renderLobby } from '../lobby/lobby.js';
+import { guestEmote, hostEmote } from '../social/controller.js';
 import { normalizeBotPreferences, prepareBotModels } from '../lobby/bot-setup.js';
 import { botModelId } from '../ai/model-catalog.mjs';
 import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady, versionsMatch } from './protocol.js';
@@ -136,6 +137,12 @@ function hostOnData(conn, d) {
       broadcast({ t: 'mics', m: runtime.network.mics });
       VC.paint();
     }
+    return;
+  }
+  // a preset emote from a friend's seat: the host checks it and relays it with that seat
+  if (d.t === 'emote') {
+    if (runtime.network.started && info.dir)
+      hostEmote(absOf(info.dir, runtime.network.hostDir), d.id);
     return;
   }
   if (d.t === 'sit' && !runtime.network.started) {
@@ -378,6 +385,10 @@ function guestOnData(d) {
   if (d.t === 'mics') {
     runtime.network.mics = d.m || {};
     VC.paint();
+    return;
+  }
+  if (d.t === 'emote') {
+    guestEmote(d.seat, d.id);
     return;
   }
   // the host turned a move down: stop waiting for it and let the player try again

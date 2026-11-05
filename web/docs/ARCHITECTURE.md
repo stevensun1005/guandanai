@@ -57,6 +57,10 @@ flowchart LR
 
 交换牌先一次更新双方的逻辑手牌，再播放动画。规则推进不依赖飞牌何时结束，避免快速准备开打时出现暂时缺牌。
 
+## 表情与快捷语
+
+`src/social/emotes.mjs` 是纯数据：预设表情／快捷语清单、按编号查找与按座位冷却。`src/social/controller.js` 负责面板、气泡定位与联机转发：客人发送 `{t:'emote', id}`，房主在 `network/rooms.js` 收到后校验编号与冷却，再广播 `{t:'emote', seat, id}`（房主座位编号）；各页面按本地座位把气泡贴在名字牌旁。气泡只用 `textContent` 写入预设文字。表情不经过 `act()`／事件队列，不写入 `G.log`、快照、复盘或采集队列。
+
 ## 座位恢复
 
 `network/recovery.js` 管理原座位凭据、恢复握手与房主快照；`rejoin-storage.js` 只处理标签页存储；`snapshot.js` 是可在 Node 独立检查的视角转换。房主等待稳定逻辑阶段后恢复玩家身份，再发送快照，之后仍按原事件流同步。

@@ -72,6 +72,8 @@ python web/tests/browser_smoke.py
 python web/tests/browser_smoke.py https://stevensun1005.github.io/guandanai/
 ```
 
+表情与快捷语：`python web/tests/emote_smoke.py http://127.0.0.1:8765/` 用电脑和手机两种尺寸的真实 PeerJS 联机，检查双方互发后气泡出现在发送者名字旁且不超出窗口、伪造的自由文字与未知编号被房主丢弃、冷却期内重复发送只显示第一条、勾选屏蔽后不显示他人表情，以及表情不写入出牌记录。Node 部分 `web/tests/emotes.test.mjs` 检查预设清单编号唯一、只认预设编号和按座位冷却。
+
 真实联机检查依赖公共信令及外部网络；本地失败时先区分产品问题与网络不可用。
 
 ## 模型数值与性能

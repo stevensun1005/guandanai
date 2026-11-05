@@ -1,0 +1,110 @@
+/* table emotes: preset emoji and quick phrases beside a seat */
+.emote-panel {
+  position: fixed;
+  z-index: 60;
+  top: 56px;
+  right: 12px;
+  width: min(340px, calc(100vw - 24px));
+  max-height: min(70dvh, 520px);
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, #0d2a1f 94%, transparent);
+  box-shadow: 0 12px 32px #0008;
+}
+.emote-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+.emote-choice {
+  font: inherit;
+  color: var(--ink);
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: #ffffff08;
+  cursor: pointer;
+}
+.emote-choice:hover,
+.emote-choice:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  background: #ffffff14;
+}
+.emote-choice.emoji {
+  font-size: 22px;
+  line-height: 1;
+  padding: 6px 0;
+}
+.emote-phrases {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+.emote-choice.phrase {
+  text-align: left;
+  font-size: 14px;
+  padding: 7px 10px;
+}
+.emote-mute {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.emote-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.emote-bubble {
+  position: fixed;
+  z-index: 58;
+  pointer-events: none;
+  width: max-content;
+  max-width: min(260px, 70vw);
+  padding: 7px 12px;
+  border-radius: 16px;
+  color: #233b30;
+  background: #fffaf0;
+  box-shadow: 0 6px 18px #0006;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  animation: emote-pop 3.5s ease forwards;
+}
+.emote-bubble.emoji {
+  padding: 4px 8px;
+  font-size: 34px;
+  line-height: 1;
+}
+@keyframes emote-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  8% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  14% {
+    transform: scale(1);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .emote-bubble {
+    animation: none;
+  }
+}

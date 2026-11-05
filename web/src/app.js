@@ -55,6 +55,7 @@ import * as collection from './collection/client.js';
 import * as collectionRecord from './collection/record.mjs';
 import * as coach from './coach/controller.js';
 import * as privateTable from './private-table/controller.js';
+import * as emotes from './social/controller.js';
 
 policyController.initialize();
 handValue.initialize();
@@ -81,6 +82,7 @@ celebrations.initialize();
 overlays.initialize();
 pointer.initialize();
 controls.initialize();
+emotes.initialize();
 handKeyboard.initialize();
 selectionStatus.initialize(controls.clearPicked);
 publicHistory.initialize();

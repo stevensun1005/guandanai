@@ -56,6 +56,10 @@ WebRTC 连接依赖双方网络、NAT、防火墙和浏览器后台限制。恢�
 
 [四人结果](../../ai/research/evaluation/rejoin-multiplayer-1.9.0.json) · [混合结果](../../ai/research/evaluation/rejoin-mixed-1.9.0.json) · [恢复竞态](../../ai/research/evaluation/rejoin-races-1.9.0.json) · [座位校验](../../ai/research/evaluation/seat-credentials-1.9.0.json)
 
+## 表情与快捷语
+
+客人发表情时，只把预设编号发给房主；房主核对编号属于预设清单、该座位已过 2.5 秒冷却，再连同发送者座位转发给所有人。消息里没有自由文字，也不能冒充别的座位；不认识的编号直接丢弃。旧版本页面收到表情消息会忽略，不影响出牌。表情不是对局动作，断线恢复、快照、牌谱和云端采集都不包含表情。真实双浏览器检查：`python web/tests/emote_smoke.py http://127.0.0.1:8765/`。
+
 ## 房主的评价许可
 
 每个新房间默认不允许出牌评价，房主可在开局前打开独立许可；加入者只读。许可随开局和重连恢复。允许后每位玩家在牌桌选项中自行开启，个人偏好不会覆盖其他人；不允许时个人开关隐藏。出牌前展示过数字预评的动作会标记 `assisted=true`，从默认未辅助训练样本中排除。[使用与百分数含义](MOVE_COACH.md)。
