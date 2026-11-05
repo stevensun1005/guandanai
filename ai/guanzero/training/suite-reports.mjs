@@ -1,3 +1,4 @@
+import { modelLabel } from './model-labels.mjs';
 import { join } from 'node:path';
 import { opponentDefinition } from './opponents.mjs';
 export function validSuiteReport(report, plan, opponent) {
@@ -24,7 +25,11 @@ export function validSuiteReport(report, plan, opponent) {
   );
 }
 
-export function suiteRows(evalDirectory, read) {
+export function suiteRows(
+  evalDirectory,
+  read,
+  { runName = 'GuanZero', modelIdentities = {} } = {},
+) {
   const root = join(evalDirectory, 'development-500'),
     manifest = read(join(root, 'manifest.json'));
   const rows = [];
@@ -66,6 +71,7 @@ export function suiteRows(evalDirectory, read) {
         opponentSHA256: definition.modelSHA256,
         suite: plan.id,
         modelVersion: plan.modelVersion,
+        modelName: modelLabel(runName, plan.modelSHA256, plan.modelVersion, modelIdentities),
         model: plan.modelSHA256.slice(0, 12),
         modelSHA256: plan.modelSHA256,
         protocol: plan.protocol,

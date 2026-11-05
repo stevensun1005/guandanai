@@ -1,4 +1,5 @@
 /** Local, read-only GuanZero progress dashboard. No control endpoints. */
+import { modelLabel, captureModelIdentities } from './model-labels.mjs';
 import { suiteRows } from './suite-reports.mjs';
 import { opponentDefinition } from './opponents.mjs';
 import { createServer } from 'node:http';
@@ -11,11 +12,11 @@ import {
   readSync,
   closeSync,
 } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, basename, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cpus, totalmem, freemem } from 'node:os';
 import { execFile } from 'node:child_process';
-import { paths, readJSON, option, actorTotals, stopped } from './lib.mjs';
+import { paths, readJSON, writeJSON, option, actorTotals, stopped } from './lib.mjs';
 const assets = fileURLToPath(new URL('./dashboard/', import.meta.url));
 function alive(pid) {
   try {
@@ -33,7 +34,7 @@ function safe(file, fallback = null) {
     return fallback;
   }
 }
-export function snapshot(run) {
+export function snapshot(run, modelIdentities = {}) {
   const p = paths(run),
     config = safe(join(p.root, 'config.json'));
   if (!config) throw Error('尚未开始训练，正在等待运行配置');
@@ -86,6 +87,12 @@ export function snapshot(run) {
               report.opponents?.[opponent]?.version ||
               (opponent === 'rule' ? 'original' : undefined),
             block: report.index,
+            modelName: modelLabel(
+              basename(p.root),
+              report.modelSHA256,
+              report.modelVersion,
+              modelIdentities,
+            ),
             seedStart: report.seedStart,
             seedEnd: report.seedEnd,
             model: report.modelSHA256?.slice(0, 12),
@@ -94,7 +101,7 @@ export function snapshot(run) {
           });
         }
     }
-  evaluations.unshift(...suiteRows(p.eval, safe));
+  evaluations.unshift(...suiteRows(p.eval, safe, { runName: basename(p.root), modelIdentities }));
   const end = running
     ? now
     : learner.updatedAt
@@ -160,7 +167,25 @@ export function snapshot(run) {
     events,
   };
 }
-export function createDashboardServer({ run }) {
+export function createDashboardServer({ run, modelIdentitiesFile = null }) {
+  const modelIdentities = modelIdentitiesFile ? safe(modelIdentitiesFile, {}) : {};
+  if (modelIdentitiesFile && resolve(modelIdentitiesFile).startsWith(resolve(run) + sep))
+    throw Error('Display identities must be stored outside the training run');
+  const seenExports = new Map();
+  let identityDirty = false;
+  const capture = () => {
+    if (!modelIdentitiesFile) return;
+    try {
+      identityDirty = captureModelIdentities(run, modelIdentities, seenExports) || identityDirty;
+      if (identityDirty) writeJSON(modelIdentitiesFile, modelIdentities);
+      identityDirty = false;
+    } catch (error) {
+      console.error('Display identity capture: ' + error.message);
+    }
+  };
+  capture();
+  const identityTimer = setInterval(capture, 30000);
+  identityTimer.unref();
   const history = [];
   let hardware = {
     gpu: null,
@@ -230,7 +255,7 @@ export function createDashboardServer({ run }) {
     try {
       const pathname = new URL(req.url, 'http://localhost').pathname;
       if (pathname === '/api/status') {
-        const status = snapshot(run),
+        const status = snapshot(run, modelIdentities),
           time = Date.now();
         const previous = history.at(-1);
         if (!previous || time - previous.time >= 1500)
@@ -273,6 +298,7 @@ export function createDashboardServer({ run }) {
     }
   });
   server.on('close', () => {
+    clearInterval(identityTimer);
     clearInterval(cpuTimer);
     clearInterval(gpuTimer);
   });
@@ -281,7 +307,9 @@ export function createDashboardServer({ run }) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const run = option('run', 'ai/guanzero/runs/guanzero-adp'),
     port = Number(option('port', '8770'));
-  createDashboardServer({ run }).listen(port, '127.0.0.1', () =>
-    console.log(`GuanZero dashboard: http://127.0.0.1:${port}`),
+  createDashboardServer({ run, modelIdentitiesFile: option('model-identities') }).listen(
+    port,
+    '127.0.0.1',
+    () => console.log(`GuanZero dashboard: http://127.0.0.1:${port}`),
   );
 }

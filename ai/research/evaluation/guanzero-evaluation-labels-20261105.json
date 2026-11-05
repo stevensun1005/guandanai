@@ -1,0 +1,33 @@
+{
+  "purpose": "display-only-evaluation-model-naming",
+  "beforeHashes": {
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\config.json": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\block-0003\\plan.json": "eb2b6c2bc743a8e394f9a59c5a4ed9224e5afe5c7b36913afa535c0fa65a181f",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\model-000000077262\\plan.json": "b657936caa5d9a344d3eb21c93c46773780650b002dc13ea7d71219476d2918b",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0000\\report.json": "a20bfb3572e3ba98d0c5c49fa6c1c54b1a0b2f79604e31936ec75060847ff987",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0001\\report.json": "01ec953e5f033644bdda9b0e9bb4dbd1b0d06a8e4fdb56f56240aa3696e739e5",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0002\\report.json": "4f5481cd02ef479ae622eab3b8f7a106413e06e3b004c739a0aa458ca65807bb",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0003\\report.json": "cc3a30c318c18ff8b62039918c2297b3792f339d24dfb63f7d3f4045f29b87d4",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\model-000000077262\\champion\\report.json": "02b4101334e2544b76b08857513b747f5c7d18a494a66b0c5a4ced59642cf477",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\model-000000077262\\clint\\report.json": "1f26318859344d26241b94a896db1d1436f31142d4a53b5ca46197f9cd4f7f3e",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\model-000000077262\\p0\\report.json": "56dabf5874aa99004cef333dcc81285ceaab118aee55ef0152664c50672feaf4",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\model-000000077262\\random\\report.json": "f5f48ad46c4134c072d0eb04a6a40b0def5f2d347d237228c9c7386ffec67f8d",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\model-000000077262\\rule\\report.json": "48dbe4816ea62e2fca0237d97f067eefe5cdb804aa33c0544853a55346037233",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\development-500\\block-0003\\random\\report.json": "a1941bc3e33d2c3a5d21f25aa995805be51644552301046d3e9ebc86ee64db61",
+    "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0002\\clint\\report.json": "21c17d2866ccbcd8fd2db14d4b23142246b836cd083e3c3ef4af78caaa3a9649"
+  },
+  "frozenEvaluatorCommit": "bdb2bbfe9a126dec9a519c0c71730d0d4a65b116",
+  "versionPolicy": "Actual frozen export number when recorded or matched by full SHA; otherwise SHA prefix, never batch number or latest model version",
+  "block0003": {
+    "sha256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+    "numericVersion": null,
+    "label": "guanzero-adp-gpubatch-03f7e0709843",
+    "reason": "Original named export pruned; old batch metadata did not retain checkpoint version"
+  },
+  "validation": {
+    "nodeTests": 175,
+    "format": "passed",
+    "build": "passed"
+  },
+  "newStrengthMatches": 0
+}
