@@ -230,7 +230,7 @@ async function main() {
     const launchEvaluation = () => {
       if (evaluating || stopping) return;
       evaluating = true;
-      const pairs = integerOption('eval-pairs', 100, 1, 100000);
+      const pairs = integerOption('eval-pairs', 250, 1, 100000);
       const child = spawn(
         process.execPath,
         [join(ROOT, 'ai/guanzero/training/evaluate.mjs'), `--run=${p.root}`, `--pairs=${pairs}`],

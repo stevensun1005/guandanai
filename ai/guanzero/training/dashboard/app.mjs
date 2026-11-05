@@ -145,20 +145,34 @@ function render(s) {
     rule: '原版规则机器人',
     p0: 'P0初始模型',
     clint: 'Clint规则机器人',
+    champion: 'danMCai门控冠军',
   };
+  const companion = s.evaluationCompanion;
+  text(
+    'eval-status',
+    companion?.phase === 'error'
+      ? `评测暂停：${companion.error}`
+      : companion
+        ? '500 场协议已启用：每类对手分别计数；未开始显示等待，历史结果不会凑入新样本。'
+        : '',
+  );
   $('evaluations').replaceChildren(
     ...(s.evaluations.length
       ? s.evaluations.map((e) =>
           row([
-            `${e.opponentName || names[e.opponent] || e.opponent} / 批次 #${e.block}`,
-            `${e.matches} 场`,
-            `${e.wins} / ${e.losses} / ${e.draws}`,
+            `${e.opponentName || names[e.opponent] || e.opponent} / ${e.suite ? `500场协议 · ${e.modelVersion}` : `历史批次 #${e.block}`}`,
+            e.plannedMatches
+              ? `${e.matches} / ${e.plannedMatches} 场 · ${e.status === 'complete' ? '完成' : e.status === 'running' ? '进行中' : '等待'}`
+              : `${e.matches} 场`,
+            `${e.wins ?? '—'} / ${e.losses ?? '—'} / ${e.draws ?? '—'}`,
             pct(e.matchWinRate),
             pct(e.roundWinRate),
             fixed(e.averageUpgradePoints, 3),
             e.confidence95?.matchWinRate
               ? e.confidence95.matchWinRate.map(pct).join(' – ')
-              : '样本不足',
+              : e.plannedMatches && e.status !== 'complete'
+                ? '完成后计算'
+                : '样本不足',
           ]),
         )
       : [row(['尚未完成评测', '—', '—', '—', '—', '—', '—'])]),

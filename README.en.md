@@ -65,6 +65,8 @@ The **[model research report](./ai/research/MODEL_STUDY.md)** documents the shar
 
 Completed multiplayer rounds with at least two human seats are collected by the host into private cloud storage. Records omit nicknames, chat, voice and seat credentials; offline retries and deduplication are supported. Private JSON/JSONL exports remain isolated research data and are not automatically fed into active training. See [collection and export](./web/collector/README.md).
 
+GuanZero development evaluation now includes random play, the original rules, P0, Clint and the accepted danMCai champion. Each opponent defaults to 500 complete matches (250 paired seeds with sides swapped). The dashboard separates live progress from completed results and historical 200-match batches. See the [evaluation protocol](ai/guanzero/README.md#开发评测对手).
+
 ## Run locally
 
 Node.js **20.19+** is required; CI uses Node.js 24.

@@ -1,4 +1,5 @@
 /** Local, read-only GuanZero progress dashboard. No control endpoints. */
+import { suiteRows } from './suite-reports.mjs';
 import { opponentDefinition } from './opponents.mjs';
 import { createServer } from 'node:http';
 import {
@@ -93,6 +94,7 @@ export function snapshot(run) {
           });
         }
     }
+  evaluations.unshift(...suiteRows(p.eval, safe));
   const end = running
     ? now
     : learner.updatedAt
@@ -153,6 +155,7 @@ export function snapshot(run) {
     latest,
     actors,
     evaluations,
+    evaluationCompanion: safe(join(p.eval, 'development-500/status.json')),
     pendingShards: shards,
     events,
   };

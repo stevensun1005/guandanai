@@ -176,3 +176,7 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。它们是功能兼容性测试，不计作棋力样本。
 
 Top 5：`coach_smoke.py` 检查开局开关、最多五种方案、点击只选牌、展示辅助标记与三种尺寸不遮挡按钮。`private_table_smoke.py` 使用真实 PeerJS 验证本机资格、同名加入者不启用、队友明牌推演、规则与网络对手普通输入、关闭恢复，以及构造结算探针的采集排除；不是完成棋力比赛。
+
+## GuanZero 开发评测
+
+五类对手及每类 500 场完整比赛的运行协议见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。相关 Node 测试覆盖冠军 accept／SHA 校验、250 对计数、指纹一致的断点续跑、阶段结果与历史结果隔离；另用真实 ONNX 完整比赛验证冠军推理接线。兼容性测试不能替代这 500 场开发成绩，也不能把开发成绩称为独立验收。

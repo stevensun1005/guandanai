@@ -27,7 +27,7 @@ test('GuanZero swapped-seat metrics use each model team and each round outcome',
 import { DEFAULT_OPPONENTS, opponentDefinition } from '../training/opponents.mjs';
 import { RULE_OPPONENT_VERSION } from '../../shared/simulation/rule-baseline.mjs';
 test('GuanZero includes Clint without relabelling the historical original rule baseline', () => {
-  assert.deepEqual(DEFAULT_OPPONENTS, ['random', 'rule', 'p0', 'clint']);
+  assert.deepEqual(DEFAULT_OPPONENTS, ['random', 'rule', 'p0', 'clint', 'champion']);
   assert.equal(opponentDefinition('clint').mode, 'rule');
   assert.equal(opponentDefinition('clint').ruleVersion, RULE_OPPONENT_VERSION);
   assert.equal(opponentDefinition('rule').ruleVersion, 'original');
@@ -75,5 +75,136 @@ test('valid Clint requests validate the supplementary report path before creatin
       subdirectory: '../escape',
     }),
     /Invalid evaluation subdirectory/,
+  );
+});
+
+import { resumeClusters } from '../training/evaluate.mjs';
+import { championDefinition } from '../training/champion.mjs';
+import { validSuiteReport, suiteRows } from '../training/suite-reports.mjs';
+import { SUITE_PAIRS, SUITE_SEED_INDEX } from '../training/development-suite.mjs';
+import { evalSeed, sha256 } from '../training/lib.mjs';
+test('500-match suites use 250 swapped pairs in a separate development seed block', () => {
+  assert.equal(SUITE_PAIRS * 2, 500);
+  assert.equal(evalSeed(SUITE_SEED_INDEX, SUITE_PAIRS), 4200000000);
+  assert.equal(opponentDefinition('champion').mode, 'snapshot');
+  const champion = championDefinition();
+  assert.equal(champion.modelSHA256.length, 64);
+  assert.ok(champion.gate.gate > 0);
+  assert.match(champion.name, /^danMCai-v\d+$/);
+});
+test('champion resolution rejects unaccepted or substituted highest-step exports', () => {
+  const root = mkdtempSync(join(tmpdir(), 'guanzero-champion-'));
+  try {
+    mkdirSync(join(root, 'web/src/ai'), { recursive: true });
+    mkdirSync(join(root, 'evidence'), { recursive: true });
+    const gate = { decision: 'reject', challenger: { version: 'v999', sha256: 'a'.repeat(64) } };
+    writeFileSync(join(root, 'evidence/gate.json'), JSON.stringify(gate));
+    writeFileSync(
+      join(root, 'evidence/champion.json'),
+      JSON.stringify({ version: 'v999', sha256: 'a'.repeat(64), history: [{ gate: 9 }] }),
+    );
+    const model = {
+      id: '009',
+      sha256: 'a'.repeat(64),
+      config: { stateFeatures: 513, actionFeatures: 54 },
+      source: {
+        version: 'v999',
+        champion: {
+          gate: 9,
+          evidence: 'evidence/gate.json',
+          evidenceSHA256: sha256(join(root, 'evidence/gate.json')),
+        },
+      },
+    };
+    writeFileSync(
+      join(root, 'web/src/ai/model-catalog.json'),
+      JSON.stringify({
+        defaultId: '009',
+        selection: { danMCaiChampions: ['009'] },
+        models: [model],
+      }),
+    );
+    assert.throws(() => championDefinition(root), /gate or history mismatch/);
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});
+test('resume accepts only identical fingerprints and complete swapped-seat seed pairs', () => {
+  const report = { protocolSHA256: 'x', pairs: 250, modelSHA256: 'm', seedStart: 4200000000 };
+  const cluster = [
+    { seed: 4200000000, neuralTeam: 0 },
+    { seed: 4200000000, neuralTeam: 1 },
+  ];
+  const progress = { ...report, opponent: 'champion', completedPairs: 1, clusters: [cluster] };
+  assert.deepEqual(resumeClusters(progress, report, 'champion'), [cluster]);
+  assert.throws(
+    () => resumeClusters({ ...progress, protocolSHA256: 'changed' }, report, 'champion'),
+    /Mismatched/,
+  );
+  assert.throws(
+    () => resumeClusters({ ...progress, clusters: [[cluster[0], cluster[0]]] }, report, 'champion'),
+    /swapped-seat/,
+  );
+});
+test('suite dashboard separates partial 500 targets from final results and rejects stale model/champion data', () => {
+  const plan = {
+    id: 'model-123',
+    protocol: 'development-500-v1',
+    modelVersion: 'model-123',
+    index: 5000,
+    pairs: 250,
+    seedStart: 4200000000,
+    seedEnd: 4200000249,
+    modelSHA256: 'a'.repeat(64),
+    opponents: ['champion'],
+    champion: { name: 'danMCai-v000293055', version: 'v000293055', modelSHA256: 'b'.repeat(64) },
+  };
+  const progress = {
+    opponent: 'champion',
+    pairs: 250,
+    seedStart: plan.seedStart,
+    modelSHA256: plan.modelSHA256,
+    opponentSHA256: plan.champion.modelSHA256,
+    completedPairs: 1,
+    metrics: { matches: 2, wins: 0, losses: 2, draws: 0, matchWinRate: 0 },
+  };
+  const files = new Map([
+    ['manifest.json', { suites: [plan] }],
+    ['model-123/plan.json', plan],
+    ['model-123/champion/champion-progress.json', progress],
+  ]);
+  const read = (file) => files.get(file.replaceAll('\\', '/').split('development-500/')[1]);
+  let row = suiteRows('test-eval', read)[0];
+  assert.equal(row.matches, 2);
+  assert.equal(row.plannedMatches, 500);
+  assert.equal(row.status, 'running');
+  assert.equal(row.confidence95, undefined);
+  files.set('model-123/champion/champion-progress.json', { ...progress, opponentSHA256: 'wrong' });
+  assert.equal(suiteRows('test-eval', read)[0].status, 'queued');
+  const result = {
+    matches: 500,
+    wins: 10,
+    losses: 480,
+    draws: 10,
+    clusters: Array.from({ length: 250 }, (_, i) =>
+      [0, 1].map((t) => ({ seed: plan.seedStart + i, neuralTeam: t })),
+    ),
+  };
+  const report = {
+    ...plan,
+    completedAt: 'done',
+    opponents: { champion: plan.champion },
+    results: { champion: result },
+  };
+  assert.equal(validSuiteReport(report, plan, 'champion'), true);
+  assert.equal(validSuiteReport({ ...report, pairs: 100 }, plan, 'champion'), false);
+  assert.equal(validSuiteReport({ ...report, modelSHA256: 'wrong' }, plan, 'champion'), false);
+  assert.equal(
+    validSuiteReport(
+      { ...report, results: { champion: { ...result, wins: 500 } } },
+      plan,
+      'champion',
+    ),
+    false,
   );
 });

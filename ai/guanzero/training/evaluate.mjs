@@ -1,5 +1,7 @@
 import { copyFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { freezeChampion } from './champion.mjs';
+import { join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as ort from 'onnxruntime-node';
 import { DEFAULT_OPPONENTS, opponentDefinition } from './opponents.mjs';
@@ -59,12 +61,36 @@ export function intervals(clusters, iterations = 2000) {
     }),
   );
 }
+export function resumeClusters(previous, report, opponent) {
+  if (!previous) return [];
+  if (
+    previous.protocolSHA256 !== report.protocolSHA256 ||
+    previous.opponent !== opponent ||
+    previous.pairs !== report.pairs ||
+    previous.modelSHA256 !== report.modelSHA256 ||
+    previous.seedStart !== report.seedStart ||
+    !Array.isArray(previous.clusters) ||
+    previous.completedPairs !== previous.clusters.length ||
+    previous.completedPairs > report.pairs
+  )
+    throw Error('Mismatched evaluation progress; preserving evidence');
+  for (const [i, pair] of previous.clusters.entries())
+    if (
+      pair.length !== 2 ||
+      pair.some((m, t) => m.seed !== report.seedStart + i || m.neuralTeam !== t)
+    )
+      throw Error('Invalid swapped-seat evaluation progress');
+  return previous.clusters;
+}
 export async function evaluate({
   run,
   model,
   index,
-  pairs = 100,
+  pairs = 250,
   subdirectory = '',
+  outputDirectory = null,
+  champion = null,
+  resume = false,
   opponents = DEFAULT_OPPONENTS,
 }) {
   if (
@@ -78,14 +104,28 @@ export async function evaluate({
     throw Error('Invalid evaluation subdirectory');
   const p = paths(run),
     start = evalSeed(index, pairs),
-    folder = join(p.eval, `block-${String(index).padStart(4, '0')}`, subdirectory);
-  if (existsSync(join(folder, 'report.json'))) throw Error('Evaluation report already exists');
+    folder = outputDirectory
+      ? resolve(outputDirectory)
+      : join(p.eval, `block-${String(index).padStart(4, '0')}`, subdirectory);
+  if (!resolve(folder).startsWith(resolve(p.eval) + sep))
+    throw Error('Evaluation output must stay inside run/eval');
+  if (!resume && existsSync(join(folder, 'report.json')))
+    throw Error('Evaluation report already exists');
   mkdirSync(folder, { recursive: true });
   const pinned = join(folder, 'model.onnx');
-  copyFileSync(resolve(model), pinned);
-  const inference = await createInference(),
-    pool = await createModelPool(ort, { threads: 1 });
-  await inference.load(pinned);
+  if (existsSync(pinned)) {
+    if (!resume || sha256(pinned) !== sha256(resolve(model)))
+      throw Error('Frozen evaluation model mismatch');
+  } else copyFileSync(resolve(model), pinned);
+  if (opponents.includes('champion')) {
+    if (!champion) champion = await freezeChampion(folder);
+    if (sha256(champion.file) !== champion.metadata.modelSHA256)
+      throw Error('Frozen champion SHA mismatch');
+    Object.assign(
+      definitions.find((d) => d.id === 'champion'),
+      champion.metadata,
+    );
+  }
   const config = readJSON(join(p.root, 'config.json'), {});
   const report = {
     purpose: 'development',
@@ -127,14 +167,31 @@ export async function evaluate({
     opponents: Object.fromEntries(definitions.map((definition) => [definition.id, definition])),
     trainingSourceSHA256: config.sourceSHA256 || {},
     exploration: 0,
+    policy: 'greedy-network-only-no-web-styles-or-endgame',
+    rules: { tribute: true, from: 2, through: 'A', aFail: 'draw' },
     intervalMethod: '95% paired-seed cluster percentile bootstrap, 2000 draws',
     results: {},
   };
+  report.protocolSHA256 = createHash('sha256')
+    .update(JSON.stringify({ ...report, results: undefined }))
+    .digest('hex');
+  const previous = readJSON(join(folder, 'report.json'), null);
+  if (resume && previous) {
+    if (previous.protocolSHA256 !== report.protocolSHA256)
+      throw Error('Evaluation protocol changed; preserving existing report');
+    if (previous.completedAt) return previous;
+    report.results = previous.results;
+  }
+  const inference = await createInference(),
+    pool = await createModelPool(ort, { threads: 1 });
   try {
+    await inference.load(pinned);
     for (const definition of definitions) {
       const opponent = definition.id;
-      const clusters = [];
-      for (let i = 0; i < pairs; i++) {
+      if (report.results[opponent]) continue;
+      const progressFile = join(folder, `${opponent}-progress.json`);
+      const clusters = resume ? resumeClusters(readJSON(progressFile, null), report, opponent) : [];
+      for (let i = clusters.length; i < pairs; i++) {
         const pair = [];
         for (const team of [0, 1]) {
           const random = seededRandom((start + i) ^ 0x6a09e667);
@@ -147,17 +204,30 @@ export async function evaluate({
               evaluate: true,
               infer: (state) => inference.values(state),
               snapshotInfer:
-                opponent === 'p0'
+                opponent === 'p0' || opponent === 'champion'
                   ? (state) =>
-                      pool.values(join(ROOT, 'ai/danMCai/models/baseline/policy.onnx'), state)
+                      pool.values(
+                        opponent === 'champion'
+                          ? champion.file
+                          : join(ROOT, 'ai/danMCai/models/baseline/policy.onnx'),
+                        state,
+                      )
                   : (state) => Float32Array.from(state.actions, () => random()),
             }),
           );
         }
         clusters.push(pair);
-        writeJSON(join(folder, `${opponent}-progress.json`), {
+        writeJSON(progressFile, {
+          protocolSHA256: report.protocolSHA256,
+          opponent,
           completedPairs: clusters.length,
           pairs,
+          modelSHA256: report.modelSHA256,
+          opponentSHA256: definition.modelSHA256,
+          seedStart: start,
+          updatedAt: new Date().toISOString(),
+          metrics: metrics(clusters),
+          clusters,
         });
       }
       report.results[opponent] = {
@@ -187,7 +257,7 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import
     run,
     model: option('model', join(p.models, latest.file)),
     index,
-    pairs: Number(option('pairs', '100')),
+    pairs: Number(option('pairs', '250')),
     opponents: option('opponents', DEFAULT_OPPONENTS.join(',')).split(','),
   });
 }

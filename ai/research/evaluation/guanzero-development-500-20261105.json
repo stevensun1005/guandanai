@@ -1,0 +1,109 @@
+{
+  "purpose": "development-evaluation-protocol-change-not-strength-acceptance",
+  "requestedMatchesPerOpponent": 500,
+  "pairsPerOpponent": 250,
+  "opponents": [
+    "random",
+    "rule",
+    "p0",
+    "clint",
+    "champion"
+  ],
+  "plannedMatchesPerSuite": 2500,
+  "seedBase": 4200000000,
+  "seedSpanPerSuite": 100000,
+  "policy": "greedy networks without web styles/endgame; rule/original and Clint/rules-v2 remain separate",
+  "validation": {
+    "nodeTests": 167,
+    "pythonGuanZeroTests": 8,
+    "format": "passed",
+    "build": "f759bd71ee",
+    "realOnnxSmoke": {
+      "purpose": "integration-smoke-not-formal-500-results",
+      "matches": {
+        "random": 2,
+        "rule": 2,
+        "p0": 2,
+        "clint": 2,
+        "champion": 2
+      },
+      "modelSHA256": "6fb37ef5c25059d550fd36d00459af6ddc20d83127da663800663f0457c45fbe",
+      "champion": {
+        "id": "champion",
+        "name": "danMCai-v000293055",
+        "mode": "snapshot",
+        "version": "v000293055",
+        "modelSHA256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+        "archiveId": "009",
+        "gate": {
+          "gate": 112,
+          "acceptedAt": "2026-11-05T08:11:50.077Z",
+          "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00112.json",
+          "evidenceSHA256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7"
+        },
+        "policy": "greedy-network-only-no-web-styles-or-endgame"
+      },
+      "completedResumeReused": true,
+      "changedProtocolRejected": true
+    },
+    "smokeSourceSHA256": {
+      "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+      "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+      "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+      "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+      "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+      "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+      "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+      "web/src/rule-bot/runtime.mjs": "384bd28f37293d1806e866b78b473ccb25d7d37adce052c083c4bcf45d8812a9",
+      "web/src/rule-bot/settings.js": "7a7f5791b7f6554b5d9f9ffc149b775534fe0a3072e27462eb2a8b799f5cb838",
+      "web/src/rule-bot/strategy.js": "3eaa8deece2ac55e6608335c5aff48943fd766ebf8116e5150f510f8d25b36eb",
+      "ai/guanzero/training/actor.mjs": "82223809566f2da541b68d4d516e51a17917d1a10c295045eab6d98ed6d8628e",
+      "ai/guanzero/training/benchmark.py": "7dc625ade077ff77ce20582e8a232b15c8dcef74ced26d70554341094a7d3b0c",
+      "ai/guanzero/training/champion.mjs": "5730507eb73972bc4d8c4b365a594fef6250bdb53bf08282fdb398fabdc9e08e",
+      "ai/guanzero/training/dashboard.mjs": "7fbcd4944dcc272373515b32d7fd62c938dd87c8cb3ff778d903501cb7405756",
+      "ai/guanzero/training/development-suite.mjs": "bcd437683de3f2e9522bab4c311e7147605203b2990a545e463bf169c2e4fccb",
+      "ai/guanzero/training/evaluate.mjs": "6c9c62437295f8d534ce03f73a90c4fd4c4bd8fdd620e7ae5bb6148c6ff73edc",
+      "ai/guanzero/training/history.mjs": "db726f04aec61bbdf4a945a21b03bf015248a441798cbefe8fbabc53635ca58a",
+      "ai/guanzero/training/history_reference.py": "1c536da369dd43e0c710989227901366b2265021705d38da3a59be7eb5c3eb76",
+      "ai/guanzero/training/inference-client.mjs": "4c44216a70dfd4a5d27237a476c6b7de88a7f7bb890a3f0137f199a4eb6a91f4",
+      "ai/guanzero/training/inference.py": "882db589fee053885b4735b8b909828fd203fd6d88bd5337f7dc8543bf6403fb",
+      "ai/guanzero/training/learner.py": "94ece01eea1008e876435b98cdf9f055c6244877096f3b1e8a272f82b58c278f",
+      "ai/guanzero/training/lib.mjs": "202073783ad50aa65ede40a89d06745ab26803a45a331f979687d5c65c21cd25",
+      "ai/guanzero/training/model.py": "ebd9b73d6382b9388b52548201849ae105ee381fdd3d11c4700b1529b756ff5f",
+      "ai/guanzero/training/opponents.mjs": "5e4bdc4f0be099e5fc3e6fe31d8babaee34d309688c3e651c7124a599fb5745e",
+      "ai/guanzero/training/run.mjs": "4b0080605b226df1ce3d8a7fcd57ad2fbf3747f52470e787e82abe40959e12d6",
+      "ai/guanzero/training/suite-reports.mjs": "03023330e4ec2081e3d3de49d982021bfce6926826ac8efc4c49642a82ffa18d",
+      "ai/guanzero/training/supplement-evaluations.mjs": "13a16fc1445c17773972ae66665d354a7c8425c7b75d8c809b519515abcc3087",
+      "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155"
+    },
+    "smokeSeeds": [
+      4199900000,
+      4199900000
+    ]
+  },
+  "protectedTrainingAndHistoricalReports": {
+    "files": {
+      "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\config.json": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+      "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0000\\report.json": "a20bfb3572e3ba98d0c5c49fa6c1c54b1a0b2f79604e31936ec75060847ff987",
+      "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0001\\report.json": "01ec953e5f033644bdda9b0e9bb4dbd1b0d06a8e4fdb56f56240aa3696e739e5",
+      "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0002\\report.json": "4f5481cd02ef479ae622eab3b8f7a106413e06e3b004c739a0aa458ca65807bb",
+      "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch\\eval\\block-0002\\clint\\report.json": "21c17d2866ccbcd8fd2db14d4b23142246b836cd083e3c3ef4af78caaa3a9649"
+    },
+    "trainingStopExisted": false,
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch"
+  },
+  "activation": "prepared-not-yet-switched",
+  "negativeResults": [
+    "A regression test rejected incomplete completed-result accounting; strict wins/losses/draws and seed-pair checks were added before activation.",
+    "New companion module required a final formatter pass; repository format check then passed."
+  ],
+  "strengthResults": null
+}
