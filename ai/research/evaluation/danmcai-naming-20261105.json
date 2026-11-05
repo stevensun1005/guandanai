@@ -196,6 +196,35 @@
       "check": "Node dashboard title assertion after branding change",
       "failure": "One assertion still expected the old dashboard product title",
       "resolution": "Update expected danMCai title and rerun the full Node suite before committing"
+    },
+    {
+      "check": "Live dashboard process replacement",
+      "failure": "Automatic approval policy rejected the proposed command that stopped the existing listener before restarting it",
+      "resolution": "Did not stop the listener; linked its static asset directory to canonical danMCai assets and verified its original port in a real browser. Frozen training stayed running."
+    },
+    {
+      "check": "Final tracked-path audit",
+      "failure": "Formatter ignore patterns still used the previous directory namespace",
+      "resolution": "Update every generated/model exclusion to ai/danMCai and retain an explicit legacy compatibility exclusion, preventing traversal of active data and nested worktrees"
     }
-  ]
+  ],
+  "workspaceApplied": {
+    "preservedDrafts": 10,
+    "relocatedDrafts": 6,
+    "draftsWithNamingOnlyEdits": 4,
+    "legacyStorageHidden": true,
+    "liveDashboard": {
+      "url": "http://127.0.0.1:8766/",
+      "title": "danMCai 训练观测台",
+      "phase": "running",
+      "learnerStep": 646010,
+      "learnerUpdatedAt": "2026-11-05T18:46:04Z",
+      "freeGiB": 9.500106811523438,
+      "reserveGiB": 4,
+      "pageErrors": [],
+      "legacyServerRetained": true,
+      "canonicalAssetsLinked": true
+    }
+  },
+  "formatterExclusionsUpdated": true
 }

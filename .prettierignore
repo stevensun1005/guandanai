@@ -3,17 +3,20 @@ web/dist
 web/artifacts
 web/src/assets
 web/vendor
-ai/local/workspace
-ai/local/runs
-ai/local/checkpoints
-ai/local/data/generated
-ai/local/environment
+ai/danMCai/workspace
+ai/danMCai/runs
+ai/danMCai/checkpoints
+ai/danMCai/data/generated
+ai/danMCai/environment
 ai/guanzero/runs
 ai/publishing/cache
-ai/local/models
+ai/danMCai/models
 ai/shared/fixtures
 ai/research/evaluation
 work
 dist
 outputs
 archive
+
+# Frozen-run compatibility storage
+ai/local/
