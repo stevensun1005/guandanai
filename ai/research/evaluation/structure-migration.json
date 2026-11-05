@@ -1543,7 +1543,10 @@
     "pythonLocalGPUOnlySkipped": 1,
     "pythonGuanZeroPassed": 8,
     "pythonStudyPassed": 9,
-    "productionBrowserModelIds": ["001", "003"],
+    "productionBrowserModelIds": [
+      "001",
+      "003"
+    ],
     "replayImportEscapingPassed": true,
     "browserPageErrors": 0,
     "packagingPassed": true,
@@ -1565,11 +1568,26 @@
     "archiveAndMigratedFilesVerifiedBeforeResume": true,
     "frozenSourceSHA256VerifiedBeforeResume": true,
     "stepObservedAfterResume": 244347,
-    "trainingTotalsBefore": {"matches": 259619, "decisions": 124385805, "rows": 124385805},
+    "trainingTotalsBefore": {
+      "matches": 259619,
+      "decisions": 124385805,
+      "rows": 124385805
+    },
     "reserveGiB": 4,
     "resumeGiB": 5,
     "originalDeadlineUTC": "2026-11-05T20:40:54.512Z",
     "protocolChanged": false,
     "strengthClaim": null
-  }
+  },
+  "immutableVerificationBaseCommit": "356ac2c963b02c2784b0199a8119d2747139e853",
+  "upstreamEvidenceUpdatesAfterVerification": [
+    {
+      "commit": "9bfb65cfb0e1a1abc648dc38b89fa04e29eef921",
+      "old": "docs/evaluation/model-study-progress.json",
+      "new": "ai/research/evaluation/model-study-progress.json",
+      "sha256": "6dd0db62b9b25879205c5d23922fab7380c849cf072905520289c32e4ab7369c",
+      "sourceBytesPreserved": true,
+      "reason": "Concurrent GuanZero progress publication retained during rename merge; supersedes the base snapshot only"
+    }
+  ]
 }

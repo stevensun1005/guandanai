@@ -90,4 +90,4 @@ await writeFile(
   JSON.stringify({ models: BOT_MODELS }, null, 2),
 );
 await writeFile(path.join(root, 'web/dist/.nojekyll'), '');
-console.log(`Built dist/ · version ${version} · browser AI, no inference server`);
+console.log(`Built web/dist/ · version ${version} · browser AI, no inference server`);

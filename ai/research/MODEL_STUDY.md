@@ -701,7 +701,7 @@ python ai/research/tools/update-model-study.py --workspace /path/to/training-che
 
 ### 13.3 实际运行记录与开发评测
 
-证据快照 UTC：`2026-11-05T05:27:18.292658+00:00`；阶段：`supervised-running`。完整配置、源码/编码与模型指纹、分种子结果、区间和进程事件见 [model-study-progress.json 的 guanzero 字段](./evaluation/model-study-progress.json)。每次阶段更新均提交历史，不把计划写成已完成。
+证据快照 UTC：`2026-11-05T06:28:45.494711+00:00`；阶段：`supervised-running`。完整配置、源码/编码与模型指纹、分种子结果、区间和进程事件见 [model-study-progress.json 的 guanzero 字段](evaluation/model-study-progress.json)。每次阶段更新均提交历史，不把计划写成已完成。
 
 | 运行                    | 状态   | 实际运行分钟 | 完整比赛 |     样本 | 训练步 | 已用样本 |
 | ----------------------- | ------ | -----------: | -------: | -------: | -----: | -------: |
@@ -710,7 +710,7 @@ python ai/research/tools/update-model-study.py --workspace /path/to/training-che
 | `smoke-002`             | 已停止 |        15.02 |     2381 |  1414879 |    441 |  1411200 |
 | `guanzero-adp`          | 已停止 |        14.85 |     2685 |  1607437 |    500 |  1600000 |
 | `guanzero-adp-recovery` | 已停止 |        35.00 |    10528 |  5833407 |   1822 |  5830400 |
-| `guanzero-adp-gpubatch` | 运行中 |       125.41 |    58725 | 35449662 |  11077 | 35446400 |
+| `guanzero-adp-gpubatch` | 运行中 |       186.86 |    83693 | 50576452 |  15803 | 50569600 |
 
 `actor-pilot` 为约五分钟单进程采样测试。`smoke-001` 在约两分钟后主动停止，以加入采样器当前模型版本可观测字段；其结果保留。`smoke-002` 为完整 15 分钟端到端测试，两个 CPU 采样器、一个 GPU 学习器、每 6 分钟三个对手各 2 对种子，并在初始模型发布后立即做一轮评测。
 
