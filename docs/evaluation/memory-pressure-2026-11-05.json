@@ -8498,7 +8498,10 @@
     "pythonLearnerPassed": 6,
     "pythonGPUOnlySkipped": 1,
     "browserDashboardAutoRefresh": true,
-    "browserPageErrors": 0
+    "browserPageErrors": 0,
+    "cleanMergedTreeNodePassed": 119,
+    "cleanMergedTree": "daad2f4d00e5f020b5f7ea8013f7c571236b1a73",
+    "formatCheck": true
   },
   "strengthEvaluation": {
     "completedMatches": 0,

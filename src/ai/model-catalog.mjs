@@ -40,5 +40,11 @@ export const botModelId = (value) =>
 export const botModel = (value) => BOT_MODELS.find((model) => model.id === botModelId(value));
 export const botModelName = (value) => {
   const model = botModel(value);
+  if (model.config.history === 'guanzero-v1' && model.source?.run) {
+    const checkpoint = Number.isSafeInteger(model.source.step)
+      ? `${model.source.step}步`
+      : model.source.version;
+    return checkpoint ? `${model.source.run} · ${checkpoint}` : model.source.run;
+  }
   return model.source?.version === 'P0' ? 'v000000000' : model.source?.version || model.id;
 };

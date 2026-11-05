@@ -1,0 +1,90 @@
+{
+  "observedAt": "2026-11-05T05:15:40.022Z",
+  "defaultId": "003",
+  "model": {
+    "id": "003",
+    "file": "bot-003.onnx",
+    "sha256": "15ae4809731d843fdfca74ba5a5bd1cc30ed00cb2de9f110ee1ca0299a12127b",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-003/bot-003.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-gpubatch",
+      "version": "model-000000009537",
+      "status": "experimental-not-heldout-accepted",
+      "registeredAt": "2026-11-05T05:15:35.468Z",
+      "step": 9537
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "positions": 16,
+      "values": 49,
+      "maxAbsoluteError": 4.76837158203125e-07,
+      "actionMismatches": 0
+    },
+    "webpage": {
+      "newPlayerDefault": "model-000000009537",
+      "preservedOptions": [
+        "001",
+        "002"
+      ],
+      "realBotPlayObserved": true,
+      "pageErrors": 0,
+      "defaultArchiveId": "003",
+      "displayName": "model-000000009537",
+      "preservedNames": [
+        "v000000000",
+        "v000198487"
+      ]
+    },
+    "checks": {
+      "nodeTests": 117,
+      "pythonTests": 8,
+      "format": "passed",
+      "build": "0272faec67"
+    },
+    "schedule": "Every 4 hours through Codex heartbeat 4-guanzero"
+  },
+  "deployment": {
+    "commit": "e1f1570eea424aa5bd8acd974220553a0d5a7b04",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/41973819143",
+    "conclusion": "success"
+  },
+  "namingUpdate": {
+    "observedAt": "2026-11-05T05:32:14.079249+00:00",
+    "displayName": "guanzero-adp-gpubatch · 9537步",
+    "run": "guanzero-adp-gpubatch",
+    "step": 9537,
+    "checkpoint": "model-000000009537",
+    "archiveId": "003",
+    "localBrowserVerified": true,
+    "build": "df2358a42d",
+    "nodeTests": 117,
+    "format": "passed",
+    "weightsChanged": false,
+    "deployment": {
+      "commit": "5be63ba24193bcca784ed4c0e1c242bfa9c1d307",
+      "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/41974629431",
+      "conclusion": "success",
+      "liveBrowserVerified": true,
+      "liveBuild": "59eded7b5b",
+      "url": "https://stevensun1005.github.io/guandanai/",
+      "observedAt": "2026-11-05T05:35:42.056986+00:00",
+      "displayName": "guanzero-adp-gpubatch · 9537步",
+      "publicModelSHA256": "15ae4809731d843fdfca74ba5a5bd1cc30ed00cb2de9f110ee1ca0299a12127b"
+    }
+  }
+}
