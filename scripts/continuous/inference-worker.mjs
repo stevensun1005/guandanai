@@ -33,19 +33,30 @@ async function create(bytes) {
   });
 }
 
+// A league can hold dozens of snapshot models and many matches use them at once, so only
+// sessions with no batch in flight are ever released.
+const LIMIT = 32;
+const busy = new Map();
+
 function session(file) {
   if (!sessions.has(file)) {
-    if (sessions.size >= 8) {
-      const [oldest, promise] = sessions.entries().next().value;
-      sessions.delete(oldest);
+    for (const [key, promise] of sessions) {
+      if (sessions.size < LIMIT) break;
+      if (busy.get(key)) continue;
+      sessions.delete(key);
       void promise.then((s) => s.release()).catch(() => {});
     }
     sessions.set(file, create(rowsModel(readFileSync(file))));
   }
-  return sessions.get(file);
+  // Refresh recency so frequently used models stay cached.
+  const promise = sessions.get(file);
+  sessions.delete(file);
+  sessions.set(file, promise);
+  return promise;
 }
 
 parentPort.on('message', async ({ id, file, rows, states, actions }) => {
+  busy.set(file, (busy.get(file) || 0) + 1);
   try {
     const engine = await session(file);
     const started = performance.now();
@@ -66,5 +77,7 @@ parentPort.on('message', async ({ id, file, rows, states, actions }) => {
     );
   } catch (error) {
     parentPort.postMessage({ id, error: String(error?.message || error) });
+  } finally {
+    busy.set(file, busy.get(file) - 1);
   }
 });

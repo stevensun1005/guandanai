@@ -4,6 +4,7 @@
  * decisions as one GPU batch (DirectML, CPU fallback) and caches candidate generation.
  *
  *   node scripts/continuous/fast-actor.mjs --run=<run> --slot=<n> [--games=48] [--provider=dml]
+ *                                           [--stop-file=<path>]
  *
  * It writes actor-<slot>.json / results-<slot>.jsonl / a<slot>-*.json exactly like actor.mjs, so
  * the supervisor's PFSP statistics, the learner and the reports read it unchanged. Shard
@@ -37,6 +38,8 @@ const slot = Number(option('slot', '0'));
 const games = Number(option('games', '48'));
 const provider = option('provider', 'dml');
 const matchLimit = Number(option('matches', '0'));
+// Optional per-machine stop flag: finish current matches, flush shards, exit.
+const stopFile = option('stop-file', '');
 if (!Number.isInteger(slot) || slot < 0 || slot >= MAX_ACTORS) throw Error('Invalid actor slot');
 if (!Number.isInteger(games) || games < 1 || games > 512) throw Error('Invalid concurrent games');
 if (!['dml', 'cpu'].includes(provider)) throw Error('Provider must be dml or cpu');
@@ -107,7 +110,10 @@ const stop = () => (stopping = true);
 process.on('SIGINT', stop);
 process.on('SIGTERM', stop);
 const running = () =>
-  !stopping && !existsSync(paths.stop) && (!matchLimit || status.matches < matchLimit);
+  !stopping &&
+  !existsSync(paths.stop) &&
+  !(stopFile && existsSync(stopFile)) &&
+  (!matchLimit || status.matches < matchLimit);
 
 let started = 0;
 async function lane() {

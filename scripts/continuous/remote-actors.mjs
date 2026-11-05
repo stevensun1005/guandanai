@@ -7,8 +7,9 @@
  * this launcher checks that the local checkout matches the run's frozen sources, refuses the
  * supervisor's own slots and slots claimed by another live machine, then keeps each actor
  * running: crashed actors restart with backoff, and while <run>/STOP exists it waits for the
- * supervisor to resume. Ctrl+C stops this machine only; unflushed rows (at most one shard
- * interval) are lost.
+ * supervisor to resume. Ctrl+C stops this machine only. Fast actors then finish their matches and
+ * flush shards (up to 90 s); standard actors are killed and lose at most one shard interval.
+ * Creating actors/stop-<host>.flag in the run directory stops this machine's fast actors too.
  */
 import { execFileSync, spawn } from 'node:child_process';
 import { appendFileSync, existsSync, rmSync, writeFileSync } from 'node:fs';
@@ -63,6 +64,9 @@ slots.forEach(claim);
 heartbeat();
 
 const logFile = join(paths.actors, `remote-${host.replace(/[^\w.-]/g, '_')}.jsonl`);
+// Creating this file stops this machine's fast actors gracefully (they flush their shards).
+const stopFlag = join(paths.actors, `stop-${host.replace(/[^\w.-]/g, '_')}.flag`);
+rmSync(stopFlag, { force: true });
 function log(kind, detail = {}) {
   const record = { t: new Date().toISOString(), host, kind, ...detail };
   try {
@@ -100,6 +104,7 @@ function start(slot) {
           `--slot=${slot}`,
           `--games=${games}`,
           `--provider=${provider}`,
+          `--stop-file=${stopFlag}`,
         ]
       : [join(REPO_ROOT, 'scripts/continuous/actor.mjs'), `--run=${paths.root}`, `--slot=${slot}`],
     { cwd: REPO_ROOT, stdio: ['ignore', 'ignore', 'pipe'], windowsHide: true },
@@ -109,6 +114,11 @@ function start(slot) {
   child.on('exit', (code) => {
     children.delete(slot);
     if (stopping) return;
+    if (existsSync(stopFlag)) {
+      log('actor-stopped-by-flag', { slot, code });
+      if (!children.size) shutdown();
+      return;
+    }
     if (existsSync(paths.stop)) {
       log('waiting-for-supervisor', { slot });
       setTimeout(() => start(slot), 30_000);
@@ -130,11 +140,27 @@ function start(slot) {
 function shutdown() {
   if (stopping) return;
   stopping = true;
+  if (implementation === 'fast' && children.size) {
+    // Ask fast actors to finish their matches and flush; force-stop whatever remains after 90 s.
+    writeFileSync(stopFlag, new Date().toISOString());
+    log('graceful-stop-requested', { slots: [...children.keys()] });
+    const deadline = Date.now() + 90_000;
+    const wait = () => {
+      if (children.size && Date.now() < deadline) return setTimeout(wait, 500);
+      finish();
+    };
+    return wait();
+  }
+  finish();
+}
+
+function finish() {
   for (const child of children.values()) child.kill();
   for (const slot of slots) {
     const current = readJSON(claimFile(slot), null);
     if (current?.host === host) rmSync(claimFile(slot), { force: true });
   }
+  rmSync(stopFlag, { force: true });
   log('stop');
   setTimeout(() => process.exit(0), 500);
 }
