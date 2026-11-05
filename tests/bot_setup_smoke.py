@@ -1,4 +1,4 @@
-"""Per-seat styles, rotated seating, preference persistence and compact layouts."""
+"""Per-seat models, rotated seating, preference persistence and compact layouts."""
 
 from pathlib import Path
 import sys, json
@@ -40,16 +40,16 @@ with sync_playwright() as p:
                 == direction
             )
             page.locator("#mixedBotsBtn").click()
-            expected = {
-                directions[(index + step) % 4]: style
-                for step, style in enumerate(
-                    ["balanced", "aggressive", "observant", "conservative"]
-                )
-            }
-            for seat, style in expected.items():
+            default = page.locator('[data-bot-seat="S"]').input_value()
+            expected = {seat: default for seat in directions}
+            for seat, model in expected.items():
                 select = page.locator(f'[data-bot-seat="{seat}"]')
-                assert select.input_value() == style
+                assert select.input_value() == model
                 assert select.is_disabled() == (seat == direction)
+                assert all(option.isdigit() for option in select.locator('option').all_text_contents())
+            other = directions[(index + 1) % 4]
+            page.locator(f'[data-bot-seat="{other}"]').select_option("001")
+            expected[other] = "001"
         assert not page.evaluate("document.documentElement.scrollWidth>innerWidth")
         page.screenshot(path=str(OUT / f"lobby-{width}.png"), full_page=True)
         page.reload(wait_until="networkidle")
@@ -62,7 +62,7 @@ with sync_playwright() as p:
                 "width": width,
                 "height": height,
                 "seatRotations": 4,
-                "stylesPersisted": True,
+                "modelsPersisted": True,
                 "pageErrors": errors,
             }
         )

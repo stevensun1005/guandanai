@@ -3,7 +3,7 @@ import { act, setHumans } from '../game/events.js';
 import { toLocal } from '../game/session.js';
 import { startTurn } from '../game/turns.js';
 import { absOf, lobbyStatus, renderLobby } from '../lobby/lobby.js';
-import { profileId } from '../ai/profiles.js';
+import { botModelId } from '../ai/model-catalog.mjs';
 import { $ } from '../ui/cards.js';
 import { hideOverlay, setPaused, showPanel, showResult } from '../ui/overlays.js';
 import { pileRebuild } from '../ui/table-pile.js';
@@ -67,7 +67,7 @@ function sendSnapshot(info, sync = false) {
     you: info.dir,
     name: info.name,
     rules: runtime.rules,
-    botStyles: runtime.botStyles,
+    botModels: runtime.botModels,
     peers: peerList(),
   });
 }
@@ -212,8 +212,8 @@ export function receiveRecovery(message) {
   runtime.direction = message.you;
   runtime.nickname = message.name;
   Object.assign(runtime.rules, message.rules);
-  runtime.botStyles = Array.from({ length: 4 }, (_, index) =>
-    profileId(message.botStyles?.[index]),
+  runtime.botModels = Array.from({ length: 4 }, (_, index) =>
+    botModelId(message.botModels?.[index]),
   );
   enterOnline('guest', message.hostDir, message.names);
   runtime.game = rotateSnapshot(message.game, runtime.network.off);

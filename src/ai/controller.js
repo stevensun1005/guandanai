@@ -3,7 +3,7 @@ import { beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 import { policyState } from './observation.js';
 import { prepareTableDecision } from './table-policy.mjs';
-import { MODELS } from './models.mjs';
+import { botModel } from './model-catalog.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost } from '../game/session.js';
 import { showError } from '../input/controls.js';
@@ -90,10 +90,11 @@ export function initialize() {
         runtime.game === game && runtime.game.tok === tok && runtime.game.log.length === count;
       await check();
       if (!current()) return null;
-      const style = runtime.botStyles?.[(p + runtime.network.off) % 4] || 'balanced';
-      const prepared = prepareTableDecision(game, p, runtime.network.off, MODELS.policy, style);
+      const model = botModel(runtime.botModels?.[(p + runtime.network.off) % 4]);
+      const prepared = prepareTableDecision(game, p, runtime.network.off, model.config);
       const { plays, state: input } = prepared;
       if (prepared.index != null) return plays[prepared.index];
+      input.modelId = model.id;
       const result = await request('decide', input);
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)

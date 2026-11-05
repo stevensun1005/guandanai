@@ -80,8 +80,8 @@ def main():
         host.evaluate("() => {aiDecide=()=>{throw Error('Unexpected classic decision')}}")
         host.locator('[data-seat="S"]').click()
         host.locator("#botStyleBox summary").click()
-        host.locator('[data-bot-seat="E"]').select_option("aggressive")
-        host.locator('[data-bot-seat="W"]').select_option("conservative")
+        host.locator('[data-bot-seat="E"]').select_option("001")
+        host.locator('[data-bot-seat="W"]').select_option("001")
         host.locator("#shareRoomBtn").click()
         invite = host.evaluate("navigator.clipboard.readText()")
         assert f"room={code}" in invite
@@ -101,15 +101,15 @@ def main():
         guest.locator("#nick").fill("朋友")
         guest.locator("#joinBtn").click()
         guest.wait_for_function('() => (NET.hostConn&&NET.hostConn.open)', timeout=25000)
-        guest.wait_for_function("() => (document.querySelector('[data-bot-seat=E]').value==='aggressive')")
+        guest.wait_for_function("() => (document.querySelector('[data-bot-seat=E]').value==='001')")
         assert guest.locator('[data-bot-seat="E"]').is_disabled()
         guest.locator('[data-seat="N"]').click()
         host.wait_for_function("() => (NET.lobby.N==='朋友')", timeout=10000)
         host.locator("#sitBtn").click()
         host.wait_for_function("() => (NET.mode==='host')")
         guest.wait_for_function("() => (NET.mode==='guest')")
-        assert host.evaluate("botStyles") == ["balanced", "aggressive", "balanced", "conservative"]
-        assert guest.evaluate("botStyles") == host.evaluate("botStyles")
+        assert host.evaluate("botModels")[1::2] == ["001", "001"]
+        assert guest.evaluate("botModels") == host.evaluate("botModels")
         assert not guest.evaluate("TableBot.ready")
         assert not guest_models, guest_models
         assert guest.locator("#aiTableStatus,[data-ai-mode]").count() == 0

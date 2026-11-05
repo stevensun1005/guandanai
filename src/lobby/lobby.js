@@ -13,7 +13,7 @@ import {
 } from '../network/rooms.js';
 import { $ } from '../ui/cards.js';
 import { render } from '../ui/table.js';
-import { loadBotPreferences, prepareBotStyles, renderBotSetup } from './bot-setup.js';
+import { loadBotPreferences, prepareBotModels, renderBotSetup } from './bot-setup.js';
 import { forgetSeat } from '../network/rejoin-storage.js';
 import { VERSION, versionsMatch } from '../network/protocol.js';
 
@@ -224,7 +224,7 @@ export function initialize() {
       forgetSeat();
       runtime.network.mode = 'solo';
       runtime.network.off = 0;
-      prepareBotStyles();
+      prepareBotModels();
       setHumans([0]);
       $('#myName').textContent = runtime.nickname;
       $('#lobby').hidden = true;

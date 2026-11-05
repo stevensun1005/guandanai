@@ -2,7 +2,7 @@ import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { enterPractice } from '../replay/session.js';
 import { nickNow, setMode } from './lobby.js';
-import { prepareBotStyles } from './bot-setup.js';
+import { prepareBotModels } from './bot-setup.js';
 import { $ } from '../ui/cards.js';
 
 export function initialize() {
@@ -16,7 +16,7 @@ export function initialize() {
     if (runtime.lobbyMode !== 'solo') setMode('solo');
     runtime.nickname = nickname;
     runtime.direction = 'S';
-    prepareBotStyles();
+    prepareBotModels();
     Sound.unlock();
     dialog.close();
     enterPractice();

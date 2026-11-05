@@ -1,6 +1,7 @@
 import { encode, cardsArray } from './encoding.mjs';
 import { encodePolicyExtrasBatch, POLICY_EXTRA_FEATURES } from './policy-features.mjs';
 import { encodeMatchFeatures } from './match-features.mjs';
+import { encodeHistory } from './history.mjs';
 
 /** Accumulate the entire candidate list before restricting a learned actor's choices. */
 export function selectPolicyScores(proposals, logits, counts, config = {}) {
@@ -49,6 +50,10 @@ export async function inferPolicy(ort, engine, state, config = {}) {
   const proposals = [],
     logits = [];
   const stateTensor = new ort.Tensor('float32', encode(state), [1, 513]);
+  const historyTensor =
+    config.history === 'guanzero-v1'
+      ? new ort.Tensor('float32', encodeHistory(state), [1, 5, 216])
+      : null;
   try {
     for (let first = 0; first < state.actions.length; first += 128) {
       const chunk = state.actions.slice(first, first + 128);
@@ -58,6 +63,7 @@ export async function inferPolicy(ort, engine, state, config = {}) {
       try {
         actionTensor = new ort.Tensor('float32', batch, [chunk.length, 54]);
         const inputs = { state: stateTensor, actions: actionTensor };
+        if (historyTensor) inputs.history = historyTensor;
         if (extras) {
           extraTensor = new ort.Tensor(
             'float32',
@@ -85,6 +91,7 @@ export async function inferPolicy(ort, engine, state, config = {}) {
     }
   } finally {
     stateTensor.dispose();
+    historyTensor?.dispose();
   }
   const values = selectPolicyScores(proposals, logits, state.counts, config);
   let index = 0;

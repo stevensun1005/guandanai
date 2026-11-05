@@ -2859,5 +2859,33 @@
       "download": null,
       "gradientUpdatesInRestoreChecks": 0
     }
-  ]
+  ],
+  "webModels": {
+    "catalog": "src/ai/model-catalog.json",
+    "defaultId": "002",
+    "models": [
+      {
+        "id": "001",
+        "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "source": {
+          "version": "P0",
+          "status": "baseline"
+        }
+      },
+      {
+        "id": "002",
+        "sha256": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-002/bot-002.onnx",
+        "source": {
+          "run": "gpu-main",
+          "version": "v000198487",
+          "step": 198487,
+          "exportedAt": "2026-11-05T04:47:20Z",
+          "expectedSHA256": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+          "status": "experimental-not-heldout-accepted",
+          "registeredAt": "2026-11-05T04:52:28.151Z"
+        }
+      }
+    ]
+  }
 }

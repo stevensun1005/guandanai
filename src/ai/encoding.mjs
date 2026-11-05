@@ -57,7 +57,7 @@ function universalFlags(hand, level) {
   if (tail >= 4) result[8] = 1;
   return result;
 }
-function replay(log) {
+export function replay(log) {
   const histories = [[], [], [], []],
     sequence = [],
     out = [],

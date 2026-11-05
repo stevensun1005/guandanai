@@ -191,6 +191,7 @@ if (new URLSearchParams(location.search).get('test') === '1') {
     myDir: 'direction',
     lobbyMode: 'lobbyMode',
     botStyles: 'botStyles',
+    botModels: 'botModels',
     TREC: 'TREC',
     practiceWH: 'practiceWH',
     TSEL: 'TSEL',

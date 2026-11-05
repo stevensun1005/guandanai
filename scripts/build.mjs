@@ -4,6 +4,8 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { MODELS } from '../src/ai/models.mjs';
+import { BOT_MODELS } from '../src/ai/model-catalog.mjs';
+import { modelBytes } from './lib/web-models.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = async (name) => (await readFile(path.join(root, name), 'utf8')).replace(/\r\n/g, '\n');
@@ -29,6 +31,13 @@ for (const [key, model] of Object.entries(MODELS)) {
   const bytes = await readFile(path.join(root, 'ai', model.file));
   modelVersions[key] = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
   hash.update(key).update(bytes);
+}
+const botBytes = new Map();
+for (const model of BOT_MODELS) {
+  const bytes = await modelBytes(root, model);
+  botBytes.set(model.file, bytes);
+  modelVersions['bot:' + model.id] = model.sha256.slice(0, 16);
+  hash.update(model.id).update(bytes);
 }
 const version = hash.digest('hex').slice(0, 10);
 const html = (await read('src/index.html')).replaceAll('__APP_VERSION__', version);
@@ -73,5 +82,10 @@ await build({
 for (const model of Object.values(MODELS)) copies['ai/' + model.file] = 'dist/models/' + model.file;
 for (const [from, to] of Object.entries(copies))
   await copyFile(path.join(root, from), path.join(root, to));
+for (const [file, bytes] of botBytes) await writeFile(path.join(root, 'dist/models', file), bytes);
+await writeFile(
+  path.join(root, 'dist/models/catalog.json'),
+  JSON.stringify({ models: BOT_MODELS }, null, 2),
+);
 await writeFile(path.join(root, 'dist/.nojekyll'), '');
 console.log(`Built dist/ · version ${version} · browser AI, no inference server`);

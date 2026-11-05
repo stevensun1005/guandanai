@@ -19,7 +19,7 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 <details>
 <summary>More views: bot personalities, mobile help and match history</summary>
 
-<p align="center"><img src="docs/media/bot-profiles.png" width="340" alt="Per-seat bot personalities" /> <img src="docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /> <img src="docs/media/match-history-mobile.png" width="280" alt="Match results and public scorecard on mobile" /></p>
+<p align="center"><img src="docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /> <img src="docs/media/match-history-mobile.png" width="280" alt="Match results and public scorecard on mobile" /></p>
 
 </details>
 
@@ -39,19 +39,19 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 | ------------------- | --------------------------------------------------------------------------------------------- |
 | Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                     |
 | Friend rooms        | Invitations, seat selection, temporary bot takeover and original-tab recovery                 |
-| Local inference     | An RL value policy and an independent response network in a Web Worker                        |
-| Five personalities  | Balanced, aggressive, conservative, observant and adaptive                                    |
+| Local inference     | Numbered trained models in a browser Web Worker                                               |
+| Numbered models     | Per-seat model IDs, a current default and selectable previous versions                        |
 | Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
 | Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
 | Public scorecards   | Select earlier rounds, filter public actions and export a round or the match                  |
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
-The personalities share the RL value policy. Observant and adaptive bots can additionally use a separately trained **supervised response classifier**. They are five playing styles, not five independently trained RL agents. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
+Choose a model number for each empty seat. New players use the latest published default; saved choices remain available. The owner requests a new complete training export every four hours. Publication is not independent playing-strength acceptance. See [model registration and publishing](docs/WEB_MODELS.md), including how another training machine can add its bot. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
 
 The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](docs/PRACTICE.md).
 
-[Bot behavior and evidence](docs/BOTS.md) · [Reproducible model training](docs/MODEL_TRAINING.md)
+[Model catalog and evidence](docs/WEB_MODELS.md) · [Reproducible model training](docs/MODEL_TRAINING.md)
 
 The **[model research report](docs/MODEL_STUDY.md)** documents the shared networks, actual learning algorithms, full-match objective, positive and negative results, and evidence limits. Completed experiments are updated with checkpoint hashes and seed-level outcomes; development peaks are kept separate from independent acceptance tests.
 

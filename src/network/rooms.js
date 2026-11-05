@@ -8,8 +8,8 @@ import { isHumanSeat, newGame, resetGame, toLocal } from '../game/session.js';
 import { owesReturn, retWait, tribOptions, tribWait } from '../game/tribute.js';
 import { beginPlay, startTurn } from '../game/turns.js';
 import { DIRS, absOf, lobbyStatus, nickNow, renderLobby } from '../lobby/lobby.js';
-import { normalizeBotPreferences, prepareBotStyles } from '../lobby/bot-setup.js';
-import { profileId } from '../ai/profiles.js';
+import { normalizeBotPreferences, prepareBotModels } from '../lobby/bot-setup.js';
+import { botModelId } from '../ai/model-catalog.mjs';
 import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady, versionsMatch } from './protocol.js';
 import { VC } from './voice.js';
 import { forgetSeat } from './rejoin-storage.js';
@@ -270,7 +270,7 @@ export function startOnline() {
     return;
   }
   confirmReservations();
-  prepareBotStyles();
+  prepareBotModels();
   runtime.network.started = true;
   runtime.network.hostDir = runtime.direction;
   const names = {};
@@ -287,7 +287,7 @@ export function startOnline() {
     names,
     rules: runtime.rules,
     peers,
-    botStyles: runtime.botStyles,
+    botModels: runtime.botModels,
   });
   enterOnline('host', runtime.direction, names);
   newGame();
@@ -412,7 +412,7 @@ function guestOnData(d) {
       localStorage.setItem('guandan-nick', runtime.nickname);
     } catch (_) {}
     if (d.rules) Object.assign(runtime.rules, d.rules);
-    runtime.botStyles = Array.from({ length: 4 }, (_, index) => profileId(d.botStyles?.[index]));
+    runtime.botModels = Array.from({ length: 4 }, (_, index) => botModelId(d.botModels?.[index]));
     enterOnline('guest', d.hostDir, d.names);
     resetGame();
     render();
@@ -459,8 +459,8 @@ function hostGone(automatic = true) {
 
 // the host left: this table carries on alone from wherever the game stood, the computer taking every other seat
 export function goSolo() {
-  runtime.botStyles = Array.from({ length: 4 }, (_, index) =>
-    profileId(runtime.botStyles?.[(index + runtime.network.off) % 4]),
+  runtime.botModels = Array.from({ length: 4 }, (_, index) =>
+    botModelId(runtime.botModels?.[(index + runtime.network.off) % 4]),
   );
   VC.stop();
   try {
