@@ -3596,5 +3596,20 @@
         }
       }
     ]
-  }
+  },
+  "independentEvaluations": [
+    {
+      "id": "independent-v481076-rule-20261105",
+      "modelSHA256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+      "results": "ai/research/evaluation/independent-v481076-rule-20261105/results.json",
+      "protocol": "ai/research/evaluation/independent-v481076-rule-20261105/protocol.json",
+      "matches": 2000,
+      "wins": 1576,
+      "losses": 297,
+      "draws": 127,
+      "winRate": 0.788,
+      "target80Supported": false,
+      "scope": "Only two model-006 seats versus two unchanged original rule seats; no old-model improvement or promotion claim"
+    }
+  ]
 }

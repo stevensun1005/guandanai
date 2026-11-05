@@ -50,6 +50,17 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     assert.deepEqual(data.resources, state.resources);
     assert.equal(data.plannedHours, 24);
     assert.deepEqual(data.evaluations, []);
+    assert.equal(data.independentEvaluation, null);
+    mkdirSync(join(directory, 'ai/local/workspace/evaluations'), { recursive: true });
+    save('ai/local/workspace/evaluations/progress.json', {
+      phase: 'running',
+      completedMatches: 20,
+      plannedMatches: 2000,
+    });
+    assert.equal(
+      (await (await fetch(base + '/api/status')).json()).independentEvaluation.completedMatches,
+      20,
+    );
     assert.equal(data.publication.confirmed, false);
     assert.equal((await fetch(base + '/api/status', { method: 'POST' })).status, 405);
     assert.equal((await fetch(base + '/config.json')).status, 404);

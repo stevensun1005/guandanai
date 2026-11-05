@@ -74,6 +74,23 @@ const node = (tag, text, className) => {
 };
 
 function render(data) {
+  const independent = data.independentEvaluation;
+  element('independent-evaluation').hidden = !independent;
+  if (independent) {
+    const stale =
+      independent.phase !== 'complete' && Date.now() - Date.parse(independent.updatedAtUTC) > 60000;
+    const phase = stale
+      ? '状态已过期'
+      : { running: '进行中', complete: '已完成', failed: '已中断' }[independent.phase] ||
+        independent.phase;
+    set('independent-lineup', `${independent.model} × 2 对 ${independent.opponent} × 2`);
+    set(
+      'independent-count',
+      `${phase} · ${number(independent.completedMatches)} / ${number(independent.plannedMatches)} 场整场比赛`,
+    );
+    element('independent-progress').max = independent.plannedMatches;
+    element('independent-progress').value = independent.completedMatches;
+  }
   const running = data.phase === 'running';
   const stopped = data.phase === 'stopped';
 

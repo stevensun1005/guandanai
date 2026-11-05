@@ -1,0 +1,205 @@
+{
+  "schema": 1,
+  "purpose": "Completed fixed independent whole-match evaluation; no model selection",
+  "protocolSHA256": "7130b0febfd6413536054175af35deb7ed1df14f5227c8389f660cefcb3e5d9c",
+  "model": {
+    "version": "v000481076",
+    "catalogId": "006",
+    "sha256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
+    "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-006/bot-006.onnx",
+    "exportedAtUTC": "2026-11-05T12:51:36Z",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    }
+  },
+  "opponent": "original-rule",
+  "rules": {
+    "tribute": true,
+    "startLevel": 2,
+    "through": "A",
+    "aFail": "draw after three failed A attempts",
+    "maxRounds": 200,
+    "truncation": "error, never silently a draw"
+  },
+  "completedAtUTC": "2026-11-05T13:43:20.938933+00:00",
+  "seedStart": 900000000,
+  "seedEnd": 900000999,
+  "completedPairs": 1000,
+  "counts": {
+    "matches": 2000,
+    "wins": 1576,
+    "losses": 297,
+    "draws": 127,
+    "rounds": 20898,
+    "doubleWins": 7421,
+    "doubleLosses": 3123,
+    "firsts": 12610,
+    "isolatedFirsts": 2493,
+    "signedUpgradePoints": 14188
+  },
+  "metrics": {
+    "matchWinRate": {
+      "estimate": 0.788,
+      "bootstrap95": [
+        0.7719875,
+        0.805
+      ]
+    },
+    "matchScore": {
+      "estimate": 0.81975,
+      "bootstrap95": [
+        0.8045,
+        0.83475
+      ]
+    },
+    "matchDrawRate": {
+      "estimate": 0.0635,
+      "bootstrap95": [
+        0.0535,
+        0.074
+      ]
+    },
+    "doubleDownRate": {
+      "estimate": 0.14944013781223084,
+      "bootstrap95": [
+        0.14465521965621192,
+        0.15443145529859445
+      ]
+    },
+    "doubleUpRate": {
+      "estimate": 0.3551057517465786,
+      "bootstrap95": [
+        0.3485268171732761,
+        0.36188729235540823
+      ]
+    },
+    "isolatedFirstRate": {
+      "estimate": 0.19770023790642346,
+      "bootstrap95": [
+        0.190794647294232,
+        0.20449783923917203
+      ]
+    },
+    "safePartnerAfterFirstRate": {
+      "estimate": 0.8022997620935766,
+      "bootstrap95": [
+        0.795502160760828,
+        0.809205352705768
+      ]
+    },
+    "meanSignedUpgradePoints": {
+      "estimate": 0.6789166427409321,
+      "bootstrap95": [
+        0.6477105297529555,
+        0.7115304786749074
+      ]
+    }
+  },
+  "teamRankPairs": {
+    "12": {
+      "count": 7421,
+      "roundRate": 0.3551057517465786
+    },
+    "13": {
+      "count": 2696,
+      "roundRate": 0.12900756053210832
+    },
+    "14": {
+      "count": 2493,
+      "roundRate": 0.11929371231696813
+    },
+    "23": {
+      "count": 3739,
+      "roundRate": 0.17891664274093214
+    },
+    "24": {
+      "count": 1426,
+      "roundRate": 0.06823619485118193
+    },
+    "34": {
+      "count": 3123,
+      "roundRate": 0.14944013781223084
+    }
+  },
+  "matchWinRateClusterHoeffding95": [
+    0.7450530591653263,
+    0.8309469408346738
+  ],
+  "matchWinRateOneSided95Lower": 0.7492977243979505,
+  "target80Supported": false,
+  "raw": {
+    "file": "matches.jsonl.gz",
+    "sha256": "db784a9729114f3809b31a2f45e380109af15a9845eb19b086b9293d5d54dab1",
+    "uncompressedSHA256": "925462e664c0028b175b82b2b48fda999e0c3b2f999de288487ea17099ba3a96",
+    "compressedBytes": 174494
+  },
+  "analysis": {
+    "bootstrapIterations": 2000,
+    "bootstrapSeed": 2026110513,
+    "cluster": "Two swapped whole matches per seed; rounds never sampled independently",
+    "fingerprint": "b0b4b8a0c3d674e4060d0b231152b5c918333f5135b338ac1b3e717d2ed1dd3e",
+    "numpy": "2.3.5"
+  },
+  "limitations": [
+    "Original P0 pretraining corpus is unavailable; the seed audit cannot prove novelty against that historical corpus.",
+    "Endgame search retains deployed wall-clock/node budgets, so exact decisions can depend on timing.",
+    "Native and browser numeric paths are not claimed bitwise identical.",
+    "Only this fixed 2v2 lineup is tested; no other model comparison or human-play claim.",
+    "Cooperation statistics are outcome proxies, with no old-model control; they do not establish longitudinal progress or intent."
+  ],
+  "execution": {
+    "preregisteredCommit": "6b11d3888b686e675934de243803a717e8102255",
+    "startedAtUTC": "2026-11-05T13:27:04.713Z",
+    "finishedAtUTC": "2026-11-05T13:42:48.045Z",
+    "wallSeconds": 943.332,
+    "workers": 2,
+    "inferenceThreadsPerWorker": 1,
+    "inferenceBackend": "onnxruntime-node CPU; unchanged shared table/Worker decision functions",
+    "node": "v24.19.0",
+    "onnxruntime": "1.31.1",
+    "os": "Windows-11-10.0.26300-SP0",
+    "sourceFingerprintsVerified": true,
+    "modelSHA256Verified": true,
+    "completedMatches": 2000,
+    "completedSeedPairs": 1000,
+    "truncatedMatches": 0,
+    "failedMatchRecords": 0,
+    "finalWorkerRSSBytes": [
+      320016384,
+      329203712
+    ]
+  },
+  "ruleTeamDescriptive": {
+    "wins": 297,
+    "losses": 1576,
+    "draws": 127,
+    "doubleUpCount": 3123,
+    "doubleDownCount": 7421,
+    "firsts": 8288,
+    "isolatedFirsts": 3739,
+    "isolatedFirstRate": 0.4511341698841699,
+    "safePartnerAfterFirstRate": 0.5488658301158301,
+    "classification": "Complementary descriptive counts in the same matches, not an additional old-model control"
+  },
+  "operationalNotes": [
+    "The read-only progress monitor briefly mislabeled a completed worker normal exit as failure while the other worker was finishing. Both collectors completed all 1000 registered seed pairs without interruption; the monitor was corrected, with no data or protocol change.",
+    "stats.decisions and stats.currentModelSeats are training-collection-only fields and are not inference counters in evaluate mode."
+  ],
+  "validation": {
+    "nodeTestsPassed": 121,
+    "nodeTestsFailed": 0,
+    "formatCheck": true,
+    "build": true,
+    "buildVersion": "7b8c4300b0",
+    "pythonLocalPassed": 29,
+    "pythonLocalGPUOnlySkipped": 1,
+    "pythonGuanZeroPassed": 8,
+    "pythonResearchPassed": 9,
+    "dashboardLiveProgressBrowser": true,
+    "dashboardPageErrors": [],
+    "webModelCatalogUnchangedByEvaluation": true,
+    "rawSeedPairsVerified": 1000,
+    "rawCompleteMatchesVerified": 2000
+  }
+}

@@ -138,6 +138,9 @@ export function dashboardSnapshot(run, workspace = project) {
   );
   return {
     observedAt: new Date().toISOString(),
+    independentEvaluation: readJSON(
+      join(workspace, 'ai/local/workspace/evaluations/progress.json'),
+    ),
     resources: status.resources || null,
     run: paths.root,
     phase: status.stoppedAt

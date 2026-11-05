@@ -40,6 +40,19 @@
         <p class="hint">进度条只表示运行时间，不代表棋力。</p>
       </section>
 
+      <section class="card" id="independent-evaluation" hidden>
+        <h2>独立整场评测</h2>
+        <p id="independent-lineup"></p>
+        <p id="independent-count"></p>
+        <progress
+          id="independent-progress"
+          max="2000"
+          value="0"
+          aria-label="独立评测实际完成场数"
+        ></progress>
+        <p class="hint">固定样本跑完后才汇总胜率；评测不更新训练权重。</p>
+      </section>
+
       <section class="metrics" aria-label="核心数字">
         <article class="card metric">
           <p class="label">已完成比赛</p>
