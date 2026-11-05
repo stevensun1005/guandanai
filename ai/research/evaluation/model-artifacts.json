@@ -3507,7 +3507,7 @@
   ],
   "webModels": {
     "catalog": "web/src/ai/model-catalog.json",
-    "defaultId": "003",
+    "defaultId": "004",
     "models": [
       {
         "id": "001",
@@ -3541,6 +3541,20 @@
           "status": "experimental-not-heldout-accepted",
           "registeredAt": "2026-11-05T05:15:35.468Z",
           "step": 9537
+        }
+      },
+      {
+        "id": "004",
+        "sha256": "a806747de50a46f76bd8b4d5de189411b902f3b46531e040daf19c76fdbd7da7",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-004/bot-004.onnx",
+        "source": {
+          "run": "gpu-main",
+          "version": "v000331516",
+          "step": 331516,
+          "exportedAt": "2026-11-05T08:50:45Z",
+          "expectedSHA256": "a806747de50a46f76bd8b4d5de189411b902f3b46531e040daf19c76fdbd7da7",
+          "status": "experimental-not-heldout-accepted",
+          "registeredAt": "2026-11-05T08:54:34.926Z"
         }
       }
     ]

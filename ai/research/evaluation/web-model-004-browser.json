@@ -1,0 +1,998 @@
+{
+  "model": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\web-publish-20261105-0852\\ai\\publishing\\cache\\frozen-20261105-0852\\gpu-main\\models\\v000331516.onnx",
+  "modelSHA256": "a806747de50a46f76bd8b4d5de189411b902f3b46531e040daf19c76fdbd7da7",
+  "fixturesSHA256": "79a1e6aad6cd19e6e46a9698dfcb12f6fd3ba6c5f4fa02a9831230925048b48b",
+  "fixturePolicySHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+  "productionRuntimeSHA256": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+  "runtimeConfig": {},
+  "featureSHA256": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+  "nativeFeatureSHA256": "0eb2779cf6b1b2bab2f96b42386217faaaec0265dfaa89cca7fd3e60af621555",
+  "wasmSHA256": "4b884c203b0fa48d057be3332c65513ff85aa3c5bddd6946acc0fab7ecda001d",
+  "testSHA256": "0108feb384cb4847cc24683970a76d202c19f8b4607960041006fe8ba65bea2f",
+  "browser": "156.0.8078.80",
+  "backend": "Chrome dedicated Worker, ONNX Runtime Web WASM, one thread",
+  "positions": 48,
+  "actions": 7922,
+  "maxError": 1.6689300537109375e-06,
+  "exactArgmax": 48,
+  "tieOnlyMismatches": 0,
+  "featureRowsExact": true,
+  "pageErrors": [],
+  "productionBuildTouched": false,
+  "serverClosed": true,
+  "elapsedSeconds": 6.62394150000182,
+  "checks": [
+    {
+      "position": 0,
+      "category": "wide",
+      "actions": 300,
+      "maxError": 9.834766387939453e-07,
+      "nativeIndex": 7,
+      "browserIndex": 7,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 0,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 1,
+      "category": "follow",
+      "actions": 15,
+      "maxError": 4.76837158203125e-07,
+      "nativeIndex": 9,
+      "browserIndex": 9,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 1,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 2,
+      "category": "follow",
+      "actions": 13,
+      "maxError": 6.556510925292969e-07,
+      "nativeIndex": 12,
+      "browserIndex": 12,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 2,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 3,
+      "category": "afterPass",
+      "actions": 13,
+      "maxError": 6.258487701416016e-07,
+      "nativeIndex": 8,
+      "browserIndex": 8,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 3,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 4,
+      "category": "afterPass",
+      "actions": 8,
+      "maxError": 5.066394805908203e-07,
+      "nativeIndex": 7,
+      "browserIndex": 7,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 4,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 5,
+      "category": "wide",
+      "actions": 218,
+      "maxError": 1.0132789611816406e-06,
+      "nativeIndex": 179,
+      "browserIndex": 179,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 5,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 6,
+      "category": "follow",
+      "actions": 23,
+      "maxError": 5.066394805908203e-07,
+      "nativeIndex": 5,
+      "browserIndex": 5,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 6,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 7,
+      "category": "follow",
+      "actions": 4,
+      "maxError": 6.556510925292969e-07,
+      "nativeIndex": 3,
+      "browserIndex": 3,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 7,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 8,
+      "category": "afterPass",
+      "actions": 2,
+      "maxError": 5.960464477539063e-08,
+      "nativeIndex": 1,
+      "browserIndex": 1,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 8,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 9,
+      "category": "afterPass",
+      "actions": 3,
+      "maxError": 5.960464477539062e-07,
+      "nativeIndex": 2,
+      "browserIndex": 2,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 9,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 10,
+      "category": "lead",
+      "actions": 124,
+      "maxError": 1.0728836059570312e-06,
+      "nativeIndex": 115,
+      "browserIndex": 115,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 10,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 11,
+      "category": "follow",
+      "actions": 8,
+      "maxError": 3.5762786865234375e-07,
+      "nativeIndex": 7,
+      "browserIndex": 7,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 11,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 12,
+      "category": "afterPass",
+      "actions": 12,
+      "maxError": 5.364418029785156e-07,
+      "nativeIndex": 11,
+      "browserIndex": 11,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 12,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 13,
+      "category": "afterPass",
+      "actions": 11,
+      "maxError": 7.152557373046875e-07,
+      "nativeIndex": 10,
+      "browserIndex": 10,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 13,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 14,
+      "category": "afterPass",
+      "actions": 4,
+      "maxError": 3.8743019104003906e-07,
+      "nativeIndex": 3,
+      "browserIndex": 3,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 15,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 15,
+      "category": "lead",
+      "actions": 105,
+      "maxError": 7.152557373046875e-07,
+      "nativeIndex": 98,
+      "browserIndex": 98,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 17,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 16,
+      "category": "follow",
+      "actions": 7,
+      "maxError": 8.046627044677734e-07,
+      "nativeIndex": 1,
+      "browserIndex": 1,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 18,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 17,
+      "category": "follow",
+      "actions": 37,
+      "maxError": 8.046627044677734e-07,
+      "nativeIndex": 27,
+      "browserIndex": 27,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 19,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 18,
+      "category": "follow",
+      "actions": 2,
+      "maxError": 9.5367431640625e-07,
+      "nativeIndex": 1,
+      "browserIndex": 1,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 20,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 19,
+      "category": "afterPass",
+      "actions": 2,
+      "maxError": 4.76837158203125e-07,
+      "nativeIndex": 1,
+      "browserIndex": 1,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 21,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 20,
+      "category": "alias",
+      "actions": 717,
+      "maxError": 1.3113021850585938e-06,
+      "nativeIndex": 704,
+      "browserIndex": 704,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 23,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 21,
+      "category": "lead",
+      "actions": 12,
+      "maxError": 5.662441253662109e-07,
+      "nativeIndex": 11,
+      "browserIndex": 11,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 38,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 22,
+      "category": "lead",
+      "actions": 122,
+      "maxError": 1.0728836059570312e-06,
+      "nativeIndex": 119,
+      "browserIndex": 119,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 44,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 23,
+      "category": "lead",
+      "actions": 113,
+      "maxError": 1.1622905731201172e-06,
+      "nativeIndex": 106,
+      "browserIndex": 106,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 48,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 24,
+      "category": "lead",
+      "actions": 104,
+      "maxError": 1.0728836059570312e-06,
+      "nativeIndex": 103,
+      "browserIndex": 103,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 52,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 25,
+      "category": "alias",
+      "actions": 64,
+      "maxError": 1.1920928955078125e-06,
+      "nativeIndex": 57,
+      "browserIndex": 57,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 59,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 26,
+      "category": "lead",
+      "actions": 24,
+      "maxError": 9.5367431640625e-07,
+      "nativeIndex": 16,
+      "browserIndex": 16,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 65,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 27,
+      "category": "afterFirstOut",
+      "actions": 2,
+      "maxError": 1.1920928955078125e-07,
+      "nativeIndex": 1,
+      "browserIndex": 1,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 68,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 28,
+      "category": "afterFirstOut",
+      "actions": 12,
+      "maxError": 1.1920928955078125e-06,
+      "nativeIndex": 7,
+      "browserIndex": 7,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 71,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 29,
+      "category": "afterFirstOut",
+      "actions": 2,
+      "maxError": 3.5762786865234375e-07,
+      "nativeIndex": 0,
+      "browserIndex": 0,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 72,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 30,
+      "category": "afterFirstOut",
+      "actions": 2,
+      "maxError": 3.5762786865234375e-07,
+      "nativeIndex": 0,
+      "browserIndex": 0,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 73,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": true,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 31,
+      "category": "afterFirstOut",
+      "actions": 11,
+      "maxError": 8.344650268554688e-07,
+      "nativeIndex": 9,
+      "browserIndex": 9,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890104,
+      "turn": 76,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 32,
+      "category": "wide",
+      "actions": 412,
+      "maxError": 9.5367431640625e-07,
+      "nativeIndex": 79,
+      "browserIndex": 79,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 0,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 33,
+      "category": "lead",
+      "actions": 122,
+      "maxError": 8.344650268554688e-07,
+      "nativeIndex": 0,
+      "browserIndex": 0,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 7,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 34,
+      "category": "wide",
+      "actions": 161,
+      "maxError": 1.430511474609375e-06,
+      "nativeIndex": 126,
+      "browserIndex": 126,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 20,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 35,
+      "category": "wide",
+      "actions": 160,
+      "maxError": 9.5367431640625e-07,
+      "nativeIndex": 158,
+      "browserIndex": 158,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 30,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 36,
+      "category": "alias",
+      "actions": 384,
+      "maxError": 1.6093254089355469e-06,
+      "nativeIndex": 289,
+      "browserIndex": 289,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 41,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 37,
+      "category": "afterFirstOut",
+      "actions": 6,
+      "maxError": 7.152557373046875e-07,
+      "nativeIndex": 5,
+      "browserIndex": 5,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 72,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 38,
+      "category": "afterFirstOut",
+      "actions": 6,
+      "maxError": 3.5762786865234375e-07,
+      "nativeIndex": 1,
+      "browserIndex": 1,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 75,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 39,
+      "category": "afterFirstOut",
+      "actions": 3,
+      "maxError": 4.76837158203125e-07,
+      "nativeIndex": 0,
+      "browserIndex": 0,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890105,
+      "turn": 76,
+      "flags": {
+        "afterFirstOut": true,
+        "alias": false,
+        "afterPass": false,
+        "wide": false,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 40,
+      "category": "alias",
+      "actions": 2148,
+      "maxError": 1.4007091522216797e-06,
+      "nativeIndex": 8,
+      "browserIndex": 8,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890106,
+      "turn": 0,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 41,
+      "category": "wide",
+      "actions": 177,
+      "maxError": 8.940696716308594e-07,
+      "nativeIndex": 175,
+      "browserIndex": 175,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890106,
+      "turn": 23,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 42,
+      "category": "alias",
+      "actions": 126,
+      "maxError": 1.519918441772461e-06,
+      "nativeIndex": 107,
+      "browserIndex": 107,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890106,
+      "turn": 48,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": false,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 43,
+      "category": "wide",
+      "actions": 219,
+      "maxError": 1.1920928955078125e-06,
+      "nativeIndex": 135,
+      "browserIndex": 135,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890107,
+      "turn": 0,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 44,
+      "category": "wide",
+      "actions": 173,
+      "maxError": 9.5367431640625e-07,
+      "nativeIndex": 172,
+      "browserIndex": 172,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890107,
+      "turn": 7,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": false,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    },
+    {
+      "position": 45,
+      "category": "alias",
+      "actions": 561,
+      "maxError": 1.6689300537109375e-06,
+      "nativeIndex": 39,
+      "browserIndex": 39,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890107,
+      "turn": 21,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": true,
+        "wide": true,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 46,
+      "category": "alias",
+      "actions": 223,
+      "maxError": 1.1920928955078125e-06,
+      "nativeIndex": 222,
+      "browserIndex": 222,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890107,
+      "turn": 25,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": true,
+        "lead": false,
+        "follow": true
+      }
+    },
+    {
+      "position": 47,
+      "category": "alias",
+      "actions": 945,
+      "maxError": 1.3113021850585938e-06,
+      "nativeIndex": 0,
+      "browserIndex": 0,
+      "exactArgmax": true,
+      "nativeValueGap": 0.0,
+      "seed": 21890108,
+      "turn": 0,
+      "flags": {
+        "afterFirstOut": false,
+        "alias": true,
+        "afterPass": false,
+        "wide": true,
+        "lead": true,
+        "follow": false
+      }
+    }
+  ],
+  "classification": "Browser/native numerical compatibility; zero strength-evaluation matches",
+  "dataPurpose": "Deterministic development/browser fixtures, never heldout strength acceptance",
+  "seeds": [
+    21890104,
+    21890105,
+    21890106,
+    21890107,
+    21890108
+  ],
+  "nativeBackend": "ONNX Runtime CPUExecutionProvider, one thread; independent NumPy state/card encoder",
+  "nativeStateEncoderSHA256": "7ca9c48dc79916d70560ae005d967730c5a6c6861e71c13f344aeb79ab2cd2f7",
+  "fingerprintConvention": "Raw file bytes except separately labeled normalized training/browser encoder hashes"
+}
