@@ -4,6 +4,7 @@ import torch
 import onnxruntime as ort
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/guanzero'))
+(ROOT/'work/guanzero').mkdir(parents=True,exist_ok=True)
 from model import GuanZeroNet, export_onnx
 class ModelTest(unittest.TestCase):
     def test_export_python_and_node(self):

@@ -3,6 +3,7 @@ import numpy as np
 import torch
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/guanzero'))
+(ROOT/'work/guanzero').mkdir(parents=True,exist_ok=True)
 from model import GuanZeroNet,optimizer,update
 from learner import load_batch,atomic_checkpoint
 class LearnerTest(unittest.TestCase):
