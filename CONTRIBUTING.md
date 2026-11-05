@@ -6,7 +6,7 @@
 
 Node.js 20.19+，推荐与 CI 一致的 Node.js 24。克隆仓库后运行 `npm ci`、`npm run build`、`npm run dev`。
 
-源码在 `src`，构建结果在 `dist`。不要直接修改 `dist`；不要把浏览器缓存、临时训练缓冲区或本机配置提交到仓库。已完成的实验报告、成果索引和研究检查点依照 [AGENTS.md](AGENTS.md) 归档，与网页默认权重分开。
+源码在 `web/src`，构建结果在 `web/dist`。不要直接修改 `web/dist`；不要把浏览器缓存、临时训练缓冲区或本机配置提交到仓库。已完成的实验报告、成果索引和研究检查点依照 [AGENTS.md](./AGENTS.md) 归档，与网页默认权重分开。
 
 ## 文件放对地方
 
@@ -14,7 +14,7 @@ Node.js 20.19+，推荐与 CI 一致的 Node.js 24。克隆仓库后运行 `npm 
 - 回合流程放 `game`。
 - 手牌操作放 `hand` 和 `input`。
 - 房间行为放 `network`。
-- 电脑决策放 `ai`，模型资源放根目录 `ai`。
+- 电脑决策放 `ai/local/models/baseline`，模型资源放根目录 `ai/local/models/baseline`。
 - 样式与图片放 `styles`、`assets`。
 
 新增模块先明确它需要什么输入、会改变什么状态、由谁调用。不要因为顺手把另一个功能也塞进去。
@@ -31,7 +31,7 @@ npm run build
 
 UI 改动附实际截图并检查手机宽度；规则改动加入具体手牌用例；联机改动跑双浏览器检查；模型改动记录数值一致性、耗时和真实对战结果。
 
-浏览器 CI 使用 Python 3.13。开发验证依赖见 `requirements-dev.txt`，模型导出与应牌训练依赖见 `requirements-models.txt`，完整主网训练还需 `requirements-training.txt`。例如 `python -m pip install -r requirements-training.txt` 会安装完整主网训练所需的 PyTorch；这些依赖不进入浏览器生产环境。Python 格式调整同样只针对本次修改的文件。
+浏览器 CI 使用 Python 3.13。开发验证依赖见 `ai/environment/requirements-dev.txt`，模型导出与应牌训练依赖见 `ai/environment/requirements-models.txt`，完整主网训练还需 `ai/environment/requirements-training.txt`。例如 `python -m pip install -r ai/environment/requirements-training.txt` 会安装完整主网训练所需的 PyTorch；这些依赖不进入浏览器生产环境。Python 格式调整同样只针对本次修改的文件。
 
 ## 文档的职责
 

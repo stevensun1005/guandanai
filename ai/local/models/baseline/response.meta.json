@@ -1,0 +1,53 @@
+{
+  "name": "response",
+  "version": 1,
+  "training": "supervised response prediction from self-play; not a second reinforcement-learning value network",
+  "architecture": [
+    253,
+    64,
+    32,
+    1
+  ],
+  "activations": [
+    "tanh",
+    "tanh",
+    "sigmoid"
+  ],
+  "parameters": 18369,
+  "input": {
+    "name": "features",
+    "shape": [
+      "batch",
+      253
+    ],
+    "featureVersion": 1,
+    "source": "web/src/ai/response-features.mjs"
+  },
+  "output": {
+    "name": "probability",
+    "shape": [
+      "batch",
+      1
+    ],
+    "meaning": "probability the next active opponent follows a played action under the sampled teacher policies"
+  },
+  "scope": "observant and adaptive profiles; rank close non-pass plays after original play/pass choice; never override a proved endgame",
+  "dataset": {
+    "games": 5000,
+    "rows": 167659,
+    "seed": 20270104,
+    "splitGames": {
+      "train": 4000,
+      "validation": 500,
+      "test": 500
+    },
+    "split": "gameIndex % 10: test 0, validation 1, train 2..9"
+  },
+  "modelSHA256": "fbfc15062dc7ad03886f3b066e1646ed89a6de61885d1976d78c5a047548d2fc",
+  "weightsSHA256": "b610e0df9c2a76c44ffc0526aedf12fa79dd170f49745c5f77faae40d87024ac",
+  "reports": [
+    "ai/research/evaluation/response-training-1.7.0.json",
+    "ai/research/evaluation/response-bootstrap-1.7.0.json",
+    "ai/research/evaluation/response-policy-1.7.0.json"
+  ]
+}

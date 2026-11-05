@@ -7,21 +7,25 @@
 Four-player GuanDan with browser-local bots, private rooms and practical hand tools.
 
 [![Deploy](https://github.com/stevensun1005/guandanai/actions/workflows/pages.yml/badge.svg)](https://github.com/stevensun1005/guandanai/actions/workflows/pages.yml)
-[![Version](https://img.shields.io/github/package-json/v/stevensun1005/guandanai?color=ddb050)](CHANGELOG.md)
+[![Version](https://img.shields.io/github/package-json/v/stevensun1005/guandanai?color=ddb050)](./CHANGELOG.md)
 ![Runtime](https://img.shields.io/badge/Runtime-Browser_%2B_WebAssembly-4a7c59)
 
-**[Play now](https://stevensun1005.github.io/guandanai/) · [Download a release](https://github.com/stevensun1005/guandanai/releases/latest) · [简体中文](README.md) · [Contributing](CONTRIBUTING.md)**
+**[Play now](https://stevensun1005.github.io/guandanai/) · [Download a release](https://github.com/stevensun1005/guandanai/releases/latest) · [简体中文](./README.md) · [Contributing](./CONTRIBUTING.md)**
 
 </div>
 
-![An actual game](docs/media/table-desktop.png)
+![An actual game](./web/docs/media/table-desktop.png)
 
 <details>
 <summary>More views: bot personalities, mobile help and match history</summary>
 
-<p align="center"><img src="docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /> <img src="docs/media/match-history-mobile.png" width="280" alt="Match results and public scorecard on mobile" /></p>
+<p align="center"><img src="./web/docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /> <img src="./web/docs/media/match-history-mobile.png" width="280" alt="Match results and public scorecard on mobile" /></p>
 
 </details>
+
+## Code and model entry points
+
+[Web application](web/README.md) · [AI](ai/README.md) · [Local model](ai/local/README.md) · [GuanZero](ai/guanzero/README.md) · [Migration guide](ai/research/STRUCTURE_MIGRATION.md)
 
 ## Bring your friends
 
@@ -47,13 +51,13 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
-Choose a training checkpoint name, such as `v000198487`, for each empty seat. New players use the latest published default; saved choices remain available. The owner requests a new complete training export every four hours. Publication is not independent playing-strength acceptance. See [model registration and publishing](docs/WEB_MODELS.md), including how another training machine can add its bot. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
+Choose a training checkpoint name, such as `v000198487`, for each empty seat. New players use the latest published default; saved choices remain available. The owner requests a new complete training export every four hours. Publication is not independent playing-strength acceptance. See [model registration and publishing](./web/docs/WEB_MODELS.md), including how another training machine can add its bot. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
 
-The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](docs/PRACTICE.md).
+The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](./web/docs/PRACTICE.md).
 
-[Model catalog and evidence](docs/WEB_MODELS.md) · [Reproducible model training](docs/MODEL_TRAINING.md)
+[Model catalog and evidence](./web/docs/WEB_MODELS.md) · [Reproducible model training](./ai/research/MODEL_TRAINING.md)
 
-The **[model research report](docs/MODEL_STUDY.md)** documents the shared networks, actual learning algorithms, full-match objective, positive and negative results, and evidence limits. Completed experiments are updated with checkpoint hashes and seed-level outcomes; development peaks are kept separate from independent acceptance tests.
+The **[model research report](./ai/research/MODEL_STUDY.md)** documents the shared networks, actual learning algorithms, full-match objective, positive and negative results, and evidence limits. Completed experiments are updated with checkpoint hashes and seed-level outcomes; development peaks are kept separate from independent acceptance tests.
 
 ## Run locally
 
@@ -75,37 +79,34 @@ npm run format:check
 npm run build
 ```
 
-Python is a developer tool for model export, training and browser validation. Players and the static build do not need it. Tested Python dependencies are recorded in `requirements-dev.txt` and `requirements-models.txt`.
+Python is a developer tool for model export, training and browser validation. Players and the static build do not need it. Tested Python dependencies are recorded in `ai/environment/requirements-dev.txt` and `ai/environment/requirements-models.txt`.
 
-Validation includes three viewport sizes, numerical checks for both models, recovery races and three complete automated matches: **37 rounds and 2,957 actions** across two- and four-client sessions. See the [validation scope and reports](docs/TESTING.md).
+Validation includes three viewport sizes, numerical checks for both models, recovery races and three complete automated matches: **37 rounds and 2,957 actions** across two- and four-client sessions. See the [validation scope and reports](./web/docs/TESTING.md).
 
 ## A project with clear boundaries
 
 ```text
-src/
-  index.html          Page structure
-  app.js              Explicit module initialization
-  core/               Pure cards, combinations, candidates and validation
-  game/               Dealing, tribute, turns, clocks and events
-  hand/ input/        Arrangement, selection, gestures and keyboard actions
-  ai/                 Features, profiles, model registry and Worker inference
-  network/            Rooms, seat recovery, snapshots and voice
-  lobby/ ui/          Lobby, table rendering and dialogs
-  replay/             Practice records, import/export and public scorecards
-  styles/ assets/     Feature styles and visual assets
-ai/                   Model files and numerical reference
-scripts/              Build, preview, data collection, training and evaluation
-tests/                Node checks and real-browser scenarios
-docs/                 Guides, architecture, evaluations and roadmap
+web/                      Web application
+  src/                    Game, UI, rooms and browser inference
+  tools/                  Build, preview and packaging
+  tests/                  Web and browser tests
+  docs/                   Playing, controls and deployment
+ai/                       AI
+  local/                  Local model training, data, evaluation and weights
+  guanzero/               Separate GuanZero training and evaluation
+  shared/                 Shared simulation and fixed positions
+  research/               Research, handoff and experiment evidence
+  publishing/             Browser model publishing and archival
+  environment/            Python dependency lists
 ```
 
-Production assets are bundled into `dist/`; edit `src/`, not the build output. Rules do not depend on DOM or session state. Model observations are explicitly limited to the acting player's hand and public information.
+Production assets are bundled into `web/dist/`; edit `web/src/`, not the build output. Rules do not depend on DOM or session state. Model observations are explicitly limited to the acting player's hand and public information.
 
 ## Publish
 
 Pull requests run unit checks, formatting, the build and real browser play/import smoke tests without deploying. Push to `main` to deploy after those checks pass. Documentation and experimental checkpoint archival pushes do not trigger deployment. Configure Pages to use **GitHub Actions** as its source. All inference resources are included in the static deployment.
 
-The application uses relative asset URLs and supports repository subpaths. See the [deployment guide](docs/DEPLOYMENT.md).
+The application uses relative asset URLs and supports repository subpaths. See the [deployment guide](./web/docs/DEPLOYMENT.md).
 
 ## Recovery and boundaries
 
@@ -113,26 +114,26 @@ A guest can refresh the original browser tab or reconnect after a data-channel i
 
 Recovery is tab-local; it does not provide account-based or cross-device sign-in. The host must remain online. If the host leaves, guests can continue independently against local bots; automatic host migration is not implemented.
 
-Validation covers desktop Chrome, simulated phone layouts, public PeerJS signaling, multiple browser contexts, full rounds, tribute and recovery races. Different physical devices and networks still need broader long-running playtests. See [testing](docs/TESTING.md) and [room recovery](docs/ROOMS.md).
+Validation covers desktop Chrome, simulated phone layouts, public PeerJS signaling, multiple browser contexts, full rounds, tribute and recovery races. Different physical devices and networks still need broader long-running playtests. See [testing](./web/docs/TESTING.md) and [room recovery](./web/docs/ROOMS.md).
 
 ## Improve one hand at a time
 
 For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include the device, browser, page version and steps. Rule or bot issues benefit from a concrete hand and the public actions leading to it. UI changes benefit from screenshots.
 
-[Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md)
+[Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md) · [Roadmap](./web/docs/ROADMAP.md)
 
 ## Model research status
 
-The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and the default web weights have not been replaced. The [research report](docs/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
+The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and the default web weights have not been replaced. The [research report](./ai/research/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
 
-`npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](docs/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength.
+`npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](./ai/research/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength.
 
 ## Documentation
 
-| Task                                  | Start here                                                                                                                                            |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Play, arrange cards or replay         | [Playing](docs/PLAYING.md) · [Practice](docs/PRACTICE.md)                                                                                             |
-| Invite friends or recover a seat      | [Rooms](docs/ROOMS.md)                                                                                                                                |
-| Develop, validate or deploy           | [Contributing](CONTRIBUTING.md) · [Architecture](docs/ARCHITECTURE.md) · [Testing](docs/TESTING.md) · [Deployment](docs/DEPLOYMENT.md)                |
-| Understand bots or reproduce training | [Bots](docs/BOTS.md) · [Training entry points](docs/MODEL_TRAINING.md) · [Historical training log](docs/TRAINING_RUN.md)                              |
-| Review evidence and planned work      | [Research report](docs/MODEL_STUDY.md) · [Improvement proposals and implementation status](docs/IMPROVEMENT_PROPOSAL.md) · [Roadmap](docs/ROADMAP.md) |
+| Task                                  | Start here                                                                                                                                                                    |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Play, arrange cards or replay         | [Playing](./web/docs/PLAYING.md) · [Practice](./web/docs/PRACTICE.md)                                                                                                         |
+| Invite friends or recover a seat      | [Rooms](./web/docs/ROOMS.md)                                                                                                                                                  |
+| Develop, validate or deploy           | [Contributing](./CONTRIBUTING.md) · [Architecture](./web/docs/ARCHITECTURE.md) · [Testing](./web/docs/TESTING.md) · [Deployment](./web/docs/DEPLOYMENT.md)                    |
+| Understand bots or reproduce training | [Bots](./web/docs/BOTS.md) · [Training entry points](./ai/research/MODEL_TRAINING.md) · [Historical training log](./ai/research/TRAINING_RUN.md)                              |
+| Review evidence and planned work      | [Research report](./ai/research/MODEL_STUDY.md) · [Improvement proposals and implementation status](./ai/research/IMPROVEMENT_PROPOSAL.md) · [Roadmap](./web/docs/ROADMAP.md) |

@@ -1,0 +1,1539 @@
+{
+  "schema": 1,
+  "classification": "Path and import organization only; no new model or strength experiment",
+  "movedTrackedFiles": 587,
+  "immutableArtifactsVerified": 303,
+  "immutableArtifacts": [
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-01/actor.npz",
+      "sha256": "e2f7008696ae243f0f682c21c116545ae13b4cf9469e5b6c925147b0dcb7fc6e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-01/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-01/critic.npz",
+      "sha256": "24b434ed82a93e4422cf4084ead9206795edb200e3762aaa3db76698aac70054"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-01/policy.onnx",
+      "sha256": "f529ffe8f571ba48471e5b0a7a593c3d62ae0969fd3e3c4bc06b7a417c51b305"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-01/training.json",
+      "sha256": "e6d62a805a72d51579fb6b0f2f3065c1406774826d9fd71155e8959b90924a88"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-02/actor.npz",
+      "sha256": "c4652ecc621469baf6de21bcb15ace0680bd9c27bf100e496cb56d51d6eae4c7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-02/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-02/critic.npz",
+      "sha256": "0d2e36344b4682a1538258b768f5ffd13f6db61e8cc7eea7d66c73540fc752af"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-02/policy.onnx",
+      "sha256": "89ef8be079ced52d6872e7b8d63b5acf67ef9578b473fd3eeedb09b26ace2941"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-02/training.json",
+      "sha256": "cdd2ccfa4b562470178f9d47d7ce6fd6b256cc3d2dddffe6e5c534c3fa5d8366"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-03/actor.npz",
+      "sha256": "8e4664d835ff20e334ea95107a14e871e3f2c15a67ec94c534a424a6e5e30a0c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-03/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-03/critic.npz",
+      "sha256": "f11ebe29af77ddd68c8aea52f6a66b3ee20f1b747688b23b626164bffeac71d6"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-03/policy.onnx",
+      "sha256": "e8f3b45f6588cc005725e9ae0581c28efb50cff74293b5bc493db32982706041"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-03/training.json",
+      "sha256": "f23217c4da0b1d0559bec3d768b97230134849f04368af1d995ae764016e1e51"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-04/actor.npz",
+      "sha256": "09d543f0cd04f321ddc6ca569bd839f614088568b58727721b4f3cd37e6cec69"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-04/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-04/critic.npz",
+      "sha256": "5d5d7376ba2c773dafb32a97bfff05374bcfca61ebc76397ad0b27d9d6b8c854"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-04/policy.onnx",
+      "sha256": "be752faaf14d5fa97551911a141a48a145f12ff953440938064daea09ca9330d"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-04/training.json",
+      "sha256": "01a5588dd27f0e936219beba1d8096479a193308570e94b77fe94716a1a7ddb9"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-05/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-05/actor.npz",
+      "sha256": "9d9661f34b8007f6f2c759154e0ca88a2755923b3998705e1fb713af46a80949"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-05/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-05/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-05/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-05/critic.npz",
+      "sha256": "a382facac1be518bef73ec98a1453e0a2d24c8cf1e52740f0380189f04dc4c57"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-05/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-05/policy.onnx",
+      "sha256": "b22f1a1f82e8834929f8c8f72f540766070144d966418716190a4d9b73fbdc7e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-05/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-05/training.json",
+      "sha256": "8d8123875f9ce7339bf18d310624c014352fc3573f0b2c7806f8a7b27c42ea81"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-06/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-06/actor.npz",
+      "sha256": "aa53ecff8d04a1d8a5aeda18df79e885378e16fcfd82354f1b4193f40934b475"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-06/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-06/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-06/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-06/critic.npz",
+      "sha256": "a9983992cb769d97fec8b2aef55da82f0f2fe56f91e847d800f2d26283150c3e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-06/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-06/policy.onnx",
+      "sha256": "77cc795e46fc7d49d5c55af690d738045036851a51de4cdd788a9c3f49f2e885"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-06/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-06/training.json",
+      "sha256": "b9f2e639f681fe4eb53cf3c7ebda1339e0c7d52ea6fb760311162c16709f1746"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-07/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-07/actor.npz",
+      "sha256": "34db49544f4c1b1a21a8727cfce42b612ef025050d165a105705ed389c807d5e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-07/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-07/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-07/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-07/critic.npz",
+      "sha256": "7088dbf080f7a91d1ec9cef2aba96b2cc7508802243776875b23ed3a8756a092"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-07/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-07/policy.onnx",
+      "sha256": "0f0a0b7e0d0c37dfbd5e5860e04588c99ec801f5aae7d01e8a8450d8a66d14ce"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-07/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-07/training.json",
+      "sha256": "2a0625dc084faecc3404557e9263336260dc19e2cb75f770b9edc7c5f278a10c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-08/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-08/actor.npz",
+      "sha256": "2c82da85402f7af037722687e035fedf347c1055e389ee044335836d4f1cbacd"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-08/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-08/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-08/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-08/critic.npz",
+      "sha256": "5e9db2d206ac8a06d9cd8331caf510f6e0721e843e99cacfd6f217e266733c8f"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-08/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-08/policy.onnx",
+      "sha256": "826ba582751484469a467ba071083b9c2903a13d57800076532799a131a37eed"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/a-public-fresh/cycle-08/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/a-public-fresh/cycle-08/training.json",
+      "sha256": "4358063d3849be5ffcd76b3e3796ef8463df2cc2dad6fd77e55ad390e0bb6ae0"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/anchor/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/anchor/policy.onnx",
+      "sha256": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-01/actor.npz",
+      "sha256": "e2f7008696ae243f0f682c21c116545ae13b4cf9469e5b6c925147b0dcb7fc6e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-01/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-01/critic.npz",
+      "sha256": "24b434ed82a93e4422cf4084ead9206795edb200e3762aaa3db76698aac70054"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-01/policy.onnx",
+      "sha256": "f529ffe8f571ba48471e5b0a7a593c3d62ae0969fd3e3c4bc06b7a417c51b305"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-01/training.json",
+      "sha256": "4fbe9bc5a803997e6db131fb98d52059db989eda1d4b98ea43fcb393017e5c45"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-02/actor.npz",
+      "sha256": "99fb5484edf13054079f3c1646d5a8f9e3df53fd7dcb06755c5fbf1fbe237db0"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-02/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-02/critic.npz",
+      "sha256": "7b7b2415c990d382574a026444072571b972bd43d6307a5af778bcc110a44ff3"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-02/policy.onnx",
+      "sha256": "62b1b5f9af75eaff00cad1b7b6a8ee240c9da83a1415209c89c886e01699153a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-02/training.json",
+      "sha256": "ce161ea3b66a752ea6213b28a83c825d8dfb2bf12fe210fd065a0c5246c75d5e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-03/actor.npz",
+      "sha256": "6cedf7ac57768ac98d694cdceb16ec7da22f594367ebbb688de3e48cf7a91060"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-03/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-03/critic.npz",
+      "sha256": "ee7307db7110af449351051eda6c6b34e4d91a9405e6c3177e3c8af720817901"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-03/policy.onnx",
+      "sha256": "b43269a3b5b8ead3f713ec14f6276c630249f333c6d119d8f05d69f559d565ad"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-03/training.json",
+      "sha256": "8092af36b34bee2e7797446866c2880e6370326a53cae3c308484015095b8845"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-04/actor.npz",
+      "sha256": "87b64e4a285f18b051e7024ec22a554d5f80eede5f196c3739830c053ccb36a2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-04/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-04/critic.npz",
+      "sha256": "3e79a1af02f520ddc6722c8a6c9ed7912a7ff01d7be588cfc2af181ccb141720"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-04/policy.onnx",
+      "sha256": "4c8e6510687224d931c9c13bd6a43fe3fda5fc381d773a3adbf59aa81c317582"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-04/training.json",
+      "sha256": "5301a191ccef994e7628dac046f8db657433bd53b10a2319a8d93d732552c5ec"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-05/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-05/actor.npz",
+      "sha256": "6bf4139ff9fe16bd52fe57c3f6870e7e9c10f2397f4d57c184ca8c7856b14bdb"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-05/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-05/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-05/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-05/critic.npz",
+      "sha256": "a3c934c4e7648c15da585e73374b73a51e1c9bff1596c213c3fbb526d09e48a4"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-05/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-05/policy.onnx",
+      "sha256": "684607f8dd6794cd667080d45090279d7b17a6ed2e8fb59aa62592726a7c0796"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-05/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-05/training.json",
+      "sha256": "6d25973173127e9541d248a2dde251a9bd94302c888d4577c901424d6981f058"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-06/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-06/actor.npz",
+      "sha256": "cc9bc92472a4977654b753faa372e6739681dee816327737f2e565a68d822ffa"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-06/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-06/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-06/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-06/critic.npz",
+      "sha256": "7d083e75b415930f9443f41f199c3ad85628d38949a0c81fc5c71eaa1ea10634"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-06/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-06/policy.onnx",
+      "sha256": "b02e2422138da2c0ce434a86b50b8556d91b6469b0993e71c115b2e40c7b1218"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-06/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-06/training.json",
+      "sha256": "3de51ef4fda94a91d14d72d312d75e87085ce127178f8f99dd0d4e4962f497e4"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-07/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-07/actor.npz",
+      "sha256": "fa0e7627672047fdfaec5474e42e6eaa0e506a4279405f9aa03b03bab2d6e9b7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-07/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-07/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-07/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-07/critic.npz",
+      "sha256": "3d7297832228e5e4fbbc0bd3ebcb1d382bcdc8524f4189dd86f3c5475e9126d6"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-07/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-07/policy.onnx",
+      "sha256": "ef5f98e58b9f07ce377b310d738761cca285858139215f2de2c0a68c892bf4c1"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-07/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-07/training.json",
+      "sha256": "5feabcb6cf31b84b93bf825ba1b2e0e1450092012338f30d80f2ce59c56fa340"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-08/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-08/actor.npz",
+      "sha256": "d5161fcc3d2160f219e534a9a9978a2bb6ffd60de1d2797191a35d577074a1cd"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-08/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-08/config.json",
+      "sha256": "c86c8b10294ac3a82842c9b169e51841d1c8bb8a929a8975c103d4f5aeb4eac2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-08/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-08/critic.npz",
+      "sha256": "f77762a87a840ba828b609532c9713dd28ed011bce2b05e0148c13f35becc7c0"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-08/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-08/policy.onnx",
+      "sha256": "95735262b69002a587b12be49854485aff9e3269a60e5269b4274046bd835cfd"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/b-public-review/cycle-08/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/b-public-review/cycle-08/training.json",
+      "sha256": "cdb1936596dbae54bf646bb92c466e6287e273f203ad9c72a0b939f1f55af036"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-01/actor.npz",
+      "sha256": "e2f7008696ae243f0f682c21c116545ae13b4cf9469e5b6c925147b0dcb7fc6e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-01/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-01/critic.npz",
+      "sha256": "45c40d9841ba5d08e718eead06fcae03109494b635753672b72c7f96f62dd75c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-01/policy.onnx",
+      "sha256": "f529ffe8f571ba48471e5b0a7a593c3d62ae0969fd3e3c4bc06b7a417c51b305"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-01/training.json",
+      "sha256": "a3ee1aa0e632849425e99e3ae1eb2e36097906be9b4b0bb65b12874ea526124e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-02/actor.npz",
+      "sha256": "3c9a59c37e425fd6f48d97cc3737c2ab469ed05114f633ae6dbb0a00da18d84d"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-02/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-02/critic.npz",
+      "sha256": "1354e23465dc71febe6e30aa892dcd41193d6a307e2d7167d8689fd309bd7111"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-02/policy.onnx",
+      "sha256": "75297f7e1faf97e4d75af90a02e7998a10c47bb0659589258e91f771fc61836c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-02/training.json",
+      "sha256": "6489abcef7cc60477421b9e9e7d27ffc1c34d503bf3ece2163770883dc291d61"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-03/actor.npz",
+      "sha256": "045e1e71676da0a1f2c061a42478147176f340e0f8510b4397e536bc20f1c678"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-03/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-03/critic.npz",
+      "sha256": "7011c4ffd98031d3d4827245a73f66790e8a9ca31c2f24e09f9676ce569234c7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-03/policy.onnx",
+      "sha256": "a326392f5248700c7e1afbb194847aa6466a49a510f796df8b64d728239c4e16"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-03/training.json",
+      "sha256": "dbe49cee240540f1d686dc1a4848a6665918b0d08570e60b87618eaca19da8ff"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-04/actor.npz",
+      "sha256": "382dd29188a56edea1ae463f0b5249d5b43c6bb507880edc2b3f6ece61bd29c7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-04/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-04/critic.npz",
+      "sha256": "b20da7a4142a56f0f7211096c89c4ac1b8568bd02bbc1903594ffdf8f1984223"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-04/policy.onnx",
+      "sha256": "c9ff9a1c5d2283fe993a563427c9c9c48caf5105232dffab90b02e74bc377791"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-04/training.json",
+      "sha256": "23c3bc3595c3712f4f99b9f25ade27d98f1ebe4ac51dfb08bdd3b95f6d602ba4"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-05/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-05/actor.npz",
+      "sha256": "5dfa2d3f67ea30f57d0b8a336575f92135076f788e65d33600fb4005bf45d8eb"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-05/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-05/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-05/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-05/critic.npz",
+      "sha256": "e7b6d4b2092e3d705f49dbc798ca2522440a1a37d255722c696837f2386280fe"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-05/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-05/policy.onnx",
+      "sha256": "5bb0cbcbbe0490f9645a37568b5cfac40cef79ea6f59c9328b099e0a898755f1"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-05/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-05/training.json",
+      "sha256": "53f0e50e11defd935cc3779d9dcfc86309edb6c559783d2ac5083ebbe1d190dd"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-06/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-06/actor.npz",
+      "sha256": "fa13588a5b932d679b1568c3f401a5d9f3e35b0924c39d6d8543e366e6402d46"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-06/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-06/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-06/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-06/critic.npz",
+      "sha256": "24fbf6abe0e018a53db1ecdf95e8ea8bd4f36cccddd9f06f16c621da3e473f84"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-06/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-06/policy.onnx",
+      "sha256": "4b6530df6e5d88cfe061113af1fb08342c34e2ed8ccec32e0fdceebad000a054"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-06/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-06/training.json",
+      "sha256": "33cd4bc129a192ab6f27b94ed8c736f876c4de592c86cf1b3fc6d308501202fa"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-07/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-07/actor.npz",
+      "sha256": "0a67f0a527282e559abdbe1ebc2fbe92678a27633f6d17229324e62e44baddd8"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-07/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-07/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-07/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-07/critic.npz",
+      "sha256": "2bf062c36e73a51575852645bce3e8905327320080ee94ed6aec6ccaee216744"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-07/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-07/policy.onnx",
+      "sha256": "7cf264f76375850a8fbe07bca032c9956e390c1f223c06614366ee0a7149b4ea"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-07/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-07/training.json",
+      "sha256": "de334dfe0d78e5a46f529c5e9b7e9be3d1fa15cc723fb5010dcf4bbb7ab9f193"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-08/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-08/actor.npz",
+      "sha256": "72734694bee98630f4fd2ed7fbbbbb5933732d229be6dc039458bae34d23047f"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-08/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-08/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-08/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-08/critic.npz",
+      "sha256": "b4452ffd5d5a213b0ed2be1c7b53087f6ac1b37518cb077e710d065eda6a5630"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-08/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-08/policy.onnx",
+      "sha256": "81a33780370baf332296649c0516012f3f466b353b13f0726a612d66c79e3fcd"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/c-private-fresh/cycle-08/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/c-private-fresh/cycle-08/training.json",
+      "sha256": "a403d930e08a7a3f404f1ad572ee0a73be898adcc3eaf150668f3dd9d86b4117"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-01/actor.npz",
+      "sha256": "e2f7008696ae243f0f682c21c116545ae13b4cf9469e5b6c925147b0dcb7fc6e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-01/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-01/critic.npz",
+      "sha256": "45c40d9841ba5d08e718eead06fcae03109494b635753672b72c7f96f62dd75c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-01/policy.onnx",
+      "sha256": "f529ffe8f571ba48471e5b0a7a593c3d62ae0969fd3e3c4bc06b7a417c51b305"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-01/training.json",
+      "sha256": "4cb5912c3d7c6d6ac0662f7d373e191589065b81940126d9a01bea3175c42101"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-02/actor.npz",
+      "sha256": "324e92bad468bc305f417cffd7bb96ff34733c2a6885dadd33f9a7e184c64dc7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-02/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-02/critic.npz",
+      "sha256": "66b790918e008cf1bde49b69ca1c6c9ff7331b46974a646ad5909124b80da91a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-02/policy.onnx",
+      "sha256": "71e824d2c011f530fc8ee3a403e53e6528fac37fb8865e2a393467c0e2ccdda3"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-02/training.json",
+      "sha256": "a1c99b7f41a8a2907053a6e57e8041ed0827b9f2264e162e710a01b1faa5243f"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-03/actor.npz",
+      "sha256": "e9d11ea3d8c232725987b5cff4ca0374eb7c844c7da5ef4654da32b62df1d888"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-03/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-03/critic.npz",
+      "sha256": "2d49060712c1b676b20ff988a89a292be107f2e2c7d93bdbb903ded7cfc0cc4b"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-03/policy.onnx",
+      "sha256": "09232f4bd87313e5413588184a14c820858651234a85fb17338adc16072fec23"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-03/training.json",
+      "sha256": "0145d16c781596df7de6ab39785486f1a0ae1365eb3fbe0566be90cd9581b7fe"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-04/actor.npz",
+      "sha256": "f74b54e2cc4cfc31f79d9cc6a1fcb6b782156b7cacaf4d50311a8690fb35a10a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-04/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-04/critic.npz",
+      "sha256": "9b1db9e3daa27d196552787c2466cdccc25d79910bed6150e13485140dea7232"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-04/policy.onnx",
+      "sha256": "821a9862485d754c63487e966ff19bedd2d6646c039b652432e788d507965fe6"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-04/training.json",
+      "sha256": "b5c84d34ae0ff2abd4c7571468b2d298a57f75ca045958514e33b9cdcace0c4a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-05/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-05/actor.npz",
+      "sha256": "8968b66316bec205f14d1df399bdbcf38f33bb4f3884b725e40a08fa6d352507"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-05/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-05/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-05/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-05/critic.npz",
+      "sha256": "20efd61abae3072500d8343907b4b889efa1253d2c16ac102772ef9bc3f20a0e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-05/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-05/policy.onnx",
+      "sha256": "785501921801763a23bf9432b28a72f0ef8f95562e76c3bbc9b911f0b7125c27"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-05/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-05/training.json",
+      "sha256": "c5ea0c8146c70b05da43c78f771f10978b51b240f082b6612f6d5609c19fe09b"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-06/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-06/actor.npz",
+      "sha256": "782c201c03f334fbb86bab0241a73f6a430f69aea7b35033cf79f31597d3275b"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-06/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-06/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-06/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-06/critic.npz",
+      "sha256": "7f46b5e21699d2b3570051898ccf478b08ac9644bfea6afe53d69dbbd2c888c4"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-06/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-06/policy.onnx",
+      "sha256": "307682b8ac6b8d4e7507bec27782f069658bdeb769afea4d9c3bb2aff19a0663"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-06/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-06/training.json",
+      "sha256": "23d26e962b51aa7de1ff3c5e9348b9fc159e7a3d7a5b3e6260562a9ddcedb92b"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-07/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-07/actor.npz",
+      "sha256": "b50266567f0f031c12a00f651367569a8ad5a4efcaa60027be6d298118e96512"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-07/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-07/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-07/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-07/critic.npz",
+      "sha256": "359fdf544c22c10ce2652285b2511b2a325102c1b37dd2ef987c4229f472f7c8"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-07/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-07/policy.onnx",
+      "sha256": "706bd5f14556aacdf8802784f56117ca58850a8b3125655c0f7b80c852bda5b1"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-07/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-07/training.json",
+      "sha256": "c835f55136ce5f4a2ce7f66c2310773d706b5105617bb47c90b61989f59219a1"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-08/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-08/actor.npz",
+      "sha256": "4cc4e26b4d845b6aadf39748512fbfecc067600724c99040c476e76ca79d9105"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-08/config.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-08/config.json",
+      "sha256": "7dab5c3e0f7bb0f3637183014c41043d6a721b81eac00403f3a8fde136be9418"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-08/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-08/critic.npz",
+      "sha256": "e01996ccdd0441b559f26c285fecffa1420e72e427928411475114fa493e5c77"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-08/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-08/policy.onnx",
+      "sha256": "62b0c2de298e297a9332197d780ec6ea737ab78d7dfc529f356bff57bc3f244b"
+    },
+    {
+      "old": "ai/experiments/asymmetric-next/d-private-review/cycle-08/training.json",
+      "new": "ai/local/models/experiments/asymmetric-next/d-private-review/cycle-08/training.json",
+      "sha256": "5378d4156e7afe097c40568410c93c564fc780cc46fc8a73f1d28feb5164a103"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-01/actor.npz",
+      "sha256": "7443c4cbb7fb882e5f358cfbf21d88731caa71cea8739866da9ecb9337cb81dc"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-01/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-01/critic.npz",
+      "sha256": "ba57f602328f65bdef1882703fc65f96518a663eddaaa16bd7654bd744cf953e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-01/policy.onnx",
+      "sha256": "bd4574004950e28a5517f5c1241d92785510fa6fd5b3804dde7fa7017301d7ee"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-01/training.json",
+      "sha256": "8cb716a42a843d28b71b74211e2e1883988ab7ab6324b47ae33d435a079b1c62"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-02/actor.npz",
+      "sha256": "eb5122f33400e0fd46940d053825063259b9c02b62ad80d16183aa8e22b3d7ef"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-02/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-02/critic.npz",
+      "sha256": "760643c71e7e7448a824c8d9bf2edd107fa74655fd33a54b12496ee96864b07d"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-02/policy.onnx",
+      "sha256": "8761fbde883fa03bdcad5df4746cb2a5f9bbcab5145ab94131246360f0528ea7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-02/training.json",
+      "sha256": "c11668607f060db01061f321bbd126b43b44a4ae13196d97172b300533f181eb"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-03/actor.npz",
+      "sha256": "4f994c363c0fb0742b25ba130fa155b72e343d42137b84ec070a82f61cebd786"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-03/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-03/critic.npz",
+      "sha256": "5f40eef93064c62263775b9b11d85b1f6327e956b6b60eb6d4e3145933bd5032"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-03/policy.onnx",
+      "sha256": "7b9302fc4f6ecafff3222093c9ca82ebae06332b71540aa1fc2113112ddd69ef"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-03/training.json",
+      "sha256": "b678d554e03b1e4266ac9d0d5d0358226c49f11ed5667d05a3d321be8e4ca1f2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-04/actor.npz",
+      "sha256": "4cad4c273f5a706d470511d4acf4013c36adaa7ed4a1846fda311e655f58ab93"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-04/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-04/critic.npz",
+      "sha256": "916a215dbab6ba75ad8de919c4d2d495289084719f5c918f299a45001606a43d"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-04/policy.onnx",
+      "sha256": "01b2339e3a8c247aa0206b5783e961fece03027cd6fe7aaa444db86d1bd791bc"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/a-public-fresh/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/a-public-fresh/cycle-04/training.json",
+      "sha256": "6eb21b1e3822aa5d23d67d88ac8884362f575989c9fbc58960f5def6e8db9b5a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/anchor/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/anchor/policy.onnx",
+      "sha256": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-01/actor.npz",
+      "sha256": "7443c4cbb7fb882e5f358cfbf21d88731caa71cea8739866da9ecb9337cb81dc"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-01/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-01/critic.npz",
+      "sha256": "ba57f602328f65bdef1882703fc65f96518a663eddaaa16bd7654bd744cf953e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-01/policy.onnx",
+      "sha256": "bd4574004950e28a5517f5c1241d92785510fa6fd5b3804dde7fa7017301d7ee"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-01/training.json",
+      "sha256": "386ba8afac7e0438db0080ee07c2515d2bdb39ad724fd806e5d482d63fabd2fd"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-02/actor.npz",
+      "sha256": "f3183a4dc9621cc1657cfac7817b1a673f2060823cea6854ba0509cda27e3dcc"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-02/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-02/critic.npz",
+      "sha256": "bc35e0fcbd98777f70d35db9e51a7de4c281e552daeb06d3a5d4788ac88f569c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-02/policy.onnx",
+      "sha256": "844708b9dbb1039061e16a34f822ada75c1df2f9becc7d99384d1f23758f3987"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-02/training.json",
+      "sha256": "20e141b32462d5a86b7a1f8465eecb157d4cb8d98f9a3aabb4b995f9089775f0"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-03/actor.npz",
+      "sha256": "942f308646ed2569c8fe7ccd1cec76678e1357cd20d781efa08293cc8d2b1110"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-03/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-03/critic.npz",
+      "sha256": "444cd9b86b7b1147caba182853ca79689bf9fd36e924ca2df6145e284357f77a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-03/policy.onnx",
+      "sha256": "865a0a7abc5a3aa244433a01719c970b5e6309c560c007038958dc306ae76f7c"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-03/training.json",
+      "sha256": "5592fcc308922152764cb5924f0c216889dbc28465dfa2633f6bd534a80aa023"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-04/actor.npz",
+      "sha256": "64611d8cb9cdefe2835abd48796ee552ee184a5c65c04e1dfbf49e194c1f7c84"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-04/config.json",
+      "sha256": "a1b6700bab39344e33ceab14a01ca74117a6ff47822e257816e7cb682c29fd43"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-04/critic.npz",
+      "sha256": "02032475c940a568e9981933fd2d32c3ba1213b41dc452044206348ff67be543"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-04/policy.onnx",
+      "sha256": "1619338cdfe75299ab8586921b1d0d5c1dd09d623a6e362c55ddda6d3fa748b1"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/b-public-review/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/b-public-review/cycle-04/training.json",
+      "sha256": "368798e61302ecfe0653ffad12a0d90cdb414703bcb62105f2d874e39f34ada9"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-01/actor.npz",
+      "sha256": "7443c4cbb7fb882e5f358cfbf21d88731caa71cea8739866da9ecb9337cb81dc"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-01/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-01/critic.npz",
+      "sha256": "1d02111d29748522106f12e3c303ffd5d8649c9401f44fe0a6628a87466cf33d"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-01/policy.onnx",
+      "sha256": "bd4574004950e28a5517f5c1241d92785510fa6fd5b3804dde7fa7017301d7ee"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-01/training.json",
+      "sha256": "427cc14b93e53419e60ae8f6c079430be3bda950fa3d6c1cb4b7bbaffed834e1"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-02/actor.npz",
+      "sha256": "d537bf423fec2008306a30062f56c4d4bcf23ed09d021ece63cad3ebeec103d5"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-02/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-02/critic.npz",
+      "sha256": "8181288768e898c4744cbdfae39883192a0d9914856269a1c8ff5741beb3e335"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-02/policy.onnx",
+      "sha256": "d2a2618d4723c4f35b156bedab0d8dc8ed5e33df1331abbf1cd6c62abb1db8a2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-02/training.json",
+      "sha256": "b0fb376055bbe1cb4e459916865429fb5d0a4c8be193d271a93f86f282cfcfad"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-03/actor.npz",
+      "sha256": "accd790425902a6902f5197372fc1a506f3ddee50eb0db9e001fa03489f38b14"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-03/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-03/critic.npz",
+      "sha256": "868fffa86fa17ef079b02918d2ec15b9d8ba8ebe1ed312e8baf3191cbef6a71f"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-03/policy.onnx",
+      "sha256": "9d916e6feaf8ffaf90e99167dcc5b11a64267fb7e62663adb8f7a3e787c75e52"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-03/training.json",
+      "sha256": "43ab628afe8803dbcbfe55ce74e631f5ad350d39823d80bfc23b0715acbe6fb8"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-04/actor.npz",
+      "sha256": "9a184f0f1adc31a362f1a748daef8aa60fb128e4c2daa80642d13ae9af46c517"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-04/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-04/critic.npz",
+      "sha256": "d9cca71df9aa1558dff778f9a97679a88ec6624563211a5765e840b11eaf0491"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-04/policy.onnx",
+      "sha256": "b4804b55d24d2e466f2feab78fe223f0baa41812b5d283c957aba5a039c7e256"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/c-private-fresh/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/c-private-fresh/cycle-04/training.json",
+      "sha256": "28e491b4e6132622d01d6333367c8bbb0bb03f5df7a28c1a373def1a5dd4db4e"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-01/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-01/actor.npz",
+      "sha256": "7443c4cbb7fb882e5f358cfbf21d88731caa71cea8739866da9ecb9337cb81dc"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-01/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-01/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-01/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-01/critic.npz",
+      "sha256": "1d02111d29748522106f12e3c303ffd5d8649c9401f44fe0a6628a87466cf33d"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-01/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-01/policy.onnx",
+      "sha256": "bd4574004950e28a5517f5c1241d92785510fa6fd5b3804dde7fa7017301d7ee"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-01/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-01/training.json",
+      "sha256": "b966dd219f5c7c4728b143a10db05e1a7ee0dba1d2e002aa48fa2f378f5465d2"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-02/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-02/actor.npz",
+      "sha256": "7d01aaf44d9858d3f35830109f6c4461c9e9d6216a6cdc02ac75701a09b7928b"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-02/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-02/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-02/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-02/critic.npz",
+      "sha256": "6b8b1c9f56ac037da4e1b3ef330a5a9a8c8c71c0bb0555c0bc6b09138bff9248"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-02/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-02/policy.onnx",
+      "sha256": "7a0795d94e8a3e5469b1c1e33c5bf1bcaf3cdc47b76464e0e263edf962feadb6"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-02/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-02/training.json",
+      "sha256": "8d45f3ba2621340fb181bf116ba62dd944b37eeff6cedc3b845ac3f3f1707266"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-03/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-03/actor.npz",
+      "sha256": "e1e454f319f723134b851c069b313253da1cfa9f7127203fe328713c31993918"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-03/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-03/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-03/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-03/critic.npz",
+      "sha256": "8ad35b0143d7cd71cd9a8e4be6b837f3a394f8df7f3bc6f6c18cc2a87a1ce569"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-03/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-03/policy.onnx",
+      "sha256": "36aff3e394bd5c72b0656c668d00d974462e29abef01f54b3cea63d918e89fd8"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-03/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-03/training.json",
+      "sha256": "de9682e520ca335222991ea9e0f7d67fef3f305fe111f2cc5b5bc175f4efd359"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-04/actor.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-04/actor.npz",
+      "sha256": "3dd4442fec532aa15a38a30555f338211e4fea7c39758e4504d47dafdbe60ae7"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-04/config.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-04/config.json",
+      "sha256": "684aa9fcd1676797423020d6de300ffd6acbe0c6f3390d9c8a73aed098680f06"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-04/critic.npz",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-04/critic.npz",
+      "sha256": "241f205e0dcfd4bdccafdf3ddd6da5595b9278bf26c2b77667bb59993a795c0a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-04/policy.onnx",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-04/policy.onnx",
+      "sha256": "d30add9297a2b066f5530915fafd15d1ee4d1d54e6deecb5e00482b8592b827a"
+    },
+    {
+      "old": "ai/experiments/asymmetric-pilot/d-private-review/cycle-04/training.json",
+      "new": "ai/local/models/experiments/asymmetric-pilot/d-private-review/cycle-04/training.json",
+      "sha256": "b5f5e92522ecb1781042dc2fd832ddcb554bcb717c95e2ca94a6899d3f533dde"
+    },
+    {
+      "old": "ai/policy.ckpt",
+      "new": "ai/local/models/baseline/policy.ckpt",
+      "sha256": "a6f132e50e205709c0efdb1b550d935c5bfc313b21726b0e70e300b6cd7ea1a3"
+    },
+    {
+      "old": "ai/policy.onnx",
+      "new": "ai/local/models/baseline/policy.onnx",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+    },
+    {
+      "old": "ai/response.npz",
+      "new": "ai/local/models/baseline/response.npz",
+      "sha256": "b610e0df9c2a76c44ffc0526aedf12fa79dd170f49745c5f77faae40d87024ac"
+    },
+    {
+      "old": "ai/response.onnx",
+      "new": "ai/local/models/baseline/response.onnx",
+      "sha256": "fbfc15062dc7ad03886f3b066e1646ed89a6de61885d1976d78c5a047548d2fc"
+    },
+    {
+      "old": "docs/evaluation/adaptive-balanced-1.8.0.json",
+      "new": "ai/research/evaluation/adaptive-balanced-1.8.0.json",
+      "sha256": "e55e9e5557c8a1e36b0087d5e63377432e83a863f333cb273edf6b31231337fe"
+    },
+    {
+      "old": "docs/evaluation/adaptive-observant-1.8.0.json",
+      "new": "ai/research/evaluation/adaptive-observant-1.8.0.json",
+      "sha256": "b1e9cce42bce55d620112c4432e3cfdb4e1f382781ba7946711ac03ca5018009"
+    },
+    {
+      "old": "docs/evaluation/asymmetric-pilot-2026-11-04.json",
+      "new": "ai/research/evaluation/asymmetric-pilot-2026-11-04.json",
+      "sha256": "70521e0ec47933b1b1803edbf0d12b160b7006ee2a73cb79f16238d3297188b2"
+    },
+    {
+      "old": "docs/evaluation/continuous-smoke-2026-11-04.json",
+      "new": "ai/research/evaluation/continuous-smoke-2026-11-04.json",
+      "sha256": "c14cca0676f5657080cfea28e940b4e390140896fc322f12e37f89dcf942ba8e"
+    },
+    {
+      "old": "docs/evaluation/cpu-main-retention-2026-11-04.json",
+      "new": "ai/research/evaluation/cpu-main-retention-2026-11-04.json",
+      "sha256": "b02afbdb8844083226401027e9e38a489b6098f973edb4ca456fa3d857c0b14f"
+    },
+    {
+      "old": "docs/evaluation/endgame-1.4.0.json",
+      "new": "ai/research/evaluation/endgame-1.4.0.json",
+      "sha256": "19e261dbc436f9e1919951844adf54029c25e2cb8524686171acc89c40ef8f85"
+    },
+    {
+      "old": "docs/evaluation/endgame-expanded-1.10.0.json",
+      "new": "ai/research/evaluation/endgame-expanded-1.10.0.json",
+      "sha256": "471cd4f0cc934f90b400067df3470dde80979c05b1585d329546a3c7b6dfa3b8"
+    },
+    {
+      "old": "docs/evaluation/fast-actor-throughput-2026-11-05.json",
+      "new": "ai/research/evaluation/fast-actor-throughput-2026-11-05.json",
+      "sha256": "81e6d9c15c2dead591d4e803f4542f80c3b618314299bdaed4ba58cd8de23472"
+    },
+    {
+      "old": "docs/evaluation/full-match-current-1.10.0.json",
+      "new": "ai/research/evaluation/full-match-current-1.10.0.json",
+      "sha256": "1eef144e2596d79a953e8a0303b756d315f5d59df990ac6295eb41587de24afd"
+    },
+    {
+      "old": "docs/evaluation/full-match-four-clients-1.11.0.json",
+      "new": "ai/research/evaluation/full-match-four-clients-1.11.0.json",
+      "sha256": "141993856acdc37629abb83453fa2343f4aa4166b5c6a55829ab18790bc98b23"
+    },
+    {
+      "old": "docs/evaluation/full-match-phaseguard-1.10.0.json",
+      "new": "ai/research/evaluation/full-match-phaseguard-1.10.0.json",
+      "sha256": "225c4bb65f114e8caac2e52a974dd2090c417abeec89bd8a8e36647e3f4cd9bb"
+    },
+    {
+      "old": "docs/evaluation/full-network-development-2026-11-04.json",
+      "new": "ai/research/evaluation/full-network-development-2026-11-04.json",
+      "sha256": "90eb4db5db077bb77917d7c55a63140cb29773b507092ee087099c99f00b118e"
+    },
+    {
+      "old": "docs/evaluation/gpu-pipeline-2026-11-04.json",
+      "new": "ai/research/evaluation/gpu-pipeline-2026-11-04.json",
+      "sha256": "5626d219850fa833ee17fa1249206dd72774fa03c06520681a1a3b58888c103a"
+    },
+    {
+      "old": "docs/evaluation/gpu-throughput-2026-11-04.json",
+      "new": "ai/research/evaluation/gpu-throughput-2026-11-04.json",
+      "sha256": "81eb0c50cc2f8bf20cc88928ddc56528f3d81ef105ea3f4191583f51f1bb6986"
+    },
+    {
+      "old": "docs/evaluation/gpu-transition-2026-11-04.json",
+      "new": "ai/research/evaluation/gpu-transition-2026-11-04.json",
+      "sha256": "7cb271956d23302cab5fd6712d048c55e760b2d4cef76c112fcabb611502626a"
+    },
+    {
+      "old": "docs/evaluation/guanzero-gpu-batch.json",
+      "new": "ai/research/evaluation/guanzero-gpu-batch.json",
+      "sha256": "3b762446a509aa69aa95227bbe0606982b03d6293c66954cd4c83bd4d7b69411"
+    },
+    {
+      "old": "docs/evaluation/guanzero-progress.json",
+      "new": "ai/research/evaluation/guanzero-progress.json",
+      "sha256": "702679f82d9a0c1c703404ecb81365ca2e97a62490687ae26eddbaf780146922"
+    },
+    {
+      "old": "docs/evaluation/guanzero-sampler-profile.json",
+      "new": "ai/research/evaluation/guanzero-sampler-profile.json",
+      "sha256": "61be4ca1394cb6211f2dc78b75fb25b98269f1ca49f1e0ce36da88fb92302d65"
+    },
+    {
+      "old": "docs/evaluation/habits-adaptive-1.13.0.json",
+      "new": "ai/research/evaluation/habits-adaptive-1.13.0.json",
+      "sha256": "1bfe1297553848f64617af9b0224927c0fad9cf7e45f76a3104e84f1fa44c818"
+    },
+    {
+      "old": "docs/evaluation/habits-observant-1.13.0.json",
+      "new": "ai/research/evaluation/habits-observant-1.13.0.json",
+      "sha256": "5a65e7080b3efd42ff108b808e980612c3ed314a5cba2c37cfa54fc665d42f48"
+    },
+    {
+      "old": "docs/evaluation/help-1.11.0.json",
+      "new": "ai/research/evaluation/help-1.11.0.json",
+      "sha256": "120ff7665ef2110ba83628e6fc482dabc91c709ee5e2cacd927aed965e8d2148"
+    },
+    {
+      "old": "docs/evaluation/match-history-1.12.0.json",
+      "new": "ai/research/evaluation/match-history-1.12.0.json",
+      "sha256": "3033067ac793f89c67aa21bb6c4032144f987e2c0d0a529ed47be25b75942741"
+    },
+    {
+      "old": "docs/evaluation/memory-pressure-2026-11-05.json",
+      "new": "ai/research/evaluation/memory-pressure-2026-11-05.json",
+      "sha256": "367d5e8c470292d64813feebffe6c1d3559ff0f999e23b2a5773212273cfc039"
+    },
+    {
+      "old": "docs/evaluation/model-study-progress.json",
+      "new": "ai/research/evaluation/model-study-progress.json",
+      "sha256": "77395369b7eb3fd3efa54683cda83547f12940d788f63c9945ef8587fdcf7741"
+    },
+    {
+      "old": "docs/evaluation/multiplayer-1.6.1.json",
+      "new": "ai/research/evaluation/multiplayer-1.6.1.json",
+      "sha256": "d378a126adeb1022bc11bbb3d6c43c985c03b8980533adae386bb281da8f0f78"
+    },
+    {
+      "old": "docs/evaluation/multiplayer-habits-1.13.0.json",
+      "new": "ai/research/evaluation/multiplayer-habits-1.13.0.json",
+      "sha256": "293519742f2b5aa727bc09277ca778303abec5269aa6a14fb9c58cfb38cc951d"
+    },
+    {
+      "old": "docs/evaluation/multiplayer-mixed-1.7.0.json",
+      "new": "ai/research/evaluation/multiplayer-mixed-1.7.0.json",
+      "sha256": "4b96d5741a4775b148e86e516735a16a1cfae3fcfc8e6bf90a7c20d719aaff10"
+    },
+    {
+      "old": "docs/evaluation/policy-training-heldout-2026-11-04.json",
+      "new": "ai/research/evaluation/policy-training-heldout-2026-11-04.json",
+      "sha256": "59cf877649a08f78710804d3b632fe7ba71d8708fb2f91fda3795b1a303aadf5"
+    },
+    {
+      "old": "docs/evaluation/profiles-1.3.0.json",
+      "new": "ai/research/evaluation/profiles-1.3.0.json",
+      "sha256": "8fd2d77924ffe4eca87be910e357cf4c67024b3428ad585e8a5d47b8809f01b3"
+    },
+    {
+      "old": "docs/evaluation/proposal-1.14.1.json",
+      "new": "ai/research/evaluation/proposal-1.14.1.json",
+      "sha256": "47020b4b7c5dd46b2059bc485815c5203d4232dab9f831ed6404e6f5c2df123f"
+    },
+    {
+      "old": "docs/evaluation/ready-transition-1.10.0.json",
+      "new": "ai/research/evaluation/ready-transition-1.10.0.json",
+      "sha256": "72ab3dbc2dd323deda182cea9ed1ca7fd3381f6494afdf1bf36e8f38fe3ed9c7"
+    },
+    {
+      "old": "docs/evaluation/rejoin-mixed-1.9.0.json",
+      "new": "ai/research/evaluation/rejoin-mixed-1.9.0.json",
+      "sha256": "e2126d1475d68c19645149049eafeea85c5719b0fe2ca1ade90ebbcf53b20470"
+    },
+    {
+      "old": "docs/evaluation/rejoin-multiplayer-1.9.0.json",
+      "new": "ai/research/evaluation/rejoin-multiplayer-1.9.0.json",
+      "sha256": "5fd11a0b21a726ad14f2f97e1e6ffb73e740abd3ca45d7c6cf3e74e0ecf631bb"
+    },
+    {
+      "old": "docs/evaluation/rejoin-races-1.9.0.json",
+      "new": "ai/research/evaluation/rejoin-races-1.9.0.json",
+      "sha256": "967e046a214b7606ea5322041a5de9955f7dfe2819705d7ddc2525e37a76b870"
+    },
+    {
+      "old": "docs/evaluation/response-bootstrap-1.7.0.json",
+      "new": "ai/research/evaluation/response-bootstrap-1.7.0.json",
+      "sha256": "cdb734f98460ecdce23896eb7cee8d20c327d6d7a9169f95eecf9dea3dc4791a"
+    },
+    {
+      "old": "docs/evaluation/response-policy-1.7.0.json",
+      "new": "ai/research/evaluation/response-policy-1.7.0.json",
+      "sha256": "549d01960dbb6fd360529c50f9df692b695e27314f97b9abb854ac2d42a7a389"
+    },
+    {
+      "old": "docs/evaluation/response-training-1.7.0.json",
+      "new": "ai/research/evaluation/response-training-1.7.0.json",
+      "sha256": "3578a623ae050796d01fd6d75db7ec015e43cbaa5d915c527097e3c81180437d"
+    },
+    {
+      "old": "docs/evaluation/resync-1.10.0.json",
+      "new": "ai/research/evaluation/resync-1.10.0.json",
+      "sha256": "336fb15c9d61045aceffc04208abee14dc28dc10e2271046da38f3b51699d39c"
+    },
+    {
+      "old": "docs/evaluation/seat-credentials-1.9.0.json",
+      "new": "ai/research/evaluation/seat-credentials-1.9.0.json",
+      "sha256": "11501bd1bc71143d5bf7e15f41e9e23b8d1b700394d284222a4dd075d1915843"
+    },
+    {
+      "old": "docs/evaluation/table-layout-1.14.0.json",
+      "new": "ai/research/evaluation/table-layout-1.14.0.json",
+      "sha256": "f28ffcf63afcb47dc09d0740df341e41eb21a16132140e405f5bc52f8c5c5366"
+    },
+    {
+      "old": "docs/evaluation/table-pipeline-mirror-smoke-2026-11-04.json",
+      "new": "ai/research/evaluation/table-pipeline-mirror-smoke-2026-11-04.json",
+      "sha256": "379cea898ebb8d726f4d9d291fb60b947a0a8c7de1eafad554c25a0921c1ad39"
+    },
+    {
+      "old": "docs/evaluation/table-pipeline-smoke-2026-11-04.json",
+      "new": "ai/research/evaluation/table-pipeline-smoke-2026-11-04.json",
+      "sha256": "6958017e99d5ffe697d93e20b9f4e15437d924c4fa185c1829e19899085852c4"
+    },
+    {
+      "old": "docs/evaluation/web-model-002.json",
+      "new": "ai/research/evaluation/web-model-002.json",
+      "sha256": "a14f4b44497626293db819ef2a990ac2f9573e7469ead7dca9508f724d3cdb36"
+    },
+    {
+      "old": "docs/evaluation/web-model-003.json",
+      "new": "ai/research/evaluation/web-model-003.json",
+      "sha256": "13d3474b12953f933c009f68b9f26f5a8812a06375dc27eda46bb9eea87209f7"
+    },
+    {
+      "old": "docs/media/bot-profiles.png",
+      "new": "web/docs/media/bot-profiles.png",
+      "sha256": "157198377d17505887c3c60f9a64b1e96515a6fe936e930157f798ba7a845ede"
+    },
+    {
+      "old": "docs/media/help-mobile.png",
+      "new": "web/docs/media/help-mobile.png",
+      "sha256": "fddabdbcac5e767fc51ab06da2d99b1aee354fcedd7a14ab16523606fddaaf60"
+    },
+    {
+      "old": "docs/media/match-history-mobile.png",
+      "new": "web/docs/media/match-history-mobile.png",
+      "sha256": "676e117596592b5dd27538898c56b59520c54b90e41f0b8a382e115f1171d90c"
+    },
+    {
+      "old": "docs/media/practice-table.png",
+      "new": "web/docs/media/practice-table.png",
+      "sha256": "cc6172213ece6d12a01a1c7348777de4112fc0c534e6bb58567d903ea284f71b"
+    },
+    {
+      "old": "docs/media/table-desktop.png",
+      "new": "web/docs/media/table-desktop.png",
+      "sha256": "3d9f520281e99f99ce583c83c501130625270a18b6e4eaa764b36d1dc767a70e"
+    },
+    {
+      "old": "src/assets/cards/card-back-1.jpg",
+      "new": "web/src/assets/cards/card-back-1.jpg",
+      "sha256": "9bfb279a3d87757ade9379f7b0a30f1701920a47fffeead32487656de6364290"
+    },
+    {
+      "old": "tests/fixtures/adaptive-positions.json",
+      "new": "ai/shared/fixtures/adaptive-positions.json",
+      "sha256": "6d248f998543edf579e2586b66dde0dfb7b804f6c49278f273db4607cae05001"
+    },
+    {
+      "old": "tests/fixtures/endgame-expanded-positions.json",
+      "new": "ai/shared/fixtures/endgame-expanded-positions.json",
+      "sha256": "fec4fbabde040bea195dc51262d408bc9b0cfa96f8ea80509d4169707d05c5e2"
+    },
+    {
+      "old": "tests/fixtures/endgame-positions.json",
+      "new": "ai/shared/fixtures/endgame-positions.json",
+      "sha256": "c13c13f056501b7420bfc4cd21efdb778ba489e843020d42d8d8397f5ea6fd30"
+    },
+    {
+      "old": "tests/fixtures/habit-positions.json",
+      "new": "ai/shared/fixtures/habit-positions.json",
+      "sha256": "ee019e0d87907de367f45fc465980273b7ce7301a7affd7e5c6e2188c6009434"
+    },
+    {
+      "old": "tests/fixtures/positions.json",
+      "new": "ai/shared/fixtures/positions.json",
+      "sha256": "34cb03914e2bb95808a005a3b00148c16fb81b1a2969805d84f0e3fbf71e146c"
+    },
+    {
+      "old": "tests/fixtures/reference-features.json.gz",
+      "new": "ai/shared/fixtures/reference-features.json.gz",
+      "sha256": "fb157e674d2fd263a53ef1ae58b41017b6f2bd6ea42e2ee5b2881cac39081077"
+    },
+    {
+      "old": "tests/fixtures/response-positions.json",
+      "new": "ai/shared/fixtures/response-positions.json",
+      "sha256": "2c3664c4fd89c30d4bf9a2428193209d57c5859c9133e63cfbda2a0f342eddd2"
+    }
+  ],
+  "validation": {
+    "nodeTestsPassed": 119,
+    "pythonLocalPassed": 27,
+    "pythonLocalGPUOnlySkipped": 1,
+    "pythonGuanZeroPassed": 8,
+    "pythonStudyPassed": 9,
+    "productionBrowserModelIds": [
+      "001",
+      "003"
+    ],
+    "browserPageErrors": 0,
+    "modelPickerViewportChecks": 3,
+    "markdownLocalLinksValid": true
+  },
+  "activeRunCompatibility": "Frozen independent runtime unchanged; old data paths retained via local directory junctions",
+  "historicalEvidence": "Raw experiment JSON preserved; mutable artifact index only updates its current catalog pointer"
+}

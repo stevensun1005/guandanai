@@ -4,11 +4,10 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      - 'docs/**'
+      - 'web/docs/**'
+      - 'ai/research/**'
       - '**/*.md'
-      - 'scripts/update-model-study.py'
-      - 'tests/model_study_test.py'
-      - 'ai/experiments/**'
+      - 'ai/local/models/experiments/**'
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -43,19 +42,19 @@ jobs:
         env:
           BROWSER_CHANNEL: chromium
         run: |
-          node scripts/serve.mjs > /tmp/guandan-preview.log 2>&1 &
+          node web/tools/serve.mjs > /tmp/guandan-preview.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for attempt in {1..30}; do
             if curl --fail --silent http://127.0.0.1:8765/ > /dev/null; then break; fi
             sleep 1
           done
-          python tests/production_smoke.py
-          python tests/replay_security_smoke.py
+          python web/tests/production_smoke.py
+          python web/tests/replay_security_smoke.py
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'
         with:
-          path: dist
+          path: web/dist
 
   deploy:
     if: github.event_name != 'pull_request'

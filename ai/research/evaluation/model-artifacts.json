@@ -1,0 +1,3548 @@
+{
+  "schema": 1,
+  "observedUTC": "2026-11-04T20:59:43.542074+00:00",
+  "classification": "Archived experimental artifacts, including rejected and smoke checkpoints; not proof of improvement",
+  "archive": {
+    "filename": "models-2026-11-04.zip",
+    "bytes": 659832476,
+    "sha256": "a79bdc24c3c7cc3bd2beeadf2735650c707ced0d6c920eaff94a313c063aaa20",
+    "download": "https://github.com/stevensun1005/guandanai/releases/download/training-2026-11-04/models-2026-11-04.zip"
+  },
+  "uniqueFiles": 416,
+  "locations": 536,
+  "artifacts": [
+    {
+      "sha256": "7443c4cbb7fb882e5f358cfbf21d88731caa71cea8739866da9ecb9337cb81dc",
+      "bytes": 5497030,
+      "archiveEntry": "7443c4cbb7fb882e5f358cfbf21d88731caa71cea8739866da9ecb9337cb81dc.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/cycle-01/model/actor.npz",
+        "work/learning/asymmetric-pilot/b-public-review/cycle-01/model/actor.npz",
+        "work/learning/asymmetric-pilot/c-private-fresh/cycle-01/model/actor.npz",
+        "work/learning/asymmetric-pilot/d-private-review/cycle-01/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "ba57f602328f65bdef1882703fc65f96518a663eddaaa16bd7654bd744cf953e",
+      "bytes": 834486,
+      "archiveEntry": "ba57f602328f65bdef1882703fc65f96518a663eddaaa16bd7654bd744cf953e.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/cycle-01/model/critic.npz",
+        "work/learning/asymmetric-pilot/b-public-review/cycle-01/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "bd4574004950e28a5517f5c1241d92785510fa6fd5b3804dde7fa7017301d7ee",
+      "bytes": 5493641,
+      "archiveEntry": "bd4574004950e28a5517f5c1241d92785510fa6fd5b3804dde7fa7017301d7ee.onnx",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/cycle-01/model/policy.onnx",
+        "work/learning/asymmetric-pilot/b-public-review/cycle-01/model/policy.onnx",
+        "work/learning/asymmetric-pilot/c-private-fresh/cycle-01/model/policy.onnx",
+        "work/learning/asymmetric-pilot/d-private-review/cycle-01/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "eb5122f33400e0fd46940d053825063259b9c02b62ad80d16183aa8e22b3d7ef",
+      "bytes": 5497030,
+      "archiveEntry": "eb5122f33400e0fd46940d053825063259b9c02b62ad80d16183aa8e22b3d7ef.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "760643c71e7e7448a824c8d9bf2edd107fa74655fd33a54b12496ee96864b07d",
+      "bytes": 834486,
+      "archiveEntry": "760643c71e7e7448a824c8d9bf2edd107fa74655fd33a54b12496ee96864b07d.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "8761fbde883fa03bdcad5df4746cb2a5f9bbcab5145ab94131246360f0528ea7",
+      "bytes": 5493641,
+      "archiveEntry": "8761fbde883fa03bdcad5df4746cb2a5f9bbcab5145ab94131246360f0528ea7.onnx",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "845e7ec9f2655127646abbde15700a7ad7bc159fb0028e0afb6450fe452d1283",
+      "bytes": 5497282,
+      "archiveEntry": "845e7ec9f2655127646abbde15700a7ad7bc159fb0028e0afb6450fe452d1283.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/initial/actor.npz",
+        "work/learning/asymmetric-pilot/b-public-review/initial/actor.npz",
+        "work/learning/asymmetric-pilot/c-private-fresh/initial/actor.npz",
+        "work/learning/asymmetric-pilot/d-private-review/initial/actor.npz",
+        "work/learning/asymmetric-smoke/a-public-fresh/initial/actor.npz",
+        "work/learning/asymmetric-smoke/b-public-review/initial/actor.npz",
+        "work/learning/asymmetric-smoke/c-private-fresh/initial/actor.npz",
+        "work/learning/asymmetric-smoke/d-private-review/initial/actor.npz",
+        "work/learning/complete-network/initial/full.npz"
+      ]
+    },
+    {
+      "sha256": "be570cb3b1b85adc77164bb18c0efd55a48f1111fe86c93fe8ed99b3b23aaa76",
+      "bytes": 834486,
+      "archiveEntry": "be570cb3b1b85adc77164bb18c0efd55a48f1111fe86c93fe8ed99b3b23aaa76.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/initial/critic.npz",
+        "work/learning/asymmetric-pilot/b-public-review/initial/critic.npz",
+        "work/learning/asymmetric-pilot/c-private-fresh/initial/critic.npz",
+        "work/learning/asymmetric-pilot/d-private-review/initial/critic.npz",
+        "work/learning/asymmetric-smoke/a-public-fresh/initial/critic.npz",
+        "work/learning/asymmetric-smoke/b-public-review/initial/critic.npz",
+        "work/learning/asymmetric-smoke/c-private-fresh/initial/critic.npz",
+        "work/learning/asymmetric-smoke/d-private-review/initial/critic.npz"
+      ]
+    },
+    {
+      "sha256": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25",
+      "bytes": 5493641,
+      "archiveEntry": "76dc5a3043351dd14e2dcbc02935adfbf8aa4a777e9e799ecaa83fc891bfbd25.onnx",
+      "locations": [
+        "work/learning/asymmetric-pilot/a-public-fresh/initial/policy.onnx",
+        "work/learning/asymmetric-pilot/b-public-review/initial/policy.onnx",
+        "work/learning/asymmetric-pilot/c-private-fresh/initial/policy.onnx",
+        "work/learning/asymmetric-pilot/d-private-review/initial/policy.onnx",
+        "work/learning/asymmetric-smoke/a-public-fresh/initial/policy.onnx",
+        "work/learning/asymmetric-smoke/b-public-review/initial/policy.onnx",
+        "work/learning/asymmetric-smoke/c-private-fresh/initial/policy.onnx",
+        "work/learning/asymmetric-smoke/d-private-review/initial/policy.onnx",
+        "work/learning/complete-network/initial/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "f3183a4dc9621cc1657cfac7817b1a673f2060823cea6854ba0509cda27e3dcc",
+      "bytes": 5497030,
+      "archiveEntry": "f3183a4dc9621cc1657cfac7817b1a673f2060823cea6854ba0509cda27e3dcc.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/b-public-review/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "bc35e0fcbd98777f70d35db9e51a7de4c281e552daeb06d3a5d4788ac88f569c",
+      "bytes": 834486,
+      "archiveEntry": "bc35e0fcbd98777f70d35db9e51a7de4c281e552daeb06d3a5d4788ac88f569c.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/b-public-review/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "844708b9dbb1039061e16a34f822ada75c1df2f9becc7d99384d1f23758f3987",
+      "bytes": 5493641,
+      "archiveEntry": "844708b9dbb1039061e16a34f822ada75c1df2f9becc7d99384d1f23758f3987.onnx",
+      "locations": [
+        "work/learning/asymmetric-pilot/b-public-review/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "1d02111d29748522106f12e3c303ffd5d8649c9401f44fe0a6628a87466cf33d",
+      "bytes": 834486,
+      "archiveEntry": "1d02111d29748522106f12e3c303ffd5d8649c9401f44fe0a6628a87466cf33d.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/c-private-fresh/cycle-01/model/critic.npz",
+        "work/learning/asymmetric-pilot/d-private-review/cycle-01/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "d537bf423fec2008306a30062f56c4d4bcf23ed09d021ece63cad3ebeec103d5",
+      "bytes": 5497030,
+      "archiveEntry": "d537bf423fec2008306a30062f56c4d4bcf23ed09d021ece63cad3ebeec103d5.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/c-private-fresh/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "8181288768e898c4744cbdfae39883192a0d9914856269a1c8ff5741beb3e335",
+      "bytes": 834486,
+      "archiveEntry": "8181288768e898c4744cbdfae39883192a0d9914856269a1c8ff5741beb3e335.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/c-private-fresh/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "d2a2618d4723c4f35b156bedab0d8dc8ed5e33df1331abbf1cd6c62abb1db8a2",
+      "bytes": 5493641,
+      "archiveEntry": "d2a2618d4723c4f35b156bedab0d8dc8ed5e33df1331abbf1cd6c62abb1db8a2.onnx",
+      "locations": [
+        "work/learning/asymmetric-pilot/c-private-fresh/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "7d01aaf44d9858d3f35830109f6c4461c9e9d6216a6cdc02ac75701a09b7928b",
+      "bytes": 5497030,
+      "archiveEntry": "7d01aaf44d9858d3f35830109f6c4461c9e9d6216a6cdc02ac75701a09b7928b.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/d-private-review/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "6b8b1c9f56ac037da4e1b3ef330a5a9a8c8c71c0bb0555c0bc6b09138bff9248",
+      "bytes": 834486,
+      "archiveEntry": "6b8b1c9f56ac037da4e1b3ef330a5a9a8c8c71c0bb0555c0bc6b09138bff9248.npz",
+      "locations": [
+        "work/learning/asymmetric-pilot/d-private-review/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "7a0795d94e8a3e5469b1c1e33c5bf1bcaf3cdc47b76464e0e263edf962feadb6",
+      "bytes": 5493641,
+      "archiveEntry": "7a0795d94e8a3e5469b1c1e33c5bf1bcaf3cdc47b76464e0e263edf962feadb6.onnx",
+      "locations": [
+        "work/learning/asymmetric-pilot/d-private-review/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "63ce570007c801b1d251df883aca90963b8b4317d739860446602de4f5c97b44",
+      "bytes": 5497030,
+      "archiveEntry": "63ce570007c801b1d251df883aca90963b8b4317d739860446602de4f5c97b44.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/a-public-fresh/cycle-01/model/actor.npz",
+        "work/learning/asymmetric-smoke/b-public-review/cycle-01/model/actor.npz",
+        "work/learning/asymmetric-smoke/c-private-fresh/cycle-01/model/actor.npz",
+        "work/learning/asymmetric-smoke/d-private-review/cycle-01/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "587d579dc925ae25e92c5d13167ed16c695b97442a91df5556c12b1eda5eafbd",
+      "bytes": 834486,
+      "archiveEntry": "587d579dc925ae25e92c5d13167ed16c695b97442a91df5556c12b1eda5eafbd.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/a-public-fresh/cycle-01/model/critic.npz",
+        "work/learning/asymmetric-smoke/b-public-review/cycle-01/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "d1323847ff9e723731a2a841bc6e4f931a17fc832b114e05398420849beda57c",
+      "bytes": 5493641,
+      "archiveEntry": "d1323847ff9e723731a2a841bc6e4f931a17fc832b114e05398420849beda57c.onnx",
+      "locations": [
+        "work/learning/asymmetric-smoke/a-public-fresh/cycle-01/model/policy.onnx",
+        "work/learning/asymmetric-smoke/b-public-review/cycle-01/model/policy.onnx",
+        "work/learning/asymmetric-smoke/c-private-fresh/cycle-01/model/policy.onnx",
+        "work/learning/asymmetric-smoke/d-private-review/cycle-01/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "1129bd610f4b81467abe46f17b4d6625b46389ff7c729977b771b6265018a261",
+      "bytes": 5497030,
+      "archiveEntry": "1129bd610f4b81467abe46f17b4d6625b46389ff7c729977b771b6265018a261.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/a-public-fresh/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "1f77dceb6abe9b4c86d05077149b9d2eeb025294e18a502865a21a3fddca875b",
+      "bytes": 834486,
+      "archiveEntry": "1f77dceb6abe9b4c86d05077149b9d2eeb025294e18a502865a21a3fddca875b.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/a-public-fresh/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "b547985a4fbc53cd7c78c0125f8d6c3edb703b45d35b1b76ea2d1789bdd3289a",
+      "bytes": 5493641,
+      "archiveEntry": "b547985a4fbc53cd7c78c0125f8d6c3edb703b45d35b1b76ea2d1789bdd3289a.onnx",
+      "locations": [
+        "work/learning/asymmetric-smoke/a-public-fresh/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "0f12ffff74f52b82da60b6b98bbeed8687e5c0402d8dbaf59e5576bb4c7727c2",
+      "bytes": 5497030,
+      "archiveEntry": "0f12ffff74f52b82da60b6b98bbeed8687e5c0402d8dbaf59e5576bb4c7727c2.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/b-public-review/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "f6f302b510d8d7eed6e0e75b8ebe28db77fac7a5a9ee1cc7cc6e630169633e2c",
+      "bytes": 834486,
+      "archiveEntry": "f6f302b510d8d7eed6e0e75b8ebe28db77fac7a5a9ee1cc7cc6e630169633e2c.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/b-public-review/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "7e271bedc215ac336375cfe4c822ec1e1b3e956ee6770eaed0ce3ab5c7b4d2a0",
+      "bytes": 5493641,
+      "archiveEntry": "7e271bedc215ac336375cfe4c822ec1e1b3e956ee6770eaed0ce3ab5c7b4d2a0.onnx",
+      "locations": [
+        "work/learning/asymmetric-smoke/b-public-review/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "f3f70a215fab31702a78dd0cf30209cb75ba761eb63da23f3aae01fa80d49c1c",
+      "bytes": 834486,
+      "archiveEntry": "f3f70a215fab31702a78dd0cf30209cb75ba761eb63da23f3aae01fa80d49c1c.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/c-private-fresh/cycle-01/model/critic.npz",
+        "work/learning/asymmetric-smoke/d-private-review/cycle-01/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "5c816949bd7f9a8952a62ab76a1bf0251390dfbed10f996d957350b4b01a5d97",
+      "bytes": 5497030,
+      "archiveEntry": "5c816949bd7f9a8952a62ab76a1bf0251390dfbed10f996d957350b4b01a5d97.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/c-private-fresh/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "8c098d56b5fa8cff3cb4a76afeb20ac450383e9bad2472b7bde53db1ea971e60",
+      "bytes": 834486,
+      "archiveEntry": "8c098d56b5fa8cff3cb4a76afeb20ac450383e9bad2472b7bde53db1ea971e60.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/c-private-fresh/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "acc7009d0b0c69ed14bac02f04fb41b9fd00faef9b1dbe4fcf471ed61c6425f8",
+      "bytes": 5493641,
+      "archiveEntry": "acc7009d0b0c69ed14bac02f04fb41b9fd00faef9b1dbe4fcf471ed61c6425f8.onnx",
+      "locations": [
+        "work/learning/asymmetric-smoke/c-private-fresh/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "7cced80611340e921e27b14dc37be20f6266c3936f65b0595692867396ff8e4c",
+      "bytes": 5497030,
+      "archiveEntry": "7cced80611340e921e27b14dc37be20f6266c3936f65b0595692867396ff8e4c.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/d-private-review/cycle-02/model/actor.npz"
+      ]
+    },
+    {
+      "sha256": "563c5750efce3d9e612e6684ef76669ad6014b0bc75cd1c393fa2deaa739a45f",
+      "bytes": 834486,
+      "archiveEntry": "563c5750efce3d9e612e6684ef76669ad6014b0bc75cd1c393fa2deaa739a45f.npz",
+      "locations": [
+        "work/learning/asymmetric-smoke/d-private-review/cycle-02/model/critic.npz"
+      ]
+    },
+    {
+      "sha256": "dfdc5b8d326d2d60f375cd0c0d8da3fb0c9a26c18d438ef92893997224b3a8a4",
+      "bytes": 5493641,
+      "archiveEntry": "dfdc5b8d326d2d60f375cd0c0d8da3fb0c9a26c18d438ef92893997224b3a8a4.onnx",
+      "locations": [
+        "work/learning/asymmetric-smoke/d-private-review/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "66d935864189395cdadb541b43f9b359e1c92ad167e3f51407853beeb3615d21",
+      "bytes": 5496862,
+      "archiveEntry": "66d935864189395cdadb541b43f9b359e1c92ad167e3f51407853beeb3615d21.npz",
+      "locations": [
+        "work/learning/complete-network/diagnostics/blend10/full.npz"
+      ]
+    },
+    {
+      "sha256": "1a5743df690b4815f9c55c8ed61c84b5a2eb9aa014f23a939168df3d1e34f9e7",
+      "bytes": 5493641,
+      "archiveEntry": "1a5743df690b4815f9c55c8ed61c84b5a2eb9aa014f23a939168df3d1e34f9e7.onnx",
+      "locations": [
+        "work/learning/complete-network/diagnostics/blend10/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "4be7c5fd34411f339dde533e475e33f9487d55bb29daf44280f11cec42ad70ac",
+      "bytes": 5496862,
+      "archiveEntry": "4be7c5fd34411f339dde533e475e33f9487d55bb29daf44280f11cec42ad70ac.npz",
+      "locations": [
+        "work/learning/complete-network/diagnostics/restore-tail/full.npz"
+      ]
+    },
+    {
+      "sha256": "e893dd97e824d8d8875d593b3eba50d796c7da37361717bef1b7a868b9245c9e",
+      "bytes": 5493641,
+      "archiveEntry": "e893dd97e824d8d8875d593b3eba50d796c7da37361717bef1b7a868b9245c9e.onnx",
+      "locations": [
+        "work/learning/complete-network/diagnostics/restore-tail/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "6535f302f672b54c59a4bd1ca5c5fc62b5f23211718e940c5a1a411707e5d274",
+      "bytes": 5496862,
+      "archiveEntry": "6535f302f672b54c59a4bd1ca5c5fc62b5f23211718e940c5a1a411707e5d274.npz",
+      "locations": [
+        "work/learning/complete-network/diagnostics/zero-new-input/full.npz"
+      ]
+    },
+    {
+      "sha256": "649793ccf12e44b91c61997d8fc7c6ca143dfd7f8c275cce3aeb861ffd8da38a",
+      "bytes": 5493641,
+      "archiveEntry": "649793ccf12e44b91c61997d8fc7c6ca143dfd7f8c275cce3aeb861ffd8da38a.onnx",
+      "locations": [
+        "work/learning/complete-network/diagnostics/zero-new-input/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "d82e1c83a127a9d3cd3b658deb9f6b15b97a8a37627e5ca398d877beda382465",
+      "bytes": 5497266,
+      "archiveEntry": "d82e1c83a127a9d3cd3b658deb9f6b15b97a8a37627e5ca398d877beda382465.npz",
+      "locations": [
+        "work/learning/complete-network/guarded-pilot/full.npz"
+      ]
+    },
+    {
+      "sha256": "4ad26c5a9c72c68667bd766ae489db0cfa341135e3d6ffc3252c8caf9cf08366",
+      "bytes": 5497530,
+      "archiveEntry": "4ad26c5a9c72c68667bd766ae489db0cfa341135e3d6ffc3252c8caf9cf08366.npz",
+      "locations": [
+        "work/learning/complete-network/guarded-pilot/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "ffe0b4fce3b4ee6e831c0969440fabd2f233aec465a5c7f2fc024df517812752",
+      "bytes": 5493641,
+      "archiveEntry": "ffe0b4fce3b4ee6e831c0969440fabd2f233aec465a5c7f2fc024df517812752.onnx",
+      "locations": [
+        "work/learning/complete-network/guarded-pilot/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "b12a993b49e054abf386be7c8f00e0c3f0150090ccdfe41d437bba00cbf3be46",
+      "bytes": 5497266,
+      "archiveEntry": "b12a993b49e054abf386be7c8f00e0c3f0150090ccdfe41d437bba00cbf3be46.npz",
+      "locations": [
+        "work/learning/complete-network/smoke-full/full.npz",
+        "work/learning/complete-network/smoke-full-conservative/full.npz"
+      ]
+    },
+    {
+      "sha256": "3de17e66bc8a442b60f4d720d7862bcab277ae3bf983cf464d22a8ded2c432a3",
+      "bytes": 5493641,
+      "archiveEntry": "3de17e66bc8a442b60f4d720d7862bcab277ae3bf983cf464d22a8ded2c432a3.onnx",
+      "locations": [
+        "work/learning/complete-network/smoke-full/policy.onnx",
+        "work/learning/complete-network/smoke-full-conservative/policy.onnx",
+        "work/learning/complete-network/smoke-middle/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "cc8690607dcdd340c528b0b7d3ab1f6bbba1a453c7cc54eead01e763fa7cd29f",
+      "bytes": 5497530,
+      "archiveEntry": "cc8690607dcdd340c528b0b7d3ab1f6bbba1a453c7cc54eead01e763fa7cd29f.npz",
+      "locations": [
+        "work/learning/complete-network/smoke-full-conservative/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "5d737ed7467c8372d4c36273d04ac0743645d923cc271f4871abd8fc1bdf94cf",
+      "bytes": 5497274,
+      "archiveEntry": "5d737ed7467c8372d4c36273d04ac0743645d923cc271f4871abd8fc1bdf94cf.npz",
+      "locations": [
+        "work/learning/complete-network/smoke-middle/full.npz"
+      ]
+    },
+    {
+      "sha256": "27fc8d596cd5244ef14d15f8cf52cf3d3ed78989ff33e6e28efd6510af5f2bb0",
+      "bytes": 5497266,
+      "archiveEntry": "27fc8d596cd5244ef14d15f8cf52cf3d3ed78989ff33e6e28efd6510af5f2bb0.npz",
+      "locations": [
+        "work/learning/complete-network/smoke-tail/full.npz"
+      ]
+    },
+    {
+      "sha256": "fbae41468a3a508ea69265c160ca550166ab9f2a73079d69a5b1a5ff2afee4d8",
+      "bytes": 5493641,
+      "archiveEntry": "fbae41468a3a508ea69265c160ca550166ab9f2a73079d69a5b1a5ff2afee4d8.onnx",
+      "locations": [
+        "work/learning/complete-network/smoke-tail/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "e6df9cd9cd68415e166a1337b682b90b9d081ebdf5d33b6b2c4a97f5459307f0",
+      "bytes": 5497266,
+      "archiveEntry": "e6df9cd9cd68415e166a1337b682b90b9d081ebdf5d33b6b2c4a97f5459307f0.npz",
+      "locations": [
+        "work/learning/complete-network/training/cycle-01/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "e8334983fcf156cf06a0afd9ff56fc6c29d36c0463c23337fc611f731b3e768e",
+      "bytes": 5497530,
+      "archiveEntry": "e8334983fcf156cf06a0afd9ff56fc6c29d36c0463c23337fc611f731b3e768e.npz",
+      "locations": [
+        "work/learning/complete-network/training/cycle-01/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "b6d36cccf23a700fa1fa4c862a66f5e89d3405c545d6f861925b0eac1a958814",
+      "bytes": 5493641,
+      "archiveEntry": "b6d36cccf23a700fa1fa4c862a66f5e89d3405c545d6f861925b0eac1a958814.onnx",
+      "locations": [
+        "work/learning/complete-network/training/cycle-01/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "0d95bd3e435c1680be3add7838cf8c5ee1d09fe80198db3ccced5fe4df9b03c3",
+      "bytes": 5497266,
+      "archiveEntry": "0d95bd3e435c1680be3add7838cf8c5ee1d09fe80198db3ccced5fe4df9b03c3.npz",
+      "locations": [
+        "work/learning/complete-network/training/cycle-02/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "905f20406840df6a6fecf4e1b7b178d549792832a02604c510473c38bcae2157",
+      "bytes": 5497530,
+      "archiveEntry": "905f20406840df6a6fecf4e1b7b178d549792832a02604c510473c38bcae2157.npz",
+      "locations": [
+        "work/learning/complete-network/training/cycle-02/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "46d858e4ce463a5d7ac7d8a28a0fca8f40695484eaf3a72079c2cd5f1e3685bc",
+      "bytes": 5493641,
+      "archiveEntry": "46d858e4ce463a5d7ac7d8a28a0fca8f40695484eaf3a72079c2cd5f1e3685bc.onnx",
+      "locations": [
+        "work/learning/complete-network/training/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "7e7c2e1414584e1fd79109b084c0eab95070b0c8fad42a443c04388cb978c069",
+      "bytes": 5497274,
+      "archiveEntry": "7e7c2e1414584e1fd79109b084c0eab95070b0c8fad42a443c04388cb978c069.npz",
+      "locations": [
+        "work/learning/complete-network/training/cycle-03/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "1d5b97689f7bd802bdc299003088890170593b068fe97cd9920122be4b69946e",
+      "bytes": 5497538,
+      "archiveEntry": "1d5b97689f7bd802bdc299003088890170593b068fe97cd9920122be4b69946e.npz",
+      "locations": [
+        "work/learning/complete-network/training/cycle-03/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "8f24172c3b61032792c11feb54c993bf15724f743fe8c6e051cdc44772f9ff0b",
+      "bytes": 5493641,
+      "archiveEntry": "8f24172c3b61032792c11feb54c993bf15724f743fe8c6e051cdc44772f9ff0b.onnx",
+      "locations": [
+        "work/learning/complete-network/training/cycle-03/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "a5dd34d0e8231fddbb76bcd83ef194e3beb2d3ed341e095f67833bdb5ad86270",
+      "bytes": 5497266,
+      "archiveEntry": "a5dd34d0e8231fddbb76bcd83ef194e3beb2d3ed341e095f67833bdb5ad86270.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-01/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "04f0b170c84314905c3b38768f43b159d369d42b40649939457e57049c669b9e",
+      "bytes": 5497530,
+      "archiveEntry": "04f0b170c84314905c3b38768f43b159d369d42b40649939457e57049c669b9e.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-01/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "ae3edf622986f5c48e727a498bda9e4e1d94a10824ff8ff9279042d01826aef2",
+      "bytes": 5493641,
+      "archiveEntry": "ae3edf622986f5c48e727a498bda9e4e1d94a10824ff8ff9279042d01826aef2.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-01/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "322e178b3e84b2aa2b727880b2686826eb125d6e68526c23092e6f5412453ba5",
+      "bytes": 5497266,
+      "archiveEntry": "322e178b3e84b2aa2b727880b2686826eb125d6e68526c23092e6f5412453ba5.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-02/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "4d6159ac093016fa50a6d35559b80a8a8666604a7bba9c79d473a3d307814602",
+      "bytes": 5497530,
+      "archiveEntry": "4d6159ac093016fa50a6d35559b80a8a8666604a7bba9c79d473a3d307814602.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-02/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "758e4f38a0ce2d9020a97cae6afe661faad5111157ac095122099c252e8e6617",
+      "bytes": 5493641,
+      "archiveEntry": "758e4f38a0ce2d9020a97cae6afe661faad5111157ac095122099c252e8e6617.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-02/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "2847a1d42a06f6709d46323ead8bc9cd0a05d3cca19e06683728c2bc7d27f7bd",
+      "bytes": 5497274,
+      "archiveEntry": "2847a1d42a06f6709d46323ead8bc9cd0a05d3cca19e06683728c2bc7d27f7bd.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-03/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "839d09782d836599b5abc36fe794f0e0cf4ea231906fca3746a5792045339848",
+      "bytes": 5497538,
+      "archiveEntry": "839d09782d836599b5abc36fe794f0e0cf4ea231906fca3746a5792045339848.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-03/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "d6d4292ccdf08e182b1381b2e282c7f6d8116cfd49a5d78c4e5acfb1d1274820",
+      "bytes": 5493641,
+      "archiveEntry": "d6d4292ccdf08e182b1381b2e282c7f6d8116cfd49a5d78c4e5acfb1d1274820.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-03/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "4d94e077ca722ed478a2b803af1c8a4090c990c1e4fbc25b70bcb5c8149be48d",
+      "bytes": 5497274,
+      "archiveEntry": "4d94e077ca722ed478a2b803af1c8a4090c990c1e4fbc25b70bcb5c8149be48d.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-04/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "5beba065662dd2a17865ff1ec9b1e7469108d7ca6058a1cd8c8b086d77afd4cc",
+      "bytes": 5497538,
+      "archiveEntry": "5beba065662dd2a17865ff1ec9b1e7469108d7ca6058a1cd8c8b086d77afd4cc.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-04/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "4878ec31822377426ab70538332237452caa2de7b75a8341b48053fd8bdf93e3",
+      "bytes": 5493641,
+      "archiveEntry": "4878ec31822377426ab70538332237452caa2de7b75a8341b48053fd8bdf93e3.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-04/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "c07eb26b41c5c0e596da78d07c6225799f3e11f3a1915f74a012b2611aaec11a",
+      "bytes": 5497266,
+      "archiveEntry": "c07eb26b41c5c0e596da78d07c6225799f3e11f3a1915f74a012b2611aaec11a.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-05/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "130fe060407f033926393ca6bfc2eb9a6fec4cd37fdec984b06952aee4379198",
+      "bytes": 5497530,
+      "archiveEntry": "130fe060407f033926393ca6bfc2eb9a6fec4cd37fdec984b06952aee4379198.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-05/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "816e684a1792c0f3fbcd872eadb459a823ce28b1f0494efca339a9314dd16254",
+      "bytes": 5493641,
+      "archiveEntry": "816e684a1792c0f3fbcd872eadb459a823ce28b1f0494efca339a9314dd16254.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-05/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "1ae64c3fdc9865a4cbf657f1782e38a16666ee1ab5f9733b4e065fa66ccd374e",
+      "bytes": 5497266,
+      "archiveEntry": "1ae64c3fdc9865a4cbf657f1782e38a16666ee1ab5f9733b4e065fa66ccd374e.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-06/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "fe3b3926d2430c2b7a7158a6109bdfab8fff50351f43da44ab27e94dc841f3a5",
+      "bytes": 5497530,
+      "archiveEntry": "fe3b3926d2430c2b7a7158a6109bdfab8fff50351f43da44ab27e94dc841f3a5.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-06/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "590c4b95a38d3fcee658b27c6423eede1c35168eaf50c35d021abf46511dd1b2",
+      "bytes": 5493641,
+      "archiveEntry": "590c4b95a38d3fcee658b27c6423eede1c35168eaf50c35d021abf46511dd1b2.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-06/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "dc51af490dd22b8bb31b1b2edd3b52006b5b82cfba3825a0ad32ac4cf0db64bf",
+      "bytes": 5497266,
+      "archiveEntry": "dc51af490dd22b8bb31b1b2edd3b52006b5b82cfba3825a0ad32ac4cf0db64bf.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-07/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "05b52e101b6e28264ed8b9469d67fd7ba7314bf016ad69052453b10f95f28d23",
+      "bytes": 5497530,
+      "archiveEntry": "05b52e101b6e28264ed8b9469d67fd7ba7314bf016ad69052453b10f95f28d23.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-07/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "9ad12717b35aeddaa3ba8dedb43bdd0ee90a3006cb2646e36e910e7602ed8913",
+      "bytes": 5493641,
+      "archiveEntry": "9ad12717b35aeddaa3ba8dedb43bdd0ee90a3006cb2646e36e910e7602ed8913.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-07/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "beca03c63938e0d87f747532f44449f37acded734cd276a9c684c40fb2936c39",
+      "bytes": 5497266,
+      "archiveEntry": "beca03c63938e0d87f747532f44449f37acded734cd276a9c684c40fb2936c39.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-08/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "3f8ffcf3726c93b84544d90c90653a29a3b0de43092ec9be98a5a57c7874c87e",
+      "bytes": 5497530,
+      "archiveEntry": "3f8ffcf3726c93b84544d90c90653a29a3b0de43092ec9be98a5a57c7874c87e.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-08/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "35aabb4ff8c634e8422d47edbc107029f0cc5c4cfcd8a253b06584f15dec0617",
+      "bytes": 5493641,
+      "archiveEntry": "35aabb4ff8c634e8422d47edbc107029f0cc5c4cfcd8a253b06584f15dec0617.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-08/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "9536c702c4a2b083d2e146b6791d9ba263e73828505360c697fccf169988b40b",
+      "bytes": 5497266,
+      "archiveEntry": "9536c702c4a2b083d2e146b6791d9ba263e73828505360c697fccf169988b40b.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-09/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "b197d656781ca25b4f751cab40aee2bb495ee925c30fdfd095d7e625c7f1cbe9",
+      "bytes": 5497530,
+      "archiveEntry": "b197d656781ca25b4f751cab40aee2bb495ee925c30fdfd095d7e625c7f1cbe9.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-09/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "7baeff00834e77b01cb570e85252d5462a922b75b99dcfa21f6151cbad6c5447",
+      "bytes": 5493641,
+      "archiveEntry": "7baeff00834e77b01cb570e85252d5462a922b75b99dcfa21f6151cbad6c5447.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-09/model/policy.onnx",
+        "work/learning/complete-network/training-guarded/cycle-10/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "104f34a8aa033aefcb4cdff825b4e83e91236594a0b86c2cc74edfcfeaa0ff3a",
+      "bytes": 5497266,
+      "archiveEntry": "104f34a8aa033aefcb4cdff825b4e83e91236594a0b86c2cc74edfcfeaa0ff3a.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-10/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "9656405d94c97da49481f004eb9f8da2cc2e370392c43367534cda95e0da9596",
+      "bytes": 5497530,
+      "archiveEntry": "9656405d94c97da49481f004eb9f8da2cc2e370392c43367534cda95e0da9596.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-10/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "db8c31923d6a5cef7ede6c66f315c8891c58684c26c4df4f9c886c7fce6771cd",
+      "bytes": 5497266,
+      "archiveEntry": "db8c31923d6a5cef7ede6c66f315c8891c58684c26c4df4f9c886c7fce6771cd.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-11/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "532e852da56f536792d101f87da0bcd158dfd238b4d1e2e449ce1d92a23d6851",
+      "bytes": 5497530,
+      "archiveEntry": "532e852da56f536792d101f87da0bcd158dfd238b4d1e2e449ce1d92a23d6851.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-11/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "029ed93224a6bcc28e7c165ebee7f111a65a96eab7fb93c2d4c5580eb940a9d8",
+      "bytes": 5493641,
+      "archiveEntry": "029ed93224a6bcc28e7c165ebee7f111a65a96eab7fb93c2d4c5580eb940a9d8.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-11/model/policy.onnx",
+        "work/learning/complete-network/training-guarded/cycle-12/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "4d301ae84eae1890c1abcf247c1d36caca6ae0b2698bb7967dcf7d9de803d7e1",
+      "bytes": 5497266,
+      "archiveEntry": "4d301ae84eae1890c1abcf247c1d36caca6ae0b2698bb7967dcf7d9de803d7e1.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-12/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "84716adda4e9c219d4e953431bf03c7afdaaa73b32440ec5a79cf8285c17c3c7",
+      "bytes": 5497530,
+      "archiveEntry": "84716adda4e9c219d4e953431bf03c7afdaaa73b32440ec5a79cf8285c17c3c7.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-12/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "31ef2a0e177b3e19ac023612ac1fc83d3e431edc2f3fcd2375dd4c1cfe744fa0",
+      "bytes": 5497266,
+      "archiveEntry": "31ef2a0e177b3e19ac023612ac1fc83d3e431edc2f3fcd2375dd4c1cfe744fa0.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-13/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "850bdfa5f6920578e44165d6fc2ce171215e8e68360de611a0b7168c6f66efa8",
+      "bytes": 5497530,
+      "archiveEntry": "850bdfa5f6920578e44165d6fc2ce171215e8e68360de611a0b7168c6f66efa8.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-13/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "75e2af35bccfc44dee9b29b9f30f148d985faa1290e138274bc628ccf8c3aec7",
+      "bytes": 5493641,
+      "archiveEntry": "75e2af35bccfc44dee9b29b9f30f148d985faa1290e138274bc628ccf8c3aec7.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-13/model/policy.onnx",
+        "work/learning/complete-network/training-guarded/cycle-14/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "403138639e88e38e1d4a830ca194cbd17bedc64e61f222b4a46639534680edd5",
+      "bytes": 5497266,
+      "archiveEntry": "403138639e88e38e1d4a830ca194cbd17bedc64e61f222b4a46639534680edd5.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-14/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "b64306dfb658b565573260e7ce8787d41f5e246a4f3f04cdafc6670e706ad34c",
+      "bytes": 5497530,
+      "archiveEntry": "b64306dfb658b565573260e7ce8787d41f5e246a4f3f04cdafc6670e706ad34c.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-14/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "6b261d706a98f52a387dc27ecb9227d6e251524a8f10910629065c57f66bd67d",
+      "bytes": 5497266,
+      "archiveEntry": "6b261d706a98f52a387dc27ecb9227d6e251524a8f10910629065c57f66bd67d.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-15/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "ca71a342ecd5277327898b715521b51a47526246bce80aa0e744732a1091434b",
+      "bytes": 5497530,
+      "archiveEntry": "ca71a342ecd5277327898b715521b51a47526246bce80aa0e744732a1091434b.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-15/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "697036aa3c47c2877d12c0327e57dd49b2e009fdcb325dfddf3da7f6ec649b24",
+      "bytes": 5493641,
+      "archiveEntry": "697036aa3c47c2877d12c0327e57dd49b2e009fdcb325dfddf3da7f6ec649b24.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-15/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "009c37105dd97186b5f438e417d3bc7cd57065f61224e084904510c0fb5fa480",
+      "bytes": 5497266,
+      "archiveEntry": "009c37105dd97186b5f438e417d3bc7cd57065f61224e084904510c0fb5fa480.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-16/model/full.npz"
+      ]
+    },
+    {
+      "sha256": "75d9cf1f57f3572a814b98f484760a027d2412d927aecf0620914fc2caf7b073",
+      "bytes": 5497530,
+      "archiveEntry": "75d9cf1f57f3572a814b98f484760a027d2412d927aecf0620914fc2caf7b073.npz",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-16/model/last-optimization.npz"
+      ]
+    },
+    {
+      "sha256": "80deb901b225226889094f359b280599695c2d5294dafa5890a021a19871f17e",
+      "bytes": 5493641,
+      "archiveEntry": "80deb901b225226889094f359b280599695c2d5294dafa5890a021a19871f17e.onnx",
+      "locations": [
+        "work/learning/complete-network/training-guarded/cycle-16/model/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "f5736d4dcdceda39c85513117e7b39927d1f84d4fbcf9364fc7a3742c6b7cc67",
+      "bytes": 5659616,
+      "archiveEntry": "f5736d4dcdceda39c85513117e7b39927d1f84d4fbcf9364fc7a3742c6b7cc67.onnx",
+      "locations": [
+        "work/learning/counterfactual-cycle1/model/policy-0.25.onnx"
+      ]
+    },
+    {
+      "sha256": "b282c21283fffe5b01654000561f94b8bfc5ac68f60272ace0c6b6a60ca0f761",
+      "bytes": 5659616,
+      "archiveEntry": "b282c21283fffe5b01654000561f94b8bfc5ac68f60272ace0c6b6a60ca0f761.onnx",
+      "locations": [
+        "work/learning/counterfactual-cycle1/model/policy-0.5.onnx"
+      ]
+    },
+    {
+      "sha256": "c3dc52e60210eac85454264610f788a8eeabcf6cf29cfff3ed69070d44081d8e",
+      "bytes": 5659616,
+      "archiveEntry": "c3dc52e60210eac85454264610f788a8eeabcf6cf29cfff3ed69070d44081d8e.onnx",
+      "locations": [
+        "work/learning/counterfactual-cycle1/model/policy-1.onnx"
+      ]
+    },
+    {
+      "sha256": "92d14909a55bd0ee994321acd4fbfb5db882ed9c69ebc2fc4a203fe539d6de56",
+      "bytes": 291274,
+      "archiveEntry": "92d14909a55bd0ee994321acd4fbfb5db882ed9c69ebc2fc4a203fe539d6de56.npz",
+      "locations": [
+        "work/learning/counterfactual-cycle1/model/residual.npz"
+      ]
+    },
+    {
+      "sha256": "bbc29c07fd509c6751a13b855b9e63a37f69e79f363aa356c56265cdc1710790",
+      "bytes": 5659616,
+      "archiveEntry": "bbc29c07fd509c6751a13b855b9e63a37f69e79f363aa356c56265cdc1710790.onnx",
+      "locations": [
+        "work/learning/counterfactual-smoke-model/policy-0.25.onnx"
+      ]
+    },
+    {
+      "sha256": "578cae9c5080f5cdfdd36a2825a2c1b1e7a532c4ac1b7a985b6aec79925b1c2e",
+      "bytes": 5659616,
+      "archiveEntry": "578cae9c5080f5cdfdd36a2825a2c1b1e7a532c4ac1b7a985b6aec79925b1c2e.onnx",
+      "locations": [
+        "work/learning/counterfactual-smoke-model/policy-0.5.onnx"
+      ]
+    },
+    {
+      "sha256": "6aba929aaf487831d7eeea9041fa25e3e2fbbf00687e3294b10ffb5e528d35d9",
+      "bytes": 5659616,
+      "archiveEntry": "6aba929aaf487831d7eeea9041fa25e3e2fbbf00687e3294b10ffb5e528d35d9.onnx",
+      "locations": [
+        "work/learning/counterfactual-smoke-model/policy-1.onnx"
+      ]
+    },
+    {
+      "sha256": "e90e2b7b71d3fddd262b7e1bb005d7a6cbe9d13664cc2c59d4091fdfc8a3ac8f",
+      "bytes": 291274,
+      "archiveEntry": "e90e2b7b71d3fddd262b7e1bb005d7a6cbe9d13664cc2c59d4091fdfc8a3ac8f.npz",
+      "locations": [
+        "work/learning/counterfactual-smoke-model/residual.npz"
+      ]
+    },
+    {
+      "sha256": "c093bab730a983f3eff1e5888c1102b71a8e941c14a386062a252ab4526f0f22",
+      "bytes": 301366,
+      "archiveEntry": "c093bab730a983f3eff1e5888c1102b71a8e941c14a386062a252ab4526f0f22.npz",
+      "locations": [
+        "work/learning/full-match-cycle1/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "f663d3166f7d7a09f3a315170c63ed84469f525c1a825195a49d6cb7e05c6636",
+      "bytes": 301366,
+      "archiveEntry": "f663d3166f7d7a09f3a315170c63ed84469f525c1a825195a49d6cb7e05c6636.npz",
+      "locations": [
+        "work/learning/full-match-cycle1/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "f454ff03ccfbf10575616f5dd6b30ec7e10f834532fcb1fc1c371d5cab2a859a",
+      "bytes": 301366,
+      "archiveEntry": "f454ff03ccfbf10575616f5dd6b30ec7e10f834532fcb1fc1c371d5cab2a859a.npz",
+      "locations": [
+        "work/learning/full-match-cycle1/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "710c17f765758973a84543bbc28d6bce262f68f2761b7004a18e632915511dd2",
+      "bytes": 301366,
+      "archiveEntry": "710c17f765758973a84543bbc28d6bce262f68f2761b7004a18e632915511dd2.npz",
+      "locations": [
+        "work/learning/full-match-cycle1/model/ppo-epoch4.npz",
+        "work/learning/full-match-cycle1/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "107c5f1dec40068e140e17c0c99bd4ff4211f1aa47689c6c33ad3486fd742559",
+      "bytes": 300282,
+      "archiveEntry": "107c5f1dec40068e140e17c0c99bd4ff4211f1aa47689c6c33ad3486fd742559.npz",
+      "locations": [
+        "work/learning/full-match-smoke/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "c45872d637800c98c3d521da92af5000f2dacb7ebf797a23687c3e6cf1a4cc45",
+      "bytes": 300282,
+      "archiveEntry": "c45872d637800c98c3d521da92af5000f2dacb7ebf797a23687c3e6cf1a4cc45.npz",
+      "locations": [
+        "work/learning/full-match-smoke/model/ppo-epoch2.npz",
+        "work/learning/full-match-smoke/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "3521a5697b8517507ab8aa5cb12b6e6306cb73f9f2a1de0d2cf780dcbe6b1ebe",
+      "bytes": 301366,
+      "archiveEntry": "3521a5697b8517507ab8aa5cb12b6e6306cb73f9f2a1de0d2cf780dcbe6b1ebe.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-01/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "c798603e8b742a725da808a39f2221f86eaf87b3875250aa5434c0d9105eb471",
+      "bytes": 301366,
+      "archiveEntry": "c798603e8b742a725da808a39f2221f86eaf87b3875250aa5434c0d9105eb471.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-01/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "7fbda51b1092b2e814be4da6dbf3868776c7b5c18d4b9093582714309e5865bf",
+      "bytes": 301366,
+      "archiveEntry": "7fbda51b1092b2e814be4da6dbf3868776c7b5c18d4b9093582714309e5865bf.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-01/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "b9795656a7ed291184eedb1980b153f93fc03ed41495bf317231c5cbd8a70a2c",
+      "bytes": 301366,
+      "archiveEntry": "b9795656a7ed291184eedb1980b153f93fc03ed41495bf317231c5cbd8a70a2c.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-01/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-01/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "17ec93a84fa5392d83ca4942d2255bb746ffc10c94eee86a8ff1d8c36891443b",
+      "bytes": 301366,
+      "archiveEntry": "17ec93a84fa5392d83ca4942d2255bb746ffc10c94eee86a8ff1d8c36891443b.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-02/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "b0d7788270a3962ab891f5c4d56dcc57a58669b5d7dea8c03005d264cd42a64e",
+      "bytes": 301366,
+      "archiveEntry": "b0d7788270a3962ab891f5c4d56dcc57a58669b5d7dea8c03005d264cd42a64e.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-02/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "89b6740786254616389c181cd84081749afed8c5db4145ecd8938c5433db1d07",
+      "bytes": 301366,
+      "archiveEntry": "89b6740786254616389c181cd84081749afed8c5db4145ecd8938c5433db1d07.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-02/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "f496c1ff58e3a4897963bc8681e246c19beed841064883d6b96e3a3ceaabdc2c",
+      "bytes": 301366,
+      "archiveEntry": "f496c1ff58e3a4897963bc8681e246c19beed841064883d6b96e3a3ceaabdc2c.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-02/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-02/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "4594f5520f7a03068d66133dc2e81d4daed5afc029cafba8f608cd76f7fd0221",
+      "bytes": 301366,
+      "archiveEntry": "4594f5520f7a03068d66133dc2e81d4daed5afc029cafba8f608cd76f7fd0221.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-03/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "42e37dfe677e75b266451d2252aad1bda5d8fb10c5bae33593869dcc68f57f8d",
+      "bytes": 301366,
+      "archiveEntry": "42e37dfe677e75b266451d2252aad1bda5d8fb10c5bae33593869dcc68f57f8d.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-03/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "1abc92213685149f09362fc0fe6c86b9772a34af92ecf25f4fd91eb3146b4997",
+      "bytes": 301366,
+      "archiveEntry": "1abc92213685149f09362fc0fe6c86b9772a34af92ecf25f4fd91eb3146b4997.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-03/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "457dc48bb71c8d9a8fb8405cd36e58e8b84f69c318abbc618c72b0b0e835e437",
+      "bytes": 301366,
+      "archiveEntry": "457dc48bb71c8d9a8fb8405cd36e58e8b84f69c318abbc618c72b0b0e835e437.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-03/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-03/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "8bd0e1ef6b69cfde1799ec30a3b418024ad8b9f08083de3566a159027aad4b76",
+      "bytes": 301366,
+      "archiveEntry": "8bd0e1ef6b69cfde1799ec30a3b418024ad8b9f08083de3566a159027aad4b76.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-04/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "2ec293068dc99680f8d9f974217c2fef3bcfcfacaf2c1a7fb6bfaa4fc18f346d",
+      "bytes": 301366,
+      "archiveEntry": "2ec293068dc99680f8d9f974217c2fef3bcfcfacaf2c1a7fb6bfaa4fc18f346d.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-04/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "1406096beb5b52c3002c0bf33c381b9567fe05c1b5eb9e41ec55b4402246209b",
+      "bytes": 301366,
+      "archiveEntry": "1406096beb5b52c3002c0bf33c381b9567fe05c1b5eb9e41ec55b4402246209b.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-04/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "b4d228e467553e51042fd3545cd824e2e31c7bc82bc1cda1a1ae08915ec45bf1",
+      "bytes": 301366,
+      "archiveEntry": "b4d228e467553e51042fd3545cd824e2e31c7bc82bc1cda1a1ae08915ec45bf1.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-04/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-04/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "efbc81f423b9cb8a59e3b4b7521704bd28d7fd512bd124ae37857dcac0ef5e38",
+      "bytes": 301366,
+      "archiveEntry": "efbc81f423b9cb8a59e3b4b7521704bd28d7fd512bd124ae37857dcac0ef5e38.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-05/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "a8d4af408901df550da89438aca509f0f923a58a3af31c69dfd3f61ac1b4ff63",
+      "bytes": 301366,
+      "archiveEntry": "a8d4af408901df550da89438aca509f0f923a58a3af31c69dfd3f61ac1b4ff63.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-05/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "c3b876daf71d22e07cf309feb2644dc0b6dbd182bcc13e47367a93253b298515",
+      "bytes": 301366,
+      "archiveEntry": "c3b876daf71d22e07cf309feb2644dc0b6dbd182bcc13e47367a93253b298515.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-05/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "f1aafa52e124e86a668f9af8800f3cf142dfc4d469a55247b272d4570eb346b2",
+      "bytes": 301366,
+      "archiveEntry": "f1aafa52e124e86a668f9af8800f3cf142dfc4d469a55247b272d4570eb346b2.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-05/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-05/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "f657634942e48d1183e3a54f8ac1d87d8738aa3e71fc810ee9af0b49fae38576",
+      "bytes": 301366,
+      "archiveEntry": "f657634942e48d1183e3a54f8ac1d87d8738aa3e71fc810ee9af0b49fae38576.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-06/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "6d2707fa8a8c8aa5c8eab39494e0fc6ed5ed398884d088538e4614d909192789",
+      "bytes": 301366,
+      "archiveEntry": "6d2707fa8a8c8aa5c8eab39494e0fc6ed5ed398884d088538e4614d909192789.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-06/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "752fff62dc845e211dd4fcd3191c5f9db2954481c3a75a8dcdd6c0f259357022",
+      "bytes": 301366,
+      "archiveEntry": "752fff62dc845e211dd4fcd3191c5f9db2954481c3a75a8dcdd6c0f259357022.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-06/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "c56f57df153516a6ca923b9f0fe77c4a40dff17a818a11463b36bc127cc4deb8",
+      "bytes": 301366,
+      "archiveEntry": "c56f57df153516a6ca923b9f0fe77c4a40dff17a818a11463b36bc127cc4deb8.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-06/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-06/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "4f60901e321739869be88a06e608524a8359a03cd2067faab7ac8af3369d744d",
+      "bytes": 301366,
+      "archiveEntry": "4f60901e321739869be88a06e608524a8359a03cd2067faab7ac8af3369d744d.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-07/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "b5b8f82bf66f1a37de266f2fbd96b0a1f4ca13c175711d0a87132878c3aa5a5d",
+      "bytes": 301366,
+      "archiveEntry": "b5b8f82bf66f1a37de266f2fbd96b0a1f4ca13c175711d0a87132878c3aa5a5d.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-07/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "21b8cc0b70ac1f8eb5b07b0c30ec1202f866b293b3ae3da1db4f3cd0405b08ac",
+      "bytes": 301366,
+      "archiveEntry": "21b8cc0b70ac1f8eb5b07b0c30ec1202f866b293b3ae3da1db4f3cd0405b08ac.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-07/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "eae02e46156ef337de75bbaef6161b723194dc348f65633dd81e2cead953a8ab",
+      "bytes": 301366,
+      "archiveEntry": "eae02e46156ef337de75bbaef6161b723194dc348f65633dd81e2cead953a8ab.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-07/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-07/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "1567695b6501619034cfd88d00cfdb6033d8e2d7eef9ba0d96dea1cd8b4339d6",
+      "bytes": 301366,
+      "archiveEntry": "1567695b6501619034cfd88d00cfdb6033d8e2d7eef9ba0d96dea1cd8b4339d6.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-08/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "67424bc643b9285704b8e268f0150211d8c3ee792c4ecfe508225052e0a1ad47",
+      "bytes": 301366,
+      "archiveEntry": "67424bc643b9285704b8e268f0150211d8c3ee792c4ecfe508225052e0a1ad47.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-08/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "2f95de48384d784f56c37a8156c7c69823a84e3195dd685b69dc940ae0bc7494",
+      "bytes": 301366,
+      "archiveEntry": "2f95de48384d784f56c37a8156c7c69823a84e3195dd685b69dc940ae0bc7494.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-08/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "5623f2f6a12110bed82652f576e1aba80e2d6e9b8e90986c54bf2369f8b79745",
+      "bytes": 301366,
+      "archiveEntry": "5623f2f6a12110bed82652f576e1aba80e2d6e9b8e90986c54bf2369f8b79745.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-08/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-08/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "1e9a42fc8cb349188864c88d6a4449702dee56a78e7c07abbbacfdbefdbf6247",
+      "bytes": 301366,
+      "archiveEntry": "1e9a42fc8cb349188864c88d6a4449702dee56a78e7c07abbbacfdbefdbf6247.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-09/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "172fe09e8777781d47927ac17b7ba524eb86acd9952ce58555e0d1eb6c7b4387",
+      "bytes": 301366,
+      "archiveEntry": "172fe09e8777781d47927ac17b7ba524eb86acd9952ce58555e0d1eb6c7b4387.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-09/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "b464422ea1fb86edfc826da514a2bc089076242fd5042b11c0b8a4969c152169",
+      "bytes": 301366,
+      "archiveEntry": "b464422ea1fb86edfc826da514a2bc089076242fd5042b11c0b8a4969c152169.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-09/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "b913c4093bad8fb16bcef5b6ae9f6687ceea87a3766c8579ea22a3c4f0706967",
+      "bytes": 301366,
+      "archiveEntry": "b913c4093bad8fb16bcef5b6ae9f6687ceea87a3766c8579ea22a3c4f0706967.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-09/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-09/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "0605d159a6e17e6fce6df71e4a4820eb599d7ffcc79632b74e994efbba0f4aec",
+      "bytes": 301366,
+      "archiveEntry": "0605d159a6e17e6fce6df71e4a4820eb599d7ffcc79632b74e994efbba0f4aec.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-10/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "d6f85d599519243a8beeaf45aa08300bd251ce8b6a456a42a780e819e6d8316b",
+      "bytes": 301366,
+      "archiveEntry": "d6f85d599519243a8beeaf45aa08300bd251ce8b6a456a42a780e819e6d8316b.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-10/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "f02ae2f371e5a5917e993215c7412f34a0e4f9fbd86ab5751749c3e5b0f44cfd",
+      "bytes": 301366,
+      "archiveEntry": "f02ae2f371e5a5917e993215c7412f34a0e4f9fbd86ab5751749c3e5b0f44cfd.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-10/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "cd318a7236ddb25dfd04b824a552e51239c69e166e3711a44b3e6c4f568c9773",
+      "bytes": 301366,
+      "archiveEntry": "cd318a7236ddb25dfd04b824a552e51239c69e166e3711a44b3e6c4f568c9773.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-10/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-10/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "f0aa3762b86bce9da4187f677d745c45606e1afd8de305402b7e7b7df8926b68",
+      "bytes": 301366,
+      "archiveEntry": "f0aa3762b86bce9da4187f677d745c45606e1afd8de305402b7e7b7df8926b68.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-11/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "696959aa0ad447b0a110ac2440f9081dfc8c2e4a963832067783ff1eb066fda6",
+      "bytes": 301366,
+      "archiveEntry": "696959aa0ad447b0a110ac2440f9081dfc8c2e4a963832067783ff1eb066fda6.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-11/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "d11fb9bdde3d41ef7eb9528799d09cf147dd3b8fab34ae97c64ce7baa685ddaf",
+      "bytes": 301366,
+      "archiveEntry": "d11fb9bdde3d41ef7eb9528799d09cf147dd3b8fab34ae97c64ce7baa685ddaf.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-11/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "f1339a0cb3e7cae2548e9357105d9be28fef48a008ea46e51944cb2a0a0ac858",
+      "bytes": 301366,
+      "archiveEntry": "f1339a0cb3e7cae2548e9357105d9be28fef48a008ea46e51944cb2a0a0ac858.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-11/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-11/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "ec47beb3d6ab3a138da95bce235b411ea3078d7ea6a4486c3f9956c5f6acca9f",
+      "bytes": 301366,
+      "archiveEntry": "ec47beb3d6ab3a138da95bce235b411ea3078d7ea6a4486c3f9956c5f6acca9f.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-12/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "028342c9315f0c112deaf0634f5df19f083444f68a0ca7d4c17ec3f627d2332a",
+      "bytes": 301366,
+      "archiveEntry": "028342c9315f0c112deaf0634f5df19f083444f68a0ca7d4c17ec3f627d2332a.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-12/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "4b3b52845e5fb0d3e68499aeacbafeaa82448709f3f4818df60bb48ce4301e03",
+      "bytes": 301366,
+      "archiveEntry": "4b3b52845e5fb0d3e68499aeacbafeaa82448709f3f4818df60bb48ce4301e03.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-12/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "3bd8c01fbf4c256d47bd95c0974777fac8769607338229a193044ed31ab6af53",
+      "bytes": 301366,
+      "archiveEntry": "3bd8c01fbf4c256d47bd95c0974777fac8769607338229a193044ed31ab6af53.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-12/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-12/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "d471277c2d783602b625a2792d2b3456bd1bbfe0deec488e32e1bd928ea49867",
+      "bytes": 301366,
+      "archiveEntry": "d471277c2d783602b625a2792d2b3456bd1bbfe0deec488e32e1bd928ea49867.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-13/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "d5222ab4d6321e46aef831a5c9902e03f71b7936898b6d41b968da274b54b123",
+      "bytes": 301366,
+      "archiveEntry": "d5222ab4d6321e46aef831a5c9902e03f71b7936898b6d41b968da274b54b123.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-13/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "1de908141aae98e797cb1c4dd1cee4af48dfffa8e4b4faca0056cab253053e82",
+      "bytes": 301366,
+      "archiveEntry": "1de908141aae98e797cb1c4dd1cee4af48dfffa8e4b4faca0056cab253053e82.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-13/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "3d66b86381905741073ce4ed730b013e677350c2b9d6ecc2d5d2f41e6edde492",
+      "bytes": 301366,
+      "archiveEntry": "3d66b86381905741073ce4ed730b013e677350c2b9d6ecc2d5d2f41e6edde492.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-13/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-13/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "a4c2f30b8cda923d4fdaded4143b4e4ae50d5fc95c1a7a087fccb9e197271023",
+      "bytes": 301366,
+      "archiveEntry": "a4c2f30b8cda923d4fdaded4143b4e4ae50d5fc95c1a7a087fccb9e197271023.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-14/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "bf67fad04b9833ab244065b445d1cd5eb201b2e59955a02ceee65c083707abe9",
+      "bytes": 301366,
+      "archiveEntry": "bf67fad04b9833ab244065b445d1cd5eb201b2e59955a02ceee65c083707abe9.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-14/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "39997fc5eb83665ba95e4ac61dad331718c137fc0afce1e098242b483f02dcab",
+      "bytes": 301366,
+      "archiveEntry": "39997fc5eb83665ba95e4ac61dad331718c137fc0afce1e098242b483f02dcab.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-14/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "006cf0160288f6c90594f9b441053bf70f396b4579f00a99f479a7be522f6bbf",
+      "bytes": 301366,
+      "archiveEntry": "006cf0160288f6c90594f9b441053bf70f396b4579f00a99f479a7be522f6bbf.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-14/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-14/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "6a88be5778eddef22c540f6476fcd5c8176270a3274b87ed33328962d632980a",
+      "bytes": 301366,
+      "archiveEntry": "6a88be5778eddef22c540f6476fcd5c8176270a3274b87ed33328962d632980a.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-15/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "c5241a076dc1fff1472335d1e9d81ee3b338462c75ae0cfb05dc2e459c48d5da",
+      "bytes": 301366,
+      "archiveEntry": "c5241a076dc1fff1472335d1e9d81ee3b338462c75ae0cfb05dc2e459c48d5da.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-15/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "6ec01037ece60b5b244d03976702eac46d13a93e09c904847abf6916be2f2bc5",
+      "bytes": 301366,
+      "archiveEntry": "6ec01037ece60b5b244d03976702eac46d13a93e09c904847abf6916be2f2bc5.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-15/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "54ae9a8173a6bfa184227b9613043409939d123021cf352afb95db3ed2d67562",
+      "bytes": 301366,
+      "archiveEntry": "54ae9a8173a6bfa184227b9613043409939d123021cf352afb95db3ed2d67562.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-15/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-15/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "79676445beac4447a14893460766fbfd7cf83e54a9bc91f23c1cc6b7fcf92802",
+      "bytes": 301366,
+      "archiveEntry": "79676445beac4447a14893460766fbfd7cf83e54a9bc91f23c1cc6b7fcf92802.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-16/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "01ea607f30b5c4dca22f3290d95a967d90cffbbcf0490df1af9746cfbdb72f18",
+      "bytes": 301366,
+      "archiveEntry": "01ea607f30b5c4dca22f3290d95a967d90cffbbcf0490df1af9746cfbdb72f18.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-16/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "14b3be9e4c56a2055d44cdc3356627f0a3c15af244f0b5e6f22122f3fda4c872",
+      "bytes": 301366,
+      "archiveEntry": "14b3be9e4c56a2055d44cdc3356627f0a3c15af244f0b5e6f22122f3fda4c872.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-16/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "5c67a695a8769e37b142458f04c2bd781fa6fea7932ca60d5a6ef501424fa98b",
+      "bytes": 301366,
+      "archiveEntry": "5c67a695a8769e37b142458f04c2bd781fa6fea7932ca60d5a6ef501424fa98b.npz",
+      "locations": [
+        "work/learning/full-match-training/cycle-16/model/ppo-epoch4.npz",
+        "work/learning/full-match-training/cycle-16/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "5361ef2c802342961a8c53f1bd86a558e28d5cfb042d3899f28d93a2a8008dd1",
+      "bytes": 301366,
+      "archiveEntry": "5361ef2c802342961a8c53f1bd86a558e28d5cfb042d3899f28d93a2a8008dd1.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-01/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "99d6edbe6908ced993d521f5c7e6624962d5eb84d2eba9e72c21fae0667a143f",
+      "bytes": 301366,
+      "archiveEntry": "99d6edbe6908ced993d521f5c7e6624962d5eb84d2eba9e72c21fae0667a143f.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-01/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "811b8d3e01660a76fa26be56a335d582dd92d6821d7a0e762cbf480c4b547c20",
+      "bytes": 301366,
+      "archiveEntry": "811b8d3e01660a76fa26be56a335d582dd92d6821d7a0e762cbf480c4b547c20.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-01/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "bebf589aecbac09996fd2293f80cc7a319e9fa17bdd655d66afc27657a0ab555",
+      "bytes": 301366,
+      "archiveEntry": "bebf589aecbac09996fd2293f80cc7a319e9fa17bdd655d66afc27657a0ab555.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-01/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-01/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "192f646cc7e2eaf0b64d6c96ed2ef9305be619c455db1e7a9154f77a1eaaa52b",
+      "bytes": 301366,
+      "archiveEntry": "192f646cc7e2eaf0b64d6c96ed2ef9305be619c455db1e7a9154f77a1eaaa52b.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-02/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "9710e98c23fdad328e010cb80023e3955643831af7e924f156cfcc54f991037f",
+      "bytes": 301366,
+      "archiveEntry": "9710e98c23fdad328e010cb80023e3955643831af7e924f156cfcc54f991037f.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-02/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "39aa8f4026d8d8cfc6e51c8a899a28a9575949c62109eda7dad6d4e6521c4208",
+      "bytes": 301366,
+      "archiveEntry": "39aa8f4026d8d8cfc6e51c8a899a28a9575949c62109eda7dad6d4e6521c4208.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-02/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "0153f713c16525061726f217fee73774727062a4fc07f12bedc47a4314521d1c",
+      "bytes": 301366,
+      "archiveEntry": "0153f713c16525061726f217fee73774727062a4fc07f12bedc47a4314521d1c.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-02/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-02/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "84de62aab2053edab5b5859fe86f810b7d0ae528806b29dd85aec7ceba4ba4f4",
+      "bytes": 301366,
+      "archiveEntry": "84de62aab2053edab5b5859fe86f810b7d0ae528806b29dd85aec7ceba4ba4f4.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-03/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "f2da561401d5ee9248fae00129bd118abb5341051563899ce4a042ba95bb9fb5",
+      "bytes": 301366,
+      "archiveEntry": "f2da561401d5ee9248fae00129bd118abb5341051563899ce4a042ba95bb9fb5.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-03/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "9dafca1b6f2746debb3ef5a4ebc2b74793d926909894b52400faafa09b46b431",
+      "bytes": 301366,
+      "archiveEntry": "9dafca1b6f2746debb3ef5a4ebc2b74793d926909894b52400faafa09b46b431.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-03/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "1552fe36ff7220a4d5c1a7a583c3eaf60738bd47069cd855d03ff97e08d5d0eb",
+      "bytes": 301366,
+      "archiveEntry": "1552fe36ff7220a4d5c1a7a583c3eaf60738bd47069cd855d03ff97e08d5d0eb.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-03/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-03/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "5b4b8c7e4dbdb8661249e6b7df9be17439f1025583a8d71af3f5d7c605fcba55",
+      "bytes": 301366,
+      "archiveEntry": "5b4b8c7e4dbdb8661249e6b7df9be17439f1025583a8d71af3f5d7c605fcba55.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-04/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "371777d92a66ebd264db51fe5569a62d2a718b975d518e174ec57fcdf4e90b23",
+      "bytes": 301366,
+      "archiveEntry": "371777d92a66ebd264db51fe5569a62d2a718b975d518e174ec57fcdf4e90b23.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-04/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "0f7acedaca39be860402b34070b47a2bcbc9c374b47392d28e1aa0e2178fbf67",
+      "bytes": 301366,
+      "archiveEntry": "0f7acedaca39be860402b34070b47a2bcbc9c374b47392d28e1aa0e2178fbf67.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-04/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "308272e2d4f9de19eea99362dfcaea59b42b55326753ff779e3ad02e0a1d85ec",
+      "bytes": 301366,
+      "archiveEntry": "308272e2d4f9de19eea99362dfcaea59b42b55326753ff779e3ad02e0a1d85ec.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-04/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-04/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "8ed5aa950eb9f78b8e85211d72fe7e5c9023d386cfc88485ca99d894473d9a13",
+      "bytes": 301366,
+      "archiveEntry": "8ed5aa950eb9f78b8e85211d72fe7e5c9023d386cfc88485ca99d894473d9a13.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-05/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "5c6b5fccf47ae18dc152527f0d912d572d70f450ba6a4a9db7acc8888905a0ee",
+      "bytes": 301366,
+      "archiveEntry": "5c6b5fccf47ae18dc152527f0d912d572d70f450ba6a4a9db7acc8888905a0ee.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-05/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "66b0f3465045b9015f95a277332ce45a1fb98bcd90ee13e04f37f0b5a302b15b",
+      "bytes": 301366,
+      "archiveEntry": "66b0f3465045b9015f95a277332ce45a1fb98bcd90ee13e04f37f0b5a302b15b.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-05/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "347334a66143c80720c26ddc93caa2d7b068ab1aee21f39f7ece021404dc39ac",
+      "bytes": 301366,
+      "archiveEntry": "347334a66143c80720c26ddc93caa2d7b068ab1aee21f39f7ece021404dc39ac.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-05/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-05/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "ae30677f5350a5277d9747e3a032706a25049a44a3426088c7bbf985945dca93",
+      "bytes": 301366,
+      "archiveEntry": "ae30677f5350a5277d9747e3a032706a25049a44a3426088c7bbf985945dca93.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-06/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "f653d996d8be4ecbf80624094effb1a37e1cdebd8b6e3e4870a8ffe140ddaf81",
+      "bytes": 301366,
+      "archiveEntry": "f653d996d8be4ecbf80624094effb1a37e1cdebd8b6e3e4870a8ffe140ddaf81.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-06/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "b614b22f37b8d7bc00c43d9bed9368530a1b5165e5cf8dbfd57a3a77df08c1d5",
+      "bytes": 301366,
+      "archiveEntry": "b614b22f37b8d7bc00c43d9bed9368530a1b5165e5cf8dbfd57a3a77df08c1d5.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-06/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "50bc102567b6c3e7a0966484dc3efe73d3085aa301acb4921f9843fd4a478c49",
+      "bytes": 301366,
+      "archiveEntry": "50bc102567b6c3e7a0966484dc3efe73d3085aa301acb4921f9843fd4a478c49.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-06/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-06/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "fe7c297ce58df5b387532d2c272443fe12fa9a56d558d9513dfeee0c78b5e48e",
+      "bytes": 301366,
+      "archiveEntry": "fe7c297ce58df5b387532d2c272443fe12fa9a56d558d9513dfeee0c78b5e48e.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-07/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "60f316f9ec14a96f320c0c59081cd52c4a3e6ee5254d8e65fbdbfcb089688ea3",
+      "bytes": 301366,
+      "archiveEntry": "60f316f9ec14a96f320c0c59081cd52c4a3e6ee5254d8e65fbdbfcb089688ea3.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-07/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "74f11371212d52f540704fc9f4c92d0075f6e632793f5f848f4cfa00804fd6ea",
+      "bytes": 301366,
+      "archiveEntry": "74f11371212d52f540704fc9f4c92d0075f6e632793f5f848f4cfa00804fd6ea.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-07/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "603a0558208d516081ecdbd0f1f0a30976ee5bea252dbf53e7effa5f13e2a61c",
+      "bytes": 301366,
+      "archiveEntry": "603a0558208d516081ecdbd0f1f0a30976ee5bea252dbf53e7effa5f13e2a61c.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-07/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-07/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "a0bad3e4b2bd8bab2e07eb0a16406656cd7697784a17dfda5b3cccda274f23df",
+      "bytes": 301366,
+      "archiveEntry": "a0bad3e4b2bd8bab2e07eb0a16406656cd7697784a17dfda5b3cccda274f23df.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-08/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "6c71d2f4ac0d86f75d07c0138a874169458f188c9480ff86d7dc85e25cd63b18",
+      "bytes": 301366,
+      "archiveEntry": "6c71d2f4ac0d86f75d07c0138a874169458f188c9480ff86d7dc85e25cd63b18.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-08/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "09dfd2e0ce63ec9b25bb10fdbbb96ca18f5ee8861975424d10b72e73456b8b32",
+      "bytes": 301366,
+      "archiveEntry": "09dfd2e0ce63ec9b25bb10fdbbb96ca18f5ee8861975424d10b72e73456b8b32.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-08/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "1c7d8e4fc968d14901a51ef6988b5ff32d0eae849adec5914fd8a0f60c35eaf4",
+      "bytes": 301366,
+      "archiveEntry": "1c7d8e4fc968d14901a51ef6988b5ff32d0eae849adec5914fd8a0f60c35eaf4.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-08/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-08/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "5fd9b7d2802711d22f094de81cb3f3ac27aa070c6865b123d3d1aec8b738fadc",
+      "bytes": 301366,
+      "archiveEntry": "5fd9b7d2802711d22f094de81cb3f3ac27aa070c6865b123d3d1aec8b738fadc.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-09/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "a6b1970e94869d97364763c8b8f1ca098e9906407cd9c43a0754d98f4d3f36ac",
+      "bytes": 301366,
+      "archiveEntry": "a6b1970e94869d97364763c8b8f1ca098e9906407cd9c43a0754d98f4d3f36ac.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-09/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "349a60b4ec3188de870d748db417e3483adac2d2378024039577a26b505ffe29",
+      "bytes": 301366,
+      "archiveEntry": "349a60b4ec3188de870d748db417e3483adac2d2378024039577a26b505ffe29.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-09/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "65b2f407cfbe2dd2e65cd2a3f9e4d12f06e84ae055003a895d1f8622349988f2",
+      "bytes": 301366,
+      "archiveEntry": "65b2f407cfbe2dd2e65cd2a3f9e4d12f06e84ae055003a895d1f8622349988f2.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-09/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-09/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "f1f9989475f1e25947a36f6ac123e20d2d5f72fe105848d148ac2de10bd256c9",
+      "bytes": 301366,
+      "archiveEntry": "f1f9989475f1e25947a36f6ac123e20d2d5f72fe105848d148ac2de10bd256c9.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-10/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "1a414479ce4fcafbe225f0965c283cf93e6313558d2ccaf1ee2a1f79d354984e",
+      "bytes": 301366,
+      "archiveEntry": "1a414479ce4fcafbe225f0965c283cf93e6313558d2ccaf1ee2a1f79d354984e.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-10/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "60f53383a40c04eaf252a995f9a23de5f1685b4830eef98d072694e15d23f4d2",
+      "bytes": 301366,
+      "archiveEntry": "60f53383a40c04eaf252a995f9a23de5f1685b4830eef98d072694e15d23f4d2.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-10/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "80a8f48f8d185f38b4fd9e432d395516ca2ca60b12413590c6e053f1ad523e46",
+      "bytes": 301366,
+      "archiveEntry": "80a8f48f8d185f38b4fd9e432d395516ca2ca60b12413590c6e053f1ad523e46.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-10/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-10/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "4ff2c00a142b7a85258fbf2ac53fe1169e8af7bafce7058c08643c5d3aef5bc9",
+      "bytes": 301366,
+      "archiveEntry": "4ff2c00a142b7a85258fbf2ac53fe1169e8af7bafce7058c08643c5d3aef5bc9.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-11/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "a814b19891cfe0112252c74b6a5d5b9e55a31ea6dc5e4361801e2f58226f774b",
+      "bytes": 301366,
+      "archiveEntry": "a814b19891cfe0112252c74b6a5d5b9e55a31ea6dc5e4361801e2f58226f774b.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-11/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "65fee1456d1efe1f0e78e2752dac7ef1d852b6078c638e4999420a15d10946eb",
+      "bytes": 301366,
+      "archiveEntry": "65fee1456d1efe1f0e78e2752dac7ef1d852b6078c638e4999420a15d10946eb.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-11/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "cb04c32f83a3be6d02cbfab888659429ecb3e7cdb33d9a654ede56c0c3ee87ba",
+      "bytes": 301366,
+      "archiveEntry": "cb04c32f83a3be6d02cbfab888659429ecb3e7cdb33d9a654ede56c0c3ee87ba.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-11/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-11/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "64a3e6448007fabd70fe90380f6a26fee78de0afbfaff08d86ad49f1250e3ec2",
+      "bytes": 301366,
+      "archiveEntry": "64a3e6448007fabd70fe90380f6a26fee78de0afbfaff08d86ad49f1250e3ec2.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-12/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "b7647e37d7eff320b9230138095b5439a2556c5c24405c2cc7ba2d875141888d",
+      "bytes": 301366,
+      "archiveEntry": "b7647e37d7eff320b9230138095b5439a2556c5c24405c2cc7ba2d875141888d.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-12/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "6a5d4f8a16c0bd9f47e680333c5530c4a24445971c3b5d24d4a4468d88fa9b0c",
+      "bytes": 301366,
+      "archiveEntry": "6a5d4f8a16c0bd9f47e680333c5530c4a24445971c3b5d24d4a4468d88fa9b0c.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-12/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "867c4e8b1e15bae1bc8e3821edb41df63684273729f4c964c19abfb1cb7ff0cb",
+      "bytes": 301366,
+      "archiveEntry": "867c4e8b1e15bae1bc8e3821edb41df63684273729f4c964c19abfb1cb7ff0cb.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-12/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-12/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "000adbdc0ff3c16fec5ff4d29ec88092032ff034b35d95cdbb76a551159e7c05",
+      "bytes": 301366,
+      "archiveEntry": "000adbdc0ff3c16fec5ff4d29ec88092032ff034b35d95cdbb76a551159e7c05.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-13/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "421d3adc1d7f81dd46cecf12572b8ebcc80d67866267f0b02c11a38f83c899a8",
+      "bytes": 301366,
+      "archiveEntry": "421d3adc1d7f81dd46cecf12572b8ebcc80d67866267f0b02c11a38f83c899a8.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-13/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "9b7ae232423b01ba3c154a4d200441e6cb90070f1f6ee061708c2c7357ad50e2",
+      "bytes": 301366,
+      "archiveEntry": "9b7ae232423b01ba3c154a4d200441e6cb90070f1f6ee061708c2c7357ad50e2.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-13/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "62cd4dda9c8cd03fe43565d968e5818cd1ea9e34c97a12bf0ae1fa080f8b3a75",
+      "bytes": 301366,
+      "archiveEntry": "62cd4dda9c8cd03fe43565d968e5818cd1ea9e34c97a12bf0ae1fa080f8b3a75.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-13/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-13/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "041e2fc6cdbca762b6ba9ff73bf202e7483e22fbde4341b811a6298a9833d433",
+      "bytes": 301366,
+      "archiveEntry": "041e2fc6cdbca762b6ba9ff73bf202e7483e22fbde4341b811a6298a9833d433.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-14/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "cfdfaa6b27d6367dd7e00c51cef8ca1ecf79a530ac144714beed5398ff7bad86",
+      "bytes": 301366,
+      "archiveEntry": "cfdfaa6b27d6367dd7e00c51cef8ca1ecf79a530ac144714beed5398ff7bad86.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-14/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "03abc5685f2b860a678fa9395b18cb074456087582a49ba46ac81cbbe515115b",
+      "bytes": 301366,
+      "archiveEntry": "03abc5685f2b860a678fa9395b18cb074456087582a49ba46ac81cbbe515115b.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-14/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "33161cbcdf13600f4e4e8a9d0dd122d28fcc94974d916b31af93338a7ecadbeb",
+      "bytes": 301366,
+      "archiveEntry": "33161cbcdf13600f4e4e8a9d0dd122d28fcc94974d916b31af93338a7ecadbeb.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-14/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-14/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "8783321ed08ce562c204591b59818faf0c3cb0e85f08d4b09f87e3b23d197362",
+      "bytes": 301366,
+      "archiveEntry": "8783321ed08ce562c204591b59818faf0c3cb0e85f08d4b09f87e3b23d197362.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-15/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "1145ddbd46a54bce832c9552838bcd46828cc2cac747194aa56b77901d4d1e23",
+      "bytes": 301366,
+      "archiveEntry": "1145ddbd46a54bce832c9552838bcd46828cc2cac747194aa56b77901d4d1e23.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-15/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "d3041bc70b1818cc337718c5ec3783b4a14fdee16870c48c552871a751f24750",
+      "bytes": 301366,
+      "archiveEntry": "d3041bc70b1818cc337718c5ec3783b4a14fdee16870c48c552871a751f24750.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-15/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "5f9e176317b5e4cd534e761a68091f02431763635930c6fb18c1b8a7efca0f36",
+      "bytes": 301366,
+      "archiveEntry": "5f9e176317b5e4cd534e761a68091f02431763635930c6fb18c1b8a7efca0f36.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-15/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-15/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "10f288a6201b50b7421d95bfc09d9aadef6e734696af9200283356dedc992d99",
+      "bytes": 301366,
+      "archiveEntry": "10f288a6201b50b7421d95bfc09d9aadef6e734696af9200283356dedc992d99.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-16/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "ac4335b47d0364ee09c37aa7e9e32347d7c3d88cb66baf382b0615a766daa298",
+      "bytes": 301366,
+      "archiveEntry": "ac4335b47d0364ee09c37aa7e9e32347d7c3d88cb66baf382b0615a766daa298.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-16/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "7a3d3794a1cf11a74ef99083d24811dff108626e373a08d6638f202d82bf7b4e",
+      "bytes": 301366,
+      "archiveEntry": "7a3d3794a1cf11a74ef99083d24811dff108626e373a08d6638f202d82bf7b4e.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-16/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "db6514f9a5224bd1ed3d565ffe8e946d46e7d92963988139b78b991c8295a47e",
+      "bytes": 301366,
+      "archiveEntry": "db6514f9a5224bd1ed3d565ffe8e946d46e7d92963988139b78b991c8295a47e.npz",
+      "locations": [
+        "work/learning/match-selfplay-training/cycle-16/model/ppo-epoch4.npz",
+        "work/learning/match-selfplay-training/cycle-16/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "8e4ef27b6a0449b0ee8888fb494e63b732c4056f319efd63332f072cb14e7025",
+      "bytes": 5659616,
+      "archiveEntry": "8e4ef27b6a0449b0ee8888fb494e63b732c4056f319efd63332f072cb14e7025.onnx",
+      "locations": [
+        "work/learning/policy-cycle1/model/policy-0.25.onnx"
+      ]
+    },
+    {
+      "sha256": "3e291ab88b5a6f33b5a61612d46091477672bc3759e2cf938c11d0e90f3d0c5a",
+      "bytes": 5659616,
+      "archiveEntry": "3e291ab88b5a6f33b5a61612d46091477672bc3759e2cf938c11d0e90f3d0c5a.onnx",
+      "locations": [
+        "work/learning/policy-cycle1/model/policy-0.5.onnx"
+      ]
+    },
+    {
+      "sha256": "429a63839b0c1f1ac902a5c5e9a9d89fa64ffdf0bb00ecc78837fc1d3da5f789",
+      "bytes": 5659616,
+      "archiveEntry": "429a63839b0c1f1ac902a5c5e9a9d89fa64ffdf0bb00ecc78837fc1d3da5f789.onnx",
+      "locations": [
+        "work/learning/policy-cycle1/model/policy-1.onnx"
+      ]
+    },
+    {
+      "sha256": "a52217fe971a8b7f8be87887feedf4a5e436d6fa7783d594f4b9f8c5ef57c21c",
+      "bytes": 291274,
+      "archiveEntry": "a52217fe971a8b7f8be87887feedf4a5e436d6fa7783d594f4b9f8c5ef57c21c.npz",
+      "locations": [
+        "work/learning/policy-cycle1/model/residual.npz"
+      ]
+    },
+    {
+      "sha256": "5550bd2c2764dd6174ca711ef999c8b7e1380b05ad4dca5d30c5b94f13ffc1eb",
+      "bytes": 5659616,
+      "archiveEntry": "5550bd2c2764dd6174ca711ef999c8b7e1380b05ad4dca5d30c5b94f13ffc1eb.onnx",
+      "locations": [
+        "work/learning/policy-cycle1/rule-model/policy-0.25.onnx"
+      ]
+    },
+    {
+      "sha256": "a79a36625ef11b957d3169f19d7d9d04600d563dc1a0d9b9bb3c0e6df3720d3d",
+      "bytes": 5659616,
+      "archiveEntry": "a79a36625ef11b957d3169f19d7d9d04600d563dc1a0d9b9bb3c0e6df3720d3d.onnx",
+      "locations": [
+        "work/learning/policy-cycle1/rule-model/policy-0.5.onnx"
+      ]
+    },
+    {
+      "sha256": "f563d4984db9b5c4fd6603226f1345ba96219174edbaf2652850917a5d02a54e",
+      "bytes": 5659616,
+      "archiveEntry": "f563d4984db9b5c4fd6603226f1345ba96219174edbaf2652850917a5d02a54e.onnx",
+      "locations": [
+        "work/learning/policy-cycle1/rule-model/policy-1.onnx"
+      ]
+    },
+    {
+      "sha256": "e76f0a0ab0cc00b3485ffa7471bf18b7dd3ad97d4a3bfd7e326063df5b358954",
+      "bytes": 291274,
+      "archiveEntry": "e76f0a0ab0cc00b3485ffa7471bf18b7dd3ad97d4a3bfd7e326063df5b358954.npz",
+      "locations": [
+        "work/learning/policy-cycle1/rule-model/residual.npz"
+      ]
+    },
+    {
+      "sha256": "a7036dff87f8451faf92b221c7a65127d114ae984d7f0406e8ff74ac2ff4ccf2",
+      "bytes": 5659616,
+      "archiveEntry": "a7036dff87f8451faf92b221c7a65127d114ae984d7f0406e8ff74ac2ff4ccf2.onnx",
+      "locations": [
+        "work/learning/policy-cycle2/model/policy-0.25.onnx"
+      ]
+    },
+    {
+      "sha256": "dc088436e3e5a019284d6e4222ad4827c42bf150aec3f3d4a24b509975a2f4e4",
+      "bytes": 5659616,
+      "archiveEntry": "dc088436e3e5a019284d6e4222ad4827c42bf150aec3f3d4a24b509975a2f4e4.onnx",
+      "locations": [
+        "work/learning/policy-cycle2/model/policy-0.5.onnx"
+      ]
+    },
+    {
+      "sha256": "5ab675e53ddcf56862df855ff70f2c8e817ddd1f7b09b626568042289484bc16",
+      "bytes": 5659616,
+      "archiveEntry": "5ab675e53ddcf56862df855ff70f2c8e817ddd1f7b09b626568042289484bc16.onnx",
+      "locations": [
+        "work/learning/policy-cycle2/model/policy-1.onnx"
+      ]
+    },
+    {
+      "sha256": "4a2c6c60495b5fec7e123e344549e9801ac85c7211437e9b0c1547285b4ca245",
+      "bytes": 291274,
+      "archiveEntry": "4a2c6c60495b5fec7e123e344549e9801ac85c7211437e9b0c1547285b4ca245.npz",
+      "locations": [
+        "work/learning/policy-cycle2/model/residual.npz"
+      ]
+    },
+    {
+      "sha256": "731d7d1b12cc1d56e20a6401bf21c21ca28949b9e3abca04f2a09f7c005c4c7d",
+      "bytes": 5659616,
+      "archiveEntry": "731d7d1b12cc1d56e20a6401bf21c21ca28949b9e3abca04f2a09f7c005c4c7d.onnx",
+      "locations": [
+        "work/learning/policy-trainer-smoke/policy-0.25.onnx"
+      ]
+    },
+    {
+      "sha256": "eced937fd258375ad5f4af6bb543296f6202b2c01a3c28d1798d4ee7f3301b5a",
+      "bytes": 5659616,
+      "archiveEntry": "eced937fd258375ad5f4af6bb543296f6202b2c01a3c28d1798d4ee7f3301b5a.onnx",
+      "locations": [
+        "work/learning/policy-trainer-smoke/policy-0.5.onnx"
+      ]
+    },
+    {
+      "sha256": "7bdda2d0707fa95615709c82c851f9487d9e2d5ff2856582683f9030b9696c24",
+      "bytes": 5659616,
+      "archiveEntry": "7bdda2d0707fa95615709c82c851f9487d9e2d5ff2856582683f9030b9696c24.onnx",
+      "locations": [
+        "work/learning/policy-trainer-smoke/policy-1.onnx"
+      ]
+    },
+    {
+      "sha256": "937ce910f4ab2cf327c668c0b28130d8f37277ec1804d00e186c616bf3097af4",
+      "bytes": 291274,
+      "archiveEntry": "937ce910f4ab2cf327c668c0b28130d8f37277ec1804d00e186c616bf3097af4.npz",
+      "locations": [
+        "work/learning/policy-trainer-smoke/residual.npz"
+      ]
+    },
+    {
+      "sha256": "2e97d217b2e1d90b2a715ace68eff56251da0510b537127af2b1ac7886e8e3cf",
+      "bytes": 295890,
+      "archiveEntry": "2e97d217b2e1d90b2a715ace68eff56251da0510b537127af2b1ac7886e8e3cf.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-01/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "1f18cde10256e64705d44da3704b9dce29e1088be11b4b7cf1de09aad30587fe",
+      "bytes": 295890,
+      "archiveEntry": "1f18cde10256e64705d44da3704b9dce29e1088be11b4b7cf1de09aad30587fe.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-01/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "0ce74ff471ce1edb4e886d079a46bdf44934a6e212dbf1fc3895046af1ba71bf",
+      "bytes": 295890,
+      "archiveEntry": "0ce74ff471ce1edb4e886d079a46bdf44934a6e212dbf1fc3895046af1ba71bf.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-01/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "89f96b4fd9a40e838e363d453d84d54a6a2d0f429d5087dab7dae95ac7640860",
+      "bytes": 295890,
+      "archiveEntry": "89f96b4fd9a40e838e363d453d84d54a6a2d0f429d5087dab7dae95ac7640860.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-01/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-01/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "ab1cb865c78734c4b3576a3d6469a4071def0f65367e31b7dae6c241f4f9c64b",
+      "bytes": 295890,
+      "archiveEntry": "ab1cb865c78734c4b3576a3d6469a4071def0f65367e31b7dae6c241f4f9c64b.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-02/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "f827ebf502a1cc5ae74c2ad9025d0e4d960f8b5a0fad556be708829e14aa4984",
+      "bytes": 295890,
+      "archiveEntry": "f827ebf502a1cc5ae74c2ad9025d0e4d960f8b5a0fad556be708829e14aa4984.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-02/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "62c0b3bc4d4206f0d01e1a367046b9c4b31a4f9bfd67aa3996e5707cc8d34385",
+      "bytes": 295890,
+      "archiveEntry": "62c0b3bc4d4206f0d01e1a367046b9c4b31a4f9bfd67aa3996e5707cc8d34385.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-02/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "3e8cb9d9b69466644fd741eca5bf12f3111e895618c126353d86625dc1b6b497",
+      "bytes": 295890,
+      "archiveEntry": "3e8cb9d9b69466644fd741eca5bf12f3111e895618c126353d86625dc1b6b497.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-02/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-02/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "9f89289db43da74cfc1e752c8666b2af45669ee451872e8aa65db7eceb7c3833",
+      "bytes": 295890,
+      "archiveEntry": "9f89289db43da74cfc1e752c8666b2af45669ee451872e8aa65db7eceb7c3833.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-03/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "cc366e83b2d2f3483edb9b82081bdd5cb62deacd5562d6e01722edca0526d2fc",
+      "bytes": 295890,
+      "archiveEntry": "cc366e83b2d2f3483edb9b82081bdd5cb62deacd5562d6e01722edca0526d2fc.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-03/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "bf5593932eb0ca1c6ae236aec200bee04d12bae3fa602ec3cc90d444b4fd5e0b",
+      "bytes": 295890,
+      "archiveEntry": "bf5593932eb0ca1c6ae236aec200bee04d12bae3fa602ec3cc90d444b4fd5e0b.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-03/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "145fb84c819dcf0a755a9d115c7378805085983aba96f213541062c4960d256e",
+      "bytes": 295890,
+      "archiveEntry": "145fb84c819dcf0a755a9d115c7378805085983aba96f213541062c4960d256e.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-03/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-03/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "2ca403bb3ce2e0e1920ea66bfcc8cb6593e4fe078a1fa5925a7b69b8198cc05b",
+      "bytes": 295890,
+      "archiveEntry": "2ca403bb3ce2e0e1920ea66bfcc8cb6593e4fe078a1fa5925a7b69b8198cc05b.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-04/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "c7724e218d3c27da2d0fa2ce0032c1faa93dede9744b3d152650110c86ae267e",
+      "bytes": 295890,
+      "archiveEntry": "c7724e218d3c27da2d0fa2ce0032c1faa93dede9744b3d152650110c86ae267e.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-04/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "3eb26c8b5d6f5e074c567120ce159a9db746ac591eafbeecc31bc36f90559db7",
+      "bytes": 295890,
+      "archiveEntry": "3eb26c8b5d6f5e074c567120ce159a9db746ac591eafbeecc31bc36f90559db7.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-04/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "4a419ed40fe12124effef82e377bc81ae050c01f3cd2c24d61a353be4d9ae1af",
+      "bytes": 295890,
+      "archiveEntry": "4a419ed40fe12124effef82e377bc81ae050c01f3cd2c24d61a353be4d9ae1af.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-04/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-04/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "cf9ab9928d97ee8a83e10f6f63b89051ed856f2d6658af318bfec4f8aeb44cac",
+      "bytes": 295890,
+      "archiveEntry": "cf9ab9928d97ee8a83e10f6f63b89051ed856f2d6658af318bfec4f8aeb44cac.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-05/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "67dc0930fa3f9ba5654d79631384b3990eb35cd2ee1ffaf30172c68d3b6de1d6",
+      "bytes": 295890,
+      "archiveEntry": "67dc0930fa3f9ba5654d79631384b3990eb35cd2ee1ffaf30172c68d3b6de1d6.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-05/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "948e8be7afe4a0f53ac2571cc7baa57446450e81394c9c1e8b9eda8e98ff3e2f",
+      "bytes": 295890,
+      "archiveEntry": "948e8be7afe4a0f53ac2571cc7baa57446450e81394c9c1e8b9eda8e98ff3e2f.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-05/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "f65dbc23a08910b08ec8e48edc9a1c2b4f46a5e6f3e35b06dad6b020cf8250a9",
+      "bytes": 295890,
+      "archiveEntry": "f65dbc23a08910b08ec8e48edc9a1c2b4f46a5e6f3e35b06dad6b020cf8250a9.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-05/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-05/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "10277c85236b4233c7f15056989a5a5ee44a458ac34164099ac522c566e9ea2f",
+      "bytes": 295890,
+      "archiveEntry": "10277c85236b4233c7f15056989a5a5ee44a458ac34164099ac522c566e9ea2f.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-06/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "918dd5f7572ae407e9b7126328dee150fd2dcf6532479288e80e111390d85b0f",
+      "bytes": 295890,
+      "archiveEntry": "918dd5f7572ae407e9b7126328dee150fd2dcf6532479288e80e111390d85b0f.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-06/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "778d174a26a8c39b7b4d8645bf020f058c1d13b80acf6a3f4860973358d57697",
+      "bytes": 295890,
+      "archiveEntry": "778d174a26a8c39b7b4d8645bf020f058c1d13b80acf6a3f4860973358d57697.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-06/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "0f3ac83e65a0484119fe38a42d42efb3986cc7dec09fd65a129b55f421095c8a",
+      "bytes": 295890,
+      "archiveEntry": "0f3ac83e65a0484119fe38a42d42efb3986cc7dec09fd65a129b55f421095c8a.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-06/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-06/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "fbe061cfbfdc95e2cc638b7ca0999827a7d7aa03b17dc2559559cebca954a06e",
+      "bytes": 295890,
+      "archiveEntry": "fbe061cfbfdc95e2cc638b7ca0999827a7d7aa03b17dc2559559cebca954a06e.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-07/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "131e9b9f8267edead6f949a46bc397b350edfeef4b7c89512b9141f93f887abe",
+      "bytes": 295890,
+      "archiveEntry": "131e9b9f8267edead6f949a46bc397b350edfeef4b7c89512b9141f93f887abe.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-07/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "58333b4c4c89ffd4bf2c1a21ab73843e830b0dea14d45bee23f0feeb1d029233",
+      "bytes": 295890,
+      "archiveEntry": "58333b4c4c89ffd4bf2c1a21ab73843e830b0dea14d45bee23f0feeb1d029233.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-07/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "5fc78291bcc88be944162044d333669a90b3226d10cf352c7cf61da9456b85fe",
+      "bytes": 295890,
+      "archiveEntry": "5fc78291bcc88be944162044d333669a90b3226d10cf352c7cf61da9456b85fe.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-07/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-07/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "95db642468bc60108428a6eca8f05ea98716abc797aba4b2fe9fb872309ce38b",
+      "bytes": 295890,
+      "archiveEntry": "95db642468bc60108428a6eca8f05ea98716abc797aba4b2fe9fb872309ce38b.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-08/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "d0a772558f06047a87e714e7fe68c54949edb1b58c14f23b280d3ed08ff3d9b1",
+      "bytes": 295890,
+      "archiveEntry": "d0a772558f06047a87e714e7fe68c54949edb1b58c14f23b280d3ed08ff3d9b1.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-08/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "88fefde220a628dc6df5fe6b5730c0f39af05966dbfe6f97d9a3f9195e8bf410",
+      "bytes": 295890,
+      "archiveEntry": "88fefde220a628dc6df5fe6b5730c0f39af05966dbfe6f97d9a3f9195e8bf410.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-08/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "a50ed18a0879c6e0422a6f73a86919dd92e10774fcaa3c17050733a38efa0829",
+      "bytes": 295890,
+      "archiveEntry": "a50ed18a0879c6e0422a6f73a86919dd92e10774fcaa3c17050733a38efa0829.npz",
+      "locations": [
+        "work/learning/ppo-k2/cycle-08/model/ppo-epoch4.npz",
+        "work/learning/ppo-k2/cycle-08/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "ee22d8b79204c6bae8598df09b13b3dc99b61490d6242c16f65cca418d45e031",
+      "bytes": 295890,
+      "archiveEntry": "ee22d8b79204c6bae8598df09b13b3dc99b61490d6242c16f65cca418d45e031.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-01/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "215cfe8b1de4ce4e656ea6b4a33d150aeed59bb8da479adeb2f14b842cffe150",
+      "bytes": 295890,
+      "archiveEntry": "215cfe8b1de4ce4e656ea6b4a33d150aeed59bb8da479adeb2f14b842cffe150.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-01/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "87dcd553951f8f4dd04b81c341d0b08454ae7a0c1bd46b9ee149085304378711",
+      "bytes": 295890,
+      "archiveEntry": "87dcd553951f8f4dd04b81c341d0b08454ae7a0c1bd46b9ee149085304378711.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-01/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "88a6197d83a64ed327fd20c2760bba216e21d54ab1ae301e62e347cb92eef166",
+      "bytes": 295890,
+      "archiveEntry": "88a6197d83a64ed327fd20c2760bba216e21d54ab1ae301e62e347cb92eef166.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-01/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-01/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "a002a285e3e50fd5be80833fc5a26185f3a94662afa2ae33f55eceaa4fad030c",
+      "bytes": 295890,
+      "archiveEntry": "a002a285e3e50fd5be80833fc5a26185f3a94662afa2ae33f55eceaa4fad030c.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-02/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "61d9858cb5f3d86a7b2142310c1c9436945ebadb55f341b041a17257b0ec0654",
+      "bytes": 295890,
+      "archiveEntry": "61d9858cb5f3d86a7b2142310c1c9436945ebadb55f341b041a17257b0ec0654.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-02/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "6a1f527c9929c5f831ef9586f3c31700ec63e898968e0e316ff2b11ad704701d",
+      "bytes": 295890,
+      "archiveEntry": "6a1f527c9929c5f831ef9586f3c31700ec63e898968e0e316ff2b11ad704701d.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-02/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "2b71adda6f45d9785e31c47642a8becd60ef56acfd2217f4e10b341f559d1b2d",
+      "bytes": 295890,
+      "archiveEntry": "2b71adda6f45d9785e31c47642a8becd60ef56acfd2217f4e10b341f559d1b2d.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-02/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-02/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "d24957ce3052208815fe7901089258ba5a05144fddd757eb833d6f1843c40a03",
+      "bytes": 295890,
+      "archiveEntry": "d24957ce3052208815fe7901089258ba5a05144fddd757eb833d6f1843c40a03.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-03/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "23f437d030de7d95b80226d8fb3a3e29bcba4b8305cd9e675ff9778a3a9f9527",
+      "bytes": 295890,
+      "archiveEntry": "23f437d030de7d95b80226d8fb3a3e29bcba4b8305cd9e675ff9778a3a9f9527.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-03/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "aac2fb94bf5cf030bf02d1dda826e0eb44edf6dff41954fcc3d112e405987bf1",
+      "bytes": 295890,
+      "archiveEntry": "aac2fb94bf5cf030bf02d1dda826e0eb44edf6dff41954fcc3d112e405987bf1.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-03/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "d4c5d4f8e24cff61ae4439258655be52306784af72a312483835e314d25a3f14",
+      "bytes": 295890,
+      "archiveEntry": "d4c5d4f8e24cff61ae4439258655be52306784af72a312483835e314d25a3f14.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-03/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-03/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "5349b5855e53306865e0d2ce697b779442a0d7e0652decb684911c8c49eaf077",
+      "bytes": 5806101,
+      "archiveEntry": "5349b5855e53306865e0d2ce697b779442a0d7e0652decb684911c8c49eaf077.onnx",
+      "locations": [
+        "work/learning/ppo-k4/cycle-04/export/policy.onnx"
+      ]
+    },
+    {
+      "sha256": "5d981e08abf82f99aab55daf7b57f1be28ec4a6546d61de5055f9927a3443bf6",
+      "bytes": 295890,
+      "archiveEntry": "5d981e08abf82f99aab55daf7b57f1be28ec4a6546d61de5055f9927a3443bf6.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-04/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "b268d24e1589fc3b322b49b814eb472ca3e2a5bb0dc369a708b72fb7ed9d10a5",
+      "bytes": 295890,
+      "archiveEntry": "b268d24e1589fc3b322b49b814eb472ca3e2a5bb0dc369a708b72fb7ed9d10a5.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-04/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "f249878f77bd25f6f01806b7e4c96122063eaee4915321e553b066dc0427b49c",
+      "bytes": 295890,
+      "archiveEntry": "f249878f77bd25f6f01806b7e4c96122063eaee4915321e553b066dc0427b49c.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-04/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "1f9a769cb640bdda61a72f1aed4bb14fcfc9458290251ebf680a082319088f1b",
+      "bytes": 295890,
+      "archiveEntry": "1f9a769cb640bdda61a72f1aed4bb14fcfc9458290251ebf680a082319088f1b.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-04/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-04/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "111512ee74c1e63aeb24e7cf3b007eaf8b6ef15c67dcfc4b0902ca5c58885b96",
+      "bytes": 295890,
+      "archiveEntry": "111512ee74c1e63aeb24e7cf3b007eaf8b6ef15c67dcfc4b0902ca5c58885b96.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-05/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "edea8ce85dea9f10159e3d55ca5998ee0a9bd4f86af94a05249f77498f6db5ac",
+      "bytes": 295890,
+      "archiveEntry": "edea8ce85dea9f10159e3d55ca5998ee0a9bd4f86af94a05249f77498f6db5ac.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-05/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "abe23a06992af204c753ca9102a711b99328ffbbc85e364f3f5216437e45517d",
+      "bytes": 295890,
+      "archiveEntry": "abe23a06992af204c753ca9102a711b99328ffbbc85e364f3f5216437e45517d.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-05/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "2fa8d76a31a1589f4cd2fa1d0b5fe32ee2e3541bece4abf22ab13807007bc35c",
+      "bytes": 295890,
+      "archiveEntry": "2fa8d76a31a1589f4cd2fa1d0b5fe32ee2e3541bece4abf22ab13807007bc35c.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-05/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-05/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "6daf60b734264f05139c5376b9be716744c7f11a378a7626aa84c0fb69ac0da9",
+      "bytes": 295890,
+      "archiveEntry": "6daf60b734264f05139c5376b9be716744c7f11a378a7626aa84c0fb69ac0da9.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-06/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "67f971d5597b1970bb624851183d031390b3bc60e7f6425c031762c24f39984a",
+      "bytes": 295890,
+      "archiveEntry": "67f971d5597b1970bb624851183d031390b3bc60e7f6425c031762c24f39984a.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-06/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "5e65199299b4eef45a8c97617594bdc009d8c659c6a15f5f2e7881e549e96505",
+      "bytes": 295890,
+      "archiveEntry": "5e65199299b4eef45a8c97617594bdc009d8c659c6a15f5f2e7881e549e96505.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-06/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "5362d966ca5f2fb8fd675151c542af0af588f07543289511c65e6b6449a80b27",
+      "bytes": 295890,
+      "archiveEntry": "5362d966ca5f2fb8fd675151c542af0af588f07543289511c65e6b6449a80b27.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-06/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-06/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "07bb0c4c71e298629c6d3250c1d61fa5cbb0dc6df921b144e01f543b41142726",
+      "bytes": 295890,
+      "archiveEntry": "07bb0c4c71e298629c6d3250c1d61fa5cbb0dc6df921b144e01f543b41142726.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-07/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "434180bf94e0732263704068810b45ef4badb40b5f5b96693033c047a06e4f4e",
+      "bytes": 295890,
+      "archiveEntry": "434180bf94e0732263704068810b45ef4badb40b5f5b96693033c047a06e4f4e.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-07/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "0f1b66a5664ff61bc200a3cdb3cfddb4143c0e93d49c2b7e8c1aa8bc8c9de18f",
+      "bytes": 295890,
+      "archiveEntry": "0f1b66a5664ff61bc200a3cdb3cfddb4143c0e93d49c2b7e8c1aa8bc8c9de18f.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-07/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "1e12692773d2fed8ebb2d2d1a91f75d2ac77cd868c2d9e372dd41e70e8a32a80",
+      "bytes": 295890,
+      "archiveEntry": "1e12692773d2fed8ebb2d2d1a91f75d2ac77cd868c2d9e372dd41e70e8a32a80.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-07/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-07/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "328adbf3a0e607a461149ecb992f37e600b817c75177679830adcc89bc53cf0e",
+      "bytes": 295890,
+      "archiveEntry": "328adbf3a0e607a461149ecb992f37e600b817c75177679830adcc89bc53cf0e.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-08/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "5704a14eef4a6286d02b6ab05e29a89fe6e71deda8ff68878df3b907df9acddd",
+      "bytes": 295890,
+      "archiveEntry": "5704a14eef4a6286d02b6ab05e29a89fe6e71deda8ff68878df3b907df9acddd.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-08/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "3684bb5cb737fe8470ccf7a3847771f3ff731e2f2fa75e3a1de1b15db4f40b78",
+      "bytes": 295890,
+      "archiveEntry": "3684bb5cb737fe8470ccf7a3847771f3ff731e2f2fa75e3a1de1b15db4f40b78.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-08/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "e31e1a48fae7f5bc4496703ba7f5346a2d1de005f816eb42ac822d279d7638cc",
+      "bytes": 295890,
+      "archiveEntry": "e31e1a48fae7f5bc4496703ba7f5346a2d1de005f816eb42ac822d279d7638cc.npz",
+      "locations": [
+        "work/learning/ppo-k4/cycle-08/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4/cycle-08/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "b327875b743e2d63fdf3d44829a68ebe5aacc1e508f9377d777c2162436fcb5d",
+      "bytes": 295890,
+      "archiveEntry": "b327875b743e2d63fdf3d44829a68ebe5aacc1e508f9377d777c2162436fcb5d.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-01/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "caf49cf97e85570d495950b736d3e102990ec1324fac112ecdf129b11704742e",
+      "bytes": 295890,
+      "archiveEntry": "caf49cf97e85570d495950b736d3e102990ec1324fac112ecdf129b11704742e.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-01/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "9a00fe2679ae71ba1a25ae4a122092c77f51076edff879511b0cd8e5192edd7e",
+      "bytes": 295890,
+      "archiveEntry": "9a00fe2679ae71ba1a25ae4a122092c77f51076edff879511b0cd8e5192edd7e.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-01/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "a7f9c3e6577ee6925525f2741d8b8ef89432e4f02d4795db6038a2278eba16d4",
+      "bytes": 295890,
+      "archiveEntry": "a7f9c3e6577ee6925525f2741d8b8ef89432e4f02d4795db6038a2278eba16d4.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-01/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-01/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "0c126be78fa3bf39fb0ecbc6868f24c86b0f6fa5a300e19f8f0314b666c07129",
+      "bytes": 295890,
+      "archiveEntry": "0c126be78fa3bf39fb0ecbc6868f24c86b0f6fa5a300e19f8f0314b666c07129.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-02/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "a9b601b954c39a858135ae55750dbe2ccf7d9bc627577fa8479e565a2c1f5673",
+      "bytes": 295890,
+      "archiveEntry": "a9b601b954c39a858135ae55750dbe2ccf7d9bc627577fa8479e565a2c1f5673.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-02/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "5101e7c79ab2c06003479af47ce5938ed407ecbe16716833507831839de49ab5",
+      "bytes": 295890,
+      "archiveEntry": "5101e7c79ab2c06003479af47ce5938ed407ecbe16716833507831839de49ab5.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-02/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "955f97d6152741ced7663980bb28bb775185371566fe42a1537fab21ab431994",
+      "bytes": 295890,
+      "archiveEntry": "955f97d6152741ced7663980bb28bb775185371566fe42a1537fab21ab431994.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-02/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-02/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "44c1fcf96369ae73f24e82b79399880fdba1574fc86caba7e7c636f33b5f5770",
+      "bytes": 295890,
+      "archiveEntry": "44c1fcf96369ae73f24e82b79399880fdba1574fc86caba7e7c636f33b5f5770.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-03/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "f23ed1433028f16100762d34d5fc67b24e66c17f57ab6e3244c953a4a5211019",
+      "bytes": 295890,
+      "archiveEntry": "f23ed1433028f16100762d34d5fc67b24e66c17f57ab6e3244c953a4a5211019.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-03/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "321ccd6a18ca99fa04805705c8e53048cb6a53f07e33c9623a4cf5be6e414630",
+      "bytes": 295890,
+      "archiveEntry": "321ccd6a18ca99fa04805705c8e53048cb6a53f07e33c9623a4cf5be6e414630.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-03/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "06376366c2764e089209c0df52c81015c8d067f103f7c612879205430c5bcf47",
+      "bytes": 295890,
+      "archiveEntry": "06376366c2764e089209c0df52c81015c8d067f103f7c612879205430c5bcf47.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-03/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-03/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "fa87e214674d071fb0b7f5282527b255f82d551dc7b6b1b856b65d5c0d79162f",
+      "bytes": 295890,
+      "archiveEntry": "fa87e214674d071fb0b7f5282527b255f82d551dc7b6b1b856b65d5c0d79162f.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-04/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "441dcd97df22c0c63616e86a71c0a62d9fa20a662ba4bf2415b5d9fbdfe3f815",
+      "bytes": 295890,
+      "archiveEntry": "441dcd97df22c0c63616e86a71c0a62d9fa20a662ba4bf2415b5d9fbdfe3f815.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-04/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "11b6a9c391a759c8a6d6e912d6835ab4268ce81c9fbd86c4885649a187cec69f",
+      "bytes": 295890,
+      "archiveEntry": "11b6a9c391a759c8a6d6e912d6835ab4268ce81c9fbd86c4885649a187cec69f.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-04/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "cd511654c16eac7935920e0173dd9ad37a6a7878138119029d67a71a7f8c4bdd",
+      "bytes": 295890,
+      "archiveEntry": "cd511654c16eac7935920e0173dd9ad37a6a7878138119029d67a71a7f8c4bdd.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-04/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-04/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "5dc3c4e895337039a540d66ef62f9d963458a36fb802a7f45929cd27aad16042",
+      "bytes": 295890,
+      "archiveEntry": "5dc3c4e895337039a540d66ef62f9d963458a36fb802a7f45929cd27aad16042.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-05/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "22cfca9b03d29af185aeab7a23d658f58b7dbab7914ca9c5d7c6ad8ee58d80d0",
+      "bytes": 295890,
+      "archiveEntry": "22cfca9b03d29af185aeab7a23d658f58b7dbab7914ca9c5d7c6ad8ee58d80d0.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-05/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "dddd4dbf8b8dc4de6a9c215352272d114d8ab643e208070e966a5f1a4b6cc2e0",
+      "bytes": 295890,
+      "archiveEntry": "dddd4dbf8b8dc4de6a9c215352272d114d8ab643e208070e966a5f1a4b6cc2e0.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-05/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "a3b75fac172c6ffca6b1d9f2351108b2d60b654da20b8dde83424b050a5831a3",
+      "bytes": 295890,
+      "archiveEntry": "a3b75fac172c6ffca6b1d9f2351108b2d60b654da20b8dde83424b050a5831a3.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-05/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-05/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "08263e3a23a22f3292676d7ee2655fdf24fe4c4e98c4247184964bd5135ae2fa",
+      "bytes": 295890,
+      "archiveEntry": "08263e3a23a22f3292676d7ee2655fdf24fe4c4e98c4247184964bd5135ae2fa.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-06/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "7d6e4a9d3bf3d4716d6b932c72645fe3092272287969db6509f8605083aad113",
+      "bytes": 295890,
+      "archiveEntry": "7d6e4a9d3bf3d4716d6b932c72645fe3092272287969db6509f8605083aad113.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-06/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "c38e590f6d1ea6419d602b1eeff77e9ffd9f1bcbd9e164887f51f2de4a3a7ec1",
+      "bytes": 295890,
+      "archiveEntry": "c38e590f6d1ea6419d602b1eeff77e9ffd9f1bcbd9e164887f51f2de4a3a7ec1.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-06/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "fcb946efff2797c1f45042e3a97120599f313d3b311afe5c8c3ec51acb8d30a2",
+      "bytes": 295890,
+      "archiveEntry": "fcb946efff2797c1f45042e3a97120599f313d3b311afe5c8c3ec51acb8d30a2.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-06/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-06/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "c5ad053705a9c54a219b1f28d6708b49b15dec1a99ca704463e72fe8c599db0a",
+      "bytes": 295890,
+      "archiveEntry": "c5ad053705a9c54a219b1f28d6708b49b15dec1a99ca704463e72fe8c599db0a.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-07/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "ea9af00a083399a331e46659580209573d29f563035de5275c5863a697549a8f",
+      "bytes": 295890,
+      "archiveEntry": "ea9af00a083399a331e46659580209573d29f563035de5275c5863a697549a8f.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-07/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "2a78aaa8b31c7ec46fce47d7f8d9f1f18b9b7baf74247df56462a0eb38ec8060",
+      "bytes": 295890,
+      "archiveEntry": "2a78aaa8b31c7ec46fce47d7f8d9f1f18b9b7baf74247df56462a0eb38ec8060.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-07/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "e57ee80f5cd5f472f0d3e7934ce1c22e91d8c3e768500b09041ee5dcf0036eb7",
+      "bytes": 295890,
+      "archiveEntry": "e57ee80f5cd5f472f0d3e7934ce1c22e91d8c3e768500b09041ee5dcf0036eb7.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-07/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-07/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "1a25c5ee7e21e2ae85f38d23edfea85ab4bc6af29d4a57fe230836d08595fb99",
+      "bytes": 295890,
+      "archiveEntry": "1a25c5ee7e21e2ae85f38d23edfea85ab4bc6af29d4a57fe230836d08595fb99.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-08/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "d4973075154551b016805cac6c653ca1025dafa3b882ad8ba0cd8faa5b000cfb",
+      "bytes": 295890,
+      "archiveEntry": "d4973075154551b016805cac6c653ca1025dafa3b882ad8ba0cd8faa5b000cfb.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-08/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "648c0b95a67e1bfcfb99c34cc292b24369ce875933064d80ff7291087f22eb3a",
+      "bytes": 295890,
+      "archiveEntry": "648c0b95a67e1bfcfb99c34cc292b24369ce875933064d80ff7291087f22eb3a.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-08/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "1222fcdf61ba1c18f5f0718db8f32c97289e6062093cf4e3d0f7484e8cef3431",
+      "bytes": 295890,
+      "archiveEntry": "1222fcdf61ba1c18f5f0718db8f32c97289e6062093cf4e3d0f7484e8cef3431.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-08/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-08/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "6c70fc1512a12b4500c71e122358cbab2f7553c76e70887750bad70fa31ed7bc",
+      "bytes": 295890,
+      "archiveEntry": "6c70fc1512a12b4500c71e122358cbab2f7553c76e70887750bad70fa31ed7bc.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-09/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "204413f5cbb6db2be2d417e497ad85f0fbeacd5065cbb605b1bdef04a28b336f",
+      "bytes": 295890,
+      "archiveEntry": "204413f5cbb6db2be2d417e497ad85f0fbeacd5065cbb605b1bdef04a28b336f.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-09/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "82720340bbddec3d5f59e2a73c8fbbd96289134d6272d142be33bccef738ab34",
+      "bytes": 295890,
+      "archiveEntry": "82720340bbddec3d5f59e2a73c8fbbd96289134d6272d142be33bccef738ab34.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-09/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "1b3c595b93cd13204942e59554b1e4bb5090c227af3a6568d9975e740362554a",
+      "bytes": 295890,
+      "archiveEntry": "1b3c595b93cd13204942e59554b1e4bb5090c227af3a6568d9975e740362554a.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-09/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-09/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "66f1f89bc3754aa794e04a891aa78c2c1977effcf4789ae79eb73fbdc0acc93a",
+      "bytes": 295890,
+      "archiveEntry": "66f1f89bc3754aa794e04a891aa78c2c1977effcf4789ae79eb73fbdc0acc93a.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-10/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "1a8b104edc6ea6a6ce8cb97c28c062e9c6ba5eb200d5b04fe501b9cc2719d529",
+      "bytes": 295890,
+      "archiveEntry": "1a8b104edc6ea6a6ce8cb97c28c062e9c6ba5eb200d5b04fe501b9cc2719d529.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-10/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "30ac2c5f54b066e64fea24929223ebd49acbb7d752e3ce421923ea15ff576a82",
+      "bytes": 295890,
+      "archiveEntry": "30ac2c5f54b066e64fea24929223ebd49acbb7d752e3ce421923ea15ff576a82.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-10/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "9b52832847510135d6f860351bbb3a83c783fc589f1d5bbb96b72483ca8fee71",
+      "bytes": 295890,
+      "archiveEntry": "9b52832847510135d6f860351bbb3a83c783fc589f1d5bbb96b72483ca8fee71.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-10/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-10/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "eb48710ed62d1056dfca4e783330d9745658f705f59a08371dc805e68d914b84",
+      "bytes": 295890,
+      "archiveEntry": "eb48710ed62d1056dfca4e783330d9745658f705f59a08371dc805e68d914b84.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-11/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "8070fb6d2043059c603d62c92132ea9371f25fe6b35ef182554caa261091e209",
+      "bytes": 295890,
+      "archiveEntry": "8070fb6d2043059c603d62c92132ea9371f25fe6b35ef182554caa261091e209.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-11/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "49cfcb61470d2bc6181a4c4681c0f1f8928b245f297e6a242681ab35952851eb",
+      "bytes": 295890,
+      "archiveEntry": "49cfcb61470d2bc6181a4c4681c0f1f8928b245f297e6a242681ab35952851eb.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-11/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "e5adc12d3c1f1f66d7f4ccdea999e13ed74e4b12f448954ac26ad8cc34c85f76",
+      "bytes": 295890,
+      "archiveEntry": "e5adc12d3c1f1f66d7f4ccdea999e13ed74e4b12f448954ac26ad8cc34c85f76.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-11/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-11/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "17807ade41156ab5eeb3e40a55d834ff984264d6d2e068a0773be1294a51e23d",
+      "bytes": 5806101,
+      "archiveEntry": "17807ade41156ab5eeb3e40a55d834ff984264d6d2e068a0773be1294a51e23d.onnx",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-12/export/strategy.onnx"
+      ]
+    },
+    {
+      "sha256": "ee89f90f5269d7f604ad40fc175d7bbeee96ba72ca94dfd7942fd88bf2636756",
+      "bytes": 295890,
+      "archiveEntry": "ee89f90f5269d7f604ad40fc175d7bbeee96ba72ca94dfd7942fd88bf2636756.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-12/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "500b2a808f9efa040570d25dbb1383eedac83b7db7a719845ce74e87ea68d966",
+      "bytes": 295890,
+      "archiveEntry": "500b2a808f9efa040570d25dbb1383eedac83b7db7a719845ce74e87ea68d966.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-12/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "20c831a37e6e13a8f8d74acd2cce099f6a1f23810a3aebb6fe9e6a72a2ab4c97",
+      "bytes": 295890,
+      "archiveEntry": "20c831a37e6e13a8f8d74acd2cce099f6a1f23810a3aebb6fe9e6a72a2ab4c97.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-12/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "06e2463e98ee4d6b66d53f72a9324b57025b33aff730e910593296b00f462598",
+      "bytes": 295890,
+      "archiveEntry": "06e2463e98ee4d6b66d53f72a9324b57025b33aff730e910593296b00f462598.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-12/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-12/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "8b70f91529bbc82b302465201b943650027071d98700da4ba6c73ef1ffef4d4d",
+      "bytes": 295890,
+      "archiveEntry": "8b70f91529bbc82b302465201b943650027071d98700da4ba6c73ef1ffef4d4d.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-13/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "f910a7a381641026e380016147bfbc7a20e182dfd121f12641fd9348619f7c77",
+      "bytes": 295890,
+      "archiveEntry": "f910a7a381641026e380016147bfbc7a20e182dfd121f12641fd9348619f7c77.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-13/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "3dfe0c629763f0da43af46f71190a703dc2eb89ee89cae98f826c14b3b5bcdb5",
+      "bytes": 295890,
+      "archiveEntry": "3dfe0c629763f0da43af46f71190a703dc2eb89ee89cae98f826c14b3b5bcdb5.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-13/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "8335417e875713309117cfb676647c64344418479184f4c0853d50e5d3615730",
+      "bytes": 295890,
+      "archiveEntry": "8335417e875713309117cfb676647c64344418479184f4c0853d50e5d3615730.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-13/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-13/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "061567415d1b789891bfcfc9c940a5aaa4663401314265c143a2ecb33967519c",
+      "bytes": 295890,
+      "archiveEntry": "061567415d1b789891bfcfc9c940a5aaa4663401314265c143a2ecb33967519c.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-14/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "3e6b80ac065f0444182adccd1857fae77fe23872013adccc5f129323e656df29",
+      "bytes": 295890,
+      "archiveEntry": "3e6b80ac065f0444182adccd1857fae77fe23872013adccc5f129323e656df29.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-14/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "4d5fe2648405fd523fe3036d2428f288f0411f9811f8a369cbab93be35e75322",
+      "bytes": 295890,
+      "archiveEntry": "4d5fe2648405fd523fe3036d2428f288f0411f9811f8a369cbab93be35e75322.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-14/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "c79c038ac4870cd0d47a7775fb1777bdd20f651d0fdf91d0362066c9b6576140",
+      "bytes": 295890,
+      "archiveEntry": "c79c038ac4870cd0d47a7775fb1777bdd20f651d0fdf91d0362066c9b6576140.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-14/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-14/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "41e3588bc7dbfab59ba4df713d6f4de59074abeb0276d87aee348b71ec114776",
+      "bytes": 295890,
+      "archiveEntry": "41e3588bc7dbfab59ba4df713d6f4de59074abeb0276d87aee348b71ec114776.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-15/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "a5fa6707460729a27e732221d323b1bb38e871a8af0fcfa993a669f0b7272863",
+      "bytes": 295890,
+      "archiveEntry": "a5fa6707460729a27e732221d323b1bb38e871a8af0fcfa993a669f0b7272863.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-15/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "05931e3a0054cd3d1eaa060181918347c14480768139c99f9c38055d70cd08aa",
+      "bytes": 295890,
+      "archiveEntry": "05931e3a0054cd3d1eaa060181918347c14480768139c99f9c38055d70cd08aa.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-15/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "14795bee057a2533f55d28a518a1d1f705ad63cc0d4ac828964fd692cf12c56c",
+      "bytes": 295890,
+      "archiveEntry": "14795bee057a2533f55d28a518a1d1f705ad63cc0d4ac828964fd692cf12c56c.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-15/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-15/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "df793f8794655231fe7fbac568c4b38e36bc9efed961db5117582ce21ca8880d",
+      "bytes": 295890,
+      "archiveEntry": "df793f8794655231fe7fbac568c4b38e36bc9efed961db5117582ce21ca8880d.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-16/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "835a370c52287fbd13a436670ef775874313343d9919d1c5c7f377eec6d8c864",
+      "bytes": 295890,
+      "archiveEntry": "835a370c52287fbd13a436670ef775874313343d9919d1c5c7f377eec6d8c864.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-16/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "b9daf44c2d755108c132476945271f476487abf65cb976f1d0831d4a82ae3757",
+      "bytes": 295890,
+      "archiveEntry": "b9daf44c2d755108c132476945271f476487abf65cb976f1d0831d4a82ae3757.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-16/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "792bcdae59a08c216979d2578dffd8e38b02e4f6a01ed38d9ab172401b75e28f",
+      "bytes": 295890,
+      "archiveEntry": "792bcdae59a08c216979d2578dffd8e38b02e4f6a01ed38d9ab172401b75e28f.npz",
+      "locations": [
+        "work/learning/ppo-k4-extended/cycle-16/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-extended/cycle-16/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "ca2d7a8c8e727d1244486c6f95c26f89e62b2c2713211796ccea63a91fa60e59",
+      "bytes": 295890,
+      "archiveEntry": "ca2d7a8c8e727d1244486c6f95c26f89e62b2c2713211796ccea63a91fa60e59.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-01/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "131095f20ee6ca77c0253bccfc9490a54852966efb86720072be2bdbc2a069ce",
+      "bytes": 295890,
+      "archiveEntry": "131095f20ee6ca77c0253bccfc9490a54852966efb86720072be2bdbc2a069ce.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-01/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "94d58c9f62e6f36006dc7f5fc2e105ab3f55f836bd6f51f98118f4fffebe485f",
+      "bytes": 295890,
+      "archiveEntry": "94d58c9f62e6f36006dc7f5fc2e105ab3f55f836bd6f51f98118f4fffebe485f.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-01/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "8d1678b0e53692a36cacb137c82263bef63f5c7254ee744d4c5f8d4bba2e0cc2",
+      "bytes": 295890,
+      "archiveEntry": "8d1678b0e53692a36cacb137c82263bef63f5c7254ee744d4c5f8d4bba2e0cc2.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-01/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-next/cycle-01/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "026e3eb59519833d830e74837772f9c26bfe6de7ccfba622b521f9b6ea16e993",
+      "bytes": 295890,
+      "archiveEntry": "026e3eb59519833d830e74837772f9c26bfe6de7ccfba622b521f9b6ea16e993.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-02/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "4ac584f88f0b59e938e98bf382f6f3eeb8a6f0cfb0254534cd99b01de58bb681",
+      "bytes": 295890,
+      "archiveEntry": "4ac584f88f0b59e938e98bf382f6f3eeb8a6f0cfb0254534cd99b01de58bb681.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-02/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "438d6090d30ffd0af2cd0bb0038a91b03f70b84862191ad10ebea702bc0075ff",
+      "bytes": 295890,
+      "archiveEntry": "438d6090d30ffd0af2cd0bb0038a91b03f70b84862191ad10ebea702bc0075ff.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-02/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "f26c7868843201dafeb2b657dabebbc76465ed5aa232e079d82651e94fcce834",
+      "bytes": 295890,
+      "archiveEntry": "f26c7868843201dafeb2b657dabebbc76465ed5aa232e079d82651e94fcce834.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-02/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-next/cycle-02/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "f1001f11a1635a51c063ff5e38ef1d58da2b05f3ef15319e681a32a05fcb2367",
+      "bytes": 295890,
+      "archiveEntry": "f1001f11a1635a51c063ff5e38ef1d58da2b05f3ef15319e681a32a05fcb2367.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-03/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "d678397d6cd640f91c2c95b8914ad916a91970fd0c9c8456c31234ad73df933e",
+      "bytes": 295890,
+      "archiveEntry": "d678397d6cd640f91c2c95b8914ad916a91970fd0c9c8456c31234ad73df933e.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-03/model/ppo-epoch2.npz"
+      ]
+    },
+    {
+      "sha256": "80128e74d2cfa1d96b70c79ede4026c5549b0d496d570eac4036d48a39f4d2a7",
+      "bytes": 295890,
+      "archiveEntry": "80128e74d2cfa1d96b70c79ede4026c5549b0d496d570eac4036d48a39f4d2a7.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-03/model/ppo-epoch3.npz"
+      ]
+    },
+    {
+      "sha256": "f552e3a42501559e5991d3fb8b9e89a7fa73022a7a6f9d45beb1c895bcf8bf66",
+      "bytes": 295890,
+      "archiveEntry": "f552e3a42501559e5991d3fb8b9e89a7fa73022a7a6f9d45beb1c895bcf8bf66.npz",
+      "locations": [
+        "work/learning/ppo-k4-next/cycle-03/model/ppo-epoch4.npz",
+        "work/learning/ppo-k4-next/cycle-03/model/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "685d2e17f1241767b4a5403db6e4c9c91b39fd8f07d9deda4e8e150d829a3fd9",
+      "bytes": 295734,
+      "archiveEntry": "685d2e17f1241767b4a5403db6e4c9c91b39fd8f07d9deda4e8e150d829a3fd9.npz",
+      "locations": [
+        "work/learning/ppo-smoke-trained/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "9d4ebcf38228356d467e02ebff48554335c00bea87ca2724f18ad830ca10463a",
+      "bytes": 295734,
+      "archiveEntry": "9d4ebcf38228356d467e02ebff48554335c00bea87ca2724f18ad830ca10463a.npz",
+      "locations": [
+        "work/learning/ppo-smoke-trained/ppo-epoch2.npz",
+        "work/learning/ppo-smoke-trained/ppo.npz"
+      ]
+    },
+    {
+      "sha256": "d01472a33353f10f4f7e6cc40bc0bb5db99e9ce24403feb6a0ca992b5486527d",
+      "bytes": 1510,
+      "archiveEntry": "d01472a33353f10f4f7e6cc40bc0bb5db99e9ce24403feb6a0ca992b5486527d.npz",
+      "locations": [
+        "work/learning/quick-model/response-linear.npz"
+      ]
+    },
+    {
+      "sha256": "382ba1916e9ebd00ea438b4d72a974554149e041d71ed7033d12865845888bb7",
+      "bytes": 1299,
+      "archiveEntry": "382ba1916e9ebd00ea438b4d72a974554149e041d71ed7033d12865845888bb7.onnx",
+      "locations": [
+        "work/learning/quick-model/response-linear.onnx"
+      ]
+    },
+    {
+      "sha256": "4b2747f95552086fadce6e24cd05cd66543615166e95203ef924f525e72697ba",
+      "bytes": 74914,
+      "archiveEntry": "4b2747f95552086fadce6e24cd05cd66543615166e95203ef924f525e72697ba.npz",
+      "locations": [
+        "work/learning/quick-model/response-small.npz"
+      ]
+    },
+    {
+      "sha256": "c134eeea0c7c27d30c55daee674c70ff1829f23b49846996b27a3524e71b3a79",
+      "bytes": 73902,
+      "archiveEntry": "c134eeea0c7c27d30c55daee674c70ff1829f23b49846996b27a3524e71b3a79.onnx",
+      "locations": [
+        "work/learning/quick-model/response-small.onnx"
+      ]
+    },
+    {
+      "sha256": "d6967ec0f04bdfec8d5f4d4799b94e33d2787e750ab0016c686bc81b5df256fc",
+      "bytes": 1510,
+      "archiveEntry": "d6967ec0f04bdfec8d5f4d4799b94e33d2787e750ab0016c686bc81b5df256fc.npz",
+      "locations": [
+        "work/learning/reproduce-release/response-linear.npz",
+        "work/learning/response-model-v1/response-linear.npz"
+      ]
+    },
+    {
+      "sha256": "8d2d69b8338e148b406cd2d4559a5417e5a9ba968db37f8b419940136b73cf34",
+      "bytes": 1299,
+      "archiveEntry": "8d2d69b8338e148b406cd2d4559a5417e5a9ba968db37f8b419940136b73cf34.onnx",
+      "locations": [
+        "work/learning/reproduce-release/response-linear.onnx",
+        "work/learning/response-model-v1/response-linear.onnx"
+      ]
+    },
+    {
+      "sha256": "b610e0df9c2a76c44ffc0526aedf12fa79dd170f49745c5f77faae40d87024ac",
+      "bytes": 74914,
+      "archiveEntry": "b610e0df9c2a76c44ffc0526aedf12fa79dd170f49745c5f77faae40d87024ac.npz",
+      "locations": [
+        "work/learning/reproduce-release/response-small.npz",
+        "work/learning/response-model-v1/response-small.npz"
+      ]
+    },
+    {
+      "sha256": "fbfc15062dc7ad03886f3b066e1646ed89a6de61885d1976d78c5a047548d2fc",
+      "bytes": 73902,
+      "archiveEntry": "fbfc15062dc7ad03886f3b066e1646ed89a6de61885d1976d78c5a047548d2fc.onnx",
+      "locations": [
+        "work/learning/reproduce-release/response-small.onnx",
+        "work/learning/response-model-v1/response-small.onnx"
+      ]
+    },
+    {
+      "sha256": "380b4ef37923617ffb2f61a1457780bdde9e55398a42da38fc3baec0e1c7be1c",
+      "bytes": 301366,
+      "archiveEntry": "380b4ef37923617ffb2f61a1457780bdde9e55398a42da38fc3baec0e1c7be1c.npz",
+      "locations": [
+        "work/learning/selfplay-smoke/model/ppo-epoch1.npz"
+      ]
+    },
+    {
+      "sha256": "227575fc4aeb2c892703c695ebc1c7469ce1bf8cba40b5b1c6250042c151cb8c",
+      "bytes": 301366,
+      "archiveEntry": "227575fc4aeb2c892703c695ebc1c7469ce1bf8cba40b5b1c6250042c151cb8c.npz",
+      "locations": [
+        "work/learning/selfplay-smoke/model/ppo-epoch2.npz",
+        "work/learning/selfplay-smoke/model/ppo.npz"
+      ]
+    }
+  ],
+  "excludedWhileIncomplete": [],
+  "scope": "Weight files only. Raw training buffers and duplicate serialized rollout behavior checkpoints are not bundled.",
+  "localArchives": [
+    {
+      "id": "cpu-main-2026-11-04-step-20923",
+      "role": "retained paused development run; not deployed and not inherited by the current GPU run",
+      "path": "work/archives/cpu-main-2026-11-04-step-20923",
+      "manifest": "docs/evaluation/cpu-main-retention-2026-11-04.json",
+      "files": 415,
+      "bytes": 1266434569,
+      "checkpointSHA256": "e84f0ba24a5487b59a68ceffda69e19fdce7dc543992ab1070b95e2bc896c5a4",
+      "policySHA256": "18f2e377a8ea747b9d7c54d5ff35743ee8d8b2ec71e2619d57d41a9b93ed7dea",
+      "retainedShardRows": 2037717,
+      "allHistoricalRawRowsRetained": false,
+      "download": null,
+      "gradientUpdatesInRestoreChecks": 0
+    },
+    {
+      "id": "gpu-memory-relief-step-212171",
+      "path": "work/archives/gpu-memory-relief-step-212171",
+      "role": "Saved during memory-budget tuning; local verified model and optimizer archive, not a deployed-model decision",
+      "step": 212171,
+      "policySHA256": "318dfcbae6f3e8c2f945a438778d949ada244baa2be112ecff14334c4fdfa057",
+      "checkpointSHA256": "ad041c1ccce3839fd750f5d4a10e81cde9e869c27bc223619b4fcbfd70071641",
+      "download": null
+    },
+    {
+      "id": "gpu-memory-relief-step-213060",
+      "path": "work/archives/gpu-memory-relief-step-213060",
+      "role": "Saved during memory-budget tuning; local verified model and optimizer archive, not a deployed-model decision",
+      "step": 213060,
+      "policySHA256": "a9a6a5fc575e40240f5791865a6a529413de6fd92be91b4d3d0459cb4bff0ce1",
+      "checkpointSHA256": "84d4c1356189f78ec62b861b6f60830be6b3b8ce44f6c4ad2b0d54977b4bc890",
+      "download": null
+    },
+    {
+      "id": "gpu-memory-relief-step-213688",
+      "path": "work/archives/gpu-memory-relief-step-213688",
+      "role": "Saved during memory-budget tuning; local verified model and optimizer archive, not a deployed-model decision",
+      "step": 213688,
+      "policySHA256": "38eca94f2482d5ccc93d9f68e83cbb4abb4577f38d07dc92ceb70929779cd246",
+      "checkpointSHA256": "384eba33d5e80a917a398af151b485eb64d1f4d7b333003e0d8709cfd6a021c1",
+      "download": null
+    }
+  ],
+  "webModels": {
+    "catalog": "web/src/ai/model-catalog.json",
+    "defaultId": "003",
+    "models": [
+      {
+        "id": "001",
+        "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "source": {
+          "version": "P0",
+          "status": "baseline"
+        }
+      },
+      {
+        "id": "002",
+        "sha256": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-002/bot-002.onnx",
+        "source": {
+          "run": "gpu-main",
+          "version": "v000198487",
+          "step": 198487,
+          "exportedAt": "2026-11-05T04:47:20Z",
+          "expectedSHA256": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+          "status": "experimental-not-heldout-accepted",
+          "registeredAt": "2026-11-05T04:52:28.151Z"
+        }
+      },
+      {
+        "id": "003",
+        "sha256": "15ae4809731d843fdfca74ba5a5bd1cc30ed00cb2de9f110ee1ca0299a12127b",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-003/bot-003.onnx",
+        "source": {
+          "run": "guanzero-adp-gpubatch",
+          "version": "model-000000009537",
+          "status": "experimental-not-heldout-accepted",
+          "registeredAt": "2026-11-05T05:15:35.468Z",
+          "step": 9537
+        }
+      }
+    ]
+  }
+}
