@@ -182,6 +182,34 @@
       "pageErrors": [],
       "lastLocalProductionVersion": "66195bc598",
       "subsequentChange": "level-picker focus restoration only; neural files unchanged"
+    },
+    "seatCredentialSafety": {
+      "versionMismatchBlocksStart": true,
+      "replacedTokenRevoked": true,
+      "hostSeatProtected": true,
+      "intentionalExitRevoked": true,
+      "pageErrors": []
+    },
+    "help": {
+      "viewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          844,
+          390
+        ]
+      ],
+      "soloPaused": true,
+      "multiplayerContinues": true,
+      "practiceDoesNotAdvance": true,
+      "pendingPolicyWaits": true,
+      "pageErrors": []
     }
   },
   "protocolBoundary": {
@@ -213,5 +241,28 @@
     "web/src/ui/overlays.js": "a550fbf951e2969954bcc2d030ad92987f808b0bff2b8654be7acc85a1980a21",
     "web/src/ui/rules-dialog.js": "21337cc2bb848a917173045245651af9b324d7d04d7c956597e7dff8a77d2c76",
     "web/src/ui/table.js": "aae2a0be5141239134a9e4a18cb2dfd77c5b5cc2683edb46368731f64a849952"
+  },
+  "deployment": {
+    "commit": "6eb89aeb1efeb6df2d6e37afa1adb1cf36ca7dd9",
+    "workflowRun": 42045105151,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42045105151",
+    "conclusion": "success",
+    "publicBrowserCheck": {
+      "url": "https://stevensun1005.github.io/guandanai/?ui-check=6eb89ae",
+      "version": "7b809c589a",
+      "levelChoices": 13,
+      "onceRule": true,
+      "defaultModel": "007",
+      "selectableModels": [
+        "001",
+        "002",
+        "003",
+        "004",
+        "005",
+        "006",
+        "007"
+      ],
+      "pageErrors": []
+    }
   }
 }
