@@ -1,10 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 const root = process.cwd();
 function temporary() {
+  // work/ is ignored by Git, so a fresh checkout (CI) does not have this parent yet.
+  mkdirSync(join(root, 'work/guanzero'), { recursive: true });
   return mkdtempSync(join(root, 'work/guanzero/run-test-'));
 }
 test('GuanZero refuses changed frozen sources before starting any trainer', () => {
