@@ -226,5 +226,48 @@
       "canonicalAssetsLinked": true
     }
   },
-  "formatterExclusionsUpdated": true
+  "formatterExclusionsUpdated": true,
+  "deployment": {
+    "checkedAtUTC": "2026-11-05T19:02:20.666188+00:00",
+    "sourceCommit": "bdae0323699d9078b587f693b202a7b9bad00eaa",
+    "expectedBuild": "813af095b4",
+    "status": "blocked-by-stale-pages-deployment",
+    "publishedNewBuild": false,
+    "existingPublicBuild": "aa43590418",
+    "existingPublicHTTP": 200,
+    "attempts": [
+      {
+        "workflow": 42086897018,
+        "attempt": 1,
+        "commit": "9d25d06c6ecda736a19e146e0850b668d16c91e4",
+        "build": "success",
+        "deploy": "timeout after updating_pages"
+      },
+      {
+        "workflow": 42087916624,
+        "attempt": 1,
+        "build": "success",
+        "deploy": "HTTP 400: previous deployment in progress"
+      },
+      {
+        "workflow": 42087916624,
+        "attempt": 2,
+        "deploy": "HTTP 400: previous deployment in progress"
+      },
+      {
+        "workflow": 42087916624,
+        "attempt": 3,
+        "deploy": "HTTP 400: previous deployment in progress after explicit cancel request"
+      }
+    ],
+    "staleDeploymentStatusAPI": "deployment_cancelled",
+    "blockerStillReportedByCreateAPI": true,
+    "pagesSettingsChanged": false,
+    "oldWebsitePreserved": true,
+    "latestTrainingObservation": {
+      "step": 651185,
+      "phase": "running",
+      "freeGiB": 10.034309387207031
+    }
+  }
 }
