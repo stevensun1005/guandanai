@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "defaultId": "006",
+  "defaultId": "007",
   "models": [
     {
       "id": "001",
@@ -111,6 +111,25 @@
         "expectedSHA256": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da",
         "status": "experimental-not-heldout-accepted",
         "registeredAt": "2026-11-05T12:55:17.396Z"
+      }
+    },
+    {
+      "id": "007",
+      "file": "bot-007.onnx",
+      "sha256": "7ec0450d793b885bb0f7d9c1aa9871fed95df29a6173a8b4c799e1c362027a41",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-007/bot-007.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-gpubatch",
+        "version": "model-000000044752",
+        "status": "experimental-not-heldout-accepted",
+        "step": 44752,
+        "registeredAt": "2026-11-05T13:18:12.809Z"
       }
     }
   ]
