@@ -69,3 +69,5 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 ## 可选评价的模型
 
 出牌评价固定读取 `selection.danMCaiChampions[0]` 的完整danMCai 冠军，与座位选择的托管／电脑模型无关。冠军经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实版本；不使用普通最新导出冒充冠军。评分仅做网络动作值的候选范围换算，不更改默认模型、性格或机器人动作。[房主许可与分数说明](MOVE_COACH.md)。
+
+开发评测现含随机、original、P0、Clint 与真实 danMCai 冠军，每类默认 500 场，独立补评、历史样本及进度口径见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。周期同步也归档新协议各对手已完成的逐场证据，核对 250 对／500 场、模型及冠军 SHA、种子和源码指纹；进行中计数不是完成成绩，不影响网页冠军默认。

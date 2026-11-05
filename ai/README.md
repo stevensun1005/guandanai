@@ -17,4 +17,4 @@
 
 网页提供 Clint 纯规则、GuanZero 两代及 danMCai 初始版／两代门控冠军；普通新导出不自动成为默认。[菜单与发布](../web/docs/WEB_MODELS.md) 统一维护名称和选择范围。
 
-GuanZero 开发评测包含随机、原版规则、P0 和 Clint（rules-v2），旧检出可独立补评，详见 [GuanZero](guanzero/README.md)。真人联机数据经独立云端服务采集，下载与预处理入口在 [共享数据](shared/data/README.md)，不自动接入活跃训练。
+GuanZero 开发评测包含随机、原版规则、P0、Clint（rules-v2）和真实 danMCai 门控冠军，每类默认 500 场；旧检出以独立进程执行新协议并显示实际进度，详见 [GuanZero](guanzero/README.md)。真人联机数据经独立云端服务采集，下载与预处理入口在 [共享数据](shared/data/README.md)，不自动接入活跃训练。

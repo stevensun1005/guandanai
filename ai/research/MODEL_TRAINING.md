@@ -6,7 +6,7 @@
 
 当前网页按六项菜单选择 Clint、GuanZero 两代、danMCai 初始版和两代门控冠军；名称与默认值以 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 为准。下文主价值网络与应牌分类器是历史训练复现内容，不代表当前只有两份可选模型。应牌预测准确率不能直接叫作棋力。
 
-GuanZero 的独立训练、GPU 合批、只读面板及随机／原版规则／P0／Clint 开发评测见 [GuanZero README](../guanzero/README.md)。真人语料的 [采集与预处理](../shared/data/README.md) 独立保存，不自动加入活跃训练。
+GuanZero 的独立训练、GPU 合批、只读面板及随机／原版规则／P0／Clint／真实 danMCai 冠军各 500 场的开发评测见 [GuanZero README](../guanzero/README.md)。真人语料的 [采集与预处理](../shared/data/README.md) 独立保存，不自动加入活跃训练。
 
 ## 按任务选择入口
 
