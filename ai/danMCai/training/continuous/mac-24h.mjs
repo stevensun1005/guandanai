@@ -18,6 +18,19 @@ import { sourceHashes } from './sources.mjs';
 import { REPO_ROOT } from './remote.mjs';
 
 export const MAC_SEEDS = { actorSeedOffset: 3_000_000, evaluationBlockOffset: 300 };
+export function macResumeArgs(reason = '', settings = '') {
+  if (settings && !reason) throw Error('Mac sampler changes require --protocol-change');
+  if (settings) {
+    const value = JSON.parse(settings);
+    if (!value || typeof value !== 'object' || Array.isArray(value))
+      throw Error('--set must be a sampler settings object');
+  }
+  return [
+    ...(reason ? [`--protocol-change=${reason}`] : []),
+    ...(settings ? [`--set=${settings}`] : []),
+  ];
+}
+
 export function remainingHours(schedule, now = Date.now()) {
   const end = Date.parse(schedule.deadlineUTC),
     start = Date.parse(schedule.startUTC);
@@ -115,6 +128,7 @@ export function prepareMac(snapshot, run, actors = 2) {
 }
 
 async function main() {
+  const resumeArgs = macResumeArgs(option('protocol-change', ''), option('set', ''));
   const snapshot = resolve(REPO_ROOT, option('snapshot', 'ai/danMCai/workspace/mac-import'));
   const run = resolve(REPO_ROOT, option('run', 'ai/danMCai/runs/mac-20261105'));
   const python = resolve(REPO_ROOT, option('python', 'ai/danMCai/environment/mac/bin/python'));
@@ -182,9 +196,7 @@ async function main() {
         `--run=${run}`,
         `--python=${python}`,
         `--hours=${hours}`,
-        ...(option('protocol-change', '')
-          ? [`--protocol-change=${option('protocol-change', '')}`]
-          : []),
+        ...resumeArgs,
       ],
       { cwd: REPO_ROOT, env, stdio: 'inherit' },
     );

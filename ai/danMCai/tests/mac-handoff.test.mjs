@@ -8,6 +8,7 @@ import {
   remainingHours,
   MAC_SEEDS,
   claimMacLock,
+  macResumeArgs,
 } from '../training/continuous/mac-24h.mjs';
 import { DEFAULT_CONFIG, readJSON, writeJSON } from '../training/continuous/lib.mjs';
 import { sourceHashes } from '../training/continuous/sources.mjs';
@@ -73,6 +74,19 @@ test('one Mac window lasts 24h, resumes only remaining time and cannot renew its
     () => remainingHours({ startUTC: schedule.startUTC, deadlineUTC: 'invalid' }),
     /Invalid/,
   );
+});
+
+test('Mac sampler tuning requires a named protocol change and forwards settings unchanged', () => {
+  const settings = '{"actors":4,"resourceBudget":{"reserveGB":4,"resumeGB":5}}';
+  assert.deepEqual(macResumeArgs(), []);
+  assert.throws(() => macResumeArgs('', settings), /protocol-change/);
+  assert.throws(() => macResumeArgs('sampler tuning', '[]'), /settings object/);
+  assert.throws(() => macResumeArgs('sampler tuning', 'null'), /settings object/);
+  assert.throws(() => macResumeArgs('sampler tuning', '{'), SyntaxError);
+  assert.deepEqual(macResumeArgs('measure four CPU samplers', settings), [
+    '--protocol-change=measure four CPU samplers',
+    `--set=${settings}`,
+  ]);
 });
 
 test('a second Mac launcher cannot share a live run', () => {
