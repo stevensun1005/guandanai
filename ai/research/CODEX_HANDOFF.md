@@ -6,6 +6,7 @@
 
 ## 当前功能补充
 
+- “检查 Clint 仓库”固定指同步其 UI 到网页、规则策略只进入 Clint规则机器人，验证后直接推送 `main`；每 4 小时定期检查。跨电脑执行边界、增量 SHA、隔离要求与发布流程统一见 [AGENTS.md](../../AGENTS.md#检查-clint-仓库的固定含义)，不改变正在运行的冻结训练。定时任务需在执行电脑配置，Git 共享的是规则约定。
 - GuanZero 已增加 Clint（rules-v2）开发评测；原 `rule` 成绩仍指 original。同一冻结模型、同牌交换阵营；旧训练通过独立补充进程写入 `eval/block-NNNN/clint/report.json`，面板只合并同来源报告。[运行说明](../guanzero/README.md)。
 - 真人联机牌谱已接入独立 Worker／D1，支持离线补传、私有导出和仅人工动作预处理；语料与活跃训练隔离，不能自动读入梯度训练或独立验收。[采集](../../web/collector/README.md) · [共享数据](../shared/data/README.md)。
 - 功能、命名和命令变化须同步中英文 README、相关目录／专门指南、CHANGELOG 及研究证据后推送；具体职责见 [贡献指南](../../CONTRIBUTING.md#文档的职责)。
