@@ -54,6 +54,7 @@ export function rotateSnapshot(source, offset) {
     if (game.clock.seats) game.clock.seats = seats(game.clock.seats);
   }
   game.lvlTeam = team(game.lvlTeam);
+  if (game.aOut != null) game.aOut = team(game.aOut);
   if (offset % 2) {
     game.levels.reverse();
     game.aFails?.reverse();
@@ -61,6 +62,7 @@ export function rotateSnapshot(source, offset) {
   if (game.result) {
     game.result.team = team(game.result.team);
     game.result.aTeam = team(game.result.aTeam);
+    if (game.result.aOut != null) game.result.aOut = team(game.result.aOut);
     game.result.order = seats(game.result.order);
   }
   if (game.roundHistory)
@@ -73,6 +75,7 @@ export function rotateSnapshot(source, offset) {
         ...record.result,
         team: team(record.result.team),
         aTeam: team(record.result.aTeam),
+        ...(record.result.aOut != null ? { aOut: team(record.result.aOut) } : {}),
         order: seats(record.result.order),
       },
     }));

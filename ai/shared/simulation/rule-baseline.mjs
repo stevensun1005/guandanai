@@ -4,11 +4,19 @@ import { aiDecide, initialize as initializeRules } from '../../../web/src/ai/rul
 import { initialize as initializeArrangement } from '../../../web/src/hand/arrangement.js';
 import { initialize as initializeHints } from '../../../web/src/hand/hints.js';
 import { seededRandom } from './simulation.mjs';
+import { chooseRuleAction } from '../../../web/src/rule-bot/strategy.js';
 
 let initialized = false;
 
-/** Run the existing rule player unchanged, with only public information and its own hand. */
-export function createRuleBaseline(seed) {
+export const RULE_OPPONENT_VERSION = 'rules-v2';
+
+/** Rule-only decisions; select original explicitly when reproducing historical evaluations. */
+export function createRuleOpponent(seed) {
+  return createRuleBaseline(seed, { version: RULE_OPPONENT_VERSION });
+}
+
+export function createRuleBaseline(seed, { version = 'original' } = {}) {
+  if (!['original', RULE_OPPONENT_VERSION].includes(version)) throw Error('Unknown rule opponent');
   if (!initialized) {
     initializeHandValue();
     initializeArrangement();
@@ -32,13 +40,14 @@ export function createRuleBaseline(seed) {
       trick: game.trick,
       log: game.log,
       seen: game.log.flatMap((entry) => entry.cards || []),
+      trib: game.trib || [],
     });
     const previousGame = runtime.game;
     const previousRandom = Math.random;
     runtime.game = view;
     Math.random = random;
     try {
-      return aiDecide(player);
+      return version === 'original' ? aiDecide(player) : chooseRuleAction(player);
     } finally {
       runtime.game = previousGame;
       Math.random = previousRandom;

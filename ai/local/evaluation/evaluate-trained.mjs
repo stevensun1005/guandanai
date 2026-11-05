@@ -9,11 +9,22 @@ import { selectProfileAction } from '../../../web/src/ai/profiles.js';
 import { endgameRequest, solvePublicEndgame } from '../../../web/src/ai/endgame.js';
 import { createRound, advanceRound } from '../../shared/simulation/simulation.mjs';
 import { createPolicyInference } from '../../shared/simulation/policy-inference.mjs';
-import { createRuleBaseline } from '../../shared/simulation/rule-baseline.mjs';
+import {
+  createRuleBaseline,
+  RULE_OPPONENT_VERSION,
+} from '../../shared/simulation/rule-baseline.mjs';
 
-export async function playEvaluationRound(seed, testedSide, infer, opponent, endgameCards = 0) {
+export async function playEvaluationRound(
+  seed,
+  testedSide,
+  infer,
+  opponent,
+  endgameCards = 0,
+  ruleVersion = 'original',
+) {
   const game = createRound(seed);
-  const rule = opponent === 'rule' ? createRuleBaseline(seed ^ 0x6a09e667) : null;
+  const rule =
+    opponent === 'rule' ? createRuleBaseline(seed ^ 0x6a09e667, { version: ruleVersion }) : null;
   const stats = { modelDecisions: 0, ruleDecisions: 0, endgameProofs: 0, candidateCount: 0 };
   for (let turns = 0; turns < 1000; turns++) {
     const player = game.turn;
@@ -93,6 +104,9 @@ async function main() {
   const seed = Number(option('seed', '20700104'));
   const endgameCards = Number(option('endgame-cards', '0'));
   const opponentType = option('opponent', 'rule');
+  const ruleVersion = option('rule-version', RULE_OPPONENT_VERSION);
+  if (!['original', RULE_OPPONENT_VERSION].includes(ruleVersion))
+    throw Error('Unknown rule opponent');
   const output = option('output', 'web/artifacts/validation/trained');
   if (!Number.isInteger(pairs) || pairs < 2 || pairs > 100000) throw Error('Invalid pair count');
   if (!Number.isInteger(seed) || seed < 0) throw Error('Invalid seed');
@@ -117,6 +131,9 @@ async function main() {
     'web/src/ai/candidates.js',
     'web/src/ai/observation.js',
     'web/src/ai/profiles.js',
+    'web/src/rule-bot/settings.js',
+    'web/src/rule-bot/arrangement.js',
+    'web/src/rule-bot/strategy.js',
     'ai/shared/simulation/simulation.mjs',
     'ai/shared/simulation/rule-baseline.mjs',
     'ai/local/evaluation/evaluate-trained.mjs',
@@ -156,6 +173,7 @@ async function main() {
           tested.infer,
           other?.infer || 'rule',
           endgameCards,
+          ruleVersion,
         );
         outcomes.push({
           testedSide: side,
@@ -188,6 +206,7 @@ async function main() {
       confidenceMethod:
         'Normal interval on per-deal paired means; each independent deal is one cluster.',
       opponent: opponentType,
+      ruleVersion: opponentType === 'rule' ? ruleVersion : null,
       seed,
       pairs,
       rounds: pairs * 2,

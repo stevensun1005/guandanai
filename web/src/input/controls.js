@@ -197,15 +197,21 @@ export function initialize() {
       setMsg('手里的牌组不成同花顺');
       return;
     }
-    const k = runtime.sfIdx % list.length,
+    if (runtime.sfIdx >= list.length) {
+      runtime.sfIdx = 0;
+      runtime.selection = new Set();
+      renderHand();
+      setMsg(`共 ${list.length} 种同花顺，已放下`);
+      Sound.play('select');
+      return;
+    }
+    const k = runtime.sfIdx,
       f = list[k];
     runtime.sfIdx++;
     runtime.selection = new Set(f.cards.map((c) => c.id));
     renderHand();
     Sound.play('select');
-    setMsg(
-      `同花顺 ${k + 1}/${list.length}：${displayOrder({ type: 'sflush', value: f.s, cards: f.cards }, runtime.game.L).map(cardText).join(' ')}`,
-    );
+    setMsg(`共 ${list.length} 种同花顺，抬起的是第 ${k + 1} 种`);
   };
   $('#rulesBtn').onclick = showRules;
   BACKS = [

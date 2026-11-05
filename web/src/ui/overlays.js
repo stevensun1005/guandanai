@@ -33,7 +33,10 @@ export function showResult() {
   const side = (t) => (t === 0 ? '我方' : '对方'),
     next = rankName(runtime.game.levels[runtime.game.lvlTeam]);
   let head, body;
-  if (r.draw) {
+  if (r.draw && r.lastTry) {
+    head = '冲 A 没有成功，本场平局';
+    body = `<p>${side(r.aOut)}三次打 A 都没打过，${side(r.aTeam)}轮到打 A 只有一次机会，也没打过。</p><p class="muted">共打了 ${runtime.game.round} 局。</p>`;
+  } else if (r.draw) {
     head = '三次打 A 未过，本场平局';
     body = `<p>${side(r.aTeam)}打 A 三次都没有打过。</p><p class="muted">共打了 ${runtime.game.round} 局。</p>`;
   } else if (r.win) {
@@ -48,8 +51,13 @@ export function showResult() {
       : `对方升级：${rankName(r.before)} → ${rankName(r.after)}`;
     body = `<p>${upText}。下一局打 <b>${next}</b>，${dblText(r)}</p>`;
     if (r.before === 14 && r.after === 14)
-      body = `<p>${side(r.team)}在 A 级，但队友是末游，没能打过 A。下一局继续打 A，${dblText(r)}</p>`;
-    if (r.reset) body += `<p>${side(r.aTeam)}三次没打过 A，从 2 重新打。</p>`;
+      body =
+        r.aOut === r.team
+          ? `<p>${side(r.team)}已用尽打 A 机会，本局名次不再触发整场获胜。下一局继续打 A，${dblText(r)}</p>`
+          : `<p>${side(r.team)}在 A 级，但队友是末游，没能打过 A。下一局继续打 A，${dblText(r)}</p>`;
+    if (r.spent)
+      body += `<p>${side(r.aTeam)}三次打 A 都没打过。${side(1 - r.aTeam)}轮到打 A 时只有一次机会：打过赢下整场，没打过算双方平局。</p>`;
+    else if (r.reset) body += `<p>${side(r.aTeam)}三次没打过 A，从 2 重新打。</p>`;
     else if (r.aTry)
       body += `<p>${side(r.aTeam)}打 A 第 ${r.aTry} 次没过，还剩 ${3 - r.aTry} 次机会。</p>`;
   }

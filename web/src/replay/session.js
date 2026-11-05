@@ -722,7 +722,9 @@ export function practiceRoundEnd() {
     r.order.map((p, i) => PLACE[i] + ' ' + runtime.names[p]).join('，') +
     '；' +
     (r.draw
-      ? '三次打 A 未过，平局'
+      ? r.lastTry
+        ? '冲 A 没有成功，平局'
+        : '三次打 A 未过，平局'
       : r.win
         ? `${side(r.team)}打过 A，赢下整场`
         : r.before === r.after

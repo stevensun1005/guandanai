@@ -1307,3 +1307,33 @@ html.phone .tribpop {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
+
+/* the side players: the alarm clock stands above the name plate, and under it the status tag (准备出牌, 已出牌 ...) with the
+   card count below that, so the plate stays narrow and the table's cards have the room. The clock is centred over the plate
+   (wider than it); the 洗牌/切牌 tag moves up over the clock when there is one. Not on a phone, nor in the test version */
+html:not(.phone) body:not(.practice) #seat3 .whorow > .clock,
+html:not(.phone) body:not(.practice) #seat1 .whorow > .clock {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  top: auto;
+  left: 50%;
+  translate: -50% 0;
+  margin: 0;
+}
+html:not(.phone) body:not(.practice) #seat3 .stat,
+html:not(.phone) body:not(.practice) #seat1 .stat {
+  top: calc(100% + 6px);
+  bottom: auto;
+}
+html:not(.phone) body:not(.practice) #seat3 .cnt,
+html:not(.phone) body:not(.practice) #seat1 .cnt {
+  top: calc(100% + 36px);
+}
+html:not(.phone) body:not(.practice) #seat3 .actlbl,
+html:not(.phone) body:not(.practice) #seat1 .actlbl {
+  bottom: calc(100% + 10px);
+}
+html:not(.phone) body:not(.practice) #seat3 .whorow:has(> .clock:not(:empty)) .actlbl,
+html:not(.phone) body:not(.practice) #seat1 .whorow:has(> .clock:not(:empty)) .actlbl {
+  bottom: calc(100% + 64px);
+}

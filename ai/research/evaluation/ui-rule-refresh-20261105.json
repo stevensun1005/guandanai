@@ -1,0 +1,217 @@
+{
+  "date": "2026-11-05",
+  "baseCommit": "ad8d3d329ef5dc6a2e1b887ad59b67e28e799bd1",
+  "kind": "compatibility-and-isolation-not-strength-evaluation",
+  "ruleVersion": "rules-v2",
+  "legacyAudit": {
+    "seeds": [
+      9100000,
+      9100031
+    ],
+    "purpose": "development-compatibility-only",
+    "completedRounds": 32,
+    "identicalDecisions": 2813,
+    "method": "Load original adapter from baseCommit; compare original versus explicit original version on every action until each round ends; physical IDs, shape, value, and size must agree."
+  },
+  "legacyMatchOutcomeCases": 702,
+  "unchangedNeuralSources": {
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/controller.js": "35637c1c2c094af6ca0c57ed7b921230d4027adcdbe4e2180c4f43ce0c12e408",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+    "web/src/ai/model-catalog.json": "5380808ebf1ab25ad6546dd40ba6f0fb31d6b597b1f4740b560410a061ee6c23",
+    "web/src/ai/model-catalog.mjs": "aa652a15c8dd9bcc669776fd87c2179b0d1dadbe822ee37c5b62149c5108b339",
+    "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+    "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+    "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/worker.mjs": "b98a7af7cb6385547243775ae50282d8f4a9a125c9a954095e84278981e09761"
+  },
+  "ruleSources": {
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/settings.js": "7a7f5791b7f6554b5d9f9ffc149b775534fe0a3072e27462eb2a8b799f5cb838",
+    "web/src/rule-bot/strategy.js": "3eaa8deece2ac55e6608335c5aff48943fd766ebf8116e5150f510f8d25b36eb"
+  },
+  "defaultModel": "007",
+  "newWinRateEvidence": null,
+  "validation": {
+    "node": {
+      "passed": 130,
+      "failed": 0
+    },
+    "python": {
+      "localPassed": 29,
+      "localSkipped": 1,
+      "guanzeroPassed": 8,
+      "researchPassed": 9
+    },
+    "formatCheck": "passed",
+    "build": {
+      "passed": true,
+      "version": "7b809c589a"
+    },
+    "ui": {
+      "checks": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "levelChoices": 13,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "levelChoices": 13,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "levelChoices": 13,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": false
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "levelChoices": 13,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": false
+        }
+      ],
+      "errors": []
+    },
+    "rejoin": {
+      "hostDirection": "W",
+      "guestDirection": "S",
+      "refreshDuringPrep": true,
+      "manualRoomCodeRecovery": true,
+      "selectedLevelAndOnceRuleSync": true,
+      "refreshDuringInFlightPolicy": true,
+      "stalePolicyCancelled": true,
+      "realGuestActionAfterReturn": true,
+      "dataChannelAutomaticRecovery": true,
+      "unknownSeatRejected": true,
+      "sameCredential": true,
+      "guestAvoidsModelDownload": true,
+      "hostExitOffersSoloContinuation": true,
+      "soloContinuationLoadsLearnedPolicy": true,
+      "pageErrors": []
+    },
+    "practiceLayout": {
+      "checks": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "touch": false,
+          "learnedTurns": 6,
+          "sameActionSlot": true,
+          "readableScrollablePlays": true,
+          "finishedPlayerControls": true,
+          "compactNotesAndResults": true
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "touch": false,
+          "learnedTurns": 6,
+          "sameActionSlot": true,
+          "readableScrollablePlays": true,
+          "finishedPlayerControls": true,
+          "compactNotesAndResults": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "touch": true,
+          "learnedTurns": 6,
+          "sameActionSlot": true,
+          "readableScrollablePlays": true,
+          "finishedPlayerControls": true,
+          "compactNotesAndResults": true
+        }
+      ],
+      "pageErrors": [],
+      "fixtureScope": "Overflow, finished-player and result geometry use synthetic display states; six opening turns per viewport use the real learned policy."
+    },
+    "practiceUndo": {
+      "realOpeningActions": 6,
+      "remainingLogAfterOneUndo": 5,
+      "annotatedExportAndImport": true,
+      "pageErrors": []
+    },
+    "production": {
+      "successfulModelIds": [
+        "001",
+        "007"
+      ],
+      "productionGlobalsHidden": true,
+      "pageErrors": [],
+      "lastLocalProductionVersion": "66195bc598",
+      "subsequentChange": "level-picker focus restoration only; neural files unchanged"
+    }
+  },
+  "protocolBoundary": {
+    "newRuleEntry": "createRuleOpponent(seed)",
+    "reproducibleBaselineDefault": "original",
+    "matchRolloutDefault": "original",
+    "singleRoundCLIDefault": "rules-v2",
+    "singleRoundCLIOverride": "--rule-version=original",
+    "frozenTrainingModified": false,
+    "newStrengthMatchesCompleted": 0,
+    "oldBenchmarkNotReinterpreted": true
+  },
+  "uiSourceSHA256": {
+    "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+    "web/src/effects/celebrations.js": "c924e75270014ecd3fb38a26339b7697ab21712f74983fff1f2e6be9be8d3e42",
+    "web/src/game/round.js": "2a334df8adad5b4c088ed4fdb0d3b589fe6ad98911ed8a516a9ce8bb35baf21b",
+    "web/src/game/session.js": "4978564562e6d0a3f807c8806aba22441dd7da89296c8d64f09daf093d385560",
+    "web/src/hand/follow-hints.js": "574fc03fdb1a859573f077828d8eb3fcf3963ac64da895b59402d14e0fb14a3c",
+    "web/src/index.html": "c8703de32f7a21828c42f4145ece1bfef42011864d6479cc1209fe661a6b0c9c",
+    "web/src/input/controls.js": "a5cf5d1671f11686498555c68840f444c204dd596fc994dfae454e8833a35d5f",
+    "web/src/lobby/level.js": "ccc2d2c8ecd8c782795c5aeda00ec3dc4d08ed06a17af90960c0140a3f45384f",
+    "web/src/lobby/lobby.js": "5ac0fc8fd4492ed4478d681c3e525c75e743a5722daf722c12685663eebd5c31",
+    "web/src/network/rooms.js": "4e6909399bf80693917cee08fd334bf342b2e58886ee9dec85ed6a6e4bd74b75",
+    "web/src/network/snapshot.js": "9612f8c5c44c9f53821a3c5df9427785bcb79018b5c6775d21cdfb4460941b4e",
+    "web/src/replay/session.js": "3ff91827c6b0d3849a909b2d2e62877c2a9199fb9f4d567a99b4c8d6759f947c",
+    "web/src/styles/effects.css": "743f605faa76d9bd12442039515e2fe241a07df14680c307271517f0b5dd27a9",
+    "web/src/styles/lobby.css": "3bbaaf94ad2e930f87beaa1d79a75b84aa98b62b8de29e2e214448b3811eb747",
+    "web/src/styles/table.css": "8a7a9c97733536710aebe5967e6d60366862268d50e20ee2af36c5915ad17e1a",
+    "web/src/ui/overlays.js": "a550fbf951e2969954bcc2d030ad92987f808b0bff2b8654be7acc85a1980a21",
+    "web/src/ui/rules-dialog.js": "21337cc2bb848a917173045245651af9b324d7d04d7c956597e7dff8a77d2c76",
+    "web/src/ui/table.js": "aae2a0be5141239134a9e4a18cb2dfd77c5b5cc2683edb46368731f64a849952"
+  }
+}

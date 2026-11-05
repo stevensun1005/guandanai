@@ -1,6 +1,7 @@
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { TYPE_NAME, cardText, rankName } from '../core/cards.js';
+import { levelAttemptLabel } from '../core/match.js';
 import { returnInstruction } from '../core/tribute.js';
 import { analyze, beats } from '../core/combinations.js';
 import { showCount } from '../effects/dealing.js';
@@ -41,12 +42,10 @@ export function render() {
     el.classList.toggle('t-red', isRedSeat(p));
     el.classList.toggle('t-blue', !isRedSeat(p));
   }
-  $('#lv0').textContent = rankName(runtime.game.levels[0]);
-  $('#lv1').textContent = rankName(runtime.game.levels[1]);
   for (const t of [0, 1]) {
-    const n = (runtime.game.aFails || [0, 0])[t];
-    $('#lvx' + t).textContent =
-      runtime.game.levels[t] === 14 && n && runtime.rules.aFail !== 'keep' ? `余${3 - n}次` : '';
+    $('#lv' + t).textContent =
+      levelAttemptLabel(runtime.game, t) || rankName(runtime.game.levels[t]);
+    $('#lvx' + t).textContent = '';
   }
   for (const t of [0, 1]) {
     const el = $('#team' + t);

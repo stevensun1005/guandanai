@@ -12,7 +12,7 @@ import { normalizeBotPreferences, prepareBotModels } from '../lobby/bot-setup.js
 import { botModelId } from '../ai/model-catalog.mjs';
 import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady, versionsMatch } from './protocol.js';
 import { VC } from './voice.js';
-import { forgetSeat } from './rejoin-storage.js';
+import { forgetSeat, savedSeat } from './rejoin-storage.js';
 import {
   connectionFailed,
   confirmReservations,
@@ -309,6 +309,7 @@ export function enterOnline(mode, hostDir, names) {
 export function joinRoom(code) {
   if (!peerReady()) return;
   leaveNet();
+  runtime.network.lastCode = code;
   lobbyStatus('正在连接…');
   const peer = new Peer();
   runtime.network.peer = peer;
@@ -319,7 +320,7 @@ export function joinRoom(code) {
     runtime.network.hostConn = conn;
     conn.on('open', () => {
       runtime.network.hostSeen = Date.now();
-      lobbyStatus('选一个空座位');
+      lobbyStatus(savedSeat(code) ? '正在恢复原座位…' : '选一个空座位');
       $('#roomCodeShow').textContent = code;
       $('#roomInfo').hidden = false;
       renderLobby();

@@ -16,6 +16,7 @@ import { render } from '../ui/table.js';
 import { loadBotPreferences, prepareBotModels, renderBotSetup } from './bot-setup.js';
 import { forgetSeat } from '../network/rejoin-storage.js';
 import { VERSION, versionsMatch } from '../network/protocol.js';
+import { renderLevelPicker, initialize as initializeLevelPicker } from './level.js';
 
 export let DIRS;
 export let absOf;
@@ -43,9 +44,12 @@ export function showStart() {
 
 // your own choice of rules (a room you join shows the host's instead)
 function loadRules() {
-  Object.assign(runtime.rules, { trib: true, aFail: 'draw' });
+  Object.assign(runtime.rules, { trib: true, aFail: 'draw', startLevel: 2, startSide: '' });
   try {
-    Object.assign(runtime.rules, JSON.parse(localStorage.getItem('guandan-rules') || '{}'));
+    const saved = JSON.parse(localStorage.getItem('guandan-rules') || '{}');
+    if (typeof saved.trib === 'boolean') runtime.rules.trib = saved.trib;
+    if (['draw', 'reset', 'once', 'keep'].includes(saved.aFail))
+      runtime.rules.aFail = saved.aFail === 'keep' ? 'once' : saved.aFail;
   } catch (_) {}
 }
 
@@ -60,6 +64,7 @@ function renderRules() {
     b.disabled = !mine;
   }
   $('#rulesNote').textContent = mine ? '' : '规则由房主选定';
+  renderLevelPicker();
 }
 
 export function setMode(m) {
@@ -125,6 +130,7 @@ export function renderLobby() {
 }
 
 export function initialize() {
+  initializeLevelPicker();
   /* ---------- the lobby: a nickname, then play alone or with friends ---------- */
   // Solo: pick a seat and the computer takes the other three. Online: one player opens a room and gets a
   // four-digit number, friends type it in to join, everyone picks a seat, and the host starts; empty seats
@@ -154,14 +160,17 @@ export function initialize() {
   addEventListener('resize', syncNickMax);
   // (typing Chinese, the length can only be checked once the characters are in)
   $('#nick').addEventListener('compositionend', syncNickMax);
-  ruleBtns = [...document.querySelectorAll('.rule-btn')];
+  ruleBtns = [...document.querySelectorAll('.rule-btn[data-rule]')];
   ruleBtns.forEach((b) =>
     b.addEventListener('click', () => {
       if (runtime.lobbyMode === 'join') return;
       if (b.dataset.rule === 'trib') runtime.rules.trib = b.dataset.val === '1';
       else runtime.rules.aFail = b.dataset.val;
       try {
-        localStorage.setItem('guandan-rules', JSON.stringify(runtime.rules));
+        localStorage.setItem(
+          'guandan-rules',
+          JSON.stringify({ trib: runtime.rules.trib, aFail: runtime.rules.aFail }),
+        );
       } catch (_) {}
       Sound.unlock();
       Sound.play('select');
@@ -172,7 +181,6 @@ export function initialize() {
   document.querySelectorAll('.mode-btn').forEach((b) =>
     b.addEventListener('click', () => {
       if (runtime.lobbyMode !== b.dataset.mode) {
-        forgetSeat();
         setMode(b.dataset.mode);
       }
     }),

@@ -312,7 +312,7 @@
             <span class="rule-k">三次打A不过</span
             ><button class="rule-btn" data-rule="aFail" data-val="draw">平局</button
             ><button class="rule-btn" data-rule="aFail" data-val="reset">从2打</button
-            ><button class="rule-btn" data-rule="aFail" data-val="keep">一直打</button>
+            ><button class="rule-btn" data-rule="aFail" data-val="once">一次机会</button>
           </div>
           <div class="rule-note" id="rulesNote"></div>
         </div>
@@ -339,7 +339,24 @@
           <button class="seat-btn t-blue" data-seat="W" style="grid-area: w">
             <b>西</b><span>空位</span>
           </button>
-          <div class="lobby-felt" style="grid-area: c" aria-hidden="true">掼</div>
+          <div class="lobby-felt" style="grid-area: c">
+            <button
+              class="level-btn"
+              id="levelBtn"
+              type="button"
+              aria-controls="levelPick"
+              aria-expanded="false"
+            >
+              选级
+            </button>
+          </div>
+          <div
+            class="level-pick"
+            id="levelPick"
+            role="group"
+            aria-label="开局级数与方位"
+            hidden
+          ></div>
           <button class="seat-btn t-blue" data-seat="E" style="grid-area: e">
             <b>东</b><span>空位</span>
           </button>

@@ -31,12 +31,21 @@ with sync_playwright() as p:
     host.wait_for_function('() => (NET.peerOpen)', timeout=30000)
     code = host.locator("#roomCodeShow").inner_text()
     host.locator("[data-seat=W]").click()
+    host.locator('#levelBtn').click()
+    host.locator('[data-lv="12"]').click()
+    host.locator('[data-side=EW]').click()
+    host.locator('[data-done]').click()
+    host.locator('[data-rule=aFail][data-val=once]').click()
     guest.goto(URL + "&room=" + code, wait_until="networkidle")
     guest.locator("#nick").fill("朋友")
     guest.locator("#joinBtn").click()
     guest.wait_for_function('() => (NET.hostConn?.open)', timeout=30000)
     guest.locator("[data-seat=S]").click()
     host.wait_for_function("() => (NET.lobby.S==='朋友')")
+    guest.wait_for_function("() => RULES.startLevel===12&&RULES.startSide==='EW'&&RULES.aFail==='once'")
+    guest.locator('#levelBtn').click()
+    assert guest.locator('[data-lv="12"]').is_disabled()
+    guest.locator('[data-done]').click()
     guest.wait_for_function("() => (sessionStorage.getItem('guandan-rejoin-seat')!==null)")
     credential = guest.evaluate("JSON.parse(sessionStorage.getItem('guandan-rejoin-seat'))")
     host.locator("#sitBtn").click()
@@ -53,6 +62,17 @@ with sync_playwright() as p:
     guest.wait_for_function("() => (NET.mode==='guest'&&G.phase==='prep'&&!NET.gone)", timeout=30000)
     host.wait_for_function('() => (NET.humans.size===2)', timeout=10000)
     assert guest.evaluate("NET.off") == 1
+    assert host.evaluate(SNAP) == guest.evaluate(SNAP)
+    assert host.evaluate('G.L') == 12
+    assert guest.evaluate('G.levels') == [2,12]
+    # Return to the lobby without an intentional seat release, then type the room code again.
+    guest.evaluate('showStart()')
+    guest.locator('[data-mode=join]').click()
+    guest.locator('#nick').fill('朋友')
+    guest.locator('#roomCode').fill(code)
+    guest.locator('#joinBtn').click()
+    guest.wait_for_function("() => NET.mode==='guest'&&G.phase==='prep'&&!NET.gone", timeout=30000)
+    host.wait_for_function('() => NET.humans.size===2', timeout=10000)
     assert host.evaluate(SNAP) == guest.evaluate(SNAP)
     assert (
         guest.evaluate("JSON.parse(sessionStorage.getItem('guandan-rejoin-seat')).token")
@@ -122,7 +142,7 @@ with sync_playwright() as p:
         guest.wait_for_timeout(100)
     assert guest.evaluate("TableBot.ready")
     assert guest.evaluate("before=>G.log.length>before", solo_before)
-    assert any("policy.onnx" in url for url in guest_models)
+    assert any(url.split('?')[0].endswith('.onnx') for url in guest_models)
 
     assert not errors, errors
     guest.screenshot(path=str(OUT / "recovered-guest.png"))
@@ -130,6 +150,8 @@ with sync_playwright() as p:
         "hostDirection": "W",
         "guestDirection": "S",
         "refreshDuringPrep": True,
+        "manualRoomCodeRecovery": True,
+        "selectedLevelAndOnceRuleSync": True,
         "refreshDuringInFlightPolicy": True,
         "stalePolicyCancelled": True,
         "realGuestActionAfterReturn": True,

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { roundOutcome } from '../src/core/match.js';
+import { roundOutcome, initialMatchLevels, levelAttemptLabel } from '../src/core/match.js';
 import {
   createMatchRound,
   applyMatchTribute,
@@ -27,6 +27,48 @@ test('playing A needs a qualifying partner finish and preserves the configured t
   assert(reset.result.reset);
   assert.equal(reset.levels[0], 2);
   assert.equal(roundOutcome({ ...atA, lvlTeam: 1, L: 11 }, [0, 2, 1, 3]).result.win, false);
+});
+
+test('once mode spends three A attempts then gives the other team one final attempt', () => {
+  const atA = { levels: [14, 12], lvlTeam: 0, L: 14, aFails: [0, 0] };
+  let state = atA;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    assert.equal(levelAttemptLabel(state, 0), `A${attempt}`);
+    state = { ...state, ...roundOutcome(state, [0, 1, 3, 2], 'once') };
+    assert.equal(state.result.draw, false);
+    assert.equal(state.result.spent, attempt === 3);
+  }
+  assert.equal(state.aOut, 0);
+  assert.equal(roundOutcome(state, [0, 2, 1, 3], 'once').result.win, false);
+  state = { ...state, ...roundOutcome(state, [1, 3, 0, 2], 'once') };
+  assert.equal(state.result.draw, false);
+  state.L = 14;
+  assert.equal(levelAttemptLabel(state, 1), 'A末');
+  const finalFailure = roundOutcome(state, [1, 0, 2, 3], 'once');
+  assert.equal(finalFailure.result.lastTry, true);
+  assert.equal(finalFailure.result.draw, true);
+  assert.equal(roundOutcome(state, [1, 0, 3, 2], 'once').result.win, true);
+  assert.equal(roundOutcome(atA, [0, 2, 1, 3], 'once').result.win, true);
+  assert.equal(levelAttemptLabel(atA, 1), null);
+});
+
+test('starting levels follow absolute compass teams for every host seat and reject invalid levels', () => {
+  for (const [own, direction] of ['S', 'E', 'N', 'W'].entries()) {
+    for (const [side, absolute] of [
+      ['SN', 0],
+      ['EW', 1],
+    ]) {
+      const initial = initialMatchLevels({ startLevel: 12, startSide: side }, direction);
+      const team = (absolute - own + 4) % 2;
+      assert.equal(initial.lvlTeam, team);
+      assert.equal(initial.levels[team], 12);
+      assert.equal(initial.levels[1 - team], 2);
+      assert.equal(initial.L, 12);
+    }
+  }
+  assert.deepEqual(initialMatchLevels({}, 'E', 1), { levels: [2, 2], lvlTeam: 1, L: 2 });
+  for (const startLevel of [1, 15, NaN, 2.5, 'Q'])
+    assert.equal(initialMatchLevels({ startLevel }).L, 2);
 });
 
 test('single and double tribute preserve all physical cards and reset cached round state', () => {

@@ -2,7 +2,7 @@ import { roundOutcome } from '../core/match.js';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { isBomb } from '../core/combinations.js';
-import { celebrate, jieFeng, victory } from '../effects/celebrations.js';
+import { celebrate, jieFeng, victory, tieGame } from '../effects/celebrations.js';
 import { active, later, nextActive, startTurn } from './turns.js';
 import { miniMode } from '../input/actions.js';
 import { handEl } from '../input/pointer.js';
@@ -137,6 +137,7 @@ function finishRound() {
   runtime.game.levels = outcome.levels;
   runtime.game.aFails = outcome.aFails;
   runtime.game.result = outcome.result;
+  if (Object.hasOwn(outcome, 'aOut')) runtime.game.aOut = outcome.aOut;
   const { team, win, draw } = outcome.result;
   if (runtime.reviewMode) practiceRoundEnd();
   runtime.game.prevOut = runtime.game.out.slice();
@@ -172,10 +173,8 @@ function finishRound() {
   later(
     () => {
       if (win) victory(team, showResult);
-      else if (draw) {
-        Sound.play('ding');
-        showResult();
-      } else {
+      else if (draw) tieGame(showResult);
+      else {
         Sound.play(team === 0 ? 'win' : 'lose');
         showResult();
       }

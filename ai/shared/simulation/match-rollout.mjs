@@ -16,6 +16,7 @@ export async function playMatch({
   initialDealSeed = null,
   trainingCritic = false,
   tablePolicy = null,
+  ruleVersion = 'original',
 }) {
   if (!['rule', 'self', 'snapshot'].includes(mode) || ![0, 1].includes(team))
     throw Error('Invalid match lineup');
@@ -40,7 +41,7 @@ export async function playMatch({
         ? initialDealSeed >>> 0
         : (Math.imul(seed, 1009) + r) >>> 0;
     const game = createMatchRound(roundSeed, match),
-      rule = createRuleBaseline(roundSeed ^ 0x6a09e667);
+      rule = createRuleBaseline(roundSeed ^ 0x6a09e667, { version: ruleVersion });
     if (tablePolicy) {
       game.roundHistory = publicHistory;
       Object.assign(game, {

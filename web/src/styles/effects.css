@@ -375,3 +375,102 @@
     transition: none !important;
   }
 }
+
+/* the match is drawn: eight seconds - the red side glows from the left, the blue side from the right, and a banner half red
+   and half blue sways like a balance over a handshake */
+.fx-tie {
+  position: fixed;
+  inset: 0;
+  z-index: 88;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 12% 55%,
+      color-mix(in srgb, var(--red-team) 45%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 88% 55%,
+      color-mix(in srgb, var(--blue-team) 45%, transparent),
+      transparent 55%
+    ),
+    rgba(8, 22, 17, 0.55);
+  animation: tieFade 8s ease-in-out forwards;
+}
+@keyframes tieFade {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.fx-champ.tie {
+  animation: tieIn 8s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+}
+.fx-champ.tie b {
+  color: #fff;
+  background: linear-gradient(90deg, var(--red-team) 0 50%, var(--blue-team) 50% 100%);
+  padding: 10px 34px 10px 50px;
+  box-shadow:
+    0 0 0 3px var(--felt-deep),
+    0 0 0 6px #e9eef2,
+    0 0 50px rgba(255, 255, 255, 0.35);
+  animation: none;
+}
+.fx-champ.tie .hs {
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 1;
+  animation: tieHs 1.2s ease-in-out infinite;
+}
+.fx-champ.tie small {
+  color: #eef3f6;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+@keyframes tieHs {
+  50% {
+    transform: scale(1.18);
+  }
+}
+@keyframes tieIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(-8deg);
+  }
+  7% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1) rotate(3deg);
+  }
+  12% {
+    transform: translate(-50%, -50%) scale(1) rotate(-3deg);
+  }
+  22% {
+    transform: translate(-50%, -50%) rotate(3deg);
+  }
+  34% {
+    transform: translate(-50%, -50%) rotate(-2deg);
+  }
+  46% {
+    transform: translate(-50%, -50%) rotate(2deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) rotate(-1deg);
+  }
+  74% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  94% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}

@@ -8,6 +8,7 @@ test('all four rejoin views rotate seats and teams while preserving physical car
   const source = {
     levels: [5, 9],
     aFails: [1, 2],
+    aOut: 0,
     lvlTeam: 1,
     hands: [deck.slice(0, 27), deck.slice(27, 54), deck.slice(54, 81), deck.slice(81)],
     last: ['pass', null, { play: { cards: [deck[3]] } }, null],
@@ -35,7 +36,7 @@ test('all four rejoin views rotate seats and teams while preserving physical car
     rest: [{ p: 0, cards: [deck[0]] }],
     kang: { has: [{ g: 3, n: 2 }], leader: 2 },
     clock: { who: 'return', seats: [2], left: 12345 },
-    result: { team: 1, aTeam: 0, order: [2, 3, 1, 0], before: 8, after: 9 },
+    result: { team: 1, aTeam: 0, aOut: 0, order: [2, 3, 1, 0], before: 8, after: 9 },
   };
   const original = structuredClone(source);
   for (let offset = 0; offset < 4; offset++) {
@@ -45,6 +46,8 @@ test('all four rejoin views rotate seats and teams while preserving physical car
     assert.equal(rotated.trib[0].r, (2 - offset + 4) % 4);
     assert.equal(rotated.nextLeader, -1);
     assert.equal(rotated.pausedBy, null);
+    assert.equal(rotated.aOut, offset % 2);
+    assert.equal(rotated.result.aOut, offset % 2);
     assert.deepEqual(rotateSnapshot(rotated, (4 - offset) % 4), original);
   }
   assert.deepEqual(source, original);

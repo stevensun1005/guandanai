@@ -13,3 +13,5 @@
 | [tests](tests)                                     | 报告的统计与证据校验                           |
 
 历史评测 JSON 保持原始内容；其中记录的旧源码路径属于实验当时的指纹，不能因文件移动而改写为新的实验。
+
+近期成果：[v000481076 独立整场评测](evaluation/independent-v481076-rule-20261105/results.json) · [rules-v2 隔离与界面兼容性证据](evaluation/ui-rule-refresh-20261105.json)。后者不包含新版对手的胜率验收。

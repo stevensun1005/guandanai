@@ -3,6 +3,7 @@ import { BASE_NAMES, makeDeck, shuffle } from '../core/cards.js';
 import { TableBot } from '../ai/controller.js';
 import { act } from './events.js';
 import { render } from '../ui/table.js';
+import { initialMatchLevels } from '../core/match.js';
 
 export let isHost;
 export let isHumanSeat;
@@ -36,6 +37,8 @@ export function resetGame() {
     aFails: [0, 0],
     nextReady: [],
     roundHistory: [],
+    aOut: null,
+    ...initialMatchLevels(runtime.rules, runtime.direction, runtime.network.off % 2),
   };
 }
 
@@ -78,7 +81,7 @@ export function initialize() {
     mics: {},
   };
   isHost = () => runtime.network.mode !== 'guest';
-  runtime.rules = { trib: true, aFail: 'draw' };
+  runtime.rules = { trib: true, aFail: 'draw', startLevel: 2, startSide: '' };
   isHumanSeat = (p) => runtime.network.humans.has(p);
   toAbs = (p) => (p + runtime.network.off) % 4;
   toLocal = (a) => (a - runtime.network.off + 4) % 4;

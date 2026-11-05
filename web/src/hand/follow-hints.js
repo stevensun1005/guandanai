@@ -52,7 +52,7 @@ export function sortHints(plays) {
   for (const gr of runtime.game.fixed) {
     const cards = gr.map((id) => hand.find((c) => c.id === id));
     const r = analyze(cards, L)
-      .filter((a) => beats(a, cur) && (!isBomb(a) || (cur && isBomb(cur))))
+      .filter((a) => beats(a, cur) && (!isBomb(a) || cur))
       .sort((a, b) => strength(a) - strength(b))[0];
     if (r) own.push({ ...r, cards, wu: cards.filter((c) => isWild(c, L)).length });
   }

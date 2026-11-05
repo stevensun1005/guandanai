@@ -11,6 +11,7 @@
 | UI、动画、音效、样式          | [src/ui](src/ui)、[src/effects](src/effects)、[src/audio](src/audio)、[src/styles](src/styles) |
 | 房间、重连、语音              | [src/network](src/network)、[src/lobby](src/lobby)                                             |
 | 模型选择、Worker 与浏览器推理 | [src/ai](src/ai)                                                                               |
+| 独立纯规则对手及版本边界      | [src/rule-bot](src/rule-bot/README.md)                                                         |
 | 当前上线模型与默认值          | [src/ai/model-catalog.json](src/ai/model-catalog.json)                                         |
 | 构建、预览、打包              | [tools](tools)                                                                                 |
 | 网页测试                      | [tests](tests)                                                                                 |

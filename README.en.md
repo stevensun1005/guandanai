@@ -37,6 +37,8 @@ The in-game scorecard keeps earlier rounds, finishing orders and public action t
 
 Empty seats are filled by bots. Play alone or with up to three friends. Keep the host's page open: the host runs the table and computes bot turns.
 
+Use the center of the lobby table to choose a starting level and compass team. The new final-chance option gives the other team one A attempt after a team has exhausted three; the table shows A1/A2/A3 or A末. Straight-flush selection now counts combinations and clears the selection after a full cycle.
+
 ## What is included
 
 | Feature             | In the game                                                                                   |

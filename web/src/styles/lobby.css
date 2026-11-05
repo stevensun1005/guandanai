@@ -465,3 +465,97 @@
     font-size: 12px;
   }
 }
+
+/* 选级: the button in the middle of the lobby table, and the picker laid over the table */
+.lobby-table {
+  position: relative;
+}
+.lobby-felt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+.level-btn {
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  white-space: nowrap;
+}
+.level-btn.on {
+  background: var(--gold);
+  color: var(--on-gold);
+}
+.level-pick {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 8px;
+  border-radius: 14px;
+  background: var(--felt);
+  border: 2px solid var(--gold);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+}
+.level-pick[hidden] {
+  display: none;
+}
+.level-pick h3 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--gold);
+  text-align: center;
+}
+.level-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.level-k {
+  font-size: 16px;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.level-pick .rule-btn {
+  min-width: 34px;
+  padding: 4px 5px;
+  font-size: 16px;
+}
+.level-pick .lv-red {
+  border-color: #c8514b;
+}
+.level-pick .lv-blue {
+  border-color: #4f86c6;
+}
+.level-pick .rule-btn.on.lv-red {
+  background: #c8514b;
+  border-color: #c8514b;
+  color: #fff;
+}
+.level-pick .rule-btn.on.lv-blue {
+  background: #4f86c6;
+  border-color: #4f86c6;
+  color: #fff;
+}
+
+.lobby-felt:has(.level-btn) {
+  opacity: 1;
+}
+.level-btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}

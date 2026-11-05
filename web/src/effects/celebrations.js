@@ -532,3 +532,83 @@ export function initialize() {
   // A tap anywhere skips to the result; done (showing the result) runs once either way, unless the game has moved on
   VICTORY_MS = 12000;
 }
+
+const TIE_MS = 8000;
+export function tieGame(done) {
+  if (runtime.reviewMode) {
+    Sound.play('ding');
+    done();
+    return;
+  }
+  const m = $('#table').getBoundingClientRect(),
+    tok = runtime.game.tok;
+  const bg = document.createElement('div');
+  bg.className = 'fx-tie';
+  document.body.appendChild(bg);
+  const b = document.createElement('div');
+  b.className = 'fx fx-champ tie';
+  b.innerHTML =
+    '<b>平局</b><span class="hs">🤝</span><small>双方握手言和</small><i>点任意处看结果</i>';
+  b.style.left = m.left + m.width / 2 + 'px';
+  b.style.top = m.top + m.height * 0.42 + 'px';
+  document.body.appendChild(b);
+  let over = false;
+  const at = (ms, fn) =>
+    setTimeout(() => {
+      if (!over) fn();
+    }, ms);
+  Sound.play('ding');
+  at(1800, () => Sound.play('ding'));
+  at(4200, () => Sound.play('fanfare'));
+  const css = getComputedStyle(document.documentElement),
+    red = css.getPropertyValue('--red-team').trim() || '#d64545',
+    blue = css.getPropertyValue('--blue-team').trim() || '#3a78d8';
+  particles(
+    (ps, age) => {
+      if (age > TIE_MS - 2500) return;
+      for (const side of [-1, 1]) {
+        for (let i = 0; i < 2; i++)
+          ps.push({
+            x: side < 0 ? -10 : innerWidth + 10,
+            y: innerHeight * (0.55 + Math.random() * 0.3),
+            vx: (-side * (5 + Math.random() * 6) * innerWidth) / 900,
+            vy: -(7 + Math.random() * 7),
+            r: Math.random() * 6,
+            vr: (Math.random() - 0.5) * 0.4,
+            w: 6 + Math.random() * 6,
+            h: 4 + Math.random() * 5,
+            c: side < 0 ? red : blue,
+            life: 1,
+          });
+      }
+    },
+    (cx, p) => {
+      p.vy += 0.22;
+      p.vx *= 0.995;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.r += p.vr;
+      p.life -= 0.004;
+      cx.save();
+      cx.globalAlpha = Math.max(0, p.life);
+      cx.translate(p.x, p.y);
+      cx.rotate(p.r);
+      cx.fillStyle = p.c;
+      cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2)));
+      cx.restore();
+      return p.life > 0 && p.y < innerHeight + 20;
+    },
+    TIE_MS - 1500,
+  );
+  const end = () => {
+    if (over) return;
+    over = true;
+    runtime.fxCut = performance.now();
+    bg.remove();
+    b.remove();
+    removeEventListener('pointerdown', end, true);
+    if (runtime.game.tok === tok) done();
+  };
+  at(800, () => addEventListener('pointerdown', end, true));
+  setTimeout(end, TIE_MS);
+}
