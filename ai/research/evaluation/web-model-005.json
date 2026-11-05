@@ -66,6 +66,11 @@
       "realBotPlayObserved": true,
       "observedPlay": "straight: C9 D8 S7 H6 D5",
       "pageErrors": 0
+    },
+    "publicResourceCheck": {
+      "modelSHA256": "passed",
+      "defaultSelection": "verified in real browser",
+      "initialCheckCorrection": "Public models/catalog.json contains only models; a defaultId assertion was invalid. Verified default in the webpage instead."
     }
   },
   "publicationRecovery": {
@@ -74,5 +79,24 @@
     "releaseOverwritten": false,
     "method": "Verified existing attachment and registered the same frozen bytes without re-upload"
   },
-  "trainingRunConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836"
+  "trainingRunConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+  "deployment": {
+    "commit": "5eab9e8c86548992d7e3cc6dc988e0231b896623",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42001613309",
+    "conclusion": "success",
+    "observedAt": "2026-11-05T09:24:34.492613+00:00",
+    "liveBuild": "c8e482866f",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "publicModelBytes": 6346014,
+    "publicModelSHA256": "ff06717ee04155f780ccca45136f537ffd7704386125a70c91dd04630ae713af",
+    "liveBrowserName": "guanzero-adp-gpubatch · 27771步",
+    "liveBrowserDefaultArchiveId": "005",
+    "preservedIds": [
+      "001",
+      "002",
+      "003",
+      "004"
+    ],
+    "pageErrors": 0
+  }
 }
