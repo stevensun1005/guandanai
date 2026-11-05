@@ -18,7 +18,8 @@
     "web/src/collection/client.js": "d0b7974a2ec28bc7233e6fedbfb3de3b19be605cf399d402e9376afa40d4776d",
     "web/tests/oracle.test.mjs": "686097de155e373c36faf538cebd865772c3306e137e9cbb1bfc8ee0786f3b03",
     "web/tests/coach_smoke.py": "d1fa1510e545d3f654805e48cc745492be0d9850f6ee5e66b75aa1aabebfeed2",
-    "web/tests/private_table_smoke.py": "23170b5e4db88df349ae8d5d25a369e59f27492d36900545ba617cf23f5508b3"
+    "web/tests/private_table_smoke.py": "23170b5e4db88df349ae8d5d25a369e59f27492d36900545ba617cf23f5508b3",
+    "web/tests/production_smoke.py": "2f61d1ae0a2b331a2c4403658089c973f8befe02df23bc6fcb162ce630e4c538"
   },
   "unchangedCoreSHA256": {
     "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
@@ -26,7 +27,11 @@
     "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
     "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
     "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
-    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2"
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/runtime.mjs": "384bd28f37293d1806e866b78b473ccb25d7d37adce052c083c4bcf45d8812a9",
+    "web/src/rule-bot/settings.js": "7a7f5791b7f6554b5d9f9ffc149b775534fe0a3072e27462eb2a8b799f5cb838",
+    "web/src/rule-bot/strategy.js": "3eaa8deece2ac55e6608335c5aff48943fd766ebf8116e5150f510f8d25b36eb"
   },
   "unchangedCatalog": true,
   "defaultModelId": "009",
@@ -327,6 +332,10 @@
     {
       "failure": "Smoke harness checked lobby checkbox before initialization",
       "resolution": "Explicit visible wait; not counted as gameplay or strength failure"
+    },
+    {
+      "failure": "Immediate public-page version-tag assertion ran before application initialization finished",
+      "resolution": "Wait explicitly for initialized tag matching the HTML build; public production smoke passed; no product change"
     }
   ],
   "dataIsolation": {
@@ -337,12 +346,170 @@
     "frozenTrainingIngestionChanged": false
   },
   "deployment": {
-    "status": "not-yet-attempted-for-this-source",
-    "priorPagesBlock": "old deployment lock; old website preserved"
+    "status": "deployed-and-public-browser-verified",
+    "publishedNewBuild": true,
+    "sourceCommit": "b5c248b4dd7e51ff559edfef656be7fdb2f431a9",
+    "workflow": 42103905511,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42103905511",
+    "buildJob": "success",
+    "deploymentJob": "success",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicHTTP": 200,
+    "publicBuild": "f759bd71ee",
+    "priorPagesLockResolved": true,
+    "pagesSettingsChanged": false,
+    "publicBrowser": {
+      "production": {
+        "productionGlobalsHidden": true,
+        "policyTurns": 3,
+        "successfulModelIds": [
+          "001",
+          "009"
+        ],
+        "pageErrors": []
+      },
+      "solo": {
+        "kind": "test",
+        "strengthMatches": 0,
+        "trainingUpdates": 0,
+        "scoring": {
+          "modelId": "009",
+          "candidates": 1295,
+          "minValue": -1.8912172317504883,
+          "maxValue": 0.3650972843170166,
+          "topFiveVisible": true,
+          "topFiveClickSelectsOnly": true,
+          "topFiveExposureMarked": true,
+          "viewTeamLevelsChecked": true,
+          "teamLevels": {
+            "self": 2,
+            "opponent": 2
+          },
+          "relativeExtremaChecked": true,
+          "selectionUsesCachedValues": true,
+          "invalidSelectionNotRated": true,
+          "disabledStaleReplyIgnored": true,
+          "injectedFailureNotScored": true,
+          "retrySucceeded": true
+        },
+        "postMoveRetained": true,
+        "layouts": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 656.203125,
+              "width": 954,
+              "height": 53
+            }
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 626,
+              "width": 302,
+              "height": 61
+            }
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 165.0625,
+              "width": 672,
+              "height": 46
+            }
+          }
+        ],
+        "pageErrors": []
+      },
+      "privatePeerJS": {
+        "kind": "test",
+        "strengthMatches": 0,
+        "completedRounds": 0,
+        "trainingUpdates": 0,
+        "realPeerJS": true,
+        "hostOnlyNicknameGate": true,
+        "guestSameNameDenied": true,
+        "noPrivateRuleFlagBroadcast": true,
+        "privateCoach": {
+          "modelId": "009",
+          "search": {
+            "candidates": 39,
+            "evaluated": 8,
+            "horizon": 4,
+            "elapsedMs": 90,
+            "fullInformation": true
+          }
+        },
+        "partnerUsesOracle": true,
+        "opponentStaysRules": true,
+        "neuralOpponentUsesOnlyPublicObservation": true,
+        "manualOutsideBeamRated": true,
+        "offRestoresPartnerRules": true,
+        "privateHandsMatchHeldCounts": true,
+        "constructedCompletionExcluded": true,
+        "uploads": 0,
+        "layouts": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "topFiveInViewport": true
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "topFiveInViewport": true
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "topFiveInViewport": true
+          }
+        ],
+        "pageErrors": []
+      }
+    },
+    "productionHarnessFollowupCommit": "2a6404a8e4a0c268a32614371a79927f33361353",
+    "verifiedAtUTC": "2026-11-05T20:37:23.922851+00:00",
+    "productionHarnessFollowup": {
+      "commit": "2a6404a8e4a0c268a32614371a79927f33361353",
+      "workflow": 42104636179,
+      "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42104636179",
+      "build": "success",
+      "deployment": "success",
+      "samePublicBuild": "f759bd71ee"
+    }
   },
   "desktopObservation": {
-    "observedAtUTC": "2026-11-05T20:27:50.529Z",
-    "freeGiB": 9.46371078491211,
-    "networkAlert": false
+    "observedAtUTC": "2026-11-05T20:34:59.319Z",
+    "freeGiB": 9.640941619873047,
+    "networkAlert": false,
+    "phase": "running",
+    "learnerStep": 680761,
+    "supervisorAlive": true,
+    "actorCount": 3
+  },
+  "updatedAtUTC": "2026-11-05T20:37:23.922851+00:00",
+  "ownerDrafts": {
+    "count": 10,
+    "byteChecks": "all preserved",
+    "submittedDrafts": false
   }
 }
