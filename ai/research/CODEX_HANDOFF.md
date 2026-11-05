@@ -6,6 +6,8 @@
 
 ## 当前功能补充
 
+- 此路线统一命名为 danMCai，入口 `ai/danMCai/`、冠军字段 `selection.danMCaiChampions`；文档和新命令使用规范名称。旧训练继续读取隐藏兼容存储，冻结配置和历史证据不改写。[迁移边界](STRUCTURE_MIGRATION.md#danmcai-名称与规范路径)。
+
 - “检查 Clint 仓库”固定指同步其 UI 到网页、规则策略只进入 Clint规则机器人，验证后直接推送 `main`；每 4 小时定期检查。跨电脑执行边界、增量 SHA、隔离要求与发布流程统一见 [AGENTS.md](../../AGENTS.md#检查-clint-仓库的固定含义)，不改变正在运行的冻结训练。定时任务需在执行电脑配置，Git 共享的是规则约定。
 - GuanZero 已增加 Clint（rules-v2）开发评测；原 `rule` 成绩仍指 original。同一冻结模型、同牌交换阵营；旧训练通过独立补充进程写入 `eval/block-NNNN/clint/report.json`，面板只合并同来源报告。[运行说明](../guanzero/README.md)。
 - 真人联机牌谱已接入独立 Worker／D1，支持离线补传、私有导出和仅人工动作预处理；语料与活跃训练隔离，不能自动读入梯度训练或独立验收。[采集](../../web/collector/README.md) · [共享数据](../shared/data/README.md)。
@@ -20,20 +22,20 @@
 
 ## 硬性约束
 
-- **2026-11-05 最新选择要求**：网页菜单仅保留 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和本机最近两代门控冠军，默认本机现任冠军。本条取代下文旧的“最新导出直接成为默认”及“所有旧编号可选”要求。按真实冠军晋升记录、accept 门控及 SHA 维护 `selection.localChampions`；普通新导出与 GuanZero 更新不能自动替换本机冠军，旧权重保留归档。发布步骤见 [网页电脑选择](../../web/docs/WEB_MODELS.md)。
+- **2026-11-05 最新选择要求**：网页菜单仅保留 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代门控冠军，默认danMCai 现任冠军。本条取代下文旧的“最新导出直接成为默认”及“所有旧编号可选”要求。按真实冠军晋升记录、accept 门控及 SHA 维护 `selection.danMCaiChampions`；普通新导出与 GuanZero 更新不能自动替换danMCai 冠军，旧权重保留归档。发布步骤见 [网页电脑选择](../../web/docs/WEB_MODELS.md)。
 
-- **现行发布规则。** 每四小时同步真实冠军与 GuanZero 最近两代；默认保持本机现任冠军，不能将普通最新导出设为默认。GuanZero 名称为 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。完整流程以 [网页模型发布](../../web/docs/WEB_MODELS.md) 为准，旧附件和实验记录保留，独立验收标准不变。
+- **现行发布规则。** 每四小时同步真实冠军与 GuanZero 最近两代；默认保持danMCai 现任冠军，不能将普通最新导出设为默认。GuanZero 名称为 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。完整流程以 [网页模型发布](../../web/docs/WEB_MODELS.md) 为准，旧附件和实验记录保留，独立验收标准不变。
 - **只报告实际完成的结果。** 正结果、负结果、退步和协议变化都写入 `ai/research/MODEL_STUDY.md`；开发集峰值不能写成验收；门控记录属于开发筛选。
 - **电脑按版本与独立规则选择。** 不再向玩家提供五种性格；历史风格代码保留用于复现实验。编号只表示发布身份，不是强弱排名。
 - **直接提交并推送到 `main`，不开新分支。** 这是仓库所有者的要求。推送前运行 `npm test`、`npm run format:check`，以及相关的 Python 测试。
-- **不要把大文件提交进 Git。** `ai/local/workspace/` 已被忽略，训练产物留在那里。`ai/local/models/experiments/` 已有约 553 MB 检查点在 Git 里，不要再往里加；需要归档的权重放到 GitHub Release 附件，在 `ai/research/evaluation/model-artifacts.json` 里记录 SHA-256。
-- **种子用途不能混。** 小于 1e9 的种子留给开发评测和留出验收；持续采样用 1e9 起，探索测量用 3.4e9 起，门控用 3.5e9 起（见 `ai/local/training/continuous/lib.mjs`）。新增用途要另划区间并写进文档。
+- **不要把大文件提交进 Git。** `ai/danMCai/workspace/` 已被忽略，训练产物留在那里。`ai/danMCai/models/experiments/` 已有约 553 MB 检查点在 Git 里，不要再往里加；需要归档的权重放到 GitHub Release 附件，在 `ai/research/evaluation/model-artifacts.json` 里记录 SHA-256。
+- **种子用途不能混。** 小于 1e9 的种子留给开发评测和留出验收；持续采样用 1e9 起，探索测量用 3.4e9 起，门控用 3.5e9 起（见 `ai/danMCai/training/continuous/lib.mjs`）。新增用途要另划区间并写进文档。
 
 ## 当前状态
 
 ### 已实现
 
-`ai/local/training/continuous/` 下：
+`ai/danMCai/training/continuous/` 下：
 
 | 文件               | 作用                                                                   |
 | ------------------ | ---------------------------------------------------------------------- |
@@ -46,7 +48,7 @@
 | `status.mjs`       | 进度摘要                                                               |
 | `explore-cost.mjs` | 测量某个探索规则在整场比赛中的代价                                     |
 
-命令：`npm run train:continuous`、`npm run train:status`。测试：`node --test ai/local/tests/continuous-training.test.mjs`、`python ai/local/tests/continuous_learner_test.py`。
+命令：`npm run train:continuous`、`npm run train:status`。测试：`node --test ai/danMCai/tests/continuous-training.test.mjs`、`python ai/danMCai/tests/continuous_learner_test.py`。
 
 ### 实测过的数字
 
@@ -59,7 +61,7 @@
 | 3 个采样进程同时运行           | 合计约 1,430–1,610 决策/秒                                                     |
 | 训练进程（4 线程，batch 2048） | 约 2.3 步/秒，约 4,800 行/秒                                                   |
 | 门控                           | 16 场整场约 12–20 秒                                                           |
-| 导出往返                       | 载入 `ai/local/models/baseline/policy.onnx` 再导出，ONNX 输出逐位一致          |
+| 导出往返                       | 载入 `ai/danMCai/models/baseline/policy.onnx` 再导出，ONNX 输出逐位一致        |
 
 探索规则代价（`explore-cost.mjs`，种子 3,400,000,000 起，150 对、300 场；探索方与贪心对手为同一个 P0；平局记 0.5）：
 
@@ -82,14 +84,14 @@
 
 - 已于 03:56:54Z 在同一运行目录续跑，调度器的 8 个采样进程全部换成快速进程（`actorImplementation: "fast"`，每进程 48 局，DirectML）；权重、优化器、样本、联赛池、冠军和计数都接着原来的，这次协议变化记录在 `config.protocolHistory` 和研究报告第 7.12 节。
 - 调度器、采样、训练和面板都从**独立运行目录 `D:/vibecoding/guandan-runtime`**（`git worktree`，分离检出）启动，不再从项目根目录启动。不要删除这个目录；更新它之前，先确认新提交没有改动 `config.json` 里 `sourceSHA256` 列出的任何文件，否则调度器会因源码变化停机。
-- 续跑脚本是 `ai/local/runs/resume-gpu-fast.mjs`；启动记录在运行目录的 `launcher.json`（`restarts` 字段）。
+- 续跑脚本是 `ai/danMCai/runs/resume-gpu-fast.mjs`；启动记录在运行目录的 `launcher.json`（`restarts` 字段）。
 - 不要再额外加快速进程：12 个快速进程时显卡被推理占满，训练降到约 2 次更新/秒；8 个时训练最快。若要再提速，方向是把所有采样进程的推理集中到一个进程里批量提交，减少和训练进程争用显卡。
 
 ### 还没有的
 
 - **已有一轮固定对手的独立实测，尚无版本提升结论。** `v000481076` 两席对原有纯规则电脑两席，1,000 对种子／2,000 场为 1,576 胜、297 负、127 平，胜率 78.80%；未支持 80% 目标，且没有旧模型对照，不能说持续训练已经带来多少提升。完整口径见[研究报告第 16 节](MODEL_STUDY.md#16-v000481076-对原有规则电脑的独立整场评测)。
 - 门控只比网络本身（贪心），不含网页风格、残局搜索和直接出完捷径。
-- 本次独立种子已事前登记并全部使用；可复现，但不能再当新留出。已有单次固定对局脚本 `ai/local/evaluation/evaluate-independent.mjs`，尚未完成通用冠军的旧模型／多对手验收脚本。
+- 本次独立种子已事前登记并全部使用；可复现，但不能再当新留出。已有单次固定对局脚本 `ai/danMCai/evaluation/evaluate-independent.mjs`，尚未完成通用冠军的旧模型／多对手验收脚本。
 - 训练目标默认只用单局升级分，整场结果的权重 `targetMatchWeight` 默认 0。
 - 损失只约束被采样的动作，没有对全部候选的约束。
 - 门控是单进程，SPRT 用的是正态近似。
@@ -98,11 +100,11 @@
 
 ### 执行进度（2026-11-04，D 盘迁移后）
 
-当前仍在第 1 步。锚点监控、报告接入及对应检查已实现；`step1-smoke` 的一次完整锚点评测为 18 胜、268 负、14 平，详见研究报告第 7.8 节。它是缩小参数的开发流程测试，因磁盘迁移停止，不能计为默认配置 24 小时训练，也没有达到两次退步停止条件。修复 `STOP` 误触发重启后，旧运行源码冻结，另以 `ai/local/runs/main` 启动默认配置。第 2 步及后续步骤仍未开始；运行中的实际进度以研究报告第 11.2 节和机器可读快照为准。
+当前仍在第 1 步。锚点监控、报告接入及对应检查已实现；`step1-smoke` 的一次完整锚点评测为 18 胜、268 负、14 平，详见研究报告第 7.8 节。它是缩小参数的开发流程测试，因磁盘迁移停止，不能计为默认配置 24 小时训练，也没有达到两次退步停止条件。修复 `STOP` 误触发重启后，旧运行源码冻结，另以 `ai/danMCai/runs/main` 启动默认配置。第 2 步及后续步骤仍未开始；运行中的实际进度以研究报告第 11.2 节和机器可读快照为准。
 
-后续按用户明确要求暂停纯 CPU 基线，并以 `ai/local/runs/gpu-main` 的 GPU 训练为主。CPU 已保存 20,923 步检查点，未运行满 24 小时；首轮门控拒绝晋升，见研究报告第 7.10 节。GPU 使用 RX 7800 XT、8 个采样进程与 1 个学习器主机线程，从冠军 P0 开始独立运行，计划 24 小时；网络设备、采样与评测种子偏移已冻结在该运行配置中。GPU 计算短测不代表端到端或棋力收益，见第 7.9 节；依然不能跳过第 1 步的长期观察而宣称后续验收已完成。
+后续按用户明确要求暂停纯 CPU 基线，并以 `ai/danMCai/runs/gpu-main` 的 GPU 训练为主。CPU 已保存 20,923 步检查点，未运行满 24 小时；首轮门控拒绝晋升，见研究报告第 7.10 节。GPU 使用 RX 7800 XT、8 个采样进程与 1 个学习器主机线程，从冠军 P0 开始独立运行，计划 24 小时；网络设备、采样与评测种子偏移已冻结在该运行配置中。GPU 计算短测不代表端到端或棋力收益，见第 7.9 节；依然不能跳过第 1 步的长期观察而宣称后续验收已完成。
 
-CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-20923/`，逐文件校验清单为 `ai/research/evaluation/cpu-main-retention-2026-11-04.json`，成果索引见 `model-artifacts.json` 的 `localArchives`。保留模型、优化器、日志及 2,037,717 条仍在磁盘的样本；更早被滚动淘汰的原始行不能声称仍完整保留。当前 GPU 独立运行尚未继承 CPU 权重或样本，恢复与单纯归档必须分开描述。勿把此归档当作无用缓存清理，勿直接在归档上续训。
+CPU 现存成果已另存至 `ai/danMCai/checkpoints/cpu-main-2026-11-04-step-20923/`，逐文件校验清单为 `ai/research/evaluation/cpu-main-retention-2026-11-04.json`，成果索引见 `model-artifacts.json` 的 `localArchives`。保留模型、优化器、日志及 2,037,717 条仍在磁盘的样本；更早被滚动淘汰的原始行不能声称仍完整保留。当前 GPU 独立运行尚未继承 CPU 权重或样本，恢复与单纯归档必须分开描述。勿把此归档当作无用缓存清理，勿直接在归档上续训。
 
 每一步都写明目标、要改的文件和完成标准。做完一步就提交、推送，并按 AGENTS.md 更新研究报告。
 
@@ -110,13 +112,13 @@ CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-2092
 
 **目标**：让系统一直跑，结果自动进研究报告。
 
-1. 用默认配置启动：`npm run train:continuous -- --run=ai/local/runs/main`。运行至少 24 小时。
+1. 用默认配置启动：`npm run train:continuous -- --run=ai/danMCai/runs/main`。运行至少 24 小时。
 2. 扩展 `ai/research/tools/update-model-study.py`：读取 `<run>/status.json`、`<run>/gate/*.json`、`<run>/champion/champion.json`，把以下内容写进第 11 节生成区和 `ai/research/evaluation/model-study-progress.json`：
    - 运行时长、采样场数、决策数、训练步数；
    - 每次门控的挑战者、冠军、对数、胜／负／平、LLR、结论；
    - 冠军更替历史和模型 SHA-256。
 3. 在 `supervisor.mjs` 里加「锚点检查」：每隔几小时，用 `gate.mjs` 让最新版本和 `models/anchor.onnx`（初始 P0）贪心对局固定 150 对（`--settings='{"minPairs":150,"maxPairs":150}'`，种子另划区间），记录平均得分和区间。连续两次区间上限低于 0.5 时，自动停止并在 `events.jsonl` 写明原因。之后可以考虑调低学习率，或者把 `anchorWeight` 设为大于 0 再开新运行。
-4. 在 `ai/research/tests/model_study_test.py` 和 `ai/local/tests/continuous-training.test.mjs` 里加对应测试。
+4. 在 `ai/research/tests/model_study_test.py` 和 `ai/danMCai/tests/continuous-training.test.mjs` 里加对应测试。
 
 **完成标准**：第 11 节能显示持续运行的门控记录和锚点检查；全部注明是开发集；测试通过。
 
@@ -127,7 +129,7 @@ CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-2092
 **2026-11-05 实际补充：**按所有者本次限定，仅完成两名 `v000481076` 对两名原有纯规则电脑的独立整场实测。种子 900,000,000–900,000,999 已用，原始逐场记录、代码／模型指纹及统计区间见[完整结果](evaluation/independent-v481076-rule-20261105/results.json)。这不表示下面的通用验收流程或旧模型对照已经完成，也不跳过第 1 步的长期观察。当前网页默认模型未因评测而更改。
 
 1. 选一段从没用过的种子作为留出集，例如 `900000000` 起 2,000 个。在 `ai/research/evaluation/` 新建一个 JSON，记录区间、用途和提交时间；提交后不再改动。
-2. 新建 `ai/local/training/continuous/accept.mjs`，调用 `ai/local/evaluation/evaluate-table.mjs` 的同一套逻辑：
+2. 新建 `ai/danMCai/training/continuous/accept.mjs`，调用 `ai/danMCai/evaluation/evaluate-table.mjs` 的同一套逻辑：
    - 冠军 vs 当前网页默认模型，配对种子、交换阵营，按当前选用模型和配置运行；历史五种风格另作复现对照；
    - 冠军 vs 规则机器人；
    - 输出逐种子结果、胜／负／平、按种子聚类的 Hoeffding 区间和 SHA-256。
@@ -169,7 +171,7 @@ CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-2092
 **目标**：尽快让所有电脑变强。
 
 - 目前最强的已有候选是 `ppo-mixed` 第 14 周期的小 Actor（扩大实验里四组全网络模型对它的胜率都低于 50%，见研究报告第 7.6 节）。
-- 用第 2 步的验收脚本对它跑留出验收。它需要 PPO 配置（`--config`），参考 `ai/local/evaluation/evaluate-table.mjs` 的用法。
+- 用第 2 步的验收脚本对它跑留出验收。它需要 PPO 配置（`--config`），参考 `ai/danMCai/evaluation/evaluate-table.mjs` 的用法。
 
 **完成标准**：验收报告写进研究报告；只有通过预定标准才宣称提升。网页部署按所有者后续的四小时授权执行，不能把部署记为验收通过。
 
@@ -255,7 +257,7 @@ CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-2092
 
 ## 最新资源策略（2026-11-05，用户追加要求）
 
-用户允许尽量提高训练速度，但要求给日常使用留内存。发生内存耗尽后已正常保存到 `v000212171`，并将模型、优化器及停止现场逐文件校验归档到 `ai/local/checkpoints/gpu-memory-relief-step-212171/`，没有删除样本或旧训练成果。恢复记录通过 `config.protocolHistory` 与事件日志保留。
+用户允许尽量提高训练速度，但要求给日常使用留内存。发生内存耗尽后已正常保存到 `v000212171`，并将模型、优化器及停止现场逐文件校验归档到 `ai/danMCai/checkpoints/gpu-memory-relief-step-212171/`，没有删除样本或旧训练成果。恢复记录通过 `config.protocolHistory` 与事件日志保留。
 
 运行继续使用独立的 `guandan-runtime`，原结束时间保持 2026-11-05 15:40:54（America/Toronto）。用户最终指定的资源预算为可用内存低于 4 GiB 逐个暂停快速采样器、高于 5 GiB 逐个恢复，桌面程序优先。最终推理会话缓存上限 6、临时张量主动释放、候选缓存 512。首次恢复仍用 8×48 并行牌局，发现缓存抖动后保留 8 个进程、每进程 8 局，并提高有界缓存以减少加载；最终采用参数及实际数据以第 7.13 节和运行配置为准。不要恢复无界/高并发缓存；不要为“释放内存”删除检查点、重放分片或重置计数。
 
@@ -265,7 +267,7 @@ CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-2092
 
 ### 出牌评价接入
 
-房主先允许、玩家后自选，评价固定用清单中的本机冠军。相对动作值百分数不能写成正确概率或胜率；评价 Worker 与机器人出牌隔离。可选 `assisted` 由预评实际展示标记，默认真人样本排除；不接入当前冻结训练。修改后按 [MOVE_COACH](../../web/docs/MOVE_COACH.md) 同步服务端白名单、浏览器测试和研究证据。
+房主先允许、玩家后自选，评价固定用清单中的danMCai 冠军。相对动作值百分数不能写成正确概率或胜率；评价 Worker 与机器人出牌隔离。可选 `assisted` 由预评实际展示标记，默认真人样本排除；不接入当前冻结训练。修改后按 [MOVE_COACH](../../web/docs/MOVE_COACH.md) 同步服务端白名单、浏览器测试和研究证据。
 
 本次两组固定评测已完整完成，最新冻结导出没有显示超越冠军；实际胜／负／平、置信区间与队友结算见[对照报告](reports/champion-clint-latest-20261105.md)，不要将结论转贴到之后的新导出。默认冠军未替换。主机恢复后沿用 3 槽与 4 GiB 软预算；进度面板分别显示两组完成数，端口观测和全机 CPU 与训练指标分开解释。
 

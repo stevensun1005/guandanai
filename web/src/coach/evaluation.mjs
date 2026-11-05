@@ -6,7 +6,7 @@ import { cardsArray } from '../ai/encoding.mjs';
 import { makeDeck, isWild } from '../core/cards.js';
 import { analyze, beats } from '../core/combinations.js';
 
-export const COACH_MODEL_ID = catalog.selection.localChampions[0];
+export const COACH_MODEL_ID = catalog.selection.danMCaiChampions[0];
 export const COACH_MODEL_NAME = botModelName(COACH_MODEL_ID);
 export const coachAllowed = (mode, rules) => mode === 'solo' || rules?.coachAllowed === true;
 export const actionKey = (ids) => cardsArray(ids).join(',');

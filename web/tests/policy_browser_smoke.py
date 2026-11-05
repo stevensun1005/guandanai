@@ -16,7 +16,7 @@ import numpy as np
 from playwright.sync_api import sync_playwright
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").is_file())
-sys.path.insert(0, str(ROOT / "ai/local/training"))
+sys.path.insert(0, str(ROOT / "ai/danMCai/training"))
 from policy_features import encode_policy_extras_batch  # noqa: E402
 from policy_learning import RolloutEngine  # noqa: E402
 
@@ -259,11 +259,11 @@ def main():
         "model": str(model),
         "modelSHA256": sha(model),
         "fixturesSHA256": sha(fixtures_path),
-        "fixturePolicySHA256": sha(ROOT / "ai/local/models/baseline/policy.onnx"),
+        "fixturePolicySHA256": sha(ROOT / "ai/danMCai/models/baseline/policy.onnx"),
         "productionRuntimeSHA256": sha(ROOT / "web/src/ai/policy-inference.mjs"),
         "runtimeConfig": runtime_config,
         "featureSHA256": sha(ROOT / "web/src/ai/policy-features.mjs"),
-        "nativeFeatureSHA256": sha(ROOT / "ai/local/training/policy_features.py"),
+        "nativeFeatureSHA256": sha(ROOT / "ai/danMCai/training/policy_features.py"),
         "wasmSHA256": sha(vendor / "ort-wasm-simd-threaded.wasm"),
         "testSHA256": sha(Path(__file__)),
         "browser": browser_version,

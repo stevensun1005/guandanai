@@ -57,9 +57,9 @@ function hashes() {
     ...sourceFiles(join(ROOT, 'ai/guanzero/training')),
     ...sourceFiles(join(ROOT, 'ai/shared/simulation')),
     ...sourceFiles(join(ROOT, 'web/src')),
-    join(ROOT, 'ai/local/training/continuous/lib.mjs'),
+    join(ROOT, 'ai/danMCai/training/continuous/lib.mjs'),
     join(ROOT, 'package-lock.json'),
-    join(ROOT, 'ai/local/models/baseline/policy.onnx'),
+    join(ROOT, 'ai/danMCai/models/baseline/policy.onnx'),
   ];
   return Object.fromEntries(
     files.sort().map((f) => [relative(ROOT, f).replaceAll('\\', '/'), sha256(f)]),
@@ -142,7 +142,7 @@ async function main() {
         device,
         python: option(
           'python',
-          join(ROOT, 'ai/local/workspace/guanzero-gpu-env/Scripts/python.exe'),
+          join(ROOT, 'ai/danMCai/workspace/guanzero-gpu-env/Scripts/python.exe'),
         ),
         actors: integerOption('actors', Math.max(1, physical - (device === 'cpu' ? 2 : 1)), 1, 40),
         learnerThreads: integerOption(

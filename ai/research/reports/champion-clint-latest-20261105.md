@@ -11,7 +11,7 @@
 | 冠军，网页归档 009 | v000293055 | `104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb` |
 | 冻结时最新导出     | v000611432 | `d4eb5f0c0b6939edb2e8c78f13901f324769c21865ddf8311febf5431d674595` |
 
-两份都是本机完整 DMC 动作值网络，输入 `state[1,513]`、`actions[N,54]`，输出 `values[N,1]`。最新导出时间为 `2026-11-05T16:42:32Z`，记录了 1,252,212,736 次参与训练的样本行，**含重放，不是同等数量的不同牌局**；累计摄入行数为 313,069,652。评测开始后继续训练产生的新版本不属于此次结果。
+两份都是danMCai 完整 DMC 动作值网络，输入 `state[1,513]`、`actions[N,54]`，输出 `values[N,1]`。最新导出时间为 `2026-11-05T16:42:32Z`，记录了 1,252,212,736 次参与训练的样本行，**含重放，不是同等数量的不同牌局**；累计摄入行数为 313,069,652。评测开始后继续训练产生的新版本不属于此次结果。
 
 Clint 是独立 `rules-v2`，不是原始 `original` 规则电脑，也不加载神经网络。[公开权重与原生兼容性核对](../evaluation/champion-clint-latest-20261105/validation.json)包含不可变归档 URL、大小和 SHA；最新导出另外检查了 1／3／129 候选批次。这不是该新导出的浏览器 WASM 验收，也没有将它加入网页菜单。
 
@@ -70,9 +70,9 @@ Clint 是独立 `rules-v2`，不是原始 `original` 规则电脑，也不加载
 权重从对应不可变 Release 下载并校验，放进忽略运行目录的 `models/champion.onnx`／`models/latest.onnx`。在事前提交 `99d72d4` 的独立检出中，对每组分别以 `--shard=0 --shards=2` 和 `--shard=1 --shards=2` 运行：
 
 ```bash
-node ai/local/evaluation/evaluate-fixed.mjs --protocol=ai/research/evaluation/champion-clint-latest-20261105/protocol-clint-rule.json --run=<clint-run> --shard=0 --shards=2
-node ai/local/evaluation/evaluate-fixed.mjs --protocol=ai/research/evaluation/champion-clint-latest-20261105/protocol-latest-model.json --run=<latest-run> --shard=0 --shards=2
-python ai/local/evaluation/summarize_independent.py --protocol=<protocol> --run=<run> --output=<output>
+node ai/danMCai/evaluation/evaluate-fixed.mjs --protocol=ai/research/evaluation/champion-clint-latest-20261105/protocol-clint-rule.json --run=<clint-run> --shard=0 --shards=2
+node ai/danMCai/evaluation/evaluate-fixed.mjs --protocol=ai/research/evaluation/champion-clint-latest-20261105/protocol-latest-model.json --run=<latest-run> --shard=0 --shards=2
+python ai/danMCai/evaluation/summarize_independent.py --protocol=<protocol> --run=<run> --output=<output>
 ```
 
 源码按协议指纹核对，模型文件按 SHA 核对。公开残局含时间预算，CPU 争用与不同推理后端会限制逐动作的精确重现；原始结算文件保留实际观测，不用重跑覆盖。

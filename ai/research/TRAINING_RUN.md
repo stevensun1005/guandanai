@@ -1,6 +1,6 @@
 # 主策略训练记录
 
-本文保存历史训练过程、阶段参数和原始实验口径，不代表当前默认模型或当前运行。现行入口见 [本机持续训练](CONTINUOUS_TRAINING.md)、[GuanZero](../guanzero/README.md) 和 [网页菜单／发布](../../web/docs/WEB_MODELS.md)；最新研究结论以 [主报告](MODEL_STUDY.md) 为准。
+本文保存历史训练过程、阶段参数和原始实验口径，不代表当前默认模型或当前运行。现行入口见 [danMCai 持续训练](CONTINUOUS_TRAINING.md)、[GuanZero](../guanzero/README.md) 和 [网页菜单／发布](../../web/docs/WEB_MODELS.md)；最新研究结论以 [主报告](MODEL_STUDY.md) 为准。
 
 这轮训练的目标是让新策略对项目原有规则机器人达到 **80% 以上的胜率**。这是待验证的目标，不是当前模型的成绩。
 
@@ -19,9 +19,9 @@
 | 公开／明牌评价 × 新题／重打，小试验 |   每组 4 |   四组共 256 | 完成                                 |
 | 相同四组的扩大试验                  |   每组 8 | 四组共 1,024 | 完成                                 |
 
-以上候选均未通过新的独立整场发布验收，默认网页权重未替换。流程检查和历史单把实验另列，不混入本表。检查点入口见[实验成果目录](../local/models/experiments/README.md)及[历史权重索引](./evaluation/model-artifacts.json)。
+以上候选均未通过新的独立整场发布验收，默认网页权重未替换。流程检查和历史单把实验另列，不混入本表。检查点入口见[实验成果目录](../danMCai/models/experiments/README.md)及[历史权重索引](./evaluation/model-artifacts.json)。
 
-文中的 `ai/local/data/generated/` 是原训练机器的本地路径，不随克隆自动出现。复现时需按相应脚本重新采样，或根据成果索引取得匹配的检查点；不要把缺少本地文件当成网页运行依赖。
+文中的 `ai/danMCai/data/generated/` 是原训练机器的本地路径，不随克隆自动出现。复现时需按相应脚本重新采样，或根据成果索引取得匹配的检查点；不要把缺少本地文件当成网页运行依赖。
 
 ## 早期单把实验口径（已被整场目标替代）
 
@@ -48,7 +48,7 @@
 
 首轮 100 副交换牌局、共 200 局：原主网络获胜 116 局，胜率 **58.0%**，按牌副分组的近似 95% 区间为 **52.30%–63.70%**。这是小规模开发基准，不能替代最终验收。
 
-训练产物先写入忽略提交的 `ai/local/data/generated/`，不自动覆盖网站权重。已完成的训练、浏览器数值、对战与发布状态已记录在下文及研究主报告，原始临时缓冲区仍留在本地。
+训练产物先写入忽略提交的 `ai/danMCai/data/generated/`，不自动覆盖网站权重。已完成的训练、浏览器数值、对战与发布状态已记录在下文及研究主报告，原始临时缓冲区仍留在本地。
 
 ## 本地实测进展（2026-11-04）
 
@@ -64,7 +64,7 @@
 | 概率策略候选（延长训练第 12 次更新） |             60.60% |
 | 同局面分支差值模型                   |             57.55% |
 
-这些是开发成绩，用于选择候选，**没有达到 80% 目标**。最终独立牌局结果另存报告，不能用开发集最高点代替验收。网页当前部署的 1.13.1 只包含激进风格开局炸牌修正，新的学习权重仍在本地实验目录。
+这些是开发成绩，用于选择候选，**没有达到 80% 目标**。最终独立牌局结果另存报告，不能用开发集最高点代替验收。网页当前部署的 1.13.1 只包含激进风格开局炸牌修正，新的学习权重仍在danMCai 实验目录。
 
 ## 复现训练与评测
 
@@ -73,22 +73,22 @@
 ```bash
 python -m pip install -r ai/environment/requirements-models.txt
 python -m pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
-node ai/local/data/tools/collect-policy.mjs --games=4000 --seed=21100104 --opponent=mixed --epsilon=0.15 --temperature=0.35 --inference-script=ai/local/training/policy_learning.py --output=ai/local/data/generated/example-data
-python ai/local/training/train_policy.py ai/local/data/generated/example-data --output=ai/local/data/generated/example-model
+node ai/danMCai/data/tools/collect-policy.mjs --games=4000 --seed=21100104 --opponent=mixed --epsilon=0.15 --temperature=0.35 --inference-script=ai/danMCai/training/policy_learning.py --output=ai/danMCai/data/generated/example-data
+python ai/danMCai/training/train_policy.py ai/danMCai/data/generated/example-data --output=ai/danMCai/data/generated/example-model
 ```
 
 训练概率策略需要指定一个已有的策略模型；每个缓冲区使用同一份行为权重，保存旧概率与价值，更新后采集新牌局：
 
 ```bash
-python ai/local/training/run-policy-training.py --output=ai/local/data/generated/example-ppo --proposal=ai/local/data/generated/example-model/policy-0.25.onnx --k=4 --cycles=8 --games=1000 --seed=25000104 --opponent=rule
-python ai/local/training/export_ppo.py ai/local/data/generated/example-ppo/cycle-08/model/ppo.npz --output=ai/local/data/generated/example-export/strategy.onnx
+python ai/danMCai/training/run-policy-training.py --output=ai/danMCai/data/generated/example-ppo --proposal=ai/danMCai/data/generated/example-model/policy-0.25.onnx --k=4 --cycles=8 --games=1000 --seed=25000104 --opponent=rule
+python ai/danMCai/training/export_ppo.py ai/danMCai/data/generated/example-ppo/cycle-08/model/ppo.npz --output=ai/danMCai/data/generated/example-export/strategy.onnx
 ```
 
 独立对照和浏览器核对：
 
 ```bash
-node ai/local/evaluation/evaluate-trained.mjs --pairs=1000 --seed=26000104 --inference-script=ai/local/training/ppo_learning.py --model=ai/local/data/generated/example-ppo/cycle-08/model/ppo.npz --output=web/artifacts/validation/example
-python web/tests/ppo_browser_smoke.py --checkpoint=ai/local/data/generated/example-ppo/cycle-08/model/ppo.npz --model=ai/local/data/generated/example-export/strategy.onnx --output=web/artifacts/validation/example-browser
+node ai/danMCai/evaluation/evaluate-trained.mjs --pairs=1000 --seed=26000104 --inference-script=ai/danMCai/training/ppo_learning.py --model=ai/danMCai/data/generated/example-ppo/cycle-08/model/ppo.npz --output=web/artifacts/validation/example
+python web/tests/ppo_browser_smoke.py --checkpoint=ai/danMCai/data/generated/example-ppo/cycle-08/model/ppo.npz --model=ai/danMCai/data/generated/example-export/strategy.onnx --output=web/artifacts/validation/example-browser
 ```
 
 所有输出目录必须是新目录，避免覆盖已存在的样本。更换模型后应使用新的验收种子。训练、推理和网页运行是分离的：玩家无需安装 Python，实验模型也不会自动替换线上模型。
@@ -113,7 +113,7 @@ python web/tests/ppo_browser_smoke.py --checkpoint=ai/local/data/generated/examp
 
 [机器可读报告](./evaluation/policy-training-heldout-2026-11-04.json)。每局是两名学习策略队友对两名原规则机器人，头游所在队获胜；不是完整打 A 的整场胜率。
 
-随后曾启动额外单把训练，计划 24 次更新、每次 2,000 局，记录在 `ai/local/data/generated/ppo-k4-next/run.json`；该计划在转向整场目标后停止，不能把计划的 48,000 局记为完成量。已有结果保留，后续模型需另选新验收牌局，不能重复使用本次验收集选模。
+随后曾启动额外单把训练，计划 24 次更新、每次 2,000 局，记录在 `ai/danMCai/data/generated/ppo-k4-next/run.json`；该计划在转向整场目标后停止，不能把计划的 48,000 局记为完成量。已有结果保留，后续模型需另选新验收牌局，不能重复使用本次验收集选模。
 
 ## 目标修正：按完整比赛学习团队配合
 
@@ -124,13 +124,13 @@ python web/tests/ppo_browser_smoke.py --checkpoint=ai/local/data/generated/examp
 模型在头游出现后继续决策和学习；有机会一次出完时，也保留合法替代动作参与选择。首批 64 场完整训练含 691 把、20,514 条学习决策，其中 3,321 条发生在头游之后。已用这些样本完成参数更新；这是流程与参数更新验证，不是整场棋力提升证明。
 
 ```bash
-node ai/local/data/tools/collect-matches.mjs --matches=64 --seed=31100104 --output=ai/local/data/generated/full-match-example/data
-python ai/local/training/train_ppo.py ai/local/data/generated/full-match-example/data --output=ai/local/data/generated/full-match-example/model
+node ai/danMCai/data/tools/collect-matches.mjs --matches=64 --seed=31100104 --output=ai/danMCai/data/generated/full-match-example/data
+python ai/danMCai/training/train_ppo.py ai/danMCai/data/generated/full-match-example/data --output=ai/danMCai/data/generated/full-match-example/model
 ```
 
 这一阶段的整场 Actor 使用神经网络提案的前四个候选，训练没有覆盖所有合法动作；后续完整主网与公开／明牌评价实验改为对生成器提供的全部候选评分。两者不能混为一种训练方法，模型能力也不表示已掌握玩家提出的全部战术。整场检查点包含额外的公开比赛信息，禁止使用旧的单把导出器直接发布。
 
-旧的额外单把训练已停止，已有数据与参数保留。整场规则对抗阶段在 `ai/local/data/generated/full-match-training/run.json` 记录了 16 次完成更新、每次 128 场，共 2,048 条整场训练轨迹。
+旧的额外单把训练已停止，已有数据与参数保留。整场规则对抗阶段在 `ai/danMCai/data/generated/full-match-training/run.json` 记录了 16 次完成更新、每次 128 场，共 2,048 条整场训练轨迹。
 
 ## 四席自对弈与历史版本对抗
 
@@ -141,10 +141,10 @@ python ai/local/training/train_ppo.py ai/local/data/generated/full-match-example
 6 场流程检查覆盖三种对手各 2 场，共 69 把、2,566 条决策。已逐条核对整场胜负标签：自对弈中四席均有样本；历史／规则对抗仅当前模型一队的两席有样本，随后完成两轮参数更新。这不属于胜率提升报告。
 
 ```bash
-python ai/local/training/run-policy-training.py --output=ai/local/data/generated/match-selfplay-example --proposal=ai/local/data/generated/policy-cycle1/model/policy-0.25.onnx --actor=ai/local/data/generated/full-match-training/cycle-04/model/ppo.npz --objective=full-match --opponent=mixed --opponent-model=ai/local/data/generated/full-match-training/cycle-02/model/ppo.npz --cycles=16 --games=128 --seed=34100104 --eval-every=2 --eval-pairs=64 --eval-seed=35110104
+python ai/danMCai/training/run-policy-training.py --output=ai/danMCai/data/generated/match-selfplay-example --proposal=ai/danMCai/data/generated/policy-cycle1/model/policy-0.25.onnx --actor=ai/danMCai/data/generated/full-match-training/cycle-04/model/ppo.npz --objective=full-match --opponent=mixed --opponent-model=ai/danMCai/data/generated/full-match-training/cycle-02/model/ppo.npz --cycles=16 --games=128 --seed=34100104 --eval-every=2 --eval-pairs=64 --eval-seed=35110104
 ```
 
-该混合对抗阶段的记录为 `ai/local/data/generated/match-selfplay-training/run.json`，已完成 16 次更新、每次 128 场，共 2,048 条整场训练轨迹；每两次更新后在另一组固定开发牌局中对原规则机器人评测。实际各周期结果及指纹见研究报告的证据快照。
+该混合对抗阶段的记录为 `ai/danMCai/data/generated/match-selfplay-training/run.json`，已完成 16 次更新、每次 128 场，共 2,048 条整场训练轨迹；每两次更新后在另一组固定开发牌局中对原规则机器人评测。实际各周期结果及指纹见研究报告的证据快照。
 
 ## 完整主网络的逐步解冻
 
@@ -165,11 +165,11 @@ python ai/local/training/run-policy-training.py --output=ai/local/data/generated
 ### 三路并行训练
 
 ```bash
-python ai/local/training/full_model.py --initialize=ai/local/data/generated/complete-example/initial
-python ai/local/training/run_full_training.py --output=ai/local/data/generated/complete-example/training --initial=ai/local/data/generated/complete-example/initial --opponent-model=ai/local/data/generated/full-match-training/cycle-04/model/ppo.npz --cycles=16 --matches=192 --workers=3 --seed=37100104 --eval-seed=38100104 --eval-pairs=64 --eval-every=2
+python ai/danMCai/training/full_model.py --initialize=ai/danMCai/data/generated/complete-example/initial
+python ai/danMCai/training/run_full_training.py --output=ai/danMCai/data/generated/complete-example/training --initial=ai/danMCai/data/generated/complete-example/initial --opponent-model=ai/danMCai/data/generated/full-match-training/cycle-04/model/ppo.npz --cycles=16 --matches=192 --workers=3 --seed=37100104 --eval-seed=38100104 --eval-pairs=64 --eval-every=2
 ```
 
-首轮目录 `ai/local/data/generated/complete-network/training/` 在首次两次更新、384 场训练后的回测出现退步：虽然验证均方误差下降，更新后的网络对两种对手的各 128 场开发比赛均未获胜。停止目录实际保留三次完成更新、使用 576 场；第四次更新未完成，不计入完成训练。导出与本地推理数值一致，因此没有用较低预测误差代替对战验收，也没有把这些权重设为默认模型。
+首轮目录 `ai/danMCai/data/generated/complete-network/training/` 在首次两次更新、384 场训练后的回测出现退步：虽然验证均方误差下降，更新后的网络对两种对手的各 128 场开发比赛均未获胜。停止目录实际保留三次完成更新、使用 576 场；第四次更新未完成，不计入完成训练。导出与本地推理数值一致，因此没有用较低预测误差代替对战验收，也没有把这些权重设为默认模型。
 
 后续全层试验降低更新步幅，并增加对初始网络输出的保持约束。保持约束参与损失计算，不限制任何合法出法；整场团队胜负仍是学习标签。在已有 192 场训练样本上，全部 1,373,185 个参数参与优化，每一层的权重均实际改变。
 
@@ -177,7 +177,7 @@ python ai/local/training/run_full_training.py --output=ai/local/data/generated/c
 
 对冻结历史模型的另外 128 场，候选获胜 61 场（47.66%），初始网络获胜 67 场（52.34%）。因此该候选没有被选为发布版本。[完整开发报告](./evaluation/full-network-development-2026-11-04.json)保留对手、种子、模型校验值和区间。
 
-后续目录 `ai/local/data/generated/complete-network/training-guarded/` 已完成 16 次更新、每次 192 场，共 3,072 场完整比赛，分三个采样进程。训练种子从 `37200104` 开始，不重复已停止实验的训练牌局。全部开发结果见研究报告自动生成区，尚未通过新的独立整场验收。
+后续目录 `ai/danMCai/data/generated/complete-network/training-guarded/` 已完成 16 次更新、每次 192 场，共 3,072 场完整比赛，分三个采样进程。训练种子从 `37200104` 开始，不重复已停止实验的训练牌局。全部开发结果见研究报告自动生成区，尚未通过新的独立整场验收。
 
 每两轮对两种固定对手分别回测：原规则机器人及冻结的历史模型。各用同牌交换双方，并按独立牌局种子计算区间，和初始化模型在同一批牌局的成绩比较。评测牌局与训练种子分开。
 
@@ -189,17 +189,17 @@ python ai/local/training/run_full_training.py --output=ai/local/data/generated/c
 
 ```bash
 python -m unittest discover -s tests -p 'full_training_test.py' -q
-python web/tests/policy_browser_smoke.py --complete-match --model=ai/local/data/generated/complete-network/smoke-middle/policy.onnx --output=web/artifacts/validation/complete-network-browser
+python web/tests/policy_browser_smoke.py --complete-match --model=ai/danMCai/data/generated/complete-network/smoke-middle/policy.onnx --output=web/artifacts/validation/complete-network-browser
 ```
 
 逐层冻结／解冻、实际梯度更新、损坏数据拒绝和 ONNX 导出已检查。浏览器通过生产推理模块核对 48 个牌局位置、7,922 个动作，选择全部一致，最大数值误差小于 0.000001；这证明运行兼容，不是胜率报告。
 
 ## 明牌评价与开局重打的四组对照
 
-`ai/local/training/run-team-study.py` 训练公开信息的完整 Actor，并比较公开／明牌 Critic 与是否重打开局。正式小试验在 `ai/local/data/generated/asymmetric-pilot/`，已完成四组各 4 周期、每周期 16 场，共 256 条训练轨迹；扩大试验 `asymmetric-next/` 已完成四组各 8 周期、每周期 32 场，共 1,024 条训练轨迹。流程检查另有 48 场，不能当作胜率证据。每两周期使用与训练分开的开发种子，对规则与冻结历史模型分别评测。具体架构、超参数、正负结果与统计边界见[研究报告](./MODEL_STUDY.md#76-明牌评价与重打首次小试验)。
+`ai/danMCai/training/run-team-study.py` 训练公开信息的完整 Actor，并比较公开／明牌 Critic 与是否重打开局。正式小试验在 `ai/danMCai/data/generated/asymmetric-pilot/`，已完成四组各 4 周期、每周期 16 场，共 256 条训练轨迹；扩大试验 `asymmetric-next/` 已完成四组各 8 周期、每周期 32 场，共 1,024 条训练轨迹。流程检查另有 48 场，不能当作胜率证据。每两周期使用与训练分开的开发种子，对规则与冻结历史模型分别评测。具体架构、超参数、正负结果与统计边界见[研究报告](./MODEL_STUDY.md#76-明牌评价与重打首次小试验)。
 
 ```bash
-python ai/local/training/run-team-study.py --output=ai/local/data/generated/asymmetric-pilot --initial=ai/local/data/generated/complete-network/initial --opponent-model=ai/local/data/generated/match-selfplay-training/cycle-14/model/ppo.npz --cycles=4 --games=16 --epochs=2 --seed=61000104 --eval-seed=62000104 --eval-pairs=16
+python ai/danMCai/training/run-team-study.py --output=ai/danMCai/data/generated/asymmetric-pilot --initial=ai/danMCai/data/generated/complete-network/initial --opponent-model=ai/danMCai/data/generated/match-selfplay-training/cycle-14/model/ppo.npz --cycles=4 --games=16 --epochs=2 --seed=61000104 --eval-seed=62000104 --eval-pairs=16
 ```
 
 所有训练代码、实验记录与本轮完成的检查点合入 `main`。历史权重较多，通过[成果目录](./evaluation/model-artifacts.json)连接到 GitHub 实验附件；网页只加载默认清单，不加载研究 Critic 或未验收候选。

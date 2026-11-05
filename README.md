@@ -28,7 +28,7 @@
 
 ## 代码与模型入口
 
-**[网页端 web/](web/README.md) · [AI ai/](ai/README.md) · [本机模型](ai/local/README.md) · [GuanZero](ai/guanzero/README.md)**
+**[网页端 web/](web/README.md) · [AI ai/](ai/README.md) · [danMCai 模型](ai/danMCai/README.md) · [GuanZero](ai/guanzero/README.md)**
 
 按功能寻找文件、运行数据和研究记录，见各目录 README。[旧路径迁移说明](ai/research/STRUCTURE_MIGRATION.md)。
 
@@ -54,7 +54,7 @@
 | 对局氛围 | 音效、全屏、可选语音、出牌动画与结果展示                      |
 | 静态部署 | GitHub Pages 自动发布，默认模型随网页部署，研究检查点单独归档 |
 
-大厅依次提供 **Clint规则机器人、GuanZero 最近两代、danMCai 初始版及最近两代冠军**。默认使用**本机现任门控冠军**，点「全部使用本地冠军」可重置。冠军依据训练系统实际门控晋升，不按步数最新替代，不代表独立棋力验收。每四小时同步；旧权重保留归档。GuanZero 使用 `guanzero-adp-gpubatch-44752` 这样的名称。具体版本与默认值见 [电脑选择与发布](./web/docs/WEB_MODELS.md)。
+大厅依次提供 **Clint规则机器人、GuanZero 最近两代、danMCai 初始版及最近两代冠军**。默认使用**danMCai 现任门控冠军**，点「全部使用danMCai 冠军」可重置。冠军依据训练系统实际门控晋升，不按步数最新替代，不代表独立棋力验收。每四小时同步；旧权重保留归档。GuanZero 使用 `guanzero-adp-gpubatch-44752` 这样的名称。具体版本与默认值见 [电脑选择与发布](./web/docs/WEB_MODELS.md)。
 
 至少两名真人的联机局结束后，房主会自动把匿名结构化牌谱保存到云端；支持断网暂存、补传与去重。牌谱可私有导出为 JSON／JSONL，供后续研究人类行为，当前训练不会自动读取。[采集与导出](./web/collector/README.md)。
 
@@ -103,7 +103,7 @@ web/                      网页端
   tests/                  网页与浏览器验证
   docs/                   玩法、操作与部署
 ai/                       AI
-  local/                  本机模型的训练、数据、评测、权重
+  danMCai/                  danMCai 模型的训练、数据、评测、权重
   guanzero/               GuanZero 的独立训练与评测
   shared/                 公共模拟与固定测试局面
   research/               研究报告、交接与实验结果
@@ -143,7 +143,7 @@ PR 会执行测试、格式、构建和真实浏览器出牌／牌谱导入检�
 
 开发评测可运行 `npm run eval:table -- --pairs=1000 --opponent=rule`：它复用网页真实决策模块，覆盖风格、公开记忆、直接出完和残局。实际已完成的样本、统计边界与复现命令见[研究报告](./ai/research/MODEL_STUDY.md#54-网页决策流程的整场评测)，不把流程检查当作棋力进步。该旧整场入口的 `rule` 仍是原版规则；Clint 的 GuanZero 评测使用 `--opponents=clint`，两者成绩不混用。
 
-GuanZero 与本机 danMCai 分开训练，支持 GPU 合批推理和只读实时面板。GuanZero 开发评测包含随机、原版规则、P0 与 Clint（rules-v2）；同一冻结模型、固定种子交换阵营，旧检出可独立补评 Clint。已完成结果和使用方式见 [GuanZero](./ai/guanzero/README.md)，不能把开发胜率当成独立验收。
+GuanZero 与danMCai 分开训练，支持 GPU 合批推理和只读实时面板。GuanZero 开发评测包含随机、原版规则、P0 与 Clint（rules-v2）；同一冻结模型、固定种子交换阵营，旧检出可独立补评 Clint。已完成结果和使用方式见 [GuanZero](./ai/guanzero/README.md)，不能把开发胜率当成独立验收。
 
 ## 文档导航
 
@@ -157,4 +157,4 @@ GuanZero 与本机 danMCai 分开训练，支持 GPU 合批推理和只读实时
 
 固定双队整场评测支持冠军同队对 Clint 同队、冠军同队对最新冻结导出同队；协议、独立种子与实际结果见[研究报告第 21 节](ai/research/MODEL_STUDY.md#21-2026-11-05冠军对-clint-与最新导出的固定整场评测)。部署与胜率结论分开记录。
 
-**可选出牌评价**：房主开房时先允许，每位玩家再自行开启；用当前本机冠军选牌预评、出牌后保留。百分数是模型相对分，不是胜率。详见[出牌评价](web/docs/MOVE_COACH.md)。
+**可选出牌评价**：房主开房时先允许，每位玩家再自行开启；用当前danMCai 冠军选牌预评、出牌后保留。百分数是模型相对分，不是胜率。详见[出牌评价](web/docs/MOVE_COACH.md)。

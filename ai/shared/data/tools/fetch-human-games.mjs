@@ -12,7 +12,7 @@ const output = resolve(
   option(
     'output',
     includeTests
-      ? 'ai/local/workspace/collection/export-validation'
+      ? 'ai/danMCai/workspace/collection/export-validation'
       : 'ai/shared/data/human-games/raw',
   ),
 );
@@ -25,7 +25,7 @@ const token =
   process.env.GUANDAN_EXPORT_TOKEN ||
   (
     await readFile(
-      resolve(root, option('token-file', 'ai/local/workspace/collection/export-token.txt')),
+      resolve(root, option('token-file', 'ai/danMCai/workspace/collection/export-token.txt')),
       'utf8',
     )
   ).trim();

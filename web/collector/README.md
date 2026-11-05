@@ -51,9 +51,9 @@ node ai/shared/data/tools/fetch-human-games.mjs
 node ai/shared/data/tools/prepare-human-games.mjs
 ```
 
-导出密钥默认读取忽略的 `ai/local/workspace/collection/export-token.txt`，也可通过 `GUANDAN_EXPORT_TOKEN` 或 `--token-file=...` 提供。原始文件位于忽略的 `ai/shared/data/human-games/raw/round-000000000001.json`，学习样本位于 `ai/shared/data/human-games/prepared/examples.jsonl`。密钥不放进网页、命令参数或文档；密钥丢失可重新设置，数据库数据不受影响。
+导出密钥默认读取忽略的 `ai/danMCai/workspace/collection/export-token.txt`，也可通过 `GUANDAN_EXPORT_TOKEN` 或 `--token-file=...` 提供。原始文件位于忽略的 `ai/shared/data/human-games/raw/round-000000000001.json`，学习样本位于 `ai/shared/data/human-games/prepared/examples.jsonl`。密钥不放进网页、命令参数或文档；密钥丢失可重新设置，数据库数据不受影响。
 
-诊断时显式传入 `--include-tests`，默认另存 `ai/local/workspace/collection/export-validation/`，不会混入正常原始目录。预处理即使读取该诊断目录，也会排除 `kind=test`。工具按每局处理并写入临时文件，完成后替换样本文件，避免将全部历史动作同时放进内存。
+诊断时显式传入 `--include-tests`，默认另存 `ai/danMCai/workspace/collection/export-validation/`，不会混入正常原始目录。预处理即使读取该诊断目录，也会排除 `kind=test`。工具按每局处理并写入临时文件，完成后替换样本文件，避免将全部历史动作同时放进内存。
 
 ## 研究边界
 

@@ -4,7 +4,7 @@ import { runtime } from '../../../web/src/app/runtime.js';
 import { analyze, beats } from '../../../web/src/core/combinations.js';
 import { createRound, advanceRound } from '../simulation/simulation.mjs';
 import { createRuleBaseline } from '../simulation/rule-baseline.mjs';
-import { clusterEstimate } from '../../local/evaluation/evaluate-trained.mjs';
+import { clusterEstimate } from '../../danMCai/evaluation/evaluate-trained.mjs';
 
 const signature = (play) =>
   play && { type: play.type, value: play.value, cards: play.cards.map((card) => card.id).sort() };

@@ -4,7 +4,7 @@
 | -------------------------------------------------- | ---------------------------------------------- |
 | [MODEL_STUDY.md](MODEL_STUDY.md)                   | 架构、训练方法、实际正负结果及统计限制的主报告 |
 | [CODEX_HANDOFF.md](CODEX_HANDOFF.md)               | 当前状态、硬性约束与后续任务顺序               |
-| [CONTINUOUS_TRAINING.md](CONTINUOUS_TRAINING.md)   | 本机持续训练、查看、停止与资源预算             |
+| [CONTINUOUS_TRAINING.md](CONTINUOUS_TRAINING.md)   | danMCai 持续训练、查看、停止与资源预算         |
 | [IMPROVEMENT_PROPOSAL.md](IMPROVEMENT_PROPOSAL.md) | 待验证的改进假设                               |
 | [MODEL_TRAINING.md](MODEL_TRAINING.md)             | 历史训练入口和应牌模型复现                     |
 | [STRUCTURE_MIGRATION.md](STRUCTURE_MIGRATION.md)   | 本次目录变化与旧运行兼容方式                   |
@@ -27,3 +27,5 @@
 [冠军对 Clint／最新导出](evaluation/champion-clint-latest-20261105)保存本次固定整场评测的事前协议、种子审计与后续实际结果；详见主报告第 21 节。
 
 [完整对照报告](reports/champion-clint-latest-20261105.md)：两组共 4,000 场已完成，最新冻结导出未显示超越冠军，保留负结果与不确定性。[出牌评价验证](evaluation/move-coach-20261105.json)另记功能兼容性，不是强度证据。
+
+名称与路径统一：[danMCai 迁移证据](evaluation/danmcai-naming-20261105.json) · [兼容说明](STRUCTURE_MIGRATION.md#danmcai-名称与规范路径)。

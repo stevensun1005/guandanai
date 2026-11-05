@@ -16,7 +16,7 @@ import numpy as np
 from playwright.sync_api import sync_playwright
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").is_file())
-sys.path.insert(0, str(ROOT / "ai/local/training"))
+sys.path.insert(0, str(ROOT / "ai/danMCai/training"))
 from export_ppo import export_ppo  # noqa: E402
 from ppo_learning import PPOEngine  # noqa: E402
 from ppo_onnx_inference import PPOOnnxEngine  # noqa: E402

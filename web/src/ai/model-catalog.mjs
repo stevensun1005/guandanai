@@ -30,7 +30,7 @@ export function validateCatalog(value) {
   }
   if (!ids.has(value.defaultId)) throw Error('Missing default model');
   if (value.selection) {
-    const champions = value.selection.localChampions;
+    const champions = value.selection.danMCaiChampions;
     if (
       value.selection.mode !== 'champions-v1' ||
       !Array.isArray(champions) ||
@@ -85,7 +85,7 @@ export function selectableModels(value) {
     { id: CLINT_RULE_ID, kind: 'rule' },
     ...guanzero,
     baseline,
-    ...value.selection.localChampions.map((id) => models.find((m) => m.id === id)),
+    ...value.selection.danMCaiChampions.map((id) => models.find((m) => m.id === id)),
   ].filter(Boolean);
 }
 export const BOT_CHOICES = Object.freeze(selectableModels(catalog));

@@ -8,7 +8,7 @@ import {
   TRAIN_SEED_SPAN,
   GATE_SEED_BASE,
   ANCHOR_SEED_BASE,
-} from '../../local/training/continuous/lib.mjs';
+} from '../../danMCai/training/continuous/lib.mjs';
 import { trainSeed, evalSeed, labels, writeShard, FEATURES } from '../training/lib.mjs';
 test('GuanZero seed blocks avoid development, main starts, and evaluation', () => {
   for (let slot = 0; slot < 40; slot++) {

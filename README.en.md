@@ -4,7 +4,7 @@
 
 ### A table for friends. One link to play.
 
-Four-player GuanDan with browser-local bots, private rooms and practical hand tools.
+Four-player GuanDan with bots running in your browser, private rooms and practical hand tools.
 
 [![Deploy](https://github.com/stevensun1005/guandanai/actions/workflows/pages.yml/badge.svg)](https://github.com/stevensun1005/guandanai/actions/workflows/pages.yml)
 [![Version](https://img.shields.io/github/package-json/v/stevensun1005/guandanai?color=ddb050)](./CHANGELOG.md)
@@ -25,7 +25,7 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 
 ## Code and model entry points
 
-[Web application](web/README.md) · [AI](ai/README.md) · [Local model](ai/local/README.md) · [GuanZero](ai/guanzero/README.md) · [Migration guide](ai/research/STRUCTURE_MIGRATION.md)
+[Web application](web/README.md) · [AI](ai/README.md) · [danMCai](ai/danMCai/README.md) · [GuanZero](ai/guanzero/README.md) · [Migration guide](ai/research/STRUCTURE_MIGRATION.md)
 
 ## Bring your friends
 
@@ -47,7 +47,7 @@ Online rounds with at least two people are archived as structured, pseudonymous 
 | ------------------- | --------------------------------------------------------------------------------------------- |
 | Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                     |
 | Friend rooms        | Invitations, seat selection, temporary bot takeover and original-tab recovery                 |
-| Local inference     | Versioned trained models in a browser Web Worker                                              |
+| Browser inference   | Versioned trained models in a browser Web Worker                                              |
 | Training versions   | GuanZero run-version names and gate-verified danMCai champions                                |
 | Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
 | Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
@@ -55,7 +55,7 @@ Online rounds with at least two people are archived as structured, pseudonymous 
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
-The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two local gate champions. The default is the **current local gate champion**. GuanZero names use the format `guanzero-adp-gpubatch-44752`; the catalog and selection guide own the actual current versions. Gate promotion is development selection, not independent strength acceptance. Four-hour synchronization preserves the local champion default; ordinary exports and GuanZero updates do not replace it. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics.
+The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two danMCai gate champions. The default is the **current danMCai gate champion**. GuanZero names use the format `guanzero-adp-gpubatch-44752`; the catalog and selection guide own the actual current versions. Gate promotion is development selection, not independent strength acceptance. Four-hour synchronization preserves the danMCai champion default; ordinary exports and GuanZero updates do not replace it. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics.
 
 The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](./web/docs/PRACTICE.md).
 
@@ -98,7 +98,7 @@ web/                      Web application
   tests/                  Web and browser tests
   docs/                   Playing, controls and deployment
 ai/                       AI
-  local/                  Local model training, data, evaluation and weights
+  danMCai/                  danMCai training, data, evaluation and weights
   guanzero/               Separate GuanZero training and evaluation
   shared/                 Shared simulation and fixed positions
   research/               Research, handoff and experiment evidence
@@ -118,7 +118,7 @@ The application uses relative asset URLs and supports repository subpaths. See t
 
 A guest can refresh the original browser tab or reconnect after a data-channel interruption. The host verifies the original seat credential, sends its current snapshot and cancels any unfinished bot turn for the returning player. A page-version mismatch blocks starting the table. If an incoming event queue stops advancing, the guest can resynchronize on the existing connection without extending the host’s turn clock.
 
-Recovery is tab-local; it does not provide account-based or cross-device sign-in. The host must remain online. If the host leaves, guests can continue independently against local bots; automatic host migration is not implemented.
+Recovery is tab-local; it does not provide account-based or cross-device sign-in. The host must remain online. If the host leaves, guests can continue independently against bots running in their own browser; automatic host migration is not implemented.
 
 Validation covers desktop Chrome, simulated phone layouts, public PeerJS signaling, multiple browser contexts, full rounds, tribute and recovery races. Different physical devices and networks still need broader long-running playtests. See [testing](./web/docs/TESTING.md) and [room recovery](./web/docs/ROOMS.md).
 
@@ -130,7 +130,7 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 
 ## Model research status
 
-The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and those historical experiments do not determine the current web default. The current default follows actual local champion promotions. The [research report](./ai/research/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
+The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and those historical experiments do not determine the current web default. The current default follows actual danMCai champion promotions. The [research report](./ai/research/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
 
 `npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](./ai/research/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength. This legacy full-match entry uses the original rules for `rule`; the GuanZero evaluator selects Clint explicitly with `--opponents=clint`.
 
@@ -148,4 +148,4 @@ GuanZero is a separate training route with batched GPU inference and a read-only
 
 Fixed full-match evaluation supports two champion seats against two Clint seats or two seats of a frozen latest export. [Protocols and evidence](ai/research/evaluation/champion-clint-latest-20261105/) keep paired seeds, model fingerprints, draws and uncertainty separate from deployment decisions.
 
-**Optional move feedback:** the host first permits it for the room, then each player independently opts in. The current local champion rates selected moves and retains the last played move. Percentages are relative model-value scores, not win probabilities. [How it works](web/docs/MOVE_COACH.md).
+**Optional move feedback:** the host first permits it for the room, then each player independently opts in. The current danMCai champion rates selected moves and retains the last played move. Percentages are relative model-value scores, not win probabilities. [How it works](web/docs/MOVE_COACH.md).

@@ -9,6 +9,6 @@
 
 ## 当前菜单与同步规则
 
-仅提供 Clint、GuanZero 最近两代、danMCai 初始版和本机最近两代真实门控冠军，默认本机现任冠军。GuanZero 名称为 `训练任务名-版本数值`，发布新代只轮换它的两项；不可变 Release 和历史证据保留。具体参数、冠军证据及默认保护以 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 为准。
+仅提供 Clint、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代真实门控冠军，默认danMCai 现任冠军。GuanZero 名称为 `训练任务名-版本数值`，发布新代只轮换它的两项；不可变 Release 和历史证据保留。具体参数、冠军证据及默认保护以 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 为准。
 
 周期同步同时归档新完成的 Clint 开发评测；即使没有新权重，也应识别新的评测证据。发布或命名变化同步根 README、相关指南、CHANGELOG 与研究报告，不能仅更新清单。

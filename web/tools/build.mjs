@@ -35,7 +35,7 @@ for (const file of await sourceFiles('web/src')) {
 }
 const modelVersions = {};
 for (const [key, model] of Object.entries(MODELS)) {
-  const bytes = await readFile(path.join(root, 'ai/local/models/baseline', model.file));
+  const bytes = await readFile(path.join(root, 'ai/danMCai/models/baseline', model.file));
   modelVersions[key] = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
   hash.update(key).update(bytes);
 }
@@ -104,7 +104,7 @@ await build({
   define: { __MODEL_VERSIONS__: JSON.stringify(modelVersions) },
 });
 for (const model of Object.values(MODELS))
-  copies['ai/local/models/baseline/' + model.file] = 'web/dist/models/' + model.file;
+  copies['ai/danMCai/models/baseline/' + model.file] = 'web/dist/models/' + model.file;
 for (const [from, to] of Object.entries(copies))
   await copyFile(path.join(root, from), path.join(root, to));
 for (const [file, bytes] of botBytes)

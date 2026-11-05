@@ -14,7 +14,7 @@ Node.js 20.19+，推荐与 CI 一致的 Node.js 24。克隆仓库后运行 `npm 
 - 回合流程放 `game`。
 - 手牌操作放 `hand` 和 `input`。
 - 房间行为放 `network`。
-- 网页模型控制器与推理放 `web/src/ai`，Clint 纯规则放 `web/src/rule-bot`；训练分别放 `ai/local` 和 `ai/guanzero`。`ai/local/models/baseline` 是参考权重目录，新增权重按 Release 归档。
+- 网页模型控制器与推理放 `web/src/ai`，Clint 纯规则放 `web/src/rule-bot`；训练分别放 `ai/danMCai` 和 `ai/guanzero`。`ai/danMCai/models/baseline` 是参考权重目录，新增权重按 Release 归档。
 - 样式与图片放 `styles`、`assets`。
 
 新增模块先明确它需要什么输入、会改变什么状态、由谁调用。不要因为顺手把另一个功能也塞进去。

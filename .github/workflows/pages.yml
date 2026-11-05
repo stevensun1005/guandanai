@@ -7,7 +7,7 @@ on:
       - 'web/docs/**'
       - 'ai/research/**'
       - '**/*.md'
-      - 'ai/local/models/experiments/**'
+      - 'ai/danMCai/models/experiments/**'
   pull_request:
     branches: [main]
   workflow_dispatch:

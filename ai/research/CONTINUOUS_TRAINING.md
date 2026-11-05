@@ -1,6 +1,6 @@
 # 持续自对弈训练
 
-本文说明本机 danMCai 的联赛／冠军门控路线。GuanZero 使用独立的逐局 DMC、GPU 合批与只读面板，四类开发对手及旧检出补评方式见 [GuanZero README](../guanzero/README.md)。当前网页默认本机实际冠军，普通新导出和 GuanZero 更新不覆盖它；[发布规则](../../web/docs/WEB_MODELS.md)。冻结运行按其原配置保留原版规则对手，不因名称变更自动切换到 Clint。
+本文说明 danMCai 的联赛／冠军门控路线。GuanZero 使用独立的逐局 DMC、GPU 合批与只读面板，四类开发对手及旧检出补评方式见 [GuanZero README](../guanzero/README.md)。当前网页默认danMCai 实际冠军，普通新导出和 GuanZero 更新不覆盖它；[发布规则](../../web/docs/WEB_MODELS.md)。冻结运行按其原配置保留原版规则对手，不因名称变更自动切换到 Clint。
 
 本系统让主价值网络在本机无人值守地连续训练：多个采样进程不停地打完整比赛，训练进程边收数据边更新，联赛对手池随训练增长，冠军由自动门控选出。训练进程不直接修改网页模型；所有者授权的每四小时发布另按 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 执行，部署与第 5.3 节的独立棋力验收分开。
 
@@ -14,7 +14,7 @@ python -m pip install -r ai/environment/requirements-training.txt
 npm run train:continuous
 ```
 
-默认运行目录是 `ai/local/runs/main`（已被 Git 忽略）。常用参数：
+默认运行目录是 `ai/danMCai/runs/main`（已被 Git 忽略）。常用参数：
 
 | 参数                | 作用                                                   |
 | ------------------- | ------------------------------------------------------ |
@@ -26,14 +26,14 @@ npm run train:continuous
 例如用 8 个采样进程、把整场结果按一半权重计入目标：
 
 ```bash
-npm run train:continuous -- --run=ai/local/runs/match-half --config='{"actors":8,"learner":{"targetMatchWeight":0.5}}'
+npm run train:continuous -- --run=ai/danMCai/runs/match-half --config='{"actors":8,"learner":{"targetMatchWeight":0.5}}'
 ```
 
 查看进度：
 
 ```bash
 npm run train:status
-npm run train:status -- --run=ai/local/runs/match-half
+npm run train:status -- --run=ai/danMCai/runs/match-half
 ```
 
 ### 实时进度面板
@@ -42,7 +42,7 @@ npm run train:status -- --run=ai/local/runs/match-half
 npm run train:dashboard
 ```
 
-打开 [本机训练进度](http://127.0.0.1:8766/)，也可把此地址放在 Codex 的右侧浏览器面板。页面每 5 秒读取真实状态，显示当前交接步骤、运行时间、整场采样数、学习决策、全网络更新步数、进程状态、最近保存模型、门控冠军、进行中的对战检查及报告发布状态。
+打开 [danMCai 训练进度](http://127.0.0.1:8766/)，也可把此地址放在 Codex 的右侧浏览器面板。页面每 5 秒读取真实状态，显示当前交接步骤、运行时间、整场采样数、学习决策、全网络更新步数、进程状态、最近保存模型、门控冠军、进行中的对战检查及报告发布状态。
 
 时间进度条仅表示本次运行时限的完成比例，不能解释为棋力、胜率或整个交接的完成比例；完成一次训练也不会自动把后续步骤标为已完成。采样数据与开发门控均不等于独立验收。状态过期、进程退出或连接中断时页面会提醒，最后记录不会被显示成持续训练的证明。
 
@@ -71,17 +71,17 @@ npm run train:dashboard
    对每个新快照启动门控：与当前冠军配对对局，SPRT 判定是否更替冠军
 ```
 
-| 文件                                                                | 作用                                     |
-| ------------------------------------------------------------------- | ---------------------------------------- |
-| [supervisor.mjs](../local/training/continuous/supervisor.mjs)       | 启动、重启、联赛、快照、门控、停止规则   |
-| [actor.mjs](../local/training/continuous/actor.mjs)                 | 采样进程                                 |
-| [learner.py](../local/training/continuous/learner.py)               | 持续训练进程                             |
-| [gate.mjs](../local/training/continuous/gate.mjs)                   | 冠军门控                                 |
-| [value_net.py](../local/training/continuous/value_net.py)           | 网络读写与网页兼容的 ONNX 导出           |
-| [lib.mjs](../local/training/continuous/lib.mjs)                     | 默认配置、样本格式、PFSP、SPRT、种子区间 |
-| [status.mjs](../local/training/continuous/status.mjs)               | 进度摘要                                 |
-| [remote-actors.mjs](../local/training/continuous/remote-actors.mjs) | 局域网内另一台电脑的采样进程启动器       |
-| [remote.mjs](../local/training/continuous/remote.mjs)               | 代码指纹核对、统计全部采样槽             |
+| 文件                                                                  | 作用                                     |
+| --------------------------------------------------------------------- | ---------------------------------------- |
+| [supervisor.mjs](../danMCai/training/continuous/supervisor.mjs)       | 启动、重启、联赛、快照、门控、停止规则   |
+| [actor.mjs](../danMCai/training/continuous/actor.mjs)                 | 采样进程                                 |
+| [learner.py](../danMCai/training/continuous/learner.py)               | 持续训练进程                             |
+| [gate.mjs](../danMCai/training/continuous/gate.mjs)                   | 冠军门控                                 |
+| [value_net.py](../danMCai/training/continuous/value_net.py)           | 网络读写与网页兼容的 ONNX 导出           |
+| [lib.mjs](../danMCai/training/continuous/lib.mjs)                     | 默认配置、样本格式、PFSP、SPRT、种子区间 |
+| [status.mjs](../danMCai/training/continuous/status.mjs)               | 进度摘要                                 |
+| [remote-actors.mjs](../danMCai/training/continuous/remote-actors.mjs) | 局域网内另一台电脑的采样进程启动器       |
+| [remote.mjs](../danMCai/training/continuous/remote.mjs)               | 代码指纹核对、统计全部采样槽             |
 
 ## 局域网内另一台电脑一起采样
 
@@ -89,7 +89,7 @@ npm run train:dashboard
 
 ### 主电脑
 
-1. 正常启动运行，例如 `npm run train:continuous -- --run=ai/local/runs/gpu-main`。
+1. 正常启动运行，例如 `npm run train:continuous -- --run=ai/danMCai/runs/gpu-main`。
 2. 在资源管理器里右键运行目录（例如 `D:\vibecoding\guandan\work\continuous\gpu-main`）→「属性」→「共享」→「高级共享」，勾选「共享此文件夹」，在「权限」里给另一台电脑登录用的账户「更改」和「读取」权限。
 3. 记下共享路径，例如 `\\主电脑名\gpu-main`。
 
@@ -140,7 +140,7 @@ npm run train:remote -- --run=Z:/ --slots=8-13
 **怎么用**：调度进程目前只会启动标准进程（它属于运行冻结的源码，运行期间不能改）。用远程启动器在**本机或其他电脑**上启动快速进程，槽号必须不小于运行配置的 `actors`：
 
 ```bash
-npm run train:remote -- --run=ai/local/runs/<运行名> --slots=8-11 --actor=fast --games=48
+npm run train:remote -- --run=ai/danMCai/runs/<运行名> --slots=8-11 --actor=fast --games=48
 ```
 
 - 想让一次新运行主要使用快速进程，可以首次启动时设 `"actors": 1`，再用上面的命令为槽 1 起启动快速进程。
@@ -161,9 +161,9 @@ npm run train:continuous -- --run=D:/vibecoding/guandan/work/continuous/gpu-main
 
 `actorSeedOffset` 默认 0，在各采样槽的训练种子块内设置起点；恢复仍优先使用保存的下一种子。`evaluationBlockOffset` 默认 0，只改变首次分配的门控／锚点块序号，后续持久化和耗尽保护不变。这两个偏移不改变训练、门控、锚点及留出的用途边界。
 
-进度面板和 `npm run train:status` 在本机存在 `ai/local/runs/gpu-main/config.json` 时优先查看 GPU 主运行，可用 `--run` 覆盖。面板显示设备名称、实际场数、更新次数与已暂停 CPU 基线。每 5 秒请求最新状态，场数直接聚合各采样进程逐场写入的计数；学习器状态在训练时约每 10 秒、等待样本时约每 2 秒更新，调度心跳约每 30 秒更新，二者不混为面板刷新时间。保存模型仍约每 10 分钟一次。设备短测见研究报告第 7.9 节；约 10.12 倍是不同运行库下训练计算的短测比值，初期端到端观测约为 1.32 倍（第 7.11 节），尚不能推断长期效率和棋力提升。
+进度面板和 `npm run train:status` 在本机存在 `ai/danMCai/runs/gpu-main/config.json` 时优先查看 GPU 主运行，可用 `--run` 覆盖。面板显示设备名称、实际场数、更新次数与已暂停 CPU 基线。每 5 秒请求最新状态，场数直接聚合各采样进程逐场写入的计数；学习器状态在训练时约每 10 秒、等待样本时约每 2 秒更新，调度心跳约每 30 秒更新，二者不混为面板刷新时间。保存模型仍约每 10 分钟一次。设备短测见研究报告第 7.9 节；约 10.12 倍是不同运行库下训练计算的短测比值，初期端到端观测约为 1.32 倍（第 7.11 节），尚不能推断长期效率和棋力提升。
 
-网络结构与网页的 P0 完全相同（$567\to512\times5\to1$），导出的 ONNX 与 `ai/local/models/baseline/policy.onnx` 使用同一输入输出，网页 Worker 和 `npm run eval:table -- --policy=<文件>` 都能直接加载。
+网络结构与网页的 P0 完全相同（$567\to512\times5\to1$），导出的 ONNX 与 `ai/danMCai/models/baseline/policy.onnx` 使用同一输入输出，网页 Worker 和 `npm run eval:table -- --policy=<文件>` 都能直接加载。
 
 每条样本保存四个目标分量：本局升级分（本队 +1～+3 或对方 −1～−3）、整场结果（+1／−1／平局 0）、局序号、整场局数。训练目标为
 
@@ -204,7 +204,7 @@ $w$ 即 `targetMatchWeight`，默认 0，即延续 P0 原有的单局升级分�
 均匀探索偶尔随机打出炸弹或拆牌，代价约 8 个百分点；T=0.02 的 softmax 只在分数接近的出法之间探索，在这个样本量下看不出代价。每组约有 ±6 个百分点的不确定性，只用于选择默认值。复现：
 
 ```bash
-node ai/local/training/continuous/explore-cost.mjs --pairs=150 --exploration='{"type":"softmax","temperature":0.02}'
+node ai/danMCai/training/continuous/explore-cost.mjs --pairs=150 --exploration='{"type":"softmax","temperature":0.02}'
 ```
 
 ## 种子与数据用途
@@ -219,7 +219,7 @@ node ai/local/training/continuous/explore-cost.mjs --pairs=150 --exploration='{"
 
 ## 持续更新研究报告
 
-训练工作目录现为 `D:\vibecoding\guandan`。训练参数和权重留在该目录的 `ai/local/runs/`，专用报告工作树只更新两份小文件：`ai/research/MODEL_STUDY.md` 和 `ai/research/evaluation/model-study-progress.json`。
+训练工作目录现为 `D:\vibecoding\guandan`。训练参数和权重留在该目录的 `ai/danMCai/runs/`，专用报告工作树只更新两份小文件：`ai/research/MODEL_STUDY.md` 和 `ai/research/evaluation/model-study-progress.json`。
 
 ```bash
 python ai/research/tools/update-model-study.py --workspace D:/vibecoding/guandan
@@ -267,4 +267,4 @@ python ai/research/tools/update-model-study.py --workspace D:/vibecoding/guandan
 
 原 8 槽配置在本机恢复阶段曾短时只剩约 1 GiB，软预算来不及逐一退出，现已正式记录为 3 槽启动。恢复前核对保存点、源码指纹、已有调度器与桌面可用内存；已有的 4 GiB 软预留不保证启动瞬间也达标。先恢复受控并发，再依据实测调整，并经正常保存及协议变更入口留痕，不能直接改冻结源码。此次记录见[主报告第 21 节](MODEL_STUDY.md)。
 
-固定对照可用 `node ai/local/evaluation/monitor-fixed.mjs --run=<含launcher.json与frozen.json的评测目录> --workspace=<项目> --until=<ISO截止时间>` 显示双组进度，并在评测完成后继续观测桌面直到截止。可用内存每 5 秒读取，全机 CPU／TCP 绑定每 30 秒读取；完成比赛的计时保持真实结束点。TCP 绑定超过 12,000 时只让未完成评测等待，不结束系统进程或改训练。阈值告警不等同网络连通性验证；具体状态看面板中的检测时间。
+固定对照可用 `node ai/danMCai/evaluation/monitor-fixed.mjs --run=<含launcher.json与frozen.json的评测目录> --workspace=<项目> --until=<ISO截止时间>` 显示双组进度，并在评测完成后继续观测桌面直到截止。可用内存每 5 秒读取，全机 CPU／TCP 绑定每 30 秒读取；完成比赛的计时保持真实结束点。TCP 绑定超过 12,000 时只让未完成评测等待，不结束系统进程或改训练。阈值告警不等同网络连通性验证；具体状态看面板中的检测时间。

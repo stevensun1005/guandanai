@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { comparePolicyEvaluations } from '../../local/evaluation/analyze-policy-evaluation.mjs';
+import { comparePolicyEvaluations } from '../../danMCai/evaluation/analyze-policy-evaluation.mjs';
 
 const outcome = (side, won, points = 1) => ({
   testedSide: side,

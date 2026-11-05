@@ -1,6 +1,6 @@
 {
   "name": "guandanai",
-  "version": "1.15.1",
+  "version": "1.16.0",
   "type": "module",
   "private": true,
   "engines": {
@@ -10,21 +10,21 @@
   "scripts": {
     "build": "node web/tools/build.mjs",
     "dev": "node web/tools/serve.mjs",
-    "test": "node --test web/tests/*.test.mjs ai/local/tests/*.test.mjs ai/guanzero/tests/*.test.mjs ai/shared/tests/*.test.mjs",
-    "eval:profiles": "node ai/local/evaluation/evaluate-profiles.mjs",
+    "test": "node --test web/tests/*.test.mjs ai/danMCai/tests/*.test.mjs ai/guanzero/tests/*.test.mjs ai/shared/tests/*.test.mjs",
+    "eval:profiles": "node ai/danMCai/evaluation/evaluate-profiles.mjs",
     "format": "prettier --write \"web/**/*.{js,mjs,css,html,md}\" \"ai/**/*.{mjs,md}\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
     "format:check": "prettier --check \"web/**/*.{js,mjs,css,html,md}\" \"ai/**/*.{mjs,md}\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
-    "eval:response": "node ai/local/evaluation/evaluate-response.mjs",
-    "eval:endgame": "node ai/local/evaluation/evaluate-endgame.mjs",
-    "eval:table": "node ai/local/evaluation/evaluate-table.mjs",
-    "train:continuous": "node ai/local/training/continuous/supervisor.mjs",
-    "train:status": "node ai/local/training/continuous/status.mjs",
-    "train:dashboard": "node ai/local/training/continuous/dashboard.mjs",
-    "train:remote": "node ai/local/training/continuous/remote-actors.mjs",
+    "eval:response": "node ai/danMCai/evaluation/evaluate-response.mjs",
+    "eval:endgame": "node ai/danMCai/evaluation/evaluate-endgame.mjs",
+    "eval:table": "node ai/danMCai/evaluation/evaluate-table.mjs",
+    "train:continuous": "node ai/danMCai/training/continuous/supervisor.mjs",
+    "train:status": "node ai/danMCai/training/continuous/status.mjs",
+    "train:dashboard": "node ai/danMCai/training/continuous/dashboard.mjs",
+    "train:remote": "node ai/danMCai/training/continuous/remote-actors.mjs",
     "train:guanzero": "node ai/guanzero/training/run.mjs",
     "train:guanzero:dashboard": "node ai/guanzero/training/dashboard.mjs",
     "package": "node web/tools/package.mjs",
-    "test:python": "python -m unittest discover -s ai/local/tests -p \"*test.py\" && python -m unittest discover -s ai/guanzero/tests -p \"*test.py\" && python -m unittest discover -s ai/research/tests -p \"*test.py\""
+    "test:python": "python -m unittest discover -s ai/danMCai/tests -p \"*test.py\" && python -m unittest discover -s ai/guanzero/tests -p \"*test.py\" && python -m unittest discover -s ai/research/tests -p \"*test.py\""
   },
   "dependencies": {
     "onnxruntime-web": "1.31.1",

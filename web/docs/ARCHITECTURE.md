@@ -77,7 +77,7 @@ flowchart LR
 
 `web/tools/build.mjs` 使用 esbuild 处理模块、样式和图片，复制模型与浏览器运行库，输出 `web/dist`。页面、脚本、样式和 Worker 使用源文件及模型共同计算的版本；模型文件使用自身内容版本。界面改动会刷新对应代码，而相同权重可以继续使用浏览器缓存。
 
-网页模型由 `web/src/ai/model-catalog.json` 注册数字编号、默认值、网络配置、来源、完整 SHA-256 和不可变 Release 地址。构建从 Release 获取新增权重，校验后复制到同源 Pages 目录；Worker 按编号维护独立会话。`web/src/ai/models.mjs` 仍保留历史 P0／R1 配置供研究复现。大厅仅显示 Clint、GuanZero 最近两代、danMCai 初始版和两代本机冠军；默认当前门控冠军。GuanZero 名称为 `训练任务名-版本数值`，完整不可变归档仍保留在清单。大厅不再提供性格偏好；房间开始、重连及转为单机都同步或旋转座位对应的编号。发布流程见 [WEB_MODELS.md](./WEB_MODELS.md)。
+网页模型由 `web/src/ai/model-catalog.json` 注册数字编号、默认值、网络配置、来源、完整 SHA-256 和不可变 Release 地址。构建从 Release 获取新增权重，校验后复制到同源 Pages 目录；Worker 按编号维护独立会话。`web/src/ai/models.mjs` 仍保留历史 P0／R1 配置供研究复现。大厅仅显示 Clint、GuanZero 最近两代、danMCai 初始版和两代danMCai 冠军；默认当前门控冠军。GuanZero 名称为 `训练任务名-版本数值`，完整不可变归档仍保留在清单。大厅不再提供性格偏好；房间开始、重连及转为单机都同步或旋转座位对应的编号。发布流程见 [WEB_MODELS.md](./WEB_MODELS.md)。
 
 Worker 单独打包自己的特征、风格与残局规则模块，浏览器推理运行库作为同源资源加载。编号模型只读取 `web/src/ai/observation.js` 明确选择的可见信息；残局搜索只使用自己的实体牌、公开记录及剩余张数。
 

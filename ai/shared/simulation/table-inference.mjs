@@ -20,7 +20,7 @@ export function createTableInference({
         key === 'policy' && policy
           ? policy
           : fileURLToPath(
-              new URL('../../local/models/baseline/' + MODELS[key].file, import.meta.url),
+              new URL('../../danMCai/models/baseline/' + MODELS[key].file, import.meta.url),
             );
       sessions.set(
         key,

@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").is_file())
 sys.path.insert(0, str(ROOT))
-from ai.local.reference.numpy_engine import PolicyNetwork, encode, cards_array
+from ai.danMCai.reference.numpy_engine import PolicyNetwork, encode, cards_array
 
 OUT = ROOT / "web/artifacts/validation/browser-release"
 OUT.mkdir(parents=True, exist_ok=True)

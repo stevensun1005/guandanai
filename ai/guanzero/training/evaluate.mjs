@@ -5,7 +5,7 @@ import * as ort from 'onnxruntime-node';
 import { DEFAULT_OPPONENTS, opponentDefinition } from './opponents.mjs';
 import { playMatch } from '../../shared/simulation/match-rollout.mjs';
 import { seededRandom } from '../../shared/simulation/simulation.mjs';
-import { createModelPool } from '../../local/training/continuous/lib.mjs';
+import { createModelPool } from '../../danMCai/training/continuous/lib.mjs';
 import {
   paths,
   readJSON,
@@ -123,7 +123,7 @@ export async function evaluate({
       ),
       'web/src/ai/encoding.mjs': sha256(join(ROOT, 'web/src/ai/encoding.mjs')),
     },
-    p0SHA256: sha256(join(ROOT, 'ai/local/models/baseline/policy.onnx')),
+    p0SHA256: sha256(join(ROOT, 'ai/danMCai/models/baseline/policy.onnx')),
     opponents: Object.fromEntries(definitions.map((definition) => [definition.id, definition])),
     trainingSourceSHA256: config.sourceSHA256 || {},
     exploration: 0,
@@ -149,7 +149,7 @@ export async function evaluate({
               snapshotInfer:
                 opponent === 'p0'
                   ? (state) =>
-                      pool.values(join(ROOT, 'ai/local/models/baseline/policy.onnx'), state)
+                      pool.values(join(ROOT, 'ai/danMCai/models/baseline/policy.onnx'), state)
                   : (state) => Float32Array.from(state.actions, () => random()),
             }),
           );

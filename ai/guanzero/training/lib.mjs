@@ -6,8 +6,8 @@ import { randomUUID } from 'node:crypto';
 import * as ort from 'onnxruntime-node';
 import { encode, cardsArray } from '../../../web/src/ai/encoding.mjs';
 import { history } from './history.mjs';
-export { readJSON, writeJSON, sha256, option } from '../../local/training/continuous/lib.mjs';
-import { readJSON, writeJSON } from '../../local/training/continuous/lib.mjs';
+export { readJSON, writeJSON, sha256, option } from '../../danMCai/training/continuous/lib.mjs';
+import { readJSON, writeJSON } from '../../danMCai/training/continuous/lib.mjs';
 export const ROOT = resolve(fileURLToPath(new URL('../../..', import.meta.url)));
 export const FEATURES = 1647,
   TRAIN_BASE = 1_000_000_000,

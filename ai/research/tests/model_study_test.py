@@ -16,7 +16,7 @@ class ModelStudyTests(unittest.TestCase):
     def test_publication_signal_ignores_sampling_ticks_and_triggers_on_completed_results(self):
         with tempfile.TemporaryDirectory() as temporary:
             workspace = Path(temporary)
-            directory = workspace / "ai/local/runs/main"
+            directory = workspace / "ai/danMCai/runs/main"
             directory.mkdir(parents=True)
             report, target = self.continuous_fixture(directory)
             report["status"] = "running"

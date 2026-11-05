@@ -33,7 +33,7 @@ npm run dev
 - 同源的房间连接库。
 - `.nojekyll`，让静态资源按原目录发布。
 
-模型计算在负责电脑的浏览器里运行，网页不依赖 Python 推理服务。只加入朋友房间的浏览器不会预先下载模型。构建读取 `web/src/ai/model-catalog.json` 和历史 `models.mjs` 元数据，下载并校验已注册模型的完整 SHA；菜单只显示当前允许的六项，权重在实际决策时按需加载。`ai/local/models/experiments/` 研究检查点和训练用 Critic 不进入网页包。Python 的模型导出、训练和批量评估工具属于开发流程。
+模型计算在负责电脑的浏览器里运行，网页不依赖 Python 推理服务。只加入朋友房间的浏览器不会预先下载模型。构建读取 `web/src/ai/model-catalog.json` 和历史 `models.mjs` 元数据，下载并校验已注册模型的完整 SHA；菜单只显示当前允许的六项，权重在实际决策时按需加载。`ai/danMCai/models/experiments/` 研究检查点和训练用 Critic 不进入网页包。Python 的模型导出、训练和批量评估工具属于开发流程。
 
 ## 独立牌谱接收服务
 

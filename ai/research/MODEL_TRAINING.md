@@ -10,24 +10,24 @@ GuanZero 的独立训练、GPU 合批、只读面板及随机／原版规则／P
 
 ## 按任务选择入口
 
-| 任务                                   | 文档与依赖                                                                                                 |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| 使用网页默认模型                       | 本文的模型清单；普通玩家不需要 Python                                                                      |
-| 复现已发布的应牌分类器                 | 本文下方的数据、训练与历史评测；`ai/environment/requirements-models.txt`                                   |
-| 训练完整主网、PPO 或公开／明牌评价网络 | [训练记录](./TRAINING_RUN.md)中的对应阶段；`ai/environment/requirements-training.txt`                      |
-| 核对实验结论、种子和模型指纹           | [研究主报告](./MODEL_STUDY.md)及其机器可读证据                                                             |
-| 取得完成的研究权重                     | [实验检查点说明](../local/models/experiments/README.md)与[历史成果索引](./evaluation/model-artifacts.json) |
+| 任务                                   | 文档与依赖                                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 使用网页默认模型                       | 本文的模型清单；普通玩家不需要 Python                                                                        |
+| 复现已发布的应牌分类器                 | 本文下方的数据、训练与历史评测；`ai/environment/requirements-models.txt`                                     |
+| 训练完整主网、PPO 或公开／明牌评价网络 | [训练记录](./TRAINING_RUN.md)中的对应阶段；`ai/environment/requirements-training.txt`                        |
+| 核对实验结论、种子和模型指纹           | [研究主报告](./MODEL_STUDY.md)及其机器可读证据                                                               |
+| 取得完成的研究权重                     | [实验检查点说明](../danMCai/models/experiments/README.md)与[历史成果索引](./evaluation/model-artifacts.json) |
 
 研究 Actor、训练专用 Critic 与网页默认模型分开保存。实验已完成不等于通过发布验收；本文下方应牌模型的历史单把数据也不代表最新整场胜率。
 
 ## 模型清单
 
-| 文件                                     | 结构与任务                                           | 使用范围                         |
-| ---------------------------------------- | ---------------------------------------------------- | -------------------------------- |
-| `ai/local/models/baseline/policy.onnx`   | 局面 513 维、动作 54 维，五层 512 单元 tanh 价值网络 | 所有电脑的主策略                 |
-| `ai/local/models/baseline/response.onnx` | 253 → 64 → 32 → 1，tanh 与 sigmoid，18,369 参数      | 观察型与融合型的接近评分出法比较 |
+| 文件                                       | 结构与任务                                           | 使用范围                         |
+| ------------------------------------------ | ---------------------------------------------------- | -------------------------------- |
+| `ai/danMCai/models/baseline/policy.onnx`   | 局面 513 维、动作 54 维，五层 512 单元 tanh 价值网络 | 所有电脑的主策略                 |
+| `ai/danMCai/models/baseline/response.onnx` | 253 → 64 → 32 → 1，tanh 与 sigmoid，18,369 参数      | 观察型与融合型的接近评分出法比较 |
 
-应牌网络约 74 KB；原始 NumPy 权重保存在 `ai/local/models/baseline/response.npz`，输入输出和文件校验值见 `ai/local/models/baseline/response.meta.json`。它是自对弈样本训练的**监督学习模型**，没有替换或重新训练默认的强化学习权重。
+应牌网络约 74 KB；原始 NumPy 权重保存在 `ai/danMCai/models/baseline/response.npz`，输入输出和文件校验值见 `ai/danMCai/models/baseline/response.meta.json`。它是自对弈样本训练的**监督学习模型**，没有替换或重新训练默认的强化学习权重。
 
 ## 数据从哪里来
 
@@ -39,11 +39,11 @@ GuanZero 的独立训练、GPU 合批、只读面板及随机／原版规则／P
 
 ```bash
 python -m pip install -r ai/environment/requirements-models.txt
-node ai/local/data/tools/collect-responses.mjs --games=5000 --seed=20270104 --output=ai/local/data/generated/dataset
-python ai/local/training/train_response.py ai/local/data/generated/dataset ai/local/data/generated/candidate
+node ai/danMCai/data/tools/collect-responses.mjs --games=5000 --seed=20270104 --output=ai/danMCai/data/generated/dataset
+python ai/danMCai/training/train_response.py ai/danMCai/data/generated/dataset ai/danMCai/data/generated/candidate
 ```
 
-数据约 171 MB，放在忽略提交的 `ai/local/workspace/`。编码版本、教师文件 SHA 和实际样本数会写入数据元信息。教师或规则变化后应重新采样、训练和评估，不要把旧测试成绩移到新权重上。
+数据约 171 MB，放在忽略提交的 `ai/danMCai/workspace/`。编码版本、教师文件 SHA 和实际样本数会写入数据元信息。教师或规则变化后应重新采样、训练和评估，不要把旧测试成绩移到新权重上。
 
 ## 预测结果
 
@@ -68,7 +68,7 @@ python ai/local/training/train_response.py ai/local/data/generated/dataset ai/lo
 最终用法在 3,000 组交换双方、共 6,000 局的留出种子 `20300104` 上检查，对手为未使用第二模型的观察型，双方均启用当时上限为 16 张的精确残局。胜率 50.23%；配对升级分均值 +0.02733，95% 区间 [-0.01208, 0.06674]。**区间包含零，尚不能宣称棋力提升。**默认均衡型保持不变。
 
 ```bash
-node ai/local/evaluation/evaluate-response.mjs --pairs=3000 --seed=20300104 --endgame-cards=16 --output=web/artifacts/validation/response
+node ai/danMCai/evaluation/evaluate-response.mjs --pairs=3000 --seed=20300104 --endgame-cards=16 --output=web/artifacts/validation/response
 ```
 
 [对局结果](./evaluation/response-policy-1.7.0.json)。这是随机级牌的独立单局，不包括跨局进还贡与整场打 A。新模型进入默认策略前，仍需新的留出局、更多对手和设备验证。
@@ -81,4 +81,4 @@ node ai/local/evaluation/evaluate-response.mjs --pairs=3000 --seed=20300104 --en
 
 ## 主网渐进训练（实验）
 
-完整主网已完成后层、中后层、全层三个阶段的实验，使用整场团队结果和生成器提供的全部合法候选进行蒙特卡洛价值学习。后续另完成全候选 PPO 与公开／明牌评价、开局重打的四组对照；这是不同的方法，不应统称为同一次渐进解冻训练。训练专用明牌 Critic 不参与网页出牌。参数范围、复现入口和实际完成量见[训练记录](./TRAINING_RUN.md)，当前结论见[研究主报告](./MODEL_STUDY.md)。该批历史实验不决定当前网页默认；当前默认依据本机实际门控冠军与发布清单。
+完整主网已完成后层、中后层、全层三个阶段的实验，使用整场团队结果和生成器提供的全部合法候选进行蒙特卡洛价值学习。后续另完成全候选 PPO 与公开／明牌评价、开局重打的四组对照；这是不同的方法，不应统称为同一次渐进解冻训练。训练专用明牌 Critic 不参与网页出牌。参数范围、复现入口和实际完成量见[训练记录](./TRAINING_RUN.md)，当前结论见[研究主报告](./MODEL_STUDY.md)。该批历史实验不决定当前网页默认；当前默认依据danMCai 实际门控冠军与发布清单。

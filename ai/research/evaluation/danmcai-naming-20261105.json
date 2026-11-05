@@ -1,0 +1,201 @@
+{
+  "baseCommit": "9bf559d1f04c04edbeabb1439e2b839567d3eb16",
+  "kind": "naming-and-path-migration-not-strength",
+  "canonicalRoute": "danMCai",
+  "canonicalDirectory": "ai/danMCai",
+  "trackedEntriesMoved": 350,
+  "unchangedArtifactBlobs": 247,
+  "unchangedHistoricalEvidenceFiles": 77,
+  "unchangedCoreBlobIds": {
+    "web/src/ai/controller.js": "9ea4623cf9df9b970fc238401d63645590be2ebf",
+    "web/src/ai/candidates.js": "5ff3d6bc6ed75cf3e73f023b0874bef0a98fd4d9",
+    "web/src/ai/encoding.mjs": "9ec3684ccf6e941207de558674dc1d335ef537ee",
+    "web/src/ai/policy-inference.mjs": "e64ec83e32e10b20fad5d585eda62c220982e5cf",
+    "web/src/ai/table-policy.mjs": "cfafd2e980449ddbf693180b36534f800035102a",
+    "web/src/rule-bot/strategy.js": "f6728cc26e3bf05ff2240f142b57a4b2323e116e"
+  },
+  "sameCatalogModels": true,
+  "sameCatalogDefault": "009",
+  "sameChampionOrder": [
+    "009",
+    "008"
+  ],
+  "nodeTests": {
+    "passed": 156
+  },
+  "python": {
+    "danMCaiPassed": 29,
+    "gpuTestSkipped": 1,
+    "counterfactualCollectionPassed": 2,
+    "guanzeroPassed": 8,
+    "researchPassed": 9
+  },
+  "featureParity": {
+    "states": 532,
+    "actions": 2996,
+    "maxError": 0
+  },
+  "referenceEncoding": {
+    "snapshots": 834,
+    "features": 567,
+    "exact": true
+  },
+  "newStrengthMatches": 0,
+  "newTrainingUpdates": 0,
+  "dashboard": {
+    "title": "danMCai 训练观测台",
+    "learnerStep": 643377,
+    "freeGiB": 9.421424865722656,
+    "reserveGiB": 4,
+    "completedIndependentMatches": 4000,
+    "refreshVerified": true,
+    "pageErrors": []
+  },
+  "coachBrowser": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "trainingUpdates": 0,
+    "hostDeniedEnforced": true,
+    "scoring": {
+      "modelId": "009",
+      "candidates": 421,
+      "minValue": -2.2443015575408936,
+      "maxValue": -1.5392310619354248,
+      "viewTeamLevelsChecked": true,
+      "teamLevels": {
+        "self": 2,
+        "opponent": 7
+      },
+      "relativeExtremaChecked": true,
+      "selectionUsesCachedValues": true,
+      "invalidSelectionNotRated": true,
+      "disabledStaleReplyIgnored": true,
+      "injectedFailureNotScored": true,
+      "retrySucceeded": true
+    },
+    "postMoveRetained": true,
+    "independentPlayerPreferences": true,
+    "assistedEventMarked": true,
+    "realPeerJSDataChannel": true,
+    "hostWGuestS": true,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 146,
+          "y": 650.71875,
+          "width": 968,
+          "height": 53
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 588,
+          "width": 302,
+          "height": 53
+        }
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 165.0625,
+          "width": 672,
+          "height": 46
+        }
+      }
+    ],
+    "rejoinRestoresPermissionAndPreference": true,
+    "pageErrors": []
+  },
+  "storage": {
+    "aliases": [
+      "runs",
+      "checkpoints",
+      "environment",
+      "workspace",
+      "data/generated"
+    ],
+    "sameDirectories": true,
+    "physicalTrainingDataMoved": false,
+    "frozenConfigSHA256": "04d991c00e3558a60a1a41d737fc24f0dd6ba1eb676ed2696667cb487a3c0646",
+    "frozenSourceHashesChecked": 32,
+    "frozenSourcesMatch": true
+  },
+  "browserRelease": {
+    "browserModelParityPositions": 17,
+    "maxValueError": "< 0.0002",
+    "inferenceApiRequests": 0,
+    "roomCreated": true,
+    "inviteLink": true,
+    "twoClientsPlayed": true,
+    "logsSynchronized": true,
+    "guestDisconnectHandled": true,
+    "legacySettingIgnored": true,
+    "modelRetryWithoutFallback": true,
+    "hiddenModelControls": true,
+    "pageErrors": [],
+    "botModelsSynchronized": true,
+    "guestAvoidsModelDownload": true,
+    "numberedModelDecisions": 27
+  },
+  "productionBrowser": {
+    "productionGlobalsHidden": true,
+    "policyTurns": 2,
+    "successfulModelIds": [
+      "001",
+      "009"
+    ],
+    "pageErrors": []
+  },
+  "modelSetupBrowser": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "seatRotations": 4,
+      "modelsPersisted": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "seatRotations": 4,
+      "modelsPersisted": true,
+      "pageErrors": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "seatRotations": 4,
+      "modelsPersisted": true,
+      "pageErrors": []
+    }
+  ],
+  "buildVersion": "813af095b4",
+  "updatedAutomations": [
+    "ai",
+    "clint-ui"
+  ],
+  "documentLinks": {
+    "checked": 432,
+    "broken": 0
+  },
+  "negativeChecks": [
+    {
+      "check": "Node dashboard title assertion after branding change",
+      "failure": "One assertion still expected the old dashboard product title",
+      "resolution": "Update expected danMCai title and rerun the full Node suite before committing"
+    }
+  ]
+}

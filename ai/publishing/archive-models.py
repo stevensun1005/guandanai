@@ -11,7 +11,7 @@ import zipfile
 def archive(workspace, output, manifest, download):
     inventory = {}
     skipped = []
-    for path in sorted((workspace / "ai/local/data/generated").rglob("*")):
+    for path in sorted((workspace / "ai/danMCai/data/generated").rglob("*")):
         if (
             not path.is_file()
             or path.suffix not in {".onnx", ".npz"}

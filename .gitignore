@@ -1,11 +1,11 @@
 node_modules/
 web/dist/
 web/artifacts/
-ai/local/workspace/
-ai/local/runs/
-ai/local/checkpoints/
-ai/local/data/generated/
-ai/local/environment/
+ai/danMCai/workspace/
+ai/danMCai/runs/
+ai/danMCai/checkpoints/
+ai/danMCai/data/generated/
+ai/danMCai/environment/
 ai/guanzero/runs/
 ai/publishing/cache/
 ai/shared/data/human-games/
@@ -18,3 +18,6 @@ archive/
 __pycache__/
 *.pyc
 .ruff_cache/
+
+# Hidden compatibility storage for active frozen runs; new code uses ai/danMCai.
+ai/local/

@@ -6,17 +6,17 @@
 - 完成有结论的实验后更新报告并推送。正结果、负结果、退步及协议变化都保留；只统计实际完成的局数，不把运行计划或开发集峰值写成独立验收。
 - 每项性能结论绑定对手、牌规、单把／整场口径、种子、实际胜／负／平、模型及编码指纹、数据用途和不确定性。区分预测误差、升级分、胜率与浏览器兼容性。
 - 没有新的独立完整比赛证据，不宣称整场 80% 已验证。所有者后续明确授权每 4 小时把最新完整导出模型发布到网页并作为新玩家默认；这是部署授权，不是棋力验收。编号、SHA-256、来源与评测状态必须同步记录，历史模型保留可选。
-- **2026-11-05 最新菜单要求取代上条的默认策略**：仅显示 Clint规则机器人、GuanZero 最近两代（命名为 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`，不带“步”字）、danMCai 初始模型及本机最近两代真实门控冠军，默认本机现任冠军。普通最新导出不能替换冠军；历史权重只保留归档。检查 champion/champion.json、accept 门控证据和 SHA，不能把步数最大当成冠军。danMCai 显示真实版本，例如 danMCai-v000293055。此后不带限定的“规则机器人”指 Clint（rules-v2），历史 original 基线须明确注明。
+- **2026-11-05 最新菜单要求取代上条的默认策略**：仅显示 Clint规则机器人、GuanZero 最近两代（命名为 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`，不带“步”字）、danMCai 初始模型及danMCai 最近两代真实门控冠军，默认danMCai 现任冠军。普通最新导出不能替换冠军；历史权重只保留归档。检查 champion/champion.json、accept 门控证据和 SHA，不能把步数最大当成冠军。danMCai 显示真实版本，例如 danMCai-v000293055。此后不带限定的“规则机器人”指 Clint（rules-v2），历史 original 基线须明确注明。
 - 训练代码、完成的实验与成果索引统一合入 `main`。模型是否成为网页默认权重，仍单独依照独立验收决定。
 - 有限与持续训练可用 `ai/research/tools/update-model-study.py` 更新生成区与证据快照。自动推送仅允许专用干净工作树中的 `ai/research/MODEL_STUDY.md` 与 `ai/research/evaluation/model-study-progress.json`，并须先通过 Node、格式和相关 Python 测试；出现分叉、其他修改或竞争时停止，不强推，不暂存用户的其他文件。
-- 新训练权重和缓冲区留在忽略的 `ai/local/runs/`、`ai/local/checkpoints/`、`ai/local/data/generated/` 与 `ai/guanzero/runs/`，临时现场放 `ai/local/workspace/`，不再往 Git 增加大文件；需要公开的权重通过 GitHub Release 附件及 SHA-256 索引归档。已有历史检查点保留，训练用 Critic 不加入网页默认模型清单。
+- 新训练权重和缓冲区留在忽略的 `ai/danMCai/runs/`、`ai/danMCai/checkpoints/`、`ai/danMCai/data/generated/` 与 `ai/guanzero/runs/`，临时现场放 `ai/danMCai/workspace/`，不再往 Git 增加大文件；需要公开的权重通过 GitHub Release 附件及 SHA-256 索引归档。已有历史检查点保留，训练用 Critic 不加入网页默认模型清单。
 - 新方法的设计假设必须与已经完成的实现及验证分开。若新数据推翻旧结论，说明修正原因并保留 Git 历史。
 - 真人联机牌谱独立保存在云端 D1，下载与生成数据留在忽略的 `ai/shared/data/human-games/`。`kind=test`、电脑与超时托管动作不作为人工样本，按整场分组防止跨训练／验证泄漏；来源标为 `unverified_browser`，不能将合法重放等同真人身份验证。不得自动接入当前冻结训练，也不得提交牌谱、导出密钥或云端管理凭据。
 - 神经网络出牌评价是动作值范围的相对分，不是校准概率或胜率。人工动作若在出牌前展示过数字预评，记为 `assisted=true` 并从默认未辅助样本中排除；仅开启、加载中或事后评分不能冒充已展示预评。房主许可和个人开关分开，评价不能读取他人私牌或改变机器人决策。
 
 ## “检查 Clint 仓库”的固定含义
 
-- 用户说“检查 Clint 仓库”“同步 Clint 更新”等，均指检查 [clintsun1977/guandan 的 main](https://github.com/clintsun1977/guandan/commits/main/) 的增量并完成适配、验证和发布，不只列出提交。此约定随本文件提交到 `main`，适用于其他电脑和后续会话；使用本机实际项目路径，不照搬另一台电脑的绝对路径。
+- 用户说“检查 Clint 仓库”“同步 Clint 更新”等，均指检查 [clintsun1977/guandan 的 main](https://github.com/clintsun1977/guandan/commits/main/) 的增量并完成适配、验证和发布，不只列出提交。此约定随本文件提交到 `main`，适用于其他电脑和后续会话；使用danMCai 实际项目路径，不照搬另一台电脑的绝对路径。
 - **UI 更新同步到本项目网页。** 包括界面、布局、视觉样式和交互；保留本项目模型菜单、冠军默认、房间恢复、房主评价许可、个人评价开关及云端牌谱采集。按功能适配，不用上游整文件覆盖本项目新增功能。
 - **规则策略更新只同步到 Clint规则机器人。** 目标是 `web/src/rule-bot/` 的 `rules-v2` 独立决策路径及其必要适配。不得把 Clint 策略加入 danMCai、GuanZero、神经网络评分、候选生成、残局决策或训练；不修改活跃训练的冻结检出、配置、权重、缓冲区及历史 original 基线。UI 与策略混在同一上游文件时逐项拆取，不能因 UI 同步顺带改变神经网络出牌。
 - **每 4 小时检查一次。** 所有者已授权有相关变化时完成上述同步并直接提交、推送 `main`；保留独立的冠军／网页模型定期同步任务，两种任务不能相互替代。定时任务在执行电脑配置，本文件共享的是行为约定，不会通过 Git 自动安装另一台电脑的定时任务。
@@ -32,7 +32,9 @@
 
 ## 工作区目录
 
-- `web/` 是网页端；`ai/local/` 是本机模型，`ai/guanzero/` 是另一条模型路线。入口与细分目录见各自 README。
+- 此模型路线统一命名为 **danMCai**，规范目录为 `ai/danMCai/`，菜单冠军字段为 `selection.danMCaiChampions`。文档、命令和新运行均使用此名称；浏览器本地存储、localhost 等通用技术含义不属于模型名称。历史机器证据和冻结配置保留原始字节，不能为改名伪造历史源码指纹或训练结果。活跃运行保留隐藏兼容存储与规范路径的目录连接，未完成停机校验前不移动其生成数据；升级方法见迁移说明。
+
+- `web/` 是网页端；`ai/danMCai/` 是danMCai 模型，`ai/guanzero/` 是另一条模型路线。入口与细分目录见各自 README。
 - 主研究报告改为 `ai/research/MODEL_STUDY.md`，机器结果改为 `ai/research/evaluation/`。自动报告器仍只允许专用工作树中的主报告和对应 `model-study-progress.json`，不得借迁移扩大自动暂存范围。
 - 历史附件内容与模型二进制指纹保留。源码移动和导入路径变化不构成新的训练结果或验收。
 - 当前运行继续使用冻结的独立检出与兼容数据路径；不要因主开发目录重排而覆盖正在训练的源码。具体见 `ai/research/STRUCTURE_MIGRATION.md`。

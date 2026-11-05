@@ -2,14 +2,14 @@
 
 大厅按以下顺序显示六项，内部编号只用于归档与房间同步。GuanZero 名称统一使用 `训练任务名-训练版本数值`，例如 `guanzero-adp-gpubatch-44752`，不再使用“步”字或中间圆点。
 
-| 顺序 | 当前选项                                                 | 来源                                    |
-| ---- | -------------------------------------------------------- | --------------------------------------- |
-| 1    | Clint规则机器人                                          | 独立 rules-v2，不使用神经网络           |
-| 2–3  | guanzero-adp-gpubatch-61045／guanzero-adp-gpubatch-44752 | GuanZero 最近两代，归档 010／007        |
-| 4    | danMCai-v000000000                                       | 原始 P0，归档 001                       |
-| 5–6  | danMCai-v000293055／danMCai-v000091092                   | 本机最近两代实际门控冠军，归档 009／008 |
+| 顺序 | 当前选项                                                 | 来源                                        |
+| ---- | -------------------------------------------------------- | ------------------------------------------- |
+| 1    | Clint规则机器人                                          | 独立 rules-v2，不使用神经网络               |
+| 2–3  | guanzero-adp-gpubatch-61045／guanzero-adp-gpubatch-44752 | GuanZero 最近两代，归档 010／007            |
+| 4    | danMCai-v000000000                                       | 原始 P0，归档 001                           |
+| 5–6  | danMCai-v000293055／danMCai-v000091092                   | danMCai 最近两代实际门控冠军，归档 009／008 |
 
-**默认使用 danMCai-v000293055。** 冠军依据 `champion/champion.json` 的真实晋升历史、accept 门控与完整权重 SHA，不按步数最大排序，也不代表全局最强或独立验收通过。历史模型退出菜单，Release 和实验记录保留归档。首次采用新菜单会使用新的本地偏好键，默认重置为本机冠军；此后玩家选择继续保存。「全部使用本地冠军」可重置四席。
+**默认使用 danMCai-v000293055。** 冠军依据 `champion/champion.json` 的真实晋升历史、accept 门控与完整权重 SHA，不按步数最大排序，也不代表全局最强或独立验收通过。历史模型退出菜单，Release 和实验记录保留归档。首次采用新菜单会使用新的本地偏好键，默认重置为danMCai 冠军；此后玩家选择继续保存。「全部使用danMCai 冠军」可重置四席。
 
 朋友房间由房主设置，加入者只查看。恢复与转单机保留对应电脑选择。Clint 在 Worker 内只接收自己的手牌和公开信息；Clint 决策不加载 ONNX，神经网络分支不叠加 Clint 规则；实际网络决策（包括玩家超时托管）按需加载相应权重。
 
@@ -18,11 +18,11 @@
 2026-11-05 所有者最新要求取代“最新导出直接设默认”：定期同步实际冠军与菜单。机器需开机、联网且 Codex 正在运行；没有冠军、菜单或新完成评测证据变化则跳过。失败时保留当前网站，不覆盖附件。
 
 1. 安全同步 main，有用户草稿时使用干净 detached worktree。
-2. 只读检查 `ai/local/runs/gpu-main/champion/champion.json` 最后两次实际晋升及对应 accept 门控，核对导出 SHA。缺少证据时停止，不能用 `models/latest.json` 替代。
-3. 已发布的相同 SHA 直接复用。未发布的冠军运行 `node ai/publishing/publish-web-model.mjs --model=<league冠军文件> --source=gpu-main --version=<真实版本> --step=<真实步数>` 准备，然后以相同参数加 `--publish`。核对公网 SHA、ONNX 1／3／129 候选输出及浏览器 WASM。归档不会自动更改冠军；同步清单 `source.champion`、`selection.localChampions`（现任在前）、匹配的 `defaultId` 和门控证据。
+2. 只读检查 `ai/danMCai/runs/gpu-main/champion/champion.json` 最后两次实际晋升及对应 accept 门控，核对导出 SHA。缺少证据时停止，不能用 `models/latest.json` 替代。
+3. 已发布的相同 SHA 直接复用。未发布的冠军运行 `node ai/publishing/publish-web-model.mjs --model=<league冠军文件> --source=gpu-main --version=<真实版本> --step=<真实步数>` 准备，然后以相同参数加 `--publish`。核对公网 SHA、ONNX 1／3／129 候选输出及浏览器 WASM。归档不会自动更改冠军；同步清单 `source.champion`、`selection.danMCaiChampions`（现任在前）、匹配的 `defaultId` 和门控证据。
 4. 运行 `npm test`、`npm run format:check`、相关 Python 测试、`npm run build` 及浏览器验证；更新研究报告与成果索引，直接推送 main，确认 Pages 部署。
 
-训练检出、运行配置、权重和缓冲区不改动，模型二进制不进 Git。清单 `models` 保留完整不可变归档；`selection.localChampions` 决定本机两代与默认值。GuanZero 从归档中取最近注册的两代，新代只轮换其自身两项。普通新导出只可归档，不进入本机冠军菜单或覆盖默认值。页面版本包含模型摘要，已开牌局不热切。
+训练检出、运行配置、权重和缓冲区不改动，模型二进制不进 Git。清单 `models` 保留完整不可变归档；`selection.danMCaiChampions` 决定本机两代与默认值。GuanZero 从归档中取最近注册的两代，新代只轮换其自身两项。普通新导出只可归档，不进入danMCai 冠军菜单或覆盖默认值。页面版本包含模型摘要，已开牌局不热切。
 
 部署、开发门控晋升、独立棋力验收是不同结论。保留两代冠军不等于证明所有对手下最强，也不能据此宣称整场 80%。[冠军原始记录](../../ai/research/evaluation/champion-selection-20261105/champion.json)。
 
@@ -68,4 +68,4 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 
 ## 可选评价的模型
 
-出牌评价固定读取 `selection.localChampions[0]` 的完整本机冠军，与座位选择的托管／电脑模型无关。冠军经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实版本；不使用普通最新导出冒充冠军。评分仅做网络动作值的候选范围换算，不更改默认模型、性格或机器人动作。[房主许可与分数说明](MOVE_COACH.md)。
+出牌评价固定读取 `selection.danMCaiChampions[0]` 的完整danMCai 冠军，与座位选择的托管／电脑模型无关。冠军经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实版本；不使用普通最新导出冒充冠军。评分仅做网络动作值的候选范围换算，不更改默认模型、性格或机器人动作。[房主许可与分数说明](MOVE_COACH.md)。

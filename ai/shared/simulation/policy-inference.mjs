@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 export function createPolicyInference({
   python = 'python',
-  script = fileURLToPath(new URL('../../local/training/eval_inference.py', import.meta.url)),
+  script = fileURLToPath(new URL('../../danMCai/training/eval_inference.py', import.meta.url)),
   env = {},
 } = {}) {
   const child = spawn(python, ['-u', script], {

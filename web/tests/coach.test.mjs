@@ -24,7 +24,7 @@ test('online evaluation requires explicit host permission and always selects the
     assert.equal(coachAllowed(mode, { coachAllowed: true }), true);
   }
   assert.equal(coachAllowed('solo', {}), true);
-  assert.equal(COACH_MODEL_ID, catalog.selection.localChampions[0]);
+  assert.equal(COACH_MODEL_ID, catalog.selection.danMCaiChampions[0]);
   assert.equal(COACH_MODEL_ID, catalog.defaultId);
 });
 

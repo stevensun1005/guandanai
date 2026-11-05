@@ -12,7 +12,7 @@ ROOT=next(p for p in Path(__file__).resolve().parents if (p/'package.json').is_f
 BASE='https://stevensun1005.github.io/guandanai/'
 ENDPOINT=json.loads((ROOT/'web/src/collection/config.json').read_text(encoding='utf-8'))['endpoint']
 OUT=ROOT/'web/artifacts/validation/collection';OUT.mkdir(parents=True,exist_ok=True)
-token_path=Path(sys.argv[sys.argv.index('--token-file')+1]) if '--token-file' in sys.argv else ROOT/'ai/local/workspace/collection/export-token.txt'
+token_path=Path(sys.argv[sys.argv.index('--token-file')+1]) if '--token-file' in sys.argv else ROOT/'ai/danMCai/workspace/collection/export-token.txt'
 TOKEN=token_path.read_text(encoding='utf-8').strip()
 with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,channel='chrome')

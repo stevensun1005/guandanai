@@ -20,7 +20,7 @@ const publish = process.argv.includes('--publish');
 const registry = join(root, 'web/src/ai/model-catalog.json');
 const originalRegistry = await readFile(registry, 'utf8');
 const catalog = validateCatalog(JSON.parse(originalRegistry));
-const run = resolve(root, option('run', 'ai/local/runs/gpu-main'));
+const run = resolve(root, option('run', 'ai/danMCai/runs/gpu-main'));
 let source, input;
 if (option('model')) {
   input = resolve(option('model'));
@@ -79,7 +79,7 @@ const model = {
 };
 catalog.models.push(model);
 // A new archive is not a new champion. The menu policy owns the default pointer.
-catalog.defaultId = catalog.selection?.localChampions[0] || id;
+catalog.defaultId = catalog.selection?.danMCaiChampions[0] || id;
 validateCatalog(catalog);
 const session = await ort.InferenceSession.create(bytes, {
   intraOpNumThreads: 1,

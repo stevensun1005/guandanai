@@ -271,14 +271,14 @@ def snapshot(workspace):
         "finalHeldoutCompleted": False,
         "target80Validated": False,
         "onlineModels": {
-            name: {"sha256": digest(ROOT / "ai/local/models/baseline" / name)}
+            name: {"sha256": digest(ROOT / "ai/danMCai/models/baseline" / name)}
             for name in ["policy.onnx", "response.onnx"]
         },
         "runs": {},
         "continuousRuns": {},
     }
     for name, relative in RUNS.items():
-        directory = workspace / "ai/local/data/generated" / relative
+        directory = workspace / "ai/danMCai/data/generated" / relative
         run = read(directory / "run.json")
         item = {"status": run["status"], "cycles": [], "plannedCycles": run["args"]["cycles"]}
         for entry in run["cycles"]:
@@ -374,7 +374,7 @@ def snapshot(workspace):
                 record["evaluations"]["rule"] = evaluation(cycle / "evaluation")
             item["cycles"].append(record)
         result["runs"][name] = item
-    continuous = workspace / "ai/local/runs"
+    continuous = workspace / "ai/danMCai/runs"
     if continuous.exists():
         for directory in sorted(continuous.iterdir()):
             if directory.is_dir() and (directory / "config.json").exists():
@@ -392,14 +392,14 @@ def publication_signal(workspace):
     """Read small completion records; avoid rehashing all historical checkpoints every minute."""
     signal = {}
     for name, relative in RUNS.items():
-        path = workspace / "ai/local/data/generated" / relative / "run.json"
+        path = workspace / "ai/danMCai/data/generated" / relative / "run.json"
         if path.exists():
             run = read(path)
             signal[name] = {
                 "status": run["status"],
                 "completed": [c["cycle"] for c in run["cycles"] if c["status"] == "complete"],
             }
-    continuous = workspace / "ai/local/runs"
+    continuous = workspace / "ai/danMCai/runs"
     if continuous.exists():
         for directory in sorted(continuous.iterdir()):
             if not directory.is_dir() or not (directory / "config.json").exists():
@@ -459,7 +459,7 @@ def progress(data):
         "",
         "表中的 `snapshot` 指该实验冻结的历史对手；各实验的历史对手不保证相同，不能横向直接比较。`ppo-rule` 早期未标记贪心评测的结果保留为旧协议记录，不纳入同协议排名。",
         "",
-        "原始逐场记录的 SHA-256、检查点与训练报告 SHA-256、种子范围及聚类区间见[机器可读快照](evaluation/model-study-progress.json)。研究权重见[成果目录](evaluation/model-artifacts.json)和 `ai/local/models/experiments/`；原始大型缓冲区仍在本地 `ai/local/workspace/`，不能把检查点公开等同于全部训练数据公开。",
+        "原始逐场记录的 SHA-256、检查点与训练报告 SHA-256、种子范围及聚类区间见[机器可读快照](evaluation/model-study-progress.json)。研究权重见[成果目录](evaluation/model-artifacts.json)和 `ai/danMCai/models/experiments/`；原始大型缓冲区仍在本地 `ai/danMCai/workspace/`，不能把检查点公开等同于全部训练数据公开。",
         "",
         "自动更新只写研究报告和证据 JSON，不再复制或提交权重。历史已归档检查点保留；新权重留在本地，需要公开时通过 Release 附件及 SHA-256 索引归档。网页默认模型清单不变。",
     ]
@@ -518,7 +518,7 @@ def publication_checks():
         [npm, "test"],
         [npm, "run", "format:check"],
         [sys.executable, "-m", "unittest", "discover", "-s", "web/tests", "-p", "model_study_test.py"],
-        [sys.executable, "ai/local/tests/continuous_learner_test.py"],
+        [sys.executable, "ai/danMCai/tests/continuous_learner_test.py"],
     ):
         subprocess.run(command, cwd=ROOT, check=True, capture_output=True)
     allowed = {PAPER.as_posix(), EVIDENCE.as_posix()}

@@ -1,6 +1,6 @@
 # 验证与复现
 
-当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：Clint、GuanZero 最近两代、danMCai 初始版与两代本机冠军。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
+当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：Clint、GuanZero 最近两代、danMCai 初始版与两代danMCai 冠军。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
 
 ## PR 自动检查与网页流程评测
 
@@ -77,8 +77,8 @@ python web/tests/browser_smoke.py https://stevensun1005.github.io/guandanai/
 ## 模型数值与性能
 
 ```bash
-python ai/local/tests/check_encoding.py
-python ai/local/tests/benchmark_model.py
+python ai/danMCai/tests/check_encoding.py
+python ai/danMCai/tests/benchmark_model.py
 ```
 
 数值检查使用独立的 NumPy 路径验证编码与计算。性能检查在同一个浏览器 Worker 中交替运行两个等价图，排除前几轮预热，比较相同手牌和候选动作。
@@ -88,8 +88,8 @@ python ai/local/tests/benchmark_model.py
 ## 持续训练
 
 ```bash
-node --test ai/local/tests/continuous-training.test.mjs
-python ai/local/tests/continuous_learner_test.py
+node --test ai/danMCai/tests/continuous-training.test.mjs
+python ai/danMCai/tests/continuous_learner_test.py
 ```
 
 Node 部分随 `npm test` 运行，覆盖种子区间、探索规则、PFSP、SPRT，以及一场真实比赛的标签与 int8 分片往返。Python 部分检查 P0 载入再导出与原 ONNX 输出逐位一致、重放缓冲、目标混合、一次真实更新与续跑。端到端运行方式见[持续训练指南](../../ai/research/CONTINUOUS_TRAINING.md)。这些检查只说明流程与数据正确，不说明训练有效。
@@ -99,7 +99,7 @@ Node 部分随 `npm test` 运行，覆盖种子区间、探索规则、PFSP、SP
 - 桌面 Chrome 与手机尺寸模拟不等于所有真实手机验收。
 - 自动整场检查，不等于长时间真人比赛或不同物理网络验收。
 - 单局对战胜率，不等于从 2 升过 A 的整场胜率。
-- 本地模型计算正常，不保证所有 NAT 环境下都能建立 WebRTC。
+- danMCai 模型计算正常，不保证所有 NAT 环境下都能建立 WebRTC。
 
 结果应说明牌局数量、种子范围、对手、运行环境及未验证部分。
 
@@ -120,7 +120,7 @@ python web/tests/multiround_smoke.py http://127.0.0.1:8765/ 3 2 --rejoin
 
 第一项用实际 Worker 延迟回复，检查玩家回来后不会收到旧电脑落牌；第二项验证换人、房主占位和主动退出后的旧凭据失效。连续对局分别覆盖三个客人视角、结算恢复和观察／融合双模型电脑。报告与边界见 [房间指南](./ROOMS.md)。
 
-Python 开发工具的已验证依赖保存在 `ai/environment/requirements-dev.txt`，模型训练依赖独立放在 `ai/environment/requirements-models.txt`。使用 Python 3.11+；本轮在 3.13 上执行。格式检查：`python -m ruff format --check scripts tests ai/local/reference`。普通玩家和生产构建不需要这些 Python 包。
+Python 开发工具的已验证依赖保存在 `ai/environment/requirements-dev.txt`，模型训练依赖独立放在 `ai/environment/requirements-models.txt`。使用 Python 3.11+；本轮在 3.13 上执行。格式检查：`python -m ruff format --check scripts tests ai/danMCai/reference`。普通玩家和生产构建不需要这些 Python 包。
 
 ## 阶段竞态与整场检查
 
@@ -171,6 +171,6 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 
 云端采集检查覆盖合格局筛选、人工／电脑／托管来源、离线队列、服务端重放、去重、测试数据隔离与私有导出；具体已完成记录见 [采集 README](../collector/README.md) 及 [研究报告](../../ai/research/MODEL_STUDY.md)。不将合法重放视为真人身份验证，也不把数据采集当成训练或强度验收。
 
-固定整场 2v2 使用 `node ai/local/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/local/tests/fixed-evaluation.test.mjs` 和 `python ai/local/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/local/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。
+固定整场 2v2 使用 `node ai/danMCai/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/danMCai/tests/fixed-evaluation.test.mjs` 和 `python ai/danMCai/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/danMCai/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。
 
 出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。它们是功能兼容性测试，不计作棋力样本。

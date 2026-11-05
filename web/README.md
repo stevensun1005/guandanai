@@ -19,7 +19,7 @@
 | 网页测试                       | [tests](tests)                                                                                 |
 | 操作与部署文档                 | [docs](docs)                                                                                   |
 
-当前电脑菜单包含 Clint、GuanZero 最近两代、danMCai 初始版与两代本机冠军。GuanZero 使用 `训练任务名-版本数值`，默认仍由本机现任冠军决定；完整顺序与发布规则见 [电脑选择](docs/WEB_MODELS.md)。Clint 不加载 ONNX；网络模型在实际决策时由房主浏览器按需加载。
+当前电脑菜单包含 Clint、GuanZero 最近两代、danMCai 初始版与两代danMCai 冠军。GuanZero 使用 `训练任务名-版本数值`，默认仍由danMCai 现任冠军决定；完整顺序与发布规则见 [电脑选择](docs/WEB_MODELS.md)。Clint 不加载 ONNX；网络模型在实际决策时由房主浏览器按需加载。
 
 在项目根目录运行：
 

@@ -9,7 +9,7 @@ export async function modelBytes(root, model) {
   const cache = join(root, 'ai/publishing/cache');
   const file = model.url
     ? join(cache, model.sha256 + '.onnx')
-    : join(root, 'ai/local/models/baseline', model.file);
+    : join(root, 'ai/danMCai/models/baseline', model.file);
   let bytes;
   try {
     bytes = await readFile(file);

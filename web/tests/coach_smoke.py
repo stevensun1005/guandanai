@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = next(p for p in Path(__file__).resolve().parents if (p/'package.json').is_file())
 URL = next((a for a in sys.argv[1:] if a.startswith('http')), 'http://127.0.0.1:8765/')
 OUT = ROOT/'web/artifacts/validation/coach'; OUT.mkdir(parents=True, exist_ok=True)
-CHAMPION = json.loads((ROOT/'web/src/ai/model-catalog.json').read_text(encoding='utf-8'))['selection']['localChampions'][0]
+CHAMPION = json.loads((ROOT/'web/src/ai/model-catalog.json').read_text(encoding='utf-8'))['selection']['danMCaiChampions'][0]
 PROBE = """const Native=Worker; window.coachProbe={requests:[],replies:[],held:[],terminated:0};
 window.Worker=class extends Native {
  constructor(...args){super(...args);this.coachIds=new Set();this.addEventListener('message',e=>{

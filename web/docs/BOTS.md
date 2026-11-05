@@ -2,7 +2,7 @@
 
 ## 当前选择
 
-大厅依次提供 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和本机最近两代门控冠军。默认使用本机现任冠军，普通最新导出不能替代冠军。GuanZero 名称采用 `guanzero-adp-gpubatch-44752` 这样的连字符格式，danMCai 显示真实版本；具体版本以 [模型选择与发布](WEB_MODELS.md) 和清单为准。
+大厅依次提供 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代门控冠军。默认使用danMCai 现任冠军，普通最新导出不能替代冠军。GuanZero 名称采用 `guanzero-adp-gpubatch-44752` 这样的连字符格式，danMCai 显示真实版本；具体版本以 [模型选择与发布](WEB_MODELS.md) 和清单为准。
 
 Clint（`clint-rule`）是独立 `rules-v2` 规则策略，不加载 ONNX，也不叠加到神经网络分支。历史规则基线 `original` 与 Clint 不同，旧成绩保持原版本标签。
 
@@ -59,15 +59,15 @@ GuanZero 开发对手为随机、原版规则、P0 与 Clint（rules-v2）；标
 记录显示近期统计实际参与了观察型 136,391 次、融合型 136,368 次决策，分别改变 261、160 次应牌网络介入前的接近候选偏好。它提供不同的观察行为，不改变默认电脑或把这些风格说成新训练的强化学习模型。[观察型结果](../../ai/research/evaluation/habits-observant-1.13.0.json) · [融合型结果](../../ai/research/evaluation/habits-adaptive-1.13.0.json)。
 
 ```bash
-node ai/local/evaluation/evaluate-habits.mjs --pairs=600 --block-rounds=5 --style=observant --seed=20410104 --output=ai/local/data/generated/habits-observant-heldout
-node ai/local/evaluation/evaluate-habits.mjs --pairs=600 --block-rounds=5 --style=adaptive --seed=20420104 --output=ai/local/data/generated/habits-adaptive-heldout
+node ai/danMCai/evaluation/evaluate-habits.mjs --pairs=600 --block-rounds=5 --style=observant --seed=20410104 --output=ai/danMCai/data/generated/habits-observant-heldout
+node ai/danMCai/evaluation/evaluate-habits.mjs --pairs=600 --block-rounds=5 --style=adaptive --seed=20420104 --output=ai/danMCai/data/generated/habits-adaptive-heldout
 ```
 
 这里是同桌连续五个独立发牌局的习惯观察检查，级牌随机，不模拟跨局进还贡或整场打 A；它和浏览器的完整比赛检查有不同用途。
 
 ## 历史复现：独立应牌网络
 
-`ai/local/models/baseline/response.onnx` 是历史版本实际训练并部署过的 253 → 64 → 32 → 1 监督学习网络，使用自对弈中的对手出／过记录。它只在观察型已决定出牌后，为主策略评分接近的多种出法预测下一位对手的回应，不改变原有出／过决定，也不覆盖残局证明。无需每局预加载：真正需要比较时，Worker 才下载约 74 KB 的权重。
+`ai/danMCai/models/baseline/response.onnx` 是历史版本实际训练并部署过的 253 → 64 → 32 → 1 监督学习网络，使用自对弈中的对手出／过记录。它只在观察型已决定出牌后，为主策略评分接近的多种出法预测下一位对手的回应，不改变原有出／过决定，也不覆盖残局证明。无需每局预加载：真正需要比较时，Worker 才下载约 74 KB 的权重。
 
 500 局留出预测检查中 Brier 为 0.15321，优于线性基线 0.16334；但 6,000 局对战的配对升级分区间仍包含零，因此不宣称胜率更高，当时均衡型为默认。完整数据、训练命令和边界见 [模型训练](../../ai/research/MODEL_TRAINING.md)。
 
