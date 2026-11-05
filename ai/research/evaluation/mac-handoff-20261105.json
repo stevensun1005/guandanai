@@ -254,7 +254,7 @@
   ],
   "webDefaultChanged": false,
   "webBuildUnchanged": "f759bd71ee",
-  "updatedAtUTC": "2026-11-05T21:40:45.414814+00:00",
+  "updatedAtUTC": "2026-11-05T21:44:03.770712+00:00",
   "fullReplayRestore": {
     "kind": "test",
     "device": "cpu",
@@ -275,11 +275,16 @@
   "newMacSeedsConsumedOnWindows": 0,
   "repositoryPublication": {
     "sourceCommit": "43d0f2f349ead309579c58b48e5db85726f3c539",
-    "status": "pushed-to-main",
+    "status": "ci-and-pages-success",
     "workflow": 42113734942,
-    "workflowStatus": "pending-behind-earlier-run",
+    "workflowStatus": "completed",
     "pagesBuildUnchanged": "f759bd71ee",
-    "webDefaultChanged": false
+    "webDefaultChanged": false,
+    "workflowConclusion": "success",
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42113734942",
+    "publicHTTP": 200,
+    "publicBuild": "f759bd71ee",
+    "verifiedAtUTC": "2026-11-05T21:44:03.770712+00:00"
   },
   "initialValidationBeforeIntegration": {
     "nodePassed": 166,
