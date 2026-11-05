@@ -330,9 +330,128 @@
     ]
   },
   "checks": {
-    "node": 109,
+    "node": 113,
     "python": 8,
     "numericTolerance": 1e-05,
     "fullMatchActionParity": true
+  },
+  "deployment": {
+    "migration": {
+      "startedAt": "2026-11-05T03:21:53.889Z",
+      "from": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-recovery",
+      "to": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch",
+      "checkpointStep": 1822,
+      "usedSamples": 5830400,
+      "checkpointSHA256": "a87f4eb0d86690b0a15ba9295f466b968bde646b544d671768dda17153857ea0",
+      "plannedEnd": "2026-11-05T21:28:50.3082648-05:00",
+      "oldActors": 13,
+      "newActors": 32,
+      "sourceCommit": "0affbd2a91ebd36d9997a551ff84f966cb62fce5"
+    },
+    "before": {
+      "observedAt": "2026-11-05T03:20:44.853Z",
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-recovery",
+      "rates": {
+        "samplesPerSecond": 2122.7522288822847,
+        "matchesPerMinute": 218.60675968367502,
+        "updatesPerSecond": 0.6548128746285197
+      },
+      "hardware": {
+        "gpu": {
+          "name": "NVIDIA GeForce RTX 4070",
+          "utilization": 11,
+          "usedMiB": 2436,
+          "totalMiB": 12282,
+          "temperature": 35
+        },
+        "cpuPercent": 89.38324033381068,
+        "ramUsedBytes": 18411884544,
+        "ramTotalBytes": 34124918784
+      },
+      "totals": {
+        "matches": 10523,
+        "rows": 5830489,
+        "liveActors": 13
+      },
+      "learner": {
+        "step": 1821,
+        "usedSamples": 5827200,
+        "loss": 3.105545265674591,
+        "updatesPerSecond": 0.6326308202816247,
+        "device": "cuda",
+        "deviceName": "NVIDIA GeForce RTX 4070",
+        "torch": "2.11.0+cu128",
+        "precision": "FP32",
+        "objective": "adp",
+        "updatedAt": 1793848844.230322,
+        "error": null,
+        "pid": 19320
+      }
+    },
+    "after": {
+      "observedAt": "2026-11-05T03:27:46.056Z",
+      "phase": "running",
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch",
+      "totals": {
+        "matches": 12783,
+        "rows": 7150507,
+        "liveActors": 32
+      },
+      "rates": {
+        "samplesPerSecond": 3896.3612406243665,
+        "matchesPerMinute": 408.47354550983175,
+        "updatesPerSecond": 1.2331914318535036
+      },
+      "hardware": {
+        "gpu": {
+          "name": "NVIDIA GeForce RTX 4070",
+          "utilization": 17,
+          "usedMiB": 2769,
+          "totalMiB": 12282,
+          "temperature": 38
+        },
+        "cpuPercent": 59.134400872539786,
+        "ramUsedBytes": 20999704576,
+        "ramTotalBytes": 34124918784
+      },
+      "inference": {
+        "pid": 44724,
+        "device": "cuda",
+        "requests": 1324936,
+        "batches": 45110,
+        "maxBatch": 32,
+        "error": null,
+        "batchWaitMilliseconds": 125559.37508190982,
+        "computeMilliseconds": 119567.68704461865,
+        "ready": true,
+        "updatedAt": 1793849265.870063,
+        "averageBatch": 29.371225892263357,
+        "requestsPerSecond": 3785.8480455354716
+      },
+      "learner": {
+        "step": 2233,
+        "usedSamples": 7145600,
+        "loss": 3.097972583770752,
+        "updatesPerSecond": 1.1801040975052628,
+        "device": "cuda",
+        "deviceName": "NVIDIA GeForce RTX 4070",
+        "torch": "2.11.0+cu128",
+        "precision": "FP32",
+        "objective": "adp",
+        "updatedAt": 1793849265.3547518,
+        "error": null,
+        "pid": 26140
+      },
+      "pendingShards": 9,
+      "cpuFallbacks": 0,
+      "cpuTieRescores": 590
+    },
+    "liveRateRatio": 1.8355233303304357,
+    "caution": "Short live observations with different model state and concurrency, not a controlled speedup estimate",
+    "checks": {
+      "node": 113,
+      "python": 8,
+      "format": "passed"
+    }
   }
 }
