@@ -29,7 +29,7 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
     assert.equal(
       botModelName(model.id),
       model.config.history === 'guanzero-v1'
-        ? `${model.source.run} · ${model.source.step}步`
+        ? `${model.source.run}-${model.source.step}`
         : 'danMCai-' + model.source.version,
     );
   assert.throws(() =>
