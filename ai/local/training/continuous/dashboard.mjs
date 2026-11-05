@@ -73,7 +73,10 @@ export function dashboardSnapshot(run, workspace = project) {
   const reporter = readJSON(join(workspace, 'ai/local/runs/reporter-launcher.json'), {});
   const evidence =
     readJSON(
-      join(workspace, 'ai/local/workspace/model-study/docs/evaluation/model-study-progress.json'),
+      join(
+        workspace,
+        'ai/local/workspace/worktrees/model-study/ai/research/evaluation/model-study-progress.json',
+      ),
     ) || readJSON(join(workspace, 'ai/research/evaluation/model-study-progress.json'), {});
   const deviceRuns = [];
   const continuousRoot = join(workspace, 'ai/local/runs');

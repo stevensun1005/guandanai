@@ -20,9 +20,23 @@
 | `work/archives/`               | `ai/local/checkpoints/`                        |
 | 其他本机临时现场               | `ai/local/workspace/`                          |
 
+## 本机文件已经放到哪里
+
+本次已实际迁移本机生成目录，不只调整源码入口：
+
+- `ai/local/runs/gpu-main/`：当前 GPU 训练的配置、采样记录、分片、学习器、联赛与评测记录。
+- `ai/local/checkpoints/`：原有 CPU/GPU 归档及迁移前第 242,498 步的完整检查点备份。
+- `ai/local/data/generated/`：历史采集与训练数据；`ai/local/environment/`：本机 Python 环境。
+- `ai/local/workspace/worktrees/`：已有开发工作树；`workspace/logs/legacy/`：历史日志；`workspace/maintenance/structure-migration/`：本次迁移的本机校验和草稿备份。
+- `ai/publishing/cache/`：网页模型下载／发布缓存；`web/artifacts/validation/`：界面验证截图；`web/artifacts/packages/`：网页压缩包。
+
+根目录保留隐藏的旧 `work/` 兼容入口，供冻结运行、旧开发工作树和历史绝对路径使用；少量历史临时现场保留在那里。根目录的 `node_modules/` 也是隐藏的开发依赖。日常查找代码从 `web/` 和 `ai/` 的 README 进入。不要手动删除兼容入口。
+
 ## 本机正在进行的训练
 
 `D:/vibecoding/guandan-runtime` 是独立的冻结源码检出，不参与正式源码重排。当前运行继续由该检出执行，原始训练配置、模型、优化器、种子游标及已落盘样本保留；4 GiB 资源预留策略不变。
+
+此次正常停机保存于 `v000242498`，迁移前后核对模型、包含优化器的检查点及原配置 SHA-256 后续跑；未变更冻结源码和协议，原截止时间仍为 2026-11-05 20:40:54 UTC。实时面板继续使用 <http://127.0.0.1:8766/>；面板和四小时发布任务均已切换到新路径。[校验证据](evaluation/structure-migration.json) 区分干净源码与带所有者草稿的本机验证。
 
 本机保留旧生成目录的兼容连接，使当前运行和已有开发工作树的绝对路径仍可访问。连接只用于本机旧现场，不是两套正式源码，也不提交 Git。新代码、新运行与文档使用新位置。不要在仍有旧进程／开发工作树引用时删除这些连接。
 

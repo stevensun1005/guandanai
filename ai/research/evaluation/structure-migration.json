@@ -1535,5 +1535,41 @@
     "markdownLocalLinksValid": true
   },
   "activeRunCompatibility": "Frozen independent runtime unchanged; old data paths retained via local directory junctions",
-  "historicalEvidence": "Raw experiment JSON preserved; mutable artifact index only updates its current catalog pointer"
+  "historicalEvidence": "Raw experiment JSON preserved; mutable artifact index only updates its current catalog pointer",
+  "workingTreeValidation": {
+    "includesUncommittedOwnerDrafts": true,
+    "nodeTestsPassed": 120,
+    "pythonLocalPassed": 27,
+    "pythonLocalGPUOnlySkipped": 1,
+    "pythonGuanZeroPassed": 8,
+    "pythonStudyPassed": 9,
+    "productionBrowserModelIds": ["001", "003"],
+    "replayImportEscapingPassed": true,
+    "browserPageErrors": 0,
+    "packagingPassed": true,
+    "publishPrepareOnlyPassed": true,
+    "dashboardAutoRefreshPassed": true,
+    "dashboardObservedStep": 243760,
+    "independentStrengthMatchesAdded": 0
+  },
+  "storageMigration": {
+    "stoppedAtUTC": "2026-11-05T06:25:54.343Z",
+    "resumedAtUTC": "2026-11-05T06:29:46.343Z",
+    "canonicalRun": "ai/local/runs/gpu-main",
+    "compatibilityRun": "work/continuous/gpu-main",
+    "archive": "ai/local/checkpoints/structure-migration-step-242498",
+    "stepBefore": 242498,
+    "checkpointSHA256": "e5d488b9aed65608d2281cd9422a235093cc43fc0a66f24be81e7d5b76475dcf",
+    "modelSHA256": "c6caa7513e8fd0976376ed823cbb487e9f6026a7c3eb0fb91ea62a5931675f30",
+    "configSHA256": "61d1118662bc5259b72d73e995b82b703b87ea7622a95c7cdd9942c5360f379e",
+    "archiveAndMigratedFilesVerifiedBeforeResume": true,
+    "frozenSourceSHA256VerifiedBeforeResume": true,
+    "stepObservedAfterResume": 244347,
+    "trainingTotalsBefore": {"matches": 259619, "decisions": 124385805, "rows": 124385805},
+    "reserveGiB": 4,
+    "resumeGiB": 5,
+    "originalDeadlineUTC": "2026-11-05T20:40:54.512Z",
+    "protocolChanged": false,
+    "strengthClaim": null
+  }
 }

@@ -5,7 +5,7 @@ ai/local/workspace/
 ai/local/runs/
 ai/local/checkpoints/
 ai/local/data/generated/
-ai/local/environment/gpu-runtime/
+ai/local/environment/
 ai/guanzero/runs/
 ai/publishing/cache/
 work/
