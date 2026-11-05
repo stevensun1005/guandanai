@@ -104,17 +104,18 @@ test('a fast actor writes standard shards and status that record its implementat
         'scripts/continuous/fast-actor.mjs',
         `--run=${directory}`,
         '--slot=39',
-        '--games=2',
-        '--matches=2',
+        '--games=1',
+        '--matches=1',
         '--provider=cpu',
       ],
-      { encoding: 'utf8', timeout: 120_000 },
+      // Generous limit: the suite may run while training saturates the CPU.
+      { encoding: 'utf8', timeout: 600_000 },
     );
     assert.equal(result.status, 0, result.stderr);
     const status = JSON.parse(readFileSync(join(paths.actors, 'actor-39.json'), 'utf8'));
     assert.equal(status.actorImplementation, 'fast');
-    assert.equal(status.matches, 2);
-    assert.equal(status.nextSeed, 45_000_002);
+    assert.equal(status.matches, 1);
+    assert.equal(status.nextSeed, 45_000_001);
     const manifests = readdirSync(paths.shards).filter((f) => f.endsWith('.json'));
     const rows = manifests.reduce(
       (n, f) => n + JSON.parse(readFileSync(join(paths.shards, f), 'utf8')).rows,

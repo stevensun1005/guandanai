@@ -4,145 +4,155 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="dark light" />
-    <title>掼蛋 AI · 实时训练进度</title>
+    <title>GuandanAI 训练观测台</title>
     <link rel="stylesheet" href="/style.css" />
     <script type="module" src="/app.mjs"></script>
   </head>
   <body>
     <main>
-      <header>
-        <p class="eyebrow">GUANDAN / MODEL LAB</p>
-        <div class="title">
-          <h1>训练进行到哪了</h1>
-          <span id="state" role="status">正在连接</span>
+      <header class="top">
+        <div>
+          <h1>GuandanAI 训练观测台</h1>
+          <p class="muted" id="subtitle">正在读取本机训练记录…</p>
         </div>
-        <p class="muted">读取本机真实训练记录 · 每 5 秒刷新 · 无需手动询问</p>
+        <span id="state" class="pill" role="status">连接中</span>
       </header>
+
       <div id="connection" class="notice" role="alert" hidden></div>
-      <aside id="baseline-note" class="panel muted small" hidden></aside>
-      <section class="panel">
-        <p class="eyebrow">当前任务 · 交接第 1 / 6 步</p>
-        <h2 id="task">默认配置的长期自对弈训练</h2>
-        <p id="description">
-          6 个采样进程收集完整比赛，训练进程更新整个价值网络。每 3
-          小时与初始模型检查，连续两次明显退步会自动停止。
-        </p>
-        <div class="spread">
-          <strong id="elapsed">等待读取</strong><span id="fraction" class="muted">24 小时计划</span>
+
+      <section class="card task" aria-labelledby="task-title">
+        <div class="task-head">
+          <div>
+            <p class="label">当前任务</p>
+            <h2 id="task-title">持续自对弈训练</h2>
+          </div>
+          <code id="run-name">—</code>
         </div>
-        <progress id="progress" max="100" value="0" aria-label="本次计划运行时间进度"></progress>
-        <p class="muted small">进度条仅代表已运行时间，不代表棋力、胜率或整个项目的完成比例。</p>
-      </section>
-      <section class="metrics" aria-label="实际完成的数据">
-        <article class="panel">
-          <span class="muted">完成整场比赛</span><strong id="matches">—</strong
-          ><small id="decisions">— 个学习决策</small>
-        </article>
-        <article class="panel">
-          <span class="muted">全网络更新</span><strong id="steps">—</strong
-          ><small id="buffer">— 行缓冲样本</small>
-        </article>
-        <article class="panel">
-          <span class="muted">采样速度</span><strong id="rate">—</strong
-          ><small>学习决策 / 秒</small>
-        </article>
-        <article class="panel">
-          <span class="muted">训练数据占用</span><strong id="disk">—</strong
-          ><small>全部保存在 D 盘</small>
-        </article>
-      </section>
-      <section class="panel" id="gpu-panel" hidden>
-        <p class="eyebrow">GPU 训练 · 与 CPU 基线分开记录</p>
-        <h2>显卡正在参与的训练</h2>
-        <div id="gpu-runs"></div>
-        <p class="muted small">
-          显卡负责网络训练，牌局模拟仍由 CPU 执行。以下是独立运行的实际数据，尚不代表棋力优于 CPU
-          基线。
+        <p class="task-text">
+          神经网络从现有模型出发，不停地和自己、历史版本以及规则机器人打完整的掼蛋比赛，再用每局的输赢结果更新自己。新版本必须在对局中明显赢过当前冠军，才能成为新冠军；网页上玩家对战的电脑暂时不会更换。
         </p>
+        <p id="protocol" class="tag" hidden></p>
+        <div class="time-row">
+          <span><strong id="elapsed">—</strong> <span class="muted" id="planned"></span></span>
+          <span class="muted" id="eta"></span>
+        </div>
+        <progress id="progress" max="100" value="0" aria-label="计划运行时间进度"></progress>
+        <p class="hint">进度条只表示运行时间，不代表棋力。</p>
       </section>
-      <section class="panel">
-        <h2>现在正在做的事</h2>
-        <p id="learner">等待读取训练进程</p>
-        <div id="processes" class="chips"></div>
-        <dl>
-          <dt>网络训练设备</dt>
-          <dd id="device">—</dd>
-          <dt>张量占用显存</dt>
-          <dd id="gpu-memory">—</dd>
-          <dt>更新速度</dt>
-          <dd id="update-rate">—</dd>
-          <dt>最近保存的模型</dt>
-          <dd id="latest">—</dd>
-          <dt>门控冠军</dt>
-          <dd id="champion">—</dd>
-          <dt>下一次锚点检查</dt>
-          <dd id="anchor">—</dd>
-          <dt>报告同步</dt>
-          <dd id="publication">—</dd>
-          <dt>面板读取时间</dt>
-          <dd id="observed">—</dd>
-          <dt>调度心跳时间</dt>
-          <dd id="updated">—</dd>
-        </dl>
-        <p class="muted small">
-          参数在内存中持续更新，约每 10
-          分钟保存一个模型；冠军只有通过门控后才更替。网页默认模型保持不变。
-        </p>
+
+      <section class="metrics" aria-label="核心数字">
+        <article class="card metric">
+          <p class="label">已完成比赛</p>
+          <strong id="matches">—</strong>
+          <small id="decisions">—</small>
+        </article>
+        <article class="card metric">
+          <p class="label">训练步数</p>
+          <strong id="steps">—</strong>
+          <small id="buffer">—</small>
+        </article>
+        <article class="card metric">
+          <p class="label">采样速度</p>
+          <strong id="rate">—</strong>
+          <small id="samplers">决策 / 秒</small>
+        </article>
+        <article class="card metric">
+          <p class="label">训练速度</p>
+          <strong id="update-rate">—</strong>
+          <small id="learner-state">步 / 秒</small>
+        </article>
       </section>
-      <section class="panel">
-        <h2>实际对战检查</h2>
-        <p class="muted small">
-          这里是开发筛选。得分 = 胜 1 / 平 0.5 / 负 0，不等于胜率；尚未完成独立留出验收。
-        </p>
-        <div id="evaluations"><p>读取中</p></div>
+
+      <div class="grid-2">
+        <section class="card" aria-labelledby="models-title">
+          <h2 id="models-title">模型</h2>
+          <dl class="facts">
+            <dt>当前冠军</dt>
+            <dd id="champion">—</dd>
+            <dt>最新保存</dt>
+            <dd id="latest">—</dd>
+            <dt>下次锚点检查</dt>
+            <dd id="anchor">—</dd>
+          </dl>
+          <p class="hint">锚点检查：最新模型与初始模型对局，连续两次明显退步就自动停止训练。</p>
+        </section>
+
+        <section class="card" aria-labelledby="system-title">
+          <h2 id="system-title">运行状态</h2>
+          <dl class="facts">
+            <dt>训练设备</dt>
+            <dd id="device">—</dd>
+            <dt>磁盘占用</dt>
+            <dd id="disk">—</dd>
+            <dt>研究报告同步</dt>
+            <dd id="publication">—</dd>
+            <dt>调度心跳</dt>
+            <dd id="updated">—</dd>
+          </dl>
+          <div id="processes" class="chips" aria-label="运行中的进程"></div>
+        </section>
+      </div>
+
+      <section class="card" aria-labelledby="eval-title">
+        <h2 id="eval-title">对战检查</h2>
+        <p class="hint">得分：胜 = 1、平 = 0.5、负 = 0。这些都是开发筛选，不是正式验收。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>类型</th>
+                <th>挑战者</th>
+                <th>对手</th>
+                <th class="num">对局</th>
+                <th class="num">胜 / 负 / 平</th>
+                <th class="num">得分</th>
+                <th>结论</th>
+              </tr>
+            </thead>
+            <tbody id="evaluations">
+              <tr>
+                <td colspan="7" class="muted">读取中…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
-      <section class="panel">
-        <h2>接下来按这个顺序做</h2>
-        <ol class="roadmap">
-          <li class="current">
-            <strong>长期训练与自动报告</strong><span id="roadmap-state">进行中</span>
-          </li>
-          <li>锁定留出种子与冠军验收脚本<span>待开始</span></li>
-          <li>门控并行化<span>待开始</span></li>
-          <li>整场目标与势函数对照<span>待开始</span></li>
-          <li>全部候选的约束对照<span>待开始</span></li>
-          <li>验收现有最强候选<span>待开始</span></li>
-        </ol>
-      </section>
-      <section class="panel" id="research-roadmap">
-        <h2>交接新增的研究任务</h2>
-        <p class="muted small">
-          以下均为待检验计划，排在第 1 步之后。当前 GPU 运行保持原配置；新增方法将另开实验验证。
-        </p>
-        <ol class="roadmap">
-          <li>
-            D1 · 用 LSTM 记住出牌历史<span>待开始 · 第 1 步后优先，先证明初始模型与 P0 等价</span>
-          </li>
-          <li>D2 · 比较升级分与整场目标<span>待开始 · 并入主流程第 4 步，比较四组目标</span></li>
-          <li>
-            D3 · 推测队友与对手余牌<span
-              >待开始 · 他人私牌仅作训练标签，决策用本人手牌与公开信息</span
-            >
-          </li>
-          <li>
-            D4 · 固定评测牌局与基线<span>待开始 · 与主流程第 2 步联合设计，开发和留出分开</span>
-          </li>
-          <li>D5 · 学习进还贡<span>待开始 · 与第 7 步的进还贡研究合并验证</span></li>
-        </ol>
-      </section>
-      <section class="panel">
-        <h2>最近事件</h2>
-        <ul id="events" class="events"></ul>
-      </section>
+
+      <div class="grid-2">
+        <section class="card" aria-labelledby="roadmap-title">
+          <h2 id="roadmap-title">路线图</h2>
+          <ol class="steps">
+            <li class="current">长期训练与自动报告 <span id="roadmap-state">进行中</span></li>
+            <li>锁定留出种子，写冠军验收脚本</li>
+            <li>门控并行化</li>
+            <li>整场胜率目标对照</li>
+            <li>全部候选的约束对照</li>
+            <li>验收现有最强候选</li>
+          </ol>
+          <p class="label sub">后续研究任务</p>
+          <ul class="research">
+            <li><b>D1</b> 用 LSTM 记住出牌历史</li>
+            <li><b>D2</b> 比较升级分与整场胜率目标</li>
+            <li><b>D3</b> 推测队友和对手的余牌（辅助任务）</li>
+            <li><b>D4</b> 固定评测牌局与基线对手</li>
+            <li><b>D5</b> 学习进贡与还贡</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="events-title">
+          <h2 id="events-title">最近事件</h2>
+          <ul id="events" class="events"></ul>
+        </section>
+      </div>
+
       <footer>
-        <p id="run" class="small muted"></p>
+        <span>数据直接读取本机训练记录，每 5 秒刷新；关闭本页不影响训练。</span>
         <a
           href="https://github.com/stevensun1005/guandanai/blob/main/docs/MODEL_STUDY.md"
           target="_blank"
           rel="noreferrer"
-          >查看已推送的研究报告 ↗</a
+          >研究报告 ↗</a
         >
-        <p class="small muted">训练在后台独立运行；关闭本面板不会停止训练。本面板仅限本机访问。</p>
       </footer>
     </main>
   </body>

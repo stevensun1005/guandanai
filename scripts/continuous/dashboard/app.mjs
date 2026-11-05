@@ -1,270 +1,264 @@
 const element = (id) => document.getElementById(id);
 const set = (id, value) => (element(id).textContent = value);
 const number = (value) => Number(value || 0).toLocaleString('zh-CN');
+const zone = { timeZone: 'America/Toronto', hour12: false };
 const time = (value) =>
   value
-    ? new Date(value).toLocaleString('zh-CN', { timeZone: 'America/Toronto', hour12: false }) +
-      ' 多伦多'
-    : '暂无';
+    ? new Date(value).toLocaleString('zh-CN', {
+        ...zone,
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : '—';
+const clock = (value) =>
+  value
+    ? new Date(value).toLocaleTimeString('zh-CN', {
+        ...zone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      })
+    : '—';
+
 const outcomes = {
-  accept: '接受挑战者',
-  reject: '拒绝挑战者',
+  accept: '通过，成为新冠军',
+  reject: '未通过',
   inconclusive: '证据不足',
-  regression: '明确退步',
-  'no-regression': '未触发退步阈值',
+  regression: '明显退步',
+  'no-regression': '未退步',
 };
-const reasons = {
+const stopReasons = {
   'operator-stop': '人工停止',
-  'time-limit': '达到运行时限',
+  'time-limit': '达到计划时长',
   'anchor-regression': '连续两次锚点退步',
-  'source-changed': '训练源码发生变化',
+  'source-changed': '训练代码发生变化',
   'crash-limit': '进程连续崩溃',
-  'disk-limit': '达到磁盘上限',
-  'supervisor-error': '调度进程错误',
+  'disk-limit': '磁盘超过上限',
+  'supervisor-error': '调度进程出错',
 };
-const label = (name) =>
-  name === 'learner'
-    ? '训练进程'
-    : name.startsWith('actor-')
-      ? '采样 ' + (Number(name.slice(6)) + 1)
-      : name === 'anchor'
-        ? '锚点评测'
-        : name === 'gate'
+const eventNames = {
+  initialized: '创建训练',
+  start: '启动训练',
+  snapshot: '保存快照进联赛池',
+  'gate-start': '开始冠军门控',
+  'gate-finish': '冠军门控结束',
+  'gate-interrupted': '冠军门控中断',
+  'anchor-start': '开始锚点检查',
+  'anchor-finish': '锚点检查结束',
+  champion: '产生新冠军',
+  shutdown: '训练停机',
+  stop: '触发停止',
+  'process-exit': '进程退出',
+  'protocol-change': '调整采样方式（协议变化）',
+};
+const processName = (process) => {
+  const base =
+    process.name === 'learner'
+      ? '训练'
+      : process.name.startsWith('actor-')
+        ? '采样 ' + (Number(process.name.slice(6)) + 1)
+        : process.name === 'gate'
           ? '冠军门控'
-          : name;
-const child = (tag, content, className) => {
-  const node = document.createElement(tag);
-  node.textContent = content;
-  if (className) node.className = className;
-  return node;
+          : process.name === 'anchor'
+            ? '锚点检查'
+            : process.name;
+  return base + (process.alive === false ? ' · 未运行' : '');
+};
+const node = (tag, text, className) => {
+  const item = document.createElement(tag);
+  if (text !== undefined) item.textContent = text;
+  if (className) item.className = className;
+  return item;
 };
 
 function render(data) {
-  const gpu = data.device?.startsWith('cuda');
-  set(
-    'device',
-    (data.learner.deviceName || (gpu ? 'GPU 初始化中' : 'CPU')) + (gpu ? ' · GPU 反向传播' : ''),
-  );
-  set('observed', time(data.observedAt));
-  set(
-    'gpu-memory',
-    data.learner.gpuAllocatedBytes == null
-      ? '—'
-      : (data.learner.gpuAllocatedBytes / 2 ** 20).toFixed(0) + ' MiB（不含驱动及其他进程）',
-  );
-  set(
-    'update-rate',
-    data.learner.stepsPerSecond == null
-      ? '—'
-      : data.learner.stepsPerSecond.toFixed(2) + ' 次/秒（本进程均值）',
-  );
-  const cpuPaused = data.cpuBaseline?.stoppedAt;
-  element('baseline-note').hidden = !cpuPaused;
-  if (cpuPaused)
-    set(
-      'baseline-note',
-      `纯 CPU 基线已停止，占用已释放。最后完成 ${number(data.cpuBaseline.totals?.matches)} 场、${number(data.cpuBaseline.learner?.step)} 次更新，检查点保留。以下主视图显示 GPU 运行。`,
-    );
-  set(
-    'description',
-    `${data.actorCount} 个调度器采样进程${data.actorImplementation === 'fast' ? '（快速版：GPU 批量推理）' : ''}${data.extraActorCount ? `、${data.extraActorCount} 个额外加入的采样进程${data.fastActorCount ? `（其中 ${data.fastActorCount} 个为 GPU 批量推理的快速进程）` : ''}` : ''}收集完整比赛，训练进程更新整个价值网络。每 ${data.anchorHours} 小时与初始模型检查，连续两次明显退步会自动停止。${data.protocolChanges?.length ? `运行中途在 ${time(data.protocolChanges.at(-1).at)} 切换了采样方式，属于协议变化，详见研究报告 7.12 节。` : ''}`,
-  );
-  const phase = { running: '● 正在训练', stopped: '■ 已停止', unconfirmed: '状态待确认' }[
-    data.phase
-  ];
-  set('state', phase);
+  const running = data.phase === 'running';
+  const stopped = data.phase === 'stopped';
+
+  set('subtitle', `多伦多时间 · 最后读取 ${clock(data.observedAt)} · 每 5 秒自动刷新`);
+  set('state', running ? '● 训练中' : stopped ? '■ 已停止' : '⚠ 状态待确认');
   element('state').dataset.phase = data.phase;
+
+  set('run-name', (data.run || '').split(/[\\/]/).pop() || '—');
   set(
-    'task',
-    data.phase === 'stopped'
-      ? '本次训练已停止'
-      : gpu
-        ? 'GPU 加速的长期自对弈训练'
-        : '默认配置的长期自对弈训练',
+    'task-title',
+    stopped
+      ? `持续自对弈训练 · 已停止（${stopReasons[data.stopReason] || data.stopReason || '原因未记录'}）`
+      : '持续自对弈训练',
   );
-  set(
-    'roadmap-state',
-    data.phase === 'running'
-      ? '训练运行中，尚未完成第 1 步'
-      : data.phase === 'stopped'
-        ? '等待复核结果，未自动进入下一步'
-        : '等待确认进程与状态',
-  );
+  const change = data.protocolChanges?.at(-1);
+  element('protocol').hidden = !change;
+  if (change)
+    set(
+      'protocol',
+      `${time(change.at)} 起调整了采样方式（${data.actorImplementation === 'fast' ? '改用 GPU 批量推理的快速采样进程' : '采样设置变化'}），属于协议变化，详见研究报告。`,
+    );
+
   const hours = data.elapsedSeconds / 3600;
-  set('elapsed', '实际运行 ' + hours.toFixed(2) + ' 小时');
   const planned = data.plannedHours;
+  set('elapsed', `已运行 ${hours.toFixed(2)} 小时`);
+  set(
+    'planned',
+    planned
+      ? `/ 计划 ${planned} 小时（${Math.min(100, (hours / planned) * 100).toFixed(0)}%）`
+      : '',
+  );
   element('progress').value = planned ? Math.min(100, (hours / planned) * 100) : 0;
   set(
-    'fraction',
-    planned ? `${((hours / planned) * 100).toFixed(1)}% / ${planned} 小时计划` : '未设置固定时限',
+    'eta',
+    running && planned
+      ? `预计 ${time(Date.parse(data.observedAt) + Math.max(0, planned * 3600 - data.elapsedSeconds) * 1000)} 结束`
+      : stopped
+        ? `停止于 ${time(data.stoppedAt)}`
+        : '',
   );
+
   set('matches', number(data.totals.matches));
-  set('decisions', number(data.totals.decisions) + ' 个学习决策');
+  set('decisions', `学习决策 ${number(data.totals.decisions)}`);
   set('steps', number(data.learner.step));
-  set('buffer', number(data.learner.buffer) + ' 行缓冲样本');
+  set('buffer', `缓冲样本 ${number(data.learner.buffer)} 行`);
   set('rate', data.decisionsPerSecond == null ? '—' : number(Math.round(data.decisionsPerSecond)));
-  set('disk', data.diskGB == null ? '—' : data.diskGB.toFixed(2) + ' GB');
+  const samplers = data.processes.filter((p) => p.name.startsWith('actor-') && p.alive !== false);
+  const fast = samplers.filter((p) => p.implementation === 'fast').length;
   set(
-    'learner',
-    data.phase === 'stopped'
-      ? '停止原因：' + (reasons[data.stopReason] || data.stopReason || '尚未记录')
-      : data.learner.state === 'waiting-for-data'
-        ? '正在等待新样本：采样进程继续打牌，训练进程遵守重放比上限。'
-        : data.learner.state === 'training'
-          ? '正在使用采样到的比赛数据更新整个价值网络。'
-          : '正在准备训练进程。',
+    'samplers',
+    `决策/秒 · ${samplers.length} 个采样进程${fast === samplers.length && fast ? '（快速版）' : fast ? `（${fast} 个快速版）` : ''}`,
   );
+  const updates = data.learnerUpdatesPerSecond ?? data.learner.stepsPerSecond;
+  set('update-rate', updates == null ? '—' : updates.toFixed(1));
+  set(
+    'learner-state',
+    '步/秒 · ' +
+      (stopped
+        ? '已停止'
+        : data.learner.state === 'training'
+          ? '正在训练'
+          : data.learner.state === 'waiting-for-data'
+            ? '等待新样本'
+            : '准备中'),
+  );
+
+  const changes = Math.max(0, (data.champion?.history?.length || 1) - 1);
+  set('champion', `${data.champion?.version || '—'} · 已更替 ${changes} 次`);
+  set('latest', `${data.latest?.version || '—'} · ${time(data.latest?.publishedAt)} 保存`);
+  set(
+    'anchor',
+    running
+      ? `${time(data.nextAnchorAt)} · 连续退步 ${data.anchorRegressionStreak}/2`
+      : '训练未运行',
+  );
+
+  const memory =
+    data.learner.gpuAllocatedBytes == null
+      ? ''
+      : ` · 显存 ${(data.learner.gpuAllocatedBytes / 2 ** 20).toFixed(0)} MiB`;
+  set(
+    'device',
+    (data.learner.deviceName || (data.device?.startsWith('cuda') ? 'GPU' : 'CPU')) + memory,
+  );
+  set('disk', data.diskGB == null ? '—' : `${data.diskGB.toFixed(1)} GB`);
+  const publication = data.publication || {};
+  set(
+    'publication',
+    (publication.reporterAlive ? '自动同步中' : '报告器未运行') +
+      (publication.snapshotAt ? ` · 上次 ${time(publication.snapshotAt)}` : ''),
+  );
+  set('updated', `${clock(data.updatedAt)}（${Math.max(0, Math.round(data.heartbeatAge))} 秒前）`);
+
   element('processes').replaceChildren(
     ...data.processes.map((process) =>
-      child(
+      node(
         'span',
-        label(process.name) +
-          (process.implementation === 'fast' ? ' · 快速' : '') +
-          (process.alive === false ? ' · 未运行' : ''),
-        process.alive === false ? 'offline' : '',
+        processName(process),
+        process.alive === false ? 'offline' : process.implementation === 'fast' ? 'fast' : '',
       ),
     ),
   );
-  set('latest', (data.latest?.version || '尚未保存') + ' · ' + time(data.latest?.publishedAt));
-  set(
-    'champion',
-    (data.champion?.version || '暂无') +
-      ' · 更替 ' +
-      Math.max(0, (data.champion?.history?.length || 1) - 1) +
-      ' 次',
-  );
-  set(
-    'anchor',
-    data.phase === 'running'
-      ? time(data.nextAnchorAt) + ' · 连续退步 ' + data.anchorRegressionStreak + '/2'
-      : '训练未运行',
-  );
-  const publication = data.publication;
-  set(
-    'publication',
-    (publication.reporterAlive ? '报告器运行中' : '报告器未运行') +
-      ' · ' +
-      (publication.confirmed ? '上次快照已推送 main：' : '证据快照（尚未确认推送）：') +
-      time(publication.snapshotAt),
-  );
-  set(
-    'updated',
-    time(data.updatedAt) + ' · ' + Math.max(0, Math.round(data.heartbeatAge)) + ' 秒前',
-  );
-  set('run', data.run);
-  element('gpu-panel').hidden = !data.deviceRuns?.length;
-  element('gpu-runs').replaceChildren(
-    ...(data.deviceRuns || []).map((run) => {
-      const box = child('div', '', 'evaluation');
-      box.append(child('strong', run.deviceName + ' · ' + run.name));
-      box.append(
-        child(
-          'p',
-          (run.phase === 'running' ? '运行中' : run.phase === 'stopped' ? '已停止' : '状态待确认') +
-            ` · ${run.actorCount} 个采样进程 · 实际运行 ${(run.elapsedSeconds / 3600).toFixed(2)} 小时`,
-        ),
-      );
-      box.append(
-        child('p', `完成 ${number(run.totals.matches)} 场 · ${number(run.step)} 次全网络更新`),
-      );
-      box.append(
-        child(
-          'p',
-          (run.learnerState === 'waiting-for-data'
-            ? '等待新样本'
-            : run.learnerState === 'training'
-              ? '正在更新参数'
-              : '等待训练状态') +
-            (run.gpuAllocatedBytes == null
-              ? ''
-              : ` · 张量分配显存 ${(run.gpuAllocatedBytes / 2 ** 20).toFixed(0)} MiB`),
-          'muted small',
-        ),
-      );
-      return box;
-    }),
-  );
-  const evaluations = data.evaluations.map((record) => {
-    const box = child('div', '', 'evaluation');
-    box.append(
-      child(
-        'strong',
-        (record.kind === 'anchor' ? '锚点检查' : '冠军门控') + ' · ' + record.challenger,
-      ),
-    );
-    box.append(
-      child(
-        'p',
-        `${record.pairs} / ${record.maxPairs} 对 · 胜 / 负 / 平：${record.wins} / ${record.losses} / ${record.draws}`,
-      ),
-    );
-    box.append(
-      child(
-        'p',
+
+  const rows = data.evaluations
+    .slice()
+    .reverse()
+    .map((record) => {
+      const row = node('tr');
+      const conclusion =
         record.status === 'complete'
           ? outcomes[record.decision] || record.decision
-          : record.status === 'running' && data.phase === 'running'
-            ? '评测中，尚无最终结论'
-            : '检查未完成，无最终结论',
-        'muted',
-      ),
-    );
-    if (record.score !== null)
-      box.append(
-        child(
-          'p',
-          `平均得分 ${(record.score * 100).toFixed(2)}%` +
+          : record.status === 'running' && running
+            ? '进行中'
+            : '未完成';
+      const score =
+        record.score == null
+          ? '—'
+          : `${(record.score * 100).toFixed(1)}%` +
             (record.interval
-              ? ` · 95% 区间 [${record.interval.map((x) => (x * 100).toFixed(2)).join('%, ')}%]`
-              : '') +
-            (record.status !== 'complete' ? '（阶段记录）' : ''),
-          'small muted',
-        ),
-      );
-    return box;
-  });
+              ? `（${record.interval.map((x) => (x * 100).toFixed(0)).join('–')}%）`
+              : '');
+      for (const [text, className] of [
+        [record.kind === 'anchor' ? '锚点检查' : '冠军门控'],
+        [record.challenger, 'mono'],
+        [
+          record.kind === 'anchor' ? '初始模型' : record.opponent || '当前冠军',
+          record.kind === 'anchor' ? '' : 'mono',
+        ],
+        [`${record.pairs}/${record.maxPairs} 对`, 'num'],
+        [`${record.wins} / ${record.losses} / ${record.draws}`, 'num'],
+        [score, 'num'],
+        [conclusion, `verdict ${record.decision || record.status}`],
+      ])
+        row.append(node('td', text, className));
+      return row;
+    });
   element('evaluations').replaceChildren(
-    ...(evaluations.length
-      ? evaluations
+    ...(rows.length
+      ? rows
       : [
-          child(
-            'p',
-            '本次运行还没有对战检查。先收集样本和更新网络，保存首个新模型后才开始门控。',
-            'muted',
-          ),
+          (() => {
+            const row = node('tr');
+            const cell = node('td', '还没有对战检查；保存第一个新模型后开始。', 'muted');
+            cell.colSpan = 7;
+            row.append(cell);
+            return row;
+          })(),
         ]),
   );
-  const eventNames = {
-    initialized: '创建运行并冻结配置',
-    start: '启动训练',
-    snapshot: '保存联赛快照',
-    'gate-start': '开始冠军门控',
-    'gate-finish': '完成冠军门控',
-    'anchor-start': '开始锚点检查',
-    'anchor-finish': '结束锚点检查',
-    champion: '产生新冠军',
-    shutdown: '训练停机',
-    stop: '触发停止规则',
-    'process-exit': '子进程退出',
-  };
+
+  set('roadmap-state', running ? '进行中' : stopped ? '已停止，等待复核' : '状态待确认');
+
   element('events').replaceChildren(
     ...data.events
       .slice()
       .reverse()
+      .slice(0, 8)
       .map((event) => {
-        const item = child(
-          'li',
-          (eventNames[event.kind] || event.kind) +
-            (event.version ? ' · ' + event.version : '') +
-            (event.reason ? ' · ' + event.reason : ''),
+        const item = node('li');
+        item.append(node('time', time(event.t)));
+        const detail =
+          event.kind === 'gate-finish' || event.kind === 'anchor-finish'
+            ? event.decision
+              ? ' · ' + (outcomes[event.decision] || event.decision)
+              : ''
+            : event.kind === 'stop' && event.reason
+              ? ' · ' + event.reason
+              : '';
+        item.append(
+          node(
+            'span',
+            (eventNames[event.kind] || event.kind) +
+              (event.version || event.challenger
+                ? ' · ' + (event.version || event.challenger)
+                : '') +
+              detail,
+          ),
         );
-        item.prepend(child('time', time(event.t)));
         return item;
       }),
   );
+
   const warning =
     data.phase === 'unconfirmed'
-      ? '状态文件已过期或调度进程未运行。以下为最后记录，不能据此认为训练仍在继续。'
+      ? '调度进程没有在运行，或状态文件已过期。下面是最后一次记录，不代表训练仍在继续。'
       : '';
   element('connection').hidden = !warning;
   element('connection').textContent = warning;
@@ -281,8 +275,8 @@ async function refresh() {
     render(data);
   } catch (error) {
     element('connection').hidden = false;
-    set('connection', '无法连接实时进度：' + error.message + '。下面的数据可能已过期。正在重试。');
-    set('state', '连接中断');
+    set('connection', `暂时连不上训练记录（${error.message}），下面的数据可能已过期，正在重试。`);
+    set('state', '⚠ 连接中断');
     element('state').dataset.phase = 'unconfirmed';
   }
 }

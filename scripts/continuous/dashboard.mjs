@@ -56,12 +56,16 @@ export function dashboardSnapshot(run, workspace = project) {
     .filter((actor) => actor.alive);
   // The supervisor's rate covers its own slots only, so measure all slots over a rolling window.
   const now = Date.now();
-  rateSamples.push({ t: now, decisions: sampled.decisions });
+  rateSamples.push({ t: now, decisions: sampled.decisions, step: learner.step || 0 });
   while (rateSamples.length > 2 && now - rateSamples[0].t > 120_000) rateSamples.shift();
   const oldest = rateSamples[0];
   const samplingRate =
     now - oldest.t >= 20_000
       ? ((sampled.decisions - oldest.decisions) * 1000) / (now - oldest.t)
+      : null;
+  const learnerRate =
+    now - oldest.t >= 20_000 && (learner.step || 0) >= oldest.step
+      ? (((learner.step || 0) - oldest.step) * 1000) / (now - oldest.t)
       : null;
   const liveTotals = sampled.slots.length
     ? { matches: sampled.matches, decisions: sampled.decisions, rows: sampled.rows }
@@ -156,6 +160,7 @@ export function dashboardSnapshot(run, workspace = project) {
     deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,
     decisionsPerSecond: samplingRate ?? status.decisionsPerSecond,
+    learnerUpdatesPerSecond: learnerRate,
     extraActorCount: extraActors.length,
     fastActorCount: extraActors.filter((a) => a.implementation === 'fast').length,
     processes: (status.running || [])
