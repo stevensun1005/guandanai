@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "purpose": "Sampling throughput engineering measurement for the continuous training actors; no model-strength claim",
+  "baseCommit": "9924b631a0b451cd955ce72d33e32cef4b7f6a07",
+  "machine": "Ryzen 7 7800X3D (8 cores / 16 threads), 32 GB, AMD RX 7800 XT, Windows 11, Node 24.19.0, onnxruntime-node 1.31.1 (DirectML execution provider bundled)",
+  "conditions": "All measurements ran while the gpu-main training run was active on the same machine (8 standard actors plus the GPU learner), so CPU and GPU were shared; numbers are not isolated hardware limits",
+  "profileStandardActor": {
+    "selfPlay": {
+      "inference": 0.48,
+      "candidateGeneration": 0.38,
+      "encoding": 0.05,
+      "note": "share of main-thread time, Node --cpu-prof, 6 matches"
+    },
+    "ruleOpponent": {
+      "inference": 0.4,
+      "candidateGeneration": 0.38,
+      "ruleBot": 0.12,
+      "note": "10 matches"
+    }
+  },
+  "directmlMicrobenchmark": {
+    "graph": "ai/policy.onnx rewritten to per-row state input",
+    "msPerRun": {
+      "43": 0.42,
+      "1024": 2.32,
+      "8192": 5.98,
+      "32768": 18.89
+    },
+    "candidatesPerSecond": {
+      "43": 103135,
+      "1024": 441924,
+      "8192": 1370197,
+      "32768": 1734435
+    },
+    "cpuSingleThreadCandidatesPerSecond": {
+      "43": 59329,
+      "1024": 78803,
+      "8192": 64035
+    },
+    "processCpuPerWallWhileWaitingOnGpu": {
+      "1030": 0.36,
+      "8192": 0.47
+    }
+  },
+  "correctness": {
+    "candidateCache": {
+      "decisionsCompared": 39959,
+      "mismatches": 0,
+      "candidateGenerationSpeedup": 1.29,
+      "hitRate": 0.57
+    },
+    "batchedGpuVsCpu": {
+      "positions": 300,
+      "maxAbsError": 4.29e-6,
+      "argmaxDifferences": 0
+    },
+    "rolloutCopyVsFrozen": {
+      "matchesCompared": 8,
+      "identical": 8
+    },
+    "perRowGraphVsDeployed": {
+      "maxAbsError": 0.0
+    }
+  },
+  "steadyStateThroughput": {
+    "protocol": "4 actor processes on slots 36-39 of a scratch run (actorSeedOffset 45,000,000, data discarded), 90 s warm-up, completed learner decisions counted over the next 210 s",
+    "standardActor": 1220,
+    "fastActorGpuInSameThread": 1478,
+    "fastActorGpuWorkerThread48Games": 2530,
+    "ratioWorkerVsStandard": 2.07
+  },
+  "limitations": [
+    "Single machine, single short window per configuration, shared with a running training job; no confidence interval",
+    "DirectML results differ from CPU inference by up to a few 1e-6, so a fast actor is equivalent in rules and policy but not bit-identical in sampled actions",
+    "Not yet used in any training run; throughput gains do not by themselves imply stronger models"
+  ]
+}

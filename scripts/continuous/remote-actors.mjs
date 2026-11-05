@@ -1,7 +1,7 @@
 /**
  * Run extra sampling actors on another machine that writes into a shared run directory.
  *
- *   node scripts/continuous/remote-actors.mjs --run=Z:/ --slots=8-15
+ *   node scripts/continuous/remote-actors.mjs --run=Z:/ --slots=8-15 [--actor=fast --games=48]
  *
  * The learner, gates and league stay on the machine that runs supervisor.mjs. Before starting,
  * this launcher checks that the local checkout matches the run's frozen sources, refuses the
@@ -20,6 +20,10 @@ import { REPO_ROOT, parseSlots, sourceMismatches } from './remote.mjs';
 const paths = runPaths(option('run', ''));
 const slots = parseSlots(option('slots', ''));
 const host = option('host', hostname());
+const implementation = option('actor', 'standard');
+const games = option('games', '48');
+const provider = option('provider', 'dml');
+if (!['standard', 'fast'].includes(implementation)) throw Error('--actor must be standard or fast');
 const STALE_MS = 3 * 60_000;
 
 if (!option('run', ''))
@@ -89,7 +93,15 @@ function start(slot) {
   }
   const child = spawn(
     process.execPath,
-    [join(REPO_ROOT, 'scripts/continuous/actor.mjs'), `--run=${paths.root}`, `--slot=${slot}`],
+    implementation === 'fast'
+      ? [
+          join(REPO_ROOT, 'scripts/continuous/fast-actor.mjs'),
+          `--run=${paths.root}`,
+          `--slot=${slot}`,
+          `--games=${games}`,
+          `--provider=${provider}`,
+        ]
+      : [join(REPO_ROOT, 'scripts/continuous/actor.mjs'), `--run=${paths.root}`, `--slot=${slot}`],
     { cwd: REPO_ROOT, stdio: ['ignore', 'ignore', 'pipe'], windowsHide: true },
   );
   let tail = '';
@@ -132,6 +144,8 @@ process.on('SIGTERM', shutdown);
 log('start', {
   run: resolve(paths.root),
   slots,
+  actor: implementation,
+  ...(implementation === 'fast' ? { games: Number(games), provider } : {}),
   node: process.version,
   frozenSources: Object.keys(config.sourceSHA256).length,
   commit: gitCommit(),
