@@ -188,6 +188,65 @@ test('STOP before the first polling tick shuts down without restarting finished 
   }
 });
 
+function runSupervisorUntilStart(directory, extra = []) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(
+      process.execPath,
+      ['scripts/continuous/supervisor.mjs', `--run=${directory}`, ...extra],
+      { cwd: fileURLToPath(new URL('..', import.meta.url)), windowsHide: true },
+    );
+    let output = '';
+    let errors = '';
+    child.stderr.on('data', (chunk) => (errors += chunk));
+    child.stdout.on('data', (chunk) => {
+      output += chunk;
+      if (output.includes('"kind":"start"')) writeFileSync(join(directory, 'STOP'), '{}');
+    });
+    const timeout = setTimeout(() => child.kill(), 25_000);
+    child.on('error', reject);
+    child.on('exit', (code) => {
+      clearTimeout(timeout);
+      resolve({ code, output, errors });
+    });
+  });
+}
+
+test('resuming with changed sources needs a named protocol change, which is recorded', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'guandan-protocol-'));
+  try {
+    assert.equal((await runSupervisorUntilStart(directory, ['--config={"actors":1}'])).code, 0);
+    const configFile = join(directory, 'config.json');
+    const config = JSON.parse(readFileSync(configFile, 'utf8'));
+    const realSources = config.sourceSHA256;
+    config.sourceSHA256 = { ...realSources, 'scripts/continuous/actor.mjs': '0'.repeat(64) };
+    writeFileSync(configFile, JSON.stringify(config));
+    const refused = await runSupervisorUntilStart(directory);
+    assert.notEqual(refused.code, 0);
+    assert.match(refused.errors, /Run source changed/);
+    const accepted = await runSupervisorUntilStart(directory, [
+      '--protocol-change=switch samplers to fast actors',
+      '--set={"actorImplementation":"fast","fastActor":{"games":4,"provider":"cpu"}}',
+    ]);
+    assert.equal(accepted.code, 0, accepted.errors || accepted.output);
+    const updated = JSON.parse(readFileSync(configFile, 'utf8'));
+    assert.deepEqual(updated.sourceSHA256, realSources);
+    assert.equal(updated.actorImplementation, 'fast');
+    assert.deepEqual(updated.fastActor, { games: 4, provider: 'cpu' });
+    const change = updated.protocolHistory.at(-1);
+    assert.equal(change.reason, 'switch samplers to fast actors');
+    assert.equal(change.previous.actorImplementation, 'standard');
+    assert.deepEqual(change.changedSources, ['scripts/continuous/actor.mjs']);
+    const badSetting = await runSupervisorUntilStart(directory, [
+      '--protocol-change=try to change exploration',
+      '--set={"exploration":{"type":"greedy"}}',
+    ]);
+    assert.notEqual(badSetting.code, 0);
+    assert.match(badSetting.errors, /cannot change exploration/);
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
+
 test('exploration rules stay greedy at their limits and only sample near-best softmax moves', () => {
   const values = new Float32Array([0.1, 1.0, 0.95, -2]);
   let state = 1;

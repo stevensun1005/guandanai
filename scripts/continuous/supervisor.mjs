@@ -40,11 +40,26 @@ const paths = runPaths(option('run', 'work/continuous/main'));
 const hours = Number(option('hours', '0'));
 const python = option('python', 'python');
 const override = JSON.parse(option('config', '{}'));
+// Resuming an existing run with different sources or sampler settings is refused unless the
+// operator names the change; it is then recorded in config.protocolHistory and events.jsonl.
+const protocolChange = option('protocol-change', '');
+const protocolSettings = JSON.parse(option('set', '{}'));
 if (!Number.isFinite(hours) || hours < 0) throw Error('Invalid hours');
 const sourceFiles = [
-  ...['supervisor.mjs', 'actor.mjs', 'gate.mjs', 'lib.mjs', 'learner.py', 'value_net.py'].map(
-    (f) => `scripts/continuous/${f}`,
-  ),
+  ...[
+    'supervisor.mjs',
+    'actor.mjs',
+    'gate.mjs',
+    'lib.mjs',
+    'learner.py',
+    'value_net.py',
+    'fast-actor.mjs',
+    'batch-inference.mjs',
+    'inference-worker.mjs',
+    'fast-candidates.mjs',
+    'fast-rollout.mjs',
+    'onnx-rows.mjs',
+  ].map((f) => `scripts/continuous/${f}`),
   ...['match-rollout.mjs', 'match-simulation.mjs', 'simulation.mjs', 'rule-baseline.mjs'].map(
     (f) => `scripts/lib/${f}`,
   ),
@@ -74,6 +89,26 @@ function sourceHashes() {
   );
 }
 const sourcesAtStart = sourceHashes();
+
+/** Only sampler settings may change through --set; everything else stays frozen. */
+function validateProtocolSettings(settings) {
+  const allowed = new Set(['actorImplementation', 'fastActor']);
+  for (const key of Object.keys(settings))
+    if (!allowed.has(key)) throw Error(`--set cannot change ${key}`);
+  if (
+    'actorImplementation' in settings &&
+    !['standard', 'fast'].includes(settings.actorImplementation)
+  )
+    throw Error('actorImplementation must be standard or fast');
+  if ('fastActor' in settings) {
+    const { games, provider, ...rest } = settings.fastActor || {};
+    if (Object.keys(rest).length) throw Error('fastActor accepts games and provider only');
+    if (games !== undefined && (!Number.isInteger(games) || games < 1 || games > 512))
+      throw Error('fastActor.games must be 1-512');
+    if (provider !== undefined && !['dml', 'cpu'].includes(provider))
+      throw Error('fastActor.provider must be dml or cpu');
+  }
+}
 
 function merge(base, extra) {
   const out = { ...base };
@@ -143,6 +178,36 @@ function initialize() {
     event('initialized', { config });
   } else if (Object.keys(override).length) {
     event('config-override-ignored', { reason: 'run already has a frozen config.json' });
+  }
+  const sourcesChanged =
+    config.sourceSHA256 && JSON.stringify(config.sourceSHA256) !== JSON.stringify(sourcesAtStart);
+  if (protocolChange && (sourcesChanged || Object.keys(protocolSettings).length)) {
+    validateProtocolSettings(protocolSettings);
+    const previous = {
+      sourceSHA256: config.sourceSHA256,
+      actorImplementation: config.actorImplementation || 'standard',
+      fastActor: config.fastActor || null,
+    };
+    const status = readJSON(paths.status, {}) || {};
+    config = merge(config, protocolSettings);
+    config.sourceSHA256 = sourcesAtStart;
+    config.protocolHistory = [
+      ...(config.protocolHistory || []),
+      {
+        at: new Date().toISOString(),
+        reason: protocolChange,
+        elapsedSecondsBefore: status.elapsedSeconds ?? null,
+        totalsBefore: status.totals ?? null,
+        learnerStepBefore: status.learner?.step ?? null,
+        previous,
+        settings: protocolSettings,
+        changedSources: Object.keys({ ...previous.sourceSHA256, ...sourcesAtStart }).filter(
+          (file) => previous.sourceSHA256?.[file] !== sourcesAtStart[file],
+        ),
+      },
+    ];
+    writeJSON(paths.config, config);
+    event('protocol-change', config.protocolHistory.at(-1));
   }
   if (!Number.isInteger(config.actors) || config.actors < 1 || config.actors > MAX_ACTORS)
     throw Error('Invalid actor count');
@@ -237,11 +302,20 @@ function start(name) {
     launch(name, python, ['-u', join(here, 'learner.py'), `--run=${paths.root}`]);
   else {
     const slot = Number(name.slice('actor-'.length));
-    launch(name, process.execPath, [
-      join(here, 'actor.mjs'),
-      `--run=${paths.root}`,
-      `--slot=${slot}`,
-    ]);
+    const fast = config.actorImplementation === 'fast';
+    launch(
+      name,
+      process.execPath,
+      fast
+        ? [
+            join(here, 'fast-actor.mjs'),
+            `--run=${paths.root}`,
+            `--slot=${slot}`,
+            `--games=${config.fastActor?.games ?? 48}`,
+            `--provider=${config.fastActor?.provider ?? 'dml'}`,
+          ]
+        : [join(here, 'actor.mjs'), `--run=${paths.root}`, `--slot=${slot}`],
+    );
   }
 }
 
