@@ -181,7 +181,29 @@
       ]
     },
     "pythonResearch": 9,
-    "pythonGuanZero": 8,
+    "pythonGuanZero": {
+      "total": 8,
+      "finalPassed": 8,
+      "initialBeforeIntegrationPassed": 8,
+      "firstIntegratedRun": {
+        "passed": 7,
+        "errors": 1,
+        "test": "live_versioned_service_node_client_and_complete_matches",
+        "error": "subprocess.TimeoutExpired after 180 seconds"
+      },
+      "isolatedRetry": {
+        "passed": 1,
+        "seconds": 14.415
+      },
+      "fullLimitedThreadRetry": {
+        "passed": 8,
+        "seconds": 25.125,
+        "ompThreads": 1,
+        "mklThreads": 1,
+        "openblasThreads": 1
+      },
+      "rootCauseProven": false
+    },
     "bashSyntax": "passed",
     "format": "passed",
     "build": "f759bd71ee",
@@ -224,11 +246,15 @@
     {
       "issue": "Initial integration assertion incorrectly equated actor generated rows with learner ingested rows",
       "resolution": "Compare saved countedShards plus physical uncounted manifests instead; 28220 new rows, cumulative 349547359; remaining actor/learner difference 335126 not attributed; do not claim transfer loss or complete usage"
+    },
+    {
+      "issue": "An extra GuanZero live network/parity regression timed out after 180s following concurrent-main integration",
+      "resolution": "Isolated retry and all eight tests passed under an explicit single-thread budget; exact timeout cause not established; kept the negative result; no GuanZero training source or run changed by this task"
     }
   ],
   "webDefaultChanged": false,
   "webBuildUnchanged": "f759bd71ee",
-  "updatedAtUTC": "2026-11-05T21:32:12.433451+00:00",
+  "updatedAtUTC": "2026-11-05T21:40:45.414814+00:00",
   "fullReplayRestore": {
     "kind": "test",
     "device": "cpu",
@@ -248,7 +274,10 @@
   "preparedConfigMatchesFinalSources": true,
   "newMacSeedsConsumedOnWindows": 0,
   "repositoryPublication": {
-    "status": "pending-commit-and-push",
+    "sourceCommit": "43d0f2f349ead309579c58b48e5db85726f3c539",
+    "status": "pushed-to-main",
+    "workflow": 42113734942,
+    "workflowStatus": "pending-behind-earlier-run",
     "pagesBuildUnchanged": "f759bd71ee",
     "webDefaultChanged": false
   },
@@ -257,5 +286,12 @@
     "baseCommit": "f2901f6e4a6b8100ad5b488b89b2155d0e55b4bf"
   },
   "integratedMainCommit": "af7dbfc69b3f4ee3bc4b83f2d376949f4ede7176",
-  "concurrentGuanZeroUpdatesPreserved": true
+  "concurrentGuanZeroUpdatesPreserved": true,
+  "workspaceIntegration": {
+    "mainFastForwarded": true,
+    "ownerDraftsPreservedExactBytes": 10,
+    "draftsStaged": 0,
+    "BOTSOriginalDraftRestoredAfterFastForward": true,
+    "otherMachineGuanZeroChangesPreserved": true
+  }
 }
