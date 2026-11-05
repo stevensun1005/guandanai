@@ -334,5 +334,98 @@
       "pageErrors": []
     }
   },
-  "version": "1.15.1"
+  "version": "1.15.1",
+  "deployment": {
+    "commit": "550a16d37d8ce8552bba453070d6f3ab9930c5c4",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42082530234",
+    "status": "success",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "buildVersion": "aa43590418",
+    "checkedAtUTC": "2026-11-05T18:19:05.208923+00:00",
+    "browserRoomsUnequalLevels": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "hostDeniedEnforced": true,
+      "scoring": {
+        "modelId": "009",
+        "candidates": 21,
+        "minValue": -1.2204887866973877,
+        "maxValue": -0.3503113090991974,
+        "viewTeamLevelsChecked": true,
+        "teamLevels": {
+          "self": 2,
+          "opponent": 7
+        },
+        "relativeExtremaChecked": true,
+        "selectionUsesCachedValues": true,
+        "invalidSelectionNotRated": true,
+        "disabledStaleReplyIgnored": true,
+        "injectedFailureNotScored": true,
+        "retrySucceeded": true
+      },
+      "postMoveRetained": true,
+      "independentPlayerPreferences": true,
+      "assistedEventMarked": true,
+      "realPeerJSDataChannel": true,
+      "hostWGuestS": true,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "bounds": {
+            "x": 146,
+            "y": 650.71875,
+            "width": 968,
+            "height": 53
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 588,
+            "width": 302,
+            "height": 53
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 165.265625,
+            "width": 672,
+            "height": 46
+          }
+        }
+      ],
+      "rejoinRestoresPermissionAndPreference": true,
+      "pageErrors": []
+    }
+  },
+  "desktopVerification": {
+    "dashboard": "http://127.0.0.1:8766/",
+    "phase": "running",
+    "supervisorAlive": true,
+    "learnerStep": 637454,
+    "learnerDevice": "AMD Radeon RX 7800 XT",
+    "learnerUpdatedAt": "2026-11-05T18:19:04Z",
+    "resources": {
+      "reserveGB": 4,
+      "resumeGB": 5,
+      "freeGB": 9.76070785522461,
+      "pausedActors": [],
+      "updatedAt": "2026-11-05T18:19:02.411Z"
+    },
+    "groupsCompletedMatches": 4000,
+    "browserErrors": []
+  }
 }
