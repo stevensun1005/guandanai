@@ -12889,7 +12889,10 @@
     "strengthMatches": 0,
     "replayManifest": "a02-000003029.json",
     "replayManifestSHA256": "93c4118fd9b32d4b94d144e721808a91087f8f8a69c40df2266437d97c435f70",
-    "note": "Not GPU utilization; capacity estimate with source frozen checkpoint and real samples; temporary network/Adam updates never reach production."
+    "note": "Not GPU utilization; capacity estimate with source frozen checkpoint and real samples; temporary network/Adam updates never reach production.",
+    "probeReplayCapacity": 8192,
+    "productionReplayCapacity": 2000000,
+    "timingIncludes": "Replay batch from the small probe buffer, float conversion, device transfer, forward/backward, Adam update, loss readback and explicit MPS synchronization; excludes production shard ingestion and export"
   },
   "adopted": {
     "actors": 4,
@@ -13699,6 +13702,15 @@
     },
     "researchPython": 9,
     "format": "passed",
-    "build": "dc9e641f73"
+    "build": "dc9e641f73",
+    "concurrentMainIntegration": {
+      "remoteCommit": "3ccc843",
+      "nodePassed": 176,
+      "researchPythonPassed": 9,
+      "format": "passed",
+      "build": "dc9e641f73",
+      "trainingFrozenSourceUnchanged": true,
+      "researchHeadingCollisionResolved": "Keep Mac startup as section 28, renumber concurrent GuanZero labels to 29, add Mac tuning as 30"
+    }
   }
 }

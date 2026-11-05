@@ -69,6 +69,8 @@ Completed multiplayer rounds with at least two human seats are collected by the 
 
 GuanZero development evaluation now includes random play, the original rules, P0, Clint and the accepted danMCai champion. Each opponent defaults to 500 complete matches (250 paired seeds with sides swapped). The dashboard separates live progress from completed results and historical 200-match batches. See the [evaluation protocol](ai/guanzero/README.md#开发评测对手).
 
+GuanZero evaluation rows use the training run and actual frozen export version, with the opponent and progress shown separately. Old snapshots without verifiable version records use a SHA suffix. See [dashboard model names](ai/guanzero/README.md#面板中的评测模型名).
+
 ## Run locally
 
 Node.js **20.19+** is required; CI uses Node.js 24.

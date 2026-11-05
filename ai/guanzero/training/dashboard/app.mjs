@@ -160,10 +160,10 @@ function render(s) {
     ...(s.evaluations.length
       ? s.evaluations.map((e) =>
           row([
-            `${e.opponentName || names[e.opponent] || e.opponent} / ${e.suite ? `500场协议 · ${e.modelVersion}` : `历史批次 #${e.block}`}`,
+            `${e.modelName || s.name} / ${e.opponentName || names[e.opponent] || e.opponent}`,
             e.plannedMatches
               ? `${e.matches} / ${e.plannedMatches} 场 · ${e.status === 'complete' ? '完成' : e.status === 'running' ? '进行中' : '等待'}`
-              : `${e.matches} 场`,
+              : `${e.matches} 场 · 历史`,
             `${e.wins ?? '—'} / ${e.losses ?? '—'} / ${e.draws ?? '—'}`,
             pct(e.matchWinRate),
             pct(e.roundWinRate),

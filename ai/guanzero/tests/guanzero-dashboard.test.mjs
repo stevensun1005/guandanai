@@ -154,3 +154,40 @@ test('dashboard accepts Clint supplements only for the same frozen model and pai
     rmSync(root, { recursive: true });
   }
 });
+
+import { modelLabel, captureModelIdentities } from '../training/model-labels.mjs';
+import { createHash } from 'node:crypto';
+test('evaluation model names use verified checkpoints and never treat block counters or the latest export as old versions', () => {
+  const { root } = fixture();
+  try {
+    const bytes = Buffer.from('named frozen model'),
+      file = join(root, 'models/model-000000078087.onnx');
+    writeFileSync(file, bytes);
+    const sha = createHash('sha256').update(bytes).digest('hex'),
+      identities = {};
+    assert.equal(captureModelIdentities(root, identities), true);
+    assert.equal(
+      modelLabel('guanzero-adp-gpubatch', sha, 'block-0003', identities),
+      'guanzero-adp-gpubatch-78087',
+    );
+    const old = 'a'.repeat(64);
+    assert.equal(
+      modelLabel('guanzero-adp-gpubatch', old, 'block-0003', identities),
+      'guanzero-adp-gpubatch-aaaaaaaaaaaa',
+    );
+    assert.equal(
+      modelLabel('guanzero-adp-gpubatch', old, 'model-000000077262', identities),
+      'guanzero-adp-gpubatch-77262',
+    );
+    const before = readFileSync(join(root, 'config.json'));
+    const rows = snapshot(root, identities);
+    assert.equal(rows.latest.version, 3);
+    assert.deepEqual(readFileSync(join(root, 'config.json')), before);
+    assert.throws(
+      () => createDashboardServer({ run: root, modelIdentitiesFile: join(root, 'config.json') }),
+      /outside the training run/,
+    );
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});
