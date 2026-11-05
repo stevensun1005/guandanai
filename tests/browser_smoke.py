@@ -30,8 +30,8 @@ def main():
             permissions=["clipboard-read", "clipboard-write"],
         )
         context.add_init_script("localStorage.setItem('guandan-ai','rules')")
-        context.add_init_script("""const NativeWorker=Worker;window.styleDecisions=0;
-          window.Worker=class extends NativeWorker{postMessage(data,...rest){if(data.type==='decide'&&data.state?.profile&&data.state.profile!=='balanced')window.styleDecisions++;return super.postMessage(data,...rest)}};""")
+        context.add_init_script("""const NativeWorker=Worker;window.modelDecisions=0;
+          window.Worker=class extends NativeWorker{postMessage(data,...rest){if(data.type==='decide'&&data.state?.modelId)window.modelDecisions++;return super.postMessage(data,...rest)}};""")
         host = context.new_page()
         errors = []
         api = []
@@ -56,7 +56,7 @@ def main():
               w.onmessage=({data})=>{w.terminate();if(data.error)reject(Error(data.error));else resolve(data.result)};
               w.onerror=e=>reject(Error(e.message));w.postMessage({id:1,type:'decide',state});
             })""",
-                state,
+                {**state, "modelId": "001"},
             )
             batch = np.array(
                 [np.concatenate((encode(state), cards_array(a))) for a in state["actions"]],
@@ -136,7 +136,7 @@ def main():
             )
             host.wait_for_timeout(100)
         assert host.evaluate("G.log.length>=12")
-        assert host.evaluate("styleDecisions") > 0
+        assert host.evaluate("modelDecisions") > 0
         host.wait_for_timeout(350)
         host_log = host.evaluate(
             "JSON.stringify(G.log.map(e=>({p:e.p,cards:e.cards?.map(c=>c.id)||null})))"
@@ -160,7 +160,7 @@ def main():
         assert not mobile.evaluate("document.documentElement.scrollWidth>innerWidth")
         # Failed resource loading waits for a retry instead of changing bot strategy.
         failure_context = browser.new_context()
-        failure_context.route("**/models/policy.onnx*", lambda route: route.abort())
+        failure_context.route("**/models/*.onnx*", lambda route: route.abort())
         failure = failure_context.new_page()
         failure.on("pageerror", lambda error: errors.append(str(error)))
         failure.goto(URL, wait_until="networkidle")
@@ -175,7 +175,7 @@ def main():
         }""")
         failure.locator("#retryTableBtn").wait_for(state="visible", timeout=25000)
         assert failure.evaluate("G.log.length") == 0
-        failure_context.unroute("**/models/policy.onnx*")
+        failure_context.unroute("**/models/*.onnx*")
         failure.locator("#retryTableBtn").click()
         failure.wait_for_function('() => (G.log.length>=1)', timeout=60000)
         failure_context.close()
@@ -194,9 +194,9 @@ def main():
             "hiddenModelControls": True,
             "pageErrors": errors,
         }
-        report["botProfilesSynchronized"] = True
+        report["botModelsSynchronized"] = True
         report["guestAvoidsModelDownload"] = True
-        report["learnedStyleDecisions"] = host.evaluate("styleDecisions")
+        report["numberedModelDecisions"] = host.evaluate("modelDecisions")
         (OUT / "report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
         print(json.dumps(report))
         browser.close()

@@ -23,5 +23,47 @@
   },
   "classification": "Owner-authorized browser deployment; not independent performance acceptance",
   "strengthEvaluation": null,
-  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155"
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "compatibility": {
+    "testedCommit": "f26a19b",
+    "buildVersion": "9044c38e06",
+    "cleanWorktree": true,
+    "nodeTests": {
+      "passed": 117,
+      "failed": 0
+    },
+    "formatCheck": true,
+    "build": true,
+    "python": {
+      "modelStudyPassed": 9,
+      "continuousLearnerPassed": 6,
+      "gpuOnlySkipped": 1
+    },
+    "browser": {
+      "successfulWorkerModelIds": ["001", "002"],
+      "desktop": true,
+      "mobilePortraitAndLandscape": true,
+      "seatRotations": 4,
+      "preferencesPersisted": true,
+      "pageErrors": [],
+      "network": {
+        "browserModelParityPositions": 17,
+        "maxValueError": "< 0.0002",
+        "inferenceApiRequests": 0,
+        "roomCreated": true,
+        "inviteLink": true,
+        "twoClientsPlayed": true,
+        "logsSynchronized": true,
+        "guestDisconnectHandled": true,
+        "legacySettingIgnored": true,
+        "modelRetryWithoutFallback": true,
+        "hiddenModelControls": true,
+        "pageErrors": [],
+        "botModelsSynchronized": true,
+        "guestAvoidsModelDownload": true,
+        "numberedModelDecisions": 31
+      }
+    },
+    "classification": "Compatibility checks only; zero new strength-evaluation matches"
+  }
 }
