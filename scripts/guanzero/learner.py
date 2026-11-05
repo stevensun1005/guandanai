@@ -8,7 +8,7 @@ import time
 from collections import deque
 import numpy as np
 import torch
-from model import GuanZeroNet, atomic_json, export_onnx, optimizer, update
+from model import GuanZeroNet, atomic_json, export_onnx, optimizer, update, replace_atomic
 FEATURES=1647
 
 def load_batch(directory, consumed, size):
@@ -41,7 +41,7 @@ def atomic_checkpoint(file, payload):
     file=Path(file); temporary=file.with_name(file.name+f'.{os.getpid()}.tmp')
     with temporary.open('wb') as stream:
         torch.save(payload,stream);stream.flush();os.fsync(stream.fileno())
-    os.replace(temporary,file)
+    replace_atomic(temporary,file)
 
 def cleanup(files):
     for file in files:

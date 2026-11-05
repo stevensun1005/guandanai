@@ -5,8 +5,20 @@ import onnxruntime as ort
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts/guanzero'))
 (ROOT/'work/guanzero').mkdir(parents=True,exist_ok=True)
-from model import GuanZeroNet, export_onnx
+from model import GuanZeroNet, export_onnx, replace_atomic
+from unittest.mock import patch
 class ModelTest(unittest.TestCase):
+    def test_atomic_replace_retries_only_transient_failures(self):
+        with patch('model.os.replace',side_effect=[PermissionError('busy'),PermissionError('busy'),None]) as rename, patch('model.time.sleep'):
+            replace_atomic('temporary','target')
+            self.assertEqual(rename.call_count,3)
+        with patch('model.os.replace',side_effect=PermissionError('permanent')) as rename, patch('model.time.sleep'):
+            with self.assertRaises(PermissionError):replace_atomic('temporary','target')
+            self.assertEqual(rename.call_count,20)
+        with patch('model.os.replace',side_effect=FileNotFoundError('missing')) as rename:
+            with self.assertRaises(FileNotFoundError):replace_atomic('temporary','target')
+            self.assertEqual(rename.call_count,1)
+
     def test_export_python_and_node(self):
         torch.set_num_threads(1); torch.manual_seed(61)
         model=GuanZeroNet().eval()

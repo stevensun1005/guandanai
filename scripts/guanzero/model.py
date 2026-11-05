@@ -3,6 +3,7 @@ import argparse
 import copy
 import json
 import os
+import time
 from pathlib import Path
 import torch
 from torch import nn
@@ -26,11 +27,21 @@ class GuanZeroNet(nn.Module):
         inputs = torch.cat((hidden.expand(count,-1),state.expand(count,-1),actions),dim=-1)
         return self.dense(inputs)
 
+def replace_atomic(temporary, file):
+    """Windows readers/scanners can briefly deny replacement; never hide permanent failure."""
+    for attempt in range(20):
+        try:
+            os.replace(temporary, file)
+            return
+        except PermissionError:
+            if attempt == 19: raise
+            time.sleep(min(.25, .01 * 2**attempt))
+
 def atomic_json(file, value):
     file = Path(file)
     temporary = file.with_name(file.name + f'.{os.getpid()}.tmp')
     temporary.write_text(json.dumps(value, indent=2),encoding='utf-8')
-    os.replace(temporary,file)
+    replace_atomic(temporary,file)
 
 def export_onnx(model, file):
     file = Path(file)
@@ -42,7 +53,7 @@ def export_onnx(model, file):
             input_names=['state','history','actions'],output_names=['values'],opset_version=17,
             dynamic_axes={'actions':{0:'candidates'},'values':{0:'candidates'}},dynamo=False,
             external_data=False)
-    os.replace(temporary,file)
+    replace_atomic(temporary,file)
 
 def optimizer(model):
     return torch.optim.RMSprop(model.parameters(),lr=1e-4,alpha=0.99,eps=1e-5,momentum=0)
