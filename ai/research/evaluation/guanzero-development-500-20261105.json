@@ -87,7 +87,12 @@
     "smokeSeeds": [
       4199900000,
       4199900000
-    ]
+    ],
+    "documentationLinks": {
+      "markdownFiles": 12,
+      "localLinksChecked": 296,
+      "broken": []
+    }
   },
   "protectedTrainingAndHistoricalReports": {
     "files": {
@@ -270,5 +275,40 @@
     "A regression test rejected incomplete completed-result accounting; strict wins/losses/draws and seed-pair checks were added before activation.",
     "New companion module required a final formatter pass; repository format check then passed."
   ],
-  "strengthResults": null
+  "strengthResults": null,
+  "completedDevelopmentEvaluations": [
+    {
+      "file": "guanzero-development-500-model-000000077262-random-20261105.json",
+      "sha256": "f5f48ad46c4134c072d0eb04a6a40b0def5f2d347d237228c9c7386ffec67f8d",
+      "modelSHA256": "53391161dd8f11b3d69d2f9533957f2d314dcde684bf9bd19aec54134f15ea98",
+      "opponent": "random",
+      "opponentVersion": "uniform-candidates-v1",
+      "pairs": 250,
+      "seedStart": 4200000000,
+      "seedEnd": 4200000249,
+      "completedAt": "2026-11-05T21:35:54.082Z",
+      "matches": 500,
+      "wins": 500,
+      "losses": 0,
+      "draws": 0,
+      "confidence95": {
+        "matchWinRate": [
+          1,
+          1
+        ],
+        "matchScore": [
+          1,
+          1
+        ],
+        "roundWinRate": [
+          0.9980244962465429,
+          1
+        ],
+        "averageUpgradePoints": [
+          2.970831690973591,
+          2.9880857823669578
+        ]
+      }
+    }
+  ]
 }
