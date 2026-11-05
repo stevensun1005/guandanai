@@ -69,12 +69,24 @@ test('GuanZero dashboard treats non-finite learner errors as errors and preserve
       modelSHA256: 'abc',
       results: {
         rule: { matches: 4, wins: 0, losses: 4, draws: 0, clusters: ['omitted'], matchWinRate: 0 },
+        clint: {
+          matches: 4,
+          wins: 1,
+          losses: 3,
+          draws: 0,
+          clusters: ['omitted'],
+          matchWinRate: 0.25,
+        },
       },
     });
     const s = snapshot(root);
     assert.equal(s.phase, 'error');
     assert.equal(s.evaluations[0].matches, 4);
     assert.equal(s.evaluations[0].clusters, undefined);
+    assert.equal(s.evaluations[0].opponentName, '原版规则机器人');
+    assert.equal(s.evaluations[0].opponentVersion, 'original');
+    assert.equal(s.evaluations[1].opponentName, 'Clint规则机器人');
+    assert.equal(s.evaluations[1].matchWinRate, 0.25);
   } finally {
     rmSync(root, { recursive: true });
   }
@@ -99,6 +111,46 @@ test('GuanZero HTTP dashboard is read-only and serves live JSON and local assets
     assert.equal(readdirSync(join(root, 'shards')).length, 0);
   } finally {
     await new Promise((resolve) => server.close(resolve));
+    rmSync(root, { recursive: true });
+  }
+});
+
+test('dashboard accepts Clint supplements only for the same frozen model and paired deals', () => {
+  const { root, write } = fixture();
+  try {
+    mkdirSync(join(root, 'eval/block-0002/clint'), { recursive: true });
+    const base = {
+      index: 2,
+      pairs: 100,
+      seedStart: 3700200000,
+      seedEnd: 3700200099,
+      modelSHA256: 'pinned',
+      results: { rule: { matches: 200, wins: 0, losses: 200, draws: 0 } },
+    };
+    write('eval/block-0002/report.json', base);
+    const supplement = {
+      ...base,
+      completedAt: new Date().toISOString(),
+      opponents: { clint: { name: 'Clint规则机器人', version: 'rules-v2' } },
+      results: { clint: { matches: 200, wins: 2, losses: 198, draws: 0 } },
+    };
+    for (const field of [
+      { modelSHA256: 'different' },
+      { seedStart: 1 },
+      { seedEnd: 2 },
+      { pairs: 99 },
+      { index: 3 },
+    ]) {
+      write('eval/block-0002/clint/report.json', { ...supplement, ...field });
+      assert.equal(snapshot(root).evaluations.length, 1);
+    }
+    write('eval/block-0002/clint/report.json', supplement);
+    const rows = snapshot(root).evaluations;
+    assert.equal(rows.length, 2);
+    assert.equal(rows[0].opponentVersion, 'original');
+    assert.equal(rows[1].opponentVersion, 'rules-v2');
+    assert.equal(rows[1].wins, 2);
+  } finally {
     rmSync(root, { recursive: true });
   }
 });

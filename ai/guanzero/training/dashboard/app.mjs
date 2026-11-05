@@ -140,12 +140,17 @@ function render(s) {
       : '等待下一次刷新';
   text('loss-range', range);
   text('sample-range', range);
-  const names = { random: '随机出牌', rule: '规则机器人', p0: 'P0' };
+  const names = {
+    random: '随机出牌',
+    rule: '原版规则机器人',
+    p0: 'P0初始模型',
+    clint: 'Clint规则机器人',
+  };
   $('evaluations').replaceChildren(
     ...(s.evaluations.length
       ? s.evaluations.map((e) =>
           row([
-            `${names[e.opponent] || e.opponent} / #${e.block}`,
+            `${e.opponentName || names[e.opponent] || e.opponent} / 批次 #${e.block}`,
             `${e.matches} 场`,
             `${e.wins} / ${e.losses} / ${e.draws}`,
             pct(e.matchWinRate),

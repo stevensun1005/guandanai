@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-11-05T15:33:02.361758+00:00",
+  "modelSHA256": "f9d57243fa320955c5b90253f07d452297750f65ef2efaf56a8503278b846e06",
+  "opponent": "clint",
+  "opponentVersion": "rules-v2",
+  "resultFile": "ai/research/evaluation/guanzero-clint-block-0002-20261105.json",
+  "resultFileSHA256": "21c17d2866ccbcd8fd2db14d4b23142246b836cd083e3c3ef4af78caaa3a9649",
+  "pairedSeeds": [
+    3700200000,
+    3700200099
+  ],
+  "matches": 200,
+  "nodeTests": 139,
+  "pythonGuanZeroTests": 8,
+  "format": "passed",
+  "build": "cc8bdd6104",
+  "encodingParity": {
+    "positions": 834,
+    "state": "exact",
+    "history": "exact"
+  },
+  "liveDashboard": {
+    "url": "http://127.0.0.1:8770/",
+    "clintMatches": 200,
+    "wins": 12,
+    "losses": 172,
+    "draws": 16,
+    "pageErrors": 0
+  },
+  "firstStartFailure": {
+    "message": "subdirectory is not defined",
+    "matchesProduced": 0,
+    "corrected": true
+  },
+  "originalReportModifiedBySupplement": false,
+  "trainingConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836"
+}

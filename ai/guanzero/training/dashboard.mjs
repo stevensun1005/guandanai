@@ -1,4 +1,5 @@
 /** Local, read-only GuanZero progress dashboard. No control endpoints. */
+import { opponentDefinition } from './opponents.mjs';
 import { createServer } from 'node:http';
 import {
   readFileSync,
@@ -56,12 +57,33 @@ export function snapshot(run) {
       .sort()
       .reverse()
       .slice(0, 4)) {
-      const report = safe(join(p.eval, name, 'report.json'));
-      if (report)
+      const original = safe(join(p.eval, name, 'report.json'));
+      const supplement = safe(join(p.eval, name, 'clint/report.json'));
+      const reports = [original];
+      if (
+        supplement?.completedAt &&
+        original &&
+        supplement.modelSHA256 === original.modelSHA256 &&
+        supplement.index === original.index &&
+        supplement.pairs === original.pairs &&
+        supplement.seedStart === original.seedStart &&
+        supplement.seedEnd === original.seedEnd &&
+        !original.results?.clint
+      )
+        reports.push(supplement);
+      for (const report of reports.filter(Boolean))
         for (const [opponent, r] of Object.entries(report.results)) {
           const { clusters, ...metrics } = r;
           evaluations.push({
             opponent,
+            opponentName:
+              report.opponents?.[opponent]?.name ||
+              (['random', 'rule', 'p0', 'clint'].includes(opponent)
+                ? opponentDefinition(opponent).name
+                : opponent),
+            opponentVersion:
+              report.opponents?.[opponent]?.version ||
+              (opponent === 'rule' ? 'original' : undefined),
             block: report.index,
             seedStart: report.seedStart,
             seedEnd: report.seedEnd,

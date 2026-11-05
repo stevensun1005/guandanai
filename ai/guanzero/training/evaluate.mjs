@@ -1,7 +1,8 @@
-import { copyFileSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as ort from 'onnxruntime-node';
+import { DEFAULT_OPPONENTS, opponentDefinition } from './opponents.mjs';
 import { playMatch } from '../../shared/simulation/match-rollout.mjs';
 import { seededRandom } from '../../shared/simulation/simulation.mjs';
 import { createModelPool } from '../../local/training/continuous/lib.mjs';
@@ -63,11 +64,22 @@ export async function evaluate({
   model,
   index,
   pairs = 100,
-  opponents = ['random', 'rule', 'p0'],
+  subdirectory = '',
+  opponents = DEFAULT_OPPONENTS,
 }) {
+  if (
+    !Array.isArray(opponents) ||
+    !opponents.length ||
+    new Set(opponents).size !== opponents.length
+  )
+    throw Error('Choose distinct GuanZero evaluation opponents');
+  const definitions = opponents.map(opponentDefinition);
+  if (subdirectory && !/^[a-z][a-z0-9-]*$/.test(subdirectory))
+    throw Error('Invalid evaluation subdirectory');
   const p = paths(run),
     start = evalSeed(index, pairs),
-    folder = join(p.eval, `block-${String(index).padStart(4, '0')}`);
+    folder = join(p.eval, `block-${String(index).padStart(4, '0')}`, subdirectory);
+  if (existsSync(join(folder, 'report.json'))) throw Error('Evaluation report already exists');
   mkdirSync(folder, { recursive: true });
   const pinned = join(folder, 'model.onnx');
   copyFileSync(resolve(model), pinned);
@@ -83,7 +95,27 @@ export async function evaluate({
     index,
     modelSHA256: sha256(pinned),
     sourceSHA256: {
-      ...config.sourceSHA256,
+      ...Object.fromEntries(
+        [
+          'ai/shared/simulation/match-rollout.mjs',
+          'ai/shared/simulation/match-simulation.mjs',
+          'ai/shared/simulation/rule-baseline.mjs',
+          'ai/shared/simulation/simulation.mjs',
+          'web/src/ai/hand-value.js',
+          'web/src/ai/rule-policy.js',
+          'web/src/ai/candidates.js',
+          'web/src/ai/observation.js',
+          'web/src/hand/hints.js',
+          'web/src/core/cards.js',
+          'web/src/core/combinations.js',
+          'web/src/core/moves.js',
+          'web/src/core/match.js',
+          'web/src/core/tribute.js',
+          ...readdirSync(join(ROOT, 'web/src/rule-bot'))
+            .filter((name) => /\.(mjs|js)$/.test(name))
+            .map((name) => 'web/src/rule-bot/' + name),
+        ].map((name) => [name, sha256(join(ROOT, name))]),
+      ),
       ...Object.fromEntries(
         readdirSync(join(ROOT, 'ai/guanzero/training'))
           .filter((n) => /\.(mjs|py)$/.test(n))
@@ -92,12 +124,15 @@ export async function evaluate({
       'web/src/ai/encoding.mjs': sha256(join(ROOT, 'web/src/ai/encoding.mjs')),
     },
     p0SHA256: sha256(join(ROOT, 'ai/local/models/baseline/policy.onnx')),
+    opponents: Object.fromEntries(definitions.map((definition) => [definition.id, definition])),
+    trainingSourceSHA256: config.sourceSHA256 || {},
     exploration: 0,
     intervalMethod: '95% paired-seed cluster percentile bootstrap, 2000 draws',
     results: {},
   };
   try {
-    for (const opponent of opponents) {
+    for (const definition of definitions) {
+      const opponent = definition.id;
       const clusters = [];
       for (let i = 0; i < pairs; i++) {
         const pair = [];
@@ -107,7 +142,8 @@ export async function evaluate({
             await playMatch({
               seed: start + i,
               team,
-              mode: opponent === 'rule' ? 'rule' : 'snapshot',
+              mode: definition.mode,
+              ruleVersion: definition.ruleVersion,
               evaluate: true,
               infer: (state) => inference.values(state),
               snapshotInfer:
@@ -152,6 +188,6 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import
     model: option('model', join(p.models, latest.file)),
     index,
     pairs: Number(option('pairs', '100')),
-    opponents: option('opponents', 'random,rule,p0').split(','),
+    opponents: option('opponents', DEFAULT_OPPONENTS.join(',')).split(','),
   });
 }
