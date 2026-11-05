@@ -44,7 +44,7 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT/'rules-table.png'))
     # Real controller + Worker + five actual ONNX files on a controlled, conserved deal.
     # These are compatibility decisions, not strength matches.
-    for model in ['001','005','007','008','009']:
+    for model in ['001','007','008','009','010']:
         result=page.evaluate("""async id=>{
           TableBot.cancelTurn();resetGame();const d=makeDeck();G.hands=[[],[],[],[]];d.forEach((c,i)=>G.hands[i%4].push(c));
           G.phase='prep';G.turn=1;G.round=1;G.log=[];G.seen=[];G.rest=[];G.fixed=[];G.trib=[];G.returns=[];G.myOrder=[];
@@ -53,7 +53,7 @@ with sync_playwright() as p:
         }""",model)
         assert result['valid'],(model,result)
     neural=page.evaluate("replies.filter(x=>x.type==='decide').map(x=>x.model)")
-    assert sorted(neural)==['001','005','007','008','009'],neural
+    assert sorted(neural)==['001','007','008','009','010'],neural
     assert not errors,errors
     report={'actualRuleReplies':rule_turns,'allRuleGameNeuralDownloads':0,'wasmModels':neural,'fixtureScope':'Eight real opening actions; five controlled compatibility decisions, no strength estimates','pageErrors':errors}
     (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')

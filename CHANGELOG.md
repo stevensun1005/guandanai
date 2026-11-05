@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2026-11-05 · GuanZero 周期快照 61045
+
+- GuanZero 最近两代轮换为 `guanzero-adp-gpubatch-61045` 与 `guanzero-adp-gpubatch-44752`，旧权重保留归档。
+- 默认仍为现任本机门控冠军，Clint、初始版及两代冠军菜单保持；本次更新是兼容性验证后的快照发布，不新增独立棋力验收。
+
 ## 2026-11-05 · GuanZero 评测、命名与文档同步
 
 - GuanZero 网页名称统一为 `训练任务名-版本数值`，例如 `guanzero-adp-gpubatch-44752`；最近两代独立轮换，不覆盖本机冠军默认。

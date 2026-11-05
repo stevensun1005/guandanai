@@ -3508,13 +3508,6 @@
   "webModels": {
     "catalog": "web/src/ai/model-catalog.json",
     "defaultId": "009",
-    "selection": {
-      "mode": "champions-v1",
-      "localChampions": [
-        "009",
-        "008"
-      ]
-    },
     "models": [
       {
         "id": "001",
@@ -3636,6 +3629,18 @@
             "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00112.json",
             "evidenceSHA256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7"
           }
+        }
+      },
+      {
+        "id": "010",
+        "sha256": "6fb37ef5c25059d550fd36d00459af6ddc20d83127da663800663f0457c45fbe",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-010/bot-010.onnx",
+        "source": {
+          "run": "guanzero-adp-gpubatch",
+          "version": "model-000000061045",
+          "status": "experimental-not-heldout-accepted",
+          "step": 61045,
+          "registeredAt": "2026-11-05T17:15:32.032Z"
         }
       }
     ]

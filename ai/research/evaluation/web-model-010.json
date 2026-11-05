@@ -1,0 +1,93 @@
+{
+  "observedAt": "2026-11-05T17:15:36.874Z",
+  "defaultId": "009",
+  "model": {
+    "id": "010",
+    "file": "bot-010.onnx",
+    "sha256": "6fb37ef5c25059d550fd36d00459af6ddc20d83127da663800663f0457c45fbe",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-010/bot-010.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-gpubatch",
+      "version": "model-000000061045",
+      "status": "experimental-not-heldout-accepted",
+      "step": 61045,
+      "registeredAt": "2026-11-05T17:15:32.032Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "frozenSnapshot": {
+    "frozenAt": "2026-11-05T17:13:14.572560+00:00",
+    "run": "guanzero-adp-gpubatch",
+    "checkpoint": "model-000000061045",
+    "step": 61045,
+    "sha256": "6fb37ef5c25059d550fd36d00459af6ddc20d83127da663800663f0457c45fbe",
+    "bytes": 6346014,
+    "latest": {
+      "file": "model-000000061045.onnx",
+      "version": 61045,
+      "updatedAt": 1793898782.492846
+    },
+    "expectedId": "010",
+    "preservedDefaultId": "009",
+    "preservedSelection": {
+      "mode": "champions-v1",
+      "localChampions": [
+        "009",
+        "008"
+      ]
+    }
+  },
+  "trainingRunConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "positions": 16,
+      "values": 49,
+      "maxAbsoluteError": 4.76837158203125e-07,
+      "actionMismatches": 0
+    },
+    "checks": {
+      "nodeTests": 148,
+      "pythonGuanZeroTests": 8,
+      "format": "passed",
+      "build": "ca2ee9dba8",
+      "pythonIndependentSummaryTests": 2
+    },
+    "menu": {
+      "ids": [
+        "clint-rule",
+        "010",
+        "007",
+        "001",
+        "009",
+        "008"
+      ],
+      "guanzeroNames": [
+        "guanzero-adp-gpubatch-61045",
+        "guanzero-adp-gpubatch-44752"
+      ],
+      "defaultId": "009",
+      "localChampions": [
+        "009",
+        "008"
+      ],
+      "defaultName": "danMCai-v000293055",
+      "localBrowserVerified": true
+    },
+    "clintEvidence": "No new completed, unarchived Clint reports; block 2 remains associated with its original frozen model",
+    "integratedUpstreamCommit": "99d72d4d0020ae390c6e856300983758c3b16e93"
+  },
+  "operationalNote": "Initial metadata decoding used the system locale and failed; retried with explicit UTF-8 on the same frozen model without repinning."
+}

@@ -48,7 +48,7 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
 
 test('curated menu contains Clint, two GuanZero generations, P0 and the last two gate champions', () => {
   const choices = BOT_CHOICES.map((m) => m.id);
-  assert.deepEqual(choices, [CLINT_RULE_ID, '007', '005', '001', '009', '008']);
+  assert.deepEqual(choices, [CLINT_RULE_ID, '010', '007', '001', '009', '008']);
   assert.equal(DEFAULT_BOT_MODEL, '009');
   assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
   assert.equal(botModelName('009'), 'danMCai-v000293055');
@@ -63,11 +63,11 @@ test('curated menu contains Clint, two GuanZero generations, P0 and the last two
   };
   const future = {
     ...catalog,
-    models: [...catalog.models, { ...catalog.models.find((m) => m.id === '007'), id: '010' }],
+    models: [...catalog.models, { ...catalog.models.find((m) => m.id === '010'), id: '011' }],
   };
   assert.deepEqual(
     selectableModels(future).map((m) => m.id),
-    [CLINT_RULE_ID, '010', '007', '001', '009', '008'],
+    [CLINT_RULE_ID, '011', '010', '001', '009', '008'],
   );
   assert.throws(() => validateCatalog({ ...catalog, defaultId: '007' }), /champion selection/);
 });
