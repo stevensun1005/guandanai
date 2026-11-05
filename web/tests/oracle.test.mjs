@@ -90,8 +90,8 @@ test('Full-information neural rollouts can overturn their public neural prior us
   const result = await scoreOracle(oracleObservation(game), infer, { horizon: 8, maxMs: 10000 });
   const small = result.actions.findIndex((ids) => ids[0] === 1),
     large = result.actions.findIndex((ids) => ids[0] === 5);
-  assert.equal(result.values[small], -2);
-  assert.equal(result.values[large], 2);
+  assert.equal(result.outcomes[small], -2);
+  assert.equal(result.outcomes[large], 2);
   assert.equal(result.actions[result.values.indexOf(Math.max(...result.values))][0], 5);
   assert.deepEqual(game, before);
 });
@@ -101,8 +101,8 @@ test('Same public hand/counts, different hidden arrangements produce different c
     b = position([[2], [5], [4], [3]]);
   const x = await scoreOracle(oracleObservation(a), infer, { horizon: 8 });
   const y = await scoreOracle(oracleObservation(b), infer, { horizon: 8 });
-  assert.deepEqual(x.values, [2]);
-  assert.deepEqual(y.values, [1]);
+  assert.deepEqual(x.outcomes, [2]);
+  assert.deepEqual(y.outcomes, [1]);
 });
 
 test('Oracle rejects duplicate private cards and a leading pass before inference', async () => {
@@ -187,7 +187,7 @@ test('Every unfinished branch is scored at the advising seat, even after 接风 
   assert(result.lines[pass].length > 3, 'the pass branch continues past the four-move horizon');
 });
 
-test('Random mid-round positions never compare leaves from different seats', async () => {
+test('Short-lookahead mode never compares leaves from different seats on random mid-round positions', async () => {
   const random = seededRandom(91);
   let checked = 0;
   for (let seed = 0; seed < 6; seed++) {
@@ -199,7 +199,12 @@ test('Random mid-round positions never compare leaves from different seats', asy
     }
     if (!game.hands[game.turn]?.length || game.out.length >= 2) continue;
     const observation = oracleObservation(game, game.turn);
-    const result = await scoreOracle(observation, infer, { horizon: 4, maxRoots: 3, maxMs: 10000 });
+    const result = await scoreOracle(observation, infer, {
+      horizon: 4,
+      maxRoots: 3,
+      maxMs: 10000,
+      fullRound: false,
+    });
     for (const [i, ids] of result.actions.entries()) {
       const turn = leafTurn(observation, ids, result.lines[i]);
       if (turn === null || result.lines[i].length >= 4 + 8 - 1) continue;
@@ -211,4 +216,82 @@ test('Random mid-round positions never compare leaves from different seats', asy
     }
   }
   assert(checked > 0);
+});
+
+test('Every candidate is played out to the end of the round and scored by the real team result', async () => {
+  const random = seededRandom(17);
+  let positions = 0;
+  for (let seed = 0; seed < 4; seed++) {
+    const game = createRound(4_200_000 + seed);
+    game.phase = 'play';
+    for (let move = 0; move < 40 + seed * 9; move++) {
+      const plays = candidates(game.hands[game.turn], game.L, game.trick?.play);
+      if (advanceRound(game, plays[Math.floor(random() * plays.length)])) break;
+    }
+    if (!game.hands[game.turn]?.length || game.out.length >= 2) continue;
+    const observation = oracleObservation(game, game.turn);
+    // maxMs 0 keeps only the greedy pass, which is deterministic.
+    const options = { maxRoots: 3, maxMs: 0 };
+    const first = await scoreOracle(observation, infer, options);
+    const again = await scoreOracle(observation, infer, options);
+    assert.equal(first.search.mode, 'round');
+    assert.deepEqual(first.values, again.values, 'the same position gives the same values');
+    assert(
+      first.rollouts.every((count) => count >= 1),
+      'every candidate gets a full rollout',
+    );
+    for (const [i, ids] of first.actions.entries()) {
+      assert(
+        [-3, -2, -1, 1, 2, 3].includes(first.outcomes[i]),
+        'one greedy rollout gives a real team result',
+      );
+      assert.notEqual(
+        first.values[i],
+        first.outcomes[i],
+        'the ranking value blends the network prior',
+      );
+      assert.equal(
+        leafTurn(observation, ids, first.lines[i]),
+        null,
+        'the line reaches the end of the round',
+      );
+    }
+    positions++;
+  }
+  assert(positions > 0);
+});
+
+test('Sampled rollouts average real results and stop at the per-candidate sample cap', async () => {
+  const game = createRound(4_300_001);
+  game.phase = 'play';
+  const random = seededRandom(5);
+  for (let move = 0; move < 60; move++) {
+    const plays = candidates(game.hands[game.turn], game.L, game.trick?.play);
+    if (advanceRound(game, plays[Math.floor(random() * plays.length)])) break;
+  }
+  const observation = oracleObservation(game, game.turn);
+  const result = await scoreOracle(observation, infer, {
+    maxRoots: 2,
+    maxSamples: 3,
+    maxMs: 60_000,
+  });
+  assert(result.rollouts.every((count) => count >= 1 && count <= 4));
+  assert(result.outcomes.every((value) => value >= -3 && value <= 3));
+  assert.equal(result.search.truncatedRollouts, 0);
+});
+
+test('Few rollouts stay close to the network prior; many rollouts move toward the real results', async () => {
+  const game = position([[3, 7], [4], [5], [6]]);
+  const observation = oracleObservation(game);
+  const few = await scoreOracle(observation, infer, { maxMs: 0, priorWeight: 4 });
+  const many = await scoreOracle(observation, infer, { maxMs: 0, priorWeight: 0 });
+  // With no prior weight the value is the pure averaged result.
+  assert.deepEqual(many.values, many.outcomes);
+  for (const [i, value] of few.values.entries()) {
+    const outcome = few.outcomes[i];
+    assert(
+      Math.abs(value) < Math.abs(outcome) || outcome === 0,
+      'the prior pulls a single outcome inward',
+    );
+  }
 });

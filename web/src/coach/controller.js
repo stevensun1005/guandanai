@@ -270,7 +270,9 @@ function renderTop5(s, game) {
   }
   const top = s.ranked;
   status.textContent = s.search
-    ? `明牌推演 ${s.search.horizon} 步 · 已评估 ${s.search.evaluated} 种出法`
+    ? s.search.mode === 'round'
+      ? `明牌推演至本局结束 · ${s.search.evaluated} 种出法 · 每种模拟 ${s.search.minRollouts}${s.search.minRollouts * s.search.evaluated === s.search.fullRollouts ? '' : '+'} 次`
+      : `明牌推演 ${s.search.horizon} 步 · 已评估 ${s.search.evaluated} 种出法`
     : `已比较 ${s.actions.length} 个候选 · 点击选牌，不会自动打出`;
   list.replaceChildren(
     ...top.map((row, index) => {
@@ -290,7 +292,7 @@ function renderTop5(s, game) {
         const gap = document.createElement('small');
         gap.className = 'coach-gap';
         gap.textContent = `差 ${(row.value - top[0].value).toFixed(2)}`;
-        gap.title = '与第一名的模型值差（约等于升级分），越接近 0 差别越小';
+        gap.title = '与第一名的平均结果差（单位约等于本局升级分），越接近 0 差别越小';
         score.append(' ', gap);
       }
       heading.append(name, score);
@@ -317,7 +319,7 @@ function renderTop5(s, game) {
             (step) =>
               `${BASE_NAMES[step.p]} ${step.cards?.length ? step.cards.map((id) => cardText(deck[id])).join('') : '过'}`,
           );
-        steps.textContent = `推演：${shown.join(' → ')}${line.length > 4 ? ' …' : ''}`;
+        steps.textContent = `推演前 ${shown.length} 手：${shown.join(' → ')}${line.length > 4 ? ' …' : ''}`;
         button.append(steps);
       }
       button.onclick = () => {
