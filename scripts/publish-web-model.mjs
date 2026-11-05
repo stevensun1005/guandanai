@@ -191,7 +191,7 @@ const report = join(root, 'docs/MODEL_STUDY.md');
 await writeFile(
   report,
   (await readFile(report, 'utf8')) +
-    `\n### 网页模型 ${id} · ${source.registeredAt || model.source.registeredAt}\n\n按所有者每四小时发布最新可用模型的授权，默认编号更新为 **${id}**。来源为 \`${source.run}/${source.version}\`，SHA-256 为 \`${digest}\`。这是部署记录，不是棋力验收：本发布未新增独立评测比赛，胜／负／平及置信区间不适用，不能据此宣称胜率提高或达到 80%。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-${id}.json)。\n`,
+    `\n### 网页模型 ${source.version}（归档 ${id}） · ${source.registeredAt || model.source.registeredAt}\n\n按所有者每四小时发布最新可用模型的授权，默认模型更新为 **${source.version}**（归档 ${id}）。来源为 \`${source.run}/${source.version}\`，SHA-256 为 \`${digest}\`。这是部署记录，不是棋力验收：本发布未新增独立评测比赛，胜／负／平及置信区间不适用，不能据此宣称胜率提高或达到 80%。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-${id}.json)。\n`,
 );
 console.log(
   JSON.stringify(

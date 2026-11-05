@@ -1,5 +1,5 @@
 import { runtime } from '../app/runtime.js';
-import { BOT_MODELS, DEFAULT_BOT_MODEL, botModelId } from '../ai/model-catalog.mjs';
+import { BOT_MODELS, DEFAULT_BOT_MODEL, botModelId, botModelName } from '../ai/model-catalog.mjs';
 import { broadcastLobby } from '../network/rooms.js';
 import { $ } from '../ui/cards.js';
 
@@ -50,7 +50,7 @@ export function renderBotSetup() {
   $('#mixedBotsBtn').disabled = joining;
   $('#botSetupNote').textContent = joining
     ? '由房主设置；玩家离开后的空位沿用对应模型。'
-    : `仅影响电脑空位。新玩家默认使用 ${DEFAULT_BOT_MODEL}，可按编号选择已发布模型。`;
+    : `仅影响电脑空位。新玩家默认使用 ${botModelName(DEFAULT_BOT_MODEL)}，可选择已发布的训练版本。`;
 }
 
 export function initialize() {
@@ -59,7 +59,7 @@ export function initialize() {
   $('#botSetupRows').innerHTML = directions
     .map(
       (direction) =>
-        `<label class="bot-setup-row"><span>${names[direction]}位 <small>电脑空位</small></span><select data-bot-seat="${direction}" aria-label="${names[direction]}位电脑模型">${BOT_MODELS.map((model) => `<option value="${model.id}">${model.id}</option>`).join('')}</select></label>`,
+        `<label class="bot-setup-row"><span>${names[direction]}位 <small>电脑空位</small></span><select data-bot-seat="${direction}" aria-label="${names[direction]}位电脑模型">${BOT_MODELS.map((model) => new window.Option(botModelName(model.id), model.id).outerHTML).join('')}</select></label>`,
     )
     .join('');
   $('#botSetupRows').addEventListener('change', (event) => {

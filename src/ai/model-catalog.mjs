@@ -38,3 +38,7 @@ export const DEFAULT_BOT_MODEL = catalog.defaultId;
 export const botModelId = (value) =>
   BOT_MODELS.some((model) => model.id === value) ? value : DEFAULT_BOT_MODEL;
 export const botModel = (value) => BOT_MODELS.find((model) => model.id === botModelId(value));
+export const botModelName = (value) => {
+  const model = botModel(value);
+  return model.source?.version === 'P0' ? 'v000000000' : model.source?.version || model.id;
+};

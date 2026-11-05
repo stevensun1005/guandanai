@@ -39,15 +39,15 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 | ------------------- | --------------------------------------------------------------------------------------------- |
 | Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                     |
 | Friend rooms        | Invitations, seat selection, temporary bot takeover and original-tab recovery                 |
-| Local inference     | Numbered trained models in a browser Web Worker                                               |
-| Numbered models     | Per-seat model IDs, a current default and selectable previous versions                        |
+| Local inference     | Versioned trained models in a browser Web Worker                                              |
+| Training versions   | Checkpoint names such as v000198487, a current default and selectable previous versions       |
 | Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
 | Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
 | Public scorecards   | Select earlier rounds, filter public actions and export a round or the match                  |
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
-Choose a model number for each empty seat. New players use the latest published default; saved choices remain available. The owner requests a new complete training export every four hours. Publication is not independent playing-strength acceptance. See [model registration and publishing](docs/WEB_MODELS.md), including how another training machine can add its bot. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
+Choose a training checkpoint name, such as `v000198487`, for each empty seat. New players use the latest published default; saved choices remain available. The owner requests a new complete training export every four hours. Publication is not independent playing-strength acceptance. See [model registration and publishing](docs/WEB_MODELS.md), including how another training machine can add its bot. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
 
 The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](docs/PRACTICE.md).
 

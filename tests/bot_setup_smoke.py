@@ -19,6 +19,8 @@ with sync_playwright() as p:
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(URL, wait_until="networkidle")
+        catalog = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()
+        labels = ['v000000000' if model['source']['version'] == 'P0' else model['source']['version'] for model in catalog['models']]
         assert page.evaluate("typeof G") == "undefined"
         assert page.locator('.mode-btn[aria-pressed="true"]').get_attribute("data-mode") == "solo"
         assert page.locator("#lobbyStatus").get_attribute("role") == "status"
@@ -46,7 +48,7 @@ with sync_playwright() as p:
                 select = page.locator(f'[data-bot-seat="{seat}"]')
                 assert select.input_value() == model
                 assert select.is_disabled() == (seat == direction)
-                assert all(option.isdigit() for option in select.locator('option').all_text_contents())
+                assert select.locator('option').all_text_contents() == labels
             other = directions[(index + 1) % 4]
             page.locator(f'[data-bot-seat="{other}"]').select_option("001")
             expected[other] = "001"

@@ -7,6 +7,7 @@ import {
   BOT_MODELS,
   DEFAULT_BOT_MODEL,
   botModelId,
+  botModelName,
   validateCatalog,
 } from '../src/ai/model-catalog.mjs';
 import { modelBytes, sha256 } from '../scripts/lib/web-models.mjs';
@@ -19,6 +20,9 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
   assert.equal(validateCatalog(catalog), catalog);
   assert.equal(botModelId('aggressive'), DEFAULT_BOT_MODEL);
   assert.equal(botModelId(BOT_MODELS[0].id), BOT_MODELS[0].id);
+  assert.equal(botModelName('001'), 'v000000000');
+  for (const model of BOT_MODELS.filter((model) => model.source?.version !== 'P0'))
+    assert.equal(botModelName(model.id), model.source.version);
   assert.throws(() =>
     validateCatalog({ ...catalog, models: [...catalog.models, catalog.models[0]] }),
   );
