@@ -225,12 +225,14 @@ test('resuming with changed sources needs a named protocol change, which is reco
     assert.match(refused.errors, /Run source changed/);
     const accepted = await runSupervisorUntilStart(directory, [
       '--protocol-change=switch samplers to fast actors',
-      '--set={"actorImplementation":"fast","fastActor":{"games":4,"provider":"cpu"}}',
+      '--set={"actors":2,"actorImplementation":"fast","fastActor":{"games":4,"provider":"cpu"},"resourceBudget":{"reserveGB":6,"resumeGB":8}}',
     ]);
     assert.equal(accepted.code, 0, accepted.errors || accepted.output);
     const updated = JSON.parse(readFileSync(configFile, 'utf8'));
     assert.deepEqual(updated.sourceSHA256, realSources);
     assert.equal(updated.actorImplementation, 'fast');
+    assert.equal(updated.actors, 2);
+    assert.deepEqual(updated.resourceBudget, { reserveGB: 6, resumeGB: 8 });
     assert.deepEqual(updated.fastActor, { games: 4, provider: 'cpu' });
     const change = updated.protocolHistory.at(-1);
     assert.equal(change.reason, 'switch samplers to fast actors');

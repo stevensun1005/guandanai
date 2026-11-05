@@ -89,6 +89,32 @@ test('the per-row model copy reproduces the deployed graph on mixed decisions', 
   assert.throws(() => rowsModel(new Uint8Array([0x0a, 0x00])), /P0-layout/);
 });
 
+test('concurrent model requests release evicted sessions before opening another one', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'guandan-session-cap-'));
+  const pool = await createBatchedPool(ort, {
+    provider: 'cpu',
+    sessionLimit: 2,
+    maxRows: 3,
+    batchDecisions: 1,
+  });
+  try {
+    const state = JSON.parse(readFileSync('tests/fixtures/positions.json', 'utf8'))[0];
+    const models = ['a', 'b', 'c'].map((name) => join(directory, name + '.onnx'));
+    for (const file of models) copyFileSync('ai/policy.onnx', file);
+    const values = await Promise.all(models.map((file) => pool.values(file, state)));
+    assert.deepEqual([...values[0]], [...values[1]]);
+    assert.deepEqual([...values[0]], [...values[2]]);
+    assert.equal(pool.stats.peakSessions, 2);
+    assert.equal(pool.stats.sessionCount, 2);
+    assert.equal(pool.stats.sessionsReleased, 1);
+    await pool.values(models[0], state);
+    assert.equal(pool.stats.sessionsReleased, 2);
+  } finally {
+    await pool.close();
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
+
 test('a fast actor writes standard shards and status that record its implementation', () => {
   const directory = mkdtempSync(join(tmpdir(), 'guandan-fast-'));
   try {

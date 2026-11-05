@@ -134,6 +134,7 @@ export function dashboardSnapshot(run, workspace = project) {
   );
   return {
     observedAt: new Date().toISOString(),
+    resources: status.resources || null,
     run: paths.root,
     phase: status.stoppedAt
       ? 'stopped'

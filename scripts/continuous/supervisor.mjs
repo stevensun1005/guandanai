@@ -23,6 +23,9 @@ import {
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { freemem, constants as osConstants, setPriority } from 'node:os';
+import { memoryAction } from './resources.mjs';
+import { actorTotals as allActorTotals } from './remote.mjs';
 import {
   DEFAULT_CONFIG,
   MAX_ACTORS,
@@ -59,6 +62,8 @@ const sourceFiles = [
     'fast-candidates.mjs',
     'fast-rollout.mjs',
     'onnx-rows.mjs',
+    'resources.mjs',
+    'remote.mjs',
   ].map((f) => `scripts/continuous/${f}`),
   ...['match-rollout.mjs', 'match-simulation.mjs', 'simulation.mjs', 'rule-baseline.mjs'].map(
     (f) => `scripts/lib/${f}`,
@@ -92,9 +97,25 @@ const sourcesAtStart = sourceHashes();
 
 /** Only sampler settings may change through --set; everything else stays frozen. */
 function validateProtocolSettings(settings) {
-  const allowed = new Set(['actorImplementation', 'fastActor']);
+  const allowed = new Set(['actors', 'actorImplementation', 'fastActor', 'resourceBudget']);
   for (const key of Object.keys(settings))
     if (!allowed.has(key)) throw Error(`--set cannot change ${key}`);
+  if (
+    'actors' in settings &&
+    (!Number.isInteger(settings.actors) || settings.actors < 1 || settings.actors > MAX_ACTORS)
+  )
+    throw Error('Invalid actor count');
+  if ('resourceBudget' in settings) {
+    const { reserveGB, resumeGB, ...rest } = settings.resourceBudget || {};
+    if (
+      Object.keys(rest).length ||
+      !Number.isFinite(reserveGB) ||
+      reserveGB < 2 ||
+      !Number.isFinite(resumeGB) ||
+      resumeGB <= reserveGB
+    )
+      throw Error('Invalid memory reserve');
+  }
   if (
     'actorImplementation' in settings &&
     !['standard', 'fast'].includes(settings.actorImplementation)
@@ -185,6 +206,8 @@ function initialize() {
     validateProtocolSettings(protocolSettings);
     const previous = {
       sourceSHA256: config.sourceSHA256,
+      actors: config.actors,
+      resourceBudget: config.resourceBudget || null,
       actorImplementation: config.actorImplementation || 'standard',
       fastActor: config.fastActor || null,
     };
@@ -244,6 +267,9 @@ if (
 )
   throw Error('Invalid anchor monitor configuration');
 const children = new Map();
+const memoryPaused = new Set();
+const resourceBudget = config.resourceBudget || { reserveGB: 4, resumeGB: 5 };
+let lastMemoryAction = 0;
 const crashes = new Map();
 let stopping = false;
 const started = Date.now();
@@ -259,6 +285,13 @@ function launch(name, command, args) {
     windowsHide: true,
     cwd: resolve(here, '../..'),
   });
+  if (child.pid) {
+    try {
+      setPriority(child.pid, osConstants.priority.PRIORITY_BELOW_NORMAL);
+    } catch (error) {
+      event('priority-warning', { name, message: error.message });
+    }
+  }
   let tail = '';
   child.stderr.on('data', (chunk) => (tail = (tail + chunk).slice(-4000)));
   child.on('error', (error) => {
@@ -280,6 +313,10 @@ function launch(name, command, args) {
       if (operatorStop && !stopping) shutdown(0, 'operator-stop');
       return;
     }
+    if (memoryPaused.has(name)) {
+      event('memory-pause-complete', { name });
+      return;
+    }
     const now = Date.now();
     const recent = (crashes.get(name) || []).filter(
       (t) => now - t < config.restarts.windowMinutes * 60000,
@@ -298,11 +335,14 @@ function launch(name, command, args) {
 }
 
 function start(name) {
+  if (memoryPaused.has(name)) return;
   if (name === 'learner')
     launch(name, python, ['-u', join(here, 'learner.py'), `--run=${paths.root}`]);
   else {
     const slot = Number(name.slice('actor-'.length));
     const fast = config.actorImplementation === 'fast';
+    const pauseFile = join(paths.root, `PAUSE-${name}`);
+    if (existsSync(pauseFile)) unlinkSync(pauseFile);
     launch(
       name,
       process.execPath,
@@ -313,6 +353,7 @@ function start(name) {
             `--slot=${slot}`,
             `--games=${config.fastActor?.games ?? 48}`,
             `--provider=${config.fastActor?.provider ?? 'dml'}`,
+            `--stop-file=${pauseFile}`,
           ]
         : [join(here, 'actor.mjs'), `--run=${paths.root}`, `--slot=${slot}`],
     );
@@ -560,15 +601,48 @@ function diskUsageGB() {
 
 let previousDecisions = null;
 function actorTotals() {
-  const actors = Array.from({ length: config.actors }, (_, slot) =>
-    readJSON(join(paths.actors, `actor-${slot}.json`), {}),
-  );
-  return Object.fromEntries(
-    ['matches', 'decisions', 'rows'].map((key) => [
-      key,
-      actors.reduce((sum, actor) => sum + (actor[key] || 0), 0),
-    ]),
-  );
+  const { slots, ...totals } = allActorTotals(paths.actors);
+  return totals;
+}
+function memoryTick() {
+  if (stopping) return;
+  const freeBytes = freemem();
+  const running = [...children.keys()].filter((name) => name.startsWith('actor-'));
+  const action =
+    config.actorImplementation === 'fast'
+      ? memoryAction({
+          freeBytes,
+          ...resourceBudget,
+          running,
+          paused: [...memoryPaused],
+          lastActionAt: lastMemoryAction,
+        })
+      : null;
+  if (action) {
+    lastMemoryAction = Date.now();
+    if (action.type === 'pause') {
+      memoryPaused.add(action.actor);
+      writeJSON(join(paths.root, `PAUSE-${action.actor}`), {
+        reason: 'memory reserve',
+        at: new Date().toISOString(),
+      });
+    } else {
+      memoryPaused.delete(action.actor);
+      start(action.actor);
+    }
+    event(`memory-${action.type}`, {
+      actor: action.actor,
+      freeGB: freeBytes / 1024 ** 3,
+      ...resourceBudget,
+    });
+  }
+  state.resources = {
+    ...resourceBudget,
+    freeGB: freeBytes / 1024 ** 3,
+    pausedActors: [...memoryPaused],
+    updatedAt: new Date().toISOString(),
+  };
+  writeJSON(paths.status, { ...readJSON(paths.status, {}), resources: state.resources });
 }
 function tick() {
   if (stopping) return;
@@ -659,3 +733,10 @@ function guardedTick() {
 }
 setInterval(guardedTick, 30000);
 setTimeout(guardedTick, 5000);
+setInterval(() => {
+  try {
+    memoryTick();
+  } catch (error) {
+    event('memory-monitor-warning', { message: error.message });
+  }
+}, 5000);

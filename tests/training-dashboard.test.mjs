@@ -21,6 +21,7 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     totals: { matches: 123, decisions: 456 },
     learner: { pid: process.pid, step: 789 },
     lastAnchorAt: Date.now(),
+    resources: { freeGB: 7.5, reserveGB: 6, resumeGB: 8, pausedActors: ['actor-1'] },
   };
   save('status.json', state);
   mkdirSync(join(directory, 'work/continuous/gpu-main/learner'), { recursive: true });
@@ -46,6 +47,7 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     assert.equal(data.deviceRuns[0].step, 34);
     assert.equal(data.deviceRuns[0].deviceName, 'Test GPU');
     assert.equal(data.learner.step, 789);
+    assert.deepEqual(data.resources, state.resources);
     assert.equal(data.plannedHours, 24);
     assert.deepEqual(data.evaluations, []);
     assert.equal(data.publication.confirmed, false);

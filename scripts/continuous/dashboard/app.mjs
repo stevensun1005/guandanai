@@ -159,6 +159,12 @@ function render(data) {
     (data.learner.deviceName || (data.device?.startsWith('cuda') ? 'GPU' : 'CPU')) + memory,
   );
   set('disk', data.diskGB == null ? '—' : `${data.diskGB.toFixed(1)} GB`);
+  set(
+    'memory',
+    data.resources
+      ? `${data.resources.freeGB.toFixed(1)} GiB 可用 · 目标预留 ${data.resources.reserveGB} GiB · 暂停 ${data.resources.pausedActors.length} 个采样器`
+      : '尚未采集',
+  );
   const publication = data.publication || {};
   set(
     'publication',

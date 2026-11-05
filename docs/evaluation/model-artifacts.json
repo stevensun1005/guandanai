@@ -2858,6 +2858,33 @@
       "allHistoricalRawRowsRetained": false,
       "download": null,
       "gradientUpdatesInRestoreChecks": 0
+    },
+    {
+      "id": "gpu-memory-relief-step-212171",
+      "path": "work/archives/gpu-memory-relief-step-212171",
+      "role": "Saved during memory-budget tuning; local verified model and optimizer archive, not a deployed-model decision",
+      "step": 212171,
+      "policySHA256": "318dfcbae6f3e8c2f945a438778d949ada244baa2be112ecff14334c4fdfa057",
+      "checkpointSHA256": "ad041c1ccce3839fd750f5d4a10e81cde9e869c27bc223619b4fcbfd70071641",
+      "download": null
+    },
+    {
+      "id": "gpu-memory-relief-step-213060",
+      "path": "work/archives/gpu-memory-relief-step-213060",
+      "role": "Saved during memory-budget tuning; local verified model and optimizer archive, not a deployed-model decision",
+      "step": 213060,
+      "policySHA256": "a9a6a5fc575e40240f5791865a6a529413de6fd92be91b4d3d0459cb4bff0ce1",
+      "checkpointSHA256": "84d4c1356189f78ec62b861b6f60830be6b3b8ce44f6c4ad2b0d54977b4bc890",
+      "download": null
+    },
+    {
+      "id": "gpu-memory-relief-step-213688",
+      "path": "work/archives/gpu-memory-relief-step-213688",
+      "role": "Saved during memory-budget tuning; local verified model and optimizer archive, not a deployed-model decision",
+      "step": 213688,
+      "policySHA256": "38eca94f2482d5ccc93d9f68e83cbb4abb4577f38d07dc92ceb70929779cd246",
+      "checkpointSHA256": "384eba33d5e80a917a398af151b485eb64d1f4d7b333003e0d8709cfd6a021c1",
+      "download": null
     }
   ],
   "webModels": {

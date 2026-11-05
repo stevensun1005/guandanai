@@ -13,10 +13,12 @@ import { ACTION, STATE } from './lib.mjs';
 
 export async function createBatchedPool(
   _ort,
-  { provider = 'dml', batchDecisions = 24, maxRows = 16384 } = {},
+  { provider = 'dml', batchDecisions = 24, maxRows = 4096, sessionLimit = 6 } = {},
 ) {
+  if (!Number.isInteger(sessionLimit) || sessionLimit < 1 || sessionLimit > 32)
+    throw Error('Invalid session limit');
   const worker = new Worker(new URL('./inference-worker.mjs', import.meta.url), {
-    workerData: { provider },
+    workerData: { provider, sessionLimit, maxRows },
   });
   const pending = new Map();
   const queues = new Map();
@@ -34,7 +36,7 @@ export async function createBatchedPool(
   let scheduled = false;
   let failure = null;
 
-  worker.on('message', ({ id, values, runMs, provider: used, fallbackReason, error }) => {
+  worker.on('message', ({ id, values, runMs, provider: used, fallbackReason, memory, error }) => {
     const job = pending.get(id);
     if (!job) return;
     pending.delete(id);
@@ -46,6 +48,7 @@ export async function createBatchedPool(
     stats.runMs += runMs;
     stats.provider = used;
     stats.fallbackReason = fallbackReason;
+    if (memory) Object.assign(stats, memory);
     let at = 0;
     for (const item of job.items) {
       const n = item.state.actions.length;

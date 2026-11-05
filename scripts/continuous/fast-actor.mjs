@@ -71,7 +71,7 @@ const writer = new ShardWriter(
   status.shardSequence,
 );
 const pool = await createBatchedPool(ort, { provider });
-const cache = createCandidateCache();
+const cache = createCandidateCache({ limit: 512 });
 const random = seededRandom((config.learner.seed ^ (slot * 0x9e3779b1)) >>> 0);
 const mix = Object.entries(config.actorMix);
 
@@ -95,6 +95,7 @@ function saveStatus() {
     ...status,
     inference: { ...pool.stats },
     candidateCache: { ...cache.stats },
+    memory: process.memoryUsage(),
     updatedAt: new Date().toISOString(),
   });
 }
