@@ -74,6 +74,17 @@
     "build": "df2358a42d",
     "nodeTests": 117,
     "format": "passed",
-    "weightsChanged": false
+    "weightsChanged": false,
+    "deployment": {
+      "commit": "5be63ba24193bcca784ed4c0e1c242bfa9c1d307",
+      "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/41974629431",
+      "conclusion": "success",
+      "liveBrowserVerified": true,
+      "liveBuild": "59eded7b5b",
+      "url": "https://stevensun1005.github.io/guandanai/",
+      "observedAt": "2026-11-05T05:35:42.056986+00:00",
+      "displayName": "guanzero-adp-gpubatch · 9537步",
+      "publicModelSHA256": "15ae4809731d843fdfca74ba5a5bd1cc30ed00cb2de9f110ee1ca0299a12127b"
+    }
   }
 }
