@@ -147,3 +147,5 @@ GuanZero is a separate training route with batched GPU inference and a read-only
 | Review evidence and planned work      | [Research report](./ai/research/MODEL_STUDY.md) · [Improvement proposals and implementation status](./ai/research/IMPROVEMENT_PROPOSAL.md) · [Roadmap](./web/docs/ROADMAP.md) |
 
 Fixed full-match evaluation supports two champion seats against two Clint seats or two seats of a frozen latest export. [Protocols and evidence](ai/research/evaluation/champion-clint-latest-20261105/) keep paired seeds, model fingerprints, draws and uncertainty separate from deployment decisions.
+
+**Optional move feedback:** the host first permits it for the room, then each player independently opts in. The current local champion rates selected moves and retains the last played move. Percentages are relative model-value scores, not win probabilities. [How it works](web/docs/MOVE_COACH.md).

@@ -13,6 +13,7 @@ import { VC } from '../network/voice.js';
 import { $ } from '../ui/cards.js';
 import { playerLeft, playerReturned, setPaused, showResult } from '../ui/overlays.js';
 import { render } from '../ui/table.js';
+import { coachAssisted } from '../coach/controller.js';
 
 /* ---------- events: every move goes through the host, which applies it and passes it on ---------- */
 export function playEvt(p, pl) {
@@ -31,6 +32,8 @@ export function playEvt(p, pl) {
 // solo and host: apply now (and, as host, send it on); a friend's page sends its move to the host and
 // waits for it to come back, so every table applies the same moves in the same order
 export function act(e) {
+  if (['play', 'pass'].includes(e.k) && e.p === toAbs(0) && !e.automatic)
+    e = { ...e, assisted: coachAssisted() };
   if (runtime.network.mode === 'guest') {
     if (runtime.network.hostConn && runtime.network.hostConn.open) {
       runtime.network.pending = ['play', 'pass', 'return', 'tribute'].includes(e.k);
@@ -143,12 +146,12 @@ function applyEvt(e) {
       if (p === 0) runtime.network.pending = false;
       if (e.k === 'pass') {
         if (!canPass(runtime.game.trick)) return false;
-        doPlay(p, null, !!e.automatic);
+        doPlay(p, null, !!e.automatic, e.assisted === true);
         return true;
       }
       const play = readPlay(runtime.game.hands[p], e, runtime.game.trick?.play, runtime.game.L);
       if (!play) return false;
-      doPlay(p, play, !!e.automatic);
+      doPlay(p, play, !!e.automatic, e.assisted === true);
       return true;
     }
   }

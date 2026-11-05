@@ -3,6 +3,8 @@ import { decideTablePolicy } from './table-policy.mjs';
 import { MODELS } from './models.mjs';
 import { botModel } from './model-catalog.mjs';
 import { decideClintRule } from '../rule-bot/runtime.mjs';
+import { COACH_MODEL_ID, prepareCoachPolicy } from '../coach/evaluation.mjs';
+import { inferPolicy } from './policy-inference.mjs';
 
 ort.env.wasm.numThreads = 1;
 ort.env.wasm.proxy = false;
@@ -27,6 +29,21 @@ self.onmessage = (event) => {
   const { id, type, state } = event.data;
   queue = queue.then(async () => {
     try {
+      if (type === 'coach') {
+        const model = botModel(COACH_MODEL_ID),
+          input = prepareCoachPolicy(state);
+        const scored = await inferPolicy(
+          ort,
+          await session('bot:' + model.id),
+          input,
+          model.config,
+        );
+        self.postMessage({
+          id,
+          result: { actions: input.actions, values: scored.values, modelId: model.id },
+        });
+        return;
+      }
       if (type === 'init' || type === 'rule') {
         self.postMessage({
           id,

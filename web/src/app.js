@@ -52,6 +52,7 @@ import * as recovery from './network/recovery.js';
 import * as startup from './app/startup.js';
 import { runtime } from './app/runtime.js';
 import * as collection from './collection/client.js';
+import * as coach from './coach/controller.js';
 
 policyController.initialize();
 handValue.initialize();
@@ -98,10 +99,12 @@ voice.initialize();
 rooms.initialize();
 recovery.initialize();
 collection.initialize();
+coach.initialize();
 startup.initialize();
 
 if (new URLSearchParams(location.search).get('test') === '1') {
   const features = [
+    coach,
     policyController,
     cards,
     combinations,

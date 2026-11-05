@@ -55,3 +55,7 @@ WebRTC 连接依赖双方网络、NAT、防火墙和浏览器后台限制。恢�
 另有延迟电脑推理回复的竞态检查、真实数据通道关闭后自动恢复，以及旧凭据、房主座位和主动退出凭据的拒绝检查。它们在同一台电脑与公共 PeerJS 信令上执行，仍需要不同物理设备和网络的长期体验反馈。
 
 [四人结果](../../ai/research/evaluation/rejoin-multiplayer-1.9.0.json) · [混合结果](../../ai/research/evaluation/rejoin-mixed-1.9.0.json) · [恢复竞态](../../ai/research/evaluation/rejoin-races-1.9.0.json) · [座位校验](../../ai/research/evaluation/seat-credentials-1.9.0.json)
+
+## 房主的评价许可
+
+每个新房间默认不允许出牌评价，房主可在开局前打开独立许可；加入者只读。许可随开局和重连恢复。允许后每位玩家在牌桌选项中自行开启，个人偏好不会覆盖其他人；不允许时个人开关隐藏。出牌前展示过数字预评的动作会标记 `assisted=true`，从默认未辅助训练样本中排除。[使用与百分数含义](MOVE_COACH.md)。

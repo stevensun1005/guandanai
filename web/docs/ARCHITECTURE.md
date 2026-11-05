@@ -107,3 +107,7 @@ Worker 单独打包自己的特征、风格与残局规则模块，浏览器推�
 | 朋友房间行为       | `network` 与双浏览器验证                             |
 | 外观变化           | `styles`、`ui` 和真实截图                            |
 | 记录格式变化       | `replay/storage.js` 与兼容检查                       |
+
+## 独立的冠军评价器
+
+`src/coach/evaluation.mjs` 定义公开观察、候选输入、冠军身份与相对值换算；`controller.js` 管理个人偏好、按回合缓存、快照失效与 UI。评价复用 `ai-worker.mjs`／`inferPolicy` 的模型加载及批量推理，但使用独立 Worker 实例，不走电脑动作选择、性格或残局搜索。房主许可放在同步的 `rules.coachAllowed`，个人开关留在本机。经确认的人工动作在 `doPlay` 修改手牌前保留评价快照，预评展示标记进入独立采集协议，不把分数发给其他玩家。[协议说明](MOVE_COACH.md)。

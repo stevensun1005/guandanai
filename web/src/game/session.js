@@ -81,7 +81,7 @@ export function initialize() {
     mics: {},
   };
   isHost = () => runtime.network.mode !== 'guest';
-  runtime.rules = { trib: true, aFail: 'draw', startLevel: 2, startSide: '' };
+  runtime.rules = { trib: true, aFail: 'draw', startLevel: 2, startSide: '', coachAllowed: false };
   isHumanSeat = (p) => runtime.network.humans.has(p);
   toAbs = (p) => (p + runtime.network.off) % 4;
   toLocal = (a) => (a - runtime.network.off + 4) % 4;

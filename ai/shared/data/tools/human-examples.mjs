@@ -11,7 +11,7 @@ export function humanExamples(saved) {
   const sourceSHA256 = createHash('sha256').update(JSON.stringify(raw)).digest('hex');
   const rows = [];
   const checked = validateRecord(raw, ({ index, action, hands, trick, turn }) => {
-    if (action.actor !== 'human') return;
+    if (action.actor !== 'human' || action.assisted === true) return;
     rows.push({
       schema: 1,
       source: 'human-browser',

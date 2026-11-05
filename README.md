@@ -156,3 +156,5 @@ GuanZero 与本机 danMCai 分开训练，支持 GPU 合批推理和只读实时
 | 核对模型成绩及计划 | [研究主报告](./ai/research/MODEL_STUDY.md) · [改进建议及实施状态](./ai/research/IMPROVEMENT_PROPOSAL.md) · [迭代路线](./web/docs/ROADMAP.md) |
 
 固定双队整场评测支持冠军同队对 Clint 同队、冠军同队对最新冻结导出同队；协议、独立种子与实际结果见[研究报告第 21 节](ai/research/MODEL_STUDY.md#21-2026-11-05冠军对-clint-与最新导出的固定整场评测)。部署与胜率结论分开记录。
+
+**可选出牌评价**：房主开房时先允许，每位玩家再自行开启；用当前本机冠军选牌预评、出牌后保留。百分数是模型相对分，不是胜率。详见[出牌评价](web/docs/MOVE_COACH.md)。

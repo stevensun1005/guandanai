@@ -1,0 +1,65 @@
+.coach-room {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--ink);
+}
+.coach-room label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.coach-room input {
+  accent-color: var(--gold);
+  width: 18px;
+  height: 18px;
+}
+.coach-room small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.coach-panel {
+  flex: none;
+  align-self: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--felt-deep);
+  font-size: 13px;
+}
+.coach-heading,
+.coach-scores {
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+}
+.coach-heading small {
+  flex: 1;
+  color: var(--muted);
+  font-size: 11px;
+}
+.coach-heading .link {
+  font-size: 11px;
+  padding: 2px 6px;
+}
+.coach-scores {
+  margin-top: 3px;
+  justify-content: space-between;
+}
+#coachPreview {
+  color: var(--gold);
+}
+#coachLast {
+  color: var(--muted);
+}
+@media (max-height: 500px) {
+  .coach-panel {
+    padding: 3px 8px;
+    font-size: 12px;
+  }
+}

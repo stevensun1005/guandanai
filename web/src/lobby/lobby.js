@@ -44,7 +44,13 @@ export function showStart() {
 
 // your own choice of rules (a room you join shows the host's instead)
 function loadRules() {
-  Object.assign(runtime.rules, { trib: true, aFail: 'draw', startLevel: 2, startSide: '' });
+  Object.assign(runtime.rules, {
+    trib: true,
+    aFail: 'draw',
+    startLevel: 2,
+    startSide: '',
+    coachAllowed: false,
+  });
   try {
     const saved = JSON.parse(localStorage.getItem('guandan-rules') || '{}');
     if (typeof saved.trib === 'boolean') runtime.rules.trib = saved.trib;
@@ -64,6 +70,14 @@ function renderRules() {
     b.disabled = !mine;
   }
   $('#rulesNote').textContent = mine ? '' : '规则由房主选定';
+  $('#coachRoomBox').hidden = runtime.lobbyMode === 'solo';
+  $('#coachRoomAllowed').checked = runtime.rules.coachAllowed === true;
+  $('#coachRoomAllowed').disabled = !mine;
+  $('#coachRoomNote').textContent = mine
+    ? '允许后，每位玩家仍需在牌桌选项中自行开启。'
+    : runtime.rules.coachAllowed
+      ? '房主允许，入局后可自行开启或关闭。'
+      : '房主未允许，本桌不提供出牌评价。';
   renderLevelPicker();
 }
 
@@ -131,6 +145,12 @@ export function renderLobby() {
 
 export function initialize() {
   initializeLevelPicker();
+  $('#coachRoomAllowed').onchange = () => {
+    if (runtime.lobbyMode !== 'host') return;
+    runtime.rules.coachAllowed = $('#coachRoomAllowed').checked;
+    renderRules();
+    broadcastLobby();
+  };
   /* ---------- the lobby: a nickname, then play alone or with friends ---------- */
   // Solo: pick a seat and the computer takes the other three. Online: one player opens a room and gets a
   // four-digit number, friends type it in to join, everyone picks a seat, and the host starts; empty seats

@@ -266,3 +266,5 @@ python ai/research/tools/update-model-study.py --workspace D:/vibecoding/guandan
 ### 恢复时的启动峰值
 
 原 8 槽配置在本机恢复阶段曾短时只剩约 1 GiB，软预算来不及逐一退出，现已正式记录为 3 槽启动。恢复前核对保存点、源码指纹、已有调度器与桌面可用内存；已有的 4 GiB 软预留不保证启动瞬间也达标。先恢复受控并发，再依据实测调整，并经正常保存及协议变更入口留痕，不能直接改冻结源码。此次记录见[主报告第 21 节](MODEL_STUDY.md)。
+
+固定对照可用 `node ai/local/evaluation/monitor-fixed.mjs --run=<含launcher.json与frozen.json的评测目录> --workspace=<项目> --until=<ISO截止时间>` 显示双组进度，并在评测完成后继续观测桌面直到截止。可用内存每 5 秒读取，全机 CPU／TCP 绑定每 30 秒读取；完成比赛的计时保持真实结束点。TCP 绑定超过 12,000 时只让未完成评测等待，不结束系统进程或改训练。阈值告警不等同网络连通性验证；具体状态看面板中的检测时间。

@@ -24,8 +24,8 @@ function context() {
 }
 export const collectDealt = () => captureDeal(runtime.game, context());
 export const collectStarted = () => captureStart(runtime.game, context());
-export const collectAction = (p, play, automatic) =>
-  captureAction(runtime.game, p, play, { ...context(), automatic });
+export const collectAction = (p, play, automatic, assisted) =>
+  captureAction(runtime.game, p, play, { ...context(), automatic, assisted });
 export function collectCompleted() {
   const record = completedRecord(runtime.game, context());
   if (record && queue) void queue.enqueue(record).catch(() => {});

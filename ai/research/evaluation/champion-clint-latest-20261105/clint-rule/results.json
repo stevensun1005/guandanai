@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "purpose": "Completed fixed independent whole-match evaluation; no model selection",
+  "protocolSHA256": "2ee022b518c8eb6389eb05d198418651d3bf10a010eb2ade96520b82f576956b",
+  "model": {
+    "version": "v000293055",
+    "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+    "catalogId": "009",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx",
+    "championGate": 112
+  },
+  "opponent": "clint-rule",
+  "opponentModel": null,
+  "rules": {
+    "tribute": true,
+    "startLevel": 2,
+    "through": "A",
+    "aFail": "draw after three failed A attempts",
+    "maxRounds": 200,
+    "truncation": "error, never a draw"
+  },
+  "pipeline": "Both neural sides use the same deployed table preparation, finishing shortcut and public endgame; no personality; native ONNX CPU one thread. Clint uses isolated rules-v2.",
+  "completedAtUTC": "2026-11-05T17:33:49.522590+00:00",
+  "seedStart": 910000000,
+  "seedEnd": 910000999,
+  "completedPairs": 1000,
+  "counts": {
+    "matches": 2000,
+    "wins": 1451,
+    "losses": 400,
+    "draws": 149,
+    "rounds": 20844,
+    "doubleWins": 7354,
+    "doubleLosses": 3701,
+    "firsts": 11955,
+    "isolatedFirsts": 2284,
+    "signedUpgradePoints": 11425
+  },
+  "metrics": {
+    "matchWinRate": {
+      "estimate": 0.7255,
+      "bootstrap95": [
+        0.707,
+        0.744
+      ]
+    },
+    "matchWinMargin": {
+      "estimate": 0.5255,
+      "bootstrap95": [
+        0.493,
+        0.5575125
+      ]
+    },
+    "matchScore": {
+      "estimate": 0.76275,
+      "bootstrap95": [
+        0.7465,
+        0.77875625
+      ]
+    },
+    "matchDrawRate": {
+      "estimate": 0.0745,
+      "bootstrap95": [
+        0.064,
+        0.086
+      ]
+    },
+    "doubleDownRate": {
+      "estimate": 0.177557090769526,
+      "bootstrap95": [
+        0.17211240804738698,
+        0.1830737730725159
+      ]
+    },
+    "doubleUpRate": {
+      "estimate": 0.3528113605833813,
+      "bootstrap95": [
+        0.3463128554514406,
+        0.3595288739726115
+      ]
+    },
+    "isolatedFirstRate": {
+      "estimate": 0.19104976997072354,
+      "bootstrap95": [
+        0.18382044966177594,
+        0.19811641032368887
+      ]
+    },
+    "safePartnerAfterFirstRate": {
+      "estimate": 0.8089502300292765,
+      "bootstrap95": [
+        0.8018835896763111,
+        0.8161795503382241
+      ]
+    },
+    "meanSignedUpgradePoints": {
+      "estimate": 0.5481193628862022,
+      "bootstrap95": [
+        0.513553666229697,
+        0.5811616605088952
+      ]
+    }
+  },
+  "teamRankPairs": {
+    "12": {
+      "count": 7354,
+      "roundRate": 0.3528113605833813
+    },
+    "13": {
+      "count": 2317,
+      "roundRate": 0.11115908654768758
+    },
+    "14": {
+      "count": 2284,
+      "roundRate": 0.10957589714066399
+    },
+    "23": {
+      "count": 3924,
+      "roundRate": 0.18825561312607944
+    },
+    "24": {
+      "count": 1264,
+      "roundRate": 0.060640951832661674
+    },
+    "34": {
+      "count": 3701,
+      "roundRate": 0.177557090769526
+    }
+  },
+  "matchWinRateClusterHoeffding95": [
+    0.6825530591653263,
+    0.7684469408346738
+  ],
+  "matchWinRateOneSided95Lower": 0.6867977243979505,
+  "target80Supported": false,
+  "raw": {
+    "file": "matches.jsonl.gz",
+    "sha256": "be09954c617c3633c6cff128e43ea33edeff3f50c660333c3dd4d46799dd3adf",
+    "uncompressedSHA256": "6748e17f35580d38d0752fb0a05f720ec77628a637d750d18e3f96d0df61a20f",
+    "compressedBytes": 173266
+  },
+  "analysis": {
+    "bootstrapIterations": 2000,
+    "bootstrapSeed": 2026110517,
+    "cluster": "Two swapped whole matches per seed; rounds never sampled independently",
+    "fingerprint": "c50c88b60fb6d74c9230aaa1650e0fe033e34b1585b0464b0f7b0b458afb99c8",
+    "numpy": "2.3.5"
+  },
+  "limitations": [
+    "Not a browser rendering benchmark.",
+    "Team finishing statistics are outcome proxies, not proof of cooperative intent.",
+    "Time-budgeted public endgame may vary with CPU contention.",
+    "Historical P0 pretraining corpus unavailable; seed independence audited only against recorded continuous samples.",
+    "Compared only the frozen champion and one latest export; more steps alone do not establish strength.",
+    "Cooperation statistics are outcome proxies, with no old-model control; they do not establish longitudinal progress or intent."
+  ]
+}

@@ -15,12 +15,14 @@ import { showResult } from '../ui/overlays.js';
 import { pileSweep, pileThrow, showPlace, showRest, trickHold } from '../ui/table-pile.js';
 import { render } from '../ui/table.js';
 import { collectAction, collectCompleted } from '../collection/client.js';
+import { rememberCoachMove } from '../coach/controller.js';
 
 let END_SHOW_MS;
 
-export function doPlay(p, play, automatic = false) {
+export function doPlay(p, play, automatic = false, assisted = false) {
   if (runtime.game.phase !== 'play' || runtime.game.turn !== p) return;
-  collectAction(p, play, automatic);
+  rememberCoachMove(p, play, automatic);
+  collectAction(p, play, automatic, assisted);
   // the clock goes at once, before the cards are laid out, so the plate is back to its own size for them
   runtime.game.clock = null;
   renderClocks();

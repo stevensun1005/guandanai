@@ -180,6 +180,7 @@ export function validateRecord(record, onAction = () => {}) {
         'value',
         'n',
         'actor',
+        'assisted',
         'humanMask',
         'model',
         'decisionMs',
@@ -188,6 +189,7 @@ export function validateRecord(record, onAction = () => {}) {
       complete ||
       a.seat !== turn ||
       !['human', 'bot', 'timeout'].includes(a.actor) ||
+      (a.assisted !== undefined && (typeof a.assisted !== 'boolean' || a.actor !== 'human')) ||
       !integer(a.humanMask, 0, 15) ||
       !integer(a.elapsedMs, lastElapsed, 7 * 86400000) ||
       !(a.decisionMs === null || integer(a.decisionMs, 0, 120000))

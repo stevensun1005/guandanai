@@ -51,6 +51,7 @@ jobs:
           done
           python web/tests/production_smoke.py
           python web/tests/replay_security_smoke.py
+          python web/tests/coach_smoke.py --solo-only
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'
         with:

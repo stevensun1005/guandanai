@@ -172,3 +172,5 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 云端采集检查覆盖合格局筛选、人工／电脑／托管来源、离线队列、服务端重放、去重、测试数据隔离与私有导出；具体已完成记录见 [采集 README](../collector/README.md) 及 [研究报告](../../ai/research/MODEL_STUDY.md)。不将合法重放视为真人身份验证，也不把数据采集当成训练或强度验收。
 
 固定整场 2v2 使用 `node ai/local/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/local/tests/fixed-evaluation.test.mjs` 和 `python ai/local/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/local/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。
+
+出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。它们是功能兼容性测试，不计作棋力样本。

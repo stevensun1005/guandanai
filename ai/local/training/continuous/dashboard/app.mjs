@@ -90,6 +90,20 @@ function render(data) {
     );
     element('independent-progress').max = independent.plannedMatches;
     element('independent-progress').value = independent.completedMatches;
+    element('independent-groups').replaceChildren(
+      ...(independent.groups || []).map((group) => {
+        const row = document.createElement('li');
+        row.textContent = `${group.opponent}：${number(group.completedMatches)} / ${number(group.plannedMatches)} 场`;
+        return row;
+      }),
+    );
+    const health = independent.desktop;
+    set(
+      'desktop-health',
+      health
+        ? `可用内存 ${Number(health.freeGiB).toFixed(1)} GiB · 全机 CPU ${health.cpuLoad ?? '—'}% · TCP 绑定 ${health.tcpBound ?? '待读取'} · 检测于 ${clock(health.checkedAtUTC)}${health.networkAlert ? ' · 端口占用偏高，未完成评测已等待' : ''}`
+        : '',
+    );
   }
   const running = data.phase === 'running';
   const stopped = data.phase === 'stopped';

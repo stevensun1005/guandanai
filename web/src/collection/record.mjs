@@ -71,6 +71,7 @@ export function captureAction(game, player, play, context) {
     cards: play ? play.cards.map((c) => c.id) : null,
     ...(play ? { type: play.type, value: play.value, n: play.n } : {}),
     actor,
+    ...(actor === 'human' && context.assisted ? { assisted: true } : {}),
     humanMask: humanMask(context.humans),
     model: actor === 'human' ? null : context.models[player],
     decisionMs:

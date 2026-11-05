@@ -12,6 +12,7 @@
 | 房间、重连、语音               | [src/network](src/network)、[src/lobby](src/lobby)                                             |
 | 匿名牌谱、断网补传、云端数据库 | [src/collection](src/collection)、[collector](collector/README.md)                             |
 | 模型选择、Worker 与浏览器推理  | [src/ai](src/ai)                                                                               |
+| 冠军出牌评价、个人开关与相对分 | [src/coach](src/coach)、[使用说明](docs/MOVE_COACH.md)                                         |
 | 独立纯规则对手及版本边界       | [src/rule-bot](src/rule-bot/README.md)                                                         |
 | 当前上线模型与默认值           | [src/ai/model-catalog.json](src/ai/model-catalog.json)                                         |
 | 构建、预览、打包               | [tools](tools)                                                                                 |

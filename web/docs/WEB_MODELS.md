@@ -65,3 +65,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 | `ai/research/evaluation/model-artifacts.json` | 权重与网页模型成果索引                                        |
 
 历史风格代码与 `web/src/ai/models.mjs` 的 P0／R1 配置仍服务于可复现研究；大厅、控制器及房间协议使用独立的编号清单，不在编号选择后叠加性格偏好。
+
+## 可选评价的模型
+
+出牌评价固定读取 `selection.localChampions[0]` 的完整本机冠军，与座位选择的托管／电脑模型无关。冠军经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实版本；不使用普通最新导出冒充冠军。评分仅做网络动作值的候选范围换算，不更改默认模型、性格或机器人动作。[房主许可与分数说明](MOVE_COACH.md)。

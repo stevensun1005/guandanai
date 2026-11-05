@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "classification": "Optional feedback compatibility, not model strength",
+  "model": {
+    "id": "009",
+    "version": "v000293055",
+    "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb"
+  },
+  "score": "round(100*(Qchosen-Qmin)/(Qmax-Qmin)); spread < 1e-6 -> 100 with flat label",
+  "calibratedProbability": false,
+  "privateOpponentHandsRead": false,
+  "trainingUpdates": 0,
+  "strengthMatches": 0,
+  "nodeTests": 155,
+  "pythonResearchTests": 9,
+  "pythonIndependentSummaryTests": 2,
+  "sourceSHA256": {
+    "web/src/coach/evaluation.mjs": "fd4e90b28319a1467f48a4a1d6defccba7e83d604213e4378b69a22fad26e351",
+    "web/src/coach/controller.js": "6199c051605612d2f104594b9c2a3373ab2d2dcdb368997e1fd1095854e79f2b",
+    "web/src/ai/worker.mjs": "6da47721da8a999d2a0dae9203e50fec3aeb079ec22850bb1c3794fc5d3c07e7",
+    "web/src/collection/record.mjs": "84d61654726cef330118f53ae983e07c469513c2e316e47101215050d505a35e",
+    "web/src/collection/validate.mjs": "67526536f33675a069ee9b7512af807722e21e1df1e14e28c4306a24f3677626",
+    "ai/shared/data/tools/human-examples.mjs": "d8936e235b053efcc3472f05af8a51a03b840496500c06eebdb347aac15b9aa1",
+    "web/tests/coach.test.mjs": "40765c28b00c0a330a965663357d9aa24e825e6cc0da1a54ab6c301b3036350b",
+    "web/tests/coach_smoke.py": "35c3a65353981c34fb035d4679d8c885682b779248f946c6e42079391f8daaac"
+  },
+  "unchangedNeuralAndRuleSHA256": {
+    "web/src/ai/controller.js": "076e95c854d245cd5a244c7e1a6a3485e117f171dd3eb30654a853deeb816a1b",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/model-catalog.json": "11aaccc429245a9cac326f751e551b05e2ba7a32d7872f1e018df4e7f2029f2e",
+    "web/src/rule-bot/strategy.js": "3eaa8deece2ac55e6608335c5aff48943fd766ebf8116e5150f510f8d25b36eb"
+  },
+  "browserSolo": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "trainingUpdates": 0,
+    "scoring": {
+      "modelId": "009",
+      "candidates": 1295,
+      "minValue": -1.8912172317504883,
+      "maxValue": 0.3650972843170166,
+      "relativeExtremaChecked": true,
+      "selectionUsesCachedValues": true,
+      "invalidSelectionNotRated": true,
+      "disabledStaleReplyIgnored": true,
+      "injectedFailureNotScored": true,
+      "retrySucceeded": true
+    },
+    "postMoveRetained": true,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 146,
+          "y": 650.71875,
+          "width": 968,
+          "height": 53
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 634,
+          "width": 302,
+          "height": 53
+        }
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 165.0625,
+          "width": 672,
+          "height": 46
+        }
+      }
+    ],
+    "pageErrors": []
+  },
+  "browserRooms": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "trainingUpdates": 0,
+    "hostDeniedEnforced": true,
+    "scoring": {
+      "modelId": "009",
+      "candidates": 12,
+      "minValue": -0.1120903491973877,
+      "maxValue": 0.9208964109420776,
+      "relativeExtremaChecked": true,
+      "selectionUsesCachedValues": true,
+      "invalidSelectionNotRated": true,
+      "disabledStaleReplyIgnored": true,
+      "injectedFailureNotScored": true,
+      "retrySucceeded": true
+    },
+    "postMoveRetained": true,
+    "independentPlayerPreferences": true,
+    "assistedEventMarked": true,
+    "realPeerJSDataChannel": true,
+    "hostWGuestS": true,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 146,
+          "y": 644.875,
+          "width": 968,
+          "height": 53
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 588,
+          "width": 302,
+          "height": 53
+        }
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 165.265625,
+          "width": 672,
+          "height": 46
+        }
+      }
+    ],
+    "rejoinRestoresPermissionAndPreference": true,
+    "pageErrors": []
+  },
+  "collector": {
+    "version": "e565275b-82fc-4f01-af01-4d21756b14c6",
+    "liveAssistedTest": {
+      "seed": 9402701,
+      "kind": "test",
+      "recordId": "4e9e794e-2db0-438a-8a4d-9fead5bae8be:1",
+      "status": 201,
+      "stored": true,
+      "sequence": 3,
+      "assistedFlagPreserved": true,
+      "anonymousExportStatus": 401,
+      "humanTrainingGames": 0
+    }
+  },
+  "negativeResults": [
+    {
+      "stage": "mobile layout screenshot",
+      "failure": "Evaluation panel overlapped side play buttons",
+      "resolution": "Measure reserved action lane and check non-overlap at all three sizes"
+    },
+    {
+      "stage": "room test harness",
+      "failure": "Pause overlay blocked controls; initial preference injection accessed storage on blank frame; driver could skip guest turn",
+      "resolution": "Hold test clocks without pause overlay, guard storage injection and stop at host seat corresponding to guest; complete real PeerJS room test passed"
+    }
+  ],
+  "comparisonBaseCommit": "e0f3bfccd5e3f30e5a090294acbd8925158c0ce8",
+  "incomingGuanZeroPreserved": {
+    "catalogId": "010",
+    "version": "model-000000061045",
+    "defaultId": "009"
+  },
+  "finalBuildVersion": "82261e6836",
+  "browserRoomsBuildVersion": "7efcf5c1dd"
+}

@@ -223,7 +223,11 @@ function hostGuestAct(seat, e) {
     default:
       return false;
   }
-  act({ ...e, automatic: false });
+  act({
+    ...e,
+    automatic: false,
+    assisted: runtime.rules.coachAllowed === true && e.assisted === true,
+  });
   return true;
 }
 

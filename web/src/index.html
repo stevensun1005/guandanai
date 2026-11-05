@@ -124,6 +124,8 @@
             ><button class="link" id="optBtn" aria-expanded="false">选项</button
             ><span class="optmenu" id="optMenu" hidden
               ><button class="link" id="historyBtn">牌谱与战况</button
+              ><button class="link tog" id="coachToggle" aria-pressed="false" hidden>
+                出牌评价：关</button
               ><button class="link tog" id="sfxBtn" aria-pressed="true">音效</button
               ><button class="link" id="cardBackBtn" title="点一下换牌背：大雁、枫叶、花纹">
                 牌背：<span id="backName">大雁</span></button
@@ -239,6 +241,22 @@
           取消选择
         </button>
       </div>
+      <aside class="coach-panel" id="coachPanel" aria-label="冠军模型出牌评价" hidden>
+        <div class="coach-heading">
+          <small
+            id="coachModel"
+            title="当前候选的最高模型值为100%，最低为0%；没有明显分差时同为100%。这不是正确概率、胜率或置信度。"
+          ></small>
+          <button class="link" id="coachRetry" hidden>重试</button>
+          <button class="link" id="coachClose" aria-label="关闭出牌评价" title="关闭出牌评价">
+            ×
+          </button>
+        </div>
+        <div class="coach-scores">
+          <output id="coachPreview" aria-live="polite" aria-atomic="true"></output>
+          <output id="coachLast"></output>
+        </div>
+      </aside>
       <div class="handwrap">
         <div class="btns" id="btns">
           <button class="btn primary round" id="playBtn">出牌</button>
@@ -316,6 +334,10 @@
             ><button class="rule-btn" data-rule="aFail" data-val="once">一次机会</button>
           </div>
           <div class="rule-note" id="rulesNote"></div>
+        </div>
+        <div class="coach-room" id="coachRoomBox" hidden>
+          <label><input type="checkbox" id="coachRoomAllowed" />允许玩家使用出牌评价</label>
+          <small id="coachRoomNote"></small>
         </div>
         <div class="lobby-join" id="joinRow" hidden>
           <input

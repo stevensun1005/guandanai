@@ -18,6 +18,7 @@ import { $, displayOrder } from './cards.js';
 import { renderClocks } from './clocks.js';
 import { renderSelectionStatus } from './selection-status.js';
 import { renderPublicHistory } from './history-dialog.js';
+import { renderCoach } from '../coach/controller.js';
 import { syncPauseBtn } from './overlays.js';
 import {
   PASS_Y,
@@ -271,6 +272,7 @@ export function renderControls() {
     tributeIds: pay ? tribOptions(0).map((card) => card.id) : [],
     confirm: !!runtime.confirmation,
   });
+  renderCoach();
 }
 
 // the table speaks for itself: only things you could not otherwise see get a line here

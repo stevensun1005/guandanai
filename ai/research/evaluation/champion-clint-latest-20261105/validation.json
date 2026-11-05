@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "recordedAtUTC": "2026-11-05T17:46:46.683471+00:00",
+  "preregisteredCommit": "99d72d4",
+  "evaluationSourceFrozen": true,
+  "models": [
+    {
+      "version": "v000293055",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx"
+    },
+    {
+      "version": "v000611432",
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/evaluation-v000611432-20261105/v000611432.onnx",
+      "sha256": "d4eb5f0c0b6939edb2e8c78f13901f324769c21865ddf8311febf5431d674595",
+      "bytes": 5368650,
+      "inputNames": [
+        "state",
+        "actions"
+      ],
+      "outputNames": [
+        "values"
+      ],
+      "batches": [
+        {
+          "actions": 1,
+          "outputShape": [
+            1,
+            1
+          ],
+          "finite": true
+        },
+        {
+          "actions": 3,
+          "outputShape": [
+            3,
+            1
+          ],
+          "finite": true
+        },
+        {
+          "actions": 129,
+          "outputShape": [
+            129,
+            1
+          ],
+          "finite": true
+        }
+      ],
+      "classification": "archive integrity and native inference compatibility, not strength"
+    }
+  ],
+  "workers": [
+    {
+      "opponent": "clint-rule",
+      "shard": 0,
+      "protocolSHA256": "2ee022b518c8eb6389eb05d198418651d3bf10a010eb2ade96520b82f576956b",
+      "startedAtUTC": "2026-11-05T17:17:20.302Z",
+      "updatedAtUTC": "2026-11-05T17:30:44.062Z",
+      "completedPairs": 500,
+      "completedMatches": 1000,
+      "rssBytes": 362311680
+    },
+    {
+      "opponent": "clint-rule",
+      "shard": 1,
+      "protocolSHA256": "2ee022b518c8eb6389eb05d198418651d3bf10a010eb2ade96520b82f576956b",
+      "startedAtUTC": "2026-11-05T17:17:20.302Z",
+      "updatedAtUTC": "2026-11-05T17:30:39.610Z",
+      "completedPairs": 500,
+      "completedMatches": 1000,
+      "rssBytes": 395988992
+    },
+    {
+      "opponent": "latest-model",
+      "shard": 0,
+      "protocolSHA256": "c81934fdee710a1ff5cd7a0873ee04334833c0c4b786446e4d39d11bef598a91",
+      "startedAtUTC": "2026-11-05T17:17:20.313Z",
+      "updatedAtUTC": "2026-11-05T17:37:57.581Z",
+      "completedPairs": 500,
+      "completedMatches": 1000,
+      "rssBytes": 450260992
+    },
+    {
+      "opponent": "latest-model",
+      "shard": 1,
+      "protocolSHA256": "c81934fdee710a1ff5cd7a0873ee04334833c0c4b786446e4d39d11bef598a91",
+      "startedAtUTC": "2026-11-05T17:17:20.313Z",
+      "updatedAtUTC": "2026-11-05T17:37:48.495Z",
+      "completedPairs": 500,
+      "completedMatches": 1000,
+      "rssBytes": 440172544
+    }
+  ],
+  "classification": "Completed fixed paired-seed whole-match comparisons; no model promotion",
+  "browserDefaultChanged": false,
+  "truncatedMatches": 0,
+  "failedWorkers": 0,
+  "elapsedSeconds": 1237.279,
+  "totalMatches": 4000,
+  "totalRounds": 42930
+}
