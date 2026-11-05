@@ -68,5 +68,26 @@
       "localBrowserVerified": true,
       "newPlayerDefault": "guanzero-adp-gpubatch · 44752步"
     }
+  },
+  "deployment": {
+    "commit": "3e14afa5e3be7c6f6d1a0e61b83b8e93e7d674ba",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42034877002",
+    "conclusion": "success",
+    "observedAt": "2026-11-05T13:23:27.415093+00:00",
+    "liveBuild": "7b8c4300b0",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "publicModelBytes": 6346014,
+    "publicModelSHA256": "7ec0450d793b885bb0f7d9c1aa9871fed95df29a6173a8b4c799e1c362027a41",
+    "liveBrowserName": "guanzero-adp-gpubatch · 44752步",
+    "liveBrowserDefaultArchiveId": "007",
+    "preservedIds": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006"
+    ],
+    "pageErrors": 0
   }
 }
