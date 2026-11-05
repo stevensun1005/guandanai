@@ -23,3 +23,5 @@
 当前入口：[GuanZero 四类开发对手与冻结补评](../guanzero/README.md)、[Clint 首批逐场结果](evaluation/guanzero-clint-block-0002-20261105.json)、[当前菜单及连字符命名](../../web/docs/WEB_MODELS.md)。这些开发评测、门控晋升和浏览器验证分别记录，不与独立验收混用。
 
 各功能说明按 [贡献指南的文档检查清单](../../CONTRIBUTING.md#文档的职责) 同步；主报告保留历史实验，当前产品入口以功能指南与模型清单为准。
+
+[冠军对 Clint／最新导出](evaluation/champion-clint-latest-20261105)保存本次固定整场评测的事前协议、种子审计与后续实际结果；详见主报告第 21 节。

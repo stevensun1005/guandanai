@@ -13,6 +13,7 @@ class IndependentSummaryTests(unittest.TestCase):
         m=summary.metrics(total)
         self.assertEqual(m['matchWinRate'],.5)
         self.assertEqual(m['matchScore'],.75)
+        self.assertEqual(m['matchWinMargin'],.5)
         self.assertEqual(m['doubleDownRate'],.25)
         self.assertEqual(m['isolatedFirstRate'],.5)
     def test_pair_bootstrap_keeps_two_swapped_matches_together(self):

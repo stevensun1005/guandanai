@@ -170,3 +170,5 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 ```
 
 云端采集检查覆盖合格局筛选、人工／电脑／托管来源、离线队列、服务端重放、去重、测试数据隔离与私有导出；具体已完成记录见 [采集 README](../collector/README.md) 及 [研究报告](../../ai/research/MODEL_STUDY.md)。不将合法重放视为真人身份验证，也不把数据采集当成训练或强度验收。
+
+固定整场 2v2 使用 `node ai/local/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/local/tests/fixed-evaluation.test.mjs` 和 `python ai/local/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/local/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。

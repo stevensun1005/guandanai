@@ -19,6 +19,7 @@ def metrics(total):
     isolated=np.divide(v['isolatedFirsts'],firsts,out=np.full_like(firsts,np.nan),where=firsts!=0)
     return {
         'matchWinRate':v['wins']/v['matches'],
+        'matchWinMargin':(v['wins']-v['losses'])/v['matches'],
         'matchScore':(v['wins']+v['draws']/2)/v['matches'],
         'matchDrawRate':v['draws']/v['matches'],
         'doubleDownRate':v['doubleLosses']/v['rounds'],
@@ -84,7 +85,7 @@ def main():
     (output/'matches.jsonl.gz').write_bytes(compressed)
     result={
         'schema':1,'purpose':'Completed fixed independent whole-match evaluation; no model selection',
-        'protocolSHA256':protocol_sha,'model':plan['model'],'opponent':plan['opponent'],'rules':plan['rules'],
+        'protocolSHA256':protocol_sha,'model':plan['model'],'opponent':plan['opponent'],'opponentModel':plan.get('opponentModel'),'rules':plan['rules'],'pipeline':plan.get('pipeline'),
         'completedAtUTC':datetime.now(timezone.utc).isoformat(),'seedStart':min(plan['seeds']),'seedEnd':max(plan['seeds']),
         'completedPairs':n,'counts':total,'metrics':summary,
         'teamRankPairs':{k:{'count':v,'roundRate':v/total['rounds']} for k,v in ranks.items()},
