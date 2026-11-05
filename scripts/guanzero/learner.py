@@ -76,11 +76,15 @@ def run(args):
         if published!=step:
             file=f'model-{step:012d}.onnx'
             export_onnx(model,root/'models'/file)
+            if config.get('inference')=='gpu-batch':
+                atomic_checkpoint(root/'models'/f'model-{step:012d}.weights.pt',{k:v.detach().cpu() for k,v in model.state_dict().items()})
             atomic_json(root/'models'/'latest.json',{'file':file,'version':step,'updatedAt':time.time()})
             published=step
             models=sorted((root/'models').glob('model-*.onnx'))
             for old in models[:-5]:
-                try: old.unlink()
+                try:
+                    old.unlink()
+                    old.with_suffix('.weights.pt').unlink(missing_ok=True)
                 except PermissionError:pass
         last_export=time.monotonic()
     def status(error=None):

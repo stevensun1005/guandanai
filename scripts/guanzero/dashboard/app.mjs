@@ -109,6 +109,12 @@ function render(s) {
     'ram',
     `内存 ${fixed(s.hardware.ramUsedBytes / 2 ** 30, 1)} / ${fixed(s.hardware.ramTotalBytes / 2 ** 30, 1)} GiB`,
   );
+  text(
+    'inference',
+    s.inference
+      ? `GPU 合批推理 · 平均 ${fixed(s.inference.averageBatch, 1)} 局面/批 · ${fixed(s.inference.requestsPerSecond, 0)} 决策/秒 · CPU 回退 ${s.actors.reduce((n, a) => n + (a.inference?.fallbacks || 0), 0)} 次`
+      : 'CPU ONNX 推理',
+  );
   text('actor-count', `${s.totals.liveActors} / ${s.config.actors} 在线`);
   text('model', `v${s.latest.version ?? '—'}`);
   text('backlog', `${s.pendingShards} 个`);

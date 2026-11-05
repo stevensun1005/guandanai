@@ -1,3 +1,4 @@
+import { createInferenceClient } from './inference-client.mjs';
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -91,7 +92,62 @@ export function writeShard(directory, rows, meta = {}) {
   });
   return name;
 }
-export async function createInference() {
+export async function createInference({ port } = {}) {
+  if (port) {
+    const remote = createInferenceClient(port),
+      fallback = await createInference();
+    let file = null,
+      version = null,
+      requests = 0,
+      fallbacks = 0,
+      tieRescores = 0,
+      lastWarning = 0;
+    return {
+      async load(next) {
+        const match = /model-(\d+)\.onnx$/.exec(next);
+        if (!match) throw Error('Invalid versioned inference model');
+        file = next;
+        version = Number(match[1]);
+      },
+      async values(state) {
+        try {
+          const values = await remote.values(version, state);
+          requests++;
+          const maximum = Math.max(...values),
+            contenders = [];
+          for (let i = 0; i < values.length; i++)
+            if (maximum - values[i] < 2e-5) contenders.push(i);
+          if (contenders.length > 1) {
+            const keys = new Set(
+              contenders.map((i) => Array.from(cardsArray(state.actions[i])).join(',')),
+            );
+            if (keys.size > 1) {
+              tieRescores++;
+              await fallback.load(file);
+              return fallback.values(state);
+            }
+            for (const i of contenders) values[i] = maximum;
+          }
+          return values;
+        } catch (error) {
+          fallbacks++;
+          if (Date.now() - lastWarning > 10000) {
+            console.error(JSON.stringify({ kind: 'inference-fallback', error: String(error) }));
+            lastWarning = Date.now();
+          }
+          await fallback.load(file);
+          return fallback.values(state);
+        }
+      },
+      stats() {
+        return { backend: 'gpu-batch', requests, fallbacks, tieRescores };
+      },
+      async close() {
+        remote.close();
+        await fallback.close();
+      },
+    };
+  }
   let current = null,
     engine = null;
   return {

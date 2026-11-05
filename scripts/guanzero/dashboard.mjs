@@ -105,6 +105,7 @@ export function snapshot(run) {
       .slice(-6);
   }
   return {
+    inference: safe(join(p.root, 'inference/status.json')),
     observedAt: new Date(now).toISOString(),
     run: p.root,
     name: p.root.split(/[\\/]/).at(-1),

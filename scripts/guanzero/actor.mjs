@@ -22,11 +22,14 @@ trainSeed(slot, 0);
 const file = join(p.actors, `actor-${slot}.json`),
   log = join(p.actors, `results-${slot}.jsonl`);
 const status = { matches: 0, rows: 0, nextSeed: 0, ...readJSON(file, {}), slot, pid: process.pid };
-const inference = await createInference();
+const inference = await createInference({
+  port: config.inference === 'gpu-batch' ? config.inferencePort : undefined,
+});
 let stopping = false;
 process.on('SIGINT', () => (stopping = true));
 process.on('SIGTERM', () => (stopping = true));
 function save() {
+  if (inference.stats) status.inference = inference.stats();
   writeJSON(file, { ...status, updatedAt: new Date().toISOString() });
 }
 try {

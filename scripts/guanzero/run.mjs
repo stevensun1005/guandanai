@@ -107,6 +107,10 @@ async function main() {
         'actors',
         'batchSize',
         'learnerThreads',
+        'inference',
+        'inferencePort',
+        'inferenceBatch',
+        'inferenceWaitMs',
         'seed',
       ]) {
         const cli = key.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase());
@@ -146,6 +150,10 @@ async function main() {
         ),
         batchSize: integerOption('batch-size', 3200, 1, 3200),
         objective,
+        inference: option('inference', 'cpu'),
+        inferencePort: integerOption('inference-port', 8771, 1024, 65535),
+        inferenceBatch: integerOption('inference-batch', 32, 1, 256),
+        inferenceWaitMs: integerOption('inference-wait-ms', 2, 0, 50),
         epsilon: 0.01,
         sourceSHA256,
         commit: execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -154,6 +162,8 @@ async function main() {
           windowsHide: true,
         }).trim(),
       };
+      if (!['cpu', 'gpu-batch'].includes(config.inference))
+        throw Error('Invalid inference backend');
       writeJSON(configFile, config);
     }
     if (stopped(p))
@@ -179,7 +189,7 @@ async function main() {
     process.on('SIGTERM', shutdown);
     const start = (key, file, args = [], failures = 0) => {
       if (stopping || stopped(p)) return;
-      const python = key === 'learner';
+      const python = key === 'learner' || key === 'inference';
       const command = python ? config.python : process.execPath;
       const child = spawn(
         command,
@@ -205,6 +215,13 @@ async function main() {
       });
     };
     start('learner', 'learner.py');
+    if (config.inference === 'gpu-batch')
+      start('inference', 'inference.py', [
+        `--port=${config.inferencePort}`,
+        `--device=${config.device}`,
+        `--batch=${config.inferenceBatch}`,
+        `--wait-ms=${config.inferenceWaitMs}`,
+      ]);
     let actorsStarted = false,
       evaluating = false;
     const launchEvaluation = () => {
@@ -230,7 +247,11 @@ async function main() {
         shutdown();
         return;
       }
-      if (!actorsStarted && existsSync(join(p.models, 'latest.json'))) {
+      const inferenceStatus = readJSON(join(p.root, 'inference/status.json'));
+      const inferenceReady =
+        config.inference !== 'gpu-batch' ||
+        (inferenceStatus?.ready && Date.now() / 1000 - inferenceStatus.updatedAt < 10);
+      if (!actorsStarted && inferenceReady && existsSync(join(p.models, 'latest.json'))) {
         actorsStarted = true;
         for (let slot = 0; slot < config.actors; slot++)
           start(`actor-${slot}`, 'actor.mjs', [`--slot=${slot}`]);

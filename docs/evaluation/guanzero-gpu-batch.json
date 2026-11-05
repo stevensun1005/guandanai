@@ -1,0 +1,338 @@
+{
+  "purpose": "development validation of version-pinned GPU sampling",
+  "controlledHarness": {
+    "cpu": {
+      "seconds": 49.8208128,
+      "matches": 13,
+      "decisions": 7220,
+      "stats": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "decisionsPerSecond": 144.9193538648972
+    },
+    "gpu-batch": {
+      "seconds": 13.784745799999998,
+      "matches": 13,
+      "decisions": 7220,
+      "stats": [
+        {
+          "backend": "gpu-batch",
+          "requests": 643,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 662,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 441,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 426,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 664,
+          "fallbacks": 0,
+          "tieRescores": 1
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 350,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 447,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 685,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 530,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 567,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 481,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 684,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 640,
+          "fallbacks": 0,
+          "tieRescores": 1
+        }
+      ],
+      "decisionsPerSecond": 523.7673660982563
+    },
+    "actionParity": true,
+    "speedup": 3.614198877718877
+  },
+  "coarseTimerHarness": {
+    "cpu": {
+      "seconds": 50.4440436,
+      "matches": 13,
+      "decisions": 7220,
+      "stats": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "decisionsPerSecond": 143.12889064270018
+    },
+    "gpu-batch": {
+      "seconds": 14.699254999999997,
+      "matches": 13,
+      "decisions": 7220,
+      "stats": [
+        {
+          "backend": "gpu-batch",
+          "requests": 643,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 662,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 441,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 426,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 664,
+          "fallbacks": 0,
+          "tieRescores": 1
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 350,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 447,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 685,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 530,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 567,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 481,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 684,
+          "fallbacks": 0,
+          "tieRescores": 0
+        },
+        {
+          "backend": "gpu-batch",
+          "requests": 640,
+          "fallbacks": 0,
+          "tieRescores": 1
+        }
+      ],
+      "decisionsPerSecond": 491.1813557898003
+    },
+    "actionParity": true,
+    "speedup": 3.431741513430443
+  },
+  "checkpoint": {
+    "checkpointStep": 1216
+  },
+  "modelSHA256": "00ae3f7250c2ae5457eb8fd26496f40002b422e56588f2f676126c72bdc746d3",
+  "seeds": {
+    "first": 2982000000,
+    "last": 2982000012,
+    "matches": 13
+  },
+  "limitations": [
+    "One Node coordinator with 13 concurrent matches; real deployment has separate actor processes.",
+    "Live CPU sampling and GPU training continued during benchmarks; measured ratio is not a deployment speed guarantee."
+  ],
+  "smoke": {
+    "learner": {
+      "step": 1332,
+      "usedSamples": 4262400,
+      "loss": 3.2774455094337465,
+      "updatesPerSecond": 0.07439326941772093,
+      "device": "cuda",
+      "deviceName": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "precision": "FP32",
+      "objective": "adp",
+      "updatedAt": 1793848337.9307892,
+      "error": null,
+      "pid": 36396
+    },
+    "inference": {
+      "pid": 7528,
+      "device": "cuda",
+      "requests": 35072,
+      "batches": 9201,
+      "maxBatch": 4,
+      "error": null,
+      "ready": false,
+      "updatedAt": 1793848337.5136187,
+      "averageBatch": 3.8117595913487663,
+      "requestsPerSecond": 252.6517400078181
+    },
+    "actors": [
+      {
+        "matches": 15,
+        "rows": 8580,
+        "nextSeed": 19000016,
+        "slot": 0,
+        "pid": 28260,
+        "inference": {
+          "backend": "gpu-batch",
+          "requests": 8762,
+          "fallbacks": 0,
+          "tieRescores": 5
+        },
+        "loadedModel": 1331,
+        "currentRows": 100,
+        "updatedAt": "2026-11-05T03:12:17.509Z"
+      },
+      {
+        "matches": 15,
+        "rows": 8559,
+        "nextSeed": 19000016,
+        "slot": 1,
+        "pid": 8000,
+        "inference": {
+          "backend": "gpu-batch",
+          "requests": 8780,
+          "fallbacks": 0,
+          "tieRescores": 4
+        },
+        "loadedModel": 1331,
+        "currentRows": 200,
+        "updatedAt": "2026-11-05T03:12:16.994Z"
+      },
+      {
+        "matches": 16,
+        "rows": 8612,
+        "nextSeed": 19000017,
+        "slot": 2,
+        "pid": 52684,
+        "inference": {
+          "backend": "gpu-batch",
+          "requests": 8756,
+          "fallbacks": 0,
+          "tieRescores": 3
+        },
+        "loadedModel": 1331,
+        "currentRows": 100,
+        "updatedAt": "2026-11-05T03:12:17.288Z"
+      },
+      {
+        "matches": 15,
+        "rows": 8774,
+        "nextSeed": 19000015,
+        "slot": 3,
+        "pid": 46364,
+        "inference": {
+          "backend": "gpu-batch",
+          "requests": 8774,
+          "fallbacks": 0,
+          "tieRescores": 2
+        },
+        "loadedModel": 1331,
+        "currentRows": 0,
+        "updatedAt": "2026-11-05T03:12:17.206Z"
+      }
+    ]
+  },
+  "checks": {
+    "node": 109,
+    "python": 8,
+    "numericTolerance": 1e-05,
+    "fullMatchActionParity": true
+  }
+}
