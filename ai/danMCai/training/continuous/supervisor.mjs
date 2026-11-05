@@ -22,8 +22,8 @@ import {
 } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { freemem, constants as osConstants, setPriority } from 'node:os';
-import { memoryAction } from './resources.mjs';
+import { constants as osConstants, setPriority } from 'node:os';
+import { memoryAction, memoryAvailability } from './resources.mjs';
 import { sourceHashes } from './sources.mjs';
 import { actorTotals as allActorTotals } from './remote.mjs';
 import {
@@ -561,7 +561,8 @@ function actorTotals() {
 }
 function memoryTick() {
   if (stopping) return;
-  const freeBytes = freemem();
+  const memory = memoryAvailability();
+  const freeBytes = memory.availableBytes;
   const running = [...children.keys()].filter((name) => name.startsWith('actor-'));
   const action =
     config.actorImplementation === 'fast'
@@ -594,6 +595,9 @@ function memoryTick() {
   state.resources = {
     ...resourceBudget,
     freeGB: freeBytes / 1024 ** 3,
+    rawFreeGB: memory.rawFreeBytes / 1024 ** 3,
+    measurement: memory.measurement,
+    measurementError: memory.measurementError ?? null,
     pausedActors: [...memoryPaused],
     updatedAt: new Date().toISOString(),
   };

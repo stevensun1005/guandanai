@@ -261,6 +261,8 @@ python ai/research/tools/update-model-study.py --workspace D:/vibecoding/guandan
 
 调度器每 5 秒检查系统可用内存：低于 4 GiB 时让一个快速采样器结束当前比赛、落盘后暂停；高于 5 GiB 再逐个恢复，同类操作至少间隔 20 秒。这是有滞后的软预算，结束比赛需要时间，不保证任何瞬间都严格空闲 4 GiB。暂停状态及可用内存显示在面板。学习器与采样器使用 BelowNormal 优先级，让普通桌面程序优先；不通过清空操作系统缓存或删训练数据腾内存。
 
+Mac 真机启动后修正可用内存口径：`vm_stat` free + inactive 页用于预算，原始空闲页与测量方法分别留档；读取失败保守使用原始空闲量并记录错误。Windows 仍使用原有系统空闲内存。Mac 固定窗口中的兼容性修复及具名恢复流程见 [MAC_HANDOFF](MAC_HANDOFF.md)，恢复不延长截止时间。
+
 配置记录在 `config.resourceBudget`。同一运行调整采样进程数、并行牌局或资源预算时，须先正常停止并保存，用 `--protocol-change=<实际原因>` 和 `--set` 显式记录，不能偷偷改冻结配置。比如 `--set='{"actors":8,"fastActor":{"games":8,"provider":"dml"},"resourceBudget":{"reserveGB":4,"resumeGB":5}}'`。该入口仍拒绝更改学习率、探索和奖励定义。
 
 `gpu-main` 本次发生过内存耗尽，正常保存到 212,171 步，随后恢复原权重、优化器、缓冲区及种子游标。8×48 牌局的有界缓存方案减少了内存，但存在模型加载抖动，已改为 8 个进程、每进程 8 局，用户最后指定预留 4 GiB；提高有界会话缓存至 6 以减少反复加载。各阶段实际测量见研究报告第 7.13 节，不把中断前后当作独立棋力实验。

@@ -182,6 +182,9 @@ async function main() {
         `--run=${run}`,
         `--python=${python}`,
         `--hours=${hours}`,
+        ...(option('protocol-change', '')
+          ? [`--protocol-change=${option('protocol-change', '')}`]
+          : []),
       ],
       { cwd: REPO_ROOT, env, stdio: 'inherit' },
     );
