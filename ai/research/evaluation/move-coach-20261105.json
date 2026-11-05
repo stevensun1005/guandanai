@@ -11,18 +11,18 @@
   "privateOpponentHandsRead": false,
   "trainingUpdates": 0,
   "strengthMatches": 0,
-  "nodeTests": 155,
+  "nodeTests": 156,
   "pythonResearchTests": 9,
   "pythonIndependentSummaryTests": 2,
   "sourceSHA256": {
-    "web/src/coach/evaluation.mjs": "fd4e90b28319a1467f48a4a1d6defccba7e83d604213e4378b69a22fad26e351",
-    "web/src/coach/controller.js": "6199c051605612d2f104594b9c2a3373ab2d2dcdb368997e1fd1095854e79f2b",
+    "web/src/coach/evaluation.mjs": "9dc2a6864b0a76e45a34260cf8458764cab33c07d14266be952dfe3c8dcef008",
+    "web/src/coach/controller.js": "681545b2469801e58ffa0469a2374e4ab1d654dd71be6d959436306105c203b8",
     "web/src/ai/worker.mjs": "6da47721da8a999d2a0dae9203e50fec3aeb079ec22850bb1c3794fc5d3c07e7",
     "web/src/collection/record.mjs": "84d61654726cef330118f53ae983e07c469513c2e316e47101215050d505a35e",
     "web/src/collection/validate.mjs": "67526536f33675a069ee9b7512af807722e21e1df1e14e28c4306a24f3677626",
     "ai/shared/data/tools/human-examples.mjs": "d8936e235b053efcc3472f05af8a51a03b840496500c06eebdb347aac15b9aa1",
-    "web/tests/coach.test.mjs": "40765c28b00c0a330a965663357d9aa24e825e6cc0da1a54ab6c301b3036350b",
-    "web/tests/coach_smoke.py": "35c3a65353981c34fb035d4679d8c885682b779248f946c6e42079391f8daaac"
+    "web/tests/coach.test.mjs": "c61ec3d45b2cf2363278ffcc38e3ad0b3b2e5d9f5848ddae892d94e45c363de5",
+    "web/tests/coach_smoke.py": "8c25208f94ee9ac844009f93ccab5f31fee74e5aa7c4a5fa25df02e716c98707"
   },
   "unchangedNeuralAndRuleSHA256": {
     "web/src/ai/controller.js": "076e95c854d245cd5a244c7e1a6a3485e117f171dd3eb30654a853deeb816a1b",
@@ -42,6 +42,11 @@
       "candidates": 1295,
       "minValue": -1.8912172317504883,
       "maxValue": 0.3650972843170166,
+      "viewTeamLevelsChecked": true,
+      "teamLevels": {
+        "self": 2,
+        "opponent": 2
+      },
       "relativeExtremaChecked": true,
       "selectionUsesCachedValues": true,
       "invalidSelectionNotRated": true,
@@ -177,6 +182,11 @@
       "stage": "room test harness",
       "failure": "Pause overlay blocked controls; initial preference injection accessed storage on blank frame; driver could skip guest turn",
       "resolution": "Hold test clocks without pause overlay, guard storage injection and stop at host seat corresponding to guest; complete real PeerJS room test passed"
+    },
+    {
+      "stage": "1.15.0 unequal team levels, odd guest seat",
+      "failure": "Observation team levels rotated twice; newly added seat-1 regression test expected self level 10 but read 7",
+      "resolution": "Use already rotated local view, match all 513 encoding dimensions at all four seats; real W-host/S-guest test with self 2 and opponent 7 passes"
     }
   ],
   "comparisonBaseCommit": "e0f3bfccd5e3f30e5a090294acbd8925158c0ce8",
@@ -185,6 +195,144 @@
     "version": "model-000000061045",
     "defaultId": "009"
   },
-  "finalBuildVersion": "82261e6836",
-  "browserRoomsBuildVersion": "7efcf5c1dd"
+  "finalBuildVersion": "aa43590418",
+  "browserRoomsBuildVersion": "7efcf5c1dd",
+  "browserRoomsUnequalLevels": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "trainingUpdates": 0,
+    "hostDeniedEnforced": true,
+    "scoring": {
+      "modelId": "009",
+      "candidates": 584,
+      "minValue": -2.11834454536438,
+      "maxValue": -0.9388775825500488,
+      "viewTeamLevelsChecked": true,
+      "teamLevels": {
+        "self": 2,
+        "opponent": 7
+      },
+      "relativeExtremaChecked": true,
+      "selectionUsesCachedValues": true,
+      "invalidSelectionNotRated": true,
+      "disabledStaleReplyIgnored": true,
+      "injectedFailureNotScored": true,
+      "retrySucceeded": true
+    },
+    "postMoveRetained": true,
+    "independentPlayerPreferences": true,
+    "assistedEventMarked": true,
+    "realPeerJSDataChannel": true,
+    "hostWGuestS": true,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 146,
+          "y": 644.875,
+          "width": 968,
+          "height": 53
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 588,
+          "width": 302,
+          "height": 53
+        }
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 158.34375,
+          "width": 672,
+          "height": 46
+        }
+      }
+    ],
+    "rejoinRestoresPermissionAndPreference": true,
+    "pageErrors": []
+  },
+  "previousDeployment": {
+    "commit": "6c93fa6691a3709984681fefd7aecff34d3e8a85",
+    "buildVersion": "82261e6836",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42080007465",
+    "conclusion": "Pages success and live PeerJS rooms passed with equal team levels; did not cover unequal-level rotation",
+    "browserRooms": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "hostDeniedEnforced": true,
+      "scoring": {
+        "modelId": "009",
+        "candidates": 144,
+        "minValue": -0.4090563654899597,
+        "maxValue": 0.8506850004196167,
+        "relativeExtremaChecked": true,
+        "selectionUsesCachedValues": true,
+        "invalidSelectionNotRated": true,
+        "disabledStaleReplyIgnored": true,
+        "injectedFailureNotScored": true,
+        "retrySucceeded": true
+      },
+      "postMoveRetained": true,
+      "independentPlayerPreferences": true,
+      "assistedEventMarked": true,
+      "realPeerJSDataChannel": true,
+      "hostWGuestS": true,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "bounds": {
+            "x": 146,
+            "y": 644.875,
+            "width": 968,
+            "height": 53
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 588,
+            "width": 302,
+            "height": 53
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 158.34375,
+            "width": 672,
+            "height": 46
+          }
+        }
+      ],
+      "rejoinRestoresPermissionAndPreference": true,
+      "pageErrors": []
+    }
+  },
+  "version": "1.15.1"
 }

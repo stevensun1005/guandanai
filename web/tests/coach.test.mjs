@@ -10,6 +10,9 @@ import {
 } from '../src/coach/evaluation.mjs';
 import catalog from '../src/ai/model-catalog.json' with { type: 'json' };
 import { makeDeck } from '../src/core/cards.js';
+import { rotateSnapshot } from '../src/network/snapshot.js';
+import { policyState } from '../src/ai/observation.js';
+import { encode } from '../src/ai/encoding.mjs';
 import { validateRecord } from '../src/collection/validate.mjs';
 import { humanExamples } from '../../ai/shared/data/tools/human-examples.mjs';
 import { collectedRound } from './fixtures/collected-round.mjs';
@@ -46,8 +49,8 @@ test('coach observation never reads another private card and freezes the pre-mov
   const state = coachObservation(game, 1);
   assert.deepEqual(state.hand, [0, 1]);
   assert.deepEqual(state.counts, [2, 27, 27, 27]);
-  assert.equal(state.selfLevel, 4);
-  assert.equal(state.opponentLevel, 2);
+  assert.equal(state.selfLevel, 2);
+  assert.equal(state.opponentLevel, 4);
   game.hands[0].pop();
   game.log.push({ p: 0, cards: [deck[0]] });
   game.levels[0] = 10;
@@ -65,6 +68,30 @@ test('rating is a monotone affine-invariant value-range score with explicit flat
   assert.deepEqual(relativeRating([1, 1 + 1e-8], 1), { percent: 100, flat: true });
   assert.throws(() => relativeRating([], 1));
   assert.throws(() => relativeRating([NaN], 1));
+});
+
+test('all four rotated evaluation views encode the same seat with unequal team levels', () => {
+  const deck = makeDeck();
+  const game = {
+    hands: [0, 1, 2, 3].map((p) => deck.slice(p * 27, p * 27 + 27)),
+    levels: [7, 10],
+    lvlTeam: 0,
+    L: 7,
+    aFails: [1, 2],
+    round: 4,
+    log: [],
+    trick: null,
+  };
+  const card = game.hands[1].pop();
+  game.log.push({ p: 1, cards: [card] });
+  for (let offset = 0; offset < 4; offset++) {
+    const local = rotateSnapshot(game, offset);
+    const expected = policyState(game, offset, 0, []),
+      actual = coachObservation(local, offset);
+    assert.equal(actual.selfLevel, expected.selfLevel, `own level rotated twice at seat ${offset}`);
+    assert.equal(actual.opponentLevel, expected.opponentLevel);
+    assert.deepEqual(encode(actual), encode(expected));
+  }
 });
 
 test('worker prepares real legal actions, including pass and finishing moves, with equivalent duplicate tensors', () => {

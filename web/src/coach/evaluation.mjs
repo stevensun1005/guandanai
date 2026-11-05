@@ -12,9 +12,10 @@ export const coachAllowed = (mode, rules) => mode === 'solo' || rules?.coachAllo
 export const actionKey = (ids) => cardsArray(ids).join(',');
 
 /** Copy only this player's cards, public history and public match context. */
-export function coachObservation(game, offset) {
+export function coachObservation(game) {
   return {
-    ...policyState(game, 0, offset, []),
+    // Hands, public seats and team levels are already rotated into this player's view.
+    ...policyState(game, 0, 0, []),
     trick: game.trick && {
       player: game.trick.player,
       play: { type: game.trick.play.type, value: game.trick.play.value, n: game.trick.play.n },

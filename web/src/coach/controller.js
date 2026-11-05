@@ -84,7 +84,7 @@ function startSnapshot(game) {
     game,
     tok: game.tok,
     count: game.log.length,
-    observation: coachObservation(game, runtime.network.off),
+    observation: coachObservation(game),
     scores: new Map(),
   };
   current = s;

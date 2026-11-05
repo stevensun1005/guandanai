@@ -31,6 +31,7 @@ def score_checks(page):
     first = page.evaluate('coachProbe.replies.at(-1)')
     assert first['modelId'] == CHAMPION
     assert page.evaluate('r=>JSON.stringify(r.hand)===JSON.stringify(G.hands[0].map(c=>c.id))', page.evaluate('coachProbe.requests.at(-1)'))
+    assert page.evaluate('()=>{const r=coachProbe.requests.at(-1);return r.selfLevel===G.levels[0]&&r.opponentLevel===G.levels[1]}')
     assert page.evaluate("coachProbe.requests.every(s=>!('hands' in s)&&s.counts.length===4)")
     values = first['values']; high=max(range(len(values)),key=lambda i:values[i]); low=min(range(len(values)),key=lambda i:values[i])
     def pick(ids): page.evaluate('ids=>{sel=new Set(ids);renderHand()}', ids)
@@ -56,7 +57,7 @@ def score_checks(page):
     page.wait_for_function("() => document.querySelector('#coachPreview').textContent.includes('合理性 100%')",timeout=60000)
     assert page.evaluate('coachAssisted()') is True
     assert page.evaluate('coachProbe.terminated') >= 2
-    return {'modelId':first['modelId'],'candidates':len(values),'minValue':min(values),'maxValue':max(values),'relativeExtremaChecked':True,'selectionUsesCachedValues':True,'invalidSelectionNotRated':True,'disabledStaleReplyIgnored':True,'injectedFailureNotScored':True,'retrySucceeded':True}, first['actions'][high]
+    return {'modelId':first['modelId'],'candidates':len(values),'minValue':min(values),'maxValue':max(values),'viewTeamLevelsChecked':True,'teamLevels':page.evaluate('()=>{const r=coachProbe.requests.at(-1);return {self:r.selfLevel,opponent:r.opponentLevel}}'),'relativeExtremaChecked':True,'selectionUsesCachedValues':True,'invalidSelectionNotRated':True,'disabledStaleReplyIgnored':True,'injectedFailureNotScored':True,'retrySucceeded':True}, first['actions'][high]
 
 def layouts(page):
     result=[]
@@ -107,6 +108,7 @@ with sync_playwright() as p:
             host.locator('#coachRoomAllowed').check();guest.wait_for_function('() => RULES.coachAllowed===true')
             host.locator('#coachRoomAllowed').uncheck();guest.wait_for_function('() => RULES.coachAllowed===false')
             if allow:host.locator('#coachRoomAllowed').check();guest.wait_for_function('() => RULES.coachAllowed===true')
+            if allow:host.evaluate("()=>{RULES.startLevel=7;RULES.startSide='EW';renderLobby();broadcastLobby()}")
             host.locator('#sitBtn').click();host.evaluate("botModels=Array(4).fill('clint-rule')")
             for _ in range(350):
                 if host.evaluate("G.phase==='prep'") and guest.evaluate("G.phase==='prep'"):break
