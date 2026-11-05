@@ -151,6 +151,8 @@ export function dashboardSnapshot(run, workspace = project) {
         ? readJSON(join(continuousRoot, 'main/status.json'))
         : null,
     actorCount: config.actors,
+    actorImplementation: config.actorImplementation || 'standard',
+    protocolChanges: (config.protocolHistory || []).map(({ at, reason }) => ({ at, reason })),
     deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,
     decisionsPerSecond: samplingRate ?? status.decisionsPerSecond,
@@ -164,7 +166,11 @@ export function dashboardSnapshot(run, workspace = project) {
             : name.startsWith('actor-')
               ? readJSON(join(paths.actors, `${name}.json`), {})
               : null;
-        return { name, alive: child ? alive(child.pid) : null };
+        return {
+          name,
+          alive: child ? alive(child.pid) : null,
+          ...(child?.actorImplementation ? { implementation: child.actorImplementation } : {}),
+        };
       })
       .concat(running ? extraActors : []),
     learner,

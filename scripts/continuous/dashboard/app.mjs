@@ -67,7 +67,7 @@ function render(data) {
     );
   set(
     'description',
-    `${data.actorCount} 个调度器采样进程${data.extraActorCount ? `、${data.extraActorCount} 个额外加入的采样进程${data.fastActorCount ? `（其中 ${data.fastActorCount} 个为 GPU 批量推理的快速进程）` : ''}` : ''}收集完整比赛，训练进程更新整个价值网络。每 ${data.anchorHours} 小时与初始模型检查，连续两次明显退步会自动停止。`,
+    `${data.actorCount} 个调度器采样进程${data.actorImplementation === 'fast' ? '（快速版：GPU 批量推理）' : ''}${data.extraActorCount ? `、${data.extraActorCount} 个额外加入的采样进程${data.fastActorCount ? `（其中 ${data.fastActorCount} 个为 GPU 批量推理的快速进程）` : ''}` : ''}收集完整比赛，训练进程更新整个价值网络。每 ${data.anchorHours} 小时与初始模型检查，连续两次明显退步会自动停止。${data.protocolChanges?.length ? `运行中途在 ${time(data.protocolChanges.at(-1).at)} 切换了采样方式，属于协议变化，详见研究报告 7.12 节。` : ''}`,
   );
   const phase = { running: '● 正在训练', stopped: '■ 已停止', unconfirmed: '状态待确认' }[
     data.phase
