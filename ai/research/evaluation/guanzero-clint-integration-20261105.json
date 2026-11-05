@@ -33,5 +33,32 @@
     "corrected": true
   },
   "originalReportModifiedBySupplement": false,
-  "trainingConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836"
+  "trainingConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+  "frozenRuntime": {
+    "path": "C:/guandan-sampler/work/guanzero-clint-runtime",
+    "commit": "294ff74a3abb4b0789ed899518280b0375b4f41f",
+    "verifiedSourceFiles": 33,
+    "lineEndingDifferences": 0,
+    "companionPid": 40624,
+    "dashboardPid": 30672,
+    "trainingProcessesRestarted": false,
+    "status": "waiting for next evaluation block"
+  },
+  "ci": {
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42056420584",
+    "initialFailure": "HTTP 504 downloading a previously published model asset during build; tests and format passed",
+    "retry": "success",
+    "attempt": 2,
+    "build": "passed",
+    "browserSmoke": "passed",
+    "deployment": "success",
+    "verifiedAt": "2026-11-05T15:43:34.551502+00:00"
+  },
+  "trainingAtCompletion": {
+    "observedAt": "2026-11-05T15:43:34.600Z",
+    "phase": "running",
+    "step": 54931,
+    "liveActors": 32,
+    "learnerError": null
+  }
 }
