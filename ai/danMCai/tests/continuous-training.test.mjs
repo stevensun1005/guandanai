@@ -166,10 +166,15 @@ test('STOP before the first polling tick shuts down without restarting finished 
   );
   let output = '';
   let errors = '';
+  let stopWritten = false;
+  const deadlineUTC = '2026-11-06T23:00:00Z';
   child.stderr.on('data', (chunk) => (errors += chunk));
   child.stdout.on('data', (chunk) => {
     output += chunk;
-    if (output.includes('"kind":"start"')) writeFileSync(join(directory, 'STOP'), '{}');
+    if (!stopWritten && output.includes('"kind":"start"')) {
+      stopWritten = true;
+      writeJSON(join(directory, 'STOP'), { reason: 'authorized-time-limit', deadlineUTC });
+    }
   });
   const timeout = setTimeout(() => child.kill(), 25_000);
   try {
@@ -186,6 +191,10 @@ test('STOP before the first polling tick shuts down without restarting finished 
     const status = JSON.parse(readFileSync(join(directory, 'status.json'), 'utf8'));
     assert.equal(status.stopReason, 'operator-stop');
     assert.deepEqual(status.running, []);
+    const stop = JSON.parse(readFileSync(join(directory, 'STOP'), 'utf8'));
+    assert.equal(stop.reason, 'authorized-time-limit');
+    assert.equal(stop.deadlineUTC, deadlineUTC);
+    assert.equal(stop.code, 0);
   } finally {
     clearTimeout(timeout);
     rmSync(directory, { recursive: true, force: true });

@@ -650,7 +650,7 @@ function shutdown(code, reason = 'operator-stop') {
   state.stopReason = reason;
   persistState();
   event('shutdown', { code });
-  writeJSON(paths.stop, { at: new Date().toISOString(), code });
+  writeJSON(paths.stop, { ...readJSON(paths.stop, {}), at: new Date().toISOString(), code });
   const deadline = Date.now() + 30000;
   const wait = () => {
     if (!children.size || Date.now() > deadline) {
