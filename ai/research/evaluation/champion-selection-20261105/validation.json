@@ -98,7 +98,9 @@
   "formatCheck": "passed",
   "build": {
     "passed": true,
-    "version": "385b43b42d"
+    "version": "cc8bdd6104",
+    "previousWorkingTreeVersion": "385b43b42d",
+    "metadataLineEndingsNormalized": true
   },
   "clintBrowser": {
     "actualRuleReplies": 6,
@@ -187,5 +189,57 @@
     "web/src/ai/model-catalog.mjs": "e3952d188851e73cfe2dbf418334c4b1634d8a8e86f97d45055d9236aefac655",
     "web/src/rule-bot/runtime.mjs": "384bd28f37293d1806e866b78b473ccb25d7d37adce052c083c4bcf45d8812a9",
     "web/src/lobby/bot-setup.js": "df11938d21536c3411b1187fb54a5fb10cdace09050b5e155903a222698c66b2"
+  },
+  "deployment": {
+    "commit": "5b21487e7318d76aa9c9d02d7e7e53177c887e33",
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42050159309",
+    "conclusion": "success",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicBuildVersion": "cc8bdd6104",
+    "observedAt": "2026-11-05T15:04:02.985445+00:00",
+    "defaultId": "009",
+    "menuIds": [
+      "clint-rule",
+      "007",
+      "005",
+      "001",
+      "009",
+      "008"
+    ],
+    "publicMenuViewports": [
+      [
+        1440,
+        1000
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "seatRotationsPerViewport": 4,
+    "publicClintAndWasm": {
+      "actualRuleReplies": 6,
+      "allRuleGameNeuralDownloads": 0,
+      "wasmModels": [
+        "001",
+        "005",
+        "007",
+        "008",
+        "009"
+      ],
+      "fixtureScope": "Eight real opening actions; five controlled compatibility decisions, no strength estimates",
+      "pageErrors": []
+    }
+  },
+  "localPreview": {
+    "url": "http://127.0.0.1:8765/",
+    "version": "cc8bdd6104",
+    "defaultId": "009",
+    "sixOptionsVerified": true,
+    "source": "clean validated build; user source drafts preserved"
   }
 }
