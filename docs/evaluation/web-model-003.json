@@ -57,5 +57,23 @@
       "build": "0272faec67"
     },
     "schedule": "Every 4 hours through Codex heartbeat 4-guanzero"
+  },
+  "deployment": {
+    "commit": "e1f1570eea424aa5bd8acd974220553a0d5a7b04",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/41973819143",
+    "conclusion": "success"
+  },
+  "namingUpdate": {
+    "observedAt": "2026-11-05T05:32:14.079249+00:00",
+    "displayName": "guanzero-adp-gpubatch · 9537步",
+    "run": "guanzero-adp-gpubatch",
+    "step": 9537,
+    "checkpoint": "model-000000009537",
+    "archiveId": "003",
+    "localBrowserVerified": true,
+    "build": "df2358a42d",
+    "nodeTests": 117,
+    "format": "passed",
+    "weightsChanged": false
   }
 }

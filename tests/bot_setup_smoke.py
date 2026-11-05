@@ -20,7 +20,13 @@ with sync_playwright() as p:
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(URL, wait_until="networkidle")
         catalog = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()
-        labels = ['v000000000' if model['source']['version'] == 'P0' else model['source']['version'] for model in catalog['models']]
+        labels = [
+            (f"{model['source']['run']} · {model['source']['step']}步"
+             if model['config'].get('history') == 'guanzero-v1' and model['source'].get('run')
+             else 'v000000000' if model['source']['version'] == 'P0'
+             else model['source']['version'])
+            for model in catalog['models']
+        ]
         assert page.evaluate("typeof G") == "undefined"
         assert page.locator('.mode-btn[aria-pressed="true"]').get_attribute("data-mode") == "solo"
         assert page.locator("#lobbyStatus").get_attribute("role") == "status"

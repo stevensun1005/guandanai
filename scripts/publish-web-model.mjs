@@ -42,6 +42,11 @@ if (option('model')) {
     status: 'experimental-not-heldout-accepted',
   };
 }
+if (option('step') !== undefined) {
+  const step = Number(option('step'));
+  if (!Number.isSafeInteger(step) || step < 0) throw Error('Invalid training step');
+  source.step = step;
+}
 const bytes = await readFile(input),
   digest = sha256(bytes);
 if (source.expectedSHA256 && digest !== source.expectedSHA256)
