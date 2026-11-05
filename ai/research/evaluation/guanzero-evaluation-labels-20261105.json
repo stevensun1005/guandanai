@@ -29,5 +29,88 @@
     "format": "passed",
     "build": "passed"
   },
-  "newStrengthMatches": 0
+  "newStrengthMatches": 0,
+  "activation": {
+    "observedAt": "2026-11-05T22:33:54.342249+00:00",
+    "dashboardLauncher": {
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch",
+      "url": "http://127.0.0.1:8770",
+      "pid": 29860,
+      "sourceRoot": "C:\\guandan-sampler\\work\\guanzero-dashboard-labels-runtime",
+      "commit": "4471101",
+      "evaluationProtocol": "development-500-v1",
+      "modelIdentities": "C:\\guandan-sampler\\work\\guanzero\\evaluation-model-identities.json"
+    },
+    "evaluatorLauncher": {
+      "pid": 10040,
+      "sourceRoot": "C:\\guandan-sampler\\work\\guanzero-evaluation-500-runtime",
+      "commit": "bdb2bbf",
+      "fromBlock": 3,
+      "targetMatchesPerOpponent": 500,
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-gpubatch",
+      "guardianState": "C:\\guandan-sampler\\work\\guanzero\\guardian-status.json",
+      "championRoot": "C:\\guandan-sampler\\work\\guanzero-web-release"
+    },
+    "browserVerified": true,
+    "protectedHashesUnchanged": true,
+    "capturedIdentities": {
+      "65dd1e8d7b0907a94050f595466bc504f86dd61bd92286373bb30432d36ca185": {
+        "sha256": "65dd1e8d7b0907a94050f595466bc504f86dd61bd92286373bb30432d36ca185",
+        "step": 79272,
+        "version": "model-000000079272",
+        "bytes": 6346014,
+        "observedAt": "2026-11-05T22:31:57.528Z",
+        "proof": "full-sha256-of-named-export"
+      },
+      "a32892c6915276f5544c1810d050394e3be79703f06684d6f29b23ea7af37359": {
+        "sha256": "a32892c6915276f5544c1810d050394e3be79703f06684d6f29b23ea7af37359",
+        "step": 79293,
+        "version": "model-000000079293",
+        "bytes": 6346014,
+        "observedAt": "2026-11-05T22:31:57.541Z",
+        "proof": "full-sha256-of-named-export"
+      },
+      "794519106538b59a031533d297490110f8a7e02945f58241a17d09a377a2fed1": {
+        "sha256": "794519106538b59a031533d297490110f8a7e02945f58241a17d09a377a2fed1",
+        "step": 79314,
+        "version": "model-000000079314",
+        "bytes": 6346014,
+        "observedAt": "2026-11-05T22:31:57.550Z",
+        "proof": "full-sha256-of-named-export"
+      },
+      "949ca8806290d62bb0e32d5af0189e99c067abf6a6436cb122931e1d8de17a38": {
+        "sha256": "949ca8806290d62bb0e32d5af0189e99c067abf6a6436cb122931e1d8de17a38",
+        "step": 79333,
+        "version": "model-000000079333",
+        "bytes": 6346014,
+        "observedAt": "2026-11-05T22:31:57.559Z",
+        "proof": "full-sha256-of-named-export"
+      },
+      "f58a7f8d481b547284a0e3cda84cf7f791a91e7c1ad01a13a52b875f2ef35684": {
+        "sha256": "f58a7f8d481b547284a0e3cda84cf7f791a91e7c1ad01a13a52b875f2ef35684",
+        "step": 79353,
+        "version": "model-000000079353",
+        "bytes": 6346014,
+        "observedAt": "2026-11-05T22:31:57.569Z",
+        "proof": "full-sha256-of-named-export"
+      },
+      "32ed84d7d38f36811d2cade50a4caea15edb34fda35ff05aed6a15548270f997": {
+        "sha256": "32ed84d7d38f36811d2cade50a4caea15edb34fda35ff05aed6a15548270f997",
+        "step": 79373,
+        "version": "model-000000079373",
+        "bytes": 6346014,
+        "observedAt": "2026-11-05T22:33:13.451Z",
+        "proof": "full-sha256-of-named-export"
+      }
+    },
+    "displayedNames": [
+      "guanzero-adp-gpubatch-03f7e0709843",
+      "guanzero-adp-gpubatch-77262",
+      "guanzero-adp-gpubatch-88064fb57d04",
+      "guanzero-adp-gpubatch-e211277fa641",
+      "guanzero-adp-gpubatch-f9d57243fa32"
+    ],
+    "trainingPhase": "running",
+    "liveActors": 32
+  }
 }
