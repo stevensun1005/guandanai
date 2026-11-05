@@ -92,6 +92,20 @@
       "markdownFiles": 12,
       "localLinksChecked": 296,
       "broken": []
+    },
+    "postIntegration": {
+      "upstreamCommit": "43d0f2f",
+      "nodeTests": 170,
+      "format": "passed",
+      "build": "f759bd71ee",
+      "preservedBothReportSections": true
+    },
+    "githubWorkflow": {
+      "url": "https://github.com/stevensun1005/guandanai/actions/runs/42112704481",
+      "headSha": "bb12336583c071487f76b1faf143452b27d218d4",
+      "conclusion": "success",
+      "includesProductionBrowserSmoke": true,
+      "includesPagesDeployment": true
     }
   },
   "protectedTrainingAndHistoricalReports": {
@@ -310,5 +324,50 @@
         ]
       }
     }
-  ]
+  ],
+  "finalHealthObservation": {
+    "observedAt": "2026-11-05T21:41:17.520499+00:00",
+    "trainingPhase": "running",
+    "liveActors": 32,
+    "step": 77996,
+    "companionPhase": "evaluating",
+    "progress": [
+      {
+        "opponent": "random",
+        "modelVersion": "model-000000077262",
+        "plannedMatches": 500,
+        "status": "complete",
+        "matches": 500
+      },
+      {
+        "opponent": "rule",
+        "modelVersion": "model-000000077262",
+        "plannedMatches": 500,
+        "status": "complete",
+        "matches": 500
+      },
+      {
+        "opponent": "p0",
+        "modelVersion": "model-000000077262",
+        "plannedMatches": 500,
+        "status": "running",
+        "matches": 8
+      },
+      {
+        "opponent": "clint",
+        "modelVersion": "model-000000077262",
+        "plannedMatches": 500,
+        "status": "running",
+        "matches": 16
+      },
+      {
+        "opponent": "champion",
+        "modelVersion": "model-000000077262",
+        "plannedMatches": 500,
+        "status": "queued",
+        "matches": 0
+      }
+    ],
+    "protectedHashesStillMatch": true
+  }
 }
