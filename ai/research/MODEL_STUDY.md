@@ -997,3 +997,5 @@ Clint Worker 在开发种子 9,201,001–9,201,004 完成四个完整单把的�
 ## 19. GuanZero 网页名称采用连字符
 
 按所有者最新命名要求，网页 GuanZero 两代显示为 **guanzero-adp-gpubatch-44752** 和 **guanzero-adp-gpubatch-27771**。后续版本统一使用 `训练任务名-版本数值`，不再显示“步”或中间圆点。完整检查点、训练步数和权重 SHA 仍保留在来源记录中。此次仅改显示格式，默认本机门控冠军、六项选择、历史归档与既有玩家选择均保持；没有新训练、权重替换或棋力评测。
+
+该命名调整已由 [Pages 工作流 42060324606](https://github.com/stevensun1005/guandanai/actions/runs/42060324606) 发布成功（源提交 `de35b5a`，网页版本 `329bc8b587`）。139 项 Node 测试、格式、构建和 CI 浏览器检查通过；公网菜单及真实浏览器均确认两代名称为 `guanzero-adp-gpubatch-44752`／`guanzero-adp-gpubatch-27771`，默认仍为本机冠军。四小时任务已同步相同命名格式。
