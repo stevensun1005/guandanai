@@ -67,7 +67,7 @@ function render(data) {
     );
   set(
     'description',
-    `${data.actorCount} 个本机采样进程${data.remoteActorSlots?.length ? `、${data.remoteActorSlots.length} 个其他电脑的采样进程` : ''}收集完整比赛，训练进程更新整个价值网络。每 ${data.anchorHours} 小时与初始模型检查，连续两次明显退步会自动停止。`,
+    `${data.actorCount} 个调度器采样进程${data.extraActorCount ? `、${data.extraActorCount} 个额外加入的采样进程${data.fastActorCount ? `（其中 ${data.fastActorCount} 个为 GPU 批量推理的快速进程）` : ''}` : ''}收集完整比赛，训练进程更新整个价值网络。每 ${data.anchorHours} 小时与初始模型检查，连续两次明显退步会自动停止。`,
   );
   const phase = { running: '● 正在训练', stopped: '■ 已停止', unconfirmed: '状态待确认' }[
     data.phase
@@ -118,7 +118,9 @@ function render(data) {
     ...data.processes.map((process) =>
       child(
         'span',
-        label(process.name) + (process.alive === false ? ' · 未运行' : ''),
+        label(process.name) +
+          (process.implementation === 'fast' ? ' · 快速' : '') +
+          (process.alive === false ? ' · 未运行' : ''),
         process.alive === false ? 'offline' : '',
       ),
     ),

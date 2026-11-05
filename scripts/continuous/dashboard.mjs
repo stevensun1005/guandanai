@@ -7,6 +7,7 @@ import { option, readJSON, runPaths } from './lib.mjs';
 import { actorTotals } from './remote.mjs';
 
 const project = fileURLToPath(new URL('../..', import.meta.url));
+const rateSamples = [];
 const assets = fileURLToPath(new URL('./dashboard/', import.meta.url));
 const alive = (pid) => {
   if (!Number.isInteger(pid) || pid < 1) return false;
@@ -39,6 +40,29 @@ export function dashboardSnapshot(run, workspace = project) {
     !status.stoppedAt && supervisorAlive && Number.isFinite(heartbeatAge) && heartbeatAge < 90;
   // Count every actor file, so machines sampling into the shared folder are included.
   const sampled = actorTotals(paths.actors);
+  // Actors started through remote-actors.mjs (other machines or fast actors on this one) are not
+  // in the supervisor's process list; show the ones that are alive or wrote progress recently.
+  const extraActors = sampled.slots
+    .filter((slot) => slot >= (config.actors || 0))
+    .map((slot) => {
+      const actor = readJSON(join(paths.actors, `actor-${slot}.json`), {});
+      const age = (Date.now() - Date.parse(actor.updatedAt)) / 1000;
+      return {
+        name: `actor-${slot}`,
+        implementation: actor.actorImplementation || 'standard',
+        alive: alive(actor.pid) || age < 180,
+      };
+    })
+    .filter((actor) => actor.alive);
+  // The supervisor's rate covers its own slots only, so measure all slots over a rolling window.
+  const now = Date.now();
+  rateSamples.push({ t: now, decisions: sampled.decisions });
+  while (rateSamples.length > 2 && now - rateSamples[0].t > 120_000) rateSamples.shift();
+  const oldest = rateSamples[0];
+  const samplingRate =
+    now - oldest.t >= 20_000
+      ? ((sampled.decisions - oldest.decisions) * 1000) / (now - oldest.t)
+      : null;
   const liveTotals = sampled.slots.length
     ? { matches: sampled.matches, decisions: sampled.decisions, rows: sampled.rows }
     : status.totals || {};
@@ -127,19 +151,22 @@ export function dashboardSnapshot(run, workspace = project) {
         ? readJSON(join(continuousRoot, 'main/status.json'))
         : null,
     actorCount: config.actors,
-    remoteActorSlots: sampled.slots.filter((slot) => slot >= config.actors),
     deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,
-    decisionsPerSecond: status.decisionsPerSecond,
-    processes: (status.running || []).map((name) => {
-      const child =
-        name === 'learner'
-          ? learner
-          : name.startsWith('actor-')
-            ? readJSON(join(paths.actors, `${name}.json`), {})
-            : null;
-      return { name, alive: child ? alive(child.pid) : null };
-    }),
+    decisionsPerSecond: samplingRate ?? status.decisionsPerSecond,
+    extraActorCount: extraActors.length,
+    fastActorCount: extraActors.filter((a) => a.implementation === 'fast').length,
+    processes: (status.running || [])
+      .map((name) => {
+        const child =
+          name === 'learner'
+            ? learner
+            : name.startsWith('actor-')
+              ? readJSON(join(paths.actors, `${name}.json`), {})
+              : null;
+        return { name, alive: child ? alive(child.pid) : null };
+      })
+      .concat(running ? extraActors : []),
     learner,
     latest: status.latest,
     champion: status.champion,
