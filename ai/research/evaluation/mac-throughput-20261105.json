@@ -13711,6 +13711,15 @@
       "build": "dc9e641f73",
       "trainingFrozenSourceUnchanged": true,
       "researchHeadingCollisionResolved": "Keep Mac startup as section 28, renumber concurrent GuanZero labels to 29, add Mac tuning as 30"
+    },
+    "finalConcurrentIntegration": {
+      "remoteCommit": "46027ac",
+      "newFeatureCommit": "8cb1799",
+      "nodePassed": 179,
+      "researchPythonPassed": 9,
+      "format": "passed",
+      "build": "7851a896c9",
+      "trainingFrozenSourceUnchanged": true
     }
   }
 }

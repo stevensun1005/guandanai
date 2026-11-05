@@ -27,7 +27,19 @@
   "validation": {
     "nodeTests": 175,
     "format": "passed",
-    "build": "passed"
+    "build": "passed",
+    "documentationLinks": {
+      "files": 9,
+      "localLinks": 268,
+      "broken": []
+    },
+    "githubWorkflow": {
+      "url": "https://github.com/stevensun1005/guandanai/actions/runs/42122567002",
+      "commit": "3ccc843eb7c0c775b1e75a793427b68cbce6b958",
+      "conclusion": "success",
+      "includesProductionBrowserSmoke": true,
+      "includesPagesDeployment": true
+    }
   },
   "newStrengthMatches": 0,
   "activation": {
@@ -111,6 +123,7 @@
       "guanzero-adp-gpubatch-f9d57243fa32"
     ],
     "trainingPhase": "running",
-    "liveActors": 32
+    "liveActors": 32,
+    "automationRuntimeInstructionsUpdated": true
   }
 }
