@@ -69,6 +69,13 @@
 
 **快速采样进程**：`fast-actor.mjs` 一个进程同时打 48 局，GPU（DirectML）批量推理放在独立线程，并缓存候选生成；同条件下 4 个进程约为标准进程的 2.07 倍（1,220 → 2,530 决策/秒），与原版的等价性已验证，详见[持续训练指南](CONTINUOUS_TRAINING.md#快速采样进程gpu-批量推理)。调度器属于 `gpu-main` 冻结源码，目前只能用 `npm run train:remote -- --run=<运行目录> --slots=<槽> --actor=fast` 启动。**建议**：`gpu-main` 结束后，在新运行开始前给 `supervisor.mjs` 加一个配置项（例如 `actorImplementation: "fast"`），让调度器直接启动快速进程，再开新运行；不要在 `gpu-main` 运行期间修改冻结文件。若要往 `gpu-main` 中途加入快速进程，先征得用户同意，并在报告中作为协议变化记录。
 
+**`gpu-main` 现在的运行方式（2026-11-05 起）**：
+
+- 已于 03:56:54Z 在同一运行目录续跑，调度器的 8 个采样进程全部换成快速进程（`actorImplementation: "fast"`，每进程 48 局，DirectML）；权重、优化器、样本、联赛池、冠军和计数都接着原来的，这次协议变化记录在 `config.protocolHistory` 和研究报告第 7.12 节。
+- 调度器、采样、训练和面板都从**独立运行目录 `D:/vibecoding/guandan-runtime`**（`git worktree`，分离检出）启动，不再从项目根目录启动。不要删除这个目录；更新它之前，先确认新提交没有改动 `config.json` 里 `sourceSHA256` 列出的任何文件，否则调度器会因源码变化停机。
+- 续跑脚本是 `work/continuous/resume-gpu-fast.mjs`；启动记录在运行目录的 `launcher.json`（`restarts` 字段）。
+- 不要再额外加快速进程：12 个快速进程时显卡被推理占满，训练降到约 2 次更新/秒；8 个时训练最快。若要再提速，方向是把所有采样进程的推理集中到一个进程里批量提交，减少和训练进程争用显卡。
+
 ### 还没有的
 
 - **没有任何棋力结论。** 系统还没长期运行过，不知道持续训练能不能变强。
