@@ -3513,6 +3513,26 @@
       "checkpointSHA256": "7bb319e32f686108b3e96374e0bc7e3111abe3bf004f750d0463e3fbd699ce5a",
       "evidence": "ai/research/evaluation/mac-continuation-20261105.json",
       "download": null
+    },
+    {
+      "id": "mac-sampler-tuning-before-4actors-step-686553",
+      "path": "ai/danMCai/runs/mac-20261105/sampler-tuning/before-4actors",
+      "role": "Preserved MPS model and Adam before sampler throughput tuning; not a web promotion",
+      "step": 686553,
+      "policySHA256": "4e1550ccb0b9948ab3682112a81b25685f96c6297761881b809872954a019bf4",
+      "checkpointSHA256": "160ad54792ccf5318f1a97e34102a2e5426d725df2e42e6a4758c66ea8c72ca0",
+      "evidence": "ai/research/evaluation/mac-throughput-20261105.json",
+      "download": null
+    },
+    {
+      "id": "mac-sampler-tuning-cursor-correction-stop-step-686630",
+      "path": "ai/danMCai/runs/mac-20261105/sampler-tuning/cursor-correction-stop",
+      "role": "Preserved MPS model and Adam before sampler throughput tuning; not a web promotion",
+      "step": 686630,
+      "policySHA256": "8bad54374dc85074d5ca236702c6be0ca0cabcd0f09c0ee4fe407ab697efb513",
+      "checkpointSHA256": "dd64a23622502a798abb49eaf06a026085a6d8ff37567bce31fd75cfe0fa16d0",
+      "evidence": "ai/research/evaluation/mac-throughput-20261105.json",
+      "download": null
     }
   ],
   "webModels": {
