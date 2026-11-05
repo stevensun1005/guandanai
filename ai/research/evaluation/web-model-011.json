@@ -86,7 +86,16 @@
       ],
       "localBrowserVerified": true
     },
-    "integratedDocumentationCommit": "02c0c9115abb1dcefbef5a8935166630fa92cd30"
+    "integratedDocumentationCommit": "02c0c9115abb1dcefbef5a8935166630fa92cd30",
+    "postConcurrentIntegration": {
+      "upstreamCommit": "e67266f39f085c7226421f272e817682ffbfaff5",
+      "nodeTests": 172,
+      "format": "passed",
+      "build": "dc9e641f73",
+      "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42116209616",
+      "workflowConclusion": "success",
+      "note": "Reapplied only the unpublished evidence append from an explicit backup; preserved concurrent coach changes without merge conflicts or rewriting published history."
+    }
   },
   "developmentEvidence": {
     "newLegacyBlock": {
@@ -194,6 +203,85 @@
     },
     "new500ReportsAtFreeze": [],
     "existing500ReportsAlreadyArchived": true,
-    "scope": "Separate model snapshots; none are strength acceptance of the published 78087 model"
+    "scope": "Separate model snapshots; none are strength acceptance of the published 78087 model",
+    "completed500RecheckedAtDeployment": true,
+    "unarchivedCompleted500AtDeployment": []
+  },
+  "deployment": {
+    "status": "success",
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42115991487",
+    "sourceCommit": "d9e3d53ce07a2f87481de2568522aa4289f1a77a",
+    "build": "fe4e37a33b",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "publicAsset": {
+      "observedAt": "2026-11-05T21:51:38.894937+00:00",
+      "assetURL": "https://stevensun1005.github.io/guandanai/models/bot-011.onnx",
+      "sha256": "3cb8d3672bb014399cf8500940f6d27506eba0ede9540b46df7c5ac60c4f87a0",
+      "bytes": 6346014,
+      "defaultId": "009",
+      "choices": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人",
+          "kind": "rule"
+        },
+        {
+          "id": "011",
+          "name": "guanzero-adp-gpubatch-78087",
+          "kind": "neural"
+        },
+        {
+          "id": "010",
+          "name": "guanzero-adp-gpubatch-61045",
+          "kind": "neural"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000",
+          "kind": "neural"
+        },
+        {
+          "id": "009",
+          "name": "danMCai-v000293055",
+          "kind": "neural"
+        },
+        {
+          "id": "008",
+          "name": "danMCai-v000091092",
+          "kind": "neural"
+        }
+      ]
+    },
+    "browserMenuVerified": true,
+    "browserSeatDefaults": [
+      "009",
+      "009",
+      "009",
+      "009"
+    ],
+    "trainingHealth": {
+      "observedAt": "2026-11-05T21:52:30.607Z",
+      "phase": "running",
+      "liveActors": 32,
+      "trainingConfigSHA256Unchanged": true,
+      "companionPhase": "evaluating"
+    },
+    "latestPublicVerification": {
+      "observedAt": "2026-11-05T21:55:32.355798+00:00",
+      "build": "dc9e641f73",
+      "sha256": "3cb8d3672bb014399cf8500940f6d27506eba0ede9540b46df7c5ac60c4f87a0",
+      "bytes": 6346014,
+      "sixChoicesVerified": true,
+      "guanzeroNames": [
+        "guanzero-adp-gpubatch-78087",
+        "guanzero-adp-gpubatch-61045"
+      ],
+      "browserSeatDefaults": [
+        "009",
+        "009",
+        "009",
+        "009"
+      ]
+    }
   }
 }
