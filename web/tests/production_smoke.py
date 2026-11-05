@@ -21,6 +21,7 @@ with sync_playwright() as p:
     page.goto(URL, wait_until="networkidle")
     assert page.evaluate("typeof G") == "undefined"
     version = page.locator('meta[name="app-version"]').get_attribute("content")
+    page.wait_for_function("version => document.querySelector('#verTag').textContent.endsWith(version)", arg=version)
     assert page.locator("#verTag").inner_text().endswith(version)
     page.locator("#nick").fill("牌友")
     page.locator('[data-seat="S"]').click()
