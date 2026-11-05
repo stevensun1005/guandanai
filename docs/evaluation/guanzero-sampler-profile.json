@@ -1,0 +1,142 @@
+{
+  "purpose": "development performance probe, not playing-strength evaluation",
+  "profile": {
+    "purpose": "isolated CPU performance development probe, no samples enter training",
+    "modelVersion": 694,
+    "matches": 8,
+    "decisions": 3931,
+    "averageCandidates": 38.10887814805393,
+    "wallSeconds": 28.914477899999998,
+    "decisionsPerSecond": 135.95265367042992,
+    "stageMilliseconds": {
+      "candidates": 4230.873600000079,
+      "policyState": 222.9625000000924,
+      "decisionContext": 56.44419999992533,
+      "advanceRound": 165.6784000001353,
+      "stateEncoding": 189.77549999997063,
+      "historyEncoding": 204.0380000000514,
+      "actionEncoding": 182.96570000009524,
+      "tensorAllocation": 56.66210000007777,
+      "onnxRun": 22470.257800000178,
+      "sampleReencoding": 753.3634000000166
+    },
+    "results": [
+      {
+        "seed": 2980000000,
+        "winner": 1,
+        "rounds": 13,
+        "decisions": 564
+      },
+      {
+        "seed": 2980000001,
+        "winner": 0,
+        "rounds": 11,
+        "decisions": 481
+      },
+      {
+        "seed": 2980000002,
+        "winner": 1,
+        "rounds": 13,
+        "decisions": 562
+      },
+      {
+        "seed": 2980000003,
+        "winner": 0,
+        "rounds": 9,
+        "decisions": 395
+      },
+      {
+        "seed": 2980000004,
+        "winner": 1,
+        "rounds": 8,
+        "decisions": 359
+      },
+      {
+        "seed": 2980000005,
+        "winner": 1,
+        "rounds": 13,
+        "decisions": 604
+      },
+      {
+        "seed": 2980000006,
+        "winner": 1,
+        "rounds": 13,
+        "decisions": 521
+      },
+      {
+        "seed": 2980000007,
+        "winner": 1,
+        "rounds": 10,
+        "decisions": 445
+      }
+    ],
+    "stagePercent": {
+      "candidates": 14.632370726638918,
+      "policyState": 0.7711102402443601,
+      "decisionContext": 0.19521085663429993,
+      "advanceRound": 0.5729946104271013,
+      "stateEncoding": 0.6563338292197579,
+      "historyEncoding": 0.7056603294228992,
+      "actionEncoding": 0.6327823059191231,
+      "tensorAllocation": 0.19596445834520074,
+      "onnxRun": 77.71282565679729,
+      "sampleReencoding": 2.605488512037136
+    }
+  },
+  "batchInference": {
+    "purpose": "compute-only development benchmark; includes GPU transfers, excludes actor IPC and batch wait; CPU actors still running",
+    "checkpointStep": 725,
+    "states": 128,
+    "cpuOrtDecisionsPerSecond": 194.39688049284345,
+    "gpuBatchResults": {
+      "1": {
+        "decisionsPerSecond": 391.2614446502255,
+        "maxAbsoluteError": 2.1457672119140625e-06,
+        "seconds": 1.6357348999008536
+      },
+      "8": {
+        "decisionsPerSecond": 2693.7602817525367,
+        "maxAbsoluteError": 2.384185791015625e-06,
+        "seconds": 0.2375861001200974
+      },
+      "16": {
+        "decisionsPerSecond": 4901.855659381324,
+        "maxAbsoluteError": 2.2649765014648438e-06,
+        "seconds": 0.13056279998272657
+      },
+      "32": {
+        "decisionsPerSecond": 7849.803818920941,
+        "maxAbsoluteError": 2.2649765014648438e-06,
+        "seconds": 0.0815306999720633
+      },
+      "64": {
+        "decisionsPerSecond": 12624.544061587962,
+        "maxAbsoluteError": 2.1457672119140625e-06,
+        "seconds": 0.05069490009918809
+      }
+    },
+    "torch": "2.11.0+cu128",
+    "gpu": "NVIDIA GeForce RTX 4070",
+    "precision": "FP32"
+  },
+  "initialProfileSummary": {
+    "modelVersion": 617,
+    "matches": 8,
+    "decisions": 3199,
+    "seconds": 18.8016084,
+    "onnxWallPercent": 75.1378063,
+    "candidatesWallPercent": 16.2839138
+  },
+  "benchmarkModelSHA256": "43e8243f38e79e6f6a39f04a6e519ff59eafb1ba54dfa3a6648f09f3652e0536",
+  "liveTrainingChanged": false,
+  "limitations": [
+    "Actors and GPU learner continued during measurement; CPU wall times include scheduling contention.",
+    "GPU benchmark includes input/output transfers but excludes interprocess communication, queue wait and gameplay.",
+    "Different pinned model versions generate different matches; the two profiles are independent descriptive probes, not a controlled before/after speed comparison."
+  ],
+  "probeSourceSHA256": {
+    "profile.mjs": "13148e1d2985355e378d42edd585b742ddaa99829de216ee77cc45b7411ae814",
+    "rollout.mjs": "caa241bd12d36c689c488794ffcdb6bb94f7714abe6e00c888ed999facc1506f",
+    "batch_bench.py": "52fe569e2358ab2a14ee8d3407bc41842ebf27daba748b4862e39341c124eef3"
+  }
+}
