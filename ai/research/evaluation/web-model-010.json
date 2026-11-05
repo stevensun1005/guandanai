@@ -89,5 +89,66 @@
     "clintEvidence": "No new completed, unarchived Clint reports; block 2 remains associated with its original frozen model",
     "integratedUpstreamCommit": "99d72d4d0020ae390c6e856300983758c3b16e93"
   },
-  "operationalNote": "Initial metadata decoding used the system locale and failed; retried with explicit UTF-8 on the same frozen model without repinning."
+  "operationalNote": "Initial metadata decoding used the system locale and failed; retried with explicit UTF-8 on the same frozen model without repinning.",
+  "deployment": {
+    "status": "success",
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42074156924",
+    "sourceCommit": "5ebd6600962a958290bf48428ab6b93030b7cdd8",
+    "build": "ca2ee9dba8",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "publicAsset": {
+      "observedAt": "2026-11-05T17:29:59.606739+00:00",
+      "assetURL": "https://stevensun1005.github.io/guandanai/models/bot-010.onnx",
+      "sha256": "6fb37ef5c25059d550fd36d00459af6ddc20d83127da663800663f0457c45fbe",
+      "bytes": 6346014,
+      "catalogKeys": [
+        "models",
+        "defaultId",
+        "choices"
+      ],
+      "choices": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人",
+          "kind": "rule"
+        },
+        {
+          "id": "010",
+          "name": "guanzero-adp-gpubatch-61045",
+          "kind": "neural"
+        },
+        {
+          "id": "007",
+          "name": "guanzero-adp-gpubatch-44752",
+          "kind": "neural"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000",
+          "kind": "neural"
+        },
+        {
+          "id": "009",
+          "name": "danMCai-v000293055",
+          "kind": "neural"
+        },
+        {
+          "id": "008",
+          "name": "danMCai-v000091092",
+          "kind": "neural"
+        }
+      ]
+    },
+    "browserMenuVerified": true,
+    "browserSeatDefaults": [
+      "009",
+      "009",
+      "009",
+      "009"
+    ],
+    "browserGuanzeroNames": [
+      "guanzero-adp-gpubatch-61045",
+      "guanzero-adp-gpubatch-44752"
+    ]
+  }
 }
