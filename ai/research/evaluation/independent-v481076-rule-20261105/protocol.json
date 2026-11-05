@@ -1152,6 +1152,7 @@
     "web/src/ui/rules-dialog.js": "0ab37cd196630ab3509cb15a558678cdcbc977091fa987850b6f52690d97b01b",
     "web/src/ui/selection-status.js": "de6dd19f2837e1e8f210a04f06bd07eefde36cd20e92c459734eb9cee58293ed",
     "web/src/ui/table-pile.js": "304924524de437eaa0c4c92e27c1ef9901daca71998d533e14846fa9e19bfad6",
-    "web/src/ui/table.js": "85132062c90fcc656f68b49865ecd186cc71e9ce918d6f5158c33ca3201e7ab9"
+    "web/src/ui/table.js": "85132062c90fcc656f68b49865ecd186cc71e9ce918d6f5158c33ca3201e7ab9",
+    "ai/local/evaluation/summarize_independent.py": "b0b4b8a0c3d674e4060d0b231152b5c918333f5135b338ac1b3e717d2ed1dd3e"
   }
 }

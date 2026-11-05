@@ -1,0 +1,72 @@
+{
+  "observedAt": "2026-11-05T13:18:17.994Z",
+  "defaultId": "007",
+  "model": {
+    "id": "007",
+    "file": "bot-007.onnx",
+    "sha256": "7ec0450d793b885bb0f7d9c1aa9871fed95df29a6173a8b4c799e1c362027a41",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-007/bot-007.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-gpubatch",
+      "version": "model-000000044752",
+      "status": "experimental-not-heldout-accepted",
+      "step": 44752,
+      "registeredAt": "2026-11-05T13:18:12.809Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "frozenSnapshot": {
+    "frozenAt": "2026-11-05T13:16:20.955332+00:00",
+    "run": "guanzero-adp-gpubatch",
+    "checkpoint": "model-000000044752",
+    "step": 44752,
+    "sha256": "7ec0450d793b885bb0f7d9c1aa9871fed95df29a6173a8b4c799e1c362027a41",
+    "bytes": 6346014,
+    "latest": {
+      "file": "model-000000044752.onnx",
+      "version": 44752,
+      "updatedAt": 1793884540.4677906
+    }
+  },
+  "trainingRunConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "positions": 16,
+      "values": 49,
+      "maxAbsoluteError": 4.470348358154297e-07,
+      "actionMismatches": 0
+    },
+    "checks": {
+      "nodeTests": 119,
+      "pythonGuanZeroTests": 8,
+      "format": "passed",
+      "build": "7b8c4300b0"
+    },
+    "webpage": {
+      "displayName": "guanzero-adp-gpubatch · 44752步",
+      "preservedIds": [
+        "001",
+        "002",
+        "003",
+        "004",
+        "005",
+        "006"
+      ],
+      "localBrowserVerified": true,
+      "newPlayerDefault": "guanzero-adp-gpubatch · 44752步"
+    }
+  }
+}
