@@ -8,6 +8,10 @@ import {
   DEFAULT_BOT_MODEL,
   botModelId,
   botModelName,
+  BOT_CHOICES,
+  CLINT_RULE_ID,
+  botChoiceId,
+  selectableModels,
   validateCatalog,
 } from '../../../web/src/ai/model-catalog.mjs';
 import { modelBytes, sha256 } from '../../publishing/artifacts.mjs';
@@ -20,13 +24,13 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
   assert.equal(validateCatalog(catalog), catalog);
   assert.equal(botModelId('aggressive'), DEFAULT_BOT_MODEL);
   assert.equal(botModelId(BOT_MODELS[0].id), BOT_MODELS[0].id);
-  assert.equal(botModelName('001'), 'v000000000');
+  assert.equal(botModelName('001'), 'danMCai-v000000000');
   for (const model of BOT_MODELS.filter((model) => model.source?.version !== 'P0'))
     assert.equal(
       botModelName(model.id),
       model.config.history === 'guanzero-v1'
         ? `${model.source.run} · ${model.source.step}步`
-        : model.source.version,
+        : 'danMCai-' + model.source.version,
     );
   assert.throws(() =>
     validateCatalog({ ...catalog, models: [...catalog.models, catalog.models[0]] }),
@@ -40,6 +44,58 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
     assert.throws(() =>
       validateCatalog({ ...catalog, models: [{ ...catalog.models[0], ...field }] }),
     );
+});
+
+test('curated menu contains Clint, two GuanZero generations, P0 and the last two gate champions', () => {
+  const choices = BOT_CHOICES.map((m) => m.id);
+  assert.deepEqual(choices, [CLINT_RULE_ID, '007', '005', '001', '009', '008']);
+  assert.equal(DEFAULT_BOT_MODEL, '009');
+  assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
+  assert.equal(botModelName('009'), 'danMCai-v000293055');
+  assert.equal(botChoiceId('006'), DEFAULT_BOT_MODEL);
+  assert.equal(botModelId('006'), '006');
+  assert.equal(botChoiceId(CLINT_RULE_ID), CLINT_RULE_ID);
+  const catalog = {
+    schema: 1,
+    defaultId: DEFAULT_BOT_MODEL,
+    models: structuredClone(BOT_MODELS),
+    selection: { mode: 'champions-v1', localChampions: ['009', '008'] },
+  };
+  const future = {
+    ...catalog,
+    models: [...catalog.models, { ...catalog.models.find((m) => m.id === '007'), id: '010' }],
+  };
+  assert.deepEqual(
+    selectableModels(future).map((m) => m.id),
+    [CLINT_RULE_ID, '010', '007', '001', '009', '008'],
+  );
+  assert.throws(() => validateCatalog({ ...catalog, defaultId: '007' }), /champion selection/);
+});
+
+test('selected local champions are backed by accepted gate records with matching model SHA', async () => {
+  const manifest = JSON.parse(
+    await readFile(
+      new URL(
+        '../../research/evaluation/champion-selection-20261105/champion.json',
+        import.meta.url,
+      ),
+      'utf8',
+    ),
+  );
+  const models = ['008', '009'].map((id) => BOT_MODELS.find((m) => m.id === id));
+  assert.deepEqual(
+    models.map((m) => m.source.version),
+    manifest.history.slice(-2).map((x) => x.version),
+  );
+  for (const model of models) {
+    const proof = model.source.champion;
+    const bytes = await readFile(new URL('../../../' + proof.evidence, import.meta.url));
+    assert.equal(sha256(bytes), proof.evidenceSHA256);
+    const gate = JSON.parse(bytes);
+    assert.equal(gate.decision, 'accept');
+    assert.equal(gate.challenger.sha256, model.sha256);
+    assert.equal(gate.challenger.version, model.source.version);
+  }
 });
 
 test('cached build models must pass the full SHA before they can be served', async () => {

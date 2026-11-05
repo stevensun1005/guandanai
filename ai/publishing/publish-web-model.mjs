@@ -78,7 +78,8 @@ const model = {
   source: { ...source, registeredAt: new Date().toISOString() },
 };
 catalog.models.push(model);
-catalog.defaultId = id;
+// A new archive is not a new champion. The menu policy owns the default pointer.
+catalog.defaultId = catalog.selection?.localChampions[0] || id;
 validateCatalog(catalog);
 const session = await ort.InferenceSession.create(bytes, {
   intraOpNumThreads: 1,
@@ -169,7 +170,7 @@ const artifacts = join(root, 'ai/research/evaluation/model-artifacts.json');
 const index = JSON.parse(await readFile(artifacts, 'utf8'));
 index.webModels = {
   catalog: 'web/src/ai/model-catalog.json',
-  defaultId: id,
+  defaultId: catalog.defaultId,
   models: catalog.models.map(({ id, sha256, url, source }) => ({
     id,
     sha256,
@@ -180,7 +181,7 @@ index.webModels = {
 await writeFile(artifacts, JSON.stringify(index, null, 2) + '\n');
 const evidence = {
   observedAt: new Date().toISOString(),
-  defaultId: id,
+  defaultId: catalog.defaultId,
   model,
   classification: 'Owner-authorized browser deployment; not independent performance acceptance',
   strengthEvaluation: null,
@@ -196,7 +197,7 @@ const report = join(root, 'ai/research/MODEL_STUDY.md');
 await writeFile(
   report,
   (await readFile(report, 'utf8')) +
-    `\n### 网页模型 ${source.version}（归档 ${id}） · ${source.registeredAt || model.source.registeredAt}\n\n按所有者每四小时发布最新可用模型的授权，默认模型更新为 **${source.version}**（归档 ${id}）。来源为 \`${source.run}/${source.version}\`，SHA-256 为 \`${digest}\`。这是部署记录，不是棋力验收：本发布未新增独立评测比赛，胜／负／平及置信区间不适用，不能据此宣称胜率提高或达到 80%。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-${id}.json)。\n`,
+    `\n### 网页模型 ${source.version}（归档 ${id}） · ${source.registeredAt || model.source.registeredAt}\n\n归档完整导出 \`${source.run}/${source.version}\`，SHA-256 为 \`${digest}\`。网页默认编号为 **${catalog.defaultId}**；启用冠军菜单时，归档新检查点不会自动替换冠军。本发布未新增独立评测比赛，不代表棋力验收或胜率提高。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-${id}.json)。\n`,
 );
 console.log(
   JSON.stringify(

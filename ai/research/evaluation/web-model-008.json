@@ -1,0 +1,40 @@
+{
+  "observedAt": "2026-11-05T14:39:20.139455+00:00",
+  "model": {
+    "id": "008",
+    "file": "bot-008.onnx",
+    "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-008/bot-008.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "gpu-main",
+      "version": "v000091092",
+      "step": 91092,
+      "status": "experimental-not-heldout-accepted",
+      "registeredAt": "2026-11-05T14:37:31Z"
+    }
+  },
+  "classification": "Archived previous development-gate champion; not independent held-out acceptance",
+  "strengthEvaluation": null,
+  "publicationRecovery": {
+    "initialPublicVerificationFailed": true,
+    "existingReleaseOverwritten": false,
+    "publicBytes": 5368650,
+    "verifiedPublicSHA256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2"
+  },
+  "stagingDefaultId": "008",
+  "websiteDeployedAtRegistration": false,
+  "defaultId": "009",
+  "nativeOnnx": {
+    "candidateCounts": [
+      1,
+      3,
+      129
+    ],
+    "finiteOutput": true
+  }
+}

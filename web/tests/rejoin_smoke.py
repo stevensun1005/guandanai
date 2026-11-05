@@ -31,6 +31,9 @@ with sync_playwright() as p:
     host.wait_for_function('() => (NET.peerOpen)', timeout=30000)
     code = host.locator("#roomCodeShow").inner_text()
     host.locator("[data-seat=W]").click()
+    host.locator('#botStyleBox summary').click()
+    host.locator('[data-bot-seat=E]').select_option('clint-rule')
+    host.locator('[data-bot-seat=N]').select_option('007')
     host.locator('#levelBtn').click()
     host.locator('[data-lv="12"]').click()
     host.locator('[data-side=EW]').click()
@@ -63,6 +66,8 @@ with sync_playwright() as p:
     host.wait_for_function('() => (NET.humans.size===2)', timeout=10000)
     assert guest.evaluate("NET.off") == 1
     assert host.evaluate(SNAP) == guest.evaluate(SNAP)
+    assert sorted(host.evaluate('botModels')) == sorted(guest.evaluate('botModels'))
+    assert 'clint-rule' in guest.evaluate('botModels')
     assert host.evaluate('G.L') == 12
     assert guest.evaluate('G.levels') == [2,12]
     # Return to the lobby without an intentional seat release, then type the room code again.
@@ -136,7 +141,7 @@ with sync_playwright() as p:
     assert guest.evaluate("NET.mode==='solo'&&NET.off===0")
     solo_before = guest.evaluate("G.log.length")
     for _ in range(300):
-        if guest.evaluate("before=>G.log.length>before", solo_before):
+        if guest.evaluate("before=>G.log.length>before", solo_before) and guest_models:
             break
         guest.evaluate("if(G.clock)G.clock.left=1")
         guest.wait_for_timeout(100)

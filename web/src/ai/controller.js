@@ -1,9 +1,10 @@
 import { runtime } from '../app/runtime.js';
-import { beats } from '../core/combinations.js';
+import { analyze, beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 import { policyState } from './observation.js';
 import { prepareTableDecision } from './table-policy.mjs';
-import { botModel } from './model-catalog.mjs';
+import { botModel, botModelId, CLINT_RULE_ID } from './model-catalog.mjs';
+import { ruleObservation } from '../rule-bot/runtime.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost } from '../game/session.js';
 import { showError } from '../input/controls.js';
@@ -90,7 +91,28 @@ export function initialize() {
         runtime.game === game && runtime.game.tok === tok && runtime.game.log.length === count;
       await check();
       if (!current()) return null;
-      const model = botModel(runtime.botModels?.[(p + runtime.network.off) % 4]);
+      const selected = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
+      if (selected === CLINT_RULE_ID) {
+        const result = await request('rule', ruleObservation(game, p));
+        if (!current()) return null;
+        if (!result) {
+          if (!game.trick) throw Error('invalid-rule-pass');
+          return null;
+        }
+        const cards = result.cards.map((id) => game.hands[p].find((card) => card.id === id));
+        if (
+          cards.some((c) => !c) ||
+          new Set(cards).size !== cards.length ||
+          !analyze(cards, game.L).some(
+            (shape) =>
+              shape.type === result.type && shape.value === result.value && shape.n === result.n,
+          ) ||
+          !beats(result, game.trick?.play)
+        )
+          throw Error('invalid-rule-action');
+        return { ...result, cards };
+      }
+      const model = botModel(selected);
       const prepared = prepareTableDecision(game, p, runtime.network.off, model.config);
       const { plays, state: input } = prepared;
       if (prepared.index != null) return plays[prepared.index];

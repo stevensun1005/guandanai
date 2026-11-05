@@ -6,6 +6,7 @@
 - 完成有结论的实验后更新报告并推送。正结果、负结果、退步及协议变化都保留；只统计实际完成的局数，不把运行计划或开发集峰值写成独立验收。
 - 每项性能结论绑定对手、牌规、单把／整场口径、种子、实际胜／负／平、模型及编码指纹、数据用途和不确定性。区分预测误差、升级分、胜率与浏览器兼容性。
 - 没有新的独立完整比赛证据，不宣称整场 80% 已验证。所有者后续明确授权每 4 小时把最新完整导出模型发布到网页并作为新玩家默认；这是部署授权，不是棋力验收。编号、SHA-256、来源与评测状态必须同步记录，历史模型保留可选。
+- **2026-11-05 最新菜单要求取代上条的默认策略**：仅显示 Clint规则机器人、GuanZero 最近两代、danMCai 初始模型及本机最近两代真实门控冠军，默认本机现任冠军。普通最新导出不能替换冠军；历史权重只保留归档。检查 champion/champion.json、accept 门控证据和 SHA，不能把步数最大当成冠军。danMCai 显示真实版本，例如 danMCai-v000293055。此后不带限定的“规则机器人”指 Clint（rules-v2），历史 original 基线须明确注明。
 - 训练代码、完成的实验与成果索引统一合入 `main`。模型是否成为网页默认权重，仍单独依照独立验收决定。
 - 有限与持续训练可用 `ai/research/tools/update-model-study.py` 更新生成区与证据快照。自动推送仅允许专用干净工作树中的 `ai/research/MODEL_STUDY.md` 与 `ai/research/evaluation/model-study-progress.json`，并须先通过 Node、格式和相关 Python 测试；出现分叉、其他修改或竞争时停止，不强推，不暂存用户的其他文件。
 - 新训练权重和缓冲区留在忽略的 `ai/local/runs/`、`ai/local/checkpoints/`、`ai/local/data/generated/` 与 `ai/guanzero/runs/`，临时现场放 `ai/local/workspace/`，不再往 Git 增加大文件；需要公开的权重通过 GitHub Release 附件及 SHA-256 索引归档。已有历史检查点保留，训练用 Critic 不加入网页默认模型清单。

@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-11-05T14:39:34.773Z",
+  "defaultId": "009",
+  "model": {
+    "id": "009",
+    "file": "bot-009.onnx",
+    "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "gpu-main",
+      "version": "v000293055",
+      "status": "experimental-not-heldout-accepted",
+      "step": 293055,
+      "registeredAt": "2026-11-05T14:39:20.461Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155"
+}

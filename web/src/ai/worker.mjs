@@ -2,6 +2,7 @@ import * as ort from './vendor/ort.wasm.min.mjs';
 import { decideTablePolicy } from './table-policy.mjs';
 import { MODELS } from './models.mjs';
 import { botModel } from './model-catalog.mjs';
+import { decideClintRule } from '../rule-bot/runtime.mjs';
 
 ort.env.wasm.numThreads = 1;
 ort.env.wasm.proxy = false;
@@ -26,12 +27,16 @@ self.onmessage = (event) => {
   const { id, type, state } = event.data;
   queue = queue.then(async () => {
     try {
+      if (type === 'init' || type === 'rule') {
+        self.postMessage({
+          id,
+          result: type === 'init' ? { ready: true } : decideClintRule(state),
+        });
+        return;
+      }
       const model = botModel(state?.modelId);
       const selectedSession = (key) => session(key === 'response' ? key : 'bot:' + model.id);
-      const result =
-        type === 'init'
-          ? (await selectedSession(), { ready: true })
-          : await decideTablePolicy(ort, selectedSession, state, model.config);
+      const result = await decideTablePolicy(ort, selectedSession, state, model.config);
       self.postMessage({ id, result });
     } catch (error) {
       sessions.clear();

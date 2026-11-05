@@ -53,7 +53,7 @@ Use the center of the lobby table to choose a starting level and compass team. T
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
-Choose a training checkpoint name, such as `v000198487`, for each empty seat. New players use the latest published default; saved choices remain available. The owner requests a new complete training export every four hours. Publication is not independent playing-strength acceptance. See [model registration and publishing](./web/docs/WEB_MODELS.md), including how another training machine can add its bot. Small endgames use exact search only when the remaining opponent hand is uniquely determined by public information.
+The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two local gate champions. The default is **danMCai-v000293055**. Gate promotion is development selection, not independent strength acceptance. Four-hour synchronization preserves the local champion default; ordinary exports and GuanZero updates do not replace it. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics.
 
 The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](./web/docs/PRACTICE.md).
 

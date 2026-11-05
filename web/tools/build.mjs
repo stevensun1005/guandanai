@@ -4,7 +4,12 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { MODELS } from '../src/ai/models.mjs';
-import { BOT_MODELS } from '../src/ai/model-catalog.mjs';
+import {
+  BOT_MODELS,
+  BOT_CHOICES,
+  DEFAULT_BOT_MODEL,
+  botModelName,
+} from '../src/ai/model-catalog.mjs';
 import { modelBytes } from '../../ai/publishing/artifacts.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -87,7 +92,19 @@ for (const [file, bytes] of botBytes)
   await writeFile(path.join(root, 'web/dist/models', file), bytes);
 await writeFile(
   path.join(root, 'web/dist/models/catalog.json'),
-  JSON.stringify({ models: BOT_MODELS }, null, 2),
+  JSON.stringify(
+    {
+      models: BOT_MODELS,
+      defaultId: DEFAULT_BOT_MODEL,
+      choices: BOT_CHOICES.map((model) => ({
+        id: model.id,
+        name: botModelName(model.id),
+        kind: model.kind || 'neural',
+      })),
+    },
+    null,
+    2,
+  ),
 );
 await writeFile(path.join(root, 'web/dist/.nojekyll'), '');
 console.log(`Built web/dist/ · version ${version} · browser AI, no inference server`);

@@ -1,0 +1,191 @@
+{
+  "observedAt": "2026-11-05T14:55:26.690406+00:00",
+  "kind": "curated-selection-and-runtime-compatibility",
+  "policy": "champions-v1",
+  "defaultId": "009",
+  "menuIds": [
+    "clint-rule",
+    "007",
+    "005",
+    "001",
+    "009",
+    "008"
+  ],
+  "modelWeights": {
+    "001": {
+      "version": "P0",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "bytes": null,
+      "url": null,
+      "champion": null
+    },
+    "005": {
+      "version": "model-000000027771",
+      "sha256": "ff06717ee04155f780ccca45136f537ffd7704386125a70c91dd04630ae713af",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-005/bot-005.onnx",
+      "champion": null
+    },
+    "007": {
+      "version": "model-000000044752",
+      "sha256": "7ec0450d793b885bb0f7d9c1aa9871fed95df29a6173a8b4c799e1c362027a41",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-007/bot-007.onnx",
+      "champion": null
+    },
+    "008": {
+      "version": "v000091092",
+      "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-008/bot-008.onnx",
+      "champion": {
+        "gate": 104,
+        "acceptedAt": "2026-11-05T01:06:47.980Z",
+        "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00104.json",
+        "evidenceSHA256": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a"
+      }
+    },
+    "009": {
+      "version": "v000293055",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx",
+      "champion": {
+        "gate": 112,
+        "acceptedAt": "2026-11-05T08:11:50.077Z",
+        "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00112.json",
+        "evidenceSHA256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7"
+      }
+    }
+  },
+  "freshStrengthMatches": 0,
+  "frozenTrainingModified": false,
+  "nativeOnnx": {
+    "models": [
+      "008",
+      "009"
+    ],
+    "candidateCounts": [
+      1,
+      3,
+      129
+    ],
+    "inputs": {
+      "state": [
+        1,
+        513
+      ],
+      "actions": [
+        "N",
+        54
+      ]
+    },
+    "output": {
+      "values": [
+        "N",
+        1
+      ]
+    }
+  },
+  "node": {
+    "passed": 134,
+    "failed": 0
+  },
+  "pythonResearch": {
+    "passed": 9,
+    "failed": 0
+  },
+  "formatCheck": "passed",
+  "build": {
+    "passed": true,
+    "version": "385b43b42d"
+  },
+  "clintBrowser": {
+    "actualRuleReplies": 6,
+    "allRuleGameNeuralDownloads": 0,
+    "wasmModels": [
+      "001",
+      "005",
+      "007",
+      "008",
+      "009"
+    ],
+    "fixtureScope": "Eight real opening actions; five controlled compatibility decisions, no strength estimates",
+    "pageErrors": []
+  },
+  "mixedRejoinBrowser": {
+    "hostDirection": "W",
+    "guestDirection": "S",
+    "refreshDuringPrep": true,
+    "manualRoomCodeRecovery": true,
+    "selectedLevelAndOnceRuleSync": true,
+    "refreshDuringInFlightPolicy": true,
+    "stalePolicyCancelled": true,
+    "realGuestActionAfterReturn": true,
+    "dataChannelAutomaticRecovery": true,
+    "unknownSeatRejected": true,
+    "sameCredential": true,
+    "guestAvoidsModelDownload": true,
+    "hostExitOffersSoloContinuation": true,
+    "soloContinuationLoadsLearnedPolicy": true,
+    "pageErrors": [],
+    "clintAndGuanzeroSelectedAndPreserved": true
+  },
+  "menuBrowser": {
+    "viewports": [
+      [
+        1440,
+        1000
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "seatRotationsPerViewport": 4,
+    "oldPreferencesResetOnce": true,
+    "newPreferencesPersist": true,
+    "sixOptionsAndOrdering": true,
+    "pageErrors": []
+  },
+  "productionBrowser": {
+    "successfulModelIds": [
+      "001",
+      "009"
+    ],
+    "globalsHidden": true,
+    "pageErrors": []
+  },
+  "unchangedNeuralCoreSHA256": {
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9"
+  },
+  "evidenceSHA256": {
+    "champion.json": "cdd84dfc3f284917098559d9023b544b9a2c8815542fdb3f2e414bbc8c08c6e7",
+    "gate-00104.json": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a",
+    "gate-00112.json": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7",
+    "gate-00117.json": "f6b412af5193a280f0136e6f4f676a90b33cd82298cc7d706de09b70fbb17c2d"
+  },
+  "automation": {
+    "id": "ai",
+    "intervalHours": 4,
+    "policy": "real local gate champions, not latest export",
+    "updated": true
+  },
+  "routingSHA256": {
+    "web/src/ai/controller.js": "31f94bcfb3900a73b2e8ebc82ed3b6337b48a67e5ccbf4e6e90663bf51f9eb21",
+    "web/src/ai/worker.mjs": "41c4da8ed3c4850f01afcdd870b5e13e796c700b1671e628fc7fc54c7c84d34b",
+    "web/src/ai/model-catalog.mjs": "e3952d188851e73cfe2dbf418334c4b1634d8a8e86f97d45055d9236aefac655",
+    "web/src/rule-bot/runtime.mjs": "384bd28f37293d1806e866b78b473ccb25d7d37adce052c083c4bcf45d8812a9",
+    "web/src/lobby/bot-setup.js": "df11938d21536c3411b1187fb54a5fb10cdace09050b5e155903a222698c66b2"
+  }
+}

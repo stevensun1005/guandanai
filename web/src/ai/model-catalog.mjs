@@ -29,16 +29,38 @@ export function validateCatalog(value) {
     files.add(model.file);
   }
   if (!ids.has(value.defaultId)) throw Error('Missing default model');
+  if (value.selection) {
+    const champions = value.selection.localChampions;
+    if (
+      value.selection.mode !== 'champions-v1' ||
+      !Array.isArray(champions) ||
+      champions.length !== 2 ||
+      new Set(champions).size !== 2 ||
+      champions.some((id) => {
+        const model = value.models.find((m) => m.id === id);
+        return !model || model.config.history || !Number.isInteger(model.source?.champion?.gate);
+      }) ||
+      value.defaultId !== champions[0]
+    )
+      throw Error('Invalid champion selection');
+  }
   return value;
 }
 
 validateCatalog(catalog);
 export const BOT_MODELS = Object.freeze(catalog.models.map((model) => Object.freeze(model)));
 export const DEFAULT_BOT_MODEL = catalog.defaultId;
+export const CLINT_RULE_ID = 'clint-rule';
 export const botModelId = (value) =>
-  BOT_MODELS.some((model) => model.id === value) ? value : DEFAULT_BOT_MODEL;
-export const botModel = (value) => BOT_MODELS.find((model) => model.id === botModelId(value));
+  value === CLINT_RULE_ID || BOT_MODELS.some((model) => model.id === value)
+    ? value
+    : DEFAULT_BOT_MODEL;
+export const botModel = (value) => {
+  if (value === CLINT_RULE_ID) throw Error('Clint rules do not use a neural model');
+  return BOT_MODELS.find((model) => model.id === botModelId(value));
+};
 export const botModelName = (value) => {
+  if (value === CLINT_RULE_ID) return 'Clint规则机器人';
   const model = botModel(value);
   if (model.config.history === 'guanzero-v1' && model.source?.run) {
     const checkpoint = Number.isSafeInteger(model.source.step)
@@ -46,5 +68,26 @@ export const botModelName = (value) => {
       : model.source.version;
     return checkpoint ? `${model.source.run} · ${checkpoint}` : model.source.run;
   }
-  return model.source?.version === 'P0' ? 'v000000000' : model.source?.version || model.id;
+  return (
+    'danMCai-' + (model.source?.version === 'P0' ? 'v000000000' : model.source?.version || model.id)
+  );
 };
+
+export function selectableModels(value) {
+  const models = value.models;
+  if (!value.selection) return models;
+  const guanzero = models
+    .filter((m) => m.config.history === 'guanzero-v1')
+    .slice(-2)
+    .reverse();
+  const baseline = models.find((m) => m.source?.version === 'P0');
+  return [
+    { id: CLINT_RULE_ID, kind: 'rule' },
+    ...guanzero,
+    baseline,
+    ...value.selection.localChampions.map((id) => models.find((m) => m.id === id)),
+  ].filter(Boolean);
+}
+export const BOT_CHOICES = Object.freeze(selectableModels(catalog));
+export const botChoiceId = (value) =>
+  BOT_CHOICES.some((m) => m.id === value) ? value : DEFAULT_BOT_MODEL;

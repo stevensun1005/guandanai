@@ -3507,7 +3507,14 @@
   ],
   "webModels": {
     "catalog": "web/src/ai/model-catalog.json",
-    "defaultId": "007",
+    "defaultId": "009",
+    "selection": {
+      "mode": "champions-v1",
+      "localChampions": [
+        "009",
+        "008"
+      ]
+    },
     "models": [
       {
         "id": "001",
@@ -3593,6 +3600,42 @@
           "status": "experimental-not-heldout-accepted",
           "step": 44752,
           "registeredAt": "2026-11-05T13:18:12.809Z"
+        }
+      },
+      {
+        "id": "008",
+        "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-008/bot-008.onnx",
+        "source": {
+          "run": "gpu-main",
+          "version": "v000091092",
+          "step": 91092,
+          "status": "experimental-not-heldout-accepted",
+          "registeredAt": "2026-11-05T14:37:31Z",
+          "champion": {
+            "gate": 104,
+            "acceptedAt": "2026-11-05T01:06:47.980Z",
+            "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00104.json",
+            "evidenceSHA256": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a"
+          }
+        }
+      },
+      {
+        "id": "009",
+        "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx",
+        "source": {
+          "run": "gpu-main",
+          "version": "v000293055",
+          "status": "experimental-not-heldout-accepted",
+          "step": 293055,
+          "registeredAt": "2026-11-05T14:39:20.461Z",
+          "champion": {
+            "gate": 112,
+            "acceptedAt": "2026-11-05T08:11:50.077Z",
+            "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00112.json",
+            "evidenceSHA256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7"
+          }
         }
       }
     ]
