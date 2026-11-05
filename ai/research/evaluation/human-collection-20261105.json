@@ -170,5 +170,71 @@
     "winRate": null,
     "confidenceInterval": null,
     "claim80Percent": false
+  },
+  "deployment": {
+    "commit": "f453f4e5d310e6452de36769ebcb9dd17fab45c6",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42064133254",
+    "workflowId": 42064133254,
+    "status": "completed",
+    "conclusion": "success",
+    "checks": {
+      "checks": [
+        {
+          "base": "http://127.0.0.1:8765/",
+          "status": 200,
+          "version": "74a5e1aadf",
+          "cloudOriginInCSP": true,
+          "endpointInBundle": true,
+          "defaultId": "009",
+          "archiveIds": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005",
+            "006",
+            "007",
+            "008",
+            "009"
+          ]
+        },
+        {
+          "base": "https://stevensun1005.github.io/guandanai/",
+          "status": 200,
+          "version": "74a5e1aadf",
+          "cloudOriginInCSP": true,
+          "endpointInBundle": true,
+          "defaultId": "009",
+          "archiveIds": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005",
+            "006",
+            "007",
+            "008",
+            "009"
+          ]
+        }
+      ],
+      "collectorHealth": {
+        "status": 200,
+        "body": {
+          "ok": true,
+          "schema": 1
+        }
+      },
+      "anonymousExportStatus": 401
+    },
+    "ciChecks": [
+      "npm test",
+      "npm run format:check",
+      "npm run build",
+      "production browser smoke",
+      "replay security browser smoke"
+    ],
+    "newGenuineHumanGames": 0,
+    "newIndependentStrengthMatches": 0
   }
 }
