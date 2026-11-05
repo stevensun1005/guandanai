@@ -5,7 +5,11 @@ import { MODELS } from '../../../web/src/ai/models.mjs';
 import { prepareTableDecision, decideTablePolicy } from '../../../web/src/ai/table-policy.mjs';
 
 /** Use the installed browser WASM runtime, model encoders and decision code inside Node. */
-export function createTableInference({ policy = null, config = MODELS.policy } = {}) {
+export function createTableInference({
+  policy = null,
+  config = MODELS.policy,
+  runtime = ort,
+} = {}) {
   ort.env.wasm.numThreads = 1;
   ort.env.wasm.proxy = false;
   const sessions = new Map();
@@ -21,8 +25,10 @@ export function createTableInference({ policy = null, config = MODELS.policy } =
       sessions.set(
         key,
         readFile(file).then((bytes) =>
-          ort.InferenceSession.create(bytes, {
-            executionProviders: ['wasm'],
+          runtime.InferenceSession.create(bytes, {
+            ...(runtime === ort
+              ? { executionProviders: ['wasm'] }
+              : { intraOpNumThreads: 1, interOpNumThreads: 1 }),
             graphOptimizationLevel: 'all',
           }),
         ),
@@ -38,7 +44,7 @@ export function createTableInference({ policy = null, config = MODELS.policy } =
       const prepared = prepareTableDecision(game, player, 0, config, profile);
       let index = prepared.index;
       if (index == null) {
-        const result = await decideTablePolicy(ort, session, prepared.state, config);
+        const result = await decideTablePolicy(runtime, session, prepared.state, config);
         index = result.index;
         stats.inferences++;
         stats.candidates += prepared.plays.length;
