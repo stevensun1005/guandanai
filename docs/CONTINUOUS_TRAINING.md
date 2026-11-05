@@ -69,15 +69,52 @@ npm run train:dashboard
    对每个新快照启动门控：与当前冠军配对对局，SPRT 判定是否更替冠军
 ```
 
-| 文件                                                   | 作用                                     |
-| ------------------------------------------------------ | ---------------------------------------- |
-| [supervisor.mjs](../scripts/continuous/supervisor.mjs) | 启动、重启、联赛、快照、门控、停止规则   |
-| [actor.mjs](../scripts/continuous/actor.mjs)           | 采样进程                                 |
-| [learner.py](../scripts/continuous/learner.py)         | 持续训练进程                             |
-| [gate.mjs](../scripts/continuous/gate.mjs)             | 冠军门控                                 |
-| [value_net.py](../scripts/continuous/value_net.py)     | 网络读写与网页兼容的 ONNX 导出           |
-| [lib.mjs](../scripts/continuous/lib.mjs)               | 默认配置、样本格式、PFSP、SPRT、种子区间 |
-| [status.mjs](../scripts/continuous/status.mjs)         | 进度摘要                                 |
+| 文件                                                         | 作用                                     |
+| ------------------------------------------------------------ | ---------------------------------------- |
+| [supervisor.mjs](../scripts/continuous/supervisor.mjs)       | 启动、重启、联赛、快照、门控、停止规则   |
+| [actor.mjs](../scripts/continuous/actor.mjs)                 | 采样进程                                 |
+| [learner.py](../scripts/continuous/learner.py)               | 持续训练进程                             |
+| [gate.mjs](../scripts/continuous/gate.mjs)                   | 冠军门控                                 |
+| [value_net.py](../scripts/continuous/value_net.py)           | 网络读写与网页兼容的 ONNX 导出           |
+| [lib.mjs](../scripts/continuous/lib.mjs)                     | 默认配置、样本格式、PFSP、SPRT、种子区间 |
+| [status.mjs](../scripts/continuous/status.mjs)               | 进度摘要                                 |
+| [remote-actors.mjs](../scripts/continuous/remote-actors.mjs) | 局域网内另一台电脑的采样进程启动器       |
+| [remote.mjs](../scripts/continuous/remote.mjs)               | 代码指纹核对、统计全部采样槽             |
+
+## 局域网内另一台电脑一起采样
+
+训练进程、门控和联赛池只在运行调度进程的主电脑上；另一台电脑只跑**采样进程**，从共享文件夹读最新模型、把样本分片写回同一个运行目录。显卡训练常常在等 CPU 打牌，多一台电脑的 CPU 能直接增加数据量。
+
+### 主电脑
+
+1. 正常启动运行，例如 `npm run train:continuous -- --run=work/continuous/gpu-main`。
+2. 在资源管理器里右键运行目录（例如 `D:\vibecoding\guandan\work\continuous\gpu-main`）→「属性」→「共享」→「高级共享」，勾选「共享此文件夹」，在「权限」里给另一台电脑登录用的账户「更改」和「读取」权限。
+3. 记下共享路径，例如 `\\主电脑名\gpu-main`。
+
+### 另一台电脑
+
+1. 安装 Node.js 20.19 以上；不需要 Python，也不需要显卡。
+2. 克隆仓库，切到**与主电脑运行时相同的提交**，执行 `npm ci`。启动器会按运行配置里冻结的代码指纹逐个核对，不一致就拒绝启动。
+3. 把共享文件夹映射为盘符（资源管理器 →「此电脑」→「映射网络驱动器」），例如 `Z:`。
+4. 启动采样，编号选主电脑没用的槽：主电脑占用 `0` 到 `actors-1`（`gpu-main` 是 0–7），可用范围到 39。一般每个 CPU 核心一个，留一两个核心给系统：
+
+```bash
+npm run train:remote -- --run=Z:/ --slots=8-13
+```
+
+### 启动器做什么
+
+- 拒绝主电脑自己的槽，以及另一台电脑在 3 分钟内还在使用的槽（`actors/claim-<槽>.json` 记录占用的电脑名和心跳）。
+- 采样进程崩溃或网络中断后按退避重启；主电脑创建 `STOP` 时等待，调度进程恢复后自动继续。
+- 每个槽有独占的种子区间，并沿用运行配置的 `actorSeedOffset`，两台电脑不会打重复的牌局。
+- 事件写入 `actors/remote-<电脑名>.jsonl`，记录电脑名、槽、代码提交与重启原因。
+- 按 Ctrl+C 只停这台电脑。尚未写出的分片（最多一个 `shardSeconds` 间隔）会丢弃；被强制结束时占用记录会留下，3 分钟后失效，同一台电脑可以立即重新占用。
+
+### 统计口径
+
+调度进程的 `status.json` 只统计本机槽。`npm run train:status`、实时面板与 `scripts/update-model-study.py` 改为汇总运行目录里全部 `actor-*.json`，报告另记 `actorSlots`、`remoteActorHosts` 和 `supervisorLocalTotals`，所以远程打的比赛会计入实际完成场数。联赛 PFSP 统计和训练进程本来就读取全部采样槽的结果与分片。
+
+不要用 OneDrive 等网盘同步代替共享文件夹：网盘可能先同步清单、后同步数据，训练进程会把未传完的分片当作坏分片丢弃。
 
 ## 训练目标
 

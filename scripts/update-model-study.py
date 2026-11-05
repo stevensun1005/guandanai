@@ -100,6 +100,40 @@ def continuous_evaluation(path, kind):
     }
 
 
+def actor_totals(directory, fallback):
+    """Sum every actor-<slot>.json, including actors on other machines that share the run folder.
+
+    The supervisor's own status only counts its local slots, so remote sampling would be missing.
+    """
+    actors = directory / "actors"
+    files = sorted(actors.glob("actor-*.json")) if actors.exists() else []
+    if not files:
+        return dict(fallback), []
+    totals = {"matches": 0, "decisions": 0, "rows": 0}
+    slots = []
+    for path in files:
+        try:
+            data = read(path)
+        except (OSError, ValueError):
+            continue
+        slots.append(int(path.stem.split("-")[1]))
+        for key in totals:
+            totals[key] += int(data.get(key) or 0)
+    return totals, sorted(slots)
+
+
+def remote_hosts(directory):
+    actors = directory / "actors"
+    hosts = {}
+    for path in sorted(actors.glob("claim-*.json")) if actors.exists() else []:
+        try:
+            claim = read(path)
+        except (OSError, ValueError):
+            continue
+        hosts.setdefault(claim.get("host"), []).append(claim.get("slot"))
+    return {host: sorted(s for s in slots if s is not None) for host, slots in hosts.items()}
+
+
 def continuous_snapshot(directory):
     config = read(directory / "config.json")
     status = read(directory / "status.json") if (directory / "status.json").exists() else {}
@@ -111,6 +145,7 @@ def continuous_snapshot(directory):
         continuous_evaluation(p, "anchor")
         for p in sorted((directory / "anchor").glob("anchor-*.json"))
     ]
+    totals, slots = actor_totals(directory, status.get("totals", {}))
     history = []
     for entry in champion.get("history", []):
         gate = next(
@@ -143,7 +178,10 @@ def continuous_snapshot(directory):
         "stoppedAt": status.get("stoppedAt"),
         "stopReason": status.get("stopReason"),
         "elapsedSeconds": status.get("elapsedSeconds"),
-        "totals": status.get("totals", {}),
+        "totals": totals,
+        "actorSlots": slots,
+        "remoteActorHosts": remote_hosts(directory),
+        "supervisorLocalTotals": status.get("totals", {}),
         "learner": status.get("learner", {}),
         "latest": status.get("latest"),
         "champion": {**champion, "history": history},

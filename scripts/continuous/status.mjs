@@ -1,6 +1,7 @@
 /** Print a short human-readable summary of a continuous training run. */
 import { existsSync } from 'node:fs';
 import { option, readJSON, runPaths } from './lib.mjs';
+import { actorTotals } from './remote.mjs';
 
 const primary = existsSync('work/continuous/gpu-main/config.json')
   ? 'work/continuous/gpu-main'
@@ -13,13 +14,15 @@ const learner = status.learner || {};
 const champion = status.champion || {};
 const league = readJSON(paths.leagueMeta, { members: [], stats: {} });
 const pct = (a, b) => (b ? `${((100 * a) / b).toFixed(1)}%` : '-');
+const sampled = actorTotals(paths.actors);
+if (!sampled.slots.length) Object.assign(sampled, status.totals || {});
 const lines = [
   `运行目录      ${paths.root}`,
   `网络训练设备  ${learner.deviceName || config.learner?.device || 'CPU'}`,
   `更新时间      ${status.updatedAt}${status.stoppedAt ? `（已停止 ${status.stoppedAt}）` : ''}`,
   `运行中进程    ${(status.running || []).join(', ') || '无'}`,
   `累计运行      ${status.elapsedSeconds == null ? '尚无累计计时' : (status.elapsedSeconds / 3600).toFixed(3) + ' 小时'}；停止原因 ${status.stopReason || '无'}`,
-  `采样          ${status.totals?.matches ?? 0} 场整场，${status.totals?.decisions ?? 0} 个决策，约 ${status.decisionsPerSecond ?? '-'} 决策/秒`,
+  `采样          ${sampled.matches} 场整场，${sampled.decisions} 个决策（采样槽 ${sampled.slots.join(',') || '-'}），本机约 ${status.decisionsPerSecond ?? '-'} 决策/秒`,
   `训练          第 ${learner.step ?? 0} 步，缓冲 ${learner.buffer ?? 0} 行，重放比 ${learner.replayRatio?.toFixed?.(2) ?? '-'}，损失 ${learner.lossEMA?.toFixed?.(4) ?? '-'}（${learner.state ?? '-'}）`,
   `最新模型      ${status.latest?.version ?? '-'}`,
   `冠军          ${champion.version ?? '-'}（更替 ${Math.max(0, (champion.history?.length || 1) - 1)} 次）`,

@@ -41,6 +41,24 @@ class ModelStudyTests(unittest.TestCase):
             status_path.write_text(json.dumps(status))
             self.assertNotEqual(study.publication_signal(workspace), interrupted)
 
+    def test_continuous_totals_include_remote_actor_slots(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary) / "run"
+            directory.mkdir()
+            self.continuous_fixture(directory)
+            actors = directory / "actors"
+            actors.mkdir()
+            for slot, matches in ((0, 5), (1, 4), (9, 6)):
+                (actors / f"actor-{slot}.json").write_text(
+                    json.dumps({"matches": matches, "decisions": 10 * matches, "rows": 9})
+                )
+            (actors / "claim-9.json").write_text(json.dumps({"slot": 9, "host": "laptop"}))
+            snapshot = study.continuous_snapshot(directory)
+            self.assertEqual(snapshot["totals"], {"matches": 15, "decisions": 150, "rows": 27})
+            self.assertEqual(snapshot["actorSlots"], [0, 1, 9])
+            self.assertEqual(snapshot["remoteActorHosts"], {"laptop": [9]})
+            self.assertEqual(snapshot["supervisorLocalTotals"]["matches"], 7)
+
     def continuous_fixture(self, directory):
         for child in ("gate", "anchor", "champion"):
             (directory / child).mkdir()

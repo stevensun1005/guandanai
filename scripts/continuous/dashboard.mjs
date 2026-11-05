@@ -4,6 +4,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { option, readJSON, runPaths } from './lib.mjs';
+import { actorTotals } from './remote.mjs';
 
 const project = fileURLToPath(new URL('../..', import.meta.url));
 const assets = fileURLToPath(new URL('./dashboard/', import.meta.url));
@@ -36,16 +37,10 @@ export function dashboardSnapshot(run, workspace = project) {
   const supervisorAlive = alive(status.pid);
   const running =
     !status.stoppedAt && supervisorAlive && Number.isFinite(heartbeatAge) && heartbeatAge < 90;
-  const actors = Array.from({ length: config.actors || 0 }, (_, slot) =>
-    readJSON(join(paths.actors, `actor-${slot}.json`)),
-  ).filter(Boolean);
-  const liveTotals = actors.length
-    ? Object.fromEntries(
-        ['matches', 'decisions', 'rows'].map((key) => [
-          key,
-          actors.reduce((sum, actor) => sum + (actor[key] || 0), 0),
-        ]),
-      )
+  // Count every actor file, so machines sampling into the shared folder are included.
+  const sampled = actorTotals(paths.actors);
+  const liveTotals = sampled.slots.length
+    ? { matches: sampled.matches, decisions: sampled.decisions, rows: sampled.rows }
     : status.totals || {};
   const reporter = readJSON(join(workspace, 'work/continuous/reporter-launcher.json'), {});
   const evidence =
@@ -132,6 +127,7 @@ export function dashboardSnapshot(run, workspace = project) {
         ? readJSON(join(continuousRoot, 'main/status.json'))
         : null,
     actorCount: config.actors,
+    remoteActorSlots: sampled.slots.filter((slot) => slot >= config.actors),
     deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,
     decisionsPerSecond: status.decisionsPerSecond,
