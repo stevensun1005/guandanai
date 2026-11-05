@@ -20,7 +20,8 @@
     "train:continuous": "node scripts/continuous/supervisor.mjs",
     "train:status": "node scripts/continuous/status.mjs",
     "train:dashboard": "node scripts/continuous/dashboard.mjs",
-    "train:remote": "node scripts/continuous/remote-actors.mjs"
+    "train:remote": "node scripts/continuous/remote-actors.mjs",
+    "train:guanzero": "node scripts/guanzero/run.mjs"
   },
   "dependencies": {
     "onnxruntime-web": "1.31.1",
