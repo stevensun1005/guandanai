@@ -187,5 +187,43 @@
       "005"
     ],
     "independentStrengthMatchesAdded": 0
+  },
+  "deployment": {
+    "verifiedAtUTC": "2026-11-05T13:01:23.410277+00:00",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "buildVersion": "82b29b0ca5",
+    "defaultId": "006",
+    "defaultObservedInFreshBrowser": true,
+    "modelNames": [
+      "v000000000",
+      "v000198487",
+      "guanzero-adp-gpubatch · 9537步",
+      "v000331516",
+      "guanzero-adp-gpubatch · 27771步",
+      "v000481076"
+    ],
+    "pageErrors": [],
+    "onlineModelSHA256": {
+      "001": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "002": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+      "003": "15ae4809731d843fdfca74ba5a5bd1cc30ed00cb2de9f110ee1ca0299a12127b",
+      "004": "a806747de50a46f76bd8b4d5de189411b902f3b46531e040daf19c76fdbd7da7",
+      "005": "ff06717ee04155f780ccca45136f537ffd7704386125a70c91dd04630ae713af",
+      "006": "6a31c7a9e80498fb13adc2bd210583686de5c59abe68a7eb8b1d7d1f6d06b0da"
+    },
+    "commit": "f65b72a3b0b76b612b2d054bcec4b05da31a0688",
+    "workflowRun": 42031592492,
+    "workflowConclusion": "success",
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42031592492",
+    "onlineBrowser": {
+      "productionGlobalsHidden": true,
+      "policyTurns": 2,
+      "successfulModelIds": [
+        "001",
+        "006"
+      ],
+      "pageErrors": []
+    },
+    "newStrengthMatchesAdded": 0
   }
 }
