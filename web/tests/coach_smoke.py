@@ -33,8 +33,14 @@ def score_checks(page):
     assert page.evaluate('r=>JSON.stringify(r.hand)===JSON.stringify(G.hands[0].map(c=>c.id))', page.evaluate('coachProbe.requests.at(-1)'))
     assert page.evaluate('()=>{const r=coachProbe.requests.at(-1);return r.selfLevel===G.levels[0]&&r.opponentLevel===G.levels[1]}')
     assert page.evaluate("coachProbe.requests.every(s=>!('hands' in s)&&s.counts.length===4)")
+    page.wait_for_function("()=>document.querySelectorAll('#coachTop5 .coach-choice').length>0")
+    assert 1 <= page.locator('#coachTop5 .coach-choice').count() <= 5
+    assert page.evaluate('coachAssisted()') is True, 'Top 5 exposure must mark assistance even before selection'
     values = first['values']; high=max(range(len(values)),key=lambda i:values[i]); low=min(range(len(values)),key=lambda i:values[i])
     def pick(ids): page.evaluate('ids=>{sel=new Set(ids);renderHand()}', ids)
+    page.locator('#coachTop5 .coach-choice').first.click()
+    assert sorted(page.evaluate('[...sel]')) == sorted(first['actions'][high])
+    page.screenshot(path=str(OUT/'top5-preview.png'))
     pick(first['actions'][high]); page.wait_for_function("() => document.querySelector('#coachPreview').textContent.includes('合理性 100%')")
     if max(values)-min(values)>=1e-6:
         pick(first['actions'][low]); assert '合理性 0%' in page.locator('#coachPreview').inner_text()
@@ -57,7 +63,7 @@ def score_checks(page):
     page.wait_for_function("() => document.querySelector('#coachPreview').textContent.includes('合理性 100%')",timeout=60000)
     assert page.evaluate('coachAssisted()') is True
     assert page.evaluate('coachProbe.terminated') >= 2
-    return {'modelId':first['modelId'],'candidates':len(values),'minValue':min(values),'maxValue':max(values),'viewTeamLevelsChecked':True,'teamLevels':page.evaluate('()=>{const r=coachProbe.requests.at(-1);return {self:r.selfLevel,opponent:r.opponentLevel}}'),'relativeExtremaChecked':True,'selectionUsesCachedValues':True,'invalidSelectionNotRated':True,'disabledStaleReplyIgnored':True,'injectedFailureNotScored':True,'retrySucceeded':True}, first['actions'][high]
+    return {'modelId':first['modelId'],'candidates':len(values),'minValue':min(values),'maxValue':max(values),'topFiveVisible':True,'topFiveClickSelectsOnly':True,'topFiveExposureMarked':True,'viewTeamLevelsChecked':True,'teamLevels':page.evaluate('()=>{const r=coachProbe.requests.at(-1);return {self:r.selfLevel,opponent:r.opponentLevel}}'),'relativeExtremaChecked':True,'selectionUsesCachedValues':True,'invalidSelectionNotRated':True,'disabledStaleReplyIgnored':True,'injectedFailureNotScored':True,'retrySucceeded':True}, first['actions'][high]
 
 def layouts(page):
     result=[]
@@ -66,8 +72,10 @@ def layouts(page):
         box=page.locator('#coachPanel').bounding_box();assert box and box['x']>=0 and box['y']>=0 and box['x']+box['width']<=w+1 and box['y']+box['height']<=h
         overlaps=page.evaluate("""()=>{const a=document.querySelector('#coachPanel').getBoundingClientRect();return [...document.querySelectorAll('#btns .btn')].some(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1})}""")
         assert not overlaps, 'evaluation panel overlaps play controls'
+        side=page.locator('#coachSuggestions').bounding_box();assert side and side['x']>=0 and side['y']>=0 and side['x']+side['width']<=w+1 and side['y']+side['height']<=h+1
+        assert not page.evaluate("""()=>{const a=document.querySelector('#coachSuggestions').getBoundingClientRect();return [...document.querySelectorAll('#btns .btn')].some(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1})}"""), 'Top 5 overlaps play controls '+str((w,h,side,page.evaluate("[...document.querySelectorAll('#btns .btn')].map(e=>({id:e.id,box:e.getBoundingClientRect().toJSON()}))")))
         page.screenshot(path=str(OUT/f'coach-{w}.png'))
-        result.append({'width':w,'height':h,'panelInViewport':True,'actionButtonsOverlap':False,'bounds':box})
+        result.append({'width':w,'height':h,'panelInViewport':True,'actionButtonsOverlap':False,'topFiveInViewport':True,'topFiveOverlapsActions':False,'bounds':box})
     page.set_viewport_size({'width':1280,'height':850})
     return result
 
@@ -80,6 +88,8 @@ with sync_playwright() as p:
         return c
     if '--solo-only' in sys.argv:
         c=context();page=c.new_page();page.goto(URL+'?test=1',wait_until='networkidle')
+        page.locator('#coachStartEnabled').wait_for(state='visible')
+        page.locator('#coachStartEnabled').check();page.locator('#coachStartEnabled').uncheck()
         page.locator('#nick').fill('Coach');page.locator('[data-seat=S]').click();page.locator('#sitBtn').click()
         page.evaluate("""()=>{G.tok++;const deck=makeDeck();G.hands=[0,1,2,3].map(p=>deck.slice(p*27,p*27+27));Object.assign(G,{phase:'play',turn:0,trick:null,log:[],out:[],seen:[],paused:true,clock:null,myOrder:[],fixed:[],fresh:[]});render()}""")
         report['scoring'],ids=score_checks(page)

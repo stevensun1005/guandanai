@@ -19,6 +19,7 @@ import { renderClocks } from './clocks.js';
 import { renderSelectionStatus } from './selection-status.js';
 import { renderPublicHistory } from './history-dialog.js';
 import { renderCoach } from '../coach/controller.js';
+import { renderPrivateTable } from '../private-table/controller.js';
 import { syncPauseBtn } from './overlays.js';
 import {
   PASS_Y,
@@ -273,6 +274,7 @@ export function renderControls() {
     confirm: !!runtime.confirmation,
   });
   renderCoach();
+  renderPrivateTable();
 }
 
 // the table speaks for itself: only things you could not otherwise see get a line here

@@ -12,6 +12,7 @@ import { VERSION } from '../network/protocol.js';
 import { $ } from '../ui/cards.js';
 import { hideOverlay, showPanel } from '../ui/overlays.js';
 import { setMsg } from '../ui/table.js';
+import { privateSeat, markPrivateTable, oracleObservation } from '../private-table/state.mjs';
 
 export let TableBot;
 
@@ -91,6 +92,30 @@ export function initialize() {
         runtime.game === game && runtime.game.tok === tok && runtime.game.log.length === count;
       await check();
       if (!current()) return null;
+      if (privateSeat(runtime, p)) {
+        markPrivateTable(runtime);
+        const result = await request('oracle', oracleObservation(game, p));
+        if (!current()) return null;
+        const index = result.values.indexOf(Math.max(...result.values));
+        const ids = result.actions[index];
+        if (!ids?.length) {
+          if (!game.trick) throw Error('invalid-oracle-pass');
+          return null;
+        }
+        const cards = ids.map((id) => game.hands[p].find((card) => card.id === id));
+        const expected = result.shapes[index];
+        const shape =
+          cards.every(Boolean) &&
+          analyze(cards, game.L).find(
+            (s) =>
+              s.type === expected?.type &&
+              s.value === expected.value &&
+              s.n === expected.n &&
+              beats(s, game.trick?.play),
+          );
+        if (!shape) throw Error('invalid-oracle-action');
+        return { ...shape, cards };
+      }
       const selected = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
       if (selected === CLINT_RULE_ID) {
         const result = await request('rule', ruleObservation(game, p));

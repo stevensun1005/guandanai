@@ -52,7 +52,9 @@ import * as recovery from './network/recovery.js';
 import * as startup from './app/startup.js';
 import { runtime } from './app/runtime.js';
 import * as collection from './collection/client.js';
+import * as collectionRecord from './collection/record.mjs';
 import * as coach from './coach/controller.js';
+import * as privateTable from './private-table/controller.js';
 
 policyController.initialize();
 handValue.initialize();
@@ -100,11 +102,15 @@ rooms.initialize();
 recovery.initialize();
 collection.initialize();
 coach.initialize();
+privateTable.initialize();
 startup.initialize();
 
 if (new URLSearchParams(location.search).get('test') === '1') {
   const features = [
     coach,
+    collection,
+    collectionRecord,
+    privateTable,
     policyController,
     cards,
     combinations,

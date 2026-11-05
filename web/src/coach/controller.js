@@ -1,15 +1,18 @@
 import { runtime } from '../app/runtime.js';
 import { analyze, beats, strength } from '../core/combinations.js';
-import { TYPE_NAME } from '../core/cards.js';
+import { TYPE_NAME, makeDeck, cardText } from '../core/cards.js';
 import { VERSION } from '../network/protocol.js';
 import { $ } from '../ui/cards.js';
 import { layoutHand } from '../hand/layout.js';
+import { renderHand } from '../hand/view.js';
+import { privateActive, oracleObservation } from '../private-table/state.mjs';
 import {
   COACH_MODEL_NAME,
   coachAllowed,
   coachObservation,
   actionKey,
   relativeRating,
+  rankedCoachActions,
 } from './evaluation.mjs';
 
 let enabled = false,
@@ -17,11 +20,19 @@ let enabled = false,
   current,
   previous,
   requestId = 0,
-  timer;
+  timer,
+  topOpen = true;
+const deck = makeDeck();
 const pending = new Map(),
   exposures = new WeakMap();
-const available = () => !runtime.reviewMode && coachAllowed(runtime.network.mode, runtime.rules);
-const sameTurn = (s, g) => s?.game === g && s.tok === g.tok && s.count === g.log.length;
+const available = () =>
+  !runtime.reviewMode &&
+  (coachAllowed(runtime.network.mode, runtime.rules) || privateActive(runtime));
+const sameTurn = (s, g) =>
+  s?.game === g &&
+  s.tok === g.tok &&
+  s.count === g.log.length &&
+  s.epoch === (runtime.privateEpoch || 0);
 let fitting = false;
 function fitCoach() {
   if (fitting) return;
@@ -40,6 +51,17 @@ function fitCoach() {
       }
       const width = `${Math.max(160, Math.floor(right - box.left))}px`;
       if (panel.style.width !== width) panel.style.width = width;
+      const popup = $('#coachSuggestions').getBoundingClientRect();
+      let ceiling = box.top;
+      for (const button of document.querySelectorAll('#btns .btn')) {
+        const b = button.getBoundingClientRect();
+        if (b.width && b.height && b.right > popup.left && b.left < popup.right)
+          ceiling = Math.min(ceiling, b.top);
+      }
+      document.documentElement.style.setProperty(
+        '--coach-popup-bottom',
+        `${Math.max(8, innerHeight - ceiling + 8)}px`,
+      );
     }
     fitting = false;
   });
@@ -84,9 +106,11 @@ function startSnapshot(game) {
     game,
     tok: game.tok,
     count: game.log.length,
+    epoch: runtime.privateEpoch || 0,
     observation: coachObservation(game),
     scores: new Map(),
   };
+  if (privateActive(runtime)) s.observation.oracle = oracleObservation(game);
   current = s;
   clearTimeout(timer);
   // Wait for the selection gesture; there is only one full candidate evaluation per local turn.
@@ -95,7 +119,10 @@ function startSnapshot(game) {
     void request(s.observation)
       .then((r) => {
         s.values = r.values;
+        s.actions = r.actions;
+        s.search = r.search;
         r.actions.forEach((ids, i) => s.scores.set(actionKey(ids), r.values[i]));
+        s.ranked = rankedCoachActions(s.actions, s.values, game.L, 5, s.observation.trick?.play);
       })
       .catch(() => {
         s.error = true;
@@ -124,6 +151,17 @@ function grade(s, action) {
         .then((r) => {
           s.scores.set(key, r.values[0]);
           s.values.push(r.values[0]);
+          s.actions.push(r.actions[0]);
+          if (s.search) {
+            s.search.evaluated = s.actions.length;
+          }
+          s.ranked = rankedCoachActions(
+            s.actions,
+            s.values,
+            s.observation.level,
+            5,
+            s.observation.trick?.play,
+          );
         })
         .catch(() => {
           s.error = true;
@@ -166,12 +204,28 @@ export function renderCoach() {
   toggle.textContent = enabled ? '出牌评价：开' : '出牌评价：关';
   const visible = enabled && permitted && game && ['play', 'roundEnd', 'over'].includes(game.phase);
   panel.hidden = !visible;
+  document.body.classList.toggle('has-coach', !!visible);
+  $('#coachSuggestions').hidden = !visible || !topOpen;
+  $('#coachTopToggle').setAttribute('aria-expanded', String(topOpen));
+  $('#coachTopToggle').textContent = topOpen ? '收起 Top 5' : '展开 Top 5';
+  $('#coachModel').textContent =
+    `${COACH_MODEL_NAME}${privateActive(runtime) ? ' · 明牌推演' : ''} · 相对分，非胜率`;
   if (!visible) {
     stopWorker();
     current = previous = null;
+    $('#coachTop5').replaceChildren();
     return;
   }
-  if (previous && (previous.snapshot.game !== game || previous.snapshot.tok !== game.tok))
+  if (current && current.epoch !== (runtime.privateEpoch || 0)) {
+    stopWorker();
+    current = previous = null;
+  }
+  if (
+    previous &&
+    (previous.snapshot.game !== game ||
+      previous.snapshot.tok !== game.tok ||
+      previous.snapshot.epoch !== (runtime.privateEpoch || 0))
+  )
     previous = null;
   const myTurn = game.phase === 'play' && game.turn === 0 && runtime.network.humans.has(0);
   let preview = '轮到你时预评';
@@ -184,8 +238,14 @@ export function renderCoach() {
         ? `${action.label} · ${grade(s, action)}`
         : '选牌查看合理性';
     if (preview.includes('合理性 ') && s.values && !s.error && !action?.invalid)
-      exposures.set(game, { game, tok: game.tok, count: game.log.length });
+      exposures.set(game, {
+        game,
+        tok: game.tok,
+        count: game.log.length,
+        epoch: runtime.privateEpoch || 0,
+      });
   }
+  renderTop5(myTurn ? current : null, game);
   $('#coachPreview').textContent = preview;
   $('#coachLast').textContent = previous
     ? `上一手 ${previous.action.label} · ${grade(previous.snapshot, previous.action)}`
@@ -193,7 +253,69 @@ export function renderCoach() {
   $('#coachRetry').hidden = !(current?.error || previous?.snapshot.error);
   fitCoach();
 }
-function setEnabled(value) {
+function renderTop5(s, game) {
+  const list = $('#coachTop5');
+  const status = $('#coachTopStatus');
+  if (!s?.values || s.error) {
+    list.replaceChildren();
+    status.textContent = s?.error
+      ? '评价不可用，可重试'
+      : s
+        ? '正在比较合法出法…'
+        : '轮到你时显示推荐';
+    return;
+  }
+  const top = s.ranked;
+  status.textContent = s.search
+    ? `明牌推演 ${s.search.horizon} 步 · 已评估 ${s.search.evaluated} 种出法`
+    : `已比较 ${s.actions.length} 个候选 · 点击选牌，不会自动打出`;
+  list.replaceChildren(
+    ...top.map((row, index) => {
+      const item = document.createElement('li'),
+        button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'coach-choice';
+      button.classList.toggle('selected', actionKey(row.ids) === actionKey([...runtime.selection]));
+      const heading = document.createElement('span');
+      heading.className = 'coach-choice-heading';
+      const name = document.createElement('strong');
+      name.textContent = `${index + 1}. ${row.ids.length ? TYPE_NAME[row.shape?.type] || '出牌' : '过牌'}`;
+      const score = document.createElement('b');
+      score.textContent = `${relativeRating(s.values, row.value).percent}%`;
+      heading.append(name, score);
+      button.append(heading);
+      const cards = document.createElement('span');
+      cards.className = 'coach-choice-cards';
+      for (const id of row.ids) {
+        const card = deck[id],
+          chip = document.createElement('span');
+        chip.className = 'coach-card';
+        chip.classList.toggle('red', card.s === 'H' || card.s === 'D' || card.r === 17);
+        chip.textContent = cardText(card);
+        cards.append(chip);
+      }
+      if (!row.ids.length) cards.textContent = '本轮不跟牌';
+      button.append(cards);
+      button.onclick = () => {
+        if (!enabled || !available() || !sameTurn(s, runtime.game) || runtime.game.turn !== 0)
+          return;
+        runtime.selection = new Set(row.ids);
+        renderHand();
+      };
+      item.append(button);
+      return item;
+    }),
+  );
+  if (top.length && !$('#coachSuggestions').hidden)
+    exposures.set(game, {
+      game,
+      tok: game.tok,
+      count: game.log.length,
+      epoch: runtime.privateEpoch || 0,
+    });
+}
+export const coachIsEnabled = () => enabled;
+export function setCoachEnabled(value) {
   enabled = !!value;
   try {
     localStorage.setItem('guandan-coach-v1', String(enabled));
@@ -210,9 +332,22 @@ export function initialize() {
   } catch {}
   $('#coachModel').textContent = `${COACH_MODEL_NAME} · 相对分，非胜率`;
   $('#coachToggle').onclick = () => {
-    if (available()) setEnabled(!enabled);
+    if (available()) setCoachEnabled(!enabled);
   };
-  $('#coachClose').onclick = () => setEnabled(false);
+  $('#coachClose').onclick = () => setCoachEnabled(false);
+  $('#coachTopToggle').onclick = () => {
+    topOpen = !topOpen;
+    if (topOpen && innerWidth < 1400) $('#privateHands').open = false;
+    renderCoach();
+  };
+  $('#coachSuggestionsClose').onclick = () => {
+    topOpen = false;
+    renderCoach();
+  };
+  document.addEventListener('coach-collapse-suggestions', () => {
+    topOpen = false;
+    renderCoach();
+  });
   $('#coachRetry').onclick = () => {
     stopWorker();
     current = previous = null;

@@ -1,0 +1,348 @@
+{
+  "kind": "test",
+  "observedAtUTC": "2026-11-05T20:27:50.802612+00:00",
+  "baseCommit": "ce0ff5cfe4f6a81bf044bb2d5549bab20ff7bd1d",
+  "buildVersion": "f759bd71ee",
+  "strengthMatches": 0,
+  "completedStrengthRounds": 0,
+  "trainingUpdatesFromThisFeature": 0,
+  "sourceHashConvention": "UTF-8 CRLF normalized to LF",
+  "sourceSHA256": {
+    "web/src/coach/controller.js": "51cb6dfc922e1832f665a4e6722729f586b54b50d9e49b280ecbc5b13edb872a",
+    "web/src/coach/evaluation.mjs": "237d8e72daef69862a9986a079d16ead2e5cb31623b6991423c77c01f6052b67",
+    "web/src/coach/oracle.mjs": "cb9b746681f18722d688829bb4359624675bd7888edd8c5c4e2246e6cab9eae7",
+    "web/src/private-table/state.mjs": "a20ea80b86bfed0a08eefc01330046a1f8b66dbdb4fb1c6f9fea8493e3cee6c0",
+    "web/src/private-table/controller.js": "278c7dced3689d9323e55e55c26a9273c6cad4713f1145b74815b68608ebe3a8",
+    "web/src/ai/controller.js": "e15b165b2f661fd44a551e76f3ca99d20f90047d8e5c67b5184429bda5f06f72",
+    "web/src/ai/worker.mjs": "82126a74eba8e99e8692e37d4ff1e76e32d6e0e283ebdfed039a608b89da5952",
+    "web/src/collection/client.js": "d0b7974a2ec28bc7233e6fedbfb3de3b19be605cf399d402e9376afa40d4776d",
+    "web/tests/oracle.test.mjs": "686097de155e373c36faf538cebd865772c3306e137e9cbb1bfc8ee0786f3b03",
+    "web/tests/coach_smoke.py": "d1fa1510e545d3f654805e48cc745492be0d9850f6ee5e66b75aa1aabebfeed2",
+    "web/tests/private_table_smoke.py": "23170b5e4db88df349ae8d5d25a369e59f27492d36900545ba617cf23f5508b3"
+  },
+  "unchangedCoreSHA256": {
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2"
+  },
+  "unchangedCatalog": true,
+  "defaultModelId": "009",
+  "championSelection": [
+    "009",
+    "008"
+  ],
+  "model": {
+    "id": "009",
+    "version": "v000293055",
+    "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb"
+  },
+  "ordinaryScoring": {
+    "kind": "relative-action-value-range",
+    "probability": false,
+    "candidateSetUnchanged": true,
+    "topFiveGroupsRankPlanAndWildcardReading": true,
+    "clickSelectsOnly": true
+  },
+  "privateSearch": {
+    "separateTrainedModel": false,
+    "rootDistinctPlans": 8,
+    "addPassAndImmediateFinish": true,
+    "horizonPlies": 4,
+    "softBudgetMs": 1800,
+    "minimumCompletedBranches": 5,
+    "leaf": "signed maximum champion Q for current player",
+    "terminal": "actual team upgrade points",
+    "opponentsInRollout": "champion greedy approximation, not actual opponent policy",
+    "timingExcludes": "initial prior inference, model loading and session initialization",
+    "noStrengthClaim": true
+  },
+  "tests": {
+    "node": {
+      "passed": 163,
+      "failed": 0,
+      "skipped": 0
+    },
+    "python": {
+      "research": 9,
+      "independentSummary": 2
+    },
+    "format": "passed",
+    "build": "passed",
+    "browser": {
+      "solo": {
+        "kind": "test",
+        "strengthMatches": 0,
+        "trainingUpdates": 0,
+        "scoring": {
+          "modelId": "009",
+          "candidates": 1295,
+          "minValue": -1.8912172317504883,
+          "maxValue": 0.3650972843170166,
+          "topFiveVisible": true,
+          "topFiveClickSelectsOnly": true,
+          "topFiveExposureMarked": true,
+          "viewTeamLevelsChecked": true,
+          "teamLevels": {
+            "self": 2,
+            "opponent": 2
+          },
+          "relativeExtremaChecked": true,
+          "selectionUsesCachedValues": true,
+          "invalidSelectionNotRated": true,
+          "disabledStaleReplyIgnored": true,
+          "injectedFailureNotScored": true,
+          "retrySucceeded": true
+        },
+        "postMoveRetained": true,
+        "layouts": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 656.203125,
+              "width": 954,
+              "height": 53
+            }
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 626,
+              "width": 302,
+              "height": 61
+            }
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 165.0625,
+              "width": 672,
+              "height": 46
+            }
+          }
+        ],
+        "pageErrors": []
+      },
+      "rooms": {
+        "kind": "test",
+        "strengthMatches": 0,
+        "trainingUpdates": 0,
+        "hostDeniedEnforced": true,
+        "scoring": {
+          "modelId": "009",
+          "candidates": 34,
+          "minValue": -0.4094163477420807,
+          "maxValue": 1.0472897291183472,
+          "topFiveVisible": true,
+          "topFiveClickSelectsOnly": true,
+          "topFiveExposureMarked": true,
+          "viewTeamLevelsChecked": true,
+          "teamLevels": {
+            "self": 2,
+            "opponent": 7
+          },
+          "relativeExtremaChecked": true,
+          "selectionUsesCachedValues": true,
+          "invalidSelectionNotRated": true,
+          "disabledStaleReplyIgnored": true,
+          "injectedFailureNotScored": true,
+          "retrySucceeded": true
+        },
+        "postMoveRetained": true,
+        "independentPlayerPreferences": true,
+        "assistedEventMarked": true,
+        "realPeerJSDataChannel": true,
+        "hostWGuestS": true,
+        "layouts": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 656.203125,
+              "width": 954,
+              "height": 53
+            }
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 580,
+              "width": 302,
+              "height": 61
+            }
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "panelInViewport": true,
+            "actionButtonsOverlap": false,
+            "topFiveInViewport": true,
+            "topFiveOverlapsActions": false,
+            "bounds": {
+              "x": 16,
+              "y": 165.0625,
+              "width": 672,
+              "height": 46
+            }
+          }
+        ],
+        "rejoinRestoresPermissionAndPreference": true,
+        "pageErrors": []
+      },
+      "private": {
+        "kind": "test",
+        "strengthMatches": 0,
+        "completedRounds": 0,
+        "trainingUpdates": 0,
+        "realPeerJS": true,
+        "hostOnlyNicknameGate": true,
+        "guestSameNameDenied": true,
+        "noPrivateRuleFlagBroadcast": true,
+        "privateCoach": {
+          "modelId": "009",
+          "search": {
+            "candidates": 406,
+            "evaluated": 8,
+            "horizon": 4,
+            "elapsedMs": 272,
+            "fullInformation": true
+          }
+        },
+        "partnerUsesOracle": true,
+        "opponentStaysRules": true,
+        "neuralOpponentUsesOnlyPublicObservation": true,
+        "manualOutsideBeamRated": true,
+        "offRestoresPartnerRules": true,
+        "privateHandsMatchHeldCounts": true,
+        "constructedCompletionExcluded": true,
+        "uploads": 0,
+        "layouts": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "topFiveInViewport": true
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "topFiveInViewport": true
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "topFiveInViewport": true
+          }
+        ],
+        "pageErrors": []
+      },
+      "production": {
+        "productionGlobalsHidden": true,
+        "successfulModelIds": [
+          "001",
+          "009"
+        ],
+        "pageErrors": []
+      },
+      "replaySecurity": {
+        "importedResultEscaped": true,
+        "priorResultEscaped": true,
+        "replayResultEscaped": true,
+        "pageErrors": []
+      },
+      "modelSetup": {
+        "sizes": [
+          [
+            1440,
+            1000
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            844,
+            390
+          ]
+        ],
+        "rotationsPerSize": 4,
+        "preferencesPersisted": true,
+        "pageErrors": []
+      }
+    }
+  },
+  "frozenTraining": {
+    "configSHA256": "04d991c00e3558a60a1a41d737fc24f0dd6ba1eb676ed2696667cb487a3c0646",
+    "sourceHashesChecked": 32,
+    "allSourcesMatch": true,
+    "resourceBudget": {
+      "reserveGB": 4,
+      "resumeGB": 5
+    },
+    "modifiedByThisFeature": false
+  },
+  "negativeResults": [
+    {
+      "failure": "Top 5 overlapped phone action button",
+      "resolution": "Anchor compact popover above intersecting controls; three sizes pass"
+    },
+    {
+      "failure": "Options menu behind recommendation panel",
+      "resolution": "Preserve header positioning and raise open-menu stacking order"
+    },
+    {
+      "failure": "Private panel covered team-level pills",
+      "resolution": "Position below actual score bounds"
+    },
+    {
+      "failure": "Smoke harness checked lobby checkbox before initialization",
+      "resolution": "Explicit visible wait; not counted as gameplay or strength failure"
+    }
+  ],
+  "dataIsolation": {
+    "ordinaryTopFiveNumericExposure": "assisted=true before action",
+    "privateGameObjects": "exclude subsequent rounds even after disabling",
+    "cloudProtocolChanged": false,
+    "rawHandsCommitted": false,
+    "frozenTrainingIngestionChanged": false
+  },
+  "deployment": {
+    "status": "not-yet-attempted-for-this-source",
+    "priorPagesBlock": "old deployment lock; old website preserved"
+  },
+  "desktopObservation": {
+    "observedAtUTC": "2026-11-05T20:27:50.529Z",
+    "freeGiB": 9.46371078491211,
+    "networkAlert": false
+  }
+}

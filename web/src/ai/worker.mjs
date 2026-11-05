@@ -5,6 +5,7 @@ import { botModel } from './model-catalog.mjs';
 import { decideClintRule } from '../rule-bot/runtime.mjs';
 import { COACH_MODEL_ID, prepareCoachPolicy } from '../coach/evaluation.mjs';
 import { inferPolicy } from './policy-inference.mjs';
+import { scoreOracle } from '../coach/oracle.mjs';
 
 ort.env.wasm.numThreads = 1;
 ort.env.wasm.proxy = false;
@@ -29,6 +30,22 @@ self.onmessage = (event) => {
   const { id, type, state } = event.data;
   queue = queue.then(async () => {
     try {
+      if (type === 'oracle' || (type === 'coach' && state.oracle)) {
+        const model = botModel(COACH_MODEL_ID);
+        const engine = await session('bot:' + model.id);
+        const observation = state.oracle
+          ? {
+              ...state.oracle,
+              ...(state.onlyAction !== undefined ? { onlyAction: state.onlyAction } : {}),
+            }
+          : state;
+        const result = await scoreOracle(
+          observation,
+          async (input) => (await inferPolicy(ort, engine, input, model.config)).values,
+        );
+        self.postMessage({ id, result: { ...result, modelId: model.id } });
+        return;
+      }
       if (type === 'coach') {
         const model = botModel(COACH_MODEL_ID),
           input = prepareCoachPolicy(state);
@@ -40,7 +57,12 @@ self.onmessage = (event) => {
         );
         self.postMessage({
           id,
-          result: { actions: input.actions, values: scored.values, modelId: model.id },
+          result: {
+            actions: input.actions,
+            values: scored.values,
+            shapes: input.actionShapes,
+            modelId: model.id,
+          },
         });
         return;
       }

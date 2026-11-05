@@ -50,7 +50,7 @@ export function renderBotSetup() {
   $('#mixedBotsBtn').disabled = joining;
   $('#botSetupNote').textContent = joining
     ? '由房主设置；玩家离开后的空位沿用对应模型。'
-    : `仅影响电脑空位。默认使用本地现任冠军 ${botModelName(DEFAULT_BOT_MODEL)}。Clint规则机器人不使用神经网络。`;
+    : `仅影响电脑空位。默认使用danMCai 现任冠军 ${botModelName(DEFAULT_BOT_MODEL)}。Clint规则机器人不使用神经网络。`;
 }
 
 export function initialize() {

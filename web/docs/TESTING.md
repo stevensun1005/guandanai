@@ -174,3 +174,5 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 固定整场 2v2 使用 `node ai/danMCai/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/danMCai/tests/fixed-evaluation.test.mjs` 和 `python ai/danMCai/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/danMCai/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。
 
 出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。它们是功能兼容性测试，不计作棋力样本。
+
+Top 5：`coach_smoke.py` 检查开局开关、最多五种方案、点击只选牌、展示辅助标记与三种尺寸不遮挡按钮。`private_table_smoke.py` 使用真实 PeerJS 验证本机资格、同名加入者不启用、队友明牌推演、规则与网络对手普通输入、关闭恢复，以及构造结算探针的采集排除；不是完成棋力比赛。

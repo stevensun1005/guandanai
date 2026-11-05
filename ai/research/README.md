@@ -29,3 +29,5 @@
 [完整对照报告](reports/champion-clint-latest-20261105.md)：两组共 4,000 场已完成，最新冻结导出未显示超越冠军，保留负结果与不确定性。[出牌评价验证](evaluation/move-coach-20261105.json)另记功能兼容性，不是强度证据。
 
 名称与路径统一：[danMCai 迁移证据](evaluation/danmcai-naming-20261105.json) · [兼容说明](STRUCTURE_MIGRATION.md#danmcai-名称与规范路径)。
+
+[Top 5 与独立完整牌面推演](evaluation/coach-top5-private-20261105.json)：记录普通评分、主机／队友／对手分支隔离、数据排除和浏览器兼容性，详见主报告第 24 节。没有新增训练或完整强度比赛，不能据此声称胜率提高。

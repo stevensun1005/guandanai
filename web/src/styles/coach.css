@@ -63,3 +63,216 @@
     font-size: 12px;
   }
 }
+
+/* Recommendations live beside the table; compact screens use a bounded popover above the hand. */
+.coach-panel {
+  border-color: rgba(221, 176, 80, 0.35);
+  background: linear-gradient(120deg, #193f32, #102d25);
+}
+#coachPreview {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.coach-suggestions {
+  position: fixed;
+  z-index: 35;
+  right: 12px;
+  bottom: var(--coach-popup-bottom, 220px);
+  width: min(310px, calc(100vw - 24px));
+  max-height: min(330px, 43dvh);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #102e26;
+  border: 1px solid rgba(221, 176, 80, 0.35);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 16px 45px #061c18a8;
+}
+.coach-suggestions header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.coach-suggestions header small {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 0.17em;
+}
+.coach-suggestions h2 {
+  margin: 4px 0 0;
+  font-size: 18px;
+  font-family: var(--font-display);
+}
+.coach-suggestions h2 span {
+  color: var(--gold);
+  font: 10px var(--font-ui);
+  letter-spacing: 0.06em;
+}
+#coachTopStatus,
+.coach-footnote {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+#coachTop5 {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  gap: 7px;
+}
+.coach-choice {
+  width: 100%;
+  text-align: left;
+  color: var(--ink);
+  font: inherit;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #ffffff05;
+  cursor: pointer;
+}
+.coach-choice:hover,
+.coach-choice:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  background: #ffffff0b;
+}
+.coach-choice.selected {
+  border-color: var(--gold);
+  background: #ddb05016;
+}
+.coach-choice-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+.coach-choice-heading b {
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.coach-choice-cards,
+.private-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 7px;
+  font-size: 11px;
+}
+.coach-card {
+  display: inline-block;
+  padding: 3px 4px;
+  border-radius: 4px;
+  color: #233b30;
+  background: #f4eee2;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.coach-card.red {
+  color: #ad2837;
+}
+.private-hands {
+  position: fixed;
+  z-index: 36;
+  left: 12px;
+  top: 65px;
+  width: 170px;
+  max-height: 45dvh;
+  overflow: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: #102e26;
+  padding: 10px;
+  box-shadow: 0 12px 30px #061c1870;
+}
+.private-hands[open] {
+  width: min(300px, calc(100vw - 24px));
+}
+.private-hands summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+}
+.private-hands summary span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+}
+.private-hands-heading {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  margin-top: 10px;
+}
+.private-hands small {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 11px;
+}
+#privateHandRows section {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  margin-top: 10px;
+}
+#privateHandRows strong {
+  font-size: 12px;
+}
+.lobby-box {
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (min-width: 1100px) and (min-height: 620px) {
+  body.has-coach #app {
+    max-width: 1480px;
+    padding-right: 292px;
+  }
+  .coach-suggestions {
+    top: 82px;
+    bottom: auto;
+    width: 258px;
+    right: max(12px, calc((100vw - 1480px) / 2 + 16px));
+    max-height: calc(100dvh - 104px);
+  }
+}
+@media (min-width: 1400px) and (min-height: 620px) {
+  body.has-private #app {
+    max-width: 1740px;
+    padding-left: 272px;
+  }
+  .private-hands,
+  .private-hands[open] {
+    left: max(12px, calc((100vw - 1740px) / 2 + 16px));
+    top: 82px;
+    width: 238px;
+    max-height: calc(100dvh - 104px);
+  }
+  body.has-private .coach-suggestions {
+    right: max(12px, calc((100vw - 1740px) / 2 + 16px));
+  }
+}
+@media (max-height: 500px) {
+  .coach-suggestions {
+    padding: 9px;
+    max-height: max(36px, calc(100dvh - var(--coach-popup-bottom, 220px) - 8px));
+  }
+  .coach-suggestions h2 {
+    font-size: 14px;
+  }
+  .coach-footnote {
+    display: none;
+  }
+  .private-hands {
+    top: 45px;
+    max-height: calc(100dvh - 105px);
+  }
+}
+
+.bar:has(.optmenu:not([hidden])) {
+  z-index: 65;
+}

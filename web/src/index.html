@@ -126,6 +126,8 @@
               ><button class="link" id="historyBtn">牌谱与战况</button
               ><button class="link tog" id="coachToggle" aria-pressed="false" hidden>
                 出牌评价：关</button
+              ><button class="link tog" id="privateTableToggle" aria-pressed="false" hidden>
+                明牌工具：关</button
               ><button class="link tog" id="sfxBtn" aria-pressed="true">音效</button
               ><button class="link" id="cardBackBtn" title="点一下换牌背：大雁、枫叶、花纹">
                 牌背：<span id="backName">大雁</span></button
@@ -248,6 +250,15 @@
             title="当前候选的最高模型值为100%，最低为0%；没有明显分差时同为100%。这不是正确概率、胜率或置信度。"
           ></small>
           <button class="link" id="coachRetry" hidden>重试</button>
+          <button
+            class="link"
+            id="coachTopToggle"
+            type="button"
+            aria-controls="coachSuggestions"
+            aria-expanded="true"
+          >
+            收起 Top 5
+          </button>
           <button class="link" id="coachClose" aria-label="关闭出牌评价" title="关闭出牌评价">
             ×
           </button>
@@ -257,6 +268,14 @@
           <output id="coachLast"></output>
         </div>
       </aside>
+      <details class="private-hands" id="privateHands" hidden>
+        <summary>明牌工具 <span>仅本机视图</span></summary>
+        <div class="private-hands-heading">
+          <small>本队电脑与辅助使用冠军网络的有限明牌推演</small
+          ><button class="link" id="privateHandsClose" type="button">收起</button>
+        </div>
+        <div id="privateHandRows"></div>
+      </details>
       <div class="handwrap">
         <div class="btns" id="btns">
           <button class="btn primary round" id="playBtn">出牌</button>
@@ -339,6 +358,14 @@
           <label><input type="checkbox" id="coachRoomAllowed" />允许玩家使用出牌评价</label>
           <small id="coachRoomNote"></small>
         </div>
+        <div class="coach-room" id="coachStartBox">
+          <label><input type="checkbox" id="coachStartEnabled" />启用我的出牌评价与 Top 5</label>
+          <small id="coachStartNote"></small>
+        </div>
+        <div class="coach-room" id="privateTableBox" hidden>
+          <label><input type="checkbox" id="privateTableAllowed" />明牌工具（本机）</label>
+          <small>本队电脑与出牌评价可使用完整牌面，对手电脑保持普通视角。</small>
+        </div>
         <div class="lobby-join" id="joinRow" hidden>
           <input
             class="lobby-nick"
@@ -416,6 +443,20 @@
     </dialog>
 
     <!-- PeerJS: browser-to-browser connections for playing with friends (room codes) -->
+    <aside class="coach-suggestions" id="coachSuggestions" aria-label="Top 5 推荐出牌" hidden>
+      <header>
+        <div>
+          <small>CHAMPION INSIGHT</small>
+          <h2>推荐出牌 <span>TOP 5</span></h2>
+        </div>
+        <button class="link" id="coachSuggestionsClose" type="button" aria-label="收起推荐出牌">
+          ×
+        </button>
+      </header>
+      <p id="coachTopStatus" role="status"></p>
+      <ol id="coachTop5"></ol>
+      <p class="coach-footnote">百分数是本回合的模型相对分，不是胜率；推荐只选牌，不替你出牌。</p>
+    </aside>
     <script src="./assets/vendor/peerjs.min.js"></script>
     <script type="module" src="./assets/app.js?v=__APP_VERSION__"></script>
   </body>

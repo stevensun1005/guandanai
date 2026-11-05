@@ -4,6 +4,7 @@ import { botModel, botModelId, CLINT_RULE_ID } from '../ai/model-catalog.mjs';
 import { captureDeal, captureStart, captureAction, completedRecord } from './record.mjs';
 import { indexedStore, UploadQueue } from './outbox.mjs';
 import config from './config.json' with { type: 'json' };
+import { privateWasUsed } from '../private-table/state.mjs';
 
 let queue;
 function context() {
@@ -27,6 +28,7 @@ export const collectStarted = () => captureStart(runtime.game, context());
 export const collectAction = (p, play, automatic, assisted) =>
   captureAction(runtime.game, p, play, { ...context(), automatic, assisted });
 export function collectCompleted() {
+  if (privateWasUsed(runtime.game)) return;
   const record = completedRecord(runtime.game, context());
   if (record && queue) void queue.enqueue(record).catch(() => {});
 }
@@ -36,6 +38,11 @@ export function initialize() {
     store: indexedStore(globalThis.indexedDB),
     endpoint: config.endpoint,
     onStatus: ({ pending, storageFailed, saved }) => {
+      if (privateWasUsed(runtime.game) && !pending) {
+        status.hidden = false;
+        status.textContent = '本场牌谱未参与采集';
+        return;
+      }
       status.hidden = !(
         pending ||
         (runtime.network.mode === 'host' && runtime.network.humans.size >= 2)

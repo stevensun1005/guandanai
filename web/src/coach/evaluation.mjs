@@ -4,12 +4,46 @@ import { policyState } from '../ai/observation.js';
 import { candidates } from '../ai/candidates.js';
 import { cardsArray } from '../ai/encoding.mjs';
 import { makeDeck, isWild } from '../core/cards.js';
-import { analyze, beats } from '../core/combinations.js';
+import { analyze, beats, strength } from '../core/combinations.js';
 
 export const COACH_MODEL_ID = catalog.selection.danMCaiChampions[0];
 export const COACH_MODEL_NAME = botModelName(COACH_MODEL_ID);
 export const coachAllowed = (mode, rules) => mode === 'solo' || rules?.coachAllowed === true;
 export const actionKey = (ids) => cardsArray(ids).join(',');
+const coachDeck = makeDeck();
+/** Use the same strongest legal reading as the selected-card UI. */
+export function coachReading(ids, level, current) {
+  if (!ids.length) return null;
+  const cards = ids.map((id) => coachDeck[id]);
+  const shape = analyze(cards, level)
+    .filter((s) => beats(s, current))
+    .sort((a, b) => strength(b) - strength(a))[0];
+  if (!shape) throw Error('Illegal coach action');
+  return { ...shape, cards, wu: cards.filter((card) => isWild(card, level)).length };
+}
+
+/** One representative per rank/shape plan; keep the best suit choice and real held IDs. */
+export function rankedCoachActions(actions, values, level, limit = 5, current) {
+  if (actions.length !== values.length || !values.every(Number.isFinite))
+    throw Error('Invalid ranked actions');
+  const plans = new Map(),
+    readings = new Map();
+  actions.forEach((ids, index) => {
+    const exact = actionKey(ids);
+    if (!readings.has(exact)) readings.set(exact, coachReading(ids, level, current));
+    const shape = readings.get(exact),
+      cards = ids.map((id) => coachDeck[id]);
+    const key = !cards.length
+      ? 'pass'
+      : `${shape?.type}|${shape?.value}|${cards
+          .map((c) => (isWild(c, level) ? 'wild' : c.r))
+          .sort()
+          .join(',')}`;
+    const row = { ids: ids.slice(), value: values[index], shape, index };
+    if (!plans.has(key) || row.value > plans.get(key).value) plans.set(key, row);
+  });
+  return [...plans.values()].sort((a, b) => b.value - a.value || a.index - b.index).slice(0, limit);
+}
 
 /** Copy only this player's cards, public history and public match context. */
 export function coachObservation(game) {
@@ -47,12 +81,7 @@ export function prepareCoachPolicy(observation) {
       if (!observation.canPass) throw Error('Cannot rate a leading pass');
       plays = [null];
     } else {
-      const cards = ids.map((id) => deck[id]);
-      const shape = analyze(cards, observation.level).find((s) =>
-        beats(s, observation.trick?.play),
-      );
-      if (!shape) throw Error('Illegal coach action');
-      plays = [{ ...shape, cards, wu: cards.filter((c) => isWild(c, observation.level)).length }];
+      plays = [coachReading(ids, observation.level, observation.trick?.play)];
     }
   } else plays = candidates(hand, observation.level, observation.trick?.play);
   return {

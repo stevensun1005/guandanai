@@ -2,7 +2,6 @@ import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { setHumans } from '../game/events.js';
 import { newGame, resetGame } from '../game/session.js';
-import { isPhone } from '../hand/layout.js';
 import {
   broadcastLobby,
   joinRoom,
@@ -17,6 +16,8 @@ import { loadBotPreferences, prepareBotModels, renderBotSetup } from './bot-setu
 import { forgetSeat } from '../network/rejoin-storage.js';
 import { VERSION, versionsMatch } from '../network/protocol.js';
 import { renderLevelPicker, initialize as initializeLevelPicker } from './level.js';
+import { coachIsEnabled, setCoachEnabled } from '../coach/controller.js';
+import { privateEligible } from '../private-table/state.mjs';
 
 export let DIRS;
 export let absOf;
@@ -78,12 +79,27 @@ function renderRules() {
     : runtime.rules.coachAllowed
       ? '房主允许，入局后可自行开启或关闭。'
       : '房主未允许，本桌不提供出牌评价。';
+  const privateOwner = privateEligible(runtime.lobbyMode, nickNow());
+  if (!privateOwner) runtime.privateTable = false;
+  $('#privateTableBox').hidden = !privateOwner;
+  $('#privateTableAllowed').checked = runtime.privateTable === true;
+  const personalAllowed =
+    runtime.lobbyMode === 'solo' ||
+    runtime.rules.coachAllowed === true ||
+    (privateOwner && runtime.privateTable);
+  $('#coachStartEnabled').checked = personalAllowed && coachIsEnabled();
+  $('#coachStartEnabled').disabled = !personalAllowed;
+  $('#coachStartNote').textContent = personalAllowed
+    ? '选牌即时评价，并显示 Top 5；入局后仍可随时关闭。'
+    : '需房主先允许使用出牌评价。';
   renderLevelPicker();
 }
 
 export function setMode(m) {
   leaveNet();
   loadRules();
+  runtime.privateTable = false;
+  runtime.privateEpoch = (runtime.privateEpoch || 0) + 1;
   loadBotPreferences();
   runtime.lobbyMode = m;
   runtime.direction = '';
@@ -145,6 +161,7 @@ export function renderLobby() {
 
 export function initialize() {
   initializeLevelPicker();
+  $('#coachStartEnabled').onchange = () => setCoachEnabled($('#coachStartEnabled').checked);
   $('#coachRoomAllowed').onchange = () => {
     if (runtime.lobbyMode !== 'host') return;
     runtime.rules.coachAllowed = $('#coachRoomAllowed').checked;
@@ -170,7 +187,7 @@ export function initialize() {
     e.textContent = t || '';
     e.classList.toggle('hot', !!hot);
   };
-  nickMax = () => (isPhone() ? 3 : 8);
+  nickMax = () => 8;
   nickNow = () =>
     $('#nick')
       .value.replace(/[<>&"']/g, '')

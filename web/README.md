@@ -31,3 +31,5 @@ npm run dev
 构建输出在 `web/dist/`，浏览器测试截图在 `web/artifacts/validation/`，打包文件在 `web/artifacts/packages/`。这些是生成内容，不提交 Git。也可以双击本目录的 `启动预览.cmd`。
 
 训练代码在 [AI 目录](../ai/README.md)。牌规和公开信息编码由网页与训练共同复用，不另复制一套。
+
+出牌评价可在开局前选择，右侧 Top 5 点击只选牌；普通分数、房主许可和数据标记见 [MOVE_COACH](docs/MOVE_COACH.md)。
