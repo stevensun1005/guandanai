@@ -65,5 +65,16 @@
       }
     },
     "classification": "Compatibility checks only; zero new strength-evaluation matches"
+  },
+  "deployment": {
+    "verifiedAt": "2026-11-05T05:04:59.994052+00:00",
+    "commit": "ace246c75ed2327f28dbdab82de344d7204ca6da",
+    "workflowRun": 41971338794,
+    "workflowConclusion": "success",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "onlineModelIds": ["001", "002"],
+    "onlineModel002SHA256": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+    "onlineWorkerSuccessfulModelIds": ["001", "002"],
+    "pageErrors": []
   }
 }
