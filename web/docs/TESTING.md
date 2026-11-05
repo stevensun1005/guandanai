@@ -1,5 +1,7 @@
 # 验证与复现
 
+当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：Clint、GuanZero 最近两代、danMCai 初始版与两代本机冠军。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
+
 ## PR 自动检查与网页流程评测
 
 PR 自动执行 `npm test`、格式检查、构建、`production_smoke.py` 与 `replay_security_smoke.py`。浏览器在实际产物上加载模型并出牌，另从文件导入恶意结果文本，验证列表、重打原结果和回放只显示文字。PR 不发布网站；主分支推送或手动运行通过检查后才部署 GitHub Pages。CI 使用安装的 Chromium，本地默认使用 Chrome，可通过 `BROWSER_CHANNEL` 更换。
@@ -157,3 +159,14 @@ python web/tests/multiround_smoke.py http://127.0.0.1:8765/ 50 2 --match --auto
 ## 练习桌布局
 
 `python web/tests/table_layout_smoke.py` 覆盖 1440×1000、1280×720 和 1024×768 触屏。通过真实入口开始练习，每个窗口至少走六手实际神经网络出牌，再用独立的显示状态检查长记录滚动、自己出完牌后的操作、评语和局末总结。操作按钮不互相重叠，理牌结束／继续／下一局位置一致，触屏高度至少 44 像素；页面错误为零。[结果](../../ai/research/evaluation/table-layout-1.14.0.json)。这些显示状态不计作真实比赛或模型胜率证明。
+
+## GuanZero 与真人牌谱的当前检查
+
+GuanZero 的默认评测包含 `random,rule,p0,clint`，其中 `rule` 明确为历史 `original`，Clint 为 `rules-v2`。相关 Node 检查覆盖对手版本、非法参数、补充报告拒绝覆盖及同模型／同种子合并；Python 验证历史编码与模型推理。
+
+```bash
+node --test ai/guanzero/tests/*.test.mjs
+python -m unittest discover -s ai/guanzero/tests -p "*test.py"
+```
+
+云端采集检查覆盖合格局筛选、人工／电脑／托管来源、离线队列、服务端重放、去重、测试数据隔离与私有导出；具体已完成记录见 [采集 README](../collector/README.md) 及 [研究报告](../../ai/research/MODEL_STUDY.md)。不将合法重放视为真人身份验证，也不把数据采集当成训练或强度验收。

@@ -7,7 +7,7 @@
 - `hand` 管理手牌的排序、分组、显示和出牌提示。
 - `ui`、`input`、`effects`、`audio` 负责呈现与交互。
 - `network` 传递房间状态和玩家事件；房主决定发牌、电脑动作和超时处理。
-- `ai/local/models/baseline` 在后台 Worker 计算策略结果，最终动作仍经过游戏事件与合法性校验。
+- `web/src/ai` 与独立 `web/src/rule-bot` 在后台 Worker 计算策略结果，最终动作仍经过游戏事件与合法性校验。
 
 ```mermaid
 flowchart LR
@@ -77,15 +77,21 @@ flowchart LR
 
 `web/tools/build.mjs` 使用 esbuild 处理模块、样式和图片，复制模型与浏览器运行库，输出 `web/dist`。页面、脚本、样式和 Worker 使用源文件及模型共同计算的版本；模型文件使用自身内容版本。界面改动会刷新对应代码，而相同权重可以继续使用浏览器缓存。
 
-网页模型由 `web/src/ai/model-catalog.json` 注册数字编号、默认值、网络配置、来源、完整 SHA-256 和不可变 Release 地址。构建从 Release 获取新增权重，校验后复制到同源 Pages 目录；Worker 按编号维护独立会话。`web/src/ai/models.mjs` 仍保留历史 P0／R1 配置供研究复现。大厅不再提供性格偏好；房间开始、重连及转为单机都同步或旋转座位对应的编号。发布流程见 [WEB_MODELS.md](./WEB_MODELS.md)。
+网页模型由 `web/src/ai/model-catalog.json` 注册数字编号、默认值、网络配置、来源、完整 SHA-256 和不可变 Release 地址。构建从 Release 获取新增权重，校验后复制到同源 Pages 目录；Worker 按编号维护独立会话。`web/src/ai/models.mjs` 仍保留历史 P0／R1 配置供研究复现。大厅仅显示 Clint、GuanZero 最近两代、danMCai 初始版和两代本机冠军；默认当前门控冠军。GuanZero 名称为 `训练任务名-版本数值`，完整不可变归档仍保留在清单。大厅不再提供性格偏好；房间开始、重连及转为单机都同步或旋转座位对应的编号。发布流程见 [WEB_MODELS.md](./WEB_MODELS.md)。
 
-Worker 单独打包自己的特征、风格与残局规则模块，浏览器推理运行库作为同源资源加载。编号模型只读取 `ai/local/models/baseline/observation.js` 明确选择的可见信息；残局搜索只使用自己的实体牌、公开记录及剩余张数。
+Worker 单独打包自己的特征、风格与残局规则模块，浏览器推理运行库作为同源资源加载。编号模型只读取 `web/src/ai/observation.js` 明确选择的可见信息；残局搜索只使用自己的实体牌、公开记录及剩余张数。
 
-`ai/local/models/baseline/table-policy.mjs` 集中维护输入准备、直接出完捷径和 Worker 决策。控制器继续负责过时结果、回合身份与动作合法性检查；Worker 负责会话加载和消息队列。`ai/shared/simulation/table-inference.mjs` 在 Node 内使用同一决策模块与浏览器 WASM，`evaluate-table.mjs` 按完整比赛评测，不再另写一份性格／搜索逻辑。整场模拟器为它补充已经结束的公开出牌记录及公开整场进度，不把其他玩家手牌送入模型。
+`web/src/ai/table-policy.mjs` 集中维护输入准备、直接出完捷径和 Worker 决策。控制器继续负责过时结果、回合身份与动作合法性检查；Worker 负责会话加载和消息队列。`ai/shared/simulation/table-inference.mjs` 在 Node 内使用同一决策模块与浏览器 WASM，`evaluate-table.mjs` 按完整比赛评测，不再另写一份性格／搜索逻辑。整场模拟器为它补充已经结束的公开出牌记录及公开整场进度，不把其他玩家手牌送入模型。
 
 页面用 CSP 限制脚本来源，并显式允许 WebAssembly；牌谱文本仍须在写入 HTML 前转义，不能用 CSP 替代输入与渲染边界校验。当前联机事件仍含全量发牌与恢复状态；模型的公开信息边界不能解释为网络层已实现手牌保密。
 
 开发源代码按功能拆分；生产资源会合并以减少请求。不要直接修改 `web/dist`，构建会覆盖它。
+
+## 结束局牌谱采集
+
+`web/src/collection` 在合格联机局结束后由房主异步提交结构化牌谱，IndexedDB 管理待上传队列、补传及去重。接收服务位于 `web/collector`，服务端重放校验后写入独立 D1；它不计算电脑出牌，也不负责房间实时推进。
+
+原始研究记录可包含结束局的四手起牌和完整动作，因此与玩家导出的公开战况是不同产物。云端数据不公开列举，导出需要私有凭据；来源标为 `unverified_browser`。预处理按整场分组、排除电脑／托管／测试动作，不直接写入当前训练。[协议与部署](../collector/README.md)。
 
 ## 调试接口
 
@@ -93,11 +99,11 @@ Worker 单独打包自己的特征、风格与残局规则模块，浏览器推�
 
 ## 新增功能放哪里
 
-| 改动               | 位置                                         |
-| ------------------ | -------------------------------------------- |
-| 新的牌型或大小关系 | `core/combinations.js` 与规则测试            |
-| 更好的手牌分组     | `hand`，不在牌面 renderer 中塞策略           |
-| 新的电脑引擎或风格 | `ai/local/models/baseline`，经过合法动作入口 |
-| 朋友房间行为       | `network` 与双浏览器验证                     |
-| 外观变化           | `styles`、`ui` 和真实截图                    |
-| 记录格式变化       | `replay/storage.js` 与兼容检查               |
+| 改动               | 位置                                                 |
+| ------------------ | ---------------------------------------------------- |
+| 新的牌型或大小关系 | `core/combinations.js` 与规则测试                    |
+| 更好的手牌分组     | `hand`，不在牌面 renderer 中塞策略                   |
+| 新的电脑引擎或风格 | `web/src/ai` 或 `web/src/rule-bot`，经过合法动作入口 |
+| 朋友房间行为       | `network` 与双浏览器验证                             |
+| 外观变化           | `styles`、`ui` 和真实截图                            |
+| 记录格式变化       | `replay/storage.js` 与兼容检查                       |

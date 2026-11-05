@@ -50,3 +50,9 @@
 4. 后续新运行放 `ai/guanzero/runs/`；旧运行续训仍由原冻结检出执行，数据可以暂留原位置。确需迁移时，先正常停止、核对数据和兼容路径，再从相同检查点恢复。
 
 根目录的 `npm run build`、`npm run dev`、训练及面板命令保持可用；不要继续照旧文档运行已移动的源码路径。
+
+## 后续新增入口
+
+真人牌谱接收服务位于 `web/collector/`，浏览器队列位于 `web/src/collection/`，下载与预处理位于 `ai/shared/data/`；原始语料和生成样本不提交 Git，也不自动接入正在运行的训练。
+
+GuanZero 工作站可在独立冻结检出中运行新版只读面板和 Clint 补充评测，实际来源以本机 `dashboard-launcher.json` 的 `sourceRoot`、`clint-companion-launcher.json` 为准。该评测检出与周期发布工作树分开，不能为了同步文档或网页代码向冻结检出拉取新源码。本文记录的本机路径和历史迁移时间属于对应工作站，不应直接套用到另一台电脑。

@@ -19,3 +19,7 @@
 [Clint 与 danMCai 冠军选择证据](evaluation/champion-selection-20261105/validation.json)记录六项菜单、真实门控来源及兼容性，不是新独立强度验收。
 
 [真人牌谱云端采集验证](evaluation/human-collection-20261105.json)记录合成联机测试、数据隔离及私有导出结果；这是数据基础设施验证，没有新增真人训练或胜率结果。
+
+当前入口：[GuanZero 四类开发对手与冻结补评](../guanzero/README.md)、[Clint 首批逐场结果](evaluation/guanzero-clint-block-0002-20261105.json)、[当前菜单及连字符命名](../../web/docs/WEB_MODELS.md)。这些开发评测、门控晋升和浏览器验证分别记录，不与独立验收混用。
+
+各功能说明按 [贡献指南的文档检查清单](../../CONTRIBUTING.md#文档的职责) 同步；主报告保留历史实验，当前产品入口以功能指南与模型清单为准。

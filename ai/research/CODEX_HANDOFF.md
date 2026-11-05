@@ -4,6 +4,12 @@
 
 这份文档告诉你：持续训练系统已经做到哪里、哪些数字是真测过的、下一步按什么顺序做、每一步做到什么程度才算完成。动手前先读完「必读」和「硬性约束」。
 
+## 当前功能补充
+
+- GuanZero 已增加 Clint（rules-v2）开发评测；原 `rule` 成绩仍指 original。同一冻结模型、同牌交换阵营；旧训练通过独立补充进程写入 `eval/block-NNNN/clint/report.json`，面板只合并同来源报告。[运行说明](../guanzero/README.md)。
+- 真人联机牌谱已接入独立 Worker／D1，支持离线补传、私有导出和仅人工动作预处理；语料与活跃训练隔离，不能自动读入梯度训练或独立验收。[采集](../../web/collector/README.md) · [共享数据](../shared/data/README.md)。
+- 功能、命名和命令变化须同步中英文 README、相关目录／专门指南、CHANGELOG 及研究证据后推送；具体职责见 [贡献指南](../../CONTRIBUTING.md#文档的职责)。
+
 ## 必读
 
 1. [AGENTS.md](../../AGENTS.md)：模型研究与证据维护的规则，优先级最高。
@@ -15,9 +21,9 @@
 
 - **2026-11-05 最新选择要求**：网页菜单仅保留 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和本机最近两代门控冠军，默认本机现任冠军。本条取代下文旧的“最新导出直接成为默认”及“所有旧编号可选”要求。按真实冠军晋升记录、accept 门控及 SHA 维护 `selection.localChampions`；普通新导出与 GuanZero 更新不能自动替换本机冠军，旧权重保留归档。发布步骤见 [网页电脑选择](../../web/docs/WEB_MODELS.md)。
 
-- **网页发布授权已更新。** 所有者后续明确要求每 4 小时发布最新完整导出模型，并以编号取代性格选择。按 [网页模型发布](../../web/docs/WEB_MODELS.md) 更新 `web/src/ai/model-catalog.json` 的默认编号；保留 `ai/local/models/baseline/policy.onnx` 作为 001 基线，不往 Git 增加权重。此授权取代旧的“通过留出验收后才能部署”门槛，但不改变第 5.3 节对棋力结论的证据要求。
+- **现行发布规则。** 每四小时同步真实冠军与 GuanZero 最近两代；默认保持本机现任冠军，不能将普通最新导出设为默认。GuanZero 名称为 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。完整流程以 [网页模型发布](../../web/docs/WEB_MODELS.md) 为准，旧附件和实验记录保留，独立验收标准不变。
 - **只报告实际完成的结果。** 正结果、负结果、退步和协议变化都写入 `ai/research/MODEL_STUDY.md`；开发集峰值不能写成验收；门控记录属于开发筛选。
-- **电脑按模型编号选择。** 不再向玩家提供五种性格；历史风格代码保留用于复现实验。编号只表示发布身份，不是强弱排名。
+- **电脑按版本与独立规则选择。** 不再向玩家提供五种性格；历史风格代码保留用于复现实验。编号只表示发布身份，不是强弱排名。
 - **直接提交并推送到 `main`，不开新分支。** 这是仓库所有者的要求。推送前运行 `npm test`、`npm run format:check`，以及相关的 Python 测试。
 - **不要把大文件提交进 Git。** `ai/local/workspace/` 已被忽略，训练产物留在那里。`ai/local/models/experiments/` 已有约 553 MB 检查点在 Git 里，不要再往里加；需要归档的权重放到 GitHub Release 附件，在 `ai/research/evaluation/model-artifacts.json` 里记录 SHA-256。
 - **种子用途不能混。** 小于 1e9 的种子留给开发评测和留出验收；持续采样用 1e9 起，探索测量用 3.4e9 起，门控用 3.5e9 起（见 `ai/local/training/continuous/lib.mjs`）。新增用途要另划区间并写进文档。
@@ -121,7 +127,7 @@ CPU 现存成果已另存至 `ai/local/checkpoints/cpu-main-2026-11-04-step-2092
 
 1. 选一段从没用过的种子作为留出集，例如 `900000000` 起 2,000 个。在 `ai/research/evaluation/` 新建一个 JSON，记录区间、用途和提交时间；提交后不再改动。
 2. 新建 `ai/local/training/continuous/accept.mjs`，调用 `ai/local/evaluation/evaluate-table.mjs` 的同一套逻辑：
-   - 冠军 vs 当前网页默认模型，配对种子、交换阵营，五种风格都跑；
+   - 冠军 vs 当前网页默认模型，配对种子、交换阵营，按当前选用模型和配置运行；历史五种风格另作复现对照；
    - 冠军 vs 规则机器人；
    - 输出逐种子结果、胜／负／平、按种子聚类的 Hoeffding 区间和 SHA-256。
 3. 每次用过的留出种子要记录下来，同一段种子只能用于一次最终决策。

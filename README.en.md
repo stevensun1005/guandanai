@@ -17,7 +17,7 @@ Four-player GuanDan with browser-local bots, private rooms and practical hand to
 ![An actual game](./web/docs/media/table-desktop.png)
 
 <details>
-<summary>More views: bot personalities, mobile help and match history</summary>
+<summary>More views: mobile help and match history</summary>
 
 <p align="center"><img src="./web/docs/media/help-mobile.png" width="280" alt="Mobile controls guide" /> <img src="./web/docs/media/match-history-mobile.png" width="280" alt="Match results and public scorecard on mobile" /></p>
 
@@ -48,20 +48,22 @@ Online rounds with at least two people are archived as structured, pseudonymous 
 | Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                     |
 | Friend rooms        | Invitations, seat selection, temporary bot takeover and original-tab recovery                 |
 | Local inference     | Versioned trained models in a browser Web Worker                                              |
-| Training versions   | Checkpoint names such as v000198487, a current default and selectable previous versions       |
+| Training versions   | GuanZero run-version names and gate-verified danMCai champions                                |
 | Hand tools          | Dragging, sweeping, manual groups, smart/rank/suit ordering and 30-step arrangement undo/redo |
 | Clear actions       | Selection feedback, keyboard navigation and optional play confirmation                        |
 | Public scorecards   | Select earlier rounds, filter public actions and export a round or the match                  |
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records             |
 | Static deployment   | GitHub Pages; no inference server or API key required                                         |
 
-The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two local gate champions. The default is **danMCai-v000293055**. Gate promotion is development selection, not independent strength acceptance. Four-hour synchronization preserves the local champion default; ordinary exports and GuanZero updates do not replace it. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics.
+The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two local gate champions. The default is the **current local gate champion**. GuanZero names use the format `guanzero-adp-gpubatch-44752`; the catalog and selection guide own the actual current versions. Gate promotion is development selection, not independent strength acceptance. Four-hour synchronization preserves the local champion default; ordinary exports and GuanZero updates do not replace it. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics.
 
 The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](./web/docs/PRACTICE.md).
 
 [Model catalog and evidence](./web/docs/WEB_MODELS.md) · [Reproducible model training](./ai/research/MODEL_TRAINING.md)
 
 The **[model research report](./ai/research/MODEL_STUDY.md)** documents the shared networks, actual learning algorithms, full-match objective, positive and negative results, and evidence limits. Completed experiments are updated with checkpoint hashes and seed-level outcomes; development peaks are kept separate from independent acceptance tests.
+
+Completed multiplayer rounds with at least two human seats are collected by the host into private cloud storage. Records omit nicknames, chat, voice and seat credentials; offline retries and deduplication are supported. Private JSON/JSONL exports remain isolated research data and are not automatically fed into active training. See [collection and export](./web/collector/README.md).
 
 ## Run locally
 
@@ -128,9 +130,11 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 
 ## Model research status
 
-The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and the default web weights have not been replaced. The [research report](./ai/research/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
+The complete 1.37-million-parameter network has undergone staged unfreezing experiments. Four-arm studies of public or training-only privileged critics and fresh or repeated openings completed 256 pilot and 1,024 extended full-match training trajectories. Repeated openings are not independent new deals, and training counts are not acceptance-test counts. Published code, evidence and checkpoint access are in `main`; the public record has not validated an independent 80% full-match win rate, and those historical experiments do not determine the current web default. The current default follows actual local champion promotions. The [research report](./ai/research/MODEL_STUDY.md) and its evidence snapshot own the latest methods and conclusions.
 
-`npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](./ai/research/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength.
+`npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](./ai/research/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength. This legacy full-match entry uses the original rules for `rule`; the GuanZero evaluator selects Clint explicitly with `--opponents=clint`.
+
+GuanZero is a separate training route with batched GPU inference and a read-only live dashboard. Its development opponents are random play, the original rules, P0 and Clint (`rules-v2`). Paired seeds and frozen-model fingerprints keep the results traceable; the legacy trainer can add Clint through an isolated supplement process. See [GuanZero](./ai/guanzero/README.md). Development results are not independent acceptance tests.
 
 ## Documentation
 
