@@ -78,6 +78,17 @@ class Replay:
         return self.x[index], self.y[index]
 
 
+def learner_device(name):
+    device = torch.device(name)
+    if device.type not in ("cpu", "cuda", "mps"):
+        raise ValueError("Supported learner devices are cpu, cuda and mps")
+    if device.type == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("GPU requested but this Python has no usable CUDA/ROCm device")
+    if device.type == "mps" and not torch.backends.mps.is_available():
+        raise RuntimeError("Apple MPS requested but unavailable; refusing silent CPU fallback")
+    return device
+
+
 class Learner:
     def __init__(self, run):
         self.run = Path(run)
@@ -85,11 +96,7 @@ class Learner:
         if not self.config:
             raise SystemExit(f"Missing {self.run / 'config.json'}")
         self.settings = self.config["learner"]
-        self.device = torch.device(self.settings.get("device", "cpu"))
-        if self.device.type not in ("cpu", "cuda"):
-            raise ValueError("Supported learner devices are cpu and cuda (including AMD ROCm)")
-        if self.device.type == "cuda" and not torch.cuda.is_available():
-            raise RuntimeError("GPU requested but this Python has no usable CUDA/ROCm device")
+        self.device = learner_device(self.settings.get("device", "cpu"))
         torch.set_num_threads(int(self.settings["threads"]))
         torch.manual_seed(int(self.settings["seed"]))
         self.models = self.run / "models"
@@ -116,7 +123,7 @@ class Learner:
             self.anchor = ValueNet(load_onnx_weights(self.run / "models" / "anchor.onnx")).to(self.device)
             self.anchor.requires_grad_(False)
         if self.checkpoint.exists():
-            saved = torch.load(self.checkpoint, weights_only=False, map_location=self.device)
+            saved = torch.load(self.checkpoint, weights_only=True, map_location="cpu")
             self.net.load_state_dict(saved["model"])
             self.optimizer.load_state_dict(saved["optimizer"])
             self.step = saved["step"]
@@ -246,10 +253,16 @@ class Learner:
             {
                 "pid": os.getpid(),
                 "device": str(self.device),
-                "deviceName": torch.cuda.get_device_name(self.device) if self.device.type == "cuda" else "CPU",
+                "deviceName": (
+                    torch.cuda.get_device_name(self.device) if self.device.type == "cuda"
+                    else "Apple MPS" if self.device.type == "mps" else "CPU"
+                ),
                 "torch": torch.__version__,
                 "hip": torch.version.hip,
-                "gpuAllocatedBytes": torch.cuda.memory_allocated(self.device) if self.device.type == "cuda" else None,
+                "gpuAllocatedBytes": (
+                    torch.cuda.memory_allocated(self.device) if self.device.type == "cuda"
+                    else torch.mps.current_allocated_memory() if self.device.type == "mps" else None
+                ),
                 "state": state,
                 "step": self.step,
                 "version": self.version,

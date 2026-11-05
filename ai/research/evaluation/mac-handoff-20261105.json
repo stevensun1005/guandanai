@@ -1,0 +1,261 @@
+{
+  "kind": "test",
+  "observedAtUTC": "2026-11-05T21:21:37.300097+00:00",
+  "baseCommit": "f2901f6e4a6b8100ad5b488b89b2155d0e55b4bf",
+  "formalStrengthMatches": 0,
+  "productionTrainingUpdatesFromThisChange": 0,
+  "sourceHashConvention": "UTF-8 CRLF normalized to LF",
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+    "ai/danMCai/training/continuous/supervisor.mjs": "3eca22f79569529b1bcb310022329903790113db16591e76e8ba6446796d9565",
+    "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "bcf33270c971bb6aca41fc8abc61fc8dca52becdcac866522925e51b67f657f0",
+    "ai/danMCai/training/continuous/mac_preflight.py": "a923b8c565b657fc075846e22dbab622ec33bf0464f44b882effbf2e2279a733",
+    "ai/danMCai/training/continuous/transfer.py": "70e9817c365566a86290d18c8bcf78ab9828bc21241443651cdfc20e58147614",
+    "ai/environment/setup-mac.sh": "da592411847880f8b5f9f4a6aea2b244212d19e8ed6ac12e943b665f5abb1f2f",
+    "ai/danMCai/tests/mac-handoff.test.mjs": "126bf068b70ce056712b88b1a07aea66eb3de2cef65d7667e56eb622f41c7cf9",
+    "ai/danMCai/tests/mac_transfer_test.py": "2853cd26e99fa662605766e0582c18b420c2f1c7c60b1c894bd5cbc73c0e79a3",
+    "ai/danMCai/tests/continuous_learner_test.py": "d21da6ca7f2f92644e24252fc49c6a5ee9efd908a63f540051ccfc9fffec50e0",
+    "ai/danMCai/training/continuous/dashboard.mjs": "d8868e585a2aa558bcc818b37864a27315d19dcf84d4e4381f013e4f0860cfa1",
+    "ai/danMCai/training/continuous/dashboard/app.mjs": "0edf0309b74feed5551159975d3aaa0d85b0a3c40debfac1f67137433bbd9672"
+  },
+  "unchangedFileSHA256": {
+    "web/src/ai/model-catalog.json": "c5b243b0c64a11ced259e5cdfcb5395cea57473c26c347e363e0e12bcafbb9b0",
+    "ai/danMCai/models/baseline/policy.onnx": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224"
+  },
+  "windowsRun": {
+    "stoppedAtUTC": "2026-11-05T20:41:22.061Z",
+    "stopReason": "time-limit",
+    "elapsedSeconds": 84769.501,
+    "totals": {
+      "matches": 731269,
+      "decisions": 349882485,
+      "rows": 349882485
+    },
+    "learner": {
+      "step": 682654,
+      "ingestedRows": 349519139,
+      "trainedRows": 1398075392,
+      "state": "stopped"
+    },
+    "latest": {
+      "version": "v000682654",
+      "file": "v000682654.onnx",
+      "sha256": "90590eb30e101d0444708e96fdb5c5ca272069ae3be013f38a8226499e56cca9",
+      "step": 682654,
+      "trainedRows": 1398075392,
+      "ingestedRows": 349519139,
+      "publishedAt": "2026-11-05T20:41:13Z"
+    },
+    "champion": {
+      "version": "v000293055",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "since": "2026-11-05T08:11:50.077Z",
+      "history": [
+        {
+          "version": "v000000000",
+          "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+          "at": "2026-11-04T20:40:54.512Z",
+          "reason": "initial"
+        },
+        {
+          "version": "v000023473",
+          "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+          "at": "2026-11-04T22:08:59.123Z",
+          "gate": 101
+        },
+        {
+          "version": "v000046476",
+          "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+          "at": "2026-11-04T23:03:24.799Z",
+          "gate": 102
+        },
+        {
+          "version": "v000068679",
+          "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+          "at": "2026-11-05T00:04:51.045Z",
+          "gate": 103
+        },
+        {
+          "version": "v000091092",
+          "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+          "at": "2026-11-05T01:06:47.980Z",
+          "gate": 104
+        },
+        {
+          "version": "v000293055",
+          "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "at": "2026-11-05T08:11:50.077Z",
+          "gate": 112
+        }
+      ]
+    },
+    "originalConfigSHA256": "04d991c00e3558a60a1a41d737fc24f0dd6ba1eb676ed2696667cb487a3c0646",
+    "frozenSourcesVerified": 32,
+    "allOriginalFilesUnchanged": true,
+    "sourceFilesVerifiedAfterPreparation": 516,
+    "ownerDraftsPreserved": 10
+  },
+  "transfer": {
+    "archiveName": "danMCai-windows-gpu-main-20261105.zip",
+    "archiveSHA256": "edebd10bad4f36f61f96e5386abda6dfe782d1cd9132765e5c371dcbce62fe2a",
+    "archiveBytes": 320471038,
+    "uncompressedBytes": 1483152514,
+    "files": 516,
+    "retainedReplayShards": 122,
+    "retainedReplayRows": 2012555,
+    "historicalEvictedRowsRecreated": false,
+    "completeExtractionVerified": true,
+    "allCurrentRunFilesIncluded": true,
+    "replayMtimePreserved": true,
+    "containsWindowsEnvironment": false,
+    "containsHumanGames": false,
+    "gitContainsArchiveOrReplay": false
+  },
+  "cpuProbe": {
+    "kind": "test",
+    "device": "cpu",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "torch": "2.15.0+cpu",
+    "strengthMatches": 0,
+    "probeUpdatesDiscarded": 20,
+    "sourceStep": 682654,
+    "checkpointSHA256": "727c59aab7d8eb37125592a0a7df45eb6f7f40e23dec7892d6a9e16266bb10c4",
+    "optimizerRestored": true,
+    "initialWeightsMatchExport": true,
+    "backendMaxAbsoluteError": 0.0,
+    "onnxMaxAbsoluteError": 1.1920928955078125e-06,
+    "sourceCheckpointUnchanged": true,
+    "elapsedSeconds": 2.214
+  },
+  "macPreset": {
+    "status": "prepared-not-run-on-Mac",
+    "architecture": "unchanged P0 full network",
+    "learnerDevice": "mps",
+    "learnerThreads": 1,
+    "actors": 2,
+    "gamesPerActor": 8,
+    "samplerProvider": "cpu",
+    "actorSeedOffset": 3000000,
+    "evaluationBlockOffset": 300,
+    "sourceFingerprints": 34,
+    "anchor": "original P0 unchanged",
+    "ruleOpponent": "historical original baseline, not Clint",
+    "minimumMemoryGiB": 16,
+    "reserveGiB": 4,
+    "resumeGiB": 5,
+    "oneWindowHours": 24,
+    "deadlineOnResume": "original deadline; remaining time only",
+    "deadlineStopFlag": "authorized-time-limit",
+    "macHardwareExecuted": false,
+    "macThroughput": null,
+    "mpsCpuParity": null
+  },
+  "dependencies": {
+    "python": "3.12 native arm64",
+    "node": "24 LTS",
+    "torch": "2.15.0",
+    "numpy": "2.3.5",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.1",
+    "officialPyPIArm64WheelsFound": true,
+    "installedOnMac": false
+  },
+  "validation": {
+    "node": {
+      "passed": 170,
+      "failed": 0
+    },
+    "pythonDanMCai": {
+      "total": 35,
+      "passed": 33,
+      "skipped": 2,
+      "skipReason": [
+        "CUDA hardware",
+        "Apple MPS hardware"
+      ]
+    },
+    "pythonResearch": 9,
+    "pythonGuanZero": 8,
+    "bashSyntax": "passed",
+    "format": "passed",
+    "build": "f759bd71ee",
+    "dashboardBrowser": {
+      "kind": "test",
+      "simulatedMacTelemetry": true,
+      "actualMPSExecuted": false,
+      "strengthMatches": 0,
+      "mpsLabel": true,
+      "unifiedMemoryLabel": true,
+      "cpuSamplerLabel": true,
+      "fixedDeadlineShown": true,
+      "autoRefreshRequests": 2,
+      "sizes": [
+        [
+          1440,
+          1000
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "pageErrors": []
+    }
+  },
+  "negativeChecks": [
+    {
+      "issue": "Windows junction path prevented the guarded CLI entry from executing",
+      "resolution": "Resolve the entry real path; actual archive-to-new-run and CPU checkpoint probe succeeded"
+    },
+    {
+      "issue": "GPU sampling language was not appropriate for a CPU sampler with an MPS learner",
+      "resolution": "Expose sampler provider independently; dashboard uses Apple MPS and unified-memory labels"
+    },
+    {
+      "issue": "MPS hardware is not available on this Windows host",
+      "resolution": "Hardware test skipped explicitly; real on-Mac preflight is mandatory and CPU fallback refused"
+    },
+    {
+      "issue": "Initial integration assertion incorrectly equated actor generated rows with learner ingested rows",
+      "resolution": "Compare saved countedShards plus physical uncounted manifests instead; 28220 new rows, cumulative 349547359; remaining actor/learner difference 335126 not attributed; do not claim transfer loss or complete usage"
+    }
+  ],
+  "webDefaultChanged": false,
+  "webBuildUnchanged": "f759bd71ee",
+  "updatedAtUTC": "2026-11-05T21:32:12.433451+00:00",
+  "fullReplayRestore": {
+    "kind": "test",
+    "device": "cpu",
+    "mpsExecuted": false,
+    "trainingUpdates": 0,
+    "step": 682654,
+    "buffer": 2000000,
+    "previousIngestedRows": 349519139,
+    "newlyIngestedSavedRows": 28220,
+    "ingestedRows": 349547359,
+    "matchesCheckpointPlusUncountedManifests": true,
+    "sourceActorGeneratedRows": 349882485,
+    "actorLearnerDifferenceNotAttributed": 335126,
+    "originalCheckpointUnchanged": true,
+    "elapsedSeconds": 4.087
+  },
+  "preparedConfigMatchesFinalSources": true,
+  "newMacSeedsConsumedOnWindows": 0,
+  "repositoryPublication": {
+    "status": "pending-commit-and-push",
+    "pagesBuildUnchanged": "f759bd71ee",
+    "webDefaultChanged": false
+  },
+  "initialValidationBeforeIntegration": {
+    "nodePassed": 166,
+    "baseCommit": "f2901f6e4a6b8100ad5b488b89b2155d0e55b4bf"
+  },
+  "integratedMainCommit": "af7dbfc69b3f4ee3bc4b83f2d376949f4ede7176",
+  "concurrentGuanZeroUpdatesPreserved": true
+}

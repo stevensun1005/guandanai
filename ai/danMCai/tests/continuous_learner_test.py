@@ -14,7 +14,7 @@ import torch
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").is_file())
 sys.path.insert(0, str(ROOT / 'ai/danMCai/training/continuous'))
-from learner import Learner, Replay, target, write_json  # noqa: E402
+from learner import Learner, Replay, target, write_json, learner_device  # noqa: E402
 from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
 
 
@@ -61,6 +61,30 @@ def write_run(directory, rows=600):
 
 
 class ContinuousLearnerTests(unittest.TestCase):
+    def test_requested_mps_never_silently_becomes_cpu(self):
+        with patch('torch.backends.mps.is_available', return_value=False):
+            with self.assertRaisesRegex(RuntimeError, 'refusing silent CPU fallback'):
+                learner_device('mps')
+        with self.assertRaises(ValueError):
+            learner_device('meta')
+
+    @unittest.skipUnless(torch.backends.mps.is_available(), 'Apple MPS hardware required')
+    def test_mps_updates_and_restores_adam_checkpoint(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = write_run(directory)
+            config = json.loads((run / 'config.json').read_text())
+            config['learner']['device'] = 'mps'
+            (run / 'config.json').write_text(json.dumps(config))
+            learner = Learner(run)
+            learner.loop(max_steps=5)
+            resumed = Learner(run)
+            self.assertEqual(resumed.step, 5)
+            self.assertTrue(resumed.optimizer.state)
+            resumed.ingest()
+            resumed.train_step()
+            self.assertEqual(resumed.step, 6)
+            self.assertTrue(all(np.isfinite(w).all() for w in resumed.net.weights()))
+
     def test_atomic_status_write_retries_a_short_sharing_lock(self):
         import os
         original = os.replace

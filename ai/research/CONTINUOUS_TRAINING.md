@@ -1,5 +1,7 @@
 # 持续自对弈训练
 
+**2026-11-05 交接状态：**Windows `gpu-main` 的本轮时限已结束，原运行保留，不再自动重启。当前所有者仅授权 MacBook 接手一个 24 小时窗口，环境、完整迁移包、MPS 预检和固定截止启动器见 [MAC_HANDOFF](MAC_HANDOFF.md)。以下 CPU／ROCm 示例用于理解既有运行，不是本次在 Windows 重启训练的指令。
+
 本文说明 danMCai 的联赛／冠军门控路线。GuanZero 使用独立的逐局 DMC、GPU 合批与只读面板，四类开发对手及旧检出补评方式见 [GuanZero README](../guanzero/README.md)。当前网页默认danMCai 实际冠军，普通新导出和 GuanZero 更新不覆盖它；[发布规则](../../web/docs/WEB_MODELS.md)。冻结运行按其原配置保留原版规则对手，不因名称变更自动切换到 Clint。
 
 本系统让主价值网络在本机无人值守地连续训练：多个采样进程不停地打完整比赛，训练进程边收数据边更新，联赛对手池随训练增长，冠军由自动门控选出。训练进程不直接修改网页模型；所有者授权的每四小时发布另按 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 执行，部署与第 5.3 节的独立棋力验收分开。

@@ -153,3 +153,5 @@ Fixed full-match evaluation supports two champion seats against two Clint seats 
 **Optional move feedback:** the host first permits it for the room, then each player independently opts in. The current danMCai champion rates selected moves and retains the last played move. Percentages are relative model-value scores, not win probabilities. [How it works](web/docs/MOVE_COACH.md).
 
 Move feedback can be selected before solo play or in an allowed room. A responsive Top 5 panel shows actual cards and relative scores; clicking selects cards without playing them. Percentages are relative action-value scores, not win probabilities. See [move feedback](web/docs/MOVE_COACH.md).
+
+Moving training to a MacBook: the [Mac handoff](ai/research/MAC_HANDOFF.md) covers native dependencies, checksummed model/Adam/replay transfer and one fixed 24-hour window. Windows artifacts remain intact. Apple MPS execution must pass the on-device probe; preparation is not a training or performance result.

@@ -33,6 +33,7 @@ export function dashboardSnapshot(run, workspace = project) {
   const config = readJSON(paths.config);
   if (!status || !config) throw Error('运行尚未生成状态文件');
   const launcher = readJSON(join(paths.root, 'launcher.json'), {});
+  const schedule = readJSON(join(paths.root, 'schedule.json'));
   const learner = readJSON(join(paths.learner, 'status.json'), status.learner || {});
   const heartbeatAge = (Date.now() - Date.parse(status.updatedAt)) / 1000;
   const supervisorAlive = alive(status.pid);
@@ -155,7 +156,8 @@ export function dashboardSnapshot(run, workspace = project) {
     stoppedAt: status.stoppedAt || null,
     stopReason: status.stopReason || null,
     elapsedSeconds: (status.elapsedSeconds || 0) + (running ? Math.max(0, heartbeatAge) : 0),
-    plannedHours: launcher.hours || null,
+    plannedHours: schedule?.durationHours || launcher.hours || null,
+    deadlineUTC: schedule?.deadlineUTC || null,
     totals: liveTotals,
     device: config.learner?.device || 'cpu',
     cpuBaseline:
@@ -164,6 +166,7 @@ export function dashboardSnapshot(run, workspace = project) {
         : null,
     actorCount: config.actors,
     actorImplementation: config.actorImplementation || 'standard',
+    samplerProvider: config.fastActor?.provider || 'cpu',
     protocolChanges: (config.protocolHistory || []).map(({ at, reason }) => ({ at, reason })),
     deviceRuns,
     anchorHours: config.anchor?.intervalHours || 3,

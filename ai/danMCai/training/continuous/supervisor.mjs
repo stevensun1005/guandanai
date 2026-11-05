@@ -22,9 +22,9 @@ import {
 } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 import { freemem, constants as osConstants, setPriority } from 'node:os';
 import { memoryAction } from './resources.mjs';
+import { sourceHashes } from './sources.mjs';
 import { actorTotals as allActorTotals } from './remote.mjs';
 import {
   DEFAULT_CONFIG,
@@ -48,51 +48,6 @@ const override = JSON.parse(option('config', '{}'));
 const protocolChange = option('protocol-change', '');
 const protocolSettings = JSON.parse(option('set', '{}'));
 if (!Number.isFinite(hours) || hours < 0) throw Error('Invalid hours');
-const sourceFiles = [
-  ...[
-    'supervisor.mjs',
-    'actor.mjs',
-    'gate.mjs',
-    'lib.mjs',
-    'learner.py',
-    'value_net.py',
-    'fast-actor.mjs',
-    'batch-inference.mjs',
-    'inference-worker.mjs',
-    'fast-candidates.mjs',
-    'fast-rollout.mjs',
-    'onnx-rows.mjs',
-    'resources.mjs',
-    'remote.mjs',
-  ].map((f) => `ai/danMCai/training/continuous/${f}`),
-  ...['match-rollout.mjs', 'match-simulation.mjs', 'simulation.mjs', 'rule-baseline.mjs'].map(
-    (f) => `ai/shared/simulation/${f}`,
-  ),
-  ...['cards.js', 'combinations.js', 'moves.js', 'match.js', 'tribute.js'].map(
-    (f) => `web/src/core/${f}`,
-  ),
-  ...[
-    'candidates.js',
-    'encoding.mjs',
-    'observation.js',
-    'rule-policy.js',
-    'hand-value.js',
-    'habits.js',
-  ].map((f) => `web/src/ai/${f}`),
-  'web/src/hand/arrangement.js',
-  'web/src/hand/hints.js',
-  'package-lock.json',
-];
-function sourceHashes() {
-  return Object.fromEntries(
-    sourceFiles.map((file) => [
-      file,
-      createHash('sha256')
-        .update(readFileSync(resolve(here, '../../../..', file), 'utf8').replaceAll('\r\n', '\n'))
-        .digest('hex'),
-    ]),
-  );
-}
 const sourcesAtStart = sourceHashes();
 
 /** Only sampler settings may change through --set; everything else stays frozen. */

@@ -124,7 +124,7 @@ function render(data) {
   if (change)
     set(
       'protocol',
-      `${time(change.at)} 起调整了采样方式（${data.actorImplementation === 'fast' ? '改用 GPU 批量推理的快速采样进程' : '采样设置变化'}），属于协议变化，详见研究报告。`,
+      `${time(change.at)} 起调整了采样方式（${data.actorImplementation === 'fast' ? `快速批量采样，${data.samplerProvider === 'cpu' ? 'CPU 推理' : 'DML 优先'}` : '采样设置变化'}），属于协议变化，详见研究报告。`,
     );
 
   const hours = data.elapsedSeconds / 3600;
@@ -139,11 +139,13 @@ function render(data) {
   element('progress').value = planned ? Math.min(100, (hours / planned) * 100) : 0;
   set(
     'eta',
-    running && planned
-      ? `预计 ${time(Date.parse(data.observedAt) + Math.max(0, planned * 3600 - data.elapsedSeconds) * 1000)} 结束`
-      : stopped
-        ? `停止于 ${time(data.stoppedAt)}`
-        : '',
+    running && data.deadlineUTC
+      ? `固定截止 ${time(data.deadlineUTC)} · 重启不延长`
+      : running && planned
+        ? `预计 ${time(Date.parse(data.observedAt) + Math.max(0, planned * 3600 - data.elapsedSeconds) * 1000)} 结束`
+        : stopped
+          ? `停止于 ${time(data.stoppedAt)}`
+          : '',
   );
 
   set('matches', number(data.totals.matches));
@@ -155,7 +157,7 @@ function render(data) {
   const fast = samplers.filter((p) => p.implementation === 'fast').length;
   set(
     'samplers',
-    `决策/秒 · ${samplers.length} 个采样进程${fast === samplers.length && fast ? '（快速版）' : fast ? `（${fast} 个快速版）` : ''}`,
+    `决策/秒 · ${samplers.length} 个采样进程${fast === samplers.length && fast ? '（快速版）' : fast ? `（${fast} 个快速版）` : ''} · ${data.samplerProvider === 'dml' || (data.samplerProvider == null && data.actorImplementation === 'fast') ? 'DML 优先' : 'CPU 推理'}`,
   );
   const updates = data.learnerUpdatesPerSecond ?? data.learner.stepsPerSecond;
   set('update-rate', updates == null ? '—' : updates.toFixed(1));
@@ -184,10 +186,12 @@ function render(data) {
   const memory =
     data.learner.gpuAllocatedBytes == null
       ? ''
-      : ` · 显存 ${(data.learner.gpuAllocatedBytes / 2 ** 20).toFixed(0)} MiB`;
+      : ` · ${data.device === 'mps' ? '张量统一内存' : '显存'} ${(data.learner.gpuAllocatedBytes / 2 ** 20).toFixed(0)} MiB`;
   set(
     'device',
-    (data.learner.deviceName || (data.device?.startsWith('cuda') ? 'GPU' : 'CPU')) + memory,
+    (data.learner.deviceName ||
+      (data.device === 'mps' ? 'Apple MPS' : data.device?.startsWith('cuda') ? 'GPU' : 'CPU')) +
+      memory,
   );
   set('disk', data.diskGB == null ? '—' : `${data.diskGB.toFixed(1)} GB`);
   set(

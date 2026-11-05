@@ -1,5 +1,7 @@
 # 目录迁移与运行兼容
 
+本次 MacBook 接手使用[独立交接指南](MAC_HANDOFF.md)：Git 克隆源码、私下复制带校验的训练 ZIP、原生重装依赖，在冻结 detached worktree 的新目录续训。Mac 主项目的规范运行入口可以链接到该冻结检出的运行目录；不把 Windows 目录连接、虚拟环境或 node_modules 复制过去，不覆盖 Windows 的原运行。旧源码及配置的历史字节保持原样；Mac 的 MPS、采样器和种子变化作为新协议记录。
+
 正式源码现在按 `web/` 与 `ai/` 分类。根目录仅保留工作区配置、README、GitHub 配置和共享依赖。各大目录的 README 提供功能入口。
 
 | 原位置                         | 新位置                                             |

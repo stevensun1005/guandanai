@@ -2,6 +2,8 @@
 
 这条路线从现有价值网络出发训练；与 GuanZero 的随机初始化路线分开。
 
+本次转交 MacBook 的环境安装、迁移附件、MPS 实测与**仅一个 24 小时窗口**见 [Mac 交接](../research/MAC_HANDOFF.md)。Windows 模型、优化器、当前回放和历史记录保留，Mac 使用新目录续训；尚无 Mac 实测性能结论。
+
 | 找什么                           | 位置                                                                     |
 | -------------------------------- | ------------------------------------------------------------------------ |
 | 持续训练调度                     | [training/continuous/supervisor.mjs](training/continuous/supervisor.mjs) |

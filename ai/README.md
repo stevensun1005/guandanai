@@ -13,6 +13,8 @@
 
 先看 [研究报告](research/MODEL_STUDY.md) 了解真实架构、已完成结果和局限；继续训练前读 [交接文档](research/CODEX_HANDOFF.md)。
 
+当前 MacBook 接手仅有一个 24 小时窗口，原生环境、只读迁移附件、冻结检出及恢复流程见 [Mac 交接](research/MAC_HANDOFF.md)；依赖入口见 [共享环境](environment/README.md)。Windows 原运行保留，不因代码同步自动重启。
+
 当前训练快照不会因目录整理自动更新源码或清空数据。运行中的旧布局与迁移路径见 [迁移说明](research/STRUCTURE_MIGRATION.md)。
 
 网页提供 Clint 纯规则、GuanZero 两代及 danMCai 初始版／两代门控冠军；普通新导出不自动成为默认。[菜单与发布](../web/docs/WEB_MODELS.md) 统一维护名称和选择范围。

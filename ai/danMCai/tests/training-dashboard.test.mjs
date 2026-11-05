@@ -49,6 +49,11 @@ test('dashboard is read-only, reports real counts and flags stale training witho
     assert.equal(data.learner.step, 789);
     assert.deepEqual(data.resources, state.resources);
     assert.equal(data.plannedHours, 24);
+    save('schedule.json', { durationHours: 24, deadlineUTC: '2026-11-06T23:00:00Z' });
+    const scheduled = await (await fetch(base + '/api/status')).json();
+    assert.equal(scheduled.deadlineUTC, '2026-11-06T23:00:00Z');
+    assert.equal(scheduled.plannedHours, 24);
+    assert.equal(scheduled.samplerProvider, 'cpu');
     assert.deepEqual(data.evaluations, []);
     assert.equal(data.independentEvaluation, null);
     mkdirSync(join(directory, 'ai/danMCai/workspace/evaluations'), { recursive: true });
