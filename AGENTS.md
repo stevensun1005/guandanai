@@ -11,6 +11,7 @@
 - 有限与持续训练可用 `ai/research/tools/update-model-study.py` 更新生成区与证据快照。自动推送仅允许专用干净工作树中的 `ai/research/MODEL_STUDY.md` 与 `ai/research/evaluation/model-study-progress.json`，并须先通过 Node、格式和相关 Python 测试；出现分叉、其他修改或竞争时停止，不强推，不暂存用户的其他文件。
 - 新训练权重和缓冲区留在忽略的 `ai/local/runs/`、`ai/local/checkpoints/`、`ai/local/data/generated/` 与 `ai/guanzero/runs/`，临时现场放 `ai/local/workspace/`，不再往 Git 增加大文件；需要公开的权重通过 GitHub Release 附件及 SHA-256 索引归档。已有历史检查点保留，训练用 Critic 不加入网页默认模型清单。
 - 新方法的设计假设必须与已经完成的实现及验证分开。若新数据推翻旧结论，说明修正原因并保留 Git 历史。
+- 真人联机牌谱独立保存在云端 D1，下载与生成数据留在忽略的 `ai/shared/data/human-games/`。`kind=test`、电脑与超时托管动作不作为人工样本，按整场分组防止跨训练／验证泄漏；来源标为 `unverified_browser`，不能将合法重放等同真人身份验证。不得自动接入当前冻结训练，也不得提交牌谱、导出密钥或云端管理凭据。
 
 ## 工作区目录
 

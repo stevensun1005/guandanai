@@ -41,6 +41,8 @@ Use the center of the lobby table to choose a starting level and compass team. T
 
 ## What is included
 
+Online rounds with at least two people are archived as structured, pseudonymous records after completion. The host uploads once, with offline retry and deduplication. Private JSON exports and human-action JSONL preparation are available; collected data is not automatically fed into active training. See [collection and export](./web/collector/README.md).
+
 | Feature             | In the game                                                                                   |
 | ------------------- | --------------------------------------------------------------------------------------------- |
 | Four-player GuanDan | Two decks, wild cards, bombs, tribute, partner lead and level progression                     |

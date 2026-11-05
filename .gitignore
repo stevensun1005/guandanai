@@ -8,6 +8,9 @@ ai/local/data/generated/
 ai/local/environment/
 ai/guanzero/runs/
 ai/publishing/cache/
+ai/shared/data/human-games/
+web/collector/.wrangler/
+web/collector/.dev.vars*
 work/
 dist/
 outputs/

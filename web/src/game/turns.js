@@ -13,6 +13,7 @@ import { practiceSnap } from '../replay/history.js';
 import { practiceRoundStart } from '../replay/session.js';
 import { renderClocks } from '../ui/clocks.js';
 import { render } from '../ui/table.js';
+import { collectStarted } from '../collection/client.js';
 
 let TRIB_SHOW_MS;
 export let active;
@@ -60,6 +61,7 @@ export function beginPlay() {
 export function startPlay(leader) {
   runtime.game.phase = 'play';
   runtime.game.turn = leader;
+  collectStarted();
   runtime.game.clock = null;
   if (runtime.reviewMode) practiceRoundStart();
   if ((runtime.game.trib && runtime.game.trib.length) || runtime.game.kang) {

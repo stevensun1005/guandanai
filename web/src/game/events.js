@@ -143,12 +143,12 @@ function applyEvt(e) {
       if (p === 0) runtime.network.pending = false;
       if (e.k === 'pass') {
         if (!canPass(runtime.game.trick)) return false;
-        doPlay(p, null);
+        doPlay(p, null, !!e.automatic);
         return true;
       }
       const play = readPlay(runtime.game.hands[p], e, runtime.game.trick?.play, runtime.game.L);
       if (!play) return false;
-      doPlay(p, play);
+      doPlay(p, play, !!e.automatic);
       return true;
     }
   }

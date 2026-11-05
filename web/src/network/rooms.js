@@ -223,7 +223,7 @@ function hostGuestAct(seat, e) {
     default:
       return false;
   }
-  act(e);
+  act({ ...e, automatic: false });
   return true;
 }
 

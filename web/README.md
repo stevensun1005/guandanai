@@ -2,20 +2,21 @@
 
 浏览器游戏、界面、房间联机和浏览器模型推理都从这里找。
 
-| 找什么                        | 位置                                                                                           |
-| ----------------------------- | ---------------------------------------------------------------------------------------------- |
-| 页面与启动流程                | [src/index.html](src/index.html)、[src/app.js](src/app.js)、[src/app](src/app)                 |
-| 牌规、牌型、比赛结算          | [src/core](src/core)                                                                           |
-| 发牌、回合、进还贡            | [src/game](src/game)                                                                           |
-| 手牌排列、选择、理牌          | [src/hand](src/hand)                                                                           |
-| UI、动画、音效、样式          | [src/ui](src/ui)、[src/effects](src/effects)、[src/audio](src/audio)、[src/styles](src/styles) |
-| 房间、重连、语音              | [src/network](src/network)、[src/lobby](src/lobby)                                             |
-| 模型选择、Worker 与浏览器推理 | [src/ai](src/ai)                                                                               |
-| 独立纯规则对手及版本边界      | [src/rule-bot](src/rule-bot/README.md)                                                         |
-| 当前上线模型与默认值          | [src/ai/model-catalog.json](src/ai/model-catalog.json)                                         |
-| 构建、预览、打包              | [tools](tools)                                                                                 |
-| 网页测试                      | [tests](tests)                                                                                 |
-| 操作与部署文档                | [docs](docs)                                                                                   |
+| 找什么                         | 位置                                                                                           |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| 页面与启动流程                 | [src/index.html](src/index.html)、[src/app.js](src/app.js)、[src/app](src/app)                 |
+| 牌规、牌型、比赛结算           | [src/core](src/core)                                                                           |
+| 发牌、回合、进还贡             | [src/game](src/game)                                                                           |
+| 手牌排列、选择、理牌           | [src/hand](src/hand)                                                                           |
+| UI、动画、音效、样式           | [src/ui](src/ui)、[src/effects](src/effects)、[src/audio](src/audio)、[src/styles](src/styles) |
+| 房间、重连、语音               | [src/network](src/network)、[src/lobby](src/lobby)                                             |
+| 匿名牌谱、断网补传、云端数据库 | [src/collection](src/collection)、[collector](collector/README.md)                             |
+| 模型选择、Worker 与浏览器推理  | [src/ai](src/ai)                                                                               |
+| 独立纯规则对手及版本边界       | [src/rule-bot](src/rule-bot/README.md)                                                         |
+| 当前上线模型与默认值           | [src/ai/model-catalog.json](src/ai/model-catalog.json)                                         |
+| 构建、预览、打包               | [tools](tools)                                                                                 |
+| 网页测试                       | [tests](tests)                                                                                 |
+| 操作与部署文档                 | [docs](docs)                                                                                   |
 
 在项目根目录运行：
 

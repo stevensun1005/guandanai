@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-11-05T16:23:14.185008+00:00",
+  "classification": "collection-infrastructure-not-model-strength",
+  "baseCommit": "8059bc54547725097ce66f36b6a5ac548d3c31e1",
+  "protocol": {
+    "schema": 1,
+    "encoding": "physical-108-v1",
+    "minimumHumans": 2,
+    "uploadAfter": "completed round, host only",
+    "trust": "unverified_browser",
+    "humanIdentityVerified": false,
+    "trainingModified": false,
+    "browserDefaultId": "009",
+    "neuralWeightsModified": false,
+    "testKindExcluded": true,
+    "automatedActionsExcluded": true,
+    "splitUnit": "matchId",
+    "rawOrSecretsCommitted": false
+  },
+  "sourceFingerprintEncoding": "SHA256 of UTF8 text with CRLF normalized to LF",
+  "sourceSHA256": {
+    "web/src/collection/record.mjs": "2a0179bb12261ffb44c153d47902b044b01b942ab0a092b6c25b9746decb98d4",
+    "web/src/collection/validate.mjs": "8736ae3cf58ebe30d702942431f04ec1f9d697f87b3572d22772d132ea7c758b",
+    "web/src/collection/outbox.mjs": "7c83a7715c4b0ee3894006455b03ef3507911959e39c9e7f937f97facf77dfa5",
+    "web/src/collection/client.js": "e7ce4839c0588543c1bc734ac86e053e2f42e07a5309b1c65b83d8e3a5acf224",
+    "web/collector/worker.mjs": "7386cd8057a8e146e135a29031ba237dfee23bc795b50633bf548c9709b1db57",
+    "web/collector/migrations/0001_rounds.sql": "f3c0ec452076a4f2045f366b1cf18ede5ada2d1f7c3127af0aa4eb23e58eea53",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+    "web/src/ai/model-catalog.json": "fb4f712135aca4ceb0a70501a2089fa29eef9b18c370dd4a73c920bc13356f9e",
+    "ai/shared/data/tools/fetch-human-games.mjs": "1b0f4a0b60bc42c73f66166a49f526dd48a1f616e455e1ed738a8c389d468080",
+    "ai/shared/data/tools/prepare-human-games.mjs": "cf0853f2c9c1ddda030cbe596a902933afb1da2170ff712aea7107f93e9b02f7",
+    "ai/shared/data/tools/human-examples.mjs": "d7b480b19b951760c7421d5ee1ae2b6d2dd1c1e78a58c674434a039b735bbdf7",
+    "web/tests/collection.test.mjs": "cf0b2ffc40e53b4343e9b018931856771e238e65f6a568144f166db7e1e54065",
+    "web/tests/collection_smoke.py": "885cdb16787fe40ba69d163515ab2c48112baff8a7574e85d304d415fb0ab3f0",
+    "web/tests/fixtures/collected-round.mjs": "48da19818cb8aab27a1797bd9f0f6db5047921b34345d741efad99b1902553a3"
+  },
+  "cloud": {
+    "database": "guandan-human-games-v1",
+    "worker": "guandan-human-games-collector",
+    "workerVersion": "fd08d901-48d4-44a3-840e-10a13dbf3ae7",
+    "endpoint": "https://guandan-human-games-collector.couple-ledger-service.workers.dev/rounds",
+    "migration": "0001_rounds.sql",
+    "rowsAtValidation": {
+      "test": 2,
+      "game": 0
+    },
+    "anonymousExportStatus": 401
+  },
+  "completed": {
+    "syntheticReplaySeeds": [
+      9301000,
+      9301001,
+      9301002,
+      9301003,
+      9301004,
+      9301005,
+      9301006,
+      9301007
+    ],
+    "directIngestSyntheticSeed": 9301009,
+    "seedPurpose": "protocol development only, not training or held-out acceptance",
+    "browser": {
+      "stage": "predeployment-local-build",
+      "recordId": "852b356a-84a9-4281-8833-5241129530ec:1",
+      "kind": "test",
+      "humanTrainingGames": 0,
+      "actions": 121,
+      "actorCounts": {
+        "human": 52,
+        "bot": 68,
+        "timeout": 1
+      },
+      "hostUploads": 1,
+      "durableCloudRow": 2,
+      "duplicateAcknowledged": true,
+      "anonymousReadDenied": true,
+      "preEndUploads": 0,
+      "pageErrors": []
+    },
+    "syntheticLayout": {
+      "classification": "synthetic-layout-only",
+      "viewports": [
+        {
+          "width": 1280,
+          "height": 850,
+          "statusVisible": true,
+          "insideDialog": false,
+          "bounds": {
+            "x": 1092,
+            "y": 80,
+            "width": 122,
+            "height": 15
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "statusVisible": true,
+          "insideDialog": false,
+          "bounds": {
+            "x": 16,
+            "y": 87,
+            "width": 286.140625,
+            "height": 15
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "statusVisible": true,
+          "insideDialog": false,
+          "bounds": {
+            "x": 706,
+            "y": 80,
+            "width": 122,
+            "height": 15
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    "normalExport": {
+      "downloaded": 0,
+      "preparedHumanActions": 0
+    },
+    "diagnosticExport": {
+      "downloaded": 2,
+      "preparedHumanActions": 0
+    },
+    "node": {
+      "passed": 146,
+      "failed": 0,
+      "networkEnvironment": "test-process-only free local port binding; default Windows dynamic range exhausted by unrelated dllhost processes"
+    },
+    "pythonResearch": {
+      "passed": 9
+    },
+    "format": "passed",
+    "build": "passed",
+    "finalBuildVersion": "74a5e1aadf"
+  },
+  "negativeResults": [
+    {
+      "stage": "initial-browser-upload",
+      "failure": "native fetch receiver Illegal invocation",
+      "effect": "record remained pending, no cloud receipt or deletion",
+      "resolution": "call globalThis.fetch and add regression; real cloud round upload passed"
+    },
+    {
+      "stage": "status-layout-review",
+      "failure": "upload status nested in help dialog",
+      "resolution": "moved into table actions; synthetic layout checked at three sizes"
+    },
+    {
+      "stage": "ordinary-npm-test",
+      "failure": "ENOBUFS in two pre-existing HTTP dashboard tests",
+      "resolution": "146 tests passed using ignored test-process-only local-port helper; OS processes/settings and training untouched"
+    }
+  ],
+  "strength": {
+    "newGenuineHumanRounds": 0,
+    "newTrainingUpdates": 0,
+    "newIndependentMatches": 0,
+    "wins": null,
+    "losses": null,
+    "draws": null,
+    "winRate": null,
+    "confidenceInterval": null,
+    "claim80Percent": false
+  }
+}

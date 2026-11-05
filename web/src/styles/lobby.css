@@ -192,12 +192,29 @@
   padding: 6px 22px;
 }
 .lobby-room {
+  flex-wrap: wrap;
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 12px;
   font-size: 18px;
   color: var(--muted);
+}
+.lobby-room > small {
+  flex-basis: 100%;
+  order: 2;
+  font-size: 12px;
+  white-space: normal;
+}
+#collectionStatus {
+  font-size: 12px;
+  display: block;
+  text-align: right;
+  flex-basis: 100%;
+  grid-column: 1 / -1;
+}
+#collectionStatus[hidden] {
+  display: none;
 }
 .lobby-room b {
   font-family: var(--font-display);

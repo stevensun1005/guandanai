@@ -28,7 +28,9 @@ const hash = createHash('sha256');
 for (const file of await sourceFiles('web/src')) {
   hash.update(file);
   hash.update(
-    /\.(js|mjs|css|html)$/.test(file) ? await read(file) : await readFile(path.join(root, file)),
+    /\.(js|mjs|css|html|json|md)$/.test(file)
+      ? await read(file)
+      : await readFile(path.join(root, file)),
   );
 }
 const modelVersions = {};
@@ -45,7 +47,24 @@ for (const model of BOT_MODELS) {
   hash.update(model.id).update(bytes);
 }
 const version = hash.digest('hex').slice(0, 10);
-const html = (await read('web/src/index.html')).replaceAll('__APP_VERSION__', version);
+const collectionConfig = JSON.parse(await read('web/src/collection/config.json'));
+let collectionOrigin = '';
+if (collectionConfig.endpoint) {
+  const endpoint = new URL(collectionConfig.endpoint);
+  if (
+    endpoint.protocol !== 'https:' ||
+    endpoint.pathname !== '/rounds' ||
+    endpoint.username ||
+    endpoint.password ||
+    endpoint.search ||
+    endpoint.hash
+  )
+    throw Error('Invalid collection endpoint');
+  collectionOrigin = endpoint.origin;
+}
+const html = (await read('web/src/index.html'))
+  .replaceAll('__APP_VERSION__', version)
+  .replaceAll('__COLLECTION_ORIGIN__', collectionOrigin);
 for (const dir of ['web/dist/assets/vendor', 'web/dist/models'])
   await mkdir(path.join(root, dir), { recursive: true });
 await writeFile(path.join(root, 'web/dist/index.html'), html);

@@ -17,3 +17,5 @@
 近期成果：[v000481076 独立整场评测](evaluation/independent-v481076-rule-20261105/results.json) · [rules-v2 隔离与界面兼容性证据](evaluation/ui-rule-refresh-20261105.json)。后者不包含新版对手的胜率验收。
 
 [Clint 与 danMCai 冠军选择证据](evaluation/champion-selection-20261105/validation.json)记录六项菜单、真实门控来源及兼容性，不是新独立强度验收。
+
+[真人牌谱云端采集验证](evaluation/human-collection-20261105.json)记录合成联机测试、数据隔离及私有导出结果；这是数据基础设施验证，没有新增真人训练或胜率结果。

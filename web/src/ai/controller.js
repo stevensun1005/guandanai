@@ -178,7 +178,7 @@ export function initialize() {
         runtime.selection = new Set();
         setMsg(pl ? '时间到，已自动出牌' : '时间到，自动过');
       }
-      act(playEvt(clock.who, pl));
+      act({ ...playEvt(clock.who, pl), automatic: true });
     }
 
     function init() {

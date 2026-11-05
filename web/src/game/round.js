@@ -14,11 +14,13 @@ import { renderClocks } from '../ui/clocks.js';
 import { showResult } from '../ui/overlays.js';
 import { pileSweep, pileThrow, showPlace, showRest, trickHold } from '../ui/table-pile.js';
 import { render } from '../ui/table.js';
+import { collectAction, collectCompleted } from '../collection/client.js';
 
 let END_SHOW_MS;
 
-export function doPlay(p, play) {
+export function doPlay(p, play, automatic = false) {
   if (runtime.game.phase !== 'play' || runtime.game.turn !== p) return;
+  collectAction(p, play, automatic);
   // the clock goes at once, before the cards are laid out, so the plate is back to its own size for them
   runtime.game.clock = null;
   renderClocks();
@@ -138,6 +140,7 @@ function finishRound() {
   runtime.game.aFails = outcome.aFails;
   runtime.game.result = outcome.result;
   if (Object.hasOwn(outcome, 'aOut')) runtime.game.aOut = outcome.aOut;
+  collectCompleted();
   const { team, win, draw } = outcome.result;
   if (runtime.reviewMode) practiceRoundEnd();
   runtime.game.prevOut = runtime.game.out.slice();

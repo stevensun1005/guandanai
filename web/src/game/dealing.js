@@ -11,6 +11,7 @@ import { $ } from '../ui/cards.js';
 import { hideOverlay, setPaused } from '../ui/overlays.js';
 import { pileGeo, pileRebuild } from '../ui/table-pile.js';
 import { render } from '../ui/table.js';
+import { collectDealt } from '../collection/client.js';
 
 let DECK_MS;
 
@@ -195,6 +196,7 @@ export function finishDeal() {
       runtime.game.hands[p].push(runtime.game.deck.pop());
   runtime.game.deck = [];
   for (const h of runtime.game.hands) sortHand(h, runtime.game.L);
+  collectDealt();
   removeDeck();
   if (!runtime.game.prevOut) {
     runtime.game.turn = runtime.game.firstLeader;
