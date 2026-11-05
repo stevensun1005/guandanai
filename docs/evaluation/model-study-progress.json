@@ -49550,7 +49550,7 @@
   "fingerprint": "9695518f151761ae8f9478a9e93e4064cb6c29b3486377211b9783a58c9b6ceb",
   "observedUTC": "2026-11-05T00:05:01.921192+00:00",
   "guanzero": {
-    "updatedAt": "2026-11-05T03:24:31.514234+00:00",
+    "updatedAt": "2026-11-05T04:25:58.937866+00:00",
     "phase": "supervised-running",
     "hardware": {
       "cpu": "Intel Core i5-13600KF",
@@ -49569,7 +49569,7 @@
       "node": "26.13.0"
     },
     "checks": {
-      "nodeTests": 109,
+      "nodeTests": 113,
       "pythonTests": 8,
       "protectedFilesUnchanged": true,
       "protectedSHA256": {
@@ -65097,538 +65097,538 @@
         },
         "actors": [
           {
-            "matches": 832,
-            "rows": 466621,
-            "nextSeed": 835,
+            "matches": 1570,
+            "rows": 915204,
+            "nextSeed": 1573,
             "slot": 0,
             "pid": 49516,
-            "loadedModel": 1961,
-            "currentRows": 0,
-            "updatedAt": "2026-11-05T03:24:31.758Z",
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.231Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18276,
+              "requests": 467059,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 169
             }
           },
           {
-            "matches": 830,
-            "rows": 466265,
-            "nextSeed": 833,
+            "matches": 1580,
+            "rows": 915410,
+            "nextSeed": 1583,
             "slot": 1,
             "pid": 34184,
-            "loadedModel": 1961,
-            "currentRows": 200,
-            "updatedAt": "2026-11-05T03:24:31.668Z",
+            "loadedModel": 6469,
+            "currentRows": 100,
+            "updatedAt": "2026-11-05T04:25:58.826Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18271,
+              "requests": 467316,
               "fallbacks": 0,
-              "tieRescores": 5
+              "tieRescores": 172
             }
           },
           {
-            "matches": 849,
-            "rows": 466767,
-            "nextSeed": 852,
+            "matches": 1587,
+            "rows": 915807,
+            "nextSeed": 1590,
             "slot": 10,
             "pid": 29360,
-            "loadedModel": 1961,
-            "currentRows": 100,
-            "updatedAt": "2026-11-05T03:24:31.068Z",
+            "loadedModel": 6469,
+            "currentRows": 300,
+            "updatedAt": "2026-11-05T04:25:58.616Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18174,
+              "requests": 467414,
               "fallbacks": 0,
-              "tieRescores": 9
+              "tieRescores": 198
             }
           },
           {
-            "matches": 840,
-            "rows": 468116,
-            "nextSeed": 843,
+            "matches": 1585,
+            "rows": 916872,
+            "nextSeed": 1588,
             "slot": 11,
             "pid": 50668,
-            "loadedModel": 1961,
+            "loadedModel": 6469,
             "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.388Z",
+            "updatedAt": "2026-11-05T04:25:58.564Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18315,
+              "requests": 467071,
               "fallbacks": 0,
-              "tieRescores": 9
+              "tieRescores": 192
             }
           },
           {
-            "matches": 843,
-            "rows": 464845,
-            "nextSeed": 846,
+            "matches": 1579,
+            "rows": 914180,
+            "nextSeed": 1582,
             "slot": 12,
             "pid": 56444,
-            "loadedModel": 1961,
-            "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.814Z",
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.477Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18314,
+              "requests": 467449,
               "fallbacks": 0,
-              "tieRescores": 3
+              "tieRescores": 175
             }
           },
           {
-            "matches": 28,
-            "rows": 18013,
-            "nextSeed": 29,
+            "matches": 760,
+            "rows": 466688,
+            "nextSeed": 761,
             "slot": 13,
             "pid": 31068,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18213,
+              "requests": 467188,
               "fallbacks": 0,
-              "tieRescores": 4
+              "tieRescores": 153
             },
-            "loadedModel": 1961,
-            "currentRows": 200,
-            "updatedAt": "2026-11-05T03:24:31.062Z"
+            "loadedModel": 6469,
+            "currentRows": 500,
+            "updatedAt": "2026-11-05T04:25:58.642Z"
           },
           {
-            "matches": 28,
-            "rows": 17778,
-            "nextSeed": 29,
+            "matches": 771,
+            "rows": 465968,
+            "nextSeed": 772,
             "slot": 14,
             "pid": 40148,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18278,
+              "requests": 466468,
               "fallbacks": 0,
-              "tieRescores": 3
+              "tieRescores": 174
             },
-            "loadedModel": 1961,
+            "loadedModel": 6469,
             "currentRows": 500,
-            "updatedAt": "2026-11-05T03:24:31.793Z"
+            "updatedAt": "2026-11-05T04:25:58.856Z"
           },
           {
-            "matches": 33,
-            "rows": 17939,
-            "nextSeed": 34,
+            "matches": 771,
+            "rows": 467465,
+            "nextSeed": 772,
             "slot": 15,
             "pid": 25912,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18239,
+              "requests": 467865,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 179
             },
-            "loadedModel": 1961,
-            "currentRows": 300,
-            "updatedAt": "2026-11-05T03:24:31.327Z"
+            "loadedModel": 6469,
+            "currentRows": 400,
+            "updatedAt": "2026-11-05T04:25:58.470Z"
           },
           {
-            "matches": 30,
-            "rows": 18104,
-            "nextSeed": 31,
+            "matches": 787,
+            "rows": 467206,
+            "nextSeed": 788,
             "slot": 16,
             "pid": 51780,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18304,
+              "requests": 467406,
               "fallbacks": 0,
-              "tieRescores": 5
+              "tieRescores": 167
             },
-            "loadedModel": 1961,
+            "loadedModel": 6469,
             "currentRows": 200,
-            "updatedAt": "2026-11-05T03:24:31.662Z"
+            "updatedAt": "2026-11-05T04:25:58.660Z"
           },
           {
-            "matches": 32,
-            "rows": 18169,
-            "nextSeed": 33,
+            "matches": 773,
+            "rows": 466596,
+            "nextSeed": 774,
             "slot": 17,
             "pid": 20364,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18269,
+              "requests": 466996,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 192
             },
-            "loadedModel": 1961,
-            "currentRows": 100,
-            "updatedAt": "2026-11-05T03:24:31.510Z"
+            "loadedModel": 6469,
+            "currentRows": 400,
+            "updatedAt": "2026-11-05T04:25:58.526Z"
           },
           {
-            "matches": 33,
-            "rows": 17959,
-            "nextSeed": 34,
+            "matches": 762,
+            "rows": 467086,
+            "nextSeed": 763,
             "slot": 18,
             "pid": 41376,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18259,
+              "requests": 467486,
               "fallbacks": 0,
-              "tieRescores": 18
+              "tieRescores": 185
             },
-            "loadedModel": 1961,
-            "currentRows": 300,
-            "updatedAt": "2026-11-05T03:24:31.760Z"
+            "loadedModel": 6469,
+            "currentRows": 400,
+            "updatedAt": "2026-11-05T04:25:58.470Z"
           },
           {
-            "matches": 30,
-            "rows": 18028,
-            "nextSeed": 31,
+            "matches": 777,
+            "rows": 466156,
+            "nextSeed": 778,
             "slot": 19,
             "pid": 44164,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18228,
+              "requests": 466956,
               "fallbacks": 0,
-              "tieRescores": 8
+              "tieRescores": 159
             },
-            "loadedModel": 1961,
-            "currentRows": 200,
-            "updatedAt": "2026-11-05T03:24:31.310Z"
+            "loadedModel": 6469,
+            "currentRows": 800,
+            "updatedAt": "2026-11-05T04:25:58.857Z"
           },
           {
-            "matches": 847,
-            "rows": 465783,
-            "nextSeed": 849,
+            "matches": 1597,
+            "rows": 914959,
+            "nextSeed": 1599,
             "slot": 2,
             "pid": 27064,
-            "loadedModel": 1961,
-            "currentRows": 0,
-            "updatedAt": "2026-11-05T03:24:31.167Z",
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.970Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18233,
+              "requests": 467609,
               "fallbacks": 0,
-              "tieRescores": 3
+              "tieRescores": 193
             }
           },
           {
-            "matches": 31,
-            "rows": 17985,
-            "nextSeed": 32,
+            "matches": 768,
+            "rows": 467437,
+            "nextSeed": 769,
             "slot": 20,
             "pid": 13212,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18285,
+              "requests": 467537,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 162
             },
-            "loadedModel": 1961,
-            "currentRows": 300,
-            "updatedAt": "2026-11-05T03:24:31.436Z"
+            "loadedModel": 6469,
+            "currentRows": 100,
+            "updatedAt": "2026-11-05T04:25:59.016Z"
           },
           {
-            "matches": 30,
-            "rows": 18308,
-            "nextSeed": 31,
+            "matches": 760,
+            "rows": 467022,
+            "nextSeed": 761,
             "slot": 21,
             "pid": 55200,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18308,
+              "requests": 467422,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 185
             },
-            "loadedModel": 1961,
-            "currentRows": 0,
-            "updatedAt": "2026-11-05T03:24:31.630Z"
+            "loadedModel": 6469,
+            "currentRows": 400,
+            "updatedAt": "2026-11-05T04:25:58.534Z"
           },
           {
-            "matches": 32,
-            "rows": 18049,
-            "nextSeed": 33,
+            "matches": 765,
+            "rows": 467988,
+            "nextSeed": 766,
             "slot": 22,
             "pid": 15608,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18349,
+              "requests": 468088,
               "fallbacks": 0,
-              "tieRescores": 4
+              "tieRescores": 171
             },
-            "loadedModel": 1961,
-            "currentRows": 300,
-            "updatedAt": "2026-11-05T03:24:31.928Z"
+            "loadedModel": 6469,
+            "currentRows": 100,
+            "updatedAt": "2026-11-05T04:25:59.082Z"
           },
           {
-            "matches": 32,
-            "rows": 18001,
-            "nextSeed": 33,
+            "matches": 763,
+            "rows": 466775,
+            "nextSeed": 764,
             "slot": 23,
             "pid": 36576,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18201,
+              "requests": 466975,
               "fallbacks": 0,
-              "tieRescores": 4
+              "tieRescores": 162
             },
-            "loadedModel": 1961,
+            "loadedModel": 6469,
             "currentRows": 200,
-            "updatedAt": "2026-11-05T03:24:31.222Z"
+            "updatedAt": "2026-11-05T04:25:58.503Z"
           },
           {
-            "matches": 29,
-            "rows": 18034,
-            "nextSeed": 30,
+            "matches": 772,
+            "rows": 466992,
+            "nextSeed": 773,
             "slot": 24,
             "pid": 31360,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18334,
+              "requests": 467192,
               "fallbacks": 0,
-              "tieRescores": 8
+              "tieRescores": 203
             },
-            "loadedModel": 1961,
-            "currentRows": 300,
-            "updatedAt": "2026-11-05T03:24:31.712Z"
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.908Z"
           },
           {
-            "matches": 31,
-            "rows": 18235,
-            "nextSeed": 32,
+            "matches": 763,
+            "rows": 466934,
+            "nextSeed": 764,
             "slot": 25,
             "pid": 47456,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18335,
+              "requests": 467134,
               "fallbacks": 0,
-              "tieRescores": 4
+              "tieRescores": 165
             },
-            "loadedModel": 1961,
-            "currentRows": 100,
-            "updatedAt": "2026-11-05T03:24:31.327Z"
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.565Z"
           },
           {
-            "matches": 30,
-            "rows": 17635,
-            "nextSeed": 31,
+            "matches": 771,
+            "rows": 467135,
+            "nextSeed": 772,
             "slot": 26,
             "pid": 46052,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18235,
+              "requests": 467135,
               "fallbacks": 0,
-              "tieRescores": 12
+              "tieRescores": 179
             },
-            "loadedModel": 1961,
-            "currentRows": 600,
-            "updatedAt": "2026-11-05T03:24:31.281Z"
+            "loadedModel": 6469,
+            "currentRows": 0,
+            "updatedAt": "2026-11-05T04:25:58.820Z"
           },
           {
-            "matches": 28,
-            "rows": 18191,
-            "nextSeed": 29,
+            "matches": 768,
+            "rows": 466721,
+            "nextSeed": 769,
             "slot": 27,
             "pid": 16392,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18291,
+              "requests": 467121,
               "fallbacks": 0,
-              "tieRescores": 5
+              "tieRescores": 167
             },
-            "loadedModel": 1961,
-            "currentRows": 100,
-            "updatedAt": "2026-11-05T03:24:31.437Z"
+            "loadedModel": 6469,
+            "currentRows": 400,
+            "updatedAt": "2026-11-05T04:25:58.392Z"
           },
           {
-            "matches": 31,
-            "rows": 17856,
-            "nextSeed": 32,
+            "matches": 761,
+            "rows": 466953,
+            "nextSeed": 762,
             "slot": 28,
             "pid": 14576,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18256,
+              "requests": 467253,
               "fallbacks": 0,
-              "tieRescores": 12
+              "tieRescores": 167
             },
-            "loadedModel": 1961,
-            "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.647Z"
+            "loadedModel": 6469,
+            "currentRows": 300,
+            "updatedAt": "2026-11-05T04:25:58.700Z"
           },
           {
-            "matches": 31,
-            "rows": 18258,
-            "nextSeed": 32,
+            "matches": 778,
+            "rows": 467000,
+            "nextSeed": 779,
             "slot": 29,
             "pid": 11804,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18258,
+              "requests": 467300,
               "fallbacks": 0,
-              "tieRescores": 8
+              "tieRescores": 175
             },
-            "loadedModel": 1961,
-            "currentRows": 0,
-            "updatedAt": "2026-11-05T03:24:31.456Z"
+            "loadedModel": 6469,
+            "currentRows": 300,
+            "updatedAt": "2026-11-05T04:25:58.983Z"
           },
           {
-            "matches": 845,
-            "rows": 467234,
-            "nextSeed": 848,
+            "matches": 1574,
+            "rows": 915979,
+            "nextSeed": 1577,
             "slot": 3,
             "pid": 10288,
-            "loadedModel": 1961,
-            "currentRows": 200,
-            "updatedAt": "2026-11-05T03:24:31.957Z",
+            "loadedModel": 6469,
+            "currentRows": 0,
+            "updatedAt": "2026-11-05T04:25:58.922Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18360,
+              "requests": 466905,
               "fallbacks": 0,
-              "tieRescores": 9
+              "tieRescores": 180
             }
           },
           {
-            "matches": 32,
-            "rows": 18304,
-            "nextSeed": 33,
+            "matches": 773,
+            "rows": 466632,
+            "nextSeed": 774,
             "slot": 30,
             "pid": 19228,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18304,
+              "requests": 467132,
               "fallbacks": 0,
-              "tieRescores": 12
+              "tieRescores": 160
             },
-            "loadedModel": 1961,
-            "currentRows": 0,
-            "updatedAt": "2026-11-05T03:24:31.964Z"
+            "loadedModel": 6469,
+            "currentRows": 500,
+            "updatedAt": "2026-11-05T04:25:58.989Z"
           },
           {
-            "matches": 30,
-            "rows": 17863,
-            "nextSeed": 31,
+            "matches": 761,
+            "rows": 467776,
+            "nextSeed": 762,
             "slot": 31,
             "pid": 30596,
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18363,
+              "requests": 467876,
               "fallbacks": 0,
-              "tieRescores": 8
+              "tieRescores": 182
             },
-            "loadedModel": 1961,
-            "currentRows": 500,
-            "updatedAt": "2026-11-05T03:24:32.044Z"
+            "loadedModel": 6469,
+            "currentRows": 100,
+            "updatedAt": "2026-11-05T04:25:58.847Z"
           },
           {
-            "matches": 835,
-            "rows": 464953,
-            "nextSeed": 838,
+            "matches": 1584,
+            "rows": 914373,
+            "nextSeed": 1587,
             "slot": 4,
             "pid": 21640,
-            "loadedModel": 1961,
-            "currentRows": 500,
-            "updatedAt": "2026-11-05T03:24:31.787Z",
+            "loadedModel": 6469,
+            "currentRows": 100,
+            "updatedAt": "2026-11-05T04:25:58.411Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18338,
+              "requests": 467358,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 160
             }
           },
           {
-            "matches": 840,
-            "rows": 468005,
-            "nextSeed": 843,
+            "matches": 1592,
+            "rows": 917750,
+            "nextSeed": 1595,
             "slot": 5,
             "pid": 12116,
-            "loadedModel": 1961,
-            "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.793Z",
+            "loadedModel": 6469,
+            "currentRows": 100,
+            "updatedAt": "2026-11-05T04:25:58.990Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18320,
+              "requests": 467765,
               "fallbacks": 0,
-              "tieRescores": 9
+              "tieRescores": 176
             }
           },
           {
-            "matches": 843,
-            "rows": 468094,
-            "nextSeed": 846,
+            "matches": 1590,
+            "rows": 917309,
+            "nextSeed": 1593,
             "slot": 6,
             "pid": 32092,
-            "loadedModel": 1961,
-            "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.575Z",
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.641Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18327,
+              "requests": 467342,
               "fallbacks": 0,
-              "tieRescores": 8
+              "tieRescores": 189
             }
           },
           {
-            "matches": 831,
-            "rows": 467550,
-            "nextSeed": 833,
+            "matches": 1567,
+            "rows": 916026,
+            "nextSeed": 1569,
             "slot": 7,
             "pid": 19644,
-            "loadedModel": 1961,
-            "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.691Z",
+            "loadedModel": 6469,
+            "currentRows": 300,
+            "updatedAt": "2026-11-05T04:25:58.797Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18320,
+              "requests": 466696,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 200
             }
           },
           {
-            "matches": 851,
-            "rows": 465919,
-            "nextSeed": 854,
+            "matches": 1594,
+            "rows": 915517,
+            "nextSeed": 1597,
             "slot": 8,
             "pid": 12448,
-            "loadedModel": 1961,
-            "currentRows": 800,
-            "updatedAt": "2026-11-05T03:24:31.842Z",
+            "loadedModel": 6469,
+            "currentRows": 200,
+            "updatedAt": "2026-11-05T04:25:58.902Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18276,
+              "requests": 467274,
               "fallbacks": 0,
-              "tieRescores": 7
+              "tieRescores": 183
             }
           },
           {
-            "matches": 835,
-            "rows": 466882,
-            "nextSeed": 838,
+            "matches": 1570,
+            "rows": 915928,
+            "nextSeed": 1573,
             "slot": 9,
             "pid": 33528,
-            "loadedModel": 1961,
+            "loadedModel": 6469,
             "currentRows": 400,
-            "updatedAt": "2026-11-05T03:24:31.780Z",
+            "updatedAt": "2026-11-05T04:25:58.596Z",
             "inference": {
               "backend": "gpu-batch",
-              "requests": 18303,
+              "requests": 467349,
               "fallbacks": 0,
-              "tieRescores": 8
+              "tieRescores": 179
             }
           }
         ],
-        "matches": 11502,
-        "samples": 6409743,
+        "matches": 35173,
+        "samples": 20777844,
         "learner": {
-          "step": 2002,
-          "usedSamples": 6406400,
-          "loss": 3.078872516155243,
-          "updatesPerSecond": 1.164459156267528,
+          "step": 6492,
+          "usedSamples": 20774400,
+          "loss": 3.1699706315994263,
+          "updatesPerSecond": 1.2156845877529727,
           "device": "cuda",
           "deviceName": "NVIDIA GeForce RTX 4070",
           "torch": "2.11.0+cu128",
           "precision": "FP32",
           "objective": "adp",
-          "updatedAt": 1793849071.6593344,
+          "updatedAt": 1793852758.5288134,
           "error": null,
           "pid": 26140
         },
         "latest": {
-          "file": "model-000000001961.onnx",
-          "version": 1961,
-          "updatedAt": 1793849038.8739777
+          "file": "model-000000006469.onnx",
+          "version": 6469,
+          "updatedAt": 1793852741.5036206
         },
         "events": [
           {
@@ -71677,7 +71677,7 @@
           "startedAt": "2026-11-04T21:28:50.3047849-05:00",
           "plannedEnd": "2026-11-05T21:28:50.3082648-05:00"
         },
-        "elapsedSeconds": 157.625234
+        "elapsedSeconds": 3845.048866
       }
     },
     "guardian": {
@@ -71686,69 +71686,70 @@
       "deadline": "2026-11-05T21:28:50.3082648-05:00",
       "phase": "running",
       "publicationEnabled": true,
-      "updatedAt": "2026-11-05T03:24:30.259960+00:00",
-      "step": 1998,
-      "matches": 11490,
-      "samples": 6401929,
+      "updatedAt": "2026-11-05T04:25:57.528012+00:00",
+      "step": 6490,
+      "matches": 35165,
+      "samples": 20773119,
       "supervisorAlive": true,
       "learnerError": null,
       "inference": {
         "pid": 44724,
         "device": "cuda",
-        "requests": 578460,
-        "batches": 19784,
+        "requests": 14946804,
+        "batches": 519880,
         "maxBatch": 32,
         "error": null,
-        "batchWaitMilliseconds": 55273.054781137034,
-        "computeMilliseconds": 52409.717622213066,
+        "batchWaitMilliseconds": 1425369.1398915835,
+        "computeMilliseconds": 1376345.3766610473,
         "ready": true,
-        "updatedAt": 1793849069.9880278,
-        "averageBatch": 29.238778811160532,
-        "requestsPerSecond": 3754.0908385502194
+        "updatedAt": 1793852757.1023016,
+        "averageBatch": 28.750488574286372,
+        "requestsPerSecond": 3891.169318897688
       },
       "actorFallbacks": 0,
       "resources": {
-        "observedAt": "2026-11-05T03:24:30.325Z",
+        "observedAt": "2026-11-05T04:25:57.536Z",
         "phase": "running",
         "totals": {
-          "matches": 11492,
-          "rows": 6403211,
+          "matches": 35165,
+          "rows": 20773119,
           "liveActors": 32
         },
         "rates": {
-          "samplesPerSecond": 3831.2836670393335,
-          "matchesPerMinute": 387.23447504827726,
-          "updatesPerSecond": 1.2196361418843378
+          "samplesPerSecond": 4130.553284273644,
+          "matchesPerMinute": 407.8086672117743,
+          "updatesPerSecond": 1.2946306895611883
         },
         "hardware": {
           "gpu": {
             "name": "NVIDIA GeForce RTX 4070",
-            "utilization": 23,
-            "usedMiB": 2749,
+            "utilization": 18,
+            "usedMiB": 2150,
             "totalMiB": 12282,
-            "temperature": 37
+            "temperature": 40
           },
-          "cpuPercent": 63.735991885807586,
-          "ramUsedBytes": 21082017792,
+          "cpuPercent": 46.78407540617636,
+          "ramUsedBytes": 16271527936,
           "ramTotalBytes": 34124918784
         },
-        "pendingShards": 7,
+        "pendingShards": 11,
         "inference": {
           "pid": 44724,
           "device": "cuda",
-          "requests": 578460,
-          "batches": 19784,
+          "requests": 14946804,
+          "batches": 519880,
           "maxBatch": 32,
           "error": null,
-          "batchWaitMilliseconds": 55273.054781137034,
-          "computeMilliseconds": 52409.717622213066,
+          "batchWaitMilliseconds": 1425369.1398915835,
+          "computeMilliseconds": 1376345.3766610473,
           "ready": true,
-          "updatedAt": 1793849069.9880278,
-          "averageBatch": 29.238778811160532,
-          "requestsPerSecond": 3754.0908385502194
+          "updatedAt": 1793852757.1023016,
+          "averageBatch": 28.750488574286372,
+          "requestsPerSecond": 3891.169318897688
         },
-        "freeGiB": 226.34021377563477
-      }
+        "freeGiB": 225.71697998046875
+      },
+      "lastPublicationCommit": "a56f676fd8c9e13a83559eae819fe4d6b5411ad6"
     }
   }
 }
