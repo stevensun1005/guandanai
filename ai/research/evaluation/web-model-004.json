@@ -92,6 +92,12 @@
         "stage": "first clean build",
         "reason": "Release attachment download returned HTTP 504",
         "recovery": "Rebuilt using previously cached 002/003 artifacts after full SHA-256 verification; new 004 Release was independently downloaded and hash-verified by publisher"
+      },
+      {
+        "stage": "first public browser smoke",
+        "reason": "Immediate version-tag assertion failed before gameplay; later inspection observed an initially empty tag once, and subsequently the expected version with no page errors or failed requests",
+        "recovery": "Repeated the unchanged public smoke test successfully: Worker replies from 001/004, zero page errors; no production-code changes",
+        "cause": "Not established; transient observation retained without attributing it to model strength"
       }
     ],
     "onnxIO": {
@@ -195,6 +201,41 @@
       "replayResultEscaped": true,
       "pageErrors": []
     },
-    "independentStrengthMatchesAdded": 0
+    "independentStrengthMatchesAdded": 0,
+    "freshCIBuildWithReleaseDownloadsPassed": true
+  },
+  "deployment": {
+    "verifiedAtUTC": "2026-11-05T09:03:05.676918+00:00",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "buildVersion": "4bfa23e593",
+    "defaultId": "004",
+    "defaultObservedInFreshBrowser": true,
+    "modelNames": [
+      "v000000000",
+      "v000198487",
+      "guanzero-adp-gpubatch · 9537步",
+      "v000331516"
+    ],
+    "pageErrors": [],
+    "onlineModelSHA256": {
+      "001": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "002": "260895a254dcffb7a9cd9d22ba4ee3e74c183711e9108611ea3772eb3af5af75",
+      "003": "15ae4809731d843fdfca74ba5a5bd1cc30ed00cb2de9f110ee1ca0299a12127b",
+      "004": "a806747de50a46f76bd8b4d5de189411b902f3b46531e040daf19c76fdbd7da7"
+    },
+    "commit": "a46536d1bdbfde2bc7c171730b41a72ac7a20cf5",
+    "workflowRun": 41998706782,
+    "workflowConclusion": "success",
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/41998706782",
+    "onlineBrowser": {
+      "productionGlobalsHidden": true,
+      "policyTurns": 3,
+      "successfulModelIds": [
+        "001",
+        "004"
+      ],
+      "pageErrors": []
+    },
+    "newStrengthMatchesAdded": 0
   }
 }
