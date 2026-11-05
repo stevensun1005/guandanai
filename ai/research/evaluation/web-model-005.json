@@ -1,0 +1,78 @@
+{
+  "observedAt": "2026-11-05T09:17:41.663Z",
+  "defaultId": "005",
+  "model": {
+    "id": "005",
+    "file": "bot-005.onnx",
+    "sha256": "ff06717ee04155f780ccca45136f537ffd7704386125a70c91dd04630ae713af",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-005/bot-005.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-gpubatch",
+      "version": "model-000000027771",
+      "status": "experimental-not-heldout-accepted",
+      "step": 27771,
+      "registeredAt": "2026-11-05T09:17:33.468Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "frozenSnapshot": {
+    "frozenAt": "2026-11-05T09:13:36.853042+00:00",
+    "run": "guanzero-adp-gpubatch",
+    "checkpoint": "model-000000027771",
+    "step": 27771,
+    "sha256": "ff06717ee04155f780ccca45136f537ffd7704386125a70c91dd04630ae713af",
+    "bytes": 6346014,
+    "latest": {
+      "file": "model-000000027771.onnx",
+      "version": 27771,
+      "updatedAt": 1793869968.8618116
+    }
+  },
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "positions": 16,
+      "values": 49,
+      "maxAbsoluteError": 2.384185791015625e-07,
+      "actionMismatches": 0
+    },
+    "checks": {
+      "nodeTests": 119,
+      "pythonGuanZeroTests": 8,
+      "format": "passed",
+      "build": "c8e482866f"
+    },
+    "webpage": {
+      "displayName": "guanzero-adp-gpubatch · 27771步",
+      "preservedIds": [
+        "001",
+        "002",
+        "003",
+        "004"
+      ],
+      "localBrowserVerified": true,
+      "realBotPlayObserved": true,
+      "observedPlay": "straight: C9 D8 S7 H6 D5",
+      "pageErrors": 0
+    }
+  },
+  "publicationRecovery": {
+    "initialPublicVerification": "failed; registry was unchanged",
+    "retryPublicSHA256": "ff06717ee04155f780ccca45136f537ffd7704386125a70c91dd04630ae713af",
+    "releaseOverwritten": false,
+    "method": "Verified existing attachment and registered the same frozen bytes without re-upload"
+  },
+  "trainingRunConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836"
+}
