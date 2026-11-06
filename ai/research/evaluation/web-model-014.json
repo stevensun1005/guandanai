@@ -93,5 +93,67 @@
         "kind": "neural"
       }
     ]
+  },
+  "deployment": {
+    "workflow": {
+      "databaseId": 42170219931,
+      "headSha": "b1a3f07e25fc8d3e378eddbe18f9edbb97fadd1e",
+      "url": "https://github.com/stevensun1005/guandanai/actions/runs/42170219931"
+    },
+    "status": "success",
+    "public": {
+      "url": "https://stevensun1005.github.io/guandanai/",
+      "modelURL": "https://stevensun1005.github.io/guandanai/models/bot-014.onnx",
+      "bytes": 6346014,
+      "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1",
+      "build": "789bbc5580",
+      "checkedAt": "2026-11-06T05:47:36.513093+00:00",
+      "choices": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人",
+          "kind": "rule"
+        },
+        {
+          "id": "014",
+          "name": "guanzero-adp-io48-104257",
+          "kind": "neural"
+        },
+        {
+          "id": "013",
+          "name": "guanzero-adp-gpubatch-81302",
+          "kind": "neural"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000",
+          "kind": "neural"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434",
+          "kind": "neural"
+        },
+        {
+          "id": "009",
+          "name": "danMCai-v000293055",
+          "kind": "neural"
+        }
+      ],
+      "defaultId": "012"
+    },
+    "liveBrowserDefaultSeats": [
+      "012",
+      "012",
+      "012",
+      "012"
+    ]
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-06T05:45:26.542557+00:00",
+    "firstNewMatchCompletedAt": "2026-11-06T03:41:21.146Z",
+    "slotsWithNewMatches": 32,
+    "observedPending": 7,
+    "inheritedPending": 0
   }
 }
