@@ -260,6 +260,30 @@ test('resuming with changed sources needs a named protocol change, which is reco
     ]);
     assert.notEqual(badSetting.code, 0);
     assert.match(badSetting.errors, /cannot change exploration/);
+    const gateSchedule = {
+      mode: 'new-first-v1',
+      minNewStep: 700,
+      activatedAt: new Date().toISOString(),
+      historicalChampions: 2,
+      historyIntervalHours: 3,
+    };
+    const scheduling = await runSupervisorUntilStart(directory, [
+      '--protocol-change=prioritize new snapshots and bound historical champion checks',
+      `--set=${JSON.stringify({ gateSchedule })}`,
+    ]);
+    assert.equal(scheduling.code, 0, scheduling.errors || scheduling.output);
+    const scheduled = JSON.parse(readFileSync(configFile, 'utf8'));
+    assert.deepEqual(scheduled.gateSchedule, gateSchedule);
+    assert.deepEqual(scheduled.learner, updated.learner);
+    assert.deepEqual(scheduled.gate, updated.gate);
+    assert.deepEqual(scheduled.anchor, updated.anchor);
+    assert.equal(scheduled.protocolHistory.at(-1).previous.gateSchedule, null);
+    const invalidGate = await runSupervisorUntilStart(directory, [
+      '--protocol-change=invalid gate change',
+      '--set={"gate":{"mu1":0.6}}',
+    ]);
+    assert.notEqual(invalidGate.code, 0);
+    assert.match(invalidGate.errors, /cannot change gate/);
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }

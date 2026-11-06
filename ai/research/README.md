@@ -43,3 +43,5 @@
 [MacBook 24 小时交接](MAC_HANDOFF.md) · [迁移与恢复证据](evaluation/mac-handoff-20261105.json)：Windows 正常停机、完整现存运行快照与 Adam 恢复已在 Windows 侧验证，这是 Windows 准备阶段的历史记录。后续 [Mac 真机启动证据](evaluation/mac-continuation-20261105.json)记录 M1 Pro 上的 MPS／Adam／ONNX 实测、内存计数负结果和同一窗口恢复；方法与继承计数见主报告第 26、28 节，完整 24 小时尚未完成。
 
 [Mac 采样吞吐调优](evaluation/mac-throughput-20261105.json)：保留原固定窗口和 4／5 GiB 内存预算，实测两名到四名 CPU 采样器；GPU 计算短探针、操作性吞吐、真实门控结果分别记录，不将更多训练量写成棋力提升。
+
+[Mac 新快照优先门控](evaluation/mac-gate-scheduling-20261105.json)：原窗口内经正常保存切换候选调度，保留历史强者低频检查、P0 退步监控与中断证据；不把少做门控等同于已测得的吞吐或棋力提升。

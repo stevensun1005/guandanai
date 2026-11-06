@@ -70,7 +70,7 @@ npm run train:dashboard
         ▼
  调度进程（supervisor）
    崩溃重启、汇总对局结果（PFSP 统计）、定时把最新模型存入联赛池、
-   对每个新快照启动门控：与当前冠军配对对局，SPRT 判定是否更替冠军
+   按候选调度选择快照启动门控：与当前冠军配对对局，SPRT 判定是否更替冠军
 ```
 
 | 文件                                                                  | 作用                                     |
@@ -78,12 +78,24 @@ npm run train:dashboard
 | [supervisor.mjs](../danMCai/training/continuous/supervisor.mjs)       | 启动、重启、联赛、快照、门控、停止规则   |
 | [actor.mjs](../danMCai/training/continuous/actor.mjs)                 | 采样进程                                 |
 | [learner.py](../danMCai/training/continuous/learner.py)               | 持续训练进程                             |
+| [gate-schedule.mjs](../danMCai/training/continuous/gate-schedule.mjs) | 新快照优先与历史候选限频（可选协议）     |
 | [gate.mjs](../danMCai/training/continuous/gate.mjs)                   | 冠军门控                                 |
 | [value_net.py](../danMCai/training/continuous/value_net.py)           | 网络读写与网页兼容的 ONNX 导出           |
 | [lib.mjs](../danMCai/training/continuous/lib.mjs)                     | 默认配置、样本格式、PFSP、SPRT、种子区间 |
 | [status.mjs](../danMCai/training/continuous/status.mjs)               | 进度摘要                                 |
 | [remote-actors.mjs](../danMCai/training/continuous/remote-actors.mjs) | 局域网内另一台电脑的采样进程启动器       |
 | [remote.mjs](../danMCai/training/continuous/remote.mjs)               | 代码指纹核对、统计全部采样槽             |
+
+## 新快照优先的门控调度
+
+历史默认行为仍会从联赛池逆序寻找未测候选；没有 `gateSchedule` 的旧运行保留该行为。所有者授权本次 Mac 切换为 `new-first-v1`，通过正常保存、新冻结检出和具名 `--protocol-change`／`--set` 应用，当前参数和恢复命令以 [MAC_HANDOFF](MAC_HANDOFF.md) 为准。
+
+- `minNewStep` 固定切换保存点，`activatedAt` 固定首次启用时间；切换立即快照一次，以后沿用原快照间隔。仅最新一份合格快照进入门控，较旧的待测快照不补赛，普通恢复不重设边界。
+- `historicalChampions` 为 0–2，按真实冠军历史选择最近几位前冠军，排除 P0 和现任。`historyIntervalHours` 至少 1 小时，本次为 3 小时；最近一次历史挑战启动时间持久保存，重启不重置限频，同一候选／现任冠军的完整门控不重复。
+- 有新候选时优先新候选；无新候选且历史检查未到期时空闲。已开始的门控正常完成；原到期 P0 锚点优先启动，检查间隔、150 对、置信区间和两次退步停机规则不变。
+- 这只改变候选选择。训练对手池、奖励、Adam、样本、牌规、SPRT 和种子区间沿用原值。跳过没有评测的快照不写成 reject；中断报告不拼入完整结果，不把空闲时间等同于已测得的吞吐提升。
+
+回归覆盖见 `ai/danMCai/tests/gate-schedule.test.mjs` 与 `continuous-training.test.mjs`；`npm test` 同时检查新快照优先、停止补赛、历史限频、候选／冠军配对和协议参数边界。
 
 ## 局域网内另一台电脑一起采样
 

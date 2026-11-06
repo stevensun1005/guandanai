@@ -31,3 +31,5 @@ Fixed 2v2 evaluation: `evaluation/evaluate-fixed.mjs --protocol=<JSON> --run=<ig
 `evaluation/monitor-fixed.mjs` 读取实际完成状态，把分组计数和桌面观测供给本机进度面板；完成进程正常退出不误判失败，告警不修改模型、奖励或训练配置。已有固定比较的完整报告见[冠军与最新导出对照](../research/reports/champion-clint-latest-20261105.md)。
 
 Mac 吞吐调优使用启动器的具名采样配置入口，正常保存后调整并发并实测，保持原内存预算、学习协议与固定截止；当前冻结检出和恢复命令以 [MAC_HANDOFF](../research/MAC_HANDOFF.md#当前-mac-执行入口2026-11-05) 为准。
+
+本次 Mac 门控已按所有者授权改为新快照优先，普通旧快照不补赛，最近两位前冠军低频检查，P0 退步监控保留；训练对手池与原固定截止沿用。参数、运行边界和测试见[持续训练指南](../research/CONTINUOUS_TRAINING.md#新快照优先的门控调度)。

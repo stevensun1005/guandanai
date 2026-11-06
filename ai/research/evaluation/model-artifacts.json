@@ -3533,6 +3533,16 @@
       "checkpointSHA256": "dd64a23622502a798abb49eaf06a026085a6d8ff37567bce31fd75cfe0fa16d0",
       "evidence": "ai/research/evaluation/mac-throughput-20261105.json",
       "download": null
+    },
+    {
+      "id": "mac-gate-scheduling-cutover-step-743487",
+      "path": "ai/danMCai/runs/mac-20261105/gate-scheduling-20261105/saved",
+      "role": "Preserved complete MPS weights and Adam at owner-authorized candidate scheduling change; not a web promotion",
+      "step": 743487,
+      "policySHA256": "f697c2eb8dfd5855be78d9ec8dfc707829c4633433e6902d66a97667c9cb2b84",
+      "checkpointSHA256": "bb6e3f59ab1a1c0c1e2b03ebaf78bb60784b30a48e96da389d3d8cc964cdd891",
+      "evidence": "ai/research/evaluation/mac-gate-scheduling-20261105.json",
+      "download": null
     }
   ],
   "webModels": {

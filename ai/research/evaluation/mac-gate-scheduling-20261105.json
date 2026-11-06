@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "observedAt": "2026-11-06T02:43:43.502591+00:00",
+  "classification": "Owner-authorized candidate scheduling protocol change; not an isolated performance experiment or held-out strength acceptance",
+  "request": {
+    "requestedAt": "2026-11-06T02:40:16.518323+00:00",
+    "schedule": {
+      "startUTC": "2026-11-05T21:58:13.414Z",
+      "deadlineUTC": "2026-11-06T21:58:13.414Z",
+      "durationHours": 24,
+      "restartExtendsDeadline": false
+    },
+    "scheduleSHA256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+    "oldSourceCommit": "1ab42a72a8299c14e4c748a699fff86e4ee730ee",
+    "frozenSourceCommit": "4ac91db",
+    "purpose": "Owner-authorized candidate scheduling change, original deadline unchanged"
+  },
+  "policy": {
+    "mode": "new-first-v1",
+    "minNewStep": 743487,
+    "activatedAt": "2026-11-06T02:40:43.451697+00:00",
+    "historicalChampions": 2,
+    "historyIntervalHours": 3
+  },
+  "historicalChampionVersionsAtCutover": [
+    "v000293055",
+    "v000091092"
+  ],
+  "historyPolicy": "At most two most recent actual former champions, globally at least 3h between historical gate starts; completed candidate/champion matchups not repeated. New snapshot wins priority; due P0 anchor starts before a gate. In-flight gates are not preempted.",
+  "snapshotPolicy": "Immediately snapshot cutover export once; keep original hourly interval thereafter; only newest cutover-or-later snapshot is eligible, no superseded or inherited ordinary backlog",
+  "trainingOpponentPoolPolicy": "Existing PFSP mix and normal snapshot/eviction behavior retained; no manual pruning of historical opponents",
+  "saved": {
+    "step": 743487,
+    "policySHA256": "f697c2eb8dfd5855be78d9ec8dfc707829c4633433e6902d66a97667c9cb2b84",
+    "checkpointSHA256": "bb6e3f59ab1a1c0c1e2b03ebaf78bb60784b30a48e96da389d3d8cc964cdd891",
+    "localArchive": "ai/danMCai/runs/mac-20261105/gate-scheduling-20261105/saved",
+    "retainedFileCount": 421,
+    "retainedManifestSHA256": "0226d204a59122b97c4ccfc0c119f4532a621d87ce74ab3a4991f010970f49e1",
+    "stoppedAt": "2026-11-06T02:40:21.704Z",
+    "learner": {
+      "pid": 1538,
+      "device": "mps",
+      "deviceName": "Apple MPS",
+      "torch": "2.15.0",
+      "hip": null,
+      "gpuAllocatedBytes": 21545984,
+      "state": "stopped",
+      "step": 743487,
+      "version": "v000743487",
+      "buffer": 2000000,
+      "ingestedRows": 380665397,
+      "trainedRows": 1522661376,
+      "lossEMA": 3.268265521202629,
+      "replayRatio": 3.9999994430804544,
+      "stepsPerSecond": 3.869916804303678,
+      "updatedAt": "2026-11-06T02:40:17Z"
+    },
+    "totals": {
+      "matches": 65601,
+      "decisions": 31167812,
+      "rows": 31167812
+    }
+  },
+  "protocolChange": {
+    "at": "2026-11-06T02:41:19.564Z",
+    "reason": "Owner-authorized new-first candidate scheduling: skip ordinary historical backlog, retain two former champions with 3h rate limit and unchanged P0 regression checks; same weights, Adam, sampling pool and original deadline",
+    "elapsedSecondsBefore": 16750.595,
+    "totalsBefore": {
+      "matches": 65601,
+      "decisions": 31167812,
+      "rows": 31167812
+    },
+    "learnerStepBefore": 743487,
+    "previous": {
+      "sourceSHA256": {
+        "ai/danMCai/training/continuous/supervisor.mjs": "39066cda321854ef992488adf4155ef37f36242083d1318b585e69b173fbdfb0",
+        "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+        "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+        "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+        "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+        "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+        "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+        "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+        "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+        "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+        "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+        "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+        "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+        "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+        "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+        "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+        "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+        "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+        "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+        "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+        "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+        "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+        "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+        "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+        "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+        "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+        "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+        "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+        "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+        "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+        "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+        "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+        "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+        "ai/danMCai/training/continuous/mac-24h.mjs": "e0b214b18ac38fc56a11240d399fe247df7dfd281a8a767d3002bac31f237409"
+      },
+      "actors": 4,
+      "resourceBudget": {
+        "reserveGB": 4,
+        "resumeGB": 5
+      },
+      "actorImplementation": "fast",
+      "fastActor": {
+        "games": 8,
+        "provider": "cpu"
+      },
+      "gateSchedule": null
+    },
+    "settings": {
+      "gateSchedule": {
+        "mode": "new-first-v1",
+        "minNewStep": 743487,
+        "activatedAt": "2026-11-06T02:40:43.451697+00:00",
+        "historicalChampions": 2,
+        "historyIntervalHours": 3
+      }
+    },
+    "changedSources": [
+      "ai/danMCai/training/continuous/supervisor.mjs",
+      "ai/danMCai/training/continuous/sources.mjs",
+      "ai/danMCai/training/continuous/mac-24h.mjs",
+      "ai/danMCai/training/continuous/gate-schedule.mjs"
+    ]
+  },
+  "frozenSourceCommit": "4ac91db5f119f6c0d6299e1e5547f5ad533689d4",
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "4350ebb4d95fb71d5dbebdc77614ba9e91c2c22de1d44f40f4472912b7928b0b",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+    "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+    "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "f7a2082c84d210b9681d8aed0d2cc6a2c7de175d93df51e23f5b21a6f9d822ed",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "schedule": {
+    "startUTC": "2026-11-05T21:58:13.414Z",
+    "deadlineUTC": "2026-11-06T21:58:13.414Z",
+    "durationHours": 24,
+    "restartExtendsDeadline": false
+  },
+  "scheduleSHA256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+  "checks": {
+    "protectedConfigurationFieldsEqual": [
+      "actors",
+      "fastActor",
+      "actorImplementation",
+      "resourceBudget",
+      "actorMix",
+      "exploration",
+      "learner",
+      "anchor",
+      "gate",
+      "snapshotMinutes",
+      "leagueSize",
+      "actorSeedOffset",
+      "evaluationBlockOffset",
+      "initialSHA256"
+    ],
+    "checkpointAtResumeUnchanged": true,
+    "championAtResumeUnchanged": true,
+    "sameScheduleBytes": true,
+    "actorCursorsMonotonic": [
+      {
+        "slot": 0,
+        "savedNextSeed": 3017415,
+        "observedNextSeed": 3017559,
+        "savedShardSequence": 3538,
+        "observedShardSequence": 3542
+      },
+      {
+        "slot": 1,
+        "savedNextSeed": 3017507,
+        "observedNextSeed": 3017659,
+        "savedShardSequence": 3564,
+        "observedShardSequence": 3567
+      },
+      {
+        "slot": 2,
+        "savedNextSeed": 3015322,
+        "observedNextSeed": 3015466,
+        "savedShardSequence": 3469,
+        "observedShardSequence": 3473
+      },
+      {
+        "slot": 3,
+        "savedNextSeed": 3015357,
+        "observedNextSeed": 3015498,
+        "savedShardSequence": 2816,
+        "observedShardSequence": 2820
+      }
+    ],
+    "macPreflight": {
+      "kind": "test",
+      "device": "mps",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "torch": "2.15.0",
+      "strengthMatches": 0,
+      "probeUpdatesDiscarded": 20,
+      "sourceStep": 743487,
+      "checkpointSHA256": "bb6e3f59ab1a1c0c1e2b03ebaf78bb60784b30a48e96da389d3d8cc964cdd891",
+      "optimizerRestored": true,
+      "initialWeightsMatchExport": true,
+      "backendMaxAbsoluteError": 1.9073486328125e-06,
+      "onnxMaxAbsoluteError": 1.2516975402832031e-06,
+      "sourceCheckpointUnchanged": true,
+      "elapsedSeconds": 1.182
+    }
+  },
+  "interruptedGate": {
+    "file": "ai/research/evaluation/mac-gate-scheduling-20261105/gate-00319.json",
+    "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+    "status": "stopped",
+    "decision": null,
+    "pairsActuallyCompleted": 492,
+    "wins": 448,
+    "losses": 432,
+    "draws": 104,
+    "purpose": "Partial development gate retained; not combined into completed acceptance"
+  },
+  "newGateStarted": {
+    "t": "2026-11-06T02:41:24.590Z",
+    "kind": "gate-start",
+    "index": 320,
+    "challenger": "v000743487",
+    "champion": "v000705434",
+    "category": "new",
+    "output": "/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-training-20261105-r4/ai/danMCai/runs/mac-20261105/gate/gate-00320.json",
+    "championCopy": "/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-training-20261105-r4/ai/danMCai/runs/mac-20261105/gate/champion-320.onnx"
+  },
+  "resumedObservation": {
+    "updatedAt": "2026-11-06T02:43:19.586Z",
+    "running": [
+      "learner",
+      "actor-0",
+      "actor-1",
+      "actor-2",
+      "actor-3",
+      "gate"
+    ],
+    "learner": {
+      "pid": 67297,
+      "device": "mps",
+      "deviceName": "Apple MPS",
+      "torch": "2.15.0",
+      "hip": null,
+      "gpuAllocatedBytes": 21545984,
+      "state": "waiting-for-data",
+      "step": 743974,
+      "version": "v000743487",
+      "buffer": 2000000,
+      "ingestedRows": 380915080,
+      "trainedRows": 1523658752,
+      "lossEMA": 3.2710091908186474,
+      "replayRatio": 3.9999958835969425,
+      "stepsPerSecond": 4.13052667496853,
+      "updatedAt": "2026-11-06T02:43:18Z"
+    },
+    "resources": {
+      "reserveGB": 4,
+      "resumeGB": 5,
+      "freeGB": 11.910812377929688,
+      "rawFreeGB": 0.5101776123046875,
+      "measurement": "vm_stat free + inactive",
+      "measurementError": null,
+      "pausedActors": [],
+      "updatedAt": "2026-11-06T02:43:39.639Z"
+    },
+    "lastHistoricalGateAt": 1793932843451,
+    "lastAnchorAt": 1793927609572
+  },
+  "validation": {
+    "node": {
+      "passed": 194,
+      "failed": 0
+    },
+    "frozenSchedulingAndResumeTests": {
+      "passed": 21
+    },
+    "danMCaiPython": {
+      "ran": 35,
+      "passed": 33,
+      "skipped": 2,
+      "skipReason": "CUDA unavailable and MPS unavailable inside restricted test process; real MPS restore/update probe passed outside restriction"
+    },
+    "researchPython": {
+      "passed": 9
+    },
+    "format": "passed",
+    "build": "55006de52b",
+    "negativeChecks": [
+      {
+        "issue": "Initial complete Node tests could not bind localhost ports in the sandbox",
+        "resolution": "Ran the same complete suite with normal localhost access: 194 passed"
+      },
+      {
+        "issue": "Initial build could not resolve github.com inside restricted network",
+        "resolution": "Retried with normal network access; build 55006de52b passed with public Release files verified by the existing build pipeline."
+      }
+    ],
+    "markdownRelativeLinks": {
+      "checked": 321,
+      "broken": 0
+    },
+    "logDirectory": "ai/danMCai/runs/mac-20261105/gate-scheduling-20261105/validation"
+  },
+  "limitations": [
+    "No on/off performance comparison; no percentage speedup claimed.",
+    "Low-frequency historical checks have not yet become due in this protocol; scheduling boundaries validated by tests.",
+    "Twenty temporary preflight updates were discarded, not counted as production training."
+  ],
+  "independentStrengthMatches": 0
+}
