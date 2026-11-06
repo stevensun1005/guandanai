@@ -28,7 +28,7 @@ node ai/shared/tribute/dashboard.mjs --run=<同一目录> --port=8789
 
 完整权重不进 Git，公开时使用不可变 GitHub Release 和 SHA。到点若融合程序未准备或验证失败，运行明确标为等待／失败，不能冒充上线。
 
-相关入口：[主报告](../../research/MODEL_STUDY.md) · [交接](../../research/CODEX_HANDOFF.md) · [共享模拟](../simulation/README.md)。
+相关入口：[主报告](../../research/MODEL_STUDY.md) · [交接](../../research/CODEX_HANDOFF.md) · [共享模拟代码](../simulation/)。
 
 ## 截止后处理与恢复
 
@@ -49,3 +49,7 @@ node ai/shared/tribute/dashboard.mjs --run=<同一目录> --port=8789
 准备命令增加 `--inherit-run=<已停止旧批次>` 和 `--python=<GPU环境Python>`。继承器验证旧协议／检查点 SHA，只改新副本的协议元数据，逐项核对网络和优化器张量，拒绝覆盖原数据。训练／开发游标接续旧批次已消费位置，新样本用未使用的后续种子；独立留出仍未开启。截止仍是 **11月6日08:00 Toronto**。
 
 2026-11-06 窗口结论：未通过预先登记的双头独立门槛，网页保留原贡还行为，候选、数据及负结果保留。 [完整结果](../../research/evaluation/tribute-20261106-final.json)。
+
+## 移交 Mac
+
+Windows 已准备独立的专项快照 ZIP 和 SHA 文件，包含前后两批全部现存数据、网络／Adam、候选和冻结底座。仅需私下复制这两个文件，项目代码从 Git 同步；不要重复导入旧主模型迁移包。实际文件、校验及 Mac 待完成事项见 [专项 Mac 交接](../../research/TRIBUTE_MAC_HANDOFF.md)。当前 Windows 专项入口硬编码 CUDA，旧窗口已截止；尚未完成专项 MPS 真机验证，不直接重启原运行，不覆盖 Mac 主训练和依赖。

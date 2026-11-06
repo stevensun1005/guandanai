@@ -32,7 +32,7 @@
 
 按功能寻找文件、运行数据和研究记录，见各目录 README。[旧路径迁移说明](ai/research/STRUCTURE_MIGRATION.md)。
 
-进还贡专项训练采用独立共享网络，固定窗口、公开信息边界与融合验收见 [专项说明](ai/shared/tribute/README.md)。该模块尚未启用到网页，当前模型菜单和默认冠军不变。
+进还贡专项训练采用独立共享网络，固定窗口、公开信息边界与融合验收见 [专项说明](ai/shared/tribute/README.md)。该模块尚未启用到网页，当前模型菜单和默认冠军不变。 [专项 Mac 数据交接](ai/research/TRIBUTE_MAC_HANDOFF.md)提供独立迁移包与后续适配步骤。
 
 Clint 规则对手独立维护：单张顺走、级牌与王的取舍、公开牌史配合的当前说明见 [Clint 策略](web/src/rule-bot/README.md#公开牌史策略更新)。神经网络模型保持自己的决策。
 

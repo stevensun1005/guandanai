@@ -53,3 +53,5 @@
 [Clint 增量同步证据](evaluation/clint-sync-20261106.json)与[当前游标](evaluation/clint-sync-state.json)：双队续局设置、桌面／平板布局、全屏稳定性及 Clint 真人超时；功能验证与普通策略棋力严格分开，详见主报告第 36 节。
 
 [Clint 公开牌史策略修订](evaluation/clint-sync-20261106-1404.json)：四项启发式的隔离、合法性与浏览器验证，新旧对手指纹分开；详见主报告第 37 节，不是新的棋力提升结论。
+
+[进还贡专项 Mac 交接](TRIBUTE_MAC_HANDOFF.md) · [Windows 打包与恢复证据](evaluation/tribute-mac-transfer-20261106.json)：完整数据／Adam 已保留并校验，Mac 专项 MPS 验证仍待执行。

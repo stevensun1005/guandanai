@@ -23,7 +23,7 @@ Four-player GuanDan with bots running in your browser, private rooms and practic
 
 </details>
 
-Tribute/return learning is an independent two-head specialist. See its [protocol and integration requirements](ai/shared/tribute/README.md). It is not enabled on the website yet; the champion menu is unchanged.
+Tribute/return learning is an independent two-head specialist. See its [protocol and integration requirements](ai/shared/tribute/README.md). It is not enabled on the website yet; the champion menu is unchanged. The [specialist Mac handoff](ai/research/TRIBUTE_MAC_HANDOFF.md) covers the separate checkpoint/data package and pending MPS adaptation.
 
 ## Code and model entry points
 

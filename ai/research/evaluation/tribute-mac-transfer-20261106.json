@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "kind": "transfer-preparation-not-training",
+  "createdUTC": "2026-11-06T14:51:06.122127+00:00",
+  "archive": "danMCai-tribute-windows-20261106.zip",
+  "archiveBytes": 43191318,
+  "sha256": "5d87c020fc8d277acec5c3cd5232ae656c83bdd954d85d02705ec5ee4077b85e",
+  "payloadFiles": 51734,
+  "archiveEntries": 51736,
+  "uncompressedPayloadBytes": 175774094,
+  "runs": [
+    {
+      "name": "tribute-20261106",
+      "files": 6488,
+      "bytes": 22532274,
+      "sourceCommit": "a514fb26564561c91abfab317e96ec50115d5813",
+      "protocolSHA256": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2"
+    },
+    {
+      "name": "tribute-champion-20261106",
+      "files": 45171,
+      "bytes": 141193272,
+      "sourceCommit": "3b0ec91dd570cecd6bf50720133ae7adeaa124ef",
+      "protocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6"
+    }
+  ],
+  "frozenSourceCommit": "3b0ec91dd570cecd6bf50720133ae7adeaa124ef",
+  "frozenSourceFiles": 73,
+  "teacherModels": [
+    {
+      "id": "012",
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+    },
+    {
+      "id": "014",
+      "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1"
+    }
+  ],
+  "validation": {
+    "zipCRC": "passed",
+    "everyPayloadSHA256": "passed",
+    "sourcesUnchangedDuringPacking": true,
+    "MacSpecialistMPSValidated": false,
+    "windowsCPURestore": {
+      "platform": "Windows CPU verification",
+      "latestStep": 59300,
+      "bestStep": 55580,
+      "parameters": 132994,
+      "allModelTensorsEqual": true,
+      "allOptimizerTensorsEqual": true,
+      "sourceCheckpointUnchanged": true,
+      "MacMPSVerified": false
+    }
+  },
+  "sourceDataEdited": false,
+  "trainingRestarted": false,
+  "webModelChanged": false,
+  "nextStep": "Mac specialist MPS and new bounded-protocol preparation; not an already compatible or running Mac task"
+}
