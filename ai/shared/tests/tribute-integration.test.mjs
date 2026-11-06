@@ -6,6 +6,9 @@ import { selectTribute } from '../tribute/select.mjs';
 import { summarize } from '../tribute/evaluate.mjs';
 import { tributeObservation, specialistHead } from '../../../web/src/ai/tribute-observation.mjs';
 import { makeDeck } from '../../../web/src/core/cards.js';
+import { resolveChampion } from '../tribute/champion.mjs';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 test('browser public tribute observations match simulator and never publish simultaneous picks', () => {
   const deck = makeDeck();
@@ -73,4 +76,19 @@ test('only evaluated full SHA cohorts receive specialist, including GuanZero sep
   assert.equal(specialistHead(manifest, { sha256: 'b', config: { history: 'guanzero-v1' } }), 1);
   assert.equal(specialistHead(manifest, { sha256: 'c', config: {} }), null);
   assert.equal(specialistHead({ ...manifest, enabled: false }, { sha256: 'a', config: {} }), null);
+});
+
+test('training teacher resolves accepted champion, rejects ordinary exports and tampered promotion', () => {
+  const root = fileURLToPath(new URL('../../../', import.meta.url));
+  const catalog = JSON.parse(readFileSync(root + 'web/src/ai/model-catalog.json'));
+  const champion = resolveChampion(root, catalog);
+  assert.equal(champion.id, catalog.selection.danMCaiChampions[0]);
+  const ordinary = catalog.models.find((m) => m.config.history === 'guanzero-v1');
+  assert.throws(
+    () => resolveChampion(root, { ...catalog, selection: { danMCaiChampions: [ordinary.id] } }),
+    /champion/,
+  );
+  const tampered = structuredClone(catalog);
+  tampered.models.find((m) => m.id === champion.id).source.champion.evidenceSHA256 = '0'.repeat(64);
+  assert.throws(() => resolveChampion(root, tampered), /mismatch/);
 });

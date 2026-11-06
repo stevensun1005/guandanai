@@ -9,7 +9,7 @@ import {
   unlinkSync,
   realpathSync,
 } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { freemem, setPriority, constants } from 'node:os';
 import { createHash } from 'node:crypto';
@@ -84,7 +84,8 @@ async function main() {
       deadlineUTC: protocol.deadlineUTC,
       protocolSHA,
       stage: 'loading',
-      sourceModels: protocol.models.map((m) => ({
+      inheritedStep: readJSON(join(run, 'inheritance.json'))?.inheritedStep || 0,
+      sourceModels: (protocol.rolloutModels || protocol.models).map((m) => ({
         id: m.id,
         version: m.source.version,
         sha256: m.sha256,
@@ -92,8 +93,8 @@ async function main() {
     });
     const initialCPU = process.cpuUsage(),
       initialTime = Date.now();
-    const save = () =>
-      writeJSON(join(run, 'progress.json'), {
+    const save = () => {
+      const progress = {
         ...state,
         updatedUTC: new Date().toISOString(),
         freeGiB: freemem() / 2 ** 30,
@@ -102,7 +103,26 @@ async function main() {
           (100 *
             ((process.cpuUsage(initialCPU).user + process.cpuUsage(initialCPU).system) / 1000)) /
           Math.max(1, Date.now() - initialTime),
-      });
+      };
+      writeJSON(join(run, 'progress.json'), progress);
+      if (protocol.progressMirror) {
+        writeJSON(protocol.progressMirror, {
+          ...progress,
+          monitoringView: true,
+          activeRun: run,
+          note:
+            '冠军续打新批次：' +
+            run +
+            '\n' +
+            JSON.stringify(state.current || {}) +
+            '\n旧批次数据与停止快照已归档。',
+        });
+        for (const file of ['fusion.json', 'evaluation-progress.json']) {
+          const result = readJSON(join(run, file));
+          if (result) writeJSON(join(dirname(protocol.progressMirror), file), result);
+        }
+      }
+    };
     save();
     const teachers = [];
     let lastSave = 0,
@@ -176,7 +196,7 @@ async function main() {
       lastFit = Date.now();
     }
     try {
-      for (const model of protocol.models) {
+      for (const model of protocol.rolloutModels || protocol.models) {
         teachers.push(
           await continuation(root, model, { provider: 'dml', delayMs: protocol.delayMs ?? 0 }),
         );
@@ -238,21 +258,29 @@ async function main() {
     if (state.stopReason === 'time-limit' && finalize && existsSync(finalize)) {
       state.stage = 'fusion-validation';
       save();
-      await new Promise((ok, fail) => {
-        const child = spawn(process.execPath, [finalize, `--run=${run}`, `--python=${python}`], {
-          cwd: protocol.finalizeRoot,
-          windowsHide: true,
-          stdio: 'inherit',
+      try {
+        await new Promise((ok, fail) => {
+          const child = spawn(process.execPath, [finalize, `--run=${run}`, `--python=${python}`], {
+            cwd: protocol.finalizeRoot,
+            windowsHide: true,
+            stdio: 'inherit',
+          });
+          child.on('error', fail);
+          child.on('exit', (code) => (code === 0 ? ok() : fail(Error('Fusion validation failed'))));
         });
-        child.on('error', fail);
-        child.on('exit', (code) => (code === 0 ? ok() : fail(Error('Fusion validation failed'))));
-      });
+      } catch (error) {
+        state.stage = 'fusion-failed';
+        state.error = readJSON(join(run, 'fusion-error.json'))?.error || error.message;
+        save();
+        throw error;
+      }
       state.stage = 'complete';
       state.fusion = readJSON(join(run, 'fusion.json'));
       save();
     } else {
       state.stage = 'awaiting-fusion';
-      state.note = 'Training stopped at deadline; run finalize-tribute with preserved weights';
+      state.note =
+        'Sampling stopped; preserved model/data require explicit finalization or a new protocol';
       save();
     }
   } finally {

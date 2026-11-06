@@ -1,7 +1,7 @@
 /** Independent paired COMPLETE-ROUND evaluation, never used to select training checkpoints. */
 import * as ort from 'onnxruntime-node';
 import { readFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { realpathSync } from 'node:fs';
@@ -154,6 +154,11 @@ export async function evaluate(
             planned: [pairs * 2, pairs * 2],
             updatedUTC: result.updatedUTC,
           });
+          if (protocol.progressMirror)
+            writeJSON(
+              join(dirname(protocol.progressMirror), 'evaluation-progress.json'),
+              readJSON(join(run, 'evaluation-progress.json')),
+            );
         }
       } finally {
         await teacher.close();

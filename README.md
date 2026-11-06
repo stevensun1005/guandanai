@@ -172,3 +172,5 @@ GuanZero 与danMCai 分开训练，支持 GPU 合批推理和只读实时面板�
 训练换电脑：[MacBook 接手指南](ai/research/MAC_HANDOFF.md)提供原生环境、带校验的模型／优化器／回放迁移和固定 24 小时启动流程。Windows 成果保留；本次 M1 Pro 已通过真实 MPS／Adam／ONNX 预检并在独立冻结检出续训。采样并发可经具名协议按实测调优，保留日常使用内存和原固定截止。本次门控按授权优先新快照，普通旧快照不补赛，保留少量前冠军及 P0 退步检查；见[调度指南](ai/research/CONTINUOUS_TRAINING.md#新快照优先的门控调度)。固定窗口与内存兼容修正见交接指南，不把启动记录当成完整 24 小时或棋力验收。
 
 GuanZero 支持从模型、优化器和样本游标续训，在固定窗口中点冻结模型并进行五对手开发评测。见 [GuanZero 训练说明](ai/guanzero/README.md)。
+
+研究中需要神经网络续打时，采用批次启动时已核验的 danMCai 门控冠军；教师切换与数据继承见 [专项协议](ai/shared/tribute/README.md)。

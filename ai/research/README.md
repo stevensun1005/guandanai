@@ -47,3 +47,5 @@
 [Mac 新快照优先门控](evaluation/mac-gate-scheduling-20261105.json)：原窗口内经正常保存切换候选调度，保留历史强者低频检查、P0 退步监控与中断证据；不把少做门控等同于已测得的吞吐或棋力提升。
 
 [进还贡专项协议](../shared/tribute/README.md) · [短测证据](evaluation/tribute-20261106-preflight.json)。开发反事实分与独立棋力结果分开记录。
+
+新增冠军续打与协议继承约定，见根 AGENTS 和 [专项协议](../shared/tribute/README.md)；继承不是新增训练结果。

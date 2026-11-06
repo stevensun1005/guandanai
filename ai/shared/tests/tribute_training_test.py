@@ -15,6 +15,7 @@ import torch
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").is_file())
 sys.path.insert(0, str(ROOT / "ai/shared/tribute"))
 from train import fit, load_groups, TributeNet  # noqa: E402
+from inherit import inherit  # noqa: E402
 
 
 def fixture(run):
@@ -47,6 +48,38 @@ def fixture(run):
 
 
 class TributeTrainingTests(unittest.TestCase):
+    def test_explicit_protocol_migration_preserves_parent_and_resumes_optimizer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "parent"
+            parent.mkdir()
+            fixture(parent)
+            before = fit(parent, "cpu", epochs=2)
+            checkpoint = parent / "learner/latest.pt"
+            original = checkpoint.read_bytes()
+            target = Path(directory) / "successor"
+            target.mkdir()
+            fixture(target)
+            protocol = json.loads((target / "protocol.json").read_text())
+            protocol["lineage"] = {
+                "parentRun": str(parent),
+                "checkpointSHA256": hashlib.sha256(original).hexdigest(),
+                "parentProtocolSHA256": hashlib.sha256(
+                    (parent / "protocol.json").read_bytes()
+                ).hexdigest(),
+            }
+            (target / "protocol.json").write_text(json.dumps(protocol))
+            digest = hashlib.sha256((target / "protocol.json").read_bytes()).hexdigest()
+            for meta_file in (target / "data").glob("*/*.json"):
+                meta = json.loads(meta_file.read_text())
+                meta["protocolSHA"] = digest
+                meta_file.write_text(json.dumps(meta))
+            report = inherit(target)
+            self.assertTrue(report["allModelAndOptimizerTensorsPreserved"])
+            self.assertEqual(checkpoint.read_bytes(), original)
+            after = fit(target, "cpu", epochs=2)
+            self.assertEqual(after["step"], before["step"] + 2)
+            self.assertEqual(after["trainingGroups"], 8)
+
     def check_device(self, device):
         with tempfile.TemporaryDirectory() as directory:
             run = Path(directory)

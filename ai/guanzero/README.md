@@ -61,3 +61,5 @@ node ai/guanzero/training/development-suite.mjs --run=<冻结运行目录> --fro
 ## 独立进还贡专项
 
 GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二输出头；它不是主 LSTM 的权重合并，不干预当前续训。只在进还贡阶段、固定 SHA 底座验收通过后启用，不改变普通出牌策略。
+
+进还贡专项标签的续打教师统一采用 danMCai 真冠军；GuanZero 是单独的接入验收对象，不把其普通导出称作冠军。主训练对手池保持冻结，详见 [专项协议](../shared/tribute/README.md)。

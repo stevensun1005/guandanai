@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "kind": "teacher-protocol-change-not-strength",
+  "observedUTC": "2026-11-06T07:44:30.420919+00:00",
+  "status": "prepared-before-new-run",
+  "ownerInstruction": "Use latest true champion for model continuation games",
+  "verifiedChampion": {
+    "id": "012",
+    "file": "bot-012.onnx",
+    "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "mac-20261105",
+      "version": "v000705434",
+      "status": "experimental-not-heldout-accepted",
+      "step": 705434,
+      "registeredAt": "2026-11-06T01:15:05.171Z",
+      "champion": {
+        "gate": 309,
+        "acceptedAt": "2026-11-06T00:22:21.010Z",
+        "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+        "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+        "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+      },
+      "trainingDevice": "mps"
+    }
+  },
+  "previousRunStopped": {
+    "iteration": 2455,
+    "trainSeeds": 2207,
+    "developmentSeeds": 248,
+    "trainingGroups": 1941,
+    "developmentGroups": 214,
+    "rows": 30254,
+    "completedCounterfactualRounds": 30254,
+    "skippedCases": 299,
+    "pid": 12168,
+    "kind": "development-training",
+    "startedUTC": "2026-11-06T06:51:47.994Z",
+    "deadlineUTC": "2026-11-06T13:00:00.000Z",
+    "protocolSHA": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2",
+    "stage": "awaiting-fusion",
+    "sourceModels": [
+      {
+        "id": "012",
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+      },
+      {
+        "id": "014",
+        "version": "model-000000104257",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1"
+      }
+    ],
+    "teachers": [
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 878477,
+        "candidates": 38423989,
+        "inferenceMs": 1085439.3182999333,
+        "rounds": 15255
+      },
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 800928,
+        "candidates": 36801304,
+        "inferenceMs": 1182927.691300167,
+        "rounds": 15002
+      }
+    ],
+    "current": {
+      "seed": 3800002206,
+      "head": 1,
+      "stage": "return",
+      "split": "train",
+      "completed": 3,
+      "total": 20
+    },
+    "learner": {
+      "stage": "trained",
+      "device": "cuda:0",
+      "deviceName": "AMD Radeon RX 7800 XT",
+      "parameters": 132994,
+      "step": 1220,
+      "newUpdates": 480,
+      "trainingGroups": 1695,
+      "trainingRows": 23807,
+      "developmentGroups": 186,
+      "development": {
+        "groups": [
+          93,
+          93
+        ],
+        "meanCounterfactualGain": [
+          -0.41935483870967744,
+          -0.5376344086021505
+        ],
+        "mse": 2.5800147095240744
+      },
+      "bestUpdated": false,
+      "loss": 2.6692416667938232,
+      "elapsedSeconds": 2.5160000000032596
+    },
+    "lastTrainingOutput": "{\"stage\": \"trained\", \"device\": \"cuda:0\", \"deviceName\": \"AMD Radeon RX 7800 XT\", \"parameters\": 132994, \"step\": 1220, \"newUpdates\": 480, \"trainingGroups\": 1695, \"trainingRows\": 23807, \"developmentGroups\": 186, \"development\": {\"groups\": [93, 93], \"meanCounterfactualGain\": [-0.41935483870967744, -0.5376344086021505], \"mse\": 2.5800147095240744}, \"bestUpdated\": false, \"loss\": 2.6692416667938232, \"elapsedSeconds\": 2.5160000000032596}\r\n",
+    "stoppedUTC": "2026-11-06T07:38:39.120Z",
+    "stopReason": "operator-stop",
+    "best": {
+      "version": "tribute-v000000140",
+      "step": 140,
+      "sha256": "085514eacd43625dd34e7501a98a5760989975c8f5862fcc7d275fdbb28d82af",
+      "file": "best.onnx",
+      "development": {
+        "groups": [
+          25,
+          26
+        ],
+        "meanCounterfactualGain": [
+          -0.64,
+          -0.4230769230769231
+        ],
+        "mse": 2.490056269651498
+      },
+      "protocolSHA256": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2"
+    },
+    "note": "Training stopped at deadline; run finalize-tribute with preserved weights",
+    "updatedUTC": "2026-11-06T07:38:39.122Z",
+    "freeGiB": 8.657707214355469,
+    "rssMiB": 426.6484375,
+    "cpuCorePercent": 92.32343469362999
+  },
+  "previousProtocolSHA256": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2",
+  "previousCheckpointSHA256": "8accb522cb3b1c2c1fd0b88deeb9156bcd88b3f1514db27acba7541bb899f51f",
+  "tests": {
+    "sharedPythonGPU": {
+      "ran": 4,
+      "passed": 4,
+      "includesProtocolMigration": true
+    }
+  },
+  "formalIndependentRounds": 0,
+  "deadlineUnchanged": "2026-11-06T13:00:00.000Z",
+  "seedPolicy": "Continue consumed training/development cursors; held-out range unused",
+  "newTrainingTeachers": "Both heads use verified danMCai champion; GuanZero remains a named integration-evaluation target only"
+}
