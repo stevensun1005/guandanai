@@ -59,7 +59,7 @@ flowchart LR
 
 ## 表情与快捷语
 
-`src/social/emotes.mjs` 是纯数据：预设表情／快捷语清单、按编号查找与按座位冷却。`src/social/controller.js` 负责面板、气泡定位与联机转发：客人发送 `{t:'emote', id}`，房主在 `network/rooms.js` 收到后校验编号与冷却，再广播 `{t:'emote', seat, id}`（房主座位编号）；各页面按本地座位把气泡贴在名字牌旁。气泡只用 `textContent` 写入预设文字。表情不经过 `act()`／事件队列，不写入 `G.log`、快照、复盘或采集队列。
+`src/social/emotes.mjs` 是纯数据：5 个表情（礼物 `g01–g03`：卡布奇诺、鲜花、炸弹；表情 `e01–e02`：墨镜、哭）与 12 句快捷语 `p01–p12`、按编号查找、收礼座位校验 `validTarget`、按座位冷却以及电脑回礼表 `BOT_REPLIES`。`src/social/controller.js` 负责面板与收礼座位选择、气泡定位、礼物飞行与落地特效（Web Animations API，减少动态效果时跳过）、快捷语朗读（浏览器 `speechSynthesis`，`zh-CN`，按座位区分音调，跟随音效开关）和联机转发：客人发送 `{t:'emote', id, to}`，房主在 `network/rooms.js` 收到后校验编号、收礼座位与冷却，再广播 `{t:'emote', seat, id, to}`（房主座位编号）；各页面按本地座位换算。单人局和房主页面在真人把礼物送给电脑座位（`isHumanSeat` 为假）时安排电脑回礼并同样广播。气泡和礼物只用 `textContent` 写入预设文字；CSS 类名带 `kind-` 前缀，避免与进贡动画的 `.gift` 冲突。表情不经过 `act()`／事件队列，不写入 `G.log`、快照、复盘或采集队列。
 
 ## 座位恢复
 

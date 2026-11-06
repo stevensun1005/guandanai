@@ -1,4 +1,4 @@
-/* table emotes: preset emoji and quick phrases beside a seat */
+/* table emotes: gifts thrown between seats, emoji with effects and quick phrases beside a seat */
 .emote-panel {
   position: fixed;
   z-index: 60;
@@ -15,8 +15,8 @@
 }
 .emote-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
 }
 .emote-choice {
   font: inherit;
@@ -32,17 +32,66 @@
   outline-offset: 1px;
   background: #ffffff14;
 }
-.emote-choice.emoji {
-  font-size: 22px;
+.emote-choice.kind-gift,
+.emote-choice.kind-emoji {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 7px 0 5px;
+}
+.emote-choice[aria-pressed='true'] {
+  border-color: var(--gold);
+  background: #ffffff1c;
+}
+.emote-icon {
+  font-size: 26px;
   line-height: 1;
-  padding: 6px 0;
+}
+.emote-label {
+  color: var(--muted);
+  font-size: 11px;
+}
+.emote-targets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px dashed #ffffff30;
+  border-radius: 10px;
+}
+.emote-targets[hidden] {
+  display: none;
+}
+.emote-targets-title {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 12px;
+}
+.emote-target {
+  overflow: hidden;
+  padding: 7px 4px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 1px solid #ffffff24;
+  border-radius: 8px;
+  background: #ffffff10;
+  cursor: pointer;
+}
+.emote-target:hover,
+.emote-target:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
 }
 .emote-phrases {
   display: grid;
   gap: 4px;
   margin-top: 10px;
 }
-.emote-choice.phrase {
+.emote-choice.kind-phrase {
   text-align: left;
   font-size: 14px;
   padding: 7px 10px;
@@ -79,7 +128,7 @@
   line-height: 1.35;
   animation: emote-pop 3.5s ease forwards;
 }
-.emote-bubble.emoji {
+.emote-bubble.kind-emoji {
   padding: 4px 8px;
   font-size: 34px;
   line-height: 1;
@@ -103,8 +152,157 @@
     opacity: 0;
   }
 }
+/* sunglasses drop onto the face; crying wobbles */
+.emote-bubble.e01 {
+  animation:
+    emote-pop 3.5s ease forwards,
+    emote-shades 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.emote-bubble.e02 {
+  animation:
+    emote-pop 3.5s ease forwards,
+    emote-sob 0.5s ease-in-out 0.2s 4;
+}
+@keyframes emote-shades {
+  0% {
+    transform: translateY(-40px) rotate(-20deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes emote-sob {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-8deg) translateY(1px);
+  }
+  75% {
+    transform: rotate(8deg) translateY(1px);
+  }
+}
+
+/* gifts: the flight between plates, the landed gift, its particles and the bomb blast */
+.emote-flight,
+.emote-gift,
+.emote-particle,
+.emote-blast {
+  position: fixed;
+  z-index: 59;
+  pointer-events: none;
+  line-height: 1;
+}
+.emote-flight {
+  font-size: 38px;
+  filter: drop-shadow(0 6px 8px #0007);
+}
+.emote-gift {
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 4px 8px #0008);
+  animation: emote-land 2.6s ease forwards;
+}
+.emote-gift.g03 {
+  animation-name: emote-land-bomb;
+}
+.emote-particle {
+  font-size: 20px;
+}
+.emote-particle.steam {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffef8e0, #fff0 70%);
+  filter: blur(1px);
+}
+.emote-blast {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #fff7d0 0%, #ffb02e 30%, #ff4d1a88 55%, #ff4d1a00 70%);
+  animation: emote-blast 0.7s ease-out forwards;
+}
+@keyframes emote-land {
+  0% {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+  12% {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  22% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  30%,
+  85% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+@keyframes emote-land-bomb {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  10% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0.2;
+  }
+  25%,
+  85% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes emote-blast {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+.emote-shake {
+  animation: emote-shake 0.5s ease-in-out;
+}
+@keyframes emote-shake {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  20% {
+    translate: -6px 2px;
+  }
+  40% {
+    translate: 5px -3px;
+  }
+  60% {
+    translate: -4px 1px;
+  }
+  80% {
+    translate: 3px 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .emote-bubble {
+  .emote-bubble,
+  .emote-bubble.e01,
+  .emote-bubble.e02,
+  .emote-gift,
+  .emote-shake {
     animation: none;
+  }
+  .emote-blast {
+    display: none;
   }
 }

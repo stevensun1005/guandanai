@@ -139,10 +139,10 @@ function hostOnData(conn, d) {
     }
     return;
   }
-  // a preset emote from a friend's seat: the host checks it and relays it with that seat
+  // a preset emote from a friend's seat: the host checks the id and receiver, then relays it with that seat
   if (d.t === 'emote') {
     if (runtime.network.started && info.dir)
-      hostEmote(absOf(info.dir, runtime.network.hostDir), d.id);
+      hostEmote(absOf(info.dir, runtime.network.hostDir), d.id, d.to);
     return;
   }
   if (d.t === 'sit' && !runtime.network.started) {
@@ -388,7 +388,7 @@ function guestOnData(d) {
     return;
   }
   if (d.t === 'emote') {
-    guestEmote(d.seat, d.id);
+    guestEmote(d.seat, d.id, d.to);
     return;
   }
   // the host turned a move down: stop waiting for it and let the player try again

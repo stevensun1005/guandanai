@@ -1,5 +1,6 @@
-"""Real PeerJS emotes: presets pop up beside the sender's seat on every page, forged ids are dropped,
-the per-seat cooldown holds and the mute option hides other players' emotes."""
+"""Real PeerJS emotes: gifts fly between seats on every page, computer seats answer gifts from
+people, quick phrases pop up and are spoken, forged ids or receivers are dropped, the per-seat
+cooldown holds and the mute option hides other players' emotes."""
 from pathlib import Path
 import json, os, sys
 from playwright.sync_api import sync_playwright
@@ -9,14 +10,40 @@ URL = next((v for v in sys.argv[1:] if v.startswith('http')), 'http://127.0.0.1:
 OUT = ROOT / 'web/artifacts/validation/emotes'
 OUT.mkdir(parents=True, exist_ok=True)
 ENDPOINT = json.loads((ROOT / 'web/src/collection/config.json').read_text())['endpoint']
+# Record what speech synthesis is asked to say instead of making noise.
+SPEECH_STUB = """window.__spoken=[];if(window.speechSynthesis){speechSynthesis.speak=(u)=>__spoken.push([u.text,u.lang,u.pitch]);}"""
 
 
-def bubble_seat(page):
-    """(local seat, name shown on that seat, bubble text) for the visible bubble beside another seat."""
-    return page.evaluate(
-        """()=>{for(const n of [1,2,3]){const b=document.querySelector(`.emote-bubble[data-seat="${n}"]`);
-        if(b)return [n,document.querySelector(`#seat${n} .name`).textContent.trim(),b.textContent]}return null}"""
-    )
+def name_of(page, local):
+    return page.evaluate(f"document.querySelector('#seat{local} .name').textContent.trim()")
+
+
+def seat_named(page, name):
+    return next(n for n in [1, 2, 3] if name_of(page, n) == name)
+
+
+def wait_gift(page, frm, to, timeout=6000):
+    page.wait_for_function(
+        f"()=>!!document.querySelector('.emote-gift[data-from=\"{frm}\"][data-to=\"{to}\"]')", timeout=timeout)
+    return page.evaluate(f"document.querySelector('.emote-gift[data-from=\"{frm}\"][data-to=\"{to}\"]').textContent")
+
+
+def bot_answer(page, bot, timeout=6000):
+    """The bot's reply as seen on this page: a gift aimed somewhere, or its own emoji bubble."""
+    page.wait_for_function(
+        f"""()=>!!document.querySelector('.emote-gift[data-from="{bot}"], .emote-bubble[data-seat="{bot}"]')""",
+        timeout=timeout)
+    return page.evaluate(f"""()=>{{const g=document.querySelector('.emote-gift[data-from="{bot}"]');
+        if(g)return ['gift',g.textContent,+g.dataset.to];
+        const b=document.querySelector('.emote-bubble[data-seat="{bot}"]');return ['emoji',b.textContent,null]}}""")
+
+
+def send_gift(page, gift_id, local):
+    page.locator('#emoteBtn').click()
+    page.locator(f'#emoteGrid .emote-choice[data-id={gift_id}]').click()
+    assert page.locator('#emoteTargets').is_visible()
+    page.locator(f'#emoteTargets .emote-target[data-to="{local}"]').click()
+    assert page.locator('#emotePanel').is_hidden()
 
 
 with sync_playwright() as p:
@@ -25,6 +52,7 @@ with sync_playwright() as p:
     gc = browser.new_context(viewport={'width': 390, 'height': 844})
     for context in [hc, gc]:
         context.route(ENDPOINT, lambda route: route.fulfill(status=503, body='isolated test'))
+        context.add_init_script(SPEECH_STUB)
     host, guest = hc.new_page(), gc.new_page()
     errors = []
     for page in [host, guest]:
@@ -46,64 +74,111 @@ with sync_playwright() as p:
     for page in [host, guest]:
         page.wait_for_function('()=>!!G && !document.querySelector("#emoteBtn").closest("[hidden]")', timeout=30000)
     host.wait_for_timeout(500)
+    guest_on_host, host_on_guest = seat_named(host, '客人'), seat_named(guest, '房主')
+    bots_on_host = [n for n in [1, 2, 3] if n != guest_on_host]
+    # Computer seats are labelled relative to each viewer, so map seats through absolute numbers.
+    host_off, guest_off = host.evaluate('NET.off'), guest.evaluate('NET.off')
+    on_guest = lambda host_local: (host_local + host_off - guest_off) % 4
+    assert on_guest(guest_on_host) == 0 and on_guest(0) == host_on_guest
 
-    # Host sends the classic phrase; it shows beside the host on both pages.
+    # The panel keeps exactly the five emotes (three gifts) and the twelve phrases.
     host.locator('#emoteBtn').click()
     assert host.locator('#emotePanel').is_visible()
-    assert host.locator('#emoteGrid .emote-choice').count() == 16
+    labels = host.locator('#emoteGrid .emote-choice .emote-label').all_inner_texts()
+    assert labels == ['卡布奇诺', '鲜花', '炸弹', '墨镜', '哭'], labels
     assert host.locator('#emotePhrases .emote-choice').count() == 12
+
+    # A quick phrase pops up beside the host on both pages and is read aloud on both.
     host.locator('#emotePhrases .emote-choice', has_text='给阿姨倒一杯卡布奇诺').click()
     assert host.locator('#emotePanel').is_hidden()
     assert host.locator('.emote-bubble[data-seat="0"]').inner_text() == '给阿姨倒一杯卡布奇诺'
     assert host.locator('#emoteBtn').is_disabled(), 'cooldown blocks immediate repeats'
-    guest.wait_for_function('()=>[1,2,3].some(n=>document.querySelector(`.emote-bubble[data-seat="${n}"]`))')
-    seat, name, text = bubble_seat(guest)
-    assert name == '房主' and text == '给阿姨倒一杯卡布奇诺', (seat, name, text)
-    # The bubble sits fully inside the window, next to its name plate.
+    guest.wait_for_function(f'()=>document.querySelector(\'.emote-bubble[data-seat="{host_on_guest}"]\')')
+    assert guest.locator(f'.emote-bubble[data-seat="{host_on_guest}"]').inner_text() == '给阿姨倒一杯卡布奇诺'
+    spoken_host, spoken_guest = host.evaluate('__spoken'), guest.evaluate('__spoken')
+    assert spoken_host and spoken_host[-1][:2] == ['给阿姨倒一杯卡布奇诺', 'zh-CN'], spoken_host
+    assert spoken_guest and spoken_guest[-1][0] == '给阿姨倒一杯卡布奇诺', spoken_guest
+    assert spoken_host[-1][2] != spoken_guest[-1][2], 'each seat has its own voice pitch'
     for page in [host, guest]:
         assert page.evaluate("""()=>[...document.querySelectorAll('.emote-bubble')].every(b=>{const r=b.getBoundingClientRect();
             return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})""")
-    host.wait_for_timeout(400)  # let the pop-in animation finish before capturing
-    host.screenshot(path=str(OUT / 'host-sent.png'))
-    guest.screenshot(path=str(OUT / 'guest-received.png'))
 
-    # Guest sends an emoji after its own cooldown; it shows beside the guest on the host page.
+    # The guest throws a flower at the host: the chooser lists the three other seats by name.
     guest.locator('#emoteBtn').click()
-    assert guest.locator('#emotePanel').is_visible()
-    guest.screenshot(path=str(OUT / 'guest-panel.png'))
-    guest.locator('#emoteGrid .emote-choice[title=卡布奇诺]').click()
-    assert guest.locator('.emote-bubble[data-seat="0"]').inner_text() == '☕'
-    host.wait_for_function('()=>[1,2,3].some(n=>document.querySelector(`.emote-bubble[data-seat="${n}"]`)?.textContent==="☕")')
-    seat, name, text = bubble_seat(host)
-    assert name == '客人' and text == '☕', (seat, name, text)
+    guest.locator('#emoteGrid .emote-choice[data-id=g02]').click()
+    targets = guest.locator('#emoteTargets .emote-target').all_inner_texts()
+    assert len(targets) == 3 and any('房主' in t for t in targets), targets
+    guest.screenshot(path=str(OUT / 'guest-targets.png'))
+    guest.locator(f'#emoteTargets .emote-target[data-to="{host_on_guest}"]').click()
+    assert guest.locator('.emote-flight').count() == 1, 'the gift flies before it lands'
+    assert wait_gift(guest, 0, host_on_guest) == '🌹'
+    assert wait_gift(host, guest_on_host, 0) == '🌹'
+    host.wait_for_timeout(300)
+    host.screenshot(path=str(OUT / 'host-got-flower.png'))
+    assert host.evaluate("!G.log.some(e=>'emote' in e || e.k==='emote')"), 'emotes are not game actions'
 
-    # Forged or repeated messages: free text and unknown ids are dropped; the host rate-limits a seat.
-    host.wait_for_timeout(3600)
+    # The host bombs a computer seat; the computer answers within two seconds, on both pages.
+    host.wait_for_timeout(2700)
+    bomb_bot = bots_on_host[0]
+    send_gift(host, 'g03', bomb_bot)
+    assert wait_gift(host, 0, bomb_bot) == '💣'
+    host.wait_for_timeout(150)
+    host.screenshot(path=str(OUT / 'host-bomb.png'))
+    kind, text, aimed = bot_answer(host, bomb_bot)
+    assert (kind, text, aimed) in [('gift', '💣', 0), ('emoji', '😭', None)], (kind, text, aimed)
+    bot_on_guest = on_guest(bomb_bot)
+    g_kind, g_text, g_aimed = bot_answer(guest, bot_on_guest)
+    assert (g_kind, g_text) == (kind, text) and (g_aimed is None or g_aimed == host_on_guest)
+    host.screenshot(path=str(OUT / 'host-bot-answer.png'))
+
+    # The guest gives a cappuccino to the other computer; the host decides its answer to the guest.
+    guest.wait_for_timeout(500)
+    cup_bot = bots_on_host[1]
+    cup_bot_on_guest = on_guest(cup_bot)
+    send_gift(guest, 'g01', cup_bot_on_guest)
+    kind, text, aimed = bot_answer(guest, cup_bot_on_guest)
+    assert (kind, text, aimed) in [('gift', '☕', 0), ('emoji', '😎', None)], (kind, text, aimed)
+
+    # Forged or repeated messages: unknown ids, gifts without a fair receiver, receivers on
+    # non-gifts are dropped; the host rate-limits a seat.
+    host.wait_for_timeout(3000)
+    for page in [host, guest]:
+        page.evaluate("document.querySelectorAll('.emote-bubble,.emote-gift').forEach(n=>n.remove())")
+    guest_abs = guest_off
     guest.evaluate("NET.hostConn.send({t:'emote',id:'<img src=x onerror=alert(1)>'})")
     guest.evaluate("NET.hostConn.send({t:'emote',id:'自由文字'})")
+    guest.evaluate("NET.hostConn.send({t:'emote',id:'g01'})")
+    guest.evaluate(f"NET.hostConn.send({{t:'emote',id:'g03',to:{guest_abs}}})")
+    guest.evaluate("NET.hostConn.send({t:'emote',id:'g03',to:9})")
+    guest.evaluate("NET.hostConn.send({t:'emote',id:'e01',to:0})")
+    host.wait_for_timeout(600)
+    assert host.evaluate("!document.querySelector('.emote-bubble,.emote-gift,.emote-flight')"), 'all forged dropped'
     guest.evaluate("NET.hostConn.send({t:'emote',id:'e01'});NET.hostConn.send({t:'emote',id:'e02'})")
     host.wait_for_timeout(800)
-    seat, name, text = bubble_seat(host)
-    assert text == '😀', 'only the first valid emote inside the cooldown is shown'
+    assert host.locator(f'.emote-bubble[data-seat="{guest_on_host}"]').inner_text() == '😎', \
+        'only the first valid emote inside the cooldown is shown'
     assert host.evaluate("!document.querySelector('.emote-bubble img')")
 
-    # Muting hides other players' emotes but not your own.
+    # Muting hides other players' emotes and gifts but not your own.
     host.wait_for_timeout(3600)
     host.locator('#emoteBtn').click()
     host.locator('#emoteMute').check()
     host.keyboard.press('Escape')
     assert host.locator('#emotePanel').is_hidden()
-    guest.evaluate("NET.hostConn.send({t:'emote',id:'e09'})")
+    guest.evaluate("NET.hostConn.send({t:'emote',id:'e02'})")
     host.wait_for_timeout(800)
-    assert bubble_seat(host) is None, 'muted host shows no emotes from others'
+    assert host.evaluate("!document.querySelector('.emote-bubble:not([data-seat=\"0\"])')"), 'muted: no bubbles'
     host.wait_for_timeout(2600)
+    guest.evaluate("NET.hostConn.send({t:'emote',id:'g02',to:0})")
+    host.wait_for_timeout(1200)
+    assert host.evaluate("!document.querySelector('.emote-gift:not([data-from=\"0\"]),.emote-flight')"), 'muted: no gifts'
     host.locator('#emoteBtn').click()
-    host.locator('#emoteGrid .emote-choice[title=点赞]').click()
-    assert host.locator('.emote-bubble[data-seat="0"]').inner_text() == '👍'
-    guest.wait_for_function('()=>[1,2,3].some(n=>document.querySelector(`.emote-bubble[data-seat="${n}"]`)?.textContent==="👍")')
-    assert not host.evaluate("G.log.some(e=>'emote' in e)"), 'emotes are not game actions'
+    host.locator('#emoteGrid .emote-choice[data-id=e01]').click()
+    assert host.locator('.emote-bubble[data-seat="0"]').inner_text() == '😎'
+    guest.wait_for_function(f'()=>document.querySelector(\'.emote-bubble[data-seat="{host_on_guest}"]\')?.textContent==="😎"')
 
-    print(json.dumps({'kind': 'test', 'realPeerJS': True, 'presets': 28, 'forgedDropped': True,
+    print(json.dumps({'kind': 'test', 'realPeerJS': True, 'emotes': 5, 'phrases': 12, 'giftsFly': True,
+                      'botAnswers': True, 'phrasesSpoken': True, 'forgedDropped': True,
                       'rateLimited': True, 'muteHidesOthers': True, 'pageErrors': errors}, ensure_ascii=False))
     assert not errors, errors
     browser.close()
