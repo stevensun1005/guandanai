@@ -86,6 +86,10 @@ npm run train:dashboard
 | [remote-actors.mjs](../danMCai/training/continuous/remote-actors.mjs) | 局域网内另一台电脑的采样进程启动器       |
 | [remote.mjs](../danMCai/training/continuous/remote.mjs)               | 代码指纹核对、统计全部采样槽             |
 
+## 固定窗口的停机核验
+
+停止后使用 [只读审计](tools/audit-continuous-stop.py)核对检查点、最终 ONNX、Adam 的全部参数状态和更新计数、采样日志、重放分片三件套与有限标签，以及监督器和采样器退出。审计输出必须在运行目录外；工具不摄入尾部样本、不执行优化器更新。未摄入的落盘样本、现存可重建的缓冲行数和已按策略淘汰的数据分别报告。Mac 的原截止证据、完整本地归档和恢复副本检查见 [MAC_HANDOFF](MAC_HANDOFF.md#窗口结束后)。
+
 ## 新快照优先的门控调度
 
 历史默认行为仍会从联赛池逆序寻找未测候选；没有 `gateSchedule` 的旧运行保留该行为。所有者授权本次 Mac 切换为 `new-first-v1`，通过正常保存、新冻结检出和具名 `--protocol-change`／`--set` 应用，当前参数和恢复命令以 [MAC_HANDOFF](MAC_HANDOFF.md) 为准。

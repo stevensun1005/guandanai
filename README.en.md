@@ -165,6 +165,8 @@ Move feedback can be selected before solo play or in an allowed room. A responsi
 
 Moving training to a MacBook: the [Mac handoff](ai/research/MAC_HANDOFF.md) covers native dependencies, checksummed model/Adam/replay transfer and one fixed 24-hour window. Windows artifacts remain intact. This M1 Pro has passed real MPS/Adam/ONNX probes and resumed in an isolated frozen checkout. Sampler concurrency can be tuned through a named, measured protocol change while preserving desktop memory headroom and the original deadline. The authorized gate schedule now prioritizes the newest snapshot, skips the ordinary historical backlog, and retains up to two former champions at a three-hour interval plus the existing P0 regression checks; see the [scheduling guide](ai/research/CONTINUOUS_TRAINING.md#新快照优先的门控调度). The handoff records the fixed deadline and memory-accounting correction; startup is not a completed 24-hour run or strength acceptance.
 
+A [read-only stop audit](ai/research/CONTINUOUS_TRAINING.md#固定窗口的停机核验) checks final weights, optimizer state, retained replay and restored archives after a fixed window ends.
+
 This Mac now has a four-hour champion publication check. Local gate promotion and web deployment are separate workflows; see the [Mac handoff](ai/research/MAC_HANDOFF.md) for the active setup and runtime requirements.
 
 GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current 48-hour window, playing 500 matches against each of three opponents. See the [training guide](ai/guanzero/README.md).

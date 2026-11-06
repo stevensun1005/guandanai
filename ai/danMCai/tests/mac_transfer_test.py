@@ -89,6 +89,27 @@ class TransferTests(unittest.TestCase):
                 unpack(archive, root / "import")
             self.assertFalse((root / "escape").exists())
 
+    def test_mac_archive_uses_its_actual_run_name_and_keeps_source_fingerprints(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            run, source = self.fixture(root)
+            archive = root / "mac-final.zip"
+            result = pack(run, source, archive, source_run="mac-20261105")
+            unpack(archive, root / "restored")
+            manifest = verify(root / "restored")
+            self.assertEqual(result["sourceRun"], "mac-20261105")
+            self.assertEqual(manifest["sourceRun"], "mac-20261105")
+            self.assertEqual(
+                (root / "restored/mac-20261105/learner/checkpoint.pt").read_bytes(),
+                (run / "learner/checkpoint.pt").read_bytes(),
+            )
+            self.assertIn("frozen-source/code.py", manifest["files"])
+            self.assertFalse(any(n.startswith("windows-gpu-main/") for n in manifest["files"]))
+            for label in ["../escape", "/absolute", "nested/run", "frozen-source", "bad:name"]:
+                with self.assertRaises(ValueError):
+                    pack(run, source, root / "invalid.zip", source_run=label)
+            self.assertFalse((root / "invalid.zip").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

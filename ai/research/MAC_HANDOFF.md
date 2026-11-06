@@ -134,6 +134,10 @@ npm run train:dashboard -- --run=ai/danMCai/runs/mac-20261105 --port=8766
 
 核对最后导出、检查点、冠军和完整门控／锚点记录，再运行 Node、格式、相关 Python 测试及构建，在干净工作树同步研究报告和成果索引到 main。记录新增量和跨后端协议变化，正负结果都保留；没有独立整场测试，不宣称 80% 已验证。
 
+最终只读核验可使用 `ai/danMCai/environment/mac/bin/python ai/research/tools/audit-continuous-stop.py --run=ai/danMCai/runs/mac-20261105 --frozen-source=ai/danMCai/workspace/mac-training-20261105-r4 --output=ai/danMCai/workspace/mac-final-20261106/audit.json`。它要求监督器和学习器已经停止，核对截止原因、网络／Adam／计数一致、保留分片长度与标签、采样结果日志和种子，不执行参数更新。审计输出放在运行目录之外，不修改源数据。
+
+本地完整归档使用 `transfer.py pack --run=<已停止的运行> --frozen-source=<原冻结检出> --source-name=mac-20261105 --output=<运行外的新ZIP>`；`--source-name` 只标识归档内目录和来源，避免把 Mac 包标成 Windows。省略时保留原 Windows 迁移格式。解压到新目录后，用 `verify` 检查全部文件 SHA，再对恢复副本做同一只读审计；不能对原训练目录解压覆盖。保留的重放不包含已淘汰的全部历史样本，未摄入的尾部样本另计，归档不等于逐位可复现原内存环或随机数状态。
+
 保留 Mac 全部运行目录与只读导入快照。需要带回 Windows 时另行打包为 Mac 窗口归档并加 SHA-256，放新目录，不覆盖 Windows `gpu-main`，不把 Mac 的 MPS 配置拿到 Windows 原目录启动。网页模型只在实际门控晋升后按冠军发布流程同步；新导出不自动替换冠军。其他机器定时任务不会通过 Git 自动迁移到 Mac。
 
 ## 门控候选调度的具名变更

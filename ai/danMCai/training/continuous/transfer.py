@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
+import re
 import stat
 import time
 import zipfile
@@ -56,7 +57,12 @@ def verify(directory):
     return manifest
 
 
-def pack(run, frozen_source, output):
+def pack(run, frozen_source, output, source_run="windows-gpu-main"):
+    if (
+        not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", source_run)
+        or source_run == "frozen-source"
+    ):
+        raise ValueError("Source run label must be a safe, non-reserved directory name")
     run, frozen_source, output = map(lambda p: Path(p).resolve(), (run, frozen_source, output))
     if output.exists() or output.with_suffix(output.suffix + ".tmp").exists():
         raise FileExistsError("Choose a new archive name; snapshots are immutable")
@@ -80,7 +86,7 @@ def pack(run, frozen_source, output):
     if not (run / "learner/checkpoint.pt").is_file():
         raise ValueError("Optimizer checkpoint missing")
     files = {
-        "windows-gpu-main/" + p.relative_to(run).as_posix(): p
+        source_run + "/" + p.relative_to(run).as_posix(): p
         for p in sorted(run.rglob("*"))
         if p.is_file()
     }
@@ -89,7 +95,7 @@ def pack(run, frozen_source, output):
         "schema": 1,
         "kind": "training-transfer",
         "createdAtUTC": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "sourceRun": "windows-gpu-main",
+        "sourceRun": source_run,
         "latest": latest,
         "champion": champion,
         "sourceStopReason": status.get("stopReason"),
@@ -117,6 +123,7 @@ def pack(run, frozen_source, output):
     )
     return {
         "archive": str(output),
+        "sourceRun": source_run,
         "bytes": output.stat().st_size,
         "sha256": digest(output),
         "files": len(files),
@@ -159,6 +166,7 @@ if __name__ == "__main__":
     p.add_argument("--run", required=True)
     p.add_argument("--frozen-source", required=True)
     p.add_argument("--output", required=True)
+    p.add_argument("--source-name", default="windows-gpu-main")
     p = subs.add_parser("unpack")
     p.add_argument("--archive", required=True)
     p.add_argument("--destination", required=True)
@@ -166,7 +174,7 @@ if __name__ == "__main__":
     p.add_argument("--snapshot", required=True)
     args = parser.parse_args()
     if args.command == "pack":
-        result = pack(args.run, args.frozen_source, args.output)
+        result = pack(args.run, args.frozen_source, args.output, args.source_name)
     elif args.command == "unpack":
         result = unpack(args.archive, args.destination)
     else:

@@ -55,3 +55,5 @@
 [Clint 公开牌史策略修订](evaluation/clint-sync-20261106-1404.json)：四项启发式的隔离、合法性与浏览器验证，新旧对手指纹分开；详见主报告第 37 节，不是新的棋力提升结论。
 
 [进还贡专项 Mac 交接](TRIBUTE_MAC_HANDOFF.md) · [Windows 打包与恢复证据](evaluation/tribute-mac-transfer-20261106.json)：完整数据／Adam 已保留并校验，Mac 专项 MPS 验证仍待执行。
+
+[停机只读审计工具](tools/audit-continuous-stop.py)核对固定窗口、最终网络和 Adam、现存重放分片与采样日志；恢复及本地 ZIP 核验流程见 [Mac 交接](MAC_HANDOFF.md#窗口结束后)。
