@@ -243,6 +243,25 @@
         },
         "trainingDevice": "mps"
       }
+    },
+    {
+      "id": "013",
+      "file": "bot-013.onnx",
+      "sha256": "041526bfe80612c48cd609b0b4a1e16095ea2d9c52bada3a888e55734f9ba696",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-013/bot-013.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-gpubatch",
+        "version": "model-000000081302",
+        "status": "experimental-not-heldout-accepted",
+        "step": 81302,
+        "registeredAt": "2026-11-06T01:46:25.967Z"
+      }
     }
   ],
   "selection": {

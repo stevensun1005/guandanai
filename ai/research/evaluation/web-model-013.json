@@ -1,0 +1,524 @@
+{
+  "observedAt": "2026-11-06T01:46:30.298Z",
+  "defaultId": "012",
+  "model": {
+    "id": "013",
+    "file": "bot-013.onnx",
+    "sha256": "041526bfe80612c48cd609b0b4a1e16095ea2d9c52bada3a888e55734f9ba696",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-013/bot-013.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-gpubatch",
+      "version": "model-000000081302",
+      "status": "experimental-not-heldout-accepted",
+      "step": 81302,
+      "registeredAt": "2026-11-06T01:46:25.967Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "frozenSnapshot": {
+    "frozenAt": "2026-11-06T01:43:24.857589+00:00",
+    "run": "guanzero-adp-gpubatch",
+    "checkpoint": "model-000000081302",
+    "step": 81302,
+    "sha256": "041526bfe80612c48cd609b0b4a1e16095ea2d9c52bada3a888e55734f9ba696",
+    "bytes": 6346014,
+    "latest": {
+      "file": "model-000000081302.onnx",
+      "version": 81302,
+      "updatedAt": 1793929364.978354
+    },
+    "expectedId": "013",
+    "preservedDefaultId": "012",
+    "preservedSelection": {
+      "mode": "champions-v1",
+      "danMCaiChampions": [
+        "012",
+        "009"
+      ]
+    },
+    "baseCommit": "30e42aa7ca7507225bfdf106af91811505701a11",
+    "trainingConfigSHA256": "cd89d4912e5fee527d1028fa3332317f2741ec817d9456e2419fd98a4dfcb836",
+    "alreadyRegistered": []
+  },
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "positions": 16,
+      "values": 49,
+      "maxAbsoluteError": 4.76837158203125e-07,
+      "actionMismatches": 0
+    },
+    "menu": {
+      "ids": [
+        "clint-rule",
+        "013",
+        "011",
+        "001",
+        "012",
+        "009"
+      ],
+      "guanzeroNames": [
+        "guanzero-adp-gpubatch-81302",
+        "guanzero-adp-gpubatch-78087"
+      ],
+      "defaultId": "012",
+      "danMCaiChampions": [
+        "012",
+        "009"
+      ],
+      "localBrowserVerified": true,
+      "browserSeatDefaults": [
+        "012",
+        "012",
+        "012",
+        "012"
+      ]
+    },
+    "checks": {
+      "nodeTests": 184,
+      "pythonGuanZeroTests": 8,
+      "format": "passed",
+      "build": "956f0ae2fa"
+    }
+  },
+  "developmentEvidence": {
+    "new500Reports": [
+      {
+        "file": "guanzero-development-500-model-000000077262-p0-20261105.json",
+        "reportSHA256": "56dabf5874aa99004cef333dcc81285ceaab118aee55ef0152664c50672feaf4",
+        "suite": "model-000000077262",
+        "checkpoint": "model-000000077262",
+        "modelSHA256": "53391161dd8f11b3d69d2f9533957f2d314dcde684bf9bd19aec54134f15ea98",
+        "opponent": "p0",
+        "opponentDefinition": {
+          "id": "p0",
+          "name": "P0初始模型",
+          "version": "p0",
+          "mode": "snapshot"
+        },
+        "pairs": 250,
+        "seedStart": 4200000000,
+        "seedEnd": 4200000249,
+        "completedAt": "2026-11-05T22:04:02.449Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 1,
+          "losses": 492,
+          "draws": 7,
+          "matchWinRate": 0.002,
+          "matchScore": 0.009,
+          "rounds": 3830,
+          "roundWins": 623,
+          "roundWinRate": 0.1626631853785901,
+          "averageUpgradePoints": -1.7783289817232375,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0.008
+            ],
+            "matchScore": [
+              0.003,
+              0.016
+            ],
+            "roundWinRate": [
+              0.14886901630720673,
+              0.1759897828863346
+            ],
+            "averageUpgradePoints": [
+              -1.842331453129197,
+              -1.7148717948717949
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-model-000000077262-clint-20261105.json",
+        "reportSHA256": "1f26318859344d26241b94a896db1d1436f31142d4a53b5ca46197f9cd4f7f3e",
+        "suite": "model-000000077262",
+        "checkpoint": "model-000000077262",
+        "modelSHA256": "53391161dd8f11b3d69d2f9533957f2d314dcde684bf9bd19aec54134f15ea98",
+        "opponent": "clint",
+        "opponentDefinition": {
+          "id": "clint",
+          "name": "Clint规则机器人",
+          "version": "rules-v2",
+          "mode": "rule",
+          "ruleVersion": "rules-v2"
+        },
+        "pairs": 250,
+        "seedStart": 4200000000,
+        "seedEnd": 4200000249,
+        "completedAt": "2026-11-05T21:59:46.645Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 75,
+          "losses": 384,
+          "draws": 41,
+          "matchWinRate": 0.15,
+          "matchScore": 0.191,
+          "rounds": 4908,
+          "roundWins": 1585,
+          "roundWinRate": 0.32294213528932353,
+          "averageUpgradePoints": -0.8035859820700897,
+          "confidence95": {
+            "matchWinRate": [
+              0.12,
+              0.182
+            ],
+            "matchScore": [
+              0.161,
+              0.222
+            ],
+            "roundWinRate": [
+              0.30745721271393645,
+              0.33782425095515783
+            ],
+            "averageUpgradePoints": [
+              -0.8816913143095189,
+              -0.7281237281237282
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-model-000000077262-champion-20261105.json",
+        "reportSHA256": "02b4101334e2544b76b08857513b747f5c7d18a494a66b0c5a4ced59642cf477",
+        "suite": "model-000000077262",
+        "checkpoint": "model-000000077262",
+        "modelSHA256": "53391161dd8f11b3d69d2f9533957f2d314dcde684bf9bd19aec54134f15ea98",
+        "opponent": "champion",
+        "opponentDefinition": {
+          "id": "champion",
+          "name": "danMCai-v000293055",
+          "mode": "snapshot",
+          "version": "v000293055",
+          "modelSHA256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "archiveId": "009",
+          "gate": {
+            "gate": 112,
+            "acceptedAt": "2026-11-05T08:11:50.077Z",
+            "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00112.json",
+            "evidenceSHA256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7"
+          },
+          "policy": "greedy-network-only-no-web-styles-or-endgame"
+        },
+        "pairs": 250,
+        "seedStart": 4200000000,
+        "seedEnd": 4200000249,
+        "completedAt": "2026-11-05T22:15:03.985Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 0,
+          "losses": 491,
+          "draws": 9,
+          "matchWinRate": 0,
+          "matchScore": 0.009,
+          "rounds": 3738,
+          "roundWins": 567,
+          "roundWinRate": 0.15168539325842698,
+          "averageUpgradePoints": -1.8507223113964686,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0.004,
+              0.015
+            ],
+            "roundWinRate": [
+              0.13937753721244925,
+              0.16344142259414227
+            ],
+            "averageUpgradePoints": [
+              -1.9091157205240175,
+              -1.7914605571465765
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-sha-03f7e0709843-random-20261105.json",
+        "reportSHA256": "a1941bc3e33d2c3a5d21f25aa995805be51644552301046d3e9ebc86ee64db61",
+        "suite": "block-0003",
+        "checkpoint": "block-0003",
+        "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+        "opponent": "random",
+        "opponentDefinition": {
+          "id": "random",
+          "name": "随机出牌",
+          "version": "uniform-candidates-v1",
+          "mode": "snapshot"
+        },
+        "pairs": 250,
+        "seedStart": 4200100000,
+        "seedEnd": 4200100249,
+        "completedAt": "2026-11-05T22:27:09.243Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 500,
+          "losses": 0,
+          "draws": 0,
+          "matchWinRate": 1,
+          "matchScore": 1,
+          "rounds": 2525,
+          "roundWins": 2519,
+          "roundWinRate": 0.9976237623762376,
+          "averageUpgradePoints": 2.9794059405940594,
+          "confidence95": {
+            "matchWinRate": [
+              1,
+              1
+            ],
+            "matchScore": [
+              1,
+              1
+            ],
+            "roundWinRate": [
+              0.9956470122675108,
+              0.9992076069730587
+            ],
+            "averageUpgradePoints": [
+              2.9703557312252964,
+              2.987281399046105
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-sha-03f7e0709843-original-20261105.json",
+        "reportSHA256": "c3505daff7140d7b3f129461f767769ce8e8417c25da7df84aa6ef053b5c7ad9",
+        "suite": "block-0003",
+        "checkpoint": "block-0003",
+        "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+        "opponent": "rule",
+        "opponentDefinition": {
+          "id": "rule",
+          "name": "原版规则机器人",
+          "version": "original",
+          "mode": "rule",
+          "ruleVersion": "original"
+        },
+        "pairs": 250,
+        "seedStart": 4200100000,
+        "seedEnd": 4200100249,
+        "completedAt": "2026-11-05T22:31:44.212Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 61,
+          "losses": 399,
+          "draws": 40,
+          "matchWinRate": 0.122,
+          "matchScore": 0.162,
+          "rounds": 4837,
+          "roundWins": 1471,
+          "roundWinRate": 0.30411412032251395,
+          "averageUpgradePoints": -0.8840190200537523,
+          "confidence95": {
+            "matchWinRate": [
+              0.096,
+              0.15
+            ],
+            "matchScore": [
+              0.133,
+              0.19
+            ],
+            "roundWinRate": [
+              0.2897504640131986,
+              0.31848321591380024
+            ],
+            "averageUpgradePoints": [
+              -0.9553811196033878,
+              -0.8103554551058146
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-sha-03f7e0709843-p0-20261105.json",
+        "reportSHA256": "4838a1ea579487140a830bdf02551fae6258c133a654b904be78270aa36803ab",
+        "suite": "block-0003",
+        "checkpoint": "block-0003",
+        "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+        "opponent": "p0",
+        "opponentDefinition": {
+          "id": "p0",
+          "name": "P0初始模型",
+          "version": "p0",
+          "mode": "snapshot"
+        },
+        "pairs": 250,
+        "seedStart": 4200100000,
+        "seedEnd": 4200100249,
+        "completedAt": "2026-11-05T22:55:07.179Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 4,
+          "losses": 487,
+          "draws": 9,
+          "matchWinRate": 0.008,
+          "matchScore": 0.017,
+          "rounds": 3910,
+          "roundWins": 695,
+          "roundWinRate": 0.17774936061381075,
+          "averageUpgradePoints": -1.6808184143222507,
+          "confidence95": {
+            "matchWinRate": [
+              0.002,
+              0.016
+            ],
+            "matchScore": [
+              0.008,
+              0.027
+            ],
+            "roundWinRate": [
+              0.16346400204970535,
+              0.19080111195350014
+            ],
+            "averageUpgradePoints": [
+              -1.7484407484407485,
+              -1.6183091545772887
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-sha-03f7e0709843-clint-20261105.json",
+        "reportSHA256": "186fbfcf4d7e5f4b971cbc20ddd581cacf1ad3c77c961df6357d50eeb3874c33",
+        "suite": "block-0003",
+        "checkpoint": "block-0003",
+        "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+        "opponent": "clint",
+        "opponentDefinition": {
+          "id": "clint",
+          "name": "Clint规则机器人",
+          "version": "rules-v2",
+          "mode": "rule",
+          "ruleVersion": "rules-v2"
+        },
+        "pairs": 250,
+        "seedStart": 4200100000,
+        "seedEnd": 4200100249,
+        "completedAt": "2026-11-05T22:50:47.120Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 75,
+          "losses": 396,
+          "draws": 29,
+          "matchWinRate": 0.15,
+          "matchScore": 0.179,
+          "rounds": 4875,
+          "roundWins": 1542,
+          "roundWinRate": 0.3163076923076923,
+          "averageUpgradePoints": -0.8207179487179487,
+          "confidence95": {
+            "matchWinRate": [
+              0.122,
+              0.182
+            ],
+            "matchScore": [
+              0.148,
+              0.212
+            ],
+            "roundWinRate": [
+              0.30128205128205127,
+              0.3315293646021247
+            ],
+            "averageUpgradePoints": [
+              -0.8989610918720717,
+              -0.7421843280552172
+            ]
+          }
+        }
+      },
+      {
+        "file": "guanzero-development-500-sha-03f7e0709843-champion-20261105.json",
+        "reportSHA256": "a72ecc1c9a0204a71c88da50068eae70cc11055e379de38b722125dfb9f63d69",
+        "suite": "block-0003",
+        "checkpoint": "block-0003",
+        "modelSHA256": "03f7e07098434b1fecf535d71c73dee2d39d04ca26f3f70154300922301fb737",
+        "opponent": "champion",
+        "opponentDefinition": {
+          "id": "champion",
+          "name": "danMCai-v000293055",
+          "mode": "snapshot",
+          "version": "v000293055",
+          "modelSHA256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "archiveId": "009",
+          "gate": {
+            "gate": 112,
+            "acceptedAt": "2026-11-05T08:11:50.077Z",
+            "evidence": "ai/research/evaluation/champion-selection-20261105/gate-00112.json",
+            "evidenceSHA256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7"
+          },
+          "policy": "greedy-network-only-no-web-styles-or-endgame"
+        },
+        "pairs": 250,
+        "seedStart": 4200100000,
+        "seedEnd": 4200100249,
+        "completedAt": "2026-11-05T23:06:41.657Z",
+        "metrics": {
+          "matches": 500,
+          "wins": 2,
+          "losses": 487,
+          "draws": 11,
+          "matchWinRate": 0.004,
+          "matchScore": 0.015,
+          "rounds": 3848,
+          "roundWins": 610,
+          "roundWinRate": 0.15852390852390852,
+          "averageUpgradePoints": -1.7913201663201663,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0.01
+            ],
+            "matchScore": [
+              0.008,
+              0.024
+            ],
+            "roundWinRate": [
+              0.14680851063829786,
+              0.1703422053231939
+            ],
+            "averageUpgradePoints": [
+              -1.8503832936822628,
+              -1.7310222672064777
+            ]
+          }
+        }
+      }
+    ],
+    "scope": "Different frozen models; not strength evidence for the published 81302 snapshot",
+    "opponentChampion": "v000293055; retained historical frozen opponent, not current v000705434",
+    "frozenPlanArchive": [
+      {
+        "file": "ai/research/evaluation/guanzero-development-500-plans-20261105/manifest.json",
+        "sha256": "2194c9cbd5d78a235d04e48789e4268e8441ba148bafaabac57417ddae870fc0"
+      },
+      {
+        "file": "ai/research/evaluation/guanzero-development-500-plans-20261105/model-000000077262-plan.json",
+        "sha256": "b657936caa5d9a344d3eb21c93c46773780650b002dc13ea7d71219476d2918b"
+      },
+      {
+        "file": "ai/research/evaluation/guanzero-development-500-plans-20261105/sha-03f7e0709843-plan.json",
+        "sha256": "eb2b6c2bc743a8e394f9a59c5a4ed9224e5afe5c7b36913afa535c0fa65a181f"
+      }
+    ]
+  },
+  "deployment": {
+    "status": "pending"
+  }
+}
