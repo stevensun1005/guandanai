@@ -304,12 +304,127 @@
       {
         "issue": "Temporary parity page initially used a module-relative WASM path that duplicated assets/vendor",
         "resolution": "Use an absolute URL derived from the test document; all 19 inference cases then passed. Production runtime path was not changed."
+      },
+      {
+        "issue": "First post-deployment public model GET returned HTTP 503 while the new menu was already visible",
+        "resolution": "A subsequent normal TLS HEAD and complete GET returned HTTP 200; full deployed bytes matched the accepted champion SHA. No client or certificate protections were changed."
       }
-    ]
+    ],
+    "browserCoach": {
+      "candidateButtons": 2,
+      "modelText": "danMCai-v000705434 · 相对分，非胜率\n收起 Top 5\n×\n过牌 · 合理性 100%\n出牌后保留上一手评价",
+      "topFiveText": "CHAMPION INSIGHT\n推荐出牌 TOP 5\n×\n\n已比较 2 个候选 · 点击选牌，不会自动打出\n\n1. 过牌\n100%\n本轮不跟牌\n2. 炸弹\n0% 差 -0.54\n♣Q\n♦Q\n♦Q\n♥Q\n\n百分数是本回合的模型相对分，不是胜率；推荐只选牌，不替你出牌。"
+    },
+    "publicBrowserMenu": {
+      "choices": [
+        {
+          "label": "Clint规则机器人",
+          "value": "clint-rule"
+        },
+        {
+          "label": "guanzero-adp-gpubatch-78087",
+          "value": "011"
+        },
+        {
+          "label": "guanzero-adp-gpubatch-61045",
+          "value": "010"
+        },
+        {
+          "label": "danMCai-v000000000",
+          "value": "001"
+        },
+        {
+          "label": "danMCai-v000705434",
+          "value": "012"
+        },
+        {
+          "label": "danMCai-v000293055",
+          "value": "009"
+        }
+      ],
+      "horizontalOverflow": false,
+      "selected": [
+        {
+          "seat": "S",
+          "value": "012"
+        },
+        {
+          "seat": "E",
+          "value": "012"
+        },
+        {
+          "seat": "N",
+          "value": "012"
+        },
+        {
+          "seat": "W",
+          "value": "012"
+        }
+      ],
+      "version": "7790dd1b9e"
+    }
   },
   "publication": {
-    "status": "validated-locally-awaiting-main-and-Pages",
+    "status": "deployed-and-publicly-verified",
     "webURL": "https://stevensun1005.github.io/guandanai/",
-    "releaseURL": "https://github.com/stevensun1005/guandanai/releases/tag/web-model-012"
+    "releaseURL": "https://github.com/stevensun1005/guandanai/releases/tag/web-model-012",
+    "sourceCommit": "4cb1c501a425f7d6a100f72c484aad470f0236d1",
+    "workflow": {
+      "runId": 42143587830,
+      "url": "https://github.com/stevensun1005/guandanai/actions/runs/42143587830",
+      "buildJob": 127649572935,
+      "deployJob": 127650187187,
+      "build": "success",
+      "deploy": "success",
+      "browserSmoke": [
+        "production_smoke.py",
+        "replay_security_smoke.py",
+        "coach_smoke.py --solo-only"
+      ]
+    },
+    "publicVerification": {
+      "passed": true,
+      "verifiedAt": "2026-11-06T01:35:13.125Z",
+      "webURL": "https://stevensun1005.github.io/guandanai/",
+      "catalogHTTP": 200,
+      "defaultId": "012",
+      "choices": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人",
+          "kind": "rule"
+        },
+        {
+          "id": "011",
+          "name": "guanzero-adp-gpubatch-78087",
+          "kind": "neural"
+        },
+        {
+          "id": "010",
+          "name": "guanzero-adp-gpubatch-61045",
+          "kind": "neural"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000",
+          "kind": "neural"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434",
+          "kind": "neural"
+        },
+        {
+          "id": "009",
+          "name": "danMCai-v000293055",
+          "kind": "neural"
+        }
+      ],
+      "modelHTTP": 200,
+      "bytes": 5368650,
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "htmlHTTP": 200,
+      "build": "7790dd1b9e"
+    }
   }
 }
