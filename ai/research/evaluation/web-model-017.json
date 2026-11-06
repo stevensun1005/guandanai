@@ -310,12 +310,133 @@
     "markdownRelativeLinks": {
       "checked": 349,
       "broken": 0
+    },
+    "publicBrowserMenu": {
+      "choices": [
+        {
+          "label": "Clint规则机器人",
+          "value": "clint-rule"
+        },
+        {
+          "label": "guanzero-adp-io48-135205",
+          "value": "016"
+        },
+        {
+          "label": "guanzero-adp-io48-120154",
+          "value": "015"
+        },
+        {
+          "label": "danMCai-v000000000",
+          "value": "001"
+        },
+        {
+          "label": "danMCai-v000855042",
+          "value": "017"
+        },
+        {
+          "label": "danMCai-v000705434",
+          "value": "012"
+        }
+      ],
+      "horizontalOverflow": false,
+      "selected": [
+        {
+          "seat": "S",
+          "value": "017"
+        },
+        {
+          "seat": "E",
+          "value": "017"
+        },
+        {
+          "seat": "N",
+          "value": "017"
+        },
+        {
+          "seat": "W",
+          "value": "017"
+        }
+      ],
+      "version": "b8a4af6b4c"
+    },
+    "trainingObservedAfterPublication": {
+      "observedAt": "2026-11-06T15:42:52.249Z",
+      "supervisorPid": 67295,
+      "learnerStep": 926506,
+      "champion": "v000855042",
+      "scheduleSHA256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ]
     }
   },
   "publication": {
-    "status": "validated-locally-awaiting-main-and-Pages",
+    "status": "deployed-and-publicly-verified",
     "releaseURL": "https://github.com/stevensun1005/guandanai/releases/tag/web-model-017",
-    "webURL": "https://stevensun1005.github.io/guandanai/"
+    "webURL": "https://stevensun1005.github.io/guandanai/",
+    "sourceCommit": "ff391ccb6b4c72f338ba5838d0e98880f02397e9",
+    "workflow": {
+      "runId": 42244231258,
+      "url": "https://github.com/stevensun1005/guandanai/actions/runs/42244231258",
+      "buildJob": 127982119459,
+      "deployJob": 127982966579,
+      "build": "success",
+      "deploy": "success",
+      "browserSmoke": [
+        "production_smoke.py",
+        "replay_security_smoke.py",
+        "coach_smoke.py --solo-only"
+      ]
+    },
+    "publicVerification": {
+      "passed": true,
+      "verifiedAt": "2026-11-06T15:41:30.756Z",
+      "webURL": "https://stevensun1005.github.io/guandanai/",
+      "catalogHTTP": 200,
+      "defaultId": "017",
+      "choices": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人",
+          "kind": "rule"
+        },
+        {
+          "id": "016",
+          "name": "guanzero-adp-io48-135205",
+          "kind": "neural"
+        },
+        {
+          "id": "015",
+          "name": "guanzero-adp-io48-120154",
+          "kind": "neural"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000",
+          "kind": "neural"
+        },
+        {
+          "id": "017",
+          "name": "danMCai-v000855042",
+          "kind": "neural"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434",
+          "kind": "neural"
+        }
+      ],
+      "modelHTTP": 200,
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "bytes": 5368650,
+      "htmlHTTP": 200,
+      "build": "b8a4af6b4c"
+    }
   },
   "syncIncident": {
     "championAcceptedAt": "2026-11-06T10:59:34.199Z",
