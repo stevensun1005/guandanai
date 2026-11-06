@@ -58,7 +58,7 @@ Clint 规则对手独立维护：单张顺走、级牌与王的取舍、公开�
 | 对局氛围 | 音效、全屏、可选语音、表情与快捷语、出牌动画与结果展示        |
 | 静态部署 | GitHub Pages 自动发布，默认模型随网页部署，研究检查点单独归档 |
 
-大厅依次提供 **Clint规则机器人、GuanZero 最近两代、danMCai 初始版及最近两代冠军**。默认使用**danMCai 现任门控冠军**，点「全部使用danMCai 冠军」可重置。冠军依据训练系统实际门控晋升，不按步数最新替代，不代表独立棋力验收。本机 GuanZero 每 8 小时冻结一代，三对手各打完 500 场后将同一份权重发布到网页。旧权重保留归档。GuanZero 使用 `guanzero-adp-gpubatch-44752` 这样的名称。具体版本与默认值见 [电脑选择与发布](./web/docs/WEB_MODELS.md)。 Mac 续训产生的冠军同样须经真实 accept 门控与 SHA 核对，再按[发布指南](web/docs/WEB_MODELS.md)同步到默认模型和出牌评价。
+大厅依次提供 **Clint规则机器人、GuanZero 最近两代、danMCai 初始版及最近两代冠军**。默认使用**danMCai 现任门控冠军**，点「全部使用danMCai 冠军」可重置。冠军依据训练系统实际门控晋升，不按步数最新替代，不代表独立棋力验收。本机 GuanZero 每 12 小时冻结一代，三对手各打完 500 场后将同一份权重发布到网页。旧权重保留归档。GuanZero 使用 `guanzero-adp-gpubatch-44752` 这样的名称。具体版本与默认值见 [电脑选择与发布](./web/docs/WEB_MODELS.md)。 Mac 续训产生的冠军同样须经真实 accept 门控与 SHA 核对，再按[发布指南](web/docs/WEB_MODELS.md)同步到默认模型和出牌评价。
 
 至少两名真人的联机局结束后，房主会自动把匿名结构化牌谱保存到云端；支持断网暂存、补传与去重。牌谱可私有导出为 JSON／JSONL，供后续研究人类行为，当前训练不会自动读取。[采集与导出](./web/collector/README.md)。
 
@@ -175,6 +175,6 @@ GuanZero 与danMCai 分开训练，支持 GPU 合批推理和只读实时面板�
 
 Mac 上已补建每四小时的真实冠军发布检查；训练晋升与网页部署由独立流程完成，当前入口与运行条件见 [Mac 交接](ai/research/MAC_HANDOFF.md)。
 
-GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗口每 8 小时冻结模型，分别对三个对手各打 500 场。见 [GuanZero 训练说明](ai/guanzero/README.md)。
+GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗口每 12 小时冻结模型，分别对三个对手各打 500 场。见 [GuanZero 训练说明](ai/guanzero/README.md)。
 
 研究中需要神经网络续打时，采用批次启动时已核验的 danMCai 门控冠军；教师切换与数据继承见 [专项协议](ai/shared/tribute/README.md)。

@@ -64,17 +64,19 @@ GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二�
 
 进还贡专项标签的续打教师统一采用 danMCai 真冠军；GuanZero 是单独的接入验收对象，不把其普通导出称作冠军。主训练对手池保持冻结，详见 [专项协议](../shared/tribute/README.md)。
 
-## 每八小时评测
+<a id="每八小时评测"></a>
 
-本次本地 io48 窗口以训练起点计时。第 8 小时的批次按追加要求在 Toronto 11 月 6 日 09:38 用当时最新完整导出 138506 启动。接下来在训练第 16、24、32、40、48 小时取样，对应 Toronto 11 月 6 日 14:12、22:12 和 7 日 06:12、14:12、22:12 左右。最后一批等训练正常退出后读取最终完整导出。138506 按登记时的五组完成；后续三个对手为随机、Clint 和获 accept 的 danMCai 冠军，各 250 对交换阵营、500 场。仅从完整逐场报告计算成绩。
+## 每十二小时评测
 
-在 Windows 本机，Codex 八小时任务先核对活动 launcher、冻结源码、最新发布清单和冠军。使用独立发布检出执行以下命令。登记器以训练槽位和完整 SHA 去重。第 24 小时交给原监督器，对应种子 4,210,000,000–4,210,000,249。窗口其它批次分别使用各自的种子段，各段起点相隔 100,000。
+本次本地 io48 窗口以训练起点计时。第 8 小时的批次按追加要求在 Toronto 11 月 6 日 09:38 用当时最新完整导出 138506 启动。改为十二小时周期时，已启动的 138506 作为首批。接下来在训练第 24、36、48 小时取样，对应 Toronto 11 月 6 日 22:12、7 日 10:12 和 7 日 22:12 左右。最后一批等训练正常退出后读取最终完整导出。138506 按登记时的五组完成；后续三个对手为随机、Clint 和获 accept 的 danMCai 冠军，各 250 对交换阵营、500 场。仅从完整逐场报告计算成绩。
+
+在 Windows 本机，Codex 十二小时任务先核对活动 launcher、冻结源码、最新发布清单和冠军。使用独立发布检出执行以下命令。登记器以训练槽位和完整 SHA 去重。第 24 小时交给原监督器，对应种子 4,210,000,000–4,210,000,249。窗口其它批次分别使用各自的种子段，第 36、48 小时分别使用索引 5101、5103。
 
 ```powershell
 node ai/guanzero/training/register-window-suite.mjs C:/guandan-sampler/work/guanzero/dashboard-launcher.json
 ```
 
-对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。本机使用登记器的 `--arm-midpoint` 单次等待模式，在第 24 小时前约 30 秒预登记三对手快照。原监督器到点复用同一具名文件和计划。检查等待进程、计划和原监督器的进度。若错过取样时段，记录漏测原因。同一个八小时任务按该批冻结名单归档全部报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每八小时评测并发布)。
+对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。本机使用登记器的 `--arm-midpoint` 单次等待模式，在第 24 小时前约 30 秒预登记三对手快照。原监督器到点复用同一具名文件和计划。检查等待进程、计划和原监督器的进度。若错过取样时段，记录漏测原因。同一个十二小时任务按该批冻结名单归档全部报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每十二小时评测并发布)。
 
 ```powershell
 node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --once

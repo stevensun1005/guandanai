@@ -1,4 +1,4 @@
-/** Register one eight-hour io48 checkpoint using the evaluator pinned by its launcher. */
+/** Register one twelve-hour io48 checkpoint using the evaluator pinned by its launcher. */
 import {
   mkdirSync,
   linkSync,
@@ -25,9 +25,15 @@ export function windowSlot(window, now) {
     window.seedIndex !== 5100
   )
     throw Error('Unexpected training window or seed reservation');
-  const slot = Math.min(6, Math.floor((now - start) / (8 * 3600000)));
+  const slot = Math.min(4, Math.floor((now - start) / (12 * 3600000)));
   if (slot < 1) throw Error('No evaluation due yet');
-  return { slot, index: window.seedIndex + slot - 3, due: start + slot * 8 * 3600000 };
+  // Keep the existing first suite, the reserved midpoint and the final seed blocks.
+  const seedOffsets = [-2, 0, 1, 3];
+  return {
+    slot,
+    index: window.seedIndex + seedOffsets[slot - 1],
+    due: start + slot * 12 * 3600000,
+  };
 }
 
 async function register(launcherPath, armMidpoint) {
@@ -67,20 +73,20 @@ async function register(launcherPath, armMidpoint) {
   const handle = openSync(lock, 'wx');
   try {
     const manifest = readJSON(path);
-    if (!manifest?.suites?.length) throw Error('Missing initial eight-hour suite');
+    if (!manifest?.suites?.length) throw Error('Missing initial transition suite');
     const existing = manifest.suites.find((p) => p.index === index);
-    if (existing && slot !== 3) return { slot, action: 'registered', id: existing.id };
-    if (slot === 3 && !armMidpoint) {
+    if (existing && slot !== 2) return { slot, action: 'registered', id: existing.id };
+    if (slot === 2 && !armMidpoint) {
       if (!existing || existing.opponentPanel !== THREE_OPPONENT_PANEL)
         throw Error('Midpoint three-opponent plan missing; inspect supervisor');
       return { slot, action: 'midpoint-supervisor', id: existing.id };
     }
     if (Date.now() - due > 2 * 3600000)
       throw Error('Missed freeze window; do not backfill with a newer export');
-    if (slot === 6 && existsSync(join(run, 'supervisor.lock')))
+    if (slot === 4 && existsSync(join(run, 'supervisor.lock')))
       throw Error('Wait for final training export');
-    if (slot < 6 && existsSync(join(run, 'STOP'))) throw Error('Training stopped early');
-    if (slot > 3 && !existsSync(join(run, 'eval', 'midpoint-complete.json')))
+    if (slot < 4 && existsSync(join(run, 'STOP'))) throw Error('Training stopped early');
+    if (slot > 2 && !existsSync(join(run, 'eval', 'midpoint-complete.json')))
       throw Error('Wait for the midpoint supervisor');
     // The frozen one-shot worker only reads registered suites for this window.
     // The midpoint owns both registration and evaluation during its dedicated slot.
@@ -108,7 +114,7 @@ async function register(launcherPath, armMidpoint) {
     const plan = manifest.suites.at(-1);
     if (plan.index !== index || plan.modelSHA256 !== digest) throw Error('Frozen plan mismatch');
     if (armMidpoint) pinMidpoint(run, directory, plan, sha256);
-    if (slot < 3) {
+    if (slot < 2) {
       manifest.seedIndexBase = window.seedIndex - manifest.suites.length;
       writeJSON(path, manifest);
     }
