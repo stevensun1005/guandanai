@@ -664,6 +664,14 @@
     {
       "issue": "room refresh during unstable shuffle/deal cannot resume",
       "resolution": "actual shuffle/cut controls, wait stable phase before refresh"
+    },
+    {
+      "issue": "public probe used a string predicate rejected by deployed CSP",
+      "resolution": "use function callback; CSP unchanged"
+    },
+    {
+      "issue": "production harness appended catalog path after a cache-busting query string",
+      "resolution": "call existing harness with canonical website URL; actual model decisions and final full smoke passed"
     }
   ],
   "strengthEvaluation": {
@@ -679,6 +687,57 @@
     "generic private-hand viewing excluded; independent owner-only tool retained"
   ],
   "deployment": {
-    "status": "pending"
+    "status": "success",
+    "sourceCommit": "abad5c19c976a07de58a02e9278744731d118c35",
+    "workflowRun": 42205340652,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42205340652",
+    "verifiedUTC": "2026-11-06T10:53:03.605591+00:00",
+    "buildVersion": "1c160016e0",
+    "publicUI": {
+      "url": "https://stevensun1005.github.io/guandanai/?clint-sync=1c160016e0",
+      "version": "1c160016e0",
+      "options": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人"
+        },
+        {
+          "id": "014",
+          "name": "guanzero-adp-io48-104257"
+        },
+        {
+          "id": "013",
+          "name": "guanzero-adp-gpubatch-81302"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434"
+        },
+        {
+          "id": "009",
+          "name": "danMCai-v000293055"
+        }
+      ],
+      "defaultId": "012",
+      "previousChampionRetained": true,
+      "advancedSetupVisible": true,
+      "testGlobalsExposed": false,
+      "pageErrors": []
+    },
+    "publicProductionSmoke": {
+      "productionGlobalsHidden": true,
+      "policyTurns": 2,
+      "successfulModelIds": [
+        "001",
+        "012"
+      ],
+      "pageErrors": []
+    },
+    "rootMainFastForwarded": true,
+    "ownerDraftsByteIdentical": 10
   }
 }
