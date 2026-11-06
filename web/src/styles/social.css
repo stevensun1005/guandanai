@@ -1,5 +1,5 @@
 /* table emotes: gifts thrown between seats, emoji with effects and quick phrases beside a seat */
-/* the round emote button under your own seat */
+/* the round emote button at the bottom right, just right of 理牌 */
 .emote-fab {
   --cool-ms: 2500ms;
   position: relative;
@@ -68,11 +68,18 @@
 body.practice #emoteBtn {
   display: none;
 }
-html.phone.rows body:not(.practice) .mebar .emote-fab {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  font-size: 18px;
+.handtools .emote-fab {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  margin-left: 2px;
+  font-size: 19px;
+  pointer-events: auto;
+}
+html.phone .handtools .emote-fab {
+  width: 30px;
+  height: 30px;
+  font-size: 17px;
 }
 
 /* the panel pops up above the button: frosted card, two tabs, large tiles */

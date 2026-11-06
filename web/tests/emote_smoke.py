@@ -92,11 +92,13 @@ with sync_playwright() as p:
     assert host.locator('#emotePanel').is_visible()
     labels = host.locator('#emoteGrid .emote-choice .emote-label').all_inner_texts()
     assert labels == ['卡布奇诺', '鲜花', '炸弹', '墨镜', '哭'], labels
-    # The round button sits in your own bar under the table; the panel opens just above it, in the window.
+    # The round button sits at the bottom right, just right of 理牌; the panel opens above it, in the window.
     for page in [host, guest]:
         if page is guest:
             page.locator('#emoteBtn').click()
-        assert page.evaluate("!!document.querySelector('#mebar #emoteBtn')")
+        assert page.evaluate("""()=>{const e=document.querySelector('.handtools #emoteBtn').getBoundingClientRect(),
+            s=document.querySelector('#sortBtn').getBoundingClientRect();
+            return e.left>=s.right-1&&Math.abs((e.top+e.bottom)/2-(s.top+s.bottom)/2)<8&&e.right<=innerWidth}"""), 'right of 理牌'
         assert page.evaluate("""()=>{const b=document.querySelector('#emoteBtn').getBoundingClientRect(),
             p=document.querySelector('#emotePanel').getBoundingClientRect();
             return p.bottom<=b.top+1&&p.left>=0&&p.right<=innerWidth&&p.top>=0}"""), 'panel above the button'
@@ -201,7 +203,7 @@ with sync_playwright() as p:
     assert host.locator('.emote-bubble[data-seat="0"]').inner_text() == '😎'
     guest.wait_for_function(f'()=>document.querySelector(\'.emote-bubble[data-seat="{host_on_guest}"]\')?.textContent==="😎"')
 
-    print(json.dumps({'kind': 'test', 'realPeerJS': True, 'emotes': 5, 'phrases': 8, 'buttonUnderOwnSeat': True, 'giftsFly': True,
+    print(json.dumps({'kind': 'test', 'realPeerJS': True, 'emotes': 5, 'phrases': 8, 'buttonRightOfSort': True, 'giftsFly': True,
                       'botAnswers': True, 'phrasesSpoken': True, 'forgedDropped': True,
                       'rateLimited': True, 'muteHidesOthers': True, 'pageErrors': errors}, ensure_ascii=False))
     assert not errors, errors
