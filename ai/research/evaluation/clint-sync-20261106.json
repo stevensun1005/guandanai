@@ -1,0 +1,684 @@
+{
+  "schema": 1,
+  "observedUTC": "2026-11-06T10:47:10.342815+00:00",
+  "kind": "ui-rule-timeout-compatibility-not-strength",
+  "dataPurpose": "development-compatibility",
+  "mainBaseCommit": "d647d3c65fe2b2517fa9da0326d04ca5bea1cadc",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "checkedSHA": "7323a12f7fcad66a29032f5fa58e8bbd57850f36",
+    "reconstructedCoverageBase": "b8f71637ac6a835280d58549094a0a8b4b456aaa",
+    "priorRecord": "ui-rule-refresh-20261105.json",
+    "priorLocalPortCommit": "6eb89aeb1efeb6df2d6e37afa1adb1cf36ca7dd9",
+    "baselineMethod": "Prior record has no upstream cursor. Audit existing port against b9ae90f through b8f7163; inspect complete b8f7163..7323a12 HTML diff and functions before establishing first verified cursor.",
+    "htmlEntryDiffParity": "index and guandan edits identical except index version string",
+    "commitLedger": [
+      {
+        "sha": "6850c0957a0cfb02c54a1cc6449aca2e0dd47ff1",
+        "adapted": [
+          "dual-team start settings, prior order, A failures",
+          "symmetric plates",
+          "central shuffle/cut",
+          "remove mini control/preference"
+        ],
+        "notApplicableOrSuperseded": [
+          "personal nickname room 8888 not applicable"
+        ]
+      },
+      {
+        "sha": "bbd25f9d7f0a181fb30d05ff523b627d36adec54",
+        "adapted": [
+          "partner count beside plate"
+        ],
+        "notApplicableOrSuperseded": []
+      },
+      {
+        "sha": "895e8b8fbd21bc809fa9d6bd51d25c0d6deea1ea",
+        "adapted": [
+          "card-back none"
+        ],
+        "notApplicableOrSuperseded": [
+          "generic finished-player private-hand viewing changes information permissions; retain public observations",
+          "intermediate text superseded by a93d1ee"
+        ]
+      },
+      {
+        "sha": "a82ff1a48c060812d2e85ff5fd34253371219d79",
+        "adapted": [],
+        "notApplicableOrSuperseded": [
+          "spectator private-hand layout depends on excluded disclosure"
+        ]
+      },
+      {
+        "sha": "a93d1ee24bdfa5904e005ee95ee35b174cf0c6b9",
+        "adapted": [
+          "remove redundant last-play text"
+        ],
+        "notApplicableOrSuperseded": [
+          "spectator-specific animations depend on excluded disclosure",
+          "intermediate timeout superseded by 9c43640"
+        ]
+      },
+      {
+        "sha": "9c43640e78266b6337aa71582da586206b563b4f",
+        "adapted": [
+          "Clint-selected human timeout",
+          "ten-second hurry warning"
+        ],
+        "notApplicableOrSuperseded": [
+          "neural and independent owner-tool timeout policies remain independent"
+        ]
+      },
+      {
+        "sha": "46148c5316e63f6584e85381c34c97092e47590b",
+        "adapted": [
+          "return clock sixty seconds"
+        ],
+        "notApplicableOrSuperseded": []
+      },
+      {
+        "sha": "93cf7aae68bdca59b1f59edb31afe9152a0196de",
+        "adapted": [],
+        "notApplicableOrSuperseded": [
+          "upstream redeployment only"
+        ]
+      },
+      {
+        "sha": "51ae125a44d43a073eb6fe0ecce7519ae55b88ad",
+        "adapted": [
+          "coalesced viewport reflow, delayed checks, one-second dimension fallback"
+        ],
+        "notApplicableOrSuperseded": []
+      },
+      {
+        "sha": "e6c76caf13077419f33f22c7e2a16659e2ace725",
+        "adapted": [],
+        "notApplicableOrSuperseded": [
+          "viewport writes superseded/reverted by 7323a12"
+        ]
+      },
+      {
+        "sha": "7323a12f7fcad66a29032f5fa58e8bbd57850f36",
+        "adapted": [
+          "no viewport meta writes",
+          "opt-in dimensions diagnostics"
+        ],
+        "notApplicableOrSuperseded": []
+      }
+    ],
+    "pending": []
+  },
+  "ruleIsolation": {
+    "ruleVersion": "rules-v2",
+    "changedScope": "explicit Clint-selected human timeout only; ordinary Clint turns unchanged",
+    "workerMessage": "rule-timeout",
+    "ordinaryUpstreamFunctions": {
+      "handCost": {
+        "before": "7426db5221782118a9bc6f8f07f967ff4b63081bc1b7bfb0ef0832dfd788b67a",
+        "after": "7426db5221782118a9bc6f8f07f967ff4b63081bc1b7bfb0ef0832dfd788b67a"
+      },
+      "mateBeatChance": {
+        "before": "f6156820ed9e5cc4b8179868551c8931d73b833a4f8994c56117ced265bdc693",
+        "after": "f6156820ed9e5cc4b8179868551c8931d73b833a4f8994c56117ced265bdc693"
+      },
+      "mateLead": {
+        "before": "5e9e4f71a29803005c9bdb4d0029f464320e24e899efad11f36054af5829d97d",
+        "after": "5e9e4f71a29803005c9bdb4d0029f464320e24e899efad11f36054af5829d97d"
+      },
+      "mateCeilings": {
+        "before": "bb0ce432e60215d9adbde1e6b13e3beafb08a7f55f3831b1376794fbd7336f27",
+        "after": "bb0ce432e60215d9adbde1e6b13e3beafb08a7f55f3831b1376794fbd7336f27"
+      },
+      "aiLead": {
+        "before": "4612bdcce0865257396cf2720b3a52d46f33039f0d8f93f2205809e6ca73ac0f",
+        "after": "4612bdcce0865257396cf2720b3a52d46f33039f0d8f93f2205809e6ca73ac0f"
+      },
+      "pickLead": {
+        "before": "52c510b4d8db7d08958cdf68afd3765b76ce9d6d616f7e4e3d09e12b0faf70e3",
+        "after": "52c510b4d8db7d08958cdf68afd3765b76ce9d6d616f7e4e3d09e12b0faf70e3"
+      },
+      "aiDecide": {
+        "before": "0ed0a917020a3b6753da6f2a376b1f144cde97f1c7541fa2f37a8c8e29c4140c",
+        "after": "0ed0a917020a3b6753da6f2a376b1f144cde97f1c7541fa2f37a8c8e29c4140c"
+      },
+      "aiChoose": {
+        "before": "c550212c45178ab09bc888f8bdca894929ccdca8385fe2de91609c2fcb23ff86",
+        "after": "c550212c45178ab09bc888f8bdca894929ccdca8385fe2de91609c2fcb23ff86"
+      },
+      "aiReturnCard": {
+        "before": "9054a368afdb813e6c9ed73812a859a6960c8d98536279fe281af0b4132bc7c6",
+        "after": "9054a368afdb813e6c9ed73812a859a6960c8d98536279fe281af0b4132bc7c6"
+      }
+    },
+    "auditMethod": "Acorn function source-range SHA-256 comparison",
+    "ordinaryLocalStrategyUnchanged": true,
+    "neuralNormalRequest": "decide",
+    "changedAdapterSHA256": {
+      "web/src/rule-bot/timeout.js": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b",
+      "web/src/rule-bot/runtime.mjs": "c7b5e99eeeff7b77fbb8955529852ea12b9e8685447d8f162bd9127c47a7ae52",
+      "web/src/ai/controller.js": "dce5dfacb8ce0b0ac59f64a4d12ebbe438f8137b91b2458e4743f8f3cce0b7ee",
+      "web/src/ai/worker.mjs": "451feb49b197ac26149b3cbdfe256119e6321612d683d4a0db8782cc72b5f0e0",
+      "web/src/lobby/start-state.mjs": "bd401aec0006c081e5d11ee7dcdd5a58686496700181edffce1828859b1f178b",
+      "web/src/lobby/level.js": "234fa0e2b25630b8efe78c5191486b7f48e5fba264f9acf90eca8607312f3e53",
+      "web/src/ui/viewport.js": "038a54e0fcc2ac8842022b287c2ec8094fa63e1a1b30c1a867530616ea7bfbc1"
+    }
+  },
+  "unchangedSourceSHA256": {
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/model-catalog.json": "c71162b59ce7babaea82ab4e083706c5cc820dba7f502028d0da43d6439e3d9a",
+    "web/src/rule-bot/strategy.js": "3eaa8deece2ac55e6608335c5aff48943fd766ebf8116e5150f510f8d25b36eb",
+    "web/src/rule-bot/settings.js": "7a7f5791b7f6554b5d9f9ffc149b775534fe0a3072e27462eb2a8b799f5cb838",
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "ai/shared/tribute/encoding.mjs": "9d101d6dc9333a265fe9e02278c7e40e24f9ce3eb0dc413b4491a00f0ce94310"
+  },
+  "modelSelection": {
+    "defaultId": "012",
+    "danMCaiChampions": [
+      "012",
+      "009"
+    ],
+    "selectableIds": [
+      "clint-rule",
+      "014",
+      "013",
+      "001",
+      "012",
+      "009"
+    ],
+    "weightsChanged": false,
+    "baselineSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+  },
+  "frozenTrainingProtection": {
+    "frozenSourceFiles": 73,
+    "sourceCommit": "3b0ec91dd570cecd6bf50720133ae7adeaa124ef",
+    "protocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6",
+    "ownerDraftsUnchanged": 10,
+    "deadlineUTC": "2026-11-06T13:00:00.000Z"
+  },
+  "validation": {
+    "node": {
+      "command": "npm test",
+      "total": 206,
+      "passed": 206,
+      "failed": 0
+    },
+    "python": {
+      "danMCai": {
+        "total": 35,
+        "passed": 33,
+        "skipped": 2
+      },
+      "GuanZero": {
+        "total": 9,
+        "passed": 9,
+        "skipped": 0
+      },
+      "research": {
+        "total": 9,
+        "passed": 9,
+        "skipped": 0
+      },
+      "shared": {
+        "total": 4,
+        "passed": 3,
+        "skipped": 1
+      },
+      "gpuValidationClaimed": false
+    },
+    "format": "npm run format:check passed",
+    "browserBuild": "1c160016e0",
+    "browser": {
+      "viewports": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            768,
+            1024
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "viewportMetaStable": true
+        }
+      ],
+      "startSetup": {
+        "levels": [
+          14,
+          8
+        ],
+        "L": 8,
+        "order": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "fails": [
+          2,
+          0
+        ]
+      },
+      "roomStartSetup": {
+        "realPeerJS": true,
+        "host": {
+          "levels": [
+            8,
+            14
+          ],
+          "L": 8,
+          "fails": [
+            1,
+            2
+          ],
+          "order": [
+            1,
+            3,
+            2,
+            0
+          ],
+          "cutter": 1
+        },
+        "guest": {
+          "levels": [
+            14,
+            8
+          ],
+          "L": 8,
+          "fails": [
+            2,
+            1
+          ],
+          "order": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "cutter": 0
+        },
+        "guestReadOnly": true,
+        "refreshPreservesSetup": true,
+        "newMatchDoesNotReapply": true
+      },
+      "timeoutRouting": {
+        "pass": null,
+        "last": "rule-timeout",
+        "neural": "decide"
+      },
+      "fullscreenCycles": 3,
+      "viewportMetaWrites": 0,
+      "privateCardsNotMadePublic": true,
+      "pageErrors": [],
+      "regressions": {
+        "ui_refresh_smoke.py": {
+          "checks": [
+            {
+              "viewport": [
+                1440,
+                1000
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": true
+            },
+            {
+              "viewport": [
+                1024,
+                768
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": true
+            },
+            {
+              "viewport": [
+                390,
+                844
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": false
+            },
+            {
+              "viewport": [
+                844,
+                390
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": false
+            }
+          ],
+          "errors": []
+        },
+        "tribute_smoke.py": {
+          "cases": [
+            {
+              "highOnly": false,
+              "automatedReturnLegal": true,
+              "immediateHandCounts": [
+                27,
+                27,
+                27,
+                27
+              ],
+              "readyDuringFlightSafe": true
+            },
+            {
+              "highOnly": true,
+              "automatedReturnLegal": true,
+              "immediateHandCounts": [
+                27,
+                27,
+                27,
+                27
+              ],
+              "readyDuringFlightSafe": true
+            }
+          ],
+          "pageErrors": []
+        },
+        "ready_transition_smoke.py": {
+          "duplicateReadyIsIdempotent": true,
+          "returnPhaseCommittedBeforeAnimation": true,
+          "concurrentTransferRunsOnce": true,
+          "eachHand27": true,
+          "physicalCards108": true,
+          "staleHoldCannotResetLead": true,
+          "pageErrors": []
+        },
+        "rejoin_smoke.py": {
+          "hostDirection": "W",
+          "guestDirection": "S",
+          "refreshDuringPrep": true,
+          "manualRoomCodeRecovery": true,
+          "selectedLevelAndOnceRuleSync": true,
+          "refreshDuringInFlightPolicy": true,
+          "stalePolicyCancelled": true,
+          "realGuestActionAfterReturn": true,
+          "dataChannelAutomaticRecovery": true,
+          "unknownSeatRejected": true,
+          "sameCredential": true,
+          "guestAvoidsModelDownload": true,
+          "hostExitOffersSoloContinuation": true,
+          "soloContinuationLoadsLearnedPolicy": true,
+          "pageErrors": []
+        },
+        "table_layout_smoke.py": {
+          "checks": [
+            {
+              "viewport": [
+                1440,
+                1000
+              ],
+              "touch": false,
+              "learnedTurns": 6,
+              "sameActionSlot": true,
+              "readableScrollablePlays": true,
+              "finishedPlayerControls": true,
+              "compactNotesAndResults": true
+            },
+            {
+              "viewport": [
+                1280,
+                720
+              ],
+              "touch": false,
+              "learnedTurns": 6,
+              "sameActionSlot": true,
+              "readableScrollablePlays": true,
+              "finishedPlayerControls": true,
+              "compactNotesAndResults": true
+            },
+            {
+              "viewport": [
+                1024,
+                768
+              ],
+              "touch": true,
+              "learnedTurns": 6,
+              "sameActionSlot": true,
+              "readableScrollablePlays": true,
+              "finishedPlayerControls": true,
+              "compactNotesAndResults": true
+            }
+          ],
+          "pageErrors": [],
+          "fixtureScope": "Overflow, finished-player and result geometry use synthetic display states; six opening turns per viewport use the real learned policy."
+        },
+        "clint_bot_smoke.py": {
+          "actualRuleReplies": 6,
+          "allRuleGameNeuralDownloads": 0,
+          "wasmModels": [
+            "014",
+            "013",
+            "001",
+            "012",
+            "009"
+          ],
+          "fixtureScope": "Eight real opening actions; five controlled compatibility decisions, no strength estimates",
+          "pageErrors": []
+        },
+        "private_table_smoke.py": {
+          "kind": "test",
+          "strengthMatches": 0,
+          "completedRounds": 0,
+          "trainingUpdates": 0,
+          "realPeerJS": true,
+          "hostOnlyNicknameGate": true,
+          "guestSameNameDenied": true,
+          "noPrivateRuleFlagBroadcast": true,
+          "privateCoach": {
+            "modelId": "012",
+            "search": {
+              "candidates": 28,
+              "evaluated": 8,
+              "mode": "round",
+              "horizon": 4,
+              "maxPlies": 12,
+              "leafSeat": "advising player, or partner after finishing",
+              "mismatchedLeaves": 0,
+              "fullRollouts": 22,
+              "minRollouts": 2,
+              "truncatedRollouts": 0,
+              "maxSamples": 12,
+              "priorWeight": 4,
+              "temperature": 0.03,
+              "elapsedMs": 2601,
+              "fullInformation": true
+            }
+          },
+          "partnerUsesOracle": true,
+          "opponentStaysRules": true,
+          "neuralOpponentUsesOnlyPublicObservation": true,
+          "manualOutsideBeamRated": true,
+          "offRestoresPartnerRules": true,
+          "privateHandsMatchHeldCounts": true,
+          "constructedCompletionExcluded": true,
+          "uploads": 0,
+          "layouts": [
+            {
+              "width": 1440,
+              "height": 1000,
+              "topFiveInViewport": true
+            },
+            {
+              "width": 390,
+              "height": 844,
+              "topFiveInViewport": true
+            },
+            {
+              "width": 844,
+              "height": 390,
+              "topFiveInViewport": true
+            }
+          ],
+          "pageErrors": []
+        },
+        "coach_smoke.py": {
+          "kind": "test",
+          "strengthMatches": 0,
+          "trainingUpdates": 0,
+          "scoring": {
+            "modelId": "012",
+            "candidates": 1295,
+            "minValue": -1.6738444566726685,
+            "maxValue": 0.5307624340057373,
+            "topFiveVisible": true,
+            "topFiveClickSelectsOnly": true,
+            "topFiveExposureMarked": true,
+            "viewTeamLevelsChecked": true,
+            "teamLevels": {
+              "self": 2,
+              "opponent": 2
+            },
+            "relativeExtremaChecked": true,
+            "selectionUsesCachedValues": true,
+            "invalidSelectionNotRated": true,
+            "disabledStaleReplyIgnored": true,
+            "injectedFailureNotScored": true,
+            "retrySucceeded": true
+          },
+          "postMoveRetained": true,
+          "layouts": [
+            {
+              "width": 1440,
+              "height": 1000,
+              "panelInViewport": true,
+              "actionButtonsOverlap": false,
+              "topFiveInViewport": true,
+              "topFiveOverlapsActions": false,
+              "bounds": {
+                "x": 16,
+                "y": 656.203125,
+                "width": 954,
+                "height": 53
+              }
+            },
+            {
+              "width": 390,
+              "height": 844,
+              "panelInViewport": true,
+              "actionButtonsOverlap": false,
+              "topFiveInViewport": true,
+              "topFiveOverlapsActions": false,
+              "bounds": {
+                "x": 16,
+                "y": 626,
+                "width": 302,
+                "height": 61
+              }
+            },
+            {
+              "width": 844,
+              "height": 390,
+              "panelInViewport": true,
+              "actionButtonsOverlap": false,
+              "topFiveInViewport": true,
+              "topFiveOverlapsActions": false,
+              "bounds": {
+                "x": 16,
+                "y": 165.0625,
+                "width": 682,
+                "height": 46
+              }
+            }
+          ],
+          "pageErrors": []
+        }
+      }
+    },
+    "build": "npm run build passed"
+  },
+  "negativeObservations": [
+    {
+      "issue": "phoneSwitch imported without export",
+      "resolution": "export existing function; rebuild"
+    },
+    {
+      "issue": "roundEvt dereferenced missing game prevOut",
+      "resolution": "optional game access; full Node pass"
+    },
+    {
+      "issue": "undeclared DOMMatrix in architecture check",
+      "resolution": "explicit window.DOMMatrix; full Node pass"
+    },
+    {
+      "issue": "fullscreen fixture clicked hidden practice-only button",
+      "resolution": "actual options fullscreen button"
+    },
+    {
+      "issue": "room fixture nickname exceeded input limit",
+      "resolution": "short valid test names"
+    },
+    {
+      "issue": "room refresh during unstable shuffle/deal cannot resume",
+      "resolution": "actual shuffle/cut controls, wait stable phase before refresh"
+    }
+  ],
+  "strengthEvaluation": {
+    "completedIndependentRounds": 0,
+    "completedIndependentMatches": 0,
+    "seedAllocation": null,
+    "winLossDraw": null,
+    "claim": "Compatibility only; no new strength or training improvement result. Historical results stay bound to original fingerprints."
+  },
+  "limitations": [
+    "Chrome automated viewports/fullscreen, not iPad Safari hardware",
+    "new-match transition explicitly invoked, not a played match",
+    "generic private-hand viewing excluded; independent owner-only tool retained"
+  ],
+  "deployment": {
+    "status": "pending"
+  }
+}

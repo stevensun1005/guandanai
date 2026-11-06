@@ -3,7 +3,7 @@ import { BASE_NAMES, makeDeck, shuffle } from '../core/cards.js';
 import { TableBot } from '../ai/controller.js';
 import { act } from './events.js';
 import { render } from '../ui/table.js';
-import { initialMatchLevels } from '../core/match.js';
+import { initialTableState } from '../lobby/start-state.mjs';
 
 export let isHost;
 export let isHumanSeat;
@@ -38,7 +38,12 @@ export function resetGame() {
     nextReady: [],
     roundHistory: [],
     aOut: null,
-    ...initialMatchLevels(runtime.rules, runtime.direction, runtime.network.off % 2),
+    ...initialTableState(
+      runtime.rules,
+      runtime.direction,
+      runtime.network.off % 2,
+      runtime.network.startSettingsUsed,
+    ),
   };
 }
 
@@ -53,8 +58,7 @@ export function newGame() {
 
 // The host sends one uniformly shuffled deck. Large bombs and four jokers remain valid random deals.
 export function roundEvt(reset) {
-  const cutter =
-    !reset && runtime.game.prevOut ? toAbs(runtime.game.prevOut[0]) : (Math.random() * 4) | 0;
+  const cutter = runtime.game?.prevOut ? toAbs(runtime.game.prevOut[0]) : (Math.random() * 4) | 0;
   const deck = shuffle(makeDeck());
   return { k: 'round', reset, deck: deck.map((c) => c.id), cutter, first: (Math.random() * 4) | 0 };
 }

@@ -312,3 +312,7 @@ GuanZero 本机续训使用独立运行目录、FIFO 清单索引和固定窗口
 所有者追加要求已写入根 AGENTS。进还贡继任批次使用当前可核验冠军统一续打，GuanZero 只作单独验收目标；原批次完整保留，旧 `progress.json` 是实时视图，停止原证据见 `progress-at-champion-transition.json`。继任运行目录 `tribute-champion-20261106`，原 08:00 Toronto 截止不变；不要把继承步数或旧样本计为本批新完成。
 
 冠军续打继任批次已经实际恢复，继承 1220 步后首训新增 20 步；原协议／检查点不变、种子不重复。见 [恢复证据](evaluation/tribute-20261106-teacher-resumed.json)。原目录进度只是监控视图，请以 `activeRun` 读取新批次原始状态；融合仍读新运行目录，不把继承当新增。
+
+## 2026-11-06 Clint 增量交接
+
+检查到上游 `7323a12f7fcad66a29032f5fa58e8bbd57850f36`。新起始游标和逐提交取舍见 [同步状态](evaluation/clint-sync-state.json) 与 [机器证据](evaluation/clint-sync-20261106.json)，不是仅凭上游 HEAD 宣称同步。此前记录没有上游游标，本次按原适配提交与现实现重新审计基点；普通规则函数逐项比较不变，新增的是 Clint 专属真人超时。普通玩家看其他家私牌与上游个人固定房间不复制。下一次从已成功游标检查增量；当前冻结专项源码／协议／数据不修改，新增 UI 层不改变其 core 兼容指纹。

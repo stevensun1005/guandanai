@@ -145,3 +145,7 @@ npm run eval:endgame -- --pairs=2000 --seed=20360104 --cards=24 --baseline=16
 单次漂亮出牌不代表整体更强。没有稳定验证结果的候选策略不会替换默认引擎。性能优化与棋力提升也分别记录。
 
 GuanZero 评测表按冻结模型显示“训练任务名-实际版本 / 对手”，进度独立显示；缺少可靠版本的旧记录使用 SHA 后缀，不把批次号作为训练版本。[面板命名](../../ai/guanzero/README.md#面板中的评测模型名)。
+
+## Clint 真人超时
+
+本次 Clint 同步增加独立真人超时路径，仅在该座位选用 Clint 时生效；跟牌过牌，领出尽量保留完整牌组。普通 Clint 电脑正常轮次、danMCai 与 GuanZero 网络决策不使用该路径。见 [规则模块](../src/rule-bot/README.md#真人超时分支) 和 [同步证据](../../ai/research/evaluation/clint-sync-20261106.json)。兼容性通过不等于胜率提高，历史成绩不改写为新策略成绩。

@@ -218,6 +218,7 @@ export function initialize() {
     ['goose', '大雁'],
     ['maple', '枫叶'],
     ['stripes', '花纹'],
+    ['none', '无'],
   ];
   runtime.cardBack = 'goose';
   try {
@@ -231,6 +232,10 @@ export function initialize() {
       localStorage.setItem('guandan-back', runtime.cardBack);
     } catch (_) {}
     syncBack();
+    if (runtime.game) {
+      pileRebuild();
+      renderHand();
+    }
   };
   syncBack();
   $('#readyBtn').onclick = () => act({ k: 'ready', p: toAbs(0) });
@@ -238,17 +243,6 @@ export function initialize() {
   $('#sfxBtn').onclick = () => {
     Sound.toggle('sfx');
     syncAudioBtns();
-  };
-  $('#miniBtn').onclick = () => {
-    runtime.miniPlays = !runtime.miniPlays;
-    try {
-      localStorage.setItem('guandan-mini', runtime.miniPlays ? '1' : '0');
-    } catch (_) {}
-    syncMini();
-    if (runtime.game) {
-      practicePlays();
-      pileRefit();
-    }
   };
   if (window.ResizeObserver)
     new ResizeObserver(() => {

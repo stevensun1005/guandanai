@@ -23,7 +23,7 @@ let phoneDevice;
 let heldSideways;
 export let isPhone;
 export let phoneRows;
-let phoneSwitch;
+export let phoneSwitch;
 export let handKeys;
 
 export function handGeo(n, keys) {

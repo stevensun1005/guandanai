@@ -45,6 +45,8 @@ export function showStart() {
 
 // your own choice of rules (a room you join shows the host's instead)
 function loadRules() {
+  delete runtime.rules.startState;
+  runtime.network.startSettingsUsed = false;
   Object.assign(runtime.rules, {
     trib: true,
     aFail: 'draw',

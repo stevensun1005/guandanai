@@ -78,7 +78,6 @@ export function syncMini() {
       }
     }
   }
-  $('#miniBtn').setAttribute('aria-pressed', runtime.miniPlays);
 }
 
 function askConfirm() {
@@ -187,9 +186,7 @@ export function initialize() {
     runtime.confirmPlay = localStorage.getItem('guandan-confirm') === '1';
   } catch (_) {}
   runtime.miniPlays = false;
-  try {
-    runtime.miniPlays = localStorage.getItem('guandan-mini') === '1';
-  } catch (_) {}
+
   selKey = () => [...runtime.selection].sort((a, b) => a - b).join(',');
   addEventListener('resize', () => {
     if (runtime.confirmation) syncCfmShow();

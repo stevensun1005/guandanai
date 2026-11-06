@@ -2,6 +2,17 @@ import { runtime } from '../app/runtime.js';
 import { initialize as initializeValue } from '../ai/hand-value.js';
 import { initialize as initializeHints } from '../hand/hints.js';
 import { chooseRuleAction } from './strategy.js';
+import { clintTimeout } from './timeout.js';
+
+export function decideClintTimeout(observation) {
+  const play = clintTimeout(
+    observation.hands[observation.player],
+    observation.L,
+    observation.trick,
+    observation.fixed || [],
+  );
+  return play && { ...play, cards: play.cards.map((c) => c.id) };
+}
 
 /** Only this seat's physical cards and public information cross the Worker boundary. */
 export function ruleObservation(game, player) {

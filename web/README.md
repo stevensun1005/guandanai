@@ -37,3 +37,7 @@ npm run dev
 ## 进还贡专项接入
 
 [共享专项](../ai/shared/tribute/README.md) 使用独立 Worker 与批准底座 SHA，覆盖机器人进贡、还贡及理牌期间提前还贡；真人、Clint 与未批准模型维持原行为。当前组件默认关闭，启用须有固定窗口独立结果和浏览器验证，不增加菜单项。
+
+## 开局与屏幕适配
+
+`src/lobby/start-state.mjs` 负责房主的初始续局状态和视角旋转，`src/lobby/level.js` 提供双队级数、名次与失败次数弹窗。只在首场首次开局应用；房间恢复保留当前状态。`src/ui/viewport.js` 合并尺寸事件并对齐名字牌，不修改 viewport meta；`#debug` 可查看尺寸诊断。使用方法见 [上桌指南](docs/PLAYING.md)，检查记录见 [Clint 增量同步](../ai/research/evaluation/clint-sync-20261106.json)。

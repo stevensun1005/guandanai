@@ -1,4 +1,5 @@
 import { runtime } from '../app/runtime.js';
+import { isPhone } from '../hand/layout.js';
 import { Sound } from '../audio/sound.js';
 import { makeDeck, sortHand } from '../core/cards.js';
 import { dealView, fly, reduceMotion } from '../effects/dealing.js';
@@ -16,7 +17,10 @@ import { collectDealt } from '../collection/client.js';
 let DECK_MS;
 
 export function startRound(e) {
-  if (e.reset) resetGame();
+  if (e.reset) {
+    resetGame();
+    runtime.network.startSettingsUsed = true;
+  }
   if (runtime.game.paused) setPaused(false);
   runtime.game.tok++;
   runtime.game.round++;
@@ -127,9 +131,10 @@ export function doCut() {
   }, actorSpot(runtime.game.cutter));
 }
 
-// where the deck sits when a player handles it: on the table right in front of them
+// Desktop/tablet handle the deck at the center; phones keep it near the acting player.
 function actorSpot(p) {
   const g = pileGeo();
+  if (!isPhone()) return { x: g.cx, y: g.cy };
   if (p === 0) return { x: g.cx, y: g.bottom - g.ch * 0.8 };
   if (p === 2) return { x: g.cx, y: g.top + g.ch * 0.8 };
   if (p === 3) return { x: g.left + g.cw * 1.9, y: g.sideY[3] };

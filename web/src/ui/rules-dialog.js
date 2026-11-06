@@ -1,5 +1,5 @@
 import { runtime } from '../app/runtime.js';
-import { PLAY_MS, PREP_MS, RET_MS, TRIB_MS } from '../game/clock.js';
+import { PLAY_MS, PREP_MS, RET_MS, TRIB_MS, HURRY_MS } from '../game/clock.js';
 import { $ } from './cards.js';
 
 function rules() {
@@ -14,13 +14,13 @@ function rules() {
         : `每方打 A 有三次机会，三次未过${runtime.rules.aFail === 'draw' ? '则本场平局。' : '则该方从 2 重新打。'}`;
   const timing = runtime.reviewMode
     ? '明牌练习按步骤推进，不限制玩家思考时间；空格或“继续”推进下一步。'
-    : `理牌 ${PREP_MS / 1000} 秒，进贡选牌 ${TRIB_MS / 1000} 秒，还贡 ${RET_MS / 1000} 秒，每手出牌 ${PLAY_MS / 1000} 秒；到时会自动处理。`;
+    : `理牌 ${PREP_MS / 1000} 秒，进贡选牌 ${TRIB_MS / 1000} 秒，还贡 ${RET_MS / 1000} 秒，每手出牌 ${PLAY_MS / 1000} 秒；最后 ${HURRY_MS / 1000} 秒提醒，到时自动处理；出牌超时按所选模型代打。`;
   return `<section><h3>四人，两队，两副牌</h3><p>共 108 张，每人 27 张。你和对家一队，按逆时针轮流出牌。头游一方升级：队友二游升 3 级、三游升 2 级、末游升 1 级。</p></section>
     <section><h3>级牌与百搭</h3><p>大王 ＞ 小王 ＞ 级牌 ＞ A ＞ K … ＞ 2。红心级牌是百搭，可以当除大小王以外的牌使用。顺子中的 A 可以作 1，不能带王。</p></section>
     <section><h3>牌型与炸弹</h3><p>单张、对子、三张、三带二、5 张顺子、3 个连续对子、2 个连续三张。通常只能用同牌型、更大的牌跟牌。</p><p>炸弹从小到大：4 张 ＜ 5 张 ＜ 同花顺 ＜ 6 张及以上 ＜ 四个王。炸弹可以压普通牌型。</p></section>
     <section><h3>过牌与接风</h3><p>先手不能过。其余人都不要时，最后出牌的人重新领出；若他已经走完，则由仍有牌的队友接风。</p></section>
     <section><h3>本桌进还贡规则</h3><p>${tribute}</p></section>
-    <section><h3>打 A 与计时</h3><p>每局打上一局获胜方的级。在本方打 A 的那一局拿到头游、且队友不是末游，才算打过 A，赢下整场；在对方的级上获胜不算过 A，下一局改打本方的 A。${fail}</p><p>${timing}</p></section>`;
+    <section><h3>Clint 超时代打</h3><p>选用 Clint规则机器人接管真人超时时，跟牌直接过；领出优先活动区的整组小牌，再考虑已成组的非炸牌和最小炸弹。其他神经网络及本机明牌工具沿用其自身决策。</p></section><section><h3>打 A 与计时</h3><p>每局打上一局获胜方的级。在本方打 A 的那一局拿到头游、且队友不是末游，才算打过 A，赢下整场；在对方的级上获胜不算过 A，下一局改打本方的 A。${fail}</p><p>${timing}</p></section>`;
 }
 
 const operations = `<section><h3>选牌与出牌</h3><p>点按选牌；按住未选中的牌扫过，可以连选。双击牌可以提交出牌；想避免误触，可在“选项”打开“出牌需确认”。手牌上方会解释所选牌型与能否出牌。</p></section>

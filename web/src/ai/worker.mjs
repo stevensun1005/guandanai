@@ -2,7 +2,7 @@ import * as ort from './vendor/ort.wasm.min.mjs';
 import { decideTablePolicy } from './table-policy.mjs';
 import { MODELS } from './models.mjs';
 import { botModel } from './model-catalog.mjs';
-import { decideClintRule } from '../rule-bot/runtime.mjs';
+import { decideClintRule, decideClintTimeout } from '../rule-bot/runtime.mjs';
 import { COACH_MODEL_ID, prepareCoachPolicy } from '../coach/evaluation.mjs';
 import { inferPolicy } from './policy-inference.mjs';
 import { scoreOracle } from '../coach/oracle.mjs';
@@ -66,10 +66,15 @@ self.onmessage = (event) => {
         });
         return;
       }
-      if (type === 'init' || type === 'rule') {
+      if (type === 'init' || type === 'rule' || type === 'rule-timeout') {
         self.postMessage({
           id,
-          result: type === 'init' ? { ready: true } : decideClintRule(state),
+          result:
+            type === 'init'
+              ? { ready: true }
+              : type === 'rule-timeout'
+                ? decideClintTimeout(state)
+                : decideClintRule(state),
         });
         return;
       }

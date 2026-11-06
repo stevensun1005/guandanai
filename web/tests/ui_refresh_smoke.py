@@ -17,12 +17,12 @@ with sync_playwright() as p:
         page.goto(URL, wait_until='networkidle')
         page.locator('#nick').fill('牌友')
         page.locator('#levelBtn').click()
-        assert page.locator('#levelPick [data-lv]').count() == 13
+        assert page.locator('#levelPick [data-lv]').count() == 26
         for level in range(2, 15):
-            page.locator(f'[data-lv="{level}"]').click()
+            page.locator(f'[data-level-team=SN][data-lv="{level}"]').click()
             assert page.evaluate('RULES.startLevel') == level
         page.locator('[data-side=EW]').click()
-        page.locator('[data-lv="12"]').click()
+        page.locator('[data-level-team=EW][data-lv="12"]').click()
         box = page.locator('#levelPick').bounding_box()
         assert box['x'] >= 0 and box['x'] + box['width'] <= width + 1
         page.screenshot(path=str(OUT / f'lobby-{width}.png'))
@@ -72,7 +72,7 @@ with sync_playwright() as p:
         page.mouse.click(4, 4)
         assert page.evaluate('tieDone') == 1
         assert page.locator('.fx-tie').count() == 0
-        reports.append({'viewport': [width,height], 'levelChoices':13, 'aLabels':True, 'flushCycle':True, 'tieSkip':True, 'sideClockGeometry':not mobile})
+        reports.append({'viewport': [width,height], 'levelChoices':26, 'aLabels':True, 'flushCycle':True, 'tieSkip':True, 'sideClockGeometry':not mobile})
         page.close()
     browser.close()
 assert not errors, errors

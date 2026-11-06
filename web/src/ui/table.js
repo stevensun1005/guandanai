@@ -1,6 +1,7 @@
+import { alignNamePlates } from './viewport.js';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
-import { TYPE_NAME, cardText, rankName } from '../core/cards.js';
+import { cardText, rankName } from '../core/cards.js';
 import { levelAttemptLabel } from '../core/match.js';
 import { returnInstruction } from '../core/tribute.js';
 import { analyze, beats } from '../core/combinations.js';
@@ -14,7 +15,7 @@ import { selKey, selectedCards, syncCfmShow, syncMini } from '../input/actions.j
 import { DIRS } from '../lobby/lobby.js';
 import { practiceMidHalf, practicePlays, practiceRender } from '../replay/inspector.js';
 import { practiceGrouped } from '../replay/session.js';
-import { $, displayOrder } from './cards.js';
+import { $ } from './cards.js';
 import { renderClocks } from './clocks.js';
 import { renderSelectionStatus } from './selection-status.js';
 import { renderPublicHistory } from './history-dialog.js';
@@ -107,16 +108,13 @@ export function render() {
     syncMini();
     practicePlays();
   }
+  alignNamePlates();
 }
 
 // the line under the disc: the play now on the table and who made it, or who leads when the table is clear
 function renderLastPlay() {
   let t = '';
-  if (runtime.game.phase === 'play' && runtime.game.trick) {
-    const p = runtime.game.trick.player,
-      pl = runtime.game.trick.play;
-    t = `${runtime.reviewMode ? `<small>第 ${runtime.game.log.filter((e) => e.cards).length} 手</small> ` : ''}${p === 0 ? '你' : runtime.names[p]} 出 ${displayOrder(pl, runtime.game.L).map(cardTag).join('')}<small>${pl.type === 'bomb' ? pl.n + '张炸弹' : TYPE_NAME[pl.type]}</small>`;
-  } else if (runtime.game.phase === 'play' && runtime.game.turn >= 0)
+  if (runtime.game.phase === 'play' && !runtime.game.trick && runtime.game.turn >= 0)
     t = `${runtime.game.turn === 0 ? '你' : runtime.names[runtime.game.turn]} 先出`;
   const el = $('#lastPlay');
   if (el.dataset.t !== t) {
@@ -148,7 +146,7 @@ export function placeLastPlay() {
   // just under the disc; when that leaves the near player too little room for a row of cards, it rides up over the
   // disc's lower edge (below the figure) to give some back
   const cw = $('#pile .probe').offsetWidth || 48;
-  let y = e.bottom + 6 - T.top;
+  let y = e.bottom + 16 - T.top;
   const short =
     cw * runtime.CR * 0.75 - (nearBottom() - T.top - (y + el.offsetHeight) - 2 * PASS_Y);
   if (short > 0) y = Math.max(e.top + e.height * 0.74 - T.top, y - short);

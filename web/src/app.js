@@ -1,4 +1,5 @@
 import './styles/index.css';
+import * as viewport from './ui/viewport.js';
 import * as policyController from './ai/controller.js';
 import * as cards from './core/cards.js';
 import * as combinations from './core/combinations.js';
@@ -106,6 +107,7 @@ collection.initialize();
 coach.initialize();
 privateTable.initialize();
 startup.initialize();
+viewport.initialize();
 
 if (new URLSearchParams(location.search).get('test') === '1') {
   const features = [

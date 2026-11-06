@@ -441,7 +441,7 @@ export function pileSweep() {
   runtime.TS = 1;
   layer.querySelectorAll('.ktag').forEach((e) => e.remove());
   // a phone keeps no heap, nor does 极简出牌区: the finished trick simply goes, with no turning over
-  if (isPhone() || miniMode()) {
+  if (isPhone() || miniMode() || runtime.cardBack === 'none') {
     layer.querySelectorAll('.pc.cur,.pc.old').forEach((e) => e.remove());
     return;
   }
@@ -462,7 +462,11 @@ export function pileRebuild() {
   runtime.heapZ = 1;
   runtime.pileGroups = [];
   runtime.TS = 1;
-  for (let i = 0; i < (isPhone() ? 0 : runtime.game.heapN || 0); i++) {
+  for (
+    let i = 0;
+    i < (isPhone() || runtime.cardBack === 'none' ? 0 : runtime.game.heapN || 0);
+    i++
+  ) {
     const el = document.createElement('div');
     el.className = 'pc';
     el.innerHTML = '<div class="bk"></div>';

@@ -123,3 +123,11 @@ Top 5 由评价缓存排序，同点数方案保留最佳花色变体，推荐�
 `ai/shared/tribute/encoding.mjs` 是仅公开信息的 389 维编码，`select.mjs` 统一 Node 和浏览器选项顺序、双头索引与平分处理。`web/src/ai/tribute-observation.mjs` 从已经一起旋转的座位／级数构建观察，不发送四家私牌或未公开的同时贡牌。
 
 `tribute-specialist.mjs` 按批准的主权重 SHA 选择输出头，独立 `tribute-worker.mjs` 校验 Release 权重并运行 389→2 模型。`game/tribute.js` 和 `game/turns.js` 对异步响应检查游戏对象、回合令牌、阶段、义务和真人座位，保护重新开局、换座和提前还贡；原同步回退时序不变。主模型清单和出牌 Worker 不混入专项策略。
+
+## 初始续局与稳定重排
+
+`lobby/start-state.mjs` 是网页开局适配层，验证方位、去重名次，并将南北／东西级数及 A 失败次数映射为本地视角；不改变共享 `core/match.js` 的结算或训练语义。`network.startSettingsUsed` 让高级续局状态仅用于第一次开局，恢复快照时显式置位。
+
+`ui/viewport.js` 合并尺寸事件，在尺寸真的改变时重排，并对晚到的旋转尺寸进行检查。名字牌按实际几何中心对齐，全屏和旋转不写 viewport meta；诊断显示仅在 `#debug` 打开。
+
+Clint 的真人超时通过独立 `rule-timeout` Worker 消息进入 `rule-bot/timeout.js`。只有所选模型为 Clint 且真人超时才使用它；普通 Clint 回合仍走 `rule`，danMCai／GuanZero 仍走 `decide`，房主独立明牌路径优先。候选生成、编码、网络打牌评分与训练未加入这套超时规则。

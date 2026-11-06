@@ -49,3 +49,5 @@
 [进还贡专项协议](../shared/tribute/README.md) · [短测证据](evaluation/tribute-20261106-preflight.json)。开发反事实分与独立棋力结果分开记录。
 
 新增冠军续打与协议继承约定，见根 AGENTS 和 [专项协议](../shared/tribute/README.md)；继承不是新增训练结果。
+
+[Clint 增量同步证据](evaluation/clint-sync-20261106.json)与[当前游标](evaluation/clint-sync-state.json)：双队续局设置、桌面／平板布局、全屏稳定性及 Clint 真人超时；功能验证与普通策略棋力严格分开，详见主报告第 36 节。

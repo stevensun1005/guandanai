@@ -6,7 +6,7 @@ import { prepareTableDecision } from './table-policy.mjs';
 import { botModel, botModelId, CLINT_RULE_ID } from './model-catalog.mjs';
 import { ruleObservation } from '../rule-bot/runtime.mjs';
 import { act, playEvt } from '../game/events.js';
-import { isHost } from '../game/session.js';
+import { isHost, isHumanSeat } from '../game/session.js';
 import { showError } from '../input/controls.js';
 import { VERSION } from '../network/protocol.js';
 import { $ } from '../ui/cards.js';
@@ -84,7 +84,7 @@ export function initialize() {
       return initialization;
     }
 
-    async function decide(p) {
+    async function decide(p, { timeout = false } = {}) {
       const game = runtime.game,
         tok = runtime.game.tok,
         count = runtime.game.log.length;
@@ -118,7 +118,10 @@ export function initialize() {
       }
       const selected = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
       if (selected === CLINT_RULE_ID) {
-        const result = await request('rule', ruleObservation(game, p));
+        const observation = ruleObservation(game, p);
+        if (timeout)
+          observation.fixed = p === 0 ? (game.fixed || []).map((ids) => ids.slice()) : [];
+        const result = await request(timeout ? 'rule-timeout' : 'rule', observation);
         if (!current()) return null;
         if (!result) {
           if (!game.trick) throw Error('invalid-rule-pass');
@@ -172,7 +175,7 @@ export function initialize() {
         generation === request;
       let pl;
       try {
-        pl = await decide(clock.who);
+        pl = await decide(clock.who, { timeout: clock.think == null && isHumanSeat(clock.who) });
       } catch (error) {
         if (!current()) return;
         stopWorker(error);

@@ -1337,3 +1337,108 @@ html:not(.phone) body:not(.practice) #seat3 .whorow:has(> .clock:not(:empty)) .a
 html:not(.phone) body:not(.practice) #seat1 .whorow:has(> .clock:not(:empty)) .actlbl {
   bottom: calc(100% + 64px);
 }
+
+/* Fixed desktop/tablet plates; counts, clocks and microphone remain outside. */
+html:not(.phone) body:not(.practice) .seat .who,
+html:not(.phone) body:not(.practice) #mebar .meinfo {
+  box-sizing: border-box;
+  width: 108px;
+  height: 38px;
+  padding: 0 8px;
+  justify-content: center;
+  gap: 6px;
+  font-size: 16px;
+}
+html:not(.phone) body:not(.practice) .seat .who .name,
+html:not(.phone) body:not(.practice) #myName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html:not(.phone) body:not(.practice) .seat .who .vc,
+html:not(.phone) body:not(.practice) #mebar .meinfo .vc {
+  position: absolute;
+  top: auto;
+  bottom: calc(100% + 2px);
+  right: 2px;
+  z-index: 6;
+}
+html:not(.phone) body:not(.practice) #seat2 .whorow > .clock {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  translate: 0 -50%;
+  margin: 0;
+}
+html:not(.phone) body:not(.practice) #seat2 .whorow > .cnt {
+  left: calc(100% + 60px);
+  top: 50%;
+  translate: 0 -50%;
+}
+html:not(.phone) body:not(.practice) #mebar {
+  position: relative;
+  display: block;
+  height: 38px;
+  min-height: 38px;
+}
+html:not(.phone) body:not(.practice) #mebar .left {
+  position: static;
+  display: block;
+}
+html:not(.phone) body:not(.practice) #mebar .whorow {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  translate: -50% 0;
+  gap: 0;
+}
+html:not(.phone) body:not(.practice) #mebar .whorow > .clock {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  translate: 0 -50%;
+  margin: 0;
+}
+html:not(.phone) body:not(.practice) #mebar .whorow > .cnt {
+  position: absolute;
+  left: calc(100% + 60px);
+  top: 50%;
+  translate: 0 -50%;
+}
+html:not(.phone) body:not(.practice) #mebar #sfBtn {
+  position: absolute;
+  left: calc(50% + 54px + 126px);
+  top: 50%;
+  translate: 0 -50%;
+}
+html:not(.phone) body:not(.practice) #mebar #fixBtn {
+  position: absolute !important;
+  left: calc(50% + 54px + 126px + 82px);
+  top: 50%;
+  translate: 0 -50%;
+}
+@media (max-width: 900px) {
+  html:not(.phone) body:not(.practice) #mebar #sfBtn {
+    left: auto;
+    right: calc(50% + 54px + 100px + 66px);
+  }
+  html:not(.phone) body:not(.practice) #mebar #fixBtn {
+    left: auto;
+    right: calc(50% + 54px + 100px);
+  }
+}
+#viewportDebug {
+  position: fixed;
+  left: 4px;
+  bottom: 4px;
+  z-index: 9999;
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #8f8;
+  font: 12px/1.35 monospace;
+  pointer-events: none;
+  white-space: pre;
+}

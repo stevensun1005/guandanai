@@ -217,6 +217,7 @@ export function receiveRecovery(message) {
   );
   enterOnline('guest', message.hostDir, message.names);
   runtime.game = rotateSnapshot(message.game, runtime.network.off);
+  runtime.network.startSettingsUsed = true;
   Object.assign(runtime.game, {
     tok,
     ...order,

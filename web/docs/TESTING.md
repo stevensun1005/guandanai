@@ -192,3 +192,12 @@ Top 5：`coach_smoke.py` 检查开局开关、最多五种方案、点击只选�
 在专用短测运行上执行 `node ai/publishing/finalize-tribute.mjs --run=<短测目录> --preflight`，用该候选的临时本机构建验证 Chrome WASM、两个输出头、真实贡还动画／早还贡、108 张牌及 Clint 隔离，最后恢复清单，不发布。浏览器结果是兼容性，不是独立胜率。截止后的正式留出评测不可被提前拿来选检查点。
 
 生产 UI 冒烟在需要过牌时也执行合法过牌，避免自动测试因只会点出牌而停在真人回合；网络空闲不替代实际应用初始化完成。
+
+## Clint 增量适配检查
+
+```bash
+node --test web/tests/start-state.test.mjs
+python -X utf8 web/tests/clint_sync_smoke.py
+```
+
+后者自建临时预览服务并关闭，须先构建；覆盖 6 次尺寸切换、3 次全屏进出且 viewport meta 零写入、双队级数／名次／失败次数、无牌背、Clint 超时与神经网络消息隔离，并串行运行 UI、贡还、准备去重、真实 PeerJS 恢复、练习布局、Clint 混合模型、独立房主工具和冠军 Top 5 回归。截图和详细日志保留于忽略的 `web/artifacts/validation/`；可提交的摘要见 [同步证据](../../ai/research/evaluation/clint-sync-20261106.json)。Chrome 尺寸模拟和全屏通过不代表 iPad Safari 真机通过，也不是完整棋力评测。
