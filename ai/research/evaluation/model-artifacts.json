@@ -4678,9 +4678,11 @@
   "specialistExperiments": [
     {
       "id": "tribute-20261106",
-      "status": "preflight-complete-not-deployed",
+      "status": "training-running-adapter-disabled",
       "evidence": "tribute-20261106-preflight.json",
-      "weights": "ignored run directory; no public release yet"
+      "weights": "ignored run directory; no public release yet",
+      "launchEvidence": "tribute-20261106-launch.json",
+      "formalIndependentStrengthRounds": 0
     }
   ]
 }

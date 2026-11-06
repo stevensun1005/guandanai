@@ -12,6 +12,7 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(URL, wait_until="networkidle")
+    page.wait_for_function("() => typeof window.hideOverlay === 'function'")
     reports = []
     for high_only in [False, True]:
         page.evaluate(

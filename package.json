@@ -24,7 +24,7 @@
     "train:guanzero": "node ai/guanzero/training/run.mjs",
     "train:guanzero:dashboard": "node ai/guanzero/training/dashboard.mjs",
     "package": "node web/tools/package.mjs",
-    "test:python": "python -m unittest discover -s ai/danMCai/tests -p \"*test.py\" && python -m unittest discover -s ai/guanzero/tests -p \"*test.py\" && python -m unittest discover -s ai/research/tests -p \"*test.py\""
+    "test:python": "python -m unittest discover -s ai/danMCai/tests -p \"*test.py\" && python -m unittest discover -s ai/guanzero/tests -p \"*test.py\" && python -m unittest discover -s ai/research/tests -p \"*test.py\" && python -m unittest discover -s ai/shared/tests -p \"*test.py\""
   },
   "dependencies": {
     "onnxruntime-web": "1.31.1",

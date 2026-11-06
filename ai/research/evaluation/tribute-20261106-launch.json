@@ -1,0 +1,656 @@
+{
+  "schema": 1,
+  "kind": "training-launch-and-development-integration",
+  "observedUTC": "2026-11-06T07:15:02.045533+00:00",
+  "formalIndependentStrengthRounds": 0,
+  "frozenCommit": "a514fb26564561c91abfab317e96ec50115d5813",
+  "protocolSHA256": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2",
+  "protocol": {
+    "schema": 1,
+    "experiment": "tribute-20261106",
+    "kind": "development-training",
+    "sourceCommit": "a514fb26564561c91abfab317e96ec50115d5813",
+    "deadlineUTC": "2026-11-06T13:00:00.000Z",
+    "deadlineEpochSeconds": 1793970000,
+    "timezone": "America/Toronto",
+    "objective": "completed-round signed upgrade points, centered within decision",
+    "encoding": "public-tribute-389-v1",
+    "architecture": [
+      389,
+      256,
+      128,
+      2
+    ],
+    "models": [
+      {
+        "id": "012",
+        "file": "bot-012.onnx",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "bytes": 5368650,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.010Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
+        }
+      },
+      {
+        "id": "014",
+        "file": "bot-014.onnx",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1",
+        "bytes": 6346014,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-014/bot-014.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54,
+          "history": "guanzero-v1"
+        },
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000104257",
+          "status": "experimental-not-heldout-accepted",
+          "step": 104257,
+          "registeredAt": "2026-11-06T05:42:10.604Z"
+        }
+      }
+    ],
+    "heads": [
+      "danMCai",
+      "GuanZero"
+    ],
+    "provider": "dml",
+    "delayMs": 0,
+    "seedAllocation": {
+      "smoke": [
+        3799000000,
+        3799999999
+      ],
+      "train": [
+        3800000000,
+        3899999999
+      ],
+      "development": [
+        3900000000,
+        3999999999
+      ],
+      "independent": [
+        4000000000,
+        4000000127
+      ]
+    },
+    "independentProtocol": {
+      "pairsPerHead": 128,
+      "team": "two specialist-equipped bots versus two identical frozen teachers with historical original tribute",
+      "seatSwap": true,
+      "metric": "signed upgrade-point difference per seed pair",
+      "acceptance": "both head mean differences >= 0, at least one > 0, and both lower 95% seed-cluster bootstrap confidence limits >= 0; otherwise preserve current web behavior",
+      "scope": "single complete round; not full match through A"
+    },
+    "resources": {
+      "samplers": 1,
+      "nativeThreads": 1,
+      "priority": "below-normal",
+      "minimumFreeGiB": 4
+    },
+    "finalizeRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\tribute-learning-20261106",
+    "sourceSHA256": {
+      "ai/shared/tribute/dataset.mjs": "cc1716f5191701635e3238096b3be2e17644edd58d2d5ef90a6fa9d2d3abca7d",
+      "ai/shared/tribute/encoding.mjs": "9d101d6dc9333a265fe9e02278c7e40e24f9ce3eb0dc413b4491a00f0ce94310",
+      "ai/shared/tribute/neural.mjs": "9f48f9bc854e4e359705fa4caa184b271c5eca5900e3a4d5849d333e45e4a90f",
+      "ai/shared/tribute/prepare.mjs": "ae5dd76770f5c778c81dc018bf32223e87759fa4f24a5f33964aa85866eb2189",
+      "ai/shared/tribute/run.mjs": "4160b150f532523daaadc4f8f3a5a8ce7e3e3af0611009e2b8d00739729d42f1",
+      "ai/shared/tribute/scenarios.mjs": "2ab07651f5bc2578a678f091b6db100313baaf30196e690b5467c0a0cc743983",
+      "ai/shared/tribute/train.py": "2f5683c4d04a5bb6ad479363a984c9097b6210df58e5c043c056066a2c2df11f",
+      "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+      "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+      "ai/shared/simulation/policy-inference.mjs": "13189396bc494b24d2457ee2373ccdf6aec22bb610106679b6011390069fbf09",
+      "ai/shared/simulation/policy-rollout.mjs": "5d4b478b57d390c6cffb20eeb26465f09b4962c6c93f9af0be77866c1025df0f",
+      "ai/shared/simulation/public-ending.mjs": "1a7f2815f80f86d3a5b61613db631b91e949a680bfd5f034d26bb9a3156fb8a2",
+      "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+      "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+      "ai/shared/simulation/table-inference.mjs": "97494c9e943d8313b93ca23c1f01f6af4a278e14d8c87b03769f2736e696c025",
+      "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+      "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "web/src/core/validation.js": "f12723cca66b153086ef7ea9be668e69ac6638ee1378b2e2990c4431f8de6abb",
+      "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "web/src/ai/controller.js": "e15b165b2f661fd44a551e76f3ca99d20f90047d8e5c67b5184429bda5f06f72",
+      "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+      "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+      "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+      "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+      "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+      "web/src/ai/model-catalog.mjs": "8265bcd26858112a747c0bea7263d807dd6942a5a41e61f687720b4428add7a2",
+      "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+      "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+      "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+      "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+      "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+      "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+      "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+      "web/src/ai/worker.mjs": "82126a74eba8e99e8692e37d4ff1e76e32d6e0e283ebdfed039a608b89da5952",
+      "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+      "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+      "ai/danMCai/training/continuous/benchmark-device.py": "e6b815c31d29f33b5181d07c6cf09b0d80cdea79b815aea09db5c3f7deb252bf",
+      "ai/danMCai/training/continuous/explore-cost.mjs": "b3ad754629a6a485d7f470786819ffce31404dc93de7bce3b0aca5ae3f566477",
+      "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+      "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+      "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+      "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+      "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+      "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+      "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+      "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+      "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3",
+      "ai/danMCai/training/continuous/mac_preflight.py": "a923b8c565b657fc075846e22dbab622ec33bf0464f44b882effbf2e2279a733",
+      "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+      "ai/danMCai/training/continuous/remote-actors.mjs": "4c01a877b51999f73e2d835ae9ff96e65d2e3a2be1b273ac5460f3a529b73ceb",
+      "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+      "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+      "ai/danMCai/training/continuous/sources.mjs": "f7a2082c84d210b9681d8aed0d2cc6a2c7de175d93df51e23f5b21a6f9d822ed",
+      "ai/danMCai/training/continuous/status.mjs": "fe3450de7eb5a59df922783a32e7dd3abb064a714a0bb64898336311fdade9d3",
+      "ai/danMCai/training/continuous/supervisor.mjs": "4350ebb4d95fb71d5dbebdc77614ba9e91c2c22de1d44f40f4472912b7928b0b",
+      "ai/danMCai/training/continuous/transfer.py": "70e9817c365566a86290d18c8bcf78ab9828bc21241443651cdfc20e58147614",
+      "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+      "ai/danMCai/training/continuous/dashboard/app.mjs": "0edf0309b74feed5551159975d3aaa0d85b0a3c40debfac1f67137433bbd9672"
+    }
+  },
+  "launchAndProgress": {
+    "iteration": 1220,
+    "trainSeeds": 1096,
+    "developmentSeeds": 124,
+    "trainingGroups": 963,
+    "developmentGroups": 105,
+    "rows": 15022,
+    "completedCounterfactualRounds": 15022,
+    "skippedCases": 151,
+    "pid": 12168,
+    "kind": "development-training",
+    "startedUTC": "2026-11-06T06:51:47.994Z",
+    "deadlineUTC": "2026-11-06T13:00:00.000Z",
+    "protocolSHA": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2",
+    "stage": "sampling",
+    "sourceModels": [
+      {
+        "id": "012",
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+      },
+      {
+        "id": "014",
+        "version": "model-000000104257",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1"
+      }
+    ],
+    "teachers": [
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 433833,
+        "candidates": 19072261,
+        "inferenceMs": 530073.0862999943,
+        "rounds": 7532
+      },
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 400068,
+        "candidates": 18365367,
+        "inferenceMs": 589506.4950000485,
+        "rounds": 7490
+      }
+    ],
+    "current": {
+      "seed": 3800001095,
+      "head": 1,
+      "stage": "return",
+      "split": "train"
+    },
+    "learner": {
+      "stage": "trained",
+      "device": "cuda:0",
+      "deviceName": "AMD Radeon RX 7800 XT",
+      "parameters": 132994,
+      "step": 380,
+      "newUpdates": 240,
+      "trainingGroups": 864,
+      "trainingRows": 12153,
+      "developmentGroups": 95,
+      "development": {
+        "groups": [
+          48,
+          47
+        ],
+        "meanCounterfactualGain": [
+          -0.5,
+          -0.5957446808510638
+        ],
+        "mse": 2.592244340606818
+      },
+      "bestUpdated": false,
+      "loss": 3.01472806930542,
+      "elapsedSeconds": 1.5939999999973224
+    },
+    "lastTrainingOutput": "{\"stage\": \"trained\", \"device\": \"cuda:0\", \"deviceName\": \"AMD Radeon RX 7800 XT\", \"parameters\": 132994, \"step\": 380, \"newUpdates\": 240, \"trainingGroups\": 864, \"trainingRows\": 12153, \"developmentGroups\": 95, \"development\": {\"groups\": [48, 47], \"meanCounterfactualGain\": [-0.5, -0.5957446808510638], \"mse\": 2.592244340606818}, \"bestUpdated\": false, \"loss\": 3.01472806930542, \"elapsedSeconds\": 1.5939999999973224}\r\n",
+    "updatedUTC": "2026-11-06T07:15:00.824Z",
+    "freeGiB": 8.043041229248047,
+    "rssMiB": 1338.71484375,
+    "cpuCorePercent": 97.37045969031374
+  },
+  "mechanicsEvaluation": {
+    "schema": 1,
+    "kind": "test",
+    "candidate": {
+      "version": "tribute-v000000020",
+      "step": 20,
+      "sha256": "e87aa065ea32539b616197a54d4576a70ac18ef38da2054b24eaa435ce5392c2",
+      "file": "best.onnx",
+      "development": {
+        "groups": [
+          2,
+          2
+        ],
+        "meanCounterfactualGain": [
+          1,
+          -0.5
+        ],
+        "mse": 2.3276570439338684
+      },
+      "protocolSHA256": "ccda9f49cad86c99697ec6f23dbca9cf904c655cdcb4b994d9071d885501a152"
+    },
+    "protocolSHA": "ccda9f49cad86c99697ec6f23dbca9cf904c655cdcb4b994d9071d885501a152",
+    "models": [
+      {
+        "id": "012",
+        "file": "bot-012.onnx",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "bytes": 5368650,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.01Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
+        }
+      },
+      {
+        "id": "014",
+        "file": "bot-014.onnx",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1",
+        "bytes": 6346014,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-014/bot-014.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54,
+          "history": "guanzero-v1"
+        },
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000104257",
+          "status": "experimental-not-heldout-accepted",
+          "step": 104257,
+          "registeredAt": "2026-11-06T05:42:10.604Z"
+        }
+      }
+    ],
+    "seedBase": 3799000100,
+    "pairs": 4,
+    "heads": [
+      [
+        {
+          "seed": 3799000100,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 3799000100,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 3799000101,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 3799000101,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 64
+        },
+        {
+          "seed": 3799000102,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 3799000102,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 3799000103,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 100
+        },
+        {
+          "seed": 3799000103,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 96
+        }
+      ],
+      [
+        {
+          "seed": 3799000100,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 3799000100,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 3799000101,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 3799000101,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 3799000102,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 3799000102,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 3799000103,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 3799000103,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 72
+        }
+      ]
+    ],
+    "complete": true,
+    "updatedUTC": "2026-11-06T06:55:49.996Z",
+    "summaries": [
+      {
+        "rounds": 8,
+        "wins": 4,
+        "losses": 4,
+        "draws": 0,
+        "doubleUps": 0,
+        "doubleDowns": 3,
+        "signedPoints": -5,
+        "pairs": 4,
+        "winRate": 0.5,
+        "meanPairedPoints": -0.625,
+        "ci95": [
+          -2.125,
+          0.75
+        ]
+      },
+      {
+        "rounds": 8,
+        "wins": 4,
+        "losses": 4,
+        "draws": 0,
+        "doubleUps": 2,
+        "doubleDowns": 4,
+        "signedPoints": -4,
+        "pairs": 4,
+        "winRate": 0.5,
+        "meanPairedPoints": -0.5,
+        "ci95": [
+          -2.25,
+          0.75
+        ]
+      }
+    ],
+    "accepted": false,
+    "completedUTC": "2026-11-06T07:09:54.235Z"
+  },
+  "browser": {
+    "kind": "browser-compatibility-not-strength",
+    "candidateSHA256": "e87aa065ea32539b616197a54d4576a70ac18ef38da2054b24eaa435ce5392c2",
+    "states": 8,
+    "headDecisions": 16,
+    "maxAbsoluteError": 5.960464477539063e-08,
+    "asyncTributeAndEarlyReturn": true,
+    "clintUnchanged": true,
+    "privateHandsNotSent": true,
+    "cards108": true,
+    "pageErrors": [],
+    "regressions": {
+      "tribute_smoke.py": "{\"cases\": [{\"highOnly\": false, \"automatedReturnLegal\": true, \"immediateHandCounts\": [27, 27, 27, 27], \"readyDuringFlightSafe\": true}, {\"highOnly\": true, \"automatedReturnLegal\": true, \"immediateHandCounts\": [27, 27, 27, 27], \"readyDuringFlightSafe\": true}], \"pageErrors\": []}",
+      "ready_transition_smoke.py": "{\"duplicateReadyIsIdempotent\": true, \"returnPhaseCommittedBeforeAnimation\": true, \"concurrentTransferRunsOnce\": true, \"eachHand27\": true, \"physicalCards108\": true, \"staleHoldCannotResetLead\": true, \"pageErrors\": []}",
+      "rejoin_smoke.py": "{\"hostDirection\": \"W\", \"guestDirection\": \"S\", \"refreshDuringPrep\": true, \"manualRoomCodeRecovery\": true, \"selectedLevelAndOnceRuleSync\": true, \"refreshDuringInFlightPolicy\": true, \"stalePolicyCancelled\": true, \"realGuestActionAfterReturn\": true, \"dataChannelAutomaticRecovery\": true, \"unknownSeatRejected\": true, \"sameCredential\": true, \"guestAvoidsModelDownload\": true, \"hostExitOffersSoloContinuation\": true, \"soloContinuationLoadsLearnedPolicy\": true, \"pageErrors\": []}"
+    }
+  },
+  "dashboard": {
+    "realtime": true,
+    "mobileOverflow": false,
+    "errors": [],
+    "text": "生成整局反事实样本"
+  },
+  "validation": {
+    "node": {
+      "pass": 201,
+      "fail": 0
+    },
+    "sharedPythonGPU": {
+      "ran": 3,
+      "fail": 0,
+      "skipped": 0
+    },
+    "sharedPythonCPU": {
+      "ran": 3,
+      "skipped": 1
+    },
+    "danMCaiPython": {
+      "ran": 35,
+      "skipped": 2
+    },
+    "guanzeroPython": {
+      "ran": 9,
+      "skipped": 0
+    },
+    "researchPython": {
+      "ran": 9,
+      "skipped": 0
+    }
+  },
+  "websiteSpecialistEnabled": false,
+  "notes": [
+    "The 16 evaluation smoke rounds use reserved smoke seeds 3799000100-3799000103, not independent holdout.",
+    "Small development candidate has negative paired point means for both heads; no improvement claim.",
+    "Dashboard script escaping fixed and real Chrome refresh/responsive checks passed on port 8789; frozen sampling code unchanged.",
+    "Browser harness waits for actual application test API, not network-idle alone. Old archived model 007 is no longer selectable; rejoin smoke now selects actual champion from catalog.",
+    "Independent holdout stays sealed until fixed cutoff. Training is running, not completed."
+  ],
+  "browserFixturesSHA256": "b7fbb512a8f6e3d502a4d8abcb217ddf4b298bcf62f670c09dc7df9759cf537c",
+  "browserStageCounts": {
+    "tribute": 4,
+    "return": 4
+  },
+  "finalizerPreflightPassed": true,
+  "boundedAwakeRequest": {
+    "pid": 46712,
+    "trainerPID": 12168,
+    "request": "ES_SYSTEM_REQUIRED; display can sleep",
+    "latestExpiryUTC": "2026-11-06T09:00:00-05:00",
+    "changesPowerPlan": false,
+    "sourceSHA256": "71dac8d42b6e8de80f62da3c26ab6589e83a84c1c613d69574d76d1b63d84016",
+    "verification": "Win32 API accepted, not administrator powercfg listing"
+  }
+}

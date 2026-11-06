@@ -33,3 +33,7 @@ Fixed 2v2 evaluation: `evaluation/evaluate-fixed.mjs --protocol=<JSON> --run=<ig
 Mac 吞吐调优使用启动器的具名采样配置入口，正常保存后调整并发并实测，保持原内存预算、学习协议与固定截止；当前冻结检出和恢复命令以 [MAC_HANDOFF](../research/MAC_HANDOFF.md#当前-mac-执行入口2026-11-05) 为准。
 
 本次 Mac 门控已按所有者授权改为新快照优先，普通旧快照不补赛，最近两位前冠军低频检查，P0 退步监控保留；训练对手池与原固定截止沿用。参数、运行边界和测试见[持续训练指南](../research/CONTINUOUS_TRAINING.md#新快照优先的门控调度)。
+
+## 独立进还贡专项
+
+[共享双头专项](../shared/tribute/README.md) 用整局升级分训练独立阶段网络；不改当前主网络、Mac 冻结运行或冠军清单。只有固定底座 SHA 通过独立贡还评测后才接入网页。

@@ -1,5 +1,5 @@
 import { runtime } from '../app/runtime.js';
-import { aiReturnCard } from '../ai/rule-policy.js';
+import { tributeDecision } from '../ai/tribute-specialist.mjs';
 import { Sound } from '../audio/sound.js';
 import { beats } from '../core/combinations.js';
 import { genPlays } from '../core/moves.js';
@@ -36,12 +36,28 @@ export function startPrep(leader) {
     .forEach((x, i) =>
       later(
         () => {
-          if (runtime.game.phase === 'prep' && runtime.game.returns.includes(x))
-            act({
-              k: 'return',
-              p: toAbs(x.from),
-              id: aiReturnCard(runtime.game.hands[x.from], runtime.game.L).id,
-            });
+          const game = runtime.game,
+            tok = game.tok;
+          if (game.phase === 'prep' && game.returns.includes(x) && !isHumanSeat(x.from)) {
+            const commit = (id) => {
+              if (
+                runtime.game !== game ||
+                game.tok !== tok ||
+                game.phase !== 'prep' ||
+                !game.returns.includes(x) ||
+                isHumanSeat(x.from)
+              )
+                return;
+              act({
+                k: 'return',
+                p: toAbs(x.from),
+                id,
+              });
+            };
+            const id = tributeDecision(game, x.from, 'return');
+            if (typeof id === 'number') commit(id);
+            else void id.then(commit);
+          }
         },
         1500 + i * 1200,
       ),

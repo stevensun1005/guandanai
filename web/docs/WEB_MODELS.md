@@ -71,3 +71,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 出牌评价固定读取 `selection.danMCaiChampions[0]` 的完整danMCai 冠军，与座位选择的托管／电脑模型无关。冠军经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实版本；不使用普通最新导出冒充冠军。评分仅做网络动作值的候选范围换算，不更改默认模型、性格或机器人动作。[房主许可与分数说明](MOVE_COACH.md)。
 
 开发评测现含随机、original、P0、Clint 与真实 danMCai 冠军，每类默认 500 场，独立补评、历史样本及进度口径见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。周期同步也归档新协议各对手已完成的逐场证据，核对 250 对／500 场、模型及冠军 SHA、种子和源码指纹；进行中计数不是完成成绩，不影响网页冠军默认。
+
+## 进还贡专项组件（开发中）
+
+`src/ai/tribute-model.json` 独立于六项主模型菜单，当前默认关闭。共享双头网络只在已批准底座 SHA 的进贡／还贡阶段使用，danMCai 和 GuanZero 各一个输出头；Clint、P0、未验收的新底座和真人选择继续用原流程。Worker 只收到本人手牌和公开贡还上下文，先核对完整权重 SHA，再用单线程 WASM 推理。加载失败或超时回退原贡还，旧房间缺失上下文也回退；不改变打牌网络或评价分数。详见 [专项协议](../../ai/shared/tribute/README.md)。

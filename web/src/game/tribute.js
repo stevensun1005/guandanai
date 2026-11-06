@@ -1,5 +1,6 @@
 import { runtime } from '../app/runtime.js';
-import { aiReturnCard, tributeCard } from '../ai/rule-policy.js';
+import { tributeCard } from '../ai/rule-policy.js';
+import { tributeDecision } from '../ai/tribute-specialist.mjs';
 import { Sound } from '../audio/sound.js';
 import { sortHand, val } from '../core/cards.js';
 import { tributeOptions } from '../core/tribute.js';
@@ -13,7 +14,43 @@ import { render } from '../ui/table.js';
 
 let tribChoice;
 const giving = new WeakMap();
+const choosing = new WeakMap();
 export let owesReturn;
+
+function botPick(stage, player) {
+  const game = runtime.game,
+    tok = game.tok,
+    key = stage + ':' + tok + ':' + player;
+  let pending = choosing.get(game);
+  if (!pending) {
+    pending = new Set();
+    choosing.set(game, pending);
+  }
+  if (pending.has(key)) return;
+  const value = tributeDecision(game, player, stage);
+  if (typeof value === 'number') return value;
+  pending.add(key);
+  void value.then((id) => {
+    pending.delete(key);
+    const phase = stage === 'tribute' ? 'tribPick' : 'return',
+      picks = stage === 'tribute' ? 'tribPick' : 'retPick';
+    if (
+      runtime.game !== game ||
+      game.tok !== tok ||
+      game.phase !== phase ||
+      isHumanSeat(player) ||
+      game[picks]?.[player] != null
+    )
+      return;
+    const obligated =
+      stage === 'tribute'
+        ? game.tribGivers?.includes(player)
+        : game.returns?.some((x) => x.from === player);
+    if (!obligated || !game.hands[player].some((c) => c.id === id)) return;
+    game[picks][player] = id;
+    (stage === 'tribute' ? tribWait : retWait)();
+  });
+}
 
 export function doTribute() {
   runtime.game.trib = [];
@@ -59,8 +96,12 @@ export function tribOptions(p) {
 
 export function tribWait() {
   for (const g of runtime.game.tribGivers)
-    if (runtime.game.tribPick[g] == null && (!isHumanSeat(g) || !tribChoice(g)))
-      runtime.game.tribPick[g] = tributeCard(runtime.game.hands[g], runtime.game.L).id;
+    if (runtime.game.tribPick[g] == null && (!isHumanSeat(g) || !tribChoice(g))) {
+      const id = isHumanSeat(g)
+        ? tributeCard(runtime.game.hands[g], runtime.game.L).id
+        : botPick('tribute', g);
+      if (id != null) runtime.game.tribPick[g] = id;
+    }
   const left = runtime.game.tribGivers.filter((g) => runtime.game.tribPick[g] == null);
   if (!left.length) {
     runtime.game.clock = null;
@@ -175,8 +216,10 @@ export function processReturns() {
 // once all have chosen, the cards go back together
 export function retWait() {
   for (const x of runtime.game.returns)
-    if (runtime.game.retPick[x.from] == null && !isHumanSeat(x.from))
-      runtime.game.retPick[x.from] = aiReturnCard(runtime.game.hands[x.from], runtime.game.L).id;
+    if (runtime.game.retPick[x.from] == null && !isHumanSeat(x.from)) {
+      const id = botPick('return', x.from);
+      if (id != null) runtime.game.retPick[x.from] = id;
+    }
   const left = runtime.game.returns
     .filter((x) => runtime.game.retPick[x.from] == null)
     .map((x) => x.from);

@@ -117,3 +117,9 @@ Worker 单独打包自己的特征、风格与残局规则模块，浏览器推�
 `src/coach/evaluation.mjs` 定义公开观察、候选输入、冠军身份与相对值换算；`controller.js` 管理个人偏好、按回合缓存、快照失效与 UI。评价复用 `ai-worker.mjs`／`inferPolicy` 的模型加载及批量推理，但使用独立 Worker 实例，不走电脑动作选择、性格或残局搜索。房主许可放在同步的 `rules.coachAllowed`，个人开关留在本机。经确认的人工动作在 `doPlay` 修改手牌前保留评价快照，预评展示标记进入独立采集协议，不把分数发给其他玩家。[协议说明](MOVE_COACH.md)。
 
 Top 5 由评价缓存排序，同点数方案保留最佳花色变体，推荐点击不发出牌事件。`private-table/state.mjs` 与 `controller.js` 管理房主本机资格、展示及采集排除；完整手牌仅进入独立 `oracle` 请求。`coach/oracle.mjs` 复用共享 `advanceRound` 和冠军网络做有限推演，不改变普通规则、候选、编码或模型权重。对手分支与普通评价继续采用公开观察。
+
+## 可选进还贡阶段网络
+
+`ai/shared/tribute/encoding.mjs` 是仅公开信息的 389 维编码，`select.mjs` 统一 Node 和浏览器选项顺序、双头索引与平分处理。`web/src/ai/tribute-observation.mjs` 从已经一起旋转的座位／级数构建观察，不发送四家私牌或未公开的同时贡牌。
+
+`tribute-specialist.mjs` 按批准的主权重 SHA 选择输出头，独立 `tribute-worker.mjs` 校验 Release 权重并运行 389→2 模型。`game/tribute.js` 和 `game/turns.js` 对异步响应检查游戏对象、回合令牌、阶段、义务和真人座位，保护重新开局、换座和提前还贡；原同步回退时序不变。主模型清单和出牌 Worker 不混入专项策略。

@@ -12,6 +12,7 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(URL, wait_until="networkidle")
+    page.wait_for_function("() => typeof window.hideOverlay === 'function'")
     queued = page.evaluate("""()=>{
  hideOverlay();$('#lobby').hidden=true;resetGame();const d=makeDeck();G.hands=[d.slice(0,28),d.slice(28,54),d.slice(54,82),d.slice(82)];G.phase='prep';G.turn=0;G.leader=0;G.L=2;G.round=2;G.log=[];G.seen=[];G.rest=[];G.fixed=[];G.myOrder=[];G.trib=[];G.gives=[];G.returns=[{from:0,to:1},{from:2,to:3}];G.retPick={0:aiReturnCard(G.hands[0],2).id};G.ready=[1];setHumans([0,1]);render();for(let i=0;i<12;i++)act({k:'ready',p:i%2});return {phase:G.phase,gives:G.gives.length,returns:G.returns.length};
  }""")

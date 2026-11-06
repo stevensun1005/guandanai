@@ -11,6 +11,7 @@ import {
   botModelName,
 } from '../src/ai/model-catalog.mjs';
 import { modelBytes } from '../../ai/publishing/artifacts.mjs';
+import tributeModel from '../src/ai/tribute-model.json' with { type: 'json' };
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const read = async (name) => (await readFile(path.join(root, name), 'utf8')).replace(/\r\n/g, '\n');
@@ -45,6 +46,18 @@ for (const model of BOT_MODELS) {
   botBytes.set(model.file, bytes);
   modelVersions['bot:' + model.id] = model.sha256.slice(0, 16);
   hash.update(model.id).update(bytes);
+}
+if (tributeModel.enabled) {
+  if (
+    !/^tribute-[a-f0-9]{64}\.onnx$/.test(tributeModel.file) ||
+    !/^https:\/\/github.com\/stevensun1005\/guandanai\/releases\/download\/tribute-[a-f0-9]{64}\/tribute-[a-f0-9]{64}\.onnx$/.test(
+      tributeModel.url,
+    )
+  )
+    throw Error('Invalid specialist release');
+  const bytes = await modelBytes(root, tributeModel);
+  botBytes.set(tributeModel.file, bytes);
+  hash.update(bytes);
 }
 const version = hash.digest('hex').slice(0, 10);
 const collectionConfig = JSON.parse(await read('web/src/collection/config.json'));
@@ -102,6 +115,14 @@ await build({
   charset: 'utf8',
   external: ['./vendor/*'],
   define: { __MODEL_VERSIONS__: JSON.stringify(modelVersions) },
+});
+await build({
+  entryPoints: [path.join(root, 'web/src/ai/tribute-worker.mjs')],
+  outfile: path.join(root, 'web/dist/assets/tribute-worker.mjs'),
+  bundle: true,
+  format: 'esm',
+  target: 'es2022',
+  external: ['./vendor/*'],
 });
 for (const model of Object.values(MODELS))
   copies['ai/danMCai/models/baseline/' + model.file] = 'web/dist/models/' + model.file;
