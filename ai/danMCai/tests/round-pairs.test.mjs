@@ -1,6 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineup, playRound } from '../evaluation/evaluate-round-pairs.mjs';
+import { lineup, playRound, runRoundPairs } from '../evaluation/evaluate-round-pairs.mjs';
+import { mkdtempSync, writeFileSync, rmSync, existsSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+test('pending evaluation cannot start with missing frozen weights or deadline', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'danmcai-pending-evaluation-'));
+  try {
+    const protocol = join(dir, 'protocol.json'),
+      run = join(dir, 'results');
+    writeFileSync(
+      protocol,
+      JSON.stringify({ models: { A: { file: null, sha256: null } }, evaluationDeadlineUTC: null }),
+    );
+    await assert.rejects(runRoundPairs({ protocol, run }), /Freeze all evaluation weights/);
+    assert.equal(existsSync(run), false);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 test('paired lineups swap both sides; mixed lineups balance which teammate uses the network', () => {
   const task = { model: 'champion', opponent: 'latest' };

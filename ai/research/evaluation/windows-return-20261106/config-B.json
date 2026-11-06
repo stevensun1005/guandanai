@@ -1,0 +1,400 @@
+{
+  "schema": 1,
+  "initial": "ai/danMCai/models/baseline/policy.onnx",
+  "actors": 4,
+  "actorSeedOffset": 12000000,
+  "evaluationBlockOffset": 800,
+  "actorMix": {
+    "self": 0.3,
+    "league": 0.5,
+    "rule": 0.2
+  },
+  "exploration": {
+    "type": "softmax",
+    "temperature": 0.02
+  },
+  "shardRows": 16384,
+  "shardSeconds": 120,
+  "learner": {
+    "device": "cuda:0",
+    "threads": 1,
+    "batch": 2048,
+    "learningRate": 1e-05,
+    "gradClip": 1,
+    "capacity": 2000000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "exportSeconds": 600,
+    "targetMatchWeight": 0,
+    "anchorWeight": 0,
+    "keepVersions": 6,
+    "seed": 20261107
+  },
+  "snapshotMinutes": 60,
+  "leagueSize": 24,
+  "gate": {
+    "alpha": 0.05,
+    "beta": 0.05,
+    "mu0": 0.5,
+    "mu1": 0.53,
+    "minPairs": 100,
+    "maxPairs": 1000
+  },
+  "anchor": {
+    "intervalHours": 3,
+    "pairs": 150,
+    "regressionLimit": 2
+  },
+  "restarts": {
+    "limit": 5,
+    "windowMinutes": 10
+  },
+  "diskLimitGB": 20,
+  "initialSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+  "createdAt": "2026-11-06T23:27:02.050513+00:00",
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "5b3e228218c123d33310327d45a89aa7958a237d9d62fed1a5af042fb5e04bd4",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "499c8e9a6d3065da55d7e6819cef5556f21864b4c5ee158547d60a85ae69d266",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "6e5459ad0da0664c64c426845e13d255b1da6a6f3e691cb89156d230f7ebf18c",
+    "ai/danMCai/training/continuous/learner.py": "e85a99526511b310700e28be7a68ecaf1feecc34bd1716d9e9c65709116ede1d",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "191df28ef0de70b9af11aa0a7621da23df7913dcbd3d6b481c5edc9f0d1305cc",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "eadde4ca63493ccca86b255ae892369fec96476266e8d6024baa077a52544a1e",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "sourceHashConvention": "UTF-8 text with CRLF normalized to LF",
+  "actorImplementation": "fast",
+  "fastActor": {
+    "games": 8,
+    "provider": "dml"
+  },
+  "protocolHistory": [
+    {
+      "at": "2026-11-06T23:27:02.050513+00:00",
+      "reason": "Prepared Windows return; new source/device/seed protocol, no training yet",
+      "parentProtocolHistory": [
+        {
+          "at": "2026-11-05T22:01:23.978Z",
+          "reason": "Mac startup compatibility: count free plus inactive pages for available headroom; preserve 4/5 GiB budget, weights, Adam, seed cursors and original deadline",
+          "elapsedSecondsBefore": 77.489,
+          "totalsBefore": {
+            "matches": 39,
+            "decisions": 17036,
+            "rows": 17036
+          },
+          "learnerStepBefore": 682742,
+          "previous": {
+            "sourceSHA256": {
+              "ai/danMCai/training/continuous/supervisor.mjs": "6ca4765cdaa6f4f38a7275d462897a33247a30897f3664e75090e0c5ffaa763a",
+              "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+              "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+              "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+              "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+              "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+              "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+              "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+              "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+              "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+              "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+              "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+              "ai/danMCai/training/continuous/resources.mjs": "f88f8403480d17250faadfacceba87075504ed011c4000e17be560fc098bc319",
+              "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+              "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+              "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+              "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+              "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+              "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+              "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+              "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+              "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+              "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+              "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+              "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+              "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+              "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+              "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+              "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+              "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+              "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+              "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+              "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+              "ai/danMCai/training/continuous/mac-24h.mjs": "bcf33270c971bb6aca41fc8abc61fc8dca52becdcac866522925e51b67f657f0"
+            },
+            "actors": 2,
+            "resourceBudget": {
+              "reserveGB": 4,
+              "resumeGB": 5
+            },
+            "actorImplementation": "fast",
+            "fastActor": {
+              "games": 8,
+              "provider": "cpu"
+            }
+          },
+          "settings": {},
+          "changedSources": [
+            "ai/danMCai/training/continuous/supervisor.mjs",
+            "ai/danMCai/training/continuous/resources.mjs",
+            "ai/danMCai/training/continuous/mac-24h.mjs"
+          ]
+        },
+        {
+          "at": "2026-11-05T22:34:00.981Z",
+          "reason": "Owner-authorized speed tuning: increase CPU samplers from two to four after measured data starvation; preserve 4/5 GiB headroom, network, reward, replay ratio, Adam and original deadline",
+          "elapsedSecondsBefore": 2007.468,
+          "totalsBefore": {
+            "matches": 4236,
+            "decisions": 1997985,
+            "rows": 1997985
+          },
+          "learnerStepBefore": 686553,
+          "previous": {
+            "sourceSHA256": {
+              "ai/danMCai/training/continuous/supervisor.mjs": "39066cda321854ef992488adf4155ef37f36242083d1318b585e69b173fbdfb0",
+              "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+              "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+              "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+              "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+              "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+              "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+              "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+              "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+              "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+              "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+              "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+              "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+              "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+              "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+              "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+              "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+              "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+              "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+              "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+              "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+              "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+              "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+              "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+              "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+              "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+              "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+              "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+              "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+              "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+              "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+              "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+              "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+              "ai/danMCai/training/continuous/mac-24h.mjs": "fe55ae263ccf75b0cfabf6dc4218915228c2950c381523bf3837e97503ebe272"
+            },
+            "actors": 2,
+            "resourceBudget": {
+              "reserveGB": 4,
+              "resumeGB": 5
+            },
+            "actorImplementation": "fast",
+            "fastActor": {
+              "games": 8,
+              "provider": "cpu"
+            }
+          },
+          "settings": {
+            "actors": 4
+          },
+          "changedSources": [
+            "ai/danMCai/training/continuous/mac-24h.mjs"
+          ]
+        },
+        {
+          "at": "2026-11-06T02:41:19.564Z",
+          "reason": "Owner-authorized new-first candidate scheduling: skip ordinary historical backlog, retain two former champions with 3h rate limit and unchanged P0 regression checks; same weights, Adam, sampling pool and original deadline",
+          "elapsedSecondsBefore": 16750.595,
+          "totalsBefore": {
+            "matches": 65601,
+            "decisions": 31167812,
+            "rows": 31167812
+          },
+          "learnerStepBefore": 743487,
+          "previous": {
+            "sourceSHA256": {
+              "ai/danMCai/training/continuous/supervisor.mjs": "39066cda321854ef992488adf4155ef37f36242083d1318b585e69b173fbdfb0",
+              "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+              "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+              "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+              "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+              "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+              "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+              "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+              "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+              "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+              "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+              "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+              "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+              "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+              "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+              "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+              "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+              "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+              "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+              "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+              "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+              "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+              "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+              "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+              "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+              "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+              "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+              "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+              "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+              "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+              "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+              "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+              "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+              "ai/danMCai/training/continuous/mac-24h.mjs": "e0b214b18ac38fc56a11240d399fe247df7dfd281a8a767d3002bac31f237409"
+            },
+            "actors": 4,
+            "resourceBudget": {
+              "reserveGB": 4,
+              "resumeGB": 5
+            },
+            "actorImplementation": "fast",
+            "fastActor": {
+              "games": 8,
+              "provider": "cpu"
+            },
+            "gateSchedule": null
+          },
+          "settings": {
+            "gateSchedule": {
+              "mode": "new-first-v1",
+              "minNewStep": 743487,
+              "activatedAt": "2026-11-06T02:40:43.451697+00:00",
+              "historicalChampions": 2,
+              "historyIntervalHours": 3
+            }
+          },
+          "changedSources": [
+            "ai/danMCai/training/continuous/supervisor.mjs",
+            "ai/danMCai/training/continuous/sources.mjs",
+            "ai/danMCai/training/continuous/mac-24h.mjs",
+            "ai/danMCai/training/continuous/gate-schedule.mjs"
+          ]
+        }
+      ]
+    }
+  ],
+  "resourceBudget": {
+    "reserveGB": 4,
+    "resumeGB": 5
+  },
+  "parent": {
+    "kind": "mac-to-windows-prepared-continuation",
+    "createdAtUTC": "2026-11-06T23:27:02.050513+00:00",
+    "snapshotManifestSHA256": "3e6b76b55f174e7cbbc135e722eb6b6c46803202b3208813c7724eeea99bc3ea",
+    "checkpointSHA256": "8c7041a3cf3b8446b9b050585a5d2467c17db8e179410c84fd62a89cf21675d6",
+    "latest": {
+      "version": "v001013906",
+      "file": "v001013906.onnx",
+      "sha256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+      "step": 1013906,
+      "trainedRows": 2076479488,
+      "ingestedRows": 519120344,
+      "publishedAt": "2026-11-06T21:58:14Z"
+    },
+    "champion": {
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "since": "2026-11-06T10:59:34.199Z",
+      "history": [
+        {
+          "version": "v000000000",
+          "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+          "at": "2026-11-04T20:40:54.512Z",
+          "reason": "initial"
+        },
+        {
+          "version": "v000023473",
+          "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+          "at": "2026-11-04T22:08:59.123Z",
+          "gate": 101
+        },
+        {
+          "version": "v000046476",
+          "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+          "at": "2026-11-04T23:03:24.799Z",
+          "gate": 102
+        },
+        {
+          "version": "v000068679",
+          "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+          "at": "2026-11-05T00:04:51.045Z",
+          "gate": 103
+        },
+        {
+          "version": "v000091092",
+          "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+          "at": "2026-11-05T01:06:47.980Z",
+          "gate": 104
+        },
+        {
+          "version": "v000293055",
+          "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "at": "2026-11-05T08:11:50.077Z",
+          "gate": 112
+        },
+        {
+          "version": "v000705434",
+          "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+          "at": "2026-11-06T00:22:21.010Z",
+          "gate": 309
+        },
+        {
+          "version": "v000855042",
+          "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+          "at": "2026-11-06T10:59:34.199Z",
+          "gate": 330
+        }
+      ]
+    },
+    "sourceConfigSHA256": "4c29a55ac9ea662a233931a5104612264c996174c9bc6ea1c7afde494229a85e",
+    "sourceScheduleSHA256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+    "newTrainingStarted": false,
+    "optimizerUpdatesExecuted": 0,
+    "note": "Matched final learner/Adam, not champion+final Adam; no new duration or window granted by preparation"
+  },
+  "gateSchedule": {
+    "mode": "new-first-v1",
+    "minNewStep": 1013906,
+    "activatedAt": "2026-11-06T23:27:02.050513+00:00",
+    "historicalChampions": 2,
+    "historyIntervalHours": 3
+  },
+  "actorSeedEnd": 12100000,
+  "evaluationBlockEnd": 850
+}

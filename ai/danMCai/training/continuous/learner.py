@@ -240,10 +240,10 @@ class Learner:
         write_json(self.models / "latest.json", latest)
         self.version = version
         self.last_export = time.time()
-        keep = int(self.settings["keepVersions"])
-        versions = sorted(self.models.glob("v*.onnx"))
-        for old in versions[:-keep]:
-            old.unlink(missing_ok=True)
+        # ponytail: retain immutable exports until offline cleanup after ALL consumers stop.
+        # A lane can reload an old version after ONNX session-cache eviction. Neither a
+        # fixed version count nor the current latest.json proves that its readers ended.
+        # At 600 s/export, a six-hour window adds about 185 MiB; diskLimitGB still applies.
         self.log({"event": "publish", **latest})
 
     def status(self, state):

@@ -17,6 +17,7 @@ export const sourceFiles = [
     'onnx-rows.mjs',
     'resources.mjs',
     'remote.mjs',
+    'windows-window.mjs',
   ].map((f) => `ai/danMCai/training/continuous/${f}`),
   ...['match-rollout.mjs', 'match-simulation.mjs', 'simulation.mjs', 'rule-baseline.mjs'].map(
     (f) => `ai/shared/simulation/${f}`,

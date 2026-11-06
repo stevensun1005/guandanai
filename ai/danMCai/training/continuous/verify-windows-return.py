@@ -31,6 +31,8 @@ def check(snapshot, project, run, device="cpu"):
     if digest(model) != latest["sha256"] or latest["step"] != saved["step"]:
         raise ValueError("Latest model/step mismatch")
     net = ValueNet(load_onnx_weights(model))
+    if len(saved["optimizer"]["state"]) != len(list(net.parameters())):
+        raise ValueError("Incomplete Adam parameter states")
     for key, value in net.state_dict().items():
         if not torch.equal(value, saved["model"][key]):
             raise ValueError("ONNX and checkpoint disagree: " + key)
@@ -74,6 +76,9 @@ def check(snapshot, project, run, device="cpu"):
         "platform": sys.platform, "python": sys.version, "torch": torch.__version__,
         "backendActuallyTested": str(backend), "hip": torch.version.hip,
         "gpuName": torch.cuda.get_device_name(backend) if backend.type == "cuda" else None,
+        "gpuTotalMemoryBytes": torch.cuda.get_device_properties(backend).total_memory if backend.type == "cuda" else None,
+        "gpuPeakAllocatedBytes": torch.cuda.max_memory_allocated(backend) if backend.type == "cuda" else None,
+        "torchHostThreads": torch.get_num_threads(),
         "step": saved["step"], "checkpointSHA256": actual_sha,
         "networkMatchesCheckpointExactly": True, "adamStates": len(saved["optimizer"]["state"]),
         "allAdamStatesFiniteAndStepsMatch": True,

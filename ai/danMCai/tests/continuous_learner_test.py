@@ -61,6 +61,18 @@ def write_run(directory, rows=600):
 
 
 class ContinuousLearnerTests(unittest.TestCase):
+    def test_publish_retains_exports_held_by_inflight_actors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = write_run(directory)
+            learner = Learner(run)
+            held = run / "models/v000000000.onnx"
+            original = held.read_bytes()
+            for step in range(1, 6):
+                learner.step = step  # Synthetic publication versions, no optimizer update.
+                learner.publish()
+            self.assertEqual(held.read_bytes(), original)
+            self.assertEqual(len(list((run / "models").glob("v*.onnx"))), 6)
+
     def test_requested_mps_never_silently_becomes_cpu(self):
         with patch('torch.backends.mps.is_available', return_value=False):
             with self.assertRaisesRegex(RuntimeError, 'refusing silent CPU fallback'):

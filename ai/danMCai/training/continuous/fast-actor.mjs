@@ -114,6 +114,7 @@ const running = () =>
   !stopping &&
   !existsSync(paths.stop) &&
   !(stopFile && existsSync(stopFile)) &&
+  status.nextSeed < (config.actorSeedEnd ?? TRAIN_SEED_SPAN) &&
   (!matchLimit || status.matches < matchLimit);
 
 let started = 0;

@@ -74,8 +74,13 @@ def summarize(protocol, results):
             "meanTurns": statistics.mean(turns),
         }
     contrasts = {}
-    for group in ["vs-clint", "vs-p0", "vs-previous", "mixed-clint"]:
-        a, b = data["champion-" + group], data["latest-" + group]
+    specifications = plan.get("contrasts", [
+        {"id": group, "left": "champion-"+group, "right": "latest-"+group,
+         "z": 2.4977054744, "confidenceLevel": 0.9875, "direction": "latest minus champion"}
+        for group in ["vs-clint", "vs-p0", "vs-previous", "mixed-clint"]])
+    for comparison in specifications:
+        group = comparison["id"]
+        a, b = data[comparison["left"]], data[comparison["right"]]
         if set(a) != set(b):
             raise ValueError("Common-opponent seeds differ")
         differences = []
@@ -85,12 +90,14 @@ def summarize(protocol, results):
                     raise ValueError("Common-opponent deals differ")
             differences.append(statistics.mean(g["signedPoints"] for g in b[seed]["games"]) -
                                statistics.mean(g["signedPoints"] for g in a[seed]["games"]))
-        contrasts[group] = estimate(differences, z=2.4977054744)
-        contrasts[group]["confidenceLevel"] = 0.9875
-        contrasts[group]["direction"] = "latest minus champion"
+        contrasts[group] = estimate(differences, z=comparison["z"])
+        contrasts[group]["confidenceLevel"] = comparison["confidenceLevel"]
+        contrasts[group]["direction"] = comparison["direction"]
     primary = reports["head-to-head"]["signedUpgradePoints"]
     lo, hi = primary["ci"]
-    winner = "latest" if lo > 0 else "champion" if hi < 0 else "inconclusive"
+    primary_model = plan.get("primaryModel", "latest")
+    primary_opponent = plan.get("primaryOpponent", "champion")
+    winner = primary_model if lo > 0 else primary_opponent if hi < 0 else "inconclusive"
     return {
         "schema": 1, "id": plan["id"], "completedAtUTC": datetime.now(timezone.utc).isoformat(),
         "purpose": plan["purpose"], "protocolSHA256": protocol_sha,
@@ -99,7 +106,7 @@ def summarize(protocol, results):
         "plannedPairs": plan["plannedPairs"], "completedPairs": sum(v["pairs"] for v in reports.values()),
         "completedRounds": sum(v["rounds"] for v in reports.values()),
         "reports": reports, "secondaryContrasts": contrasts,
-        "primaryWinner": winner, "primaryInterpretation": "Latest perspective; 95% seed-cluster CI for signed upgrade points",
+        "primaryWinner": winner, "primaryInterpretation": plan.get("primaryInterpretation", "Latest perspective; 95% seed-cluster CI for signed upgrade points"),
         "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
         "optimizerUpdatesExecuted": 0,
     }

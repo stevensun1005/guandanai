@@ -61,6 +61,16 @@ export const DEFAULT_CONFIG = Object.freeze({
 export const option = (name, fallback) =>
   process.argv.find((x) => x.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 
+/** Retire selection membership, never files still referenced by actors or queued gates. */
+export function trimLeagueMembership(league, limit) {
+  while (league.members.length > limit) {
+    const index = league.members.findIndex((m) => !m.pinned);
+    if (index < 0) break;
+    const [removed] = league.members.splice(index, 1);
+    delete league.stats[removed.id];
+  }
+}
+
 export function runPaths(run) {
   const root = resolve(run);
   return {

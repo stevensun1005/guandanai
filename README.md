@@ -26,6 +26,8 @@
 
 </details>
 
+Windows 回迁已完成包校验、ROCm／DirectML 实测和双臂配置准备，**正式训练未启动**；操作与启动条件见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。网页继续使用真实冠军，准备不构成棋力提升证据。
+
 ## 代码与模型入口
 
 **[网页端 web/](web/README.md) · [AI ai/](ai/README.md) · [danMCai 模型](ai/danMCai/README.md) · [GuanZero](ai/guanzero/README.md)**

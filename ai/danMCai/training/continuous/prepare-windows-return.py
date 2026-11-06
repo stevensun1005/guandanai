@@ -16,7 +16,8 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def prepare(snapshot, project, destination, actors=4, provider="dml"):
+def prepare(snapshot, project, destination, actors=4, provider="dml", actor_offset=6_000_000,
+            evaluation_offset=600, actor_end=None, evaluation_end=None):
     snapshot, project, destination = (Path(p).resolve() for p in (snapshot, project, destination))
     if destination.exists():
         raise FileExistsError("Destination must be new; never overwrite Windows or Mac runs")
@@ -44,7 +45,11 @@ def prepare(snapshot, project, destination, actors=4, provider="dml"):
         raise ValueError("Latest model SHA mismatch")
     if digest(source / "champion/champion.onnx") != champion["sha256"]:
         raise ValueError("Champion model SHA mismatch")
-    actor_offset, evaluation_offset = 6_000_000, 600
+    actor_end = 50_000_000 if actor_end is None else actor_end
+    evaluation_end = 1000 if evaluation_end is None else evaluation_end
+    if not (0 <= actor_offset < actor_end <= 50_000_000 and
+            0 <= evaluation_offset < evaluation_end <= 1000):
+        raise ValueError("Invalid reserved seed bounds")
     for p in (source / "actors").glob("actor-*.json"):
         if json.loads(p.read_text())["nextSeed"] >= actor_offset:
             raise ValueError("Windows return seed block is not fresh")
@@ -74,7 +79,8 @@ def prepare(snapshot, project, destination, actors=4, provider="dml"):
         "sourceHashConvention": "UTF-8 text with CRLF normalized to LF",
         "initial": "ai/danMCai/models/baseline/policy.onnx",
         "actors": actors, "actorSeedOffset": actor_offset,
-        "evaluationBlockOffset": evaluation_offset, "actorImplementation": "fast",
+        "actorSeedEnd": actor_end, "evaluationBlockOffset": evaluation_offset,
+        "evaluationBlockEnd": evaluation_end, "actorImplementation": "fast",
         "fastActor": {"games": 8, "provider": provider},
         "resourceBudget": {"reserveGB": 4, "resumeGB": 5},
         "parent": parent,
@@ -106,6 +112,7 @@ def prepare(snapshot, project, destination, actors=4, provider="dml"):
         "checkpointSHA256": digest(destination / "learner/checkpoint.pt"),
         "sourceCheckpointSHA256": checkpoint_sha, "replayShards": len(list((destination / "shards").glob("*.json"))),
         "actorSeedOffset": actor_offset, "evaluationBlockOffset": evaluation_offset,
+        "actorSeedEnd": actor_end, "evaluationBlockEnd": evaluation_end,
         "deviceForLaterAuthorizedStart": "cuda:0", "optimizerUpdatesExecuted": 0,
         "started": False, "scheduleCreated": False,
     }
@@ -120,5 +127,10 @@ if __name__ == "__main__":
     parser.add_argument("--run", required=True)
     parser.add_argument("--actors", type=int, default=4)
     parser.add_argument("--provider", choices=["cpu", "dml"], default="dml")
+    parser.add_argument("--actor-offset", type=int, default=6_000_000)
+    parser.add_argument("--actor-end", type=int)
+    parser.add_argument("--evaluation-offset", type=int, default=600)
+    parser.add_argument("--evaluation-end", type=int)
     args = parser.parse_args()
-    print(json.dumps(prepare(args.snapshot, args.project, args.run, args.actors, args.provider)))
+    print(json.dumps(prepare(args.snapshot, args.project, args.run, args.actors, args.provider,
+                             args.actor_offset, args.evaluation_offset, args.actor_end, args.evaluation_end)))

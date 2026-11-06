@@ -1,5 +1,7 @@
 # 持续自对弈训练
 
+Windows 回迁后的 A／B 准备已经完成，尚未启动。新检出将联盟选择池淘汰与权重文件生命周期分开，运行期间保留不可变导出，避免在途采样重载 ENOENT；旧冻结源码不变。两个运行、互斥种子、只检查的固定窗口入口和实际 GPU 证据见 [Windows 交接](WINDOWS_RETURN_20261106.md)。不要用本页通用启动示例绕过新窗口的时长确认。
+
 **2026-11-06 交接状态：**Windows `gpu-main` 和 Mac 唯一 24 小时窗口均已结束，原运行保留，不自动重启。随后固定独立整局比较已完成，冠军与最终学习器尚无明确强弱差异。恢复包、匹配 Adam、Windows 新目录准备和只读 GPU 验证见 [WINDOWS_RETURN](WINDOWS_RETURN_20261106.md)；历史 Mac 启动、固定截止和收尾证据见 [MAC_HANDOFF](MAC_HANDOFF.md)。以下 CPU／ROCm 示例用于理解既有运行，不是本次重启训练的指令。
 
 本文说明 danMCai 的联赛／冠军门控路线。GuanZero 使用独立的逐局 DMC、GPU 合批与只读面板，四类开发对手及旧检出补评方式见 [GuanZero README](../guanzero/README.md)。当前网页默认danMCai 实际冠军，普通新导出和 GuanZero 更新不覆盖它；[发布规则](../../web/docs/WEB_MODELS.md)。冻结运行按其原配置保留原版规则对手，不因名称变更自动切换到 Clint。

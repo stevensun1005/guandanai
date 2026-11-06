@@ -23,6 +23,8 @@ Four-player GuanDan with bots running in your browser, private rooms and practic
 
 </details>
 
+The Windows return package, matched learner/Adam state, ROCm computation and DirectML inference have been verified. Two isolated experiment arms are prepared; **formal training has not started**, and no new window is counting down. See the [Windows handoff](ai/research/WINDOWS_RETURN_20261106.md) for paths, seed reservations and launch conditions. The website champion is unchanged; preparation is not evidence of stronger play.
+
 Tribute/return learning is an independent two-head specialist. See its [protocol and integration requirements](ai/shared/tribute/README.md). It is not enabled on the website yet; the champion menu is unchanged. The [specialist Mac handoff](ai/research/TRIBUTE_MAC_HANDOFF.md) covers the separate checkpoint/data package and pending MPS adaptation.
 
 ## Code and model entry points

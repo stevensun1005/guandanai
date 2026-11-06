@@ -1,0 +1,39 @@
+{
+  "verifiedUTC": "2026-11-06T23:41:19.084278+00:00",
+  "node": {
+    "tests": 219,
+    "passed": 219
+  },
+  "pythonDanMCai": {
+    "tests": 41,
+    "passed": 40,
+    "skipped": 1,
+    "skip": "Apple MPS requires a Mac"
+  },
+  "pythonResearch": {
+    "tests": 17,
+    "passed": 17
+  },
+  "formatCheck": "passed",
+  "build": "passed",
+  "webBuild": "b8a4af6b4c",
+  "markdownRelativeLinks": "passed",
+  "ownerDraftsPreserved": 10,
+  "webDefaultSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "webDefault": "017",
+  "modelMenu": [
+    "clint-rule",
+    "016",
+    "015",
+    "001",
+    "017",
+    "012"
+  ],
+  "formalTrainingStarted": false,
+  "formalOptimizerUpdatesExecuted": 0,
+  "newScheduleCreated": false,
+  "heldoutRoundsCompleted": 0,
+  "preparedSourceFiles": 36,
+  "initialCheckpointUnchanged": true,
+  "unitTestUpdates": "Disposable synthetic fixtures only, not experiment training"
+}

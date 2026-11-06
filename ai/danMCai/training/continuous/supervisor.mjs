@@ -36,6 +36,7 @@ import {
   readJSON,
   runPaths,
   sha256,
+  trimLeagueMembership,
   writeJSON,
 } from './lib.mjs';
 
@@ -202,6 +203,20 @@ function initialize() {
   const evaluationOffset = config.evaluationBlockOffset ?? 0;
   if (!Number.isInteger(evaluationOffset) || evaluationOffset < 0 || evaluationOffset >= 1000)
     throw Error('Invalid evaluation seed block offset');
+  if (
+    config.evaluationBlockEnd !== undefined &&
+    (!Number.isInteger(config.evaluationBlockEnd) ||
+      config.evaluationBlockEnd <= evaluationOffset ||
+      config.evaluationBlockEnd > 1000)
+  )
+    throw Error('Invalid evaluation seed block end');
+  if (
+    config.actorSeedEnd !== undefined &&
+    (!Number.isInteger(config.actorSeedEnd) ||
+      config.actorSeedEnd <= config.actorSeedOffset ||
+      config.actorSeedEnd > 50_000_000)
+  )
+    throw Error('Invalid actor seed block end');
   if (config.sourceSHA256 && JSON.stringify(config.sourceSHA256) !== JSON.stringify(sourcesAtStart))
     throw Error('Run source changed; use a new run directory to keep protocols separate');
   return config;
@@ -383,13 +398,7 @@ function snapshot() {
     step: latest.step,
     addedAt: new Date().toISOString(),
   });
-  while (league.members.length > config.leagueSize) {
-    const index = league.members.findIndex((m) => !m.pinned);
-    if (index < 0) break;
-    const [removed] = league.members.splice(index, 1);
-    rmSync(join(paths.league, removed.file), { force: true });
-    delete league.stats[removed.id];
-  }
+  trimLeagueMembership(league, config.leagueSize);
   writeJSON(paths.leagueMeta, league);
   state.lastSnapshotAt = Date.now();
   event('snapshot', { version: latest.version, step: latest.step });
@@ -398,6 +407,7 @@ function snapshot() {
 
 let gateJob = null;
 function startGate() {
+  if (state.gateIndex >= (config.evaluationBlockEnd ?? 1000)) return;
   const league = readJSON(paths.leagueMeta);
   const champion = readJSON(paths.championMeta);
   const selection = selectGateCandidate({
@@ -490,6 +500,7 @@ function finishGate(code, stderr) {
 
 let anchorJob = null;
 function startAnchor() {
+  if (state.anchorIndex >= (config.evaluationBlockEnd ?? 1000)) return;
   const latest = readJSON(paths.latest);
   if (!latest?.step) return;
   const index = state.anchorIndex++;

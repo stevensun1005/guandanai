@@ -58,6 +58,13 @@ export async function runRoundPairs({ protocol, run, shard = 0, shards = 4 }) {
   const bytes = readFileSync(protocol),
     plan = JSON.parse(bytes),
     protocolSHA256 = hash(bytes);
+  if (
+    !Number.isFinite(Date.parse(plan.evaluationDeadlineUTC)) ||
+    Object.values(plan.models).some(
+      (m) => typeof m.file !== 'string' || !/^[a-f0-9]{64}$/.test(m.sha256),
+    )
+  )
+    throw Error('Freeze all evaluation weights and a bounded evaluation deadline before starting');
   if (!Number.isInteger(shard) || shard < 0 || shard >= shards || shards !== plan.workers)
     throw Error('Invalid worker');
   for (const [name, sha] of Object.entries(plan.sourceSHA256))

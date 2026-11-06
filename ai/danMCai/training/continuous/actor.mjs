@@ -81,7 +81,12 @@ const stop = () => (stopping = true);
 process.on('SIGINT', stop);
 process.on('SIGTERM', stop);
 
-while (!stopping && !existsSync(paths.stop) && (!matchLimit || status.matches < matchLimit)) {
+while (
+  !stopping &&
+  !existsSync(paths.stop) &&
+  (!matchLimit || status.matches < matchLimit) &&
+  status.nextSeed < (config.actorSeedEnd ?? TRAIN_SEED_SPAN)
+) {
   const latest = readJSON(paths.latest);
   if (!latest) throw Error('No latest model published');
   const model = join(paths.models, latest.file);

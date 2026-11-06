@@ -81,6 +81,23 @@ class WindowsReturnTests(unittest.TestCase):
                 WINDOWS.prepare(snapshot, project, destination)
             self.assertFalse(destination.exists())
 
+    @patch.object(WINDOWS.subprocess, "check_output", return_value='{"new-source":"hash"}')
+    def test_distinct_bounded_seed_reservations_and_replay_mtimes(self, _):
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot, project = fixture(Path(tmp))
+            for name, offset, index in [("A", 8_000_000, 700), ("B", 12_000_000, 800)]:
+                destination = project / "ai/danMCai/runs" / name
+                result = WINDOWS.prepare(snapshot, project, destination, actor_offset=offset,
+                                         actor_end=offset+100_000, evaluation_offset=index, evaluation_end=index+50)
+                self.assertEqual(result["actorSeedOffset"], offset)
+                self.assertEqual(result["actorSeedEnd"], offset+100_000)
+                self.assertEqual(result["evaluationBlockEnd"], index+50)
+                original = snapshot / "mac-20261105/shards/a00-000004100.json"
+                self.assertEqual(original.stat().st_mtime, (destination / "shards" / original.name).stat().st_mtime)
+                self.assertFalse((destination / "schedule.json").exists())
+            with self.assertRaisesRegex(ValueError, "seed bounds"):
+                WINDOWS.prepare(snapshot, project, project / "ai/danMCai/runs/bad", actor_offset=100, actor_end=99)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,46 @@
+{
+  "modelSHA256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+  "positions": 16,
+  "trainingStarted": false,
+  "optimizerUpdatesExecuted": 0,
+  "hostTotalBytes": 33520291840,
+  "hostFreeBeforeBytes": 12495646720,
+  "providers": {
+    "cpu": {
+      "batches": 16,
+      "decisions": 16,
+      "rows": 49,
+      "runMs": 5.376999999999953,
+      "prepareMs": 1.2149999999999892,
+      "inFlightMax": 1,
+      "provider": "cpu",
+      "fallbackReason": null,
+      "sessionCount": 1,
+      "sessionsCreated": 1,
+      "sessionsReleased": 0,
+      "peakSessions": 1,
+      "maxAbsErrorAgainstCPU": 0,
+      "finite": true,
+      "providerScope": "Actual ONNX session provider; individual kernel placement not profiled. No matches or throughput benchmark."
+    },
+    "dml": {
+      "batches": 16,
+      "decisions": 16,
+      "rows": 49,
+      "runMs": 43.219699999999875,
+      "prepareMs": 0.7477000000002931,
+      "inFlightMax": 1,
+      "provider": "dml",
+      "fallbackReason": null,
+      "sessionCount": 1,
+      "sessionsCreated": 1,
+      "sessionsReleased": 0,
+      "peakSessions": 1,
+      "maxAbsErrorAgainstCPU": 0.0000018775463104248047,
+      "finite": true,
+      "providerScope": "Actual ONNX session provider; individual kernel placement not profiled. No matches or throughput benchmark."
+    }
+  },
+  "hostFreeAfterBytes": 12440080384,
+  "verifiedUTC": "2026-11-06T23:28:21.221Z"
+}
