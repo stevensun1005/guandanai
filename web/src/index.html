@@ -163,15 +163,6 @@
             title="开麦后同桌的人能听到你说话"
           >
             闭麦</button
-          ><button
-            class="link"
-            id="emoteBtn"
-            aria-haspopup="dialog"
-            aria-controls="emotePanel"
-            aria-expanded="false"
-            title="给同桌发表情或快捷语"
-          >
-            表情</button
           ><button class="link" id="rulesBtn" aria-haspopup="dialog" aria-controls="rulesDialog">
             帮助</button
           ><button class="link" id="pauseBtn">暂停</button
@@ -233,11 +224,36 @@
       </main>
 
       <div class="emote-panel" id="emotePanel" role="dialog" aria-label="发送表情和快捷语" hidden>
-        <div class="emote-grid" id="emoteGrid"></div>
-        <div class="emote-targets" id="emoteTargets" hidden></div>
-        <div class="emote-phrases" id="emotePhrases"></div>
+        <div class="emote-tabs" id="emoteTabs" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            data-tab="emotes"
+            aria-selected="true"
+            aria-controls="emoteEmotes"
+          >
+            表情</button
+          ><button
+            type="button"
+            role="tab"
+            data-tab="phrases"
+            aria-selected="false"
+            aria-controls="emotePhrases"
+          >
+            快捷语
+          </button>
+        </div>
+        <div class="emote-page" id="emoteEmotes" role="tabpanel">
+          <div class="emote-grid" id="emoteGrid"></div>
+          <div class="emote-targets" id="emoteTargets" hidden></div>
+        </div>
+        <div class="emote-page emote-phrases" id="emotePhrases" role="tabpanel" hidden></div>
         <label class="emote-mute"
-          ><input type="checkbox" id="emoteMute" /> 不显示其他人的表情</label
+          ><input type="checkbox" id="emoteMute" /><span
+            class="emote-switch"
+            aria-hidden="true"
+          ></span
+          >屏蔽他人表情</label
         >
       </div>
       <div class="emote-live" id="emoteLive" aria-live="polite"></div>
@@ -251,6 +267,18 @@
             </div>
             <span class="cnt" id="myCnt"></span>
           </div>
+          <button
+            type="button"
+            class="emote-fab"
+            id="emoteBtn"
+            aria-haspopup="dialog"
+            aria-controls="emotePanel"
+            aria-expanded="false"
+            aria-label="表情"
+            title="发表情或快捷语"
+          >
+            <span aria-hidden="true">😊</span>
+          </button>
           <button class="link" id="sfBtn" title="依次选出手里所有能组成的同花顺（包括用百搭）">
             同花顺
           </button>

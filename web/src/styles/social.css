@@ -1,108 +1,355 @@
 /* table emotes: gifts thrown between seats, emoji with effects and quick phrases beside a seat */
+/* the round emote button under your own seat */
+.emote-fab {
+  --cool-ms: 2500ms;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  font-size: 21px;
+  line-height: 1;
+  border: 1px solid #ffffff3d;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff6c9 0%, #ffcf4a 38%, #f19a14 100%);
+  box-shadow:
+    0 4px 12px #0007,
+    inset 0 -3px 0 #c06a0a66,
+    inset 0 2px 0 #ffffff80;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+.emote-fab:hover {
+  transform: translateY(-1px) scale(1.06);
+}
+.emote-fab:active {
+  transform: scale(0.94);
+}
+.emote-fab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.emote-fab[aria-expanded='true'] {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 0 3px #ffd76a66,
+    0 4px 12px #0007;
+}
+.emote-fab:disabled {
+  cursor: default;
+  filter: grayscale(0.75) brightness(0.8);
+}
+/* cooldown: a ring that sweeps round until the next emote may go */
+@property --cool {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+.emote-fab.cooling::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(#ffd76a var(--cool), #ffffff1f 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 calc(100% - 3px));
+  animation: emote-cool var(--cool-ms) linear forwards;
+}
+@keyframes emote-cool {
+  from {
+    --cool: 0%;
+  }
+  to {
+    --cool: 100%;
+  }
+}
+body.practice #emoteBtn {
+  display: none;
+}
+html.phone.rows body:not(.practice) .mebar .emote-fab {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 18px;
+}
+
+/* the panel pops up above the button: frosted card, two tabs, large tiles */
 .emote-panel {
+  --arrow-x: 50%;
   position: fixed;
   z-index: 60;
-  top: 56px;
-  right: 12px;
-  width: min(340px, calc(100vw - 24px));
-  max-height: min(70dvh, 520px);
+  width: min(360px, calc(100vw - 20px));
+  max-height: min(64dvh, 480px);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px 12px;
+  border: 1px solid #ffffff2e;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(180deg, #1f4a3bf0, #0f2a20f2);
+  backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow:
+    0 18px 48px #000a,
+    inset 0 1px 0 #ffffff26;
+  transform-origin: var(--arrow-x) 100%;
+  animation: emote-panel-in 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+.emote-panel[hidden] {
+  display: none;
+}
+.emote-panel::after {
+  content: '';
+  position: absolute;
+  left: var(--arrow-x);
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  translate: -50% 0;
+  rotate: 45deg;
+  background: #0f2a20;
+  border-right: 1px solid #ffffff2e;
+  border-bottom: 1px solid #ffffff2e;
+}
+@keyframes emote-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+}
+.emote-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: #00000040;
+}
+.emote-tabs [role='tab'] {
+  flex: 1;
+  padding: 6px 0;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffffa6;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.emote-tabs [role='tab'][aria-selected='true'] {
+  color: #3a2300;
+  background: linear-gradient(180deg, #ffe08a, #f5b532);
+  box-shadow: 0 2px 6px #0005;
+}
+.emote-tabs [role='tab']:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+.emote-page {
   overflow: auto;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: color-mix(in srgb, #0d2a1f 94%, transparent);
-  box-shadow: 0 12px 32px #0008;
+  min-height: 0;
+}
+.emote-page[hidden] {
+  display: none;
 }
 .emote-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+  gap: 8px;
+  padding: 2px;
 }
 .emote-choice {
   font: inherit;
-  color: var(--ink);
+  color: #fff;
   border: 1px solid transparent;
-  border-radius: 9px;
-  background: #ffffff08;
   cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease;
 }
-.emote-choice:hover,
 .emote-choice:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid #ffd76a;
   outline-offset: 1px;
-  background: #ffffff14;
 }
 .emote-choice.kind-gift,
 .emote-choice.kind-emoji {
+  position: relative;
   display: grid;
   justify-items: center;
-  gap: 3px;
-  padding: 7px 0 5px;
+  gap: 5px;
+  padding: 9px 0 7px;
+  border-radius: 16px;
+  background: var(--tile, #ffffff14);
+  box-shadow:
+    inset 0 1px 0 #ffffff33,
+    0 3px 8px #0004;
+}
+.emote-choice.kind-gift:hover,
+.emote-choice.kind-emoji:hover {
+  transform: translateY(-2px);
+}
+.emote-choice.kind-gift:active,
+.emote-choice.kind-emoji:active {
+  transform: scale(0.94);
+}
+.emote-choice[data-id='g01'] {
+  --tile: linear-gradient(160deg, #a8714a, #5b341c);
+}
+.emote-choice[data-id='g02'] {
+  --tile: linear-gradient(160deg, #f27aa0, #a8274f);
+}
+.emote-choice[data-id='g03'] {
+  --tile: linear-gradient(160deg, #ff8a3d, #8e1d12);
+}
+.emote-choice[data-id='e01'] {
+  --tile: linear-gradient(160deg, #ffd45c, #b97a06);
+}
+.emote-choice[data-id='e02'] {
+  --tile: linear-gradient(160deg, #6cb6ff, #23589c);
+}
+/* gifts carry a small badge: they are thrown at someone */
+.emote-choice.kind-gift::before {
+  content: '送';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+  color: #3a2300;
+  border-radius: 6px;
+  background: #ffe08a;
 }
 .emote-choice[aria-pressed='true'] {
-  border-color: var(--gold);
-  background: #ffffff1c;
+  border-color: #ffe08a;
+  box-shadow:
+    0 0 0 2px #ffe08a88,
+    0 3px 8px #0004;
 }
 .emote-icon {
-  font-size: 26px;
-  line-height: 1;
+  display: block;
+  height: 34px;
+  font-size: 28px;
+  line-height: 34px;
+  filter: drop-shadow(0 2px 2px #0005);
 }
 .emote-label {
-  color: var(--muted);
   font-size: 11px;
+  font-weight: 700;
+  color: #fffe;
+  text-shadow: 0 1px 1px #0006;
 }
 .emote-targets {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
-  margin-top: 8px;
-  padding: 8px;
-  border: 1px dashed #ffffff30;
-  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #00000038;
+  animation: emote-panel-in 0.15s ease;
 }
 .emote-targets[hidden] {
   display: none;
 }
 .emote-targets-title {
   grid-column: 1 / -1;
-  color: var(--muted);
+  color: #ffffffb3;
   font-size: 12px;
 }
 .emote-target {
   overflow: hidden;
-  padding: 7px 4px;
+  padding: 8px 4px;
   font: inherit;
   font-size: 13px;
-  color: var(--ink);
+  font-weight: 700;
+  color: #fff;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border: 1px solid #ffffff24;
-  border-radius: 8px;
-  background: #ffffff10;
+  border: 1px solid #ffffff30;
+  border-radius: 999px;
+  background: #ffffff1a;
   cursor: pointer;
 }
-.emote-target:hover,
+.emote-target:hover {
+  background: #ffffff2e;
+}
 .emote-target:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid #ffd76a;
   outline-offset: 1px;
 }
 .emote-phrases {
   display: grid;
-  gap: 4px;
-  margin-top: 10px;
+  gap: 6px;
 }
 .emote-choice.kind-phrase {
-  text-align: left;
+  padding: 9px 14px;
   font-size: 14px;
-  padding: 7px 10px;
+  text-align: left;
+  border-radius: 12px;
+  background: #ffffff12;
 }
+.emote-choice.kind-phrase:hover {
+  background: #ffffff24;
+}
+.emote-choice.kind-phrase:active {
+  transform: scale(0.98);
+}
+/* the mute option as a small switch */
 .emote-mute {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: flex-end;
+  gap: 8px;
   margin-top: 10px;
-  color: var(--muted);
+  color: #ffffffa6;
   font-size: 12px;
+  cursor: pointer;
+}
+.emote-mute input {
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 17px;
+  margin: 0;
+  opacity: 0;
+}
+.emote-switch {
+  position: relative;
+  order: 2;
+  width: 30px;
+  height: 17px;
+  border-radius: 999px;
+  background: #ffffff30;
+  transition: background 0.15s ease;
+}
+.emote-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  transition: translate 0.15s ease;
+}
+.emote-mute input:checked + .emote-switch {
+  background: #f5b532;
+}
+.emote-mute input:checked + .emote-switch::after {
+  translate: 13px 0;
+}
+.emote-mute input:focus-visible + .emote-switch {
+  outline: 2px solid #ffd76a;
+  outline-offset: 2px;
 }
 .emote-live {
   position: absolute;
@@ -295,6 +542,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .emote-panel,
+  .emote-targets,
+  .emote-fab.cooling::after,
   .emote-bubble,
   .emote-bubble.e01,
   .emote-bubble.e02,

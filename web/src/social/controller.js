@@ -338,11 +338,16 @@ export function sendEmote(id, toSeat) {
   return true;
 }
 
+/** The button stays disabled during the cooldown, with a ring that sweeps round until it is ready. */
 function paintCooldown() {
   const button = $('#emoteBtn');
   if (!button) return;
   const wait = coolingUntil - Date.now();
   button.disabled = wait > 0;
+  if (wait > 0 && !button.classList.contains('cooling')) {
+    button.style.setProperty('--cool-ms', `${wait}ms`);
+    button.classList.add('cooling');
+  } else if (wait <= 0) button.classList.remove('cooling');
   if (wait > 0) setTimeout(paintCooldown, wait + 20);
 }
 
@@ -380,13 +385,40 @@ function hideTargets() {
     choice.removeAttribute('aria-pressed');
 }
 
+/** Open the panel just above the emote button under your own seat, kept inside the window. */
+function placePanel() {
+  const panel = $('#emotePanel'),
+    button = $('#emoteBtn');
+  if (panel.hidden) return;
+  const r = button.getBoundingClientRect(),
+    margin = 10,
+    width = panel.offsetWidth;
+  const center = r.left + r.width / 2;
+  const left = Math.max(margin, Math.min(innerWidth - margin - width, center - width / 2));
+  panel.style.left = `${left}px`;
+  panel.style.bottom = `${Math.max(margin, innerHeight - r.top + 10)}px`;
+  panel.style.setProperty('--arrow-x', `${Math.max(18, Math.min(width - 18, center - left))}px`);
+}
+
+function setTab(name) {
+  for (const tab of document.querySelectorAll('#emoteTabs [role=tab]')) {
+    const on = tab.dataset.tab === name;
+    tab.setAttribute('aria-selected', String(on));
+    tab.tabIndex = on ? 0 : -1;
+    $(`#${tab.getAttribute('aria-controls')}`).hidden = !on;
+  }
+  hideTargets();
+}
+
 function setPanel(open) {
   const panel = $('#emotePanel'),
     button = $('#emoteBtn');
   hideTargets();
   panel.hidden = !open;
   button.setAttribute('aria-expanded', String(open));
-  if (open) panel.querySelector('button')?.focus();
+  if (!open) return;
+  placePanel();
+  panel.querySelector('.emote-page:not([hidden]) button')?.focus();
 }
 
 function buildPanel() {
@@ -439,6 +471,17 @@ export function initialize() {
     muted = localStorage.getItem(MUTE_KEY) === 'true';
   } catch (_) {}
   buildPanel();
+  for (const tab of document.querySelectorAll('#emoteTabs [role=tab]'))
+    tab.onclick = () => setTab(tab.dataset.tab);
+  $('#emoteTabs').addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    const tabs = [...document.querySelectorAll('#emoteTabs [role=tab]')];
+    const next = tabs[(tabs.indexOf(document.activeElement) + 1) % tabs.length] || tabs[0];
+    setTab(next.dataset.tab);
+    next.focus();
+  });
+  setTab('emotes');
+  addEventListener('resize', placePanel);
   $('#emoteBtn').onclick = (event) => {
     event.stopPropagation();
     setPanel($('#emotePanel').hidden);

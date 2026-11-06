@@ -38,8 +38,14 @@ def bot_answer(page, bot, timeout=6000):
         const b=document.querySelector('.emote-bubble[data-seat="{bot}"]');return ['emoji',b.textContent,null]}}""")
 
 
+def open_tab(page, tab):
+    if page.locator('#emotePanel').is_hidden():
+        page.locator('#emoteBtn').click()
+    page.locator(f'#emoteTabs [data-tab={tab}]').click()
+
+
 def send_gift(page, gift_id, local):
-    page.locator('#emoteBtn').click()
+    open_tab(page, 'emotes')
     page.locator(f'#emoteGrid .emote-choice[data-id={gift_id}]').click()
     assert page.locator('#emoteTargets').is_visible()
     page.locator(f'#emoteTargets .emote-target[data-to="{local}"]').click()
@@ -86,7 +92,23 @@ with sync_playwright() as p:
     assert host.locator('#emotePanel').is_visible()
     labels = host.locator('#emoteGrid .emote-choice .emote-label').all_inner_texts()
     assert labels == ['卡布奇诺', '鲜花', '炸弹', '墨镜', '哭'], labels
-    assert host.locator('#emotePhrases .emote-choice').count() == 12
+    # The round button sits in your own bar under the table; the panel opens just above it, in the window.
+    for page in [host, guest]:
+        if page is guest:
+            page.locator('#emoteBtn').click()
+        assert page.evaluate("!!document.querySelector('#mebar #emoteBtn')")
+        assert page.evaluate("""()=>{const b=document.querySelector('#emoteBtn').getBoundingClientRect(),
+            p=document.querySelector('#emotePanel').getBoundingClientRect();
+            return p.bottom<=b.top+1&&p.left>=0&&p.right<=innerWidth&&p.top>=0}"""), 'panel above the button'
+    guest.wait_for_timeout(300)  # let the pop-in finish before capturing
+    guest.screenshot(path=str(OUT / 'guest-panel.png'))
+    guest.keyboard.press('Escape')
+    host.screenshot(path=str(OUT / 'host-panel.png'))
+    assert host.locator('#emotePhrases').is_hidden(), 'phrases sit on their own tab'
+    host.locator('#emoteTabs [data-tab=phrases]').click()
+    phrases = host.locator('#emotePhrases .emote-choice').all_inner_texts()
+    host.screenshot(path=str(OUT / 'host-phrases.png'))
+    assert len(phrases) == 8 and not any(w in t for t in phrases for w in ['炸', '留着', '靠你', '稳住']), phrases
 
     # A quick phrase pops up beside the host on both pages and is read aloud on both.
     host.locator('#emotePhrases .emote-choice', has_text='给阿姨倒一杯卡布奇诺').click()
@@ -104,10 +126,11 @@ with sync_playwright() as p:
             return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})""")
 
     # The guest throws a flower at the host: the chooser lists the three other seats by name.
-    guest.locator('#emoteBtn').click()
+    open_tab(guest, 'emotes')
     guest.locator('#emoteGrid .emote-choice[data-id=g02]').click()
     targets = guest.locator('#emoteTargets .emote-target').all_inner_texts()
     assert len(targets) == 3 and any('房主' in t for t in targets), targets
+    guest.wait_for_timeout(250)
     guest.screenshot(path=str(OUT / 'guest-targets.png'))
     guest.locator(f'#emoteTargets .emote-target[data-to="{host_on_guest}"]').click()
     assert guest.locator('.emote-flight').count() == 1, 'the gift flies before it lands'
@@ -162,7 +185,8 @@ with sync_playwright() as p:
     # Muting hides other players' emotes and gifts but not your own.
     host.wait_for_timeout(3600)
     host.locator('#emoteBtn').click()
-    host.locator('#emoteMute').check()
+    host.locator('.emote-mute').click()
+    assert host.locator('#emoteMute').is_checked()
     host.keyboard.press('Escape')
     assert host.locator('#emotePanel').is_hidden()
     guest.evaluate("NET.hostConn.send({t:'emote',id:'e02'})")
@@ -172,12 +196,12 @@ with sync_playwright() as p:
     guest.evaluate("NET.hostConn.send({t:'emote',id:'g02',to:0})")
     host.wait_for_timeout(1200)
     assert host.evaluate("!document.querySelector('.emote-gift:not([data-from=\"0\"]),.emote-flight')"), 'muted: no gifts'
-    host.locator('#emoteBtn').click()
+    open_tab(host, 'emotes')
     host.locator('#emoteGrid .emote-choice[data-id=e01]').click()
     assert host.locator('.emote-bubble[data-seat="0"]').inner_text() == '😎'
     guest.wait_for_function(f'()=>document.querySelector(\'.emote-bubble[data-seat="{host_on_guest}"]\')?.textContent==="😎"')
 
-    print(json.dumps({'kind': 'test', 'realPeerJS': True, 'emotes': 5, 'phrases': 12, 'giftsFly': True,
+    print(json.dumps({'kind': 'test', 'realPeerJS': True, 'emotes': 5, 'phrases': 8, 'buttonUnderOwnSeat': True, 'giftsFly': True,
                       'botAnswers': True, 'phrasesSpoken': True, 'forgedDropped': True,
                       'rateLimited': True, 'muteHidesOthers': True, 'pageErrors': errors}, ensure_ascii=False))
     assert not errors, errors

@@ -17,7 +17,9 @@ test('the catalog keeps the five emotes, three of them gifts, and the classic ph
   const pick = (kind) => EMOTES.filter((entry) => entry.kind === kind).map((entry) => entry.label);
   assert.deepEqual(pick('gift'), ['卡布奇诺', '鲜花', '炸弹']);
   assert.deepEqual(pick('emoji'), ['墨镜', '哭']);
-  assert.equal(pick('phrase').length, 12);
+  assert.equal(pick('phrase').length, 8);
+  for (const signal of ['炸', '留着', '靠你', '稳住'])
+    assert(!pick('phrase').some((text) => text.includes(signal)), `no play signal: ${signal}`);
   const texts = EMOTES.map((entry) => entry.text);
   assert(texts.includes('给阿姨倒一杯卡布奇诺'));
   assert(texts.some((text) => text.includes('我等的花儿都谢了')));
@@ -34,6 +36,8 @@ test('only preset ids resolve; free text and other values are rejected', () => {
   for (const value of [
     '',
     'p99',
+    'p09',
+    'p10',
     'e03',
     '自由文字',
     '<img src=x>',
