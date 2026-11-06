@@ -44,6 +44,8 @@ with sync_playwright() as p:
             page.locator("#hintBtn").click()
             if page.locator("#playBtn").is_enabled():
                 page.locator("#playBtn").click()
+            elif page.locator("#passBtn").is_enabled():
+                page.locator("#passBtn").click()
         page.wait_for_timeout(100)
     page.wait_for_function('models => models.every(id => window.policyReplies.includes(id))', arg=['001', default], timeout=30000)
     expected = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()

@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "kind": "deployment-and-browser-compatibility-not-strength",
+  "observedUTC": "2026-11-06T07:30:39.256085+00:00",
+  "sourceCommit": "fceebaba5be652d3e1fda23d50a03e2130cb21de",
+  "pages": {
+    "runId": 42180277154,
+    "url": "https://github.com/stevensun1005/guandanai/actions/runs/42180277154",
+    "conclusion": "success"
+  },
+  "previousAttempt": {
+    "runId": 42177095948,
+    "conclusion": "failure",
+    "build": "success",
+    "deployment": "syncing_files timed out; next deployment succeeded"
+  },
+  "publicBuild": "f7cd5e6733",
+  "defaultId": "012",
+  "visibleChoiceIds": [
+    "clint-rule",
+    "014",
+    "013",
+    "001",
+    "012",
+    "009"
+  ],
+  "specialistEnabled": false,
+  "publicProductionSmoke": {
+    "productionGlobalsHidden": true,
+    "policyTurns": 2,
+    "successfulModelIds": [
+      "001",
+      "012"
+    ],
+    "pageErrors": []
+  },
+  "firstPublicSmoke": {
+    "passed": false,
+    "reason": "Timed out waiting for both selected models to reply; old automation handled play but did not press legal pass. After adding pass flow, the public smoke completed."
+  },
+  "formalIndependentStrengthRounds": 0,
+  "ownerDraftsPreserved": 10,
+  "frozenSourceFilesVerified": 64,
+  "deadlineUTC": "2026-11-06T13:00:00.000Z"
+}

@@ -190,3 +190,5 @@ Top 5：`coach_smoke.py` 检查开局开关、最多五种方案、点击只选�
 `npm test` 包含共享阶段驱动的旧基线逐项对照、守恒、观察隐私、旋转、双头及独立配对统计；`npm run test:python` 包含共享网络拟合、优化器恢复、协议拒绝和导出数值对照。GPU 环境另外运行 `python -m unittest discover -s ai/shared/tests -p "*test.py"`，不把 CPU 跳过写成 GPU 通过。
 
 在专用短测运行上执行 `node ai/publishing/finalize-tribute.mjs --run=<短测目录> --preflight`，用该候选的临时本机构建验证 Chrome WASM、两个输出头、真实贡还动画／早还贡、108 张牌及 Clint 隔离，最后恢复清单，不发布。浏览器结果是兼容性，不是独立胜率。截止后的正式留出评测不可被提前拿来选检查点。
+
+生产 UI 冒烟在需要过牌时也执行合法过牌，避免自动测试因只会点出牌而停在真人回合；网络空闲不替代实际应用初始化完成。
