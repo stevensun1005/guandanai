@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node web/tools/build.mjs",
     "dev": "node web/tools/serve.mjs",
-    "test": "node --test web/tests/*.test.mjs ai/danMCai/tests/*.test.mjs ai/guanzero/tests/*.test.mjs ai/shared/tests/*.test.mjs",
+    "test": "node --test web/tests/*.test.mjs ai/danMCai/tests/*.test.mjs ai/guanzero/tests/*.test.mjs ai/shared/tests/*.test.mjs ai/research/tests/*.test.mjs",
     "eval:profiles": "node ai/danMCai/evaluation/evaluate-profiles.mjs",
     "format": "prettier --write \"web/**/*.{js,mjs,css,html,md}\" \"ai/**/*.{mjs,md}\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
     "format:check": "prettier --check \"web/**/*.{js,mjs,css,html,md}\" \"ai/**/*.{mjs,md}\" \"*.md\" \".github/**/*.yml\" package.json .prettierrc.json",
