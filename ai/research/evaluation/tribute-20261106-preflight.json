@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "kind": "preflight-and-development-smoke",
+  "observedUTC": "2026-11-06T06:49:27.527Z",
+  "deadlineUTC": "2026-11-06T13:00:00.000Z",
+  "formalIndependentStrengthRounds": 0,
+  "baseline": "historical original tribute/return; no Clint strategy",
+  "tests": {
+    "node": {
+      "pass": 197,
+      "fail": 0
+    },
+    "sharedPythonGPU": {
+      "pass": 3,
+      "fail": 0,
+      "includesCPU": true
+    },
+    "researchPython": {
+      "pass": 9,
+      "fail": 0
+    }
+  },
+  "teacherSmoke": {
+    "kind": "test",
+    "seed": 3799000000,
+    "formalStrengthMatches": 0,
+    "results": [
+      {
+        "id": "012",
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "elapsedMs": 1008,
+        "result": {
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 87
+        },
+        "stats": {
+          "requestedProvider": "dml",
+          "mode": "dml-requested-cpu-node-fallback-possible",
+          "calls": 63,
+          "candidates": 3620,
+          "inferenceMs": 153.08499999999867,
+          "rounds": 1
+        }
+      },
+      {
+        "id": "014",
+        "version": "model-000000104257",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1",
+        "elapsedMs": 1233,
+        "result": {
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 84
+        },
+        "stats": {
+          "requestedProvider": "dml",
+          "mode": "dml-requested-cpu-node-fallback-possible",
+          "calls": 55,
+          "candidates": 2652,
+          "inferenceMs": 516.9429999999988,
+          "rounds": 1
+        }
+      }
+    ]
+  },
+  "boundedRunnerSmoke": {
+    "iteration": 29,
+    "trainSeeds": 25,
+    "developmentSeeds": 4,
+    "trainingGroups": 22,
+    "developmentGroups": 4,
+    "rows": 378,
+    "completedCounterfactualRounds": 378,
+    "skippedCases": 2,
+    "pid": 48380,
+    "kind": "development-training",
+    "startedUTC": "2026-11-06T06:48:47.648Z",
+    "deadlineUTC": "2026-11-06T06:49:27.4375336Z",
+    "protocolSHA": "ccda9f49cad86c99697ec6f23dbca9cf904c655cdcb4b994d9071d885501a152",
+    "stage": "awaiting-fusion",
+    "sourceModels": [
+      {
+        "id": "012",
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+      },
+      {
+        "id": "014",
+        "version": "model-000000104257",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1"
+      }
+    ],
+    "teachers": [
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 9694,
+        "candidates": 402147,
+        "inferenceMs": 11951.908999999869,
+        "rounds": 169
+      },
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 11249,
+        "candidates": 466154,
+        "inferenceMs": 17049.316599999947,
+        "rounds": 217
+      }
+    ],
+    "current": {
+      "seed": 3800000024,
+      "head": 0,
+      "stage": "return",
+      "split": "train",
+      "completed": 8,
+      "total": 14
+    },
+    "learner": {
+      "stage": "trained",
+      "device": "cuda:0",
+      "deviceName": "AMD Radeon RX 7800 XT",
+      "parameters": 132994,
+      "step": 20,
+      "newUpdates": 20,
+      "trainingGroups": 8,
+      "trainingRows": 108,
+      "developmentGroups": 4,
+      "development": {
+        "groups": [
+          2,
+          2
+        ],
+        "meanCounterfactualGain": [
+          1,
+          -0.5
+        ],
+        "mse": 2.3276570439338684
+      },
+      "bestUpdated": true,
+      "loss": 4.401393413543701,
+      "elapsedSeconds": 0.9530000000013388
+    },
+    "lastTrainingOutput": "{\"stage\": \"trained\", \"device\": \"cuda:0\", \"deviceName\": \"AMD Radeon RX 7800 XT\", \"parameters\": 132994, \"step\": 20, \"newUpdates\": 20, \"trainingGroups\": 8, \"trainingRows\": 108, \"developmentGroups\": 4, \"development\": {\"groups\": [2, 2], \"meanCounterfactualGain\": [1.0, -0.5], \"mse\": 2.3276570439338684}, \"bestUpdated\": true, \"loss\": 4.401393413543701, \"elapsedSeconds\": 0.9530000000013388}\r\n",
+    "stoppedUTC": "2026-11-06T06:49:27.526Z",
+    "stopReason": "time-limit",
+    "best": {
+      "version": "tribute-v000000020",
+      "step": 20,
+      "sha256": "e87aa065ea32539b616197a54d4576a70ac18ef38da2054b24eaa435ce5392c2",
+      "file": "best.onnx",
+      "development": {
+        "groups": [
+          2,
+          2
+        ],
+        "meanCounterfactualGain": [
+          1,
+          -0.5
+        ],
+        "mse": 2.3276570439338684
+      },
+      "protocolSHA256": "ccda9f49cad86c99697ec6f23dbca9cf904c655cdcb4b994d9071d885501a152"
+    },
+    "note": "Training stopped at deadline; run finalize-tribute with preserved weights",
+    "updatedUTC": "2026-11-06T06:49:27.527Z",
+    "freeGiB": 9.168159484863281,
+    "rssMiB": 350.80859375,
+    "cpuCorePercent": 236.11013591453934
+  },
+  "caveats": [
+    "40-second mechanics smoke only; development labels not independent strength",
+    "378 committed counterfactual rounds; teacher counters include 8 completed prefix rounds in an aborted group",
+    "GuanZero development gain -0.5 from only two groups; not grounds for deployment",
+    "No measured DirectML GPU utilization; some nodes may run on CPU",
+    "Free-memory guard is a polled soft budget",
+    "Synthetic prior finish/levels; completed current round, not full match through A"
+  ],
+  "negativeFindings": [
+    "Initial standalone scenario failed because original return baseline had not initialized AIP; fixed by the same original-baseline initialization used by existing match factories.",
+    "CLI import guard failed under directory junction realpaths; fixed with realpathSync."
+  ]
+}

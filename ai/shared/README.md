@@ -9,3 +9,5 @@
 规则基线显式区分 `original` 与 `rules-v2`（Clint）；历史原版规则成绩不能改名为 Clint。固定种子和公开信息边界由共享模拟器及测试核对。
 
 真人牌谱下载和预处理在 [data](data/README.md)，接收端在 [web/collector](../../web/collector/README.md)。原始数据及生成样本被忽略，不自动混入两条训练路线或独立验收。
+
+[进还贡专项](tribute/README.md) 以完整单局升级分训练共享双头网络，独立于两条主训练和 Clint 策略；状态与部署限制见专项说明。
