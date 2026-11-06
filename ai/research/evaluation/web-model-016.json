@@ -34,7 +34,7 @@
       "backend": "browser-wasm",
       "positions": 16,
       "totalValues": 49,
-      "maxError": 2.682209014892578e-07,
+      "maxError": 2.682209014892578E-07,
       "actionMismatches": 0
     },
     "localBrowser": {
@@ -76,5 +76,61 @@
     "build": "25a1081020",
     "format": "passed",
     "pendingDevelopmentReports": 0
+  },
+  "deployment": {
+    "browser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "016",
+          "guanzero-adp-io48-135205"
+        ],
+        [
+          "015",
+          "guanzero-adp-io48-120154"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ],
+        [
+          "009",
+          "danMCai-v000293055"
+        ]
+      ],
+      "defaults": [
+        "012",
+        "012",
+        "012",
+        "012"
+      ]
+    },
+    "verifiedAt": "2026-11-06T13:51:26.2566038+00:00",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "assets": {
+      "016": {
+        "url": "https://stevensun1005.github.io/guandanai/models/bot-016.onnx",
+        "bytes": 6346014,
+        "sha256": "c24f03730ad4e76f6acd91430374c3755058e118d1bf85ff207548ae4852b2bd"
+      },
+      "015": {
+        "url": "https://stevensun1005.github.io/guandanai/models/bot-015.onnx",
+        "bytes": 6346014,
+        "sha256": "8ede9a08a84ad0acaff74c24c8e7287d3da7d19e86f846e0052c6c6d620051ba"
+      }
+    },
+    "workflow": {
+      "conclusion": "success",
+      "headSha": "992ee60798d4334ccad41535f0533efd4627be1a",
+      "status": "completed",
+      "url": "https://github.com/stevensun1005/guandanai/actions/runs/42228472526"
+    }
   }
 }
