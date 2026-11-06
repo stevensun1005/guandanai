@@ -201,3 +201,5 @@ python -X utf8 web/tests/clint_sync_smoke.py
 ```
 
 后者自建临时预览服务并关闭，须先构建；覆盖 6 次尺寸切换、3 次全屏进出且 viewport meta 零写入、双队级数／名次／失败次数、无牌背、Clint 超时与神经网络消息隔离，并串行运行 UI、贡还、准备去重、真实 PeerJS 恢复、练习布局、Clint 混合模型、独立房主工具和冠军 Top 5 回归。截图和详细日志保留于忽略的 `web/artifacts/validation/`；可提交的摘要见 [同步证据](../../ai/research/evaluation/clint-sync-20261106.json)。Chrome 尺寸模拟和全屏通过不代表 iPad Safari 真机通过，也不是完整棋力评测。
+
+GuanZero 菜单回归按当前归档编号独立核对最近两代，并模拟再新增一代，检查仅替换较旧一项。现任冠军默认、两代门控证据、Clint 与 P0 的检查继续单独执行。

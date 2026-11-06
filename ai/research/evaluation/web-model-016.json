@@ -1,0 +1,80 @@
+{
+  "observedAt": "2026-11-06T13:46:14.405Z",
+  "defaultId": "012",
+  "model": {
+    "id": "016",
+    "file": "bot-016.onnx",
+    "sha256": "c24f03730ad4e76f6acd91430374c3755058e118d1bf85ff207548ae4852b2bd",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-016/bot-016.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-io48",
+      "version": "model-000000135205",
+      "status": "experimental-not-heldout-accepted",
+      "step": 135205,
+      "registeredAt": "2026-11-06T13:46:09.173Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "validation": {
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "browserWasm": {
+      "status": "PASSED",
+      "backend": "browser-wasm",
+      "positions": 16,
+      "totalValues": 49,
+      "maxError": 2.682209014892578e-07,
+      "actionMismatches": 0
+    },
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "016",
+          "guanzero-adp-io48-135205"
+        ],
+        [
+          "015",
+          "guanzero-adp-io48-120154"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ],
+        [
+          "009",
+          "danMCai-v000293055"
+        ]
+      ],
+      "defaults": [
+        "012",
+        "012",
+        "012",
+        "012"
+      ]
+    },
+    "nodeTests": 206,
+    "guanzeroPythonTests": 9,
+    "build": "25a1081020",
+    "format": "passed",
+    "pendingDevelopmentReports": 0
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "observedAt": "2026-11-06T09:47:57.407Z",
+  "defaultId": "012",
+  "model": {
+    "id": "015",
+    "file": "bot-015.onnx",
+    "sha256": "8ede9a08a84ad0acaff74c24c8e7287d3da7d19e86f846e0052c6c6d620051ba",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-015/bot-015.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-io48",
+      "version": "model-000000120154",
+      "status": "experimental-not-heldout-accepted",
+      "step": 120154,
+      "registeredAt": "2026-11-06T09:47:52.777Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "validation": {
+    "build": "399b2f3e48",
+    "pythonTests": 9,
+    "browserWasm": {
+      "status": "PASSED",
+      "backend": "browser-wasm",
+      "positions": 16,
+      "totalValues": 49,
+      "maxError": 5.662441253662109e-07,
+      "actionMismatches": 0
+    },
+    "nativeCandidates": [
+      1,
+      3,
+      129
+    ],
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "015",
+          "guanzero-adp-io48-120154"
+        ],
+        [
+          "014",
+          "guanzero-adp-io48-104257"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ],
+        [
+          "009",
+          "danMCai-v000293055"
+        ]
+      ],
+      "defaults": [
+        "012",
+        "012",
+        "012",
+        "012"
+      ]
+    }
+  },
+  "releaseRecovery": {
+    "publicSHA256": "8ede9a08a84ad0acaff74c24c8e7287d3da7d19e86f846e0052c6c6d620051ba",
+    "previousWebsiteDeployment": false,
+    "reason": "Prior pre-push regression pinned old GuanZero IDs; immutable attachment reused without uploading."
+  }
+}

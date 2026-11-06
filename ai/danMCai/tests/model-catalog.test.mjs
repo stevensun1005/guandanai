@@ -48,7 +48,12 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
 
 test('curated menu contains Clint, two GuanZero generations, P0 and the last two gate champions', () => {
   const choices = BOT_CHOICES.map((m) => m.id);
-  assert.deepEqual(choices, [CLINT_RULE_ID, '014', '013', '001', '012', '009']);
+  // Immutable archive IDs increase even when unrelated models are registered.
+  const generations = BOT_MODELS.filter((m) => m.config.history === 'guanzero-v1')
+    .map((m) => m.id)
+    .sort((a, b) => Number(b) - Number(a));
+  assert.ok(generations.length >= 2);
+  assert.deepEqual(choices, [CLINT_RULE_ID, ...generations.slice(0, 2), '001', '012', '009']);
   assert.equal(DEFAULT_BOT_MODEL, '012');
   assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
   assert.equal(botModelName('012'), 'danMCai-v000705434');
@@ -61,13 +66,17 @@ test('curated menu contains Clint, two GuanZero generations, P0 and the last two
     models: structuredClone(BOT_MODELS),
     selection: { mode: 'champions-v1', danMCaiChampions: ['012', '009'] },
   };
+  const nextId = String(1 + Math.max(...BOT_MODELS.map((m) => Number(m.id)))).padStart(3, '0');
   const future = {
     ...catalog,
-    models: [...catalog.models, { ...catalog.models.find((m) => m.id === '014'), id: '015' }],
+    models: [
+      ...catalog.models,
+      { ...catalog.models.find((m) => m.id === generations[0]), id: nextId },
+    ],
   };
   assert.deepEqual(
     selectableModels(future).map((m) => m.id),
-    [CLINT_RULE_ID, '015', '014', '001', '012', '009'],
+    [CLINT_RULE_ID, nextId, generations[0], '001', '012', '009'],
   );
   assert.throws(() => validateCatalog({ ...catalog, defaultId: '007' }), /champion selection/);
 });

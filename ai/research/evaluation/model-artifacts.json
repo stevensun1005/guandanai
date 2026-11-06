@@ -3738,6 +3738,30 @@
           "step": 104257,
           "registeredAt": "2026-11-06T05:42:10.604Z"
         }
+      },
+      {
+        "id": "015",
+        "sha256": "8ede9a08a84ad0acaff74c24c8e7287d3da7d19e86f846e0052c6c6d620051ba",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-015/bot-015.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000120154",
+          "status": "experimental-not-heldout-accepted",
+          "step": 120154,
+          "registeredAt": "2026-11-06T09:47:52.777Z"
+        }
+      },
+      {
+        "id": "016",
+        "sha256": "c24f03730ad4e76f6acd91430374c3755058e118d1bf85ff207548ae4852b2bd",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-016/bot-016.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000135205",
+          "status": "experimental-not-heldout-accepted",
+          "step": 135205,
+          "registeredAt": "2026-11-06T13:46:09.173Z"
+        }
       }
     ]
   },
