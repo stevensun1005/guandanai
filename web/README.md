@@ -41,3 +41,5 @@ npm run dev
 ## 开局与屏幕适配
 
 `src/lobby/start-state.mjs` 负责房主的初始续局状态和视角旋转，`src/lobby/level.js` 提供双队级数、名次与失败次数弹窗。只在首场首次开局应用；房间恢复保留当前状态。`src/ui/viewport.js` 合并尺寸事件并对齐名字牌，不修改 viewport meta；`#debug` 可查看尺寸诊断。使用方法见 [上桌指南](docs/PLAYING.md)，检查记录见 [Clint 增量同步](../ai/research/evaluation/clint-sync-20261106.json)。
+
+Clint 的普通出牌与真人超时分别维护：本轮仅更新普通公开牌史策略，未改网页布局和神经网络。范围、例外及来源指纹见 [规则模块](src/rule-bot/README.md#公开牌史策略更新)。

@@ -1,0 +1,666 @@
+{
+  "schema": 1,
+  "observedUTC": "2026-11-06T14:21:33.748450+00:00",
+  "kind": "rule-strategy-compatibility-not-strength",
+  "dataPurpose": "development regression only",
+  "mainBaseCommit": "220b6d9205e8b1c7e3b10d360487c36602098378",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "previousSuccessfulSHA": "7323a12f7fcad66a29032f5fa58e8bbd57850f36",
+    "checkedSHA": "54fde9edc451fe6808fa2d8548e086f25b188b41",
+    "previousEvidence": "clint-sync-20261106.json",
+    "commits": [
+      "54fde9edc451fe6808fa2d8548e086f25b188b41"
+    ],
+    "uiChanges": [],
+    "adapted": [
+      "smallest natural arranged single through ace, including over partner",
+      "natural level single before jokers over opponent, including pair split",
+      "re-lead latest unanswered partner pair/full/straight kind",
+      "hold only beating big-joker single on first opposing single when partner has not tried, with public-tribute and other exceptions"
+    ],
+    "notApplicable": [
+      {
+        "change": "upstream index version string",
+        "reason": "retain project content-hash version and room compatibility protocol"
+      }
+    ],
+    "pending": [],
+    "functionAndSettingsAudit": {
+      "before": "7323a12f7fcad66a29032f5fa58e8bbd57850f36",
+      "after": "54fde9edc451fe6808fa2d8548e086f25b188b41",
+      "method": "Acorn top-level declaration source-range SHA-256; compare both HTML entry points",
+      "changedFunctions": [
+        {
+          "name": "mateBeatenKinds",
+          "before": null,
+          "after": "47f21f89a94164dec1fb11cba032356d70e992b6b3ebf1da3f430a27d96575cf"
+        },
+        {
+          "name": "aiLead",
+          "before": "4612bdcce0865257396cf2720b3a52d46f33039f0d8f93f2205809e6ca73ac0f",
+          "after": "17a5a43349f97d38ab82ec0358e8aac7815872a6434444e00d4505e32c74a8ab"
+        },
+        {
+          "name": "smallSingle",
+          "before": null,
+          "after": "8debfcbaed92f33e0914553e6dc9d017f61f8ebb1523174a0277eaf43a5c5d3e"
+        },
+        {
+          "name": "aiChoose",
+          "before": "c550212c45178ab09bc888f8bdca894929ccdca8385fe2de91609c2fcb23ff86",
+          "after": "a81cf43fce8e497f6ec2a0d080bc550953eae42706b5fd8862d2a484b8c1540a"
+        }
+      ],
+      "changedSettings": {
+        "rSingleAlong": 1,
+        "singleAlongMax": 14,
+        "rLevelFirst": 1,
+        "rMateTypeLead": 1,
+        "rMateFirstJoker": 1
+      },
+      "entryPointsFunctionAndSettingsEqual": true
+    }
+  },
+  "opponent": {
+    "version": "rules-v2",
+    "identity": "version plus source SHA; previous results retain previous SHA",
+    "sourceSHA256": {
+      "web/src/rule-bot/settings.js": {
+        "before": "7a7f5791b7f6554b5d9f9ffc149b775534fe0a3072e27462eb2a8b799f5cb838",
+        "after": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd"
+      },
+      "web/src/rule-bot/strategy.js": {
+        "before": "3eaa8deece2ac55e6608335c5aff48943fd766ebf8116e5150f510f8d25b36eb",
+        "after": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72"
+      },
+      "web/src/rule-bot/arrangement.js": {
+        "before": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+        "after": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2"
+      }
+    },
+    "standaloneTimeoutUnchanged": true,
+    "originalBaselineUnchanged": true,
+    "learnedPoliciesUnchanged": true
+  },
+  "protectedSourceSHA256": {
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/controller.js": "dce5dfacb8ce0b0ac59f64a4d12ebbe438f8137b91b2458e4743f8f3cce0b7ee",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+    "web/src/ai/model-catalog.json": "9d0841e85e81d37249b2a53686e25fdac1b39a626d60a6b426433e24470425fb",
+    "web/src/ai/model-catalog.mjs": "8265bcd26858112a747c0bea7263d807dd6942a5a41e61f687720b4428add7a2",
+    "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+    "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+    "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/tribute-model.json": "f99ef55d3bf7c128fc595f2c019e6831d9be1cb8873627dca4ee85b59a117383",
+    "web/src/ai/tribute-observation.mjs": "003e540856a8f7cd5e3f5bce44a592b7e2e5089fb3ded60cd9c2bca3ec7c3285",
+    "web/src/ai/tribute-specialist.mjs": "e5439246020316b80b6522cab4edf644bf9a768cfb13e08fb34ab070fb2bd83b",
+    "web/src/ai/tribute-worker.mjs": "2aa3e1525125821a0d21c3779c4bfd6a0a8dca135657da92e16205b29543aba2",
+    "web/src/ai/worker.mjs": "451feb49b197ac26149b3cbdfe256119e6321612d683d4a0db8782cc72b5f0e0",
+    "web/src/coach/controller.js": "f73ca534a931c29ddc0f84f145b434a7da111582e910f4755e334500edd28194",
+    "web/src/coach/evaluation.mjs": "237d8e72daef69862a9986a079d16ead2e5cb31623b6991423c77c01f6052b67",
+    "web/src/coach/oracle.mjs": "3d79627253723b54575264b3f4c71a121869fb96f80087052d68020872a7dbf7",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/core/validation.js": "f12723cca66b153086ef7ea9be668e69ac6638ee1378b2e2990c4431f8de6abb",
+    "web/src/private-table/controller.js": "278c7dced3689d9323e55e55c26a9273c6cad4713f1145b74815b68608ebe3a8",
+    "web/src/private-table/state.mjs": "a20ea80b86bfed0a08eefc01330046a1f8b66dbdb4fb1c6f9fea8493e3cee6c0"
+  },
+  "protection": {
+    "ownerDraftsByteIdentical": 10,
+    "frozenSourceFilesVerified": 73,
+    "frozenCommit": "3b0ec91dd570cecd6bf50720133ae7adeaa124ef",
+    "frozenProtocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6",
+    "baselinePolicySHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+    "trainingWeightsConfigurationBuffersEdited": false,
+    "deadlineUTC": "2026-11-06T13:00:00.000Z"
+  },
+  "modelSelection": {
+    "menu": [
+      "clint-rule",
+      "016",
+      "015",
+      "001",
+      "012",
+      "009"
+    ],
+    "defaultId": "012",
+    "danMCaiChampions": [
+      "012",
+      "009"
+    ],
+    "modelCatalogUnchanged": true
+  },
+  "validation": {
+    "node": {
+      "command": "npm test",
+      "total": 214,
+      "passed": 214,
+      "failed": 0,
+      "newBehaviorTests": 8
+    },
+    "python": {
+      "command": "npm run test:python",
+      "total": 57,
+      "passed": 54,
+      "skipped": 3,
+      "suites": {
+        "danMCai": [
+          35,
+          2
+        ],
+        "GuanZero": [
+          9,
+          0
+        ],
+        "research": [
+          9,
+          0
+        ],
+        "shared": [
+          4,
+          1
+        ]
+      },
+      "suiteCountsMeaning": "[total,skipped]",
+      "gpuValidationClaimed": false
+    },
+    "format": "passed",
+    "buildVersion": "9d84698bdb",
+    "regressionBrowserBuild": "896cacb8bb",
+    "buildVersionDifference": "rule-bot README added after full browser run; final-build Worker regression also passed",
+    "finalBuildWorker": {
+      "actualRuleReplies": 6,
+      "allRuleGameNeuralDownloads": 0,
+      "wasmModels": [
+        "016",
+        "015",
+        "001",
+        "012",
+        "009"
+      ],
+      "strategyFixtures": {
+        "singleAlong": {
+          "type": "single",
+          "value": 14
+        },
+        "levelFirst": {
+          "type": "single",
+          "value": 15
+        },
+        "firstJoker": null,
+        "tributeException": {
+          "type": "single",
+          "value": 17
+        }
+      },
+      "fixtureScope": "Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+      "pageErrors": []
+    },
+    "browser": {
+      "viewports": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            768,
+            1024
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "viewportMetaStable": true
+        },
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "viewportMetaStable": true
+        }
+      ],
+      "startSetup": {
+        "levels": [
+          14,
+          8
+        ],
+        "L": 8,
+        "order": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "fails": [
+          2,
+          0
+        ]
+      },
+      "roomStartSetup": {
+        "realPeerJS": true,
+        "host": {
+          "levels": [
+            8,
+            14
+          ],
+          "L": 8,
+          "fails": [
+            1,
+            2
+          ],
+          "order": [
+            1,
+            3,
+            2,
+            0
+          ],
+          "cutter": 1
+        },
+        "guest": {
+          "levels": [
+            14,
+            8
+          ],
+          "L": 8,
+          "fails": [
+            2,
+            1
+          ],
+          "order": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "cutter": 0
+        },
+        "guestReadOnly": true,
+        "refreshPreservesSetup": true,
+        "newMatchDoesNotReapply": true
+      },
+      "timeoutRouting": {
+        "pass": null,
+        "last": "rule-timeout",
+        "neural": "decide"
+      },
+      "fullscreenCycles": 3,
+      "viewportMetaWrites": 0,
+      "privateCardsNotMadePublic": true,
+      "pageErrors": [],
+      "regressions": {
+        "ui_refresh_smoke.py": {
+          "checks": [
+            {
+              "viewport": [
+                1440,
+                1000
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": true
+            },
+            {
+              "viewport": [
+                1024,
+                768
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": true
+            },
+            {
+              "viewport": [
+                390,
+                844
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": false
+            },
+            {
+              "viewport": [
+                844,
+                390
+              ],
+              "levelChoices": 26,
+              "aLabels": true,
+              "flushCycle": true,
+              "tieSkip": true,
+              "sideClockGeometry": false
+            }
+          ],
+          "errors": []
+        },
+        "tribute_smoke.py": {
+          "cases": [
+            {
+              "highOnly": false,
+              "automatedReturnLegal": true,
+              "immediateHandCounts": [
+                27,
+                27,
+                27,
+                27
+              ],
+              "readyDuringFlightSafe": true
+            },
+            {
+              "highOnly": true,
+              "automatedReturnLegal": true,
+              "immediateHandCounts": [
+                27,
+                27,
+                27,
+                27
+              ],
+              "readyDuringFlightSafe": true
+            }
+          ],
+          "pageErrors": []
+        },
+        "ready_transition_smoke.py": {
+          "duplicateReadyIsIdempotent": true,
+          "returnPhaseCommittedBeforeAnimation": true,
+          "concurrentTransferRunsOnce": true,
+          "eachHand27": true,
+          "physicalCards108": true,
+          "staleHoldCannotResetLead": true,
+          "pageErrors": []
+        },
+        "rejoin_smoke.py": {
+          "hostDirection": "W",
+          "guestDirection": "S",
+          "refreshDuringPrep": true,
+          "manualRoomCodeRecovery": true,
+          "selectedLevelAndOnceRuleSync": true,
+          "refreshDuringInFlightPolicy": true,
+          "stalePolicyCancelled": true,
+          "realGuestActionAfterReturn": true,
+          "dataChannelAutomaticRecovery": true,
+          "unknownSeatRejected": true,
+          "sameCredential": true,
+          "guestAvoidsModelDownload": true,
+          "hostExitOffersSoloContinuation": true,
+          "soloContinuationLoadsLearnedPolicy": true,
+          "pageErrors": []
+        },
+        "table_layout_smoke.py": {
+          "checks": [
+            {
+              "viewport": [
+                1440,
+                1000
+              ],
+              "touch": false,
+              "learnedTurns": 6,
+              "sameActionSlot": true,
+              "readableScrollablePlays": true,
+              "finishedPlayerControls": true,
+              "compactNotesAndResults": true
+            },
+            {
+              "viewport": [
+                1280,
+                720
+              ],
+              "touch": false,
+              "learnedTurns": 6,
+              "sameActionSlot": true,
+              "readableScrollablePlays": true,
+              "finishedPlayerControls": true,
+              "compactNotesAndResults": true
+            },
+            {
+              "viewport": [
+                1024,
+                768
+              ],
+              "touch": true,
+              "learnedTurns": 6,
+              "sameActionSlot": true,
+              "readableScrollablePlays": true,
+              "finishedPlayerControls": true,
+              "compactNotesAndResults": true
+            }
+          ],
+          "pageErrors": [],
+          "fixtureScope": "Overflow, finished-player and result geometry use synthetic display states; six opening turns per viewport use the real learned policy."
+        },
+        "clint_bot_smoke.py": {
+          "actualRuleReplies": 6,
+          "allRuleGameNeuralDownloads": 0,
+          "wasmModels": [
+            "016",
+            "015",
+            "001",
+            "012",
+            "009"
+          ],
+          "strategyFixtures": {
+            "singleAlong": {
+              "type": "single",
+              "value": 14
+            },
+            "levelFirst": {
+              "type": "single",
+              "value": 15
+            },
+            "firstJoker": null,
+            "tributeException": {
+              "type": "single",
+              "value": 17
+            }
+          },
+          "fixtureScope": "Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+          "pageErrors": []
+        },
+        "private_table_smoke.py": {
+          "kind": "test",
+          "strengthMatches": 0,
+          "completedRounds": 0,
+          "trainingUpdates": 0,
+          "realPeerJS": true,
+          "hostOnlyNicknameGate": true,
+          "guestSameNameDenied": true,
+          "noPrivateRuleFlagBroadcast": true,
+          "privateCoach": {
+            "modelId": "012",
+            "search": {
+              "candidates": 23,
+              "evaluated": 8,
+              "mode": "round",
+              "horizon": 4,
+              "maxPlies": 12,
+              "leafSeat": "advising player, or partner after finishing",
+              "mismatchedLeaves": 0,
+              "fullRollouts": 24,
+              "minRollouts": 3,
+              "truncatedRollouts": 0,
+              "maxSamples": 12,
+              "priorWeight": 4,
+              "temperature": 0.03,
+              "elapsedMs": 2573,
+              "fullInformation": true
+            }
+          },
+          "partnerUsesOracle": true,
+          "opponentStaysRules": true,
+          "neuralOpponentUsesOnlyPublicObservation": true,
+          "manualOutsideBeamRated": true,
+          "offRestoresPartnerRules": true,
+          "privateHandsMatchHeldCounts": true,
+          "constructedCompletionExcluded": true,
+          "uploads": 0,
+          "layouts": [
+            {
+              "width": 1440,
+              "height": 1000,
+              "topFiveInViewport": true
+            },
+            {
+              "width": 390,
+              "height": 844,
+              "topFiveInViewport": true
+            },
+            {
+              "width": 844,
+              "height": 390,
+              "topFiveInViewport": true
+            }
+          ],
+          "pageErrors": []
+        },
+        "coach_smoke.py": {
+          "kind": "test",
+          "strengthMatches": 0,
+          "trainingUpdates": 0,
+          "scoring": {
+            "modelId": "012",
+            "candidates": 1295,
+            "minValue": -1.6738444566726685,
+            "maxValue": 0.5307624340057373,
+            "topFiveVisible": true,
+            "topFiveClickSelectsOnly": true,
+            "topFiveExposureMarked": true,
+            "viewTeamLevelsChecked": true,
+            "teamLevels": {
+              "self": 2,
+              "opponent": 2
+            },
+            "relativeExtremaChecked": true,
+            "selectionUsesCachedValues": true,
+            "invalidSelectionNotRated": true,
+            "disabledStaleReplyIgnored": true,
+            "injectedFailureNotScored": true,
+            "retrySucceeded": true
+          },
+          "postMoveRetained": true,
+          "layouts": [
+            {
+              "width": 1440,
+              "height": 1000,
+              "panelInViewport": true,
+              "actionButtonsOverlap": false,
+              "topFiveInViewport": true,
+              "topFiveOverlapsActions": false,
+              "bounds": {
+                "x": 16,
+                "y": 656.203125,
+                "width": 954,
+                "height": 53
+              }
+            },
+            {
+              "width": 390,
+              "height": 844,
+              "panelInViewport": true,
+              "actionButtonsOverlap": false,
+              "topFiveInViewport": true,
+              "topFiveOverlapsActions": false,
+              "bounds": {
+                "x": 16,
+                "y": 626,
+                "width": 302,
+                "height": 61
+              }
+            },
+            {
+              "width": 844,
+              "height": 390,
+              "panelInViewport": true,
+              "actionButtonsOverlap": false,
+              "topFiveInViewport": true,
+              "topFiveOverlapsActions": false,
+              "bounds": {
+                "x": 16,
+                "y": 165.0625,
+                "width": 682,
+                "height": 46
+              }
+            }
+          ],
+          "pageErrors": []
+        }
+      }
+    }
+  },
+  "compatibilityRounds": {
+    "uniqueSeeds": [
+      9204200,
+      9204207
+    ],
+    "seedRangeInclusive": true,
+    "completeSingleRounds": 8,
+    "decisionsPerSuccessfulPass": 687,
+    "pairing": null,
+    "opponents": "same Clint strategy at all four seats",
+    "purpose": "legality regression; no strength comparison",
+    "repeatedInTests": true,
+    "notIndependentNewSamplesOnRepeat": true
+  },
+  "fixtureSeeds": {
+    "ruleRandom": 9204001,
+    "handGeneration": 9204100,
+    "purpose": "development behavior fixtures; controlled history not complete replay"
+  },
+  "strengthEvaluation": {
+    "completeIndependentRounds": 0,
+    "completeIndependentMatches": 0,
+    "winLossDraw": null,
+    "performanceClaim": null,
+    "historicalResultsReassigned": false
+  },
+  "limitations": [
+    "rule heuristics, not neural training or online learning",
+    "eight self-play legality rounds do not estimate strength",
+    "history fixtures check branches, not complete replay legality",
+    "Chrome automation does not validate iPad Safari hardware"
+  ],
+  "deployment": {
+    "status": "pending"
+  }
+}

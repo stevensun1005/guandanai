@@ -149,3 +149,7 @@ GuanZero 评测表按冻结模型显示“训练任务名-实际版本 / 对手�
 ## Clint 真人超时
 
 本次 Clint 同步增加独立真人超时路径，仅在该座位选用 Clint 时生效；跟牌过牌，领出尽量保留完整牌组。普通 Clint 电脑正常轮次、danMCai 与 GuanZero 网络决策不使用该路径。见 [规则模块](../src/rule-bot/README.md#真人超时分支) 和 [同步证据](../../ai/research/evaluation/clint-sync-20261106.json)。兼容性通过不等于胜率提高，历史成绩不改写为新策略成绩。
+
+## Clint 公开牌史策略修订
+
+Clint 已适配上游 `54fde9e` 的散单顺走、自然级牌先于王、队友领牌类型推断及首单保大王条件。完整优先级和例外见 [规则模块](../src/rule-bot/README.md#公开牌史策略更新)。这是独立 `rules-v2` 的源码修订，历史对手成绩仍绑定原 SHA；未将启发式加入 danMCai、GuanZero、评价或训练，也未完成新策略的独立强度对照。

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "7323a12f7fcad66a29032f5fa58e8bbd57850f36",
-  "evidence": "clint-sync-20261106.json",
+  "lastSuccessfulUpstreamSHA": "54fde9edc451fe6808fa2d8548e086f25b188b41",
+  "evidence": "clint-sync-20261106-1404.json",
   "pending": []
 }

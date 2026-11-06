@@ -79,3 +79,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 研究续打教师按 [AGENTS](../../AGENTS.md) 取批次开始时已核验的最新 danMCai 真冠军，普通最新导出不能冒充。专项训练教师与网页接入验收目标分开；此追加要求不改变网页默认模型或菜单。
 
 2026-11-06 窗口结论：未通过预先登记的双头独立门槛，网页保留原贡还行为，候选、数据及负结果保留。 [完整结果](../../ai/research/evaluation/tribute-20261106-final.json)。
+
+## Clint 策略身份
+
+菜单中的 Clint 始终指独立 `rules-v2` 路线；路线名称不固定其全部历史策略。当前源码修订与比较边界见 [规则模块](../src/rule-bot/README.md#公开牌史策略更新) 和 [同步状态](../../ai/research/evaluation/clint-sync-state.json)。更新 Clint 不改六项菜单、冠军默认或神经网络权重。旧开发／独立成绩继续绑定当时的三个规则源码指纹。

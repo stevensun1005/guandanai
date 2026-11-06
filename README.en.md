@@ -41,6 +41,8 @@ Empty seats are filled by bots. Play alone or with up to three friends. Keep the
 
 Use the lobby’s start-settings dialog to set each team’s level, the active team, the previous finishing order and failed A attempts. Desktop/tablet name plates are symmetric, card backs can be hidden, and rotation/fullscreen changes reflow without rewriting the viewport. The new final-chance option gives the other team one A attempt after a team has exhausted three; the table shows A1/A2/A3 or A末. Straight-flush selection now counts combinations and clears the selection after a full cycle.
 
+Clint’s standalone rules include single-card following, level-card/joker priorities and partner lead-type inference from public history. See the [rule module](web/src/rule-bot/README.md#公开牌史策略更新); neural policies remain independent.
+
 ## What is included
 
 Online rounds with at least two people are archived as structured, pseudonymous records after completion. The host uploads once, with offline retry and deduplication. Private JSON exports and human-action JSONL preparation are available; collected data is not automatically fed into active training. See [collection and export](./web/collector/README.md).

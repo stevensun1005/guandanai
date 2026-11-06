@@ -56,8 +56,26 @@ with sync_playwright() as p:
         assert result['valid'],(model,result)
     neural=page.evaluate("replies.filter(x=>x.type==='decide').map(x=>x.model)")
     assert sorted(neural)==sorted(selected),neural
+    strategy=page.evaluate("""async()=>{
+      const results={},deck=makeDeck();
+      for(const [name,ranks,winner,rank,paid] of [
+        ['singleAlong',[14,5,5,3,3,3],2,10,false],
+        ['levelFirst',[7,7,16,17,5,5,3,3,3],3,14,false],
+        ['firstJoker',[17,5,5,3,3,3],3,7,false],
+        ['tributeException',[17,5,5,3,3,3],3,7,true]]){
+        TableBot.cancelTurn();resetGame();const used=new Set();
+        const hand=ranks.map(r=>{const c=deck.find(c=>c.r===r&&c.s!=='H'&&!used.has(c.id));used.add(c.id);return c});
+        const c=deck.find(c=>c.r===rank&&c.s!=='H'&&!used.has(c.id));
+        const play={...analyze([c],7)[0],cards:[c]};
+        Object.assign(G,{L:7,hands:[hand,new Array(20),new Array(20),new Array(20)],trick:{player:winner,play},log:[{p:winner,...play,lead:true}],trib:paid?[{g:2,tc:deck.find(c=>c.r===8)}]:[],phase:'prep',clock:null,round:1});
+        botModels=['clint-rule','clint-rule','clint-rule','clint-rule'];
+        const p=await TableBot.decide(0);results[name]=p?{type:p.type,value:p.value}:null;
+      }
+      return results;
+    }""")
+    assert strategy == {'singleAlong':{'type':'single','value':14},'levelFirst':{'type':'single','value':15},'firstJoker':None,'tributeException':{'type':'single','value':17}},strategy
     assert not errors,errors
-    report={'actualRuleReplies':rule_turns,'allRuleGameNeuralDownloads':0,'wasmModels':neural,'fixtureScope':'Eight real opening actions; five controlled compatibility decisions, no strength estimates','pageErrors':errors}
+    report={'actualRuleReplies':rule_turns,'allRuleGameNeuralDownloads':0,'wasmModels':neural,'strategyFixtures':strategy,'fixtureScope':'Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates','pageErrors':errors}
     (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print(json.dumps(report))
     browser.close()

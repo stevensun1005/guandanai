@@ -454,6 +454,44 @@ function plainBomb(list, L) {
     i = lv.indexOf(power(b));
   return list.find((u) => !u.wu && lv.indexOf(power(u)) - i <= AIP.bombPlainGap) || b;
 }
+// Latest partner-led kinds lost to an opponent without another partner play.
+function mateBeatenKinds(p) {
+  const m = (p + 2) % 4,
+    lg = runtime.game.log || [],
+    out = [];
+  let lead = null,
+    mateAgain = false,
+    win = null;
+  const close = () => {
+    if (
+      lead &&
+      !mateAgain &&
+      win &&
+      win.p % 2 !== m % 2 &&
+      ['pair', 'full', 'straight'].includes(lead.type)
+    ) {
+      const i = out.indexOf(lead.type);
+      if (i >= 0) out.splice(i, 1);
+      out.unshift(lead.type);
+    }
+  };
+  for (const e of lg) {
+    if (e.cards && e.lead) {
+      close();
+      lead = e.p === m ? e : null;
+      mateAgain = false;
+      win = e;
+      continue;
+    }
+    if (!lead) continue;
+    if (e.cards) {
+      win = e;
+      if (e.p === m) mateAgain = true;
+    }
+  }
+  close();
+  return out;
+}
 function aiLead(p, units, plays, ph) {
   const hand = runtime.game.hands[p],
     L = runtime.game.L;
@@ -522,6 +560,12 @@ function aiLead(p, units, plays, ph) {
       if (other.length) return pickLead(other, p);
       return of(t).reduce((m, u) => (u.value > m.value ? u : m));
     }
+  if (AIP.rMateTypeLead && mateLeft) {
+    for (const t of mateBeatenKinds(p)) {
+      const c = of(t).sort((a, b) => a.value - b.value || b.n - a.n)[0];
+      if (c) return c;
+    }
+  }
   const st = AIP.rLeadMate || AIP.rDry ? passStats() : null;
 
   if (AIP.rLeadMate && tierOf(p) >= 3 && mateStronger(p)) {
@@ -698,12 +742,27 @@ function feedMate(p, cur) {
   if (xn === 5 && (couldMake(pool, 'full', 0) || couldMake(pool, 'straight', 0))) return null;
   return pick(['full', 'straight']);
 }
+function smallSingle(units, cur) {
+  if (!cur || cur.type !== 'single') return null;
+  return (
+    units
+      .filter(
+        (u) =>
+          u.type === 'single' &&
+          !isBomb(u) &&
+          !u.wu &&
+          u.value <= AIP.singleAlongMax &&
+          beats(u, cur),
+      )
+      .sort((a, b) => a.value - b.value)[0] || null
+  );
+}
 function aiChoose(p) {
   const hand = runtime.game.hands[p],
     L = runtime.game.L,
     cur = runtime.game.trick ? runtime.game.trick.play : null;
   tierOf(p);
-  const plays = genPlays(hand, L).filter((pl) => beats(pl, cur));
+  let plays = genPlays(hand, L).filter((pl) => beats(pl, cur));
   if (!plays.length) return null;
   const fin = plays.find((pl) => pl.cards.length === hand.length);
 
@@ -762,6 +821,10 @@ function aiChoose(p) {
       if (top) return top;
     }
 
+    if (AIP.rSingleAlong) {
+      const s = smallSingle(units, cur);
+      if (s) return s;
+    }
     if (AIP.rGoAlong) {
       const along = units
         .filter(
@@ -830,11 +893,47 @@ function aiChoose(p) {
   const four = (b) =>
     AIP.rFourBomb && winLeft === 4 && !(isTop(b, out()) && restCost(hand, b, L) <= 1);
 
+  if (AIP.rMateFirstJoker && cur.type === 'single' && cur.value < 16 && mateYet()) {
+    const mine = cur.cards || [];
+    const firstSingle = !(runtime.game.log || []).some(
+      (e) =>
+        e.cards &&
+        e.type === 'single' &&
+        e.p % 2 !== p % 2 &&
+        !e.cards.some((c) => mine.some((x) => x.id === c.id)),
+    );
+    const m = (p + 2) % 4;
+    const mateNoSmall = (runtime.game.trib || []).some(
+      (t) => t.g === m && t.tc && val(t.tc, L) < 16,
+    );
+    const singles = plays.filter((x) => x.type === 'single');
+    if (
+      firstSingle &&
+      !mateNoSmall &&
+      singles.length &&
+      singles.every((x) => x.cards[0].r === 17)
+    ) {
+      plays = plays.filter((x) => x.type !== 'single' || x.cards[0].r !== 17);
+      units = units.filter((u) => u.type !== 'single' || u.cards[0].r !== 17);
+      if (!plays.length) return null;
+    }
+  }
   if (AIP.rBombBack && isBomb(cur)) {
     const d = bombBack(p, units, cur, winLeft, ph, mateYet);
     if (d) return d.pl && four(d.pl) ? null : d.pl || null;
   }
 
+  if (AIP.rSingleAlong) {
+    const s = smallSingle(units, cur);
+    if (s) return s;
+  }
+  if (AIP.rLevelFirst && cur.type === 'single' && cur.value < 15) {
+    const lv = plays.find(
+      (x) =>
+        x.type === 'single' && x.cards.length === 1 && x.cards[0].r === L && !isWild(x.cards[0], L),
+    );
+    if (lv) return lv;
+  }
   if (AIP.rPureFit) {
     const pure = units
       .filter(

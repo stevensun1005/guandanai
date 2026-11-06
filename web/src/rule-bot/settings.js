@@ -95,4 +95,9 @@ export const RULE_SETTINGS = Object.freeze({
   rBombPlain: 1,
   bombPlainGap: 6,
   rLeadPartner: 1,
+  rSingleAlong: 1,
+  singleAlongMax: 14,
+  rLevelFirst: 1,
+  rMateTypeLead: 1,
+  rMateFirstJoker: 1,
 });
