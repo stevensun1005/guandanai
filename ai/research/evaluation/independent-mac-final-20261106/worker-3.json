@@ -1,0 +1,11 @@
+{
+  "shard": 3,
+  "pid": 301,
+  "phase": "complete",
+  "failure": null,
+  "currentTask": "latest-mixed-clint",
+  "completedPairs": 2500,
+  "protocolSHA256": "c57bb719368f85fc1f063ab0d688c29ccdd31c023af7f87d49ded595ca1c5239",
+  "updatedAtUTC": "2026-11-06T22:39:09.771Z",
+  "rssBytes": 424017920
+}

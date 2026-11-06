@@ -1,6 +1,6 @@
 # 持续自对弈训练
 
-**2026-11-05 交接状态：**Windows `gpu-main` 的本轮时限已结束，原运行保留，不再自动重启。当前所有者仅授权 MacBook 接手一个 24 小时窗口，环境、完整迁移包、MPS 预检和固定截止启动器见 [MAC_HANDOFF](MAC_HANDOFF.md)。以下 CPU／ROCm 示例用于理解既有运行，不是本次在 Windows 重启训练的指令。
+**2026-11-06 交接状态：**Windows `gpu-main` 和 Mac 唯一 24 小时窗口均已结束，原运行保留，不自动重启。随后固定独立整局比较已完成，冠军与最终学习器尚无明确强弱差异。恢复包、匹配 Adam、Windows 新目录准备和只读 GPU 验证见 [WINDOWS_RETURN](WINDOWS_RETURN_20261106.md)；历史 Mac 启动、固定截止和收尾证据见 [MAC_HANDOFF](MAC_HANDOFF.md)。以下 CPU／ROCm 示例用于理解既有运行，不是本次重启训练的指令。
 
 本文说明 danMCai 的联赛／冠军门控路线。GuanZero 使用独立的逐局 DMC、GPU 合批与只读面板，四类开发对手及旧检出补评方式见 [GuanZero README](../guanzero/README.md)。当前网页默认danMCai 实际冠军，普通新导出和 GuanZero 更新不覆盖它；[发布规则](../../web/docs/WEB_MODELS.md)。冻结运行按其原配置保留原版规则对手，不因名称变更自动切换到 Clint。
 
@@ -292,3 +292,7 @@ Mac 真机启动后修正可用内存口径：`vm_stat` free + inactive 页用�
 ## GuanZero 开发评测更新
 
 GuanZero 与 danMCai 的训练配置分开。其五类开发对手现含真实 danMCai 门控冠军，每类默认 250 对／500 场完整比赛；冻结训练的补充进程、断点续跑、面板进度和历史结果边界见 [GuanZero 运行协议](../guanzero/README.md#开发评测对手)。仅改变开发评测，不改变当前学习器、采样参数或网页默认模型。
+
+## 已结束窗口返回 Windows
+
+`prepare-windows-return.py` 从校验通过的 Mac 快照准备新的 Windows 运行目录，继承最终学习器和匹配 Adam、回放及累计计数，单独登记源码、后端和种子变化。`verify-windows-return.py` 只读核对网络、Adam、回放，并在指定 CPU／cuda:0 后端前向与恢复优化器，不执行更新。完整命令和目的机验证边界见 [Windows 返回交接](WINDOWS_RETURN_20261106.md)。准备不启动训练、不复制已过期 schedule、不覆盖旧 Windows 运行；新的时长和固定截止在下一轮明确后建立。

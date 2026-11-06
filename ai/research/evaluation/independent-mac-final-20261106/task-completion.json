@@ -1,0 +1,11 @@
+{
+  "observedAtUTC": "2026-11-06T22:50:35.817988+00:00",
+  "firstClockUTC": "2026-11-06T22:27:35Z",
+  "hardTaskDeadlineUTC": "2026-11-07T03:20:00Z",
+  "evaluationCompletedBeforeDeadline": true,
+  "windowsBundleDeliveredAndVerified": true,
+  "trainingRestarted": false,
+  "optionalStoppingByOutcome": false,
+  "maximumFiveHoursExceeded": false,
+  "publicationPending": true
+}

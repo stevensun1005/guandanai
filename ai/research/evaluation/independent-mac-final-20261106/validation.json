@@ -1,0 +1,46 @@
+{
+  "observedAtUTC": "2026-11-06T22:40:29.482924+00:00",
+  "completePairs": 10000,
+  "completeRounds": 20000,
+  "allFrozenSourceHashesStillMatch": true,
+  "allCompressedRawFilesRestoreExactly": true,
+  "missingOrRepeatedPairs": 0,
+  "pairedDealsDiffer": 0,
+  "corruptionChecks": [
+    {
+      "corruption": "incomplete-pair",
+      "rejected": true,
+      "reason": "Incomplete position-swap pair"
+    },
+    {
+      "corruption": "wrong-reward",
+      "rejected": true,
+      "reason": "Invalid final round reward"
+    },
+    {
+      "corruption": "missing-pair",
+      "rejected": true,
+      "reason": "Missing preregistered seed pairs"
+    }
+  ],
+  "initialLaunchFailure": {
+    "reason": "Sandbox disallowed lowering OS process priority; no games produced. Identical protocol restarted outside sandbox, original attempt retained locally.",
+    "completedPairs": 0
+  },
+  "nodeTestsPassed": 216,
+  "transferTestsPassed": 4,
+  "windowsPreparationTestsPassed": 3,
+  "researchTestsPassed": 12,
+  "optimizerUpdatesExecuted": 0,
+  "webChampionChanged": false,
+  "format": "passed",
+  "build": "b8a4af6b4c",
+  "pythonSyntax": "passed",
+  "webRuntimeOrModelChanged": false,
+  "preregistrationCI": {
+    "runId": 42305453935,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/stevensun1005/guandanai/actions/runs/42305453935"
+  }
+}

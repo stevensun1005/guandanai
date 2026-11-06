@@ -1,0 +1,9 @@
+{
+  "observedAtUTC": "2026-11-06T22:44:15.590409+00:00",
+  "activeTrainingOrEvaluationProcesses": [],
+  "oldMacStillStopped": true,
+  "latestStepStill1013906": true,
+  "scheduleSHA256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+  "oldMacDeadlineUTC": "2026-11-06T21:58:13.414Z",
+  "newTrainingStarted": false
+}

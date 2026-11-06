@@ -1,0 +1,30 @@
+{
+  "archive": "ai/danMCai/workspace/windows-return-20261106/danMCai-Windows-return-20261106-ready.zip",
+  "bytes": 421964889,
+  "sha256": "29ca8cee2ab41eb0132b92440ade8969818c719a3c8fdd430c7e8920483f77e2",
+  "payloadFiles": 785,
+  "uncompressedPayloadBytes": 478543471,
+  "sourceBaseCommit": "b74dbf569659e78348d78179e20f8776f3087baa",
+  "manifestSHA256": "94228efb33ca70fcf3a784d8c4f7c2bce976845d68a083ea510d9fedea14f30d",
+  "innerTrainingArchiveSHA256": "ab6e7e7b65dd67d855d943a41f408f1e4182d8283c5173e8b1376223b2b9ac4a",
+  "unrelatedHistoricalBinariesExcludedFromSourceCopy": 146,
+  "allCurrentRunFilesRetainedInInnerArchive": 610,
+  "trainingStarted": false,
+  "optimizerUpdatesExecuted": 0,
+  "windowsGPUActuallyTested": false,
+  "deliveredAtUTC": "2026-11-06T22:49:56.026921+00:00",
+  "deliveryPath": "/Users/stevensun/Downloads/danMCai-Windows-return-20261106-ready.zip",
+  "deliveryChecksumPath": "/Users/stevensun/Downloads/danMCai-Windows-return-20261106-ready.zip.sha256",
+  "downloadCopySHA256Verified": true,
+  "outerRestore": {
+    "snapshot": "/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/windows-return-20261106/verified-bundle",
+    "verifiedFiles": 785,
+    "innerTrainingArchiveSHA256Matches": true,
+    "restoredProjectTrainingSourceMatchesPreparedProtocol": true,
+    "restoredProjectContainsRecoveryTools": true,
+    "noNodeModulesOrGitIncluded": true
+  },
+  "restorationCPUCheck": "ai/research/evaluation/independent-mac-final-20261106/windows-restoration-check.json",
+  "instructions": "ai/research/WINDOWS_RETURN_20261106.md",
+  "role": "Private Windows return package; complete present Mac state inside immutable inner ZIP; no new training authorization/duration or GPU validation claim"
+}

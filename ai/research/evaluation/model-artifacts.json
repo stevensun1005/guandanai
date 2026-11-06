@@ -3558,6 +3558,21 @@
       "verifiedFiles": 610,
       "evidence": "ai/research/evaluation/mac-24h-20261106.json",
       "download": null
+    },
+    {
+      "id": "windows-return-20261106",
+      "path": "ai/danMCai/workspace/windows-return-20261106/danMCai-Windows-return-20261106-ready.zip",
+      "deliveryPath": "/Users/stevensun/Downloads/danMCai-Windows-return-20261106-ready.zip",
+      "archiveSHA256": "29ca8cee2ab41eb0132b92440ade8969818c719a3c8fdd430c7e8920483f77e2",
+      "archiveBytes": 421964889,
+      "verifiedFiles": 785,
+      "innerMacStateVerifiedFiles": 610,
+      "step": 1013906,
+      "checkpointSHA256": "8c7041a3cf3b8446b9b050585a5d2467c17db8e179410c84fd62a89cf21675d6",
+      "championVersion": "v000855042",
+      "role": "Private Windows return bundle, prepared without training; matching final Adam, retained replay, frozen state, source and independent round evaluation",
+      "evidence": "ai/research/evaluation/independent-mac-final-20261106/windows-package.json",
+      "download": null
     }
   ],
   "webModels": {
@@ -3813,6 +3828,37 @@
       "winRate": 0.788,
       "target80Supported": false,
       "scope": "Only two model-006 seats versus two unchanged original rule seats; no old-model improvement or promotion claim"
+    },
+    {
+      "id": "independent-mac-final-20261106",
+      "models": {
+        "champion": {
+          "version": "v000855042",
+          "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+        },
+        "latest": {
+          "version": "v001013906",
+          "sha256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e"
+        },
+        "p0": {
+          "version": "v000000000",
+          "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422"
+        },
+        "previous": {
+          "version": "v000705434",
+          "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+        }
+      },
+      "results": "ai/research/evaluation/independent-mac-final-20261106/results.json",
+      "protocol": "ai/research/evaluation/independent-mac-final-20261106/protocol.json",
+      "rawIndex": "ai/research/evaluation/independent-mac-final-20261106/raw-index.json",
+      "pairs": 10000,
+      "rounds": 20000,
+      "unit": "single round",
+      "primaryWinner": "inconclusive",
+      "meanLatestMinusChampionHeadToHeadPoints": 0.0055,
+      "scope": "Fixed specified models; exact same deal swapped between teams; no training, automatic champion promotion or coaching claim",
+      "windowsReturnPackage": "ai/research/evaluation/independent-mac-final-20261106/windows-package.json"
     }
   ],
   "guanzeroDevelopmentEvidence": [

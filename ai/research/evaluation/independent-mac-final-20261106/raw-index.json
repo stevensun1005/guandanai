@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "file": "worker-0.jsonl.gz",
+      "sha256": "bfac8fc876dc09c5c0d10d8304f487dca14dbe7e4eac62abdabe7b428c7af1f7",
+      "bytes": 150205,
+      "uncompressedSHA256": "b75221e9d613b70a5946f86c241ef4819f23ce97bcbed7b7b9c270a36efc128c",
+      "pairs": 2500,
+      "rounds": 5000
+    },
+    {
+      "file": "worker-1.jsonl.gz",
+      "sha256": "c7065211dbb1f475f26aebcc837d407be712f940ad6f8c1705313378158d33d8",
+      "bytes": 150159,
+      "uncompressedSHA256": "937a42199ec4c69a9b08095591f8deef96bb162be5def96a4dac48a8143207df",
+      "pairs": 2500,
+      "rounds": 5000
+    },
+    {
+      "file": "worker-2.jsonl.gz",
+      "sha256": "c3b600695b0e33df584007391f9a2b11927fe6cee0d29a3ae3b3b68a950a7d41",
+      "bytes": 149723,
+      "uncompressedSHA256": "560a0acdc25ff763b9f24ce7121d61700a841248c1beb40544fab25ec4e6b71f",
+      "pairs": 2500,
+      "rounds": 5000
+    },
+    {
+      "file": "worker-3.jsonl.gz",
+      "sha256": "bb8f8bc2f66d9064eb7824368539abd8635c6f3d5c7f53752bd4bd1f0e1c1155",
+      "bytes": 149879,
+      "uncompressedSHA256": "d8249252c41cc5ccab64273d072b4d4b22006f22282755b5a4f4c5b8779573ff",
+      "pairs": 2500,
+      "rounds": 5000
+    }
+  ],
+  "pairs": 10000,
+  "rounds": 20000,
+  "trainingData": false,
+  "humanGames": false
+}

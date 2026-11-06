@@ -169,6 +169,8 @@ A [read-only stop audit](ai/research/CONTINUOUS_TRAINING.md#固定窗口的停�
 
 The final champion from this Mac window has been verified on the website, and the window-specific publication check has ended. A new training window requires separate authorization; see the [final handoff](ai/research/MAC_HANDOFF.md).
 
+The fixed paired single-round comparison is complete and found no clear strength difference between the champion and final learner. Training remains stopped. See the [Windows return handoff](ai/research/WINDOWS_RETURN_20261106.md) for the checked model/Adam/replay bundle and next-experiment recommendations.
+
 GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current 48-hour window, playing 500 matches against each of three opponents. See the [training guide](ai/guanzero/README.md).
 
 Research continuation games use the verified danMCai champion frozen at batch start. Teacher changes and inherited work are tracked in the [specialist protocol](ai/shared/tribute/README.md).

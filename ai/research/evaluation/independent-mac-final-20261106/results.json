@@ -1,0 +1,496 @@
+{
+  "schema": 1,
+  "id": "independent-mac-final-20261106",
+  "completedAtUTC": "2026-11-06T22:39:45.536104+00:00",
+  "purpose": "Independent held-out single-round comparison of two owner-specified fixed models; no training and no champion promotion",
+  "protocolSHA256": "c57bb719368f85fc1f063ab0d688c29ccdd31c023af7f87d49ded595ca1c5239",
+  "models": {
+    "champion": {
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "file": "models/champion.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "latest": {
+      "version": "v001013906",
+      "sha256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+      "file": "models/latest.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "p0": {
+      "version": "v000000000",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "file": "models/p0.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "previous": {
+      "version": "v000705434",
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "file": "models/previous.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "one complete round to finishing order",
+    "level": "seeded uniform 2..A",
+    "leader": "seeded uniform seat",
+    "tribute": false,
+    "tributeReason": "Fresh independent deals, no preceding round; not a tribute or full-match evaluation",
+    "maxTurns": 1000,
+    "truncation": "error, not draw"
+  },
+  "pipeline": "Native ONNX CPU one thread; raw neural argmax over canonical candidates, no web personality/endgame/finishing shortcut, no Clint heuristics added to neural policies. Clint independent rules-v2 own-hand/public-only.",
+  "pairing": "Exactly the same 108 card IDs at the same seats, level and first leader; swap model/team allocation between parity 0 and 1. Mixed focal seat alternates between teammates by seed parity. Both games must complete to count a pair.",
+  "statistics": {
+    "primary": "Mean signed round upgrade points of latest vs champion, averaged within each seed pair; 95% paired-cluster normal CI, 1.96*sampleSD/sqrt(n). Positive supports latest, negative champion, crossing zero inconclusive.",
+    "secondary": "Both models vs Clint/P0/previous and with Clint teammate vs two Clint. Same seed across candidates; analyze latest-minus-champion paired-cluster signed-point difference. Four secondary contrasts with Bonferroni 98.75% CIs (z=2.4977054744). Do not pool opponents into one win rate.",
+    "alsoReport": "Actual W/L/D, mean signed points, finishing-rank pairs, double-wins/losses, mean turns; seed-cluster uncertainty. No optional stopping by outcome or sample expansion.",
+    "decision": "Report primary and heterogeneous secondary effects separately; no forced overall winner when uncertainty or matchup reversal remains. No automatic webpage champion replacement.",
+    "statisticsSeed": 2026110622
+  },
+  "plannedPairs": 10000,
+  "completedPairs": 10000,
+  "completedRounds": 20000,
+  "reports": {
+    "head-to-head": {
+      "model": "latest",
+      "opponent": "champion",
+      "mixed": false,
+      "pairs": 2000,
+      "rounds": 4000,
+      "wins": 2006,
+      "losses": 1994,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 2000,
+        "mean": 0.0055,
+        "standardError": 0.026897427587139307,
+        "ci": [
+          -0.04721895807079304,
+          0.05821895807079304
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 2000,
+        "mean": 0.5015,
+        "standardError": 0.006316155627512314,
+        "ci": [
+          0.4891203349700758,
+          0.5138796650299241
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 928,
+        "13": 396,
+        "14": 682,
+        "23": 693,
+        "24": 360,
+        "34": 941
+      },
+      "meanTurns": 81.37925
+    },
+    "champion-vs-clint": {
+      "model": "champion",
+      "opponent": "clint",
+      "mixed": false,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1175,
+      "losses": 825,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.5495,
+        "standardError": 0.04358554174780267,
+        "ci": [
+          0.46407233817430676,
+          0.6349276618256933
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.5875,
+        "standardError": 0.009730798448145889,
+        "ci": [
+          0.5684276350416341,
+          0.606572364958366
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 697,
+        "13": 183,
+        "14": 295,
+        "23": 324,
+        "24": 174,
+        "34": 327
+      },
+      "meanTurns": 87.0975
+    },
+    "latest-vs-clint": {
+      "model": "latest",
+      "opponent": "clint",
+      "mixed": false,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1180,
+      "losses": 820,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.531,
+        "standardError": 0.04269498637851829,
+        "ci": [
+          0.44731782669810416,
+          0.6146821733018959
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.59,
+        "standardError": 0.009459888450161002,
+        "ci": [
+          0.5714586186376844,
+          0.6085413813623155
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 678,
+        "13": 182,
+        "14": 320,
+        "23": 325,
+        "24": 154,
+        "34": 341
+      },
+      "meanTurns": 87.0675
+    },
+    "champion-vs-p0": {
+      "model": "champion",
+      "opponent": "p0",
+      "mixed": false,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1033,
+      "losses": 967,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.078,
+        "standardError": 0.039255024607774185,
+        "ci": [
+          0.0010601517687626044,
+          0.1549398482312374
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.5165,
+        "standardError": 0.009031019284073604,
+        "ci": [
+          0.4987992022032157,
+          0.5342007977967842
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 507,
+        "13": 211,
+        "14": 315,
+        "23": 306,
+        "24": 187,
+        "34": 474
+      },
+      "meanTurns": 81.3075
+    },
+    "latest-vs-p0": {
+      "model": "latest",
+      "opponent": "p0",
+      "mixed": false,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1022,
+      "losses": 978,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.0715,
+        "standardError": 0.038976363438716376,
+        "ci": [
+          -0.004893672339884095,
+          0.1478936723398841
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.511,
+        "standardError": 0.008885829052933551,
+        "ci": [
+          0.49358377505625023,
+          0.5284162249437497
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 494,
+        "13": 192,
+        "14": 336,
+        "23": 340,
+        "24": 195,
+        "34": 443
+      },
+      "meanTurns": 81.7235
+    },
+    "champion-vs-previous": {
+      "model": "champion",
+      "opponent": "previous",
+      "mixed": false,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 988,
+      "losses": 1012,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": -0.021,
+        "standardError": 0.039422241350703456,
+        "ci": [
+          -0.09826759304737878,
+          0.05626759304737877
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.494,
+        "standardError": 0.009330115275335619,
+        "ci": [
+          0.4757129740603422,
+          0.5122870259396578
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 461,
+        "13": 216,
+        "14": 311,
+        "23": 335,
+        "24": 198,
+        "34": 479
+      },
+      "meanTurns": 80.979
+    },
+    "latest-vs-previous": {
+      "model": "latest",
+      "opponent": "previous",
+      "mixed": false,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 998,
+      "losses": 1002,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": -0.053,
+        "standardError": 0.037770591968059194,
+        "ci": [
+          -0.12703036025739603,
+          0.021030360257396026
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.499,
+        "standardError": 0.00889258556765568,
+        "ci": [
+          0.4815705322873949,
+          0.5164294677126051
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 416,
+        "13": 222,
+        "14": 360,
+        "23": 323,
+        "24": 202,
+        "34": 477
+      },
+      "meanTurns": 81.5675
+    },
+    "champion-mixed-clint": {
+      "model": "champion",
+      "opponent": "clint",
+      "mixed": true,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1090,
+      "losses": 910,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.2725,
+        "standardError": 0.04542088513896231,
+        "ci": [
+          0.1834750651276339,
+          0.36152493487236614
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.545,
+        "standardError": 0.009877883000550907,
+        "ci": [
+          0.5256393493189203,
+          0.5643606506810798
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 592,
+        "13": 187,
+        "14": 311,
+        "23": 336,
+        "24": 142,
+        "34": 432
+      },
+      "meanTurns": 88.4835
+    },
+    "latest-mixed-clint": {
+      "model": "latest",
+      "opponent": "clint",
+      "mixed": true,
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1106,
+      "losses": 894,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.274,
+        "standardError": 0.041281086808950755,
+        "ci": [
+          0.19308906985445656,
+          0.3549109301455435
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.553,
+        "standardError": 0.009234515486817719,
+        "ci": [
+          0.5349003496458373,
+          0.5710996503541628
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 541,
+        "13": 184,
+        "14": 381,
+        "23": 333,
+        "24": 192,
+        "34": 369
+      },
+      "meanTurns": 89.2885
+    }
+  },
+  "secondaryContrasts": {
+    "vs-clint": {
+      "clusters": 1000,
+      "mean": -0.0185,
+      "standardError": 0.0553847923641971,
+      "ci": [
+        -0.1568348990865624,
+        0.1198348990865624
+      ],
+      "z": 2.4977054744,
+      "method": "Normal approximation using independent seed-pair sample SD",
+      "confidenceLevel": 0.9875,
+      "direction": "latest minus champion"
+    },
+    "vs-p0": {
+      "clusters": 1000,
+      "mean": -0.0065,
+      "standardError": 0.05209050941554682,
+      "ci": [
+        -0.13660675053149604,
+        0.12360675053149603
+      ],
+      "z": 2.4977054744,
+      "method": "Normal approximation using independent seed-pair sample SD",
+      "confidenceLevel": 0.9875,
+      "direction": "latest minus champion"
+    },
+    "vs-previous": {
+      "clusters": 1000,
+      "mean": -0.032,
+      "standardError": 0.053947997056298456,
+      "ci": [
+        -0.16674620758043174,
+        0.10274620758043174
+      ],
+      "z": 2.4977054744,
+      "method": "Normal approximation using independent seed-pair sample SD",
+      "confidenceLevel": 0.9875,
+      "direction": "latest minus champion"
+    },
+    "mixed-clint": {
+      "clusters": 1000,
+      "mean": 0.0015,
+      "standardError": 0.05671388026060476,
+      "ci": [
+        -0.14015456920137861,
+        0.14315456920137862
+      ],
+      "z": 2.4977054744,
+      "method": "Normal approximation using independent seed-pair sample SD",
+      "confidenceLevel": 0.9875,
+      "direction": "latest minus champion"
+    }
+  },
+  "primaryWinner": "inconclusive",
+  "primaryInterpretation": "Latest perspective; 95% seed-cluster CI for signed upgrade points",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}
