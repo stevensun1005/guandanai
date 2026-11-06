@@ -63,3 +63,19 @@ node ai/guanzero/training/development-suite.mjs --run=<冻结运行目录> --fro
 GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二输出头；它不是主 LSTM 的权重合并，不干预当前续训。只在进还贡阶段、固定 SHA 底座验收通过后启用，不改变普通出牌策略。
 
 进还贡专项标签的续打教师统一采用 danMCai 真冠军；GuanZero 是单独的接入验收对象，不把其普通导出称作冠军。主训练对手池保持冻结，详见 [专项协议](../shared/tribute/README.md)。
+
+## 每八小时评测
+
+本次本地 io48 窗口以训练起点计时。第 8 小时的批次按追加要求在 Toronto 11 月 6 日 09:38 用当时最新完整导出 138506 启动。接下来在训练第 16、24、32、40、48 小时取样，对应 Toronto 11 月 6 日 14:12、22:12 和 7 日 06:12、14:12、22:12 左右。最后一批等训练正常退出后读取最终完整导出。每批五个对手为随机、原版规则、P0、Clint 和获 accept 的 danMCai 冠军，各 250 对交换阵营、500 场。仅从完整逐场报告计算成绩。
+
+在 Windows 本机，Codex 八小时任务先核对活动 launcher、冻结源码、最新发布清单和冠军。使用独立发布检出执行以下命令。登记器以训练槽位和完整 SHA 去重。第 24 小时交给原监督器，对应种子 4,210,000,000–4,210,000,249。窗口其它批次分别使用各自的种子段，各段起点相隔 100,000。
+
+```powershell
+node ai/guanzero/training/register-window-suite.mjs C:/guandan-sampler/work/guanzero/dashboard-launcher.json
+```
+
+对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。第 24 小时只检查原监督器。若错过取样时段，记录漏测原因。每四小时的网页发布继续独立归档已完成的报告。
+
+```powershell
+node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --once
+```
