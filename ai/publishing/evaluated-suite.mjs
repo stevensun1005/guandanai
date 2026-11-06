@@ -5,7 +5,7 @@ import { validSuiteReport } from '../guanzero/training/suite-reports.mjs';
 import {
   DEFAULT_OPPONENTS,
   LEGACY_FIVE_OPPONENTS,
-  FOUR_OPPONENT_PANEL,
+  THREE_OPPONENT_PANEL,
 } from '../guanzero/training/opponents.mjs';
 import { sha256 } from './artifacts.mjs';
 
@@ -17,11 +17,11 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   const plan = await read(join(suite, 'plan.json'));
   const manifest = await read(join(parent, 'manifest.json'));
   // Unmarked historical plans always require all five reports. A missing report
-  // cannot turn an old batch into a new four-opponent batch.
+  // cannot turn an old batch into a new three-opponent batch.
   const legacy = plan.opponentPanel === undefined;
   const panel = legacy ? LEGACY_FIVE_OPPONENTS : DEFAULT_OPPONENTS;
   if (
-    (!legacy && plan.opponentPanel !== FOUR_OPPONENT_PANEL) ||
+    (!legacy && plan.opponentPanel !== THREE_OPPONENT_PANEL) ||
     (source.run === 'guanzero-adp-io48' && legacy !== (plan.index === 5098)) ||
     resolve(input) !== join(suite, 'model.onnx') ||
     basename(parent) !== 'development-500' ||
@@ -80,7 +80,7 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   }
   return {
     protocol: plan.protocol,
-    opponentPanel: legacy ? 'legacy-five' : FOUR_OPPONENT_PANEL,
+    opponentPanel: legacy ? 'legacy-five' : THREE_OPPONENT_PANEL,
     modelSHA256: digest,
     seedStart: plan.seedStart,
     seedEnd: plan.seedEnd,
