@@ -7,5 +7,16 @@
   "trainingRestarted": false,
   "optionalStoppingByOutcome": false,
   "maximumFiveHoursExceeded": false,
-  "publicationPending": true
+  "publicationPending": false,
+  "completedAtUTC": "2026-11-06T22:54:11.049112+00:00",
+  "publishedSourceCommit": "5e11dc7aa8d466d92c59b872d0f89a63f2943784",
+  "CI": {
+    "runId": 42307775431,
+    "url": "https://github.com/stevensun1005/guandanai/actions/runs/42307775431",
+    "commit": "5e11dc7aa8d466d92c59b872d0f89a63f2943784",
+    "build": "success",
+    "browserSmokeTests": "success",
+    "pagesDeploy": "success"
+  },
+  "elapsedMinutesFromFirstClock": 26.6
 }

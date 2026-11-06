@@ -42,5 +42,23 @@
     "status": "completed",
     "conclusion": "success",
     "url": "https://github.com/stevensun1005/guandanai/actions/runs/42305453935"
+  },
+  "finalSourceCI": {
+    "runId": 42307775431,
+    "url": "https://github.com/stevensun1005/guandanai/actions/runs/42307775431",
+    "commit": "5e11dc7aa8d466d92c59b872d0f89a63f2943784",
+    "build": "success",
+    "browserSmokeTests": "success",
+    "pagesDeploy": "success"
+  },
+  "packagedToolFingerprints": {
+    "allPackagedToolsMatchFinalSource": true,
+    "sha256": {
+      "ai/danMCai/evaluation/evaluate-round-pairs.mjs": "75a65f2ea60081bda870ea5b85151b7f64db1b13cb96db8f914ee54a5d966a28",
+      "ai/danMCai/evaluation/summarize-round-pairs.py": "51458d6e1bd80e37691f6edddb24eb6bd040e8790f5e35863a6ffa40ca27a199",
+      "ai/danMCai/training/continuous/transfer.py": "d040df2ace8cb9b66ae7485aaf6b692416be8549a1487f847161481237a8b06a",
+      "ai/danMCai/training/continuous/prepare-windows-return.py": "0b210a8984cff94d52daab501a310ed05c142e976728553ac0a3e23822e7b692",
+      "ai/danMCai/training/continuous/verify-windows-return.py": "2d19776aedc058a0ebdda90ed833a8452657844ebecf72ab1828e4240010971e"
+    }
   }
 }
