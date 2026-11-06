@@ -47,3 +47,5 @@ node ai/shared/tribute/dashboard.mjs --run=<同一目录> --port=8789
 原 `tribute-20261106` 批次已停止，原始样本与全部权重保留。停止状态原字节保存为 `progress-at-champion-transition.json`；其 `progress.json` 此后只作为同一面板端口的实时视图，带 `monitoringView` 与 `activeRun` 指向继任批次，不能再用作旧批次结果。新目录 `ai/danMCai/runs/tribute-champion-20261106/` 单独存储新数据。旧网络与 Adam 完整继承，累计步数与本批新增步数分开，旧数据不直接混入新缓冲。
 
 准备命令增加 `--inherit-run=<已停止旧批次>` 和 `--python=<GPU环境Python>`。继承器验证旧协议／检查点 SHA，只改新副本的协议元数据，逐项核对网络和优化器张量，拒绝覆盖原数据。训练／开发游标接续旧批次已消费位置，新样本用未使用的后续种子；独立留出仍未开启。截止仍是 **11月6日08:00 Toronto**。
+
+2026-11-06 窗口结论：未通过预先登记的双头独立门槛，网页保留原贡还行为，候选、数据及负结果保留。 [完整结果](../../research/evaluation/tribute-20261106-final.json)。

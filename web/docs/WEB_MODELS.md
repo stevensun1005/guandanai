@@ -77,3 +77,5 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 `src/ai/tribute-model.json` 独立于六项主模型菜单，当前默认关闭。共享双头网络只在已批准底座 SHA 的进贡／还贡阶段使用，danMCai 和 GuanZero 各一个输出头；Clint、P0、未验收的新底座和真人选择继续用原流程。Worker 只收到本人手牌和公开贡还上下文，先核对完整权重 SHA，再用单线程 WASM 推理。加载失败或超时回退原贡还，旧房间缺失上下文也回退；不改变打牌网络或评价分数。详见 [专项协议](../../ai/shared/tribute/README.md)。
 
 研究续打教师按 [AGENTS](../../AGENTS.md) 取批次开始时已核验的最新 danMCai 真冠军，普通最新导出不能冒充。专项训练教师与网页接入验收目标分开；此追加要求不改变网页默认模型或菜单。
+
+2026-11-06 窗口结论：未通过预先登记的双头独立门槛，网页保留原贡还行为，候选、数据及负结果保留。 [完整结果](../../ai/research/evaluation/tribute-20261106-final.json)。

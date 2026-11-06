@@ -4678,15 +4678,10 @@
   "specialistExperiments": [
     {
       "id": "tribute-20261106",
-      "status": "training-running-adapter-disabled",
-      "evidence": "tribute-20261106-preflight.json",
-      "weights": "ignored run directory; no public release yet",
-      "launchEvidence": "tribute-20261106-launch.json",
-      "formalIndependentStrengthRounds": 0,
-      "teacherTransitionEvidence": "tribute-20261106-teacher-transition.json",
-      "resumedEvidence": "tribute-20261106-teacher-resumed.json",
-      "currentRun": "tribute-champion-20261106",
-      "teacherSHA256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+      "status": "rejected-preserved",
+      "sha256": "b1d74ac7632ec8eb956f88b86fef7ef66184aaf50bf821fa302d4a761a95e24e",
+      "evidence": "tribute-20261106-final.json",
+      "release": null
     }
   ]
 }

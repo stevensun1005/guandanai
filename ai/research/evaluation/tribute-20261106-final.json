@@ -1,0 +1,7269 @@
+{
+  "schema": 1,
+  "kind": "independent-complete-round-and-browser",
+  "createdUTC": "2026-11-06T13:01:44.911Z",
+  "deployedSpecialist": false,
+  "mainNetworksUnchanged": true,
+  "finalizerCommit": "e7ec268640dbba30422ced5e045facce40d963f9",
+  "frozenTrainingCommit": "3b0ec91dd570cecd6bf50720133ae7adeaa124ef",
+  "protocol": {
+    "schema": 1,
+    "protocolRevision": 2,
+    "experiment": "tribute-20261106",
+    "kind": "development-training",
+    "sourceCommit": "3b0ec91dd570cecd6bf50720133ae7adeaa124ef",
+    "deadlineUTC": "2026-11-06T13:00:00.000Z",
+    "deadlineEpochSeconds": 1793970000,
+    "timezone": "America/Toronto",
+    "objective": "completed-round signed upgrade points, centered within decision",
+    "encoding": "public-tribute-389-v1",
+    "architecture": [
+      389,
+      256,
+      128,
+      2
+    ],
+    "models": [
+      {
+        "id": "012",
+        "file": "bot-012.onnx",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "bytes": 5368650,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.010Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
+        }
+      },
+      {
+        "id": "014",
+        "file": "bot-014.onnx",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1",
+        "bytes": 6346014,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-014/bot-014.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54,
+          "history": "guanzero-v1"
+        },
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000104257",
+          "status": "experimental-not-heldout-accepted",
+          "step": 104257,
+          "registeredAt": "2026-11-06T05:42:10.604Z"
+        }
+      }
+    ],
+    "rolloutModels": [
+      {
+        "id": "012",
+        "file": "bot-012.onnx",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "bytes": 5368650,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.010Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
+        }
+      },
+      {
+        "id": "012",
+        "file": "bot-012.onnx",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "bytes": 5368650,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.010Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
+        }
+      }
+    ],
+    "teacherPolicy": "latest-verified-danMCai-champion-at-batch-start",
+    "lineage": {
+      "parentRun": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\tribute-20261106",
+      "parentProtocolSHA256": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2",
+      "previousProgress": {
+        "iteration": 2455,
+        "trainSeeds": 2207,
+        "developmentSeeds": 248,
+        "trainingGroups": 1941,
+        "developmentGroups": 214,
+        "rows": 30254,
+        "completedCounterfactualRounds": 30254,
+        "skippedCases": 299,
+        "pid": 12168,
+        "kind": "development-training",
+        "startedUTC": "2026-11-06T06:51:47.994Z",
+        "deadlineUTC": "2026-11-06T13:00:00.000Z",
+        "protocolSHA": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2",
+        "stage": "awaiting-fusion",
+        "sourceModels": [
+          {
+            "id": "012",
+            "version": "v000705434",
+            "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+          },
+          {
+            "id": "014",
+            "version": "model-000000104257",
+            "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1"
+          }
+        ],
+        "teachers": [
+          {
+            "requestedProvider": "dml",
+            "mode": "dml-requested-cpu-node-fallback-possible",
+            "calls": 878477,
+            "candidates": 38423989,
+            "inferenceMs": 1085439.3182999333,
+            "rounds": 15255
+          },
+          {
+            "requestedProvider": "dml",
+            "mode": "dml-requested-cpu-node-fallback-possible",
+            "calls": 800928,
+            "candidates": 36801304,
+            "inferenceMs": 1182927.691300167,
+            "rounds": 15002
+          }
+        ],
+        "current": {
+          "seed": 3800002206,
+          "head": 1,
+          "stage": "return",
+          "split": "train",
+          "completed": 3,
+          "total": 20
+        },
+        "learner": {
+          "stage": "trained",
+          "device": "cuda:0",
+          "deviceName": "AMD Radeon RX 7800 XT",
+          "parameters": 132994,
+          "step": 1220,
+          "newUpdates": 480,
+          "trainingGroups": 1695,
+          "trainingRows": 23807,
+          "developmentGroups": 186,
+          "development": {
+            "groups": [
+              93,
+              93
+            ],
+            "meanCounterfactualGain": [
+              -0.41935483870967744,
+              -0.5376344086021505
+            ],
+            "mse": 2.5800147095240744
+          },
+          "bestUpdated": false,
+          "loss": 2.6692416667938232,
+          "elapsedSeconds": 2.5160000000032596
+        },
+        "lastTrainingOutput": "{\"stage\": \"trained\", \"device\": \"cuda:0\", \"deviceName\": \"AMD Radeon RX 7800 XT\", \"parameters\": 132994, \"step\": 1220, \"newUpdates\": 480, \"trainingGroups\": 1695, \"trainingRows\": 23807, \"developmentGroups\": 186, \"development\": {\"groups\": [93, 93], \"meanCounterfactualGain\": [-0.41935483870967744, -0.5376344086021505], \"mse\": 2.5800147095240744}, \"bestUpdated\": false, \"loss\": 2.6692416667938232, \"elapsedSeconds\": 2.5160000000032596}\r\n",
+        "stoppedUTC": "2026-11-06T07:38:39.120Z",
+        "stopReason": "operator-stop",
+        "best": {
+          "version": "tribute-v000000140",
+          "step": 140,
+          "sha256": "085514eacd43625dd34e7501a98a5760989975c8f5862fcc7d275fdbb28d82af",
+          "file": "best.onnx",
+          "development": {
+            "groups": [
+              25,
+              26
+            ],
+            "meanCounterfactualGain": [
+              -0.64,
+              -0.4230769230769231
+            ],
+            "mse": 2.490056269651498
+          },
+          "protocolSHA256": "487b396f362c9b632db2732876861542015f49dc2295b7de265f0a67447e2aa2"
+        },
+        "note": "Training stopped at deadline; run finalize-tribute with preserved weights",
+        "updatedUTC": "2026-11-06T07:38:39.122Z",
+        "freeGiB": 8.657707214355469,
+        "rssMiB": 426.6484375,
+        "cpuCorePercent": 92.32343469362999
+      },
+      "checkpointSHA256": "8accb522cb3b1c2c1fd0b88deeb9156bcd88b3f1514db27acba7541bb899f51f"
+    },
+    "progressMirror": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\tribute-20261106\\progress.json",
+    "heads": [
+      "danMCai",
+      "GuanZero"
+    ],
+    "provider": "dml",
+    "delayMs": 0,
+    "seedAllocation": {
+      "smoke": [
+        3799000000,
+        3799999999
+      ],
+      "train": [
+        3800000000,
+        3899999999
+      ],
+      "development": [
+        3900000000,
+        3999999999
+      ],
+      "independent": [
+        4000000000,
+        4000000127
+      ]
+    },
+    "independentProtocol": {
+      "pairsPerHead": 128,
+      "team": "two specialist-equipped bots versus two identical frozen teachers with historical original tribute",
+      "seatSwap": true,
+      "metric": "signed upgrade-point difference per seed pair",
+      "acceptance": "both head mean differences >= 0, at least one > 0, and both lower 95% seed-cluster bootstrap confidence limits >= 0; otherwise preserve current web behavior",
+      "scope": "single complete round; not full match through A"
+    },
+    "resources": {
+      "samplers": 1,
+      "nativeThreads": 1,
+      "priority": "below-normal",
+      "minimumFreeGiB": 4
+    },
+    "finalizeRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\tribute-learning-20261106",
+    "sourceSHA256": {
+      "ai/shared/tribute/awake_until.py": "71dac8d42b6e8de80f62da3c26ab6589e83a84c1c613d69574d76d1b63d84016",
+      "ai/shared/tribute/browser-fixtures.mjs": "78ee578df85ed22d4f1841ce400b3da517cec48c88dfe251c44f2c0883d12b0b",
+      "ai/shared/tribute/champion.mjs": "1827101a9c74ee8fbec18acb38c28ef7dace49bf721dc8651cee63d3bd1c3d11",
+      "ai/shared/tribute/dataset.mjs": "cc1716f5191701635e3238096b3be2e17644edd58d2d5ef90a6fa9d2d3abca7d",
+      "ai/shared/tribute/encoding.mjs": "9d101d6dc9333a265fe9e02278c7e40e24f9ce3eb0dc413b4491a00f0ce94310",
+      "ai/shared/tribute/evaluate.mjs": "f7b958094f3f4a644d99c35b320b7c244d2179bc54d47145175940523ce974d9",
+      "ai/shared/tribute/inherit.py": "5401282eebe96356a4444cd3f847cd1d706c55ef2dc1eadec9c356ff9297e3e4",
+      "ai/shared/tribute/neural.mjs": "9f48f9bc854e4e359705fa4caa184b271c5eca5900e3a4d5849d333e45e4a90f",
+      "ai/shared/tribute/prepare.mjs": "545d5188545d34a821a7f1bbaac3c22536a268b454ca7a2899ee40eae23fe191",
+      "ai/shared/tribute/run.mjs": "0252ffd68c5eed3d3fe4418c38e4ea3c6ef387fbd002398ff5ec931fc73f47fd",
+      "ai/shared/tribute/scenarios.mjs": "2ab07651f5bc2578a678f091b6db100313baaf30196e690b5467c0a0cc743983",
+      "ai/shared/tribute/select.mjs": "bd55ed90b01a889bf441912804439be7e2edd2165771559509dcc663eb4b8e56",
+      "ai/shared/tribute/train.py": "2f5683c4d04a5bb6ad479363a984c9097b6210df58e5c043c056066a2c2df11f",
+      "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+      "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+      "ai/shared/simulation/policy-inference.mjs": "13189396bc494b24d2457ee2373ccdf6aec22bb610106679b6011390069fbf09",
+      "ai/shared/simulation/policy-rollout.mjs": "5d4b478b57d390c6cffb20eeb26465f09b4962c6c93f9af0be77866c1025df0f",
+      "ai/shared/simulation/public-ending.mjs": "1a7f2815f80f86d3a5b61613db631b91e949a680bfd5f034d26bb9a3156fb8a2",
+      "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+      "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+      "ai/shared/simulation/table-inference.mjs": "97494c9e943d8313b93ca23c1f01f6af4a278e14d8c87b03769f2736e696c025",
+      "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+      "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "web/src/core/validation.js": "f12723cca66b153086ef7ea9be668e69ac6638ee1378b2e2990c4431f8de6abb",
+      "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "web/src/ai/controller.js": "e15b165b2f661fd44a551e76f3ca99d20f90047d8e5c67b5184429bda5f06f72",
+      "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+      "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+      "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+      "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+      "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+      "web/src/ai/model-catalog.mjs": "8265bcd26858112a747c0bea7263d807dd6942a5a41e61f687720b4428add7a2",
+      "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+      "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+      "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+      "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+      "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+      "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+      "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+      "web/src/ai/tribute-observation.mjs": "003e540856a8f7cd5e3f5bce44a592b7e2e5089fb3ded60cd9c2bca3ec7c3285",
+      "web/src/ai/tribute-specialist.mjs": "e5439246020316b80b6522cab4edf644bf9a768cfb13e08fb34ab070fb2bd83b",
+      "web/src/ai/tribute-worker.mjs": "2aa3e1525125821a0d21c3779c4bfd6a0a8dca135657da92e16205b29543aba2",
+      "web/src/ai/worker.mjs": "82126a74eba8e99e8692e37d4ff1e76e32d6e0e283ebdfed039a608b89da5952",
+      "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+      "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+      "ai/danMCai/training/continuous/benchmark-device.py": "e6b815c31d29f33b5181d07c6cf09b0d80cdea79b815aea09db5c3f7deb252bf",
+      "ai/danMCai/training/continuous/explore-cost.mjs": "b3ad754629a6a485d7f470786819ffce31404dc93de7bce3b0aca5ae3f566477",
+      "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+      "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+      "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+      "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+      "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+      "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+      "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+      "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+      "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3",
+      "ai/danMCai/training/continuous/mac_preflight.py": "a923b8c565b657fc075846e22dbab622ec33bf0464f44b882effbf2e2279a733",
+      "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+      "ai/danMCai/training/continuous/remote-actors.mjs": "4c01a877b51999f73e2d835ae9ff96e65d2e3a2be1b273ac5460f3a529b73ceb",
+      "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+      "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+      "ai/danMCai/training/continuous/sources.mjs": "f7a2082c84d210b9681d8aed0d2cc6a2c7de175d93df51e23f5b21a6f9d822ed",
+      "ai/danMCai/training/continuous/status.mjs": "fe3450de7eb5a59df922783a32e7dd3abb064a714a0bb64898336311fdade9d3",
+      "ai/danMCai/training/continuous/supervisor.mjs": "4350ebb4d95fb71d5dbebdc77614ba9e91c2c22de1d44f40f4472912b7928b0b",
+      "ai/danMCai/training/continuous/transfer.py": "70e9817c365566a86290d18c8bcf78ab9828bc21241443651cdfc20e58147614",
+      "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+      "ai/danMCai/training/continuous/dashboard/app.mjs": "0edf0309b74feed5551159975d3aaa0d85b0a3c40debfac1f67137433bbd9672"
+    }
+  },
+  "protocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6",
+  "training": {
+    "iteration": 19592,
+    "trainSeeds": 17632,
+    "developmentSeeds": 1960,
+    "trainingGroups": 13555,
+    "developmentGroups": 1496,
+    "rows": 212346,
+    "completedCounterfactualRounds": 212346,
+    "skippedCases": 2085,
+    "pid": 37760,
+    "kind": "development-training",
+    "startedUTC": "2026-11-06T07:46:34.411Z",
+    "deadlineUTC": "2026-11-06T13:00:00.000Z",
+    "protocolSHA": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6",
+    "stage": "fusion-validation",
+    "inheritedStep": 1220,
+    "sourceModels": [
+      {
+        "id": "012",
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+      },
+      {
+        "id": "012",
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2"
+      }
+    ],
+    "teachers": [
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 6141261,
+        "candidates": 270872162,
+        "inferenceMs": 7418607.842699878,
+        "rounds": 105806
+      },
+      {
+        "requestedProvider": "dml",
+        "mode": "dml-requested-cpu-node-fallback-possible",
+        "calls": 6178511,
+        "candidates": 270467144,
+        "inferenceMs": 7459005.373199846,
+        "rounds": 106552
+      }
+    ],
+    "current": {
+      "seed": 3800017631,
+      "head": 1,
+      "stage": "return",
+      "split": "train",
+      "completed": 12,
+      "total": 17
+    },
+    "learner": {
+      "stage": "trained",
+      "device": "cuda:0",
+      "deviceName": "AMD Radeon RX 7800 XT",
+      "parameters": 132994,
+      "step": 59300,
+      "newUpdates": 3720,
+      "trainingGroups": 13455,
+      "trainingRows": 189931,
+      "developmentGroups": 1486,
+      "development": {
+        "groups": [
+          749,
+          737
+        ],
+        "meanCounterfactualGain": [
+          -0.2857142857142857,
+          -0.2225237449118046
+        ],
+        "mse": 3.7684663860566827
+      },
+      "bestUpdated": false,
+      "loss": 1.4361310005187988,
+      "elapsedSeconds": 13.156000000002678
+    },
+    "lastTrainingOutput": "{\"stage\": \"trained\", \"device\": \"cuda:0\", \"deviceName\": \"AMD Radeon RX 7800 XT\", \"parameters\": 132994, \"step\": 59300, \"newUpdates\": 3720, \"trainingGroups\": 13455, \"trainingRows\": 189931, \"developmentGroups\": 1486, \"development\": {\"groups\": [749, 737], \"meanCounterfactualGain\": [-0.2857142857142857, -0.2225237449118046], \"mse\": 3.7684663860566827}, \"bestUpdated\": false, \"loss\": 1.4361310005187988, \"elapsedSeconds\": 13.156000000002678}\r\n",
+    "stoppedUTC": "2026-11-06T13:00:00.085Z",
+    "stopReason": "time-limit",
+    "best": {
+      "version": "tribute-v000055580",
+      "step": 55580,
+      "sha256": "b1d74ac7632ec8eb956f88b86fef7ef66184aaf50bf821fa302d4a761a95e24e",
+      "file": "best.onnx",
+      "development": {
+        "groups": [
+          725,
+          715
+        ],
+        "meanCounterfactualGain": [
+          -0.22482758620689655,
+          -0.26153846153846155
+        ],
+        "mse": 3.676966994139204
+      },
+      "protocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6"
+    },
+    "updatedUTC": "2026-11-06T13:00:00.087Z",
+    "freeGiB": 7.877433776855469,
+    "rssMiB": 469.4921875,
+    "cpuCorePercent": 85.5621933272802
+  },
+  "candidate": {
+    "version": "tribute-v000055580",
+    "step": 55580,
+    "sha256": "b1d74ac7632ec8eb956f88b86fef7ef66184aaf50bf821fa302d4a761a95e24e",
+    "file": "best.onnx",
+    "development": {
+      "groups": [
+        725,
+        715
+      ],
+      "meanCounterfactualGain": [
+        -0.22482758620689655,
+        -0.26153846153846155
+      ],
+      "mse": 3.676966994139204
+    },
+    "protocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6"
+  },
+  "evaluation": {
+    "schema": 1,
+    "kind": "independent-complete-round",
+    "candidate": {
+      "version": "tribute-v000055580",
+      "step": 55580,
+      "sha256": "b1d74ac7632ec8eb956f88b86fef7ef66184aaf50bf821fa302d4a761a95e24e",
+      "file": "best.onnx",
+      "development": {
+        "groups": [
+          725,
+          715
+        ],
+        "meanCounterfactualGain": [
+          -0.22482758620689655,
+          -0.26153846153846155
+        ],
+        "mse": 3.676966994139204
+      },
+      "protocolSHA256": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6"
+    },
+    "protocolSHA": "779fc13056d4fabef7391c56f002f5c3028a5a9bf58f82eccf151d3d9f88c1f6",
+    "models": [
+      {
+        "id": "012",
+        "file": "bot-012.onnx",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "bytes": 5368650,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.010Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
+        }
+      },
+      {
+        "id": "014",
+        "file": "bot-014.onnx",
+        "sha256": "b752ee8b8cfc572aae50c2b0fecc0e20f0db29f9d2309b14cb14d7f153e5d5d1",
+        "bytes": 6346014,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-014/bot-014.onnx",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54,
+          "history": "guanzero-v1"
+        },
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000104257",
+          "status": "experimental-not-heldout-accepted",
+          "step": 104257,
+          "registeredAt": "2026-11-06T05:42:10.604Z"
+        }
+      }
+    ],
+    "seedBase": 4000000000,
+    "pairs": 128,
+    "heads": [
+      [
+        {
+          "seed": 4000000000,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000000,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000001,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 67
+        },
+        {
+          "seed": 4000000001,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000002,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000002,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000003,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 73
+        },
+        {
+          "seed": 4000000003,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 73
+        },
+        {
+          "seed": 4000000004,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000004,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000005,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000005,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000006,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000006,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000007,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000007,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 103
+        },
+        {
+          "seed": 4000000008,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 60
+        },
+        {
+          "seed": 4000000008,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000009,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000009,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000010,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 106
+        },
+        {
+          "seed": 4000000010,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000011,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000011,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 4000000012,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000012,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000013,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000013,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000014,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000014,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 111
+        },
+        {
+          "seed": 4000000015,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000015,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000016,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000016,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000017,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 52
+        },
+        {
+          "seed": 4000000017,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 48
+        },
+        {
+          "seed": 4000000018,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 115
+        },
+        {
+          "seed": 4000000018,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000019,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000019,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000020,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000020,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000021,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000021,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000022,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 95
+        },
+        {
+          "seed": 4000000022,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000023,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 62
+        },
+        {
+          "seed": 4000000023,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 62
+        },
+        {
+          "seed": 4000000024,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000024,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000025,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000025,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000026,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000026,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000027,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 73
+        },
+        {
+          "seed": 4000000027,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 104
+        },
+        {
+          "seed": 4000000028,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 4000000028,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000029,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 110
+        },
+        {
+          "seed": 4000000029,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000030,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000030,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000031,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000031,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000032,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000032,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 98
+        },
+        {
+          "seed": 4000000033,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 4000000033,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000034,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000034,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 102
+        },
+        {
+          "seed": 4000000035,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000035,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000036,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000036,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000037,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000037,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000038,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000038,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000039,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 65
+        },
+        {
+          "seed": 4000000039,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000040,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000040,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000041,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000041,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000042,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000042,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000043,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000043,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 100
+        },
+        {
+          "seed": 4000000044,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000044,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000045,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000045,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000046,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000046,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000047,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 4000000047,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000048,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000048,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 95
+        },
+        {
+          "seed": 4000000049,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000049,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000050,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000050,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000051,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000051,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 106
+        },
+        {
+          "seed": 4000000052,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000052,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000053,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000053,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000054,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000054,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000055,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000055,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 60
+        },
+        {
+          "seed": 4000000056,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 73
+        },
+        {
+          "seed": 4000000056,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000057,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000057,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000058,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000058,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000059,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 53
+        },
+        {
+          "seed": 4000000059,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 4000000060,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 95
+        },
+        {
+          "seed": 4000000060,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 95
+        },
+        {
+          "seed": 4000000061,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000061,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000062,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 60
+        },
+        {
+          "seed": 4000000062,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000063,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 62
+        },
+        {
+          "seed": 4000000063,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000064,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000064,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 64
+        },
+        {
+          "seed": 4000000065,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000065,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000066,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 105
+        },
+        {
+          "seed": 4000000066,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 105
+        },
+        {
+          "seed": 4000000067,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000067,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000068,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000068,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000069,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000069,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000070,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000070,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000071,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000071,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000072,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000072,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000073,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000073,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 101
+        },
+        {
+          "seed": 4000000074,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000074,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000075,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 59
+        },
+        {
+          "seed": 4000000075,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 64
+        },
+        {
+          "seed": 4000000076,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000076,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000077,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000077,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000078,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 73
+        },
+        {
+          "seed": 4000000078,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000079,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000079,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000080,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000080,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000081,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000081,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000082,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000082,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 95
+        },
+        {
+          "seed": 4000000083,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000083,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000084,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000084,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 4000000085,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 67
+        },
+        {
+          "seed": 4000000085,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000086,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000086,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000087,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000087,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000088,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 60
+        },
+        {
+          "seed": 4000000088,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000089,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000089,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000090,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000090,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000091,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000091,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000092,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000092,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000093,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000093,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000094,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000094,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000095,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 103
+        },
+        {
+          "seed": 4000000095,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 120
+        },
+        {
+          "seed": 4000000096,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000096,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000097,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 106
+        },
+        {
+          "seed": 4000000097,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000098,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000098,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000099,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 56
+        },
+        {
+          "seed": 4000000099,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 34
+        },
+        {
+          "seed": 4000000100,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000100,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 95
+        },
+        {
+          "seed": 4000000101,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000101,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000102,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000102,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000103,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000103,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 64
+        },
+        {
+          "seed": 4000000104,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000104,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000105,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000105,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000106,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000106,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000107,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000107,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 108
+        },
+        {
+          "seed": 4000000108,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000108,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000109,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000109,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000110,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000110,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000111,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000111,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000112,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000112,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000113,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000113,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000114,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000114,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000115,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000115,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000116,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000116,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000117,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000117,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000118,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000118,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 101
+        },
+        {
+          "seed": 4000000119,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 57
+        },
+        {
+          "seed": 4000000119,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000120,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 98
+        },
+        {
+          "seed": 4000000120,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 98
+        },
+        {
+          "seed": 4000000121,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 109
+        },
+        {
+          "seed": 4000000121,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000122,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000122,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000123,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000123,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000124,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000124,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 67
+        },
+        {
+          "seed": 4000000125,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000125,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000126,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000126,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000127,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000127,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 89
+        }
+      ],
+      [
+        {
+          "seed": 4000000000,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000000,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000001,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000001,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000002,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000002,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 99
+        },
+        {
+          "seed": 4000000003,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000003,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000004,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000004,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 102
+        },
+        {
+          "seed": 4000000005,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000005,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000006,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000006,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000007,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000007,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000008,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000008,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000009,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000009,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000010,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000010,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000011,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000011,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000012,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000012,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 4000000013,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000013,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000014,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 71
+        },
+        {
+          "seed": 4000000014,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000015,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000015,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000016,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000016,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000017,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 64
+        },
+        {
+          "seed": 4000000017,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000018,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000018,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000019,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000019,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 4000000020,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000020,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000021,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000021,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 61
+        },
+        {
+          "seed": 4000000022,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000022,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000023,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000023,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000024,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000024,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000025,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000025,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000026,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000026,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000027,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000027,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 4000000028,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000028,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000029,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000029,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000030,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000030,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000031,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 100
+        },
+        {
+          "seed": 4000000031,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000032,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000032,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000033,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000033,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000034,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000034,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000035,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000035,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000036,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000036,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000037,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000037,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000038,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 103
+        },
+        {
+          "seed": 4000000038,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 103
+        },
+        {
+          "seed": 4000000039,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000039,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000040,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000040,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000041,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000041,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000042,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000042,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000043,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 103
+        },
+        {
+          "seed": 4000000043,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 110
+        },
+        {
+          "seed": 4000000044,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000044,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000045,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000045,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000046,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000046,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000047,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000047,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000048,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000048,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000049,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000049,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000050,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000050,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000051,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 69
+        },
+        {
+          "seed": 4000000051,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 64
+        },
+        {
+          "seed": 4000000052,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000052,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000053,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000053,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000054,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000054,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000055,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000055,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000056,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000056,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000057,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000057,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 115
+        },
+        {
+          "seed": 4000000058,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000058,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000059,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000059,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000060,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000060,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000061,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000061,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000062,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000062,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 77
+        },
+        {
+          "seed": 4000000063,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000063,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000064,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000064,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000065,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000065,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000066,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000066,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000067,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000067,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000068,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000068,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 98
+        },
+        {
+          "seed": 4000000069,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000069,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000070,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000070,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000071,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000071,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 106
+        },
+        {
+          "seed": 4000000072,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000072,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000073,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000073,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000074,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000074,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000075,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000075,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 78
+        },
+        {
+          "seed": 4000000076,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000076,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 99
+        },
+        {
+          "seed": 4000000077,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000077,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000078,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 93
+        },
+        {
+          "seed": 4000000078,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 65
+        },
+        {
+          "seed": 4000000079,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000079,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 63
+        },
+        {
+          "seed": 4000000080,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 99
+        },
+        {
+          "seed": 4000000080,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000081,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 85
+        },
+        {
+          "seed": 4000000081,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000082,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000082,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 4000000083,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000083,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 54
+        },
+        {
+          "seed": 4000000084,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000084,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000085,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000085,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 88
+        },
+        {
+          "seed": 4000000086,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000086,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000087,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 100
+        },
+        {
+          "seed": 4000000087,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000088,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 68
+        },
+        {
+          "seed": 4000000088,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000089,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 66
+        },
+        {
+          "seed": 4000000089,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 54
+        },
+        {
+          "seed": 4000000090,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000090,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 47
+        },
+        {
+          "seed": 4000000091,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000091,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000092,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000092,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000093,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000093,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000094,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 101
+        },
+        {
+          "seed": 4000000094,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 101
+        },
+        {
+          "seed": 4000000095,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 102
+        },
+        {
+          "seed": 4000000095,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000096,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000096,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000097,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000097,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000098,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            0,
+            1,
+            2
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000098,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000099,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 58
+        },
+        {
+          "seed": 4000000099,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 57
+        },
+        {
+          "seed": 4000000100,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000100,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000101,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000101,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000102,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000102,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            1,
+            3,
+            0
+          ],
+          "decisions": 91
+        },
+        {
+          "seed": 4000000103,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000103,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "decisions": 104
+        },
+        {
+          "seed": 4000000104,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000104,
+          "side": 1,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000105,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000105,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000106,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000106,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000107,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 87
+        },
+        {
+          "seed": 4000000107,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000108,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000108,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000109,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 90
+        },
+        {
+          "seed": 4000000109,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000110,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000110,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000111,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000111,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            2,
+            0,
+            3
+          ],
+          "decisions": 75
+        },
+        {
+          "seed": 4000000112,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000112,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "decisions": 79
+        },
+        {
+          "seed": 4000000113,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 115
+        },
+        {
+          "seed": 4000000113,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000114,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 97
+        },
+        {
+          "seed": 4000000114,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            3,
+            1,
+            2
+          ],
+          "decisions": 96
+        },
+        {
+          "seed": 4000000115,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000115,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000116,
+          "side": 0,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000116,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "decisions": 76
+        },
+        {
+          "seed": 4000000117,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 70
+        },
+        {
+          "seed": 4000000117,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "decisions": 108
+        },
+        {
+          "seed": 4000000118,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000118,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000119,
+          "side": 0,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "decisions": 86
+        },
+        {
+          "seed": 4000000119,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 74
+        },
+        {
+          "seed": 4000000120,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            0,
+            3,
+            2,
+            1
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000120,
+          "side": 1,
+          "winner": 0,
+          "points": 1,
+          "order": [
+            0,
+            1,
+            3,
+            2
+          ],
+          "decisions": 81
+        },
+        {
+          "seed": 4000000121,
+          "side": 0,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 80
+        },
+        {
+          "seed": 4000000121,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000122,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000122,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 72
+        },
+        {
+          "seed": 4000000123,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 84
+        },
+        {
+          "seed": 4000000123,
+          "side": 1,
+          "winner": 1,
+          "points": 2,
+          "order": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000124,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000124,
+          "side": 1,
+          "winner": 0,
+          "points": 3,
+          "order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "decisions": 94
+        },
+        {
+          "seed": 4000000125,
+          "side": 0,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            3,
+            0,
+            2,
+            1
+          ],
+          "decisions": 89
+        },
+        {
+          "seed": 4000000125,
+          "side": 1,
+          "winner": 1,
+          "points": 1,
+          "order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "decisions": 99
+        },
+        {
+          "seed": 4000000126,
+          "side": 0,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 82
+        },
+        {
+          "seed": 4000000126,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            1,
+            3,
+            0,
+            2
+          ],
+          "decisions": 83
+        },
+        {
+          "seed": 4000000127,
+          "side": 0,
+          "winner": 0,
+          "points": 2,
+          "order": [
+            2,
+            3,
+            0,
+            1
+          ],
+          "decisions": 92
+        },
+        {
+          "seed": 4000000127,
+          "side": 1,
+          "winner": 1,
+          "points": 3,
+          "order": [
+            3,
+            1,
+            2,
+            0
+          ],
+          "decisions": 79
+        }
+      ]
+    ],
+    "complete": true,
+    "updatedUTC": "2026-11-06T13:00:49.128Z",
+    "summaries": [
+      {
+        "rounds": 256,
+        "wins": 122,
+        "losses": 134,
+        "draws": 0,
+        "doubleUps": 58,
+        "doubleDowns": 69,
+        "signedPoints": -31,
+        "pairs": 128,
+        "winRate": 0.4765625,
+        "meanPairedPoints": -0.12109375,
+        "ci95": [
+          -0.3359375,
+          0.09765625
+        ]
+      },
+      {
+        "rounds": 256,
+        "wins": 117,
+        "losses": 139,
+        "draws": 0,
+        "doubleUps": 55,
+        "doubleDowns": 75,
+        "signedPoints": -60,
+        "pairs": 128,
+        "winRate": 0.45703125,
+        "meanPairedPoints": -0.234375,
+        "ci95": [
+          -0.4609375,
+          -0.01171875
+        ]
+      }
+    ],
+    "accepted": false,
+    "completedUTC": "2026-11-06T13:00:49.250Z"
+  },
+  "browser": {
+    "kind": "browser-compatibility-not-strength",
+    "candidateSHA256": "b1d74ac7632ec8eb956f88b86fef7ef66184aaf50bf821fa302d4a761a95e24e",
+    "states": 8,
+    "headDecisions": 16,
+    "maxAbsoluteError": 0.0000019073486328125,
+    "asyncTributeAndEarlyReturn": true,
+    "clintUnchanged": true,
+    "privateHandsNotSent": true,
+    "cards108": true,
+    "pageErrors": [],
+    "regressions": {
+      "tribute_smoke.py": "{\"cases\": [{\"highOnly\": false, \"automatedReturnLegal\": true, \"immediateHandCounts\": [27, 27, 27, 27], \"readyDuringFlightSafe\": true}, {\"highOnly\": true, \"automatedReturnLegal\": true, \"immediateHandCounts\": [27, 27, 27, 27], \"readyDuringFlightSafe\": true}], \"pageErrors\": []}",
+      "ready_transition_smoke.py": "{\"duplicateReadyIsIdempotent\": true, \"returnPhaseCommittedBeforeAnimation\": true, \"concurrentTransferRunsOnce\": true, \"eachHand27\": true, \"physicalCards108\": true, \"staleHoldCannotResetLead\": true, \"pageErrors\": []}",
+      "rejoin_smoke.py": "{\"hostDirection\": \"W\", \"guestDirection\": \"S\", \"refreshDuringPrep\": true, \"manualRoomCodeRecovery\": true, \"selectedLevelAndOnceRuleSync\": true, \"refreshDuringInFlightPolicy\": true, \"stalePolicyCancelled\": true, \"realGuestActionAfterReturn\": true, \"dataChannelAutomaticRecovery\": true, \"unknownSeatRejected\": true, \"sameCredential\": true, \"guestAvoidsModelDownload\": true, \"hostExitOffersSoloContinuation\": true, \"soloContinuationLoadsLearnedPolicy\": true, \"pageErrors\": []}"
+    }
+  },
+  "release": null,
+  "scope": "synthetic prior order/levels, completed single round; no full-match, human or Clint strength claim"
+}
