@@ -4161,6 +4161,315 @@
       },
       "protocol": "development-500-paired-full-match",
       "classification": "development-only-not-independent-acceptance"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-legacy-block-0000-20261105.json",
+      "reportSHA256": "a20bfb3572e3ba98d0c5c49fa6c1c54b1a0b2f79604e31936ec75060847ff987",
+      "protocol": "legacy-200",
+      "modelSHA256": "e211277fa6416c5cdbf167d324f21a5e3d13f36a708fd81fa80c934558edc81e",
+      "seedStart": 3700000000,
+      "seedEnd": 3700000099,
+      "pairs": 100,
+      "completedAt": "2026-11-05T02:43:42.634Z",
+      "results": {
+        "random": {
+          "matches": 200,
+          "wins": 3,
+          "losses": 176,
+          "draws": 21,
+          "matchWinRate": 0.015,
+          "matchScore": 0.0675,
+          "rounds": 1942,
+          "roundWins": 526,
+          "roundWinRate": 0.2708547888774459,
+          "averageUpgradePoints": -1.1498455200823894,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0.035
+            ],
+            "matchScore": [
+              0.0425,
+              0.0925
+            ],
+            "roundWinRate": [
+              0.2511676180591593,
+              0.28888888888888886
+            ],
+            "averageUpgradePoints": [
+              -1.245382585751979,
+              -1.0616608652411736
+            ]
+          }
+        },
+        "rule": {
+          "matches": 200,
+          "wins": 0,
+          "losses": 200,
+          "draws": 0,
+          "matchWinRate": 0,
+          "matchScore": 0,
+          "rounds": 1003,
+          "roundWins": 1,
+          "roundWinRate": 0.0009970089730807576,
+          "averageUpgradePoints": -2.993020937188435,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0,
+              0
+            ],
+            "roundWinRate": [
+              0,
+              0.00298804780876494
+            ],
+            "averageUpgradePoints": [
+              -3,
+              -2.9831013916500995
+            ]
+          }
+        },
+        "p0": {
+          "matches": 200,
+          "wins": 0,
+          "losses": 200,
+          "draws": 0,
+          "matchWinRate": 0,
+          "matchScore": 0,
+          "rounds": 1003,
+          "roundWins": 0,
+          "roundWinRate": 0,
+          "averageUpgradePoints": -2.9940179461615153,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0,
+              0
+            ],
+            "roundWinRate": [
+              0,
+              0
+            ],
+            "averageUpgradePoints": [
+              -3,
+              -2.9860973187686195
+            ]
+          }
+        }
+      },
+      "archivePurpose": "Recover exact historical raw reports; not new games or new acceptance"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-legacy-block-0001-20261105.json",
+      "reportSHA256": "01ec953e5f033644bdda9b0e9bb4dbd1b0d06a8e4fdb56f56240aa3696e739e5",
+      "protocol": "legacy-200",
+      "modelSHA256": "88064fb57d041abfd79f1a7952c40c418c0489ed7de2f0d85e5427fb370bee2d",
+      "seedStart": 3700100000,
+      "seedEnd": 3700100099,
+      "pairs": 100,
+      "completedAt": "2026-11-05T09:28:53.060Z",
+      "results": {
+        "random": {
+          "matches": 200,
+          "wins": 200,
+          "losses": 0,
+          "draws": 0,
+          "matchWinRate": 1,
+          "matchScore": 1,
+          "rounds": 1027,
+          "roundWins": 1021,
+          "roundWinRate": 0.994157740993184,
+          "averageUpgradePoints": 2.945472249269718,
+          "confidence95": {
+            "matchWinRate": [
+              1,
+              1
+            ],
+            "matchScore": [
+              1,
+              1
+            ],
+            "roundWinRate": [
+              0.989351403678606,
+              0.9980506822612085
+            ],
+            "averageUpgradePoints": [
+              2.921814671814672,
+              2.96767874632713
+            ]
+          }
+        },
+        "rule": {
+          "matches": 200,
+          "wins": 0,
+          "losses": 195,
+          "draws": 5,
+          "matchWinRate": 0,
+          "matchScore": 0.0125,
+          "rounds": 1509,
+          "roundWins": 207,
+          "roundWinRate": 0.13717693836978131,
+          "averageUpgradePoints": -1.8621603711066932,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0.0025,
+              0.0275
+            ],
+            "roundWinRate": [
+              0.11896668932698844,
+              0.15657894736842104
+            ],
+            "averageUpgradePoints": [
+              -1.9554489376285127,
+              -1.7662170841361593
+            ]
+          }
+        },
+        "p0": {
+          "matches": 200,
+          "wins": 0,
+          "losses": 200,
+          "draws": 0,
+          "matchWinRate": 0,
+          "matchScore": 0,
+          "rounds": 1223,
+          "roundWins": 78,
+          "roundWinRate": 0.06377759607522486,
+          "averageUpgradePoints": -2.44971381847915,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0,
+              0
+            ],
+            "roundWinRate": [
+              0.05128205128205128,
+              0.07661612130885874
+            ],
+            "averageUpgradePoints": [
+              -2.5191029900332227,
+              -2.381950040290089
+            ]
+          }
+        }
+      },
+      "archivePurpose": "Recover exact historical raw reports; not new games or new acceptance"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-legacy-block-0002-20261105.json",
+      "reportSHA256": "4f5481cd02ef479ae622eab3b8f7a106413e06e3b004c739a0aa458ca65807bb",
+      "protocol": "legacy-200",
+      "modelSHA256": "f9d57243fa320955c5b90253f07d452297750f65ef2efaf56a8503278b846e06",
+      "seedStart": 3700200000,
+      "seedEnd": 3700200099,
+      "pairs": 100,
+      "completedAt": "2026-11-05T15:31:46.343Z",
+      "results": {
+        "random": {
+          "matches": 200,
+          "wins": 200,
+          "losses": 0,
+          "draws": 0,
+          "matchWinRate": 1,
+          "matchScore": 1,
+          "rounds": 1017,
+          "roundWins": 1015,
+          "roundWinRate": 0.9980334316617503,
+          "averageUpgradePoints": 2.968534906588004,
+          "confidence95": {
+            "matchWinRate": [
+              1,
+              1
+            ],
+            "matchScore": [
+              1,
+              1
+            ],
+            "roundWinRate": [
+              0.9951028403525954,
+              1
+            ],
+            "averageUpgradePoints": [
+              2.9530791788856305,
+              2.983168316831683
+            ]
+          }
+        },
+        "rule": {
+          "matches": 200,
+          "wins": 7,
+          "losses": 182,
+          "draws": 11,
+          "matchWinRate": 0.035,
+          "matchScore": 0.0625,
+          "rounds": 1766,
+          "roundWins": 421,
+          "roundWinRate": 0.23839184597961494,
+          "averageUpgradePoints": -1.260475651189128,
+          "confidence95": {
+            "matchWinRate": [
+              0.01,
+              0.065
+            ],
+            "matchScore": [
+              0.035,
+              0.0925
+            ],
+            "roundWinRate": [
+              0.21696480092325446,
+              0.26005509641873276
+            ],
+            "averageUpgradePoints": [
+              -1.3755841121495327,
+              -1.1459369817578773
+            ]
+          }
+        },
+        "p0": {
+          "matches": 200,
+          "wins": 0,
+          "losses": 198,
+          "draws": 2,
+          "matchWinRate": 0,
+          "matchScore": 0.005,
+          "rounds": 1416,
+          "roundWins": 182,
+          "roundWinRate": 0.1285310734463277,
+          "averageUpgradePoints": -2.0190677966101696,
+          "confidence95": {
+            "matchWinRate": [
+              0,
+              0
+            ],
+            "matchScore": [
+              0,
+              0.0125
+            ],
+            "roundWinRate": [
+              0.10966810966810966,
+              0.1470790378006873
+            ],
+            "averageUpgradePoints": [
+              -2.1079710144927537,
+              -1.9366485013623977
+            ]
+          }
+        }
+      },
+      "archivePurpose": "Recover exact historical raw reports; not new games or new acceptance"
     }
   ],
   "guanzeroDevelopmentPlanArchives": [
