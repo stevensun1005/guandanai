@@ -1,7 +1,19 @@
 /** Register one eight-hour io48 checkpoint using the evaluator pinned by its launcher. */
-import { existsSync, openSync, closeSync, unlinkSync, realpathSync } from 'node:fs';
+import {
+  mkdirSync,
+  linkSync,
+  existsSync,
+  openSync,
+  closeSync,
+  unlinkSync,
+  realpathSync,
+} from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+
+import { FOUR_OPPONENT_PANEL } from './opponents.mjs';
+import { addSuite } from './development-suite.mjs';
+import { setTimeout as sleep } from 'node:timers/promises';
 
 export function windowSlot(window, now) {
   const start = Date.parse(window.startedAt);
@@ -18,7 +30,7 @@ export function windowSlot(window, now) {
   return { slot, index: window.seedIndex + slot - 3, due: start + slot * 8 * 3600000 };
 }
 
-async function register(launcherPath) {
+async function register(launcherPath, armMidpoint) {
   const base = dirname(realpathSync(launcherPath));
   const { readFileSync } = await import('node:fs');
   const launcher = JSON.parse(readFileSync(launcherPath, 'utf8'));
@@ -38,10 +50,17 @@ async function register(launcherPath) {
     throw Error('Frozen evaluator checkout changed');
   const load = (name) => import(pathToFileURL(join(sourceRoot, 'ai/guanzero/training', name)).href);
   const { readJSON, writeJSON, sha256 } = await load('lib.mjs');
-  const { addSuite } = await load('development-suite.mjs');
   const window = readJSON(join(run, 'window.json'));
-  const { slot, index, due } = windowSlot(window, Date.now());
-  if (slot === 3) return { slot, action: 'midpoint-supervisor' };
+  const midpoint = Date.parse(window.midpointAt);
+  if (armMidpoint) {
+    // The frozen supervisor reuses its named midpoint file and registered plan.
+    // Stage both just before its timer, leaving the running trainer untouched.
+    const target = midpoint - 30000;
+    console.log(JSON.stringify({ action: 'armed', prepareAt: new Date(target).toISOString() }));
+    if (Date.now() < target) await sleep(target - Date.now());
+    if (Date.now() >= midpoint - 10000) throw Error('Too late to stage the midpoint safely');
+  }
+  const { slot, index, due } = windowSlot(window, armMidpoint ? midpoint : Date.now());
   const directory = join(run, 'eval', 'development-500');
   const path = join(directory, 'manifest.json');
   const lock = join(directory, '.window-registration.lock');
@@ -50,7 +69,12 @@ async function register(launcherPath) {
     const manifest = readJSON(path);
     if (!manifest?.suites?.length) throw Error('Missing initial eight-hour suite');
     const existing = manifest.suites.find((p) => p.index === index);
-    if (existing) return { slot, action: 'registered', id: existing.id };
+    if (existing && slot !== 3) return { slot, action: 'registered', id: existing.id };
+    if (slot === 3 && !armMidpoint) {
+      if (!existing || existing.opponentPanel !== FOUR_OPPONENT_PANEL)
+        throw Error('Midpoint four-opponent plan missing; inspect supervisor');
+      return { slot, action: 'midpoint-supervisor', id: existing.id };
+    }
     if (Date.now() - due > 2 * 3600000)
       throw Error('Missed freeze window; do not backfill with a newer export');
     if (slot === 6 && existsSync(join(run, 'supervisor.lock')))
@@ -60,7 +84,10 @@ async function register(launcherPath) {
       throw Error('Wait for the midpoint supervisor');
     // The frozen one-shot worker only reads registered suites for this window.
     // The midpoint owns both registration and evaluation during its dedicated slot.
-    const latest = readJSON(join(run, 'models', 'latest.json'));
+    const latest =
+      existing && armMidpoint
+        ? { file: existing.modelVersion + '.onnx', version: Number(existing.modelVersion.slice(6)) }
+        : readJSON(join(run, 'models', 'latest.json'));
     if (
       !/^model-\d+\.onnx$/.test(latest.file) ||
       Number(latest.file.slice(6, -5)) !== latest.version
@@ -68,6 +95,11 @@ async function register(launcherPath) {
       throw Error('Invalid checkpoint identity');
     const model = join(run, 'models', latest.file),
       id = latest.file.slice(0, -5);
+    if (armMidpoint && existing) {
+      if (existing.opponentPanel !== FOUR_OPPONENT_PANEL) throw Error('Midpoint panel mismatch');
+      pinMidpoint(run, directory, existing, sha256);
+      return { slot, action: 'midpoint-ready', id };
+    }
     const digest = sha256(model);
     if (manifest.suites.some((p) => p.modelSHA256 === digest))
       return { slot, action: 'same-weights', sha256: digest };
@@ -75,6 +107,7 @@ async function register(launcherPath) {
     await addSuite(run, manifest, { id, version: id, model, championRoot: window.championRoot });
     const plan = manifest.suites.at(-1);
     if (plan.index !== index || plan.modelSHA256 !== digest) throw Error('Frozen plan mismatch');
+    if (armMidpoint) pinMidpoint(run, directory, plan, sha256);
     if (slot < 3) {
       manifest.seedIndexBase = window.seedIndex - manifest.suites.length;
       writeJSON(path, manifest);
@@ -86,7 +119,17 @@ async function register(launcherPath) {
   }
 }
 
+function pinMidpoint(run, directory, plan, sha256) {
+  const pinned = join(run, 'eval', 'midpoint-snapshot');
+  mkdirSync(pinned, { recursive: true });
+  const target = join(pinned, plan.modelVersion + '.onnx');
+  if (!existsSync(target)) linkSync(join(directory, plan.id, 'model.onnx'), target);
+  if (sha256(target) !== plan.modelSHA256) throw Error('Midpoint snapshot mismatch');
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   if (!process.argv[2]) throw Error('Pass the active dashboard-launcher.json path');
-  console.log(JSON.stringify(await register(process.argv[2])));
+  console.log(
+    JSON.stringify(await register(process.argv[2], process.argv.includes('--arm-midpoint'))),
+  );
 }

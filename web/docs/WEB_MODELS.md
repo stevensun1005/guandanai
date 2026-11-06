@@ -15,7 +15,7 @@
 
 ## GuanZero 每八小时评测并发布
 
-本机 io48 每 8 小时取一次快照。随机、原版规则、P0、Clint 和 danMCai 冠军各完成 500 场后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前核对五份完整报告、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席默认由 danMCai 冠军清单决定。[本机运行与时间表](../../ai/guanzero/README.md#每八小时评测)。
+本机 io48 每 8 小时取一次快照。随机、P0、Clint 和 danMCai 冠军各完成 500 场后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前核对四份完整报告（旧批次 138506 沿用原五份）、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席默认由 danMCai 冠军清单决定。[本机运行与时间表](../../ai/guanzero/README.md#每八小时评测)。
 
 ## danMCai 冠军定期同步
 
@@ -74,7 +74,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 
 出牌评价固定读取 `selection.danMCaiChampions[0]` 的完整danMCai 冠军，与座位选择的托管／电脑模型无关。冠军经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实版本；不使用普通最新导出冒充冠军。评分仅做网络动作值的候选范围换算，不更改默认模型、性格或机器人动作。[房主许可与分数说明](MOVE_COACH.md)。
 
-开发评测现含随机、original、P0、Clint 与真实 danMCai 冠军，每类默认 500 场，独立补评、历史样本及进度口径见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。周期同步也归档新协议各对手已完成的逐场证据，核对 250 对／500 场、模型及冠军 SHA、种子和源码指纹；进行中计数不是完成成绩，不影响网页冠军默认。
+开发评测现含随机、P0、Clint 与真实 danMCai 冠军，每类默认 500 场，独立补评、历史样本及进度口径见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。周期同步也归档新协议各对手已完成的逐场证据，核对 250 对／500 场、模型及冠军 SHA、种子和源码指纹；进行中计数不是完成成绩，不影响网页冠军默认。
 
 ## 进还贡专项组件（开发中）
 

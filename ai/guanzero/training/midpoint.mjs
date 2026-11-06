@@ -1,4 +1,4 @@
-/** Freeze one named checkpoint at the midpoint, then run five paired suites. */
+/** Freeze one named checkpoint at the midpoint, then evaluate the registered opponents. */
 import { copyFileSync, renameSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';

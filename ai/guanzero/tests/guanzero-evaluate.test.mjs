@@ -27,7 +27,7 @@ test('GuanZero swapped-seat metrics use each model team and each round outcome',
 import { DEFAULT_OPPONENTS, opponentDefinition } from '../training/opponents.mjs';
 import { RULE_OPPONENT_VERSION } from '../../shared/simulation/rule-baseline.mjs';
 test('GuanZero includes Clint without relabelling the historical original rule baseline', () => {
-  assert.deepEqual(DEFAULT_OPPONENTS, ['random', 'rule', 'p0', 'clint', 'champion']);
+  assert.deepEqual(DEFAULT_OPPONENTS, ['random', 'p0', 'clint', 'champion']);
   assert.equal(opponentDefinition('clint').mode, 'rule');
   assert.equal(opponentDefinition('clint').ruleVersion, RULE_OPPONENT_VERSION);
   assert.equal(opponentDefinition('rule').ruleVersion, 'original');

@@ -22,7 +22,7 @@
 
 ## 开发评测对手
 
-默认对手为随机出牌（`random`）、原版规则（`rule`，`original`）、P0（`p0`）、Clint规则机器人（`clint`，`rules-v2`）和 danMCai 现任门控冠军（`champion`）。每类默认 **250 对种子、交换阵营共 500 场完整比赛**，五类合计计划 2,500 场。原版规则与 Clint 分开记录。
+默认对手为随机出牌（`random`）、P0（`p0`）、Clint规则机器人（`clint`，`rules-v2`）和 danMCai 现任门控冠军（`champion`）。每类默认 **250 对种子、交换阵营共 500 场完整比赛**，四类合计 2,000 场。历史五对手计划继续独立保存 original 的成绩。
 
 ```powershell
 node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250
@@ -40,7 +40,7 @@ node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --oppone
 node ai/guanzero/training/development-suite.mjs --run=<冻结运行目录> --from-block=3 --guardian-state=<守护状态文件>
 ```
 
-首次启动冻结当时最新完整导出；之后跟随后续原批次的冻结模型与最终评测。新报告单独写在 `eval/development-500/<快照或批次>/<对手>/`，旧 200 场及旧 `clint/report.json` 保留为历史，不能拼入新样本。新开发种子从 4,200,000,000 起，每批独占 100,000 个种子区间，使用前 250 个；与旧批次种子分开，不能作为未用留出集。每批五类使用相同种子和同一模型，按种子交换阵营。
+首次启动冻结当时最新完整导出；之后跟随后续原批次的冻结模型与最终评测。新报告单独写在 `eval/development-500/<快照或批次>/<对手>/`，旧 200 场及旧 `clint/report.json` 保留为历史，不能拼入新样本。新开发种子从 4,200,000,000 起，每批独占 100,000 个种子区间，使用前 250 个；与旧批次种子分开，不能作为未用留出集。每批各对手使用相同种子和同一模型，按种子交换阵营。
 
 补充进程以 BelowNormal 优先级、最多两个单线程 CPU 推理会话运行，不使用训练 GPU。面板显示每类实际完成数／500、排队／进行中／完成、具体冠军版本及阶段胜率；置信区间仅在该对手 500 场完成后计算。指纹、种子和冻结权重完全一致时可从已完成的配对断点续跑，变更或损坏则停止并保留现场。`.lock` 防止重复进程；`status.json` 保存错误与状态。仅停止补充进程可创建 `eval/development-500/STOP`，不要误写训练根目录的 STOP。旧的 Clint-only 补评入口保留用于历史协议复现。
 
@@ -56,7 +56,7 @@ node ai/guanzero/training/development-suite.mjs --run=<冻结运行目录> --fro
 
 学习器按发布时间和文件名为已发布的一批分片建立 FIFO 索引。每次更新将模型、优化器和样本位置一起原子保存，然后清理耗尽的本地分片和内存游标。索引剩余样本不足一批时重新发现新分片。已索引分片超过 4096 或磁盘可用空间低于 8 GiB 时，采样器暂缓领取下一个种子。
 
-在已准备并验证的独立目录使用 `train:guanzero` 的 `--hours=48 --midpoint-five --midpoint-seed-index=5100 --champion-root=<发布工作树>` 及原训练参数。window.json 固定首次起点、中点和截止时间，恢复沿用原窗口。到中点时先冻结具名导出，再核验发布工作树当前冠军的 accept 依据和完整 SHA。五类对手各 250 对交换阵营种子、500 场完整比赛，进度与结果写在 eval/development-500。本次窗口使用 4,210,000,000 起的开发种子，未来独立窗口应另行分配区间。
+在已准备并验证的独立目录使用 `train:guanzero` 的 `--hours=48 --midpoint-five --midpoint-seed-index=5100 --champion-root=<发布工作树>` 及原训练参数。window.json 固定首次起点、中点和截止时间，恢复沿用原窗口。到中点时先冻结具名导出，再核验发布工作树当前冠军的 accept 依据和完整 SHA。新批次四类对手各 250 对交换阵营种子、500 场完整比赛，进度与结果写在 eval/development-500。本次窗口使用 4,210,000,000 起的开发种子，未来独立窗口应另行分配区间。
 
 ## 独立进还贡专项
 
@@ -66,7 +66,7 @@ GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二�
 
 ## 每八小时评测
 
-本次本地 io48 窗口以训练起点计时。第 8 小时的批次按追加要求在 Toronto 11 月 6 日 09:38 用当时最新完整导出 138506 启动。接下来在训练第 16、24、32、40、48 小时取样，对应 Toronto 11 月 6 日 14:12、22:12 和 7 日 06:12、14:12、22:12 左右。最后一批等训练正常退出后读取最终完整导出。每批五个对手为随机、原版规则、P0、Clint 和获 accept 的 danMCai 冠军，各 250 对交换阵营、500 场。仅从完整逐场报告计算成绩。
+本次本地 io48 窗口以训练起点计时。第 8 小时的批次按追加要求在 Toronto 11 月 6 日 09:38 用当时最新完整导出 138506 启动。接下来在训练第 16、24、32、40、48 小时取样，对应 Toronto 11 月 6 日 14:12、22:12 和 7 日 06:12、14:12、22:12 左右。最后一批等训练正常退出后读取最终完整导出。138506 按登记时的五组完成；后续四个对手为随机、P0、Clint 和获 accept 的 danMCai 冠军，各 250 对交换阵营、500 场。仅从完整逐场报告计算成绩。
 
 在 Windows 本机，Codex 八小时任务先核对活动 launcher、冻结源码、最新发布清单和冠军。使用独立发布检出执行以下命令。登记器以训练槽位和完整 SHA 去重。第 24 小时交给原监督器，对应种子 4,210,000,000–4,210,000,249。窗口其它批次分别使用各自的种子段，各段起点相隔 100,000。
 
@@ -74,7 +74,7 @@ GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二�
 node ai/guanzero/training/register-window-suite.mjs C:/guandan-sampler/work/guanzero/dashboard-launcher.json
 ```
 
-对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。第 24 小时只检查原监督器。若错过取样时段，记录漏测原因。同一个八小时任务归档五份完整报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每八小时评测并发布)。
+对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。本机使用登记器的 `--arm-midpoint` 单次等待模式，在第 24 小时前约 30 秒预登记四对手快照。原监督器到点复用同一具名文件和计划。检查等待进程、计划和原监督器的进度。若错过取样时段，记录漏测原因。同一个八小时任务按该批冻结名单归档全部报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每八小时评测并发布)。
 
 ```powershell
 node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --once
