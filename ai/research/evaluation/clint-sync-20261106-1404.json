@@ -119,7 +119,9 @@
     "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
     "web/src/core/validation.js": "f12723cca66b153086ef7ea9be668e69ac6638ee1378b2e2990c4431f8de6abb",
     "web/src/private-table/controller.js": "278c7dced3689d9323e55e55c26a9273c6cad4713f1145b74815b68608ebe3a8",
-    "web/src/private-table/state.mjs": "a20ea80b86bfed0a08eefc01330046a1f8b66dbdb4fb1c6f9fea8493e3cee6c0"
+    "web/src/private-table/state.mjs": "a20ea80b86bfed0a08eefc01330046a1f8b66dbdb4fb1c6f9fea8493e3cee6c0",
+    "web/src/rule-bot/timeout.js": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b",
+    "web/src/rule-bot/runtime.mjs": "c7b5e99eeeff7b77fbb8955529852ea12b9e8685447d8f162bd9127c47a7ae52"
   },
   "protection": {
     "ownerDraftsByteIdentical": 10,
@@ -661,6 +663,77 @@
     "Chrome automation does not validate iPad Safari hardware"
   ],
   "deployment": {
-    "status": "pending"
+    "status": "success",
+    "sourceCommit": "3649e495aaf99472d7518cde0a5f26fd4bd25f5f",
+    "workflowRun": 42233502682,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42233502682",
+    "verifiedUTC": "2026-11-06T14:35:05.621271+00:00",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "browser": {
+      "version": "9d84698bdb",
+      "menu": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人"
+        },
+        {
+          "id": "016",
+          "name": "guanzero-adp-io48-135205"
+        },
+        {
+          "id": "015",
+          "name": "guanzero-adp-io48-120154"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434"
+        },
+        {
+          "id": "009",
+          "name": "danMCai-v000293055"
+        }
+      ],
+      "defaults": [
+        "012",
+        "012",
+        "012",
+        "012"
+      ],
+      "pageErrors": [],
+      "worker": {
+        "actualRuleReplies": 6,
+        "allRuleGameNeuralDownloads": 0,
+        "wasmModels": [
+          "016",
+          "015",
+          "001",
+          "012",
+          "009"
+        ],
+        "strategyFixtures": {
+          "singleAlong": {
+            "type": "single",
+            "value": 14
+          },
+          "levelFirst": {
+            "type": "single",
+            "value": 15
+          },
+          "firstJoker": null,
+          "tributeException": {
+            "type": "single",
+            "value": 17
+          }
+        },
+        "fixtureScope": "Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+        "pageErrors": []
+      }
+    },
+    "rootMainFastForwarded": true,
+    "ownerDraftsByteIdentical": 10
   }
 }
