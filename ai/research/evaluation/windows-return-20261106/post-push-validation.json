@@ -1,0 +1,29 @@
+{
+  "verifiedUTC": "2026-11-06T23:45:12.538959+00:00",
+  "codeCommit": "f7934412fbf2988b03053a6ee95e6fee74c7be98",
+  "workflowId": 42313691090,
+  "workflowConclusion": "success",
+  "jobs": [
+    {
+      "name": "build",
+      "conclusion": "success"
+    },
+    {
+      "name": "deploy",
+      "conclusion": "success"
+    }
+  ],
+  "webDefault": "017",
+  "webModelSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "legacySummaryRegression": {
+    "passed": true,
+    "existingRoundsRecomputed": 20000,
+    "newRoundsPlayed": 0,
+    "originalResultsUnchanged": true
+  },
+  "ownerDraftsPreserved": 10,
+  "formalTrainingStarted": false,
+  "formalOptimizerUpdatesExecuted": 0,
+  "newScheduleCreated": false,
+  "checkpointUnchanged": true
+}
