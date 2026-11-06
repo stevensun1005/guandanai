@@ -53,10 +53,10 @@ test('curated menu contains Clint, two GuanZero generations, P0 and the last two
     .map((m) => m.id)
     .sort((a, b) => Number(b) - Number(a));
   assert.ok(generations.length >= 2);
-  assert.deepEqual(choices, [CLINT_RULE_ID, ...generations.slice(0, 2), '001', '012', '009']);
-  assert.equal(DEFAULT_BOT_MODEL, '012');
+  assert.deepEqual(choices, [CLINT_RULE_ID, ...generations.slice(0, 2), '001', '017', '012']);
+  assert.equal(DEFAULT_BOT_MODEL, '017');
   assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
-  assert.equal(botModelName('012'), 'danMCai-v000705434');
+  assert.equal(botModelName('017'), 'danMCai-v000855042');
   assert.equal(botChoiceId('006'), DEFAULT_BOT_MODEL);
   assert.equal(botModelId('006'), '006');
   assert.equal(botChoiceId(CLINT_RULE_ID), CLINT_RULE_ID);
@@ -64,7 +64,7 @@ test('curated menu contains Clint, two GuanZero generations, P0 and the last two
     schema: 1,
     defaultId: DEFAULT_BOT_MODEL,
     models: structuredClone(BOT_MODELS),
-    selection: { mode: 'champions-v1', danMCaiChampions: ['012', '009'] },
+    selection: { mode: 'champions-v1', danMCaiChampions: ['017', '012'] },
   };
   const nextId = String(1 + Math.max(...BOT_MODELS.map((m) => Number(m.id)))).padStart(3, '0');
   const future = {
@@ -76,7 +76,7 @@ test('curated menu contains Clint, two GuanZero generations, P0 and the last two
   };
   assert.deepEqual(
     selectableModels(future).map((m) => m.id),
-    [CLINT_RULE_ID, nextId, generations[0], '001', '012', '009'],
+    [CLINT_RULE_ID, nextId, generations[0], '001', '017', '012'],
   );
   assert.throws(() => validateCatalog({ ...catalog, defaultId: '007' }), /champion selection/);
 });
@@ -85,13 +85,13 @@ test('selected local champions are backed by accepted gate records with matching
   const manifest = JSON.parse(
     await readFile(
       new URL(
-        '../../research/evaluation/champion-selection-mac-20261105/champion.json',
+        '../../research/evaluation/champion-selection-mac-20261106/champion.json',
         import.meta.url,
       ),
       'utf8',
     ),
   );
-  const models = ['009', '012'].map((id) => BOT_MODELS.find((m) => m.id === id));
+  const models = ['012', '017'].map((id) => BOT_MODELS.find((m) => m.id === id));
   assert.deepEqual(
     models.map((m) => m.source.version),
     manifest.history.slice(-2).map((x) => x.version),

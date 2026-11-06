@@ -27,6 +27,8 @@ nohup node ai/danMCai/training/continuous/mac-24h.mjs \
 
 此命令读取既有 schedule，不重新计时；没有每日重启任务。实时只读面板为 <http://127.0.0.1:8766/>。已完成的预检与首次兼容性停机见[本次证据](evaluation/mac-continuation-20261105.json)和主报告第 28 节。完整窗口尚未完成，没有新增独立棋力验收；后续实际冠军晋升按 [WEB_MODELS](../../web/docs/WEB_MODELS.md) 单独发布，普通最新导出不自动替换冠军。下文的首次建立工作树命令保留为准备流程，当前 Mac 不要重复执行。
 
+本机已补建每四小时 danMCai 真实冠军发布检查（应用定期任务 `danmcai`，在本聊天继续）。训练晋升只更新本地冠军，不会直接发布；该任务负责核对证据、归档 Release、测试、推送与确认网页。电脑及应用需保持运行；Git 文档不会自动在其他电脑安装任务。该任务不启动或修改训练，原固定截止仍沿用。2026-11-06 的漏发与补发记录见[归档 017](evaluation/web-model-017.json)。
+
 ## 给 Mac 上的 Codex
 
 先读 `AGENTS.md`、本文件、`CONTINUOUS_TRAINING.md`、`CODEX_HANDOFF.md` 和 `STRUCTURE_MIGRATION.md`。这次先完成迁移、MPS 实测与续训，不在 24 小时窗口内插入 LSTM、改奖励、改对手池或重新从零训练等新实验。保护已有草稿，直接提交推送 main；训练用独立冻结检出，报告与网页发布使用另外的工作树。

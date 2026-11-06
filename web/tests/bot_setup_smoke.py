@@ -22,8 +22,8 @@ with sync_playwright() as p:
         page.goto(URL, wait_until="networkidle")
         catalog = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()
         labels = [choice['name'] for choice in catalog['choices']]
-        assert [c['id'] for c in catalog['choices']] == ['clint-rule','014','013','001','012','009']
-        assert catalog['defaultId'] == '012'
+        assert [c['id'] for c in catalog['choices']] == ['clint-rule','016','015','001','017','012']
+        assert catalog['defaultId'] == '017'
         assert all(page.locator(f'[data-bot-seat={s}]').input_value()==catalog['defaultId'] for s in ['S','E','N','W'])
         assert page.evaluate("typeof G") == "undefined"
         assert page.locator('.mode-btn[aria-pressed="true"]').get_attribute("data-mode") == "solo"

@@ -1,0 +1,340 @@
+{
+  "observedAt": "2026-11-06T15:28:35.306Z",
+  "defaultId": "017",
+  "model": {
+    "id": "017",
+    "file": "bot-017.onnx",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "mac-20261105",
+      "version": "v000855042",
+      "status": "experimental-not-heldout-accepted",
+      "step": 855042,
+      "registeredAt": "2026-11-06T15:28:31.478Z",
+      "champion": {
+        "gate": 330,
+        "acceptedAt": "2026-11-06T10:59:34.199Z",
+        "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+        "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+        "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+      },
+      "trainingDevice": "mps"
+    }
+  },
+  "classification": "Owner-authorized publication of the actual accepted development-gate champion; not independent strength acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "selection": {
+    "mode": "champions-v1",
+    "danMCaiChampions": [
+      "017",
+      "012"
+    ]
+  },
+  "championManifestSHA256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+  "championGate": {
+    "gate": 330,
+    "file": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+    "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+    "decision": "accept",
+    "pairs": 475,
+    "wins": 463,
+    "losses": 397,
+    "draws": 90,
+    "meanScore": 0.5347368421052632,
+    "clusterHoeffding95CI": [
+      0.4724228709243919,
+      0.5970508132861345
+    ],
+    "firstSeed": 3533000000,
+    "lastSeed": 3533000474,
+    "rules": {
+      "tribute": true,
+      "aFail": "draw",
+      "from": 2,
+      "through": "A"
+    },
+    "sourceSHA256": {
+      "ai/danMCai/training/continuous/supervisor.mjs": "4350ebb4d95fb71d5dbebdc77614ba9e91c2c22de1d44f40f4472912b7928b0b",
+      "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+      "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+      "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+      "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+      "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+      "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+      "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+      "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+      "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+      "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+      "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+      "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+      "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+      "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+      "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+      "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+      "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+      "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+      "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+      "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+      "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+      "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+      "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+      "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+      "ai/danMCai/training/continuous/sources.mjs": "f7a2082c84d210b9681d8aed0d2cc6a2c7de175d93df51e23f5b21a6f9d822ed",
+      "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+    }
+  },
+  "validation": {
+    "nativeONNX": {
+      "provider": "CPUExecutionProvider",
+      "dynamicCandidateBatches": [
+        1,
+        3,
+        129
+      ],
+      "allFinite": true
+    },
+    "browserWASM": {
+      "passed": true,
+      "modelId": "017",
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "backend": "browser WASM, one thread",
+      "strengthMatches": 0,
+      "positions": 16,
+      "dynamicBatches": [
+        1,
+        3,
+        129
+      ],
+      "maxAbsoluteError": 1.043081283569336e-06,
+      "checks": [
+        {
+          "name": "position-0",
+          "candidates": 8,
+          "maxError": 6.556510925292969e-07,
+          "index": 3
+        },
+        {
+          "name": "position-1",
+          "candidates": 5,
+          "maxError": 0,
+          "index": 3
+        },
+        {
+          "name": "position-2",
+          "candidates": 8,
+          "maxError": 5.960464477539062e-07,
+          "index": 0
+        },
+        {
+          "name": "position-3",
+          "candidates": 5,
+          "maxError": 7.748603820800781e-07,
+          "index": 3
+        },
+        {
+          "name": "position-4",
+          "candidates": 8,
+          "maxError": 4.76837158203125e-07,
+          "index": 4
+        },
+        {
+          "name": "position-5",
+          "candidates": 4,
+          "maxError": 4.76837158203125e-07,
+          "index": 1
+        },
+        {
+          "name": "position-6",
+          "candidates": 8,
+          "maxError": 8.344650268554688e-07,
+          "index": 7
+        },
+        {
+          "name": "position-7",
+          "candidates": 2,
+          "maxError": 4.76837158203125e-07,
+          "index": 0
+        },
+        {
+          "name": "position-8",
+          "candidates": 1,
+          "maxError": 2.384185791015625e-07,
+          "index": 0
+        },
+        {
+          "name": "position-9",
+          "candidates": 8,
+          "maxError": 1.043081283569336e-06,
+          "index": 2
+        },
+        {
+          "name": "position-10",
+          "candidates": 1,
+          "maxError": 0,
+          "index": 0
+        },
+        {
+          "name": "position-11",
+          "candidates": 8,
+          "maxError": 7.152557373046875e-07,
+          "index": 7
+        },
+        {
+          "name": "position-12",
+          "candidates": 8,
+          "maxError": 6.556510925292969e-07,
+          "index": 6
+        },
+        {
+          "name": "position-13",
+          "candidates": 2,
+          "maxError": 2.384185791015625e-07,
+          "index": 1
+        },
+        {
+          "name": "position-14",
+          "candidates": 1,
+          "maxError": 8.940696716308594e-08,
+          "index": 0
+        },
+        {
+          "name": "position-15",
+          "candidates": 3,
+          "maxError": 5.960464477539062e-07,
+          "index": 1
+        },
+        {
+          "name": "batch-1",
+          "candidates": 1,
+          "maxError": 3.5762786865234375e-07,
+          "index": 0
+        },
+        {
+          "name": "batch-3",
+          "candidates": 3,
+          "maxError": 6.556510925292969e-07,
+          "index": 2
+        },
+        {
+          "name": "batch-129",
+          "candidates": 129,
+          "maxError": 6.556510925292969e-07,
+          "index": 3
+        }
+      ],
+      "realPositionCandidates": 80,
+      "fixturesSHA256": "34cb03914e2bb95808a005a3b00148c16fb81b1a2969805d84f0e3fbf71e146c",
+      "preparedFixtureSHA256": "d79268b00747a9bf63e890dd15de3699b1f689207af35ff1664df639f368cd1e",
+      "harnessSHA256": "d7bcafa7f48a5bcf4425a58b86f3b0f8852c634a603d5a4b8f680d1d361a1db7"
+    },
+    "browserMenu": {
+      "choices": [
+        {
+          "label": "Clint规则机器人",
+          "value": "clint-rule"
+        },
+        {
+          "label": "guanzero-adp-io48-135205",
+          "value": "016"
+        },
+        {
+          "label": "guanzero-adp-io48-120154",
+          "value": "015"
+        },
+        {
+          "label": "danMCai-v000000000",
+          "value": "001"
+        },
+        {
+          "label": "danMCai-v000855042",
+          "value": "017"
+        },
+        {
+          "label": "danMCai-v000705434",
+          "value": "012"
+        }
+      ],
+      "horizontalOverflow": false,
+      "selected": [
+        {
+          "seat": "S",
+          "value": "017"
+        },
+        {
+          "seat": "E",
+          "value": "017"
+        },
+        {
+          "seat": "N",
+          "value": "017"
+        },
+        {
+          "seat": "W",
+          "value": "017"
+        }
+      ],
+      "version": "b8a4af6b4c"
+    },
+    "node": {
+      "passed": 214,
+      "failed": 0
+    },
+    "researchPython": {
+      "passed": 9
+    },
+    "format": "passed",
+    "build": "b8a4af6b4c",
+    "browserSmokePythonSyntax": "passed",
+    "browserCoach": {
+      "candidateButtons": 5,
+      "modelText": "danMCai-v000855042 · 相对分，非胜率\n收起 Top 5\n×\n过牌 · 合理性 75%\n出牌后保留上一手评价",
+      "topFiveText": "CHAMPION INSIGHT\n推荐出牌 TOP 5\n×\n\n已比较 27 个候选 · 点击选牌，不会自动打出\n\n1. 单张\n100%\n♠9\n2. 单张\n95% 差 -0.06\n♠J\n3. 单张\n88% 差 -0.14\n♥8\n4. 炸弹\n77% 差 -0.26\n♦3\n♦3\n♠3\n♥2\n5. 过牌\n75% 差 -0.29\n本轮不跟牌\n\n百分数是本回合的模型相对分，不是胜率；推荐只选牌，不替你出牌。"
+    },
+    "trainingScheduleSHA256Unchanged": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+    "markdownRelativeLinks": {
+      "checked": 349,
+      "broken": 0
+    }
+  },
+  "publication": {
+    "status": "validated-locally-awaiting-main-and-Pages",
+    "releaseURL": "https://github.com/stevensun1005/guandanai/releases/tag/web-model-017",
+    "webURL": "https://stevensun1005.github.io/guandanai/"
+  },
+  "syncIncident": {
+    "championAcceptedAt": "2026-11-06T10:59:34.199Z",
+    "observedAt": "2026-11-06T15:28:35.306Z",
+    "webDefaultBefore": "012",
+    "localPeriodicChampionPublisherFound": false,
+    "localReporterFound": false,
+    "rootCause": "Training promotes the local champion only. This Mac had no corresponding periodic release/push/deploy task installed. Existing repository instructions alone did not install it.",
+    "repair": {
+      "automationId": "danmcai",
+      "kind": "heartbeat",
+      "status": "ACTIVE",
+      "cadenceHours": 4,
+      "destination": "current chat",
+      "trainingRestartAuthorized": false,
+      "originalTrainingDeadlineUTC": "2026-11-06T21:58:13.414Z",
+      "runtimeRequirement": "Mac and desktop app must remain running",
+      "officialReference": "https://learn.chatgpt.com/docs/automations?surface=app",
+      "verifiedScheduledRun": false
+    }
+  }
+}

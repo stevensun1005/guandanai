@@ -7,9 +7,9 @@
 | 1    | Clint规则机器人                                    | 独立 rules-v2，不使用神经网络               |
 | 2–3  | guanzero-adp-io48-135205／guanzero-adp-io48-120154 | GuanZero 最近两代，归档 016／015            |
 | 4    | danMCai-v000000000                                 | 原始 P0，归档 001                           |
-| 5–6  | danMCai-v000705434／danMCai-v000293055             | danMCai 最近两代实际门控冠军，归档 012／009 |
+| 5–6  | danMCai-v000855042／danMCai-v000705434             | danMCai 最近两代实际门控冠军，归档 017／012 |
 
-**默认使用 danMCai-v000705434。** 冠军依据 `champion/champion.json` 的真实晋升历史、accept 门控与完整权重 SHA，不按步数最大排序，也不代表全局最强或独立验收通过。历史模型退出菜单，Release 和实验记录保留归档。首次采用新菜单会使用新的本地偏好键，默认重置为danMCai 冠军；此后玩家选择继续保存。「全部使用danMCai 冠军」可重置四席。
+**默认使用 danMCai-v000855042。** 冠军依据 `champion/champion.json` 的真实晋升历史、accept 门控与完整权重 SHA，不按步数最大排序，也不代表全局最强或独立验收通过。历史模型退出菜单，Release 和实验记录保留归档。首次采用新菜单会使用新的本地偏好键，默认重置为danMCai 冠军；此后玩家选择继续保存。「全部使用danMCai 冠军」可重置四席。
 
 朋友房间由房主设置，加入者只查看。恢复与转单机保留对应电脑选择。Clint 在 Worker 内只接收自己的手牌和公开信息；Clint 决策不加载 ONNX，神经网络分支不叠加 Clint 规则；实际网络决策（包括玩家超时托管）按需加载相应权重。
 
@@ -28,7 +28,7 @@
 
 训练检出、运行配置、权重和缓冲区不改动，模型二进制不进 Git。清单 `models` 保留完整不可变归档；`selection.danMCaiChampions` 决定本机两代与默认值。GuanZero 从归档中取最近注册的两代，新代只轮换其自身两项。普通新导出只可归档，不进入danMCai 冠军菜单或覆盖默认值。页面版本包含模型摘要，已开牌局不热切。
 
-部署、开发门控晋升、独立棋力验收是不同结论。保留两代冠军不等于证明所有对手下最强，也不能据此宣称整场 80%。[当前冠军原始记录](../../ai/research/evaluation/champion-selection-mac-20261105/champion.json)及[accept 门控 309](../../ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json)；历史选冠军记录保留原目录。
+部署、开发门控晋升、独立棋力验收是不同结论。保留两代冠军不等于证明所有对手下最强，也不能据此宣称整场 80%。[当前冠军原始记录](../../ai/research/evaluation/champion-selection-mac-20261106/champion.json)及[accept 门控 330](../../ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json)；历史选冠军记录保留原目录。
 
 每次命名或发布策略变化同步中英文 README、相关目录 README、机器人／部署指南与 CHANGELOG。新增 Clint 开发评测证据亦随周期归档，不以有无新权重决定是否更新研究文档。
 
