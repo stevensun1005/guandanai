@@ -1,7 +1,13 @@
 import { publicLog, publicLogText } from './public-log.js';
 import { rankName } from '../core/cards.js';
+import { aStayReason } from '../core/match.js';
 
 export const MAX_PUBLIC_ROUNDS = 200;
+const STAY_NOTE = {
+  notOwnA: ' · 本局打对方的级，未打 A',
+  partnerLast: ' · 队友末游，未过 A',
+  spent: ' · 打 A 机会已用尽',
+};
 const RESULT_FIELDS = [
   'team',
   'up',
@@ -77,7 +83,7 @@ export function publicMatchText(records) {
       const text = publicLogText(publicLog(record, record.names, record.names[0]));
       const result = record.result;
       return result
-        ? `${text}\n名次：${result.order.map((seat) => record.names[seat]).join(' → ')}\n${result.team ? '对方' : '我方'}本局获胜 · 级数 ${rankName(result.before)} → ${rankName(record.levels?.[result.team] ?? result.after)}${result.win ? ' · 打过 A' : result.draw ? ' · 本场平局' : ''}`
+        ? `${text}\n名次：${result.order.map((seat) => record.names[seat]).join(' → ')}\n${result.team ? '对方' : '我方'}本局获胜 · 级数 ${rankName(result.before)} → ${rankName(record.levels?.[result.team] ?? result.after)}${result.win ? ' · 打过 A' : result.draw ? ' · 本场平局' : STAY_NOTE[aStayReason(result)] || ''}`
         : text;
     }),
   ].join('\n\n');

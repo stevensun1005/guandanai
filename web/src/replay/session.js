@@ -1,6 +1,7 @@
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { PLACE, TYPE_NAME, cardText, isWild, rankName, sortHand, val } from '../core/cards.js';
+import { aStayReason } from '../core/match.js';
 import { analyze, isBomb, power } from '../core/combinations.js';
 import { setHumans } from '../game/events.js';
 import { newGame } from '../game/session.js';
@@ -728,7 +729,9 @@ export function practiceRoundEnd() {
       : r.win
         ? `${side(r.team)}打过 A，赢下整场`
         : r.before === r.after
-          ? `${side(r.team)}在 A 级，没能打过`
+          ? aStayReason(r) === 'notOwnA'
+            ? `${side(r.team)}获胜，但本局打的是${side(r.aTeam)}的级，还没打 A`
+            : `${side(r.team)}在 A 级，没能打过`
           : `${side(r.team)}升 ${r.up} 级（${rankName(r.before)} → ${rankName(r.after)}）`);
   practiceStore();
 }

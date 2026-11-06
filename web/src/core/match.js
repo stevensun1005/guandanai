@@ -85,3 +85,19 @@ export function levelAttemptLabel(game, team) {
     ? 'A末'
     : `A${Math.min(3, (game.aFails?.[team] || 0) + 1)}`;
 }
+
+/**
+ * Why the round's winners are still at A after a round they won while at A (null when they passed
+ * A, were not at A, or moved). Each round is played at the level of the previous round's winners,
+ * so a team at A only passes it in a round played at its own A, with its partner not last.
+ *   spent       - the team used up its A attempts ("once" table rule)
+ *   notOwnA     - the round was played at the other team's level
+ *   partnerLast - the round was played at their A but the partner finished last
+ */
+export function aStayReason(result) {
+  if (!result || result.win || result.draw || result.before !== 14 || result.after !== 14)
+    return null;
+  if (result.aOut != null && result.aOut === result.team) return 'spent';
+  if (result.aTeam !== result.team || result.playedLevel !== 14) return 'notOwnA';
+  return 'partnerLast';
+}

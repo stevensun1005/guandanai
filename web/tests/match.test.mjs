@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { roundOutcome, initialMatchLevels, levelAttemptLabel } from '../src/core/match.js';
+import {
+  aStayReason,
+  roundOutcome,
+  initialMatchLevels,
+  levelAttemptLabel,
+} from '../src/core/match.js';
 import {
   createMatchRound,
   applyMatchTribute,
@@ -27,6 +32,33 @@ test('playing A needs a qualifying partner finish and preserves the configured t
   assert(reset.result.reset);
   assert.equal(reset.levels[0], 2);
   assert.equal(roundOutcome({ ...atA, lvlTeam: 1, L: 11 }, [0, 2, 1, 3]).result.win, false);
+});
+
+test('a team at A that wins at the other team level is told it has not played A yet', () => {
+  // the reported match: we were at A (one failed try), the opponents won the round before, so
+  // round 9 was played at their 6; we finished first and second
+  const state = { levels: [14, 6], lvlTeam: 1, L: 6, aFails: [1, 0] };
+  const outcome = roundOutcome(state, [0, 2, 3, 1]);
+  assert.equal(outcome.result.win, false);
+  assert.deepEqual(outcome.levels, [14, 6]);
+  assert.equal(outcome.lvlTeam, 0, 'next round is played at our A');
+  assert.equal(aStayReason(outcome.result), 'notOwnA');
+  // the next round is at our A: first and second now wins the match
+  assert(roundOutcome({ ...state, ...outcome, L: 14 }, [0, 2, 3, 1]).result.win);
+  // at our own A with the partner last
+  const atA = { levels: [14, 6], lvlTeam: 0, L: 14, aFails: [0, 0] };
+  assert.equal(aStayReason(roundOutcome(atA, [0, 1, 3, 2]).result), 'partnerLast');
+  // passed, moved, lost or not at A: no reason to give
+  assert.equal(aStayReason(roundOutcome(atA, [0, 2, 1, 3]).result), null);
+  assert.equal(aStayReason(roundOutcome(atA, [1, 3, 0, 2]).result), null);
+  assert.equal(
+    aStayReason(roundOutcome({ levels: [9, 6], lvlTeam: 0, L: 9 }, [0, 2, 1, 3]).result),
+    null,
+  );
+  assert.equal(
+    aStayReason({ before: 14, after: 14, team: 0, aOut: 0, aTeam: 0, playedLevel: 14 }),
+    'spent',
+  );
 });
 
 test('once mode spends three A attempts then gives the other team one final attempt', () => {

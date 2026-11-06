@@ -1,5 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { rankName } from '../core/cards.js';
+import { aStayReason } from '../core/match.js';
 import { act } from '../game/events.js';
 import { toAbs } from '../game/session.js';
 import { placeActionBtns } from '../hand/layout.js';
@@ -46,15 +47,19 @@ export function showResult() {
     head = `${side(r.team)}三次没打过 A`;
     body = `<p>按规则从 2 重新打。下一局打 <b>${next}</b>，${dblText(r)}</p>`;
   } else {
-    head = ours
-      ? `我方升级：${rankName(r.before)} → ${rankName(r.after)}`
-      : `对方升级：${rankName(r.before)} → ${rankName(r.after)}`;
+    const stay = aStayReason(r);
+    head = stay
+      ? `${side(r.team)}本局获胜，仍在 A 级`
+      : ours
+        ? `我方升级：${rankName(r.before)} → ${rankName(r.after)}`
+        : `对方升级：${rankName(r.before)} → ${rankName(r.after)}`;
     body = `<p>${upText}。下一局打 <b>${next}</b>，${dblText(r)}</p>`;
-    if (r.before === 14 && r.after === 14)
-      body =
-        r.aOut === r.team
-          ? `<p>${side(r.team)}已用尽打 A 机会，本局名次不再触发整场获胜。下一局继续打 A，${dblText(r)}</p>`
-          : `<p>${side(r.team)}在 A 级，但队友是末游，没能打过 A。下一局继续打 A，${dblText(r)}</p>`;
+    if (stay === 'spent')
+      body = `<p>${side(r.team)}已用尽打 A 机会，本局名次不再触发整场获胜。下一局继续打 A，${dblText(r)}</p>`;
+    else if (stay === 'notOwnA')
+      body = `<p>本局打的是${side(r.aTeam)}的 ${rankName(r.playedLevel)}，不是${side(r.team)}的 A：每局打上一局获胜方的级，只有在${side(r.team)}打 A 的那一局拿到头游、且队友不是末游，才算打过 A。下一局打 <b>${next}</b>，${dblText(r)}</p>`;
+    else if (stay === 'partnerLast')
+      body = `<p>${side(r.team)}在打 A，但队友是末游，没能打过 A。下一局继续打 A，${dblText(r)}</p>`;
     if (r.spent)
       body += `<p>${side(r.aTeam)}三次打 A 都没打过。${side(1 - r.aTeam)}轮到打 A 时只有一次机会：打过赢下整场，没打过算双方平局。</p>`;
     else if (r.reset) body += `<p>${side(r.aTeam)}三次没打过 A，从 2 重新打。</p>`;
