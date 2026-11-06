@@ -74,7 +74,7 @@ GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二�
 node ai/guanzero/training/register-window-suite.mjs C:/guandan-sampler/work/guanzero/dashboard-launcher.json
 ```
 
-对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。第 24 小时只检查原监督器。若错过取样时段，记录漏测原因。每四小时的网页发布继续独立归档已完成的报告。
+对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。第 24 小时只检查原监督器。若错过取样时段，记录漏测原因。同一个八小时任务归档五份完整报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每八小时评测并发布)。
 
 ```powershell
 node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --once

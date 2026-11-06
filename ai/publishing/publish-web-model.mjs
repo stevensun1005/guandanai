@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { validateCatalog } from '../../web/src/ai/model-catalog.mjs';
 import { sha256 } from './artifacts.mjs';
+import { verifyEvaluatedSuite } from './evaluated-suite.mjs';
 import * as ort from 'onnxruntime-node';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -51,6 +52,11 @@ const bytes = await readFile(input),
   digest = sha256(bytes);
 if (source.expectedSHA256 && digest !== source.expectedSHA256)
   throw Error('Export changed or corrupted; retry with a complete export');
+const suite = option('evaluated-suite');
+const developmentEvaluation =
+  source.run === 'guanzero-adp-io48' || suite
+    ? await verifyEvaluatedSuite(suite, input, digest, source, root)
+    : null;
 if (catalog.models.some((model) => model.sha256 === digest)) {
   console.log('This exact model is already registered; no duplicate release.');
   process.exit(0);
@@ -68,6 +74,11 @@ await writeFile(join(folder, digest + '.onnx'), bytes);
 const config = option('config')
   ? JSON.parse(await readFile(resolve(option('config')), 'utf8'))
   : { stateFeatures: 513, actionFeatures: 54 };
+if (
+  developmentEvaluation &&
+  (config.stateFeatures !== 513 || config.actionFeatures !== 54 || config.history !== 'guanzero-v1')
+)
+  throw Error('Invalid GuanZero evaluation encoding');
 const model = {
   id,
   file,
@@ -185,6 +196,7 @@ const evidence = {
   model,
   classification: 'Owner-authorized browser deployment; not independent performance acceptance',
   strengthEvaluation: null,
+  ...(developmentEvaluation && { developmentEvaluation }),
   encodingSHA256: sha256(
     (await readFile(join(root, 'web/src/ai/encoding.mjs'))).toString().replace(/\r\n/g, '\n'),
   ),

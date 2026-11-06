@@ -13,7 +13,11 @@
 
 朋友房间由房主设置，加入者只查看。恢复与转单机保留对应电脑选择。Clint 在 Worker 内只接收自己的手牌和公开信息；Clint 决策不加载 ONNX，神经网络分支不叠加 Clint 规则；实际网络决策（包括玩家超时托管）按需加载相应权重。
 
-## 每四小时同步
+## GuanZero 每八小时评测并发布
+
+本机 io48 每 8 小时取一次快照。随机、原版规则、P0、Clint 和 danMCai 冠军各完成 500 场后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前核对五份完整报告、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席默认由 danMCai 冠军清单决定。[本机运行与时间表](../../ai/guanzero/README.md#每八小时评测)。
+
+## danMCai 冠军定期同步
 
 2026-11-05 所有者最新要求取代“最新导出直接设默认”：定期同步实际冠军与菜单。机器需开机、联网且 Codex 正在运行；没有冠军、菜单或新完成评测证据变化则跳过。失败时保留当前网站，不覆盖附件。
 
