@@ -1,0 +1,112 @@
+{
+  "createdAtUTC": "2026-11-06T22:30:59.071345+00:00",
+  "trainingRootSeedsInspected": 1087918,
+  "allKnownRootSeeds": 1113690,
+  "trainingLogs": [
+    {
+      "path": "ai/danMCai/runs/mac-20261105/actors/results-0.jsonl",
+      "sha256": "500fdfc41b77ce7f02c4967a98c9a9d4ce0912912e2b251f70c2eb590a979c74",
+      "bytes": 15378553
+    },
+    {
+      "path": "ai/danMCai/runs/mac-20261105/actors/results-1.jsonl",
+      "sha256": "3affb3de60e1b2d82563383d04146f5f2454cf39113dd6dcdd27081f694399e8",
+      "bytes": 15369174
+    },
+    {
+      "path": "ai/danMCai/runs/mac-20261105/actors/results-2.jsonl",
+      "sha256": "94d23c0aae86db331b75e6b75e666402cd267337b58a3e63added54afb53a496",
+      "bytes": 15002950
+    },
+    {
+      "path": "ai/danMCai/runs/mac-20261105/actors/results-3.jsonl",
+      "sha256": "6a5e2e3814400dabab66fa59bdf9b96db7acb27c785863f2501bcd7312f41929",
+      "bytes": 14992135
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-0.jsonl",
+      "sha256": "f0a5cc0f79ada611c145baa96904441412d906eb931e01ecfaa591a39f70064f",
+      "bytes": 17406286
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-1.jsonl",
+      "sha256": "984e6b46417f79ba85d65870416d70ac1da2d774cc0c7339ec3079d7b8f422b3",
+      "bytes": 17489688
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-10.jsonl",
+      "sha256": "d2bd662bad4b17b8369143c46f7ca87cc4a08b1381b741f1be741cce1fa850b8",
+      "bytes": 2693
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-11.jsonl",
+      "sha256": "ff233f4e100c76c82cdc8d4d0f940c066d82a55bc3e1096c90ab7b0b205473e3",
+      "bytes": 7104
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-12.jsonl",
+      "sha256": "0410cf85e88b3ec0e968e86227575e7dfb9654b6dc18cafdb6afb73b0ea280b4",
+      "bytes": 355454
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-13.jsonl",
+      "sha256": "c447d888ec5660b5b76ceb9416ac09c9143fc58ca83ac741f785c9765cd0f87f",
+      "bytes": 379683
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-14.jsonl",
+      "sha256": "c0584cee7f1f5561fdf700fa8fe5f3ca92091d18089104cef729d0f155af049a",
+      "bytes": 368626
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-15.jsonl",
+      "sha256": "dfe5f5c39757264c816830bb1b3cf777f2044f7a3034d86dc67861573b08072c",
+      "bytes": 381799
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-2.jsonl",
+      "sha256": "e9a5ddb9eb1547a5fa5e58883c33d2024b8f202cc7fc70cbcfb12f86b5bef96d",
+      "bytes": 17365930
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-3.jsonl",
+      "sha256": "505383dd9f2f90add556bdec50329344b4112b643b25de8f41235b542947ef1a",
+      "bytes": 13486728
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-4.jsonl",
+      "sha256": "b51766f978e8669f9914f95bb5f8f80474ed7aa1748f77bbf9b5b298e78edc74",
+      "bytes": 13245236
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-5.jsonl",
+      "sha256": "12dd79e602fed719869f674e443ab6994709b2425bd24733e77c4024306e14c4",
+      "bytes": 13264355
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-6.jsonl",
+      "sha256": "a71244d32049342bf3bafc71687d32486c5c9dca6f7d04bd6ec3631e97f8f21a",
+      "bytes": 13003444
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-7.jsonl",
+      "sha256": "76545c940f209a049a9c3d4009b40ca9e144d18aa8ba099d737c4a603819e3cf",
+      "bytes": 12864304
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-8.jsonl",
+      "sha256": "6d34fa9acdfb396bc6ffea2bc4959b4ff4798b5719ed4308919ca4b21e626e0c",
+      "bytes": 3354
+    },
+    {
+      "path": "ai/danMCai/workspace/mac-import/windows-gpu-main/actors/results-9.jsonl",
+      "sha256": "e7bf0ff0509fb928294b3e73ab6e6300b1008d6692fdb6344188d5f791e6a45f",
+      "bytes": 2869
+    }
+  ],
+  "excludedFreshCandidates": [],
+  "selectedUniqueDeals": 6000,
+  "rootSeedOverlap": 0,
+  "derivedRoundSeedOverlap": 0,
+  "scope": "Saved Windows parent and Mac actor roots plus public recorded evaluation seeds; conservatively excludes 200 derived round seeds per root. No evidence of model exposure to selected deals in inspected records; cannot audit absent pre-baseline data."
+}
