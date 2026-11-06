@@ -167,13 +167,39 @@ async function main() {
       };
       if (!['cpu', 'gpu-batch'].includes(config.inference))
         throw Error('Invalid inference backend');
+      const migration = readJSON(join(p.root, 'migration.json'));
+      if (migration) {
+        if (sha256(join(p.learner, 'state.pt')) !== migration.checkpointSHA256)
+          throw Error('Continuation checkpoint fingerprint mismatch');
+        config.continuedFrom = migration.parent;
+        config.initialStep = migration.step;
+      }
       writeJSON(configFile, config);
     }
     if (stopped(p))
       throw Error(`Run is stopped: remove only this run's STOP to explicitly resume ${p.root}`);
     const hours = Number(option('hours', '24'));
     if (!Number.isFinite(hours) || hours <= 0) throw Error('Invalid hours');
-    const deadline = Date.now() + hours * 3600000;
+    const windowFile = join(p.root, 'window.json');
+    let window = readJSON(windowFile);
+    if (!window && process.argv.includes('--midpoint-five')) {
+      const start = Date.now();
+      const seedIndex = integerOption('midpoint-seed-index', 5100, 5000, 5948);
+      window = {
+        startedAt: new Date(start).toISOString(),
+        midpointAt: new Date(start + hours * 1800000).toISOString(),
+        plannedEnd: new Date(start + hours * 3600000).toISOString(),
+        hours,
+        seedIndex,
+        championRoot: resolve(option('champion-root', ROOT)),
+      };
+      writeJSON(windowFile, window);
+    }
+    const deadline = window ? Date.parse(window.plannedEnd) : Date.now() + hours * 3600000;
+    if (window) {
+      if (Date.now() >= deadline) throw Error('Fixed training window expired');
+      writeJSON(join(p.root, 'launcher.json'), { ...window, pid: process.pid });
+    }
     const log = (event) => console.log(JSON.stringify({ t: new Date().toISOString(), ...event }));
     const shutdown = () => {
       if (stopping) return;
@@ -245,10 +271,36 @@ async function main() {
         log({ kind: 'evaluation-exit', code });
       });
     };
+    let nextMidpointAttempt = 0;
     timer = setInterval(() => {
       if (stopped(p) || Date.now() >= deadline) {
         shutdown();
         return;
+      }
+      if (
+        window &&
+        Date.now() >= Date.parse(window.midpointAt) &&
+        Date.now() >= nextMidpointAttempt &&
+        !children.has('midpoint') &&
+        !existsSync(join(p.eval, 'midpoint-complete.json'))
+      ) {
+        const child = spawn(
+          process.execPath,
+          [
+            join(ROOT, 'ai/guanzero/training/midpoint.mjs'),
+            `--run=${p.root}`,
+            `--seed-index=${window.seedIndex}`,
+            `--champion-root=${window.championRoot}`,
+          ],
+          { cwd: ROOT, windowsHide: true, stdio: ['ignore', 'inherit', 'inherit'] },
+        );
+        children.set('midpoint', child);
+        log({ kind: 'midpoint-start', pid: child.pid });
+        child.once('close', (code) => {
+          children.delete('midpoint');
+          nextMidpointAttempt = Date.now() + 60000;
+          log({ kind: 'midpoint-exit', code });
+        });
       }
       const inferenceStatus = readJSON(join(p.root, 'inference/status.json'));
       const inferenceReady =
@@ -261,7 +313,8 @@ async function main() {
         if (option('eval-at-start', 'false') === 'true') launchEvaluation();
       }
     }, 1000);
-    evalTimer = setInterval(launchEvaluation, Number(option('eval-seconds', '21600')) * 1000);
+    if (!window)
+      evalTimer = setInterval(launchEvaluation, Number(option('eval-seconds', '21600')) * 1000);
     await new Promise((resolveDone) => {
       const check = setInterval(() => {
         if (stopping && children.size === 0) {

@@ -10,6 +10,7 @@ import {
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { setPriority, constants } from 'node:os';
+import { modelBytes } from '../../publishing/artifacts.mjs';
 import { evaluate } from './evaluate.mjs';
 import { DEFAULT_OPPONENTS } from './opponents.mjs';
 import { freezeChampion, championDefinition } from './champion.mjs';
@@ -31,12 +32,14 @@ export async function addSuite(
   const digest = sha256(model);
   if (manifest.suites.some((s) => s.modelSHA256 === digest)) return;
   if (existsSync(folder)) throw Error('Unregistered suite folder; preserve evidence and inspect');
-  mkdirSync(folder, { recursive: true });
   const definition = championDefinition(championRoot);
+  // Fetch/validate before reserving a suite folder so a transient download can retry.
+  await modelBytes(championRoot, definition.artifact);
+  mkdirSync(folder, { recursive: true });
   const champion = await freezeChampion(folder, definition, championRoot);
   copyFileSync(model, join(folder, 'model.onnx'));
   if (sha256(join(folder, 'model.onnx')) !== digest) throw Error('GuanZero freeze changed');
-  const index = SUITE_SEED_INDEX + manifest.suites.length,
+  const index = (manifest.seedIndexBase ?? SUITE_SEED_INDEX) + manifest.suites.length,
     start = evalSeed(index, SUITE_PAIRS);
   const plan = {
     id,

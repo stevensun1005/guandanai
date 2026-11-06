@@ -34,6 +34,14 @@ function save() {
 }
 try {
   while (!stopping && !stopped(p)) {
+    if (readJSON(join(p.learner, 'status.json'))?.pauseSampling) {
+      if (Date.now() - Date.parse(status.updatedAt || 0) > 30000) {
+        status.updatedAt = new Date().toISOString();
+        save();
+      }
+      await new Promise((done) => setTimeout(done, 1000));
+      continue;
+    }
     const count = status.nextSeed++,
       seed = trainSeed(slot, count),
       random = seededRandom((seed ^ config.seed) >>> 0);

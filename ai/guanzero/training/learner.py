@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import shutil
 import time
 from collections import deque
 import numpy as np
@@ -11,15 +12,37 @@ import torch
 from model import GuanZeroNet, atomic_json, export_onnx, optimizer, update, replace_atomic
 FEATURES=1647
 
+class ShardQueue:
+    """Process immutable FIFO cohorts. Advance only after durable checkpoint."""
+    def __init__(self, directory):
+        self.directory = Path(directory)
+        self.refresh()
+
+    def refresh(self):
+        entries = []
+        for file in self.directory.glob('*.json'):
+            meta = json.loads(file.read_bytes())
+            entries.append((meta['createdAt'], file.name, file, meta))
+        self.pending = deque(sorted(entries))
+
+    def committed(self, exhausted):
+        for file in exhausted:
+            if self.pending.popleft()[2] != file:
+                raise RuntimeError('FIFO commit order mismatch')
+
+    def batch(self, consumed, size):
+        return read_batch(self.pending, consumed, size)
+
+
 def load_batch(directory, consumed, size):
-    manifests=[]
-    for file in Path(directory).glob('*.json'):
-        meta=json.loads(file.read_text(encoding='utf-8'))
-        manifests.append((meta['createdAt'],file.name,file,meta))
+    return ShardQueue(directory).batch(consumed, size)
+
+
+def read_batch(manifests, consumed, size):
     xs,ys,remaining=[],[],size
     cursor=dict(consumed)
     exhausted=[]
-    for _,_,file,meta in sorted(manifests):
+    for _,_,file,meta in manifests:
         if meta['schema']!=1 or meta['features']!=FEATURES or meta['targets']!=['adp','wp']:
             raise ValueError(f'Invalid GuanZero shard schema: {file}')
         offset=cursor.get(file.name,0)
@@ -45,7 +68,7 @@ def atomic_checkpoint(file, payload):
 
 def cleanup(files):
     for file in files:
-        for item in [file,file.with_suffix('.x.i8'),file.with_suffix('.y.f32')]:
+        for item in [file.with_suffix('.x.i8'),file.with_suffix('.y.f32'),file]:
             item.unlink(missing_ok=True)
 
 def run(args):
@@ -93,13 +116,21 @@ def run(args):
             'deviceName':torch.cuda.get_device_name(0) if device.startswith('cuda') else device,
             'torch':torch.__version__,'precision':'FP32','objective':config['objective'],
             'updatedAt':time.time(),'error':error,'pid':os.getpid()}
+        result['indexedShards'] = len(queue.pending)
+        result['pauseSampling'] = len(queue.pending) > 4096 or shutil.disk_usage(root).free < 8 * 1024**3
         atomic_json(status_file,result)
+    queue = ShardQueue(root/'shards')
+    # Absent manifests were retired after durable commit.
+    consumed = {name: consumed[name] for _,name,_,_ in queue.pending if name in consumed}
     if not state.exists():atomic_checkpoint(state,snapshot())
     publish();status()
     if args.init_only:return
     try:
         while not stopping and not (root/'STOP').exists():
-            batch=load_batch(root/'shards',consumed,config['batchSize'])
+            batch=queue.batch(consumed,config['batchSize'])
+            if batch is None:
+                queue.refresh()
+                batch=queue.batch(consumed,config['batchSize'])
             if batch is None:
                 if time.monotonic()-last_export>=60:publish()
                 status();time.sleep(1);continue
@@ -110,6 +141,9 @@ def run(args):
             # write never advances the durable cursor; a committed update is not replayed.
             atomic_checkpoint(state,snapshot())
             cleanup(exhausted)
+            queue.committed(exhausted)
+            for file in exhausted:
+                consumed.pop(file.name, None)
             if time.monotonic()-last_export>=60:publish()
             if time.monotonic()-last_archive>=1800:
                 atomic_checkpoint(root/'learner'/f'checkpoint-{step:012d}.pt',snapshot())

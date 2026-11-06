@@ -117,7 +117,12 @@ function render(s) {
   );
   text('actor-count', `${s.totals.liveActors} / ${s.config.actors} 在线`);
   text('model', `v${s.latest.version ?? '—'}`);
-  text('backlog', `${s.pendingShards} 个`);
+  text(
+    'backlog',
+    s.learner.pauseSampling
+      ? `${s.pendingShards} 个 · 采样暂缓，学习器正在读取积压`
+      : `${s.pendingShards} 个`,
+  );
   text('objective', `${s.config.objective.toUpperCase()} / ${number(s.config.batchSize)}`);
   text(
     'heartbeat',

@@ -4480,6 +4480,167 @@
         }
       },
       "archivePurpose": "Recover exact historical raw reports; not new games or new acceptance"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-81551-development-500-random.json",
+      "opponent": "random",
+      "reportSHA256": "af082759041d784fd56bdb189c8c86278c1e10f6cc445f74407d2aca00dad4a9",
+      "seedStart": 4200200000,
+      "seedEnd": 4200200249,
+      "modelSHA256": "7dade6cf173a13a0ad829fd919e540ddff24e78865471c67337ae19c1ca2c8e5",
+      "metrics": {
+        "wins": 500,
+        "losses": 0,
+        "draws": 0,
+        "confidence95": {
+          "matchWinRate": [
+            1,
+            1
+          ],
+          "matchScore": [
+            1,
+            1
+          ],
+          "roundWinRate": [
+            0.9988104678826328,
+            1
+          ],
+          "averageUpgradePoints": [
+            2.97864768683274,
+            2.9912629070691024
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-81551-development-500-rule.json",
+      "opponent": "rule",
+      "reportSHA256": "cca6813a2d37e5b38af1baba21cfe16c2597c22df4cae51cfea302efb894fdb0",
+      "seedStart": 4200200000,
+      "seedEnd": 4200200249,
+      "modelSHA256": "7dade6cf173a13a0ad829fd919e540ddff24e78865471c67337ae19c1ca2c8e5",
+      "metrics": {
+        "wins": 69,
+        "losses": 389,
+        "draws": 42,
+        "confidence95": {
+          "matchWinRate": [
+            0.112,
+            0.166
+          ],
+          "matchScore": [
+            0.151,
+            0.211
+          ],
+          "roundWinRate": [
+            0.2952236870542468,
+            0.3258057893656333
+          ],
+          "averageUpgradePoints": [
+            -0.917652027027027,
+            -0.7687461897988214
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-81551-development-500-p0.json",
+      "opponent": "p0",
+      "reportSHA256": "fc1f6d4a7d41d4bbab9196a45cfe9d3f8587e61c2646261d9a805c2e263fb53e",
+      "seedStart": 4200200000,
+      "seedEnd": 4200200249,
+      "modelSHA256": "7dade6cf173a13a0ad829fd919e540ddff24e78865471c67337ae19c1ca2c8e5",
+      "metrics": {
+        "wins": 3,
+        "losses": 486,
+        "draws": 11,
+        "confidence95": {
+          "matchWinRate": [
+            0,
+            0.014
+          ],
+          "matchScore": [
+            0.009,
+            0.027
+          ],
+          "roundWinRate": [
+            0.16451779267663744,
+            0.19170598460392352
+          ],
+          "averageUpgradePoints": [
+            -1.754335260115607,
+            -1.6210790464240903
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-81551-development-500-clint.json",
+      "opponent": "clint",
+      "reportSHA256": "1b60481d4358b1685c2309e908d7bc48e28e3dfee6c7a71862e8e93d6977bcf9",
+      "seedStart": 4200200000,
+      "seedEnd": 4200200249,
+      "modelSHA256": "7dade6cf173a13a0ad829fd919e540ddff24e78865471c67337ae19c1ca2c8e5",
+      "metrics": {
+        "wins": 80,
+        "losses": 377,
+        "draws": 43,
+        "confidence95": {
+          "matchWinRate": [
+            0.128,
+            0.192
+          ],
+          "matchScore": [
+            0.172,
+            0.236
+          ],
+          "roundWinRate": [
+            0.31404305747580485,
+            0.34400948991696323
+          ],
+          "averageUpgradePoints": [
+            -0.7990324531344487,
+            -0.6462319406481843
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-81551-development-500-champion.json",
+      "opponent": "champion",
+      "reportSHA256": "880e7e789ec86f36ed521cf2231c3c19b9364be1023010c3afc327d8efa7d693",
+      "seedStart": 4200200000,
+      "seedEnd": 4200200249,
+      "modelSHA256": "7dade6cf173a13a0ad829fd919e540ddff24e78865471c67337ae19c1ca2c8e5",
+      "metrics": {
+        "wins": 1,
+        "losses": 492,
+        "draws": 7,
+        "confidence95": {
+          "matchWinRate": [
+            0,
+            0.006
+          ],
+          "matchScore": [
+            0.004,
+            0.016
+          ],
+          "roundWinRate": [
+            0.15396578538102643,
+            0.179474216380182
+          ],
+          "averageUpgradePoints": [
+            -1.8110647181628392,
+            -1.6947608200455582
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-81551-legacy-200.json",
+      "protocol": "legacy-200",
+      "reportSHA256": "80bfdfedd55079b9679c2c2f2563945a05ee4d57d554b84aa7e13668b100dccb",
+      "modelSHA256": "7dade6cf173a13a0ad829fd919e540ddff24e78865471c67337ae19c1ca2c8e5"
     }
   ],
   "guanzeroDevelopmentPlanArchives": [

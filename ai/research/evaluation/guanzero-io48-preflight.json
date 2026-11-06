@@ -1,0 +1,42 @@
+{
+  "parentStep": 81551,
+  "optimizer": "RMSprop",
+  "shards": 85442,
+  "oldCursorEntries": 450437,
+  "indexSeconds": 5.910512800095603,
+  "batchRows": 3200,
+  "readTimesSecondsOldNew": [
+    [
+      6.517840700224042,
+      0.005275400122627616
+    ],
+    [
+      6.468922399915755,
+      0.004620100138708949
+    ],
+    [
+      6.505659499904141,
+      0.004597799852490425
+    ]
+  ],
+  "equalRows": 9600,
+  "resumeAt": 81552,
+  "verifiedStep": 81553,
+  "identicalWeightsOptimizerLossCursor": true,
+  "checkpointSHA256": "8be955b2532bd64fc5ffd24d6da775a4892351200c0df39d28ec1337ff8aaca5",
+  "midpointIntegration": {
+    "preparedRealSnapshot": 81551,
+    "afterLatestPointerChange": "same-frozen-checkpoint",
+    "seedIndexBase": 5100,
+    "pairsPerOpponent": 250,
+    "opponents": [
+      "random",
+      "rule",
+      "p0",
+      "clint",
+      "champion"
+    ]
+  },
+  "scope": "Read-only three warm batches after initial index build; training throughput is measured separately.",
+  "verificationCorrection": "Initial read-only harness retained retired manifests in its legacy directory. Compared newly exhausted entries separately on subsequent batches, then verified rows, targets and actual CUDA restart."
+}
