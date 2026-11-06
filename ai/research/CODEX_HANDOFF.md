@@ -310,3 +310,5 @@ GuanZero 本机续训使用独立运行目录、FIFO 清单索引和固定窗口
 ## 冠军续打交接（2026-11-06）
 
 所有者追加要求已写入根 AGENTS。进还贡继任批次使用当前可核验冠军统一续打，GuanZero 只作单独验收目标；原批次完整保留，旧 `progress.json` 是实时视图，停止原证据见 `progress-at-champion-transition.json`。继任运行目录 `tribute-champion-20261106`，原 08:00 Toronto 截止不变；不要把继承步数或旧样本计为本批新完成。
+
+冠军续打继任批次已经实际恢复，继承 1220 步后首训新增 20 步；原协议／检查点不变、种子不重复。见 [恢复证据](evaluation/tribute-20261106-teacher-resumed.json)。原目录进度只是监控视图，请以 `activeRun` 读取新批次原始状态；融合仍读新运行目录，不把继承当新增。
