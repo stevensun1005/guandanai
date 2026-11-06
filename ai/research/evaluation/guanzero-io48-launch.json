@@ -1,0 +1,31 @@
+{
+  "frozenCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "trainingRun": "guanzero-adp-io48",
+  "initialStep": 81551,
+  "initialShards": 85442,
+  "optimizer": "RMSprop",
+  "device": "NVIDIA GeForce RTX 4070",
+  "schedule": {
+    "startedAt": "2026-11-06T03:11:40.256Z",
+    "midpointAt": "2026-11-07T03:11:40.256Z",
+    "plannedEnd": "2026-11-08T03:11:40.256Z",
+    "hours": 48,
+    "seedIndex": 5100
+  },
+  "observation": {
+    "firstStep": 82672,
+    "lastStep": 83144,
+    "firstIndexedShards": 79022,
+    "lastIndexedShards": 76348,
+    "intervalSeconds": 59.37635254859924,
+    "updatesPerSecond": 7.949292601186144,
+    "usedSamples": 266060800,
+    "samplingPausedForDrain": true,
+    "observedAt": "2026-11-06T03:15:11.794160+00:00"
+  },
+  "dashboardPort": 8770,
+  "parentCheckpointUnchanged": true,
+  "all32ActorSeedCursorsChecked": true,
+  "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42154975916",
+  "workflowConclusion": "success"
+}
