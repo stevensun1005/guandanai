@@ -25,7 +25,7 @@ def require(condition, message):
         raise ValueError(message)
 
 
-def audit_shards(directory, counted):
+def audit_shards(directory, counted, inherited_absent=()):
     directory = Path(directory)
     manifests = {}
     expected = set()
@@ -53,7 +53,8 @@ def audit_shards(directory, counted):
     actual = {p.name for p in directory.iterdir() if p.is_file()}
     require(actual == expected, f"Orphan or temporary shard files: {sorted(actual ^ expected)}")
     require(manifests, "No replay shards retained")
-    require(set(counted) <= manifests.keys(), "Checkpoint references missing retained shards")
+    absent = set(counted) - manifests.keys()
+    require(absent <= set(inherited_absent), "Checkpoint references missing retained shards")
     pending = {name: meta for name, meta in manifests.items() if name not in counted}
     return {
         "manifests": manifests,
@@ -63,6 +64,7 @@ def audit_shards(directory, counted):
         "pendingRows": sum(m["rows"] for m in pending.values()),
         "allCompanionsAndLengthsValid": True,
         "allTargetsFiniteAndWithinProtocol": True,
+        "inheritedCountedNamesAlreadyAbsentAtHandoff": sorted(absent),
     }
 
 
@@ -101,7 +103,7 @@ def audit_actor_logs(directory, seed_offset):
     return actors
 
 
-def audit(run, frozen_source):
+def audit(run, frozen_source, inherited_run=None):
     run, frozen_source = Path(run).resolve(), Path(frozen_source).resolve()
     status, learner = read(run / "status.json"), read(run / "learner/status.json")
     require(status.get("stoppedAt") and not status.get("running"), "Supervisor has not stopped")
@@ -148,7 +150,16 @@ def audit(run, frozen_source):
         adam_steps.append(float(state["step"]))
     require(all(step == checkpoint["step"] for step in adam_steps), "Adam step disagreement")
 
-    shards = audit_shards(run / "shards", checkpoint["countedShards"])
+    inherited_absent = set()
+    inherited_checkpoint_sha = None
+    if inherited_run:
+        inherited_run = Path(inherited_run).resolve()
+        inherited_checkpoint_sha = sha(inherited_run / "learner/checkpoint.pt")
+        require(inherited_checkpoint_sha == config["parent"]["checkpointSHA256"],
+                "Inherited bookkeeping checkpoint SHA mismatch")
+        inherited = torch.load(inherited_run / "learner/checkpoint.pt", weights_only=True, map_location="cpu")
+        inherited_absent = set(inherited["countedShards"]) - {p.name for p in (inherited_run / "shards").glob("*.json")}
+    shards = audit_shards(run / "shards", checkpoint["countedShards"], inherited_absent)
     actors = audit_actor_logs(run / "actors", config["actorSeedOffset"])
     pids = [status["pid"], learner["pid"], *[a["pid"] for a in actors]]
     alive = []
@@ -184,6 +195,7 @@ def audit(run, frozen_source):
         "historicallyEvictedRowsRecovered": False,
         "checkpointIncludesReplayRingOrRandomState": False,
         "badShardEvents": bad_shards, "optimizerUpdatesExecutedByAudit": 0,
+        "inheritedBookkeepingCheckpointSHA256": inherited_checkpoint_sha,
         "limit": "Validates completed saved data and retained replay; does not recover evicted raw samples or prove playing strength.",
     }
 
@@ -193,10 +205,11 @@ if __name__ == "__main__":
     parser.add_argument("--run", required=True)
     parser.add_argument("--frozen-source", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--inherited-run")
     args = parser.parse_args()
     output = Path(args.output).resolve()
     require(not output.is_relative_to(Path(args.run).resolve()), "Audit output must be outside source run")
-    result = audit(args.run, args.frozen_source)
+    result = audit(args.run, args.frozen_source, args.inherited_run)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"passed": True, "step": result["checkpoint"]["step"], "retainedRows": result["replay"]["retainedRows"], "pendingRows": result["replay"]["pendingRows"]}))

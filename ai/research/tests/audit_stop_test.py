@@ -50,6 +50,8 @@ class StopAuditTests(unittest.TestCase):
             orphan.unlink()
             with self.assertRaisesRegex(ValueError, "missing retained"):
                 AUDIT.audit_shards(root, ["missing.json"])
+            inherited = AUDIT.audit_shards(root, ["missing.json"], ["missing.json"])
+            self.assertEqual(inherited["inheritedCountedNamesAlreadyAbsentAtHandoff"], ["missing.json"])
 
     def test_actor_results_must_match_counters_and_never_repeat_seeds(self):
         with tempfile.TemporaryDirectory() as tmp:

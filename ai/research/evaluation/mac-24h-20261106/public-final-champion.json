@@ -1,0 +1,42 @@
+{
+  "verifiedAtUTC": "2026-11-06T22:00:52.204Z",
+  "passed": true,
+  "defaultId": "017",
+  "version": "v000855042",
+  "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "bytes": 5368650,
+  "choices": [
+    {
+      "id": "clint-rule",
+      "name": "Clint规则机器人",
+      "kind": "rule"
+    },
+    {
+      "id": "016",
+      "name": "guanzero-adp-io48-135205",
+      "kind": "neural"
+    },
+    {
+      "id": "015",
+      "name": "guanzero-adp-io48-120154",
+      "kind": "neural"
+    },
+    {
+      "id": "001",
+      "name": "danMCai-v000000000",
+      "kind": "neural"
+    },
+    {
+      "id": "017",
+      "name": "danMCai-v000855042",
+      "kind": "neural"
+    },
+    {
+      "id": "012",
+      "name": "danMCai-v000705434",
+      "kind": "neural"
+    }
+  ],
+  "existingImmutableReleaseReused": true,
+  "webURL": "https://stevensun1005.github.io/guandanai/"
+}

@@ -1,0 +1,18 @@
+{
+  "pid": 67297,
+  "device": "mps",
+  "deviceName": "Apple MPS",
+  "torch": "2.15.0",
+  "hip": null,
+  "gpuAllocatedBytes": 21545984,
+  "state": "stopped",
+  "step": 1013906,
+  "version": "v001013906",
+  "buffer": 2000000,
+  "ingestedRows": 519120344,
+  "trainedRows": 2076479488,
+  "lossEMA": 3.302812445128356,
+  "replayRatio": 3.9999963630783846,
+  "stepsPerSecond": 3.8957260651782426,
+  "updatedAt": "2026-11-06T21:58:14Z"
+}

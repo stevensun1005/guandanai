@@ -1,0 +1,11 @@
+{
+  "checkpointStep": 682654,
+  "ingestedRows": 349519139,
+  "trainedRows": 1398075392,
+  "uncountedImportedShards": {
+    "a01-000003063.json": 8620,
+    "a00-000003038.json": 10990,
+    "a02-000003029.json": 8610
+  },
+  "uncountedImportedRows": 28220
+}

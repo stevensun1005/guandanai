@@ -3543,6 +3543,21 @@
       "checkpointSHA256": "bb6e3f59ab1a1c0c1e2b03ebaf78bb60784b30a48e96da389d3d8cc964cdd891",
       "evidence": "ai/research/evaluation/mac-gate-scheduling-20261105.json",
       "download": null
+    },
+    {
+      "id": "mac-final-window-step-1013906",
+      "path": "ai/danMCai/workspace/mac-final-20261106/danMCai-mac-20261105-final.zip",
+      "role": "Closed single 24h Mac window; complete present files including final network, matching Adam, retained replay and late shards; local archive, not a new training authorization",
+      "step": 1013906,
+      "policySHA256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+      "checkpointSHA256": "8c7041a3cf3b8446b9b050585a5d2467c17db8e179410c84fd62a89cf21675d6",
+      "championVersion": "v000855042",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "archiveSHA256": "ab6e7e7b65dd67d855d943a41f408f1e4182d8283c5173e8b1376223b2b9ac4a",
+      "archiveBytes": 402083111,
+      "verifiedFiles": 610,
+      "evidence": "ai/research/evaluation/mac-24h-20261106.json",
+      "download": null
     }
   ],
   "webModels": {
@@ -4727,5 +4742,15 @@
       "evidence": "tribute-20261106-final.json",
       "release": null
     }
-  ]
+  ],
+  "continuousWindowClosures": {
+    "mac-20261105": {
+      "status": "closed",
+      "deadlineUTC": "2026-11-06T21:58:13.414Z",
+      "finalStep": 1013906,
+      "champion": "v000855042",
+      "webDefaultId": "017",
+      "evidence": "ai/research/evaluation/mac-24h-20261106.json"
+    }
+  }
 }

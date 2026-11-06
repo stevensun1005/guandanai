@@ -57,3 +57,5 @@
 [进还贡专项 Mac 交接](TRIBUTE_MAC_HANDOFF.md) · [Windows 打包与恢复证据](evaluation/tribute-mac-transfer-20261106.json)：完整数据／Adam 已保留并校验，Mac 专项 MPS 验证仍待执行。
 
 [停机只读审计工具](tools/audit-continuous-stop.py)核对固定窗口、最终网络和 Adam、现存重放分片与采样日志；恢复及本地 ZIP 核验流程见 [Mac 交接](MAC_HANDOFF.md#窗口结束后)。
+
+[Mac 唯一 24 小时窗口最终核验](evaluation/mac-24h-20261106.json)：原截止触发停止、最终学习器与 Adam、现存回放及尾部数据、610 文件本地归档恢复均核对通过，最终冠军复用网页归档 017。完整原始正负门控及尚待独立验证的结论见主报告第 40 节。

@@ -1,0 +1,9 @@
+{
+  "version": "v001013906",
+  "file": "v001013906.onnx",
+  "sha256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+  "step": 1013906,
+  "trainedRows": 2076479488,
+  "ingestedRows": 519120344,
+  "publishedAt": "2026-11-06T21:58:14Z"
+}

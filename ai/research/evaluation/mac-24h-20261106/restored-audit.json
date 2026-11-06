@@ -1,0 +1,830 @@
+{
+  "schema": 1,
+  "kind": "Read-only final continuous-run audit",
+  "passed": true,
+  "observedAtUTC": "2026-11-06T22:00:49.763376+00:00",
+  "run": "/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-final-20261106/restored/mac-20261105",
+  "schedule": {
+    "startUTC": "2026-11-05T21:58:13.414Z",
+    "deadlineUTC": "2026-11-06T21:58:13.414Z",
+    "durationHours": 24,
+    "restartExtendsDeadline": false
+  },
+  "scheduleSHA256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+  "STOP": {
+    "reason": "authorized-time-limit",
+    "deadlineUTC": "2026-11-06T21:58:13.414Z",
+    "at": "2026-11-06T21:58:15.454Z",
+    "code": 0
+  },
+  "statusStopReason": "operator-stop",
+  "supervisorStoppedAt": "2026-11-06T21:58:19.466Z",
+  "trainingProcessesExited": [
+    67295,
+    67297,
+    67298,
+    67299,
+    67300,
+    67301
+  ],
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "4350ebb4d95fb71d5dbebdc77614ba9e91c2c22de1d44f40f4472912b7928b0b",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+    "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+    "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "f7a2082c84d210b9681d8aed0d2cc6a2c7de175d93df51e23f5b21a6f9d822ed",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "latest": {
+    "version": "v001013906",
+    "file": "v001013906.onnx",
+    "sha256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+    "step": 1013906,
+    "trainedRows": 2076479488,
+    "ingestedRows": 519120344,
+    "publishedAt": "2026-11-06T21:58:14Z"
+  },
+  "champion": {
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "since": "2026-11-06T10:59:34.199Z",
+    "history": [
+      {
+        "version": "v000000000",
+        "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "at": "2026-11-04T20:40:54.512Z",
+        "reason": "initial"
+      },
+      {
+        "version": "v000023473",
+        "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+        "at": "2026-11-04T22:08:59.123Z",
+        "gate": 101
+      },
+      {
+        "version": "v000046476",
+        "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+        "at": "2026-11-04T23:03:24.799Z",
+        "gate": 102
+      },
+      {
+        "version": "v000068679",
+        "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+        "at": "2026-11-05T00:04:51.045Z",
+        "gate": 103
+      },
+      {
+        "version": "v000091092",
+        "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+        "at": "2026-11-05T01:06:47.980Z",
+        "gate": 104
+      },
+      {
+        "version": "v000293055",
+        "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+        "at": "2026-11-05T08:11:50.077Z",
+        "gate": 112
+      },
+      {
+        "version": "v000705434",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "at": "2026-11-06T00:22:21.010Z",
+        "gate": 309
+      },
+      {
+        "version": "v000855042",
+        "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+        "at": "2026-11-06T10:59:34.199Z",
+        "gate": 330
+      }
+    ]
+  },
+  "checkpoint": {
+    "sha256": "8c7041a3cf3b8446b9b050585a5d2467c17db8e179410c84fd62a89cf21675d6",
+    "step": 1013906,
+    "trainedRows": 2076479488,
+    "ingestedRows": 519120344,
+    "modelMatchesONNX": true,
+    "adamStates": 12,
+    "adamSteps": [
+      1013906.0
+    ],
+    "countedShards": 239
+  },
+  "replay": {
+    "manifests": {
+      "a00-000005585.json": {
+        "rows": 16881,
+        "matches": 32
+      },
+      "a00-000005586.json": {
+        "rows": 16760,
+        "matches": 37
+      },
+      "a00-000005587.json": {
+        "rows": 16609,
+        "matches": 34
+      },
+      "a00-000005588.json": {
+        "rows": 16913,
+        "matches": 36
+      },
+      "a00-000005589.json": {
+        "rows": 16460,
+        "matches": 36
+      },
+      "a00-000005590.json": {
+        "rows": 16945,
+        "matches": 37
+      },
+      "a00-000005591.json": {
+        "rows": 16594,
+        "matches": 36
+      },
+      "a00-000005592.json": {
+        "rows": 16931,
+        "matches": 38
+      },
+      "a00-000005593.json": {
+        "rows": 16612,
+        "matches": 37
+      },
+      "a00-000005594.json": {
+        "rows": 16627,
+        "matches": 36
+      },
+      "a00-000005595.json": {
+        "rows": 16918,
+        "matches": 37
+      },
+      "a00-000005596.json": {
+        "rows": 16711,
+        "matches": 35
+      },
+      "a00-000005597.json": {
+        "rows": 16817,
+        "matches": 39
+      },
+      "a00-000005598.json": {
+        "rows": 16488,
+        "matches": 35
+      },
+      "a00-000005599.json": {
+        "rows": 16841,
+        "matches": 36
+      },
+      "a00-000005600.json": {
+        "rows": 16610,
+        "matches": 36
+      },
+      "a00-000005601.json": {
+        "rows": 16912,
+        "matches": 32
+      },
+      "a00-000005602.json": {
+        "rows": 16466,
+        "matches": 35
+      },
+      "a00-000005603.json": {
+        "rows": 16723,
+        "matches": 36
+      },
+      "a00-000005604.json": {
+        "rows": 16494,
+        "matches": 29
+      },
+      "a00-000005605.json": {
+        "rows": 16662,
+        "matches": 36
+      },
+      "a00-000005606.json": {
+        "rows": 16639,
+        "matches": 36
+      },
+      "a00-000005607.json": {
+        "rows": 16449,
+        "matches": 34
+      },
+      "a00-000005608.json": {
+        "rows": 16793,
+        "matches": 37
+      },
+      "a00-000005609.json": {
+        "rows": 16798,
+        "matches": 34
+      },
+      "a00-000005610.json": {
+        "rows": 17051,
+        "matches": 34
+      },
+      "a00-000005611.json": {
+        "rows": 16408,
+        "matches": 36
+      },
+      "a00-000005612.json": {
+        "rows": 16531,
+        "matches": 38
+      },
+      "a00-000005613.json": {
+        "rows": 16494,
+        "matches": 35
+      },
+      "a00-000005614.json": {
+        "rows": 16847,
+        "matches": 36
+      },
+      "a00-000005615.json": {
+        "rows": 9735,
+        "matches": 21
+      },
+      "a01-000005607.json": {
+        "rows": 16478,
+        "matches": 35
+      },
+      "a01-000005608.json": {
+        "rows": 16538,
+        "matches": 31
+      },
+      "a01-000005609.json": {
+        "rows": 16893,
+        "matches": 40
+      },
+      "a01-000005610.json": {
+        "rows": 16652,
+        "matches": 36
+      },
+      "a01-000005611.json": {
+        "rows": 16537,
+        "matches": 36
+      },
+      "a01-000005612.json": {
+        "rows": 16410,
+        "matches": 35
+      },
+      "a01-000005613.json": {
+        "rows": 16397,
+        "matches": 36
+      },
+      "a01-000005614.json": {
+        "rows": 16671,
+        "matches": 35
+      },
+      "a01-000005615.json": {
+        "rows": 16618,
+        "matches": 34
+      },
+      "a01-000005616.json": {
+        "rows": 17021,
+        "matches": 37
+      },
+      "a01-000005617.json": {
+        "rows": 16833,
+        "matches": 40
+      },
+      "a01-000005618.json": {
+        "rows": 16440,
+        "matches": 37
+      },
+      "a01-000005619.json": {
+        "rows": 16402,
+        "matches": 33
+      },
+      "a01-000005620.json": {
+        "rows": 16525,
+        "matches": 36
+      },
+      "a01-000005621.json": {
+        "rows": 16848,
+        "matches": 36
+      },
+      "a01-000005622.json": {
+        "rows": 16647,
+        "matches": 32
+      },
+      "a01-000005623.json": {
+        "rows": 16833,
+        "matches": 36
+      },
+      "a01-000005624.json": {
+        "rows": 16430,
+        "matches": 37
+      },
+      "a01-000005625.json": {
+        "rows": 16838,
+        "matches": 36
+      },
+      "a01-000005626.json": {
+        "rows": 16707,
+        "matches": 34
+      },
+      "a01-000005627.json": {
+        "rows": 16453,
+        "matches": 36
+      },
+      "a01-000005628.json": {
+        "rows": 16694,
+        "matches": 37
+      },
+      "a01-000005629.json": {
+        "rows": 16671,
+        "matches": 32
+      },
+      "a01-000005630.json": {
+        "rows": 16403,
+        "matches": 35
+      },
+      "a01-000005631.json": {
+        "rows": 16445,
+        "matches": 32
+      },
+      "a01-000005632.json": {
+        "rows": 16843,
+        "matches": 35
+      },
+      "a01-000005633.json": {
+        "rows": 17135,
+        "matches": 33
+      },
+      "a01-000005634.json": {
+        "rows": 16556,
+        "matches": 34
+      },
+      "a01-000005635.json": {
+        "rows": 16596,
+        "matches": 32
+      },
+      "a01-000005636.json": {
+        "rows": 11961,
+        "matches": 28
+      },
+      "a02-000005515.json": {
+        "rows": 16533,
+        "matches": 34
+      },
+      "a02-000005516.json": {
+        "rows": 16626,
+        "matches": 35
+      },
+      "a02-000005517.json": {
+        "rows": 16876,
+        "matches": 37
+      },
+      "a02-000005518.json": {
+        "rows": 16524,
+        "matches": 36
+      },
+      "a02-000005519.json": {
+        "rows": 16610,
+        "matches": 35
+      },
+      "a02-000005520.json": {
+        "rows": 16753,
+        "matches": 38
+      },
+      "a02-000005521.json": {
+        "rows": 16623,
+        "matches": 35
+      },
+      "a02-000005522.json": {
+        "rows": 16836,
+        "matches": 38
+      },
+      "a02-000005523.json": {
+        "rows": 16761,
+        "matches": 33
+      },
+      "a02-000005524.json": {
+        "rows": 16680,
+        "matches": 34
+      },
+      "a02-000005525.json": {
+        "rows": 16587,
+        "matches": 37
+      },
+      "a02-000005526.json": {
+        "rows": 16851,
+        "matches": 35
+      },
+      "a02-000005527.json": {
+        "rows": 16791,
+        "matches": 33
+      },
+      "a02-000005528.json": {
+        "rows": 16445,
+        "matches": 33
+      },
+      "a02-000005529.json": {
+        "rows": 16630,
+        "matches": 38
+      },
+      "a02-000005530.json": {
+        "rows": 17001,
+        "matches": 38
+      },
+      "a02-000005531.json": {
+        "rows": 16778,
+        "matches": 34
+      },
+      "a02-000005532.json": {
+        "rows": 16887,
+        "matches": 36
+      },
+      "a02-000005533.json": {
+        "rows": 16595,
+        "matches": 38
+      },
+      "a02-000005534.json": {
+        "rows": 16574,
+        "matches": 31
+      },
+      "a02-000005535.json": {
+        "rows": 17145,
+        "matches": 38
+      },
+      "a02-000005536.json": {
+        "rows": 16582,
+        "matches": 37
+      },
+      "a02-000005537.json": {
+        "rows": 17210,
+        "matches": 33
+      },
+      "a02-000005538.json": {
+        "rows": 16586,
+        "matches": 32
+      },
+      "a02-000005539.json": {
+        "rows": 16638,
+        "matches": 33
+      },
+      "a02-000005540.json": {
+        "rows": 16677,
+        "matches": 32
+      },
+      "a02-000005541.json": {
+        "rows": 16400,
+        "matches": 34
+      },
+      "a02-000005542.json": {
+        "rows": 16788,
+        "matches": 30
+      },
+      "a02-000005543.json": {
+        "rows": 16980,
+        "matches": 35
+      },
+      "a02-000005544.json": {
+        "rows": 16776,
+        "matches": 31
+      },
+      "a02-000005545.json": {
+        "rows": 13023,
+        "matches": 24
+      },
+      "a03-000004867.json": {
+        "rows": 16423,
+        "matches": 33
+      },
+      "a03-000004868.json": {
+        "rows": 16501,
+        "matches": 33
+      },
+      "a03-000004869.json": {
+        "rows": 16571,
+        "matches": 32
+      },
+      "a03-000004870.json": {
+        "rows": 16693,
+        "matches": 31
+      },
+      "a03-000004871.json": {
+        "rows": 16897,
+        "matches": 34
+      },
+      "a03-000004872.json": {
+        "rows": 16748,
+        "matches": 33
+      },
+      "a03-000004873.json": {
+        "rows": 16712,
+        "matches": 36
+      },
+      "a03-000004874.json": {
+        "rows": 16422,
+        "matches": 31
+      },
+      "a03-000004875.json": {
+        "rows": 16633,
+        "matches": 36
+      },
+      "a03-000004876.json": {
+        "rows": 16664,
+        "matches": 35
+      },
+      "a03-000004877.json": {
+        "rows": 16709,
+        "matches": 36
+      },
+      "a03-000004878.json": {
+        "rows": 16789,
+        "matches": 35
+      },
+      "a03-000004879.json": {
+        "rows": 16752,
+        "matches": 36
+      },
+      "a03-000004880.json": {
+        "rows": 16545,
+        "matches": 34
+      },
+      "a03-000004881.json": {
+        "rows": 16857,
+        "matches": 40
+      },
+      "a03-000004882.json": {
+        "rows": 16664,
+        "matches": 32
+      },
+      "a03-000004883.json": {
+        "rows": 16460,
+        "matches": 39
+      },
+      "a03-000004884.json": {
+        "rows": 16511,
+        "matches": 36
+      },
+      "a03-000004885.json": {
+        "rows": 16404,
+        "matches": 39
+      },
+      "a03-000004886.json": {
+        "rows": 16575,
+        "matches": 33
+      },
+      "a03-000004887.json": {
+        "rows": 16399,
+        "matches": 31
+      },
+      "a03-000004888.json": {
+        "rows": 16605,
+        "matches": 36
+      },
+      "a03-000004889.json": {
+        "rows": 16827,
+        "matches": 33
+      },
+      "a03-000004890.json": {
+        "rows": 16464,
+        "matches": 27
+      },
+      "a03-000004891.json": {
+        "rows": 16590,
+        "matches": 32
+      },
+      "a03-000004892.json": {
+        "rows": 16984,
+        "matches": 37
+      },
+      "a03-000004893.json": {
+        "rows": 16649,
+        "matches": 37
+      },
+      "a03-000004894.json": {
+        "rows": 16775,
+        "matches": 36
+      },
+      "a03-000004895.json": {
+        "rows": 16420,
+        "matches": 35
+      },
+      "a03-000004896.json": {
+        "rows": 16525,
+        "matches": 36
+      },
+      "a03-000004897.json": {
+        "rows": 14751,
+        "matches": 27
+      }
+    },
+    "shards": 123,
+    "retainedRows": 2033479,
+    "pendingShards": [
+      "a00-000005615.json",
+      "a01-000005636.json",
+      "a02-000005545.json",
+      "a03-000004897.json"
+    ],
+    "pendingRows": 49470,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": [
+      "a00-000002315.json",
+      "a00-000002316.json",
+      "a00-000002317.json",
+      "a00-000002318.json",
+      "a00-000002319.json",
+      "a00-000002320.json",
+      "a00-000002321.json",
+      "a00-000002322.json",
+      "a00-000002323.json",
+      "a00-000002324.json",
+      "a00-000002325.json",
+      "a00-000002326.json",
+      "a00-000002327.json",
+      "a00-000002328.json",
+      "a00-000002329.json",
+      "a00-000002330.json",
+      "a01-000002345.json",
+      "a01-000002346.json",
+      "a01-000002347.json",
+      "a01-000002348.json",
+      "a01-000002349.json",
+      "a01-000002350.json",
+      "a01-000002351.json",
+      "a01-000002352.json",
+      "a01-000002353.json",
+      "a01-000002354.json",
+      "a01-000002355.json",
+      "a01-000002356.json",
+      "a01-000002357.json",
+      "a01-000002358.json",
+      "a01-000002359.json",
+      "a02-000002300.json",
+      "a02-000002301.json",
+      "a02-000002302.json",
+      "a02-000002303.json",
+      "a02-000002304.json",
+      "a02-000002305.json",
+      "a02-000002306.json",
+      "a02-000002307.json",
+      "a02-000002308.json",
+      "a02-000002309.json",
+      "a02-000002310.json",
+      "a02-000002311.json",
+      "a02-000002312.json",
+      "a02-000002313.json",
+      "a02-000002314.json",
+      "a02-000002315.json",
+      "a02-000002316.json",
+      "a02-000002317.json",
+      "a02-000002318.json",
+      "a03-000002339.json",
+      "a03-000002340.json",
+      "a03-000002341.json",
+      "a03-000002342.json",
+      "a03-000002343.json",
+      "a03-000002344.json",
+      "a03-000002345.json",
+      "a03-000002346.json",
+      "a03-000002347.json",
+      "a03-000002348.json",
+      "a03-000002349.json",
+      "a03-000002350.json",
+      "a03-000002351.json",
+      "a03-000002352.json",
+      "a03-000002353.json",
+      "a03-000002354.json",
+      "a03-000002355.json",
+      "a04-000002306.json",
+      "a04-000002307.json",
+      "a04-000002308.json",
+      "a04-000002309.json",
+      "a04-000002310.json",
+      "a04-000002311.json",
+      "a04-000002312.json",
+      "a04-000002313.json",
+      "a04-000002314.json",
+      "a04-000002315.json",
+      "a04-000002316.json",
+      "a04-000002317.json",
+      "a04-000002318.json",
+      "a04-000002319.json",
+      "a04-000002320.json",
+      "a04-000002321.json",
+      "a05-000002303.json",
+      "a05-000002304.json",
+      "a05-000002305.json",
+      "a05-000002306.json",
+      "a05-000002307.json",
+      "a05-000002308.json",
+      "a05-000002309.json",
+      "a05-000002310.json",
+      "a05-000002311.json",
+      "a05-000002312.json",
+      "a05-000002313.json",
+      "a05-000002314.json",
+      "a05-000002315.json",
+      "a05-000002316.json",
+      "a05-000002317.json",
+      "a05-000002318.json",
+      "a06-000002292.json",
+      "a07-000002255.json",
+      "a07-000002256.json",
+      "a07-000002257.json",
+      "a07-000002258.json",
+      "a07-000002259.json",
+      "a07-000002260.json",
+      "a07-000002261.json",
+      "a07-000002262.json",
+      "a07-000002263.json",
+      "a07-000002264.json",
+      "a07-000002265.json",
+      "a07-000002266.json",
+      "a07-000002267.json",
+      "a07-000002268.json",
+      "a07-000002269.json",
+      "a07-000002270.json",
+      "a07-000002271.json",
+      "a07-000002272.json",
+      "a07-000002273.json",
+      "a07-000002274.json"
+    ]
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 67298,
+      "matches": 90288,
+      "decisions": 42895058,
+      "failures": 0,
+      "nextSeed": 3090288,
+      "shardSequence": 5616,
+      "uniqueLoggedSeeds": 90288,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 1,
+      "pid": 67299,
+      "matches": 90218,
+      "decisions": 42840853,
+      "failures": 1,
+      "nextSeed": 3090219,
+      "shardSequence": 5637,
+      "uniqueLoggedSeeds": 90219,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 2,
+      "pid": 67300,
+      "matches": 88076,
+      "decisions": 41895797,
+      "failures": 1,
+      "nextSeed": 3088077,
+      "shardSequence": 5546,
+      "uniqueLoggedSeeds": 88077,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 3,
+      "pid": 67301,
+      "matches": 88017,
+      "decisions": 41990747,
+      "failures": 0,
+      "nextSeed": 3088017,
+      "shardSequence": 4898,
+      "uniqueLoggedSeeds": 88017,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "totals": {
+    "matches": 356599,
+    "decisions": 169622455,
+    "rows": 169622455
+  },
+  "reconstructedReplayRows": 2000000,
+  "historicallyEvictedRowsRecovered": false,
+  "checkpointIncludesReplayRingOrRandomState": false,
+  "badShardEvents": [],
+  "optimizerUpdatesExecutedByAudit": 0,
+  "inheritedBookkeepingCheckpointSHA256": "727c59aab7d8eb37125592a0a7df45eb6f7f40e23dec7892d6a9e16266bb10c4",
+  "limit": "Validates completed saved data and retained replay; does not recover evicted raw samples or prove playing strength."
+}

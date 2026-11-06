@@ -1,0 +1,7 @@
+{
+  "check": "Active-run audit must refuse without output or source mutations",
+  "passed": true,
+  "reason": "Supervisor has not stopped",
+  "preparationIssue": "Initial audit tried to read a not-yet-created STOP before its stopped guard; reordered the guard and repeated successfully.",
+  "labelProtocolNote": "Checked frozen labelMatch: roundIndex is zero-based, 0 <= index < matchRounds; audit and corruption tests use this actual layout."
+}

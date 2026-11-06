@@ -1,0 +1,14 @@
+[
+  {
+    "file": "ai/danMCai/runs/mac-20261105/actors/results-1.jsonl",
+    "t": 1793958116065,
+    "error": "ENOENT: no such file or directory, open '/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-training-20261105-r4/ai/danMCai/runs/mac-20261105/league/v000515120.onnx'",
+    "seed": 1053044181
+  },
+  {
+    "file": "ai/danMCai/runs/mac-20261105/actors/results-2.jsonl",
+    "t": 1793940116222,
+    "error": "ENOENT: no such file or directory, open '/Users/stevensun/Desktop/guandanai/ai/danMCai/workspace/mac-training-20261105-r4/ai/danMCai/runs/mac-20261105/league/v000331516.onnx'",
+    "seed": 1103022971
+  }
+]

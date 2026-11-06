@@ -1,0 +1,1612 @@
+{
+  "deadlineUTC": "2026-11-06T21:58:13.414Z",
+  "firstStop": {
+    "observedAtUTC": "2026-11-06T21:58:13.674163+00:00",
+    "observedSecondsAfterDeadline": 0.26015710830688477,
+    "record": {
+      "reason": "authorized-time-limit",
+      "deadlineUTC": "2026-11-06T21:58:13.414Z",
+      "at": "2026-11-06T21:58:13.659Z"
+    }
+  },
+  "observations": [
+    {
+      "at": "2026-11-06T21:06:04.572237+00:00",
+      "updatedAt": "2026-11-06T21:05:53.301Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1001828,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:07:04.939749+00:00",
+      "updatedAt": "2026-11-06T21:06:53.305Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1002056,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:08:05.265732+00:00",
+      "updatedAt": "2026-11-06T21:07:53.309Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1002283,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:09:05.626563+00:00",
+      "updatedAt": "2026-11-06T21:08:53.311Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1002543,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:10:05.925929+00:00",
+      "updatedAt": "2026-11-06T21:09:53.315Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1002738,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:11:06.316529+00:00",
+      "updatedAt": "2026-11-06T21:10:54.150Z",
+      "stoppedAt": null,
+      "running": [],
+      "learnerStep": 1002965,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:12:06.733562+00:00",
+      "updatedAt": "2026-11-06T21:11:53.325Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1003194,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:13:07.107877+00:00",
+      "updatedAt": "2026-11-06T21:12:53.331Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1003454,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:14:07.518207+00:00",
+      "updatedAt": "2026-11-06T21:13:53.358Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1003715,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:15:07.918211+00:00",
+      "updatedAt": "2026-11-06T21:14:53.337Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1003944,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:16:08.293408+00:00",
+      "updatedAt": "2026-11-06T21:15:53.342Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1004106,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:17:08.702043+00:00",
+      "updatedAt": "2026-11-06T21:16:53.345Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1004367,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:18:09.079802+00:00",
+      "updatedAt": "2026-11-06T21:17:53.348Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1004628,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:19:09.430712+00:00",
+      "updatedAt": "2026-11-06T21:18:53.353Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1004855,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:20:09.874380+00:00",
+      "updatedAt": "2026-11-06T21:19:53.356Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1005050,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:21:10.338344+00:00",
+      "updatedAt": "2026-11-06T21:20:53.368Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1005278,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:22:10.703477+00:00",
+      "updatedAt": "2026-11-06T21:21:53.362Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1005540,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:23:11.112258+00:00",
+      "updatedAt": "2026-11-06T21:22:53.366Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1005766,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:24:11.482011+00:00",
+      "updatedAt": "2026-11-06T21:23:53.371Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1005995,
+      "learnerState": "training"
+    },
+    {
+      "at": "2026-11-06T21:25:11.852578+00:00",
+      "updatedAt": "2026-11-06T21:24:53.374Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1006257,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:26:12.254275+00:00",
+      "updatedAt": "2026-11-06T21:25:53.378Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1006454,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:27:12.631671+00:00",
+      "updatedAt": "2026-11-06T21:26:53.380Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1006715,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:28:13.016409+00:00",
+      "updatedAt": "2026-11-06T21:27:53.408Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1006942,
+      "learnerState": "training"
+    },
+    {
+      "at": "2026-11-06T21:29:13.231003+00:00",
+      "updatedAt": "2026-11-06T21:28:53.389Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1007169,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:30:13.500388+00:00",
+      "updatedAt": "2026-11-06T21:29:53.391Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1007428,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:31:13.747365+00:00",
+      "updatedAt": "2026-11-06T21:30:53.393Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1007656,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:32:14.003971+00:00",
+      "updatedAt": "2026-11-06T21:31:53.394Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1007915,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:33:14.250215+00:00",
+      "updatedAt": "2026-11-06T21:32:53.396Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1008110,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:34:14.498790+00:00",
+      "updatedAt": "2026-11-06T21:33:53.397Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1008373,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:35:14.746777+00:00",
+      "updatedAt": "2026-11-06T21:34:53.399Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1008601,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:36:15.014549+00:00",
+      "updatedAt": "2026-11-06T21:35:53.401Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1008830,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:37:15.408251+00:00",
+      "updatedAt": "2026-11-06T21:36:53.404Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1009090,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:38:15.790750+00:00",
+      "updatedAt": "2026-11-06T21:37:53.405Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1009348,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:39:16.060521+00:00",
+      "updatedAt": "2026-11-06T21:38:53.408Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1009577,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:40:16.305576+00:00",
+      "updatedAt": "2026-11-06T21:39:53.437Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1009771,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:41:16.571204+00:00",
+      "updatedAt": "2026-11-06T21:40:53.415Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3"
+      ],
+      "learnerStep": 1010031,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:42:16.819802+00:00",
+      "updatedAt": "2026-11-06T21:41:53.470Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1010258,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:43:17.073245+00:00",
+      "updatedAt": "2026-11-06T21:42:53.417Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1010487,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:44:17.326948+00:00",
+      "updatedAt": "2026-11-06T21:43:53.420Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1010714,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:45:17.560576+00:00",
+      "updatedAt": "2026-11-06T21:44:53.420Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1010911,
+      "learnerState": "training"
+    },
+    {
+      "at": "2026-11-06T21:46:17.802645+00:00",
+      "updatedAt": "2026-11-06T21:45:53.426Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1011170,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:47:18.033341+00:00",
+      "updatedAt": "2026-11-06T21:46:53.425Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1011399,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:48:18.285688+00:00",
+      "updatedAt": "2026-11-06T21:47:53.428Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1011595,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:49:18.512410+00:00",
+      "updatedAt": "2026-11-06T21:48:53.429Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1011822,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:50:18.795160+00:00",
+      "updatedAt": "2026-11-06T21:49:53.434Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1012084,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:51:19.170558+00:00",
+      "updatedAt": "2026-11-06T21:50:53.436Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1012344,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:52:19.548729+00:00",
+      "updatedAt": "2026-11-06T21:51:53.444Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1012474,
+      "learnerState": "training"
+    },
+    {
+      "at": "2026-11-06T21:53:19.917213+00:00",
+      "updatedAt": "2026-11-06T21:52:53.449Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1012734,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:54:20.264501+00:00",
+      "updatedAt": "2026-11-06T21:53:53.453Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1012995,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:55:20.639316+00:00",
+      "updatedAt": "2026-11-06T21:54:53.470Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1013254,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:56:20.989546+00:00",
+      "updatedAt": "2026-11-06T21:55:53.458Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1013483,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:57:21.369725+00:00",
+      "updatedAt": "2026-11-06T21:56:53.462Z",
+      "stoppedAt": null,
+      "running": [
+        "learner",
+        "actor-0",
+        "actor-1",
+        "actor-2",
+        "actor-3",
+        "gate"
+      ],
+      "learnerStep": 1013646,
+      "learnerState": "waiting-for-data"
+    },
+    {
+      "at": "2026-11-06T21:58:13.674163+00:00",
+      "event": "STOP-update",
+      "record": {
+        "reason": "authorized-time-limit",
+        "deadlineUTC": "2026-11-06T21:58:13.414Z",
+        "at": "2026-11-06T21:58:13.659Z"
+      }
+    },
+    {
+      "at": "2026-11-06T21:58:15.681167+00:00",
+      "event": "STOP-update",
+      "record": {
+        "reason": "authorized-time-limit",
+        "deadlineUTC": "2026-11-06T21:58:13.414Z",
+        "at": "2026-11-06T21:58:15.454Z",
+        "code": 0
+      }
+    },
+    {
+      "at": "2026-11-06T21:58:19.710593+00:00",
+      "updatedAt": "2026-11-06T21:58:19.466Z",
+      "stoppedAt": "2026-11-06T21:58:19.466Z",
+      "running": [],
+      "learnerStep": 1013906,
+      "learnerState": "stopped"
+    }
+  ],
+  "confirmedProcessesExitedAtUTC": "2026-11-06T21:58:19.710593+00:00",
+  "status": {
+    "elapsedSeconds": 86170.494,
+    "gates": [
+      {
+        "index": 301,
+        "challenger": "v000668538",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 853,
+        "wins": 763,
+        "losses": 747,
+        "draws": 196,
+        "llr": -3.0697307842234336,
+        "finishedAt": "2026-11-05T22:32:13.454Z"
+      },
+      {
+        "index": 304,
+        "challenger": "v000649298",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 464,
+        "wins": 406,
+        "losses": 411,
+        "draws": 111,
+        "llr": -3.0361963197400796,
+        "finishedAt": "2026-11-05T22:52:48.547Z"
+      },
+      {
+        "index": 305,
+        "challenger": "v000630482",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 439,
+        "wins": 392,
+        "losses": 403,
+        "draws": 83,
+        "llr": -3.0726718459343787,
+        "finishedAt": "2026-11-05T23:09:01.570Z"
+      },
+      {
+        "index": 306,
+        "challenger": "v000691292",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 253,
+        "wins": 213,
+        "losses": 241,
+        "draws": 52,
+        "llr": -2.96157788216732,
+        "finishedAt": "2026-11-05T23:18:43.902Z"
+      },
+      {
+        "index": 307,
+        "challenger": "v000611432",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 415,
+        "wins": 377,
+        "losses": 388,
+        "draws": 65,
+        "llr": -2.969014416712809,
+        "finishedAt": "2026-11-05T23:34:13.032Z"
+      },
+      {
+        "index": 308,
+        "challenger": "v000584230",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "inconclusive",
+        "pairs": 1000,
+        "wins": 915,
+        "losses": 868,
+        "draws": 217,
+        "llr": -1.0481903643484358,
+        "finishedAt": "2026-11-06T00:11:51.501Z"
+      },
+      {
+        "index": 309,
+        "challenger": "v000705434",
+        "champion": "v000293055",
+        "code": 0,
+        "decision": "accept",
+        "pairs": 280,
+        "wins": 281,
+        "losses": 227,
+        "draws": 52,
+        "llr": 3.025994238311744,
+        "finishedAt": "2026-11-06T00:22:21.010Z"
+      },
+      {
+        "index": 310,
+        "challenger": "v000550941",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 283,
+        "wins": 253,
+        "losses": 272,
+        "draws": 41,
+        "llr": -3.061324012935776,
+        "finishedAt": "2026-11-06T00:32:54.470Z"
+      },
+      {
+        "index": 311,
+        "challenger": "v000515120",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 303,
+        "wins": 254,
+        "losses": 274,
+        "draws": 78,
+        "llr": -3.0034809336179924,
+        "finishedAt": "2026-11-06T00:44:35.802Z"
+      },
+      {
+        "index": 312,
+        "challenger": "v000481076",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 604,
+        "wins": 542,
+        "losses": 541,
+        "draws": 125,
+        "llr": -2.9479436771114957,
+        "finishedAt": "2026-11-06T01:07:33.791Z"
+      },
+      {
+        "index": 313,
+        "challenger": "v000719526",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 162,
+        "wins": 134,
+        "losses": 163,
+        "draws": 27,
+        "llr": -2.947379546173123,
+        "finishedAt": "2026-11-06T01:20:05.115Z"
+      },
+      {
+        "index": 314,
+        "challenger": "v000444167",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 233,
+        "wins": 198,
+        "losses": 221,
+        "draws": 47,
+        "llr": -2.986465795174424,
+        "finishedAt": "2026-11-06T01:29:21.041Z"
+      },
+      {
+        "index": 315,
+        "challenger": "v000406312",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 441,
+        "wins": 387,
+        "losses": 395,
+        "draws": 100,
+        "llr": -3.0535757538855135,
+        "finishedAt": "2026-11-06T01:45:36.918Z"
+      },
+      {
+        "index": 316,
+        "challenger": "v000368644",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 384,
+        "wins": 335,
+        "losses": 349,
+        "draws": 84,
+        "llr": -2.9478599253233235,
+        "finishedAt": "2026-11-06T01:59:39.476Z"
+      },
+      {
+        "index": 317,
+        "challenger": "v000733561",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 354,
+        "wins": 316,
+        "losses": 327,
+        "draws": 65,
+        "llr": -3.0037650783788643,
+        "finishedAt": "2026-11-06T02:13:02.221Z"
+      },
+      {
+        "index": 318,
+        "challenger": "v000331516",
+        "champion": "v000705434",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 209,
+        "wins": 173,
+        "losses": 200,
+        "draws": 45,
+        "llr": -3.0506395953500847,
+        "finishedAt": "2026-11-06T02:20:59.642Z"
+      },
+      {
+        "index": 320,
+        "challenger": "v000743487",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 272,
+        "wins": 231,
+        "losses": 254,
+        "draws": 59,
+        "llr": -3.065988776346767,
+        "finishedAt": "2026-11-06T02:51:36.261Z"
+      },
+      {
+        "index": 321,
+        "challenger": "v000755363",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 216,
+        "wins": 181,
+        "losses": 204,
+        "draws": 47,
+        "llr": -3.006855342325982,
+        "finishedAt": "2026-11-06T03:49:43.402Z"
+      },
+      {
+        "index": 322,
+        "challenger": "v000769638",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 514,
+        "wins": 461,
+        "losses": 468,
+        "draws": 99,
+        "llr": -2.998347792421786,
+        "finishedAt": "2026-11-06T05:00:42.055Z"
+      },
+      {
+        "index": 323,
+        "challenger": "v000293055",
+        "champion": "v000705434",
+        "category": "historical-champion",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 100,
+        "wins": 77,
+        "losses": 105,
+        "draws": 18,
+        "llr": -3.804822908816882,
+        "finishedAt": "2026-11-06T05:44:36.907Z"
+      },
+      {
+        "index": 324,
+        "challenger": "v000783862",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 346,
+        "wins": 297,
+        "losses": 313,
+        "draws": 82,
+        "llr": -2.976692203328503,
+        "finishedAt": "2026-11-06T05:57:58.800Z"
+      },
+      {
+        "index": 325,
+        "challenger": "v000798042",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 398,
+        "wins": 351,
+        "losses": 362,
+        "draws": 83,
+        "llr": -3.0506617660490023,
+        "finishedAt": "2026-11-06T06:56:35.705Z"
+      },
+      {
+        "index": 326,
+        "challenger": "v000812278",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 290,
+        "wins": 248,
+        "losses": 265,
+        "draws": 67,
+        "llr": -2.9974413668223217,
+        "finishedAt": "2026-11-06T07:52:48.363Z"
+      },
+      {
+        "index": 327,
+        "challenger": "v000091092",
+        "champion": "v000705434",
+        "category": "historical-champion",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 106,
+        "wins": 85,
+        "losses": 110,
+        "draws": 17,
+        "llr": -2.9686310865405083,
+        "finishedAt": "2026-11-06T08:44:51.680Z"
+      },
+      {
+        "index": 328,
+        "challenger": "v000826707",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 157,
+        "wins": 125,
+        "losses": 153,
+        "draws": 36,
+        "llr": -3.006365884861403,
+        "finishedAt": "2026-11-06T08:51:13.182Z"
+      },
+      {
+        "index": 329,
+        "challenger": "v000840958",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 320,
+        "wins": 276,
+        "losses": 296,
+        "draws": 68,
+        "llr": -2.972909361069843,
+        "finishedAt": "2026-11-06T09:53:24.923Z"
+      },
+      {
+        "index": 330,
+        "challenger": "v000855042",
+        "champion": "v000705434",
+        "category": "new",
+        "code": 0,
+        "decision": "accept",
+        "pairs": 475,
+        "wins": 463,
+        "losses": 397,
+        "draws": 90,
+        "llr": 2.9756030943276484,
+        "finishedAt": "2026-11-06T10:59:34.199Z"
+      },
+      {
+        "index": 331,
+        "challenger": "v000705434",
+        "champion": "v000855042",
+        "category": "historical-champion",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 287,
+        "wins": 247,
+        "losses": 267,
+        "draws": 60,
+        "llr": -2.952778272845898,
+        "finishedAt": "2026-11-06T11:51:52.073Z"
+      },
+      {
+        "index": 332,
+        "challenger": "v000869184",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 100,
+        "wins": 71,
+        "losses": 109,
+        "draws": 20,
+        "llr": -3.6925685221814115,
+        "finishedAt": "2026-11-06T11:56:00.859Z"
+      },
+      {
+        "index": 333,
+        "challenger": "v000883409",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 152,
+        "wins": 124,
+        "losses": 147,
+        "draws": 33,
+        "llr": -2.9767552340253793,
+        "finishedAt": "2026-11-06T12:47:35.949Z"
+      },
+      {
+        "index": 334,
+        "challenger": "v000897469",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 318,
+        "wins": 274,
+        "losses": 292,
+        "draws": 70,
+        "llr": -2.9448408414086535,
+        "finishedAt": "2026-11-06T13:53:50.948Z"
+      },
+      {
+        "index": 335,
+        "challenger": "v000293055",
+        "champion": "v000855042",
+        "category": "historical-champion",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 396,
+        "wins": 356,
+        "losses": 370,
+        "draws": 66,
+        "llr": -2.955919192593217,
+        "finishedAt": "2026-11-06T14:55:38.642Z"
+      },
+      {
+        "index": 336,
+        "challenger": "v000911757",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 147,
+        "wins": 122,
+        "losses": 147,
+        "draws": 25,
+        "llr": -3.0115960445335728,
+        "finishedAt": "2026-11-06T15:01:18.379Z"
+      },
+      {
+        "index": 337,
+        "challenger": "v000925758",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 306,
+        "wins": 264,
+        "losses": 279,
+        "draws": 69,
+        "llr": -3.020238923244824,
+        "finishedAt": "2026-11-06T15:53:38.827Z"
+      },
+      {
+        "index": 338,
+        "challenger": "v000939910",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 218,
+        "wins": 183,
+        "losses": 206,
+        "draws": 47,
+        "llr": -3.0251245491470393,
+        "finishedAt": "2026-11-06T16:51:27.176Z"
+      },
+      {
+        "index": 339,
+        "challenger": "v000954202",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 137,
+        "wins": 106,
+        "losses": 132,
+        "draws": 36,
+        "llr": -2.953843131804496,
+        "finishedAt": "2026-11-06T17:46:58.896Z"
+      },
+      {
+        "index": 340,
+        "challenger": "v000966044",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 421,
+        "wins": 381,
+        "losses": 392,
+        "draws": 69,
+        "llr": -3.012141222898193,
+        "finishedAt": "2026-11-06T18:57:29.538Z"
+      },
+      {
+        "index": 341,
+        "challenger": "v000980240",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 547,
+        "wins": 486,
+        "losses": 490,
+        "draws": 118,
+        "llr": -3.10094743461403,
+        "finishedAt": "2026-11-06T20:02:34.226Z"
+      },
+      {
+        "index": 342,
+        "challenger": "v000994207",
+        "champion": "v000855042",
+        "category": "new",
+        "code": 0,
+        "decision": "reject",
+        "pairs": 763,
+        "wins": 701,
+        "losses": 691,
+        "draws": 134,
+        "llr": -2.9478464409622127,
+        "finishedAt": "2026-11-06T21:10:54.150Z"
+      }
+    ],
+    "anchorChecks": [
+      {
+        "index": 300,
+        "challenger": "v000721940",
+        "challengerSHA256": "63c72f5068fc9aced2e6f10c88a7425147e4f105c20d9618aaa9eb4c0cade382",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 147,
+        "losses": 123,
+        "draws": 30,
+        "meanScore": 0.54,
+        "clusterHoeffding95CI": [
+          0.42911147558450224,
+          0.6508885244154978
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T01:13:29.572Z"
+      },
+      {
+        "index": 301,
+        "challenger": "v000764942",
+        "challengerSHA256": "7471901f8e08ab25b0bbcbffcf15c70f1dcc9617205c3e182611915a0c9990d2",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 157,
+        "losses": 114,
+        "draws": 29,
+        "meanScore": 0.5716666666666667,
+        "clusterHoeffding95CI": [
+          0.46077814225116887,
+          0.6825551910821644
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T04:19:21.556Z"
+      },
+      {
+        "index": 302,
+        "challenger": "v000807529",
+        "challengerSHA256": "bd9ff8afc2a6bd756412aadf45cb9de49eddae008811e4046697f59c098db1da",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 135,
+        "losses": 126,
+        "draws": 39,
+        "meanScore": 0.515,
+        "clusterHoeffding95CI": [
+          0.4041114755845022,
+          0.6258885244154978
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T07:25:33.166Z"
+      },
+      {
+        "index": 303,
+        "challenger": "v000850352",
+        "challengerSHA256": "45903b751809c815570a865b468c6909972eef4d3a73304b4a73b02cea64929c",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 144,
+        "losses": 131,
+        "draws": 25,
+        "meanScore": 0.5216666666666666,
+        "clusterHoeffding95CI": [
+          0.4107781422511688,
+          0.6325551910821644
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T10:31:28.853Z"
+      },
+      {
+        "index": 304,
+        "challenger": "v000895123",
+        "challengerSHA256": "61c48f1d65d7ee61ece57e8faf92d70fa49a1f0555a64a39fb27ab7debae8c83",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 151,
+        "losses": 123,
+        "draws": 26,
+        "meanScore": 0.5466666666666666,
+        "clusterHoeffding95CI": [
+          0.43577814225116884,
+          0.6575551910821644
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T13:37:30.788Z"
+      },
+      {
+        "index": 305,
+        "challenger": "v000937506",
+        "challengerSHA256": "51b35a09e00a40676a5f66073aabb7369dc62296955d229ccff95e7be93982fe",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 147,
+        "losses": 118,
+        "draws": 35,
+        "meanScore": 0.5483333333333333,
+        "clusterHoeffding95CI": [
+          0.43744480891783555,
+          0.6592218577488311
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T16:43:18.654Z"
+      },
+      {
+        "index": 306,
+        "challenger": "v000987144",
+        "challengerSHA256": "79c6debe16d0fc40d913a4d38a7df821775748f41fd45865f1011f585bdba1cb",
+        "anchorSHA256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+        "status": "complete",
+        "code": 0,
+        "pairs": 150,
+        "wins": 137,
+        "losses": 128,
+        "draws": 35,
+        "meanScore": 0.515,
+        "clusterHoeffding95CI": [
+          0.4041114755845022,
+          0.6258885244154978
+        ],
+        "regressionStreak": 0,
+        "finishedAt": "2026-11-06T20:08:34.630Z"
+      }
+    ],
+    "gateIndex": 344,
+    "anchorIndex": 307,
+    "lastAnchorAt": 1793995714630,
+    "lastSnapshotAt": 1794001313448,
+    "resultOffsets": {
+      "results-1.jsonl": 15364060,
+      "results-0.jsonl": 15373600,
+      "results-2.jsonl": 14998340,
+      "results-3.jsonl": 14987367
+    },
+    "anchorRegressionStreak": 0,
+    "startedAt": "2026-11-05T21:58:13.461Z",
+    "pid": 67295,
+    "updatedAt": "2026-11-06T21:58:19.466Z",
+    "recent": {
+      "matches": 125,
+      "decisions": 62258,
+      "byMode": {
+        "rule": {
+          "matches": 24,
+          "wins": 15,
+          "draws": 2
+        },
+        "self": {
+          "matches": 67,
+          "wins": 25,
+          "draws": 6
+        },
+        "league": {
+          "matches": 34,
+          "wins": 16,
+          "draws": 3
+        }
+      }
+    },
+    "resources": {
+      "reserveGB": 4,
+      "resumeGB": 5,
+      "freeGB": 11.359329223632812,
+      "rawFreeGB": 0.38983154296875,
+      "measurement": "vm_stat free + inactive",
+      "measurementError": null,
+      "pausedActors": [],
+      "updatedAt": "2026-11-06T21:58:11.954Z"
+    },
+    "running": [],
+    "diskGB": 1.36,
+    "decisionsPerSecond": 0,
+    "totals": {
+      "matches": 356599,
+      "decisions": 169622455,
+      "rows": 169622455
+    },
+    "latest": {
+      "version": "v001013906",
+      "file": "v001013906.onnx",
+      "sha256": "a44ff84c17ec1c31beaec3c7280121d5d87bd875b06d9eb8cd0bb9c46378903e",
+      "step": 1013906,
+      "trainedRows": 2076479488,
+      "ingestedRows": 519120344,
+      "publishedAt": "2026-11-06T21:58:14Z"
+    },
+    "champion": {
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "since": "2026-11-06T10:59:34.199Z",
+      "history": [
+        {
+          "version": "v000000000",
+          "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+          "at": "2026-11-04T20:40:54.512Z",
+          "reason": "initial"
+        },
+        {
+          "version": "v000023473",
+          "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+          "at": "2026-11-04T22:08:59.123Z",
+          "gate": 101
+        },
+        {
+          "version": "v000046476",
+          "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+          "at": "2026-11-04T23:03:24.799Z",
+          "gate": 102
+        },
+        {
+          "version": "v000068679",
+          "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+          "at": "2026-11-05T00:04:51.045Z",
+          "gate": 103
+        },
+        {
+          "version": "v000091092",
+          "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+          "at": "2026-11-05T01:06:47.980Z",
+          "gate": 104
+        },
+        {
+          "version": "v000293055",
+          "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+          "at": "2026-11-05T08:11:50.077Z",
+          "gate": 112
+        },
+        {
+          "version": "v000705434",
+          "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+          "at": "2026-11-06T00:22:21.010Z",
+          "gate": 309
+        },
+        {
+          "version": "v000855042",
+          "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+          "at": "2026-11-06T10:59:34.199Z",
+          "gate": 330
+        }
+      ]
+    },
+    "learner": {
+      "pid": 67297,
+      "device": "mps",
+      "deviceName": "Apple MPS",
+      "torch": "2.15.0",
+      "hip": null,
+      "gpuAllocatedBytes": 21545984,
+      "state": "stopped",
+      "step": 1013906,
+      "version": "v001013906",
+      "buffer": 2000000,
+      "ingestedRows": 519120344,
+      "trainedRows": 2076479488,
+      "lossEMA": 3.302812445128356,
+      "replayRatio": 3.9999963630783846,
+      "stepsPerSecond": 3.8957260651782426,
+      "updatedAt": "2026-11-06T21:58:14Z"
+    },
+    "gateScheduleActivatedAt": "2026-11-06T02:40:43.451697+00:00",
+    "lastHistoricalGateAt": 1793976052077,
+    "stopReason": "operator-stop",
+    "stoppedAt": "2026-11-06T21:58:19.466Z"
+  },
+  "learner": {
+    "pid": 67297,
+    "device": "mps",
+    "deviceName": "Apple MPS",
+    "torch": "2.15.0",
+    "hip": null,
+    "gpuAllocatedBytes": 21545984,
+    "state": "stopped",
+    "step": 1013906,
+    "version": "v001013906",
+    "buffer": 2000000,
+    "ingestedRows": 519120344,
+    "trainedRows": 2076479488,
+    "lossEMA": 3.302812445128356,
+    "replayRatio": 3.9999963630783846,
+    "stepsPerSecond": 3.8957260651782426,
+    "updatedAt": "2026-11-06T21:58:14Z"
+  }
+}
