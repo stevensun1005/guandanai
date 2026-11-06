@@ -25,6 +25,7 @@ import { fileURLToPath } from 'node:url';
 import { constants as osConstants, setPriority } from 'node:os';
 import { memoryAction, memoryAvailability } from './resources.mjs';
 import { sourceHashes } from './sources.mjs';
+import { selectGateCandidate, validateGateSchedule } from './gate-schedule.mjs';
 import { actorTotals as allActorTotals } from './remote.mjs';
 import {
   DEFAULT_CONFIG,
@@ -50,11 +51,18 @@ const protocolSettings = JSON.parse(option('set', '{}'));
 if (!Number.isFinite(hours) || hours < 0) throw Error('Invalid hours');
 const sourcesAtStart = sourceHashes();
 
-/** Only sampler settings may change through --set; everything else stays frozen. */
+/** Named changes may adjust sampling/resources and candidate scheduling, never match targets. */
 function validateProtocolSettings(settings) {
-  const allowed = new Set(['actors', 'actorImplementation', 'fastActor', 'resourceBudget']);
+  const allowed = new Set([
+    'actors',
+    'actorImplementation',
+    'fastActor',
+    'resourceBudget',
+    'gateSchedule',
+  ]);
   for (const key of Object.keys(settings))
     if (!allowed.has(key)) throw Error(`--set cannot change ${key}`);
+  if ('gateSchedule' in settings) validateGateSchedule(settings.gateSchedule);
   if (
     'actors' in settings &&
     (!Number.isInteger(settings.actors) || settings.actors < 1 || settings.actors > MAX_ACTORS)
@@ -165,6 +173,7 @@ function initialize() {
       resourceBudget: config.resourceBudget || null,
       actorImplementation: config.actorImplementation || 'standard',
       fastActor: config.fastActor || null,
+      gateSchedule: config.gateSchedule || null,
     };
     const status = readJSON(paths.status, {}) || {};
     config = merge(config, protocolSettings);
@@ -189,6 +198,7 @@ function initialize() {
   }
   if (!Number.isInteger(config.actors) || config.actors < 1 || config.actors > MAX_ACTORS)
     throw Error('Invalid actor count');
+  validateGateSchedule(config.gateSchedule);
   const evaluationOffset = config.evaluationBlockOffset ?? 0;
   if (!Number.isInteger(evaluationOffset) || evaluationOffset < 0 || evaluationOffset >= 1000)
     throw Error('Invalid evaluation seed block offset');
@@ -208,6 +218,11 @@ state.anchorChecks ??= [];
 state.anchorRegressionStreak ??= 0;
 state.lastAnchorAt ??= Date.now();
 state.startedAt ??= new Date().toISOString();
+if (config.gateSchedule && state.gateScheduleActivatedAt !== config.gateSchedule.activatedAt) {
+  state.gateScheduleActivatedAt = config.gateSchedule.activatedAt;
+  state.lastHistoricalGateAt = Date.parse(config.gateSchedule.activatedAt);
+  state.lastSnapshotAt = 0; // Offer the saved cutover model once, without waiting another hour.
+}
 const elapsedBeforeStart = state.elapsedSeconds || 0;
 state.pid = process.pid;
 delete state.stoppedAt;
@@ -385,18 +400,31 @@ let gateJob = null;
 function startGate() {
   const league = readJSON(paths.leagueMeta);
   const champion = readJSON(paths.championMeta);
-  const gated = new Set(state.gates.map((g) => g.challenger));
-  const candidate = [...league.members]
-    .reverse()
-    .find((m) => !m.pinned && !gated.has(m.id) && m.id !== champion.version);
-  if (!candidate) return;
+  const selection = selectGateCandidate({
+    members: league.members,
+    champion,
+    gates: state.gates,
+    policy: config.gateSchedule,
+    lastHistoricalGateAt: state.lastHistoricalGateAt,
+    now: Date.now(),
+  });
+  if (!selection) return;
+  const { member: candidate, category } = selection;
   const index = state.gateIndex++;
+  if (category === 'historical-champion') state.lastHistoricalGateAt = Date.now();
   persistState(); // A crash must never reuse an evaluation seed block.
   const output = join(paths.gate, `gate-${String(index).padStart(5, '0')}.json`);
   // Copy the champion so a promotion during the gate cannot change the file under test.
   const championCopy = join(paths.gate, `champion-${index}.onnx`);
   copyFileSync(join(paths.champion, 'champion.onnx'), championCopy);
-  gateJob = { index, challenger: candidate.id, champion: champion.version, output, championCopy };
+  gateJob = {
+    index,
+    challenger: candidate.id,
+    champion: champion.version,
+    category,
+    output,
+    championCopy,
+  };
   launch('gate', process.execPath, [
     join(here, 'gate.mjs'),
     `--run=${paths.root}`,
@@ -425,6 +453,7 @@ function finishGate(code, stderr) {
     index: job.index,
     challenger: job.challenger,
     champion: job.champion,
+    category: job.category,
     code,
     decision:
       code === 0 && report?.status === 'complete' && report.pairs?.length >= config.gate.minPairs

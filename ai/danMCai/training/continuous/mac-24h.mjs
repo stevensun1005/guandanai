@@ -19,11 +19,12 @@ import { REPO_ROOT } from './remote.mjs';
 
 export const MAC_SEEDS = { actorSeedOffset: 3_000_000, evaluationBlockOffset: 300 };
 export function macResumeArgs(reason = '', settings = '') {
-  if (settings && !reason) throw Error('Mac sampler changes require --protocol-change');
+  if (settings && !reason)
+    throw Error('Mac scheduling or sampler changes require --protocol-change');
   if (settings) {
     const value = JSON.parse(settings);
     if (!value || typeof value !== 'object' || Array.isArray(value))
-      throw Error('--set must be a sampler settings object');
+      throw Error('--set must be a scheduling or sampler settings object');
   }
   return [
     ...(reason ? [`--protocol-change=${reason}`] : []),

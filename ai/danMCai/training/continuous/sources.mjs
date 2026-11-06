@@ -3,6 +3,7 @@ import { localSourceHashes } from './remote.mjs';
 export const sourceFiles = [
   ...[
     'supervisor.mjs',
+    'gate-schedule.mjs',
     'actor.mjs',
     'gate.mjs',
     'lib.mjs',
