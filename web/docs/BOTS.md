@@ -2,6 +2,8 @@
 
 ## 当前选择
 
+Mac 续训的冠军晋升遵循同一清单和 accept 门控核对流程；浏览器出牌与评价使用已发布完整权重，MPS 训练后端不会成为浏览器依赖。
+
 大厅依次提供 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代门控冠军。默认使用danMCai 现任冠军，普通最新导出不能替代冠军。GuanZero 名称采用 `guanzero-adp-gpubatch-44752` 这样的连字符格式，danMCai 显示真实版本；具体版本以 [模型选择与发布](WEB_MODELS.md) 和清单为准。
 
 Clint（`clint-rule`）是独立 `rules-v2` 规则策略，不加载 ONNX，也不叠加到神经网络分支。历史规则基线 `original` 与 Clint 不同，旧成绩保持原版本标签。

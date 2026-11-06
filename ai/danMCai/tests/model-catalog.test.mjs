@@ -48,10 +48,10 @@ test('model IDs are immutable numbered entries and unknown preferences use the c
 
 test('curated menu contains Clint, two GuanZero generations, P0 and the last two gate champions', () => {
   const choices = BOT_CHOICES.map((m) => m.id);
-  assert.deepEqual(choices, [CLINT_RULE_ID, '011', '010', '001', '009', '008']);
-  assert.equal(DEFAULT_BOT_MODEL, '009');
+  assert.deepEqual(choices, [CLINT_RULE_ID, '011', '010', '001', '012', '009']);
+  assert.equal(DEFAULT_BOT_MODEL, '012');
   assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
-  assert.equal(botModelName('009'), 'danMCai-v000293055');
+  assert.equal(botModelName('012'), 'danMCai-v000705434');
   assert.equal(botChoiceId('006'), DEFAULT_BOT_MODEL);
   assert.equal(botModelId('006'), '006');
   assert.equal(botChoiceId(CLINT_RULE_ID), CLINT_RULE_ID);
@@ -59,15 +59,15 @@ test('curated menu contains Clint, two GuanZero generations, P0 and the last two
     schema: 1,
     defaultId: DEFAULT_BOT_MODEL,
     models: structuredClone(BOT_MODELS),
-    selection: { mode: 'champions-v1', danMCaiChampions: ['009', '008'] },
+    selection: { mode: 'champions-v1', danMCaiChampions: ['012', '009'] },
   };
   const future = {
     ...catalog,
-    models: [...catalog.models, { ...catalog.models.find((m) => m.id === '011'), id: '012' }],
+    models: [...catalog.models, { ...catalog.models.find((m) => m.id === '011'), id: '013' }],
   };
   assert.deepEqual(
     selectableModels(future).map((m) => m.id),
-    [CLINT_RULE_ID, '012', '011', '001', '009', '008'],
+    [CLINT_RULE_ID, '013', '011', '001', '012', '009'],
   );
   assert.throws(() => validateCatalog({ ...catalog, defaultId: '007' }), /champion selection/);
 });
@@ -76,13 +76,13 @@ test('selected local champions are backed by accepted gate records with matching
   const manifest = JSON.parse(
     await readFile(
       new URL(
-        '../../research/evaluation/champion-selection-20261105/champion.json',
+        '../../research/evaluation/champion-selection-mac-20261105/champion.json',
         import.meta.url,
       ),
       'utf8',
     ),
   );
-  const models = ['008', '009'].map((id) => BOT_MODELS.find((m) => m.id === id));
+  const models = ['009', '012'].map((id) => BOT_MODELS.find((m) => m.id === id));
   assert.deepEqual(
     models.map((m) => m.source.version),
     manifest.history.slice(-2).map((x) => x.version),

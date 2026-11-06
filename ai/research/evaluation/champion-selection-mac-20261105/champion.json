@@ -1,0 +1,49 @@
+{
+  "version": "v000705434",
+  "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+  "since": "2026-11-06T00:22:21.010Z",
+  "history": [
+    {
+      "version": "v000000000",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "at": "2026-11-04T20:40:54.512Z",
+      "reason": "initial"
+    },
+    {
+      "version": "v000023473",
+      "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+      "at": "2026-11-04T22:08:59.123Z",
+      "gate": 101
+    },
+    {
+      "version": "v000046476",
+      "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+      "at": "2026-11-04T23:03:24.799Z",
+      "gate": 102
+    },
+    {
+      "version": "v000068679",
+      "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+      "at": "2026-11-05T00:04:51.045Z",
+      "gate": 103
+    },
+    {
+      "version": "v000091092",
+      "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+      "at": "2026-11-05T01:06:47.980Z",
+      "gate": 104
+    },
+    {
+      "version": "v000293055",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "at": "2026-11-05T08:11:50.077Z",
+      "gate": 112
+    },
+    {
+      "version": "v000705434",
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "at": "2026-11-06T00:22:21.010Z",
+      "gate": 309
+    }
+  ]
+}

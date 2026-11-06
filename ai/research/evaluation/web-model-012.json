@@ -1,0 +1,315 @@
+{
+  "observedAt": "2026-11-06T01:15:09.645Z",
+  "defaultId": "012",
+  "model": {
+    "id": "012",
+    "file": "bot-012.onnx",
+    "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "mac-20261105",
+      "version": "v000705434",
+      "status": "experimental-not-heldout-accepted",
+      "step": 705434,
+      "registeredAt": "2026-11-06T01:15:05.171Z",
+      "champion": {
+        "gate": 309,
+        "acceptedAt": "2026-11-06T00:22:21.010Z",
+        "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+        "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+        "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+      },
+      "trainingDevice": "mps"
+    }
+  },
+  "classification": "Owner-authorized publication of the actual accepted development-gate champion; not held-out performance acceptance",
+  "strengthEvaluation": null,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "selection": {
+    "mode": "champions-v1",
+    "danMCaiChampions": [
+      "012",
+      "009"
+    ]
+  },
+  "championManifestSHA256": "c19bdea228811173bf49bd300dc8b0e8ad403330d20fc102717c63eef695c4fe",
+  "championGate": {
+    "gate": 309,
+    "file": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+    "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+    "decision": "accept",
+    "pairs": 280,
+    "wins": 281,
+    "losses": 227,
+    "draws": 52,
+    "meanScore": 0.5482142857142858,
+    "clusterHoeffding95CI": [
+      0.46705219641460616,
+      0.6293763750139654
+    ],
+    "firstSeed": 3530900000,
+    "lastSeed": 3530900279,
+    "rules": {
+      "tribute": true,
+      "aFail": "draw",
+      "from": 2,
+      "through": "A"
+    },
+    "sourceSHA256": {
+      "ai/danMCai/training/continuous/supervisor.mjs": "39066cda321854ef992488adf4155ef37f36242083d1318b585e69b173fbdfb0",
+      "ai/danMCai/training/continuous/actor.mjs": "9a14ef6d1880ef3876f50fb5291c6fde7e78508ff31da7dd9ad284b05755e3f9",
+      "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+      "ai/danMCai/training/continuous/lib.mjs": "3241a192d2652280011a23f0b8e8edd5bb16658a7040b570f38085652ddb3b82",
+      "ai/danMCai/training/continuous/learner.py": "b593db159f78ead5da2c4bcd1b95b9cd6fd953fcb7f621c307d7f19ffbd42ee5",
+      "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+      "ai/danMCai/training/continuous/fast-actor.mjs": "e5b43b2dd900aeda798d4ddace8f1936009b529053b768c84f6fba0761a3e711",
+      "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+      "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+      "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+      "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+      "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+      "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+      "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+      "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+      "ai/shared/simulation/match-simulation.mjs": "c93fe60fa4e55d0101b87fc349ef9088c765f1a28d6c28bf1446cdf7f6221db0",
+      "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+      "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+      "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+      "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+      "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+      "web/src/core/match.js": "cbdef03c6391759da8bb2b9a3c5cef5b2cdb3f99e839e6e1e9d199a1fa27dad1",
+      "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+      "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+      "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+      "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+      "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+      "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+      "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+      "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+      "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+      "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+      "ai/danMCai/training/continuous/sources.mjs": "693417e7ca6d79488114f1c1000de4e68a4df82215a02444dbcbc092d314dcd4",
+      "ai/danMCai/training/continuous/mac-24h.mjs": "e0b214b18ac38fc56a11240d399fe247df7dfd281a8a767d3002bac31f237409"
+    }
+  },
+  "validation": {
+    "nativeONNX": {
+      "provider": "CPUExecutionProvider",
+      "dynamicCandidateBatches": [
+        1,
+        3,
+        129
+      ],
+      "allFinite": true
+    },
+    "browserWASM": {
+      "backend": "browser WASM, one thread",
+      "checks": [
+        {
+          "candidates": 8,
+          "index": 3,
+          "maxError": 1.0132789611816406e-06,
+          "name": "position-0"
+        },
+        {
+          "candidates": 5,
+          "index": 1,
+          "maxError": 4.76837158203125e-07,
+          "name": "position-1"
+        },
+        {
+          "candidates": 8,
+          "index": 0,
+          "maxError": 7.152557373046875e-07,
+          "name": "position-2"
+        },
+        {
+          "candidates": 5,
+          "index": 3,
+          "maxError": 1.4603137969970703e-06,
+          "name": "position-3"
+        },
+        {
+          "candidates": 8,
+          "index": 7,
+          "maxError": 4.76837158203125e-07,
+          "name": "position-4"
+        },
+        {
+          "candidates": 4,
+          "index": 1,
+          "maxError": 4.76837158203125e-07,
+          "name": "position-5"
+        },
+        {
+          "candidates": 8,
+          "index": 2,
+          "maxError": 8.344650268554688e-07,
+          "name": "position-6"
+        },
+        {
+          "candidates": 2,
+          "index": 0,
+          "maxError": 7.748603820800781e-07,
+          "name": "position-7"
+        },
+        {
+          "candidates": 1,
+          "index": 0,
+          "maxError": 0,
+          "name": "position-8"
+        },
+        {
+          "candidates": 8,
+          "index": 3,
+          "maxError": 8.344650268554688e-07,
+          "name": "position-9"
+        },
+        {
+          "candidates": 1,
+          "index": 0,
+          "maxError": 2.384185791015625e-07,
+          "name": "position-10"
+        },
+        {
+          "candidates": 8,
+          "index": 0,
+          "maxError": 7.152557373046875e-07,
+          "name": "position-11"
+        },
+        {
+          "candidates": 8,
+          "index": 7,
+          "maxError": 1.0132789611816406e-06,
+          "name": "position-12"
+        },
+        {
+          "candidates": 2,
+          "index": 1,
+          "maxError": 4.76837158203125e-07,
+          "name": "position-13"
+        },
+        {
+          "candidates": 1,
+          "index": 0,
+          "maxError": 1.6689300537109375e-06,
+          "name": "position-14"
+        },
+        {
+          "candidates": 3,
+          "index": 2,
+          "maxError": 7.152557373046875e-07,
+          "name": "position-15"
+        },
+        {
+          "candidates": 1,
+          "index": 0,
+          "maxError": 8.940696716308594e-07,
+          "name": "batch-1"
+        },
+        {
+          "candidates": 3,
+          "index": 1,
+          "maxError": 8.940696716308594e-07,
+          "name": "batch-3"
+        },
+        {
+          "candidates": 129,
+          "index": 3,
+          "maxError": 1.0132789611816406e-06,
+          "name": "batch-129"
+        }
+      ],
+      "dynamicBatches": [
+        1,
+        3,
+        129
+      ],
+      "maxAbsoluteError": 1.6689300537109375e-06,
+      "modelId": "012",
+      "passed": true,
+      "positions": 16,
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "strengthMatches": 0,
+      "version": "v000705434",
+      "fixturesSHA256": "34cb03914e2bb95808a005a3b00148c16fb81b1a2969805d84f0e3fbf71e146c",
+      "preparedFixtureSHA256": "b415b8667a0cc11a3743dbc73400afab55589a67bcdb367ce50e9a67dceba69d",
+      "harnessSHA256": "5615b82b088a07cf1a759897cc34ee6cdbe536264754eb0a4d056214c9ca3847",
+      "realPositionCandidates": 80
+    },
+    "browserMenu": {
+      "choices": [
+        {
+          "label": "Clint规则机器人",
+          "value": "clint-rule"
+        },
+        {
+          "label": "guanzero-adp-gpubatch-78087",
+          "value": "011"
+        },
+        {
+          "label": "guanzero-adp-gpubatch-61045",
+          "value": "010"
+        },
+        {
+          "label": "danMCai-v000000000",
+          "value": "001"
+        },
+        {
+          "label": "danMCai-v000705434",
+          "value": "012"
+        },
+        {
+          "label": "danMCai-v000293055",
+          "value": "009"
+        }
+      ],
+      "horizontalOverflow": false,
+      "selected": [
+        {
+          "seat": "S",
+          "value": "012"
+        },
+        {
+          "seat": "E",
+          "value": "012"
+        },
+        {
+          "seat": "N",
+          "value": "012"
+        },
+        {
+          "seat": "W",
+          "value": "012"
+        }
+      ],
+      "version": "7790dd1b9e"
+    },
+    "node": {
+      "passed": 184,
+      "failed": 0
+    },
+    "researchPython": {
+      "passed": 9
+    },
+    "browserSmokePythonSyntax": "passed",
+    "format": "passed",
+    "build": "7790dd1b9e",
+    "negativeChecks": [
+      {
+        "issue": "Temporary parity page initially used a module-relative WASM path that duplicated assets/vendor",
+        "resolution": "Use an absolute URL derived from the test document; all 19 inference cases then passed. Production runtime path was not changed."
+      }
+    ]
+  },
+  "publication": {
+    "status": "validated-locally-awaiting-main-and-Pages",
+    "webURL": "https://stevensun1005.github.io/guandanai/",
+    "releaseURL": "https://github.com/stevensun1005/guandanai/releases/tag/web-model-012"
+  }
+}

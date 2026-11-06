@@ -8,6 +8,7 @@ ROOT=next(p for p in Path(__file__).resolve().parents if (p/'package.json').is_f
 URL=next((v for v in sys.argv[1:] if v.startswith('http')),'http://127.0.0.1:8765/')
 OUT=ROOT/'web/artifacts/validation/private-table';OUT.mkdir(parents=True,exist_ok=True)
 ENDPOINT=json.loads((ROOT/'web/src/collection/config.json').read_text())['endpoint']
+CHAMPION=json.loads((ROOT/'web/src/ai/model-catalog.json').read_text())['selection']['danMCaiChampions'][0]
 PROBE="""const Native=Worker;window.privateProbe={requests:[],replies:[]};window.Worker=class extends Native{constructor(...a){super(...a);this.addEventListener('message',e=>{if(e.data.result)privateProbe.replies.push(e.data.result)})}postMessage(d,...r){privateProbe.requests.push(structuredClone(d));return super.postMessage(d,...r)}};"""
 with sync_playwright() as p:
  b=p.chromium.launch(channel=os.environ.get('BROWSER_CHANNEL','chrome'),headless=True)
@@ -52,7 +53,7 @@ with sync_playwright() as p:
   host.evaluate('e=>act(e)',event);host.wait_for_function('n=>G.log.length>n',arg=state['count'])
  host.wait_for_function("()=>G.turn===0&&document.querySelectorAll('#coachTop5 .coach-choice').length>0",timeout=60000)
  reply=host.evaluate('privateProbe.replies.filter(r=>r.search?.fullInformation).at(-1)')
- assert reply and reply['modelId']=='009'
+ assert reply and reply['modelId']==CHAMPION
  print(json.dumps({'stage':'private-inference','search':reply['search']}),flush=True)
  assert host.evaluate('privateProbe.requests.some(r=>r.type==="coach"&&r.state.oracle?.hands.length===4)')
  assert host.locator('#privateHands').is_visible()
@@ -66,7 +67,7 @@ with sync_playwright() as p:
  assert any(r['type']=='rule' for r in opponent)
  assert all(r['type']!='oracle' and 'oracle' not in (r.get('state') or {}) for r in opponent)
  before=host.evaluate('privateProbe.requests.length')
- host.evaluate('''async()=>{const trick=G.trick,model=botModels[3];G.trick=null;botModels[3]='009';try{await TableBot.decide(3)}finally{G.trick=trick;botModels[3]=model}}''')
+ host.evaluate('''async id=>{const trick=G.trick,model=botModels[3];G.trick=null;botModels[3]=id;try{await TableBot.decide(3)}finally{G.trick=trick;botModels[3]=model}}''',CHAMPION)
  neural=host.evaluate('n=>privateProbe.requests.slice(n)',before)
  assert any(r['type']=='decide' for r in neural)
  assert all(r['type']!='oracle' and 'oracle' not in (r.get('state') or {}) and 'hands' not in (r.get('state') or {}) for r in neural)

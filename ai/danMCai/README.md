@@ -24,7 +24,7 @@
 
 根目录常用命令仍为 `npm run train:status`、`npm run train:dashboard`。正在运行的 `gpu-main` 继续使用原冻结运行环境，先读[迁移说明](../research/STRUCTURE_MIGRATION.md)，不要用新布局源码直接覆盖旧运行。
 
-网页中的产品名称为 danMCai，显示真实版本，如 `danMCai-v000293055`。网页默认取本路线实际门控冠军，不能按 `models/latest.json` 的最大步数代替；最新两次晋升、accept 门控和完整 SHA 都需核对。[菜单与发布](../../web/docs/WEB_MODELS.md)。真人数据的采集与预处理独立于本训练，未经实验不改动正在运行的缓冲区或对手池。
+网页中的产品名称为 danMCai，显示真实版本，如 `danMCai-v000705434`。网页默认取本路线实际门控冠军，不能按 `models/latest.json` 的最大步数代替；最新两次晋升、accept 门控和完整 SHA 都需核对。[菜单与发布](../../web/docs/WEB_MODELS.md)。真人数据的采集与预处理独立于本训练，未经实验不改动正在运行的缓冲区或对手池。
 
 Fixed 2v2 evaluation: `evaluation/evaluate-fixed.mjs --protocol=<JSON> --run=<ignored run>` binds both teammates to one checkpoint, swaps teams per seed and writes resumable full-match records. `evaluation/summarize_independent.py` reports paired-seed uncertainty; current protocols are indexed in the [research report](../research/MODEL_STUDY.md).
 

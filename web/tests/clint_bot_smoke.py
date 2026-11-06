@@ -44,16 +44,18 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT/'rules-table.png'))
     # Real controller + Worker + five actual ONNX files on a controlled, conserved deal.
     # These are compatibility decisions, not strength matches.
-    for model in ['001','008','009','010','011']:
+    catalog=page.request.get(URL.split('?')[0].rstrip('/')+'/models/catalog.json').json()
+    selected=[m['id'] for m in catalog['choices'] if m['kind']=='neural']
+    for model in selected:
         result=page.evaluate("""async id=>{
           TableBot.cancelTurn();resetGame();const d=makeDeck();G.hands=[[],[],[],[]];d.forEach((c,i)=>G.hands[i%4].push(c));
           G.phase='prep';G.turn=1;G.round=1;G.log=[];G.seen=[];G.rest=[];G.fixed=[];G.trib=[];G.returns=[];G.myOrder=[];
-          G.clock=null;botModels=['009',id,'009','009'];
+          G.clock=null;botModels=[id,id,id,id];
           const play=await TableBot.decide(1);return {valid:!!play&&play.cards.every(c=>G.hands[1].includes(c)),type:play?.type};
         }""",model)
         assert result['valid'],(model,result)
     neural=page.evaluate("replies.filter(x=>x.type==='decide').map(x=>x.model)")
-    assert sorted(neural)==['001','008','009','010','011'],neural
+    assert sorted(neural)==sorted(selected),neural
     assert not errors,errors
     report={'actualRuleReplies':rule_turns,'allRuleGameNeuralDownloads':0,'wasmModels':neural,'fixtureScope':'Eight real opening actions; five controlled compatibility decisions, no strength estimates','pageErrors':errors}
     (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')

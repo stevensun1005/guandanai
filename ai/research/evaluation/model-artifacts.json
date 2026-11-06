@@ -3537,7 +3537,7 @@
   ],
   "webModels": {
     "catalog": "web/src/ai/model-catalog.json",
-    "defaultId": "009",
+    "defaultId": "012",
     "models": [
       {
         "id": "001",
@@ -3683,6 +3683,26 @@
           "status": "experimental-not-heldout-accepted",
           "step": 78087,
           "registeredAt": "2026-11-05T21:44:57.015Z"
+        }
+      },
+      {
+        "id": "012",
+        "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-012/bot-012.onnx",
+        "source": {
+          "run": "mac-20261105",
+          "version": "v000705434",
+          "status": "experimental-not-heldout-accepted",
+          "step": 705434,
+          "registeredAt": "2026-11-06T01:15:05.171Z",
+          "champion": {
+            "gate": 309,
+            "acceptedAt": "2026-11-06T00:22:21.010Z",
+            "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+            "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+            "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+          },
+          "trainingDevice": "mps"
         }
       }
     ]
