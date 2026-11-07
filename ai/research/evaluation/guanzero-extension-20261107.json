@@ -1,0 +1,56 @@
+{
+  "resumedFromStep": 225278,
+  "verifiedStep": 225308,
+  "extendedWindow": {
+    "startedAt": "2026-11-06T03:11:40.256Z",
+    "midpointAt": "2026-11-07T03:11:40.256Z",
+    "plannedEnd": "2026-11-11T15:00:00.000Z",
+    "hours": 131.80548444444443,
+    "seedIndex": 5100,
+    "championRoot": "C:\\guandan-sampler\\work\\guanzero-web-release",
+    "extension": {
+      "authorizedAt": "2026-11-07T13:59:51.6216167+00:00",
+      "requestedDeadlineLocal": "2026-11-11T10:00:00-05:00",
+      "authority": "owner-request",
+      "originalPlannedEnd": "2026-11-08T03:11:40.256Z"
+    }
+  },
+  "task": {
+    "repetitionDuration": "P4DT1H4S",
+    "executionTimeLimit": "P4DT1H3M4S",
+    "state": "Running"
+  },
+  "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+  "previousWindow": {
+    "startedAt": "2026-11-06T03:11:40.256Z",
+    "midpointAt": "2026-11-07T03:11:40.256Z",
+    "plannedEnd": "2026-11-08T03:11:40.256Z",
+    "hours": 48,
+    "seedIndex": 5100,
+    "championRoot": "C:\\guandan-sampler\\work\\guanzero-web-release"
+  },
+  "observedAt": "2026-11-07T14:00:41.5970938+00:00",
+  "validation": {
+    "checkpointRecoveryFixture": "passed",
+    "extensionBoundaries": "passed",
+    "nodeTests": 221,
+    "format": "passed",
+    "build": "passed"
+  },
+  "liveActors": 32,
+  "guard": {
+    "pid": 25020,
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+    "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+    "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "plannedEnd": "2026-11-11T15:00:00.000Z",
+    "restarts": 1,
+    "phase": "healthy",
+    "step": 225301,
+    "supervisorPid": 55104,
+    "updatedAt": "2026-11-07T14:00:30.842Z",
+    "error": null,
+    "resumedFromStep": 225278,
+    "lastRestartAt": "2026-11-07T13:59:59.107Z"
+  }
+}
