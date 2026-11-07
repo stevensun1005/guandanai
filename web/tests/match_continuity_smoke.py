@@ -10,7 +10,7 @@ with sync_playwright() as p:
  def block(route):uploads.append(route.request.post_data);route.fulfill(status=503,body='isolated test')
  page.route('**/rounds',block)
  page.add_init_script('''const state={levels:{SN:14,EW:8},playSide:'EW',order:['S','N','E','W'],aFails:{SN:1,EW:0},aOut:'SN'};localStorage.setItem('guandan-match-continuity-v1',JSON.stringify({id:crypto.randomUUID(),players:Array.from({length:4},()=>crypto.randomUUID()),nextRound:8,state,rules:{trib:true,aFail:'once'},excluded:true,savedAt:Date.now()}));''')
- page.goto(URL,wait_until='networkidle');assert page.locator('#continueMatch').is_visible();page.locator('#continueMatch').click()
+ page.goto(URL,wait_until='networkidle');page.locator('#continueMatch').wait_for(state='visible');page.locator('#continueMatch').click()
  assert page.evaluate("RULES.startState.levels.SN===14&&RULES.startState.playSide==='EW'&&RULES.startState.aOut==='SN'")
  page.locator('#nick').fill('继续测试');page.locator('[data-seat=E]').click();page.locator('#botStyleBox summary').click()
  for seat in ['S','N','W']:page.locator(f'[data-bot-seat={seat}]').select_option('clint-rule')

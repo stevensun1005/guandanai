@@ -1117,11 +1117,114 @@
     "No candidate model, reward, network inference, active frozen trainer/source/config/buffer or champion changed. Belief0.3 gateTo04 stays false.",
     "Legacy collection_smoke requires an ignored cloud export token and was not run here; no credential or human-data export was accessed. Credential-free local collector/continuity/PeerJS tests run instead.",
     "Initial integration surfaced one undeclared browser Option name and the old private-test assumption; fixed explicit browser dependency and strengthened early private exclusion assertion before publishing.",
-    "Concurrent UI/browser/build activity may affect operational training throughput; do not treat it as an isolated training-speed comparison."
+    "Concurrent UI/browser/build activity may affect operational training throughput; do not treat it as an isolated training-speed comparison.",
+    "First public continuity smoke checked visibility before asynchronous lobby initialization completed; explicit visible-state wait passed the same public fixture. Production behavior unchanged."
   ],
   "deployment": {
-    "status": "local-validation-passed-awaiting-main-and-Pages",
-    "build": "d26121c58e"
+    "status": "Pages-success-and-public-browser-verified",
+    "sourceCommit": "2697a270c01f199c97de33ed56f40d31229a4568",
+    "build": "d26121c58e",
+    "workflowRun": 42412227817,
+    "conclusion": "success",
+    "url": "https://github.com/stevensun1005/guandanai/actions/runs/42412227817",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "onlineEndgame": {
+      "solves": [
+        "求解完成：双方均按本局升级分最优行动时，南北赢 1 级。2 手，3 节点，0.00 秒。"
+      ],
+      "legalReplayMoves": 2,
+      "nodes": 3,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "controls": 11,
+          "allHitTests": true
+        },
+        {
+          "width": 900,
+          "height": 700,
+          "controls": 11,
+          "allHitTests": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "controls": 11,
+          "allHitTests": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "controls": 11,
+          "allHitTests": true
+        }
+      ],
+      "actualWorker": true,
+      "tenCardBoundedResult": "求解完成：双方均按本局升级分最优行动时，东西赢 2 级。17 手，477,869 节点，1.22 秒。",
+      "stopAndReturn": true,
+      "localRecordReload": true,
+      "neuralDownloads": 0,
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "onlineContinuity": {
+      "restoredRule": "once",
+      "rotatedSeat": "E",
+      "levels": [
+        8,
+        14
+      ],
+      "aOut": 1,
+      "previousOrder": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "roundIdentityAndPrivateExclusion": "covered by executable Node restart/collection tests",
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "onlineMenu": {
+      "url": "https://stevensun1005.github.io/guandanai/",
+      "build": "d26121c58e",
+      "defaultId": "017",
+      "choices": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人",
+          "kind": "rule"
+        },
+        {
+          "id": "021",
+          "name": "guanzero-adp-io48-229609",
+          "kind": "neural"
+        },
+        {
+          "id": "020",
+          "name": "guanzero-adp-io48-223067",
+          "kind": "neural"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000",
+          "kind": "neural"
+        },
+        {
+          "id": "017",
+          "name": "danMCai-v000855042",
+          "kind": "neural"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434",
+          "kind": "neural"
+        }
+      ],
+      "endgameEnabled": true,
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+    }
   },
   "activeTrainingReadOnlyAudit": {
     "observedAtUTC": "2026-11-07T20:40:17.938Z",
