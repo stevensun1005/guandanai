@@ -188,3 +188,4 @@ Research continuation games use the verified danMCai champion frozen at batch st
 A dedicated Windows watchdog can resume the fixed GuanZero training window after a supervisor exit. See [recovery](ai/guanzero/README.md#自动恢复) for checkpoint checks, the stop control and the original deadline.
 
 The owner extended the local GuanZero run through **2026-11-11 10:00 America/Toronto**. Twelve-hour evaluations and same-checkpoint publishing continue under the [authorized window](ai/guanzero/README.md#授权延长窗口).
+Stage-zero match-objective analysis is documented in the [research index](ai/research/README.md) and study section 48. It reanalyses historical model 009, not new results for web champion 017. New training on this Windows machine is limited to danMCai.

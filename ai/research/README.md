@@ -2,6 +2,8 @@
 
 阶段 0.1 的[历史整场分歧协议](evaluation/match-objective-divergence-20261107/protocol.json)固定两组 009 网页策略的旧档案；只读规则重放与按牌副簇统计，无新模型对局。运行 `python ai/research/tools/match-objective-divergence.py --protocol=ai/research/evaluation/match-objective-divergence-20261107/protocol.json --out=ai/danMCai/workspace/match-objective-results.json`。结果不得冒称 017 棋力或开启整场训练的授权。
 
+[阶段 0.1 实际结果](evaluation/match-objective-divergence-20261107/results.json)与主报告第 48 节保留两组各 1,000 对的旧证据重放及 95% 簇区间，并指出“败场来自对方 A 的 +2／+3”是现有牌规恒等式，不能作为后续训练门槛。
+
 A/B 评测后获准自主分析并执行后续实验，最终截止 Toronto 11 月 11 日周三中午 12:00；见 [自主研究窗口](AUTONOMOUS_RESEARCH_20261107.md)。计划与完成结果分开，网页冠军不自动改变。
 
 Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluation/windows-return-20261106/)。随后获准的 A→B 各四小时训练与独立评测见 [交接](WINDOWS_RETURN_20261106.md)、第 44 节及 [新证据](evaluation/windows-ab-20261107/)。启动与资源读数不构成新增棋力结果。

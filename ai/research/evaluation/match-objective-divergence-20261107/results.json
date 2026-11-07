@@ -1,0 +1,575 @@
+{
+  "schema": 1,
+  "kind": "archived-009-web-policy-proxy-not-017-evaluation",
+  "protocolSHA256": "3da3a5bda74fef6cee57f22b75f5bf77b6dfef8d3bfbf09c1172a4cc4201bec2",
+  "newGames": 0,
+  "optimizerUpdates": 0,
+  "groups": {
+    "clint-rule": {
+      "model": {
+        "version": "v000293055",
+        "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+        "catalogId": "009",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx",
+        "championGate": 112
+      },
+      "opponent": "clint-rule",
+      "opponentModel": null,
+      "rules": {
+        "tribute": true,
+        "startLevel": 2,
+        "through": "A",
+        "aFail": "draw after three failed A attempts",
+        "maxRounds": 200,
+        "truncation": "error, never a draw"
+      },
+      "pipeline": "Both neural sides use the same deployed table preparation, finishing shortcut and public endgame; no personality; native ONNX CPU one thread. Clint uses isolated rules-v2.",
+      "sourceSHA256": "be09954c617c3633c6cff128e43ea33edeff3f50c660333c3dd4d46799dd3adf",
+      "pairs": 1000,
+      "matches": 2000,
+      "rounds": 20844,
+      "wins": 1451,
+      "losses": 400,
+      "draws": 149,
+      "metrics": {
+        "ownAPlusOnePerOwnAAttempt": {
+          "numerator": 185,
+          "denominator": 2345,
+          "estimate": 0.07889125799573561,
+          "pairedSeedCluster95CI": [
+            0.06794425087108014,
+            0.09079230491190984
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "ownAPlusOnePerOwnAFirst": {
+          "numerator": 185,
+          "denominator": 1636,
+          "estimate": 0.11308068459657701,
+          "pairedSeedCluster95CI": [
+            0.09767974142974142,
+            0.1301496864842966
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "opponentAWinPerOpponentAAttempt": {
+          "numerator": 400,
+          "denominator": 1147,
+          "estimate": 0.34873583260680036,
+          "pairedSeedCluster95CI": [
+            0.3214573680876123,
+            0.377454167765761
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "lossesEndingInOpponentAPlusTwoOrThree": {
+          "numerator": 400,
+          "denominator": 400,
+          "estimate": 1.0,
+          "pairedSeedCluster95CI": [
+            1.0,
+            1.0
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "threeFailedADrawRate": {
+          "numerator": 149,
+          "denominator": 2000,
+          "estimate": 0.0745,
+          "pairedSeedCluster95CI": [
+            0.063,
+            0.0865
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "matchWinRate": {
+          "numerator": 1451,
+          "denominator": 2000,
+          "estimate": 0.7255,
+          "pairedSeedCluster95CI": [
+            0.7065,
+            0.744
+          ],
+          "undefinedBootstrapReplicates": 0
+        }
+      }
+    },
+    "latest-model": {
+      "model": {
+        "version": "v000293055",
+        "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+        "catalogId": "009",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        },
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-009/bot-009.onnx",
+        "championGate": 112
+      },
+      "opponent": "latest-model",
+      "opponentModel": {
+        "version": "v000611432",
+        "sha256": "d4eb5f0c0b6939edb2e8c78f13901f324769c21865ddf8311febf5431d674595",
+        "step": 611432,
+        "trainedRows": 1252212736,
+        "ingestedRows": 313069652,
+        "publishedAt": "2026-11-05T16:42:32Z",
+        "config": {
+          "stateFeatures": 513,
+          "actionFeatures": 54
+        }
+      },
+      "rules": {
+        "tribute": true,
+        "startLevel": 2,
+        "through": "A",
+        "aFail": "draw after three failed A attempts",
+        "maxRounds": 200,
+        "truncation": "error, never a draw"
+      },
+      "pipeline": "Both neural sides use the same deployed table preparation, finishing shortcut and public endgame; no personality; native ONNX CPU one thread. Clint uses isolated rules-v2.",
+      "sourceSHA256": "063e8314e9feb3fa7270def9ff5a2a728d22351a7c1530a3f7ae5b85037835b5",
+      "pairs": 1000,
+      "matches": 2000,
+      "rounds": 22086,
+      "wins": 940,
+      "losses": 881,
+      "draws": 179,
+      "metrics": {
+        "ownAPlusOnePerOwnAAttempt": {
+          "numerator": 261,
+          "denominator": 1887,
+          "estimate": 0.1383147853736089,
+          "pairedSeedCluster95CI": [
+            0.12288797924537227,
+            0.15380604796663191
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "ownAPlusOnePerOwnAFirst": {
+          "numerator": 261,
+          "denominator": 1201,
+          "estimate": 0.21731890091590342,
+          "pairedSeedCluster95CI": [
+            0.19478179877038618,
+            0.2398381548951966
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "opponentAWinPerOpponentAAttempt": {
+          "numerator": 881,
+          "denominator": 1860,
+          "estimate": 0.4736559139784946,
+          "pairedSeedCluster95CI": [
+            0.45135410385171415,
+            0.49634225249685016
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "lossesEndingInOpponentAPlusTwoOrThree": {
+          "numerator": 881,
+          "denominator": 881,
+          "estimate": 1.0,
+          "pairedSeedCluster95CI": [
+            1.0,
+            1.0
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "threeFailedADrawRate": {
+          "numerator": 179,
+          "denominator": 2000,
+          "estimate": 0.0895,
+          "pairedSeedCluster95CI": [
+            0.077,
+            0.1025
+          ],
+          "undefinedBootstrapReplicates": 0
+        },
+        "matchWinRate": {
+          "numerator": 940,
+          "denominator": 2000,
+          "estimate": 0.47,
+          "pairedSeedCluster95CI": [
+            0.45,
+            0.49
+          ],
+          "undefinedBootstrapReplicates": 0
+        }
+      }
+    }
+  },
+  "stateTransitionDeltaTable": [
+    {
+      "ownLevel": 12,
+      "activeTeam": 0,
+      "signedRoundPoints": -3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 0,
+      "signedRoundPoints": -2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 0,
+      "signedRoundPoints": -1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 0,
+      "signedRoundPoints": 1,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 0,
+      "signedRoundPoints": 2,
+      "ownLevelDelta": 2,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 0,
+      "signedRoundPoints": 3,
+      "ownLevelDelta": 2,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 1,
+      "signedRoundPoints": -3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-loss",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 1,
+      "signedRoundPoints": -2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-loss",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 1,
+      "signedRoundPoints": -1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 1,
+      "signedRoundPoints": 1,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 1,
+      "signedRoundPoints": 2,
+      "ownLevelDelta": 2,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 12,
+      "activeTeam": 1,
+      "signedRoundPoints": 3,
+      "ownLevelDelta": 2,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 0,
+      "signedRoundPoints": -3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 0,
+      "signedRoundPoints": -2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 0,
+      "signedRoundPoints": -1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 0,
+      "signedRoundPoints": 1,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 0,
+      "signedRoundPoints": 2,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 0,
+      "signedRoundPoints": 3,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 1,
+      "signedRoundPoints": -3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-loss",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 1,
+      "signedRoundPoints": -2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-loss",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 1,
+      "signedRoundPoints": -1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 1,
+      "signedRoundPoints": 1,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 1,
+      "signedRoundPoints": 2,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 13,
+      "activeTeam": 1,
+      "signedRoundPoints": 3,
+      "ownLevelDelta": 1,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 0,
+      "signedRoundPoints": -3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 0,
+      "signedRoundPoints": -2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 0,
+      "signedRoundPoints": -1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 0,
+      "signedRoundPoints": 1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 0,
+      "signedRoundPoints": 2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-win",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 0,
+      "signedRoundPoints": 3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-win",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 1,
+      "signedRoundPoints": -3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-loss",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 1,
+      "signedRoundPoints": -2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": "own-loss",
+      "failedAAttempt": 0,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 1,
+      "signedRoundPoints": -1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 1,
+      "signedRoundPoints": 1,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 1,
+      "signedRoundPoints": 2,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    },
+    {
+      "ownLevel": 14,
+      "activeTeam": 1,
+      "signedRoundPoints": 3,
+      "ownLevelDelta": 0,
+      "opponentLevelDelta": 0,
+      "terminal": null,
+      "failedAAttempt": 1,
+      "scope": "exact state transition; not a learned match-value estimate"
+    }
+  ],
+  "limitations": [
+    "All observations are historical 009 under web-policy shortcuts, not 017 raw argmax.",
+    "Bootstrap clusters include both exchanged matches and their complete histories.",
+    "All non-draw match losses must end with the opponent passing A by +2/+3 under these rules. The loss-share threshold is tautological, not evidence for changing objectives.",
+    "Transition deltas are exact rules, not counterfactual causal effects or a fitted value function.",
+    "No new seeds, models, training, match objective or website changes."
+  ]
+}
