@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-07T19:26:57.812128+00:00",
+  "protocolSHA256": "9c1a51090e4ad4cdaa938824dd07b89b1fedf20a2457010a8f31d1d8440f1d0a",
+  "frozenSourceCommit": "1be3dcb",
+  "sourceAndModelUnchanged": true,
+  "rawPositionResultsSHA256": "5c8c061d53b12580a1b0d46e9e5b30e18d317b2eb9f0cd0dd2d07f6ee79576ec",
+  "compressedPositionResultsSHA256": "4b268cffa49eebe92b2ab8b22312827d14b3098009b1b51b962e664d35b8ebbe",
+  "positionFixtures": {
+    "retainedInIgnoredRun": "positions.json",
+    "sha256": "34d8c77aaa58724b5c67be16e7736248efdf81e6b2976d5a3f4ac66cdf605faf",
+    "reason": "Generated true-deal states stay out of Git; reconstruct using frozen source, model, seed and ply"
+  },
+  "window": {
+    "startUTC": "2026-11-07T19:18:09.709Z",
+    "deadlineUTC": "2026-11-07T20:18:09.709Z",
+    "requestedHours": 1,
+    "restartExtendsDeadline": false
+  },
+  "status": {
+    "pid": 26552,
+    "phase": "complete",
+    "displayName": "信念搜索 · 200个争议位置预试",
+    "updatedAt": "2026-11-07T19:21:35.716Z",
+    "completedPositions": 200,
+    "plannedPositions": 200,
+    "optimizerUpdates": 0,
+    "strengthGames": 0,
+    "provider": "dml",
+    "minimumAvailableGiB": 12.805580139160156,
+    "completedDeals": 200,
+    "collectedPositions": 200,
+    "stoppedAt": "2026-11-07T19:21:35.716Z"
+  },
+  "gate04": "blocked: uniform belief agreement lower than raw champion; do not increase sample, change world count or switch weighting after seeing these results",
+  "next": "0.6 zero-extras equivalence only; optional separately preregistered 1.6 remains a distinct hypothesis"
+}

@@ -6,6 +6,8 @@
 
 [信念搜索开发设计](evaluation/belief-pretrial-20261107/protocol.design.json)用于阶段 0.3 的补牌、完整 raw 贪心推演、争议比例和调用耗时测量；200 个真实位置预试的计划与实际结果必须分开。真牌参照的 48 次确定性重复仅有一个有效世界，不是 48 个独立样本。
 
+[0.3 实际负结果](evaluation/belief-pretrial-20261107/results.json)：200 位置全部完成，搜索一致率低于原冠军，0.4 门槛失败；延迟达标不能替代有效性。第 49.1 节与逐位置结果保留，不扩大样本补救。下一项只做 0.6 等价学生准备。
+
 阶段 0.1 的[历史整场分歧协议](evaluation/match-objective-divergence-20261107/protocol.json)固定两组 009 网页策略的旧档案；只读规则重放与按牌副簇统计，无新模型对局。运行 `python ai/research/tools/match-objective-divergence.py --protocol=ai/research/evaluation/match-objective-divergence-20261107/protocol.json --out=ai/danMCai/workspace/match-objective-results.json`。结果不得冒称 017 棋力或开启整场训练的授权。
 
 [阶段 0.1 实际结果](evaluation/match-objective-divergence-20261107/results.json)与主报告第 48 节保留两组各 1,000 对的旧证据重放及 95% 簇区间，并指出“败场来自对方 A 的 +2／+3”是现有牌规恒等式，不能作为后续训练门槛。

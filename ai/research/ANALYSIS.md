@@ -29,3 +29,5 @@ The development reference requests 48 identical true-deal worlds. With determini
 预试设计与正式冻结协议见 `evaluation/belief-pretrial-20261107/`。最多 400 副新开发牌中，每副只取第八手之后第一个语义 top-2 差 <0.15 的位置，目标 200 位置；同时用完整开发局的所有有选择决策统计争议比例。每次调用均实测总耗时，而不是假定三秒。需要 200 位置完整、20 次真实教师逐手贪心对照无差异、相对全信息参照的一致率高于原始冠军，才可登记 0.4；开发一致率本身不证明棋力提升。未完成或负结果不扩大样本。
 
 All new compute uses a separately registered campaign task, fixed one-hour maximum, its original STOP/deadline and the four/five GiB memory pause/resume budget. Original training, GuanZero, tribute and website model selection remain unchanged. No actual D1 record is read for this pretrial.
+
+**Actual negative result:** all 200 positions completed; belief/reference agreement 34.5% versus raw champion 60.0%, paired difference −25.5pp (95% deal-position CI −33.95 to −17.05). Mean call time 579ms, p95 864ms. The effectiveness gate failed, so search pilot 0.4 is blocked. This is development agreement, not a measured strength or win-rate decline. See [results](evaluation/belief-pretrial-20261107/results.json) and study section 49.1.

@@ -1,0 +1,114 @@
+[
+  {
+    "seed": 976000000,
+    "weights": [
+      0.335909956574704,
+      0.37096465292442704,
+      0.01807725189158901,
+      0.06443338268043951,
+      0.19743447398634315,
+      0.009252763537505728,
+      0.0030959241988313476,
+      0.0008315942061602727
+    ],
+    "temperature": 0.2,
+    "essBeforeResampling": 3.401302907961375,
+    "resampled": true,
+    "indices": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      4,
+      4
+    ],
+    "distinctSurvivors": 3,
+    "warning": "Resampling may duplicate worlds; uniform output weights do not imply independent information."
+  },
+  {
+    "seed": 976000001,
+    "weights": [
+      0.2941455360853305,
+      0.019010517501368656,
+      0.001363046088860568,
+      0.5221898023311888,
+      0.00010453353817473538,
+      0.00006946533689474879,
+      0.01999737468740637,
+      0.14311972443077564
+    ],
+    "temperature": 0.2,
+    "essBeforeResampling": 2.628464839091901,
+    "resampled": true,
+    "indices": [
+      0,
+      0,
+      3,
+      3,
+      3,
+      3,
+      7,
+      7
+    ],
+    "distinctSurvivors": 3,
+    "warning": "Resampling may duplicate worlds; uniform output weights do not imply independent information."
+  },
+  {
+    "seed": 976000002,
+    "weights": [
+      0.5970107222033825,
+      0.00592911922319645,
+      0.002256743604124363,
+      0.3299561421195965,
+      0.008516715694003052,
+      0.05495282954877428,
+      0.0003259386533062348,
+      0.0010517889536166402
+    ],
+    "temperature": 0.2,
+    "essBeforeResampling": 2.134805878423501,
+    "resampled": true,
+    "indices": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      3,
+      5
+    ],
+    "distinctSurvivors": 3,
+    "warning": "Resampling may duplicate worlds; uniform output weights do not imply independent information."
+  },
+  {
+    "seed": 976000003,
+    "weights": [
+      0.0000035658601892384753,
+      0.9281976091000277,
+      0.006069130590062636,
+      0.02721890684560097,
+      4.252053868698023e-8,
+      0.0000028000477090130037,
+      0.0005695111435444539,
+      0.0379384338923271
+    ],
+    "temperature": 0.2,
+    "essBeforeResampling": 1.1577180699235778,
+    "resampled": true,
+    "indices": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "distinctSurvivors": 1,
+    "warning": "Resampling may duplicate worlds; uniform output weights do not imply independent information."
+  }
+]

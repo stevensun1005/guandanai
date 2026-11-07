@@ -566,3 +566,4 @@
 - Complete the fixed 10,000-round champion-start holdout: positive primary signed-points comparison, inconclusive common-Clint and mixed-teammate differences; preserve all paired evidence and keep web champion 017 unchanged.
 - Add development-only public-belief determinizations and complete champion-raw Monte Carlo continuations, with bounded pretrial/STOP support and honest ESS/duplicate-world reporting. No webpage scoring or champion change.
 - Fix future evaluation CLI entry checks for directory junctions and reject missing worker statuses; retain the completed experiment's original frozen implementation and failed-start evidence.
+- Record the complete 200-position belief pretrial negative result: lower reference agreement despite sub-second observed mean latency. Block search pilot 0.4; preserve per-position evidence and ESS collapse diagnostics.

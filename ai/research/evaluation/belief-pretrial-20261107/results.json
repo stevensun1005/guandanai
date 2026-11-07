@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "kind": "development-feasibility-not-independent-strength",
+  "phase": "complete",
+  "completedAtUTC": "2026-11-07T19:21:35.715Z",
+  "protocolSHA256": "9c1a51090e4ad4cdaa938824dd07b89b1fedf20a2457010a8f31d1d8440f1d0a",
+  "deals": 200,
+  "decisions": 16255,
+  "eligibleSemanticDecisions": 11880,
+  "disputedDecisions": 5524,
+  "directGreedyChecks": 20,
+  "disputeFraction": 0.464983164983165,
+  "disputeFractionDealCluster95CI": [
+    0.4527845327537629,
+    0.4771817972125671
+  ],
+  "completedPositions": 200,
+  "plannedPositions": 200,
+  "uniformAgreement": 0.345,
+  "baselineAgreement": 0.6,
+  "agreementDifference": {
+    "n": 200,
+    "mean": -0.255,
+    "standardError": 0.04311810355606282,
+    "ci95": [
+      -0.3395114829698831,
+      -0.1704885170301169
+    ],
+    "method": "Normal approximation over one development position per independent deal; not playing-strength uncertainty"
+  },
+  "callTiming": {
+    "n": 200,
+    "meanMs": 579.1619599999999,
+    "medianMs": 564.7636000000057,
+    "p95Ms": 864.1655000000028,
+    "maxMs": 1080.1382000000012
+  },
+  "inference": {
+    "batches": 46235,
+    "decisions": 317628,
+    "rows": 6969866,
+    "runMs": 67620.07240000078,
+    "prepareMs": 6211.967900000556,
+    "inFlightMax": 4,
+    "provider": "dml",
+    "fallbackReason": null,
+    "sessionCount": 1,
+    "sessionsCreated": 1,
+    "sessionsReleased": 0,
+    "peakSessions": 1
+  },
+  "minimumAvailableGiB": 12.805580139160156,
+  "gateTo04": false,
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "limitations": [
+    "First disputed position after 8 plies per self-play deal, not a representative human sample.",
+    "Full-information reference is raw champion continuation, not optimal play; 48 identical worlds are memoized to one effective world.",
+    "Only development agreement and observed latency, never a strength claim or web promotion."
+  ]
+}
