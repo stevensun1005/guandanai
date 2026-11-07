@@ -194,3 +194,5 @@ The champion-start danMCai experiment completed 10,000 fresh heldout rounds. Its
 Stage 0.6 prepares a [zero-projection extras student](ai/research/ANALYSIS.md), retaining the champion backbone for numerical and browser equivalence checks. This is not online training, a strength improvement or a website promotion.
 
 The next optional [danMCai experiment](ai/research/CONTINUOUS_TRAINING.md) tests a four-hour champion-only exploiter with fresh Adam, then separate held-out comparisons against 017, P0 and 012. This hypothesis does not imply improvement or authorize replacing the website champion.
+
+The danMCai experiment started with a fixed November7 14:56–18:56 Toronto window. The [live dashboard](http://127.0.0.1:8767/) reports measured updates and resources. Held-out evaluation follows training; no new strength result or website promotion is claimed. [Evidence](ai/research/evaluation/exploiter-017-20261107/startup.json).
