@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>danMCai · A/B 实验实时进度</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0d1422;
+      color: #e9eff9;
+      font:
+        16px/1.6 system-ui,
+        sans-serif;
+    }
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+    }
+    h1 {
+      font-size: 26px;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0;
+    }
+    small,
+    .muted {
+      color: #aab8cf;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .card {
+      background: #172338;
+      border: 1px solid #2b3f5c;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    progress {
+      width: 100%;
+      height: 18px;
+      accent-color: #55d9b3;
+    }
+    .numbers {
+      font-size: 26px;
+      color: #66e6c1;
+    }
+    .error {
+      color: #ffb8ac;
+      white-space: pre-wrap;
+    }
+    dl {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    dd {
+      margin: 0;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+    a {
+      color: #88d9ff;
+    }
+    #connection {
+      border-radius: 8px;
+      padding: 8px;
+      background: #20312e;
+    }
+    @media (max-width: 650px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 16px;
+      }
+    }
+    button {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 0;
+    }
+  </style>
+  <main>
+    <h1>danMCai · A/B 对照实验</h1>
+    <p class="muted">A → B，各 4 小时，之后独立评测。4 GiB 可用内存预留；网页冠军保持不变。</p>
+    <div id="connection">正在连接实时数据…</div>
+    <section class="card">
+      <h2 id="phase">读取中</h2>
+      <div id="machine"></div>
+      <small id="updated"></small>
+    </section>
+    <div class="cards" id="arms"></div>
+    <section class="card">
+      <h2>独立整局评测</h2>
+      <p id="evalText">训练完成后冻结权重再开始；目前不代表棋力结论。</p>
+      <progress id="evalProgress" max="24000" value="0"></progress>
+      <div id="workers"></div>
+    </section>
+    <section class="card">
+      <h2>实验口径</h2>
+      <p>
+        A：self / league / original-rule = 0.5 / 0.3 / 0.2<br />B：0.3 / 0.5 /
+        0.2。其他训练设置一致。各自的训练与门控种子分开。
+      </p>
+      <p>
+        评测使用预登记新牌副、同副牌交换位置，分别统计升级分、胜负、名次和双下，不合并为总体胜率。训练步数和训练局数不是独立棋力成绩。
+      </p>
+      <a href="/api/status">原始实时 JSON</a>
+      <pre id="failure" class="error"></pre>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id),
+      n = (v) =>
+        Number.isFinite(v) ? v.toLocaleString('zh-CN', { maximumFractionDigits: 1 }) : '—';
+    const labels = {
+      ready: '等待启动',
+      'training-A': 'A 组训练中',
+      'training-B': 'B 组训练中',
+      'completed-A': 'A 已停止，准备 B',
+      'completed-B': '两组已停止，准备冻结评测',
+      'independent-evaluation': '独立评测中',
+      'complete-awaiting-research-publication': '评测完成，等待报告校核与推送',
+      'needs-attention': '需要处理：已保留现场',
+    };
+    function el(tag, text) {
+      const x = document.createElement(tag);
+      if (text !== undefined) x.textContent = text;
+      return x;
+    }
+    function field(dl, key, value) {
+      dl.append(el('dt', key), el('dd', value));
+    }
+    async function refresh() {
+      try {
+        const r = await fetch('/api/status', { cache: 'no-store' });
+        if (!r.ok) throw Error('HTTP ' + r.status);
+        const s = await r.json();
+        $('connection').textContent = '实时连接正常 · 每 3 秒刷新';
+        $('phase').textContent = labels[s.phase] || s.phase;
+        $('updated').textContent =
+          '读取时间：' +
+          new Date(s.observedAtUTC).toLocaleString() +
+          ' · 控制进程' +
+          (s.controllerAlive ? '在线' : '未确认');
+        $('machine').textContent =
+          '可用内存 ' +
+          n(s.memory.availableGiB) +
+          ' / ' +
+          n(s.memory.totalGiB) +
+          ' GiB · 全机 CPU ' +
+          n(s.machineCPUPercent) +
+          '%';
+        $('arms').replaceChildren();
+        for (const [id, a] of Object.entries(s.arms)) {
+          const box = el('article');
+          box.className = 'card';
+          box.append(
+            el(
+              'h2',
+              id +
+                ' 组 · ' +
+                {
+                  waiting: '等待',
+                  running: '训练中',
+                  stopped: '已停止',
+                  unconfirmed: '心跳待确认',
+                }[a.phase],
+            ),
+          );
+          const schedule = a.schedule;
+          const left = schedule
+            ? Math.max(0, (Date.parse(schedule.deadlineUTC) - Date.now()) / 1000)
+            : null;
+          const p = el('progress');
+          p.max = 14400;
+          p.value = left === null ? 0 : 14400 - left;
+          box.append(p);
+          const nums = el('div', '本轮新增 ' + n(a.newUpdates) + ' 次更新');
+          nums.className = 'numbers';
+          box.append(nums);
+          const dl = el('dl');
+          field(
+            dl,
+            '固定截止',
+            schedule ? new Date(schedule.deadlineUTC).toLocaleString() : '尚未开始计时',
+          );
+          field(
+            dl,
+            '剩余时间',
+            left === null
+              ? '等待上一组完成'
+              : Math.floor(left / 3600) + '时 ' + Math.floor((left % 3600) / 60) + '分',
+          );
+          field(dl, '累计学习器步数', n(a.learner.step || a.inheritedStep));
+          field(dl, '本轮已采样对局', n(a.actors.matches));
+          field(dl, '本轮决策数', n(a.actors.decisions));
+          field(dl, '采样决策 / 秒', n(a.decisionsPerSecond));
+          field(dl, '后端', a.learner.device || 'cuda:0 · 等待');
+          field(dl, '设备', a.learner.deviceName || 'RX 7800 XT · 等待状态');
+          field(dl, '训练进程显存分配', n((a.learner.gpuAllocatedBytes || 0) / 1024 ** 2) + ' MiB');
+          field(dl, '暂停采样器', a.resources?.pausedActors?.join(', ') || '无');
+          field(dl, '训练心跳', a.updatedAt ? new Date(a.updatedAt).toLocaleTimeString() : '等待');
+          box.append(dl);
+          $('arms').append(box);
+        }
+        const e = s.evaluation;
+        $('evalProgress').value = e.completedRounds;
+        $('evalText').textContent =
+          n(e.completedRounds) +
+          ' / ' +
+          n(e.plannedRounds) +
+          ' 局' +
+          (e.deadlineUTC
+            ? ' · 固定截止 ' + new Date(e.deadlineUTC).toLocaleString()
+            : ' · 尚未启动');
+        $('workers').textContent = e.workers
+          .map(
+            (w) => 'Worker ' + w.shard + '：' + w.phase + ' / ' + n(w.completedPairs * 2) + ' 局',
+          )
+          .join('；');
+        $('failure').textContent = s.failure || '';
+      } catch (error) {
+        $('connection').textContent =
+          '连接中断：' + error.message + '。以下是旧数据显示，不能视为实时。';
+      }
+    }
+    refresh();
+    setInterval(refresh, 3000);
+  </script>
+</html>

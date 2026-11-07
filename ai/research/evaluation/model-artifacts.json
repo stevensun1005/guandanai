@@ -4849,5 +4849,23 @@
       "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42328688040",
       "webBuild": "2e6141b678"
     }
+  ],
+  "windowsExperimentRuns": [
+    {
+      "id": "windows-ab-20261107",
+      "status": "training-A",
+      "hoursPerArm": 4,
+      "order": [
+        "A",
+        "B"
+      ],
+      "authorization": "ai/research/evaluation/windows-ab-20261107/authorization.json",
+      "evidence": "ai/research/evaluation/windows-ab-20261107/launch.json",
+      "validation": "ai/research/evaluation/windows-ab-20261107/validation.json",
+      "preparedExperiment": "windows-ab-20261106",
+      "webChampionHold": "017",
+      "independentCompletedRoundsAtLaunch": 0,
+      "dashboard": "http://127.0.0.1:8766/"
+    }
   ]
 }

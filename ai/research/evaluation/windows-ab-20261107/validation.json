@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "node": {
+    "tests": 221,
+    "passed": 221
+  },
+  "pythonDanMCai": {
+    "tests": 41,
+    "passed": 40,
+    "skipped": 1,
+    "skip": "Apple MPS hardware test"
+  },
+  "pythonResearch": {
+    "tests": 17,
+    "passed": 17
+  },
+  "format": "passed",
+  "build": "passed",
+  "browser": {
+    "phase": "training-A",
+    "arms": [
+      "A",
+      "B"
+    ],
+    "liveRefresh": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "readOnly": true,
+    "pageErrors": []
+  },
+  "preparedFrozenFilesUnchangedPerArm": 36,
+  "ownerDraftsPreserved": 10,
+  "neuralRuleWebModelChanges": [],
+  "controlSourcesSHA256": {
+    "ai/research/tools/run-windows-ab.mjs": "cc9b48924da8effa2f5e4357c91244b2ec4fa0638cd65532e828fe0a1ade7128",
+    "ai/research/tools/windows-ab-dashboard.html": "25e7e271008cbdfe6eb527b30004ea72b10e03ec8ca75b8eebbf6dafcfc0d18b"
+  },
+  "startupSamplerObservations": [
+    {
+      "slot": 0,
+      "updatedAt": "2026-11-07T05:57:26.450Z",
+      "provider": "dml",
+      "fallbackReason": null,
+      "failures": 0
+    },
+    {
+      "slot": 1,
+      "updatedAt": "2026-11-07T05:57:26.960Z",
+      "provider": "dml",
+      "fallbackReason": null,
+      "failures": 0
+    },
+    {
+      "slot": 2,
+      "updatedAt": "2026-11-07T05:57:26.520Z",
+      "provider": "dml",
+      "fallbackReason": null,
+      "failures": 0
+    },
+    {
+      "slot": 3,
+      "updatedAt": "2026-11-07T05:57:24.972Z",
+      "provider": "dml",
+      "fallbackReason": null,
+      "failures": 0
+    }
+  ],
+  "checks": {
+    "node-tests.log": {
+      "sha256": "25e1b1dbaa3fc5ce8d1da56abe2675f34f9ab2ffb2cb93c203af2968cebb3309",
+      "expectedSummaryFound": true
+    },
+    "python-tests.log": {
+      "sha256": "d17391ff954b27904afe38c4f3a4876eac906df4be6dce804eb1945ba450a969",
+      "expectedSummaryFound": true
+    },
+    "research-tests.log": {
+      "sha256": "1aa6ee55f39425ceafd5097b4e8a9d2a6f6c57c6e406f5d29995d5456b806571",
+      "expectedSummaryFound": true
+    },
+    "format.log": {
+      "sha256": "f3421b2dfe4af6fa1780d301d1d172f6a5f016bca5beab10dfc251dceece6929",
+      "expectedSummaryFound": true
+    },
+    "build.log": {
+      "sha256": "d20c2ae99541b7b91dd06247cd95b2092ac19908135743a9a57aa00223c7b295",
+      "expectedSummaryFound": true
+    }
+  }
+}

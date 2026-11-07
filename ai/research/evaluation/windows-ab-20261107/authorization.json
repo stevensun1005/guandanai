@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "id": "windows-ab-20261107",
+  "authorizedDateToronto": "2026-11-07",
+  "authorization": "Owner 2026-11-07: A then B, four hours each, reserve 4 GiB, live dashboard, then preregistered independent evaluation and research publication; do not change web champion.",
+  "order": [
+    "A",
+    "B"
+  ],
+  "hoursPerArm": 4,
+  "resourceBudget": {
+    "reserveGiB": 4,
+    "resumeGiB": 5,
+    "policy": "Existing frozen sampler hysteresis; not an OS-wide hard memory partition"
+  },
+  "trainingSourceCommit": "b7bd49a9a11fe7ae2904b8968c1027c6d9215fe3",
+  "controlBaseCommit": "8405308610e45b75186c7d45ef0fd7ca5f17ffdc",
+  "preparedProtocol": "ai/research/evaluation/windows-return-20261106/protocol.json",
+  "preparedProtocolSHA256": "205cb40c310ddec15d616112cbc185f9e51db1f683264e34c1b4c40602699f09",
+  "onlyTreatment": {
+    "A": {
+      "self": 0.5,
+      "league": 0.3,
+      "rule": 0.2
+    },
+    "B": {
+      "self": 0.3,
+      "league": 0.5,
+      "rule": 0.2
+    }
+  },
+  "selectionForIndependentEvaluation": "Each arm final complete learner export after its window, not its peak, internal champion or largest cross-arm step",
+  "evaluationPlan": "ai/research/evaluation/windows-return-20261106/heldout-protocol.pending.json",
+  "plannedRounds": 24000,
+  "evaluationWorkers": 4,
+  "evaluationReserveGiB": 5,
+  "evaluationDeadlinePolicy": "Set once at freeze: start + 12h operational cap, fixed sample only, no outcome-dependent extension",
+  "webChampionHold": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+  },
+  "promoteFromEitherArm": false,
+  "scheduledRestartTaskInstalled": false,
+  "followupAutomation": "windows-a-b"
+}

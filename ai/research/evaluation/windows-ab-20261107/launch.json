@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-07T05:51:33.839Z",
+  "status": "training-A",
+  "runAliases": {
+    "A": "ai/danMCai/runs/windows-ab-20261106-A",
+    "B": "ai/danMCai/runs/windows-ab-20261106-B"
+  },
+  "runtime": "ai/danMCai/workspace/windows-ab-20261107/",
+  "controlWorktree": "ai/danMCai/workspace/worktrees/windows-ab-control-20261107",
+  "frozenTrainingAndEvaluationSource": "ai/danMCai/workspace/worktrees/windows-return-20261106",
+  "dashboard": "http://127.0.0.1:8766/",
+  "controllerPID": 29792,
+  "ASchedule": {
+    "startUTC": "2026-11-07T05:49:32.553Z",
+    "deadlineUTC": "2026-11-07T09:49:32.553Z",
+    "durationHours": 4,
+    "restartExtendsDeadline": false,
+    "authorization": "Owner 2026-11-07: A then B, four hours each, reserve 4 GiB, live dashboard, then preregistered independent evaluation and research publication; do not change web champion."
+  },
+  "BSchedule": null,
+  "liveSample": {
+    "memory": {
+      "availableGiB": 8.216053009033203,
+      "totalGiB": 31.218204498291016,
+      "reserveGiB": 4,
+      "resumeGiB": 5
+    },
+    "machineCPUPercent": 43.812243884266735,
+    "A": {
+      "newUpdates": 553,
+      "learner": {
+        "pid": 39176,
+        "device": "cuda:0",
+        "deviceName": "AMD Radeon RX 7800 XT",
+        "torch": "2.9.1+rocmsdk20260116",
+        "hip": "7.2.26024-f6f897bd3d",
+        "gpuAllocatedBytes": 168273920,
+        "state": "waiting-for-data",
+        "step": 1014459,
+        "version": "v001013906",
+        "buffer": 2000000,
+        "ingestedRows": 519403067,
+        "trainedRows": 2077612032,
+        "lossEMA": 3.3142963896803517,
+        "replayRatio": 3.9999995456322557,
+        "stepsPerSecond": 4.732638786428926,
+        "updatedAt": "2026-11-07T05:51:32Z"
+      },
+      "actors": {
+        "matches": 602,
+        "decisions": 283222,
+        "rows": 283222,
+        "slots": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  },
+  "independentCompletedRounds": 0,
+  "scope": "Startup and resource snapshot only, not throughput benchmark or strength conclusion",
+  "oldRunsRestarted": false,
+  "webChampionChanged": false
+}

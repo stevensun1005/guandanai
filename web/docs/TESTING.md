@@ -1,5 +1,11 @@
 # 验证与复现
 
+## Windows A/B 实验面板
+
+`node --test ai/research/tests/windows-ab-controller.test.mjs` 用临时合成文件验证未完全退出的学习器不能进入评测、完整最终权重按 SHA 冻结、再次调用不重置评测截止，以及新增更新计数不含继承步数。它不启动真实训练。
+
+`python ai/research/tests/windows_ab_dashboard_smoke.py http://127.0.0.1:8766/` 只读取已经存在的本机面板，检查三秒刷新、两臂、4 GiB 预算、拒绝写请求，以及桌面／390 像素布局；不会启动、停止或修改训练。真实运行与固定截止见 [Windows 交接](../../ai/research/WINDOWS_RETURN_20261106.md)。
+
 ## 公开观战与语音回归
 
 `node --test web/tests/spectators.test.mjs` 检查公开投影不包含手牌、牌堆、种子或辅助状态，并拒绝无效实体牌／座位／张数。`python web/tests/spectators_smoke.py <预览根URL>` 使用三个独立 Chrome 上下文和真实 PeerJS：两名玩家仍占两席，观众无模型下载，不能出牌、占座或用玩家凭证恢复；覆盖玩家刷新恢复后的双路语音、房主禁言／重新允许、第二局数据刷新、房主退出，以及 1440／1024／390 像素布局。音频使用浏览器合成测试设备，不代表真实麦克风品质或跨设备网络验收。所有浏览器局面标为 `kind=test`，不进入真人训练样本。

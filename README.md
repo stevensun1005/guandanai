@@ -26,7 +26,7 @@
 
 </details>
 
-Windows 回迁已完成包校验、ROCm／DirectML 实测和双臂配置准备，**正式训练未启动**；操作与启动条件见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。网页继续使用真实冠军，准备不构成棋力提升证据。
+Windows A／B 已获准顺序各训四小时，随后进行独立整局评测；[实时面板](http://127.0.0.1:8766/)显示实际进度与资源，启动证据和固定截止见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。网页冠军保持不变，训练进度不构成棋力提升结论。
 
 ## 代码与模型入口
 
@@ -181,7 +181,7 @@ GuanZero 与danMCai 分开训练，支持 GPU 合批推理和只读实时面板�
 
 本次 Mac 窗口的最终冠军已完成网页核对，对应周期发布检查随本轮收尾结束；新训练窗口须另行授权。[最终记录与交接](ai/research/MAC_HANDOFF.md)。
 
-Windows 返回包、匹配检查点与 Adam 的恢复、独立整局比较和下一轮建议见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。本轮评测已完成，冠军与最终学习器尚无明确强弱差异；训练保持停止。
+Windows 返回包、匹配检查点与 Adam 的恢复、已完成的 Mac 独立比较及新的 Windows A／B 实验见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。Mac 原窗口保持停止；新的两臂另有固定截止，结果尚待实际完成的独立评测。
 
 GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗口每 12 小时冻结模型，分别对两个对手各打 500 场。见 [GuanZero 训练说明](ai/guanzero/README.md)。
 
