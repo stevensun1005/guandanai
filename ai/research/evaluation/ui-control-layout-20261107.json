@@ -1238,11 +1238,103 @@
     "build": {
       "passed": true,
       "version": "4262ad83ef"
+    },
+    "ci": {
+      "passed": true,
+      "build": "success",
+      "deploy": "success",
+      "runId": 42398993215
     }
   },
   "deployment": {
-    "status": "pending CI and Pages for uniform short-window followup",
-    "currentlyPublishedSourceCommit": "fe066bc3f2ff00d8f9381a53c1caf418baa820de"
+    "status": "success",
+    "sourceCommit": "a20677cb9fb58dfe95eecbb352647aa0d88845ac",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42398993215",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "verifiedAtUTC": "2026-11-07T18:08:02.793786+00:00",
+    "publicBrowser": {
+      "version": "4262ad83ef",
+      "menu": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人"
+        },
+        {
+          "id": "021",
+          "name": "guanzero-adp-io48-229609"
+        },
+        {
+          "id": "020",
+          "name": "guanzero-adp-io48-223067"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000"
+        },
+        {
+          "id": "017",
+          "name": "danMCai-v000855042"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434"
+        }
+      ],
+      "defaultIds": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ],
+      "cases": [
+        {
+          "phase": "play",
+          "cards": 27,
+          "viewport": [
+            1024,
+            768
+          ],
+          "overlapOrOcclusion": false
+        },
+        {
+          "phase": "roundEnd",
+          "cards": 8,
+          "viewport": [
+            1024,
+            768
+          ],
+          "overlapOrOcclusion": false
+        },
+        {
+          "phase": "play",
+          "cards": 1,
+          "viewport": [
+            375,
+            450
+          ],
+          "overlapOrOcclusion": false
+        },
+        {
+          "phase": "play",
+          "cards": 27,
+          "viewport": [
+            844,
+            390
+          ],
+          "overlapOrOcclusion": false
+        },
+        {
+          "phase": "play",
+          "cards": 8,
+          "viewport": [
+            1280,
+            300
+          ],
+          "overlapOrOcclusion": false
+        }
+      ],
+      "pageErrors": []
+    }
   },
   "limitations": [
     "Display-state fixtures and functional browser checks are not completed strength matches.",
