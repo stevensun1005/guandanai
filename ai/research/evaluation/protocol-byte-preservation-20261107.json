@@ -1,0 +1,20 @@
+{
+  "reason": "Preserve exact Windows-generated protocol bytes independently of Git line-ending normalization; no experimental content or results changed",
+  "archives": [
+    {
+      "file": "ai/research/evaluation/match-objective-divergence-20261107/protocol-original.json.gz",
+      "originalSHA256": "3da3a5bda74fef6cee57f22b75f5bf77b6dfef8d3bfbf09c1172a4cc4201bec2",
+      "compressedSHA256": "86203e06bbfb15f513e8faf2b8a58aabfa2238197d03994b040d220477bd0576"
+    },
+    {
+      "file": "ai/research/evaluation/shared-analysis-20261107/protocol-original.json.gz",
+      "originalSHA256": "5520942e23b28c7abc6d220626b5bddde6845d0abd05f4343d4e6eee06aa72a6",
+      "compressedSHA256": "1ed84d942e5c5cc0ca49a10f06579fe757c5cc8c34accb8c1165c2537c9e5f45"
+    },
+    {
+      "file": "ai/research/evaluation/champion-restart-20261107/heldout-protocol-original.json.gz",
+      "originalSHA256": "da651238044d42ae2ebf88b25b90460b0d0649774bf265db7a59fbcd8069a484",
+      "compressedSHA256": "4d6e1817c9b565087871b3b62b12f0b23519421e0e166bf6496937c728973c22"
+    }
+  ]
+}

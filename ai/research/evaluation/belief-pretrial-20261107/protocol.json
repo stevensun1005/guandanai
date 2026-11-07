@@ -488,7 +488,8 @@
     976001771
   ],
   "modelFile": "models/champion.onnx",
-  "seedAuditSHA256": "30b6df82f767d64bbe8a9c9070acaa0fc9dba6def8717ea3171c098d16284b07",
+  "seedAuditSHA256": "589088d414d8dcfc0992c1df797c97b6e97f9db3e54fb31e245efa017a249639",
   "greedyChecks": 20,
-  "statistics": "Dispute ratio uses complete-deal cluster delta-method 95% CI. Agreement difference normal CI over one position per deal. Development only."
+  "statistics": "Dispute ratio uses complete-deal cluster delta-method 95% CI. Agreement difference normal CI over one position per deal. Development only.",
+  "serialization": "UTF-8 LF, frozen before registration"
 }
