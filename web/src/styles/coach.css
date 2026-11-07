@@ -331,7 +331,7 @@
 }
 
 /* A very short narrow window needs scrolling space rather than overlays over its controls. */
-@media (max-width: 799px) and (max-height: 599px), (max-height: 349px) {
+@media (max-height: 699px) {
   body:not(.practice) {
     overflow-y: auto;
   }

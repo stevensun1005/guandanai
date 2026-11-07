@@ -12,8 +12,7 @@ import { phoneRefit, pileRebuild, pileRefit } from '../ui/table-pile.js';
 import { placeLastPlay, render } from '../ui/table.js';
 
 export let sideBtns;
-export const stackedControls = () =>
-  !runtime.reviewMode && ((innerWidth < 800 && innerHeight < 600) || innerHeight < 350);
+export const stackedControls = () => !runtime.reviewMode && innerHeight < 700;
 let BTN_GAP;
 let SPOT_UP;
 let actionInset;

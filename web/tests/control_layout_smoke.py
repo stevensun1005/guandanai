@@ -181,6 +181,17 @@ with sync_playwright() as p:
                             page.screenshot(path=str(OUT / f'failure-{len(failures)}.png'))
                     if coach and phase == 'play' and (n == 8) and (view == 'flat'):
                         page.screenshot(path=str(OUT / f'controls-{width}-{height}-{mobile}.png'))
+            if (width,height,mobile,coach)==(844,390,False,True):
+                case={'phase':'play','n':27,'returning':False,'selected':False,'view':'vert','alreadyReady':False,'opponentTurn':True}
+                page.evaluate(FIXTURE,case)
+                page.evaluate("""()=>{const deck=makeDeck(),bomb=deck.filter(c=>c.r===9||(c.r===2&&c.s==='H')),
+                    ids=new Set(bomb.map(c=>c.id)),rest=deck.filter(c=>!ids.has(c.id));G.L=2;
+                    G.hands=[bomb.concat(rest.splice(0,17)),...Array.from({length:3},()=>rest.splice(0,27))];
+                    G.fixed=[bomb.map(c=>c.id)];G.myOrder=[];renderHand();
+                    if(!analyze(bomb,2).some(s=>s.type==='bomb'&&s.n===10))throw Error('Invalid stress fixture');}""")
+                page.wait_for_timeout(200)
+                issues=page.evaluate(AUDIT);count+=1
+                if issues:failures.append({'viewport':[width,height],'scenario':'legal-ten-card-bomb-vertical','issues':issues})
             print(json.dumps({'viewport': [width, height], 'coach': coach, 'completed': count, 'failures': len(failures)}), flush=True)
             view_reports.append({'viewport': [width, height], 'mobile': mobile, 'coach': coach, 'htmlClasses': page.locator('html').get_attribute('class')})
             context.close()

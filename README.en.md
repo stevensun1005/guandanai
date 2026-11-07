@@ -16,7 +16,7 @@ Four-player GuanDan with bots running in your browser, private rooms and practic
 
 ## Table assistance and hand reset
 
-On desktop windows at least 800 pixels wide, Top 5 uses a reserved sidebar with its own scrolling. Collapsing it restores table space while keeping selection ratings. Controls reserve their own space as cards and timers change; short desktop windows use a smaller action column or a two-column grid. Round-result actions stay inside the result card. Very narrow, short windows use a scrollable layout instead of overlapping overlays. The **复原** button restores loose cards to rank order, preserves manual groups and supports undo. In four-hand practice it restores the suggested grouping instead. See the [playing guide](web/docs/PLAYING.md) and [coach guide](web/docs/MOVE_COACH.md).
+On desktop windows at least 800 pixels wide and 700 pixels tall, Top 5 uses a reserved sidebar with its own scrolling. Collapsing it restores table space while keeping selection ratings. Controls reserve their own space as cards and timers change; short desktop windows use a smaller action column or a two-column grid. Round-result actions stay inside the result card. Windows shorter than 700 pixels use a scrollable layout instead of overlapping overlays. The **复原** button restores loose cards to rank order, preserves manual groups and supports undo. In four-hand practice it restores the suggested grouping instead. See the [playing guide](web/docs/PLAYING.md) and [coach guide](web/docs/MOVE_COACH.md).
 
 ![An actual game](./web/docs/media/table-desktop.png)
 

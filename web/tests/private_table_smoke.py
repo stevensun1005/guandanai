@@ -84,6 +84,9 @@ with sync_playwright() as p:
  for w,h in [(1440,1000),(390,844),(844,390)]:
   host.set_viewport_size({'width':w,'height':h});host.wait_for_timeout(300)
   if host.locator('#coachSuggestions').is_hidden():host.locator('#coachTopToggle').click()
+  if host.evaluate("getComputedStyle(document.body).overflowY==='auto'"):
+   host.evaluate("""()=>{const a=document.querySelector('#coachPanel').getBoundingClientRect(),b=document.querySelector('#coachSuggestions').getBoundingClientRect();document.scrollingElement.scrollBy({top:(a.top+b.bottom)/2-innerHeight/2,behavior:'instant'})}""")
+   host.wait_for_timeout(100)
   top=host.locator('#coachSuggestions').bounding_box();assert top and top['x']>=0 and top['y']>=0 and top['x']+top['width']<=w+1 and top['y']+top['height']<=h+1
   host.screenshot(path=str(OUT/f'private-{w}.png'))
   layouts.append({'width':w,'height':h,'topFiveInViewport':True})

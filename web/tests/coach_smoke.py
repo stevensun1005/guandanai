@@ -69,10 +69,13 @@ def layouts(page):
     result=[]
     for w,h in [(1920,1080),(1440,1000),(1366,768),(1280,720),(1100,620),(1024,768),(900,600),(1280,500),(390,844),(844,390)]:
         page.set_viewport_size({'width':w,'height':h});page.wait_for_timeout(250)
+        if page.evaluate("getComputedStyle(document.body).overflowY==='auto'"):
+            page.evaluate("""()=>{const a=document.querySelector('#coachPanel').getBoundingClientRect(),b=document.querySelector('#coachSuggestions').getBoundingClientRect();document.scrollingElement.scrollBy({top:(a.top+b.bottom)/2-innerHeight/2,behavior:'instant'})}""")
+            page.wait_for_timeout(100)
         box=page.locator('#coachPanel').bounding_box();assert box and box['x']>=0 and box['y']>=0 and box['x']+box['width']<=w+1 and box['y']+box['height']<=h
         overlaps=page.evaluate("""()=>{const a=document.querySelector('#coachPanel').getBoundingClientRect();return [...document.querySelectorAll('#btns .btn')].some(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1})}""")
         assert not overlaps, 'evaluation panel overlaps play controls'
-        side=page.locator('#coachSuggestions').bounding_box();assert side and side['x']>=0 and side['y']>=0 and side['x']+side['width']<=w+1 and side['y']+side['height']<=h+1
+        side=page.locator('#coachSuggestions').bounding_box();assert side and side['x']>=0 and side['y']>=0 and side['x']+side['width']<=w+1 and side['y']+side['height']<=h+1, f'Top 5 viewport {w}x{h}: {side}; scroll='+str(page.evaluate('({body:document.body.scrollTop,doc:document.documentElement.scrollTop,overflow:getComputedStyle(document.body).overflowY,parent:document.querySelector("#coachSuggestions").parentElement.id})'))
         assert not page.evaluate("""()=>{const a=document.querySelector('#coachSuggestions').getBoundingClientRect();return [...document.querySelectorAll('#btns .btn')].some(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1})}"""), 'Top 5 overlaps play controls '+str((w,h,side,page.evaluate("[...document.querySelectorAll('#btns .btn')].map(e=>({id:e.id,box:e.getBoundingClientRect().toJSON()}))")))
         if w >= 900:
             # Check the game surface, not just the play buttons: the old popover covered seats.

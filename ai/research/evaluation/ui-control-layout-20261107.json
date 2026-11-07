@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "ui-layout-and-visible-assistance-validation",
-  "recordedAtUTC": "2026-11-07T17:18:44.800113+00:00",
+  "recordedAtUTC": "2026-11-07T17:56:32.562157+00:00",
   "baseMain": "c607234b1709f3edc57412bff4127bae3a6384b9",
   "scope": [
     "Normal-flow hand tools and identity, with reserved space for action controls",
@@ -11,13 +11,16 @@
     "Assisted records require visible, unclipped, unobscured numeric ratings; scroll exposure is recorded"
   ],
   "fullGeometry": {
-    "buildVersion": "ceb8b76746",
-    "method": "16 viewport/touch configurations x 13 synthetic display scenarios x hand views and coach on/off; rectangle overlap and six interior hit tests. No match-strength sample.",
+    "buildVersion": "4262ad83ef",
+    "method": "18 viewport/touch configurations x 13 scenarios with coach on/off and applicable views, plus one legal ten-card wildcard bomb in vertical grouping. Six-point hit tests and rectangle intersections; scrolling layouts bring each button into view.",
     "result": {
       "kind": "synthetic-display-hit-test",
+      "buildVersions": [
+        "4262ad83ef"
+      ],
       "strengthGames": 0,
       "trainingUpdates": 0,
-      "testedStates": 1040,
+      "testedStates": 1145,
       "viewports": [
         {
           "viewport": [
@@ -306,11 +309,48 @@
           "mobile": true,
           "coach": true,
           "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
         }
       ],
       "failures": [],
       "pageErrors": []
-    }
+    },
+    "legalTenCardBombPassed": true
   },
   "affectedLayoutFollowup": {
     "method": "Seven configurations affected by scrolling thresholds (including new 375x450 and 1280x300 boundaries), full-width inline ratings and visibility handling. These cases overlap the main matrix; not independent games.",
@@ -591,9 +631,9 @@
       "hostDeniedEnforced": true,
       "scoring": {
         "modelId": "017",
-        "candidates": 15,
-        "minValue": -2.1350691318511963,
-        "maxValue": -1.735508680343628,
+        "candidates": 7,
+        "minValue": -1.507291316986084,
+        "maxValue": -1.2535991668701172,
         "topFiveVisible": true,
         "topFiveClickSelectsOnly": true,
         "topFiveExposureMarked": true,
@@ -625,7 +665,7 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 236,
-            "y": 698.203125,
+            "y": 702.765625,
             "width": 989,
             "height": 53
           }
@@ -640,7 +680,7 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 618.203125,
+            "y": 622.765625,
             "width": 954,
             "height": 53
           }
@@ -655,7 +695,7 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 386.203125,
+            "y": 390.765625,
             "width": 889,
             "height": 53
           }
@@ -670,7 +710,7 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 338.203125,
+            "y": 342.765625,
             "width": 813,
             "height": 53
           }
@@ -685,8 +725,8 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 272.65625,
-            "width": 654,
+            "y": 202.1875,
+            "width": 1068,
             "height": 53
           }
         },
@@ -700,7 +740,7 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 417.828125,
+            "y": 421.921875,
             "width": 588,
             "height": 53
           }
@@ -715,8 +755,8 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 278.828125,
-            "width": 478,
+            "y": 192.1875,
+            "width": 868,
             "height": 53
           }
         },
@@ -730,8 +770,8 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 204.84375,
-            "width": 813,
+            "y": 146.1875,
+            "width": 1248,
             "height": 46
           }
         },
@@ -760,8 +800,8 @@
           "desktopGameSurfaceOverlap": null,
           "bounds": {
             "x": 16,
-            "y": 127.0625,
-            "width": 481,
+            "y": 102.1875,
+            "width": 812,
             "height": 46
           }
         }
@@ -781,20 +821,20 @@
       "privateCoach": {
         "modelId": "017",
         "search": {
-          "candidates": 24,
+          "candidates": 226,
           "evaluated": 8,
           "mode": "round",
           "horizon": 4,
           "maxPlies": 12,
           "leafSeat": "advising player, or partner after finishing",
           "mismatchedLeaves": 0,
-          "fullRollouts": 13,
-          "minRollouts": 1,
+          "fullRollouts": 26,
+          "minRollouts": 3,
           "truncatedRollouts": 0,
           "maxSamples": 12,
           "priorWeight": 4,
           "temperature": 0.03,
-          "elapsedMs": 2523,
+          "elapsedMs": 2533,
           "fullInformation": true
         }
       },
@@ -983,8 +1023,8 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 272.65625,
-            "width": 654,
+            "y": 274.1875,
+            "width": 1068,
             "height": 53
           }
         },
@@ -1013,8 +1053,8 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 278.828125,
-            "width": 478,
+            "y": 274.1875,
+            "width": 868,
             "height": 53
           }
         },
@@ -1028,8 +1068,8 @@
           "desktopGameSurfaceOverlap": false,
           "bounds": {
             "x": 16,
-            "y": 204.84375,
-            "width": 813,
+            "y": 238.984375,
+            "width": 1248,
             "height": 46
           }
         },
@@ -1058,8 +1098,8 @@
           "desktopGameSurfaceOverlap": null,
           "bounds": {
             "x": 16,
-            "y": 127.0625,
-            "width": 476,
+            "y": 128.984375,
+            "width": 812,
             "height": 46
           }
         }
@@ -1146,11 +1186,18 @@
       "scope": "Static dependency check",
       "failedChecks": 1,
       "resolution": "DOM Node constant is now explicitly qualified through window; final 225 tests pass."
+    },
+    {
+      "buildVersion": "93f953fad5",
+      "scope": "One legal ten-card wildcard bomb, vertical grouping at 844x390",
+      "issues": 6,
+      "resolution": "All windows under 700px use native flow and scrolling; the followup full matrix and legal bomb stress pass."
     }
   ],
   "testHarnessCorrections": [
     "Public history smoke waits for test hooks before evaluating a fixture.",
-    "Emote smoke checks viewport/hit access when sorting controls are intentionally absent for empty hands."
+    "Emote smoke checks viewport/hit access when sorting controls are intentionally absent for empty hands.",
+    "Scroll the combined coach/recommendation region to its center before viewport assertions; avoids fractional nearest-scroll clipping in ordinary and private rooms."
   ],
   "modelCatalogChanged": false,
   "defaultId": "017",
@@ -1166,16 +1213,17 @@
   "sourceSHA256": {
     ".github/workflows/pages.yml": "4fb0a7b3998b338e9d2e23623c1a8777e18f4abbd9dbfadaf9a13f14d3ca6196",
     "web/src/coach/controller.js": "9e6ebea921fec481e267ba2de8ef3cca6c0d0b371a52a0ec78d3be972e2e4d96",
-    "web/src/hand/layout.js": "d5f0df4648d90cfe666066d21247fe1239f2f2227e36380ff484d7417804cb14",
+    "web/src/hand/layout.js": "b6ad6c90bc50abff70a361812513c3d62ec81db024fc06f3fce93beb16584f57",
     "web/src/styles/cards.css": "c9fd8a5a04a6e54b63bd4c98f4292266bb40c9680ffe511d900be93f006755ec",
-    "web/src/styles/coach.css": "f9811191ee24b9916de22d7e0663e3fe8c12ea28251f84486e4f8d04dfdac2b9",
+    "web/src/styles/coach.css": "1b00ef8dc950eef9a06cafa282d5f0f6cf24411fb16b13b0fc5ce5e707b6c13f",
     "web/src/styles/hand.css": "197a9be4db23cef95ed06da0001bb4e70788092f6c9908dd3702a35423147534",
     "web/src/styles/table.css": "a3f50a0cbcc6172539835b4df1dc31d90d586a4724bc433a9befeb9b12291089",
     "web/src/ui/table.js": "c138fb5ad9d368cfc7d2112f864a80c24ec27fedff6ff7e40a4e9b8991ea7a86",
-    "web/tests/coach_smoke.py": "3e7c26af78ac18077626172c199a32f41df2967c58e8bd2837dc3395f48d6d58",
+    "web/tests/coach_smoke.py": "50f627f5eb40262d35d9048c711cf6d587a7c834f5151fb6cf41dfbec9923241",
     "web/tests/emote_smoke.py": "ecb687f51e84c6460843ae5d65dae1b951739237b773f84e49a42c699f8d93e3",
     "web/tests/public_history_smoke.py": "1d48e0a9ca7df2b19328194dfcb26d6c64989c701bfdd77828c09d6ad1f09ca2",
-    "web/tests/control_layout_smoke.py": "aa7b051099758ec8329c37069d148c27c47959ce7338b357750fb85d08b281b0"
+    "web/tests/control_layout_smoke.py": "3b09ee40aee0a3b699e9897211b56827fb56c8540ccc5130e3754f785ddec807",
+    "web/tests/private_table_smoke.py": "e5159899feeef4462201693448171e46fd6a3421a7592d485cc9bdb6224d0f40"
   },
   "checks": {
     "npmTest": {
@@ -1189,85 +1237,12 @@
     "format": "passed",
     "build": {
       "passed": true,
-      "version": "93f953fad5"
-    },
-    "ci": {
-      "passed": true,
-      "unitAndFormattingAndBuild": true,
-      "productionReplayCoachAndTargetedControlBrowsers": true
+      "version": "4262ad83ef"
     }
   },
   "deployment": {
-    "status": "success",
-    "sourceCommit": "fe066bc3f2ff00d8f9381a53c1caf418baa820de",
-    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42396025120",
-    "publicURL": "https://stevensun1005.github.io/guandanai/",
-    "verifiedAtUTC": "2026-11-07T17:28:46.905498+00:00",
-    "publicBrowser": {
-      "version": "93f953fad5",
-      "menu": [
-        {
-          "id": "clint-rule",
-          "name": "Clint规则机器人"
-        },
-        {
-          "id": "021",
-          "name": "guanzero-adp-io48-229609"
-        },
-        {
-          "id": "020",
-          "name": "guanzero-adp-io48-223067"
-        },
-        {
-          "id": "001",
-          "name": "danMCai-v000000000"
-        },
-        {
-          "id": "017",
-          "name": "danMCai-v000855042"
-        },
-        {
-          "id": "012",
-          "name": "danMCai-v000705434"
-        }
-      ],
-      "defaultIds": [
-        "017",
-        "017",
-        "017",
-        "017"
-      ],
-      "cases": [
-        {
-          "phase": "play",
-          "cards": 27,
-          "viewport": [
-            1024,
-            768
-          ],
-          "overlapOrOcclusion": false
-        },
-        {
-          "phase": "roundEnd",
-          "cards": 8,
-          "viewport": [
-            1024,
-            768
-          ],
-          "overlapOrOcclusion": false
-        },
-        {
-          "phase": "play",
-          "cards": 1,
-          "viewport": [
-            375,
-            450
-          ],
-          "overlapOrOcclusion": false
-        }
-      ],
-      "pageErrors": []
-    }
+    "status": "pending CI and Pages for uniform short-window followup",
+    "currentlyPublishedSourceCommit": "fe066bc3f2ff00d8f9381a53c1caf418baa820de"
   },
   "limitations": [
     "Display-state fixtures and functional browser checks are not completed strength matches.",
@@ -1277,5 +1252,384 @@
   "protectedDrafts": {
     "count": 10,
     "changedFromSavedDrafts": []
-  }
+  },
+  "geometryHistory": [
+    {
+      "buildVersion": "ceb8b76746",
+      "method": "16 viewport/touch configurations x 13 synthetic display scenarios x hand views and coach on/off; rectangle overlap and six interior hit tests. No match-strength sample.",
+      "result": {
+        "kind": "synthetic-display-hit-test",
+        "strengthGames": 0,
+        "trainingUpdates": 0,
+        "testedStates": 1040,
+        "viewports": [
+          {
+            "viewport": [
+              1920,
+              1080
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1920,
+              1080
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1440,
+              900
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1440,
+              900
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1280,
+              720
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1280,
+              720
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1024,
+              768
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1024,
+              768
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              900,
+              600
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              900,
+              600
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              899,
+              600
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              899,
+              600
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              844,
+              390
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              844,
+              390
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1280,
+              500
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              1280,
+              500
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              799,
+              390
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              799,
+              390
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              600,
+              390
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              600,
+              390
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              700,
+              500
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              700,
+              500
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              600,
+              600
+            ],
+            "mobile": false,
+            "coach": false,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              600,
+              600
+            ],
+            "mobile": false,
+            "coach": true,
+            "htmlClasses": "back-goose"
+          },
+          {
+            "viewport": [
+              390,
+              844
+            ],
+            "mobile": true,
+            "coach": false,
+            "htmlClasses": "phone rows back-goose"
+          },
+          {
+            "viewport": [
+              390,
+              844
+            ],
+            "mobile": true,
+            "coach": true,
+            "htmlClasses": "phone rows back-goose"
+          },
+          {
+            "viewport": [
+              844,
+              390
+            ],
+            "mobile": true,
+            "coach": false,
+            "htmlClasses": "phone side back-goose"
+          },
+          {
+            "viewport": [
+              844,
+              390
+            ],
+            "mobile": true,
+            "coach": true,
+            "htmlClasses": "phone side back-goose"
+          },
+          {
+            "viewport": [
+              667,
+              375
+            ],
+            "mobile": true,
+            "coach": false,
+            "htmlClasses": "phone side back-goose"
+          },
+          {
+            "viewport": [
+              667,
+              375
+            ],
+            "mobile": true,
+            "coach": true,
+            "htmlClasses": "phone side back-goose"
+          },
+          {
+            "viewport": [
+              375,
+              320
+            ],
+            "mobile": true,
+            "coach": false,
+            "htmlClasses": "phone side back-goose"
+          },
+          {
+            "viewport": [
+              375,
+              320
+            ],
+            "mobile": true,
+            "coach": true,
+            "htmlClasses": "phone side back-goose"
+          }
+        ],
+        "failures": [],
+        "pageErrors": []
+      }
+    }
+  ],
+  "deploymentHistory": [
+    {
+      "status": "success",
+      "sourceCommit": "fe066bc3f2ff00d8f9381a53c1caf418baa820de",
+      "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42396025120",
+      "publicURL": "https://stevensun1005.github.io/guandanai/",
+      "verifiedAtUTC": "2026-11-07T17:28:46.905498+00:00",
+      "publicBrowser": {
+        "version": "93f953fad5",
+        "menu": [
+          {
+            "id": "clint-rule",
+            "name": "Clint规则机器人"
+          },
+          {
+            "id": "021",
+            "name": "guanzero-adp-io48-229609"
+          },
+          {
+            "id": "020",
+            "name": "guanzero-adp-io48-223067"
+          },
+          {
+            "id": "001",
+            "name": "danMCai-v000000000"
+          },
+          {
+            "id": "017",
+            "name": "danMCai-v000855042"
+          },
+          {
+            "id": "012",
+            "name": "danMCai-v000705434"
+          }
+        ],
+        "defaultIds": [
+          "017",
+          "017",
+          "017",
+          "017"
+        ],
+        "cases": [
+          {
+            "phase": "play",
+            "cards": 27,
+            "viewport": [
+              1024,
+              768
+            ],
+            "overlapOrOcclusion": false
+          },
+          {
+            "phase": "roundEnd",
+            "cards": 8,
+            "viewport": [
+              1024,
+              768
+            ],
+            "overlapOrOcclusion": false
+          },
+          {
+            "phase": "play",
+            "cards": 1,
+            "viewport": [
+              375,
+              450
+            ],
+            "overlapOrOcclusion": false
+          }
+        ],
+        "pageErrors": []
+      }
+    }
+  ],
+  "concurrentWorkload": "UI browser/Node validation ran alongside the unchanged frozen champion-restart training task; this report makes no throughput or strength comparison."
 }
