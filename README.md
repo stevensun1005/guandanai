@@ -186,3 +186,5 @@ Windows 返回包、匹配检查点与 Adam 的恢复、已完成的 Mac 独立�
 GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗口每 12 小时冻结模型，分别对两个对手各打 500 场。见 [GuanZero 训练说明](ai/guanzero/README.md)。
 
 研究中需要神经网络续打时，采用批次启动时已核验的 danMCai 门控冠军；教师切换与数据继承见 [专项协议](ai/shared/tribute/README.md)。
+
+GuanZero 固定窗口支持独立 Windows 自动恢复任务。监督器退出后校验检查点并继续训练，操作与截止规则见[恢复说明](ai/guanzero/README.md#自动恢复)。

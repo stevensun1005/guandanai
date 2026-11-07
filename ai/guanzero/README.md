@@ -81,3 +81,13 @@ node ai/guanzero/training/register-window-suite.mjs C:/guandan-sampler/work/guan
 ```powershell
 node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --once
 ```
+
+## 自动恢复
+
+本机 io48 使用独立 Windows 计划任务 `GuanZero-io48-Recovery` 运行 `training/watchdog.mjs`。任务每分钟触发并以 IgnoreNew 保护单实例；运行中的恢复器每 15 秒核对监督器。训练监督器负责学习器、推理服务和采样进程的重启。系统登录后也可触发任务。
+
+监督器意外退出时，恢复器核对同一运行目录的进程身份，等候 30 秒后清理确实失去监督器的同运行采样／学习进程。随后读取完整 state.pt，核对模型、优化器、步数、使用样本和游标，再从原冻结检出启动 run.mjs。该入口再次校验冻结源码。失败使用有上限的重试间隔。
+
+原始 config.json 与 window.json 在恢复期间按完整 SHA 核验。训练根目录 STOP、学习器明确错误和原固定截止均结束自动恢复。故障耗时计入现有窗口。需要人工停止时，可禁用计划任务或使用训练原有 STOP 流程。恢复器状态和日志位于 work/guanzero/watchdog-io48，训练数据由原运行目录保存。
+
+隔离模拟进程实测检查点继承、监督器存活时跳过、进程退出后恢复及 STOP 分支。本机当前运行通过只读健康检查接入，实际任务状态与首次进度另记研究证据。

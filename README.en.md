@@ -178,3 +178,5 @@ The fixed paired single-round comparison is complete and found no clear strength
 GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current 48-hour window, playing 500 matches against each of two opponents. See the [training guide](ai/guanzero/README.md).
 
 Research continuation games use the verified danMCai champion frozen at batch start. Teacher changes and inherited work are tracked in the [specialist protocol](ai/shared/tribute/README.md).
+
+A dedicated Windows watchdog can resume the fixed GuanZero training window after a supervisor exit. See [recovery](ai/guanzero/README.md#自动恢复) for checkpoint checks, the stop control and the original deadline.
