@@ -201,5 +201,44 @@
     },
     "build": "ebe8cc215e",
     "format": "passed"
+  },
+  "deployment": {
+    "url": "https://github.com/stevensun1005/guandanai/actions/runs/42333073714",
+    "status": "success",
+    "publicSHA256": "a9faa1898f6a5846aaa03a31a82249e25fc4f163b6f1da44a35d2ce2f006f65f",
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "018",
+          "guanzero-adp-io48-138506"
+        ],
+        [
+          "016",
+          "guanzero-adp-io48-135205"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    }
   }
 }
