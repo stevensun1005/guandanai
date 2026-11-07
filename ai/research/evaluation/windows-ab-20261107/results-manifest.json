@@ -3,7 +3,7 @@
   "protocolFile": "heldout-protocol.json",
   "protocolSHA256": "0f1abd7b38f3764d1959b24fe506a0f6a6799b317f55c56afd602cc07fe88a65",
   "summaryFile": "results.json",
-  "summarySHA256": "f4aec4751a98787cc566744c763f4bd1688d205f409a9b8c1311d9fd6aada6cf",
+  "summarySHA256": "c03e9f4b976653724b5faeb208c78e73f2441c2ef3e80c8c0a340006bda83815",
   "completedPairs": 12000,
   "completedRounds": 24000,
   "rawEvidence": [
@@ -95,5 +95,11 @@
       }
     }
   },
-  "kind": "independent-single-round-evaluation-not-web-promotion"
+  "kind": "independent-single-round-evaluation-not-web-promotion",
+  "summaryOriginalRuntimeSHA256": "f4aec4751a98787cc566744c763f4bd1688d205f409a9b8c1311d9fd6aada6cf",
+  "textHashConvention": "Repository text hashes use committed LF bytes; original runtime summary hash separately preserves Windows CRLF output. JSONL gzip hashes always preserve original raw bytes.",
+  "trainingStopEvidenceRepositorySHA256": {
+    "A": "f7455c117c0ca90c157ed273a98fc3c04ac4aec7cb287e1111434b0be22a4f87",
+    "B": "ea853720d81d02bc22d1d1923905943af14c236a64fd208ae32e44557136a3a2"
+  }
 }

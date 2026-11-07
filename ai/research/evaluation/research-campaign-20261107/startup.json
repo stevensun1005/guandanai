@@ -26,5 +26,7 @@
     "format": "passed",
     "build": "passed"
   },
-  "webChampionChanged": false
+  "webChampionChanged": false,
+  "campaignManifestSource": "Ignored runtime ai/danMCai/runs/research-through-20261111/campaign.json, original local bytes",
+  "repositoryAuthorizationSHA256": "1d2f6ddda91580a30b1ae89e79c49cf6c7f76cb5fac9763cc53a5a3d84180d2d"
 }
