@@ -4,17 +4,18 @@ A/B 评测后获准自主分析并执行后续实验，最终截止 Toronto 11 �
 
 Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluation/windows-return-20261106/)。随后获准的 A→B 各四小时训练与独立评测见 [交接](WINDOWS_RETURN_20261106.md)、第 44 节及 [新证据](evaluation/windows-ab-20261107/)。启动与资源读数不构成新增棋力结果。
 
-| 文档                                               | 用途                                           |
-| -------------------------------------------------- | ---------------------------------------------- |
-| [MODEL_STUDY.md](MODEL_STUDY.md)                   | 架构、训练方法、实际正负结果及统计限制的主报告 |
-| [CODEX_HANDOFF.md](CODEX_HANDOFF.md)               | 当前状态、硬性约束与后续任务顺序               |
-| [CONTINUOUS_TRAINING.md](CONTINUOUS_TRAINING.md)   | danMCai 持续训练、查看、停止与资源预算         |
-| [IMPROVEMENT_PROPOSAL.md](IMPROVEMENT_PROPOSAL.md) | 待验证的改进假设                               |
-| [MODEL_TRAINING.md](MODEL_TRAINING.md)             | 历史训练入口和应牌模型复现                     |
-| [STRUCTURE_MIGRATION.md](STRUCTURE_MIGRATION.md)   | 本次目录变化与旧运行兼容方式                   |
-| [evaluation](evaluation)                           | 机器可读实验结果、发布记录与权重索引           |
-| [tools](tools)                                     | 主报告生成、证据维护与真人出牌对比工具         |
-| [tests](tests)                                     | 报告的统计与证据校验                           |
+| 文档                                                         | 用途                                                                   |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| [MODEL_STUDY.md](MODEL_STUDY.md)                             | 架构、训练方法、实际正负结果及统计限制的主报告                         |
+| [CODEX_HANDOFF.md](CODEX_HANDOFF.md)                         | 当前状态、硬性约束与后续任务顺序                                       |
+| [CONTINUOUS_TRAINING.md](CONTINUOUS_TRAINING.md)             | danMCai 持续训练、查看、停止与资源预算                                 |
+| [IMPROVEMENT_PROPOSAL.md](IMPROVEMENT_PROPOSAL.md)           | 待验证的改进假设                                                       |
+| [TRAINING_ROADMAP_20261107.md](TRAINING_ROADMAP_20261107.md) | 更像人、能解释、会配合、以整场为目标的分阶段训练路线（设计，无新结果） |
+| [MODEL_TRAINING.md](MODEL_TRAINING.md)                       | 历史训练入口和应牌模型复现                                             |
+| [STRUCTURE_MIGRATION.md](STRUCTURE_MIGRATION.md)             | 本次目录变化与旧运行兼容方式                                           |
+| [evaluation](evaluation)                                     | 机器可读实验结果、发布记录与权重索引                                   |
+| [tools](tools)                                               | 主报告生成、证据维护与真人出牌对比工具                                 |
+| [tests](tests)                                               | 报告的统计与证据校验                                                   |
 
 ## 真人出牌与模型对比
 
