@@ -1,5 +1,9 @@
 # 验证与复现
 
+## 持续研究面板
+
+`python ai/research/tests/campaign_dashboard_smoke.py http://127.0.0.1:8767/` 只读取当前研究面板，验证真实刷新、截止保护心跳、只读接口及 1440／390 像素布局，并输出当时截图；不启动或停止训练。截图时间及当前任务来自实时 API，不能把旧截图描述成最新运行状态。
+
 ## Windows A/B 实验面板
 
 `node --test ai/research/tests/windows-ab-controller.test.mjs` 用临时合成文件验证未完全退出的学习器不能进入评测、完整最终权重按 SHA 冻结、再次调用不重置评测截止，以及新增更新计数不含继承步数。它不启动真实训练。

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>danMCai · 持续研究</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0d1422;
+      color: #e9eff9;
+      font:
+        16px/1.6 system-ui,
+        sans-serif;
+    }
+    main {
+      max-width: 1050px;
+      margin: auto;
+      padding: 24px;
+    }
+    h1 {
+      font-size: 27px;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0;
+    }
+    p {
+      margin: 10px 0;
+    }
+    .muted,
+    small {
+      color: #aebcd2;
+    }
+    .card {
+      background: #172338;
+      border: 1px solid #30445f;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .numbers {
+      font-size: 27px;
+      color: #66e6c1;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    progress {
+      width: 100%;
+      height: 18px;
+      accent-color: #55d9b3;
+    }
+    dl {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    dd {
+      margin: 0;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+    #connection {
+      padding: 10px;
+      background: #20312e;
+      border-radius: 8px;
+    }
+    .error {
+      color: #ffb8ac;
+      white-space: pre-wrap;
+    }
+    a {
+      color: #88d9ff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td,
+    th {
+      text-align: left;
+      padding: 8px;
+      border-bottom: 1px solid #30445f;
+    }
+    @media (max-width: 650px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 14px;
+      }
+      h1 {
+        font-size: 23px;
+      }
+      table {
+        font-size: 12px;
+      }
+    }
+  </style>
+  <main>
+    <h1>danMCai · 持续研究与训练</h1>
+    <p class="muted">短测 → 分析 → 下一项实验／长训。保留 4 GiB 内存，网页冠军保持不变。</p>
+    <div id="connection">正在连接实时数据…</div>
+    <section class="card">
+      <h2 id="current">读取当前任务…</h2>
+      <p id="activity"></p>
+      <p id="next" class="muted"></p>
+      <small id="updated"></small>
+    </section>
+    <div class="grid">
+      <section class="card">
+        <h2>当前任务进度</h2>
+        <p class="numbers" id="count">—</p>
+        <progress id="bar" value="0" max="1"></progress>
+        <dl id="metrics"></dl>
+        <pre id="failure" class="error"></pre>
+      </section>
+      <section class="card">
+        <h2>总窗口与资源</h2>
+        <dl id="resources"></dl>
+        <p><a href="http://127.0.0.1:8766/">已完成的 A/B 与 24,000 局评测</a></p>
+        <small id="guard"></small>
+      </section>
+    </div>
+    <section class="card">
+      <h2>任务记录</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>任务</th>
+            <th>状态</th>
+            <th>实际进度</th>
+            <th>心跳</th>
+          </tr>
+        </thead>
+        <tbody id="history"></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <h2>结果怎样使用</h2>
+      <p>
+        缓存诊断只检查数值、加载次数、耗时和内存，不能证明棋力提升。完整网络训练与独立对战另行验证，负结果也保留。
+      </p>
+      <p>
+        任务结束后自动分析并继续；如果没有活动任务会明确显示分析／准备状态，不用计划量冒充实际训练。
+      </p>
+      <a href="/api/status">实时原始数据</a>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id),
+      num = (v) =>
+        Number.isFinite(v) ? v.toLocaleString('zh-CN', { maximumFractionDigits: 1 }) : '—',
+      date = (v) => (v ? new Date(v).toLocaleString() : '—');
+    const label = {
+      running: '运行中',
+      starting: '启动中',
+      'waiting-for-memory': '等待内存恢复',
+      complete: '已完成',
+      failed: '失败',
+      stopped: '已停止',
+      training: '训练中',
+      analysis: '分析并选择下一步',
+      preparing: '准备下一项实验',
+      'prerequisite-complete-next-diagnostic-planned': '准备缓存诊断',
+    };
+    function el(tag, text) {
+      const x = document.createElement(tag);
+      if (text !== undefined) x.textContent = text;
+      return x;
+    }
+    function field(dl, k, v) {
+      dl.append(el('dt', k), el('dd', v));
+    }
+    async function refresh() {
+      try {
+        const r = await fetch('/api/status', { cache: 'no-store' });
+        if (!r.ok) throw Error('HTTP ' + r.status);
+        const s = await r.json(),
+          a = s.tasks.at(-1),
+          v = a?.state || {},
+          p = s.progress;
+        $('connection').textContent =
+          '实时连接正常 · 每 3 秒刷新' + (a?.stale ? ' · 当前任务心跳待确认' : '');
+        $('current').textContent = v.displayName || p.displayName || '分析结果，准备下一项';
+        $('activity').textContent =
+          (label[v.phase] || label[p.phase] || p.phase || '等待登记') +
+          (p.analysis ? ' · ' + p.analysis : '');
+        $('next').textContent = '下一步：' + (p.nextTask || '根据刚完成任务的实际结果决定');
+        $('updated').textContent =
+          '读取时间 ' +
+          date(s.observedAtUTC) +
+          ' · 任务心跳 ' +
+          date(v.updatedAt || p.updatedAtUTC);
+        const done = v.completedRequests ?? a?.learner?.step ?? 0,
+          total = v.plannedRequests ?? null;
+        $('count').textContent =
+          total !== null
+            ? num(done) + ' / ' + num(total) + ' 次推理请求'
+            : a?.learner
+              ? '累计 ' + num(a.learner.step) + ' 次更新'
+              : '分析／准备中';
+        $('bar').max = total || 1;
+        $('bar').value = total ? done : 0;
+        $('metrics').replaceChildren();
+        field($('metrics'), '任务截止', date(a?.window.deadlineUTC));
+        field($('metrics'), '缓存会话上限', num(v.sessionLimit));
+        field($('metrics'), '实际后端', v.provider || a?.learner?.device || '—');
+        field($('metrics'), '本任务参数更新', num(v.optimizerUpdates ?? a?.learner?.step));
+        field($('metrics'), '已完成棋力比赛', num(v.strengthGames));
+        field(
+          $('metrics'),
+          '任务进程',
+          a ? (a.processAlive ? '在线' : v.stoppedAt ? '已退出' : '未确认') : '尚未启动',
+        );
+        $('failure').textContent = v.failure || '';
+        $('resources').replaceChildren();
+        field($('resources'), '最终结束', date(s.campaign.deadlineUTC));
+        field($('resources'), '停止计算', date(s.campaign.computeDeadlineUTC));
+        field(
+          $('resources'),
+          '可用内存',
+          num(s.resources.availableGiB) + ' / ' + num(s.resources.totalGiB) + ' GiB',
+        );
+        field($('resources'), '全机 CPU', num(s.resources.machineCPUPercent) + '%');
+        field($('resources'), '网页冠军', s.webChampion);
+        $('guard').textContent =
+          '截止保护：' +
+          (s.guardianHealthy ? '在线' : '心跳异常，需检查') +
+          ' · ' +
+          date(s.guardian?.updatedAtUTC);
+        $('history').replaceChildren();
+        for (const t of [...s.tasks].reverse()) {
+          const tr = el('tr');
+          for (const text of [
+            t.state.displayName || t.id,
+            label[t.state.phase] || t.state.phase || '已登记',
+            t.state.completedRequests !== undefined
+              ? num(t.state.completedRequests) + ' 次请求'
+              : t.learner
+                ? num(t.learner.step) + ' 次更新'
+                : '—',
+            date(t.state.updatedAt),
+          ])
+            tr.append(el('td', text));
+          $('history').append(tr);
+        }
+      } catch (error) {
+        $('connection').textContent =
+          '连接中断：' + error.message + '。下面是旧数据，不能视为实时。';
+      }
+    }
+    refresh();
+    setInterval(refresh, 3000);
+  </script>
+</html>

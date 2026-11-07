@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "status": "preregistered-before-diagnostic-results",
+  "node": {
+    "tests": 222,
+    "passed": 222
+  },
+  "pythonResearch": {
+    "tests": 17,
+    "passed": 17
+  },
+  "format": "passed",
+  "build": "passed",
+  "browser": {
+    "observedAtUTC": "2026-11-07T14:20:02.473Z",
+    "taskCount": 0,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "stopBeforeStart": {
+    "passed": true,
+    "inferenceRequests": 0,
+    "optimizerUpdates": 0
+  },
+  "initialHarnessIssue": "Default Windows GBK reader could not decode UTF-8 status; explicit UTF-8 reread and complete STOP probe passed",
+  "diagnosticResultsAvailable": false
+}
