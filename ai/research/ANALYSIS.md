@@ -15,3 +15,5 @@ node ai/research/tools/validate-shared-analysis.mjs ai/research/evaluation/share
 ```
 
 The protocol checks 100 capture/no-capture outcomes and four complete raw-policy fixtures with byte-level native ONNX output comparisons. These are development equivalence tests, not independent playing-strength games. New artifacts stay in ignored workspace unless reduced to small research evidence. Source hashes refer to the frozen development implementation; later edits require a new protocol rather than rewriting old evidence.
+
+[Actual validation](evaluation/shared-analysis-20261107/results.json): 100 capture/no-capture seeds, zero outcome mismatches; four native-policy seeds, 227 requests byte-identical with maximum absolute error zero. These checks do not establish a playing-strength benefit or universal equivalence. See study section 48.1 for counts and limitations.

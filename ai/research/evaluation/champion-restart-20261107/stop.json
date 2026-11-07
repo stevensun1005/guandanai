@@ -1,0 +1,686 @@
+{
+  "schema": 1,
+  "kind": "stopped-campaign-integrity-not-strength",
+  "passed": true,
+  "observedAtUTC": "2026-11-07T18:52:36.098826+00:00",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\champion-restart-20261107",
+  "task": {
+    "id": "champion-restart-20261107",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\champion-restart-20261107",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-restart-20261107\\protocol.json",
+    "protocolSHA256": "d644d69ec6ce44efa511a69fb91f23902e3aa5ef9992a484f13b2e4bfa2c10b1",
+    "window": {
+      "startUTC": "2026-11-07T14:51:53.792Z",
+      "deadlineUTC": "2026-11-07T18:51:53.792Z",
+      "requestedHours": 4,
+      "restartExtendsDeadline": false
+    }
+  },
+  "stoppedAtUTC": "2026-11-07T18:52:00.034Z",
+  "exitDelaySeconds": 6.242,
+  "latest": {
+    "version": "v000103620",
+    "file": "v000103620.onnx",
+    "sha256": "5e7870cd7c4fc2cbcd3e19aeb120d65c256a82b156a93fdf9bb9f9caae5d0556",
+    "step": 103620,
+    "trainedRows": 212213760,
+    "ingestedRows": 53053891,
+    "publishedAt": "2026-11-07T18:51:55Z"
+  },
+  "checkpointSHA256": "97fbfa09f42156941e4500466e0ff64b2de8217bf63c0adf559e6d5874000066",
+  "matchingNetworkAndAdam": true,
+  "adamStates": 12,
+  "adamStep": 103620,
+  "parent": {
+    "kind": "champion-weights-new-optimizer-new-replay",
+    "teacher": {
+      "id": "017",
+      "file": "bot-017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "mac-20261105",
+        "version": "v000855042",
+        "status": "experimental-not-heldout-accepted",
+        "step": 855042,
+        "registeredAt": "2026-11-06T15:28:31.478Z",
+        "champion": {
+          "gate": 330,
+          "acceptedAt": "2026-11-06T10:59:34.199Z",
+          "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+          "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+          "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+        },
+        "trainingDevice": "mps"
+      }
+    },
+    "startingStep": 0,
+    "predecessorNetworkStep": 855042,
+    "checkpointInherited": false,
+    "adamInherited": false,
+    "replayInherited": false,
+    "counterMeaning": "New-run updates start at zero; historical 855042 network step recorded separately. No invented matching champion Adam."
+  },
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "5b3e228218c123d33310327d45a89aa7958a237d9d62fed1a5af042fb5e04bd4",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "499c8e9a6d3065da55d7e6819cef5556f21864b4c5ee158547d60a85ae69d266",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "6e5459ad0da0664c64c426845e13d255b1da6a6f3e691cb89156d230f7ebf18c",
+    "ai/danMCai/training/continuous/learner.py": "e85a99526511b310700e28be7a68ecaf1feecc34bd1716d9e9c65709116ede1d",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "8df74f465cac02752d3b4e7141ba6262235a2721bb6d65a5446dd69edecc0c4a",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "eadde4ca63493ccca86b255ae892369fec96476266e8d6024baa077a52544a1e",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 62180,
+      "matches": 27822,
+      "decisions": 13229778,
+      "failures": 0,
+      "nextSeed": 22027822,
+      "shardSequence": 794,
+      "uniqueLoggedSeeds": 27822,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 1,
+      "pid": 44088,
+      "matches": 27654,
+      "decisions": 13153945,
+      "failures": 0,
+      "nextSeed": 22027654,
+      "shardSequence": 790,
+      "uniqueLoggedSeeds": 27654,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 2,
+      "pid": 37404,
+      "matches": 27636,
+      "decisions": 13129044,
+      "failures": 0,
+      "nextSeed": 22027636,
+      "shardSequence": 789,
+      "uniqueLoggedSeeds": 27636,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 3,
+      "pid": 50068,
+      "matches": 28516,
+      "decisions": 13608660,
+      "failures": 0,
+      "nextSeed": 22028516,
+      "shardSequence": 819,
+      "uniqueLoggedSeeds": 28516,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "replay": {
+    "manifests": {
+      "a00-000000762.json": {
+        "rows": 16621,
+        "matches": 39
+      },
+      "a00-000000763.json": {
+        "rows": 16901,
+        "matches": 34
+      },
+      "a00-000000764.json": {
+        "rows": 17076,
+        "matches": 36
+      },
+      "a00-000000765.json": {
+        "rows": 16814,
+        "matches": 33
+      },
+      "a00-000000766.json": {
+        "rows": 16501,
+        "matches": 30
+      },
+      "a00-000000767.json": {
+        "rows": 17010,
+        "matches": 36
+      },
+      "a00-000000768.json": {
+        "rows": 17025,
+        "matches": 32
+      },
+      "a00-000000769.json": {
+        "rows": 16648,
+        "matches": 33
+      },
+      "a00-000000770.json": {
+        "rows": 16821,
+        "matches": 37
+      },
+      "a00-000000771.json": {
+        "rows": 16418,
+        "matches": 31
+      },
+      "a00-000000772.json": {
+        "rows": 16772,
+        "matches": 36
+      },
+      "a00-000000773.json": {
+        "rows": 16953,
+        "matches": 34
+      },
+      "a00-000000774.json": {
+        "rows": 16474,
+        "matches": 35
+      },
+      "a00-000000775.json": {
+        "rows": 16727,
+        "matches": 33
+      },
+      "a00-000000776.json": {
+        "rows": 16601,
+        "matches": 32
+      },
+      "a00-000000777.json": {
+        "rows": 16541,
+        "matches": 33
+      },
+      "a00-000000778.json": {
+        "rows": 16762,
+        "matches": 31
+      },
+      "a00-000000779.json": {
+        "rows": 16674,
+        "matches": 35
+      },
+      "a00-000000780.json": {
+        "rows": 16672,
+        "matches": 32
+      },
+      "a00-000000781.json": {
+        "rows": 16939,
+        "matches": 35
+      },
+      "a00-000000782.json": {
+        "rows": 16588,
+        "matches": 34
+      },
+      "a00-000000783.json": {
+        "rows": 16562,
+        "matches": 36
+      },
+      "a00-000000784.json": {
+        "rows": 16492,
+        "matches": 34
+      },
+      "a00-000000785.json": {
+        "rows": 16457,
+        "matches": 34
+      },
+      "a00-000000786.json": {
+        "rows": 17016,
+        "matches": 37
+      },
+      "a00-000000787.json": {
+        "rows": 16760,
+        "matches": 32
+      },
+      "a00-000000788.json": {
+        "rows": 16998,
+        "matches": 30
+      },
+      "a00-000000789.json": {
+        "rows": 16757,
+        "matches": 35
+      },
+      "a00-000000790.json": {
+        "rows": 16400,
+        "matches": 40
+      },
+      "a00-000000791.json": {
+        "rows": 16552,
+        "matches": 34
+      },
+      "a00-000000792.json": {
+        "rows": 16731,
+        "matches": 35
+      },
+      "a00-000000793.json": {
+        "rows": 8346,
+        "matches": 17
+      },
+      "a01-000000758.json": {
+        "rows": 16771,
+        "matches": 29
+      },
+      "a01-000000759.json": {
+        "rows": 16710,
+        "matches": 35
+      },
+      "a01-000000760.json": {
+        "rows": 16761,
+        "matches": 32
+      },
+      "a01-000000761.json": {
+        "rows": 16910,
+        "matches": 38
+      },
+      "a01-000000762.json": {
+        "rows": 16804,
+        "matches": 35
+      },
+      "a01-000000763.json": {
+        "rows": 16566,
+        "matches": 33
+      },
+      "a01-000000764.json": {
+        "rows": 16685,
+        "matches": 37
+      },
+      "a01-000000765.json": {
+        "rows": 16802,
+        "matches": 37
+      },
+      "a01-000000766.json": {
+        "rows": 16556,
+        "matches": 33
+      },
+      "a01-000000767.json": {
+        "rows": 16787,
+        "matches": 32
+      },
+      "a01-000000768.json": {
+        "rows": 16711,
+        "matches": 33
+      },
+      "a01-000000769.json": {
+        "rows": 16401,
+        "matches": 37
+      },
+      "a01-000000770.json": {
+        "rows": 16717,
+        "matches": 36
+      },
+      "a01-000000771.json": {
+        "rows": 16758,
+        "matches": 33
+      },
+      "a01-000000772.json": {
+        "rows": 16727,
+        "matches": 33
+      },
+      "a01-000000773.json": {
+        "rows": 17043,
+        "matches": 35
+      },
+      "a01-000000774.json": {
+        "rows": 16866,
+        "matches": 32
+      },
+      "a01-000000775.json": {
+        "rows": 16627,
+        "matches": 34
+      },
+      "a01-000000776.json": {
+        "rows": 16568,
+        "matches": 32
+      },
+      "a01-000000777.json": {
+        "rows": 16426,
+        "matches": 33
+      },
+      "a01-000000778.json": {
+        "rows": 16991,
+        "matches": 32
+      },
+      "a01-000000779.json": {
+        "rows": 16959,
+        "matches": 41
+      },
+      "a01-000000780.json": {
+        "rows": 16508,
+        "matches": 34
+      },
+      "a01-000000781.json": {
+        "rows": 16573,
+        "matches": 33
+      },
+      "a01-000000782.json": {
+        "rows": 16817,
+        "matches": 36
+      },
+      "a01-000000783.json": {
+        "rows": 17112,
+        "matches": 34
+      },
+      "a01-000000784.json": {
+        "rows": 16697,
+        "matches": 36
+      },
+      "a01-000000785.json": {
+        "rows": 16674,
+        "matches": 38
+      },
+      "a01-000000786.json": {
+        "rows": 17133,
+        "matches": 38
+      },
+      "a01-000000787.json": {
+        "rows": 17075,
+        "matches": 35
+      },
+      "a01-000000788.json": {
+        "rows": 16890,
+        "matches": 40
+      },
+      "a01-000000789.json": {
+        "rows": 320,
+        "matches": 1
+      },
+      "a02-000000759.json": {
+        "rows": 16417,
+        "matches": 37
+      },
+      "a02-000000760.json": {
+        "rows": 16567,
+        "matches": 39
+      },
+      "a02-000000761.json": {
+        "rows": 16744,
+        "matches": 41
+      },
+      "a02-000000762.json": {
+        "rows": 16603,
+        "matches": 35
+      },
+      "a02-000000763.json": {
+        "rows": 16521,
+        "matches": 39
+      },
+      "a02-000000764.json": {
+        "rows": 16479,
+        "matches": 35
+      },
+      "a02-000000765.json": {
+        "rows": 16451,
+        "matches": 37
+      },
+      "a02-000000766.json": {
+        "rows": 16598,
+        "matches": 37
+      },
+      "a02-000000767.json": {
+        "rows": 16428,
+        "matches": 29
+      },
+      "a02-000000768.json": {
+        "rows": 16686,
+        "matches": 36
+      },
+      "a02-000000769.json": {
+        "rows": 16896,
+        "matches": 39
+      },
+      "a02-000000770.json": {
+        "rows": 16419,
+        "matches": 32
+      },
+      "a02-000000771.json": {
+        "rows": 16621,
+        "matches": 35
+      },
+      "a02-000000772.json": {
+        "rows": 16739,
+        "matches": 34
+      },
+      "a02-000000773.json": {
+        "rows": 16607,
+        "matches": 37
+      },
+      "a02-000000774.json": {
+        "rows": 16439,
+        "matches": 33
+      },
+      "a02-000000775.json": {
+        "rows": 16881,
+        "matches": 37
+      },
+      "a02-000000776.json": {
+        "rows": 16530,
+        "matches": 36
+      },
+      "a02-000000777.json": {
+        "rows": 17017,
+        "matches": 38
+      },
+      "a02-000000778.json": {
+        "rows": 17004,
+        "matches": 35
+      },
+      "a02-000000779.json": {
+        "rows": 16900,
+        "matches": 37
+      },
+      "a02-000000780.json": {
+        "rows": 16519,
+        "matches": 35
+      },
+      "a02-000000781.json": {
+        "rows": 16620,
+        "matches": 36
+      },
+      "a02-000000782.json": {
+        "rows": 17149,
+        "matches": 38
+      },
+      "a02-000000783.json": {
+        "rows": 16665,
+        "matches": 35
+      },
+      "a02-000000784.json": {
+        "rows": 16929,
+        "matches": 36
+      },
+      "a02-000000785.json": {
+        "rows": 16557,
+        "matches": 43
+      },
+      "a02-000000786.json": {
+        "rows": 16744,
+        "matches": 36
+      },
+      "a02-000000787.json": {
+        "rows": 16565,
+        "matches": 31
+      },
+      "a02-000000788.json": {
+        "rows": 6320,
+        "matches": 11
+      },
+      "a03-000000787.json": {
+        "rows": 16667,
+        "matches": 32
+      },
+      "a03-000000788.json": {
+        "rows": 16519,
+        "matches": 35
+      },
+      "a03-000000789.json": {
+        "rows": 16835,
+        "matches": 40
+      },
+      "a03-000000790.json": {
+        "rows": 16458,
+        "matches": 33
+      },
+      "a03-000000791.json": {
+        "rows": 16582,
+        "matches": 33
+      },
+      "a03-000000792.json": {
+        "rows": 16856,
+        "matches": 35
+      },
+      "a03-000000793.json": {
+        "rows": 16911,
+        "matches": 38
+      },
+      "a03-000000794.json": {
+        "rows": 16386,
+        "matches": 35
+      },
+      "a03-000000795.json": {
+        "rows": 17011,
+        "matches": 35
+      },
+      "a03-000000796.json": {
+        "rows": 16574,
+        "matches": 38
+      },
+      "a03-000000797.json": {
+        "rows": 16395,
+        "matches": 33
+      },
+      "a03-000000798.json": {
+        "rows": 16925,
+        "matches": 38
+      },
+      "a03-000000799.json": {
+        "rows": 16550,
+        "matches": 35
+      },
+      "a03-000000800.json": {
+        "rows": 17159,
+        "matches": 39
+      },
+      "a03-000000801.json": {
+        "rows": 16804,
+        "matches": 35
+      },
+      "a03-000000802.json": {
+        "rows": 16643,
+        "matches": 31
+      },
+      "a03-000000803.json": {
+        "rows": 16622,
+        "matches": 35
+      },
+      "a03-000000804.json": {
+        "rows": 16792,
+        "matches": 35
+      },
+      "a03-000000805.json": {
+        "rows": 16952,
+        "matches": 39
+      },
+      "a03-000000806.json": {
+        "rows": 16697,
+        "matches": 35
+      },
+      "a03-000000807.json": {
+        "rows": 16449,
+        "matches": 37
+      },
+      "a03-000000808.json": {
+        "rows": 16653,
+        "matches": 34
+      },
+      "a03-000000809.json": {
+        "rows": 16676,
+        "matches": 35
+      },
+      "a03-000000810.json": {
+        "rows": 16436,
+        "matches": 33
+      },
+      "a03-000000811.json": {
+        "rows": 16666,
+        "matches": 34
+      },
+      "a03-000000812.json": {
+        "rows": 16410,
+        "matches": 31
+      },
+      "a03-000000813.json": {
+        "rows": 16637,
+        "matches": 31
+      },
+      "a03-000000814.json": {
+        "rows": 16522,
+        "matches": 33
+      },
+      "a03-000000815.json": {
+        "rows": 16499,
+        "matches": 35
+      },
+      "a03-000000816.json": {
+        "rows": 16600,
+        "matches": 42
+      },
+      "a03-000000817.json": {
+        "rows": 16654,
+        "matches": 34
+      },
+      "a03-000000818.json": {
+        "rows": 2441,
+        "matches": 6
+      }
+    },
+    "shards": 126,
+    "retainedRows": 2055150,
+    "pendingShards": [
+      "a00-000000793.json",
+      "a01-000000788.json",
+      "a01-000000789.json",
+      "a02-000000787.json",
+      "a02-000000788.json",
+      "a03-000000817.json",
+      "a03-000000818.json"
+    ],
+    "pendingRows": 67536,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": []
+  },
+  "totals": {
+    "matches": 111628,
+    "decisions": 53121427,
+    "rows": 53121427
+  },
+  "tailRowsNotInCheckpoint": 67536,
+  "optimizerUpdatesDuringAudit": 0,
+  "preservedHistory": true,
+  "webChampionChanged": false,
+  "limitations": "Retained replay only; evicted samples, original in-memory ring/RNG not recovered."
+}

@@ -1,5 +1,6 @@
 """Read-only validation and fresh captures of the live research campaign panel."""
 from pathlib import Path
+from datetime import datetime, timezone
 import json
 import sys
 from playwright.sync_api import sync_playwright
@@ -19,7 +20,7 @@ with sync_playwright() as p:
     assert first != page.locator('#updated').text_content()
     state = page.request.get(url + 'api/status').json()
     assert state['guardianHealthy']
-    assert state['campaign']['deadlineUTC'] == '2026-11-11T17:00:00.000Z'
+    assert datetime.fromisoformat(state['campaign']['deadlineUTC'].replace('Z','+00:00')) == datetime(2026,11,11,17,tzinfo=timezone.utc)
     assert page.request.post(url + 'api/status').status == 405
     if state['tasks']:
         current = state['tasks'][-1]

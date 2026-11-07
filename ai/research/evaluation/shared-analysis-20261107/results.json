@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "kind": "development-equivalence-not-strength",
+  "protocolSHA256": "5520942e23b28c7abc6d220626b5bddde6845d0abd05f4343d4e6eee06aa72a6",
+  "captureSeeds": 100,
+  "captureOutcomeMismatches": 0,
+  "capturedActions": 13968,
+  "baselineSeeds": 4,
+  "checkedDecisions": 227,
+  "maxAbsError": 0,
+  "byteEqual": true,
+  "optimizerUpdates": 0,
+  "webChampionChanged": false,
+  "completedAtUTC": "2026-11-07T18:51:09.313Z"
+}
