@@ -73,3 +73,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [完整采样对照结果](evaluation/cache-e2e-20261107/analysis.json)：2,048 场开发采样完成，按预登记选择下一新运行的缓存参数，系统观察与棋力严格区分。
 
 [冠军起点完整网络微调](evaluation/champion-restart-20261107/protocol.json)：冠军权重、新 Adam／新回放、四小时预算，随后预登记 10,000 局新牌副评测；GPU 实测与正式学习计数分开。
+
+[冠军网络微调实际启动](evaluation/champion-restart-20261107/startup.json)记录固定截止、真实正式更新／ROCm／DirectML与可用内存；它是启动快照，非最终或独立棋力成绩。

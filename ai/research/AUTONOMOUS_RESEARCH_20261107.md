@@ -41,3 +41,5 @@ node ai/research/tools/research-deadline.mjs --campaign=<上述根目录> --regi
 有结论就更新 [主报告](MODEL_STUDY.md)、机器证据、成果索引及受影响中英文指南；测试、格式、构建通过后只暂存本次小文件推送 main，不开分支、不强推、不提交权重回放秘密。周三先停止计算，核对保存，再汇总完成及未完成项并提交；开发门控、独立成绩与部署分别陈述，网页冠军不变。
 
 [授权与验证证据](evaluation/research-campaign-20261107/) · [当前 A/B 实验](WINDOWS_RETURN_20261106.md)
+
+PowerShell 7.6 读取含 ISO 截止的 JSON 时使用 `ConvertFrom-Json -DateKind String`，再按带时区字符串计算剩余时间；默认日期自动转换后再次调用 Parse 可能丢失时区。仍核对注册 JSON 原始 UTC，不能因启动检查失败重开或延长窗口。

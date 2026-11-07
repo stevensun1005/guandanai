@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-07T14:56:27.220Z",
+  "kind": "actual-training-start-not-strength-result",
+  "protocolSHA256": "d644d69ec6ce44efa511a69fb91f23902e3aa5ef9992a484f13b2e4bfa2c10b1",
+  "task": {
+    "id": "champion-restart-20261107",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\champion-restart-20261107",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-restart-20261107\\protocol.json",
+    "protocolSHA256": "d644d69ec6ce44efa511a69fb91f23902e3aa5ef9992a484f13b2e4bfa2c10b1",
+    "window": {
+      "startUTC": "2026-11-07T14:51:53.792Z",
+      "deadlineUTC": "2026-11-07T18:51:53.792Z",
+      "requestedHours": 4,
+      "restartExtendsDeadline": false
+    }
+  },
+  "launch": {
+    "pid": 62880,
+    "remainingHoursAtLaunch": 3.9749886721944443,
+    "window": {
+      "startUTC": "2026-11-07T14:51:53.792Z",
+      "deadlineUTC": "2026-11-07T18:51:53.792Z",
+      "requestedHours": 4,
+      "restartExtendsDeadline": false
+    },
+    "launchedAtUTC": "2026-11-07T14:53:24.0028082+00:00",
+    "startupHarnessNote": "First launch refused before spawning because ConvertFrom-Json auto date coercion lost zone when reparsed. Retry uses -DateKind String, preserves original fixed deadline and remaining time.",
+    "source": "champion-restart-runtime-20261107",
+    "run": "D:/vibecoding/guandan/ai/danMCai/runs/research-through-20261111/experiments/champion-restart-20261107",
+    "authorization": "Owner autonomous research through 2026-11-11 noon Toronto; four-hour preregistered full-network task"
+  },
+  "learner": {
+    "pid": 29080,
+    "device": "cuda:0",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gpuAllocatedBytes": 168534016,
+    "state": "waiting-for-data",
+    "step": 1209,
+    "version": "v000000000",
+    "buffer": 619137,
+    "ingestedRows": 619137,
+    "trainedRows": 2476032,
+    "lossEMA": 3.1931034932014035,
+    "replayRatio": 3.9991665818712177,
+    "stepsPerSecond": 6.753592341767166,
+    "updatedAt": "2026-11-07T14:56:25Z"
+  },
+  "supervisor": {
+    "pid": 62880,
+    "startedAt": "2026-11-07T14:53:24.073Z",
+    "running": [
+      "learner",
+      "actor-0",
+      "actor-1",
+      "actor-2",
+      "actor-3"
+    ],
+    "totals": {
+      "matches": 1387,
+      "decisions": 668050,
+      "rows": 668050
+    },
+    "resources": {
+      "reserveGB": 4,
+      "resumeGB": 5,
+      "freeGB": 8.198406219482422,
+      "rawFreeGB": 8.198406219482422,
+      "measurement": "os.freemem",
+      "measurementError": null,
+      "pausedActors": [],
+      "updatedAt": "2026-11-07T14:56:24.395Z"
+    }
+  },
+  "actorInference": [
+    {
+      "slot": 0,
+      "provider": "dml",
+      "fallbackReason": null,
+      "sessionLimit": 12,
+      "matches": 328
+    },
+    {
+      "slot": 1,
+      "provider": "dml",
+      "fallbackReason": null,
+      "sessionLimit": 12,
+      "matches": 365
+    },
+    {
+      "slot": 2,
+      "provider": "dml",
+      "fallbackReason": null,
+      "sessionLimit": 12,
+      "matches": 363
+    },
+    {
+      "slot": 3,
+      "provider": "dml",
+      "fallbackReason": null,
+      "sessionLimit": 12,
+      "matches": 356
+    }
+  ],
+  "availableGiB": 8.078960418701172,
+  "deadlineGuardianHealthy": true,
+  "configUnchanged": true,
+  "webChampionUnchanged": "017/v000855042",
+  "counterMeaning": "All step counts are new formal updates in this run, not 855042 inherited network training steps. Validation had one disposable update outside the run.",
+  "scope": "Live training and backend evidence, no independent strength result yet. First launch harness refused before spawn due to PowerShell ISO date coercion; fixed with DateKind String, no extension of registered deadline."
+}
