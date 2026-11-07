@@ -1822,3 +1822,5 @@ Downloads 外层包 **421,964,889 字节**、SHA `29ca8cee2ab41eb0132b92440ade89
 归档完整导出 `guanzero-adp-io48/model-000000186280`，SHA-256 为 `bb745cbf44b4a0f648ef93998b60f1f02211d5a4bdd4176b02cf607d6e26d754`。网页默认编号为 **017**；启用冠军菜单时，归档新检查点不会自动替换冠军。本发布未新增独立评测比赛，不代表棋力验收或胜率提高。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-019.json)。
 
 中点 guanzero-adp-io48-186280 使用三对手开发协议，各 250 对／500 场，种子 4,210,000,000–4,210,000,249。胜／负／平及胜率配对95%区间为 random 500／0／0，区间 [1, 1]；clint 219／226／55，区间 [0.398, 0.48]；champion 47／408／45，区间 [0.07, 0.122]。冠军为冻结的 danMCai-v000855042，完整 SHA 和 accept 见[计划](evaluation/guanzero-186280-plan.json)。网页归档 019 使用同一冻结权重。Chrome 单线程 WASM 在16个局面49个值的最大误差2.38×10⁻⁷，动作分歧0。逐场报告按同名前缀分别归档。
+
+[中点模型 Pages 部署](https://github.com/stevensun1005/guandanai/actions/runs/42335811782)成功，019 公网权重完整 SHA 与三组评测计划一致。实际 Chrome 大厅包含最近两代 186280、138506，四席默认为 v000855042，记录于[发布证据](evaluation/web-model-019.json)。

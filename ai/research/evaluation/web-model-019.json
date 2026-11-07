@@ -153,5 +153,45 @@
     },
     "build": "3b6db88b66",
     "format": "passed"
+  },
+  "deployment": {
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42335811782",
+    "status": "success",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-019.onnx",
+    "publicSHA256": "bb745cbf44b4a0f648ef93998b60f1f02211d5a4bdd4176b02cf607d6e26d754",
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "019",
+          "guanzero-adp-io48-186280"
+        ],
+        [
+          "018",
+          "guanzero-adp-io48-138506"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    }
   }
 }
