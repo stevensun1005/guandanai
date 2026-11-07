@@ -17,3 +17,15 @@ node ai/research/tools/validate-shared-analysis.mjs ai/research/evaluation/share
 The protocol checks 100 capture/no-capture outcomes and four complete raw-policy fixtures with byte-level native ONNX output comparisons. These are development equivalence tests, not independent playing-strength games. New artifacts stay in ignored workspace unless reduced to small research evidence. Source hashes refer to the frozen development implementation; later edits require a new protocol rather than rewriting old evidence.
 
 [Actual validation](evaluation/shared-analysis-20261107/results.json): 100 capture/no-capture seeds, zero outcome mismatches; four native-policy seeds, 227 requests byte-identical with maximum absolute error zero. These checks do not establish a playing-strength benefit or universal equivalence. See study section 48.1 for counts and limitations.
+
+## 信念搜索开发 / Belief-search development
+
+`ai/shared/search/belief.mjs` 仅接收己手、公开出牌、剩牌数及公开的进贡牌归属，均匀补齐其余实体牌。过牌不是“没有可压牌”的证明。可选历史似然采用温度至少 0.2 的 softmax；ESS 不足时系统重采样，报告重采样前 ESS 和幸存的不同粒子数，不把重复粒子当作新增信息。
+
+`pimc.mjs` 比较语义去重的冠军前三候选、过牌及合法直接出完动作；每个根使用同一批补牌世界，四家由同一冠军 raw argmax 打到单局最终结果。没有短视叶估值、手工战术加分或 Clint 参与。输出为模拟最终升级分、结局直方图及相对 raw argmax 的配对差和标准误；不是校准概率、最优解或推荐的因果解释。重复世界只计算一次；存在重复时不提供伪独立标准误。
+
+The development reference requests 48 identical true-deal worlds. With deterministic raw continuations these have **one effective unique world**, so they are memoized rather than presented as 48 independent samples. It is a full-information champion continuation reference, not optimal play. `rolloutOracleRound` and the optional research-only `rawArgmax`/`onlyShape` oracle arguments support exact per-root greedy comparisons; the webpage's ordinary full-information tool keeps its previous defaults.
+
+预试设计与正式冻结协议见 `evaluation/belief-pretrial-20261107/`。最多 400 副新开发牌中，每副只取第八手之后第一个语义 top-2 差 <0.15 的位置，目标 200 位置；同时用完整开发局的所有有选择决策统计争议比例。每次调用均实测总耗时，而不是假定三秒。需要 200 位置完整、20 次真实教师逐手贪心对照无差异、相对全信息参照的一致率高于原始冠军，才可登记 0.4；开发一致率本身不证明棋力提升。未完成或负结果不扩大样本。
+
+All new compute uses a separately registered campaign task, fixed one-hour maximum, its original STOP/deadline and the four/five GiB memory pause/resume budget. Original training, GuanZero, tribute and website model selection remain unchanged. No actual D1 record is read for this pretrial.

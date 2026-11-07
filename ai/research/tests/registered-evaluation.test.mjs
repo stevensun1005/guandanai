@@ -4,7 +4,23 @@ import { mkdtempSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { evaluateRegistered } from '../tools/run-round-evaluation.mjs';
+
+test('CLI enters the controller through canonical directory aliases rather than silently skipping', () => {
+  const run = mkdtempSync(join(tmpdir(), 'danmcai-evaluation-cli-'));
+  try {
+    const script = fileURLToPath(
+      new URL('../tools/run-round-evaluation.mjs', import.meta.url),
+    ).replace(/ai[\\/]local[\\/]/, 'ai/danMCai/');
+    const result = spawnSync(process.execPath, [script, `--run=${run}`], { encoding: 'utf8' });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /Unregistered or changed protocol/);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
 
 test('registered STOP or fixed expiry prevents any worker spawn or inference', async () => {
   for (const expired of [true, false]) {

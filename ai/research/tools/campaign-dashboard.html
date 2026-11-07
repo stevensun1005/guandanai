@@ -164,6 +164,10 @@
       failed: '失败',
       stopped: '已停止',
       training: '训练中',
+      evaluation: '独立评测中',
+      development: '开发验证（不训练）',
+      'incomplete-deadline': '已按截止停止，样本未完成',
+      'incomplete-position-sample': '开发位置样本不足',
       analysis: '分析并选择下一步',
       preparing: '准备下一项实验',
       'prerequisite-complete-next-diagnostic-planned': '准备缓存诊断',
@@ -204,14 +208,22 @@
           ' · 任务心跳 ' +
           date(v.updatedAt || p.updatedAtUTC);
         const done =
-            v.completedRequests ?? v.completedRounds ?? v.completedMatches ?? a?.learner?.step ?? 0,
-          total = v.plannedRequests ?? v.plannedRounds ?? v.plannedMatches ?? null,
+            v.completedRequests ??
+            v.completedPositions ??
+            v.completedRounds ??
+            v.completedMatches ??
+            a?.learner?.step ??
+            0,
+          total =
+            v.plannedRequests ?? v.plannedPositions ?? v.plannedRounds ?? v.plannedMatches ?? null,
           unit =
-            v.plannedRounds !== undefined
-              ? '局独立评测'
-              : v.plannedMatches !== undefined
-                ? '场完整采样'
-                : '次推理请求';
+            v.plannedPositions !== undefined
+              ? '个开发搜索位置'
+              : v.plannedRounds !== undefined
+                ? '局独立评测'
+                : v.plannedMatches !== undefined
+                  ? '场完整采样'
+                  : '次推理请求';
         $('count').textContent =
           total !== null
             ? (preparing ? '上一项：' : '') + num(done) + ' / ' + num(total) + ' ' + unit
@@ -229,6 +241,10 @@
         field($('metrics'), '任务截止', date(a?.window.deadlineUTC));
         field($('metrics'), '缓存会话上限', num(v.sessionLimit ?? a?.sampler?.sessionLimit));
         field($('metrics'), '实际后端', v.provider || a?.learner?.device || '—');
+        if (v.plannedPositions !== undefined) {
+          field($('metrics'), '已收集争议位置', num(v.collectedPositions));
+          field($('metrics'), '已完成开发整局', num(v.completedDeals));
+        }
         field($('metrics'), '本任务参数更新', num(v.optimizerUpdates ?? a?.newUpdates));
         if (a?.learner) {
           field($('metrics'), '累计更新计数', num(a.learner.step));

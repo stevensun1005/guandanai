@@ -1,0 +1,67 @@
+{
+  "nodePassed": 235,
+  "nodeFailed": 0,
+  "pythonResearchPassed": 20,
+  "format": "passed",
+  "build": "9c90969c76",
+  "stopProbe": "stopped-before-spawn; zero positions and optimizer updates",
+  "browser": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "completedRounds": 0,
+    "trainingUpdates": 0,
+    "realPeerJS": true,
+    "hostOnlyNicknameGate": true,
+    "guestSameNameDenied": true,
+    "noPrivateRuleFlagBroadcast": true,
+    "privateCoach": {
+      "modelId": "017",
+      "search": {
+        "candidates": 14,
+        "evaluated": 8,
+        "mode": "round",
+        "horizon": 4,
+        "maxPlies": 12,
+        "leafSeat": "advising player, or partner after finishing",
+        "mismatchedLeaves": 0,
+        "fullRollouts": 26,
+        "minRollouts": 3,
+        "truncatedRollouts": 0,
+        "maxSamples": 12,
+        "priorWeight": 4,
+        "temperature": 0.03,
+        "elapsedMs": 2605,
+        "fullInformation": true
+      }
+    },
+    "partnerUsesOracle": true,
+    "opponentStaysRules": true,
+    "neuralOpponentUsesOnlyPublicObservation": true,
+    "manualOutsideBeamRated": true,
+    "offRestoresPartnerRules": true,
+    "privateHandsMatchHeldCounts": true,
+    "constructedCompletionExcluded": true,
+    "uploads": 0,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "topFiveInViewport": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "topFiveInViewport": true
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "topFiveInViewport": true
+      }
+    ],
+    "pageErrors": []
+  },
+  "modelCatalogChanged": false,
+  "webChampion": "017/v000855042",
+  "frozenTrainingChanged": false
+}

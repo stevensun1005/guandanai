@@ -1,6 +1,6 @@
 /** One bounded registered evaluation. No training, restart or model selection. */
 import { spawn } from 'node:child_process';
-import { existsSync, openSync, closeSync, unlinkSync } from 'node:fs';
+import { existsSync, openSync, closeSync, unlinkSync, realpathSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readJSON, writeJSON, option, sha256 } from '../../danMCai/training/continuous/lib.mjs';
@@ -80,6 +80,7 @@ export async function evaluateRegistered(run) {
     );
     tick();
     if (
+      state.workers.length !== plan.workers ||
       settled.some((x) => x.status === 'rejected') ||
       state.workers.some((w) => w.phase !== 'complete')
     )
@@ -111,5 +112,5 @@ export async function evaluateRegistered(run) {
   return state;
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+if (process.argv[1] && realpathSync(resolve(process.argv[1])) === fileURLToPath(import.meta.url))
   await evaluateRegistered(resolve(option('run', '')));

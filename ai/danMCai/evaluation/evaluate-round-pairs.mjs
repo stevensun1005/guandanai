@@ -1,7 +1,7 @@
 /** Fixed held-out single-round comparisons. Never trains or changes a champion. */
 import * as ort from 'onnxruntime-node';
 import { createHash } from 'node:crypto';
-import { appendFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readFileSync, realpathSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { constants, setPriority } from 'node:os';
@@ -176,7 +176,7 @@ export async function runRoundPairs({ protocol, run, shard = 0, shards = 4 }) {
   }
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+if (process.argv[1] && realpathSync(resolve(process.argv[1])) === fileURLToPath(import.meta.url))
   await runRoundPairs({
     protocol: resolve(option('protocol', '')),
     run: resolve(option('run', '')),

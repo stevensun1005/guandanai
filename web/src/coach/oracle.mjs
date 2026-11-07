@@ -36,8 +36,8 @@ function restore(input) {
 const shapeOf = (play) => play && { type: play.type, value: play.value, n: play.n, wu: play.wu };
 
 /** A rollout move: a legal finish first, otherwise the best or a softmax-sampled network value. */
-function chooseMove(plays, estimates, hand, random, temperature) {
-  const finish = plays.findIndex((play) => play?.cards.length === hand.length);
+function chooseMove(plays, estimates, hand, random, temperature, rawArgmax = false) {
+  const finish = rawArgmax ? -1 : plays.findIndex((play) => play?.cards.length === hand.length);
   if (finish >= 0) return finish;
   const best = estimates.indexOf(Math.max(...estimates));
   if (!random) return best;
@@ -78,12 +78,14 @@ export async function scoreOracle(
     maxSamples = 12,
     priorWeight = 4,
     maxRoundPlies = 600,
+    rawArgmax = false,
   } = {},
 ) {
   const initial = restore(input),
     player = input.player,
     side = player % 2;
   let roots = candidates(initial.hands[player], initial.L, initial.trick?.play);
+  const declaredRoots = roots;
   const canonical = new Map();
   for (const play of roots) {
     const cards = play?.cards.map((card) => card.id) || [],
@@ -103,6 +105,18 @@ export async function scoreOracle(
     if (!ids.length) {
       if (!initial.trick) throw Error('Cannot pass on lead');
       roots = [null];
+    } else if (rawArgmax && input.onlyShape) {
+      const expected = actionKey(ids);
+      const exact = declaredRoots.find(
+        (play) =>
+          play &&
+          actionKey(play.cards.map((c) => c.id)) === expected &&
+          play.type === input.onlyShape.type &&
+          play.value === input.onlyShape.value &&
+          play.n === input.onlyShape.n,
+      );
+      if (!exact) throw Error('Invalid declared research action');
+      roots = [exact];
     } else {
       roots = [coachReading(ids, initial.L, initial.trick?.play)];
     }
@@ -140,7 +154,7 @@ export async function scoreOracle(
       const estimates = await infer(policyState(game, mover, 0, plays));
       if (estimates.length !== plays.length || !estimates.every(Number.isFinite))
         throw Error('Invalid rollout values');
-      index = chooseMove(plays, estimates, game.hands[mover], random, temperature);
+      index = chooseMove(plays, estimates, game.hands[mover], random, temperature, rawArgmax);
     }
     return { p: mover, play: plays[index] };
   }
@@ -267,4 +281,44 @@ export async function scoreOracle(
       fullInformation: true,
     },
   };
+}
+
+/** Complete deterministic research continuation; default webpage oracle behavior is unchanged. */
+export async function rolloutOracleRound(
+  input,
+  root,
+  infer,
+  { maxPlies = 1000, stop = () => false } = {},
+) {
+  const game = restore(input),
+    side = input.player % 2,
+    line = [];
+  if (stop()) throw Error('Research rollout stopped');
+  let result = advanceRound(game, root);
+  for (let ply = 1; !result && ply < maxPlies; ply++) {
+    if (stop()) throw Error('Research rollout stopped');
+    const p = game.turn,
+      plays = candidates(game.hands[p], game.L, game.trick?.play);
+    if (!plays.length) throw Error('No legal continuation');
+    let index = 0;
+    if (plays.length > 1) {
+      const state = policyState(game, p, 0, plays);
+      state.trick = game.trick && {
+        player: game.trick.player,
+        play: { type: game.trick.play.type, value: game.trick.play.value, n: game.trick.play.n },
+      };
+      state.actionShapes = plays.map(
+        (a) => a && { type: a.type, value: a.value, n: a.n, wu: a.wu || 0 },
+      );
+      const values = Array.from(await infer(state));
+      if (values.length !== plays.length || !values.every(Number.isFinite))
+        throw Error('Invalid raw rollout scores');
+      index = chooseMove(plays, values, game.hands[p], null, 0, true);
+    }
+    const play = plays[index];
+    line.push({ p, cards: play?.cards.map((c) => c.id) || null });
+    result = advanceRound(game, play);
+  }
+  if (!result) throw Error('Research round truncated; no leaf estimate or draw assigned');
+  return { value: (result.winner === side ? 1 : -1) * result.points, result, line };
 }

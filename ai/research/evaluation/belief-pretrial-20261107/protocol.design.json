@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "stage": "0.3",
+  "registeredAtUTC": "2026-11-07T19:01:55.614991+00:00",
+  "baseCommit": "0d38fed7b8f3a0113f7629e6c2531238434b8bb5",
+  "purpose": "Development PIMC feasibility and reference agreement, not independent strength acceptance",
+  "teacher": "017/v000855042",
+  "modelSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "selection": {
+    "positions": 200,
+    "maxDevelopmentDeals": 400,
+    "sample": "First semantic-plan top2 Q gap <0.15 after at least eight plies, at most one position per deal; finish each deal for dispute-frequency denominator",
+    "gap": 0.15,
+    "scope": "Self-play simulated positions only; not representative human positions"
+  },
+  "worlds": 8,
+  "fullInformationReferenceWorlds": 48,
+  "referenceNote": "With raw argmax and an identical true deal, 48 identical determinations are deterministic repeats with effective unique world count 1. Memoize identical worlds and report requested/effective counts; no 48-independent-sample uncertainty claim. Full-information greedy continuation is not an optimal-play oracle.",
+  "roots": "Champion semantic-deduplicated top3, plus pass and legal immediate finishes; no hand tactical scores",
+  "continuation": "Unchanged champion raw argmax, no finishing shortcut, common worlds for all roots, complete single round only; truncation/STOP is error, never leaf bootstrap or draw",
+  "phaseB": "Optional public-history softmax log-likelihood with T>=0.2; report ESS before resampling and distinct survivors, never claim resampling creates information",
+  "acceptance": {
+    "greedy": "Per-root trace and outcome equal to priorWeight=0 direct oracle rollout in raw mode",
+    "agreement": "All 200 completed; belief agreement with deterministic full-information reference strictly exceeds raw argmax agreement; clustered difference reported; no promotion",
+    "timing": "Measure every uniform-search call: count, mean, median, p95, max; <=3s is a target, not assumed",
+    "incomplete": "Block 0.4 if acceptance or completeness fails; report partial result"
+  },
+  "budgetHours": 1,
+  "reserveGiB": 4,
+  "resumeGiB": 5,
+  "devicePlan": "One bounded DirectML inference worker plus Node game logic; CPU fallback recorded; no gradient updates",
+  "seedStatus": "Fresh development deals audited before start; separate future independent search pilot seeds",
+  "sourceStatus": "Freeze exact files/commit before launching preregistered pilot",
+  "noAuthorization": [
+    "live UI calibration",
+    "D1 private-hand analysis",
+    "Mac compute",
+    "post-Wednesday compute",
+    "match-level objective",
+    "GuanZero training"
+  ]
+}
