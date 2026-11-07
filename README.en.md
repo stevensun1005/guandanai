@@ -64,7 +64,7 @@ Online rounds with at least two people are archived as structured, pseudonymous 
 | Practice            | An explicit face-up solo table with notes, step-by-step play and portable records                                                                                                                                                                      |
 | Static deployment   | GitHub Pages; no inference server or API key required                                                                                                                                                                                                  |
 
-The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two danMCai gate champions. The default is the **current danMCai gate champion**. GuanZero names use the format `guanzero-adp-gpubatch-44752`; the catalog and selection guide own the actual current versions. Gate promotion is development selection, not independent strength acceptance. The local GuanZero run freezes a checkpoint every twelve hours and publishes those exact weights after all three opponents have played 500 matches each. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics. Champions from the Mac continuation follow the same accepted-gate and SHA checks before updating the default and move-feedback model.
+The menu contains Clint rules, the latest two GuanZero generations, danMCai P0 and the last two danMCai gate champions. The default is the **current danMCai gate champion**. GuanZero names use the format `guanzero-adp-gpubatch-44752`; the catalog and selection guide own the actual current versions. Gate promotion is development selection, not independent strength acceptance. The local GuanZero run freezes a checkpoint every twelve hours and publishes those exact weights after all two opponents have played 500 matches each. Historical weights remain archived. See [selection and publishing](./web/docs/WEB_MODELS.md). Neural decisions do not apply Clint heuristics. Champions from the Mac continuation follow the same accepted-gate and SHA checks before updating the default and move-feedback model.
 
 The practice table keeps its action grid in one place, including after your hand is empty. Played cards stay readable in a scrollable area, while notes and round results sit in the lower-left corner. See the [practice guide](./web/docs/PRACTICE.md).
 
@@ -76,7 +76,7 @@ The project aims to keep improving overall playing strength and become a trainin
 
 Completed multiplayer rounds with at least two human seats are collected by the host into private cloud storage. Records omit nicknames, chat, voice and seat credentials; offline retries and deduplication are supported. Private JSON/JSONL exports remain isolated research data and are not automatically fed into active training. See [collection and export](./web/collector/README.md).
 
-GuanZero development evaluation now includes random play, Clint and the accepted danMCai champion. Each opponent defaults to 500 complete matches (250 paired seeds with sides swapped). The dashboard separates live progress from completed results and historical 200-match batches. See the [evaluation protocol](ai/guanzero/README.md#开发评测对手).
+GuanZero development evaluation now includes Clint and the accepted danMCai champion. Each opponent defaults to 500 complete matches (250 paired seeds with sides swapped). The dashboard separates live progress from completed results and historical 200-match batches. See the [evaluation protocol](ai/guanzero/README.md#开发评测对手).
 
 GuanZero evaluation rows use the training run and actual frozen export version, with the opponent and progress shown separately. Old snapshots without verifiable version records use a SHA suffix. See [dashboard model names](ai/guanzero/README.md#面板中的评测模型名).
 
@@ -149,7 +149,7 @@ The complete 1.37-million-parameter network has undergone staged unfreezing expe
 
 `npm run eval:table -- --pairs=1000 --opponent=rule` evaluates complete matches through the same preparation and decision functions used by the web controller and Worker, including styles, public history, finishing shortcuts and endgame search. See the [research report](./ai/research/MODEL_STUDY.md) for completed sample sizes and limitations; pipeline smoke checks are not evidence of improved playing strength. This legacy full-match entry uses the original rules for `rule`; the GuanZero evaluator selects Clint explicitly with `--opponents=clint`.
 
-GuanZero is a separate training route with batched GPU inference and a read-only live dashboard. Its development opponents are random play, Clint (`rules-v2`) and the danMCai gate champion. Paired seeds and frozen-model fingerprints keep the results traceable; the legacy trainer can add Clint through an isolated supplement process. See [GuanZero](./ai/guanzero/README.md). Development results are not independent acceptance tests.
+GuanZero is a separate training route with batched GPU inference and a read-only live dashboard. Its development opponents are Clint (`rules-v2`) and the danMCai gate champion. Paired seeds and frozen-model fingerprints keep the results traceable; the legacy trainer can add Clint through an isolated supplement process. See [GuanZero](./ai/guanzero/README.md). Development results are not independent acceptance tests.
 
 ## Documentation
 
@@ -175,6 +175,6 @@ The final champion from this Mac window has been verified on the website, and th
 
 The fixed paired single-round comparison is complete and found no clear strength difference between the champion and final learner. Training remains stopped. See the [Windows return handoff](ai/research/WINDOWS_RETURN_20261106.md) for the checked model/Adam/replay bundle and next-experiment recommendations.
 
-GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current 48-hour window, playing 500 matches against each of three opponents. See the [training guide](ai/guanzero/README.md).
+GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current 48-hour window, playing 500 matches against each of two opponents. See the [training guide](ai/guanzero/README.md).
 
 Research continuation games use the verified danMCai champion frozen at batch start. Teacher changes and inherited work are tracked in the [specialist protocol](ai/shared/tribute/README.md).

@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { setPriority, constants } from 'node:os';
 import { modelBytes } from '../../publishing/artifacts.mjs';
 import { evaluate } from './evaluate.mjs';
-import { DEFAULT_OPPONENTS, THREE_OPPONENT_PANEL } from './opponents.mjs';
+import { DEFAULT_OPPONENTS, TWO_OPPONENT_PANEL } from './opponents.mjs';
 import { freezeChampion, championDefinition } from './champion.mjs';
 import { ROOT, paths, readJSON, writeJSON, option, sha256, evalSeed } from './lib.mjs';
 export const SUITE_PAIRS = 250;
@@ -52,7 +52,7 @@ export async function addSuite(
     pairs: SUITE_PAIRS,
     seedStart: start,
     seedEnd: start + SUITE_PAIRS - 1,
-    opponentPanel: THREE_OPPONENT_PANEL,
+    opponentPanel: TWO_OPPONENT_PANEL,
     opponents: [...DEFAULT_OPPONENTS],
     champion: champion.metadata,
     createdAt: new Date().toISOString(),

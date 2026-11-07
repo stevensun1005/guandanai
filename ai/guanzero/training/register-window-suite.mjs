@@ -11,7 +11,7 @@ import {
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 
-import { THREE_OPPONENT_PANEL } from './opponents.mjs';
+import { THREE_OPPONENT_PANEL, TWO_OPPONENT_PANEL } from './opponents.mjs';
 import { addSuite } from './development-suite.mjs';
 import { setTimeout as sleep } from 'node:timers/promises';
 
@@ -77,8 +77,8 @@ async function register(launcherPath, armMidpoint) {
     const existing = manifest.suites.find((p) => p.index === index);
     if (existing && slot !== 2) return { slot, action: 'registered', id: existing.id };
     if (slot === 2 && !armMidpoint) {
-      if (!existing || existing.opponentPanel !== THREE_OPPONENT_PANEL)
-        throw Error('Midpoint three-opponent plan missing; inspect supervisor');
+      if (!existing || ![THREE_OPPONENT_PANEL, TWO_OPPONENT_PANEL].includes(existing.opponentPanel))
+        throw Error('Midpoint registered-opponent plan missing; inspect supervisor');
       return { slot, action: 'midpoint-supervisor', id: existing.id };
     }
     if (Date.now() - due > 2 * 3600000)
@@ -102,7 +102,8 @@ async function register(launcherPath, armMidpoint) {
     const model = join(run, 'models', latest.file),
       id = latest.file.slice(0, -5);
     if (armMidpoint && existing) {
-      if (existing.opponentPanel !== THREE_OPPONENT_PANEL) throw Error('Midpoint panel mismatch');
+      if (![THREE_OPPONENT_PANEL, TWO_OPPONENT_PANEL].includes(existing.opponentPanel))
+        throw Error('Midpoint panel mismatch');
       pinMidpoint(run, directory, existing, sha256);
       return { slot, action: 'midpoint-ready', id };
     }
