@@ -432,7 +432,57 @@
   "trainingUpdates": 0,
   "webDefaultUnchanged": "017 / danMCai-v000855042",
   "deployment": {
-    "status": "awaiting-pages",
-    "passed": false
+    "verifiedUTC": "2026-11-07T02:24:45.195600+00:00",
+    "status": "success",
+    "passed": true,
+    "commit": "4eac7abc7f754137e2415d7f5eb978e3befd99c6",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42328688040",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success"
+      }
+    ],
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "webBuild": "2e6141b678",
+    "menuOrder": [
+      "clint-rule",
+      "016",
+      "015",
+      "001",
+      "017",
+      "012"
+    ],
+    "defaultId": "017",
+    "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "downloadedChampionBytes": 5368650,
+    "publicSpectators": {
+      "roomCodeShown": true,
+      "twoHumansRemainTwo": true,
+      "spectatorCannotActSitRecoverOrSync": true,
+      "unseatedReceivesNoGameBroadcast": true,
+      "incompatibleVersionRejected": true,
+      "spectatorNeuralDownloads": 0,
+      "publicSnapshotsOnly": true,
+      "guestRecoveryWhileWatching": true,
+      "twoPlayerAudioLines": true,
+      "hostVoiceLockAndUnlock": true,
+      "nextRoundFreshState": true,
+      "nicknamesAndBlackNames": true,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "hostExitEndsSpectating": true,
+      "pageErrors": [],
+      "purpose": "Browser interaction/security regression, no strength evaluation or real human training data"
+    },
+    "ownerDraftsPreserved": 10,
+    "formalTrainingStarted": false
   }
 }

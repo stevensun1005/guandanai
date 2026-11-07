@@ -4818,9 +4818,12 @@
       "previousSHA": "54fde9edc451fe6808fa2d8548e086f25b188b41",
       "scope": "UI and spectator networking; rule and neural policies unchanged",
       "evidence": "ai/research/evaluation/clint-sync-20261106-latest.json",
-      "status": "locally-validated-awaiting-pages",
+      "status": "published-and-publicly-verified",
       "strengthMatches": 0,
-      "trainingUpdates": 0
+      "trainingUpdates": 0,
+      "deployedCommit": "4eac7abc7f754137e2415d7f5eb978e3befd99c6",
+      "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42328688040",
+      "webBuild": "2e6141b678"
     }
   ]
 }
