@@ -45,6 +45,7 @@ if (!Number.isInteger(games) || games < 1 || games > 512) throw Error('Invalid c
 if (!['dml', 'cpu'].includes(provider)) throw Error('Provider must be dml or cpu');
 const config = readJSON(paths.config);
 if (!config) throw Error(`Missing ${paths.config}; start the run with supervisor.mjs`);
+const sessionLimit = Number(option('session-limit', config.fastActor?.sessionLimit ?? '6'));
 
 const statusFile = join(paths.actors, `actor-${slot}.json`);
 const resultsFile = join(paths.actors, `results-${slot}.jsonl`);
@@ -54,6 +55,7 @@ const status = {
   pid: process.pid,
   actorImplementation: 'fast',
   concurrentGames: games,
+  sessionLimit,
   startedAt: new Date().toISOString(),
   matches: previous.matches || 0,
   decisions: previous.decisions || 0,
@@ -70,7 +72,7 @@ const writer = new ShardWriter(
   `a${String(slot).padStart(2, '0')}`,
   status.shardSequence,
 );
-const pool = await createBatchedPool(ort, { provider });
+const pool = await createBatchedPool(ort, { provider, sessionLimit });
 const cache = createCandidateCache({ limit: 512 });
 const random = seededRandom((config.learner.seed ^ (slot * 0x9e3779b1)) >>> 0);
 const mix = Object.entries(config.actorMix);

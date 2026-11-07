@@ -84,6 +84,7 @@
       text-align: left;
       padding: 8px;
       border-bottom: 1px solid #30445f;
+      overflow-wrap: anywhere;
     }
     @media (max-width: 650px) {
       .grid {
@@ -182,24 +183,32 @@
         const s = await r.json(),
           a = s.tasks.at(-1),
           v = a?.state || {},
-          p = s.progress;
+          p = s.progress,
+          preparing =
+            ['analysis', 'preparing'].includes(p.phase) &&
+            Date.parse(p.updatedAtUTC) > Date.parse(v.updatedAt || 0);
         $('connection').textContent =
           '实时连接正常 · 每 3 秒刷新' + (a?.stale ? ' · 当前任务心跳待确认' : '');
-        $('current').textContent = v.displayName || p.displayName || '分析结果，准备下一项';
+        $('current').textContent = preparing
+          ? p.displayName
+          : v.displayName || p.displayName || '分析结果，准备下一项';
         $('activity').textContent =
-          (label[v.phase] || label[p.phase] || p.phase || '等待登记') +
-          (p.analysis ? ' · ' + p.analysis : '');
+          ((preparing ? label[p.phase] : label[v.phase]) ||
+            label[p.phase] ||
+            p.phase ||
+            '等待登记') + (p.analysis ? ' · ' + p.analysis : '');
         $('next').textContent = '下一步：' + (p.nextTask || '根据刚完成任务的实际结果决定');
         $('updated').textContent =
           '读取时间 ' +
           date(s.observedAtUTC) +
           ' · 任务心跳 ' +
           date(v.updatedAt || p.updatedAtUTC);
-        const done = v.completedRequests ?? a?.learner?.step ?? 0,
-          total = v.plannedRequests ?? null;
+        const done = v.completedRequests ?? v.completedMatches ?? a?.learner?.step ?? 0,
+          total = v.plannedRequests ?? v.plannedMatches ?? null,
+          unit = v.plannedMatches !== undefined ? '场完整采样' : '次推理请求';
         $('count').textContent =
           total !== null
-            ? num(done) + ' / ' + num(total) + ' 次推理请求'
+            ? (preparing ? '上一项：' : '') + num(done) + ' / ' + num(total) + ' ' + unit
             : a?.learner
               ? '累计 ' + num(a.learner.step) + ' 次更新'
               : '分析／准备中';
@@ -240,9 +249,11 @@
             label[t.state.phase] || t.state.phase || '已登记',
             t.state.completedRequests !== undefined
               ? num(t.state.completedRequests) + ' 次请求'
-              : t.learner
-                ? num(t.learner.step) + ' 次更新'
-                : '—',
+              : t.state.completedMatches !== undefined
+                ? num(t.state.completedMatches) + ' 场采样'
+                : t.learner
+                  ? num(t.learner.step) + ' 次更新'
+                  : '—',
             date(t.state.updatedAt),
           ])
             tr.append(el('td', text));

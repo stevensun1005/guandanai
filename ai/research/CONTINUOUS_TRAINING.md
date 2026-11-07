@@ -2,7 +2,7 @@
 
 A/B 独立评测后可按新授权自主选择后续实验，最长至 Toronto 11 月 11 日周三中午；先预登记，再注册固定截止并实际监听 STOP。见 [自主研究窗口](AUTONOMOUS_RESEARCH_20261107.md)，不延长以下任何旧运行。
 
-Windows A／B 已获准顺序各训四小时，A 已实际启动；[实时面板](http://127.0.0.1:8766/)显示两臂、资源和后续独立评测。运行期间保留不可变导出，避免在途采样重载 ENOENT；冻结源码不变。两个运行、互斥种子、固定截止与实际 GPU 证据见 [Windows 交接](WINDOWS_RETURN_20261106.md)首节。不要用本页通用启动示例重复启动、补时或绕过已有截止。
+Windows A／B 各四小时及 24,000 局独立评测均已完成；[历史面板](http://127.0.0.1:8766/)保留两臂原始进度。后续任务查看[持续面板](http://127.0.0.1:8767/)。运行期间保留不可变导出，避免在途采样重载 ENOENT；冻结源码不变。两个运行、互斥种子、固定截止与实际 GPU 证据见 [Windows 交接](WINDOWS_RETURN_20261106.md)首节。不要用本页通用启动示例重复启动、补时或绕过已有截止。
 
 **2026-11-06 交接状态：**Windows `gpu-main` 和 Mac 唯一 24 小时窗口均已结束，原运行保留，不自动重启。随后固定独立整局比较已完成，冠军与最终学习器尚无明确强弱差异。恢复包、匹配 Adam、Windows 新目录准备和只读 GPU 验证见 [WINDOWS_RETURN](WINDOWS_RETURN_20261106.md)；历史 Mac 启动、固定截止和收尾证据见 [MAC_HANDOFF](MAC_HANDOFF.md)。以下 CPU／ROCm 示例用于理解既有运行，不是本次重启训练的指令。
 
@@ -300,3 +300,7 @@ GuanZero 与 danMCai 的训练配置分开。其五类开发对手现含真实 d
 ## 已结束窗口返回 Windows
 
 `prepare-windows-return.py` 从校验通过的 Mac 快照准备新的 Windows 运行目录，继承最终学习器和匹配 Adam、回放及累计计数，单独登记源码、后端和种子变化。`verify-windows-return.py` 只读核对网络、Adam、回放，并在指定 CPU／cuda:0 后端前向与恢复优化器，不执行更新。完整命令和目的机验证边界见 [Windows 返回交接](WINDOWS_RETURN_20261106.md)。准备不启动训练、不复制已过期 schedule、不覆盖旧 Windows 运行；新的时长和固定截止在下一轮明确后建立。
+
+## 有界缓存诊断入口
+
+快速采样器支持 `--session-limit=<1–32>` 或新配置 `fastActor.sessionLimit`，默认仍为 6。此入口只控制进程内 ONNX 会话缓存，不改变网络或奖励，旧冻结检出保持原样。`benchmark-cache-sampling.mjs` 在独立已注册任务中比较四阶段完整采样，检查冻结源码、配置、联盟和权重 SHA，并遵守截止／4 GiB 预算与 STOP；不启动学习器或更新联盟。缓存微基准[实际结果](evaluation/cache-reuse-20261107/results.json)不能直接当成完整采样或棋力收益。

@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "kind": "fixed-replay-inference-cache-diagnostic-not-end-to-end-or-strength",
+  "protocolSHA256": "70ae2300963d74cb7e337fe071ad645d0c924b9757069e4c88d5f21384c04de0",
+  "phase": "complete",
+  "completedRequests": 16384,
+  "plannedRequests": 16384,
+  "phases": [
+    {
+      "phaseIndex": 0,
+      "sessionLimit": 6,
+      "completedRequests": 4096,
+      "wallMs": 9975.0851,
+      "requestMeanMs": 2.3205781738281277,
+      "sessionsCreated": 200,
+      "sessionsReleased": 194,
+      "peakSessions": 6,
+      "maxAbsError": 0,
+      "provider": "dml"
+    },
+    {
+      "phaseIndex": 1,
+      "sessionLimit": 12,
+      "completedRequests": 4096,
+      "wallMs": 5676.1572000000015,
+      "requestMeanMs": 1.2746918701171888,
+      "sessionsCreated": 68,
+      "sessionsReleased": 56,
+      "peakSessions": 12,
+      "maxAbsError": 0,
+      "provider": "dml"
+    },
+    {
+      "phaseIndex": 2,
+      "sessionLimit": 12,
+      "completedRequests": 4096,
+      "wallMs": 5519.746800000003,
+      "requestMeanMs": 1.2377299316406396,
+      "sessionsCreated": 68,
+      "sessionsReleased": 56,
+      "peakSessions": 12,
+      "maxAbsError": 0,
+      "provider": "dml"
+    },
+    {
+      "phaseIndex": 3,
+      "sessionLimit": 6,
+      "completedRequests": 4096,
+      "wallMs": 9837.110500000003,
+      "requestMeanMs": 2.290572290039071,
+      "sessionsCreated": 200,
+      "sessionsReleased": 194,
+      "peakSessions": 6,
+      "maxAbsError": 0,
+      "provider": "dml"
+    }
+  ],
+  "minimumAvailableGiB": 14.370281219482422,
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "maxAbsError": 0,
+  "scope": "System microbenchmark only. No gradient updates, new games or strength estimates. It cannot establish end-to-end sampler speed or playing strength; any improvement requires a separately preregistered complete sampling probe.",
+  "completedAtUTC": "2026-11-07T14:22:31.027Z"
+}

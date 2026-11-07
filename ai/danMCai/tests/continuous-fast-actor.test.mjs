@@ -138,6 +138,7 @@ test('a fast actor writes standard shards and status that record its implementat
         '--games=1',
         '--matches=1',
         '--provider=cpu',
+        '--session-limit=12',
       ],
       // Generous limit: the suite may run while training saturates the CPU.
       { encoding: 'utf8', timeout: 600_000 },
@@ -145,6 +146,7 @@ test('a fast actor writes standard shards and status that record its implementat
     assert.equal(result.status, 0, result.stderr);
     const status = JSON.parse(readFileSync(join(paths.actors, 'actor-39.json'), 'utf8'));
     assert.equal(status.actorImplementation, 'fast');
+    assert.equal(status.sessionLimit, 12);
     assert.equal(status.matches, 1);
     assert.equal(status.nextSeed, 45_000_001);
     const manifests = readdirSync(paths.shards).filter((f) => f.endsWith('.json'));

@@ -1,0 +1,4 @@
+{"phaseIndex":0,"sessionLimit":6,"completedRequests":4096,"wallMs":9975.0851,"requestMeanMs":2.3205781738281277,"sessionsCreated":200,"sessionsReleased":194,"peakSessions":6,"maxAbsError":0,"provider":"dml"}
+{"phaseIndex":1,"sessionLimit":12,"completedRequests":4096,"wallMs":5676.1572000000015,"requestMeanMs":1.2746918701171888,"sessionsCreated":68,"sessionsReleased":56,"peakSessions":12,"maxAbsError":0,"provider":"dml"}
+{"phaseIndex":2,"sessionLimit":12,"completedRequests":4096,"wallMs":5519.746800000003,"requestMeanMs":1.2377299316406396,"sessionsCreated":68,"sessionsReleased":56,"peakSessions":12,"maxAbsError":0,"provider":"dml"}
+{"phaseIndex":3,"sessionLimit":6,"completedRequests":4096,"wallMs":9837.110500000003,"requestMeanMs":2.290572290039071,"sessionsCreated":200,"sessionsReleased":194,"peakSessions":6,"maxAbsError":0,"provider":"dml"}
