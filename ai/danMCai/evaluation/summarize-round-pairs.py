@@ -18,6 +18,31 @@ def estimate(values, z=1.96):
             "z": z, "method": "Normal approximation using independent seed-pair sample SD"}
 
 
+def exploitation_signal(data, specification):
+    """Head-to-head gain minus paired common-P0 improvement on a disjoint deal block."""
+    head, latest, champion = (data[specification[key]] for key in ['head', 'latestVsP0', 'championVsP0'])
+    if set(latest) != set(champion) or set(head) & set(latest):
+        raise ValueError('Exploitation signal requires paired P0 and disjoint head-to-head deals')
+    points = lambda row: statistics.mean(g['signedPoints'] for g in row['games'])
+    differences=[]
+    for seed in latest:
+        for a,b in zip(latest[seed]['games'],champion[seed]['games']):
+            if (a['dealSHA256'],a['level'],a['leader']) != (b['dealSHA256'],b['level'],b['leader']):
+                raise ValueError('Exploitation common-opponent deals differ')
+        differences.append(points(latest[seed])-points(champion[seed]))
+    a,b=estimate([points(row) for row in head.values()]),estimate(differences)
+    if a['standardError'] is None or b['standardError'] is None:
+        raise ValueError('Insufficient independent exploitation clusters')
+    mean=a['mean']-b['mean'];se=math.hypot(a['standardError'],b['standardError']);z=2.5758293035
+    return {'mean':mean,'standardError':se,'ci':[mean-z*se,mean+z*se],
+            'confidenceLevel':.99,'headClusters':a['clusters'],'commonP0Clusters':b['clusters'],
+            'definition':'latest-vs-017 points minus (latest-vs-P0 minus 017-vs-P0 points)',
+            'baseline':'017 versus itself has exact zero paired mean by side-swap symmetry; no baseline games invented',
+            'method':'Independent deal-block variances added; paired common-P0 difference preserves covariance',
+            'roadmapPointGate':a['ci'][0]>0 and mean>.05,
+            'limit':'One target and one run; signal interval crossing zero remains uncertain, no automatic promotion'}
+
+
 def summarize(protocol, results):
     protocol, results = Path(protocol), Path(results)
     plan = json.loads(protocol.read_text())
@@ -73,6 +98,7 @@ def summarize(protocol, results):
             "wins": wins["wins"], "losses": wins["losses"], "draws": 0,
             "signedUpgradePoints": estimate(points), "roundWinScore": estimate(scores),
             "finishingRankPairs": dict(sorted(ranks.items())),
+            "doubleDowns": ranks["34"], "doubleUps": ranks["12"],
             "meanTurns": statistics.mean(turns),
         }
     contrasts = {}
@@ -100,7 +126,7 @@ def summarize(protocol, results):
     primary_model = plan.get("primaryModel", "latest")
     primary_opponent = plan.get("primaryOpponent", "champion")
     winner = primary_model if lo > 0 else primary_opponent if hi < 0 else "inconclusive"
-    return {
+    result = {
         "schema": 1, "id": plan["id"], "completedAtUTC": datetime.now(timezone.utc).isoformat(),
         "purpose": plan["purpose"], "protocolSHA256": protocol_sha,
         "models": plan["models"], "unit": "complete single round", "protocol": plan["rules"],
@@ -112,6 +138,9 @@ def summarize(protocol, results):
         "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
         "optimizerUpdatesExecuted": 0,
     }
+    if plan.get('exploitationSignal'):
+        result['exploitationSignal']=exploitation_signal(data,plan['exploitationSignal'])
+    return result
 
 
 if __name__ == "__main__":

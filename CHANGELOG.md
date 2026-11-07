@@ -569,3 +569,5 @@
 - Record the complete 200-position belief pretrial negative result: lower reference agreement despite sub-second observed mean latency. Block search pilot 0.4; preserve per-position evidence and ESS collapse diagnostics.
 
 研究：阶段 0.6 增加保留冠军主干的零 extras 投影导出、严格决策／浏览器验证及 STOP／截止边界。进还贡在权重读取前拒绝 extras；默认训练、网页冠军及历史冻结检出不变，结果另行登记。
+
+研究：新增已注册四小时训练入口、实际窗口起点快照保护、联盟完整性检查；种子审计覆盖整场根与单局牌副派生别名。可选017剥削臂使用普通网络与新Adam，预登记P0／012迁移及剥削信号，网页模型不变。

@@ -192,3 +192,5 @@ Stage-zero match-objective analysis is documented in the [research index](ai/res
 The champion-start danMCai experiment completed 10,000 fresh heldout rounds. Its direct comparison with the original champion improved signed upgrade points; common-Clint and mixed-teammate contrasts remain inconclusive. See [grouped evidence and limitations](ai/research/MODEL_STUDY.md#467-最终学习器-10000-局独立留出完成). Web champion 017 is unchanged; experimental weights are not automatically published.
 
 Stage 0.6 prepares a [zero-projection extras student](ai/research/ANALYSIS.md), retaining the champion backbone for numerical and browser equivalence checks. This is not online training, a strength improvement or a website promotion.
+
+The next optional [danMCai experiment](ai/research/CONTINUOUS_TRAINING.md) tests a four-hour champion-only exploiter with fresh Adam, then separate held-out comparisons against 017, P0 and 012. This hypothesis does not imply improvement or authorize replacing the website champion.

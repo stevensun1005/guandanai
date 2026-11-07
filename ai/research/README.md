@@ -98,3 +98,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [0.6 协议](evaluation/extras-equivalence-20261107/protocol.json)封存零投影学生、40,000 开发决策与 48 浏览器夹具的等价条件；尚待本批实测，不等于更强。
 
 [0.6 实测](evaluation/extras-equivalence-20261107/results.json)：40,000 决策 argmax 全同／最大差 0，48 WASM 位置 argmax 全同；兼容性通过，训练更新与新棋力验收均为零。下一项仅可另行登记普通 017 剥削臂。
+
+[可选1.6协议](evaluation/exploiter-017-20261107/protocol.json)准备普通017／新Adam／空回放、仅017对手四小时剥削臂与独立10,000局留出；是待验证假设，实际启动／结果另记，不将extras等价当提升。

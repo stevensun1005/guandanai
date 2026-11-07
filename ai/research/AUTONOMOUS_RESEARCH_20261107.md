@@ -49,3 +49,9 @@ PowerShell 7.6 读取含 ISO 截止的 JSON 时使用 `ConvertFrom-Json -DateKin
 当前 Windows 交流电源方案的空闲睡眠为三小时。专用 `research-awake.ps1` 在研究总窗口内提交临时 SYSTEM_REQUIRED 请求（不保持屏幕亮，不改永久电源方案），按原总截止释放，心跳在 `awake-status.json`。取消研究时先核对其中 PID 再停止这一个辅助进程；不能批量终止系统或其他训练。API 请求／释放已实测，`powercfg /requests` 的系统枚举需要提升权限，本次未提升，不能声称已通过该命令独立枚举 OS 请求。实际周三释放尚未发生，不能写成已经测过现实截止。
 
 Windows Python 虚拟环境会出现一层重定向父进程和实际 Python 学习器子进程，同一命令行不等于重复训练。本批启动实查为 supervisor → GPU 环境 Scripts/python.exe → 实际 Python312（状态 PID 29080），应按进程树和状态判断，不误杀正常父子。
+
+## 2026-11-07 阶段 0 后的下一批
+
+0.1／0.2／0.3／0.6 已完成。0.3 负结果阻止 0.4；不重复开发位置或扩大 W 补救。下一项仅是已授权可选 1.6 普通 017 剥削臂，新起点协议见 `evaluation/exploiter-017-20261107/`，实际启动另记。四小时及一小时留出的各自窗口只注册一次；保留 4 GiB、原全局截止、无自动网页晋升。本机只跑 danMCai，不启动 GuanZero 或进还贡。
+
+The exploiter uses the ordinary champion with fresh Adam and empty replay. It does not train the zero-extras student. A negative result means no cheap signal was found in this run, not evidence that exploitation is impossible. Shared-P0 and shared-012 comparisons preserve deal pairing; the target-specific signal remains separate from general strength.
