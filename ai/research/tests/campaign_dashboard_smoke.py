@@ -21,6 +21,11 @@ with sync_playwright() as p:
     assert state['guardianHealthy']
     assert state['campaign']['deadlineUTC'] == '2026-11-11T17:00:00.000Z'
     assert page.request.post(url + 'api/status').status == 405
+    if state['tasks']:
+        current = state['tasks'][-1]
+        if current['learner'] and current['processAlive'] and not current['state'].get('stoppedAt'):
+            assert '训练中' in page.locator('#history tr').first.text_content()
+            assert '本次新增' in page.locator('#count').text_content()
     for width, height in [(1440, 1000), (390, 844)]:
         page.set_viewport_size({'width': width, 'height': height})
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth')

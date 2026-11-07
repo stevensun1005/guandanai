@@ -229,7 +229,13 @@
           field($('metrics'), '已摄入样本', num(a.learner.ingestedRows));
           field($('metrics'), '采样完整比赛', num(v.totals?.matches));
           field($('metrics'), '采样决策／秒', num(v.decisionsPerSecond));
-          field($('metrics'), '学习器状态', a.learner.state || '—');
+          field(
+            $('metrics'),
+            '学习器状态',
+            a.learner.state === 'waiting-for-data'
+              ? '等待新样本（当前更新预算已完成）'
+              : label[a.learner.state] || a.learner.state || '—',
+          );
           field(
             $('metrics'),
             'GPU 张量内存',
@@ -247,7 +253,7 @@
           );
           field($('metrics'), '训练时间进度', '上方进度条按固定窗口计时');
         }
-        field($('metrics'), '已完成棋力比赛', num(v.strengthGames));
+        field($('metrics'), '已完成棋力比赛', num(v.strengthGames ?? (a?.learner ? 0 : undefined)));
         field(
           $('metrics'),
           '任务进程',
@@ -274,7 +280,13 @@
           const tr = el('tr');
           for (const text of [
             t.state.displayName || t.id,
-            label[t.state.phase] || t.state.phase || '已登记',
+            label[t.state.phase] ||
+              t.state.phase ||
+              (t.state.stoppedAt
+                ? label.stopped
+                : t.learner && t.processAlive
+                  ? label.training
+                  : '已登记'),
             t.state.completedRequests !== undefined
               ? num(t.state.completedRequests) + ' 次请求'
               : t.state.completedMatches !== undefined

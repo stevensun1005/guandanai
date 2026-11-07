@@ -1,0 +1,22 @@
+{
+  "awake": {
+    "displayRequired": false,
+    "pid": 49636,
+    "deadlineUTC": "2026-11-11T17:00:00.000Z",
+    "phase": "awake",
+    "powerPlanChanged": false,
+    "updatedAtUTC": "2026-11-07T15:00:55.6295764+00:00"
+  },
+  "powerPlanStandbyIdleACSeconds": 10800,
+  "apiRequestAndReleaseProbe": "passed-both-returned-nonzero",
+  "powershellParserErrors": 0,
+  "osPowerRequestEnumeration": "powercfg /requests requires administrator; unavailable without elevation, no elevation requested",
+  "futureDeadlineActuallyObserved": false,
+  "scope": "Temporary wake request, not a model/strength result; screen may turn off and permanent power settings unchanged",
+  "venvProcessTree": {
+    "supervisorPID": 62880,
+    "venvRedirectorPID": 61520,
+    "actualLearnerPID": 29080,
+    "logicalLearners": 1
+  }
+}

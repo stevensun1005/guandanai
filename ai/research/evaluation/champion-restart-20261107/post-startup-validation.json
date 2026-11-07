@@ -1,0 +1,25 @@
+{
+  "nodeTests": 223,
+  "nodePassed": 223,
+  "pythonResearchTests": 17,
+  "pythonResearchPassed": 17,
+  "format": "passed",
+  "build": "passed",
+  "browser": {
+    "observedAtUTC": "2026-11-07T15:01:40.053Z",
+    "taskCount": 3,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "activeTrainingHistoryLabel": "verified-training-not-registered",
+  "powerRequestAndReleaseAPI": "both-nonzero",
+  "powerShellSyntaxErrors": 0,
+  "OSRequestEnumeration": "not-verified-requires-elevation",
+  "modelRuntimeModified": false
+}

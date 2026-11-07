@@ -43,3 +43,7 @@ node ai/research/tools/research-deadline.mjs --campaign=<上述根目录> --regi
 [授权与验证证据](evaluation/research-campaign-20261107/) · [当前 A/B 实验](WINDOWS_RETURN_20261106.md)
 
 PowerShell 7.6 读取含 ISO 截止的 JSON 时使用 `ConvertFrom-Json -DateKind String`，再按带时区字符串计算剩余时间；默认日期自动转换后再次调用 Parse 可能丢失时区。仍核对注册 JSON 原始 UTC，不能因启动检查失败重开或延长窗口。
+
+当前 Windows 交流电源方案的空闲睡眠为三小时。专用 `research-awake.ps1` 在研究总窗口内提交临时 SYSTEM_REQUIRED 请求（不保持屏幕亮，不改永久电源方案），按原总截止释放，心跳在 `awake-status.json`。取消研究时先核对其中 PID 再停止这一个辅助进程；不能批量终止系统或其他训练。API 请求／释放已实测，`powercfg /requests` 的系统枚举需要提升权限，本次未提升，不能声称已通过该命令独立枚举 OS 请求。实际周三释放尚未发生，不能写成已经测过现实截止。
+
+Windows Python 虚拟环境会出现一层重定向父进程和实际 Python 学习器子进程，同一命令行不等于重复训练。本批启动实查为 supervisor → GPU 环境 Scripts/python.exe → 实际 Python312（状态 PID 29080），应按进程树和状态判断，不误杀正常父子。
