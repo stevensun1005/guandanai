@@ -1858,3 +1858,10 @@ A 在固定截止后 **5.187 秒**完整退出，停止时间 `2026-11-07T09:49:
 ### io48 独立自动恢复与即时开发批次（2026-11-07）
 
 Windows 计划任务 GuanZero-io48-Recovery 已运行，每15秒核对监督器，单实例启动、登录后触发及每分钟补触发。最初任务缺少 Git 路径而退出，补齐既有 Git 的独立执行环境后状态持续 healthy。隔离模拟训练进程验证了完整检查点恢复、存活时跳过、退出后重启和 STOP。原配置与固定截止按完整 SHA 核验。即时冻结 223067，SHA 435e5d494444fcdd73637c3c847706b4fcc46fd92bd9f70124339ef66d26dba7；Clint 和 danMCai-v000855042 各计划500场，独立开发种子4,211,000,000–4,211,000,249。已观察到实际对局，最终成绩待完整报告。[任务与启动证据](evaluation/guanzero-watchdog-20261107.json)。
+
+### 223067 即时开发评测完成
+
+同一冻结 GuanZero 223067 对 Clint 和 danMCai-v000855042 各完成250对／500场。种子4,211,000,000–4,211,000,249，模型与冠军完整 SHA 和 accept330 见[计划](evaluation/guanzero-223067-plan.json)。
+[clint原始逐场记录](evaluation/guanzero-223067-development-500-clint.json)：258胜／191负／51平，整场胜率51.6%，种子簇95%区间[0.472, 0.558]。
+
+[champion原始逐场记录](evaluation/guanzero-223067-development-500-champion.json)：77胜／399负／24平，整场胜率15.4%，种子簇95%区间[0.124, 0.184]。
