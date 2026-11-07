@@ -1,5 +1,7 @@
 # 模型研究与证据
 
+[冠军起点微调的 10,000 局留出](evaluation/champion-restart-20261107/heldout-results.json)已全部完成：直接对原冠军的升级分 +0.0875 [0.0121,0.1629]；共同 Clint 对手和混合队友的差异仍不明确。网页冠军未变；完整分组、原始证据和限制见主报告第 46.7 节及[原始索引](evaluation/champion-restart-20261107/heldout-manifest.json)。
+
 [共享分析层与等价验证](ANALYSIS.md)记录纯描述标签、D1 过滤边界、可选模拟日志和任意评测队友的接口。验证中的开发协议与后续真实结果分开保存，不改变神经网络排名或网页冠军。
 
 阶段 0.1 的[历史整场分歧协议](evaluation/match-objective-divergence-20261107/protocol.json)固定两组 009 网页策略的旧档案；只读规则重放与按牌副簇统计，无新模型对局。运行 `python ai/research/tools/match-objective-divergence.py --protocol=ai/research/evaluation/match-objective-divergence-20261107/protocol.json --out=ai/danMCai/workspace/match-objective-results.json`。结果不得冒称 017 棋力或开启整场训练的授权。

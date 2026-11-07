@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "completedAtUTC": "2026-11-07T19:04:56.208841+00:00",
+  "protocolSHA256": "da651238044d42ae2ebf88b25b90460b0d0649774bf265db7a59fbcd8069a484",
+  "frozenEvaluationCommit": "66dad37514382c3320915ea39abe98735011dd90",
+  "frozenControllerCommit": "0d38fed",
+  "controllerSHA256": "e20f1782bbe364bbb17fac3ee01b6b4153e9436d7ab4fe2df5d981ee41364e25",
+  "sourceAndWeightsUnchanged": true,
+  "workers": [
+    {
+      "slot": 0,
+      "file": "heldout-worker-0.jsonl.gz",
+      "compressedSHA256": "8939e0f498be735b0f9dfb998ee8f182e7521cf0d4235a00e3c6fd2f0951c6d1",
+      "originalSHA256": "63548e6357fb50558c6fcbe93d8be0688433297d7f791f3a45f789cd060ac602",
+      "originalBytes": 745872,
+      "status": {
+        "shard": 0,
+        "pid": 53584,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-mixed-clint",
+        "completedPairs": 1250,
+        "protocolSHA256": "da651238044d42ae2ebf88b25b90460b0d0649774bf265db7a59fbcd8069a484",
+        "updatedAtUTC": "2026-11-07T19:03:11.857Z",
+        "rssBytes": 338952192
+      }
+    },
+    {
+      "slot": 1,
+      "file": "heldout-worker-1.jsonl.gz",
+      "compressedSHA256": "bdecb682d694748537413650c9e4c01f7e5c77de60c4d2a4b14dec092e86c4cc",
+      "originalSHA256": "d32917c56f66e8de2e79f6d5947cc6178d111ca3328d5f68887dbc40b4b0217f",
+      "originalBytes": 745925,
+      "status": {
+        "shard": 1,
+        "pid": 28736,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-mixed-clint",
+        "completedPairs": 1250,
+        "protocolSHA256": "da651238044d42ae2ebf88b25b90460b0d0649774bf265db7a59fbcd8069a484",
+        "updatedAtUTC": "2026-11-07T19:03:11.750Z",
+        "rssBytes": 326643712
+      }
+    },
+    {
+      "slot": 2,
+      "file": "heldout-worker-2.jsonl.gz",
+      "compressedSHA256": "74b8c407060c85708269437a766a8b4bb805bc15dbbe9076a8de94fc47086eea",
+      "originalSHA256": "5c6aaf5a03fca8960dc07b3b3e0adefb6a0c5c21cbf3b0e784cb7c369df7c5d7",
+      "originalBytes": 745937,
+      "status": {
+        "shard": 2,
+        "pid": 7800,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-mixed-clint",
+        "completedPairs": 1250,
+        "protocolSHA256": "da651238044d42ae2ebf88b25b90460b0d0649774bf265db7a59fbcd8069a484",
+        "updatedAtUTC": "2026-11-07T19:03:08.145Z",
+        "rssBytes": 324624384
+      }
+    },
+    {
+      "slot": 3,
+      "file": "heldout-worker-3.jsonl.gz",
+      "compressedSHA256": "98c8b4012d8c9ab55b9e3b92f594e26230562e0800abb32e5a316b9caba1a381",
+      "originalSHA256": "97d3d4aa3bdd6c7cfeb6fb7b5c2d162ef12ed9a3a836f266a51c3174834b994b",
+      "originalBytes": 745974,
+      "status": {
+        "shard": 3,
+        "pid": 30916,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-mixed-clint",
+        "completedPairs": 1250,
+        "protocolSHA256": "da651238044d42ae2ebf88b25b90460b0d0649774bf265db7a59fbcd8069a484",
+        "updatedAtUTC": "2026-11-07T19:03:11.449Z",
+        "rssBytes": 334548992
+      }
+    }
+  ],
+  "webChampionChanged": false,
+  "startupNotes": [
+    {
+      "attempt": 1,
+      "reason": "Canonical danMCai path versus physical ai/local path CLI equality skipped main; no status/workers/games"
+    },
+    {
+      "attempt": 2,
+      "reason": "Same frozen controller export invoked but child CLI guard skipped workers; summarizer rejected missing files; zero games"
+    },
+    {
+      "attempt": 3,
+      "reason": "Same frozen exported controller with NODE_OPTIONS=--preserve-symlinks-main; source, models, seeds and earlier protocol deadline unchanged",
+      "pid": 21880,
+      "actualWorkers": [
+        53584,
+        28736,
+        7800,
+        30916
+      ]
+    }
+  ],
+  "limits": "Positive primary signed-round-point comparison only; no overall, match-level, human or automatic champion claim.",
+  "dashboard": {
+    "observedAtUTC": "2026-11-07T18:56:01.434Z",
+    "taskCount": 4,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  }
+}

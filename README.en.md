@@ -189,3 +189,4 @@ A dedicated Windows watchdog can resume the fixed GuanZero training window after
 
 The owner extended the local GuanZero run through **2026-11-11 10:00 America/Toronto**. Twelve-hour evaluations and same-checkpoint publishing continue under the [authorized window](ai/guanzero/README.md#授权延长窗口).
 Stage-zero match-objective analysis is documented in the [research index](ai/research/README.md) and study section 48. It reanalyses historical model 009, not new results for web champion 017. New training on this Windows machine is limited to danMCai.
+The champion-start danMCai experiment completed 10,000 fresh heldout rounds. Its direct comparison with the original champion improved signed upgrade points; common-Clint and mixed-teammate contrasts remain inconclusive. See [grouped evidence and limitations](ai/research/MODEL_STUDY.md#467-最终学习器-10000-局独立留出完成). Web champion 017 is unchanged; experimental weights are not automatically published.
