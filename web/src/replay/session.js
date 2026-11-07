@@ -239,7 +239,7 @@ export function readGroup(cards, L) {
 }
 
 // a group that makes no play counts as its cards rank by rank (singles, pairs, threes)
-function groupUnits(cards, L) {
+export function groupUnits(cards, L) {
   const u = readGroup(cards, L);
   if (u) return [u];
   const by = new Map();
@@ -262,7 +262,7 @@ function myUnits() {
 
 // your groups in the order the computer's are shown in: bombs first, then runs, then the rest, larger first; groups that
 // make no play last
-function sortGroups(groups, by, L) {
+export function sortGroups(groups, by, L) {
   const key = (gr) => {
     const u = readGroup(
       gr.map((id) => by.get(id)),

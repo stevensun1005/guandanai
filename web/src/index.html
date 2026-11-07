@@ -469,7 +469,7 @@
           <p id="botSetupNote"></p>
         </details>
         <button class="link practice-entry" type="button" id="practiceBtn">
-          训练 · 四家明牌与复盘记录
+          训练 · 配牌、牌局与复盘
         </button>
         <button class="link practice-entry" type="button" id="spectatorBtn">观战</button>
         <div class="lobby-join" id="spectatorRow" hidden>
@@ -491,15 +491,30 @@
       </div>
     </div>
     <dialog id="practiceDialog" class="practice-dialog" aria-labelledby="practiceTitle">
-      <h2 id="practiceTitle">明牌训练</h2>
-      <p>四家明牌，逐步推进。看清牌型、比较出法，也可以保存带评语的复盘记录。</p>
-      <p class="muted">这是单机练习桌。分组估分仅供理牌参考，电脑仍按学习策略出牌。</p>
+      <h2 id="practiceTitle">训练</h2>
+      <p>先选想练的内容，按自己的节奏比较、整理和复盘。</p>
+      <p class="muted">分组参考分不是神经网络评分或胜率。牌局电脑仍按所选模型出牌。</p>
       <p id="practiceRoomNote" class="muted" hidden>进入练习会离开当前朋友房间。</p>
+      <div class="tm-btns">
+        <button class="tm-card" type="button" id="practiceArrange">
+          <b>配牌</b><span>比较分组参考，调整一手牌的组合并保存记录</span>
+        </button>
+        <button class="tm-card" type="button" id="practiceStart">
+          <b>牌局</b><span>四家明牌、逐步出牌，保存带评语的复盘</span>
+        </button>
+        <button class="tm-card" type="button" disabled><b>残局</b><span>还在准备</span></button>
+      </div>
       <form method="dialog" class="btns">
-        <button class="btn" value="cancel">返回</button>
-        <button class="btn primary" type="button" id="practiceStart">进入明牌练习</button>
+        <button class="btn" value="cancel">返回大厅</button>
       </form>
     </dialog>
+    <section
+      class="arr arrange-practice"
+      id="arr"
+      aria-label="配牌训练"
+      tabindex="-1"
+      hidden
+    ></section>
 
     <!-- PeerJS: browser-to-browser connections for playing with friends (room codes) -->
     <section id="spectatorView" aria-label="只读观战牌桌" hidden>

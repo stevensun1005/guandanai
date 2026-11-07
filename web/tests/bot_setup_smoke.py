@@ -7,6 +7,10 @@ from playwright.sync_api import sync_playwright
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8765/"
 OUT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").is_file()) / "web/artifacts/validation/bot-setup"
 OUT.mkdir(parents=True, exist_ok=True)
+source = json.loads((OUT.parents[3] / 'web/src/ai/model-catalog.json').read_text(encoding='utf8'))
+guanzero = [m['id'] for m in source['models'] if m['config'].get('history') == 'guanzero-v1'][-2:][::-1]
+baseline = next(m['id'] for m in source['models'] if m['source']['version'] == 'P0')
+expected_choices = ['clint-rule', *guanzero, baseline, *source['selection']['danMCaiChampions']]
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, channel="chrome")
     reports = []
@@ -22,8 +26,8 @@ with sync_playwright() as p:
         page.goto(URL, wait_until="networkidle")
         catalog = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()
         labels = [choice['name'] for choice in catalog['choices']]
-        assert [c['id'] for c in catalog['choices']] == ['clint-rule','016','015','001','017','012']
-        assert catalog['defaultId'] == '017'
+        assert [c['id'] for c in catalog['choices']] == expected_choices
+        assert catalog['defaultId'] == source['defaultId'] == source['selection']['danMCaiChampions'][0]
         assert all(page.locator(f'[data-bot-seat={s}]').input_value()==catalog['defaultId'] for s in ['S','E','N','W'])
         assert page.evaluate("typeof G") == "undefined"
         assert page.locator('.mode-btn[aria-pressed="true"]').get_attribute("data-mode") == "solo"

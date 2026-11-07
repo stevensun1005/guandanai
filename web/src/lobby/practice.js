@@ -4,9 +4,13 @@ import { enterPractice } from '../replay/session.js';
 import { nickNow, setMode } from './lobby.js';
 import { prepareBotModels } from './bot-setup.js';
 import { $ } from '../ui/cards.js';
+import { openArrangement, initialize as initializeArrangement } from '../practice/arrangement.js';
+import { leaveNet } from '../network/rooms.js';
+import { forgetSeat } from '../network/rejoin-storage.js';
 
 export function initialize() {
   const dialog = $('#practiceDialog');
+  initializeArrangement();
   $('#practiceBtn').onclick = () => {
     $('#practiceRoomNote').hidden = runtime.lobbyMode === 'solo';
     dialog.showModal();
@@ -20,5 +24,17 @@ export function initialize() {
     Sound.unlock();
     dialog.close();
     enterPractice();
+  };
+  $('#practiceArrange').onclick = () => {
+    leaveNet();
+    forgetSeat();
+    if (runtime.lobbyMode !== 'solo') setMode('solo');
+    Sound.unlock();
+    dialog.close();
+    $('#lobby').hidden = true;
+    openArrangement(() => {
+      $('#lobby').hidden = false;
+      dialog.showModal();
+    });
   };
 }

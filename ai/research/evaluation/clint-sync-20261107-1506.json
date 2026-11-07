@@ -1,0 +1,516 @@
+{
+  "schema": 1,
+  "kind": "ui-training-exercise-compatibility-not-strength",
+  "observedAtUTC": "2026-11-07T15:32:56.921497+00:00",
+  "mainBaseCommit": "45758c6d556c3940421bd18ed82b4e6f89e70477",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "previousSuccessfulSHA": "2b2878b62d18171a27b342308514d2d53da4d678",
+    "checkedSHA": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1",
+    "commits": [
+      "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1"
+    ],
+    "reviewedFiles": [
+      "index.html",
+      "guandan.html"
+    ],
+    "sourceAudit": {
+      "before": "2b2878b62d18171a27b342308514d2d53da4d678",
+      "after": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1",
+      "method": "Full actual HTML diffs plus Acorn top-level declaration SHA-256, both entry points",
+      "changedFunctions": [],
+      "addedFunctions": [
+        "arrOpen",
+        "arrDeal",
+        "arrIds",
+        "arrOrder",
+        "arrComp",
+        "arrMine",
+        "arrAuto",
+        "arrTidy",
+        "arrEdit",
+        "arrName",
+        "arrText",
+        "arrLayout",
+        "arrRowsHTML",
+        "arrRender",
+        "arrTop",
+        "arrSeatHTML",
+        "arrSumHTML",
+        "arrToast",
+        "arrDone",
+        "arrDb",
+        "arrRecText",
+        "arrAllText",
+        "arrSave",
+        "arrCopy"
+      ],
+      "changedExistingVariables": [
+        "VERSION"
+      ],
+      "entryPointDeclarationsEquivalentExceptVersion": true,
+      "ruleFunctionsUnchanged": true,
+      "ruleFingerprint": {
+        "aiChoose": "a81cf43fce8e497f6ec2a0d080bc550953eae42706b5fd8862d2a484b8c1540a",
+        "aiLead": "17a5a43349f97d38ab82ec0358e8aac7815872a6434444e00d4505e32c74a8ab",
+        "mateBeatenKinds": "47f21f89a94164dec1fb11cba032356d70e992b6b3ebf1da3f430a27d96575cf",
+        "smallSingle": "8debfcbaed92f33e0914553e6dc9d017f61f8ebb1523174a0277eaf43a5c5d3e"
+      }
+    },
+    "adapted": [
+      "three practice choices with endgame disabled",
+      "separate computer/manual grouping panels, one seat at a time",
+      "group/split/join/restore and highlighted differences",
+      "four-seat finish/skip/re-record/summary and next-deal level choice",
+      "500 local assisted exercise records and text/copy export",
+      "keyboard selection, quota feedback, physical-card partition validation and desktop/tablet/phone layouts"
+    ],
+    "notApplicable": [
+      {
+        "change": "upstream password before training",
+        "reason": "Preserve the existing public practice entry, no new gate"
+      },
+      {
+        "change": "viewer-specific window.claude database writes",
+        "reason": "No such integration here; local exercise records and explicit export remain isolated from D1 and frozen training"
+      },
+      {
+        "change": "hardcoded VERSION and duplicate HTML application scripts",
+        "reason": "Keep content build hash and modular project"
+      },
+      {
+        "change": "treat grouping score as neural probability or automatically train on changed groups",
+        "reason": "UI-only heuristic reference, assisted=true; no learning claims or data ingestion"
+      }
+    ],
+    "remainingImplementationItems": []
+  },
+  "unchangedSourceHashConvention": "Git UTF-8 LF bytes; CRLF normalized for local comparison",
+  "neuralCoreAndRulesUnchanged": {
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/controller.js": "dce5dfacb8ce0b0ac59f64a4d12ebbe438f8137b91b2458e4743f8f3cce0b7ee",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+    "web/src/ai/model-catalog.json": "e3c5eeb0a5380345dde82e9daf05458fe756245436f92180603f3fd86c353c22",
+    "web/src/ai/model-catalog.mjs": "8265bcd26858112a747c0bea7263d807dd6942a5a41e61f687720b4428add7a2",
+    "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+    "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+    "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/tribute-model.json": "f99ef55d3bf7c128fc595f2c019e6831d9be1cb8873627dca4ee85b59a117383",
+    "web/src/ai/tribute-observation.mjs": "003e540856a8f7cd5e3f5bce44a592b7e2e5089fb3ded60cd9c2bca3ec7c3285",
+    "web/src/ai/tribute-specialist.mjs": "e5439246020316b80b6522cab4edf644bf9a768cfb13e08fb34ab070fb2bd83b",
+    "web/src/ai/tribute-worker.mjs": "2aa3e1525125821a0d21c3779c4bfd6a0a8dca135657da92e16205b29543aba2",
+    "web/src/ai/worker.mjs": "451feb49b197ac26149b3cbdfe256119e6321612d683d4a0db8782cc72b5f0e0",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/core/validation.js": "f12723cca66b153086ef7ea9be668e69ac6638ee1378b2e2990c4431f8de6abb",
+    "web/src/rule-bot/README.md": "aeca0ca9e3c41932d9dc6682958c97926834b449d52147ee85ebb70576be77cc",
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/runtime.mjs": "c7b5e99eeeff7b77fbb8955529852ea12b9e8685447d8f162bd9127c47a7ae52",
+    "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+    "web/src/rule-bot/strategy.js": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72",
+    "web/src/rule-bot/timeout.js": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b"
+  },
+  "frozenActiveTraining": {
+    "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\champion-restart-runtime-20261107",
+    "sourceSHA256Verified": true,
+    "configSHA256Verified": true,
+    "deadlineUnchanged": "2026-11-07T18:51:53.792Z"
+  },
+  "ownerDraftFilesPreserved": 10,
+  "catalogAndDefaultUnchanged": true,
+  "webVersion": "b6e7b6537c",
+  "tests": {
+    "node": {
+      "passed": 225,
+      "total": 225
+    },
+    "pythonResearch": {
+      "passed": 17,
+      "total": 17
+    },
+    "format": "passed",
+    "build": "passed",
+    "arrangement": {
+      "publicMenu": true,
+      "physicalCardsPreserved": true,
+      "groupSplitJoinRestore": true,
+      "keyboardSelection": true,
+      "fourSeatRecords": true,
+      "exportedRecords": 4,
+      "assistedLabels": true,
+      "quotaFeedback": true,
+      "quotaExportAvailable": true,
+      "returnToLearnedTable": true,
+      "cloudUploads": 0,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "pageErrors": []
+    },
+    "practice": {
+      "publicPracticeEntry": true,
+      "learnedTurns": 5,
+      "annotatedExport": true,
+      "freshBrowserImport": true,
+      "corruptRecordsSkipped": true,
+      "quotaFeedback": true,
+      "legacyMigration": true,
+      "pageErrors": []
+    },
+    "production": {
+      "productionGlobalsHidden": true,
+      "policyTurns": 3,
+      "successfulModelIds": [
+        "001",
+        "017"
+      ],
+      "pageErrors": []
+    },
+    "modelMenu": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      }
+    ],
+    "clintAndFiveWasm": {
+      "actualRuleReplies": 6,
+      "allRuleGameNeuralDownloads": 0,
+      "wasmModels": [
+        "020",
+        "019",
+        "001",
+        "017",
+        "012"
+      ],
+      "strategyFixtures": {
+        "singleAlong": {
+          "type": "single",
+          "value": 14
+        },
+        "levelFirst": {
+          "type": "single",
+          "value": 15
+        },
+        "firstJoker": null,
+        "tributeException": {
+          "type": "single",
+          "value": 17
+        }
+      },
+      "fixtureScope": "Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+      "pageErrors": []
+    },
+    "rejoin": {
+      "hostDirection": "W",
+      "guestDirection": "S",
+      "refreshDuringPrep": true,
+      "manualRoomCodeRecovery": true,
+      "selectedLevelAndOnceRuleSync": true,
+      "refreshDuringInFlightPolicy": true,
+      "stalePolicyCancelled": true,
+      "realGuestActionAfterReturn": true,
+      "dataChannelAutomaticRecovery": true,
+      "unknownSeatRejected": true,
+      "sameCredential": true,
+      "guestAvoidsModelDownload": true,
+      "hostExitOffersSoloContinuation": true,
+      "soloContinuationLoadsLearnedPolicy": true,
+      "pageErrors": []
+    },
+    "coach": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "hostDeniedEnforced": true,
+      "scoring": {
+        "modelId": "017",
+        "candidates": 11,
+        "minValue": -1.4260289669036865,
+        "maxValue": -0.9147675037384033,
+        "topFiveVisible": true,
+        "topFiveClickSelectsOnly": true,
+        "topFiveExposureMarked": true,
+        "viewTeamLevelsChecked": true,
+        "teamLevels": {
+          "self": 2,
+          "opponent": 7
+        },
+        "relativeExtremaChecked": true,
+        "selectionUsesCachedValues": true,
+        "invalidSelectionNotRated": true,
+        "disabledStaleReplyIgnored": true,
+        "injectedFailureNotScored": true,
+        "retrySucceeded": true
+      },
+      "postMoveRetained": true,
+      "independentPlayerPreferences": true,
+      "assistedEventMarked": true,
+      "realPeerJSDataChannel": true,
+      "hostWGuestS": true,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "bounds": {
+            "x": 16,
+            "y": 656.203125,
+            "width": 954,
+            "height": 53
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "bounds": {
+            "x": 16,
+            "y": 580,
+            "width": 302,
+            "height": 61
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "bounds": {
+            "x": 16,
+            "y": 165.0625,
+            "width": 682,
+            "height": 46
+          }
+        }
+      ],
+      "rejoinRestoresPermissionAndPreference": true,
+      "pageErrors": []
+    },
+    "privateTool": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "completedRounds": 0,
+      "trainingUpdates": 0,
+      "realPeerJS": true,
+      "hostOnlyNicknameGate": true,
+      "guestSameNameDenied": true,
+      "noPrivateRuleFlagBroadcast": true,
+      "privateCoach": {
+        "modelId": "017",
+        "search": {
+          "candidates": 3,
+          "evaluated": 3,
+          "mode": "round",
+          "horizon": 4,
+          "maxPlies": 12,
+          "leafSeat": "advising player, or partner after finishing",
+          "mismatchedLeaves": 0,
+          "fullRollouts": 29,
+          "minRollouts": 9,
+          "truncatedRollouts": 0,
+          "maxSamples": 12,
+          "priorWeight": 4,
+          "temperature": 0.03,
+          "elapsedMs": 2523,
+          "fullInformation": true
+        }
+      },
+      "partnerUsesOracle": true,
+      "opponentStaysRules": true,
+      "neuralOpponentUsesOnlyPublicObservation": true,
+      "manualOutsideBeamRated": false,
+      "offRestoresPartnerRules": true,
+      "privateHandsMatchHeldCounts": true,
+      "constructedCompletionExcluded": true,
+      "uploads": 0,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "topFiveInViewport": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "spectators": {
+      "roomCodeShown": true,
+      "twoHumansRemainTwo": true,
+      "spectatorCannotActSitRecoverOrSync": true,
+      "unseatedReceivesNoGameBroadcast": true,
+      "incompatibleVersionRejected": true,
+      "spectatorNeuralDownloads": 0,
+      "publicSnapshotsOnly": true,
+      "guestRecoveryWhileWatching": true,
+      "twoPlayerAudioLines": true,
+      "hostVoiceLockAndUnlock": true,
+      "nextRoundFreshState": true,
+      "nicknamesAndBlackNames": true,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "hostExitEndsSpectating": true,
+      "pageErrors": [],
+      "purpose": "Browser interaction/security regression, no strength evaluation or real human training data"
+    },
+    "collection": {
+      "stage": "predeployment-local-build",
+      "kind": "test",
+      "humanTrainingGames": 0,
+      "actions": 100,
+      "actorCounts": {
+        "human": 46,
+        "bot": 53,
+        "timeout": 1
+      },
+      "hostUploads": 1,
+      "duplicateAcknowledged": true,
+      "anonymousReadDenied": true,
+      "preEndUploads": 0,
+      "pageErrors": []
+    }
+  },
+  "initialValidationIssues": [
+    {
+      "test": "arrangement smoke storage restore",
+      "result": "Playwright invoked returned native setItem function, Illegal invocation",
+      "repair": "Use a block callback with no returned native function; full smoke rerun passed"
+    },
+    {
+      "test": "existing practice undo",
+      "result": "First attempt timed out at exact n-1 check, immediate rerun passed",
+      "repair": "Wait for current log step snapshot to settle before reading undo count; producer code unchanged, full revised smoke passed"
+    },
+    {
+      "test": "existing menu smoke",
+      "result": "Hardcoded 016/015 disagreed with current 019/018",
+      "repair": "Derive expected latest two GuanZero entries and champion default from source catalog, compare built UI; source catalog unchanged"
+    },
+    {
+      "test": "collection in clean detached tree",
+      "result": "Default private token fixture absent, no collection test started",
+      "repair": "Use ignored owner token file explicitly with local-build routing; test-kind upload, dedup and private export passed; no token copied or committed"
+    }
+  ],
+  "strengthMatches": 0,
+  "trainingUpdates": 0,
+  "deployment": {
+    "status": "pending-confirmation",
+    "successCursorAdvanced": false,
+    "validatedMergedSourceBeforePush": true
+  },
+  "initialMainBaseCommit": "55d267d1f37504cfe5e65f5892da36c385f5e436",
+  "concurrentUpdate": {
+    "commits": [
+      "df6a39e",
+      "45758c6"
+    ],
+    "scope": "GuanZero 020/223067 publication and live SHA evidence preserved; both research and changelog additions kept when rebasing.",
+    "danMCaiDefaultUnchanged": "017"
+  },
+  "preMergeCompatibility": {
+    "menu": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      }
+    ],
+    "clintAndFiveWasm": {
+      "actualRuleReplies": 6,
+      "allRuleGameNeuralDownloads": 0,
+      "wasmModels": [
+        "019",
+        "018",
+        "001",
+        "017",
+        "012"
+      ],
+      "strategyFixtures": {
+        "singleAlong": {
+          "type": "single",
+          "value": 14
+        },
+        "levelFirst": {
+          "type": "single",
+          "value": 15
+        },
+        "firstJoker": null,
+        "tributeException": {
+          "type": "single",
+          "value": 17
+        }
+      },
+      "fixtureScope": "Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+      "pageErrors": []
+    }
+  }
+}

@@ -46,6 +46,8 @@ with sync_playwright() as p:
         page.wait_for_timeout(100)
     assert page.evaluate("G.log.length>=6")
     page.wait_for_function("() => !document.querySelector('#undoBtn').disabled")
+    # A move's log can arrive before its next-turn snapshot. Inspect only a settled step.
+    page.wait_for_function("() => TSNAP.at(-1)?.log.length===G.log.length")
     before_undo = page.evaluate('G.log.length')
     page.locator('#undoBtn').click()
     page.wait_for_function('n => G.log.length===n-1', arg=before_undo)

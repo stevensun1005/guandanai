@@ -132,3 +132,7 @@ Top 5 由评价缓存排序，同点数方案保留最佳花色变体，推荐�
 `ui/viewport.js` 合并尺寸事件，在尺寸真的改变时重排，并对晚到的旋转尺寸进行检查。名字牌按实际几何中心对齐，全屏和旋转不写 viewport meta；诊断显示仅在 `#debug` 打开。
 
 Clint 的真人超时通过独立 `rule-timeout` Worker 消息进入 `rule-bot/timeout.js`。只有所选模型为 Clint 且真人超时才使用它；普通 Clint 回合仍走 `rule`，danMCai／GuanZero 仍走 `decide`，房主独立明牌路径优先。候选生成、编码、网络打牌评分与训练未加入这套超时规则。
+
+## 独立配牌练习
+
+`lobby/practice.js` 处理训练种类选择；`practice/groups.mjs` 校验完整实体牌分区与记录，`practice/arrangement.js` 管理一次一家的编辑、对照、总结及本机持久化，`styles/arrangement-practice.css` 适配桌面／触屏。复用原理牌展示函数，`replay/session.js` 仅额外导出既有 `groupUnits`／`sortGroups`；不改变其实现或任何规则／神经网络决策。配牌数据的 key 与牌局复盘不同，辅助标签固定为 true，不接入 D1 或活跃训练。
