@@ -1,3 +1,4 @@
+import { validateWindow } from './window.mjs';
 /** Register one twelve-hour io48 checkpoint using the evaluator pinned by its launcher. */
 import {
   mkdirSync,
@@ -16,24 +17,15 @@ import { addSuite } from './development-suite.mjs';
 import { setTimeout as sleep } from 'node:timers/promises';
 
 export function windowSlot(window, now) {
-  const start = Date.parse(window.startedAt);
-  const end = Date.parse(window.plannedEnd);
-  if (
-    window.hours !== 48 ||
-    end - start !== 48 * 3600000 ||
-    Date.parse(window.midpointAt) !== start + 24 * 3600000 ||
-    window.seedIndex !== 5100
-  )
-    throw Error('Unexpected training window or seed reservation');
-  const slot = Math.min(4, Math.floor((now - start) / (12 * 3600000)));
+  const { start, end } = validateWindow(window);
+  const final = now >= end;
+  const slot = final
+    ? Math.ceil((end - start) / (12 * 3600000))
+    : Math.floor((now - start) / (12 * 3600000));
   if (slot < 1) throw Error('No evaluation due yet');
-  // Keep the existing first suite, the reserved midpoint and the final seed blocks.
-  const seedOffsets = [-2, 0, 1, 3];
-  return {
-    slot,
-    index: window.seedIndex + seedOffsets[slot - 1],
-    due: start + slot * 12 * 3600000,
-  };
+  const historical = [5098, 5100, 5101, 5103];
+  const index = final && window.extension ? 5150 : (historical[slot - 1] ?? 5120 + slot - 5);
+  return { slot, index, final, due: final ? end : start + slot * 12 * 3600000 };
 }
 
 async function register(launcherPath, armMidpoint) {
@@ -66,7 +58,7 @@ async function register(launcherPath, armMidpoint) {
     if (Date.now() < target) await sleep(target - Date.now());
     if (Date.now() >= midpoint - 10000) throw Error('Too late to stage the midpoint safely');
   }
-  const { slot, index, due } = windowSlot(window, armMidpoint ? midpoint : Date.now());
+  const { slot, index, due, final } = windowSlot(window, armMidpoint ? midpoint : Date.now());
   const directory = join(run, 'eval', 'development-500');
   const path = join(directory, 'manifest.json');
   const lock = join(directory, '.window-registration.lock');
@@ -83,9 +75,9 @@ async function register(launcherPath, armMidpoint) {
     }
     if (Date.now() - due > 2 * 3600000)
       throw Error('Missed freeze window; do not backfill with a newer export');
-    if (slot === 4 && existsSync(join(run, 'supervisor.lock')))
+    if (final && existsSync(join(run, 'supervisor.lock')))
       throw Error('Wait for final training export');
-    if (slot < 4 && existsSync(join(run, 'STOP'))) throw Error('Training stopped early');
+    if (!final && existsSync(join(run, 'STOP'))) throw Error('Training stopped early');
     if (slot > 2 && !existsSync(join(run, 'eval', 'midpoint-complete.json')))
       throw Error('Wait for the midpoint supervisor');
     // The frozen one-shot worker only reads registered suites for this window.

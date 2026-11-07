@@ -180,3 +180,5 @@ GuanZero can resume its optimizer and sample cursor in a fixed training window a
 Research continuation games use the verified danMCai champion frozen at batch start. Teacher changes and inherited work are tracked in the [specialist protocol](ai/shared/tribute/README.md).
 
 A dedicated Windows watchdog can resume the fixed GuanZero training window after a supervisor exit. See [recovery](ai/guanzero/README.md#自动恢复) for checkpoint checks, the stop control and the original deadline.
+
+The owner extended the local GuanZero run through **2026-11-11 10:00 America/Toronto**. Twelve-hour evaluations and same-checkpoint publishing continue under the [authorized window](ai/guanzero/README.md#授权延长窗口).

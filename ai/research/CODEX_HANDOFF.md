@@ -344,3 +344,5 @@ io48 每十二小时评测已从 138506 的五组切换为186280 的三组、后
 入口 [TRIBUTE_MAC_HANDOFF.md](TRIBUTE_MAC_HANDOFF.md)。新包 `danMCai-tribute-windows-20261106.zip` 与 `.zip.sha256` 位于 Windows `D:\vibecoding\guandan-transfer\`，约 41.2 MiB，51,734 个负载文件完整校验；网络与 Adam 在 Windows CPU 恢复一致。旧数据和代码未改，Mac 专项 MPS 接入和新限时协议仍待完成，不是延长已结束的旧窗口，也不覆盖现有 Mac 主训练。先读该文档，不能直接调用硬编码 CUDA／旧截止的启动器。
 
 GuanZero io48 已增加独立 Windows 自动恢复任务，原窗口与检查点恢复规则见[GuanZero 自动恢复](../guanzero/README.md#自动恢复)。当前手动开发批次另用 4,211,000,000 起的独立种子。
+
+GuanZero所有者已明确延期至2026-11-11 10:00 Toronto，覆盖旧48小时截止。新window.extension、12小时评测和独立恢复任务以[活动授权窗口](../guanzero/README.md#授权延长窗口)为准。

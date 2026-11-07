@@ -188,3 +188,5 @@ GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗�
 研究中需要神经网络续打时，采用批次启动时已核验的 danMCai 门控冠军；教师切换与数据继承见 [专项协议](ai/shared/tribute/README.md)。
 
 GuanZero 固定窗口支持独立 Windows 自动恢复任务。监督器退出后校验检查点并继续训练，操作与截止规则见[恢复说明](ai/guanzero/README.md#自动恢复)。
+
+本机 GuanZero 延长至多伦多时间 **2026-11-11 10:00**，后续评测和同权重发布继续每12小时，自动恢复按[活动窗口](ai/guanzero/README.md#授权延长窗口)执行。

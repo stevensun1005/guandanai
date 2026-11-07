@@ -1,3 +1,4 @@
+import { validateWindow } from './window.mjs';
 /** Windows watchdog for an existing fixed GuanZero training window. */
 import {
   existsSync,
@@ -68,11 +69,7 @@ export async function watch({ run, runtime, control, once = false }) {
   const original = { config: await hash(configFile), window: await hash(windowFile) };
   const window = read(windowFile),
     config = read(configFile);
-  if (
-    window.hours !== 48 ||
-    Date.parse(window.plannedEnd) - Date.parse(window.startedAt) !== 48 * 3600000
-  )
-    throw Error('Unexpected fixed training window');
+  validateWindow(window);
   const commit = execFileSync('git', ['rev-parse', 'HEAD'], {
     cwd: runtime,
     encoding: 'utf8',

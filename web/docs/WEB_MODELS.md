@@ -89,3 +89,5 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 ## Clint 策略身份
 
 菜单中的 Clint 始终指独立 `rules-v2` 路线；路线名称不固定其全部历史策略。当前源码修订与比较边界见 [规则模块](../src/rule-bot/README.md#公开牌史策略更新) 和 [同步状态](../../ai/research/evaluation/clint-sync-state.json)。更新 Clint 不改六项菜单、冠军默认或神经网络权重。旧开发／独立成绩继续绑定当时的三个规则源码指纹。
+
+本机GuanZero周期发布持续至所有者授权的2026-11-11 10:00 Toronto训练截止，最后评测与部署在最终完整导出后执行。[活动窗口](../../ai/guanzero/README.md#授权延长窗口)。
