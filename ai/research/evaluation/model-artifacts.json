@@ -4853,7 +4853,7 @@
   "windowsExperimentRuns": [
     {
       "id": "windows-ab-20261107",
-      "status": "training-A",
+      "status": "training-B",
       "hoursPerArm": 4,
       "order": [
         "A",
@@ -4865,7 +4865,13 @@
       "preparedExperiment": "windows-ab-20261106",
       "webChampionHold": "017",
       "independentCompletedRoundsAtLaunch": 0,
-      "dashboard": "http://127.0.0.1:8766/"
+      "dashboard": "http://127.0.0.1:8766/",
+      "AStopEvidence": "ai/research/evaluation/windows-ab-20261107/arm-A-stop.json",
+      "transitionEvidence": "ai/research/evaluation/windows-ab-20261107/transition-A-B.json",
+      "AEnded": "2026-11-07T09:49:37.740Z",
+      "AUpdates": 96056,
+      "AExportSHA256": "7fdadb492891c8557faf3c10ea5eca6145b67578e27d5aaba74cdad200d0b50e",
+      "BDeadlineUTC": "2026-11-07T13:49:37.798Z"
     }
   ]
 }

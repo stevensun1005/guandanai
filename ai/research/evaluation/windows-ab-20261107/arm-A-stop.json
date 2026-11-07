@@ -1,0 +1,793 @@
+{
+  "schema": 1,
+  "arm": "A",
+  "kind": "completed-training-window-not-independent-strength",
+  "observedAtUTC": "2026-11-07T09:55:08.802538+00:00",
+  "schedule": {
+    "startUTC": "2026-11-07T05:49:32.553Z",
+    "deadlineUTC": "2026-11-07T09:49:32.553Z",
+    "durationHours": 4,
+    "restartExtendsDeadline": false,
+    "authorization": "Owner 2026-11-07: A then B, four hours each, reserve 4 GiB, live dashboard, then preregistered independent evaluation and research publication; do not change web champion."
+  },
+  "stoppedAtUTC": "2026-11-07T09:49:37.740Z",
+  "exitDelayAfterDeadlineSeconds": 5.187,
+  "latest": {
+    "version": "v001109962",
+    "file": "v001109962.onnx",
+    "sha256": "7fdadb492891c8557faf3c10ea5eca6145b67578e27d5aaba74cdad200d0b50e",
+    "step": 1109962,
+    "trainedRows": 2273202176,
+    "ingestedRows": 568300661,
+    "publishedAt": "2026-11-07T09:49:33Z"
+  },
+  "checkpointSHA256": "0464ab4dd3f49b1fb8bf71c7daf2e9a080655bad20c5468373a3c2f23698597a",
+  "inheritedStep": 1013906,
+  "newUpdates": 96056,
+  "newIngestedRows": 49180317,
+  "newTrainedRows": 196722688,
+  "trainedRows": 2273202176,
+  "ingestedRows": 568300661,
+  "modelMatchesCheckpointExactly": true,
+  "adamStates": 12,
+  "adamFiniteAndStepsMatch": true,
+  "samplerObservations": [
+    {
+      "slot": 0,
+      "inference": {
+        "batches": 5650236,
+        "decisions": 14297742,
+        "rows": 627730861,
+        "runMs": 10245016.760900317,
+        "prepareMs": 572959.2688022415,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 49896,
+        "sessionsReleased": 49890,
+        "peakSessions": 6
+      }
+    },
+    {
+      "slot": 1,
+      "inference": {
+        "batches": 6020806,
+        "decisions": 15328044,
+        "rows": 672860430,
+        "runMs": 10387595.430101143,
+        "prepareMs": 606424.8739991533,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 37546,
+        "sessionsReleased": 37540,
+        "peakSessions": 6
+      }
+    },
+    {
+      "slot": 2,
+      "inference": {
+        "batches": 5645303,
+        "decisions": 14552677,
+        "rows": 638642567,
+        "runMs": 10202558.91640144,
+        "prepareMs": 580378.3636992394,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 47390,
+        "sessionsReleased": 47384,
+        "peakSessions": 6
+      }
+    },
+    {
+      "slot": 3,
+      "inference": {
+        "batches": 5886470,
+        "decisions": 14826798,
+        "rows": 651134246,
+        "runMs": 10434865.461598767,
+        "prepareMs": 595293.6384989797,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 40775,
+        "sessionsReleased": 40769,
+        "peakSessions": 6
+      }
+    }
+  ],
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 51304,
+      "matches": 24880,
+      "decisions": 11909075,
+      "failures": 0,
+      "nextSeed": 8024880,
+      "shardSequence": 6332,
+      "uniqueLoggedSeeds": 24880,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 1,
+      "pid": 59416,
+      "matches": 26629,
+      "decisions": 12768040,
+      "failures": 0,
+      "nextSeed": 8026629,
+      "shardSequence": 6403,
+      "uniqueLoggedSeeds": 26629,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 2,
+      "pid": 51032,
+      "matches": 25356,
+      "decisions": 12183434,
+      "failures": 0,
+      "nextSeed": 8025356,
+      "shardSequence": 6278,
+      "uniqueLoggedSeeds": 25356,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 3,
+      "pid": 62988,
+      "matches": 25726,
+      "decisions": 12329425,
+      "failures": 0,
+      "nextSeed": 8025726,
+      "shardSequence": 5639,
+      "uniqueLoggedSeeds": 25726,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "shards": {
+    "manifests": {
+      "a00-000006302.json": {
+        "rows": 16992,
+        "matches": 34
+      },
+      "a00-000006303.json": {
+        "rows": 16517,
+        "matches": 36
+      },
+      "a00-000006304.json": {
+        "rows": 16729,
+        "matches": 30
+      },
+      "a00-000006305.json": {
+        "rows": 16695,
+        "matches": 38
+      },
+      "a00-000006306.json": {
+        "rows": 16533,
+        "matches": 34
+      },
+      "a00-000006307.json": {
+        "rows": 16712,
+        "matches": 36
+      },
+      "a00-000006308.json": {
+        "rows": 16520,
+        "matches": 38
+      },
+      "a00-000006309.json": {
+        "rows": 16678,
+        "matches": 34
+      },
+      "a00-000006310.json": {
+        "rows": 16412,
+        "matches": 33
+      },
+      "a00-000006311.json": {
+        "rows": 16509,
+        "matches": 36
+      },
+      "a00-000006312.json": {
+        "rows": 16550,
+        "matches": 36
+      },
+      "a00-000006313.json": {
+        "rows": 16961,
+        "matches": 38
+      },
+      "a00-000006314.json": {
+        "rows": 16546,
+        "matches": 37
+      },
+      "a00-000006315.json": {
+        "rows": 16763,
+        "matches": 34
+      },
+      "a00-000006316.json": {
+        "rows": 16515,
+        "matches": 34
+      },
+      "a00-000006317.json": {
+        "rows": 16570,
+        "matches": 32
+      },
+      "a00-000006318.json": {
+        "rows": 16590,
+        "matches": 33
+      },
+      "a00-000006319.json": {
+        "rows": 16443,
+        "matches": 35
+      },
+      "a00-000006320.json": {
+        "rows": 16680,
+        "matches": 31
+      },
+      "a00-000006321.json": {
+        "rows": 16953,
+        "matches": 41
+      },
+      "a00-000006322.json": {
+        "rows": 16418,
+        "matches": 33
+      },
+      "a00-000006323.json": {
+        "rows": 16569,
+        "matches": 38
+      },
+      "a00-000006324.json": {
+        "rows": 16747,
+        "matches": 32
+      },
+      "a00-000006325.json": {
+        "rows": 16685,
+        "matches": 41
+      },
+      "a00-000006326.json": {
+        "rows": 16504,
+        "matches": 36
+      },
+      "a00-000006327.json": {
+        "rows": 16384,
+        "matches": 30
+      },
+      "a00-000006328.json": {
+        "rows": 16548,
+        "matches": 33
+      },
+      "a00-000006329.json": {
+        "rows": 16991,
+        "matches": 33
+      },
+      "a00-000006330.json": {
+        "rows": 16461,
+        "matches": 31
+      },
+      "a00-000006331.json": {
+        "rows": 4589,
+        "matches": 9
+      },
+      "a01-000006371.json": {
+        "rows": 16627,
+        "matches": 35
+      },
+      "a01-000006372.json": {
+        "rows": 16610,
+        "matches": 37
+      },
+      "a01-000006373.json": {
+        "rows": 16420,
+        "matches": 31
+      },
+      "a01-000006374.json": {
+        "rows": 16563,
+        "matches": 32
+      },
+      "a01-000006375.json": {
+        "rows": 17181,
+        "matches": 32
+      },
+      "a01-000006376.json": {
+        "rows": 16486,
+        "matches": 36
+      },
+      "a01-000006377.json": {
+        "rows": 16469,
+        "matches": 35
+      },
+      "a01-000006378.json": {
+        "rows": 16939,
+        "matches": 42
+      },
+      "a01-000006379.json": {
+        "rows": 16598,
+        "matches": 34
+      },
+      "a01-000006380.json": {
+        "rows": 16937,
+        "matches": 34
+      },
+      "a01-000006381.json": {
+        "rows": 16885,
+        "matches": 33
+      },
+      "a01-000006382.json": {
+        "rows": 17032,
+        "matches": 33
+      },
+      "a01-000006383.json": {
+        "rows": 16600,
+        "matches": 37
+      },
+      "a01-000006384.json": {
+        "rows": 16953,
+        "matches": 39
+      },
+      "a01-000006385.json": {
+        "rows": 16899,
+        "matches": 37
+      },
+      "a01-000006386.json": {
+        "rows": 16476,
+        "matches": 32
+      },
+      "a01-000006387.json": {
+        "rows": 16795,
+        "matches": 34
+      },
+      "a01-000006388.json": {
+        "rows": 16835,
+        "matches": 40
+      },
+      "a01-000006389.json": {
+        "rows": 16656,
+        "matches": 35
+      },
+      "a01-000006390.json": {
+        "rows": 16871,
+        "matches": 37
+      },
+      "a01-000006391.json": {
+        "rows": 16545,
+        "matches": 36
+      },
+      "a01-000006392.json": {
+        "rows": 16626,
+        "matches": 37
+      },
+      "a01-000006393.json": {
+        "rows": 16544,
+        "matches": 35
+      },
+      "a01-000006394.json": {
+        "rows": 16625,
+        "matches": 34
+      },
+      "a01-000006395.json": {
+        "rows": 16673,
+        "matches": 38
+      },
+      "a01-000006396.json": {
+        "rows": 16834,
+        "matches": 35
+      },
+      "a01-000006397.json": {
+        "rows": 17082,
+        "matches": 33
+      },
+      "a01-000006398.json": {
+        "rows": 16851,
+        "matches": 38
+      },
+      "a01-000006399.json": {
+        "rows": 16463,
+        "matches": 35
+      },
+      "a01-000006400.json": {
+        "rows": 16694,
+        "matches": 37
+      },
+      "a01-000006401.json": {
+        "rows": 16438,
+        "matches": 33
+      },
+      "a01-000006402.json": {
+        "rows": 10221,
+        "matches": 22
+      },
+      "a02-000006247.json": {
+        "rows": 16570,
+        "matches": 37
+      },
+      "a02-000006248.json": {
+        "rows": 16439,
+        "matches": 35
+      },
+      "a02-000006249.json": {
+        "rows": 16658,
+        "matches": 34
+      },
+      "a02-000006250.json": {
+        "rows": 16636,
+        "matches": 32
+      },
+      "a02-000006251.json": {
+        "rows": 16697,
+        "matches": 34
+      },
+      "a02-000006252.json": {
+        "rows": 16463,
+        "matches": 35
+      },
+      "a02-000006253.json": {
+        "rows": 16792,
+        "matches": 36
+      },
+      "a02-000006254.json": {
+        "rows": 16835,
+        "matches": 32
+      },
+      "a02-000006255.json": {
+        "rows": 16893,
+        "matches": 40
+      },
+      "a02-000006256.json": {
+        "rows": 16559,
+        "matches": 37
+      },
+      "a02-000006257.json": {
+        "rows": 16730,
+        "matches": 32
+      },
+      "a02-000006258.json": {
+        "rows": 16610,
+        "matches": 36
+      },
+      "a02-000006259.json": {
+        "rows": 16731,
+        "matches": 36
+      },
+      "a02-000006260.json": {
+        "rows": 16548,
+        "matches": 37
+      },
+      "a02-000006261.json": {
+        "rows": 17041,
+        "matches": 37
+      },
+      "a02-000006262.json": {
+        "rows": 16730,
+        "matches": 30
+      },
+      "a02-000006263.json": {
+        "rows": 16558,
+        "matches": 37
+      },
+      "a02-000006264.json": {
+        "rows": 16695,
+        "matches": 39
+      },
+      "a02-000006265.json": {
+        "rows": 16762,
+        "matches": 35
+      },
+      "a02-000006266.json": {
+        "rows": 16517,
+        "matches": 38
+      },
+      "a02-000006267.json": {
+        "rows": 16572,
+        "matches": 36
+      },
+      "a02-000006268.json": {
+        "rows": 16958,
+        "matches": 31
+      },
+      "a02-000006269.json": {
+        "rows": 16552,
+        "matches": 37
+      },
+      "a02-000006270.json": {
+        "rows": 16461,
+        "matches": 36
+      },
+      "a02-000006271.json": {
+        "rows": 16402,
+        "matches": 37
+      },
+      "a02-000006272.json": {
+        "rows": 16422,
+        "matches": 34
+      },
+      "a02-000006273.json": {
+        "rows": 16735,
+        "matches": 35
+      },
+      "a02-000006274.json": {
+        "rows": 16508,
+        "matches": 37
+      },
+      "a02-000006275.json": {
+        "rows": 16455,
+        "matches": 31
+      },
+      "a02-000006276.json": {
+        "rows": 16727,
+        "matches": 32
+      },
+      "a02-000006277.json": {
+        "rows": 10808,
+        "matches": 24
+      },
+      "a03-000005607.json": {
+        "rows": 16660,
+        "matches": 35
+      },
+      "a03-000005608.json": {
+        "rows": 16596,
+        "matches": 34
+      },
+      "a03-000005609.json": {
+        "rows": 16861,
+        "matches": 35
+      },
+      "a03-000005610.json": {
+        "rows": 16491,
+        "matches": 35
+      },
+      "a03-000005611.json": {
+        "rows": 16556,
+        "matches": 36
+      },
+      "a03-000005612.json": {
+        "rows": 16562,
+        "matches": 33
+      },
+      "a03-000005613.json": {
+        "rows": 16485,
+        "matches": 37
+      },
+      "a03-000005614.json": {
+        "rows": 16965,
+        "matches": 40
+      },
+      "a03-000005615.json": {
+        "rows": 16805,
+        "matches": 35
+      },
+      "a03-000005616.json": {
+        "rows": 16579,
+        "matches": 36
+      },
+      "a03-000005617.json": {
+        "rows": 16921,
+        "matches": 34
+      },
+      "a03-000005618.json": {
+        "rows": 16479,
+        "matches": 34
+      },
+      "a03-000005619.json": {
+        "rows": 16667,
+        "matches": 35
+      },
+      "a03-000005620.json": {
+        "rows": 17461,
+        "matches": 36
+      },
+      "a03-000005621.json": {
+        "rows": 16638,
+        "matches": 36
+      },
+      "a03-000005622.json": {
+        "rows": 16390,
+        "matches": 36
+      },
+      "a03-000005623.json": {
+        "rows": 16948,
+        "matches": 38
+      },
+      "a03-000005624.json": {
+        "rows": 16493,
+        "matches": 33
+      },
+      "a03-000005625.json": {
+        "rows": 16909,
+        "matches": 34
+      },
+      "a03-000005626.json": {
+        "rows": 16751,
+        "matches": 35
+      },
+      "a03-000005627.json": {
+        "rows": 16414,
+        "matches": 37
+      },
+      "a03-000005628.json": {
+        "rows": 16520,
+        "matches": 35
+      },
+      "a03-000005629.json": {
+        "rows": 16439,
+        "matches": 36
+      },
+      "a03-000005630.json": {
+        "rows": 16661,
+        "matches": 33
+      },
+      "a03-000005631.json": {
+        "rows": 17029,
+        "matches": 34
+      },
+      "a03-000005632.json": {
+        "rows": 16540,
+        "matches": 37
+      },
+      "a03-000005633.json": {
+        "rows": 17227,
+        "matches": 35
+      },
+      "a03-000005634.json": {
+        "rows": 16418,
+        "matches": 36
+      },
+      "a03-000005635.json": {
+        "rows": 16691,
+        "matches": 34
+      },
+      "a03-000005636.json": {
+        "rows": 16658,
+        "matches": 32
+      },
+      "a03-000005637.json": {
+        "rows": 16564,
+        "matches": 30
+      },
+      "a03-000005638.json": {
+        "rows": 484,
+        "matches": 1
+      }
+    },
+    "shards": 125,
+    "retainedRows": 2043118,
+    "pendingShards": [
+      "a00-000006330.json",
+      "a00-000006331.json",
+      "a01-000006402.json",
+      "a02-000006277.json",
+      "a03-000005637.json",
+      "a03-000005638.json"
+    ],
+    "pendingRows": 59127,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": [
+      "a00-000002315.json",
+      "a00-000002316.json",
+      "a00-000002317.json",
+      "a00-000002318.json",
+      "a00-000002319.json",
+      "a00-000002320.json",
+      "a00-000002321.json",
+      "a00-000002322.json",
+      "a00-000002323.json",
+      "a00-000002324.json",
+      "a00-000002325.json",
+      "a00-000002326.json",
+      "a00-000002327.json",
+      "a00-000002328.json",
+      "a00-000002329.json",
+      "a00-000002330.json",
+      "a01-000002345.json",
+      "a01-000002346.json",
+      "a01-000002347.json",
+      "a01-000002348.json",
+      "a01-000002349.json",
+      "a01-000002350.json",
+      "a01-000002351.json",
+      "a01-000002352.json",
+      "a01-000002353.json",
+      "a01-000002354.json",
+      "a01-000002355.json",
+      "a01-000002356.json",
+      "a01-000002357.json",
+      "a01-000002358.json",
+      "a01-000002359.json",
+      "a02-000002300.json",
+      "a02-000002301.json",
+      "a02-000002302.json",
+      "a02-000002303.json",
+      "a02-000002304.json",
+      "a02-000002305.json",
+      "a02-000002306.json",
+      "a02-000002307.json",
+      "a02-000002308.json",
+      "a02-000002309.json",
+      "a02-000002310.json",
+      "a02-000002311.json",
+      "a02-000002312.json",
+      "a02-000002313.json",
+      "a02-000002314.json",
+      "a02-000002315.json",
+      "a02-000002316.json",
+      "a02-000002317.json",
+      "a02-000002318.json",
+      "a03-000002339.json",
+      "a03-000002340.json",
+      "a03-000002341.json",
+      "a03-000002342.json",
+      "a03-000002343.json",
+      "a03-000002344.json",
+      "a03-000002345.json",
+      "a03-000002346.json",
+      "a03-000002347.json",
+      "a03-000002348.json",
+      "a03-000002349.json",
+      "a03-000002350.json",
+      "a03-000002351.json",
+      "a03-000002352.json",
+      "a03-000002353.json",
+      "a03-000002354.json",
+      "a03-000002355.json",
+      "a04-000002306.json",
+      "a04-000002307.json",
+      "a04-000002308.json",
+      "a04-000002309.json",
+      "a04-000002310.json",
+      "a04-000002311.json",
+      "a04-000002312.json",
+      "a04-000002313.json",
+      "a04-000002314.json",
+      "a04-000002315.json",
+      "a04-000002316.json",
+      "a04-000002317.json",
+      "a04-000002318.json",
+      "a04-000002319.json",
+      "a04-000002320.json",
+      "a04-000002321.json",
+      "a05-000002303.json",
+      "a05-000002304.json",
+      "a05-000002305.json",
+      "a05-000002306.json",
+      "a05-000002307.json",
+      "a05-000002308.json",
+      "a05-000002309.json",
+      "a05-000002310.json",
+      "a05-000002311.json",
+      "a05-000002312.json",
+      "a05-000002313.json",
+      "a05-000002314.json",
+      "a05-000002315.json",
+      "a05-000002316.json",
+      "a05-000002317.json",
+      "a05-000002318.json",
+      "a06-000002292.json",
+      "a07-000002255.json",
+      "a07-000002256.json",
+      "a07-000002257.json",
+      "a07-000002258.json",
+      "a07-000002259.json",
+      "a07-000002260.json",
+      "a07-000002261.json",
+      "a07-000002262.json",
+      "a07-000002263.json",
+      "a07-000002264.json",
+      "a07-000002265.json",
+      "a07-000002266.json",
+      "a07-000002267.json",
+      "a07-000002268.json",
+      "a07-000002269.json",
+      "a07-000002270.json",
+      "a07-000002271.json",
+      "a07-000002272.json",
+      "a07-000002273.json",
+      "a07-000002274.json"
+    ]
+  },
+  "frozenFilesUnchanged": 36,
+  "optimizerUpdatesDuringThisAudit": 0,
+  "independentEvaluationRounds": 0,
+  "webChampionChanged": false
+}

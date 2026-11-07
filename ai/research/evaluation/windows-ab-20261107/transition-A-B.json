@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-07T09:55:09.355Z",
+  "phase": "training-B",
+  "AStopEvidence": "arm-A-stop.json",
+  "AStopEvidenceSHA256": "acf36b3297e67361f9f0e89e24073b31a51cdba16c8fd73dbf3fd5e34c1cc1b1",
+  "BSchedule": {
+    "startUTC": "2026-11-07T09:49:37.798Z",
+    "deadlineUTC": "2026-11-07T13:49:37.798Z",
+    "durationHours": 4,
+    "restartExtendsDeadline": false,
+    "authorization": "Owner 2026-11-07: A then B, four hours each, reserve 4 GiB, live dashboard, then preregistered independent evaluation and research publication; do not change web champion."
+  },
+  "BDevice": "cuda:0",
+  "memorySnapshot": {
+    "availableGiB": 6.747821807861328,
+    "totalGiB": 31.218204498291016,
+    "reserveGiB": 4,
+    "resumeGiB": 5
+  },
+  "independentCompletedRounds": 0,
+  "webChampionChanged": false,
+  "sourceOrRecipeChanges": [],
+  "checks": {
+    "node": {
+      "tests": 221,
+      "passed": 221
+    },
+    "pythonResearch": {
+      "tests": 17,
+      "passed": 17
+    },
+    "format": "passed",
+    "build": "passed"
+  }
+}
