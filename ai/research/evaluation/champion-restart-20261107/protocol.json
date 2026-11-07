@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "id": "champion-restart-20261107",
+  "purpose": "Four-hour full-network Monte Carlo fine-tuning from verified current champion with fresh Adam and fresh replay; evaluate fixed final learner against unchanged starting champion.",
+  "hypothesis": "New full-network self-play updates from the actual champion may improve final single-round team upgrade points; improvement is unproven. This is not a one-factor ablation against prior A/B.",
+  "budgetHours": 4,
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\champion-restart-20261107",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\champion-restart-runtime-20261107",
+  "sourceCommit": "66dad37514382c3320915ea39abe98735011dd90",
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "5b3e228218c123d33310327d45a89aa7958a237d9d62fed1a5af042fb5e04bd4",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "499c8e9a6d3065da55d7e6819cef5556f21864b4c5ee158547d60a85ae69d266",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "6e5459ad0da0664c64c426845e13d255b1da6a6f3e691cb89156d230f7ebf18c",
+    "ai/danMCai/training/continuous/learner.py": "e85a99526511b310700e28be7a68ecaf1feecc34bd1716d9e9c65709116ede1d",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "8df74f465cac02752d3b4e7141ba6262235a2721bb6d65a5446dd69edecc0c4a",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "eadde4ca63493ccca86b255ae892369fec96476266e8d6024baa077a52544a1e",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "configSHA256": "eef2454842ba90ca14a75817e33507ad69228f028628abc30c9b5ea36d05ec14",
+  "initialNetworkSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "parent": {
+    "kind": "champion-weights-new-optimizer-new-replay",
+    "teacher": {
+      "id": "017",
+      "file": "bot-017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "mac-20261105",
+        "version": "v000855042",
+        "status": "experimental-not-heldout-accepted",
+        "step": 855042,
+        "registeredAt": "2026-11-06T15:28:31.478Z",
+        "champion": {
+          "gate": 330,
+          "acceptedAt": "2026-11-06T10:59:34.199Z",
+          "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+          "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+          "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+        },
+        "trainingDevice": "mps"
+      }
+    },
+    "startingStep": 0,
+    "predecessorNetworkStep": 855042,
+    "checkpointInherited": false,
+    "adamInherited": false,
+    "replayInherited": false,
+    "counterMeaning": "New-run updates start at zero; historical 855042 network step recorded separately. No invented matching champion Adam."
+  },
+  "adam": "Fresh; no inherited checkpoint or Adam moments; run-relative optimizer updates start0. Inherited source network step855042 recorded separately.",
+  "replay": "Initially empty; old runs and samples retained elsewhere unchanged. New ring capacity2000000, minSamples100000, replayRatio4. Cache-probe shards never ingested.",
+  "cacheDecision": {
+    "observedAtUTC": "2026-11-07T14:48:33.995440+00:00",
+    "groups": {
+      "6": {
+        "decisionsPerSecond": 959.9954041757901,
+        "sessionsCreated": 19047,
+        "inferenceDecisions": 596633,
+        "createdPer1000InferenceDecisions": 31.924147675371625
+      },
+      "12": {
+        "decisionsPerSecond": 2295.8448376374736,
+        "sessionsCreated": 343,
+        "inferenceDecisions": 587097,
+        "createdPer1000InferenceDecisions": 0.5842305445267136
+      }
+    },
+    "observedThroughputRatio": 2.3915164881529667,
+    "selectedForNextNewRun": 12,
+    "selectionMatchesPreregisteredRule": true,
+    "completeMatches": 2048,
+    "uniqueRootSeeds": 2048,
+    "sourceConfigurationLeagueAndWeightsUnchanged": true,
+    "minimumAvailableGiB": 9.178531646728516,
+    "rawMatchesSHA256": "e63b9b17af65ee6703a404b098a91533f5ce627091716c91f9cda3df679a1671",
+    "limit": "Operational sampling probe, not gradient-training throughput or strength. Different deals/scheduling, ongoing separate GuanZero load and concurrent validation/preflight activity prevent a clean isolated cache causal estimate. Report every phase; apply only to the new run.",
+    "coactivity": "A disposable ROCm numerical preflight ran near end of phase0; Node/browser/Python validation ran during later phases. No formal learner was active. These activities were not controlled by the timing protocol."
+  },
+  "target": "Final single-round team upgrade points only; targetMatchWeight0, no hand tactical reward, no Clint policy in learner or sampler.",
+  "actorMix": {
+    "self": 0.5,
+    "league": 0.3,
+    "rule": 0.2
+  },
+  "trainingSeedReservation": {
+    "actorOffset": 22000000,
+    "actorEnd": 22100000,
+    "evaluationOffset": 900,
+    "evaluationEnd": 950,
+    "halfOpenRootRanges": [
+      [
+        1022000000,
+        1022100000
+      ],
+      [
+        1072000000,
+        1072100000
+      ],
+      [
+        1122000000,
+        1122100000
+      ],
+      [
+        1172000000,
+        1172100000
+      ],
+      [
+        3590000000,
+        3595000000
+      ],
+      [
+        3690000000,
+        3695000000
+      ]
+    ]
+  },
+  "heldoutPendingProtocolSHA256": "a3865f00f223276838155e764367e7b5502fba33d9b7ad3c899a31974520f390",
+  "gpuPreflightSHA256": "469e6f8e68ec2160a372544da46a60b1f922955da6a9f2195ea76749a23c7f20",
+  "freezeSelection": "Final fully stopped learner export only, not peak or internal gate champion. No automatic website model change.",
+  "followup": "After complete stop, audit model/Adam/shards/seeds, freeze exact final export SHA and a once-only <=3h evaluation deadline; execute pending 10000-round paired-deal protocol with new seeds. Analyze actual results and choose next task within global window.",
+  "resourceBudget": {
+    "reserveGB": 4,
+    "resumeGB": 5
+  },
+  "startCondition": "Passed cache probe, full-network GPU numerical/Adam preflight and tests, source/config/initial SHA check, >=5GiB available and >=8GiB disk, fresh task registration, no active process/STOP. Never extend the global or local window."
+}

@@ -69,3 +69,7 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [持续循环与缓存微基准结果](evaluation/cache-reuse-20261107/results.json)：16,384 次固定输入请求、实际 DirectML、最大输出差 0；约 1.77 倍的均值耗时比仅限该访问近似，下一项完整采样另验，不是棋力结果。
 
 [完整采样缓存对照预登记](evaluation/cache-e2e-20261107/protocol.json)：同一真实冠军教师、冻结联盟，四进程比较 6／12 有界会话缓存；用途为系统吞吐，不是棋力。
+
+[完整采样对照结果](evaluation/cache-e2e-20261107/analysis.json)：2,048 场开发采样完成，按预登记选择下一新运行的缓存参数，系统观察与棋力严格区分。
+
+[冠军起点完整网络微调](evaluation/champion-restart-20261107/protocol.json)：冠军权重、新 Adam／新回放、四小时预算，随后预登记 10,000 局新牌副评测；GPU 实测与正式学习计数分开。

@@ -33,6 +33,8 @@ function snapshot() {
     const run = safeRun(root, task.run);
     const state = readJSON(join(run, 'status.json'), {});
     const learner = readJSON(join(run, 'learner/status.json'));
+    const config = readJSON(join(run, 'config.json'), {});
+    const startingStep = config.parent?.startingStep ?? config.parent?.latest?.step ?? 0;
     const age = (Date.now() - Date.parse(state.updatedAt)) / 1000;
     return {
       id: task.id,
@@ -40,6 +42,19 @@ function snapshot() {
       protocolSHA256: task.protocolSHA256,
       state,
       learner,
+      startingStep,
+      newUpdates: learner ? Math.max(0, learner.step - startingStep) : 0,
+      sampler: config.fastActor || null,
+      actorInference: Array.from({ length: config.actors || 0 }, (_, slot) => {
+        const actor = readJSON(join(run, `actors/actor-${slot}.json`), {});
+        return {
+          slot,
+          provider: actor.inference?.provider || null,
+          fallbackReason: actor.inference?.fallbackReason || null,
+          sessionLimit: actor.sessionLimit ?? null,
+          matches: actor.matches || 0,
+        };
+      }),
       summary: readJSON(join(run, 'summary.json')),
       heartbeatAgeSeconds: Number.isFinite(age) ? age : null,
       processAlive: live(state.pid),

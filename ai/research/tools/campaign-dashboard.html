@@ -210,15 +210,43 @@
           total !== null
             ? (preparing ? '上一项：' : '') + num(done) + ' / ' + num(total) + ' ' + unit
             : a?.learner
-              ? '累计 ' + num(a.learner.step) + ' 次更新'
+              ? '本次新增 ' + num(a.newUpdates) + ' 次参数更新'
               : '分析／准备中';
-        $('bar').max = total || 1;
-        $('bar').value = total ? done : 0;
+        const duration = Date.parse(a?.window.deadlineUTC) - Date.parse(a?.window.startUTC);
+        $('bar').max = total || (a?.learner && duration > 0 ? duration : 1);
+        $('bar').value = total
+          ? done
+          : a?.learner && duration > 0
+            ? Math.min(duration, Date.parse(s.observedAtUTC) - Date.parse(a.window.startUTC))
+            : 0;
         $('metrics').replaceChildren();
         field($('metrics'), '任务截止', date(a?.window.deadlineUTC));
-        field($('metrics'), '缓存会话上限', num(v.sessionLimit));
+        field($('metrics'), '缓存会话上限', num(v.sessionLimit ?? a?.sampler?.sessionLimit));
         field($('metrics'), '实际后端', v.provider || a?.learner?.device || '—');
-        field($('metrics'), '本任务参数更新', num(v.optimizerUpdates ?? a?.learner?.step));
+        field($('metrics'), '本任务参数更新', num(v.optimizerUpdates ?? a?.newUpdates));
+        if (a?.learner) {
+          field($('metrics'), '累计更新计数', num(a.learner.step));
+          field($('metrics'), '已摄入样本', num(a.learner.ingestedRows));
+          field($('metrics'), '采样完整比赛', num(v.totals?.matches));
+          field($('metrics'), '采样决策／秒', num(v.decisionsPerSecond));
+          field($('metrics'), '学习器状态', a.learner.state || '—');
+          field(
+            $('metrics'),
+            'GPU 张量内存',
+            num(a.learner.gpuAllocatedBytes / 1024 ** 2) + ' MiB',
+          );
+          field(
+            $('metrics'),
+            '采样实际后端',
+            [...new Set(a.actorInference.map((x) => x.provider || '加载中'))].join(' / '),
+          );
+          field(
+            $('metrics'),
+            '采样回退',
+            a.actorInference.some((x) => x.fallbackReason) ? '有回退，需检查' : '当前无记录',
+          );
+          field($('metrics'), '训练时间进度', '上方进度条按固定窗口计时');
+        }
         field($('metrics'), '已完成棋力比赛', num(v.strengthGames));
         field(
           $('metrics'),
@@ -252,7 +280,7 @@
               : t.state.completedMatches !== undefined
                 ? num(t.state.completedMatches) + ' 场采样'
                 : t.learner
-                  ? num(t.learner.step) + ' 次更新'
+                  ? num(t.newUpdates) + ' 次新增更新'
                   : '—',
             date(t.state.updatedAt),
           ])

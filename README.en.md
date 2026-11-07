@@ -23,7 +23,7 @@ Four-player GuanDan with bots running in your browser, private rooms and practic
 
 </details>
 
-The [continuous research dashboard](http://127.0.0.1:8767/) follows the current task. After the A/B evaluation, evidence will guide the next short diagnostic or longer training experiment, with authorization ending **Wednesday, November 11 at noon Toronto time**. See the [autonomous research window](ai/research/AUTONOMOUS_RESEARCH_20261107.md) for deadline protection, memory limits and reporting.
+The [continuous research dashboard](http://127.0.0.1:8767/) follows the current task. The A/B evaluation is complete. Evidence guides sequential short diagnostics and full-network training experiments, with authorization ending **Wednesday, November 11 at noon Toronto time**. See the [autonomous research window](ai/research/AUTONOMOUS_RESEARCH_20261107.md) for deadline protection, memory limits and reporting.
 
 The owner has authorized sequential four-hour Windows A/B training windows followed by preregistered independent round evaluation. The [historical A/B dashboard](http://127.0.0.1:8766/) shows measured progress and resources; see the [Windows handoff](ai/research/WINDOWS_RETURN_20261106.md) for fixed deadlines, evidence and recovery boundaries. The website champion stays unchanged. Training progress is not evidence of stronger play.
 

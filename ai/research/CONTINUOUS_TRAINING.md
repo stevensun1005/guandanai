@@ -304,3 +304,5 @@ GuanZero 与 danMCai 的训练配置分开。其五类开发对手现含真实 d
 ## 有界缓存诊断入口
 
 快速采样器支持 `--session-limit=<1–32>` 或新配置 `fastActor.sessionLimit`，默认仍为 6。此入口只控制进程内 ONNX 会话缓存，不改变网络或奖励，旧冻结检出保持原样。`benchmark-cache-sampling.mjs` 在独立已注册任务中比较四阶段完整采样，检查冻结源码、配置、联盟和权重 SHA，并遵守截止／4 GiB 预算与 STOP；不启动学习器或更新联盟。缓存微基准[实际结果](evaluation/cache-reuse-20261107/results.json)不能直接当成完整采样或棋力收益。
+
+当前自动窗口已接续[冠军网络微调协议](evaluation/champion-restart-20261107/protocol.json)：从现冠军网络以新 Adam／新回放重新微调，不是恢复其优化器。运行内版本／更新数从 0 计，原网络历史步数另记；完整网络参与训练，当前状态以持续面板及本批启动证据为准。只有最终学习器参加预登记留出，不更换网页冠军。

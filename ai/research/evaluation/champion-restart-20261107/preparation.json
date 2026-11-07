@@ -1,0 +1,311 @@
+{
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\champion-restart-20261107",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\champion-restart-runtime-20261107",
+  "sourceCommit": "66dad37514382c3320915ea39abe98735011dd90",
+  "initial": {
+    "version": "v000000000",
+    "file": "v000000000.onnx",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "step": 0,
+    "trainedRows": 0,
+    "ingestedRows": 0,
+    "publishedAt": "2026-11-07T14:45:19.145162+00:00",
+    "parentVersion": "v000855042",
+    "counterMeaning": "New run updates with fresh Adam; weights inherited from champion, not random/P0"
+  },
+  "teacher": {
+    "id": "017",
+    "file": "bot-017.onnx",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "bytes": 5368650,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    },
+    "source": {
+      "run": "mac-20261105",
+      "version": "v000855042",
+      "status": "experimental-not-heldout-accepted",
+      "step": 855042,
+      "registeredAt": "2026-11-06T15:28:31.478Z",
+      "champion": {
+        "gate": 330,
+        "acceptedAt": "2026-11-06T10:59:34.199Z",
+        "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+        "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+        "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+      },
+      "trainingDevice": "mps"
+    }
+  },
+  "initialAdamStates": 0,
+  "checkpointAbsent": true,
+  "initialReplayShards": 0,
+  "leagueOriginalSHA256": "10de26f0202dd9488c39cb584fb545025174782c27eb7db54a964bf9f2de5de4",
+  "leagueImportedSHA256": "679f83501df59ad3597cbd3bd65bb198d04c18fce45eee07d22d2821ed697014",
+  "leagueWeights": [
+    {
+      "id": "parent-anchor",
+      "file": "parent-anchor.onnx",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "addedAt": "2026-11-04T20:40:54.512Z",
+      "pinned": true,
+      "sourceId": "anchor",
+      "sourceFile": "anchor.onnx"
+    },
+    {
+      "id": "parent-v000023473",
+      "file": "parent-v000023473.onnx",
+      "sha256": "70bf06b4baf5690ed891e4ce3886f80b899d0fd51b897b410cc34a3fb914b967",
+      "addedAt": "2026-11-04T21:51:25.660Z",
+      "pinned": true,
+      "sourceId": "v000023473",
+      "sourceFile": "v000023473.onnx",
+      "sourceStep": 23473
+    },
+    {
+      "id": "parent-v000046476",
+      "file": "parent-v000046476.onnx",
+      "sha256": "4c469bc42efb1566a74034b32c1797d56c60837bb1f26cf1f2d39beab6b15f2b",
+      "addedAt": "2026-11-04T22:51:26.406Z",
+      "pinned": true,
+      "sourceId": "v000046476",
+      "sourceFile": "v000046476.onnx",
+      "sourceStep": 46476
+    },
+    {
+      "id": "parent-v000068679",
+      "file": "parent-v000068679.onnx",
+      "sha256": "6d428019e6c31d0640bc26d7ea280942c77d402ead5472fa3cdb3356e29688fd",
+      "addedAt": "2026-11-04T23:51:27.277Z",
+      "pinned": true,
+      "sourceId": "v000068679",
+      "sourceFile": "v000068679.onnx",
+      "sourceStep": 68679
+    },
+    {
+      "id": "parent-v000091092",
+      "file": "parent-v000091092.onnx",
+      "sha256": "5a6a250b10ed33eea151a7dcae4e6396d36d8737107965db98d58912ec5b9af2",
+      "addedAt": "2026-11-05T00:51:28.207Z",
+      "pinned": true,
+      "sourceId": "v000091092",
+      "sourceFile": "v000091092.onnx",
+      "sourceStep": 91092
+    },
+    {
+      "id": "parent-v000293055",
+      "file": "parent-v000293055.onnx",
+      "sha256": "104ca1cb8bcd63fffc3214148031e50054c5a3e13cdbfcc2a9eda26bba0ba2eb",
+      "addedAt": "2026-11-05T07:52:18.815Z",
+      "pinned": true,
+      "sourceId": "v000293055",
+      "sourceFile": "v000293055.onnx",
+      "sourceStep": 293055
+    },
+    {
+      "id": "parent-v000705434",
+      "file": "parent-v000705434.onnx",
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "addedAt": "2026-11-05T23:58:24.324Z",
+      "pinned": true,
+      "sourceId": "v000705434",
+      "sourceFile": "v000705434.onnx",
+      "sourceStep": 705434
+    },
+    {
+      "id": "parent-v000783862",
+      "file": "parent-v000783862.onnx",
+      "sha256": "a82b3e9b3baa0b9922b5a5cd3265788fd21253a4e14a79aa68ddbb547a34d509",
+      "addedAt": "2026-11-06T05:41:50.162Z",
+      "sourceId": "v000783862",
+      "sourceFile": "v000783862.onnx",
+      "sourceStep": 783862
+    },
+    {
+      "id": "parent-v000798042",
+      "file": "parent-v000798042.onnx",
+      "sha256": "6827b05a20ce99b346fdcce5bbde1a3208df58e2a8ab90e91467fdd37ac92287",
+      "addedAt": "2026-11-06T06:41:50.354Z",
+      "sourceId": "v000798042",
+      "sourceFile": "v000798042.onnx",
+      "sourceStep": 798042
+    },
+    {
+      "id": "parent-v000812278",
+      "file": "parent-v000812278.onnx",
+      "sha256": "8158c4509b3ad287de02134538bbb6b902dd485512f1d38e2b01b28086c1db0b",
+      "addedAt": "2026-11-06T07:41:50.578Z",
+      "sourceId": "v000812278",
+      "sourceFile": "v000812278.onnx",
+      "sourceStep": 812278
+    },
+    {
+      "id": "parent-v000826707",
+      "file": "parent-v000826707.onnx",
+      "sha256": "cd3eaece7ebf4b1caefd9fb7042956b1f3783bf7774d402b44863ffaf448456f",
+      "addedAt": "2026-11-06T08:41:50.810Z",
+      "sourceId": "v000826707",
+      "sourceFile": "v000826707.onnx",
+      "sourceStep": 826707
+    },
+    {
+      "id": "parent-v000840958",
+      "file": "parent-v000840958.onnx",
+      "sha256": "1c44ababa9bd7eab2d4afec8fbc89496bc6279c7d7a7632aef3790b01cbecdd0",
+      "addedAt": "2026-11-06T09:41:51.006Z",
+      "sourceId": "v000840958",
+      "sourceFile": "v000840958.onnx",
+      "sourceStep": 840958
+    },
+    {
+      "id": "parent-v000855042",
+      "file": "parent-v000855042.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "addedAt": "2026-11-06T10:41:51.211Z",
+      "pinned": true,
+      "sourceId": "v000855042",
+      "sourceFile": "v000855042.onnx",
+      "sourceStep": 855042
+    },
+    {
+      "id": "parent-v000869184",
+      "file": "parent-v000869184.onnx",
+      "sha256": "94a2f7afc78cba75193a27b252aa9e573a89bd020c50c08c551ac15939bcd17d",
+      "addedAt": "2026-11-06T11:41:51.447Z",
+      "sourceId": "v000869184",
+      "sourceFile": "v000869184.onnx",
+      "sourceStep": 869184
+    },
+    {
+      "id": "parent-v000883409",
+      "file": "parent-v000883409.onnx",
+      "sha256": "40e1a38d44967c2e776aac81eb9a556ed3f565e0a64761c30f38ce34cf6fd676",
+      "addedAt": "2026-11-06T12:41:51.656Z",
+      "sourceId": "v000883409",
+      "sourceFile": "v000883409.onnx",
+      "sourceStep": 883409
+    },
+    {
+      "id": "parent-v000897469",
+      "file": "parent-v000897469.onnx",
+      "sha256": "646e0866bb16121d8a4e672111b732962ec57ce07e60d19d5bd3e95d36736175",
+      "addedAt": "2026-11-06T13:41:51.877Z",
+      "sourceId": "v000897469",
+      "sourceFile": "v000897469.onnx",
+      "sourceStep": 897469
+    },
+    {
+      "id": "parent-v000911757",
+      "file": "parent-v000911757.onnx",
+      "sha256": "d458365c200e1a5cf8f82682faf044054ed50aba33fb5a759776947e1cc3af2b",
+      "addedAt": "2026-11-06T14:41:52.085Z",
+      "sourceId": "v000911757",
+      "sourceFile": "v000911757.onnx",
+      "sourceStep": 911757
+    },
+    {
+      "id": "parent-v000925758",
+      "file": "parent-v000925758.onnx",
+      "sha256": "5f28a73b369e1803c0e9cfcfa3e5d53bb5868f9be1d0d40c2b99b0f9dfb5befd",
+      "addedAt": "2026-11-06T15:41:52.249Z",
+      "sourceId": "v000925758",
+      "sourceFile": "v000925758.onnx",
+      "sourceStep": 925758
+    },
+    {
+      "id": "parent-v000939910",
+      "file": "parent-v000939910.onnx",
+      "sha256": "e05365f8deb3f54681daeadcd5953d2bd93136d13a06ecd1d4d58c2c303a575a",
+      "addedAt": "2026-11-06T16:41:52.458Z",
+      "sourceId": "v000939910",
+      "sourceFile": "v000939910.onnx",
+      "sourceStep": 939910
+    },
+    {
+      "id": "parent-v000954202",
+      "file": "parent-v000954202.onnx",
+      "sha256": "1bfd9a854bb18897bfc1cf28a3662d5f68894cc865345484ea7e323046bec7bc",
+      "addedAt": "2026-11-06T17:41:52.640Z",
+      "sourceId": "v000954202",
+      "sourceFile": "v000954202.onnx",
+      "sourceStep": 954202
+    },
+    {
+      "id": "parent-v000966044",
+      "file": "parent-v000966044.onnx",
+      "sha256": "053ad37044796ff05ebc7c9613b5ebbd7c883e3362e851cdaf51b27967f5fd9f",
+      "addedAt": "2026-11-06T18:41:52.999Z",
+      "sourceId": "v000966044",
+      "sourceFile": "v000966044.onnx",
+      "sourceStep": 966044
+    },
+    {
+      "id": "parent-v000980240",
+      "file": "parent-v000980240.onnx",
+      "sha256": "e0e13b857cc0ed197680af242013939c47741deedeb922671040ec2341318a18",
+      "addedAt": "2026-11-06T19:41:53.034Z",
+      "sourceId": "v000980240",
+      "sourceFile": "v000980240.onnx",
+      "sourceStep": 980240
+    },
+    {
+      "id": "parent-v000994207",
+      "file": "parent-v000994207.onnx",
+      "sha256": "cd5b00ac4570de7f92983317298bb5763e0dbb3ac47d84216893e4b3ed0d32b3",
+      "addedAt": "2026-11-06T20:41:53.228Z",
+      "sourceId": "v000994207",
+      "sourceFile": "v000994207.onnx",
+      "sourceStep": 994207
+    },
+    {
+      "id": "parent-v001008177",
+      "file": "parent-v001008177.onnx",
+      "sha256": "b432eb092d1e7e67f0875afca54fceb9da22b668f673047962641308fd8d7005",
+      "addedAt": "2026-11-06T21:41:53.439Z",
+      "sourceId": "v001008177",
+      "sourceFile": "v001008177.onnx",
+      "sourceStep": 1008177
+    }
+  ],
+  "cacheSelection": "Pending completed cache-e2e experiment. No task clock or training started.",
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "5b3e228218c123d33310327d45a89aa7958a237d9d62fed1a5af042fb5e04bd4",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "499c8e9a6d3065da55d7e6819cef5556f21864b4c5ee158547d60a85ae69d266",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "6e5459ad0da0664c64c426845e13d255b1da6a6f3e691cb89156d230f7ebf18c",
+    "ai/danMCai/training/continuous/learner.py": "e85a99526511b310700e28be7a68ecaf1feecc34bd1716d9e9c65709116ede1d",
+    "ai/danMCai/training/continuous/value_net.py": "d83d06f8e432b41660900e71c8ed4d397ffbb9845cd1d4f61b445cfc698a990f",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "8df74f465cac02752d3b4e7141ba6262235a2721bb6d65a5446dd69edecc0c4a",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "bf10d546bdac54b09342f17a49bff7cd9621b30e16954975154375ed56a86e9f",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "e4be8116b17853a36425c81bcb6906318a226441e850a7915a08425a63aa8744",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "a30894cbc4f832c794d09f95ba1af3990c2f107d6f9eb7d5d0fc75c39ac78b41",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "eadde4ca63493ccca86b255ae892369fec96476266e8d6024baa077a52544a1e",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  }
+}

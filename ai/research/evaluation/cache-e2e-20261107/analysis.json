@@ -1,0 +1,27 @@
+{
+  "observedAtUTC": "2026-11-07T14:48:33.995440+00:00",
+  "groups": {
+    "6": {
+      "decisionsPerSecond": 959.9954041757901,
+      "sessionsCreated": 19047,
+      "inferenceDecisions": 596633,
+      "createdPer1000InferenceDecisions": 31.924147675371625
+    },
+    "12": {
+      "decisionsPerSecond": 2295.8448376374736,
+      "sessionsCreated": 343,
+      "inferenceDecisions": 587097,
+      "createdPer1000InferenceDecisions": 0.5842305445267136
+    }
+  },
+  "observedThroughputRatio": 2.3915164881529667,
+  "selectedForNextNewRun": 12,
+  "selectionMatchesPreregisteredRule": true,
+  "completeMatches": 2048,
+  "uniqueRootSeeds": 2048,
+  "sourceConfigurationLeagueAndWeightsUnchanged": true,
+  "minimumAvailableGiB": 9.178531646728516,
+  "rawMatchesSHA256": "e63b9b17af65ee6703a404b098a91533f5ce627091716c91f9cda3df679a1671",
+  "limit": "Operational sampling probe, not gradient-training throughput or strength. Different deals/scheduling, ongoing separate GuanZero load and concurrent validation/preflight activity prevent a clean isolated cache causal estimate. Report every phase; apply only to the new run.",
+  "coactivity": "A disposable ROCm numerical preflight ran near end of phase0; Node/browser/Python validation ran during later phases. No formal learner was active. These activities were not controlled by the timing protocol."
+}
