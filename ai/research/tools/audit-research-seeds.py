@@ -110,5 +110,5 @@ if __name__ == '__main__':
         raise ValueError('Invalid development seed reservation')
     d = audit(args.workspace, args.start, args.count)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(d, indent=2)+'\n', encoding='utf-8')
+    args.out.write_bytes((json.dumps(d, indent=2)+'\n').encode('utf-8'))
     print(json.dumps({'files': len(d['files']), 'known': d['knownUniqueRootSeeds'], 'reserved': len(d['seeds'])}))

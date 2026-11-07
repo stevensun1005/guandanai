@@ -1,6 +1,7 @@
 """Check a candidate policy in isolated Chrome WASM, without rebuilding the game."""
 
 import argparse
+from datetime import datetime, timezone
 from functools import partial
 import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -25,12 +26,16 @@ import { createRound, advanceRound } from './ai/shared/simulation/simulation.mjs
 import { candidates } from './web/src/ai/candidates.js';
 import { policyState, decisionContext } from './web/src/ai/observation.js';
 import { createPolicyInference } from './ai/shared/simulation/policy-inference.mjs';
-const engine=createPolicyInference(), samples=[];
+import { existsSync } from 'node:fs';
+const engine=createPolicyInference({python:PYTHON,env:{GUANDAN_POLICY_MODEL:FIXTURE_POLICY}}), samples=[];
+const fixtureSeeds=FIXTURE_SEEDS;
+const stopped=()=> (STOP_FILE && existsSync(STOP_FILE)) || (DEADLINE_MS && Date.now()>=DEADLINE_MS);
 const needed={afterFirstOut:8,alias:8,afterPass:8,wide:8,lead:8,follow:8};
 try {
-  for(let round=0;round<64&&samples.length<48;round++) {
-    const seed=21890104+round, game=createRound(seed);
+  for(let round=0;round<fixtureSeeds.length&&samples.length<48;round++) {
+    const seed=fixtureSeeds[round], game=createRound(seed);
     for(let turn=0;turn<1000;turn++) {
+      if(stopped())throw Error('Browser fixture deadline or STOP');
       const plays=candidates(game.hands[game.turn],game.L,game.trick?.play);
       const state=policyState(game,game.turn,0,plays);
       state.trick=decisionContext(game,game.turn).trick;
@@ -48,7 +53,7 @@ try {
       if(category&&plays.length>1) {
         samples.push({seed,turn,category,flags,state});needed[category]--;
       }
-      let selected=plays.findIndex(play=>play&&play.cards.length===game.hands[game.turn].length);
+      let selected=RAW_FIXTURES ? -1 : plays.findIndex(play=>play&&play.cards.length===game.hands[game.turn].length);
       if(selected<0&&plays.length===1)selected=0;
       if(selected<0) {
         const values=await engine.infer(state);
@@ -107,6 +112,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True)
     parser.add_argument("--complete-match", action="store_true")
+    parser.add_argument("--fixture-policy")
+    parser.add_argument("--fixture-seeds")
+    parser.add_argument("--raw-fixtures", action="store_true")
+    parser.add_argument("--strict-argmax", action="store_true")
+    parser.add_argument("--stop-file")
+    parser.add_argument("--deadline")
     parser.add_argument("--output", default="web/artifacts/validation/candidate-browser")
     args = parser.parse_args()
     model = Path(args.model).resolve()
@@ -116,13 +127,30 @@ def main():
     vendor = harness / "vendor"
     vendor.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
+    deadline=datetime.fromisoformat(args.deadline.replace('Z','+00:00')) if args.deadline else None
+    def check_live():
+        if (args.stop_file and Path(args.stop_file).exists()) or (deadline and datetime.now(timezone.utc)>=deadline):
+            raise InterruptedError('Browser validation deadline or STOP')
+    check_live()
+    fixture_policy=Path(args.fixture_policy).resolve() if args.fixture_policy else ROOT/'ai/danMCai/models/baseline/policy.onnx'
+    fixture_seeds=json.loads(Path(args.fixture_seeds).read_text()) if args.fixture_seeds else list(range(21890104,21890168))
+    if isinstance(fixture_seeds,dict): fixture_seeds=fixture_seeds['browserSeeds']
+    if not fixture_seeds or len(set(fixture_seeds))!=len(fixture_seeds):
+        raise ValueError('Invalid fixture seeds')
+    fixture_code=(FIXTURES.replace('PYTHON',json.dumps(sys.executable))
+                  .replace('FIXTURE_POLICY',json.dumps(str(fixture_policy)))
+                  .replace('FIXTURE_SEEDS',json.dumps(fixture_seeds))
+                  .replace('RAW_FIXTURES','true' if args.raw_fixtures else 'false')
+                  .replace('STOP_FILE',json.dumps(args.stop_file))
+                  .replace('DEADLINE_MS',str(int(deadline.timestamp()*1000)) if deadline else 'null'))
     generated = subprocess.run(
-        ["node", "--input-type=module", "-e", FIXTURES],
+        ["node", "--input-type=module", "-e", fixture_code],
         cwd=ROOT,
         check=True,
         capture_output=True,
         text=True,
         encoding="utf-8",
+        timeout=max(.1,(deadline-datetime.now(timezone.utc)).total_seconds()) if deadline else None,
     )
     fixtures = json.loads(generated.stdout)
     if args.complete_match:
@@ -204,10 +232,12 @@ def main():
                 page.goto(f"http://127.0.0.1:{server.server_port}/", wait_until="networkidle")
                 page.wait_for_function("() => (typeof window.evaluatePolicy==='function')")
                 for index, fixture in enumerate(fixtures):
+                    check_live()
                     state = fixture["state"]
                     expected = native.score(state)[0]
                     extra = encode_policy_extras_batch(state)
-                    actual = page.evaluate("state=>window.evaluatePolicy(state)", state)
+                    timeout_ms=max(1,min(60000,int((deadline-datetime.now(timezone.utc)).total_seconds()*1000))) if deadline else 60000
+                    actual = page.evaluate("([state,ms])=>Promise.race([window.evaluatePolicy(state),new Promise((_,reject)=>setTimeout(()=>reject(Error('Fixed validation deadline')),ms))])", [state,timeout_ms])
                     values = np.array(actual["values"], dtype=np.float32)
                     if (
                         values.shape != expected.shape
@@ -227,7 +257,7 @@ def main():
                     chosen = actual["index"]
                     if (
                         best != chosen
-                        and float(expected[best] - expected[chosen]) > 2 * error + 1e-6
+                        and float(expected[best] - expected[chosen]) > (0 if args.strict_argmax else 2 * error + 1e-6)
                     ):
                         raise AssertionError(
                             f"Position {index}: non-tied argmax mismatch {best}/{chosen}"
@@ -259,7 +289,10 @@ def main():
         "model": str(model),
         "modelSHA256": sha(model),
         "fixturesSHA256": sha(fixtures_path),
-        "fixturePolicySHA256": sha(ROOT / "ai/danMCai/models/baseline/policy.onnx"),
+        "fixturePolicySHA256": sha(fixture_policy),
+        "fixtureSeeds":fixture_seeds,
+        "rawFixtures":args.raw_fixtures,
+        "strictNonTieArgmax":args.strict_argmax,
         "productionRuntimeSHA256": sha(ROOT / "web/src/ai/policy-inference.mjs"),
         "runtimeConfig": runtime_config,
         "featureSHA256": sha(ROOT / "web/src/ai/policy-features.mjs"),

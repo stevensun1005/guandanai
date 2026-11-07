@@ -368,3 +368,5 @@ io48 每十二小时评测已从 138506 的五组切换为186280 的三组、后
 GuanZero io48 已增加独立 Windows 自动恢复任务，原窗口与检查点恢复规则见[GuanZero 自动恢复](../guanzero/README.md#自动恢复)。当前手动开发批次另用 4,211,000,000 起的独立种子。
 
 GuanZero所有者已明确延期至2026-11-11 10:00 Toronto，覆盖旧48小时截止。新window.extension、12小时评测和独立恢复任务以[活动授权窗口](../guanzero/README.md#授权延长窗口)为准。
+
+阶段 0.3 已完成负结果，0.4 不启动；0.6 的学生／Node／浏览器等价接口已准备，执行以 `evaluation/extras-equivalence-20261107/protocol.json` 与 campaign 注册的固定窗口为准。无 extras 在线训练或自动发布授权。

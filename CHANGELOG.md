@@ -567,3 +567,5 @@
 - Add development-only public-belief determinizations and complete champion-raw Monte Carlo continuations, with bounded pretrial/STOP support and honest ESS/duplicate-world reporting. No webpage scoring or champion change.
 - Fix future evaluation CLI entry checks for directory junctions and reject missing worker statuses; retain the completed experiment's original frozen implementation and failed-start evidence.
 - Record the complete 200-position belief pretrial negative result: lower reference agreement despite sub-second observed mean latency. Block search pilot 0.4; preserve per-position evidence and ESS collapse diagnostics.
+
+研究：阶段 0.6 增加保留冠军主干的零 extras 投影导出、严格决策／浏览器验证及 STOP／截止边界。进还贡在权重读取前拒绝 extras；默认训练、网页冠军及历史冻结检出不变，结果另行登记。

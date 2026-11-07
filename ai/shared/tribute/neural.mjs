@@ -8,6 +8,8 @@ import { createCandidateCache } from '../../danMCai/training/continuous/fast-can
 import { advanceRound } from '../simulation/simulation.mjs';
 
 export async function continuation(root, model, { provider = 'dml', delayMs = 1 } = {}) {
+  if (model.config.extraFeatures || model.config.rerankCandidates)
+    throw Error('Unsupported continuation configuration');
   const bytes = await modelBytes(root, model);
   let engine,
     requested = provider,
@@ -29,8 +31,6 @@ export async function continuation(root, model, { provider = 'dml', delayMs = 1 
     engine = await ort.InferenceSession.create(bytes, { ...settings, executionProviders: ['cpu'] });
     mode = `cpu-after-${provider}-session-error: ${error.message}`;
   }
-  if (model.config.extraFeatures || model.config.rerankCandidates)
-    throw Error('Unsupported continuation configuration');
   const expected = ['actions', 'state', ...(model.config.history ? ['history'] : [])].sort();
   if (
     JSON.stringify(engine.inputNames.slice().sort()) !== JSON.stringify(expected) ||

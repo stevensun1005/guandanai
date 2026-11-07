@@ -1,0 +1,18 @@
+{
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "studentSHA256": "39d82cb92d98e16c09da57087ec431af412ce1650401cd37874527f221c84171",
+  "networkGroupsPreserved": 12,
+  "extraWeightShape": [
+    53,
+    512
+  ],
+  "extraWeightNonzero": 0,
+  "optimizerUpdates": 0,
+  "trainingStarted": false,
+  "config": {
+    "stateFeatures": 513,
+    "actionFeatures": 54,
+    "extraFeatures": 53
+  },
+  "notDeployableAsChampion": "Ordinary oracle context remains incomplete; require separate acceptance and owner authorization."
+}

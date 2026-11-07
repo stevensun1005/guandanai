@@ -89,6 +89,19 @@ class ValueNet(torch.nn.Module):
         return self.layers[-1](hidden).squeeze(-1)
 
 
+class ValueNetExtras(ValueNet):
+    """Equivalent champion student at initialization; no online learner uses this class yet."""
+    def __init__(self, weights=None):
+        super().__init__(weights)
+        self.extra_weight = torch.nn.Parameter(torch.zeros(53, WIDTH))
+
+    def forward(self, features, extras):
+        hidden = torch.tanh(self.layers[0](features) + extras @ self.extra_weight)
+        for layer in self.layers[1:-1]:
+            hidden = torch.tanh(layer(hidden))
+        return self.layers[-1](hidden).squeeze(-1)
+
+
 def export_onnx(weights, path):
     """Write the same graph layout as the deployed ai/danMCai/models/baseline/policy.onnx, atomically."""
     validate(weights)
@@ -133,5 +146,34 @@ def export_onnx(weights, path):
     path = Path(path)
     temporary = path.with_name(path.name + ".tmp")
     onnx.save(model, str(temporary))
+    os.replace(temporary, path)
+    return sha256(path)
+
+
+def export_onnx_extras(weights, path, extra_weight=None):
+    """Add a zero (or explicitly supplied) per-action public-feature projection, keeping values."""
+    import tempfile
+    extra = np.zeros((53, WIDTH), dtype=np.float32) if extra_weight is None else np.asarray(extra_weight, dtype=np.float32)
+    if extra.shape != (53, WIDTH) or not np.isfinite(extra).all():
+        raise ValueError('Invalid extras projection')
+    path = Path(path)
+    with tempfile.TemporaryDirectory(dir=path.parent) as directory:
+        base = Path(directory) / 'base.onnx'
+        export_onnx(weights, base)
+        model = onnx.load(base)
+    graph = model.graph
+    graph.input.append(helper.make_tensor_value_info('extras', TensorProto.FLOAT, ['batch', 53]))
+    graph.initializer.append(numpy_helper.from_array(extra.copy(), 'extra_weight'))
+    nodes = list(graph.node)
+    # Preserve the existing state/action summation, then add the independent public projection.
+    nodes[2].output[0] = 'base_first_linear'
+    nodes[3:3] = [helper.make_node('MatMul', ['extras', 'extra_weight'], ['extra_hidden']),
+                  helper.make_node('Add', ['base_first_linear', 'extra_hidden'], ['first_linear'])]
+    del graph.node[:]
+    graph.node.extend(nodes)
+    graph.name = 'GuandanChampionZeroExtrasStudent'
+    onnx.checker.check_model(model)
+    temporary = path.with_name(path.name + '.tmp')
+    onnx.save(model, temporary)
     os.replace(temporary, path)
     return sha256(path)

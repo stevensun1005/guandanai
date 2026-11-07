@@ -1,0 +1,73 @@
+{
+  "observedAtUTC": "2026-11-07T19:42:48.798821+00:00",
+  "nodePassed": 237,
+  "nodeFailed": 0,
+  "pythonResearchPassed": 20,
+  "pythonExtrasPassed": 2,
+  "pythonContinuousPassed": 9,
+  "pythonContinuousSkipped": 1,
+  "format": "passed",
+  "build": "9c90969c76",
+  "privateTable": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "completedRounds": 0,
+    "trainingUpdates": 0,
+    "realPeerJS": true,
+    "hostOnlyNicknameGate": true,
+    "guestSameNameDenied": true,
+    "noPrivateRuleFlagBroadcast": true,
+    "privateCoach": {
+      "modelId": "017",
+      "search": {
+        "candidates": 155,
+        "evaluated": 8,
+        "mode": "round",
+        "horizon": 4,
+        "maxPlies": 12,
+        "leafSeat": "advising player, or partner after finishing",
+        "mismatchedLeaves": 0,
+        "fullRollouts": 13,
+        "minRollouts": 1,
+        "truncatedRollouts": 0,
+        "maxSamples": 12,
+        "priorWeight": 4,
+        "temperature": 0.03,
+        "elapsedMs": 2556,
+        "fullInformation": true
+      }
+    },
+    "partnerUsesOracle": true,
+    "opponentStaysRules": true,
+    "neuralOpponentUsesOnlyPublicObservation": true,
+    "manualOutsideBeamRated": true,
+    "offRestoresPartnerRules": true,
+    "privateHandsMatchHeldCounts": true,
+    "constructedCompletionExcluded": true,
+    "uploads": 0,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "topFiveInViewport": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "topFiveInViewport": true
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "topFiveInViewport": true
+      }
+    ],
+    "pageErrors": []
+  },
+  "protocolSHA256": "a16c1c2a7529391fc51726d06a219b9e40ba437e16e939706625d12d9298acd3",
+  "noGPUEnvironmentReplacement": true,
+  "notes": [
+    "GPU Python lacks Playwright; browser uses existing Python313. No installation or training update.",
+    "Full 40000 native/48 WASM run remains pending this preregistration."
+  ]
+}

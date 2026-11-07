@@ -243,3 +243,7 @@ GuanZero 菜单回归按当前归档编号独立核对最近两代，并模拟�
 ## 配牌练习与训练选择
 
 `node --test web/tests/arrangement-practice.test.mjs` 检查成组／拆开／并入后两个实体副本与余牌守恒、无效目标／丢牌防护和损坏记录拒绝。`python web/tests/arrangement_practice_smoke.py <URL>` 通过公开 UI 验证三种入口（残局禁用）、键盘选择、四家 108 张实体牌、重记／导出、存储失败恢复、零云端上传及 1440／1024／390 像素布局，并返回原明牌桌。`practice_smoke.py` 先等当前步快照落定再核对撤回，避免在异步落牌中读取撤回前数量。其练习出牌、评语、导入导出与旧记录兼容继续回归。
+
+## extras 等价学生的研究验证
+
+阶段 0.6 使用独立注册的一小时协议：40,000 个真实冠军决策逐候选对照，加 48 个浏览器位置。`policy_browser_smoke.py` 可显式指定 `--fixture-policy`、`--fixture-seeds`、`--raw-fixtures`、`--strict-argmax`、`--stop-file` 与 `--deadline`；默认历史夹具入口不变。严格模式不豁免非平局 argmax 差异；超过截止中止，不将未完成验证写为通过。实际结果统一见[分析研究](../../ai/research/ANALYSIS.md)。此检查不替换网页模型，也不构成棋力比赛。

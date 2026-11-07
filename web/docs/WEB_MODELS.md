@@ -91,3 +91,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 菜单中的 Clint 始终指独立 `rules-v2` 路线；路线名称不固定其全部历史策略。当前源码修订与比较边界见 [规则模块](../src/rule-bot/README.md#公开牌史策略更新) 和 [同步状态](../../ai/research/evaluation/clint-sync-state.json)。更新 Clint 不改六项菜单、冠军默认或神经网络权重。旧开发／独立成绩继续绑定当时的三个规则源码指纹。
 
 本机GuanZero周期发布持续至所有者授权的2026-11-11 10:00 Toronto训练截止，最后评测与部署在最终完整导出后执行。[活动窗口](../../ai/guanzero/README.md#授权延长窗口)。
+
+## 研究用零 extras 导出
+
+阶段 0.6 可在忽略目录准备保留冠军主干、53×512 全零投影的双输入 ONNX，仅运行发布工具的准备流程，**不传 `--publish`**。它不是新冠军、已训练模型或已发布归档；网页清单与 baseline 均须 SHA 不变。普通 oracle 的 extras 上下文未补齐，进还贡续打明确拒绝此模型。方法与实测分开记录于[分析指南](../../ai/research/ANALYSIS.md)。

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "stage": "0.6",
+  "registeredAtUTC": "2026-11-07T19:21:25.693604+00:00",
+  "baseCommit": "1be3dcbac5a201d9a14349a2d8bc4e37a95c6c5b",
+  "purpose": "Zero-initialized 53-feature projection on the exact champion backbone; equivalence validation only, no training or web promotion",
+  "teacher": "017/v000855042",
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "architecture": "ValueNetExtras: same six MLP layers, extra_weight [53,512] initialized exactly zero, same values output",
+  "optimizerUpdates": 0,
+  "checks": {
+    "native": "40000 actual raw champion decision states; same argmax and max abs Q delta<=1e-4; any non-tie argmax mismatch blocks",
+    "browser": "48 isolated Chrome WASM fixtures covering after-first-out, physical aliases, pass history, >128 candidates, lead, follow; fixture teacher fixed champion017",
+    "oracle": "Existing ordinary oracle lacks full extras context; do not deploy extras as champion until that separate path is completed; retain ordinary behavior",
+    "tribute": "Extras continuation rejects before model access; specialist stays disabled",
+    "publishing": "Preparation compatibility only without --publish, catalog and baseline unchanged"
+  },
+  "computeBudgetHours": 1,
+  "reserveGiB": 4,
+  "resumeGiB": 5,
+  "resources": "Single-thread native CPU ONNX validation, no GPU gradients, original GPU Python environment preserved",
+  "seedStatus": "New development block for equivalence and a disjoint block of64 browser fixtures, audit before execution",
+  "sourceStatus": "Freeze exact sources before registered native validation",
+  "noAuthorization": [
+    "extras online training",
+    "match-level reward",
+    "live calibrated Top5",
+    "Mac computation",
+    "web champion replacement",
+    "GuanZero training"
+  ]
+}

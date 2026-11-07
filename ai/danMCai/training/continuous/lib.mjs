@@ -165,7 +165,7 @@ export function argmax(values) {
 }
 
 /** Per-decision P0-layout inference with one cached native session per model file. */
-export async function createModelPool(ort, { threads = 1, limit = 8 } = {}) {
+export async function createModelPool(ort, { threads = 1, limit = 8, provider = null } = {}) {
   const sessions = new Map();
   async function session(file) {
     if (!sessions.has(file)) {
@@ -180,6 +180,7 @@ export async function createModelPool(ort, { threads = 1, limit = 8 } = {}) {
           intraOpNumThreads: threads,
           interOpNumThreads: 1,
           graphOptimizationLevel: 'all',
+          ...(provider ? { executionProviders: [provider] } : {}),
         }),
       );
     }

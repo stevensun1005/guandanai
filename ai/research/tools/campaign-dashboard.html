@@ -166,6 +166,8 @@
       training: '训练中',
       evaluation: '独立评测中',
       development: '开发验证（不训练）',
+      'checking-browser': '浏览器兼容验证',
+      'checking-publication-compatibility': '发布接口验证（不发布）',
       'incomplete-deadline': '已按截止停止，样本未完成',
       'incomplete-position-sample': '开发位置样本不足',
       analysis: '分析并选择下一步',
@@ -218,7 +220,7 @@
             v.plannedRequests ?? v.plannedPositions ?? v.plannedRounds ?? v.plannedMatches ?? null,
           unit =
             v.plannedPositions !== undefined
-              ? '个开发搜索位置'
+              ? v.positionUnit || '个开发搜索位置'
               : v.plannedRounds !== undefined
                 ? '局独立评测'
                 : v.plannedMatches !== undefined
@@ -309,13 +311,17 @@
                 : t.learner && t.processAlive
                   ? label.training
                   : '已登记'),
-            t.state.completedRequests !== undefined
-              ? num(t.state.completedRequests) + ' 次请求'
-              : t.state.completedMatches !== undefined
-                ? num(t.state.completedMatches) + ' 场采样'
-                : t.learner
-                  ? num(t.newUpdates) + ' 次新增更新'
-                  : '—',
+            t.state.completedPositions !== undefined
+              ? num(t.state.completedPositions) + ' 个决策位置'
+              : t.state.completedRounds !== undefined
+                ? num(t.state.completedRounds) + ' 局评测'
+                : t.state.completedRequests !== undefined
+                  ? num(t.state.completedRequests) + ' 次请求'
+                  : t.state.completedMatches !== undefined
+                    ? num(t.state.completedMatches) + ' 场采样'
+                    : t.learner
+                      ? num(t.newUpdates) + ' 次新增更新'
+                      : '—',
             date(t.state.updatedAt),
           ])
             tr.append(el('td', text));

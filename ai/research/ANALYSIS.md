@@ -31,3 +31,11 @@ The development reference requests 48 identical true-deal worlds. With determini
 All new compute uses a separately registered campaign task, fixed one-hour maximum, its original STOP/deadline and the four/five GiB memory pause/resume budget. Original training, GuanZero, tribute and website model selection remain unchanged. No actual D1 record is read for this pretrial.
 
 **Actual negative result:** all 200 positions completed; belief/reference agreement 34.5% versus raw champion 60.0%, paired difference −25.5pp (95% deal-position CI −33.95 to −17.05). Mean call time 579ms, p95 864ms. The effectiveness gate failed, so search pilot 0.4 is blocked. This is development agreement, not a measured strength or win-rate decline. See [results](evaluation/belief-pretrial-20261107/results.json) and study section 49.1.
+
+## 0.6 零投影学生 / Zero-projection student
+
+`ValueNetExtras` retains all twelve champion backbone parameter groups and adds a zero `[53,512]` projection before the first tanh. The export keeps `values` and adds an `extras` input. This is an equivalent export candidate, not a trained improvement or an optimizer continuation. The ordinary six-layer learner does not use this class.
+
+正式协议与新开发种子见 [0.6](evaluation/extras-equivalence-20261107/protocol.json)。目标 40,000 个真实 raw 冠军有选择决策（不是 40,000 个独立牌副），逐候选最大差 ≤1e-4，非平局 argmax 差异必须为零；再检查六类共 48 个 Chrome WASM 位置。只做发布准备兼容性，不上传 Release、不改冠军。协议冻结时尚无该批实测结果，不宣称通过。
+
+`run-extras-equivalence.mjs --run=<registered-run>` requires a campaign task and original fixed one-hour STOP/deadline; native validation explicitly uses one CPU thread per session. Browser checks use isolated artifacts and a disjoint development seed block. Tribute rejects extras before reading weights; the specialist stays disabled. Ordinary oracle observation context remains incomplete for extras, so this student is not deployable as champion. No online extras training, human-data use, new rewards or calibrated Top 5 is authorized.
