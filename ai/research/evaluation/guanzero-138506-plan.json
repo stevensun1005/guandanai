@@ -1,0 +1,36 @@
+{
+  "id": "model-000000138506",
+  "protocol": "development-500-v1",
+  "purpose": "development-not-heldout-acceptance",
+  "modelVersion": "model-000000138506",
+  "modelSHA256": "a9faa1898f6a5846aaa03a31a82249e25fc4f163b6f1da44a35d2ce2f006f65f",
+  "sourceBlock": null,
+  "index": 5098,
+  "pairs": 250,
+  "seedStart": 4209800000,
+  "seedEnd": 4209800249,
+  "opponents": [
+    "random",
+    "rule",
+    "p0",
+    "clint",
+    "champion"
+  ],
+  "champion": {
+    "id": "champion",
+    "name": "danMCai-v000705434",
+    "mode": "snapshot",
+    "version": "v000705434",
+    "modelSHA256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+    "archiveId": "012",
+    "gate": {
+      "gate": 309,
+      "acceptedAt": "2026-11-06T00:22:21.010Z",
+      "evidence": "ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+      "evidenceSHA256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "manifest": "ai/research/evaluation/champion-selection-mac-20261105/champion.json"
+    },
+    "policy": "greedy-network-only-no-web-styles-or-endgame"
+  },
+  "createdAt": "2026-11-06T14:38:26.993Z"
+}

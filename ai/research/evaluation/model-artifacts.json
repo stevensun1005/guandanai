@@ -3812,6 +3812,18 @@
           },
           "trainingDevice": "mps"
         }
+      },
+      {
+        "id": "018",
+        "sha256": "a9faa1898f6a5846aaa03a31a82249e25fc4f163b6f1da44a35d2ce2f006f65f",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-018/bot-018.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000138506",
+          "status": "experimental-not-heldout-accepted",
+          "step": 138506,
+          "registeredAt": "2026-11-07T03:13:06.962Z"
+        }
       }
     ]
   },
