@@ -138,3 +138,4 @@ Clint 的真人超时通过独立 `rule-timeout` Worker 消息进入 `rule-bot/t
 ## 独立配牌练习
 
 `lobby/practice.js` 处理训练种类选择；`practice/groups.mjs` 校验完整实体牌分区与记录，`practice/arrangement.js` 管理一次一家的编辑、对照、总结及本机持久化，`styles/arrangement-practice.css` 适配桌面／触屏。复用原理牌展示函数，`replay/session.js` 仅额外导出既有 `groupUnits`／`sortGroups`；不改变其实现或任何规则／神经网络决策。配牌数据的 key 与牌局复盘不同，辅助标签固定为 true，不接入 D1 或活跃训练。
+离线研究的 `src/analysis/concepts.mjs` 只提供公开信息与己手的描述标签，不接入网页决策或评分排序；评测记录和数据边界见[共享分析指南](../../ai/research/ANALYSIS.md)。

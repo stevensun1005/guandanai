@@ -562,3 +562,4 @@
 
 - Register historical 009 match-objective reanalysis with rule replay and paired-seed cluster intervals; no new model games, reward changes or website champion promotion.
 - Limit new Windows training/research to danMCai; preserve frozen runs and the original Wednesday deadline.
+- Add offline public-information analysis, replay-derived cooperation labels and D1 filtering; evaluation supports explicit teammates and optional traces. Ordinary model inference keeps its existing path; development equivalence validation is separate from strength acceptance.

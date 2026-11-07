@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "stage": "0.2",
+  "registeredAtUTC": "2026-11-07T18:44:05.330505+00:00",
+  "baseCommit": "c509d16db3d18c86d8c7215d71a4194022b5eed0",
+  "purpose": "Descriptive public-information concepts and replay labels; evaluation-only arbitrary teammates and model-config inference; no strategy change",
+  "acceptance": {
+    "captureVsNoCapture": "100 fresh development seeds, exact round results equal",
+    "baseInference": "4 fresh development seeds, raw no-extras inference byte-for-byte equal to old pooling path",
+    "labels": "At least 20 constructed action-log cases, no mismatches",
+    "rankInvariance": "Label calls do not mutate candidates or values; fuzzing",
+    "privacy": "D1 adapter validates structure; only kind=game actor=human assisted!=true observations returned; no hidden hands returned or passed to scorer",
+    "staticImports": "concepts never import rule-bot or chooseRuleAction"
+  },
+  "seedStatus": "Reserve and publish fresh development seeds via read-only audit before validation; no heldout seeds used",
+  "sourceStatus": "Freeze implementation blob hashes and commit before empirical validation",
+  "reward": "unchanged single-round final signed team upgrade points; all tags descriptive only",
+  "resources": "Single-process CPU checks; retain 4 GiB; do not touch frozen runs or training environment",
+  "webChampion": "017/v000855042 unchanged",
+  "newTrainingUpdates": 0
+}

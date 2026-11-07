@@ -47,7 +47,8 @@ def summarize(protocol, results):
                     raise ValueError("Invalid final round reward")
                 focus = team + (seed % 2) * 2
                 seats = [tasks[id]["opponent"] if p % 2 != team else
-                         "clint" if tasks[id].get("mixed") and p != focus else tasks[id]["model"] for p in range(4)]
+                         (tasks[id].get("teammate") or ("clint" if tasks[id].get("mixed") else tasks[id]["model"]))
+                         if p != focus else tasks[id]["model"] for p in range(4)]
                 if seats != game["seats"]:
                     raise ValueError("Wrong lineup")
             data[id][seed] = row
@@ -66,7 +67,8 @@ def summarize(protocol, results):
                 ranks[places] += 1
                 turns.append(g["turns"])
         reports[id] = {
-            "model": task["model"], "opponent": task["opponent"], "mixed": task["mixed"],
+            "model": task["model"], "opponent": task["opponent"], "mixed": task.get("mixed", False),
+            "teammate": task.get("teammate", "clint" if task.get("mixed") else task["model"]),
             "pairs": len(points), "rounds": len(points) * 2,
             "wins": wins["wins"], "losses": wins["losses"], "draws": 0,
             "signedUpgradePoints": estimate(points), "roundWinScore": estimate(scores),

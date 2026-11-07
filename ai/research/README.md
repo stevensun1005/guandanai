@@ -1,5 +1,7 @@
 # 模型研究与证据
 
+[共享分析层与等价验证](ANALYSIS.md)记录纯描述标签、D1 过滤边界、可选模拟日志和任意评测队友的接口。验证中的开发协议与后续真实结果分开保存，不改变神经网络排名或网页冠军。
+
 阶段 0.1 的[历史整场分歧协议](evaluation/match-objective-divergence-20261107/protocol.json)固定两组 009 网页策略的旧档案；只读规则重放与按牌副簇统计，无新模型对局。运行 `python ai/research/tools/match-objective-divergence.py --protocol=ai/research/evaluation/match-objective-divergence-20261107/protocol.json --out=ai/danMCai/workspace/match-objective-results.json`。结果不得冒称 017 棋力或开启整场训练的授权。
 
 [阶段 0.1 实际结果](evaluation/match-objective-divergence-20261107/results.json)与主报告第 48 节保留两组各 1,000 对的旧证据重放及 95% 簇区间，并指出“败场来自对方 A 的 +2／+3”是现有牌规恒等式，不能作为后续训练门槛。

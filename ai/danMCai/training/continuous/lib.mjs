@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { encode, cardsArray } from '../../../../web/src/ai/encoding.mjs';
+import { inferPolicy } from '../../../../web/src/ai/policy-inference.mjs';
 
 export const STATE = 513;
 export const ACTION = 54;
@@ -185,8 +186,10 @@ export async function createModelPool(ort, { threads = 1, limit = 8 } = {}) {
     return sessions.get(file);
   }
   return {
-    async values(file, state) {
+    async values(file, state, config = {}) {
       const engine = await session(file);
+      if (config.extraFeatures || config.history || config.rerankCandidates)
+        return (await inferPolicy(ort, engine, state, config)).values;
       const n = state.actions.length;
       const actions = new Float32Array(n * ACTION);
       for (let i = 0; i < n; i++) actions.set(cardsArray(state.actions[i]), i * ACTION);

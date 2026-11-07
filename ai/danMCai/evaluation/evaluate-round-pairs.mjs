@@ -11,6 +11,7 @@ import { candidates } from '../../../web/src/ai/candidates.js';
 import { policyState } from '../../../web/src/ai/observation.js';
 import { argmax, createModelPool, option, writeJSON } from '../training/continuous/lib.mjs';
 import { memoryAvailability } from '../training/continuous/resources.mjs';
+import { analysisState } from './cooperation-labels.mjs';
 
 export const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
@@ -18,12 +19,17 @@ export function lineup(task, team, seed) {
   if (![0, 1].includes(team)) throw Error('Invalid team');
   const focus = team + (seed % 2) * 2;
   return [0, 1, 2, 3].map((p) =>
-    p % 2 !== team ? task.opponent : task.mixed && p !== focus ? 'clint' : task.model,
+    p % 2 !== team
+      ? task.opponent
+      : p !== focus
+        ? task.teammate || (task.mixed ? 'clint' : task.model)
+        : task.model,
   );
 }
 
-export async function playRound({ seed, seats, values }) {
+export async function playRound({ seed, seats, values, capture = false, modelConfigs = {} }) {
   const game = createRound(seed);
+  const trace = capture ? { initial: structuredClone(game), moves: [] } : null;
   const initial = {
     level: game.L,
     leader: game.turn,
@@ -32,7 +38,8 @@ export async function playRound({ seed, seats, values }) {
   const rule = createRuleOpponent(seed ^ 0x6a09e667);
   for (let turn = 0; turn < 1000; turn++) {
     const p = game.turn;
-    let play;
+    let play,
+      estimates = null;
     if (seats[p] === 'clint') play = rule(game, p);
     else {
       const plays = candidates(game.hands[p], game.L, game.trick?.play);
@@ -40,15 +47,28 @@ export async function playRound({ seed, seats, values }) {
       let index = 0;
       if (plays.length > 1) {
         // policyState exposes only the acting player's cards and public information.
-        const scores = await values(seats[p], policyState(game, p, 0, plays));
+        const config = modelConfigs[seats[p]] || {};
+        const state =
+          config.extraFeatures || config.history
+            ? analysisState(game, p, plays)
+            : policyState(game, p, 0, plays);
+        const scores = await values(seats[p], state);
         if (scores.length !== plays.length || !Array.from(scores).every(Number.isFinite))
           throw Error('Invalid policy values');
         index = argmax(scores);
+        if (capture) estimates = Array.from(scores);
       }
       play = plays[index];
     }
+    if (capture)
+      trace.moves.push({
+        p,
+        cards: play?.cards.map((c) => c.id) || null,
+        ...(play ? { type: play.type, value: play.value, n: play.n } : {}),
+        estimates,
+      });
     const result = advanceRound(game, play);
-    if (result) return { ...initial, ...result, turns: turn + 1 };
+    if (result) return { ...initial, ...result, turns: turn + 1, ...(capture ? { trace } : {}) };
   }
   throw Error('Round truncated; never count as a draw');
 }
@@ -122,7 +142,11 @@ export async function runRoundPairs({ protocol, run, shard = 0, shards = 4 }) {
           const result = await playRound({
             seed,
             seats,
-            values: (id, s) => pool.values(files[id], s),
+            values: (id, s) => pool.values(files[id], s, plan.models[id].config),
+            modelConfigs: Object.fromEntries(
+              Object.entries(plan.models).map(([id, m]) => [id, m.config || {}]),
+            ),
+            capture: !!plan.capture,
           });
           games.push({
             team,
