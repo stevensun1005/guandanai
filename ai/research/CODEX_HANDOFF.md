@@ -370,3 +370,5 @@ GuanZero io48 已增加独立 Windows 自动恢复任务，原窗口与检查点
 GuanZero所有者已明确延期至2026-11-11 10:00 Toronto，覆盖旧48小时截止。新window.extension、12小时评测和独立恢复任务以[活动授权窗口](../guanzero/README.md#授权延长窗口)为准。
 
 阶段 0.3 已完成负结果，0.4 不启动；0.6 的学生／Node／浏览器等价接口已准备，执行以 `evaluation/extras-equivalence-20261107/protocol.json` 与 campaign 注册的固定窗口为准。无 extras 在线训练或自动发布授权。
+
+0.6 已在冻结 `13e8f17` 完成，结果见主报告第 50.1 节；不要重复跑 40,000／48，也不要把零投影学生换上网页。0.4 仍关闭，下一项可选 1.6 必须新协议、起点 017／新 Adam／空回放，非 extras 训练。

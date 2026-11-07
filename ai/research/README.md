@@ -96,3 +96,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [按钮多状态与显示辅助标记验证](evaluation/ui-control-layout-20261107.json)：操作区避让、极小窗口滚动、局末结果、真实评分及屏幕内展示标记；属于界面与数据采集兼容性，不是新的棋力或训练结果。
 
 [0.6 协议](evaluation/extras-equivalence-20261107/protocol.json)封存零投影学生、40,000 开发决策与 48 浏览器夹具的等价条件；尚待本批实测，不等于更强。
+
+[0.6 实测](evaluation/extras-equivalence-20261107/results.json)：40,000 决策 argmax 全同／最大差 0，48 WASM 位置 argmax 全同；兼容性通过，训练更新与新棋力验收均为零。下一项仅可另行登记普通 017 剥削臂。

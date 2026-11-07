@@ -1,0 +1,38 @@
+{
+  "sourceCommit": "13e8f17e1e98bf3327e9cbafa75b0b7f9425cbd3",
+  "task": {
+    "id": "extras-equivalence-20261107",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\extras-equivalence-20261107",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-equivalence-20261107\\protocol.json",
+    "protocolSHA256": "a16c1c2a7529391fc51726d06a219b9e40ba437e16e939706625d12d9298acd3",
+    "window": {
+      "startUTC": "2026-11-07T19:43:07.062Z",
+      "deadlineUTC": "2026-11-07T20:43:07.062Z",
+      "requestedHours": 1,
+      "restartExtendsDeadline": false
+    }
+  },
+  "runnerPID": 62928,
+  "sourceAndModelHashesVerifiedBeforeLaunch": true,
+  "processExited": true,
+  "artifacts": {
+    "summary.json": {
+      "sha256": "3090a5e69be1a302dedafa915f676d338fcfbfe368a1ceeb758123d9a9c593a4",
+      "bytes": 15512
+    },
+    "browser\\report.json": {
+      "sha256": "bbced5808938e12c691b198758dcbd62c2f9e97f91d0521d14e75da99c8a6498",
+      "bytes": 13996
+    },
+    "browser\\positions.json": {
+      "sha256": "7e2de3eed805ad6ea8e5facdec845cd345900b52b1164896d172fcaac934b0a0",
+      "bytes": 496251
+    },
+    "publish-prepare.log": {
+      "sha256": "de8cdf68e228f456cb2c4e9049eab008e47d5d36c1e6edf93988e63c311434ea",
+      "bytes": 661
+    }
+  },
+  "fullFixturePositions": "Ignored only, no private hands or models committed",
+  "publish": "Preparation only; no Release upload, catalog/default unchanged"
+}
