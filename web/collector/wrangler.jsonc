@@ -4,7 +4,7 @@
   "compatibility_date": "2026-11-05",
   "workers_dev": true,
   "observability": {"enabled":false},
-  "vars": {"ALLOWED_ORIGINS":"https://stevensun1005.github.io,http://127.0.0.1:8765,http://localhost:8765"},
+  "vars": {"ALLOWED_ORIGINS":"https://stevensun1005.github.io,https://clintsun1977.github.io,http://127.0.0.1:8765,http://localhost:8765"},
   "ratelimits": [{"name":"RATE_LIMITER","namespace_id":"10827","simple":{"limit":60,"period":60}}],
   "d1_databases": [{"binding":"DB","database_name":"guandan-human-games-v1","database_id":"95189c4e-2e9b-47aa-bf8a-d7bfae11729c","migrations_dir":"migrations"}]
 }

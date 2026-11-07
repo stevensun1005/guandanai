@@ -42,7 +42,9 @@ npx wrangler@4.158.0 secret put EXPORT_TOKEN --config web/collector/wrangler.jso
 
 公开接口仅有 `POST /rounds` 与不含数据的 `/health`。指定网页 Origin、98,304 字节上限、每来源 IP 60 次／分钟限流和严格字段白名单共同约束写入；原始 IP 不写入数据库。`GET /admin/export` 必须提供私有 Bearer 密钥，每页最多 100 局，默认排除测试局。匿名访问没有牌谱列表或下载权限。
 
-当前 D1 为 `guandan-human-games-v1`，接收服务为 `guandan-human-games-collector`。允许正式 GitHub Pages 来源及本机 `127.0.0.1:8765`／`localhost:8765` 预览；更换域名时需要同时修改来源清单、网页配置与 CSP，再部署验证。
+当前 D1 为 `guandan-human-games-v1`，接收服务为 `guandan-human-games-collector`。允许正式 GitHub Pages 来源、Clint 网站 `https://clintsun1977.github.io` 及本机 `127.0.0.1:8765`／`localhost:8765` 预览；更换域名时需要同时修改来源清单、网页配置与 CSP，再部署验证。
+
+[Clint 的掼蛋网站](https://clintsun1977.github.io/guandan/)使用同一格式上传两名以上真人的牌谱，与本站记录同库导出、同样经服务端重放校验。其 `appVersion` 以 `c1977` 开头，电脑 ID 沿用本项目发布编号（danMCai `017`、GuanZero `021`），Clint 规则为 `clint-rule`、版本 `clintsun1977-…`；需要区分来源时按 `appVersion` 前缀筛选。采集代码见 [clintsun1977/guandan `web/src/collection/`](https://github.com/clintsun1977/guandan/tree/main/web/src/collection)。
 
 在项目根目录：
 

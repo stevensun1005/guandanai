@@ -80,7 +80,7 @@ The **[model research report](./ai/research/MODEL_STUDY.md)** documents the shar
 
 The project aims to keep improving overall playing strength and become a training partner that helps its owner review games and improve. An 80% win rate is only a historical threshold against specific opponents, not the overall goal. Performance across opponents, partnership play and teaching value require separate evidence; planned abilities are not claimed as implemented or validated.
 
-Completed multiplayer rounds with at least two human seats are collected by the host into private cloud storage. Records omit nicknames, chat, voice and seat credentials; offline retries and deduplication are supported. Private JSON/JSONL exports remain isolated research data and are not automatically fed into active training. See [collection and export](./web/collector/README.md).
+Completed multiplayer rounds with at least two human seats are collected by the host into private cloud storage. Records omit nicknames, chat, voice and seat credentials; offline retries and deduplication are supported. Private JSON/JSONL exports remain isolated research data and are not automatically fed into active training. Rounds from [Clint's site](https://clintsun1977.github.io/guandan/) are uploaded to the same store in the same format (`appVersion` starting with `c1977`). See [collection and export](./web/collector/README.md).
 
 GuanZero development evaluation now includes Clint and the accepted danMCai champion. Each opponent defaults to 500 complete matches (250 paired seeds with sides swapped). The dashboard separates live progress from completed results and historical 200-match batches. See the [evaluation protocol](ai/guanzero/README.md#开发评测对手).
 

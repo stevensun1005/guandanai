@@ -68,7 +68,7 @@ Clint 规则对手独立维护：单张顺走、级牌与王的取舍、公开�
 
 大厅依次提供 **Clint规则机器人、GuanZero 最近两代、danMCai 初始版及最近两代冠军**。默认使用**danMCai 现任门控冠军**，点「全部使用danMCai 冠军」可重置。冠军依据训练系统实际门控晋升，不按步数最新替代，不代表独立棋力验收。本机 GuanZero 每 12 小时冻结一代，两对手各打完 500 场后将同一份权重发布到网页。旧权重保留归档。GuanZero 使用 `guanzero-adp-gpubatch-44752` 这样的名称。具体版本与默认值见 [电脑选择与发布](./web/docs/WEB_MODELS.md)。 Mac 续训产生的冠军同样须经真实 accept 门控与 SHA 核对，再按[发布指南](web/docs/WEB_MODELS.md)同步到默认模型和出牌评价。
 
-至少两名真人的联机局结束后，房主会自动把匿名结构化牌谱保存到云端；支持断网暂存、补传与去重。牌谱可私有导出为 JSON／JSONL，供后续研究人类行为，当前训练不会自动读取。[采集与导出](./web/collector/README.md)。
+至少两名真人的联机局结束后，房主会自动把匿名结构化牌谱保存到云端；支持断网暂存、补传与去重。牌谱可私有导出为 JSON／JSONL，供后续研究人类行为，当前训练不会自动读取。[Clint 的网站](https://clintsun1977.github.io/guandan/)的真人局也以同一格式上传到同一云端（`appVersion` 以 `c1977` 开头）。[采集与导出](./web/collector/README.md)。
 
 ## 为浏览器而做
 
