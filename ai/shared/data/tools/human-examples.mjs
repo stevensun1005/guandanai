@@ -1,9 +1,15 @@
 import { createHash } from 'node:crypto';
 import { validateRecord } from '../../../../web/src/collection/validate.mjs';
 
-export function humanExamples(saved) {
+/**
+ * keepAssistedMatches: match IDs whose `assisted` flags are known not to reflect real use of the move coach (for example a
+ * match where the evaluation was only switched on to test the interface). Their flagged human actions are kept and marked
+ * `assistedOverride: true`; every other match still excludes assisted actions.
+ */
+export function humanExamples(saved, { keepAssistedMatches = new Set() } = {}) {
   const { result, levelsAfter, remaining, trust, ...raw } = saved;
   if (raw.kind !== 'game') return [];
+  const keepAssisted = keepAssistedMatches.has(raw.matchId);
   const bucket = createHash('sha256')
     .update('guandan-human-v1:' + raw.matchId)
     .digest()[0];
@@ -11,7 +17,7 @@ export function humanExamples(saved) {
   const sourceSHA256 = createHash('sha256').update(JSON.stringify(raw)).digest('hex');
   const rows = [];
   const checked = validateRecord(raw, ({ index, action, hands, trick, turn }) => {
-    if (action.actor !== 'human' || action.assisted === true) return;
+    if (action.actor !== 'human' || (action.assisted === true && !keepAssisted)) return;
     rows.push({
       schema: 1,
       source: 'human-browser',
@@ -43,6 +49,7 @@ export function humanExamples(saved) {
       },
       action: { cards: action.cards, type: action.type, value: action.value, n: action.n },
       decisionMs: action.decisionMs,
+      ...(action.assisted === true ? { assistedOverride: true } : {}),
     });
   });
   for (const row of rows)

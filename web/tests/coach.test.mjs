@@ -118,6 +118,22 @@ test('worker prepares real legal actions, including pass and finishing moves, wi
   assert.ok(follow.actions.some((ids) => !ids.length));
 });
 
+test('a match named in keepAssistedMatches keeps its assisted human actions, marked as overridden', () => {
+  const record = collectedRound();
+  record.kind = 'game';
+  const human = record.actions.find((a) => a.actor === 'human');
+  const before = humanExamples(record).length;
+  human.assisted = true;
+  assert.equal(humanExamples(record).length, before - 1);
+  const kept = humanExamples(record, { keepAssistedMatches: new Set([record.matchId]) });
+  assert.equal(kept.length, before);
+  assert.equal(kept.filter((row) => row.assistedOverride).length, 1);
+  assert.equal(
+    humanExamples(record, { keepAssistedMatches: new Set(['other-match']) }).length,
+    before - 1,
+  );
+});
+
 test('assisted human actions remain replayable but are excluded from unassisted imitation examples', () => {
   const record = collectedRound();
   record.kind = 'game';
