@@ -1,0 +1,157 @@
+{
+  "observedAt": "2026-11-07T03:49:47.742Z",
+  "defaultId": "017",
+  "model": {
+    "id": "019",
+    "file": "bot-019.onnx",
+    "sha256": "bb745cbf44b4a0f648ef93998b60f1f02211d5a4bdd4176b02cf607d6e26d754",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-019/bot-019.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-io48",
+      "version": "model-000000186280",
+      "status": "experimental-not-heldout-accepted",
+      "step": 186280,
+      "registeredAt": "2026-11-07T03:49:42.557Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "developmentEvaluation": {
+    "protocol": "development-500-v1",
+    "opponentPanel": "random-clint-champion-v1",
+    "modelSHA256": "bb745cbf44b4a0f648ef93998b60f1f02211d5a4bdd4176b02cf607d6e26d754",
+    "seedStart": 4210000000,
+    "seedEnd": 4210000249,
+    "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "opponents": {
+      "random": {
+        "wins": 500,
+        "losses": 0,
+        "draws": 0,
+        "confidence95": {
+          "matchWinRate": [
+            1,
+            1
+          ],
+          "matchScore": [
+            1,
+            1
+          ],
+          "roundWinRate": [
+            1,
+            1
+          ],
+          "averageUpgradePoints": [
+            2.9908475925189015,
+            2.997603833865815
+          ]
+        },
+        "reportSHA256": "912613ab14112b82ffc98d775055f7a1a06c49c9c351ffde55dca34221d45ad7"
+      },
+      "clint": {
+        "wins": 219,
+        "losses": 226,
+        "draws": 55,
+        "confidence95": {
+          "matchWinRate": [
+            0.398,
+            0.48
+          ],
+          "matchScore": [
+            0.454,
+            0.532
+          ],
+          "roundWinRate": [
+            0.44788213627992635,
+            0.4768432752871434
+          ],
+          "averageUpgradePoints": [
+            -0.0611353711790393,
+            0.07683700111898545
+          ]
+        },
+        "reportSHA256": "693daaa3916ce7e76b3ee03488c686240b6487154656e2aacebccb3a2ba8b6a1"
+      },
+      "champion": {
+        "wins": 47,
+        "losses": 408,
+        "draws": 45,
+        "confidence95": {
+          "matchWinRate": [
+            0.07,
+            0.122
+          ],
+          "matchScore": [
+            0.114,
+            0.166
+          ],
+          "roundWinRate": [
+            0.3123728123728124,
+            0.3420949391918399
+          ],
+          "averageUpgradePoints": [
+            -0.9562563580874873,
+            -0.8166864843440349
+          ]
+        },
+        "reportSHA256": "ce14ce4ae90494f7b2b9a3589cd1ca181f5c5452178b67913c1b4f5be3ea94c7"
+      }
+    }
+  },
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "validation": {
+    "browserWasm": {
+      "status": "PASSED",
+      "backend": "browser-wasm",
+      "positions": 16,
+      "totalValues": 49,
+      "maxError": 2.384185791015625e-07,
+      "actionMismatches": 0
+    },
+    "nodeTests": 220,
+    "guanzeroPythonTests": 9,
+    "reportArchivePrefix": "ai/research/evaluation/guanzero-186280-development-500-",
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "019",
+          "guanzero-adp-io48-186280"
+        ],
+        [
+          "018",
+          "guanzero-adp-io48-138506"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    },
+    "build": "3b6db88b66",
+    "format": "passed"
+  }
+}

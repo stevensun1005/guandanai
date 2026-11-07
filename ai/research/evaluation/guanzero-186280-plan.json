@@ -1,0 +1,35 @@
+{
+  "id": "model-000000186280",
+  "protocol": "development-500-v1",
+  "purpose": "development-not-heldout-acceptance",
+  "modelVersion": "model-000000186280",
+  "modelSHA256": "bb745cbf44b4a0f648ef93998b60f1f02211d5a4bdd4176b02cf607d6e26d754",
+  "sourceBlock": null,
+  "index": 5100,
+  "pairs": 250,
+  "seedStart": 4210000000,
+  "seedEnd": 4210000249,
+  "opponentPanel": "random-clint-champion-v1",
+  "opponents": [
+    "random",
+    "clint",
+    "champion"
+  ],
+  "champion": {
+    "id": "champion",
+    "name": "danMCai-v000855042",
+    "mode": "snapshot",
+    "version": "v000855042",
+    "modelSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "archiveId": "017",
+    "gate": {
+      "gate": 330,
+      "acceptedAt": "2026-11-06T10:59:34.199Z",
+      "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+      "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+    },
+    "policy": "greedy-network-only-no-web-styles-or-endgame"
+  },
+  "createdAt": "2026-11-07T03:11:10.744Z"
+}
