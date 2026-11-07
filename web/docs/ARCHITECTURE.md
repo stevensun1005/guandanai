@@ -7,6 +7,7 @@
 - `hand` 管理手牌的排序、分组、显示和出牌提示。
 - `ui`、`input`、`effects`、`audio` 负责呈现与交互。
 - `network` 传递房间状态和玩家事件；房主决定发牌、电脑动作和超时处理。
+- `network/spectators.js` 负责独立观众连接、公开牌桌及语音管理；`public-table.mjs` 仅投影公开字段并验证接收格式。观众与有凭证的玩家连接分开，不接收 `evt/start/resume` 等可含私牌的消息，不进入游戏控制器、模型推理或牌谱采集。联盟训练、网页冠军及神经网络策略不受此模块影响。
 - `web/src/ai` 与独立 `web/src/rule-bot` 在后台 Worker 计算策略结果，最终动作仍经过游戏事件与合法性校验。
 
 ```mermaid

@@ -81,10 +81,11 @@ export function initialize() {
     inbox: [],
     pending: false,
     conns: new Map(),
+    spectators: new Map(),
     lobby: { S: null, E: null, N: null, W: null },
     mics: {},
   };
-  isHost = () => runtime.network.mode !== 'guest';
+  isHost = () => !['guest', 'spectator'].includes(runtime.network.mode);
   runtime.rules = { trib: true, aFail: 'draw', startLevel: 2, startSide: '', coachAllowed: false };
   isHumanSeat = (p) => runtime.network.humans.has(p);
   toAbs = (p) => (p + runtime.network.off) % 4;

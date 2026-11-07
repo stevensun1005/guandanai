@@ -4811,5 +4811,16 @@
       "durationHours": null,
       "largeFilesInGit": false
     }
+  ],
+  "clintSyncHistory": [
+    {
+      "upstreamSHA": "2b2878b62d18171a27b342308514d2d53da4d678",
+      "previousSHA": "54fde9edc451fe6808fa2d8548e086f25b188b41",
+      "scope": "UI and spectator networking; rule and neural policies unchanged",
+      "evidence": "ai/research/evaluation/clint-sync-20261106-latest.json",
+      "status": "locally-validated-awaiting-pages",
+      "strengthMatches": 0,
+      "trainingUpdates": 0
+    }
   ]
 }

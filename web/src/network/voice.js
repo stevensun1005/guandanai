@@ -30,7 +30,10 @@ export function initialize() {
       talking = new Set(),
       waiting = [],
       buf = new Uint8Array(512);
-    const me = () => toAbs(0);
+    let muted = new Set(),
+      locked = false;
+    const me = () =>
+      runtime.network.mode === 'spectator' ? runtime.network.spectatorId : toAbs(0);
     const ctx = () => {
       if (!ac) {
         const AC = window.AudioContext || window.webkitAudioContext;
@@ -42,7 +45,7 @@ export function initialize() {
       mic ||
       blank ||
       (blank = ctx() ? ac.createMediaStreamDestination().stream.getAudioTracks()[0] : null);
-    const here = (a) => active && !!peers[a] && isHumanSeat(toLocal(a));
+    const here = (a) => active && !!peers[a] && (a >= 10 || isHumanSeat(toLocal(a)));
     function meter(a, stream) {
       try {
         const c = ctx(),
@@ -81,6 +84,7 @@ export function initialize() {
           document.body.appendChild(ln.audio);
         }
         ln.audio.srcObject = st;
+        ln.audio.muted = muted.has(a);
         ln.audio.play().catch(() => {});
         meter(a, st);
       });
@@ -142,6 +146,8 @@ export function initialize() {
       paint();
     }
     function stop() {
+      muted.clear();
+      locked = false;
       if (!active && !mic) return;
       active = false;
       waiting.length = 0;
@@ -162,7 +168,7 @@ export function initialize() {
     function prune() {
       if (!active) return;
       for (const a of [...lines.keys()]) if (!here(a)) drop(a);
-      if (runtime.network.humans.size < 2) stop();
+      if (Object.keys(peers).filter((a) => +a === me() || here(+a)).length < 2) stop();
       else paint();
     }
     function swap(call, t) {
@@ -174,7 +180,7 @@ export function initialize() {
       } catch (_) {}
     }
     async function toggle() {
-      if (!active) return;
+      if (!active || locked) return;
       if (!mic) {
         try {
           // an iPad plays the page like a media app; to listen to the microphone it has to switch to a call
@@ -184,7 +190,7 @@ export function initialize() {
           const st = await navigator.mediaDevices.getUserMedia({
             audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
           });
-          if (!active) {
+          if (!active || locked) {
             st.getTracks().forEach((t) => t.stop());
             return;
           }
@@ -232,11 +238,16 @@ export function initialize() {
       b.classList.toggle('on', on);
       b.textContent = on ? '开麦' : '闭麦';
       b.setAttribute('aria-pressed', on);
+      const watch = $('#spectatorMic');
+      watch.hidden = !active || runtime.network.mode !== 'spectator';
+      watch.disabled = locked;
+      watch.textContent = locked ? '语音已关闭' : on ? '开麦' : '闭麦';
+      watch.setAttribute('aria-pressed', String(on));
       for (let q = 0; q < 4; q++) {
         const el = $(q ? `#seat${q} .vc` : '#myVc');
         if (!el) continue;
         const a = toAbs(q),
-          mine = q === 0 ? on : !!runtime.network.mics[a];
+          mine = q === 0 && runtime.network.mode !== 'spectator' ? on : !!runtime.network.mics[a];
         el.className =
           'vc' + (!active || !isHumanSeat(q) ? '' : talking.has(a) ? ' talk' : mine ? '' : ' mute');
       }
@@ -250,6 +261,19 @@ export function initialize() {
       for (const ln of lines.values())
         if (ln.audio && ln.audio.paused) ln.audio.play().catch(() => {});
     }
-    return { start, stop, prune, incoming, toggle, wake, paint };
+    function setMuted(ids) {
+      muted = new Set(ids);
+      for (const [a, line] of lines) if (line.audio) line.audio.muted = muted.has(a);
+    }
+    function lock(off) {
+      locked = off;
+      if (off && mic) {
+        on = false;
+        mic.enabled = false;
+        Sound.duck(false);
+      }
+      paint();
+    }
+    return { start, stop, prune, incoming, toggle, wake, paint, setMuted, lock };
   })();
 }

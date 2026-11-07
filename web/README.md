@@ -42,4 +42,8 @@ npm run dev
 
 `src/lobby/start-state.mjs` 负责房主的初始续局状态和视角旋转，`src/lobby/level.js` 提供双队级数、名次与失败次数弹窗。只在首场首次开局应用；房间恢复保留当前状态。`src/ui/viewport.js` 合并尺寸事件并对齐名字牌，不修改 viewport meta；`#debug` 可查看尺寸诊断。使用方法见 [上桌指南](docs/PLAYING.md)，检查记录见 [Clint 增量同步](../ai/research/evaluation/clint-sync-20261106.json)。
 
-Clint 的普通出牌与真人超时分别维护：本轮仅更新普通公开牌史策略，未改网页布局和神经网络。范围、例外及来源指纹见 [规则模块](src/rule-bot/README.md#公开牌史策略更新)。
+Clint 的普通出牌与真人超时分别维护；早前的公开牌史策略修订只改变规则对手，范围、例外及指纹见 [规则模块](src/rule-bot/README.md#公开牌史策略更新)。
+
+## 训练与公开观战
+
+大厅「训练」保留单机明牌复盘；「观战」通过四位房间号查看公开牌面，不占座、不接收私牌、不操作牌局。实现分为 `src/network/public-table.mjs` 的纯数据投影／验证、`src/network/spectators.js` 的独立连接与视图，语音仍由 `network/voice.js` 处理。房主选项新增房间号及逐个观众的语音开关。使用与测试见 [上桌指南](docs/PLAYING.md#观战朋友的牌桌)、[验证指南](docs/TESTING.md#公开观战与语音回归)。本轮四个 UI 提交没有修改 Clint 策略、神经网络或冻结训练。

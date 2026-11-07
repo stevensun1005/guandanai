@@ -7,6 +7,16 @@
   margin: 0;
   line-height: 1.5;
 }
+body.practice .seat .who .name,
+body.practice #myName {
+  color: #000 !important;
+}
+body.practice .pchip {
+  border: 0;
+  width: auto;
+  min-width: calc(var(--mcw) * 1.2);
+  align-self: stretch;
+}
 body.practice {
   --tside-w: 340px;
 }

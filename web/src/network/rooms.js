@@ -29,10 +29,23 @@ import {
 import { $ } from '../ui/cards.js';
 import { hideOverlay, showResult } from '../ui/overlays.js';
 import { render, setMsg } from '../ui/table.js';
+import {
+  acceptSpectator,
+  closeSpectator,
+  relaySpectators,
+  resetSpectators,
+  spectatorData,
+  spectatorGone,
+  spectatorMessage,
+  syncRoomOptions,
+  voicePeers,
+  updateSpectatorVoice,
+} from './spectators.js';
 
 let SILENT_MS;
 
 export function leaveNet() {
+  resetSpectators();
   VC.stop();
   try {
     runtime.network.peer && runtime.network.peer.destroy();
@@ -101,7 +114,8 @@ export function openRoom() {
 }
 
 export function broadcast(msg) {
-  for (const v of runtime.network.conns.values()) if (v.conn.open) v.conn.send(msg);
+  for (const v of runtime.network.conns.values()) if (v.dir && v.conn.open) v.conn.send(msg);
+  relaySpectators(msg);
 }
 
 export function broadcastLobby() {
@@ -118,9 +132,14 @@ export function broadcastLobby() {
 }
 
 function hostOnData(conn, d) {
+  if (spectatorData(conn, d)) return;
   const info = runtime.network.conns.get(conn.peer);
   if (!info || !d) return;
   info.seen = Date.now();
+  if (d.t === 'watch') {
+    acceptSpectator(conn, info, d);
+    return;
+  }
   if (d.t === 'hello') info.version = d.ver;
   if (receiveHello(conn, d)) return;
   if (receiveSync(conn, d)) return;
@@ -239,6 +258,7 @@ function hostGuestAct(seat, e) {
 }
 
 function hostOnClose(conn, how = 'drop') {
+  if (closeSpectator(conn)) return;
   const info = runtime.network.conns.get(conn.peer);
   if (!info) return;
   runtime.network.conns.delete(conn.peer);
@@ -254,6 +274,7 @@ function hostOnClose(conn, how = 'drop') {
   const seat = absOf(info.dir, runtime.network.hostDir);
   const list = [...runtime.network.humans].filter((h) => h !== seat);
   act({ k: 'humans', list, names: runtime.network.names, left: info.name, how });
+  updateSpectatorVoice();
   const c = runtime.game.clock;
   if (c && (c.who === seat || c.seat === seat)) {
     runtime.game.clock = null;
@@ -289,9 +310,7 @@ export function startOnline() {
     if (runtime.network.lobby[d]) names[absOf(d, runtime.direction)] = runtime.network.lobby[d];
   runtime.network.names = names;
   // each person's connection name, so the people at the table can call each other for voice
-  const peers = { 0: runtime.network.peer.id };
-  for (const v of runtime.network.conns.values())
-    if (v.dir && runtime.network.lobby[v.dir]) peers[absOf(v.dir, runtime.direction)] = v.conn.peer;
+  const peers = voicePeers();
   broadcast({
     t: 'start',
     hostDir: runtime.direction,
@@ -317,9 +336,10 @@ export function enterOnline(mode, hostDir, names) {
 }
 
 // a friend: connects to the room number and follows the host
-export function joinRoom(code) {
+export function joinRoom(code, watching = false) {
   if (!peerReady()) return;
   leaveNet();
+  runtime.network.watching = watching;
   runtime.network.lastCode = code;
   lobbyStatus('正在连接…');
   const peer = new Peer();
@@ -331,6 +351,10 @@ export function joinRoom(code) {
     runtime.network.hostConn = conn;
     conn.on('open', () => {
       runtime.network.hostSeen = Date.now();
+      if (watching) {
+        conn.send({ t: 'watch', name: nickNow() || '观众', ver: VERSION });
+        return;
+      }
       lobbyStatus(savedSeat(code) ? '正在恢复原座位…' : '选一个空座位');
       $('#roomCodeShow').textContent = code;
       $('#roomInfo').hidden = false;
@@ -346,6 +370,12 @@ export function joinRoom(code) {
   });
   peer.on('error', (err) => {
     if (runtime.network.peer !== peer) return;
+    if (watching) {
+      spectatorGone(
+        err.type === 'peer-unavailable' ? '没有这个房间，请核对房间号' : '观战连接失败，请重试',
+      );
+      return;
+    }
     if (runtime.network.mode === 'guest') {
       connectionFailed(
         err.type === 'peer-unavailable'
@@ -369,6 +399,10 @@ export function sendSit(d) {
 
 function guestOnData(d) {
   if (!d) return;
+  if (runtime.network.watching || runtime.network.mode === 'spectator') {
+    spectatorMessage(d);
+    return;
+  }
   runtime.network.hostSeen = Date.now();
   if (receiveRecovery(d)) return;
   if (d.t === 'ping') {
@@ -385,6 +419,14 @@ function guestOnData(d) {
   if (d.t === 'mics') {
     runtime.network.mics = d.m || {};
     VC.paint();
+    return;
+  }
+  if (d.t === 'vpeers') {
+    VC.start(d.peers);
+    return;
+  }
+  if (d.t === 'vmuted') {
+    VC.setMuted(d.ids || []);
     return;
   }
   if (d.t === 'emote') {
@@ -439,6 +481,10 @@ function guestOnData(d) {
 }
 
 function hostGone(automatic = true) {
+  if (runtime.network.watching || runtime.network.mode === 'spectator') {
+    spectatorGone(automatic ? undefined : '房主已退出，观战结束。');
+    return;
+  }
   if (runtime.network.gone) return;
   VC.stop();
   if (runtime.network.mode === 'guest') {
@@ -514,7 +560,7 @@ export function initialize() {
   SILENT_MS = 20000;
   setInterval(() => {
     const now = Date.now();
-    for (const v of [...runtime.network.conns.values()]) {
+    for (const v of [...runtime.network.conns.values(), ...runtime.network.spectators.values()]) {
       if (now - v.seen > SILENT_MS) {
         try {
           v.conn.close();

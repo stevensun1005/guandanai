@@ -123,6 +123,8 @@
           ><span class="optwrap"
             ><button class="link" id="optBtn" aria-expanded="false">选项</button
             ><span class="optmenu" id="optMenu" hidden
+              ><span class="optinfo" id="roomOpt" hidden>房间号 <b id="roomOptNum"></b></span
+              ><span id="spectatorVoices" hidden></span
               ><button class="link" id="historyBtn">牌谱与战况</button
               ><button class="link tog" id="coachToggle" aria-pressed="false" hidden>
                 出牌评价：关</button
@@ -467,8 +469,21 @@
           <p id="botSetupNote"></p>
         </details>
         <button class="link practice-entry" type="button" id="practiceBtn">
-          复盘练习 · 四家明牌与出牌记录
+          训练 · 四家明牌与复盘记录
         </button>
+        <button class="link practice-entry" type="button" id="spectatorBtn">观战</button>
+        <div class="lobby-join" id="spectatorRow" hidden>
+          <input
+            class="lobby-nick"
+            id="spectatorCode"
+            inputmode="numeric"
+            maxlength="4"
+            autocomplete="off"
+            placeholder="房间号"
+            aria-label="观战房间号"
+          />
+          <button class="btn primary" type="button" id="spectatorGo">进入观战</button>
+        </div>
         <button class="link practice-entry" type="button" id="lobbyHelpBtn">
           第一次玩？查看玩法与操作
         </button>
@@ -476,7 +491,7 @@
       </div>
     </div>
     <dialog id="practiceDialog" class="practice-dialog" aria-labelledby="practiceTitle">
-      <h2 id="practiceTitle">复盘练习</h2>
+      <h2 id="practiceTitle">明牌训练</h2>
       <p>四家明牌，逐步推进。看清牌型、比较出法，也可以保存带评语的复盘记录。</p>
       <p class="muted">这是单机练习桌。分组估分仅供理牌参考，电脑仍按学习策略出牌。</p>
       <p id="practiceRoomNote" class="muted" hidden>进入练习会离开当前朋友房间。</p>
@@ -487,6 +502,28 @@
     </dialog>
 
     <!-- PeerJS: browser-to-browser connections for playing with friends (room codes) -->
+    <section id="spectatorView" aria-label="只读观战牌桌" hidden>
+      <header class="watch-header">
+        <div>
+          <small>观战 · 房间 <b id="spectatorRoom"></b></small>
+          <h1>朋友牌桌</h1>
+        </div>
+        <button class="link" type="button" id="spectatorMic" aria-pressed="false" hidden>
+          闭麦
+        </button>
+        <button class="link" type="button" id="spectatorBack">退出观战</button>
+      </header>
+      <p id="spectatorStatus" role="status">正在连接…</p>
+      <p id="spectatorScore"></p>
+      <p class="watch-note">只读公开牌面，不占座位；手牌仅显示张数。</p>
+      <div class="watch-layout">
+        <div id="spectatorSeats"></div>
+        <aside>
+          <h2>出牌记录</h2>
+          <ol id="spectatorLog"></ol>
+        </aside>
+      </div>
+    </section>
     <aside class="coach-suggestions" id="coachSuggestions" aria-label="Top 5 推荐出牌" hidden>
       <header>
         <div>

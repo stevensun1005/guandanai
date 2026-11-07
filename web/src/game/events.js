@@ -32,6 +32,7 @@ export function playEvt(p, pl) {
 // solo and host: apply now (and, as host, send it on); a friend's page sends its move to the host and
 // waits for it to come back, so every table applies the same moves in the same order
 export function act(e) {
+  if (runtime.network.watching || runtime.network.mode === 'spectator') return;
   if (['play', 'pass'].includes(e.k) && e.p === toAbs(0) && !e.automatic)
     e = { ...e, assisted: coachAssisted() };
   if (runtime.network.mode === 'guest') {

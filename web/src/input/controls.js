@@ -1,4 +1,5 @@
 import { runtime } from '../app/runtime.js';
+import { syncRoomOptions } from '../network/spectators.js';
 import { Sound, syncAudioBtns } from '../audio/sound.js';
 import { SUITS, SUIT_ORDER, cardText, isWild } from '../core/cards.js';
 import { analyze } from '../core/combinations.js';
@@ -264,6 +265,7 @@ export function initialize() {
   // it hangs from the button's right edge; where the button sits near the left of the screen (a phone held upright) it
   // hangs from the left edge instead, so it never runs off the screen
   $('#optBtn').onclick = () => {
+    syncRoomOptions();
     const m = $('#optMenu');
     m.hidden = !m.hidden;
     $('#optBtn').setAttribute('aria-expanded', !m.hidden);

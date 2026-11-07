@@ -1,5 +1,11 @@
 # 验证与复现
 
+## 公开观战与语音回归
+
+`node --test web/tests/spectators.test.mjs` 检查公开投影不包含手牌、牌堆、种子或辅助状态，并拒绝无效实体牌／座位／张数。`python web/tests/spectators_smoke.py <预览根URL>` 使用三个独立 Chrome 上下文和真实 PeerJS：两名玩家仍占两席，观众无模型下载，不能出牌、占座或用玩家凭证恢复；覆盖玩家刷新恢复后的双路语音、房主禁言／重新允许、第二局数据刷新、房主退出，以及 1440／1024／390 像素布局。音频使用浏览器合成测试设备，不代表真实麦克风品质或跨设备网络验收。所有浏览器局面标为 `kind=test`，不进入真人训练样本。
+
+本轮同时回归原有模型菜单、Clint Worker 与五个神经网络 WASM、复盘记录、房主／个人评价、Top 5、独立明牌工具、房间恢复及云端牌谱。代码与实际记录见 [Clint UI 同步证据](../../ai/research/evaluation/clint-sync-20261106-latest.json)，属于兼容性测试，不是新的模型训练或棋力成绩。
+
 当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：Clint、GuanZero 最近两代、danMCai 初始版与两代danMCai 冠军。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
 
 ## PR 自动检查与网页流程评测

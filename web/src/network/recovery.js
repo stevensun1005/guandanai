@@ -13,6 +13,7 @@ import { VERSION } from './protocol.js';
 import { VC } from './voice.js';
 import { forgetSeat, rememberSeat, savedSeat } from './rejoin-storage.js';
 import { canResume, rotateSnapshot } from './snapshot.js';
+import { voicePeers } from './spectators.js';
 
 const reservations = new Map();
 let retryTimer = 0;
@@ -49,11 +50,7 @@ export function confirmReservations() {
 }
 
 export function peerList() {
-  const peers = { 0: runtime.network.peer.id };
-  for (const info of runtime.network.conns.values())
-    if (info.dir && info.conn.open)
-      peers[absOf(info.dir, runtime.network.hostDir)] = info.conn.peer;
-  return peers;
+  return voicePeers();
 }
 
 function sendSnapshot(info, sync = false) {
