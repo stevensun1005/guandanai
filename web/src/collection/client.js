@@ -5,16 +5,19 @@ import { captureDeal, captureStart, captureAction, completedRecord } from './rec
 import { indexedStore, UploadQueue } from './outbox.mjs';
 import config from './config.json' with { type: 'json' };
 import { privateWasUsed } from '../private-table/state.mjs';
+import { matchIdentity, rememberMatch, matchExcluded } from './match-link.mjs';
 
 let queue;
 function context() {
-  return {
+  const value = {
     mode: runtime.network.mode,
     practice: runtime.reviewMode,
     kind: new URLSearchParams(location.search).get('test') === '1' ? 'test' : 'game',
     humans: [...runtime.network.humans],
     version: VERSION,
     rules: runtime.rules,
+    direction: runtime.direction,
+    excluded: privateWasUsed(runtime.game),
     models: [0, 1, 2, 3].map((p) => {
       const id = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
       if (id === CLINT_RULE_ID) return { id, sha256: null, version: 'rules-v2' };
@@ -22,14 +25,20 @@ function context() {
       return { id, sha256: model.sha256, version: model.source?.version || id };
     }),
   };
+  value.session = matchIdentity(runtime.game, value, runtime.pendingContinuation);
+  if (value.session) runtime.pendingContinuation = null;
+  value.excluded ||= !!value.session?.excluded;
+  return value;
 }
 export const collectDealt = () => captureDeal(runtime.game, context());
 export const collectStarted = () => captureStart(runtime.game, context());
 export const collectAction = (p, play, automatic, assisted) =>
   captureAction(runtime.game, p, play, { ...context(), automatic, assisted });
 export function collectCompleted() {
-  if (privateWasUsed(runtime.game)) return;
-  const record = completedRecord(runtime.game, context());
+  const value = context();
+  rememberMatch(runtime.game, value, localStorage);
+  if (value.excluded) return;
+  const record = completedRecord(runtime.game, value);
   if (record && queue) void queue.enqueue(record).catch(() => {});
 }
 export function initialize() {
@@ -38,7 +47,7 @@ export function initialize() {
     store: indexedStore(globalThis.indexedDB),
     endpoint: config.endpoint,
     onStatus: ({ pending, storageFailed, saved }) => {
-      if (privateWasUsed(runtime.game) && !pending) {
+      if ((privateWasUsed(runtime.game) || matchExcluded(runtime.game)) && !pending) {
         status.hidden = false;
         status.textContent = '本场牌谱未参与采集';
         return;

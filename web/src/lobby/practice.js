@@ -7,10 +7,12 @@ import { $ } from '../ui/cards.js';
 import { openArrangement, initialize as initializeArrangement } from '../practice/arrangement.js';
 import { leaveNet } from '../network/rooms.js';
 import { forgetSeat } from '../network/rejoin-storage.js';
+import { openEndgame, initialize as initializeEndgame } from '../practice/endgame.js';
 
 export function initialize() {
   const dialog = $('#practiceDialog');
   initializeArrangement();
+  initializeEndgame();
   $('#practiceBtn').onclick = () => {
     $('#practiceRoomNote').hidden = runtime.lobbyMode === 'solo';
     dialog.showModal();
@@ -33,6 +35,18 @@ export function initialize() {
     dialog.close();
     $('#lobby').hidden = true;
     openArrangement(() => {
+      $('#lobby').hidden = false;
+      dialog.showModal();
+    });
+  };
+  $('#practiceEndgame').onclick = () => {
+    leaveNet();
+    forgetSeat();
+    if (runtime.lobbyMode !== 'solo') setMode('solo');
+    Sound.unlock();
+    dialog.close();
+    $('#lobby').hidden = true;
+    openEndgame(() => {
       $('#lobby').hidden = false;
       dialog.showModal();
     });

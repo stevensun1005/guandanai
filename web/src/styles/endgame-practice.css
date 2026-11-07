@@ -1,0 +1,97 @@
+.endgame-practice-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 125;
+  overflow: auto;
+  padding: 18px;
+  background: var(--felt-deep);
+  color: var(--ink);
+}
+.endgame-practice-panel header,
+.end-toolbar,
+.end-replay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.endgame-practice-panel h2 {
+  margin: 0 auto 0 0;
+}
+.endgame-practice-panel label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.endgame-practice-panel select {
+  font: inherit;
+  max-width: 100%;
+  background: var(--felt);
+  color: var(--ink);
+  padding: 6px;
+}
+.endgame-practice-panel p {
+  line-height: 1.6;
+}
+.end-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.end-seat {
+  padding: 12px;
+  background: var(--shade);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  min-width: 0;
+}
+.end-seat.active {
+  border-color: var(--gold);
+}
+.end-seat h3 {
+  margin: 0 0 8px;
+}
+.end-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 98px;
+}
+.end-cards .card {
+  position: relative;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 82px;
+  font-size: 14px;
+  pointer-events: none;
+}
+.end-cards .card .idx {
+  font-size: 16px;
+}
+.end-cards .card .pip {
+  font-size: 25px;
+}
+.end-replay {
+  margin-top: 16px;
+}
+.end-replay input {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+#endLine {
+  max-height: 280px;
+  overflow: auto;
+  padding-left: 28px;
+}
+#endLine button[aria-current='true'] {
+  color: var(--gold);
+}
+@media (max-width: 650px) {
+  .end-grid {
+    grid-template-columns: 1fr;
+  }
+  .endgame-practice-panel {
+    padding: 12px;
+  }
+}

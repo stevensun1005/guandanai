@@ -95,9 +95,9 @@ with sync_playwright() as p:
  assert host.locator('#privateHands').is_hidden();assert host.locator('#coachSuggestions').is_hidden()
  before=host.evaluate('privateProbe.requests.length');host.evaluate('async()=>await TableBot.decide(2)')
  normal=host.evaluate('n=>privateProbe.requests.slice(n)',before);assert any(r['type']=='rule' for r in normal) and all(r['type']!='oracle' for r in normal)
- # A pending captured record is deliberately given a result to exercise the real enqueue guard.
+ # Private exclusion now reaches captureStart: no completed candidate survives even a constructed result.
  host.evaluate("G.result={order:[0,2,1,3]}")
- assert host.evaluate("completedRecord(G,{mode:'host',practice:false})!==null")
+ assert host.evaluate("completedRecord(G,{mode:'host',practice:false})===null")
  host.evaluate('collectCompleted()');host.wait_for_timeout(500)
  assert not uploads, 'Privileged match reached the upload queue after being switched off'
  assert not errors,errors

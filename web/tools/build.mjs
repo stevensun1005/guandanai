@@ -124,6 +124,14 @@ await build({
   target: 'es2022',
   external: ['./vendor/*'],
 });
+await build({
+  entryPoints: [path.join(root, 'web/src/rule-bot/practice-worker.mjs')],
+  outfile: path.join(root, 'web/dist/assets/clint-practice-worker.mjs'),
+  bundle: true,
+  format: 'esm',
+  target: 'es2022',
+  charset: 'utf8',
+});
 for (const model of Object.values(MODELS))
   copies['ai/danMCai/models/baseline/' + model.file] = 'web/dist/models/' + model.file;
 for (const [from, to] of Object.entries(copies))

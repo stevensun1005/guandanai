@@ -470,8 +470,15 @@
           <button class="link" id="mixedBotsBtn" type="button">全部使用danMCai 冠军</button>
           <p id="botSetupNote"></p>
         </details>
+        <button
+          class="link practice-entry"
+          type="button"
+          id="continueMatch"
+          hidden
+          title="只恢复上一局结束后的级数、名次与整场编号，不恢复中途手牌"
+        ></button>
         <button class="link practice-entry" type="button" id="practiceBtn">
-          训练 · 配牌、牌局与复盘
+          训练 · 配牌、牌局与残局复盘
         </button>
         <button class="link practice-entry" type="button" id="spectatorBtn">观战</button>
         <div class="lobby-join" id="spectatorRow" hidden>
@@ -504,12 +511,69 @@
         <button class="tm-card" type="button" id="practiceStart">
           <b>牌局</b><span>四家明牌、逐步出牌，保存带评语的复盘</span>
         </button>
-        <button class="tm-card" type="button" disabled><b>残局</b><span>还在准备</span></button>
+        <button class="tm-card" type="button" id="practiceEndgame">
+          <b>残局</b><span>每家最多10张，独立明牌求解并回放；不训练模型</span>
+        </button>
       </div>
       <form method="dialog" class="btns">
         <button class="btn" value="cancel">返回大厅</button>
       </form>
     </dialog>
+    <section
+      id="endgamePractice"
+      class="endgame-practice-panel"
+      aria-label="Clint明牌残局练习"
+      hidden
+    >
+      <header>
+        <h2>明牌残局 · Clint 独立练习</h2>
+        <button class="btn" id="endClose" type="button">返回训练菜单</button>
+      </header>
+      <p>
+        Clint
+        先按普通观察打出模拟残局，再对双方所有合法动作进行明牌极小极大求解。只有完整算出的路线才称最优；同值路线可能不止一条。这是本机练习，不更新任何神经网络、不上传牌谱。
+      </p>
+      <div class="end-toolbar">
+        <label>级牌<select id="endLevel" aria-label="残局级牌"></select></label>
+        <label
+          >每家最多<select id="endLimit">
+            <option>3</option>
+            <option selected>5</option>
+            <option>7</option>
+            <option>10</option></select
+          >张</label
+        >
+        <label
+          >求解上限<select id="endBudget">
+            <option value="2000">2秒</option>
+            <option value="5000" selected>5秒</option>
+            <option value="10000">10秒</option>
+            <option value="30000">30秒</option>
+          </select></label
+        >
+        <button class="btn primary" id="endNew" type="button">换一局并求解</button>
+        <button class="btn" id="endStop" type="button" disabled>停止</button>
+        <button class="btn" id="endExport" type="button" disabled>导出本局</button>
+        <label>历史<select id="endSaved" aria-label="本机残局记录"></select></label>
+      </div>
+      <p id="endStatus" role="status"></p>
+      <p id="endTrick"></p>
+      <div id="endHands" class="end-grid"></div>
+      <div class="end-replay">
+        <button class="btn" id="endPrev" type="button" disabled>上一步</button
+        ><button class="btn" id="endNext" type="button" disabled>下一步</button
+        ><button class="btn" id="endReplay" type="button" disabled>回放</button
+        ><input
+          id="endStep"
+          type="range"
+          min="0"
+          max="0"
+          value="0"
+          aria-label="残局回放进度"
+        /><span id="endStepLabel"></span>
+      </div>
+      <ol id="endLine" aria-label="最优出牌路线"></ol>
+    </section>
     <section
       class="arr arrange-practice"
       id="arr"

@@ -68,3 +68,5 @@ Pages 继续静态托管，AI 继续在房主浏览器计算。真人联机结�
 ## Clint 同步游标
 
 上游增量以 [同步状态](../../ai/research/evaluation/clint-sync-state.json) 指向的已验证 SHA 为起点，逐项适配并验证后推进；完整取舍、未适用的信息权限变化见对应机器证据。菜单／冠军发布与 Clint 检查独立执行，不能用一次 UI 更新替代模型发布。
+
+新增明牌残局练习的独立文件为 `assets/clint-practice-worker.mjs`，由 `npm run build` 自动生成。发布仍上传完整 `web/dist/`，不要只替换HTML或遗漏Worker。CI会验证新练习与续场界面，模型清单／冠军不随UI发布改变。

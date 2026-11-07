@@ -53,6 +53,8 @@ jobs:
           python web/tests/replay_security_smoke.py
           python web/tests/coach_smoke.py --solo-only
           python web/tests/control_layout_smoke.py --targeted
+          python web/tests/clint_endgame_smoke.py http://127.0.0.1:8765/
+          python web/tests/match_continuity_smoke.py http://127.0.0.1:8765/
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'
         with:

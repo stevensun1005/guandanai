@@ -23,6 +23,7 @@ export function startOptions(rules, direction = 'S') {
       : '',
     order,
     aFails: { SN: integer(raw.aFails?.SN, 0, 2, 0), EW: integer(raw.aFails?.EW, 0, 2, 0) },
+    aOut: ['SN', 'EW'].includes(raw.aOut) ? raw.aOut : '',
   };
 }
 export function startConfigured(s) {
@@ -30,7 +31,8 @@ export function startConfigured(s) {
     Object.values(s.levels).some((l) => l !== 2) ||
     !!s.playSide ||
     s.order.some(Boolean) ||
-    Object.values(s.aFails).some(Boolean)
+    Object.values(s.aFails).some(Boolean) ||
+    !!s.aOut
   );
 }
 /** Initial tabletop setup only; training and core settlement rules stay unchanged. */
@@ -56,5 +58,6 @@ export function initialTableState(rules, direction = 'S', hostTeam = 0, used = f
     L: levels[lvlTeam],
     aFails,
     prevOut: complete ? s.order.map(local) : null,
+    aOut: s.aOut ? team(s.aOut[0]) : null,
   };
 }

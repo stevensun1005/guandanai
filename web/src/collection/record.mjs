@@ -1,6 +1,6 @@
 const sessions = new WeakMap();
 const eligible = (context) =>
-  context.mode === 'host' && !context.practice && context.humans.length >= 2;
+  context.mode === 'host' && !context.practice && !context.excluded && context.humans.length >= 2;
 export const humanMask = (humans) => humans.reduce((mask, seat) => mask | (1 << seat), 0);
 const ids = (hands) => hands.map((hand) => hand.map((card) => card.id));
 
@@ -9,18 +9,20 @@ export function captureDeal(game, context) {
   let session = sessions.get(game);
   if (!session) {
     session = {
-      id: crypto.randomUUID(),
-      players: Array.from({ length: 4 }, () => crypto.randomUUID()),
+      id: context.session?.id || crypto.randomUUID(),
+      players: context.session?.players || Array.from({ length: 4 }, () => crypto.randomUUID()),
+      base: context.session?.base || 0,
     };
     sessions.set(game, session);
   }
+  session.localRound = game.round;
   session.pending = {
     schema: 1,
     kind: context.kind || 'game',
     encoding: 'physical-108-v1',
-    id: `${session.id}:${game.round}`,
+    id: `${session.id}:${session.base + game.round}`,
     matchId: session.id,
-    round: game.round,
+    round: session.base + game.round,
     appVersion: context.version,
     startedAt: new Date().toISOString(),
     level: game.L,
@@ -41,7 +43,7 @@ export function captureDeal(game, context) {
 export function captureStart(game, context) {
   const session = sessions.get(game),
     record = session?.pending;
-  if (!record || record.round !== game.round || record.hands || !eligible(context)) return;
+  if (!record || session.localRound !== game.round || record.hands || !eligible(context)) return;
   record.leader = game.turn;
   record.hands = ids(game.hands);
   record.humanMask = humanMask(context.humans);
@@ -61,7 +63,13 @@ export function captureStart(game, context) {
 export function captureAction(game, player, play, context) {
   const session = sessions.get(game),
     record = session?.pending;
-  if (!record?.hands || record.round !== game.round || record.endedAt || context.mode !== 'host')
+  if (
+    !record?.hands ||
+    session.localRound !== game.round ||
+    record.endedAt ||
+    context.mode !== 'host' ||
+    context.excluded
+  )
     return;
   const human = context.humans.includes(player);
   const actor = human ? (context.automatic ? 'timeout' : 'human') : 'bot';
@@ -83,10 +91,12 @@ export function captureAction(game, player, play, context) {
 }
 
 export function completedRecord(game, context) {
-  const record = sessions.get(game)?.pending;
+  const session = sessions.get(game),
+    record = session?.pending;
   if (
     !record?.hands ||
-    record.round !== game.round ||
+    session.localRound !== game.round ||
+    context.excluded ||
     !game.result ||
     context.mode !== 'host' ||
     context.practice

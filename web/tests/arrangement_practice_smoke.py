@@ -18,7 +18,7 @@ with sync_playwright() as p:
     page.goto(URL, wait_until='networkidle')
     page.locator('#practiceBtn').click()
     assert page.locator('#practiceDialog .tm-card').count()==3
-    assert page.locator('#practiceDialog .tm-card').last.is_disabled()
+    assert page.locator('#practiceEndgame').is_enabled()
     page.screenshot(path=str(OUT/'menu.png'))
     page.locator('#practiceArrange').click()
     panel = page.locator('#arr')

@@ -5,6 +5,13 @@ import { render } from '../ui/table.js';
 import { renderLobby } from '../lobby/lobby.js';
 import { TableBot } from '../ai/controller.js';
 import { privateEligible, privateActive, markPrivateTable, privateWasUsed } from './state.mjs';
+import { excludeMatch } from '../collection/match-link.mjs';
+
+function markUsed() {
+  markPrivateTable(runtime);
+  if (privateWasUsed(runtime.game))
+    excludeMatch(runtime.game, localStorage, runtime.pendingContinuation, runtime.rules);
+}
 
 export function setPrivateTable(value) {
   const mode = $('#lobby').hidden ? runtime.network.mode : runtime.lobbyMode;
@@ -12,7 +19,7 @@ export function setPrivateTable(value) {
   runtime.privateTable = value === true && privateEligible(mode, nickname);
   runtime.privateEpoch = (runtime.privateEpoch || 0) + 1;
   if (runtime.privateTable && innerWidth >= 1400) $('#privateHands').open = true;
-  markPrivateTable(runtime);
+  markUsed();
   if (privateWasUsed(runtime.game)) {
     $('#collectionStatus').hidden = false;
     $('#collectionStatus').textContent = '本场牌谱未参与采集';
@@ -49,7 +56,7 @@ export function renderPrivateTable() {
     delete panel.dataset.position;
     return;
   }
-  markPrivateTable(runtime);
+  markUsed();
   $('#collectionStatus').hidden = false;
   $('#collectionStatus').textContent = '本场牌谱未参与采集';
   const top = Math.max(65, Math.ceil($('.score').getBoundingClientRect().bottom + 12));

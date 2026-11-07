@@ -18,6 +18,7 @@ import { VERSION, versionsMatch } from '../network/protocol.js';
 import { renderLevelPicker, initialize as initializeLevelPicker } from './level.js';
 import { coachIsEnabled, setCoachEnabled } from '../coach/controller.js';
 import { privateEligible } from '../private-table/state.mjs';
+import { renderContinueMatch, initialize as initializeContinueMatch } from './continue-match.js';
 
 export let DIRS;
 export let absOf;
@@ -124,6 +125,7 @@ export function setMode(m) {
 }
 
 export function renderLobby() {
+  renderContinueMatch();
   $('#shareRoomBtn').hidden = runtime.lobbyMode !== 'host' || !runtime.network.peerOpen;
   const nick = nickNow(),
     solo = runtime.lobbyMode === 'solo';
@@ -163,6 +165,7 @@ export function renderLobby() {
 
 export function initialize() {
   initializeLevelPicker();
+  initializeContinueMatch();
   $('#coachStartEnabled').onchange = () => setCoachEnabled($('#coachStartEnabled').checked);
   $('#coachRoomAllowed').onchange = () => {
     if (runtime.lobbyMode !== 'host') return;

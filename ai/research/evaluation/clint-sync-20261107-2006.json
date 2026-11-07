@@ -1,0 +1,1136 @@
+{
+  "schema": 1,
+  "kind": "ui-and-isolated-clint-exercise-correctness-not-strength",
+  "observedAtUTC": "2026-11-07T20:36:32.950794+00:00",
+  "mainBaseCommit": "247c94cc1771ef38613212629bf6bc8f37ef2e12",
+  "upstream": {
+    "previousSHA": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1",
+    "checkedSHA": "ece39ee524f43640748b764875040c9244a1435d",
+    "commits": [
+      "12e8ccbdcdb29b1eec74dfee5957a4876935dd3c",
+      "cfeba659ce225f1ca6b9ca0a0a36ac110de2b91b",
+      "05eaa71bd997e32b8fd6e0f0c1d56652eb895863",
+      "a89ce5f7000ab30b035499000bdabfe1f16f4d21",
+      "655163c223f2ea8615195f36cc67e9d3377f0ce6",
+      "e0c473c2b92cf423c64494af460be86769b2daf9",
+      "2311a3b041cca147e7d75c7bc184b805f9a0bff5",
+      "a6b895c6b7de15d207e2bc7bf09a31c83f2acf14",
+      "8579c54784fa400e07d9531ae5b954f4ddd6455e",
+      "860131295e4ea64454a734d68481eb11805527d7",
+      "ece39ee524f43640748b764875040c9244a1435d"
+    ],
+    "changedPaths": [
+      "M\tREADME.md",
+      "A\tbot/README.md",
+      "A\tbot/clint/clint-bot.js",
+      "A\tbot/clint/endgame-search.js",
+      "A\tbot/danmcai/README.md",
+      "A\tbot/danmcai/danmcai-v000855042.onnx",
+      "A\tbot/guanzero/README.md",
+      "A\tbot/guanzero/guanzero-adp-io48-229609.onnx",
+      "A\tbot/models.json",
+      "A\tbot/neural/neural-bot.js",
+      "D\tbuild.py",
+      "D\tguandan.html",
+      "M\tindex.html",
+      "A\tweb/README.md",
+      "A\tweb/build.py",
+      "A\tweb/src/app/boot.js",
+      "A\tweb/src/app/main.js",
+      "A\tweb/src/audio/sound.js",
+      "A\tweb/src/coach/coach.js",
+      "A\tweb/src/collection/match-link.js",
+      "A\tweb/src/collection/record.js",
+      "A\tweb/src/collection/upload.js",
+      "A\tweb/src/core/cards.js",
+      "A\tweb/src/core/combinations.js",
+      "A\tweb/src/core/moves.js",
+      "A\tweb/src/effects/celebrations.js",
+      "A\tweb/src/effects/dealing.js",
+      "A\tweb/src/effects/shuffle.js",
+      "A\tweb/src/game/clock.js",
+      "A\tweb/src/game/computer-players.js",
+      "A\tweb/src/game/dealing.js",
+      "A\tweb/src/game/endgame-setup.js",
+      "A\tweb/src/game/events.js",
+      "A\tweb/src/game/hint-order.js",
+      "A\tweb/src/game/match.js",
+      "A\tweb/src/game/next-round.js",
+      "A\tweb/src/game/play.js",
+      "A\tweb/src/game/round.js",
+      "A\tweb/src/game/state.js",
+      "A\tweb/src/game/ticker.js",
+      "A\tweb/src/game/tribute.js",
+      "A\tweb/src/game/turns.js",
+      "A\tweb/src/hand/geometry.js",
+      "A\tweb/src/hand/hints.js",
+      "A\tweb/src/hand/layout.js",
+      "A\tweb/src/hand/straight-flush.js",
+      "A\tweb/src/hand/view.js",
+      "A\tweb/src/hand/views.js",
+      "A\tweb/src/index.html",
+      "A\tweb/src/input/actions.js",
+      "A\tweb/src/input/hand-input.js",
+      "A\tweb/src/lobby/lobby.js",
+      "A\tweb/src/lobby/modes.js",
+      "A\tweb/src/lobby/rules.js",
+      "A\tweb/src/network/connection.js",
+      "A\tweb/src/network/guest.js",
+      "A\tweb/src/network/host.js",
+      "A\tweb/src/network/resume.js",
+      "A\tweb/src/network/voice.js",
+      "A\tweb/src/social/emotes.js",
+      "A\tweb/src/styles/base.css",
+      "A\tweb/src/styles/cards.css",
+      "A\tweb/src/styles/celebrations.css",
+      "A\tweb/src/styles/coach.css",
+      "A\tweb/src/styles/deck.css",
+      "A\tweb/src/styles/desktop.css",
+      "A\tweb/src/styles/emotes.css",
+      "A\tweb/src/styles/hand.css",
+      "A\tweb/src/styles/header.css",
+      "A\tweb/src/styles/lobby.css",
+      "A\tweb/src/styles/overlay.css",
+      "A\tweb/src/styles/table.css",
+      "A\tweb/src/styles/training.css",
+      "A\tweb/src/training/arrange.js",
+      "A\tweb/src/training/counter.js",
+      "A\tweb/src/training/my-groups.js",
+      "A\tweb/src/training/plays.js",
+      "A\tweb/src/training/record-text.js",
+      "A\tweb/src/training/records.js",
+      "A\tweb/src/training/replay-view.js",
+      "A\tweb/src/training/steps.js",
+      "A\tweb/src/training/training.js",
+      "A\tweb/src/ui/action-buttons.js",
+      "A\tweb/src/ui/card-back.js",
+      "A\tweb/src/ui/cards.js",
+      "A\tweb/src/ui/message.js",
+      "A\tweb/src/ui/options.js",
+      "A\tweb/src/ui/overlays.js",
+      "A\tweb/src/ui/phone.js",
+      "A\tweb/src/ui/pile.js",
+      "A\tweb/src/ui/render.js",
+      "A\tweb/src/ui/resize.js",
+      "A\tweb/src/ui/tribute-info.js",
+      "A\tweb/src/ui/watch.js"
+    ],
+    "allJavaScriptFiles": [
+      {
+        "path": "bot/clint/clint-bot.js",
+        "sha256": "88e032d3a2384f0298c0044a231cbddf161e16cfc420893f7d12dc82aab44c34",
+        "bytes": 56849
+      },
+      {
+        "path": "bot/clint/endgame-search.js",
+        "sha256": "4910dc355f396307591a2e8b3fc9aefcac20cf1de519b9acba7cbd5d03d723c1",
+        "bytes": 12826
+      },
+      {
+        "path": "bot/neural/neural-bot.js",
+        "sha256": "d7cf310061839a0bf4d05f91ebd0063a485153b451004db9778f6bf1558ccc21",
+        "bytes": 18061
+      },
+      {
+        "path": "web/src/app/boot.js",
+        "sha256": "696a13b07ddfe67bf520a5bf29038d7a4e16150acb5d8bcb52859352ac871a72",
+        "bytes": 947
+      },
+      {
+        "path": "web/src/app/main.js",
+        "sha256": "70ea71d5739d6a9f669523bec342bbf3cf02976af79dff197c4ac3fd46571f22",
+        "bytes": 135
+      },
+      {
+        "path": "web/src/audio/sound.js",
+        "sha256": "e32a513caf69a222fb32b8b945bc5e665e92686fd0ae9af69e389ef64e518013",
+        "bytes": 9736
+      },
+      {
+        "path": "web/src/coach/coach.js",
+        "sha256": "d92f3c0dbafbba15a490c75e283b81137924376f56e98aca3400175aae106492",
+        "bytes": 10999
+      },
+      {
+        "path": "web/src/collection/match-link.js",
+        "sha256": "ec0a0751b037084b849e0ee73461ea783b1b0da7c434c687390c5f30dfdc5f30",
+        "bytes": 3648
+      },
+      {
+        "path": "web/src/collection/record.js",
+        "sha256": "41b7026500b595c7d7a3383f30c0d7b1f04ef04c50d82e20b691a303ffb84978",
+        "bytes": 4082
+      },
+      {
+        "path": "web/src/collection/upload.js",
+        "sha256": "fb8873f9bbf08c71cd22e22b26d341464527966afa7b247bfb8451b59d68e37d",
+        "bytes": 3304
+      },
+      {
+        "path": "web/src/core/cards.js",
+        "sha256": "080d3082626d49c86633d15f727fae52cf060cde2edd096549767860d5d8e58b",
+        "bytes": 1441
+      },
+      {
+        "path": "web/src/core/combinations.js",
+        "sha256": "ad1b3baa7df928c540ea0155dcdd4e21f0ccf32b946f0b2eb86f1bb6188ef1d6",
+        "bytes": 2725
+      },
+      {
+        "path": "web/src/core/moves.js",
+        "sha256": "d1deae883b7e29de2543e1fd975ca008d67b7215cf7abf83818781422e14a2be",
+        "bytes": 2137
+      },
+      {
+        "path": "web/src/effects/celebrations.js",
+        "sha256": "ab7d4524c2cd4164d59becc4bd2d7c0538e47c63cd50d6da0c6fa2f6adced37e",
+        "bytes": 15346
+      },
+      {
+        "path": "web/src/effects/dealing.js",
+        "sha256": "8596c78c932871589943b289713f756913bf25ff6bdf41f4b5eea27ae0f04683",
+        "bytes": 4132
+      },
+      {
+        "path": "web/src/effects/shuffle.js",
+        "sha256": "ae0a26dea4150c1cd5bdf86fa46db69c613ebec47708a1c63b91aca6f7e59d06",
+        "bytes": 3473
+      },
+      {
+        "path": "web/src/game/clock.js",
+        "sha256": "c7406de9d4953d73319f46bdf7d030d041425c30033196cd1869f24fc9a6437a",
+        "bytes": 329
+      },
+      {
+        "path": "web/src/game/computer-players.js",
+        "sha256": "09a04bbed0137173f7ed170573b9223f5d47cb91ddc1fa1aba57153530644e41",
+        "bytes": 2465
+      },
+      {
+        "path": "web/src/game/dealing.js",
+        "sha256": "ae7dfb3bc487a248e0574a13ff82e2c4bbac83e7acec5170504c0ba0baeb58e8",
+        "bytes": 4452
+      },
+      {
+        "path": "web/src/game/endgame-setup.js",
+        "sha256": "9f78633857e54a4c19589903af0d108537fbfb39bd2345e85be8cc960ad0fd4f",
+        "bytes": 3249
+      },
+      {
+        "path": "web/src/game/events.js",
+        "sha256": "c3df0ab370f02e1b95dbe6222d70b5244fe6ebb742c129f94f307d84c26dc8ec",
+        "bytes": 4778
+      },
+      {
+        "path": "web/src/game/hint-order.js",
+        "sha256": "f29d1e9e76582fd706e2e630d6bc7a37e4a4e7a98715d52037320b6eb0f8a607",
+        "bytes": 5639
+      },
+      {
+        "path": "web/src/game/match.js",
+        "sha256": "bdc4c433b58c647655c8a6889d3068574e952d1abaa5824710c7661c4f461a55",
+        "bytes": 1718
+      },
+      {
+        "path": "web/src/game/next-round.js",
+        "sha256": "784496715e7dc8518d853e0006e92f71d4c7926fe06b805cff73c19e8dd7bc14",
+        "bytes": 584
+      },
+      {
+        "path": "web/src/game/play.js",
+        "sha256": "20dd065f310514d453020443692d4bce6969f17ee0ea7b1e5fa2fb5e93f1c3b2",
+        "bytes": 5350
+      },
+      {
+        "path": "web/src/game/round.js",
+        "sha256": "951825cd8cb393ced359d82bf0e68248fc04d0a92eb9a599adc231e826d700c4",
+        "bytes": 1902
+      },
+      {
+        "path": "web/src/game/state.js",
+        "sha256": "c12d0a20bfd3a5ae2c0b28288adc724296195931ad1799230c3860c3a516b654",
+        "bytes": 1683
+      },
+      {
+        "path": "web/src/game/ticker.js",
+        "sha256": "b21e2a0a4766befd93fccb021d10f722193c32bf8b5f6f285a567f24bc0294d3",
+        "bytes": 6461
+      },
+      {
+        "path": "web/src/game/tribute.js",
+        "sha256": "3ab974b7a26a7a6a776e0cc8d186378aa4452fbef14315055d4104f7ca3e3da8",
+        "bytes": 6268
+      },
+      {
+        "path": "web/src/game/turns.js",
+        "sha256": "2bc740ebca77157d2922eb1ff5152b17c44a0d46b93e29d826a220817e67a2eb",
+        "bytes": 2642
+      },
+      {
+        "path": "web/src/hand/geometry.js",
+        "sha256": "634c6d56c2178e7ad4faddc4a6a28ee7800f4df945fe3b680a10ce062f39a644",
+        "bytes": 8765
+      },
+      {
+        "path": "web/src/hand/hints.js",
+        "sha256": "241439046c59464ce677e4db3d4b3d70eef6889b48f252335559bc1a8586040c",
+        "bytes": 3664
+      },
+      {
+        "path": "web/src/hand/layout.js",
+        "sha256": "cb113ee450c3a3388d1b9540b4e899e5518edba847c38cda9589350d35a5174c",
+        "bytes": 10065
+      },
+      {
+        "path": "web/src/hand/straight-flush.js",
+        "sha256": "b47cb293e4cfd45ba26763a54f8a4692c636acbeb5e683f3e5d6b563f666b2b1",
+        "bytes": 1418
+      },
+      {
+        "path": "web/src/hand/view.js",
+        "sha256": "8cd0f80a335c5866f4ce41b9935d6abd9e7bd70d138c177926f779182e992373",
+        "bytes": 3035
+      },
+      {
+        "path": "web/src/hand/views.js",
+        "sha256": "9cb16761352b8b09ad9a3c58ad5606b43051b4e7c3bfca3ae735dc37700e2413",
+        "bytes": 2593
+      },
+      {
+        "path": "web/src/input/actions.js",
+        "sha256": "4b76bdf61cf68bdd99411bafbc6db6f058594abae2bb24077b8514008b52f768",
+        "bytes": 4678
+      },
+      {
+        "path": "web/src/input/hand-input.js",
+        "sha256": "51e5cff4e495cf8dbe08ed0fd9b15321e44bd52f63d0f50424f3702e37d68ac4",
+        "bytes": 11099
+      },
+      {
+        "path": "web/src/lobby/lobby.js",
+        "sha256": "75b3c94ef27bf9d81575711b18555644b9c5ccedd2456d584799517259868caa",
+        "bytes": 2345
+      },
+      {
+        "path": "web/src/lobby/modes.js",
+        "sha256": "3900d388be8f673e31f7d29f69c7857857e16d31259fd2532515f84da4dfd8f7",
+        "bytes": 4078
+      },
+      {
+        "path": "web/src/lobby/rules.js",
+        "sha256": "aa1664b2d0c3a1254367f8bcd7a8d76db8d1fc8a2765beaa17d74895001cc9dc",
+        "bytes": 5934
+      },
+      {
+        "path": "web/src/network/connection.js",
+        "sha256": "57b29c82ef92be6fabde3a1e5ee419a7d9aabfe73198cd5d01bb1477b6f17b0e",
+        "bytes": 912
+      },
+      {
+        "path": "web/src/network/guest.js",
+        "sha256": "4a850db1c6e288c81e158c40fcbb0db82398086ed6dd844bec55b8d2e4605716",
+        "bytes": 12201
+      },
+      {
+        "path": "web/src/network/host.js",
+        "sha256": "f33b76c817b0ca67cfe043f3c3366a4b5d81c56090da7ae4854c0ab60b9f4e6c",
+        "bytes": 6489
+      },
+      {
+        "path": "web/src/network/resume.js",
+        "sha256": "f666977c4f90c3b293401570ca8f798e09e1bda348f7c455a8ea75fe2e2355b2",
+        "bytes": 6971
+      },
+      {
+        "path": "web/src/network/voice.js",
+        "sha256": "b0e55c090d77f0f6a5b203e82aa300c987b323b9733a049ab3e391f9c3e18eda",
+        "bytes": 7772
+      },
+      {
+        "path": "web/src/social/emotes.js",
+        "sha256": "a519b7432397fb07efa88a2988ca01205e7a7a5df9befe7d349b9483d91130c1",
+        "bytes": 18159
+      },
+      {
+        "path": "web/src/training/arrange.js",
+        "sha256": "41f856a8bb7d6501628a123dfaec8b4547b47ed5361450fb181f48ef971373be",
+        "bytes": 10576
+      },
+      {
+        "path": "web/src/training/counter.js",
+        "sha256": "5bf2da41f304b04a33b8f9619d61fe0331edb56a4c6f24f0081432e95f0290f5",
+        "bytes": 7330
+      },
+      {
+        "path": "web/src/training/my-groups.js",
+        "sha256": "3d078c81b6f81f7b25528779c73510ccc5506b077aed596eeff9845d248b79c8",
+        "bytes": 1952
+      },
+      {
+        "path": "web/src/training/plays.js",
+        "sha256": "1e9763cab221fe2e966951ce04619c1a2e06cf5d2970dc0742cffea0a83ce21d",
+        "bytes": 12591
+      },
+      {
+        "path": "web/src/training/record-text.js",
+        "sha256": "a08c4152c6151972c28fd50149dfa24efb16aa0d43e4c749700c316013e66a2f",
+        "bytes": 12171
+      },
+      {
+        "path": "web/src/training/records.js",
+        "sha256": "75c418f9c06802250af0e30bea0632d2b0652c90742f1043890da8eb1ec38ebf",
+        "bytes": 8642
+      },
+      {
+        "path": "web/src/training/replay-view.js",
+        "sha256": "86317039b94b6bcd3299fd44cf0ba09a1e16480d9c0477fb8f862fbeedc36487",
+        "bytes": 9997
+      },
+      {
+        "path": "web/src/training/steps.js",
+        "sha256": "72e7e8adeeef7f828e4a74904303e0ee198dbf40ab6bf01784c14ff44ca66050",
+        "bytes": 6556
+      },
+      {
+        "path": "web/src/training/training.js",
+        "sha256": "5a0a0d39071facd2adaf5d52ae4c47637c4c016ba7d1c3bc0529debfd7d062b6",
+        "bytes": 12799
+      },
+      {
+        "path": "web/src/ui/action-buttons.js",
+        "sha256": "5dfe44afbfac3f0b13ab197b8863851a5bc272e038619a71c0c98d0d2684c7d0",
+        "bytes": 4777
+      },
+      {
+        "path": "web/src/ui/card-back.js",
+        "sha256": "55fc733da69d5243ccb69413b9bcf494d89f298537e7d9fdc0b90572eef61746",
+        "bytes": 1034
+      },
+      {
+        "path": "web/src/ui/cards.js",
+        "sha256": "a7f050bd4b18facb6c95ae794f53642a38f2af1aef7c9e93fa050e74231736e6",
+        "bytes": 2531
+      },
+      {
+        "path": "web/src/ui/message.js",
+        "sha256": "ad57fe5d0671bc72eca918cf6ded1622f7615a1566e4ba11cb80b9a3182f0485",
+        "bytes": 213
+      },
+      {
+        "path": "web/src/ui/options.js",
+        "sha256": "90c4557fb343fbdcb3a5a1169d0cc852619e1f4e57a3117ba9379376fad076e9",
+        "bytes": 4353
+      },
+      {
+        "path": "web/src/ui/overlays.js",
+        "sha256": "c6b649c5ec62caf8e2337c7d43da098a4106220edc3a91349cecfb294d0d6965",
+        "bytes": 10864
+      },
+      {
+        "path": "web/src/ui/phone.js",
+        "sha256": "a10a7ab00601c5c4895139c5acf486f8b3f8c11e19566d86a880492513a00f3d",
+        "bytes": 3731
+      },
+      {
+        "path": "web/src/ui/pile.js",
+        "sha256": "de76986273a02125811bbc5a472ccbf5046a35ad2ef47a7938d51d4589896b4e",
+        "bytes": 21172
+      },
+      {
+        "path": "web/src/ui/render.js",
+        "sha256": "a0e73678129a1c9970a103224c255dfac613b2820531066dffde03526d2e07c9",
+        "bytes": 9224
+      },
+      {
+        "path": "web/src/ui/resize.js",
+        "sha256": "5cad1a054bbe5783f4a947676e245789ed0b15541520b18bbf274a1ce2eca071",
+        "bytes": 3497
+      },
+      {
+        "path": "web/src/ui/tribute-info.js",
+        "sha256": "4173d2fe70d759fe51949e3a94e87bd8fb6f716442a362dac49e8e2ecab16b6f",
+        "bytes": 3250
+      },
+      {
+        "path": "web/src/ui/watch.js",
+        "sha256": "bc46bcc88e7c21ca57e78209f5b4460d7b38e17e2aeb2c689323da26ec3cab7b",
+        "bytes": 2044
+      }
+    ],
+    "changedExistingDeclarations": [
+      "mateLead",
+      "inferDeals",
+      "inferNow",
+      "RULES",
+      "newGame",
+      "startRound",
+      "finishDeal",
+      "startPlay",
+      "startTurn",
+      "timeUp",
+      "doPlay",
+      "finishRound",
+      "onPlay",
+      "onPass",
+      "onHint",
+      "applyEvt",
+      "renderControls",
+      "showRules",
+      "nickMax",
+      "nickNow",
+      "syncNickMax",
+      "loadRules",
+      "renderRules",
+      "enterTest",
+      "roundName",
+      "testRoundStart",
+      "recOut",
+      "recIn",
+      "turnHTML",
+      "tvDraw",
+      "testReplay",
+      "testText",
+      "VERSION",
+      "hostOnData",
+      "REJ_SKIP",
+      "guestOnData"
+    ],
+    "removedExistingDeclarations": [
+      "ARKEY",
+      "AR",
+      "arrOpen",
+      "arrDeal",
+      "arrKey",
+      "arrIds",
+      "arrOrder",
+      "arrComp",
+      "arrMine",
+      "arrPow",
+      "arrAuto",
+      "arrTidy",
+      "arrEdit",
+      "arrName",
+      "arrLabel",
+      "arrText",
+      "arrLayout",
+      "arrRowsHTML",
+      "arrRender",
+      "arrTop",
+      "arrSeatHTML",
+      "arrSumHTML",
+      "arrToast",
+      "arrDone",
+      "arrDb",
+      "ARDECK",
+      "arrRecText",
+      "arrAllText",
+      "arrSave",
+      "arrCopy"
+    ],
+    "addedDeclarations": [
+      "mcOver",
+      "mcReward",
+      "mcPlaysCache",
+      "mcPlays",
+      "mcMoves",
+      "mcStep",
+      "mcRollout",
+      "mcNode",
+      "mcIter",
+      "mcBest",
+      "mcFromGame",
+      "mcNow",
+      "mcSearch",
+      "ES_SUIT",
+      "ES_TYPE",
+      "ES_SORT",
+      "ES_PORT",
+      "EsSolver",
+      "NeuralBot",
+      "COACH_ID",
+      "CO",
+      "coachKey",
+      "coachTop5",
+      "coachDeck",
+      "coachShown",
+      "coachSnap",
+      "coachPick",
+      "coachGrade",
+      "coachAssisted",
+      "coachRemember",
+      "renderCoach",
+      "top5Wide",
+      "renderTop5",
+      "top5Room",
+      "top5Pop",
+      "coachPlace",
+      "coachModel",
+      "MATCH_KEY",
+      "MATCH_KEEP_MS",
+      "ML",
+      "mlLoad",
+      "mlStore",
+      "mlOwn",
+      "mlHostDir",
+      "mlDir",
+      "mlSide",
+      "mlPlays",
+      "mlSame",
+      "mlMatch",
+      "mlRoundEnd",
+      "mlRenderBtn",
+      "REC",
+      "recHumans",
+      "recMask",
+      "recEligible",
+      "recModel",
+      "REC_TIMEOUT",
+      "recDeal",
+      "recStart",
+      "recAction",
+      "recDone",
+      "COLLECT_URL",
+      "Outbox",
+      "BOT_WAIT_MS",
+      "botId",
+      "botLabel",
+      "botFailed",
+      "BOT_USED",
+      "botPreload",
+      "botStart",
+      "aiMove",
+      "botFail",
+      "endgameSim",
+      "endgameRestoreTrick",
+      "endgameDeal",
+      "ENDG",
+      "ENDLIM",
+      "ENDTT",
+      "ENDAUTO",
+      "ENDCAP",
+      "ENDTOK",
+      "TOP5_NAMES",
+      "nickClean",
+      "nickTop5Start",
+      "APP_HASH",
+      "Emotes",
+      "ENDRUN",
+      "ENDREC",
+      "endgameShow",
+      "endgameTrain",
+      "endgameNext"
+    ],
+    "ordinaryClintChangedDeclarations": [
+      "mateLead",
+      "inferDeals",
+      "inferNow"
+    ],
+    "ordinaryClintPreserved": [
+      "AIP",
+      "UNIT_SCORE",
+      "unitCost",
+      "baseCost",
+      "seqCost",
+      "handCost",
+      "isSeq",
+      "isCtrl",
+      "unitScore",
+      "armScore",
+      "armUnit",
+      "armRest",
+      "armWilds",
+      "ARM_SHAPES",
+      "arrange",
+      "armCache",
+      "armPlays",
+      "armPlaysRaw",
+      "POWER_CUTS",
+      "handPower",
+      "scorePower",
+      "restCost",
+      "outside",
+      "TALLY_RANKS",
+      "tallyKey",
+      "tallyPlayed",
+      "tallyLeft",
+      "isTop",
+      "tierOf",
+      "mateBeatChance",
+      "oppBeatChance",
+      "tricksWon",
+      "mateStronger",
+      "passStats",
+      "dryFor",
+      "dryUnits",
+      "RUNS",
+      "SAME",
+      "handCounts",
+      "addCounts",
+      "holds",
+      "bombsOf",
+      "canBeat",
+      "inferEvents",
+      "eventFactor",
+      "opps",
+      "inferBeat",
+      "inferMateBeat",
+      "builtFulls",
+      "mateCeilings",
+      "mateLacks",
+      "plainBomb",
+      "mateBeatenKinds",
+      "aiLead",
+      "pickLead",
+      "gamePhase",
+      "aiDecide",
+      "bombLevels",
+      "bombBack",
+      "unseenOf",
+      "couldMake",
+      "feedMate",
+      "smallSingle",
+      "aiChoose",
+      "aiReturnCard",
+      "tributeCard"
+    ],
+    "method": "Acorn top-level declaration token fingerprints over old HTML scripts and every new JS source, plus actual incremental diff review. No binary model copied.",
+    "binaryModelsAlreadyPresent": {
+      "bot/danmcai/danmcai-v000855042.onnx": {
+        "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+        "existingCatalogId": "017",
+        "copiedIntoGit": false
+      },
+      "bot/guanzero/guanzero-adp-io48-229609.onnx": {
+        "sha256": "43d72b65e773fb5acb6b8f86baed16a69a1977a97fb6fddf4fe5f23ee25261bc",
+        "existingCatalogId": "021",
+        "copiedIntoGit": false
+      }
+    },
+    "ordinaryChangesReviewed": {
+      "mateLead": "G.open only: true private hands once; ordinary branch unchanged",
+      "inferDeals": "G.open only: true hand counts, not adapted into ordinary bot",
+      "inferNow": "G.open bypass only; ordinary rule condition unchanged"
+    }
+  },
+  "adapted": [
+    "Standalone bounded open-hand endgame UI, solve/stop/replay/local30-record history/export",
+    "Explicit between-round continuation, failed A/once state, rotated anonymous seat IDs and monotonic round IDs",
+    "Persist private collection exclusion immediately and across resumed game objects",
+    "Retain independent per-seat grouping, room recovery, owner/individual coach permissions, six-model menu and social presets"
+  ],
+  "notApplicable": [
+    {
+      "change": "Replace original project with web/bot tree or upstream model binaries",
+      "reason": "Already modular web/ai with immutable Release model catalog; both imported upstream weights already archived as017/021. No whole-file overwrite or binaries added."
+    },
+    {
+      "change": "Delete arrangement practice",
+      "reason": "Preserve owner feature; menu now offers grouping, full-round review and endgame."
+    },
+    {
+      "change": "Nickname-gated Top5 and copied neural scoring/model roster",
+      "reason": "Preserve existing room permission/personal switch and public Top5; no new nickname gate or changed neural decision/default."
+    },
+    {
+      "change": "Upstream private G.open inference in three Clint helpers",
+      "reason": "Ordinary Clint receives own/public only; complete hands belong exclusively to explicit standalone practice solver, not ordinary rules/NN/candidates/endgame inference/training."
+    },
+    {
+      "change": "Auto-loop120s solving,4million numeric-hash TT entries and heuristic genPlays-only move coverage",
+      "reason": "Explicit one-click bounded worker,5s default/30s maximum,100k full-string TT keys,20k hand caches,2million nodes and exhaustive legal physical subsets. Stop/incomplete never claims optimal. No model learning."
+    },
+    {
+      "change": "Re-add copied expression/gift/quick-phrase styles and routing",
+      "reason": "Upstream imported our existing presets/rate limiting; these are already present and retained."
+    }
+  ],
+  "ordinaryRuleSHA256": {
+    "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/strategy.js": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72"
+  },
+  "models": {
+    "catalogSHA256": "1f1abfdf5065bc655d011d0fdeb6bb3f3f72e5339bc355b7dbba1eff5e783dea",
+    "defaultId": "017",
+    "danMCaiChampions": [
+      "017",
+      "012"
+    ],
+    "unchanged": true
+  },
+  "validation": {
+    "nodePassed": 244,
+    "pythonResearchPassed": 24,
+    "format": "passed",
+    "build": "d26121c58e",
+    "unitCases": {
+      "exhaustiveReferencePositions": 16,
+      "moveSetFixtures": 40,
+      "restartAndPrivacyTests": 3
+    },
+    "endgameBrowser": {
+      "solves": [
+        "求解完成：双方均按本局升级分最优行动时，南北赢 1 级。4 手，24 节点，0.00 秒。"
+      ],
+      "legalReplayMoves": 4,
+      "nodes": 24,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "controls": 13,
+          "allHitTests": true
+        },
+        {
+          "width": 900,
+          "height": 700,
+          "controls": 13,
+          "allHitTests": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "controls": 13,
+          "allHitTests": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "controls": 13,
+          "allHitTests": true
+        }
+      ],
+      "actualWorker": true,
+      "tenCardBoundedResult": "求解完成：双方均按本局升级分最优行动时，南北赢 1 级。14 手，4,649 节点，0.02 秒。",
+      "stopAndReturn": true,
+      "localRecordReload": true,
+      "neuralDownloads": 0,
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "continuityBrowser": {
+      "restoredRule": "once",
+      "rotatedSeat": "E",
+      "levels": [
+        8,
+        14
+      ],
+      "aOut": 1,
+      "previousOrder": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "roundIdentityAndPrivateExclusion": "covered by executable Node restart/collection tests",
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "privateTable": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "completedRounds": 0,
+      "trainingUpdates": 0,
+      "realPeerJS": true,
+      "hostOnlyNicknameGate": true,
+      "guestSameNameDenied": true,
+      "noPrivateRuleFlagBroadcast": true,
+      "privateCoach": {
+        "modelId": "017",
+        "search": {
+          "candidates": 304,
+          "evaluated": 8,
+          "mode": "round",
+          "horizon": 4,
+          "maxPlies": 12,
+          "leafSeat": "advising player, or partner after finishing",
+          "mismatchedLeaves": 0,
+          "fullRollouts": 17,
+          "minRollouts": 2,
+          "truncatedRollouts": 0,
+          "maxSamples": 12,
+          "priorWeight": 4,
+          "temperature": 0.03,
+          "elapsedMs": 2611,
+          "fullInformation": true
+        }
+      },
+      "partnerUsesOracle": true,
+      "opponentStaysRules": true,
+      "neuralOpponentUsesOnlyPublicObservation": true,
+      "manualOutsideBeamRated": true,
+      "offRestoresPartnerRules": true,
+      "privateHandsMatchHeldCounts": true,
+      "constructedCompletionExcluded": true,
+      "uploads": 0,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "topFiveInViewport": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "controlLayouts": {
+      "kind": "synthetic-display-hit-test",
+      "buildVersions": [
+        "d26121c58e"
+      ],
+      "strengthGames": 0,
+      "trainingUpdates": 0,
+      "testedStates": 521,
+      "viewports": [
+        {
+          "viewport": [
+            1920,
+            1080
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1920,
+            1080
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        }
+      ],
+      "failures": [],
+      "pageErrors": []
+    },
+    "arrangementRegression": {
+      "publicMenu": true,
+      "physicalCardsPreserved": true,
+      "groupSplitJoinRestore": true,
+      "keyboardSelection": true,
+      "fourSeatRecords": true,
+      "exportedRecords": 4,
+      "assistedLabels": true,
+      "quotaFeedback": true,
+      "quotaExportAvailable": true,
+      "returnToLearnedTable": true,
+      "cloudUploads": 0,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "pageErrors": []
+    },
+    "roomRecovery": {
+      "hostDirection": "W",
+      "guestDirection": "S",
+      "refreshDuringPrep": true,
+      "manualRoomCodeRecovery": true,
+      "selectedLevelAndOnceRuleSync": true,
+      "refreshDuringInFlightPolicy": true,
+      "stalePolicyCancelled": true,
+      "realGuestActionAfterReturn": true,
+      "dataChannelAutomaticRecovery": true,
+      "unknownSeatRejected": true,
+      "sameCredential": true,
+      "guestAvoidsModelDownload": true,
+      "hostExitOffersSoloContinuation": true,
+      "soloContinuationLoadsLearnedPolicy": true,
+      "pageErrors": []
+    }
+  },
+  "limits": [
+    "These are correctness/UI tests, not independent strength matches or proof that every10-card position finishes within budget.",
+    "No candidate model, reward, network inference, active frozen trainer/source/config/buffer or champion changed. Belief0.3 gateTo04 stays false.",
+    "Legacy collection_smoke requires an ignored cloud export token and was not run here; no credential or human-data export was accessed. Credential-free local collector/continuity/PeerJS tests run instead.",
+    "Initial integration surfaced one undeclared browser Option name and the old private-test assumption; fixed explicit browser dependency and strengthened early private exclusion assertion before publishing.",
+    "Concurrent UI/browser/build activity may affect operational training throughput; do not treat it as an isolated training-speed comparison."
+  ],
+  "deployment": {
+    "status": "local-validation-passed-awaiting-main-and-Pages",
+    "build": "d26121c58e"
+  },
+  "activeTrainingReadOnlyAudit": {
+    "observedAtUTC": "2026-11-07T20:40:17.938Z",
+    "task": "exploiter-017-20261107",
+    "alive": true,
+    "newUpdates": 9365,
+    "availableGiB": 5.514575958251953,
+    "originalDeadlineUTC": "2026-11-07T23:56:21.396Z",
+    "guardianHealthy": true,
+    "frozenSourceMismatches": []
+  }
+}
