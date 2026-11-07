@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "observedUTC": "2026-11-07T02:16:21.953002+00:00",
+  "observedUTC": "2026-11-07T02:19:43.783411+00:00",
   "kind": "ui-network-compatibility-not-strength",
   "mainBaseCommit": "b7bd49a9a11fe7ae2904b8968c1027c6d9215fe3",
   "upstream": {
@@ -157,7 +157,7 @@
     },
     "formatCheck": "passed",
     "build": "passed",
-    "webBuild": "9545d0030c",
+    "webBuild": "2e6141b678",
     "spectators": {
       "roomCodeShown": true,
       "twoHumansRemainTwo": true,

@@ -1,5 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { cardHTML, $ } from '../ui/cards.js';
+import { setMsg } from '../ui/table.js';
 import { rankName } from '../core/cards.js';
 import { lobbyStatus, nickNow } from '../lobby/lobby.js';
 import { VERSION, OLD_PAGE } from './protocol.js';
@@ -62,6 +63,9 @@ export function acceptSpectator(conn, info, message) {
       .slice(0, 8) || '观众';
   const sid = (runtime.network.spectatorSequence = (runtime.network.spectatorSequence || 9) + 1);
   viewers().set(conn.peer, { conn, name, sid, seen: Date.now(), muted: false });
+  const notice = `${name} 来观战（现在 ${viewers().size} 人观战）`;
+  if (runtime.network.started) setMsg(notice);
+  else lobbyStatus(notice);
   conn.send({
     t: 'watch-open',
     sid,
@@ -95,6 +99,7 @@ export function closeSpectator(conn) {
   const viewer = viewers().get(conn.peer);
   if (!viewer || viewer.conn !== conn) return false;
   viewers().delete(conn.peer);
+  if (runtime.network.started) setMsg(`${viewer.name} 离开了观战`);
   delete runtime.network.mics[viewer.sid];
   updateSpectatorVoice();
   syncRoomOptions();
