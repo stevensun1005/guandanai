@@ -1,0 +1,79 @@
+{
+  "validation": {
+    "checkpointStep": 123,
+    "nodeTests": 221,
+    "build": "passed",
+    "format": "passed",
+    "isolatedProcessRecovery": "passed",
+    "stopRespected": true
+  },
+  "observedAt": "2026-11-07T13:28:23.8928911+00:00",
+  "task": {
+    "multipleInstances": "IgnoreNew",
+    "name": "GuanZero-io48-Recovery",
+    "pollSeconds": 15,
+    "repetition": "PT1M",
+    "state": "Running"
+  },
+  "fixedInputs": {
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "f9642e29aafc1aaeb1947b92c98f22a2c306c584f1117534f1d5ec04c8856d48"
+  },
+  "plan": {
+    "id": "model-000000223067",
+    "protocol": "development-500-v1",
+    "purpose": "development-not-heldout-acceptance",
+    "modelVersion": "model-000000223067",
+    "modelSHA256": "435e5d494444fcdd73637c3c847706b4fcc46fd92bd9f70124339ef66d26dba7",
+    "sourceBlock": null,
+    "index": 5110,
+    "pairs": 250,
+    "seedStart": 4211000000,
+    "seedEnd": 4211000249,
+    "opponentPanel": "clint-champion-v1",
+    "opponents": [
+      "clint",
+      "champion"
+    ],
+    "champion": {
+      "id": "champion",
+      "name": "danMCai-v000855042",
+      "mode": "snapshot",
+      "version": "v000855042",
+      "modelSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "archiveId": "017",
+      "gate": {
+        "gate": 330,
+        "acceptedAt": "2026-11-06T10:59:34.199Z",
+        "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+        "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+        "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+      },
+      "policy": "greedy-network-only-no-web-styles-or-endgame"
+    },
+    "createdAt": "2026-11-07T13:21:36.095Z"
+  },
+  "initialProgress": {
+    "clint": {
+      "pairs": 68,
+      "matches": 136
+    },
+    "champion": {
+      "pairs": 36,
+      "matches": 72
+    }
+  },
+  "guard": {
+    "pid": 26364,
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+    "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+    "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "plannedEnd": "2026-11-08T03:11:40.256Z",
+    "restarts": 0,
+    "phase": "healthy",
+    "step": 223483,
+    "supervisorPid": 62320,
+    "updatedAt": "2026-11-07T13:28:15.571Z",
+    "error": null
+  }
+}
