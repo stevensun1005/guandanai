@@ -1973,3 +1973,5 @@ Pages 工作流 [42386954803](https://github.com/stevensun1005/guandanai/actions
 归档完整导出 `guanzero-adp-io48/model-000000229609`，SHA-256 为 `43d72b65e773fb5acb6b8f86baed16a69a1977a97fb6fddf4fe5f23ee25261bc`。网页默认编号为 **017**；启用冠军菜单时，归档新检查点不会自动替换冠军。本发布未新增独立评测比赛，不代表棋力验收或胜率提高。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-021.json)。
 
 第36小时冻结guanzero-adp-io48-229609，种子4,210,100,000–4,210,100,249，各250对交换阵营／500场。Clint为263胜／200负／37平，胜率52.6%，95%种子簇区间48.4%–56.8%；冻结danMCai-v000855042为74胜／396负／30平，胜率14.8%，区间11.8%–17.8%。[计划](evaluation/guanzero-229609-plan.json)、[Clint逐场](evaluation/guanzero-229609-development-500-clint.json)、[冠军逐场](evaluation/guanzero-229609-development-500-champion.json)保留原始字节。网页021使用同一完整SHA。Chrome单线程WASM对照16个局面49个值，最大绝对误差6.41×10⁻⁷，动作分歧0。
+
+[229609 Pages部署](https://github.com/stevensun1005/guandanai/actions/runs/42387813351)成功，021公网完整SHA与冻结评测相同。真实Chrome六项菜单及四席默认v000855042核对通过。[线上证据](evaluation/web-model-021.json)。
