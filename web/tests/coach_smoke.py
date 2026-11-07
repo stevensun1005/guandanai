@@ -67,15 +67,19 @@ def score_checks(page):
 
 def layouts(page):
     result=[]
-    for w,h in [(1440,1000),(390,844),(844,390)]:
+    for w,h in [(1920,1080),(1440,1000),(1366,768),(1280,720),(1100,620),(1024,768),(900,600),(1280,500),(390,844),(844,390)]:
         page.set_viewport_size({'width':w,'height':h});page.wait_for_timeout(250)
         box=page.locator('#coachPanel').bounding_box();assert box and box['x']>=0 and box['y']>=0 and box['x']+box['width']<=w+1 and box['y']+box['height']<=h
         overlaps=page.evaluate("""()=>{const a=document.querySelector('#coachPanel').getBoundingClientRect();return [...document.querySelectorAll('#btns .btn')].some(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1})}""")
         assert not overlaps, 'evaluation panel overlaps play controls'
         side=page.locator('#coachSuggestions').bounding_box();assert side and side['x']>=0 and side['y']>=0 and side['x']+side['width']<=w+1 and side['y']+side['height']<=h+1
         assert not page.evaluate("""()=>{const a=document.querySelector('#coachSuggestions').getBoundingClientRect();return [...document.querySelectorAll('#btns .btn')].some(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1})}"""), 'Top 5 overlaps play controls '+str((w,h,side,page.evaluate("[...document.querySelectorAll('#btns .btn')].map(e=>({id:e.id,box:e.getBoundingClientRect().toJSON()}))")))
+        if w >= 900:
+            # Check the game surface, not just the play buttons: the old popover covered seats.
+            obstacles = page.evaluate("""()=>{const a=document.querySelector('#coachSuggestions').getBoundingClientRect();return [...document.querySelectorAll('#table, #hand, #mebar, #coachPanel, .handtools, .bar, .who, #hand .card')].filter(e=>{const b=e.getBoundingClientRect();return b.width&&b.height&&Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1}).map(e=>e.id||e.className)}""")
+            assert not obstacles, f'Top 5 covers desktop game UI at {w}x{h}: {obstacles}'
         page.screenshot(path=str(OUT/f'coach-{w}.png'))
-        result.append({'width':w,'height':h,'panelInViewport':True,'actionButtonsOverlap':False,'topFiveInViewport':True,'topFiveOverlapsActions':False,'bounds':box})
+        result.append({'width':w,'height':h,'panelInViewport':True,'actionButtonsOverlap':False,'topFiveInViewport':True,'topFiveOverlapsActions':False,'desktopGameSurfaceOverlap':False if w>=900 else None,'bounds':box})
     page.set_viewport_size({'width':1280,'height':850})
     return result
 
@@ -93,10 +97,20 @@ with sync_playwright() as p:
         page.locator('#nick').fill('Coach');page.locator('[data-seat=S]').click();page.locator('#sitBtn').click()
         page.evaluate("""()=>{G.tok++;const deck=makeDeck();G.hands=[0,1,2,3].map(p=>deck.slice(p*27,p*27+27));Object.assign(G,{phase:'play',turn:0,trick:null,log:[],out:[],seen:[],paused:true,clock:null,myOrder:[],fixed:[],fresh:[]});render()}""")
         report['scoring'],ids=score_checks(page)
+        report['layouts']=layouts(page)
+        # Collapsing returns the rail to the table; reopening reserves it again.
+        open_width = page.locator('#table').bounding_box()['width']
+        page.locator('#coachTopToggle').click()
+        page.wait_for_timeout(100)
+        assert page.locator('#table').bounding_box()['width'] > open_width
+        assert page.locator('#coachSuggestions').is_hidden()
+        assert not page.evaluate("document.body.classList.contains('has-coach-top')")
+        page.locator('#coachTopToggle').click()
+        assert page.evaluate("document.body.classList.contains('has-coach-top')")
         if ids:page.evaluate('onPlay()')
         else:page.evaluate('onPass()')
         page.wait_for_function("() => document.querySelector('#coachLast').textContent.includes('合理性 100%')")
-        report['postMoveRetained']=True;report['layouts']=layouts(page);c.close()
+        report['postMoveRetained']=True;c.close()
     else:
         def room(allow):
             hc,gc=context(),context()

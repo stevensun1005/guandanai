@@ -106,6 +106,10 @@ export function toggleHandTools() {
 
 export function initialize() {
   const menu = $('#handToolsMenu');
+  $('#restoreHandBtn').onclick = () => {
+    closeTools();
+    applyTool('rank');
+  };
   menu.addEventListener('click', (event) => {
     const action = event.target.closest('[data-hand-tool]');
     if (!action || action.disabled) return;

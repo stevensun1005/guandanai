@@ -208,6 +208,7 @@ export function renderCoach() {
   const visible = enabled && permitted && game && ['play', 'roundEnd', 'over'].includes(game.phase);
   panel.hidden = !visible;
   document.body.classList.toggle('has-coach', !!visible);
+  document.body.classList.toggle('has-coach-top', !!visible && topOpen);
   $('#coachSuggestions').hidden = !visible || !topOpen;
   $('#coachTopToggle').setAttribute('aria-expanded', String(topOpen));
   $('#coachTopToggle').textContent = topOpen ? '收起 Top 5' : '展开 Top 5';

@@ -1,0 +1,509 @@
+{
+  "schema": 1,
+  "kind": "ui-functional-validation",
+  "recordedAt": "2026-11-07T15:58:44.960161+00:00",
+  "baseMain": "61c3dbed0949d98d2986519f3e93e2852a3a842e",
+  "upstreamReference": {
+    "sha": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1",
+    "scope": "Restore loose-card rank order while keeping fixed groups; not a new upstream sync"
+  },
+  "scope": [
+    "Desktop Top 5 reserves a right rail from 900 CSS pixels; header and hand tools cannot cover it",
+    "Collapse releases rail space while selection scoring stays active",
+    "One-click restore uses existing rank sorting and undo history; fixed groups and physical cards preserved",
+    "Practice retains its separate suggested-group restore"
+  ],
+  "modelCatalogChanged": false,
+  "danMCaiDefault": "017",
+  "danMCaiChampions": [
+    "017",
+    "012"
+  ],
+  "strengthMatches": 0,
+  "trainingUpdatesByThisChange": 0,
+  "solo": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "trainingUpdates": 0,
+    "scoring": {
+      "modelId": "017",
+      "candidates": 1295,
+      "minValue": -1.567628026008606,
+      "maxValue": 0.4160967767238617,
+      "topFiveVisible": true,
+      "topFiveClickSelectsOnly": true,
+      "topFiveExposureMarked": true,
+      "viewTeamLevelsChecked": true,
+      "teamLevels": {
+        "self": 2,
+        "opponent": 2
+      },
+      "relativeExtremaChecked": true,
+      "selectionUsesCachedValues": true,
+      "invalidSelectionNotRated": true,
+      "disabledStaleReplyIgnored": true,
+      "injectedFailureNotScored": true,
+      "retrySucceeded": true
+    },
+    "layouts": [
+      {
+        "width": 1920,
+        "height": 1080,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 236,
+          "y": 698.203125,
+          "width": 989,
+          "height": 53
+        }
+      },
+      {
+        "width": 1440,
+        "height": 1000,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 618.203125,
+          "width": 954,
+          "height": 53
+        }
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 386.203125,
+          "width": 889,
+          "height": 53
+        }
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 338.203125,
+          "width": 813,
+          "height": 53
+        }
+      },
+      {
+        "width": 1100,
+        "height": 620,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 272.65625,
+          "width": 654,
+          "height": 53
+        }
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 417.828125,
+          "width": 588,
+          "height": 53
+        }
+      },
+      {
+        "width": 900,
+        "height": 600,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 278.828125,
+          "width": 478,
+          "height": 53
+        }
+      },
+      {
+        "width": 1280,
+        "height": 500,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": false,
+        "bounds": {
+          "x": 16,
+          "y": 204.84375,
+          "width": 813,
+          "height": 46
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": null,
+        "bounds": {
+          "x": 16,
+          "y": 580,
+          "width": 302,
+          "height": 61
+        }
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "desktopGameSurfaceOverlap": null,
+        "bounds": {
+          "x": 16,
+          "y": 165.0625,
+          "width": 682,
+          "height": 46
+        }
+      }
+    ],
+    "postMoveRetained": true,
+    "pageErrors": []
+  },
+  "rooms": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "trainingUpdates": 0,
+    "hostDeniedEnforced": true,
+    "scoring": {
+      "modelId": "017",
+      "candidates": 6,
+      "minValue": -1.571142554283142,
+      "maxValue": -1.1985344886779785,
+      "topFiveVisible": true,
+      "topFiveClickSelectsOnly": true,
+      "topFiveExposureMarked": true,
+      "viewTeamLevelsChecked": true,
+      "teamLevels": {
+        "self": 2,
+        "opponent": 7
+      },
+      "relativeExtremaChecked": true,
+      "selectionUsesCachedValues": true,
+      "invalidSelectionNotRated": true,
+      "disabledStaleReplyIgnored": true,
+      "injectedFailureNotScored": true,
+      "retrySucceeded": true
+    },
+    "postMoveRetained": true,
+    "independentPlayerPreferences": true,
+    "assistedEventMarked": true,
+    "realPeerJSDataChannel": true,
+    "hostWGuestS": true,
+    "layouts": [
+      {
+        "width": 1920,
+        "height": 1080,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 236,
+          "y": 693.078125,
+          "width": 989,
+          "height": 53
+        }
+      },
+      {
+        "width": 1440,
+        "height": 1000,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 613.078125,
+          "width": 954,
+          "height": 53
+        }
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 381.078125,
+          "width": 889,
+          "height": 53
+        }
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 333.078125,
+          "width": 813,
+          "height": 53
+        }
+      },
+      {
+        "width": 1100,
+        "height": 620,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 268.140625,
+          "width": 654,
+          "height": 53
+        }
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 413.21875,
+          "width": 588,
+          "height": 53
+        }
+      },
+      {
+        "width": 900,
+        "height": 600,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 274.6875,
+          "width": 478,
+          "height": 53
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 580,
+          "width": 302,
+          "height": 61
+        }
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "panelInViewport": true,
+        "actionButtonsOverlap": false,
+        "topFiveInViewport": true,
+        "topFiveOverlapsActions": false,
+        "bounds": {
+          "x": 16,
+          "y": 162.015625,
+          "width": 682,
+          "height": 46
+        }
+      }
+    ],
+    "rejoinRestoresPermissionAndPreference": true,
+    "pageErrors": []
+  },
+  "handTools": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "sorts": 3,
+      "groupPreserved": true,
+      "oneClickRestore": true,
+      "restoreUndoRedo": true,
+      "undo": true,
+      "redoAndShortcuts": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "sorts": 3,
+      "groupPreserved": true,
+      "oneClickRestore": true,
+      "restoreUndoRedo": true,
+      "undo": true,
+      "redoAndShortcuts": true,
+      "pageErrors": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "sorts": 3,
+      "groupPreserved": true,
+      "oneClickRestore": true,
+      "restoreUndoRedo": true,
+      "undo": true,
+      "redoAndShortcuts": true,
+      "pageErrors": []
+    }
+  ],
+  "privateTool": {
+    "kind": "test",
+    "strengthMatches": 0,
+    "completedRounds": 0,
+    "trainingUpdates": 0,
+    "realPeerJS": true,
+    "hostOnlyNicknameGate": true,
+    "guestSameNameDenied": true,
+    "noPrivateRuleFlagBroadcast": true,
+    "privateCoach": {
+      "modelId": "017",
+      "search": {
+        "candidates": 10,
+        "evaluated": 8,
+        "mode": "round",
+        "horizon": 4,
+        "maxPlies": 12,
+        "leafSeat": "advising player, or partner after finishing",
+        "mismatchedLeaves": 0,
+        "fullRollouts": 22,
+        "minRollouts": 2,
+        "truncatedRollouts": 0,
+        "maxSamples": 12,
+        "priorWeight": 4,
+        "temperature": 0.03,
+        "elapsedMs": 2590,
+        "fullInformation": true
+      }
+    },
+    "partnerUsesOracle": true,
+    "opponentStaysRules": true,
+    "neuralOpponentUsesOnlyPublicObservation": true,
+    "manualOutsideBeamRated": true,
+    "offRestoresPartnerRules": true,
+    "privateHandsMatchHeldCounts": true,
+    "constructedCompletionExcluded": true,
+    "uploads": 0,
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "topFiveInViewport": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "topFiveInViewport": true
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "topFiveInViewport": true
+      }
+    ],
+    "pageErrors": []
+  },
+  "practice": {
+    "publicEntry": true,
+    "restoreVisible": true,
+    "manualGroupResetViaRealButton": true,
+    "allHandsUnchanged": true,
+    "playedHistoryUnchanged": true,
+    "annotatedExportAndImport": true,
+    "pageErrors": []
+  },
+  "production": {
+    "testGlobalsHidden": true,
+    "learnedActions": 5,
+    "modelIds": [
+      "001",
+      "017"
+    ],
+    "pageErrors": []
+  },
+  "checks": {
+    "npmTest": {
+      "passed": 225,
+      "failed": 0,
+      "firstRunPassed": true,
+      "intermediateRun": "One concurrent run hit the existing synthetic supervisor partial-JSON race; a subsequent full npm test passed all 225. Training sources were not changed."
+    },
+    "pythonResearch": {
+      "passed": 17,
+      "failed": 0
+    },
+    "formatCheck": "passed after formatting the two touched source files",
+    "build": "passed",
+    "version": "ddcd69a4fd"
+  },
+  "protectedDrafts": {
+    "count": 10,
+    "sha256Unchanged": true
+  },
+  "limitations": [
+    "Browser tests use synthetic test fixtures and PeerJS test rooms; no chess-strength claim",
+    "Screenshots and model downloads remain in ignored validation directories",
+    "An early practice-test setup did not refresh disabled state; replaced by real group button interaction"
+  ],
+  "sourceSHA256": {
+    "web/src/coach/controller.js": "32da4cf8de9cfc60fae08f652071fc9a857261838ef9017f8d70288e6828386e",
+    "web/src/styles/coach.css": "4f5884ea603adf0e0c5385797aaec4880c60878c2d0a3c19f50eeb2ad30a9c69",
+    "web/src/hand/tools.js": "bebdd14217e9dd3113fa964886a2f49b20f30e9b7050455f6c2c29f475b99a10",
+    "web/src/styles/replay.css": "a0798c2c86df66a304217b78a061a39a9c79c0245523b5bc91db3b6475b5a7df",
+    "web/src/ui/table.js": "c1befdeac882f7cb28224c4b219a1a88a026483335fc8e3bb4d5aa6a55508f80",
+    "web/src/index.html": "0d4644418e4eb2e8f61cb9f23dbfaf29301a5d039ce25b50f282a6547ab2d5b1",
+    "web/tests/coach_smoke.py": "53796edb108fe73aafb38e4b7cde17627c0c7b823b9bf25fb7d06b581274ea51",
+    "web/tests/hand_tools_smoke.py": "c9ef800c1c04dfb7ad79a7d76162c0b5b0a8ced52cb669e56f7a7b173ac17723",
+    "web/tests/practice_smoke.py": "cb8d70ea3a511ab5a0918363bbe99f6c12fd8a8aef899358553968b827c8e631"
+  },
+  "sourceHashEncoding": "UTF-8 with LF line endings"
+}

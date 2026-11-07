@@ -24,6 +24,7 @@ body.practice #app {
   max-width: none;
   margin: 0;
 }
+body.practice #restoreHandBtn,
 body.practice #fanBtn,
 body.practice #rowsBtn {
   display: none;

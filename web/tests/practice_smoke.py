@@ -31,6 +31,16 @@ with sync_playwright() as p:
         page.wait_for_timeout(100)
     page.locator("#readyBtn").wait_for(state="visible")
     assert page.locator(".peek").count() == 3
+    assert page.locator("#restoreHandBtn").is_hidden()
+    assert page.locator("#sortBtn").inner_text() == "复原"
+    before_reset = page.evaluate("G.hands.map(h=>h.map(c=>c.id).sort((a,b)=>a-b))")
+    page.evaluate("sel=new Set(G.hands[0].slice(0,2).map(c=>c.id));renderHand()")
+    page.locator("#fixBtn").click()
+    assert page.evaluate("G.tgLock.length") > 0
+    page.locator("#sortBtn").click()
+    assert page.evaluate("G.tgLock.length") == 0
+    assert page.evaluate("G.hands.map(h=>h.map(c=>c.id).sort((a,b)=>a-b))") == before_reset
+    assert page.evaluate("G.log.length") == 0
     page.locator("#readyBtn").click()
     for _ in range(300):
         if page.evaluate("G.log.length>=6"):

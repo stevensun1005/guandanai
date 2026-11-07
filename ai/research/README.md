@@ -77,3 +77,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [冠军网络微调实际启动](evaluation/champion-restart-20261107/startup.json)记录固定截止、真实正式更新／ROCm／DirectML与可用内存；它是启动快照，非最终或独立棋力成绩。
 
 [Clint 配牌练习与训练选择同步](evaluation/clint-sync-20261107-1506.json)记录 `ec58b20` 的功能适配、未照搬项、原有模型／房间兼容及响应测试；不是新的训练或棋力结果。
+
+[Top 5 侧栏与手牌复原验证](evaluation/ui-coach-restore-20261107.json)：桌面预留空间、收起恢复宽度、一键复原／保留成组／撤销重做及普通与明牌联机边界；仅功能测试，不是模型训练或棋力结果。

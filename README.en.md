@@ -14,6 +14,10 @@ Four-player GuanDan with bots running in your browser, private rooms and practic
 
 </div>
 
+## Table assistance and hand reset
+
+On desktop windows at least 900 pixels wide, Top 5 uses a reserved sidebar with its own scrolling. Collapsing it restores table space while keeping selection ratings. The **复原** button restores loose cards to rank order, preserves manual groups and supports undo. In four-hand practice it restores the suggested grouping instead. See the [playing guide](web/docs/PLAYING.md) and [coach guide](web/docs/MOVE_COACH.md).
+
 ![An actual game](./web/docs/media/table-desktop.png)
 
 <details>

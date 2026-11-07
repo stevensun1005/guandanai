@@ -240,17 +240,27 @@
   overflow-y: auto;
   overscroll-behavior: contain;
 }
-@media (min-width: 1100px) and (min-height: 620px) {
-  body.has-coach #app {
+@media (min-width: 900px) {
+  body.has-coach-top #app {
     max-width: 1480px;
     padding-right: 292px;
   }
+  body.has-coach-top .bar {
+    right: 292px;
+  }
+  body.has-coach-top .handwrap .handtools {
+    position: relative;
+    bottom: auto;
+    min-height: 34px;
+    margin-top: 4px;
+  }
   .coach-suggestions {
-    top: 82px;
+    top: 12px;
     bottom: auto;
     width: 258px;
     right: max(12px, calc((100vw - 1480px) / 2 + 16px));
-    max-height: calc(100dvh - 104px);
+    max-height: calc(100dvh - 24px);
+    scrollbar-gutter: stable;
   }
 }
 @media (min-width: 1400px) and (min-height: 620px) {
@@ -265,11 +275,14 @@
     width: 238px;
     max-height: calc(100dvh - 104px);
   }
+  body.has-private.has-coach-top .bar {
+    left: 272px;
+  }
   body.has-private .coach-suggestions {
     right: max(12px, calc((100vw - 1740px) / 2 + 16px));
   }
 }
-@media (max-height: 500px) {
+@media (max-width: 899px) and (max-height: 500px) {
   .coach-suggestions {
     padding: 9px;
     max-height: max(36px, calc(100dvh - var(--coach-popup-bottom, 220px) - 8px));

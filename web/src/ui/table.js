@@ -235,6 +235,7 @@ export function renderControls() {
     fixedNow = new Set((runtime.game.fixed || []).flat());
   $('#sortBtn').textContent = runtime.reviewMode ? '复原' : '理牌';
   $('#sortBtn').disabled = !runtime.game.hands[0].length;
+  $('#restoreHandBtn').disabled = !runtime.game.hands[0].length;
   fb.disabled = !picked || !runtime.game.hands[0].length;
   fb.textContent = practiceGrouped()
     ? '成组'

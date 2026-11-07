@@ -47,6 +47,19 @@ with sync_playwright() as p:
             page.locator(f'[data-hand-tool="{mode}"]').click()
             assert page.evaluate("JSON.stringify(G.fixed)") == group
             assert page.evaluate("G.fixed.flat().concat(G.myOrder).sort((a,b)=>a-b)") == original
+        # One-click restore keeps fixed groups, clears the selection and is undoable.
+        page.evaluate("G.myOrder.reverse();sel=new Set(G.myOrder.slice(0,1));renderHand()")
+        reversed_order = page.evaluate("JSON.stringify(G.myOrder)")
+        page.locator("#restoreHandBtn").click()
+        assert page.evaluate("JSON.stringify(G.fixed)") == group
+        assert page.evaluate("sel.size") == 0
+        assert page.evaluate("G.fixed.flat().concat(G.myOrder).sort((a,b)=>a-b)") == original
+        restored_order = page.evaluate("JSON.stringify(G.myOrder)")
+        assert restored_order != reversed_order
+        page.keyboard.press("Control+z")
+        assert page.evaluate("JSON.stringify(G.myOrder)") == reversed_order
+        page.keyboard.press("Control+y")
+        assert page.evaluate("JSON.stringify(G.myOrder)") == restored_order
         page.locator("#sortBtn").click()
         page.locator('[data-hand-tool="release"]').click()
         assert page.evaluate("G.fixed.length") == 0
@@ -85,6 +98,8 @@ with sync_playwright() as p:
                 "height": height,
                 "sorts": 3,
                 "groupPreserved": True,
+                "oneClickRestore": True,
+                "restoreUndoRedo": True,
                 "undo": True,
                 "redoAndShortcuts": True,
                 "pageErrors": errors,
