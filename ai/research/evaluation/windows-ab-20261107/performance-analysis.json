@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "arms": {
+    "A": {
+      "newUpdates": 96056,
+      "trainingDecisions": 49189974,
+      "newIngestedRows": 49180317,
+      "sessionsCreated": 175607,
+      "inferenceDecisions": 59005261,
+      "sessionCreationsPer1000InferenceDecisions": 2.976124451004462,
+      "trainingDecisionsPerAuthorizedSecond": 3415.9704166666666
+    },
+    "B": {
+      "newUpdates": 32749,
+      "trainingDecisions": 16767732,
+      "newIngestedRows": 16767499,
+      "sessionsCreated": 791443,
+      "inferenceDecisions": 23265798,
+      "sessionCreationsPer1000InferenceDecisions": 34.01744483468824,
+      "trainingDecisionsPerAuthorizedSecond": 1164.4258333333332
+    }
+  },
+  "scope": "Observed four-hour runs; summed sampler counters, not a randomized cache experiment",
+  "finding": "A and B have materially different sampling throughput and session churn; causal role of cache size remains untested",
+  "nextHypothesis": "Bounded session-cache reuse may reduce load churn at the B mix without changing model outputs or the training recipe",
+  "nextExperimentStatus": "planned-short-diagnostic-not-started",
+  "independentHeldoutMayBeReusedAsNewAcceptance": false
+}

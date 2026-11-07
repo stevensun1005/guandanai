@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-07T14:03:31.763263+00:00",
+  "campaignManifestSHA256": "49243f1d42da858649f992dc93d13773c4f5bd13cb679f924d042b56b1427df6",
+  "guardian": {
+    "pid": 5536,
+    "updatedAtUTC": "2026-11-07T14:03:29.109Z",
+    "computeDeadlineUTC": "2026-11-11T16:45:00.000Z",
+    "deadlineUTC": "2026-11-11T17:00:00.000Z",
+    "registeredTasks": 0,
+    "globallyStopped": false,
+    "stopped": [],
+    "rejected": [],
+    "failure": null
+  },
+  "guardianSourceSHA256": "6bc84fe2b3b40806bc3f3ae50cda6cc7bf1f6db10a69158c84bc56e6011be868",
+  "newExperimentsStarted": 0,
+  "prerequisiteCompletedRounds": 24000,
+  "nextTask": "Preregister and run a bounded inference-session-cache diagnostic, then select a full-network experiment from actual evidence",
+  "nextTaskStatus": "planned-not-started",
+  "validation": {
+    "nodeTests": 222,
+    "nodePassed": 222,
+    "pythonResearchTests": 17,
+    "pythonResearchPassed": 17,
+    "format": "passed",
+    "build": "passed"
+  },
+  "webChampionChanged": false
+}

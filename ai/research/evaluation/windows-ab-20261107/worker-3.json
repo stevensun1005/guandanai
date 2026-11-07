@@ -1,0 +1,11 @@
+{
+  "shard": 3,
+  "pid": 20160,
+  "phase": "complete",
+  "failure": null,
+  "currentTask": "B-mixed-clint",
+  "completedPairs": 3000,
+  "protocolSHA256": "0f1abd7b38f3764d1959b24fe506a0f6a6799b317f55c56afd602cc07fe88a65",
+  "updatedAtUTC": "2026-11-07T13:56:45.453Z",
+  "rssBytes": 436785152
+}

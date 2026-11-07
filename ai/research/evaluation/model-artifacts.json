@@ -4853,7 +4853,7 @@
   "windowsExperimentRuns": [
     {
       "id": "windows-ab-20261107",
-      "status": "training-B",
+      "status": "complete-independent-evaluation",
       "hoursPerArm": 4,
       "order": [
         "A",
@@ -4871,7 +4871,24 @@
       "AEnded": "2026-11-07T09:49:37.740Z",
       "AUpdates": 96056,
       "AExportSHA256": "7fdadb492891c8557faf3c10ea5eca6145b67578e27d5aaba74cdad200d0b50e",
-      "BDeadlineUTC": "2026-11-07T13:49:37.798Z"
+      "BDeadlineUTC": "2026-11-07T13:49:37.798Z",
+      "results": "ai/research/evaluation/windows-ab-20261107/results.json",
+      "resultsManifest": "ai/research/evaluation/windows-ab-20261107/results-manifest.json",
+      "completedRounds": 24000,
+      "primaryWinner": "inconclusive",
+      "BStopEvidence": "ai/research/evaluation/windows-ab-20261107/arm-B-stop.json",
+      "BUpdates": 32749
+    }
+  ],
+  "autonomousResearchCampaigns": [
+    {
+      "id": "research-through-20261111",
+      "status": "authorized-prerequisite-complete-next-diagnostic-planned",
+      "authorization": "ai/research/evaluation/research-campaign-20261107/authorization.json",
+      "evidence": "ai/research/evaluation/research-campaign-20261107/startup.json",
+      "deadlineUTC": "2026-11-11T17:00:00.000Z",
+      "computeDeadlineUTC": "2026-11-11T16:45:00.000Z",
+      "webChampionHold": "017"
     }
   ]
 }

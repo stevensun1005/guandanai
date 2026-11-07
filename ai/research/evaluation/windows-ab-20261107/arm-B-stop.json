@@ -1,0 +1,796 @@
+{
+  "schema": 1,
+  "arm": "B",
+  "kind": "completed-training-window-not-independent-strength",
+  "observedAtUTC": "2026-11-07T13:51:51.203643+00:00",
+  "schedule": {
+    "startUTC": "2026-11-07T09:49:37.798Z",
+    "deadlineUTC": "2026-11-07T13:49:37.798Z",
+    "durationHours": 4,
+    "restartExtendsDeadline": false,
+    "authorization": "Owner 2026-11-07: A then B, four hours each, reserve 4 GiB, live dashboard, then preregistered independent evaluation and research publication; do not change web champion."
+  },
+  "stoppedAtUTC": "2026-11-07T13:50:08.591Z",
+  "exitDelayAfterDeadlineSeconds": 30.793,
+  "latest": {
+    "version": "v001046655",
+    "file": "v001046655.onnx",
+    "sha256": "ad028c56d6ad8e0e6045f25e8da04c16ac01995d9dfb63b66e813be4602e35eb",
+    "step": 1046655,
+    "trainedRows": 2143549440,
+    "ingestedRows": 535887843,
+    "publishedAt": "2026-11-07T13:49:37Z"
+  },
+  "checkpointSHA256": "8b7f9430e43908eb7aa5f84d1884324f939c057d31cff6da1141b66707726f53",
+  "inheritedStep": 1013906,
+  "newUpdates": 32749,
+  "newIngestedRows": 16767499,
+  "newTrainedRows": 67069952,
+  "trainedRows": 2143549440,
+  "ingestedRows": 535887843,
+  "modelMatchesCheckpointExactly": true,
+  "adamStates": 12,
+  "adamFiniteAndStepsMatch": true,
+  "samplerObservations": [
+    {
+      "slot": 0,
+      "inference": {
+        "batches": 3546103,
+        "decisions": 5933443,
+        "rows": 262569475,
+        "runMs": 6867195.2548006475,
+        "prepareMs": 248919.13300150595,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 195554,
+        "sessionsReleased": 195548,
+        "peakSessions": 6
+      }
+    },
+    {
+      "slot": 1,
+      "inference": {
+        "batches": 3480064,
+        "decisions": 5816862,
+        "rows": 257039369,
+        "runMs": 6831911.11880198,
+        "prepareMs": 245331.62609913354,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 197404,
+        "sessionsReleased": 197398,
+        "peakSessions": 6
+      }
+    },
+    {
+      "slot": 2,
+      "inference": {
+        "batches": 3346056,
+        "decisions": 5461720,
+        "rows": 241354160,
+        "runMs": 6645607.550301321,
+        "prepareMs": 230766.84039935394,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 203937,
+        "sessionsReleased": 203931,
+        "peakSessions": 6
+      }
+    },
+    {
+      "slot": 3,
+      "inference": {
+        "batches": 3628787,
+        "decisions": 6053773,
+        "rows": 267700333,
+        "runMs": 6883305.256297942,
+        "prepareMs": 252799.93209988248,
+        "inFlightMax": 8,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 6,
+        "sessionsCreated": 194548,
+        "sessionsReleased": 194542,
+        "peakSessions": 6
+      }
+    }
+  ],
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 26036,
+      "matches": 10493,
+      "decisions": 4284644,
+      "failures": 0,
+      "nextSeed": 12010493,
+      "shardSequence": 5878,
+      "uniqueLoggedSeeds": 10493,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 1,
+      "pid": 54336,
+      "matches": 10232,
+      "decisions": 4205463,
+      "failures": 0,
+      "nextSeed": 12010232,
+      "shardSequence": 5893,
+      "uniqueLoggedSeeds": 10232,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 2,
+      "pid": 29408,
+      "matches": 9624,
+      "decisions": 3913285,
+      "failures": 0,
+      "nextSeed": 12009624,
+      "shardSequence": 5785,
+      "uniqueLoggedSeeds": 9624,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 3,
+      "pid": 20908,
+      "matches": 10631,
+      "decisions": 4364340,
+      "failures": 0,
+      "nextSeed": 12010631,
+      "shardSequence": 5164,
+      "uniqueLoggedSeeds": 10631,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "shards": {
+    "manifests": {
+      "a00-000005848.json": {
+        "rows": 11552,
+        "matches": 31
+      },
+      "a00-000005849.json": {
+        "rows": 15133,
+        "matches": 41
+      },
+      "a00-000005850.json": {
+        "rows": 16400,
+        "matches": 43
+      },
+      "a00-000005851.json": {
+        "rows": 16561,
+        "matches": 40
+      },
+      "a00-000005852.json": {
+        "rows": 16709,
+        "matches": 39
+      },
+      "a00-000005853.json": {
+        "rows": 16668,
+        "matches": 36
+      },
+      "a00-000005854.json": {
+        "rows": 16672,
+        "matches": 44
+      },
+      "a00-000005855.json": {
+        "rows": 16752,
+        "matches": 43
+      },
+      "a00-000005856.json": {
+        "rows": 16620,
+        "matches": 41
+      },
+      "a00-000005857.json": {
+        "rows": 16671,
+        "matches": 39
+      },
+      "a00-000005858.json": {
+        "rows": 16496,
+        "matches": 44
+      },
+      "a00-000005859.json": {
+        "rows": 17023,
+        "matches": 42
+      },
+      "a00-000005860.json": {
+        "rows": 16625,
+        "matches": 40
+      },
+      "a00-000005861.json": {
+        "rows": 16601,
+        "matches": 44
+      },
+      "a00-000005862.json": {
+        "rows": 16709,
+        "matches": 34
+      },
+      "a00-000005863.json": {
+        "rows": 16564,
+        "matches": 36
+      },
+      "a00-000005864.json": {
+        "rows": 16693,
+        "matches": 40
+      },
+      "a00-000005865.json": {
+        "rows": 16716,
+        "matches": 40
+      },
+      "a00-000005866.json": {
+        "rows": 16568,
+        "matches": 39
+      },
+      "a00-000005867.json": {
+        "rows": 16746,
+        "matches": 41
+      },
+      "a00-000005868.json": {
+        "rows": 16537,
+        "matches": 41
+      },
+      "a00-000005869.json": {
+        "rows": 16498,
+        "matches": 38
+      },
+      "a00-000005870.json": {
+        "rows": 16753,
+        "matches": 37
+      },
+      "a00-000005871.json": {
+        "rows": 16494,
+        "matches": 39
+      },
+      "a00-000005872.json": {
+        "rows": 16632,
+        "matches": 39
+      },
+      "a00-000005873.json": {
+        "rows": 16513,
+        "matches": 45
+      },
+      "a00-000005874.json": {
+        "rows": 16552,
+        "matches": 44
+      },
+      "a00-000005875.json": {
+        "rows": 16625,
+        "matches": 43
+      },
+      "a00-000005876.json": {
+        "rows": 16546,
+        "matches": 34
+      },
+      "a00-000005877.json": {
+        "rows": 15259,
+        "matches": 37
+      },
+      "a01-000005856.json": {
+        "rows": 16557,
+        "matches": 39
+      },
+      "a01-000005857.json": {
+        "rows": 16642,
+        "matches": 39
+      },
+      "a01-000005858.json": {
+        "rows": 16614,
+        "matches": 40
+      },
+      "a01-000005859.json": {
+        "rows": 16717,
+        "matches": 38
+      },
+      "a01-000005860.json": {
+        "rows": 16545,
+        "matches": 38
+      },
+      "a01-000005861.json": {
+        "rows": 16777,
+        "matches": 45
+      },
+      "a01-000005862.json": {
+        "rows": 17019,
+        "matches": 39
+      },
+      "a01-000005863.json": {
+        "rows": 16419,
+        "matches": 34
+      },
+      "a01-000005864.json": {
+        "rows": 16394,
+        "matches": 37
+      },
+      "a01-000005865.json": {
+        "rows": 16960,
+        "matches": 43
+      },
+      "a01-000005866.json": {
+        "rows": 16767,
+        "matches": 39
+      },
+      "a01-000005867.json": {
+        "rows": 16499,
+        "matches": 42
+      },
+      "a01-000005868.json": {
+        "rows": 16649,
+        "matches": 39
+      },
+      "a01-000005869.json": {
+        "rows": 16572,
+        "matches": 42
+      },
+      "a01-000005870.json": {
+        "rows": 16554,
+        "matches": 41
+      },
+      "a01-000005871.json": {
+        "rows": 16459,
+        "matches": 39
+      },
+      "a01-000005872.json": {
+        "rows": 16423,
+        "matches": 37
+      },
+      "a01-000005873.json": {
+        "rows": 16544,
+        "matches": 38
+      },
+      "a01-000005874.json": {
+        "rows": 16567,
+        "matches": 38
+      },
+      "a01-000005875.json": {
+        "rows": 16944,
+        "matches": 42
+      },
+      "a01-000005876.json": {
+        "rows": 16610,
+        "matches": 42
+      },
+      "a01-000005877.json": {
+        "rows": 16571,
+        "matches": 41
+      },
+      "a01-000005878.json": {
+        "rows": 16697,
+        "matches": 41
+      },
+      "a01-000005879.json": {
+        "rows": 16712,
+        "matches": 37
+      },
+      "a01-000005880.json": {
+        "rows": 16454,
+        "matches": 45
+      },
+      "a01-000005881.json": {
+        "rows": 16393,
+        "matches": 37
+      },
+      "a01-000005882.json": {
+        "rows": 16732,
+        "matches": 41
+      },
+      "a01-000005883.json": {
+        "rows": 16798,
+        "matches": 41
+      },
+      "a01-000005884.json": {
+        "rows": 16693,
+        "matches": 43
+      },
+      "a01-000005885.json": {
+        "rows": 16511,
+        "matches": 39
+      },
+      "a01-000005886.json": {
+        "rows": 16819,
+        "matches": 39
+      },
+      "a01-000005887.json": {
+        "rows": 16854,
+        "matches": 39
+      },
+      "a01-000005888.json": {
+        "rows": 16489,
+        "matches": 39
+      },
+      "a01-000005889.json": {
+        "rows": 16793,
+        "matches": 37
+      },
+      "a01-000005890.json": {
+        "rows": 16597,
+        "matches": 41
+      },
+      "a01-000005891.json": {
+        "rows": 16665,
+        "matches": 42
+      },
+      "a01-000005892.json": {
+        "rows": 7201,
+        "matches": 20
+      },
+      "a02-000005759.json": {
+        "rows": 16577,
+        "matches": 41
+      },
+      "a02-000005760.json": {
+        "rows": 16447,
+        "matches": 40
+      },
+      "a02-000005761.json": {
+        "rows": 16474,
+        "matches": 40
+      },
+      "a02-000005762.json": {
+        "rows": 17060,
+        "matches": 47
+      },
+      "a02-000005763.json": {
+        "rows": 16451,
+        "matches": 41
+      },
+      "a02-000005764.json": {
+        "rows": 16466,
+        "matches": 42
+      },
+      "a02-000005765.json": {
+        "rows": 16574,
+        "matches": 42
+      },
+      "a02-000005766.json": {
+        "rows": 16422,
+        "matches": 43
+      },
+      "a02-000005767.json": {
+        "rows": 16443,
+        "matches": 40
+      },
+      "a02-000005768.json": {
+        "rows": 16783,
+        "matches": 43
+      },
+      "a02-000005769.json": {
+        "rows": 16232,
+        "matches": 42
+      },
+      "a02-000005770.json": {
+        "rows": 16443,
+        "matches": 39
+      },
+      "a02-000005771.json": {
+        "rows": 17136,
+        "matches": 37
+      },
+      "a02-000005772.json": {
+        "rows": 16792,
+        "matches": 36
+      },
+      "a02-000005773.json": {
+        "rows": 16562,
+        "matches": 45
+      },
+      "a02-000005774.json": {
+        "rows": 16391,
+        "matches": 41
+      },
+      "a02-000005775.json": {
+        "rows": 16594,
+        "matches": 41
+      },
+      "a02-000005776.json": {
+        "rows": 16455,
+        "matches": 43
+      },
+      "a02-000005777.json": {
+        "rows": 17062,
+        "matches": 39
+      },
+      "a02-000005778.json": {
+        "rows": 11589,
+        "matches": 30
+      },
+      "a02-000005779.json": {
+        "rows": 16831,
+        "matches": 43
+      },
+      "a02-000005780.json": {
+        "rows": 16419,
+        "matches": 38
+      },
+      "a02-000005781.json": {
+        "rows": 17106,
+        "matches": 37
+      },
+      "a02-000005782.json": {
+        "rows": 16590,
+        "matches": 44
+      },
+      "a02-000005783.json": {
+        "rows": 16900,
+        "matches": 39
+      },
+      "a02-000005784.json": {
+        "rows": 9974,
+        "matches": 19
+      },
+      "a03-000005131.json": {
+        "rows": 16625,
+        "matches": 43
+      },
+      "a03-000005132.json": {
+        "rows": 17083,
+        "matches": 39
+      },
+      "a03-000005133.json": {
+        "rows": 16623,
+        "matches": 41
+      },
+      "a03-000005134.json": {
+        "rows": 16555,
+        "matches": 34
+      },
+      "a03-000005135.json": {
+        "rows": 16757,
+        "matches": 36
+      },
+      "a03-000005136.json": {
+        "rows": 16592,
+        "matches": 45
+      },
+      "a03-000005137.json": {
+        "rows": 16774,
+        "matches": 39
+      },
+      "a03-000005138.json": {
+        "rows": 16786,
+        "matches": 39
+      },
+      "a03-000005139.json": {
+        "rows": 16444,
+        "matches": 33
+      },
+      "a03-000005140.json": {
+        "rows": 17213,
+        "matches": 38
+      },
+      "a03-000005141.json": {
+        "rows": 16578,
+        "matches": 43
+      },
+      "a03-000005142.json": {
+        "rows": 16772,
+        "matches": 39
+      },
+      "a03-000005143.json": {
+        "rows": 16498,
+        "matches": 39
+      },
+      "a03-000005144.json": {
+        "rows": 16900,
+        "matches": 40
+      },
+      "a03-000005145.json": {
+        "rows": 16686,
+        "matches": 44
+      },
+      "a03-000005146.json": {
+        "rows": 16514,
+        "matches": 39
+      },
+      "a03-000005147.json": {
+        "rows": 16610,
+        "matches": 37
+      },
+      "a03-000005148.json": {
+        "rows": 14497,
+        "matches": 39
+      },
+      "a03-000005149.json": {
+        "rows": 16435,
+        "matches": 41
+      },
+      "a03-000005150.json": {
+        "rows": 16579,
+        "matches": 43
+      },
+      "a03-000005151.json": {
+        "rows": 16518,
+        "matches": 41
+      },
+      "a03-000005152.json": {
+        "rows": 16516,
+        "matches": 39
+      },
+      "a03-000005153.json": {
+        "rows": 16496,
+        "matches": 43
+      },
+      "a03-000005154.json": {
+        "rows": 16573,
+        "matches": 41
+      },
+      "a03-000005155.json": {
+        "rows": 16601,
+        "matches": 41
+      },
+      "a03-000005156.json": {
+        "rows": 16686,
+        "matches": 41
+      },
+      "a03-000005157.json": {
+        "rows": 16441,
+        "matches": 39
+      },
+      "a03-000005158.json": {
+        "rows": 16708,
+        "matches": 40
+      },
+      "a03-000005159.json": {
+        "rows": 16632,
+        "matches": 37
+      },
+      "a03-000005160.json": {
+        "rows": 16468,
+        "matches": 43
+      },
+      "a03-000005161.json": {
+        "rows": 16877,
+        "matches": 46
+      },
+      "a03-000005162.json": {
+        "rows": 16518,
+        "matches": 39
+      },
+      "a03-000005163.json": {
+        "rows": 751,
+        "matches": 2
+      }
+    },
+    "shards": 126,
+    "retainedRows": 2049178,
+    "pendingShards": [
+      "a00-000005877.json",
+      "a01-000005892.json",
+      "a02-000005784.json",
+      "a03-000005162.json",
+      "a03-000005163.json"
+    ],
+    "pendingRows": 49703,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": [
+      "a00-000002315.json",
+      "a00-000002316.json",
+      "a00-000002317.json",
+      "a00-000002318.json",
+      "a00-000002319.json",
+      "a00-000002320.json",
+      "a00-000002321.json",
+      "a00-000002322.json",
+      "a00-000002323.json",
+      "a00-000002324.json",
+      "a00-000002325.json",
+      "a00-000002326.json",
+      "a00-000002327.json",
+      "a00-000002328.json",
+      "a00-000002329.json",
+      "a00-000002330.json",
+      "a01-000002345.json",
+      "a01-000002346.json",
+      "a01-000002347.json",
+      "a01-000002348.json",
+      "a01-000002349.json",
+      "a01-000002350.json",
+      "a01-000002351.json",
+      "a01-000002352.json",
+      "a01-000002353.json",
+      "a01-000002354.json",
+      "a01-000002355.json",
+      "a01-000002356.json",
+      "a01-000002357.json",
+      "a01-000002358.json",
+      "a01-000002359.json",
+      "a02-000002300.json",
+      "a02-000002301.json",
+      "a02-000002302.json",
+      "a02-000002303.json",
+      "a02-000002304.json",
+      "a02-000002305.json",
+      "a02-000002306.json",
+      "a02-000002307.json",
+      "a02-000002308.json",
+      "a02-000002309.json",
+      "a02-000002310.json",
+      "a02-000002311.json",
+      "a02-000002312.json",
+      "a02-000002313.json",
+      "a02-000002314.json",
+      "a02-000002315.json",
+      "a02-000002316.json",
+      "a02-000002317.json",
+      "a02-000002318.json",
+      "a03-000002339.json",
+      "a03-000002340.json",
+      "a03-000002341.json",
+      "a03-000002342.json",
+      "a03-000002343.json",
+      "a03-000002344.json",
+      "a03-000002345.json",
+      "a03-000002346.json",
+      "a03-000002347.json",
+      "a03-000002348.json",
+      "a03-000002349.json",
+      "a03-000002350.json",
+      "a03-000002351.json",
+      "a03-000002352.json",
+      "a03-000002353.json",
+      "a03-000002354.json",
+      "a03-000002355.json",
+      "a04-000002306.json",
+      "a04-000002307.json",
+      "a04-000002308.json",
+      "a04-000002309.json",
+      "a04-000002310.json",
+      "a04-000002311.json",
+      "a04-000002312.json",
+      "a04-000002313.json",
+      "a04-000002314.json",
+      "a04-000002315.json",
+      "a04-000002316.json",
+      "a04-000002317.json",
+      "a04-000002318.json",
+      "a04-000002319.json",
+      "a04-000002320.json",
+      "a04-000002321.json",
+      "a05-000002303.json",
+      "a05-000002304.json",
+      "a05-000002305.json",
+      "a05-000002306.json",
+      "a05-000002307.json",
+      "a05-000002308.json",
+      "a05-000002309.json",
+      "a05-000002310.json",
+      "a05-000002311.json",
+      "a05-000002312.json",
+      "a05-000002313.json",
+      "a05-000002314.json",
+      "a05-000002315.json",
+      "a05-000002316.json",
+      "a05-000002317.json",
+      "a05-000002318.json",
+      "a06-000002292.json",
+      "a07-000002255.json",
+      "a07-000002256.json",
+      "a07-000002257.json",
+      "a07-000002258.json",
+      "a07-000002259.json",
+      "a07-000002260.json",
+      "a07-000002261.json",
+      "a07-000002262.json",
+      "a07-000002263.json",
+      "a07-000002264.json",
+      "a07-000002265.json",
+      "a07-000002266.json",
+      "a07-000002267.json",
+      "a07-000002268.json",
+      "a07-000002269.json",
+      "a07-000002270.json",
+      "a07-000002271.json",
+      "a07-000002272.json",
+      "a07-000002273.json",
+      "a07-000002274.json"
+    ]
+  },
+  "frozenFilesUnchanged": 36,
+  "optimizerUpdatesDuringThisAudit": 0,
+  "independentEvaluationRounds": 0,
+  "webChampionChanged": false
+}

@@ -23,6 +23,8 @@ Four-player GuanDan with bots running in your browser, private rooms and practic
 
 </details>
 
+After the A/B evaluation, evidence will guide the next short diagnostic or longer training experiment, with authorization ending **Wednesday, November 11 at noon Toronto time**. See the [autonomous research window](ai/research/AUTONOMOUS_RESEARCH_20261107.md) for deadline protection, memory limits and reporting.
+
 The owner has authorized sequential four-hour Windows A/B training windows followed by preregistered independent round evaluation. The [live dashboard](http://127.0.0.1:8766/) shows measured progress and resources; see the [Windows handoff](ai/research/WINDOWS_RETURN_20261106.md) for fixed deadlines, evidence and recovery boundaries. The website champion stays unchanged. Training progress is not evidence of stronger play.
 
 Tribute/return learning is an independent two-head specialist. See its [protocol and integration requirements](ai/shared/tribute/README.md). It is not enabled on the website yet; the champion menu is unchanged. The [specialist Mac handoff](ai/research/TRIBUTE_MAC_HANDOFF.md) covers the separate checkpoint/data package and pending MPS adaptation.

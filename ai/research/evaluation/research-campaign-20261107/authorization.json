@@ -1,0 +1,21 @@
+{
+  "id": "research-through-20261111",
+  "authorizedAtUTC": "2026-11-07T13:49:39.291965+00:00",
+  "deadlineToronto": "2026-11-11T12:00:00-05:00",
+  "deadlineUTC": "2026-11-11T17:00:00.000Z",
+  "computeDeadlineUTC": "2026-11-11T16:45:00.000Z",
+  "restartExtendsDeadline": false,
+  "reserveGiB": 4,
+  "resumeGiB": 5,
+  "phase": "waiting-for-current-ab-evaluation",
+  "prerequisite": "windows-ab-20261107 complete independent evaluation and analysis; current windows unchanged",
+  "webChampionHold": "017/v000855042",
+  "scope": "Autonomously analyze completed evidence, preregister and run bounded short or long danMCai experiments, verify and publish actual research results to main; no automatic web champion change",
+  "doNotTouch": [
+    "gpu-main",
+    "old Mac snapshots",
+    "GuanZero",
+    "tribute specialists"
+  ],
+  "termination": "Stop research computation at 11:45 Toronto to reserve 15 minutes for final checkpoint audit/report before noon; no renewal"
+}
