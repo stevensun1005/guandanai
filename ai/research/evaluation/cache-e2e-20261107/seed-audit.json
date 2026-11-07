@@ -1,0 +1,3446 @@
+{
+  "auditedAtUTC": "2026-11-07T14:33:43.612877+00:00",
+  "knownUniqueRootSeeds": 1300905,
+  "files": [
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\actors\\results-0.jsonl",
+      "sha256": "f8464fa8a2f856937f1357d24fac597875fd96214de50abe289960b382d4faf5",
+      "seeds": 3750
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\actors\\results-1.jsonl",
+      "sha256": "86ca4587c52b7842a6a42f846a1a0c29dacf4ee8343b02fe5e2f3fa6981033c0",
+      "seeds": 3708
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\actors\\results-2.jsonl",
+      "sha256": "a41ef070266329649322604a0082f783182b6a0e3313f4ab44b93291d4ac537b",
+      "seeds": 3755
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\actors\\results-3.jsonl",
+      "sha256": "2660e4f49206c48fe17930823246a20a5d50296022adb821209823e1e6aad4ae",
+      "seeds": 3728
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\actors\\results-4.jsonl",
+      "sha256": "934a318cc31022bdeddbd2b7d0eb17455c5229d5b30d749b7cc5f21369ab3117",
+      "seeds": 3741
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\actors\\results-5.jsonl",
+      "sha256": "d42d82756edc36a1133768816f1b673147152836e23dbdb18f51bea8787037f2",
+      "seeds": 3729
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\gate\\gate-00000.json",
+      "sha256": "fa85bf7a49da83b6ccf476fb8c5baf58d37f98e27b393586aa9ef358b91f646f",
+      "seeds": 313
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\checkpoints\\cpu-main-2026-11-04-step-20923\\gate\\gate-00001.json",
+      "sha256": "1368b4afb4b7e1700da1699c659331af97e72738ecf3749db9c2cfa323418426",
+      "seeds": 45
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-0.jsonl",
+      "sha256": "f0a5cc0f79ada611c145baa96904441412d906eb931e01ecfaa591a39f70064f",
+      "seeds": 105815
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-1.jsonl",
+      "sha256": "984e6b46417f79ba85d65870416d70ac1da2d774cc0c7339ec3079d7b8f422b3",
+      "seeds": 106301
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-10.jsonl",
+      "sha256": "d2bd662bad4b17b8369143c46f7ca87cc4a08b1381b741f1be741cce1fa850b8",
+      "seeds": 16
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-11.jsonl",
+      "sha256": "ff233f4e100c76c82cdc8d4d0f940c066d82a55bc3e1096c90ab7b0b205473e3",
+      "seeds": 48
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-12.jsonl",
+      "sha256": "0410cf85e88b3ec0e968e86227575e7dfb9654b6dc18cafdb6afb73b0ea280b4",
+      "seeds": 2086
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-13.jsonl",
+      "sha256": "c447d888ec5660b5b76ceb9416ac09c9143fc58ca83ac741f785c9765cd0f87f",
+      "seeds": 2233
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-14.jsonl",
+      "sha256": "c0584cee7f1f5561fdf700fa8fe5f3ca92091d18089104cef729d0f155af049a",
+      "seeds": 2166
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-15.jsonl",
+      "sha256": "dfe5f5c39757264c816830bb1b3cf777f2044f7a3034d86dc67861573b08072c",
+      "seeds": 2243
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-2.jsonl",
+      "sha256": "e9a5ddb9eb1547a5fa5e58883c33d2024b8f202cc7fc70cbcfb12f86b5bef96d",
+      "seeds": 105586
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-3.jsonl",
+      "sha256": "505383dd9f2f90add556bdec50329344b4112b643b25de8f41235b542947ef1a",
+      "seeds": 82809
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-4.jsonl",
+      "sha256": "b51766f978e8669f9914f95bb5f8f80474ed7aa1748f77bbf9b5b298e78edc74",
+      "seeds": 81373
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-5.jsonl",
+      "sha256": "12dd79e602fed719869f674e443ab6994709b2425bd24733e77c4024306e14c4",
+      "seeds": 81481
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-6.jsonl",
+      "sha256": "a71244d32049342bf3bafc71687d32486c5c9dca6f7d04bd6ec3631e97f8f21a",
+      "seeds": 79974
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-7.jsonl",
+      "sha256": "76545c940f209a049a9c3d4009b40ca9e144d18aa8ba099d737c4a603819e3cf",
+      "seeds": 79149
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-8.jsonl",
+      "sha256": "6d34fa9acdfb396bc6ffea2bc4959b4ff4798b5719ed4308919ca4b21e626e0c",
+      "seeds": 20
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\actors\\results-9.jsonl",
+      "sha256": "e7bf0ff0509fb928294b3e73ab6e6300b1008d6692fdb6344188d5f791e6a45f",
+      "seeds": 17
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00100.json",
+      "sha256": "ad016965e48ca9438f6cc4b31c10989520c0e6d3059584ca8838bf6d9bdddaed",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00101.json",
+      "sha256": "ca3f211251e5deaa8a6f7dec8dc9ecf1ca6274c849deeb081c46ffff1579ebb5",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00102.json",
+      "sha256": "a618935e302c1b44ab82de2d0c7cf4c71d70ded0f9930c198867d356af52a33a",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00103.json",
+      "sha256": "c2067dd0c02f1cf21b4a5ad3751953cb06eaa9c85f63e537305d1a4d21c45c56",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00104.json",
+      "sha256": "e26250425b7a82357b46c480a4089cb26c93ae53659b28586f54077624cff9b0",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00105.json",
+      "sha256": "583db446e7d208ca91976eb2831ce1cf3b6b72c1cc0beeff854464a574228149",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\anchor\\anchor-00106.json",
+      "sha256": "b4170dac04679e7a09de3e873b230ece1a5da63e4453561b8dc52bec95f8f990",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00100.json",
+      "sha256": "00239ce996b585852e350125998b954df367cc0f17d51c676671146170fee345",
+      "seeds": 178
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00101.json",
+      "sha256": "fa23aaf6892ca62e697116ad45e3678dd94b7727cd593b4cf9d57f59d38cc7ac",
+      "seeds": 401
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00102.json",
+      "sha256": "1996b1af3f6036d880106ef5c5ac68f3fc2b8f9a9339feaea724f7239c6ae6e2",
+      "seeds": 265
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00103.json",
+      "sha256": "22b60f897754ea5a8b79f834236457417db9c76ae55cc33088285d9ac3b77377",
+      "seeds": 291
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00104.json",
+      "sha256": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a",
+      "seeds": 346
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00105.json",
+      "sha256": "079ed782d953fad11a9d5941c2b17f505d495ac6f9cdb6c8aa672ede907fad75",
+      "seeds": 912
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00106.json",
+      "sha256": "2c3cee655dbc4f9a3d2eba2f98054311aeedcdc24ab04d31286cadfe41c2f38a",
+      "seeds": 784
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00107.json",
+      "sha256": "e5fd9552eff57369a379e54357210ff0e92df8003156f55b3fc12aed3ff9e032",
+      "seeds": 90
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00108.json",
+      "sha256": "b07010acbb1bfc1e21c4c89377440b8c63144a0c7295c932d771d59a2c9c1108",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00109.json",
+      "sha256": "3b58e53377411f7b7a8526449e31bb5f7833a87dffee74bfece1132bb6e85079",
+      "seeds": 246
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00110.json",
+      "sha256": "27e0ebe7e5edc7042a808eaaf8a1d89e70a292d6eb6ba0753d6ba92b83113e15",
+      "seeds": 262
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00111.json",
+      "sha256": "d20124a929421a88b560e90ad4b9f0b48379b71a021f9381d49d85c8b05ad79b",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00112.json",
+      "sha256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00113.json",
+      "sha256": "b29c7dcb230d554b58ad3b3d71f8fe4bd3ead74693097f91a2eb1951b5b9dfd9",
+      "seeds": 225
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00114.json",
+      "sha256": "f38050b4f85e9fd08064d216ccededa3552b000481c5b8e303365761a0a10dbd",
+      "seeds": 487
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00115.json",
+      "sha256": "2a654a8bed84c5ba7f20dcb82441681152c9448a9e6642a22e6b09ebe31a44fa",
+      "seeds": 243
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00116.json",
+      "sha256": "91d837aba23623f4721966f798765707d204869959a4be451601dd3fbfcedb8a",
+      "seeds": 193
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00117.json",
+      "sha256": "f6b412af5193a280f0136e6f4f676a90b33cd82298cc7d706de09b70fbb17c2d",
+      "seeds": 442
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00118.json",
+      "sha256": "9ba88cb67ac9527e6d32a2568f3edfccafa33781b6640126db3e5d8d249c5a10",
+      "seeds": 203
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00119.json",
+      "sha256": "059cc91c0c6040590882bc7bf6bdce3848c952e01e3f88921615507161787fa7",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00120.json",
+      "sha256": "98981b483531540210a900e86182e4e6a1bd42401886edf0d73e9497f9e78483",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00121.json",
+      "sha256": "5866e8bf3dd27d41de716b03486eb256858e994042921ac0b3d535907b591049",
+      "seeds": 23
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00122.json",
+      "sha256": "38dd7b45fa19761020b97697bf5a9539776790fa372de656d7149fa54dc39e70",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00123.json",
+      "sha256": "d5634a60eb89f1dc8cf2cddfc09774c46fb6b98f50ea9f6a0c30ca31b1347dff",
+      "seeds": 258
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00124.json",
+      "sha256": "7e3fb2a3ccdff369a497895c5edeab24f386a68ed193a85edcc659583f1ae554",
+      "seeds": 282
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\gpu-main\\gate\\gate-00125.json",
+      "sha256": "354be46234a55aa5901ff3847bed75565c022f5a81737cc03e807ae046a1dd8d",
+      "seeds": 162
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\actors\\results-0.jsonl",
+      "sha256": "f8464fa8a2f856937f1357d24fac597875fd96214de50abe289960b382d4faf5",
+      "seeds": 3750
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\actors\\results-1.jsonl",
+      "sha256": "86ca4587c52b7842a6a42f846a1a0c29dacf4ee8343b02fe5e2f3fa6981033c0",
+      "seeds": 3708
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\actors\\results-2.jsonl",
+      "sha256": "a41ef070266329649322604a0082f783182b6a0e3313f4ab44b93291d4ac537b",
+      "seeds": 3755
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\actors\\results-3.jsonl",
+      "sha256": "2660e4f49206c48fe17930823246a20a5d50296022adb821209823e1e6aad4ae",
+      "seeds": 3728
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\actors\\results-4.jsonl",
+      "sha256": "934a318cc31022bdeddbd2b7d0eb17455c5229d5b30d749b7cc5f21369ab3117",
+      "seeds": 3741
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\actors\\results-5.jsonl",
+      "sha256": "d42d82756edc36a1133768816f1b673147152836e23dbdb18f51bea8787037f2",
+      "seeds": 3729
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\gate\\gate-00000.json",
+      "sha256": "fa85bf7a49da83b6ccf476fb8c5baf58d37f98e27b393586aa9ef358b91f646f",
+      "seeds": 313
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\main\\gate\\gate-00001.json",
+      "sha256": "1368b4afb4b7e1700da1699c659331af97e72738ecf3749db9c2cfa323418426",
+      "seeds": 45
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\step1-smoke\\actors\\results-0.jsonl",
+      "sha256": "f8a365db6d316da2c2f6d6eb4dfea9fa70b97dc06f35335d9b00af6cbf133dcb",
+      "seeds": 675
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\step1-smoke\\anchor\\anchor-00000.json",
+      "sha256": "b03f06156021fae1f9f74a0777cc8f3cdabcb47ccd31f1207a33c817bb2050d7",
+      "seeds": 76
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\step1-smoke\\anchor\\anchor-00001.json",
+      "sha256": "549f0b5a1ef3797df52227fbdc0a84739b7e12d7f88138a912bd70a49b0e084a",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\runs\\step1-smoke\\gate\\gate-00000.json",
+      "sha256": "64af8e3a86f2b25015f369c6a9107e6b47305ce880144a907de2cc51ed874339",
+      "seeds": 40
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\actors\\results-0.jsonl",
+      "sha256": "500fdfc41b77ce7f02c4967a98c9a9d4ce0912912e2b251f70c2eb590a979c74",
+      "seeds": 90288
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\actors\\results-1.jsonl",
+      "sha256": "3affb3de60e1b2d82563383d04146f5f2454cf39113dd6dcdd27081f694399e8",
+      "seeds": 90219
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\actors\\results-2.jsonl",
+      "sha256": "94d23c0aae86db331b75e6b75e666402cd267337b58a3e63added54afb53a496",
+      "seeds": 88077
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\actors\\results-3.jsonl",
+      "sha256": "6a5e2e3814400dabab66fa59bdf9b96db7acb27c785863f2501bcd7312f41929",
+      "seeds": 88017
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00300.json",
+      "sha256": "458295360add26e2ec24d508b56d2f54f7c7ad8226d07517a9382a5d2568b2d0",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00301.json",
+      "sha256": "5c5e30c9b0e3cdfa5ed02d2f2192d773ba963821d3870d89686f8ac0bcc4f413",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00302.json",
+      "sha256": "445ee0194ce97b729faea0c985889b70f351a8185cd90f042eb224d8c7f26f4d",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00303.json",
+      "sha256": "0218676fd2d6ab17fc933a3fae7834e1d10aa784d54907d8a4e5e185e79d81aa",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00304.json",
+      "sha256": "bf5827abbafcfdca2d0fd7dd36fb027c96d297179adb92698a48f15a9f7641e2",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00305.json",
+      "sha256": "82fef17b40b1dbb557c5929f01980f36efaaa732e39e5b4f81035f762668d175",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\anchor\\anchor-00306.json",
+      "sha256": "6763b0193466f0631807ed4146e7d33cce08ad726f47d83cc3969d2640e8381c",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00300.json",
+      "sha256": "f8c1cf986ddfddb3f7e6f577e3850a4f74df5af762ac40d035240190ced81363",
+      "seeds": 34
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00301.json",
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00302.json",
+      "sha256": "d6e4df09b55bf9fb99849ea1de1f7bbcc9b05b746c058c20cb95c83c96ff4545",
+      "seeds": 33
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00303.json",
+      "sha256": "224281e9087f4065c91af991c79b7017631598c26aca3ba7fbdaa8d2b08928a3",
+      "seeds": 15
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00304.json",
+      "sha256": "f211c04311297b7302a78daac63ee0da4295d4cfd0e73647859977ef8fa9a7e8",
+      "seeds": 464
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00305.json",
+      "sha256": "929faefd096296c8d97c784f729483d53916aefd5591c2c8b020c35fc7f432e7",
+      "seeds": 439
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00306.json",
+      "sha256": "0cd2b8a1f405b4a82ed3ad40ce37ab16d47f608e6a8df4de0ba7b6469cfa011f",
+      "seeds": 253
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00307.json",
+      "sha256": "84bbe716b82f581c6a0d49935963167a0b7128082bbd0dfc0791b5cdf36fb81d",
+      "seeds": 415
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00308.json",
+      "sha256": "e2927989f8e4b8067621a83ddc24d57a2edeffa14ee3a3eb5d77094a32c2199c",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00309.json",
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00310.json",
+      "sha256": "10dd5575425c9518c1bce63037a48ce51cacec4f14457c2f73e8cb65150c87d8",
+      "seeds": 283
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00311.json",
+      "sha256": "6504462af3c6b754c4580e415ed5cada254f0b375cc2dc03577219e51d97e016",
+      "seeds": 303
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00312.json",
+      "sha256": "1c74bf11225fbc0fd73d36a7d5af633703bec5a64e0b42204155eb7f6f68de60",
+      "seeds": 604
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00313.json",
+      "sha256": "34ec5a36967b1bf5008b7ccdd7e0503e1058659315c1bf6f313e926ea3f5217b",
+      "seeds": 162
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00314.json",
+      "sha256": "b8ee1b19948134231e74b5b1d9d008680232aac11deb74fc8a215f72545ffa92",
+      "seeds": 233
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00315.json",
+      "sha256": "c0db23a9cbea5b5e9fc7999048fec0605e02741d9210b86332f78f3c6d4f2a9b",
+      "seeds": 441
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00316.json",
+      "sha256": "89fb1f36116232daadafba5f029b0510a04d96263f2af3ff697035e0e3450dcc",
+      "seeds": 384
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00317.json",
+      "sha256": "d6ebaf301f5c52c953f39e7d2188d6981290d3e0f927a6d480f89429fe4b2946",
+      "seeds": 354
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00318.json",
+      "sha256": "b53d05855aea8f15ddd9a9eb30a37d830545811a806251c553abf9371038ef8b",
+      "seeds": 209
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00319.json",
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00320.json",
+      "sha256": "9c3db4164123e022d64f6a5d0b335456ac5ee45f2155a7cea492e7837ec67020",
+      "seeds": 272
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00321.json",
+      "sha256": "a05ffc4c6ab13bd17ea24e233be1bf9de7febd74cf4d90bcfa52f6c77fb63bef",
+      "seeds": 216
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00322.json",
+      "sha256": "74a30b7d792ecc593ad9b1f7d85fd1b4f3715643230a77fcdd085f159a315eae",
+      "seeds": 514
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00323.json",
+      "sha256": "8fd4b132452ef2d7f386f245fb36d8e99f8da1dc3d98b9098424615a1073ef63",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00324.json",
+      "sha256": "8820b95c2148f257b9f43df898181e6c98bfaf02afe8ccbb54f36034c5558f3d",
+      "seeds": 346
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00325.json",
+      "sha256": "4f607fd097ef6a053bafb7b2b054e32356f49b779db7005ec672b1f438b629bb",
+      "seeds": 398
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00326.json",
+      "sha256": "939ae3845c5013810526ea50753effe05958e1e9c8e654b19c4b3184a317af2f",
+      "seeds": 290
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00327.json",
+      "sha256": "3b276f93851ff9972d4393ac00bad8176c18fc675a0892e4510015707d1f15ba",
+      "seeds": 106
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00328.json",
+      "sha256": "32c718b69581b731cdcde2add5e7cbfd52e3c02ad366fb7add91dc63a076bdee",
+      "seeds": 157
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00329.json",
+      "sha256": "56cb4b3aa3fd2ac7437d699c634735f0a1aed40dd4581312ae04122bc3689590",
+      "seeds": 320
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00330.json",
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00331.json",
+      "sha256": "4012444f205c69656452065463ad476181fe9d437bec85ccd08a16d915c963cb",
+      "seeds": 287
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00332.json",
+      "sha256": "fbb13db6c47c5f46686d832f78d9b8e46a56938f7a154fe502e819c0dedee14b",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00333.json",
+      "sha256": "b17963cbd43b96320a27990db361672a33f58d8bdc26d2828aadaccd09aaf46d",
+      "seeds": 152
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00334.json",
+      "sha256": "95e88a06d18181c60780b8fed5dc73a0258831357af5e62617b50813da7b2e51",
+      "seeds": 318
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00335.json",
+      "sha256": "8121b5d6f06c798f2a80b2f85574da719b68ca5f8f45fd0f12387c6f9a6d187c",
+      "seeds": 396
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00336.json",
+      "sha256": "0cc47e859d4ce5ceaa7ce1c17b93511e022798144a6ad67da1183a91f4b48b34",
+      "seeds": 147
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00337.json",
+      "sha256": "c1757bda92a654cd8ffee825d93bd250a21dbcefd65f849a35ff243b1da553a6",
+      "seeds": 306
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00338.json",
+      "sha256": "6c01b59991e088f50f321702da156e7d3fd5e42d6147255e541de8af5c827ae3",
+      "seeds": 218
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00339.json",
+      "sha256": "5160d19866ec86ee1453ef9cbbf7774af31528c4fd21a35123a009581304469e",
+      "seeds": 137
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00340.json",
+      "sha256": "b3e14b992a15e4963a4f6cdde61cffd53c0633924f08db1e7a3014672b51a89b",
+      "seeds": 421
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00341.json",
+      "sha256": "549fb8b7a55a55a8505036e97656b43ffca857fd719036bba2bbc4b649691da0",
+      "seeds": 547
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00342.json",
+      "sha256": "b8979a8e621aaddd7763fde632f21932f33d579131ec45e8d5b67e104116cc74",
+      "seeds": 763
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate\\gate-00343.json",
+      "sha256": "e5bdc80254ecb5fc43ff0f8b809f8c9b42e7f5ce103fe10812540cd553edb22b",
+      "seeds": 433
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\before-stop\\actors\\results-0.jsonl",
+      "sha256": "48d41896239283ecec9db411f87d611bba998c1bb70d30b869e6163e49911ed3",
+      "seeds": 17407
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\before-stop\\actors\\results-1.jsonl",
+      "sha256": "6d639625387ef9da585df847dc1d618c824997efb34d467e3e33af71a8fec493",
+      "seeds": 17499
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\before-stop\\actors\\results-2.jsonl",
+      "sha256": "eb2af7b2814c0c65904a1c545c5ff2771b279e6b820a2d732e33e633780303d9",
+      "seeds": 15314
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\before-stop\\actors\\results-3.jsonl",
+      "sha256": "c05862ac899efa24b10ce935beb07a71f0ec68ea94e8d898c3b914cd4e3363f6",
+      "seeds": 15349
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\actors\\results-0.jsonl",
+      "sha256": "70a075308c4f47b2a0f379cda1110c0ae272e77550f4c6739e30ac4fdfb81567",
+      "seeds": 17415
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\actors\\results-1.jsonl",
+      "sha256": "2ac2b07aa3d1eb2873c4f53a98d34ab50deb2dfd2d0ca70b5373178a74cf86b2",
+      "seeds": 17507
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\actors\\results-2.jsonl",
+      "sha256": "b99c5d47ceebe0c0c9a74401cb6260ffde1d85bbbce798e9bd95a83ce1bca59a",
+      "seeds": 15322
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\actors\\results-3.jsonl",
+      "sha256": "809c179ed0a2ee5b59711da226e572f746dcf9446e4db089cfedfd666073f61e",
+      "seeds": 15357
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\anchor\\anchor-00300.json",
+      "sha256": "458295360add26e2ec24d508b56d2f54f7c7ad8226d07517a9382a5d2568b2d0",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00300.json",
+      "sha256": "f8c1cf986ddfddb3f7e6f577e3850a4f74df5af762ac40d035240190ced81363",
+      "seeds": 34
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00301.json",
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00302.json",
+      "sha256": "d6e4df09b55bf9fb99849ea1de1f7bbcc9b05b746c058c20cb95c83c96ff4545",
+      "seeds": 33
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00303.json",
+      "sha256": "224281e9087f4065c91af991c79b7017631598c26aca3ba7fbdaa8d2b08928a3",
+      "seeds": 15
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00304.json",
+      "sha256": "f211c04311297b7302a78daac63ee0da4295d4cfd0e73647859977ef8fa9a7e8",
+      "seeds": 464
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00305.json",
+      "sha256": "929faefd096296c8d97c784f729483d53916aefd5591c2c8b020c35fc7f432e7",
+      "seeds": 439
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00306.json",
+      "sha256": "0cd2b8a1f405b4a82ed3ad40ce37ab16d47f608e6a8df4de0ba7b6469cfa011f",
+      "seeds": 253
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00307.json",
+      "sha256": "84bbe716b82f581c6a0d49935963167a0b7128082bbd0dfc0791b5cdf36fb81d",
+      "seeds": 415
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00308.json",
+      "sha256": "e2927989f8e4b8067621a83ddc24d57a2edeffa14ee3a3eb5d77094a32c2199c",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00309.json",
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00310.json",
+      "sha256": "10dd5575425c9518c1bce63037a48ce51cacec4f14457c2f73e8cb65150c87d8",
+      "seeds": 283
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00311.json",
+      "sha256": "6504462af3c6b754c4580e415ed5cada254f0b375cc2dc03577219e51d97e016",
+      "seeds": 303
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00312.json",
+      "sha256": "1c74bf11225fbc0fd73d36a7d5af633703bec5a64e0b42204155eb7f6f68de60",
+      "seeds": 604
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00313.json",
+      "sha256": "34ec5a36967b1bf5008b7ccdd7e0503e1058659315c1bf6f313e926ea3f5217b",
+      "seeds": 162
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00314.json",
+      "sha256": "b8ee1b19948134231e74b5b1d9d008680232aac11deb74fc8a215f72545ffa92",
+      "seeds": 233
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00315.json",
+      "sha256": "c0db23a9cbea5b5e9fc7999048fec0605e02741d9210b86332f78f3c6d4f2a9b",
+      "seeds": 441
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00316.json",
+      "sha256": "89fb1f36116232daadafba5f029b0510a04d96263f2af3ff697035e0e3450dcc",
+      "seeds": 384
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00317.json",
+      "sha256": "d6ebaf301f5c52c953f39e7d2188d6981290d3e0f927a6d480f89429fe4b2946",
+      "seeds": 354
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00318.json",
+      "sha256": "b53d05855aea8f15ddd9a9eb30a37d830545811a806251c553abf9371038ef8b",
+      "seeds": 209
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\mac-return-import-20261106\\mac-20261105\\gate-scheduling-20261105\\saved\\gate\\gate-00319.json",
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\adaptive-balanced-1.8.0.json",
+      "sha256": "e55e9e5557c8a1e36b0087d5e63377432e83a863f333cb273edf6b31231337fe",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\adaptive-observant-1.8.0.json",
+      "sha256": "b1e9cce42bce55d620112c4432e3cfdb4e1f382781ba7946711ac03ca5018009",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\asymmetric-pilot-2026-11-04.json",
+      "sha256": "70521e0ec47933b1b1803edbf0d12b160b7006ee2a73cb79f16238d3297188b2",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\cache-reuse-20261107\\protocol.json",
+      "sha256": "70ae2300963d74cb7e337fe071ad645d0c924b9757069e4c88d5f21384c04de0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\cache-reuse-20261107\\results.json",
+      "sha256": "1e40b047045367c040023775b6339788620451ee65f90c2bbb127c2c3f879328",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\cache-reuse-20261107\\validation.json",
+      "sha256": "d7d3e1dd7ef499d0c96dc94c28fa08aa536dfea7fe1b32da3aa0bcbaec230f5c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\clint-rule\\matches.jsonl.gz",
+      "sha256": "be09954c617c3633c6cff128e43ea33edeff3f50c660333c3dd4d46799dd3adf",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\clint-rule\\results.json",
+      "sha256": "8a1f3fc280282f73b132eec244e01bd2584656fad14fef2f28928404b0ca18a1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\latest-model\\matches.jsonl.gz",
+      "sha256": "063e8314e9feb3fa7270def9ff5a2a728d22351a7c1530a3f7ae5b85037835b5",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\latest-model\\results.json",
+      "sha256": "381e75488b9ace55fa62c3dc482708ecd5dc11ebd0fdb8574022d7865bf40d5c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\protocol-clint-rule.json",
+      "sha256": "2ee022b518c8eb6389eb05d198418651d3bf10a010eb2ade96520b82f576956b",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\protocol-latest-model.json",
+      "sha256": "c81934fdee710a1ff5cd7a0873ee04334833c0c4b786446e4d39d11bef598a91",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\seed-audit.json",
+      "sha256": "be3c572aabaea4a187c074c5fd2ede19ee63c25fe2302948c5e197a8f043e158",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-clint-latest-20261105\\validation.json",
+      "sha256": "a199e2ea1f216bbbf52ca3ec7f6f5ada665a7b65b8f3efef7391522d1a171c57",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-20261105\\champion.json",
+      "sha256": "cdd84dfc3f284917098559d9023b544b9a2c8815542fdb3f2e414bbc8c08c6e7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-20261105\\gate-00104.json",
+      "sha256": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a",
+      "seeds": 346
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-20261105\\gate-00112.json",
+      "sha256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-20261105\\gate-00117.json",
+      "sha256": "f6b412af5193a280f0136e6f4f676a90b33cd82298cc7d706de09b70fbb17c2d",
+      "seeds": 442
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-20261105\\validation.json",
+      "sha256": "021fbfbdd765072afae92c76660044fe51693f57be6fa587ea62964ac5a62858",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-mac-20261105\\champion.json",
+      "sha256": "c19bdea228811173bf49bd300dc8b0e8ad403330d20fc102717c63eef695c4fe",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-mac-20261105\\gate-00309.json",
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-mac-20261106\\champion.json",
+      "sha256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\champion-selection-mac-20261106\\gate-00330.json",
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\clint-sync-20261106-1404.json",
+      "sha256": "beb8d3084511cd87cf158552078c036896a9efc2f5a1a547936519bd099cebec",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\clint-sync-20261106-latest.json",
+      "sha256": "4bf2885cb44ec452eb53141c9362f9a9aadcbd8a06c30cf5f0bc7405f57f7f32",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\clint-sync-20261106.json",
+      "sha256": "96420044e60b5a2ac3112812ea58494ec1f5f0b738f8c59361a5ba2dc98f26e1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\clint-sync-state.json",
+      "sha256": "dc798943b0e130d34f1dc6dd7878d3c167656333e0455b46856097f6045582d5",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\coach-top5-private-20261105.json",
+      "sha256": "9f4fe8503a1174d14a70b86345dee63f4cbc0ee702790cc2df8973cec27aec7d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\continuous-smoke-2026-11-04.json",
+      "sha256": "c14cca0676f5657080cfea28e940b4e390140896fc322f12e37f89dcf942ba8e",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\cpu-main-retention-2026-11-04.json",
+      "sha256": "b02afbdb8844083226401027e9e38a489b6098f973edb4ca456fa3d857c0b14f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\danmcai-naming-20261105.json",
+      "sha256": "7ccd4d06462e46d5f2f23141802734cf129d371e60bc0bbabd4d2b4f4827f5b1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\endgame-1.4.0.json",
+      "sha256": "19e261dbc436f9e1919951844adf54029c25e2cb8524686171acc89c40ef8f85",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\endgame-expanded-1.10.0.json",
+      "sha256": "471cd4f0cc934f90b400067df3470dde80979c05b1585d329546a3c7b6dfa3b8",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\fast-actor-throughput-2026-11-05.json",
+      "sha256": "81e6d9c15c2dead591d4e803f4542f80c3b618314299bdaed4ba58cd8de23472",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\full-match-current-1.10.0.json",
+      "sha256": "1eef144e2596d79a953e8a0303b756d315f5d59df990ac6295eb41587de24afd",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\full-match-four-clients-1.11.0.json",
+      "sha256": "141993856acdc37629abb83453fa2343f4aa4166b5c6a55829ab18790bc98b23",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\full-match-phaseguard-1.10.0.json",
+      "sha256": "225c4bb65f114e8caac2e52a974dd2090c417abeec89bd8a8e36647e3f4cd9bb",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\full-network-development-2026-11-04.json",
+      "sha256": "90eb4db5db077bb77917d7c55a63140cb29773b507092ee087099c99f00b118e",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\gpu-pipeline-2026-11-04.json",
+      "sha256": "5626d219850fa833ee17fa1249206dd72774fa03c06520681a1a3b58888c103a",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\gpu-throughput-2026-11-04.json",
+      "sha256": "81eb0c50cc2f8bf20cc88928ddc56528f3d81ef105ea3f4191583f51f1bb6986",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\gpu-transition-2026-11-04.json",
+      "sha256": "7cb271956d23302cab5fd6712d048c55e760b2d4cef76c112fcabb611502626a",
+      "seeds": 314
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-138506-development-500-champion.json",
+      "sha256": "123b0d7f7450e98948e4f500b01cbbdc3413fa05bee070c7499388c2e36b32a0",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-138506-development-500-clint.json",
+      "sha256": "6a1b38fd843e6324a5ee2b4ed54e730bff7ac0bd3073b26d190a0418a0189dcc",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-138506-development-500-p0.json",
+      "sha256": "85179e4a5f46b3b4c0aa0bbc0241e74bb7e533784c8f0121164d334df8a3bdd5",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-138506-development-500-random.json",
+      "sha256": "5e17bee133f007755cd780207025542cd18dd08e7d8a11585c479f8e8be455dc",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-138506-development-500-rule.json",
+      "sha256": "892cc36f1bfa00ed767643e799991842955b59739db434015d5a274af4966e06",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-138506-plan.json",
+      "sha256": "d1a888ceaf276154c82c5d299e1ac88e154097346a77cb4f8a7da08f9afd0001",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-186280-development-500-champion.json",
+      "sha256": "ce14ce4ae90494f7b2b9a3589cd1ca181f5c5452178b67913c1b4f5be3ea94c7",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-186280-development-500-clint.json",
+      "sha256": "693daaa3916ce7e76b3ee03488c686240b6487154656e2aacebccb3a2ba8b6a1",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-186280-development-500-random.json",
+      "sha256": "912613ab14112b82ffc98d775055f7a1a06c49c9c351ffde55dca34221d45ad7",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-186280-plan.json",
+      "sha256": "b7a72969efac6e286a19b8d24b410201cb09ee4bd45ff681a92bd2558a72f655",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-223067-development-500-champion.json",
+      "sha256": "f9db59d95314208125a2eced1e4964835132f27130c8bfa48f99a51be7b6849c",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-223067-development-500-clint.json",
+      "sha256": "0c22001a186f26cdd495f9bd2b7d7903c71dab11e4b2b8999ed4cc4e95ed3a3c",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-223067-plan.json",
+      "sha256": "b4b8ed17f41acf8f4bb619b914a96b6994463a33c45bef76873026689720763e",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-81551-development-500-champion.json",
+      "sha256": "880e7e789ec86f36ed521cf2231c3c19b9364be1023010c3afc327d8efa7d693",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-81551-development-500-clint.json",
+      "sha256": "1b60481d4358b1685c2309e908d7bc48e28e3dfee6c7a71862e8e93d6977bcf9",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-81551-development-500-p0.json",
+      "sha256": "fc1f6d4a7d41d4bbab9196a45cfe9d3f8587e61c2646261d9a805c2e263fb53e",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-81551-development-500-random.json",
+      "sha256": "af082759041d784fd56bdb189c8c86278c1e10f6cc445f74407d2aca00dad4a9",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-81551-development-500-rule.json",
+      "sha256": "cca6813a2d37e5b38af1baba21cfe16c2597c22df4cae51cfea302efb894fdb0",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-81551-legacy-200.json",
+      "sha256": "80bfdfedd55079b9679c2c2f2563945a05ee4d57d554b84aa7e13668b100dccb",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-clint-block-0002-20261105.json",
+      "sha256": "21c17d2866ccbcd8fd2db14d4b23142246b836cd083e3c3ef4af78caaa3a9649",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-clint-integration-20261105.json",
+      "sha256": "a80a2fb48d21a2eefe7d6ca08b7eea095e67a75b20209d2bde9cf92212365b7f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-20261105.json",
+      "sha256": "431013ffeb7000c87947eeba940511f4f68d90583f9efdb39f71e9e91454213c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-champion-20261105.json",
+      "sha256": "02b4101334e2544b76b08857513b747f5c7d18a494a66b0c5a4ced59642cf477",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-clint-20261105.json",
+      "sha256": "1f26318859344d26241b94a896db1d1436f31142d4a53b5ca46197f9cd4f7f3e",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-original-20261105.json",
+      "sha256": "48dbe4816ea62e2fca0237d97f067eefe5cdb804aa33c0544853a55346037233",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-p0-20261105.json",
+      "sha256": "56dabf5874aa99004cef333dcc81285ceaab118aee55ef0152664c50672feaf4",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-random-20261105.json",
+      "sha256": "f5f48ad46c4134c072d0eb04a6a40b0def5f2d347d237228c9c7386ffec67f8d",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-plans-20261105\\manifest.json",
+      "sha256": "2194c9cbd5d78a235d04e48789e4268e8441ba148bafaabac57417ddae870fc0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-plans-20261105\\model-000000077262-plan.json",
+      "sha256": "b657936caa5d9a344d3eb21c93c46773780650b002dc13ea7d71219476d2918b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-plans-20261105\\sha-03f7e0709843-plan.json",
+      "sha256": "eb2b6c2bc743a8e394f9a59c5a4ed9224e5afe5c7b36913afa535c0fa65a181f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-champion-20261105.json",
+      "sha256": "a72ecc1c9a0204a71c88da50068eae70cc11055e379de38b722125dfb9f63d69",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-clint-20261105.json",
+      "sha256": "186fbfcf4d7e5f4b971cbc20ddd581cacf1ad3c77c961df6357d50eeb3874c33",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-original-20261105.json",
+      "sha256": "c3505daff7140d7b3f129461f767769ce8e8417c25da7df84aa6ef053b5c7ad9",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-p0-20261105.json",
+      "sha256": "4838a1ea579487140a830bdf02551fae6258c133a654b904be78270aa36803ab",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-random-20261105.json",
+      "sha256": "a1941bc3e33d2c3a5d21f25aa995805be51644552301046d3e9ebc86ee64db61",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-evaluation-labels-20261105.json",
+      "sha256": "bdd9c2e23aae11ebcc19c8755745fa264d5af7772052b715f8078cac5e185b82",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-extension-20261107.json",
+      "sha256": "c0f945a2cffb4e2a022412f3c1251b01f6d55906204be70f043ab08ffda6027b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-gpu-batch.json",
+      "sha256": "3b762446a509aa69aa95227bbe0606982b03d6293c66954cd4c83bd4d7b69411",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-io48-eight-hour-start.json",
+      "sha256": "b0cdff8f83509dcd8e6a55f2c7c827db2243780d44ad968ae6a657fb4f119d3f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-io48-launch.json",
+      "sha256": "3be6689c24a1e9cf4df633b208c30e4844524212e04dfa420d5ddcc026bd8837",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-io48-preflight.json",
+      "sha256": "469c54a3607a28fc81e99058125e34e96a4b74f649f53b153bb233ea3c2a8883",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-io48-resume-20261106.json",
+      "sha256": "9ecbbccbe5514f02f11e8c130ee50e19e3b7f9db6e7ae86f516d5fd0d38ab849",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-legacy-block-0000-20261105.json",
+      "sha256": "a20bfb3572e3ba98d0c5c49fa6c1c54b1a0b2f79604e31936ec75060847ff987",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-legacy-block-0001-20261105.json",
+      "sha256": "01ec953e5f033644bdda9b0e9bb4dbd1b0d06a8e4fdb56f56240aa3696e739e5",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-legacy-block-0002-20261105.json",
+      "sha256": "4f5481cd02ef479ae622eab3b8f7a106413e06e3b004c739a0aa458ca65807bb",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-legacy-block-0003-20261105.json",
+      "sha256": "cc3a30c318c18ff8b62039918c2297b3792f339d24dfb63f7d3f4045f29b87d4",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-progress.json",
+      "sha256": "702679f82d9a0c1c703404ecb81365ca2e97a62490687ae26eddbaf780146922",
+      "seeds": 105
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-sampler-profile.json",
+      "sha256": "61be4ca1394cb6211f2dc78b75fb25b98269f1ca49f1e0ce36da88fb92302d65",
+      "seeds": 8
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\guanzero-watchdog-20261107.json",
+      "sha256": "7fabdf14c05541f42eb2e62289f8ed68b395e393ca6883adc2a4bb61175586cf",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\habits-adaptive-1.13.0.json",
+      "sha256": "1bfe1297553848f64617af9b0224927c0fad9cf7e45f76a3104e84f1fa44c818",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\habits-observant-1.13.0.json",
+      "sha256": "5a65e7080b3efd42ff108b808e980612c3ed314a5cba2c37cfa54fc665d42f48",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\help-1.11.0.json",
+      "sha256": "120ff7665ef2110ba83628e6fc482dabc91c709ee5e2cacd927aed965e8d2148",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\human-collection-20261105.json",
+      "sha256": "93b500379e635c37dc112349e041e0e44662c1965d42a458637ae07fd1cb0208",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\controller.json",
+      "sha256": "8b27bd2ab5a4006df498a18c4f52a5fc45e0e454c77c9988dbfb4f6772b36e72",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\protocol.json",
+      "sha256": "c57bb719368f85fc1f063ab0d688c29ccdd31c023af7f87d49ded595ca1c5239",
+      "seeds": 6000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\public-champion-unchanged.json",
+      "sha256": "5c45ca23df17dee3c800d0248d74ac18b0f33bd86b24a936585d09e7b77e8747",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\raw-index.json",
+      "sha256": "52f5b0c5a43821d7e2c3c6f12276ae8c648af2f39156932374ad79d6b6222a7d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\results.json",
+      "sha256": "ca7ef1a6982d351bfe5389831365eb6e40ed6c0eddbe0b782d201730e3fd6128",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\seed-audit.json",
+      "sha256": "8133754637004e4cba20cc819e1b44337be4c4c913d2ea52b6cfb7bc1e9ea081",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\stop-still-closed.json",
+      "sha256": "0366fa4492043bfc666d046923de5c63cd45b9663ae0368d2c43a491a2fb8d19",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\task-completion.json",
+      "sha256": "9214d276053b8a134c5aa3bac0cadc128563bcf310a8c884704c807819895dac",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\validation.json",
+      "sha256": "8bb24097331e80fda6c4da93082d61af151c78c42fd6e161dff6df60746f1219",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\windows-package.json",
+      "sha256": "907e2b78b566fa65ae2e0122ca780dd97ff00a009d8e4fecb3eb6c4e9a28f27a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\windows-preparation.json",
+      "sha256": "71c6821047d9c76adb814c00bfb6315fd7aa318676ecaa5cdd3fda8b9a402ede",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\windows-restoration-check.json",
+      "sha256": "a4932c55e859cf8547b9ffec5b9494dc692d9576a5527489abd61e664909475d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-0.json",
+      "sha256": "b080368a717c0e79ba70b9949918efe25722c8b4c5066443276cc6eca6725df0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-0.jsonl.gz",
+      "sha256": "bfac8fc876dc09c5c0d10d8304f487dca14dbe7e4eac62abdabe7b428c7af1f7",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-1.json",
+      "sha256": "777ace3501b1a32237ca3282d07325f5224f619a88277843bf93a9bd8738116f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-1.jsonl.gz",
+      "sha256": "c7065211dbb1f475f26aebcc837d407be712f940ad6f8c1705313378158d33d8",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-2.json",
+      "sha256": "911ef41df70649a8b620f0aea1d0140f7ca5fb84270be2eccec43fce9be1507a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-2.jsonl.gz",
+      "sha256": "c3b600695b0e33df584007391f9a2b11927fe6cee0d29a3ae3b3b68a950a7d41",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-3.json",
+      "sha256": "b73be5f5e8defbda013a4a34bedd817efe740383a350dd34f23ecc47fea595dc",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-3.jsonl.gz",
+      "sha256": "bb8f8bc2f66d9064eb7824368539abd8635c6f3d5c7f53752bd4bd1f0e1c1155",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\matches.jsonl.gz",
+      "sha256": "db784a9729114f3809b31a2f45e380109af15a9845eb19b086b9293d5d54dab1",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\protocol.json",
+      "sha256": "86c4e3454235f35341bcfd34bcc04232a1884c6e50fd2b634c20ed3e8f1cefb1",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\results.json",
+      "sha256": "31df0a8bdb120541a42f29298954e57d2eb22029b18cbfa3898a5bea0252fcc7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\seed-audit.json",
+      "sha256": "4f23a847cc4883e08937d8f854d80e69a41c289e68c20f1e9bdf1a7d999213fd",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00300.json",
+      "sha256": "458295360add26e2ec24d508b56d2f54f7c7ad8226d07517a9382a5d2568b2d0",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00301.json",
+      "sha256": "5c5e30c9b0e3cdfa5ed02d2f2192d773ba963821d3870d89686f8ac0bcc4f413",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00302.json",
+      "sha256": "445ee0194ce97b729faea0c985889b70f351a8185cd90f042eb224d8c7f26f4d",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00303.json",
+      "sha256": "0218676fd2d6ab17fc933a3fae7834e1d10aa784d54907d8a4e5e185e79d81aa",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00304.json",
+      "sha256": "bf5827abbafcfdca2d0fd7dd36fb027c96d297179adb92698a48f15a9f7641e2",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00305.json",
+      "sha256": "82fef17b40b1dbb557c5929f01980f36efaaa732e39e5b4f81035f762668d175",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00306.json",
+      "sha256": "6763b0193466f0631807ed4146e7d33cce08ad726f47d83cc3969d2640e8381c",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\archive.json",
+      "sha256": "fbe7f3314ec2b7cba88257e32eb67d5763cad7f4d9a96bd8729802ceac13e7a4",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\audit.json",
+      "sha256": "d57d903aab9c5f4e232485d45860512035ab064092ff1ea718ea082a00ffb02c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\champion\\champion.json",
+      "sha256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\config.json",
+      "sha256": "4c29a55ac9ea662a233931a5104612264c996174c9bc6ea1c7afde494229a85e",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\evaluation-summary.json",
+      "sha256": "ca1dde1c3f646b3994a3c2d6cf3fafc682fd32d3050de5404d1042a576f7f075",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00300.json",
+      "sha256": "f8c1cf986ddfddb3f7e6f577e3850a4f74df5af762ac40d035240190ced81363",
+      "seeds": 34
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00301.json",
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00302.json",
+      "sha256": "d6e4df09b55bf9fb99849ea1de1f7bbcc9b05b746c058c20cb95c83c96ff4545",
+      "seeds": 33
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00303.json",
+      "sha256": "224281e9087f4065c91af991c79b7017631598c26aca3ba7fbdaa8d2b08928a3",
+      "seeds": 15
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00304.json",
+      "sha256": "f211c04311297b7302a78daac63ee0da4295d4cfd0e73647859977ef8fa9a7e8",
+      "seeds": 464
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00305.json",
+      "sha256": "929faefd096296c8d97c784f729483d53916aefd5591c2c8b020c35fc7f432e7",
+      "seeds": 439
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00306.json",
+      "sha256": "0cd2b8a1f405b4a82ed3ad40ce37ab16d47f608e6a8df4de0ba7b6469cfa011f",
+      "seeds": 253
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00307.json",
+      "sha256": "84bbe716b82f581c6a0d49935963167a0b7128082bbd0dfc0791b5cdf36fb81d",
+      "seeds": 415
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00308.json",
+      "sha256": "e2927989f8e4b8067621a83ddc24d57a2edeffa14ee3a3eb5d77094a32c2199c",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00309.json",
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00310.json",
+      "sha256": "10dd5575425c9518c1bce63037a48ce51cacec4f14457c2f73e8cb65150c87d8",
+      "seeds": 283
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00311.json",
+      "sha256": "6504462af3c6b754c4580e415ed5cada254f0b375cc2dc03577219e51d97e016",
+      "seeds": 303
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00312.json",
+      "sha256": "1c74bf11225fbc0fd73d36a7d5af633703bec5a64e0b42204155eb7f6f68de60",
+      "seeds": 604
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00313.json",
+      "sha256": "34ec5a36967b1bf5008b7ccdd7e0503e1058659315c1bf6f313e926ea3f5217b",
+      "seeds": 162
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00314.json",
+      "sha256": "b8ee1b19948134231e74b5b1d9d008680232aac11deb74fc8a215f72545ffa92",
+      "seeds": 233
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00315.json",
+      "sha256": "c0db23a9cbea5b5e9fc7999048fec0605e02741d9210b86332f78f3c6d4f2a9b",
+      "seeds": 441
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00316.json",
+      "sha256": "89fb1f36116232daadafba5f029b0510a04d96263f2af3ff697035e0e3450dcc",
+      "seeds": 384
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00317.json",
+      "sha256": "d6ebaf301f5c52c953f39e7d2188d6981290d3e0f927a6d480f89429fe4b2946",
+      "seeds": 354
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00318.json",
+      "sha256": "b53d05855aea8f15ddd9a9eb30a37d830545811a806251c553abf9371038ef8b",
+      "seeds": 209
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00319.json",
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00320.json",
+      "sha256": "9c3db4164123e022d64f6a5d0b335456ac5ee45f2155a7cea492e7837ec67020",
+      "seeds": 272
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00321.json",
+      "sha256": "a05ffc4c6ab13bd17ea24e233be1bf9de7febd74cf4d90bcfa52f6c77fb63bef",
+      "seeds": 216
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00322.json",
+      "sha256": "74a30b7d792ecc593ad9b1f7d85fd1b4f3715643230a77fcdd085f159a315eae",
+      "seeds": 514
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00323.json",
+      "sha256": "8fd4b132452ef2d7f386f245fb36d8e99f8da1dc3d98b9098424615a1073ef63",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00324.json",
+      "sha256": "8820b95c2148f257b9f43df898181e6c98bfaf02afe8ccbb54f36034c5558f3d",
+      "seeds": 346
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00325.json",
+      "sha256": "4f607fd097ef6a053bafb7b2b054e32356f49b779db7005ec672b1f438b629bb",
+      "seeds": 398
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00326.json",
+      "sha256": "939ae3845c5013810526ea50753effe05958e1e9c8e654b19c4b3184a317af2f",
+      "seeds": 290
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00327.json",
+      "sha256": "3b276f93851ff9972d4393ac00bad8176c18fc675a0892e4510015707d1f15ba",
+      "seeds": 106
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00328.json",
+      "sha256": "32c718b69581b731cdcde2add5e7cbfd52e3c02ad366fb7add91dc63a076bdee",
+      "seeds": 157
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00329.json",
+      "sha256": "56cb4b3aa3fd2ac7437d699c634735f0a1aed40dd4581312ae04122bc3689590",
+      "seeds": 320
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00330.json",
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00331.json",
+      "sha256": "4012444f205c69656452065463ad476181fe9d437bec85ccd08a16d915c963cb",
+      "seeds": 287
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00332.json",
+      "sha256": "fbb13db6c47c5f46686d832f78d9b8e46a56938f7a154fe502e819c0dedee14b",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00333.json",
+      "sha256": "b17963cbd43b96320a27990db361672a33f58d8bdc26d2828aadaccd09aaf46d",
+      "seeds": 152
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00334.json",
+      "sha256": "95e88a06d18181c60780b8fed5dc73a0258831357af5e62617b50813da7b2e51",
+      "seeds": 318
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00335.json",
+      "sha256": "8121b5d6f06c798f2a80b2f85574da719b68ca5f8f45fd0f12387c6f9a6d187c",
+      "seeds": 396
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00336.json",
+      "sha256": "0cc47e859d4ce5ceaa7ce1c17b93511e022798144a6ad67da1183a91f4b48b34",
+      "seeds": 147
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00337.json",
+      "sha256": "c1757bda92a654cd8ffee825d93bd250a21dbcefd65f849a35ff243b1da553a6",
+      "seeds": 306
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00338.json",
+      "sha256": "6c01b59991e088f50f321702da156e7d3fd5e42d6147255e541de8af5c827ae3",
+      "seeds": 218
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00339.json",
+      "sha256": "5160d19866ec86ee1453ef9cbbf7774af31528c4fd21a35123a009581304469e",
+      "seeds": 137
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00340.json",
+      "sha256": "b3e14b992a15e4963a4f6cdde61cffd53c0633924f08db1e7a3014672b51a89b",
+      "seeds": 421
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00341.json",
+      "sha256": "549fb8b7a55a55a8505036e97656b43ffca857fd719036bba2bbc4b649691da0",
+      "seeds": 547
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00342.json",
+      "sha256": "b8979a8e621aaddd7763fde632f21932f33d579131ec45e8d5b67e104116cc74",
+      "seeds": 763
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00343.json",
+      "sha256": "e5bdc80254ecb5fc43ff0f8b809f8c9b42e7f5ce103fe10812540cd553edb22b",
+      "seeds": 433
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\inheritance.json",
+      "sha256": "e66d0fddaee2f98c692303b0f796e3cecd8482d47354c4a76e34676fda8c51ae",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\learner\\status.json",
+      "sha256": "86d65544f3259c6ea5fcfa76479dcae5d19d005c0d46b2d4cef9475a18987445",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\models\\latest.json",
+      "sha256": "9535059e29afdaee34962168fd89116198e0199cf088c9adcc522c9883199ff5",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\original-import-verification.json",
+      "sha256": "c8ab6fd479e1fb98fd35bfdfbf47a610782111b6daa2cdff96a56a706f105063",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\post-audit-archive-verification.json",
+      "sha256": "0f80cc1440fd455d3679bdf78d318582c3b26072d77681cd6992e36086e3f6d7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\preparation-validation.json",
+      "sha256": "ff046fa7e6084b38bdf55a16ef9d77e606fb05d9b1bc7abc2efa33254df318a1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\process-scan.json",
+      "sha256": "966a9d77632ef6c46c5194cca6cd47ee4085b0ee128181a1764581c45527fdad",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\public-final-champion.json",
+      "sha256": "881969075c0ce320fd4b1a63befdb62d31d104a27566ee0f960ca3cf8a82474b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\restore.json",
+      "sha256": "84b82c438d0eefb2f7e39955a5893c1fd33f8f168fdd3acc625a086ba0b82702",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\restored-audit.json",
+      "sha256": "aab3917f9d2197e7b28a6071538de9c4fd071be19adf6cb9358b48ee5c02d969",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\sampling-errors.json",
+      "sha256": "611bd53c56facdf421435d84bebc204477a343f7c0f87aa5f0daf29034dfda59",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\schedule.json",
+      "sha256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\status.json",
+      "sha256": "6b90d3bc80c0b512c544a8aa0a8e7db3444c5e8098f7bf5b52534b57cde1c541",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\stop-observation.json",
+      "sha256": "3a2d8fc6cbd66aa2b9792dda3a0221dbf252f00e0fdd4f6b93171b95adbe31b6",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106\\validation.json",
+      "sha256": "91fd3a69c509e6df041234665c49d9b25c0e86c09bed965f9a29c021c3c72483",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-24h-20261106.json",
+      "sha256": "cbf2d262bd97ef615a2c331c5585095c7e3bc6dd71b9421ab9c4803f9d7c04cc",
+      "seeds": 3
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-continuation-20261105.json",
+      "sha256": "1e20ec9849dcb42013034d813b983b5a11ee0ca62cab210af7c76454e5aaa0f4",
+      "seeds": 35
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-gate-00301-20261105.json",
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-gate-scheduling-20261105\\gate-00319.json",
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-gate-scheduling-20261105.json",
+      "sha256": "bdd01c6c96f7606fc02f9d661575d7ddaf9e6deb710941baa6d7b9acb7684aa4",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-handoff-20261105.json",
+      "sha256": "76a465461d4f4ecdc057e0371a0a3895e4289fce126d2314886deb9254d33aff",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\mac-throughput-20261105.json",
+      "sha256": "bf4712b70f1c74b02d027c418c71811f5584f964adf97efd0e306a3bd607ea40",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\match-history-1.12.0.json",
+      "sha256": "3033067ac793f89c67aa21bb6c4032144f987e2c0d0a529ed47be25b75942741",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\memory-pressure-2026-11-05.json",
+      "sha256": "367d5e8c470292d64813feebffe6c1d3559ff0f999e23b2a5773212273cfc039",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\model-artifacts.json",
+      "sha256": "cc9b074298caf4c2813d90cfb073950503591608742cd8155c610cbdf695b7e8",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\model-study-progress.json",
+      "sha256": "6dd0db62b9b25879205c5d23922fab7380c849cf072905520289c32e4ab7369c",
+      "seeds": 2537
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\move-coach-20261105.json",
+      "sha256": "7a62c2431f108f66b1e00b8403312989b00baea668fcb79642c9949f0ee90c38",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\multiplayer-1.6.1.json",
+      "sha256": "d378a126adeb1022bc11bbb3d6c43c985c03b8980533adae386bb281da8f0f78",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\multiplayer-habits-1.13.0.json",
+      "sha256": "293519742f2b5aa727bc09277ca778303abec5269aa6a14fb9c58cfb38cc951d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\multiplayer-mixed-1.7.0.json",
+      "sha256": "4b96d5741a4775b148e86e516735a16a1cfae3fcfc8e6bf90a7c20d719aaff10",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\policy-training-heldout-2026-11-04.json",
+      "sha256": "59cf877649a08f78710804d3b632fe7ba71d8708fb2f91fda3795b1a303aadf5",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\profiles-1.3.0.json",
+      "sha256": "8fd2d77924ffe4eca87be910e357cf4c67024b3428ad585e8a5d47b8809f01b3",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\proposal-1.14.1.json",
+      "sha256": "47020b4b7c5dd46b2059bc485815c5203d4232dab9f831ed6404e6f5c2df123f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\ready-transition-1.10.0.json",
+      "sha256": "72ab3dbc2dd323deda182cea9ed1ca7fd3381f6494afdf1bf36e8f38fe3ed9c7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\rejoin-mixed-1.9.0.json",
+      "sha256": "e2126d1475d68c19645149049eafeea85c5719b0fe2ca1ade90ebbcf53b20470",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\rejoin-multiplayer-1.9.0.json",
+      "sha256": "5fd11a0b21a726ad14f2f97e1e6ffb73e740abd3ca45d7c6cf3e74e0ecf631bb",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\rejoin-races-1.9.0.json",
+      "sha256": "967e046a214b7606ea5322041a5de9955f7dfe2819705d7ddc2525e37a76b870",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\research-campaign-20261107\\authorization.json",
+      "sha256": "1d2f6ddda91580a30b1ae89e79c49cf6c7f76cb5fac9763cc53a5a3d84180d2d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\research-campaign-20261107\\startup.json",
+      "sha256": "cdba16bf0c2d9465a68557cf41385cd1d2ec29a656e57bfb3ccb4051a6bee391",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\response-bootstrap-1.7.0.json",
+      "sha256": "cdb734f98460ecdce23896eb7cee8d20c327d6d7a9169f95eecf9dea3dc4791a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\response-policy-1.7.0.json",
+      "sha256": "549d01960dbb6fd360529c50f9df692b695e27314f97b9abb854ac2d42a7a389",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\response-training-1.7.0.json",
+      "sha256": "3578a623ae050796d01fd6d75db7ec015e43cbaa5d915c527097e3c81180437d",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\resync-1.10.0.json",
+      "sha256": "336fb15c9d61045aceffc04208abee14dc28dc10e2271046da38f3b51699d39c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\seat-credentials-1.9.0.json",
+      "sha256": "11501bd1bc71143d5bf7e15f41e9e23b8d1b700394d284222a4dd075d1915843",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\structure-migration.json",
+      "sha256": "36bfa992e4cd3a1d4852134636b9fa59eb54f9097a0988a439bf006630484364",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\table-layout-1.14.0.json",
+      "sha256": "f28ffcf63afcb47dc09d0740df341e41eb21a16132140e405f5bc52f8c5c5366",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\table-pipeline-mirror-smoke-2026-11-04.json",
+      "sha256": "379cea898ebb8d726f4d9d291fb60b947a0a8c7de1eafad554c25a0921c1ad39",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\table-pipeline-smoke-2026-11-04.json",
+      "sha256": "6958017e99d5ffe697d93e20b9f4e15437d924c4fa185c1829e19899085852c4",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-20261106-deployment.json",
+      "sha256": "da5265e721c84f0a733b657b7e9ec090f7b6b160fccb51c57d18f3a6cc09c8fd",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-20261106-final.json",
+      "sha256": "4eea782b02da1add7b11750e2250e3a2a164ae81a7d2322cbd01793c3b5eefb1",
+      "seeds": 130
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-20261106-launch.json",
+      "sha256": "93de86a4c8a466f02602d44442567784f62b7715daa75b686e113071e0c625ff",
+      "seeds": 5
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-20261106-preflight.json",
+      "sha256": "54ac91c62a13c465a95e1d9feae3a599eee66c5ddb6ba0bcd7f2c8898b501ffb",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-20261106-teacher-resumed.json",
+      "sha256": "efd825ef595bf880c954235f15e37575aad7fee08f9e3c6ae3fcdcfbef01086e",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-20261106-teacher-transition.json",
+      "sha256": "19b32b606ea746d4f16a3d098ac41aa59effa4d6b4211d9f91302d366c7e0301",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\tribute-mac-transfer-20261106.json",
+      "sha256": "16f20a715a829f83e67eec145b87f5332c41438e81ff54db4cea92a290d1bb2f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\ui-rule-refresh-20261105.json",
+      "sha256": "f86d0e4710a947118a92b6098c0c90c549e4d29bbd4b1ff2f18f50b08bb4b26e",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-002.json",
+      "sha256": "a14f4b44497626293db819ef2a990ac2f9573e7469ead7dca9508f724d3cdb36",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-003.json",
+      "sha256": "13d3474b12953f933c009f68b9f26f5a8812a06375dc27eda46bb9eea87209f7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-004-browser.json",
+      "sha256": "97580aed1f2b83f5c992894b789a1ec945dca58dd74db3cf9bbc6498e880ace8",
+      "seeds": 5
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-004.json",
+      "sha256": "fe6f096f6487f25e199ebce9dc95730b7165421a0e2ad248726780faab2b5fdf",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-005.json",
+      "sha256": "a31461a200d8559b956318acfbb2a1347ec5e4b88b931ed822c94bd921497af2",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-006-browser.json",
+      "sha256": "7cabb3c2fe47b94ae5c8708b2b1691b52b357727666e25734cca79cc522ce770",
+      "seeds": 5
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-006.json",
+      "sha256": "d8a5633519335e637fdc782c61d854d0527b24b059616f4029292898e0a4d02a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-007.json",
+      "sha256": "446c98ee8f3ae8a2515408ead7d8adea719c7af400c6ed50fb425d56dfef9be9",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-008.json",
+      "sha256": "9735c049e30e4f2cff4f637ba4fe2bc3241165bd1b49717913bfef4d7f132c63",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-009.json",
+      "sha256": "d9e9ac09f815573f2d4ac94bb6ca1f7f86e6adedd3f9a78339b19b23d45511dd",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-010.json",
+      "sha256": "694cd1340d4715b0b31ef995fc219a3ed3033ed9c9e8e1dd6895a2063ecad314",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-011.json",
+      "sha256": "6690d81433f2650eace0496c4021a6c755a3fb275b6d969083b6980e9274bdbe",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-012.json",
+      "sha256": "acc45aaaed9281609a796c8617ac4f55a01617550c6e6cab6e62ba0540415782",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-013.json",
+      "sha256": "f5059256f2aa4d550715702956f8ef4546ed5005131aa2f365ae8376d3c5efa0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-014.json",
+      "sha256": "8d05d9166386249caa0dd4f00c48bee3ea388feb137cc05f7175332dc44c75a7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-015.json",
+      "sha256": "d39cbcee12848e48223f0ecbb4485dd035784835ea91a795673fc53814c3eb52",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-016.json",
+      "sha256": "8a48b14b9547858c4acef2e72c769d7e8ad7ab3eea3499ccaf73a0cb1efe1c35",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-017.json",
+      "sha256": "db0a8a861b0afb9831dac1a09453da34e2ea793fd42fc6d0800956e14062f751",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-018.json",
+      "sha256": "2ce2633e4a5bc0c38106dceb3c9b3b4cb1b1111218d34e20e66f5b25711fa1df",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\web-model-019.json",
+      "sha256": "eeb7a67e4b60f125f66395f66b1e17b8a4d204a6f2f958a6a8e657f6ef07672d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\arm-A-stop.json",
+      "sha256": "f7455c117c0ca90c157ed273a98fc3c04ac4aec7cb287e1111434b0be22a4f87",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\arm-B-stop.json",
+      "sha256": "ea853720d81d02bc22d1d1923905943af14c236a64fd208ae32e44557136a3a2",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\authorization.json",
+      "sha256": "bf192c5f63f31abc7e515cae2cf7e6d6ec873c1236a9eb0430111f236a8a6b4b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\gpu-A.json",
+      "sha256": "9ec9df1fd118073682b077938cc709d007ae080bbfd3cb445c05ddce373c465d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\gpu-B.json",
+      "sha256": "da6e66d7353a44ad47ccca1c0df6f4444d1fe18d791a4f1dd0e18924cf64668c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\heldout-protocol.json",
+      "sha256": "0f1abd7b38f3764d1959b24fe506a0f6a6799b317f55c56afd602cc07fe88a65",
+      "seeds": 7000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\launch.json",
+      "sha256": "b4e4bfecf7c69eefc1a96384870f93fe837752f930909c5c4bd7e4e4537ab208",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\performance-analysis.json",
+      "sha256": "5134b343eb5908e128fc9ad70520ca2c133a3106a4e6b7e75d2c57c9d79d26c4",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\results-manifest.json",
+      "sha256": "a4004d5bfe77f153f9990549de11c9f9a1f5a2f7fee7a168028937a53f6a20cf",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\results.json",
+      "sha256": "c03e9f4b976653724b5faeb208c78e73f2441c2ef3e80c8c0a340006bda83815",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\transition-A-B.json",
+      "sha256": "84a787109d40fc0804a2d645d1c700289ec4833c73ca2addf63999188a30021b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\validation.json",
+      "sha256": "a06f85aa89e8465fb4336a8a94efa65bc878796197d35fbd58b6ae01c6732568",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-0.json",
+      "sha256": "d4f290363feafa8bfbed486827ad1b573166d9f2f12140b9dc9eb452fc123305",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-0.jsonl.gz",
+      "sha256": "7acaea954208b3c65cd8c02f688b138e88070303132972d4a3a5842408cb9420",
+      "seeds": 1750
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-1.json",
+      "sha256": "6e206bbeb28875dea48344175bff612268144a1b1a3c5c84d00f831148038a92",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-1.jsonl.gz",
+      "sha256": "a5ec8b6f985b8e70dc31a7b579a2a8adea71a5fbdb280e8b31a3b71b2bb8ea77",
+      "seeds": 1750
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-2.json",
+      "sha256": "9b49d41980b94f3ce24614e4ea1adf0f7b943b0600ce417f257dd43df2342ae6",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-2.jsonl.gz",
+      "sha256": "8e07cc2c364bfec632a96334a301cfc9b5421578722df5c499644b2883971c33",
+      "seeds": 1750
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-3.json",
+      "sha256": "32f1df70e5adc906a016065e6b7f9a834b7226be66b1fab9fd01509619d54302",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-ab-20261107\\worker-3.jsonl.gz",
+      "sha256": "79e6f1a7c3ed2c9e773c76325360f63a534c9b18eda7c37bcc606992c201b90d",
+      "seeds": 1750
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\config-A.json",
+      "sha256": "2607e2be7a93b0102e2200092b294405c58a24f9759c1eba2aa75c031d88af55",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\config-B.json",
+      "sha256": "930e26b3a7cc71001c6882a0e0c4907756e39d9ff4fb19f7649fdafbfb22ee68",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\gpu-A-final.json",
+      "sha256": "f2f3ae4dd0fb32bd2d922c0a0680b798c5f1b89c0d701bc3611164394aabd19b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\gpu-B.json",
+      "sha256": "b18f9126e2ea723a31faa410b2dfd51c3cdf7a9b9e319fa402abc27cb064f0eb",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\heldout-protocol.pending.json",
+      "sha256": "896ad6d77b2acba10d9f2736cadda38be13a7eaba5d101b210a13cae6ef107ef",
+      "seeds": 7000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\post-push-validation.json",
+      "sha256": "0ffa4f7b465ecf462fcc52b93a1d4ddb466927168422e2e9d17a87a014361f34",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\protocol.json",
+      "sha256": "205cb40c310ddec15d616112cbc185f9e51db1f683264e34c1b4c40602699f09",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\restoration.json",
+      "sha256": "89bd790162b8e0e52fefdf5733a5873267d7198b93fa2a03cc8a5644a1581a20",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\sampling-provider.json",
+      "sha256": "33a5222ce5dc7f3e57cc2189fe2564cf612a4b03ba94faa60f6db6a12877494f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\seed-audit.json",
+      "sha256": "1ff3f16c94c78e80d3613cee53988a347cdef7ef9cb0837d9c19339e43757c0d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\research-campaign-20261107\\ai\\research\\evaluation\\windows-return-20261106\\validation.json",
+      "sha256": "5f94b0da9a02a2871a0471a0625e234fa581a907d810e38f6a26fd9d29bd4158",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-A\\actors\\results-0.jsonl",
+      "sha256": "979c3ffefc7cc49951bc54f777eff8e264456dd87c84db767ae18220dd317e53",
+      "seeds": 24880
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-A\\actors\\results-1.jsonl",
+      "sha256": "057d5360ed316e82363af6ff681d214e05eee0ff97c533fa7288236bcacfedfa",
+      "seeds": 26629
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-A\\actors\\results-2.jsonl",
+      "sha256": "afe785b19c43f0a2d06b59a42b647f1090ef2dda2bc446db2a64a4c6fcb150c7",
+      "seeds": 25356
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-A\\actors\\results-3.jsonl",
+      "sha256": "1ce969f06604145e2c4ae1b2de965683815f3abee5205e75e82c914946d8547d",
+      "seeds": 25726
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-B\\actors\\results-0.jsonl",
+      "sha256": "b47ac79eacc2e9b1e445cdf8d12367336d42df3d05e760639bfd73451514dfbb",
+      "seeds": 10493
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-B\\actors\\results-1.jsonl",
+      "sha256": "d67db36740b14d62f45b17fde644cfbb0b816e2a5b2fb21f84a57fd1f80b116c",
+      "seeds": 10232
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-B\\actors\\results-2.jsonl",
+      "sha256": "87844f9f1ff082ad85d247713020247a65afb43c14988d0b9e10b5669ae01136",
+      "seeds": 9624
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\danMCai\\runs\\windows-ab-20261106-B\\actors\\results-3.jsonl",
+      "sha256": "0e5a53c3e26ae9a86c68e973d3ebfcbeaba2d598cd561d4cff0834b8c0f2de4b",
+      "seeds": 10631
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\adaptive-balanced-1.8.0.json",
+      "sha256": "e55e9e5557c8a1e36b0087d5e63377432e83a863f333cb273edf6b31231337fe",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\adaptive-observant-1.8.0.json",
+      "sha256": "b1e9cce42bce55d620112c4432e3cfdb4e1f382781ba7946711ac03ca5018009",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\asymmetric-pilot-2026-11-04.json",
+      "sha256": "70521e0ec47933b1b1803edbf0d12b160b7006ee2a73cb79f16238d3297188b2",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\clint-rule\\matches.jsonl.gz",
+      "sha256": "be09954c617c3633c6cff128e43ea33edeff3f50c660333c3dd4d46799dd3adf",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\clint-rule\\results.json",
+      "sha256": "8a1f3fc280282f73b132eec244e01bd2584656fad14fef2f28928404b0ca18a1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\latest-model\\matches.jsonl.gz",
+      "sha256": "063e8314e9feb3fa7270def9ff5a2a728d22351a7c1530a3f7ae5b85037835b5",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\latest-model\\results.json",
+      "sha256": "381e75488b9ace55fa62c3dc482708ecd5dc11ebd0fdb8574022d7865bf40d5c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\protocol-clint-rule.json",
+      "sha256": "2ee022b518c8eb6389eb05d198418651d3bf10a010eb2ade96520b82f576956b",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\protocol-latest-model.json",
+      "sha256": "c81934fdee710a1ff5cd7a0873ee04334833c0c4b786446e4d39d11bef598a91",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\seed-audit.json",
+      "sha256": "be3c572aabaea4a187c074c5fd2ede19ee63c25fe2302948c5e197a8f043e158",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-clint-latest-20261105\\validation.json",
+      "sha256": "a199e2ea1f216bbbf52ca3ec7f6f5ada665a7b65b8f3efef7391522d1a171c57",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-20261105\\champion.json",
+      "sha256": "cdd84dfc3f284917098559d9023b544b9a2c8815542fdb3f2e414bbc8c08c6e7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-20261105\\gate-00104.json",
+      "sha256": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a",
+      "seeds": 346
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-20261105\\gate-00112.json",
+      "sha256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-20261105\\gate-00117.json",
+      "sha256": "f6b412af5193a280f0136e6f4f676a90b33cd82298cc7d706de09b70fbb17c2d",
+      "seeds": 442
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-20261105\\validation.json",
+      "sha256": "021fbfbdd765072afae92c76660044fe51693f57be6fa587ea62964ac5a62858",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-mac-20261105\\champion.json",
+      "sha256": "c19bdea228811173bf49bd300dc8b0e8ad403330d20fc102717c63eef695c4fe",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-mac-20261105\\gate-00309.json",
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-mac-20261106\\champion.json",
+      "sha256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\champion-selection-mac-20261106\\gate-00330.json",
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\clint-sync-20261106-1404.json",
+      "sha256": "beb8d3084511cd87cf158552078c036896a9efc2f5a1a547936519bd099cebec",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\clint-sync-20261106.json",
+      "sha256": "96420044e60b5a2ac3112812ea58494ec1f5f0b738f8c59361a5ba2dc98f26e1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\clint-sync-state.json",
+      "sha256": "41e7619bddfa641f9038e531622703e74d42c3322dc76ed0604e3c6bd934e1bb",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\coach-top5-private-20261105.json",
+      "sha256": "9f4fe8503a1174d14a70b86345dee63f4cbc0ee702790cc2df8973cec27aec7d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\continuous-smoke-2026-11-04.json",
+      "sha256": "c14cca0676f5657080cfea28e940b4e390140896fc322f12e37f89dcf942ba8e",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\cpu-main-retention-2026-11-04.json",
+      "sha256": "b02afbdb8844083226401027e9e38a489b6098f973edb4ca456fa3d857c0b14f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\danmcai-naming-20261105.json",
+      "sha256": "7ccd4d06462e46d5f2f23141802734cf129d371e60bc0bbabd4d2b4f4827f5b1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\endgame-1.4.0.json",
+      "sha256": "19e261dbc436f9e1919951844adf54029c25e2cb8524686171acc89c40ef8f85",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\endgame-expanded-1.10.0.json",
+      "sha256": "471cd4f0cc934f90b400067df3470dde80979c05b1585d329546a3c7b6dfa3b8",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\fast-actor-throughput-2026-11-05.json",
+      "sha256": "81e6d9c15c2dead591d4e803f4542f80c3b618314299bdaed4ba58cd8de23472",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\full-match-current-1.10.0.json",
+      "sha256": "1eef144e2596d79a953e8a0303b756d315f5d59df990ac6295eb41587de24afd",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\full-match-four-clients-1.11.0.json",
+      "sha256": "141993856acdc37629abb83453fa2343f4aa4166b5c6a55829ab18790bc98b23",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\full-match-phaseguard-1.10.0.json",
+      "sha256": "225c4bb65f114e8caac2e52a974dd2090c417abeec89bd8a8e36647e3f4cd9bb",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\full-network-development-2026-11-04.json",
+      "sha256": "90eb4db5db077bb77917d7c55a63140cb29773b507092ee087099c99f00b118e",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\gpu-pipeline-2026-11-04.json",
+      "sha256": "5626d219850fa833ee17fa1249206dd72774fa03c06520681a1a3b58888c103a",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\gpu-throughput-2026-11-04.json",
+      "sha256": "81eb0c50cc2f8bf20cc88928ddc56528f3d81ef105ea3f4191583f51f1bb6986",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\gpu-transition-2026-11-04.json",
+      "sha256": "7cb271956d23302cab5fd6712d048c55e760b2d4cef76c112fcabb611502626a",
+      "seeds": 314
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-81551-development-500-champion.json",
+      "sha256": "880e7e789ec86f36ed521cf2231c3c19b9364be1023010c3afc327d8efa7d693",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-81551-development-500-clint.json",
+      "sha256": "1b60481d4358b1685c2309e908d7bc48e28e3dfee6c7a71862e8e93d6977bcf9",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-81551-development-500-p0.json",
+      "sha256": "fc1f6d4a7d41d4bbab9196a45cfe9d3f8587e61c2646261d9a805c2e263fb53e",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-81551-development-500-random.json",
+      "sha256": "af082759041d784fd56bdb189c8c86278c1e10f6cc445f74407d2aca00dad4a9",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-81551-development-500-rule.json",
+      "sha256": "cca6813a2d37e5b38af1baba21cfe16c2597c22df4cae51cfea302efb894fdb0",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-81551-legacy-200.json",
+      "sha256": "80bfdfedd55079b9679c2c2f2563945a05ee4d57d554b84aa7e13668b100dccb",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-clint-block-0002-20261105.json",
+      "sha256": "21c17d2866ccbcd8fd2db14d4b23142246b836cd083e3c3ef4af78caaa3a9649",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-clint-integration-20261105.json",
+      "sha256": "a80a2fb48d21a2eefe7d6ca08b7eea095e67a75b20209d2bde9cf92212365b7f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-20261105.json",
+      "sha256": "431013ffeb7000c87947eeba940511f4f68d90583f9efdb39f71e9e91454213c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-champion-20261105.json",
+      "sha256": "02b4101334e2544b76b08857513b747f5c7d18a494a66b0c5a4ced59642cf477",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-clint-20261105.json",
+      "sha256": "1f26318859344d26241b94a896db1d1436f31142d4a53b5ca46197f9cd4f7f3e",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-original-20261105.json",
+      "sha256": "48dbe4816ea62e2fca0237d97f067eefe5cdb804aa33c0544853a55346037233",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-p0-20261105.json",
+      "sha256": "56dabf5874aa99004cef333dcc81285ceaab118aee55ef0152664c50672feaf4",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-model-000000077262-random-20261105.json",
+      "sha256": "f5f48ad46c4134c072d0eb04a6a40b0def5f2d347d237228c9c7386ffec67f8d",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-plans-20261105\\manifest.json",
+      "sha256": "2194c9cbd5d78a235d04e48789e4268e8441ba148bafaabac57417ddae870fc0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-plans-20261105\\model-000000077262-plan.json",
+      "sha256": "b657936caa5d9a344d3eb21c93c46773780650b002dc13ea7d71219476d2918b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-plans-20261105\\sha-03f7e0709843-plan.json",
+      "sha256": "eb2b6c2bc743a8e394f9a59c5a4ed9224e5afe5c7b36913afa535c0fa65a181f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-champion-20261105.json",
+      "sha256": "a72ecc1c9a0204a71c88da50068eae70cc11055e379de38b722125dfb9f63d69",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-clint-20261105.json",
+      "sha256": "186fbfcf4d7e5f4b971cbc20ddd581cacf1ad3c77c961df6357d50eeb3874c33",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-original-20261105.json",
+      "sha256": "c3505daff7140d7b3f129461f767769ce8e8417c25da7df84aa6ef053b5c7ad9",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-p0-20261105.json",
+      "sha256": "4838a1ea579487140a830bdf02551fae6258c133a654b904be78270aa36803ab",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-development-500-sha-03f7e0709843-random-20261105.json",
+      "sha256": "a1941bc3e33d2c3a5d21f25aa995805be51644552301046d3e9ebc86ee64db61",
+      "seeds": 250
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-evaluation-labels-20261105.json",
+      "sha256": "bdd9c2e23aae11ebcc19c8755745fa264d5af7772052b715f8078cac5e185b82",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-gpu-batch.json",
+      "sha256": "3b762446a509aa69aa95227bbe0606982b03d6293c66954cd4c83bd4d7b69411",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-io48-eight-hour-start.json",
+      "sha256": "b0cdff8f83509dcd8e6a55f2c7c827db2243780d44ad968ae6a657fb4f119d3f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-io48-launch.json",
+      "sha256": "3be6689c24a1e9cf4df633b208c30e4844524212e04dfa420d5ddcc026bd8837",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-io48-preflight.json",
+      "sha256": "469c54a3607a28fc81e99058125e34e96a4b74f649f53b153bb233ea3c2a8883",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-legacy-block-0000-20261105.json",
+      "sha256": "a20bfb3572e3ba98d0c5c49fa6c1c54b1a0b2f79604e31936ec75060847ff987",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-legacy-block-0001-20261105.json",
+      "sha256": "01ec953e5f033644bdda9b0e9bb4dbd1b0d06a8e4fdb56f56240aa3696e739e5",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-legacy-block-0002-20261105.json",
+      "sha256": "4f5481cd02ef479ae622eab3b8f7a106413e06e3b004c739a0aa458ca65807bb",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-legacy-block-0003-20261105.json",
+      "sha256": "cc3a30c318c18ff8b62039918c2297b3792f339d24dfb63f7d3f4045f29b87d4",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-progress.json",
+      "sha256": "702679f82d9a0c1c703404ecb81365ca2e97a62490687ae26eddbaf780146922",
+      "seeds": 105
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\guanzero-sampler-profile.json",
+      "sha256": "61be4ca1394cb6211f2dc78b75fb25b98269f1ca49f1e0ce36da88fb92302d65",
+      "seeds": 8
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\habits-adaptive-1.13.0.json",
+      "sha256": "1bfe1297553848f64617af9b0224927c0fad9cf7e45f76a3104e84f1fa44c818",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\habits-observant-1.13.0.json",
+      "sha256": "5a65e7080b3efd42ff108b808e980612c3ed314a5cba2c37cfa54fc665d42f48",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\help-1.11.0.json",
+      "sha256": "120ff7665ef2110ba83628e6fc482dabc91c709ee5e2cacd927aed965e8d2148",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\human-collection-20261105.json",
+      "sha256": "93b500379e635c37dc112349e041e0e44662c1965d42a458637ae07fd1cb0208",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\controller.json",
+      "sha256": "8b27bd2ab5a4006df498a18c4f52a5fc45e0e454c77c9988dbfb4f6772b36e72",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\protocol.json",
+      "sha256": "c57bb719368f85fc1f063ab0d688c29ccdd31c023af7f87d49ded595ca1c5239",
+      "seeds": 6000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\public-champion-unchanged.json",
+      "sha256": "5c45ca23df17dee3c800d0248d74ac18b0f33bd86b24a936585d09e7b77e8747",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\raw-index.json",
+      "sha256": "52f5b0c5a43821d7e2c3c6f12276ae8c648af2f39156932374ad79d6b6222a7d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\results.json",
+      "sha256": "ca7ef1a6982d351bfe5389831365eb6e40ed6c0eddbe0b782d201730e3fd6128",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\seed-audit.json",
+      "sha256": "8133754637004e4cba20cc819e1b44337be4c4c913d2ea52b6cfb7bc1e9ea081",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\stop-still-closed.json",
+      "sha256": "0366fa4492043bfc666d046923de5c63cd45b9663ae0368d2c43a491a2fb8d19",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\task-completion.json",
+      "sha256": "9214d276053b8a134c5aa3bac0cadc128563bcf310a8c884704c807819895dac",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\validation.json",
+      "sha256": "8bb24097331e80fda6c4da93082d61af151c78c42fd6e161dff6df60746f1219",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\windows-package.json",
+      "sha256": "907e2b78b566fa65ae2e0122ca780dd97ff00a009d8e4fecb3eb6c4e9a28f27a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\windows-preparation.json",
+      "sha256": "71c6821047d9c76adb814c00bfb6315fd7aa318676ecaa5cdd3fda8b9a402ede",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\windows-restoration-check.json",
+      "sha256": "a4932c55e859cf8547b9ffec5b9494dc692d9576a5527489abd61e664909475d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-0.json",
+      "sha256": "b080368a717c0e79ba70b9949918efe25722c8b4c5066443276cc6eca6725df0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-0.jsonl.gz",
+      "sha256": "bfac8fc876dc09c5c0d10d8304f487dca14dbe7e4eac62abdabe7b428c7af1f7",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-1.json",
+      "sha256": "777ace3501b1a32237ca3282d07325f5224f619a88277843bf93a9bd8738116f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-1.jsonl.gz",
+      "sha256": "c7065211dbb1f475f26aebcc837d407be712f940ad6f8c1705313378158d33d8",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-2.json",
+      "sha256": "911ef41df70649a8b620f0aea1d0140f7ca5fb84270be2eccec43fce9be1507a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-2.jsonl.gz",
+      "sha256": "c3b600695b0e33df584007391f9a2b11927fe6cee0d29a3ae3b3b68a950a7d41",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-3.json",
+      "sha256": "b73be5f5e8defbda013a4a34bedd817efe740383a350dd34f23ecc47fea595dc",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-mac-final-20261106\\worker-3.jsonl.gz",
+      "sha256": "bb8f8bc2f66d9064eb7824368539abd8635c6f3d5c7f53752bd4bd1f0e1c1155",
+      "seeds": 1500
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\matches.jsonl.gz",
+      "sha256": "db784a9729114f3809b31a2f45e380109af15a9845eb19b086b9293d5d54dab1",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\protocol.json",
+      "sha256": "86c4e3454235f35341bcfd34bcc04232a1884c6e50fd2b634c20ed3e8f1cefb1",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\results.json",
+      "sha256": "31df0a8bdb120541a42f29298954e57d2eb22029b18cbfa3898a5bea0252fcc7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\independent-v481076-rule-20261105\\seed-audit.json",
+      "sha256": "4f23a847cc4883e08937d8f854d80e69a41c289e68c20f1e9bdf1a7d999213fd",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00300.json",
+      "sha256": "458295360add26e2ec24d508b56d2f54f7c7ad8226d07517a9382a5d2568b2d0",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00301.json",
+      "sha256": "5c5e30c9b0e3cdfa5ed02d2f2192d773ba963821d3870d89686f8ac0bcc4f413",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00302.json",
+      "sha256": "445ee0194ce97b729faea0c985889b70f351a8185cd90f042eb224d8c7f26f4d",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00303.json",
+      "sha256": "0218676fd2d6ab17fc933a3fae7834e1d10aa784d54907d8a4e5e185e79d81aa",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00304.json",
+      "sha256": "bf5827abbafcfdca2d0fd7dd36fb027c96d297179adb92698a48f15a9f7641e2",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00305.json",
+      "sha256": "82fef17b40b1dbb557c5929f01980f36efaaa732e39e5b4f81035f762668d175",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\anchor\\anchor-00306.json",
+      "sha256": "6763b0193466f0631807ed4146e7d33cce08ad726f47d83cc3969d2640e8381c",
+      "seeds": 150
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\archive.json",
+      "sha256": "fbe7f3314ec2b7cba88257e32eb67d5763cad7f4d9a96bd8729802ceac13e7a4",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\audit.json",
+      "sha256": "d57d903aab9c5f4e232485d45860512035ab064092ff1ea718ea082a00ffb02c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\champion\\champion.json",
+      "sha256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\config.json",
+      "sha256": "4c29a55ac9ea662a233931a5104612264c996174c9bc6ea1c7afde494229a85e",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\evaluation-summary.json",
+      "sha256": "ca1dde1c3f646b3994a3c2d6cf3fafc682fd32d3050de5404d1042a576f7f075",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00300.json",
+      "sha256": "f8c1cf986ddfddb3f7e6f577e3850a4f74df5af762ac40d035240190ced81363",
+      "seeds": 34
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00301.json",
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00302.json",
+      "sha256": "d6e4df09b55bf9fb99849ea1de1f7bbcc9b05b746c058c20cb95c83c96ff4545",
+      "seeds": 33
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00303.json",
+      "sha256": "224281e9087f4065c91af991c79b7017631598c26aca3ba7fbdaa8d2b08928a3",
+      "seeds": 15
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00304.json",
+      "sha256": "f211c04311297b7302a78daac63ee0da4295d4cfd0e73647859977ef8fa9a7e8",
+      "seeds": 464
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00305.json",
+      "sha256": "929faefd096296c8d97c784f729483d53916aefd5591c2c8b020c35fc7f432e7",
+      "seeds": 439
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00306.json",
+      "sha256": "0cd2b8a1f405b4a82ed3ad40ce37ab16d47f608e6a8df4de0ba7b6469cfa011f",
+      "seeds": 253
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00307.json",
+      "sha256": "84bbe716b82f581c6a0d49935963167a0b7128082bbd0dfc0791b5cdf36fb81d",
+      "seeds": 415
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00308.json",
+      "sha256": "e2927989f8e4b8067621a83ddc24d57a2edeffa14ee3a3eb5d77094a32c2199c",
+      "seeds": 1000
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00309.json",
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00310.json",
+      "sha256": "10dd5575425c9518c1bce63037a48ce51cacec4f14457c2f73e8cb65150c87d8",
+      "seeds": 283
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00311.json",
+      "sha256": "6504462af3c6b754c4580e415ed5cada254f0b375cc2dc03577219e51d97e016",
+      "seeds": 303
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00312.json",
+      "sha256": "1c74bf11225fbc0fd73d36a7d5af633703bec5a64e0b42204155eb7f6f68de60",
+      "seeds": 604
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00313.json",
+      "sha256": "34ec5a36967b1bf5008b7ccdd7e0503e1058659315c1bf6f313e926ea3f5217b",
+      "seeds": 162
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00314.json",
+      "sha256": "b8ee1b19948134231e74b5b1d9d008680232aac11deb74fc8a215f72545ffa92",
+      "seeds": 233
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00315.json",
+      "sha256": "c0db23a9cbea5b5e9fc7999048fec0605e02741d9210b86332f78f3c6d4f2a9b",
+      "seeds": 441
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00316.json",
+      "sha256": "89fb1f36116232daadafba5f029b0510a04d96263f2af3ff697035e0e3450dcc",
+      "seeds": 384
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00317.json",
+      "sha256": "d6ebaf301f5c52c953f39e7d2188d6981290d3e0f927a6d480f89429fe4b2946",
+      "seeds": 354
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00318.json",
+      "sha256": "b53d05855aea8f15ddd9a9eb30a37d830545811a806251c553abf9371038ef8b",
+      "seeds": 209
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00319.json",
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00320.json",
+      "sha256": "9c3db4164123e022d64f6a5d0b335456ac5ee45f2155a7cea492e7837ec67020",
+      "seeds": 272
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00321.json",
+      "sha256": "a05ffc4c6ab13bd17ea24e233be1bf9de7febd74cf4d90bcfa52f6c77fb63bef",
+      "seeds": 216
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00322.json",
+      "sha256": "74a30b7d792ecc593ad9b1f7d85fd1b4f3715643230a77fcdd085f159a315eae",
+      "seeds": 514
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00323.json",
+      "sha256": "8fd4b132452ef2d7f386f245fb36d8e99f8da1dc3d98b9098424615a1073ef63",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00324.json",
+      "sha256": "8820b95c2148f257b9f43df898181e6c98bfaf02afe8ccbb54f36034c5558f3d",
+      "seeds": 346
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00325.json",
+      "sha256": "4f607fd097ef6a053bafb7b2b054e32356f49b779db7005ec672b1f438b629bb",
+      "seeds": 398
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00326.json",
+      "sha256": "939ae3845c5013810526ea50753effe05958e1e9c8e654b19c4b3184a317af2f",
+      "seeds": 290
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00327.json",
+      "sha256": "3b276f93851ff9972d4393ac00bad8176c18fc675a0892e4510015707d1f15ba",
+      "seeds": 106
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00328.json",
+      "sha256": "32c718b69581b731cdcde2add5e7cbfd52e3c02ad366fb7add91dc63a076bdee",
+      "seeds": 157
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00329.json",
+      "sha256": "56cb4b3aa3fd2ac7437d699c634735f0a1aed40dd4581312ae04122bc3689590",
+      "seeds": 320
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00330.json",
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00331.json",
+      "sha256": "4012444f205c69656452065463ad476181fe9d437bec85ccd08a16d915c963cb",
+      "seeds": 287
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00332.json",
+      "sha256": "fbb13db6c47c5f46686d832f78d9b8e46a56938f7a154fe502e819c0dedee14b",
+      "seeds": 100
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00333.json",
+      "sha256": "b17963cbd43b96320a27990db361672a33f58d8bdc26d2828aadaccd09aaf46d",
+      "seeds": 152
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00334.json",
+      "sha256": "95e88a06d18181c60780b8fed5dc73a0258831357af5e62617b50813da7b2e51",
+      "seeds": 318
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00335.json",
+      "sha256": "8121b5d6f06c798f2a80b2f85574da719b68ca5f8f45fd0f12387c6f9a6d187c",
+      "seeds": 396
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00336.json",
+      "sha256": "0cc47e859d4ce5ceaa7ce1c17b93511e022798144a6ad67da1183a91f4b48b34",
+      "seeds": 147
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00337.json",
+      "sha256": "c1757bda92a654cd8ffee825d93bd250a21dbcefd65f849a35ff243b1da553a6",
+      "seeds": 306
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00338.json",
+      "sha256": "6c01b59991e088f50f321702da156e7d3fd5e42d6147255e541de8af5c827ae3",
+      "seeds": 218
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00339.json",
+      "sha256": "5160d19866ec86ee1453ef9cbbf7774af31528c4fd21a35123a009581304469e",
+      "seeds": 137
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00340.json",
+      "sha256": "b3e14b992a15e4963a4f6cdde61cffd53c0633924f08db1e7a3014672b51a89b",
+      "seeds": 421
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00341.json",
+      "sha256": "549fb8b7a55a55a8505036e97656b43ffca857fd719036bba2bbc4b649691da0",
+      "seeds": 547
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00342.json",
+      "sha256": "b8979a8e621aaddd7763fde632f21932f33d579131ec45e8d5b67e104116cc74",
+      "seeds": 763
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\gate\\gate-00343.json",
+      "sha256": "e5bdc80254ecb5fc43ff0f8b809f8c9b42e7f5ce103fe10812540cd553edb22b",
+      "seeds": 433
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\inheritance.json",
+      "sha256": "e66d0fddaee2f98c692303b0f796e3cecd8482d47354c4a76e34676fda8c51ae",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\learner\\status.json",
+      "sha256": "86d65544f3259c6ea5fcfa76479dcae5d19d005c0d46b2d4cef9475a18987445",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\models\\latest.json",
+      "sha256": "9535059e29afdaee34962168fd89116198e0199cf088c9adcc522c9883199ff5",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\original-import-verification.json",
+      "sha256": "c8ab6fd479e1fb98fd35bfdfbf47a610782111b6daa2cdff96a56a706f105063",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\post-audit-archive-verification.json",
+      "sha256": "0f80cc1440fd455d3679bdf78d318582c3b26072d77681cd6992e36086e3f6d7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\preparation-validation.json",
+      "sha256": "ff046fa7e6084b38bdf55a16ef9d77e606fb05d9b1bc7abc2efa33254df318a1",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\process-scan.json",
+      "sha256": "966a9d77632ef6c46c5194cca6cd47ee4085b0ee128181a1764581c45527fdad",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\public-final-champion.json",
+      "sha256": "881969075c0ce320fd4b1a63befdb62d31d104a27566ee0f960ca3cf8a82474b",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\restore.json",
+      "sha256": "84b82c438d0eefb2f7e39955a5893c1fd33f8f168fdd3acc625a086ba0b82702",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\restored-audit.json",
+      "sha256": "aab3917f9d2197e7b28a6071538de9c4fd071be19adf6cb9358b48ee5c02d969",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\sampling-errors.json",
+      "sha256": "611bd53c56facdf421435d84bebc204477a343f7c0f87aa5f0daf29034dfda59",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\schedule.json",
+      "sha256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\status.json",
+      "sha256": "6b90d3bc80c0b512c544a8aa0a8e7db3444c5e8098f7bf5b52534b57cde1c541",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\stop-observation.json",
+      "sha256": "3a2d8fc6cbd66aa2b9792dda3a0221dbf252f00e0fdd4f6b93171b95adbe31b6",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106\\validation.json",
+      "sha256": "91fd3a69c509e6df041234665c49d9b25c0e86c09bed965f9a29c021c3c72483",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-24h-20261106.json",
+      "sha256": "cbf2d262bd97ef615a2c331c5585095c7e3bc6dd71b9421ab9c4803f9d7c04cc",
+      "seeds": 3
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-continuation-20261105.json",
+      "sha256": "1e20ec9849dcb42013034d813b983b5a11ee0ca62cab210af7c76454e5aaa0f4",
+      "seeds": 35
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-gate-00301-20261105.json",
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-gate-scheduling-20261105\\gate-00319.json",
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-gate-scheduling-20261105.json",
+      "sha256": "bdd01c6c96f7606fc02f9d661575d7ddaf9e6deb710941baa6d7b9acb7684aa4",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-handoff-20261105.json",
+      "sha256": "76a465461d4f4ecdc057e0371a0a3895e4289fce126d2314886deb9254d33aff",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\mac-throughput-20261105.json",
+      "sha256": "bf4712b70f1c74b02d027c418c71811f5584f964adf97efd0e306a3bd607ea40",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\match-history-1.12.0.json",
+      "sha256": "3033067ac793f89c67aa21bb6c4032144f987e2c0d0a529ed47be25b75942741",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\memory-pressure-2026-11-05.json",
+      "sha256": "367d5e8c470292d64813feebffe6c1d3559ff0f999e23b2a5773212273cfc039",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\model-artifacts.json",
+      "sha256": "228ac7de072c32d3f73daa46af280de61f67b33955577ca94d639dccd9f3ddc3",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\model-study-progress.json",
+      "sha256": "6dd0db62b9b25879205c5d23922fab7380c849cf072905520289c32e4ab7369c",
+      "seeds": 2537
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\move-coach-20261105.json",
+      "sha256": "7a62c2431f108f66b1e00b8403312989b00baea668fcb79642c9949f0ee90c38",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\multiplayer-1.6.1.json",
+      "sha256": "d378a126adeb1022bc11bbb3d6c43c985c03b8980533adae386bb281da8f0f78",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\multiplayer-habits-1.13.0.json",
+      "sha256": "293519742f2b5aa727bc09277ca778303abec5269aa6a14fb9c58cfb38cc951d",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\multiplayer-mixed-1.7.0.json",
+      "sha256": "4b96d5741a4775b148e86e516735a16a1cfae3fcfc8e6bf90a7c20d719aaff10",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\policy-training-heldout-2026-11-04.json",
+      "sha256": "59cf877649a08f78710804d3b632fe7ba71d8708fb2f91fda3795b1a303aadf5",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\profiles-1.3.0.json",
+      "sha256": "8fd2d77924ffe4eca87be910e357cf4c67024b3428ad585e8a5d47b8809f01b3",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\proposal-1.14.1.json",
+      "sha256": "47020b4b7c5dd46b2059bc485815c5203d4232dab9f831ed6404e6f5c2df123f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\ready-transition-1.10.0.json",
+      "sha256": "72ab3dbc2dd323deda182cea9ed1ca7fd3381f6494afdf1bf36e8f38fe3ed9c7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\rejoin-mixed-1.9.0.json",
+      "sha256": "e2126d1475d68c19645149049eafeea85c5719b0fe2ca1ade90ebbcf53b20470",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\rejoin-multiplayer-1.9.0.json",
+      "sha256": "5fd11a0b21a726ad14f2f97e1e6ffb73e740abd3ca45d7c6cf3e74e0ecf631bb",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\rejoin-races-1.9.0.json",
+      "sha256": "967e046a214b7606ea5322041a5de9955f7dfe2819705d7ddc2525e37a76b870",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\response-bootstrap-1.7.0.json",
+      "sha256": "cdb734f98460ecdce23896eb7cee8d20c327d6d7a9169f95eecf9dea3dc4791a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\response-policy-1.7.0.json",
+      "sha256": "549d01960dbb6fd360529c50f9df692b695e27314f97b9abb854ac2d42a7a389",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\response-training-1.7.0.json",
+      "sha256": "3578a623ae050796d01fd6d75db7ec015e43cbaa5d915c527097e3c81180437d",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\resync-1.10.0.json",
+      "sha256": "336fb15c9d61045aceffc04208abee14dc28dc10e2271046da38f3b51699d39c",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\seat-credentials-1.9.0.json",
+      "sha256": "11501bd1bc71143d5bf7e15f41e9e23b8d1b700394d284222a4dd075d1915843",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\structure-migration.json",
+      "sha256": "36bfa992e4cd3a1d4852134636b9fa59eb54f9097a0988a439bf006630484364",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\table-layout-1.14.0.json",
+      "sha256": "f28ffcf63afcb47dc09d0740df341e41eb21a16132140e405f5bc52f8c5c5366",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\table-pipeline-mirror-smoke-2026-11-04.json",
+      "sha256": "379cea898ebb8d726f4d9d291fb60b947a0a8c7de1eafad554c25a0921c1ad39",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\table-pipeline-smoke-2026-11-04.json",
+      "sha256": "6958017e99d5ffe697d93e20b9f4e15437d924c4fa185c1829e19899085852c4",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-20261106-deployment.json",
+      "sha256": "da5265e721c84f0a733b657b7e9ec090f7b6b160fccb51c57d18f3a6cc09c8fd",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-20261106-final.json",
+      "sha256": "4eea782b02da1add7b11750e2250e3a2a164ae81a7d2322cbd01793c3b5eefb1",
+      "seeds": 130
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-20261106-launch.json",
+      "sha256": "93de86a4c8a466f02602d44442567784f62b7715daa75b686e113071e0c625ff",
+      "seeds": 5
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-20261106-preflight.json",
+      "sha256": "54ac91c62a13c465a95e1d9feae3a599eee66c5ddb6ba0bcd7f2c8898b501ffb",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-20261106-teacher-resumed.json",
+      "sha256": "efd825ef595bf880c954235f15e37575aad7fee08f9e3c6ae3fcdcfbef01086e",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-20261106-teacher-transition.json",
+      "sha256": "19b32b606ea746d4f16a3d098ac41aa59effa4d6b4211d9f91302d366c7e0301",
+      "seeds": 1
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\tribute-mac-transfer-20261106.json",
+      "sha256": "16f20a715a829f83e67eec145b87f5332c41438e81ff54db4cea92a290d1bb2f",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\ui-rule-refresh-20261105.json",
+      "sha256": "f86d0e4710a947118a92b6098c0c90c549e4d29bbd4b1ff2f18f50b08bb4b26e",
+      "seeds": 2
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-002.json",
+      "sha256": "a14f4b44497626293db819ef2a990ac2f9573e7469ead7dca9508f724d3cdb36",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-003.json",
+      "sha256": "13d3474b12953f933c009f68b9f26f5a8812a06375dc27eda46bb9eea87209f7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-004-browser.json",
+      "sha256": "97580aed1f2b83f5c992894b789a1ec945dca58dd74db3cf9bbc6498e880ace8",
+      "seeds": 5
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-004.json",
+      "sha256": "fe6f096f6487f25e199ebce9dc95730b7165421a0e2ad248726780faab2b5fdf",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-005.json",
+      "sha256": "a31461a200d8559b956318acfbb2a1347ec5e4b88b931ed822c94bd921497af2",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-006-browser.json",
+      "sha256": "7cabb3c2fe47b94ae5c8708b2b1691b52b357727666e25734cca79cc522ce770",
+      "seeds": 5
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-006.json",
+      "sha256": "d8a5633519335e637fdc782c61d854d0527b24b059616f4029292898e0a4d02a",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-007.json",
+      "sha256": "446c98ee8f3ae8a2515408ead7d8adea719c7af400c6ed50fb425d56dfef9be9",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-008.json",
+      "sha256": "9735c049e30e4f2cff4f637ba4fe2bc3241165bd1b49717913bfef4d7f132c63",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-009.json",
+      "sha256": "d9e9ac09f815573f2d4ac94bb6ca1f7f86e6adedd3f9a78339b19b23d45511dd",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-010.json",
+      "sha256": "694cd1340d4715b0b31ef995fc219a3ed3033ed9c9e8e1dd6895a2063ecad314",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-011.json",
+      "sha256": "6690d81433f2650eace0496c4021a6c755a3fb275b6d969083b6980e9274bdbe",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-012.json",
+      "sha256": "acc45aaaed9281609a796c8617ac4f55a01617550c6e6cab6e62ba0540415782",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-013.json",
+      "sha256": "f5059256f2aa4d550715702956f8ef4546ed5005131aa2f365ae8376d3c5efa0",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-014.json",
+      "sha256": "8d05d9166386249caa0dd4f00c48bee3ea388feb137cc05f7175332dc44c75a7",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-015.json",
+      "sha256": "d39cbcee12848e48223f0ecbb4485dd035784835ea91a795673fc53814c3eb52",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-016.json",
+      "sha256": "8a48b14b9547858c4acef2e72c769d7e8ad7ab3eea3499ccaf73a0cb1efe1c35",
+      "seeds": 0
+    },
+    {
+      "path": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\windows-return-20261106\\ai\\research\\evaluation\\web-model-017.json",
+      "sha256": "db0a8a861b0afb9831dac1a09453da34e2ea793fd42fc6d0800956e14062f751",
+      "seeds": 0
+    }
+  ],
+  "reservations": [
+    {
+      "phase": 0,
+      "slot": 0,
+      "startInclusive": 1020000000,
+      "endExclusive": 1020000128
+    },
+    {
+      "phase": 0,
+      "slot": 1,
+      "startInclusive": 1070000000,
+      "endExclusive": 1070000128
+    },
+    {
+      "phase": 0,
+      "slot": 2,
+      "startInclusive": 1120000000,
+      "endExclusive": 1120000128
+    },
+    {
+      "phase": 0,
+      "slot": 3,
+      "startInclusive": 1170000000,
+      "endExclusive": 1170000128
+    },
+    {
+      "phase": 1,
+      "slot": 0,
+      "startInclusive": 1020001000,
+      "endExclusive": 1020001128
+    },
+    {
+      "phase": 1,
+      "slot": 1,
+      "startInclusive": 1070001000,
+      "endExclusive": 1070001128
+    },
+    {
+      "phase": 1,
+      "slot": 2,
+      "startInclusive": 1120001000,
+      "endExclusive": 1120001128
+    },
+    {
+      "phase": 1,
+      "slot": 3,
+      "startInclusive": 1170001000,
+      "endExclusive": 1170001128
+    },
+    {
+      "phase": 2,
+      "slot": 0,
+      "startInclusive": 1020002000,
+      "endExclusive": 1020002128
+    },
+    {
+      "phase": 2,
+      "slot": 1,
+      "startInclusive": 1070002000,
+      "endExclusive": 1070002128
+    },
+    {
+      "phase": 2,
+      "slot": 2,
+      "startInclusive": 1120002000,
+      "endExclusive": 1120002128
+    },
+    {
+      "phase": 2,
+      "slot": 3,
+      "startInclusive": 1170002000,
+      "endExclusive": 1170002128
+    },
+    {
+      "phase": 3,
+      "slot": 0,
+      "startInclusive": 1020003000,
+      "endExclusive": 1020003128
+    },
+    {
+      "phase": 3,
+      "slot": 1,
+      "startInclusive": 1070003000,
+      "endExclusive": 1070003128
+    },
+    {
+      "phase": 3,
+      "slot": 2,
+      "startInclusive": 1120003000,
+      "endExclusive": 1120003128
+    },
+    {
+      "phase": 3,
+      "slot": 3,
+      "startInclusive": 1170003000,
+      "endExclusive": 1170003128
+    }
+  ],
+  "knownRootOverlap": 0,
+  "purpose": "Development sampling-throughput probe only, never independent strength acceptance. All resulting root/derived round seeds must be excluded from future heldout selection. Prior local seed audit inputs plus completed A/B actors and current committed public evaluation; unavailable other-machine training history not covered."
+}
