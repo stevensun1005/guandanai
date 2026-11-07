@@ -244,10 +244,14 @@
         field($('metrics'), '缓存会话上限', num(v.sessionLimit ?? a?.sampler?.sessionLimit));
         field($('metrics'), '实际后端', v.provider || a?.learner?.device || '—');
         if (v.plannedPositions !== undefined) {
-          field($('metrics'), '已收集争议位置', num(v.collectedPositions));
+          field(
+            $('metrics'),
+            v.collectedPositions !== undefined ? '已收集争议位置' : '已处理决策位置',
+            num(v.collectedPositions ?? v.completedPositions),
+          );
           field($('metrics'), '已完成开发整局', num(v.completedDeals));
         }
-        field($('metrics'), '本任务参数更新', num(v.optimizerUpdates ?? a?.newUpdates));
+        field($('metrics'), '本任务参数更新', num(a?.learner ? a.newUpdates : v.optimizerUpdates));
         if (a?.learner) {
           field($('metrics'), '累计更新计数', num(a.learner.step));
           field($('metrics'), '已摄入样本', num(a.learner.ingestedRows));
