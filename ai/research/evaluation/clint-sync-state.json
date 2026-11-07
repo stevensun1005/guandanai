@@ -1,14 +1,8 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "2b2878b62d18171a27b342308514d2d53da4d678",
-  "evidence": "clint-sync-20261106-latest.json",
-  "pending": [
-    {
-      "sha": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1",
-      "item": "Pages deployment confirmation after validated UI changes",
-      "evidence": "clint-sync-20261107-1506.json"
-    }
-  ],
+  "lastSuccessfulUpstreamSHA": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1",
+  "evidence": "clint-sync-20261107-1506.json",
+  "pending": [],
   "lastCheckedUpstreamSHA": "ec58b209f31ce752e6ee7d7b6fbc9428b472f0b1"
 }

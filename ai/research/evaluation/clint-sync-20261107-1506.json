@@ -447,9 +447,66 @@
   "strengthMatches": 0,
   "trainingUpdates": 0,
   "deployment": {
-    "status": "pending-confirmation",
-    "successCursorAdvanced": false,
-    "validatedMergedSourceBeforePush": true
+    "status": "success",
+    "sourceCommit": "ba2478f05648f699570e49dd592634fcf72f75aa",
+    "workflowRunId": 42386954803,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42386954803",
+    "confirmedAtUTC": "2026-11-07T15:37:57.655364+00:00",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "liveVersion": "b6e7b6537c",
+    "liveChoices": [
+      {
+        "id": "clint-rule",
+        "name": "Clint\u89c4\u5219\u673a\u5668\u4eba",
+        "kind": "rule"
+      },
+      {
+        "id": "020",
+        "name": "guanzero-adp-io48-223067",
+        "kind": "neural"
+      },
+      {
+        "id": "019",
+        "name": "guanzero-adp-io48-186280",
+        "kind": "neural"
+      },
+      {
+        "id": "001",
+        "name": "danMCai-v000000000",
+        "kind": "neural"
+      },
+      {
+        "id": "017",
+        "name": "danMCai-v000855042",
+        "kind": "neural"
+      },
+      {
+        "id": "012",
+        "name": "danMCai-v000705434",
+        "kind": "neural"
+      }
+    ],
+    "liveDefaultId": "017",
+    "liveArrangementUI": {
+      "publicMenu": true,
+      "physicalCardsPreserved": true,
+      "groupSplitJoinRestore": true,
+      "keyboardSelection": true,
+      "fourSeatRecords": true,
+      "exportedRecords": 4,
+      "assistedLabels": true,
+      "quotaFeedback": true,
+      "quotaExportAvailable": true,
+      "returnToLearnedTable": true,
+      "cloudUploads": 0,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "pageErrors": []
+    },
+    "successCursorAdvanced": true
   },
   "initialMainBaseCommit": "55d267d1f37504cfe5e65f5892da36c385f5e436",
   "concurrentUpdate": {
