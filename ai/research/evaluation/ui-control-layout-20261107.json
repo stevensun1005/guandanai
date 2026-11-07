@@ -1190,10 +1190,84 @@
     "build": {
       "passed": true,
       "version": "93f953fad5"
+    },
+    "ci": {
+      "passed": true,
+      "unitAndFormattingAndBuild": true,
+      "productionReplayCoachAndTargetedControlBrowsers": true
     }
   },
   "deployment": {
-    "status": "pending CI and Pages; existing site retained until successful deployment"
+    "status": "success",
+    "sourceCommit": "fe066bc3f2ff00d8f9381a53c1caf418baa820de",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42396025120",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "verifiedAtUTC": "2026-11-07T17:28:46.905498+00:00",
+    "publicBrowser": {
+      "version": "93f953fad5",
+      "menu": [
+        {
+          "id": "clint-rule",
+          "name": "Clint规则机器人"
+        },
+        {
+          "id": "021",
+          "name": "guanzero-adp-io48-229609"
+        },
+        {
+          "id": "020",
+          "name": "guanzero-adp-io48-223067"
+        },
+        {
+          "id": "001",
+          "name": "danMCai-v000000000"
+        },
+        {
+          "id": "017",
+          "name": "danMCai-v000855042"
+        },
+        {
+          "id": "012",
+          "name": "danMCai-v000705434"
+        }
+      ],
+      "defaultIds": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ],
+      "cases": [
+        {
+          "phase": "play",
+          "cards": 27,
+          "viewport": [
+            1024,
+            768
+          ],
+          "overlapOrOcclusion": false
+        },
+        {
+          "phase": "roundEnd",
+          "cards": 8,
+          "viewport": [
+            1024,
+            768
+          ],
+          "overlapOrOcclusion": false
+        },
+        {
+          "phase": "play",
+          "cards": 1,
+          "viewport": [
+            375,
+            450
+          ],
+          "overlapOrOcclusion": false
+        }
+      ],
+      "pageErrors": []
+    }
   },
   "limitations": [
     "Display-state fixtures and functional browser checks are not completed strength matches.",
