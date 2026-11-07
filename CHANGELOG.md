@@ -557,3 +557,8 @@
 - 单人游戏、朋友房间与邀请链接。
 - 浏览器内策略模型和空位电脑接管。
 - GitHub Pages 自动构建发布。
+
+# Stage 0 research preparation — 2026-11-07
+
+- Register historical 009 match-objective reanalysis with rule replay and paired-seed cluster intervals; no new model games, reward changes or website champion promotion.
+- Limit new Windows training/research to danMCai; preserve frozen runs and the original Wednesday deadline.

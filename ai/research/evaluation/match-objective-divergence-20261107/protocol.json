@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "registeredAtUTC": "2026-11-07T18:39:18.218230+00:00",
+  "baseCommit": "c71edc0b6bf71ea9223cc4ee7d86138bcf1df3f4",
+  "purpose": "Stage 0.1 descriptive reanalysis of historical 009 web-policy matches; no new games or strength claim for 017",
+  "sourceSHA256": {
+    "ai/research/tools/match-objective-divergence.py": "f64aff5b565ba207ce518477560253176568fd3700612fac4e26f4cf825dcad0",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2"
+  },
+  "groups": {
+    "clint-rule": {
+      "archive": "ai/research/evaluation/champion-clint-latest-20261105/clint-rule/matches.jsonl.gz",
+      "sha256": "be09954c617c3633c6cff128e43ea33edeff3f50c660333c3dd4d46799dd3adf",
+      "originalProtocol": "ai/research/evaluation/champion-clint-latest-20261105/protocol-clint-rule.json"
+    },
+    "latest-model": {
+      "archive": "ai/research/evaluation/champion-clint-latest-20261105/latest-model/matches.jsonl.gz",
+      "sha256": "063e8314e9feb3fa7270def9ff5a2a728d22351a7c1530a3f7ae5b85037835b5",
+      "originalProtocol": "ai/research/evaluation/champion-clint-latest-20261105/protocol-latest-model.json"
+    }
+  },
+  "bootstrapReplicates": 4000,
+  "bootstrapRNGSeed": 2026110701,
+  "RNGUse": "Bootstrap indices only, never a deal or training seed",
+  "newDealSeeds": [],
+  "interval": "95% percentile bootstrap of complete exchanged match-seed pairs; groups separate",
+  "metrics": {
+    "ownAPlusOnePerOwnAAttempt": "own active A rounds ending with own +1 / all own active A rounds",
+    "opponentAWinPerOpponentAAttempt": "opponent active A rounds ending with opponent +2/+3 / all opponent active A rounds",
+    "threeFailedADrawRate": "matches ending in third failed A attempt / matches",
+    "lossShare": "all losses ending in opponent own-A +2/+3 / losses; structural tautology, not a stage-3 gate",
+    "deltaTable": "exact next-state level deltas and termination; not inferred match value"
+  },
+  "stopping": "Read the two complete fixed archives once; missing, mismatched or truncated histories fail. No training/window/website modifications.",
+  "authorization": "Owner stage 0 request 2026-11-07; Windows only danMCai; all eight roadmap decisions remain unapproved",
+  "notAuthorized": [
+    "Mac compute",
+    "post-Wednesday compute",
+    "D1 omniscient review",
+    "live calibrated Top5",
+    "match-level training",
+    "GuanZero training"
+  ],
+  "resourceBudget": "Single-process descriptive CPU analysis; no NN/GPU or model loading; retain existing 4 GiB reserve"
+}
