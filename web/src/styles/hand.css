@@ -376,3 +376,16 @@
     filter: brightness(1.12);
   }
 }
+
+@media (min-width: 561px) {
+  body:not(.practice) .handwrap .handtools {
+    position: relative;
+    bottom: auto;
+    min-height: 34px;
+    margin-top: 4px;
+  }
+}
+
+body:not(.practice) .handtools.empty .link {
+  display: none;
+}

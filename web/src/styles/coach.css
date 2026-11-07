@@ -79,7 +79,7 @@
   right: 12px;
   bottom: var(--coach-popup-bottom, 220px);
   width: min(310px, calc(100vw - 24px));
-  max-height: min(330px, 43dvh);
+  max-height: min(330px, var(--coach-popup-height, 43dvh));
   overflow: auto;
   overscroll-behavior: contain;
   background: #102e26;
@@ -240,6 +240,23 @@
   overflow-y: auto;
   overscroll-behavior: contain;
 }
+@media (min-width: 800px) and (max-width: 899px) {
+  body.has-coach-top #app {
+    max-width: 1480px;
+    padding-right: 244px;
+  }
+  body.has-coach-top .bar {
+    right: 244px;
+  }
+  .coach-suggestions {
+    top: 12px;
+    bottom: auto;
+    right: 12px;
+    width: 220px;
+    max-height: calc(100dvh - 24px);
+    scrollbar-gutter: stable;
+  }
+}
 @media (min-width: 900px) {
   body.has-coach-top #app {
     max-width: 1480px;
@@ -247,12 +264,6 @@
   }
   body.has-coach-top .bar {
     right: 292px;
-  }
-  body.has-coach-top .handwrap .handtools {
-    position: relative;
-    bottom: auto;
-    min-height: 34px;
-    margin-top: 4px;
   }
   .coach-suggestions {
     top: 12px;
@@ -282,10 +293,10 @@
     right: max(12px, calc((100vw - 1740px) / 2 + 16px));
   }
 }
-@media (max-width: 899px) and (max-height: 500px) {
+@media (max-width: 799px) and (max-height: 500px) {
   .coach-suggestions {
     padding: 9px;
-    max-height: max(36px, calc(100dvh - var(--coach-popup-bottom, 220px) - 8px));
+    max-height: var(--coach-popup-height, 43dvh);
   }
   .coach-suggestions h2 {
     font-size: 14px;
@@ -301,4 +312,71 @@
 
 .bar:has(.optmenu:not([hidden])) {
   z-index: 65;
+}
+
+@media (max-width: 899px) {
+  .coach-suggestions header > div > small {
+    display: none;
+  }
+  .coach-suggestions h2 {
+    margin: 0;
+    font-size: 14px;
+  }
+  #coachSuggestionsClose {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+  }
+}
+
+/* A very short narrow window needs scrolling space rather than overlays over its controls. */
+@media (max-width: 799px) and (max-height: 599px), (max-height: 349px) {
+  body:not(.practice) {
+    overflow-y: auto;
+  }
+  body:not(.practice) #app {
+    height: auto;
+    min-height: 100dvh;
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  body:not(.practice) .bar {
+    right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  body:not(.practice) #table {
+    flex: none;
+    min-height: 180px;
+  }
+  html.phone.rows body:not(.practice) #btns,
+  html.phone.side body:not(.practice) #btns,
+  body:not(.practice) #btns {
+    --d: 48px !important;
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    right: auto;
+    bottom: auto !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  body:not(.practice) #seat0 #deckBtn {
+    position: static;
+    right: auto;
+    bottom: auto;
+    transform: none;
+  }
+  body:not(.practice) .coach-suggestions {
+    position: relative;
+    flex: none;
+    width: 100%;
+    left: auto !important;
+    right: auto !important;
+    top: auto;
+    bottom: auto;
+    max-height: 210px;
+    margin: 0;
+  }
 }

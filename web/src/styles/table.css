@@ -1376,57 +1376,38 @@ html:not(.phone) body:not(.practice) #seat2 .whorow > .cnt {
   top: 50%;
   translate: 0 -50%;
 }
-html:not(.phone) body:not(.practice) #mebar {
-  position: relative;
-  display: block;
-  height: 38px;
+/* Hand actions and the player's identity stay in normal flow, clear of the action column. */
+body:not(.practice) #mebar {
+  height: auto;
   min-height: 38px;
+  padding-right: var(--hand-actions-space, 0px);
 }
-html:not(.phone) body:not(.practice) #mebar .left {
+body:not(.practice) #mebar .left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+body:not(.practice) #mebar .whorow {
+  position: relative;
+  left: auto;
+  top: auto;
+  translate: none;
+  gap: 8px;
+}
+body:not(.practice) #mebar .cnt {
   position: static;
-  display: block;
+  translate: none;
 }
-html:not(.phone) body:not(.practice) #mebar .whorow {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  translate: -50% 0;
-  gap: 0;
+body:not(.practice) #mebar #sfBtn,
+body:not(.practice) #mebar #fixBtn {
+  position: static !important;
+  translate: none;
+  flex: none;
 }
-html:not(.phone) body:not(.practice) #mebar .whorow > .clock {
-  position: absolute;
-  left: calc(100% + 10px);
-  top: 50%;
-  translate: 0 -50%;
-  margin: 0;
-}
-html:not(.phone) body:not(.practice) #mebar .whorow > .cnt {
-  position: absolute;
-  left: calc(100% + 60px);
-  top: 50%;
-  translate: 0 -50%;
-}
-html:not(.phone) body:not(.practice) #mebar #sfBtn {
-  position: absolute;
-  left: calc(50% + 54px + 126px);
-  top: 50%;
-  translate: 0 -50%;
-}
-html:not(.phone) body:not(.practice) #mebar #fixBtn {
-  position: absolute !important;
-  left: calc(50% + 54px + 126px + 82px);
-  top: 50%;
-  translate: 0 -50%;
-}
-@media (max-width: 900px) {
-  html:not(.phone) body:not(.practice) #mebar #sfBtn {
-    left: auto;
-    right: calc(50% + 54px + 100px + 66px);
-  }
-  html:not(.phone) body:not(.practice) #mebar #fixBtn {
-    left: auto;
-    right: calc(50% + 54px + 100px);
-  }
+body:not(.practice) .selection-bar {
+  padding-right: var(--hand-actions-space, 0px);
 }
 #viewportDebug {
   position: fixed;
@@ -1441,4 +1422,18 @@ html:not(.phone) body:not(.practice) #mebar #fixBtn {
   font: 12px/1.35 monospace;
   pointer-events: none;
   white-space: pre;
+}
+
+@media (min-width: 561px) {
+  body:not(.practice) #btns.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, var(--d));
+  }
+}
+
+@media (max-width: 899px) {
+  /* The selection status already states whose turn it is; omit the duplicate badge on narrow tables. */
+  body:not(.practice) #mebar .actlbl {
+    display: none;
+  }
 }

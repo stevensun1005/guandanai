@@ -30,6 +30,8 @@
 
 Windows A／B 已获准顺序各训四小时，随后进行独立整局评测；[历史 A/B 面板](http://127.0.0.1:8766/)显示实际进度与资源，启动证据和固定截止见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。网页冠军保持不变，训练进度不构成棋力提升结论。
 
+电脑及手机操作区会为按钮预留空间：少牌不让操作列盖住成组工具，矮窗口可切成两列，局末按钮留在结果卡内。
+
 ## 代码与模型入口
 
 **[网页端 web/](web/README.md) · [AI ai/](ai/README.md) · [danMCai 模型](ai/danMCai/README.md) · [GuanZero](ai/guanzero/README.md)**

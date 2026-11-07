@@ -1,0 +1,1207 @@
+{
+  "schema": 1,
+  "kind": "ui-layout-and-visible-assistance-validation",
+  "recordedAtUTC": "2026-11-07T17:18:44.800113+00:00",
+  "baseMain": "c607234b1709f3edc57412bff4127bae3a6384b9",
+  "scope": [
+    "Normal-flow hand tools and identity, with reserved space for action controls",
+    "Action column clamps between header and tool row; compact two-column fallback",
+    "Short narrow or extremely short windows scroll with inline Top 5 and normal-flow buttons",
+    "Result actions stay inside their panel; asynchronous refit does not override control visibility",
+    "Assisted records require visible, unclipped, unobscured numeric ratings; scroll exposure is recorded"
+  ],
+  "fullGeometry": {
+    "buildVersion": "ceb8b76746",
+    "method": "16 viewport/touch configurations x 13 synthetic display scenarios x hand views and coach on/off; rectangle overlap and six interior hit tests. No match-strength sample.",
+    "result": {
+      "kind": "synthetic-display-hit-test",
+      "strengthGames": 0,
+      "trainingUpdates": 0,
+      "testedStates": 1040,
+      "viewports": [
+        {
+          "viewport": [
+            1920,
+            1080
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1920,
+            1080
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            900,
+            600
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            900,
+            600
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            899,
+            600
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            899,
+            600
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            500
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            500
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            700,
+            500
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            700,
+            500
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            600
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            600
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        }
+      ],
+      "failures": [],
+      "pageErrors": []
+    }
+  },
+  "affectedLayoutFollowup": {
+    "method": "Seven configurations affected by scrolling thresholds (including new 375x450 and 1280x300 boundaries), full-width inline ratings and visibility handling. These cases overlap the main matrix; not independent games.",
+    "result": {
+      "kind": "synthetic-display-hit-test",
+      "buildVersions": [
+        "ef0d101da7"
+      ],
+      "strengthGames": 0,
+      "trainingUpdates": 0,
+      "testedStates": 390,
+      "viewports": [
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            700,
+            500
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            700,
+            500
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        }
+      ],
+      "failures": [],
+      "pageErrors": []
+    }
+  },
+  "browserRegressions": {
+    "handTools": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "sorts": 3,
+        "groupPreserved": true,
+        "oneClickRestore": true,
+        "restoreUndoRedo": true,
+        "undo": true,
+        "redoAndShortcuts": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "sorts": 3,
+        "groupPreserved": true,
+        "oneClickRestore": true,
+        "restoreUndoRedo": true,
+        "undo": true,
+        "redoAndShortcuts": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "sorts": 3,
+        "groupPreserved": true,
+        "oneClickRestore": true,
+        "restoreUndoRedo": true,
+        "undo": true,
+        "redoAndShortcuts": true,
+        "pageErrors": []
+      }
+    ],
+    "selection": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "keyboardSelection": true,
+        "spaceDidNotPass": true,
+        "selectionFeedback": true,
+        "keyboardPlay": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "keyboardSelection": true,
+        "spaceDidNotPass": true,
+        "selectionFeedback": true,
+        "keyboardPlay": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "keyboardSelection": true,
+        "spaceDidNotPass": true,
+        "selectionFeedback": true,
+        "keyboardPlay": true,
+        "pageErrors": []
+      }
+    ],
+    "tribute": {
+      "cases": [
+        {
+          "highOnly": false,
+          "automatedReturnLegal": true,
+          "immediateHandCounts": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "readyDuringFlightSafe": true
+        },
+        {
+          "highOnly": true,
+          "automatedReturnLegal": true,
+          "immediateHandCounts": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "readyDuringFlightSafe": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "readyTransition": {
+      "duplicateReadyIsIdempotent": true,
+      "returnPhaseCommittedBeforeAnimation": true,
+      "concurrentTransferRunsOnce": true,
+      "eachHand27": true,
+      "physicalCards108": true,
+      "staleHoldCannotResetLead": true,
+      "pageErrors": []
+    },
+    "publicHistory": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "publicOnly": true,
+        "filterAndLiveUpdate": true,
+        "downloadMatchesCopy": true,
+        "keyboardIsolated": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "publicOnly": true,
+        "filterAndLiveUpdate": true,
+        "downloadMatchesCopy": true,
+        "keyboardIsolated": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "publicOnly": true,
+        "filterAndLiveUpdate": true,
+        "downloadMatchesCopy": true,
+        "keyboardIsolated": true,
+        "pageErrors": []
+      }
+    ],
+    "coachRooms": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "hostDeniedEnforced": true,
+      "scoring": {
+        "modelId": "017",
+        "candidates": 15,
+        "minValue": -2.1350691318511963,
+        "maxValue": -1.735508680343628,
+        "topFiveVisible": true,
+        "topFiveClickSelectsOnly": true,
+        "topFiveExposureMarked": true,
+        "viewTeamLevelsChecked": true,
+        "teamLevels": {
+          "self": 2,
+          "opponent": 7
+        },
+        "relativeExtremaChecked": true,
+        "selectionUsesCachedValues": true,
+        "invalidSelectionNotRated": true,
+        "disabledStaleReplyIgnored": true,
+        "injectedFailureNotScored": true,
+        "retrySucceeded": true
+      },
+      "postMoveRetained": true,
+      "independentPlayerPreferences": true,
+      "assistedEventMarked": true,
+      "realPeerJSDataChannel": true,
+      "hostWGuestS": true,
+      "layouts": [
+        {
+          "width": 1920,
+          "height": 1080,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 236,
+            "y": 698.203125,
+            "width": 989,
+            "height": 53
+          }
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 618.203125,
+            "width": 954,
+            "height": 53
+          }
+        },
+        {
+          "width": 1366,
+          "height": 768,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 386.203125,
+            "width": 889,
+            "height": 53
+          }
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 338.203125,
+            "width": 813,
+            "height": 53
+          }
+        },
+        {
+          "width": 1100,
+          "height": 620,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 272.65625,
+            "width": 654,
+            "height": 53
+          }
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 417.828125,
+            "width": 588,
+            "height": 53
+          }
+        },
+        {
+          "width": 900,
+          "height": 600,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 278.828125,
+            "width": 478,
+            "height": 53
+          }
+        },
+        {
+          "width": 1280,
+          "height": 500,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 204.84375,
+            "width": 813,
+            "height": 46
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": null,
+          "bounds": {
+            "x": 16,
+            "y": 521,
+            "width": 302,
+            "height": 61
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": null,
+          "bounds": {
+            "x": 16,
+            "y": 127.0625,
+            "width": 481,
+            "height": 46
+          }
+        }
+      ],
+      "rejoinRestoresPermissionAndPreference": true,
+      "pageErrors": []
+    },
+    "privateTable": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "completedRounds": 0,
+      "trainingUpdates": 0,
+      "realPeerJS": true,
+      "hostOnlyNicknameGate": true,
+      "guestSameNameDenied": true,
+      "noPrivateRuleFlagBroadcast": true,
+      "privateCoach": {
+        "modelId": "017",
+        "search": {
+          "candidates": 24,
+          "evaluated": 8,
+          "mode": "round",
+          "horizon": 4,
+          "maxPlies": 12,
+          "leafSeat": "advising player, or partner after finishing",
+          "mismatchedLeaves": 0,
+          "fullRollouts": 13,
+          "minRollouts": 1,
+          "truncatedRollouts": 0,
+          "maxSamples": 12,
+          "priorWeight": 4,
+          "temperature": 0.03,
+          "elapsedMs": 2523,
+          "fullInformation": true
+        }
+      },
+      "partnerUsesOracle": true,
+      "opponentStaysRules": true,
+      "neuralOpponentUsesOnlyPublicObservation": true,
+      "manualOutsideBeamRated": true,
+      "offRestoresPartnerRules": true,
+      "privateHandsMatchHeldCounts": true,
+      "constructedCompletionExcluded": true,
+      "uploads": 0,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "topFiveInViewport": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "practice": {
+      "publicPracticeEntry": true,
+      "learnedTurns": 5,
+      "annotatedExport": true,
+      "freshBrowserImport": true,
+      "corruptRecordsSkipped": true,
+      "quotaFeedback": true,
+      "legacyMigration": true,
+      "pageErrors": []
+    },
+    "practiceLayout": {
+      "checks": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "touch": false,
+          "learnedTurns": 6,
+          "sameActionSlot": true,
+          "readableScrollablePlays": true,
+          "finishedPlayerControls": true,
+          "compactNotesAndResults": true
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "touch": false,
+          "learnedTurns": 6,
+          "sameActionSlot": true,
+          "readableScrollablePlays": true,
+          "finishedPlayerControls": true,
+          "compactNotesAndResults": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "touch": true,
+          "learnedTurns": 6,
+          "sameActionSlot": true,
+          "readableScrollablePlays": true,
+          "finishedPlayerControls": true,
+          "compactNotesAndResults": true
+        }
+      ],
+      "pageErrors": [],
+      "fixtureScope": "Overflow, finished-player and result geometry use synthetic display states; six opening turns per viewport use the real learned policy."
+    },
+    "production": {
+      "productionGlobalsHidden": true,
+      "policyTurns": 2,
+      "successfulModelIds": [
+        "001",
+        "017"
+      ],
+      "pageErrors": []
+    },
+    "coachSolo": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "scoring": {
+        "modelId": "017",
+        "candidates": 1295,
+        "minValue": -1.567628026008606,
+        "maxValue": 0.4160967767238617,
+        "topFiveVisible": true,
+        "topFiveClickSelectsOnly": true,
+        "topFiveExposureMarked": true,
+        "viewTeamLevelsChecked": true,
+        "teamLevels": {
+          "self": 2,
+          "opponent": 2
+        },
+        "relativeExtremaChecked": true,
+        "selectionUsesCachedValues": true,
+        "invalidSelectionNotRated": true,
+        "disabledStaleReplyIgnored": true,
+        "injectedFailureNotScored": true,
+        "retrySucceeded": true
+      },
+      "offscreenRatingsNotExposed": true,
+      "scrollExposureRecorded": true,
+      "layouts": [
+        {
+          "width": 1920,
+          "height": 1080,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 236,
+            "y": 698.203125,
+            "width": 989,
+            "height": 53
+          }
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 618.203125,
+            "width": 954,
+            "height": 53
+          }
+        },
+        {
+          "width": 1366,
+          "height": 768,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 386.203125,
+            "width": 889,
+            "height": 53
+          }
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 338.203125,
+            "width": 813,
+            "height": 53
+          }
+        },
+        {
+          "width": 1100,
+          "height": 620,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 272.65625,
+            "width": 654,
+            "height": 53
+          }
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 417.828125,
+            "width": 588,
+            "height": 53
+          }
+        },
+        {
+          "width": 900,
+          "height": 600,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 278.828125,
+            "width": 478,
+            "height": 53
+          }
+        },
+        {
+          "width": 1280,
+          "height": 500,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 204.84375,
+            "width": 813,
+            "height": 46
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": null,
+          "bounds": {
+            "x": 16,
+            "y": 521,
+            "width": 302,
+            "height": 61
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": null,
+          "bounds": {
+            "x": 16,
+            "y": 127.0625,
+            "width": 476,
+            "height": 46
+          }
+        }
+      ],
+      "postMoveRetained": true,
+      "pageErrors": []
+    },
+    "emotes": {
+      "kind": "test",
+      "realPeerJS": true,
+      "emotes": 5,
+      "phrases": 8,
+      "buttonRightOfSort": true,
+      "giftsFly": true,
+      "botAnswers": true,
+      "phrasesSpoken": true,
+      "forgedDropped": true,
+      "rateLimited": true,
+      "muteHidesOthers": true,
+      "pageErrors": []
+    },
+    "help": {
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "lobbyHelp": true,
+          "tabsAndKeyboard": true,
+          "soloClockPaused": true,
+          "responsive": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "lobbyHelp": true,
+          "tabsAndKeyboard": true,
+          "soloClockPaused": true,
+          "responsive": true,
+          "pageErrors": []
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "lobbyHelp": true,
+          "tabsAndKeyboard": true,
+          "soloClockPaused": true,
+          "responsive": true,
+          "pageErrors": []
+        }
+      ],
+      "pendingPolicyWaitsForHelpClose": true,
+      "currentHouseRulesShown": true,
+      "multiplayerClockContinues": true,
+      "practiceHelpDoesNotAdvanceTurn": true
+    }
+  },
+  "negativeDevelopmentRuns": [
+    {
+      "buildVersion": "3cf421e129",
+      "checks": 576,
+      "failedStates": 59,
+      "resolution": "Result controls placed inside panel, inactive tools hidden and phase buttons bounded."
+    },
+    {
+      "buildVersion": "c071420e64",
+      "checks": 576,
+      "failedStates": 1,
+      "resolution": "Narrow landscape recommendation close was outside viewport; compact sidebar and scrolling fallback."
+    },
+    {
+      "buildVersion": "ed4b8be518",
+      "checks": 1040,
+      "failedStates": 14,
+      "resolution": "Async coach refit wrongly unhid grouping after round end; layout no longer owns ordinary grouping visibility."
+    },
+    {
+      "buildVersion": "0fe487ff78",
+      "checks": 104,
+      "failedStates": 25,
+      "resolution": "Small portrait and extreme-short windows also need scroll fallback; no clipping or overlays accepted."
+    },
+    {
+      "scope": "Static dependency check",
+      "failedChecks": 1,
+      "resolution": "DOM Node constant is now explicitly qualified through window; final 225 tests pass."
+    }
+  ],
+  "testHarnessCorrections": [
+    "Public history smoke waits for test hooks before evaluating a fixture.",
+    "Emote smoke checks viewport/hit access when sorting controls are intentionally absent for empty hands."
+  ],
+  "modelCatalogChanged": false,
+  "defaultId": "017",
+  "champions": [
+    "017",
+    "012"
+  ],
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "frozenTrainingChanged": false,
+  "strengthGames": 0,
+  "trainingUpdatesByThisChange": 0,
+  "sourceHashEncoding": "UTF-8 with LF line endings",
+  "sourceSHA256": {
+    ".github/workflows/pages.yml": "4fb0a7b3998b338e9d2e23623c1a8777e18f4abbd9dbfadaf9a13f14d3ca6196",
+    "web/src/coach/controller.js": "9e6ebea921fec481e267ba2de8ef3cca6c0d0b371a52a0ec78d3be972e2e4d96",
+    "web/src/hand/layout.js": "d5f0df4648d90cfe666066d21247fe1239f2f2227e36380ff484d7417804cb14",
+    "web/src/styles/cards.css": "c9fd8a5a04a6e54b63bd4c98f4292266bb40c9680ffe511d900be93f006755ec",
+    "web/src/styles/coach.css": "f9811191ee24b9916de22d7e0663e3fe8c12ea28251f84486e4f8d04dfdac2b9",
+    "web/src/styles/hand.css": "197a9be4db23cef95ed06da0001bb4e70788092f6c9908dd3702a35423147534",
+    "web/src/styles/table.css": "a3f50a0cbcc6172539835b4df1dc31d90d586a4724bc433a9befeb9b12291089",
+    "web/src/ui/table.js": "c138fb5ad9d368cfc7d2112f864a80c24ec27fedff6ff7e40a4e9b8991ea7a86",
+    "web/tests/coach_smoke.py": "3e7c26af78ac18077626172c199a32f41df2967c58e8bd2837dc3395f48d6d58",
+    "web/tests/emote_smoke.py": "ecb687f51e84c6460843ae5d65dae1b951739237b773f84e49a42c699f8d93e3",
+    "web/tests/public_history_smoke.py": "1d48e0a9ca7df2b19328194dfcb26d6c64989c701bfdd77828c09d6ad1f09ca2",
+    "web/tests/control_layout_smoke.py": "aa7b051099758ec8329c37069d148c27c47959ce7338b357750fb85d08b281b0"
+  },
+  "checks": {
+    "npmTest": {
+      "passed": 225,
+      "failed": 0
+    },
+    "pythonResearch": {
+      "passed": 17,
+      "failed": 0
+    },
+    "format": "passed",
+    "build": {
+      "passed": true,
+      "version": "93f953fad5"
+    }
+  },
+  "deployment": {
+    "status": "pending CI and Pages; existing site retained until successful deployment"
+  },
+  "limitations": [
+    "Display-state fixtures and functional browser checks are not completed strength matches.",
+    "The viewport/hit test only establishes browser visibility, not whether a human looked at a rating.",
+    "Large logs, screenshots and model binaries remain in ignored directories."
+  ],
+  "protectedDrafts": {
+    "count": 10,
+    "changedFromSavedDrafts": []
+  }
+}

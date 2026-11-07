@@ -20,6 +20,7 @@ with sync_playwright() as p:
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(URL, wait_until="networkidle")
+        page.wait_for_function("() => typeof window.hideOverlay === 'function'")
         page.evaluate("""()=>{
    hideOverlay();$('#lobby').hidden=true;resetGame();const d=makeDeck();
    G.hands=[d.slice(2),[],[],[]];G.log=[{p:0,type:'single',value:2,n:1,cards:[d[0]],lead:true},{p:1,cards:null},{p:2,type:'single',value:3,n:1,cards:[d[1]]}];

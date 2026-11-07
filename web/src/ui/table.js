@@ -177,6 +177,7 @@ function statusOf(p) {
 }
 
 export function renderControls() {
+  $('.handtools').classList.toggle('empty', !runtime.game.hands[0].length);
   const my = runtime.game.phase === 'play' && runtime.game.turn === 0;
   // leading next while the finished trick is still on show: 出牌 can already be pressed
   const soon =
@@ -197,6 +198,7 @@ export function renderControls() {
   // once your hand is empty (out, or the round is over) the play buttons have nothing left to do
   // while you are sorting, the "done sorting" button takes the play buttons' place
   $('#btns').hidden =
+    (!runtime.reviewMode && ['roundEnd', 'over'].includes(runtime.game.phase)) ||
     (!runtime.reviewMode &&
       !ret &&
       runtime.game.phase !== 'deal' &&
@@ -237,6 +239,8 @@ export function renderControls() {
   $('#sortBtn').disabled = !runtime.game.hands[0].length;
   $('#restoreHandBtn').disabled = !runtime.game.hands[0].length;
   fb.disabled = !picked || !runtime.game.hands[0].length;
+  if (!runtime.reviewMode)
+    fb.hidden = !runtime.game.hands[0].length || ['roundEnd', 'over'].includes(runtime.game.phase);
   fb.textContent = practiceGrouped()
     ? '成组'
     : picked && [...runtime.selection].every((id) => fixedNow.has(id))

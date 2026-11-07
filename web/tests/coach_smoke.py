@@ -97,6 +97,21 @@ with sync_playwright() as p:
         page.locator('#nick').fill('Coach');page.locator('[data-seat=S]').click();page.locator('#sitBtn').click()
         page.evaluate("""()=>{G.tok++;const deck=makeDeck();G.hands=[0,1,2,3].map(p=>deck.slice(p*27,p*27+27));Object.assign(G,{phase:'play',turn:0,trick:null,log:[],out:[],seen:[],paused:true,clock:null,myOrder:[],fixed:[],fresh:[]});render()}""")
         report['scoring'],ids=score_checks(page)
+        # The stacked layout must not label an off-screen loaded rating as shown assistance.
+        page.set_viewport_size({'width':600,'height':390})
+        page.wait_for_timeout(250)
+        page.locator('.handwrap').evaluate("e=>e.style.minHeight='900px'")
+        page.locator('.handwrap').evaluate("e=>e.scrollIntoView({block:'end',behavior:'instant'})")
+        page.evaluate('G.tok++;render()')
+        page.wait_for_function("() => document.querySelectorAll('#coachTop5 .coach-choice').length>0",timeout=60000)
+        assert page.locator('#coachPanel').bounding_box()['y'] + page.locator('#coachPanel').bounding_box()['height'] < 0
+        assert page.evaluate('coachAssisted()') is False, 'off-screen loaded scores counted as shown assistance'
+        page.locator('#coachPreview').scroll_into_view_if_needed()
+        page.wait_for_function('() => coachAssisted()')
+        report['offscreenRatingsNotExposed']=True
+        report['scrollExposureRecorded']=True
+        page.locator('.handwrap').evaluate("e=>e.style.minHeight=''")
+        page.evaluate('document.body.scrollTop=0;document.documentElement.scrollTop=0')
         report['layouts']=layouts(page)
         # Collapsing returns the rail to the table; reopening reserves it again.
         open_width = page.locator('#table').bounding_box()['width']

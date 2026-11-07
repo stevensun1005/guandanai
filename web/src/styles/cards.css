@@ -520,3 +520,10 @@ html.phone body:not(.practice) #myPlace {
 .panel .btns {
   justify-content: flex-end;
 }
+
+/* The result's actions belong to its panel, not floating over the still-visible table controls. */
+body:not(.practice):has(#overlay:not([hidden]) #panel[data-kind='result']) .coach-panel,
+body:not(.practice):has(#overlay:not([hidden]) #panel[data-kind='result']) .coach-suggestions,
+body:not(.practice):has(#overlay:not([hidden]) #panel[data-kind='result']) .handtools {
+  visibility: hidden;
+}

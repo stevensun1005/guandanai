@@ -3,7 +3,7 @@ import { analyze, beats, strength } from '../core/combinations.js';
 import { TYPE_NAME, BASE_NAMES, makeDeck, cardText } from '../core/cards.js';
 import { VERSION } from '../network/protocol.js';
 import { $ } from '../ui/cards.js';
-import { layoutHand } from '../hand/layout.js';
+import { layoutHand, stackedControls } from '../hand/layout.js';
 import { renderHand } from '../hand/view.js';
 import { privateActive, oracleObservation } from '../private-table/state.mjs';
 import {
@@ -38,26 +38,55 @@ function fitCoach() {
   if (fitting) return;
   fitting = true;
   requestAnimationFrame(() => {
-    const panel = $('#coachPanel');
+    const panel = $('#coachPanel'),
+      suggestions = $('#coachSuggestions');
+    const stacked = stackedControls();
+    if (stacked && suggestions.parentElement !== $('#app')) panel.after(suggestions);
+    else if (!stacked && suggestions.parentElement === $('#app')) document.body.append(suggestions);
     if (!panel.hidden) {
       layoutHand();
       const app = $('#app'),
         box = panel.getBoundingClientRect();
       let right =
         app.getBoundingClientRect().right - parseFloat(getComputedStyle(app).paddingRight);
-      for (const button of document.querySelectorAll('#btns .btn')) {
-        const b = button.getBoundingClientRect();
-        if (b.width && b.height && b.left > box.left + 140) right = Math.min(right, b.left - 8);
+      if (!stacked) {
+        for (const button of document.querySelectorAll('#btns .btn')) {
+          const b = button.getBoundingClientRect();
+          if (b.width && b.height && b.left > box.left + 140) right = Math.min(right, b.left - 8);
+        }
       }
       const width = `${Math.max(160, Math.floor(right - box.left))}px`;
       if (panel.style.width !== width) panel.style.width = width;
-      const popup = $('#coachSuggestions').getBoundingClientRect();
-      let ceiling = box.top;
-      for (const button of document.querySelectorAll('#btns .btn')) {
-        const b = button.getBoundingClientRect();
-        if (b.width && b.height && b.right > popup.left && b.left < popup.right)
-          ceiling = Math.min(ceiling, b.top);
+      const popup = suggestions.getBoundingClientRect();
+      let ceiling = box.top,
+        available = 0;
+      if (!stacked && innerWidth < 800 && !suggestions.hidden) {
+        const obstacles = [...document.querySelectorAll('#btns .btn, #mebar, #selectionBar')]
+          .map((e) => e.getBoundingClientRect())
+          .filter((r) => r.width && r.height);
+        const headers = [...document.querySelectorAll('.bar button')]
+          .map((e) => e.getBoundingClientRect())
+          .filter((r) => r.width && r.height);
+        const choices = [innerWidth - popup.width - 12, 12]
+          .map((left) => {
+            const intersects = (r) => r.right > left && r.left < left + popup.width;
+            const bottom = Math.min(box.top, ...obstacles.filter(intersects).map((r) => r.top));
+            const floor = Math.max(8, ...headers.filter(intersects).map((r) => r.bottom + 8));
+            return { left, bottom, height: bottom - floor - 8 };
+          })
+          .sort((a, b) => b.height - a.height);
+        const best = choices[0];
+        suggestions.style.left = `${best.left}px`;
+        suggestions.style.right = 'auto';
+        ceiling = best.bottom;
+        available = best.height;
+      } else {
+        suggestions.style.left = suggestions.style.right = '';
       }
+      document.documentElement.style.setProperty(
+        '--coach-popup-height',
+        `${Math.max(52, available)}px`,
+      );
       document.documentElement.style.setProperty(
         '--coach-popup-bottom',
         `${Math.max(8, innerHeight - ceiling + 8)}px`,
@@ -65,6 +94,70 @@ function fitCoach() {
     }
     fitting = false;
   });
+}
+
+// A rating below the fold, clipped inside a scroller or covered by a result is not a shown preview.
+function visibleRating(element, rect = element.getBoundingClientRect()) {
+  if (!element.isConnected || getComputedStyle(element).visibility !== 'visible') return false;
+  let left = Math.max(0, rect.left),
+    right = Math.min(innerWidth, rect.right),
+    top = Math.max(0, rect.top),
+    bottom = Math.min(innerHeight, rect.bottom);
+  for (let parent = element.parentElement; parent; parent = parent.parentElement) {
+    const style = getComputedStyle(parent),
+      bounds = parent.getBoundingClientRect();
+    if (/(auto|scroll|hidden|clip)/.test(style.overflowX)) {
+      left = Math.max(left, bounds.left);
+      right = Math.min(right, bounds.right);
+    }
+    if (/(auto|scroll|hidden|clip)/.test(style.overflowY)) {
+      top = Math.max(top, bounds.top);
+      bottom = Math.min(bottom, bounds.bottom);
+    }
+  }
+  if (left >= right || top >= bottom) return false;
+  return element.contains(document.elementFromPoint((left + right) / 2, (top + bottom) / 2));
+}
+function markDisplayedRatings() {
+  const game = runtime.game;
+  if (
+    !enabled ||
+    !available() ||
+    !sameTurn(current, game) ||
+    game.turn !== 0 ||
+    !current.values ||
+    current.error
+  )
+    return;
+  const old = exposures.get(game);
+  if (
+    old &&
+    old.tok === game.tok &&
+    old.count === game.log.length &&
+    old.epoch === (runtime.privateEpoch || 0)
+  )
+    return;
+  const preview = $('#coachPreview'),
+    match = preview.textContent.match(/合理性 (\d+%)/);
+  let shown = false;
+  if (match && preview.firstChild?.nodeType === window.Node.TEXT_NODE) {
+    const range = document.createRange(),
+      offset = match.index + '合理性 '.length;
+    range.setStart(preview.firstChild, offset);
+    range.setEnd(preview.firstChild, offset + match[1].length);
+    shown = visibleRating(preview, range.getBoundingClientRect());
+  }
+  if (!shown && !$('#coachSuggestions').hidden)
+    shown = [...document.querySelectorAll('#coachTop5 .coach-choice-heading b')].some((e) =>
+      visibleRating(e),
+    );
+  if (shown)
+    exposures.set(game, {
+      game,
+      tok: game.tok,
+      count: game.log.length,
+      epoch: runtime.privateEpoch || 0,
+    });
 }
 
 function stopWorker() {
@@ -182,6 +275,7 @@ function grade(s, action) {
 
 /** True only when a percentage preview was actually displayed before this move. */
 export function coachAssisted() {
+  markDisplayedRatings();
   return sameTurn(exposures.get(runtime.game), runtime.game);
 }
 export function rememberCoachMove(player, play, automatic) {
@@ -241,16 +335,10 @@ export function renderCoach() {
       : action
         ? `${action.label} · ${grade(s, action)}`
         : '选牌查看合理性';
-    if (preview.includes('合理性 ') && s.values && !s.error && !action?.invalid)
-      exposures.set(game, {
-        game,
-        tok: game.tok,
-        count: game.log.length,
-        epoch: runtime.privateEpoch || 0,
-      });
   }
   renderTop5(myTurn ? current : null, game);
   $('#coachPreview').textContent = preview;
+  markDisplayedRatings();
   $('#coachLast').textContent = previous
     ? `上一手 ${previous.action.label} · ${grade(previous.snapshot, previous.action)}`
     : '出牌后保留上一手评价';
@@ -333,13 +421,6 @@ function renderTop5(s, game) {
       return item;
     }),
   );
-  if (top.length && !$('#coachSuggestions').hidden)
-    exposures.set(game, {
-      game,
-      tok: game.tok,
-      count: game.log.length,
-      epoch: runtime.privateEpoch || 0,
-    });
 }
 export const coachIsEnabled = () => enabled;
 export function setCoachEnabled(value) {
@@ -382,4 +463,5 @@ export function initialize() {
   };
   new ResizeObserver(fitCoach).observe($('#coachPanel'));
   addEventListener('resize', fitCoach);
+  document.addEventListener('scroll', markDisplayedRatings, true);
 }

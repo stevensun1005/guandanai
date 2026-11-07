@@ -12,6 +12,8 @@ import { phoneRefit, pileRebuild, pileRefit } from '../ui/table-pile.js';
 import { placeLastPlay, render } from '../ui/table.js';
 
 export let sideBtns;
+export const stackedControls = () =>
+  !runtime.reviewMode && ((innerWidth < 800 && innerHeight < 600) || innerHeight < 350);
 let BTN_GAP;
 let SPOT_UP;
 let actionInset;
@@ -194,8 +196,10 @@ export function drawFixZone(g) {
     t.id = 'fixTags';
     handEl.parentNode.insertBefore(t, handEl.nextSibling);
   }
-  const on = !!g;
-  z.hidden = t.hidden = $('#fixBtn').hidden = !on;
+  const on = !!g && (runtime.reviewMode || !!runtime.game.hands[0].length);
+  z.hidden = t.hidden = !on;
+  // Ordinary button visibility belongs to renderControls, including asynchronous coach refits.
+  if (runtime.reviewMode) $('#fixBtn').hidden = !on;
   if (!on) {
     if (runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(runtime.game?.phase))
       $('#undoBtn').hidden = false;
@@ -274,7 +278,7 @@ function phoneHandGeo(n, keys) {
     ch = probe.offsetHeight;
   // (on its side the hand always takes two rows, each card the easier to read)
   const b = $('#btns'),
-    W = Wall - (b.hidden ? 0 : b.offsetWidth + 8),
+    W = Wall - (b.hidden || stackedControls() ? 0 : b.offsetWidth + 8),
     maxRows = phoneRows() ? 3 : 2,
     cap = phoneRows()
       ? Infinity
@@ -560,6 +564,8 @@ export function layoutHand() {
     });
   // a phone marks the cards of its groups with a gold edge along the top
   cards.forEach((c) => c.classList.toggle('grp', isPhone() && fixed.has(+c.dataset.id)));
+  if (!runtime.reviewMode && phoneRows() && !$('#btns').hidden)
+    g.height = Math.max(g.height, $('#btns').offsetHeight + 6);
   el.style.height = g.height + 'px';
   drawFixZone(g);
   placeLastPlay();
@@ -625,6 +631,7 @@ export function placeActionBtns() {
     }
     return;
   }
+  if (!on || isPhone()) $('#btns').classList.remove('compact-grid');
   // a phone on its side: the play buttons two by two, their right edge on 复原's and standing just over it
   if (on && isPhone()) {
     const b = $('#btns'),
@@ -637,27 +644,30 @@ export function placeActionBtns() {
       if (runtime.pileGroups.length && !b.hidden) pileRefit();
     }
   } else if (on) {
-    // the column is placed so its tribute / return button, or else its hint button, stands on the spot
     const b = $('#btns'),
       rb = $('#returnBtn'),
-      anchor = rb.hidden ? $('#hintBtn') : rb;
-    // in a short window the buttons above the spot could reach the right-hand player's plate: they get smaller
-    // (never below 48px) so the column stays clear of it
-    const s1 = $('#seat1 .whorow').getBoundingClientRect(),
+      anchor = rb.hidden ? $('#hintBtn') : rb,
+      tools = $('.handtools').getBoundingClientRect(),
       cx = h.right - actionInset(h.width),
+      buttons = [...b.children].filter((e) => !e.hidden),
       gap = 8;
-    const above = [...b.children]
-      .slice(0, [...b.children].indexOf(anchor))
-      .filter((e) => !e.hidden).length;
-    let d = 68;
-    if (s1.left < cx + d / 2 && s1.right > cx - d / 2) {
-      const room = h.bottom - SPOT_UP - (s1.bottom + gap);
-      d = Math.max(48, Math.min(68, Math.floor((room - above * gap) / (above + 0.5))));
+    let floor = 8;
+    for (const e of document.querySelectorAll('.bar button')) {
+      const r = e.getBoundingClientRect();
+      if (r.width && r.height && r.left < cx + 40 && r.right > cx - 40)
+        floor = Math.max(floor, r.bottom + 8);
     }
+    const ceiling = Math.min(innerHeight - 8, tools.top - 8),
+      space = Math.max(0, ceiling - floor);
+    b.classList.toggle('compact-grid', space < buttons.length * 48 + (buttons.length - 1) * gap);
+    const rows = b.classList.contains('compact-grid')
+        ? Math.ceil(buttons.length / 2)
+        : buttons.length,
+      d = Math.max(48, Math.min(68, Math.floor((space - (rows - 1) * gap) / Math.max(1, rows))));
     if (b.style.getPropertyValue('--d') !== d + 'px') b.style.setProperty('--d', d + 'px');
     b.style.left = h.width - actionInset(h.width) - (b.offsetWidth || runtime.colW) / 2 + 'px';
-    const top = h.height - SPOT_UP - anchor.offsetTop - anchor.offsetHeight / 2 + 'px';
-    // the column moved (the hand got shorter): the table's cards make way for it again
+    const desired = h.bottom - SPOT_UP - anchor.offsetTop - anchor.offsetHeight / 2,
+      top = Math.max(floor, Math.min(desired, ceiling - b.offsetHeight)) - h.top + 'px';
     if (b.style.top !== top) {
       b.style.top = top;
       if (runtime.pileGroups.length && !b.hidden) pileRefit();
@@ -669,26 +679,44 @@ export function placeActionBtns() {
     b.style.bottom = phoneRows() ? $('.handtools').offsetHeight + 6 + 'px' : '';
     if (!phoneRows()) b.style.left = b.style.top = '';
   }
+  $('#app').style.setProperty(
+    '--hand-actions-space',
+    `${Math.ceil(on && !isPhone() ? actionInset(h.width) + ($('#btns').offsetWidth || runtime.colW) / 2 + 12 : 0)}px`,
+  );
   for (const id of ['#deckBtn', '#readyBtn', '#nextBtn']) {
     const e = $(id);
     if (!e) continue;
+    if (id === '#nextBtn') {
+      e.classList.remove('atcol');
+      e.style.left = e.style.top = '';
+      continue;
+    }
     e.classList.toggle('atcol', on);
     if (!on) {
       e.style.left = e.style.top = '';
       continue;
     }
     e.style.left = h.right - actionInset(h.width) + 'px';
-    // while sorting you may also owe a return: 还贡 then takes the spot and 理牌结束 stands just above it
-    e.style.top =
+    const radius = e.offsetHeight / 2;
+    let floor = radius + 8;
+    for (const header of document.querySelectorAll('.bar button')) {
+      const r = header.getBoundingClientRect(),
+        cx = h.right - actionInset(h.width);
+      if (r.width && r.height && r.left < cx + radius && r.right > cx - radius)
+        floor = Math.max(floor, r.bottom + radius + 8);
+    }
+    const desired =
       h.bottom -
       SPOT_UP -
-      (id === '#readyBtn' && !$('#returnBtn').hidden && !$('#btns').hidden ? 120 : 0) +
+      (id === '#readyBtn' && !$('#returnBtn').hidden && !$('#btns').hidden ? 120 : 0);
+    e.style.top =
+      Math.max(floor, Math.min(desired, $('.handtools').getBoundingClientRect().top - radius - 8)) +
       'px';
   }
 }
 
 export function initialize() {
-  sideBtns = () => matchMedia('(min-width:561px)').matches;
+  sideBtns = () => matchMedia('(min-width:561px)').matches && !stackedControls();
   BTN_GAP = 18;
   runtime.colW = 90;
   SPOT_UP = 226;

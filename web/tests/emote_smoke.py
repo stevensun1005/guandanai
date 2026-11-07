@@ -96,9 +96,15 @@ with sync_playwright() as p:
     for page in [host, guest]:
         if page is guest:
             page.locator('#emoteBtn').click()
-        assert page.evaluate("""()=>{const e=document.querySelector('.handtools #emoteBtn').getBoundingClientRect(),
-            s=document.querySelector('#sortBtn').getBoundingClientRect();
-            return e.left>=s.right-1&&Math.abs((e.top+e.bottom)/2-(s.top+s.bottom)/2)<8&&e.right<=innerWidth}"""), 'right of 理牌'
+        if page.locator('#sortBtn').is_visible():
+            assert page.evaluate("""()=>{const e=document.querySelector('.handtools #emoteBtn').getBoundingClientRect(),
+                s=document.querySelector('#sortBtn').getBoundingClientRect();
+                return e.left>=s.right-1&&Math.abs((e.top+e.bottom)/2-(s.top+s.bottom)/2)<8&&e.right<=innerWidth}"""), 'right of 理牌'
+        else:
+            # Empty hands hide sorting controls; the social action remains visible and clickable.
+            assert page.evaluate("""()=>{const e=document.querySelector('#emoteBtn'),b=e.getBoundingClientRect();
+                return b.left>=0&&b.right<=innerWidth&&b.top>=0&&b.bottom<=innerHeight&&
+                  e.contains(document.elementFromPoint(b.x+b.width/2,b.y+b.height/2))}""")
         assert page.evaluate("""()=>{const b=document.querySelector('#emoteBtn').getBoundingClientRect(),
             p=document.querySelector('#emotePanel').getBoundingClientRect();
             return p.bottom<=b.top+1&&p.left>=0&&p.right<=innerWidth&&p.top>=0}"""), 'panel above the button'
