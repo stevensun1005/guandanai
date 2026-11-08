@@ -94,7 +94,7 @@ def summarize(protocol,run):
         result[task['id']]={'roots':len(task['seeds']),'eligiblePairs':len(data),'ineligibleNoReplacement':ineligible,'baselineWLD':baseline_wld,'deviationWLD':altered_wld,'displayLayerWeightedSlope':fit,'displayLayerByOwnHandStage':stages,'predictedGapBins':bins}
         check()
     if rows:raise ValueError('Unregistered root rows')
-    return {'schema':1,'protocolSHA256':digest,'completedRoots':10000,'eligiblePairs':eligible_total,'completedRounds':completed_rounds,'tasks':result,'optimizerUpdates':0,'strengthGames':0,'scope':'Final single-round baseline-minus-one-forced-action delta under fixed raw continuation; importance weights target uniform focal decision/rank pairs within each root. Opponents separate. No neural training, calibrated UI, model strength rating, match training or promotion. Theil–Sen is unweighted descriptive on oversampled cases; bootstrap is conditional on this frozen teacher.'}
+    return {'schema':1,'protocolSHA256':digest,'completedRoots':sum(len(t['seeds']) for t in plan['tasks']),'eligiblePairs':eligible_total,'completedRounds':completed_rounds,'tasks':result,'optimizerUpdates':0,'strengthGames':0,'scope':'Final single-round baseline-minus-one-forced-action delta under fixed raw continuation; importance weights target uniform focal decision/rank pairs within each root. Opponents separate. No neural training, calibrated UI, model strength rating, match training or promotion. Theil–Sen is unweighted descriptive on oversampled cases; bootstrap is conditional on this frozen teacher.'}
 
 
 if __name__=='__main__':

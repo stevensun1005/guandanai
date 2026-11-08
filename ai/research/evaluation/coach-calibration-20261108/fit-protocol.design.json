@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "id": "coach-calibration-fit-20261108",
+  "purpose": "Roadmap1.1 offline weighted monotone final-round delta calibration, SELF LABELS ONLY. Deterministic descriptive fitting, no neural/policy training, Clint fitting, calibrated UI or promotion.",
+  "displayName": "danMCai \u00b7 \u81ea\u535a\u5f08\u7ec8\u5c40\u5dee\u79bb\u7ebf\u4fdd\u5e8f\u62df\u5408",
+  "budgetHours": 0.25,
+  "reserveGiB": 4,
+  "resumeGiB": 5,
+  "dataRun": "D:/vibecoding/guandan/ai/danMCai/runs/research-through-20261111/experiments/coach-deviation-20261108",
+  "dataProtocolSHA256": "d99f43c35196aab10ef837ae3641d9b21973f5f2132c2387fbd3b7c14345f75f",
+  "dataFiles": {
+    "worker-0.jsonl": "c91786bb4e47e4be66a580018f777b113048aac3dfd57899f724b904a0278327",
+    "worker-1.jsonl": "5d47cf7d4365c466fbea75d4d08edb259cc76089ecf2d96dbd2683f49dc5a695",
+    "worker-2.jsonl": "5cbbd601c56cbcfc8e82378db9cc0204f2b7db9e071715a3a2e68cf1eb08e3cb",
+    "worker-3.jsonl": "9aa2ac2a1b10b89ebabbb42f7b445eda36d993658146744182183b8f8b13c399"
+  },
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "trainingTask": "self",
+  "expectedSelfRoots": 2500,
+  "expectedDisplayCases": 1906,
+  "filter": "Only self rows,one sampled rank2..5 alternative,predictedGap[.05,1]. Other task rows skipped before accessing outcome/choice/weight. Exact existing importance weights.",
+  "maps": "Three own-hand stages27..20/19..10/9..1. Weighted least-squares monotone PAVA on predictedQgap -> realized final signed upgrade difference. Pool duplicate x andadjacent equal/decreasing means; preserve negative means; left-constant steps, empiricalstage support only. Minimum50 cases; unsupported stage/query returns unavailable. No fallback,tuning,clipping or extrapolation.",
+  "artifact": "calibration.offline.json <=50000bytes, explicitnot-for-UI scope,bind teacher/source/dataSHA. Deterministic/no fit RNG, no gradient/optimizer/checkpoint.",
+  "evaluation": "Fit data have already been examined for beta; all fit statistics are development-only, never independent acceptance. Future4000 fresh validation roots andindependent sampling/bootstrap seeds are reserved inseed-audit. Freeze this generated mapSHA andfullholdout protocol before firstnewgame.",
+  "stop": "Once registered15minute maximum,realrun/campaignSTOP andearlierdeadline checked beforedata andbetweenwork,memorypause4/resume5. Existingfit/status rejectsrepeat; noextension or mapselection on future validation."
+}

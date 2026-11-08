@@ -37,7 +37,9 @@ export async function evaluateRegistered(run) {
       (n, w) => n + (w.completedRounds ?? w.completedPairs * 2),
       0,
     );
-    state.strengthGames = ['decision-trace', 'deviation-pairs'].includes(plan.evaluationKind)
+    state.strengthGames = ['decision-trace', 'deviation-pairs', 'calibration-validation'].includes(
+      plan.evaluationKind,
+    )
       ? 0
       : state.completedRounds;
     state.updatedAt = new Date().toISOString();
@@ -73,7 +75,7 @@ export async function evaluateRegistered(run) {
               plan.evaluationSource,
               plan.evaluationKind === 'decision-trace'
                 ? 'ai/danMCai/evaluation/evaluate-decision-trace.mjs'
-                : plan.evaluationKind === 'deviation-pairs'
+                : ['deviation-pairs', 'calibration-validation'].includes(plan.evaluationKind)
                   ? 'ai/danMCai/evaluation/evaluate-deviation-pairs.mjs'
                   : 'ai/danMCai/evaluation/evaluate-round-pairs.mjs',
             ),
@@ -104,9 +106,11 @@ export async function evaluateRegistered(run) {
           plan.evaluationSource,
           plan.evaluationKind === 'decision-trace'
             ? 'ai/research/tools/summarize-decision-trace.py'
-            : plan.evaluationKind === 'deviation-pairs'
-              ? 'ai/research/tools/summarize-deviation-pairs.py'
-              : 'ai/danMCai/evaluation/summarize-round-pairs.py',
+            : plan.evaluationKind === 'calibration-validation'
+              ? 'ai/research/tools/fit-coach-calibration.py'
+              : plan.evaluationKind === 'deviation-pairs'
+                ? 'ai/research/tools/summarize-deviation-pairs.py'
+                : 'ai/danMCai/evaluation/summarize-round-pairs.py',
         ),
         '--protocol',
         protocol,

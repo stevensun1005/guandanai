@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "nodeTests": {
+    "passed": 274,
+    "failed": 0
+  },
+  "researchPython": {
+    "passed": 40
+  },
+  "sharedPython": {
+    "passed": 3,
+    "skipped": 1
+  },
+  "formatCheck": "pass",
+  "build": "5d55b91a83",
+  "focusedBoundaries": [
+    "PAVA duplicate and negative outcomes",
+    "non-self labels skipped before accessing targets",
+    "paired bootstrap covariance",
+    "registered STOP prevents data access and map creation"
+  ],
+  "calibrationState": "not fitted; new validation not started",
+  "optimizerUpdates": 0,
+  "webDefault": "017/v000855042",
+  "danMCaiChampions": [
+    "017",
+    "012"
+  ]
+}

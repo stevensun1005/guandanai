@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "passed": true,
+  "completedRoots": 10000,
+  "eligiblePairs": 10000,
+  "completedRounds": 20000,
+  "allFiveProcessesExited": true,
+  "allLocksAndPendingAbsent": true,
+  "sourceSHA": "3f2c7fcd6f93e3cf6cf781adfa0ffd47a9ae04f4",
+  "protocolSHA256": "d99f43c35196aab10ef837ae3641d9b21973f5f2132c2387fbd3b7c14345f75f",
+  "frozenExecutionFilesMatched": 154,
+  "modelsMatched": 2,
+  "allRowsSeedAllocationsAndFinalSignedDeltasValidated": true,
+  "allSamplingProbabilitiesAndWeightsRecomputed": true,
+  "commonPrefixAndOneInterventionGuardedPairs": 10000,
+  "fullBootstrapAndSummaryReproducedExactly": true,
+  "workerFiles": {
+    "worker-0.jsonl": {
+      "bytes": 2405139,
+      "sha256": "c91786bb4e47e4be66a580018f777b113048aac3dfd57899f724b904a0278327"
+    },
+    "worker-1.jsonl": {
+      "bytes": 2405239,
+      "sha256": "5d47cf7d4365c466fbea75d4d08edb259cc76089ecf2d96dbd2683f49dc5a695"
+    },
+    "worker-2.jsonl": {
+      "bytes": 2404006,
+      "sha256": "5cbbd601c56cbcfc8e82378db9cc0204f2b7db9e071715a3a2e68cf1eb08e3cb"
+    },
+    "worker-3.jsonl": {
+      "bytes": 2405436,
+      "sha256": "9aa2ac2a1b10b89ebabbb42f7b445eda36d993658146744182183b8f8b13c399"
+    }
+  },
+  "minimumAvailableGiB": 11.758792877197266,
+  "stoppedAtUTC": "2026-11-08T04:10:16.100Z",
+  "optimizerUpdates": 0,
+  "scope": "One-action final single-round diagnostic, no calibrated UI or model training/promotion."
+}

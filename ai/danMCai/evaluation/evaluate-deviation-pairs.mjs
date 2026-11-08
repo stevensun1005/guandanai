@@ -109,7 +109,10 @@ export async function runDeviationPairs({ protocol, run, shard = 0, shards = 4 }
     completedPairs: 0,
     completedRounds: 0,
     ineligibleRoots: 0,
-    plannedRoots: 2500,
+    plannedRoots: plan.tasks.reduce(
+      (n, t) => n + Math.max(0, Math.ceil((t.seeds.length - shard) / shards)),
+      0,
+    ),
     optimizerUpdates: 0,
     minimumAvailableGiB: freemem() / 1024 ** 3,
   };
