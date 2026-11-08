@@ -1,0 +1,61 @@
+{
+  "schema": "danmcai-human-endgame-optimality-supplement-v1",
+  "status": "Descriptive additions computed after the preregistered summary; not preregistered.",
+  "pairedCritical": {
+    "scope": "Same critical decisions as summary.decisionAudit.critical (student restricted to <= 32 cards).",
+    "champion": {
+      "humanOk_modelOk": 74,
+      "humanOk_modelLost": 24,
+      "humanLost_modelOk": 10,
+      "humanLost_modelLost": 7
+    },
+    "student": {
+      "humanOk_modelOk": 71,
+      "humanOk_modelLost": 25,
+      "humanLost_modelOk": 8,
+      "humanLost_modelLost": 8
+    },
+    "exactSignTestTwoSided": {
+      "champion": 0.024306510109454393,
+      "student": 0.004551384132355452
+    },
+    "note": "Decisions within a round are not independent; the sign test treats them as independent and overstates certainty."
+  },
+  "regretSizes": {
+    "human": {
+      "1": 13,
+      "2": 4
+    },
+    "champion": {
+      "2": 12,
+      "1": 16,
+      "4": 2,
+      "3": 1
+    }
+  },
+  "agreementWithHuman": {
+    "champion": 45,
+    "student": 50,
+    "of": 115
+  },
+  "takeoverBudgetExceeded": {
+    "champion/seat": 13,
+    "champion/team": 9,
+    "student/seat": 17,
+    "student/team": 10
+  },
+  "championSelfPlaySanity": {
+    "purpose": "Rule out an input bug on replayed human positions: same modelChoice/createSolver path on champion-vs-champion single rounds.",
+    "seeds": "First 30 seeds of /Users/stevensun/guandan-runtime.noindex/eval-sanity/dev-seeds.json (endgame development block, not human data, not the section-57 held-out deals)",
+    "rounds": 30,
+    "criticalDecisionsAtMost32Cards": 124,
+    "optimal": 98,
+    "optimalRate": 0.7903225806451613,
+    "meanRegret": 0.2903225806451613,
+    "budget": {
+      "maxNodes": 2000000,
+      "maxMs": 10000
+    },
+    "scriptSHA256": "faaac5d32a3dc044a8c06205a717271754df5f9a594e3868544dccf02bd0f3c5"
+  }
+}

@@ -1,0 +1,887 @@
+{
+  "rounds": 26,
+  "tails": [
+    {
+      "round": "5f687c12:1",
+      "actions": 65,
+      "tailActions": 5,
+      "tailStartCards": 38,
+      "tailStop": "card-cap"
+    },
+    {
+      "round": "5f687c12:7",
+      "actions": 94,
+      "tailActions": 26,
+      "tailStartCards": 38,
+      "tailStop": "card-cap"
+    },
+    {
+      "round": "5f687c12:13",
+      "actions": 67,
+      "tailActions": 8,
+      "tailStartCards": 36,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:6",
+      "actions": 66,
+      "tailActions": 20,
+      "tailStartCards": 32,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:12",
+      "actions": 96,
+      "tailActions": 28,
+      "tailStartCards": 34,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:2",
+      "actions": 101,
+      "tailActions": 29,
+      "tailStartCards": 33,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:8",
+      "actions": 68,
+      "tailActions": 8,
+      "tailStartCards": 30,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:1",
+      "actions": 93,
+      "tailActions": 23,
+      "tailStartCards": 23,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:7",
+      "actions": 80,
+      "tailActions": 15,
+      "tailStartCards": 38,
+      "tailStop": "card-cap"
+    },
+    {
+      "round": "ac9ece36:13",
+      "actions": 85,
+      "tailActions": 12,
+      "tailStartCards": 29,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:3",
+      "actions": 92,
+      "tailActions": 11,
+      "tailStartCards": 37,
+      "tailStop": "card-cap"
+    },
+    {
+      "round": "5f687c12:9",
+      "actions": 87,
+      "tailActions": 9,
+      "tailStartCards": 27,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:2",
+      "actions": 87,
+      "tailActions": 12,
+      "tailStartCards": 28,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:8",
+      "actions": 90,
+      "tailActions": 20,
+      "tailStartCards": 31,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:4",
+      "actions": 86,
+      "tailActions": 9,
+      "tailStartCards": 28,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:10",
+      "actions": 97,
+      "tailActions": 34,
+      "tailStartCards": 22,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:3",
+      "actions": 101,
+      "tailActions": 25,
+      "tailStartCards": 25,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:9",
+      "actions": 65,
+      "tailActions": 12,
+      "tailStartCards": 29,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:5",
+      "actions": 77,
+      "tailActions": 16,
+      "tailStartCards": 29,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:11",
+      "actions": 77,
+      "tailActions": 18,
+      "tailStartCards": 29,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:4",
+      "actions": 76,
+      "tailActions": 7,
+      "tailStartCards": 24,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:10",
+      "actions": 83,
+      "tailActions": 13,
+      "tailStartCards": 25,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:6",
+      "actions": 89,
+      "tailActions": 33,
+      "tailStartCards": 30,
+      "tailStop": "budget"
+    },
+    {
+      "round": "5f687c12:12",
+      "actions": 101,
+      "tailActions": 38,
+      "tailStartCards": 26,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:5",
+      "actions": 95,
+      "tailActions": 29,
+      "tailStartCards": 29,
+      "tailStop": "budget"
+    },
+    {
+      "round": "ac9ece36:11",
+      "actions": 92,
+      "tailActions": 26,
+      "tailStartCards": 27,
+      "tailStop": "budget"
+    }
+  ],
+  "humanDecisions": 486,
+  "humanOutsideCandidates": 0,
+  "unscored": 10,
+  "decisionAudit": {
+    "choices": {
+      "human": {
+        "decisions": 241,
+        "rounds": 26,
+        "optimal": 223,
+        "optimalRate": 0.9253112033195021,
+        "ci95": [
+          0.8947368421052632,
+          0.9547511312217195
+        ],
+        "meanRegret": 0.0912863070539419,
+        "totalRegret": 22
+      },
+      "champion": {
+        "decisions": 240,
+        "rounds": 26,
+        "optimal": 206,
+        "optimalRate": 0.8583333333333333,
+        "ci95": [
+          0.8125,
+          0.9067796610169492
+        ],
+        "meanRegret": 0.2375,
+        "totalRegret": 57
+      },
+      "student": {
+        "decisions": 230,
+        "rounds": 25,
+        "optimal": 196,
+        "optimalRate": 0.8521739130434782,
+        "ci95": [
+          0.8064516129032258,
+          0.8976744186046511
+        ],
+        "meanRegret": 0.2391304347826087,
+        "totalRegret": 55
+      }
+    },
+    "critical": {
+      "human": {
+        "decisions": 115,
+        "rounds": 24,
+        "optimal": 98,
+        "optimalRate": 0.8521739130434782,
+        "ci95": [
+          0.7863247863247863,
+          0.9137931034482759
+        ],
+        "meanRegret": 0.1826086956521739,
+        "totalRegret": 21
+      },
+      "champion": {
+        "decisions": 115,
+        "rounds": 24,
+        "optimal": 84,
+        "optimalRate": 0.7304347826086957,
+        "ci95": [
+          0.6548672566371682,
+          0.8161764705882353
+        ],
+        "meanRegret": 0.4434782608695652,
+        "totalRegret": 51
+      },
+      "student": {
+        "decisions": 112,
+        "rounds": 24,
+        "optimal": 79,
+        "optimalRate": 0.7053571428571429,
+        "ci95": [
+          0.6306306306306306,
+          0.7831325301204819
+        ],
+        "meanRegret": 0.48214285714285715,
+        "totalRegret": 54
+      }
+    },
+    "criticalUnassisted": {
+      "human": {
+        "decisions": 79,
+        "rounds": 22,
+        "optimal": 67,
+        "optimalRate": 0.8481012658227848,
+        "ci95": [
+          0.7722772277227723,
+          0.927536231884058
+        ],
+        "meanRegret": 0.20253164556962025,
+        "totalRegret": 16
+      },
+      "champion": {
+        "decisions": 79,
+        "rounds": 22,
+        "optimal": 59,
+        "optimalRate": 0.7468354430379747,
+        "ci95": [
+          0.6774193548387096,
+          0.8309859154929577
+        ],
+        "meanRegret": 0.3924050632911392,
+        "totalRegret": 31
+      },
+      "student": {
+        "decisions": 76,
+        "rounds": 22,
+        "optimal": 56,
+        "optimalRate": 0.7368421052631579,
+        "ci95": [
+          0.6617647058823529,
+          0.8142857142857143
+        ],
+        "meanRegret": 0.40789473684210525,
+        "totalRegret": 31
+      }
+    },
+    "byCards": {
+      "1-8": {
+        "human": {
+          "decisions": 9,
+          "rounds": 6,
+          "optimal": 9,
+          "optimalRate": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "meanRegret": 0,
+          "totalRegret": 0
+        },
+        "champion": {
+          "decisions": 9,
+          "rounds": 6,
+          "optimal": 7,
+          "optimalRate": 0.7777777777777778,
+          "ci95": [
+            0.3333333333333333,
+            1
+          ],
+          "meanRegret": 0.2222222222222222,
+          "totalRegret": 2
+        },
+        "student": {
+          "decisions": 9,
+          "rounds": 6,
+          "optimal": 7,
+          "optimalRate": 0.7777777777777778,
+          "ci95": [
+            0.3333333333333333,
+            1
+          ],
+          "meanRegret": 0.2222222222222222,
+          "totalRegret": 2
+        }
+      },
+      "9-16": {
+        "human": {
+          "decisions": 27,
+          "rounds": 11,
+          "optimal": 24,
+          "optimalRate": 0.8888888888888888,
+          "ci95": [
+            0.7692307692307693,
+            1
+          ],
+          "meanRegret": 0.1111111111111111,
+          "totalRegret": 3
+        },
+        "champion": {
+          "decisions": 27,
+          "rounds": 11,
+          "optimal": 23,
+          "optimalRate": 0.8518518518518519,
+          "ci95": [
+            0.75,
+            0.9583333333333334
+          ],
+          "meanRegret": 0.2222222222222222,
+          "totalRegret": 6
+        },
+        "student": {
+          "decisions": 27,
+          "rounds": 11,
+          "optimal": 22,
+          "optimalRate": 0.8148148148148148,
+          "ci95": [
+            0.7083333333333334,
+            0.9230769230769231
+          ],
+          "meanRegret": 0.25925925925925924,
+          "totalRegret": 7
+        }
+      },
+      "17-24": {
+        "human": {
+          "decisions": 39,
+          "rounds": 16,
+          "optimal": 33,
+          "optimalRate": 0.8461538461538461,
+          "ci95": [
+            0.7368421052631579,
+            0.9487179487179487
+          ],
+          "meanRegret": 0.23076923076923078,
+          "totalRegret": 9
+        },
+        "champion": {
+          "decisions": 39,
+          "rounds": 16,
+          "optimal": 25,
+          "optimalRate": 0.6410256410256411,
+          "ci95": [
+            0.41935483870967744,
+            0.8048780487804879
+          ],
+          "meanRegret": 0.6410256410256411,
+          "totalRegret": 25
+        },
+        "student": {
+          "decisions": 39,
+          "rounds": 16,
+          "optimal": 24,
+          "optimalRate": 0.6153846153846154,
+          "ci95": [
+            0.4146341463414634,
+            0.775
+          ],
+          "meanRegret": 0.6923076923076923,
+          "totalRegret": 27
+        }
+      },
+      "25-32": {
+        "human": {
+          "decisions": 37,
+          "rounds": 17,
+          "optimal": 30,
+          "optimalRate": 0.8108108108108109,
+          "ci95": [
+            0.7209302325581395,
+            0.90625
+          ],
+          "meanRegret": 0.21621621621621623,
+          "totalRegret": 8
+        },
+        "champion": {
+          "decisions": 37,
+          "rounds": 17,
+          "optimal": 27,
+          "optimalRate": 0.7297297297297297,
+          "ci95": [
+            0.6176470588235294,
+            0.8648648648648649
+          ],
+          "meanRegret": 0.4594594594594595,
+          "totalRegret": 17
+        },
+        "student": {
+          "decisions": 37,
+          "rounds": 17,
+          "optimal": 26,
+          "optimalRate": 0.7027027027027027,
+          "ci95": [
+            0.5789473684210527,
+            0.8787878787878788
+          ],
+          "meanRegret": 0.4864864864864865,
+          "totalRegret": 18
+        }
+      },
+      "33-40": {
+        "human": {
+          "decisions": 3,
+          "rounds": 3,
+          "optimal": 2,
+          "optimalRate": 0.6666666666666666,
+          "ci95": [
+            0,
+            1
+          ],
+          "meanRegret": 0.3333333333333333,
+          "totalRegret": 1
+        },
+        "champion": {
+          "decisions": 3,
+          "rounds": 3,
+          "optimal": 2,
+          "optimalRate": 0.6666666666666666,
+          "ci95": [
+            0,
+            1
+          ],
+          "meanRegret": 0.3333333333333333,
+          "totalRegret": 1
+        },
+        "student": {
+          "decisions": 0,
+          "rounds": 0,
+          "optimal": 0,
+          "optimalRate": null,
+          "ci95": null,
+          "meanRegret": null,
+          "totalRegret": 0
+        }
+      }
+    },
+    "afterHumanError": {
+      "note": "Critical decisions where the human move lost value: did the model pick a value-keeping move there?",
+      "champion": {
+        "decisions": 17,
+        "rounds": 12,
+        "optimal": 10,
+        "optimalRate": 0.5882352941176471,
+        "ci95": [
+          0.375,
+          0.8571428571428571
+        ],
+        "meanRegret": 0.47058823529411764,
+        "totalRegret": 8
+      },
+      "student": {
+        "decisions": 16,
+        "rounds": 12,
+        "optimal": 8,
+        "optimalRate": 0.5,
+        "ci95": [
+          0.29411764705882354,
+          0.7333333333333333
+        ],
+        "meanRegret": 0.625,
+        "totalRegret": 10
+      }
+    }
+  },
+  "takeover": {
+    "all": {
+      "champion/seat": {
+        "runs": 76,
+        "rounds": 25,
+        "reachedExact": 58,
+        "reachedExactRate": 0.7631578947368421,
+        "ci95": [
+          0.6567164179104478,
+          0.8536585365853658
+        ],
+        "meanShortfall": 0.3815789473684211,
+        "budgetExceeded": 13,
+        "outcomes": {
+          "-3->-3->-3": 16,
+          "3->3->3": 10,
+          "-1->-1->-3": 2,
+          "-1->-1->-1": 6,
+          "-1->-2->-3": 1,
+          "1->2->1": 1,
+          "2->2->2": 3,
+          "-2->-2->-3": 2,
+          "-1->-1->-2": 2,
+          "1->1->1": 6,
+          "2->3->2": 1,
+          "-2->-3->-3": 2,
+          "2->3->3": 1,
+          "3->2->1": 1,
+          "-3->-2->-3": 2,
+          "3->2->2": 2,
+          "-2->-1->-2": 2,
+          "2->1->1": 4,
+          "-2->-1->-1": 3,
+          "-3->-2->-2": 2,
+          "-2->-2->-2": 1,
+          "3->3->2": 1,
+          "-1->1->-2": 1,
+          "1->-1->-1": 2,
+          "-1->1->-3": 1,
+          "3->3->-2": 1
+        }
+      },
+      "champion/team": {
+        "runs": 43,
+        "rounds": 23,
+        "reachedExact": 31,
+        "reachedExactRate": 0.7209302325581395,
+        "ci95": [
+          0.6,
+          0.8372093023255814
+        ],
+        "meanShortfall": 0.4883720930232558,
+        "budgetExceeded": 9,
+        "outcomes": {
+          "-3->-3->-3": 8,
+          "3->3->3": 7,
+          "-1->-1->-3": 1,
+          "2->2->2": 2,
+          "-2->-2->-3": 1,
+          "-1->-1->-2": 3,
+          "1->1->1": 4,
+          "2->3->2": 1,
+          "-2->-3->-3": 1,
+          "3->2->2": 2,
+          "-3->-2->-3": 1,
+          "-2->-1->-2": 2,
+          "2->1->1": 2,
+          "-3->-2->-2": 1,
+          "-2->-1->-1": 1,
+          "-2->-2->-2": 1,
+          "3->3->2": 1,
+          "-1->1->-3": 1,
+          "1->-1->-1": 1,
+          "3->3->-3": 1,
+          "-1->-1->-1": 1
+        }
+      },
+      "student/seat": {
+        "runs": 72,
+        "rounds": 22,
+        "reachedExact": 59,
+        "reachedExactRate": 0.8194444444444444,
+        "ci95": [
+          0.7105263157894737,
+          0.9142857142857143
+        ],
+        "meanShortfall": 0.2638888888888889,
+        "budgetExceeded": 17,
+        "outcomes": {
+          "-3->-3->-3": 16,
+          "3->3->3": 10,
+          "-1->-1->-3": 2,
+          "-1->-1->-1": 6,
+          "2->2->1": 1,
+          "-2->-2->-3": 2,
+          "2->2->2": 2,
+          "-1->-1->-2": 2,
+          "1->1->1": 6,
+          "2->3->2": 1,
+          "-2->-3->-3": 2,
+          "2->3->3": 1,
+          "-3->-2->-3": 2,
+          "3->2->2": 2,
+          "-2->-1->-1": 4,
+          "2->1->1": 4,
+          "-3->-2->-2": 2,
+          "-2->-2->-2": 1,
+          "-2->-1->-2": 1,
+          "3->3->1": 1,
+          "-1->1->1": 1,
+          "1->-1->-1": 2,
+          "-1->1->-3": 1
+        }
+      },
+      "student/team": {
+        "runs": 42,
+        "rounds": 22,
+        "reachedExact": 30,
+        "reachedExactRate": 0.7142857142857143,
+        "ci95": [
+          0.5714285714285714,
+          0.8372093023255814
+        ],
+        "meanShortfall": 0.38095238095238093,
+        "budgetExceeded": 10,
+        "outcomes": {
+          "-3->-3->-3": 8,
+          "3->3->3": 7,
+          "-1->-1->-3": 1,
+          "2->2->1": 1,
+          "-2->-2->-3": 1,
+          "-1->-1->-2": 3,
+          "1->1->1": 4,
+          "2->3->2": 1,
+          "-2->-3->-3": 1,
+          "3->2->2": 2,
+          "-3->-2->-3": 2,
+          "-2->-1->-1": 2,
+          "2->1->1": 2,
+          "-2->-2->-2": 1,
+          "2->2->2": 1,
+          "-2->-1->-2": 1,
+          "3->3->1": 1,
+          "-1->1->-2": 1,
+          "1->-1->-1": 1,
+          "-1->-1->-1": 1
+        }
+      }
+    },
+    "teamFellShort": {
+      "champion/seat": {
+        "runs": 14,
+        "rounds": 8,
+        "reachedExact": 6,
+        "reachedExactRate": 0.42857142857142855,
+        "ci95": [
+          0.14285714285714285,
+          0.7333333333333333
+        ],
+        "meanShortfall": 0.9285714285714286,
+        "budgetExceeded": 5,
+        "outcomes": {
+          "1->2->1": 1,
+          "2->3->2": 1,
+          "2->3->3": 1,
+          "-3->-2->-3": 2,
+          "-2->-1->-2": 2,
+          "-2->-1->-1": 3,
+          "-3->-2->-2": 2,
+          "-1->1->-2": 1,
+          "-1->1->-3": 1
+        }
+      },
+      "champion/team": {
+        "runs": 7,
+        "rounds": 7,
+        "reachedExact": 2,
+        "reachedExactRate": 0.2857142857142857,
+        "ci95": [
+          0,
+          0.5714285714285714
+        ],
+        "meanShortfall": 1.1428571428571428,
+        "budgetExceeded": 3,
+        "outcomes": {
+          "2->3->2": 1,
+          "-3->-2->-3": 1,
+          "-2->-1->-2": 2,
+          "-3->-2->-2": 1,
+          "-2->-1->-1": 1,
+          "-1->1->-3": 1
+        }
+      },
+      "student/seat": {
+        "runs": 13,
+        "rounds": 7,
+        "reachedExact": 8,
+        "reachedExactRate": 0.6153846153846154,
+        "ci95": [
+          0.2727272727272727,
+          0.8571428571428571
+        ],
+        "meanShortfall": 0.6153846153846154,
+        "budgetExceeded": 6,
+        "outcomes": {
+          "2->3->2": 1,
+          "2->3->3": 1,
+          "-3->-2->-3": 2,
+          "-2->-1->-1": 4,
+          "-3->-2->-2": 2,
+          "-2->-1->-2": 1,
+          "-1->1->1": 1,
+          "-1->1->-3": 1
+        }
+      },
+      "student/team": {
+        "runs": 7,
+        "rounds": 7,
+        "reachedExact": 2,
+        "reachedExactRate": 0.2857142857142857,
+        "ci95": [
+          0,
+          0.5714285714285714
+        ],
+        "meanShortfall": 1,
+        "budgetExceeded": 3,
+        "outcomes": {
+          "2->3->2": 1,
+          "-3->-2->-3": 2,
+          "-2->-1->-1": 2,
+          "-2->-1->-2": 1,
+          "-1->1->-2": 1
+        }
+      }
+    },
+    "lossTurnable": {
+      "champion/seat": {
+        "runs": 2,
+        "rounds": 1,
+        "reachedExact": 0,
+        "reachedExactRate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "meanShortfall": 3.5,
+        "budgetExceeded": 0,
+        "outcomes": {
+          "-1->1->-2": 1,
+          "-1->1->-3": 1
+        }
+      },
+      "champion/team": {
+        "runs": 1,
+        "rounds": 1,
+        "reachedExact": 0,
+        "reachedExactRate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "meanShortfall": 4,
+        "budgetExceeded": 0,
+        "outcomes": {
+          "-1->1->-3": 1
+        }
+      },
+      "student/seat": {
+        "runs": 2,
+        "rounds": 1,
+        "reachedExact": 1,
+        "reachedExactRate": 0.5,
+        "ci95": [
+          0.5,
+          0.5
+        ],
+        "meanShortfall": 2,
+        "budgetExceeded": 0,
+        "outcomes": {
+          "-1->1->1": 1,
+          "-1->1->-3": 1
+        }
+      },
+      "student/team": {
+        "runs": 1,
+        "rounds": 1,
+        "reachedExact": 0,
+        "reachedExactRate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "meanShortfall": 3,
+        "budgetExceeded": 0,
+        "outcomes": {
+          "-1->1->-2": 1
+        }
+      }
+    },
+    "doubleDownAvoidable": {
+      "champion/seat": {
+        "runs": 4,
+        "rounds": 2,
+        "reachedExact": 2,
+        "reachedExactRate": 0.5,
+        "ci95": [
+          0,
+          1
+        ],
+        "meanShortfall": 0.5,
+        "budgetExceeded": 2,
+        "outcomes": {
+          "-3->-2->-3": 2,
+          "-3->-2->-2": 2
+        }
+      },
+      "champion/team": {
+        "runs": 2,
+        "rounds": 2,
+        "reachedExact": 1,
+        "reachedExactRate": 0.5,
+        "ci95": [
+          0,
+          1
+        ],
+        "meanShortfall": 0.5,
+        "budgetExceeded": 1,
+        "outcomes": {
+          "-3->-2->-3": 1,
+          "-3->-2->-2": 1
+        }
+      },
+      "student/seat": {
+        "runs": 4,
+        "rounds": 2,
+        "reachedExact": 2,
+        "reachedExactRate": 0.5,
+        "ci95": [
+          0,
+          1
+        ],
+        "meanShortfall": 0.5,
+        "budgetExceeded": 2,
+        "outcomes": {
+          "-3->-2->-3": 2,
+          "-3->-2->-2": 2
+        }
+      },
+      "student/team": {
+        "runs": 2,
+        "rounds": 2,
+        "reachedExact": 0,
+        "reachedExactRate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "meanShortfall": 1,
+        "budgetExceeded": 1,
+        "outcomes": {
+          "-3->-2->-3": 2
+        }
+      }
+    }
+  }
+}
