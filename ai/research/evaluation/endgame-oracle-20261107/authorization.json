@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-11-08",
+  "machine": "MacBook Pro M1 Pro (owner's everyday machine)",
+  "ownerMessages": [
+    {
+      "text": "那就先保留danmcai的训练 在我这台电脑上写一个尾盘的模型进行训练 之后接入danmcai怎么样 因为另外的电脑在24hr 完全给训练使用 这台macbook我平时还会用 所以训练这种简单一点的任务",
+      "meaning": "Keep the other machine's danMCai training untouched; build and train an endgame model on this Mac; integrate into danMCai later."
+    },
+    {
+      "text": "根据你说的这段 我不需要管坑 就按他们这种方式来",
+      "meaning": "Follow the PerfectDou/Suphx approach (perfect information during training, own hand at execution)."
+    },
+    {
+      "text": "训练的时候要开启dashboard",
+      "meaning": "Run a live dashboard during training."
+    },
+    {
+      "text": "让风扇开转",
+      "meaning": "Interpreted as: use the Mac's full compute (7 actors + MPS learner at normal priority). macOS controls fan speed itself."
+    }
+  ],
+  "scope": "One fixed 12-hour Mac training window plus its held-out evaluation. No change to the web champion, menu, frozen runs on other machines, reward definition, or Clint isolation.",
+  "assumedByAgent": "The 12-hour window length was chosen by the agent; the owner can stop it at any time with the STOP file."
+}

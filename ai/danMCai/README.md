@@ -25,6 +25,7 @@ Mac 收尾后的独立整局比较与 Windows 返回包见 [Windows 交接](../r
 | 已有历史实验检查点               | [models/experiments](models/experiments)                                 |
 | 独立 NumPy 编码与数值参考        | [reference](reference)                                                   |
 | 本路线测试                       | [tests](tests)                                                           |
+| 尾盘明牌引导训练（Mac 实验）     | [endgame](endgame/README.md)                                             |
 
 本机生成目录：`runs/` 存运行数据与实时面板记录，`checkpoints/` 存保留的检查点，`data/generated/` 存采集数据，`environment/` 存本机环境，`workspace/` 存开发工作树与临时实验。它们均不提交 Git。
 

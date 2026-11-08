@@ -118,3 +118,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [队友网格完整结果](evaluation/cooperation-grid-20261108/results.json)：192,000局全部完成，12格同时99%区间均跨零且abs(gap)<0.10，不开启队友多样性训练。下一项[表示语料协议](evaluation/representation-corpus-20261108/protocol.design.json)用固定017约100万决策测编码空洞，零梯度。
 
 [表示语料真实启动](evaluation/representation-corpus-20261108/startup.json)：冻结c32a66d／152源码，90,480已保存决策与1,110完整单局的初始快照；约100万是计划量，频率／残差结论待完整结束，不是训练或网页发布。
+
+[Mac 尾盘明牌引导训练预登记](evaluation/endgame-oracle-20261107/protocol.json)：PerfectDou／Suphx 式训练，冠军打到尾盘、学生接手；明牌只进训练。设计与开发检查见主报告第 57 节，尚无棋力结果。
