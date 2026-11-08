@@ -20,5 +20,20 @@
     "trainingRanges": 16,
     "heldoutDeals": 10000
   },
-  "preflightPublicationOrder": "Owner authorization and experiment design/source published in c506a03; exact local preflight protocol registered before execution, full preflight protocol/results published with this manifest before LONG training starts."
+  "preflightPublicationOrder": "Owner authorization and experiment design/source published in c506a03; exact local preflight protocol registered before execution, full preflight protocol/results published with this manifest before LONG training starts.",
+  "formalV2": {
+    "seedAuditFiles": 913,
+    "knownRoots": 1577036,
+    "rootsPerSlot": 50000,
+    "trainingRepeats": 2,
+    "intentionalTrainingRootSharingWithinRepeat": true,
+    "differentRepeatsDisjoint": true,
+    "startup": "startup-v2.json",
+    "actualUpdatesAtStartup": 788,
+    "fourArmsStarted": false,
+    "sourceFrozen": "c506a03",
+    "fullProtocolPublishedBeforeFormalLaunch": "cc47be3",
+    "earlierCutoffWatcherHealthy": true,
+    "earlyStopPilotAuditPassed": true
+  }
 }

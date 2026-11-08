@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "kind": "actual-training-startup-not-strength",
+  "observedAtUTC": "2026-11-08T13:37:46.977Z",
+  "sourceCommit": "c506a03",
+  "preregisteredAtMain": "cc47be3",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s1-v2-20261108",
+  "registration": {
+    "id": "extras-public-s1-v2-20261108",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\extras-public-s1-v2-20261108",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s1-v2-20261108\\protocol.json",
+    "protocolSHA256": "b1e8257de1be17d672be3f76458563d79f8d3a5af49ce6b5a4bb6792cabbb48b",
+    "window": {
+      "startUTC": "2026-11-08T13:36:24.535Z",
+      "deadlineUTC": "2026-11-08T17:36:24.535Z",
+      "requestedHours": 4,
+      "restartExtendsDeadline": false
+    }
+  },
+  "launch": {
+    "pid": 3964,
+    "supervisorPID": 43296,
+    "remainingHours": 3.9999897222222223,
+    "task": {
+      "id": "extras-public-s1-v2-20261108",
+      "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\extras-public-s1-v2-20261108",
+      "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s1-v2-20261108\\protocol.json",
+      "protocolSHA256": "b1e8257de1be17d672be3f76458563d79f8d3a5af49ce6b5a4bb6792cabbb48b",
+      "window": {
+        "startUTC": "2026-11-08T13:36:24.535Z",
+        "deadlineUTC": "2026-11-08T17:36:24.535Z",
+        "requestedHours": 4,
+        "restartExtendsDeadline": false
+      }
+    },
+    "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\extras-training-runtime-20261108",
+    "startedAtUTC": "2026-11-08T13:36:24.580Z"
+  },
+  "learner": {
+    "pid": 57720,
+    "device": "cuda:0",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gpuAllocatedBytes": 168968192,
+    "state": "waiting-for-data",
+    "step": 788,
+    "version": "v000000000",
+    "buffer": 403721,
+    "ingestedRows": 403721,
+    "trainedRows": 1613824,
+    "lossEMA": 3.151195760320075,
+    "replayRatio": 3.9973744244168623,
+    "stepsPerSecond": 9.980323217304099,
+    "updatedAt": "2026-11-08T13:37:46Z"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 52872,
+      "matches": 176,
+      "decisions": 108980,
+      "rows": 108980,
+      "nextSeed": 25509259,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "slot": 1,
+      "pid": 64012,
+      "matches": 172,
+      "decisions": 111083,
+      "rows": 111083,
+      "nextSeed": 25509255,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "slot": 2,
+      "pid": 47952,
+      "matches": 171,
+      "decisions": 108987,
+      "rows": 108987,
+      "nextSeed": 25509254,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "slot": 3,
+      "pid": 33748,
+      "matches": 170,
+      "decisions": 109290,
+      "rows": 109290,
+      "nextSeed": 25509253,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    }
+  ],
+  "resources": {
+    "availableGiB": 7.3540191650390625,
+    "totalGiB": 31.218204498291016,
+    "machineCPUPercent": 32.1204594846321
+  },
+  "earlierCutoff": {
+    "pid": 55540,
+    "updatedAtUTC": "2026-11-08T13:37:44.060Z",
+    "deadlineUTC": "2026-11-11T15:00:00.000Z",
+    "computeDeadlineUTC": "2026-11-11T14:45:00.000Z",
+    "authorizationSHA256": "f09d1aa1ecc745926efef45c99ad4c01e04e62e191b19c62e64889a28468564e",
+    "failure": null
+  },
+  "webChampion": "danMCai-v000855042 · 保持不变",
+  "pilotInherited": false,
+  "newRunsPlanned": 4,
+  "newRunsStarted": 1,
+  "otherRunsNotYetRegistered": true
+}

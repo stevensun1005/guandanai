@@ -228,3 +228,5 @@ The offline self-simulation review converter and integrity audit are complete (M
 2026-11-08: New owner authorization permits autonomous Windows danMCai training until Wednesday 10:00 Toronto, with compute stopping at 09:45. The public-extras versus zero-input two-seed experiment is in preparation, not a strength result. Web champion017, frozen runs and human-data isolation remain unchanged. See the model study section66.
 
 Capacity correction: the original10k-roots/slot engineering pilot was stopped and preserved at1825updates, without a strength claim. Formalv2 uses50kroots/slot; input arms share new training roots within each training seed, while the two training-seed repeats are disjoint. No pilot weights, Adam or replay are inherited. Protocol changes remain in study66.1–66.2.
+
+Formalv2 training has started from frozenc506a03, with the first arm registered13:36:24.535–17:36:24.535Z and actualGPUupdates verified. The four-arm queue advances automatically; only the first arm has started, and strength remains unevaluated. Dashboard8767 and the earlier15:00Z/14:45Z cutoff are active. See study66.3 and startup-v2 evidence.
