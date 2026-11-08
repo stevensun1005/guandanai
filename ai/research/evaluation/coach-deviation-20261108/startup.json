@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T04:05:34.856443+00:00",
+  "sourceSHA": "3f2c7fcd6f93e3cf6cf781adfa0ffd47a9ae04f4",
+  "protocolSHA256": "d99f43c35196aab10ef837ae3641d9b21973f5f2132c2387fbd3b7c14345f75f",
+  "controllerPID": 61688,
+  "workerPIDs": [
+    53816,
+    18992,
+    29408,
+    58452
+  ],
+  "allFiveProcessesAlive": true,
+  "completedRootsAtStatus": 1852,
+  "completedPairsAtStatus": 1852,
+  "completedRoundsAtStatus": 3705,
+  "statusUpdatedAt": "2026-11-08T04:05:32.719Z",
+  "completePairRowsAudited": 1895,
+  "allAuditedFinalDeltasAndWeightsValid": true,
+  "minimumAvailableGiB": 12.287555694580078,
+  "availableGiB": 12.578983306884766,
+  "sourceFilesMatched": 154,
+  "modelFileHashesMatched": 2,
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "protocolDeadlineUTC": "2026-11-08T05:03:42.034861+00:00",
+  "dashboard": {
+    "observedAtUTC": "2026-11-08T04:04:25.212Z",
+    "taskCount": 15,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "scope": "Actual partial startup, not a final beta/calibration result or completed10000-pair evidence."
+}
