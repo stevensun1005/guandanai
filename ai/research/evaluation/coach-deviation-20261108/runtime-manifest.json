@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "sourceSHA": "3f2c7fcd6f93e3cf6cf781adfa0ffd47a9ae04f4",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\coach-deviation-runtime-20261108",
+  "sourceFiles": 154,
+  "registeredWindow": {
+    "startUTC": "2026-11-08T04:03:42.664Z",
+    "deadlineUTC": "2026-11-08T05:03:42.664Z",
+    "requestedHours": 1,
+    "restartExtendsDeadline": false
+  },
+  "protocolDeadlineUTC": "2026-11-08T05:03:42.034861+00:00",
+  "protocolSHA256": "d99f43c35196aab10ef837ae3641d9b21973f5f2132c2387fbd3b7c14345f75f",
+  "protocolLF_SHA256": "d99f43c35196aab10ef837ae3641d9b21973f5f2132c2387fbd3b7c14345f75f",
+  "models": {
+    "champion": {
+      "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\champion.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "017"
+    },
+    "p0": {
+      "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\p0.onnx",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "001"
+    }
+  },
+  "deviationPairsExecutedAtFreeze": 0,
+  "optimizerUpdates": 0
+}
