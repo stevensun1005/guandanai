@@ -1,0 +1,211 @@
+{
+  "schema": "danmcai-endgame-oracle-protocol-v1-amendment-2",
+  "registeredAt": "2026-11-08",
+  "purpose": "Mac-only endgame oracle-guiding training (Suphx/PerfectDou style): champion plays until the endgame threshold, a student learns endgame values with other hands visible only during training, oracle input decays to zero, exported student sees only its own hand. Research experiment; not a web release.",
+  "authorization": "evaluation/endgame-oracle-20261107/authorization.json",
+  "teacher": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "champion": "ai/research/evaluation/champion-selection-mac-20261106/champion.json",
+    "gate": 330
+  },
+  "start": "Exact copy of champion 017 trunk; oracle projection 162x512 initialized to zero; fresh Adam; empty replay; run steps count from 0 (inherited network step 855042 recorded separately).",
+  "target": "Decider team's final signed single-round upgrade points (+-1/+-2/+-3), Monte Carlo, MSE. No tempo, trick-control, bomb or partner proxy in reward, loss, gate or acceptance.",
+  "rules": "Single fresh deals from createRound (random level and leader, no tribute, no cross-round match state), same as the held-out protocols of sections 41/44/46.",
+  "run": {
+    "hours": null,
+    "actors": 7,
+    "deadline": "2026-11-08T14:18:02.146Z"
+  },
+  "priority": {
+    "learnerNice": 0,
+    "actorNice": 5
+  },
+  "actor": {
+    "count": 7,
+    "threshold": 32,
+    "temperature": 0.02,
+    "shardRows": 4096,
+    "slotSeeds": [
+      [
+        [
+          3808000000,
+          3808200000
+        ],
+        [
+          3816000000,
+          3816200000
+        ]
+      ],
+      [
+        [
+          3832000000,
+          3832200000
+        ],
+        [
+          3887000000,
+          3887200000
+        ]
+      ],
+      [
+        [
+          3892000000,
+          3892200000
+        ],
+        [
+          3905000000,
+          3905200000
+        ]
+      ],
+      [
+        [
+          3942000000,
+          3942200000
+        ],
+        [
+          3948000000,
+          3948200000
+        ]
+      ],
+      [
+        [
+          3986000000,
+          3986200000
+        ],
+        [
+          3996000000,
+          3996200000
+        ]
+      ],
+      [
+        [
+          4017000000,
+          4017200000
+        ],
+        [
+          4035000000,
+          4035200000
+        ]
+      ],
+      [
+        [
+          4078000000,
+          4078200000
+        ],
+        [
+          4156000000,
+          4156200000
+        ]
+      ]
+    ],
+    "note": "Endgame = total cards in all hands <= threshold. Before it every decision is champion greedy; at/after it the latest exported student decides with softmax(Q/0.02) and the decision is recorded. Finishing move and single candidate are automatic (as in the web table policy)."
+  },
+  "learner": {
+    "device": "mps",
+    "threads": 2,
+    "seed": 20261108,
+    "learningRate": 1e-05,
+    "batch": 2048,
+    "capacity": 1500000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "oracleDecaySteps": 29000,
+    "exportSeconds": 600,
+    "oracle": "Per-sample keep probability p=max(0,1-step/oracleDecaySteps); kept samples see the other three hands (162 counts relative to the decider), dropped samples see zeros.",
+    "keepShardRows": 2000000
+  },
+  "seeds": {
+    "audit": "ai/research/evaluation/endgame-oracle-20261107/seed-audit.json",
+    "auditSHA256": "074bb8981ddeb1bb8330ef0e81ff20fa4a4660f84b3083cec2a417e8766f5e27",
+    "trainingBlocks": [
+      [
+        3808000000,
+        3808200000
+      ],
+      [
+        3816000000,
+        3816200000
+      ],
+      [
+        3832000000,
+        3832200000
+      ],
+      [
+        3887000000,
+        3887200000
+      ],
+      [
+        3892000000,
+        3892200000
+      ],
+      [
+        3905000000,
+        3905200000
+      ],
+      [
+        3942000000,
+        3942200000
+      ],
+      [
+        3948000000,
+        3948200000
+      ],
+      [
+        3986000000,
+        3986200000
+      ],
+      [
+        3996000000,
+        3996200000
+      ],
+      [
+        4017000000,
+        4017200000
+      ],
+      [
+        4035000000,
+        4035200000
+      ],
+      [
+        4078000000,
+        4078200000
+      ],
+      [
+        4156000000,
+        4156200000
+      ]
+    ],
+    "smokeBlockUsedForDevelopment": [
+      3838000000,
+      3838200000
+    ],
+    "unusedReservedBlock": [
+      4174000000,
+      4174200000
+    ],
+    "heldout": "First 3,000 seeds of the audit's reserved list (985,009,200..985,018,373)",
+    "scope": "Audit read 360 locally readable evidence files (69,454 known roots); Windows-only logs not readable from this Mac are unverified."
+  },
+  "stop": "Fixed deadline 2026-11-08T14:18:02.146Z (original window); restarts use only the remaining time; STOP or deadline stops all processes; no extension, no peak picking.",
+  "evaluation": {
+    "object": "The final exported student after the window (models/latest.json at stop), not an intermediate or best-looking export.",
+    "design": "3,000 held-out deals, each played twice with sides swapped (6,000 single rounds). Focal team plays champion until total cards <= 32 then the student, greedy; the other team plays champion 017 throughout. Finishing move/single candidate automatic; no endgame proof shortcut, no styles.",
+    "primary": "Focal team's mean signed round points per deal pair, 95% deal-cluster normal interval. Positive evidence only if the lower bound > 0.",
+    "secondary": "Wins/losses; number of endgame decisions where student differs from champion; descriptive perfect-information minimax regret on disagreements with <= 18 cards (exact solver, 3 s budget; not an acceptance metric).",
+    "notCovered": "Clint or other opponents, human teammates, tribute and whole-match (pass-A) effects, web integration. Any web use requires a separate preregistered acceptance."
+  },
+  "unchanged": "Web champion 017 and menu, Windows campaign and all frozen runs, reward definition, GuanZero, tribute specialist.",
+  "amends": {
+    "file": "ai/research/evaluation/endgame-oracle-20261107/protocol-amendment-1.json",
+    "sha256": "a5ff1751910b875ecd1d00cedb58d935e1c164cffc494dfa4a41436c32427fdb"
+  },
+  "amendment": {
+    "reason": "Owner request 2026-11-08 (UTC 02:4x): \"可以慢一点去掉明牌 大概明牌6hr\" — remove oracle information more slowly, about 6 hours.",
+    "changes": [
+      "oracleDecaySteps 20,000 -> 29,000. Measured learner rate about 1.33 updates/s (replay-ratio bound) from the amended start at 02:24:43Z, so the keep probability reaches 0 about 6 h after that start (around 08:25Z), leaving about 6 h of own-hand-only training before the unchanged deadline.",
+      "Applied by STOP and restart at about step 1,400 (keep 0.93 under the old schedule, 0.95 under the new one); network, Adam state, step count and replay data continue; config.json records the change under amendments."
+    ],
+    "unchanged": "Deadline 2026-11-08T14:18:02.146Z, teacher, threshold, temperature, learning rate, batch, replay, pruning, actors, priorities, seeds, held-out deals, evaluation design and acceptance rule."
+  }
+}
