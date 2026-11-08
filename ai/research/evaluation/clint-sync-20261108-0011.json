@@ -1157,8 +1157,77 @@
     "Source/root user drafts, frozen research runs, GuanZero and tribute remain untouched."
   ],
   "deployment": {
-    "status": "pending",
-    "successCursorAdvanced": false
+    "status": "success",
+    "successCursorAdvanced": true,
+    "codeCommit": "0149b745f56fd179871bd3bf48709b8ec84ae5b1",
+    "workflowRun": 42431678785,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42431678785",
+    "deployedAtUTC": "2026-11-08T00:56:38Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicBuild": "61f17dfedd",
+    "verifiedAtUTC": "2026-11-08T00:57:57.798265+00:00",
+    "publicMenuAndRules": [
+      {
+        "viewport": [
+          1500,
+          1000
+        ],
+        "build": "61f17dfedd",
+        "menu": [
+          "clint-rule",
+          "021",
+          "020",
+          "001",
+          "017",
+          "012"
+        ],
+        "default": "017",
+        "ruleSections": 4,
+        "ruleTabsChecked": 12,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "build": "61f17dfedd",
+        "menu": [
+          "clint-rule",
+          "021",
+          "020",
+          "001",
+          "017",
+          "012"
+        ],
+        "default": "017",
+        "ruleSections": 4,
+        "ruleTabsChecked": 12,
+        "pageErrors": []
+      }
+    ],
+    "publicHostRestoration": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "publicTestsScope": "Synthetic UI/network correctness with collector blocked; zero human data uploads, strength games and optimizer updates."
   },
   "frozenResearchReadOnlyAudit": {
     "sourceFilesMatched": 36,
