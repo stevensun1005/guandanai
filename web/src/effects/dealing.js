@@ -10,7 +10,8 @@ export let reduceMotion;
 export function fly(p) {
   if (reduceMotion()) return;
   const a = $('.emblem').getBoundingClientRect();
-  const t = (p === 0 ? $('#hand') : $('#seat' + p + ' .who .back')).getBoundingClientRect();
+  let t = (p === 0 ? $('#hand') : $('#seat' + p + ' .who .back')).getBoundingClientRect();
+  if (p && !t.width) t = $('#seat' + p + ' .who').getBoundingClientRect();
   const sx = a.left + a.width / 2,
     sy = a.top + a.height / 2;
   const tx = t.left + t.width / 2 + (p === 0 ? (Math.random() - 0.5) * t.width * 0.5 : 0),

@@ -273,6 +273,44 @@ html.phone.rows body:not(.practice) .mebar .link {
 html.phone.rows body:not(.practice) .mebar .left {
   gap: 6px;
 }
+/* Compensate only the space reserved by this project's action layout. */
+html.phone.rows body:not(.practice) #mebar .left {
+  position: relative;
+  width: 100%;
+  min-height: 33px;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+html.phone.rows body:not(.practice) #mebar .left .whorow {
+  position: absolute;
+  left: calc(50% + var(--hand-actions-space, 0px) / 2);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+html.phone.rows body:not(.practice) #myClock {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  translate: 0 -50%;
+  margin: 0;
+}
+html.phone.rows body:not(.practice) #myCnt {
+  position: absolute;
+  left: calc(100% + 46px);
+  top: 50%;
+  translate: 0 -50%;
+}
+html.phone.rows body:not(.practice) #myName {
+  max-width: 5.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html.phone body:not(.practice) #selectionBar.keep-phone-space[hidden] {
+  display: flex !important;
+  visibility: hidden;
+}
 /* the finishing places at half size; your partner's beside the plate rather than under it, where their cards lie */
 html.phone body:not(.practice) .place {
   font-size: 14px;

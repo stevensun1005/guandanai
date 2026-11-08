@@ -514,8 +514,15 @@ export function placeCard(c, slot, i) {
   }
 }
 
+let phoneHandPeak = null;
+
 export function layoutHand() {
   phoneRefit();
+  if (!runtime.reviewMode && isPhone()) {
+    const key = [runtime.game.round, innerWidth, innerHeight, runtime.handView].join('|');
+    if (phoneHandPeak?.game !== runtime.game || phoneHandPeak.key !== key)
+      phoneHandPeak = { game: runtime.game, key, height: 0 };
+  } else phoneHandPeak = null;
   const el = $('#hand'),
     cards = [...el.children],
     n = cards.length;
@@ -529,7 +536,9 @@ export function layoutHand() {
       runtime.game.phase === 'shuffle' ||
       runtime.game.phase === 'cut');
   if (!n && !dealing) {
-    if (!(runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(runtime.game.phase)))
+    if (phoneHandPeak?.height && ['play', 'roundEnd', 'over'].includes(runtime.game.phase))
+      el.style.height = phoneHandPeak.height + 'px';
+    else if (!(runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(runtime.game.phase)))
       el.style.height = '';
     drawFixZone(null);
     placeActionBtns();
@@ -565,6 +574,10 @@ export function layoutHand() {
   cards.forEach((c) => c.classList.toggle('grp', isPhone() && fixed.has(+c.dataset.id)));
   if (!runtime.reviewMode && phoneRows() && !$('#btns').hidden)
     g.height = Math.max(g.height, $('#btns').offsetHeight + 6);
+  if (phoneHandPeak) {
+    phoneHandPeak.height = Math.max(phoneHandPeak.height, g.height);
+    g.height = phoneHandPeak.height;
+  }
   el.style.height = g.height + 'px';
   drawFixZone(g);
   placeLastPlay();

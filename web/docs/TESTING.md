@@ -261,3 +261,5 @@ Node测试另以全宽参考求解器核对16个小残局、40组合法动作集
 `python web/tests/host_restore_smoke.py <URL>`通过真实PeerJS验证房主刷新及关闭标签页后同房间、同手牌、匿名记录ID和原座位凭据恢复，以及明确清除后不恢复；只用合成牌面并阻止云端上传。`help_smoke.py`检查分页键盘、单人计时暂停与联机继续计时；`match_continuity_smoke.py`现从选级内恢复上一场。既有模型WASM、私人明牌边界、响应控件命中和朋友重连仍需回归。
 
 房主恢复回归另先实际显示冠军评分、关闭个人开关再刷新，确认当前手辅助标记保留且无新展示；Node同时验证加载态不标记、进入下一手后旧标记失效。
+
+Clint手机增量回归：构建并启动本地服务后运行 `python -X utf8 web/tests/clint_phone_smoke.py http://127.0.0.1:8784/`。覆盖390×844、375×667、844×390与1440×1000，27→8→1→0张姓名／手牌稳定、新局和空手旋转重置、三家隐藏牌背的真实动画落点；合成局、采集请求阻断，不是棋力证据。另运行 `control_layout_smoke.py <URL> --targeted` 与 `host_restore_smoke.py <URL>`，核对评价、按钮和真实PeerJS恢复。

@@ -5,6 +5,10 @@ import { $ } from './cards.js';
 export function renderSelectionStatus(options) {
   const game = runtime.game;
   const row = $('#selectionBar');
+  row.classList.toggle(
+    'keep-phone-space',
+    !runtime.reviewMode && ['play', 'roundEnd', 'over'].includes(game?.phase),
+  );
   row.hidden =
     runtime.reviewMode ||
     !game?.hands[0]?.length ||
