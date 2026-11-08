@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-07 · GuanZero 第48小时模型发布
+
+- 270292 完成Clint和danMCai冠军各500场，网页发布实际参赛权重，最近两代270292、229609。[发布记录](ai/research/evaluation/web-model-022.json)。
+
 ## 2026-11-08 · Mac 尾盘明牌引导训练（预登记）
 
 - 新增 [ai/danMCai/endgame](ai/danMCai/endgame/README.md)：按 PerfectDou／Suphx 方式训练尾盘模型——训练时额外看另外三家的手牌并逐步去掉，导出的学生只看自己的牌，与网页模型格式相同。
