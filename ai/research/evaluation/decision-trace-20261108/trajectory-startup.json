@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T03:44:28.381778+00:00",
+  "sourceSHA": "11671a5f37f40fcbf05f51ba5daea432562a1568",
+  "protocolSHA256": "e158e1d5668363bfd3c05a729e77558aa4f4ce3de2d6c0ec8c4d0a1368439542",
+  "publicationMarker": {
+    "protocolSHA256": "e158e1d5668363bfd3c05a729e77558aa4f4ce3de2d6c0ec8c4d0a1368439542",
+    "gapSHA256": "d1c67bf41c9430f5ceba0ab2f4cfe28e17b29079b1637243563330825e250b1d",
+    "mainCommit": "91d155af0d431c474a6bfaef707d9ec81bf3ba7a",
+    "publishedAtUTC": "2026-11-08T03:43:29.725166+00:00",
+    "windowUnchanged": true
+  },
+  "publishedGapGitBlobLF_SHA256": "372ddb2b6254ee49ca95ad25313bc5aef17adc1d61fa21703e201e874d1ad6dc",
+  "runtimeGapRawSHA256": "d1c67bf41c9430f5ceba0ab2f4cfe28e17b29079b1637243563330825e250b1d",
+  "rawAndPublicJsonEquivalent": true,
+  "newlineNote": "Python runtime gap-summary usesWindowsCRLF; Git public blob isLF. Marker retains original raw hash, both preserved; protocol isLF andunchanged.",
+  "controllerPID": 35700,
+  "workerPIDs": [
+    55704,
+    47172,
+    31508,
+    60684
+  ],
+  "allFiveProcessesAlive": true,
+  "completedRoundsIncluding400Gap": 2891,
+  "completedTrajectoryPairs": 1245,
+  "minimumAvailableGiB": 12.324291229248047,
+  "availableGiB": 12.4027099609375,
+  "sourceFilesMatched": 150,
+  "modelsMatched": 2,
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "protocolDeadlineUTC": "2026-11-08T04:42:00.645035+00:00",
+  "dashboard": {
+    "observedAtUTC": "2026-11-08T03:43:34.090Z",
+    "taskCount": 14,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "scope": "Actual partial trajectory startup, not completed6000 pairs or realized-deviation/calibration evidence."
+}
