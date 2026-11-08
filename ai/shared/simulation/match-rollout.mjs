@@ -17,6 +17,7 @@ export async function playMatch({
   trainingCritic = false,
   tablePolicy = null,
   ruleVersion = 'original',
+  checkpoint = null,
 }) {
   if (!['rule', 'self', 'snapshot'].includes(mode) || ![0, 1].includes(team))
     throw Error('Invalid match lineup');
@@ -36,6 +37,7 @@ export async function playMatch({
     };
   const seats = new Set();
   for (let r = 0; r < 200; r++) {
+    if (checkpoint) await checkpoint();
     const roundSeed =
       r === 0 && initialDealSeed !== null
         ? initialDealSeed >>> 0
@@ -53,6 +55,7 @@ export async function playMatch({
     }
     let result = null;
     for (let turn = 0; turn < 1000; turn++) {
+      if (checkpoint) await checkpoint();
       const p = game.turn,
         opponent = p % 2 !== team;
       let play;

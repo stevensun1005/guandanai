@@ -1,0 +1,171 @@
+{
+  "phase": "complete",
+  "pid": 57244,
+  "startedAtUTC": "2026-11-08T02:50:09.337122+00:00",
+  "completedPositions": 722044,
+  "plannedPositions": 722044,
+  "positionUnit": "\u6761\u65e2\u6709\u9009\u62e9\u51b3\u7b56\uff08\u51bb\u7ed3\u524d\u5411\uff09",
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "completedDeals": 0,
+  "minimumAvailableGiB": 12.28793716430664,
+  "protocolSHA256": "13598b156249cd082ad49fefd6d80a99a349760bd87ab0a0908f2b989ed79aaf",
+  "memoryPaused": false,
+  "availableGiB": 12.304302215576172,
+  "analysisStage": "bootstrap",
+  "updatedAtUTC": "2026-11-08T02:50:26.851896+00:00",
+  "provider": "ROCm cuda:0 frozen forward / CPU float64 ridge",
+  "device": "AMD Radeon RX 7800 XT",
+  "parameterGroups": 12,
+  "maxQDifference": 1.0609626770019531e-05,
+  "gpuForwardPreflightPassed": true,
+  "selectedPenalties": {
+    "extras": 0.0001,
+    "raw": 1.0,
+    "rawExtras": 0.01,
+    "hidden": 1.0,
+    "hiddenExtras": 0.01
+  },
+  "completedAtUTC": "2026-11-08T02:50:28.263157+00:00",
+  "sourceSHA": "3499b98ed6dad4e305b059bd1951ab4118a10134",
+  "splitSHA256": "779d92a27ee847fe7f0fbcb1477e01714b1d51b0e74d5c5255e1915e13493346",
+  "splitDeals": [
+    7371,
+    2496,
+    2415
+  ],
+  "splitChoiceRows": [
+    432789,
+    147549,
+    141706
+  ],
+  "dataDeals": 12282,
+  "modelNames": [
+    "baseline",
+    "extras",
+    "raw",
+    "rawExtras",
+    "hidden",
+    "hiddenExtras"
+  ],
+  "testMeanSquaredError": [
+    3.5656149549813856,
+    3.5450465142975336,
+    3.565966672899699,
+    3.5323615226751905,
+    3.5326695377166777,
+    3.4771258289801446
+  ],
+  "validationWeightedSSE": [
+    [
+      8593.97903911197,
+      8594.650483775744,
+      8619.503354578754
+    ],
+    [
+      8675.553282858828,
+      8673.358524297893,
+      8640.965232206492
+    ],
+    [
+      8547.769610346302,
+      8546.617540161955,
+      8593.325455241667
+    ],
+    [
+      8580.861327502842,
+      8576.193648326702,
+      8574.96437617818
+    ],
+    [
+      8431.769853241345,
+      8428.141552387888,
+      8525.079766259805
+    ]
+  ],
+  "intervals": {
+    "names": [
+      "extrasR2",
+      "rawR2",
+      "rawExtrasR2",
+      "hiddenR2",
+      "hiddenExtrasR2",
+      "rawPartialR2",
+      "hiddenPartialR2"
+    ],
+    "point": [
+      0.005768553515605124,
+      -9.864158714667504e-05,
+      0.009326142257659598,
+      0.009239757427728201,
+      0.024817353280846,
+      0.009423854260865006,
+      0.015722871370650093
+    ],
+    "ci95": [
+      [
+        0.004097626804541607,
+        0.007427904484411741
+      ],
+      [
+        -0.002282380944789364,
+        0.0021058359744781444
+      ],
+      [
+        0.004878829284988906,
+        0.013925555673074994
+      ],
+      [
+        0.006077366616009894,
+        0.01230849129352326
+      ],
+      [
+        0.019907924825891928,
+        0.029729900079440475
+      ],
+      [
+        0.0068090494191049376,
+        0.012177985391033892
+      ],
+      [
+        0.012876255222387584,
+        0.018643732145487923
+      ]
+    ],
+    "ci99": [
+      [
+        0.003535021936825933,
+        0.00795636165826137
+      ],
+      [
+        -0.0029928755026076017,
+        0.002763074359011886
+      ],
+      [
+        0.003187240835602629,
+        0.01536191869069551
+      ],
+      [
+        0.005032119057167797,
+        0.013360130527736509
+      ],
+      [
+        0.01854325353156034,
+        0.03139301613140787
+      ],
+      [
+        0.006076077548699734,
+        0.012921983876790239
+      ],
+      [
+        0.012080784924517455,
+        0.01960794867532922
+      ]
+    ]
+  },
+  "parameterSHA256Before": "eb947fc3841a617180e5e0276bafbb36e2fa51499194ef49dfcd1740e51d8eb3",
+  "parameterSHA256After": "eb947fc3841a617180e5e0276bafbb36e2fa51499194ef49dfcd1740e51d8eb3",
+  "ridgeFits": 15,
+  "conservativeInputClosureCondition": false,
+  "scope": "Existing champion trajectories, independent complete single-round deal split; conditional statistical inference, no match or policy-strength acceptance. Tactical and privileged labels unused."
+}

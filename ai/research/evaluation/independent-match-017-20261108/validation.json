@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T02:57:44.559169+00:00",
+  "priorMain": "69d398b",
+  "nodeTestsPassed": 268,
+  "researchPythonPassed": 33,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "format": "passed",
+  "build": "18c564b0c0",
+  "realControllerAndWorkerStopBeforeModels": true,
+  "perActionStopBeforeFurtherPlay": true,
+  "checkpointCompleteMatchEquality": true,
+  "isolatedMixedSeats": true,
+  "terminalTruncationAndWinnerValidation": true,
+  "newMatchGamesExecuted": 0,
+  "optimizerUpdates": 0,
+  "scope": "Development tests only; no independent strength results."
+}

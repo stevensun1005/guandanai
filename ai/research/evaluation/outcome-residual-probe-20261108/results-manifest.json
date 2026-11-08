@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "passed": true,
+  "logicalProbeParentPID": 59280,
+  "logicalProbeChildPID": 57244,
+  "bothProcessesExited": true,
+  "lockAbsent": true,
+  "sourceFilesMatched": 2,
+  "datasetFilesVerifiedByRunner": 6,
+  "networkParameterGroups": 12,
+  "parameterHashesUnchanged": true,
+  "neuralGradientsNone": true,
+  "optimizerUpdates": 0,
+  "ridgeFits": 15,
+  "splitDeals": [
+    7371,
+    2496,
+    2415
+  ],
+  "splitChoiceRows": [
+    432789,
+    147549,
+    141706
+  ],
+  "allDealPartitionsMutuallyExclusive": true,
+  "splitSHA256": "779d92a27ee847fe7f0fbcb1477e01714b1d51b0e74d5c5255e1915e13493346",
+  "maximumFrozenGpuQDifference": 1.0609626770019531e-05,
+  "rawR2RecalculatedFromReportedMSE": true,
+  "resultsSHA256": "d794f235267aaebf7151d0dbb14b42ef108f547f6f2aeac7641224b32317c15d",
+  "scope": "Audit, not repeated fitting or bootstrap. No playing-strength conclusion."
+}
