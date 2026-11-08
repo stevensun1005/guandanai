@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T03:41:23.686835+00:00",
+  "priorMain": "ab8d2d7",
+  "nodeTestsPassed": 270,
+  "researchPythonPassed": 34,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "format": "passed",
+  "build": "18c564b0c0",
+  "compactTracePreservesRawOutcomeAndStableTies": true,
+  "ordinaryInputsContainNoOtherHands": true,
+  "realRegisteredWorkerSTOPBeforeModelOutput": true,
+  "perActionStopBeforeFurtherPlay": true,
+  "descriptiveQuantileTest": true,
+  "trajectoryRoundsExecuted": 0,
+  "optimizerUpdates": 0,
+  "scope": "Development validation only, no trajectory or calibration result."
+}

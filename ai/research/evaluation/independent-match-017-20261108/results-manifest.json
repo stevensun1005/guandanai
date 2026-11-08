@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "passed": true,
+  "sourceSHA": "a216541014b10bb0008caffb6286025fc5ad855f",
+  "protocolSHA256": "b79537d700a0b441492efc72f403d8e7b36a52a1dc80f1ba00633b5d47d30578",
+  "allFiveProcessesExited": true,
+  "allLocksAbsent": true,
+  "allPendingPairFilesAbsent": true,
+  "completeRootCases": 6000,
+  "completeMatches": 11000,
+  "completeRounds": 117508,
+  "allRowsSeedsTeamsTerminalWinnersAndRanksValidated": true,
+  "allBootstrapAndSummariesReproducedExactly": true,
+  "frozenExecutionFilesMatched": 147,
+  "modelsMatched": 3,
+  "workerFiles": {
+    "worker-0.jsonl": {
+      "bytes": 5312880,
+      "sha256": "84aae8ac3ba75892fbc88765d512c3281acde07e56bb952ca50c9d22033c4b62"
+    },
+    "worker-1.jsonl": {
+      "bytes": 5288577,
+      "sha256": "dce86addfa018e0e92fe4aee56f01d308a4c0cb6a49cefb392becc19c76b6c30"
+    },
+    "worker-2.jsonl": {
+      "bytes": 5364985,
+      "sha256": "87878bb190ad40d07722cb94c31aea592ee87082885d24cb65b9b6ce971a096c"
+    },
+    "worker-3.jsonl": {
+      "bytes": 5354327,
+      "sha256": "55ceac157225e5352f0f13478fbd3f5900547c37b681487dc7b7ffbc0b1d1462"
+    }
+  },
+  "minimumAvailableGiB": 10.978286743164062,
+  "stoppedAtUTC": "2026-11-08T03:33:55.868Z",
+  "optimizerUpdates": 0,
+  "scope": "Final audit only. Existing weights unchanged; no model promotion or whole-match training."
+}

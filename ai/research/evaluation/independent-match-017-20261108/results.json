@@ -1,0 +1,341 @@
+{
+  "schema": 1,
+  "title": "raw argmax \u534f\u8bae\u4e0b017\u7684\u9996\u6b21\u72ec\u7acb\u6574\u573a\u8bc4\u6d4b\uff08\u53e6\u5217\u7f51\u9875\u7b56\u7565\u5bf9\u7167\uff09",
+  "protocolSHA256": "b79537d700a0b441492efc72f403d8e7b36a52a1dc80f1ba00633b5d47d30578",
+  "tasks": {
+    "raw-clint": {
+      "arm": "raw",
+      "opponent": "clint",
+      "mixed": false,
+      "clusters": 1000,
+      "matches": 2000,
+      "wins": 1560,
+      "losses": 305,
+      "draws": 135,
+      "matchScoreMean": 0.6275,
+      "ci95": [
+        0.596,
+        0.659
+      ],
+      "ci99": [
+        0.586,
+        0.6670025
+      ],
+      "roundTeamRanks": {
+        "12": 7974,
+        "13": 1686,
+        "14": 2799,
+        "23": 3135,
+        "24": 1550,
+        "34": 3150
+      },
+      "doubleWins": 7974,
+      "doubleLosses": 3150
+    },
+    "raw-p0": {
+      "arm": "raw",
+      "opponent": "p0",
+      "mixed": false,
+      "clusters": 500,
+      "matches": 1000,
+      "wins": 511,
+      "losses": 381,
+      "draws": 108,
+      "matchScoreMean": 0.13,
+      "ci95": [
+        0.079,
+        0.181
+      ],
+      "ci99": [
+        0.064,
+        0.197
+      ],
+      "roundTeamRanks": {
+        "12": 2947,
+        "13": 1086,
+        "14": 1850,
+        "23": 1781,
+        "24": 932,
+        "34": 2525
+      },
+      "doubleWins": 2947,
+      "doubleLosses": 2525
+    },
+    "raw-previous": {
+      "arm": "raw",
+      "opponent": "previous",
+      "mixed": false,
+      "clusters": 500,
+      "matches": 1000,
+      "wins": 428,
+      "losses": 476,
+      "draws": 96,
+      "matchScoreMean": -0.048,
+      "ci95": [
+        -0.101,
+        0.005
+      ],
+      "ci99": [
+        -0.11700499999999998,
+        0.024
+      ],
+      "roundTeamRanks": {
+        "12": 2711,
+        "13": 1035,
+        "14": 1782,
+        "23": 1848,
+        "24": 1082,
+        "34": 2735
+      },
+      "doubleWins": 2711,
+      "doubleLosses": 2735
+    },
+    "raw-mixed": {
+      "arm": "raw",
+      "opponent": "clint",
+      "mixed": true,
+      "clusters": 500,
+      "matches": 1000,
+      "wins": 613,
+      "losses": 291,
+      "draws": 96,
+      "matchScoreMean": 0.322,
+      "ci95": [
+        0.27197500000000013,
+        0.371
+      ],
+      "ci99": [
+        0.254,
+        0.386
+      ],
+      "roundTeamRanks": {
+        "12": 3393,
+        "13": 868,
+        "14": 1761,
+        "23": 1615,
+        "24": 825,
+        "34": 2188
+      },
+      "doubleWins": 3393,
+      "doubleLosses": 2188
+    },
+    "raw-self": {
+      "arm": "raw",
+      "opponent": "champion",
+      "mixed": false,
+      "clusters": 500,
+      "matches": 500,
+      "wins": 223,
+      "losses": 232,
+      "draws": 45,
+      "matchScoreMean": -0.018,
+      "ci95": [
+        -0.104,
+        0.064
+      ],
+      "ci99": [
+        -0.128,
+        0.08801000000000021
+      ],
+      "roundTeamRanks": {
+        "12": 1344,
+        "13": 530,
+        "14": 903,
+        "23": 924,
+        "24": 520,
+        "34": 1353
+      },
+      "doubleWins": 1344,
+      "doubleLosses": 1353
+    },
+    "web-clint": {
+      "arm": "web",
+      "opponent": "clint",
+      "mixed": false,
+      "clusters": 1000,
+      "matches": 2000,
+      "wins": 1574,
+      "losses": 286,
+      "draws": 140,
+      "matchScoreMean": 0.644,
+      "ci95": [
+        0.614,
+        0.673
+      ],
+      "ci99": [
+        0.6044975,
+        0.6815025
+      ],
+      "roundTeamRanks": {
+        "12": 7769,
+        "13": 2304,
+        "14": 2227,
+        "23": 3573,
+        "24": 1108,
+        "34": 3200
+      },
+      "doubleWins": 7769,
+      "doubleLosses": 3200
+    },
+    "web-p0": {
+      "arm": "web",
+      "opponent": "p0",
+      "mixed": false,
+      "clusters": 500,
+      "matches": 1000,
+      "wins": 533,
+      "losses": 368,
+      "draws": 99,
+      "matchScoreMean": 0.165,
+      "ci95": [
+        0.1129750000000001,
+        0.216
+      ],
+      "ci99": [
+        0.09599500000000002,
+        0.233
+      ],
+      "roundTeamRanks": {
+        "12": 2865,
+        "13": 1474,
+        "14": 1494,
+        "23": 2012,
+        "24": 757,
+        "34": 2553
+      },
+      "doubleWins": 2865,
+      "doubleLosses": 2553
+    },
+    "web-previous": {
+      "arm": "web",
+      "opponent": "previous",
+      "mixed": false,
+      "clusters": 500,
+      "matches": 1000,
+      "wins": 436,
+      "losses": 462,
+      "draws": 102,
+      "matchScoreMean": -0.026,
+      "ci95": [
+        -0.08,
+        0.02702500000000009
+      ],
+      "ci99": [
+        -0.095,
+        0.043005000000000106
+      ],
+      "roundTeamRanks": {
+        "12": 2594,
+        "13": 1385,
+        "14": 1441,
+        "23": 2024,
+        "24": 847,
+        "34": 2807
+      },
+      "doubleWins": 2594,
+      "doubleLosses": 2807
+    },
+    "web-mixed": {
+      "arm": "web",
+      "opponent": "clint",
+      "mixed": true,
+      "clusters": 500,
+      "matches": 1000,
+      "wins": 633,
+      "losses": 278,
+      "draws": 89,
+      "matchScoreMean": 0.355,
+      "ci95": [
+        0.304,
+        0.405
+      ],
+      "ci99": [
+        0.286995,
+        0.4210050000000001
+      ],
+      "roundTeamRanks": {
+        "12": 3390,
+        "13": 984,
+        "14": 1659,
+        "23": 1716,
+        "24": 729,
+        "34": 2203
+      },
+      "doubleWins": 3390,
+      "doubleLosses": 2203
+    },
+    "web-self": {
+      "arm": "web",
+      "opponent": "champion",
+      "mixed": false,
+      "clusters": 500,
+      "matches": 500,
+      "wins": 226,
+      "losses": 225,
+      "draws": 49,
+      "matchScoreMean": 0.002,
+      "ci95": [
+        -0.082,
+        0.084
+      ],
+      "ci99": [
+        -0.102,
+        0.114
+      ],
+      "roundTeamRanks": {
+        "12": 1322,
+        "13": 597,
+        "14": 922,
+        "23": 840,
+        "24": 564,
+        "34": 1316
+      },
+      "doubleWins": 1322,
+      "doubleLosses": 1316
+    }
+  },
+  "webVersusRaw": {
+    "clint": {
+      "webMinusRawMatchScore": 0.0165,
+      "ci99": [
+        -0.01850499999999998,
+        0.051
+      ],
+      "scope": "Matched root clusters; descriptive comparison, no selection/promotion"
+    },
+    "p0": {
+      "webMinusRawMatchScore": 0.035,
+      "ci99": [
+        -0.038,
+        0.104
+      ],
+      "scope": "Matched root clusters; descriptive comparison, no selection/promotion"
+    },
+    "previous": {
+      "webMinusRawMatchScore": 0.022,
+      "ci99": [
+        -0.042,
+        0.08600500000000011
+      ],
+      "scope": "Matched root clusters; descriptive comparison, no selection/promotion"
+    },
+    "mixed": {
+      "webMinusRawMatchScore": 0.033,
+      "ci99": [
+        -0.008,
+        0.075
+      ],
+      "scope": "Matched root clusters; descriptive comparison, no selection/promotion"
+    },
+    "self": {
+      "webMinusRawMatchScore": 0.02,
+      "ci99": [
+        -0.078,
+        0.12
+      ],
+      "scope": "Matched root clusters; descriptive comparison, no selection/promotion"
+    }
+  },
+  "completedMatches": 11000,
+  "scope": "Independent whole-match evaluation, aFail=draw, original tribute. No pooling opponents; not comparable to gate330, GuanZero or old009 web-policy evaluations. No training, promotion or universal80percent claim."
+}

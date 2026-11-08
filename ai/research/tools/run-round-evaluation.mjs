@@ -33,8 +33,11 @@ export async function evaluateRegistered(run) {
     state.workers = Array.from({ length: plan.workers }, (_, slot) =>
       readJSON(join(run, `worker-${slot}.json`)),
     ).filter(Boolean);
-    state.completedRounds = state.workers.reduce((n, w) => n + w.completedPairs * 2, 0);
-    state.strengthGames = state.completedRounds;
+    state.completedRounds = state.workers.reduce(
+      (n, w) => n + (w.completedRounds ?? w.completedPairs * 2),
+      0,
+    );
+    state.strengthGames = plan.evaluationKind === 'decision-trace' ? 0 : state.completedRounds;
     state.updatedAt = new Date().toISOString();
     if (stop() && !existsSync(join(run, 'STOP')))
       writeJSON(join(run, 'STOP'), { reason: 'fixed-evaluation-deadline', atUTC: state.updatedAt });
@@ -64,7 +67,12 @@ export async function evaluateRegistered(run) {
         launch(
           process.execPath,
           [
-            join(plan.evaluationSource, 'ai/danMCai/evaluation/evaluate-round-pairs.mjs'),
+            join(
+              plan.evaluationSource,
+              plan.evaluationKind === 'decision-trace'
+                ? 'ai/danMCai/evaluation/evaluate-decision-trace.mjs'
+                : 'ai/danMCai/evaluation/evaluate-round-pairs.mjs',
+            ),
             `--protocol=${protocol}`,
             `--run=${run}`,
             `--shard=${slot}`,
@@ -88,7 +96,12 @@ export async function evaluateRegistered(run) {
     await launch(
       plan.python,
       [
-        join(plan.evaluationSource, 'ai/danMCai/evaluation/summarize-round-pairs.py'),
+        join(
+          plan.evaluationSource,
+          plan.evaluationKind === 'decision-trace'
+            ? 'ai/research/tools/summarize-decision-trace.py'
+            : 'ai/danMCai/evaluation/summarize-round-pairs.py',
+        ),
         '--protocol',
         protocol,
         '--results',

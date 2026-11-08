@@ -34,6 +34,7 @@ export async function playRound({
   capture = false,
   descriptive = false,
   modelConfigs = {},
+  checkpoint = null,
 }) {
   const game = createRound(seed);
   const trace = capture ? { initial: structuredClone(game), moves: [] } : null;
@@ -55,6 +56,7 @@ export async function playRound({
     : null;
   let pending = [];
   for (let turn = 0; turn < 1000; turn++) {
+    if (checkpoint) await checkpoint();
     const p = game.turn;
     let play,
       estimates = null;
