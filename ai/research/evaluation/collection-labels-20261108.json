@@ -74,7 +74,13 @@
       "scope": "Synthetic UI/network correctness, no strength games or real human records"
     },
     "inMemoryCloudSQLPreservesLabels": true,
-    "sanitizationUnicodeNullComputerAndSampleExclusionRegression": true
+    "sanitizationUnicodeNullComputerAndSampleExclusionRegression": true,
+    "syntheticRawEvidence": {
+      "appVersion": "02b78397b0",
+      "kind": "test",
+      "sha256": "6cf60405da68a18f173b1e9ea4b090954ee5f046a23f096862a59ce7c2d67003",
+      "fullRecord": "ignored local artifact only, not committed"
+    }
   },
   "preservedSourceSHA256": {
     "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
@@ -122,8 +128,36 @@
     "web/src/network/spectators.js": "31d6fc99e392359a876ca3dd9bdca2d6761013834f0a9568bd8a1957de2d41cb",
     "web/src/network/voice.js": "c9dbf611c49bacb44d7a9f37ff2483e569aab1c553852cac127764106a1ab8ba"
   },
-  "scope": "Only synthetic kind=test round used for end-to-end cloud validation. No real player records, full private cards, weights, export credentials or generated samples committed; no human/neural training, champion change or frozen-run writes. Existing collector protocol already accepts optional labels; no receiver redeployment required.",
+  "scope": "Two synthetic kind=test complete rounds (predeployment and deployed Pages) validated cloud persistence. Zero human training samples or strength acceptance. No real player records, full private cards, weights, export credentials or generated samples committed; no champion change or frozen-run writes. Existing collector protocol already accepts optional labels; no receiver redeployment required.",
   "deployment": {
-    "status": "pending"
+    "status": "success",
+    "codeCommit": "19fb94e447e8799e93400a983875312ee47f1234",
+    "workflowRun": 42448965760,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42448965760",
+    "deployedAtUTC": "2026-11-08T05:04:24Z",
+    "publicBuild": "02b78397b0",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "verifiedAtUTC": "2026-11-08T05:06:09.712469+00:00",
+    "liveSyntheticCloudRoundTrip": {
+      "stage": "deployed-pages",
+      "recordId": "fad1dd23-94a7-45cb-b0ad-436c6e7f0c54:1",
+      "kind": "test",
+      "humanTrainingGames": 0,
+      "actions": 84,
+      "actorCounts": {
+        "human": 38,
+        "bot": 45,
+        "timeout": 1
+      },
+      "hostUploads": 1,
+      "durableCloudRow": 41,
+      "duplicateAcknowledged": true,
+      "anonymousReadDenied": true,
+      "preEndUploads": 0,
+      "roomAndHumanNamesRoundTrip": true,
+      "computerNamesNull": true,
+      "pageErrors": []
+    },
+    "liveSyntheticRawSHA256": "51e980be04ac57b9d51a0affbdebeaea8a708cb9a5d5616b521c3521292195e0"
   }
 }
