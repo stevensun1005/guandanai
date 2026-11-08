@@ -953,6 +953,48 @@
   },
   "scope": "Four visual changes plus plate-center adaptation. No model/policy/reward/training changes; no human/strength games or uploads.",
   "deployment": {
-    "status": "pending"
+    "status": "success",
+    "codeCommit": "01799f635549546895ee08e14196b71fb2a9f669",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42501549267",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "version": "0bafe9ce07",
+    "verifiedAtUTC": "2026-11-08T16:53:26.872123+00:00",
+    "liveBrowser": {
+      "viewportCases": 5,
+      "pageErrors": [],
+      "version": "0bafe9ce07",
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ],
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "024",
+          "guanzero-adp-io48-310956"
+        ],
+        [
+          "023",
+          "guanzero-adp-io48-303975"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ]
+    }
   }
 }

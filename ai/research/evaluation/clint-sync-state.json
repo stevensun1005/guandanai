@@ -1,19 +1,14 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "2b2a824e8d653b35ba64fe998aa3cdff0d0dd9a0",
-  "evidence": "clint-sync-20261108-0435.json",
-  "pending": [
-    {
-      "upstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
-      "evidence": "clint-sync-20261108-1635.json",
-      "remaining": "Pages deployment and live verification"
-    }
-  ],
+  "lastSuccessfulUpstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
+  "evidence": "clint-sync-20261108-1635.json",
+  "pending": [],
   "lastCheckedUpstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",
     "deployedCodeCommit": "19fb94e447e8799e93400a983875312ee47f1234"
-  }
+  },
+  "previousSuccessfulEvidence": "clint-sync-20261108-0435.json"
 }
