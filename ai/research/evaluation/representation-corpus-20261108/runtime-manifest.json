@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "id": "representation-corpus-20261108",
+  "sourceCommit": "c32a66d64c89f6701ac983ef6b2a855f7c731b1a",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\representation-corpus-runtime-20261108",
+  "sourceFiles": 152,
+  "protocolSHA256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0",
+  "protocolLF_SHA256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0",
+  "designSHA256": "44252a598e4fc04dcd1378e030c900f4857dd61b9f31de721ea5cf9146307e1b",
+  "seedAuditSHA256": "72ed6f156389b026d120d0079363344913e86f25094c5c98dc14c2c26c1fe5e9",
+  "registeredWindow": {
+    "startUTC": "2026-11-08T02:11:06.724Z",
+    "deadlineUTC": "2026-11-08T04:11:06.724Z",
+    "requestedHours": 2,
+    "restartExtendsDeadline": false
+  },
+  "protocolDeadlineUTC": "2026-11-08T04:11:06.650174+00:00",
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "dataDirectory": "D:/vibecoding/guandan/ai/danMCai/data/generated/representation-corpus-20261108",
+  "decisionsExecutedAtFreeze": 0,
+  "optimizerUpdates": 0
+}
