@@ -9,6 +9,7 @@
  */
 import { Worker } from 'node:worker_threads';
 import { encode, cardsArray } from '../../../../web/src/ai/encoding.mjs';
+import { encodePolicyExtrasBatch } from '../../../../web/src/ai/policy-features.mjs';
 import { ACTION, STATE } from './lib.mjs';
 
 export async function createBatchedPool(
@@ -69,9 +70,11 @@ export async function createBatchedPool(
     const rows = items.reduce((n, item) => n + item.state.actions.length, 0);
     const states = new Float32Array(rows * STATE);
     const actions = new Float32Array(rows * ACTION);
+    const extras = items.some((x) => x.extrasMode) ? new Float32Array(rows * 53) : null;
     let row = 0;
     for (const item of items) {
       const encoded = encode(item.state);
+      if (item.extrasMode === 'public') extras.set(encodePolicyExtrasBatch(item.state), row * 53);
       for (const ids of item.state.actions) {
         states.set(encoded, row * STATE);
         actions.set(cardsArray(ids), row * ACTION);
@@ -85,10 +88,10 @@ export async function createBatchedPool(
     stats.batches++;
     stats.decisions += items.length;
     stats.rows += rows;
-    worker.postMessage({ id, file, rows, states: states.buffer, actions: actions.buffer }, [
-      states.buffer,
-      actions.buffer,
-    ]);
+    worker.postMessage(
+      { id, file, rows, states: states.buffer, actions: actions.buffer, extras: extras?.buffer },
+      [states.buffer, actions.buffer, ...(extras ? [extras.buffer] : [])],
+    );
   }
 
   function flush() {
@@ -112,11 +115,11 @@ export async function createBatchedPool(
 
   return {
     stats,
-    values(file, state) {
+    values(file, state, extrasMode = null) {
       return new Promise((resolve, reject) => {
         if (failure) return reject(failure);
         if (!queues.has(file)) queues.set(file, []);
-        queues.get(file).push({ state, resolve, reject });
+        queues.get(file).push({ state, resolve, reject, extrasMode });
         if (!scheduled) {
           scheduled = true;
           setImmediate(flush);

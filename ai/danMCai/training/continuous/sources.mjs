@@ -35,6 +35,7 @@ export const sourceFiles = [
   ].map((f) => `web/src/ai/${f}`),
   'web/src/hand/arrangement.js',
   'web/src/hand/hints.js',
+  'web/src/ai/policy-features.mjs',
   'package-lock.json',
   'ai/danMCai/training/continuous/sources.mjs',
   'ai/danMCai/training/continuous/mac-24h.mjs',

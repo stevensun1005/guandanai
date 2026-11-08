@@ -223,6 +223,16 @@ function initialize() {
 }
 
 const config = initialize();
+if (
+  config.extrasMode &&
+  (!['public', 'zero'].includes(config.extrasMode) ||
+    !config.researchNoGate ||
+    config.actorImplementation !== 'fast' ||
+    config.actorMix.rule !== 0 ||
+    config.learner.targetMatchWeight !== 0 ||
+    config.learner.anchorWeight !== 0)
+)
+  throw Error('Extras training requires the registered single-round neural-only ablation');
 const state = readJSON(paths.status, {}) || {};
 state.gateIndex ??= config.evaluationBlockOffset ?? 0;
 state.lastSnapshotAt ??= 0;
@@ -655,8 +665,9 @@ function tick() {
     return shutdown(0, 'time-limit');
   }
   const totals = updateLeague();
-  if (Date.now() - state.lastSnapshotAt >= config.snapshotMinutes * 60000) snapshot();
-  if (!children.has('gate') && !children.has('anchor')) {
+  if (!config.researchNoGate && Date.now() - state.lastSnapshotAt >= config.snapshotMinutes * 60000)
+    snapshot();
+  if (!config.researchNoGate && !children.has('gate') && !children.has('anchor')) {
     if (Date.now() - state.lastAnchorAt >= anchorSettings.intervalHours * 3600000) startAnchor();
     else startGate();
   }

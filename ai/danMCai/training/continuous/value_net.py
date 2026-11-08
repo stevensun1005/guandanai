@@ -90,7 +90,7 @@ class ValueNet(torch.nn.Module):
 
 
 class ValueNetExtras(ValueNet):
-    """Equivalent champion student at initialization; no online learner uses this class yet."""
+    """Equivalent champion student at initialization; opt-in extras learner uses public features."""
     def __init__(self, weights=None):
         super().__init__(weights)
         self.extra_weight = torch.nn.Parameter(torch.zeros(53, WIDTH))

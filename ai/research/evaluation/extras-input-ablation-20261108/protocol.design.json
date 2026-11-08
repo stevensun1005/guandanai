@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "purpose": "New owner-authorized two-seed controlled public-extras training; predictions are hypotheses, not strength claims",
+  "authorization": "authorization.json",
+  "initial": "ordinary017/v000855042 backbone plus identical zero53x512 projection,13parameters in both arms",
+  "initialization": {
+    "optimizer": "freshAdam each run",
+    "replay": "empty",
+    "startingStep": 0,
+    "inheritedBackboneStep": 855042,
+    "pretrainedExtras": false
+  },
+  "arms": [
+    {
+      "id": "extras-public-s1-20261108",
+      "extrasMode": "public",
+      "optimizerSeed": 202611081,
+      "actorSeedOffset": 24960000,
+      "actorSeedEnd": 24970000,
+      "hours": 4
+    },
+    {
+      "id": "extras-zero-s1-20261108",
+      "extrasMode": "zero",
+      "optimizerSeed": 202611081,
+      "actorSeedOffset": 24970000,
+      "actorSeedEnd": 24980000,
+      "hours": 4
+    },
+    {
+      "id": "extras-zero-s2-20261108",
+      "extrasMode": "zero",
+      "optimizerSeed": 202611082,
+      "actorSeedOffset": 24980000,
+      "actorSeedEnd": 24990000,
+      "hours": 4
+    },
+    {
+      "id": "extras-public-s2-20261108",
+      "extrasMode": "public",
+      "optimizerSeed": 202611082,
+      "actorSeedOffset": 25020000,
+      "actorSeedEnd": 25030000,
+      "hours": 4
+    }
+  ],
+  "protocolChanges": [
+    "new source with opt-in extras replay and batched inference",
+    "self-only current-model training; no rules/Clint",
+    "all neural decisions keep existing candidate generation/softmax .02",
+    "internal gates and league snapshots disabled for controlled ablation",
+    "same13parameter architecture; zero arm masks all53features",
+    "full six-layer backbone optimized; newAdam and emptyreplay per arm",
+    "shorter authorization cutoff; unchanged immutable old campaign"
+  ],
+  "target": "Only completed single-round final signed upgrade +/-1/2/3; stored match components have lossweight0; no tactical or privileged target",
+  "selection": "Final window learner only, never best export or internal champion",
+  "resources": {
+    "actors": 4,
+    "lanesPerActor": 8,
+    "actorProvider": "dml",
+    "sessionLimit": 12,
+    "learner": "existingROCm cuda:0",
+    "threads": 1,
+    "batch": 2048,
+    "lr": 1e-05,
+    "capacity": 2000000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "exportSeconds": 600,
+    "reserveGiB": 4,
+    "resumeGiB": 5
+  },
+  "seedUse": {
+    "audit": "seed-audit.json",
+    "training": "new disjoint match-root intervals, max200derivedrounds, block exhaustion stopsactors",
+    "heldout": "10000 new literal deals =2 training seeds x5opponentgroups x1000deals; botharms share corresponding evaluationdeals",
+    "development": "synthetic tensors only, no new gameplay"
+  },
+  "evaluation": {
+    "groups": [
+      "vs017",
+      "vsP0",
+      "vs012",
+      "vsClint",
+      "mixed:finalist+Clint vsClint+Clint"
+    ],
+    "pairsPerGroupPerModelPerTrainingSeed": 1000,
+    "gamesPerModelPerTrainingSeed": 10000,
+    "primary": "per-training-seed public-minus-zero signed team upgrade vs017, paired deal-cluster95%CI",
+    "secondary": "other comparisons99%CI; peropponent WLD,placements,doubleup/doubledown",
+    "repeatCriterion": "positive primary point for BOTH training seeds and each95%lower>0; otherwise uncertain or negative; no pooled game CI masquerading as more training replicates",
+    "strata": "two-slots-no-play from frozen observation, descriptive report; never gate on tactical tags",
+    "partialGames": "incomplete pairs excluded and explicitly counted; no false full completion",
+    "publish": false
+  },
+  "deadlineUTC": "2026-11-11T15:00:00.000Z",
+  "computeDeadlineUTC": "2026-11-11T14:45:00.000Z",
+  "restart": "original remaining budget only; in-memory replay/RNG restoration is not guaranteed, any restart reported",
+  "next": "before fourth arm finishes prepare independent evaluation; analyze both-seed evidence and preregister next informative training under broad owner authorization; no waiting for per-route approval"
+}

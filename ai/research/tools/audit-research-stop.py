@@ -30,7 +30,7 @@ def audit(run, frozen):
     import torch
     torch.set_num_threads(1)
     sys.path.insert(0, str(frozen / 'ai/danMCai/training/continuous'))
-    from value_net import ValueNet, load_onnx_weights
+    from value_net import ValueNet, ValueNetExtras, load_onnx_weights
     state, learner, config = (read(run/p) for p in ['status.json','learner/status.json','config.json'])
     task=read(run/'campaign-task.json')
     assert state.get('stoppedAt') and not state.get('running') and learner['state']=='stopped'
@@ -38,7 +38,9 @@ def audit(run, frozen):
     assert sha(Path(task['protocol']))==task['protocolSHA256']
     assert not task['window']['restartExtendsDeadline']
     parse=lambda s:datetime.fromisoformat(s.replace('Z','+00:00'))
-    assert parse(state['stoppedAt'])>=parse(task['window']['deadlineUTC'])
+    plan=read(run/'protocol.json')
+    effective=min(parse(task['window']['deadlineUTC']),parse(plan.get('deadlineUTC',task['window']['deadlineUTC'])))
+    assert parse(state['stoppedAt'])>=effective
     for name,digest in config['sourceSHA256'].items():
         assert hashlib.sha256((frozen/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()==digest,name
     latest=read(run/'models/latest.json')
@@ -47,9 +49,16 @@ def audit(run, frozen):
     assert saved['step']==learner['step']==latest['step']
     for field in ['trainedRows','ingestedRows']:
         assert saved[field]==learner[field]==latest[field]
-    net=ValueNet(load_onnx_weights(run/'models'/latest['file']))
+    net=(ValueNetExtras if config.get('extrasMode') else ValueNet)(load_onnx_weights(run/'models'/latest['file']))
+    if config.get('extrasMode'):
+        import onnx
+        from onnx import numpy_helper
+        a={v.name:numpy_helper.to_array(v) for v in onnx.load(str(run/'models'/latest['file'])).graph.initializer}
+        with torch.no_grad():net.extra_weight.copy_(torch.from_numpy(a['extra_weight'].copy()))
+        if config['extrasMode']=='zero':assert torch.count_nonzero(net.extra_weight)==0
     assert all(torch.equal(v,saved['model'][k]) for k,v in net.state_dict().items())
-    assert len(saved['optimizer']['state'])==len(list(net.parameters()))==12
+    parameters=13 if config.get('extrasMode') else 12
+    assert len(saved['optimizer']['state'])==len(list(net.parameters()))==parameters
     assert all(int(s['step'])==saved['step'] and all(torch.isfinite(v).all() for v in s.values())
                for s in saved['optimizer']['state'].values())
     spec=importlib.util.spec_from_file_location('stop_audit',ROOT/'ai/research/tools/audit-continuous-stop.py')
@@ -64,7 +73,7 @@ def audit(run, frozen):
        'task':task,'stoppedAtUTC':state['stoppedAt'],
        'exitDelaySeconds':(parse(state['stoppedAt'])-parse(task['window']['deadlineUTC'])).total_seconds(),
        'latest':latest,'checkpointSHA256':sha(run/'learner/checkpoint.pt'),
-       'matchingNetworkAndAdam':True,'adamStates':12,'adamStep':saved['step'],
+       'matchingNetworkAndAdam':True,'adamStates':parameters,'adamStep':saved['step'],
        'parent':config['parent'],'sourceSHA256':config['sourceSHA256'],
        'actors':actors,'replay':shards,'totals':state['totals'],
        'tailRowsNotInCheckpoint':shards['pendingRows'],'optimizerUpdatesDuringAudit':0,

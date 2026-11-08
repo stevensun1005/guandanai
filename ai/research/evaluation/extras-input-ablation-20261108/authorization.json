@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "ownerInstruction": "开始吧 我要你到周三早上10.要连续不断的训练 一个训练结束了你就要自己想该训练什么 我允许你训练任何东西",
+  "recordedAtUTC": "2026-11-08T13:19:38.309212+00:00",
+  "deadlineUTC": "2026-11-11T15:00:00.000Z",
+  "computeDeadlineUTC": "2026-11-11T14:45:00.000Z",
+  "supersedes": "Previous Wednesday noon deadline and waiting for stage2 training approval, only for NEW Windows danMCai runs",
+  "trainingAuthorization": "Autonomous training methods including extras; analyze results, preregister and launch next informative run without another approval. Preparation/evaluation/audits are necessary parts of the loop.",
+  "preserved": [
+    "other machines and frozen runs untouched",
+    "web017/[017,012] no publication",
+    "single-round terminal reward only",
+    "Clint evaluation only",
+    "human/D1 data remain excluded",
+    "no compute after new deadline"
+  ],
+  "oldCampaignManifestChanged": false
+}

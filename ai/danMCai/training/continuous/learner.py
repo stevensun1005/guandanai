@@ -16,7 +16,7 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
+from value_net import FEATURES, ValueNet, ValueNetExtras, export_onnx, export_onnx_extras, load_onnx_weights  # noqa: E402
 
 TARGETS = 4
 
@@ -51,18 +51,24 @@ def target(raw, match_weight):
 class Replay:
     """Fixed-capacity ring of int8 features and float32 target components."""
 
-    def __init__(self, capacity, seed):
+    def __init__(self, capacity, seed, extra_features=0):
         self.capacity = capacity
         self.x = np.zeros((capacity, FEATURES), np.int8)
         self.y = np.zeros((capacity, TARGETS), np.float32)
+        self.e = np.zeros((capacity, extra_features), np.float32) if extra_features else None
         self.size = 0
         self.cursor = 0
         self.random = np.random.default_rng(seed)
 
-    def add(self, x, y):
+    def add(self, x, y, e=None):
         for start in range(0, len(x), self.capacity):
             xs, ys = x[start : start + self.capacity], y[start : start + self.capacity]
             n = len(xs)
+            if self.e is not None:
+                if e is None or e.shape != (len(x), 53) or not np.isfinite(e).all():
+                    raise ValueError("Invalid extras replay rows")
+                positions = (self.cursor + np.arange(n)) % self.capacity
+                self.e[positions] = e[start:start+n]
             end = self.cursor + n
             if end <= self.capacity:
                 self.x[self.cursor : end], self.y[self.cursor : end] = xs, ys
@@ -75,7 +81,7 @@ class Replay:
 
     def batch(self, n):
         index = self.random.integers(0, self.size, n)
-        return self.x[index], self.y[index]
+        return (self.x[index], self.y[index], self.e[index]) if self.e is not None else (self.x[index], self.y[index])
 
 
 def learner_device(name):
@@ -104,7 +110,10 @@ class Learner:
         self.state_dir = self.run / "learner"
         self.state_dir.mkdir(parents=True, exist_ok=True)
         self.checkpoint = self.state_dir / "checkpoint.pt"
-        self.replay = Replay(int(self.settings["capacity"]), int(self.settings["seed"]))
+        self.extras_mode = self.config.get("extrasMode")
+        if self.extras_mode not in (None, "public", "zero"):
+            raise ValueError("Unknown extras mode")
+        self.replay = Replay(int(self.settings["capacity"]), int(self.settings["seed"]), 53 if self.extras_mode else 0)
         self.ingested = set()
         self.counted = set()
         self.ingested_rows = 0
@@ -114,11 +123,19 @@ class Learner:
         self.started = time.time()
         latest = read_json(self.models / "latest.json")
         initial = self.models / latest["file"]
-        self.net = ValueNet(load_onnx_weights(initial)).to(self.device)
+        self.net = (ValueNetExtras if self.extras_mode else ValueNet)(load_onnx_weights(initial)).to(self.device)
+        if self.extras_mode:
+            import onnx
+            from onnx import numpy_helper
+            arrays = {v.name: numpy_helper.to_array(v) for v in onnx.load(str(initial)).graph.initializer}
+            with torch.no_grad():
+                self.net.extra_weight.copy_(torch.from_numpy(arrays["extra_weight"].copy()).to(self.device))
         self.optimizer = torch.optim.Adam(
             self.net.parameters(), lr=float(self.settings["learningRate"])
         )
         self.anchor = None
+        if self.extras_mode and float(self.settings["anchorWeight"]) != 0:
+            raise ValueError("Extras experiment requires the registered zero anchor loss")
         if float(self.settings["anchorWeight"]) > 0:
             self.anchor = ValueNet(load_onnx_weights(self.run / "models" / "anchor.onnx")).to(self.device)
             self.anchor.requires_grad_(False)
@@ -168,7 +185,15 @@ class Learner:
                 self.log({"event": "bad-shard", "name": manifest.name})
                 self.ingested.add(manifest.name)
                 continue
-            self.replay.add(x.reshape(rows, FEATURES), y.reshape(rows, TARGETS))
+            if self.extras_mode:
+                e = np.fromfile(f"{stem}.e.f32", np.float32).reshape(rows, 53)
+                if meta.get("extraFeatures") != 53 or not np.isfinite(e).all():
+                    raise ValueError("Invalid extras manifest")
+                if self.extras_mode == "zero" and np.any(e):
+                    raise ValueError("Control arm received nonzero extras")
+                self.replay.add(x.reshape(rows, FEATURES), y.reshape(rows, TARGETS), e)
+            else:
+                self.replay.add(x.reshape(rows, FEATURES), y.reshape(rows, TARGETS))
             self.ingested.add(manifest.name)
             if manifest.name not in self.counted:
                 self.counted.add(manifest.name)
@@ -182,17 +207,18 @@ class Learner:
             kept += int(meta["rows"])
             if kept > self.replay.capacity:
                 stem = manifest.with_suffix("")
-                for suffix in (".x.i8", ".y.f32", ".json"):
+                for suffix in (".x.i8", ".y.f32", ".e.f32", ".json"):
                     Path(f"{stem}{suffix}").unlink(missing_ok=True)
                 self.ingested.discard(manifest.name)
                 self.counted.discard(manifest.name)
         return added
 
     def train_step(self):
-        x, raw = self.replay.batch(int(self.settings["batch"]))
+        data = self.replay.batch(int(self.settings["batch"]))
+        x, raw = data[:2]
         features = torch.from_numpy(x.astype(np.float32)).to(self.device)
         goal = torch.from_numpy(target(raw, float(self.settings["targetMatchWeight"]))).to(self.device)
-        prediction = self.net(features)
+        prediction = self.net(features, torch.from_numpy(data[2]).to(self.device)) if self.extras_mode else self.net(features)
         loss = torch.mean((prediction - goal) ** 2)
         if self.anchor is not None:
             with torch.no_grad():
@@ -215,7 +241,7 @@ class Learner:
     def publish(self):
         version = f"v{self.step:09d}"
         file = f"{version}.onnx"
-        digest = export_onnx(self.net.weights(), self.models / file)
+        digest = export_onnx_extras(self.net.weights(), self.models / file, self.net.extra_weight.detach().cpu().numpy()) if self.extras_mode else export_onnx(self.net.weights(), self.models / file)
         torch.save(
             {
                 "model": self.net.state_dict(),
@@ -224,6 +250,9 @@ class Learner:
                 "trainedRows": self.trained_rows,
                 "ingestedRows": self.ingested_rows,
                 "countedShards": sorted(self.counted),
+                "torchRNG": torch.get_rng_state(),
+                "cudaRNG": torch.cuda.get_rng_state_all() if self.device.type == "cuda" else [],
+                "replayRNGJSON": json.dumps(self.replay.random.bit_generator.state),
             },
             f"{self.checkpoint}.tmp",
         )

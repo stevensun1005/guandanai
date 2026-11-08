@@ -62,7 +62,7 @@ async function session(file) {
   return promise;
 }
 
-async function score({ id, file, rows, states, actions }) {
+async function score({ id, file, rows, states, actions, extras }) {
   try {
     const engine = await session(file);
     const started = performance.now();
@@ -82,6 +82,14 @@ async function score({ id, file, rows, states, actions }) {
           54,
         ]),
       };
+      if (engine.inputNames.includes('extras')) {
+        if (!extras) throw Error('Missing registered extras input');
+        inputs.extras = new ort.Tensor(
+          'float32',
+          new Float32Array(extras).subarray(first * 53, (first + count) * 53),
+          [count, 53],
+        );
+      }
       let output;
       try {
         output = await engine.run(inputs);

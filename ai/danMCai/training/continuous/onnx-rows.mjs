@@ -107,7 +107,10 @@ export function rowsModel(modelBytes) {
       });
     return edited;
   });
-  if (['state', 'actions', 'values'].some((name) => !seen.has(name)) || seen.size !== 3)
+  if (
+    ['state', 'actions', 'values'].some((name) => !seen.has(name)) ||
+    (seen.size !== 3 && !(seen.size === 4 && seen.has('extras')))
+  )
     throw Error('Not a P0-layout policy graph (expected inputs state, actions and output values)');
   return out;
 }

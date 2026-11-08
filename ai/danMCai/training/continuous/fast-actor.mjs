@@ -14,6 +14,7 @@ import { appendFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import * as ort from 'onnxruntime-node';
 import { seededRandom } from '../../../shared/simulation/simulation.mjs';
+import { encodePolicyExtras } from '../../../../web/src/ai/policy-features.mjs';
 import { createBatchedPool } from './batch-inference.mjs';
 import { createCandidateCache } from './fast-candidates.mjs';
 import { playMatchWith } from './fast-rollout.mjs';
@@ -140,10 +141,18 @@ async function lane() {
         candidates: cache.candidates,
         snapshotInfer: lineup.file ? (state) => pool.values(lineup.file, state) : null,
         decide: async (state) => {
-          const values = await pool.values(model, state);
+          const values = await pool.values(model, state, config.extrasMode);
           const { index } = explore(values, config.exploration, random);
           rows.push({
             features: encodeSample(state, state.actions[index]),
+            ...(config.extrasMode
+              ? {
+                  extras:
+                    config.extrasMode === 'public'
+                      ? encodePolicyExtras(state, index)
+                      : new Float32Array(53),
+                }
+              : {}),
             team: state.p % 2,
             round: state.match.round,
           });

@@ -50,6 +50,14 @@ def audit_shards(directory, counted, inherited_absent=()):
                     f"Invalid round bounds: {path.name}")
         manifests[path.name] = {"rows": rows, "matches": meta["matches"]}
         expected.update([path.name, x.name, y.name])
+    for path in directory.glob('*.json'):
+        meta=read(path)
+        if meta.get('extraFeatures'):
+            require(meta['extraFeatures']==53,'Wrong extras width')
+            e=path.with_suffix('.e.f32')
+            require(e.is_file() and e.stat().st_size==meta['rows']*53*4,'Bad extras sidecar')
+            require(all(math.isfinite(v[0]) for v in struct.iter_unpack('<f',e.read_bytes())),'Nonfinite extras')
+            expected.add(e.name)
     actual = {p.name for p in directory.iterdir() if p.is_file()}
     require(actual == expected, f"Orphan or temporary shard files: {sorted(actual ^ expected)}")
     require(manifests, "No replay shards retained")

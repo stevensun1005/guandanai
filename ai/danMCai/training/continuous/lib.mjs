@@ -218,7 +218,11 @@ export function labelMatch(rows, result) {
     if (!round) throw Error('Decision from an unknown round');
     const points = (row.team === round.team ? 1 : -1) * round.up;
     const outcome = result.winner === null ? 0 : row.team === result.winner ? 1 : -1;
-    return { features: row.features, targets: [points, outcome, row.round - 1, rounds.size] };
+    return {
+      features: row.features,
+      ...(row.extras ? { extras: row.extras } : {}),
+      targets: [points, outcome, row.round - 1, rounds.size],
+    };
   });
 }
 
@@ -232,6 +236,7 @@ export class ShardWriter {
   }
   reset() {
     this.features = [];
+    this.extras = [];
     this.targets = [];
     this.matches = 0;
     this.models = new Set();
@@ -243,6 +248,7 @@ export class ShardWriter {
   add(labelled, model) {
     for (const row of labelled) {
       this.features.push(row.features);
+      this.extras.push(row.extras);
       this.targets.push(row.targets);
     }
     this.matches++;
@@ -257,10 +263,19 @@ export class ShardWriter {
     this.targets.forEach((row, i) => targets.set(row, i * TARGETS));
     writeFileSync(join(this.directory, `${name}.x.i8`), features);
     writeFileSync(join(this.directory, `${name}.y.f32`), targets);
+    const withExtras = this.extras.some(Boolean);
+    if (withExtras) {
+      if (this.extras.some((x) => !x || x.length !== 53 || !x.every(Number.isFinite)))
+        throw Error('Invalid extras shard');
+      const data = new Float32Array(this.rows * 53);
+      this.extras.forEach((x, i) => data.set(x, i * 53));
+      writeFileSync(join(this.directory, `${name}.e.f32`), data);
+    }
     const manifest = {
       schema: 1,
       rows: this.rows,
       features: FEATURES,
+      ...(withExtras ? { extraFeatures: 53 } : {}),
       targets: ['roundPoints', 'matchResult', 'roundIndex', 'matchRounds'],
       matches: this.matches,
       models: [...this.models],

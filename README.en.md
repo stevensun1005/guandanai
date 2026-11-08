@@ -224,3 +224,5 @@ Owner-authorized local collection now snapshots the room and human nicknames at 
 Fresh4,000-root/8,000-round offline calibration validation did not establish lower error: both self/Clint primary intervals cross zero. The map stays offline with no refit or sample expansion. Next is the bounded simulated-self review CLI only: archived Q ranks plus descriptions, no new games, inference, human/D1 input, search, calibrated values or promotion. See MODEL_STUDY62.2/65.
 
 The offline self-simulation review converter and integrity audit are complete (MODEL_STUDY65.1). Further training remains limited by existing gates/authorization; a new direction has been requested. Do not rerun completed studies or enter phase2 automatically. Original campaign deadline monitoring continues; full review data stay ignored locally.
+
+2026-11-08: New owner authorization permits autonomous Windows danMCai training until Wednesday 10:00 Toronto, with compute stopping at 09:45. The public-extras versus zero-input two-seed experiment is in preparation, not a strength result. Web champion017, frozen runs and human-data isolation remain unchanged. See the model study section66.
