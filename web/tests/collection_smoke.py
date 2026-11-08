@@ -68,7 +68,7 @@ with sync_playwright() as p:
         host.wait_for_function('n=>G.log.length>n',arg=state['log'],timeout=10000)
         if host.evaluate("G.phase==='play'"):assert not uploads
     assert host.evaluate("G.phase==='roundEnd'||G.phase==='over'")
-    try:host.wait_for_function("() => document.querySelector('#collectionStatus').textContent==='牌谱已同步'",timeout=40000)
+    try:host.wait_for_function("() => document.querySelector('#collectionStatus').textContent.startsWith('牌谱已同步')",timeout=40000)
     except Exception:
         print(json.dumps({'uploads':len(uploads),'responses':responses,'status':host.locator('#collectionStatus').inner_text(),'errors':errors}));raise
     assert len(uploads)==1, len(uploads)
@@ -76,17 +76,20 @@ with sync_playwright() as p:
     raw=uploads[0];assert raw['kind']=='test' and raw['humanMask']==3
     assert {a['actor'] for a in raw['actions']}=={'human','bot','timeout'}
     assert len(raw['actions'])==host.evaluate('G.log.length')
-    assert 'CollectH' not in json.dumps(raw) and 'CollectG' not in json.dumps(raw)
+    assert raw['room']==code
+    assert [s['name'] for s in raw['seats']]==['CollectH','CollectG',None,None]
     headers={'Authorization':'Bearer '+TOKEN}
     admin=ENDPOINT.rsplit('/',1)[0]+'/admin/export?includeTests=1'
     response=host.request.get(admin,headers=headers);assert response.ok
     saved=next(x for x in response.json()['records'] if x['record']['id']==raw['id'])
     assert len(saved['record']['actions'])==len(raw['actions'])
+    assert saved['record']['room']==code
+    assert [s['name'] for s in saved['record']['seats']]==['CollectH','CollectG',None,None]
     duplicate=host.request.post(ENDPOINT,data=json.dumps(raw),headers={'Content-Type':'application/json','Origin':'https://stevensun1005.github.io'})
     assert duplicate.status==200 and duplicate.json()['duplicate']
     assert host.request.get(admin).status==401
     assert not errors,errors
     host.screenshot(path=str(OUT/'completed.png'))
-    report={'stage':'predeployment-local-build' if '--local-build' in sys.argv else 'deployed-pages','recordId':raw['id'],'kind':'test','humanTrainingGames':0,'actions':len(raw['actions']),'actorCounts':{a:sum(x['actor']==a for x in raw['actions']) for a in ['human','bot','timeout']},'hostUploads':len(uploads),'durableCloudRow':saved['seq'],'duplicateAcknowledged':True,'anonymousReadDenied':True,'preEndUploads':0,'pageErrors':errors}
+    report={'stage':'predeployment-local-build' if '--local-build' in sys.argv else 'deployed-pages','recordId':raw['id'],'kind':'test','humanTrainingGames':0,'actions':len(raw['actions']),'actorCounts':{a:sum(x['actor']==a for x in raw['actions']) for a in ['human','bot','timeout']},'hostUploads':len(uploads),'durableCloudRow':saved['seq'],'duplicateAcknowledged':True,'anonymousReadDenied':True,'preEndUploads':0,'roomAndHumanNamesRoundTrip':True,'computerNamesNull':True,'pageErrors':errors}
     (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report))
     browser.close()

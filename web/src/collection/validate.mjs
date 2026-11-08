@@ -16,7 +16,7 @@ const model = (m) =>
     : /^\d{3,}$/.test(m.id) && /^[a-f0-9]{64}$/.test(m.sha256)) &&
   typeof m.version === 'string' &&
   /^[\w.-]{1,80}$/.test(m.version);
-// Optional labels a site may attach: the room number and each person's nickname (Clint's site sends them; this site does not).
+// Optional labels from this site and Clint: room number and human nicknames; older records may omit them.
 const label = (s, max) =>
   s === undefined ||
   s === null ||

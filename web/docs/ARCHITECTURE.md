@@ -146,4 +146,6 @@ Clint 的真人超时通过独立 `rule-timeout` Worker 消息进入 `rule-bot/t
 
 `ui/rules-book.mjs`提供图解规则内容，不接入策略；`hand/straight-flushes.mjs`只用于手动提示去重，不替代神经网络候选。`ui/level-display.mjs`和game.shown只保存本局显示，不改变级数结算、奖励或共享core规则。
 
-Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手牌高度稳定（含最后一张与隐藏选择提示行）、发牌飞向可见姓名牌、大厅署名及去除采集短说明。保留017默认和已有模型偏好；本站匿名牌谱不新增昵称／房间号，Clint来源可选字段接收沿用原实现；规则与神经网络路径均未修改。证据见`ai/research/evaluation/clint-sync-20261108-0435.json`。
+Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手牌高度稳定（含最后一张与隐藏选择提示行）、发牌飞向可见姓名牌、大厅署名及去除采集短说明。保留017默认和已有模型偏好；该次同步时未新增本站标签；随后所有者已明确授权本站也采集房间号／真人昵称，现与Clint来源统一；规则与神经网络路径均未修改。证据见`ai/research/evaluation/clint-sync-20261108-0435.json`。
+
+所有者追加要求：本站新联机记录也保存room与开打时真人seats[].name（电脑null），与Clint清理／长度规则一致。旧牌谱不回填，研究样本去除明文标签，单人／练习／明牌／测试与assisted边界不变；不新增训练或换冠军。实现与验证见`ai/research/evaluation/collection-labels-20261108.json`。

@@ -263,3 +263,5 @@ Node测试另以全宽参考求解器核对16个小残局、40组合法动作集
 房主恢复回归另先实际显示冠军评分、关闭个人开关再刷新，确认当前手辅助标记保留且无新展示；Node同时验证加载态不标记、进入下一手后旧标记失效。
 
 Clint手机增量回归：构建并启动本地服务后运行 `python -X utf8 web/tests/clint_phone_smoke.py http://127.0.0.1:8784/`。覆盖390×844、375×667、844×390与1440×1000，27→8→1→0张姓名／手牌稳定、新局和空手旋转重置、三家隐藏牌背的真实动画落点；合成局、采集请求阻断，不是棋力证据。另运行 `control_layout_smoke.py <URL> --targeted` 与 `host_restore_smoke.py <URL>`，核对评价、按钮和真实PeerJS恢复。
+
+采集标签回归：`node --test web/tests/collection.test.mjs`检查清理／Unicode长度、空标签、电脑null、完整重放、SQLite持久化与研究样本不含标签。`collection_smoke.py --local-build --token-file <本机私有密钥文件>`以真实PeerJS完成一个合成kind=test单局，验证上传、私有回读、幂等与拒绝匿名导出；密钥不输出，原始测试牌谱只存忽略目录。`host_restore_smoke.py <URL>`还比较刷新／关页前后的房间号和真人昵称；这些测试不是人类样本或棋力证据。

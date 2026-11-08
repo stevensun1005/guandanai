@@ -14,6 +14,8 @@ function context() {
     practice: runtime.reviewMode,
     kind: new URLSearchParams(location.search).get('test') === '1' ? 'test' : 'game',
     humans: [...runtime.network.humans],
+    room: runtime.network.code,
+    names: { ...runtime.network.names, 0: runtime.network.names?.[0] || runtime.nickname },
     version: VERSION,
     rules: runtime.rules,
     direction: runtime.direction,
@@ -63,6 +65,7 @@ export function initialize() {
             ? '牌谱已同步'
             : '牌谱自动保存'
           : '牌谱仅本机暂存';
+      status.textContent += ' · 新牌谱含昵称、房间号';
     },
   });
   addEventListener('online', () => void queue.flush());

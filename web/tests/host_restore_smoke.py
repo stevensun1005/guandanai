@@ -6,7 +6,7 @@ ROOT=next(p for p in Path(__file__).resolve().parents if (p/'package.json').is_f
 URL=(sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765/').rstrip('/')+'/?test=1'
 OUT=ROOT/'web/artifacts/validation/host-restore';OUT.mkdir(parents=True,exist_ok=True)
 SETUP="""()=>{G.tok++;resetGame();G.round=1;G.deck=[];G.hands=Array.from({length:4},(_,p)=>makeDeck().slice(p*27,p*27+27));Object.assign(G,{phase:'play',turn:0,L:2,paused:true,pausedBy:0,fixed:[],myOrder:[],reveal:0,gives:[],trib:[],seen:[],log:[],pw:[],clock:{who:0,left:60000,total:60000}});setHumans([0,1],NET.names);collectDealt();collectStarted();render();saveHost();}"""
-SNAP="()=>({hands:G.hands.map(h=>h.map(c=>c.id)),code:NET.code,record:snapshotRecord(G).pending.id})"
+SNAP="()=>({hands:G.hands.map(h=>h.map(c=>c.id)),code:NET.code,record:snapshotRecord(G).pending.id,room:snapshotRecord(G).pending.room,names:snapshotRecord(G).pending.seats.map(s=>s.name)})"
 with sync_playwright() as p:
  browser=p.chromium.launch(channel='chrome',headless=True)
  hc,gc=browser.new_context(),browser.new_context();errors=[];uploads=[]
@@ -39,5 +39,5 @@ with sync_playwright() as p:
  expect(host.locator('#coachPanel')).to_be_hidden()
  assert not errors,errors
  host.evaluate('()=>forgetHost()');host.reload(wait_until='networkidle');expect(host.locator('#lobby')).to_be_visible();assert host.evaluate('()=>G?.phase==="start" && !NET.started')
- report={'cases':cases,'explicitForgetDoesNotRestore':True,'actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff':True,'pageErrors':errors,'uploads':len(uploads),'scope':'Synthetic UI/network correctness, no strength games or real human records'}
+ report={'cases':cases,'explicitForgetDoesNotRestore':True,'actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff':True,'roomAndHumanNamesRestored':True,'pageErrors':errors,'uploads':len(uploads),'scope':'Synthetic UI/network correctness, no strength games or real human records'}
  (OUT/'report.json').write_bytes((json.dumps(report,indent=2)+'\n').encode());print(json.dumps(report));browser.close()

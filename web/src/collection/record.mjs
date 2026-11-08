@@ -3,6 +3,15 @@ const eligible = (context) =>
   context.mode === 'host' && !context.practice && !context.excluded && context.humans.length >= 2;
 export const humanMask = (humans) => humans.reduce((mask, seat) => mask | (1 << seat), 0);
 const ids = (hands) => hands.map((hand) => hand.map((card) => card.id));
+const label = (value, max) =>
+  [
+    ...String(value ?? '')
+      .replace(/[\u0000-\u001f\u007f]/g, '')
+      .trim(),
+  ]
+    .slice(0, max)
+    .join('')
+    .trim() || null;
 
 export function captureDeal(game, context) {
   if (!eligible(context)) return;
@@ -51,7 +60,10 @@ export function captureStart(game, context) {
     id,
     human: context.humans.includes(p),
     bot: context.models[p],
+    name: context.humans.includes(p) ? label(context.names?.[p], 24) : null,
   }));
+  const room = label(context.room, 16);
+  if (room) record.room = room;
   record.tribute = (game.trib || []).map((t) => ({
     from: t.g,
     to: t.r,

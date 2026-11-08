@@ -14,7 +14,7 @@
 | 手牌排列、选择、理牌           | [src/hand](src/hand)                                                                           |
 | UI、动画、音效、样式           | [src/ui](src/ui)、[src/effects](src/effects)、[src/audio](src/audio)、[src/styles](src/styles) |
 | 房间、重连、语音               | [src/network](src/network)、[src/lobby](src/lobby)                                             |
-| 匿名牌谱、断网补传、云端数据库 | [src/collection](src/collection)、[collector](collector/README.md)                             |
+| 联机牌谱、断网补传、云端数据库 | [src/collection](src/collection)、[collector](collector/README.md)                             |
 | 模型选择、Worker 与浏览器推理  | [src/ai](src/ai)                                                                               |
 | 冠军出牌评价、个人开关与相对分 | [src/coach](src/coach)、[使用说明](docs/MOVE_COACH.md)                                         |
 | 独立纯规则对手及版本边界       | [src/rule-bot](src/rule-bot/README.md)                                                         |
@@ -58,4 +58,6 @@ Clint 的普通出牌与真人超时分别维护；早前的公开牌史策略�
 
 本次Clint界面同步提供四类／12页图解规则书、原房间的房主刷新／误关恢复、选级内续场、收牌动画完成后才可出牌、同花顺提示去重与说话麦克风。规则书保留本项目计时、键盘、混合电脑与评价权限说明；默认017与普通Clint策略不变。[使用](docs/PLAYING.md)／[恢复边界](docs/ROOMS.md)。
 
-Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手牌高度稳定（含最后一张与隐藏选择提示行）、发牌飞向可见姓名牌、大厅署名及去除采集短说明。保留017默认和已有模型偏好；本站匿名牌谱不新增昵称／房间号，Clint来源可选字段接收沿用原实现；规则与神经网络路径均未修改。证据见`ai/research/evaluation/clint-sync-20261108-0435.json`。
+Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手牌高度稳定（含最后一张与隐藏选择提示行）、发牌飞向可见姓名牌、大厅署名及去除采集短说明。保留017默认和已有模型偏好；该次同步时未新增本站标签；随后所有者已明确授权本站也采集房间号／真人昵称，现与Clint来源统一；规则与神经网络路径均未修改。证据见`ai/research/evaluation/clint-sync-20261108-0435.json`。
+
+所有者追加要求：本站新联机记录也保存room与开打时真人seats[].name（电脑null），与Clint清理／长度规则一致。旧牌谱不回填，研究样本去除明文标签，单人／练习／明牌／测试与assisted边界不变；不新增训练或换冠军。实现与验证见`ai/research/evaluation/collection-labels-20261108.json`。

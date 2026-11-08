@@ -75,6 +75,34 @@ test('ingestion accepts an optional room number and seat nicknames, and nothing 
   }
 });
 
+test('capture sanitizes room and human-only names before durable replay; examples omit labels', () => {
+  const record = collectedRound(9301000, {
+    room: ' \u0000' + '房'.repeat(20) + '\n ',
+    names: { 0: ' \t房主\n ', 1: '😀'.repeat(30), 2: '电脑不采集' },
+  });
+  assert.equal(record.room, '房'.repeat(16));
+  assert.deepEqual(
+    record.seats.map((s) => s.name),
+    ['房主', '😀'.repeat(24), null, null],
+  );
+  const checked = validateRecord(record);
+  assert.equal(checked.room, record.room);
+  assert.deepEqual(
+    checked.seats.map((s) => s.name),
+    record.seats.map((s) => s.name),
+  );
+  const rows = humanExamples({ ...record, kind: 'game' });
+  assert.ok(rows.length);
+  assert.ok(rows.every((row) => !('room' in row) && !('seats' in row) && !('name' in row)));
+  assert.ok(!JSON.stringify(rows).includes('房主'));
+  const missing = collectedRound(9301001, { room: '\n', names: { 0: '\t ' } });
+  assert.ok(!('room' in missing));
+  assert.deepEqual(
+    missing.seats.map((s) => s.name),
+    [null, null, null, null],
+  );
+});
+
 test('human examples exclude test and automated actions, keep match splits together and reveal no other hand', () => {
   const record = collectedRound();
   assert.deepEqual(humanExamples(record), []);
@@ -180,7 +208,7 @@ test('cloud SQL stores one immutable round, denies public reads and separates te
       },
     },
   };
-  const record = collectedRound(),
+  const record = collectedRound(9301000, { room: '4821', names: { 0: 'CloudH', 1: 'CloudG' } }),
     post = (value, origin = 'https://stevensun1005.github.io') =>
       new Request('https://collector.test/rounds', {
         method: 'POST',
@@ -196,6 +224,12 @@ test('cloud SQL stores one immutable round, denies public reads and separates te
   conflict.kind = 'game';
   assert.equal((await worker.fetch(post(conflict), env)).status, 409);
   assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM rounds').get().n, 1);
+  const payload = JSON.parse(sqlite.prepare('SELECT payload FROM rounds').get().payload);
+  assert.equal(payload.room, '4821');
+  assert.deepEqual(
+    payload.seats.map((s) => s.name),
+    ['CloudH', 'CloudG', null, null],
+  );
   assert.equal(
     (await worker.fetch(new Request('https://collector.test/admin/export'), env)).status,
     401,

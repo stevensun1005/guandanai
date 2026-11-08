@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "kind": "collection-label-correctness-not-human-or-strength-acceptance",
+  "ownerRequest": "昵称房间号采集这个项目也同步改了",
+  "observedAtUTC": "2026-11-08T04:59:27.329497+00:00",
+  "baseMainSHA": "bcf84e80bdf6305852e20fb775fd5d2ef6fb5e64",
+  "sourceSHA256": {
+    "web/src/collection/client.js": "a8381fb787f17ae6aa779fc85e4ac55150002c2ff011e09a97b5455a6831221b",
+    "web/src/collection/record.mjs": "bd980cd4be9ac9b2b2ca7f7e7ca9fd121e6cc154ed1a385b8cac344e9dcac0ac",
+    "web/src/collection/validate.mjs": "dafe1c869d73ae1d944f2589f82075a3495d8518ae07956dbe3425c9638dc929",
+    "ai/shared/data/tools/human-examples.mjs": "7733bf031a25e56ca600e6d589b07f36cdebbe97f12e5ff228dd8ff86ea6778c"
+  },
+  "implementation": {
+    "captureAt": "eligible host round play start, once",
+    "room": "room optional, cleaned, max16 Unicode characters",
+    "humanNames": "seats[].name cleaned, max24 Unicode characters; missing null",
+    "computerNames": null,
+    "oldRecords": "no backfill, optional fields still accepted",
+    "preprocessing": "plain room/name fields excluded; only raw provenance hash may change",
+    "neuralTrainingUpdates": 0,
+    "webDefault": "017/v000855042",
+    "danMCaiChampions": [
+      "017",
+      "012"
+    ]
+  },
+  "validation": {
+    "nodePassed": 275,
+    "nodeFailed": 0,
+    "sharedPythonPassed": 3,
+    "sharedPythonSkipped": 1,
+    "formatCheck": "pass",
+    "build": "02b78397b0",
+    "syntheticCloudRoundTrip": {
+      "stage": "predeployment-local-build",
+      "recordId": "b41d7bff-32d8-4657-8bad-39426059c1b1:1",
+      "kind": "test",
+      "humanTrainingGames": 0,
+      "actions": 92,
+      "actorCounts": {
+        "human": 44,
+        "bot": 47,
+        "timeout": 1
+      },
+      "hostUploads": 1,
+      "durableCloudRow": 40,
+      "duplicateAcknowledged": true,
+      "anonymousReadDenied": true,
+      "preEndUploads": 0,
+      "roomAndHumanNamesRoundTrip": true,
+      "computerNamesNull": true,
+      "pageErrors": []
+    },
+    "actualPeerJSHostRestore": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff": true,
+      "roomAndHumanNamesRestored": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "inMemoryCloudSQLPreservesLabels": true,
+    "sanitizationUnicodeNullComputerAndSampleExclusionRegression": true
+  },
+  "preservedSourceSHA256": {
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/practice-endgame.mjs": "7c30182c0145c1069e44acf9e0c8f8504dd61a2b055b36fcf7b3db2cbfdec0d7",
+    "web/src/rule-bot/practice-worker.mjs": "95d180d1d63c30d12aafb825754ea886f6cca7d905e3bebd290dee111c4276e1",
+    "web/src/rule-bot/README.md": "354fd704d7326aa3d6db6fc6630be99771c78fd28963af7bc37a6de19b6f5824",
+    "web/src/rule-bot/runtime.mjs": "c7b5e99eeeff7b77fbb8955529852ea12b9e8685447d8f162bd9127c47a7ae52",
+    "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+    "web/src/rule-bot/strategy.js": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72",
+    "web/src/rule-bot/timeout.js": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/controller.js": "dce5dfacb8ce0b0ac59f64a4d12ebbe438f8137b91b2458e4743f8f3cce0b7ee",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+    "web/src/ai/model-catalog.json": "9fcd82f00134af33c533a93a22705a81ca50e20b24221084f1e74a58889f4624",
+    "web/src/ai/model-catalog.mjs": "8265bcd26858112a747c0bea7263d807dd6942a5a41e61f687720b4428add7a2",
+    "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+    "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+    "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/tribute-model.json": "f99ef55d3bf7c128fc595f2c019e6831d9be1cb8873627dca4ee85b59a117383",
+    "web/src/ai/tribute-observation.mjs": "003e540856a8f7cd5e3f5bce44a592b7e2e5089fb3ded60cd9c2bca3ec7c3285",
+    "web/src/ai/tribute-specialist.mjs": "e5439246020316b80b6522cab4edf644bf9a768cfb13e08fb34ab070fb2bd83b",
+    "web/src/ai/tribute-worker.mjs": "2aa3e1525125821a0d21c3779c4bfd6a0a8dca135657da92e16205b29543aba2",
+    "web/src/ai/worker.mjs": "451feb49b197ac26149b3cbdfe256119e6321612d683d4a0db8782cc72b5f0e0",
+    "web/src/private-table/controller.js": "e4233bf1d4db39204265aa34830524bd8c8c44bed297c92f70bf17f36ba682bb",
+    "web/src/private-table/state.mjs": "16f2c2035d01e39c450caea5214d3b56aa77c4a44b8a22b79f9fba6c7101da80",
+    "web/src/network/host-restore.js": "6fecf6123a1921917e2a264d7b85c734be844a50902ca1b07a6447f14a8837d5",
+    "web/src/network/host-storage.mjs": "a08aafd402198103f30c0833c40b87a73f391dd1cdc64114af4ac8fad7bb3878",
+    "web/src/network/protocol.js": "b6f5bf5c57c3ead3034a04e0887952f979ecf0074ff5038fb5d44c97fa5341bf",
+    "web/src/network/public-table.mjs": "1881f1ab55bb7643cb7beec3d810e39b89616ee994a767a2cfdf94072592313c",
+    "web/src/network/recovery.js": "6abe9e8cd3b271058a452526b1ff299926e3d658f375648fc6588d05f9234e7d",
+    "web/src/network/rejoin-storage.js": "bc20290ca07c26873aa19f53cb2b4a1ec6aef7e594d13bc266f8410fba84628e",
+    "web/src/network/rooms.js": "4e5595d8db4fc5a1e513abcd7586d2be4fc02129430103b1a929bee90a116f9c",
+    "web/src/network/snapshot.js": "e288fd4f9fd6cee5d8c97258ffe9291193debda3f3f7a9dd44c9253be1a2e5f8",
+    "web/src/network/spectators.js": "31d6fc99e392359a876ca3dd9bdca2d6761013834f0a9568bd8a1957de2d41cb",
+    "web/src/network/voice.js": "c9dbf611c49bacb44d7a9f37ff2483e569aab1c553852cac127764106a1ab8ba"
+  },
+  "scope": "Only synthetic kind=test round used for end-to-end cloud validation. No real player records, full private cards, weights, export credentials or generated samples committed; no human/neural training, champion change or frozen-run writes. Existing collector protocol already accepts optional labels; no receiver redeployment required.",
+  "deployment": {
+    "status": "pending"
+  }
+}

@@ -8,7 +8,7 @@ import {
   completedRecord,
 } from '../../src/collection/record.mjs';
 
-export function collectedRound(seed = 9301000) {
+export function collectedRound(seed = 9301000, metadata = {}) {
   const game = createRound(seed),
     context = {
       mode: 'host',
@@ -21,6 +21,7 @@ export function collectedRound(seed = 9301000) {
         sha256: null,
         version: 'rules-v2',
       })),
+      ...metadata,
     };
   Object.assign(game, {
     round: 1,

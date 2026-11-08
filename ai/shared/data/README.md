@@ -18,3 +18,5 @@ node ai/shared/data/tools/prepare-human-games.mjs --keep-assisted=5f687c12
 ```
 
 普通 Top 5 展示过数字也记作辅助，默认排除未辅助样本。房主使用本机明牌工具后，当前游戏对象后续牌局不加入上传队列；此前已入队的普通牌谱不删除。该工具和数据不接入冻结训练。
+
+所有者追加要求：本站新联机记录也保存room与开打时真人seats[].name（电脑null），与Clint清理／长度规则一致。旧牌谱不回填，研究样本去除明文标签，单人／练习／明牌／测试与assisted边界不变；不新增训练或换冠军。实现与验证见`ai/research/evaluation/collection-labels-20261108.json`。
