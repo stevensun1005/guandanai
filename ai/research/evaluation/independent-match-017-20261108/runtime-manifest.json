@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "sourceSHA": "a216541014b10bb0008caffb6286025fc5ad855f",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\independent-match-017-runtime-20261108",
+  "sourceFiles": 147,
+  "registeredWindow": {
+    "startUTC": "2026-11-08T02:58:25.214Z",
+    "deadlineUTC": "2026-11-08T04:58:25.214Z",
+    "requestedHours": 2,
+    "restartExtendsDeadline": false
+  },
+  "protocolDeadlineUTC": "2026-11-08T04:58:24.550815+00:00",
+  "protocolSHA256": "b79537d700a0b441492efc72f403d8e7b36a52a1dc80f1ba00633b5d47d30578",
+  "protocolLF_SHA256": "b79537d700a0b441492efc72f403d8e7b36a52a1dc80f1ba00633b5d47d30578",
+  "models": {
+    "champion": {
+      "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\champion.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "017"
+    },
+    "p0": {
+      "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\p0.onnx",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "001"
+    },
+    "previous": {
+      "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\previous.onnx",
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "012"
+    }
+  },
+  "matchesExecutedAtFreeze": 0,
+  "optimizerUpdates": 0
+}
