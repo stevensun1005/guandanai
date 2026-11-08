@@ -625,7 +625,313 @@
   },
   "scope": "Synthetic UI/network/compatibility only; zero strength matches, neural/optimizer updates or human sample uploads. Frozen runs and ten root drafts untouched.",
   "deployment": {
-    "status": "pending",
-    "successCursorAdvanced": false
+    "status": "success",
+    "successCursorAdvanced": true,
+    "codeCommit": "390450f035b619c784a38d24293847bc627fe056",
+    "workflowRun": 42448166910,
+    "workflowURL": "https://github.com/stevensun1005/guandanai/actions/runs/42448166910",
+    "deployedAtUTC": "2026-11-08T04:52:03Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicBuild": "73e1e16d29",
+    "verifiedAtUTC": "2026-11-08T04:53:12.042030+00:00",
+    "publicValidation": {
+      "publicURL": "https://stevensun1005.github.io/guandanai/?test=1&clint=390450f",
+      "build": "73e1e16d29",
+      "menu": [
+        {
+          "id": "clint-rule",
+          "label": "Clint规则机器人"
+        },
+        {
+          "id": "022",
+          "label": "guanzero-adp-io48-270292"
+        },
+        {
+          "id": "021",
+          "label": "guanzero-adp-io48-229609"
+        },
+        {
+          "id": "001",
+          "label": "danMCai-v000000000"
+        },
+        {
+          "id": "017",
+          "label": "danMCai-v000855042"
+        },
+        {
+          "id": "012",
+          "label": "danMCai-v000705434"
+        }
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ],
+      "phoneGeometryAndAnimation": {
+        "scope": "Synthetic browser geometry, no strength games, uploads or training",
+        "cases": [
+          {
+            "viewport": [
+              390,
+              844
+            ],
+            "mobile": true,
+            "states": [
+              {
+                "cards": 27,
+                "hand": 216,
+                "nameY": 512.4296875,
+                "ownX": 195,
+                "partnerX": 195,
+                "classes": "phone rows back-goose"
+              },
+              {
+                "cards": 8,
+                "hand": 216,
+                "nameY": 512.4296875,
+                "ownX": 195,
+                "partnerX": 195,
+                "classes": "phone rows back-goose"
+              },
+              {
+                "cards": 1,
+                "hand": 216,
+                "nameY": 512.4296875,
+                "ownX": 195,
+                "partnerX": 195,
+                "classes": "phone rows back-goose"
+              },
+              {
+                "cards": 0,
+                "hand": 216,
+                "nameY": 512.4296875,
+                "ownX": 195,
+                "partnerX": 195,
+                "classes": "phone rows back-goose"
+              }
+            ],
+            "flyTargets": [
+              {
+                "p": 1,
+                "x": 350,
+                "y": 338.231,
+                "expectedX": 350,
+                "expectedY": 338.23126220703125
+              },
+              {
+                "p": 2,
+                "x": 195,
+                "y": 114.625,
+                "expectedX": 195,
+                "expectedY": 114.625
+              },
+              {
+                "p": 3,
+                "x": 40,
+                "y": 338.231,
+                "expectedX": 40,
+                "expectedY": 338.23126220703125
+              }
+            ]
+          },
+          {
+            "viewport": [
+              375,
+              667
+            ],
+            "mobile": true,
+            "states": [
+              {
+                "cards": 27,
+                "hand": 151,
+                "nameY": 285.4296875,
+                "ownX": 187.5,
+                "partnerX": 187.5,
+                "classes": "phone rows back-goose"
+              },
+              {
+                "cards": 8,
+                "hand": 151,
+                "nameY": 285.4296875,
+                "ownX": 187.5,
+                "partnerX": 187.5,
+                "classes": "phone rows back-goose"
+              },
+              {
+                "cards": 1,
+                "hand": 151,
+                "nameY": 285.4296875,
+                "ownX": 187.5,
+                "partnerX": 187.5,
+                "classes": "phone rows back-goose"
+              },
+              {
+                "cards": 0,
+                "hand": 151,
+                "nameY": 285.4296875,
+                "ownX": 187.5,
+                "partnerX": 187.5,
+                "classes": "phone rows back-goose"
+              }
+            ],
+            "flyTargets": [
+              {
+                "p": 1,
+                "x": 335,
+                "y": 215.881,
+                "expectedX": 335,
+                "expectedY": 215.88125610351562
+              },
+              {
+                "p": 2,
+                "x": 187.5,
+                "y": 114.625,
+                "expectedX": 187.5,
+                "expectedY": 114.625
+              },
+              {
+                "p": 3,
+                "x": 40,
+                "y": 215.881,
+                "expectedX": 40,
+                "expectedY": 215.88125610351562
+              }
+            ]
+          },
+          {
+            "viewport": [
+              844,
+              390
+            ],
+            "mobile": true,
+            "states": [
+              {
+                "cards": 27,
+                "hand": 104,
+                "nameY": 200.546875,
+                "ownX": 330.25,
+                "partnerX": 422,
+                "classes": "phone side back-goose"
+              },
+              {
+                "cards": 8,
+                "hand": 104,
+                "nameY": 200.546875,
+                "ownX": 303.78125,
+                "partnerX": 422,
+                "classes": "phone side back-goose"
+              },
+              {
+                "cards": 1,
+                "hand": 104,
+                "nameY": 200.546875,
+                "ownX": 305.734375,
+                "partnerX": 422,
+                "classes": "phone side back-goose"
+              },
+              {
+                "cards": 0,
+                "hand": 104,
+                "nameY": 200.546875,
+                "ownX": 404.25,
+                "partnerX": 422,
+                "classes": "phone side back-goose"
+              }
+            ],
+            "flyTargets": [
+              {
+                "p": 1,
+                "x": 802,
+                "y": 117.438,
+                "expectedX": 802,
+                "expectedY": 117.4375
+              },
+              {
+                "p": 2,
+                "x": 422,
+                "y": 27.9688,
+                "expectedX": 422,
+                "expectedY": 27.96875
+              },
+              {
+                "p": 3,
+                "x": 42,
+                "y": 117.438,
+                "expectedX": 42,
+                "expectedY": 117.4375
+              }
+            ]
+          },
+          {
+            "viewport": [
+              1440,
+              1000
+            ],
+            "mobile": false,
+            "states": [
+              {
+                "cards": 27,
+                "hand": 282.28125,
+                "nameY": 590.875,
+                "ownX": 526.265625,
+                "partnerX": 720,
+                "classes": "back-goose"
+              },
+              {
+                "cards": 8,
+                "hand": 282.28125,
+                "nameY": 590.875,
+                "ownX": 499.78125,
+                "partnerX": 720,
+                "classes": "back-goose"
+              },
+              {
+                "cards": 1,
+                "hand": 282.28125,
+                "nameY": 590.875,
+                "ownX": 501.734375,
+                "partnerX": 720,
+                "classes": "back-goose"
+              },
+              {
+                "cards": 0,
+                "hand": 123.59375,
+                "nameY": 783.5625,
+                "ownX": 600.265625,
+                "partnerX": 720,
+                "classes": "back-goose"
+              }
+            ],
+            "flyTargets": [
+              {
+                "p": 1,
+                "x": 1240,
+                "y": 318.438,
+                "expectedX": 1240,
+                "expectedY": 318.43756103515625
+              },
+              {
+                "p": 2,
+                "x": 720,
+                "y": 27,
+                "expectedX": 720,
+                "expectedY": 27
+              },
+              {
+                "p": 3,
+                "x": 200,
+                "y": 318.438,
+                "expectedX": 200,
+                "expectedY": 318.43756103515625
+              }
+            ]
+          }
+        ],
+        "pageErrors": []
+      },
+      "pageErrors": []
+    }
   }
 }
