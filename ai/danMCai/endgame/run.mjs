@@ -62,6 +62,7 @@ export function defaultConfig({ hours, actors, champion, seedBase, now = new Dat
       minSamples: 100_000,
       replayRatio: 4,
       oracleDecaySteps: 60_000,
+      keepShardRows: 2_000_000,
       exportSeconds: 600,
     },
     sources: Object.fromEntries(SOURCES.map((file) => [file, sha256(join(root, file))])),
@@ -94,6 +95,11 @@ async function main() {
     });
     if (protocolFile) {
       config.protocol = { file: resolve(protocolFile), sha256: sha256(resolve(protocolFile)) };
+      // An amendment may pin the original fixed deadline instead of starting a fresh window.
+      if (run_.deadline) {
+        config.deadline = new Date(run_.deadline).toISOString();
+        config.hours = (Date.parse(config.deadline) - Date.parse(config.createdAt)) / 3600_000;
+      }
       config.purpose = protocol.purpose;
       Object.assign(config.actor, protocol.actor || {});
       Object.assign(config.learner, protocol.learner || {});
@@ -175,6 +181,14 @@ async function main() {
     writeJSON(join(run, 'status.json'), status);
     await new Promise((r) => setTimeout(r, 3000));
   }
+  // Children watch STOP and the deadline themselves and may exit before this loop notices.
+  if (!status.stopReason)
+    status.stopReason =
+      Date.now() >= deadline
+        ? 'fixed-deadline'
+        : existsSync(join(run, 'STOP'))
+          ? 'stop-file'
+          : 'children-finished';
   status.endedAt = new Date().toISOString();
   status.children = [];
   writeJSON(join(run, 'status.json'), status);

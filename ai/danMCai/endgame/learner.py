@@ -110,6 +110,7 @@ class Learner:
         self.optimizer = torch.optim.Adam(self.net.parameters(), lr=float(self.s["learningRate"]))
         self.step = self.trained_rows = self.ingested_rows = 0
         self.ingested = set()
+        self.pruned_rows = 0
         self.loss_ema = None
         self.started = time.time()
         if self.checkpoint.exists():
@@ -119,6 +120,7 @@ class Learner:
             self.step, self.trained_rows = state["step"], state["trainedRows"]
             self.ingested_rows, self.ingested = state["ingestedRows"], set(state["ingested"])
             self.loss_ema = state.get("lossEma")
+            self.pruned_rows = state.get("prunedRows", 0)
             # Replay is not checkpointed: refill it from the newest shards still on disk.
             self.refill()
         else:
@@ -130,7 +132,32 @@ class Learner:
         for name in reversed(names):
             if rows >= self.replay.capacity:
                 break
+            if not Path(f"{self.shards / name}.y.f32").exists():
+                break  # older data files were pruned after ingestion
             rows += self.load(name, count=False)
+
+    def prune(self):
+        """Delete data files of ingested shards outside the newest keepShardRows rows.
+
+        Training only ever samples the newest `capacity` rows, so pruning older ingested shards
+        changes nothing it learns; it bounds disk use. Per-shard JSON metadata is kept as record.
+        """
+        keep = int(self.s.get("keepShardRows", 0))
+        if keep <= 0:
+            return
+        live = []
+        for meta in sorted(self.shards.glob("*.json"), key=lambda p: p.stat().st_mtime):
+            name = meta.name[:-5]
+            if name in self.ingested and Path(f"{self.shards / name}.y.f32").exists():
+                live.append((name, read_json(meta, {}).get("rows", 0)))
+        total = sum(rows for _, rows in live)
+        for name, rows in live:
+            if total <= keep:
+                break
+            for ext in ("x.i8", "o.i8", "y.f32"):
+                Path(f"{self.shards / name}.{ext}").unlink(missing_ok=True)
+            total -= rows
+            self.pruned_rows += rows
 
     def load(self, name, count=True):
         base = self.shards / name
@@ -191,6 +218,7 @@ class Learner:
                 "ingestedRows": self.ingested_rows,
                 "ingested": sorted(self.ingested),
                 "lossEma": self.loss_ema,
+                "prunedRows": self.pruned_rows,
             },
             temporary,
         )
@@ -206,6 +234,7 @@ class Learner:
                 "ingestedRows": self.ingested_rows,
                 "replayRows": self.replay.size,
                 "oracleKeep": keep,
+                "prunedRows": self.pruned_rows,
                 "lossEma": self.loss_ema,
                 "device": str(self.device),
                 "updatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -233,6 +262,7 @@ class Learner:
                 last_export = time.time()
             if time.time() - last_save >= 120:
                 self.save()
+                self.prune()
                 last_save = time.time()
             self.status("training", keep)
         self.save()

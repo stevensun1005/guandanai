@@ -30,6 +30,8 @@ node ai/danMCai/endgame/run.mjs --run=ai/danMCai/runs/<运行名> --python=ai/da
 node ai/danMCai/endgame/dashboard.mjs --run=ai/danMCai/runs/<运行名>
 ```
 
+运行目录放在 iCloud 同步之外（例如 `~/guandan-runtime.noindex/<运行名>`，再在 `ai/danMCai/runs/` 建链接）：桌面若开启 iCloud 同步，样本分片会被上传和索引。学习器按 `keepShardRows`（默认 200 万行）删除已摄入的旧分片数据文件，保留 JSON 元数据。
+
 首次启动冻结 `config.json`（冠军 SHA、种子块、阈值、学习率、固定截止、源码 SHA）；重启只用原截止前的剩余时间，源码变化则拒绝启动。运行目录下新建 `STOP` 文件即可让所有进程保存后退出。运行数据、模型和样本都在忽略的 `ai/danMCai/runs/`。
 
 测试：`node --test ai/danMCai/tests/endgame-*.test.mjs`、`ai/danMCai/environment/mac/bin/python ai/danMCai/tests/endgame_learner_test.py`。

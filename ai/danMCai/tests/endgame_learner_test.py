@@ -11,7 +11,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "training" / "continuous"))
 sys.path.insert(0, str(ROOT / "endgame"))
-from learner import ORACLE, OracleValueNet, keep_probability  # noqa: E402
+from learner import ORACLE, Learner, OracleValueNet, keep_probability  # noqa: E402
 from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
 
 BASELINE = ROOT / "models" / "baseline" / "policy.onnx"
@@ -45,6 +45,40 @@ class EndgameLearnerTest(unittest.TestCase):
             exported = load_onnx_weights(path)
         for a, b in zip(exported, net.weights()):
             np.testing.assert_array_equal(a, b)
+
+    def test_prune_keeps_newest_ingested_rows_and_metadata(self):
+        import json
+        import os
+
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory)
+            (run / "shards").mkdir()
+            (run / "models").mkdir()
+            config = {
+                "deadline": "2099-01-01T00:00:00Z",
+                "champion": {"file": str(BASELINE)},
+                "learner": {"device": "cpu", "threads": 1, "seed": 1, "learningRate": 1e-5,
+                            "batch": 8, "capacity": 100, "minSamples": 1, "replayRatio": 4,
+                            "oracleDecaySteps": 10, "exportSeconds": 600, "keepShardRows": 25},
+            }
+            (run / "config.json").write_text(json.dumps(config))
+            for i in range(4):
+                base = run / "shards" / f"s0-{i:06d}"
+                np.zeros((10, FEATURES), np.int8).tofile(f"{base}.x.i8")
+                np.zeros((10, ORACLE), np.int8).tofile(f"{base}.o.i8")
+                np.ones(10, np.float32).tofile(f"{base}.y.f32")
+                Path(f"{base}.json").write_text(json.dumps({"rows": 10}))
+                os.utime(f"{base}.json", (1000 + i, 1000 + i))
+            learner = Learner(run)
+            self.assertEqual(learner.ingest(), 40)
+            learner.prune()
+            remaining = sorted(p.name for p in (run / "shards").glob("*.y.f32"))
+            self.assertEqual(remaining, ["s0-000002.y.f32", "s0-000003.y.f32"])
+            self.assertEqual(len(list((run / "shards").glob("*.json"))), 4)
+            self.assertEqual(learner.pruned_rows, 20)
+            learner.save()
+            resumed = Learner(run)  # refill must skip pruned shards without failing
+            self.assertEqual(resumed.replay.size, 20)
 
 
 if __name__ == "__main__":

@@ -5,7 +5,8 @@
  *   node ai/danMCai/endgame/dashboard.mjs --run=<dir> [--port=8768]
  */
 import { createServer } from 'node:http';
-import { readdirSync, statSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { readdirSync, statfsSync } from 'node:fs';
 import { cpus, freemem, loadavg, totalmem } from 'node:os';
 import { basename, join, resolve } from 'node:path';
 import { readJSON } from '../training/continuous/lib.mjs';
@@ -25,6 +26,25 @@ const alive = (pid) => {
 const age = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 1000 : null);
 
 const history = [];
+
+/** macOS keeps most memory as reclaimable cache; os.freemem() alone looks near zero. */
+function availableMemoryGiB() {
+  try {
+    const text = execFileSync('vm_stat', { encoding: 'utf8' });
+    const page = Number(/page size of (\d+)/.exec(text)?.[1] || 16384);
+    const pages = (label) => Number(new RegExp(`${label}:\\s+(\\d+)`).exec(text)?.[1] || 0);
+    return (
+      ((pages('Pages free') +
+        pages('Pages inactive') +
+        pages('Pages speculative') +
+        pages('Pages purgeable')) *
+        page) /
+      2 ** 30
+    );
+  } catch {
+    return freemem() / 2 ** 30;
+  }
+}
 
 export function snapshot(run) {
   const config = readJSON(join(run, 'config.json'));
@@ -102,7 +122,15 @@ export function snapshot(run) {
     machine: {
       cpus: cpus().length,
       load1: loadavg()[0],
-      freeMemoryGiB: freemem() / 2 ** 30,
+      freeMemoryGiB: availableMemoryGiB(),
+      diskFreeGiB: (() => {
+        try {
+          const fs = statfsSync(run);
+          return (fs.bavail * fs.bsize) / 2 ** 30;
+        } catch {
+          return null;
+        }
+      })(),
       totalMemoryGiB: totalmem() / 2 ** 30,
     },
     history: history.filter((_, i) => i % Math.max(1, Math.floor(history.length / 240)) === 0),
@@ -152,7 +180,7 @@ document.getElementById('grid').innerHTML=
 '<div class="card"><h2>明牌信息保留率</h2><div class="big">'+(L.oracleKeep==null?'—':f(L.oracleKeep*100,1)+'%')+'</div><div class="bar"><div style="width:'+((L.oracleKeep??0)*100).toFixed(1)+'%"></div></div><div class="row"><span>降到 0 的步数</span><span class="num">'+f(s.learnerConfig.oracleDecaySteps)+'</span></div><div class="row"><span>说明</span><span>逐步去掉他家手牌</span></div></div>'+
 '<div class="card"><h2>样本</h2><div class="big">'+f(s.totals.rows)+' 行</div><div class="row"><span>采样速度</span><span class="num">'+f(s.rates.rowsPerSecond,1)+' 行/秒</span></div><div class="row"><span>已打局数</span><span class="num">'+f(s.totals.rounds)+'</span></div><div class="row"><span>已入回放</span><span class="num">'+f(L.ingestedRows)+'</span></div><div class="row"><span>回放容量</span><span class="num">'+f(L.replayRows)+' / '+f(s.learnerConfig.capacity)+'</span></div></div>'+
 '<div class="card"><h2>最新学生模型</h2><div class="big">'+(s.latest.version||'—')+'</div><div class="row"><span>SHA-256</span><span class="num">'+(s.latest.sha256||'').slice(0,12)+'</span></div><div class="row"><span>说明</span><span>只看自己的牌，尚未独立评测</span></div></div>'+
-'<div class="card"><h2>进程与本机</h2><div class="row"><span>调度器</span><span>'+(s.supervisor.alive?pill('存活','ok'):pill('未运行','bad'))+'</span></div><div class="row"><span>子进程</span><span>'+kids+'</span></div><div class="row"><span>重启次数</span><span class="num">'+(Object.entries(s.supervisor.restarts).map(([k,v])=>k+'×'+v).join(' ')||'0')+'</span></div><div class="row"><span>系统负载</span><span class="num">'+f(s.machine.load1,2)+' / '+s.machine.cpus+' 核</span></div><div class="row"><span>空闲内存</span><span class="num">'+f(s.machine.freeMemoryGiB,1)+' / '+f(s.machine.totalMemoryGiB,0)+' GiB</span></div></div>'+
+'<div class="card"><h2>进程与本机</h2><div class="row"><span>调度器</span><span>'+(s.supervisor.alive?pill('存活','ok'):pill('未运行','bad'))+'</span></div><div class="row"><span>子进程</span><span>'+kids+'</span></div><div class="row"><span>重启次数</span><span class="num">'+(Object.entries(s.supervisor.restarts).map(([k,v])=>k+'×'+v).join(' ')||'0')+'</span></div><div class="row"><span>系统负载（含其他程序）</span><span class="num">'+f(s.machine.load1,2)+' / '+s.machine.cpus+' 核</span></div><div class="row"><span>可用内存（含可回收）</span><span class="num">'+f(s.machine.freeMemoryGiB,1)+' / '+f(s.machine.totalMemoryGiB,0)+' GiB</span></div><div class="row"><span>磁盘剩余</span><span class="num">'+f(s.machine.diskFreeGiB,0)+' GiB</span></div><div class="row"><span>已清理旧样本</span><span class="num">'+f(s.learner.prunedRows)+' 行</span></div></div>'+
 '<div class="card"><h2>损失（EMA）走势</h2>'+spark(s.history,'loss')+'</div>'+
 '<div class="card"><h2>明牌保留率走势</h2>'+spark(s.history,'keep',0,1)+'</div>'+
 '<div class="card wide"><h2>采样进程</h2><table><tr><th>槽位</th><th>局数</th><th>尾盘样本</th><th>种子块用量</th><th>更新</th></tr>'+actors+'</table></div>'}
