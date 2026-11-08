@@ -23,6 +23,16 @@ const alive = (pid) => {
     return error.code === 'EPERM';
   }
 };
+/** Owner is in Toronto: every time shown on the page is America/Toronto (美东). */
+const TZ = 'America/Toronto';
+const eastern = (iso, seconds = false) =>
+  new Date(iso).toLocaleTimeString('zh-CN', {
+    timeZone: TZ,
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    ...(seconds ? { second: '2-digit' } : {}),
+  }) + ' 美东';
 const age = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 1000 : null);
 
 const history = [];
@@ -84,7 +94,7 @@ export function activity(run, { supervisorAlive, children, actors, learner, dead
   const actorKids = children.filter((c) => c.name.startsWith('actor-'));
   const actorsAlive = actorKids.filter((c) => c.alive).length;
   const seedsUsed = actors.length > 0 && actors.every((a) => a.seedProgress >= 1);
-  const deadlineText = new Date(deadline).toISOString().slice(11, 16) + ' UTC';
+  const deadlineText = eastern(deadline);
 
   let phase, headline, detail, next, tone;
   if (evalSummary) {
@@ -97,7 +107,7 @@ export function activity(run, { supervisorAlive, children, actors, learner, dead
     phase = 'evaluate';
     tone = 'ok';
     headline = '独立评测进行中';
-    detail = `最终学生 ${basename(evalRun.student)} 对冠军 017，${evalRun.pairs} 组预登记牌局，${workers} 个进程；已完成 ${partsDone}/${workers} 个分片（分片只在结束时写出，中途无更细进度）。开始于 ${evalRun.startedAt.slice(11, 19)} UTC。`;
+    detail = `最终学生 ${basename(evalRun.student)} 对冠军 017，${evalRun.pairs} 组预登记牌局，${workers} 个进程；已完成 ${partsDone}/${workers} 个分片（分片只在结束时写出，中途无更细进度）。开始于 ${eastern(evalRun.startedAt, true)}。`;
     next = '评测完成后写出 eval-final/summary.json。';
   } else if (evalRun && !evaluating) {
     phase = 'evaluate';
@@ -112,7 +122,7 @@ export function activity(run, { supervisorAlive, children, actors, learner, dead
     phase = 'evaluate';
     tone = 'warn';
     headline = '训练已结束，独立评测即将启动';
-    detail = `调度器已退出${endedAt ? '（' + endedAt.slice(11, 19) + ' UTC）' : ''}，post-run-evaluate.sh 正在启动评测。`;
+    detail = `调度器已退出${endedAt ? '（' + eastern(endedAt, true) + '）' : ''}，post-run-evaluate.sh 正在启动评测。`;
     next = '用最终导出的学生模型跑 3,000 组预登记牌局。';
   } else if (supervisorAlive && actorsAlive > 0) {
     phase = 'train';
@@ -305,13 +315,13 @@ return '<svg viewBox="0 0 300 70" preserveAspectRatio="none"><polyline fill="non
 async function tick(){let s;try{s=await (await fetch('api/status',{cache:'no-store'})).json()}catch(e){document.getElementById('sub').innerHTML=pill('面板连接中断','bad');return}
 if(s.error){document.getElementById('sub').textContent=s.error;return}
 const L=s.learner||{},st=s.running?pill('训练中','ok'):s.supervisor.endedAt?pill('已结束 · '+(s.supervisor.stopReason||''),'warn'):pill('未在运行','bad');
-document.getElementById('sub').innerHTML=st+' &nbsp;'+s.run+' · 教师 '+s.champion.id+'／'+s.champion.version+' · 尾盘阈值 全桌剩 ≤'+s.threshold+' 张 · 读取于 '+new Date(s.readAt).toLocaleTimeString('zh-CN');
+document.getElementById('sub').innerHTML=st+' &nbsp;'+s.run+' · 教师 '+s.champion.id+'／'+s.champion.version+' · 尾盘阈值 全桌剩 ≤'+s.threshold+' 张 · 读取于 '+new Date(s.readAt).toLocaleTimeString('zh-CN',{timeZone:'America/Toronto',hour12:false})+' 美东';
 const A=s.activity;if(A){const mark={done:'✓ ',active:'● ',failed:'✗ ',pending:'○ '};
 document.getElementById('now').innerHTML='<h2>现在在做什么</h2>'+pill(A.headline,A.tone)+'<p>'+A.detail+'</p><p><span style="color:var(--muted)">下一步：</span>'+A.next+'</p><div class="steps">'+A.stages.map(x=>'<div class="step '+x.state+'">'+mark[x.state]+x.name+'</div>').join('')+'</div>'+(A.postRunLog&&A.postRunLog.length?'<div class="note">post-run.log：'+A.postRunLog.join(' / ')+'</div>':'')}
 const kids=(s.supervisor.children||[]).map(c=>c.name+(c.alive?'':' ✗')).join('、')||'—';
 const actors=s.actors.map(a=>'<tr><td>槽 '+a.slot+'</td><td>'+f(a.rounds)+'</td><td>'+f(a.rows)+'</td><td>'+f(a.seedProgress*100,2)+'%</td><td>'+(a.updatedAgeSeconds==null?'—':dur(a.updatedAgeSeconds)+'前')+'</td></tr>').join('');
 document.getElementById('grid').innerHTML=
-'<div class="card"><h2>固定窗口</h2><div class="big">'+dur(s.remainingSeconds)+'</div><div class="bar"><div style="width:'+(s.timeProgress*100).toFixed(1)+'%"></div></div><div class="row"><span>截止</span><span>'+new Date(s.deadline).toLocaleString('zh-CN')+'</span></div><div class="row"><span>时间进度</span><span class="num">'+f(s.timeProgress*100,1)+'%</span></div></div>'+
+'<div class="card"><h2>固定窗口</h2><div class="big">'+dur(s.remainingSeconds)+'</div><div class="bar"><div style="width:'+(s.timeProgress*100).toFixed(1)+'%"></div></div><div class="row"><span>截止</span><span>'+new Date(s.deadline).toLocaleString('zh-CN',{timeZone:'America/Toronto',hour12:false})+' 美东'+'</span></div><div class="row"><span>时间进度</span><span class="num">'+f(s.timeProgress*100,1)+'%</span></div></div>'+
 '<div class="card"><h2>学习器（MPS）</h2><div class="big">'+f(L.step)+' 步</div><div class="row"><span>状态</span><span>'+(L.state||'—')+'</span></div><div class="row"><span>更新速度</span><span class="num">'+f(s.rates.stepsPerSecond,2)+' 步/秒</span></div><div class="row"><span>损失（EMA）</span><span class="num">'+f(L.lossEma,4)+'</span></div><div class="row"><span>心跳</span><span>'+(L.heartbeatAgeSeconds==null?'—':dur(L.heartbeatAgeSeconds)+'前')+'</span></div></div>'+
 '<div class="card"><h2>明牌信息保留率</h2><div class="big">'+(L.oracleKeep==null?'—':f(L.oracleKeep*100,1)+'%')+'</div><div class="bar"><div style="width:'+((L.oracleKeep??0)*100).toFixed(1)+'%"></div></div><div class="row"><span>降到 0 的步数</span><span class="num">'+f(s.learnerConfig.oracleDecaySteps)+'</span></div><div class="row"><span>说明</span><span>逐步去掉他家手牌</span></div></div>'+
 '<div class="card"><h2>样本</h2><div class="big">'+f(s.totals.rows)+' 行</div><div class="row"><span>采样速度</span><span class="num">'+f(s.rates.rowsPerSecond,1)+' 行/秒</span></div><div class="row"><span>已打局数</span><span class="num">'+f(s.totals.rounds)+'</span></div><div class="row"><span>已入回放</span><span class="num">'+f(L.ingestedRows)+'</span></div><div class="row"><span>回放容量</span><span class="num">'+f(L.replayRows)+' / '+f(s.learnerConfig.capacity)+'</span></div></div>'+

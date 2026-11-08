@@ -30,7 +30,7 @@ node ai/danMCai/endgame/run.mjs --run=ai/danMCai/runs/<运行名> --python=ai/da
 node ai/danMCai/endgame/dashboard.mjs --run=ai/danMCai/runs/<运行名>
 ```
 
-面板顶部“现在在做什么”只根据真实状态判断当前阶段：采样＋训练、采样种子用完后仅等待固定截止、`post-run-evaluate.sh` 启动的独立评测（读取 `eval-final/run.json`、分片和评测进程），以及 `summary.json` 写出后的结果。评测分片只在结束时写出，中途没有更细的进度；面板不控制训练，也不把阶段或损失当成棋力。
+面板顶部“现在在做什么”只根据真实状态判断当前阶段：采样＋训练、采样种子用完后仅等待固定截止、`post-run-evaluate.sh` 启动的独立评测（读取 `eval-final/run.json`、分片和评测进程），以及 `summary.json` 写出后的结果。评测分片只在结束时写出，中途没有更细的进度；页面上的时间一律按多伦多时间（America/Toronto，标"美东"）显示；仓库里的证据文件仍保留原始 ISO／UTC 时间戳。面板不控制训练，也不把阶段或损失当成棋力。
 
 运行目录放在 iCloud 同步之外（例如 `~/guandan-runtime.noindex/<运行名>`，再在 `ai/danMCai/runs/` 建链接）：桌面若开启 iCloud 同步，样本分片会被上传和索引。学习器按 `keepShardRows`（默认 200 万行）删除已摄入的旧分片数据文件，保留 JSON 元数据。
 
