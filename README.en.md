@@ -230,3 +230,5 @@ The offline self-simulation review converter and integrity audit are complete (M
 Capacity correction: the original10k-roots/slot engineering pilot was stopped and preserved at1825updates, without a strength claim. Formalv2 uses50kroots/slot; input arms share new training roots within each training seed, while the two training-seed repeats are disjoint. No pilot weights, Adam or replay are inherited. Protocol changes remain in study66.1–66.2.
 
 Formalv2 training has started from frozenc506a03, with the first arm registered13:36:24.535–17:36:24.535Z and actualGPUupdates verified. The four-arm queue advances automatically; only the first arm has started, and strength remains unevaluated. Dashboard8767 and the earlier15:00Z/14:45Z cutoff are active. See study66.3 and startup-v2 evidence.
+
+The owner additionally permits training a new research champion and explicitly continuing future batches from it after preregistered gates, fullSHA provenance and independent evaluation. Current frozen arms, webchampion017/[017,012] and the Wednesday10:00 cutoff remain unchanged. No new champion has yet passed. See study66.4 and champion-authorization evidence.

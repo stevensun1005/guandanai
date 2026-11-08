@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "recordedAtUTC": "2026-11-08T13:40:58.361638+00:00",
+  "ownerInstruction": "你要是想继续训练 训练出新的冠军模型也可以",
+  "authorization": "Autonomous training may produce and recognize a new research champion after preregistered gate and independent evaluation; new batches may explicitly start from the validated research champion.",
+  "notEvidence": "No candidate has yet passed a new champion gate; training loss or latest export is insufficient.",
+  "preserved": [
+    "Wednesday10:00Toronto deadline/09:45compute cutoff",
+    "active four-arm frozen protocols unchanged",
+    "webdefault017 and selection[017,012] unchanged; no new webpublication authorization",
+    "oldchampions,failed experiments and source/modelSHA preserved",
+    "single-round terminal outcomes; Clint evalonly; no humantraining"
+  ]
+}
