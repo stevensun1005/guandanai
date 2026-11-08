@@ -1,0 +1,43 @@
+{
+  "schema": "danmcai-endgame-oracle-protocol-v1-amendment-3",
+  "registeredAt": "2026-11-08",
+  "amends": {
+    "file": "ai/research/evaluation/endgame-oracle-20261107/protocol-amendment-2.json",
+    "sha256": "605050c377fd5077616e47655ad106c605edda62f365c39999483d6cac039dcc"
+  },
+  "amendment": {
+    "reason": "Owner instruction 2026-11-08 (about 14:09Z): \"跑完了你就可以提前截止进入下一步了 不需要等\" — once the run has finished its work, stop early and go to the next step instead of waiting for the fixed deadline.",
+    "observed": "All 7 actor slots had used up their preregistered seed blocks and exited cleanly around 13:28Z (seed progress 100.03-100.16%; the slight overshoot is rounds started before the block check). The learner was idle in waiting-for-data at the replay-ratio-4 cap from then on, so no new samples or updates were possible before the deadline.",
+    "changes": [
+      "Stop condition: in addition to the fixed deadline, the run is stopped once all actors have used up their seed blocks. Applied by writing STOP at 2026-11-08T14:09:58Z (about 8 minutes before the unchanged deadline 2026-11-08T14:18:02.146Z); supervisor ended 14:10:00Z with stopReason stop-file."
+    ],
+    "unchanged": "Teacher, seeds, learner settings, final-model rule (models/latest.json at stop), held-out deals, evaluation design and acceptance rule. No seeds were added and the window was not extended; no intermediate export was chosen."
+  },
+  "finalState": {
+    "learnerStep": 61050,
+    "trainedRows": 125030400,
+    "ingestedRows": 31234673,
+    "prunedRows": 29158833,
+    "lossEma": 1.6137789289520394,
+    "oracleKeep": 0.0,
+    "actorRounds": 2803016,
+    "actorRows": 31234673,
+    "finalStudent": {
+      "file": "e00061050.onnx",
+      "version": "e00061050",
+      "step": 61050,
+      "sha256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef"
+    },
+    "note": "Loss is an MSE on signed round points, not a win rate or strength claim."
+  },
+  "evaluation": {
+    "startedAt": "2026-11-08T14:10:23.811Z",
+    "student": "models/e00061050.onnx",
+    "studentSHA256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef",
+    "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "seedsSHA256": "074bb8981ddeb1bb8330ef0e81ff20fa4a4660f84b3083cec2a417e8766f5e27",
+    "pairs": "3000",
+    "workers": 8,
+    "status": "started automatically by post-run-evaluate.sh; no result yet"
+  }
+}
