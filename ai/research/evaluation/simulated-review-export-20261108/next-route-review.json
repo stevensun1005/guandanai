@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "Next-route review, not a new experiment or authorization",
+  "completed": "simulated-review-export-20261108",
+  "status": "awaiting informative authorized hypothesis or owner direction; original campaign safety monitoring continues",
+  "closedOrUnapproved": [
+    {
+      "route": "0.4 search /2.1ExIt",
+      "reason": "0.3gate false; owner prohibits rescue/rerun/W expansion"
+    },
+    {
+      "route": "2.2 teammate league",
+      "reason": "1.2interaction condition false; stage2notauthorized"
+    },
+    {
+      "route": "2.3extras online",
+      "reason": "residual increment exists, but phase2 requires new written authorization; not granted"
+    },
+    {
+      "route": "2.5live calibratedTop5",
+      "reason": "freshMSEprimaryfalse and owner has not approved contract change"
+    },
+    {
+      "route": "whole-match head/tribute",
+      "reason": "later training stage and preserved specialty runs; not authorized"
+    },
+    {
+      "route": "D1full-information/human training",
+      "reason": "nickname/room collection authorization does not authorize D1review or human training"
+    },
+    {
+      "route": "Mac/postWednesday",
+      "reason": "no new compute authorization"
+    }
+  ],
+  "doNotRepeat": [
+    "AB24000/cache",
+    "championrestart/exploiter training or completed holdouts",
+    "belief-pretrial0.3/zero-extras0.6",
+    "cooperation grid",
+    "representation/residual probe",
+    "independent017matches",
+    "decisiontrace/deviation/calibration validation",
+    "completed self-review conversion"
+  ],
+  "next": "Ask owner for a new direction where hard boundaries conflict; otherwise inspect genuinely new main evidence and act only on a meaningful already-authorized hypothesis. No clock-filling tests or phase2reinterpretation."
+}

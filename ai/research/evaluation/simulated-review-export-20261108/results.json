@@ -1,0 +1,18 @@
+{
+  "pid": 42132,
+  "phase": "complete",
+  "displayName": "danMCai · self模拟局离线复盘导出",
+  "startedAtUTC": "2026-11-08T05:18:54.415Z",
+  "completedPositions": 1000,
+  "plannedPositions": 1000,
+  "positionUnit": "个已有self牌副（离线复盘转换）",
+  "archivedRoundsReplayed": 1000,
+  "framesExported": 20304,
+  "optimizerUpdates": 0,
+  "networkForwards": 0,
+  "newGames": 0,
+  "minimumAvailableGiB": 13.10946273803711,
+  "stoppedAtUTC": "2026-11-08T05:19:28.007Z",
+  "reviewsSHA256": "037800d99ad6a333c34359842665ba9c1b8ec537e06d97fa3cafb7d2ea1a10f9",
+  "scope": "Functional export of old self-simulation records only, not independent strength, predictive validity, new data, live UI or human review. D1/Clint/mixed/P0, belief searches and calibrated maps are unsupported."
+}

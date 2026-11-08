@@ -222,3 +222,5 @@ Clint changes e7538a1→2b2a824 align phone name plates, preserve the hand area 
 Owner-authorized local collection now snapshots the room and human nicknames at play start, with null computer names. Labels are cleaned and bounded as on Clint, retained in private raw records and excluded from prepared sample fields. Historical records remain unchanged; this does not authorize human-data training or a champion change.
 
 Fresh4,000-root/8,000-round offline calibration validation did not establish lower error: both self/Clint primary intervals cross zero. The map stays offline with no refit or sample expansion. Next is the bounded simulated-self review CLI only: archived Q ranks plus descriptions, no new games, inference, human/D1 input, search, calibrated values or promotion. See MODEL_STUDY62.2/65.
+
+The offline self-simulation review converter and integrity audit are complete (MODEL_STUDY65.1). Further training remains limited by existing gates/authorization; a new direction has been requested. Do not rerun completed studies or enter phase2 automatically. Original campaign deadline monitoring continues; full review data stay ignored locally.

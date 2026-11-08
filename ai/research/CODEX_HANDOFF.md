@@ -424,3 +424,5 @@ Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手�
 所有者追加要求：本站新联机记录也保存room与开打时真人seats[].name（电脑null），与Clint清理／长度规则一致。旧牌谱不回填，研究样本去除明文标签，单人／练习／明牌／测试与assisted边界不变；不新增训练或换冠军。实现与验证见`ai/research/evaluation/collection-labels-20261108.json`。
 
 4,000新根／8,000单局离线校准验证已结束，self与Clint改善区间均跨0、主条件false；保留负结果，不重拟合或上线映射。继续1.5的仅模拟self离线复盘CLI：已封存轨迹转成原Q排序＋描述，拒绝D1／其他模型，不搜索、不预测升级分、不训练。主报告62.2／65与simulated-review-export证据给出范围。
+
+当前最近任务已停止：simulated-review-export-20261108，冻结6225ac2，1,000旧self根／20,304帧，零新局／网络前向／更新，结果与SHA审计均通过。校准4,000新根主条件false。后续已询问研究方向，门槛与未授权路线见evaluation/simulated-review-export-20261108/next-route-review.json；原总窗口保护和跟进保持，不重开任务、不热改冻结树。
