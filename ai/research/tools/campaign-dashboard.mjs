@@ -62,9 +62,23 @@ function snapshot() {
     };
   });
   const guardian = readJSON(join(root, 'guardian-status.json'));
+  const campaign = readJSON(join(root, 'campaign.json'));
+  const amendment = readJSON(join(root, 'authorization-20261108.json'));
+  const earlyCutoff = readJSON(join(root, 'early-cutoff-status.json'));
+  if (amendment) {
+    if (
+      amendment.deadlineUTC !== '2026-11-11T15:00:00.000Z' ||
+      amendment.computeDeadlineUTC !== '2026-11-11T14:45:00.000Z'
+    )
+      throw Error('Unrecognized earlier authorization');
+    campaign.originalDeadlineUTC = campaign.deadlineUTC;
+    campaign.deadlineUTC = amendment.deadlineUTC;
+    campaign.computeDeadlineUTC = amendment.computeDeadlineUTC;
+  }
   return {
     observedAtUTC: new Date().toISOString(),
-    campaign: readJSON(join(root, 'campaign.json')),
+    campaign,
+    earlyCutoff,
     progress: readJSON(join(root, 'progress.json'), {}),
     tasks,
     guardian,

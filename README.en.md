@@ -226,3 +226,5 @@ Fresh4,000-root/8,000-round offline calibration validation did not establish low
 The offline self-simulation review converter and integrity audit are complete (MODEL_STUDY65.1). Further training remains limited by existing gates/authorization; a new direction has been requested. Do not rerun completed studies or enter phase2 automatically. Original campaign deadline monitoring continues; full review data stay ignored locally.
 
 2026-11-08: New owner authorization permits autonomous Windows danMCai training until Wednesday 10:00 Toronto, with compute stopping at 09:45. The public-extras versus zero-input two-seed experiment is in preparation, not a strength result. Web champion017, frozen runs and human-data isolation remain unchanged. See the model study section66.
+
+Capacity correction: the original10k-roots/slot engineering pilot was stopped and preserved at1825updates, without a strength claim. Formalv2 uses50kroots/slot; input arms share new training roots within each training seed, while the two training-seed repeats are disjoint. No pilot weights, Adam or replay are inherited. Protocol changes remain in study66.1–66.2.

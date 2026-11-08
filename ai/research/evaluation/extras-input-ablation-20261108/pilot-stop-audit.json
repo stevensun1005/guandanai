@@ -1,0 +1,441 @@
+{
+  "schema": 1,
+  "kind": "stopped-campaign-integrity-not-strength",
+  "passed": true,
+  "observedAtUTC": "2026-11-08T13:30:18.662091+00:00",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s1-20261108",
+  "earlyStoppedPilot": true,
+  "fullWindowCompleted": false,
+  "task": {
+    "id": "extras-public-s1-20261108",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\extras-public-s1-20261108",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s1-20261108\\protocol.json",
+    "protocolSHA256": "2fde051e5b2fe72b9d71827282620f8113b92d4503732a5c7555fdc2fc7e6606",
+    "window": {
+      "startUTC": "2026-11-08T13:26:01.593Z",
+      "deadlineUTC": "2026-11-08T17:26:01.593Z",
+      "requestedHours": 4,
+      "restartExtendsDeadline": false
+    }
+  },
+  "stoppedAtUTC": "2026-11-08T13:29:17.602Z",
+  "exitDelaySeconds": -14203.991,
+  "latest": {
+    "version": "v000001825",
+    "file": "v000001825.onnx",
+    "sha256": "c87c2a3486b91d9955b9cf772f20db78133317135c77faa1f72a054013e85891",
+    "step": 1825,
+    "trainedRows": 3737600,
+    "ingestedRows": 934576,
+    "publishedAt": "2026-11-08T13:29:15Z"
+  },
+  "checkpointSHA256": "1af110eabd40b469ae4550df83664c66228b9ff84ee1e664c0b62d83c9d5f01e",
+  "matchingNetworkAndAdam": true,
+  "adamStates": 13,
+  "adamStep": 1825,
+  "parent": {
+    "kind": "017-zero-extras-input-ablation-newAdam-emptyReplay",
+    "network": {
+      "id": "017",
+      "file": "bot-017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "mac-20261105",
+        "version": "v000855042",
+        "status": "experimental-not-heldout-accepted",
+        "step": 855042,
+        "registeredAt": "2026-11-06T15:28:31.478Z",
+        "champion": {
+          "gate": 330,
+          "acceptedAt": "2026-11-06T10:59:34.199Z",
+          "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+          "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+          "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+        },
+        "trainingDevice": "mps"
+      }
+    },
+    "startingStep": 0,
+    "predecessorNetworkStep": 855042,
+    "checkpointInherited": false,
+    "adamInherited": false,
+    "replayInherited": false
+  },
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "1bf1c517732185265845576cbf9246b7c35dc1a94528b0e5290527e5da736ac3",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "499c8e9a6d3065da55d7e6819cef5556f21864b4c5ee158547d60a85ae69d266",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "44127ca201f38082ba9c5a2396167cbcb6a07f084d5fcb09c91d34d8815fed3f",
+    "ai/danMCai/training/continuous/learner.py": "a5a4a308da01d4d302af770dc1d1f33e780b0f6a413e4f11839a59c6b666d14a",
+    "ai/danMCai/training/continuous/value_net.py": "f312566021039ed161298ea1fcc3791aed94a91f02cb1992dc033d9a00503f09",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "c62cf18a72d8f4adf1eeb59cbbd84ac49fd852d4eeaf7d6e2011a2e0307a4f74",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "d791c4e747d6a2cfb9a6d767f9e0c549a0b808fbe1ad5ca3babb02e2e6da2fb2",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "9d94a0c421004b42924e8237f6d52d09cdef8a4e6c0cf8c8e9ab11393c4605bc",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "d48d06e817269e30bb1d17f6951dc10131a2f91dcb27c78003dfb5cb096d9592",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "558a8a54daff502980c4521d70b7b17b078464a7452d8fd164c099622e79404a",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "package-lock.json": "514d5b52217d43bda46d9d98556b01f4798d35bc4f10e98944436c042b151224",
+    "ai/danMCai/training/continuous/sources.mjs": "c016e84db70448db2e91b3ab27639a58054d843373e892e86f6873bc19774027",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 38460,
+      "matches": 400,
+      "decisions": 255444,
+      "failures": 0,
+      "nextSeed": 24960400,
+      "shardSequence": 16,
+      "uniqueLoggedSeeds": 400,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 1,
+      "pid": 31092,
+      "matches": 398,
+      "decisions": 253708,
+      "failures": 0,
+      "nextSeed": 24960398,
+      "shardSequence": 16,
+      "uniqueLoggedSeeds": 398,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 2,
+      "pid": 49224,
+      "matches": 390,
+      "decisions": 254626,
+      "failures": 0,
+      "nextSeed": 24960390,
+      "shardSequence": 16,
+      "uniqueLoggedSeeds": 390,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 3,
+      "pid": 35480,
+      "matches": 404,
+      "decisions": 255956,
+      "failures": 0,
+      "nextSeed": 24960404,
+      "shardSequence": 16,
+      "uniqueLoggedSeeds": 404,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "replay": {
+    "manifests": {
+      "a00-000000000.json": {
+        "rows": 16763,
+        "matches": 27
+      },
+      "a00-000000001.json": {
+        "rows": 16886,
+        "matches": 27
+      },
+      "a00-000000002.json": {
+        "rows": 16679,
+        "matches": 27
+      },
+      "a00-000000003.json": {
+        "rows": 16982,
+        "matches": 25
+      },
+      "a00-000000004.json": {
+        "rows": 16796,
+        "matches": 26
+      },
+      "a00-000000005.json": {
+        "rows": 16475,
+        "matches": 25
+      },
+      "a00-000000006.json": {
+        "rows": 16637,
+        "matches": 26
+      },
+      "a00-000000007.json": {
+        "rows": 16811,
+        "matches": 26
+      },
+      "a00-000000008.json": {
+        "rows": 16707,
+        "matches": 28
+      },
+      "a00-000000009.json": {
+        "rows": 16762,
+        "matches": 27
+      },
+      "a00-000000010.json": {
+        "rows": 16672,
+        "matches": 26
+      },
+      "a00-000000011.json": {
+        "rows": 16656,
+        "matches": 25
+      },
+      "a00-000000012.json": {
+        "rows": 16484,
+        "matches": 26
+      },
+      "a00-000000013.json": {
+        "rows": 16542,
+        "matches": 26
+      },
+      "a00-000000014.json": {
+        "rows": 16396,
+        "matches": 26
+      },
+      "a00-000000015.json": {
+        "rows": 5196,
+        "matches": 7
+      },
+      "a01-000000000.json": {
+        "rows": 16710,
+        "matches": 26
+      },
+      "a01-000000001.json": {
+        "rows": 16873,
+        "matches": 27
+      },
+      "a01-000000002.json": {
+        "rows": 16692,
+        "matches": 27
+      },
+      "a01-000000003.json": {
+        "rows": 16564,
+        "matches": 25
+      },
+      "a01-000000004.json": {
+        "rows": 16433,
+        "matches": 25
+      },
+      "a01-000000005.json": {
+        "rows": 16640,
+        "matches": 27
+      },
+      "a01-000000006.json": {
+        "rows": 16870,
+        "matches": 26
+      },
+      "a01-000000007.json": {
+        "rows": 16893,
+        "matches": 26
+      },
+      "a01-000000008.json": {
+        "rows": 17029,
+        "matches": 28
+      },
+      "a01-000000009.json": {
+        "rows": 16502,
+        "matches": 27
+      },
+      "a01-000000010.json": {
+        "rows": 16884,
+        "matches": 28
+      },
+      "a01-000000011.json": {
+        "rows": 16534,
+        "matches": 25
+      },
+      "a01-000000012.json": {
+        "rows": 16838,
+        "matches": 26
+      },
+      "a01-000000013.json": {
+        "rows": 16920,
+        "matches": 24
+      },
+      "a01-000000014.json": {
+        "rows": 16918,
+        "matches": 28
+      },
+      "a01-000000015.json": {
+        "rows": 2408,
+        "matches": 3
+      },
+      "a02-000000000.json": {
+        "rows": 16406,
+        "matches": 26
+      },
+      "a02-000000001.json": {
+        "rows": 16713,
+        "matches": 25
+      },
+      "a02-000000002.json": {
+        "rows": 16851,
+        "matches": 24
+      },
+      "a02-000000003.json": {
+        "rows": 16723,
+        "matches": 26
+      },
+      "a02-000000004.json": {
+        "rows": 16445,
+        "matches": 25
+      },
+      "a02-000000005.json": {
+        "rows": 16490,
+        "matches": 27
+      },
+      "a02-000000006.json": {
+        "rows": 16607,
+        "matches": 25
+      },
+      "a02-000000007.json": {
+        "rows": 16943,
+        "matches": 27
+      },
+      "a02-000000008.json": {
+        "rows": 16951,
+        "matches": 28
+      },
+      "a02-000000009.json": {
+        "rows": 16562,
+        "matches": 24
+      },
+      "a02-000000010.json": {
+        "rows": 16488,
+        "matches": 24
+      },
+      "a02-000000011.json": {
+        "rows": 16498,
+        "matches": 26
+      },
+      "a02-000000012.json": {
+        "rows": 16562,
+        "matches": 24
+      },
+      "a02-000000013.json": {
+        "rows": 16836,
+        "matches": 25
+      },
+      "a02-000000014.json": {
+        "rows": 16392,
+        "matches": 27
+      },
+      "a02-000000015.json": {
+        "rows": 5159,
+        "matches": 7
+      },
+      "a03-000000000.json": {
+        "rows": 16550,
+        "matches": 27
+      },
+      "a03-000000001.json": {
+        "rows": 16823,
+        "matches": 27
+      },
+      "a03-000000002.json": {
+        "rows": 16976,
+        "matches": 28
+      },
+      "a03-000000003.json": {
+        "rows": 16940,
+        "matches": 27
+      },
+      "a03-000000004.json": {
+        "rows": 16546,
+        "matches": 28
+      },
+      "a03-000000005.json": {
+        "rows": 16532,
+        "matches": 26
+      },
+      "a03-000000006.json": {
+        "rows": 16496,
+        "matches": 26
+      },
+      "a03-000000007.json": {
+        "rows": 16608,
+        "matches": 25
+      },
+      "a03-000000008.json": {
+        "rows": 16979,
+        "matches": 26
+      },
+      "a03-000000009.json": {
+        "rows": 16499,
+        "matches": 27
+      },
+      "a03-000000010.json": {
+        "rows": 16601,
+        "matches": 24
+      },
+      "a03-000000011.json": {
+        "rows": 16687,
+        "matches": 26
+      },
+      "a03-000000012.json": {
+        "rows": 16447,
+        "matches": 24
+      },
+      "a03-000000013.json": {
+        "rows": 16583,
+        "matches": 28
+      },
+      "a03-000000014.json": {
+        "rows": 16778,
+        "matches": 25
+      },
+      "a03-000000015.json": {
+        "rows": 5911,
+        "matches": 10
+      }
+    },
+    "shards": 64,
+    "retainedRows": 1019734,
+    "pendingShards": [
+      "a00-000000014.json",
+      "a00-000000015.json",
+      "a01-000000014.json",
+      "a01-000000015.json",
+      "a02-000000014.json",
+      "a02-000000015.json",
+      "a03-000000014.json",
+      "a03-000000015.json"
+    ],
+    "pendingRows": 85158,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": []
+  },
+  "totals": {
+    "matches": 1592,
+    "decisions": 1019734,
+    "rows": 1019734
+  },
+  "tailRowsNotInCheckpoint": 85158,
+  "optimizerUpdatesDuringAudit": 0,
+  "preservedHistory": true,
+  "webChampionChanged": false,
+  "limitations": "Retained replay only; evicted samples, original in-memory ring/RNG not recovered."
+}

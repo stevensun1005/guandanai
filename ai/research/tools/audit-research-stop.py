@@ -26,7 +26,7 @@ def alive(pid):
     return probe.returncode == 0
 
 
-def audit(run, frozen):
+def audit(run, frozen, allow_early_stop=False):
     import torch
     torch.set_num_threads(1)
     sys.path.insert(0, str(frozen / 'ai/danMCai/training/continuous'))
@@ -40,7 +40,10 @@ def audit(run, frozen):
     parse=lambda s:datetime.fromisoformat(s.replace('Z','+00:00'))
     plan=read(run/'protocol.json')
     effective=min(parse(task['window']['deadlineUTC']),parse(plan.get('deadlineUTC',task['window']['deadlineUTC'])))
-    assert parse(state['stoppedAt'])>=effective
+    if not allow_early_stop:
+        assert parse(state['stoppedAt'])>=effective
+    else:
+        assert (run/'STOP').exists() and parse(state['stoppedAt'])<effective
     for name,digest in config['sourceSHA256'].items():
         assert hashlib.sha256((frozen/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()==digest,name
     latest=read(run/'models/latest.json')
@@ -70,6 +73,7 @@ def audit(run, frozen):
     assert sum(a['decisions'] for a in actors)==state['totals']['decisions']==state['totals']['rows']
     return {'schema':1,'kind':'stopped-campaign-integrity-not-strength','passed':True,
        'observedAtUTC':datetime.now(timezone.utc).isoformat(),'run':str(run),
+       'earlyStoppedPilot':allow_early_stop,'fullWindowCompleted':not allow_early_stop,
        'task':task,'stoppedAtUTC':state['stoppedAt'],
        'exitDelaySeconds':(parse(state['stoppedAt'])-parse(task['window']['deadlineUTC'])).total_seconds(),
        'latest':latest,'checkpointSHA256':sha(run/'learner/checkpoint.pt'),
@@ -84,9 +88,9 @@ def audit(run, frozen):
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__)
     p.add_argument('--run',type=Path,required=True);p.add_argument('--frozen-source',type=Path,required=True)
-    p.add_argument('--output',type=Path,required=True);args=p.parse_args()
+    p.add_argument('--output',type=Path,required=True);p.add_argument('--allow-early-stop',action='store_true');args=p.parse_args()
     assert not args.output.resolve().is_relative_to(args.run.resolve())
-    result=audit(args.run,args.frozen_source)
+    result=audit(args.run,args.frozen_source,args.allow_early_stop)
     args.output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'passed':True,'version':result['latest']['version'],'step':result['latest']['step'],
                      'retainedRows':result['replay']['retainedRows'],'pendingRows':result['replay']['pendingRows']}))
