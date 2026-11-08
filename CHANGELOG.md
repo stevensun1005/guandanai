@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-08 · GuanZero 即时评测模型同权重发布
+
+- 303975 已完成两组各500场，网页归档023使用实际参赛权重，最近两代303975、270292。[发布记录](ai/research/evaluation/web-model-023.json)。
+
 ## 2026-11-07 · GuanZero 第48小时模型发布
 
 - 270292 完成Clint和danMCai冠军各500场，网页发布实际参赛权重，最近两代270292、229609。[发布记录](ai/research/evaluation/web-model-022.json)。
