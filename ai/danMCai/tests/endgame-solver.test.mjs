@@ -9,6 +9,7 @@ import {
   signedPoints,
   remainingCards,
   SolverBudget,
+  createSolver,
 } from '../endgame/solver.mjs';
 
 /** Play legal random moves from a fresh deal until at most `cards` remain; null if the round ends. */
@@ -104,4 +105,22 @@ test('values are signed team points; the other team sees the negation; budgets t
   assert.equal(checked, 10);
   const big = randomEndgame(9001, 60) || positionFromGame(createRound(9001));
   assert.throws(() => solveEndgame(positionFromGame(big), { maxNodes: 50 }), SolverBudget);
+});
+
+test('shared-table solver matches solveEndgame on values and every root move, across reused tables', () => {
+  const solver = createSolver({ maxNodes: 3_000_000, maxMs: 20_000 });
+  let checked = 0;
+  for (let seed = 1; checked < 30 && seed < 600; seed++) {
+    const game = randomEndgame(12_300 + seed, 14);
+    if (!game) continue;
+    const position = positionFromGame(game);
+    const reference = solveEndgame(position, { perspective: 0, maxNodes: 3_000_000 });
+    assert.equal(solver.value(position), reference.value);
+    for (const { play, value } of reference.actions) {
+      assert.equal(solver.actionValue(position, play), value);
+      assert.equal(solver.keepsValue(position, play, reference.value), value === reference.value);
+    }
+    checked++;
+  }
+  assert.ok(checked >= 20, `only ${checked} endgames checked`);
 });

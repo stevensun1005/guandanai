@@ -1,0 +1,149 @@
+{
+  "schema": "danmcai-human-endgame-optimality-v1",
+  "registeredAt": "2026-11-08",
+  "status": "preregistered before the full audit; development checks used one round for timing/coverage only (no optimality numbers were read)",
+  "request": "Owner 2026-11-08: take the cloud human games, cut them to the endgame and check whether the model can always play the optimal solution there; with one seat under its control, can it beat the opponents, and when the side that actually lost had a better line, can it find it. Going out first is not the only goal: avoiding a double-down (-3 -> -2) also counts.",
+  "kind": "Diagnostic audit only. No training, no gradient update, no change to the web champion, menu, or any run. Human records are evaluation data here, not training data.",
+  "data": {
+    "source": "Cloud D1 guandan-human-games-v1, kind=game, read-only query with the owner's local wrangler OAuth (export token not present on this Mac). Saved under the ignored ai/shared/data/human-games/d1-snapshot-20261108/; records are not committed.",
+    "rounds": 26,
+    "matches": [
+      "5f687c12",
+      "ac9ece36"
+    ],
+    "seq": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      26,
+      27,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "serverSHA256": [
+      "0da28ddf27f61a874062f25f3503ce2db7abb8cc7fabb9d6ca436f01ce39a3e3",
+      "412b75457ca8de487136714fe870961b8409550799b1d92d763ad207fd146439",
+      "3e333586931593987ccd0a079a0cae39c7cb36f31558c6fd711fc199b5510414",
+      "e43cb39920713ee9115462aef255a9ea22215c2a12e01e79285b3e96e6d63e6e",
+      "a0eb055065f705fee47f32f2d167d3ebe5af7b5cb9edd36eff9db4c7c25c73c5",
+      "0e8f9bc7e34d2e6410468849432d0d7f1ee4ac7cbc35c5bb8d1d13622dedee95",
+      "cc00cf0cb6524f6d6be2352c28e72cf434a96b8ecb6534e65abd2494f1247013",
+      "8f1fd299295f7fd3e5bd0c671f36e0340a9badbdd08f251aa088927fc1aaec61",
+      "1a05b2e9070d816abc34394ee05da5263f73caa5e2839b84e16a7ace7cab8d71",
+      "fbb4f35ace733ce37a7becf72c07e181121762833cfc6bbdc0997150b0ca9db4",
+      "20b13f09fc0311068b8fccf69f4a3a9719b078adcb2a68e4b26d91840911688d",
+      "0dd51de98736e25d3be30a4a4257b4f1e0e43b7940fee05889206a42e445599d",
+      "aa5168bc00c574583d18907aea0db9c74d1d8d94fb335b3223c962e20600b0ce",
+      "452ee2636bec407e40d7773c9bad443ce501e1dfc5741206d005c05f5908f9dd",
+      "279eb459b1fdb25dff9417e775eb02c9537babf4653421565bd5d190c0325961",
+      "5d4c6412f70e9c32190e5a6bb024bec8b1236bbb1acd26dae48c3c7375bf323e",
+      "5156ebe7e25f0e1911cdd331be22961278b1a131d52da9881aaf053db6ac4e70",
+      "a90e8b646c632956a6435d1bd2f49888d412db8c01d41e75e570cac551ecbdb0",
+      "a5840712ae41a28705baa7bb131de90421f716fcbe80a6139eaf62301a2007f3",
+      "ce6fd18980e9c9b17069bda46397821804167c9369c478c075d869b031f786e3",
+      "cd20a77683ce0b6fae417f8e4ed0420b30b710f8f5cbd6c35be9fc9e40fd74c3",
+      "be0725c91330f05871af3b1f6f3a5d614b2c8c022679fc1f8fc1b21afc976df6",
+      "82f005fa09ce88b273ed9d99337460126ca4e4848566d12187b6a17eb1166a89",
+      "35eda7bef2ad1053763caa659d9f5f3d2feb4fdc4c88350427418c8c0cd04880",
+      "8bb9e97b0d53fdd21cec0cfe7d8f099b0906f3d233adb4fec1c633c3c44ae815",
+      "d315ae36b8fe43fb5aa3745c54dce05ccad8e61af00638eb68b13a9e0e58c741"
+    ],
+    "fileSHA256": {
+      "round-000000000012.json": "21a038fc66b7ded09c97bfa97a26381bf9ed78958d74c5c915034a31f0546df3",
+      "round-000000000013.json": "cdfab0c8e73fa28b70d8f1626a51f61821eb917d705c7c5014d8316c307d529b",
+      "round-000000000014.json": "e10b7d8d7b5ac476ab50428eb3424eeb598af526dfb8991ad8e0c5f014532540",
+      "round-000000000015.json": "f9870d5d5d5890451d7a829558f49dfe7472b5a58056996c2575b3814ae4dea5",
+      "round-000000000016.json": "b9d983f51a794f436dd47e73f77a60495bb735cbd2167663cfb70ad576b5aa30",
+      "round-000000000017.json": "22943b70a63ebdd555a907543a214064582a536f9018a0391c141518c960c509",
+      "round-000000000018.json": "c6ab31529f682bcf70498b293cabbcf0f7bbb5629dacf8d822f7d01647c0d947",
+      "round-000000000019.json": "1349a1e77629112440843154022481488216f7003453dfa5e2611419ecd11c46",
+      "round-000000000020.json": "0253e2af01dfe55cac02c71cc357bd37f63051b997c7ac6eb677266ad960caec",
+      "round-000000000021.json": "88f46133477bd075e7f6d007486d8cb6de454b77437c615dbf1caaa205f18b87",
+      "round-000000000022.json": "1d717e7a2fd84137bf31143e2df9da8413ee35ac56e6cdf0bee334ed1b34b033",
+      "round-000000000023.json": "7f17b086cd079539d5089626495161755391ecddb4cc20079357bdade1089a5d",
+      "round-000000000024.json": "5cff55d204006648296a88748be02e3ad89a5bc83ae0dc3baee74cdfa3c869b9",
+      "round-000000000026.json": "f37a140831c8eab4d2ba1d4fafed137ef589e925b1d8836ef003d6c1908c91e2",
+      "round-000000000027.json": "1f8728b58b4aa18375ddd35b5391d1b20d3917a4813b9cc4bc88acb12defda31",
+      "round-000000000029.json": "6939d23fd68a634b74367afc26edd090d285b8eea41021dd01e450a05be505a3",
+      "round-000000000030.json": "515494faeb72b9a436dc6fa6c7da179b85e6aea77a8cabb89185493aa603c626",
+      "round-000000000031.json": "f1bc254620bb2b0276fe24a8a587f6b8ce52e6c83bf4cfbc4208175d9594ced9",
+      "round-000000000032.json": "142d20ad5e6fcc1d6727e86f1c71be3a03bfd11e3a707d32e6d443e6d81892b6",
+      "round-000000000033.json": "8a986c31c13dc4ecd674d0822b82bdc5a1c5732ea8206d6bd95cca581aa2d59e",
+      "round-000000000034.json": "72db72034c0864c0aa8001862a01b2403ed8e3107bcfb3b929f973db9ada22e4",
+      "round-000000000035.json": "85d4f2a35b436d1387a1234d9ce0f47432dc1359c44d3f1f1497a25ad09f5f42",
+      "round-000000000036.json": "009e787b67ba68b4cb43ae6c5209fc1abfca87b045f812b80dcf346bcaa7f2df",
+      "round-000000000037.json": "2e32ab4c8aa11f930c8829dcc197d48ce68e29d266b5f46894f1914d81ce838d",
+      "round-000000000038.json": "8635d4d9bfd97a9cb779f2f708fe95c48f9d990271049802c87304a1984064b8",
+      "round-000000000039.json": "0c9923c108360d358e9920a4263d22d559775a888d6ddc32fd7c835a8a32f7a1"
+    },
+    "concatenatedSHA256": "0a642be26dc0475ac34087ca143480158da20f845c17c33198564488df7da2dc",
+    "composition": "All 26 rounds: 4 human seats (humanMask 15), Clint site appVersion c1977…, no bot or timeout actions, 2,210 human actions; all replay legally with web/src/collection/validate.mjs.",
+    "trust": "unverified_browser (legal replay is not identity verification).",
+    "assisted": "Match 5f687c12 has 678 actions flagged assisted=true; the data README records the owner's confirmation that these flags came from testing the evaluation UI. They are kept (--keep-assisted=5f687c12) and every human-rate result is also reported for unassisted actions only."
+  },
+  "models": {
+    "champion": {
+      "id": "017",
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+    },
+    "student": {
+      "version": "e00061050",
+      "sha256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef",
+      "note": "Endgame oracle-guiding student (section 57); trained only for tables with <= 32 cards, so its rates are reported for <= 32 cards."
+    },
+    "policy": "Greedy argmax on own hand + public history (policyState), finishing move and single candidate automatic; no web balanced style, no endgame proof shortcut."
+  },
+  "solver": {
+    "file": "ai/danMCai/endgame/solver.mjs createSolver",
+    "definition": "Exact perfect-information team minimax over the signed single-round result (+-1/+-2/+-3 for the mover's team) with the same candidate generator as play; values are exact, not proxies (no tempo/control/bomb terms).",
+    "budget": {
+      "maxNodes": 5000000,
+      "maxMs": 30000,
+      "maxTable": 3000000
+    },
+    "check": "createSolver equals solveEndgame on values and every root move for 30 random endgames (new test)."
+  },
+  "design": {
+    "tail": "Walk each round back from its last action, solving every position, and stop at the first one with > 40 cards on the table or over budget. The audited tail depends only on solver tractability, not on the moves; it includes early double-up endings with many cards left.",
+    "decisionAudit": "Every human decision in the tail. Best value vs value after the human's move, the champion's choice and the student's choice. 'choice' = not automatic and >= 2 candidates; 'critical' = a choice where some candidate loses value (optimalMoves < candidates). Optimal = keeps the exact value; regret = best - chosen.",
+    "afterHumanError": "Critical decisions where the human's move lost value: did the model choose a value-keeping move in that same position?",
+    "takeover": "From the first tail position: a model controls one active seat (each seat separately) or both seats of a team; every other seat plays the first solver-optimal candidate with all hands visible. Success = final signed points equal the start position's exact value (the maximum possible against perfect opponents). Subsets: teams whose real result was below the exact value; real loss but exact win; real double-down (-3) but exact better than -3."
+  },
+  "metrics": "Optimal rates with round-cluster bootstrap 95% intervals (2,000 draws, seed 20261108), mean regret in round points; takeover success rates with the same interval, mean shortfall, outcome transitions actual->exact->achieved. No acceptance threshold: this is descriptive.",
+  "limits": [
+    "Only 26 rounds from 2 matches of the same four players on one site; intervals are conditional on these rounds and cannot be generalised to all human play.",
+    "Perfect-information optimum is an upper bound: a player who sees only their own hand cannot always reach it (strategy fusion). A miss is not necessarily a mistake given the information available.",
+    "Single-round signed points only; whole-match effects (pass A, aFail) are not scored.",
+    "Opponents in takeover are perfect-information solvers, stronger than any real opponent."
+  ],
+  "sources": {
+    "ai/danMCai/endgame/human-endgames.mjs": "5ea11fc7bfdf253e0f1fb07d73484512e016043c59ff85d4251190d43ca93b1c",
+    "ai/danMCai/endgame/solver.mjs": "2fb05704ebced6fee92259fd53a2ccede55dfc6c1db201bf8fb2ccb3ecbfc9e6",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/collection/validate.mjs": "dafe1c869d73ae1d944f2589f82075a3495d8518ae07956dbe3425c9638dc929",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2"
+  },
+  "outputs": "Per-decision rows stay in the ignored workspace (no cards). Committed: run.json and summary.json (counts and values only).",
+  "followUp": "Any training on human endgames needs its own preregistration; 26 rounds are too few to train on directly."
+}

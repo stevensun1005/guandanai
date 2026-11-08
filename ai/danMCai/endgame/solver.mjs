@@ -208,3 +208,109 @@ export function solveEndgame(
 }
 
 export { VALUES };
+
+/**
+ * Reusable solver for many related positions (for example every position of one replayed round).
+ * Values are always for team 0 (negate for team 1), so one transposition table is valid across
+ * calls; stored entries are true bounds, so a budget abort never corrupts it. Each call has its own
+ * node/time budget and throws SolverBudget when it runs out. Same rules and candidate set as
+ * solveEndgame, but the root is searched with alpha-beta (value only) and single moves are checked
+ * with a null window, which is far cheaper than exact values for every root action.
+ */
+export function createSolver({ maxNodes = 5_000_000, maxMs = 30_000, maxTable = 3_000_000 } = {}) {
+  const table = new Map();
+  const legalCache = new Map();
+  let nodes = 0,
+    deadline = Infinity;
+
+  function legal(hand, level, current) {
+    const key = faceKey(hand) + '|' + level + '|' + shapeKey(current);
+    let plays = legalCache.get(key);
+    if (!plays) {
+      plays = candidates(hand, level, current);
+      plays.sort(
+        (a, b) =>
+          Number(b?.cards.length === hand.length) - Number(a?.cards.length === hand.length) ||
+          (b ? b.cards.length : -1) - (a ? a.cards.length : -1),
+      );
+      if (legalCache.size > 400_000) legalCache.clear();
+      legalCache.set(key, plays);
+    }
+    return plays;
+  }
+  const key = (p) =>
+    p.hands.map(faceKey).join('/') +
+    `|${p.L}|${p.turn}|${p.trick ? p.trick.player + ':' + shapeKey(p.trick.play) : '-'}|${p.passes}|${p.out.join('')}`;
+
+  function search(p, alpha, beta) {
+    if (++nodes > maxNodes || ((nodes & 1023) === 0 && performance.now() > deadline))
+      throw new SolverBudget(nodes);
+    const k = key(p);
+    const entry = table.get(k);
+    if (entry) {
+      if (entry.lower === entry.upper) return entry.lower;
+      if (entry.lower >= beta) return entry.lower;
+      if (entry.upper <= alpha) return entry.upper;
+      alpha = Math.max(alpha, entry.lower);
+      beta = Math.min(beta, entry.upper);
+    }
+    const maximizing = p.turn % 2 === 0;
+    let best = maximizing ? MIN - 1 : MAX + 1;
+    const a0 = alpha,
+      b0 = beta;
+    for (const play of legal(p.hands[p.turn], p.L, p.trick?.play || null)) {
+      const next = step(p, play);
+      const v = next.result ? signedPoints(next.result, 0) : search(next.position, alpha, beta);
+      if (maximizing) {
+        if (v > best) best = v;
+        if (best > alpha) alpha = best;
+      } else {
+        if (v < best) best = v;
+        if (best < beta) beta = best;
+      }
+      if (alpha >= beta) break;
+    }
+    const stored = entry ? { ...entry } : { lower: MIN, upper: MAX };
+    if (best <= a0) stored.upper = Math.min(stored.upper, best);
+    else if (best >= b0) stored.lower = Math.max(stored.lower, best);
+    else stored.lower = stored.upper = best;
+    table.set(k, stored);
+    return best;
+  }
+
+  function begin() {
+    nodes = 0;
+    deadline = performance.now() + maxMs;
+    if (table.size > maxTable) table.clear();
+  }
+  const child = (position, play, alpha, beta) => {
+    const next = step(position, play);
+    return next.result ? signedPoints(next.result, 0) : search(next.position, alpha, beta);
+  };
+
+  return {
+    /** Exact value of the position for team 0. */
+    value(position) {
+      begin();
+      return search(position, MIN, MAX);
+    },
+    /** Exact value for team 0 after the mover plays `play` (null = pass). */
+    actionValue(position, play) {
+      begin();
+      return child(position, play, MIN, MAX);
+    },
+    /** Whether `play` keeps the position's team-0 value `v` for the mover (null-window test). */
+    keepsValue(position, play, v) {
+      begin();
+      const maximizing = position.turn % 2 === 0;
+      const result = child(position, play, v - 0.5, v + 0.5);
+      return maximizing ? result >= v : result <= v;
+    },
+    get nodes() {
+      return nodes;
+    },
+    get tableSize() {
+      return table.size;
+    },
+  };
+}
