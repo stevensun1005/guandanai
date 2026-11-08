@@ -19,5 +19,24 @@
   "selection": [
     "017",
     "012"
-  ]
+  ],
+  "dashboard": {
+    "observedAtUTC": "2026-11-08T02:12:26.972Z",
+    "taskCount": 11,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "actualCPUStartupAndBinaryPrefixesVerified": true,
+  "upstreamPages": {
+    "commit": "a0aebaec0a8952a4a9898145e4f43f421aed65ef",
+    "run": 42435556407,
+    "conclusion": "success",
+    "note": "Collector metadata update; research commits change no web model."
+  }
 }

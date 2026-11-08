@@ -116,3 +116,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [网格真实启动](evaluation/cooperation-grid-20261108/startup.json)：冻结2f82e19／155源码指纹、四工作器、固定05:09:22Z截止；首批真实计数单独封存，不冒充完整结果。
 
 [队友网格完整结果](evaluation/cooperation-grid-20261108/results.json)：192,000局全部完成，12格同时99%区间均跨零且abs(gap)<0.10，不开启队友多样性训练。下一项[表示语料协议](evaluation/representation-corpus-20261108/protocol.design.json)用固定017约100万决策测编码空洞，零梯度。
+
+[表示语料真实启动](evaluation/representation-corpus-20261108/startup.json)：冻结c32a66d／152源码，90,480已保存决策与1,110完整单局的初始快照；约100万是计划量，频率／残差结论待完整结束，不是训练或网页发布。

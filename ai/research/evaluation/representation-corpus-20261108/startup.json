@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T02:13:56.842Z",
+  "title": "danMCai · 冠军表示语料与编码空洞统计",
+  "currentTask": "representation-corpus-20261108",
+  "state": {
+    "pid": 33280,
+    "phase": "development",
+    "displayName": "danMCai · 冠军表示语料与编码空洞统计",
+    "positionUnit": "条完整单局决策",
+    "completedPositions": 90480,
+    "plannedPositions": 1000000,
+    "completedDeals": 1110,
+    "optimizerUpdates": 0,
+    "strengthGames": 0,
+    "provider": "CPUExecutionProvider (explicit, one thread)",
+    "minimumAvailableGiB": 13.04305648803711,
+    "updatedAt": "2026-11-08T02:13:56.787Z"
+  },
+  "controllerAlive": true,
+  "resources": {
+    "availableGiB": 13.440940856933594,
+    "totalGiB": 31.218204498291016,
+    "machineCPUPercent": 10.554013176977584
+  },
+  "guardianHealthy": true,
+  "registeredWindow": {
+    "startUTC": "2026-11-08T02:11:06.724Z",
+    "deadlineUTC": "2026-11-08T04:11:06.724Z",
+    "requestedHours": 2,
+    "restartExtendsDeadline": false
+  },
+  "protocolDeadlineUTC": "2026-11-08T04:11:06.650174+00:00",
+  "sourceCommit": "c32a66d64c89f6701ac983ef6b2a855f7c731b1a",
+  "sourceFilesMatched": 152,
+  "teacherVerified": true,
+  "committedBinaryPrefixes": {
+    "features.i8": {
+      "expectedCommittedPrefixBytes": 51302160,
+      "observedBytes": 51302160
+    },
+    "extras.f32": {
+      "expectedCommittedPrefixBytes": 19181760,
+      "observedBytes": 19181760
+    },
+    "metadata.u32": {
+      "expectedCommittedPrefixBytes": 1809600,
+      "observedBytes": 1809600
+    },
+    "labels.f32": {
+      "expectedCommittedPrefixBytes": 3981120,
+      "observedBytes": 3981120
+    }
+  },
+  "scope": "Actual startup counters only, not completed corpus prevalence, residual R2 or strength evidence.",
+  "webChampion": "017/v000855042",
+  "selection": [
+    "017",
+    "012"
+  ]
+}
