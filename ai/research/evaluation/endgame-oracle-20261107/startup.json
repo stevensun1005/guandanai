@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T02:39:36+00:00",
+  "purpose": "Startup snapshot of the amended endgame run; not a training result or strength evidence.",
+  "run": "~/guandan-runtime.noindex/endgame-oracle-20261108-r2 (linked from ai/danMCai/runs/)",
+  "frozenCheckout": {
+    "commit": "5d56038",
+    "path": "~/guandan-runtime.noindex/endgame-runtime-5d56038"
+  },
+  "protocol": {
+    "file": "evaluation/endgame-oracle-20261107/protocol-amendment-1.json",
+    "sha256": "a5ff1751910b875ecd1d00cedb58d935e1c164cffc494dfa4a41436c32427fdb"
+  },
+  "deadline": "2026-11-08T14:18:02.146Z",
+  "starts": [
+    {
+      "at": "2026-11-08T02:24:43.815Z",
+      "note": "First amended start, child of the agent session."
+    },
+    {
+      "at": "2026-11-08T02:28:22.888Z",
+      "note": "Operator restart via STOP to detach from the agent session (nohup, parent launchd) plus caffeinate -i tied to the supervisor; same config and deadline. The STOP was renamed a few seconds before the supervisor wrote its final status, so that stop is labelled children-finished; the renamed STOP file keeps the real reason."
+    }
+  ],
+  "resources": {
+    "machine": "MacBook Pro M1 Pro, 10 cores, 32 GiB",
+    "actors": 7,
+    "actorNice": 5,
+    "learner": "MPS, normal priority, 2 threads"
+  },
+  "snapshot": {
+    "learnerState": "waiting-for-data",
+    "updates": 1200,
+    "ingestedRows": 594929,
+    "oracleKeep": 0.94005,
+    "lossEma": 1.6067248761668054,
+    "rounds": 56044,
+    "endgameRows": 599031
+  },
+  "evaluatorSanity": {
+    "seeds": "30 development deals 3,838,150,000..029 from the smoke block (not held-out)",
+    "sameModel": {
+      "meanSignedPoints": 0,
+      "rounds": 60,
+      "expected": "exactly 0: identical games with sides swapped"
+    },
+    "earlyStudent": {
+      "sha256": "30eca28088c5cc3b2acad5dd3681be28754f38d6b603330f2e5a03e3968a252a",
+      "differs": 54,
+      "endgameDecisions": 393,
+      "solverChecked": 24,
+      "note": "Plumbing check only; 30 deals cannot measure strength."
+    }
+  },
+  "postRun": "A detached job waits for the supervisor to exit, then evaluates the final exported student on the 3,000 preregistered held-out deals (8 workers) into the run directory eval-final/."
+}
