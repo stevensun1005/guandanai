@@ -129,5 +129,45 @@
         "017"
       ]
     }
+  },
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42496062147",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-024.onnx",
+    "publicSHA256": "86dad83347535f38f7c131bb567b34b5f875cf2f613675d22605600fdb18b863",
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "024",
+          "guanzero-adp-io48-310956"
+        ],
+        [
+          "023",
+          "guanzero-adp-io48-303975"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    }
   }
 }
