@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "sourceSHA": "600cf4d1d5828049621d3ba45dda031ad143f8e4",
+  "protocolSHA256": "c4cc125133daaa9031a111dda837e7ad8af7352b251a06f1c72fcf20be5802dd",
+  "mapSHA256": "764c78a3c0fcd5fb8da3d652096dec242f395792e3fbc216e7e805bcccc50bf3",
+  "resultsSHA256": "8b813c676ed17899e4ac8ff15fc7cddab0bc4b017a6c4c60cf33cf90aff1648f",
+  "mapBytes": 3393,
+  "allChildProcesses": "fit is one synchronous Python process; exited, verified with Node PID probe",
+  "locks": [],
+  "status": {
+    "pid": 9916,
+    "phase": "complete",
+    "startedAtUTC": "2026-11-08T04:31:30.179919+00:00",
+    "optimizerUpdates": 0,
+    "strengthGames": 0,
+    "completedPositions": 2500,
+    "plannedPositions": 2500,
+    "positionUnit": "个已有自博弈根（离线统计拟合）",
+    "completedAtUTC": "2026-11-08T04:31:30.354123+00:00"
+  },
+  "scope": "Development fit only; self labels only, no independent forecast result."
+}

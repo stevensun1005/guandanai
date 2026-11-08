@@ -1,0 +1,12 @@
+{
+  "id": "coach-calibration-validation-20261108",
+  "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\coach-calibration-validation-20261108",
+  "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\coach-calibration-validation-20261108\\protocol.json",
+  "protocolSHA256": "e0a42f8f64bf9c7185d8403377cfe07fce3d4d047ab84d34c8c06d4aae634d0d",
+  "window": {
+    "startUTC": "2026-11-08T04:32:22.174Z",
+    "deadlineUTC": "2026-11-08T05:32:22.174Z",
+    "requestedHours": 1,
+    "restartExtendsDeadline": false
+  }
+}

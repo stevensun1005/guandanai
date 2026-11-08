@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "phase": "complete",
+  "completedAtUTC": "2026-11-08T04:31:30.354123+00:00",
+  "sourceSHA": "600cf4d1d5828049621d3ba45dda031ad143f8e4",
+  "selfRoots": 2500,
+  "displayCases": 1906,
+  "stageCases": {
+    "27..20": 864,
+    "19..10": 685,
+    "9..1": 357
+  },
+  "mapBytes": 3393,
+  "mapSHA256": "764c78a3c0fcd5fb8da3d652096dec242f395792e3fbc216e7e805bcccc50bf3",
+  "opponentLabelsUsedForFit": false,
+  "optimizerUpdates": 0,
+  "scope": "Deterministic development fit only. No independent predictive validation or calibrated UI authorization."
+}
