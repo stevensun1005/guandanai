@@ -16,6 +16,15 @@ const model = (m) =>
     : /^\d{3,}$/.test(m.id) && /^[a-f0-9]{64}$/.test(m.sha256)) &&
   typeof m.version === 'string' &&
   /^[\w.-]{1,80}$/.test(m.version);
+// Optional labels a site may attach: the room number and each person's nickname (Clint's site sends them; this site does not).
+const label = (s, max) =>
+  s === undefined ||
+  s === null ||
+  (typeof s === 'string' &&
+    s.trim() === s &&
+    s.length >= 1 &&
+    [...s].length <= max &&
+    !/[\u0000-\u001f\u007f]/.test(s));
 const fields = (object, allowed) =>
   object && !Array.isArray(object) && Object.keys(object).every((k) => allowed.includes(k));
 function hands(value) {
@@ -54,9 +63,11 @@ export function validateRecord(record, onAction = () => {}) {
       'tribute',
       'actions',
       'order',
+      'room',
     ])
   )
     fail('unknown_record_fields');
+  if (!label(record.room, 16)) fail('invalid_room');
   if (
     record.schema !== 1 ||
     !['game', 'test'].includes(record.kind) ||
@@ -105,8 +116,9 @@ export function validateRecord(record, onAction = () => {}) {
     new Set(record.seats.map((s) => s?.id)).size !== 4 ||
     record.seats.some(
       (s, p) =>
-        !fields(s, ['id', 'human', 'bot']) ||
+        !fields(s, ['id', 'human', 'bot', 'name']) ||
         !uuid(s.id) ||
+        !label(s.name, 24) ||
         s.human !== !!(record.humanMask & (1 << p)) ||
         !fields(s.bot, ['id', 'sha256', 'version']) ||
         !model(s.bot),

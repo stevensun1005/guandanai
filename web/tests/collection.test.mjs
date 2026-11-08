@@ -49,6 +49,32 @@ test('ingestion rejects unfinished games, forged cards, incorrect actors and arb
   }
 });
 
+test('ingestion accepts an optional room number and seat nicknames, and nothing else personal', () => {
+  const record = collectedRound();
+  record.room = '4821';
+  record.seats.forEach((s, p) => (s.name = s.human ? `玩家${p}` : null));
+  const result = validateRecord(record);
+  assert.equal(result.room, '4821');
+  assert.deepEqual(
+    result.seats.map((s) => s.name),
+    record.seats.map((s) => s.name),
+  );
+  assert.ok(!JSON.stringify(humanExamples({ ...record, kind: 'game' })).includes('玩家'));
+  for (const mutate of [
+    (r) => (r.room = ''),
+    (r) => (r.room = 4821),
+    (r) => (r.room = 'x'.repeat(17)),
+    (r) => (r.seats[0].name = ' padded'),
+    (r) => (r.seats[0].name = 'a\nb'),
+    (r) => (r.seats[0].name = 'x'.repeat(25)),
+    (r) => (r.seats[0].ip = 'private'),
+  ]) {
+    const value = structuredClone(record);
+    mutate(value);
+    assert.throws(() => validateRecord(value));
+  }
+});
+
 test('human examples exclude test and automated actions, keep match splits together and reveal no other hand', () => {
   const record = collectedRound();
   assert.deepEqual(humanExamples(record), []);

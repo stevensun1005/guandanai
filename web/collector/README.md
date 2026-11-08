@@ -11,6 +11,8 @@ GitHub Pages 继续承载游戏。这里的独立 Cloudflare Worker 把结束后
 
 房间页面显示匿名采集说明。记录不包含昵称、房间号、聊天、语音、座位恢复凭据或 IP。四个随机座位 ID 仅在同一整场中稳定，不能用来识别跨房间的个人。
 
+例外：Clint 的网站（`appVersion` 以 `c1977` 开头）会附带可选的 `room`（房间号）和 `seats[].name`（真人昵称，电脑座位为 `null`）。本站自己的记录不带这两个字段。它们只存在原始牌谱里，`human-examples.mjs` 生成的训练样本不包含。
+
 ## 机器格式
 
 每局一条 JSON：
@@ -22,6 +24,7 @@ GitHub Pages 继续承载游戏。这里的独立 Cloudflare Worker 把结束后
 | `match / rules / level / leader`           | 开局级数、A 次数、桌规和首出方                                         |
 | `dealtHands / hands / tribute`             | 发牌后及进还贡后的四手牌，实际交换                                     |
 | `seats / humanMask`                        | 匿名座位、初始真人状态、电脑 ID／版本／完整权重 SHA                    |
+| `room / seats[].name`                      | 可选；房间号（≤16 字）与真人昵称（≤24 字），首尾不能有空白或控制字符   |
 | `actions`                                  | 所有出牌和过牌、牌型、操作者来源、当时真人掩码、托管模型和主机观测时间 |
 | `order / result / levelsAfter / remaining` | 名次及服务端重算的结算和余牌                                           |
 
