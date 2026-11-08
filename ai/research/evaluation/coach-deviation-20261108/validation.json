@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T04:02:42.455932+00:00",
+  "priorMain": "a51b2abca45117f90939c24023d53aa74663f258",
+  "nodeTestsPassed": 274,
+  "researchPythonPassed": 36,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "format": "passed",
+  "build": "5d55b91a83",
+  "singleLegalRankedInterventionAndPrefix": true,
+  "changedCandidateFingerprintRejected": true,
+  "isolatedClintOpponentAndTeammatePrefixEquality": true,
+  "focalSeatAllocationBalanced": true,
+  "importanceWeightsRecoverUniformTarget": true,
+  "realRegisteredWorkerSTOPBeforeModelsOutput": true,
+  "realSummaryCLISTOPBeforeDataOutput": true,
+  "weightedSlopeBootstrapSynthetic": true,
+  "deviationPairsExecuted": 0,
+  "optimizerUpdates": 0,
+  "scope": "Development validation only, not calibration or strength acceptance."
+}

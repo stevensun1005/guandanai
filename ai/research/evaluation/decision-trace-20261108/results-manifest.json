@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "passed": true,
+  "sourceSHA": "11671a5f37f40fcbf05f51ba5daea432562a1568",
+  "protocolSHA256": "e158e1d5668363bfd3c05a729e77558aa4f4ce3de2d6c0ec8c4d0a1368439542",
+  "completedGapRootPairs": 200,
+  "completedTrajectoryPairs": 6000,
+  "completedRounds": 12400,
+  "allFiveProcessesExited": true,
+  "allLocksAndPendingAbsent": true,
+  "frozenSourceFilesMatched": 150,
+  "frozenModelsMatched": 2,
+  "fullSummaryReproducedExactly": true,
+  "minimumAvailableGiB": 12.135387420654297,
+  "stoppedAtUTC": "2026-11-08T03:47:19.885Z",
+  "replayAudit": {
+    "schema": 1,
+    "roundsReplayed": 12400,
+    "movesReplayed": 1049781,
+    "neuralChoicesVerified": 707735,
+    "workerFiles": {
+      "worker-0.jsonl": {
+        "bytes": 43060071,
+        "sha256": "5e479a4d66a7123489cecc6025115b28d8778ffbbc0260bd73249f7e9b018a83"
+      },
+      "worker-1.jsonl": {
+        "bytes": 43218237,
+        "sha256": "33f9c0babb9a8df023cd740987b7479e2db7a35eb0f94e4a476f55a6a5daf29e"
+      },
+      "worker-2.jsonl": {
+        "bytes": 42893162,
+        "sha256": "92707fdad16fd65811370abcd7f9a7af48f84f5e5bd0285e31f5fd50aec1289f"
+      },
+      "worker-3.jsonl": {
+        "bytes": 43090394,
+        "sha256": "312f372dc815a20ba383431b1007de4799f63eb5053ce03c209dcba188ff4209"
+      }
+    },
+    "networkForwardsDuringAudit": 0
+  },
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "scope": "Simulated development corpus only; full reconstruction under frozen engine and neural candidate/recorded argmax consistency, zero additional network forwards. Not realized-deviation/calibration evidence."
+}

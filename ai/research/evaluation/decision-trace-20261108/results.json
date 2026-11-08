@@ -1,0 +1,395 @@
+{
+  "schema": 1,
+  "protocolSHA256": "e158e1d5668363bfd3c05a729e77558aa4f4ce3de2d6c0ec8c4d0a1368439542",
+  "gapOnly": false,
+  "completeRounds": 12400,
+  "tasks": {
+    "gap-self": {
+      "stage": "gap",
+      "opponent": "champion",
+      "mixed": false,
+      "pairedDeals": 50,
+      "rounds": 100,
+      "wins": 50,
+      "losses": 50,
+      "draws": 0,
+      "teamRankCounts": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "championDecisions": 8322,
+      "forcedChampionDecisions": 2396,
+      "top2Gap": {
+        "n": 5926,
+        "mean": 0.31274397892431444,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.005051851272583008,
+          "p25": 0.04925820231437683,
+          "p50": 0.16210126876831055,
+          "p75": 0.41888313740491867,
+          "p95": 1.122875690460205,
+          "max": 4.028430223464966
+        },
+        "fractionAtLeastPoint1": 0.6085048936888289,
+        "fractionPoint05Through1": 0.6776915288558893
+      },
+      "top5Gap": {
+        "n": 3694,
+        "mean": 0.5717900955155049,
+        "quantiles": {
+          "min": 0.004091143608093262,
+          "p05": 0.048152923583984375,
+          "p25": 0.19668827950954437,
+          "p50": 0.44046902656555176,
+          "p75": 0.7938946755602956,
+          "p95": 1.6032702326774597,
+          "max": 4.372190475463867
+        },
+        "fractionAtLeastPoint1": 0.8857606930157012,
+        "fractionPoint05Through1": 0.78938819707634
+      }
+    },
+    "gap-clint": {
+      "stage": "gap",
+      "opponent": "clint",
+      "mixed": false,
+      "pairedDeals": 50,
+      "rounds": 100,
+      "wins": 61,
+      "losses": 39,
+      "draws": 0,
+      "teamRankCounts": [
+        61,
+        59,
+        40,
+        40
+      ],
+      "championDecisions": 4347,
+      "forcedChampionDecisions": 1116,
+      "top2Gap": {
+        "n": 3231,
+        "mean": 0.29931051450421503,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.006069660186767578,
+          "p25": 0.04951104521751404,
+          "p50": 0.15678489208221436,
+          "p75": 0.4244749844074249,
+          "p95": 1.0237154960632324,
+          "max": 4.019895553588867
+        },
+        "fractionAtLeastPoint1": 0.6205509130300216,
+        "fractionPoint05Through1": 0.6939028164654906
+      },
+      "top5Gap": {
+        "n": 1987,
+        "mean": 0.5370494567549627,
+        "quantiles": {
+          "min": 0.0041904449462890625,
+          "p05": 0.06235470771789551,
+          "p25": 0.20082628726959229,
+          "p50": 0.3966038227081299,
+          "p75": 0.7457320541143417,
+          "p95": 1.402211707830429,
+          "max": 3.579240918159485
+        },
+        "fractionAtLeastPoint1": 0.9048817312531454,
+        "fractionPoint05Through1": 0.8147961751383996
+      }
+    },
+    "gap-p0": {
+      "stage": "gap",
+      "opponent": "p0",
+      "mixed": false,
+      "pairedDeals": 50,
+      "rounds": 100,
+      "wins": 44,
+      "losses": 56,
+      "draws": 0,
+      "teamRankCounts": [
+        44,
+        59,
+        53,
+        44
+      ],
+      "championDecisions": 4159,
+      "forcedChampionDecisions": 1172,
+      "top2Gap": {
+        "n": 2987,
+        "mean": 0.3164551503514197,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.0055977642536163335,
+          "p25": 0.050879836082458496,
+          "p50": 0.17875492572784424,
+          "p75": 0.4457201845943928,
+          "p95": 1.0737971484661097,
+          "max": 5.483994960784912
+        },
+        "fractionAtLeastPoint1": 0.6277201205222631,
+        "fractionPoint05Through1": 0.6913290927351858
+      },
+      "top5Gap": {
+        "n": 1880,
+        "mean": 0.5729156962065819,
+        "quantiles": {
+          "min": 0.005080580711364746,
+          "p05": 0.050027301907539366,
+          "p25": 0.20886946469545364,
+          "p50": 0.44063761830329895,
+          "p75": 0.816020131111145,
+          "p95": 1.5031926319003102,
+          "max": 5.656150817871094
+        },
+        "fractionAtLeastPoint1": 0.8968085106382979,
+        "fractionPoint05Through1": 0.7829787234042553
+      }
+    },
+    "gap-mixed": {
+      "stage": "gap",
+      "opponent": "clint",
+      "mixed": true,
+      "pairedDeals": 50,
+      "rounds": 100,
+      "wins": 59,
+      "losses": 41,
+      "draws": 0,
+      "teamRankCounts": [
+        59,
+        59,
+        34,
+        48
+      ],
+      "championDecisions": 2199,
+      "forcedChampionDecisions": 552,
+      "top2Gap": {
+        "n": 1647,
+        "mean": 0.3017758003302579,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.005306512117385864,
+          "p25": 0.04620540142059326,
+          "p50": 0.16568106412887573,
+          "p75": 0.39797377586364746,
+          "p95": 1.0600692003965377,
+          "max": 3.7401115894317627
+        },
+        "fractionAtLeastPoint1": 0.6102003642987249,
+        "fractionPoint05Through1": 0.6818457802064359
+      },
+      "top5Gap": {
+        "n": 1021,
+        "mean": 0.5552768795518432,
+        "quantiles": {
+          "min": 0.006217598915100098,
+          "p05": 0.05444127321243286,
+          "p25": 0.19819319248199463,
+          "p50": 0.4032507538795471,
+          "p75": 0.7490760087966919,
+          "p95": 1.5695101022720337,
+          "max": 3.96511173248291
+        },
+        "fractionAtLeastPoint1": 0.8952007835455436,
+        "fractionPoint05Through1": 0.7992164544564153
+      }
+    },
+    "trajectory-self": {
+      "stage": "trajectory",
+      "opponent": "champion",
+      "mixed": false,
+      "pairedDeals": 1500,
+      "rounds": 3000,
+      "wins": 1500,
+      "losses": 1500,
+      "draws": 0,
+      "teamRankCounts": [
+        1500,
+        1500,
+        1500,
+        1500
+      ],
+      "championDecisions": 245114,
+      "forcedChampionDecisions": 68388,
+      "top2Gap": {
+        "n": 176726,
+        "mean": 0.31600097039678043,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.00533449649810791,
+          "p25": 0.050768643617630005,
+          "p50": 0.17034053802490234,
+          "p75": 0.4343065991997719,
+          "p95": 1.1107513308525085,
+          "max": 4.667259931564331
+        },
+        "fractionAtLeastPoint1": 0.628475719475346,
+        "fractionPoint05Through1": 0.6856716046308976
+      },
+      "top5Gap": {
+        "n": 108874,
+        "mean": 0.5572216517310329,
+        "quantiles": {
+          "min": 0.0008620023727416992,
+          "p05": 0.049216663837432874,
+          "p25": 0.20057427883148193,
+          "p50": 0.4130532741546631,
+          "p75": 0.7683727145195007,
+          "p95": 1.5382663667201966,
+          "max": 5.044645309448242
+        },
+        "fractionAtLeastPoint1": 0.8895971489979242,
+        "fractionPoint05Through1": 0.7920899388283704
+      }
+    },
+    "trajectory-clint": {
+      "stage": "trajectory",
+      "opponent": "clint",
+      "mixed": false,
+      "pairedDeals": 1500,
+      "rounds": 3000,
+      "wins": 1718,
+      "losses": 1282,
+      "draws": 0,
+      "teamRankCounts": [
+        1718,
+        1753,
+        1302,
+        1227
+      ],
+      "championDecisions": 129817,
+      "forcedChampionDecisions": 34214,
+      "top2Gap": {
+        "n": 95603,
+        "mean": 0.30574047207966243,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.005606724321842195,
+          "p25": 0.0503687858581543,
+          "p50": 0.16599953174591064,
+          "p75": 0.42197105288505554,
+          "p95": 1.0580129444599151,
+          "max": 5.47817325592041
+        },
+        "fractionAtLeastPoint1": 0.622668744704664,
+        "fractionPoint05Through1": 0.6927920671945441
+      },
+      "top5Gap": {
+        "n": 59635,
+        "mean": 0.5530639784165955,
+        "quantiles": {
+          "min": 0.001087188720703125,
+          "p05": 0.05864732861518861,
+          "p25": 0.20737941563129425,
+          "p50": 0.41437387466430664,
+          "p75": 0.7621553614735603,
+          "p95": 1.4848537057638167,
+          "max": 5.035230875015259
+        },
+        "fractionAtLeastPoint1": 0.8997903915485872,
+        "fractionPoint05Through1": 0.808837092311562
+      }
+    },
+    "trajectory-p0": {
+      "stage": "trajectory",
+      "opponent": "p0",
+      "mixed": false,
+      "pairedDeals": 1500,
+      "rounds": 3000,
+      "wins": 1573,
+      "losses": 1427,
+      "draws": 0,
+      "teamRankCounts": [
+        1573,
+        1578,
+        1441,
+        1408
+      ],
+      "championDecisions": 122015,
+      "forcedChampionDecisions": 33174,
+      "top2Gap": {
+        "n": 88841,
+        "mean": 0.3155207610967559,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.005311727523803711,
+          "p25": 0.051093995571136475,
+          "p50": 0.17036008834838867,
+          "p75": 0.43290114402770996,
+          "p95": 1.106845736503601,
+          "max": 5.077781438827515
+        },
+        "fractionAtLeastPoint1": 0.6274918112132911,
+        "fractionPoint05Through1": 0.6873403045890973
+      },
+      "top5Gap": {
+        "n": 55145,
+        "mean": 0.5614361114603097,
+        "quantiles": {
+          "min": 0.002028822898864746,
+          "p05": 0.05108139514923096,
+          "p25": 0.20362219214439392,
+          "p50": 0.4132762551307678,
+          "p75": 0.7747305929660797,
+          "p95": 1.5464687168598172,
+          "max": 5.534326076507568
+        },
+        "fractionAtLeastPoint1": 0.8924290506845589,
+        "fractionPoint05Through1": 0.7914226131108895
+      }
+    },
+    "trajectory-mixed": {
+      "stage": "trajectory",
+      "opponent": "clint",
+      "mixed": true,
+      "pairedDeals": 1500,
+      "rounds": 3000,
+      "wins": 1633,
+      "losses": 1367,
+      "draws": 0,
+      "teamRankCounts": [
+        1633,
+        1595,
+        1361,
+        1411
+      ],
+      "championDecisions": 65420,
+      "forcedChampionDecisions": 17571,
+      "top2Gap": {
+        "n": 47849,
+        "mean": 0.2957354724693674,
+        "quantiles": {
+          "min": 0.0,
+          "p05": 0.005626869201660156,
+          "p25": 0.050113677978515625,
+          "p50": 0.16409367322921753,
+          "p75": 0.4046914577484131,
+          "p95": 1.0152626514434813,
+          "max": 4.279409885406494
+        },
+        "fractionAtLeastPoint1": 0.6209743150327071,
+        "fractionPoint05Through1": 0.6978411252063784
+      },
+      "top5Gap": {
+        "n": 29738,
+        "mean": 0.5527104494298825,
+        "quantiles": {
+          "min": 0.0022478103637695312,
+          "p05": 0.05766443014144898,
+          "p25": 0.20903080701828003,
+          "p50": 0.4191858321428299,
+          "p75": 0.7647904753684998,
+          "p95": 1.4747971490025515,
+          "max": 4.092739820480347
+        },
+        "fractionAtLeastPoint1": 0.9006658147824332,
+        "fractionPoint05Through1": 0.8077543883247024
+      }
+    }
+  },
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "scope": "Descriptive Q gaps over champion simulated trajectories, decisions correlated within deal. No realized deviation, calibration, causal/tactical recommendation or strength acceptance; complete private simulated deals remain ignored locally."
+}

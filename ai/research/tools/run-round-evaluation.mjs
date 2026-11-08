@@ -37,7 +37,9 @@ export async function evaluateRegistered(run) {
       (n, w) => n + (w.completedRounds ?? w.completedPairs * 2),
       0,
     );
-    state.strengthGames = plan.evaluationKind === 'decision-trace' ? 0 : state.completedRounds;
+    state.strengthGames = ['decision-trace', 'deviation-pairs'].includes(plan.evaluationKind)
+      ? 0
+      : state.completedRounds;
     state.updatedAt = new Date().toISOString();
     if (stop() && !existsSync(join(run, 'STOP')))
       writeJSON(join(run, 'STOP'), { reason: 'fixed-evaluation-deadline', atUTC: state.updatedAt });
@@ -71,7 +73,9 @@ export async function evaluateRegistered(run) {
               plan.evaluationSource,
               plan.evaluationKind === 'decision-trace'
                 ? 'ai/danMCai/evaluation/evaluate-decision-trace.mjs'
-                : 'ai/danMCai/evaluation/evaluate-round-pairs.mjs',
+                : plan.evaluationKind === 'deviation-pairs'
+                  ? 'ai/danMCai/evaluation/evaluate-deviation-pairs.mjs'
+                  : 'ai/danMCai/evaluation/evaluate-round-pairs.mjs',
             ),
             `--protocol=${protocol}`,
             `--run=${run}`,
@@ -100,7 +104,9 @@ export async function evaluateRegistered(run) {
           plan.evaluationSource,
           plan.evaluationKind === 'decision-trace'
             ? 'ai/research/tools/summarize-decision-trace.py'
-            : 'ai/danMCai/evaluation/summarize-round-pairs.py',
+            : plan.evaluationKind === 'deviation-pairs'
+              ? 'ai/research/tools/summarize-deviation-pairs.py'
+              : 'ai/danMCai/evaluation/summarize-round-pairs.py',
         ),
         '--protocol',
         protocol,

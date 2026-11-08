@@ -15,6 +15,21 @@ import { analysisState } from './cooperation-labels.mjs';
 
 export const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
+export const candidateFingerprint = (plays) =>
+  hash(
+    JSON.stringify(
+      plays.map(
+        (play) =>
+          play && {
+            cards: play.cards.map((c) => c.id),
+            type: play.type,
+            value: play.value,
+            n: play.n,
+          },
+      ),
+    ),
+  );
+
 export function lineup(task, team, seed) {
   if (![0, 1].includes(team)) throw Error('Invalid team');
   const focus = team + (seed % 2) * 2;
@@ -35,6 +50,8 @@ export async function playRound({
   descriptive = false,
   modelConfigs = {},
   checkpoint = null,
+  captureChoices = false,
+  intervention = null,
 }) {
   const game = createRound(seed);
   const trace = capture ? { initial: structuredClone(game), moves: [] } : null;
@@ -54,12 +71,17 @@ export async function playRound({
         opponentReceivesLeadAndFinishesWithinTwoActions: 0,
       }))
     : null;
-  let pending = [];
+  let pending = [],
+    applied = 0,
+    interventionQGap = null;
   for (let turn = 0; turn < 1000; turn++) {
     if (checkpoint) await checkpoint();
     const p = game.turn;
     let play,
-      estimates = null;
+      estimates = null,
+      choice = null;
+    if (intervention?.turn === turn && (p !== intervention.player || seats[p] !== 'champion'))
+      throw Error('Intervention must target the preregistered champion seat');
     if (seats[p] === 'clint') play = rule(game, p);
     else if (seats[p] === 'original') play = original(game, p);
     else {
@@ -78,7 +100,30 @@ export async function playRound({
           throw Error('Invalid policy values');
         index = argmax(scores);
         if (capture) estimates = Array.from(scores);
+        if (intervention?.turn === turn) {
+          const ranking = Array.from(scores, (q, i) => ({ q, i })).sort(
+            (a, b) => b.q - a.q || a.i - b.i,
+          );
+          if (
+            intervention.rank < 2 ||
+            intervention.rank > 5 ||
+            ranking[intervention.rank - 1]?.i !== intervention.index ||
+            candidateFingerprint(plays) !== intervention.candidateSHA256
+          )
+            throw Error('Intervention candidate/rank fingerprint mismatch');
+          interventionQGap = scores[index] - scores[intervention.index];
+          index = intervention.index;
+          applied++;
+        }
       }
+      if (intervention?.turn === turn && applied !== 1)
+        throw Error('Intervention lacks a real choice');
+      if (capture && captureChoices)
+        choice = {
+          chosenIndex: index,
+          candidateSHA256: candidateFingerprint(plays),
+          ownHandCount: game.hands[p].length,
+        };
       play = plays[index];
     }
     if (capture)
@@ -87,6 +132,7 @@ export async function playRound({
         cards: play?.cards.map((c) => c.id) || null,
         ...(play ? { type: play.type, value: play.value, n: play.n } : {}),
         estimates,
+        ...(choice || {}),
       });
     if (descriptive) {
       const row = descriptions[p];
@@ -103,14 +149,17 @@ export async function playRound({
     const result = advanceRound(game, play);
     if (descriptive && !play && !game.trick && game.turn % 2 !== p % 2)
       pending.push({ p, receiver: game.turn, turn });
-    if (result)
+    if (result) {
+      if (intervention && applied !== 1) throw Error('Intervention position never reached');
       return {
         ...initial,
         ...result,
         turns: turn + 1,
         ...(capture ? { trace } : {}),
         ...(descriptive ? { descriptions } : {}),
+        ...(intervention ? { interventionApplied: applied, interventionQGap } : {}),
       };
+    }
   }
   throw Error('Round truncated; never count as a draw');
 }
