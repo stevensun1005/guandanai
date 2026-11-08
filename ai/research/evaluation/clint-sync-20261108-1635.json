@@ -1,0 +1,958 @@
+{
+  "schema": 1,
+  "kind": "ui-layout-voice-indicator-not-strategy-or-strength",
+  "checkedAtUTC": "2026-11-08T16:45:14.703794+00:00",
+  "baseMainSHA": "899cbf4a011450fcc8e3ba13f54e43a52d5d6915",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "previousSHA": "2b2a824e8d653b35ba64fe998aa3cdff0d0dd9a0",
+    "checkedSHA": "15868750340355261529bd372dfde4c4a782705d",
+    "commits": [
+      "7bf5734bf076b9b339e5f6471b7bb6e183b2d512",
+      "15868750340355261529bd372dfde4c4a782705d"
+    ],
+    "paths": [
+      {
+        "path": "README.md",
+        "upstreamSHA256": "0d4a4e0c0ec5690deb1be56a2b6efdbc05ab047f7f3a50e1674c83254d883c9f",
+        "disposition": "Upstream model-reference update only; project already has newerGuanZero024/023 and immutable archives, so do not downgrade/delete weights or copy upstream defaultClint."
+      },
+      {
+        "path": "bot/README.md",
+        "upstreamSHA256": "9eb63e55d35e4671dd0b694f4b25ead0f843301d67756ec840a7981d5c993787",
+        "disposition": "Upstream model-reference update only; project already has newerGuanZero024/023 and immutable archives, so do not downgrade/delete weights or copy upstream defaultClint."
+      },
+      {
+        "path": "bot/guanzero/README.md",
+        "upstreamSHA256": "422cdb90280cd92ec7693f651f6e717cc5980291b00e4a06ae148379cefe6fb2",
+        "disposition": "Upstream model-reference update only; project already has newerGuanZero024/023 and immutable archives, so do not downgrade/delete weights or copy upstream defaultClint."
+      },
+      {
+        "path": "bot/guanzero/guanzero-adp-io48-229609.onnx",
+        "upstreamSHA256": null,
+        "disposition": "Upstream model-reference update only; project already has newerGuanZero024/023 and immutable archives, so do not downgrade/delete weights or copy upstream defaultClint."
+      },
+      {
+        "path": "bot/guanzero/guanzero-adp-io48-303975.onnx",
+        "upstreamSHA256": "e02bd26f3d90cb9ef90f7075ad1acd845c709bebac734611c44eb66d48fdbd4b",
+        "disposition": "Upstream model-reference update only; project already has newerGuanZero024/023 and immutable archives, so do not downgrade/delete weights or copy upstream defaultClint."
+      },
+      {
+        "path": "bot/models.json",
+        "upstreamSHA256": "205daa3c3366de113a8594865f0dad51f4150c2f35e7f4c1b1150ce8866eac8b",
+        "disposition": "Upstream model-reference update only; project already has newerGuanZero024/023 and immutable archives, so do not downgrade/delete weights or copy upstream defaultClint."
+      },
+      {
+        "path": "index.html",
+        "upstreamSHA256": "b77ccb33fc95100b19ca30ab49875df1837550f7ad518ec416be933c68f32ad7",
+        "disposition": "Generated bundle source hunks reviewed; adapt source only. Keep project-specific version stamping, menu, coach, collection and recovery."
+      },
+      {
+        "path": "web/src/effects/celebrations.js",
+        "upstreamSHA256": "db9b811774fe1ddf9f1fcd574179ce3d1b47b835ac903672f4a87845c08f0b67",
+        "disposition": "Desktop/tablet side-seat jieFeng label besideplate towardtable; canonical isPhone preserves phone path."
+      },
+      {
+        "path": "web/src/game/dealing.js",
+        "upstreamSHA256": "b138543ce95d964901027d86f9777c8d3654974eb01108cdcf401b52a6533fea",
+        "disposition": "Adapt plate-relative partner hint anchor; preserve effects and frozen training code."
+      },
+      {
+        "path": "web/src/hand/layout.js",
+        "upstreamSHA256": "a20f7558704bc963045e8278ddc90a8ae74d315d9330a07b88eb7b500b9b8f1c",
+        "disposition": "Desktop horizontal grouped-hand labels at lower-right; vertical/phone branches unchanged."
+      },
+      {
+        "path": "web/src/network/voice.js",
+        "upstreamSHA256": "e03f82eaada21df864b8ddb282ebfa291177495e0f59c430245b07e62131baa7",
+        "disposition": "Remove muted badge from plate paint only; retain micbutton, spectator, permissions and voice connection logic."
+      },
+      {
+        "path": "web/src/styles/header.css",
+        "upstreamSHA256": "615dce8b0884db90ea5c8bb3c12021d37b740c96756ecd03882d311abd8b26aa",
+        "disposition": "Adapt badge CSS in local combinedtable.css; microphone buttons/permissions unchanged."
+      },
+      {
+        "path": "web/src/styles/table.css",
+        "upstreamSHA256": "85b5ab1acfd1219ff966d52d4614432c1768a13e9a4c619799d408969d539b0b",
+        "disposition": "Partner shuffle/cut hint belowplate; measured platecenter compensates inline phoneclock."
+      }
+    ]
+  },
+  "strategyChanged": false,
+  "protectedFingerprints": {
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/practice-endgame.mjs": "7c30182c0145c1069e44acf9e0c8f8504dd61a2b055b36fcf7b3db2cbfdec0d7",
+    "web/src/rule-bot/practice-worker.mjs": "95d180d1d63c30d12aafb825754ea886f6cca7d905e3bebd290dee111c4276e1",
+    "web/src/rule-bot/README.md": "354fd704d7326aa3d6db6fc6630be99771c78fd28963af7bc37a6de19b6f5824",
+    "web/src/rule-bot/runtime.mjs": "c7b5e99eeeff7b77fbb8955529852ea12b9e8685447d8f162bd9127c47a7ae52",
+    "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+    "web/src/rule-bot/strategy.js": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72",
+    "web/src/rule-bot/timeout.js": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/controller.js": "dce5dfacb8ce0b0ac59f64a4d12ebbe438f8137b91b2458e4743f8f3cce0b7ee",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+    "web/src/ai/model-catalog.json": "1d9f8c6ed31f44b791f56d48af0704c1d8bf13481da621fa578ce640b8e1e1d6",
+    "web/src/ai/model-catalog.mjs": "8265bcd26858112a747c0bea7263d807dd6942a5a41e61f687720b4428add7a2",
+    "web/src/ai/models.mjs": "37647bfec2872529f0f12ac273584072fc652f40899bf918a2a148ea99f087b4",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+    "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+    "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+    "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+    "web/src/ai/tribute-model.json": "f99ef55d3bf7c128fc595f2c019e6831d9be1cb8873627dca4ee85b59a117383",
+    "web/src/ai/tribute-observation.mjs": "003e540856a8f7cd5e3f5bce44a592b7e2e5089fb3ded60cd9c2bca3ec7c3285",
+    "web/src/ai/tribute-specialist.mjs": "e5439246020316b80b6522cab4edf644bf9a768cfb13e08fb34ab070fb2bd83b",
+    "web/src/ai/tribute-worker.mjs": "2aa3e1525125821a0d21c3779c4bfd6a0a8dca135657da92e16205b29543aba2",
+    "web/src/ai/worker.mjs": "451feb49b197ac26149b3cbdfe256119e6321612d683d4a0db8782cc72b5f0e0",
+    "web/src/collection/client.js": "a8381fb787f17ae6aa779fc85e4ac55150002c2ff011e09a97b5455a6831221b",
+    "web/src/collection/config.json": "004da22cb34c361abb4c4d4421230e12ae117efffeb61b6e0f4dd7ced3a9c615",
+    "web/src/collection/match-link.mjs": "eacaabca67802f329c6aad9bc43326384c7c34b422cb73fab6a4a80b91639887",
+    "web/src/collection/outbox.mjs": "7c83a7715c4b0ee3894006455b03ef3507911959e39c9e7f937f97facf77dfa5",
+    "web/src/collection/record.mjs": "bd980cd4be9ac9b2b2ca7f7e7ca9fd121e6cc154ed1a385b8cac344e9dcac0ac",
+    "web/src/collection/validate.mjs": "dafe1c869d73ae1d944f2589f82075a3495d8518ae07956dbe3425c9638dc929",
+    "web/src/private-table/controller.js": "e4233bf1d4db39204265aa34830524bd8c8c44bed297c92f70bf17f36ba682bb",
+    "web/src/private-table/state.mjs": "16f2c2035d01e39c450caea5214d3b56aa77c4a44b8a22b79f9fba6c7101da80",
+    "web/src/network/host-restore.js": "6fecf6123a1921917e2a264d7b85c734be844a50902ca1b07a6447f14a8837d5",
+    "web/src/network/host-storage.mjs": "a08aafd402198103f30c0833c40b87a73f391dd1cdc64114af4ac8fad7bb3878",
+    "web/src/network/protocol.js": "b6f5bf5c57c3ead3034a04e0887952f979ecf0074ff5038fb5d44c97fa5341bf",
+    "web/src/network/public-table.mjs": "1881f1ab55bb7643cb7beec3d810e39b89616ee994a767a2cfdf94072592313c",
+    "web/src/network/recovery.js": "6abe9e8cd3b271058a452526b1ff299926e3d658f375648fc6588d05f9234e7d",
+    "web/src/network/rejoin-storage.js": "bc20290ca07c26873aa19f53cb2b4a1ec6aef7e594d13bc266f8410fba84628e",
+    "web/src/network/rooms.js": "4e5595d8db4fc5a1e513abcd7586d2be4fc02129430103b1a929bee90a116f9c",
+    "web/src/network/snapshot.js": "e288fd4f9fd6cee5d8c97258ffe9291193debda3f3f7a9dd44c9253be1a2e5f8",
+    "web/src/network/spectators.js": "31d6fc99e392359a876ca3dd9bdca2d6761013834f0a9568bd8a1957de2d41cb"
+  },
+  "protectedHashConvention": "UTF8textLFnormalized",
+  "activeFrozenTraining": {
+    "sourceCommit": "c506a03",
+    "sourceFilesVerified": 215,
+    "hotEdited": false,
+    "optimizerUpdatesObserved": 92555,
+    "notStrengthEvidence": true
+  },
+  "validation": {
+    "nodePassed": 293,
+    "nodeConcurrency": 1,
+    "researchPythonPassed": 40,
+    "sharedPythonPassed": 3,
+    "sharedPythonSkipped": 1,
+    "plateLayout": {
+      "scope": "Synthetic UI geometry; no full games, uploads or training",
+      "cases": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "hint": {
+            "plate": {
+              "x": 666,
+              "y": 8,
+              "width": 108,
+              "height": 38,
+              "top": 8,
+              "right": 774,
+              "bottom": 46,
+              "left": 666
+            },
+            "label": {
+              "x": 682.359375,
+              "y": 54,
+              "width": 75.28125,
+              "height": 45,
+              "top": 54,
+              "right": 757.640625,
+              "bottom": 99,
+              "left": 682.359375
+            },
+            "phone": false
+          },
+          "celebrations": [
+            {
+              "seat": 1,
+              "x": 1124,
+              "y": 319.859,
+              "plate": {
+                "x": 1186,
+                "y": 300.859375,
+                "width": 108,
+                "height": 38,
+                "top": 300.859375,
+                "right": 1294,
+                "bottom": 338.859375,
+                "left": 1186
+              },
+              "phone": false
+            },
+            {
+              "seat": 3,
+              "x": 316,
+              "y": 319.859,
+              "plate": {
+                "x": 146,
+                "y": 300.859375,
+                "width": 108,
+                "height": 38,
+                "top": 300.859375,
+                "right": 254,
+                "bottom": 338.859375,
+                "left": 146
+              },
+              "phone": false
+            }
+          ],
+          "grouping": {
+            "tag": {
+              "x": 256.078125,
+              "y": 771.59375,
+              "width": 38,
+              "height": 20,
+              "top": 771.59375,
+              "right": 294.078125,
+              "bottom": 791.59375,
+              "left": 256.078125
+            },
+            "card": {
+              "x": 146,
+              "y": 690.59375,
+              "width": 74,
+              "height": 103.59375,
+              "top": 690.59375,
+              "right": 220,
+              "bottom": 794.1875,
+              "left": 146
+            }
+          },
+          "muteBadge": {
+            "display": "none",
+            "pseudo": "none"
+          },
+          "menu": [
+            [
+              "clint-rule",
+              "Clint规则机器人"
+            ],
+            [
+              "024",
+              "guanzero-adp-io48-310956"
+            ],
+            [
+              "023",
+              "guanzero-adp-io48-303975"
+            ],
+            [
+              "001",
+              "danMCai-v000000000"
+            ],
+            [
+              "017",
+              "danMCai-v000855042"
+            ],
+            [
+              "012",
+              "danMCai-v000705434"
+            ]
+          ]
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "hint": {
+            "plate": {
+              "x": 586,
+              "y": 8,
+              "width": 108,
+              "height": 38,
+              "top": 8,
+              "right": 694,
+              "bottom": 46,
+              "left": 586
+            },
+            "label": {
+              "x": 602.1015625,
+              "y": 54,
+              "width": 75.796875,
+              "height": 45,
+              "top": 54,
+              "right": 677.8984375,
+              "bottom": 99,
+              "left": 602.1015625
+            },
+            "phone": false
+          },
+          "celebrations": [
+            {
+              "seat": 1,
+              "x": 1044,
+              "y": 179.859,
+              "plate": {
+                "x": 1106,
+                "y": 160.85940551757812,
+                "width": 108,
+                "height": 38,
+                "top": 160.85940551757812,
+                "right": 1214,
+                "bottom": 198.85940551757812,
+                "left": 1106
+              },
+              "phone": false
+            },
+            {
+              "seat": 3,
+              "x": 236,
+              "y": 179.859,
+              "plate": {
+                "x": 66,
+                "y": 160.85940551757812,
+                "width": 108,
+                "height": 38,
+                "top": 160.85940551757812,
+                "right": 174,
+                "bottom": 198.85940551757812,
+                "left": 66
+              },
+              "phone": false
+            }
+          ],
+          "grouping": {
+            "tag": {
+              "x": 176.078125,
+              "y": 491.59375,
+              "width": 38,
+              "height": 20,
+              "top": 491.59375,
+              "right": 214.078125,
+              "bottom": 511.59375,
+              "left": 176.078125
+            },
+            "card": {
+              "x": 66,
+              "y": 410.59375,
+              "width": 74,
+              "height": 103.59375,
+              "top": 410.59375,
+              "right": 140,
+              "bottom": 514.1875,
+              "left": 66
+            }
+          },
+          "muteBadge": {
+            "display": "none",
+            "pseudo": "none"
+          },
+          "menu": [
+            [
+              "clint-rule",
+              "Clint规则机器人"
+            ],
+            [
+              "024",
+              "guanzero-adp-io48-310956"
+            ],
+            [
+              "023",
+              "guanzero-adp-io48-303975"
+            ],
+            [
+              "001",
+              "danMCai-v000000000"
+            ],
+            [
+              "017",
+              "danMCai-v000855042"
+            ],
+            [
+              "012",
+              "danMCai-v000705434"
+            ]
+          ]
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "hint": {
+            "plate": {
+              "x": 458,
+              "y": 8,
+              "width": 108,
+              "height": 38,
+              "top": 8,
+              "right": 566,
+              "bottom": 46,
+              "left": 458
+            },
+            "label": {
+              "x": 474.359375,
+              "y": 54,
+              "width": 75.28125,
+              "height": 45,
+              "top": 54,
+              "right": 549.640625,
+              "bottom": 99,
+              "left": 474.359375
+            },
+            "phone": false
+          },
+          "celebrations": [
+            {
+              "seat": 1,
+              "x": 838,
+              "y": 219.953,
+              "plate": {
+                "x": 900,
+                "y": 200.953125,
+                "width": 108,
+                "height": 38,
+                "top": 200.953125,
+                "right": 1008,
+                "bottom": 238.953125,
+                "left": 900
+              },
+              "phone": false
+            },
+            {
+              "seat": 3,
+              "x": 186,
+              "y": 219.953,
+              "plate": {
+                "x": 16,
+                "y": 200.953125,
+                "width": 108,
+                "height": 38,
+                "top": 200.953125,
+                "right": 124,
+                "bottom": 238.953125,
+                "left": 16
+              },
+              "phone": false
+            }
+          ],
+          "grouping": {
+            "tag": {
+              "x": 114.71875,
+              "y": 557.140625,
+              "width": 38,
+              "height": 20,
+              "top": 557.140625,
+              "right": 152.71875,
+              "bottom": 577.140625,
+              "left": 114.71875
+            },
+            "card": {
+              "x": 16,
+              "y": 488.140625,
+              "width": 65.53125,
+              "height": 91.75,
+              "top": 488.140625,
+              "right": 81.53125,
+              "bottom": 579.890625,
+              "left": 16
+            }
+          },
+          "muteBadge": {
+            "display": "none",
+            "pseudo": "none"
+          },
+          "menu": [
+            [
+              "clint-rule",
+              "Clint规则机器人"
+            ],
+            [
+              "024",
+              "guanzero-adp-io48-310956"
+            ],
+            [
+              "023",
+              "guanzero-adp-io48-303975"
+            ],
+            [
+              "001",
+              "danMCai-v000000000"
+            ],
+            [
+              "017",
+              "danMCai-v000855042"
+            ],
+            [
+              "012",
+              "danMCai-v000705434"
+            ]
+          ]
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "hint": {
+            "plate": {
+              "x": 152.5,
+              "y": 97,
+              "width": 48,
+              "height": 35.25,
+              "top": 97,
+              "right": 200.5,
+              "bottom": 132.25,
+              "left": 152.5
+            },
+            "label": {
+              "x": 153.6796875,
+              "y": 140.25,
+              "width": 45.640625,
+              "height": 27,
+              "top": 140.25,
+              "right": 199.3203125,
+              "bottom": 167.25,
+              "left": 153.6796875
+            },
+            "phone": true
+          },
+          "celebrations": [
+            {
+              "seat": 1,
+              "x": 350,
+              "y": 290.606,
+              "plate": {
+                "x": 326,
+                "y": 320.60626220703125,
+                "width": 48,
+                "height": 35.25,
+                "top": 320.60626220703125,
+                "right": 374,
+                "bottom": 355.85626220703125,
+                "left": 326
+              },
+              "phone": true
+            },
+            {
+              "seat": 3,
+              "x": 40,
+              "y": 290.606,
+              "plate": {
+                "x": 16,
+                "y": 320.60626220703125,
+                "width": 48,
+                "height": 35.25,
+                "top": 320.60626220703125,
+                "right": 64,
+                "bottom": 355.85626220703125,
+                "left": 16
+              },
+              "phone": true
+            }
+          ],
+          "grouping": null,
+          "muteBadge": {
+            "display": "none",
+            "pseudo": "none"
+          },
+          "menu": [
+            [
+              "clint-rule",
+              "Clint规则机器人"
+            ],
+            [
+              "024",
+              "guanzero-adp-io48-310956"
+            ],
+            [
+              "023",
+              "guanzero-adp-io48-303975"
+            ],
+            [
+              "001",
+              "danMCai-v000000000"
+            ],
+            [
+              "017",
+              "danMCai-v000855042"
+            ],
+            [
+              "012",
+              "danMCai-v000705434"
+            ]
+          ]
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "hint": {
+            "plate": {
+              "x": 377.5,
+              "y": 8,
+              "width": 52,
+              "height": 39.9375,
+              "top": 8,
+              "right": 429.5,
+              "bottom": 47.9375,
+              "left": 377.5
+            },
+            "label": {
+              "x": 380.6796875,
+              "y": 55.9375,
+              "width": 45.640625,
+              "height": 27,
+              "top": 55.9375,
+              "right": 426.3203125,
+              "bottom": 82.9375,
+              "left": 380.6796875
+            },
+            "phone": true
+          },
+          "celebrations": [
+            {
+              "seat": 1,
+              "x": 802,
+              "y": 67.4688,
+              "plate": {
+                "x": 776,
+                "y": 97.46875,
+                "width": 52,
+                "height": 39.9375,
+                "top": 97.46875,
+                "right": 828,
+                "bottom": 137.40625,
+                "left": 776
+              },
+              "phone": true
+            },
+            {
+              "seat": 3,
+              "x": 42,
+              "y": 67.4688,
+              "plate": {
+                "x": 16,
+                "y": 97.46875,
+                "width": 52,
+                "height": 39.9375,
+                "top": 97.46875,
+                "right": 68,
+                "bottom": 137.40625,
+                "left": 16
+              },
+              "phone": true
+            }
+          ],
+          "grouping": null,
+          "muteBadge": {
+            "display": "none",
+            "pseudo": "none"
+          },
+          "menu": [
+            [
+              "clint-rule",
+              "Clint规则机器人"
+            ],
+            [
+              "024",
+              "guanzero-adp-io48-310956"
+            ],
+            [
+              "023",
+              "guanzero-adp-io48-303975"
+            ],
+            [
+              "001",
+              "danMCai-v000000000"
+            ],
+            [
+              "017",
+              "danMCai-v000855042"
+            ],
+            [
+              "012",
+              "danMCai-v000705434"
+            ]
+          ]
+        }
+      ],
+      "pageErrors": []
+    },
+    "phoneRegression": {
+      "scope": "Synthetic browser geometry, no strength games, uploads or training",
+      "cases": [
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "states": [
+            {
+              "cards": 27,
+              "hand": 216,
+              "nameY": 512.4296875,
+              "ownX": 195,
+              "partnerX": 195,
+              "classes": "phone rows back-goose"
+            },
+            {
+              "cards": 8,
+              "hand": 216,
+              "nameY": 512.4296875,
+              "ownX": 195,
+              "partnerX": 195,
+              "classes": "phone rows back-goose"
+            },
+            {
+              "cards": 1,
+              "hand": 216,
+              "nameY": 512.4296875,
+              "ownX": 195,
+              "partnerX": 195,
+              "classes": "phone rows back-goose"
+            },
+            {
+              "cards": 0,
+              "hand": 216,
+              "nameY": 512.4296875,
+              "ownX": 195,
+              "partnerX": 195,
+              "classes": "phone rows back-goose"
+            }
+          ],
+          "flyTargets": [
+            {
+              "p": 1,
+              "x": 350,
+              "y": 338.231,
+              "expectedX": 350,
+              "expectedY": 338.23126220703125
+            },
+            {
+              "p": 2,
+              "x": 195,
+              "y": 114.625,
+              "expectedX": 195,
+              "expectedY": 114.625
+            },
+            {
+              "p": 3,
+              "x": 40,
+              "y": 338.231,
+              "expectedX": 40,
+              "expectedY": 338.23126220703125
+            }
+          ]
+        },
+        {
+          "viewport": [
+            375,
+            667
+          ],
+          "mobile": true,
+          "states": [
+            {
+              "cards": 27,
+              "hand": 151,
+              "nameY": 285.4296875,
+              "ownX": 187.5,
+              "partnerX": 187.5,
+              "classes": "phone rows back-goose"
+            },
+            {
+              "cards": 8,
+              "hand": 151,
+              "nameY": 285.4296875,
+              "ownX": 187.5,
+              "partnerX": 187.5,
+              "classes": "phone rows back-goose"
+            },
+            {
+              "cards": 1,
+              "hand": 151,
+              "nameY": 285.4296875,
+              "ownX": 187.5,
+              "partnerX": 187.5,
+              "classes": "phone rows back-goose"
+            },
+            {
+              "cards": 0,
+              "hand": 151,
+              "nameY": 285.4296875,
+              "ownX": 187.5,
+              "partnerX": 187.5,
+              "classes": "phone rows back-goose"
+            }
+          ],
+          "flyTargets": [
+            {
+              "p": 1,
+              "x": 335,
+              "y": 215.881,
+              "expectedX": 335,
+              "expectedY": 215.88125610351562
+            },
+            {
+              "p": 2,
+              "x": 187.5,
+              "y": 114.625,
+              "expectedX": 187.5,
+              "expectedY": 114.625
+            },
+            {
+              "p": 3,
+              "x": 40,
+              "y": 215.881,
+              "expectedX": 40,
+              "expectedY": 215.88125610351562
+            }
+          ]
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "states": [
+            {
+              "cards": 27,
+              "hand": 104,
+              "nameY": 200.546875,
+              "ownX": 330.25,
+              "partnerX": 422,
+              "classes": "phone side back-goose"
+            },
+            {
+              "cards": 8,
+              "hand": 104,
+              "nameY": 200.546875,
+              "ownX": 303.78125,
+              "partnerX": 422,
+              "classes": "phone side back-goose"
+            },
+            {
+              "cards": 1,
+              "hand": 104,
+              "nameY": 200.546875,
+              "ownX": 305.734375,
+              "partnerX": 422,
+              "classes": "phone side back-goose"
+            },
+            {
+              "cards": 0,
+              "hand": 104,
+              "nameY": 200.546875,
+              "ownX": 404.25,
+              "partnerX": 422,
+              "classes": "phone side back-goose"
+            }
+          ],
+          "flyTargets": [
+            {
+              "p": 1,
+              "x": 802,
+              "y": 117.438,
+              "expectedX": 802,
+              "expectedY": 117.4375
+            },
+            {
+              "p": 2,
+              "x": 422,
+              "y": 27.9688,
+              "expectedX": 422,
+              "expectedY": 27.96875
+            },
+            {
+              "p": 3,
+              "x": 42,
+              "y": 117.438,
+              "expectedX": 42,
+              "expectedY": 117.4375
+            }
+          ]
+        },
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "mobile": false,
+          "states": [
+            {
+              "cards": 27,
+              "hand": 282.28125,
+              "nameY": 590.875,
+              "ownX": 526.265625,
+              "partnerX": 720,
+              "classes": "back-goose"
+            },
+            {
+              "cards": 8,
+              "hand": 282.28125,
+              "nameY": 590.875,
+              "ownX": 499.78125,
+              "partnerX": 720,
+              "classes": "back-goose"
+            },
+            {
+              "cards": 1,
+              "hand": 282.28125,
+              "nameY": 590.875,
+              "ownX": 501.734375,
+              "partnerX": 720,
+              "classes": "back-goose"
+            },
+            {
+              "cards": 0,
+              "hand": 123.59375,
+              "nameY": 783.5625,
+              "ownX": 600.265625,
+              "partnerX": 720,
+              "classes": "back-goose"
+            }
+          ],
+          "flyTargets": [
+            {
+              "p": 1,
+              "x": 1240,
+              "y": 318.438,
+              "expectedX": 1240,
+              "expectedY": 318.43756103515625
+            },
+            {
+              "p": 2,
+              "x": 720,
+              "y": 27,
+              "expectedX": 720,
+              "expectedY": 27
+            },
+            {
+              "p": 3,
+              "x": 200,
+              "y": 318.438,
+              "expectedX": 200,
+              "expectedY": 318.43756103515625
+            }
+          ]
+        }
+      ],
+      "pageErrors": []
+    },
+    "hostRestore": "refresh/closed-tab and assistedpreview persistence passed,0uploads,0errors; rawartifact ignored",
+    "ruleBrowser": "6actualClintreplies,0neuraldownloads for ruleonly;5WASMmodels024/023/001/017/012 and4rulefixtures passed,0errors",
+    "format": "pass",
+    "build": "0bafe9ce07"
+  },
+  "scope": "Four visual changes plus plate-center adaptation. No model/policy/reward/training changes; no human/strength games or uploads.",
+  "deployment": {
+    "status": "pending"
+  }
+}

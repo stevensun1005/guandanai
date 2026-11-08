@@ -112,7 +112,7 @@
   font-weight: 700;
 }
 /* voice (online only): 开麦 lit gold while your microphone is on; beside each person's name a bouncing speaker while
-   they talk, or a grey 闭麦 while their microphone is off */
+   they talk; no microphone-off badge above the player plate */
 #micBtn.on {
   color: var(--on-gold);
   background: var(--gold);
@@ -128,8 +128,7 @@
   align-items: center;
   flex: none;
 }
-.vc.talk,
-.vc.mute {
+.vc.talk {
   display: inline-flex;
 }
 .vc svg {
@@ -142,16 +141,7 @@
   display: block;
   animation: vcTalk 0.45s ease-in-out infinite alternate;
 }
-.vc.mute::after {
-  content: '闭麦';
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 1;
-  padding: 2px 5px;
-  border-radius: 999px;
-  color: var(--muted);
-  border: 1px solid var(--line-strong);
-}
+
 @keyframes vcTalk {
   from {
     transform: scale(0.8);
@@ -680,9 +670,9 @@ html.phone .tribpop {
   translate: -50% 0;
 }
 #seat2 .actlbl {
-  left: calc(100% + 12px);
-  top: 50%;
-  translate: 0 -50%;
+  left: 50%;
+  top: calc(100% + 8px);
+  translate: -50% 0;
 }
 /* card counts stay hidden until a player is down to 10 or fewer, then they shout */
 .cnt {

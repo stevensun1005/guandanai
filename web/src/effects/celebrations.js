@@ -2,6 +2,7 @@ import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { reduceMotion, seatPoint } from './dealing.js';
 import { $ } from '../ui/cards.js';
+import { isPhone } from '../hand/layout.js';
 
 let VICTORY_MS;
 
@@ -411,11 +412,14 @@ export function jieFeng(from, to) {
     // the label rises as it fades, so it starts where there is room above it: below the plate of the player
     // across the table (at the top of the screen), above everyone else's
     const r = plate && plate.getBoundingClientRect();
+    const side = !isPhone() && (to === 1 || to === 3);
     const q = !r
       ? actPoint(to)
       : to === 2
         ? { x: r.left + r.width / 2, y: r.bottom + 44 }
-        : { x: r.left + r.width / 2, y: r.top - 30 };
+        : side
+          ? { x: to === 3 ? r.right + 62 : r.left - 62, y: r.top + r.height / 2 }
+          : { x: r.left + r.width / 2, y: r.top - 30 };
     fxEl('fx-tag first', '接风', q.x, q.y);
     Sound.play('ding');
     if (plate) {

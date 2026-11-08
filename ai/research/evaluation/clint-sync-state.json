@@ -3,8 +3,14 @@
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
   "lastSuccessfulUpstreamSHA": "2b2a824e8d653b35ba64fe998aa3cdff0d0dd9a0",
   "evidence": "clint-sync-20261108-0435.json",
-  "pending": [],
-  "lastCheckedUpstreamSHA": "2b2a824e8d653b35ba64fe998aa3cdff0d0dd9a0",
+  "pending": [
+    {
+      "upstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
+      "evidence": "clint-sync-20261108-1635.json",
+      "remaining": "Pages deployment and live verification"
+    }
+  ],
+  "lastCheckedUpstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",

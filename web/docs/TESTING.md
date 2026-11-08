@@ -265,3 +265,7 @@ Node测试另以全宽参考求解器核对16个小残局、40组合法动作集
 Clint手机增量回归：构建并启动本地服务后运行 `python -X utf8 web/tests/clint_phone_smoke.py http://127.0.0.1:8784/`。覆盖390×844、375×667、844×390与1440×1000，27→8→1→0张姓名／手牌稳定、新局和空手旋转重置、三家隐藏牌背的真实动画落点；合成局、采集请求阻断，不是棋力证据。另运行 `control_layout_smoke.py <URL> --targeted` 与 `host_restore_smoke.py <URL>`，核对评价、按钮和真实PeerJS恢复。
 
 采集标签回归：`node --test web/tests/collection.test.mjs`检查清理／Unicode长度、空标签、电脑null、完整重放、SQLite持久化与研究样本不含标签。`collection_smoke.py --local-build --token-file <本机私有密钥文件>`以真实PeerJS完成一个合成kind=test单局，验证上传、私有回读、幂等与拒绝匿名导出；密钥不输出，原始测试牌谱只存忽略目录。`host_restore_smoke.py <URL>`还比较刷新／关页前后的房间号和真人昵称；这些测试不是人类样本或棋力证据。
+
+2026-11-08 Clint增量：电脑版/平板的对家洗牌与切牌提示移到姓名牌下方，左右接风提示移到姓名牌靠牌桌一侧，横排成组标签移到牌组右下；姓名旁不再显示闭麦文字，麦克风按钮与语音权限保留。手机提示按实际姓名牌居中，原接风路径保留。六项模型菜单、017默认、昵称/房间号采集、房间恢复和冻结训练不变。机器证据见主报告63.1。
+
+运行`python web/tests/clint_plate_smoke.py <URL>`检查五个屏幕尺寸的姓名牌提示、接风与成组标签，以及闭麦徽标隐藏；手机既有回归用`clint_phone_smoke.py`，联机与标记恢复用`host_restore_smoke.py`。全部使用合成状态，采集上传被拦截，不作棋力证据。

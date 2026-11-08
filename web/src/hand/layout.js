@@ -146,7 +146,7 @@ export function handGeo(n, keys) {
     rows.forEach((r, i) => {
       const y = lift + i * gap;
       r.gr.forEach((id, j) => g.fix.set(id, { x: j * r.off, y, rot: 0 }));
-      g.fixTags.push({ x: r.w + 5, y, gr: r.gr });
+      g.fixTags.push({ x: r.w + 5, y: y + ch - 26, gr: r.gr });
     });
     need = lift + ch + (rows.length - 1) * gap + 6;
   }
