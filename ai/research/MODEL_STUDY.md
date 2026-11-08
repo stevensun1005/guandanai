@@ -2427,3 +2427,5 @@ Q差只表示冻结模型的相对估值间距，不是终局实现Δ、校准�
 归档完整导出 `guanzero-adp-io48/model-000000270292`，SHA-256 为 `00a1ec91244392963cf681d5d02ead66ab6b42be3bd504daed943df0613ca15b`。网页默认编号为 **017**；启用冠军菜单时，归档新检查点不会自动替换冠军。本发布未新增独立评测比赛，不代表棋力验收或胜率提高。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-022.json)。
 
 第48小时冻结guanzero-adp-io48-270292，按延期后的中间批次执行；开发种子4,210,300,000–4,210,300,249，每组250对交换阵营／500场。Clint为287胜／177负／36平，胜率57.4%，95%种子簇区间53.4%–61.2%；冻结danMCai-v000855042为108胜／352负／40平，胜率21.6%，区间18.2%–25.0%。[计划](evaluation/guanzero-270292-plan.json)、[Clint逐场](evaluation/guanzero-270292-development-500-clint.json)、[冠军逐场](evaluation/guanzero-270292-development-500-champion.json)保留原始字节及双方完整指纹。网页022使用同一权重SHA。Chrome单线程WASM对照16个局面49个值，最大绝对误差3.58×10⁻⁷，动作分歧0。
+
+[270292 Pages部署](https://github.com/stevensun1005/guandanai/actions/runs/42444033455)成功，公网022完整SHA与本批两组评测相同。实际Chrome大厅六项菜单、最近两代270292／229609和四席默认v000855042核对通过。[发布证据](evaluation/web-model-022.json)。
