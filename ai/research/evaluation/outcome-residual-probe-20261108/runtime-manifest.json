@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "sourceSHA": "3499b98ed6dad4e305b059bd1951ab4118a10134",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\outcome-residual-runtime-20261108",
+  "sourceFiles": {
+    "ai/research/tools/probe-outcome-residual.py": "49296f5bdda437a15cf86f1920dbf9bfc074169ff586f33886373b3b9d78cc2b",
+    "ai/danMCai/training/continuous/value_net.py": "5da913ae50dc2550efeb41df6c83c97209d8c0dd9978234d30f8534089b75285"
+  },
+  "registeredWindow": {
+    "startUTC": "2026-11-08T02:49:52.945Z",
+    "deadlineUTC": "2026-11-08T03:49:52.945Z",
+    "requestedHours": 1,
+    "restartExtendsDeadline": false
+  },
+  "protocolDeadlineUTC": "2026-11-08T03:49:27.912970+00:00",
+  "protocolSHA256": "13598b156249cd082ad49fefd6d80a99a349760bd87ab0a0908f2b989ed79aaf",
+  "protocolLF_SHA256": "13598b156249cd082ad49fefd6d80a99a349760bd87ab0a0908f2b989ed79aaf",
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "corpusProtocolSHA256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0",
+  "residualRowsExecutedAtFreeze": 0,
+  "optimizerUpdates": 0,
+  "initialRegistrationCLI": "First invocation used space arguments and failed validation before registration; corrected to documented --name=value. No task existed and no clock reset."
+}
