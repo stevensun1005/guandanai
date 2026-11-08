@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T02:02:07.885Z",
+  "passed": true,
+  "completedRounds": 192000,
+  "pairs": 96000,
+  "sourceCommit": "2f82e199424d219590810d8ba180798325543665",
+  "sourceFilesMatched": 155,
+  "modelsVerified": true,
+  "processes": [
+    {
+      "pid": 42276,
+      "alive": false
+    },
+    {
+      "pid": 48688,
+      "alive": false
+    },
+    {
+      "pid": 7120,
+      "alive": false
+    },
+    {
+      "pid": 53200,
+      "alive": false
+    },
+    {
+      "pid": 41656,
+      "alive": false
+    }
+  ],
+  "controllerLockAbsent": true,
+  "files": {
+    "protocol.json": {
+      "rawSHA256": "d30ebe3d506904f8ded201247f4b1777ee44b482f25da0fdd3576b35954f7aab",
+      "lfSHA256": "d30ebe3d506904f8ded201247f4b1777ee44b482f25da0fdd3576b35954f7aab"
+    },
+    "summary.json": {
+      "rawSHA256": "88e9cecaa54beadb58b5a2b194423b826f90d4c255e2e0369f33f9d1c3068b15",
+      "lfSHA256": "62f0959121d6336813b2d461e38062a0f6a922e13f177f9b385b94d9d5336751"
+    },
+    "status.json": {
+      "rawSHA256": "0dfa3cc8f22f34cb6979c912ca2fc789f38aaad432f83ef33e149cfc29650c22",
+      "lfSHA256": "0dfa3cc8f22f34cb6979c912ca2fc789f38aaad432f83ef33e149cfc29650c22"
+    },
+    "worker-0.json": {
+      "rawSHA256": "e53c3ef74519957cad4573ceb1ebab06796b42225c9bcd6fb32ac19ec70a7be0",
+      "lfSHA256": "e53c3ef74519957cad4573ceb1ebab06796b42225c9bcd6fb32ac19ec70a7be0"
+    },
+    "worker-0.jsonl": {
+      "rawSHA256": "d4d7a3edbb4c88e2df5752b87d86d0616a13070cdbcc17d157b140dffd1c59ab",
+      "lfSHA256": "d4d7a3edbb4c88e2df5752b87d86d0616a13070cdbcc17d157b140dffd1c59ab"
+    },
+    "worker-1.json": {
+      "rawSHA256": "52af05377fb423824f94228424292c7259c16b9ccf3685d8b48ae6bc213efaf1",
+      "lfSHA256": "52af05377fb423824f94228424292c7259c16b9ccf3685d8b48ae6bc213efaf1"
+    },
+    "worker-1.jsonl": {
+      "rawSHA256": "0f1c0111122d5b3e32584569141d7de653a24eff1e43592d72a2267cad69d2f8",
+      "lfSHA256": "0f1c0111122d5b3e32584569141d7de653a24eff1e43592d72a2267cad69d2f8"
+    },
+    "worker-2.json": {
+      "rawSHA256": "ac7c6d934521611e0be625c77babe6f4d3ad8c4bb7402f45de031488402e730a",
+      "lfSHA256": "ac7c6d934521611e0be625c77babe6f4d3ad8c4bb7402f45de031488402e730a"
+    },
+    "worker-2.jsonl": {
+      "rawSHA256": "9c6f30b812eb1baeed606b24bff023b8b82d4b5f2f480a975dcf10039d6289b1",
+      "lfSHA256": "9c6f30b812eb1baeed606b24bff023b8b82d4b5f2f480a975dcf10039d6289b1"
+    },
+    "worker-3.json": {
+      "rawSHA256": "8ba19a954df0bdeaf46c8e3e792c7b0d84e94da1b49c66fed9ad16e2e223ce67",
+      "lfSHA256": "8ba19a954df0bdeaf46c8e3e792c7b0d84e94da1b49c66fed9ad16e2e223ce67"
+    },
+    "worker-3.jsonl": {
+      "rawSHA256": "099e7c26f1875c50955a053c9f87980cf5d1f392bf38ce49d6fe74ef0897971e",
+      "lfSHA256": "099e7c26f1875c50955a053c9f87980cf5d1f392bf38ce49d6fe74ef0897971e"
+    }
+  },
+  "optimizerUpdates": 0,
+  "promotion": false,
+  "serialization": "Runtime raw bytes preserved; Git public text may normalize CRLF to LF.",
+  "all96000PairsRevalidated": true,
+  "statisticsReproducedExactly": true
+}

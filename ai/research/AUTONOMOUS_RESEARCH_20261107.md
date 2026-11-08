@@ -57,3 +57,5 @@ Windows Python 虚拟环境会出现一层重定向父进程和实际 Python 学
 The exploiter uses the ordinary champion with fresh Adam and empty replay. It does not train the zero-extras student. A negative result means no cheap signal was found in this run, not evidence that exploitation is impossible. Shared-P0 and shared-012 comparisons preserve deal pairing; the target-specific signal remains separate from general strength.
 
 1.6及新单席条件诊断已完成，差异仍不明确。当前选择路线图1.2在Windows串行执行[冠军队友网格](evaluation/cooperation-grid-20261108/protocol.design.json)，不是Mac窗口或阶段2训练；旧冻结运行、八项所有者待决定及原总截止继续不变。
+
+网格192,000局未过交互条件，队友训练路线保持关闭。继续Windows串行路线图1.3的表示语料／编码频率诊断；这不授权Mac、整场训练、extras在线或真人数据训练。

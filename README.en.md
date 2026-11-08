@@ -202,3 +202,5 @@ The practice menu now includes a separate **open-hand endgame solver** with boun
 The latest Clint UI adaptation adds an illustrated four-section rulebook, continuation inside level selection, delayed play controls during card collection, and deduplicated straight-flush hints. The six-item model menu and default champion017 remain unchanged. [Scope and verification](ai/research/MODEL_STUDY.md#54-clint增量规则书房主恢复与交互时序).
 
 The 20,000-round single-seat/fixed-teammate diagnostic is complete; differences remain inconclusive. The next [champion017 cooperation grid](ai/research/MODEL_STUDY.md#55-冠军队友对手网格预登记) preregisters12,000 fresh deals,4,000 paired deals per cell and simultaneous interaction intervals. It evaluates final-round upgrade points without new training or website promotion.
+
+The192,000-round [cooperation grid](ai/research/MODEL_STUDY.md#552-完成192000局未达到队友交互条件) is complete; no cell met the preregistered interaction condition. The next representation-corpus diagnostic uses only fixed champion017, without gradients, Clint/human training or website promotion.

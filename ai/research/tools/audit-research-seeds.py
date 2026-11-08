@@ -11,6 +11,11 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[3]
 
+def candidate_seeds(start):
+    if not 0 <= start < 2**32:
+        raise ValueError('Invalid uint32 seed start')
+    return range(start,min(2**32,start+1_000_000))
+
 
 def seeds_in(value):
     if isinstance(value, dict):
@@ -130,7 +135,7 @@ def audit(workspace, start, count, training_ranges=None):
         ranges += training_ranges
     inverse = pow(1009, -1, 2**32)
     chosen = []
-    for seed in range(start, min(1_000_000_000, start + 1_000_000)):
+    for seed in candidate_seeds(start):
         if seed in known:
             continue
         i = np.searchsorted(derived, seed - 199)
@@ -163,7 +168,7 @@ if __name__ == '__main__':
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--training-ranges', type=Path)
     args = parser.parse_args()
-    if not 0 <= args.start < 1_000_000_000 or not 1 <= args.count <= 40000:
+    if not 0 <= args.start < 2**32 or not 1 <= args.count <= 40000:
         raise ValueError('Invalid development seed reservation')
     d = audit(args.workspace, args.start, args.count,
               json.loads(args.training_ranges.read_text()) if args.training_ranges else None)

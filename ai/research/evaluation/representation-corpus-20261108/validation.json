@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "nodeTests": 258,
+  "researchPythonPassed": 27,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "format": "passed",
+  "build": "18c564b0c0",
+  "priorMain": "a0aebaec0a8952a4a9898145e4f43f421aed65ef",
+  "representationDecisionsExecuted": 0,
+  "optimizerUpdates": 0,
+  "rawOutcomeEqualitySeeds": 3,
+  "losslessInt8AndExactUint32Schema": true,
+  "publicInputAndPrivilegedLabelBoundary": true,
+  "realSTOPZeroDatasetAndModelAccess": true,
+  "uint32SeedDomainBoundaryTest": true,
+  "gridAll96000PairsRevalidated": true,
+  "webChampion": "017",
+  "selection": [
+    "017",
+    "012"
+  ]
+}
