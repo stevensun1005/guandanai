@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "purpose": "GPU extras zero/public synthetic one-update each, matching13Adam states and export/DirectML ABI checks; not strength evidence",
+  "device": "AMD Radeon RX 7800 XT",
+  "torch": "2.9.1+rocmsdk20260116",
+  "hip": "7.2.26024-f6f897bd3d",
+  "optimizerUpdates": 2,
+  "syntheticOnly": true,
+  "newGames": 0,
+  "strengthEvidence": false,
+  "checks": [
+    {
+      "mode": "zero",
+      "loss": 11.351442337036133,
+      "extraGradientNonzero": 0,
+      "adamStates": 13,
+      "matchingRestoredAdam": true
+    },
+    {
+      "mode": "public",
+      "loss": 8.952255249023438,
+      "extraGradientNonzero": 27136,
+      "adamStates": 13,
+      "matchingRestoredAdam": true
+    }
+  ],
+  "initialSHA256": "39d82cb92d98e16c09da57087ec431af412ce1650401cd37874527f221c84171",
+  "stoppedAtUTC": "2026-11-08T13:24:56.131122+00:00"
+}

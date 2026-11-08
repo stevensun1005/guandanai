@@ -6,14 +6,19 @@
     "passed": 3,
     "skipped": 1
   },
-  "danMCaiPython": "run each module in isolated Python to avoid existing endgame/continuous learner module-name collision",
+  "danMCaiPython": {
+    "isolatedModules": 13,
+    "failed": 0,
+    "reason": "existing endgame/continuous learner module-name collision under combined discovery"
+  },
   "format": "passed",
   "build": "02b78397b0",
-  "newGPUTrainingPreflight": "pending registered frozen-source execution",
+  "newGPUTrainingPreflight": "registered completed2synthetic updates,13Adam states,DirectML ABI7positions14decisions1178values,maxdifference1.967e-6,nofallback",
   "seedAudit": {
     "files": 887,
     "knownRoots": 1565442,
     "trainingRanges": 16,
     "heldoutDeals": 10000
-  }
+  },
+  "preflightPublicationOrder": "Owner authorization and experiment design/source published in c506a03; exact local preflight protocol registered before execution, full preflight protocol/results published with this manifest before LONG training starts."
 }

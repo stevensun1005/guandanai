@@ -1,0 +1,20 @@
+{
+  "decisions": 7,
+  "maxDifference": 0.0000019669532775878906,
+  "inference": {
+    "batches": 14,
+    "decisions": 14,
+    "rows": 1178,
+    "runMs": 125.6478999999996,
+    "prepareMs": 4.931899999999928,
+    "inFlightMax": 1,
+    "provider": "dml",
+    "fallbackReason": null,
+    "sessionCount": 2,
+    "sessionsCreated": 2,
+    "sessionsReleased": 0,
+    "peakSessions": 2
+  },
+  "newCompletedGames": 0,
+  "strengthEvidence": false
+}

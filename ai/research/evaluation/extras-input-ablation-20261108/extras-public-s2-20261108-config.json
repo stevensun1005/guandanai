@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "actors": 4,
+  "actorImplementation": "fast",
+  "fastActor": {
+    "games": 8,
+    "provider": "dml",
+    "sessionLimit": 12
+  },
+  "exploration": {
+    "type": "softmax",
+    "temperature": 0.02
+  },
+  "shardRows": 16384,
+  "shardSeconds": 120,
+  "learner": {
+    "device": "cuda:0",
+    "threads": 1,
+    "batch": 2048,
+    "learningRate": 1e-05,
+    "gradClip": 1,
+    "capacity": 2000000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "exportSeconds": 600,
+    "targetMatchWeight": 0,
+    "anchorWeight": 0,
+    "keepVersions": 6,
+    "seed": 202611082
+  },
+  "snapshotMinutes": 1440,
+  "leagueSize": 24,
+  "gate": {
+    "alpha": 0.05,
+    "beta": 0.05,
+    "mu0": 0.5,
+    "mu1": 0.53,
+    "minPairs": 100,
+    "maxPairs": 1000
+  },
+  "anchor": {
+    "intervalHours": 3,
+    "pairs": 150,
+    "regressionLimit": 2
+  },
+  "restarts": {
+    "limit": 5,
+    "windowMinutes": 10
+  },
+  "diskLimitGB": 20,
+  "resourceBudget": {
+    "reserveGB": 4,
+    "resumeGB": 5
+  },
+  "initial": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s2-20261108\\initial.onnx",
+  "actorMix": {
+    "self": 1,
+    "league": 0,
+    "rule": 0
+  },
+  "actorSeedOffset": 25020000,
+  "actorSeedEnd": 25030000,
+  "evaluationBlockOffset": 950,
+  "evaluationBlockEnd": 951,
+  "parent": {
+    "kind": "017-zero-extras-input-ablation-newAdam-emptyReplay",
+    "network": {
+      "id": "017",
+      "file": "bot-017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "mac-20261105",
+        "version": "v000855042",
+        "status": "experimental-not-heldout-accepted",
+        "step": 855042,
+        "registeredAt": "2026-11-06T15:28:31.478Z",
+        "champion": {
+          "gate": 330,
+          "acceptedAt": "2026-11-06T10:59:34.199Z",
+          "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+          "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+          "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+        },
+        "trainingDevice": "mps"
+      }
+    },
+    "startingStep": 0,
+    "predecessorNetworkStep": 855042,
+    "checkpointInherited": false,
+    "adamInherited": false,
+    "replayInherited": false
+  },
+  "extrasMode": "public",
+  "researchNoGate": true
+}

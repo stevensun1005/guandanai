@@ -1,0 +1,12 @@
+{
+  "id": "extras-training-preflight-20261108",
+  "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\extras-training-preflight-20261108",
+  "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-training-preflight-20261108\\protocol.json",
+  "protocolSHA256": "e8c5e850671e34fbb73fb102f9aa17c4d8e9e06e7400e2af95a5d4a5566e53ac",
+  "window": {
+    "startUTC": "2026-11-08T13:24:47.509Z",
+    "deadlineUTC": "2026-11-08T13:39:47.509Z",
+    "requestedHours": 0.25,
+    "restartExtendsDeadline": false
+  }
+}

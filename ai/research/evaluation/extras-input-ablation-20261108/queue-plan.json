@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "campaign": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111",
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\danMCai\\workspace\\worktrees\\extras-training-runtime-20261108",
+  "sourceCommit": "c506a03",
+  "python": "D:/vibecoding/guandan/ai/danMCai/environment/gpu-runtime/Scripts/python.exe",
+  "deadlineUTC": "2026-11-11T15:00:00.000Z",
+  "computeDeadlineUTC": "2026-11-11T14:45:00.000Z",
+  "arms": [
+    {
+      "id": "extras-public-s1-20261108",
+      "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s1-20261108",
+      "protocolSHA256": "2fde051e5b2fe72b9d71827282620f8113b92d4503732a5c7555fdc2fc7e6606"
+    },
+    {
+      "id": "extras-zero-s1-20261108",
+      "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-zero-s1-20261108",
+      "protocolSHA256": "ae32e1716bb9216aa0f5ac1e5163c279d00d1427a942649856a90592b973fd7f"
+    },
+    {
+      "id": "extras-zero-s2-20261108",
+      "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-zero-s2-20261108",
+      "protocolSHA256": "39c8d71412a64ab9b761dc394f37b23269603c0adb4abd8605c6b5415307c2e0"
+    },
+    {
+      "id": "extras-public-s2-20261108",
+      "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\extras-public-s2-20261108",
+      "protocolSHA256": "d165302e6ac23a58a328c00cf5bf28a0eba7ba2d92b9255033e929d6f91f5376"
+    }
+  ]
+}
