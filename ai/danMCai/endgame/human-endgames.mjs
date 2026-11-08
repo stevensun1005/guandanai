@@ -24,6 +24,7 @@
  *   node ai/danMCai/endgame/human-endgames.mjs --raw=<dir of round-*.json> --champion=<onnx>
  *        --student=<onnx> --out=<dir> [--max-cards=40]
  *        [--max-nodes=5000000] [--max-ms=30000] [--workers=8] [--keep-assisted=<prefix,...>]
+ *   node ai/danMCai/endgame/human-endgames.mjs --summarize=<out> [--student-cards=32]
  */
 import { spawn } from 'node:child_process';
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -127,6 +128,10 @@ export async function modelChoice(values, file, game, plays) {
   return { index: argmax(await values(file, policyState(game, player, 0, plays))), auto: null };
 }
 
+/** The student plays only at or below --student-cards cards (as deployed); the champion above. */
+const fileFor = (config, model, game) =>
+  model === 'student' && remaining(game) > config.studentCards ? config.champion : config[model];
+
 const forMover = (team0Value, seat) => (seat % 2 === 0 ? team0Value : -team0Value);
 const budgeted = (fn) => {
   try {
@@ -170,7 +175,7 @@ async function auditRound(file, config) {
     const seat = game.turn;
     const plays = candidates(game.hands[seat], game.L, game.trick?.play || null);
     const champion = await modelChoice(config.values, config.champion, game, plays);
-    const student = await modelChoice(config.values, config.student, game, plays);
+    const student = await modelChoice(config.values, fileFor(config, 'student', game), game, plays);
     const valueOf = (move) => budgeted(() => forMover(solver.actionValue(position, move), seat));
     const optimal = budgeted(() =>
       plays.reduce((n, move) => n + Number(solver.keepsValue(position, move, value0)), 0),
@@ -246,7 +251,12 @@ async function auditRound(file, config) {
             const value0 = solver.value(position);
             let index;
             if (control.includes(player)) {
-              const choice = await modelChoice(config.values, config[model], game, plays);
+              const choice = await modelChoice(
+                config.values,
+                fileFor(config, model, game),
+                game,
+                plays,
+              );
               index = choice.index;
               modelMoves++;
               if (!choice.auto) modelDecisions++;
@@ -282,6 +292,7 @@ async function worker() {
     maxCards: Number(option('max-cards')),
     budget: { maxNodes: Number(option('max-nodes')), maxMs: Number(option('max-ms')) },
     keepAssisted: (option('keep-assisted', '') || '').split(',').filter(Boolean),
+    studentCards: Number(option('student-cards', Infinity)),
   };
   const rows = [];
   for (const file of files) rows.push(await auditRound(file, config));
@@ -305,6 +316,7 @@ async function main() {
     'max-nodes': option('max-nodes', 5_000_000),
     'max-ms': option('max-ms', 30_000),
     'keep-assisted': option('keep-assisted', ''),
+    'student-cards': option('student-cards', Infinity),
   };
   const run = {
     ...args,
@@ -504,7 +516,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       ? Promise.resolve().then(() => {
           const out = resolve(summaryOnly);
           const rounds = JSON.parse(readFileSync(join(out, 'rows.json'), 'utf8'));
-          const summary = summarize(rounds);
+          const summary = summarize(rounds, {
+            studentCards: Number(option('student-cards', 32)),
+          });
           writeFileSync(join(out, 'summary.json'), JSON.stringify(summary, null, 2));
           console.log(JSON.stringify(summary.decisionAudit.critical, null, 2));
         })

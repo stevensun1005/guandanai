@@ -11,7 +11,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "training" / "continuous"))
 sys.path.insert(0, str(ROOT / "endgame"))
-from learner import ORACLE, Learner, OracleValueNet, keep_probability  # noqa: E402
+from learner import ORACLE, Learner, OracleValueNet, keep_probability, labels_valid  # noqa: E402
 from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
 
 BASELINE = ROOT / "models" / "baseline" / "policy.onnx"
@@ -23,6 +23,17 @@ class EndgameLearnerTest(unittest.TestCase):
         self.assertAlmostEqual(keep_probability(50, 100), 0.5)
         self.assertEqual(keep_probability(100, 100), 0.0)
         self.assertEqual(keep_probability(500, 100), 0.0)
+
+    def test_label_kinds(self):
+        points = np.array([-3, -1, 2, 3], np.float32)
+        averaged = np.array([-2.75, 0.0, 1.125, 3.0], np.float32)
+        self.assertTrue(labels_valid(points))
+        self.assertFalse(labels_valid(averaged))
+        self.assertTrue(labels_valid(averaged, "pimc-mean"))
+        self.assertFalse(labels_valid(np.array([3.5], np.float32), "pimc-mean"))
+        self.assertFalse(labels_valid(np.array([np.nan], np.float32), "pimc-mean"))
+        with self.assertRaises(ValueError):
+            labels_valid(points, "unknown")
 
     def test_initial_network_ignores_oracle_and_equals_champion(self):
         weights = load_onnx_weights(BASELINE)

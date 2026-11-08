@@ -20,6 +20,10 @@ const option = (name, fallback) =>
 
 export const SOURCES = [
   'ai/danMCai/endgame/actor.mjs',
+  'ai/danMCai/endgame/pimc-actor.mjs',
+  'ai/danMCai/endgame/solver.mjs',
+  'ai/shared/search/belief.mjs',
+  'ai/shared/search/pimc.mjs',
   'ai/danMCai/endgame/learner.py',
   'ai/danMCai/endgame/run.mjs',
   'ai/danMCai/training/continuous/lib.mjs',
@@ -101,10 +105,13 @@ async function main() {
         config.hours = (Date.parse(config.deadline) - Date.parse(config.createdAt)) / 3600_000;
       }
       config.purpose = protocol.purpose;
+      if (protocol.schema) config.schema = protocol.schema;
       Object.assign(config.actor, protocol.actor || {});
       Object.assign(config.learner, protocol.learner || {});
       config.priority = protocol.priority || config.priority;
     } else if (!option('seed-base')) throw Error('Missing --seed-base or --protocol');
+    if (!['actor.mjs', 'pimc-actor.mjs'].includes(config.actor.script || 'actor.mjs'))
+      throw Error(`Unknown actor script ${config.actor.script}`);
     if (config.actor.slotSeeds.length !== config.actor.count)
       throw Error('Seed blocks must match the actor count');
     writeJSON(join(run, 'config.json'), config);
@@ -167,7 +174,8 @@ async function main() {
       '-n',
       String(actorNice),
       process.execPath,
-      join(here, 'actor.mjs'),
+      // The protocol may select another actor (for example pimc-actor.mjs); default unchanged.
+      join(here, config.actor.script || 'actor.mjs'),
       `--run=${run}`,
       `--slot=${slot}`,
     ]);

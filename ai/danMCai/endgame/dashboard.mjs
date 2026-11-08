@@ -195,6 +195,7 @@ export function snapshot(run) {
       seedProgress: (a.rounds || 0) / total,
       updatedAgeSeconds: age(a.updatedAt),
       stopped: !!a.stopped,
+      totals: a.totals || null,
     };
   });
   let shardFiles = 0;
@@ -233,6 +234,17 @@ export function snapshot(run) {
     }),
     run: basename(run),
     purpose: config.purpose || 'endgame oracle-guiding training',
+    pimc: config.actor.script === 'pimc-actor.mjs',
+    labels: (() => {
+      // Descriptive label diagnostics summed over actors (PIMC runs only): how often the label's
+      // best move and the champion's move are optimal in the real (hidden) deal.
+      const t = {};
+      for (const a of actors)
+        for (const [k, v] of Object.entries(a.totals || {})) t[k] = (t[k] || 0) + v;
+      return Object.keys(t).length
+        ? { ...t, worlds: config.actor.worlds, threshold: config.actor.threshold }
+        : null;
+    })(),
     champion: config.champion,
     threshold: config.actor.threshold,
     temperature: config.actor.temperature,
@@ -301,7 +313,7 @@ svg{width:100%;height:70px}.note{color:var(--muted);font-size:12px;margin-top:12
 .steps{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.step{flex:1 1 140px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:13px;color:var(--muted)}
 .step.done{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}.step.active{color:var(--accent);border-color:var(--accent);font-weight:650}.step.failed{color:var(--bad);border-color:var(--bad);font-weight:650}
 </style></head><body><main>
-<h1>danMCai 尾盘训练（明牌引导）</h1><div class="sub" id="sub">读取中…</div>
+<h1 id="title">danMCai 尾盘训练</h1><div class="sub" id="sub">读取中…</div>
 <div class="card now" id="now"></div>
 <div class="grid" id="grid"></div>
 <p class="note">只读面板：每 3 秒读取运行目录的真实状态文件，不控制训练。时间进度条只表示本次固定窗口用掉的时间，不代表棋力；损失下降、更新步数和样本数都不是胜率。明牌信息只进训练，导出的学生模型只看自己的牌。</p>
@@ -316,19 +328,19 @@ async function tick(){let s;try{s=await (await fetch('api/status',{cache:'no-sto
 if(s.error){document.getElementById('sub').textContent=s.error;return}
 const L=s.learner||{},st=s.running?pill('训练中','ok'):s.supervisor.endedAt?pill('已结束 · '+(s.supervisor.stopReason||''),'warn'):pill('未在运行','bad');
 document.getElementById('sub').innerHTML=st+' &nbsp;'+s.run+' · 教师 '+s.champion.id+'／'+s.champion.version+' · 尾盘阈值 全桌剩 ≤'+s.threshold+' 张 · 读取于 '+new Date(s.readAt).toLocaleTimeString('zh-CN',{timeZone:'America/Toronto',hour12:false})+' 美东';
-const A=s.activity;if(A){const mark={done:'✓ ',active:'● ',failed:'✗ ',pending:'○ '};
+document.getElementById('title').textContent='danMCai 尾盘训练（'+(s.pimc?'求解器标注':'明牌引导')+'）';const A=s.activity;if(A){const mark={done:'✓ ',active:'● ',failed:'✗ ',pending:'○ '};
 document.getElementById('now').innerHTML='<h2>现在在做什么</h2>'+pill(A.headline,A.tone)+'<p>'+A.detail+'</p><p><span style="color:var(--muted)">下一步：</span>'+A.next+'</p><div class="steps">'+A.stages.map(x=>'<div class="step '+x.state+'">'+mark[x.state]+x.name+'</div>').join('')+'</div>'+(A.postRunLog&&A.postRunLog.length?'<div class="note">post-run.log：'+A.postRunLog.join(' / ')+'</div>':'')}
 const kids=(s.supervisor.children||[]).map(c=>c.name+(c.alive?'':' ✗')).join('、')||'—';
 const actors=s.actors.map(a=>'<tr><td>槽 '+a.slot+'</td><td>'+f(a.rounds)+'</td><td>'+f(a.rows)+'</td><td>'+f(a.seedProgress*100,2)+'%</td><td>'+(a.updatedAgeSeconds==null?'—':dur(a.updatedAgeSeconds)+'前')+'</td></tr>').join('');
 document.getElementById('grid').innerHTML=
 '<div class="card"><h2>固定窗口</h2><div class="big">'+dur(s.remainingSeconds)+'</div><div class="bar"><div style="width:'+(s.timeProgress*100).toFixed(1)+'%"></div></div><div class="row"><span>截止</span><span>'+new Date(s.deadline).toLocaleString('zh-CN',{timeZone:'America/Toronto',hour12:false})+' 美东'+'</span></div><div class="row"><span>时间进度</span><span class="num">'+f(s.timeProgress*100,1)+'%</span></div></div>'+
 '<div class="card"><h2>学习器（MPS）</h2><div class="big">'+f(L.step)+' 步</div><div class="row"><span>状态</span><span>'+(L.state||'—')+'</span></div><div class="row"><span>更新速度</span><span class="num">'+f(s.rates.stepsPerSecond,2)+' 步/秒</span></div><div class="row"><span>损失（EMA）</span><span class="num">'+f(L.lossEma,4)+'</span></div><div class="row"><span>心跳</span><span>'+(L.heartbeatAgeSeconds==null?'—':dur(L.heartbeatAgeSeconds)+'前')+'</span></div></div>'+
-'<div class="card"><h2>明牌信息保留率</h2><div class="big">'+(L.oracleKeep==null?'—':f(L.oracleKeep*100,1)+'%')+'</div><div class="bar"><div style="width:'+((L.oracleKeep??0)*100).toFixed(1)+'%"></div></div><div class="row"><span>降到 0 的步数</span><span class="num">'+f(s.learnerConfig.oracleDecaySteps)+'</span></div><div class="row"><span>说明</span><span>逐步去掉他家手牌</span></div></div>'+
+(s.pimc?'<div class="card"><h2>求解器标签（诊断）</h2><div class="big">'+(s.labels?f(s.labels.decisions)+' 个决策':'—')+'</div><div class="row"><span>每决策抽样世界</span><span class="num">'+(s.labels?s.labels.worlds:'—')+'</span></div><div class="row"><span>标签最佳 真实最优</span><span class="num">'+(s.labels&&s.labels.trueChecked?f(s.labels.labelBestTrueOptimal/s.labels.trueChecked*100,1)+'%':'—')+'</span></div><div class="row"><span>冠军出法 真实最优</span><span class="num">'+(s.labels&&s.labels.trueChecked?f(s.labels.championTrueOptimal/s.labels.trueChecked*100,1)+'%':'—')+'</span></div><div class="row"><span>超预算跳过</span><span class="num">'+(s.labels?f(s.labels.skipped):'—')+'</span></div><div class="note">全部决策（含不关键的），用真实隐藏手牌事后核对，只是诊断，不进标签、不是胜率。</div></div>':'<div class="card"><h2>明牌信息保留率</h2><div class="big">'+(L.oracleKeep==null?'—':f(L.oracleKeep*100,1)+'%')+'</div><div class="bar"><div style="width:'+((L.oracleKeep??0)*100).toFixed(1)+'%"></div></div><div class="row"><span>降到 0 的步数</span><span class="num">'+f(s.learnerConfig.oracleDecaySteps)+'</span></div><div class="row"><span>说明</span><span>逐步去掉他家手牌</span></div></div>)+
 '<div class="card"><h2>样本</h2><div class="big">'+f(s.totals.rows)+' 行</div><div class="row"><span>采样速度</span><span class="num">'+f(s.rates.rowsPerSecond,1)+' 行/秒</span></div><div class="row"><span>已打局数</span><span class="num">'+f(s.totals.rounds)+'</span></div><div class="row"><span>已入回放</span><span class="num">'+f(L.ingestedRows)+'</span></div><div class="row"><span>回放容量</span><span class="num">'+f(L.replayRows)+' / '+f(s.learnerConfig.capacity)+'</span></div></div>'+
 '<div class="card"><h2>最新学生模型</h2><div class="big">'+(s.latest.version||'—')+'</div><div class="row"><span>SHA-256</span><span class="num">'+(s.latest.sha256||'').slice(0,12)+'</span></div><div class="row"><span>说明</span><span>只看自己的牌，尚未独立评测</span></div></div>'+
 '<div class="card"><h2>进程与本机</h2><div class="row"><span>调度器</span><span>'+(s.supervisor.alive?pill('存活','ok'):pill('未运行','bad'))+'</span></div><div class="row"><span>子进程</span><span>'+kids+'</span></div><div class="row"><span>重启次数</span><span class="num">'+(Object.entries(s.supervisor.restarts).map(([k,v])=>k+'×'+v).join(' ')||'0')+'</span></div><div class="row"><span>系统负载（含其他程序）</span><span class="num">'+f(s.machine.load1,2)+' / '+s.machine.cpus+' 核</span></div><div class="row"><span>可用内存（含可回收）</span><span class="num">'+f(s.machine.freeMemoryGiB,1)+' / '+f(s.machine.totalMemoryGiB,0)+' GiB</span></div><div class="row"><span>磁盘剩余</span><span class="num">'+f(s.machine.diskFreeGiB,0)+' GiB</span></div><div class="row"><span>已清理旧样本</span><span class="num">'+f(s.learner.prunedRows)+' 行</span></div></div>'+
 '<div class="card"><h2>损失（EMA）走势</h2>'+spark(s.history,'loss')+'</div>'+
-'<div class="card"><h2>明牌保留率走势</h2>'+spark(s.history,'keep',0,1)+'</div>'+
+(s.pimc?'':'<div class="card"><h2>明牌保留率走势</h2>'+spark(s.history,'keep',0,1)+'</div>')+
 '<div class="card wide"><h2>采样进程</h2><table><tr><th>槽位</th><th>局数</th><th>尾盘样本</th><th>种子块用量</th><th>更新</th></tr>'+actors+'</table></div>'}
 tick();setInterval(tick,3000);
 </script></body></html>`;

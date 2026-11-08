@@ -1,0 +1,154 @@
+{
+  "schema": "danmcai-endgame-pimc-v1",
+  "registeredAt": "2026-11-08",
+  "authorization": "Owner 2026-11-08 (Toronto ~10:00): \"按你的方法训练\" — train with the method proposed after the human-endgame audit (section 67): solver-labelled self-play endgames, human endgames used only as a held-out test.",
+  "purpose": "Mac-only solver-labelled endgame training: champion plays to the endgame, every candidate of each endgame decision is labelled with its exact perfect-information value averaged over worlds sampled from the mover's public information (PIMC), and a student initialised as the champion regresses these values. Research experiment; not a web release.",
+  "teacher": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "champion": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+  },
+  "start": "Exact copy of champion 017 (the oracle projection exists in the learner but its input is always zero: oracleDecaySteps 0); fresh Adam; empty replay; steps count from 0.",
+  "target": "For each real endgame decision (table <= 20 cards, not a finishing move, >= 2 candidates) and EVERY candidate a: Q(s,a) = mean over 8 worlds (uniform deals of the unseen cards consistent with own hand, cards played and hand counts; sampleWorlds) of the exact perfect-information team-minimax value of a, in the mover team's signed single-round points (+-1/+-2/+-3, so avoiding a double-down counts). Worlds over budget are dropped; a decision needs >= 4 solved worlds or it is not recorded. No tempo, trick-control, bomb or partner proxy in reward, loss, gate or acceptance. The real hidden hands are used only for a descriptive diagnostic, never for a label.",
+  "approximation": "PIMC is an approximation of the round value for a player who sees only their own hand: the uniform belief ignores what earlier plays reveal, and averaging perfect-information values overrates information learned only later (strategy fusion).",
+  "developmentEvidence": {
+    "note": "Measured before registration on development seeds (section-57 smoke block 3,838,0xx,xxx), not on held-out or human data.",
+    "labelQuality": "160 champion self-play rounds, 390 critical decisions at <= 20 cards (some move loses value in the real deal): label-best move truly optimal 91.8% (8 worlds) / 93.4% (16 worlds) vs champion 75.9%; mean true regret 0.12 / 0.10 vs 0.30 points.",
+    "throughput": "8 worlds at <= 20 cards: ~13 rows/s per actor (6-min pipeline smoke, 2 actors, 1,481 decisions, 0 skipped); <= 24 cards was ~9x slower, so the threshold is 20.",
+    "smoke": "Supervisor + 2 PIMC actors + MPS learner, 6 minutes: 350 updates, exports e00000200/e00000350, loss EMA 0.34; smoke run discarded."
+  },
+  "run": {
+    "hours": 10,
+    "actors": 7
+  },
+  "priority": {
+    "learnerNice": 0,
+    "actorNice": 5
+  },
+  "actor": {
+    "script": "pimc-actor.mjs",
+    "count": 7,
+    "threshold": 20,
+    "worlds": 8,
+    "minWorlds": 4,
+    "temperature": 0.05,
+    "followLabel": 0.5,
+    "shardRows": 4096,
+    "solver": {
+      "maxNodes": 1500000,
+      "maxMs": 3000,
+      "maxTable": 1000000
+    },
+    "slotSeeds": [
+      [
+        [
+          4221696000,
+          4221796000
+        ]
+      ],
+      [
+        [
+          4228381000,
+          4228481000
+        ]
+      ],
+      [
+        [
+          4232392000,
+          4232492000
+        ]
+      ],
+      [
+        [
+          4233729000,
+          4233829000
+        ]
+      ],
+      [
+        [
+          4235066000,
+          4235166000
+        ]
+      ],
+      [
+        [
+          4241751000,
+          4241851000
+        ]
+      ],
+      [
+        [
+          4245762000,
+          4245862000
+        ]
+      ]
+    ],
+    "note": "Above 20 cards every seat plays champion greedy. At a labelled decision the next move is the label's best move with probability 0.5, else softmax(champion Q / 0.05)."
+  },
+  "learner": {
+    "device": "mps",
+    "threads": 2,
+    "seed": 20261108,
+    "learningRate": 2e-05,
+    "batch": 1024,
+    "capacity": 1500000,
+    "minSamples": 50000,
+    "replayRatio": 8,
+    "oracleDecaySteps": 0,
+    "keepShardRows": 2000000,
+    "exportSeconds": 600,
+    "labels": "pimc-mean"
+  },
+  "seeds": {
+    "audit": "ai/research/evaluation/endgame-pimc-20261108/seed-audit.json",
+    "auditSHA256": "78b375e0665892c092af39863361e2d493256803673957f888960abd664d2a80",
+    "trainingBlocks": [
+      [
+        4221696000,
+        4221796000
+      ],
+      [
+        4228381000,
+        4228481000
+      ],
+      [
+        4232392000,
+        4232492000
+      ],
+      [
+        4233729000,
+        4233829000
+      ],
+      [
+        4235066000,
+        4235166000
+      ],
+      [
+        4241751000,
+        4241851000
+      ],
+      [
+        4245762000,
+        4245862000
+      ]
+    ],
+    "spareTrainingBlock": [
+      4255121000,
+      4255221000
+    ],
+    "heldout": "The audit's 3,000 reserved seeds (987,500,328..987,509,501)",
+    "scope": "Audit read 478 locally readable evidence files, 133166 known roots; other machines' unpublished history is unverified."
+  },
+  "stop": "Fixed 10-hour deadline from first start; restarts use only the remaining time; STOP stops all processes; no extension; the owner may stop early.",
+  "evaluation": {
+    "object": "The final exported student at stop (models/latest.json), not an intermediate or best-looking export.",
+    "primary": "3,000 held-out deals each played twice with sides swapped (6,000 single rounds): focal team plays champion until the table has <= 20 cards, then the student, greedy; the other team plays champion 017 throughout (evaluate.mjs --threshold=20). Metric: focal team's mean signed round points per deal pair with a 95% deal-cluster normal interval. Positive evidence only if the lower bound > 0.",
+    "secondary": [
+      "Human endgame audit (section 67 protocol, same 26 rounds, same solver budget) rerun with the new student at <= 20 cards and the champion above: critical-decision optimal rate vs humans and champion, and takeovers. Descriptive; not an acceptance metric.",
+      "evaluate.mjs descriptive exact regret on disagreements with <= 18 cards."
+    ],
+    "notCovered": "Clint or other opponents, human teammates, tribute and whole-match effects, web integration. Any web use needs a separate preregistered acceptance."
+  },
+  "unchanged": "Web champion 017 and menu, Windows campaign and all frozen runs, reward definition, GuanZero, tribute specialist, section-57 student."
+}

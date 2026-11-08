@@ -41,6 +41,16 @@ def write_json(path, value):
     os.replace(temporary, path)
 
 
+def labels_valid(y, kind="signed-points"):
+    """Monte Carlo rows carry one realised result (+-1/+-2/+-3); PIMC rows carry an average of
+    exact signed round points over sampled worlds, so any finite value in [-3, 3]."""
+    if kind == "signed-points":
+        return bool(np.isin(y, [-3, -2, -1, 1, 2, 3]).all())
+    if kind == "pimc-mean":
+        return bool(np.isfinite(y).all() and (np.abs(y) <= 3).all())
+    raise ValueError(f"Unknown label kind {kind}")
+
+
 def keep_probability(step, decay_steps):
     """Oracle keep rate: 1 at step 0, linearly to 0 at decay_steps, then 0."""
     if decay_steps <= 0:
@@ -164,7 +174,7 @@ class Learner:
         y = np.fromfile(f"{base}.y.f32", np.float32)
         x = np.fromfile(f"{base}.x.i8", np.int8).reshape(len(y), FEATURES)
         o = np.fromfile(f"{base}.o.i8", np.int8).reshape(len(y), ORACLE)
-        if not np.isin(y, [-3, -2, -1, 1, 2, 3]).all():
+        if not labels_valid(y, self.s.get("labels", "signed-points")):
             raise ValueError(f"{name}: labels outside signed round points")
         self.replay.add(x, o, y)
         if count:
