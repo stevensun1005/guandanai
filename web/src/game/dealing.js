@@ -24,6 +24,7 @@ export function startRound(e) {
   if (runtime.game.paused) setPaused(false);
   runtime.game.tok++;
   runtime.game.round++;
+  runtime.game.shown = null;
   runtime.game.L = runtime.game.levels[runtime.game.lvlTeam];
   const byId = new Map(makeDeck().map((c) => [c.id, c]));
   runtime.game.deck = e.deck.map((id) => byId.get(id));
@@ -64,7 +65,6 @@ export function startRound(e) {
   runtime.game.ready = [];
   runtime.game.nextReady = [];
   runtime.network.pending = false;
-  runtime.game.queuedPlay = false;
   runtime.selection = new Set();
   hideOverlay();
   removeDeck();

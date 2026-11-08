@@ -26,17 +26,21 @@ with sync_playwright() as p:
             page.evaluate("RULES.trib=false;RULES.aFail='keep'")
         page.locator("#rulesBtn").click()
         if width == 1440:
+            page.locator('#helpTabs [data-section="2"]').click()
+            page.locator('#helpSubtabs [data-tab="1"]').click()
             assert "本场不进贡" in page.locator("#rulesPane").inner_text()
+            page.locator('#helpSubtabs [data-tab="2"]').click()
             assert "打 A 不限次数" in page.locator("#rulesPane").inner_text()
         before = page.evaluate("G.clock.left")
         page.wait_for_timeout(500)
         assert abs(page.evaluate("G.clock.left") - before) < 20
-        page.locator("#operationsTab").click()
-        assert page.locator("#operationsTab").get_attribute("aria-selected") == "true"
-        assert page.locator("#rulesPane").is_hidden()
+        page.locator('#helpTabs [data-section="3"]').click()
+        page.locator('#helpSubtabs [data-tab="3"]').click()
+        assert page.locator("#helpTab3").get_attribute("aria-selected") == "true"
+        assert "键盘也能打" in page.locator("#rulesPane").inner_text()
         page.keyboard.press("p")
         assert page.evaluate("sel.size") == 0
-        page.locator("#operationsPane").focus()
+        page.locator("#rulesPane").focus()
         page.keyboard.press("PageDown")
         rect = page.locator("#rulesDialog").bounding_box()
         assert (

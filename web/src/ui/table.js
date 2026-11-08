@@ -2,7 +2,7 @@ import { alignNamePlates } from './viewport.js';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { cardText, rankName } from '../core/cards.js';
-import { levelAttemptLabel } from '../core/match.js';
+import { levelDisplayLabel } from './level-display.mjs';
 import { returnInstruction } from '../core/tribute.js';
 import { analyze, beats } from '../core/combinations.js';
 import { showCount } from '../effects/dealing.js';
@@ -45,19 +45,18 @@ export function render() {
     el.classList.toggle('t-red', isRedSeat(p));
     el.classList.toggle('t-blue', !isRedSeat(p));
   }
+  const shown = runtime.game.shown || runtime.game;
   for (const t of [0, 1]) {
-    $('#lv' + t).textContent =
-      levelAttemptLabel(runtime.game, t) || rankName(runtime.game.levels[t]);
+    $('#lv' + t).textContent = levelDisplayLabel(shown, t);
     $('#lvx' + t).textContent = '';
   }
   for (const t of [0, 1]) {
     const el = $('#team' + t);
-    el.classList.toggle('playing', runtime.game.lvlTeam === t);
+    el.classList.toggle('playing', shown.lvlTeam === t);
     el.classList.toggle('t-red', isRedSeat(t));
     el.classList.toggle('t-blue', !isRedSeat(t));
-    el.title = runtime.game.lvlTeam === t ? '本局打这一方的级' : '';
-    $('#tn' + t).textContent =
-      (t === 0 ? '我方' : '对方') + (runtime.game.lvlTeam === t ? '打' : '');
+    el.title = shown.lvlTeam === t ? '本局打这一方的级' : '';
+    $('#tn' + t).textContent = (t === 0 ? '我方' : '对方') + (shown.lvlTeam === t ? '打' : '');
   }
   const lv = $('#curLv');
   if (lv.dataset.v !== rankName(runtime.game.L)) {
@@ -213,7 +212,7 @@ export function renderControls() {
   const picked = runtime.selection.size > 0,
     cur = my && runtime.game.trick ? runtime.game.trick.play : null;
   const playable =
-    (my || soon) && picked && analyze(selectedCards(), runtime.game.L).some((r) => beats(r, cur));
+    my && picked && analyze(selectedCards(), runtime.game.L).some((r) => beats(r, cur));
   const can = {
     playBtn: playable,
     hintBtn: my,

@@ -141,3 +141,7 @@ Clint 的真人超时通过独立 `rule-timeout` Worker 消息进入 `rule-bot/t
 离线研究的 `src/analysis/concepts.mjs` 只提供公开信息与己手的描述标签，不接入网页决策或评分排序；评测记录和数据边界见[共享分析指南](../../ai/research/ANALYSIS.md)。
 
 `practice/endgame.js` 是独立明牌残局界面；`rule-bot/practice-worker.mjs` 与 `practice-endgame.mjs` 只在此显式模式生成／求解模拟局面，不从普通机器人／神经网络决策或训练入口导入。`collection/match-link.mjs` 只保存局间匿名进度与排除位，`lobby/continue-match.js` 提供主动继续；record模块以局内序号匹配事件，以累计序号形成牌谱ID，避免续场后漏记或重号。
+
+`network/host-storage.mjs`只读写三小时、同版本的浏览器本机私有恢复记录；`host-restore.js`复用房主连接监听和原座位凭据，归一化中断动画后继续。采集record／match模块分别快照未完成记录和匿名连续身份；恢复历史明牌排除位但不自动开启明牌工具。公开观战仍只接收白名单投影。
+
+`ui/rules-book.mjs`提供图解规则内容，不接入策略；`hand/straight-flushes.mjs`只用于手动提示去重，不替代神经网络候选。`ui/level-display.mjs`和game.shown只保存本局显示，不改变级数结算、奖励或共享core规则。

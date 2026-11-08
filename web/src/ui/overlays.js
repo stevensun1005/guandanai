@@ -1,3 +1,4 @@
+import { forgetHost } from '../network/host-restore.js';
 import { runtime } from '../app/runtime.js';
 import { rankName } from '../core/cards.js';
 import { aStayReason } from '../core/match.js';
@@ -161,6 +162,7 @@ export function askQuit() {
 }
 
 function quitGame() {
+  forgetHost();
   forgetSeat();
   try {
     if (runtime.network.mode === 'host') broadcast({ t: 'bye' });

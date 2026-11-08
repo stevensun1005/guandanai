@@ -35,3 +35,8 @@ export function oracleObservation(game, player = 0) {
     out: game.out.slice(),
   };
 }
+
+// A restored game keeps its permanent collection exclusion; this never enables the tool.
+export function restorePrivateUse(game, used) {
+  if (used && game) touched.add(game);
+}

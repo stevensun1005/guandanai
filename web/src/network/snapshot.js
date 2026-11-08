@@ -53,6 +53,14 @@ export function rotateSnapshot(source, offset) {
     if (game.clock.seat != null) game.clock.seat = seat(game.clock.seat);
     if (game.clock.seats) game.clock.seats = seats(game.clock.seats);
   }
+  if (game.shown) {
+    game.shown.lvlTeam = team(game.shown.lvlTeam);
+    if (game.shown.aOut != null) game.shown.aOut = team(game.shown.aOut);
+    if (offset % 2) {
+      game.shown.levels.reverse();
+      game.shown.aFails.reverse();
+    }
+  }
   game.lvlTeam = team(game.lvlTeam);
   if (game.aOut != null) game.aOut = team(game.aOut);
   if (offset % 2) {

@@ -15,7 +15,7 @@ export function initialize() {
   // (NET.mics, host's seat numbers); who is talking is measured on each page from the sound itself.
   VC = (() => {
     const SPK =
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
     document.querySelectorAll('.vc').forEach((e) => (e.innerHTML = SPK));
     let active = false,
       peers = {},
@@ -148,9 +148,15 @@ export function initialize() {
     function stop() {
       muted.clear();
       locked = false;
+      // Calls may have queued before the seat list arrived. Always discard them on reconnect,
+      // even when voice never became active; their PeerJS provider is about to be destroyed.
+      for (const call of waiting.splice(0)) {
+        try {
+          call.close();
+        } catch (_) {}
+      }
       if (!active && !mic) return;
       active = false;
-      waiting.length = 0;
       for (const a of [...lines.keys()]) drop(a);
       if (mic) {
         mic.stop();
@@ -249,7 +255,14 @@ export function initialize() {
         const a = toAbs(q),
           mine = q === 0 && runtime.network.mode !== 'spectator' ? on : !!runtime.network.mics[a];
         el.className =
-          'vc' + (!active || !isHumanSeat(q) ? '' : talking.has(a) ? ' talk' : mine ? '' : ' mute');
+          'vc' +
+          (!active || !isHumanSeat(q)
+            ? ''
+            : talking.has(a)
+              ? ' talk'
+              : mine || q || runtime.network.mode === 'spectator'
+                ? ''
+                : ' mute');
       }
     }
     // browsers hold sound back until the page is touched: every tap wakes the listening and the lines up again

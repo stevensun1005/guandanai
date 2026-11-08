@@ -38,38 +38,12 @@
         <h2 id="helpTitle">上桌指南</h2>
         <button class="link" id="helpClose" autofocus>返回牌桌</button>
       </header>
-      <nav class="help-tabs" id="helpTabs" role="tablist" aria-label="帮助内容">
-        <button
-          id="rulesTab"
-          type="button"
-          role="tab"
-          data-help-tab="rules"
-          aria-controls="rulesPane"
-          aria-selected="true"
-        >
-          打牌规则
-        </button>
-        <button
-          id="operationsTab"
-          type="button"
-          role="tab"
-          data-help-tab="operations"
-          aria-controls="operationsPane"
-          aria-selected="false"
-          tabindex="-1"
-        >
-          操作方法
-        </button>
-      </nav>
-      <div class="help-content">
-        <div id="rulesPane" role="tabpanel" aria-labelledby="rulesTab" tabindex="0"></div>
-        <div
-          id="operationsPane"
-          role="tabpanel"
-          aria-labelledby="operationsTab"
-          tabindex="0"
-          hidden
-        ></div>
+      <div class="rules">
+        <nav class="rules-side" id="helpTabs" aria-label="规则分类"></nav>
+        <div class="rules-main">
+          <div class="rules-tabs" id="helpSubtabs" role="tablist" aria-label="规则分页"></div>
+          <div id="rulesPane" class="rules-body" role="tabpanel" tabindex="0"></div>
+        </div>
       </div>
       <small id="helpTiming"></small>
     </dialog>
@@ -470,13 +444,7 @@
           <button class="link" id="mixedBotsBtn" type="button">全部使用danMCai 冠军</button>
           <p id="botSetupNote"></p>
         </details>
-        <button
-          class="link practice-entry"
-          type="button"
-          id="continueMatch"
-          hidden
-          title="只恢复上一局结束后的级数、名次与整场编号，不恢复中途手牌"
-        ></button>
+
         <button class="link practice-entry" type="button" id="practiceBtn">
           训练 · 配牌、牌局与残局复盘
         </button>

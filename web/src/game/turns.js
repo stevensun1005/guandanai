@@ -8,7 +8,6 @@ import { isHost, isHumanSeat, toAbs } from './session.js';
 import { act } from './events.js';
 import { processReturns } from './tribute.js';
 import { sortHints } from '../hand/follow-hints.js';
-import { onPlay } from '../input/actions.js';
 import { practiceSnap } from '../replay/history.js';
 import { practiceRoundStart } from '../replay/session.js';
 import { renderClocks } from '../ui/clocks.js';
@@ -151,11 +150,6 @@ export function startTurn() {
     Sound.play('turn');
     runtime.game.clock = { who: 0, left: PLAY_MS, total: PLAY_MS };
     render();
-    // 出牌 was pressed while the last trick was still on show
-    if (runtime.game.queuedPlay) {
-      runtime.game.queuedPlay = false;
-      if (runtime.selection.size) onPlay();
-    }
     return;
   }
   // a friend's turn: their clock runs here too, and their move arrives as an event

@@ -113,14 +113,21 @@ function advance() {
         runtime.game.log.length !== count
       )
         return;
-      pileSweep();
+      const turning = pileSweep();
       runtime.game.heapN += runtime.game.trickPlays.reduce((s, t) => s + t.play.cards.length, 0);
       runtime.game.trickPlays = [];
       runtime.game.trick = null;
       runtime.game.passes = 0;
       runtime.game.last = [null, null, null, null];
-      runtime.game.turn = leader;
-      startTurn();
+      if (leader === 0 && turning && !runtime.reviewMode)
+        later(() => {
+          runtime.game.turn = leader;
+          startTurn();
+        }, turning);
+      else {
+        runtime.game.turn = leader;
+        startTurn();
+      }
       if (jf) jieFeng(jf.from, jf.to);
     }, trickHold());
     return;
@@ -130,6 +137,12 @@ function advance() {
 }
 
 function finishRound() {
+  runtime.game.shown = {
+    levels: runtime.game.levels.slice(),
+    lvlTeam: runtime.game.lvlTeam,
+    aFails: runtime.game.aFails.slice(),
+    aOut: runtime.game.aOut,
+  };
   // the losing side's remaining players fill in the last places, in turn order
   let i = runtime.game.out[runtime.game.out.length - 1];
   const k0 = runtime.game.out.length;

@@ -27,7 +27,7 @@ with sync_playwright() as p:
  page.locator('#endReplay').click();page.wait_for_timeout(1000);assert int(page.locator('#endStep').input_value())>=1
  page.locator('#endStep').fill('0');page.locator('#endStep').dispatch_event('input')
  with page.expect_download() as d:page.locator('#endExport').click()
- d.value.save_as(str(OUT/'endgame.json'));record=json.loads((OUT/'endgame.json').read_text())
+ d.value.save_as(str(OUT/'endgame.json'));record=json.loads((OUT/'endgame.json').read_text(encoding='utf-8'))
  assert record['kind']=='clint-open-endgame-practice' and record['assisted'] and record['result']['complete']
  layouts=[]
  for w,h in [(1440,1000),(900,700),(844,390),(390,844)]:

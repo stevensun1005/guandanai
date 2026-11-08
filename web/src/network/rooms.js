@@ -1,3 +1,4 @@
+import { clearHost } from './host-storage.mjs';
 import { runtime } from '../app/runtime.js';
 import { readPlay, canPass, isReturnCard } from '../core/validation.js';
 import { aiReturnCard, tributeCard } from '../ai/rule-policy.js';
@@ -84,6 +85,10 @@ export function openRoom() {
     }
     lobbyStatus('开房间失败，请检查网络后重试');
   });
+  listenHost(peer);
+}
+
+export function listenHost(peer) {
   peer.on('call', (c) => VC.incoming(c));
   peer.on('connection', (conn) => {
     conn.on('open', () => {
@@ -297,6 +302,7 @@ function hostOnClose(conn, how = 'drop') {
 
 // the host starts: everyone learns where everyone sits, then the first deal goes out
 export function startOnline() {
+  clearHost(localStorage);
   if (!versionsMatch(runtime.network.conns.values(), VERSION)) {
     lobbyStatus('大家的页面版本需要一致，请刷新后重新入座。');
     return;
@@ -337,6 +343,7 @@ export function enterOnline(mode, hostDir, names) {
 
 // a friend: connects to the room number and follows the host
 export function joinRoom(code, watching = false) {
+  clearHost(localStorage);
   if (!peerReady()) return;
   leaveNet();
   runtime.network.watching = watching;
@@ -521,6 +528,7 @@ function hostGone(automatic = true) {
 
 // the host left: this table carries on alone from wherever the game stood, the computer taking every other seat
 export function goSolo() {
+  clearHost(localStorage);
   runtime.botModels = Array.from({ length: 4 }, (_, index) =>
     botModelId(runtime.botModels?.[(index + runtime.network.off) % 4]),
   );

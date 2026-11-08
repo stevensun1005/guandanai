@@ -108,3 +108,17 @@ export function completedRecord(game, context) {
   }
   return structuredClone(record);
 }
+
+export function snapshotRecord(game) {
+  const session = sessions.get(game);
+  return session
+    ? { ...structuredClone(session), elapsed: performance.now() - session.monotonicStart }
+    : null;
+}
+export function restoreRecord(game, saved, awayMs = 0) {
+  if (saved)
+    sessions.set(game, {
+      ...structuredClone(saved),
+      monotonicStart: performance.now() - saved.elapsed - awayMs,
+    });
+}

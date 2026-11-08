@@ -20,19 +20,9 @@ export function selectedCards() {
 }
 
 export function onPlay() {
-  // you lead next but the finished trick is still on show: the play goes out the moment your turn starts
+  // A selection may be prepared during the sweep, but submission waits for the real turn.
   if (runtime.game.phase === 'play' && runtime.game.turn === -1 && runtime.game.nextLeader === 0) {
-    if (!selectedCards().length) {
-      setMsg('先选几张牌', true);
-      return;
-    }
-    if (!analyze(selectedCards(), runtime.game.L).length) {
-      setMsg('这几张牌不成牌型', true);
-      return;
-    }
-    if (askConfirm()) return;
-    runtime.game.queuedPlay = true;
-    setMsg('这一轮的牌收起后马上出');
+    setMsg('这一轮的牌还在收，收完再出', true);
     return;
   }
   if (runtime.game.phase !== 'play') return;

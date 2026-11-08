@@ -134,3 +134,8 @@ export function excludeMatch(game, storage, pending = null, rules = {}) {
     }
   }
 }
+
+export const snapshotMatch = (game) => structuredClone(identities.get(game) || null);
+export function restoreMatch(game, saved) {
+  if (saved) identities.set(game, structuredClone(saved));
+}

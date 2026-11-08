@@ -1,3 +1,4 @@
+import { renderLevelPicker } from './level.js';
 import { runtime } from '../app/runtime.js';
 import { readMatch, sameMatchStart } from '../collection/match-link.mjs';
 import { rankName } from '../core/cards.js';
@@ -21,6 +22,7 @@ export function initialize() {
     runtime.rules.trib = saved.rules.trib;
     runtime.rules.aFail = saved.rules.aFail;
     renderLobby();
+    renderLevelPicker();
     if (runtime.lobbyMode === 'host') broadcastLobby();
   };
 }

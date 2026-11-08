@@ -18,6 +18,12 @@ import { voicePeers } from './spectators.js';
 const reservations = new Map();
 let retryTimer = 0;
 
+export const snapshotReservations = () => [...reservations.entries()];
+export function restoreReservations(saved) {
+  reservations.clear();
+  for (const [token, seat] of saved || []) reservations.set(token, seat);
+}
+
 export function resetReservations() {
   reservations.clear();
 }

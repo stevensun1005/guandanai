@@ -3,6 +3,7 @@ import { makeDeck } from '../core/cards.js';
 /** Public projection only: spectators never receive the deck, private hands or game seeds. */
 export function publicTable(game, names = {}, humans = new Set()) {
   if (!game) return null;
+  const shown = game.shown || game;
   const cards = (list) => (list || []).map(({ id, r, s }) => ({ id, r, s }));
   const play = (entry) =>
     entry && { cards: cards(entry.cards), type: entry.type, value: entry.value, n: entry.n };
@@ -10,9 +11,9 @@ export function publicTable(game, names = {}, humans = new Set()) {
     round: game.round,
     phase: game.phase,
     level: game.L,
-    levels: game.levels.slice(),
-    aFails: game.aFails?.slice() || [0, 0],
-    levelTeam: game.lvlTeam,
+    levels: shown.levels.slice(),
+    aFails: shown.aFails?.slice() || [0, 0],
+    levelTeam: shown.lvlTeam,
     turn: game.turn,
     out: game.out.slice(),
     paused: !!game.paused,

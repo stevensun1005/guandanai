@@ -37,10 +37,10 @@ with sync_playwright() as p:
           G.hands[1]=G.hands[1].slice(0,10);
           G.phase='play';G.turn=1;G.round=1;G.log=[];G.seen=[];G.rest=[];G.fixed=[];
           G.myOrder=[];G.pw=[];G.trib=[];G.returns=[];
-          G.levels=[14,14];G.aFails=[1,2];G.clock={who:1,left:25000,total:30000};render();
+          G.levels=[14,14];G.lvlTeam=0;G.aFails=[1,2];G.clock={who:1,left:25000,total:30000};render();
         }""")
         assert page.locator('#lv0').inner_text() == 'A2'
-        assert page.locator('#lv1').inner_text() == 'A3'
+        assert page.locator('#lv1').inner_text() == 'A2'
         page.evaluate('G.aOut=0;render()')
         assert page.locator('#lv1').inner_text() == 'A末'
         page.wait_for_timeout(350)

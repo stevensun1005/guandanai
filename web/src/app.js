@@ -1,3 +1,4 @@
+import * as hostRestore from './network/host-restore.js';
 import './styles/index.css';
 import * as viewport from './ui/viewport.js';
 import * as policyController from './ai/controller.js';
@@ -108,11 +109,13 @@ recovery.initialize();
 collection.initialize();
 coach.initialize();
 privateTable.initialize();
+hostRestore.initialize();
 startup.initialize();
 viewport.initialize();
 
 if (new URLSearchParams(location.search).get('test') === '1') {
   const features = [
+    hostRestore,
     coach,
     collection,
     collectionRecord,

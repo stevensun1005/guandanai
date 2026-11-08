@@ -45,7 +45,7 @@ The in-game scorecard keeps earlier rounds, finishing orders and public action t
 2. Pick a seat and copy the invitation link.
 3. Friends open the link and take their seats. The host starts the game.
 
-Empty seats are filled by bots. Play alone or with up to three friends. Keep the host's page open: the host runs the table and computes bot turns.
+Empty seats are filled by bots. Play alone or with up to three friends. The host runs the table and computes bot turns. Within three hours, reopening the same build in the same browser can restore the original room after a refresh or closed tab; friends reclaim their original seat credentials. Explicit exit clears this local recovery.
 
 Use the lobby’s start-settings dialog to set each team’s level, the active team, the previous finishing order and failed A attempts. Desktop/tablet name plates are symmetric, card backs can be hidden, and rotation/fullscreen changes reflow without rewriting the viewport. The new final-chance option gives the other team one A attempt after a team has exhausted three; the table shows A1/A2/A3 or A末. Straight-flush selection now counts combinations and clears the selection after a full cycle.
 
@@ -198,3 +198,5 @@ The next optional [danMCai experiment](ai/research/CONTINUOUS_TRAINING.md) tests
 The four-hour exploiter and its 10,000-round heldout are complete: no cheap target-specific signal was found. A new preregistered single-seat/fixed-teammate diagnostic uses fresh deals, with no training or website promotion. [Results and limits](ai/research/MODEL_STUDY.md#513-10000局留出完成本次未便宜找到剥削信号); [live progress](http://127.0.0.1:8767/).
 
 The practice menu now includes a separate **open-hand endgame solver** with bounded computation, replay and local JSON export; it never trains a model or changes ordinary bot decisions. **Continue previous match** restores only between-round progress and anonymous match/seat IDs, preserving round numbering and private-tool collection exclusion. It does not restore unfinished hands or replace room reconnection. [Practice](web/docs/PRACTICE.md) · [Collection boundaries](web/collector/README.md).
+
+The latest Clint UI adaptation adds an illustrated four-section rulebook, continuation inside level selection, delayed play controls during card collection, and deduplicated straight-flush hints. The six-item model menu and default champion017 remain unchanged. [Scope and verification](ai/research/MODEL_STUDY.md#54-clint增量规则书房主恢复与交互时序).

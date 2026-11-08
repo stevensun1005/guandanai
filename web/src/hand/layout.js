@@ -721,7 +721,7 @@ export function initialize() {
   SPOT_UP = 226;
   actionInset = (w) => Math.min(150, Math.max(runtime.colW / 2 + 16, w * 0.12));
   FIX_GAP = 14;
-  FIX_TAG = 46;
+  FIX_TAG = 62;
   runtime.fixPeak = { k: '', w: 0, h: 0 };
   runtime.ROW_STEP = 0.58;
   runtime.CR = 1.4;

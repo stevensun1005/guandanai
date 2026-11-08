@@ -54,12 +54,20 @@ export function renderLevelPicker() {
       : '不选名次则从第一局开始，不进贡';
   const attempts = (side) =>
     `<div class="level-row"><span class="level-k">${sides[side]}打A不过</span>${[0, 1, 2].map((n) => btn(n + ' 次', `data-attempt-team="${side}" data-attempt="${n}"`, s.aFails[side] === n)).join('')}</div>`;
+  const continuation = $('#continueMatch');
   $('#levelPick').innerHTML =
     `<div class="level-card"><h3 id="startStateTitle">选级（接着之前的牌局）</h3>${lv('SN')}${lv('EW')}<div class="level-row"><span class="level-k">本局打谁的级</span>${['SN', 'EW', ''].map((side) => btn(sides[side] || '自动', `data-side="${side}"`, s.playSide === side)).join('')}</div><p class="hint">上一局名次（决定进贡关系）</p>${ranks}<p class="hint" id="startTributeHint">${pay}</p>${attempts('SN')}${attempts('EW')}<div class="level-row">${mine ? '<button type="button" class="rule-btn" data-reset>还原</button>' : '<span class="rule-note">由房主选定</span>'}<button type="button" class="rule-btn" data-done>好</button></div></div>`;
+  $('#levelPick .level-card h3').after(continuation);
 }
 export function initialize() {
   const picker = $('#levelPick');
   document.body.append(picker);
+  const continuation = document.createElement('button');
+  continuation.id = 'continueMatch';
+  continuation.type = 'button';
+  continuation.className = 'rule-btn level-cont';
+  continuation.hidden = true;
+  picker.append(continuation);
   picker.setAttribute('role', 'dialog');
   picker.setAttribute('aria-modal', 'true');
   picker.setAttribute('aria-labelledby', 'startStateTitle');
@@ -83,6 +91,7 @@ export function initialize() {
     }
     if (runtime.lobbyMode === 'join') return;
     let s = startOptions(runtime.rules, runtime.direction || 'S');
+    if (b.id === 'continueMatch') return;
     const d = b.dataset;
     if (d.levelTeam) s.levels[d.levelTeam] = Number(d.lv);
     else if (d.side !== undefined) s.playSide = d.side;

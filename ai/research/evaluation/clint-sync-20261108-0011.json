@@ -1,0 +1,967 @@
+{
+  "schema": 1,
+  "kind": "ui-network-correctness-not-strength",
+  "observedAtUTC": "2026-11-08T00:37:21.169774+00:00",
+  "mainBaseCommit": "ba65b4a4492270f0c32192fe543a22bd3f994153",
+  "upstream": {
+    "previousSHA": "ece39ee524f43640748b764875040c9244a1435d",
+    "checkedSHA": "e7538a18b6e8869b62cee8864d680249267ed449",
+    "commits": [
+      "01c4f923b42770d97a4efd9d60942aa8ccf5c27c",
+      "4d975d47b14834a527d6c4ac073b1553e5e25dca",
+      "de81f9cb04ab7ac5daf2d5b2f0d658a7b46ed3de",
+      "0e402a7a39ea1b52c88092b1921e95204564c118",
+      "4cb8258b28abd5c5ff230a47f46be991fde7aa47",
+      "ce475c68166e353ae4ff888bbf40f2b4f59911a3",
+      "e66efb5ed5b04af5e8f84ec978dbaa8147a6c0c9",
+      "6581132931c914ef1b06dab34438588be4a96ce8",
+      "47f24edf07c9474baac6eedfed435c44b63ed28c",
+      "e7538a18b6e8869b62cee8864d680249267ed449"
+    ],
+    "paths": [
+      {
+        "path": "README.md",
+        "change": "M",
+        "upstreamSHA256": "a339364937bd8715678fc1da957cedd2ce53f077acaa6f62de8669abbe3b73e5",
+        "disposition": "Documentation changes reconciled in bilingual root and affected project guides; no live training integration."
+      },
+      {
+        "path": "bot/README.md",
+        "change": "M",
+        "upstreamSHA256": "17974eb2fb6e519456976e84f05d2d8e8089a6eef69a3738820e8ed456e21a40",
+        "disposition": "Documentation changes reconciled in bilingual root and affected project guides; no live training integration."
+      },
+      {
+        "path": "bot/clint/clint-bot.js",
+        "change": "M",
+        "upstreamSHA256": "dabadaa4114013223899a12e7aad0172af33389da067308e68e4cc47e9c62edc",
+        "disposition": "Only removes old G.open private-hand branches; project ordinary Clint path already excluded them and remains byte-unchanged."
+      },
+      {
+        "path": "bot/clint/endgame-search.js",
+        "change": "D",
+        "upstreamSHA256": null,
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "bot/models.json",
+        "change": "M",
+        "upstreamSHA256": "795b70f3f56fe4fadf983eaed1a9fcf827ce7bae5d5f009683809ff25808686f",
+        "disposition": "Upstream short generic labels/default do not replace owner-required full versions and017 default."
+      },
+      {
+        "path": "index.html",
+        "change": "M",
+        "upstreamSHA256": "2cb04d04120c62ad62e0593b355648a6f22135ef6f9178e7fb7156a8baae4f60",
+        "disposition": "Generated upstream bundle; all behavior reviewed through source deltas, never whole-file copied."
+      },
+      {
+        "path": "web/README.md",
+        "change": "M",
+        "upstreamSHA256": "54fcf012a5c8a411abcc152d737fcea574eb70159ddb951a9f48c6ac564e5561",
+        "disposition": "Documentation changes reconciled in bilingual root and affected project guides; no live training integration."
+      },
+      {
+        "path": "web/src/app/boot.js",
+        "change": "M",
+        "upstreamSHA256": "127b57cb381261853061a95ecdd709f958e0046bd247598fb1aad6f15c43ccba",
+        "disposition": "Adapted auto host recovery through app/startup and isolated host-restore module."
+      },
+      {
+        "path": "web/src/coach/coach.js",
+        "change": "M",
+        "upstreamSHA256": "67ee84e90ed4c9bc5e825ab6d159c388f4908676b1f62c332862e4dfceadf7c1",
+        "disposition": "Already defaults off; retain separate host permission, individual switch, Top5 and private owner exception."
+      },
+      {
+        "path": "web/src/collection/match-link.js",
+        "change": "M",
+        "upstreamSHA256": "5e4cb6290301650b2174901b4def0eeb90bbf9a28631750e3aeb3ac5a50793f2",
+        "disposition": "Adapted continuation placement; preserve existing anonymous match identity and permanent private exclusion."
+      },
+      {
+        "path": "web/src/collection/record.js",
+        "change": "M",
+        "upstreamSHA256": "bba2577a88fa4f5d22239b699d4f8745a8e42d8fa356251d29f30e4785ee7ed6",
+        "disposition": "Keep project eligibility, review/private exclusions and actor provenance; add local record snapshot/resume only."
+      },
+      {
+        "path": "web/src/game/computer-players.js",
+        "change": "M",
+        "upstreamSHA256": "256018dc716b73e4a219af71bcfed873dd488d66b63c525dc968f97b3e889af3",
+        "disposition": "Do not adopt Clint default; owner requires017 and the six-model real-version menu."
+      },
+      {
+        "path": "web/src/game/endgame-setup.js",
+        "change": "D",
+        "upstreamSHA256": null,
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/game/events.js",
+        "change": "M",
+        "upstreamSHA256": "1e4ddc69b39e7c6d68eec2b1636d4dbb9fa2c05994cb0eb7c5dd711f56701f0e",
+        "disposition": "Save committed host state after events; keep legal-event and assisted-action checks."
+      },
+      {
+        "path": "web/src/game/play.js",
+        "change": "M",
+        "upstreamSHA256": "c17676578cebfbcdbe05a9ee0cdb256bf878f5e4a96c8d8a416f0d4f1943c535",
+        "disposition": "Adapt delayed submission and pre-result display snapshot; no changes to match outcome rules."
+      },
+      {
+        "path": "web/src/game/round.js",
+        "change": "M",
+        "upstreamSHA256": "21896452b8103b9ade2e4212641d3fb28c0af12f1546e0955fa3e7bb521fe8b2",
+        "disposition": "Clear display snapshot on next deal; keep original UI practice and simulation behavior."
+      },
+      {
+        "path": "web/src/game/state.js",
+        "change": "M",
+        "upstreamSHA256": "cb31e4378daaf72687093f3e3e819910507a7b846d2ed1a739e1adc4a40e081a",
+        "disposition": "Preserve017 default and permission model; do not copy upstream global practice flags."
+      },
+      {
+        "path": "web/src/game/turns.js",
+        "change": "M",
+        "upstreamSHA256": "8b976cf9ae6dc4fd87fc30f41f92a26d1a54ba22600ba6af9069ca3433327a87",
+        "disposition": "Remove queued early play; retain own practice controller."
+      },
+      {
+        "path": "web/src/hand/layout.js",
+        "change": "M",
+        "upstreamSHA256": "8c779c18e4f972b8e916dea2ac8e06978201db365766907875b423c77ba2f0f6",
+        "disposition": "Increase fixed group tag reservation to62 pixels."
+      },
+      {
+        "path": "web/src/hand/straight-flush.js",
+        "change": "M",
+        "upstreamSHA256": "49c72a0a5107a09bf903d168b7d68e586e34f9c6a27ac0e2122a09af4309ef23",
+        "disposition": "Adapt in UI-only straight-flushes helper; no neural/Clint candidate changes."
+      },
+      {
+        "path": "web/src/index.html",
+        "change": "M",
+        "upstreamSHA256": "a7e0172a17e75dc968fd87dba4459138dca15f82be68a0a8cbc1a46f630a4312",
+        "disposition": "Adapt rulebook, continuation placement; retain six-model menu and own practice chooser."
+      },
+      {
+        "path": "web/src/input/actions.js",
+        "change": "M",
+        "upstreamSHA256": "0238462e609918d1e81f1e4122355751f7fbaa7534c3883952213feb866f06a3",
+        "disposition": "Reject submission during card collection instead of queuing it."
+      },
+      {
+        "path": "web/src/lobby/rules.js",
+        "change": "M",
+        "upstreamSHA256": "821b1be199b8ff2ad3632552d7e47d6bdaa5b4d32adf86dd15634113f5b91e72",
+        "disposition": "Move own continuation into existing level picker; preserve default and independent coach switches."
+      },
+      {
+        "path": "web/src/network/guest.js",
+        "change": "M",
+        "upstreamSHA256": "d8ae494c4b80d8340be8f34e196c934684552b353459a8e9dee0628ec0cf8815",
+        "disposition": "Clear old host recovery when deliberately joining another table."
+      },
+      {
+        "path": "web/src/network/host-restore.js",
+        "change": "A",
+        "upstreamSHA256": "005c8e0e13c2df352002677053c8f4f84fd10ffc8cf1b63e7a6fd92b136e36d7",
+        "disposition": "Adapt with original opaque reservations, full local game, pending anonymous record and private exclusion; never public spectator data."
+      },
+      {
+        "path": "web/src/network/host.js",
+        "change": "M",
+        "upstreamSHA256": "3911645eb2b91c52abc6b27a70586aacaf28728a612aec96d45e67d65ed5c2c3",
+        "disposition": "Reuse host connection listener for same room restoration."
+      },
+      {
+        "path": "web/src/network/voice.js",
+        "change": "M",
+        "upstreamSHA256": "55454a820f5a4e576a29d25b8e1b73deed558aa9b16dd59b5790418a60bf246d",
+        "disposition": "Adapt speaking mic and own-only muted badge; fix queued obsolete calls during reconnect."
+      },
+      {
+        "path": "web/src/social/emotes.js",
+        "change": "M",
+        "upstreamSHA256": "3789288f708401d3508c588501f257e92d9ac17322fc60806710959b7da67e8d",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/styles/cards.css",
+        "change": "M",
+        "upstreamSHA256": "1b6ba87ffcc275047c3a19882761d8f655ab55289199de1e60b2522776c1c454",
+        "disposition": "Keep own muted badge above own plate; speaking mics inside other plates."
+      },
+      {
+        "path": "web/src/styles/emotes.css",
+        "change": "M",
+        "upstreamSHA256": "02359d9b1b5a11dcbe4aebcf2b8baaeeb38dbf671c612f197469dd8b12b6bdce",
+        "disposition": "Only removes upstream legacy endgame CSS guard. Project standalone practice has no social controls, and ordinary/practice/spectator boundaries remain unchanged."
+      },
+      {
+        "path": "web/src/styles/header.css",
+        "change": "M",
+        "upstreamSHA256": "8029f6bc5158326755f0fa9107d370dbef33e9464c6c9ef9f9b76bd663f19f76",
+        "disposition": "Adapt mic layout in existing table.css."
+      },
+      {
+        "path": "web/src/styles/lobby.css",
+        "change": "M",
+        "upstreamSHA256": "1605903f4712de5820ce92968d9450824d022bee11fc591a43bdc8f56ccd413a",
+        "disposition": "Adapt level continuation; keep full checkpoint labels on mobile under owner naming rule."
+      },
+      {
+        "path": "web/src/styles/rules.css",
+        "change": "A",
+        "upstreamSHA256": "2ced18436749e1df6722ab27bf8fcd03d65a057e1e5240cbb24373029048fb3c",
+        "disposition": "Adapt illustrated responsive rulebook stylesheet."
+      },
+      {
+        "path": "web/src/styles/training.css",
+        "change": "M",
+        "upstreamSHA256": "64889277111ce5482ff44cb411d13799a10d40128e94ed30196627b970627784",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/training/plays.js",
+        "change": "M",
+        "upstreamSHA256": "d58179da363d2481dbe5b8c95324e2502b45b97ea79d18c788f342856c663fb7",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/training/record-text.js",
+        "change": "M",
+        "upstreamSHA256": "a2728e644b5925f05fb9346f350b79dc0d1cb3470a01bba3eb4519c26a6c5a62",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/training/records.js",
+        "change": "M",
+        "upstreamSHA256": "34b96ea9d178128a2055d62731bf9e0168b3b32ea941c6f9671242710ffa114b",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/training/replay-view.js",
+        "change": "M",
+        "upstreamSHA256": "603c7794dc63da8295ee600f2ed6598c399b4ebd16513f7edc7a3bd271b6ede0",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/training/steps.js",
+        "change": "M",
+        "upstreamSHA256": "9d3e6cec740a002a58ba047e242cbefe716021b07d55d02ee799aa6e88ba3eae",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/training/training.js",
+        "change": "M",
+        "upstreamSHA256": "d5584055af64139a1e967fc71a6448c5865804fc4561a6e52f1ee2a344efa4ba",
+        "disposition": "Upstream removal concerns its legacy full-table/endgame training route. Retain project-owned bounded isolated Worker, practice menu and archived records; no neural/training integration."
+      },
+      {
+        "path": "web/src/ui/overlays.js",
+        "change": "M",
+        "upstreamSHA256": "62e115f4241bbdfb039923b44038373be3bf2a72e69bff87f5655ae35478b280",
+        "disposition": "Adapt illustrated guide and explicit host snapshot cleanup; preserve modal permissions and result flow."
+      },
+      {
+        "path": "web/src/ui/pile.js",
+        "change": "M",
+        "upstreamSHA256": "7f5acac8b0532f7b3ee7f4fd3e978b8fb53f07bfc4dcfe219a584391bb19f621",
+        "disposition": "Return actual sweep duration; play controls wait for its completion."
+      },
+      {
+        "path": "web/src/ui/render.js",
+        "change": "M",
+        "upstreamSHA256": "4bc96280a84df443b83fce897ba68aacfce43d250a36754a2f94edf3b06692e3",
+        "disposition": "Use display-only prior-round snapshot and current-turn gating; no reward or policy changes."
+      },
+      {
+        "path": "web/src/ui/rules.js",
+        "change": "A",
+        "upstreamSHA256": "b18321fde79fa305b7182ed9414dd9eb88e5d957f1b2877249a888654124bb6c",
+        "disposition": "Adapt four categories and12 pages using project card renderer, clocks, unlimited A, legal10-card bombs and keyboard help."
+      }
+    ]
+  },
+  "ordinaryClintUnchanged": {
+    "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/strategy.js": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72"
+  },
+  "neuralPoliciesAndCandidatesChanged": false,
+  "webModels": {
+    "defaultId": "017",
+    "danMCaiChampions": [
+      "017",
+      "012"
+    ],
+    "catalogSHA256": "1f1abfdf5065bc655d011d0fdeb6bb3f3f72e5339bc355b7dbba1eff5e783dea",
+    "releaseUpload": false
+  },
+  "validation": {
+    "nodeTests": 251,
+    "researchPython": {
+      "passed": 24
+    },
+    "sharedPython": {
+      "passed": 3,
+      "skipped": 1
+    },
+    "format": "passed",
+    "build": "becde16159",
+    "rulesFourViewports": [
+      {
+        "viewport": [
+          1500,
+          1000
+        ],
+        "tabsChecked": 12,
+        "cardExamples": 97,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          800,
+          600
+        ],
+        "tabsChecked": 12,
+        "cardExamples": 97,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "tabsChecked": 12,
+        "cardExamples": 97,
+        "pageErrors": []
+      },
+      {
+        "viewport": [
+          360,
+          640
+        ],
+        "tabsChecked": 12,
+        "cardExamples": 97,
+        "pageErrors": []
+      }
+    ],
+    "hostRestoration": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "focusedControls": {
+      "continueInsideLevelPicker": true,
+      "continuationAppliesOriginalState": true,
+      "playDisabledDuringSweepAndNotQueued": true,
+      "playEnabledOnActualTurn": true,
+      "levelDisplayHeldThenUpdated": true,
+      "pageErrors": []
+    },
+    "helpModal": {
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "lobbyHelp": true,
+          "tabsAndKeyboard": true,
+          "soloClockPaused": true,
+          "responsive": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "lobbyHelp": true,
+          "tabsAndKeyboard": true,
+          "soloClockPaused": true,
+          "responsive": true,
+          "pageErrors": []
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "lobbyHelp": true,
+          "tabsAndKeyboard": true,
+          "soloClockPaused": true,
+          "responsive": true,
+          "pageErrors": []
+        }
+      ],
+      "pendingPolicyWaitsForHelpClose": true,
+      "currentHouseRulesShown": true,
+      "multiplayerClockContinues": true,
+      "practiceHelpDoesNotAdvanceTurn": true
+    },
+    "privateTable": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "completedRounds": 0,
+      "trainingUpdates": 0,
+      "realPeerJS": true,
+      "hostOnlyNicknameGate": true,
+      "guestSameNameDenied": true,
+      "noPrivateRuleFlagBroadcast": true,
+      "privateCoach": {
+        "modelId": "017",
+        "search": {
+          "candidates": 358,
+          "evaluated": 8,
+          "mode": "round",
+          "horizon": 4,
+          "maxPlies": 12,
+          "leafSeat": "advising player, or partner after finishing",
+          "mismatchedLeaves": 0,
+          "fullRollouts": 19,
+          "minRollouts": 2,
+          "truncatedRollouts": 0,
+          "maxSamples": 12,
+          "priorWeight": 4,
+          "temperature": 0.03,
+          "elapsedMs": 2644,
+          "fullInformation": true
+        }
+      },
+      "partnerUsesOracle": true,
+      "opponentStaysRules": true,
+      "neuralOpponentUsesOnlyPublicObservation": true,
+      "manualOutsideBeamRated": true,
+      "offRestoresPartnerRules": true,
+      "privateHandsMatchHeldCounts": true,
+      "constructedCompletionExcluded": true,
+      "uploads": 0,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "topFiveInViewport": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "rejoin": {
+      "hostDirection": "W",
+      "guestDirection": "S",
+      "refreshDuringPrep": true,
+      "manualRoomCodeRecovery": true,
+      "selectedLevelAndOnceRuleSync": true,
+      "refreshDuringInFlightPolicy": true,
+      "stalePolicyCancelled": true,
+      "realGuestActionAfterReturn": true,
+      "dataChannelAutomaticRecovery": true,
+      "unknownSeatRejected": true,
+      "sameCredential": true,
+      "guestAvoidsModelDownload": true,
+      "hostExitOffersSoloContinuation": true,
+      "soloContinuationLoadsLearnedPolicy": true,
+      "pageErrors": []
+    },
+    "clintAndWasm": {
+      "actualRuleReplies": 6,
+      "allRuleGameNeuralDownloads": 0,
+      "wasmModels": [
+        "021",
+        "020",
+        "001",
+        "017",
+        "012"
+      ],
+      "strategyFixtures": {
+        "singleAlong": {
+          "type": "single",
+          "value": 14
+        },
+        "levelFirst": {
+          "type": "single",
+          "value": 15
+        },
+        "firstJoker": null,
+        "tributeException": {
+          "type": "single",
+          "value": 17
+        }
+      },
+      "fixtureScope": "Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+      "pageErrors": []
+    },
+    "UIRefresh": {
+      "checks": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "levelChoices": 26,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "levelChoices": 26,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "levelChoices": 26,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": false
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "levelChoices": 26,
+          "aLabels": true,
+          "flushCycle": true,
+          "tieSkip": true,
+          "sideClockGeometry": false
+        }
+      ],
+      "errors": []
+    },
+    "controlLayout": {
+      "kind": "synthetic-display-hit-test",
+      "buildVersions": [
+        "becde16159"
+      ],
+      "strengthGames": 0,
+      "trainingUpdates": 0,
+      "testedStates": 1145,
+      "viewports": [
+        {
+          "viewport": [
+            1920,
+            1080
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1920,
+            1080
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1440,
+            900
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            720
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            900,
+            600
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            900,
+            600
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            899,
+            600
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            899,
+            600
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            500
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            500
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            799,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            390
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            390
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            700,
+            500
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            700,
+            500
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            600
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            600,
+            600
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            667,
+            375
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            320
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone side back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": false,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            375,
+            450
+          ],
+          "mobile": true,
+          "coach": true,
+          "htmlClasses": "phone rows back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": false,
+          "htmlClasses": "back-goose"
+        },
+        {
+          "viewport": [
+            1280,
+            300
+          ],
+          "mobile": false,
+          "coach": true,
+          "htmlClasses": "back-goose"
+        }
+      ],
+      "failures": [],
+      "pageErrors": []
+    },
+    "midDeal": {
+      "midDealOriginalRotatingAllocationPreserved": true,
+      "cards": 108,
+      "duplicateOrLostCards": 0,
+      "pageErrors": []
+    },
+    "retainedEndgamePractice": {
+      "solves": [
+        "求解完成：双方均按本局升级分最优行动时，东西赢 1 级。4 手，9 节点，0.00 秒。"
+      ],
+      "legalReplayMoves": 4,
+      "nodes": 9,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "controls": 13,
+          "allHitTests": true
+        },
+        {
+          "width": 900,
+          "height": 700,
+          "controls": 13,
+          "allHitTests": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "controls": 13,
+          "allHitTests": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "controls": 13,
+          "allHitTests": true
+        }
+      ],
+      "actualWorker": true,
+      "tenCardBoundedResult": "求解完成：双方均按本局升级分最优行动时，东西赢 3 级。17 手，504,800 节点，0.50 秒。",
+      "stopAndReturn": true,
+      "localRecordReload": true,
+      "neuralDownloads": 0,
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "allRequiredLocalChecksPassed": true
+  },
+  "initialFailureAndRepair": "Actual PeerJS refresh found an inactive voice wait queue answering a call from the destroyed provider. Clear and close waiting calls before stop early-return; added executable regression and rechecked refresh/closed-tab recovery. Windows downloaded-JSON smoke uses explicit UTF8.",
+  "limits": [
+    "Synthetic UI and network tests only; zero independent strength games and optimizer updates.",
+    "Host recovery requires same build, same browser, usable local storage and reclaiming the original room within3h.",
+    "Source/root user drafts, frozen research runs, GuanZero and tribute remain untouched."
+  ],
+  "deployment": {
+    "status": "pending",
+    "successCursorAdvanced": false
+  },
+  "frozenResearchReadOnlyAudit": {
+    "sourceFilesMatched": 36,
+    "runStepStill44731": true,
+    "finalSHA256": "a40d7715750564dd39bff117e4af538b93455ffc5fd27200785e02097b5ff36c",
+    "frozenFilesWritten": 0,
+    "preregisteredSourceFilesMatched": 60
+  }
+}

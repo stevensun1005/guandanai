@@ -1,7 +1,8 @@
+import { uniqueStraightFlushes } from '../hand/straight-flushes.mjs';
 import { runtime } from '../app/runtime.js';
 import { syncRoomOptions } from '../network/spectators.js';
 import { Sound, syncAudioBtns } from '../audio/sound.js';
-import { SUITS, SUIT_ORDER, cardText, isWild } from '../core/cards.js';
+import { cardText } from '../core/cards.js';
 import { analyze } from '../core/combinations.js';
 import { act } from '../game/events.js';
 import { isHost, newGame, roundEvt, toAbs } from '../game/session.js';
@@ -52,27 +53,8 @@ export function syncHandBtns() {
 
 // every straight flush the hand can make, wild cards filling the gaps: those needing fewer wild cards first, then low to
 // high; each press of 同花顺 picks the next one, so the player can look them over and set one aside while sorting
-export function straightFlushes(hand = runtime.game.hands[0]) {
-  const L = runtime.game.L,
-    w = hand.filter((c) => isWild(c, L)),
-    out = [];
-  for (const su of SUITS)
-    for (let s = 1; s <= 10; s++) {
-      const nat = [];
-      let wu = 0;
-      for (let q = s; q < s + 5; q++) {
-        const r = q === 1 ? 14 : q,
-          c = hand.find((x) => !isWild(x, L) && x.s === su && x.r === r);
-        if (c) nat.push(c);
-        else wu++;
-      }
-      if (wu <= w.length && wu < 5) {
-        const cards = nat.concat(w.slice(0, wu));
-        if (analyze(cards, L).some((a) => a.type === 'sflush')) out.push({ cards, wu, s, su });
-      }
-    }
-  return out.sort((a, b) => a.wu - b.wu || a.s - b.s || SUIT_ORDER[a.su] - SUIT_ORDER[b.su]);
-}
+export const straightFlushes = (hand = runtime.game.hands[0]) =>
+  uniqueStraightFlushes(hand, runtime.game.L);
 
 function syncBack() {
   for (const [k] of BACKS)

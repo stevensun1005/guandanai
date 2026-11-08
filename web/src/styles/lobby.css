@@ -631,3 +631,11 @@
   padding: 4px 3px;
   font-size: 16px;
 }
+
+.level-cont {
+  align-self: center;
+  white-space: normal;
+  padding: 8px 14px;
+  color: var(--gold);
+  margin: 4px 0 12px;
+}

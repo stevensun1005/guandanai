@@ -1,3 +1,4 @@
+import { clearHost } from '../network/host-storage.mjs';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { enterPractice } from '../replay/session.js';
@@ -23,6 +24,7 @@ export function initialize() {
     runtime.nickname = nickname;
     runtime.direction = 'S';
     prepareBotModels();
+    clearHost(localStorage);
     Sound.unlock();
     dialog.close();
     enterPractice();
@@ -31,6 +33,7 @@ export function initialize() {
     leaveNet();
     forgetSeat();
     if (runtime.lobbyMode !== 'solo') setMode('solo');
+    clearHost(localStorage);
     Sound.unlock();
     dialog.close();
     $('#lobby').hidden = true;
@@ -43,6 +46,7 @@ export function initialize() {
     leaveNet();
     forgetSeat();
     if (runtime.lobbyMode !== 'solo') setMode('solo');
+    clearHost(localStorage);
     Sound.unlock();
     dialog.close();
     $('#lobby').hidden = true;

@@ -3,6 +3,12 @@
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
   "lastSuccessfulUpstreamSHA": "ece39ee524f43640748b764875040c9244a1435d",
   "evidence": "clint-sync-20261107-2006.json",
-  "pending": [],
-  "lastCheckedUpstreamSHA": "ece39ee524f43640748b764875040c9244a1435d"
+  "pending": [
+    {
+      "upstreamSHA": "e7538a18b6e8869b62cee8864d680249267ed449",
+      "evidence": "clint-sync-20261108-0011.json",
+      "status": "local-tests-passed-awaiting-Pages"
+    }
+  ],
+  "lastCheckedUpstreamSHA": "e7538a18b6e8869b62cee8864d680249267ed449"
 }

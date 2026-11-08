@@ -1,3 +1,4 @@
+import { restoreHost } from '../network/host-restore.js';
 import { runtime } from './runtime.js';
 import { lobbyStatus, setMode, showStart } from '../lobby/lobby.js';
 import { $ } from '../ui/cards.js';
@@ -20,6 +21,7 @@ export function initialize() {
   };
   showStart();
   invitedRoom = new URLSearchParams(location.search).get('room');
+  if (!invitedRoom && restoreHost()) return;
   const previous = savedSeat(invitedRoom);
   if (!invitedRoom && previous) invitedRoom = previous.code;
   if (/^\d{4}$/.test(invitedRoom || '')) {

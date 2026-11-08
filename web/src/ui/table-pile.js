@@ -443,14 +443,16 @@ export function pileSweep() {
   // a phone keeps no heap, nor does 极简出牌区: the finished trick simply goes, with no turning over
   if (isPhone() || miniMode() || runtime.cardBack === 'none') {
     layer.querySelectorAll('.pc.cur,.pc.old').forEach((e) => e.remove());
-    return;
+    return 0;
   }
-  layer.querySelectorAll('.pc.cur,.pc.old').forEach((el) => {
+  const cards = layer.querySelectorAll('.pc.cur,.pc.old');
+  cards.forEach((el) => {
     el.classList.remove('cur', 'old');
     el.style.transitionDelay = ((Math.random() * 120) | 0) + 'ms';
     el.style.zIndex = ++runtime.heapZ;
     el.style.transform = heapSpot(g);
   });
+  return cards.length ? 620 : 0;
 }
 
 // redraw the pile from state (page update or window resize), without animation

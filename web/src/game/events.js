@@ -1,3 +1,4 @@
+import { saveHost } from '../network/host-restore.js';
 import { runtime } from '../app/runtime.js';
 import { TableBot } from '../ai/controller.js';
 import { BASE_NAMES } from '../core/cards.js';
@@ -43,7 +44,10 @@ export function act(e) {
     }
     return;
   }
-  if (applyEvt(e) && runtime.network.mode === 'host') broadcast({ t: 'evt', e });
+  if (applyEvt(e) && runtime.network.mode === 'host') {
+    broadcast({ t: 'evt', e });
+    saveHost();
+  }
 }
 
 // apply one event if this table has reached the point where it fits; false means "not yet", so a friend's page

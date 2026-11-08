@@ -247,6 +247,7 @@ function practiceReplay(rec) {
   if (runtime.game.paused) setPaused(false);
   runtime.game.tok++;
   runtime.game.round++;
+  runtime.game.shown = null;
   const byId = new Map(makeDeck().map((c) => [c.id, c]));
   runtime.game.levels = rec.levels ? rec.levels.slice() : runtime.game.levels.slice();
   runtime.game.levels[rec.lvlTeam] = rec.L;
