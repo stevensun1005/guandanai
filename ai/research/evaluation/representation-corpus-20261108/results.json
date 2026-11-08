@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "kind": "representation-corpus-not-training-or-strength",
+  "phase": "complete",
+  "completedAtUTC": "2026-11-08T02:31:31.603Z",
+  "protocolSHA256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0",
+  "teacher": {
+    "catalogId": "017",
+    "version": "v000855042",
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\champion.onnx",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    }
+  },
+  "rows": 1000022,
+  "completeDeals": 12282,
+  "candidateValues": 30705863,
+  "blindCounts": [
+    601947,
+    116078,
+    161308,
+    59380,
+    61309
+  ],
+  "blindFrequency": {
+    "mean": 0.39806624254266404,
+    "clusters": 12282,
+    "standardError": 0.00039933972037612265,
+    "ci95": [
+      0.39728353669072686,
+      0.3988489483946012
+    ],
+    "method": "Ratio linearization normal interval over independent complete deals, not independent decisions"
+  },
+  "choiceBlindFrequency": {
+    "mean": 0.4111176050213006,
+    "clusters": 12282,
+    "standardError": 0.0005553305234031842,
+    "ci95": [
+      0.41002915719543037,
+      0.4122060528471709
+    ],
+    "method": "Ratio linearization normal interval over independent complete deals, not independent decisions"
+  },
+  "columns": {
+    "features": 567,
+    "extras": 53,
+    "metadata": 5,
+    "labels": 11
+  },
+  "labelNames": [
+    "chosenQ",
+    "finalSignedPoints",
+    "finishingRank",
+    "trickPresent",
+    "relativeTrickOwnerOrNone",
+    "passes",
+    "partnerLeading",
+    "partnerHasBomb",
+    "ownHandCount",
+    "blindKind",
+    "level"
+  ],
+  "dataDirectory": "D:/vibecoding/guandan/ai/danMCai/data/generated/representation-corpus-20261108",
+  "files": {
+    "features.i8": {
+      "bytes": 567012474,
+      "sha256": "3bbe28524fee137ab9269483a7ac8a11b2199a9662586e64e425461857f5ae9f"
+    },
+    "extras.f32": {
+      "bytes": 212004664,
+      "sha256": "a587d66bf09fef7830a542cfd6c9e188af55a0bb122200d44d065a721731b16b"
+    },
+    "metadata.u32": {
+      "bytes": 20000440,
+      "sha256": "99d568413a9805dcd25aba7febfa7842a5c9c13da0d4a03c77f982ae0181cbdf"
+    },
+    "labels.f32": {
+      "bytes": 44000968,
+      "sha256": "6a67a85516bc91ee3949240780576cefda24e1c770356d8cef3ec2a62590bb89"
+    },
+    "candidate-values.f32": {
+      "bytes": 122823452,
+      "sha256": "15256904674fb6286dfc21142f5c1e6d50e020b1661aa0ec5141055301098a79"
+    }
+  },
+  "minimumAvailableGiB": 12.868404388427734,
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "scope": "Independent complete single rounds; split/cluster by deal, never by decisions. Privileged labels never enter policy features, ranking, rewards or training. Corpus prevalence is not an input-arm benefit or closed residual-probe result."
+}

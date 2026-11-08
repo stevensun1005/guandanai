@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T02:49:03.741773+00:00",
+  "priorMain": "7fb8b839bf8c9953b2207fde49a19823eff58f9c",
+  "nodeTestsPassed": 264,
+  "researchPythonPassed": 31,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "inheritedEndgamePythonPassed": 4,
+  "format": "passed",
+  "build": "18c564b0c0",
+  "realCLIStopBeforeModelDataLockOutput": true,
+  "weightedRidgeSyntheticCheck": true,
+  "pairedBootstrapCovarianceCheck": true,
+  "dealSplitDeterministic": true,
+  "residualRowsExecuted": 0,
+  "optimizerUpdates": 0,
+  "scope": "Development validation only; no GPU or predictive/strength result yet."
+}

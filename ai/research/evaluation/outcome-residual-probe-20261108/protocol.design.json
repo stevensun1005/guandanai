@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "outcome-residual-probe-20261108",
+  "purpose": "Roadmap1.3 read-only final single-round G minus fixed017 Q representation diagnostic. No policy training or strength acceptance.",
+  "teacher": {
+    "catalogId": "017",
+    "version": "v000855042",
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\champion.onnx",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54
+    }
+  },
+  "dataDirectory": "D:/vibecoding/guandan/ai/danMCai/data/generated/representation-corpus-20261108",
+  "rows": 1000022,
+  "choiceRows": 722044,
+  "dataDeals": 12282,
+  "dataFiles": {
+    "features.i8": {
+      "bytes": 567012474,
+      "sha256": "3bbe28524fee137ab9269483a7ac8a11b2199a9662586e64e425461857f5ae9f"
+    },
+    "extras.f32": {
+      "bytes": 212004664,
+      "sha256": "a587d66bf09fef7830a542cfd6c9e188af55a0bb122200d44d065a721731b16b"
+    },
+    "metadata.u32": {
+      "bytes": 20000440,
+      "sha256": "99d568413a9805dcd25aba7febfa7842a5c9c13da0d4a03c77f982ae0181cbdf"
+    },
+    "labels.f32": {
+      "bytes": 44000968,
+      "sha256": "6a67a85516bc91ee3949240780576cefda24e1c770356d8cef3ec2a62590bb89"
+    },
+    "candidate-values.f32": {
+      "bytes": 122823452,
+      "sha256": "15256904674fb6286dfc21142f5c1e6d50e020b1661aa0ec5141055301098a79"
+    },
+    "deals.json": {
+      "bytes": 3049286,
+      "sha256": "876db5aac97816c69038d7a2960baf91d1e45cfcd5b57fbb5380fdb614b50def"
+    }
+  },
+  "sourceCorpusProtocolSHA256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0",
+  "budgetHours": 1,
+  "reserveGiB": 4,
+  "resumeGiB": 5,
+  "splitSalt": "danmcai-outcome-ridge-20261108-v1-9385271",
+  "bootstrapSeed": 2081108349,
+  "bootstrapReplicates": 4000,
+  "penalties": [
+    0.0001,
+    0.01,
+    1.0
+  ],
+  "qTolerance": 0.0001,
+  "split": "SHA256(salt:dealSeed), first8 bytes big endian modulo10:0..5 train,6..7 validation,8..9 test. All rows of a deal stay together.",
+  "sample": "Only stored argmax rows with candidateCount>1; within each split each complete deal receives equal total weight. No new games or deal seeds. Statistical seeds are new and separate from simulation.",
+  "features": [
+    "extras53",
+    "raw567",
+    "raw567+extras53",
+    "frozenPenultimate512",
+    "frozenPenultimate512+extras53"
+  ],
+  "target": "labels[1] final own-team signed upgrade minus labels[0] chosen champion Q. All other label columns unused.",
+  "selection": "For each model choose one penalty by validation equal-deal MSE, tie first in listed order; test never selects hyperparameters.",
+  "primary": "Extras-only test R2 relative to training residual mean; 95% complete-deal paired percentile bootstrap conditional on fitted ridge models.",
+  "secondary": "Hidden+extras vs hidden partial R2; raw+extras vs raw partial R2 and all five absolute R2, 95% and99% intervals. Negative values retained.",
+  "closure": "Conservative: extras-only R2 and hidden partialR2 BOTH95%upper<.01. Otherwise input utility remains conditional or uncertain; never launches2.3 automatically. This additional requirement is stricter than roadmap.",
+  "scope": "Cluster by independent complete single-round deal, not whole matches (none generated). Self-champion greedy distribution only; cannot generalize to other policies, tactical explanations or playing strength.",
+  "network": "Existing ROCm cuda:0,threads1,batch2048,inference_mode,12params requires_gradFalse. SHA before/after and zero gradients. No optimizer, exports or coefficient files. Preflight first256 train choice rows reproduce storedQ within1e-4; no backend fallback.",
+  "stop": "Exclusiveprobe.lock; actual run/campaignSTOP and fixed registered deadline checked before model/data/output and every chunk/bootstrap batch. Memory pause4/resume5GiB. Existing status refuses a repeated fit; no automatic restart or extension.",
+  "unapproved": "Tactical/privileged label prediction deliberately omitted because owner forbids such targets in losses; extras online, whole-match training, human/D1,Clint training and website promotion excluded."
+}

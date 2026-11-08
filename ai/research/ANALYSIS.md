@@ -45,3 +45,5 @@ Actual 0.6 validation passed: 40,000 native decisions with 1,676,914 candidate v
 冠军队友网格按[第55节](MODEL_STUDY.md#55-冠军队友对手网格预登记)比较同牌混合队与两种纯队的最终升级分，保留三项协方差；过牌／压队友计数仅作描述，不进入任何评分或验收。original与Clint均为隔离评测策略，非神经网络改动。
 
 [表示语料](evaluation/representation-corpus-20261108/protocol.design.json)按独立完整牌副记录原始567特征、53 extras和终局／特权标签；标签不进策略。频率按整副牌簇统计，不能把动作当独立或把语料存在说成残差探针／输入臂有效。
+
+表示语料已完成1,000,022决策／12,282独立完整单局：两槽皆非出牌39.81%，选择行41.11%，都不满足<5%稀少条件。逐文件／终局标签／种子审计通过，零网络更新。下一项只读终局G−Q岭回归与冻结隐藏层探针；战术和特权标签不作损失，不启动extras在线。详情见主报告第56.2／58节及evaluation/outcome-residual-probe-20261108/。

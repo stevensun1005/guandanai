@@ -59,3 +59,5 @@ The exploiter uses the ordinary champion with fresh Adam and empty replay. It do
 1.6及新单席条件诊断已完成，差异仍不明确。当前选择路线图1.2在Windows串行执行[冠军队友网格](evaluation/cooperation-grid-20261108/protocol.design.json)，不是Mac窗口或阶段2训练；旧冻结运行、八项所有者待决定及原总截止继续不变。
 
 网格192,000局未过交互条件，队友训练路线保持关闭。继续Windows串行路线图1.3的表示语料／编码频率诊断；这不授权Mac、整场训练、extras在线或真人数据训练。
+
+表示语料已完成1,000,022决策／12,282独立完整单局：两槽皆非出牌39.81%，选择行41.11%，都不满足<5%稀少条件。逐文件／终局标签／种子审计通过，零网络更新。下一项只读终局G−Q岭回归与冻结隐藏层探针；战术和特权标签不作损失，不启动extras在线。详情见主报告第56.2／58节及evaluation/outcome-residual-probe-20261108/。

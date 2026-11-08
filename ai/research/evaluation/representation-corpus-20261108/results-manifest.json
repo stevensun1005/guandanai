@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "passed": true,
+  "rows": 1000022,
+  "completeDeals": 12282,
+  "candidateValues": 30705863,
+  "choiceRows": 722044,
+  "blindCounts": [
+    601947,
+    116078,
+    161308,
+    59380,
+    61309
+  ],
+  "choiceBlindCounts": [
+    425199,
+    111531,
+    102849,
+    52397,
+    30068
+  ],
+  "allBinaryFileHashesMatched": true,
+  "rowWidthsAndDealSpansVerified": true,
+  "allChosenValuesEqualCandidateArgmax": true,
+  "allFinalSignedRewardsAndRanksVerified": true,
+  "seedPrefixMatchesFrozenPlan": true,
+  "unusedReservedSeeds": 7718,
+  "sourceFilesMatched": 152,
+  "teacherVerified": true,
+  "collectorPID": 33280,
+  "controllerLockAbsent": true,
+  "minimumAvailableGiBIncludingFinalHashSave": 12.54366683959961,
+  "files": {
+    "protocol.json": {
+      "sha256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0"
+    },
+    "summary.json": {
+      "sha256": "a69933ee87fa288aa42c4cdb8d78cc53777c477d9c6ae74ee1b913455504ab98"
+    },
+    "status.json": {
+      "sha256": "8f8f878264ffabadab37beb814bc70b13a6a070c14825c3973d83ab8aa8053b3"
+    }
+  },
+  "dealsSHA256": "876db5aac97816c69038d7a2960baf91d1e45cfcd5b57fbb5380fdb614b50def",
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "scope": "Corpus validation only. No matrix or candidate weights published; data remain ignored. Frequency is not residual utility or playing strength.",
+  "collectorAlive": false,
+  "auditedAtUTC": "2026-11-08T02:47:13.613013+00:00"
+}
