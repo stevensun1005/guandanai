@@ -14,14 +14,14 @@
 
 ## 文件
 
-| 文件            | 作用                                                     |
-| --------------- | -------------------------------------------------------- |
-| `run.mjs`       | 调度：冻结配置与源码 SHA、固定截止、启动学习器与采样进程 |
-| `actor.mjs`     | 采样：冠军打到尾盘，学生接手并记录样本与明牌特征         |
-| `learner.py`    | 学习器：Apple MPS，明牌保留率衰减，定时导出学生 ONNX     |
-| `dashboard.mjs` | 只读本机面板，默认 <http://127.0.0.1:8768/>              |
-| `evaluate.mjs`  | 留出评测：同副牌交换阵营，学生接管尾盘 vs 纯冠军         |
-| `solver.mjs`    | 明牌精确求解器（评测诊断用）                             |
+| 文件            | 作用                                                                                    |
+| --------------- | --------------------------------------------------------------------------------------- |
+| `run.mjs`       | 调度：冻结配置与源码 SHA、固定截止、启动学习器与采样进程                                |
+| `actor.mjs`     | 采样：冠军打到尾盘，学生接手并记录样本与明牌特征                                        |
+| `learner.py`    | 学习器：Apple MPS，明牌保留率衰减，定时导出学生 ONNX                                    |
+| `dashboard.mjs` | 只读本机面板，默认 <http://127.0.0.1:8768/>；顶部“现在在做什么”按真实进程与文件显示阶段 |
+| `evaluate.mjs`  | 留出评测：同副牌交换阵营，学生接管尾盘 vs 纯冠军                                        |
+| `solver.mjs`    | 明牌精确求解器（评测诊断用）                                                            |
 
 ## 运行
 
@@ -29,6 +29,8 @@
 node ai/danMCai/endgame/run.mjs --run=ai/danMCai/runs/<运行名> --python=ai/danMCai/environment/mac/bin/python
 node ai/danMCai/endgame/dashboard.mjs --run=ai/danMCai/runs/<运行名>
 ```
+
+面板顶部“现在在做什么”只根据真实状态判断当前阶段：采样＋训练、采样种子用完后仅等待固定截止、`post-run-evaluate.sh` 启动的独立评测（读取 `eval-final/run.json`、分片和评测进程），以及 `summary.json` 写出后的结果。评测分片只在结束时写出，中途没有更细的进度；面板不控制训练，也不把阶段或损失当成棋力。
 
 运行目录放在 iCloud 同步之外（例如 `~/guandan-runtime.noindex/<运行名>`，再在 `ai/danMCai/runs/` 建链接）：桌面若开启 iCloud 同步，样本分片会被上传和索引。学习器按 `keepShardRows`（默认 200 万行）删除已摄入的旧分片数据文件，保留 JSON 元数据。
 
