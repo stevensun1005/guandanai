@@ -1,0 +1,12 @@
+{
+  "id": "simulated-review-export-20261108",
+  "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\simulated-review-export-20261108",
+  "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\research-through-20261111\\experiments\\simulated-review-export-20261108\\protocol.json",
+  "protocolSHA256": "ee5728a3e6f44cb0dbd70d2fb87bc062c79ea0187db655aa26463d202fa9038a",
+  "window": {
+    "startUTC": "2026-11-08T05:18:27.460Z",
+    "deadlineUTC": "2026-11-08T05:33:27.460Z",
+    "requestedHours": 0.25,
+    "restartExtendsDeadline": false
+  }
+}
