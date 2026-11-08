@@ -1,0 +1,932 @@
+{
+  "schema": 1,
+  "phase": "complete",
+  "completedAtUTC": "2026-11-08T04:35:07.540514+00:00",
+  "calibrationSHA256": "764c78a3c0fcd5fb8da3d652096dec242f395792e3fbc216e7e805bcccc50bf3",
+  "tasks": {
+    "self": {
+      "newRoots": 1000,
+      "displayCases": 764,
+      "supportedCases": 763,
+      "coverageCount": 0.9986910994764397,
+      "coverageWeight": 0.9985800505342035,
+      "mseOrder": [
+        "rawGap",
+        "offlinePava",
+        "zero",
+        "frozenSelfStageMean"
+      ],
+      "weightedMSE": [
+        3.981209921537617,
+        3.9964611995628085,
+        4.020537975418011,
+        4.001533863849728
+      ],
+      "pairedMSEDifferences": {
+        "names": [
+          "rawMinusCalibratedMSE",
+          "zeroMinusCalibratedMSE",
+          "selfStageMeanMinusCalibratedMSE"
+        ],
+        "point": [
+          -0.01525127802519144,
+          0.024076775855202737,
+          0.005072664286919437
+        ],
+        "ci95": [
+          [
+            -0.11231787129561283,
+            0.0836779407943168
+          ],
+          [
+            -0.14402968423490073,
+            0.19290895319591944
+          ],
+          [
+            -0.13739870180259994,
+            0.14620987359958978
+          ]
+        ],
+        "ci99": [
+          [
+            -0.14553140480998017,
+            0.11586263677156723
+          ],
+          [
+            -0.1940785731931711,
+            0.2420236906344858
+          ],
+          [
+            -0.1836773321501765,
+            0.1843667436664357
+          ]
+        ],
+        "simultaneous95PrimaryTwoGroups": [
+          [
+            -0.12703844756477572,
+            0.0969086155246579
+          ],
+          [
+            -0.16521256702168688,
+            0.21491092826618804
+          ],
+          [
+            -0.15947388498468296,
+            0.16330940594152488
+          ]
+        ]
+      }
+    },
+    "clint": {
+      "newRoots": 1000,
+      "displayCases": 764,
+      "supportedCases": 763,
+      "coverageCount": 0.9986910994764397,
+      "coverageWeight": 0.9984540989300482,
+      "mseOrder": [
+        "rawGap",
+        "offlinePava",
+        "zero",
+        "frozenSelfStageMean"
+      ],
+      "weightedMSE": [
+        4.135131791173717,
+        4.19182781787892,
+        4.086917722814296,
+        4.063798711423292
+      ],
+      "pairedMSEDifferences": {
+        "names": [
+          "rawMinusCalibratedMSE",
+          "zeroMinusCalibratedMSE",
+          "selfStageMeanMinusCalibratedMSE"
+        ],
+        "point": [
+          -0.05669602670520302,
+          -0.10491009506462401,
+          -0.12802910645562804
+        ],
+        "ci95": [
+          [
+            -0.14330367037851893,
+            0.025246621802167593
+          ],
+          [
+            -0.24329786645104345,
+            0.028370468731670984
+          ],
+          [
+            -0.25223829127540814,
+            -0.009775940406297963
+          ]
+        ],
+        "ci99": [
+          [
+            -0.16696560320491985,
+            0.05224019719843209
+          ],
+          [
+            -0.2813463603130002,
+            0.06868348470801126
+          ],
+          [
+            -0.28849308802952595,
+            0.028317814024706636
+          ]
+        ],
+        "simultaneous95PrimaryTwoGroups": [
+          [
+            -0.15525291944501884,
+            0.038331972285757826
+          ],
+          [
+            -0.2581875193137021,
+            0.04505132089006292
+          ],
+          [
+            -0.27003194432870453,
+            0.007737775476017971
+          ]
+        ]
+      }
+    },
+    "p0": {
+      "newRoots": 1000,
+      "displayCases": 760,
+      "supportedCases": 757,
+      "coverageCount": 0.9960526315789474,
+      "coverageWeight": 0.9948643120856158,
+      "mseOrder": [
+        "rawGap",
+        "offlinePava",
+        "zero",
+        "frozenSelfStageMean"
+      ],
+      "weightedMSE": [
+        3.8345043705142223,
+        3.854640997868886,
+        3.9596735873006716,
+        3.880400874016698
+      ],
+      "pairedMSEDifferences": {
+        "names": [
+          "rawMinusCalibratedMSE",
+          "zeroMinusCalibratedMSE",
+          "selfStageMeanMinusCalibratedMSE"
+        ],
+        "point": [
+          -0.020136627354663705,
+          0.10503258943178562,
+          0.025759876147811944
+        ],
+        "ci95": [
+          [
+            -0.1010041753535686,
+            0.055635294201225656
+          ],
+          [
+            -0.0334357572667066,
+            0.24782429756671678
+          ],
+          [
+            -0.09145816672090931,
+            0.1480286767792992
+          ]
+        ],
+        "ci99": [
+          [
+            -0.12435419655812509,
+            0.07933314149449755
+          ],
+          [
+            -0.07989460632775915,
+            0.29084286507934803
+          ],
+          [
+            -0.12665243766841303,
+            0.1857884752015537
+          ]
+        ],
+        "simultaneous95PrimaryTwoGroups": [
+          [
+            -0.1122160062926884,
+            0.06688960823510626
+          ],
+          [
+            -0.05343807249820823,
+            0.26895029903699297
+          ],
+          [
+            -0.10545679029736924,
+            0.1670069202147644
+          ]
+        ]
+      }
+    },
+    "mixed": {
+      "newRoots": 1000,
+      "displayCases": 758,
+      "supportedCases": 757,
+      "coverageCount": 0.9986807387862797,
+      "coverageWeight": 0.9985581130499778,
+      "mseOrder": [
+        "rawGap",
+        "offlinePava",
+        "zero",
+        "frozenSelfStageMean"
+      ],
+      "weightedMSE": [
+        4.699390421518626,
+        4.744565463858669,
+        4.801615148184467,
+        4.776023489738044
+      ],
+      "pairedMSEDifferences": {
+        "names": [
+          "rawMinusCalibratedMSE",
+          "zeroMinusCalibratedMSE",
+          "selfStageMeanMinusCalibratedMSE"
+        ],
+        "point": [
+          -0.04517504234004299,
+          0.057049684325797934,
+          0.03145802587937485
+        ],
+        "ci95": [
+          [
+            -0.1333955136303568,
+            0.04461894303715881
+          ],
+          [
+            -0.09002645272827829,
+            0.20427297699308686
+          ],
+          [
+            -0.09440553485941061,
+            0.15408297827672493
+          ]
+        ],
+        "ci99": [
+          [
+            -0.15749004231805822,
+            0.07355910605350635
+          ],
+          [
+            -0.13531477923332197,
+            0.24897644505179087
+          ],
+          [
+            -0.1336097238972268,
+            0.1940863543655929
+          ]
+        ],
+        "simultaneous95PrimaryTwoGroups": [
+          [
+            -0.14570519926863768,
+            0.05711809600976731
+          ],
+          [
+            -0.10842914354694323,
+            0.2260828457568353
+          ],
+          [
+            -0.11504061620312152,
+            0.17222259758824007
+          ]
+        ]
+      }
+    }
+  },
+  "offlinePrimaryRawMSECondition": false,
+  "rawDeviationDiagnostics": {
+    "schema": 1,
+    "protocolSHA256": "e0a42f8f64bf9c7185d8403377cfe07fce3d4d047ab84d34c8c06d4aae634d0d",
+    "completedRoots": 4000,
+    "eligiblePairs": 4000,
+    "completedRounds": 8000,
+    "tasks": {
+      "self": {
+        "roots": 1000,
+        "eligiblePairs": 1000,
+        "ineligibleNoReplacement": 0,
+        "baselineWLD": [
+          479,
+          521,
+          0
+        ],
+        "deviationWLD": [
+          440,
+          560,
+          0
+        ],
+        "displayLayerWeightedSlope": {
+          "n": 764,
+          "slope": 0.5980940338722953,
+          "ci95": [
+            0.21974873200162656,
+            0.9713294666812026
+          ],
+          "ci99": [
+            0.1093153567852909,
+            1.0916208566383605
+          ],
+          "weightedMeanPredictedGap": 0.3627958977914881,
+          "weightedMeanRealizedDelta": 0.1672147503691807,
+          "effectiveSampleSize": 722.2332749319012,
+          "interceptSensitivity": {
+            "slope": 0.892129873309425,
+            "intercept": -0.15644630796471864
+          },
+          "qUnitApproxResearchCondition": false,
+          "zeroWithinInterval": false,
+          "unweightedTheilSenDescriptive": 0.0
+        },
+        "displayLayerByOwnHandStage": {
+          "27..20": {
+            "n": 345,
+            "slope": 0.6060054494845076,
+            "ci95": [
+              0.018649046152527646,
+              1.2082884949556245
+            ],
+            "ci99": [
+              -0.19468348024363658,
+              1.412848335519121
+            ],
+            "weightedMeanPredictedGap": 0.36415601569886397,
+            "weightedMeanRealizedDelta": 0.14456364412779965,
+            "effectiveSampleSize": 329.38474090370175,
+            "interceptSensitivity": {
+              "slope": 1.085666426372207,
+              "intercept": -0.2507883160779273
+            }
+          },
+          "19..10": {
+            "n": 263,
+            "slope": 0.7528767466744052,
+            "ci95": [
+              0.16557572879286958,
+              1.366486642608896
+            ],
+            "ci99": [
+              -0.014988612359153245,
+              1.5357640179122716
+            ],
+            "weightedMeanPredictedGap": 0.34760894076402277,
+            "weightedMeanRealizedDelta": 0.22987954049428513,
+            "effectiveSampleSize": 245.63881767492975,
+            "interceptSensitivity": {
+              "slope": 0.9336494369220901,
+              "intercept": -0.09466535131912893
+            }
+          },
+          "9..1": {
+            "n": 156,
+            "slope": 0.3579334357656417,
+            "ci95": [
+              -0.42070376163469925,
+              1.1594062291515999
+            ],
+            "ci99": [
+              -0.6241889820912723,
+              1.4414073393015556
+            ],
+            "weightedMeanPredictedGap": 0.38613442692015554,
+            "weightedMeanRealizedDelta": 0.10929488795857846,
+            "effectiveSampleSize": 147.4393435102353,
+            "interceptSensitivity": {
+              "slope": 0.5197837429727868,
+              "intercept": -0.09141150975663202
+            }
+          }
+        },
+        "predictedGapBins": {
+          "0..0.05": {
+            "n": 160,
+            "weightedPredictedGap": 0.022042657693138977,
+            "weightedRealizedDelta": -0.17050080669641798,
+            "clusterStandardError": 0.125137829776482,
+            "effectiveSampleSize": 123.93292923994083
+          },
+          "0.05..0.1": {
+            "n": 94,
+            "weightedPredictedGap": 0.0738272890182758,
+            "weightedRealizedDelta": -0.18255584088710086,
+            "clusterStandardError": 0.17959710115526648,
+            "effectiveSampleSize": 75.44241198252031
+          },
+          "0.1..0.2": {
+            "n": 167,
+            "weightedPredictedGap": 0.14709018810456664,
+            "weightedRealizedDelta": 0.09084174983224542,
+            "clusterStandardError": 0.14345219870473067,
+            "effectiveSampleSize": 161.08727092983355
+          },
+          "0.2..0.4": {
+            "n": 241,
+            "weightedPredictedGap": 0.29229957597986506,
+            "weightedRealizedDelta": 0.05498045850266908,
+            "clusterStandardError": 0.12703302212531675,
+            "effectiveSampleSize": 232.71862976844412
+          },
+          "0.4..0.7": {
+            "n": 164,
+            "weightedPredictedGap": 0.5261241765663004,
+            "weightedRealizedDelta": 0.295378081495691,
+            "clusterStandardError": 0.1668279178837746,
+            "effectiveSampleSize": 158.678118713235
+          },
+          "0.7..1": {
+            "n": 98,
+            "weightedPredictedGap": 0.834578371973367,
+            "weightedRealizedDelta": 0.6293092097498756,
+            "clusterStandardError": 0.2505906813812509,
+            "effectiveSampleSize": 96.17950719602996
+          },
+          "1..2": {
+            "n": 66,
+            "weightedPredictedGap": 1.3671759150690763,
+            "weightedRealizedDelta": 1.3282334881331581,
+            "clusterStandardError": 0.2656635338851756,
+            "effectiveSampleSize": 64.91902761734767
+          },
+          "2..above": {
+            "n": 10,
+            "weightedPredictedGap": 2.7805113672411137,
+            "weightedRealizedDelta": 2.066815393601106,
+            "clusterStandardError": 0.5033528026417943,
+            "effectiveSampleSize": 9.835990134016868
+          }
+        }
+      },
+      "clint": {
+        "roots": 1000,
+        "eligiblePairs": 1000,
+        "ineligibleNoReplacement": 0,
+        "baselineWLD": [
+          571,
+          429,
+          0
+        ],
+        "deviationWLD": [
+          534,
+          466,
+          0
+        ],
+        "displayLayerWeightedSlope": {
+          "n": 764,
+          "slope": 0.4033731838658377,
+          "ci95": [
+            0.0381492813099046,
+            0.7681754947093905
+          ],
+          "ci99": [
+            -0.06763281115892827,
+            0.8770544297276196
+          ],
+          "weightedMeanPredictedGap": 0.35976286342238467,
+          "weightedMeanRealizedDelta": 0.14690261558553902,
+          "effectiveSampleSize": 722.5389353540047,
+          "interceptSensitivity": {
+            "slope": 0.3933344178048212,
+            "intercept": 0.005395499153499933
+          },
+          "qUnitApproxResearchCondition": false,
+          "zeroWithinInterval": false,
+          "unweightedTheilSenDescriptive": 0.0
+        },
+        "displayLayerByOwnHandStage": {
+          "27..20": {
+            "n": 338,
+            "slope": 0.3167286667218571,
+            "ci95": [
+              -0.3791124898319574,
+              1.0193245037666843
+            ],
+            "ci99": [
+              -0.599847689704159,
+              1.2199967027343397
+            ],
+            "weightedMeanPredictedGap": 0.3439471283765471,
+            "weightedMeanRealizedDelta": 0.10358244811499913,
+            "effectiveSampleSize": 317.3526890225422,
+            "interceptSensitivity": {
+              "slope": 0.3467569213552713,
+              "intercept": -0.015683599229838627
+            }
+          },
+          "19..10": {
+            "n": 279,
+            "slope": 0.26219233002792314,
+            "ci95": [
+              -0.27703570634965513,
+              0.8098960378292929
+            ],
+            "ci99": [
+              -0.450900559636592,
+              1.0125786736058957
+            ],
+            "weightedMeanPredictedGap": 0.3723371330040716,
+            "weightedMeanRealizedDelta": 0.08340287025136667,
+            "effectiveSampleSize": 264.90141986291746,
+            "interceptSensitivity": {
+              "slope": 0.3387860346969647,
+              "intercept": -0.042739750609519095
+            }
+          },
+          "9..1": {
+            "n": 147,
+            "slope": 0.8919373744995217,
+            "ci95": [
+              0.48268377721000993,
+              1.3311481918256105
+            ],
+            "ci99": [
+              0.35240863555783913,
+              1.493697648281536
+            ],
+            "weightedMeanPredictedGap": 0.37263910838461345,
+            "weightedMeanRealizedDelta": 0.37900075474736483,
+            "effectiveSampleSize": 140.76923226752965,
+            "interceptSensitivity": {
+              "slope": 0.5956068683307106,
+              "intercept": 0.15705434238485697
+            }
+          }
+        },
+        "predictedGapBins": {
+          "0..0.05": {
+            "n": 157,
+            "weightedPredictedGap": 0.02319917334450192,
+            "weightedRealizedDelta": 0.051455138451989714,
+            "clusterStandardError": 0.15541339475499402,
+            "effectiveSampleSize": 119.63137050490145
+          },
+          "0.05..0.1": {
+            "n": 110,
+            "weightedPredictedGap": 0.07584457646934714,
+            "weightedRealizedDelta": -0.09429454930727,
+            "clusterStandardError": 0.2179239954555745,
+            "effectiveSampleSize": 88.25172240480072
+          },
+          "0.1..0.2": {
+            "n": 162,
+            "weightedPredictedGap": 0.14654605736919044,
+            "weightedRealizedDelta": -0.052663823317491906,
+            "clusterStandardError": 0.1451624009236084,
+            "effectiveSampleSize": 156.2565724617501
+          },
+          "0.2..0.4": {
+            "n": 232,
+            "weightedPredictedGap": 0.29079076342977456,
+            "weightedRealizedDelta": 0.3096962526955343,
+            "clusterStandardError": 0.13194836405238472,
+            "effectiveSampleSize": 224.58268430226704
+          },
+          "0.4..0.7": {
+            "n": 162,
+            "weightedPredictedGap": 0.5289151479248229,
+            "weightedRealizedDelta": 0.16532132840431465,
+            "clusterStandardError": 0.1618590242404802,
+            "effectiveSampleSize": 158.56584167510707
+          },
+          "0.7..1": {
+            "n": 98,
+            "weightedPredictedGap": 0.8418547561538964,
+            "weightedRealizedDelta": 0.3005047285054377,
+            "clusterStandardError": 0.24001866709045047,
+            "effectiveSampleSize": 96.74862166484667
+          },
+          "1..2": {
+            "n": 69,
+            "weightedPredictedGap": 1.279806317365808,
+            "weightedRealizedDelta": 0.6154136642076838,
+            "clusterStandardError": 0.23709773409960896,
+            "effectiveSampleSize": 67.6751542284288
+          },
+          "2..above": {
+            "n": 10,
+            "weightedPredictedGap": 2.3179413188297695,
+            "weightedRealizedDelta": 0.47023235639136174,
+            "clusterStandardError": 0.5407356414656668,
+            "effectiveSampleSize": 9.938046875734468
+          }
+        }
+      },
+      "p0": {
+        "roots": 1000,
+        "eligiblePairs": 1000,
+        "ineligibleNoReplacement": 0,
+        "baselineWLD": [
+          530,
+          470,
+          0
+        ],
+        "deviationWLD": [
+          489,
+          511,
+          0
+        ],
+        "displayLayerWeightedSlope": {
+          "n": 760,
+          "slope": 0.8470514456355872,
+          "ci95": [
+            0.4741862705243302,
+            1.2187837525743732
+          ],
+          "ci99": [
+            0.36916740044439983,
+            1.3564323307885067
+          ],
+          "weightedMeanPredictedGap": 0.3457168706372675,
+          "weightedMeanRealizedDelta": 0.293835374500087,
+          "effectiveSampleSize": 714.9997257174778,
+          "interceptSensitivity": {
+            "slope": 0.8410632430935527,
+            "intercept": 0.003065622089752529
+          },
+          "qUnitApproxResearchCondition": false,
+          "zeroWithinInterval": false,
+          "unweightedTheilSenDescriptive": 0.0
+        },
+        "displayLayerByOwnHandStage": {
+          "27..20": {
+            "n": 308,
+            "slope": 0.7789026180619312,
+            "ci95": [
+              0.12529156719669624,
+              1.445338330823624
+            ],
+            "ci99": [
+              -0.057204156592915056,
+              1.6568185472878207
+            ],
+            "weightedMeanPredictedGap": 0.35370353228581713,
+            "weightedMeanRealizedDelta": 0.2511616039644726,
+            "effectiveSampleSize": 292.0540077477802,
+            "interceptSensitivity": {
+              "slope": 0.9356679312677655,
+              "intercept": -0.0797874483714992
+            }
+          },
+          "19..10": {
+            "n": 325,
+            "slope": 0.8180731420926814,
+            "ci95": [
+              0.23757974626457273,
+              1.397214860183754
+            ],
+            "ci99": [
+              0.06059963482405119,
+              1.6003453452943572
+            ],
+            "weightedMeanPredictedGap": 0.3372035105181466,
+            "weightedMeanRealizedDelta": 0.30130287897677294,
+            "effectiveSampleSize": 303.42113926911776,
+            "interceptSensitivity": {
+              "slope": 0.6662715520380244,
+              "intercept": 0.07663377267117713
+            }
+          },
+          "9..1": {
+            "n": 127,
+            "slope": 1.0802516374511353,
+            "ci95": [
+              0.443948245519079,
+              1.796042731819657
+            ],
+            "ci99": [
+              0.21789022807884592,
+              2.0560392036760997
+            ],
+            "weightedMeanPredictedGap": 0.3487242539024985,
+            "weightedMeanRealizedDelta": 0.37986992649819873,
+            "effectiveSampleSize": 119.91335484915149,
+            "interceptSensitivity": {
+              "slope": 1.0635512580995172,
+              "intercept": 0.008983807530380972
+            }
+          }
+        },
+        "predictedGapBins": {
+          "0..0.05": {
+            "n": 147,
+            "weightedPredictedGap": 0.02109623640519331,
+            "weightedRealizedDelta": -0.06710263475266569,
+            "clusterStandardError": 0.12029932345466625,
+            "effectiveSampleSize": 114.28861238317191
+          },
+          "0.05..0.1": {
+            "n": 88,
+            "weightedPredictedGap": 0.07413020663222136,
+            "weightedRealizedDelta": -0.3030462180190388,
+            "clusterStandardError": 0.1516559609538306,
+            "effectiveSampleSize": 67.57173952296036
+          },
+          "0.1..0.2": {
+            "n": 182,
+            "weightedPredictedGap": 0.14633694244354029,
+            "weightedRealizedDelta": 0.16179590070024222,
+            "clusterStandardError": 0.13710299885539926,
+            "effectiveSampleSize": 174.7903109050037
+          },
+          "0.2..0.4": {
+            "n": 251,
+            "weightedPredictedGap": 0.283078088686364,
+            "weightedRealizedDelta": 0.331316556302221,
+            "clusterStandardError": 0.13017231797410284,
+            "effectiveSampleSize": 242.46714456712996
+          },
+          "0.4..0.7": {
+            "n": 167,
+            "weightedPredictedGap": 0.547308857419394,
+            "weightedRealizedDelta": 0.5204220591265277,
+            "clusterStandardError": 0.16850996197561235,
+            "effectiveSampleSize": 162.7854321671866
+          },
+          "0.7..1": {
+            "n": 72,
+            "weightedPredictedGap": 0.8510258300382215,
+            "weightedRealizedDelta": 0.6211050091115513,
+            "clusterStandardError": 0.26375273136667643,
+            "effectiveSampleSize": 70.49743729821496
+          },
+          "1..2": {
+            "n": 82,
+            "weightedPredictedGap": 1.2976432598102843,
+            "weightedRealizedDelta": 1.384086768899058,
+            "clusterStandardError": 0.24067273525089763,
+            "effectiveSampleSize": 80.9467877390216
+          },
+          "2..above": {
+            "n": 11,
+            "weightedPredictedGap": 2.361135668479784,
+            "weightedRealizedDelta": 1.405045912546338,
+            "clusterStandardError": 0.7088502104533853,
+            "effectiveSampleSize": 10.70627348556254
+          }
+        }
+      },
+      "mixed": {
+        "roots": 1000,
+        "eligiblePairs": 1000,
+        "ineligibleNoReplacement": 0,
+        "baselineWLD": [
+          532,
+          468,
+          0
+        ],
+        "deviationWLD": [
+          504,
+          496,
+          0
+        ],
+        "displayLayerWeightedSlope": {
+          "n": 758,
+          "slope": 0.764457672706613,
+          "ci95": [
+            0.35489797302347437,
+            1.1569210368750769
+          ],
+          "ci99": [
+            0.23073772119823227,
+            1.2959163105544032
+          ],
+          "weightedMeanPredictedGap": 0.36051499841567775,
+          "weightedMeanRealizedDelta": 0.16969667983228412,
+          "effectiveSampleSize": 718.6270577269418,
+          "interceptSensitivity": {
+            "slope": 1.3967299862163922,
+            "intercept": -0.33384542893564817
+          },
+          "qUnitApproxResearchCondition": false,
+          "zeroWithinInterval": false,
+          "unweightedTheilSenDescriptive": 0.0
+        },
+        "displayLayerByOwnHandStage": {
+          "27..20": {
+            "n": 350,
+            "slope": 0.728949980706689,
+            "ci95": [
+              0.023308387618731042,
+              1.4356293324833125
+            ],
+            "ci99": [
+              -0.18125589124922195,
+              1.6259152444641718
+            ],
+            "weightedMeanPredictedGap": 0.32720020361310026,
+            "weightedMeanRealizedDelta": 0.17144817940234608,
+            "effectiveSampleSize": 329.3822901228205,
+            "interceptSensitivity": {
+              "slope": 1.1533895825396854,
+              "intercept": -0.2059411268498677
+            }
+          },
+          "19..10": {
+            "n": 274,
+            "slope": 0.692443066124008,
+            "ci95": [
+              0.006885298986100416,
+              1.3617347711615133
+            ],
+            "ci99": [
+              -0.1914892598861452,
+              1.5577388250348168
+            ],
+            "weightedMeanPredictedGap": 0.37724672485464955,
+            "weightedMeanRealizedDelta": 0.112225941721345,
+            "effectiveSampleSize": 259.8096376385732,
+            "interceptSensitivity": {
+              "slope": 1.511872885239424,
+              "intercept": -0.4581231526317772
+            }
+          },
+          "9..1": {
+            "n": 134,
+            "slope": 0.9612161218396493,
+            "ci95": [
+              0.39081305979933184,
+              1.573239151993738
+            ],
+            "ci99": [
+              0.22611430618283251,
+              1.7473326925994508
+            ],
+            "weightedMeanPredictedGap": 0.4129385601211128,
+            "weightedMeanRealizedDelta": 0.28156344083291474,
+            "effectiveSampleSize": 129.46814180801962,
+            "interceptSensitivity": {
+              "slope": 1.754324540003118,
+              "intercept": -0.44286480870110634
+            }
+          }
+        },
+        "predictedGapBins": {
+          "0..0.05": {
+            "n": 164,
+            "weightedPredictedGap": 0.023547246852737357,
+            "weightedRealizedDelta": -0.1361374980266026,
+            "clusterStandardError": 0.1637482471115853,
+            "effectiveSampleSize": 129.52327608332513
+          },
+          "0.05..0.1": {
+            "n": 107,
+            "weightedPredictedGap": 0.072124388204666,
+            "weightedRealizedDelta": -0.20018891374832737,
+            "clusterStandardError": 0.23132865035428132,
+            "effectiveSampleSize": 85.33575552954936
+          },
+          "0.1..0.2": {
+            "n": 158,
+            "weightedPredictedGap": 0.14983434857683778,
+            "weightedRealizedDelta": -0.138705038634953,
+            "clusterStandardError": 0.1649216167103082,
+            "effectiveSampleSize": 153.50597247768758
+          },
+          "0.2..0.4": {
+            "n": 217,
+            "weightedPredictedGap": 0.2863763601266765,
+            "weightedRealizedDelta": 0.026155838405983563,
+            "clusterStandardError": 0.14497177068842554,
+            "effectiveSampleSize": 210.9972282481798
+          },
+          "0.4..0.7": {
+            "n": 185,
+            "weightedPredictedGap": 0.5331381274197567,
+            "weightedRealizedDelta": 0.5362048776569787,
+            "clusterStandardError": 0.16871873812802823,
+            "effectiveSampleSize": 180.5504179334137
+          },
+          "0.7..1": {
+            "n": 91,
+            "weightedPredictedGap": 0.8248320171220231,
+            "weightedRealizedDelta": 0.6514087179841432,
+            "clusterStandardError": 0.2655592814726341,
+            "effectiveSampleSize": 89.68848757947556
+          },
+          "1..2": {
+            "n": 67,
+            "weightedPredictedGap": 1.2888313388109742,
+            "weightedRealizedDelta": 0.9856019950459962,
+            "clusterStandardError": 0.26429939649193973,
+            "effectiveSampleSize": 65.81065822782404
+          },
+          "2..above": {
+            "n": 11,
+            "weightedPredictedGap": 2.533355888663481,
+            "weightedRealizedDelta": 1.4997181826791581,
+            "clusterStandardError": 0.5890164650530253,
+            "effectiveSampleSize": 10.937775172940704
+          }
+        }
+      }
+    },
+    "optimizerUpdates": 0,
+    "strengthGames": 0,
+    "scope": "Final single-round baseline-minus-one-forced-action delta under fixed raw continuation; importance weights target uniform focal decision/rank pairs within each root. Opponents separate. No neural training, calibrated UI, model strength rating, match training or promotion. Theil\u2013Sen is unweighted descriptive on oversampled cases; bootstrap is conditional on this frozen teacher."
+  },
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "scope": "Fresh-root numerical forecast validation only; common supported display layer, no calibrated UI, policy update, probability, strength acceptance or promotion. Clint/mixed/P0 were evaluation-only, never map fitting."
+}

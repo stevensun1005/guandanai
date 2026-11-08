@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "passed": true,
+  "observedAtUTC": "2026-11-08T05:08:19.764635+00:00",
+  "completedRoots": 4000,
+  "eligiblePairs": 4000,
+  "completedRounds": 8000,
+  "sourceSHA": "600cf4d1d5828049621d3ba45dda031ad143f8e4",
+  "frozenExecutionFilesMatched": 156,
+  "modelsMatched": 2,
+  "protocolSHA256": "e0a42f8f64bf9c7185d8403377cfe07fce3d4d047ab84d34c8c06d4aae634d0d",
+  "mapSHA256": "764c78a3c0fcd5fb8da3d652096dec242f395792e3fbc216e7e805bcccc50bf3",
+  "allFiveProcessesExited": [
+    45028,
+    6628,
+    57276,
+    1116,
+    48080
+  ],
+  "locksAndPendingAbsent": true,
+  "allRootAllocationFinalRanksDeltasSamplingWeightsChecked": true,
+  "exactlyOneInterventionAndCommonPrefix": "enforced by frozen worker for all4000 pairs; no new replay inference during audit",
+  "fullSummaryAndBootstrapReproducedExactly": true,
+  "minimumAvailableGiB": 12.318916320800781,
+  "completedAtUTC": "2026-11-08T04:35:07.559Z",
+  "optimizerUpdates": 0,
+  "workerFiles": {
+    "worker-0.jsonl": {
+      "bytes": 961485,
+      "sha256": "21970fc9b059a00b097e6915e57bd86346be730a9a41b576a12dd7d3e4acaf28"
+    },
+    "worker-1.jsonl": {
+      "bytes": 961487,
+      "sha256": "4ecb041dcb2dd7c10b7349f42d3083e3913d6b5d710ad1c456191e6f8c520d57"
+    },
+    "worker-2.jsonl": {
+      "bytes": 961436,
+      "sha256": "19d16f1ad540be5c54833b0e72e3f783148b64cbf92e7af27f1531d36ff158da"
+    },
+    "worker-3.jsonl": {
+      "bytes": 961442,
+      "sha256": "3b09cdae203fda97c6f408798e7af6b5667d14d3cfb5db21238ca2ebe0a9b3d9"
+    }
+  },
+  "scope": "Independent numerical forecast validation, primary condition false. No refit, expansion, calibrated UI, strength claim or promotion."
+}

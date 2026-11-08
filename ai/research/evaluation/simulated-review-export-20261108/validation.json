@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "nodePassed": 278,
+  "researchPythonPassed": 40,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "formatCheck": "pass",
+  "build": "02b78397b0",
+  "focusedChecks": [
+    "archived stable tied ranks and final points",
+    "own-only review frames",
+    "D1/other-model/missing-terminal/corrupt-Q rejection",
+    "STOP at replay turn and before data/output creation"
+  ],
+  "functionalOnly": true,
+  "registeredExportStarted": false,
+  "networkForwards": 0,
+  "optimizerUpdates": 0
+}
