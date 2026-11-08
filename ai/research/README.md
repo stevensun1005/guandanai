@@ -112,3 +112,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [Clint本轮界面与恢复证据](evaluation/clint-sync-20261108-0011.json)：图解规则、房主本机恢复、续场入口及显示时序；只验证功能，普通规则指纹／网页冠军不变，不是新的棋力实验。
 
 [单席诊断结果](evaluation/exploiter-teammate-diagnostic-20261108/results.json)：20,000局全部完成，固定017/P0/012队友的焦点差异仍不明确；下一项[冠军队友×对手网格](evaluation/cooperation-grid-20261108/protocol.design.json)另用12,000新牌副／每格4,000对，预登记交互与多重区间，不重跑剥削留出。
+
+[网格真实启动](evaluation/cooperation-grid-20261108/startup.json)：冻结2f82e19／155源码指纹、四工作器、固定05:09:22Z截止；首批真实计数单独封存，不冒充完整结果。

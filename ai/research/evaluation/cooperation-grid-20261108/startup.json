@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T01:11:47.438Z",
+  "title": "danMCai · 冠军队友×对手交互网格",
+  "currentTask": "cooperation-grid-20261108",
+  "phase": "evaluation",
+  "controllerPID": 42276,
+  "completedRounds": 6200,
+  "plannedRounds": 192000,
+  "optimizerUpdates": 0,
+  "workers": [
+    {
+      "shard": 0,
+      "pid": 48688,
+      "phase": "running",
+      "failure": null,
+      "currentTask": "mixed-previous-vs-champion",
+      "completedPairs": 780,
+      "protocolSHA256": "d30ebe3d506904f8ded201247f4b1777ee44b482f25da0fdd3576b35954f7aab",
+      "updatedAtUTC": "2026-11-08T01:11:46.550Z",
+      "rssBytes": 315994112
+    },
+    {
+      "shard": 1,
+      "pid": 7120,
+      "phase": "running",
+      "failure": null,
+      "currentTask": "mixed-previous-vs-champion",
+      "completedPairs": 760,
+      "protocolSHA256": "d30ebe3d506904f8ded201247f4b1777ee44b482f25da0fdd3576b35954f7aab",
+      "updatedAtUTC": "2026-11-08T01:11:45.025Z",
+      "rssBytes": 319651840
+    },
+    {
+      "shard": 2,
+      "pid": 53200,
+      "phase": "running",
+      "failure": null,
+      "currentTask": "mixed-previous-vs-champion",
+      "completedPairs": 780,
+      "protocolSHA256": "d30ebe3d506904f8ded201247f4b1777ee44b482f25da0fdd3576b35954f7aab",
+      "updatedAtUTC": "2026-11-08T01:11:45.900Z",
+      "rssBytes": 315547648
+    },
+    {
+      "shard": 3,
+      "pid": 41656,
+      "phase": "running",
+      "failure": null,
+      "currentTask": "mixed-previous-vs-champion",
+      "completedPairs": 780,
+      "protocolSHA256": "d30ebe3d506904f8ded201247f4b1777ee44b482f25da0fdd3576b35954f7aab",
+      "updatedAtUTC": "2026-11-08T01:11:45.423Z",
+      "rssBytes": 321597440
+    }
+  ],
+  "resources": {
+    "availableGiB": 12.60219955444336,
+    "totalGiB": 31.218204498291016,
+    "machineCPUPercent": 29.00326627415899
+  },
+  "guardianHealthy": true,
+  "window": {
+    "startUTC": "2026-11-08T01:09:22.124Z",
+    "deadlineUTC": "2026-11-08T05:09:22.124Z",
+    "requestedHours": 4,
+    "restartExtendsDeadline": false
+  },
+  "protocolDeadlineUTC": "2026-11-08T05:09:22.046791+00:00",
+  "sourceFilesMatched": 155,
+  "webChampion": "017/v000855042",
+  "selection": [
+    "017",
+    "012"
+  ]
+}

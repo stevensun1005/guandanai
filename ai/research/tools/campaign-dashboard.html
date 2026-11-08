@@ -308,8 +308,10 @@
         for (const t of [...s.tasks].reverse()) {
           const tr = el('tr');
           for (const text of [
-            (p.currentTask === t.id && p.displayName) || t.state.displayName || t.id,
-            label[t.state.phase] ||
+            (p.currentTask === t.id && p.displayName) || t.id,
+            (t.state.stoppedAt && t.state.phase !== 'complete' && !t.state.failure
+              ? label.stopped
+              : label[t.state.phase]) ||
               t.state.phase ||
               (t.state.stoppedAt
                 ? label.stopped

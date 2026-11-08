@@ -27,6 +27,13 @@ with sync_playwright() as p:
         if current['learner'] and current['processAlive'] and not current['state'].get('stoppedAt'):
             assert '训练中' in page.locator('#history tr').first.text_content()
             assert '本次新增' in page.locator('#count').text_content()
+        for task in state['tasks']:
+            if task['state'].get('stoppedAt') and task['state'].get('phase') == 'training':
+                row=page.locator('#history tr').filter(has_text=task['id'])
+                assert row.locator('td').nth(1).inner_text() == '已停止'
+        current_id=state['progress'].get('currentTask')
+        if current_id==state['tasks'][-1]['id']:
+            assert page.locator('#current').inner_text()==state['progress']['displayName']
     for width, height in [(1440, 1000), (390, 844)]:
         page.set_viewport_size({'width': width, 'height': height})
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth')
