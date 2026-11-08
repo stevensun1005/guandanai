@@ -301,7 +301,7 @@
     "releaseUpload": false
   },
   "validation": {
-    "nodeTests": 251,
+    "nodeTests": 252,
     "researchPython": {
       "passed": 24
     },
@@ -310,7 +310,7 @@
       "skipped": 1
     },
     "format": "passed",
-    "build": "becde16159",
+    "build": "61f17dfedd",
     "rulesFourViewports": [
       {
         "viewport": [
@@ -897,7 +897,8 @@
         }
       ],
       "failures": [],
-      "pageErrors": []
+      "pageErrors": [],
+      "coverageNote": "1145 control states tested on becde16159. Render files unchanged in final 61f17dfedd; host exposure persistence and coach separately tested on final build."
     },
     "midDeal": {
       "midDealOriginalRotatingAllocationPreserved": true,
@@ -945,7 +946,209 @@
       "uploads": 0,
       "pageErrors": []
     },
-    "allRequiredLocalChecksPassed": true
+    "allRequiredLocalChecksPassed": true,
+    "hostRecovery": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "coachSolo": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "scoring": {
+        "modelId": "017",
+        "candidates": 1295,
+        "minValue": -1.567628026008606,
+        "maxValue": 0.4160967767238617,
+        "topFiveVisible": true,
+        "topFiveClickSelectsOnly": true,
+        "topFiveExposureMarked": true,
+        "viewTeamLevelsChecked": true,
+        "teamLevels": {
+          "self": 2,
+          "opponent": 2
+        },
+        "relativeExtremaChecked": true,
+        "selectionUsesCachedValues": true,
+        "invalidSelectionNotRated": true,
+        "disabledStaleReplyIgnored": true,
+        "injectedFailureNotScored": true,
+        "retrySucceeded": true
+      },
+      "offscreenRatingsNotExposed": true,
+      "scrollExposureRecorded": true,
+      "layouts": [
+        {
+          "width": 1920,
+          "height": 1080,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 236,
+            "y": 698.203125,
+            "width": 989,
+            "height": 53
+          }
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 618.203125,
+            "width": 954,
+            "height": 53
+          }
+        },
+        {
+          "width": 1366,
+          "height": 768,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 386.203125,
+            "width": 889,
+            "height": 53
+          }
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 338.203125,
+            "width": 813,
+            "height": 53
+          }
+        },
+        {
+          "width": 1100,
+          "height": 620,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 175.1875,
+            "width": 1068,
+            "height": 53
+          }
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 417.828125,
+            "width": 588,
+            "height": 53
+          }
+        },
+        {
+          "width": 900,
+          "height": 600,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 165.1875,
+            "width": 868,
+            "height": 53
+          }
+        },
+        {
+          "width": 1280,
+          "height": 500,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": false,
+          "bounds": {
+            "x": 16,
+            "y": 118.984375,
+            "width": 1248,
+            "height": 46
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": null,
+          "bounds": {
+            "x": 16,
+            "y": 521,
+            "width": 302,
+            "height": 61
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "panelInViewport": true,
+          "actionButtonsOverlap": false,
+          "topFiveInViewport": true,
+          "topFiveOverlapsActions": false,
+          "desktopGameSurfaceOverlap": null,
+          "bounds": {
+            "x": 16,
+            "y": 63.984375,
+            "width": 812,
+            "height": 46
+          }
+        }
+      ],
+      "postMoveRetained": true,
+      "pageErrors": []
+    }
   },
   "initialFailureAndRepair": "Actual PeerJS refresh found an inactive voice wait queue answering a call from the destroyed provider. Clear and close waiting calls before stop early-return; added executable regression and rechecked refresh/closed-tab recovery. Windows downloaded-JSON smoke uses explicit UTF8.",
   "limits": [
@@ -963,5 +1166,13 @@
     "finalSHA256": "a40d7715750564dd39bff117e4af538b93455ffc5fd27200785e02097b5ff36c",
     "frozenFilesWritten": 0,
     "preregisteredSourceFilesMatched": 60
+  },
+  "predeploymentExposureRepair": {
+    "cancelledRun": 42431006048,
+    "conclusion": "cancelled",
+    "deployed": false,
+    "reason": "Preserve actual current-decision preview exposure across host refresh even after personal switch is off. Loading does not count, next action does not inherit.",
+    "nodeRegressionPassed": true,
+    "actualWASMRefreshRegressionPassed": true
   }
 }

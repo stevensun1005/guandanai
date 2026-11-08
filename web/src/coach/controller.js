@@ -278,6 +278,17 @@ export function coachAssisted() {
   markDisplayedRatings();
   return sameTurn(exposures.get(runtime.game), runtime.game);
 }
+/** Restore only a previously displayed preview on the unchanged saved decision. */
+export function restoreCoachExposure(game, shown) {
+  if (shown)
+    exposures.set(game, {
+      game,
+      tok: game.tok,
+      count: game.log.length,
+      epoch: runtime.privateEpoch || 0,
+    });
+}
+
 export function rememberCoachMove(player, play, automatic) {
   const game = runtime.game;
   if (player !== 0 || automatic || !enabled || !available()) return;

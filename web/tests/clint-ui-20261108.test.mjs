@@ -157,3 +157,22 @@ test('voice stop discards calls queued before voice activation and before the ol
     else globalThis.document = prior;
   }
 });
+
+test('host refresh retains an actual prior exposure for only that saved decision; loading stays unassisted', async () => {
+  const { runtime } = await import('../src/app/runtime.js');
+  const coach = await import('../src/coach/controller.js');
+  const old = runtime.game;
+  runtime.game = { tok: 7, log: [] };
+  try {
+    coach.restoreCoachExposure(runtime.game, false);
+    assert.equal(coach.coachAssisted(), false);
+    coach.restoreCoachExposure(runtime.game, true);
+    assert.equal(coach.coachAssisted(), true);
+    runtime.game.log.push({ p: 0, cards: null });
+    assert.equal(coach.coachAssisted(), false);
+    runtime.game = { tok: 8, log: [] };
+    assert.equal(coach.coachAssisted(), false);
+  } finally {
+    runtime.game = old;
+  }
+});

@@ -30,6 +30,14 @@ with sync_playwright() as p:
   assert host.evaluate(SNAP)==before
   cases.append({'action':action,'sameRoomAndPhysicalHands':True,'anonymousRecordIdentity':True,'opaqueGuestSeatRecovered':True})
  assert not errors,errors
+ # Expose a real rating, turn the personal UI off, then refresh. No new preview can supply the flag.
+ host.evaluate("()=>{RULES.coachAllowed=true;G.paused=false;hideOverlay();G.turn=0;setCoachEnabled(true);render();}")
+ host.wait_for_function('()=>coachAssisted()',timeout=60000)
+ host.evaluate('()=>{setCoachEnabled(false);saveHost();}')
+ host.reload(wait_until='networkidle');host.wait_for_function('()=>NET.started && G?.phase==="play"',timeout=70000)
+ assert host.evaluate('()=>coachAssisted()')
+ expect(host.locator('#coachPanel')).to_be_hidden()
+ assert not errors,errors
  host.evaluate('()=>forgetHost()');host.reload(wait_until='networkidle');expect(host.locator('#lobby')).to_be_visible();assert host.evaluate('()=>G?.phase==="start" && !NET.started')
- report={'cases':cases,'explicitForgetDoesNotRestore':True,'pageErrors':errors,'uploads':len(uploads),'scope':'Synthetic UI/network correctness, no strength games or real human records'}
+ report={'cases':cases,'explicitForgetDoesNotRestore':True,'actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff':True,'pageErrors':errors,'uploads':len(uploads),'scope':'Synthetic UI/network correctness, no strength games or real human records'}
  (OUT/'report.json').write_bytes((json.dumps(report,indent=2)+'\n').encode());print(json.dumps(report));browser.close()

@@ -1,3 +1,4 @@
+import { coachAssisted, restoreCoachExposure } from '../coach/controller.js';
 import { runtime } from '../app/runtime.js';
 import { $ } from '../ui/cards.js';
 import { VERSION, ROOM_PREFIX, peerReady } from './protocol.js';
@@ -54,6 +55,7 @@ export function saveHost() {
     record: snapshotRecord(game),
     match: snapshotMatch(game),
     privateUsed: privateWasUsed(game),
+    assistedBeforeReload: coachAssisted(),
   });
 }
 function resume(saved) {
@@ -80,6 +82,7 @@ function resume(saved) {
   restoreMatch(game, saved.match);
   restoreRecord(game, saved.record, Date.now() - saved.savedAt);
   restorePrivateUse(game, saved.privateUsed);
+  restoreCoachExposure(game, saved.assistedBeforeReload === true);
   runtime.selection = new Set();
   runtime.confirmation = null;
   runtime.privateTable = false;
