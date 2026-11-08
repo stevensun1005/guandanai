@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T03:43:11.339497+00:00",
+  "sourceSHA": "11671a5f37f40fcbf05f51ba5daea432562a1568",
+  "protocolSHA256": "e158e1d5668363bfd3c05a729e77558aa4f4ce3de2d6c0ec8c4d0a1368439542",
+  "controllerPID": 35700,
+  "workerPIDs": [
+    55704,
+    47172,
+    31508,
+    60684
+  ],
+  "allFiveProcessesAlive": true,
+  "completedGapPairs": 200,
+  "completedGapRounds": 400,
+  "trajectoryPairsBeforePublicGap": 0,
+  "allWorkersAwaitingPublication": true,
+  "sourceFilesMatched": 150,
+  "minimumAvailableGiB": 12.324291229248047,
+  "optimizerUpdates": 0,
+  "strengthGames": 0,
+  "dashboard": {
+    "observedAtUTC": "2026-11-08T03:42:33.308Z",
+    "taskCount": 14,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "scope": "Actual200-root gap result and publication barrier; remaining6000 pairs not yet run."
+}
