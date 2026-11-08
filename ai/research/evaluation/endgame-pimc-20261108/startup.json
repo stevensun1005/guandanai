@@ -1,0 +1,30 @@
+{
+  "schema": "danmcai-endgame-pimc-startup-v1",
+  "status": "Actual startup record; not a training result.",
+  "frozenCheckout": {
+    "commit": "0d4e4b0",
+    "path": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-runtime-0d4e4b0"
+  },
+  "run": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-20261108 (outside iCloud; .noindex)",
+  "createdAt": "2026-11-08T15:24:06.840Z",
+  "deadline": "2026-11-09T01:24:06.840Z",
+  "deadlineToronto": "2026-11-08 20:24 EST",
+  "configSHA256": "679e6fefffb0e8d27790acdc8e0bceeb95a818a37ce59adb43e65e41aa76d909",
+  "protocolSHA256": "d4816f09e6c73cdd0712e7def4c95ecd1739dfecf31a1a83392b525b3310a47e",
+  "champion": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+  },
+  "championFile": "copied from the section-57 run's frozen champion.onnx after run.mjs verified the SHA (web/dist is a build output absent from the checkout)",
+  "launch": "nohup caffeinate -i node run.mjs (parent launchd), 7 actors nice 5 + MPS learner; post-run-evaluate.sh waits for the supervisor, then runs evaluate.mjs (3,000 held-out pairs, threshold 20) and the human endgame audit with --student-cards=20.",
+  "observedAt": "2026-11-08T15:43:26Z",
+  "firstMinutes": {
+    "learnerStep": 450,
+    "lossEma": 0.3770523898784028,
+    "ingestedRows": 53642,
+    "rowsPerSecondDashboard": 98,
+    "restarts": {}
+  },
+  "dashboard": "http://127.0.0.1:8768/ (read-only, Toronto time)"
+}
