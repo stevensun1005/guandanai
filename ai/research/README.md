@@ -110,3 +110,5 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 [1.6完整留出](evaluation/exploiter-017-20261107/heldout-results.json)：10,000局全部完成；对017升级分−0.071，95%[−0.14361,+0.00161]，剥削信号+0.020，99%[−0.14872,+0.18872]，点门槛false，本次未便宜找到。随后实际启动[新固定队友诊断](evaluation/exploiter-teammate-diagnostic-20261108/protocol.json)，不是重复旧留出。
 
 [Clint本轮界面与恢复证据](evaluation/clint-sync-20261108-0011.json)：图解规则、房主本机恢复、续场入口及显示时序；只验证功能，普通规则指纹／网页冠军不变，不是新的棋力实验。
+
+[单席诊断结果](evaluation/exploiter-teammate-diagnostic-20261108/results.json)：20,000局全部完成，固定017/P0/012队友的焦点差异仍不明确；下一项[冠军队友×对手网格](evaluation/cooperation-grid-20261108/protocol.design.json)另用12,000新牌副／每格4,000对，预登记交互与多重区间，不重跑剥削留出。

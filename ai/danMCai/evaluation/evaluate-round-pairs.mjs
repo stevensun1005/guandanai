@@ -6,7 +6,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { constants, setPriority } from 'node:os';
 import { createRound, advanceRound } from '../../shared/simulation/simulation.mjs';
-import { createRuleOpponent } from '../../shared/simulation/rule-baseline.mjs';
+import { createRuleOpponent, createRuleBaseline } from '../../shared/simulation/rule-baseline.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { policyState } from '../../../web/src/ai/observation.js';
 import { argmax, createModelPool, option, writeJSON } from '../training/continuous/lib.mjs';
@@ -27,7 +27,14 @@ export function lineup(task, team, seed) {
   );
 }
 
-export async function playRound({ seed, seats, values, capture = false, modelConfigs = {} }) {
+export async function playRound({
+  seed,
+  seats,
+  values,
+  capture = false,
+  descriptive = false,
+  modelConfigs = {},
+}) {
   const game = createRound(seed);
   const trace = capture ? { initial: structuredClone(game), moves: [] } : null;
   const initial = {
@@ -36,11 +43,23 @@ export async function playRound({ seed, seats, values, capture = false, modelCon
     dealSHA256: hash(JSON.stringify(game.hands.map((h) => h.map((c) => c.id)))),
   };
   const rule = createRuleOpponent(seed ^ 0x6a09e667);
+  const original = seats.includes('original') ? createRuleBaseline(seed ^ 0xbb67ae85) : null;
+  const descriptions = descriptive
+    ? Array.from({ length: 4 }, () => ({
+        decisions: 0,
+        passes: 0,
+        overPartner: 0,
+        bombOverPartner: 0,
+        opponentReceivesLeadAndFinishesWithinTwoActions: 0,
+      }))
+    : null;
+  let pending = [];
   for (let turn = 0; turn < 1000; turn++) {
     const p = game.turn;
     let play,
       estimates = null;
     if (seats[p] === 'clint') play = rule(game, p);
+    else if (seats[p] === 'original') play = original(game, p);
     else {
       const plays = candidates(game.hands[p], game.L, game.trick?.play);
       if (!plays.length) throw Error('No legal actions');
@@ -67,8 +86,29 @@ export async function playRound({ seed, seats, values, capture = false, modelCon
         ...(play ? { type: play.type, value: play.value, n: play.n } : {}),
         estimates,
       });
+    if (descriptive) {
+      const row = descriptions[p];
+      row.decisions++;
+      row.passes += Number(!play);
+      const over = !!play && game.trick?.player === (p + 2) % 4;
+      row.overPartner += Number(over);
+      row.bombOverPartner += Number(over && ['bomb', 'sflush', 'jokers'].includes(play.type));
+      for (const event of pending)
+        if (event.receiver === p && play?.cards.length === game.hands[p].length)
+          descriptions[event.p].opponentReceivesLeadAndFinishesWithinTwoActions++;
+      pending = pending.filter((event) => turn - event.turn < 2);
+    }
     const result = advanceRound(game, play);
-    if (result) return { ...initial, ...result, turns: turn + 1, ...(capture ? { trace } : {}) };
+    if (descriptive && !play && !game.trick && game.turn % 2 !== p % 2)
+      pending.push({ p, receiver: game.turn, turn });
+    if (result)
+      return {
+        ...initial,
+        ...result,
+        turns: turn + 1,
+        ...(capture ? { trace } : {}),
+        ...(descriptive ? { descriptions } : {}),
+      };
   }
   throw Error('Round truncated; never count as a draw');
 }
@@ -147,6 +187,7 @@ export async function runRoundPairs({ protocol, run, shard = 0, shards = 4 }) {
               Object.entries(plan.models).map(([id, m]) => [id, m.config || {}]),
             ),
             capture: !!plan.capture,
+            descriptive: !!plan.descriptive,
           });
           games.push({
             team,

@@ -55,3 +55,5 @@ Windows Python 虚拟环境会出现一层重定向父进程和实际 Python 学
 0.1／0.2／0.3／0.6 已完成。0.3 负结果阻止 0.4；不重复开发位置或扩大 W 补救。下一项仅是已授权可选 1.6 普通 017 剥削臂，新起点协议见 `evaluation/exploiter-017-20261107/`，实际启动另记。四小时及一小时留出的各自窗口只注册一次；保留 4 GiB、原全局截止、无自动网页晋升。本机只跑 danMCai，不启动 GuanZero 或进还贡。
 
 The exploiter uses the ordinary champion with fresh Adam and empty replay. It does not train the zero-extras student. A negative result means no cheap signal was found in this run, not evidence that exploitation is impossible. Shared-P0 and shared-012 comparisons preserve deal pairing; the target-specific signal remains separate from general strength.
+
+1.6及新单席条件诊断已完成，差异仍不明确。当前选择路线图1.2在Windows串行执行[冠军队友网格](evaluation/cooperation-grid-20261108/protocol.design.json)，不是Mac窗口或阶段2训练；旧冻结运行、八项所有者待决定及原总截止继续不变。

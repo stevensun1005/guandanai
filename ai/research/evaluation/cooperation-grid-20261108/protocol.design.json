@@ -1,0 +1,474 @@
+{
+  "schema": 1,
+  "workers": 4,
+  "reserveGiB": 5,
+  "rules": {
+    "unit": "one complete round to finishing order",
+    "level": "seeded uniform 2..A",
+    "leader": "seeded uniform seat",
+    "tribute": false,
+    "tributeReason": "Fresh independent deals, no preceding round; not a tribute or full-match evaluation",
+    "maxTurns": 1000,
+    "truncation": "error, not draw"
+  },
+  "pairing": "Exactly the same 108 card IDs at the same seats, level and first leader; swap model/team allocation between parity 0 and 1. Mixed focal seat alternates between teammates by seed parity. Both games must complete to count a pair.",
+  "pipeline": "Native ONNX CPU one thread; raw neural argmax over canonical candidates, no web personality/endgame/finishing shortcut, no Clint heuristics added to neural policies. Clint independent rules-v2 own-hand/public-only.",
+  "id": "cooperation-grid-20261108",
+  "displayName": "danMCai · 冠军队友×对手交互网格",
+  "purpose": "Roadmap1.2 Windows serial evaluation: test whether017 mixed-team signed round points depart from the average of homogeneous teams against each fixed opponent. Prior exploiter focal-seat comparisons were inconclusive; do not repeat or rescue those tests.",
+  "status": "preregistered-before-any-grid-results",
+  "budgetHours": 4,
+  "models": {
+    "champion": {
+      "file": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\champion.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "017"
+    },
+    "p0": {
+      "file": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\p0.onnx",
+      "sha256": "d5038709af116c779e7f6a014ea1a68aab6a1a0026fddcf19862881d060e0422",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "001"
+    },
+    "previous": {
+      "file": "D:\\vibecoding\\guandan\\ai\\local\\runs\\research-through-20261111\\experiments\\exploiter-017-heldout-20261107\\models\\previous.onnx",
+      "sha256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "catalogId": "012"
+    }
+  },
+  "descriptive": true,
+  "capture": false,
+  "plannedPairs": 96000,
+  "plannedRounds": 192000,
+  "primaryTask": "champion-vs-clint",
+  "primaryModel": "champion",
+  "primaryOpponent": "clint",
+  "primaryInterpretation": "Champion-pair versus Clint baseline is descriptive. Grid decisions use paired interactions, not this baseline or a pooled win rate.",
+  "contrasts": [],
+  "taskDefinitions": [
+    {
+      "id": "mixed-previous-vs-champion",
+      "model": "champion",
+      "teammate": "previous",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "pure-previous-vs-champion",
+      "model": "previous",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "mixed-p0-vs-champion",
+      "model": "champion",
+      "teammate": "p0",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "pure-p0-vs-champion",
+      "model": "p0",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "mixed-original-vs-champion",
+      "model": "champion",
+      "teammate": "original",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "pure-original-vs-champion",
+      "model": "original",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "mixed-clint-vs-champion",
+      "model": "champion",
+      "teammate": "clint",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "pure-clint-vs-champion",
+      "model": "clint",
+      "opponent": "champion",
+      "seedBlock": 0
+    },
+    {
+      "id": "champion-vs-p0",
+      "model": "champion",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "mixed-previous-vs-p0",
+      "model": "champion",
+      "teammate": "previous",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "pure-previous-vs-p0",
+      "model": "previous",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "mixed-p0-vs-p0",
+      "model": "champion",
+      "teammate": "p0",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "mixed-original-vs-p0",
+      "model": "champion",
+      "teammate": "original",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "pure-original-vs-p0",
+      "model": "original",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "mixed-clint-vs-p0",
+      "model": "champion",
+      "teammate": "clint",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "pure-clint-vs-p0",
+      "model": "clint",
+      "opponent": "p0",
+      "seedBlock": 1
+    },
+    {
+      "id": "champion-vs-clint",
+      "model": "champion",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "mixed-previous-vs-clint",
+      "model": "champion",
+      "teammate": "previous",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "pure-previous-vs-clint",
+      "model": "previous",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "mixed-p0-vs-clint",
+      "model": "champion",
+      "teammate": "p0",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "pure-p0-vs-clint",
+      "model": "p0",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "mixed-original-vs-clint",
+      "model": "champion",
+      "teammate": "original",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "pure-original-vs-clint",
+      "model": "original",
+      "opponent": "clint",
+      "seedBlock": 2
+    },
+    {
+      "id": "mixed-clint-vs-clint",
+      "model": "champion",
+      "teammate": "clint",
+      "opponent": "clint",
+      "seedBlock": 2
+    }
+  ],
+  "interactions": [
+    {
+      "id": "previous-with017-vs-champion",
+      "terms": [
+        {
+          "task": "mixed-previous-vs-champion",
+          "weight": 1
+        },
+        {
+          "task": "pure-previous-vs-champion",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": [
+        "017+017 versus017+017=0 by paired symmetry"
+      ]
+    },
+    {
+      "id": "p0-with017-vs-champion",
+      "terms": [
+        {
+          "task": "mixed-p0-vs-champion",
+          "weight": 1
+        },
+        {
+          "task": "pure-p0-vs-champion",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": [
+        "017+017 versus017+017=0 by paired symmetry"
+      ]
+    },
+    {
+      "id": "original-with017-vs-champion",
+      "terms": [
+        {
+          "task": "mixed-original-vs-champion",
+          "weight": 1
+        },
+        {
+          "task": "pure-original-vs-champion",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": [
+        "017+017 versus017+017=0 by paired symmetry"
+      ]
+    },
+    {
+      "id": "clint-with017-vs-champion",
+      "terms": [
+        {
+          "task": "mixed-clint-vs-champion",
+          "weight": 1
+        },
+        {
+          "task": "pure-clint-vs-champion",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": [
+        "017+017 versus017+017=0 by paired symmetry"
+      ]
+    },
+    {
+      "id": "previous-with017-vs-p0",
+      "terms": [
+        {
+          "task": "mixed-previous-vs-p0",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-p0",
+          "weight": -0.5
+        },
+        {
+          "task": "pure-previous-vs-p0",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": []
+    },
+    {
+      "id": "p0-with017-vs-p0",
+      "terms": [
+        {
+          "task": "mixed-p0-vs-p0",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-p0",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": [
+        "p0 homogeneous versus itself=0 by paired symmetry"
+      ]
+    },
+    {
+      "id": "original-with017-vs-p0",
+      "terms": [
+        {
+          "task": "mixed-original-vs-p0",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-p0",
+          "weight": -0.5
+        },
+        {
+          "task": "pure-original-vs-p0",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": []
+    },
+    {
+      "id": "clint-with017-vs-p0",
+      "terms": [
+        {
+          "task": "mixed-clint-vs-p0",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-p0",
+          "weight": -0.5
+        },
+        {
+          "task": "pure-clint-vs-p0",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": []
+    },
+    {
+      "id": "previous-with017-vs-clint",
+      "terms": [
+        {
+          "task": "mixed-previous-vs-clint",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-clint",
+          "weight": -0.5
+        },
+        {
+          "task": "pure-previous-vs-clint",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": []
+    },
+    {
+      "id": "p0-with017-vs-clint",
+      "terms": [
+        {
+          "task": "mixed-p0-vs-clint",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-clint",
+          "weight": -0.5
+        },
+        {
+          "task": "pure-p0-vs-clint",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": []
+    },
+    {
+      "id": "original-with017-vs-clint",
+      "terms": [
+        {
+          "task": "mixed-original-vs-clint",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-clint",
+          "weight": -0.5
+        },
+        {
+          "task": "pure-original-vs-clint",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": []
+    },
+    {
+      "id": "clint-with017-vs-clint",
+      "terms": [
+        {
+          "task": "mixed-clint-vs-clint",
+          "weight": 1
+        },
+        {
+          "task": "champion-vs-clint",
+          "weight": -0.5
+        }
+      ],
+      "zeroBaselines": [
+        "clint homogeneous versus itself=0 by paired symmetry"
+      ]
+    }
+  ],
+  "zeroBaselines": [],
+  "analysis": {
+    "primary": "12 interaction cells: gap(X,O)=pts(017+X versus O+O)-[pts(017+017 versus O+O)+pts(X+X versus O+O)]/2. All terms share4000 deal pairs within each opponent block; retain covariance. Report99% per-cell CIs plus Bonferroni simultaneous99% family intervals.",
+    "condition": "Only abs(gap)>0.10 with simultaneous99% interval excluding0 supports a future teammate-diversity proposal. It does not authorize phase2.2 training before Wednesday or website promotion.",
+    "secondary": "Each lineup W/L/D, signed points95% deal-pair CI, finishing ranks, double-up/down. Tactical action counts are descriptive and never influence actions or acceptance.",
+    "stopping": "Exactly96000 swapped-deal pairs/192000 complete rounds or once-only4h deadline; no interim effect stopping, adaptive expansion or extension. Incomplete pairs not counted as complete; truncation errors.",
+    "limits": "Fixed017,012,P0,original and currentClint only; no human cooperation, whole-match result or causal tactical mechanism. Hypotheses chosen after the exploiter negative result."
+  },
+  "seedBlocks": [
+    {
+      "opponent": "champion",
+      "startIndex": 0,
+      "count": 4000
+    },
+    {
+      "opponent": "p0",
+      "startIndex": 4000,
+      "count": 4000
+    },
+    {
+      "opponent": "clint",
+      "startIndex": 8000,
+      "count": 4000
+    }
+  ],
+  "rulePolicies": {
+    "clint": "rules-v2 independent own-hand/public-only evaluator",
+    "original": "Explicit historical original baseline; isolated evaluation only"
+  },
+  "constantCells": "X=017 has gap exactly0 by identical policy definition, no invented games. Homogeneous opponent versus itself has exact0 swapped-pair mean by symmetry; no fabricated baseline games.",
+  "rationale": "A final-exploiter single-seat replacement was-0.034 with017 teammate, while P0/012 contrasts had99% intervals crossing0. Diagnose the current champion mixture itself with all three constituent lineups and new opponents, rather than drawing a mechanism from uncertain focal-seat differences.",
+  "authorization": "Windows danMCai evaluation only through original Nov11 cutoff. No Mac, human data, extras online, whole-match training, Clint neural path or deployment.",
+  "championVerification": {
+    "catalogDefault": "017",
+    "selection": [
+      "017",
+      "012"
+    ],
+    "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json",
+    "gateEvidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+    "gateEvidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+    "manifestSHA256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+    "weightSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+  },
+  "ruleSourceSHA256": {
+    "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+    "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+    "web/src/rule-bot/strategy.js": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae"
+  },
+  "freezeRequirement": "Resolve the commit containing this preregistration to a detached runtime; sign all execution files and a complete runtime protocol before one-time registration. Never edit a frozen runtime."
+}

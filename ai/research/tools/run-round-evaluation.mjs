@@ -22,7 +22,7 @@ export async function evaluateRegistered(run) {
     pid: process.pid,
     phase: 'evaluation',
     updatedAt: new Date().toISOString(),
-    displayName: '冠军微调最终模型 · 10000局独立留出',
+    displayName: plan.displayName || '冠军微调最终模型 · 10000局独立留出',
     completedRounds: 0,
     plannedRounds: plan.plannedRounds,
     optimizerUpdates: 0,

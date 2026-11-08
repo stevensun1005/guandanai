@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "nodeTests": 254,
+  "researchPythonPassed": 26,
+  "sharedPythonPassed": 3,
+  "sharedPythonSkipped": 1,
+  "format": "passed",
+  "build": "61f17dfedd",
+  "originalAndClintIsolatedEvaluation": true,
+  "descriptionSwitchOutcomeAndReplayEquivalent": true,
+  "pairedCovarianceAndWrongDealRegression": true,
+  "controllerStopAndExpiryZeroSpawnTests": "passed in npm test",
+  "strengthGamesForGridExecuted": 0,
+  "optimizerUpdates": 0,
+  "websiteChampion": "017",
+  "selection": [
+    "017",
+    "012"
+  ],
+  "workerRealStopZeroPairsNoOutput": true
+}

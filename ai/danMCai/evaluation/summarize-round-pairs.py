@@ -43,6 +43,32 @@ def exploitation_signal(data, specification):
             'limit':'One target and one run; signal interval crossing zero remains uncertain, no automatic promotion'}
 
 
+def cooperation_interactions(data, specifications):
+    """Compute paired linear interactions, retaining all three terms' covariance."""
+    output={}
+    for item in specifications:
+        terms=item['terms']
+        reference=data[terms[0]['task']]
+        if any(set(data[t['task']]) != set(reference) for t in terms):
+            raise ValueError('Interaction requires common deal seeds')
+        gaps=[]
+        for seed,row in reference.items():
+            identity=[(g['dealSHA256'],g['level'],g['leader']) for g in row['games']]
+            if any([(g['dealSHA256'],g['level'],g['leader']) for g in data[t['task']][seed]['games']] != identity for t in terms):
+                raise ValueError('Interaction deals differ')
+            gaps.append(sum(t['weight']*statistics.mean(g['signedPoints'] for g in data[t['task']][seed]['games']) for t in terms))
+        result=estimate(gaps,z=2.5758293035)
+        result['confidenceLevel']=.99
+        family=estimate(gaps,z=statistics.NormalDist().inv_cdf(1-.01/(2*len(specifications))))
+        result['familywise99CI']=family['ci']
+        result['passesResultCondition']=abs(result['mean'])>.10 and (family['ci'][0]>0 or family['ci'][1]<0)
+        result['terms']=terms
+        result['zeroBaselines']=item.get('zeroBaselines',[])
+        result['scope']='Paired lineup interaction, not a causal tactical explanation. No authorization for teammate training or promotion.'
+        output[item['id']]=result
+    return output
+
+
 def summarize(protocol, results):
     protocol, results = Path(protocol), Path(results)
     plan = json.loads(protocol.read_text())
@@ -101,6 +127,14 @@ def summarize(protocol, results):
             "doubleDowns": ranks["34"], "doubleUps": ranks["12"],
             "meanTurns": statistics.mean(turns),
         }
+        if plan.get('descriptive'):
+            totals=Counter()
+            for row in data[id].values():
+                for g in row['games']:
+                    for seat in [g['team'],g['team']+2]:
+                        totals.update(g['descriptions'][seat])
+            reports[id]['descriptiveTeamCounts']=dict(totals)
+            reports[id]['descriptiveScope']='Counts per acting team decision; never rewards, losses, gates or acceptance criteria.'
     contrasts = {}
     specifications = plan.get("contrasts", [
         {"id": group, "left": "champion-"+group, "right": "latest-"+group,
@@ -121,7 +155,7 @@ def summarize(protocol, results):
         contrasts[group] = estimate(differences, z=comparison["z"])
         contrasts[group]["confidenceLevel"] = comparison["confidenceLevel"]
         contrasts[group]["direction"] = comparison["direction"]
-    primary = reports["head-to-head"]["signedUpgradePoints"]
+    primary = reports[plan.get('primaryTask','head-to-head')]["signedUpgradePoints"]
     lo, hi = primary["ci"]
     primary_model = plan.get("primaryModel", "latest")
     primary_opponent = plan.get("primaryOpponent", "champion")
@@ -140,6 +174,8 @@ def summarize(protocol, results):
     }
     if plan.get('exploitationSignal'):
         result['exploitationSignal']=exploitation_signal(data,plan['exploitationSignal'])
+    if plan.get('interactions'):
+        result['cooperationInteractions']=cooperation_interactions(data,plan['interactions'])
     return result
 
 

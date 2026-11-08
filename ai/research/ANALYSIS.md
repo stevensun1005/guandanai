@@ -41,3 +41,5 @@ All new compute uses a separately registered campaign task, fixed one-hour maxim
 `run-extras-equivalence.mjs --run=<registered-run>` requires a campaign task and original fixed one-hour STOP/deadline; native validation explicitly uses one CPU thread per session. Browser checks use isolated artifacts and a disjoint development seed block. Tribute rejects extras before reading weights; the specialist stays disabled. Ordinary oracle observation context remains incomplete for extras, so this student is not deployable as champion. No online extras training, human-data use, new rewards or calibrated Top 5 is authorized.
 
 Actual 0.6 validation passed: 40,000 native decisions with 1,676,914 candidate values, identical argmax and zero maximum value delta; 48 Chrome WASM positions retained identical argmax, maximum native/WASM delta 2.6226e-6. This finite-sample compatibility result is not a strength result. [Evidence](evaluation/extras-equivalence-20261107/results.json), study section 50.1. No optimizer update or promotion occurred.
+
+冠军队友网格按[第55节](MODEL_STUDY.md#55-冠军队友对手网格预登记)比较同牌混合队与两种纯队的最终升级分，保留三项协方差；过牌／压队友计数仅作描述，不进入任何评分或验收。original与Clint均为隔离评测策略，非神经网络改动。
