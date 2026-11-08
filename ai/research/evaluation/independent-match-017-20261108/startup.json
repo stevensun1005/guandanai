@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-08T02:59:48.273958+00:00",
+  "sourceSHA": "a216541014b10bb0008caffb6286025fc5ad855f",
+  "protocolSHA256": "b79537d700a0b441492efc72f403d8e7b36a52a1dc80f1ba00633b5d47d30578",
+  "phase": "evaluation",
+  "completedMatchesAtStatus": 416,
+  "statusUpdatedAt": "2026-11-08T02:59:47.627Z",
+  "plannedMatches": 11000,
+  "controllerPID": 46168,
+  "workerPIDs": [
+    51324,
+    39028,
+    35744,
+    52908
+  ],
+  "allFiveProcessesAlive": true,
+  "completePairRowsAudited": 208,
+  "fullTerminalHistoriesValid": true,
+  "sourceFilesMatched": 147,
+  "allThreeModelsMatched": true,
+  "minimumAvailableGiB": 12.200374603271484,
+  "optimizerUpdates": 0,
+  "dashboard": {
+    "observedAtUTC": "2026-11-08T02:58:56.934Z",
+    "taskCount": 13,
+    "readOnly": true,
+    "liveRefresh": true,
+    "guardianHealthy": true,
+    "viewports": [
+      1440,
+      390
+    ],
+    "pageErrors": []
+  },
+  "guardianPID": 5536,
+  "awakePID": 49636,
+  "scope": "Actual partial startup only; not final match scores or completed11,000-match evidence."
+}
