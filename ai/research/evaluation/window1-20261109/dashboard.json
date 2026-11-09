@@ -25,6 +25,11 @@
       "name": "window1e.sh",
       "startMarker": "window1e start",
       "endMarker": "window1e end"
+    },
+    {
+      "name": "window1f.sh",
+      "startMarker": "window1f start",
+      "endMarker": "window1f end"
     }
   ],
   "stages": [
@@ -510,6 +515,26 @@
       "rule": {
         "type": "dev",
         "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "D-distill-data",
+      "ids": [
+        "D-distill-data"
+      ],
+      "title": "D 下个窗口的蒸馏数据（猜牌搜索判断）",
+      "desc": "四家都用猜牌搜索对打，记录每个中盘决策里各候选的搜索得分，作为下个窗口把搜索教进网络（网页可用）的训练数据。只生成数据，不训练、不下结论。",
+      "kind": "generate",
+      "queue": "window1f.sh",
+      "after": "组合机器人跑完后，到 10:43 为止",
+      "paths": {
+        "out": "D/data",
+        "log": "logs/D-distill-data.log"
+      },
+      "total": null,
+      "rule": {
+        "type": "descriptive",
+        "text": "数据生成，不作结论"
       }
     }
   ]

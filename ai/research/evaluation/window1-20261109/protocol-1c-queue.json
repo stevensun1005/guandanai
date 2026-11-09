@@ -37,6 +37,12 @@
       "id": "H-tune",
       "what": "Belief v1 midgame search tuning on the same 1,200 dev pairs as H-v2-P2-v1 (3,838,183,000-184,199; reference = that 8-world net-2 run): (a) 16 worlds net 2; (b) 8 worlds net 1. Paired differences vs the reference. Development only.",
       "addedAt": "2026-11-09T13:40Z"
+    },
+    {
+      "id": "D-distill-data",
+      "what": "Distillation data for the next window: distill-generate.mjs (all four seats play belief-v1 net-2 search at 21-40 cards, champion elsewhere) on the newly audited training block 4,264,011,000-4,264,110,999 (seed-audit-distill.json; second block 4,288,077,000-4,288,176,999 reserved); rows = searched candidates with search value, champion Q, win-loss vs champion move. Data only; no training or claim in this window.",
+      "after": "C-combined",
+      "addedAt": "2026-11-09T13:46Z"
     }
   ],
   "stop": "STOP file or 15:45Z stops every stage; unfinished stages are reported as not run."
