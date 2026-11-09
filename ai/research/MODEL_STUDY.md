@@ -2788,3 +2788,5 @@ H3 留出 3,000 副（989,000,000–989,002,999，交换阵营共 6,000 单局�
 [计划](evaluation/guanzero-385979-plan.json)、[Clint逐场报告](evaluation/guanzero-385979-development-500-clint.json)、[冠军逐场报告](evaluation/guanzero-385979-development-500-champion.json)保留完整比赛、区间、源码与协议指纹，已重算核验。公网Release完整SHA通过；Pages状态以[发布证据](evaluation/web-model-026.json)为准。
 
 本周期还修复自动化提示乱码与旧时刻文字，实际日历仍为08:00/20:00；最终任务跟进周三10:00截止，训练配置/窗口SHA未变。Windows验证发现上游新研究工具的路径分隔符、mkdir/nice及目录链接问题，已在开发检出修复并通过338项Node、11项跳过及9项GuanZero Python；未更新任何活动冻结检出。
+
+385979部署确认：[Pages 42626116363](https://github.com/stevensun1005/guandanai/actions/runs/42626116363)成功，公网bot-026完整SHA与冻结计划及两组报告一致。真实Chrome菜单为Clint、GuanZero385979/352359、P0、danMCai017/012，四席默认均017；测试和部署证据已附于网页归档026。

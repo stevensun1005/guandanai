@@ -141,5 +141,48 @@
     "timezone": "America/Toronto",
     "localTime": "2026-11-09T08:00:00-05:00",
     "index": 5130
+  },
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42626116363",
+    "commit": "7e33b99bf59846f413dbeb86980d673d46571261",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-026.onnx",
+    "publicSHA256": "21300c36c7c273b43274a83fa70dc62ce85be0cc84decc6dda2080548e0096b1",
+    "bytes": 6346014,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "026",
+          "guanzero-adp-io48-385979"
+        ],
+        [
+          "025",
+          "guanzero-adp-io48-352359"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    },
+    "verifiedAt": "2026-11-09T13:37:27.184509+00:00"
   }
 }
