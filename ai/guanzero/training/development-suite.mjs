@@ -12,17 +12,29 @@ import {
 import { join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { fork, execFileSync } from 'node:child_process';
-import { freezeReason } from './reason.mjs';
+import { freezeReason, reasonProtocol } from './reason.mjs';
 import { setPriority, constants } from 'node:os';
 import { modelBytes } from '../../publishing/artifacts.mjs';
 import { evaluate } from './evaluate.mjs';
-import { DEFAULT_OPPONENTS, REASON_OPPONENT_PANEL } from './opponents.mjs';
+import { DEFAULT_OPPONENTS, REASON_PANELS } from './opponents.mjs';
 import { freezeChampion, championDefinition } from './champion.mjs';
 import { ROOT, paths, readJSON, writeJSON, option, sha256, evalSeed } from './lib.mjs';
 export const SUITE_PAIRS = 250;
 export const SUITE_SEED_INDEX = 5000; // 4,200,000,000+, disjoint from legacy blocks.
 import { validSuiteReport } from './suite-reports.mjs';
 export { validSuiteReport } from './suite-reports.mjs';
+/**
+ * Panel of a new batch. The frozen companion that will run it decides the reason protocol (a v1
+ * companion freezes v1 identities, a v2 companion v2); the plan's panel follows that identity,
+ * and a launcher that names a panel must agree with its companion.
+ */
+export function reasonPanel(reason, reasonRuntime = null) {
+  const panel = reasonProtocol(reason);
+  if (!REASON_PANELS.includes(panel)) throw Error('Unknown reason protocol');
+  if (reasonRuntime?.opponentPanel && reasonRuntime.opponentPanel !== panel)
+    throw Error('Reason launcher protocol differs from its frozen companion');
+  return panel;
+}
 export async function addSuite(
   run,
   manifest,
@@ -59,6 +71,7 @@ export async function addSuite(
     ).freezeReason;
   }
   const reason = await freeze(folder, champion.metadata, championRoot);
+  const opponentPanel = reasonPanel(reason, reasonRuntime);
   const index = (manifest.seedIndexBase ?? SUITE_SEED_INDEX) + manifest.suites.length,
     start = evalSeed(index, SUITE_PAIRS);
   const plan = {
@@ -72,7 +85,7 @@ export async function addSuite(
     pairs: SUITE_PAIRS,
     seedStart: start,
     seedEnd: start + SUITE_PAIRS - 1,
-    opponentPanel: REASON_OPPONENT_PANEL,
+    opponentPanel,
     opponents: [...DEFAULT_OPPONENTS],
     champion: champion.metadata,
     reason,
@@ -121,6 +134,12 @@ export async function runDevelopmentSuites({
   });
   const state = { pid: process.pid, phase: 'starting', targetMatchesPerOpponent: 500, fromBlock };
   const save = () => writeJSON(status, { ...state, updatedAt: new Date().toISOString() });
+  let head = null;
+  const pinnedElsewhere = (plan) => {
+    if (!plan.evaluationRuntime) return false;
+    head ??= execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
+    return head !== plan.evaluationRuntime.commit;
+  };
   try {
     save();
     if (!manifest.suites.length) {
@@ -155,6 +174,11 @@ export async function runDevelopmentSuites({
         const pending = plan.opponents.filter(
           (op) => !validSuiteReport(readJSON(join(folder, op, 'report.json'), null), plan, op),
         );
+        // Workers refuse a plan pinned to another evaluator checkout; say so before forking.
+        if (pending.length && pinnedElsewhere(plan))
+          throw Error(
+            `Suite ${plan.id} is pinned to evaluator ${plan.evaluationRuntime.commit}; finish it from that checkout`,
+          );
         state.suite = plan.id;
         state.phase = 'evaluating';
         save();

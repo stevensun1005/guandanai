@@ -36,7 +36,7 @@ node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --oppone
 node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --opponents=champion
 ```
 
-每批冻结同一 GuanZero 模型，以及清单中现任 danMCai 冠军的版本、完整 SHA、`champion.json` 和 accept 门控依据。GuanZero和普通冠军组使用贪心网络评分；reason组实际运行冻结的手牌推断、中盘8世界搜索、尾盘PIMC及桌面预算回退，不用普通冠军权重冒充推理。这里测的是本机CPU上的冻结桌面策略，回退率随本机负载变化；不是平板性能验收。双方仅使用自身手牌及公开信息。报告保存实际胜负平、逐场记录、编码／源码指纹和配对种子簇 95% 区间，评测数据不进入训练缓冲区。
+每批冻结同一 GuanZero 模型，以及清单中现任 danMCai 冠军的版本、完整 SHA、`champion.json` 和 accept 门控依据。GuanZero和普通冠军组使用贪心网络评分；reason组实际运行冻结的手牌推断、中盘8世界搜索、尾盘PIMC及预算回退（协议v1为桌面3／4秒，v2为每步50秒，见[协议](#danmcai-reason评测协议)），不用普通冠军权重冒充推理。这里测的是本机CPU上的冻结策略，回退率随本机负载变化（v2受影响较小）；不是平板性能验收。双方仅使用自身手牌及公开信息。报告保存实际胜负平、逐场记录、编码／源码指纹和配对种子簇 95% 区间，评测数据不进入训练缓冲区。
 
 ### 已运行的冻结训练
 
@@ -110,16 +110,36 @@ node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/gu
 
 ## danMCai-reason评测协议
 
-新批次面板标识 `clint-champion-reason-v1`，对手列表严格为 `["clint","champion","reason"]`。历史 `clint-champion-v1` 两组、`random-clint-champion-v1` 三组及未标记的五组保持原名单与原报告，不追加或改写历史成绩。首个新槽为11月9日20:00，后续仍为每天Toronto08:00/20:00；本次不额外启动即时正式500场。
+reason面板有两个协议，对手列表都严格为 `["clint","champion","reason"]`，只有reason组的时间规则不同：`clint-champion-reason-v1`（2026-11-09登记，桌面预算3／4秒，已登记批次保持v1）和 `clint-champion-reason-v2`（所有者2026-11-09要求，每步50秒推理上限，见下文；从新伴随检出接管后登记的批次使用）。历史 `clint-champion-v1` 两组、`random-clint-champion-v1` 三组及未标记的五组保持原名单与原报告，不追加或改写历史成绩。首个新槽为11月9日20:00，后续仍为每天Toronto08:00/20:00；本次不额外启动即时正式500场。
 
 登记器还读取训练运行之外的 `work/guanzero/reason-evaluation-launcher.json`，从其独立冻结源码冻结推理身份；该文件的 `sourceRoot/commit` 标明新伴随检出，`baselineRoot/baselineCommit` 保留af2a683。不更新主训练或旧冻结检出。运行新伴随的 `development-suite.mjs --run=<活动运行> --champion-root=<发布检出> --baseline-root=<af2a683冻结检出> --once`；三组工作器同批启动，各自断点、逐场结果分开保存。锁和活PID阻止重复启动；禁止用旧伴随直接处理含reason的新计划。
 
-每批 `plan.reason` 固定搜索机器人的完整manifest SHA、冠军底座SHA及accept门控、推断ONNX完整SHA/特征版本、搜索参数、桌面预算、执行策略版本与静态源码闭包。`reason-belief.onnx`与`champion.onnx`一起复制进本批评测目录，二进制不进Git。当前reason为9001／`danMCai-reason-v000855042`，但登记时按真实现任冠军重新解析，不能永久写死编号代替核验。
+每批 `plan.reason` 固定搜索机器人的完整manifest SHA、冠军底座SHA及accept门控、推断ONNX完整SHA/特征版本、搜索参数、预算、执行策略版本与静态源码闭包；v2身份另含 `protocol: "clint-champion-reason-v2"` 和 `move`（每步规则与回退统计项清单），v1身份不含这两项、字节不变。批次面板由伴随冻结的身份决定（`development-suite.mjs` 的 `reasonPanel`）：v1伴随只能登记v1，v2伴随只能登记v2；launcher若写明 `opponentPanel` 而与伴随不符，登记直接停止。工作器和发布器都要求面板与 `plan.reason` 的协议一致。`reason-belief.onnx`与`champion.onnx`一起复制进本批评测目录，二进制不进Git。当前reason为9001／`danMCai-reason-v000855042`，但登记时按真实现任冠军重新解析，不能永久写死编号代替核验。
 
-策略复用网页 `search/core.mjs`、公开信息payload与推断输入：21–40张8世界、冠军前6＋过牌、net=2；≤20张8世界PIMC、至少4个世界完成；其余张数、预算超时或公开贡还信息矛盾回到同一冠军。桌面预算中盘3000ms、尾盘4000ms，每次求解3000ms／150万节点／30万表项。这是协议v1登记时的网页桌面预算，固定为 `training/reason.mjs` 的 `REASON_V1_BUDGET`；网页机器人2026-11-09起改为每步50秒属于部署变化，不改变本协议，评测要用新预算须另行登记新协议。执行时仅自身手牌和公开信息可读，搜索前遮蔽其他手牌；进还贡按现有比赛引擎执行，推理器只接收公开贡还记录。
+策略复用网页 `search/core.mjs`、公开信息payload与推断输入：21–40张8世界、冠军前6＋过牌、net=2；≤20张8世界PIMC、至少4个世界完成；其余张数、预算超时或公开贡还信息矛盾回到同一冠军。**v1**：桌面预算中盘3000ms、尾盘4000ms，每次求解3000ms／150万节点／30万表项；时钟在冠军推理之后开始。这是协议v1登记时的网页桌面预算，固定为 `training/reason.mjs` 的 `REASON_V1_BUDGET`，只用于复现已登记的v1批次（由ce55b74伴随运行）。
+
+**v2**（`REASON_V2_BUDGET`、`REASON_V2_MOVE`）：电脑每步与真人一样最多60秒；推理最晚第50秒停，留10秒给回退出牌；失败不连带。Node评测里没有思考停顿和首次加载等待，所以50秒从这一步决策开始（含冠军推理）计，中盘、尾盘同为50,000ms；每次精确求解上限取 min(3000ms, 距截止剩余时间)：剩余≥3秒用共享求解器（超时或节点上限按Node规则跳过该世界），不足3秒时用只限剩余时间的单次求解器（精确值相同、不共用置换表），它被时钟停下即视为到截止，整次作废出冻结冠军017的那一手；节点上限仍按Node规则跳过。每步各有自己的截止与上下文，某步回退不影响下一步照常搜索；非预算类异常仍直接中止评测、保留现场，不伪装成正常比赛。v2报告的 `policy` 为 `guanzero-greedy-vs-frozen-danmcai-reason-move-deadline-50s` 并含 `opponentPanel`，均进入协议指纹；`searchStats` 除v1各项外还记录 `solverDeadlineCapped`（不足3秒而缩短的求解次数）、`maxSearchMs` 及超过3／10／30秒的搜索数，完成时缺项即报错。
+
+**v2耗时与口径估计（未实测，不是结果）**：ce55b74两场真实权重工程冒烟中，1,143个决策里搜索207次（中盘149、尾盘58），搜索合计47.6秒（平均约0.23秒），2次因3／4秒预算回退（约1%）；网页50秒冒烟耗时中位0.155秒、最长4.28秒。多数搜索1秒内完成，不受上限影响，所以预计v2每批reason组只是适度变慢：按该样本，每场推理约24秒；原回退的约1%搜索改为最多算到50秒，最坏每场多约46秒×回退次数（样本中每场约1次）。但最坏情况很长：每次搜索都可能跑满50秒，一场约百次搜索时理论上限超过一小时，一批可能跨过下一个12小时槽，届时按现有规则等待存活PID退出，不重复启动。v2回退更少，结果受本机负载影响小于v1，但耗时仍随负载变化，超过50秒的搜索照样回退并计数。v1与v2成绩分开报告，不能合并或互相替代。
+
+网页机器人2026-11-09起改为每步50秒属于部署变化；v2是按所有者要求另行登记的评测协议，不改动任何已登记的v1批次。执行时仅自身手牌和公开信息可读，搜索前遮蔽其他手牌；进还贡按现有比赛引擎执行，推理器只接收公开贡还记录。
 
 `reason/report.json`保存完整500场、250交换阵营簇、模型/对手/源码/协议指纹及搜索次数、实际偏离冠军次数、各类回退和耗时。回退次数必须报告，异常不得静默伪装成正常reason比赛。旧独立证据仅覆盖对冠军、无进贡的单局；新完整打A含进贡评测是新的开发证据，不能借用旧+0.237当作预期成绩。
 
 发布器对新批次强制三份完整报告全通过，再发布同一suite/model.onnx，无最低胜率门槛。网页菜单与默认按最新WEB_MODELS维护，当前四项、默认reason，开发评测数量不是网页菜单数量。实现、发布策略及本机接入检查保存在研究报告与工程验证记录。
 
-本机三组评测源码冻结于 `guanzero-reason-eval-runtime` 的ce55b74；8770只读面板使用 `dashboard-launcher.dashboardSourceRoot` 指向的独立 `guanzero-reason-dashboard-runtime`（28b1317）。面板升级仅换面板检出/进程，不能向评测或训练冻结检出拉代码。
+本机三组评测源码冻结于 `guanzero-reason-eval-runtime` 的ce55b74（协议v1）；8770只读面板使用 `dashboard-launcher.dashboardSourceRoot` 指向的独立 `guanzero-reason-dashboard-runtime`（28b1317）。面板升级仅换面板检出/进程，不能向评测或训练冻结检出拉代码。面板按 `plan.opponents` 和 `plan.reason.name` 显示，不检查面板标识，v2批次无需升级面板。
+
+### 切换到v2（GuanZero本机）
+
+v2只能通过新的冻结伴随检出启用；不向ce55b74、af2a683、28b1317或训练检出拉代码，不改已登记计划、报告与断点。下文 `<X>` 为推送到 `main`、含 `REASON_V2_BUDGET` 的完整提交SHA，`<活动运行>`、`<发布检出>`、`<af2a683冻结检出>` 同上节。
+
+1. **发布检出**更新到 `<X>` 或更新的 `main`（发布前本来就要更新）。新登记器从冻结身份取面板，launcher仍指向ce55b74时照样登记v1，所以这一步可以先做；发布器同时核验v1、v2批次。核对：`git -C <发布检出> merge-base --is-ancestor <X> HEAD`。
+2. **安装新伴随**（新目录，不覆盖旧伴随）：`git -C <发布检出> worktree add --detach C:/guandan-sampler/work/guanzero-reason-v2-eval-runtime <X>`，进入该目录 `npm ci`，确认 `git rev-parse HEAD` 等于 `<X>`，再运行 `node --test ai/guanzero/tests/guanzero-reason.test.mjs`。任一步失败就保持launcher不变（下一槽仍登记v1），记录原因，不登记v2。
+3. **检查v1批次**：读 `<活动运行>/eval/development-500/manifest.json`，对每个 `opponentPanel` 为 `clint-champion-reason-v1` 的批次核对三份 `report.json` 是否完整（统一面板或 `status.json`）。
+   - 全部完成：直接进行第4步。
+   - **有v1批次正在评测或未完成**：不停止、不重启、不改动它；它继续由ce55b74伴随（`development-500/.lock` 的PID）完成，断点只能由ce55b74续跑。新伴随遇到未完成的v1批次会以 “pinned to evaluator ce55b74…” 拒绝，不会接手。第4步可以照常做（登记与评测分开），但第6步要等该v1批次三份报告完成、旧伴随PID退出后再做。旧伴随完成v1后若遇到已登记的v2计划，会以 “Unknown GuanZero opponent panel” 停下，这是预期：确认v1三份报告完整即可，v1按原计划和原报告发布。
+4. **切换launcher**（不在登记进行中操作：`development-500/.window-registration.lock` 不存在时）：把 `C:/guandan-sampler/work/guanzero/reason-evaluation-launcher.json` 原样复制为 `reason-evaluation-launcher.v1-ce55b74.json` 保留，再把原文件改为 `sourceRoot` = 新伴随目录、`commit` = `<X>`，`baselineRoot`／`baselineCommit` 保持af2a683不变，并新增 `"opponentPanel": "clint-champion-reason-v2"` 与 `"effectiveFrom": "<下一槽时间>"`。
+5. **下一槽登记**照旧在发布检出运行 `register-window-suite.mjs`。核对新 `plan.json`：`opponentPanel` 为 `clint-champion-reason-v2`、`reason.protocol` 相同、`reason.budget` 为 `{midgameMs:50000,endgameMs:50000,solverMs:3000,solverTable:300000}`、`reason.move` 存在、`evaluationRuntime.commit` = `<X>`、`baselineCommit` = af2a683。不符就停下保留现场，不改计划补救。
+6. **启动评测**：确认没有存活的旧伴随PID后，在新伴随目录运行 `node ai/guanzero/training/development-suite.mjs --run=<活动运行> --champion-root=<发布检出> --baseline-root=<af2a683冻结检出> --once`。Clint与普通冠军两组仍由af2a683计算，只有reason组按v2运行。
+7. **记录**：新增接入证据（旧／新launcher SHA-256、`<X>`、首个v2批次ID与时间、新伴随测试结果）；v1批次报告、计划和已发布记录保持原样，表格按协议分别标注。以后再改预算须登记v3，不就地修改v2。

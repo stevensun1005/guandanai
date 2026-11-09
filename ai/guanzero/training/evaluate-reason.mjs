@@ -7,7 +7,14 @@ import { playMatch } from '../../shared/simulation/match-rollout.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { policyState } from '../../../web/src/ai/observation.js';
 import { metrics, intervals, resumeClusters } from './evaluate.mjs';
-import { createReasonEngine, chooseReason, verifyFrozenReason } from './reason.mjs';
+import {
+  createReasonEngine,
+  chooseReason,
+  verifyFrozenReason,
+  reasonProtocol,
+  REASON_V2_MOVE,
+} from './reason.mjs';
+import { REASON_PANELS, REASON_V1_PANEL } from './opponents.mjs';
 import { readJSON, writeJSON, sha256, createInference } from './lib.mjs';
 
 export function reasonProtocolDigest(report) {
@@ -37,7 +44,9 @@ export async function reasonMatch({ seed, team, inference, engine, play = playMa
 }
 export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
   assert.deepEqual(plan.opponents, ['clint', 'champion', 'reason']);
-  assert.equal(plan.opponentPanel, 'clint-champion-reason-v1');
+  assert.ok(REASON_PANELS.includes(plan.opponentPanel), 'Not a reason panel');
+  assert.equal(reasonProtocol(plan.reason), plan.opponentPanel, 'Reason protocol and panel differ');
+  const v1 = plan.opponentPanel === REASON_V1_PANEL;
   assert.equal(sha256(join(folder, 'model.onnx')), plan.modelSHA256);
   verifyFrozenReason(folder, plan.reason, plan.champion, { sources: true });
   const out = join(folder, 'reason');
@@ -52,7 +61,11 @@ export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
     sourceSHA256: plan.reason.sourceSHA256,
     opponents: { reason: plan.reason },
     exploration: 0,
-    policy: 'guanzero-greedy-vs-frozen-danmcai-reason-desktop',
+    // The v1 report keeps its registered shape; later protocols name themselves in the digest.
+    policy: v1
+      ? 'guanzero-greedy-vs-frozen-danmcai-reason-desktop'
+      : 'guanzero-greedy-vs-frozen-danmcai-reason-move-deadline-50s',
+    ...(!v1 && { opponentPanel: plan.opponentPanel }),
     rules: { tribute: true, from: 2, through: 'A', aFail: 'draw' },
     intervalMethod: '95% paired-seed cluster percentile bootstrap, 2000 draws',
     results: {},
@@ -95,6 +108,9 @@ export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
         clusters,
       });
     }
+    if (!v1)
+      for (const key of REASON_V2_MOVE.statistics)
+        assert.ok(Number.isFinite(engine.stats[key]), 'Missing reason statistic ' + key);
     report.results.reason = { ...metrics(clusters), confidence95: intervals(clusters), clusters };
     report.searchStats = engine.stats;
     report.completedAt = new Date().toISOString();

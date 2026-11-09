@@ -12,19 +12,30 @@ import { restoreGame } from '../../../web/src/ai/search/payload.mjs';
 import { createRound } from '../../shared/simulation/simulation.mjs';
 import {
   REASON_V1_BUDGET,
+  REASON_V2_BUDGET,
+  REASON_V2_MOVE,
+  REASON_PROTOCOLS,
   verifyReasonMetadata,
   reasonPayload,
   reasonContext,
+  reasonProtocol,
+  reasonStats,
+  deadlineSolver,
+  chooseReason,
 } from '../training/reason.mjs';
-import { reasonMatch, reasonProtocolDigest } from '../training/evaluate-reason.mjs';
+import { SearchBudgetError } from '../../../web/src/ai/search/core.mjs';
+import { SolverBudget } from '../../danMCai/endgame/solver.mjs';
+import { candidates } from '../../../web/src/ai/candidates.js';
+import { reasonMatch, reasonProtocolDigest, evaluateReason } from '../training/evaluate-reason.mjs';
 import { evaluate } from '../training/evaluate.mjs';
-import { suiteOpponents } from '../training/opponents.mjs';
+import { reasonPanel } from '../training/development-suite.mjs';
+import { suiteOpponents, REASON_V1_PANEL, REASON_V2_PANEL } from '../training/opponents.mjs';
 import { validSuiteReport } from '../training/suite-reports.mjs';
 import { verifyEvaluatedSuite } from '../../publishing/evaluated-suite.mjs';
 import { guanzeroCards } from '../../research/tools/guanzero-stages.mjs';
 
 const hash = (b) => createHash('sha256').update(b).digest('hex');
-function identities() {
+function identities(protocol = REASON_V1_PANEL) {
   const champion = {
     id: 'champion',
     name: 'danMCai-v000001',
@@ -50,14 +61,23 @@ function identities() {
     manifest,
     modelSHA256: hash(JSON.stringify(manifest)),
     gate: champion.gate,
-    budget: { ...REASON_V1_BUDGET },
-    execution: 'web-desktop-policy-native-onnx-v1',
+    budget: { ...REASON_PROTOCOLS[protocol].budget },
+    execution: REASON_PROTOCOLS[protocol].execution,
+    ...(protocol !== REASON_V1_PANEL && {
+      protocol,
+      move: structuredClone(REASON_PROTOCOLS[protocol].move),
+    }),
     sourceSHA256: { 'reason-code.mjs': hash('code') },
   };
   return { champion, reason: { ...identity, evaluationSHA256: hash(JSON.stringify(identity)) } };
 }
 test('new three-opponent panel does not relabel any historical panels', () => {
   assert.deepEqual(suiteOpponents({ opponentPanel: 'clint-champion-reason-v1' }), [
+    'clint',
+    'champion',
+    'reason',
+  ]);
+  assert.deepEqual(suiteOpponents({ opponentPanel: 'clint-champion-reason-v2' }), [
     'clint',
     'champion',
     'reason',
@@ -91,6 +111,138 @@ test('reason identity binds both networks, desktop budgets and the accepted base
     verifyReasonMetadata(reason, { ...champion, modelSHA256: hash('new champion') }),
   );
   assert.throws(() => verifyReasonMetadata(reason, { ...champion, gate: { gate: 2 } }));
+});
+test('protocol v2 identity binds the 50 s move rule; v1 identities stay without a protocol field', () => {
+  const { champion, reason } = identities(REASON_V2_PANEL);
+  verifyReasonMetadata(reason, champion);
+  assert.equal(reasonProtocol(reason), REASON_V2_PANEL);
+  assert.equal(reasonProtocol(identities().reason), REASON_V1_PANEL);
+  assert.deepEqual(REASON_V2_BUDGET, {
+    midgameMs: 50_000,
+    endgameMs: 50_000,
+    solverMs: 3000,
+    solverTable: 300_000,
+  });
+  assert.equal(REASON_V2_MOVE.reasoningDeadlineMs + REASON_V2_MOVE.fallbackReserveMs, 60_000);
+  const { protocol, move, ...withoutProtocol } = reason;
+  assert.equal(protocol, REASON_V2_PANEL);
+  assert.ok(move);
+  for (const change of [
+    { budget: { ...REASON_V1_BUDGET } },
+    { execution: 'web-desktop-policy-native-onnx-v1' },
+    { move: { ...REASON_V2_MOVE, failuresSticky: true } },
+    { move: { ...REASON_V2_MOVE, statistics: ['budgetFallback'] } },
+    { protocol: 'clint-champion-reason-v3' },
+  ])
+    assert.throws(() => verifyReasonMetadata({ ...reason, ...change }, champion));
+  // a 50 s budget without the v2 protocol field is neither v1 nor v2
+  assert.throws(() => verifyReasonMetadata(withoutProtocol, champion));
+  // an explicit v1 field would give v1 batches a second identity
+  const v1 = identities().reason;
+  assert.throws(() => verifyReasonMetadata({ ...v1, protocol: REASON_V1_PANEL }, champion));
+  assert.throws(() => verifyReasonMetadata({ ...v1, move: REASON_V2_MOVE }, champion));
+});
+test('v2 context: 50 s deadline from decision start in both bands, solver capped by time left', () => {
+  const engine = {
+    protocol: REASON_V2_PANEL,
+    budget: REASON_V2_BUDGET,
+    params: SEARCH_BOT_V1,
+    stats: reasonStats(REASON_V2_PANEL),
+    solver: { actionValue: () => 'shared' },
+  };
+  for (const band of ['midgame', 'endgame']) {
+    const context = reasonContext(engine, 100, band, () => 101);
+    assert.equal(context.deadline, 50_100);
+    assert.equal(context.solverTimeIsBudget, false);
+  }
+  let clock = 0;
+  const made = [];
+  engine.createSolver = (options) => {
+    made.push(options);
+    return {
+      actionValue: () => {
+        if (options.fail) throw options.fail;
+        return 'capped';
+      },
+    };
+  };
+  const solver = deadlineSolver(engine, 50_000, () => clock);
+  clock = 46_999; // 3,001 ms left: the shared solver keeps its own 3 s limit
+  assert.equal(solver.actionValue({}, null), 'shared');
+  clock = 48_800; // 1,200 ms left: a solver limited to the time left
+  assert.equal(solver.actionValue({}, null), 'capped');
+  assert.deepEqual(made[0], {
+    maxNodes: SEARCH_BOT_V1.solverMaxNodes,
+    maxMs: 1200,
+    maxTable: REASON_V2_BUDGET.solverTable,
+  });
+  assert.equal(engine.stats.solverDeadlineCapped, 1);
+  // a clock stop of a capped call is the deadline: discard the search, play the champion
+  engine.createSolver = (options) => ({
+    actionValue: () => {
+      throw new SolverBudget(options.maxNodes - 1);
+    },
+  });
+  assert.throws(() => solver.actionValue({}, null), SearchBudgetError);
+  // a node-limit stop is still the tested Node rule (skip that world)
+  engine.createSolver = (options) => ({
+    actionValue: () => {
+      throw new SolverBudget(options.maxNodes + 1);
+    },
+  });
+  assert.throws(() => solver.actionValue({}, null), SolverBudget);
+  clock = 50_000;
+  assert.throws(() => solver.actionValue({}, null), SearchBudgetError);
+  // v1 keeps the shared solver and its 3 / 4 s deadlines
+  const v1 = reasonContext(
+    { ...engine, protocol: undefined, budget: REASON_V1_BUDGET },
+    0,
+    'endgame',
+  );
+  assert.equal(v1.deadline, 4000);
+  assert.equal(v1.solver, engine.solver);
+});
+test('v2 fallback is never sticky: a budget fallback does not stop the next move from searching', async () => {
+  const game = createRound(123);
+  for (const hand of game.hands) hand.splice(9); // 36 cards: midgame band
+  const p = game.turn,
+    plays = candidates(game.hands[p], game.L, null);
+  let clock = 1000;
+  const deadlines = [];
+  let call = 0;
+  const engine = {
+    protocol: REASON_V2_PANEL,
+    budget: REASON_V2_BUDGET,
+    params: SEARCH_BOT_V1,
+    stats: reasonStats(REASON_V2_PANEL),
+    now: () => clock,
+    values: async (s) => s.actions.map((_, i) => (i === 0 ? 1 : 0)),
+    decide: async (masked, seed, ctx) => {
+      deadlines.push(ctx.deadline);
+      if (call++ === 0) {
+        clock += 50_001; // the first search runs past its deadline
+        assert.ok(ctx.now() > ctx.deadline);
+        throw new SearchBudgetError('midgame');
+      }
+      assert.equal(masked.hands[p].length, 9);
+      clock += 400;
+      return { plays, index: plays.length - 1 };
+    },
+  };
+  const first = await chooseReason(engine, game, p, 7);
+  assert.deepEqual(first, plays[0]); // champion fallback
+  const start = clock;
+  const second = await chooseReason(engine, game, p, 7);
+  assert.deepEqual(second, plays.at(-1)); // searched again and played the search choice
+  assert.deepEqual(deadlines, [1000 + 50_000, start + 50_000]);
+  assert.equal(engine.stats.budgetFallback, 1);
+  assert.equal(engine.stats.midgame, 2);
+  assert.equal(engine.stats.changedFromChampion, 1);
+  assert.equal(engine.stats.searchesOver30s, 1);
+  assert.equal(engine.stats.searchesOver3s, 1);
+  assert.equal(engine.stats.maxSearchMs, 50_001);
+  for (const key of REASON_V2_MOVE.statistics) assert.ok(Number.isFinite(engine.stats[key]), key);
+  assert.equal(reasonStats().maxSearchMs, undefined); // v1 counters keep their registered shape
 });
 test('opponent policy cannot see other hands; swapping hidden cards preserves its payload', () => {
   const game = createRound(123),
@@ -152,19 +304,52 @@ test('reason evaluation uses actual desktop deadlines and separate team policies
   assert.equal(guan, 2);
   assert.equal(base, 2);
 });
+test('a new batch takes its panel from the companion-frozen reason identity', () => {
+  assert.equal(reasonPanel(identities().reason), REASON_V1_PANEL);
+  assert.equal(reasonPanel(identities(REASON_V2_PANEL).reason), REASON_V2_PANEL);
+  assert.equal(
+    reasonPanel(identities(REASON_V2_PANEL).reason, { opponentPanel: REASON_V2_PANEL }),
+    REASON_V2_PANEL,
+  );
+  // a launcher switched to v2 but still pointing at the v1 companion stops registration
+  assert.throws(
+    () => reasonPanel(identities().reason, { opponentPanel: REASON_V2_PANEL }),
+    /differs from its frozen companion/,
+  );
+  assert.throws(() => reasonPanel({ protocol: 'clint-champion-reason-v9' }), /Unknown/);
+});
+test('reason worker refuses a plan whose panel and frozen reason protocol differ', async () => {
+  const opponents = ['clint', 'champion', 'reason'];
+  for (const [panel, protocol] of [
+    [REASON_V2_PANEL, REASON_V1_PANEL],
+    [REASON_V1_PANEL, REASON_V2_PANEL],
+  ])
+    await assert.rejects(
+      evaluateReason({
+        run: 'unused',
+        folder: 'unused',
+        plan: { opponents, opponentPanel: panel, reason: identities(protocol).reason },
+      }),
+      /protocol and panel differ/,
+    );
+  await assert.rejects(
+    evaluateReason({ run: 'unused', folder: 'unused', plan: { opponents, opponentPanel: 'x' } }),
+    /Not a reason panel/,
+  );
+});
 test('direct old evaluator rejects reason instead of silently playing pure champion or self', async () => {
   await assert.rejects(
     evaluate({ run: 'unused', model: 'unused', index: 1, opponents: ['reason'] }),
     /registered suite/,
   );
 });
-test('publisher requires all three reports and exact frozen reasoning identity; legacy two remains valid', async () => {
+async function publisherRoundTrip(protocol) {
   const temp = mkdtempSync(join(tmpdir(), 'guanzero-reason-'));
   try {
     const root = join(temp, 'repo'),
       folder = join(temp, 'guanzero-adp-io48/eval/development-500/model-000001');
     mkdirSync(folder, { recursive: true });
-    const { champion, reason } = identities();
+    const { champion, reason } = identities(protocol);
     const write = (p, d) => {
       mkdirSync(join(p, '..'), { recursive: true });
       writeFileSync(p, JSON.stringify(d, null, 2) + '\n');
@@ -186,7 +371,7 @@ test('publisher requires all three reports and exact frozen reasoning identity; 
     const plan = {
       id: 'model-000001',
       protocol: 'development-500-v1',
-      opponentPanel: 'clint-champion-reason-v1',
+      opponentPanel: protocol,
       opponents: ['clint', 'champion', 'reason'],
       modelVersion: 'model-000001',
       modelSHA256: hash('model'),
@@ -249,12 +434,21 @@ test('publisher requires all three reports and exact frozen reasoning identity; 
     delete plan.reason;
     savePlan();
     assert.equal(Object.keys((await verify()).opponents).length, 2);
-    plan.opponentPanel = 'clint-champion-reason-v1';
+    plan.opponentPanel = protocol;
     plan.opponents = ['clint', 'champion', 'reason'];
     plan.reason = reason;
     savePlan();
     write(join(folder, 'reason/report.json'), reports.reason);
-    assert.equal(Object.keys((await verify()).opponents).length, 3);
+    const verified = await verify();
+    assert.equal(Object.keys(verified.opponents).length, 3);
+    assert.equal(verified.opponentPanel, protocol);
+    assert.equal(verified.reason.budget.midgameMs, protocol === REASON_V1_PANEL ? 3000 : 50_000);
+    // the panel must name the protocol its frozen reason identity was registered with
+    plan.opponentPanel = protocol === REASON_V1_PANEL ? REASON_V2_PANEL : REASON_V1_PANEL;
+    savePlan();
+    await assert.rejects(verify(), /protocol and opponent panel differ/);
+    plan.opponentPanel = protocol;
+    savePlan();
     const changed = structuredClone(reports.reason);
     changed.opponents.reason.budget.solverMs = 1;
     assert.equal(validSuiteReport(changed, plan, 'reason'), false);
@@ -268,7 +462,11 @@ test('publisher requires all three reports and exact frozen reasoning identity; 
   } finally {
     rmSync(temp, { recursive: true, force: true });
   }
-});
+}
+test('publisher requires all three reports and exact frozen reasoning identity; legacy two remains valid', () =>
+  publisherRoundTrip(REASON_V1_PANEL));
+test('publisher verifies protocol v2 batches the same way and binds panel to reason protocol', () =>
+  publisherRoundTrip(REASON_V2_PANEL));
 
 test('source fingerprint ignores comments and unrelated relative strings', () => {
   const dir = mkdtempSync(join(tmpdir(), 'reason-closure-'));

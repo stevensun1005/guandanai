@@ -2,7 +2,7 @@ import { reasonProtocolDigest } from '../guanzero/training/evaluate-reason.mjs';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, join, resolve } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
-import { verifyFrozenReason } from '../guanzero/training/reason.mjs';
+import { verifyFrozenReason, reasonProtocol } from '../guanzero/training/reason.mjs';
 import { validSuiteReport } from '../guanzero/training/suite-reports.mjs';
 import {
   DEFAULT_OPPONENTS,
@@ -10,7 +10,7 @@ import {
   THREE_OPPONENT_PANEL,
   LEGACY_THREE_OPPONENTS,
   TWO_OPPONENT_PANEL,
-  REASON_OPPONENT_PANEL,
+  REASON_PANELS,
   LEGACY_TWO_OPPONENTS,
   suiteOpponents,
 } from '../guanzero/training/opponents.mjs';
@@ -28,12 +28,14 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   const legacy = plan.opponentPanel === undefined;
   const historicalThree = plan.opponentPanel === THREE_OPPONENT_PANEL;
   const panel = suiteOpponents(plan);
-  if (plan.opponentPanel === REASON_OPPONENT_PANEL)
+  const reasonPanel = REASON_PANELS.includes(plan.opponentPanel);
+  if (reasonPanel) {
     verifyFrozenReason(suite, plan.reason, plan.champion);
+    if (reasonProtocol(plan.reason) !== plan.opponentPanel)
+      throw Error('Reason protocol and opponent panel differ');
+  }
   if (
-    (!legacy &&
-      !historicalThree &&
-      ![TWO_OPPONENT_PANEL, REASON_OPPONENT_PANEL].includes(plan.opponentPanel)) ||
+    (!legacy && !historicalThree && plan.opponentPanel !== TWO_OPPONENT_PANEL && !reasonPanel) ||
     (source.run === 'guanzero-adp-io48' &&
       (legacy !== (plan.index === 5098) || (historicalThree && plan.index !== 5100))) ||
     resolve(input) !== join(suite, 'model.onnx') ||

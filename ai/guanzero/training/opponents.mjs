@@ -4,14 +4,21 @@ export const LEGACY_FIVE_OPPONENTS = Object.freeze(['random', 'rule', 'p0', 'cli
 export const LEGACY_THREE_OPPONENTS = Object.freeze(['random', 'clint', 'champion']);
 export const DEFAULT_OPPONENTS = Object.freeze(['clint', 'champion', 'reason']);
 export const LEGACY_TWO_OPPONENTS = Object.freeze(['clint', 'champion']);
-export const REASON_OPPONENT_PANEL = 'clint-champion-reason-v1';
+/** Registered 2026-11-09 with the old 3 / 4 s desktop budget; kept for its frozen batches. */
+export const REASON_V1_PANEL = 'clint-champion-reason-v1';
+/** Owner 2026-11-09: computer moves up to 60 s, reasoning at most 50 s, fallback after. */
+export const REASON_V2_PANEL = 'clint-champion-reason-v2';
+/** Both reason panels evaluate the same three opponents; only the reason budget differs. */
+export const REASON_PANELS = Object.freeze([REASON_V1_PANEL, REASON_V2_PANEL]);
+/** Panel of newly registered batches (the frozen companion's freezeReason decides it). */
+export const REASON_OPPONENT_PANEL = REASON_V2_PANEL;
 export const THREE_OPPONENT_PANEL = 'random-clint-champion-v1';
 export const TWO_OPPONENT_PANEL = 'clint-champion-v1';
 export function suiteOpponents(plan) {
   if (plan.opponentPanel === undefined) return LEGACY_FIVE_OPPONENTS;
   if (plan.opponentPanel === THREE_OPPONENT_PANEL) return LEGACY_THREE_OPPONENTS;
   if (plan.opponentPanel === TWO_OPPONENT_PANEL) return LEGACY_TWO_OPPONENTS;
-  if (plan.opponentPanel === REASON_OPPONENT_PANEL) return DEFAULT_OPPONENTS;
+  if (REASON_PANELS.includes(plan.opponentPanel)) return DEFAULT_OPPONENTS;
   throw Error('Unknown GuanZero opponent panel');
 }
 const definitions = {
