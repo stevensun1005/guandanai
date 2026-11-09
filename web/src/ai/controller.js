@@ -8,6 +8,7 @@ import { sharedSearchClient } from './search/client.js';
 import { searchPayload } from './search/payload.mjs';
 import { searchBand } from './search/constants.mjs';
 import { ruleObservation } from '../rule-bot/runtime.mjs';
+import { RULES_ONLY_TIMEOUT_MS, clintBrainMs, hardLeft } from './turn-timing.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost, isHumanSeat } from '../game/session.js';
 import { showError } from '../input/controls.js';
@@ -25,6 +26,15 @@ export function initialize() {
     let ready = false,
       initialization = null,
       generation = 0;
+    const clintFallbacks = { timeout: 0, error: 0 };
+    /** Computer moves' time from the turn start to the decision, by seat kind (?test=1 checks). */
+    const moveMs = { reason: [], clint: [], neural: [] };
+    function recordMove(p, ms) {
+      const id = seatModel(p);
+      const list = moveMs[searchBot(id) ? 'reason' : id === CLINT_RULE_ID ? 'clint' : 'neural'];
+      list.push(Math.round(ms));
+      if (list.length > 500) list.shift();
+    }
     let worker = null,
       requestId = 0;
     const pending = new Map();
@@ -39,7 +49,8 @@ export function initialize() {
       }
       pending.clear();
     }
-    function request(type, state) {
+    /** One AI-worker request; past `timeout` the worker is replaced and every request fails. */
+    function request(type, state, timeout = type === 'init' ? 60000 : 15000) {
       return new Promise((resolve, reject) => {
         if (!worker) {
           const url = new URL('./assets/ai-worker.mjs', document.baseURI);
@@ -56,10 +67,7 @@ export function initialize() {
           worker.onerror = () => stopWorker(new Error('AI worker failed'));
         }
         const id = ++requestId;
-        const timer = setTimeout(
-          () => stopWorker(new Error('AI timeout')),
-          type === 'init' ? 60000 : 15000,
-        );
+        const timer = setTimeout(() => stopWorker(new Error('AI timeout')), timeout);
         pending.set(id, { resolve, reject, timer });
         worker.postMessage({ id, type, state });
       });
@@ -73,10 +81,25 @@ export function initialize() {
      * first); any failure plays champion 017 instead.
      */
     let searchClient = null,
-      prefetched = null;
+      prefetched = null,
+      turnStart = null;
     const searchSeeds = new WeakMap();
     const seatModel = (p) => botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
-    function searchRequest(p) {
+    const turnKey = (game, p) => `${game.tok}|${game.log.length}|${p}`;
+    /**
+     * When seat p's current turn started on this host (performance.now() clock): recorded by
+     * prefetch() as the turn's clock is created, so the thinking pause and any first-load wait
+     * count against the 50 s reasoning limit (owner rule 2026-11-09, turn-timing.mjs). Without a
+     * record (a restored host) the turn's game clock gives the elapsed time.
+     */
+    function turnStartedAt(p, clock) {
+      const game = runtime.game;
+      if (turnStart?.game === game && turnStart.key === turnKey(game, p)) return turnStart.at;
+      const elapsed =
+        clock && Number.isFinite(clock.total - clock.left) ? clock.total - clock.left : 0;
+      return performance.now() - Math.max(0, elapsed);
+    }
+    function searchRequest(p, startedAt = turnStartedAt(p)) {
       const game = runtime.game;
       const bot = searchBot(seatModel(p));
       if (!bot || game.turn !== p || privateSeat(runtime, p)) return null;
@@ -85,13 +108,13 @@ export function initialize() {
       const plays = candidates(game.hands[p], game.L, game.trick?.play);
       if (plays.length === 1 || plays.some((play) => play?.cards.length === game.hands[p].length))
         return null;
-      const key = `${game.tok}|${game.log.length}|${p}`;
+      const key = turnKey(game, p);
       if (prefetched?.game === game && prefetched.key === key) return prefetched.promise;
       if (!searchSeeds.has(game))
         searchSeeds.set(game, crypto.getRandomValues(new Uint32Array(1))[0]);
       searchClient ||= sharedSearchClient(VERSION);
       const payload = searchPayload(game, p, runtime.network.off, searchSeeds.get(game));
-      const promise = searchClient.decide(bot.id, payload);
+      const promise = searchClient.decide(bot.id, payload, { startedAt });
       prefetched = { game, key, promise };
       return promise;
     }
@@ -138,7 +161,7 @@ export function initialize() {
       return initialization;
     }
 
-    async function decide(p, { timeout = false } = {}) {
+    async function decide(p, { timeout = false, startedAt = turnStartedAt(p) } = {}) {
       const game = runtime.game,
         tok = runtime.game.tok,
         count = runtime.game.log.length;
@@ -175,7 +198,25 @@ export function initialize() {
         const observation = ruleObservation(game, p);
         if (timeout)
           observation.fixed = p === 0 ? (game.fixed || []).map((ids) => ids.slice()) : [];
-        const result = await request(timeout ? 'rule-timeout' : 'rule', observation);
+        let result;
+        if (timeout) result = await request('rule-timeout', observation);
+        else {
+          // rules, then the 残局大脑 for at most 30 s and never past the turn's 50 s mark; a worker
+          // still busy at 52 s (or failing) is replaced and the rules-only move is played instead.
+          // Not sticky: the next move asks for the brain again.
+          observation.brainMs = clintBrainMs(performance.now() - startedAt);
+          try {
+            result = await request(
+              'rule',
+              observation,
+              Math.max(1000, hardLeft(startedAt, performance.now())),
+            );
+          } catch (error) {
+            if (!current()) return null;
+            clintFallbacks[/timeout/i.test(error.message) ? 'timeout' : 'error']++;
+            result = await request('rule', { ...observation, brainMs: 0 }, RULES_ONLY_TIMEOUT_MS);
+          }
+        }
         if (!current()) return null;
         if (!result) {
           if (!game.trick) throw Error('invalid-rule-pass');
@@ -201,11 +242,17 @@ export function initialize() {
       let search = null;
       try {
         // a human seat's timeout autoplay plays the champion at once: no extra wait after its clock
-        search = timeout ? null : searchRequest(p);
+        search = timeout ? null : searchRequest(p, startedAt);
       } catch {
         search = null; // an unexpected payload problem plays the champion move
       }
+      input.modelId = model.id;
+      // Champion 017's move is computed on the AI worker while the search runs (a separate
+      // worker), so a fallback at the 50 s mark is played at once.
+      let champion = null;
       if (search) {
+        champion = request('decide', input);
+        champion.catch(() => {});
         const result = await search;
         if (!current()) return null;
         const play = searchedPlay(result, plays, p);
@@ -213,8 +260,15 @@ export function initialize() {
         if (result?.ok)
           searchClient.stats.fallbacks.mismatch = (searchClient.stats.fallbacks.mismatch || 0) + 1;
       }
-      input.modelId = model.id;
-      const result = await request('decide', input);
+      let result;
+      try {
+        result = await (champion || request('decide', input));
+      } catch (error) {
+        if (!champion) throw error;
+        // the early request failed (a replaced worker): ask once more, still before 60 s
+        if (!current()) return null;
+        result = await request('decide', input, RULES_ONLY_TIMEOUT_MS);
+      }
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)
         throw new Error('invalid-action');
@@ -243,8 +297,11 @@ export function initialize() {
         isHost() &&
         generation === request;
       let pl;
+      const autoplay = clock.think == null && isHumanSeat(clock.who),
+        startedAt = turnStartedAt(clock.who, clock);
       try {
-        pl = await decide(clock.who, { timeout: clock.think == null && isHumanSeat(clock.who) });
+        pl = await decide(clock.who, { timeout: autoplay, startedAt });
+        if (current() && !autoplay) recordMove(clock.who, performance.now() - startedAt);
       } catch (error) {
         if (!current()) return;
         stopWorker(error);
@@ -254,6 +311,7 @@ export function initialize() {
         );
         $('#retryTableBtn').onclick = () => {
           hideOverlay();
+          turnStart = null; // a retry is a fresh attempt: its time counts from the clock again
           if (current()) void playTurn(clock);
         };
         $('#leaveTableBtn').onclick = () => location.reload();
@@ -290,13 +348,18 @@ export function initialize() {
       }
     }
     /**
-     * Start a research-bot search during a computer seat's think delay; decide() reuses the same
-     * request. Never for a human seat: its timeout autoplay plays champion 017 without searching,
-     * and a prefetch would occupy the serial search worker on every human turn.
+     * A computer seat's turn starts (its clock was just created): record the start, from which
+     * the 50 s reasoning limit counts, and start a research-bot search during the think delay;
+     * decide() reuses the same request. Never for a human seat: its timeout autoplay plays
+     * champion 017 without searching, and a prefetch would occupy the serial search worker on
+     * every human turn.
      */
     function prefetch(p) {
       try {
-        if (isHost() && runtime.game.phase === 'play' && !isHumanSeat(p)) void searchRequest(p);
+        if (!isHost() || runtime.game.phase !== 'play' || isHumanSeat(p)) return;
+        const game = runtime.game;
+        turnStart = { game, key: turnKey(game, p), at: performance.now() };
+        void searchRequest(p, turnStart.at);
       } catch {
         /* decide() rebuilds the request and falls back to the champion. */
       }
@@ -309,6 +372,16 @@ export function initialize() {
       playTurn,
       get searchStats() {
         return searchClient?.stats || null;
+      },
+      /** Per kind: milliseconds from each computer turn's start to its decision. */
+      get moveTimes() {
+        return Object.fromEntries(
+          Object.entries(moveMs).map(([kind, list]) => [kind, list.slice()]),
+        );
+      },
+      /** Clint seats that played the rules-only move after a brain overrun or worker failure. */
+      get clintFallbacks() {
+        return { ...clintFallbacks };
       },
       cancelTurn() {
         generation++;

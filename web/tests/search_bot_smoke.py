@@ -61,6 +61,10 @@ with sync_playwright() as p:
                 page.locator("#passBtn").click()
         page.wait_for_timeout(100)
     stats = page.evaluate("JSON.parse(JSON.stringify(TableBot.searchStats))")
+    # owner rule 2026-11-09: every computer move, from its turn start (thinking pause included),
+    # is decided by the 52 s hard limit, well before the 60 s turn
+    move_ms = page.evaluate("TableBot.moveTimes")["reason"]
+    assert move_ms and max(move_ms) < 52000, move_ms
     assert not page.locator("#retryTableBtn").is_visible()
     assert not errors, errors
     assert page.evaluate("G.phase") in ("roundEnd", "over"), page.evaluate("G.phase")
@@ -78,6 +82,11 @@ with sync_playwright() as p:
         "searchMs": {
             "p50": sorted(stats["ms"])[len(stats["ms"]) // 2] if stats["ms"] else None,
             "max": max(stats["ms"]) if stats["ms"] else None,
+        },
+        "moveMsFromTurnStart": {
+            "moves": len(move_ms),
+            "p50": sorted(move_ms)[len(move_ms) // 2],
+            "max": max(move_ms),
         },
         "workers": sorted({url.split("?")[0].rsplit("/", 1)[-1] for url in workers}),
         "beliefSHA256": loaded.get(bot["belief"]["file"]),

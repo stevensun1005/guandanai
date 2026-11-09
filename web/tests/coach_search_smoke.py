@@ -56,7 +56,7 @@ with sync_playwright() as p:
                 band = "midgame" if 21 <= state["cards"] <= 40 else "endgame" if state["cards"] <= 20 else None
                 if band:
                     # wait for this turn's coach result (search values or the champion fallback);
-                    # the bound covers the first-load wait (10 s) and a 56 s hard timeout
+                    # the bound covers the first-load wait (10 s) and the 52 s hard timeout
                     page.wait_for_function(
                         "()=>{const t=document.querySelector('#coachTopStatus').textContent;return !/搜索中|正在比较/.test(t)}",
                         timeout=70000,

@@ -4,6 +4,8 @@
  * --endgame-worlds=belief` with its defaults (MODEL_STUDY 70.4 / 71.2). A Node test checks these
  * against midgame-search DEFAULTS and evaluate.mjs SEARCH, so a drift fails `npm test`.
  */
+import { HARD_MS, REASON_MS } from '../turn-timing.mjs';
+
 export const SEARCH_CORE_VERSION = 'search-v1';
 
 export const SEARCH_BOT_V1 = Object.freeze({
@@ -31,24 +33,27 @@ export function searchBand(cards, params = SEARCH_BOT_V1) {
 export const worldSeed = (seed, ply) => (seed * 1009 + ply * 7919) >>> 0;
 
 /**
- * Browser time and memory budgets. A search that does not finish inside `midgameMs` /
- * `endgameMs` is discarded and the table plays champion 017's move instead. `solverMs` is the
- * per-call exact-solver limit (Node: 3,000 ms) and `solverTable` the transposition-table size at
- * which the table is cleared before a call (Node: 1,000,000); neither changes a solved value.
- * Owner 2026-11-09: 50 s per move on every device (was 3 / 4 s desktop, 3.5 s mobile with a 1 s
- * mobile solver limit), below the 60 s human turn clock (game/clock.js PLAY_MS). Within a call the
- * table grows by at most `solverMaxNodes`, so the memory bound does not depend on these times.
+ * Browser time and memory budgets. `midgameMs` / `endgameMs` are the reasoning limit measured from
+ * the start of the computer seat's turn on the host (owner rule 2026-11-09, ai/turn-timing.mjs:
+ * 60 s per move like a human, at most 50 s of reasoning, 10 s kept for the fallback move): the
+ * thinking pause and any first-load wait count against them, so a search gets only the time left
+ * to the 50 s mark. A search that does not finish by then is discarded and the table plays
+ * champion 017's move instead. `solverMs` is the per-call exact-solver limit (Node: 3,000 ms); a
+ * call is also capped by the time left to the 50 s mark, so no call runs past it. `solverTable` is
+ * the transposition-table size at which the table is cleared before a call (Node: 1,000,000);
+ * neither changes a solved value. Within a call the table grows by at most `solverMaxNodes`, so
+ * the memory bound does not depend on these times.
  */
 export const SEARCH_BUDGETS = Object.freeze({
   desktop: Object.freeze({
-    midgameMs: 50_000,
-    endgameMs: 50_000,
+    midgameMs: REASON_MS,
+    endgameMs: REASON_MS,
     solverMs: 3000,
     solverTable: 300_000,
   }),
   mobile: Object.freeze({
-    midgameMs: 50_000,
-    endgameMs: 50_000,
+    midgameMs: REASON_MS,
+    endgameMs: REASON_MS,
     solverMs: 3000,
     solverTable: 100_000,
   }),
@@ -57,21 +62,23 @@ export const SEARCH_BUDGETS = Object.freeze({
 /**
  * Per-call exact-solver time limit of the tested Node bot (evaluate.mjs SEARCH.solver.maxMs). A
  * world the Node bot cannot solve in this time is skipped there, so a browser call stopped by the
- * clock at this limit follows the tested rule. A browser budget with a SHORTER per-call limit
- * would skip worlds Node solves; there a clock stop discards the whole search instead and the
- * table plays champion 017 (a node-limit stop at solverMaxNodes is the tested rule and skips).
- * Since 2026-11-09 both shipped budgets use the Node limit, so this rule only guards a future
- * shorter budget.
+ * clock at this limit follows the tested rule. A call with a SHORTER limit (a budget with a shorter
+ * `solverMs`, or a call capped by the time left to the 50 s mark) would skip worlds Node solves;
+ * there a stop discards the whole search instead and the table plays champion 017 (a node-limit
+ * stop of an uncapped call at solverMaxNodes is the tested rule and skips the world).
  */
 export const NODE_SOLVER_MS = 3000;
 
-/** Hard limit for one worker reply: budget, one solver call of overshoot and three seconds. */
+/**
+ * Hard limit for one worker reply, measured like the budget from the turn start: 52 s. The search
+ * stops itself by 50 s (no solver call overshoots), so this only replaces a worker that hangs.
+ */
 export const hardTimeoutMs = (budget) =>
-  Math.max(budget.midgameMs, budget.endgameMs) + budget.solverMs + 3000;
+  Math.max(budget.midgameMs, budget.endgameMs) + (HARD_MS - REASON_MS);
 
 /**
  * Longest a decision (or a coach request) waits for the networks' first load before it falls
- * back to champion 017 while loading continues in the background. Independent of the search
- * budget, so a slow download never holds a table for a whole 50 s budget.
+ * back to champion 017 while loading continues in the background (and never past the 50 s mark).
+ * The wait counts against the 50 s, so a slow download never holds a table for a whole budget.
  */
 export const FIRST_LOAD_WAIT_MS = 10_000;

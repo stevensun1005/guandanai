@@ -10,15 +10,21 @@
  *   - a table request while a coach job runs asks the coach job to stop ('cancel', honoured
  *     within about 50 ms between inferences or between endgame worlds); if it has not stopped
  *     after PREEMPT_MS the worker is replaced and the networks reload before the table job.
- * A table job's budget and hard timeout start when it is posted, so a coach job never eats
- * into them, and table searches never yield or cancel; a coach job past its hard timeout replaces
- * the worker without failing queued table jobs. A worker replacement does drop the table
+ * A table job's budget and hard timeout are measured from the start of the seat's turn (owner rule
+ * 2026-11-09, ../turn-timing.mjs): the search stops at the 50 s mark (`remainingMs` is the time
+ * left when the job is posted; the first-load wait and any wait behind a coach job count), and a
+ * job not answered by 52 s is dropped (replacing the worker if it is running), so the champion
+ * move is played well before 60 s. Table searches never yield or cancel; a coach job past its hard
+ * timeout (52 s from its post) replaces the worker without failing queued table jobs.
+ * Nothing is sticky: after any fallback, timeout, worker error or replacement, or failed load, the
+ * next decision loads (if needed) and searches again. A worker replacement does drop the table
  * solver's transposition table (exact values unchanged; only worlds right at the node limit can
  * be solved differently), and the table job waits for the reload.
  *   - a new coach request (the player's next turn) drops queued coach jobs and asks a running
  *     one to stop: with 50 s budgets an old turn's coach search must not delay the newest turn.
  */
 import { FIRST_LOAD_WAIT_MS, SEARCH_BUDGETS, hardTimeoutMs } from './constants.mjs';
+import { REASON_MS } from '../turn-timing.mjs';
 
 const PREEMPT_MS = 500;
 
@@ -33,12 +39,17 @@ export function deviceClass(nav = globalThis.navigator) {
   return 'desktop';
 }
 
-export function createSearchClient({ version, device = deviceClass(), spawn } = {}) {
+export function createSearchClient({
+  version,
+  device = deviceClass(),
+  spawn,
+  now = () => performance.now(),
+} = {}) {
   const budget = SEARCH_BUDGETS[device];
+  const reasonMs = Math.min(REASON_MS, Math.max(budget.midgameMs, budget.endgameMs));
   let worker = null,
     requestId = 0,
     initialized = null,
-    initFailedAt = -Infinity,
     loadedBot = null,
     active = null,
     preemptTimer = null;
@@ -47,6 +58,7 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     device,
     budget,
     firstLoadWaitMs: FIRST_LOAD_WAIT_MS,
+    hardTimeoutMs: hardTimeoutMs(budget),
     requests: 0,
     searched: 0,
     differs: 0,
@@ -110,14 +122,26 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     let index = queue.findIndex((job) => job.owner !== 'coach');
     if (index < 0) index = 0;
     const [job] = queue.splice(index, 1);
+    if (job.deadline !== undefined) {
+      // a table search: only the time left to the turn's 50 s mark
+      const remainingMs = job.deadline - now();
+      if (remainingMs <= 0) {
+        clearTimeout(job.timer);
+        job.reject(new Error('search-budget'));
+        pump();
+        return;
+      }
+      job.message = { ...job.message, remainingMs };
+    }
     ensureWorker();
     active = job;
     job.id = ++requestId;
     // a coach job past its hard timeout is replaced alone: queued table jobs must not fail with it
-    job.timer = setTimeout(
-      () => (job.owner === 'coach' ? abandon(job, 'search-timeout') : stop('search-timeout')),
-      job.timeout,
-    );
+    if (job.timeout !== undefined)
+      job.timer = setTimeout(
+        () => (job.owner === 'coach' ? abandon(job, 'search-timeout') : stop('search-timeout')),
+        job.timeout,
+      );
     worker.postMessage({ id: job.id, ...job.message });
   }
   function call(message, timeout, owner = 'table', front = false) {
@@ -128,14 +152,32 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
       pump();
     });
   }
+  /**
+   * A table search measured from its turn start: it searches until `deadline` (the 50 s mark)
+   * and is dropped at `expires` (52 s) wherever it is, waiting in the queue or running.
+   */
+  function tableCall(message, deadline, expires) {
+    return new Promise((resolve, reject) => {
+      const job = { message, owner: 'table', deadline, resolve, reject };
+      job.timer = setTimeout(
+        () => {
+          if (active === job) return stop('search-timeout');
+          const index = queue.indexOf(job);
+          if (index >= 0) queue.splice(index, 1);
+          reject(new Error('search-timeout'));
+        },
+        Math.max(0, expires - now()),
+      );
+      queue.push(job);
+      pump();
+    });
+  }
+  /** Load the networks; a failed load is retried by the next request (never sticky). */
   function init(bot) {
-    if (performance.now() - initFailedAt < 30000) return Promise.reject(Error('search-init-wait'));
     if (!initialized) {
       loadedBot = bot;
       initialized = call({ type: 'init', bot, budget }, 60000, 'init', true).catch((error) => {
         initialized = null;
-        // a coach job being replaced is not a load failure
-        if (error.message !== 'search-preempted') initFailedAt = performance.now();
         throw error;
       });
     }
@@ -159,15 +201,21 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     active.cancelled = true;
     worker.postMessage({ type: 'cancel', id: active.id });
   }
-  /** Wait at most FIRST_LOAD_WAIT_MS for the networks; they keep loading in the background. */
-  async function ready(bot) {
+  /**
+   * Wait at most FIRST_LOAD_WAIT_MS (and never past `limit` ms) for the networks; they keep
+   * loading in the background.
+   */
+  async function ready(bot, limit = Infinity) {
     const loading = init(bot);
     loading.catch(() => {});
     let timer;
     await Promise.race([
       loading,
       new Promise((_, reject) => {
-        timer = setTimeout(() => reject(Error('search-loading')), FIRST_LOAD_WAIT_MS);
+        timer = setTimeout(
+          () => reject(Error('search-loading')),
+          Math.max(0, Math.min(FIRST_LOAD_WAIT_MS, limit)),
+        );
       }),
     ]).finally(() => clearTimeout(timer));
   }
@@ -176,9 +224,11 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
       ? 'timeout'
       : error.message === 'search-loading'
         ? 'loading'
-        : error.message === 'search-preempted'
-          ? 'preempted'
-          : 'error';
+        : error.message === 'search-budget'
+          ? 'budget'
+          : error.message === 'search-preempted'
+            ? 'preempted'
+            : 'error';
   function fallback(reason, extra = {}, bucket = stats) {
     bucket.fallbacks[reason] = (bucket.fallbacks[reason] || 0) + 1;
     return { fallback: true, reason, ...extra };
@@ -190,15 +240,21 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     warm(bot) {
       void init(bot).catch(() => {});
     },
-    async decide(bot, payload) {
+    /**
+     * One table decision. `startedAt` (same clock as `now`) is when the seat's turn started on
+     * the host; the search ends by startedAt + 50 s and the reply is given up at startedAt + 52 s.
+     */
+    async decide(bot, payload, { startedAt = now() } = {}) {
       stats.requests++;
       yieldToTable();
+      const deadline = startedAt + reasonMs,
+        expires = startedAt + hardTimeoutMs(budget);
       let result;
       try {
         // A table never waits for a slow first load longer than FIRST_LOAD_WAIT_MS (10 s, not
         // the 50 s search budget): the networks keep loading and this decision plays 017.
-        await ready(bot);
-        result = await call({ type: 'search', payload }, hardTimeoutMs(budget));
+        await ready(bot, deadline - now());
+        result = await tableCall({ type: 'search', payload }, deadline, expires);
       } catch (error) {
         return fallback(reasonOf(error), { message: error.message });
       }

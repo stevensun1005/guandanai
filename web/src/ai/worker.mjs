@@ -2,7 +2,7 @@ import * as ort from './vendor/ort.wasm.min.mjs';
 import { decideTablePolicy } from './table-policy.mjs';
 import { MODELS } from './models.mjs';
 import { botModel } from './model-catalog.mjs';
-import { decideClintRule, decideClintTimeout } from '../rule-bot/runtime.mjs';
+import { clintBrainSettings, decideClintRule, decideClintTimeout } from '../rule-bot/runtime.mjs';
 import { COACH_MODEL_ID, prepareCoachPolicy } from '../coach/evaluation.mjs';
 import { inferPolicy } from './policy-inference.mjs';
 import { scoreOracle } from '../coach/oracle.mjs';
@@ -23,6 +23,12 @@ function session(key = 'policy') {
     sessions.set(key, promise);
   }
   return sessions.get(key);
+}
+
+/** The controller's brain budget travels with the observation; the view itself never keeps it. */
+function withoutBrainMs(state) {
+  const { brainMs: _, ...observation } = state;
+  return observation;
 }
 
 let queue = Promise.resolve();
@@ -74,7 +80,7 @@ self.onmessage = (event) => {
               ? { ready: true }
               : type === 'rule-timeout'
                 ? decideClintTimeout(state)
-                : decideClintRule(state),
+                : decideClintRule(withoutBrainMs(state), clintBrainSettings(state.brainMs)),
         });
         return;
       }

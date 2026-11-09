@@ -51,6 +51,15 @@ import {
 } from '../src/ai/search/known-cards.mjs';
 import { createSearchClient, deviceClass } from '../src/ai/search/client.js';
 import {
+  CLINT_BRAIN_MS,
+  HARD_MS,
+  REASON_MS,
+  RULES_ONLY_TIMEOUT_MS,
+  TURN_MS,
+  clintBrainMs,
+} from '../src/ai/turn-timing.mjs';
+import { readFileSync } from 'node:fs';
+import {
   BOT_CHOICES,
   DEFAULT_BOT_MODEL,
   NEURAL_DEFAULT_MODEL,
@@ -69,6 +78,8 @@ import { collectedRound } from './fixtures/collected-round.mjs';
 import { nodeStub } from '../tools/node-stub.mjs';
 import { COACH_MODEL_ID, COACH_SEARCH_BOT_ID } from '../src/coach/evaluation.mjs';
 import { normalizeBotPreferences, storedBotPreferences } from '../src/lobby/bot-setup.js';
+
+const PLAY_MS_SOURCE = readFileSync(new URL('../src/game/clock.js', import.meta.url), 'utf8');
 
 /* Deterministic stand-ins: a hash of the public inputs, never of hidden cards. */
 function mix(...parts) {
@@ -146,12 +157,15 @@ test('frozen search settings equal the held-out-tested Node bot', () => {
     assert.ok(
       budget.solverMs <= SEARCH.solver.maxMs && budget.solverTable <= SEARCH.solver.maxTable,
     );
-    // owner 2026-11-09: 50 s per move; the hard limit stays under the 60 s human turn clock
-    assert.equal(budget.midgameMs, 50_000);
-    assert.equal(budget.endgameMs, 50_000);
-    assert.equal(hardTimeoutMs(budget), 56_000);
-    assert.ok(hardTimeoutMs(budget) < 60_000, 'below the 60 s human turn clock (PLAY_MS)');
+    // owner 2026-11-09: 60 s per move like a human, at most 50 s of reasoning from the turn
+    // start, 10 s kept for the fallback move; a hung worker is replaced at 52 s
+    assert.equal(budget.midgameMs, REASON_MS);
+    assert.equal(budget.endgameMs, REASON_MS);
+    assert.equal(hardTimeoutMs(budget), HARD_MS);
+    assert.ok(hardTimeoutMs(budget) + RULES_ONLY_TIMEOUT_MS < TURN_MS, 'fallback before 60 s');
   }
+  assert.deepEqual([TURN_MS, REASON_MS, HARD_MS, CLINT_BRAIN_MS], [60_000, 50_000, 52_000, 30_000]);
+  assert.equal(PLAY_MS_SOURCE.includes('PLAY_MS = 60000'), true, 'the human turn clock is 60 s');
   assert.ok(FIRST_LOAD_WAIT_MS <= 10_000, 'a first load never holds a table for a whole budget');
   assert.equal(searchBand(41), null);
   assert.equal(searchBand(40), 'midgame');
@@ -276,6 +290,74 @@ test('a clock-stopped solver call under a shorter-than-Node limit falls back as 
   );
   assert.equal(skipped.minWorldsFallback, true);
   assert.equal(skipped.index, skipped.championIndex);
+});
+
+test('solver calls are capped by the time left to the 50 s mark; a capped stop falls back', async () => {
+  const positions = [];
+  for (let seed = 731900700; positions.length < 6 && seed < 731900760; seed++)
+    for (const position of bandPositions(seed, 2))
+      if (position.band === 'endgame') positions.push(position);
+  let compared = 0,
+    stopped = 0;
+  for (const { game, seed } of positions) {
+    const masked = () => restoreGame(searchPayload(game, game.turn, 0, seed));
+    const full = await endgameDecision(masked(), seed, webContext(testSolver()));
+    // 3 s or more left before every call: the shared solver runs every call, as without a deadline
+    {
+      const capped = [];
+      const roomy = await endgameDecision(masked(), seed, {
+        ...webContext(testSolver()),
+        now: () => 0,
+        deadline: REASON_MS,
+        solverMs: NODE_SOLVER_MS,
+        cappedSolver: (ms) => capped.push(ms),
+      });
+      assert.equal(capped.length, 0);
+      assert.equal(roomy.index, full.index);
+    }
+    // 1.5 s left: every call runs on a solver limited to the 1.5 s left (never past the mark)
+    const limits = [];
+    const capped =
+      (maxMs, maxNodes = 40_000) =>
+      (ms) => {
+        limits.push(ms);
+        return createSolver({ maxNodes, maxMs, maxTable: 1e9 });
+      };
+    const late = {
+      ...webContext(testSolver()),
+      now: () => REASON_MS - 1500,
+      deadline: REASON_MS,
+      solverMs: NODE_SOLVER_MS,
+    };
+    if (full.used === full.worlds.length) {
+      // a capped call that finishes gives the same exact value: the same decision
+      const finished = await endgameDecision(masked(), seed, {
+        ...late,
+        cappedSolver: capped(1e9, 1e9),
+      });
+      assert.equal(finished.index, full.index);
+      assert.equal(finished.used, full.used);
+      compared++;
+    }
+    // a capped call stopped by its node limit (its own cold table) also discards the search
+    try {
+      const nodes = await endgameDecision(masked(), seed, { ...late, cappedSolver: capped(1e9) });
+      assert.equal(nodes.index, full.index);
+    } catch (error) {
+      assert.ok(error instanceof SearchBudgetError);
+    }
+    assert.ok(limits.length > 0 && limits.every((ms) => ms === 1500));
+    // the time left runs out inside a capped call: the whole search is discarded (017)
+    try {
+      const strict = await endgameDecision(masked(), seed, { ...late, cappedSolver: capped(-1) });
+      assert.equal(strict.index, full.index, 'no call reached the clock check');
+    } catch (error) {
+      assert.ok(error instanceof SearchBudgetError);
+      assert.equal(error.stage, 'endgame');
+      stopped++;
+    }
+  }
+  assert.ok(compared > 0 && stopped > 0, `${compared} compared / ${stopped} stopped`);
 });
 
 /** A deal with a public tribute (and return) applied and some plays made. */
@@ -748,4 +830,143 @@ test('a superseded coach job that has not stopped still yields to a table search
   next.reply(next.posted[1].id, { ok: true, index: 0, championIndex: 0, ms: 5 });
   assert.equal((await table).ok, true);
   assert.equal(client.stats.coach.preempted, 1);
+});
+
+/** A fake clock (the client's `now`) next to mocked timers. */
+function turnClock(t) {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const clock = { at: 0 };
+  const flush = () => new Promise((resolve) => setImmediate(resolve));
+  const advance = async (ms) => {
+    clock.at += ms;
+    t.mock.timers.tick(ms);
+    await flush();
+  };
+  return { clock, now: () => clock.at, flush, advance };
+}
+
+test('a table search gets the time left to the 50 s mark of its turn and is dropped at 52 s', async (t) => {
+  const { clock, now, flush, advance } = turnClock(t);
+  const { workers, spawn } = fakeWorkers();
+  const client = createSearchClient({ version: 't', device: 'desktop', spawn, now });
+  assert.equal(client.stats.hardTimeoutMs, HARD_MS);
+  // the turn started 800 ms ago (thinking pause); the networks then take 3 s to load
+  let settled = null;
+  const table = client.decide('9001', { p: 1 }, { startedAt: -800 }).then((r) => (settled = r));
+  await flush();
+  await advance(3000);
+  workers[0].reply(workers[0].posted[0].id, { ready: true });
+  await flush();
+  const search = workers[0].posted.at(-1);
+  assert.equal(search.type, 'search');
+  assert.equal(search.remainingMs, REASON_MS - 800 - 3000, 'the pause and the load count');
+  // the worker never answers: at 52 s from the turn start it is replaced
+  await advance(HARD_MS - 800 - 3000 - 1);
+  assert.equal(settled, null);
+  await advance(1);
+  await table;
+  assert.equal(settled.fallback, true);
+  assert.equal(settled.reason, 'timeout');
+  assert.equal(workers[0].terminated, true);
+  assert.ok(clock.at - -800 <= HARD_MS, 'the champion plays from 52 s, well before 60 s');
+  // worker replaced, then the next move searches normally
+  const start = clock.at;
+  const next = client.decide('9001', { p: 2 }, { startedAt: start });
+  await flush();
+  assert.equal(workers.length, 2);
+  workers[1].reply(workers[1].posted[0].id, { ready: true });
+  await flush();
+  const again = workers[1].posted.at(-1);
+  assert.equal(again.type, 'search');
+  assert.equal(again.remainingMs, REASON_MS);
+  workers[1].reply(again.id, { ok: true, index: 2, championIndex: 0, ms: 9 });
+  assert.equal((await next).index, 2);
+  assert.deepEqual(client.stats.fallbacks, { timeout: 1 });
+});
+
+test('a fallback never sticks: after a failed search, worker error or failed load the next move searches', async (t) => {
+  const { now, flush, advance } = turnClock(t);
+  const { workers, spawn } = fakeWorkers();
+  const client = createSearchClient({ version: 't', device: 'desktop', spawn, now });
+  // 1. the first load fails: the next move loads again at once (no back-off)
+  const first = client.decide('9001', { p: 1 });
+  await flush();
+  workers[0].onmessage({ data: { id: workers[0].posted[0].id, error: 'fetch failed' } });
+  assert.equal((await first).reason, 'error');
+  const second = client.decide('9001', { p: 1 });
+  await flush();
+  const init = workers[0].posted.at(-1);
+  assert.equal(init.type, 'init', 'the load is retried by the next move');
+  workers[0].reply(init.id, { ready: true });
+  await flush();
+  // 2. the search itself falls back (budget): the next move searches
+  workers[0].reply(workers[0].posted.at(-1).id, { fallback: true, reason: 'budget' });
+  assert.equal((await second).reason, 'budget');
+  const third = client.decide('9001', { p: 1 });
+  await flush();
+  const search = workers[0].posted.at(-1);
+  assert.equal(search.type, 'search');
+  workers[0].reply(search.id, { ok: true, index: 1, championIndex: 0, ms: 4 });
+  assert.equal((await third).index, 1);
+  // 3. the worker crashes mid-search: it is replaced and the next move searches
+  const fourth = client.decide('9001', { p: 1 });
+  await flush();
+  workers[0].onerror();
+  assert.equal((await fourth).reason, 'error');
+  assert.equal(workers[0].terminated, true);
+  const fifth = client.decide('9001', { p: 1 });
+  await flush();
+  workers[1].reply(workers[1].posted[0].id, { ready: true });
+  await flush();
+  workers[1].reply(workers[1].posted.at(-1).id, { ok: true, index: 0, championIndex: 0, ms: 3 });
+  assert.equal((await fifth).ok, true);
+  // 4. a slow first load: the wait is capped by the time left, and the next move searches
+  const slow = createSearchClient({ version: 't', device: 'desktop', spawn, now });
+  let settled = null;
+  const loading = slow
+    .decide('9001', { p: 1 }, { startedAt: now() - 45_000 })
+    .then((r) => (settled = r));
+  await flush();
+  await advance(4_999);
+  assert.equal(settled, null);
+  await advance(1);
+  await loading;
+  assert.equal(settled.reason, 'loading', 'waited the 5 s left, not FIRST_LOAD_WAIT_MS');
+  workers.at(-1).reply(workers.at(-1).posted[0].id, { ready: true });
+  await flush();
+  const after = slow.decide('9001', { p: 1 });
+  await flush();
+  const late = workers.at(-1).posted.at(-1);
+  assert.equal(late.type, 'search');
+  workers.at(-1).reply(late.id, { ok: true, index: 0, championIndex: 0, ms: 3 });
+  assert.equal((await after).ok, true);
+  assert.equal(client.stats.searched, 2);
+});
+
+test('a table search that could only start after the 50 s mark is not posted', async (t) => {
+  const { now, flush, advance } = turnClock(t);
+  const { workers, spawn } = fakeWorkers();
+  const client = createSearchClient({ version: 't', device: 'desktop', spawn, now });
+  const coach = client.evaluate('9001', { p: 0 });
+  await flush();
+  workers[0].reply(workers[0].posted[0].id, { ready: true });
+  await flush();
+  const job = workers[0].posted.at(-1);
+  assert.equal(job.type, 'coach');
+  const table = client.decide('9001', { p: 1 }, { startedAt: now() - REASON_MS + 200 });
+  await flush();
+  // the coach job replies only after the 50 s mark (inside the 500 ms preempt window)
+  await advance(300);
+  workers[0].reply(job.id, { fallback: true, reason: 'cancelled' });
+  await coach;
+  const result = await table;
+  assert.equal(result.reason, 'budget');
+  assert.ok(!workers[0].posted.some((m) => m.type === 'search'));
+});
+
+test('Clint brain budget: 30 s, never past the 50 s mark of the turn, rules only after it', () => {
+  assert.equal(clintBrainMs(800), CLINT_BRAIN_MS);
+  assert.equal(clintBrainMs(25_000), 25_000);
+  assert.equal(clintBrainMs(REASON_MS), 0);
+  assert.equal(clintBrainMs(70_000), 0);
 });

@@ -3,8 +3,12 @@
  * and belief ONNX sessions and one exact solver, so a slow search never blocks the shared AI
  * worker (Top 5, Clint, champion decisions). Messages:
  *   {id, type: 'init', bot, budget}      load both networks and create the solver;
- *   {id, type: 'search', payload}        one decision; replies {ok, index, ids, shape, kind, ...}
+ *   {id, type: 'search', payload, remainingMs}
+ *                                        one decision; replies {ok, index, ids, shape, kind, ...}
  *                                        or {fallback: true, reason} (the table then plays 017).
+ *                                        `remainingMs` is the time left to the 50 s reasoning mark
+ *                                        of the seat's turn (turn-timing.mjs); the search and every
+ *                                        exact-solver call stop by then.
  *   {id, type: 'coach', payload}         the human player's move-coach values (search/coach.mjs);
  *                                        replies {ok, kind, plays, base, values, ...} or
  *                                        {fallback: true, reason} (the coach shows 017's values).
@@ -73,7 +77,21 @@ async function load(id, budget) {
   };
 }
 
-async function search(payload) {
+/** A one-call solver limited to the time left to the deadline (search/core.mjs pimcLabelFromWorlds). */
+const cappedSolver = (ms) =>
+  createSolver({
+    maxNodes: SEARCH_BOT_V1.solverMaxNodes,
+    maxMs: ms,
+    maxTable: engine.budget.solverTable,
+  });
+
+/** Deadline of a job: its band budget, and never past the turn's 50 s mark. */
+function deadlineOf(started, band, remainingMs) {
+  const bandMs = band === 'midgame' ? engine.budget.midgameMs : engine.budget.endgameMs;
+  return started + Math.min(bandMs, Number.isFinite(remainingMs) ? remainingMs : Infinity);
+}
+
+async function search(payload, remainingMs) {
   const started = performance.now();
   let game;
   try {
@@ -90,9 +108,11 @@ async function search(payload) {
     probabilities: engine.probabilities,
     solver: engine.solver,
     solverTimeIsBudget: engine.budget.solverMs < NODE_SOLVER_MS,
+    solverMs: engine.budget.solverMs,
+    cappedSolver,
     offset: payload.offset,
     now: () => performance.now(),
-    deadline: started + (band === 'midgame' ? engine.budget.midgameMs : engine.budget.endgameMs),
+    deadline: deadlineOf(started, band, remainingMs),
     counter,
   };
   let decision;
@@ -169,13 +189,15 @@ async function coach(payload, job) {
       maxTable: engine.budget.solverTable,
     }),
     solverTimeIsBudget: engine.budget.solverMs < NODE_SOLVER_MS,
+    solverMs: engine.budget.solverMs,
+    cappedSolver,
     offset: payload.offset,
     pause,
     now: () => {
       if (job.cancelled) throw new SearchBudgetError('cancelled');
       return performance.now();
     },
-    deadline: started + (band === 'midgame' ? engine.budget.midgameMs : engine.budget.endgameMs),
+    deadline: deadlineOf(started, band),
     counter: { inferences: 0 },
   };
   let result;
@@ -226,7 +248,10 @@ self.onmessage = ({ data }) => {
         throw Error('Search worker not ready');
       self.postMessage({
         id,
-        result: type === 'coach' ? await coach(data.payload, job) : await search(data.payload),
+        result:
+          type === 'coach'
+            ? await coach(data.payload, job)
+            : await search(data.payload, data.remainingMs),
       });
     } catch (error) {
       if (type === 'init') engine = null;

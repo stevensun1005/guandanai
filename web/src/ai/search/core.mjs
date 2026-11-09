@@ -10,7 +10,9 @@
  *     web game is solo or the host, whose offset is also 0);
  *   - a deadline is checked before every champion / belief inference and every exact-solver call;
  *     exceeding it throws SearchBudgetError and the whole search is discarded (never a partial
- *     midgame or an endgame that has not attempted all 8 worlds).
+ *     midgame or an endgame that has not attempted all 8 worlds);
+ *   - an exact-solver call is capped by the time left to that deadline (ctx.cappedSolver), and a
+ *     capped call that stops discards the whole search too.
  * Only the mover's hand and public information reach this module (see payload.mjs).
  */
 import { advanceRound } from '../../../../ai/shared/simulation/simulation.mjs';
@@ -21,7 +23,7 @@ import { SolverBudget } from '../../../../ai/danMCai/endgame/solver.mjs';
 import { candidates } from '../candidates.js';
 import { policyState } from '../observation.js';
 import { makeDeck } from '../../core/cards.js';
-import { SEARCH_BOT_V1, searchBand, worldSeed } from './constants.mjs';
+import { NODE_SOLVER_MS, SEARCH_BOT_V1, searchBand, worldSeed } from './constants.mjs';
 
 export { searchBand };
 
@@ -133,7 +135,8 @@ export async function beliefWorlds(game, seed, count, guard) {
 /**
  * Midgame net-2 rollout search on a MASKED game (midgame-search.mjs searchDecision).
  * ctx = {values(state), probabilities(view), now(), deadline?, offset?, counter?}; the endgame
- * also takes ctx.solver and ctx.solverTimeIsBudget.
+ * also takes ctx.solver, ctx.solverTimeIsBudget and, to cap calls at the deadline, ctx.solverMs
+ * and ctx.cappedSolver(ms).
  */
 export async function midgameDecision(game, seed, ctx, params = SEARCH_BOT_V1) {
   ctx.counter ||= { inferences: 0 };
@@ -169,6 +172,11 @@ const forMover = (team0Value, seat) => (seat % 2 === 0 ? team0Value : -team0Valu
  * midgame-search.mjs pimcLabelFromWorlds with a deadline before every exact-solver call. With
  * `timeIsBudget` (a per-call solver limit shorter than Node's NODE_SOLVER_MS), a call stopped by the
  * clock rather than by the node limit throws SearchBudgetError instead of skipping the world.
+ * With `remaining` (ms left to the deadline) and `cappedSolver(ms)`, a call that starts with less
+ * than `solverMs` left runs on a solver limited to the time left, so no call runs past the
+ * deadline; any stop of such a capped call throws SearchBudgetError (the tested rule would have
+ * given that world the full per-call limit and the shared table), and a capped call that finishes
+ * returns the same exact value.
  */
 export function pimcLabelFromWorlds(
   game,
@@ -177,7 +185,13 @@ export function pimcLabelFromWorlds(
   solver,
   minWorlds,
   check = () => {},
-  { timeIsBudget = false, maxNodes = SEARCH_BOT_V1.solverMaxNodes } = {},
+  {
+    timeIsBudget = false,
+    maxNodes = SEARCH_BOT_V1.solverMaxNodes,
+    remaining = null,
+    cappedSolver = null,
+    solverMs = NODE_SOLVER_MS,
+  } = {},
 ) {
   const sums = new Float64Array(plays.length);
   let used = 0;
@@ -190,23 +204,39 @@ export function pimcLabelFromWorlds(
       passes: game.passes,
       out: game.out.slice(),
     };
-    let values;
-    try {
-      values = plays.map((play) => {
-        check();
-        return forMover(solver.actionValue(position, play), position.turn);
-      });
-    } catch (error) {
-      if (!(error instanceof SolverBudget)) throw error;
-      if (timeIsBudget && !(error.nodes > maxNodes)) throw new SearchBudgetError('endgame');
-      continue;
+    const values = [];
+    let skipped = false;
+    for (const play of plays) {
+      check();
+      const left = remaining ? remaining() : Infinity;
+      const capped = !!cappedSolver && left < solverMs;
+      try {
+        const callSolver = capped ? cappedSolver(Math.max(0, left)) : solver;
+        values.push(forMover(callSolver.actionValue(position, play), position.turn));
+      } catch (error) {
+        if (!(error instanceof SolverBudget)) throw error;
+        if (capped || (timeIsBudget && !(error.nodes > maxNodes)))
+          throw new SearchBudgetError('endgame');
+        skipped = true;
+        break;
+      }
     }
+    if (skipped) continue;
     values.forEach((v, i) => (sums[i] += v));
     used++;
   }
   if (used < minWorlds) return { q: null, used };
   return { q: Array.from(sums, (s) => s / used), used };
 }
+
+/** pimcLabelFromWorlds options of a search context (shared by the bot and the move coach). */
+export const solverOptions = (ctx, params = SEARCH_BOT_V1) => ({
+  timeIsBudget: !!ctx.solverTimeIsBudget,
+  maxNodes: params.solverMaxNodes,
+  remaining: ctx.deadline !== undefined ? () => ctx.deadline - ctx.now() : null,
+  cappedSolver: ctx.cappedSolver || null,
+  solverMs: ctx.solverMs ?? NODE_SOLVER_MS,
+});
 
 /** evaluate.mjs searchChoice's rule: argmax, ties within tolerance to the champion's Q. */
 export function pimcPick({ q, used }, base, tolerance = SEARCH_BOT_V1.tieTolerance) {
@@ -233,10 +263,15 @@ export async function endgameDecision(game, seed, ctx, params = SEARCH_BOT_V1) {
   const championIndex = argmax(base);
   const worlds = await beliefWorlds(game, seed, params.endgameWorlds, guard);
   const choice = pimcPick(
-    pimcLabelFromWorlds(game, plays, worlds, ctx.solver, params.minWorlds, guard.check, {
-      timeIsBudget: !!ctx.solverTimeIsBudget,
-      maxNodes: params.solverMaxNodes,
-    }),
+    pimcLabelFromWorlds(
+      game,
+      plays,
+      worlds,
+      ctx.solver,
+      params.minWorlds,
+      guard.check,
+      solverOptions(ctx, params),
+    ),
     base,
     params.tieTolerance,
   );

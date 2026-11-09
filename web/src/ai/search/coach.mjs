@@ -27,6 +27,7 @@ import {
   pimcLabelFromWorlds,
   remainingCards,
   searchBand,
+  solverOptions,
 } from './core.mjs';
 
 export async function coachSearchValues(game, seed, ctx, params = SEARCH_BOT_V1) {
@@ -57,10 +58,15 @@ export async function coachSearchValues(game, seed, ctx, params = SEARCH_BOT_V1)
   let used = 0;
   for (const world of worlds) {
     await ctx.pause?.();
-    const one = pimcLabelFromWorlds(game, plays, [world], ctx.solver, 1, guard.check, {
-      timeIsBudget: !!ctx.solverTimeIsBudget,
-      maxNodes: params.solverMaxNodes,
-    });
+    const one = pimcLabelFromWorlds(
+      game,
+      plays,
+      [world],
+      ctx.solver,
+      1,
+      guard.check,
+      solverOptions(ctx, params),
+    );
     if (!one.q) continue; // the node limit skipped this world, as in the bot
     one.q.forEach((value, i) => (sums[i] += value));
     used++;
