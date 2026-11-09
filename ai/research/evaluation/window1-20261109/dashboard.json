@@ -20,6 +20,11 @@
       "name": "window1d.sh",
       "startMarker": "window1d start",
       "endMarker": "window1d end"
+    },
+    {
+      "name": "window1e.sh",
+      "startMarker": "window1e start",
+      "endMarker": "window1e end"
     }
   ],
   "stages": [
@@ -441,6 +446,64 @@
         {
           "label": "尾盘猜牌世界",
           "out": "C/belief-end"
+        }
+      ],
+      "total": 1200,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "H-tune-w16",
+      "ids": [
+        "H-tune-w16"
+      ],
+      "title": "H 调参：16 个世界（开发 1,200 副）",
+      "desc": "同一批牌上把猜牌世界从 8 个加到 16 个，看搜索是否更准；与 8 世界结果配对比较。",
+      "kind": "compare",
+      "queue": "window1e.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "H/tune-w16-compare.json"
+      },
+      "sides": [
+        {
+          "label": "原设置（8 世界，多赢 2 个）",
+          "out": "H/p2v2-v1"
+        },
+        {
+          "label": "调参",
+          "out": "H/tune-w16"
+        }
+      ],
+      "total": 1200,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "H-tune-net1",
+      "ids": [
+        "H-tune-net1"
+      ],
+      "title": "H 调参：多赢 1 个世界就偏离（开发 1,200 副）",
+      "desc": "猜牌更准后是否可以放宽偏离冠军的门槛（2 → 1 个世界）；与原设置配对比较。",
+      "kind": "compare",
+      "queue": "window1e.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "H/tune-net1-compare.json"
+      },
+      "sides": [
+        {
+          "label": "原设置（8 世界，多赢 2 个）",
+          "out": "H/p2v2-v1"
+        },
+        {
+          "label": "调参",
+          "out": "H/tune-net1"
         }
       ],
       "total": 1200,

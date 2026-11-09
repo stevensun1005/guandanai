@@ -32,6 +32,11 @@
       "what": "Combined research bot (midgame-search.mjs 2852cf6): belief-world midgame search at 21-40 cards (v1 16d76783...) + 8-world exact PIMC at <=20 cards; endgame worlds uniform vs belief (v1, trained on 21-80 cards, so <=20 is out of band) on the same 1,200 dev pairs 3,838,186,000-3,838,187,199; each arm vs champion and the paired difference",
       "after": "H-band41",
       "addedAt": "2026-11-09T12:45Z"
+    },
+    {
+      "id": "H-tune",
+      "what": "Belief v1 midgame search tuning on the same 1,200 dev pairs as H-v2-P2-v1 (3,838,183,000-184,199; reference = that 8-world net-2 run): (a) 16 worlds net 2; (b) 8 worlds net 1. Paired differences vs the reference. Development only.",
+      "addedAt": "2026-11-09T13:40Z"
     }
   ],
   "stop": "STOP file or 15:45Z stops every stage; unfinished stages are reported as not run."
