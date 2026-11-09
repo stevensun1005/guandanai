@@ -2889,3 +2889,7 @@ reason组实际调用网页桌面策略的公开信息推断和搜索，冻结�
 - **新指纹**：`strategy.js` `67a4d054…`（原 `daa43533…`），新增 `endgame-brain.mjs` `b9bf399d…`，`runtime.mjs` `f5306108…`（原 `c7b5e99e…`）；`settings.js`、`arrangement.js` 未变。此前所有 Clint 成绩（包括 GuanZero 各批 500 场 Clint 评测）只属于旧指纹，不能移用到新 Clint。`createRuleOpponent`（`rule-baseline.mjs`）目前仍只调用规则部分，不含残局大脑；用它跑出的对战结果须注明“不含残局大脑”。
 
 [同步证据](evaluation/clint-sync-20261109-2155.json)。
+
+## 73. danMCai-reason 对最新 Clint 的整场评测：预登记（2026-11-09）
+
+所有者要求用推理机器人对现在最新的 Clint 机器人打 500 场。焦点队为网页 1.18.1 部署的 danMCai-reason-v000855042（冠军 017＋手牌推断 v1，21–40 张推断世界搜索、≤20 张推断世界精确求解，每步推理不超过 50 秒、超时出 017），对手为同步到上游 `30a8067` 的 Clint rules-v2（规则＋残局大脑，网页路径，大脑上限 30 秒）。250 个审计种子各打两场交换阵营，共 500 场完整比赛（升级、进还贡、打 A，三次打 A 失败记平，最多 200 局），每局种子与 GuanZero 开发评测相同。**主指标**：焦点队每场得分（胜 1、平 0.5、负 0）的平均，95% 种子对簇自助区间；下界 >0.5 才算赢过这个 Clint，上界 <0.5 为输。双方都受时间预算影响，本机同时有其他研究任务，结果会报告推理回落与 Clint 大脑超时比例。[协议](evaluation/reason-vs-clint-20261109/protocol.json) · [种子审计](evaluation/reason-vs-clint-20261109/seed-audit.json)。

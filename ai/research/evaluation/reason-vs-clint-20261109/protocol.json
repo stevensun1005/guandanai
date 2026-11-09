@@ -1,0 +1,30 @@
+{
+  "schema": "danmcai-reason-vs-clint-20261109-v1",
+  "registeredAt": "2026-11-09",
+  "request": "Owner 2026-11-09: run danMCai-reason (inference bot) vs the latest Clint bot, 500 matches.",
+  "focal": "danMCai-reason-v000855042 (web id 9001) as deployed in 1.18.1: champion 017 (462afc99...) + hand-inference v1 (16d76783...), belief-world midgame search 21-40, belief-world 8-world exact PIMC <=20, champion elsewhere; tribute/return as the web computer seat; desktop budgets of the 60/50/10 rule (reasoning <= 50 s per move, solver min(3 s, time left), fallback 017).",
+  "opponent": "Clint rules-v2 as synced from upstream clintsun1977/guandan through 30a8067 (rules + endgame brain, web path decideClintRule with the 30 s brain cap within 50 s), --clint=web.",
+  "design": "250 audited seeds (seeds.json, from seed-audit.json), each played twice with the reason team on seats 0/2 and then 1/3: 500 complete matches (levels, tribute/return, A levels, aFail=draw, 200-round cap) with the GuanZero development-suite per-round seeds.",
+  "primary": "Focal match score per match (win 1, draw 0.5, loss 0) averaged over matches, 95% seed-pair cluster percentile bootstrap (2,000 draws). Evidence that danMCai-reason beats this Clint iff the lower bound > 0.5; evidence that it is worse iff the upper bound < 0.5.",
+  "secondary": "Wins/losses/draws, net match score, mean final level difference, per-side results, A-failures, reason search fallbacks by band and reason, Clint brain calls/fallbacks/changes, timing. Both sides are time-budgeted, so results depend on machine load (other research jobs run concurrently on this Mac); fallback rates are reported with the result.",
+  "notCovered": "Human players or partners, other opponents, mobile devices; this is a whole-match evaluation of the deployed Node-equivalent bot, not a web latency test.",
+  "seeds": {
+    "file": "ai/research/evaluation/reason-vs-clint-20261109/seeds.json",
+    "sha256": "c6d6f8dd53edf9ee6a477b6834755a3b84d8e4de553ac62a1d9fdf641f0caacd",
+    "audit": "ai/research/evaluation/reason-vs-clint-20261109/seed-audit.json",
+    "auditSHA256": "90a277117dc5ab54de5f8711d0535ecbdda06d5bd3541999284afd7383ee13d7"
+  },
+  "sources": {
+    "ai/danMCai/belief/reason-match-eval.mjs": "84e9c5c1c21da1c889fe601421ec828c515dcee35ccc5790f88442d026890c65",
+    "web/src/ai/search/core.mjs": "54025c92905b27623bfdd98479d3ba5f3aff0e4c5a45074cc56b2c5c4b429c2e",
+    "web/src/ai/search/constants.mjs": "8c97a9dcdbc031de48e9cf844922bd5aa0295c0e26403a81f183c5d62892b4a1",
+    "web/src/ai/turn-timing.mjs": "ef953e6e812e3b6762628ac6dc42922b395f5913708e71b1166419fb394c4109",
+    "web/src/rule-bot/strategy.js": "67a4d0542f8a01a55c58d0ef8a51075a1c55026fe362683d12e63ce70b879c98",
+    "web/src/rule-bot/endgame-brain.mjs": "b9bf399d04e8cb1a483f573666b920714d1ae211457030acfbe310655f10e3eb",
+    "web/src/rule-bot/runtime.mjs": "0b372ee9863190419edb41af08fec01d9f6435cc255e99960511275dbb713ad5"
+  },
+  "run": {
+    "workers": 5,
+    "note": "launchd job; resumable by completed pairs; STOP file in the output directory stops it."
+  }
+}
