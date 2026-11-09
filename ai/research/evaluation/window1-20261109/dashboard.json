@@ -1,0 +1,244 @@
+{
+  "title": "第一窗口研究面板（2026-11-09）",
+  "deadline": "2026-11-09T15:45:00Z",
+  "note": "长期计划第一窗口（MODEL_STUDY 第 70 节）。冻结检出 996ade0／0d0c58f；冠军 017 为对手与基线；网页冠军与菜单不变。截止或 STOP 文件即停，未跑完的部分记为未运行。",
+  "orchestrators": [
+    { "name": "window1.sh", "startMarker": "window1 start", "endMarker": "window1 end" },
+    { "name": "window1-p2.sh" },
+    { "name": "window1c.sh", "startMarker": "window1c start", "endMarker": "window1c end" }
+  ],
+  "stages": [
+    {
+      "key": "A-train",
+      "ids": ["A-train"],
+      "title": "A 尾盘修正：离线训练",
+      "desc": "在第 68 节 PIMC 标签上训练加在冠军上的尾盘修正量（默认等于冠军），看标签里还有没有可学的改进。",
+      "kind": "residual",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/A-train.log", "out": "A/train", "result": "A/train/summary.json" },
+      "total": 6000,
+      "rule": { "type": "dev", "text": "开发检查，不作验收；只导出最终一步，不按开发成绩挑检查点" }
+    },
+    {
+      "key": "A-devgate",
+      "ids": ["A-devgate"],
+      "title": "A 开发把关（1,600 副）",
+      "desc": "≤20 张换成修正学生、其余用冠军，对冠军打 1,600 副开发牌，先看有没有明显变差。",
+      "kind": "evaluate",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/A-devgate.log", "out": "A/dev-gate" },
+      "total": 1600,
+      "rule": { "type": "dev", "text": "开发检查，不作验收" }
+    },
+    {
+      "key": "A-wholeround",
+      "ids": ["A-wholeround"],
+      "title": "A 整局使用（400 副）",
+      "desc": "每一手都用修正模型打 400 副开发牌，检查修正量在 >20 张时不会把冠军带坏（非劣检查）。",
+      "kind": "evaluate",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/A-wholeround.log", "out": "A/wholeround" },
+      "total": 400,
+      "rule": { "type": "dev", "text": "整局非劣检查，开发检查，不作验收" }
+    },
+    {
+      "key": "A-h1",
+      "ids": ["A-h1"],
+      "title": "A 留出验收 H1（3,000 副）",
+      "desc": "预登记主指标：在封存的 H1 牌局上，≤20 张换修正学生，对冠军交换阵营各打一次。",
+      "kind": "evaluate",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/A-h1.log", "out": "A/h1" },
+      "total": 3000,
+      "rule": { "type": "heldout", "text": "预登记：H1 留出 3,000 副，95% 牌副簇区间下界 >0 为正向证据" }
+    },
+    {
+      "key": "B-review",
+      "ids": ["B-review"],
+      "title": "B 复盘工具（26 局真人牌）",
+      "desc": "在云端真人牌局上逐座位出复盘报告，标出明牌事后最优下丢了几分，验证复盘工具能跑通。",
+      "kind": "review",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/B-review.log", "out": "B", "result": "B/review.json" },
+      "rule": { "type": "descriptive", "text": "描述性：明牌事后丢分，报告只留本机，不作验收" }
+    },
+    {
+      "key": "A-human",
+      "ids": ["A-human", "A-human-summary"],
+      "title": "A 真人尾盘审计",
+      "desc": "在真人牌局的尾盘关键决策上，比较真人、冠军和修正学生命中明牌最优的比例。",
+      "kind": "audit",
+      "queue": "window1.sh",
+      "paths": {
+        "log": "logs/A-human.log",
+        "out": "A/human-audit",
+        "result": "A/human-audit/summary.json"
+      },
+      "rule": { "type": "descriptive", "text": "描述性：明牌事后最优，样本小，不作验收" }
+    },
+    {
+      "key": "S-h2",
+      "ids": ["S-h2"],
+      "title": "S 现场搜索留出验收 H2（3,000 副）",
+      "desc": "预登记主指标：≤20 张按 8 个猜测世界精确求解出牌、平手听冠军，在封存的 H2 牌局上对冠军。",
+      "kind": "evaluate",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/S-h2.log", "out": "S/h2" },
+      "total": 3000,
+      "rule": {
+        "type": "heldout",
+        "text": "预登记：H2 留出 3,000 副，95% 区间下界 >0 为正向证据；只授权电脑端研究机器人，不接网页"
+      }
+    },
+    {
+      "key": "H-generate",
+      "ids": ["H-generate"],
+      "title": "H 猜牌数据 v1（4 万局）",
+      "desc": "用冠军自博弈 4 万局，记录 21–80 张时每个决策的公开信息和三家真实手牌，作为猜牌网络的训练数据。",
+      "kind": "generate",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/H-generate.log", "out": "H/data" },
+      "total": 160,
+      "rule": { "type": "descriptive", "text": "数据生成，无判定" }
+    },
+    {
+      "key": "H-train",
+      "ids": ["H-train"],
+      "title": "H 猜牌网络 v1 训练",
+      "desc": "只用出牌方可见的信息，预测每张没见过的牌在另外三家的概率；固定超参数，只导出最终一步。",
+      "kind": "train",
+      "queue": "window1.sh",
+      "paths": {
+        "log": "logs/H-train.log",
+        "out": "H/model",
+        "result": "H/model/train-report.json"
+      },
+      "total": 20000,
+      "capMinutes": 60,
+      "rule": { "type": "dev", "text": "开发检查，不作验收" }
+    },
+    {
+      "key": "H-P1",
+      "ids": ["H-P1"],
+      "title": "H P1 猜得准不准（v1）",
+      "desc": "在 1,000 局开发牌上，比较猜牌网络和均匀乱猜对真实手牌的每张对数似然。",
+      "kind": "metrics",
+      "queue": "window1.sh",
+      "paths": { "log": "logs/H-P1.log", "result": "H/p1.json" },
+      "rule": {
+        "type": "gate",
+        "pass": "过关",
+        "text": "预登记 P1：每张对数似然增益 95% 区间下界 >0 为过关（开发阶段）"
+      }
+    },
+    {
+      "key": "H-P2",
+      "ids": ["H-P2"],
+      "title": "H P2 猜牌世界中盘搜索（开发 1,200 副）",
+      "desc": "21–40 张时用多世界模拟搜索出牌，同一批开发牌上比较猜牌世界和均匀世界的配对差。",
+      "kind": "compare",
+      "paths": { "compare": "H/p2-compare.json" },
+      "sides": [
+        { "label": "均匀世界", "out": "H/p2-uniform" },
+        { "label": "猜牌世界", "out": "H/p2-belief" }
+      ],
+      "total": 1200,
+      "rule": { "type": "dev", "text": "开发检查（开发种子），不作验收；须留出验证" }
+    },
+    {
+      "key": "H3",
+      "ids": ["H3"],
+      "title": "H3 猜牌搜索留出验收（3,000 副）",
+      "desc": "预登记主指标：在全新封存的 H3 牌局上，焦点队 21–40 张用猜牌世界搜索、其余用冠军，对手全程冠军；同批牌再跑均匀世界做配对。",
+      "kind": "compare",
+      "doneWhen": ["H3/belief/summary.json", "H3/uniform/summary.json"],
+      "paths": { "compare": "H3/compare.json" },
+      "sides": [
+        { "label": "均匀世界", "out": "H3/uniform" },
+        { "label": "猜牌世界（主）", "out": "H3/belief", "primary": true }
+      ],
+      "total": 3000,
+      "rule": {
+        "type": "heldout",
+        "text": "预登记：猜牌世界 3,000 副，95% 区间下界 >0 为正向证据；只授权电脑端研究机器人，不接网页"
+      },
+      "compareRule": { "type": "descriptive", "text": "次要：同批牌换均匀世界的配对差，描述性" }
+    },
+    {
+      "key": "H-v2-generate",
+      "ids": ["H-v2-generate"],
+      "title": "H 猜牌数据 v2（再 6 万局）",
+      "desc": "用审计过的备用种子块剩下的 6 万局继续生成猜牌训练数据，用剩下的空闲核心。",
+      "kind": "generate",
+      "queue": "window1c.sh",
+      "paths": { "log": "logs/H-v2-generate.log", "out": "H/data-v2" },
+      "total": 240,
+      "rule": { "type": "descriptive", "text": "数据生成，无判定" }
+    },
+    {
+      "key": "H-v2-train",
+      "requires": ["H-v2-generate"],
+      "ids": ["H-v2-train"],
+      "title": "H 猜牌网络 v2 训练（10 万局、更大）",
+      "desc": "用 v1＋v2 共 10 万局训练隐藏层 1024 的第二版猜牌网络，只导出最终一步。",
+      "kind": "train",
+      "queue": "window1c.sh",
+      "after": "H-v2-generate 完成后",
+      "paths": {
+        "log": "logs/H-v2-train.log",
+        "out": "H/model-v2",
+        "result": "H/model-v2/train-report.json"
+      },
+      "total": 40000,
+      "capMinutes": 90,
+      "rule": { "type": "dev", "text": "开发检查，不作验收" }
+    },
+    {
+      "key": "H-v2-P1",
+      "requires": ["H-v2-train"],
+      "ids": ["H-v2-P1"],
+      "title": "H v2 猜得准不准（与 v1 同种子）",
+      "desc": "在和 v1 相同的 1,000 局开发牌上测猜牌质量，直接和 v1 对比。",
+      "kind": "metrics",
+      "queue": "window1c.sh",
+      "after": "H-v2-train 完成后",
+      "paths": { "log": "logs/H-v2-P1.log", "result": "H/p1-v2.json", "reference": "H/p1.json" },
+      "rule": { "type": "dev", "text": "开发检查（与 v1 同种子对比），不作验收" }
+    },
+    {
+      "key": "H-v2-P2",
+      "requires": ["H-v2-P1"],
+      "ids": ["H-v2-P2-v1", "H-v2-P2-v2"],
+      "skipIds": ["H-v2-P2"],
+      "title": "H v2 对 v1 中盘搜索（开发 1,200 副）",
+      "desc": "21–40 张猜牌世界搜索分别用 v1 和 v2 网络，在同一批 1,200 副开发牌上比较配对差。",
+      "kind": "compare",
+      "queue": "window1c.sh",
+      "after": "H-v2-P1 完成后，且剩余 ≥20 分钟",
+      "paths": { "compare": "H/p2v2-compare.json" },
+      "sides": [
+        { "label": "v1", "out": "H/p2v2-v1" },
+        { "label": "v2", "out": "H/p2v2-v2" }
+      ],
+      "total": 1200,
+      "rule": { "type": "dev", "text": "开发检查（开发种子），不作验收" }
+    },
+    {
+      "key": "H-band41",
+      "ids": ["H-band41-belief", "H-band41-uniform"],
+      "skipIds": ["H-band41"],
+      "title": "H 更早阶段 41–60 张（开发 800 副）",
+      "desc": "看猜牌在更早的阶段还管不管用：41–60 张时猜牌世界和均匀世界的中盘搜索配对差。",
+      "kind": "compare",
+      "queue": "window1c.sh",
+      "after": "H3 两边都写出 summary.json 后，且剩余 ≥20 分钟",
+      "paths": { "compare": "H/band41-compare.json" },
+      "sides": [
+        { "label": "均匀世界", "out": "H/band41-uniform" },
+        { "label": "猜牌世界", "out": "H/band41-belief" }
+      ],
+      "total": 800,
+      "rule": { "type": "dev", "text": "开发检查（开发种子），不作验收" }
+    }
+  ]
+}
