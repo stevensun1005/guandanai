@@ -8,8 +8,23 @@
  * deal pair, with a 95% deal-cluster normal interval. An exact perfect-information regret check on
  * small endgames is descriptive only (it is not an acceptance metric).
  *
+ * --policy selects what the focal team plays at or below the threshold (default `student`, whose
+ * results and output files are unchanged from the original evaluator):
+ *   student         argmax of the --student network;
+ *   pimc-search     runtime search, no network: the 8-world PIMC label of every candidate
+ *                   (labelDecision from pimc-actor.mjs, same solver budget, minimum 4 solved worlds
+ *                   and world seed (seed*1009 + ply*7919)>>>0 as the section-68 actor), playing the
+ *                   label-maximal candidate; ties (|y - y*| <= 1e-9) go to the champion's highest
+ *                   value; when no label is available (fewer than 4 worlds solved inside the budget)
+ *                   the champion argmax is played and counted as a fallback. Labels are mean exact
+ *                   signed round points over sampled worlds; the hidden hands are never read;
+ *   champion-check  the champion itself (pairing sanity check: every pair must score exactly 0).
+ * Search results can depend on the per-solver millisecond budget and on the worker's transposition
+ * table (which worlds finish inside budget), so they are not bit-reproducible across machines.
+ *
  *   node ai/danMCai/endgame/evaluate.mjs --student=<onnx> --champion=<onnx> --seeds=<seed-audit.json>
  *        --out=<dir> [--pairs=3000] [--threshold=32] [--workers=4] [--solver-cards=18]
+ *        [--policy=student|pimc-search|champion-check]   (--student is not used by the other two)
  */
 import { spawn } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -20,17 +35,62 @@ import { createRound, advanceRound } from '../../shared/simulation/simulation.mj
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { policyState } from '../../../web/src/ai/observation.js';
 import { argmax, createModelPool, sha256 } from '../training/continuous/lib.mjs';
-import { positionFromGame, solveEndgame, SolverBudget } from './solver.mjs';
+import { labelDecision } from './pimc-actor.mjs';
+import { createSolver, positionFromGame, solveEndgame, SolverBudget } from './solver.mjs';
 
 const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
 
+export const POLICIES = ['student', 'pimc-search', 'champion-check'];
+/** Fixed runtime-search settings of --policy=pimc-search (section-68 actor labels). */
+export const SEARCH = Object.freeze({
+  worlds: 8,
+  minWorlds: 4,
+  solver: Object.freeze({ maxNodes: 1_500_000, maxMs: 3000, maxTable: 1_000_000 }),
+  worldSeed: '(seed*1009 + ply*7919)>>>0',
+  tieTolerance: 1e-9,
+  tieBreak: 'champion value',
+});
+export const createSearchSolver = () => createSolver(SEARCH.solver);
+/** Source files (relative to this module) whose SHA-256 the non-default modes record in run.json. */
+const SEARCH_SOURCES = [
+  './pimc-actor.mjs',
+  './solver.mjs',
+  '../../shared/search/belief.mjs',
+  '../../shared/search/pimc.mjs',
+  '../../shared/simulation/simulation.mjs',
+  '../../../web/src/ai/candidates.js',
+  '../../../web/src/ai/observation.js',
+  '../../../web/src/core/combinations.js',
+  '../training/continuous/lib.mjs',
+];
+
+/**
+ * Runtime PIMC choice for the current decision: label-maximal candidate, ties broken by the
+ * champion values `base`; `index` is null when no label is available.
+ */
+export function searchChoice(game, plays, base, { solver, seed, ply }) {
+  const label = labelDecision(game, plays, {
+    solver,
+    worlds: SEARCH.worlds,
+    minWorlds: SEARCH.minWorlds,
+    seed: (seed * 1009 + ply * 7919) >>> 0,
+  });
+  if (!label.q) return { index: null, used: label.used, tied: 0 };
+  const top = Math.max(...label.q);
+  const tied = [];
+  label.q.forEach((y, i) => Math.abs(y - top) <= SEARCH.tieTolerance && tied.push(i));
+  const index = tied.reduce((best, i) => (base[i] > base[best] ? i : best), tied[0]);
+  return { index, used: label.used, tied: tied.length };
+}
+
 export async function playPaired(
   seed,
   focalTeam,
-  { values, champion, student, threshold, solverCards },
+  { values, champion, student, threshold, solverCards, policy = 'student', solver = null },
 ) {
+  if (!POLICIES.includes(policy)) throw Error(`Unknown policy ${policy}`);
   const game = createRound(seed);
   const stats = {
     endgameDecisions: 0,
@@ -39,6 +99,18 @@ export async function playPaired(
     regretStudent: 0,
     regretChampion: 0,
   };
+  // Extra per-round fields only outside the default mode, so student-mode output is unchanged.
+  if (policy === 'pimc-search') {
+    if (!solver) throw Error('pimc-search needs a solver');
+    Object.assign(stats, {
+      searched: 0,
+      searchFallbacks: 0,
+      searchTies: 0,
+      worldsUsed: 0,
+      searchSeconds: 0,
+      searchMaxSeconds: 0,
+    });
+  }
   for (let ply = 0; ply < 1000; ply++) {
     const player = game.turn;
     const plays = candidates(game.hands[player], game.L, game.trick?.play);
@@ -49,9 +121,21 @@ export async function playPaired(
       const useStudent = player % 2 === focalTeam && remaining(game) <= threshold;
       const base = await values(champion, state);
       if (useStudent) {
-        const own = await values(student, state);
-        index = argmax(own);
         const championIndex = argmax(base);
+        if (policy === 'student') index = argmax(await values(student, state));
+        else if (policy === 'champion-check') index = championIndex;
+        else {
+          const started = performance.now();
+          const choice = searchChoice(game, plays, base, { solver, seed, ply });
+          const seconds = (performance.now() - started) / 1000;
+          stats.searched++;
+          stats.worldsUsed += choice.used;
+          stats.searchSeconds += seconds;
+          stats.searchMaxSeconds = Math.max(stats.searchMaxSeconds, seconds);
+          stats.searchTies += Number(choice.tied > 1);
+          if (choice.index === null) stats.searchFallbacks++;
+          index = choice.index ?? championIndex;
+        }
         stats.endgameDecisions++;
         if (index !== championIndex) {
           stats.differs++;
@@ -94,25 +178,31 @@ async function worker() {
   );
   const pool = await createModelPool(ort, { threads: 1, limit: 2 });
   const values = (file, state) => pool.values(file, state);
+  const policy = option('policy', 'student');
   const config = {
     values,
     champion: option('champion'),
     student: option('student'),
     threshold: Number(option('threshold')),
     solverCards: Number(option('solver-cards')),
+    policy,
+    solver: policy === 'pimc-search' ? createSearchSolver() : null,
   };
   const rows = [];
   for (let i = part; i < seeds.length; i += parts) {
     const seed = seeds[i];
+    const started = performance.now();
     const a = await playPaired(seed, 0, config);
     const b = await playPaired(seed, 1, config);
-    rows.push({ seed, a, b, mean: (a.points + b.points) / 2 });
+    const row = { seed, a, b, mean: (a.points + b.points) / 2 };
+    if (policy !== 'student') row.seconds = (performance.now() - started) / 1000;
+    rows.push(row);
   }
   writeFileSync(join(option('out'), `part-${part}.json`), JSON.stringify(rows));
   await pool.close();
 }
 
-export function summarize(rows) {
+export function summarize(rows, { policy = 'student' } = {}) {
   const n = rows.length;
   const means = rows.map((r) => r.mean);
   const mean = means.reduce((a, b) => a + b, 0) / n;
@@ -136,6 +226,38 @@ export function summarize(rows) {
       championMean: sum('solverChecked') ? sum('regretChampion') / sum('solverChecked') : null,
       note: 'Perfect-information minimax regret on disagreements with <= solver-cards cards; descriptive only.',
     },
+    ...(policy === 'student' ? {} : policySummary(rows, rounds, sum, policy)),
+  };
+}
+
+/** Fields added (never replacing existing ones) for --policy other than the default student. */
+function policySummary(rows, rounds, sum, policy) {
+  const extra = {
+    policy,
+    policyNote:
+      policy === 'pimc-search'
+        ? 'studentEndgameDecisions/decisionsDifferentFromChampion/regretStudent refer to the runtime PIMC search arm, not a network.'
+        : 'Focal team plays the champion everywhere; meanSignedPoints must be exactly 0.',
+    pairsZero: rows.filter((r) => r.mean === 0).length,
+    pairsPositive: rows.filter((r) => r.mean > 0).length,
+    pairsNegative: rows.filter((r) => r.mean < 0).length,
+    pairSeconds: rows.reduce((s, r) => s + (r.seconds ?? 0), 0),
+    meanPairSeconds: rows.reduce((s, r) => s + (r.seconds ?? 0), 0) / rows.length,
+  };
+  if (policy !== 'pimc-search') return extra;
+  const searched = sum('searched');
+  return {
+    ...extra,
+    search: {
+      ...SEARCH,
+      searchedDecisions: searched,
+      fallbacksToChampion: sum('searchFallbacks'),
+      tiedLabelMaximum: sum('searchTies'),
+      worldsUsed: sum('worldsUsed'),
+      searchSeconds: sum('searchSeconds'),
+      secondsPerSearchedDecision: searched ? sum('searchSeconds') / searched : null,
+      maxSecondsPerSearchedDecision: Math.max(0, ...rounds.map((r) => r.searchMaxSeconds)),
+    },
   };
 }
 
@@ -143,25 +265,44 @@ async function main() {
   const out = resolve(option('out'));
   mkdirSync(out, { recursive: true });
   const workers = Number(option('workers', 4));
+  const policy = option('policy', 'student');
+  if (!POLICIES.includes(policy)) throw Error(`Unknown --policy=${policy}`);
+  const withStudent = policy === 'student';
   const args = {
-    student: resolve(option('student')),
+    ...(withStudent ? { student: resolve(option('student')) } : {}),
     champion: resolve(option('champion')),
     seeds: resolve(option('seeds')),
     pairs: option('pairs', 3000),
     threshold: option('threshold', 32),
     'solver-cards': option('solver-cards', 18),
     out,
+    ...(withStudent ? {} : { policy }),
   };
+  const self = fileURLToPath(import.meta.url);
   const protocol = {
     ...args,
-    studentSHA256: sha256(args.student),
+    ...(withStudent ? { studentSHA256: sha256(args.student) } : {}),
     championSHA256: sha256(args.champion),
     seedsSHA256: sha256(args.seeds),
     workers,
     startedAt: new Date().toISOString(),
+    ...(withStudent
+      ? {}
+      : {
+          student: null,
+          studentSHA256: null,
+          evaluatorSHA256: sha256(self),
+          // The arm's behaviour also depends on these modules (labels, belief, rules, candidates).
+          sourceSHA256: Object.fromEntries(
+            SEARCH_SOURCES.map((path) => [
+              path,
+              sha256(fileURLToPath(new URL(path, import.meta.url))),
+            ]),
+          ),
+          ...(policy === 'pimc-search' ? { search: SEARCH } : {}),
+        }),
   };
   writeFileSync(join(out, 'run.json'), JSON.stringify(protocol, null, 2));
-  const self = fileURLToPath(import.meta.url);
   await Promise.all(
     Array.from(
       { length: workers },
@@ -190,7 +331,11 @@ async function main() {
   const rows = Array.from({ length: workers }, (_, part) =>
     JSON.parse(readFileSync(join(out, `part-${part}.json`), 'utf8')),
   ).flat();
-  const summary = { ...protocol, finishedAt: new Date().toISOString(), ...summarize(rows) };
+  const summary = {
+    ...protocol,
+    finishedAt: new Date().toISOString(),
+    ...summarize(rows, { policy }),
+  };
   writeFileSync(join(out, 'summary.json'), JSON.stringify(summary, null, 2));
   console.log(JSON.stringify(summary, null, 2));
 }

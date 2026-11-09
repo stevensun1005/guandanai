@@ -1,0 +1,113 @@
+{
+  "schema": "danmcai-window1-20261109-v1",
+  "registeredAt": "2026-11-09",
+  "authorization": "Owner 2026-11-08 (Toronto ~22:50): run the long-term plan's first 12-hour window directly once the plan is ready; hand inference must be in the plan (ai/research/TRAINING_PLAN_LONGTERM_20261109.md).",
+  "window": {
+    "start": "2026-11-09 Toronto ~00:00",
+    "deadline": "2026-11-09T16:00:00Z",
+    "deadlineToronto": "2026-11-09 11:00 EST",
+    "stop": "STOP file in the run directory or the deadline stops every stage; no extension; unfinished stages are reported as not run."
+  },
+  "champion": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+  },
+  "A_endgameResidual": {
+    "what": "Offline residual q = champion + f on the frozen section-68 PIMC rows (1,902,174 rows; slots 0-5 train, slot 6 validation). f zero-initialised; per decision: keep set y*-y<0.25 gets keepWeight*mean f^2, reject set a squared hinge (margin 0.125) below the weakest kept q; silent decisions mean f^2.",
+    "recipe": {
+      "steps": 6000,
+      "batchDecisions": 256,
+      "lr": [
+        5e-05,
+        5e-06
+      ],
+      "schedule": "cosine",
+      "gradClip": 1.0,
+      "keepWeight": 10,
+      "seed": 20261109,
+      "device": "mps"
+    },
+    "keepWeightChoice": "Chosen before any play on slot-6 validation labels by a rule fixed in advance (silent and keep-set agreement with the champion >= 0.98 / 0.95, then max informative hit): weights 1/10/30 gave silent agreement 0.895/0.980/0.992, keep-set 0.927/0.986/0.995, informative hit 0.821/0.808/0.807 (champion 0.805) -> 10. Development runs only, seed 3838120100.",
+    "object": "The single final export (fused ONNX c+f, champion I/O contract).",
+    "primary": "Held-out H1 (heldout-h1.json, 3,000 deals) each played twice with sides swapped: focal team champion until <= 20 cards then the residual student, opponents champion, greedy (evaluate.mjs --threshold=20). Positive evidence iff the 95% deal-cluster lower bound of focal mean signed round points per pair is > 0.",
+    "descriptive": [
+      "Dev gate: 1,600 dev pairs (dev-gate.json), same design; reported, not required for H1.",
+      "Whole round: the fused student used for every decision (--threshold=108) on 400 dev pairs (dev-wholeround.json): non-inferiority check, point >= -0.02 expected.",
+      "Human endgame audit (section-67 protocol, student at <= 20 cards)."
+    ]
+  },
+  "S_runtimeSearchArm": {
+    "what": "Node research-bot policy: at <= 20 cards the focal team plays the 8-world PIMC label argmax (exact solver 1.5M nodes / 3 s / 1M table per world, >= 4 worlds) with ties to the champion Q; champion elsewhere (evaluate.mjs --policy=pimc-search). Dev: +0.126 on 87 pairs, +0.097 [0.021,0.174] on 36 pairs.",
+    "primary": "Held-out H2 (heldout-h2.json, 3,000 deals), same paired design; positive iff lower bound > 0. Positive would allow Node research bots (not the web) to use this search; no web change.",
+    "note": "Not bit-reproducible (time budget per solve); values that finish are exact."
+  },
+  "H_handInferenceV1": {
+    "status": "Development only in this window (owner-mandated track; continues regardless of the result).",
+    "data": "Champion-greedy self-play, 40,000 rounds on the audited spare training block seeds 4,255,121,000-4,255,160,999, every decision with 21-80 cards (generate.mjs --band=21-80 --every=1).",
+    "model": "features (public mover view incl. per-seat play/pass shape history) -> 512 -> 512 -> 54x3; train.py --lr=3e-4 --dropout=0.3 --input-dropout=0.1 --weight-decay=1e-2 --augment-suits=1 --batch=1024 --max-steps=20000, seed-split validation (seed % 10 == 0), final step only.",
+    "P1": "Held-out dev seeds 3,838,180,000-3,838,180,999 (metrics.mjs): per-copy log-likelihood gain over uniform with seed-cluster 95% interval; pass iff lower bound > 0.",
+    "P2": "Midgame net-2 rollout search (8 worlds, K=6, 21-40 cards) with belief-sampled vs uniform worlds on the same 1,200 dev pairs 3,838,181,000-3,838,182,199 (ai/danMCai/belief/midgame-search.mjs): paired difference with deal-cluster 95% interval. Reported as development; a positive result leads to a preregistered held-out test in the next window."
+  },
+  "B_review": "ai/danMCai/review/review.mjs on the 26 cloud rounds (d1-snapshot-20261108, all seats, --pimc=8). Reports stay in ignored folders; only aggregate counts are committed.",
+  "multipleClaims": "Two acceptance claims (A on H1, S on H2) use disjoint audited held-out blocks, alpha 0.05 each.",
+  "seeds": {
+    "audit": "ai/research/evaluation/window1-20261109/seed-audit.json",
+    "auditSHA256": "897f832bc88b7da00ee17ff5ab40a97fdf50dde1f5489109a552facf00c20e91",
+    "files": 502,
+    "knownRoots": 136666,
+    "H1": [
+      988000000,
+      988009173
+    ],
+    "H2": [
+      988009174,
+      988019033
+    ],
+    "handInferenceTrainingBlock": [
+      4255121000,
+      4255221000
+    ],
+    "devSubranges": {
+      "A gate": [
+        3838140000,
+        3838141599
+      ],
+      "A whole-round": [
+        3838142000,
+        3838142399
+      ],
+      "H P1": [
+        3838180000,
+        3838180999
+      ],
+      "H P2": [
+        3838181000,
+        3838182199
+      ]
+    }
+  },
+  "unchanged": "Web champion 017, menu and every frozen run; human records are test data only; no tempo/trick/bomb/partner signal anywhere.",
+  "sources": {
+    "ai/danMCai/endgame/residual-learner.py": "caa3d9b91ca69af101c0cf930c5ddcf0c96054617a2d410f9194a2efe949be57",
+    "ai/danMCai/training/continuous/residual_export.py": "b739aee583d747fcd04fa5d908228f9fedb4af6cf806568b633b9b75542a8c11",
+    "ai/danMCai/training/continuous/value_net.py": "f312566021039ed161298ea1fcc3791aed94a91f02cb1992dc033d9a00503f09",
+    "ai/danMCai/endgame/evaluate.mjs": "1c392bae5f5431fdea7470abb369561cef60e9132ffe0798278cbcdf8b026c00",
+    "ai/danMCai/endgame/pimc-actor.mjs": "d4fd5325bfe77ee13f0310a8778a24147d5fa9ad101cb7e22eccaa36df8409e7",
+    "ai/danMCai/endgame/solver.mjs": "2fb05704ebced6fee92259fd53a2ccede55dfc6c1db201bf8fb2ccb3ecbfc9e6",
+    "ai/danMCai/endgame/human-endgames.mjs": "c5b28ae1ef3b95eb57530ba8d27579fde8b50fd6c147429542b4223ac9c1648d",
+    "ai/danMCai/belief/features.mjs": "5dfd95df04860b8b06488efcfabfd384783fec42ff0e54f090cce2bcfb4255a5",
+    "ai/danMCai/belief/generate.mjs": "a34a9f12f6fef55d856733685acfcb32c36e17dce7200f6b7363bbe4357ef2c4",
+    "ai/danMCai/belief/train.py": "38e08beea3ca865208519fd310e88cc5cfdf8aa74c48332b5623322c89663a6e",
+    "ai/danMCai/belief/sampler.mjs": "32695eb8d458e32cf233cab6fd1a41c715e6fee90aa778c96614b5ce42d0a1f6",
+    "ai/danMCai/belief/metrics.mjs": "bda911cc2e89c6e80d03f38e87855e95a521fb02e74fdd7ff42d31317fd30579",
+    "ai/danMCai/review/review.mjs": "9910119d277652c457b422778770d62cd11b59031c687bf1a1cab0a55dd73068",
+    "ai/danMCai/review/report.mjs": "725731ada96edef0b2bc3b2ea0387e023105f4a03b2dbbe8b6df6f92f4df2279",
+    "ai/shared/search/belief.mjs": "a106d051abe8b488ee0fbeea163b54c891036245132800172ac76e810d702f86",
+    "ai/shared/search/pimc.mjs": "94374899cb13d175d08d7e58d8deb6f16bc97427858a4a77a58cdceafc7bc5a5",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155"
+  }
+}
