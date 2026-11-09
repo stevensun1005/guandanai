@@ -1,0 +1,37 @@
+{
+  "A": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/band41-uniform",
+  "B": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/band41-belief",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "settingDifferences": {
+    "worldsSource": [
+      "uniform",
+      "belief"
+    ],
+    "beliefSHA256": [
+      null,
+      "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+    ]
+  },
+  "prefixPairs": [
+    800,
+    800
+  ],
+  "commonPairs": 800,
+  "seeds": [
+    3838185000,
+    3838185799
+  ],
+  "meanA": -0.2275,
+  "meanB": -0.1475,
+  "difference": "B minus A, focal mean signed round points per deal pair",
+  "meanDifference": 0.08,
+  "sdDifference": 1.3456833132183579,
+  "ci95": [
+    -0.013251096018415592,
+    0.1732510960184156
+  ],
+  "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+  "pairsIdentical": 266,
+  "pairsBBetter": 285,
+  "pairsABetter": 249
+}

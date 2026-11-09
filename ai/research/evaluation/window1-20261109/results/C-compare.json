@@ -1,0 +1,33 @@
+{
+  "A": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/C/uniform-end",
+  "B": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/C/belief-end",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "settingDifferences": {
+    "endgameWorlds": [
+      "uniform",
+      "belief"
+    ]
+  },
+  "prefixPairs": [
+    1200,
+    1200
+  ],
+  "commonPairs": 1200,
+  "seeds": [
+    3838186000,
+    3838187199
+  ],
+  "meanA": 0.18958333333333333,
+  "meanB": 0.25583333333333336,
+  "difference": "B minus A, focal mean signed round points per deal pair",
+  "meanDifference": 0.06625,
+  "sdDifference": 0.4389151127839982,
+  "ci95": [
+    0.04141603966531085,
+    0.09108396033468916
+  ],
+  "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+  "pairsIdentical": 1030,
+  "pairsBBetter": 121,
+  "pairsABetter": 49
+}

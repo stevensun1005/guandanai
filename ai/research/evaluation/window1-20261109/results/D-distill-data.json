@@ -1,0 +1,23 @@
+{
+  "data": {
+    "blocks": 617,
+    "rounds": 12340,
+    "decisions": 128322,
+    "rows": 558122,
+    "seedRange": [
+      4264011000,
+      4264023459
+    ]
+  },
+  "data2": {
+    "blocks": 103,
+    "rounds": 1030,
+    "decisions": 10760,
+    "rows": 46353,
+    "seedRange": [
+      4288077000,
+      4288078049
+    ]
+  },
+  "note": "Distillation data for the next window (belief-v1 search labels, all four seats searching at 21-40 cards); stored in the ignored run directory D/; not committed."
+}

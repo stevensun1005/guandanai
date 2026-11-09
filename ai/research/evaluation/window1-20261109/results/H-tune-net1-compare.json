@@ -1,0 +1,33 @@
+{
+  "A": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/p2v2-v1",
+  "B": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/tune-net1",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "settingDifferences": {
+    "net": [
+      2,
+      1
+    ]
+  },
+  "prefixPairs": [
+    1200,
+    1200
+  ],
+  "commonPairs": 1200,
+  "seeds": [
+    3838183000,
+    3838184199
+  ],
+  "meanA": 0.12416666666666666,
+  "meanB": 0.07333333333333333,
+  "difference": "B minus A, focal mean signed round points per deal pair",
+  "meanDifference": -0.050833333333333335,
+  "sdDifference": 0.6784537973840805,
+  "ci95": [
+    -0.08922047062347074,
+    -0.012446196043195919
+  ],
+  "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+  "pairsIdentical": 828,
+  "pairsBBetter": 168,
+  "pairsABetter": 204
+}
