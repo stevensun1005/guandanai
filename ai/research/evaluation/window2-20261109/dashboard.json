@@ -17,6 +17,11 @@
       "name": "window2c.sh",
       "startMarker": "window2c start",
       "endMarker": "window2c end"
+    },
+    {
+      "name": "window2d.sh",
+      "startMarker": "window2d start",
+      "endMarker": "window2d end"
     }
   ],
   "stages": [
@@ -49,7 +54,7 @@
       "desc": "有空闲核心时自动接着生成猜牌搜索判断数据（四家都搜索），给蒸馏训练用；只生成数据，不下结论。",
       "kind": "generate",
       "queue": "window2.sh",
-      "after": "随时补满空闲核心",
+      "after": "一直在跑，每 15 分钟补满空闲核心，到截止为止",
       "paths": {
         "out": "../window1-20261109/D/data2",
         "log": "logs/BF-distill.log"
@@ -58,6 +63,10 @@
       "rule": {
         "type": "descriptive",
         "text": "数据生成，不作结论"
+      },
+      "markers": {
+        "start": "BACKFILL chunk",
+        "end": "BACKFILL end"
       }
     },
     {
@@ -169,6 +178,93 @@
         {
           "label": "16 个世界",
           "out": "C-w16/w16"
+        }
+      ],
+      "total": 1200,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "H-div-generate",
+      "ids": [
+        "H-div-generate"
+      ],
+      "title": "H 猜牌训练数据：更多样的打法（4 万局）",
+      "desc": "网页默认机器人要面对真人，原猜牌网络只学过冠军最稳的打法；这里让冠军带一点随机性打 4 万局，作为补充训练数据。",
+      "kind": "generate",
+      "queue": "window2d.sh",
+      "after": "立即",
+      "paths": {
+        "out": "H/data-div",
+        "log": "logs/H-div-generate.log"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "数据生成，不作结论"
+      },
+      "total": null
+    },
+    {
+      "key": "H-div-train",
+      "ids": [
+        "H-div-train"
+      ],
+      "title": "H 猜牌网络：原数据＋多样数据",
+      "desc": "用原 4 万局＋新 4 万局训练（与 v1 同设置），只导出最终一步。",
+      "kind": "train",
+      "queue": "window2d.sh",
+      "after": "多样数据生成完后",
+      "paths": {
+        "out": "H/model-div",
+        "log": "logs/H-div-train.log"
+      },
+      "rule": {
+        "type": "dev",
+        "text": "开发检查，不作验收"
+      },
+      "total": 30000
+    },
+    {
+      "key": "H-div-P1",
+      "ids": [
+        "H-div-P1"
+      ],
+      "title": "H 多样数据版：猜得准不准",
+      "desc": "与 v1 同一批开发局比较对数损失（v1 0.793）。",
+      "kind": "metrics",
+      "queue": "window2d.sh",
+      "after": "训练完后",
+      "paths": {
+        "result": "H/p1-div.json"
+      },
+      "rule": {
+        "type": "gate",
+        "text": "开发检查：相对均匀的增益下界 >0 为过关"
+      }
+    },
+    {
+      "key": "H-div-P2",
+      "ids": [
+        "H-div-P2"
+      ],
+      "title": "H 多样数据版 vs v1 中盘搜索（开发 1,200 副）",
+      "desc": "同一批开发牌上与 v1 配对比较中盘搜索。",
+      "kind": "compare",
+      "queue": "window2d.sh",
+      "after": "准确度检查后",
+      "paths": {
+        "compare": "H/p2-div-compare.json"
+      },
+      "sides": [
+        {
+          "label": "v1",
+          "out": "../window1-20261109/H/p2v2-v1"
+        },
+        {
+          "label": "多样数据版",
+          "out": "H/p2-div"
         }
       ],
       "total": 1200,

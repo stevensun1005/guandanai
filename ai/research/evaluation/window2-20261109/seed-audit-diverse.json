@@ -1,0 +1,3603 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-09T19:43:53.581718+00:00",
+  "purpose": "Development validation; exclude from future independent acceptance",
+  "files": [
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/adaptive-balanced-1.8.0.json",
+      "prefixBytes": 452,
+      "sha256": "e55e9e5557c8a1e36b0087d5e63377432e83a863f333cb273edf6b31231337fe",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/adaptive-observant-1.8.0.json",
+      "prefixBytes": 455,
+      "sha256": "b1e9cce42bce55d620112c4432e3cfdb4e1f382781ba7946711ac03ca5018009",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/asymmetric-pilot-2026-11-04.json",
+      "prefixBytes": 7918,
+      "sha256": "70521e0ec47933b1b1803edbf0d12b160b7006ee2a73cb79f16238d3297188b2",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/phase-b.json",
+      "prefixBytes": 2420,
+      "sha256": "2c192b3d9cac283690a3982c19571b29ecff3978404bcd3c1e55170df735798a",
+      "seeds": 4
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/protocol.design.json",
+      "prefixBytes": 2654,
+      "sha256": "9601da4005f29354e5835c1b1b10b0645d69fd4f5274717f203faf987b1a781b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/protocol.json",
+      "prefixBytes": 13872,
+      "sha256": "9c1a51090e4ad4cdaa938824dd07b89b1fedf20a2457010a8f31d1d8440f1d0a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/results-manifest.json",
+      "prefixBytes": 1607,
+      "sha256": "8993c17e360d5630de1af3c48a572cdd710eb1c0e64d6e8bae07dc529fcdbc9d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/results.json",
+      "prefixBytes": 1888,
+      "sha256": "edc1ac7d8327fd7625640bedd0724167ecf6f0edead0f4ef94048518239992c9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/seed-audit.json",
+      "prefixBytes": 233209,
+      "sha256": "589088d414d8dcfc0992c1df797c97b6e97f9db3e54fb31e245efa017a249639",
+      "seeds": 400
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/belief-pretrial-20261107/validation.json",
+      "prefixBytes": 1696,
+      "sha256": "73f4036f6757b9e7c63fd81d1089c5498913004a5d5ff16d8137b4b3dcc6fcdc",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-e2e-20261107/analysis.json",
+      "prefixBytes": 1348,
+      "sha256": "cc3203e8b58ced4d412315f9004de52dc1053405a514263401bcf50ab5ea343d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-e2e-20261107/matches.jsonl.gz",
+      "prefixBytes": 27341,
+      "sha256": "e63b9b17af65ee6703a404b098a91533f5ce627091716c91f9cda3df679a1671",
+      "seeds": 2048
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-e2e-20261107/protocol.json",
+      "prefixBytes": 15294,
+      "sha256": "b208d96b4f9ba34058846b962b0191ce7e5ab20d857f2be7e9e9845c7ff44fcd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-e2e-20261107/results.json",
+      "prefixBytes": 22857,
+      "sha256": "d6d1589d9c6d973be61573839446b5d47b397359596cecc5cfb5296f6c96f5e4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-e2e-20261107/seed-audit.json",
+      "prefixBytes": 183295,
+      "sha256": "6dee6b9d8b283d4e6ef2c7faa51bf46695a107c4790bb92e6e02c7b8c865b21e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-reuse-20261107/post-results-validation.json",
+      "prefixBytes": 242,
+      "sha256": "d56b33c013ec8ae458f2306c32e1cfc98d9df93cafff77337624c2bed179578c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-reuse-20261107/protocol.json",
+      "prefixBytes": 39149,
+      "sha256": "70ae2300963d74cb7e337fe071ad645d0c924b9757069e4c88d5f21384c04de0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-reuse-20261107/results.json",
+      "prefixBytes": 1899,
+      "sha256": "1e40b047045367c040023775b6339788620451ee65f90c2bbb127c2c3f879328",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cache-reuse-20261107/validation.json",
+      "prefixBytes": 744,
+      "sha256": "d7d3e1dd7ef499d0c96dc94c28fa08aa536dfea7fe1b32da3aa0bcbaec230f5c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/clint-rule/matches.jsonl.gz",
+      "prefixBytes": 173266,
+      "sha256": "be09954c617c3633c6cff128e43ea33edeff3f50c660333c3dd4d46799dd3adf",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/clint-rule/results.json",
+      "prefixBytes": 4447,
+      "sha256": "8a1f3fc280282f73b132eec244e01bd2584656fad14fef2f28928404b0ca18a1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/latest-model/matches.jsonl.gz",
+      "prefixBytes": 186383,
+      "sha256": "063e8314e9feb3fa7270def9ff5a2a728d22351a7c1530a3f7ae5b85037835b5",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/latest-model/results.json",
+      "prefixBytes": 4764,
+      "sha256": "381e75488b9ace55fa62c3dc482708ecd5dc11ebd0fdb8574022d7865bf40d5c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/protocol-clint-rule.json",
+      "prefixBytes": 21239,
+      "sha256": "2ee022b518c8eb6389eb05d198418651d3bf10a010eb2ade96520b82f576956b",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/protocol-latest-model.json",
+      "prefixBytes": 21557,
+      "sha256": "c81934fdee710a1ff5cd7a0873ee04334833c0c4b786446e4d39d11bef598a91",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/seed-audit.json",
+      "prefixBytes": 40315,
+      "sha256": "be3c572aabaea4a187c074c5fd2ede19ee63c25fe2302948c5e197a8f043e158",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-clint-latest-20261105/validation.json",
+      "prefixBytes": 2977,
+      "sha256": "a199e2ea1f216bbbf52ca3ec7f6f5ada665a7b65b8f3efef7391522d1a171c57",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/awake-validation.json",
+      "prefixBytes": 805,
+      "sha256": "0486a314913912c1db1e1c40c0a58d62eff68eedc12bf36eb7ee7f57dd7d114c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/gpu-preflight.json",
+      "prefixBytes": 839,
+      "sha256": "469e6f8e68ec2160a372544da46a60b1f922955da6a9f2195ea76749a23c7f20",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-manifest.json",
+      "prefixBytes": 4133,
+      "sha256": "7ab1c98999c1445343be709b25188fba34f1619ac4fc7b3025692f5dbcaa56dd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-protocol.json",
+      "prefixBytes": 113736,
+      "sha256": "fd23c820a2586c02dd379f23e2c18a5b639a6aafd4b1fd00ca9dfc8973a60f20",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-protocol.pending.json",
+      "prefixBytes": 112944,
+      "sha256": "a3865f00f223276838155e764367e7b5502fba33d9b7ad3c899a31974520f390",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-results.json",
+      "prefixBytes": 9100,
+      "sha256": "38f38b01f47f363904a63dcb1b22fc7d2cbc8de3025e2f965afb72f315c9d75a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-worker-0.jsonl.gz",
+      "prefixBytes": 75253,
+      "sha256": "8939e0f498be735b0f9dfb998ee8f182e7521cf0d4235a00e3c6fd2f0951c6d1",
+      "seeds": 750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-worker-1.jsonl.gz",
+      "prefixBytes": 75232,
+      "sha256": "bdecb682d694748537413650c9e4c01f7e5c77de60c4d2a4b14dec092e86c4cc",
+      "seeds": 750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-worker-2.jsonl.gz",
+      "prefixBytes": 75303,
+      "sha256": "74b8c407060c85708269437a766a8b4bb805bc15dbbe9076a8de94fc47086eea",
+      "seeds": 750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/heldout-worker-3.jsonl.gz",
+      "prefixBytes": 75392,
+      "sha256": "98c8b4012d8c9ab55b9e3b92f594e26230562e0800abb32e5a316b9caba1a381",
+      "seeds": 750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/post-startup-validation.json",
+      "prefixBytes": 620,
+      "sha256": "4f8675debbe904921866593f698dd29a4167a59c6eb400ccc12aaaeab8b7dff1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/preparation.json",
+      "prefixBytes": 13746,
+      "sha256": "328858928f8e4ec908adadd6c4f2e864c886a74c47adaf3ebd24c06eb5605de9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/protocol.json",
+      "prefixBytes": 9780,
+      "sha256": "d644d69ec6ce44efa511a69fb91f23902e3aa5ef9992a484f13b2e4bfa2c10b1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/seed-audit.json",
+      "prefixBytes": 229009,
+      "sha256": "3f5097132dc921330b84c9f3831392a6e4d608ee3072fbfdb13302b25df1855a",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/startup.json",
+      "prefixBytes": 3865,
+      "sha256": "4b68a6f60c66222bdbbc399ef81ca60fbbab0d72c9b0534c49a68f04cac8b60e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/stop.json",
+      "prefixBytes": 19250,
+      "sha256": "b5206c6ee5ef51ad2d32312abab5113b07fd92de7ba95a6e4124e0a62c7276a6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-restart-20261107/validation.json",
+      "prefixBytes": 1449,
+      "sha256": "bc5a1599ced32c9ce44af6f7d18626c5148e4f4b797c983a547c7422ea6e994c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-20261105/champion.json",
+      "prefixBytes": 1291,
+      "sha256": "cdd84dfc3f284917098559d9023b544b9a2c8815542fdb3f2e414bbc8c08c6e7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-20261105/gate-00104.json",
+      "prefixBytes": 33833,
+      "sha256": "6bb880e5063a73fd34e234348330c2b87941bde28594d3a4e88b227f4f77ae2a",
+      "seeds": 346
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-20261105/gate-00112.json",
+      "prefixBytes": 45886,
+      "sha256": "7e58ee57fadc5d7a0898ae0fcf952e4f7ad720adb01f34fcf91ea6d1a7a555a7",
+      "seeds": 475
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-20261105/gate-00117.json",
+      "prefixBytes": 43021,
+      "sha256": "f6b412af5193a280f0136e6f4f676a90b33cd82298cc7d706de09b70fbb17c2d",
+      "seeds": 442
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-20261105/validation.json",
+      "prefixBytes": 7293,
+      "sha256": "021fbfbdd765072afae92c76660044fe51693f57be6fa587ea62964ac5a62858",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-mac-20261105/champion.json",
+      "prefixBytes": 1477,
+      "sha256": "c19bdea228811173bf49bd300dc8b0e8ad403330d20fc102717c63eef695c4fe",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-mac-20261105/gate-00309.json",
+      "prefixBytes": 29613,
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-mac-20261106/champion.json",
+      "prefixBytes": 1663,
+      "sha256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+      "prefixBytes": 46585,
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261106-1404.json",
+      "prefixBytes": 23616,
+      "sha256": "beb8d3084511cd87cf158552078c036896a9efc2f5a1a547936519bd099cebec",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261106-latest.json",
+      "prefixBytes": 16803,
+      "sha256": "4bf2885cb44ec452eb53141c9362f9a9aadcbd8a06c30cf5f0bc7405f57f7f32",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261106.json",
+      "prefixBytes": 23663,
+      "sha256": "96420044e60b5a2ac3112812ea58494ec1f5f0b738f8c59361a5ba2dc98f26e1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261107-1506.json",
+      "prefixBytes": 19293,
+      "sha256": "c8e8dd5d460303b2906ecfea6dd2d0c02e1c56e5bd1a462365849fe9a9524ca4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261107-2006.json",
+      "prefixBytes": 36190,
+      "sha256": "29711d60ec8c2a80e05a384af7dce23bd98517b1d91d7b9be437e3b1d1c73b18",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261108-0011.json",
+      "prefixBytes": 39059,
+      "sha256": "8f1523fd6aad8923381f1b4c27d4e643879d43f004c05cd37db7ff9545aa7d98",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261108-0435.json",
+      "prefixBytes": 29557,
+      "sha256": "2e125290f54f5af8be7dcdd13e6aec9afee16c396eb448c44897d4b6fffbe063",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261108-1635.json",
+      "prefixBytes": 31475,
+      "sha256": "c8d298a49678ae9c11f1767e9c6fd5c06a25ffdfc2f692558d81be75ab6f0649",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-state.json",
+      "prefixBytes": 633,
+      "sha256": "d91263ca2dfe04ed784a7caf998d531afbd52ca97816aa1a6358265dc737f4aa",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/calibration.offline.json",
+      "prefixBytes": 3393,
+      "sha256": "764c78a3c0fcd5fb8da3d652096dec242f395792e3fbc216e7e805bcccc50bf3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/fit-manifest.json",
+      "prefixBytes": 914,
+      "sha256": "1a2fec57574e3d1345cc9513adeea4dcc7170782c1a3ae1d204b2ab3c5a3831d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/fit-protocol.design.json",
+      "prefixBytes": 2477,
+      "sha256": "15976132fb2a32f2820f31ab742fa8a014b011fc7d84b771452e0be6e340bc1a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/fit-protocol.json",
+      "prefixBytes": 19366,
+      "sha256": "c4cc125133daaa9031a111dda837e7ad8af7352b251a06f1c72fcf20be5802dd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/fit-registration.json",
+      "prefixBytes": 578,
+      "sha256": "a15e9adf9090cc03a07f9043c30526314e131406942ba0b396cfe1c1a9794edc",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/fit-results.json",
+      "prefixBytes": 562,
+      "sha256": "8b813c676ed17899e4ac8ff15fc7cddab0bc4b017a6c4c60cf33cf90aff1648f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/heldout-protocol.json",
+      "prefixBytes": 103843,
+      "sha256": "e0a42f8f64bf9c7185d8403377cfe07fce3d4d047ab84d34c8c06d4aae634d0d",
+      "seeds": 4002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/heldout-protocol.pending.json",
+      "prefixBytes": 86262,
+      "sha256": "7cf62e2f62b48a0658dcb006ffa006fd1e30c3aea6e639d6e4e0994b791cc7a4",
+      "seeds": 4002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/heldout-registration.json",
+      "prefixBytes": 596,
+      "sha256": "41c924828a0a8f36cca3520c90065ea0c9c2ff181ba1eef61bedc0082a0e90c5",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/heldout-results-manifest.json",
+      "prefixBytes": 1662,
+      "sha256": "cea3cbbf1353714ea8cd94b2c297e216131e23daf69cbf1052333151656f4606",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/heldout-results.json",
+      "prefixBytes": 28880,
+      "sha256": "7f10754ee45a8e9cbfe0a48ed0a50f9db54c04a082db6fe5046e1a26728752d6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/seed-audit.json",
+      "prefixBytes": 326207,
+      "sha256": "d847146a688ba58d3626317272ea02f60f056818241e307249632bf73e5f0ddc",
+      "seeds": 4000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/startup.json",
+      "prefixBytes": 4262,
+      "sha256": "ebd5150309475741fb293c30f062cd21daf36b13b5a0c2fd014fc72232150fa3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-calibration-20261108/validation.json",
+      "prefixBytes": 626,
+      "sha256": "cb783055498849e38e8f0f87437a7b70e2e3f346e6e4559d27bf007a417ee49b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/protocol.design.json",
+      "prefixBytes": 205963,
+      "sha256": "0914a0142b08c8c32d25bb40bbaca74ed771992cc3ee5c2053488acc8c8118ad",
+      "seeds": 10002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/protocol.json",
+      "prefixBytes": 222665,
+      "sha256": "d99f43c35196aab10ef837ae3641d9b21973f5f2132c2387fbd3b7c14345f75f",
+      "seeds": 10002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/results-manifest.json",
+      "prefixBytes": 1413,
+      "sha256": "0f14fe7248394c66a0cfc4d5b64683ceac6a1a20aa53a1a476ad7944d0f407b7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/results.json",
+      "prefixBytes": 20385,
+      "sha256": "d81ff11113dbcbd2b3434fb6a70489e4a70593b44b7253e400228b44b45713d4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/runtime-manifest.json",
+      "prefixBytes": 1452,
+      "sha256": "4e7d36895b34f4d22daa95ff4cc22a77cefe06e1977cd0c433bf23b88893eb77",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/seed-audit.json",
+      "prefixBytes": 419495,
+      "sha256": "d0ec02989c5338cb66e6ee9b781db568082464604e24e8f08a0f4b10fcee5bab",
+      "seeds": 10002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/startup.json",
+      "prefixBytes": 1175,
+      "sha256": "d2f0634245d92c17ddc29e91a2d9e543090830a8fe2cfb95b1082d7c607d2fa7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-deviation-20261108/validation.json",
+      "prefixBytes": 815,
+      "sha256": "39141255f03f151ae973def170452317bdd8d75acce1fe3741dd42814c412858",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/coach-top5-private-20261105.json",
+      "prefixBytes": 16549,
+      "sha256": "9f4fe8503a1174d14a70b86345dee63f4cbc0ee702790cc2df8973cec27aec7d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/collection-labels-20261108.json",
+      "prefixBytes": 9187,
+      "sha256": "992adf0546a5a0599e3db1ccf17cf24e46f6b715c304768cca4b74c4266d8d1f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/continuous-smoke-2026-11-04.json",
+      "prefixBytes": 7161,
+      "sha256": "c14cca0676f5657080cfea28e940b4e390140896fc322f12e37f89dcf942ba8e",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/protocol.design.json",
+      "prefixBytes": 13825,
+      "sha256": "488c08c0c08a76fb36844d044ea862c6041166b7781921def11a025e812e2986",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/results-manifest.json",
+      "prefixBytes": 3024,
+      "sha256": "c29278a4cd3716086737be259547fd0db6f713ef62274f580fcc4c311426e93c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/results.json",
+      "prefixBytes": 49966,
+      "sha256": "62f0959121d6336813b2d461e38062a0f6a922e13f177f9b385b94d9d5336751",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/runtime-manifest.json",
+      "prefixBytes": 18495,
+      "sha256": "b4049329d7b7c05f7fe24e4dc771265077ffa09c7d5f96a8e731327051ca91b4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/seed-audit.json",
+      "prefixBytes": 421524,
+      "sha256": "be9bac39b14d2844d711988f1926be8f8e8357cf68d10aed9cd05620af35bb85",
+      "seeds": 12000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/startup.json",
+      "prefixBytes": 2223,
+      "sha256": "a00c76189b7d6086b3d9e310bae799382a3ac1a6b8bcdf7d9ea9d12de70de4b6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cooperation-grid-20261108/validation.json",
+      "prefixBytes": 1193,
+      "sha256": "10bf6ef4a250f1e04510cfdbbabe322a658764a63136b42297fa313bdbf0249f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/cpu-main-retention-2026-11-04.json",
+      "prefixBytes": 69272,
+      "sha256": "b02afbdb8844083226401027e9e38a489b6098f973edb4ca456fa3d857c0b14f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/danmcai-naming-20261105.json",
+      "prefixBytes": 7737,
+      "sha256": "7ccd4d06462e46d5f2f23141802734cf129d371e60bc0bbabd4d2b4f4827f5b1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/gap-summary.json",
+      "prefixBytes": 5695,
+      "sha256": "372ddb2b6254ee49ca95ad25313bc5aef17adc1d61fa21703e201e874d1ad6dc",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/protocol.design.json",
+      "prefixBytes": 129273,
+      "sha256": "d32d9e684e9d188e7e46cf33e4b9264516a0b93019da66c103f0d1c0331a9feb",
+      "seeds": 6202
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/protocol.json",
+      "prefixBytes": 145537,
+      "sha256": "e158e1d5668363bfd3c05a729e77558aa4f4ce3de2d6c0ec8c4d0a1368439542",
+      "seeds": 6202
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/results-manifest.json",
+      "prefixBytes": 1596,
+      "sha256": "5064c8dcf71d1e6794f43666b10c721ff475997422cac710da2ccaa6979c5501",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/results.json",
+      "prefixBytes": 11062,
+      "sha256": "06210fea52cd8f5cc7e34aca134c48d063ad3348d850c0fb6a3cb480d93eda50",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/runtime-manifest.json",
+      "prefixBytes": 1453,
+      "sha256": "789f9a5c4a11c0577220ce53a62edc1a7f1ad3cabab9c7034c2b1e846618546b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/seed-audit.json",
+      "prefixBytes": 354030,
+      "sha256": "bfbb6d528b466180c8be36921bf63cfb89a40f36c3c52ba389064738c05277fd",
+      "seeds": 6202
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/startup.json",
+      "prefixBytes": 938,
+      "sha256": "5445f2696c3f8ebcf9879e8096b302de97a1cbef4c7290df601cb242a2e863df",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/trajectory-startup.json",
+      "prefixBytes": 1767,
+      "sha256": "0d3ef38ffb53f18e39debc52b6d27779d32339f33d58ec3b735b2699e2c3d828",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/decision-trace-20261108/validation.json",
+      "prefixBytes": 626,
+      "sha256": "650a4918a219e586ea2597efcac1f5c56d5d2f5e11e61a4ba992b0cac0a5fb87",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-1.4.0.json",
+      "prefixBytes": 859,
+      "sha256": "19e261dbc436f9e1919951844adf54029c25e2cb8524686171acc89c40ef8f85",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-expanded-1.10.0.json",
+      "prefixBytes": 814,
+      "sha256": "471cd4f0cc934f90b400067df3470dde80979c05b1585d329546a3c7b6dfa3b8",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/authorization.json",
+      "prefixBytes": 1396,
+      "sha256": "322b991acc0e0dd274981fce290969f6fdb11883ff67127d98265fe928d80f06",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/final-evaluation/pairs.json",
+      "prefixBytes": 112727,
+      "sha256": "85d945ec66096b8883cfac983f203aa5372f7cc3635a4739cc4b4634ded6de49",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/final-evaluation/run.json",
+      "prefixBytes": 830,
+      "sha256": "da7a14a177d5bdb0d7fffaece0b782baaf5b34800c0aadf69e4e2212553b8443",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/final-evaluation/summary.json",
+      "prefixBytes": 1472,
+      "sha256": "86f7ed5f0bcb5f6d170e5369848204b20072c97cef368d6f707f010131a4fc78",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/protocol-amendment-1.json",
+      "prefixBytes": 7894,
+      "sha256": "a5ff1751910b875ecd1d00cedb58d935e1c164cffc494dfa4a41436c32427fdb",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/protocol-amendment-2.json",
+      "prefixBytes": 7191,
+      "sha256": "605050c377fd5077616e47655ad106c605edda62f365c39999483d6cac039dcc",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/protocol-amendment-3.json",
+      "prefixBytes": 2501,
+      "sha256": "45fe6af8bae4d405af7b807ac918663a60b9d42832bfa457049976b9fdf3555e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/protocol.json",
+      "prefixBytes": 5964,
+      "sha256": "ee5a82ce8bd4ab3999841d91ca52c1c1579fe0cd6a619ba82b633ba0537aefd0",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/seed-audit.json",
+      "prefixBytes": 157608,
+      "sha256": "074bb8981ddeb1bb8330ef0e81ff20fa4a4660f84b3083cec2a417e8766f5e27",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-oracle-20261107/startup.json",
+      "prefixBytes": 2232,
+      "sha256": "c391da3c362eada5ec940ccdba5f31207b31df834f13ca941cbb2a65a5fc0cb2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/final-evaluation/pairs.json",
+      "prefixBytes": 112206,
+      "sha256": "5f6aee271da9a6873527224b765ec1dfecb3e605bc5c600cadbb63933892b298",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/final-evaluation/run.json",
+      "prefixBytes": 818,
+      "sha256": "4366678c0faaecc776b630b49b492705ae26ce26bec7c57ecaee96a97ab74a6a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/final-evaluation/summary.json",
+      "prefixBytes": 1447,
+      "sha256": "e3ca4ac5c4943e0cb36fbacc99578b10b5aa224b9b8c9bfe8b8c8deb8e7c5ec3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/final-state.json",
+      "prefixBytes": 2571,
+      "sha256": "a2cb8f2174d9be446dca66e220a04973deb677718bb108b47ad9265b957ef500",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/human-audit/run.json",
+      "prefixBytes": 3314,
+      "sha256": "b4f3fcb51baa6fcfbc7f9bf0a9e4a60597c934dda7a3f8b4673f3d78e71fb63f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/human-audit/summary.json",
+      "prefixBytes": 20212,
+      "sha256": "8d5797ce732e995131fcaee933c6b2e4a0016663161e9cc4a17ac1a9caf2b7b6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/postmortem-dev.json",
+      "prefixBytes": 7439,
+      "sha256": "d2517f79fecaa2616d11a2c8acdb9f31dd284efe32822005ff922f6c04caeb48",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/protocol.json",
+      "prefixBytes": 6556,
+      "sha256": "d4816f09e6c73cdd0712e7def4c95ecd1739dfecf31a1a83392b525b3310a47e",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/seed-audit.json",
+      "prefixBytes": 194560,
+      "sha256": "78b375e0665892c092af39863361e2d493256803673957f888960abd664d2a80",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/endgame-pimc-20261108/startup.json",
+      "prefixBytes": 1489,
+      "sha256": "f1258ff4eb2aa8ff574150bb79a2f7a85a96a858cb1b98f9cc483f7667ce320b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/dashboard-validation.json",
+      "prefixBytes": 835,
+      "sha256": "2064c7fa7e92fe6bb0682192c856b716dca6e4574658a280851e36af27f6d653",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/gpu-preflight.json",
+      "prefixBytes": 839,
+      "sha256": "cf4a5333f3eb8c997aa003f317158c2b5f25a5613e23cc1f65e4c3faf7ba98cf",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/heldout-completion.json",
+      "prefixBytes": 1705,
+      "sha256": "86a409cc215e2f6c8149098082a36dd1d8911c81ddf4250c7aa21ae086828059",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/heldout-protocol.json",
+      "prefixBytes": 116696,
+      "sha256": "2f7effebfb084f1833e958a167f3268c3bde728e47defe4c41d1ac39f09251d3",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/heldout-protocol.pending.json",
+      "prefixBytes": 99391,
+      "sha256": "af93250e92d0e65f1d41f52b1c8ee1fbe558ef7f95f4427c6246d3b9621b2102",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/heldout-results.json",
+      "prefixBytes": 10335,
+      "sha256": "2ff40791bb7cd35297438dc36b3a491d606af188165bdb2967e52d9a1616dcef",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/heldout-startup.json",
+      "prefixBytes": 3181,
+      "sha256": "3cde735a3d7855a5410575c4e6772ae7cdba1a4f5268ff6408a06ac5f6a1a2ab",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/initial-config.json",
+      "prefixBytes": 2575,
+      "sha256": "a33bac7047498f5fddda7e60e4ba545d6410f5ff6b0457712e5aaaab9cfc5821",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/protocol.json",
+      "prefixBytes": 10386,
+      "sha256": "cbc4b6083907fa2f4e429b4d9efbaa141f6fafef5cd5a7cd7b59539698e0efa1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/results-manifest.json",
+      "prefixBytes": 2369,
+      "sha256": "708cc6bf679a11a58ce6cd78db597f3049343ba1bb36497a870ab34e8b438cc7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/seed-audit.json",
+      "prefixBytes": 278074,
+      "sha256": "73df0a4d29c9c0912a1b7e3734f6d62aa2df50a76b56be068cfb1357392e4713",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/startup.json",
+      "prefixBytes": 3341,
+      "sha256": "d2d53181bcbca328d222d6257916222c0e05f4c6e4cab2ddb7047e701da1c0db",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/stop-audit.json",
+      "prefixBytes": 19002,
+      "sha256": "3958ba1c3d402af244a0b2c636f91406528268d9939dc80eb1fb7fd1550b5949",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-017-20261107/validation.json",
+      "prefixBytes": 778,
+      "sha256": "f4513a92156520a79986a2067d98c956c24eaaf446fa6f8d46e6ed753d9e4176",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-teammate-diagnostic-20261108/protocol.json",
+      "prefixBytes": 212925,
+      "sha256": "97328f0391b561d7bbe2c9ce9fbb59433eff71c6bbbbaf5b2484cf5c81382bc0",
+      "seeds": 6000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-teammate-diagnostic-20261108/results-manifest.json",
+      "prefixBytes": 3076,
+      "sha256": "a0fe858ab7486f12d63e7399cbd159ed9572c4d2f8b95255237ba223dabf1bab",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-teammate-diagnostic-20261108/results.json",
+      "prefixBytes": 10674,
+      "sha256": "92baeec1b7989341363c4fb9cbdb2a21b2cfbd52f0bf15fcd77f1939af1b3689",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-teammate-diagnostic-20261108/seed-audit.json",
+      "prefixBytes": 328300,
+      "sha256": "39e4639317c311d6fdb18b05e2bcd4289e6db78e323727bc47c9770a70b6ce1a",
+      "seeds": 6000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/exploiter-teammate-diagnostic-20261108/startup.json",
+      "prefixBytes": 2092,
+      "sha256": "f6daec4d0e7736fd09f656b22fc0d237d5f1c50ae8e435a4a2e3175b8ad9d41f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/preparation.json",
+      "prefixBytes": 558,
+      "sha256": "536a6480ba8ff54d4adf4bc543cd72fea9a2570202b32894c9eb473844a92c5a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/protocol.design.json",
+      "prefixBytes": 1830,
+      "sha256": "adebc3acaa2e7039617f2cd3e2d1ca2774ad4a3103744aec65d5500ba71565c0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/protocol.json",
+      "prefixBytes": 39319,
+      "sha256": "a16c1c2a7529391fc51726d06a219b9e40ba437e16e939706625d12d9298acd3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/results-manifest.json",
+      "prefixBytes": 1505,
+      "sha256": "5bc3eea694e2e8da3ae7f2e3cf1ee247d90d2cc78452c5afda00be939da24619",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/results.json",
+      "prefixBytes": 15512,
+      "sha256": "3090a5e69be1a302dedafa915f676d338fcfbfe368a1ceeb758123d9a9c593a4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/seed-audit.json",
+      "prefixBytes": 260956,
+      "sha256": "e5f095eb5f9c913400a63180ce74421a457e191a19e8472515530ef4d25ede3b",
+      "seeds": 2064
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-equivalence-20261107/validation.json",
+      "prefixBytes": 1993,
+      "sha256": "f00942430b6e718f7790518eb3830ac1c09b1d3dfd9838b87f602c9fdaafe870",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/authorization.json",
+      "prefixBytes": 988,
+      "sha256": "f09d1aa1ecc745926efef45c99ad4c01e04e62e191b19c62e64889a28468564e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/batch-preflight.json",
+      "prefixBytes": 439,
+      "sha256": "11d588bda3d40ead21e8e289ced1987a172caf6bd196d701f0f80f725a66595a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/champion-authorization.json",
+      "prefixBytes": 854,
+      "sha256": "d13e9edd012a68504953f63798a5d8ef80d80b9be5fcdba97f1d60979230421b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s1-20261108-config.json",
+      "prefixBytes": 2630,
+      "sha256": "09c6ed36018592c9751f5b8ff657f079858323b7c1d2119e46a285c2858d92b8",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s1-20261108-protocol.json",
+      "prefixBytes": 25333,
+      "sha256": "2fde051e5b2fe72b9d71827282620f8113b92d4503732a5c7555fdc2fc7e6606",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s1-v2-20261108-config.json",
+      "prefixBytes": 2673,
+      "sha256": "638e93b6dd734f678dec14208ae95ca2a1d5f140da322f9b392bd6a1ebe86c01",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s1-v2-20261108-protocol.json",
+      "prefixBytes": 25652,
+      "sha256": "b1e8257de1be17d672be3f76458563d79f8d3a5af49ce6b5a4bb6792cabbb48b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s2-20261108-config.json",
+      "prefixBytes": 2630,
+      "sha256": "39eb42f26cfea9298ec230cfcb749f10b86b56eab2558fd5c06fc6be19be9a8f",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s2-20261108-protocol.json",
+      "prefixBytes": 25333,
+      "sha256": "d165302e6ac23a58a328c00cf5bf28a0eba7ba2d92b9255033e929d6f91f5376",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s2-v2-20261108-config.json",
+      "prefixBytes": 2673,
+      "sha256": "061e854474fdd2504974fa6e4ca1642f1b6f92451b90422dbaacd274e8523861",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-public-s2-v2-20261108-protocol.json",
+      "prefixBytes": 25652,
+      "sha256": "33a3a1c2e8b0f2269d1f8aaccfe8258b35a573d902615a094d5fc244d7609ff2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s1-20261108-config.json",
+      "prefixBytes": 2626,
+      "sha256": "1718960d7088ba094cc7486a08f27cab836f909e1a1e0986c43b1287699ae8d2",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s1-20261108-protocol.json",
+      "prefixBytes": 25327,
+      "sha256": "ae32e1716bb9216aa0f5ac1e5163c279d00d1427a942649856a90592b973fd7f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s1-v2-20261108-config.json",
+      "prefixBytes": 2669,
+      "sha256": "4e8162754fabf308d9e711d79db35f28b7467f2a105863a1009a72e950146dd7",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s1-v2-20261108-protocol.json",
+      "prefixBytes": 25646,
+      "sha256": "064e15b2e6f6f5469441b90e15580b65aa97b959d68144c997f2c305a38c25e8",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s2-20261108-config.json",
+      "prefixBytes": 2626,
+      "sha256": "e46012b3135f77fe22b7e266644f5dc34cf527b6666be9e9bc83f587b99d251c",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s2-20261108-protocol.json",
+      "prefixBytes": 25327,
+      "sha256": "39c8d71412a64ab9b761dc394f37b23269603c0adb4abd8605c6b5415307c2e0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s2-v2-20261108-config.json",
+      "prefixBytes": 2669,
+      "sha256": "3bf9eef059de0811144744b0a0d74703445f5852717de6204e0ecb18a7664509",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/extras-zero-s2-v2-20261108-protocol.json",
+      "prefixBytes": 25646,
+      "sha256": "5df09ac2e5ace3445443568f6254a63425d8ae9e8d3f7d2c22a90275c362f62e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/gpu-preflight.json",
+      "prefixBytes": 848,
+      "sha256": "d5179eb5fa4df848a85f0da649c5ad35cdc87eee63699dd39fa9baf62e898138",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/pilot-queue-status.json",
+      "prefixBytes": 1163,
+      "sha256": "fab11936b75b0fcfd80a099d9ac312f45159a024e78541cca3655c72cd6afc77",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/pilot-stop-audit.json",
+      "prefixBytes": 14036,
+      "sha256": "90326ab1df34f1aee222520143f46b63d836a03616c2018bcc063a81b83d77d7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/preflight-protocol.json",
+      "prefixBytes": 24089,
+      "sha256": "e8c5e850671e34fbb73fb102f9aa17c4d8e9e06e7400e2af95a5d4a5566e53ac",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/preflight-registration.json",
+      "prefixBytes": 590,
+      "sha256": "f85b9abcb0e051b1f2dcc8f42bf4e861245cbdb1455e9681f8746ae63f8b17bc",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/protocol.design-v2.json",
+      "prefixBytes": 4613,
+      "sha256": "5d1c09468b763c07321221f639de530183eeed4162384bd22d1e21403ffee2f4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/protocol.design.json",
+      "prefixBytes": 4012,
+      "sha256": "d25377d443c7ebc7f42b5582785eeef1c84ba6d06984d6f29ca306ed71da2d20",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/queue-plan-v2.json",
+      "prefixBytes": 1570,
+      "sha256": "01fe67565eb8c53690acd0c2fb0ed3bfab77ec62a8088c262b36b1c484cee57d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/queue-plan.json",
+      "prefixBytes": 1526,
+      "sha256": "bd07cbcd7e9a236df8b1d4a785f6a5caea4cb90ff80c2600dad26996d9e9f699",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/seed-audit-v2.json",
+      "prefixBytes": 440855,
+      "sha256": "3b64c81d87cd21158e49a45d1de3b78778843b7b524d1dd453b15ea7ae86fa59",
+      "seeds": 10000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/seed-audit.json",
+      "prefixBytes": 432798,
+      "sha256": "9e3adf7ba3f7579625d51683ac3e2984910a56d8995a45cbdb06496b972f1bb4",
+      "seeds": 10000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/startup-v2.json",
+      "prefixBytes": 3862,
+      "sha256": "92a0eb7e7b43b1d984680802aa5ed6435f0a4b2babc6263b6d82c2f594c23195",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/extras-input-ablation-20261108/validation.json",
+      "prefixBytes": 1368,
+      "sha256": "bb925ab4ed663894983a3f64bc91d67d4f0384f7bc550a76bb95be9be807ef4a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/fast-actor-throughput-2026-11-05.json",
+      "prefixBytes": 2663,
+      "sha256": "81e6d9c15c2dead591d4e803f4542f80c3b618314299bdaed4ba58cd8de23472",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/full-match-current-1.10.0.json",
+      "prefixBytes": 2604,
+      "sha256": "1eef144e2596d79a953e8a0303b756d315f5d59df990ac6295eb41587de24afd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/full-match-four-clients-1.11.0.json",
+      "prefixBytes": 2063,
+      "sha256": "141993856acdc37629abb83453fa2343f4aa4166b5c6a55829ab18790bc98b23",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/full-match-phaseguard-1.10.0.json",
+      "prefixBytes": 1642,
+      "sha256": "225c4bb65f114e8caac2e52a974dd2090c417abeec89bd8a8e36647e3f4cd9bb",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/full-network-development-2026-11-04.json",
+      "prefixBytes": 14986,
+      "sha256": "90eb4db5db077bb77917d7c55a63140cb29773b507092ee087099c99f00b118e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/gpu-pipeline-2026-11-04.json",
+      "prefixBytes": 9125,
+      "sha256": "5626d219850fa833ee17fa1249206dd72774fa03c06520681a1a3b58888c103a",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/gpu-throughput-2026-11-04.json",
+      "prefixBytes": 8844,
+      "sha256": "81eb0c50cc2f8bf20cc88928ddc56528f3d81ef105ea3f4191583f51f1bb6986",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/gpu-transition-2026-11-04.json",
+      "prefixBytes": 41651,
+      "sha256": "7cb271956d23302cab5fd6712d048c55e760b2d4cef76c112fcabb611502626a",
+      "seeds": 314
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-champion.json",
+      "prefixBytes": 2622565,
+      "sha256": "123b0d7f7450e98948e4f500b01cbbdc3413fa05bee070c7499388c2e36b32a0",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-clint.json",
+      "prefixBytes": 2944452,
+      "sha256": "6a1b38fd843e6324a5ee2b4ed54e730bff7ac0bd3073b26d190a0418a0189dcc",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-p0.json",
+      "prefixBytes": 2663750,
+      "sha256": "85179e4a5f46b3b4c0aa0bbc0241e74bb7e533784c8f0121164d334df8a3bdd5",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-random.json",
+      "prefixBytes": 1553865,
+      "sha256": "5e17bee133f007755cd780207025542cd18dd08e7d8a11585c479f8e8be455dc",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-rule.json",
+      "prefixBytes": 3014983,
+      "sha256": "892cc36f1bfa00ed767643e799991842955b59739db434015d5a274af4966e06",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-plan.json",
+      "prefixBytes": 1144,
+      "sha256": "d1a888ceaf276154c82c5d299e1ac88e154097346a77cb4f8a7da08f9afd0001",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-development-500-champion.json",
+      "prefixBytes": 2800889,
+      "sha256": "ce14ce4ae90494f7b2b9a3589cd1ca181f5c5452178b67913c1b4f5be3ea94c7",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-development-500-clint.json",
+      "prefixBytes": 3046044,
+      "sha256": "693daaa3916ce7e76b3ee03488c686240b6487154656e2aacebccb3a2ba8b6a1",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-development-500-random.json",
+      "prefixBytes": 1550760,
+      "sha256": "912613ab14112b82ffc98d775055f7a1a06c49c9c351ffde55dca34221d45ad7",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-plan.json",
+      "prefixBytes": 1169,
+      "sha256": "b7a72969efac6e286a19b8d24b410201cb09ee4bd45ff681a92bd2558a72f655",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-223067-development-500-champion.json",
+      "prefixBytes": 2813458,
+      "sha256": "f9db59d95314208125a2eced1e4964835132f27130c8bfa48f99a51be7b6849c",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-223067-development-500-clint.json",
+      "prefixBytes": 2963220,
+      "sha256": "0c22001a186f26cdd495f9bd2b7d7903c71dab11e4b2b8999ed4cc4e95ed3a3c",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-223067-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "b4b8ed17f41acf8f4bb619b914a96b6994463a33c45bef76873026689720763e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-229609-development-500-champion.json",
+      "prefixBytes": 2846652,
+      "sha256": "6a66195dc1e9bfb53ca82d8f69db1d64f8bff347677532252f5e2d7f84dadaf3",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-229609-development-500-clint.json",
+      "prefixBytes": 2979653,
+      "sha256": "14c84014cb8824d75c10b2b17ed3014c9c3949ee5cd8147538fca41fb1dfc1f2",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-229609-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "41a962ed433af672f3156515e633fe95dace8980df1b079524540a61b06ae148",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-270292-development-500-champion.json",
+      "prefixBytes": 2952139,
+      "sha256": "1da34615a528c9f7398d3ddb525eb7ed9a144e694e820cbed01877097049457d",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-270292-development-500-clint.json",
+      "prefixBytes": 2952417,
+      "sha256": "3a380821a7c8d87abcbcc1c14888b88dcbdafb40cf887cce22a21fb29588ab7b",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-270292-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "4cfe6e9059d966cd8e0cecd910431c62db0559946044477f620ec54c7b3af653",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-303975-development-500-champion.json",
+      "prefixBytes": 3027659,
+      "sha256": "0b6c8d69b8184d0510973dfe081c0b9bd52b3892eeb5d5db346ac29c3a31a67e",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-303975-development-500-clint.json",
+      "prefixBytes": 2966773,
+      "sha256": "8e79130bf324e38fac62a55d0038d61707e6a906a1360b915a597d02e0074aa6",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-303975-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "a25931de33634411aaf71aa0b8a174b4b1291dbe62037ae2ca2324bc0a15c342",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-310956-development-500-champion.json",
+      "prefixBytes": 3026620,
+      "sha256": "ba063b39df6cac7d5e325becc457268b7eec6fdd2f82d4fcc732d9c29715d574",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-310956-development-500-clint.json",
+      "prefixBytes": 2995022,
+      "sha256": "50068960752c6429193b05707d1a12fc7375af7b4821d5b10ecf695029c3d7bd",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-310956-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "eea2c13d26d69eeed9c3bd4a346c2d2e3a280c6eedd9672567ff71a2edb18032",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-352359-development-500-champion.json",
+      "prefixBytes": 3053133,
+      "sha256": "40b0497fc8a946daa215fc00daecc5c46dc133f8e8dd6592e2c1c3049a12560d",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-352359-development-500-clint.json",
+      "prefixBytes": 2962738,
+      "sha256": "d4a89bfd37cde04911a53b3a50b14e2e63f9c42401be4a7c33ed15fec3deb902",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-352359-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "5cc2174922f865172a9abd7257d43e7801ffda7c19b89ce9e1f4c0cfde899ab2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-352359-request.json",
+      "prefixBytes": 1923,
+      "sha256": "251649883f798d574e6d96f930609e3d3d6bd2a1541cb70212f6726781ac1980",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-385979-development-500-champion.json",
+      "prefixBytes": 3165645,
+      "sha256": "c925b8cde2a180123c62c6057252015c587ea3079c18e8aeef859a46883e976d",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-385979-development-500-clint.json",
+      "prefixBytes": 2939622,
+      "sha256": "6646f034f829dad1b72f68187e65d7ef12889b69e5b922a005f3ffc89d3a6b18",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-385979-plan.json",
+      "prefixBytes": 1148,
+      "sha256": "9b20b6e0a0a7a2bf43de1944dbaa7cddf686c7511d78b76d7155918bae54c240",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-81551-development-500-champion.json",
+      "prefixBytes": 2243125,
+      "sha256": "880e7e789ec86f36ed521cf2231c3c19b9364be1023010c3afc327d8efa7d693",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-81551-development-500-clint.json",
+      "prefixBytes": 2848159,
+      "sha256": "1b60481d4358b1685c2309e908d7bc48e28e3dfee6c7a71862e8e93d6977bcf9",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-81551-development-500-p0.json",
+      "prefixBytes": 2269559,
+      "sha256": "fc1f6d4a7d41d4bbab9196a45cfe9d3f8587e61c2646261d9a805c2e263fb53e",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-81551-development-500-random.json",
+      "prefixBytes": 1554588,
+      "sha256": "af082759041d784fd56bdb189c8c86278c1e10f6cc445f74407d2aca00dad4a9",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-81551-development-500-rule.json",
+      "prefixBytes": 2732600,
+      "sha256": "cca6813a2d37e5b38af1baba21cfe16c2597c22df4cae51cfea302efb894fdb0",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-81551-legacy-200.json",
+      "prefixBytes": 2634922,
+      "sha256": "80bfdfedd55079b9679c2c2f2563945a05ee4d57d554b84aa7e13668b100dccb",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-clint-block-0002-20261105.json",
+      "prefixBytes": 1019182,
+      "sha256": "21c17d2866ccbcd8fd2db14d4b23142246b836cd083e3c3ef4af78caaa3a9649",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-clint-integration-20261105.json",
+      "prefixBytes": 1976,
+      "sha256": "a80a2fb48d21a2eefe7d6ca08b7eea095e67a75b20209d2bde9cf92212365b7f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-20261105.json",
+      "prefixBytes": 16324,
+      "sha256": "431013ffeb7000c87947eeba940511f4f68d90583f9efdb39f71e9e91454213c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-model-000000077262-champion-20261105.json",
+      "prefixBytes": 2174150,
+      "sha256": "02b4101334e2544b76b08857513b747f5c7d18a494a66b0c5a4ced59642cf477",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-model-000000077262-clint-20261105.json",
+      "prefixBytes": 2768921,
+      "sha256": "1f26318859344d26241b94a896db1d1436f31142d4a53b5ca46197f9cd4f7f3e",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-model-000000077262-original-20261105.json",
+      "prefixBytes": 2782291,
+      "sha256": "48dbe4816ea62e2fca0237d97f067eefe5cdb804aa33c0544853a55346037233",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-model-000000077262-p0-20261105.json",
+      "prefixBytes": 2220551,
+      "sha256": "56dabf5874aa99004cef333dcc81285ceaab118aee55ef0152664c50672feaf4",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-model-000000077262-random-20261105.json",
+      "prefixBytes": 1557662,
+      "sha256": "f5f48ad46c4134c072d0eb04a6a40b0def5f2d347d237228c9c7386ffec67f8d",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-plans-20261105/manifest.json",
+      "prefixBytes": 2432,
+      "sha256": "2194c9cbd5d78a235d04e48789e4268e8441ba148bafaabac57417ddae870fc0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-plans-20261105/model-000000077262-plan.json",
+      "prefixBytes": 1050,
+      "sha256": "b657936caa5d9a344d3eb21c93c46773780650b002dc13ea7d71219476d2918b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-plans-20261105/sha-03f7e0709843-plan.json",
+      "prefixBytes": 1042,
+      "sha256": "eb2b6c2bc743a8e394f9a59c5a4ed9224e5afe5c7b36913afa535c0fa65a181f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-sha-03f7e0709843-champion-20261105.json",
+      "prefixBytes": 2230383,
+      "sha256": "a72ecc1c9a0204a71c88da50068eae70cc11055e379de38b722125dfb9f63d69",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-sha-03f7e0709843-clint-20261105.json",
+      "prefixBytes": 2752055,
+      "sha256": "186fbfcf4d7e5f4b971cbc20ddd581cacf1ad3c77c961df6357d50eeb3874c33",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-sha-03f7e0709843-original-20261105.json",
+      "prefixBytes": 2732490,
+      "sha256": "c3505daff7140d7b3f129461f767769ce8e8417c25da7df84aa6ef053b5c7ad9",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-sha-03f7e0709843-p0-20261105.json",
+      "prefixBytes": 2261348,
+      "sha256": "4838a1ea579487140a830bdf02551fae6258c133a654b904be78270aa36803ab",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-development-500-sha-03f7e0709843-random-20261105.json",
+      "prefixBytes": 1555619,
+      "sha256": "a1941bc3e33d2c3a5d21f25aa995805be51644552301046d3e9ebc86ee64db61",
+      "seeds": 250
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-evaluation-labels-20261105.json",
+      "prefixBytes": 7165,
+      "sha256": "bdd9c2e23aae11ebcc19c8755745fa264d5af7772052b715f8078cac5e185b82",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-extension-20261107.json",
+      "prefixBytes": 1817,
+      "sha256": "c0f945a2cffb4e2a022412f3c1251b01f6d55906204be70f043ab08ffda6027b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-gpu-batch.json",
+      "prefixBytes": 11367,
+      "sha256": "3b762446a509aa69aa95227bbe0606982b03d6293c66954cd4c83bd4d7b69411",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-io48-eight-hour-start.json",
+      "prefixBytes": 1935,
+      "sha256": "b0cdff8f83509dcd8e6a55f2c7c827db2243780d44ad968ae6a657fb4f119d3f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-io48-launch.json",
+      "prefixBytes": 977,
+      "sha256": "3be6689c24a1e9cf4df633b208c30e4844524212e04dfa420d5ddcc026bd8837",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-io48-preflight.json",
+      "prefixBytes": 1215,
+      "sha256": "469c54a3607a28fc81e99058125e34e96a4b74f649f53b153bb233ea3c2a8883",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-io48-resume-20261106.json",
+      "prefixBytes": 993,
+      "sha256": "9ecbbccbe5514f02f11e8c130ee50e19e3b7f9db6e7ae86f516d5fd0d38ab849",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-legacy-block-0000-20261105.json",
+      "prefixBytes": 2327714,
+      "sha256": "a20bfb3572e3ba98d0c5c49fa6c1c54b1a0b2f79604e31936ec75060847ff987",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-legacy-block-0001-20261105.json",
+      "prefixBytes": 2231432,
+      "sha256": "01ec953e5f033644bdda9b0e9bb4dbd1b0d06a8e4fdb56f56240aa3696e739e5",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-legacy-block-0002-20261105.json",
+      "prefixBytes": 2455790,
+      "sha256": "4f5481cd02ef479ae622eab3b8f7a106413e06e3b004c739a0aa458ca65807bb",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-legacy-block-0003-20261105.json",
+      "prefixBytes": 2683906,
+      "sha256": "cc3a30c318c18ff8b62039918c2297b3792f339d24dfb63f7d3f4045f29b87d4",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-next-stage-review-20261109.json",
+      "prefixBytes": 14783,
+      "sha256": "2a986816e5c8ccfb3e2933db47caa24df96e57a8daf98b86eeebf68ff6ab3a7a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-progress.json",
+      "prefixBytes": 387892,
+      "sha256": "702679f82d9a0c1c703404ecb81365ca2e97a62490687ae26eddbaf780146922",
+      "seeds": 105
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-sampler-profile.json",
+      "prefixBytes": 4454,
+      "sha256": "61be4ca1394cb6211f2dc78b75fb25b98269f1ca49f1e0ce36da88fb92302d65",
+      "seeds": 8
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-schedule-20261108.json",
+      "prefixBytes": 1913,
+      "sha256": "1c6609dbc5d7c7e106c8e8272e6ce4b5d00020e52a4b71fc4da60aab1225ecb9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-watchdog-20261107.json",
+      "prefixBytes": 2415,
+      "sha256": "7fabdf14c05541f42eb2e62289f8ed68b395e393ca6883adc2a4bb61175586cf",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/habits-adaptive-1.13.0.json",
+      "prefixBytes": 927,
+      "sha256": "1bfe1297553848f64617af9b0224927c0fad9cf7e45f76a3104e84f1fa44c818",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/habits-observant-1.13.0.json",
+      "prefixBytes": 924,
+      "sha256": "5a65e7080b3efd42ff108b808e980612c3ed314a5cba2c37cfa54fc665d42f48",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/help-1.11.0.json",
+      "prefixBytes": 750,
+      "sha256": "120ff7665ef2110ba83628e6fc482dabc91c709ee5e2cacd927aed965e8d2148",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/human-collection-20261105.json",
+      "prefixBytes": 7694,
+      "sha256": "93b500379e635c37dc112349e041e0e44662c1965d42a458637ae07fd1cb0208",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/human-endgame-optimality-20261108/protocol.json",
+      "prefixBytes": 10860,
+      "sha256": "df7efe43e3b775cefb39685c1e386f6af07526a2345246d53c1b6889bb439ed1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/human-endgame-optimality-20261108/run.json",
+      "prefixBytes": 3299,
+      "sha256": "352f60e78093e3217b8b6652b38398e02ae54dc6f2e2f100504d6d00ca5a1318",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/human-endgame-optimality-20261108/summary.json",
+      "prefixBytes": 20323,
+      "sha256": "670c9615559a05d26fc1671e2e657385c6121fae8a0570e893cf60cc2efcd2b3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/human-endgame-optimality-20261108/supplement.json",
+      "prefixBytes": 1880,
+      "sha256": "22219559fef6d05f12b48c8b22c4e768fdcb5324dc627ddc98257814272568fa",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/controller.json",
+      "prefixBytes": 254,
+      "sha256": "8b27bd2ab5a4006df498a18c4f52a5fc45e0e454c77c9988dbfb4f6772b36e72",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/protocol.json",
+      "prefixBytes": 208519,
+      "sha256": "c57bb719368f85fc1f063ab0d688c29ccdd31c023af7f87d49ded595ca1c5239",
+      "seeds": 6000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/public-champion-unchanged.json",
+      "prefixBytes": 286,
+      "sha256": "5c45ca23df17dee3c800d0248d74ac18b0f33bd86b24a936585d09e7b77e8747",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/raw-index.json",
+      "prefixBytes": 1292,
+      "sha256": "52f5b0c5a43821d7e2c3c6f12276ae8c648af2f39156932374ad79d6b6222a7d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/results.json",
+      "prefixBytes": 14380,
+      "sha256": "ca7ef1a6982d351bfe5389831365eb6e40ed6c0eddbe0b782d201730e3fd6128",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/seed-audit.json",
+      "prefixBytes": 4637,
+      "sha256": "8133754637004e4cba20cc819e1b44337be4c4c913d2ea52b6cfb7bc1e9ea081",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/stop-still-closed.json",
+      "prefixBytes": 337,
+      "sha256": "0366fa4492043bfc666d046923de5c63cd45b9663ae0368d2c43a491a2fb8d19",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/task-completion.json",
+      "prefixBytes": 813,
+      "sha256": "9214d276053b8a134c5aa3bac0cadc128563bcf310a8c884704c807819895dac",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/validation.json",
+      "prefixBytes": 2385,
+      "sha256": "8bb24097331e80fda6c4da93082d61af151c78c42fd6e161dff6df60746f1219",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/windows-package.json",
+      "prefixBytes": 1728,
+      "sha256": "907e2b78b566fa65ae2e0122ca780dd97ff00a009d8e4fecb3eb6c4e9a28f27a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/windows-preparation.json",
+      "prefixBytes": 562,
+      "sha256": "71c6821047d9c76adb814c00bfb6315fd7aa318676ecaa5cdd3fda8b9a402ede",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/windows-restoration-check.json",
+      "prefixBytes": 927,
+      "sha256": "a4932c55e859cf8547b9ffec5b9494dc692d9576a5527489abd61e664909475d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-0.json",
+      "prefixBytes": 296,
+      "sha256": "b080368a717c0e79ba70b9949918efe25722c8b4c5066443276cc6eca6725df0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-0.jsonl.gz",
+      "prefixBytes": 150205,
+      "sha256": "bfac8fc876dc09c5c0d10d8304f487dca14dbe7e4eac62abdabe7b428c7af1f7",
+      "seeds": 1500
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-1.json",
+      "prefixBytes": 296,
+      "sha256": "777ace3501b1a32237ca3282d07325f5224f619a88277843bf93a9bd8738116f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-1.jsonl.gz",
+      "prefixBytes": 150159,
+      "sha256": "c7065211dbb1f475f26aebcc837d407be712f940ad6f8c1705313378158d33d8",
+      "seeds": 1500
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-2.json",
+      "prefixBytes": 296,
+      "sha256": "911ef41df70649a8b620f0aea1d0140f7ca5fb84270be2eccec43fce9be1507a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-2.jsonl.gz",
+      "prefixBytes": 149723,
+      "sha256": "c3b600695b0e33df584007391f9a2b11927fe6cee0d29a3ae3b3b68a950a7d41",
+      "seeds": 1500
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-3.json",
+      "prefixBytes": 296,
+      "sha256": "b73be5f5e8defbda013a4a34bedd817efe740383a350dd34f23ecc47fea595dc",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-mac-final-20261106/worker-3.jsonl.gz",
+      "prefixBytes": 149879,
+      "sha256": "bb8f8bc2f66d9064eb7824368539abd8635c6f3d5c7f53752bd4bd1f0e1c1155",
+      "seeds": 1500
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/protocol.design.json",
+      "prefixBytes": 125671,
+      "sha256": "155c1fd1a3a396872bdb45f2b9c0e41f467eca2fc3c1dcd244257ae0919b1da4",
+      "seeds": 3002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/protocol.json",
+      "prefixBytes": 141551,
+      "sha256": "b79537d700a0b441492efc72f403d8e7b36a52a1dc80f1ba00633b5d47d30578",
+      "seeds": 3002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/results-manifest.json",
+      "prefixBytes": 1334,
+      "sha256": "bf8184b9ca35beaa005d83519721d102e3b007ff381b640aaae5e2edf37eee32",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/results.json",
+      "prefixBytes": 7186,
+      "sha256": "ee2c0ad3726f35245763aec9720e297b83e066dfd4e177b3f5b651f3077acd78",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/runtime-manifest.json",
+      "prefixBytes": 1826,
+      "sha256": "c87af7873145176eba8b1f8c57733717bba8b05ec358388d9c25fc6e72db0d20",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/seed-audit.json",
+      "prefixBytes": 300375,
+      "sha256": "6a8045e95a255faf083bfa4c84b755800f40d69ac6effa9fd43e4438292fc6aa",
+      "seeds": 3002
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/startup.json",
+      "prefixBytes": 1067,
+      "sha256": "f993e414cae399b5c8a3f351b3e40ee43c4449a006a5652d8476fd5458fbf094",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-match-017-20261108/validation.json",
+      "prefixBytes": 598,
+      "sha256": "b044f9a76776d4dc44fe2616c55e6b9c60fad153d4f73a1a9b4d769f8e3dd13f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-v481076-rule-20261105/matches.jsonl.gz",
+      "prefixBytes": 174494,
+      "sha256": "db784a9729114f3809b31a2f45e380109af15a9845eb19b086b9293d5d54dab1",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-v481076-rule-20261105/protocol.json",
+      "prefixBytes": 27412,
+      "sha256": "86c4e3454235f35341bcfd34bcc04232a1884c6e50fd2b634c20ed3e8f1cefb1",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-v481076-rule-20261105/results.json",
+      "prefixBytes": 6159,
+      "sha256": "31df0a8bdb120541a42f29298954e57d2eb22029b18cbfa3898a5bea0252fcc7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/independent-v481076-rule-20261105/seed-audit.json",
+      "prefixBytes": 21518,
+      "sha256": "4f23a847cc4883e08937d8f854d80e69a41c289e68c20f1e9bdf1a7d999213fd",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00300.json",
+      "prefixBytes": 18369,
+      "sha256": "458295360add26e2ec24d508b56d2f54f7c7ad8226d07517a9382a5d2568b2d0",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00301.json",
+      "prefixBytes": 18523,
+      "sha256": "5c5e30c9b0e3cdfa5ed02d2f2192d773ba963821d3870d89686f8ac0bcc4f413",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00302.json",
+      "prefixBytes": 18495,
+      "sha256": "445ee0194ce97b729faea0c985889b70f351a8185cd90f042eb224d8c7f26f4d",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00303.json",
+      "prefixBytes": 18511,
+      "sha256": "0218676fd2d6ab17fc933a3fae7834e1d10aa784d54907d8a4e5e185e79d81aa",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00304.json",
+      "prefixBytes": 18513,
+      "sha256": "bf5827abbafcfdca2d0fd7dd36fb027c96d297179adb92698a48f15a9f7641e2",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00305.json",
+      "prefixBytes": 18531,
+      "sha256": "82fef17b40b1dbb557c5929f01980f36efaaa732e39e5b4f81035f762668d175",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/anchor/anchor-00306.json",
+      "prefixBytes": 18487,
+      "sha256": "6763b0193466f0631807ed4146e7d33cce08ad726f47d83cc3969d2640e8381c",
+      "seeds": 150
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/archive.json",
+      "prefixBytes": 345,
+      "sha256": "fbe7f3314ec2b7cba88257e32eb67d5763cad7f4d9a96bd8729802ceac13e7a4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/audit.json",
+      "prefixBytes": 22815,
+      "sha256": "d57d903aab9c5f4e232485d45860512035ab064092ff1ea718ea082a00ffb02c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/champion/champion.json",
+      "prefixBytes": 1663,
+      "sha256": "6f6656e38d74a8462bdcdb8df4d9be3fd3c6dbc0ab1008154d805ddf7df63246",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/config.json",
+      "prefixBytes": 22633,
+      "sha256": "4c29a55ac9ea662a233931a5104612264c996174c9bc6ea1c7afde494229a85e",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/evaluation-summary.json",
+      "prefixBytes": 292335,
+      "sha256": "ca1dde1c3f646b3994a3c2d6cf3fafc682fd32d3050de5404d1042a576f7f075",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00300.json",
+      "prefixBytes": 8315,
+      "sha256": "f8c1cf986ddfddb3f7e6f577e3850a4f74df5af762ac40d035240190ced81363",
+      "seeds": 34
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00301.json",
+      "prefixBytes": 79182,
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00302.json",
+      "prefixBytes": 8269,
+      "sha256": "d6e4df09b55bf9fb99849ea1de1f7bbcc9b05b746c058c20cb95c83c96ff4545",
+      "seeds": 33
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00303.json",
+      "prefixBytes": 6716,
+      "sha256": "224281e9087f4065c91af991c79b7017631598c26aca3ba7fbdaa8d2b08928a3",
+      "seeds": 15
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00304.json",
+      "prefixBytes": 45560,
+      "sha256": "f211c04311297b7302a78daac63ee0da4295d4cfd0e73647859977ef8fa9a7e8",
+      "seeds": 464
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00305.json",
+      "prefixBytes": 43355,
+      "sha256": "929faefd096296c8d97c784f729483d53916aefd5591c2c8b020c35fc7f432e7",
+      "seeds": 439
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00306.json",
+      "prefixBytes": 27292,
+      "sha256": "0cd2b8a1f405b4a82ed3ad40ce37ab16d47f608e6a8df4de0ba7b6469cfa011f",
+      "seeds": 253
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00307.json",
+      "prefixBytes": 41252,
+      "sha256": "84bbe716b82f581c6a0d49935963167a0b7128082bbd0dfc0791b5cdf36fb81d",
+      "seeds": 415
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00308.json",
+      "prefixBytes": 91848,
+      "sha256": "e2927989f8e4b8067621a83ddc24d57a2edeffa14ee3a3eb5d77094a32c2199c",
+      "seeds": 1000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00309.json",
+      "prefixBytes": 29613,
+      "sha256": "9d0dddb9e67895a0c45aa0c4be76b7317a2dccc3b9fb635bb024781fb763e86c",
+      "seeds": 280
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00310.json",
+      "prefixBytes": 29851,
+      "sha256": "10dd5575425c9518c1bce63037a48ce51cacec4f14457c2f73e8cb65150c87d8",
+      "seeds": 283
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00311.json",
+      "prefixBytes": 31646,
+      "sha256": "6504462af3c6b754c4580e415ed5cada254f0b375cc2dc03577219e51d97e016",
+      "seeds": 303
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00312.json",
+      "prefixBytes": 57626,
+      "sha256": "1c74bf11225fbc0fd73d36a7d5af633703bec5a64e0b42204155eb7f6f68de60",
+      "seeds": 604
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00313.json",
+      "prefixBytes": 19418,
+      "sha256": "34ec5a36967b1bf5008b7ccdd7e0503e1058659315c1bf6f313e926ea3f5217b",
+      "seeds": 162
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00314.json",
+      "prefixBytes": 25564,
+      "sha256": "b8ee1b19948134231e74b5b1d9d008680232aac11deb74fc8a215f72545ffa92",
+      "seeds": 233
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00315.json",
+      "prefixBytes": 43558,
+      "sha256": "c0db23a9cbea5b5e9fc7999048fec0605e02741d9210b86332f78f3c6d4f2a9b",
+      "seeds": 441
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00316.json",
+      "prefixBytes": 38625,
+      "sha256": "89fb1f36116232daadafba5f029b0510a04d96263f2af3ff697035e0e3450dcc",
+      "seeds": 384
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00317.json",
+      "prefixBytes": 36006,
+      "sha256": "d6ebaf301f5c52c953f39e7d2188d6981290d3e0f927a6d480f89429fe4b2946",
+      "seeds": 354
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00318.json",
+      "prefixBytes": 23497,
+      "sha256": "b53d05855aea8f15ddd9a9eb30a37d830545811a806251c553abf9371038ef8b",
+      "seeds": 209
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00319.json",
+      "prefixBytes": 47942,
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00320.json",
+      "prefixBytes": 29065,
+      "sha256": "9c3db4164123e022d64f6a5d0b335456ac5ee45f2155a7cea492e7837ec67020",
+      "seeds": 272
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00321.json",
+      "prefixBytes": 24227,
+      "sha256": "a05ffc4c6ab13bd17ea24e233be1bf9de7febd74cf4d90bcfa52f6c77fb63bef",
+      "seeds": 216
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00322.json",
+      "prefixBytes": 49957,
+      "sha256": "74a30b7d792ecc593ad9b1f7d85fd1b4f3715643230a77fcdd085f159a315eae",
+      "seeds": 514
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00323.json",
+      "prefixBytes": 14163,
+      "sha256": "8fd4b132452ef2d7f386f245fb36d8e99f8da1dc3d98b9098424615a1073ef63",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00324.json",
+      "prefixBytes": 35475,
+      "sha256": "8820b95c2148f257b9f43df898181e6c98bfaf02afe8ccbb54f36034c5558f3d",
+      "seeds": 346
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00325.json",
+      "prefixBytes": 39952,
+      "sha256": "4f607fd097ef6a053bafb7b2b054e32356f49b779db7005ec672b1f438b629bb",
+      "seeds": 398
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00326.json",
+      "prefixBytes": 30631,
+      "sha256": "939ae3845c5013810526ea50753effe05958e1e9c8e654b19c4b3184a317af2f",
+      "seeds": 290
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00327.json",
+      "prefixBytes": 14705,
+      "sha256": "3b276f93851ff9972d4393ac00bad8176c18fc675a0892e4510015707d1f15ba",
+      "seeds": 106
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00328.json",
+      "prefixBytes": 19130,
+      "sha256": "32c718b69581b731cdcde2add5e7cbfd52e3c02ad366fb7add91dc63a076bdee",
+      "seeds": 157
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00329.json",
+      "prefixBytes": 33190,
+      "sha256": "56cb4b3aa3fd2ac7437d699c634735f0a1aed40dd4581312ae04122bc3689590",
+      "seeds": 320
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00330.json",
+      "prefixBytes": 46585,
+      "sha256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+      "seeds": 475
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00331.json",
+      "prefixBytes": 30357,
+      "sha256": "4012444f205c69656452065463ad476181fe9d437bec85ccd08a16d915c963cb",
+      "seeds": 287
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00332.json",
+      "prefixBytes": 14169,
+      "sha256": "fbb13db6c47c5f46686d832f78d9b8e46a56938f7a154fe502e819c0dedee14b",
+      "seeds": 100
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00333.json",
+      "prefixBytes": 18695,
+      "sha256": "b17963cbd43b96320a27990db361672a33f58d8bdc26d2828aadaccd09aaf46d",
+      "seeds": 152
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00334.json",
+      "prefixBytes": 33044,
+      "sha256": "95e88a06d18181c60780b8fed5dc73a0258831357af5e62617b50813da7b2e51",
+      "seeds": 318
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00335.json",
+      "prefixBytes": 39743,
+      "sha256": "8121b5d6f06c798f2a80b2f85574da719b68ca5f8f45fd0f12387c6f9a6d187c",
+      "seeds": 396
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00336.json",
+      "prefixBytes": 18249,
+      "sha256": "0cc47e859d4ce5ceaa7ce1c17b93511e022798144a6ad67da1183a91f4b48b34",
+      "seeds": 147
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00337.json",
+      "prefixBytes": 32010,
+      "sha256": "c1757bda92a654cd8ffee825d93bd250a21dbcefd65f849a35ff243b1da553a6",
+      "seeds": 306
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00338.json",
+      "prefixBytes": 24398,
+      "sha256": "6c01b59991e088f50f321702da156e7d3fd5e42d6147255e541de8af5c827ae3",
+      "seeds": 218
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00339.json",
+      "prefixBytes": 17411,
+      "sha256": "5160d19866ec86ee1453ef9cbbf7774af31528c4fd21a35123a009581304469e",
+      "seeds": 137
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00340.json",
+      "prefixBytes": 41901,
+      "sha256": "b3e14b992a15e4963a4f6cdde61cffd53c0633924f08db1e7a3014672b51a89b",
+      "seeds": 421
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00341.json",
+      "prefixBytes": 52835,
+      "sha256": "549fb8b7a55a55a8505036e97656b43ffca857fd719036bba2bbc4b649691da0",
+      "seeds": 547
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00342.json",
+      "prefixBytes": 71443,
+      "sha256": "b8979a8e621aaddd7763fde632f21932f33d579131ec45e8d5b67e104116cc74",
+      "seeds": 763
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/gate/gate-00343.json",
+      "prefixBytes": 42943,
+      "sha256": "e5bdc80254ecb5fc43ff0f8b809f8c9b42e7f5ce103fe10812540cd553edb22b",
+      "seeds": 433
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/inheritance.json",
+      "prefixBytes": 255,
+      "sha256": "e66d0fddaee2f98c692303b0f796e3cecd8482d47354c4a76e34676fda8c51ae",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/learner/status.json",
+      "prefixBytes": 430,
+      "sha256": "86d65544f3259c6ea5fcfa76479dcae5d19d005c0d46b2d4cef9475a18987445",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/models/latest.json",
+      "prefixBytes": 256,
+      "sha256": "9535059e29afdaee34962168fd89116198e0199cf088c9adcc522c9883199ff5",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/original-import-verification.json",
+      "prefixBytes": 23,
+      "sha256": "c8ab6fd479e1fb98fd35bfdfbf47a610782111b6daa2cdff96a56a706f105063",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/post-audit-archive-verification.json",
+      "prefixBytes": 23,
+      "sha256": "0f80cc1440fd455d3679bdf78d318582c3b26072d77681cd6992e36086e3f6d7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/preparation-validation.json",
+      "prefixBytes": 446,
+      "sha256": "ff046fa7e6084b38bdf55a16ef9d77e606fb05d9b1bc7abc2efa33254df318a1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/process-scan.json",
+      "prefixBytes": 92,
+      "sha256": "966a9d77632ef6c46c5194cca6cd47ee4085b0ee128181a1764581c45527fdad",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/public-final-champion.json",
+      "prefixBytes": 901,
+      "sha256": "881969075c0ce320fd4b1a63befdb62d31d104a27566ee0f960ca3cf8a82474b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/restore.json",
+      "prefixBytes": 122,
+      "sha256": "84b82c438d0eefb2f7e39955a5893c1fd33f8f168fdd3acc625a086ba0b82702",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/restored-audit.json",
+      "prefixBytes": 22805,
+      "sha256": "aab3917f9d2197e7b28a6071538de9c4fd071be19adf6cb9358b48ee5c02d969",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/sampling-errors.json",
+      "prefixBytes": 631,
+      "sha256": "611bd53c56facdf421435d84bebc204477a343f7c0f87aa5f0daf29034dfda59",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/schedule.json",
+      "prefixBytes": 147,
+      "sha256": "af96d1dc1cc1b6a86c3e4eccf34278e9a1ca81fda7ba6a37e9a2dc14441904f6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/status.json",
+      "prefixBytes": 20532,
+      "sha256": "6b90d3bc80c0b512c544a8aa0a8e7db3444c5e8098f7bf5b52534b57cde1c541",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/stop-observation.json",
+      "prefixBytes": 40987,
+      "sha256": "3a2d8fc6cbd66aa2b9792dda3a0221dbf252f00e0fdd4f6b93171b95adbe31b6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106/validation.json",
+      "prefixBytes": 548,
+      "sha256": "91fd3a69c509e6df041234665c49d9b25c0e86c09bed965f9a29c021c3c72483",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-24h-20261106.json",
+      "prefixBytes": 35190,
+      "sha256": "cbf2d262bd97ef615a2c331c5585095c7e3bc6dd71b9421ab9c4803f9d7c04cc",
+      "seeds": 3
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-continuation-20261105.json",
+      "prefixBytes": 36953,
+      "sha256": "1e20ec9849dcb42013034d813b983b5a11ee0ca62cab210af7c76454e5aaa0f4",
+      "seeds": 35
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-gate-00301-20261105.json",
+      "prefixBytes": 79182,
+      "sha256": "0a1a547f43583f598d16f82cd1d074d4dd766b508d7412109f3f5d9a5acf6528",
+      "seeds": 853
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-gate-scheduling-20261105/gate-00319.json",
+      "prefixBytes": 47942,
+      "sha256": "0f2a4a5ad84db689354bdacac1d761e879deb3d6543e908f41eb8126453d57dd",
+      "seeds": 492
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-gate-scheduling-20261105.json",
+      "prefixBytes": 17456,
+      "sha256": "bdd01c6c96f7606fc02f9d661575d7ddaf9e6deb710941baa6d7b9acb7684aa4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-handoff-20261105.json",
+      "prefixBytes": 11493,
+      "sha256": "76a465461d4f4ecdc057e0371a0a3895e4289fce126d2314886deb9254d33aff",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/mac-throughput-20261105.json",
+      "prefixBytes": 506334,
+      "sha256": "bf4712b70f1c74b02d027c418c71811f5584f964adf97efd0e306a3bd607ea40",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/match-history-1.12.0.json",
+      "prefixBytes": 1522,
+      "sha256": "3033067ac793f89c67aa21bb6c4032144f987e2c0d0a529ed47be25b75942741",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/match-objective-divergence-20261107/protocol.json",
+      "prefixBytes": 2536,
+      "sha256": "d54691d2ee38a2e72879982c591d8625ec490d9d33465529ac5fdd97fc4ef27e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/match-objective-divergence-20261107/results.json",
+      "prefixBytes": 16811,
+      "sha256": "d6d58e490cf4c6551569fe4d38c5a0cddbe00b34ae591e03e605c449c03603c0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/memory-pressure-2026-11-05.json",
+      "prefixBytes": 284972,
+      "sha256": "367d5e8c470292d64813feebffe6c1d3559ff0f999e23b2a5773212273cfc039",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/midgame-dev-20261108/summary.json",
+      "prefixBytes": 17703,
+      "sha256": "31626c86c02264eb1359433adb89597859c85893734cfaf52209b1504ab53bec",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/model-artifacts.json",
+      "prefixBytes": 199570,
+      "sha256": "d1467ed2834185302f13408b8627f476b0d5c9c515eedc5c51c7a18468b43f4d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/model-study-progress.json",
+      "prefixBytes": 2251086,
+      "sha256": "6dd0db62b9b25879205c5d23922fab7380c849cf072905520289c32e4ab7369c",
+      "seeds": 2537
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/move-coach-20261105.json",
+      "prefixBytes": 13006,
+      "sha256": "7a62c2431f108f66b1e00b8403312989b00baea668fcb79642c9949f0ee90c38",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/multiplayer-1.6.1.json",
+      "prefixBytes": 635,
+      "sha256": "d378a126adeb1022bc11bbb3d6c43c985c03b8980533adae386bb281da8f0f78",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/multiplayer-habits-1.13.0.json",
+      "prefixBytes": 1574,
+      "sha256": "293519742f2b5aa727bc09277ca778303abec5269aa6a14fb9c58cfb38cc951d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/multiplayer-mixed-1.7.0.json",
+      "prefixBytes": 707,
+      "sha256": "4b96d5741a4775b148e86e516735a16a1cfae3fcfc8e6bf90a7c20d719aaff10",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/outcome-residual-probe-20261108/protocol.design.json",
+      "prefixBytes": 4218,
+      "sha256": "f33acdf5438caa9bbdfc12645da941d4ac349bf4d2ab6e035b11e76b5f8d0d38",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/outcome-residual-probe-20261108/protocol.json",
+      "prefixBytes": 4704,
+      "sha256": "13598b156249cd082ad49fefd6d80a99a349760bd87ab0a0908f2b989ed79aaf",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/outcome-residual-probe-20261108/results-manifest.json",
+      "prefixBytes": 885,
+      "sha256": "96f76b2082583bb07c800b3ebe238605b12fb1ec10a1978b219dc4a102afee94",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/outcome-residual-probe-20261108/results.json",
+      "prefixBytes": 4007,
+      "sha256": "7f7f243d84e5169cc254dd69a001e44d3810056f04633feba2a2db9f433ec0c8",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/outcome-residual-probe-20261108/runtime-manifest.json",
+      "prefixBytes": 1301,
+      "sha256": "86d6acffaa769bff505975b3e3403f6d5658da5c71cab703e63d9cbb98c4b0a9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/outcome-residual-probe-20261108/validation.json",
+      "prefixBytes": 629,
+      "sha256": "91770ba6f8fd2240599ca45287911fdc425ae6953bcfbf5298c80921c3a0f83b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/policy-training-heldout-2026-11-04.json",
+      "prefixBytes": 1156,
+      "sha256": "59cf877649a08f78710804d3b632fe7ba71d8708fb2f91fda3795b1a303aadf5",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/profiles-1.3.0.json",
+      "prefixBytes": 1950,
+      "sha256": "8fd2d77924ffe4eca87be910e357cf4c67024b3428ad585e8a5d47b8809f01b3",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/proposal-1.14.1.json",
+      "prefixBytes": 1665,
+      "sha256": "47020b4b7c5dd46b2059bc485815c5203d4232dab9f831ed6404e6f5c2df123f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/protocol-byte-preservation-20261107.json",
+      "prefixBytes": 1064,
+      "sha256": "ce833930032d73389c6510c8680bd38f9f79b1e1fc5133a44e18dcac4a5328e9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/ready-transition-1.10.0.json",
+      "prefixBytes": 231,
+      "sha256": "72ab3dbc2dd323deda182cea9ed1ca7fd3381f6494afdf1bf36e8f38fe3ed9c7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/rejoin-mixed-1.9.0.json",
+      "prefixBytes": 1047,
+      "sha256": "e2126d1475d68c19645149049eafeea85c5719b0fe2ca1ade90ebbcf53b20470",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/rejoin-multiplayer-1.9.0.json",
+      "prefixBytes": 1011,
+      "sha256": "5fd11a0b21a726ad14f2f97e1e6ffb73e740abd3ca45d7c6cf3e74e0ecf631bb",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/rejoin-races-1.9.0.json",
+      "prefixBytes": 430,
+      "sha256": "967e046a214b7606ea5322041a5de9955f7dfe2819705d7ddc2525e37a76b870",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/protocol.design.json",
+      "prefixBytes": 324609,
+      "sha256": "42865c6dad10b2f0cfe8c51db37a3a078275af8dc9aa678321a99d92fe52e3f3",
+      "seeds": 20000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/protocol.json",
+      "prefixBytes": 340719,
+      "sha256": "e2aa4b57b9e773a1e306c4194920dfc1a76da2d1e21d441eb7728c1cd7874da0",
+      "seeds": 20000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/results-manifest.json",
+      "prefixBytes": 1450,
+      "sha256": "5ddf3f246b883577d3430625d0d4af9c09b28ba0a6c6d2817bf1362e9d64d75a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/results.json",
+      "prefixBytes": 2894,
+      "sha256": "a69933ee87fa288aa42c4cdb8d78cc53777c477d9c6ae74ee1b913455504ab98",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/runtime-manifest.json",
+      "prefixBytes": 1105,
+      "sha256": "ded8cb8964d2f847a5d810debde127c6d51fa3622d2e77d6fa6a250799258107",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/seed-audit.json",
+      "prefixBytes": 564061,
+      "sha256": "b999970a1d0c4f9427f68869a00fcd544d340d9c24373e15523fd053f9cca512",
+      "seeds": 20000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/startup.json",
+      "prefixBytes": 1868,
+      "sha256": "a6529a2d2176e59997feefcad6f6762ee7aa7db85becdf57d6209cca709ab358",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/representation-corpus-20261108/validation.json",
+      "prefixBytes": 1117,
+      "sha256": "8a0c01dc42af22506ed6f3f9f9ad85f5012e6f79753569879c558553cf4e4511",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/research-campaign-20261107/authorization.json",
+      "prefixBytes": 968,
+      "sha256": "1d2f6ddda91580a30b1ae89e79c49cf6c7f76cb5fac9763cc53a5a3d84180d2d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/research-campaign-20261107/startup.json",
+      "prefixBytes": 1256,
+      "sha256": "cdba16bf0c2d9465a68557cf41385cd1d2ec29a656e57bfb3ccb4051a6bee391",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/response-bootstrap-1.7.0.json",
+      "prefixBytes": 245,
+      "sha256": "cdb734f98460ecdce23896eb7cee8d20c327d6d7a9169f95eecf9dea3dc4791a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/response-policy-1.7.0.json",
+      "prefixBytes": 407,
+      "sha256": "549d01960dbb6fd360529c50f9df692b695e27314f97b9abb854ac2d42a7a389",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/response-training-1.7.0.json",
+      "prefixBytes": 24704,
+      "sha256": "3578a623ae050796d01fd6d75db7ec015e43cbaa5d915c527097e3c81180437d",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/resync-1.10.0.json",
+      "prefixBytes": 185,
+      "sha256": "336fb15c9d61045aceffc04208abee14dc28dc10e2271046da38f3b51699d39c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/seat-credentials-1.9.0.json",
+      "prefixBytes": 218,
+      "sha256": "11501bd1bc71143d5bf7e15f41e9e23b8d1b700394d284222a4dd075d1915843",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/shared-analysis-20261107/protocol.design.json",
+      "prefixBytes": 1417,
+      "sha256": "2d2a6c0cdca931ed9d52e995f8b75dfb82f14fbad50285a8fbdb4f5a4b75c6e4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/shared-analysis-20261107/protocol.json",
+      "prefixBytes": 4914,
+      "sha256": "71495707d654822e9aa1c421911ca89c8039aeb3d86344dbf18a85e08ec2f6e2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/shared-analysis-20261107/results.json",
+      "prefixBytes": 434,
+      "sha256": "08dc448415d72abdd96b87fb2c7448f238ec298440695204759c5df7e855ec92",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/shared-analysis-20261107/seed-audit.json",
+      "prefixBytes": 224651,
+      "sha256": "d53fa9cdf8665a3b46d3dc130a708f6c095820191fc341f6e2313a7ad455db26",
+      "seeds": 104
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/development-seed-audit.json",
+      "prefixBytes": 267018,
+      "sha256": "dd0b292cc11bd896359f7def59a19ad8feb54bcea65831bc20f07b52ba565109",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/next-route-review.json",
+      "prefixBytes": 1796,
+      "sha256": "df1c3152325ba7d92b7ba8a3c96dcf6a5eeefdc0fc0afbed5633aa8a90be5c3d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/protocol.design.json",
+      "prefixBytes": 19603,
+      "sha256": "39bf6cdd1a8a82acedbdc7224702e64ced45bf6b093ca300a91d5a7dccfa5d3b",
+      "seeds": 1004
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/protocol.json",
+      "prefixBytes": 36570,
+      "sha256": "ee5728a3e6f44cb0dbd70d2fb87bc062c79ea0187db655aa26463d202fa9038a",
+      "seeds": 1004
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/registration.json",
+      "prefixBytes": 584,
+      "sha256": "8da9d7987563edfd786650203f6752ec06f1b3ec0ebe178dbbf9019645c29269",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/results-manifest.json",
+      "prefixBytes": 1119,
+      "sha256": "015e016f53fabf007a4f4fd2fb3241c284fa6f17a01c0ed9c4f72d8103f8f579",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/results.json",
+      "prefixBytes": 800,
+      "sha256": "cba56345d3988f3b3c9dc65dc9c88652fbe747a4747e4fe885ab3f8460e0b511",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/simulated-review-export-20261108/validation.json",
+      "prefixBytes": 509,
+      "sha256": "d0114f1763f63ffab4bfb5487458ac9dcc63541269265c97f79690c6bb9e1dea",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/structure-migration.json",
+      "prefixBytes": 83169,
+      "sha256": "36bfa992e4cd3a1d4852134636b9fa59eb54f9097a0988a439bf006630484364",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/table-layout-1.14.0.json",
+      "prefixBytes": 903,
+      "sha256": "f28ffcf63afcb47dc09d0740df341e41eb21a16132140e405f5bc52f8c5c5366",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/table-pipeline-mirror-smoke-2026-11-04.json",
+      "prefixBytes": 27027,
+      "sha256": "379cea898ebb8d726f4d9d291fb60b947a0a8c7de1eafad554c25a0921c1ad39",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/table-pipeline-smoke-2026-11-04.json",
+      "prefixBytes": 148073,
+      "sha256": "6958017e99d5ffe697d93e20b9f4e15437d924c4fa185c1829e19899085852c4",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-20261106-deployment.json",
+      "prefixBytes": 1265,
+      "sha256": "da5265e721c84f0a733b657b7e9ec090f7b6b160fccb51c57d18f3a6cc09c8fd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-20261106-final.json",
+      "prefixBytes": 148874,
+      "sha256": "4eea782b02da1add7b11750e2250e3a2a164ae81a7d2322cbd01793c3b5eefb1",
+      "seeds": 130
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-20261106-launch.json",
+      "prefixBytes": 24057,
+      "sha256": "93de86a4c8a466f02602d44442567784f62b7715daa75b686e113071e0c625ff",
+      "seeds": 5
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-20261106-preflight.json",
+      "prefixBytes": 6020,
+      "sha256": "54ac91c62a13c465a95e1d9feae3a599eee66c5ddb6ba0bcd7f2c8898b501ffb",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-20261106-teacher-resumed.json",
+      "prefixBytes": 21879,
+      "sha256": "efd825ef595bf880c954235f15e37575aad7fee08f9e3c6ae3fcdcfbef01086e",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-20261106-teacher-transition.json",
+      "prefixBytes": 5293,
+      "sha256": "19b32b606ea746d4f16a3d098ac41aa59effa4d6b4211d9f91302d366c7e0301",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/tribute-mac-transfer-20261106.json",
+      "prefixBytes": 1927,
+      "sha256": "16f20a715a829f83e67eec145b87f5332c41438e81ff54db4cea92a290d1bb2f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/ui-coach-restore-20261107.json",
+      "prefixBytes": 13758,
+      "sha256": "c3a1c546b6aee26e9b7613e28a6899e7bd0b377641bf11582e0b1d7186890308",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/ui-control-layout-20261107.json",
+      "prefixBytes": 43691,
+      "sha256": "f79a4beb293f935155b9ad940a378febf001660618a813ab3a57835e82d4476b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/ui-rule-refresh-20261105.json",
+      "prefixBytes": 9968,
+      "sha256": "f86d0e4710a947118a92b6098c0c90c549e4d29bbd4b1ff2f18f50b08bb4b26e",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-002.json",
+      "prefixBytes": 2664,
+      "sha256": "a14f4b44497626293db819ef2a990ac2f9573e7469ead7dca9508f724d3cdb36",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-003.json",
+      "prefixBytes": 2782,
+      "sha256": "13d3474b12953f933c009f68b9f26f5a8812a06375dc27eda46bb9eea87209f7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-004-browser.json",
+      "prefixBytes": 23569,
+      "sha256": "97580aed1f2b83f5c992894b789a1ec945dca58dd74db3cf9bbc6498e880ace8",
+      "seeds": 5
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-004.json",
+      "prefixBytes": 9939,
+      "sha256": "fe6f096f6487f25e199ebce9dc95730b7165421a0e2ad248726780faab2b5fdf",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-005.json",
+      "prefixBytes": 3340,
+      "sha256": "a31461a200d8559b956318acfbb2a1347ec5e4b88b931ed822c94bd921497af2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-006-browser.json",
+      "prefixBytes": 23565,
+      "sha256": "7cabb3c2fe47b94ae5c8708b2b1691b52b357727666e25734cca79cc522ce770",
+      "seeds": 5
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-006.json",
+      "prefixBytes": 9058,
+      "sha256": "d8a5633519335e637fdc782c61d854d0527b24b059616f4029292898e0a4d02a",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-007.json",
+      "prefixBytes": 2746,
+      "sha256": "446c98ee8f3ae8a2515408ead7d8adea719c7af400c6ed50fb425d56dfef9be9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-008.json",
+      "prefixBytes": 1175,
+      "sha256": "9735c049e30e4f2cff4f637ba4fe2bc3241165bd1b49717913bfef4d7f132c63",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-009.json",
+      "prefixBytes": 835,
+      "sha256": "d9e9ac09f815573f2d4ac94bb6ca1f7f86e6adedd3f9a78339b19b23d45511dd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-010.json",
+      "prefixBytes": 4352,
+      "sha256": "694cd1340d4715b0b31ef995fc219a3ed3033ed9c9e8e1dd6895a2063ecad314",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-011.json",
+      "prefixBytes": 8205,
+      "sha256": "6690d81433f2650eace0496c4021a6c755a3fb275b6d969083b6980e9274bdbe",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-012.json",
+      "prefixBytes": 14738,
+      "sha256": "acc45aaaed9281609a796c8617ac4f55a01617550c6e6cab6e62ba0540415782",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-013.json",
+      "prefixBytes": 29451,
+      "sha256": "f5059256f2aa4d550715702956f8ef4546ed5005131aa2f365ae8376d3c5efa0",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-014.json",
+      "prefixBytes": 4014,
+      "sha256": "8d05d9166386249caa0dd4f00c48bee3ea388feb137cc05f7175332dc44c75a7",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-015.json",
+      "prefixBytes": 2065,
+      "sha256": "d39cbcee12848e48223f0ecbb4485dd035784835ea91a795673fc53814c3eb52",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-016.json",
+      "prefixBytes": 3270,
+      "sha256": "8a48b14b9547858c4acef2e72c769d7e8ad7ab3eea3499ccaf73a0cb1efe1c35",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-017.json",
+      "prefixBytes": 15782,
+      "sha256": "db0a8a861b0afb9831dac1a09453da34e2ea793fd42fc6d0800956e14062f751",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-018.json",
+      "prefixBytes": 5928,
+      "sha256": "2ce2633e4a5bc0c38106dceb3c9b3b4cb1b1111218d34e20e66f5b25711fa1df",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-019.json",
+      "prefixBytes": 4846,
+      "sha256": "eeb7a67e4b60f125f66395f66b1e17b8a4d204a6f2f958a6a8e657f6ef07672d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-020.json",
+      "prefixBytes": 4211,
+      "sha256": "7bdffabf6f09545d8aa73e6a7f3070ebf5f9e0bd9f1a619cfc377042c9af6004",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-021.json",
+      "prefixBytes": 4225,
+      "sha256": "bc6c5a4c6ca38cf6aebf5889da2c1b552a9881847fc1251d6b14fe7e116f92a9",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-022.json",
+      "prefixBytes": 4306,
+      "sha256": "2603796216bd0dce17ea3cac5204eaefa23b8187834aac297c999506ebc309d4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-023.json",
+      "prefixBytes": 4222,
+      "sha256": "26db037a33a1dfedc2e257e6cde66d393574354b36a22ca70ed49852b745a7ec",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-024.json",
+      "prefixBytes": 4305,
+      "sha256": "1f7ecd3e1e95f64242a46606b76a2f6e55204e408da82971434853ebeef55e96",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-025.json",
+      "prefixBytes": 4723,
+      "sha256": "da670177f117f53c8b1ae226dc23aee502c89955338b391375a7a575195be637",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-model-026.json",
+      "prefixBytes": 4815,
+      "sha256": "89d280b269a1e8af23ab7ce6563d1204572665536b78f0349862d63c317a5bd3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-search-bot-9001.json",
+      "prefixBytes": 18459,
+      "sha256": "59f5c936369f5599ffa3afd54b66e075904b710bf485bdec91bc594899e5d0a6",
+      "seeds": 14
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-search-bot-latency.json",
+      "prefixBytes": 44207,
+      "sha256": "f32faa7a22c894b93b24b1089ec0ab1c0b82ae3f124f86c5e3c01eefda9072ea",
+      "seeds": 56
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/web-search-bot-parity.json",
+      "prefixBytes": 109277,
+      "sha256": "cecebad1650e0a0ca870c030ae292095170127f0dab3518b8728e932f5f8e907",
+      "seeds": 97
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/dashboard.json",
+      "prefixBytes": 15460,
+      "sha256": "3b7bfd2858870e2bd606801fd657fb36e98506d247dd11b1478a4d999029db23",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/dev-gate.json",
+      "prefixBytes": 19307,
+      "sha256": "3feb778961d8d02c28e701d5554c612bd157070858d050eb039c58d392e38566",
+      "seeds": 1600
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/dev-wholeround.json",
+      "prefixBytes": 4907,
+      "sha256": "8a51937d7a4ed51ce0f3f561b973d1abfde7901880e61f4dcf7ddd637afce2c2",
+      "seeds": 400
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/heldout-h1.json",
+      "prefixBytes": 33154,
+      "sha256": "d80643e13da3ef91c7ba0673615be0507c80f602e41f042b5c7b220a645cda91",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/heldout-h2.json",
+      "prefixBytes": 33154,
+      "sha256": "66960fb9a23a1351031bacf5e48e7ea65a633f4d829bdf84f69870ade5c3c1aa",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/protocol-1c-queue.json",
+      "prefixBytes": 2968,
+      "sha256": "2f686e0c145247bc9b9de999cd1fcd1918f6bb689eec1a131eacf6666013f7b2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/protocol-h3.json",
+      "prefixBytes": 2594,
+      "sha256": "79b97f141b95ad1b87f4f45bf3b60c524d60c57929bc4a6249914b1f0aae3a13",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/protocol.json",
+      "prefixBytes": 7572,
+      "sha256": "6902c344b4247a4be37821d11050075f1e4368d6d5c1eea98ca6fc0a5d912942",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/A-devgate.json",
+      "prefixBytes": 1415,
+      "sha256": "f9dd38a56abab6c296e9a2b9b88c97424782f37d1ed62ceb0692ade691df4300",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/A-h1.json",
+      "prefixBytes": 1423,
+      "sha256": "2ba5fed8cefd041ca359c5948018281d87da660811991da5d58f30778328233d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/A-human-audit.json",
+      "prefixBytes": 20253,
+      "sha256": "a2d1a9e2fe2d4e997cc5639734092b0b3b9897c18afb81714ab38fd2da7d4bcb",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/A-train.json",
+      "prefixBytes": 28876,
+      "sha256": "c24bd69becf1306ae78e866167271b7eddb830a0074fbe74afe2202f1c8dac5a",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/A-wholeround.json",
+      "prefixBytes": 1398,
+      "sha256": "3c3f79c389225d8760c6e1fd6cb469dfaba7b740df4bea07fbc1d957bfc6456e",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/B-review-summary.json",
+      "prefixBytes": 3338,
+      "sha256": "54c7c081898d96bd364adb08a1a603d0c9dad9cd6754064879b8b59b922de71b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/C-belief-end.json",
+      "prefixBytes": 7342,
+      "sha256": "f56345a613f84a5f8ef75a61435975e271345f352b52aa5d81df19cb2fb5261b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/C-compare.json",
+      "prefixBytes": 895,
+      "sha256": "ac8ece7731b6b360aabc0aef13b146fce426f9df72e4a3a101e813f2973ec636",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/C-uniform-end.json",
+      "prefixBytes": 7104,
+      "sha256": "cb73a60dcebbf997e015b6187bbe03b76ba937d403ad4c22f56f83ca18acbe33",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/D-distill-data.json",
+      "prefixBytes": 498,
+      "sha256": "5d0c24afff590087f98dccd13f83fc325033cbb774a659ed18ddc3b56977142b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-band41-compare.json",
+      "prefixBytes": 985,
+      "sha256": "eebaeb1c06366769739f1c6b35d6309f6dfdc14f5417d1f254abc344bcface2f",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-p1.json",
+      "prefixBytes": 2042,
+      "sha256": "717b619ca1493a980a56305b6dc4e9e7284ac2e8ff2a19ebc14d5a49649d8fb5",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-p2-belief.json",
+      "prefixBytes": 5308,
+      "sha256": "9c2afb94cfe207718a6ae9da32a796ed45c59f8e4a2db1db7117e97f3b3da582",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-p2-compare.json",
+      "prefixBytes": 1005,
+      "sha256": "aedf149019c4ed90e852105a6e5e4edbb16ac3928a2d5ce4988ca46f63246b79",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-p2-uniform.json",
+      "prefixBytes": 4911,
+      "sha256": "7fc1972d243dc61bc48836642db1dbf34daeabd69c1e66ed82569f036ffb6bb3",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-train-report.json",
+      "prefixBytes": 8903,
+      "sha256": "7f022c7640e0102dd25bfe497b6c0bc2dc1e3480dc1dfcf5144fa73ab6c95f0d",
+      "seeds": 3
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-tune-net1-compare.json",
+      "prefixBytes": 882,
+      "sha256": "f8976c11cb3c371c6bfa30499b9f0ed03f3ea2f8c776ae880eab9e79b7a65c73",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-tune-w16-compare.json",
+      "prefixBytes": 871,
+      "sha256": "50953e4b11e6c7521e5158f2a514868894ddcce86f0e35a6ea0f15beb9acf6aa",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-v2-p1.json",
+      "prefixBytes": 2093,
+      "sha256": "96e9aa09d274420fff4b272131608ed2d7c7a2ac260717f8e7b9bd746bfdeaca",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-v2-p2-compare.json",
+      "prefixBytes": 1002,
+      "sha256": "c304b5a9e93f2dc9adc8fc5378554192eb78e12449f01ee816fcc98d5c0b53c1",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H-v2-train-report.json",
+      "prefixBytes": 9269,
+      "sha256": "9119441747f60be11d397dc17cf116de403df437c3ec005aaedb9e561f153201",
+      "seeds": 5
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H3-belief.json",
+      "prefixBytes": 5314,
+      "sha256": "3217933da4ed6ee11202698ef51a6eb80ec99a97e0ce8e8ee89d509e820ddb95",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H3-compare.json",
+      "prefixBytes": 998,
+      "sha256": "876bb00067cb47783534c0577f9e42641aa096b53fca9ee884737b35baf08b4e",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/H3-uniform.json",
+      "prefixBytes": 4885,
+      "sha256": "53430e8b1d6cc489ae97ba0226f891fc5f98606efce312aafb695c88abd8aba1",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/results/S-h2.json",
+      "prefixBytes": 3183,
+      "sha256": "3e93228f803415782cc78978e9c6191c5930400bbe85c7f81c3fd2b68f99af0b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/seed-audit-distill.json",
+      "prefixBytes": 164864,
+      "sha256": "554124e91fa06d1908e49987167fae7dd568ef2ffccf9abf033f3191a8204a0c",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/seed-audit-h3.json",
+      "prefixBytes": 157859,
+      "sha256": "a674fb30d7b1fed216fa34f65ed09e6a3945817cc29ac1429f6a435b5228d1a7",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window1-20261109/seed-audit.json",
+      "prefixBytes": 246065,
+      "sha256": "897f832bc88b7da00ee17ff5ab40a97fdf50dde1f5489109a552facf00c20e91",
+      "seeds": 6000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/addendum-1.json",
+      "prefixBytes": 1640,
+      "sha256": "2618ab5e1c617eabfd0454f7e3c10c52d5ea96edf75447339232e8ef75c0681c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/addendum-2.json",
+      "prefixBytes": 776,
+      "sha256": "fe32e4aaa35dcf5e487e85c0a7696091271b6a19d0b13231f04229dc1022305d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/dashboard.json",
+      "prefixBytes": 5061,
+      "sha256": "6d137a9e6d3dcd99c4819e3150881759035d9ee31da1eacd09a645d117ea4530",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/heldout-h5.json",
+      "prefixBytes": 33154,
+      "sha256": "9c774b10a3e0813434a6db6a0355031f2be8a52e7f3cefb76833667cd40b9b9e",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/protocol.json",
+      "prefixBytes": 2477,
+      "sha256": "969eda3e3c5eb92f3ca47401d47b51cb56bc892b9f285ae2a35377b3c1103afc",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/results/C-h4-run.json",
+      "prefixBytes": 5655,
+      "sha256": "1984d6459b1362cae884843c253f1f0d650556e792e3c274b8b5adb35b3a49bd",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/results/C-h4.json",
+      "prefixBytes": 7309,
+      "sha256": "17cf1dcf969ae0a1c9ffd0ab1bdbe58b349aafd9dfadccd5900e30ecd76075be",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/results/H-v3-p1.json",
+      "prefixBytes": 2116,
+      "sha256": "f6c6248e5acebd949758bb5822272a3c58ef48d39c5fcfb70ace5be267da3cb8",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/results/H-v3-p2-compare.json",
+      "prefixBytes": 1002,
+      "sha256": "dce5d4881400dd5facc3ae0a7d3038bc84a8b0a3f1fd7759f93d8bdeb183d08f",
+      "seeds": 2
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/results/H-v3-p2.json",
+      "prefixBytes": 5875,
+      "sha256": "c0c20eb2979f6378bc7c216d6c525808615ff6184658476a9b7e9c5bb8875788",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/results/H-v3-train-report.json",
+      "prefixBytes": 9061,
+      "sha256": "075700c30727b9b4858fd3379b917b5200a96aac4a8f47c16a4f18f290970173",
+      "seeds": 3
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/seed-audit-diverse.json",
+      "prefixBytes": 172782,
+      "sha256": "1d5857a38a32af7f91c10d8c2f7cba6bf35982c3854623770911e656a2e1f565",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/window2-20261109/seed-audit.json",
+      "prefixBytes": 213108,
+      "sha256": "6aecea3dac7fe3487a63a75e4bb5cee2362b96330be7e8da9550e85bf2953f95",
+      "seeds": 3000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/arm-A-stop.json",
+      "prefixBytes": 18480,
+      "sha256": "f7455c117c0ca90c157ed273a98fc3c04ac4aec7cb287e1111434b0be22a4f87",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/arm-B-stop.json",
+      "prefixBytes": 18539,
+      "sha256": "ea853720d81d02bc22d1d1923905943af14c236a64fd208ae32e44557136a3a2",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/authorization.json",
+      "prefixBytes": 1731,
+      "sha256": "bf192c5f63f31abc7e515cae2cf7e6d6ec873c1236a9eb0430111f236a8a6b4b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/gpu-A.json",
+      "prefixBytes": 1101,
+      "sha256": "9ec9df1fd118073682b077938cc709d007ae080bbfd3cb445c05ddce373c465d",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/gpu-B.json",
+      "prefixBytes": 1101,
+      "sha256": "da6e66d7353a44ad47ccca1c0df6f4444d1fe18d791a4f1dd0e18924cf64668c",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/heldout-protocol.json",
+      "prefixBytes": 247949,
+      "sha256": "0f1abd7b38f3764d1959b24fe506a0f6a6799b317f55c56afd602cc07fe88a65",
+      "seeds": 7000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/launch.json",
+      "prefixBytes": 2149,
+      "sha256": "b4e4bfecf7c69eefc1a96384870f93fe837752f930909c5c4bd7e4e4537ab208",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/performance-analysis.json",
+      "prefixBytes": 1173,
+      "sha256": "5134b343eb5908e128fc9ad70520ca2c133a3106a4e6b7e75d2c57c9d79d26c4",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/results-manifest.json",
+      "prefixBytes": 3820,
+      "sha256": "a4004d5bfe77f153f9990549de11c9f9a1f5a2f7fee7a168028937a53f6a20cf",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/results.json",
+      "prefixBytes": 16638,
+      "sha256": "c03e9f4b976653724b5faeb208c78e73f2441c2ef3e80c8c0a340006bda83815",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/transition-A-B.json",
+      "prefixBytes": 1047,
+      "sha256": "84a787109d40fc0804a2d645d1c700289ec4833c73ca2addf63999188a30021b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/validation.json",
+      "prefixBytes": 2280,
+      "sha256": "a06f85aa89e8465fb4336a8a94efa65bc878796197d35fbd58b6ae01c6732568",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-0.json",
+      "prefixBytes": 293,
+      "sha256": "d4f290363feafa8bfbed486827ad1b573166d9f2f12140b9dc9eb452fc123305",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-0.jsonl.gz",
+      "prefixBytes": 179858,
+      "sha256": "7acaea954208b3c65cd8c02f688b138e88070303132972d4a3a5842408cb9420",
+      "seeds": 1750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-1.json",
+      "prefixBytes": 293,
+      "sha256": "6e206bbeb28875dea48344175bff612268144a1b1a3c5c84d00f831148038a92",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-1.jsonl.gz",
+      "prefixBytes": 179920,
+      "sha256": "a5ec8b6f985b8e70dc31a7b579a2a8adea71a5fbdb280e8b31a3b71b2bb8ea77",
+      "seeds": 1750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-2.json",
+      "prefixBytes": 293,
+      "sha256": "9b49d41980b94f3ce24614e4ea1adf0f7b943b0600ce417f257dd43df2342ae6",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-2.jsonl.gz",
+      "prefixBytes": 179797,
+      "sha256": "8e07cc2c364bfec632a96334a301cfc9b5421578722df5c499644b2883971c33",
+      "seeds": 1750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-3.json",
+      "prefixBytes": 293,
+      "sha256": "32f1df70e5adc906a016065e6b7f9a834b7226be66b1fab9fd01509619d54302",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-ab-20261107/worker-3.jsonl.gz",
+      "prefixBytes": 179801,
+      "sha256": "79e6f1a7c3ed2c9e773c76325360f63a534c9b18eda7c37bcc606992c201b90d",
+      "seeds": 1750
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/config-A.json",
+      "prefixBytes": 24606,
+      "sha256": "2607e2be7a93b0102e2200092b294405c58a24f9759c1eba2aa75c031d88af55",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/config-B.json",
+      "prefixBytes": 24608,
+      "sha256": "930e26b3a7cc71001c6882a0e0c4907756e39d9ff4fb19f7649fdafbfb22ee68",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/gpu-A-final.json",
+      "prefixBytes": 1101,
+      "sha256": "f2f3ae4dd0fb32bd2d922c0a0680b798c5f1b89c0d701bc3611164394aabd19b",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/gpu-B.json",
+      "prefixBytes": 1000,
+      "sha256": "b18f9126e2ea723a31faa410b2dfd51c3cdf7a9b9e319fa402abc27cb064f0eb",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/heldout-protocol.pending.json",
+      "prefixBytes": 247504,
+      "sha256": "896ad6d77b2acba10d9f2736cadda38be13a7eaba5d101b210a13cae6ef107ef",
+      "seeds": 7000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/post-push-validation.json",
+      "prefixBytes": 763,
+      "sha256": "0ffa4f7b465ecf462fcc52b93a1d4ddb466927168422e2e9d17a87a014361f34",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/protocol.json",
+      "prefixBytes": 136891,
+      "sha256": "205cb40c310ddec15d616112cbc185f9e51db1f683264e34c1b4c40602699f09",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/restoration.json",
+      "prefixBytes": 30826,
+      "sha256": "89bd790162b8e0e52fefdf5733a5873267d7198b93fa2a03cc8a5644a1581a20",
+      "seeds": 1
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/sampling-provider.json",
+      "prefixBytes": 1426,
+      "sha256": "33a5222ce5dc7f3e57cc2189fe2564cf612a4b03ba94faa60f6db6a12877494f",
+      "seeds": 0
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/seed-audit.json",
+      "prefixBytes": 205909,
+      "sha256": "1ff3f16c94c78e80d3613cee53988a347cdef7ef9cb0837d9c19339e43757c0d",
+      "seeds": 7000
+    },
+    {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/windows-return-20261106/validation.json",
+      "prefixBytes": 924,
+      "sha256": "5f94b0da9a02a2871a0471a0625e234fa581a907d810e38f6a26fd9d29bd4158",
+      "seeds": 0
+    }
+  ],
+  "knownUniqueRootSeeds": 148101,
+  "seeds": [
+    990600000
+  ],
+  "futureRootRanges": [
+    [
+      1008000000,
+      1008100000
+    ],
+    [
+      1058000000,
+      1058100000
+    ],
+    [
+      1108000000,
+      1108100000
+    ],
+    [
+      1158000000,
+      1158100000
+    ],
+    [
+      3570000000,
+      3575000000
+    ],
+    [
+      3670000000,
+      3675000000
+    ],
+    [
+      1012000000,
+      1012100000
+    ],
+    [
+      1062000000,
+      1062100000
+    ],
+    [
+      1112000000,
+      1112100000
+    ],
+    [
+      1162000000,
+      1162100000
+    ],
+    [
+      3580000000,
+      3585000000
+    ],
+    [
+      3680000000,
+      3685000000
+    ],
+    [
+      1020000000,
+      1020000128
+    ],
+    [
+      1070000000,
+      1070000128
+    ],
+    [
+      1120000000,
+      1120000128
+    ],
+    [
+      1170000000,
+      1170000128
+    ],
+    [
+      1020001000,
+      1020001128
+    ],
+    [
+      1070001000,
+      1070001128
+    ],
+    [
+      1120001000,
+      1120001128
+    ],
+    [
+      1170001000,
+      1170001128
+    ],
+    [
+      1020002000,
+      1020002128
+    ],
+    [
+      1070002000,
+      1070002128
+    ],
+    [
+      1120002000,
+      1120002128
+    ],
+    [
+      1170002000,
+      1170002128
+    ],
+    [
+      1020003000,
+      1020003128
+    ],
+    [
+      1070003000,
+      1070003128
+    ],
+    [
+      1120003000,
+      1120003128
+    ],
+    [
+      1170003000,
+      1170003128
+    ],
+    [
+      2100000000,
+      2100003000
+    ],
+    [
+      1024960000,
+      1024970000
+    ],
+    [
+      1074960000,
+      1074970000
+    ],
+    [
+      1124960000,
+      1124970000
+    ],
+    [
+      1174960000,
+      1174970000
+    ],
+    [
+      1024970000,
+      1024980000
+    ],
+    [
+      1074970000,
+      1074980000
+    ],
+    [
+      1124970000,
+      1124980000
+    ],
+    [
+      1174970000,
+      1174980000
+    ],
+    [
+      1024980000,
+      1024990000
+    ],
+    [
+      1074980000,
+      1074990000
+    ],
+    [
+      1124980000,
+      1124990000
+    ],
+    [
+      1174980000,
+      1174990000
+    ],
+    [
+      1025020000,
+      1025030000
+    ],
+    [
+      1075020000,
+      1075030000
+    ],
+    [
+      1125020000,
+      1125030000
+    ],
+    [
+      1175020000,
+      1175030000
+    ],
+    [
+      1022000000,
+      1022100000
+    ],
+    [
+      1072000000,
+      1072100000
+    ],
+    [
+      1122000000,
+      1122100000
+    ],
+    [
+      1172000000,
+      1172100000
+    ],
+    [
+      3590000000,
+      3595000000
+    ],
+    [
+      3690000000,
+      3695000000
+    ],
+    [
+      1022000000,
+      1022100000
+    ],
+    [
+      1072000000,
+      1072100000
+    ],
+    [
+      1122000000,
+      1122100000
+    ],
+    [
+      1172000000,
+      1172100000
+    ],
+    [
+      3590000000,
+      3595000000
+    ],
+    [
+      3690000000,
+      3695000000
+    ],
+    [
+      3718348000,
+      3718448000
+    ]
+  ],
+  "rootOverlap": 0,
+  "derivedRoundOverlap": 0,
+  "newTrainingRootRanges": [
+    [
+      3718348000,
+      3718448000
+    ]
+  ],
+  "trainingAudit": "For each proposed root interval, exclude up to 200 derived deals against historical seeds interpreted both as literal deals and match roots; new intervals also mutually disjoint. Historical unused reservations exclude literal roots, not imaginary completed rounds.",
+  "scope": "Readable local evidence and old audit paths only; unavailable remote machine history is unverified. Excludes 200 possible round deals per known or reserved root."
+}

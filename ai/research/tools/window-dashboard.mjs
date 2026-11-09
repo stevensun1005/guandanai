@@ -625,7 +625,20 @@ function stageState(stage, log, ctx) {
   const starts = ev.map((e) => e.start).filter(Number.isFinite);
   const ends = ev.map((e) => e.end).filter(Number.isFinite);
   const failedEv = ev.find((e) => e.end != null && e.rc != null && e.rc !== 0);
-  const allEnded = ids.every((id) => log.ids.get(id)?.end != null);
+  let allEnded = ids.every((id) => log.ids.get(id)?.end != null);
+  // Stages logged with free-text markers instead of START/END lines (for example a backfill loop
+  // writing "BACKFILL chunk ..." and "BACKFILL end"): config `markers: {start, end}` prefixes.
+  if (stage.markers?.start && !starts.length) {
+    const first = log.markers.find((m) => m.text.startsWith(stage.markers.start));
+    if (first) {
+      starts.push(first.at);
+      const last = stage.markers.end
+        ? log.markers.filter((m) => m.text.startsWith(stage.markers.end) && m.at >= first.at)
+        : [];
+      allEnded = last.length > 0;
+      if (allEnded) ends.push(Math.max(...last.map((m) => m.at)));
+    }
+  }
   const doneWhen = (stage.doneWhen || []).map((rel) => join(ctx.run, rel));
   const doneByFiles = doneWhen.length > 0 && doneWhen.every((f) => existsSync(f));
   const skipEv = [...ids, ...(stage.skipIds || [])]

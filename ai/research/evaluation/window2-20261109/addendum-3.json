@@ -1,0 +1,15 @@
+{
+  "schema": "danmcai-window2-addendum-3",
+  "registeredAt": "2026-11-09T19:55Z",
+  "C_w16_result": "Development: combined bot with 16 midgame worlds vs 8 on 1,200 dev pairs: +0.008 [-0.034, 0.051] (8 worlds +0.255, 16 worlds +0.263). No gain; keep 8 worlds.",
+  "H_diverse": {
+    "why": "The 9001 bot is becoming the web default and will face human play; belief v1 learned only from champion-greedy self-play. Test whether adding more varied play (champion softmax over its values, temperature 0.1) to the training data changes inference quality and the midgame search.",
+    "data": "generate.mjs --features=v1 --temperature=0.1 --band=21-80 --every=1 on the newly audited training block seeds 3,718,348,000-3,718,387,999 (40,000 rounds; audit seed-audit-diverse.json, block 3,718,348,000-3,718,447,999), frozen checkout c17ae5a.",
+    "train": "train.py on window-1 v1 data (40,000 greedy rounds) + this data; v1 settings (hidden 512, lr 3e-4, dropout 0.3, input dropout 0.1, wd 1e-2, suit augmentation, batch 1024), 30,000 steps, seed 20261112, final step only.",
+    "P1": "metrics.mjs on dev seeds 3,838,180,000-180,999 (same as v1).",
+    "P2": "midgame-search.mjs with this model on dev pairs 3,838,183,000-184,199, paired vs window-1 H/p2v2-v1.",
+    "status": "Development only."
+  },
+  "dashboardFix": "Backfill stage now detected from its 'BACKFILL chunk'/'BACKFILL end' log markers (it was running but shown as queued).",
+  "auditSHA256": "763232295048e0480422aa40f0c0dd55f464ad4649100a817af41c85450561f1"
+}

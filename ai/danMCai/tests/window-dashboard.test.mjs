@@ -377,3 +377,43 @@ test(
     console.table(rows);
   },
 );
+
+test('stages logged with free-text markers (backfill loops) show running, then done', () => {
+  const run = mkdtempSync(join(tmpdir(), 'window-dashboard-markers-'));
+  try {
+    const config = {
+      title: 't',
+      deadline: '2030-01-01T00:00:00Z',
+      orchestrators: [{ name: 'q.sh', startMarker: 'q start', endMarker: 'q end' }],
+      stages: [
+        {
+          key: 'BF',
+          ids: ['BF'],
+          title: 'bf',
+          kind: 'generate',
+          queue: 'q.sh',
+          markers: { start: 'BACKFILL chunk', end: 'BACKFILL end' },
+          paths: { out: 'D' },
+          rule: { type: 'descriptive', text: '' },
+        },
+      ],
+    };
+    const lines = [
+      '2029-01-01T00:00:00Z q start pid 1',
+      '2029-01-01T00:01:00Z BACKFILL chunk workers=3',
+    ];
+    writeFileSync(join(run, 'stages.log'), lines.join('\n') + '\n');
+    const now = Date.parse('2029-01-01T00:10:00Z');
+    let s = snapshot(run, config, { now, psText: '', machine: false });
+    assert.equal(s.stages[0].error, undefined);
+    assert.equal(s.stages[0].state, 'running');
+    writeFileSync(
+      join(run, 'stages.log'),
+      [...lines, '2029-01-01T00:20:00Z BACKFILL end'].join('\n') + '\n',
+    );
+    s = snapshot(run, config, { now: now + 3_600_000, psText: '', machine: false });
+    assert.equal(s.stages[0].state, 'done');
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
