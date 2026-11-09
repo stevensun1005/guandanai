@@ -7,8 +7,8 @@ import { botModel, botModelId, CLINT_RULE_ID, searchBot } from './model-catalog.
 import { sharedSearchClient } from './search/client.js';
 import { searchPayload } from './search/payload.mjs';
 import { searchBand } from './search/constants.mjs';
-import { ruleObservation } from '../rule-bot/runtime.mjs';
-import { RULES_ONLY_TIMEOUT_MS, clintBrainMs, hardLeft } from './turn-timing.mjs';
+import { decideClintRule, ruleObservation, RULES_ONLY } from '../rule-bot/runtime.mjs';
+import { FALLBACK_RETRY_MS, clintBrainMs, hardLeft } from './turn-timing.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost, isHumanSeat } from '../game/session.js';
 import { showError } from '../input/controls.js';
@@ -70,6 +70,16 @@ export function initialize() {
         const timer = setTimeout(() => stopWorker(new Error('AI timeout')), timeout);
         pending.set(id, { resolve, reject, timer });
         worker.postMessage({ id, type, state });
+      });
+    }
+    /** `promise`, or an 'AI timeout' rejection after `ms` (the promise itself keeps running). */
+    function within(promise, ms) {
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('AI timeout')), Math.max(0, ms));
+        promise.then(
+          (value) => (clearTimeout(timer), resolve(value)),
+          (error) => (clearTimeout(timer), reject(error)),
+        );
       });
     }
     function state(p, plays) {
@@ -167,9 +177,12 @@ export function initialize() {
         count = runtime.game.log.length;
       const current = () =>
         runtime.game === game && runtime.game.tok === tok && runtime.game.log.length === count;
-      await check();
-      if (!current()) return null;
+      const selected = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
+      if (!timeout && selected === CLINT_RULE_ID && !privateSeat(runtime, p))
+        return clintDecide(game, p, startedAt, current);
       if (privateSeat(runtime, p)) {
+        await check();
+        if (!current()) return null;
         markPrivateTable(runtime);
         const result = await request('oracle', oracleObservation(game, p));
         if (!current()) return null;
@@ -193,47 +206,17 @@ export function initialize() {
         if (!shape) throw Error('invalid-oracle-action');
         return { ...shape, cards };
       }
-      const selected = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
       if (selected === CLINT_RULE_ID) {
-        const observation = ruleObservation(game, p);
-        if (timeout)
-          observation.fixed = p === 0 ? (game.fixed || []).map((ids) => ids.slice()) : [];
-        let result;
-        if (timeout) result = await request('rule-timeout', observation);
-        else {
-          // rules, then the 残局大脑 for at most 30 s and never past the turn's 50 s mark; a worker
-          // still busy at 52 s (or failing) is replaced and the rules-only move is played instead.
-          // Not sticky: the next move asks for the brain again.
-          observation.brainMs = clintBrainMs(performance.now() - startedAt);
-          try {
-            result = await request(
-              'rule',
-              observation,
-              Math.max(1000, hardLeft(startedAt, performance.now())),
-            );
-          } catch (error) {
-            if (!current()) return null;
-            clintFallbacks[/timeout/i.test(error.message) ? 'timeout' : 'error']++;
-            result = await request('rule', { ...observation, brainMs: 0 }, RULES_ONLY_TIMEOUT_MS);
-          }
-        }
+        // a human seat's timeout autoplay with Clint's timeout rule
+        await check();
         if (!current()) return null;
-        if (!result) {
-          if (!game.trick) throw Error('invalid-rule-pass');
-          return null;
-        }
-        const cards = result.cards.map((id) => game.hands[p].find((card) => card.id === id));
-        if (
-          cards.some((c) => !c) ||
-          new Set(cards).size !== cards.length ||
-          !analyze(cards, game.L).some(
-            (shape) =>
-              shape.type === result.type && shape.value === result.value && shape.n === result.n,
-          ) ||
-          !beats(result, game.trick?.play)
-        )
-          throw Error('invalid-rule-action');
-        return { ...result, cards };
+        const observation = ruleObservation(game, p);
+        observation.fixed = p === 0 ? (game.fixed || []).map((ids) => ids.slice()) : [];
+        const result = await request('rule-timeout', observation);
+        if (!current()) return null;
+        const play = rulePlay(game, p, result);
+        if (play === undefined) throw Error('invalid-rule-action');
+        return play;
       }
       const model = botModel(selected);
       const prepared = prepareTableDecision(game, p, runtime.network.off, model.config);
@@ -248,10 +231,11 @@ export function initialize() {
       }
       input.modelId = model.id;
       // Champion 017's move is computed on the AI worker while the search runs (a separate
-      // worker), so a fallback at the 50 s mark is played at once.
+      // worker), so a fallback at the 50 s mark is played at once; a searched move never waits
+      // for the AI worker.
       let champion = null;
       if (search) {
-        champion = request('decide', input);
+        champion = check().then(() => request('decide', input));
         champion.catch(() => {});
         const result = await search;
         if (!current()) return null;
@@ -259,6 +243,9 @@ export function initialize() {
         if (play !== undefined) return play;
         if (result?.ok)
           searchClient.stats.fallbacks.mismatch = (searchClient.stats.fallbacks.mismatch || 0) + 1;
+      } else {
+        await check();
+        if (!current()) return null;
       }
       let result;
       try {
@@ -267,7 +254,7 @@ export function initialize() {
         if (!champion) throw error;
         // the early request failed (a replaced worker): ask once more, still before 60 s
         if (!current()) return null;
-        result = await request('decide', input, RULES_ONLY_TIMEOUT_MS);
+        result = await request('decide', input, FALLBACK_RETRY_MS);
       }
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)
@@ -280,6 +267,53 @@ export function initialize() {
       )
         throw new Error('stale-action');
       return pl;
+    }
+
+    /** The rule worker's reply as a play of seat p; undefined when it does not fit the table. */
+    function rulePlay(game, p, result) {
+      if (!result) return game.trick ? null : undefined;
+      const cards = (result.cards || []).map((id) => game.hands[p].find((card) => card.id === id));
+      if (
+        !cards.length ||
+        cards.some((c) => !c) ||
+        new Set(cards).size !== cards.length ||
+        !analyze(cards, game.L).some(
+          (shape) =>
+            shape.type === result.type && shape.value === result.value && shape.n === result.n,
+        ) ||
+        !beats(result, game.trick?.play)
+      )
+        return undefined;
+      return { ...result, cards };
+    }
+    /**
+     * A Clint seat's move: the rules, then the 残局大脑 for at most 30 s and never past the turn's
+     * 50 s mark (owner rule 2026-11-09, turn-timing.mjs). A rule worker that is not loaded or still
+     * busy at 52 s is replaced; then, as after a worker error or an unusable reply, the rules-only
+     * move is computed here on the page (well under 20 ms) and played: never the failure panel.
+     * Not sticky: the next move asks the worker for the brain again.
+     */
+    async function clintDecide(game, p, startedAt, current) {
+      const observation = ruleObservation(game, p);
+      try {
+        await within(check(), hardLeft(startedAt, performance.now()));
+        if (!current()) return null;
+        const result = await request(
+          'rule',
+          { ...observation, brainMs: clintBrainMs(performance.now() - startedAt) },
+          Math.max(1000, hardLeft(startedAt, performance.now())),
+        );
+        if (!current()) return null;
+        const play = rulePlay(game, p, result);
+        if (play !== undefined) return play;
+        throw new Error('invalid-rule-action');
+      } catch (error) {
+        if (!current()) return null;
+        clintFallbacks[/timeout/i.test(error.message) ? 'timeout' : 'error']++;
+      }
+      const play = rulePlay(game, p, decideClintRule(observation, RULES_ONLY));
+      if (play === undefined) throw Error('invalid-rule-action');
+      return play;
     }
 
     async function playTurn(clock) {

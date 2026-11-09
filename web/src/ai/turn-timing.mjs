@@ -14,8 +14,12 @@ export const REASON_MS = 50_000;
 export const HARD_MS = 52_000;
 /** Upstream Clint BRAIN.ms: one 残局大脑 decision searches at most 30 s (and never past REASON_MS). */
 export const CLINT_BRAIN_MS = 30_000;
-/** Longest wait for Clint's rules-only move after a brain overrun or a replaced rule worker. */
-export const RULES_ONLY_TIMEOUT_MS = 5_000;
+/**
+ * Longest wait for a second champion-017 request when the first one failed (its AI worker was
+ * replaced): asked at the latest at HARD_MS, so it answers before TURN_MS. Clint's rules-only
+ * fallback needs no worker: the page computes it at once (ai/controller.js clintDecide).
+ */
+export const FALLBACK_RETRY_MS = 5_000;
 
 /** Milliseconds of reasoning left for a turn that started at `startedAt` (same clock as `now`). */
 export const reasonLeft = (startedAt, now) => startedAt + REASON_MS - now;

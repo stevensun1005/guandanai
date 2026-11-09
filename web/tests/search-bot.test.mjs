@@ -54,7 +54,7 @@ import {
   CLINT_BRAIN_MS,
   HARD_MS,
   REASON_MS,
-  RULES_ONLY_TIMEOUT_MS,
+  FALLBACK_RETRY_MS,
   TURN_MS,
   clintBrainMs,
 } from '../src/ai/turn-timing.mjs';
@@ -162,7 +162,7 @@ test('frozen search settings equal the held-out-tested Node bot', () => {
     assert.equal(budget.midgameMs, REASON_MS);
     assert.equal(budget.endgameMs, REASON_MS);
     assert.equal(hardTimeoutMs(budget), HARD_MS);
-    assert.ok(hardTimeoutMs(budget) + RULES_ONLY_TIMEOUT_MS < TURN_MS, 'fallback before 60 s');
+    assert.ok(hardTimeoutMs(budget) + FALLBACK_RETRY_MS < TURN_MS, 'fallback before 60 s');
   }
   assert.deepEqual([TURN_MS, REASON_MS, HARD_MS, CLINT_BRAIN_MS], [60_000, 50_000, 52_000, 30_000]);
   assert.equal(PLAY_MS_SOURCE.includes('PLAY_MS = 60000'), true, 'the human turn clock is 60 s');
