@@ -109,7 +109,15 @@ async function register(launcherPath, armMidpoint) {
     if (manifest.suites.some((p) => p.modelSHA256 === digest))
       return { slot, action: 'same-weights', sha256: digest };
     manifest.seedIndexBase = index - manifest.suites.length;
-    await addSuite(run, manifest, { id, version: id, model, championRoot: window.championRoot });
+    const reasonRuntime = readJSON(join(base, 'reason-evaluation-launcher.json'), null);
+    if (!reasonRuntime) throw Error('Missing frozen reason evaluation launcher');
+    await addSuite(run, manifest, {
+      id,
+      version: id,
+      model,
+      championRoot: window.championRoot,
+      reasonRuntime,
+    });
     const plan = manifest.suites.at(-1);
     if (plan.index !== index || plan.modelSHA256 !== digest) throw Error('Frozen plan mismatch');
     if (armMidpoint) pinMidpoint(run, directory, plan, sha256);

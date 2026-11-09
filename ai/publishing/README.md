@@ -25,3 +25,5 @@ Mac 续训与 Windows 原运行按相同冠军证据发布；`--source` 写实�
 两头均未退步且达到协议区间门槛时才写 `tribute-model.json` 的批准底座 SHA；新底座不会自动继承批准。负结果也提交研究证据，网页仍走原贡还。`--preflight` 只用专用短测运行检查流程，不上传、提交或推送。验证 Python 默认 `python`，专项 GPU Python 只供训练进程使用。失败现场保存在运行目录的 `fusion-error.json`；不覆盖既有 Release。
 
 本机 io48 从已完成的十二小时批次发布，准备与正式发布都须提供 `--evaluated-suite` 和该目录的 `model.onnx`。详见[同批发布](../../web/docs/WEB_MODELS.md#guanzero-每十二小时评测并发布)。
+
+GuanZero从2026-11-09晚批起按三对手计划发布：Clint、普通冠军、danMCai-reason各500场全部完成且身份一致才可登记同一冻结权重。历史批次保留原名单；reason的底座/推断网络/搜索预算也参与校验，见[GuanZero协议](../guanzero/README.md#danmcai-reason评测协议)。

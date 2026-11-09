@@ -1,6 +1,8 @@
+import { reasonProtocolDigest } from '../guanzero/training/evaluate-reason.mjs';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, join, resolve } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
+import { verifyFrozenReason } from '../guanzero/training/reason.mjs';
 import { validSuiteReport } from '../guanzero/training/suite-reports.mjs';
 import {
   DEFAULT_OPPONENTS,
@@ -8,6 +10,9 @@ import {
   THREE_OPPONENT_PANEL,
   LEGACY_THREE_OPPONENTS,
   TWO_OPPONENT_PANEL,
+  REASON_OPPONENT_PANEL,
+  LEGACY_TWO_OPPONENTS,
+  suiteOpponents,
 } from '../guanzero/training/opponents.mjs';
 import { sha256 } from './artifacts.mjs';
 
@@ -22,13 +27,13 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   // cannot turn an old batch into a newer smaller batch.
   const legacy = plan.opponentPanel === undefined;
   const historicalThree = plan.opponentPanel === THREE_OPPONENT_PANEL;
-  const panel = legacy
-    ? LEGACY_FIVE_OPPONENTS
-    : historicalThree
-      ? LEGACY_THREE_OPPONENTS
-      : DEFAULT_OPPONENTS;
+  const panel = suiteOpponents(plan);
+  if (plan.opponentPanel === REASON_OPPONENT_PANEL)
+    verifyFrozenReason(suite, plan.reason, plan.champion);
   if (
-    (!legacy && !historicalThree && plan.opponentPanel !== TWO_OPPONENT_PANEL) ||
+    (!legacy &&
+      !historicalThree &&
+      ![TWO_OPPONENT_PANEL, REASON_OPPONENT_PANEL].includes(plan.opponentPanel)) ||
     (source.run === 'guanzero-adp-io48' &&
       (legacy !== (plan.index === 5098) || (historicalThree && plan.index !== 5100))) ||
     resolve(input) !== join(suite, 'model.onnx') ||
@@ -74,6 +79,8 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
       (op === 'champion' && !isDeepStrictEqual(report.opponents.champion.gate, plan.champion.gate))
     )
       throw Error('Incomplete or mismatched report: ' + op);
+    if (op === 'reason' && report.protocolSHA256 !== reasonProtocolDigest(report))
+      throw Error('Reason protocol fingerprint mismatch');
     const { wins, losses, draws, confidence95, clusters } = report.results[op];
     const matches = clusters.flat();
     if (
@@ -93,6 +100,7 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
     seedStart: plan.seedStart,
     seedEnd: plan.seedEnd,
     championSHA256: plan.champion.modelSHA256,
+    ...(plan.reason && { reason: plan.reason }),
     opponents,
   };
 }

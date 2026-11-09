@@ -1,3 +1,4 @@
+import { isDeepStrictEqual } from 'node:util';
 import { modelLabel } from './model-labels.mjs';
 import { join } from 'node:path';
 import { opponentDefinition } from './opponents.mjs';
@@ -21,7 +22,11 @@ export function validSuiteReport(report, plan, opponent) {
         pair.every((m, t) => m.seed === plan.seedStart + i && m.neuralTeam === t),
     ) &&
     (opponent !== 'champion' ||
-      report.opponents?.champion?.modelSHA256 === plan.champion.modelSHA256),
+      report.opponents?.champion?.modelSHA256 === plan.champion.modelSHA256) &&
+    (opponent !== 'reason' ||
+      (!!plan.reason &&
+        isDeepStrictEqual(report.opponents?.reason, plan.reason) &&
+        isDeepStrictEqual(report.sourceSHA256, plan.reason.sourceSHA256))),
   );
 }
 
@@ -57,13 +62,22 @@ export function suiteRows(
         progress.completedPairs >= 0 &&
         progress.completedPairs <= plan.pairs &&
         progress.metrics?.matches === 2 * progress.completedPairs &&
-        (opponent !== 'champion' || progress.opponentSHA256 === plan.champion.modelSHA256);
+        (opponent !== 'champion' || progress.opponentSHA256 === plan.champion.modelSHA256) &&
+        (opponent !== 'reason' ||
+          (progress.opponentSHA256 === plan.reason?.modelSHA256 &&
+            progress.evaluationSHA256 === plan.reason?.evaluationSHA256));
       const { clusters, ...m } = complete
         ? report.results[opponent]
         : validProgress
           ? progress.metrics
           : {};
-      const definition = opponent === 'champion' ? plan.champion : opponentDefinition(opponent);
+      const definition =
+        opponent === 'champion'
+          ? plan.champion
+          : opponent === 'reason'
+            ? plan.reason
+            : opponentDefinition(opponent);
+      if (!definition) continue;
       rows.push({
         opponent,
         opponentName: definition.name,

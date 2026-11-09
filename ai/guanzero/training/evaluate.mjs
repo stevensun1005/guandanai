@@ -4,7 +4,7 @@ import { freezeChampion } from './champion.mjs';
 import { join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as ort from 'onnxruntime-node';
-import { DEFAULT_OPPONENTS, opponentDefinition } from './opponents.mjs';
+import { DEFAULT_OPPONENTS, LEGACY_TWO_OPPONENTS, opponentDefinition } from './opponents.mjs';
 import { playMatch } from '../../shared/simulation/match-rollout.mjs';
 import { seededRandom } from '../../shared/simulation/simulation.mjs';
 import { createModelPool } from '../../danMCai/training/continuous/lib.mjs';
@@ -91,7 +91,7 @@ export async function evaluate({
   outputDirectory = null,
   champion = null,
   resume = false,
-  opponents = DEFAULT_OPPONENTS,
+  opponents = LEGACY_TWO_OPPONENTS,
 }) {
   if (
     !Array.isArray(opponents) ||
@@ -100,6 +100,10 @@ export async function evaluate({
   )
     throw Error('Choose distinct GuanZero evaluation opponents');
   const definitions = opponents.map(opponentDefinition);
+  if (opponents.includes('reason'))
+    throw Error(
+      'Reason requires a registered suite and evaluation-worker.mjs; never substitute self-play',
+    );
   if (subdirectory && !/^[a-z][a-z0-9-]*$/.test(subdirectory))
     throw Error('Invalid evaluation subdirectory');
   const p = paths(run),
@@ -258,6 +262,6 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import
     model: option('model', join(p.models, latest.file)),
     index,
     pairs: Number(option('pairs', '250')),
-    opponents: option('opponents', DEFAULT_OPPONENTS.join(',')).split(','),
+    opponents: option('opponents', LEGACY_TWO_OPPONENTS.join(',')).split(','),
   });
 }

@@ -152,3 +152,5 @@ PR 会执行测试、格式、构建和真实浏览器出牌／牌谱导入检�
 | 开发、测试或发布   | [贡献指南](./CONTRIBUTING.md) · [架构](./web/docs/ARCHITECTURE.md) · [测试](./web/docs/TESTING.md) · [部署](./web/docs/DEPLOYMENT.md)                                                        |
 | 了解电脑和复现训练 | [机器人](./web/docs/BOTS.md) · [电脑选择与发布](./web/docs/WEB_MODELS.md) · [训练入口](./ai/research/MODEL_TRAINING.md) · [历史训练记录](./ai/research/TRAINING_RUN.md)                      |
 | 核对模型成绩及计划 | [研究主报告](./ai/research/MODEL_STUDY.md) · [研究进展日志](./ai/research/PROGRESS_LOG.md) · [改进建议及实施状态](./ai/research/IMPROVEMENT_PROPOSAL.md) · [迭代路线](./web/docs/ROADMAP.md) |
+
+GuanZero定时开发评测从2026-11-09晚批起包含Clint、danMCai冠军与danMCai-reason，各500场，完成后发布同一冻结模型。[运行协议](ai/guanzero/README.md#danmcai-reason评测协议)。

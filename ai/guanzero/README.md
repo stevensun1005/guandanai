@@ -26,15 +26,17 @@
 
 ## 开发评测对手
 
-默认对手为 Clint规则机器人（`clint`，`rules-v2`）和 danMCai 现任门控冠军（`champion`）。每类默认 **250 对种子、交换阵营共 500 场完整比赛**，两类合计 1,000 场。历史五对手计划继续独立保存 original 和 P0 的成绩。
+从2026-11-09晚批开始，默认三对手：Clint规则机器人（`clint`，`rules-v2`）、danMCai 现任门控冠军（`champion`）、该冠军上的 danMCai-reason（`reason`）。每类默认 **250 对种子、交换阵营共 500 场完整比赛**，三类合计 **1,500场**。同一批共用同一份GuanZero冻结权重和种子。历史五对手计划继续独立保存 original 和 P0 的成绩。
+
+直接 `evaluate.mjs` 仅用于普通两组/单组基线；新的三组定时批次必须先登记，再运行本页后述的独立伴随。
 
 ```powershell
-node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250
+node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --opponents=clint,champion
 # 仅运行实际门控冠军；权重与 accept 门控证据自动核对
 node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --opponents=champion
 ```
 
-每批冻结同一 GuanZero 模型，以及清单中现任 danMCai 冠军的版本、完整 SHA、`champion.json` 和 accept 门控依据。神经网络均为候选动作上的贪心评分，不叠加网页风格或残局搜索；这是冻结冠军权重的对战，不等同整套网页策略的验收。双方仅使用自身手牌及公开信息。报告保存实际胜负平、逐场记录、编码／源码指纹和配对种子簇 95% 区间，评测数据不进入训练缓冲区。
+每批冻结同一 GuanZero 模型，以及清单中现任 danMCai 冠军的版本、完整 SHA、`champion.json` 和 accept 门控依据。GuanZero和普通冠军组使用贪心网络评分；reason组实际运行冻结的手牌推断、中盘8世界搜索、尾盘PIMC及桌面预算回退，不用普通冠军权重冒充推理。这里测的是本机CPU上的冻结桌面策略，回退率随本机负载变化；不是平板性能验收。双方仅使用自身手牌及公开信息。报告保存实际胜负平、逐场记录、编码／源码指纹和配对种子簇 95% 区间，评测数据不进入训练缓冲区。
 
 ### 已运行的冻结训练
 
@@ -46,7 +48,7 @@ node ai/guanzero/training/development-suite.mjs --run=<冻结运行目录> --fro
 
 首次启动冻结当时最新完整导出；之后跟随后续原批次的冻结模型与最终评测。新报告单独写在 `eval/development-500/<快照或批次>/<对手>/`，旧 200 场及旧 `clint/report.json` 保留为历史，不能拼入新样本。新开发种子从 4,200,000,000 起，每批独占 100,000 个种子区间，使用前 250 个；与旧批次种子分开，不能作为未用留出集。每批各对手使用相同种子和同一模型，按种子交换阵营。
 
-补充进程以 BelowNormal 优先级、最多两个单线程 CPU 推理会话运行，不使用训练 GPU。面板显示每类实际完成数／500、排队／进行中／完成、具体冠军版本及阶段胜率；置信区间仅在该对手 500 场完成后计算。指纹、种子和冻结权重完全一致时可从已完成的配对断点续跑，变更或损坏则停止并保留现场。`.lock` 防止重复进程；`status.json` 保存错误与状态。仅停止补充进程可创建 `eval/development-500/STOP`，不要误写训练根目录的 STOP。旧的 Clint-only 补评入口保留用于历史协议复现。
+三组在同一批次分别启动BelowNormal独立进程、CPU单线程ONNX会话。Clint与普通冠军继续从原af2a683冻结评测器调用；reason从独立的新冻结伴随检出运行，不使用训练GPU。统一只读面板显示每类实际完成数／500、排队／进行中／完成、具体对手版本及实际胜负平；置信区间仅在该对手 500 场完成后计算。指纹、种子和冻结权重完全一致时可从已完成的配对断点续跑，变更或损坏则停止并保留现场。`.lock` 防止重复进程；`status.json` 保存错误与状态。仅停止补充进程可创建 `eval/development-500/STOP`，不要误写训练根目录的 STOP。旧的 Clint-only 补评入口保留用于历史协议复现。
 
 ### 面板中的评测模型名
 
@@ -74,7 +76,7 @@ GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二�
 
 历史安排：本次本地 io48 窗口最初以训练起点计时。第 8 小时的批次按追加要求在 Toronto 11 月 6 日 09:38 用当时最新完整导出 138506 启动。改为十二小时周期时，已启动的 138506 作为首批。接下来在训练第 24、36、48 小时取样，对应 Toronto 11 月 6 日 22:12、7 日 10:12 和 7 日 22:12 左右。最后一批等训练正常退出后读取最终完整导出。138506 按登记时的五组完成；186280 按三组完成；后续两个对手为 Clint 和获 accept 的 danMCai 冠军，各 250 对交换阵营、500 场。仅从完整逐场报告计算成绩。
 
-**当前安排（所有者2026-11-08更新）**：从11月9日起，每天 America/Toronto **08:00、20:00** 冻结模型；旧10:12／22:12触发取消。完成Clint和真实danMCai冠军各500场后发布本批同一权重，发布时间取决于比赛和验证完成时间。
+**当前安排（所有者2026-11-08更新，11月9日追加reason）**：从11月9日起，每天 America/Toronto **08:00、20:00** 冻结模型；旧10:12／22:12触发取消。三组各500场全部完成后发布本批同一权重，发布时间取决于比赛和验证完成时间。
 
 登记器读取运行目录之外的 `work/guanzero/evaluation-schedule.json`，以 `firstAt=2026-11-09T13:00:00.000Z`、12小时间隔建立日历槽，不能继续按训练起点推算。此有限窗口各槽均核对Toronto本地08:00／20:00。新普通索引5130–5134，种子各为 `3700000000 + index * 100000` 起250对；历史索引与报告保留，最终索引5150单列。重复执行复用同槽，未到首个时间拒绝登记，错过两小时不以新权重补旧槽。不得更改冻结训练配置或窗口来调整评测时间。
 
@@ -84,10 +86,10 @@ GuanZero 可使用 [共享专项网络](../shared/tribute/README.md) 的第二�
 node ai/guanzero/training/register-window-suite.mjs C:/guandan-sampler/work/guanzero/dashboard-launcher.json
 ```
 
-对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 dashboard-launcher.sourceRoot 指向的原冻结检出执行以下命令，并核对 status.json 的 PID 和逐对手实际进度。历史第24小时使用登记器的 `--arm-midpoint` 单次等待模式，在第 24 小时前约 30 秒预登记本批对手名单与快照。原监督器到点复用同一具名文件和计划。中点已完成，不再启动等待进程。若错过取样时段，记录漏测原因。同一个十二小时任务按该批冻结名单归档全部报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每十二小时评测并发布)。
+对已登记且还有未完成报告的批次，先核对 development-500/.lock 的 PID。等待存活评测退出后，在 reason-evaluation-launcher.sourceRoot 指向的新冻结伴随检出执行以下命令，--baseline-root保留原af2a683检出，并核对 status.json 的 PID 和逐对手实际进度。历史第24小时使用登记器的 `--arm-midpoint` 单次等待模式，在第 24 小时前约 30 秒预登记本批对手名单与快照。原监督器到点复用同一具名文件和计划。中点已完成，不再启动等待进程。若错过取样时段，记录漏测原因。同一个十二小时任务按该批冻结名单归档全部报告，然后用本批 model.onnx 发布。发布时以计划、报告、Release 和 Pages 的完整 SHA-256 核对身份。[发布参数](../../web/docs/WEB_MODELS.md#guanzero-每十二小时评测并发布)。
 
 ```powershell
-node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --once
+node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/guanzero/guanzero-adp-io48 --champion-root=C:/guandan-sampler/work/guanzero-web-release --baseline-root=C:/guandan-sampler/work/guanzero-io48-runtime --once
 ```
 
 ## 自动恢复
@@ -104,4 +106,18 @@ node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/gu
 
 所有者于11月7日明确延长当前io48运行至 Toronto 11月11日周三上午10:00，即15:00UTC。window.json保留原起点与已完成中点，extension记录旧截止和授权时间。监督器读取启动时的截止，因此延期通过一次检查点停机恢复切换生效。原始训练配置、优化器和采样游标继续沿用。
 
-当前评测按上述08:00／20:00日历持续至新截止。第48小时是历史中间批次，原有5120等种子槽与报告保留；新日历普通槽5130起，最终5150，与即时5110／5111分开。周三08:00任务完成普通批次后继续跟进10:00正常停训，核对最终完整导出，再登记5150并完成最后一轮两对手各500场及同权重发布，不等到20:00才登记。Windows恢复任务的重复触发时长和执行时限也延长到新截止，训练STOP与明确错误仍按恢复说明处理。
+当前评测按上述08:00／20:00日历持续至新截止。第48小时是历史中间批次，原有5120等种子槽与报告保留；新日历普通槽5130起，最终5150，与即时5110／5111分开。周三08:00任务完成普通批次后继续跟进10:00正常停训，核对最终完整导出，再登记5150并完成最后一轮三对手各500场及同权重发布，不等到20:00才登记。Windows恢复任务的重复触发时长和执行时限也延长到新截止，训练STOP与明确错误仍按恢复说明处理。
+
+## danMCai-reason评测协议
+
+新批次面板标识 `clint-champion-reason-v1`，对手列表严格为 `["clint","champion","reason"]`。历史 `clint-champion-v1` 两组、`random-clint-champion-v1` 三组及未标记的五组保持原名单与原报告，不追加或改写历史成绩。首个新槽为11月9日20:00，后续仍为每天Toronto08:00/20:00；本次不额外启动即时正式500场。
+
+登记器还读取训练运行之外的 `work/guanzero/reason-evaluation-launcher.json`，从其独立冻结源码冻结推理身份；该文件的 `sourceRoot/commit` 标明新伴随检出，`baselineRoot/baselineCommit` 保留af2a683。不更新主训练或旧冻结检出。运行新伴随的 `development-suite.mjs --run=<活动运行> --champion-root=<发布检出> --baseline-root=<af2a683冻结检出> --once`；三组工作器同批启动，各自断点、逐场结果分开保存。锁和活PID阻止重复启动；禁止用旧伴随直接处理含reason的新计划。
+
+每批 `plan.reason` 固定搜索机器人的完整manifest SHA、冠军底座SHA及accept门控、推断ONNX完整SHA/特征版本、搜索参数、桌面预算、执行策略版本与静态源码闭包。`reason-belief.onnx`与`champion.onnx`一起复制进本批评测目录，二进制不进Git。当前reason为9001／`danMCai-reason-v000855042`，但登记时按真实现任冠军重新解析，不能永久写死编号代替核验。
+
+策略复用网页 `search/core.mjs`、公开信息payload与推断输入：21–40张8世界、冠军前6＋过牌、net=2；≤20张8世界PIMC、至少4个世界完成；其余张数、预算超时或公开贡还信息矛盾回到同一冠军。桌面预算中盘3000ms、尾盘4000ms，每次求解3000ms／150万节点／30万表项。执行时仅自身手牌和公开信息可读，搜索前遮蔽其他手牌；进还贡按现有比赛引擎执行，推理器只接收公开贡还记录。
+
+`reason/report.json`保存完整500场、250交换阵营簇、模型/对手/源码/协议指纹及搜索次数、实际偏离冠军次数、各类回退和耗时。回退次数必须报告，异常不得静默伪装成正常reason比赛。旧独立证据仅覆盖对冠军、无进贡的单局；新完整打A含进贡评测是新的开发证据，不能借用旧+0.237当作预期成绩。
+
+发布器对新批次强制三份完整报告全通过，再发布同一suite/model.onnx，无最低胜率门槛。网页菜单与默认按最新WEB_MODELS维护，当前四项、默认reason，开发评测数量不是网页菜单数量。实现、发布策略及本机接入检查保存在研究报告与工程验证记录。

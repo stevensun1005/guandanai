@@ -1,3 +1,4 @@
+import { guanzeroCards } from './guanzero-stages.mjs';
 /**
  * Read-only live dashboard for a research window run by stage scripts (window1.sh and friends).
  * It reads stages.log ("<ISO> START <id>[ ...]", "<ISO> END <id> rc=<n>", "<ISO> SKIP <id> (why)"
@@ -726,7 +727,9 @@ export function snapshot(run, config, options = {}) {
   const psText = options.psText ?? processList();
   const deadline = Date.parse(config.deadline);
   const log = parseStagesLog(readText(join(run, 'stages.log')));
-  const stop = existsSync(join(run, 'STOP'));
+  const stop =
+    existsSync(join(run, 'STOP')) ||
+    (!!config.guanzeroRun && existsSync(join(config.guanzeroRun, 'STOP')));
   const ctx = { run, config, now, deadline, psText, stop, states: new Map() };
   const stages = (config.stages || []).map((stage) => {
     const base = {
@@ -772,6 +775,20 @@ export function snapshot(run, config, options = {}) {
       return { ...base, state: 'queued', stateText: '读取出错', error: error.message, results: [] };
     }
   });
+  if (config.guanzeroRun) {
+    for (const card of guanzeroCards(config.guanzeroRun, now))
+      stages.push({
+        ...card,
+        stateText: STATE_TEXT[card.state],
+        startText: card.start ? eastern(card.start) : '—',
+        endText: card.end ? eastern(card.end) : '—',
+        durationText: card.start ? duration(((card.end ?? now) - card.start) / 1000) : '—',
+        progress: {
+          ...card.progress,
+          etaText: card.progress.eta ? eastern(card.progress.eta) : null,
+        },
+      });
+  }
   const running = stages.filter((s) => s.state === 'running');
   const queued = stages.filter((s) => s.state === 'queued');
   const orchestrators = (config.orchestrators || []).map((o) => ({
@@ -779,7 +796,11 @@ export function snapshot(run, config, options = {}) {
     alive: pathInCommands(psText, isAbsolute(o.name) ? o.name : join(run, o.name)),
   }));
   let headline, tone;
-  if (stop) [headline, tone] = ['已放 STOP 文件：所有阶段会停下', 'bad'];
+  if (stop)
+    [headline, tone] = [
+      config.guanzeroRun ? '训练已请求停止，评测查看各阶段状态' : '已放 STOP 文件：所有阶段会停下',
+      'bad',
+    ];
   else if (now >= deadline) [headline, tone] = ['已过截止', 'warn'];
   else if (running.length) [headline, tone] = [`正在跑 ${running.length} 项`, 'ok'];
   else if (queued.length) [headline, tone] = ['没有阶段在运行，有排队项', 'warn'];

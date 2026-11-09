@@ -1,3 +1,5 @@
+import { workerAlive } from './worker-lock.mjs';
+import { setTimeout as sleep } from 'node:timers/promises';
 /** Paired 500-match development suites beside a read-only frozen trainer. */
 import {
   existsSync,
@@ -8,11 +10,13 @@ import {
   unlinkSync,
 } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fork, execFileSync } from 'node:child_process';
+import { freezeReason } from './reason.mjs';
 import { setPriority, constants } from 'node:os';
 import { modelBytes } from '../../publishing/artifacts.mjs';
 import { evaluate } from './evaluate.mjs';
-import { DEFAULT_OPPONENTS, TWO_OPPONENT_PANEL } from './opponents.mjs';
+import { DEFAULT_OPPONENTS, REASON_OPPONENT_PANEL } from './opponents.mjs';
 import { freezeChampion, championDefinition } from './champion.mjs';
 import { ROOT, paths, readJSON, writeJSON, option, sha256, evalSeed } from './lib.mjs';
 export const SUITE_PAIRS = 250;
@@ -22,7 +26,7 @@ export { validSuiteReport } from './suite-reports.mjs';
 export async function addSuite(
   run,
   manifest,
-  { id, model, version, sourceBlock = null, championRoot = ROOT },
+  { id, model, version, sourceBlock = null, championRoot = ROOT, reasonRuntime = null },
 ) {
   if (!/^[a-z0-9-]+$/.test(id)) throw Error('Invalid development suite ID');
   const p = paths(run),
@@ -39,6 +43,22 @@ export async function addSuite(
   const champion = await freezeChampion(folder, definition, championRoot);
   copyFileSync(model, join(folder, 'model.onnx'));
   if (sha256(join(folder, 'model.onnx')) !== digest) throw Error('GuanZero freeze changed');
+  let freeze = freezeReason;
+  if (reasonRuntime) {
+    if (
+      execFileSync('git', ['rev-parse', 'HEAD'], {
+        cwd: reasonRuntime.sourceRoot,
+        encoding: 'utf8',
+      }).trim() !== reasonRuntime.commit
+    )
+      throw Error('Reason runtime commit changed');
+    freeze = (
+      await import(
+        pathToFileURL(join(reasonRuntime.sourceRoot, 'ai/guanzero/training/reason.mjs')).href
+      )
+    ).freezeReason;
+  }
+  const reason = await freeze(folder, champion.metadata, championRoot);
   const index = (manifest.seedIndexBase ?? SUITE_SEED_INDEX) + manifest.suites.length,
     start = evalSeed(index, SUITE_PAIRS);
   const plan = {
@@ -52,9 +72,16 @@ export async function addSuite(
     pairs: SUITE_PAIRS,
     seedStart: start,
     seedEnd: start + SUITE_PAIRS - 1,
-    opponentPanel: TWO_OPPONENT_PANEL,
+    opponentPanel: REASON_OPPONENT_PANEL,
     opponents: [...DEFAULT_OPPONENTS],
     champion: champion.metadata,
+    reason,
+    ...(reasonRuntime && {
+      evaluationRuntime: {
+        commit: reasonRuntime.commit,
+        baselineCommit: reasonRuntime.baselineCommit,
+      },
+    }),
     createdAt: new Date().toISOString(),
   };
   writeJSON(join(folder, 'plan.json'), plan);
@@ -68,6 +95,7 @@ export async function runDevelopmentSuites({
   once = false,
   pollMs = 30000,
   championRoot = ROOT,
+  baselineRoot = null,
 }) {
   const p = paths(run),
     directory = join(p.eval, 'development-500');
@@ -130,26 +158,38 @@ export async function runDevelopmentSuites({
         state.suite = plan.id;
         state.phase = 'evaluating';
         save();
-        // Two single-thread CPU sessions; no training GPU or optimizer access.
-        for (let i = 0; i < pending.length; i += 2) {
-          const results = await Promise.allSettled(
-            pending.slice(i, i + 2).map((op) =>
-              evaluate({
-                run,
-                model: join(folder, 'model.onnx'),
-                index: plan.index,
-                pairs: plan.pairs,
-                opponents: [op],
-                champion,
-                outputDirectory: join(folder, op),
-                resume: true,
-              }),
-            ),
-          );
-          const failure = results.find((r) => r.status === 'rejected');
-          if (failure) throw failure.reason;
-          save();
-        }
+        // Each opponent gets a separate low-priority process, started in the same batch.
+        // Baseline opponents keep the original evaluator; reason uses this frozen companion.
+        const children = [];
+        const results = await Promise.allSettled(
+          pending.map(async (op) => {
+            while (workerAlive(join(folder, op, '.worker.lock'))) {
+              if (validSuiteReport(readJSON(join(folder, op, 'report.json'), null), plan, op))
+                return;
+              await sleep(5000);
+            }
+            return new Promise((done, fail) => {
+              const child = fork(
+                join(ROOT, 'ai/guanzero/training/evaluation-worker.mjs'),
+                [
+                  `--run=${run}`,
+                  `--suite=${plan.id}`,
+                  `--opponent=${op}`,
+                  ...(baselineRoot ? [`--baseline-root=${baselineRoot}`] : []),
+                ],
+                { windowsHide: true, stdio: 'inherit' },
+              );
+              children.push(child);
+              child.once('error', fail);
+              child.once('exit', (code) =>
+                code === 0 ? done() : fail(Error(`${op} worker exited ${code}`)),
+              );
+            });
+          }),
+        );
+        const failure = results.find((r) => r.status === 'rejected');
+        if (failure) throw failure.reason;
+        save();
         if (
           !plan.opponents.every((op) =>
             validSuiteReport(readJSON(join(folder, op, 'report.json'), null), plan, op),
@@ -183,5 +223,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     guardianState: option('guardian-state'),
     championRoot: option('champion-root', ROOT),
     once: process.argv.includes('--once'),
+    baselineRoot: option('baseline-root', null),
   });
 }

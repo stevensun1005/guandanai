@@ -18,6 +18,8 @@
 
 ## 当前功能补充
 
+- **2026-11-09 GuanZero追加reason对手**：后续08:00/20:00新批为Clint、danMCai冠军、danMCai-reason各500场，共1500。真实推断搜索、桌面预算与双方权重/门控均冻结。新独立reason评测运行指针为 `work/guanzero/reason-evaluation-launcher.json`，原af2a683只供训练和普通两组基线。三组独立低优先级工作器同批启动；新发布必须全部报告完成。统一只读面板读取真实各组记录，历史批次和原训练窗口不改。详见[GuanZero](../guanzero/README.md#danmcai-reason评测协议)。
+
 - **GuanZero 11月9日08点评测已完成**：guanzero-adp-io48-385979，clint: 347胜/109负/44平；champion: 162胜/279负/59平，各500场。网页归档026保持同一冻结SHA；部署成功与公网实测以 `evaluation/web-model-026.json` 为准。日历08:00/20:00、周三10:00训练截止继续生效。
 
 - **GuanZero后续方案评审（2026-11-09）**：已核对有限历史、自博弈与FIFO事实，提出历史表达、手牌推断、对抗分布及尾盘修正的分阶段对照，见[适用性评审](GUANZERO_NEXT_STAGE_REVIEW_20261109.md)。这是计划，尚未启动新训练或改动活动窗口，不能直接套用danMCai的瓶颈结论。

@@ -1,0 +1,76 @@
+{
+  "kind": "engineering-integration-not-strength-acceptance",
+  "observedAt": "2026-11-09T22:11:04.466006+00:00",
+  "status": "validated-awaiting-frozen-runtime-install",
+  "ownerRequest": "Add danMCai-reason; from now three opponents, start with normal scheduled batches.",
+  "effectiveSlot": "2026-11-09T20:00:00-05:00",
+  "timezone": "America/Toronto",
+  "times": [
+    "08:00",
+    "20:00"
+  ],
+  "opponents": [
+    "clint",
+    "champion",
+    "reason"
+  ],
+  "pairsPerOpponent": 250,
+  "matchesPerOpponent": 500,
+  "totalMatchesPerSuite": 1500,
+  "opponentPanel": "clint-champion-reason-v1",
+  "smoke": {
+    "complete": true,
+    "metrics": {
+      "matches": 2,
+      "wins": 1,
+      "losses": 1,
+      "draws": 0,
+      "matchWinRate": 0.5,
+      "matchScore": 0.5,
+      "rounds": 23,
+      "roundWins": 13,
+      "roundWinRate": 0.5652173913043478,
+      "averageUpgradePoints": 0.30434782608695654,
+      "confidence95": null
+    },
+    "stats": {
+      "decisions": 889,
+      "forced": 312,
+      "baseOnly": 413,
+      "midgame": 110,
+      "endgame": 54,
+      "minWorldsFallback": 0,
+      "budgetFallback": 3,
+      "knownCardsFallback": 0,
+      "changedFromChampion": 23,
+      "inferences": 45936,
+      "searchMs": 68953.58789999997
+    },
+    "modelSHA256": "7e028d35f86cbdd425fefbc39ec78fa499194c1ac061dff8b43f498e34f7bbac",
+    "reasonSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+    "policySHA256": "040225da8f3f5186facc95269b988263f8c506d5f3532e135168b62a756f8440"
+  },
+  "smokeClassification": "Two complete engineering matches on fixture seed101 with swapped teams; not a 500-match development result.",
+  "tests": {
+    "node": {
+      "total": 388,
+      "passed": 374,
+      "skipped": 14,
+      "failed": 0
+    },
+    "guanzeroPython": 9,
+    "format": "passed",
+    "build": "3363f7c9f4",
+    "targetedReasonAndDashboard": {
+      "total": 17,
+      "passed": 16,
+      "skipped": 1
+    }
+  },
+  "unchangedTraining": {
+    "config": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "window": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6"
+  },
+  "baselineCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "frozenRuntime": null
+}

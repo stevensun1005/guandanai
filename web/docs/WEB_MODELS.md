@@ -47,7 +47,7 @@
 
 ## GuanZero 每十二小时评测并发布
 
-本机 io48 每天 America/Toronto 08:00、20:00 取一次快照（自2026-11-09起，旧10:12／22:12取消）。周三10:00固定截止另取最终完整导出，具体日历槽见训练指南。Clint 和 danMCai 冠军各完成 500 场后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前核对两份完整报告（138506 沿用五份，186280 沿用三份）、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席菜单默认由 `selection.defaultChoice` 决定（现为 9001，未设置时为 danMCai 现任冠军），GuanZero 发布不改变它。[本机运行与时间表](../../ai/guanzero/README.md#每十二小时评测)。
+本机 io48 每天 America/Toronto 08:00、20:00 取一次快照（自2026-11-09起，旧10:12／22:12取消）。周三10:00固定截止另取最终完整导出，具体日历槽见训练指南。从2026-11-09晚批起，Clint、danMCai 冠军、danMCai-reason 三组各完成500场后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前按冻结批次名单核对全部报告：新三组共1500场；历史两组仍两份、138506五份、186280三份、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席菜单默认由 `selection.defaultChoice` 决定（现为 9001，未设置时为 danMCai 现任冠军），GuanZero 发布不改变它。[本机运行与时间表](../../ai/guanzero/README.md#每十二小时评测)。
 
 ## danMCai 冠军定期同步
 
@@ -106,7 +106,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 
 2026-11-09 起出牌评价默认使用菜单中的 danMCai-reason（底座为 `selection.danMCaiChampions[0]` 的搜索机器人，现为 9001）：牌桌剩 21–40 张显示其推断世界推演值、≤20 张显示精确求解值，其余或未完成时显示冠军 `selection.danMCaiChampions[0]` 的网络动作值；与座位选择的托管／电脑模型无关。冠军或推理机器人经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实名称；不使用普通最新导出冒充冠军。评分只做候选范围内的相对换算，不更改默认模型、性格或机器人动作。[来源、预算与房主许可](MOVE_COACH.md)。
 
-开发评测现含 Clint 与真实 danMCai 冠军，每类默认 500 场，独立补评、历史样本及进度口径见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。周期同步也归档新协议各对手已完成的逐场证据，核对 250 对／500 场、模型及冠军 SHA、种子和源码指纹；进行中计数不是完成成绩，不影响网页冠军默认。
+开发评测现含 Clint、真实 danMCai 冠军及 danMCai-reason，每类默认500场，新批合计1500场，独立补评、历史样本及进度口径见 [GuanZero](../../ai/guanzero/README.md#开发评测对手)。周期同步也归档新协议各对手已完成的逐场证据，核对 250 对／500 场、模型及冠军 SHA、种子和源码指纹；进行中计数不是完成成绩，不影响网页冠军默认。
 
 ## 进还贡专项组件（开发中）
 
