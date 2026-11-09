@@ -6,11 +6,7 @@ import { fileURLToPath } from 'node:url';
 import * as ort from 'onnxruntime-node';
 import { modelBytes, sha256 as digest } from '../../publishing/artifacts.mjs';
 import { searchBotManifest, validateCatalog } from '../../../web/src/ai/model-catalog.mjs';
-import {
-  SEARCH_BOT_V1,
-  SEARCH_BUDGETS,
-  NODE_SOLVER_MS,
-} from '../../../web/src/ai/search/constants.mjs';
+import { SEARCH_BOT_V1, NODE_SOLVER_MS } from '../../../web/src/ai/search/constants.mjs';
 import { searchPayload, restoreGame } from '../../../web/src/ai/search/payload.mjs';
 import { KnownCardsError } from '../../../web/src/ai/search/known-cards.mjs';
 import { championValues, beliefProbabilities } from '../../../web/src/ai/search/inference.mjs';
@@ -28,6 +24,18 @@ import { policyState } from '../../../web/src/ai/observation.js';
 import { createRound } from '../../shared/simulation/simulation.mjs';
 import { publicView } from '../../danMCai/belief/features.mjs';
 import { readJSON, sha256, ROOT } from './lib.mjs';
+
+/**
+ * Desktop budget registered with protocol clint-champion-reason-v1 (the web desktop budget until
+ * 2026-11-09). The web bot moved to 50 s per move that day (a deployment change); this registered
+ * evaluation keeps its frozen budget, and changing it needs a new protocol.
+ */
+export const REASON_V1_BUDGET = Object.freeze({
+  midgameMs: 3000,
+  endgameMs: 4000,
+  solverMs: 3000,
+  solverTable: 300_000,
+});
 
 export function reasonSources() {
   // Catalog data evolve after publishing; identity is frozen separately in the manifest below.
@@ -59,7 +67,7 @@ export function verifyReasonMetadata(reason, champion) {
   assert.equal(reason.manifest.base.version, champion.version);
   assert.deepEqual(reason.gate, champion.gate);
   assert.deepEqual(reason.manifest.search, SEARCH_BOT_V1);
-  assert.deepEqual(reason.budget, SEARCH_BUDGETS.desktop);
+  assert.deepEqual(reason.budget, REASON_V1_BUDGET);
   assert.equal(reason.execution, 'web-desktop-policy-native-onnx-v1');
   assert.equal(reason.manifest.belief.featureVersion, 'belief-v1');
 }
@@ -82,7 +90,7 @@ export async function freezeReason(folder, champion, root = ROOT) {
     modelSHA256: bot.sha256,
     manifest,
     gate: champion.gate,
-    budget: { ...SEARCH_BUDGETS.desktop },
+    budget: { ...REASON_V1_BUDGET },
     execution: 'web-desktop-policy-native-onnx-v1',
     sourceSHA256: reasonSources(),
   };

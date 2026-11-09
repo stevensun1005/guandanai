@@ -13,10 +13,12 @@
  * A table job's budget and hard timeout start when it is posted, so a coach job never eats
  * into them, and table searches never yield or cancel; a coach job past its hard timeout replaces
  * the worker without failing queued table jobs. A worker replacement does drop the table
- * solver's transposition table (exact values unchanged; only worlds right at the node or mobile
- * time limit can be solved differently), and the table job waits for the reload.
+ * solver's transposition table (exact values unchanged; only worlds right at the node limit can
+ * be solved differently), and the table job waits for the reload.
+ *   - a new coach request (the player's next turn) drops queued coach jobs and asks a running
+ *     one to stop: with 50 s budgets an old turn's coach search must not delay the newest turn.
  */
-import { SEARCH_BUDGETS, hardTimeoutMs } from './constants.mjs';
+import { FIRST_LOAD_WAIT_MS, SEARCH_BUDGETS, hardTimeoutMs } from './constants.mjs';
 
 const PREEMPT_MS = 500;
 
@@ -44,6 +46,7 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
   const stats = {
     device,
     budget,
+    firstLoadWaitMs: FIRST_LOAD_WAIT_MS,
     requests: 0,
     searched: 0,
     differs: 0,
@@ -150,7 +153,13 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     // still running after PREEMPT_MS (one long exact-solver call): replace the worker
     preemptTimer = setTimeout(() => abandon(job, 'search-preempted'), PREEMPT_MS);
   }
-  /** Wait at most one budget for the networks; they keep loading in the background. */
+  /** Ask a running coach job to stop at its next check; it then replies 'cancelled'. */
+  function cancelActiveCoach() {
+    if (active?.owner !== 'coach' || active.cancelled) return;
+    active.cancelled = true;
+    worker.postMessage({ type: 'cancel', id: active.id });
+  }
+  /** Wait at most FIRST_LOAD_WAIT_MS for the networks; they keep loading in the background. */
   async function ready(bot) {
     const loading = init(bot);
     loading.catch(() => {});
@@ -158,7 +167,7 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     await Promise.race([
       loading,
       new Promise((_, reject) => {
-        timer = setTimeout(() => reject(Error('search-loading')), budget.midgameMs);
+        timer = setTimeout(() => reject(Error('search-loading')), FIRST_LOAD_WAIT_MS);
       }),
     ]).finally(() => clearTimeout(timer));
   }
@@ -186,8 +195,8 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
       yieldToTable();
       let result;
       try {
-        // A table never waits for a slow first load longer than one search budget: the
-        // networks keep loading in the background and this decision plays the champion.
+        // A table never waits for a slow first load longer than FIRST_LOAD_WAIT_MS (10 s, not
+        // the 50 s search budget): the networks keep loading and this decision plays 017.
         await ready(bot);
         result = await call({ type: 'search', payload }, hardTimeoutMs(budget));
       } catch (error) {
@@ -207,8 +216,10 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     async evaluate(bot, payload) {
       const bucket = stats.coach;
       bucket.requests++;
+      // only the newest turn: drop queued coach jobs and stop a running one
       for (let i = queue.length - 1; i >= 0; i--)
-        if (queue[i].owner === 'coach') queue.splice(i, 1)[0].reject(new Error('search-preempted')); // only the newest turn
+        if (queue[i].owner === 'coach') queue.splice(i, 1)[0].reject(new Error('search-preempted'));
+      cancelActiveCoach();
       let result;
       try {
         await ready(bot);
@@ -226,10 +237,7 @@ export function createSearchClient({ version, device = deviceClass(), spawn } = 
     cancelCoach() {
       for (let i = queue.length - 1; i >= 0; i--)
         if (queue[i].owner === 'coach') queue.splice(i, 1)[0].reject(new Error('search-cancelled'));
-      if (active?.owner === 'coach' && !active.cancelled) {
-        active.cancelled = true;
-        worker.postMessage({ type: 'cancel', id: active.id });
-      }
+      cancelActiveCoach();
     },
   };
 }

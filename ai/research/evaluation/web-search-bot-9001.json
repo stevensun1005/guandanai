@@ -621,5 +621,92 @@
       }
     },
     "limits": "inherits the 017-opponent, single-round, no-tribute validation; usefulness of these numbers as coaching is untested; midgame values vary with the 8 random worlds"
+  },
+  "budget50s20261109": {
+    "date": "2026-11-09",
+    "owner": "真人一个人都可以有60s出牌时间 把模型的单次出牌时间延长至50s",
+    "kind": "deployment setting change; not an acceptance or strength result",
+    "previousBudgets": {
+      "desktop": {
+        "midgameMs": 3000,
+        "endgameMs": 4000,
+        "solverMs": 3000,
+        "solverTable": 300000
+      },
+      "mobile": {
+        "midgameMs": 3500,
+        "endgameMs": 3500,
+        "solverMs": 1000,
+        "solverTable": 100000
+      },
+      "hardTimeoutMs": {
+        "desktop": 10000,
+        "mobile": 7500
+      },
+      "firstLoadWaitMs": "one midgame budget (3000 desktop / 3500 mobile)"
+    },
+    "browserBudgets": {
+      "desktop": {
+        "midgameMs": 50000,
+        "endgameMs": 50000,
+        "solverMs": 3000,
+        "solverTable": 300000
+      },
+      "mobile": {
+        "midgameMs": 50000,
+        "endgameMs": 50000,
+        "solverMs": 3000,
+        "solverTable": 100000
+      },
+      "hardTimeoutMs": 56000,
+      "firstLoadWaitMs": 10000,
+      "humanTurnMs": 60000
+    },
+    "rules": [
+      "both device classes now use the Node per-call solver limit (NODE_SOLVER_MS 3000), so a clock-stopped solver call skips the world as in Node; the shorter-than-Node discard rule stays only for a future shorter budget",
+      "solver table sizes unchanged: within one call the table grows by at most solverMaxNodes (1.5M), so the memory bound does not depend on the time limits",
+      "first-load wait decoupled from the search budget (FIRST_LOAD_WAIT_MS 10000)",
+      "the move coach uses the same budgets; a new coach request asks the previous turn's running coach search to stop (no worker replacement); table searches still preempt the coach and the coach never blocks the human's move",
+      "human timeout autoplay still plays 017 without searching; computer seats are not timed while the host waits for the search after the 0.5-1 s think delay; a joiner's countdown for that seat can reach 0 only if a first load finishes just inside 10 s and the following search then runs to the 56 s hard timeout, and then it only waits for the host's event"
+    ],
+    "guanzeroReasonEvaluation": "protocol clint-champion-reason-v1 keeps its registered 3000/4000 ms desktop budget (ai/guanzero/training/reason.mjs REASON_V1_BUDGET); the running frozen companion checkout is not changed",
+    "identityUnchanged": {
+      "id": "9001",
+      "identitySHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "version": "v000855042-bsearch1-16d76783",
+      "note": "the search manifest has no time budgets; budgets are browser deployment settings"
+    },
+    "checks": {
+      "searchBotSmoke": {
+        "test": "web/tests/search_bot_smoke.py against a local build of this change (desktop class)",
+        "searched": 16,
+        "requests": 16,
+        "differs": 5,
+        "fallbacks": 0,
+        "msP50": 155,
+        "msMax": 4277,
+        "note": "the 4277 ms search exceeds both previous caps and would have fallen back to 017 before"
+      },
+      "coachSearchSmoke": {
+        "test": "web/tests/coach_search_smoke.py (wait bound raised to 70 s)",
+        "coachSearches": 3,
+        "coachCompleted": 3,
+        "coachMs": [
+          361,
+          455,
+          15
+        ],
+        "tableSearches": 11,
+        "tableFallbacks": 0
+      },
+      "machine": "shared research Mac (window-2 workers running, nice -n 10); development checks, not strength results",
+      "node": "npm test 390 tests: 386 pass, 4 skipped, 0 fail (search-bot.test.mjs 15/15 incl. 50 s budgets, 56 s hard timeout < 60 s, 10 s first-load wait, coach supersede; guanzero-reason.test.mjs 9/9 with REASON_V1_BUDGET); format:check and build pass"
+    },
+    "historicalNote": "the parity, Chrome latency and fallback numbers above were measured under the previous 3/4 s (desktop) and 3.5/3.5/1 s (mobile) budgets; completed decisions still equal Node, current fallback rates are not measured",
+    "sourcesChanged": {
+      "web/src/ai/search/constants.mjs": "e12fb02acf99cdb97119d825aa511b58f386372a937210f0db7f8b30f7625fe1",
+      "web/src/ai/search/client.js": "75536a1251c00fdfa2724acaedd980f803f3f086d80108ada18aa41072736214",
+      "ai/guanzero/training/reason.mjs": "10f7eceb0500da5cf24d16879caf674bb43ea230c9aaec908493f328eb4744c1"
+    }
   }
 }

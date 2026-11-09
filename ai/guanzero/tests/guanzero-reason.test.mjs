@@ -10,7 +10,12 @@ import { createHash } from 'node:crypto';
 import { SEARCH_BOT_V1, SEARCH_BUDGETS } from '../../../web/src/ai/search/constants.mjs';
 import { restoreGame } from '../../../web/src/ai/search/payload.mjs';
 import { createRound } from '../../shared/simulation/simulation.mjs';
-import { verifyReasonMetadata, reasonPayload, reasonContext } from '../training/reason.mjs';
+import {
+  REASON_V1_BUDGET,
+  verifyReasonMetadata,
+  reasonPayload,
+  reasonContext,
+} from '../training/reason.mjs';
 import { reasonMatch, reasonProtocolDigest } from '../training/evaluate-reason.mjs';
 import { evaluate } from '../training/evaluate.mjs';
 import { suiteOpponents } from '../training/opponents.mjs';
@@ -45,7 +50,7 @@ function identities() {
     manifest,
     modelSHA256: hash(JSON.stringify(manifest)),
     gate: champion.gate,
-    budget: { ...SEARCH_BUDGETS.desktop },
+    budget: { ...REASON_V1_BUDGET },
     execution: 'web-desktop-policy-native-onnx-v1',
     sourceSHA256: { 'reason-code.mjs': hash('code') },
   };
@@ -71,6 +76,8 @@ test('reason identity binds both networks, desktop budgets and the accepted base
   verifyReasonMetadata(reason, champion);
   for (const change of [
     { budget: SEARCH_BUDGETS.mobile },
+    // the 50 s web budget (2026-11-09) is a deployment change, not protocol v1
+    { budget: SEARCH_BUDGETS.desktop },
     {
       manifest: {
         ...reason.manifest,
@@ -104,7 +111,7 @@ test('opponent policy cannot see other hands; swapping hidden cards preserves it
   );
 });
 test('reason evaluation uses actual desktop deadlines and separate team policies', async () => {
-  const budget = SEARCH_BUDGETS.desktop;
+  const budget = REASON_V1_BUDGET;
   const context = reasonContext({ budget }, 100, 'midgame', () => 101);
   assert.equal(context.deadline, 3100);
   assert.equal(context.solverTimeIsBudget, false);

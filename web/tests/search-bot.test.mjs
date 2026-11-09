@@ -24,6 +24,7 @@ import { candidates } from '../src/ai/candidates.js';
 import { policyState } from '../src/ai/observation.js';
 import { cardIndex } from '../src/ai/encoding.mjs';
 import {
+  FIRST_LOAD_WAIT_MS,
   NODE_SOLVER_MS,
   SEARCH_BOT_V1,
   SEARCH_BUDGETS,
@@ -145,8 +146,13 @@ test('frozen search settings equal the held-out-tested Node bot', () => {
     assert.ok(
       budget.solverMs <= SEARCH.solver.maxMs && budget.solverTable <= SEARCH.solver.maxTable,
     );
-    assert.ok(hardTimeoutMs(budget) < 15000, 'stays under the shared worker timeout');
+    // owner 2026-11-09: 50 s per move; the hard limit stays under the 60 s human turn clock
+    assert.equal(budget.midgameMs, 50_000);
+    assert.equal(budget.endgameMs, 50_000);
+    assert.equal(hardTimeoutMs(budget), 56_000);
+    assert.ok(hardTimeoutMs(budget) < 60_000, 'below the 60 s human turn clock (PLAY_MS)');
   }
+  assert.ok(FIRST_LOAD_WAIT_MS <= 10_000, 'a first load never holds a table for a whole budget');
   assert.equal(searchBand(41), null);
   assert.equal(searchBand(40), 'midgame');
   assert.equal(searchBand(21), 'midgame');
@@ -229,8 +235,9 @@ test('a search that exceeds its budget is discarded as a whole', async () => {
 
 test('a clock-stopped solver call under a shorter-than-Node limit falls back as a whole', async () => {
   assert.equal(NODE_SOLVER_MS, SEARCH.solver.maxMs);
+  // both shipped budgets use the Node per-call limit; the rule below guards a shorter budget
   assert.equal(SEARCH_BUDGETS.desktop.solverMs, NODE_SOLVER_MS);
-  assert.ok(SEARCH_BUDGETS.mobile.solverMs < NODE_SOLVER_MS);
+  assert.equal(SEARCH_BUDGETS.mobile.solverMs, NODE_SOLVER_MS);
   const positions = [];
   for (let seed = 731900700; positions.length < 6 && seed < 731900760; seed++)
     for (const position of bandPositions(seed, 2))
@@ -656,4 +663,56 @@ test('a coach job past its hard timeout is replaced alone; a queued table search
   fresh.reply(fresh.posted[1].id, { ok: true, index: 0, championIndex: 0, ms: 5 });
   assert.equal((await table).ok, true);
   assert.deepEqual(client.stats.fallbacks, {});
+});
+
+test('a slow first load waits FIRST_LOAD_WAIT_MS, not the 50 s search budget', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const flush = () => new Promise((resolve) => setImmediate(resolve));
+  const { workers, spawn } = fakeWorkers();
+  const client = createSearchClient({ version: 't', device: 'desktop', spawn });
+  assert.equal(client.stats.firstLoadWaitMs, FIRST_LOAD_WAIT_MS);
+  let settled = null;
+  const table = client.decide('9001', { p: 1 }).then((r) => (settled = r));
+  await flush();
+  assert.equal(workers[0].posted[0].type, 'init');
+  t.mock.timers.tick(FIRST_LOAD_WAIT_MS - 1);
+  await flush();
+  assert.equal(settled, null);
+  t.mock.timers.tick(1);
+  await table;
+  assert.equal(settled.reason, 'loading');
+  assert.ok(FIRST_LOAD_WAIT_MS < SEARCH_BUDGETS.desktop.midgameMs);
+  // the load continues in the background; the next decision searches
+  workers[0].reply(workers[0].posted[0].id, { ready: true });
+  await flush();
+  const next = client.decide('9001', { p: 1 });
+  await flush();
+  const search = workers[0].posted.at(-1);
+  assert.equal(search.type, 'search');
+  workers[0].reply(search.id, { ok: true, index: 0, championIndex: 0, ms: 5 });
+  assert.equal((await next).ok, true);
+});
+
+test("a new coach request stops the previous turn's running coach search", async () => {
+  const { workers, spawn } = fakeWorkers();
+  const client = createSearchClient({ version: 't', device: 'desktop', spawn });
+  const old = client.evaluate('9001', { p: 0, turn: 'old' });
+  await tick();
+  const [worker] = workers;
+  worker.reply(worker.posted[0].id, { ready: true });
+  await tick();
+  const job = worker.posted.at(-1);
+  assert.equal(job.type, 'coach');
+  const fresh = client.evaluate('9001', { p: 0, turn: 'new' });
+  await tick();
+  assert.deepEqual(worker.posted.at(-1), { type: 'cancel', id: job.id });
+  worker.reply(job.id, { fallback: true, reason: 'cancelled' });
+  assert.equal((await old).reason, 'cancelled');
+  await tick();
+  const next = worker.posted.at(-1);
+  assert.equal(next.type, 'coach');
+  assert.equal(next.payload.turn, 'new');
+  worker.reply(next.id, { ok: true, kind: 'endgame', plays: [], values: [], ms: 3 });
+  assert.equal((await fresh).ok, true);
+  assert.equal(workers.length, 1, 'no worker replacement: the table solver cache is kept');
 });

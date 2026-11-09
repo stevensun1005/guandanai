@@ -116,7 +116,7 @@ node web/tools/search-latency.mjs --belief=<belief.onnx> --url=http://127.0.0.1:
 python web/tests/search_bot_smoke.py http://127.0.0.1:8795/
 ```
 
-`search-bot.test.mjs` 用确定性替身网络（不读暗牌）在固定种子的中盘、尾盘局面上要求浏览器核心与 `midgame-search.mjs` 的选择、搜索根、各世界结果和抽到的世界完全相同；另查：Worker 载荷只含公开信息（打乱暗牌不改变载荷，读取暗牌占位即报错）、超出预算整次作废、200 个合成进贡／还贡／抗贡局面的世界都满足公开记录且矛盾时报 `KnownCardsError`、清单校验、收集身份通过 `validateRecord`、打包后的 Worker 不含 `node:` 导入。`web-parity.mjs` 与 `search-latency.mjs` 需要真实模型，不在 CI；后者用无头 Chrome 的 DevTools 协议直接驱动构建出的 Worker。DevTools CPU 降速不作用于 Worker，手机数字用“手机预算÷4”代理。`search_bot_smoke.py` 打一整局单人局，先确认三席默认即为 `selection.defaultChoice`（9001），检查推断网络 SHA、两个 Worker 都在、搜索次数、无错误面板。房主＋加入者双浏览器下只有房主创建搜索 Worker 尚未单独自动化。当前结果见主报告第 72 节。
+`search-bot.test.mjs` 用确定性替身网络（不读暗牌）在固定种子的中盘、尾盘局面上要求浏览器核心与 `midgame-search.mjs` 的选择、搜索根、各世界结果和抽到的世界完全相同；另查：Worker 载荷只含公开信息（打乱暗牌不改变载荷，读取暗牌占位即报错）、超出预算整次作废、200 个合成进贡／还贡／抗贡局面的世界都满足公开记录且矛盾时报 `KnownCardsError`、清单校验、收集身份通过 `validateRecord`、打包后的 Worker 不含 `node:` 导入；预算项检查每步 50 秒、硬超时 56 秒低于真人 60 秒计时、两档单次求解都等于 Node 的 3 秒、首次加载只等 10 秒（不等满预算），以及新一手的评价请求会请停上一手仍在跑的评价搜索。`web-parity.mjs` 与 `search-latency.mjs` 需要真实模型，不在 CI；后者用无头 Chrome 的 DevTools 协议直接驱动构建出的 Worker。DevTools CPU 降速不作用于 Worker，手机数字用“手机预算÷4”代理。`search_bot_smoke.py` 打一整局单人局，先确认三席默认即为 `selection.defaultChoice`（9001），检查推断网络 SHA、两个 Worker 都在、搜索次数、无错误面板。房主＋加入者双浏览器下只有房主创建搜索 Worker 尚未单独自动化。当前结果见主报告第 72 节。
 
 ## 模型数值与性能
 
@@ -217,7 +217,7 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 
 固定整场 2v2 使用 `node ai/danMCai/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/danMCai/tests/fixed-evaluation.test.mjs` 和 `python ai/danMCai/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/danMCai/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。
 
-出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。2026-11-09 起评价默认用 danMCai-reason：`search-bot.test.mjs` 检查评价搜索值与机器人中盘 `means`／尾盘 PIMC 值逐项相同、尾盘每个世界之间让出一次，以及共享搜索 Worker 的排队（电脑优先、请评价停下、500 毫秒未停换 Worker 并先重载）；`coach.test.mjs` 检查搜索值按牌面合并、未评估出法排在后面且不给分。`python web/tests/coach_search_smoke.py <预览URL>` 打一整局单人局（没进搜索范围时换一副重打，最多三副），核对搜索范围内的 Top 5 来源与状态行、发往搜索 Worker 的评价请求只含本人手牌与公开信息，以及电脑搜索照常完成。它们是功能兼容性测试，不计作棋力样本。
+出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。2026-11-09 起评价默认用 danMCai-reason：`search-bot.test.mjs` 检查评价搜索值与机器人中盘 `means`／尾盘 PIMC 值逐项相同、尾盘每个世界之间让出一次，以及共享搜索 Worker 的排队（电脑优先、请评价停下、500 毫秒未停换 Worker 并先重载）；`coach.test.mjs` 检查搜索值按牌面合并、未评估出法排在后面且不给分。`python web/tests/coach_search_smoke.py <预览URL>` 打一整局单人局（没进搜索范围时换一副重打，最多三副），核对搜索范围内的 Top 5 来源与状态行、发往搜索 Worker 的评价请求只含本人手牌与公开信息，以及电脑搜索照常完成；每手等待评价结果的上限为 70 秒（首次加载 10 秒＋硬超时 56 秒）。它们是功能兼容性测试，不计作棋力样本。
 
 Top 5：`coach_smoke.py` 检查开局开关、最多五种方案、点击只选牌、展示辅助标记与三种尺寸不遮挡按钮。`private_table_smoke.py` 使用真实 PeerJS 验证本机资格、同名加入者不启用、队友明牌推演、规则与网络对手普通输入、关闭恢复，以及构造结算探针的采集排除；不是完成棋力比赛。
 

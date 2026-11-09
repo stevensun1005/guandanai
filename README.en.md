@@ -134,7 +134,7 @@ You can also upload the whole `web/dist` directory produced by `npm run build` t
 
 **Why can’t a friend connect sometimes?** Rooms use WebRTC with public PeerJS signaling, so both networks, NAT and firewalls matter. A page-version mismatch blocks starting the table; refresh both sides to the same build and retry.
 
-**Why does a bot sometimes think for a few seconds?** The default inference-search bot runs a multi-world search in the midgame and endgame, using up to about 3–4 seconds per move on desktop, with a different budget on phones and low-end devices. Past its budget it plays champion 017’s move. See [bot design](./web/docs/BOTS.md).
+**Why does a bot sometimes think for a few seconds?** The default inference-search bot runs a multi-world search in the midgame and endgame. It usually finishes in under a second; the cap is 50 seconds per move on every device (shorter than the 60-second human turn). Past the cap it plays champion 017’s move. See [bot design](./web/docs/BOTS.md).
 
 **Do the bots peek at other hands?** No. Model and search inputs contain only the acting seat’s hand and public information. The host browser holds the full table state, which is separate from what the models receive.
 
