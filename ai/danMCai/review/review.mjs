@@ -1,3 +1,4 @@
+import { setPriority, constants } from 'node:os';
 /**
  * Post-game review of finished rounds (cloud D1 records; trust=unverified_browser).
  *
@@ -533,20 +534,29 @@ async function main() {
       (part, i) =>
         new Promise((done, fail) => {
           const child = spawn(
-            'nice',
+            process.platform === 'win32' ? process.execPath : 'nice',
             [
-              '-n',
-              '10',
-              process.execPath,
+              ...(process.platform === 'win32' ? [] : ['-n', '10', process.execPath]),
               self,
               '--worker',
               `--files=${JSON.stringify(part)}`,
               `--part-out=${join(out, `.part-${i}.json`)}`,
               ...passthrough,
             ],
-            { stdio: 'inherit' },
+            { stdio: 'inherit', windowsHide: true },
           );
           children.push(child);
+          if (process.platform === 'win32' && child.pid) {
+            try {
+              setPriority(child.pid, constants.priority.PRIORITY_BELOW_NORMAL);
+            } catch (error) {
+              if (error.code !== 'ERR_SYSTEM_ERROR' || error.info?.code !== 'ESRCH') {
+                stopAll();
+                fail(error);
+                return;
+              }
+            }
+          }
           child.on('error', fail);
           child.on('exit', (code) =>
             code === 0 ? done() : fail(Error(`review worker ${i} exit ${code}`)),

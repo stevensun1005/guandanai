@@ -1,7 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -283,7 +290,7 @@ test('tribute knowledge covers only cards the seat itself gave or received', () 
 test('command line writes JSON, Markdown and HTML and refuses the data directory', () => {
   const dir = mkdtempSync(join(tmpdir(), 'review-'));
   const raw = join(dir, 'raw');
-  execFileSync('mkdir', [raw]);
+  mkdirSync(raw);
   for (const [i, seed] of [9301001, 9301003].entries())
     writeFileSync(
       join(raw, `round-00000000000${i}.json`),
@@ -293,7 +300,7 @@ test('command line writes JSON, Markdown and HTML and refuses the data directory
   assert.doesNotThrow(() => assertSafeOut(join(dir, 'out'), raw));
   // A symlinked path into the raw directory is still refused.
   const link = join(dir, 'link');
-  symlinkSync(raw, link);
+  symlinkSync(raw, link, process.platform === 'win32' ? 'junction' : 'dir');
   assert.throws(() => assertSafeOut(join(link, 'review'), raw));
   assert.throws(() => assertSafeOut(join(dir, 'x', 'ai', 'shared', 'data', 'y')));
   const script = fileURLToPath(new URL('../review/review.mjs', import.meta.url));

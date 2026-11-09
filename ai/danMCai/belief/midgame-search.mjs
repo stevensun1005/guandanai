@@ -593,7 +593,7 @@ export function sourceClosure(entry = SELF) {
   visit(entry);
   return Object.fromEntries(
     [...seen]
-      .map(([file, hash]) => [relative(REPO, file), hash])
+      .map(([file, hash]) => [relative(REPO, file).replaceAll('\\', '/'), hash])
       .sort(([a], [b]) => (a < b ? -1 : 1)),
   );
 }

@@ -46,3 +46,5 @@ node ai/danMCai/review/report.mjs --in=ai/danMCai/workspace/review/review.json
 - 记录来自浏览器上传，未做身份验证；`assisted`（出牌前看过数字预评）和非本人操作（电脑、超时托管）在每手上标出，但仍计入该座位的统计。
 - 复盘不改变任何机器人、训练、门控或网页默认模型，也不是棋力验收；建议能否帮助本人在未辅助对局中少丢分需另行验证。
 - 测试：`node --test ai/danMCai/tests/review.test.mjs`（用 `collectedRound` 固定牌局，与独立的 `solveEndgame` 核对最优集合和丢分，核对主变合法且结束于报告的值，以及座位选择）。
+
+Windows工作器直接使用Node并设为BelowNormal优先级、隐藏进程窗口；POSIX继续使用`nice -n 10`。目录与软链接安全边界在两种平台均作回归验证。

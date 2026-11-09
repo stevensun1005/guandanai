@@ -81,3 +81,5 @@ node ai/danMCai/belief/metrics.mjs --belief=<模型目录>/belief.onnx --seeds=<
 ## 中盘搜索开发检查（P2）
 
 `midgame-search.mjs`：中盘（默认 21–40 张）一步模拟搜索，候选为冠军前 6 名（可过牌时加过牌），每个候选在 8 个世界里由冠军打到底；只有某候选比冠军出法多赢至少 2 个世界且平均更高时才偏离冠军。`--worlds-source=uniform` 与均匀抽样完全一致，`--worlds-source=belief --belief=<onnx>` 改用推断网络抽样；隐藏手牌在搜索中被屏蔽，真实发牌从不参与决策。`--compare=<A>,<B>` 给出同一批牌的配对差和牌副簇 95% 区间。这是开发工具，正式结论需另行预登记。
+
+源码闭包指纹的键统一使用仓库相对路径和正斜杠，Windows与POSIX保持同一字段格式；已冻结实验仍使用原记录与原源码。
