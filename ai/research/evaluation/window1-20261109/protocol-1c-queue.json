@@ -1,0 +1,32 @@
+{
+  "schema": "danmcai-window1c-queue-v1",
+  "registeredAt": "2026-11-09",
+  "authorization": "Owner 2026-11-09 ~06:45 Toronto: when one stage finishes start the next immediately and keep the computer busy (within window 1, deadline 10:45 Toronto = 15:45Z).",
+  "status": "Development checks only (hand-inference track); no acceptance claim; results feed the next window's preregistration.",
+  "stages": [
+    {
+      "id": "H-v2-generate",
+      "what": "generate.mjs on the rest of the audited spare training block, seeds 4,255,161,000-4,255,220,999 (60,000 rounds), band 21-80, every 1, champion greedy",
+      "workers": "2 while H3 runs, as available"
+    },
+    {
+      "id": "H-band41",
+      "what": "midgame-search.mjs band 41-60 cards (otherwise identical settings), belief v1 (16d76783...) vs uniform on the same 800 dev pairs 3,838,185,000-3,838,185,799; paired difference",
+      "after": "H3 finishes"
+    },
+    {
+      "id": "H-v2-train",
+      "what": "train.py on v1 data + v2 data (100,000 rounds), --hidden=1024 --max-steps=40000 --batch=1024 --lr=3e-4 --dropout=0.3 --input-dropout=0.1 --weight-decay=1e-2 --augment-suits=1 --seed=20261110, final step only",
+      "after": "H-v2-generate"
+    },
+    {
+      "id": "H-v2-P1",
+      "what": "metrics.mjs on the same dev seeds as v1 P1 (3,838,180,000-180,999) for a like-for-like comparison"
+    },
+    {
+      "id": "H-v2-P2",
+      "what": "midgame-search.mjs band 21-40, belief v2 vs belief v1 on the same 1,200 dev pairs 3,838,183,000-3,838,184,199; paired difference"
+    }
+  ],
+  "stop": "STOP file or 15:45Z stops every stage; unfinished stages are reported as not run."
+}
