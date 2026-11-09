@@ -150,5 +150,48 @@
     "updatedAt": 1794262718.3048372,
     "error": null,
     "pauseSampling": false
-  }
+  },
+  "environment": {
+    "node": "v26.13.0",
+    "onnxruntime": {
+      "common": "1.31.1",
+      "node": "1.31.1"
+    },
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13600KF",
+    "threadsPerOnnxSession": 1
+  },
+  "ci": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42710904256",
+    "commit": "cd692fc20f82d8b60418be73563122ac4d5ab20f",
+    "successfulAttempt": 2,
+    "firstAttempt": "Build and browser checks passed; Pages deployment-status timeout; retried only failed deployment."
+  },
+  "liveMenuRegression": {
+    "menu": [
+      [
+        "clint-rule",
+        "Clint规则机器人"
+      ],
+      [
+        "026",
+        "guanzero-adp-io48-385979"
+      ],
+      [
+        "017",
+        "danMCai-v000855042"
+      ],
+      [
+        "9001",
+        "danMCai-reason-v000855042"
+      ]
+    ],
+    "defaults": [
+      "9001",
+      "9001",
+      "9001",
+      "9001"
+    ]
+  },
+  "finalVerifiedAt": "2026-11-09T22:39:18.118984+00:00"
 }
