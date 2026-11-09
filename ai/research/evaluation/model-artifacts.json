@@ -5154,5 +5154,19 @@
       "computeDeadlineUTC": "2026-11-11T16:45:00.000Z",
       "webChampionHold": "017"
     }
+  ],
+  "guanzeroDevelopmentProtocols": [
+    {
+      "file": "ai/research/evaluation/guanzero-reason-integration-20261109.json",
+      "classification": "engineering-integration-not-strength-acceptance",
+      "effectiveFrom": "2026-11-09T20:00:00-05:00",
+      "opponents": [
+        "clint",
+        "champion",
+        "reason"
+      ],
+      "matchesPerOpponent": 500,
+      "runtimeCommit": "ce55b7458e7a67f9cce11887d54b1cda4e7cde04"
+    }
   ]
 }

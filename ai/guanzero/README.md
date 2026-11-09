@@ -121,3 +121,5 @@ node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/gu
 `reason/report.json`保存完整500场、250交换阵营簇、模型/对手/源码/协议指纹及搜索次数、实际偏离冠军次数、各类回退和耗时。回退次数必须报告，异常不得静默伪装成正常reason比赛。旧独立证据仅覆盖对冠军、无进贡的单局；新完整打A含进贡评测是新的开发证据，不能借用旧+0.237当作预期成绩。
 
 发布器对新批次强制三份完整报告全通过，再发布同一suite/model.onnx，无最低胜率门槛。网页菜单与默认按最新WEB_MODELS维护，当前四项、默认reason，开发评测数量不是网页菜单数量。实现、发布策略及本机接入检查保存在研究报告与工程验证记录。
+
+本机三组评测源码冻结于 `guanzero-reason-eval-runtime` 的ce55b74；8770只读面板使用 `dashboard-launcher.dashboardSourceRoot` 指向的独立 `guanzero-reason-dashboard-runtime`（28b1317）。面板升级仅换面板检出/进程，不能向评测或训练冻结检出拉代码。

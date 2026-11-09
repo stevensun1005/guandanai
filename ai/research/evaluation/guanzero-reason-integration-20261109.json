@@ -1,7 +1,7 @@
 {
   "kind": "engineering-integration-not-strength-acceptance",
   "observedAt": "2026-11-09T22:11:04.466006+00:00",
-  "status": "validated-awaiting-frozen-runtime-install",
+  "status": "installed-for-next-normal-slot",
   "ownerRequest": "Add danMCai-reason; from now three opponents, start with normal scheduled batches.",
   "effectiveSlot": "2026-11-09T20:00:00-05:00",
   "timezone": "America/Toronto",
@@ -22,33 +22,33 @@
     "complete": true,
     "metrics": {
       "matches": 2,
-      "wins": 1,
+      "wins": 0,
       "losses": 1,
-      "draws": 0,
-      "matchWinRate": 0.5,
-      "matchScore": 0.5,
-      "rounds": 23,
-      "roundWins": 13,
-      "roundWinRate": 0.5652173913043478,
-      "averageUpgradePoints": 0.30434782608695654,
+      "draws": 1,
+      "matchWinRate": 0,
+      "matchScore": 0.25,
+      "rounds": 30,
+      "roundWins": 14,
+      "roundWinRate": 0.4666666666666667,
+      "averageUpgradePoints": -0.16666666666666666,
       "confidence95": null
     },
     "stats": {
-      "decisions": 889,
-      "forced": 312,
-      "baseOnly": 413,
-      "midgame": 110,
-      "endgame": 54,
+      "decisions": 1143,
+      "forced": 367,
+      "baseOnly": 569,
+      "midgame": 149,
+      "endgame": 58,
       "minWorldsFallback": 0,
-      "budgetFallback": 3,
+      "budgetFallback": 2,
       "knownCardsFallback": 0,
-      "changedFromChampion": 23,
-      "inferences": 45936,
-      "searchMs": 68953.58789999997
+      "changedFromChampion": 38,
+      "inferences": 59682,
+      "searchMs": 47626.14039999999
     },
-    "modelSHA256": "7e028d35f86cbdd425fefbc39ec78fa499194c1ac061dff8b43f498e34f7bbac",
+    "modelSHA256": "17198cb1a511a2b52e72d5222def4567dfe29e6f081429c687b3cbf29eb27b7a",
     "reasonSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
-    "policySHA256": "040225da8f3f5186facc95269b988263f8c506d5f3532e135168b62a756f8440"
+    "policySHA256": "7fca53b40e3d31fe6b8d8a732aad5cf1e3a2c9445d5c5159cfb22c7ba2d43d67"
   },
   "smokeClassification": "Two complete engineering matches on fixture seed101 with swapped teams; not a 500-match development result.",
   "tests": {
@@ -72,5 +72,83 @@
     "window": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6"
   },
   "baselineCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
-  "frozenRuntime": null
+  "frozenRuntime": {
+    "sourceRoot": "C:\\guandan-sampler\\work\\guanzero-reason-eval-runtime",
+    "commit": "ce55b7458e7a67f9cce11887d54b1cda4e7cde04",
+    "baselineRoot": "C:/guandan-sampler/work/guanzero-io48-runtime",
+    "baselineCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "opponentPanel": "clint-champion-reason-v1",
+    "effectiveFrom": "2026-11-09T20:00:00-05:00",
+    "opponents": [
+      "clint",
+      "champion",
+      "reason"
+    ],
+    "matchesPerOpponent": 500
+  },
+  "installedAt": "2026-11-09T22:18:38.344598+00:00",
+  "dashboard": {
+    "url": "http://127.0.0.1:8770",
+    "sourceRoot": "C:/guandan-sampler/work/guanzero-reason-dashboard-runtime",
+    "commit": "28b1317eb69382783e9998d862e2684aa1e04740",
+    "browser": {
+      "title": "GuanZero 本地训练与三对手开发评测",
+      "hasLearner": true,
+      "hasCurrent": true,
+      "hasEastern": true,
+      "hasProgress": true,
+      "hasHistory": true,
+      "errors": []
+    }
+  },
+  "registrationPreview": {
+    "classification": "engineering-registration-only-no-matches",
+    "opponents": [
+      "clint",
+      "champion",
+      "reason"
+    ],
+    "commit": "ce55b7458e7a67f9cce11887d54b1cda4e7cde04",
+    "reasonSHA": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+    "policySHA": "7fca53b40e3d31fe6b8d8a732aad5cf1e3a2c9445d5c5159cfb22c7ba2d43d67"
+  },
+  "menuRegression": {
+    "menu": [
+      [
+        "clint-rule",
+        "Clint规则机器人"
+      ],
+      [
+        "026",
+        "guanzero-adp-io48-385979"
+      ],
+      [
+        "017",
+        "danMCai-v000855042"
+      ],
+      [
+        "9001",
+        "danMCai-reason-v000855042"
+      ]
+    ],
+    "defaults": [
+      "9001",
+      "9001",
+      "9001",
+      "9001"
+    ]
+  },
+  "automation": {
+    "id": "guanzero-8",
+    "rule": "RRULE:FREQ=DAILY;BYHOUR=8,20;BYMINUTE=0;BYSECOND=0",
+    "threeOpponentPromptVerified": true,
+    "nextSlot": "2026-11-09T20:00:00-05:00"
+  },
+  "learnerAtInstall": {
+    "step": 417797,
+    "usedSamples": 1336950400,
+    "updatedAt": 1794262718.3048372,
+    "error": null,
+    "pauseSampling": false
+  }
 }
