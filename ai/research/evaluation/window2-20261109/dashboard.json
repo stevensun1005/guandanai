@@ -41,7 +41,7 @@
       "queue": "window2.sh",
       "after": "随时补满空闲核心",
       "paths": {
-        "out": "../window1-20261109/D/data",
+        "out": "../window1-20261109/D/data2",
         "log": "logs/BF-distill.log"
       },
       "total": null,
