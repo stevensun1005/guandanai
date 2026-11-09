@@ -132,5 +132,48 @@
       ]
     }
   },
-  "ownerRequestedSupplement": "Toronto 2026-11-08 night, frozen 22:14; not a retroactive 20:00 model"
+  "ownerRequestedSupplement": "Toronto 2026-11-08 night, frozen 22:14; not a retroactive 20:00 model",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42558011829",
+    "commit": "742583067ea7c730439b6dc8949031f362347ea1",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-025.onnx",
+    "publicSHA256": "aa1bfd7fe972739ae6ea3c0f321379dd36360f1ab274765a0e42df8568b877b5",
+    "bytes": 6346014,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "025",
+          "guanzero-adp-io48-352359"
+        ],
+        [
+          "024",
+          "guanzero-adp-io48-310956"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    },
+    "verifiedAt": "2026-11-09T03:50:46.348721+00:00"
+  }
 }

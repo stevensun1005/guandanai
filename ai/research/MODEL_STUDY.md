@@ -2713,3 +2713,5 @@ self下界为**0.4989317663**，低于0.5；不能四舍五入成0.50后宣称�
 逐场胜负、种子、阵营、协议SHA及源码指纹重新核对通过，训练config/window完整SHA未改。上代310956的对应胜率为62.8%与24.4%；这里使用新开发牌副，两代区间重叠，不能据此确认对冠军的稳定提升。这些仍是开发结果，不是独立棋力验收。
 
 [Clint逐场报告](evaluation/guanzero-352359-development-500-clint.json)／[冠军逐场报告](evaluation/guanzero-352359-development-500-champion.json)保留完整历史、双方指纹与2000次配对簇bootstrap区间。网页归档025只使用本批 `model.onnx`，公网Release下载SHA已核对；Pages状态和真实浏览器菜单结果以[发布记录](evaluation/web-model-025.json)为准。浏览器WASM验证16局面／49个数值，最大误差4.76837158203125e-7、动作差异0；兼容性不代表棋力验收。
+
+部署确认：GitHub Pages [42558011829](https://github.com/stevensun1005/guandanai/actions/runs/42558011829)成功；公网 `models/bot-025.onnx` 的完整SHA与本批计划、两份报告一致。真实Chrome菜单显示GuanZero最近两代352359／310956、Clint、P0与两代danMCai冠军，四席默认均017。部署证据已附于网页归档025记录。
