@@ -33,7 +33,7 @@ Mac 收尾后的独立整局比较与 Windows 返回包见 [Windows 交接](../r
 
 根目录常用命令仍为 `npm run train:status`、`npm run train:dashboard`。正在运行的 `gpu-main` 继续使用原冻结运行环境，先读[迁移说明](../research/STRUCTURE_MIGRATION.md)，不要用新布局源码直接覆盖旧运行。
 
-网页中的产品名称为 danMCai，显示真实版本，如 `danMCai-v000855042`。网页默认取本路线实际门控冠军，不能按 `models/latest.json` 的最大步数代替；最新两次晋升、accept 门控和完整 SHA 都需核对。[菜单与发布](../../web/docs/WEB_MODELS.md)。真人数据的采集与预处理独立于本训练，未经实验不改动正在运行的缓冲区或对手池。
+网页中的产品名称为 danMCai，显示真实版本，如 `danMCai-v000855042`。菜单最后另有带推理的研究机器人 `danMCai-reason-v000855042`（编号 9001，原名 `danMCai-v000855042+推理搜索`）：017 权重＋[推断网络 v1](belief/README.md#网页研究机器人9001浏览器移植)上的搜索，不是新训练的冠军；2026-11-09 起按所有者指示为网页新玩家与出牌评价的默认（部署决定，不是验收），菜单只剩 Clint、最新 GuanZero、现任冠军与它四项。清单 `defaultId`、进还贡和评价的冠军值取本路线实际门控冠军，不能按 `models/latest.json` 的最大步数代替；最新两次晋升、accept 门控和完整 SHA 都需核对。[菜单与发布](../../web/docs/WEB_MODELS.md)。真人数据的采集与预处理独立于本训练，未经实验不改动正在运行的缓冲区或对手池。
 
 Fixed 2v2 evaluation: `evaluation/evaluate-fixed.mjs --protocol=<JSON> --run=<ignored run>` binds both teammates to one checkpoint, swaps teams per seed and writes resumable full-match records. `evaluation/summarize_independent.py` reports paired-seed uncertainty; current protocols are indexed in the [research report](../research/MODEL_STUDY.md).
 

@@ -1,6 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { VERSION } from '../network/protocol.js';
-import { botModel, botModelId, CLINT_RULE_ID } from '../ai/model-catalog.mjs';
+import { botIdentity } from '../ai/model-catalog.mjs';
 import { captureDeal, captureStart, captureAction, completedRecord } from './record.mjs';
 import { indexedStore, UploadQueue } from './outbox.mjs';
 import config from './config.json' with { type: 'json' };
@@ -20,12 +20,9 @@ function context() {
     rules: runtime.rules,
     direction: runtime.direction,
     excluded: privateWasUsed(runtime.game),
-    models: [0, 1, 2, 3].map((p) => {
-      const id = botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
-      if (id === CLINT_RULE_ID) return { id, sha256: null, version: 'rules-v2' };
-      const model = botModel(id);
-      return { id, sha256: model.sha256, version: model.source?.version || id };
-    }),
+    models: [0, 1, 2, 3].map((p) =>
+      botIdentity(runtime.botModels?.[(p + runtime.network.off) % 4]),
+    ),
   };
   value.session = matchIdentity(runtime.game, value, runtime.pendingContinuation);
   if (value.session) runtime.pendingContinuation = null;

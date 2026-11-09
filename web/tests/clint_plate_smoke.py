@@ -9,8 +9,10 @@ URL = (sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:8784/').rstrip('/
 OUT = ROOT / 'web/artifacts/validation/clint-sync-20261108-1635'
 OUT.mkdir(parents=True, exist_ok=True)
 catalog = json.loads((ROOT / 'web/src/ai/model-catalog.json').read_bytes())
-guanzero = [m['id'] for m in catalog['models'] if m.get('config', {}).get('history') == 'guanzero-v1'][-2:][::-1]
-expected_menu = ['clint-rule', *guanzero, '001', *catalog['selection']['danMCaiChampions']]
+guanzero = [m['id'] for m in catalog['models'] if m.get('config', {}).get('history') == 'guanzero-v1'][-1:]
+champion = catalog['selection']['danMCaiChampions'][0]
+# four-entry menu since 2026-11-09: Clint, newest GuanZero, current champion, danMCai-reason
+expected_menu = ['clint-rule', *guanzero, champion, *[b['id'] for b in catalog.get('searchBots', []) if b['base'] == champion][-1:]]
 SETUP = """()=>{G.tok++;resetGame();G.round=1;Object.assign(G,{phase:'play',turn:0,L:2,paused:true,pausedBy:0,fixed:[],myOrder:[],reveal:0,gives:[],trib:[],seen:[],log:[],pw:[],out:[],clock:{who:2,left:60000,total:60000}});G.hands=Array.from({length:4},(_,p)=>makeDeck().slice(p*27,p*27+27));G.deck=[];hideOverlay();render();}"""
 
 with sync_playwright() as p:

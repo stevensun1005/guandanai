@@ -19,6 +19,7 @@ Windows 回迁准备保留在主报告第 42 节及 [原始机器证据](evaluat
 | 文档                                                         | 用途                                                                   |
 | ------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | [MODEL_STUDY.md](MODEL_STUDY.md)                             | 架构、训练方法、实际正负结果及统计限制的主报告                         |
+| [PROGRESS_LOG.md](PROGRESS_LOG.md)                           | 2026-11-09 自根 README 原文移出的研究进展、训练窗口与同步记录（历史）  |
 | [CODEX_HANDOFF.md](CODEX_HANDOFF.md)                         | 当前状态、硬性约束与后续任务顺序                                       |
 | [CONTINUOUS_TRAINING.md](CONTINUOUS_TRAINING.md)             | danMCai 持续训练、查看、停止与资源预算                                 |
 | [IMPROVEMENT_PROPOSAL.md](IMPROVEMENT_PROPOSAL.md)           | 待验证的改进假设                                                       |

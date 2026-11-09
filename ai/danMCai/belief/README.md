@@ -91,3 +91,16 @@ node ai/danMCai/belief/metrics.mjs --belief=<模型目录>/belief.onnx --seeds=<
 ## 蒸馏学习器（开发）
 
 `distill-learner.py` 在冻结冠军之上训练初值为零的修正量，目标是复现推断世界搜索的选择（仅在搜索偏离冠军处推开，其余保持冠军），只导出最终一步、融合 ONNX 与冠军接口一致。第二窗口开发检查发现：以 8 个世界的搜索最大者为目标、只用冠军的 567 维输入时，验证集上只能复现约 7% 的偏离（接近机会水平），见主报告第 71.1 节。
+
+## 网页研究机器人（9001，浏览器移植）
+
+2026-11-09 所有者要求把推断世界搜索放进游戏。网页菜单最后一项 `danMCai-reason-v000855042`（原名 `danMCai-v000855042+推理搜索`）使用本目录的推断网络 v1（`16d76783…`）和 `midgame-search.mjs --worlds-source=belief --endgame=pimc --endgame-hi=20 --endgame-worlds=belief` 的同一规则。本目录的研究源码保持字节不变：浏览器代码在 `web/src/ai/search/`（`core.mjs` 是 `searchDecision`／`endgameDecision` 的副本，加了时间预算），只复用 `sampleBeliefWorlds`、`publicView`、`featuresFor` 与求解器。
+
+- `web/tests/search-bot.test.mjs`（`npm test`，无需模型）：用确定性替身网络，在固定种子的中盘与尾盘局面上要求浏览器核心与本目录 Node 函数的选择、根节点、各世界结果和世界完全相同。
+- `web-parity.mjs`（本地，需要模型）：冠军自博弈的开发种子局面上比较 Node 研究机器人、浏览器核心＋onnxruntime-node、浏览器核心＋onnxruntime-web WASM，以及按电脑预算运行的回落率和耗时；结果写入 `ai/research/evaluation/web-search-bot-parity.json`。
+
+```bash
+node ai/danMCai/belief/web-parity.mjs --belief=<belief.onnx> --rounds=100 --per-band=2 --out=ai/research/evaluation/web-search-bot-parity.json
+```
+
+2026-11-09 所有者指示把它设为网页新玩家默认（清单 `selection.defaultChoice`；冠军 017 仍可选并供进还贡），随后又要求出牌评价也默认用它：评价在牌桌剩 40 张以内显示同一搜索的值（`web/src/ai/search/coach.mjs`）。这是部署，不是验收：棋力证据仍只有冠军对手、单局、不进贡的 H3／H4 留出结果。详见 [BOTS.md](../../../web/docs/BOTS.md#研究机器人推理搜索9001) 与主报告第 72 节。

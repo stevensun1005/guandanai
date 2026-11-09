@@ -13,6 +13,7 @@ import { practiceRoundStart } from '../replay/session.js';
 import { renderClocks } from '../ui/clocks.js';
 import { render } from '../ui/table.js';
 import { collectStarted } from '../collection/client.js';
+import { TableBot } from '../ai/controller.js';
 
 let TRIB_SHOW_MS;
 export let active;
@@ -172,6 +173,8 @@ export function startTurn() {
     think: isHost() ? think : undefined,
   };
   renderClocks();
+  // only the deciding device searches; a research-bot search overlaps the think delay
+  if (isHost()) TableBot?.prefetch(p);
 }
 
 export function initialize() {

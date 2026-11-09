@@ -33,7 +33,7 @@ npm run dev
 - 同源的房间连接库。
 - `.nojekyll`，让静态资源按原目录发布。
 
-模型计算在负责电脑的浏览器里运行，网页不依赖 Python 推理服务。只加入朋友房间的浏览器不会预先下载模型。构建读取 `web/src/ai/model-catalog.json` 和历史 `models.mjs` 元数据，下载并校验已注册模型的完整 SHA；菜单只显示当前允许的六项，权重在实际决策时按需加载。`ai/danMCai/models/experiments/` 研究检查点和训练用 Critic 不进入网页包。Python 的模型导出、训练和批量评估工具属于开发流程。
+模型计算在负责电脑的浏览器里运行，网页不依赖 Python 推理服务。只加入朋友房间的浏览器不会预先下载模型。构建读取 `web/src/ai/model-catalog.json` 和历史 `models.mjs` 元数据，下载并校验已注册模型的完整 SHA；菜单只显示四项：Clint、最新一代 GuanZero、danMCai 现任冠军与研究机器人 danMCai-reason-v000855042（9001，2026-11-09 起为新玩家与出牌评价的默认），其余权重只作归档，权重在实际决策时按需加载。研究机器人的推断网络 `belief-v1-16d76783.onnx` 同样来自固定 Release（`web-belief-v1-16d76783`），构建按清单 SHA 校验后放进 `models/`，并打包 `assets/search-worker.mjs`。**这个 Release 必须先存在**，否则 Pages 构建在下载推断网络时失败：用 `node ai/publishing/publish-belief-asset.mjs --bot=9001 --file=<belief.onnx>` 准备（核对 SHA 与大小、写入构建缓存），再加 `--publish` 创建 tag（已有 tag 不覆盖）并核对公网文件 SHA。自 1.18.0 起，应用版本也包含 `web/src` 以外被打包的模块，此后每次构建的版本号都会因此与旧算法不同。`ai/danMCai/models/experiments/` 研究检查点和训练用 Critic 不进入网页包。Python 的模型导出、训练和批量评估工具属于开发流程。
 
 ## 独立牌谱接收服务
 
@@ -59,7 +59,7 @@ Pages 继续静态托管，AI 继续在房主浏览器计算。真人联机结�
 
 ## 评价与采集协议
 
-出牌评价仍是浏览器 WASM，无需云端评分接口或管理密钥。发布此版本前先部署兼容可选 `actions[].assisted` 的接收 Worker，再发布 Pages，避免新记录被旧白名单拒绝；旧 `schema=1` 记录仍有效。失败上传继续留在待上传队列，不能丢弃。CI 增加 `coach_smoke.py --solo-only`；真实联机许可与重连另用完整脚本实测。冠军来源保持现有清单和发布政策。[评价指南](MOVE_COACH.md)。
+出牌评价仍是浏览器 WASM，无需云端评分接口或管理密钥。发布此版本前先部署兼容可选 `actions[].assisted` 的接收 Worker，再发布 Pages，避免新记录被旧白名单拒绝；旧 `schema=1` 记录仍有效。失败上传继续留在待上传队列，不能丢弃。CI 增加 `coach_smoke.py --solo-only`；真实联机许可与重连另用完整脚本实测。冠军来源保持现有清单和发布政策；2026-11-09 起评价在搜索范围内用 danMCai-reason 的搜索值，搜索网络与电脑共用同一份 `belief-v1-16d76783.onnx` 和 `search-worker.mjs`，不新增部署文件。[评价指南](MOVE_COACH.md)。
 
 ## 进还贡阶段模型
 

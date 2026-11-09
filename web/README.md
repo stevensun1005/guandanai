@@ -6,24 +6,24 @@
 
 浏览器游戏、界面、房间联机和浏览器模型推理都从这里找。
 
-| 找什么                         | 位置                                                                                           |
-| ------------------------------ | ---------------------------------------------------------------------------------------------- |
-| 页面与启动流程                 | [src/index.html](src/index.html)、[src/app.js](src/app.js)、[src/app](src/app)                 |
-| 牌规、牌型、比赛结算           | [src/core](src/core)                                                                           |
-| 发牌、回合、进还贡             | [src/game](src/game)                                                                           |
-| 手牌排列、选择、理牌           | [src/hand](src/hand)                                                                           |
-| UI、动画、音效、样式           | [src/ui](src/ui)、[src/effects](src/effects)、[src/audio](src/audio)、[src/styles](src/styles) |
-| 房间、重连、语音               | [src/network](src/network)、[src/lobby](src/lobby)                                             |
-| 联机牌谱、断网补传、云端数据库 | [src/collection](src/collection)、[collector](collector/README.md)                             |
-| 模型选择、Worker 与浏览器推理  | [src/ai](src/ai)                                                                               |
-| 冠军出牌评价、个人开关与相对分 | [src/coach](src/coach)、[使用说明](docs/MOVE_COACH.md)                                         |
-| 独立纯规则对手及版本边界       | [src/rule-bot](src/rule-bot/README.md)                                                         |
-| 当前上线模型与默认值           | [src/ai/model-catalog.json](src/ai/model-catalog.json)                                         |
-| 构建、预览、打包               | [tools](tools)                                                                                 |
-| 网页测试                       | [tests](tests)                                                                                 |
-| 操作与部署文档                 | [docs](docs)                                                                                   |
+| 找什么                                       | 位置                                                                                           |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 页面与启动流程                               | [src/index.html](src/index.html)、[src/app.js](src/app.js)、[src/app](src/app)                 |
+| 牌规、牌型、比赛结算                         | [src/core](src/core)                                                                           |
+| 发牌、回合、进还贡                           | [src/game](src/game)                                                                           |
+| 手牌排列、选择、理牌                         | [src/hand](src/hand)                                                                           |
+| UI、动画、音效、样式                         | [src/ui](src/ui)、[src/effects](src/effects)、[src/audio](src/audio)、[src/styles](src/styles) |
+| 房间、重连、语音                             | [src/network](src/network)、[src/lobby](src/lobby)                                             |
+| 联机牌谱、断网补传、云端数据库               | [src/collection](src/collection)、[collector](collector/README.md)                             |
+| 模型选择、Worker 与浏览器推理                | [src/ai](src/ai)                                                                               |
+| 出牌评价（默认推理搜索值）、个人开关与相对分 | [src/coach](src/coach)、[使用说明](docs/MOVE_COACH.md)                                         |
+| 独立纯规则对手及版本边界                     | [src/rule-bot](src/rule-bot/README.md)                                                         |
+| 当前上线模型与默认值                         | [src/ai/model-catalog.json](src/ai/model-catalog.json)                                         |
+| 构建、预览、打包                             | [tools](tools)                                                                                 |
+| 网页测试                                     | [tests](tests)                                                                                 |
+| 操作与部署文档                               | [docs](docs)                                                                                   |
 
-当前电脑菜单包含 Clint、GuanZero 最近两代、danMCai 初始版与两代danMCai 冠军。GuanZero 使用 `训练任务名-版本数值`，默认仍由danMCai 现任冠军决定；完整顺序与发布规则见 [电脑选择](docs/WEB_MODELS.md)。Clint 不加载 ONNX；网络模型在实际决策时由房主浏览器按需加载。
+当前电脑菜单只有四项：Clint、最新一代 GuanZero、danMCai 现任冠军（danMCai-v000855042）和带推理的研究机器人 `danMCai-reason-v000855042`（9001，017＋推断网络搜索，在独立 `search-worker` 中运行，超时回落 017，见 [BOTS](docs/BOTS.md#研究机器人推理搜索9001)）。2026-11-09 起按所有者指示新玩家默认 9001，出牌评价也默认用它的搜索值（只在无进贡单局对冠军 017 验证过，对真人和进贡局未测）；017 仍可选，进还贡仍用 017。初始版、上一任冠军和旧 GuanZero 只保留归档。GuanZero 使用 `训练任务名-版本数值`；完整顺序与发布规则见 [电脑选择](docs/WEB_MODELS.md)。Clint 不加载 ONNX；网络模型在实际决策时由房主浏览器按需加载。
 
 在项目根目录运行：
 

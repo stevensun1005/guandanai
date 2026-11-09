@@ -1,6 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { PLAY_MS, PREP_MS, RET_MS, TRIB_MS, HURRY_MS } from '../game/clock.js';
-import { botModelName } from '../ai/model-catalog.mjs';
+import { DEFAULT_BOT_MODEL, botModelName } from '../ai/model-catalog.mjs';
 import { rulesPages, ruleCards } from './rules-book.mjs';
 import { $ } from './cards.js';
 let at = { section: 0, tab: 0 };
@@ -14,7 +14,9 @@ function renderBook() {
   const timing = runtime.reviewMode
     ? '明牌练习按步骤推进，没有玩家倒计时。'
     : `进贡 ${TRIB_MS / 1000} 秒，理牌 ${PREP_MS / 1000} 秒，还贡 ${RET_MS / 1000} 秒，每手出牌 ${PLAY_MS / 1000} 秒；最后 ${HURRY_MS / 1000} 秒提醒。`;
-  const models = [...new Set(runtime.botModels || ['017'])].map(botModelName).join('、');
+  const models = [...new Set(runtime.botModels || [DEFAULT_BOT_MODEL])]
+    .map(botModelName)
+    .join('、');
   const pages = rulesPages(runtime.rules, models, timing);
   pages[3].tabs.push({
     label: '更多操作',

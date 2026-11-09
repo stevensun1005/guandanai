@@ -18,7 +18,7 @@
 
 另一台电脑若仍在训练，先保留当前冻结源码检出，再升级目录；不要在运行中把新路径代码直接覆盖进去。[具体迁移步骤](../research/STRUCTURE_MIGRATION.md)。
 
-网页名称统一使用 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。网页只保留最近两代 GuanZero，默认仍为danMCai 门控冠军；[当前菜单](../../web/docs/WEB_MODELS.md) 为唯一版本入口。GuanZero 的训练量与开发结果不能直接等同原论文或独立验收成绩。
+网页名称统一使用 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。网页菜单 2026-11-09 起只保留最新一代 GuanZero（新代替换旧代，旧代归档），默认为 danMCai-reason（现任冠军加推断搜索）；[当前菜单](../../web/docs/WEB_MODELS.md) 为唯一版本入口。GuanZero 的训练量与开发结果不能直接等同原论文或独立验收成绩。
 
 ## 后续训练方案（待验证）
 

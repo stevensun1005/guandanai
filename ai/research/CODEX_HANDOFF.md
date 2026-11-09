@@ -78,7 +78,7 @@
 
 ## 硬性约束
 
-- **2026-11-05 最新选择要求**：网页菜单仅保留 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代门控冠军，默认danMCai 现任冠军。本条取代下文旧的“最新导出直接成为默认”及“所有旧编号可选”要求。按真实冠军晋升记录、accept 门控及 SHA 维护 `selection.danMCaiChampions`；普通新导出与 GuanZero 更新不能自动替换danMCai 冠军，旧权重保留归档。发布步骤见 [网页电脑选择](../../web/docs/WEB_MODELS.md)。
+- **2026-11-05 选择要求（历史；2026-11-09 起菜单改为 Clint、最新 GuanZero、现任冠军、默认 danMCai-reason 四项，见 AGENTS 与 WEB_MODELS）**：网页菜单仅保留 Clint规则机器人、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代门控冠军，默认danMCai 现任冠军。本条取代下文旧的“最新导出直接成为默认”及“所有旧编号可选”要求。按真实冠军晋升记录、accept 门控及 SHA 维护 `selection.danMCaiChampions`；普通新导出与 GuanZero 更新不能自动替换danMCai 冠军，旧权重保留归档。发布步骤见 [网页电脑选择](../../web/docs/WEB_MODELS.md)。
 
 - **现行发布规则。** 本机 GuanZero 每十二小时按评测批次发布同一权重，danMCai 按真实门控冠军同步；默认保持danMCai 现任冠军，不能将普通最新导出设为默认。GuanZero 名称为 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。完整流程以 [网页模型发布](../../web/docs/WEB_MODELS.md) 为准，旧附件和实验记录保留，独立验收标准不变。
 - **最终目标是赢下整个牌局，不是眼前一两手。** 现阶段以**整局**为准（最终名次与升级分）；**整场**（先打过 A）是后续训练阶段的内容，现在不要求按整场换算，也不为此改动正在运行的训练。拿到牌权、压住一轮、保住炸弹只是中间信号，不能当成奖励、门控、验收指标或推荐理由；收益很小、对本局结果没有帮助的“抢牌权”不算好棋。详见根目录 `AGENTS.md`「最终目标」一节。

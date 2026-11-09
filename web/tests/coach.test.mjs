@@ -7,7 +7,12 @@ import {
   relativeRating,
   actionKey,
   COACH_MODEL_ID,
+  COACH_NAME,
+  COACH_SEARCH_BOT_ID,
+  mergeSearchValues,
+  rankedCoachActions,
 } from '../src/coach/evaluation.mjs';
+import { BOT_CHOICES, searchBot } from '../src/ai/model-catalog.mjs';
 import catalog from '../src/ai/model-catalog.json' with { type: 'json' };
 import { makeDeck } from '../src/core/cards.js';
 import { rotateSnapshot } from '../src/network/snapshot.js';
@@ -17,15 +22,65 @@ import { validateRecord } from '../src/collection/validate.mjs';
 import { humanExamples } from '../../ai/shared/data/tools/human-examples.mjs';
 import { collectedRound } from './fixtures/collected-round.mjs';
 
-test('online evaluation requires explicit host permission and always selects the current local champion', () => {
+test('online evaluation requires explicit host permission; it defaults to the reasoning bot over the current champion', () => {
   for (const mode of ['host', 'guest']) {
     for (const value of [undefined, false, 'true', 1])
       assert.equal(coachAllowed(mode, { coachAllowed: value }), false);
     assert.equal(coachAllowed(mode, { coachAllowed: true }), true);
   }
   assert.equal(coachAllowed('solo', {}), true);
+  // champion weights: fallback values, single extra moves and the private table
   assert.equal(COACH_MODEL_ID, catalog.selection.danMCaiChampions[0]);
   assert.equal(COACH_MODEL_ID, catalog.defaultId);
+  // owner 2026-11-09: the coach uses the menu's reasoning bot (danMCai-reason) by default
+  assert.equal(COACH_SEARCH_BOT_ID, '9001');
+  assert.equal(searchBot(COACH_SEARCH_BOT_ID).base, COACH_MODEL_ID);
+  assert.ok(BOT_CHOICES.some((choice) => choice.id === COACH_SEARCH_BOT_ID));
+  assert.equal(COACH_NAME, 'danMCai-reason-v000855042');
+});
+
+test('search values replace the champion values only for the moves the search evaluated', () => {
+  const deck = makeDeck();
+  // hand 3♠ 3♥ 5♠; level 2, leading: candidates single 3, pair 3, single 5
+  const actions = [[deck[1].id], [deck[1].id, deck[14].id], [deck[3].id]];
+  const base = [0.4, 0.9, 0.1];
+  const search = {
+    ok: true,
+    kind: 'midgame',
+    // the worker may use other physical copies of the same faces
+    plays: [[deck[3].id], [deck[54 + 1].id, deck[14].id]],
+    values: [1.5, -0.5],
+  };
+  const shown = mergeSearchValues(actions, {
+    ...search,
+    plays: [...search.plays, [deck[1].id]],
+    values: [...search.values, null],
+  });
+  assert.deepEqual(shown, [null, -0.5, 1.5]);
+  const ranked = rankedCoachActions(actions, shown, 2, 5, null, base);
+  // searched moves first by search value, then the unsearched one by champion value
+  assert.deepEqual(
+    ranked.map((row) => [row.index, row.value]),
+    [
+      [2, 1.5],
+      [1, -0.5],
+      [0, null],
+    ],
+  );
+  // ties of the search value go to the higher champion value (the bot's tie rule)
+  const tied = rankedCoachActions(actions, [0, 0, 0], 2, 5, null, base);
+  assert.deepEqual(
+    tied.map((row) => row.index),
+    [1, 0, 2],
+  );
+  assert.equal(mergeSearchValues(actions, { ...search, ok: false }), null);
+  assert.equal(
+    mergeSearchValues(actions, { ...search, plays: [[deck[20].id]], values: [1] }),
+    null,
+  );
+  // null is only valid next to champion tiebreak values
+  assert.throws(() => rankedCoachActions(actions, shown, 2, 5, null));
+  assert.throws(() => rankedCoachActions(actions, shown, 2, 5, null, [0, 1]));
 });
 
 test('coach observation never reads another private card and freezes the pre-move public state', () => {

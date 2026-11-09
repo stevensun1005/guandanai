@@ -82,9 +82,11 @@ flowchart LR
 
 ## 构建与资源版本
 
-`web/tools/build.mjs` 使用 esbuild 处理模块、样式和图片，复制模型与浏览器运行库，输出 `web/dist`。页面、脚本、样式和 Worker 使用源文件及模型共同计算的版本；模型文件使用自身内容版本。界面改动会刷新对应代码，而相同权重可以继续使用浏览器缓存。
+`web/tools/build.mjs` 使用 esbuild 处理模块、样式和图片，复制模型与浏览器运行库，输出 `web/dist`。页面、脚本、样式和 Worker 使用源文件及模型共同计算的版本；自 1.18.0 起，版本也包含各包从 `web/src` 以外实际打包的模块（如 `ai/shared/`、`ai/danMCai/belief/`），由 esbuild metafile 列出，避免只改这些模块时浏览器继续用旧缓存。模型文件使用自身内容版本。界面改动会刷新对应代码，而相同权重可以继续使用浏览器缓存。
 
-网页模型由 `web/src/ai/model-catalog.json` 注册数字编号、默认值、网络配置、来源、完整 SHA-256 和不可变 Release 地址。构建从 Release 获取新增权重，校验后复制到同源 Pages 目录；Worker 按编号维护独立会话。`web/src/ai/models.mjs` 仍保留历史 P0／R1 配置供研究复现。大厅仅显示 Clint、GuanZero 最近两代、danMCai 初始版和两代danMCai 冠军；默认当前门控冠军。GuanZero 名称为 `训练任务名-版本数值`，完整不可变归档仍保留在清单。大厅不再提供性格偏好；房间开始、重连及转为单机都同步或旋转座位对应的编号。发布流程见 [WEB_MODELS.md](./WEB_MODELS.md)。
+网页模型由 `web/src/ai/model-catalog.json` 注册数字编号、默认值、网络配置、来源、完整 SHA-256 和不可变 Release 地址。构建从 Release 获取新增权重，校验后复制到同源 Pages 目录；Worker 按编号维护独立会话。`web/src/ai/models.mjs` 仍保留历史 P0／R1 配置供研究复现。大厅只显示四项（`selectableModels`，清单 `selection.mode: latest-v2`）：Clint、最近注册的一代 GuanZero、`danMCaiChampions[0]` 现任冠军和底座为它的最新研究机器人（现为 9001，显示 `danMCai-reason-v000855042`）；`selection.defaultChoice` 使新玩家默认 9001（2026-11-09 所有者指示），`defaultId` 仍为当前门控冠军，供进还贡、搜索回落和评价的冠军值使用。退出菜单的已存选择经 `botChoiceId` 回到默认。GuanZero 名称为 `训练任务名-版本数值`，完整不可变归档仍保留在清单。大厅不再提供性格偏好；房间开始、重连及转为单机都同步或旋转座位对应的编号。发布流程见 [WEB_MODELS.md](./WEB_MODELS.md)。
+
+研究机器人 9001（`searchBots`）另有一个 `search-worker.mjs`。控制器在 `prepareTableDecision` 之后、只在需要选择且桌上剩 ≤40 张时调用它；主线程用 `web/src/ai/search/payload.mjs` 只发送本座位手牌与公开信息，Worker 用读取即报错的占位重建其他三家。Worker 自带 017 与推断网络会话及一个精确求解器，执行 `web/src/ai/search/core.mjs`（`midgame-search.mjs` 的浏览器副本，研究源码保持冻结，CI 逐项比较二者决定）。任何失败或超出预算都回到共享 `ai-worker` 的 017 决策，只终止搜索 Worker，不调用共享 Worker 的停止流程。出牌评价与电脑共用这一个搜索 Worker（`sharedSearchClient`）：客户端一次只发一项，电脑优先；电脑请求到达时请正在算的评价停下（`cancel`，评价每约 50 毫秒让出一次），500 毫秒内未停就换 Worker 并先重载网络。电脑搜索从不让步，预算从真正开始时计。构建用 `web/tools/node-stub.mjs` 把研究模块里仅本地读文件时才用的 `node:fs`／`node:path` 换成会报错的空实现。详见 [BOTS.md](./BOTS.md#研究机器人推理搜索9001)。
 
 Worker 单独打包自己的特征、风格与残局规则模块，浏览器推理运行库作为同源资源加载。编号模型只读取 `web/src/ai/observation.js` 明确选择的可见信息；残局搜索只使用自己的实体牌、公开记录及剩余张数。
 
@@ -115,9 +117,9 @@ Worker 单独打包自己的特征、风格与残局规则模块，浏览器推�
 | 外观变化           | `styles`、`ui` 和真实截图                            |
 | 记录格式变化       | `replay/storage.js` 与兼容检查                       |
 
-## 独立的冠军评价器
+## 独立的出牌评价器
 
-`src/coach/evaluation.mjs` 定义公开观察、候选输入、冠军身份与相对值换算；`controller.js` 管理个人偏好、按回合缓存、快照失效与 UI。评价复用 `ai-worker.mjs`／`inferPolicy` 的模型加载及批量推理，但使用独立 Worker 实例，不走电脑动作选择、性格或残局搜索。房主许可放在同步的 `rules.coachAllowed`，个人开关留在本机。经确认的人工动作在 `doPlay` 修改手牌前保留评价快照，预评展示标记进入独立采集协议，不把分数发给其他玩家。[协议说明](MOVE_COACH.md)。
+`src/coach/evaluation.mjs` 定义公开观察、候选输入、评价身份（默认菜单中的 danMCai-reason，冠军值来自 `danMCaiChampions[0]`）、搜索值合并与相对值换算；`controller.js` 管理个人偏好、按回合缓存、快照失效与 UI。冠军值复用 `ai-worker.mjs`／`inferPolicy` 的模型加载及批量推理，但使用独立 Worker 实例，不走电脑动作选择或性格。牌桌剩 21–40 张或 ≤20 张时，评价另把本人视角的 `searchPayload`（offset 0，视角已旋转）交给共享搜索 Worker 的 `coach` 请求，由 `search/coach.mjs` 返回与机器人同源的中盘平均值（冠军前 6＋过牌）或尾盘全部候选的 PIMC 值；未完成即整回合改用冠军值。房主许可放在同步的 `rules.coachAllowed`，个人开关留在本机。经确认的人工动作在 `doPlay` 修改手牌前保留评价快照，预评展示标记进入独立采集协议，不把分数发给其他玩家。[协议说明](MOVE_COACH.md)。
 
 Top 5 由评价缓存排序，同点数方案保留最佳花色变体，推荐点击不发出牌事件。`private-table/state.mjs` 与 `controller.js` 管理房主本机资格、展示及采集排除；完整手牌仅进入独立 `oracle` 请求。`coach/oracle.mjs` 复用共享 `advanceRound` 和冠军网络做有限推演，不改变普通规则、候选、编码或模型权重。对手分支与普通评价继续采用公开观察。
 

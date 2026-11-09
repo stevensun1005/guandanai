@@ -6,11 +6,17 @@ import { $ } from '../ui/cards.js';
 import { layoutHand, stackedControls } from '../hand/layout.js';
 import { renderHand } from '../hand/view.js';
 import { privateActive, oracleObservation } from '../private-table/state.mjs';
+import { sharedSearchClient } from '../ai/search/client.js';
+import { searchPayload } from '../ai/search/payload.mjs';
+import { SEARCH_BOT_V1, searchBand } from '../ai/search/constants.mjs';
 import {
   COACH_MODEL_NAME,
+  COACH_NAME,
+  COACH_SEARCH_BOT_ID,
   coachAllowed,
   coachObservation,
   actionKey,
+  mergeSearchValues,
   relativeRating,
   rankedCoachActions,
 } from './evaluation.mjs';
@@ -24,7 +30,9 @@ let enabled = false,
   topOpen = true;
 const deck = makeDeck();
 const pending = new Map(),
-  exposures = new WeakMap();
+  exposures = new WeakMap(),
+  searchSeeds = new WeakMap();
+let searchClient = null;
 const available = () =>
   !runtime.reviewMode &&
   (coachAllowed(runtime.network.mode, runtime.rules) || privateActive(runtime));
@@ -162,6 +170,7 @@ function markDisplayedRatings() {
 
 function stopWorker() {
   clearTimeout(timer);
+  searchClient?.cancelCoach();
   worker?.terminate();
   worker = null;
   for (const p of pending.values()) {
@@ -194,6 +203,59 @@ async function request(state) {
     worker.postMessage({ id, type: 'coach', state });
   });
 }
+/**
+ * Reasoning-search request for the player's own turn, built from the pre-move position: the own
+ * hand and public information only (search/payload.mjs), offset 0 because this view is already
+ * rotated to the player (as coachObservation). Null outside the search bands, for the private
+ * table (it keeps its own oracle) or without a reasoning bot in the menu.
+ */
+function reasoningPayload(game) {
+  if (!COACH_SEARCH_BOT_ID || privateActive(runtime) || !/^https?:$/.test(location.protocol))
+    return null;
+  const cards = game.hands.reduce((sum, hand) => sum + hand.length, 0);
+  // load the networks a little before the first searched turn
+  if (cards <= SEARCH_BOT_V1.hi + 20) {
+    searchClient ||= sharedSearchClient(VERSION);
+    searchClient.warm(COACH_SEARCH_BOT_ID);
+  }
+  if (!searchBand(cards) || game.turn !== 0) return null;
+  if (!searchSeeds.has(game)) searchSeeds.set(game, crypto.getRandomValues(new Uint32Array(1))[0]);
+  try {
+    return searchPayload(game, 0, 0, searchSeeds.get(game));
+  } catch {
+    return null;
+  }
+}
+/** Display values: search values where the reasoning search finished, otherwise the champion's. */
+function applyValues(s, result) {
+  const shown = s.payload && result ? mergeSearchValues(s.actions, result) : null;
+  if (shown) {
+    s.source = result.kind;
+    s.shown = shown;
+    s.reasoning = {
+      worlds: result.used,
+      evaluated: shown.filter((value) => value !== null).length,
+    };
+  } else {
+    s.source = 'champion';
+    s.shown = s.base.slice();
+    // in a search band without finished search values: say so next to the champion numbers
+    if (s.payload && s.actions.length > 1) s.fallback = result?.reason || 'error';
+  }
+  rerank(s);
+}
+function rerank(s) {
+  s.values = s.shown.filter((value) => value !== null);
+  s.scores = new Map(s.actions.map((ids, i) => [actionKey(ids), s.shown[i]]));
+  s.ranked = rankedCoachActions(
+    s.actions,
+    s.shown,
+    s.observation.level,
+    5,
+    s.observation.trick?.play,
+    s.source === 'champion' ? undefined : s.base,
+  );
+}
 function startSnapshot(game) {
   const s = {
     game,
@@ -202,27 +264,41 @@ function startSnapshot(game) {
     epoch: runtime.privateEpoch || 0,
     observation: coachObservation(game),
     scores: new Map(),
+    source: 'champion',
   };
   if (privateActive(runtime)) s.observation.oracle = oracleObservation(game);
+  else s.payload = reasoningPayload(game);
   current = s;
   clearTimeout(timer);
   // Wait for the selection gesture; there is only one full candidate evaluation per local turn.
   timer = setTimeout(() => {
     if (!enabled || !available() || (current !== s && previous?.snapshot !== s)) return;
     void request(s.observation)
-      .then((r) => {
-        s.values = r.values;
+      .then(async (r) => {
         s.actions = r.actions;
+        s.base = r.values.slice();
         s.search = r.search;
-        r.actions.forEach((ids, i) => s.scores.set(actionKey(ids), r.values[i]));
         // Private-table rollouts return the moves they assumed; show them so a ranking can be checked.
         s.lines = new Map((r.lines || []).map((line, i) => [actionKey(r.actions[i]), line]));
-        s.ranked = rankedCoachActions(s.actions, s.values, game.L, 5, s.observation.trick?.play);
+        let result = null;
+        // The champion values come first (fast); a search runs only while this turn is still
+        // open and there is a real choice. Table searches take the worker first (client.js).
+        if (s.payload && r.actions.length > 1 && current === s && sameTurn(s, runtime.game)) {
+          s.searching = true;
+          renderCoach();
+          searchClient ||= sharedSearchClient(VERSION);
+          result = await searchClient.evaluate(COACH_SEARCH_BOT_ID, s.payload);
+        }
+        if (!enabled) return;
+        applyValues(s, result);
       })
       .catch(() => {
         s.error = true;
       })
-      .finally(renderCoach);
+      .finally(() => {
+        s.searching = false;
+        renderCoach();
+      });
   }, 150);
   return s;
 }
@@ -236,7 +312,7 @@ function selection(game) {
 }
 function grade(s, action) {
   if (s.error) return '评价暂不可用，请重试';
-  if (!s.values) return '冠军模型评价中…';
+  if (!s.values) return s.searching ? '推理搜索中…' : '评价中…';
   const key = actionKey(action.ids);
   if (!s.scores.has(key)) {
     // Physical duplicates share a tensor key. A legal omitted candidate gets its own network call.
@@ -244,20 +320,15 @@ function grade(s, action) {
       s.extraPending = true;
       void request({ ...s.observation, onlyAction: action.ids })
         .then((r) => {
-          s.scores.set(key, r.values[0]);
-          if (r.lines?.[0]) s.lines?.set(key, r.lines[0]);
-          s.values.push(r.values[0]);
+          if (r.lines?.[0]) s.lines?.set(actionKey(r.actions[0]), r.lines[0]);
           s.actions.push(r.actions[0]);
+          s.base.push(r.values[0]);
+          // a move the reasoning search did not see stays unrated next to search values
+          s.shown.push(s.source === 'champion' ? r.values[0] : null);
           if (s.search) {
             s.search.evaluated = s.actions.length;
           }
-          s.ranked = rankedCoachActions(
-            s.actions,
-            s.values,
-            s.observation.level,
-            5,
-            s.observation.trick?.play,
-          );
+          rerank(s);
         })
         .catch(() => {
           s.error = true;
@@ -267,10 +338,12 @@ function grade(s, action) {
           renderCoach();
         });
     }
-    return '冠军模型评价中…';
+    return '评价中…';
   }
-  const score = relativeRating(s.values, s.scores.get(key));
-  return `合理性 ${score.percent}%${score.flat ? ' · 候选无明显分差' : ''}`;
+  const value = s.scores.get(key);
+  if (value === null) return '未进入推理搜索，不评分';
+  const score = relativeRating(s.values, value);
+  return `合理性 ${score.percent}%${score.flat ? ' · 候选无明显分差' : ''}${s.source === 'champion' ? '' : ' · 推理'}`;
 }
 
 /** True only when a percentage preview was actually displayed before this move. */
@@ -318,7 +391,7 @@ export function renderCoach() {
   $('#coachTopToggle').setAttribute('aria-expanded', String(topOpen));
   $('#coachTopToggle').textContent = topOpen ? '收起 Top 5' : '展开 Top 5';
   $('#coachModel').textContent =
-    `${COACH_MODEL_NAME}${privateActive(runtime) ? ' · 明牌推演' : ''} · 相对分，非胜率`;
+    `${privateActive(runtime) ? `${COACH_MODEL_NAME} · 明牌推演` : COACH_NAME} · 相对分，非胜率`;
   if (!visible) {
     stopWorker();
     current = previous = null;
@@ -363,9 +436,11 @@ function renderTop5(s, game) {
     list.replaceChildren();
     status.textContent = s?.error
       ? '评价不可用，可重试'
-      : s
-        ? '正在比较合法出法…'
-        : '轮到你时显示推荐';
+      : s?.searching
+        ? '推理搜索中…'
+        : s
+          ? '正在比较合法出法…'
+          : '轮到你时显示推荐';
     return;
   }
   const top = s.ranked;
@@ -373,7 +448,11 @@ function renderTop5(s, game) {
     ? s.search.mode === 'round'
       ? `明牌推演至本局结束 · ${s.search.evaluated} 种出法 · 每种模拟 ${s.search.minRollouts}${s.search.minRollouts * s.search.evaluated === s.search.fullRollouts ? '' : '+'} 次`
       : `明牌推演 ${s.search.horizon} 步 · 已评估 ${s.search.evaluated} 种出法`
-    : `已比较 ${s.actions.length} 个候选 · 点击选牌，不会自动打出`;
+    : s.source === 'midgame'
+      ? `推理搜索 · ${s.reasoning.worlds} 个推断世界打完本局 · 评估 ${s.reasoning.evaluated}/${s.actions.length} 种`
+      : s.source === 'endgame'
+        ? `残局推理 · ${s.reasoning.worlds} 个推断世界精确求解 · ${s.actions.length} 种出法`
+        : `${s.fallback ? '推理未完成，用冠军估值 · ' : ''}已比较 ${s.actions.length} 个候选 · 点击选牌，不会自动打出`;
   list.replaceChildren(
     ...top.map((row, index) => {
       const item = document.createElement('li'),
@@ -385,15 +464,27 @@ function renderTop5(s, game) {
       heading.className = 'coach-choice-heading';
       const name = document.createElement('strong');
       name.textContent = `${index + 1}. ${row.ids.length ? TYPE_NAME[row.shape?.type] || '出牌' : '过牌'}`;
-      const score = document.createElement('b');
-      score.textContent = `${relativeRating(s.values, row.value).percent}%`;
-      if (index > 0) {
-        // The percentage is rescaled within this turn; the raw gap shows whether it really matters.
-        const gap = document.createElement('small');
-        gap.className = 'coach-gap';
-        gap.textContent = `差 ${(row.value - top[0].value).toFixed(2)}`;
-        gap.title = '与第一名的平均结果差（单位约等于本局升级分），越接近 0 差别越小';
-        score.append(' ', gap);
+      let score;
+      if (row.value === null) {
+        // ranked by the champion below every searched move; no number of its own
+        score = document.createElement('small');
+        score.className = 'coach-gap';
+        score.textContent = '未进入推理搜索';
+        score.title = '推理搜索只评估冠军前 6 名和过牌；这种出法按冠军估值排在其后';
+      } else {
+        score = document.createElement('b');
+        score.textContent = `${relativeRating(s.values, row.value).percent}%`;
+        if (index > 0) {
+          // The percentage is rescaled within this turn; the raw gap shows whether it really matters.
+          const gap = document.createElement('small');
+          gap.className = 'coach-gap';
+          gap.textContent = `差 ${(row.value - top[0].value).toFixed(2)}`;
+          gap.title =
+            s.source === 'champion'
+              ? '与第一名的平均结果差（单位约等于本局升级分），越接近 0 差别越小'
+              : '与第一名的推断世界平均本局得分差（升级分），越接近 0 差别越小';
+          score.append(' ', gap);
+        }
       }
       heading.append(name, score);
       button.append(heading);

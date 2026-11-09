@@ -3,7 +3,10 @@ import { analyze, beats } from '../core/combinations.js';
 import { candidates } from './candidates.js';
 import { policyState } from './observation.js';
 import { prepareTableDecision } from './table-policy.mjs';
-import { botModel, botModelId, CLINT_RULE_ID } from './model-catalog.mjs';
+import { botModel, botModelId, CLINT_RULE_ID, searchBot } from './model-catalog.mjs';
+import { sharedSearchClient } from './search/client.js';
+import { searchPayload } from './search/payload.mjs';
+import { searchBand } from './search/constants.mjs';
 import { ruleObservation } from '../rule-bot/runtime.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost, isHumanSeat } from '../game/session.js';
@@ -63,6 +66,57 @@ export function initialize() {
     }
     function state(p, plays) {
       return policyState(runtime.game, p, runtime.network.off, plays);
+    }
+
+    /*
+     * Belief-search research bot: a separate worker (shared with the move coach, table jobs
+     * first); any failure plays champion 017 instead.
+     */
+    let searchClient = null,
+      prefetched = null;
+    const searchSeeds = new WeakMap();
+    const seatModel = (p) => botModelId(runtime.botModels?.[(p + runtime.network.off) % 4]);
+    function searchRequest(p) {
+      const game = runtime.game;
+      const bot = searchBot(seatModel(p));
+      if (!bot || game.turn !== p || privateSeat(runtime, p)) return null;
+      const cards = game.hands.reduce((sum, hand) => sum + hand.length, 0);
+      if (!searchBand(cards)) return null;
+      const plays = candidates(game.hands[p], game.L, game.trick?.play);
+      if (plays.length === 1 || plays.some((play) => play?.cards.length === game.hands[p].length))
+        return null;
+      const key = `${game.tok}|${game.log.length}|${p}`;
+      if (prefetched?.game === game && prefetched.key === key) return prefetched.promise;
+      if (!searchSeeds.has(game))
+        searchSeeds.set(game, crypto.getRandomValues(new Uint32Array(1))[0]);
+      searchClient ||= sharedSearchClient(VERSION);
+      const payload = searchPayload(game, p, runtime.network.off, searchSeeds.get(game));
+      const promise = searchClient.decide(bot.id, payload);
+      prefetched = { game, key, promise };
+      return promise;
+    }
+    /** The searched play, or undefined when the reply does not match this table exactly. */
+    function searchedPlay(result, plays, p) {
+      const game = runtime.game;
+      if (!result?.ok || !Number.isInteger(result.index) || result.index >= plays.length)
+        return undefined;
+      const play = plays[result.index];
+      const ids = (list) =>
+        list
+          .slice()
+          .sort((a, b) => a - b)
+          .join(',');
+      if (!play) return game.trick && !result.ids.length && !result.shape ? null : undefined;
+      if (
+        ids(play.cards.map((card) => card.id)) !== ids(result.ids) ||
+        play.type !== result.shape?.type ||
+        play.value !== result.shape.value ||
+        play.n !== result.shape.n ||
+        !play.cards.every((card) => game.hands[p].includes(card)) ||
+        !beats(play, game.trick?.play)
+      )
+        return undefined;
+      return play;
     }
 
     async function check() {
@@ -144,6 +198,21 @@ export function initialize() {
       const prepared = prepareTableDecision(game, p, runtime.network.off, model.config);
       const { plays, state: input } = prepared;
       if (prepared.index != null) return plays[prepared.index];
+      let search = null;
+      try {
+        // a human seat's timeout autoplay plays the champion at once: no extra wait after its clock
+        search = timeout ? null : searchRequest(p);
+      } catch {
+        search = null; // an unexpected payload problem plays the champion move
+      }
+      if (search) {
+        const result = await search;
+        if (!current()) return null;
+        const play = searchedPlay(result, plays, p);
+        if (play !== undefined) return play;
+        if (result?.ok)
+          searchClient.stats.fallbacks.mismatch = (searchClient.stats.fallbacks.mismatch || 0) + 1;
+      }
       input.modelId = model.id;
       const result = await request('decide', input);
       if (!current()) return null;
@@ -211,12 +280,36 @@ export function initialize() {
 
     function init() {
       void check().catch(() => {});
+      const bot = [0, 1, 2, 3]
+        .filter((p) => !isHumanSeat(p))
+        .map(seatModel)
+        .find((id) => searchBot(id));
+      if (bot && /^https?:$/.test(location.protocol)) {
+        searchClient ||= sharedSearchClient(VERSION);
+        searchClient.warm(bot);
+      }
+    }
+    /**
+     * Start a research-bot search during a computer seat's think delay; decide() reuses the same
+     * request. Never for a human seat: its timeout autoplay plays champion 017 without searching,
+     * and a prefetch would occupy the serial search worker on every human turn.
+     */
+    function prefetch(p) {
+      try {
+        if (isHost() && runtime.game.phase === 'play' && !isHumanSeat(p)) void searchRequest(p);
+      } catch {
+        /* decide() rebuilds the request and falls back to the champion. */
+      }
     }
     return {
       init,
       check,
       decide,
+      prefetch,
       playTurn,
+      get searchStats() {
+        return searchClient?.stats || null;
+      },
       cancelTurn() {
         generation++;
       },

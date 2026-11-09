@@ -80,6 +80,24 @@
   color: var(--ink);
   font: inherit;
 }
+/* phones: the seat name sits above a full-width menu, so the longest label
+   (danMCai-reason-v000855042) stays readable to its end */
+@media (max-width: 440px) {
+  .bot-setup-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .bot-setup-row small {
+    display: inline;
+    margin: 0 0 0 6px;
+  }
+}
+@media (max-width: 350px) {
+  .bot-setup select {
+    font-size: 13px;
+    padding-inline: 4px;
+  }
+}
 .bot-setup .human-seat {
   opacity: 0.55;
 }

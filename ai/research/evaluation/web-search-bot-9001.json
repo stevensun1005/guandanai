@@ -1,0 +1,625 @@
+{
+  "kind": "web-deployment-not-acceptance",
+  "authorization": {
+    "date": "2026-11-09",
+    "owner": "推理能力的比没有推理的强，把这套策略和 bot 加入到 danMCai 里推送到游戏里",
+    "scope": "one extra non-default menu entry; default and coach stay champion 017; supersedes the \"不接网页\" scope of MODEL_STUDY 70.4 and 71.2 for this entry only"
+  },
+  "bot": {
+    "id": "9001",
+    "name": "danMCai-v000855042+推理搜索",
+    "identitySHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+    "version": "v000855042-bsearch1-16d76783",
+    "base": {
+      "id": "017",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "version": "v000855042",
+      "gate": 330
+    },
+    "belief": {
+      "file": "belief-v1-16d76783.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "bytes": 3931285,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-belief-v1-16d76783/belief-v1-16d76783.onnx",
+      "featureVersion": "belief-v1",
+      "trainReportSHA256": "7f022c7640e0102dd25bfe497b6c0bc2dc1e3480dc1dfcf5144fa73ab6c95f0d",
+      "trainingSeeds": [
+        4255121000,
+        4255160999
+      ],
+      "trainingBand": [
+        21,
+        80
+      ]
+    },
+    "search": {
+      "lo": 21,
+      "hi": 40,
+      "worlds": 8,
+      "k": 6,
+      "net": 2,
+      "endgameHi": 20,
+      "endgameWorlds": 8,
+      "minWorlds": 4,
+      "tieTolerance": 1e-09,
+      "solverMaxNodes": 1500000,
+      "worldSeed": "(seed*1009 + ply*7919)>>>0"
+    }
+  },
+  "releaseAsset": {
+    "tag": "web-belief-v1-16d76783",
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-belief-v1-16d76783/belief-v1-16d76783.onnx",
+    "status": "to be created by the coordinator with ai/publishing/publish-belief-asset.mjs --publish before the Pages build"
+  },
+  "testedNodeBot": {
+    "command": "node ai/danMCai/belief/midgame-search.mjs --worlds-source=belief --belief=<16d76783 belief.onnx> --endgame=pimc --endgame-hi=20 --endgame-worlds=belief",
+    "heldOut": {
+      "H4": {
+        "seeds": [
+          990023757,
+          990026756
+        ],
+        "pairs": 3000,
+        "meanSignedPointsPerPair": 0.237,
+        "ci95": [
+          0.208,
+          0.266
+        ],
+        "evidence": "ai/research/evaluation/window2-20261109/results/C-h4.json"
+      },
+      "H3midgameOnly": {
+        "meanSignedPointsPerPair": 0.139,
+        "ci95": [
+          0.111,
+          0.166
+        ],
+        "evidence": "ai/research/evaluation/window1-20261109/results/H3-compare.json"
+      }
+    },
+    "scope": "champion-017 opponents, single rounds, no tribute, both focal teammates searching"
+  },
+  "browserBudgets": {
+    "desktop": {
+      "midgameMs": 3000,
+      "endgameMs": 4000,
+      "solverMs": 3000,
+      "solverTable": 300000
+    },
+    "mobile": {
+      "midgameMs": 3500,
+      "endgameMs": 3500,
+      "solverMs": 1000,
+      "solverTable": 100000
+    },
+    "rule": "a search that exceeds its budget, errors, times out or contradicts public tribute records is discarded entirely and champion 017 plays (its public-endgame solver included); a run with fewer than 4 solved endgame worlds plays the raw champion move as the Node bot does; with a per-call solver limit shorter than the Node bot 3,000 ms (mobile), a solver call stopped by the clock discards the whole search (017 plays) instead of skipping the world; a stop at the 1.5M node limit skips the world as in Node"
+  },
+  "parity": {
+    "file": "ai/research/evaluation/web-search-bot-parity.json",
+    "sha256": "cecebad1650e0a0ca870c030ae292095170127f0dab3518b8728e932f5f8e907",
+    "seeds": [
+      731950000,
+      731950099
+    ],
+    "midgame": {
+      "decisions": 157,
+      "nodeDiffersFromChampion": 45,
+      "webCoreOnnxNodeExactlyEqual": 157,
+      "webCoreWasmSameDecision": 157,
+      "wasmMs": {
+        "p50": 404,
+        "p95": 1031,
+        "max": 2339
+      },
+      "desktopBudget": {
+        "fallbacks": 0,
+        "sameDecisionAsNode": 157,
+        "sameDecisionAsNodeWhenCompleted": 157,
+        "completed": 157,
+        "ms": {
+          "p50": 401,
+          "p95": 1223
+        }
+      }
+    },
+    "endgame": {
+      "decisions": 108,
+      "nodeDiffersFromChampion": 9,
+      "webCoreOnnxNodeExactlyEqual": 108,
+      "webCoreWasmSameDecision": 108,
+      "wasmMs": {
+        "p50": 35,
+        "p95": 1511,
+        "max": 17460
+      },
+      "desktopBudget": {
+        "fallbacks": 2,
+        "sameDecisionAsNode": 106,
+        "sameDecisionAsNodeWhenCompleted": 106,
+        "completed": 106,
+        "ms": {
+          "p50": 32,
+          "p95": 2030
+        }
+      }
+    },
+    "all": {
+      "decisions": 265,
+      "nodeDiffersFromChampion": 54,
+      "webCoreOnnxNodeExactlyEqual": 265,
+      "webCoreWasmSameDecision": 265,
+      "wasmMs": {
+        "p50": 260,
+        "p95": 1098,
+        "max": 17460
+      },
+      "desktopBudget": {
+        "fallbacks": 2,
+        "sameDecisionAsNode": 263,
+        "sameDecisionAsNodeWhenCompleted": 263,
+        "completed": 263,
+        "ms": {
+          "p50": 262,
+          "p95": 1264
+        }
+      }
+    },
+    "note": "Node process peak heap 2422 MB comes from the parity-only solvers with unbounded tables, not from the browser configuration"
+  },
+  "chromeLatency": {
+    "file": "ai/research/evaluation/web-search-bot-latency.json",
+    "sha256": "f32faa7a22c894b93b24b1089ec0ab1c0b82ae3f124f86c5e3c01eefda9072ea",
+    "chrome": "Chrome/157.0.8103.38",
+    "seeds": [
+      731960000,
+      731960059
+    ],
+    "positions": 93,
+    "arms": [
+      {
+        "name": "desktop",
+        "budget": {
+          "midgameMs": 3000,
+          "endgameMs": 4000,
+          "solverMs": 3000,
+          "solverTable": 300000
+        },
+        "initMs": 586,
+        "peakWorkerHeapMB": 219,
+        "midgame": {
+          "decisions": 56,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 56,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 460,
+            "p95": 931,
+            "max": 1166
+          }
+        },
+        "endgame": {
+          "decisions": 37,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 37,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 86,
+            "p95": 3290,
+            "max": 3487
+          }
+        },
+        "all": {
+          "decisions": 93,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 93,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 297,
+            "p95": 1766,
+            "max": 3487
+          }
+        }
+      },
+      {
+        "name": "mobile-proxy-quarter-budget",
+        "budget": {
+          "midgameMs": 875,
+          "endgameMs": 875,
+          "solverMs": 250,
+          "solverTable": 100000
+        },
+        "initMs": 574,
+        "peakWorkerHeapMB": 214,
+        "midgame": {
+          "decisions": 56,
+          "fallbacks": 4,
+          "fallbackRate": 0.07142857142857142,
+          "sameAsNode": 52,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 460,
+            "p95": 876,
+            "max": 877
+          }
+        },
+        "endgame": {
+          "decisions": 37,
+          "fallbacks": 5,
+          "fallbackRate": 0.13513513513513514,
+          "sameAsNode": 32,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 83,
+            "p95": 919,
+            "max": 929
+          }
+        },
+        "all": {
+          "decisions": 93,
+          "fallbacks": 9,
+          "fallbackRate": 0.0967741935483871,
+          "sameAsNode": 84,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 305,
+            "p95": 877,
+            "max": 929
+          }
+        }
+      }
+    ],
+    "note": "DevTools CPU throttling is not supported for dedicated workers; the mobile arm divides the mobile budget by 4 on this machine as a proxy for a 4x slower device"
+  },
+  "browserSmoke": {
+    "test": "web/tests/search_bot_smoke.py",
+    "result": "one solo round, three seats on 9001, no page errors, no table error panel, belief asset SHA verified in the browser, search worker and shared AI worker both active",
+    "runs": [
+      {
+        "searched": 13,
+        "differs": 1,
+        "fallbacks": 0,
+        "maxMs": 440
+      },
+      {
+        "searched": 10,
+        "differs": 2,
+        "fallbacks": 0,
+        "maxMs": 351
+      }
+    ],
+    "alsoPassed": [
+      "bot_setup_smoke.py",
+      "coach_smoke.py --solo-only",
+      "private_table_smoke.py",
+      "production_smoke.py"
+    ]
+  },
+  "machine": "shared research Mac (window-2 workers running, nice -n 10); times are upper-biased",
+  "claims": {
+    "allowed": "the web bot makes the same decision as the held-out-tested Node bot whenever its search completes in budget; otherwise it plays champion 017",
+    "notAllowed": "any web strength number; +0.237 is not transferable to humans, human partners, mixed teams, tribute rounds or budget fallbacks"
+  },
+  "sources": {
+    "web/src/ai/search/constants.mjs": "f13ecfe6702d5b040d95bff03e4486e7eaf8a9fa135a91db8664cc7d2650818c",
+    "web/src/ai/search/core.mjs": "f60515ebac277ba618041c72e4298ff2a1c4b35fbb300ec2d5f392885036d434",
+    "web/src/ai/search/payload.mjs": "5a2b7bc192a24bd0bfaed270c86ff3f1fcece381890bfd6fb275621520cbc920",
+    "web/src/ai/search/known-cards.mjs": "62d7006416a279781e486950f02f1277dd9a7872e8f42689e07f7ab8cb6db895",
+    "web/src/ai/search/inference.mjs": "ee4a70f5c663e0acc97353ded566c8f0299ef04aec136668ebbc7c2edd004cda",
+    "web/src/ai/search/client.js": "cb4893530b892fc5eac1e474bc0af5b55edeb8e11bcbc3485e2679c632c09a56",
+    "web/src/ai/search-worker.mjs": "d44ffd7de9b986d25f75728e0bacb9eeba5d09cc0ba5ff4969b8ed4b7932f9ee",
+    "web/src/ai/controller.js": "7b422cd2f78188172c836c9f3df518cd75fff5ec5b6779f3a31d3affb006c498",
+    "web/src/ai/model-catalog.mjs": "ef41fd1e2a35a73cf9578ef88391ea3e8fddf300211bc348f9729f30cb062743",
+    "ai/danMCai/belief/midgame-search.mjs": "b15276c618bbe1a64938a547a0b6b455d9f1456c556111307829f6aa6f2831a2",
+    "ai/danMCai/belief/sampler.mjs": "be1343f70df52864a44a2187f4cd923365bbdd4591d4d43f8175307003658a2c",
+    "ai/danMCai/belief/features.mjs": "de146a33e7bc3b6b0fa3c041ae966f1dd5ca078f8a4f9b66be0da52ef4cfcf29",
+    "ai/danMCai/endgame/solver.mjs": "2fb05704ebced6fee92259fd53a2ccede55dfc6c1db201bf8fb2ccb3ecbfc9e6",
+    "ai/danMCai/endgame/evaluate.mjs": "1c392bae5f5431fdea7470abb369561cef60e9132ffe0798278cbcdf8b026c00",
+    "ai/shared/search/pimc.mjs": "94374899cb13d175d08d7e58d8deb6f16bc97427858a4a77a58cdceafc7bc5a5",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2"
+  },
+  "generatedAt": "2026-11-09T18:24:23.819Z",
+  "review": {
+    "date": "2026-11-09",
+    "changes": [
+      "mobile solver calls stopped by the clock fall back to 017 as a whole (before: the world was skipped, a choice neither Node nor 017 would make); desktop unchanged",
+      "search prefetch and worker warm-up only for computer seats; a human seat timeout still searches on demand"
+    ],
+    "sourcesChanged": [
+      "web/src/ai/search/constants.mjs",
+      "web/src/ai/search/core.mjs",
+      "web/src/ai/search-worker.mjs",
+      "web/src/ai/controller.js"
+    ],
+    "latencyNote": "the mobile-proxy latency arm was measured before this change; mobile fallbacks can only stay equal or rise",
+    "extraParity": {
+      "seeds": [
+        731975000,
+        731975014
+      ],
+      "decisions": 39,
+      "midgame": 23,
+      "endgame": 16,
+      "nodeDiffersFromChampion": 11,
+      "webNodeExactlyEqual": 39,
+      "webWasmSameDecision": 39,
+      "desktopBudgetFallbacks": 0,
+      "desktopBudgetSameAsNode": 39,
+      "note": "web-parity.mjs, development seeds, not a strength result; not saved as a separate file"
+    },
+    "chromeRerun": {
+      "seeds": [
+        731980000,
+        731980009
+      ],
+      "tool": "web/tools/search-latency.mjs against the rebuilt worker (headless Chrome)",
+      "positions": 19,
+      "desktop": {
+        "fallbacks": 0,
+        "sameAsNode": 19,
+        "p50Ms": 313,
+        "maxMs": 834
+      },
+      "mobileProxyQuarterBudget": {
+        "fallbacks": 1,
+        "sameAsNode": 18,
+        "completedDifferentFromNode": 0,
+        "p50Ms": 318,
+        "maxMs": 878
+      },
+      "note": "development seeds, shared loaded machine; not saved as a separate file"
+    }
+  },
+  "reconcile": {
+    "date": "2026-11-09",
+    "changes": [
+      "first decision waits at most one midgame budget for the networks, then plays 017 while loading continues (client.js)",
+      "phone menu label fits (lobby.css); menu subtitle no longer calls every entry a trained version (index.html)",
+      "a human seat timeout autoplay plays champion 017 without searching (supersedes the review note that it searched on demand)"
+    ],
+    "sourcesChanged": [
+      "web/src/ai/search/client.js",
+      "web/src/ai/controller.js"
+    ],
+    "justifiedNotChanged": {
+      "abandonedTurnSearch": "a search still running for an abandoned turn can delay the next one in the serial worker; the hard timeout bounds it and the result is a whole-search fallback to 017, never a mixed decision",
+      "recordLabel": "collection identity is per seat and round; a budget fallback still records 9001 because the fallback is part of the policy definition; the per-round search seed is not recorded (collector schema unchanged)",
+      "rulesDialog": "listing player-seat menu choices predates this change",
+      "pagesWorkflow": "search_bot_smoke.py is not added to the Pages workflow: the CI runner may use the phone budget, and fallbacks are legitimate behaviour there; run locally"
+    },
+    "parityRerun": {
+      "tool": "ai/danMCai/belief/web-parity.mjs",
+      "seeds": [
+        731985000,
+        731985029
+      ],
+      "midgame": {
+        "decisions": 25,
+        "nodeDiffersFromChampion": 2,
+        "webNodeExactlyEqual": 25,
+        "webWasmSameDecision": 25,
+        "webWasmMs": {
+          "p50": 554,
+          "p95": 1303,
+          "max": 1487
+        },
+        "nodeMs": {
+          "p50": 601,
+          "max": 980
+        },
+        "desktopBudget": {
+          "fallbacks": 0,
+          "sameDecisionAsNode": 25,
+          "sameDecisionAsNodeWhenCompleted": 25,
+          "completed": 25,
+          "ms": {
+            "p50": 542,
+            "p95": 1329
+          }
+        },
+        "wasmOverDesktopBudget": 0
+      },
+      "endgame": {
+        "decisions": 16,
+        "nodeDiffersFromChampion": 2,
+        "webNodeExactlyEqual": 16,
+        "webWasmSameDecision": 16,
+        "webWasmMs": {
+          "p50": 58,
+          "p95": 11997,
+          "max": 11997
+        },
+        "nodeMs": {
+          "p50": 54,
+          "max": 11616
+        },
+        "desktopBudget": {
+          "fallbacks": 2,
+          "sameDecisionAsNode": 14,
+          "sameDecisionAsNodeWhenCompleted": 14,
+          "completed": 14,
+          "ms": {
+            "p50": 59,
+            "p95": 4764
+          }
+        },
+        "wasmOverDesktopBudget": 2
+      },
+      "all": {
+        "decisions": 41,
+        "nodeDiffersFromChampion": 4,
+        "webNodeExactlyEqual": 41,
+        "webWasmSameDecision": 41,
+        "webWasmMs": {
+          "p50": 344,
+          "p95": 1948,
+          "max": 11997
+        },
+        "nodeMs": {
+          "p50": 353,
+          "max": 11616
+        },
+        "desktopBudget": {
+          "fallbacks": 2,
+          "sameDecisionAsNode": 39,
+          "sameDecisionAsNodeWhenCompleted": 39,
+          "completed": 39,
+          "ms": {
+            "p50": 317,
+            "p95": 2007
+          }
+        },
+        "wasmOverDesktopBudget": 2
+      },
+      "note": "development seeds, not a strength result; machine under window-2 load"
+    },
+    "chromeRerun": {
+      "tool": "web/tools/search-latency.mjs against the rebuilt worker (headless Chrome)",
+      "seeds": [
+        731990000,
+        731990019
+      ],
+      "positions": 30,
+      "desktop": {
+        "midgame": {
+          "decisions": 18,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 18,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 300,
+            "p95": 666,
+            "max": 666
+          }
+        },
+        "endgame": {
+          "decisions": 12,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 12,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 73,
+            "p95": 2765,
+            "max": 2765
+          }
+        },
+        "all": {
+          "decisions": 30,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 30,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 218,
+            "p95": 666,
+            "max": 2765
+          }
+        }
+      },
+      "mobileProxyQuarterBudget": {
+        "midgame": {
+          "decisions": 18,
+          "fallbacks": 0,
+          "fallbackRate": 0,
+          "sameAsNode": 18,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 302,
+            "p95": 677,
+            "max": 677
+          }
+        },
+        "endgame": {
+          "decisions": 12,
+          "fallbacks": 1,
+          "fallbackRate": 0.08333333333333333,
+          "sameAsNode": 11,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 59,
+            "p95": 877,
+            "max": 877
+          }
+        },
+        "all": {
+          "decisions": 30,
+          "fallbacks": 1,
+          "fallbackRate": 0.03333333333333333,
+          "sameAsNode": 29,
+          "completedDifferentFromNode": 0,
+          "wallMs": {
+            "p50": 232,
+            "p95": 677,
+            "max": 877
+          }
+        }
+      },
+      "peakWorkerHeapMB": {
+        "desktop": 92,
+        "mobileProxy": 63
+      }
+    },
+    "browserSmokes": "search_bot_smoke (15 searches, 0 fallbacks, belief SHA 16d76783 confirmed), bot_setup_smoke, production, replay_security, coach --solo-only, control_layout --targeted, clint_endgame, match_continuity, private_table: all pass, no page errors"
+  },
+  "menuCoach20261109": {
+    "date": "2026-11-09",
+    "owner": [
+      "出牌建议也默认改为带推理的机器人",
+      "rename to danMCai-reason-v<champion version>",
+      "menu offers exactly four entries: Clint rule bot, latest GuanZero generation, latest danMCai champion 017, latest danMCai-reason (default)"
+    ],
+    "kind": "deployment and naming decision; not an acceptance or strength result",
+    "name": "danMCai-reason-v000855042",
+    "previousName": "danMCai-v000855042+推理搜索",
+    "identityUnchanged": {
+      "id": "9001",
+      "identitySHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "version": "v000855042-bsearch1-16d76783"
+    },
+    "menu": {
+      "mode": "latest-v2",
+      "order": [
+        "clint-rule",
+        "026",
+        "017",
+        "9001"
+      ],
+      "default": "9001",
+      "retiredFromMenuKeptArchived": [
+        "001",
+        "012",
+        "025 and older GuanZero"
+      ],
+      "savedRetiredChoices": "fall back to 9001 (botChoiceId)"
+    },
+    "coach": {
+      "default": "9001 (menu reasoning bot over danMCaiChampions[0])",
+      "midgame21to40": "mean signed round points over the bot's 8 belief worlds for its searched roots (champion top-6 + pass); other candidates unrated, ranked after them by champion value",
+      "endgameLe20": "mean exact PIMC value over solved belief worlds (>= 4 of 8) for every candidate",
+      "otherwise": "champion 017 values; same on budget overrun, min-worlds, loading, cancel or error (status line says so)",
+      "budgets": "same as the table bot (SEARCH_BUDGETS by device class)",
+      "worker": "shared search-worker; one job at a time, table first; coach yields about every 50 ms for cancel, replaced after 500 ms; table searches never yield",
+      "sources": [
+        "web/src/ai/search/coach.mjs",
+        "web/src/ai/search/client.js",
+        "web/src/ai/search-worker.mjs",
+        "web/src/coach/controller.js",
+        "web/src/coach/evaluation.mjs"
+      ]
+    },
+    "checks": {
+      "node": "npm test 378/378 before docs; search-bot.test.mjs coach values equal midgameDecision.means / pimcLabelFromWorlds on stand-in positions; queue/preempt tests",
+      "browser": {
+        "coach_search_smoke": "one solo round (random deal, development only): 7 coach searches, 7 completed, 0 fallbacks, 0 preempted; table 15 searches completed, 0 fallbacks",
+        "coach_smoke": "solo and real-PeerJS rooms passed (out-of-band opening shows champion values)",
+        "private_table_smoke": "passed; private tool keeps priority",
+        "bot_setup_smoke": "four entries, name and retired-choice fallback passed",
+        "search_bot_smoke": "passed"
+      }
+    },
+    "limits": "inherits the 017-opponent, single-round, no-tribute validation; usefulness of these numbers as coaching is untested; midgame values vary with the 8 random worlds"
+  }
+}

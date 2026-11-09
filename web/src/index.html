@@ -251,11 +251,11 @@
           取消选择
         </button>
       </div>
-      <aside class="coach-panel" id="coachPanel" aria-label="冠军模型出牌评价" hidden>
+      <aside class="coach-panel" id="coachPanel" aria-label="出牌评价" hidden>
         <div class="coach-heading">
           <small
             id="coachModel"
-            title="当前候选的最高模型值为100%，最低为0%；没有明显分差时同为100%。这不是正确概率、胜率或置信度。"
+            title="当前候选的最高值为100%，最低为0%；没有明显分差时同为100%。剩21–40张时用推理搜索（8个推断世界打完本局的平均得分，只评冠军前6名和过牌），剩20张以内用推断世界精确求解，其余时候或搜索超时用冠军估值。这不是正确概率、胜率或置信度。"
           ></small>
           <button class="link" id="coachRetry" hidden>重试</button>
           <button
@@ -439,9 +439,9 @@
         </div>
         <button class="btn primary lobby-go" id="sitBtn" disabled>坐下开始</button>
         <details class="bot-setup" id="botStyleBox">
-          <summary>电脑模型 <span>为每个空位选择训练版本</span></summary>
+          <summary>电脑模型 <span>为每个空位选择版本</span></summary>
           <div id="botSetupRows"></div>
-          <button class="link" id="mixedBotsBtn" type="button">全部使用danMCai 冠军</button>
+          <button class="link" id="mixedBotsBtn" type="button">全部恢复默认</button>
           <p id="botSetupNote"></p>
         </details>
 
@@ -576,7 +576,7 @@
     <aside class="coach-suggestions" id="coachSuggestions" aria-label="Top 5 推荐出牌" hidden>
       <header>
         <div>
-          <small>CHAMPION INSIGHT</small>
+          <small>DANMCAI INSIGHT</small>
           <h2>推荐出牌 <span>TOP 5</span></h2>
         </div>
         <button class="link" id="coachSuggestionsClose" type="button" aria-label="收起推荐出牌">

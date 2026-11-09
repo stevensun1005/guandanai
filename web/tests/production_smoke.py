@@ -27,7 +27,12 @@ with sync_playwright() as p:
     page.locator('[data-seat="S"]').click()
     page.locator('#botStyleBox summary').click()
     default = page.locator('[data-bot-seat="N"]').input_value()
-    page.locator('[data-bot-seat="E"]').select_option('001')
+    # a search-bot default (menu 9001) sends its unsearched turns to the worker as its base champion
+    published = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()
+    default = next((b['base'] for b in published.get('searchBots', []) if b['id'] == default), default)
+    # the newest GuanZero generation: a non-default neural entry of the four-entry menu
+    other = next(c['id'] for c in published['choices'] if c['kind'] == 'neural' and c['id'] != default)
+    page.locator('[data-bot-seat="E"]').select_option(other)
     page.locator("#sitBtn").click()
     for _ in range(250):
         if page.locator("#readyBtn").is_visible():
@@ -38,7 +43,7 @@ with sync_playwright() as p:
         page.wait_for_timeout(100)
     page.locator("#readyBtn").click()
     for _ in range(400):
-        if page.evaluate("models => models.every(id => window.policyReplies.includes(id))", ['001', default]):
+        if page.evaluate("models => models.every(id => window.policyReplies.includes(id))", [other, default]):
             break
         if page.locator("#hintBtn").is_enabled():
             page.locator("#hintBtn").click()
@@ -47,11 +52,11 @@ with sync_playwright() as p:
             elif page.locator("#passBtn").is_enabled():
                 page.locator("#passBtn").click()
         page.wait_for_timeout(100)
-    page.wait_for_function('models => models.every(id => window.policyReplies.includes(id))', arg=['001', default], timeout=30000)
+    page.wait_for_function('models => models.every(id => window.policyReplies.includes(id))', arg=[other, default], timeout=30000)
     expected = page.request.get(URL.rstrip('/') + '/models/catalog.json').json()
     ids = {model['id'] for model in expected['models']}
     assert all(model in ids for model in page.evaluate('window.policyModels'))
-    assert set(page.evaluate('window.policyReplies')) == {'001', default}
+    assert set(page.evaluate('window.policyReplies')) == {other, default}
     assert not page.locator('#retryTableBtn').is_visible()
     assert not errors, errors
     page.screenshot(path=str(OUT / "table.png"))

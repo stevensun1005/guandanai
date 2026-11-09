@@ -30,7 +30,7 @@
 
 本轮同时回归原有模型菜单、Clint Worker 与五个神经网络 WASM、复盘记录、房主／个人评价、Top 5、独立明牌工具、房间恢复及云端牌谱。代码与实际记录见 [Clint UI 同步证据](../../ai/research/evaluation/clint-sync-20261106-latest.json)，属于兼容性测试，不是新的模型训练或棋力成绩。
 
-当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：Clint、GuanZero 最近两代、danMCai 初始版与两代danMCai 冠军。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
+当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：2026-11-09 起只有 Clint、最新一代 GuanZero、danMCai 现任冠军与 danMCai-reason 四项。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
 
 ## PR 自动检查与网页流程评测
 
@@ -105,6 +105,18 @@ python web/tests/browser_smoke.py https://stevensun1005.github.io/guandanai/
 表情与快捷语：`python web/tests/emote_smoke.py http://127.0.0.1:8765/` 用电脑和手机两种尺寸的真实 PeerJS 联机，检查表情按钮在右下角「理牌」右边、面板在按钮正上方且不超出窗口，表情页只有 5 个表情，快捷语在另一页且只有 8 句、不含出牌暗示；快捷语气泡出现在发送者名字旁且不超出窗口，双方都调用中文朗读且音调不同；客人送鲜花给房主时礼物先飞行再落在双方页面的正确座位；房主给电脑扔炸弹、客人给另一台电脑送卡布奇诺后，电脑按回礼表回应且双方都看到；伪造的自由文字、未知编号、缺少或指向自己的收礼座位、非礼物带收礼座位都被房主丢弃；冷却期内重复发送只显示第一条；打开屏蔽开关后不显示他人表情和礼物；表情不写入出牌记录。截图在 `web/artifacts/validation/emotes/`。Node 部分 `web/tests/emotes.test.mjs` 检查清单、只认预设编号、收礼座位校验、回礼表和按座位冷却。
 
 真实联机检查依赖公共信令及外部网络；本地失败时先区分产品问题与网络不可用。
+
+## 研究机器人（9001）
+
+```bash
+node --test web/tests/search-bot.test.mjs     # 也在 npm test 内；不需要模型文件
+node ai/danMCai/belief/web-parity.mjs --belief=<belief.onnx> --rounds=100 --per-band=2 --out=ai/research/evaluation/web-search-bot-parity.json
+npm run build && PORT=8795 node web/tools/serve.mjs &
+node web/tools/search-latency.mjs --belief=<belief.onnx> --url=http://127.0.0.1:8795/ --rounds=60 --out=ai/research/evaluation/web-search-bot-latency.json
+python web/tests/search_bot_smoke.py http://127.0.0.1:8795/
+```
+
+`search-bot.test.mjs` 用确定性替身网络（不读暗牌）在固定种子的中盘、尾盘局面上要求浏览器核心与 `midgame-search.mjs` 的选择、搜索根、各世界结果和抽到的世界完全相同；另查：Worker 载荷只含公开信息（打乱暗牌不改变载荷，读取暗牌占位即报错）、超出预算整次作废、200 个合成进贡／还贡／抗贡局面的世界都满足公开记录且矛盾时报 `KnownCardsError`、清单校验、收集身份通过 `validateRecord`、打包后的 Worker 不含 `node:` 导入。`web-parity.mjs` 与 `search-latency.mjs` 需要真实模型，不在 CI；后者用无头 Chrome 的 DevTools 协议直接驱动构建出的 Worker。DevTools CPU 降速不作用于 Worker，手机数字用“手机预算÷4”代理。`search_bot_smoke.py` 打一整局单人局，先确认三席默认即为 `selection.defaultChoice`（9001），检查推断网络 SHA、两个 Worker 都在、搜索次数、无错误面板。房主＋加入者双浏览器下只有房主创建搜索 Worker 尚未单独自动化。当前结果见主报告第 72 节。
 
 ## 模型数值与性能
 
@@ -205,7 +217,7 @@ python -m unittest discover -s ai/guanzero/tests -p "*test.py"
 
 固定整场 2v2 使用 `node ai/danMCai/evaluation/evaluate-fixed.mjs --protocol=<固定协议> --run=<忽略目录>`；测试入口包括 `node --test ai/danMCai/tests/fixed-evaluation.test.mjs` 和 `python ai/danMCai/tests/independent_summary_test.py`。先冻结权重、登记配对种子与来源指纹，完成后才用 `python ai/danMCai/evaluation/summarize_independent.py --protocol=... --run=... --output=...` 汇总；测速局与正式局分开，不将截断计为平局。
 
-出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。它们是功能兼容性测试，不计作棋力样本。
+出牌评价：`node --test web/tests/coach.test.mjs` 验证许可、私牌边界、百分数数学与辅助样本过滤；`python web/tests/coach_smoke.py --solo-only` 检查真实冠军 WASM、缓存、非法牌、关闭竞态、错误重试与三种尺寸，CI 同步运行。完整 `python web/tests/coach_smoke.py <预览URL>` 使用两个浏览器上下文及真实 PeerJS，检查房主许可、个人选择、辅助标记与重连。2026-11-09 起评价默认用 danMCai-reason：`search-bot.test.mjs` 检查评价搜索值与机器人中盘 `means`／尾盘 PIMC 值逐项相同、尾盘每个世界之间让出一次，以及共享搜索 Worker 的排队（电脑优先、请评价停下、500 毫秒未停换 Worker 并先重载）；`coach.test.mjs` 检查搜索值按牌面合并、未评估出法排在后面且不给分。`python web/tests/coach_search_smoke.py <预览URL>` 打一整局单人局（没进搜索范围时换一副重打，最多三副），核对搜索范围内的 Top 5 来源与状态行、发往搜索 Worker 的评价请求只含本人手牌与公开信息，以及电脑搜索照常完成。它们是功能兼容性测试，不计作棋力样本。
 
 Top 5：`coach_smoke.py` 检查开局开关、最多五种方案、点击只选牌、展示辅助标记与三种尺寸不遮挡按钮。`private_table_smoke.py` 使用真实 PeerJS 验证本机资格、同名加入者不启用、队友明牌推演、规则与网络对手普通输入、关闭恢复，以及构造结算探针的采集排除；不是完成棋力比赛。
 
@@ -232,7 +244,7 @@ python -X utf8 web/tests/clint_sync_smoke.py
 
 后者自建临时预览服务并关闭，须先构建；覆盖 6 次尺寸切换、3 次全屏进出且 viewport meta 零写入、双队级数／名次／失败次数、无牌背、Clint 超时与神经网络消息隔离，并串行运行 UI、贡还、准备去重、真实 PeerJS 恢复、练习布局、Clint 混合模型、独立房主工具和冠军 Top 5 回归。截图和详细日志保留于忽略的 `web/artifacts/validation/`；可提交的摘要见 [同步证据](../../ai/research/evaluation/clint-sync-20261106.json)。Chrome 尺寸模拟和全屏通过不代表 iPad Safari 真机通过，也不是完整棋力评测。
 
-GuanZero 菜单回归按当前归档编号独立核对最近两代，并模拟再新增一代，检查仅替换较旧一项。现任冠军默认、两代门控证据、Clint 与 P0 的检查继续单独执行。
+菜单回归（2026-11-09 起四项）核对 Clint、最近注册的一代 GuanZero、现任冠军与 danMCai-reason，并模拟再新增一代 GuanZero，检查新代替换旧代、没有搜索机器人时只剩三项。001、012 与上一代 GuanZero 仍在归档、`botModelId` 仍能解析，但 `botChoiceId` 回到默认 9001。菜单默认 9001（`defaultChoice`）与 `defaultId` 现任冠军、两代门控证据的检查继续单独执行；`search-bot.test.mjs` 另查新档案四席默认 9001、旧 v1 偏好中的 `017` 迁移为默认、已退出菜单的已存选择回到默认，以及底座不是现任冠军或不在菜单里的 `defaultChoice` 被拒绝。`bot_setup_smoke.py` 核对构建清单四项、`danMCai-reason-v000855042` 名称、`defaultId`（菜单默认）与 `neuralDefaultId`（冠军），并预置指向 001／012／旧 GuanZero 的 v2 存储，检查它们回到默认而 Clint 保留。
 
 ## Clint 2026-11-06 公开牌史策略
 

@@ -8,9 +8,13 @@ import {
   BOT_MODELS,
   BOT_CHOICES,
   DEFAULT_BOT_MODEL,
+  NEURAL_DEFAULT_MODEL,
+  SEARCH_BOTS,
   botModelName,
+  searchBot,
 } from '../src/ai/model-catalog.mjs';
 import { modelBytes } from '../../ai/publishing/artifacts.mjs';
+import { nodeStub } from './node-stub.mjs';
 import tributeModel from '../src/ai/tribute-model.json' with { type: 'json' };
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -25,6 +29,21 @@ async function sourceFiles(directory) {
   }
   return files;
 }
+const bundles = {
+  app: { entryPoints: [path.join(root, 'web/src/app.js')] },
+  ai: { entryPoints: [path.join(root, 'web/src/ai/worker.mjs')], external: ['./vendor/*'] },
+  tribute: {
+    entryPoints: [path.join(root, 'web/src/ai/tribute-worker.mjs')],
+    external: ['./vendor/*'],
+  },
+  practice: { entryPoints: [path.join(root, 'web/src/rule-bot/practice-worker.mjs')] },
+  search: {
+    entryPoints: [path.join(root, 'web/src/ai/search-worker.mjs')],
+    external: ['./vendor/*'],
+    plugins: [nodeStub],
+  },
+};
+const loader = { '.jpg': 'file', '.png': 'file', '.svg': 'file' };
 const hash = createHash('sha256');
 for (const file of await sourceFiles('web/src')) {
   hash.update(file);
@@ -34,6 +53,24 @@ for (const file of await sourceFiles('web/src')) {
       : await readFile(path.join(root, file)),
   );
 }
+// Modules bundled from outside web/src (ai/shared, ai/danMCai/...) are part of the app version too.
+const inputs = new Set();
+for (const options of Object.values(bundles)) {
+  const { metafile } = await build({
+    ...options,
+    bundle: true,
+    format: 'esm',
+    write: false,
+    metafile: true,
+    outdir: path.join(root, 'web/dist/.analysis'),
+    loader,
+    logLevel: 'silent',
+    absWorkingDir: root,
+  });
+  for (const input of Object.keys(metafile.inputs)) inputs.add(input);
+}
+for (const input of [...inputs].filter((f) => !f.startsWith('web/src/') && !f.includes(':')).sort())
+  hash.update(input).update(await readFile(path.join(root, input)));
 const modelVersions = {};
 for (const [key, model] of Object.entries(MODELS)) {
   const bytes = await readFile(path.join(root, 'ai/danMCai/models/baseline', model.file));
@@ -46,6 +83,14 @@ for (const model of BOT_MODELS) {
   botBytes.set(model.file, bytes);
   modelVersions['bot:' + model.id] = model.sha256.slice(0, 16);
   hash.update(model.id).update(bytes);
+}
+for (const bot of SEARCH_BOTS) {
+  const base = searchBot(bot.id) && BOT_MODELS.find((model) => model.id === bot.base);
+  if (!base) throw Error(`Search bot ${bot.id} has no base model`);
+  const bytes = await modelBytes(root, { id: 'belief:' + bot.id, ...bot.belief });
+  botBytes.set(bot.belief.file, bytes);
+  modelVersions['belief:' + bot.id] = bot.belief.sha256.slice(0, 16);
+  hash.update(bot.id).update(bytes);
 }
 if (tributeModel.enabled) {
   if (
@@ -125,6 +170,16 @@ await build({
   external: ['./vendor/*'],
 });
 await build({
+  ...bundles.search,
+  outfile: path.join(root, 'web/dist/assets/search-worker.mjs'),
+  bundle: true,
+  format: 'esm',
+  target: 'es2022',
+  sourcemap: 'external',
+  charset: 'utf8',
+  define: { __MODEL_VERSIONS__: JSON.stringify(modelVersions) },
+});
+await build({
   entryPoints: [path.join(root, 'web/src/rule-bot/practice-worker.mjs')],
   outfile: path.join(root, 'web/dist/assets/clint-practice-worker.mjs'),
   bundle: true,
@@ -143,11 +198,15 @@ await writeFile(
   JSON.stringify(
     {
       models: BOT_MODELS,
+      searchBots: SEARCH_BOTS,
+      // menu default for new players; neuralDefaultId is the champion behind tribute, search
+      // fallbacks, the coach's fallback values and the private table
       defaultId: DEFAULT_BOT_MODEL,
+      neuralDefaultId: NEURAL_DEFAULT_MODEL,
       choices: BOT_CHOICES.map((model) => ({
         id: model.id,
         name: botModelName(model.id),
-        kind: model.kind || 'neural',
+        kind: searchBot(model.id) ? 'search' : model.kind || 'neural',
       })),
     },
     null,

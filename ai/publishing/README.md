@@ -3,6 +3,7 @@
 - [publish-web-model.mjs](publish-web-model.mjs)：冻结完整导出、验证、上传 Release、注册模型并记录证据。
 - [artifacts.mjs](artifacts.mjs)：构建时下载模型并核对 SHA-256。
 - [archive-models.py](archive-models.py)：历史权重归档工具。
+- [publish-belief-asset.mjs](publish-belief-asset.mjs)：把研究机器人（`searchBots`）的推断网络发布为固定 Release 附件；先按清单核对 SHA 和大小并写入构建缓存，`--publish` 才建 tag（不覆盖已有 tag）并核对公网 SHA。清单项由人工编写和审查，工具不改清单。
 - `cache/`：本机发布与下载缓存，不提交 Git。
 
 玩家看到的模型名称来自真实训练版本；正式清单位于 [web/src/ai/model-catalog.json](../../web/src/ai/model-catalog.json)。[发布与另一台电脑接入说明](../../web/docs/WEB_MODELS.md)。
@@ -11,7 +12,7 @@
 
 Mac 续训与 Windows 原运行按相同冠军证据发布；`--source` 写实际运行名，清单的 `source.champion` 绑定 accept 记录和 SHA。普通归档步骤仍不自动晋升默认模型。
 
-仅提供 Clint、GuanZero 最近两代、danMCai 初始版和danMCai 最近两代真实门控冠军，默认danMCai 现任冠军。GuanZero 名称为 `训练任务名-版本数值`，发布新代只轮换它的两项；不可变 Release 和历史证据保留。具体参数、冠军证据及默认保护以 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 为准。
+2026-11-09 起菜单只提供四项：Clint、最近注册的一代 GuanZero、danMCai 现任真实门控冠军（`danMCaiChampions[0]`）和研究机器人 9001（danMCai-reason-v000855042，017＋推断网络搜索，所有者授权，非冠军）；初始版、上一任冠军与旧 GuanZero 只保留归档。按所有者 2026-11-09 指示，菜单默认 `selection.defaultChoice` 为 9001，`defaultId` 仍是danMCai 现任冠军。`publish-web-model.mjs` 只改 `models` 与 `webModels`，保留 `searchBots` 与 `defaultChoice`；冠军更换后若 `defaultChoice` 的底座不再是现任冠军，清单校验会失败，须另行决定。GuanZero 名称为 `训练任务名-版本数值`，发布新代替换菜单里的旧一代；不可变 Release 和历史证据保留。具体参数、冠军证据及默认保护以 [WEB_MODELS.md](../../web/docs/WEB_MODELS.md) 为准。
 
 周期同步同时归档新完成的 Clint 开发评测；即使没有新权重，也应识别新的评测证据。发布或命名变化同步根 README、相关指南、CHANGELOG 与研究报告，不能仅更新清单。
 

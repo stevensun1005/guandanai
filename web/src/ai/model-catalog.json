@@ -519,10 +519,66 @@
     }
   ],
   "selection": {
-    "mode": "champions-v1",
+    "mode": "latest-v2",
     "danMCaiChampions": [
       "017",
       "012"
-    ]
-  }
+    ],
+    "defaultChoice": "9001"
+  },
+  "searchBots": [
+    {
+      "id": "9001",
+      "kind": "belief-search",
+      "base": "017",
+      "belief": {
+        "file": "belief-v1-16d76783.onnx",
+        "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+        "bytes": 3931285,
+        "url": "https://github.com/stevensun1005/guandanai/releases/download/web-belief-v1-16d76783/belief-v1-16d76783.onnx",
+        "featureVersion": "belief-v1",
+        "trainReportSHA256": "7f022c7640e0102dd25bfe497b6c0bc2dc1e3480dc1dfcf5144fa73ab6c95f0d",
+        "trainingSeeds": [
+          4255121000,
+          4255160999
+        ],
+        "trainingBand": [
+          21,
+          80
+        ]
+      },
+      "search": {
+        "lo": 21,
+        "hi": 40,
+        "worlds": 8,
+        "k": 6,
+        "net": 2,
+        "endgameHi": 20,
+        "endgameWorlds": 8,
+        "minWorlds": 4,
+        "tieTolerance": 1e-9,
+        "solverMaxNodes": 1500000,
+        "worldSeed": "(seed*1009 + ply*7919)>>>0"
+      },
+      "version": "v000855042-bsearch1-16d76783",
+      "sha256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "source": {
+        "status": "research-bot-not-champion-deployment-not-acceptance",
+        "tested": "Node bot midgame-search.mjs --worlds-source=belief --endgame=pimc --endgame-hi=20 --endgame-worlds=belief; held-out H4 990,023,757-990,026,756: +0.237 [0.208, 0.266] mean signed round points per deal pair vs champion-017 opponents, single rounds, no tribute; H3 midgame only +0.139 [0.111, 0.166]",
+        "scope": "validated only vs champion-017 opponents in single rounds without tribute; untested vs humans, human partners, mixed teams or tribute rounds; browser budget overruns play champion 017",
+        "evidence": [
+          {
+            "file": "ai/research/evaluation/window2-20261109/results/C-h4.json",
+            "sha256": "17cf1dcf969ae0a1c9ffd0ab1bdbe58b349aafd9dfadccd5900e30ecd76075be"
+          },
+          {
+            "file": "ai/research/evaluation/window1-20261109/results/H3-compare.json",
+            "sha256": "876bb00067cb47783534c0577f9e42641aa096b53fca9ee884737b35baf08b4e"
+          }
+        ],
+        "deployment": "ai/research/evaluation/web-search-bot-9001.json",
+        "authorizedAt": "2026-11-09"
+      }
+    }
+  ]
 }

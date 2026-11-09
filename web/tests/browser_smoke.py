@@ -11,6 +11,7 @@ ROOT = next(p for p in Path(__file__).resolve().parents if (p / "package.json").
 sys.path.insert(0, str(ROOT))
 from ai.danMCai.reference.numpy_engine import PolicyNetwork, encode, cards_array
 
+CHAMPION = json.loads((ROOT / "web/src/ai/model-catalog.json").read_text(encoding="utf8"))["selection"]["danMCaiChampions"][0]
 OUT = ROOT / "web/artifacts/validation/browser-release"
 OUT.mkdir(parents=True, exist_ok=True)
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8765"
@@ -80,8 +81,9 @@ def main():
         host.evaluate("() => {aiDecide=()=>{throw Error('Unexpected classic decision')}}")
         host.locator('[data-seat="S"]').click()
         host.locator("#botStyleBox summary").click()
-        host.locator('[data-bot-seat="E"]').select_option("001")
-        host.locator('[data-bot-seat="W"]').select_option("001")
+        # a non-default menu entry (the four-entry menu no longer offers P0 001)
+        host.locator('[data-bot-seat="E"]').select_option(CHAMPION)
+        host.locator('[data-bot-seat="W"]').select_option(CHAMPION)
         host.locator("#shareRoomBtn").click()
         invite = host.evaluate("navigator.clipboard.readText()")
         assert f"room={code}" in invite
@@ -101,14 +103,14 @@ def main():
         guest.locator("#nick").fill("朋友")
         guest.locator("#joinBtn").click()
         guest.wait_for_function('() => (NET.hostConn&&NET.hostConn.open)', timeout=25000)
-        guest.wait_for_function("() => (document.querySelector('[data-bot-seat=E]').value==='001')")
+        guest.wait_for_function("id => (document.querySelector('[data-bot-seat=E]').value===id)", arg=CHAMPION)
         assert guest.locator('[data-bot-seat="E"]').is_disabled()
         guest.locator('[data-seat="N"]').click()
         host.wait_for_function("() => (NET.lobby.N==='朋友')", timeout=10000)
         host.locator("#sitBtn").click()
         host.wait_for_function("() => (NET.mode==='host')")
         guest.wait_for_function("() => (NET.mode==='guest')")
-        assert host.evaluate("botModels")[1::2] == ["001", "001"]
+        assert host.evaluate("botModels")[1::2] == [CHAMPION, CHAMPION]
         assert guest.evaluate("botModels") == host.evaluate("botModels")
         assert not guest.evaluate("TableBot.ready")
         assert not guest_models, guest_models
