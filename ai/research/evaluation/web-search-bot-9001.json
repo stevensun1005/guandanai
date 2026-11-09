@@ -783,12 +783,13 @@
     "supersedes": "budget50s20261109.browserBudgets.hardTimeoutMs (56000 from the post) and its first-load / init-retry rules",
     "constants": {
       "source": "web/src/ai/turn-timing.mjs",
-      "sha256": "ac428a86e089bec54226e346c77e0fa2c05c95ac6d48ba596e2b1f6f6cca45dc",
+      "sha256": "ef953e6e812e3b6762628ac6dc42922b395f5913708e71b1166419fb394c4109",
       "TURN_MS": 60000,
       "REASON_MS": 50000,
       "HARD_MS": 52000,
       "CLINT_BRAIN_MS": 30000,
-      "RULES_ONLY_TIMEOUT_MS": 5000
+      "FALLBACK_RETRY_MS": 5000,
+      "note": "RULES_ONLY_TIMEOUT_MS (699674b) was renamed FALLBACK_RETRY_MS in 2d10594: only the second champion-017 request after a replaced AI worker uses it; sha256 is the 2d10594 file (699674b: ac428a86e089bec54226e346c77e0fa2c05c95ac6d48ba596e2b1f6f6cca45dc)"
     },
     "measuredFrom": "the computer seat's turn start on the host: TableBot.prefetch(p) records performance.now() as the turn clock is created (turns.js); a restored host without a record uses the turn clock's elapsed time",
     "danMCaiReason": [
@@ -796,19 +797,19 @@
       "each exact-solver call is capped by min(solverMs 3000, time left): with less than 3000 ms left a one-call solver limited to the time left is used (same node limit); any stop of such a capped call throws SearchBudgetError (the whole search falls back to 017), a capped call that finishes returns the same exact value, so no call runs past the 50 s mark and completed decisions are unchanged",
       "hardTimeoutMs = 50000 + 2000 = 52000 from the turn start; the table job is dropped at that time whether running (worker replaced) or queued; a job that could only be posted after the 50 s mark is not posted (reason 'budget')",
       "first-load wait min(FIRST_LOAD_WAIT_MS 10000, time left to 50 s)",
-      "champion 017's move is requested on the AI worker in parallel with the search, so a fallback plays at once",
+      "champion 017's move is requested on the AI worker in parallel with the search, so a fallback plays at once; since 2d10594 the AI worker load (check()) runs inside that parallel request, so a valid searched move never waits for it",
       "non-sticky: the 30 s init back-off (search-init-wait) is removed; after any fallback, timeout, worker error/replacement or failed load the next decision loads (if needed) and searches",
       "move coach unchanged in rules: 50 s from its own request, hard timeout now 52 s from its post, never blocks the human, table searches first"
     ],
     "clint": [
       "WEB_BRAIN back to upstream ms 30000; the controller sends brainMs = min(30000, 50000 - elapsed since turn start); clintBrainSettings(brainMs < 1) plays the rules only",
-      "the rule worker request waits until 52 s from the turn start (was 15 s, whose timeout showed the table-failure panel); a timeout or worker error replaces the worker and requests the rules-only move (5 s limit) instead of the panel; the next move sends the brain budget again",
+      "the rule worker request waits until 52 s from the turn start (was 15 s, whose timeout showed the table-failure panel); 699674b replaced the worker and requested the rules-only move from a new worker (5 s limit); since 2d10594 a timeout, crash, error reply, unusable reply or an AI worker not loaded by 52 s plays the rules-only move computed on the page (decideClintRule(observation, RULES_ONLY); Node 2,690 decisions mean 0.15 ms, max 13 ms), so no second worker request can fail into the panel; the next move sends the brain budget again",
       "web/src/rule-bot/runtime.mjs sha256 0b372ee9863190419edb41af08fec01d9f6435cc255e99960511275dbb713ad5 (was f53061083cc943fcfed379d7c8815787b073df415bcf43db49922198bad3bcb2); strategy.js and endgame-brain.mjs unchanged; rules-v2 decisions with an unfinished brain are unchanged, only the browser brain's time cap changes (10 s -> 30 s)"
     ],
     "tests": {
       "npmTest": "416/416 pass on the working tree of 699674b (node --test, all suites); a later rerun under nice -n 10 had 415/416, the one failure being ai/danMCai/tests/round-pairs.test.mjs (os.setPriority EACCES under nice, unrelated; 5/5 pass without nice)",
       "searchBotTest": "web/tests/search-bot.test.mjs 21/21: constants, capped solver calls (finished = same decision, stopped = SearchBudgetError), remainingMs net of pause and load, 52 s drop and worker replacement then next move searches, failed load / budget fallback / worker crash then next move searches, no post after 50 s, Clint brain budget",
-      "turnTimingTest": "web/tests/turn-timing.test.mjs 2/2: table controller with fake workers - Clint brain hung to 52 s plays the rules-only move and the next move asks for the brain again; danMCai-reason requests 017 alongside the search, a budget fallback plays 017, the next move plays the searched move, a hung search worker is replaced at 52 s and the next move searches on the fresh worker",
+      "turnTimingTest": "web/tests/turn-timing.test.mjs 4/4 on 2d10594 (2/2 on 699674b): table controller with fake workers - Clint brain hung to 52 s plays the rules-only move computed on the page (no second worker request) and the next move asks for the brain again; danMCai-reason requests 017 alongside the search, a budget fallback plays 017, the next move plays the searched move, a hung search worker is replaced at 52 s and the next move searches on the fresh worker; Clint error reply, crash, AI worker not loaded by 52 s, unusable reply in a row, each playing the page rules-only move, then the brain's move; danMCai-reason hang to 52 s, failed network load, worker crash, error reply in a row, each playing 017, then the searched move",
       "formatAndBuild": "npm run format:check and npm run build pass (build version c56510eaa6)"
     },
     "checks": {
@@ -956,6 +957,72 @@
       "no new match; the +0.237 evidence scope and the identity are unchanged",
       "real phones and a host + joiner room were not run for this change",
       "a capped solver call uses a one-call solver without the shared transposition table, so near the node limit it can stop where the warm table would not; such a stop discards the search (017), never a different searched move"
-    ]
+    ],
+    "review2d10594": {
+      "webCodeCommit": "2d10594",
+      "kind": "adversarial review fixes; deployment timing, not a strength result",
+      "changes": [
+        "Clint fallback computed on the page instead of a second rule-worker request (which could itself fail into 牌桌准备失败)",
+        "Clint seats bound the AI worker load by the turn's 52 s mark",
+        "danMCai-reason searched move no longer awaits the AI worker load",
+        "RULES_ONLY_TIMEOUT_MS renamed FALLBACK_RETRY_MS"
+      ],
+      "npmTest": "418/418 pass (nice -n 10)",
+      "bundles": "integration guide script b421f0a3... rerun on the working tree of 2d10594: search-worker.mjs 89142 bytes 10079e4bddc771241cdb617ce7dab799a08870b9aca87cb97e77b6d993ba27a4, reason-client.mjs 51063 bytes 869ab81e3975e82bb21b8c2e49d73b4a6e57f3d24fce5d8f1493678002e27f0f (unchanged); ORT and models unchanged",
+      "chromeMixedRound": {
+        "machine": "this Mac, Chrome headless, local static build web/dist on 127.0.0.1:8804; research jobs running at the same time; ad-hoc script, not a repo smoke",
+        "seats": {
+          "E": "9001",
+          "N": "clint-rule",
+          "W": "9001",
+          "S": "human (hint autoplay)"
+        },
+        "reasonMoves": {
+          "n": 45,
+          "p50Ms": 788,
+          "p95Ms": 991,
+          "maxMs": 998
+        },
+        "searchStats": {
+          "requests": 16,
+          "searched": 16,
+          "differs": 1,
+          "fallbacks": 0,
+          "searchMsMax": 509
+        },
+        "clintMoves": {
+          "n": 25,
+          "p50Ms": 892,
+          "p95Ms": 10940,
+          "maxMs": 30698,
+          "note": "the brain used its full upstream 30 s on one move"
+        },
+        "clintFallbacks": {
+          "timeout": 0,
+          "error": 0
+        },
+        "failurePanel": false,
+        "pageErrors": 0
+      },
+      "chromeForcedHangRound": {
+        "method": "same seats; a page Worker wrapper swallowed the third search message and the first brain-phase Clint rule request (never posted to the worker)",
+        "reasonHungMoveMs": 52001,
+        "reasonFallback": "017 (fallbacks.timeout 1)",
+        "searchRequestsAfterHang": 3,
+        "clintHungMoveMs": 52007,
+        "clintFallback": "rules-only on the page (clintFallbacks.timeout 1)",
+        "brainRequestsAfterHang": 6,
+        "otherMovesMaxMs": {
+          "reason": 995
+        },
+        "failurePanel": false,
+        "pageErrors": 0
+      },
+      "notTested": [
+        "real phones",
+        "host plus joiner room",
+        "AI worker (017) load failure: the fallback itself needs 017, so a reason/neural seat still shows the failure panel when 017 cannot load at all"
+      ]
+    }
   }
 }

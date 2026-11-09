@@ -376,7 +376,7 @@ const reasonClient = () =>
 - 牌桌请求到来时，丢掉排队中的评价任务；如果有评价任务在跑，先发 `cancel`，500 毫秒内还没停下，就替换 Worker 并重新加载网络（通常 0.3–0.6 秒）。
 - 牌桌任务的截止和硬超时都从**回合开始**（`startedAt`）计时：在评价任务后面排队、等 Worker 重新加载的时间都计入。发出时已过 50 秒的牌桌任务不再发给 Worker，直接回落 `budget`。
 
-**`decide` 最长要等多久**：不超过回合开始后约 52 秒（`startedAt + hardTimeoutMs`），包括首次加载、排在评价或重新加载后面的情况（此前从发出请求起算，最坏可达 0.5＋60＋56 秒，已取消）；实际多数决策不到 1 秒。牌桌一侧仍应自设一个略长的保险上限（第 8.3 节）。
+**`decide` 最长要等多久**：不超过回合开始后约 52 秒（`startedAt + hardTimeoutMs`），包括首次加载、排在评价或重新加载后面的情况（此前从发出请求起算，最坏可达 0.5＋60＋56 秒，已取消）；实际多数决策不到 1 秒。牌桌一侧仍应自设一个略长的保险上限（第 8.3 节），并让它也包住第一次加载客户端打包的时间。
 
 客户端返回的回落原因包括：`timeout`、`loading`、`budget`（发出时已过 50 秒）、`preempted`、`error`，以及 Worker 返回的 `budget`、`out-of-band`、`known-cards`、`min-worlds`、`cancelled`。本仓库还会在牌桌一侧记录 `mismatch`，指搜索结果与本桌的牌对不上。
 
@@ -453,7 +453,7 @@ const reasonClient = () =>
 
 - 在 `botStart(p)`（回合计时开始时）记下 `startedAt = performance.now()`，传给 `client.decide(…, {startedAt})`。思考停顿、首次加载、你们自己的等待都要计入 50 秒，不要在停顿之后才开始计时。
 - 017 的回落出法**和搜索同时开始算**（`NeuralBot.decide('danmcai', …)` 与搜索并行），搜索回落时直接用它；不要等到 50 秒后才开始算 017（首次用到时可能还要下载、编译模型）。
-- 保险上限：`startedAt + m.HARD_MS + 1000`（53 秒）还没有结果就按回落处理；正常情况下 `decide` 在 52 秒前已经返回。
+- 保险上限：回合开始后 53 秒（`HARD_MS`＋1 秒）还没有结果就按回落处理，而且这个上限要包住**整个** `reasonSearch`，包括第一次 `reasonClient()` 动态加载 `reason-client.mjs`：只包住 `client.decide` 时，网络慢到加载客户端就要几十秒的那一手会一直等下去，直到 `BOT_WAIT_MS` 触发 `botFail`，之后整页都改出 Clint 规则（正是规则禁止的“一直回退”）。加载完成前拿不到 `m.HARD_MS`，所以示意里直接写 53,000 毫秒。正常情况下 `decide` 在 52 秒前已经返回。
 - 你们的 `BOT_WAIT_MS = 30000` 必须提高：它要容下“到 52 秒的搜索＋017 回落”，并且整手不超过 60 秒，建议 **`BOT_WAIT_MS = 60000`，从回合开始（`botStart`）计**。超过后 `aiMove` 记 `nn.err` 并调用 `botFail`，会让本页之后都改用 Clint 规则，所以它只能作为 017 本身失败时的最后防线，不能比搜索加回落先触发。同时核对你们给电脑座位的出牌计时、超时托管和联机掉线判定不会在 60 秒内先触发；只有房主（负责计算的页面）在等，Worker 不占主线程，心跳照常。若一定要保留 30 秒的 `BOT_WAIT_MS`，就把推理截止改到 30 秒内（例如传 `startedAt` 时减去 20 秒的余量）：少数长搜索会多回落，不再符合所有者的 50 秒规则，须向你们的所有者说明。
 - 不要做“失败一次就停用搜索”的标志：一手回落后，下一手照常调用 `client.decide`。
 
@@ -490,16 +490,23 @@ const botId = () =>
 //   (id === REASON_ID ? reasonDecide(p, g, startedAt) : NeuralBot.decide(id, g, p, NET.off))
 // nn.id 仍是 REASON_ID，所以 aiMove 里 BOT_USED[p] 会记成 REASON_ID（含 017 回落的出牌）。
 
+const REASON_CAP_MS = 53000; // = HARD_MS (52,000) + 1,000：保险上限，从回合开始算
+
 async function reasonDecide(p, g, startedAt) {
   // 017 的回落出法与搜索同时开始算，搜索回落时立即可用（60／50／10 规则的 10 秒余量）
   const champion = Promise.resolve().then(() => NeuralBot.decide(REASON_BASE, g, p, NET.off));
   champion.catch(() => {});
-  let pl;
-  try {
-    pl = await reasonSearch(p, startedAt);
-  } catch (e) {
-    pl = undefined; // 搜索的任何异常都回落 017，不调用 botFail
-  }
+  // 保险上限包住整个 reasonSearch（含第一次加载 reason-client.mjs），从回合开始算 53 秒
+  let timer;
+  const pl = await Promise.race([
+    reasonSearch(p, startedAt).catch(() => undefined), // 搜索的任何异常都回落 017，不调用 botFail
+    new Promise((res) => {
+      timer = setTimeout(
+        () => res(undefined),
+        Math.max(0, startedAt + REASON_CAP_MS - performance.now()),
+      );
+    }),
+  ]).finally(() => clearTimeout(timer));
   // 没有“失败一次就停用”的标志：下一手照常搜索
   return pl !== undefined ? pl : champion;
 }
@@ -523,18 +530,8 @@ async function reasonSearch(p, startedAt) {
     REASON_SEEDS.set(key, crypto.getRandomValues(new Uint32Array(1))[0]);
   }
   const payload = m.searchPayload(G, p, NET.off, REASON_SEEDS.get(key));
-  let timer;
-  const r = await Promise.race([
-    // 推理在回合开始后 50 秒停下，52 秒前返回（含首次加载和排队）
-    client.decide(REASON_BOT, payload, { startedAt }),
-    new Promise((res) => {
-      // 保险上限：回合开始后 53 秒
-      timer = setTimeout(
-        () => res({ fallback: true, reason: 'caller-timeout' }),
-        Math.max(0, startedAt + m.HARD_MS + 1000 - performance.now()),
-      );
-    }),
-  ]).finally(() => clearTimeout(timer));
+  // 推理在回合开始后 50 秒停下，52 秒前返回（含首次加载和排队）；保险上限在 reasonDecide
+  const r = await client.decide(REASON_BOT, payload, { startedAt });
   if (!r || !r.ok || now() !== at) return undefined;
   const trick = G.trick && G.trick.play;
   if (!r.ids.length) return !r.shape && trick ? null : undefined;
@@ -792,43 +789,44 @@ function recModel(id) {
 
 已经按本文旧版接入的项目（例如 Clint 网站，它在 `46f5e76` 里接入了 danMCai-reason），按下面的条目从旧到新逐条更新。每条都写明本仓库的网页代码提交、要改什么、怎么验证。最新的在最前。
 
-### 2026-11-09 · `699674b`：电脑出牌时间规则“60 秒出牌、50 秒推理、10 秒回落”
+### 2026-11-09 · `699674b`＋复核 `2d10594`：电脑出牌时间规则“60 秒出牌、50 秒推理、10 秒回落”
 
 **规则（所有者原话）**：“机器人和真人一样是最多60s出牌时间 推理时间最多50s 留出来10s为了万一没推理出来回退出牌用 上一手没成功下一手依然会推理 不会一次回退后面一直回退”。
 
 **本仓库改了什么**（搜索参数 `SEARCH_BOT_V1`、模型、身份 `9001`／清单摘要 `442d888a…6a24`、收集身份都没变；预算内完成的搜索，决策与改动前逐项相同）：
 
-| 项目                     | 之前（`296c27e`）                                     | 现在（`699674b`）                                                                                            |
-| ------------------------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| 50 秒推理从哪里算        | 牌桌任务发给 Worker 时                                | **回合开始**（`client.decide(bot, payload, {startedAt})`，含思考停顿、首次加载、排队）                       |
-| 单次精确求解时限         | 3 秒（可能越过 50 秒）                                | min(3 秒, 到 50 秒的剩余时间)；被截短后没解完就整次回落 017，解完则值不变                                    |
-| 硬超时                   | 56 秒，从发出起算（`hardTimeoutMs` = 50＋3＋3）       | **52 秒，从回合开始起算**（`hardTimeoutMs` = 50＋2）；在队列里等的任务到时同样放弃                           |
-| `decide` 最坏返回时间    | 约 0.5＋60＋56 秒（评价卡住、Worker 重载时）          | 回合开始后约 52 秒                                                                                           |
-| 首次加载等待             | 最多 10 秒                                            | 最多 10 秒，且不超过到 50 秒的剩余时间；等待计入 50 秒                                                       |
-| `init` 失败后            | 30 秒内不再重试（`search-init-wait`），这段时间全回落 | 下一次请求立即重试（没有冷却）                                                                               |
-| 回落原因                 | `timeout`、`loading`、`preempted`、`error`…           | 另加 `budget`（发出时已过 50 秒）；`search-init-wait` 不再出现                                               |
-| Worker 消息              | `{type: 'search', payload}`                           | `{type: 'search', payload, remainingMs}`（客户端填写）                                                       |
-| 客户端打包新导出         | —                                                     | `TURN_MS`（60,000）、`REASON_MS`（50,000）、`HARD_MS`（52,000）；`client.stats.hardTimeoutMs`                |
-| 017 回落                 | 搜索回落后才请求 017                                  | 与搜索同时请求，回落时立即出（本仓库 `controller.js`）                                                       |
-| Clint 残局大脑（本仓库） | 10 秒（规则 Worker 15 秒超时，超时弹“牌桌准备失败”）  | 上游的 30 秒且不超过回合开始后 50 秒；规则 Worker 等到 52 秒；超时或出错出只用规则的出法，下一手照常启用大脑 |
+| 项目                     | 之前（`296c27e`）                                     | 现在（`699674b`）                                                                                                                                                                 |
+| ------------------------ | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 50 秒推理从哪里算        | 牌桌任务发给 Worker 时                                | **回合开始**（`client.decide(bot, payload, {startedAt})`，含思考停顿、首次加载、排队）                                                                                            |
+| 单次精确求解时限         | 3 秒（可能越过 50 秒）                                | min(3 秒, 到 50 秒的剩余时间)；被截短后没解完就整次回落 017，解完则值不变                                                                                                         |
+| 硬超时                   | 56 秒，从发出起算（`hardTimeoutMs` = 50＋3＋3）       | **52 秒，从回合开始起算**（`hardTimeoutMs` = 50＋2）；在队列里等的任务到时同样放弃                                                                                                |
+| `decide` 最坏返回时间    | 约 0.5＋60＋56 秒（评价卡住、Worker 重载时）          | 回合开始后约 52 秒                                                                                                                                                                |
+| 首次加载等待             | 最多 10 秒                                            | 最多 10 秒，且不超过到 50 秒的剩余时间；等待计入 50 秒                                                                                                                            |
+| `init` 失败后            | 30 秒内不再重试（`search-init-wait`），这段时间全回落 | 下一次请求立即重试（没有冷却）                                                                                                                                                    |
+| 回落原因                 | `timeout`、`loading`、`preempted`、`error`…           | 另加 `budget`（发出时已过 50 秒）；`search-init-wait` 不再出现                                                                                                                    |
+| Worker 消息              | `{type: 'search', payload}`                           | `{type: 'search', payload, remainingMs}`（客户端填写）                                                                                                                            |
+| 客户端打包新导出         | —                                                     | `TURN_MS`（60,000）、`REASON_MS`（50,000）、`HARD_MS`（52,000）；`client.stats.hardTimeoutMs`                                                                                     |
+| 017 回落                 | 搜索回落后才请求 017                                  | 与搜索同时请求，回落时立即出（本仓库 `controller.js`）                                                                                                                            |
+| Clint 残局大脑（本仓库） | 10 秒（规则 Worker 15 秒超时，超时弹“牌桌准备失败”）  | 上游的 30 秒且不超过回合开始后 50 秒；规则 Worker 等到 52 秒；超时、出错、未加载好或回复对不上时，页面直接算只用规则的出法（`2d10594`，不再另发 Worker 请求），下一手照常启用大脑 |
 
 **你们要改的地方**（按第 8.3 节当前示意；行号以你们的版本为准）：
 
 1. **换打包文件**：在包含本文的 `main` 提交上按第 4.1 节重新取出脚本（SHA `b421f0a3…dbd97`）并运行，用输出替换 `bot/reason/assets/search-worker.mjs`（89,142 字节，`10079e4b…27a4`）和 `bot/reason/assets/reason-client.mjs`（51,063 字节，`869ab81e…7f0f`），同步更新 `web/build.py` 里的 SHA／字节清单。ORT 三个文件和两份模型不变。
 2. **从回合开始计时**：在 `botStart(p)` 开头记下 `const startedAt = performance.now()`，一路传到 `client.decide(REASON_BOT, payload, { startedAt })`。不要在思考停顿之后、也不要在 `reasonClient()` 加载完之后才取时间。
 3. **017 与搜索同时算**：`reasonDecide` 一开始就调用 `NeuralBot.decide('danmcai', g, p, NET.off)`，搜索回落时直接用它（第 8.3 节示意）。
-4. **调用方等待上限**：把 `reasonSearch` 里的保险上限从 `firstLoadWaitMs + hardTimeoutMs(b) + 1000`（67 秒）改为 `startedAt + m.HARD_MS + 1000 - performance.now()`（回合开始后 53 秒）。
+4. **调用方等待上限**：把 `reasonSearch` 里的保险上限 `firstLoadWaitMs + hardTimeoutMs(b) + 1000`（67 秒）删掉，改为在 `reasonDecide` 里用回合开始后 53 秒（`startedAt + 53000 - performance.now()`）包住**整个** `reasonSearch`，包括第一次 `await reasonClient()`（第 8.3 节示意）。只包住 `client.decide` 不够：加载客户端本身慢的那一手会一直等到 `BOT_WAIT_MS` 触发 `botFail`，之后整页改出 Clint 规则。
 5. **`BOT_WAIT_MS`**：从 30 秒提高到 **60 秒，从回合开始（`botStart`）计**，包括 017 回落。它只在 017 本身也失败时兜底调用 `botFail`；30 秒的值会在 50 秒推理还没结束时就把整页改成 Clint 规则，违反规则的“不会一直回退”。同时确认你们的电脑座位出牌计时、超时托管和掉线判定不会在 60 秒内先触发。
 6. **不粘滞**：检查你们的接入代码没有“搜索失败一次就不再搜索”的标志、冷却或重试计数；任何回落之后下一手都要照常调用 `client.decide`。`botFail` 只能由 017 失败触发，搜索失败不能触发它。
-7. **Clint 座位（建议，同一规则）**：你们的 Clint 电脑若启用残局大脑（上游 30 秒），按同一框架：大脑上限取 min(30 秒, 回合开始后 50 秒的剩余时间)；超时、出错或卡住时出只用规则的出法，不要弹失败提示，也不要停用之后的大脑。本仓库的做法见 `web/src/ai/controller.js`（`clintBrainMs`、`RULES_ONLY_TIMEOUT_MS`）和 `web/src/rule-bot/runtime.mjs`（`clintBrainSettings`）。这是你们自己的 Clint 代码，按你们的所有者决定。
+7. **Clint 座位（建议，同一规则）**：你们的 Clint 电脑若启用残局大脑（上游 30 秒），按同一框架：大脑上限取 min(30 秒, 回合开始后 50 秒的剩余时间)；超时、出错或卡住时出只用规则的出法，不要弹失败提示，也不要停用之后的大脑。回落用的规则出法最好不依赖可能已经卡住的 Worker：本仓库在页面上直接算（`decideClintRule(…, RULES_ONLY)`，Node 中最长 13 毫秒）；你们的 Clint 规则本来就在主线程，直接调用即可。本仓库的做法见 `web/src/ai/controller.js`（`clintDecide`、`clintBrainMs`）和 `web/src/rule-bot/runtime.mjs`（`clintBrainSettings`）。这是你们自己的 Clint 代码，按你们的所有者决定。
 8. 出牌评价（`client.evaluate`）不用改：它仍从请求时起算 50 秒、不阻止真人出牌、电脑优先；评价任务的硬超时随 `hardTimeoutMs` 变为 52 秒。
 
 **怎么验证**：
 
-- 本仓库检出（包含本文的 `main`）：`npm ci && node --test web/tests/search-bot.test.mjs web/tests/turn-timing.test.mjs`，21＋2 项通过；`git diff --stat 699674b <你用的提交> -- web/src ai/danMCai ai/shared` 无输出。
-- 打包：第 4.1 节脚本 SHA 为 `b421f0a3…dbd97`，输出 SHA 与第 4.1 节的表一致；`grep -c 'from "node:' bot/reason/assets/*.mjs` 都为 0。
+- 本仓库检出（包含本文的 `main`）：`npm ci && node --test web/tests/search-bot.test.mjs web/tests/turn-timing.test.mjs`，21＋4 项通过（`turn-timing` 的后两项是两类座位连续多种失败后下一手恢复正常）；`git diff --stat 2d10594 <你用的提交> -- web/src ai/danMCai ai/shared` 无输出。
+- 打包：第 4.1 节脚本 SHA 为 `b421f0a3…dbd97`，输出 SHA 与第 4.1 节的表一致（复核 `2d10594` 只改了不进打包的 `controller.js` 和常量名，重新打包后两个文件逐字节不变，仍为 `10079e4b…27a4`、`869ab81e…7f0f`）；`grep -c 'from "node:' bot/reason/assets/*.mjs` 都为 0。
 - 第 14 节第 3 条（构建好的 Worker 与 Node 逐个比较）重做一次：`completedDifferentFromNode` 必须为 0。本仓库 2026-11-09 用这次的打包输出、按 `bot/reason/` 布局跑了 10 局（731,960,000 起，16 个决策）：电脑预算 16/16 与 Node 相同、0 回落，耗时中位 0.46 秒、最长 3.13 秒；手机代理 1 次回落，完成的 15 个全部相同（本地检查，未存为证据文件）。
 - 浏览器（普通模式，电脑选 reason）：每手从 `botStart` 到出牌都在 60 秒内（本仓库实测见主报告第 72 节，最长约 1 秒，含 0.5–1 秒停顿）；把某一手的 `startedAt` 人为设为 51 秒前，这一手出 017（`fallbacks.budget` 加 1），**下一手照常搜索**（`searched` 继续增加）；页面上没有 `botFail` 提示。
+- 卡住时的回落（建议做一次）：在页面里包一层 `Worker`，把某一手的 `search` 消息吞掉不发给 Worker，这一手应在回合开始后约 52 秒出 017（`fallbacks.timeout` 加 1，Worker 被替换），下一手照常搜索，页面上没有 `botFail` 提示。本仓库 2026-11-09 在 `2d10594` 的构建上做了同样的检查（无头 Chrome，一局单人局，东西两席 reason、北家 Clint，本地检查，未存为证据文件）：被吞掉搜索的那一手在 52,001 毫秒出 017，之后 3 次搜索照常；被吞掉残局大脑请求的 Clint 那一手在 52,007 毫秒出只用规则的出法，之后 6 次请求照常带大脑预算；没有失败面板。不吞消息的同一配置一局：reason 45 手中位 0.79 秒、最长 1.00 秒（16 次搜索 0 回落），Clint 25 手中位 0.89 秒、最长 30.7 秒（残局大脑用满上游 30 秒）。
 - 本仓库在真实构建的 Worker 上的截止检查（无头 Chrome，尾盘 20 张局面）：回合开始于 40／46／48.5 秒前的三次决策分别在回合开始后 50,002／50,002／50,001 毫秒回落 017，没有越过 50 秒的求解；回合开始于 45 秒前的另一个局面在 47.5 秒完成搜索。
 
 ### 2026-11-09 · `296c27e`：每步上限 50 秒（已被上一条取代）
