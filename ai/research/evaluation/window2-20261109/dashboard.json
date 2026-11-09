@@ -32,6 +32,11 @@
       "name": "owner-tasks (手动推进，Claude 记录进度)",
       "startMarker": "ownertasks start",
       "endMarker": "ownertasks end"
+    },
+    {
+      "name": "window2f.sh",
+      "startMarker": "window2f start",
+      "endMarker": "window2f end"
     }
   ],
   "stages": [
@@ -425,6 +430,138 @@
       "rule": {
         "type": "descriptive",
         "text": "结果出来后按预登记规则另记"
+      }
+    },
+    {
+      "key": "T-budget50",
+      "ids": [
+        "T-budget50"
+      ],
+      "title": "推理机器人单次出牌时限改为 50 秒",
+      "desc": "中盘／尾盘每步上限 3–4 秒改为 50 秒（电脑与手机），手机单次求解上限改回验收用的 3 秒，首次加载最多等 10 秒，出牌建议同一时限；测试、浏览器检查、推送上线。",
+      "kind": "audit",
+      "queue": "owner-tasks (手动推进，Claude 记录进度)",
+      "after": "立即",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
+    },
+    {
+      "key": "V-eg24",
+      "ids": [
+        "V-eg24"
+      ],
+      "title": "多想 A：精确求解提前到 ≤24 张（开发 600 副）",
+      "desc": "用更多时间把精确求解从 20 张提前到 24 张，与现版本同一批牌配对比较，并量每步用时。",
+      "kind": "compare",
+      "queue": "window2f.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "V/V-eg24-compare.json"
+      },
+      "sides": [
+        {
+          "label": "现版本",
+          "out": "C-w16/w8"
+        },
+        {
+          "label": "多想版本",
+          "out": "V/V-eg24"
+        }
+      ],
+      "total": 600,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "V-eg28",
+      "ids": [
+        "V-eg28"
+      ],
+      "title": "多想 B：精确求解提前到 ≤28 张（开发 600 副）",
+      "desc": "精确求解从 28 张开始；冠军在 17–32 张丢分最多。",
+      "kind": "compare",
+      "queue": "window2f.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "V/V-eg28-compare.json"
+      },
+      "sides": [
+        {
+          "label": "现版本",
+          "out": "C-w16/w8"
+        },
+        {
+          "label": "多想版本",
+          "out": "V/V-eg28"
+        }
+      ],
+      "total": 600,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "V-k10",
+      "ids": [
+        "V-k10"
+      ],
+      "title": "多想 C：中盘多看 10 种出法（开发 600 副）",
+      "desc": "中盘搜索候选从冠军前 6 名加到前 10 名。",
+      "kind": "compare",
+      "queue": "window2f.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "V/V-k10-compare.json"
+      },
+      "sides": [
+        {
+          "label": "现版本",
+          "out": "C-w16/w8"
+        },
+        {
+          "label": "多想版本",
+          "out": "V/V-k10"
+        }
+      ],
+      "total": 600,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "V-w32",
+      "ids": [
+        "V-w32"
+      ],
+      "title": "多想 D：中盘 32 个推断世界（开发 600 副）",
+      "desc": "中盘推断世界从 8 个加到 32 个（16 个时没有提升，这里再加一倍确认）。",
+      "kind": "compare",
+      "queue": "window2f.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "V/V-w32-compare.json"
+      },
+      "sides": [
+        {
+          "label": "现版本",
+          "out": "C-w16/w8"
+        },
+        {
+          "label": "多想版本",
+          "out": "V/V-w32"
+        }
+      ],
+      "total": 600,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
       }
     }
   ]
