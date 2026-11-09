@@ -1,0 +1,297 @@
+{
+  "featureVersion": "belief-v1",
+  "features": 1238,
+  "data": [
+    "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/data"
+  ],
+  "dataProtocols": [
+    {
+      "seeds": [
+        4255121000,
+        4255160999
+      ],
+      "band": [
+        21,
+        80
+      ],
+      "every": 1,
+      "temperature": 0,
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+    }
+  ],
+  "split": {
+    "valSeeds": null,
+    "valMod": 10
+  },
+  "trainRows": 1820093,
+  "trainSeeds": 36000,
+  "valSeeds": 4000,
+  "hyper": {
+    "hidden": 512,
+    "batch": 1024,
+    "lr": 0.0003,
+    "weightDecay": 0.01,
+    "dropout": 0.3,
+    "inputDropout": 0.1,
+    "augmentSuits": true,
+    "maxSteps": 20000,
+    "minutes": 60.0,
+    "seed": 20261109,
+    "device": "mps"
+  },
+  "steps": 20000,
+  "trainSeconds": 313.1483073234558,
+  "rowsPerSecond": 65400.32157621049,
+  "epochs": 11.252172279108814,
+  "initialValidation": {
+    "rows": 203086,
+    "unseenCopies": 7356155,
+    "modelLogLossPerCopy": 0.9758332858426474,
+    "uniformLogLossPerCopy": 0.9758332761971078,
+    "modelTop1": 0.48353344920002367,
+    "uniformTop1": 0.48353344920002367
+  },
+  "finalValidation": {
+    "rows": 203086,
+    "unseenCopies": 7356155,
+    "modelLogLossPerCopy": 0.7923708713954436,
+    "uniformLogLossPerCopy": 0.9758332761971078,
+    "modelTop1": 0.579323981074352,
+    "uniformTop1": 0.48353344920002367
+  },
+  "history": [
+    {
+      "step": 0,
+      "seconds": 0.0,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.9758332858426474,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.48353344920002367,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 1000,
+      "seconds": 20.183114290237427,
+      "trainLossEMA": 0.8348028827079668,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.813688760054547,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5739687377441068,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 2000,
+      "seconds": 41.07166314125061,
+      "trainLossEMA": 0.8276700599620462,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.808621030678566,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5756425741436932,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 3000,
+      "seconds": 56.829543113708496,
+      "trainLossEMA": 0.8236319797632315,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.8064499609295905,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5760545420807474,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 4000,
+      "seconds": 71.76874208450317,
+      "trainLossEMA": 0.819676261070641,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.8040004091335188,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5762923701308632,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 5000,
+      "seconds": 86.90207099914551,
+      "trainLossEMA": 0.816475439226266,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.8019179343821538,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.576758306479404,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 6000,
+      "seconds": 101.90370726585388,
+      "trainLossEMA": 0.8143300465784593,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.8003602298549333,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5764987279359938,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 7000,
+      "seconds": 116.89153027534485,
+      "trainLossEMA": 0.811852560876865,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7988171461634651,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5768875859739225,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 8000,
+      "seconds": 131.91081309318542,
+      "trainLossEMA": 0.8101069615428077,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.797892921905575,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5771163739752629,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 9000,
+      "seconds": 147.03201723098755,
+      "trainLossEMA": 0.8083673534891898,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7970620505013116,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5771694587729596,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 10000,
+      "seconds": 162.02103209495544,
+      "trainLossEMA": 0.8075838362287681,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7962361344694578,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.577191345206837,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 11000,
+      "seconds": 177.0379240512848,
+      "trainLossEMA": 0.8050285452883076,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7958478115453255,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5775287497340662,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 12000,
+      "seconds": 192.02062511444092,
+      "trainLossEMA": 0.804659822310007,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7951303815816168,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5780530045927526,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 13000,
+      "seconds": 207.10374808311462,
+      "trainLossEMA": 0.8044025704136758,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7945840948410081,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5782742478917314,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 14000,
+      "seconds": 222.0912160873413,
+      "trainLossEMA": 0.8029305471444701,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.794549678838146,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5782411463597491,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 15000,
+      "seconds": 237.11103415489197,
+      "trainLossEMA": 0.8022332532629096,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7941188566968144,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5785090852490193,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 16000,
+      "seconds": 252.14616799354553,
+      "trainLossEMA": 0.8021477754539156,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7938922361172874,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5786562409302142,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 17000,
+      "seconds": 267.2533211708069,
+      "trainLossEMA": 0.8003084952329578,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7935780882501395,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.578632519298465,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 18000,
+      "seconds": 282.221467256546,
+      "trainLossEMA": 0.800554059964189,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7931258496222253,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5787295129044997,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 19000,
+      "seconds": 297.23320603370667,
+      "trainLossEMA": 0.7988789572636493,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.792578856682629,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.5793029102839731,
+      "uniformTop1": 0.48353344920002367
+    },
+    {
+      "step": 20000,
+      "seconds": 312.28725028038025,
+      "trainLossEMA": 0.7984700469991766,
+      "rows": 203086,
+      "unseenCopies": 7356155,
+      "modelLogLossPerCopy": 0.7923708713954436,
+      "uniformLogLossPerCopy": 0.9758332761971078,
+      "modelTop1": 0.579323981074352,
+      "uniformTop1": 0.48353344920002367
+    }
+  ],
+  "onnx": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+  "onnxSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+  "note": "Validation rows are whole held-out seeds of the same generation run; final network only."
+}

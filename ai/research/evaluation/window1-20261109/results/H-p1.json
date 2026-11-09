@@ -1,0 +1,70 @@
+{
+  "belief": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+  "beliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "championIsFrozen017": true,
+  "seeds": [
+    3838180000,
+    3838180999
+  ],
+  "trainingSeeds": [
+    [
+      4255121000,
+      4255160999
+    ]
+  ],
+  "heldOutChecked": true,
+  "band": [
+    21,
+    80
+  ],
+  "every": 1,
+  "samples": 8,
+  "worlds": 32,
+  "rounds": 1000,
+  "decisions": 50685,
+  "unseenCopies": 1837083,
+  "beliefModel": {
+    "logLikelihoodPerCopy": -0.7928437769188645,
+    "logLossPerCopy": 0.7928437769188645,
+    "top1PerCopy": 0.5789433574857532,
+    "expectedOverlap": 0.5954362835142838,
+    "trueDealPercentileAmongUniformWorlds": 0.9781777153003848
+  },
+  "uniform": {
+    "logLikelihoodPerCopy": -0.9763158504868267,
+    "logLossPerCopy": 0.9763158504868267,
+    "top1PerCopy": 0.4828535237656655,
+    "expectedOverlap": 0.4767384897702069,
+    "trueDealPercentileAmongUniformWorlds": 0.5
+  },
+  "logLikelihoodGainPerCopy": {
+    "mean": 0.18351474663815945,
+    "ci95": [
+      0.17938846917945167,
+      0.18764102409686723
+    ],
+    "n": 1000,
+    "interval": "per-seed mean (belief - uniform) log-likelihood per copy; seed-cluster normal"
+  },
+  "byTableCards": {
+    "21-40": {
+      "decisions": 17857,
+      "beliefLogLossPerCopy": 0.5767663757624791,
+      "uniformLogLossPerCopy": 0.809677619104383
+    },
+    "41-60": {
+      "decisions": 17125,
+      "beliefLogLossPerCopy": 0.7695582279030373,
+      "uniformLogLossPerCopy": 0.9748211322732285
+    },
+    "61-80": {
+      "decisions": 15703,
+      "beliefLogLossPerCopy": 0.9116726469825738,
+      "uniformLogLossPerCopy": 1.0552448351066155
+    }
+  },
+  "seconds": 111.641,
+  "note": "Inference-quality (P1) metrics on held-out champion self-play; not playing strength."
+}

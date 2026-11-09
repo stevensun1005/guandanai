@@ -1,0 +1,177 @@
+{
+  "kind": "post-game-review",
+  "valueKind": "perfect-information-hindsight-signed-round-points",
+  "trust": "unverified_browser",
+  "options": {
+    "seats": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "maxCards": 40,
+    "maxNodes": 5000000,
+    "maxMs": 30000,
+    "pimc": 8,
+    "pimcCards": 20
+  },
+  "startedAt": "2026-11-09T04:53:42.364Z",
+  "finishedAt": "2026-11-09T05:04:41.840Z",
+  "summary": [
+    {
+      "seat": 0,
+      "rounds": 21,
+      "decisions": 118,
+      "choices": 74,
+      "scored": 116,
+      "flagged": 7,
+      "lostPoints": 9,
+      "nonHuman": 0,
+      "assisted": 0,
+      "pimcChecked": 2,
+      "pimcMostWorlds": 1,
+      "pimcHindsightOnly": 0
+    },
+    {
+      "seat": 1,
+      "rounds": 22,
+      "decisions": 109,
+      "choices": 66,
+      "scored": 106,
+      "flagged": 5,
+      "lostPoints": 6,
+      "nonHuman": 0,
+      "assisted": 56,
+      "pimcChecked": 1,
+      "pimcMostWorlds": 0,
+      "pimcHindsightOnly": 0
+    },
+    {
+      "seat": 2,
+      "rounds": 22,
+      "decisions": 123,
+      "choices": 52,
+      "scored": 118,
+      "flagged": 2,
+      "lostPoints": 2,
+      "nonHuman": 0,
+      "assisted": 36,
+      "pimcChecked": 1,
+      "pimcMostWorlds": 0,
+      "pimcHindsightOnly": 0
+    },
+    {
+      "seat": 3,
+      "rounds": 24,
+      "decisions": 136,
+      "choices": 83,
+      "scored": 133,
+      "flagged": 4,
+      "lostPoints": 5,
+      "nonHuman": 0,
+      "assisted": 61,
+      "pimcChecked": 2,
+      "pimcMostWorlds": 0,
+      "pimcHindsightOnly": 1
+    }
+  ],
+  "players": [
+    {
+      "player": "4756f30c",
+      "seats": [
+        0
+      ],
+      "rounds": 12,
+      "decisions": 57,
+      "scored": 55,
+      "flagged": 3,
+      "lostPoints": 4,
+      "assisted": 0
+    },
+    {
+      "player": "6a83f5d6",
+      "seats": [
+        2
+      ],
+      "rounds": 11,
+      "decisions": 64,
+      "scored": 63,
+      "flagged": 2,
+      "lostPoints": 2,
+      "assisted": 36
+    },
+    {
+      "player": "779774bc",
+      "seats": [
+        3
+      ],
+      "rounds": 13,
+      "decisions": 72,
+      "scored": 71,
+      "flagged": 1,
+      "lostPoints": 2,
+      "assisted": 0
+    },
+    {
+      "player": "9a53fbbb",
+      "seats": [
+        1
+      ],
+      "rounds": 12,
+      "decisions": 59,
+      "scored": 57,
+      "flagged": 2,
+      "lostPoints": 2,
+      "assisted": 56
+    },
+    {
+      "player": "9ce56d30",
+      "seats": [
+        2
+      ],
+      "rounds": 11,
+      "decisions": 59,
+      "scored": 55,
+      "flagged": 0,
+      "lostPoints": 0,
+      "assisted": 0
+    },
+    {
+      "player": "c9dedbd9",
+      "seats": [
+        3
+      ],
+      "rounds": 11,
+      "decisions": 64,
+      "scored": 62,
+      "flagged": 3,
+      "lostPoints": 3,
+      "assisted": 61
+    },
+    {
+      "player": "f8f37290",
+      "seats": [
+        1
+      ],
+      "rounds": 10,
+      "decisions": 50,
+      "scored": 49,
+      "flagged": 3,
+      "lostPoints": 4,
+      "assisted": 0
+    },
+    {
+      "player": "fa6c9e2c",
+      "seats": [
+        0
+      ],
+      "rounds": 9,
+      "decisions": 61,
+      "scored": 61,
+      "flagged": 4,
+      "lostPoints": 5,
+      "assisted": 0
+    }
+  ],
+  "note": "Aggregate counts only; per-round reports stay in the ignored run directory. Player IDs are anonymous per-match seat IDs (8-char prefix)."
+}

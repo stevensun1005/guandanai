@@ -1,0 +1,34 @@
+{
+  "schema": "danmcai-window1b-h3-v1",
+  "registeredAt": "2026-11-09",
+  "authorization": "Owner plan authorization (run the long-term plan directly); this is the plan's next step for the hand-inference track, run inside window 1's remaining time (deadline 2026-11-09 11:00 Toronto).",
+  "hypothesis": "Midgame net-2 rollout search (21-40 cards on the table, 8 worlds, champion top-6 + pass, deviate from the champion only if a candidate wins >= 2 more worlds than it loses and has a higher mean, champion tie-break) with worlds sampled from hand-inference network v1 beats champion 017. Development P2 (1,200 pairs): +0.1375 [0.094, 0.181]; uniform worlds -0.069; paired +0.207 [0.152, 0.262].",
+  "object": {
+    "script": "ai/danMCai/belief/midgame-search.mjs (commit 0d0c58f)",
+    "beliefModel": "window-1 H/model/belief.onnx",
+    "beliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "trainReportSHA256": "7f022c7640e0102dd25bfe497b6c0bc2dc1e3480dc1dfcf5144fa73ab6c95f0d",
+    "champion": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "settings": {
+      "lo": 21,
+      "hi": 40,
+      "worlds": 8,
+      "k": 6,
+      "net": 2,
+      "tieBreak": "champion"
+    }
+  },
+  "heldOut": {
+    "block": [
+      989000000,
+      989002999
+    ],
+    "audit": "ai/research/evaluation/window1-20261109/seed-audit-h3.json",
+    "auditSHA256": "a674fb30d7b1fed216fa34f65ed09e6a3945817cc29ac1429f6a435b5228d1a7",
+    "note": "Consecutive block found conflict-free by the audit tool's range check (literal and derived-deal) against 508 evidence files / 144,667 known roots; recorded in the audit's newTrainingRootRanges field but used ONLY as held-out evaluation deals."
+  },
+  "primary": "3,000 deals each played twice with sides swapped; focal team uses the belief-world search at 21-40 cards and champion greedy elsewhere; opponents champion greedy throughout. Focal mean signed round points per deal pair with 95% deal-cluster normal interval; positive evidence iff lower bound > 0.",
+  "secondary": "Same deals with uniform worlds (same search otherwise): paired difference belief - uniform (descriptive).",
+  "scope": "Single fresh rounds, no tribute, champion-017 opponents, Node research bot only; not a web change. Positive would allow Node research bots to use belief-world midgame search and justifies distilling it into the network in a later window.",
+  "stop": "Deadline 2026-11-09T15:45:00Z (10:45 Toronto); the summary uses the contiguous completed prefix; unfinished pairs are reported as not run, never extrapolated."
+}

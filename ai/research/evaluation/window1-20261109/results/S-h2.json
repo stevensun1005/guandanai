@@ -1,0 +1,70 @@
+{
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+  "seeds": "/Users/stevensun/guandan-runtime.noindex/window1-runtime-996ade0/ai/research/evaluation/window1-20261109/heldout-h2.json",
+  "pairs": 3000,
+  "threshold": "20",
+  "solver-cards": "18",
+  "out": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/S/h2",
+  "policy": "pimc-search",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "seedsSHA256": "66960fb9a23a1351031bacf5e48e7ea65a633f4d829bdf84f69870ade5c3c1aa",
+  "workers": 5,
+  "startedAt": "2026-11-09T04:39:45.426Z",
+  "student": null,
+  "studentSHA256": null,
+  "evaluatorSHA256": "1c392bae5f5431fdea7470abb369561cef60e9132ffe0798278cbcdf8b026c00",
+  "sourceSHA256": {
+    "./pimc-actor.mjs": "d4fd5325bfe77ee13f0310a8778a24147d5fa9ad101cb7e22eccaa36df8409e7",
+    "./solver.mjs": "2fb05704ebced6fee92259fd53a2ccede55dfc6c1db201bf8fb2ccb3ecbfc9e6",
+    "../../shared/search/belief.mjs": "a106d051abe8b488ee0fbeea163b54c891036245132800172ac76e810d702f86",
+    "../../shared/search/pimc.mjs": "94374899cb13d175d08d7e58d8deb6f16bc97427858a4a77a58cdceafc7bc5a5",
+    "../../shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "../../../web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "../../../web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "../../../web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "../training/continuous/lib.mjs": "44127ca201f38082ba9c5a2396167cbcb6a07f084d5fcb09c91d34d8815fed3f"
+  },
+  "search": {
+    "worlds": 8,
+    "minWorlds": 4,
+    "solver": {
+      "maxNodes": 1500000,
+      "maxMs": 3000,
+      "maxTable": 1000000
+    },
+    "worldSeed": "(seed*1009 + ply*7919)>>>0",
+    "tieTolerance": 1e-9,
+    "tieBreak": "champion value",
+    "searchedDecisions": 16160,
+    "fallbacksToChampion": 26,
+    "tiedLabelMaximum": 10747,
+    "worldsUsed": 128912,
+    "searchSeconds": 13131.555781530977,
+    "secondsPerSearchedDecision": 0.8125962736095902,
+    "maxSecondsPerSearchedDecision": 112.8355575000001
+  },
+  "finishedAt": "2026-11-09T05:31:24.554Z",
+  "rounds": 6000,
+  "focalWins": 2977,
+  "focalLosses": 3023,
+  "meanSignedPoints": 0.076,
+  "ci95": [
+    0.060534359540852664,
+    0.09146564045914733
+  ],
+  "interval": "deal-pair cluster, normal approximation; evaluation deals only, not training reruns",
+  "studentEndgameDecisions": 16160,
+  "decisionsDifferentFromChampion": 2684,
+  "descriptiveExactRegret": {
+    "checked": 2159,
+    "studentMean": 0.14960629921259844,
+    "championMean": 0.587308939323761,
+    "note": "Perfect-information minimax regret on disagreements with <= solver-cards cards; descriptive only."
+  },
+  "policyNote": "studentEndgameDecisions/decisionsDifferentFromChampion/regretStudent refer to the runtime PIMC search arm, not a network.",
+  "pairsZero": 2273,
+  "pairsPositive": 584,
+  "pairsNegative": 143,
+  "pairSeconds": 14212.827893714006,
+  "meanPairSeconds": 4.737609297904669
+}

@@ -1,0 +1,32 @@
+{
+  "student": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/A/train/fused.onnx",
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+  "seeds": "/Users/stevensun/guandan-runtime.noindex/window1-runtime-996ade0/ai/research/evaluation/window1-20261109/heldout-h1.json",
+  "pairs": 3000,
+  "threshold": "20",
+  "solver-cards": "18",
+  "out": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/A/h1",
+  "studentSHA256": "67b28191cffc100c9d5445d3da06754ffebff5845966db4ead5839e13baabbd3",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "seedsSHA256": "d80643e13da3ef91c7ba0673615be0507c80f602e41f042b5c7b220a645cda91",
+  "workers": 3,
+  "startedAt": "2026-11-09T04:48:06.924Z",
+  "finishedAt": "2026-11-09T04:53:42.253Z",
+  "rounds": 6000,
+  "focalWins": 3003,
+  "focalLosses": 2997,
+  "meanSignedPoints": 0.003,
+  "ci95": [
+    -0.0013821086429615728,
+    0.007382108642961573
+  ],
+  "interval": "deal-pair cluster, normal approximation; evaluation deals only, not training reruns",
+  "studentEndgameDecisions": 14910,
+  "decisionsDifferentFromChampion": 284,
+  "descriptiveExactRegret": {
+    "checked": 232,
+    "studentMean": 0.06896551724137931,
+    "championMean": 0.19827586206896552,
+    "note": "Perfect-information minimax regret on disagreements with <= solver-cards cards; descriptive only."
+  }
+}
