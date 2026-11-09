@@ -27,6 +27,11 @@
       "name": "web-deploy (手动推进，Claude 记录进度)",
       "startMarker": "webdeploy start",
       "endMarker": "webdeploy end"
+    },
+    {
+      "name": "owner-tasks (手动推进，Claude 记录进度)",
+      "startMarker": "ownertasks start",
+      "endMarker": "ownertasks end"
     }
   ],
   "stages": [
@@ -372,6 +377,54 @@
       "rule": {
         "type": "descriptive",
         "text": "所有者交代的任务，不是实验结论"
+      }
+    },
+    {
+      "key": "T-clint-sync",
+      "ids": [
+        "T-clint-sync"
+      ],
+      "title": "同步 Clint 最新机器人（15868750 → 最新 main）",
+      "desc": "逐项阅读 Clint 仓库自上次同步以来的改动，把规则机器人（rules-v2）的策略更新移植进来并测试；不碰神经网络与训练；界面改动记录待办。",
+      "kind": "audit",
+      "queue": "owner-tasks (手动推进，Claude 记录进度)",
+      "after": "立即",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
+    },
+    {
+      "key": "T-eval-tool",
+      "ids": [
+        "T-eval-tool"
+      ],
+      "title": "写对战评测程序：推理机器人 vs Clint（整场）",
+      "desc": "整场比赛（含进贡、打 A），推理机器人一队对 Clint 规则机器人一队，250 对种子交换阵营共 500 场；可续跑、可停止。",
+      "kind": "audit",
+      "queue": "owner-tasks (手动推进，Claude 记录进度)",
+      "after": "立即（与同步并行）",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
+    },
+    {
+      "key": "T-eval-run",
+      "ids": [
+        "T-eval-run"
+      ],
+      "title": "对战：danMCai-reason vs 最新 Clint（500 场）",
+      "desc": "同步完成、评测程序通过检查后，预登记并在新审计的种子上跑 500 场整场比赛，报告胜负平与区间。",
+      "kind": "audit",
+      "queue": "owner-tasks (手动推进，Claude 记录进度)",
+      "after": "同步与评测程序都完成后",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "结果出来后按预登记规则另记"
       }
     }
   ]
