@@ -104,3 +104,21 @@ node ai/danMCai/belief/web-parity.mjs --belief=<belief.onnx> --rounds=100 --per-
 ```
 
 2026-11-09 所有者指示把它设为网页新玩家默认（清单 `selection.defaultChoice`；冠军 017 仍可选并供进还贡），随后又要求出牌评价也默认用它：评价在牌桌剩 40 张以内显示同一搜索的值（`web/src/ai/search/coach.mjs`）。这是部署，不是验收：棋力证据仍只有冠军对手、单局、不进贡的 H3／H4 留出结果。详见 [BOTS.md](../../../web/docs/BOTS.md#研究机器人推理搜索9001) 与主报告第 72 节。
+
+## 推理机器人对 Clint 的整场评测工具（开发工具，不是结果）
+
+`reason-match-eval.mjs` 用整场规则（从 2 打到 A、进贡／还贡、打 A 三次失败记平局）评测网页上部署的 `danMCai-reason-v000855042`（菜单 9001）对 Clint规则机器人（`rules-v2`）。所有者 2026-11-09 要求 500 场；本文件只提供工具，正式运行由协调者预登记种子后执行，本节不含任何胜率。
+
+- **配对与对局引擎**沿用 GuanZero 开发套件（[ai/guanzero/README.md](../../guanzero/README.md)）：每个种子打两场，推理机器人先坐 0/2 再坐 1/3，250 个种子 = 500 场。直接复用 `createMatchRound`、`advanceRound`、`advanceMatch`（aFail `draw`）、`playMatch` 的每局种子。与 `playMatch` 不同之处：按发牌与进贡后的手牌重建网页牌桌上公开的进贡记录（`trib`）和抗贡记录（`kang`），使 Clint 的公开推断和搜索的“已知牌”与网页一致；不重建且用 `--clint=rules-only` 时逐局结果与 `playMatch` 完全相同（测试核对）。
+- **Clint 对手默认是网页上部署的 Clint 座位**（`--clint=web`）：AI Worker 的 `decideClintRule(ruleObservation(game, p))`，即 `strategy.js` 的规则出法再经同步来的**残局大脑**（`endgame-brain.mjs`，四家都 ≤12 张时抽样未见牌并精确求解，网页单次上限 10 秒），只读自己手牌与公开信息；随机数用开发套件给 Clint 的同一种子流（局种子 ^ 0x6a09e667）。关掉残局大脑时与开发套件 `createRuleBaseline(…, 'rules-v2')` 逐局相同（测试核对）。`--clint=rules-only` 是开发套件原接法，**不含残局大脑**，只用于与历史 GuanZero Clint 评测对照，不能称为“最新 Clint”。每场记录残局大脑的调用、采用、超时保留规则出法与改变出法次数及用时。
+- **推理机器人**按 `controller.js`、`search/client.js`、`search-worker.mjs` 的部署逻辑：完成牌或唯一候选直接出；牌桌 21–40 张或 ≤20 张时，`searchPayload`→`restoreGame`（屏蔽他人手牌、公开已知牌）→`searchBotDecision`，使用**电脑预算**（中盘 3 秒、尾盘 4 秒、求解器单次 3 秒、每进程一个常驻求解器、表 30 万）；超预算、已知牌矛盾、错误、超过硬时限（丢弃求解器表）或回复与牌桌不符时改用冠军 017（`decideTablePolicy`，含公开二人残局证明），按原因计数；其余局面直接用 017。进贡／还贡：网页进贡专家未启用，所有电脑都出 `tributeOptions()[0]`／`aiReturnCard`，与开发套件的基线选择相同。唯一与网页不同的是搜索种子：网页每局用加密随机数，这里用局种子的固定散列 `searchSeedOf`（不读牌），以便复现。
+- **时间预算让结果依赖机器负载与进程数**（推理机器人的搜索预算与 Clint 残局大脑的 10 秒上限都是墙钟时间）：每场记录搜索次数、偏离冠军次数、各原因回落数和用时；汇总报告回落率。默认用 onnxruntime-web WASM 单线程（与浏览器同一运行时），`--ort=node` 可换原生运行时。
+- **输出**：`protocol.json`（协议、模型与源码 SHA、Clint 指纹、种子文件 SHA）、`seeds.json`、`pairs.jsonl`（每完成一对种子追加一行，含两场的胜者、最终级数、局数、打 A 失败次数、逐局记录、搜索与回落统计、用时）、`progress.json`、`report.json`（胜／负／平、胜率与按种子对聚类的 95% 自助区间、净胜场、最终级数差、双方座位分开的结果、回落与用时汇总）。协议不同或目录里有不明内容时拒绝写入；按已完成的种子对续跑；`<out>/STOP` 或 `--deadline` 停止派发并中止未完成的对局。源码指纹是本工具静态导入闭包的全部文件（含 `web/src/rule-bot/` 与网页运行时），任何改动都会使续跑拒绝。
+
+```bash
+nice -n 10 node ai/danMCai/belief/reason-match-eval.mjs --out=<目录> --seeds=<a>..<b> --workers=6 \
+  [--deadline=<ISO 时间>] [--belief=<belief.onnx>] [--champion=<bot-017.onnx>] [--ort=wasm|node] [--clint=web|rules-only]
+node ai/danMCai/belief/reason-match-eval.mjs --summarize --out=<目录>
+```
+
+测试 `ai/danMCai/tests/reason-match-eval.test.mjs`（`npm test`，无需模型）用替身网络覆盖进贡记录重建、与 `playMatch` 逐局一致、网页 Clint 关掉残局大脑时与开发套件逐局一致、残局大脑实际启用、预算与硬时限回落、协议拒绝与续跑、汇总统计。

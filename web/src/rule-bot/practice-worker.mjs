@@ -1,7 +1,7 @@
 import { makeDeck, shuffle } from '../core/cards.js';
 import { genPlays } from '../core/moves.js';
 import { beats } from '../core/combinations.js';
-import { decideClintRule, ruleObservation } from './runtime.mjs';
+import { RULES_ONLY, decideClintRule, ruleObservation } from './runtime.mjs';
 import { finished, solveEndgame, stepPosition } from './practice-endgame.mjs';
 
 export function generate(limit, L) {
@@ -21,8 +21,9 @@ export function generate(limit, L) {
     };
     for (let ply = 0; ply < 500; ply++) {
       if (performance.now() >= deadline) throw Error('生成达到5秒上限，请重试或提高张数上限');
+      // rules only (残局大脑 off): generation stays within its 5 s budget, as before the brain sync
       const p = game.turn,
-        selected = decideClintRule(ruleObservation(game, p));
+        selected = decideClintRule(ruleObservation(game, p), RULES_ONLY);
       let play = selected && {
         ...selected,
         cards: selected.cards.map((id) => game.hands[p].find((c) => c.id === id)),

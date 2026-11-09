@@ -1,0 +1,666 @@
+{
+  "schema": 1,
+  "kind": "rule-strategy-sync-endgame-brain-compatibility-not-strength",
+  "checkedAtUTC": "2026-11-09T22:06:38.197066+00:00",
+  "ownerRequest": "先把clint项目那里最新的clint机器人pull过来 (then a 500-game reason-bot vs latest Clint run, done separately)",
+  "baseMainSHA": "181c12f033b48738f8b96b203e0115e361c82569",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "previousSHA": "15868750340355261529bd372dfde4c4a782705d",
+    "checkedSHA": "30a8067ec901cda4109507ac0ef26c455444f846",
+    "method": "fresh clone; git log/show for every commit in previousSHA..checkedSHA, each changed path read; bundle index.html checked to embed the reviewed sources",
+    "commits": [
+      {
+        "sha": "fb83ae990fabf5162d4450df3955593223e89bed",
+        "date": "2026-11-08T13:47:45-05:00",
+        "subject": "成组提示字按最长一组对齐；暂停时暂停窗口里能开关麦、房主能取消别人的暂停",
+        "items": [
+          {
+            "path": "web/src/hand/layout.js",
+            "upstreamSHA256AtChecked": "de2463b9637596c778a426c7a4856fc5f8ff81c7603392238c4975ad19c42661",
+            "classification": "ui",
+            "disposition": "PENDING: grouped-hand tags in one column at the longest group end (desktop horizontal). This owner request covers the Clint bot only."
+          },
+          {
+            "path": "web/src/ui/overlays.js",
+            "upstreamSHA256AtChecked": "ce2c2e399ac2ddf1daff741691d07fd2580549446cefa39466fd06a3a6e82e8c",
+            "classification": "ui",
+            "disposition": "PENDING: pause panel microphone button (syncPauseMic) and host \"取消暂停\" for another player's pause. Bot-only request."
+          },
+          {
+            "path": "web/src/game/events.js",
+            "upstreamSHA256AtChecked": "abe98fbf27e1ac003cc4a7fa9a117a96b00e35cd23d58c4465bc9ee7e895c000",
+            "classification": "ui",
+            "disposition": "PENDING: pause event honours host force:1 resume. Network/UI behaviour; bot-only request."
+          },
+          {
+            "path": "web/src/network/voice.js",
+            "upstreamSHA256AtChecked": "7e0544e2d555eb29580419d3d069c8269c0ccb5ba54bd382491bb70443ab3e4e",
+            "classification": "ui",
+            "disposition": "PENDING: voice paint() calls syncPauseMic. Bot-only request."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "6460e6857feffeab5584725eaec28f47cc9484b6",
+        "date": "2026-11-08T17:15:55-05:00",
+        "subject": "残局大脑：默认电脑在四家都只剩 6 张以内时，抽样没见过的牌（按出牌过牌加权）并用精确求解器算，明显更好才改规则的出法",
+        "items": [
+          {
+            "path": "bot/clint/endgame-brain.js",
+            "upstreamSHA256AtChecked": "f1ca90e42541ad31571265a2dc78e467adab7ff524daf61febd97e4d4d35fe81",
+            "classification": "rule-strategy",
+            "disposition": "PORTED (final state at 2d91ecc) to web/src/rule-bot/endgame-brain.mjs: mcReward/mcMoves/mcStep, EsSolver ab/info/key, esValue, esWorld, brainOn, brainCore, endgameBrain. EsSolver.step()/line() are not used by the brain and not ported."
+          },
+          {
+            "path": "web/src/game/computer-players.js",
+            "upstreamSHA256AtChecked": "5b497280f3b503634af7b756b8feec7a3cf544c53e2e93d59904e280474420dd",
+            "classification": "rule-strategy wiring",
+            "disposition": "ADAPTED: upstream runs rules then the brain for computers on the Clint rules (brainStart/rulesMove). Here runtime.mjs decideClintRule (the only web Clint route, rule Worker) calls chooseClintAction = endgameBrain(chooseRuleAction). Upstream also uses rulesMove as the fallback when a neural bot fails; this project has no rule fallback for neural seats (MODEL_STUDY sec. 18), so not applicable. Async generator stepping (setTimeout) replaced by the synchronous endgameBrain inside the Worker; same decision."
+          },
+          {
+            "path": "web/src/index.html",
+            "upstreamSHA256AtChecked": "9daea634a37619de87363a2da60b132d609f32b33d803649093abbb1e46cfecc",
+            "classification": "not-applicable",
+            "disposition": "//@include of endgame-brain.js into the bundle; this project uses ES module imports."
+          },
+          {
+            "path": "web/src/training/steps.js",
+            "upstreamSHA256AtChecked": "3bb12b9225ca4d4c8c8b4de6296e33b500ca54259b547bbcb0d9eb1f0ebd18fa",
+            "classification": "not-applicable",
+            "disposition": "Upstream step/test mode testDecide uses rulesMove; this project has no counterpart (all Clint computer moves go through runtime.mjs, which now includes the brain)."
+          },
+          {
+            "path": "README.md",
+            "upstreamSHA256AtChecked": "13406846091fe21bb48881c6b7f5ef2f993bd97b5c685e2df2503910cae69df9",
+            "classification": "docs",
+            "disposition": "Upstream docs; described in web/src/rule-bot/README.md instead."
+          },
+          {
+            "path": "bot/README.md",
+            "upstreamSHA256AtChecked": "33b8a69995425717e6db56ff97953c66f62b6e8c65968c9af76454313df79c10",
+            "classification": "docs",
+            "disposition": "Upstream docs; described in web/src/rule-bot/README.md instead."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "6b8a7eb5354c07c48630577e3804d201a0866ee2",
+        "date": "2026-11-09T11:18:31-05:00",
+        "subject": "残局大脑放宽到每家 ≤10 张：设置改成对象，每种牌分布轮流用三种搜索顺序并限时，太难的牌分布放弃，来不及就用规则的出法",
+        "items": [
+          {
+            "path": "bot/clint/endgame-brain.js",
+            "upstreamSHA256AtChecked": "f1ca90e42541ad31571265a2dc78e467adab7ff524daf61febd97e4d4d35fe81",
+            "classification": "rule-strategy",
+            "disposition": "PORTED as part of the final state (BRAIN settings object, ES_PORT search orders, esWorld per-deal time limit and give-up)."
+          },
+          {
+            "path": "README.md",
+            "upstreamSHA256AtChecked": "13406846091fe21bb48881c6b7f5ef2f993bd97b5c685e2df2503910cae69df9",
+            "classification": "docs",
+            "disposition": "Upstream docs."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "7fd07fdf3ae0e6a0157b99d89ccf09bfa789e98d",
+        "date": "2026-11-09T13:05:41-05:00",
+        "subject": "Give stezer0's computer partner full hand knowledge",
+        "items": [
+          {
+            "path": "bot/clint/clint-bot.js",
+            "upstreamSHA256AtChecked": "c37eeb41aba75429a0cf0703937ea3140308cd96ad3b5d48140a71ec6a3c73f7",
+            "classification": "not-applicable",
+            "disposition": "aiSeesAll(p) branches in outside/mateLead/inferDeals/inferNow/feedMate: only active for one nickname's computer partner reading the true hands. This project's rule observations never carry other hands (runtime.mjs / rule-baseline information boundary, AGENTS 房主本机明牌工具: opponents/rules keep ordinary observation). With aiSeesAll false the upstream code is identical to the ported code; verified by the parity run with aiSeesAll stubbed false. Owner decision if a Clint partner open-hand mode is wanted here."
+          },
+          {
+            "path": "bot/clint/endgame-brain.js",
+            "upstreamSHA256AtChecked": "f1ca90e42541ad31571265a2dc78e467adab7ff524daf61febd97e4d4d35fe81",
+            "classification": "not-applicable",
+            "disposition": "aiSeesAll true-deal search branch; same reason."
+          },
+          {
+            "path": "web/src/game/state.js",
+            "upstreamSHA256AtChecked": "8b0d90d9690eaf8a92a3bd869c3f3f29063a0b2669e4ed603980dfbe7ced3576",
+            "classification": "not-applicable",
+            "disposition": "aiSeesAll(p) nickname check; same reason."
+          },
+          {
+            "path": "web/src/game/computer-players.js",
+            "upstreamSHA256AtChecked": "5b497280f3b503634af7b756b8feec7a3cf544c53e2e93d59904e280474420dd",
+            "classification": "not-applicable",
+            "disposition": "aiSeesAll routing (skip neural, brain on true hands); same reason."
+          },
+          {
+            "path": "tests/ai-hand-knowledge.cjs",
+            "upstreamSHA256AtChecked": "768948dc8f1e16e1660ac12c7c56e11653e9b7dadb68acb05c47d4b70dbbc7d5",
+            "classification": "not-applicable",
+            "disposition": "Upstream test of the aiSeesAll mode."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "220f2459a4a62423532cfad503ffcc3a5022670c",
+        "date": "2026-11-09T13:48:04-05:00",
+        "subject": "残局大脑：计算时间上限提到 10 秒（一种牌分布最多 4 秒，第一种就算不完当场放弃），抽样数加到 40 种",
+        "items": [
+          {
+            "path": "bot/clint/endgame-brain.js",
+            "upstreamSHA256AtChecked": "f1ca90e42541ad31571265a2dc78e467adab7ff524daf61febd97e4d4d35fe81",
+            "classification": "rule-strategy",
+            "disposition": "PORTED as part of the final state (k 40; first deal too hard gives up)."
+          },
+          {
+            "path": "web/src/game/computer-players.js",
+            "upstreamSHA256AtChecked": "5b497280f3b503634af7b756b8feec7a3cf544c53e2e93d59904e280474420dd",
+            "classification": "rule-strategy wiring",
+            "disposition": "BRAIN_WAIT_MS; superseded by f03dc3c; see WEB_BRAIN adaptation."
+          },
+          {
+            "path": "README.md",
+            "upstreamSHA256AtChecked": "13406846091fe21bb48881c6b7f5ef2f993bd97b5c685e2df2503910cae69df9",
+            "classification": "docs",
+            "disposition": "Upstream docs."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "f03dc3c853d81bdd3730fb40ed4788e85b73e91a",
+        "date": "2026-11-09T16:07:24-05:00",
+        "subject": "残局大脑：每家 ≤12 张启用，计算时间上限 30 秒（一种牌分布最多 10 秒），抽到 8 种后能判断就提前停",
+        "items": [
+          {
+            "path": "bot/clint/endgame-brain.js",
+            "upstreamSHA256AtChecked": "f1ca90e42541ad31571265a2dc78e467adab7ff524daf61febd97e4d4d35fe81",
+            "classification": "rule-strategy",
+            "disposition": "PORTED: BRAIN {max 12, k 40, edge 0.2, ms 30000, minWorlds 3, worldMs 10000, minStop 8, stopZ 2.5} and the early stop by standard errors. Default export BRAIN is exactly this."
+          },
+          {
+            "path": "web/src/game/computer-players.js",
+            "upstreamSHA256AtChecked": "5b497280f3b503634af7b756b8feec7a3cf544c53e2e93d59904e280474420dd",
+            "classification": "rule-strategy wiring",
+            "disposition": "ADAPTED: upstream waits up to 32 s (BRAIN_WAIT_MS) for a 30 s brain. This project's rule Worker request times out at 15 s (web/src/ai/controller.js, outside this assignment) and a timeout shows the table-failure panel, so runtime.mjs WEB_BRAIN caps one browser decision at ms 10000 (worldMs stays 10000, bounded by ms). Pending: raise the controller rule-request timeout to >=32 s if the full 30 s budget is wanted in the browser."
+          },
+          {
+            "path": "README.md",
+            "upstreamSHA256AtChecked": "13406846091fe21bb48881c6b7f5ef2f993bd97b5c685e2df2503910cae69df9",
+            "classification": "docs",
+            "disposition": "Upstream docs."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "2d91ecca950e6617f80e500cd205450112bb40d4",
+        "date": "2026-11-09T16:23:33-05:00",
+        "subject": "电脑后期出炸弹：选出的最小炸弹若是同点数更大一组的一部分（5张A里的4张），整组一起出，不拆成4张加一张单牌",
+        "items": [
+          {
+            "path": "bot/clint/clint-bot.js",
+            "upstreamSHA256AtChecked": "c37eeb41aba75429a0cf0703937ea3140308cd96ad3b5d48140a71ec6a3c73f7",
+            "classification": "rule-strategy",
+            "disposition": "PORTED to web/src/rule-bot/strategy.js aiChoose late-bomb branch (whole same-rank natural bomb)."
+          },
+          {
+            "path": "index.html",
+            "upstreamSHA256AtChecked": "452a9e284bdd56575fb6d041a9c49dcd1b187b81a36f1e9c69548285f27361d2",
+            "classification": "bundle",
+            "disposition": "Generated single-file bundle (web/build.py); checked that it embeds the reviewed bot/clint and web/src sources verbatim. Not copied; this project builds ES modules."
+          }
+        ]
+      },
+      {
+        "sha": "60d81efc29068d84d7b677a2cd442ec1b6928700",
+        "date": "2026-11-09T16:45:42-05:00",
+        "subject": "Remove stezer0's all-hands computer partner (reverts 7fd07fd)",
+        "items": [
+          {
+            "path": "bot/clint/clint-bot.js",
+            "classification": "not-applicable",
+            "disposition": "Revert of the aiSeesAll branches of 7fd07fd, which were never ported. Confirms the ported rules path."
+          },
+          {
+            "path": "bot/clint/endgame-brain.js",
+            "classification": "not-applicable",
+            "disposition": "Removes the aiSeesAll true-deal branch; header now states the brain reads only public state and its own hand, matching endgame-brain.mjs."
+          },
+          {
+            "path": "web/src/game/state.js",
+            "classification": "not-applicable",
+            "disposition": "aiSeesAll nickname check removed."
+          },
+          {
+            "path": "web/src/game/computer-players.js",
+            "classification": "not-applicable",
+            "disposition": "aiSeesAll routing removed."
+          },
+          {
+            "path": "tests/ai-hand-knowledge.cjs",
+            "classification": "not-applicable",
+            "disposition": "Upstream test of the removed mode deleted."
+          },
+          {
+            "path": "index.html",
+            "classification": "bundle",
+            "disposition": "Generated bundle."
+          }
+        ]
+      },
+      {
+        "sha": "46f5e768c5d7d5c95715425d085d5be10c83b494",
+        "date": "2026-11-09T17:02:00-05:00",
+        "subject": "danMCai 换成 guandanai 的搜索版（9001）：底座 017，推断暗牌后搜索；页面上仍叫 danMCai",
+        "items": [
+          {
+            "path": "bot/reason/**, bot/models.json, web/src/game/reason-bot.js, web/src/game/computer-players.js, web/src/coach/coach.js, web/src/collection/record.js, web/src/lobby/rules.js, web/src/index.html, web/build.py",
+            "classification": "not-applicable",
+            "disposition": "Upstream's integration of this project's own danMCai-reason (9001) bundle per web/docs/REASON_BOT_INTEGRATION.md. Not Clint rule strategy; bot/clint untouched; tribute/return still Clint rules there. Nothing to bring back: the source is this project."
+          },
+          {
+            "path": "README.md, bot/README.md, web/README.md",
+            "classification": "docs",
+            "disposition": "Upstream docs."
+          },
+          {
+            "path": "web/__pycache__/build.cpython-312.pyc",
+            "classification": "not-applicable",
+            "disposition": "Accidental cache file, removed in 30a8067."
+          },
+          {
+            "path": "index.html",
+            "classification": "bundle",
+            "disposition": "Generated bundle."
+          }
+        ]
+      },
+      {
+        "sha": "30a8067ec901cda4109507ac0ef26c455444f846",
+        "date": "2026-11-09T17:02:11-05:00",
+        "subject": "Drop an accidentally committed Python cache file; ignore __pycache__",
+        "items": [
+          {
+            "path": ".gitignore, web/__pycache__/build.cpython-312.pyc",
+            "classification": "not-applicable",
+            "disposition": "Repository hygiene."
+          }
+        ]
+      }
+    ],
+    "checkedSHAInitial": "2d91ecca950e6617f80e500cd205450112bb40d4",
+    "extension": {
+      "reviewedAtUTC": "2026-11-09T22:12:06.790113+00:00",
+      "reason": "Upstream main advanced to 30a8067 (3 commits after 2d91ecc) while this sync was in review; the range was extended and every new commit read. No new rule-strategy change: the final bot/clint sources equal the ported state.",
+      "finalUpstreamSources": {
+        "bot/clint/clint-bot.js": {
+          "sha256": "f8a9d544a35857d5e9708644a75775eb51b0624679fb4e557db795abf94e1f18",
+          "note": "git diff 7fd07fd^..30a8067 = only the 2d91ecc whole-group bomb (ported)"
+        },
+        "bot/clint/endgame-brain.js": {
+          "sha256": "bb2b7f668b9669c7b2b8e076a70ae45d68366939f67d225911421eb1c494341d",
+          "note": "2d91ecc version minus the aiSeesAll branch and one comment line; equals the ported endgame-brain.mjs logic"
+        },
+        "index.html": {
+          "sha256": "b93de40907bd54c852eef76f4f4f7ccb2d00e3d6b8e7d93f0e468a3d990483cd",
+          "note": "bundle embeds both bot/clint files verbatim; no aiSeesAll left"
+        }
+      }
+    }
+  },
+  "strategyChanged": true,
+  "ported": [
+    "残局大脑 (bot/clint/endgame-brain.js final state) -> web/src/rule-bot/endgame-brain.mjs",
+    "late whole same-rank bomb (2d91ecc) -> web/src/rule-bot/strategy.js"
+  ],
+  "adaptations": [
+    {
+      "what": "browser brain budget",
+      "detail": "runtime.mjs WEB_BRAIN {ms:10000}; upstream ms 30000. Reason: rule Worker request timeout 15 s in web/src/ai/controller.js."
+    },
+    {
+      "what": "practice generation",
+      "detail": "practice-worker.mjs passes RULES_ONLY {max:-1} so 训练→残局 generation stays rules-only within its 5 s budget, as before."
+    },
+    {
+      "what": "observation fields",
+      "detail": "ruleObservation now also carries public phase, turn, passes, out (needed by brainOn/brainCore); still no other-seat cards."
+    },
+    {
+      "what": "exports",
+      "detail": "strategy.js exports handCounts/inferEvents/eventFactor (unchanged bodies) for the brain; endgame-brain.mjs exports BRAIN, BRAIN_STAT, brainOn, endgameBrain, chooseClintAction, EsSolver."
+    }
+  ],
+  "pending": [
+    {
+      "commit": "fb83ae990fabf5162d4450df3955593223e89bed",
+      "paths": [
+        "web/src/hand/layout.js",
+        "web/src/ui/overlays.js",
+        "web/src/game/events.js",
+        "web/src/network/voice.js"
+      ],
+      "reason": "UI (grouped-tag column alignment; pause-panel mic toggle; host cancels another player's pause). This owner request covers the Clint bot only."
+    },
+    {
+      "commit": "f03dc3c853d81bdd3730fb40ed4788e85b73e91a",
+      "paths": [
+        "web/src/ai/controller.js"
+      ],
+      "reason": "Browser cap 10 s instead of upstream 30 s until the rule Worker request timeout (15 s, outside this assignment) is raised to >=32 s."
+    },
+    {
+      "commit": null,
+      "paths": [
+        "ai/shared/simulation/rule-baseline.mjs"
+      ],
+      "reason": "createRuleOpponent still calls chooseRuleAction (rules only, no 残局大脑) and its view lacks phase/turn/passes/out. A run against \"latest Clint\" with the brain must call chooseClintAction from web/src/rule-bot/endgame-brain.mjs with those public fields (outside this assignment)."
+    }
+  ],
+  "notApplicable": [
+    {
+      "commit": "7fd07fdf3ae0e6a0157b99d89ccf09bfa789e98d",
+      "reason": "aiSeesAll full-hand-knowledge partner for one nickname; never ported (this project's Clint observations never carry other hands). Reverted upstream by 60d81ef, so no owner decision is pending."
+    },
+    {
+      "commit": "60d81efc29068d84d7b677a2cd442ec1b6928700",
+      "reason": "Revert of 7fd07fd."
+    },
+    {
+      "commit": "46f5e768c5d7d5c95715425d085d5be10c83b494",
+      "reason": "Upstream wiring of this project's danMCai-reason into its own page; not Clint strategy."
+    },
+    {
+      "commit": "30a8067ec901cda4109507ac0ef26c455444f846",
+      "reason": ".gitignore / cache file."
+    }
+  ],
+  "knownPreexistingDivergence": {
+    "what": "shared web/src/core/moves.js genPlays adds a mixed-suit straight when the first-card selection is single-suited (project fix); upstream genPlays does not.",
+    "effect": "3 of 17,916 rules decisions differ in the parity run (all a straight vs a bomb over a straight); also present against upstream 15868750, so not introduced by this range. core/moves.js is shared with the neural route and was not changed.",
+    "samples": [
+      {
+        "seed": 9311015,
+        "step": 59,
+        "ours": "10,12,62,63,91",
+        "upstream": "18,44,59,72"
+      },
+      {
+        "seed": 9311022,
+        "step": 54,
+        "ours": "8,23,25,76,78",
+        "upstream": "8,25,34,75"
+      },
+      {
+        "seed": 9311050,
+        "step": 84,
+        "ours": "18,25,50,102,103",
+        "upstream": "18,25,79,105"
+      }
+    ]
+  },
+  "opponent": {
+    "version": "rules-v2",
+    "identity": "version plus source SHA-256; all earlier Clint results (e.g. GuanZero 500-game Clint evaluations) stay bound to the earlier fingerprints",
+    "sourceSHA256": {
+      "web/src/rule-bot/settings.js": {
+        "before": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+        "after": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd"
+      },
+      "web/src/rule-bot/arrangement.js": {
+        "before": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+        "after": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2"
+      },
+      "web/src/rule-bot/strategy.js": {
+        "before": "daa435336610b35e529947bdfe3ff3d91f68725ec1418a8552430b878de00d72",
+        "after": "67a4d0542f8a01a55c58d0ef8a51075a1c55026fe362683d12e63ce70b879c98"
+      },
+      "web/src/rule-bot/endgame-brain.mjs": {
+        "before": null,
+        "after": "b9bf399d04e8cb1a483f573666b920714d1ae211457030acfbe310655f10e3eb"
+      },
+      "web/src/rule-bot/runtime.mjs": {
+        "before": "c7b5e99eeeff7b77fbb8955529852ea12b9e8685447d8f162bd9127c47a7ae52",
+        "after": "f53061083cc943fcfed379d7c8815787b073df415bcf43db49922198bad3bcb2"
+      },
+      "web/src/rule-bot/timeout.js": {
+        "before": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b",
+        "after": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b"
+      },
+      "web/src/rule-bot/practice-endgame.mjs": {
+        "before": "7c30182c0145c1069e44acf9e0c8f8504dd61a2b055b36fcf7b3db2cbfdec0d7",
+        "after": "7c30182c0145c1069e44acf9e0c8f8504dd61a2b055b36fcf7b3db2cbfdec0d7"
+      },
+      "web/src/rule-bot/practice-worker.mjs": {
+        "before": "95d180d1d63c30d12aafb825754ea886f6cca7d905e3bebd290dee111c4276e1",
+        "after": "144f45bd8e2f26a27223d3f868f0aafe2cd3cc7d726cc7de87ae98301534048a"
+      },
+      "web/src/rule-bot/README.md": {
+        "before": "354fd704d7326aa3d6db6fc6630be99771c78fd28963af7bc37a6de19b6f5824",
+        "after": "3597cf034e61cf6ed3af741c638042b65fbe3947e75ba4de974602137b72df64"
+      }
+    },
+    "originalBaselineUnchanged": true,
+    "learnedPoliciesUnchanged": true,
+    "standaloneTimeoutUnchanged": true
+  },
+  "parity": {
+    "method": "Node vm loads upstream web/src/core/{cards,combinations,moves}.js, bot/clint/clint-bot.js, bot/clint/endgame-brain.js, web/src/hand/hints.js at checkedSHA with aiSeesAll=()=>false; both sides get the same masked view (own hand, other hand counts, public log) and the same seeded Math.random per decision; play follows this project's choice.",
+    "rules": {
+      "rounds": 200,
+      "roundSeeds": "9311000-9311199 (simulation.mjs createRound)",
+      "decisions": 17916,
+      "identical": 17913,
+      "different": 3,
+      "cause": "knownPreexistingDivergence"
+    },
+    "brain": {
+      "positions": 150,
+      "selection": "first 150 positions in those rounds with every hand <=6 cards",
+      "settings": "ms and worldMs unlimited (1e9) on both sides so every deal finishes and the result is deterministic",
+      "identical": 150,
+      "changedFromRules": 3
+    },
+    "fixtures": {
+      "file": "ai/shared/tests/fixtures/clint-endgame-brain-20261109.json",
+      "positions": 4,
+      "scanned": 238,
+      "note": "positions where upstream's brain overrides upstream's rules, expected plays from the upstream run; seeds 9400000+"
+    },
+    "dataPurpose": "development compatibility only; not strength",
+    "reviewRerunAgainstFinalUpstream": {
+      "upstreamSHA": "30a8067ec901cda4109507ac0ef26c455444f846",
+      "method": "same vm harness (parity.mjs) on a git archive of 30a8067 (aiSeesAll no longer exists upstream); brain positions selected with every hand <= BRAIN_MAX; ms/worldMs unlimited on both sides",
+      "runs": [
+        {
+          "roundSeeds": "9720000-9720059",
+          "rulesDecisions": 5307,
+          "rulesIdentical": 5306,
+          "rulesDifferent": 1,
+          "differentCause": "knownPreexistingDivergence (seed 9720014 step 40: ours straight with a mixed-suit 6, upstream straight flush 3-6 + wild)",
+          "brainMax": 6,
+          "brainPositions": 30,
+          "brainIdentical": 30,
+          "brainChangedFromRules": 1
+        },
+        {
+          "roundSeeds": "9730000-9730011",
+          "rulesDecisions": 1051,
+          "rulesIdentical": 1051,
+          "brainMax": 9,
+          "brainPositions": 12,
+          "brainCalls": 6,
+          "brainIdentical": 12,
+          "brainChangedFromRules": 0
+        },
+        {
+          "roundSeeds": "9740000-9740039",
+          "brainMax": 12,
+          "result": "not completed: unlimited-time exact search on <=12-card deals did not finish within 25 min (timeout 124); no comparison recorded"
+        }
+      ]
+    },
+    "reviewStructuredCloneCheck": "Node: 6 rounds (seeds 9750000-9750005), every decision via decideClintRule(structuredClone(ruleObservation(...)), {ms:2000, worldMs:1000}): all replies legal physical cards; the brain engaged (42 calls) after a structured clone as in the Worker."
+  },
+  "timing": {
+    "scope": "Node, this Mac with research jobs running, nice 10; all four seats Clint (rules + 残局大脑); simulation rounds seeds 9500000-9500002; descriptive only",
+    "upstreamBudget30s": {
+      "ms": 30000,
+      "rounds": [
+        {
+          "seed": 9500000,
+          "totalS": 228.455382583,
+          "brainDecisions": 40,
+          "brainMeanS": 5.709240066700001,
+          "brainMaxS": 30.003420125000005
+        },
+        {
+          "seed": 9500001,
+          "totalS": 20.96270758300001,
+          "brainDecisions": 18,
+          "brainMeanS": 1.1625236805000039,
+          "brainMaxS": 10.002846875000017
+        },
+        {
+          "seed": 9500002,
+          "totalS": 1.4074118749999907,
+          "brainDecisions": 8,
+          "brainMeanS": 0.17207854162500372,
+          "brainMaxS": 0.819957208000007
+        }
+      ],
+      "stat": {
+        "calls": 34,
+        "used": 22,
+        "fallback": 12,
+        "changed": 2,
+        "ms": 250647.56691200013
+      }
+    },
+    "webBudget10s": {
+      "ms": 10000,
+      "rounds": [
+        {
+          "seed": 9500000,
+          "totalS": 156.75750066599997,
+          "brainDecisions": 40,
+          "brainMeanS": 3.916923929149998,
+          "brainMaxS": 10.006777207999999
+        },
+        {
+          "seed": 9500001,
+          "totalS": 20.888428917000013,
+          "brainDecisions": 18,
+          "brainMeanS": 1.1584632708333327,
+          "brainMaxS": 10.003165957999999
+        },
+        {
+          "seed": 9500002,
+          "totalS": 1.4351282499999798,
+          "brainDecisions": 8,
+          "brainMeanS": 0.17639997924999262,
+          "brainMaxS": 0.850509624999977
+        }
+      ],
+      "stat": {
+        "calls": 34,
+        "used": 21,
+        "fallback": 13,
+        "changed": 2,
+        "ms": 178911.68333100007
+      }
+    },
+    "note": "Round 9500000 took 228 s (30 s budget) / 157 s (10 s budget) of brain time; peak RSS about 1.2 GB during the 30 s run (three solvers with 2e6-entry tables per deal). A 500-game evaluation that includes the brain is far slower than rules-only."
+  },
+  "validation": {
+    "newTests": [
+      "ai/shared/tests/clint-20261109.test.mjs (2d91ecc five-ace whole bomb; brain vs upstream on 4 fixed positions; brain off/fallback; Worker endgame information boundary)"
+    ],
+    "changedTests": [
+      {
+        "file": "ai/shared/tests/clint-runtime.test.mjs",
+        "change": "four-round Worker route passes {ms:200, worldMs:100}: with the 10 s web budget the test took 160 s"
+      },
+      {
+        "file": "ai/danMCai/tests/review.test.mjs",
+        "change": "SEEDS adds 9301009. Its fixtures are rules-v2 self-play (web/tests/fixtures/collected-round.mjs); after 2d91ecc seeds 9301001-3 no longer contain a losing move (verified: reverting only the 2d91ecc line makes them pass). Outside the nominal clint-sync file list; one-line fixture-seed change."
+      }
+    ],
+    "npmTest": {
+      "tests": 395,
+      "pass": 395,
+      "fail": 0
+    },
+    "formatCheck": "pass",
+    "build": {
+      "result": "pass",
+      "version": "ab30534c1f",
+      "note": "ai-worker.mjs and clint-practice-worker.mjs bundle endgame-brain"
+    },
+    "researchPython": {
+      "ran": 40,
+      "result": "OK"
+    },
+    "sharedPython": {
+      "result": "error",
+      "reason": "tribute_training_test.py cannot import onnxruntime in /opt/anaconda3 python 3.12; environment, unrelated to Clint"
+    },
+    "browser": "not run in this step",
+    "reviewFixes": [
+      "MODEL_STUDY runtime.mjs fingerprint corrected to the actual file hash (was bc6677bd..., an earlier draft).",
+      "Range extended to upstream 30a8067; 7fd07fd owner-decision item dropped because upstream reverted it."
+    ],
+    "npmTestReview": {
+      "tests": 397,
+      "pass": 397,
+      "fail": 0,
+      "note": "includes the parallel builder's new tests"
+    },
+    "formatCheckReview": "pass",
+    "buildReview": {
+      "result": "pass",
+      "version": "856bf83912"
+    }
+  },
+  "limitations": [
+    "No strength claim: no games were played for strength; upstream comments' self-test numbers are upstream development data.",
+    "The brain is a time-limited sampled search: decisions depend on machine speed and random numbers.",
+    "Browser budget 10 s differs from upstream 30 s.",
+    "createRuleOpponent (rule-baseline.mjs) does not include the brain."
+  ],
+  "deployment": "Working tree only; not committed or pushed by this step."
+}

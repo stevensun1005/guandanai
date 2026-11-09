@@ -36,7 +36,8 @@ test('Clint Worker route completes four full rounds with legal physical actions'
     let finished = false;
     for (let i = 0; i < 1000; i++) {
       const p = game.turn,
-        reply = decideClintRule(ruleObservation(game, p));
+        // the 残局大脑 runs on its usual route with a short budget to keep the suite quick
+        reply = decideClintRule(ruleObservation(game, p), { ms: 200, worldMs: 100 });
       const play = reply && {
         ...reply,
         cards: reply.cards.map((id) => game.hands[p].find((c) => c.id === id)),

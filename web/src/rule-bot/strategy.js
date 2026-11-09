@@ -181,7 +181,7 @@ function mateLead(p, pool, st) {
 const RUNS = { straight: [5, 1], pairs3: [3, 2], trip2: [2, 3] },
   SAME = { single: 1, pair: 2, triple: 3 };
 
-function handCounts(cards, L) {
+export function handCounts(cards, L) {
   const c = new Array(18).fill(0),
     nat = new Array(18).fill(0);
   let w = 0;
@@ -245,7 +245,7 @@ function bombsOf(k) {
 const canBeat = (k, pl, exact) =>
   isBomb(pl) ? bombsOf(k).some((b) => beats(b, pl)) : holds(k, pl.type, pl.value, 99, exact);
 
-function inferEvents(p) {
+export function inferEvents(p) {
   const ev = [[], [], [], []],
     left = [0, 1, 2, 3].map((i) => runtime.game.hands[i].length),
     log = runtime.game.log || [];
@@ -280,7 +280,7 @@ function inferEvents(p) {
     }
   return ev;
 }
-function eventFactor(x, k) {
+export function eventFactor(x, k) {
   const h = addCounts(k, x.k);
   if (x.r === 'A')
     return holds(h, x.type, x.v, 99, x.ph < 2)
@@ -1041,11 +1041,19 @@ function aiChoose(p) {
   }
   const bombs = order.filter(isBomb);
   if (bombs.length) {
-    const pb =
+    let pb =
       plainBomb(
         bombs.slice().sort((a, b) => power(a) - power(b)),
         L,
       ) || bombs[0];
+    // Upstream 2d91ecc: four aces out of five go as the whole same-rank group, not four plus a single.
+    const whole =
+      pb.type === 'bomb' && !pb.wu
+        ? bombs
+            .filter((u) => u.type === 'bomb' && !u.wu && u.value === pb.value && u.n > pb.n)
+            .sort((a, b) => b.n - a.n)[0]
+        : null;
+    if (whole) pb = whole;
     const b = { pl: pb, rc: restCost(hand, pb, L) };
 
     const rest = hand.filter((c) => !b.pl.cards.includes(c)),
