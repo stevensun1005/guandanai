@@ -22,6 +22,11 @@
       "name": "window2d.sh",
       "startMarker": "window2d start",
       "endMarker": "window2d end"
+    },
+    {
+      "name": "web-deploy (手动推进，Claude 记录进度)",
+      "startMarker": "webdeploy start",
+      "endMarker": "webdeploy end"
     }
   ],
   "stages": [
@@ -271,6 +276,86 @@
       "rule": {
         "type": "dev",
         "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "W-build",
+      "ids": [
+        "W-build"
+      ],
+      "title": "网页：推理机器人接入（已完成）",
+      "desc": "把推理搜索机器人做进网页：独立后台计算、每步限时超时退回冠军、出牌与验收版本逐项一致、浏览器实测。",
+      "kind": "audit",
+      "queue": "web-deploy (手动推进，Claude 记录进度)",
+      "after": "—",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "网页上线任务，不是实验结论"
+      }
+    },
+    {
+      "key": "W-default-readme",
+      "ids": [
+        "W-default-readme"
+      ],
+      "title": "网页：改成默认 ＋ 整理 README",
+      "desc": "新开网页默认用推理机器人；README 只留游戏介绍，研究流水账原样移到研究目录的进度记录。",
+      "kind": "audit",
+      "queue": "web-deploy (手动推进，Claude 记录进度)",
+      "after": "立即",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "网页上线任务，不是实验结论"
+      }
+    },
+    {
+      "key": "W-reason-menu-coach",
+      "ids": [
+        "W-reason-menu-coach"
+      ],
+      "title": "网页：改名 danMCai-reason、菜单只留四项、出牌建议改用推理",
+      "desc": "菜单只留 Clint、最新 GuanZero、最新 danMCai（017）、最新 danMCai-reason（默认）；Top 5 出牌建议改由推理机器人计算，超时退回冠军。",
+      "kind": "audit",
+      "queue": "web-deploy (手动推进，Claude 记录进度)",
+      "after": "改默认和 README 完成后",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "网页上线任务，不是实验结论"
+      }
+    },
+    {
+      "key": "W-publish-deploy",
+      "ids": [
+        "W-publish-deploy"
+      ],
+      "title": "网页：发布模型文件、推送、等待自动部署",
+      "desc": "把猜牌网络文件发布到 GitHub Release，推送 main，等 Pages 构建上线。",
+      "kind": "audit",
+      "queue": "web-deploy (手动推进，Claude 记录进度)",
+      "after": "上一项完成并通过检查后",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "网页上线任务，不是实验结论"
+      }
+    },
+    {
+      "key": "W-live-verify",
+      "ids": [
+        "W-live-verify"
+      ],
+      "title": "网页：线上核实",
+      "desc": "打开线上网页，确认菜单四项、默认是 reason、出牌建议来自 reason、能完整打完一局。",
+      "kind": "audit",
+      "queue": "web-deploy (手动推进，Claude 记录进度)",
+      "after": "部署完成后",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "网页上线任务，不是实验结论"
       }
     }
   ]
