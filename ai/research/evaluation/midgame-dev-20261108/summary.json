@@ -1,0 +1,404 @@
+{
+  "schema": "danmcai-midgame-dev-20261108-v1",
+  "status": "Development diagnostics (Toronto 2026-11-08 21:56-22:50): not preregistered, development seeds 3,838,090,000-3,838,097,099 (plus small checks at 131,000-131,259, 163,000-024, 164,000-020), champion 017 opponents, single fresh rounds, no tribute. Not acceptance results.",
+  "rolloutSearch": [
+    {
+      "name": "R1 one-step rollout, uniform belief",
+      "band": "21-40 cards on table",
+      "worlds": 8,
+      "candidateCap": 6,
+      "pairs": 310,
+      "meanSignedPointsPerPair": -0.1887,
+      "ci95": [
+        -0.2858,
+        -0.0916
+      ],
+      "seedRange": [
+        3838090000,
+        3838090309
+      ],
+      "searchedDecisions": 3211,
+      "differsFromChampion": 0.374,
+      "secondsPerDecision": 0.443,
+      "inferencesPerDecision": 498.8
+    },
+    {
+      "name": "R2 one-step rollout, uniform belief",
+      "band": "41-80 cards on table",
+      "worlds": 8,
+      "candidateCap": 6,
+      "pairs": 218,
+      "meanSignedPointsPerPair": -0.8372,
+      "ci95": [
+        -1.0001,
+        -0.6742
+      ],
+      "seedRange": [
+        3838092000,
+        3838092217
+      ],
+      "searchedDecisions": 4991,
+      "differsFromChampion": 0.4907,
+      "secondsPerDecision": 0.952,
+      "inferencesPerDecision": 1228.7
+    },
+    {
+      "name": "R3 hybrid: rollout, then exact createSolver value once the world has <=16 cards",
+      "band": "21-40 cards on table",
+      "worlds": 8,
+      "candidateCap": 6,
+      "pairs": 486,
+      "meanSignedPointsPerPair": -0.2006,
+      "ci95": [
+        -0.2725,
+        -0.1287
+      ],
+      "seedRange": [
+        3838094000,
+        3838094485
+      ],
+      "searchedDecisions": 5202,
+      "differsFromChampion": 0.3539,
+      "secondsPerDecision": 0.893,
+      "inferencesPerDecision": 317
+    },
+    {
+      "name": "Sanity: champion only (pairing check)",
+      "band": "21-80 (no search)",
+      "worlds": 0,
+      "candidateCap": 0,
+      "pairs": 40,
+      "meanSignedPointsPerPair": 0,
+      "ci95": [
+        0,
+        0
+      ],
+      "seedRange": [
+        3838096000,
+        3838096039
+      ],
+      "searchedDecisions": 0,
+      "differsFromChampion": 0,
+      "secondsPerDecision": 0,
+      "inferencesPerDecision": 0
+    },
+    {
+      "name": "D-truth DIAGNOSTIC ONLY (illegal: the single world is the TRUE deal, hidden cards used)",
+      "band": "21-40 cards on table",
+      "worlds": 1,
+      "candidateCap": 6,
+      "pairs": 310,
+      "meanSignedPointsPerPair": 0.9597,
+      "ci95": [
+        0.8624,
+        1.0569
+      ],
+      "seedRange": [
+        3838090000,
+        3838090309
+      ],
+      "searchedDecisions": 3251,
+      "differsFromChampion": 0.0997,
+      "secondsPerDecision": 0.0335,
+      "inferencesPerDecision": 47.4
+    },
+    {
+      "name": "D-net2 rollout, uniform belief, deviate only if a candidate beats the champion move in >=2 more of the 8 worlds than it loses (and higher mean); paired vs R1 on the same 310 deals +0.123 [0.030, 0.216]",
+      "band": "21-40 cards on table",
+      "worlds": 8,
+      "candidateCap": 6,
+      "pairs": 310,
+      "meanSignedPointsPerPair": -0.0661,
+      "ci95": [
+        -0.1504,
+        0.0181
+      ],
+      "seedRange": [
+        3838090000,
+        3838090309
+      ],
+      "searchedDecisions": 3274,
+      "differsFromChampion": 0.2019,
+      "secondsPerDecision": 0.315,
+      "inferencesPerDecision": 494.7
+    },
+    {
+      "name": "D-w32 rollout, uniform belief, W=32 (R3 option a); paired vs R1 on the same 109 deals +0.239 [0.034, 0.444] (R1 on those deals was -0.294)",
+      "band": "21-40 cards on table",
+      "worlds": 32,
+      "candidateCap": 6,
+      "pairs": 109,
+      "meanSignedPointsPerPair": -0.055,
+      "ci95": [
+        -0.2261,
+        0.116
+      ],
+      "seedRange": [
+        3838090000,
+        3838090108
+      ],
+      "searchedDecisions": 1127,
+      "differsFromChampion": 0.3878,
+      "secondsPerDecision": 1.157,
+      "inferencesPerDecision": 2038.8
+    },
+    {
+      "name": "D-lik rollout with likelihood-weighted belief (32 uniform worlds weighted by champion-softmax likelihood of the last 24 public decisions, T=0.2, systematic resample to 8; mean ESS 6.6/32); paired vs R1 on the same 117 deals +0.145 [-0.037, 0.328]",
+      "band": "21-40 cards on table",
+      "worlds": 8,
+      "candidateCap": 6,
+      "pairs": 117,
+      "meanSignedPointsPerPair": -0.1068,
+      "ci95": [
+        -0.2637,
+        0.05
+      ],
+      "seedRange": [
+        3838090000,
+        3838090116
+      ],
+      "searchedDecisions": 1247,
+      "differsFromChampion": 0.3641,
+      "secondsPerDecision": 0.897,
+      "inferencesPerDecision": 1249.2
+    }
+  ],
+  "rolloutMethod": "Development check only: not preregistered, development seeds only, no training data written, no committed or run files touched. Scripts: /Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/rollout1.mjs (SHA-256 211c5dc8..., used for R1, R2, R3 and the sanity arm) and rollout2.mjs (055fd50e..., a copy plus the --net, --truth and --belief=lik options, used for the D arms). The paired comparison helper is rollout-compare.mjs. Outputs are in the workspace directories rollout1-R1, rollout1-R2, rollout1-R3hybrid, rollout1-sanity-champion and rollout2-D-{truth,net2,w32,lik}. Each has run.json, summary.json and per-pair jsonl. Champion 017 ONNX SHA 462afc99ee6bcfb7... is verified in every run.json.\n\nDesign (same as evaluate.mjs playPaired): createRound(seed) single fresh rounds with random level and leader and no tribute. Each deal is played twice with sides swapped. The opponents are always champion greedy. The focal team plays champion greedy, except at its real decisions (not a finishing move, more than one candidate) while the table holds lo..hi cards.\n\nAt such a decision the search does the following:\n(1) Roots: the champion's top-K candidate indices by Q (K=6), plus pass if legal (mean 4.3-4.5 roots, because many decisions have fewer than 7 candidates).\n(2) W worlds come from sampleWorlds(searchObservation(game, mover)): uniform deals of the unseen cards consistent with the mover's own hand, the public log and the hand counts. The seed is (seed*1009 + ply*7919)>>>0, and every root uses the same worlds (common random numbers).\n(3) For every world and root, the search plays the root in a clone of the game with the world's hands. Then all four seats play champion greedy to the end of the round. Each seat sees only its own world hand plus the public log. A finishing move is taken first and a single candidate is automatic. In the R3 hybrid, once the world has 16 or fewer cards, the rest is the exact perfect-information team-minimax value from createSolver.value (maxNodes 1.5M, 3 s; 164,719 exact calls, 0 budget fallbacks).\n(4) A root's value is the mean signed round points for the mover's team over the W worlds. The search picks the argmax, and ties within 1e-9 go to the champion's Q.\n\nMetric: the focal team's mean signed round points per deal pair, with a 95% deal-cluster normal interval. Workers take interleaved seeds, and summaries use only the contiguous completed prefix. Wall time ran 21:56-22:38 with 7 worker processes. R1 was stopped deliberately after 9 minutes once its interval was clearly below 0, to free 3 slots for the diagnostic arms. Its 23 completed pairs beyond the prefix are dropped, so seeds through about 3,838,090,332 were played. R2 dropped 1 pair beyond its prefix (3,838,092,218 consumed) and R3 dropped 6 (through about 3,838,094,491). The D arms reuse R1's deals (3,838,090,000+) on purpose, so they can be compared pair by pair with R1. The sanity arm used 3,838,096,000-039. That rang",
+  "exactSolveScaling": [
+    {
+      "budget": "3 s / 1.5M nodes",
+      "N": 20,
+      "positions": 16,
+      "meanCards": 18.4,
+      "solved": "16/16 (100%)",
+      "medianMs": 18,
+      "p90Ms": 225
+    },
+    {
+      "budget": "3 s / 1.5M nodes",
+      "N": 24,
+      "positions": 16,
+      "meanCards": 22.6,
+      "solved": "15/16 (94%)",
+      "medianMs": 87,
+      "p90Ms": 2599
+    },
+    {
+      "budget": "3 s / 1.5M nodes",
+      "N": 28,
+      "positions": 16,
+      "meanCards": 26.8,
+      "solved": "12/16 (75%)",
+      "medianMs": 788,
+      "p90Ms": 3001
+    },
+    {
+      "budget": "3 s / 1.5M nodes",
+      "N": 32,
+      "positions": 16,
+      "meanCards": 30.1,
+      "solved": "7/16 (44%)",
+      "medianMs": 2971,
+      "p90Ms": 3002
+    },
+    {
+      "budget": "3 s / 1.5M nodes",
+      "N": 36,
+      "positions": 16,
+      "meanCards": 34.2,
+      "solved": "5/16 (31%)",
+      "medianMs": 3001,
+      "p90Ms": 3003
+    },
+    {
+      "budget": "30 s / 20M nodes",
+      "N": 20,
+      "positions": 16,
+      "solved": "16/16 (100%)",
+      "medianMs": 26,
+      "p90Ms": 322,
+      "maxNodesSolved": 114178
+    },
+    {
+      "budget": "30 s / 20M nodes",
+      "N": 24,
+      "positions": 16,
+      "solved": "16/16 (100%)",
+      "medianMs": 152,
+      "p90Ms": 3762,
+      "maxNodesSolved": 3339613
+    },
+    {
+      "budget": "30 s / 20M nodes",
+      "N": 28,
+      "positions": 16,
+      "solved": "15/16 (94%)",
+      "medianMs": 959,
+      "p90Ms": 19560,
+      "maxNodesSolved": 6793770
+    },
+    {
+      "budget": "30 s / 20M nodes",
+      "N": 32,
+      "positions": 16,
+      "solved": "12/16 (75%)",
+      "medianMs": 7251,
+      "p90Ms": 30005,
+      "medianMsSolved": 3065
+    },
+    {
+      "budget": "30 s / 20M nodes",
+      "N": 36,
+      "positions": 16,
+      "solved": "9/16 (56%)",
+      "medianMs": 10630,
+      "p90Ms": 30006,
+      "medianMsSolved": 830
+    },
+    {
+      "note": "Speed 260-430k nodes/s per process. Every 30 s failure was time-bound at 7.2M-10.3M nodes; none reached 20M. Largest table was 7.7M entries, below V8's ~16.7M Map limit, so 20M nodes would not fit in 30 s. This measures createSolver.value(), one value on the TRUE deal. Exact values for every root action on the true deal, the case relevant to post-game review, took median 118 ms, p90 2.1 s, max 16 s over 357 positions at <=24 cards (10 s / 5M budget, 2 of 69 first-file positions timed out). The section-68 report that <=28 did not finish was about 8-world all-action PIMC labelling, which costs about 8x candidates as much."
+    }
+  ],
+  "depthLimitedSearch": [
+    {
+      "design": "Perfect-information team alpha-beta over full game objects. Passes count as plies. The root uses alpha-beta and returns the first best move; other root values are only bounds. A leaf's team-0 value is sign(mover team) times the max of champion Q over the leaf mover's candidates. The leaf observation is policyState(leafGame, mover): the mover's own hand plus the public log and hand counts of the hypothetical line, which is the champion's normal input. Terminal nodes score exact signed round points. Width 0 searches every child; width 6 keeps the mover's top-6 children by champion Q plus any finishing move. 8 s cap per depth."
+    },
+    {
+      "timing_width0": {
+        "cards_1_20": {
+          "n": 175,
+          "meanCand": 9,
+          "d2_med_p90_ms": [
+            4,
+            17
+          ],
+          "d4": [
+            11,
+            98
+          ],
+          "d6": [
+            28,
+            335
+          ],
+          "d6_timeouts": 3
+        },
+        "cards_21_24": {
+          "n": 169,
+          "meanCand": 10.8,
+          "d2": [
+            3,
+            21
+          ],
+          "d4": [
+            12,
+            147
+          ],
+          "d6": [
+            43,
+            468
+          ],
+          "d6_timeouts": 4
+        }
+      }
+    },
+    {
+      "timing_width6": {
+        "cards_25_28": {
+          "n": 35,
+          "d4": [
+            10,
+            108
+          ],
+          "d6": [
+            41,
+            432
+          ]
+        },
+        "cards_29_32": {
+          "n": 31,
+          "d4": [
+            13,
+            144
+          ],
+          "d6": [
+            52,
+            352
+          ]
+        },
+        "cards_33_36": {
+          "n": 35,
+          "meanCand": 26.2,
+          "d4": [
+            19,
+            289
+          ],
+          "d6": [
+            54,
+            1299
+          ]
+        }
+      }
+    },
+    {
+      "accuracy_vs_exact_width0": "339 unique positions at <=24 cards (dev seeds 3,838,096,000-199) with exact per-action true-deal values; 158 are critical (not every action optimal). On critical positions, a random candidate is optimal 41.7% of the time. Champion greedy (imperfect information) is optimal in 81.6%, mean regret 0.329. Depth 2 is optimal in 65.8%, regret 0.557. Depth 4 is optimal in 81.6%, regret 0.285. Depth 6 is optimal in 81.0%, regret 0.316. Paired regret reduction against champion: d4 +0.044 [-0.084, 0.173]; d6 +0.013 [-0.155, 0.181]. On critical positions d4 picks the same move as champion only 46% of the time (d6 38%), yet is optimal equally often. Width-6 beam on the first 67 positions (26 critical): d4 and d6 88.5%, the same as champion."
+    },
+    {
+      "verdict": "No usable midgame expert here. Search with champion leaves sees all four hands, an information advantage the champion lacks, and still does not beat the champion against the exact solver. Depth 2 is clearly worse. A short perfect-information lookahead does not fix the champion's leaf errors."
+    }
+  ],
+  "rolloutThroughput": {
+    "setup": "24 midgame snapshots (21-40 cards, mean 28.9) x 10 repeats, all four seats champion greedy until the round ends. Each rollout has 12.1 non-forced decisions on average. One process with 1 ONNX thread; 2 other probe processes and a sibling experiment were running at the same time. Batched mode uses a copy of the champion whose state input accepts one state row per action row (same weights; Gemm(state)+MatMul(actions)): /Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/midgame/champion-rowstate.onnx. Batched and unbatched results were identical (sanity check passed).",
+    "batch1_unbatched": {
+      "rolloutsPerSec": 74.6,
+      "msPerDecision": 1.11
+    },
+    "batch8": {
+      "rolloutsPerSec": 123.2,
+      "msPerDecision": 0.67
+    },
+    "batch32": {
+      "rolloutsPerSec": 153.5,
+      "msPerDecision": 0.54
+    },
+    "batch128": {
+      "rolloutsPerSec": 119.4,
+      "msPerDecision": 0.69,
+      "note": "only 2 lockstep waves of 240 games, so overhead dominates. Not the real asymptote."
+    },
+    "implication": "Each process does about 75-150 midgame rollouts per second. An 8-world x 12-candidate rollout decision (~100 rollouts) costs about 0.7-1.3 s per process. JS encoding and candidate generation are now a large share of the cost."
+  },
+  "beliefCheck": {
+    "setup": "480 unique snapshots at 21-40 cards (mean 28.9; 80 from rounds 3,838,096,000-039 and 400 from 096,040-199). For every root candidate: one deterministic champion-greedy rollout on the TRUE hidden deal, compared with the mean over 8 uniform public-information worlds (sampleWorlds; world seeds 3,838,096,500-579 and 3,838,096,700-097,099). Values are in the mover team's signed round points.",
+    "flatUnderTrueDeal": "41.7% (all candidates have equal true-deal rollout value)",
+    "critical": 280,
+    "beliefArgmaxIsTrueBest": 0.668,
+    "championArgmaxIsTrueBest": 0.725,
+    "meanTrueRegret_belief8": 0.721,
+    "meanTrueRegret_champion": 0.525,
+    "by_cards": {
+      "21_28": {
+        "n": 133,
+        "belief8": 0.744,
+        "champion": 0.759,
+        "regretBelief": 0.526,
+        "regretChampion": 0.459
+      },
+      "29_40": {
+        "n": 147,
+        "belief8": 0.599,
+        "champion": 0.694,
+        "regretBelief": 0.898,
+        "regretChampion": 0.585
+      }
+    },
+    "interpretation": "Averaging champion rollouts over 8 uniform worlds picks worse than the champion's own Q, and the gap is largest at 29-40 cards. Choosing by the true deal would gain about 0.5 points per critical decision over the champion, but that is an unattainable perfect-information ceiling that includes luck. Plain PIMC rollouts with a uniform belief are therefore not a midgame teacher. Any midgame gain must come from better belief or hidden-information handling (for example the history-weighted likelihoodWeights) or from more and better outcome-trained learning, not from deeper perfect-information search."
+  },
+  "readings": [
+    "One-step rollout search over uniform public-information worlds is negative in the midgame: 21-40 cards -0.19 [-0.29,-0.09] (310 pairs), with exact tail -0.20 [-0.27,-0.13] (486), 41-80 cards -0.84 [-1.00,-0.67] (218). Noise-reduced variants reach about zero but not above (net-2 rule -0.07, 32 worlds -0.06, likelihood-weighted -0.11).",
+    "The same search on the TRUE hidden deal (illegal diagnostic) is +0.96 [0.86,1.06] (310 pairs, 230 positive, 0 negative): the champion is an adequate continuation policy; the hidden-hand belief is the bottleneck.",
+    "Depth-limited perfect-information search with champion leaves is no better than the champion against the exact solver at <=24 cards (d4 regret 0.285 vs 0.329, difference +0.044 [-0.084,0.173]).",
+    "The public play/pass history is highly informative (true deal ranks 0.98-1.00 under the champion-policy likelihood) but uniform proposals almost never land near the posterior; the champion's state has no pass history or play order.",
+    "In-search predicted gains (+0.11 to +0.29 per searched decision) did not predict play results; only real play can gate.",
+    "Exact solving with the true deal (post-game review): 30 s budget solves 100% at <=24, 94% at <=28, 75% at <=32, 56% at <=36 cards."
+  ]
+}
