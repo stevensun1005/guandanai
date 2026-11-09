@@ -116,7 +116,7 @@ node web/tools/search-latency.mjs --belief=<belief.onnx> --url=http://127.0.0.1:
 python web/tests/search_bot_smoke.py http://127.0.0.1:8795/
 ```
 
-`search-bot.test.mjs` 用确定性替身网络（不读暗牌）在固定种子的中盘、尾盘局面上要求浏览器核心与 `midgame-search.mjs` 的选择、搜索根、各世界结果和抽到的世界完全相同；另查：Worker 载荷只含公开信息（打乱暗牌不改变载荷，读取暗牌占位即报错）、超出预算整次作废、200 个合成进贡／还贡／抗贡局面的世界都满足公开记录且矛盾时报 `KnownCardsError`、清单校验、收集身份通过 `validateRecord`、打包后的 Worker 不含 `node:` 导入；预算项检查每步 50 秒、硬超时 56 秒低于真人 60 秒计时、两档单次求解都等于 Node 的 3 秒、首次加载只等 10 秒（不等满预算），以及新一手的评价请求会请停上一手仍在跑的评价搜索。`web-parity.mjs` 与 `search-latency.mjs` 需要真实模型，不在 CI；后者用无头 Chrome 的 DevTools 协议直接驱动构建出的 Worker。DevTools CPU 降速不作用于 Worker，手机数字用“手机预算÷4”代理。`search_bot_smoke.py` 打一整局单人局，先确认三席默认即为 `selection.defaultChoice`（9001），检查推断网络 SHA、两个 Worker 都在、搜索次数、无错误面板。房主＋加入者双浏览器下只有房主创建搜索 Worker 尚未单独自动化。当前结果见主报告第 72 节。
+`search-bot.test.mjs` 用确定性替身网络（不读暗牌）在固定种子的中盘、尾盘局面上要求浏览器核心与 `midgame-search.mjs` 的选择、搜索根、各世界结果和抽到的世界完全相同；另查：Worker 载荷只含公开信息（打乱暗牌不改变载荷，读取暗牌占位即报错）、超出预算整次作废、200 个合成进贡／还贡／抗贡局面的世界都满足公开记录且矛盾时报 `KnownCardsError`、清单校验、收集身份通过 `validateRecord`、打包后的 Worker 不含 `node:` 导入；预算项检查每步 50 秒、硬超时 56 秒低于真人 60 秒计时、两档单次求解都等于 Node 的 3 秒、首次加载只等 10 秒（不等满预算），以及新一手的评价请求会请停上一手仍在跑的评价搜索（请停后仍未停下时，电脑搜索照样在 500 毫秒后换 Worker 先算）。`web-parity.mjs` 与 `search-latency.mjs` 需要真实模型，不在 CI；后者用无头 Chrome 的 DevTools 协议直接驱动构建出的 Worker。DevTools CPU 降速不作用于 Worker，手机数字用“手机预算÷4”代理。`search_bot_smoke.py` 打一整局单人局，先确认三席默认即为 `selection.defaultChoice`（9001），检查推断网络 SHA、两个 Worker 都在、搜索次数、无错误面板。房主＋加入者双浏览器下只有房主创建搜索 Worker 尚未单独自动化。当前结果见主报告第 72 节。
 
 ## 模型数值与性能
 

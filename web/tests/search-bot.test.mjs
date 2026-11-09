@@ -716,3 +716,36 @@ test("a new coach request stops the previous turn's running coach search", async
   assert.equal((await fresh).ok, true);
   assert.equal(workers.length, 1, 'no worker replacement: the table solver cache is kept');
 });
+
+test('a superseded coach job that has not stopped still yields to a table search within PREEMPT_MS', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const flush = () => new Promise((resolve) => setImmediate(resolve));
+  const { workers, spawn } = fakeWorkers();
+  const client = createSearchClient({ version: 't', device: 'desktop', spawn });
+  const old = client.evaluate('9001', { p: 0, turn: 'old' });
+  await flush();
+  workers[0].reply(workers[0].posted[0].id, { ready: true });
+  await flush();
+  const job = workers[0].posted.at(-1);
+  assert.equal(job.type, 'coach');
+  // the next turn's coach request asks it to stop, but it is inside one long solver call
+  const fresh = client.evaluate('9001', { p: 0, turn: 'new' });
+  await flush();
+  assert.deepEqual(workers[0].posted.at(-1), { type: 'cancel', id: job.id });
+  const table = client.decide('9001', { p: 1 });
+  await flush();
+  assert.equal(workers[0].posted.length, 3, 'no second cancel; the preempt timer still runs');
+  // a table request drops queued coach jobs (that turn's coach shows champion values)
+  assert.equal((await fresh).reason, 'preempted');
+  t.mock.timers.tick(500);
+  assert.equal((await old).reason, 'preempted');
+  assert.equal(workers[0].terminated, true);
+  const next = workers[1];
+  assert.equal(next.posted[0].type, 'init');
+  next.reply(next.posted[0].id, { ready: true });
+  await flush();
+  assert.equal(next.posted[1].type, 'search');
+  next.reply(next.posted[1].id, { ok: true, index: 0, championIndex: 0, ms: 5 });
+  assert.equal((await table).ok, true);
+  assert.equal(client.stats.coach.preempted, 1);
+});

@@ -700,7 +700,55 @@
         "tableFallbacks": 0
       },
       "machine": "shared research Mac (window-2 workers running, nice -n 10); development checks, not strength results",
-      "node": "npm test 390 tests: 386 pass, 4 skipped, 0 fail (search-bot.test.mjs 15/15 incl. 50 s budgets, 56 s hard timeout < 60 s, 10 s first-load wait, coach supersede; guanzero-reason.test.mjs 9/9 with REASON_V1_BUDGET); format:check and build pass"
+      "node": "npm test 390 tests: 386 pass, 4 skipped, 0 fail (search-bot.test.mjs 15/15 incl. 50 s budgets, 56 s hard timeout < 60 s, 10 s first-load wait, coach supersede; guanzero-reason.test.mjs 9/9 with REASON_V1_BUDGET); format:check and build pass",
+      "reviewSoloRounds": {
+        "test": "Adversarial review: two full solo rounds on a local build (port 8802, headless system Chrome, desktop class), three danMCai-reason seats (default 9001) and the move coach on; a page probe timed every move (turn start to play) and every search-worker reply",
+        "rounds": 2,
+        "tableSearches": {
+          "requests": 43,
+          "completed": 43,
+          "fallbacks": 0,
+          "differsFrom017": 11,
+          "workerMsP50": [
+            167,
+            123
+          ],
+          "workerMsMax": [
+            2179,
+            980
+          ]
+        },
+        "botMoveWallMs": {
+          "over40Cards": {
+            "n": 88,
+            "max": 1026
+          },
+          "cards21to40": {
+            "n": 38,
+            "max": 1006
+          },
+          "cards20orFewer": {
+            "n": 24,
+            "max": 2177
+          }
+        },
+        "coachSearches": {
+          "requests": 4,
+          "completed": 4,
+          "fallbacks": 0,
+          "ms": [
+            174,
+            438,
+            138,
+            224
+          ],
+          "preempted": 0
+        },
+        "firstLoadInitMs": 329,
+        "pageErrors": 0,
+        "note": "Bot move wall time includes the 0.5-1 s think delay that the search overlaps. Development checks on the shared research Mac, not strength results."
+      },
+      "reviewTests": "search-bot.test.mjs 16/16: added a check that a coach job asked to stop by the next turn's coach request, but still inside one solver call, does not delay a table search beyond PREEMPT_MS (500 ms; the worker is replaced and the table search runs first)."
     },
     "historicalNote": "the parity, Chrome latency and fallback numbers above were measured under the previous 3/4 s (desktop) and 3.5/3.5/1 s (mobile) budgets; completed decisions still equal Node, current fallback rates are not measured",
     "sourcesChanged": {
