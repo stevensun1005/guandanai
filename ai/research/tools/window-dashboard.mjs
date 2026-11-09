@@ -779,6 +779,7 @@ export function snapshot(run, config, options = {}) {
     for (const card of guanzeroCards(config.guanzeroRun, now))
       stages.push({
         ...card,
+        ids: [card.key],
         stateText: STATE_TEXT[card.state],
         startText: card.start ? eastern(card.start) : '—',
         endText: card.end ? eastern(card.end) : '—',

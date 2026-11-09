@@ -333,6 +333,7 @@ test('unified dashboard reads actual learner progress and the training STOP with
       machine: false,
     });
     assert.equal(result.now.running.length, 1);
+    assert.ok(result.stages.every((stage) => Array.isArray(stage.ids)));
     assert.match(result.now.running[0].text, /123/);
     assert.equal(result.window.stop, false);
     writeFileSync(join(run, 'STOP'), 'owner');
