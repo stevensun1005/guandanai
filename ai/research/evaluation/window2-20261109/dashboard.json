@@ -12,6 +12,11 @@
       "name": "window2b.sh",
       "startMarker": "window2b start",
       "endMarker": "window2b end"
+    },
+    {
+      "name": "window2c.sh",
+      "startMarker": "window2c start",
+      "endMarker": "window2c end"
     }
   ],
   "stages": [
@@ -134,6 +139,36 @@
         {
           "label": "v3",
           "out": "H/p2-v3"
+        }
+      ],
+      "total": 1200,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
+      }
+    },
+    {
+      "key": "C-w16",
+      "ids": [
+        "C-w16-w8",
+        "C-w16-w16"
+      ],
+      "title": "C 组合机器人 16 个世界 vs 8 个（开发 1,200 副）",
+      "desc": "最强机器人里把抽样世界从 8 个加到 16 个（中盘和尾盘都加），同一批开发牌配对比较，看值不值得多花一倍计算。",
+      "kind": "compare",
+      "queue": "window2c.sh",
+      "after": "立即",
+      "paths": {
+        "compare": "C-w16/compare.json"
+      },
+      "sides": [
+        {
+          "label": "8 个世界",
+          "out": "C-w16/w8"
+        },
+        {
+          "label": "16 个世界",
+          "out": "C-w16/w16"
         }
       ],
       "total": 1200,

@@ -1,0 +1,9 @@
+{
+  "schema": "danmcai-window2-addendum-2",
+  "registeredAt": "2026-11-09T17:45Z",
+  "C_w16": {
+    "what": "Combined research bot (same as C-h4) with 16 worlds in BOTH the midgame search and the <=20 PIMC endgame vs the same bot with 8 worlds, on the same 1,200 dev pairs 3,838,188,000-3,838,189,199; paired difference. Development only (a positive result would be confirmed on a fresh held-out block later).",
+    "workers": "4 + 4"
+  },
+  "engineering": "Clint rules-v2 opponent option for the combined-bot evaluator, and a distillation v2 learner (relative target, belief inputs) are being built; each is registered in a further addendum before it runs."
+}

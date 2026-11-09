@@ -1,0 +1,33 @@
+{
+  "A": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/p2v2-v1",
+  "B": "/Users/stevensun/guandan-runtime.noindex/window2-20261109/H/p2-v3",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "settingDifferences": {
+    "beliefSHA256": [
+      "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "a4a70070f438dcf399ab6b690d58da5af483d9d6da363008ddb8fa6fac214ca0"
+    ]
+  },
+  "prefixPairs": [
+    1200,
+    1200
+  ],
+  "commonPairs": 1200,
+  "seeds": [
+    3838183000,
+    3838184199
+  ],
+  "meanA": 0.12416666666666666,
+  "meanB": 0.11041666666666666,
+  "difference": "B minus A, focal mean signed round points per deal pair",
+  "meanDifference": -0.01375,
+  "sdDifference": 0.8707187050857211,
+  "ci95": [
+    -0.06301554851942898,
+    0.03551554851942897
+  ],
+  "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+  "pairsIdentical": 690,
+  "pairsBBetter": 250,
+  "pairsABetter": 260
+}
