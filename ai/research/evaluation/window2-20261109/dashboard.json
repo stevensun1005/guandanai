@@ -563,6 +563,22 @@
         "type": "dev",
         "text": "开发检查（开发种子），不作验收"
       }
+    },
+    {
+      "key": "T-gz-reason-v2",
+      "ids": [
+        "T-gz-reason-v2"
+      ],
+      "title": "GuanZero 定时评测的 reason 组改用 50 秒规则（新协议 v2）",
+      "desc": "另一台电脑上的 GuanZero 定时评测里 reason 组目前固定 3–4 秒；新增 clint-champion-reason-v2，按每手 60 秒、推理最多 50 秒、失败不连带的规则，从下一批起生效，并写好那台电脑的切换步骤；已登记批次不改。",
+      "kind": "audit",
+      "queue": "owner-tasks (手动推进，Claude 记录进度)",
+      "after": "立即（与计时规则改动并行）",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
     }
   ]
 }
