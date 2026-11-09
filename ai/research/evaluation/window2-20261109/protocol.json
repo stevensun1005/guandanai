@@ -1,0 +1,29 @@
+{
+  "schema": "danmcai-window2-20261109-v1",
+  "registeredAt": "2026-11-09",
+  "authorization": "Owner 2026-11-09 ~10:50 Toronto asked what to run now; standing authorization to run the long-term plan directly and keep the computer busy.",
+  "window": {
+    "start": "2026-11-09 ~10:55 Toronto",
+    "deadline": "2026-11-10T04:00:00Z",
+    "deadlineToronto": "2026-11-09 23:00 EST",
+    "stop": "STOP file in the run directory or the deadline stops all stages; unfinished stages are reported as not run."
+  },
+  "champion": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+  },
+  "C_combinedBot": {
+    "what": "Combined Node research bot (midgame-search.mjs at this commit): focal team plays belief-world net-2 rollout search at 21-40 cards (belief v1 16d76783..., 8 worlds, champion top-6 + pass) and 8-world exact PIMC at <=20 cards with worlds from the same belief model (champion tie-break; >= 4 worlds else champion); champion greedy elsewhere; opponents champion greedy.",
+    "devEvidence": "1,200 dev pairs: +0.256 [0.212, 0.299]; with uniform endgame worlds +0.190; paired +0.066 [0.041, 0.091] (MODEL_STUDY 70.5).",
+    "primary": "Held-out H4 consecutive block 990,023,757-990,026,756 (3,000 deals, audited conflict-free; recorded in the audit's newTrainingRootRanges field but used only for evaluation), each played twice with sides swapped; focal mean signed round points per pair with 95% deal-cluster normal interval; positive iff lower bound > 0. Node research bot only; no web change."
+  },
+  "D_distillation": {
+    "status": "Registered in an addendum before it starts (trainer under construction): residual on frozen champion trained on the window-1 distillation data (belief-search labels at 21-40 cards), network-only play, dev gate then held-out H5 (heldout-h5.json, 3,000 audited seeds from 990,500,000)."
+  },
+  "H_beliefV3": {
+    "status": "Registered in an addendum before it starts: hand-inference v3 with ordered play/pass history inputs; development checks P1/P2 vs v1 on the same dev seeds."
+  },
+  "backfill": "Whenever registered stages leave cores idle, distill-generate.mjs (window-1 settings, belief v1) continues on the audited block 4,264,011,000-4,264,110,999 (resuming, skipping finished blocks) and then 4,288,077,000-4,288,176,999; data only, no claim.",
+  "unchanged": "Web champion 017, menu and every frozen run; human records are test data only."
+}

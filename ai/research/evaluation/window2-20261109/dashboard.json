@@ -1,0 +1,54 @@
+{
+  "title": "第二窗口研究面板（2026-11-09）",
+  "deadline": "2026-11-10T04:00:00Z",
+  "note": "长期计划第二窗口（MODEL_STUDY 第 71 节）。冠军 017 为对手与基线；网页冠军与菜单不变。截止或 STOP 文件即停，未跑完的部分记为未运行。",
+  "orchestrators": [
+    {
+      "name": "window2.sh",
+      "startMarker": "window2 start",
+      "endMarker": "window2 end"
+    }
+  ],
+  "stages": [
+    {
+      "key": "C-h4",
+      "ids": [
+        "C-h4"
+      ],
+      "title": "C 组合研究机器人留出验收 H4（3,000 副）",
+      "desc": "中盘 21–40 张猜牌搜索 ＋ ≤20 张猜牌世界精确求解，对冠军在全新封存牌上正式验收（开发 1,200 副 +0.256）。",
+      "kind": "midgame",
+      "queue": "window2.sh",
+      "after": "立即",
+      "paths": {
+        "out": "C-h4",
+        "log": "logs/C-h4.log"
+      },
+      "total": 3000,
+      "rule": {
+        "type": "heldout",
+        "text": "预登记主指标：95% 区间下界 >0 为正向证据"
+      }
+    },
+    {
+      "key": "BF-distill",
+      "ids": [
+        "BF-distill"
+      ],
+      "title": "补位：蒸馏数据继续生成",
+      "desc": "有空闲核心时自动接着生成猜牌搜索判断数据（四家都搜索），给蒸馏训练用；只生成数据，不下结论。",
+      "kind": "generate",
+      "queue": "window2.sh",
+      "after": "随时补满空闲核心",
+      "paths": {
+        "out": "../window1-20261109/D/data",
+        "log": "logs/BF-distill.log"
+      },
+      "total": null,
+      "rule": {
+        "type": "descriptive",
+        "text": "数据生成，不作结论"
+      }
+    }
+  ]
+}
