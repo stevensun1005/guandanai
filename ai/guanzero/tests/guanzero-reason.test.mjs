@@ -9,7 +9,7 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { SEARCH_BOT_V1, SEARCH_BUDGETS } from '../../../web/src/ai/search/constants.mjs';
 import { restoreGame } from '../../../web/src/ai/search/payload.mjs';
-import { createRound } from '../../shared/simulation/simulation.mjs';
+import { createRound, advanceRound } from '../../shared/simulation/simulation.mjs';
 import {
   REASON_V1_BUDGET,
   REASON_V2_BUDGET,
@@ -23,8 +23,15 @@ import {
   deadlineSolver,
   chooseReason,
 } from '../training/reason.mjs';
-import { SearchBudgetError } from '../../../web/src/ai/search/core.mjs';
-import { SolverBudget } from '../../danMCai/endgame/solver.mjs';
+import {
+  SearchBudgetError,
+  argmax,
+  searchBand,
+  remainingCards,
+} from '../../../web/src/ai/search/core.mjs';
+import { SolverBudget, createSolver } from '../../danMCai/endgame/solver.mjs';
+import { TARGETS } from '../../danMCai/belief/features.mjs';
+import { policyState } from '../../../web/src/ai/observation.js';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { reasonMatch, reasonProtocolDigest, evaluateReason } from '../training/evaluate-reason.mjs';
 import { evaluate } from '../training/evaluate.mjs';
@@ -243,6 +250,89 @@ test('v2 fallback is never sticky: a budget fallback does not stop the next move
   assert.equal(engine.stats.maxSearchMs, 50_001);
   for (const key of REASON_V2_MOVE.statistics) assert.ok(Number.isFinite(engine.stats[key]), key);
   assert.equal(reasonStats().maxSearchMs, undefined); // v1 counters keep their registered shape
+});
+test('v2 real search: several consecutive failures, then healthy moves equal a fresh engine', async () => {
+  // Real searchBotDecision / exact solver; only the networks and the clock are injected.
+  // Legal positions reached by play (card counts conserved), with a real choice to make.
+  const position = (most) => {
+    const game = createRound(123);
+    for (;;) {
+      const p = game.turn,
+        plays = candidates(game.hands[p], game.L, game.trick?.play),
+        left = game.hands.reduce((n, h) => n + h.length, 0);
+      const finish = plays.some((a) => a && a.cards.length === game.hands[p].length);
+      if (left <= most && plays.length > 1 && !finish) return game;
+      assert.equal(advanceRound(game, plays.find((a) => a) ?? null), null);
+    }
+  };
+  const values = async (s) => s.actions.map((_, i) => ((i * 7919) % 13) / 13);
+  const probabilities = async () => new Float32Array(TARGETS).fill(0.25);
+  const fresh = () => {
+    let clock = 1000;
+    const engine = {
+      protocol: REASON_V2_PANEL,
+      budget: REASON_V2_BUDGET,
+      params: SEARCH_BOT_V1,
+      stats: reasonStats(REASON_V2_PANEL),
+      now: () => clock,
+      values,
+      probabilities,
+      solver: createSolver({
+        maxNodes: SEARCH_BOT_V1.solverMaxNodes,
+        maxMs: REASON_V2_BUDGET.solverMs,
+        maxTable: REASON_V2_BUDGET.solverTable,
+      }),
+    };
+    return { engine, advance: (ms) => (clock += ms) };
+  };
+  const midgame = position(36),
+    endgame = position(14);
+  assert.equal(
+    searchBand(remainingCards(restoreGame(reasonPayload(midgame, midgame.turn, 11)))),
+    'midgame',
+  );
+  assert.equal(
+    searchBand(remainingCards(restoreGame(reasonPayload(endgame, endgame.turn, 11)))),
+    'endgame',
+  );
+  const { engine, advance } = fresh();
+  const decide = (game) => chooseReason(engine, game, game.turn, 11);
+  const championOf = async (game) => {
+    const plays = candidates(game.hands[game.turn], game.L, game.trick?.play);
+    return plays[argmax(await values(policyState(game, game.turn, 0, plays)))];
+  };
+  // 1. midgame: the champion inference itself uses up the 50 s (clock counts from decision start)
+  engine.values = async (s) => (advance(50_001), values(s));
+  assert.deepEqual(await decide(midgame), await championOf(midgame));
+  engine.values = values;
+  // 2. endgame: deadline passes during the belief inference, before the first solver call
+  engine.probabilities = async (v) => (advance(50_001), probabilities(v));
+  assert.deepEqual(await decide(endgame), await championOf(endgame));
+  // 3. endgame: 1 s left, the capped solver is stopped by the clock
+  engine.probabilities = async (v) => (advance(49_000), probabilities(v));
+  engine.createSolver = ({ maxNodes }) => ({
+    actionValue: () => {
+      throw new SolverBudget(maxNodes - 1);
+    },
+  });
+  assert.deepEqual(await decide(endgame), await championOf(endgame));
+  engine.probabilities = probabilities;
+  delete engine.createSolver;
+  assert.equal(engine.stats.budgetFallback, 3);
+  assert.equal(engine.stats.solverDeadlineCapped, 1);
+  assert.equal(engine.stats.midgame, 1);
+  assert.equal(engine.stats.endgame, 2);
+  // 4. healthy moves after the failures: searched, and identical to an engine that never failed
+  const before = { ...engine.stats };
+  const reference = fresh().engine;
+  for (const game of [midgame, endgame])
+    assert.deepEqual(await decide(game), await chooseReason(reference, game, game.turn, 11));
+  assert.equal(engine.stats.budgetFallback, 3); // no new fallback
+  assert.equal(engine.stats.midgame, 2);
+  assert.equal(engine.stats.endgame, 3);
+  assert.ok(engine.stats.inferences > before.inferences);
+  for (const key of ['changedFromChampion', 'minWorldsFallback', 'inferences', 'budgetFallback'])
+    assert.equal(engine.stats[key] - before[key], reference.stats[key], key);
 });
 test('opponent policy cannot see other hands; swapping hidden cards preserves its payload', () => {
   const game = createRound(123),
