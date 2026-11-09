@@ -26,6 +26,12 @@
     {
       "id": "H-v2-P2",
       "what": "midgame-search.mjs band 21-40, belief v2 vs belief v1 on the same 1,200 dev pairs 3,838,183,000-3,838,184,199; paired difference"
+    },
+    {
+      "id": "C-combined",
+      "what": "Combined research bot (midgame-search.mjs 2852cf6): belief-world midgame search at 21-40 cards (v1 16d76783...) + 8-world exact PIMC at <=20 cards; endgame worlds uniform vs belief (v1, trained on 21-80 cards, so <=20 is out of band) on the same 1,200 dev pairs 3,838,186,000-3,838,187,199; each arm vs champion and the paired difference",
+      "after": "H-band41",
+      "addedAt": "2026-11-09T12:45Z"
     }
   ],
   "stop": "STOP file or 15:45Z stops every stage; unfinished stages are reported as not run."
