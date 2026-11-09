@@ -36,6 +36,8 @@ npm run dev
 
 训练代码在 [AI 目录](../ai/README.md)。牌规和公开信息编码由网页与训练共同复用，不另复制一套。
 
+其他网站（如 Clint 的网站）要接入 danMCai-reason，见 [接入指南](docs/REASON_BOT_INTEGRATION.md)。
+
 出牌评价可在开局前选择，右侧 Top 5 点击只选牌；普通分数、房主许可和数据标记见 [MOVE_COACH](docs/MOVE_COACH.md)。
 
 ## 进还贡专项接入
