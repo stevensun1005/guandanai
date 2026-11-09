@@ -1,0 +1,241 @@
+{
+  "schema": "danmcai-endgame-pimc-postmortem-v1",
+  "status": "Development diagnostics after the section-68 negative result: not preregistered, development seeds 3,838,0xx,xxx only (no held-out or training seeds), small samples. They explain the failure and shape the next protocol; they are not acceptance results.",
+  "labelStructure": {
+    "decisions": 76428,
+    "rows": 478863,
+    "fractionAllLabelsEqual": 0.3799,
+    "fractionUniqueMax": 0.3172,
+    "meanCandidatesTiedAtMax": 3.557,
+    "totalVariance": 3.0589,
+    "betweenDecisionVariance": 2.8508,
+    "withinDecisionVariance": 0.2081
+  },
+  "labelStructureNote": "76,428 decisions from every 4th section-68 shard. Only 6.8% of label variance is within a decision; 38% of decisions have all labels equal; 65% of candidates tie at the maximum on average.",
+  "modelFits": {
+    "champion": {
+      "mseBetween_perDecisionMeanError": 1.2964,
+      "mseWithin_centeredError": 0.137,
+      "argmaxIsLabelMax_labelsDiffer": 0.7686
+    },
+    "student_e00014900": {
+      "mseBetween_perDecisionMeanError": 0.3523,
+      "mseWithin_centeredError": 0.1036,
+      "argmaxIsLabelMax_labelsDiffer": 0.7878
+    },
+    "studentSameArgmaxAsChampionOnFlatLabelDecisions": 0.501,
+    "note": "Mostly in-sample for the student. Absolute MSE cut between-decision error 73% but within-decision error 24%; where labels are flat the student kept the champion's move only ~50% of the time."
+  },
+  "playDiagnostics": {
+    "labelArgmaxFirstIndex": {
+      "mode": "pimc",
+      "student": "",
+      "pairs": 664,
+      "threshold": 20,
+      "seedRange": [
+        3838010000,
+        3838010663
+      ],
+      "focalWins": 652,
+      "focalLosses": 676,
+      "meanSignedPoints": 0.043674698795180725,
+      "ci95": [
+        0.005990988043742353,
+        0.0813584095466191
+      ]
+    },
+    "labelArgmaxChampionTiebreak": {
+      "mode": "pimc",
+      "student": "",
+      "pairs": 87,
+      "threshold": 20,
+      "seedRange": [
+        3838010000,
+        3838010086
+      ],
+      "focalWins": 87,
+      "focalLosses": 87,
+      "meanSignedPoints": 0.12643678160919541,
+      "ci95": [
+        0.03409005267403377,
+        0.21878351054435707
+      ]
+    },
+    "section68StudentSameDeals": {
+      "mode": "student",
+      "student": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-20261108/models/e00014900.onnx",
+      "pairs": 800,
+      "threshold": 20,
+      "seedRange": [
+        3838010000,
+        3838010799
+      ],
+      "focalWins": 789,
+      "focalLosses": 811,
+      "meanSignedPoints": -0.0525,
+      "ci95": [
+        -0.08153747072116233,
+        -0.023462529278837675
+      ]
+    },
+    "championSanity": {
+      "mode": "champion",
+      "student": "",
+      "pairs": 800,
+      "threshold": 20,
+      "seedRange": [
+        3838010000,
+        3838010799
+      ],
+      "focalWins": 800,
+      "focalLosses": 800,
+      "meanSignedPoints": 0,
+      "ci95": [
+        0,
+        0
+      ]
+    },
+    "orderingLossStudent2000steps": {
+      "student": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/armB-2000.onnx",
+      "pairs": 800,
+      "threshold": 20,
+      "seedRange": [
+        3838050000,
+        3838050799
+      ],
+      "modes": [
+        {
+          "mode": "full",
+          "pairs": 800,
+          "meanSignedPoints": 0.0013,
+          "ci95": [
+            -0.028,
+            0.0305
+          ],
+          "focalWins": 789,
+          "focalLosses": 811,
+          "pairsZero": 654,
+          "focalEndgameDecisions": 4033,
+          "studentDecisions": 4033,
+          "deviations": 1101,
+          "lateDeviations": 456,
+          "roundsWithDeviation": 645
+        },
+        {
+          "mode": "single",
+          "pairs": 800,
+          "meanSignedPoints": 0.0025,
+          "ci95": [
+            -0.0244,
+            0.0294
+          ],
+          "focalWins": 798,
+          "focalLosses": 802,
+          "pairsZero": 675,
+          "focalEndgameDecisions": 3997,
+          "studentDecisions": 2587,
+          "deviations": 645,
+          "lateDeviations": 0,
+          "roundsWithDeviation": 645
+        },
+        {
+          "mode": "first2",
+          "pairs": 800,
+          "meanSignedPoints": -0.0013,
+          "ci95": [
+            -0.0301,
+            0.0276
+          ],
+          "focalWins": 790,
+          "focalLosses": 810,
+          "pairsZero": 655,
+          "focalEndgameDecisions": 4010,
+          "studentDecisions": 3496,
+          "deviations": 926,
+          "lateDeviations": 281,
+          "roundsWithDeviation": 645
+        }
+      ]
+    },
+    "orderingLossStudent6000steps": {
+      "student": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/armB-6000.onnx",
+      "pairs": 800,
+      "threshold": 20,
+      "seedRange": [
+        3838050000,
+        3838050799
+      ],
+      "modes": [
+        {
+          "mode": "full",
+          "pairs": 800,
+          "meanSignedPoints": 0.0037,
+          "ci95": [
+            -0.0252,
+            0.0327
+          ],
+          "focalWins": 790,
+          "focalLosses": 810,
+          "pairsZero": 649,
+          "focalEndgameDecisions": 4120,
+          "studentDecisions": 4120,
+          "deviations": 1246,
+          "lateDeviations": 555,
+          "roundsWithDeviation": 691
+        },
+        {
+          "mode": "single",
+          "pairs": 800,
+          "meanSignedPoints": 0.0075,
+          "ci95": [
+            -0.0198,
+            0.0348
+          ],
+          "focalWins": 799,
+          "focalLosses": 801,
+          "pairsZero": 662,
+          "focalEndgameDecisions": 4034,
+          "studentDecisions": 2505,
+          "deviations": 691,
+          "lateDeviations": 0,
+          "roundsWithDeviation": 691
+        },
+        {
+          "mode": "first2",
+          "pairs": 800,
+          "meanSignedPoints": 0.0013,
+          "ci95": [
+            -0.027,
+            0.0295
+          ],
+          "focalWins": 791,
+          "focalLosses": 809,
+          "pairsZero": 659,
+          "focalEndgameDecisions": 4123,
+          "studentDecisions": 3474,
+          "deviations": 1012,
+          "lateDeviations": 321,
+          "roundsWithDeviation": 691
+        }
+      ]
+    },
+    "section68StudentWholeRound": {
+      "student": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-20261108/models/e00014900.onnx",
+      "pairs": 400,
+      "threshold": 108,
+      "focalWins": 246,
+      "focalLosses": 554,
+      "meanSignedPoints": -0.9225,
+      "ci95": [
+        -1.0411734994583215,
+        -0.8038265005416785
+      ]
+    }
+  },
+  "readings": [
+    "Playing the 8-world label argmax directly (no network) beats the champion only modestly: +0.044 [0.006, 0.081] over 664 dev pairs with first-index tie-break; with the champion breaking label ties +0.126 [0.034, 0.219] on only 87 pairs (wide).",
+    "A listwise/centred ordering loss trained offline on the section-68 rows improves label metrics but plays at about zero (+0.001 / +0.004 on 800 dev pairs): label metrics do not predict play and cannot gate a training window.",
+    "The section-68 student used for the whole round (threshold 108) loses -0.92 per pair: it must only be used behind a card-count switch.",
+    "The section-68 learner made 14,900 updates (= 8 x 1.9M rows at batch 1024), a few minutes of MPS work: the data were never fitted to convergence."
+  ]
+}
