@@ -1,0 +1,14 @@
+{
+  "student": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-20261108/models/e00014900.onnx",
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-20261108/models/champion.onnx",
+  "seeds": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-runtime-0d4e4b0/ai/research/evaluation/endgame-pimc-20261108/seed-audit.json",
+  "pairs": "3000",
+  "threshold": "20",
+  "solver-cards": "18",
+  "out": "/Users/stevensun/guandan-runtime.noindex/endgame-pimc-20261108/eval-final",
+  "studentSHA256": "fe8388f10c51a8e7f6771cf36a2085b29046b6f3912cdd89485a8506268578bc",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "seedsSHA256": "78b375e0665892c092af39863361e2d493256803673957f888960abd664d2a80",
+  "workers": 8,
+  "startedAt": "2026-11-09T01:25:15.340Z"
+}

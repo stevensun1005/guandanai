@@ -1,0 +1,88 @@
+{
+  "schema": "danmcai-endgame-pimc-final-state-v1",
+  "stop": {
+    "reason": "fixed-deadline",
+    "endedAt": "2026-11-09T01:24:51.842Z",
+    "deadline": "2026-11-09T01:24:06.840Z",
+    "restarts": {}
+  },
+  "learner": {
+    "step": 14900,
+    "trainedRows": 15257600,
+    "ingestedRows": 1902174,
+    "replayRows": 1500000,
+    "prunedRows": 0,
+    "lossEma": 0.5066400948779608
+  },
+  "actors": {
+    "rounds": 56545,
+    "rows": 1902174,
+    "labelStats": {
+      "decisions": 304774,
+      "skipped": 403,
+      "worldsUsed": 2434761,
+      "trueChecked": 304653,
+      "labelBestTrueOptimal": 293627,
+      "championTrueOptimal": 281726,
+      "labelBestTrueRegret": 18209,
+      "championTrueRegret": 30122
+    }
+  },
+  "finalStudent": {
+    "file": "e00014900.onnx",
+    "version": "e00014900",
+    "step": 14900,
+    "sha256": "fe8388f10c51a8e7f6771cf36a2085b29046b6f3912cdd89485a8506268578bc"
+  },
+  "humanAuditSameScope": {
+    "scope": "Critical decisions with <= 20 cards (where the student plays), same positions for all three",
+    "decisions": 51,
+    "human": {
+      "optimal": 45,
+      "meanRegret": 0.13725490196078433
+    },
+    "champion": {
+      "optimal": 39,
+      "meanRegret": 0.39215686274509803
+    },
+    "student": {
+      "optimal": 36,
+      "meanRegret": 0.43137254901960786
+    },
+    "pairedChampionStudent": {
+      "championLost_studentLost": 10,
+      "championOk_studentOk": 34,
+      "championOk_studentLost": 5,
+      "championLost_studentOk": 2
+    }
+  },
+  "developmentDiagnostic": {
+    "status": "Not preregistered; computed after the primary result to locate the failure.",
+    "data": "Champion self-play, development seeds 3,838,001,000..3,838,001,159 (same 160 rounds as the pre-registration label check), decisions at <= 20 cards with 8-world PIMC labels.",
+    "decisions": 824,
+    "critical": 390,
+    "picksLabelBest": {
+      "student": 0.845873786407767,
+      "champion": 0.8131067961165048
+    },
+    "meanWithinDecisionCorrelationWithLabel": {
+      "student": 0.3340816694164524,
+      "champion": 0.28920378378224987
+    },
+    "meanAbsErrorVsLabel": {
+      "student": 0.6506988067695378,
+      "champion": 0.8200178887719848
+    },
+    "criticalTrueOptimal": {
+      "label": 0.9179487179487179,
+      "student": 0.7384615384615385,
+      "champion": 0.7589743589743589
+    },
+    "criticalMeanTrueRegret": {
+      "label": 0.12051282051282051,
+      "student": 0.3230769230769231,
+      "champion": 0.3
+    },
+    "scriptSHA256": "93e3d6339e0c36cb52bac1dc797eab2ee91353552ec738c6ce15dfa8371c69b7"
+  }
+}
