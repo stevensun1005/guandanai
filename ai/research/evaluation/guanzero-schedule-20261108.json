@@ -1,0 +1,71 @@
+{
+  "kind": "owner-authorized-evaluation-calendar-change",
+  "timezone": "America/Toronto",
+  "oldLocalTimes": [
+    "10:12",
+    "22:12"
+  ],
+  "localTimes": [
+    "08:00",
+    "20:00"
+  ],
+  "automationId": "guanzero-8",
+  "firstAt": "2026-11-09T13:00:00.000Z",
+  "schedule": {
+    "schemaVersion": 1,
+    "run": "guanzero-adp-io48",
+    "timezone": "America/Toronto",
+    "firstAt": "2026-11-09T13:00:00.000Z",
+    "intervalHours": 12,
+    "seedIndexBase": 5130,
+    "finalIndex": 5150,
+    "authority": "owner-request",
+    "requestedLocalHours": [
+      8,
+      20
+    ]
+  },
+  "scheduleSHA256": "df6bbc5d359a62be7804ef6e41bb7cbbbcb132e4c15b857bc1c61496feb5b9ec",
+  "windowSHA256": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6",
+  "plannedEnd": "2026-11-11T15:00:00.000Z",
+  "retainedIndices": [
+    5098,
+    5100,
+    5110,
+    5101,
+    5103,
+    5111,
+    5120
+  ],
+  "newOrdinaryIndices": [
+    5130,
+    5131,
+    5132,
+    5133,
+    5134
+  ],
+  "finalIndex": 5150,
+  "opponents": [
+    "clint",
+    "champion"
+  ],
+  "matchesPerOpponent": 500,
+  "publish": "after all reports and compatibility checks complete, exact same frozen weights",
+  "finalHandling": "Wednesday 08:00 task follows through 10:00 stop and final export; no training extension",
+  "strengthClaim": false,
+  "validation": {
+    "nodeTests": {
+      "passed": 297,
+      "failed": 0
+    },
+    "calendarRegressionTests": 4,
+    "formatCheck": "passed",
+    "build": "passed",
+    "liveRegistrar": "No evaluation due yet; manifest SHA unchanged",
+    "frozenWindowSHAUnchanged": true,
+    "python": "No Python implementation changed; not applicable"
+  },
+  "automationRule": "RRULE:FREQ=DAILY;BYHOUR=8,20;BYMINUTE=0;BYSECOND=0",
+  "registrarSHA256": "847febc456f0f49e4e0f2d2a8cde1245e33c78cdf27e68677f2c93f51381ba71",
+  "calendarLogicSHA256": "d1cbe9a043997458c570df0a847e21cf2f113669e9633d828d940f904d49e2d0"
+}

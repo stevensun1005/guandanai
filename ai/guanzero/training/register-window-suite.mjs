@@ -1,4 +1,5 @@
 import { validateWindow } from './window.mjs';
+import { calendarSlot } from './calendar-slot.mjs';
 /** Register one twelve-hour io48 checkpoint using the evaluator pinned by its launcher. */
 import {
   mkdirSync,
@@ -58,7 +59,12 @@ async function register(launcherPath, armMidpoint) {
     if (Date.now() < target) await sleep(target - Date.now());
     if (Date.now() >= midpoint - 10000) throw Error('Too late to stage the midpoint safely');
   }
-  const { slot, index, due, final } = windowSlot(window, armMidpoint ? midpoint : Date.now());
+  const schedulePath = join(base, 'evaluation-schedule.json');
+  const selected =
+    !armMidpoint && existsSync(schedulePath)
+      ? calendarSlot(window, Date.now(), readJSON(schedulePath))
+      : windowSlot(window, armMidpoint ? midpoint : Date.now());
+  const { slot, index, due, final } = selected;
   const directory = join(run, 'eval', 'development-500');
   const path = join(directory, 'manifest.json');
   const lock = join(directory, '.window-registration.lock');
