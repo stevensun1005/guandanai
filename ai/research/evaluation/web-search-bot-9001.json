@@ -707,6 +707,24 @@
       "web/src/ai/search/constants.mjs": "e12fb02acf99cdb97119d825aa511b58f386372a937210f0db7f8b30f7625fe1",
       "web/src/ai/search/client.js": "75536a1251c00fdfa2724acaedd980f803f3f086d80108ada18aa41072736214",
       "ai/guanzero/training/reason.mjs": "10f7eceb0500da5cf24d16879caf674bb43ea230c9aaec908493f328eb4744c1"
+    },
+    "integrationBundle": {
+      "doc": "web/docs/REASON_BOT_INTEGRATION.md section 4.1 (script SHA-256 28e967d8d5de0c613de4a61e36e90aeb9cfdddb5be1b62162c7cccb2093f5dd6, unchanged)",
+      "webCodeCommit": "296c27e82e7c9570a78395306d08af9d5a6f7c08",
+      "assets/search-worker.mjs": {
+        "bytes": 87993,
+        "sha256": "3cb40262b059a6bdb972eaabc7b4b6745f59a9ffcd9ff616051c2576e2a8e258"
+      },
+      "assets/reason-client.mjs": {
+        "bytes": 49622,
+        "sha256": "a9e4cf2dc8abc55449d78c2f4ef88e55a7992c48064501d18b70dfe30cf91a08"
+      },
+      "previous": {
+        "webCode": "fc2ed46 (reproduced on 4fec0f6, same web code)",
+        "assets/search-worker.mjs": "f5d632bf9214d62839b952b479476f58eea8942caec5f74fc8f18b85ebafba14",
+        "assets/reason-client.mjs": "45c395363cdb7eb427c5b23aa344888746f653ed46b0cb62757a8d0a63a83d36"
+      },
+      "unchanged": "ORT files and both models"
     }
   }
 }
