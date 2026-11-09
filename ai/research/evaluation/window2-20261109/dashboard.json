@@ -357,6 +357,22 @@
         "type": "descriptive",
         "text": "网页上线任务，不是实验结论"
       }
+    },
+    {
+      "key": "W-integration-guide",
+      "ids": [
+        "W-integration-guide"
+      ],
+      "title": "给其他项目的接入说明（Clint 网站换成推理机器人）",
+      "desc": "写一份独立的接入说明：要复制的模块、两个模型文件的地址和校验码、调用接口与限时、出牌建议接法、牌谱身份、验收范围、自检清单；再由不看本仓库代码的独立检查核对能否照着接上。",
+      "kind": "audit",
+      "queue": "web-deploy (手动推进，Claude 记录进度)",
+      "after": "改名／四项菜单／出牌建议完成后，与上线一起推送",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
     }
   ]
 }
