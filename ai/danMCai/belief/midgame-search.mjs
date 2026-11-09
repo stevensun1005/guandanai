@@ -30,6 +30,21 @@
  * world sampler see only the mover's public view; the true deal is never used for a decision.
  * mode=champion plays champion everywhere (pairing sanity check: every pair must score 0).
  *
+ * Optional endgame arm (--endgame=pimc; default --endgame=none is exactly the behaviour above,
+ * with identical per-pair rows): at the focal team's real decisions (not a finishing move, more
+ * than one candidate) with at most `endgameHi` (< lo) cards on the table, choose as
+ * ai/danMCai/endgame/evaluate.mjs --policy=pimc-search does: exact value (createSolver, budget
+ * evaluate.mjs SEARCH.solver) of EVERY candidate in each of 8 worlds seeded by
+ * worldSeed(deal seed, ply), mean over the solved worlds, at least 4 solved worlds else the
+ * champion move (counted as a fallback), argmax with ties within 1e-9 broken by the champion's Q.
+ *   --endgame-worlds=uniform  sampleWorlds as pimc-actor.mjs labelDecision (evaluate.mjs
+ *                             searchChoice is called directly, on the masked game);
+ *   --endgame-worlds=belief   sampleBeliefWorlds with the same --belief network as the midgame
+ *                             (note: the v1 belief model was trained on 21-80 card positions, so
+ *                             endgame positions are outside its training band).
+ * The midgame band keeps its rollout net-d search with --worlds-source. The endgame search also
+ * runs on the masked game; the true deal never decides anything.
+ *
  * Metric: focal mean signed round points per deal pair, 95% deal-cluster normal interval; workers
  * take seeds start+part, start+part+parts, ...; the summary uses the contiguous completed prefix.
  * Per-pair rows (part-*.jsonl) allow a PAIRED comparison of two runs on the same seeds:
@@ -38,6 +53,7 @@
  *        --start=<seed> --pairs=<n> --out=<dir> [--workers=4] [--minutes=40]
  *        [--lo=21] [--hi=40] [--worlds=8] [--k=6] [--net=2] [--mode=search|champion]
  *        [--champion=<onnx>] [--allow-champion=1] [--belief-train-report=<json>|none]
+ *        [--endgame=none|pimc] [--endgame-hi=20] [--endgame-worlds=uniform|belief]
  *   node ai/danMCai/belief/midgame-search.mjs --summarize=1 --out=<dir>
  *   node ai/danMCai/belief/midgame-search.mjs --compare=<dirA>,<dirB>     (reports B minus A)
  */
@@ -56,6 +72,8 @@ import { argmax, createModelPool, sha256 } from '../training/continuous/lib.mjs'
 import { publicView } from './features.mjs';
 import { createBeliefModel, sampleBeliefWorlds } from './sampler.mjs';
 import { assertHeldOut, trainingSeedRanges } from './metrics.mjs';
+import { SEARCH, createSearchSolver, searchChoice } from '../endgame/evaluate.mjs';
+import { SolverBudget } from '../endgame/solver.mjs';
 
 const SELF = fileURLToPath(import.meta.url);
 const REPO = resolve(dirname(SELF), '../../..');
@@ -72,6 +90,9 @@ export const DEFAULTS = Object.freeze({
   k: 6,
   net: 2,
   tieBreak: 'champion',
+  endgame: 'none',
+  endgameHi: 20,
+  endgameWorlds: 'uniform',
 });
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
 
@@ -178,6 +199,93 @@ export async function sampleSearchWorlds(game, seed, cfg) {
   };
 }
 
+const forMover = (team0Value, seat) => (seat % 2 === 0 ? team0Value : -team0Value);
+
+/**
+ * PIMC label of every candidate from GIVEN worlds (physical ids): the same computation as
+ * labelDecision in ai/danMCai/endgame/pimc-actor.mjs, whose worlds are always uniform. Returns
+ * { q, used }; q is null when fewer than `minWorlds` worlds were solved inside the budget.
+ */
+export function pimcLabelFromWorlds(game, plays, worlds, solver, minWorlds = SEARCH.minWorlds) {
+  const sums = new Float64Array(plays.length);
+  let used = 0;
+  for (const hands of worlds) {
+    const position = {
+      hands: hands.map((hand) => hand.map((id) => deck[id])),
+      L: game.L,
+      turn: game.turn,
+      trick: game.trick ? { player: game.trick.player, play: game.trick.play } : null,
+      passes: game.passes,
+      out: game.out.slice(),
+    };
+    let values;
+    try {
+      values = plays.map((play) => forMover(solver.actionValue(position, play), position.turn));
+    } catch (error) {
+      if (!(error instanceof SolverBudget)) throw error;
+      continue;
+    }
+    values.forEach((v, i) => (sums[i] += v));
+    used++;
+  }
+  if (used < minWorlds) return { q: null, used };
+  return { q: Array.from(sums, (s) => s / used), used };
+}
+
+/** evaluate.mjs searchChoice's rule on a label: argmax, ties within 1e-9 to the champion's Q. */
+export function pimcPick({ q, used }, base) {
+  if (!q) return { index: null, used, tied: 0 };
+  const top = Math.max(...q);
+  const tied = [];
+  q.forEach((y, i) => Math.abs(y - top) <= SEARCH.tieTolerance && tied.push(i));
+  const index = tied.reduce((best, i) => (base[i] > base[best] ? i : best), tied[0]);
+  return { index, used, tied: tied.length };
+}
+
+/**
+ * One endgame PIMC decision for the seat to move, on the masked game. uniform worlds: evaluate.mjs
+ * searchChoice itself; belief worlds: sampleBeliefWorlds (8 worlds, same world seed) and the same
+ * label and choice rule. `index` falls back to the champion move when no label is available.
+ */
+export async function endgameDecision(trueGame, seed, cfg) {
+  const t0 = performance.now();
+  const player = trueGame.turn;
+  const game = maskHidden(trueGame, player);
+  const ply = game.log.length;
+  const plays = candidates(game.hands[player], game.L, game.trick?.play);
+  const base = await cfg.values(cfg.champion, policyState(game, player, 0, plays));
+  const championIndex = argmax(base);
+  let choice,
+    worlds = null,
+    probs = null,
+    beliefMs = 0;
+  if (cfg.endgameWorlds === 'uniform')
+    choice = searchChoice(game, plays, base, { solver: cfg.solver, seed, ply });
+  else if (cfg.endgameWorlds === 'belief') {
+    const tb = performance.now();
+    ({ worlds, probs } = await sampleSearchWorlds(game, seed, {
+      worldsSource: 'belief',
+      belief: cfg.belief,
+      worlds: SEARCH.worlds,
+    }));
+    beliefMs = performance.now() - tb;
+    choice = pimcPick(pimcLabelFromWorlds(game, plays, worlds, cfg.solver), base);
+  } else throw Error(`Unknown endgame worlds ${cfg.endgameWorlds}`);
+  return {
+    index: choice.index ?? championIndex,
+    fallback: choice.index === null,
+    used: choice.used,
+    tied: choice.tied,
+    championIndex,
+    plays,
+    base,
+    worlds,
+    probs,
+    beliefMs,
+    ms: performance.now() - t0,
+  };
+}
+
 /**
  * One search decision for the seat to move. The game is masked here, so only the mover's own hand,
  * hand counts and the public log can influence the result.
@@ -240,6 +348,24 @@ export async function playRound(seed, focalTeam, cfg) {
     gainEstimate: 0, // mean(chosen) - mean(champion move), in-search estimate only
     differPlies: [],
   };
+  // Endgame fields only with --endgame=pimc, so default rows are unchanged.
+  const endgameOn = (cfg.endgame ?? 'none') === 'pimc';
+  if (endgameOn) {
+    if (!(cfg.endgameHi < cfg.lo)) throw Error('Endgame and midgame bands overlap');
+    if (!cfg.solver) throw Error('--endgame=pimc needs a solver');
+    Object.assign(stats, {
+      endgameDecisions: 0,
+      endgameSearched: 0,
+      endgameFallbacks: 0,
+      endgameDiffers: 0,
+      endgameTies: 0,
+      endgameWorldsUsed: 0,
+      endgameMs: 0,
+      endgameMaxMs: 0,
+      endgameBeliefMs: 0,
+      endgameDifferPlies: [],
+    });
+  }
   for (let ply = 0; ply < 1000; ply++) {
     if (ply !== game.log.length) throw Error('Ply must equal the public log length');
     const player = game.turn;
@@ -249,8 +375,20 @@ export async function playRound(seed, focalTeam, cfg) {
     if (index < 0) {
       const cards = remaining(game);
       const inBand = player % 2 === focalTeam && cards >= cfg.lo && cards <= cfg.hi;
+      const inEndgame = endgameOn && player % 2 === focalTeam && cards <= cfg.endgameHi;
       let championIndex;
-      if (inBand && cfg.mode === 'search') {
+      if (inEndgame && cfg.mode === 'search') {
+        const d = await endgameDecision(game, seed, cfg);
+        index = d.index;
+        championIndex = d.championIndex;
+        stats.endgameSearched++;
+        stats.endgameFallbacks += Number(d.fallback);
+        stats.endgameTies += Number(d.tied > 1);
+        stats.endgameWorldsUsed += d.used;
+        stats.endgameMs += d.ms;
+        stats.endgameMaxMs = Math.max(stats.endgameMaxMs, d.ms);
+        stats.endgameBeliefMs += d.beliefMs;
+      } else if (inBand && cfg.mode === 'search') {
         const d = await searchDecision(game, seed, cfg);
         index = d.index;
         championIndex = d.championIndex;
@@ -270,6 +408,13 @@ export async function playRound(seed, focalTeam, cfg) {
         if (index !== championIndex) {
           stats.differs++;
           stats.differPlies.push(ply);
+        }
+      }
+      if (inEndgame) {
+        stats.endgameDecisions++;
+        if (index !== championIndex) {
+          stats.endgameDiffers++;
+          stats.endgameDifferPlies.push(ply);
         }
       }
     }
@@ -329,6 +474,26 @@ export function summarize(rows) {
     inferencesPerSearchedDecision: searched ? sum('inferences') / searched : null,
     meanInSearchGainEstimate: searched ? sum('gainEstimate') / searched : null,
     meanPairSeconds: n ? rows.reduce((s, r) => s + r.ms, 0) / 1000 / n : null,
+    ...(rounds.some((r) => 'endgameSearched' in r) ? { endgame: endgameSummary(sum, rounds) } : {}),
+  };
+}
+
+/** Endgame-arm totals (only for runs with --endgame=pimc); the fields above are midgame-only. */
+function endgameSummary(sum, rounds) {
+  const searched = sum('endgameSearched');
+  const per = (key, scale = 1) => (searched ? sum(key) / scale / searched : null);
+  return {
+    focalEndgameDecisions: sum('endgameDecisions'),
+    searchedDecisions: searched,
+    fallbacksToChampion: sum('endgameFallbacks'),
+    decisionsDifferentFromChampion: sum('endgameDiffers'),
+    fractionDiffering: per('endgameDiffers'),
+    tiedLabelMaximum: sum('endgameTies'),
+    meanWorldsUsed: per('endgameWorldsUsed'),
+    secondsPerSearchedDecision: per('endgameMs', 1000),
+    maxSecondsPerSearchedDecision: Math.max(0, ...rounds.map((r) => r.endgameMaxMs || 0)) / 1000,
+    beliefSecondsPerSearchedDecision: per('endgameBeliefMs', 1000),
+    note: 'seconds include the champion forward pass of the decision; solver results depend on the 3 s per-world budget and the worker transposition table, so they are not bit-reproducible',
   };
 }
 
@@ -348,7 +513,21 @@ export function collect(out, workers, start) {
   return { all, rows, last };
 }
 
-const COMPARED_SETTINGS = ['mode', 'worldsSource', 'lo', 'hi', 'worlds', 'k', 'net', 'tieBreak'];
+const COMPARED_SETTINGS = [
+  'mode',
+  'worldsSource',
+  'lo',
+  'hi',
+  'worlds',
+  'k',
+  'net',
+  'tieBreak',
+  'endgame',
+  'endgameHi',
+  'endgameWorlds',
+];
+/** Values of settings that runs from before the endgame option did not record. */
+const LEGACY_SETTINGS = { endgame: 'none' };
 
 /**
  * Paired comparison of two runs on their common contiguous-prefix seeds: per deal the difference
@@ -388,8 +567,8 @@ export function compareRuns(dirA, dirB) {
     throw Error('Runs use different champions; a paired comparison is not meaningful');
   const settingDifferences = Object.fromEntries(
     [...COMPARED_SETTINGS, 'beliefSHA256']
-      .filter((key) => A.run[key] !== B.run[key])
-      .map((key) => [key, [A.run[key] ?? null, B.run[key] ?? null]]),
+      .map((key) => [key, [A, B].map(({ run }) => run[key] ?? LEGACY_SETTINGS[key] ?? null)])
+      .filter(([, [a, b]]) => a !== b),
   );
   return {
     A: resolve(dirA),
@@ -456,7 +635,7 @@ const parseArgs = (argv) =>
 
 /** Validated protocol for a new run (throws on a wrong champion or a belief/seed overlap). */
 export function buildProtocol(args) {
-  const num = (key) => Number(args[key] ?? DEFAULTS[key]);
+  const num = (key, arg = key) => Number(args[arg] ?? DEFAULTS[key]);
   const protocol = {
     purpose:
       'development check of midgame one-step rollout search (net-d) with uniform or belief worlds; ' +
@@ -477,6 +656,9 @@ export function buildProtocol(args) {
     belief: null,
     beliefSHA256: null,
     beliefTrainingSeeds: null,
+    endgame: args.endgame ?? DEFAULTS.endgame,
+    endgameHi: null,
+    endgameWorlds: null,
   };
   if (!['search', 'champion'].includes(protocol.mode)) throw Error('--mode=search|champion');
   if (!['uniform', 'belief'].includes(protocol.worldsSource))
@@ -489,8 +671,34 @@ export function buildProtocol(args) {
   protocol.championSHA256 = sha256(protocol.champion);
   if (protocol.championSHA256 !== CHAMPION_SHA256 && args['allow-champion'] !== '1')
     throw Error(`Champion SHA-256 ${protocol.championSHA256} is not the frozen 017 copy`);
-  if (protocol.worldsSource === 'belief') {
-    if (!args.belief) throw Error('--worlds-source=belief needs --belief=<onnx>');
+  if (protocol.endgame === 'pimc') {
+    protocol.endgameHi = num('endgameHi', 'endgame-hi');
+    protocol.endgameWorlds = args['endgame-worlds'] ?? DEFAULTS.endgameWorlds;
+    if (!Number.isInteger(protocol.endgameHi) || protocol.endgameHi < 0)
+      throw Error('--endgame-hi');
+    if (protocol.endgameHi >= protocol.lo)
+      throw Error(`Bands overlap: --endgame-hi=${protocol.endgameHi} must be below --lo`);
+    if (!['uniform', 'belief'].includes(protocol.endgameWorlds))
+      throw Error('--endgame-worlds=uniform|belief');
+    protocol.endgameSearch = {
+      ...SEARCH,
+      rule:
+        'evaluate.mjs --policy=pimc-search: exact value of every candidate per world, mean over ' +
+        'solved worlds, champion move if fewer than minWorlds solved, argmax with champion-Q tie-break',
+      worldSampler:
+        protocol.endgameWorlds === 'uniform'
+          ? 'sampleWorlds as pimc-actor labelDecision (evaluate.mjs searchChoice)'
+          : 'sampleBeliefWorlds with the --belief network on publicView',
+    };
+    protocol.purpose +=
+      '; combined with 8-world exact PIMC endgame search at <= endgameHi cards (focal team)';
+  } else if (protocol.endgame !== 'none') throw Error('--endgame=none|pimc');
+  else if (args['endgame-hi'] !== undefined || args['endgame-worlds'] !== undefined)
+    throw Error('--endgame-hi/--endgame-worlds are only used with --endgame=pimc');
+  const needsBelief = protocol.worldsSource === 'belief' || protocol.endgameWorlds === 'belief';
+  if (needsBelief) {
+    if (!args.belief)
+      throw Error('--worlds-source=belief or --endgame-worlds=belief needs --belief=<onnx>');
     protocol.belief = resolve(args.belief);
     protocol.beliefSHA256 = sha256(protocol.belief);
     const reportFile =
@@ -498,13 +706,24 @@ export function buildProtocol(args) {
     if (reportFile !== 'none') {
       if (!existsSync(reportFile))
         throw Error(`No belief train report at ${reportFile}; pass --belief-train-report=none`);
-      const ranges = trainingSeedRanges(JSON.parse(readFileSync(reportFile, 'utf8')));
+      const report = JSON.parse(readFileSync(reportFile, 'utf8'));
+      const ranges = trainingSeedRanges(report);
       assertHeldOut([protocol.start, protocol.start + protocol.pairs - 1], ranges);
       protocol.beliefTrainingSeeds = ranges;
+      protocol.beliefTrainingBands = (report.dataProtocols || [report.dataProtocol])
+        .filter(Boolean)
+        .map((p) => p.band ?? null);
       protocol.beliefTrainReport = resolve(reportFile);
       protocol.beliefTrainReportSHA256 = sha256(reportFile);
     } else protocol.beliefTrainReport = 'none (seed overlap not checked)';
-  } else if (args.belief) throw Error('--belief is only used with --worlds-source=belief');
+    if (protocol.endgameWorlds === 'belief')
+      protocol.endgameBeliefNote =
+        `endgame worlds (<= ${protocol.endgameHi} cards) come from the belief network; the v1 ` +
+        'belief model was trained on 21-80 card positions (training bands: ' +
+        `${JSON.stringify(protocol.beliefTrainingBands ?? 'not checked')}), so these positions are ` +
+        'outside its training band';
+  } else if (args.belief)
+    throw Error('--belief is only used with --worlds-source=belief or --endgame-worlds=belief');
   return protocol;
 }
 
@@ -512,13 +731,14 @@ export function buildProtocol(args) {
 export async function createConfig(protocol, ort, { threads = 1 } = {}) {
   const pool = await createModelPool(ort, { threads, limit: 2 });
   const belief =
-    protocol.worldsSource === 'belief'
+    protocol.worldsSource === 'belief' || protocol.endgameWorlds === 'belief'
       ? await createBeliefModel(ort, protocol.belief, { threads })
       : null;
   return {
     ...protocol,
     values: (file, state) => pool.values(file, state),
     belief,
+    solver: protocol.endgame === 'pimc' ? createSearchSolver() : null,
     async close() {
       await pool.close();
       if (belief) await belief.close();

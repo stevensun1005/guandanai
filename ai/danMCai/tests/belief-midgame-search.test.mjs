@@ -9,6 +9,11 @@ import { sampleWorlds } from '../../shared/search/belief.mjs';
 import { searchObservation } from '../../shared/search/pimc.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { features, publicView } from '../belief/features.mjs';
+import { sampleBeliefWorlds } from '../belief/sampler.mjs';
+import { labelDecision } from '../endgame/pimc-actor.mjs';
+import { SEARCH, createSearchSolver, playPaired, searchChoice } from '../endgame/evaluate.mjs';
+import { argmax } from '../training/continuous/lib.mjs';
+import { policyState } from '../../../web/src/ai/observation.js';
 import {
   CHAMPION_SHA256,
   DEFAULT_CHAMPION,
@@ -16,9 +21,13 @@ import {
   compareRows,
   compareRuns,
   createConfig,
+  endgameDecision,
   maskHidden,
   netChoice,
+  pimcLabelFromWorlds,
+  pimcPick,
   playPair,
+  playRound,
   sampleSearchWorlds,
   searchDecision,
   searchRootsOf,
@@ -45,9 +54,9 @@ function randomPosition(seed, hi = 40) {
   }
 }
 
-function position(seed) {
+function position(seed, hi = 40) {
   for (let s = seed; ; s++) {
-    const game = randomPosition(s);
+    const game = randomPosition(s, hi);
     if (game) return { game, seed: s };
   }
 }
@@ -215,6 +224,9 @@ test('sourceClosure records every statically imported module', () => {
     'ai/shared/search/belief.mjs',
     'web/src/ai/candidates.js',
     'web/src/core/combinations.js',
+    'ai/danMCai/endgame/evaluate.mjs',
+    'ai/danMCai/endgame/pimc-actor.mjs',
+    'ai/danMCai/endgame/solver.mjs',
   ])
     assert.match(sources[file], /^[0-9a-f]{64}$/, file);
 });
@@ -418,6 +430,321 @@ test(
       assert.equal(r.a.searched, r.a.bandDecisions);
     } finally {
       await cfg.close();
+    }
+  },
+);
+
+/** Hidden cards (ids, sorted) of every seat except `seat`. */
+const hiddenIds = (hands, seat) =>
+  hands
+    .flatMap((h, s) => (s === seat ? [] : h))
+    .map((c) => (typeof c === 'number' ? c : c.id))
+    .sort((a, b) => a - b);
+
+test('buildProtocol: endgame defaults, options, band overlap and belief requirements', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'midgame-endgame-protocol-'));
+  try {
+    const champion = join(dir, 'champion.onnx');
+    writeFileSync(champion, 'not the champion');
+    const belief = join(dir, 'belief.onnx');
+    writeFileSync(belief, 'belief bytes');
+    writeFileSync(
+      join(dir, 'train-report.json'),
+      JSON.stringify({ dataProtocols: [{ seeds: [100, 199], band: [21, 80] }] }),
+    );
+    const base = { start: '200', pairs: '10', champion, 'allow-champion': '1' };
+    const none = buildProtocol(base);
+    assert.deepEqual(
+      [none.endgame, none.endgameHi, none.endgameWorlds, none.endgameSearch],
+      ['none', null, null, undefined],
+    );
+    assert.throws(() => buildProtocol({ ...base, 'endgame-hi': '20' }), /only used/);
+    assert.throws(() => buildProtocol({ ...base, 'endgame-worlds': 'belief' }), /only used/);
+    assert.throws(() => buildProtocol({ ...base, endgame: 'exact' }), /none\|pimc/);
+    const pimc = buildProtocol({ ...base, endgame: 'pimc' });
+    assert.deepEqual([pimc.endgameHi, pimc.endgameWorlds], [20, 'uniform']);
+    assert.equal(pimc.endgameSearch.minWorlds, 4);
+    assert.deepEqual(pimc.endgameSearch.solver, SEARCH.solver);
+    assert.equal(pimc.belief, null);
+    // Bands must not overlap: endgame-hi < lo.
+    assert.throws(() => buildProtocol({ ...base, endgame: 'pimc', 'endgame-hi': '21' }), /overlap/);
+    assert.throws(
+      () => buildProtocol({ ...base, endgame: 'pimc', 'endgame-hi': '25', lo: '25' }),
+      /overlap/,
+    );
+    assert.equal(
+      buildProtocol({ ...base, endgame: 'pimc', 'endgame-hi': '24', lo: '25' }).endgameHi,
+      24,
+    );
+    assert.throws(() => buildProtocol({ ...base, endgame: 'pimc', 'endgame-worlds': 'x' }));
+    // Belief endgame worlds need --belief (also with uniform midgame worlds); seeds checked.
+    const eb = { ...base, endgame: 'pimc', 'endgame-worlds': 'belief' };
+    assert.throws(() => buildProtocol(eb), /needs --belief/);
+    const p = buildProtocol({ ...eb, belief });
+    assert.equal(p.worldsSource, 'uniform');
+    assert.match(p.beliefSHA256, /^[0-9a-f]{64}$/);
+    assert.deepEqual(p.beliefTrainingBands, [[21, 80]]);
+    assert.match(p.endgameBeliefNote, /21-80/);
+    assert.throws(() => buildProtocol({ ...eb, belief, start: '150' }), /overlap/);
+    assert.throws(() => buildProtocol({ ...base, endgame: 'pimc', belief }), /only used/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('pimcLabelFromWorlds on uniform worlds equals labelDecision; pimcPick equals searchChoice', () => {
+  for (const start of [3_838_129_310, 3_838_129_320, 3_838_129_330]) {
+    const { game, seed } = position(start, 14);
+    const ply = game.log.length;
+    const plays = candidates(game.hands[game.turn], game.L, game.trick?.play);
+    const wseed = worldSeed(seed, ply);
+    const want = labelDecision(game, plays, {
+      solver: createSearchSolver(),
+      worlds: SEARCH.worlds,
+      minWorlds: SEARCH.minWorlds,
+      seed: wseed,
+    });
+    const masked = maskHidden(game, game.turn);
+    const worlds = sampleWorlds(searchObservation(masked, game.turn), {
+      count: SEARCH.worlds,
+      seed: wseed,
+    });
+    const got = pimcLabelFromWorlds(masked, plays, worlds, createSearchSolver());
+    assert.ok(want.q, `seed ${seed} solved`);
+    assert.deepEqual(got, want);
+    const random = seededRandom(seed);
+    const base = plays.map(() => Math.round(random() * 4) / 4); // ties exercise the tie-break
+    const choice = searchChoice(game, plays, base, { solver: createSearchSolver(), seed, ply });
+    assert.deepEqual(pimcPick(got, base), choice);
+  }
+  // Not enough solved worlds: no label, no choice.
+  assert.deepEqual(pimcPick({ q: null, used: 3 }, [1, 2]), { index: null, used: 3, tied: 0 });
+});
+
+test(
+  'endgame=pimc + uniform makes evaluate.mjs pimc-search choices (single decisions and whole rounds)',
+  { skip: !haveChampion && 'champion missing' },
+  async () => {
+    const cfg = await championConfig({
+      endgame: 'pimc',
+      endgameHi: 12,
+      endgameWorlds: 'uniform',
+      lo: 200,
+      hi: 200, // no midgame band, so only the endgame arm differs from the champion
+    });
+    try {
+      for (const start of [3_838_129_340, 3_838_129_350, 3_838_129_360]) {
+        const { game, seed } = position(start, 14);
+        const plays = candidates(game.hands[game.turn], game.L, game.trick?.play);
+        const base = await cfg.values(DEFAULT_CHAMPION, policyState(game, game.turn, 0, plays));
+        const want = searchChoice(game, plays, base, {
+          solver: createSearchSolver(),
+          seed,
+          ply: game.log.length,
+        });
+        const permuted = permuteHidden(game, start);
+        for (const g of [game, permuted]) {
+          const d = await endgameDecision(g, seed, cfg);
+          assert.equal(d.index, want.index ?? argmax(base), `seed ${seed}`);
+          assert.equal(d.fallback, want.index === null);
+          assert.equal(d.used, want.used);
+          assert.equal(d.championIndex, argmax(base));
+        }
+      }
+      for (const seed of [3_838_129_370]) {
+        for (const focalTeam of [0, 1]) {
+          const got = await playRound(seed, focalTeam, cfg);
+          const want = await playPaired(seed, focalTeam, {
+            values: cfg.values,
+            champion: DEFAULT_CHAMPION,
+            threshold: 12,
+            solverCards: -1,
+            policy: 'pimc-search',
+            solver: createSearchSolver(),
+          });
+          assert.equal(got.points, want.points);
+          assert.deepEqual(got.order, want.order);
+          assert.equal(got.endgameSearched, want.searched);
+          assert.equal(got.endgameDecisions, want.endgameDecisions);
+          assert.equal(got.endgameFallbacks, want.searchFallbacks);
+          assert.equal(got.endgameDiffers, want.differs);
+          assert.equal(got.endgameWorldsUsed, want.worldsUsed);
+          assert.equal(got.searched, 0);
+          assert.ok(got.endgameSearched > 0);
+        }
+      }
+    } finally {
+      await cfg.close();
+    }
+  },
+);
+
+test(
+  'default endgame=none: identical rows and the same round fields as before the endgame option',
+  { skip: !haveChampion && 'champion missing' },
+  async () => {
+    const small = { worlds: 2, k: 2, lo: 21, hi: 30 };
+    const legacy = await championConfig(small); // protocol without any endgame field
+    const explicit = await championConfig({
+      ...small,
+      ...buildProtocolDefaults(),
+    });
+    try {
+      assert.equal(explicit.endgame, 'none');
+      assert.equal(explicit.solver, null);
+      for (const seed of [3_838_129_380, 3_838_129_381]) {
+        const x = untimed(await playPair(seed, legacy));
+        const raw = await playPair(seed, explicit);
+        const keys = ['a', 'b'].map((side) => Object.keys(raw[side]).sort());
+        assert.deepEqual(untimed(raw), x);
+        // Round fields of the midgame-only version (commit 0d0c58f), unchanged; no endgame keys.
+        for (const k of keys)
+          assert.deepEqual(k, [
+            'bandDecisions',
+            'beliefMs',
+            'candidatesSearched',
+            'differPlies',
+            'differs',
+            'gainEstimate',
+            'inferences',
+            'order',
+            'plies',
+            'points',
+            'searchMs',
+            'searched',
+            'ties',
+          ]);
+      }
+    } finally {
+      await legacy.close();
+      await explicit.close();
+    }
+  },
+);
+
+/** A pair row without its wall-clock fields (the only fields that differ between reruns). */
+const untimed = ({ ms: _, ...row }) => {
+  for (const side of ['a', 'b']) {
+    const { searchMs: _s, beliefMs: _b, ...rest } = row[side];
+    row[side] = rest;
+  }
+  return row;
+};
+
+/** The endgame fields buildProtocol records for a default (endgame=none) run. */
+function buildProtocolDefaults() {
+  return { endgame: 'none', endgameHi: null, endgameWorlds: null };
+}
+
+test(
+  'belief endgame worlds: 8 count-consistent masked worlds from the belief network, permutation invariant',
+  { skip: !(haveChampion && haveBelief) && 'champion or smoke belief ONNX missing' },
+  async () => {
+    const cfg = await championConfig({
+      endgame: 'pimc',
+      endgameHi: 20,
+      endgameWorlds: 'belief',
+      belief: SMOKE_BELIEF,
+    });
+    try {
+      for (const start of [3_838_129_390, 3_838_129_395]) {
+        const { game, seed } = position(start, 20);
+        assert.ok(remaining(game) <= 20);
+        const d = await endgameDecision(game, seed, cfg);
+        assert.equal(d.worlds.length, SEARCH.worlds);
+        assert.equal(d.probs.length, 162);
+        assert.deepEqual(
+          d.worlds,
+          sampleBeliefWorlds(searchObservation(game, game.turn), d.probs, {
+            count: SEARCH.worlds,
+            seed: worldSeed(seed, game.log.length),
+          }),
+        );
+        for (const hands of d.worlds) {
+          assert.deepEqual(
+            hands.map((h) => h.length),
+            game.hands.map((h) => h.length),
+          );
+          assert.deepEqual(
+            hands[game.turn],
+            game.hands[game.turn].map((c) => c.id),
+          );
+          assert.deepEqual(hiddenIds(hands, game.turn), hiddenIds(game.hands, game.turn));
+        }
+        assert.ok(d.used <= SEARCH.worlds);
+        assert.ok(d.beliefMs > 0);
+        const e = await endgameDecision(permuteHidden(game, start), seed, cfg);
+        assert.deepEqual(e.worlds, d.worlds);
+        assert.deepEqual(e.probs, d.probs);
+        assert.equal(e.index, d.index);
+      }
+    } finally {
+      await cfg.close();
+    }
+  },
+);
+
+test(
+  'combined pair (midgame rollout + endgame PIMC) records endgame stats; summary and compare',
+  { skip: !haveChampion && 'champion missing' },
+  async () => {
+    const cfg = await championConfig({
+      worlds: 2,
+      k: 2,
+      lo: 21,
+      hi: 30,
+      endgame: 'pimc',
+      endgameHi: 14,
+      endgameWorlds: 'uniform',
+    });
+    try {
+      const r = await playPair(3_838_129_385, cfg);
+      for (const side of [r.a, r.b]) {
+        assert.equal(side.endgameSearched, side.endgameDecisions);
+        assert.equal(side.endgameDifferPlies.length, side.endgameDiffers);
+        assert.ok(side.endgameFallbacks <= side.endgameSearched);
+        assert.equal(side.searched, side.bandDecisions);
+      }
+      assert.ok(r.a.endgameSearched + r.b.endgameSearched > 0);
+      const s = summarize([r]);
+      assert.equal(s.endgame.searchedDecisions, r.a.endgameSearched + r.b.endgameSearched);
+      assert.ok(s.endgame.secondsPerSearchedDecision > 0);
+      assert.equal(summarize([{ ...r, a: { points: 0 }, b: { points: 0 } }]).endgame, undefined);
+    } finally {
+      await cfg.close();
+    }
+    const dir = mkdtempSync(join(tmpdir(), 'midgame-compare-endgame-'));
+    try {
+      const write = (name, run) => {
+        const d = join(dir, name);
+        mkdirSync(d);
+        writeFileSync(join(d, 'run.json'), JSON.stringify(run));
+        writeFileSync(
+          join(d, 'part-0.jsonl'),
+          JSON.stringify({ seed: 5, mean: 1, a: { points: 1 }, b: { points: 1 }, ms: 1 }),
+        );
+        return d;
+      };
+      const run = { start: 5, workers: 1, championSHA256: 'c', worldsSource: 'belief', net: 2 };
+      const legacy = write('legacy', run);
+      const none = write('none', { ...run, ...buildProtocolDefaults() });
+      const pimc = write('pimc', {
+        ...run,
+        endgame: 'pimc',
+        endgameHi: 20,
+        endgameWorlds: 'belief',
+      });
+      assert.deepEqual(compareRuns(legacy, none).settingDifferences, {});
+      const c = compareRuns(none, pimc);
+      assert.deepEqual(c.settingDifferences, {
+        endgame: ['none', 'pimc'],
+        endgameHi: [null, 20],
+        endgameWorlds: [null, 'belief'],
+      });
+      assert.equal(c.commonPairs, 1);
+      assert.equal(c.meanDifference, 0);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
     }
   },
 );
