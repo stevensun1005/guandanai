@@ -18,7 +18,9 @@
  *
  * The training report (default: train-report.json next to the ONNX) lists the generation seed
  * ranges the network was trained and validated on; metrics refuse seeds overlapping them, and
- * refuse to run without a report unless --train-report=none is given explicitly.
+ * refuse to run without a report unless --train-report=none is given explicitly. The feature
+ * version (v1 or v3) is taken from that report (default v1 when absent; the ONNX input width is
+ * checked) and recorded in the summary; --features=v1|v3 overrides it.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -126,16 +128,21 @@ async function main() {
     baseSeed = Number(option('seed', 1));
   const out = resolve(option('out'));
   const reportOption = option('train-report', join(dirname(beliefFile), 'train-report.json'));
-  let trainingSeeds = null;
+  let trainingSeeds = null,
+    trainReport = null;
   if (reportOption !== 'none') {
     if (!existsSync(reportOption))
       throw Error(`No training report at ${reportOption}; pass --train-report=<json> or none`);
-    trainingSeeds = trainingSeedRanges(JSON.parse(readFileSync(reportOption, 'utf8')));
+    trainReport = JSON.parse(readFileSync(reportOption, 'utf8'));
+    trainingSeeds = trainingSeedRanges(trainReport);
     assertHeldOut([a, b], trainingSeeds);
   }
   const championSHA256 = sha256(champion);
   const pool = await createModelPool(ort, { threads: 1, limit: 1 });
-  const belief = await createBeliefModel(ort, beliefFile);
+  const belief = await createBeliefModel(ort, beliefFile, {
+    featureVersion: option('features', undefined),
+    ...(trainReport ? { report: trainReport } : {}),
+  });
   const choose = championChooser((state) => pool.values(champion, state));
   const totals = { belief: { copies: 0, ll: 0, hits: 0 }, uniform: { copies: 0, ll: 0, hits: 0 } };
   const overlaps = { belief: 0, uniform: 0 };
@@ -197,6 +204,8 @@ async function main() {
   const summary = {
     belief: beliefFile,
     beliefSHA256: sha256(beliefFile),
+    beliefFeatureVersion: belief.featureVersion,
+    beliefFeatureSource: belief.featureSource,
     champion,
     championSHA256,
     championIsFrozen017: championSHA256 === CHAMPION_SHA256,

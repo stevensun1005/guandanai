@@ -26,7 +26,9 @@ import { unseenPhysicalCards } from '../../../web/src/analysis/concepts.mjs';
 import { seededRandom } from '../../shared/simulation/simulation.mjs';
 import { makeDeck } from '../../../web/src/core/cards.js';
 import { cardIndex } from '../../../web/src/ai/encoding.mjs';
-import { FACES, FEATURES, SEATS, TARGETS, features } from './features.mjs';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { FACES, FEATURE_SPECS, SEATS, TARGETS, featureSpec, featuresFor } from './features.mjs';
 
 const FLOOR = 1e-12;
 const deck = makeDeck();
@@ -186,20 +188,76 @@ export function beliefLogScore(view, probs, hands) {
 }
 
 /**
- * Belief network for Node: ONNX input `features` [batch, FEATURES] float32, output `probs`
- * [batch, 54, 3]. Views without play shapes (e.g. policyState) have them inferred from the cards.
+ * Feature version of a belief network: the explicit `featureVersion` option, else the
+ * `featureVersion` of its training report (`report` object, `reportFile`, or train-report.json next
+ * to the ONNX), else belief-v1 (window-1 models and every model trained before v3). When the ONNX
+ * declares a fixed input width it must match; with no explicit or reported version a width that
+ * matches exactly one known version selects it. Returns the feature spec.
  */
-export async function createBeliefModel(ort, file, { threads = 1 } = {}) {
+export function resolveBeliefFeatures(
+  file,
+  { featureVersion, report, reportFile, inputWidth } = {},
+) {
+  let version = featureVersion ?? null,
+    source = version ? 'option' : null;
+  if (!version) {
+    let data = report ?? null;
+    const path = reportFile ?? (file ? join(dirname(file), 'train-report.json') : null);
+    if (!data && path && existsSync(path)) data = JSON.parse(readFileSync(path, 'utf8'));
+    if (data?.featureVersion) [version, source] = [data.featureVersion, 'report'];
+  }
+  const known = Number.isInteger(inputWidth) && inputWidth > 0;
+  if (!version && known) {
+    const match = Object.values(FEATURE_SPECS).filter((s) => s.features === inputWidth);
+    if (match.length === 1) [version, source] = [match[0].version, 'width'];
+  }
+  const spec = featureSpec(version ?? 'v1');
+  if (known && spec.features !== inputWidth)
+    throw Error(
+      `Belief network input width ${inputWidth} does not match ${spec.version} (${spec.features}, from ${source ?? 'default'})`,
+    );
+  return { ...spec, source: source ?? 'default' };
+}
+
+/**
+ * Belief network for Node: ONNX input `features` [batch, F] float32, output `probs`
+ * [batch, 54, 3]; F and the feature version come from resolveBeliefFeatures (default v1). Views
+ * without play shapes (e.g. policyState) have them inferred from the cards.
+ */
+export async function createBeliefModel(
+  ort,
+  file,
+  { threads = 1, featureVersion, report, reportFile } = {},
+) {
   const session = await ort.InferenceSession.create(file, {
     intraOpNumThreads: threads,
     interOpNumThreads: 1,
     graphOptimizationLevel: 'all',
   });
+  const width = session.inputMetadata?.[0]?.shape?.[1];
+  let spec;
+  try {
+    spec = resolveBeliefFeatures(file, {
+      featureVersion,
+      report,
+      reportFile,
+      inputWidth: typeof width === 'number' ? width : undefined,
+    });
+  } catch (error) {
+    await session.release();
+    throw error;
+  }
+  const FEATURES = spec.features;
   return {
+    featureVersion: spec.version,
+    features: FEATURES,
+    featureSource: spec.source,
     async probabilities(views) {
       const list = Array.isArray(views) ? views : [views];
       const x = new Float32Array(list.length * FEATURES);
-      list.forEach((view, i) => x.set(features(view, { deck }), i * FEATURES));
+      list.forEach((view, i) =>
+        x.set(featuresFor(view, { version: spec.version, deck }), i * FEATURES),
+      );
       const output = await session.run({
         features: new ort.Tensor('float32', x, [list.length, FEATURES]),
       });

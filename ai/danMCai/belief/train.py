@@ -1,4 +1,4 @@
-"""Hand-inference network v1 trainer.
+"""Hand-inference network trainer (feature versions belief-v1 and belief-v3).
 
 Predicts, for each of the 54 faces, the probability that an unseen copy sits with each of the three
 other relative seats (next, partner, previous), from the mover's public-view features
@@ -16,6 +16,13 @@ contribute nothing.
 Validation is split by seed (never by row), so no round is in both sets. Reported: validation
 per-copy log-loss and top-1 seat accuracy (ties share credit) of the model vs the uniform baseline.
 Only the final network is exported (no best-checkpoint selection).
+
+The feature version and width come from the data's run.json (generate.mjs --features=v1|v3; all
+directories must agree). It is written to train-report.json (featureVersion, features) and to the
+ONNX metadata_props, which sampler.mjs / metrics.mjs / midgame-search.mjs use to build the matching
+input (default v1 when a report has none). The counts block sits at the same offset in v1 and v3
+(v3 extends v1), so the uniform prior is unchanged; v3's per-face denial blocks join the suit
+permutation through the run's faceBlocks.
 
     python ai/danMCai/belief/train.py --data=<gen dir>[,<gen dir>...] --out=<dir>
         [--minutes=5] [--val-mod=10] [--batch=1024] [--lr=1e-3] [--hidden=512] [--device=mps]
@@ -173,8 +180,11 @@ def evaluate(net, x, y, counts_offset, device, batch=8192):
     }
 
 
-def export_onnx(net, path):
-    """features [batch, F] float32 -> probs [batch, 54, 3]; same math as BeliefNet.forward."""
+def export_onnx(net, path, feature_version="belief-v1"):
+    """features [batch, F] float32 -> probs [batch, 54, 3]; same math as BeliefNet.forward.
+
+    The feature version and width are stored as ONNX metadata_props (featureVersion, features).
+    """
     net = net.cpu().eval()
     f = net.l1.in_features
     c0 = net.counts_offset
@@ -212,13 +222,14 @@ def export_onnx(net, path):
     ]
     graph = helper.make_graph(
         nodes,
-        "GuandanBeliefV1",
+        "GuandanBeliefV3" if feature_version == "belief-v3" else "GuandanBeliefV1",
         [helper.make_tensor_value_info("features", TensorProto.FLOAT, ["batch", f])],
         [helper.make_tensor_value_info("probs", TensorProto.FLOAT, ["batch", FACES, SEATS])],
         init,
     )
     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], producer_name="GuandanAI")
     model.ir_version = 8
+    helper.set_model_props(model, {"featureVersion": str(feature_version), "features": str(f)})
     onnx.checker.check_model(model)
     path = Path(path)
     temporary = path.with_name(path.name + ".tmp")
@@ -227,7 +238,15 @@ def export_onnx(net, path):
     return sha256(path)
 
 
-def suit_permutations(layout, features):
+def face_blocks_of(run):
+    """Start offsets of the 54-face blocks: run["faceBlocks"] (v3 and later) or the v1 blocks."""
+    if run.get("faceBlocks"):
+        return [int(b) for b in run["faceBlocks"]]
+    layout = run["layout"]
+    return [layout["own"][0], layout["unseen"][0]] + [layout["played"][0] + FACES * r for r in range(SEATS)]
+
+
+def suit_permutations(layout, features, face_blocks=None):
     """Index maps for the 6 permutations of the non-heart suits (spade, club, diamond).
 
     Champion face index: (rank - 2) * 4 + slot with slot 0 = hearts, 1 = spades, 2 = clubs,
@@ -245,7 +264,7 @@ def suit_permutations(layout, features):
     for perm in itertools.permutations((1, 2, 3)):
         slot = {0: 0, 1: perm[0], 2: perm[1], 3: perm[2]}
         face_maps.append(np.array([f if f >= 52 else (f // 4) * 4 + slot[f % 4] for f in range(FACES)]))
-    blocks = [layout["own"][0], layout["unseen"][0]] + [layout["played"][0] + FACES * r for r in range(SEATS)]
+    blocks = face_blocks if face_blocks is not None else face_blocks_of({"layout": layout})
     x_maps, y_maps = [], []
     for fm in face_maps:
         xm = np.arange(features)
@@ -297,7 +316,11 @@ def train(args):
         raise AssertionError("Seed leakage between train and validation")
     device = torch.device(args.device if args.device != "mps" or torch.backends.mps.is_available() else "cpu")
     mean, scale = standardization(x, train_idx)
-    x_maps, y_maps = suit_permutations(run["layout"], x.shape[1]) if args.augment_suits else (None, None)
+    feature_version = run.get("featureVersion", "belief-v1")
+    face_blocks = face_blocks_of(run)
+    x_maps, y_maps = (
+        suit_permutations(run["layout"], x.shape[1], face_blocks) if args.augment_suits else (None, None)
+    )
     if x_maps is not None:  # symmetrize so every relabelled deal is standardized alike
         mean, scale = mean[x_maps].mean(axis=0), scale[x_maps].mean(axis=0)
     net = BeliefNet(x.shape[1], counts_offset, mean, scale, args.hidden, args.dropout, args.input_dropout).to(device)
@@ -335,10 +358,11 @@ def train(args):
     out.mkdir(parents=True, exist_ok=True)
     net.eval()
     torch.save({"state": net.state_dict(), "counts_offset": counts_offset, "hidden": args.hidden}, out / "belief.pt")
-    onnx_sha = export_onnx(net, out / "belief.onnx")
+    onnx_sha = export_onnx(net, out / "belief.onnx", feature_version)
     report = {
-        "featureVersion": run["featureVersion"],
+        "featureVersion": feature_version,
         "features": int(x.shape[1]),
+        "faceBlocks": face_blocks,
         "data": [str(Path(d).resolve()) for d in directories],
         "dataProtocols": [
             {k: r[k] for k in ("seeds", "band", "every", "temperature", "championSHA256") if k in r} for r in runs

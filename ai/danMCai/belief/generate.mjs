@@ -9,7 +9,12 @@
  * seat holds. The real hidden hands never enter the features.
  *
  *   node ai/danMCai/belief/generate.mjs --seeds=a..b --out=<dir> [--band=21-80] [--every=1]
- *        [--champion=<onnx>] [--workers=1] [--block=50]
+ *        [--champion=<onnx>] [--workers=1] [--block=50] [--features=v1|v3]
+ *
+ * --features selects the feature version (features.mjs; default v1). A v1 run writes exactly the
+ * same run.json protocol and shards as before the option existed, so v1 runs still resume; a v3
+ * run records featureVersion belief-v3, its width, layout and the 54-face block offsets
+ * (faceBlocks) the trainer's suit permutation needs.
  *
  * Output (resumable by seed block; a block is done once its .json exists):
  *   run.json                      frozen protocol (refuses to resume with a different one)
@@ -34,15 +39,7 @@ import { fileURLToPath } from 'node:url';
 import { createRound, advanceRound, seededRandom } from '../../shared/simulation/simulation.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { policyState } from '../../../web/src/ai/observation.js';
-import {
-  FEATURES,
-  FEATURE_VERSION,
-  LAYOUT,
-  TARGETS,
-  features,
-  hiddenTarget,
-  publicView,
-} from './features.mjs';
+import { TARGETS, featureSpec, featuresFor, hiddenTarget, publicView } from './features.mjs';
 
 export const DEFAULT_CHAMPION =
   '/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx';
@@ -116,7 +113,9 @@ export async function playRecordedRound(seed, { choose, band = [21, 80], every =
 }
 
 /** Generate one seed block into rows (in memory). */
-export async function generateBlock(seeds, { choose, band, every }) {
+export async function generateBlock(seeds, { choose, band, every, version = 'v1' }) {
+  const spec = featureSpec(version);
+  const FEATURES = spec.features;
   const xs = [],
     ys = [],
     ms = [];
@@ -127,7 +126,7 @@ export async function generateBlock(seeds, { choose, band, every }) {
       band,
       every,
       onTurn(game, view, ply) {
-        xs.push(features(view));
+        xs.push(featuresFor(view, { version: spec.version }));
         ys.push(hiddenTarget(game, view.p));
         ms.push([seed, ply, view.p, onTable(game)]);
       },
@@ -144,7 +143,7 @@ export async function generateBlock(seeds, { choose, band, every }) {
     y.set(ys[i], i * TARGETS);
     m.set(ms[i], i * 4);
   }
-  return { rows, x, y, m, plies };
+  return { rows, x, y, m, plies, featureVersion: spec.version, features: FEATURES };
 }
 
 function atomicWrite(file, data) {
@@ -154,12 +153,16 @@ function atomicWrite(file, data) {
 
 export function writeBlock(dir, start, end, block, extra = {}) {
   const name = join(dir, `b${start}`);
+  // Validate before writing anything, so a mismatched block leaves no shard files behind.
+  const spec = featureSpec(block.featureVersion ?? 'v1');
+  if (block.x.length !== block.rows * spec.features)
+    throw Error('Block width does not match its version');
   atomicWrite(`${name}.x.u8`, block.x);
   atomicWrite(`${name}.y.u8`, block.y);
   atomicWrite(`${name}.m.u32`, Buffer.from(block.m.buffer, block.m.byteOffset, block.m.byteLength));
   const meta = {
-    featureVersion: FEATURE_VERSION,
-    features: FEATURES,
+    featureVersion: spec.version,
+    features: spec.features,
     targets: TARGETS,
     seeds: [start, end],
     rows: block.rows,
@@ -193,7 +196,12 @@ async function worker() {
     if (existsSync(join(out, `b${start}.json`))) continue;
     const t0 = Date.now();
     const seeds = Array.from({ length: end - start + 1 }, (_, k) => start + k);
-    const block = await generateBlock(seeds, { choose, band: run.band, every: run.every });
+    const block = await generateBlock(seeds, {
+      choose,
+      band: run.band,
+      every: run.every,
+      version: run.featureVersion,
+    });
     writeBlock(out, start, end, block, { elapsedMs: Date.now() - t0, part });
   }
   await pool.close();
@@ -205,11 +213,14 @@ async function main() {
   mkdirSync(out, { recursive: true });
   const champion = resolve(option('champion', DEFAULT_CHAMPION));
   const championSHA256 = sha256(champion);
+  const spec = featureSpec(option('features', 'v1'));
   const protocol = {
-    featureVersion: FEATURE_VERSION,
-    features: FEATURES,
+    featureVersion: spec.version,
+    features: spec.features,
     targets: TARGETS,
-    layout: LAYOUT,
+    layout: spec.layout,
+    // v1 keeps its original protocol keys (no faceBlocks) so existing v1 runs still resume.
+    ...(spec.version === 'belief-v1' ? {} : { faceBlocks: spec.faceBlocks }),
     seeds: parseRange(option('seeds'), 'seeds'),
     band: parseRange(option('band', '21-80'), 'band'),
     every: Number(option('every', 1)),

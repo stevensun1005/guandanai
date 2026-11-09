@@ -7,6 +7,11 @@
       "name": "window2.sh",
       "startMarker": "window2 start",
       "endMarker": "window2 end"
+    },
+    {
+      "name": "window2b.sh",
+      "startMarker": "window2b start",
+      "endMarker": "window2b end"
     }
   ],
   "stages": [
@@ -48,6 +53,93 @@
       "rule": {
         "type": "descriptive",
         "text": "数据生成，不作结论"
+      }
+    },
+    {
+      "key": "H-v3-generate",
+      "ids": [
+        "H-v3-generate"
+      ],
+      "title": "H 猜牌 v3 数据（与 v1 同 4 万局）",
+      "desc": "用按顺序的出牌／不要历史生成 v3 训练数据，种子与 v1 完全相同，便于公平比较。",
+      "kind": "generate",
+      "queue": "window2b.sh",
+      "after": "立即",
+      "paths": {
+        "out": "H/data-v3",
+        "log": "logs/H-v3-generate.log"
+      },
+      "total": null,
+      "rule": {
+        "type": "descriptive",
+        "text": "数据生成，不作结论"
+      }
+    },
+    {
+      "key": "H-v3-train",
+      "ids": [
+        "H-v3-train"
+      ],
+      "title": "H 猜牌 v3 训练",
+      "desc": "与 v1 完全相同的设置训练 v3，只导出最终一步。",
+      "kind": "train",
+      "queue": "window2b.sh",
+      "after": "v3 数据完成后",
+      "paths": {
+        "out": "H/model-v3",
+        "log": "logs/H-v3-train.log"
+      },
+      "total": 20000,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查，不作验收"
+      }
+    },
+    {
+      "key": "H-v3-P1",
+      "ids": [
+        "H-v3-P1"
+      ],
+      "title": "H v3 猜得准不准（与 v1 同种子）",
+      "desc": "在 v1 用过的同一批开发局上比较对数损失（v1 为 0.793，均匀 0.976）。",
+      "kind": "metrics",
+      "queue": "window2b.sh",
+      "after": "v3 训练完成后",
+      "paths": {
+        "result": "H/p1-v3.json"
+      },
+      "rule": {
+        "type": "gate",
+        "text": "开发检查：相对均匀的增益下界 >0 为过关"
+      }
+    },
+    {
+      "key": "H-v3-P2",
+      "ids": [
+        "H-v3-P2"
+      ],
+      "title": "H v3 对 v1 中盘搜索（开发 1,200 副）",
+      "desc": "同一批开发牌上，用 v3 的猜牌世界做中盘搜索，与 v1 配对比较。",
+      "kind": "compare",
+      "queue": "window2b.sh",
+      "after": "v3 准确度检查后",
+      "paths": {
+        "compare": "H/p2-v3-compare.json"
+      },
+      "sides": [
+        {
+          "label": "v1",
+          "out": "../window1-20261109/H/p2v2-v1"
+        },
+        {
+          "label": "v3",
+          "out": "H/p2-v3"
+        }
+      ],
+      "total": 1200,
+      "rule": {
+        "type": "dev",
+        "text": "开发检查（开发种子），不作验收"
       }
     }
   ]

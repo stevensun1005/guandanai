@@ -1,0 +1,12 @@
+{
+  "schema": "danmcai-window2-addendum-1",
+  "registeredAt": "2026-11-09T16:25Z",
+  "D_distillationDevFinding": "Development only (not preregistered acceptance): distill-learner.py on the window-1 distillation data (671 train / 75 validation blocks, 142,057 decisions). Target = 8-world net-2 search choice; residual on the champion's 567 inputs. Validation reproduction of search deviations: 0.010 (deviation weight 1), 0.069 (10), 0.130 (50); with lr 1e-3 the model memorises 20 blocks (0.94 train) but only 0.10 train / 0.07 validation on all data; in-search gain of student deviations <= 0. Reading: the 8-world argmax is mostly unpredictable from the champion features. No D held-out run in this window; H5 stays unused. Redesign (later window): denoised relative target, belief output and pass history as inputs.",
+  "H_v3": {
+    "what": "Hand inference v3 (ordered public action history + denial counts) trained on the SAME seeds as v1 (4,255,121,000-4,255,160,999, 40,000 rounds, band 21-80, every 1) for a matched comparison; same train.py settings as v1 (lr 3e-4, dropout 0.3, input dropout 0.1, wd 1e-2, suit augmentation, 20,000 steps, batch 1024, hidden 512), seed 20261111.",
+    "P1": "metrics.mjs on dev seeds 3,838,180,000-180,999 (same as v1 P1): log-loss and gain vs uniform, compared with v1 (0.793).",
+    "P2": "midgame-search.mjs belief v3, 21-40 cards, 8 worlds, net 2, on dev pairs 3,838,183,000-184,199; paired comparison with the existing v1 run on those seeds (window1 H/p2v2-v1).",
+    "status": "Development checks; a positive P2 leads to a held-out test in a later window."
+  },
+  "backfill": "unchanged"
+}
