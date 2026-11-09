@@ -1,0 +1,136 @@
+{
+  "observedAt": "2026-11-09T03:42:14.867Z",
+  "defaultId": "017",
+  "model": {
+    "id": "025",
+    "file": "bot-025.onnx",
+    "sha256": "aa1bfd7fe972739ae6ea3c0f321379dd36360f1ab274765a0e42df8568b877b5",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-025/bot-025.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-io48",
+      "version": "model-000000352359",
+      "status": "experimental-not-heldout-accepted",
+      "step": 352359,
+      "registeredAt": "2026-11-09T03:42:10.298Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "developmentEvaluation": {
+    "protocol": "development-500-v1",
+    "opponentPanel": "clint-champion-v1",
+    "modelSHA256": "aa1bfd7fe972739ae6ea3c0f321379dd36360f1ab274765a0e42df8568b877b5",
+    "seedStart": 4212100000,
+    "seedEnd": 4212100249,
+    "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "opponents": {
+      "clint": {
+        "wins": 313,
+        "losses": 139,
+        "draws": 48,
+        "confidence95": {
+          "matchWinRate": [
+            0.586,
+            0.666
+          ],
+          "matchScore": [
+            0.638,
+            0.712
+          ],
+          "roundWinRate": [
+            0.5125810141059856,
+            0.5456616669831024
+          ],
+          "averageUpgradePoints": [
+            0.2909904868494684,
+            0.44166984369043083
+          ]
+        },
+        "reportSHA256": "d4a89bfd37cde04911a53b3a50b14e2e63f9c42401be4a7c33ed15fec3deb902"
+      },
+      "champion": {
+        "wins": 132,
+        "losses": 311,
+        "draws": 57,
+        "confidence95": {
+          "matchWinRate": [
+            0.228,
+            0.298
+          ],
+          "matchScore": [
+            0.287,
+            0.354
+          ],
+          "roundWinRate": [
+            0.3952613764573148,
+            0.42285508291276136
+          ],
+          "averageUpgradePoints": [
+            -0.43341227910366187,
+            -0.30625227190112686
+          ]
+        },
+        "reportSHA256": "40b0497fc8a946daa215fc00daecc5c46dc133f8e8dd6592e2c1c3049a12560d"
+      }
+    }
+  },
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "validation": {
+    "browserWasm": {
+      "status": "PASSED",
+      "backend": "browser-wasm",
+      "positions": 16,
+      "totalValues": 49,
+      "maxError": 4.76837158203125e-07,
+      "actionMismatches": 0
+    },
+    "guanzeroPythonTests": 9,
+    "reportArchivePrefix": "ai/research/evaluation/guanzero-352359-development-500-",
+    "protocolAndSourceFingerprints": "recomputed and verified against frozen af2a683 evaluator",
+    "matchOutcomes": "recounted from all 250 swapped-team clusters per opponent",
+    "nodeTests": 297,
+    "format": "passed",
+    "build": "c2e114643f",
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "025",
+          "guanzero-adp-io48-352359"
+        ],
+        [
+          "024",
+          "guanzero-adp-io48-310956"
+        ],
+        [
+          "001",
+          "danMCai-v000000000"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "012",
+          "danMCai-v000705434"
+        ]
+      ],
+      "defaults": [
+        "017",
+        "017",
+        "017",
+        "017"
+      ]
+    }
+  },
+  "ownerRequestedSupplement": "Toronto 2026-11-08 night, frozen 22:14; not a retroactive 20:00 model"
+}
