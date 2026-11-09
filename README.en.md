@@ -181,7 +181,7 @@ The final champion from this Mac window has been verified on the website, and th
 
 The fixed paired single-round comparison is complete and found no clear strength difference between the champion and final learner. Training remains stopped. See the [Windows return handoff](ai/research/WINDOWS_RETURN_20261106.md) for the checked model/Adam/replay bundle and next-experiment recommendations.
 
-GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current fixed window (extended to November 11, 2026 at 10:00 America/Toronto), playing 500 matches against each of two opponents. See the [training guide](ai/guanzero/README.md).
+GuanZero can resume its optimizer and sample cursor in a fixed training window and evaluate a frozen checkpoint every twelve hours in the current fixed window (extended to November 11, 2026 at 10:00 America/Toronto), playing 500 matches against each of two opponents. See the [training guide](ai/guanzero/README.md). The [next-stage review](ai/research/GUANZERO_NEXT_STAGE_REVIEW_20261109.md) proposes controlled experiments on history encoding, hand inference and training opponents; these are plans, not validated improvements.
 
 Research continuation games use the verified danMCai champion frozen at batch start. Teacher changes and inherited work are tracked in the [specialist protocol](ai/shared/tribute/README.md).
 

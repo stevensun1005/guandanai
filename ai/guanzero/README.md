@@ -20,6 +20,10 @@
 
 网页名称统一使用 `训练任务名-版本数值`，如 `guanzero-adp-gpubatch-44752`。网页只保留最近两代 GuanZero，默认仍为danMCai 门控冠军；[当前菜单](../../web/docs/WEB_MODELS.md) 为唯一版本入口。GuanZero 的训练量与开发结果不能直接等同原论文或独立验收成绩。
 
+## 后续训练方案（待验证）
+
+参考danMCai长期计划的[GuanZero适用性评审](../research/GUANZERO_NEXT_STAGE_REVIEW_20261109.md)：先明确短历史中的pass/补位与座位，再验证手牌推断和训练对手分布，最后考虑独立尾盘修正。当前已有20槽历史与单次消费FIFO，不能把其他模型的诊断直接当作本机瓶颈。该文档是新试验建议，尚未启动新运行。
+
 ## 开发评测对手
 
 默认对手为 Clint规则机器人（`clint`，`rules-v2`）和 danMCai 现任门控冠军（`champion`）。每类默认 **250 对种子、交换阵营共 500 场完整比赛**，两类合计 1,000 场。历史五对手计划继续独立保存 original 和 P0 的成绩。

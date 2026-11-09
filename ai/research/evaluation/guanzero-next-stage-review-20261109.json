@@ -1,0 +1,505 @@
+{
+  "kind": "read-only-plan-applicability-review-not-training",
+  "observedAt": "2026-11-09T04:12:18.400782+00:00",
+  "referencePlan": "ai/research/TRAINING_PLAN_LONGTERM_20261109.md",
+  "referencePlanSHA256": "1960fe1a7429fb36acf4758f5d25ff506ad99b8526c1c17048afad802ac1681f",
+  "reviewedMain": "a784b03",
+  "frozenRuntimeCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "frozenFilesSHA256": {
+    "ai/guanzero/training/history.mjs": "db726f04aec61bbdf4a945a21b03bf015248a441798cbefe8fbabc53635ca58a",
+    "ai/guanzero/training/model.py": "ebd9b73d6382b9388b52548201849ae105ee381fdd3d11c4700b1529b756ff5f",
+    "ai/guanzero/training/actor.mjs": "ed63a96bc1f02b8a0a6a7f5f09ca204cb76e2e853be2ba214af24dc3b6f3497f",
+    "ai/guanzero/training/learner.py": "46a58b95f20a160f4812b00628336e352d83fc755725cc5c7fcb95b27fa6985f",
+    "ai/guanzero/training/lib.mjs": "202073783ad50aa65ede40a89d06745ab26803a45a331f979687d5c65c21cd25"
+  },
+  "learnerSnapshot": {
+    "step": 355574,
+    "usedSamples": 1137836800,
+    "loss": 3.3728333735466003,
+    "updatesPerSecond": 0.947387434722412,
+    "device": "cuda",
+    "deviceName": "NVIDIA GeForce RTX 4070",
+    "torch": "2.11.0+cu128",
+    "precision": "FP32",
+    "objective": "adp",
+    "updatedAt": 1794197537.602126,
+    "error": null,
+    "pid": 36344,
+    "indexedShards": 5,
+    "pauseSampling": false
+  },
+  "trainingConfigSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+  "windowSHA256": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6",
+  "publishedDevelopmentTrend": [
+    {
+      "archive": "018",
+      "step": 138506,
+      "modelSHA256": "a9faa1898f6a5846aaa03a31a82249e25fc4f163b6f1da44a35d2ce2f006f65f",
+      "championSHA256": "13b7a9373e9305bffa6e3c4d2b50532a306d75da8e67219ed1bfba9f9d68d0b2",
+      "seedStart": 4209800000,
+      "seedEnd": 4209800249,
+      "opponents": {
+        "clint": {
+          "wins": 190,
+          "losses": 264,
+          "draws": 46,
+          "confidence95": {
+            "matchWinRate": [
+              0.34,
+              0.42
+            ],
+            "matchScore": [
+              0.388,
+              0.465
+            ],
+            "roundWinRate": [
+              0.41110901190251276,
+              0.4393596986817326
+            ],
+            "averageUpgradePoints": [
+              -0.2743156668608037,
+              -0.12890775762253956
+            ]
+          },
+          "reportSHA256": "6a1b38fd843e6324a5ee2b4ed54e730bff7ac0bd3073b26d190a0418a0189dcc"
+        },
+        "champion": {
+          "wins": 27,
+          "losses": 451,
+          "draws": 22,
+          "confidence95": {
+            "matchWinRate": [
+              0.036,
+              0.074
+            ],
+            "matchScore": [
+              0.056,
+              0.096
+            ],
+            "roundWinRate": [
+              0.2553520194217612,
+              0.28341793570219964
+            ],
+            "averageUpgradePoints": [
+              -1.2285587975243148,
+              -1.0897219882055602
+            ]
+          },
+          "reportSHA256": "123b0d7f7450e98948e4f500b01cbbdc3413fa05bee070c7499388c2e36b32a0"
+        }
+      }
+    },
+    {
+      "archive": "019",
+      "step": 186280,
+      "modelSHA256": "bb745cbf44b4a0f648ef93998b60f1f02211d5a4bdd4176b02cf607d6e26d754",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4210000000,
+      "seedEnd": 4210000249,
+      "opponents": {
+        "clint": {
+          "wins": 219,
+          "losses": 226,
+          "draws": 55,
+          "confidence95": {
+            "matchWinRate": [
+              0.398,
+              0.48
+            ],
+            "matchScore": [
+              0.454,
+              0.532
+            ],
+            "roundWinRate": [
+              0.44788213627992635,
+              0.4768432752871434
+            ],
+            "averageUpgradePoints": [
+              -0.0611353711790393,
+              0.07683700111898545
+            ]
+          },
+          "reportSHA256": "693daaa3916ce7e76b3ee03488c686240b6487154656e2aacebccb3a2ba8b6a1"
+        },
+        "champion": {
+          "wins": 47,
+          "losses": 408,
+          "draws": 45,
+          "confidence95": {
+            "matchWinRate": [
+              0.07,
+              0.122
+            ],
+            "matchScore": [
+              0.114,
+              0.166
+            ],
+            "roundWinRate": [
+              0.3123728123728124,
+              0.3420949391918399
+            ],
+            "averageUpgradePoints": [
+              -0.9562563580874873,
+              -0.8166864843440349
+            ]
+          },
+          "reportSHA256": "ce14ce4ae90494f7b2b9a3589cd1ca181f5c5452178b67913c1b4f5be3ea94c7"
+        }
+      }
+    },
+    {
+      "archive": "020",
+      "step": 223067,
+      "modelSHA256": "435e5d494444fcdd73637c3c847706b4fcc46fd92bd9f70124339ef66d26dba7",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4211000000,
+      "seedEnd": 4211000249,
+      "opponents": {
+        "clint": {
+          "wins": 258,
+          "losses": 191,
+          "draws": 51,
+          "confidence95": {
+            "matchWinRate": [
+              0.472,
+              0.558
+            ],
+            "matchScore": [
+              0.526,
+              0.606
+            ],
+            "roundWinRate": [
+              0.4667659653695774,
+              0.496
+            ],
+            "averageUpgradePoints": [
+              0.022905134567665585,
+              0.169392523364486
+            ]
+          },
+          "reportSHA256": "0c22001a186f26cdd495f9bd2b7d7903c71dab11e4b2b8999ed4cc4e95ed3a3c"
+        },
+        "champion": {
+          "wins": 77,
+          "losses": 399,
+          "draws": 24,
+          "confidence95": {
+            "matchWinRate": [
+              0.124,
+              0.184
+            ],
+            "matchScore": [
+              0.147,
+              0.209
+            ],
+            "roundWinRate": [
+              0.33652694610778444,
+              0.3665402275903374
+            ],
+            "averageUpgradePoints": [
+              -0.8109544246883302,
+              -0.6721115537848605
+            ]
+          },
+          "reportSHA256": "f9db59d95314208125a2eced1e4964835132f27130c8bfa48f99a51be7b6849c"
+        }
+      }
+    },
+    {
+      "archive": "021",
+      "step": 229609,
+      "modelSHA256": "43d72b65e773fb5acb6b8f86baed16a69a1977a97fb6fddf4fe5f23ee25261bc",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4210100000,
+      "seedEnd": 4210100249,
+      "opponents": {
+        "clint": {
+          "wins": 263,
+          "losses": 200,
+          "draws": 37,
+          "confidence95": {
+            "matchWinRate": [
+              0.484,
+              0.568
+            ],
+            "matchScore": [
+              0.524,
+              0.604
+            ],
+            "roundWinRate": [
+              0.47160131916452913,
+              0.5008356545961002
+            ],
+            "averageUpgradePoints": [
+              0.04398278120905858,
+              0.18434583888783088
+            ]
+          },
+          "reportSHA256": "14c84014cb8824d75c10b2b17ed3014c9c3949ee5cd8147538fca41fb1dfc1f2"
+        },
+        "champion": {
+          "wins": 74,
+          "losses": 396,
+          "draws": 30,
+          "confidence95": {
+            "matchWinRate": [
+              0.118,
+              0.178
+            ],
+            "matchScore": [
+              0.148,
+              0.209
+            ],
+            "roundWinRate": [
+              0.33748723186925433,
+              0.3652089407191448
+            ],
+            "averageUpgradePoints": [
+              -0.8262182843334676,
+              -0.6934335443037974
+            ]
+          },
+          "reportSHA256": "6a66195dc1e9bfb53ca82d8f69db1d64f8bff347677532252f5e2d7f84dadaf3"
+        }
+      }
+    },
+    {
+      "archive": "022",
+      "step": 270292,
+      "modelSHA256": "00a1ec91244392963cf681d5d02ead66ab6b42be3bd504daed943df0613ca15b",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4210300000,
+      "seedEnd": 4210300249,
+      "opponents": {
+        "clint": {
+          "wins": 287,
+          "losses": 177,
+          "draws": 36,
+          "confidence95": {
+            "matchWinRate": [
+              0.534,
+              0.612
+            ],
+            "matchScore": [
+              0.573,
+              0.647
+            ],
+            "roundWinRate": [
+              0.4917546785251065,
+              0.5226400613967767
+            ],
+            "averageUpgradePoints": [
+              0.14296351451973194,
+              0.2944287063267233
+            ]
+          },
+          "reportSHA256": "3a380821a7c8d87abcbcc1c14888b88dcbdafb40cf887cce22a21fb29588ab7b"
+        },
+        "champion": {
+          "wins": 108,
+          "losses": 352,
+          "draws": 40,
+          "confidence95": {
+            "matchWinRate": [
+              0.182,
+              0.25
+            ],
+            "matchScore": [
+              0.221,
+              0.289
+            ],
+            "roundWinRate": [
+              0.36190105181145305,
+              0.3921229586935639
+            ],
+            "averageUpgradePoints": [
+              -0.638959021169159,
+              -0.49476489624976205
+            ]
+          },
+          "reportSHA256": "1da34615a528c9f7398d3ddb525eb7ed9a144e694e820cbed01877097049457d"
+        }
+      }
+    },
+    {
+      "archive": "023",
+      "step": 303975,
+      "modelSHA256": "e02bd26f3d90cb9ef90f7075ad1acd845c709bebac734611c44eb66d48fdbd4b",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4211100000,
+      "seedEnd": 4211100249,
+      "opponents": {
+        "clint": {
+          "wins": 280,
+          "losses": 176,
+          "draws": 44,
+          "confidence95": {
+            "matchWinRate": [
+              0.52,
+              0.6
+            ],
+            "matchScore": [
+              0.566,
+              0.642
+            ],
+            "roundWinRate": [
+              0.4842755522276301,
+              0.5137440758293839
+            ],
+            "averageUpgradePoints": [
+              0.16010548125824073,
+              0.3023390682389329
+            ]
+          },
+          "reportSHA256": "8e79130bf324e38fac62a55d0038d61707e6a906a1360b915a597d02e0074aa6"
+        },
+        "champion": {
+          "wins": 124,
+          "losses": 330,
+          "draws": 46,
+          "confidence95": {
+            "matchWinRate": [
+              0.212,
+              0.284
+            ],
+            "matchScore": [
+              0.259,
+              0.331
+            ],
+            "roundWinRate": [
+              0.3829626837542405,
+              0.41164434523809523
+            ],
+            "averageUpgradePoints": [
+              -0.5220231429637925,
+              -0.3851215499908609
+            ]
+          },
+          "reportSHA256": "0b6c8d69b8184d0510973dfe081c0b9bd52b3892eeb5d5db346ac29c3a31a67e"
+        }
+      }
+    },
+    {
+      "archive": "024",
+      "step": 310956,
+      "modelSHA256": "86dad83347535f38f7c131bb567b34b5f875cf2f613675d22605600fdb18b863",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4212000000,
+      "seedEnd": 4212000249,
+      "opponents": {
+        "clint": {
+          "wins": 314,
+          "losses": 157,
+          "draws": 29,
+          "confidence95": {
+            "matchWinRate": [
+              0.586,
+              0.668
+            ],
+            "matchScore": [
+              0.618,
+              0.696
+            ],
+            "roundWinRate": [
+              0.5044198895027624,
+              0.5341290563222678
+            ],
+            "averageUpgradePoints": [
+              0.23048668503213957,
+              0.3740691235440137
+            ]
+          },
+          "reportSHA256": "50068960752c6429193b05707d1a12fc7375af7b4821d5b10ecf695029c3d7bd"
+        },
+        "champion": {
+          "wins": 122,
+          "losses": 330,
+          "draws": 48,
+          "confidence95": {
+            "matchWinRate": [
+              0.208,
+              0.28
+            ],
+            "matchScore": [
+              0.257,
+              0.328
+            ],
+            "roundWinRate": [
+              0.3864974245768948,
+              0.41253644314868804
+            ],
+            "averageUpgradePoints": [
+              -0.5060804490177736,
+              -0.3843144560357675
+            ]
+          },
+          "reportSHA256": "ba063b39df6cac7d5e325becc457268b7eec6fdd2f82d4fcc732d9c29715d574"
+        }
+      }
+    },
+    {
+      "archive": "025",
+      "step": 352359,
+      "modelSHA256": "aa1bfd7fe972739ae6ea3c0f321379dd36360f1ab274765a0e42df8568b877b5",
+      "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "seedStart": 4212100000,
+      "seedEnd": 4212100249,
+      "opponents": {
+        "clint": {
+          "wins": 313,
+          "losses": 139,
+          "draws": 48,
+          "confidence95": {
+            "matchWinRate": [
+              0.586,
+              0.666
+            ],
+            "matchScore": [
+              0.638,
+              0.712
+            ],
+            "roundWinRate": [
+              0.5125810141059856,
+              0.5456616669831024
+            ],
+            "averageUpgradePoints": [
+              0.2909904868494684,
+              0.44166984369043083
+            ]
+          },
+          "reportSHA256": "d4a89bfd37cde04911a53b3a50b14e2e63f9c42401be4a7c33ed15fec3deb902"
+        },
+        "champion": {
+          "wins": 132,
+          "losses": 311,
+          "draws": 57,
+          "confidence95": {
+            "matchWinRate": [
+              0.228,
+              0.298
+            ],
+            "matchScore": [
+              0.287,
+              0.354
+            ],
+            "roundWinRate": [
+              0.3952613764573148,
+              0.42285508291276136
+            ],
+            "averageUpgradePoints": [
+              -0.43341227910366187,
+              -0.30625227190112686
+            ]
+          },
+          "reportSHA256": "40b0497fc8a946daa215fc00daecc5c46dc133f8e8dd6592e2c1c3049a12560d"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Different development seeds across model versions; not paired model-change estimates or heldout acceptance.",
+    "A fresh queue snapshot cannot establish long-run data age or prove the learning bottleneck.",
+    "The danMCai oracle/search experiments do not establish the same causal bottleneck in GuanZero."
+  ],
+  "experimentStarted": false
+}

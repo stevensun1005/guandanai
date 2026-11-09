@@ -187,7 +187,7 @@ GuanZero 与danMCai 分开训练，支持 GPU 合批推理和只读实时面板�
 
 Windows 返回包、匹配检查点与 Adam 的恢复、已完成的 Mac 独立比较及新的 Windows A／B 实验见 [Windows 交接](ai/research/WINDOWS_RETURN_20261106.md)。Mac 原窗口保持停止；新的两臂另有固定截止，结果尚待实际完成的独立评测。
 
-GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗口每 12 小时冻结模型，分别对两个对手各打 500 场。见 [GuanZero 训练说明](ai/guanzero/README.md)。
+GuanZero 支持从模型、优化器和样本游标续训，在本轮固定窗口每 12 小时冻结模型，分别对两个对手各打 500 场。见 [GuanZero 训练说明](ai/guanzero/README.md)。 后续历史表达、手牌推断与训练对抗的[适用性评审](ai/research/GUANZERO_NEXT_STAGE_REVIEW_20261109.md)已记录，具体方案尚待对照验证。
 
 研究中需要神经网络续打时，采用批次启动时已核验的 danMCai 门控冠军；教师切换与数据继承见 [专项协议](ai/shared/tribute/README.md)。
 
