@@ -1,0 +1,14 @@
+{
+  "schema": "danmcai-window2-addendum-4",
+  "registeredAt": "2026-11-09T22:30Z",
+  "request": "Owner 2026-11-09: the reasoning bot may reason for up to 50 s per move (humans get 60 s); use the time to think more, not only as a timeout.",
+  "baseline": "Combined bot as deployed (belief v1 worlds, midgame 21-40 net-2 8 worlds k 6, belief-world 8-world exact PIMC at <=20): window-2 C-w16/w8 on dev pairs 3,838,188,000-189,199, +0.255 per pair vs champion 017.",
+  "variants": {
+    "A-eg24": "--endgame-hi=24 --lo=25 (exact PIMC from 24 cards)",
+    "B-eg28": "--endgame-hi=28 --lo=29 (exact PIMC from 28 cards)",
+    "C-k10": "--k=10 (midgame evaluates champion top-10 + pass)",
+    "D-w32": "--worlds=32 (32 midgame worlds)"
+  },
+  "design": "Each variant on the first 600 of the same dev pairs (3,838,188,000-188,599), all else as the baseline, vs champion 017; paired difference vs the baseline on the common pairs (midgame-search.mjs --compare). Report per-searched-decision time (mean, max) per band to check the 50 s per-move budget. Development only: a variant that is clearly better and fits the budget goes to a held-out test before any web change. Node runs have no per-move time budget (solver per-world 3 s as tested), so times are measured, not capped.",
+  "workers": "A 2, B 2, C 2, D 1 under window-2 load (also runs H-div and backfill); load can reduce solved worlds via the per-world 3 s limit - recorded as a caveat."
+}
