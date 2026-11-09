@@ -774,5 +774,188 @@
       },
       "unchanged": "ORT files and both models"
     }
+  },
+  "turnRule60s50s10s20261109": {
+    "date": "2026-11-09",
+    "owner": "机器人和真人一样是最多60s出牌时间 推理时间最多50s 留出来10s为了万一没推理出来回退出牌用 上一手没成功下一手依然会推理 不会一次回退后面一直回退",
+    "kind": "deployment timing change; not an acceptance or strength result",
+    "webCodeCommit": "699674b5b5db26a4370b45e8fc9e704b956046e5",
+    "supersedes": "budget50s20261109.browserBudgets.hardTimeoutMs (56000 from the post) and its first-load / init-retry rules",
+    "constants": {
+      "source": "web/src/ai/turn-timing.mjs",
+      "sha256": "ac428a86e089bec54226e346c77e0fa2c05c95ac6d48ba596e2b1f6f6cca45dc",
+      "TURN_MS": 60000,
+      "REASON_MS": 50000,
+      "HARD_MS": 52000,
+      "CLINT_BRAIN_MS": 30000,
+      "RULES_ONLY_TIMEOUT_MS": 5000
+    },
+    "measuredFrom": "the computer seat's turn start on the host: TableBot.prefetch(p) records performance.now() as the turn clock is created (turns.js); a restored host without a record uses the turn clock's elapsed time",
+    "danMCaiReason": [
+      "SEARCH_BUDGETS midgameMs/endgameMs 50000 are the deadline from the turn start: the client posts remainingMs = startedAt + 50000 - now and the worker's deadline is min(band budget, remainingMs); the think pause, first-load wait and any wait behind a coach job or worker reload count",
+      "each exact-solver call is capped by min(solverMs 3000, time left): with less than 3000 ms left a one-call solver limited to the time left is used (same node limit); any stop of such a capped call throws SearchBudgetError (the whole search falls back to 017), a capped call that finishes returns the same exact value, so no call runs past the 50 s mark and completed decisions are unchanged",
+      "hardTimeoutMs = 50000 + 2000 = 52000 from the turn start; the table job is dropped at that time whether running (worker replaced) or queued; a job that could only be posted after the 50 s mark is not posted (reason 'budget')",
+      "first-load wait min(FIRST_LOAD_WAIT_MS 10000, time left to 50 s)",
+      "champion 017's move is requested on the AI worker in parallel with the search, so a fallback plays at once",
+      "non-sticky: the 30 s init back-off (search-init-wait) is removed; after any fallback, timeout, worker error/replacement or failed load the next decision loads (if needed) and searches",
+      "move coach unchanged in rules: 50 s from its own request, hard timeout now 52 s from its post, never blocks the human, table searches first"
+    ],
+    "clint": [
+      "WEB_BRAIN back to upstream ms 30000; the controller sends brainMs = min(30000, 50000 - elapsed since turn start); clintBrainSettings(brainMs < 1) plays the rules only",
+      "the rule worker request waits until 52 s from the turn start (was 15 s, whose timeout showed the table-failure panel); a timeout or worker error replaces the worker and requests the rules-only move (5 s limit) instead of the panel; the next move sends the brain budget again",
+      "web/src/rule-bot/runtime.mjs sha256 0b372ee9863190419edb41af08fec01d9f6435cc255e99960511275dbb713ad5 (was f53061083cc943fcfed379d7c8815787b073df415bcf43db49922198bad3bcb2); strategy.js and endgame-brain.mjs unchanged; rules-v2 decisions with an unfinished brain are unchanged, only the browser brain's time cap changes (10 s -> 30 s)"
+    ],
+    "tests": {
+      "npmTest": "416/416 pass on the working tree of 699674b (node --test, all suites); a later rerun under nice -n 10 had 415/416, the one failure being ai/danMCai/tests/round-pairs.test.mjs (os.setPriority EACCES under nice, unrelated; 5/5 pass without nice)",
+      "searchBotTest": "web/tests/search-bot.test.mjs 21/21: constants, capped solver calls (finished = same decision, stopped = SearchBudgetError), remainingMs net of pause and load, 52 s drop and worker replacement then next move searches, failed load / budget fallback / worker crash then next move searches, no post after 50 s, Clint brain budget",
+      "turnTimingTest": "web/tests/turn-timing.test.mjs 2/2: table controller with fake workers - Clint brain hung to 52 s plays the rules-only move and the next move asks for the brain again; danMCai-reason requests 017 alongside the search, a budget fallback plays 017, the next move plays the searched move, a hung search worker is replaced at 52 s and the next move searches on the fresh worker",
+      "formatAndBuild": "npm run format:check and npm run build pass (build version c56510eaa6)"
+    },
+    "checks": {
+      "machine": "this Mac (Apple Silicon), Chrome headless, local static build on 127.0.0.1:8803; research jobs (launchd com.guandanai.*) running at the same time",
+      "searchBotSmoke": {
+        "test": "web/tests/search_bot_smoke.py (three 9001 seats, one solo round)",
+        "searchRequests": 13,
+        "searched": 13,
+        "fallbacks": 0,
+        "searchMsP50": 182,
+        "searchMsMax": 697,
+        "computerMovesTimed": 63,
+        "moveMsFromTurnStartP50": 838,
+        "moveMsFromTurnStartMax": 996,
+        "note": "move time includes the 0.5-1 s think pause; all 9001-seat moves including those outside the search band"
+      },
+      "coachSearchSmoke": {
+        "test": "web/tests/coach_search_smoke.py",
+        "coachSearches": 3,
+        "coachCompleted": 3,
+        "coachMs": [
+          924,
+          332,
+          3549
+        ],
+        "tableSearches": 14,
+        "tableFallbacks": 0
+      },
+      "botSetupSmoke": "web/tests/bot_setup_smoke.py: 3 viewports, seat rotations 4, models persisted, no page errors",
+      "clintBotSmoke": "web/tests/clint_bot_smoke.py: 6 rule replies, no neural downloads for an all-Clint table, 2 WASM compatibility decisions, 4 strategy fixtures unchanged, no page errors",
+      "clintTurnTimingSmoke": {
+        "test": "web/tests/clint_turn_timing_smoke.py (three Clint seats, one solo round)",
+        "clintMoves": 64,
+        "moveMsFromTurnStartP50": 796,
+        "moveMsFromTurnStartP95": 996,
+        "moveMsFromTurnStartMax": 999,
+        "ruleRequests": 64,
+        "brainBudgetSent": {
+          "min": 30000,
+          "max": 30000
+        },
+        "brainPhaseRequests": 10,
+        "brainPhaseRuleReplyMsMax": 250,
+        "rulesOnlyFallbacks": {
+          "timeout": 0,
+          "error": 0
+        },
+        "failurePanel": false
+      },
+      "deadlineProbe": {
+        "test": "ad-hoc Playwright script on the built page: TableBot.decide(1, {startedAt: now - X}) on a synthetic conserved 20-card endgame position (log of the other 88 cards as singles), real search worker and WASM",
+        "results": [
+          {
+            "turnStartedMsAgo": 0,
+            "msFromTurnStart": 7723,
+            "outcome": "searched (includes first load)"
+          },
+          {
+            "turnStartedMsAgo": 0,
+            "msFromTurnStart": 5670,
+            "outcome": "searched"
+          },
+          {
+            "turnStartedMsAgo": 40000,
+            "msFromTurnStart": 50002,
+            "outcome": "budget fallback, 017"
+          },
+          {
+            "turnStartedMsAgo": 46000,
+            "msFromTurnStart": 50002,
+            "outcome": "budget fallback, 017"
+          },
+          {
+            "turnStartedMsAgo": 48500,
+            "msFromTurnStart": 50001,
+            "outcome": "budget fallback, 017"
+          }
+        ],
+        "secondProbe": {
+          "note": "other synthetic positions (new random search seed per game object)",
+          "results": [
+            {
+              "band": "endgame",
+              "turnStartedMsAgo": 45000,
+              "msFromTurnStart": 47469,
+              "outcome": "searched"
+            },
+            {
+              "band": "endgame",
+              "turnStartedMsAgo": 49900,
+              "msFromTurnStart": 50002,
+              "outcome": "budget fallback"
+            },
+            {
+              "band": "midgame",
+              "turnStartedMsAgo": 45000,
+              "msFromTurnStart": 45587,
+              "outcome": "searched"
+            },
+            {
+              "band": "midgame",
+              "turnStartedMsAgo": 49900,
+              "msFromTurnStart": 50001,
+              "outcome": "budget fallback"
+            },
+            {
+              "band": "any",
+              "turnStartedMsAgo": 51000,
+              "msFromTurnStart": 51001,
+              "outcome": "not posted, budget fallback"
+            }
+          ]
+        },
+        "note": "synthetic positions are timing probes only (development, not strength); every fallback played a legal 017 move at once"
+      },
+      "integrationBundle": {
+        "script": "REASON_BOT_INTEGRATION.md section 4.1 build-reason-bundle.mjs sha256 b421f0a37965e685db595e10620e1b926425a87e9575e7e46bb132a2ef1dbd97",
+        "searchWorker": {
+          "bytes": 89142,
+          "sha256": "10079e4bddc771241cdb617ce7dab799a08870b9aca87cb97e77b6d993ba27a4"
+        },
+        "reasonClient": {
+          "bytes": 51063,
+          "sha256": "869ab81e3975e82bb21b8c2e49d73b4a6e57f3d24fce5d8f1493678002e27f0f"
+        },
+        "searchLatencyOnBundle": {
+          "tool": "web/tools/search-latency.mjs --start=731960000 --rounds=10 against the bundle served under /bot/reason/",
+          "decisions": 16,
+          "desktop": {
+            "sameAsNode": 16,
+            "fallbacks": 0,
+            "wallMsP50": 459,
+            "wallMsMax": 3134
+          },
+          "mobileProxyQuarterBudget": {
+            "fallbacks": 1,
+            "completedSameAsNode": 15,
+            "completedDifferentFromNode": 0
+          },
+          "note": "development seeds, consistency only; local check, raw JSON not committed"
+        }
+      }
+    },
+    "notEvaluated": [
+      "no new match; the +0.237 evidence scope and the identity are unchanged",
+      "real phones and a host + joiner room were not run for this change",
+      "a capped solver call uses a one-call solver without the shared transposition table, so near the node limit it can stop where the warm table would not; such a stop discards the search (017), never a different searched move"
+    ]
   }
 }

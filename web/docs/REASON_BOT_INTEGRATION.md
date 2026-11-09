@@ -2,7 +2,7 @@
 
 本文写给另一个项目的开发者或 AI 代理，目标是 Clint 的掼蛋网站（[clintsun1977/guandan](https://github.com/clintsun1977/guandan)）：用 **danMCai-reason-v000855042**（本项目编号 `9001`）替换该站目前的普通 danMCai 机器人（冠军 017，`bot/danmcai/danmcai-v000855042.onnx`）。按本文操作，只需从本仓库取文中列出的文件，不必读懂本仓库其余部分。
 
-- **本仓库版本**：网页代码以 `296c27e82e7c9570a78395306d08af9d5a6f7c08`（2026-11-09，每步上限改为 50 秒）为准，本文第 4.1 节的打包输出也是在这个提交上得到的。本文的这次更新是在它之后提交的，所以 `296c27e` 本身不含更新后的本文。实际接入时，用包含本文的 `main` 提交（它的网页代码与 `296c27e` 相同，除非之后又有改动），并记下完整 SHA。要确认网页代码没变：`git diff --stat 296c27e <你用的提交> -- web/src ai/danMCai ai/shared` 应该没有输出；有输出时，打包文件的 SHA 会和第 4.1 节的表不同，第 14 节的自检必须重做。本文初版对应的是 `fc2ed469fe83366532ee3bc6825eaef493163c42`（每步 3／4 秒）；两者之间网页代码只改了 `web/src/ai/search/constants.mjs` 和 `client.js`（预算、首次加载等待、评价请停上一手）。
+- **本仓库版本**：网页代码以 `699674b5b5db26a4370b45e8fc9e704b956046e5`（2026-11-09，电脑出牌时间规则“60 秒出牌、50 秒推理、10 秒回落”）为准，本文第 4.1 节的打包输出也是在这个提交上得到的。本文的这次更新是在它之后提交的，所以 `699674b` 本身不含更新后的本文。实际接入时，用包含本文的 `main` 提交（它的网页代码与 `699674b` 相同，除非之后又有改动），并记下完整 SHA。要确认网页代码没变：`git diff --stat 699674b <你用的提交> -- web/src ai/danMCai ai/shared` 应该没有输出；有输出时，打包文件的 SHA 会和第 4.1 节的表不同，第 14 节的自检必须重做。早先版本：`fc2ed469fe83366532ee3bc6825eaef493163c42`（初版，每步 3／4 秒）、`296c27e82e7c9570a78395306d08af9d5a6f7c08`（每步 50 秒，从发出请求起算）。**已经按旧版接入的项目先看第 17 节“版本更新记录”**，那里列出每次要改的地方。
 - **对方仓库**：按 Clint 仓库 `main` 的 `2d91ecca950e6617f80e500cd205450112bb40d4`（2026-11-09）核对过。文中凡是写“你们的”代码（`G`、`NET`、`NeuralBot`、`BOT_USED`、`botStart`、`aiMove`、`recModel`、`coachSnap`、`coachGrade`、`CO.shown`、`check_models`），都以这个版本为准。对方代码变了要重新核对。
 - 文中出处路径都相对本仓库根目录；Clint 仓库的路径写成“Clint `路径`”。
 - 第 8–10 节中给 Clint 的代码是**按 `2d91ecc` 写的示意**，没有在 Clint 的网站上运行过。它们说明必须满足的规则，最后以第 14 节的自检为准。
@@ -68,6 +68,17 @@ danMCai-reason 是一个**推理搜索策略**：底座是冠军 017 的网络�
 
 Worker 在单独的线程里跑，不会卡住页面。搜索花的时间和电脑的“思考”延迟重叠：本仓库在本座位计时开始时就发请求（`web/src/game/turns.js` 调用 `TableBot.prefetch(p)`）；你们的 `botStart(p)` 也是在计时开始时调用的（Clint `web/src/game/turns.js`），在那里发请求即可。
 
+**电脑出牌时间规则（所有者 2026-11-09，原话）**：“机器人和真人一样是最多60s出牌时间 推理时间最多50s 留出来10s为了万一没推理出来回退出牌用 上一手没成功下一手依然会推理 不会一次回退后面一直回退”。本仓库的实现（常量在 `web/src/ai/turn-timing.mjs`，客户端打包导出 `TURN_MS`、`REASON_MS`、`HARD_MS`）：
+
+| 时刻（从房主上该座位回合开始算，含思考停顿和首次加载） | 发生什么                                                                                                                        |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| 0                                                      | 记下回合开始时间 `startedAt`（`performance.now()`），发出搜索请求；017 的出法同时在另一个 Worker 上算好备用                     |
+| ≤ 10 秒且不超过 50 秒                                  | 首次加载最多等到这里，超时本次出 017（加载在后台继续）                                                                          |
+| 50 秒（`REASON_MS`）                                   | 搜索必须停下：预算是到这个时刻的剩余时间；每次精确求解上限取 min(3 秒, 剩余时间)，没有一次求解越过 50 秒                        |
+| 52 秒（`HARD_MS`）                                     | 还没回复的搜索被放弃（正在跑就替换 Worker），出 017                                                                             |
+| 60 秒（`TURN_MS`）                                     | 与真人相同的出牌上限；回落出法在此之前很早就已出                                                                                |
+| 下一手                                                 | 照常加载（若需要）并搜索：任何回落、超时、Worker 出错或被替换、加载失败都不会让以后的出牌一直回落（客户端没有冷却或“禁用”标志） |
+
 ## 4. 要复制哪些文件
 
 ### 4.1 推荐做法：两个打包文件，加 ORT 和两份模型
@@ -86,7 +97,7 @@ Worker 在单独的线程里跑，不会卡住页面。搜索花的时间和电�
 # 在 guandanai 检出根目录运行，需要 Node ≥ 20.19
 npm ci
 awk '/^```js$/{if(!n++){f=1;next}} f&&/^```$/{exit} f' web/docs/REASON_BOT_INTEGRATION.md > web/tools/build-reason-bundle.mjs
-shasum -a 256 web/tools/build-reason-bundle.mjs   # 应为 28e967d8d5de0c613de4a61e36e90aeb9cfdddb5be1b62162c7cccb2093f5dd6
+shasum -a 256 web/tools/build-reason-bundle.mjs   # 应为 b421f0a37965e685db595e10620e1b926425a87e9575e7e46bb132a2ef1dbd97
 node web/tools/build-reason-bundle.mjs <输出目录>
 ````
 
@@ -130,6 +141,7 @@ await build({
       "export { createSearchClient, deviceClass } from './web/src/ai/search/client.js';",
       "export { searchPayload } from './web/src/ai/search/payload.mjs';",
       "export { SEARCH_BOT_V1, SEARCH_BUDGETS, searchBand, hardTimeoutMs } from './web/src/ai/search/constants.mjs';",
+      "export { TURN_MS, REASON_MS, HARD_MS } from './web/src/ai/turn-timing.mjs';",
       "export { candidates } from './web/src/ai/candidates.js';",
       "export { mergeSearchValues, rankedCoachActions, relativeRating, actionKey } from './web/src/coach/evaluation.mjs';",
       "export { botIdentity, botModelName } from './web/src/ai/model-catalog.mjs';",
@@ -169,12 +181,12 @@ for (const f of files.sort()) {
 }
 ```
 
-2026-11-09 用上面命令取出的脚本（SHA 如上）在 `296c27e` 的网页代码上实际运行过，输出如下（两个打包文件在 `fc2ed46` 上原为 `search-worker.mjs` 87,977 字节 `f5d632bf…ba14`、`reason-client.mjs` 49,455 字节 `45c39536…3d36`，本次在网页代码与之相同的 `4fec0f6` 上重跑仍得到这两个值）。脚本设了 `absWorkingDir: root`，在哪个目录运行结果都一样。打包文件的 SHA 会随本仓库网页代码变化，ORT 和模型的 SHA 不会变：
+2026-11-09 用上面命令取出的脚本（SHA 如上；比上一版多导出 `TURN_MS`、`REASON_MS`、`HARD_MS`，原脚本 SHA `28e967d8…f5dd6`）在 `699674b` 的网页代码上实际运行过，输出如下（两个打包文件此前的值：`fc2ed46` 上 `search-worker.mjs` 87,977 字节 `f5d632bf…ba14`、`reason-client.mjs` 49,455 字节 `45c39536…3d36`；`296c27e` 上 87,993 字节 `3cb40262…e258`、49,622 字节 `a9e4cf2d…1a08`）。脚本设了 `absWorkingDir: root`，在哪个目录运行结果都一样。打包文件的 SHA 会随本仓库网页代码变化，ORT 和模型的 SHA 不会变：
 
 | 部署路径（相对输出目录）                    | 字节       | SHA-256                                                            | 说明                                                                |
 | ------------------------------------------- | ---------- | ------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| `assets/search-worker.mjs`                  | 87,993     | `3cb40262b059a6bdb972eaabc7b4b6745f59a9ffcd9ff616051c2576e2a8e258` | Worker 打包（296c27e）                                              |
-| `assets/reason-client.mjs`                  | 49,622     | `a9e4cf2dc8abc55449d78c2f4ef88e55a7992c48064501d18b70dfe30cf91a08` | 主线程客户端打包（296c27e，含 `candidates` 导出）                   |
+| `assets/search-worker.mjs`                  | 89,142     | `10079e4bddc771241cdb617ce7dab799a08870b9aca87cb97e77b6d993ba27a4` | Worker 打包（699674b）                                              |
+| `assets/reason-client.mjs`                  | 51,063     | `869ab81e3975e82bb21b8c2e49d73b4a6e57f3d24fce5d8f1493678002e27f0f` | 主线程客户端打包（699674b，含 `candidates` 与时间常量导出）         |
 | `assets/vendor/ort.wasm.min.mjs`            | 53,725     | `c21d9c326d453a4a61398270c804d5979e118540597cb0c07f7b3d64e6098234` | onnxruntime-web 1.31.1（你们 `NeuralBot` 从 CDN 加载的也是 1.31.1） |
 | `assets/vendor/ort-wasm-simd-threaded.mjs`  | 24,738     | `30ed0b5cd1182ede931fea448afb567d4dc705ec957af09f108a2be5f770dac3` | 同上                                                                |
 | `assets/vendor/ort-wasm-simd-threaded.wasm` | 14,848,852 | `4b884c203b0fa48d057be3332c65513ff85aa3c5bddd6946acc0fab7ecda001d` | 同上                                                                |
@@ -189,21 +201,21 @@ for (const f of files.sort()) {
 
 用 esbuild metafile 核对过（入口 `web/src/ai/search-worker.mjs`，`external: ['./vendor/*']`，`plugins: [nodeStub]`），Worker 共带入下列文件：
 
-| 文件                                                                                                                                                                                                                                                                                | 作用                                                                   | 浏览器安全性                                                                            |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `web/src/ai/search-worker.mjs`                                                                                                                                                                                                                                                      | Worker 入口与消息协议                                                  | 浏览器专用（`self`、`performance`、`MessageChannel`）；需要 `define __MODEL_VERSIONS__` |
-| `web/src/ai/search/core.mjs`、`coach.mjs`、`inference.mjs`、`payload.mjs`、`known-cards.mjs`、`constants.mjs`                                                                                                                                                                       | 搜索核心、评价值、ONNX 调用、载荷还原、公开贡牌约束、冻结参数          | 安全                                                                                    |
-| `web/src/ai/model-catalog.mjs`、`web/src/ai/model-catalog.json`                                                                                                                                                                                                                     | 9001 定义、底座 017、身份摘要（import 时会跑 `validateCatalog`）       | 安全（JSON 用 `with { type: 'json' }` 导入，esbuild 打包）                              |
-| `web/src/core/cards.js`、`web/src/core/combinations.js`、`web/src/ai/candidates.js`、`web/src/ai/encoding.mjs`、`web/src/ai/observation.js`、`web/src/ai/habits.js`、`web/src/ai/hand-value.js`、`web/src/ai/profiles.js`、`web/src/ai/endgame.js`、`web/src/analysis/concepts.mjs` | 牌、牌型、候选顺序、513／54 维编码、可见状态                           | 安全                                                                                    |
-| `web/src/coach/oracle.mjs`、`web/src/coach/evaluation.mjs`                                                                                                                                                                                                                          | 经 `ai/shared/search/pimc.mjs` 间接带入                                | 安全                                                                                    |
-| `ai/shared/simulation/simulation.mjs`、`ai/shared/search/pimc.mjs`、`ai/shared/search/belief.mjs`                                                                                                                                                                                   | 推演（`advanceRound`、`createRound`）、`searchObservation`、种子随机数 | 安全                                                                                    |
-| `ai/danMCai/belief/features.mjs`                                                                                                                                                                                                                                                    | belief-v1 公开特征（`publicView`、`featuresFor`）                      | 安全                                                                                    |
-| `ai/danMCai/belief/sampler.mjs`                                                                                                                                                                                                                                                     | 按推断概率精确抽样世界（`sampleBeliefWorlds`）                         | **需要 node-stub**：它导入 `node:fs`、`node:path`，只给本地读文件用，网页从不调用       |
-| `ai/danMCai/endgame/solver.mjs`                                                                                                                                                                                                                                                     | 尾盘精确求解器                                                         | 安全                                                                                    |
+| 文件                                                                                                                                                                                                                                                                                | 作用                                                                    | 浏览器安全性                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `web/src/ai/search-worker.mjs`                                                                                                                                                                                                                                                      | Worker 入口与消息协议                                                   | 浏览器专用（`self`、`performance`、`MessageChannel`）；需要 `define __MODEL_VERSIONS__` |
+| `web/src/ai/search/core.mjs`、`coach.mjs`、`inference.mjs`、`payload.mjs`、`known-cards.mjs`、`constants.mjs`、`web/src/ai/turn-timing.mjs`                                                                                                                                         | 搜索核心、评价值、ONNX 调用、载荷还原、公开贡牌约束、冻结参数、时间规则 | 安全                                                                                    |
+| `web/src/ai/model-catalog.mjs`、`web/src/ai/model-catalog.json`                                                                                                                                                                                                                     | 9001 定义、底座 017、身份摘要（import 时会跑 `validateCatalog`）        | 安全（JSON 用 `with { type: 'json' }` 导入，esbuild 打包）                              |
+| `web/src/core/cards.js`、`web/src/core/combinations.js`、`web/src/ai/candidates.js`、`web/src/ai/encoding.mjs`、`web/src/ai/observation.js`、`web/src/ai/habits.js`、`web/src/ai/hand-value.js`、`web/src/ai/profiles.js`、`web/src/ai/endgame.js`、`web/src/analysis/concepts.mjs` | 牌、牌型、候选顺序、513／54 维编码、可见状态                            | 安全                                                                                    |
+| `web/src/coach/oracle.mjs`、`web/src/coach/evaluation.mjs`                                                                                                                                                                                                                          | 经 `ai/shared/search/pimc.mjs` 间接带入                                 | 安全                                                                                    |
+| `ai/shared/simulation/simulation.mjs`、`ai/shared/search/pimc.mjs`、`ai/shared/search/belief.mjs`                                                                                                                                                                                   | 推演（`advanceRound`、`createRound`）、`searchObservation`、种子随机数  | 安全                                                                                    |
+| `ai/danMCai/belief/features.mjs`                                                                                                                                                                                                                                                    | belief-v1 公开特征（`publicView`、`featuresFor`）                       | 安全                                                                                    |
+| `ai/danMCai/belief/sampler.mjs`                                                                                                                                                                                                                                                     | 按推断概率精确抽样世界（`sampleBeliefWorlds`）                          | **需要 node-stub**：它导入 `node:fs`、`node:path`，只给本地读文件用，网页从不调用       |
+| `ai/danMCai/endgame/solver.mjs`                                                                                                                                                                                                                                                     | 尾盘精确求解器                                                          | 安全                                                                                    |
 
 node-stub（`web/tools/node-stub.mjs`）把 `node:fs`／`node:path` 换成一个调用就抛错（`Node file APIs are unavailable in the browser`）的模块，本仓库正式构建也这样做（`web/tools/build.mjs` 的 `bundles.search`）。本仓库测试 `web/tests/search-bot.test.mjs` 检查打包结果里没有 `node:` 导入、也没有 `onnxruntime-node`。图中只有 `sampler.mjs` 一个文件需要这个映射。
 
-客户端打包（`reason-client.mjs`）导出 `createSearchClient`、`deviceClass`、`searchPayload`、`SEARCH_BOT_V1`、`SEARCH_BUDGETS`、`searchBand`、`hardTimeoutMs`、`candidates`、`mergeSearchValues`、`rankedCoachActions`、`relativeRating`、`actionKey`、`botIdentity`、`botModelName`。它带入 `web/src/ai/search/client.js`（只依赖 `constants.mjs`）、`payload.mjs` 及其依赖（`cards.js`、`known-cards.mjs` → `concepts.mjs` → `candidates.js`、`combinations.js`、`hand-value.js`、`encoding.mjs`），以及评价用的 `web/src/coach/evaluation.mjs`（依赖 `model-catalog.*`、`observation.js`、`habits.js`、`candidates.js`、`encoding.mjs`、`cards.js`、`combinations.js`）。这些都是浏览器安全的，不需要 node-stub。
+客户端打包（`reason-client.mjs`）导出 `createSearchClient`、`deviceClass`、`searchPayload`、`SEARCH_BOT_V1`、`SEARCH_BUDGETS`、`searchBand`、`hardTimeoutMs`、`TURN_MS`、`REASON_MS`、`HARD_MS`、`candidates`、`mergeSearchValues`、`rankedCoachActions`、`relativeRating`、`actionKey`、`botIdentity`、`botModelName`。它带入 `web/src/ai/search/client.js`（只依赖 `constants.mjs` 和 `web/src/ai/turn-timing.mjs`）、`payload.mjs` 及其依赖（`cards.js`、`known-cards.mjs` → `concepts.mjs` → `candidates.js`、`combinations.js`、`hand-value.js`、`encoding.mjs`），以及评价用的 `web/src/coach/evaluation.mjs`（依赖 `model-catalog.*`、`observation.js`、`habits.js`、`candidates.js`、`encoding.mjs`、`cards.js`、`combinations.js`）。这些都是浏览器安全的，不需要 node-stub。
 
 `candidates` 是 Worker 内部用的同一个候选生成器。2026-11-09 用 20,000 组随机牌比较过：你们的 `analyze` 与本仓库的读法完全相同；在 1,000 手随机手牌上，你们 `NeuralBot` 移植的候选生成器与本仓库的 `candidates` 顺序也完全相同。这只是本文作者的一次本地检查，没有存成证据文件。打包导出 `candidates` 是为了让你们不依赖 `NeuralBot._test`。
 
@@ -229,14 +241,14 @@ node-stub（`web/tools/node-stub.mjs`）把 `node:fs`／`node:path` 换成一个
 
 通常不用直接对 Worker 发消息，用第 7 节的客户端即可。这里列出协议是为了排查问题。Worker 内部有队列，一次只处理一个任务。
 
-| 发送                                      | 回复                                                                                                                                            |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{id, type: 'init', bot: '9001', budget}` | `{id, result: {ready: true}}`；失败时 `{id, error}`                                                                                             |
-| `{id, type: 'search', payload}`           | `{id, result}`，见 6.2；还没 init 时 `{id, error: 'Search worker not ready'}`                                                                   |
-| `{id, type: 'coach', payload}`            | `{id, result}`，见 6.3；还没 init 时同上                                                                                                        |
-| `{type: 'cancel', id}`                    | 无回复；只会停掉**正在运行**的 coach 任务（在两次推理或两个尾盘世界之间检查，约 50 毫秒内）。排队中的任务由客户端丢弃。牌桌搜索不让步、不可取消 |
+| 发送                                         | 回复                                                                                                                                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `{id, type: 'init', bot: '9001', budget}`    | `{id, result: {ready: true}}`；失败时 `{id, error}`                                                                                                                                                     |
+| `{id, type: 'search', payload, remainingMs}` | `{id, result}`，见 6.2；还没 init 时 `{id, error: 'Search worker not ready'}`。`remainingMs` 是发出时距该回合 50 秒的剩余毫秒（客户端填写）；搜索和每次求解都在这之前停下，缺省时按 `budget` 从收到算起 |
+| `{id, type: 'coach', payload}`               | `{id, result}`，见 6.3；还没 init 时同上                                                                                                                                                                |
+| `{type: 'cancel', id}`                       | 无回复；只会停掉**正在运行**的 coach 任务（在两次推理或两个尾盘世界之间检查，约 50 毫秒内）。排队中的任务由客户端丢弃。牌桌搜索不让步、不可取消                                                         |
 
-`init` 会加载两个网络，在固定开局（`createRound(1)`）上预热一次，并建好求解器（节点上限 1,500,000，时限和置换表大小取自 `budget`）。
+`init` 会加载两个网络，在固定开局（`createRound(1)`）上预热一次，并建好求解器（节点上限 1,500,000，时限和置换表大小取自 `budget`）。剩余时间不足 3 秒时，单次求解改用一个只限这段剩余时间的临时求解器（同一节点上限）；这样的求解没解完（无论因为时间还是节点上限）就整次回落 `budget`，解完的值与不限时相同。
 
 ### 6.1 请求载荷（`searchPayload(game, p, offset, seed)`，`web/src/ai/search/payload.mjs`）
 
@@ -337,36 +349,36 @@ const reasonClient = () =>
 - **整个页面只建一个客户端**，牌桌和出牌评价共用。一个 Worker 的堆内存峰值约 210–220 MB（`web-search-bot-latency.json` 和 `web-search-bot-9001.json` 测得 219 MB 和 214 MB），不要建两个。
 - 传了 `spawn` 就不会用默认路径（`./assets/search-worker.mjs`）；不传 `device` 时用 `deviceClass()` 自动判断。
 - `client.warm('9001')`：提前加载网络。本仓库在有电脑座位选 9001 时调用；出牌评价在桌上剩 ≤60 张时也会预热。
-- `client.decide('9001', payload)`：牌桌决策，**不会抛错**。结果要么是 6.2 的 `ok` 对象，要么是 `{fallback: true, reason, …}`。
+- `client.decide('9001', payload, {startedAt})`：牌桌决策，**不会抛错**。结果要么是 6.2 的 `ok` 对象，要么是 `{fallback: true, reason, …}`。`startedAt` 是该座位回合开始的 `performance.now()`（与客户端同一个页面时钟）：搜索在 `startedAt + 50 秒`前停下，`startedAt + 52 秒`还没结果就放弃（返回 `timeout`），所以 `decide` 最迟在回合开始后约 52 秒返回。不传时按调用时刻算，那样思考停顿和你们等待的时间就不计入 50 秒，**接入方必须传**。
 - `client.evaluate('9001', payload)`：出牌评价，同样不会抛错。新请求会顶掉排队中的旧评价请求，并请仍在运行的上一个评价任务停下（发 `cancel`，不换 Worker），新一手优先。
 - `client.cancelCoach()`：关闭评价时调用，不影响牌桌任务。
-- `client.stats`：只在内存里的统计（`device`、`budget`、`firstLoadWaitMs`、`requests`、`searched`、`differs`、`fallbacks`、`ms`，以及 `coach.*`），用于自检。
+- `client.stats`：只在内存里的统计（`device`、`budget`、`firstLoadWaitMs`、`hardTimeoutMs`、`requests`、`searched`、`differs`、`fallbacks`、`ms`，以及 `coach.*`），用于自检。
 
 **设备和预算**（`SEARCH_BUDGETS`，`web/src/ai/search/constants.mjs`）：
 
-| 设备类别                                                                                                                                                    | 中盘预算  | 尾盘预算  | 单次求解时限 | 置换表  | 硬超时（`hardTimeoutMs`） |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | --------- | ------------ | ------- | ------------------------- |
-| `desktop`                                                                                                                                                   | 50,000 ms | 50,000 ms | 3,000 ms     | 300,000 | 56,000 ms                 |
-| `mobile`：`userAgentData.mobile`；UA 含 `Mobi\|iPhone\|iPad\|iPod\|Android`；iPadOS（`MacIntel` 且多点触控）；`hardwareConcurrency ≤ 4`；`deviceMemory ≤ 4` | 50,000 ms | 50,000 ms | 3,000 ms     | 100,000 | 56,000 ms                 |
+| 设备类别                                                                                                                                                    | 中盘截止（从回合开始） | 尾盘截止（从回合开始） | 单次求解时限            | 置换表  | 硬超时（`hardTimeoutMs`，从回合开始） |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ---------------------- | ----------------------- | ------- | ------------------------------------- |
+| `desktop`                                                                                                                                                   | 50,000 ms              | 50,000 ms              | min(3,000 ms, 剩余时间) | 300,000 | 52,000 ms                             |
+| `mobile`：`userAgentData.mobile`；UA 含 `Mobi\|iPhone\|iPad\|iPod\|Android`；iPadOS（`MacIntel` 且多点触控）；`hardwareConcurrency ≤ 4`；`deviceMemory ≤ 4` | 50,000 ms              | 50,000 ms              | min(3,000 ms, 剩余时间) | 100,000 | 52,000 ms                             |
 
-2026-11-09 所有者要求“把模型的单次出牌时间延长至50s”（真人每手 60 秒）：此前电脑为 3,000／4,000／3,000 ms（硬超时 10,000 ms），手机为 3,500／3,500／1,000 ms（硬超时 7,500 ms）。预算只是上限，搜索算完就返回，多数决策仍不到 1 秒。
+2026-11-09 所有者先要求“把模型的单次出牌时间延长至50s”（`296c27e`：50 秒从发出请求起算，硬超时 56 秒），随后定下上面的“60 秒出牌、50 秒推理、10 秒回落”规则（`699674b`：50 秒和 52 秒都从回合开始起算）。更早的预算：电脑 3,000／4,000／3,000 ms（硬超时 10,000 ms），手机 3,500／3,500／1,000 ms（硬超时 7,500 ms）。预算只是上限，搜索算完就返回，多数决策仍不到 1 秒。
 
 各项规则（`client.js`、`core.mjs`）：
 
 - 超过预算就**整次作废**，不会用到半截的搜索结果。
-- 两档的单次求解时限都等于 Node 测试版本的 3 秒，被时钟停下或达到 1,500,000 节点上限的求解都跳过这个世界，与 Node 规则相同。较慢的设备（尤其手机）在 3 秒内没解完的世界，在 Node 测试机上可能解完，所以这时完成的搜索不保证与 Node 逐项相同；手机此前（1 秒时限）遇到这种情况整次回落 017。（若单次时限短于 Node，被时钟停下的求解会让整次作废；这条规则仍在代码里，只对更短的预算起作用。）
-- 第一次决策最多等 `FIRST_LOAD_WAIT_MS`（10 秒，与 50 秒预算脱钩；`client.stats.firstLoadWaitMs`）让网络加载完，超时就本次回落（`loading`），加载在后台继续。
-- `init` 本身的超时是 60 秒；失败后 30 秒内不再重试（`search-init-wait`）。
+- 两档的单次求解时限都等于 Node 测试版本的 3 秒，被时钟停下或达到 1,500,000 节点上限的求解都跳过这个世界，与 Node 规则相同。距 50 秒不足 3 秒时，求解时限截短为剩余时间，这样的求解没解完就整次作废、出 017（Node 会给它完整的 3 秒），解完则值相同、决策不变。较慢的设备（尤其手机）在 3 秒内没解完的世界，在 Node 测试机上可能解完，所以这时完成的搜索不保证与 Node 逐项相同；手机此前（1 秒时限）遇到这种情况整次回落 017。（若单次时限短于 Node，被时钟停下的求解会让整次作废；这条规则仍在代码里，只对更短的预算起作用。）
+- 第一次决策最多等 `FIRST_LOAD_WAIT_MS`（10 秒，且不超过到 50 秒的剩余时间；`client.stats.firstLoadWaitMs`）让网络加载完，超时就本次回落（`loading`），加载在后台继续；等待的时间计入 50 秒。
+- `init` 本身的超时是 60 秒；失败后**下一次请求立即重试**（`699674b` 取消了原来 30 秒内不再重试的 `search-init-wait` 冷却，以免一次失败让之后的出牌一直回落）。
 
 **调度**：
 
 - 客户端一次只向 Worker 发一个任务，牌桌任务优先。
 - 牌桌请求到来时，丢掉排队中的评价任务；如果有评价任务在跑，先发 `cancel`，500 毫秒内还没停下，就替换 Worker 并重新加载网络（通常 0.3–0.6 秒）。
-- 牌桌任务的预算和硬超时从它**发给 Worker 时**才开始计时，评价任务不会占用牌桌的时间。
+- 牌桌任务的截止和硬超时都从**回合开始**（`startedAt`）计时：在评价任务后面排队、等 Worker 重新加载的时间都计入。发出时已过 50 秒的牌桌任务不再发给 Worker，直接回落 `budget`。
 
-**`decide` 最长要等多久**：通常不超过“首次加载等待＋硬超时”（10＋56＝66 秒，两档相同）；实际多数决策不到 1 秒。但有一种少见情况会更长：评价任务 500 毫秒内停不下来，Worker 被替换。这时牌桌任务排在新的 `init` 后面，`init` 最多可等 60 秒，牌桌任务的硬超时要等它发出后才开始。所以理论上最长约 0.5＋60＋56 秒。牌桌一侧要自己设上限（第 8.3 节），不能指望 `decide` 一定在 30 秒内返回。
+**`decide` 最长要等多久**：不超过回合开始后约 52 秒（`startedAt + hardTimeoutMs`），包括首次加载、排在评价或重新加载后面的情况（此前从发出请求起算，最坏可达 0.5＋60＋56 秒，已取消）；实际多数决策不到 1 秒。牌桌一侧仍应自设一个略长的保险上限（第 8.3 节）。
 
-客户端返回的回落原因包括：`timeout`、`loading`、`preempted`、`error`，以及 Worker 返回的 `budget`、`out-of-band`、`known-cards`、`min-worlds`、`cancelled`。本仓库还会在牌桌一侧记录 `mismatch`，指搜索结果与本桌的牌对不上。
+客户端返回的回落原因包括：`timeout`、`loading`、`budget`（发出时已过 50 秒）、`preempted`、`error`，以及 Worker 返回的 `budget`、`out-of-band`、`known-cards`、`min-worlds`、`cancelled`。本仓库还会在牌桌一侧记录 `mismatch`，指搜索结果与本桌的牌对不上。
 
 ## 8. 牌桌接入（替换普通 danMCai）
 
@@ -437,7 +449,13 @@ const reasonClient = () =>
 
 `NeuralBot.decide('danmcai')` 是本仓库 017 牌桌路径（`table-policy.mjs`、`policy-inference.mjs`、`endgame.js`）的移植，包括公开残局求解（Clint `bot/neural/neural-bot.js` 的 `decide`、`solvePublicEndgame`）。
 
-**等待上限**：搜索要自己设上限：`client.stats.firstLoadWaitMs + hardTimeoutMs(client.stats.budget) + 1000`（两档都是 10＋56＋1＝67 秒），超过上限就按回落处理。你们的 `BOT_WAIT_MS = 30000`，超过后 `aiMove` 记 `nn.err`，然后调用 `botFail`，它**短于**这个上限。所以采用 50 秒预算时必须把 `BOT_WAIT_MS` 提高到能容下“搜索上限＋017 的计算”（例如 75 秒），并核对你们给电脑座位的出牌计时、超时托管和联机掉线判定不会在这段时间内先触发；只有房主（负责计算的页面）在等，Worker 不占主线程，心跳照常。若要保留 30 秒的 `BOT_WAIT_MS`，就得把搜索上限设在 30 秒以内（例如 25 秒），超过即出 017 的牌：这样少数长搜索会多回落，不再是所有者要求的 50 秒，须向你们的所有者说明。
+**时间（按第 3 节的 60／50／10 规则）**：
+
+- 在 `botStart(p)`（回合计时开始时）记下 `startedAt = performance.now()`，传给 `client.decide(…, {startedAt})`。思考停顿、首次加载、你们自己的等待都要计入 50 秒，不要在停顿之后才开始计时。
+- 017 的回落出法**和搜索同时开始算**（`NeuralBot.decide('danmcai', …)` 与搜索并行），搜索回落时直接用它；不要等到 50 秒后才开始算 017（首次用到时可能还要下载、编译模型）。
+- 保险上限：`startedAt + m.HARD_MS + 1000`（53 秒）还没有结果就按回落处理；正常情况下 `decide` 在 52 秒前已经返回。
+- 你们的 `BOT_WAIT_MS = 30000` 必须提高：它要容下“到 52 秒的搜索＋017 回落”，并且整手不超过 60 秒，建议 **`BOT_WAIT_MS = 60000`，从回合开始（`botStart`）计**。超过后 `aiMove` 记 `nn.err` 并调用 `botFail`，会让本页之后都改用 Clint 规则，所以它只能作为 017 本身失败时的最后防线，不能比搜索加回落先触发。同时核对你们给电脑座位的出牌计时、超时托管和联机掉线判定不会在 60 秒内先触发；只有房主（负责计算的页面）在等，Worker 不占主线程，心跳照常。若一定要保留 30 秒的 `BOT_WAIT_MS`，就把推理截止改到 30 秒内（例如传 `startedAt` 时减去 20 秒的余量）：少数长搜索会多回落，不再符合所有者的 50 秒规则，须向你们的所有者说明。
+- 不要做“失败一次就停用搜索”的标志：一手回落后，下一手照常调用 `client.decide`。
 
 **重建出牌**：
 
@@ -467,22 +485,27 @@ const botId = () =>
       ? RULES.bot
       : '';
 // botPreload：reason 时预载 017，并 reasonClient().then(({client}) => client.warm(REASON_BOT))
-// botStart：把 NeuralBot.decide(id, g, p, NET.off) 换成
-//   (id === REASON_ID ? reasonDecide(p, g) : NeuralBot.decide(id, g, p, NET.off))
+// botStart：在开头记下 const startedAt = performance.now()（回合开始），并把
+//   NeuralBot.decide(id, g, p, NET.off) 换成
+//   (id === REASON_ID ? reasonDecide(p, g, startedAt) : NeuralBot.decide(id, g, p, NET.off))
 // nn.id 仍是 REASON_ID，所以 aiMove 里 BOT_USED[p] 会记成 REASON_ID（含 017 回落的出牌）。
 
-async function reasonDecide(p, g) {
+async function reasonDecide(p, g, startedAt) {
+  // 017 的回落出法与搜索同时开始算，搜索回落时立即可用（60／50／10 规则的 10 秒余量）
+  const champion = Promise.resolve().then(() => NeuralBot.decide(REASON_BASE, g, p, NET.off));
+  champion.catch(() => {});
   let pl;
   try {
-    pl = await reasonSearch(p);
+    pl = await reasonSearch(p, startedAt);
   } catch (e) {
     pl = undefined; // 搜索的任何异常都回落 017，不调用 botFail
   }
-  return pl !== undefined ? pl : NeuralBot.decide(REASON_BASE, g, p, NET.off);
+  // 没有“失败一次就停用”的标志：下一手照常搜索
+  return pl !== undefined ? pl : champion;
 }
 
 // 返回出牌对象、null（过牌）或 undefined（不搜索／回落）
-async function reasonSearch(p) {
+async function reasonSearch(p, startedAt) {
   const at = G.tok + ':' + G.log.length + ':' + G.turn;
   const now = () => G.tok + ':' + G.log.length + ':' + G.turn;
   if (aiSeesAll(p) || G.turn !== p || G.phase !== 'play') return undefined;
@@ -500,14 +523,15 @@ async function reasonSearch(p) {
     REASON_SEEDS.set(key, crypto.getRandomValues(new Uint32Array(1))[0]);
   }
   const payload = m.searchPayload(G, p, NET.off, REASON_SEEDS.get(key));
-  const b = client.stats.budget;
   let timer;
   const r = await Promise.race([
-    client.decide(REASON_BOT, payload),
+    // 推理在回合开始后 50 秒停下，52 秒前返回（含首次加载和排队）
+    client.decide(REASON_BOT, payload, { startedAt }),
     new Promise((res) => {
+      // 保险上限：回合开始后 53 秒
       timer = setTimeout(
         () => res({ fallback: true, reason: 'caller-timeout' }),
-        client.stats.firstLoadWaitMs + m.hardTimeoutMs(b) + 1000,
+        Math.max(0, startedAt + m.HARD_MS + 1000 - performance.now()),
       );
     }),
   ]).finally(() => clearTimeout(timer));
@@ -526,7 +550,7 @@ async function reasonSearch(p) {
 
 写本文时，作者在本地检查过上面“重建出牌”的写法：在 60 局模拟对局里，把每个决策点的每个合法候选（共 98,263 个，含 6,051 个过牌）都当成搜索结果，用你们 `2d91ecc` 的 `analyze`、`beats` 重建，全部成功。这项检查没有存成证据文件，也没有运行你们的页面。
 
-也可以在发搜索请求时同时开始 017 决策，搜索失败时直接用它的结果。这只是把回落的计算提前，回落规则本身不变。
+上面的示意已在发搜索请求时同时开始 017 决策（本仓库 `controller.js` 也这样做），搜索失败时直接用它的结果。这只是把回落的计算提前，回落规则本身不变。
 
 ### 8.4 进还贡
 
@@ -667,7 +691,7 @@ function recModel(id) {
 
 ## 13. 分步接入计划
 
-1. 在本仓库包含本文的 `main` 提交上运行 `npm ci`、`node --test web/tests/search-bot.test.mjs`（第 14 节第 1 条），记下完整提交 SHA，并按本文开头确认网页代码与 `296c27e` 相同。
+1. 在本仓库包含本文的 `main` 提交上运行 `npm ci`、`node --test web/tests/search-bot.test.mjs`（第 14 节第 1 条），记下完整提交 SHA，并按本文开头确认网页代码与 `699674b` 相同。
 2. 按第 4.1 节取出打包脚本，核对脚本 SHA，然后运行。把输出放到你们仓库的 `bot/reason/`，把输出的 SHA 清单写进你们的说明文档。
 3. 在 `web/build.py` 里加上 `bot/reason/` 下文件的 SHA 和字节检查（第 8.1 节）。
 4. 在 `bot/models.json` 里新增 reason 条目，不带 `file`。菜单按钮改成新条目，旧选择做映射（第 8.1 节）。
@@ -681,7 +705,7 @@ function recModel(id) {
 
 第 1–4、6 条在**本仓库检出**的根目录运行，需要 Node ≥ 20.19 和 `npm ci`。
 
-1. **单元一致性**（不需要模型文件）：`node --test web/tests/search-bot.test.mjs`。在 `296c27e` 上运行，15 项全部通过（`fc2ed46` 上为 13 项；新增两项检查首次加载只等 10 秒、新一手评价请停上一手）。它用确定性的替身网络，在固定种子的中盘和尾盘局面上，要求浏览器核心与 `midgame-search.mjs` 在选择、搜索根、各世界结果和抽到的世界上完全相同；同时检查载荷只含公开信息、超预算整次作废、公开贡牌约束、身份能通过 `validateRecord`、打包后没有 `node:` 导入。
+1. **单元一致性**（不需要模型文件）：`node --test web/tests/search-bot.test.mjs web/tests/turn-timing.test.mjs`。在 `699674b` 上运行，21＋2 项全部通过（`296c27e` 上 `search-bot` 为 15 项，`fc2ed46` 上 13 项；新增项检查剩余时间截短求解、52 秒放弃、回落不粘滞、50 秒后不再发出搜索，以及牌桌控制器的 60／50／10 规则）。它用确定性的替身网络，在固定种子的中盘和尾盘局面上，要求浏览器核心与 `midgame-search.mjs` 在选择、搜索根、各世界结果和抽到的世界上完全相同；同时检查载荷只含公开信息、超预算整次作废、公开贡牌约束、身份能通过 `validateRecord`、打包后没有 `node:` 导入。
 2. **打包和 SHA**：运行第 4.1 节的脚本，核对 ORT 和模型的 SHA 与表中一致；`grep -c 'from "node:' <输出>/assets/*.mjs` 每个文件都应为 0。
 3. **构建好的 Worker 与 Node 参考版逐个比较（必须做）**：把你们的部署目录用本地 HTTP 服务提供（`.mjs` 必须是 JavaScript MIME，`.wasm` 是 `application/wasm`；`python3 -m http.server` 可以），然后运行：
 
@@ -715,7 +739,9 @@ function recModel(id) {
 7. **耗时**：在真实桌面浏览器和至少一部手机上，各打完整的单人局（电脑选 reason，普通模式，不加 `?test=1`），在控制台查看 `client.stats`。要求：
    - 牌桌不卡、每一手都合法、没有出现 `botFail` 提示；
    - `searched > 0`，`fallbacks` 里各原因的计数合理（50 秒预算下桌面和手机都应以 0 为主；手机上偶有 `budget` 回落说明设备很慢）；
-   - `ms` 的 95 分位低于预算。
+   - `ms` 的 95 分位低于预算；
+   - 从回合开始（`botStart`）到出牌的时间每一手都在 60 秒内，最长不超过约 52 秒（本仓库用 `TableBot.moveTimes` 记录，见 `web/tests/search_bot_smoke.py`）；
+   - 人为让一手回落（例如把 `startedAt` 设为 51 秒前），下一手仍然搜索（`searched` 继续增加）。
 8. **整局浏览器冒烟**：
    - 单人局打完一局普通局和一局进贡局；
    - 房主加一名加入者的房间里，只有房主页面为电脑创建搜索 Worker（加入者只在开了评价时才会有）；
@@ -726,29 +752,30 @@ function recModel(id) {
 
 ## 15. 常见问题
 
-| 现象                                               | 原因与处理                                                                                                                                                           |
-| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Worker 报 `__MODEL_VERSIONS__ is not defined`      | 打包时漏了 `define`。用第 4.1 节的脚本重新打包。                                                                                                                     |
-| 取出的打包脚本 SHA 不对或解析失败                  | 手工复制时多带或少带了代码块的边界行。用第 4.1 节的 `awk` 命令重新取出，并确认本文没有在本地被格式化工具改动过。                                                     |
-| Worker 启动失败或模块加载失败                      | `.mjs` 的 MIME 不是 JavaScript，或者没用 `{type: 'module'}`；也可能是 `assets/vendor/` 下缺了 ORT 的三个文件。                                                       |
-| 模型 404                                           | 目录不是 `X/assets/…` 和 `X/models/…` 的结构，或者文件名改了（必须是 `bot-017.onnx` 和 `belief-v1-16d76783.onnx`）。                                                 |
-| 报 `Node file APIs are unavailable in the browser` | 有代码调用了 `sampler.mjs` 读文件的分支，正常网页不会走到这里，说明打包或源码被改过。                                                                                |
-| 第一手总是 `loading` 回落                          | 第一次决策最多等 10 秒（`firstLoadWaitMs`）。尽早调用 `client.warm('9001')`（开局或选好机器人时）。                                                                  |
-| 很多 `error`，并且 30 秒内不再重试                 | `init` 失败后的冷却（`search-init-wait`）。查看 Worker 的控制台，通常是 404 或 MIME 问题。                                                                           |
-| `known-cards` 回落                                 | 进贡、还贡或抗贡记录与公开打出的牌矛盾。检查 `G.trib` 的 `tc`／`rc` 是否是实际交换的牌对象，`G.kang.has` 的 `n` 是否等于大王张数（0–2）。                            |
-| `Invalid search payload`                           | `G.turn ≠ p`、`hand.length ≠ counts[p]`、`counts` 不是 4 项、牌号重复或不在 0–107 范围内。                                                                           |
-| 搜索结果总对不上你们的牌（本仓库叫 `mismatch`）    | 用了 `index` 而不是 `ids`＋`shape`；或者 `analyze` 的读法不一致。先检查牌号映射。                                                                                    |
-| 出现 `botFail` 提示、之后全用 Clint 规则           | 017 本身失败，或者搜索没有自设上限、整个请求超过了 `BOT_WAIT_MS`（50 秒预算下须把它提高到 67 秒＋017 以上）。搜索失败只能回落 017，不能触发 `botFail`（第 8.3 节）。 |
-| `Invalid ranked actions`                           | 显示 017 值时传了第 6 个参数，或者 `shown` 里有 `null` 却没传 `s.base`；也可能 `s.actions`、`shown`、`s.base` 长度不一致（补算出法时漏了追加某一项）。               |
-| 手机上 `budget` 回落多                             | 每步上限已是 50 秒，回落多说明设备很慢或页面在后台被限速。这时出的是 017 的牌；不要为此改预算语义。                                                                  |
-| 页面内存高                                         | 每个 Worker 约 210–220 MB。确认整个页面只有一个客户端；评价不要另建 Worker。                                                                                         |
-| 收集器拒收（`invalid_seats`、`invalid_actor`）     | 身份的 `sha256` 填成了文件 SHA，或者 `version` 不对；也可能把 `assisted` 写到了电脑或超时动作上。                                                                    |
-| 想直接从 Release 地址加载模型                      | 不要这样做：不能保证浏览器拿到的字节与构建时校验过的一致，跨域行为也不受你们控制。在构建时下载并校验，再从同源地址提供。                                             |
+| 现象                                               | 原因与处理                                                                                                                                                       |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Worker 报 `__MODEL_VERSIONS__ is not defined`      | 打包时漏了 `define`。用第 4.1 节的脚本重新打包。                                                                                                                 |
+| 取出的打包脚本 SHA 不对或解析失败                  | 手工复制时多带或少带了代码块的边界行。用第 4.1 节的 `awk` 命令重新取出，并确认本文没有在本地被格式化工具改动过。                                                 |
+| Worker 启动失败或模块加载失败                      | `.mjs` 的 MIME 不是 JavaScript，或者没用 `{type: 'module'}`；也可能是 `assets/vendor/` 下缺了 ORT 的三个文件。                                                   |
+| 模型 404                                           | 目录不是 `X/assets/…` 和 `X/models/…` 的结构，或者文件名改了（必须是 `bot-017.onnx` 和 `belief-v1-16d76783.onnx`）。                                             |
+| 报 `Node file APIs are unavailable in the browser` | 有代码调用了 `sampler.mjs` 读文件的分支，正常网页不会走到这里，说明打包或源码被改过。                                                                            |
+| 第一手总是 `loading` 回落                          | 第一次决策最多等 10 秒（`firstLoadWaitMs`）。尽早调用 `client.warm('9001')`（开局或选好机器人时）。                                                              |
+| 很多 `error`                                       | `init` 失败（每手都会重试，`699674b` 起没有冷却）。查看 Worker 的控制台，通常是 404 或 MIME 问题。                                                               |
+| `known-cards` 回落                                 | 进贡、还贡或抗贡记录与公开打出的牌矛盾。检查 `G.trib` 的 `tc`／`rc` 是否是实际交换的牌对象，`G.kang.has` 的 `n` 是否等于大王张数（0–2）。                        |
+| `Invalid search payload`                           | `G.turn ≠ p`、`hand.length ≠ counts[p]`、`counts` 不是 4 项、牌号重复或不在 0–107 范围内。                                                                       |
+| 搜索结果总对不上你们的牌（本仓库叫 `mismatch`）    | 用了 `index` 而不是 `ids`＋`shape`；或者 `analyze` 的读法不一致。先检查牌号映射。                                                                                |
+| 出现 `botFail` 提示、之后全用 Clint 规则           | 017 本身失败，或者 `BOT_WAIT_MS` 仍是 30 秒、比“到 52 秒的搜索＋017 回落”先到（须改为从回合开始计 60 秒，第 8.3 节）。搜索失败只能回落 017，不能触发 `botFail`。 |
+| 电脑出牌超过 60 秒，或思考停顿后才开始算 50 秒     | 没有把回合开始的 `startedAt` 传给 `client.decide`（第 7、8.3 节）。                                                                                              |
+| `Invalid ranked actions`                           | 显示 017 值时传了第 6 个参数，或者 `shown` 里有 `null` 却没传 `s.base`；也可能 `s.actions`、`shown`、`s.base` 长度不一致（补算出法时漏了追加某一项）。           |
+| 手机上 `budget` 回落多                             | 每步上限已是 50 秒，回落多说明设备很慢或页面在后台被限速。这时出的是 017 的牌；不要为此改预算语义。                                                              |
+| 页面内存高                                         | 每个 Worker 约 210–220 MB。确认整个页面只有一个客户端；评价不要另建 Worker。                                                                                     |
+| 收集器拒收（`invalid_seats`、`invalid_actor`）     | 身份的 `sha256` 填成了文件 SHA，或者 `version` 不对；也可能把 `assisted` 写到了电脑或超时动作上。                                                                |
+| 想直接从 Release 地址加载模型                      | 不要这样做：不能保证浏览器拿到的字节与构建时校验过的一致，跨域行为也不受你们控制。在构建时下载并校验，再从同源地址提供。                                         |
 
 ## 16. 出处索引
 
 - 清单与身份：`web/src/ai/model-catalog.json`（`searchBots`）、`web/src/ai/model-catalog.mjs`（`searchBotManifest`、`botIdentity`、`botModelName`、`validateCatalog`）
-- 参数与预算：`web/src/ai/search/constants.mjs`
+- 参数与预算：`web/src/ai/search/constants.mjs`；电脑出牌时间规则：`web/src/ai/turn-timing.mjs`
 - 搜索核心与评价值：`web/src/ai/search/core.mjs`、`web/src/ai/search/coach.mjs`
 - 载荷与公开约束：`web/src/ai/search/payload.mjs`、`web/src/ai/search/known-cards.mjs`
 - ONNX 调用：`web/src/ai/search/inference.mjs`
@@ -757,6 +784,53 @@ function recModel(id) {
 - 评价接入参考：`web/src/coach/controller.js`、`web/src/coach/evaluation.mjs`、`web/docs/MOVE_COACH.md`
 - 构建：`web/tools/build.mjs`、`web/tools/node-stub.mjs`、`ai/publishing/artifacts.mjs`、`ai/publishing/publish-belief-asset.mjs`
 - 收集：`web/src/collection/validate.mjs`、`web/src/collection/record.mjs`、`web/src/collection/config.json`
-- 测试与工具：`web/tests/search-bot.test.mjs`、`web/tools/search-latency.mjs`、`ai/danMCai/belief/web-parity.mjs`
+- 测试与工具：`web/tests/search-bot.test.mjs`、`web/tests/turn-timing.test.mjs`、`web/tools/search-latency.mjs`、`ai/danMCai/belief/web-parity.mjs`
 - 证据：`ai/research/MODEL_STUDY.md` 第 70–72 节；`ai/research/evaluation/window2-20261109/`（H4）、`ai/research/evaluation/window1-20261109/`（H3）；`ai/research/evaluation/web-search-bot-{9001,parity,latency}.json`
 - 本仓库说明：[电脑对手](BOTS.md#研究机器人推理搜索9001)、[模型选择与发布](WEB_MODELS.md)、[出牌评价](MOVE_COACH.md)
+
+## 17. 版本更新记录（给已接入的项目）
+
+已经按本文旧版接入的项目（例如 Clint 网站，它在 `46f5e76` 里接入了 danMCai-reason），按下面的条目从旧到新逐条更新。每条都写明本仓库的网页代码提交、要改什么、怎么验证。最新的在最前。
+
+### 2026-11-09 · `699674b`：电脑出牌时间规则“60 秒出牌、50 秒推理、10 秒回落”
+
+**规则（所有者原话）**：“机器人和真人一样是最多60s出牌时间 推理时间最多50s 留出来10s为了万一没推理出来回退出牌用 上一手没成功下一手依然会推理 不会一次回退后面一直回退”。
+
+**本仓库改了什么**（搜索参数 `SEARCH_BOT_V1`、模型、身份 `9001`／清单摘要 `442d888a…6a24`、收集身份都没变；预算内完成的搜索，决策与改动前逐项相同）：
+
+| 项目                     | 之前（`296c27e`）                                     | 现在（`699674b`）                                                                                            |
+| ------------------------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 50 秒推理从哪里算        | 牌桌任务发给 Worker 时                                | **回合开始**（`client.decide(bot, payload, {startedAt})`，含思考停顿、首次加载、排队）                       |
+| 单次精确求解时限         | 3 秒（可能越过 50 秒）                                | min(3 秒, 到 50 秒的剩余时间)；被截短后没解完就整次回落 017，解完则值不变                                    |
+| 硬超时                   | 56 秒，从发出起算（`hardTimeoutMs` = 50＋3＋3）       | **52 秒，从回合开始起算**（`hardTimeoutMs` = 50＋2）；在队列里等的任务到时同样放弃                           |
+| `decide` 最坏返回时间    | 约 0.5＋60＋56 秒（评价卡住、Worker 重载时）          | 回合开始后约 52 秒                                                                                           |
+| 首次加载等待             | 最多 10 秒                                            | 最多 10 秒，且不超过到 50 秒的剩余时间；等待计入 50 秒                                                       |
+| `init` 失败后            | 30 秒内不再重试（`search-init-wait`），这段时间全回落 | 下一次请求立即重试（没有冷却）                                                                               |
+| 回落原因                 | `timeout`、`loading`、`preempted`、`error`…           | 另加 `budget`（发出时已过 50 秒）；`search-init-wait` 不再出现                                               |
+| Worker 消息              | `{type: 'search', payload}`                           | `{type: 'search', payload, remainingMs}`（客户端填写）                                                       |
+| 客户端打包新导出         | —                                                     | `TURN_MS`（60,000）、`REASON_MS`（50,000）、`HARD_MS`（52,000）；`client.stats.hardTimeoutMs`                |
+| 017 回落                 | 搜索回落后才请求 017                                  | 与搜索同时请求，回落时立即出（本仓库 `controller.js`）                                                       |
+| Clint 残局大脑（本仓库） | 10 秒（规则 Worker 15 秒超时，超时弹“牌桌准备失败”）  | 上游的 30 秒且不超过回合开始后 50 秒；规则 Worker 等到 52 秒；超时或出错出只用规则的出法，下一手照常启用大脑 |
+
+**你们要改的地方**（按第 8.3 节当前示意；行号以你们的版本为准）：
+
+1. **换打包文件**：在包含本文的 `main` 提交上按第 4.1 节重新取出脚本（SHA `b421f0a3…dbd97`）并运行，用输出替换 `bot/reason/assets/search-worker.mjs`（89,142 字节，`10079e4b…27a4`）和 `bot/reason/assets/reason-client.mjs`（51,063 字节，`869ab81e…7f0f`），同步更新 `web/build.py` 里的 SHA／字节清单。ORT 三个文件和两份模型不变。
+2. **从回合开始计时**：在 `botStart(p)` 开头记下 `const startedAt = performance.now()`，一路传到 `client.decide(REASON_BOT, payload, { startedAt })`。不要在思考停顿之后、也不要在 `reasonClient()` 加载完之后才取时间。
+3. **017 与搜索同时算**：`reasonDecide` 一开始就调用 `NeuralBot.decide('danmcai', g, p, NET.off)`，搜索回落时直接用它（第 8.3 节示意）。
+4. **调用方等待上限**：把 `reasonSearch` 里的保险上限从 `firstLoadWaitMs + hardTimeoutMs(b) + 1000`（67 秒）改为 `startedAt + m.HARD_MS + 1000 - performance.now()`（回合开始后 53 秒）。
+5. **`BOT_WAIT_MS`**：从 30 秒提高到 **60 秒，从回合开始（`botStart`）计**，包括 017 回落。它只在 017 本身也失败时兜底调用 `botFail`；30 秒的值会在 50 秒推理还没结束时就把整页改成 Clint 规则，违反规则的“不会一直回退”。同时确认你们的电脑座位出牌计时、超时托管和掉线判定不会在 60 秒内先触发。
+6. **不粘滞**：检查你们的接入代码没有“搜索失败一次就不再搜索”的标志、冷却或重试计数；任何回落之后下一手都要照常调用 `client.decide`。`botFail` 只能由 017 失败触发，搜索失败不能触发它。
+7. **Clint 座位（建议，同一规则）**：你们的 Clint 电脑若启用残局大脑（上游 30 秒），按同一框架：大脑上限取 min(30 秒, 回合开始后 50 秒的剩余时间)；超时、出错或卡住时出只用规则的出法，不要弹失败提示，也不要停用之后的大脑。本仓库的做法见 `web/src/ai/controller.js`（`clintBrainMs`、`RULES_ONLY_TIMEOUT_MS`）和 `web/src/rule-bot/runtime.mjs`（`clintBrainSettings`）。这是你们自己的 Clint 代码，按你们的所有者决定。
+8. 出牌评价（`client.evaluate`）不用改：它仍从请求时起算 50 秒、不阻止真人出牌、电脑优先；评价任务的硬超时随 `hardTimeoutMs` 变为 52 秒。
+
+**怎么验证**：
+
+- 本仓库检出（包含本文的 `main`）：`npm ci && node --test web/tests/search-bot.test.mjs web/tests/turn-timing.test.mjs`，21＋2 项通过；`git diff --stat 699674b <你用的提交> -- web/src ai/danMCai ai/shared` 无输出。
+- 打包：第 4.1 节脚本 SHA 为 `b421f0a3…dbd97`，输出 SHA 与第 4.1 节的表一致；`grep -c 'from "node:' bot/reason/assets/*.mjs` 都为 0。
+- 第 14 节第 3 条（构建好的 Worker 与 Node 逐个比较）重做一次：`completedDifferentFromNode` 必须为 0。本仓库 2026-11-09 用这次的打包输出、按 `bot/reason/` 布局跑了 10 局（731,960,000 起，16 个决策）：电脑预算 16/16 与 Node 相同、0 回落，耗时中位 0.46 秒、最长 3.13 秒；手机代理 1 次回落，完成的 15 个全部相同（本地检查，未存为证据文件）。
+- 浏览器（普通模式，电脑选 reason）：每手从 `botStart` 到出牌都在 60 秒内（本仓库实测见主报告第 72 节，最长约 1 秒，含 0.5–1 秒停顿）；把某一手的 `startedAt` 人为设为 51 秒前，这一手出 017（`fallbacks.budget` 加 1），**下一手照常搜索**（`searched` 继续增加）；页面上没有 `botFail` 提示。
+- 本仓库在真实构建的 Worker 上的截止检查（无头 Chrome，尾盘 20 张局面）：回合开始于 40／46／48.5 秒前的三次决策分别在回合开始后 50,002／50,002／50,001 毫秒回落 017，没有越过 50 秒的求解；回合开始于 45 秒前的另一个局面在 47.5 秒完成搜索。
+
+### 2026-11-09 · `296c27e`：每步上限 50 秒（已被上一条取代）
+
+所有者要求“真人一个人都可以有60s出牌时间 把模型的单次出牌时间延长至50s”：预算由电脑 3／4 秒、手机 3.5 秒改为一律 50 秒，手机单次求解改为 3 秒，硬超时 56 秒（从发出请求起算），首次加载等待固定 10 秒，新一手的评价请求会请停上一手的评价搜索。当时的打包输出为 `search-worker.mjs` 87,993 字节 `3cb40262…e258`、`reason-client.mjs` 49,622 字节 `a9e4cf2d…1a08`。按 `fc2ed46` 接入的项目直接按上一条（`699674b`）更新即可，不必先停在这一版；若停在这一版，必须把 `BOT_WAIT_MS` 提高到 67 秒＋017 以上，而这不符合后来的 60 秒规则。

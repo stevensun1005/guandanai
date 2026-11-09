@@ -662,5 +662,21 @@
     "Browser budget 10 s differs from upstream 30 s.",
     "createRuleOpponent (rule-baseline.mjs) does not include the brain."
   ],
-  "deployment": "Working tree only; not committed or pushed by this step."
+  "deployment": "Working tree only; not committed or pushed by this step.",
+  "addendum20261109TurnRule": {
+    "date": "2026-11-09",
+    "webCodeCommit": "699674b5b5db26a4370b45e8fc9e704b956046e5",
+    "owner": "机器人和真人一样是最多60s出牌时间 推理时间最多50s 留出来10s为了万一没推理出来回退出牌用 上一手没成功下一手依然会推理 不会一次回退后面一直回退",
+    "resolvesPending": "f03dc3c browser cap: WEB_BRAIN is upstream ms 30000 again; the controller caps it at the time left to 50 s from the turn start (brainMs), the rule worker request waits until 52 s, and an overrun / timeout / worker error plays the rules-only move instead of the table-failure panel; not sticky",
+    "runtimeMjs": {
+      "before": "f53061083cc943fcfed379d7c8815787b073df415bcf43db49922198bad3bcb2",
+      "after": "0b372ee9863190419edb41af08fec01d9f6435cc255e99960511275dbb713ad5"
+    },
+    "unchanged": [
+      "web/src/rule-bot/strategy.js 67a4d054...",
+      "web/src/rule-bot/endgame-brain.mjs b9bf399d..."
+    ],
+    "note": "the original pending/adaptation entries above are kept as recorded at sync time; earlier Clint results stay bound to their fingerprints; no new strength result",
+    "evidence": "ai/research/evaluation/web-search-bot-9001.json turnRule60s50s10s20261109"
+  }
 }
