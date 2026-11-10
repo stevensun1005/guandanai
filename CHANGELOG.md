@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-10 · 第三窗口 S7 真人面板评分工具
+
+- 新增 `ai/danMCai/belief/panel-scorer.mjs` 与 `arm-replay.mjs`：在固定的真人留出面板上比较模型的打法统计与精确求解正确率，并重放验收牌局统计残局结构；只作描述，不作门控；私有牌谱只读，输出不含身份信息。说明见 `ai/danMCai/belief/README.md`。
+
 ## 2026-11-09 · 第三窗口训练与评测工具：215 维 extras（含推断边缘）
 
 - 持续训练器新增 `extrasMode: "public-belief"`（53 维公开 extras＋推断网络 v1 从行动者公开视角给出的 162 维边缘，`beliefModel` 的 SHA-256 冻结进配置）、`learner.extrasLearningRate`（零初始化投影单独的 Adam 组，默认 1e-4）、`learner.trunkFrozen`、`researchSnapshots`，以及给冠军加零投影的 `wrap_initial.py`。extras 运行允许原规则对手，仍须 `researchNoGate`；源码指纹加入推断采样与特征文件。见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#215-维额外输入public-belief第三窗口新增)。

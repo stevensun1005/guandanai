@@ -136,3 +136,7 @@ node ai/danMCai/belief/reason-match-eval.mjs --summarize --out=<目录>
 ```
 
 测试 `ai/danMCai/tests/reason-match-eval.test.mjs`（`npm test`，无需模型）用替身网络覆盖进贡记录重建、与 `playMatch` 逐局一致、网页 Clint 关掉残局大脑时与开发套件逐局一致、残局大脑实际启用、预算与硬时限回落、协议拒绝与续跑、汇总统计。
+
+## 真人面板评分（panel-scorer.mjs、arm-replay.mjs，第三窗口 S7）
+
+`panel-scorer.mjs` 在固定的真人留出面板上给模型打分（只作描述，不作门控）：1,458 个未辅助真人决策、269 个领出局面和可精确求解的关键局面（§67 的 115 个及 S7a 扩充部分）。输出早炸率、小牌上压王、拆牌代价、与真人一致率、领出接不回来的组合牌比例、精确求解正确率，以及手牌推断 v1 在真人局面上的对数损失，并给出两个模型的配对差。215 维模型的输入与 `midgame-search.mjs --focal-raw-model` 完全一致，只从出牌方自己的手牌和公开信息计算（遮蔽他人手牌，读取即报错）；只有推断对数损失的真值读取四家手牌，不进入任何模型。`--parity=1` 检查包装初始模型与 017 在全部面板局面选牌一致。私有牌谱只读，输出不含记录号、房间号和昵称。`arm-replay.mjs` 按各臂设置重放 S6 的牌局，用于统计残局手牌结构。测试 `ai/danMCai/tests/panel-scorer.test.mjs`（无私有牌谱时跳过对齐测试）。
