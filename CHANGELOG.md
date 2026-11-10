@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2026-11-10 · 第四窗口评测工具：对手也推理
+
+- `ai/danMCai/belief/midgame-search.mjs` 新增 `--opponents=champion|search`（默认不变）：`search` 时对手队同样用推断世界搜索与精确残局，各自只看遮蔽视角，40 张以上仍为冠军 017 贪心，从不使用被测的 215 维模型；行记录新增 `opp` 计数。另加 `--deadline`、`--stop-file`。测试 `midgame-search-opponents.test.mjs` 核对默认路径复现第三窗口 S1 记录、换位恒等和拒绝组合。说明见 `ai/danMCai/belief/README.md`。
+- 只是工具与测试，没有新的训练结果或验收；网页冠军 017、默认 danMCai-reason、菜单与出牌评价不变。
+
 ## 2026-11-10 · GuanZero468071评测权重发布
 
 - 网页归档027使用同一冻结SHA：冠军500场205胜/247负/48平，reason50场22胜/25负/3平。

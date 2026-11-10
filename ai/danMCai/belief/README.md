@@ -88,6 +88,12 @@ node ai/danMCai/belief/metrics.mjs --belief=<模型目录>/belief.onnx --seeds=<
 - `--mode=raw`：不搜索，焦点方每个直接决策都用该模型（止损检查用）；不能与 `--endgame=pimc` 或 `--worlds-source=belief` 同用。
 - `--held-out=1`：只改写报告里“开发种子”的说明并记录 `heldOut`，用于预登记的留出验收。
 
+第四窗口（2026-11-10）新增，仍是工具，不是结果：
+
+- `--opponents=champion|search`（默认 `champion`，行为与记录不变）：`search` 时对手队也用同一套机器决策（`lo`–`hi` 张推断世界搜索、`endgameHi` 以下精确 PIMC），每个座位只看自己的遮蔽视角，世界按同一 `worldSeed(发牌种子, 步数)` 规则生成；`hi` 张以上对手始终是冠军 017 贪心（即现网 9001），从不使用 `--focal-raw-model`。只有 `search` 时每行新增 `opp` 计数（`bandDecisions`、`searched`、`differs`、`endgame*`、`searchMs`、`endgameMs`），`run.json` 记录 `opponents`；`--compare` 把旧运行视为 `champion`。`--opponents=search` 与 `--mode=raw`、或非 `search` 模式带 `--focal-raw-model` 的组合会被拒绝。
+- `--deadline=<ISO>`、`--stop-file=<路径,…>`：每副开始前检查，到时或出现 STOP 文件即停，已完成的牌副保留。
+- 测试 `ai/danMCai/tests/midgame-search-opponents.test.mjs`：默认路径逐字段复现第三窗口 S1 A 臂 20 副（求解器按墙钟预算，`endgameWorldsUsed` 允许每个残局决策差一个世界）；换位恒等；拒绝组合。用途是第四窗口 S6b（对手也推理的验收）。
+
 ## 交接点上界诊断（handover-oracle.mjs，第三窗口 S1）
 
 `handover-oracle.mjs` 估计 40 张交接点以上、以下各丢多少分：A＝现网 9001（直接调用本目录 `midgame-search.mjs` 的决策函数），B＝40 张以上用“看真实发牌”的推演、40 张及以下照常 9001，C＝全程看真实发牌。真实发牌推演读取隐藏手牌，只是上界，不是玩家，也不作训练数据。对手为冠军 017 贪心，单局、不进贡、换位配对；支持 `--deadline`／`--stop-file`，`--summarize=1` 给出 B−A、C−B、A−C 配对差。测试 `ai/danMCai/tests/handover-oracle.test.mjs`（A 臂逐局复现 `midgame-search` 的 `playRound`）。
