@@ -444,3 +444,63 @@ test('whole-match evaluation tally counts complete pair lines only', async () =>
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('a stopped whole-match evaluation shows its partial result and says it is short of plan', () => {
+  const run = mkdtempSync(join(tmpdir(), 'window-dashboard-stopped-'));
+  try {
+    mkdirSync(join(run, 'eval'));
+    writeFileSync(
+      join(run, 'eval', 'report.json'),
+      JSON.stringify({
+        status: 'stopped',
+        summary: {
+          pairs: 60,
+          matches: 120,
+          wins: 89,
+          losses: 19,
+          draws: 12,
+          matchWinRate: 89 / 120,
+          matchScore: 95 / 120,
+          roundWinRate: 0.593,
+          confidence95: { matchScore: [0.721, 0.854] },
+        },
+      }),
+    );
+    writeFileSync(
+      join(run, 'stages.log'),
+      '2029-01-01T00:00:00Z ownertasks start\n2029-01-01T00:00:00Z START T\n2029-01-01T01:00:00Z END T rc=0\n',
+    );
+    const config = {
+      title: 't',
+      deadline: '2029-01-02T00:00:00Z',
+      orchestrators: [{ name: 'q', startMarker: 'ownertasks start', endMarker: 'ownertasks end' }],
+      stages: [
+        {
+          key: 'T',
+          ids: ['T'],
+          title: 't',
+          desc: 'd',
+          kind: 'match-eval',
+          queue: 'q',
+          paths: { out: 'eval' },
+          rule: { type: 'heldout', text: 'r' },
+          total: 500,
+        },
+      ],
+    };
+    const s = snapshot(run, config, {
+      now: Date.parse('2029-01-01T02:00:00Z'),
+      psText: '',
+      machine: false,
+    });
+    const [r] = s.stages[0].results;
+    assert.match(r.heading, /部分结果/);
+    assert.deepEqual(r.rows[0], ['场数', '120 / 计划 500']);
+    assert.deepEqual(r.rows[1], ['推理队 胜／负／平', '89 / 19 / 12']);
+    assert.match(r.rows[2][1], /79\.2% \[72\.1%, 85\.4%\]/);
+    assert.match(r.verdict.text, /仅 60 \/ 预登记 250 副/);
+    assert.equal(r.verdict.tone, 'warn');
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});

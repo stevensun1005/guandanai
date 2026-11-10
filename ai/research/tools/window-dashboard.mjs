@@ -303,14 +303,18 @@ function resultsFor(stage, run, state) {
   switch (stage.kind) {
     case 'match-eval': {
       const dir = p(paths.out);
-      const report = readJSON(join(dir, 'report.json'));
+      const file = readJSON(join(dir, 'report.json'));
+      // reason-match-eval.mjs keeps the numbers under `summary`; a run ended by its STOP file has
+      // status "stopped" and is a partial result, short of the preregistered size.
+      const report = file?.summary || file;
+      const stopped = file?.status === 'stopped';
       const pct = (x) => (x == null ? '—' : `${(x * 100).toFixed(1)}%`);
       if (report) {
         const ci = report.confidence95?.matchScore;
         const shifted = Array.isArray(ci) ? ci.map((x) => x - 0.5) : null;
         out.push(
           block(
-            '最终结果',
+            stopped ? '部分结果（中途叫停，未跑满预登记场数）' : '最终结果',
             [
               ['场数', `${num(report.matches)} / 计划 ${num(stage.total)}`],
               [
