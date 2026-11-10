@@ -1,0 +1,71 @@
+{
+  "featureVersion": "belief-v1",
+  "features": 1238,
+  "targets": 162,
+  "layout": {
+    "own": [
+      0,
+      54
+    ],
+    "unseen": [
+      54,
+      108
+    ],
+    "played": [
+      108,
+      270
+    ],
+    "counts": [
+      270,
+      274
+    ],
+    "out": [
+      274,
+      277
+    ],
+    "level": [
+      277,
+      290
+    ],
+    "shapes": [
+      290,
+      734
+    ],
+    "passOpponent": [
+      734,
+      1178
+    ],
+    "passPartner": [
+      1178,
+      1208
+    ],
+    "leads": [
+      1208,
+      1238
+    ]
+  },
+  "seeds": [
+    4292000000,
+    4292039999
+  ],
+  "band": [
+    41,
+    108
+  ],
+  "every": 2,
+  "block": 250,
+  "temperature": 0,
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "policy": "champion for all four seats (finishing move first, single candidate automatic); greedy at temperature 0, else softmax reseeded per round",
+  "metaFormat": "m.u32: seed, ply, mover, cards on table",
+  "blocks": 160,
+  "rounds": 40000,
+  "rows": 1015349,
+  "plies": 3243029,
+  "workers": 3,
+  "wallSeconds": 3347.451,
+  "rowsPerSecondPerProcess": 102.13292915336461,
+  "note": "rowsPerSecondPerProcess uses each block elapsed time of this invocation and earlier resumed blocks",
+  "finishedAt": "2026-11-10T04:53:00.030Z"
+}

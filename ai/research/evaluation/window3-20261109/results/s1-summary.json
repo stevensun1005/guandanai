@@ -1,0 +1,266 @@
+{
+  "finishedAt": "2026-11-10T05:55:09.318Z",
+  "workerFailures": [],
+  "arms": {
+    "A": {
+      "arm": "A",
+      "armSpec": {
+        "above": "champion",
+        "mid": "search",
+        "end": "search"
+      },
+      "start": 4291000000,
+      "plannedPairs": 400,
+      "completedPairsTotal": 400,
+      "seedRange": [
+        4291000000,
+        4291000399
+      ],
+      "droppedBeyondPrefix": 0,
+      "pairs": 400,
+      "rounds": 800,
+      "focalWins": 419,
+      "focalLosses": 381,
+      "pairsZero": 195,
+      "pairsPositive": 161,
+      "pairsNegative": 44,
+      "meanSignedPoints": 0.28125,
+      "sd": 0.7773571559262025,
+      "ci95": [
+        0.20506899871923215,
+        0.3574310012807679
+      ],
+      "interval": "deal-pair cluster, normal approximation; development seeds; development diagnostic",
+      "focalBandDecisions": 4167,
+      "searchedDecisions": 4167,
+      "decisionsDifferentFromChampion": 849,
+      "fractionDiffering": 0.20374370050395968,
+      "tiedRolloutArgmax": 140,
+      "meanCandidatesSearched": 4.367170626349892,
+      "secondsPerSearchedDecision": 0.5198015094355609,
+      "beliefSecondsPerSearchedDecision": 0.0011031087492190718,
+      "inferencesPerSearchedDecision": 450.2891768658507,
+      "meanInSearchGainEstimate": 0.14632829373650108,
+      "meanPairSeconds": 9.262505298002509,
+      "endgame": {
+        "focalEndgameDecisions": 2189,
+        "searchedDecisions": 2189,
+        "fallbacksToChampion": 3,
+        "decisionsDifferentFromChampion": 260,
+        "fractionDiffering": 0.1187756966651439,
+        "tiedLabelMaximum": 1537,
+        "meanWorldsUsed": 7.98172681589767,
+        "secondsPerSearchedDecision": 0.6213853519712194,
+        "maxSecondsPerSearchedDecision": 135.9985968749998,
+        "beliefSecondsPerSearchedDecision": 0.0012376084015567569,
+        "note": "seconds include the champion forward pass of the decision; solver results depend on the 3 s per-world budget and the worker transposition table, so they are not bit-reproducible"
+      },
+      "oracle": {
+        "focalAboveDecisions": 16797,
+        "oracleDecisions": 0,
+        "oracleDecisionsDifferentFromChampion": 0,
+        "oracleFractionDiffering": null,
+        "oracleSecondsPerDecision": null,
+        "handoverRounds": 798,
+        "handoverCorrQResult": 0.6696668538942018,
+        "handoverNote": "champion max Q at the focal first real decision with <= hi cards vs that round result (descriptive)"
+      },
+      "summarizedAt": "2026-11-10T05:55:09.295Z"
+    },
+    "B": {
+      "arm": "B",
+      "armSpec": {
+        "above": "oracle",
+        "mid": "search",
+        "end": "search"
+      },
+      "start": 4291000000,
+      "plannedPairs": 400,
+      "completedPairsTotal": 400,
+      "seedRange": [
+        4291000000,
+        4291000399
+      ],
+      "droppedBeyondPrefix": 0,
+      "pairs": 400,
+      "rounds": 800,
+      "focalWins": 663,
+      "focalLosses": 137,
+      "pairsZero": 34,
+      "pairsPositive": 352,
+      "pairsNegative": 14,
+      "meanSignedPoints": 1.86875,
+      "sd": 1.134842767862326,
+      "ci95": [
+        1.7575354087494919,
+        1.979964591250508
+      ],
+      "interval": "deal-pair cluster, normal approximation; development seeds; development diagnostic",
+      "focalBandDecisions": 4244,
+      "searchedDecisions": 4244,
+      "decisionsDifferentFromChampion": 763,
+      "fractionDiffering": 0.1797832233741753,
+      "tiedRolloutArgmax": 122,
+      "meanCandidatesSearched": 4.36875589066918,
+      "secondsPerSearchedDecision": 0.5115078476277067,
+      "beliefSecondsPerSearchedDecision": 0.001132946066686037,
+      "inferencesPerSearchedDecision": 440.0518378887842,
+      "meanInSearchGainEstimate": 0.13254005655042414,
+      "meanPairSeconds": 26.00614484323748,
+      "endgame": {
+        "focalEndgameDecisions": 2062,
+        "searchedDecisions": 2062,
+        "fallbacksToChampion": 2,
+        "decisionsDifferentFromChampion": 217,
+        "fractionDiffering": 0.1052376333656644,
+        "tiedLabelMaximum": 1336,
+        "meanWorldsUsed": 7.987390882638215,
+        "secondsPerSearchedDecision": 0.6611941117972893,
+        "maxSecondsPerSearchedDecision": 59.053376667,
+        "beliefSecondsPerSearchedDecision": 0.0010588192803112357,
+        "note": "seconds include the champion forward pass of the decision; solver results depend on the 3 s per-world budget and the worker transposition table, so they are not bit-reproducible"
+      },
+      "oracle": {
+        "focalAboveDecisions": 16566,
+        "oracleDecisions": 16566,
+        "oracleDecisionsDifferentFromChampion": 922,
+        "oracleFractionDiffering": 0.05565616322588434,
+        "oracleSecondsPerDecision": 0.40805952368423154,
+        "handoverRounds": 799,
+        "handoverCorrQResult": 0.5018730949326737,
+        "handoverNote": "champion max Q at the focal first real decision with <= hi cards vs that round result (descriptive)"
+      },
+      "summarizedAt": "2026-11-10T05:55:09.303Z"
+    },
+    "C": {
+      "arm": "C",
+      "armSpec": {
+        "above": "oracle",
+        "mid": "oracle",
+        "end": "oracle"
+      },
+      "start": 4291000000,
+      "plannedPairs": 400,
+      "completedPairsTotal": 400,
+      "seedRange": [
+        4291000000,
+        4291000399
+      ],
+      "droppedBeyondPrefix": 0,
+      "pairs": 400,
+      "rounds": 800,
+      "focalWins": 755,
+      "focalLosses": 45,
+      "pairsZero": 2,
+      "pairsPositive": 398,
+      "pairsNegative": 0,
+      "meanSignedPoints": 2.62125,
+      "sd": 0.6788412931261104,
+      "ci95": [
+        2.554723553273641,
+        2.6877764467263585
+      ],
+      "interval": "deal-pair cluster, normal approximation; development seeds; development diagnostic",
+      "focalBandDecisions": 4340,
+      "searchedDecisions": 0,
+      "decisionsDifferentFromChampion": 0,
+      "fractionDiffering": null,
+      "tiedRolloutArgmax": 0,
+      "meanCandidatesSearched": null,
+      "secondsPerSearchedDecision": null,
+      "beliefSecondsPerSearchedDecision": null,
+      "inferencesPerSearchedDecision": null,
+      "meanInSearchGainEstimate": null,
+      "meanPairSeconds": 17.412789174584994,
+      "endgame": {
+        "focalEndgameDecisions": 2000,
+        "searchedDecisions": 0,
+        "fallbacksToChampion": 0,
+        "decisionsDifferentFromChampion": 0,
+        "fractionDiffering": null,
+        "tiedLabelMaximum": 0,
+        "meanWorldsUsed": null,
+        "secondsPerSearchedDecision": null,
+        "maxSecondsPerSearchedDecision": 0,
+        "beliefSecondsPerSearchedDecision": null,
+        "note": "seconds include the champion forward pass of the decision; solver results depend on the 3 s per-world budget and the worker transposition table, so they are not bit-reproducible"
+      },
+      "oracle": {
+        "focalAboveDecisions": 16566,
+        "oracleDecisions": 22906,
+        "oracleDecisionsDifferentFromChampion": 951,
+        "oracleFractionDiffering": 0.04151750633021915,
+        "oracleSecondsPerDecision": 0.29946894014175296,
+        "handoverRounds": 799,
+        "handoverCorrQResult": 0.47916777725427795,
+        "handoverNote": "champion max Q at the focal first real decision with <= hi cards vs that round result (descriptive)"
+      },
+      "summarizedAt": "2026-11-10T05:55:09.316Z"
+    }
+  },
+  "compare": {
+    "B-A": {
+      "difference": "B minus A, focal mean signed round points per deal pair",
+      "commonPairs": 400,
+      "seeds": [
+        4291000000,
+        4291000399
+      ],
+      "meanA": 0.28125,
+      "meanB": 1.86875,
+      "meanDifference": 1.5875,
+      "sdDifference": 1.290933780277926,
+      "ci95": [
+        1.4609884895327632,
+        1.7140115104672367
+      ],
+      "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+      "pairsIdentical": 51,
+      "pairsBBetter": 326,
+      "pairsABetter": 23,
+      "note": "development diagnostic; the oracle reads hidden cards (upper bound, not a player)"
+    },
+    "C-B": {
+      "difference": "B minus A, focal mean signed round points per deal pair",
+      "commonPairs": 400,
+      "seeds": [
+        4291000000,
+        4291000399
+      ],
+      "meanA": 1.86875,
+      "meanB": 2.62125,
+      "meanDifference": 0.7525,
+      "sdDifference": 1.0393239319812515,
+      "ci95": [
+        0.6506462546658373,
+        0.8543537453341626
+      ],
+      "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+      "pairsIdentical": 201,
+      "pairsBBetter": 199,
+      "pairsABetter": 0,
+      "note": "development diagnostic; the oracle reads hidden cards (upper bound, not a player)"
+    },
+    "C-A": {
+      "difference": "B minus A, focal mean signed round points per deal pair",
+      "commonPairs": 400,
+      "seeds": [
+        4291000000,
+        4291000399
+      ],
+      "meanA": 0.28125,
+      "meanB": 2.62125,
+      "meanDifference": 2.34,
+      "sdDifference": 1.0084355982856432,
+      "ci95": [
+        2.241173311368007,
+        2.438826688631993
+      ],
+      "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+      "pairsIdentical": 14,
+      "pairsBBetter": 384,
+      "pairsABetter": 2,
+      "note": "development diagnostic; the oracle reads hidden cards (upper bound, not a player)"
+    }
+  }
+}

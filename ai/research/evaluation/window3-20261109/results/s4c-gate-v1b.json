@@ -1,0 +1,54 @@
+{
+  "note": "development gate (eligibility for a paired play test only); not acceptance, no play claim",
+  "positions41to60": {
+    "planned": 160,
+    "completed": 160
+  },
+  "worlds": 64,
+  "regression41to60": {
+    "alternatives": 554,
+    "intercept": 0.166,
+    "interceptCI": [
+      -0.195,
+      0.517
+    ],
+    "rollout": 0.189,
+    "rolloutCI": [
+      -0.384,
+      0.703
+    ],
+    "qGap": 1.115,
+    "qGapCI": [
+      0.218,
+      1.934
+    ],
+    "reference_v1_128worlds": "rollout 0.03 [-0.36, 0.46], Q gap 1.24 [0.69, 1.72] (calibration.md, all 320 positions)"
+  },
+  "logLoss": {
+    "41-60": {
+      "v1": 0.7754,
+      "v1b": 0.9999,
+      "v1bMinusV1": 0.2246
+    },
+    "61-80": {
+      "v1": 0.9148,
+      "v1b": 1.0703,
+      "v1bMinusV1": 0.1555
+    },
+    "81-108": {
+      "v1b": 1.0846,
+      "uniform": 1.0902,
+      "gainOverUniform": 0.0056,
+      "decisions": 2758,
+      "weighting": "decision-weighted over the 81-100 and 101-120 bands of metrics.mjs"
+    },
+    "seeds": "3990000000..3990000299 (calibration self-play seeds; held out from both v1 and v1b training), every 2nd turn"
+  },
+  "criteria": {
+    "1_rolloutLowerBound>=0.5_and_interceptCovers0": false,
+    "3_81to108_gainOverUniform>=0.05": false,
+    "2_logLoss41to80_notWorseThanV1By>0.01": false
+  },
+  "decision": "not eligible",
+  "decisionShort": "not-eligible"
+}

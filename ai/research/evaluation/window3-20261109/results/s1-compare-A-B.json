@@ -1,0 +1,21 @@
+{
+  "difference": "B minus A, focal mean signed round points per deal pair",
+  "commonPairs": 400,
+  "seeds": [
+    4291000000,
+    4291000399
+  ],
+  "meanA": 0.28125,
+  "meanB": 1.86875,
+  "meanDifference": 1.5875,
+  "sdDifference": 1.290933780277926,
+  "ci95": [
+    1.4609884895327632,
+    1.7140115104672367
+  ],
+  "interval": "paired deal-cluster normal approximation; development seeds, not held-out",
+  "pairsIdentical": 51,
+  "pairsBBetter": 326,
+  "pairsABetter": 23,
+  "note": "development diagnostic; the oracle reads hidden cards (upper bound, not a player)"
+}

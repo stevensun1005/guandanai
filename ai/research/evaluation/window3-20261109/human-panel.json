@@ -78,6 +78,20 @@
       "what": "durable copy of the audit rows (the scratchpad may be cleaned); byte-identical",
       "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/inputs/w3design/audit-rows.json",
       "sha256": "29bddf765ecca4126ea4acfb787e4d05383cab4871df603033cc24f305ee8d28"
+    },
+    {
+      "at": "2026-11-10T06:00:30Z",
+      "what": "S7a solver panel summary (M4), fixed before any 017w export was scored",
+      "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S7a/summary.json",
+      "sha256": "3419fd3092bb94d94e22b898f80a79291ad2fcf368fdf0f91e1deddb2284d7fe"
+    },
+    {
+      "at": "2026-11-10T12:07:32Z",
+      "what": "S7a solver panel summary (M4), repair run (repair after environment failure; inputs and rules unchanged; fixed before any 017w panel score; records from the SHA-verified copy inputs/human-raw); supersedes the 2026-11-10T06:00:30Z entry, whose summary had 0 of 31 rounds (environment failure); fixed before any 017w export was scored",
+      "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S7a/summary.json",
+      "sha256": "ed5ef8a3632b513b98a24f7e8cfbe46af52720af27ba6a1bb3ee270789b9c252",
+      "roundsComplete": 3,
+      "roundsPlanned": 31
     }
   ]
 }

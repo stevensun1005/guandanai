@@ -1,0 +1,982 @@
+{
+  "schema": "w3-s7-report-v1",
+  "kind": "descriptive diagnostics (M5); no number in this file is a gate, an acceptance or a win rate; S6 is the only acceptance",
+  "generatedAt": "2026-11-10T15:49:03Z",
+  "privacy": "aggregates only; positions by anonymous index; no nickname, room, record id, match id or file name",
+  "models": {
+    "017": {
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+    },
+    "017w": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train/models/v000083172.onnx",
+      "sha256": "f00e662206844b707b7efc0d1c729784754dd93c41a9ad2f173f40a80a62fec6",
+      "step": 83172,
+      "version": "v000083172",
+      "researchName": "017w-v000083172",
+      "status": "research network under test; not web, not champion, not default",
+      "note": "from S3/final-export.txt (queue, after the 09:00 stop)"
+    },
+    "beliefV1": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+  },
+  "files": {
+    "S7/scorer.mjs": "b6372ee7139807148005af43586091ea1da6534aa26d3b5b97cdf5a35f4a2071",
+    "S7/arm-replay.mjs": "b8b8eb2c7764f4aaf1f6307f43aeab82470d55b70eb8825e7a028a6d5cfbb1f2",
+    "scripts/s7.sh": "e6e838b42284547568546d192c23fcbe3f15588c171f057475438ca0fb63e8a9",
+    "scripts/s7_report.py": "4ed8b83ab23639b71eb5cbfaae27798ed9fbab1c9468e5a5a382bfbe68620c04",
+    "S7/panel.json": "82ba0d6a93ad512b8c663e5cdf3343be07f336c42eb3a25db019a1fc6b90a84a",
+    "S7/parity.json": "d99d04e6033353ea5f02397baff08d951d90987eb567aae53081ad5f56396249",
+    "S7/arm-replay.json": "bbe3a3ffa035018303abbfc3ace8d1547360697531bb691c3f58a8985289c344",
+    "S6/compare.json": "a750d9d87dff487c14948402dda58247e2f786bb416ea10092f7a50ef743c614",
+    "S7a/summary.json": "ed5ef8a3632b513b98a24f7e8cfbe46af52720af27ba6a1bb3ee270789b9c252",
+    "human-panel.json": "2daaf40d34e8a8187d5bfa79b7a73e963e6a35ba17b07f2b8bf3de8824d26008"
+  },
+  "scorerAcceptance": {
+    "model": "v000000000",
+    "identical": 1458,
+    "positions": 1458,
+    "leadsIdentical": 269,
+    "leads": 269,
+    "solverPositionsIdentical": 115,
+    "solverPositions": 115,
+    "publishedMatch": {
+      "decisions": {
+        "got": 1458,
+        "published": 1458,
+        "match": true
+      },
+      "bomb": {
+        "got": [
+          368,
+          1022
+        ],
+        "published": [
+          368,
+          1022
+        ],
+        "match": true
+      },
+      "joker": {
+        "got": [
+          22,
+          88
+        ],
+        "published": [
+          22,
+          88
+        ],
+        "match": true
+      },
+      "structureCost": {
+        "got": [
+          506,
+          1026
+        ],
+        "published": [
+          506,
+          1026
+        ],
+        "match": true
+      },
+      "agreement": {
+        "got": [
+          651,
+          1458
+        ],
+        "published": [
+          651,
+          1458
+        ],
+        "match": true
+      },
+      "leads": {
+        "got": 269,
+        "published": 269,
+        "match": true
+      },
+      "uncoveredMultiLead": {
+        "got": [
+          40,
+          269
+        ],
+        "published": [
+          40,
+          269
+        ],
+        "match": true
+      },
+      "ownerPattern": {
+        "got": [
+          24,
+          269
+        ],
+        "published": [
+          24,
+          269
+        ],
+        "match": true
+      },
+      "solverCritical": {
+        "got": [
+          84,
+          115
+        ],
+        "published": [
+          84,
+          115
+        ],
+        "match": true
+      }
+    },
+    "pass": true,
+    "when": "queue S7-scorer at 07:00 Toronto with train-init/v000000000.onnx"
+  },
+  "humanPanel": {
+    "label": "descriptive, not a gate",
+    "counts": {
+      "decisions": 1458,
+      "bombLegalFollows": 1022,
+      "jokerOpportunities": 88,
+      "leadPositions": 269,
+      "solverCritical": 115,
+      "s7aCritical": 4,
+      "rounds": 31
+    },
+    "records": {
+      "rounds": 31,
+      "registeredInPanel": 31,
+      "panelFile": {
+        "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/human-panel.json",
+        "sha256": "2daaf40d34e8a8187d5bfa79b7a73e963e6a35ba17b07f2b8bf3de8824d26008"
+      },
+      "trust": "unverified_browser"
+    },
+    "reproduction": {
+      "auditRows": {
+        "auditRows": 1458,
+        "matched": 1458,
+        "championIndexEqual": 1458,
+        "humanIndexEqual": 1458,
+        "championCostEqual": 1458,
+        "humanCostEqual": 1458,
+        "bombOppEqual": 1458,
+        "sha256": "29bddf765ecca4126ea4acfb787e4d05383cab4871df603033cc24f305ee8d28"
+      },
+      "leadRows": {
+        "leadRows": 269,
+        "matched": 269,
+        "championEqual": 269,
+        "humanEqual": 269,
+        "ctlEqual": 269,
+        "sha256": "d7e95f36e7a3b15b1937da19bb97f8d8c004cc0693fc7dd249d570734a454c13"
+      }
+    },
+    "solverChecks": {
+      "keepsValueChecks": 23,
+      "overBudget": 0,
+      "skippedForTime": 0,
+      "seconds": 3.198,
+      "cap": "10 min in total",
+      "storedChampionConsistency": {
+        "checked": 119,
+        "inconsistent": 0
+      }
+    },
+    "models": [
+      {
+        "label": "017",
+        "path": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+        "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+        "extrasWidth": 0,
+        "scoring": "no extras: championValues(policyState) as the W3 audit"
+      },
+      {
+        "label": "017w",
+        "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train/models/v000083172.onnx",
+        "sha256": "f00e662206844b707b7efc0d1c729784754dd93c41a9ad2f173f40a80a62fec6",
+        "extrasWidth": 215,
+        "scoring": "focal raw 215: midgame-search.mjs createFocalRawScorer on rawPolicyState(masked game) with 53 public extras + 162 beliefMarginals(belief, publicView(masked game, mover))"
+      }
+    ],
+    "metrics": {
+      "017": {
+        "bomb": {
+          "what": "bombed / bomb-legal follow (real decision, no finishing move, following, bomb legal)",
+          "num": 368,
+          "den": 1022,
+          "value": 0.36007827788649704,
+          "ci95": [
+            0.3060263653483992,
+            0.4107142857142857
+          ],
+          "clusters": 30,
+          "label": "descriptive, not a gate"
+        },
+        "joker": {
+          "what": "joker played / joker possible on an opponent's single or pair of K or lower (no finishing move)",
+          "num": 22,
+          "den": 88,
+          "value": 0.25,
+          "ci95": [
+            0.14285714285714285,
+            0.34
+          ],
+          "clusters": 27,
+          "label": "descriptive, not a gate"
+        },
+        "cost": {
+          "what": "structure cost per play (plays-to-empty after minus (before - 1); passes excluded)",
+          "num": 506,
+          "den": 1026,
+          "value": 0.49317738791423,
+          "ci95": [
+            0.4225352112676056,
+            0.5737211634904714
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "agree": {
+          "what": "same move as the unassisted human",
+          "num": 651,
+          "den": 1458,
+          "value": 0.44650205761316875,
+          "ci95": [
+            0.4144404332129964,
+            0.4803194523673702
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "unc": {
+          "what": "uncovered multi-card lead / all lead positions",
+          "num": 40,
+          "den": 269,
+          "value": 0.14869888475836432,
+          "ci95": [
+            0.09818181818181818,
+            0.20074349442379183
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "uncB": {
+          "what": "uncovered and beatable multi-card lead / all lead positions",
+          "num": 29,
+          "den": 269,
+          "value": 0.10780669144981413,
+          "ci95": [
+            0.06643356643356643,
+            0.15602836879432624
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "owner": {
+          "what": "owner's pattern: controlling single/pair available AND uncovered multi-card lead / all lead positions",
+          "num": 24,
+          "den": 269,
+          "value": 0.08921933085501858,
+          "ci95": [
+            0.047619047619047616,
+            0.13523131672597866
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "ownerB": {
+          "what": "owner's pattern, beatable lead only / all lead positions",
+          "num": 18,
+          "den": 269,
+          "value": 0.06691449814126393,
+          "ci95": [
+            0.032520325203252036,
+            0.1079136690647482
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "solver": {
+          "what": "section-67 critical decisions: chosen move keeps the exact value",
+          "num": 84,
+          "den": 115,
+          "value": 0.7304347826086957,
+          "ci95": [
+            0.6513761467889908,
+            0.8111111111111111
+          ],
+          "clusters": 24,
+          "unscored": 0,
+          "label": "descriptive, not a gate"
+        },
+        "solverUnassisted": {
+          "what": "section-67 critical decisions, unassisted only",
+          "num": 59,
+          "den": 79,
+          "value": 0.7468354430379747,
+          "ci95": [
+            0.6756756756756757,
+            0.8309859154929577
+          ],
+          "clusters": 22,
+          "label": "descriptive, not a gate"
+        },
+        "s7a": {
+          "what": "S7a critical decisions: chosen move keeps the exact value",
+          "num": 4,
+          "den": 4,
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "clusters": 2,
+          "unscored": 0,
+          "label": "descriptive, not a gate"
+        }
+      },
+      "017w": {
+        "bomb": {
+          "what": "bombed / bomb-legal follow (real decision, no finishing move, following, bomb legal)",
+          "num": 429,
+          "den": 1022,
+          "value": 0.4197651663405088,
+          "ci95": [
+            0.36629667003027244,
+            0.470960929250264
+          ],
+          "clusters": 30,
+          "label": "descriptive, not a gate"
+        },
+        "joker": {
+          "what": "joker played / joker possible on an opponent's single or pair of K or lower (no finishing move)",
+          "num": 17,
+          "den": 88,
+          "value": 0.19318181818181818,
+          "ci95": [
+            0.09210526315789473,
+            0.2808988764044944
+          ],
+          "clusters": 27,
+          "label": "descriptive, not a gate"
+        },
+        "cost": {
+          "what": "structure cost per play (plays-to-empty after minus (before - 1); passes excluded)",
+          "num": 487,
+          "den": 1077,
+          "value": 0.4521819870009285,
+          "ci95": [
+            0.3820627802690583,
+            0.5275895450145208
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "agree": {
+          "what": "same move as the unassisted human",
+          "num": 634,
+          "den": 1458,
+          "value": 0.4348422496570645,
+          "ci95": [
+            0.4062268346923647,
+            0.46266829865361075
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "unc": {
+          "what": "uncovered multi-card lead / all lead positions",
+          "num": 32,
+          "den": 269,
+          "value": 0.11895910780669144,
+          "ci95": [
+            0.0776255707762557,
+            0.15755627009646303
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "uncB": {
+          "what": "uncovered and beatable multi-card lead / all lead positions",
+          "num": 21,
+          "den": 269,
+          "value": 0.07806691449814127,
+          "ci95": [
+            0.04716981132075472,
+            0.1124031007751938
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "owner": {
+          "what": "owner's pattern: controlling single/pair available AND uncovered multi-card lead / all lead positions",
+          "num": 21,
+          "den": 269,
+          "value": 0.07806691449814127,
+          "ci95": [
+            0.04230769230769231,
+            0.11646586345381527
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "ownerB": {
+          "what": "owner's pattern, beatable lead only / all lead positions",
+          "num": 15,
+          "den": 269,
+          "value": 0.055762081784386616,
+          "ci95": [
+            0.02843601895734597,
+            0.08503401360544217
+          ],
+          "clusters": 31,
+          "label": "descriptive, not a gate"
+        },
+        "solver": {
+          "what": "section-67 critical decisions: chosen move keeps the exact value",
+          "num": 86,
+          "den": 115,
+          "value": 0.7478260869565218,
+          "ci95": [
+            0.6914893617021277,
+            0.8059701492537313
+          ],
+          "clusters": 24,
+          "unscored": 0,
+          "label": "descriptive, not a gate"
+        },
+        "solverUnassisted": {
+          "what": "section-67 critical decisions, unassisted only",
+          "num": 61,
+          "den": 79,
+          "value": 0.7721518987341772,
+          "ci95": [
+            0.6938775510204082,
+            0.8714285714285714
+          ],
+          "clusters": 22,
+          "label": "descriptive, not a gate"
+        },
+        "s7a": {
+          "what": "S7a critical decisions: chosen move keeps the exact value",
+          "num": 4,
+          "den": 4,
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "clusters": 2,
+          "unscored": 0,
+          "label": "descriptive, not a gate"
+        }
+      }
+    },
+    "choicesDifferentFrom017": {
+      "017": {
+        "decisions": 0,
+        "leads": 0,
+        "solverPositions": 0
+      },
+      "017w": {
+        "decisions": 494,
+        "leads": 124,
+        "solverPositions": 39
+      }
+    },
+    "humans": {
+      "note": "the recorded unassisted human moves at the same positions (reference)",
+      "bomb": {
+        "num": 114,
+        "den": 1022,
+        "value": 0.11154598825831702,
+        "ci95": [
+          0.09776536312849161,
+          0.12544378698224853
+        ],
+        "clusters": 30
+      },
+      "joker": {
+        "num": 12,
+        "den": 88,
+        "value": 0.13636363636363635,
+        "ci95": [
+          0.05194805194805195,
+          0.22
+        ],
+        "clusters": 27
+      },
+      "cost": {
+        "num": 252,
+        "den": 784,
+        "value": 0.32142857142857145,
+        "ci95": [
+          0.2853185595567867,
+          0.35454545454545455
+        ],
+        "clusters": 31
+      },
+      "unc": {
+        "num": 20,
+        "den": 269,
+        "value": 0.07434944237918216,
+        "ci95": [
+          0.045283018867924525,
+          0.10545454545454545
+        ],
+        "clusters": 31
+      },
+      "owner": {
+        "num": 15,
+        "den": 269,
+        "value": 0.055762081784386616,
+        "ci95": [
+          0.029304029304029304,
+          0.08433734939759036
+        ],
+        "clusters": 31
+      },
+      "solver": {
+        "num": 98,
+        "den": 115,
+        "value": 0.8521739130434782,
+        "ci95": [
+          0.7894736842105263,
+          0.9111111111111111
+        ],
+        "clusters": 24
+      },
+      "s7a": {
+        "num": 4,
+        "den": 4,
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ],
+        "clusters": 2
+      },
+      "label": "descriptive, not a gate"
+    },
+    "paired017wMinus017": {
+      "bomb": {
+        "point": 0.059686888454011766,
+        "ci95": [
+          0.03587962962962965,
+          0.08730964467005081
+        ],
+        "positions": 1022,
+        "clusters": 30,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "joker": {
+        "point": -0.05681818181818182,
+        "ci95": [
+          -0.11904761904761907,
+          0
+        ],
+        "positions": 88,
+        "clusters": 27,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "cost": {
+        "point": -0.040995400913301505,
+        "ci95": [
+          -0.07765711990139851,
+          -0.0041948226917922216
+        ],
+        "positions": 1458,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "agree": {
+        "point": -0.011659807956104273,
+        "ci95": [
+          -0.03263598326359829,
+          0.006065200909780133
+        ],
+        "positions": 1458,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "unc": {
+        "point": -0.029739776951672875,
+        "ci95": [
+          -0.06617647058823531,
+          0.0034722222222222238
+        ],
+        "positions": 269,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "uncB": {
+        "point": -0.02973977695167286,
+        "ci95": [
+          -0.06584362139917695,
+          0.0031152647975077885
+        ],
+        "positions": 269,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "owner": {
+        "point": -0.011152416356877318,
+        "ci95": [
+          -0.036630036630036625,
+          0.01581027667984189
+        ],
+        "positions": 269,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "ownerB": {
+        "point": -0.011152416356877318,
+        "ci95": [
+          -0.0364963503649635,
+          0.015444015444015441
+        ],
+        "positions": 269,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "multi": {
+        "point": -0.009842788790157209,
+        "ci95": [
+          -0.08222811671087538,
+          0.062246963562753055
+        ],
+        "positions": 269,
+        "clusters": 31,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "solver": {
+        "point": 0.017391304347826098,
+        "ci95": [
+          -0.04629629629629628,
+          0.08196721311475419
+        ],
+        "positions": 115,
+        "clusters": 24,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "solverUnassisted": {
+        "point": 0.025316455696202556,
+        "ci95": [
+          -0.05882352941176472,
+          0.12941176470588234
+        ],
+        "positions": 79,
+        "clusters": 22,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      },
+      "s7a": {
+        "point": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "positions": 4,
+        "clusters": 2,
+        "interval": "round-cluster bootstrap, 2,000 draws, percentile; descriptive, not a test",
+        "label": "descriptive, not a gate"
+      }
+    },
+    "timing": {
+      "scoreSeconds": 20.098,
+      "totalSeconds": 23.543
+    }
+  },
+  "beliefOnHumanPositions": {
+    "what": "belief v1 log loss per unseen copy (network probabilities on the mover public view; truth = the recorded hands; metrics.mjs scoreProbabilities) vs the uniform baseline; difference < 0 = the network is better than uniform; round-cluster bootstrap",
+    "selfPlayReference": {
+      "belief": 0.793,
+      "uniform": 0.976,
+      "note": "champion self-play (S7 plan)"
+    },
+    "trainingRangeNote": "belief v1 was trained on single level-2 rounds without tribute at 21-80 cards (champion self-play); human rounds include other levels, tribute and > 80 cards (outside that range)",
+    "model": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "featureVersion": "belief-v1"
+    },
+    "all": {
+      "positions": 1458,
+      "copies": 69540,
+      "beliefLogLossPerCopy": 0.9363346644448635,
+      "uniformLogLossPerCopy": 1.0304961370729362,
+      "differenceBeliefMinusUniform": -0.09416147262807259,
+      "ci95": [
+        -0.11359783490062185,
+        -0.07243316009367731
+      ]
+    },
+    "trainingBand21to80": {
+      "positions": 842,
+      "copies": 32590,
+      "beliefLogLossPerCopy": 0.8400402425957212,
+      "uniformLogLossPerCopy": 0.9786029227672833,
+      "differenceBeliefMinusUniform": -0.1385626801715622,
+      "ci95": [
+        -0.16855690396373516,
+        -0.10719328084952548
+      ]
+    },
+    "byBand": {
+      ">80": {
+        "positions": 523,
+        "copies": 36264,
+        "beliefLogLossPerCopy": 1.034617502300544,
+        "uniformLogLossPerCopy": 1.0875625900542734,
+        "differenceBeliefMinusUniform": -0.052945087753729254,
+        "ci95": [
+          -0.06641483258320079,
+          -0.03709934802277389
+        ]
+      },
+      "61-80": {
+        "positions": 323,
+        "copies": 17110,
+        "beliefLogLossPerCopy": 0.9366844993210417,
+        "uniformLogLossPerCopy": 1.0569245658645692,
+        "differenceBeliefMinusUniform": -0.12024006654352747,
+        "ci95": [
+          -0.14444898332461328,
+          -0.09787674640703604
+        ]
+      },
+      "41-60": {
+        "positions": 272,
+        "copies": 10417,
+        "beliefLogLossPerCopy": 0.8255046455580133,
+        "uniformLogLossPerCopy": 0.9774462323088923,
+        "differenceBeliefMinusUniform": -0.15194158675087896,
+        "ci95": [
+          -0.19977291381561743,
+          -0.10428075590375585
+        ]
+      },
+      "21-40": {
+        "positions": 247,
+        "copies": 5063,
+        "beliefLogLossPerCopy": 0.5433454137929482,
+        "uniformLogLossPerCopy": 0.7163011118074832,
+        "differenceBeliefMinusUniform": -0.17295569801453503,
+        "ci95": [
+          -0.22470037731930895,
+          -0.11391524747422495
+        ]
+      },
+      "<=20": {
+        "positions": 93,
+        "copies": 686,
+        "beliefLogLossPerCopy": 0.3154984779508664,
+        "uniformLogLossPerCopy": 0.4790996404341898,
+        "differenceBeliefMinusUniform": -0.1636011624833234,
+        "ci95": [
+          -0.24090483608730398,
+          -0.06754137441005972
+        ]
+      }
+    },
+    "label": "descriptive, not a gate"
+  },
+  "s7aSummary": {
+    "label": "descriptive, not a gate",
+    "sha256": "ed5ef8a3632b513b98a24f7e8cfbe46af52720af27ba6a1bb3ee270789b9c252",
+    "critical": {
+      "human": {
+        "decisions": 4,
+        "rounds": 2,
+        "optimal": 4,
+        "optimalRate": 1,
+        "ci95": [
+          1,
+          1
+        ],
+        "meanRegret": 0,
+        "totalRegret": 0
+      },
+      "champion": {
+        "decisions": 4,
+        "rounds": 2,
+        "optimal": 4,
+        "optimalRate": 1,
+        "ci95": [
+          1,
+          1
+        ],
+        "meanRegret": 0,
+        "totalRegret": 0
+      },
+      "student": {
+        "decisions": 3,
+        "rounds": 2,
+        "optimal": 3,
+        "optimalRate": 1,
+        "ci95": [
+          1,
+          1
+        ],
+        "meanRegret": 0,
+        "totalRegret": 0
+      }
+    },
+    "rounds": 3
+  },
+  "armReplay": {
+    "runs": [
+      {
+        "label": "A",
+        "dir": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S6/A",
+        "storedContiguousPairs": 1322,
+        "focalRawModel": null,
+        "focalRawModelSHA256": null
+      },
+      {
+        "label": "B",
+        "dir": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S6/B",
+        "storedContiguousPairs": 1664,
+        "focalRawModel": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train/models/v000083172.onnx",
+        "focalRawModelSHA256": "f00e662206844b707b7efc0d1c729784754dd93c41a9ad2f173f40a80a62fec6"
+      }
+    ],
+    "qModel": {
+      "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train/models/v000083172.onnx",
+      "sha256": "f00e662206844b707b7efc0d1c729784754dd93c41a9ad2f173f40a80a62fec6"
+    },
+    "pairsReplayed": 217,
+    "seedRange": [
+      4294500000,
+      4294500216
+    ],
+    "stopReason": "deadline or STOP",
+    "seconds": 2002.754,
+    "summary": {
+      "A": {
+        "rounds": 434,
+        "matchedStoredRows": 434,
+        "endSingles": {
+          "n": 253,
+          "value": 1.5849802371541502
+        },
+        "endJoker": {
+          "num": 51,
+          "den": 253,
+          "value": 0.2015810276679842
+        },
+        "endBomb": {
+          "num": 11,
+          "den": 253,
+          "value": 0.043478260869565216
+        },
+        "firstOutBomb": {
+          "num": 177,
+          "den": 632,
+          "value": 0.2800632911392405
+        },
+        "firstOutJoker": {
+          "num": 234,
+          "den": 632,
+          "value": 0.370253164556962
+        },
+        "seatRoundsWithBombOpportunity": 822,
+        "seatRoundsWithBombWhileFollowing": 740,
+        "firstBombTableCardsMedian": 72,
+        "handover": {
+          "rounds": 432,
+          "corrQ017Result": 0.6832877212130255,
+          "corrQModelResult": 0.6874357791079346
+        }
+      },
+      "B": {
+        "rounds": 434,
+        "matchedStoredRows": 434,
+        "endSingles": {
+          "n": 260,
+          "value": 1.646153846153846
+        },
+        "endJoker": {
+          "num": 64,
+          "den": 260,
+          "value": 0.24615384615384617
+        },
+        "endBomb": {
+          "num": 12,
+          "den": 260,
+          "value": 0.046153846153846156
+        },
+        "firstOutBomb": {
+          "num": 178,
+          "den": 666,
+          "value": 0.2672672672672673
+        },
+        "firstOutJoker": {
+          "num": 269,
+          "den": 666,
+          "value": 0.4039039039039039
+        },
+        "seatRoundsWithBombOpportunity": 825,
+        "seatRoundsWithBombWhileFollowing": 769,
+        "firstBombTableCardsMedian": 77,
+        "handover": {
+          "rounds": 429,
+          "corrQ017Result": 0.7148580165471801,
+          "corrQModelResult": 0.7160361571150177
+        }
+      }
+    },
+    "baselines": {
+      "SIM9001": {
+        "endSingles": 1.6,
+        "endJoker": 0.208,
+        "endBomb": 0.033,
+        "firstOutBomb": 0.305,
+        "firstOutJoker": 0.346,
+        "firstBombMedian": 76,
+        "source": "W3 audit tables 4a/4c and first-bomb table (162 simulated rounds, all seats 9001)"
+      },
+      "s1Corr017": 0.58
+    },
+    "s1Handover": {
+      "A": {
+        "pairsContiguous": 400,
+        "rounds": 798,
+        "corrQ017Result": 0.6696668538942018
+      },
+      "B": {
+        "pairsContiguous": 400,
+        "rounds": 799,
+        "corrQ017Result": 0.5018730949326737
+      },
+      "C": {
+        "pairsContiguous": 400,
+        "rounds": 799,
+        "corrQ017Result": 0.47916777725427795
+      }
+    },
+    "note": "focal seats only; replayed rounds are the runs' own deals (first pairs of the contiguous prefix), not a random sample of the run; SIM9001 baselines are self-play with all four seats 9001 against itself, the S6 arms face raw 017 seats, so the comparison mixes opponents",
+    "label": "descriptive, not a gate"
+  },
+  "s6AcceptanceReading": {
+    "note": "cited from S6/compare.json; the S6 reading follows protocol v2 stages.S6 (interval above 0 / covers 0 / below 0); nothing in S7 changes it",
+    "commonPairs": 1322,
+    "meanDifference": -0.10287443267776097,
+    "ci95": [
+      -0.17916741638078337,
+      -0.02658144897473859
+    ]
+  },
+  "notComputed": [],
+  "beliefTrainingRangeNote": "belief v1 was trained on single level-2 rounds without tribute at 21-80 cards (champion self-play); in S3 whole matches at other levels, tribute rounds and above 80 cards its marginals are outside that range (not a leak; reported in S7)"
+}
