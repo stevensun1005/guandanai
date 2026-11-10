@@ -4,6 +4,7 @@
 
 - 新增 `ai/danMCai/training/continuous/search-actor.mjs`：四个座位都按已部署 9001 推理（21–40 张推断世界搜索、≤ 20 张精确残局，决策函数从 `midgame-search.mjs` 导入），40 张以上冠军 017 按温度 0.02 探索；以快速采样进程的 215 维 `public-belief` 分片格式和整局标签写出，每 100 副一块，`STOP` 时保留已完成的块。测试 `search-actor.test.mjs` 核对与 `midgame-search` 的决策一致和与快速采样进程的行格式一致。说明见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#推理采样进程search-actormjs第四窗口新增)。
 - `midgame-search.mjs` 新增 `--opponents=guanzero --opponent-model=<onnx>`：对手队用 GuanZero 导出模型（网页同一打分代码、`guanzero-v1` 历史），按 GuanZero 评测工具的规则取最大值，只作评测对手。测试 `midgame-search-guanzero.test.mjs` 在 50 个存档局面上与 GuanZero 评测会话逐一一致。说明见 `ai/danMCai/belief/README.md`。
+- 统一研究面板 `ai/research/tools/window-dashboard.mjs` 新增阶段类型 `actor`：读推理采样进程的运行目录（一个或多个 `sides`），进度只数已完成的块（`blocks/bNNNNNN.done.json`），完成后显示 `manifest.json` 的局数、行数、每进程每小时吞吐、每局推理决策数与峰值内存；`untilDeadline` 标注局数只是上限。
 - 只是工具与测试，没有新的训练结果或验收；网页冠军 017、默认 danMCai-reason、菜单与出牌评价不变。
 
 ## 2026-11-10 · 第四窗口评测工具：对手也推理

@@ -215,6 +215,9 @@ const STATE_TEXT = {
 
 /* ---------- result extraction, one per kind ---------- */
 
+/** Run directories of an `actor` stage (search-actor.mjs): `sides`, else `paths.out`. */
+const actorSides = (stage) => stage.sides || [{ label: '', out: stage.paths?.out }];
+
 function matchResult(s, planned) {
   const rows = [
     ['每副焦点队平均升级分', `${signed(s.meanSignedPoints)} ${interval(s.ci95)}`],
@@ -495,6 +498,36 @@ function resultsFor(stage, run, state) {
       );
       break;
     }
+    case 'actor': {
+      // search-actor.mjs run directories (one, or several sides): manifest.json, written at the end.
+      for (const side of actorSides(stage)) {
+        const m = readJSON(join(p(side.out), 'manifest.json'));
+        if (!m) continue;
+        const t = m.throughputPerWorker,
+          r = m.perRound;
+        out.push(
+          block(
+            side.label || '生成汇总',
+            [
+              ['完成块／局', `${num(m.finishedBlocks)} / ${num(m.finishedRounds)}`],
+              ['样本行', num(m.rowsTotal)],
+              ['每进程每小时 局／行', t ? `${num(t.roundsPerHour)} / ${num(t.rowsPerHour)}` : '—'],
+              [
+                '每局推理决策 中段／残局',
+                r
+                  ? `${plain(r.searchedDecisions, 1)} / ${plain(r.endgameSearchedDecisions, 1)}`
+                  : '—',
+              ],
+              ['峰值内存（单进程）', m.peakRSSMB ? `${num(m.peakRSSMB)} MB` : '—'],
+              ['大小', `${plain(m.bytesTotal / 2 ** 30, 2)} GB`],
+            ],
+            stage.rule,
+            null,
+          ),
+        );
+      }
+      break;
+    }
     case 'residual': {
       const s = readJSON(p(paths.result));
       const f = s?.validation?.final;
@@ -619,6 +652,31 @@ function progressFor(stage, run, state, startMs, now) {
       const rounds = Array.isArray(r?.seeds) ? r.seeds[1] - r.seeds[0] + 1 : null;
       res.fraction = total ? Math.min(1, names.length / total) : null;
       res.text = `${num(names.length)} / ${total ? num(total) : '—'} 块${size ? `（约 ${num(Math.min(names.length * size, rounds ?? Infinity))} / ${num(rounds)} 局）` : ''}`;
+      break;
+    }
+    case 'actor': {
+      // Finished blocks only (blocks/bNNNNNN.done.json); an unfinished block is not progress.
+      let done = 0,
+        total = 0;
+      const parts = actorSides(stage).map((side) => {
+        const dir = p(side.out);
+        const r = readJSON(join(dir, 'run.json'));
+        const recs = listDir(join(dir, 'blocks'))
+          .filter((f) => /^b\d{6}\.done\.json$/.test(f))
+          .map((f) => readJSON(join(dir, 'blocks', f)))
+          .filter(Boolean);
+        const rounds = recs.reduce((s, b) => s + (b.rounds || 0), 0);
+        const rows = recs.reduce((s, b) => s + (b.rowsWritten || 0), 0);
+        const planned = Number(r?.rounds) || 0;
+        done += rounds;
+        total += planned;
+        if (Number.isFinite(r?.deadline)) res.cap = Math.max(res.cap ?? -Infinity, r.deadline);
+        const label = side.label ? `${side.label} ` : '';
+        if (!r) return `${label}未开始`;
+        return `${label}${num(recs.length)} 块 · ${num(rounds)} / ${planned ? num(planned) : '—'} 局 · ${num(rows)} 行`;
+      });
+      res.fraction = total ? Math.min(1, done / total) : null;
+      res.text = parts.join(' · ') + (stage.untilDeadline ? '（局数是上限，到截止即停）' : '');
       break;
     }
     case 'train':

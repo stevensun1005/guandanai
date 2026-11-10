@@ -551,3 +551,74 @@ test('cards: running (latest start first), then queued in run order, then ended 
     'never',
   ]);
 });
+
+test('actor stage (search-actor.mjs): finished blocks only, deadline cap, manifest results per side', () => {
+  const run = mkdtempSync(join(tmpdir(), 'window-dashboard-actor-'));
+  try {
+    const config = {
+      title: 't',
+      deadline: '2030-01-01T00:00:00Z',
+      stages: [
+        {
+          key: 'C1',
+          kind: 'actor',
+          paths: { out: 'C1/corpus' },
+          untilDeadline: true,
+          rule: { type: 'descriptive', text: '' },
+        },
+        {
+          key: 'A1',
+          kind: 'actor',
+          sides: [
+            { label: '推理', out: 'A1/search' },
+            { label: '无推理', out: 'A1/raw' },
+          ],
+          rule: { type: 'descriptive', text: '' },
+        },
+      ],
+    };
+    const deadline = Date.parse('2029-01-01T05:00:00Z');
+    writeJSON(join(run, 'C1/corpus/run.json'), { rounds: 1000, blockRounds: 100, deadline });
+    for (const b of [0, 1])
+      writeJSON(join(run, `C1/corpus/blocks/b00000${b}.done.json`), {
+        rounds: 100,
+        rowsWritten: 4000,
+      });
+    // An unfinished block directory is not progress.
+    mkdirSync(join(run, 'C1/corpus/blocks/.tmp-b000002'), { recursive: true });
+    writeJSON(join(run, 'A1/search/run.json'), { rounds: 50, blockRounds: 25 });
+    writeJSON(join(run, 'A1/search/manifest.json'), {
+      finishedBlocks: 2,
+      finishedRounds: 50,
+      rowsTotal: 2300,
+      bytesTotal: 2 ** 29,
+      throughputPerWorker: { roundsPerHour: 900, rowsPerHour: 41000 },
+      perRound: { searchedDecisions: 10.5, endgameSearchedDecisions: 5 },
+      peakRSSMB: 640,
+    });
+    writeFileSync(
+      join(run, 'stages.log'),
+      [
+        '2029-01-01T00:00:00Z START C1',
+        '2029-01-01T00:00:00Z START A1',
+        '2029-01-01T00:30:00Z END A1 rc=0',
+      ].join('\n') + '\n',
+    );
+    const now = Date.parse('2029-01-01T01:00:00Z');
+    const s = snapshot(run, config, { now, psText: '', machine: false });
+    const by = Object.fromEntries(s.stages.map((x) => [x.key, x]));
+    assert.equal(by.C1.error, undefined);
+    assert.equal(by.C1.state, 'running');
+    assert.equal(by.C1.progress.text, '2 块 · 200 / 1,000 局 · 8,000 行（局数是上限，到截止即停）');
+    assert.equal(by.C1.progress.fraction, 0.2);
+    assert.ok(by.C1.progress.etaText.endsWith('美东'));
+    assert.equal(by.A1.state, 'done');
+    assert.match(by.A1.progress.text, /推理 0 块 · 0 \/ 50 局 · 0 行 · 无推理 未开始/);
+    assert.equal(by.A1.results.length, 1);
+    assert.equal(by.A1.results[0].heading, '推理');
+    assert.deepEqual(by.A1.results[0].rows[2], ['每进程每小时 局／行', '900 / 41,000']);
+    assert.equal(by.A1.results[0].verdict.text, '描述性（不判定）');
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
