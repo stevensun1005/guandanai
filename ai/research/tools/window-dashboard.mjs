@@ -210,6 +210,7 @@ const STATE_TEXT = {
   done: '已完成',
   failed: '失败',
   skipped: '未运行',
+  stopped: '已停止',
 };
 
 /* ---------- result extraction, one per kind ---------- */

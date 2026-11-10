@@ -16,7 +16,14 @@ import { freezeReason, reasonProtocol } from './reason.mjs';
 import { setPriority, constants } from 'node:os';
 import { modelBytes } from '../../publishing/artifacts.mjs';
 import { evaluate } from './evaluate.mjs';
-import { DEFAULT_OPPONENTS, REASON_PANELS } from './opponents.mjs';
+import {
+  DEFAULT_OPPONENTS,
+  REASON_PANELS,
+  MIXED_PANEL,
+  MIXED_PAIRS,
+  suiteReasonProtocol,
+} from './opponents.mjs';
+import { freezeClint } from './evaluate-clint.mjs';
 import { freezeChampion, championDefinition } from './champion.mjs';
 import { ROOT, paths, readJSON, writeJSON, option, sha256, evalSeed } from './lib.mjs';
 export const SUITE_PAIRS = 250;
@@ -29,9 +36,9 @@ export { validSuiteReport } from './suite-reports.mjs';
  * and a launcher that names a panel must agree with its companion.
  */
 export function reasonPanel(reason, reasonRuntime = null) {
-  const panel = reasonProtocol(reason);
+  const panel = reasonRuntime?.opponentPanel ?? reasonProtocol(reason);
   if (!REASON_PANELS.includes(panel)) throw Error('Unknown reason protocol');
-  if (reasonRuntime?.opponentPanel && reasonRuntime.opponentPanel !== panel)
+  if (suiteReasonProtocol({ opponentPanel: panel }) !== reasonProtocol(reason))
     throw Error('Reason launcher protocol differs from its frozen companion');
   return panel;
 }
@@ -55,7 +62,8 @@ export async function addSuite(
   const champion = await freezeChampion(folder, definition, championRoot);
   copyFileSync(model, join(folder, 'model.onnx'));
   if (sha256(join(folder, 'model.onnx')) !== digest) throw Error('GuanZero freeze changed');
-  let freeze = freezeReason;
+  let freeze = freezeReason,
+    freezeBrain = freezeClint;
   if (reasonRuntime) {
     if (
       execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -69,9 +77,17 @@ export async function addSuite(
         pathToFileURL(join(reasonRuntime.sourceRoot, 'ai/guanzero/training/reason.mjs')).href
       )
     ).freezeReason;
+    if (reasonRuntime.opponentPanel === MIXED_PANEL)
+      freezeBrain = (
+        await import(
+          pathToFileURL(join(reasonRuntime.sourceRoot, 'ai/guanzero/training/evaluate-clint.mjs'))
+            .href
+        )
+      ).freezeClint;
   }
   const reason = await freeze(folder, champion.metadata, championRoot);
-  const opponentPanel = reasonPanel(reason, reasonRuntime);
+  const opponentPanel = reasonPanel(reason, reasonRuntime ?? { opponentPanel: MIXED_PANEL });
+  const clint = opponentPanel === MIXED_PANEL ? freezeBrain() : null;
   const index = (manifest.seedIndexBase ?? SUITE_SEED_INDEX) + manifest.suites.length,
     start = evalSeed(index, SUITE_PAIRS);
   const plan = {
@@ -87,6 +103,7 @@ export async function addSuite(
     seedEnd: start + SUITE_PAIRS - 1,
     opponentPanel,
     opponents: [...DEFAULT_OPPONENTS],
+    ...(clint && { opponentPairs: { ...MIXED_PAIRS }, clint }),
     champion: champion.metadata,
     reason,
     ...(reasonRuntime && {
@@ -132,7 +149,7 @@ export async function runDevelopmentSuites({
     protocol: 'development-500-v1',
     suites: [],
   });
-  const state = { pid: process.pid, phase: 'starting', targetMatchesPerOpponent: 500, fromBlock };
+  const state = { pid: process.pid, phase: 'starting', fromBlock };
   const save = () => writeJSON(status, { ...state, updatedAt: new Date().toISOString() });
   let head = null;
   const pinnedElsewhere = (plan) => {
@@ -169,6 +186,7 @@ export async function runDevelopmentSuites({
         });
       }
       for (const plan of manifest.suites) {
+        if (existsSync(join(directory, plan.id, 'cancelled.json'))) continue;
         const folder = join(directory, plan.id),
           champion = { file: join(folder, 'champion.onnx'), metadata: plan.champion };
         const pending = plan.opponents.filter(
@@ -180,6 +198,9 @@ export async function runDevelopmentSuites({
             `Suite ${plan.id} is pinned to evaluator ${plan.evaluationRuntime.commit}; finish it from that checkout`,
           );
         state.suite = plan.id;
+        state.targetMatchesByOpponent = Object.fromEntries(
+          plan.opponents.map((op) => [op, 2 * (plan.opponentPairs?.[op] ?? plan.pairs)]),
+        );
         state.phase = 'evaluating';
         save();
         // Each opponent gets a separate low-priority process, started in the same batch.

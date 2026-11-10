@@ -1,4 +1,5 @@
 import { reasonProtocolDigest } from '../guanzero/training/evaluate-reason.mjs';
+import { clintProtocolDigest, verifyClintMetadata } from '../guanzero/training/evaluate-clint.mjs';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, join, resolve } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
@@ -13,6 +14,9 @@ import {
   REASON_PANELS,
   LEGACY_TWO_OPPONENTS,
   suiteOpponents,
+  suiteReasonProtocol,
+  suitePairs,
+  MIXED_PANEL,
 } from '../guanzero/training/opponents.mjs';
 import { sha256 } from './artifacts.mjs';
 
@@ -21,6 +25,12 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   const suite = resolve(directory);
   const parent = dirname(suite);
   const read = async (file) => JSON.parse(await readFile(file, 'utf8'));
+  try {
+    await readFile(join(suite, 'cancelled.json'));
+    throw Error('Owner cancelled this suite; cannot publish');
+  } catch (e) {
+    if (e.code !== 'ENOENT') throw e;
+  }
   const plan = await read(join(suite, 'plan.json'));
   const manifest = await read(join(parent, 'manifest.json'));
   // Unmarked historical plans always require all five reports. A missing report
@@ -31,9 +41,11 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   const reasonPanel = REASON_PANELS.includes(plan.opponentPanel);
   if (reasonPanel) {
     verifyFrozenReason(suite, plan.reason, plan.champion);
-    if (reasonProtocol(plan.reason) !== plan.opponentPanel)
+    if (reasonProtocol(plan.reason) !== suiteReasonProtocol(plan))
       throw Error('Reason protocol and opponent panel differ');
   }
+  if (plan.opponentPanel === MIXED_PANEL) verifyClintMetadata(plan.clint);
+  for (const op of panel) suitePairs(plan, op);
   if (
     (!legacy && !historicalThree && plan.opponentPanel !== TWO_OPPONENT_PANEL && !reasonPanel) ||
     (source.run === 'guanzero-adp-io48' &&
@@ -77,12 +89,20 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
       !validSuiteReport(report, plan, op) ||
       report.opponents[op].id !== op ||
       (op === 'rule' && report.opponents.rule.version !== 'original') ||
-      (op === 'clint' && report.opponents.clint.version !== 'rules-v2') ||
+      (op === 'clint' &&
+        report.opponents.clint.version !==
+          (plan.opponentPanel === MIXED_PANEL ? 'rules-v2-brain-v1' : 'rules-v2')) ||
       (op === 'champion' && !isDeepStrictEqual(report.opponents.champion.gate, plan.champion.gate))
     )
       throw Error('Incomplete or mismatched report: ' + op);
     if (op === 'reason' && report.protocolSHA256 !== reasonProtocolDigest(report))
       throw Error('Reason protocol fingerprint mismatch');
+    if (
+      op === 'clint' &&
+      plan.opponentPanel === MIXED_PANEL &&
+      report.protocolSHA256 !== clintProtocolDigest(report)
+    )
+      throw Error('Clint protocol fingerprint mismatch');
     const { wins, losses, draws, confidence95, clusters } = report.results[op];
     const matches = clusters.flat();
     if (
@@ -93,7 +113,20 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
       matches.filter((m) => m.winner === null).length !== draws
     )
       throw Error('Per-match outcomes disagree: ' + op);
-    opponents[op] = { wins, losses, draws, confidence95, reportSHA256: sha256(bytes) };
+    opponents[op] = {
+      wins,
+      losses,
+      draws,
+      confidence95,
+      reportSHA256: sha256(bytes),
+      ...(plan.opponentPanel === MIXED_PANEL
+        ? {
+            pairs: suitePairs(plan, op),
+            matches: 2 * suitePairs(plan, op),
+            seedEnd: plan.seedStart + suitePairs(plan, op) - 1,
+          }
+        : {}),
+    };
   }
   return {
     protocol: plan.protocol,
@@ -103,6 +136,7 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
     seedEnd: plan.seedEnd,
     championSHA256: plan.champion.modelSHA256,
     ...(plan.reason && { reason: plan.reason }),
+    ...(plan.clint && { clint: plan.clint, opponentPairs: plan.opponentPairs }),
     opponents,
   };
 }

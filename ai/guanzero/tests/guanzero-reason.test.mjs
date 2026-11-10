@@ -35,9 +35,11 @@ import { policyState } from '../../../web/src/ai/observation.js';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { reasonMatch, reasonProtocolDigest, evaluateReason } from '../training/evaluate-reason.mjs';
 import { evaluate } from '../training/evaluate.mjs';
-import { reasonPanel } from '../training/development-suite.mjs';
+import { reasonPanel, runDevelopmentSuites } from '../training/development-suite.mjs';
 import { suiteOpponents, REASON_V1_PANEL, REASON_V2_PANEL } from '../training/opponents.mjs';
 import { validSuiteReport } from '../training/suite-reports.mjs';
+import { MIXED_PANEL, MIXED_PAIRS, suitePairs } from '../training/opponents.mjs';
+import { freezeClint, clintProtocolDigest } from '../training/evaluate-clint.mjs';
 import { verifyEvaluatedSuite } from '../../publishing/evaluated-suite.mjs';
 import { guanzeroCards } from '../../research/tools/guanzero-stages.mjs';
 
@@ -439,7 +441,8 @@ async function publisherRoundTrip(protocol) {
     const root = join(temp, 'repo'),
       folder = join(temp, 'guanzero-adp-io48/eval/development-500/model-000001');
     mkdirSync(folder, { recursive: true });
-    const { champion, reason } = identities(protocol);
+    const mixed = protocol === MIXED_PANEL;
+    const { champion, reason } = identities(mixed ? REASON_V2_PANEL : protocol);
     const write = (p, d) => {
       mkdirSync(join(p, '..'), { recursive: true });
       writeFileSync(p, JSON.stringify(d, null, 2) + '\n');
@@ -471,6 +474,7 @@ async function publisherRoundTrip(protocol) {
       seedEnd: 4213100249,
       champion,
       reason,
+      ...(mixed ? { opponentPairs: { ...MIXED_PAIRS }, clint: freezeClint() } : {}),
     };
     const savePlan = () => {
       write(join(folder, 'plan.json'), plan);
@@ -484,8 +488,11 @@ async function publisherRoundTrip(protocol) {
           ? reason
           : op === 'champion'
             ? champion
-            : { id: 'clint', mode: 'rule', version: 'rules-v2' };
-      const clusters = Array.from({ length: 250 }, (_, i) =>
+            : mixed
+              ? plan.clint
+              : { id: 'clint', mode: 'rule', version: 'rules-v2' };
+      const pairs = suitePairs(plan, op);
+      const clusters = Array.from({ length: pairs }, (_, i) =>
         [0, 1].map((t) => ({
           seed: plan.seedStart + i,
           neuralTeam: t,
@@ -495,14 +502,21 @@ async function publisherRoundTrip(protocol) {
       );
       const report = {
         index: plan.index,
-        pairs: 250,
+        pairs,
         seedStart: plan.seedStart,
-        seedEnd: plan.seedEnd,
+        seedEnd: plan.seedStart + pairs - 1,
         modelSHA256: plan.modelSHA256,
-        sourceSHA256: reason.sourceSHA256,
+        sourceSHA256: op === 'clint' && mixed ? plan.clint.sourceSHA256 : reason.sourceSHA256,
         opponents: { [op]: definition },
         results: {
-          [op]: { matches: 500, wins: 500, losses: 0, draws: 0, confidence95: {}, clusters },
+          [op]: {
+            matches: pairs * 2,
+            wins: pairs * 2,
+            losses: 0,
+            draws: 0,
+            confidence95: {},
+            clusters,
+          },
         },
         completedAt: 'complete',
       };
@@ -519,14 +533,16 @@ async function publisherRoundTrip(protocol) {
         root,
       );
     await assert.rejects(verify(), /ENOENT/);
-    plan.opponentPanel = 'clint-champion-v1';
-    plan.opponents = ['clint', 'champion'];
-    delete plan.reason;
-    savePlan();
-    assert.equal(Object.keys((await verify()).opponents).length, 2);
-    plan.opponentPanel = protocol;
-    plan.opponents = ['clint', 'champion', 'reason'];
-    plan.reason = reason;
+    if (!mixed) {
+      plan.opponentPanel = 'clint-champion-v1';
+      plan.opponents = ['clint', 'champion'];
+      delete plan.reason;
+      savePlan();
+      assert.equal(Object.keys((await verify()).opponents).length, 2);
+      plan.opponentPanel = protocol;
+      plan.opponents = ['clint', 'champion', 'reason'];
+      plan.reason = reason;
+    }
     savePlan();
     write(join(folder, 'reason/report.json'), reports.reason);
     const verified = await verify();
@@ -549,6 +565,27 @@ async function publisherRoundTrip(protocol) {
     assert.equal(cards.length, 3);
     assert.ok(cards.every((c) => c.state === 'done'));
     assert.ok(cards.some((c) => c.title.includes('danMCai-reason-v000001')));
+    if (mixed) {
+      assert.deepEqual(
+        cards.map((c) => c.progress.text),
+        ['已完成 50/50 场', '已完成 500/500 场', '已完成 50/50 场'],
+      );
+      plan.opponentPairs.clint = 250;
+      savePlan();
+      await assert.rejects(verify(), /pair counts/);
+      plan.opponentPairs.clint = 25;
+      savePlan();
+      const old = reports.clint.opponents.clint;
+      reports.clint.opponents.clint = { id: 'clint', version: 'rules-v2', mode: 'rule' };
+      reports.clint.protocolSHA256 = clintProtocolDigest(reports.clint);
+      write(join(folder, 'clint/report.json'), reports.clint);
+      await assert.rejects(verify(), /mismatched report/);
+      reports.clint.opponents.clint = old;
+      reports.clint.protocolSHA256 = clintProtocolDigest(reports.clint);
+      write(join(folder, 'clint/report.json'), reports.clint);
+      write(join(folder, 'cancelled.json'), { cancelledAt: 'owner' });
+      await assert.rejects(verify(), /cancelled/);
+    }
   } finally {
     rmSync(temp, { recursive: true, force: true });
   }
@@ -557,6 +594,85 @@ test('publisher requires all three reports and exact frozen reasoning identity; 
   publisherRoundTrip(REASON_V1_PANEL));
 test('publisher verifies protocol v2 batches the same way and binds panel to reason protocol', () =>
   publisherRoundTrip(REASON_V2_PANEL));
+test('mixed protocol requires brain-enabled Clint 50, champion 500, reason 50 and rejects cancellation', () =>
+  publisherRoundTrip(MIXED_PANEL));
+test('legacy protocols cannot be downsized by adding per-opponent counts', () => {
+  assert.throws(
+    () =>
+      suitePairs(
+        { opponentPanel: REASON_V2_PANEL, pairs: 250, opponentPairs: { ...MIXED_PAIRS } },
+        'reason',
+      ),
+    /Historical/,
+  );
+  assert.equal(
+    reasonPanel(identities(REASON_V2_PANEL).reason, { opponentPanel: MIXED_PANEL }),
+    MIXED_PANEL,
+  );
+});
+test('cancelled incomplete suite is never restarted by the next one-shot companion', async () => {
+  const run = mkdtempSync(join(tmpdir(), 'guanzero-cancel-')),
+    dir = join(run, 'eval/development-500');
+  try {
+    mkdirSync(join(dir, 'model-000001'), { recursive: true });
+    writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ suites: [{ id: 'model-000001' }] }));
+    writeFileSync(
+      join(dir, 'model-000001/cancelled.json'),
+      JSON.stringify({ cancelledAt: 'owner' }),
+    );
+    const result = await runDevelopmentSuites({ run, once: true });
+    assert.equal(result.phase, 'waiting');
+    assert.equal(result.suite, undefined);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
+test('cancelled evaluation stays visibly stopped with its actual partial match count', () => {
+  const run = mkdtempSync(join(tmpdir(), 'guanzero-stop-card-')),
+    dir = join(run, 'eval/development-500'),
+    folder = join(dir, 'model-000001');
+  try {
+    mkdirSync(join(folder, 'reason'), { recursive: true });
+    const plan = {
+      id: 'model-000001',
+      protocol: 'development-500-v1',
+      pairs: 250,
+      index: 5131,
+      modelVersion: 'model-000001',
+      modelSHA256: 'abc',
+      createdAt: '2026-11-10T01:00:00Z',
+      seedStart: 4213100000,
+      seedEnd: 4213100249,
+      opponents: ['reason'],
+      reason: { name: 'reason', version: 'v1', modelSHA256: 'def', evaluationSHA256: 'eval' },
+    };
+    for (const [p, v] of [
+      ['manifest.json', { suites: [plan] }],
+      ['model-000001/plan.json', plan],
+      ['model-000001/cancelled.json', { cancelledAt: '2026-11-10T03:34:00Z' }],
+      [
+        'model-000001/reason/reason-progress.json',
+        {
+          opponent: 'reason',
+          pairs: 250,
+          completedPairs: 132,
+          seedStart: plan.seedStart,
+          modelSHA256: 'abc',
+          opponentSHA256: 'def',
+          evaluationSHA256: 'eval',
+          metrics: { matches: 264 },
+        },
+      ],
+    ])
+      writeFileSync(join(dir, p), JSON.stringify(v));
+    const [card] = guanzeroCards(run, Date.now());
+    assert.equal(card.state, 'stopped');
+    assert.equal(card.processAlive, null);
+    assert.match(card.progress.text, /已按要求停止.*264\/500/);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
 
 test('source fingerprint ignores comments and unrelated relative strings', () => {
   const dir = mkdtempSync(join(tmpdir(), 'reason-closure-'));

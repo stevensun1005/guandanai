@@ -80,13 +80,23 @@ export function guanzeroCards(root, now) {
       rule: '开发检查，不作验收',
       dev: true,
       ruleLabel: '开发检查，不作验收',
-      state: completed ? 'done' : row.status === 'running' ? 'running' : 'queued',
+      state: completed
+        ? 'done'
+        : row.status === 'cancelled'
+          ? 'stopped'
+          : row.status === 'running'
+            ? 'running'
+            : 'queued',
       start: row.matches ? start : null,
-      end: completed ? Date.parse(row.completedAt) : null,
-      processAlive: completed ? null : alive(worker?.pid),
+      end: completed
+        ? Date.parse(row.completedAt)
+        : row.cancelledAt
+          ? Date.parse(row.cancelledAt)
+          : null,
+      processAlive: completed || row.status === 'cancelled' ? null : alive(worker?.pid),
       progress: {
         fraction: row.matches / row.plannedMatches,
-        text: `已完成 ${row.matches}/${row.plannedMatches} 场`,
+        text: `${row.status === 'cancelled' ? '已按要求停止；' : ''}已完成 ${row.matches}/${row.plannedMatches} 场`,
         eta: null,
         etaText: null,
       },
@@ -96,6 +106,7 @@ export function guanzeroCards(root, now) {
         ['模型SHA', row.modelSHA256],
         ['对手版本', row.opponentVersion || '—'],
         ...(progress?.searchStats ? [['搜索与回落', JSON.stringify(progress.searchStats)]] : []),
+        ...(progress?.brainStats ? [['Clint残局大脑', JSON.stringify(progress.brainStats)]] : []),
       ]),
     });
   }

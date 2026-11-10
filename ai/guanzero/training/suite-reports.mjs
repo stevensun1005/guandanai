@@ -1,21 +1,27 @@
 import { isDeepStrictEqual } from 'node:util';
 import { modelLabel } from './model-labels.mjs';
 import { join } from 'node:path';
-import { opponentDefinition } from './opponents.mjs';
+import { opponentDefinition, suitePairs, MIXED_PANEL } from './opponents.mjs';
 export function validSuiteReport(report, plan, opponent) {
+  let pairs;
+  try {
+    pairs = suitePairs(plan, opponent);
+  } catch {
+    return false;
+  }
   return Boolean(
     report?.completedAt &&
     report.modelSHA256 === plan.modelSHA256 &&
     report.index === plan.index &&
-    report.pairs === plan.pairs &&
+    report.pairs === pairs &&
     report.seedStart === plan.seedStart &&
-    report.seedEnd === plan.seedEnd &&
-    report.results?.[opponent]?.matches === plan.pairs * 2 &&
+    report.seedEnd === plan.seedStart + pairs - 1 &&
+    report.results?.[opponent]?.matches === pairs * 2 &&
     report.results[opponent].wins +
       report.results[opponent].losses +
       report.results[opponent].draws ===
-      plan.pairs * 2 &&
-    report.results[opponent].clusters?.length === plan.pairs &&
+      pairs * 2 &&
+    report.results[opponent].clusters?.length === pairs &&
     report.results[opponent].clusters.every(
       (pair, i) =>
         pair.length === 2 &&
@@ -23,6 +29,10 @@ export function validSuiteReport(report, plan, opponent) {
     ) &&
     (opponent !== 'champion' ||
       report.opponents?.champion?.modelSHA256 === plan.champion.modelSHA256) &&
+    (opponent !== 'clint' ||
+      plan.opponentPanel !== MIXED_PANEL ||
+      (isDeepStrictEqual(report.opponents?.clint, plan.clint) &&
+        isDeepStrictEqual(report.sourceSHA256, plan.clint?.sourceSHA256))) &&
     (opponent !== 'reason' ||
       (!!plan.reason &&
         isDeepStrictEqual(report.opponents?.reason, plan.reason) &&
@@ -51,6 +61,13 @@ export function suiteRows(
     )
       continue;
     for (const opponent of plan.opponents) {
+      let pairs;
+      try {
+        pairs = suitePairs(plan, opponent);
+      } catch {
+        continue;
+      }
+      const cancelled = read(join(folder, 'cancelled.json'));
       const report = read(join(folder, opponent, 'report.json'));
       const complete = validSuiteReport(report, plan, opponent);
       const progress = read(join(folder, opponent, `${opponent}-progress.json`));
@@ -58,11 +75,15 @@ export function suiteRows(
         progress?.opponent === opponent &&
         progress.modelSHA256 === plan.modelSHA256 &&
         progress.seedStart === plan.seedStart &&
-        progress.pairs === plan.pairs &&
+        progress.pairs === pairs &&
         progress.completedPairs >= 0 &&
-        progress.completedPairs <= plan.pairs &&
+        progress.completedPairs <= pairs &&
         progress.metrics?.matches === 2 * progress.completedPairs &&
         (opponent !== 'champion' || progress.opponentSHA256 === plan.champion.modelSHA256) &&
+        (opponent !== 'clint' ||
+          plan.opponentPanel !== MIXED_PANEL ||
+          (progress.opponentSHA256 === plan.clint?.evaluationSHA256 &&
+            progress.evaluationSHA256 === plan.clint?.evaluationSHA256)) &&
         (opponent !== 'reason' ||
           (progress.opponentSHA256 === plan.reason?.modelSHA256 &&
             progress.evaluationSHA256 === plan.reason?.evaluationSHA256));
@@ -76,7 +97,9 @@ export function suiteRows(
           ? plan.champion
           : opponent === 'reason'
             ? plan.reason
-            : opponentDefinition(opponent);
+            : opponent === 'clint' && plan.clint
+              ? plan.clint
+              : opponentDefinition(opponent);
       if (!definition) continue;
       rows.push({
         opponent,
@@ -90,9 +113,16 @@ export function suiteRows(
         modelSHA256: plan.modelSHA256,
         protocol: plan.protocol,
         seedStart: plan.seedStart,
-        seedEnd: plan.seedEnd,
-        plannedMatches: 2 * plan.pairs,
-        status: complete ? 'complete' : validProgress ? 'running' : 'queued',
+        seedEnd: plan.seedStart + pairs - 1,
+        plannedMatches: 2 * pairs,
+        status: complete
+          ? 'complete'
+          : cancelled
+            ? 'cancelled'
+            : validProgress
+              ? 'running'
+              : 'queued',
+        cancelledAt: cancelled?.cancelledAt,
         matches: 0,
         completedAt: complete ? report.completedAt : null,
         ...m,

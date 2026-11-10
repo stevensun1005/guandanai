@@ -244,7 +244,14 @@ test('synthetic run covers every state and progress kind without crashing', () =
     assert.match(paired.rows[0][1], /^\+0\.750/);
     assert.match(paired.source, /现算/);
     assert.equal(by.Missing.state, 'queued');
-    assert.deepEqual(s.counts, { queued: 2, running: 4, done: 2, failed: 1, skipped: 2 });
+    assert.deepEqual(s.counts, {
+      queued: 2,
+      running: 4,
+      done: 2,
+      failed: 1,
+      skipped: 2,
+      stopped: 0,
+    });
     assert.equal(s.now.running.length, 4);
     assert.deepEqual(
       s.now.next.map((x) => x.after),

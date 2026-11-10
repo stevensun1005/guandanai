@@ -286,3 +286,5 @@ Clint手机增量回归：构建并启动本地服务后运行 `python -X utf8 w
 运行`python web/tests/clint_plate_smoke.py <URL>`检查五个屏幕尺寸的姓名牌提示、接风与成组标签，以及闭麦徽标隐藏；手机既有回归用`clint_phone_smoke.py`，联机与标记恢复用`host_restore_smoke.py`。全部使用合成状态，采集上传被拦截，不作棋力证据。
 
 `turn-timing.test.mjs` 的setTimeout与performance.now共用虚拟时钟；在CPU繁忙时也按精确50/52/60秒边界验证，避免把真实测试耗时混进虚拟时间。此项只稳定回归，不改变生产出牌预算。
+
+GuanZero混合评测回归：`guanzero-clint.test.mjs`在真实合法残局调用网页同款大脑并校验出牌合法性，同时检查比赛适配器走含大脑路径。`guanzero-reason.test.mjs`要求新v3完整50/500/50场、每组正确配对子范围和原始指纹；拒绝旧规则冒充新Clint、旧批次缩样本、已取消批次发布，且伴随不能重启已取消比赛。面板总数与实际报告分别读取，不把50场标成500场。

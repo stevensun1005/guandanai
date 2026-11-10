@@ -2929,3 +2929,13 @@ reason组实际调用网页桌面策略的公开信息推断和搜索，冻结�
 **核查。**两名独立核查者分别审读代码路径并逐行重放 8 个局面（四个结果和出完顺序全部一致，搜索中读取他人手牌会报错，从未触发），以及从原始逐行记录独立重算全部数字（3,212 个结果与出完顺序一致，种子无缺口，区间差别在重抽样误差内），均为“确认，附说明”。
 
 **对训练方向的含义。**只把训练数据的后半局换成更准的打法，不足以纠正开局的炸弹选择；在冠军自对弈的对手面前，这些炸弹并不吃亏。所有者看到的问题若存在，更可能来自对手类型（会惩罚早炸的对手从未出现在训练和评测里）以及输入盲点，而不是残局价值估计。下一个窗口的设计据此调整。工具 `ai/danMCai/belief/opening-counterfactual.mjs`（SHA-256 `66976ac6…9928`），测试 8 项通过；[报告与指纹](evaluation/opening-bomb-counterfactual-20261109/REPORT.md)，逐局面记录留在运行目录（`rows.jsonl`，SHA-256 `ebb5b6fd…f942`）。
+
+### GuanZero评测协议改为50/500/50，旧427033批取消（2026-11-09 Toronto）
+
+所有者明确要求Clint加入残局大脑，后续Clint与reason各50场，danMCai冠军仍500场。新面板`clint-brain-champion-reason-v3`冻结25/250/25对交换阵营种子；共享批次槽与模型，Clint/reason取前25个种子，不将旧500场截成50场。Clint实际调用网页同款规则＋30秒残局大脑，冻结完整源码和预算，并保存逐场及汇总调用、完成、改牌、回退、耗时；reason仍是v2的50秒规则，普通冠军仍是af2a683贪心网络。新50场成绩仅作快速开发检查，区间更宽，不是独立验收。
+
+`guanzero-adp-io48-427033`（SHA `76fe6c930545752f1a75dc43bcb3077e10935f513f6303c6e7bf9f39d0c00821`）由所有者在未完成时叫停：旧rules-only Clint 500场347胜/114负/39平；冠军500场176胜/263负/61平；reason只完成264场75胜/166负/23平，未生成completedAt，不作为500场完成结果。已核对进程身份并停止评测父子进程，训练不动。原计划及逐对簇重算保存，[取消证据](evaluation/guanzero-427033-cancelled.json)、[旧Clint完整报告](evaluation/guanzero-427033-development-500-clint.json)、[冠军完整报告](evaluation/guanzero-427033-development-500-champion.json)、[reason停止进度](evaluation/guanzero-427033-development-500-reason-stopped-progress.json)。该批不可发布，原网页模型026保留。
+
+新伴随跳过取消标记，发布器拒绝取消批次，并强制逐组核验真实pairs、matches、seedEnd、源码/策略指纹与同一模型SHA。下一正常取样仍Toronto08:00，周三11月11日10:00截止不变；不倒填20点槽、不更改原计划与训练配置。
+
+新协议工程回归：Node 442项（428通过、14跳过）、Python9项、格式及构建全部通过；真实合法残局调用了Clint大脑并验证出牌，取消批次不能续跑/发布。Chrome确认仍为026/385979及四项菜单、四席reason默认。本次没有新协议正式比赛结果。[验证证据](evaluation/guanzero-mixed-protocol-20261109.json)。

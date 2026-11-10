@@ -14,7 +14,7 @@ import {
   reasonProtocol,
   REASON_V2_MOVE,
 } from './reason.mjs';
-import { REASON_PANELS, REASON_V1_PANEL } from './opponents.mjs';
+import { REASON_PANELS, REASON_V1_PANEL, suiteReasonProtocol, suitePairs } from './opponents.mjs';
 import { readJSON, writeJSON, sha256, createInference } from './lib.mjs';
 
 export function reasonProtocolDigest(report) {
@@ -45,7 +45,12 @@ export async function reasonMatch({ seed, team, inference, engine, play = playMa
 export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
   assert.deepEqual(plan.opponents, ['clint', 'champion', 'reason']);
   assert.ok(REASON_PANELS.includes(plan.opponentPanel), 'Not a reason panel');
-  assert.equal(reasonProtocol(plan.reason), plan.opponentPanel, 'Reason protocol and panel differ');
+  assert.equal(
+    reasonProtocol(plan.reason),
+    suiteReasonProtocol(plan),
+    'Reason protocol and panel differ',
+  );
+  const pairs = suitePairs(plan, 'reason');
   const v1 = plan.opponentPanel === REASON_V1_PANEL;
   assert.equal(sha256(join(folder, 'model.onnx')), plan.modelSHA256);
   verifyFrozenReason(folder, plan.reason, plan.champion, { sources: true });
@@ -54,8 +59,8 @@ export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
   const report = {
     purpose: 'development',
     seedStart: plan.seedStart,
-    seedEnd: plan.seedEnd,
-    pairs: plan.pairs,
+    seedEnd: plan.seedStart + pairs - 1,
+    pairs,
     index: plan.index,
     modelSHA256: plan.modelSHA256,
     sourceSHA256: plan.reason.sourceSHA256,
@@ -87,7 +92,7 @@ export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
   try {
     await inference.load(join(folder, 'model.onnx'));
     if (progress?.searchStats) Object.assign(engine.stats, progress.searchStats);
-    for (let i = clusters.length; i < plan.pairs; i++) {
+    for (let i = clusters.length; i < pairs; i++) {
       stop();
       const pair = [];
       for (const team of [0, 1])
@@ -98,7 +103,7 @@ export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
         evaluationSHA256: plan.reason.evaluationSHA256,
         opponent: 'reason',
         completedPairs: clusters.length,
-        pairs: plan.pairs,
+        pairs,
         modelSHA256: plan.modelSHA256,
         opponentSHA256: plan.reason.modelSHA256,
         seedStart: plan.seedStart,

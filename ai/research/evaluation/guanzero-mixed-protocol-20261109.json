@@ -1,0 +1,67 @@
+{
+  "observedAt": "2026-11-10T03:50:35.015506+00:00",
+  "authority": "owner Nov9 evening; stop unfinished evaluation and change future counts",
+  "opponentPanel": "clint-brain-champion-reason-v3",
+  "opponentPairs": {
+    "clint": 25,
+    "champion": 250,
+    "reason": 25
+  },
+  "totalMatches": 600,
+  "reasonProtocol": "clint-champion-reason-v2",
+  "clintPolicy": "web Clint rules plus public-information endgame brain, 30000ms",
+  "cancelledSuite": "model-000000427033",
+  "cancelledEvidence": "ai/research/evaluation/guanzero-427033-cancelled.json",
+  "newFormalMatches": 0,
+  "tests": {
+    "node": {
+      "total": 442,
+      "passed": 428,
+      "failed": 0,
+      "skipped": 14
+    },
+    "guanzeroPython": 9,
+    "format": "passed",
+    "build": "passed",
+    "actualClintLateGameSearch": "passed",
+    "cancelledSuiteResumeAndPublishRejection": "passed",
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "026",
+          "guanzero-adp-io48-385979"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "9001",
+          "danMCai-reason-v000855042"
+        ]
+      ],
+      "defaults": [
+        "9001",
+        "9001",
+        "9001",
+        "9001"
+      ]
+    }
+  },
+  "testLogSHA256": {
+    "node": "0bb4bdd2eefc35b1cb52a3e69631ab08718d8961d104bcba07e7f032eb894e64",
+    "python": "ed136446a03d47175cfa572b443bfa1471a94ebb47e5f411c6aad2687a4ec9d1",
+    "format": "08a92d5689602ad3735f3bdb203f7891ab4c86ed828076938fbfaccb999aba8d",
+    "build": "afe002f955515688e84dd4c7eb921f6274f5cab69198311b1eeba13362a8ca0e",
+    "clint-test": "c2bb0efa5fb91c255f4e4aa310de8f8578f3f736f85a10479363468dc363a6ee",
+    "browser": "16a378d4b4a36ba896274057410e0c9a7f0ea954f0bc8b07548086bbac6455f9"
+  },
+  "trainingUnchanged": {
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6"
+  }
+}

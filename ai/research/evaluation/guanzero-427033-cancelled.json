@@ -1,0 +1,40 @@
+{
+  "cancelledAt": "2026-11-10T03:36:57.093867+00:00",
+  "reason": "Owner stopped unfinished batch; future Clint includes endgame brain, Clint/reason each 50 matches, champion 500. Preserve original plan/results.",
+  "modelVersion": "model-000000427033",
+  "modelSHA256": "76fe6c930545752f1a75dc43bcb3077e10935f513f6303c6e7bf9f39d0c00821",
+  "planSHA256": "e0bef04aabcda76e19028c46889e279e4a4e431ca3729e98c58f35482b2ca20f",
+  "records": [
+    {
+      "opponent": "clint",
+      "file": "ai/research/evaluation/guanzero-427033-development-500-clint.json",
+      "sha256": "5082d0db59e41e301500080c7ba784b45dcb57efee72b1e85b167cd625c41472",
+      "complete": true,
+      "matches": 500,
+      "wins": 347,
+      "losses": 114,
+      "draws": 39
+    },
+    {
+      "opponent": "champion",
+      "file": "ai/research/evaluation/guanzero-427033-development-500-champion.json",
+      "sha256": "a07bcbf114498725d60a59d6a2b3cb12ffba9af14b0201a23b7cd8d080376b62",
+      "complete": true,
+      "matches": 500,
+      "wins": 176,
+      "losses": 263,
+      "draws": 61
+    },
+    {
+      "opponent": "reason",
+      "file": "ai/research/evaluation/guanzero-427033-development-500-reason-stopped-progress.json",
+      "sha256": "b2766decb69c9639d51d986644e6488b4b0a59fc519d1e60ab928b38c7b98b4e",
+      "complete": false,
+      "matches": 264,
+      "wins": 75,
+      "losses": 166,
+      "draws": 23
+    }
+  ],
+  "publishable": false
+}
