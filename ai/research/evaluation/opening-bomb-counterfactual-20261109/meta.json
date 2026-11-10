@@ -1,0 +1,10 @@
+{
+  "protocol": "opening-bomb-counterfactual-v1",
+  "start": 4300000000,
+  "target": 800,
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+  "belief": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "beliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+  "createdAt": "2026-11-10T02:43:16.126Z"
+}

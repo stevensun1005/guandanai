@@ -1,0 +1,240 @@
+{
+  "protocol": "opening-bomb-counterfactual-v1",
+  "start": 4300000000,
+  "target": 800,
+  "champion": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+  "belief": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+  "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "beliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+  "status": "complete",
+  "error": null,
+  "finishedAt": "2026-11-10T03:23:40.242Z",
+  "summary": {
+    "positions": 803,
+    "rowsTotal": 803,
+    "P1": {
+      "d": {
+        "n": 803,
+        "mean": -0.0136986301369863,
+        "ci95": [
+          -0.17310087173100872,
+          0.14570361145703611
+        ],
+        "sharePositive": 0.33250311332503113,
+        "shareZero": 0.3549190535491905,
+        "shareNegative": 0.3125778331257783
+      },
+      "meanOutcomeA": -0.0037359900373599006,
+      "meanOutcomeB": -0.017434620174346202,
+      "byBand": {
+        ">80": {
+          "n": 696,
+          "mean": -0.005747126436781609,
+          "ci95": [
+            -0.17385057471264367,
+            0.16091954022988506
+          ],
+          "sharePositive": 0.3333333333333333,
+          "shareZero": 0.35344827586206895,
+          "shareNegative": 0.3132183908045977
+        },
+        "61-80": {
+          "n": 107,
+          "mean": -0.06542056074766354,
+          "ci95": [
+            -0.4953271028037383,
+            0.3644859813084112
+          ],
+          "sharePositive": 0.32710280373831774,
+          "shareZero": 0.3644859813084112,
+          "shareNegative": 0.308411214953271
+        }
+      },
+      "byBlindFollow": {
+        "false": {
+          "n": 548,
+          "mean": 0.07481751824817519,
+          "ci95": [
+            -0.11496350364963503,
+            0.2664233576642336
+          ],
+          "sharePositive": 0.34306569343065696,
+          "shareZero": 0.3467153284671533,
+          "shareNegative": 0.3102189781021898
+        },
+        "true": {
+          "n": 255,
+          "mean": -0.20392156862745098,
+          "ci95": [
+            -0.48627450980392156,
+            0.07058823529411765
+          ],
+          "sharePositive": 0.30980392156862746,
+          "shareZero": 0.37254901960784315,
+          "shareNegative": 0.3176470588235294
+        }
+      },
+      "byTrickClass": {
+        "single": {
+          "n": 336,
+          "mean": 0.07738095238095238,
+          "ci95": [
+            -0.15773809523809523,
+            0.3125
+          ],
+          "sharePositive": 0.31845238095238093,
+          "shareZero": 0.38392857142857145,
+          "shareNegative": 0.2976190476190476
+        },
+        "other": {
+          "n": 426,
+          "mean": -0.09389671361502347,
+          "ci95": [
+            -0.3192488262910798,
+            0.1267605633802817
+          ],
+          "sharePositive": 0.3403755868544601,
+          "shareZero": 0.323943661971831,
+          "shareNegative": 0.33568075117370894
+        },
+        "pair": {
+          "n": 41,
+          "mean": 0.07317073170731707,
+          "ci95": [
+            -0.5853658536585366,
+            0.6829268292682927
+          ],
+          "sharePositive": 0.36585365853658536,
+          "shareZero": 0.43902439024390244,
+          "shareNegative": 0.1951219512195122
+        }
+      }
+    },
+    "P2": {
+      "d": {
+        "n": 803,
+        "mean": -0.1357409713574097,
+        "ci95": [
+          -0.29638854296388545,
+          0.024906600249066
+        ],
+        "sharePositive": 0.3275217932752179,
+        "shareZero": 0.3287671232876712,
+        "shareNegative": 0.3437110834371108
+      },
+      "meanOutcomeA": 0.057285180572851806,
+      "meanOutcomeB": -0.0784557907845579,
+      "byBand": {
+        ">80": {
+          "n": 696,
+          "mean": -0.14367816091954022,
+          "ci95": [
+            -0.3132183908045977,
+            0.021551724137931036
+          ],
+          "sharePositive": 0.3218390804597701,
+          "shareZero": 0.3275862068965517,
+          "shareNegative": 0.3505747126436782
+        },
+        "61-80": {
+          "n": 107,
+          "mean": -0.08411214953271028,
+          "ci95": [
+            -0.5327102803738317,
+            0.3644859813084112
+          ],
+          "sharePositive": 0.3644859813084112,
+          "shareZero": 0.3364485981308411,
+          "shareNegative": 0.29906542056074764
+        }
+      },
+      "byBlindFollow": {
+        "false": {
+          "n": 548,
+          "mean": -0.043795620437956206,
+          "ci95": [
+            -0.22992700729927007,
+            0.145985401459854
+          ],
+          "sharePositive": 0.3521897810218978,
+          "shareZero": 0.3266423357664234,
+          "shareNegative": 0.32116788321167883
+        },
+        "true": {
+          "n": 255,
+          "mean": -0.3333333333333333,
+          "ci95": [
+            -0.6274509803921569,
+            -0.0392156862745098
+          ],
+          "sharePositive": 0.27450980392156865,
+          "shareZero": 0.3333333333333333,
+          "shareNegative": 0.39215686274509803
+        }
+      },
+      "byTrickClass": {
+        "single": {
+          "n": 336,
+          "mean": 0.011904761904761904,
+          "ci95": [
+            -0.22023809523809523,
+            0.24404761904761904
+          ],
+          "sharePositive": 0.3392857142857143,
+          "shareZero": 0.34226190476190477,
+          "shareNegative": 0.31845238095238093
+        },
+        "other": {
+          "n": 426,
+          "mean": -0.2676056338028169,
+          "ci95": [
+            -0.4953051643192488,
+            -0.0539906103286385
+          ],
+          "sharePositive": 0.31690140845070425,
+          "shareZero": 0.30985915492957744,
+          "shareNegative": 0.3732394366197183
+        },
+        "pair": {
+          "n": 41,
+          "mean": 0.024390243902439025,
+          "ci95": [
+            -0.6097560975609756,
+            0.6585365853658537
+          ],
+          "sharePositive": 0.34146341463414637,
+          "shareZero": 0.4146341463414634,
+          "shareNegative": 0.24390243902439024
+        }
+      }
+    },
+    "pairedP2minusP1": {
+      "n": 803,
+      "mean": -0.12204234122042341,
+      "ci95": [
+        -0.2640099626400996,
+        0.021170610211706103
+      ],
+      "sharePositive": 0.286425902864259,
+      "shareZero": 0.3848069738480697,
+      "shareNegative": 0.3287671232876712
+    },
+    "moveBPassShare": 0.7247820672478207,
+    "blindFollowShare": 0.3175591531755915,
+    "p2SearchFallbacks": {
+      "midgameRequests": 17209,
+      "midgameFallbacks": 0,
+      "endgameRequests": 8787,
+      "endgameFallbacks": 13,
+      "reasons": {
+        "endgame:budget": 13
+      }
+    },
+    "meanWallSecondsPerPosition": 11.903114570361133,
+    "reading": {
+      "verdict": "iii",
+      "text": "inconclusive at this size; P2 interval half-width 0.161"
+    },
+    "note": "development check on new seeds; not an acceptance result, a win rate or a strength claim"
+  }
+}
