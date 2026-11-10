@@ -646,6 +646,22 @@
         "type": "descriptive",
         "text": "所有者交代的任务，不是实验结论"
       }
+    },
+    {
+      "key": "T-window3-launch",
+      "ids": [
+        "T-window3-launch"
+      ],
+      "title": "12 小时计划定稿后自动启动第三窗口训练",
+      "desc": "所有者 22:28 美东授权：下一个 12 小时训练计划一出来就自动开跑，不再等确认。步骤：审核计划（是否符合整局目标、不写手工规则、手牌推断保留、预登记与新种子），用 Opus 实现并测试代码，冻结检出、登记协议和 STOP 截止保护，建第三窗口面板（手机可看），然后启动。网页冠军 017 和默认 danMCai-reason 不变。",
+      "kind": "audit",
+      "queue": "owner-tasks (手动推进，Claude 记录进度)",
+      "after": "计划定稿（Fable 设计流程）且第二窗口 23:00 美东结束后",
+      "paths": {},
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
     }
   ]
 }
