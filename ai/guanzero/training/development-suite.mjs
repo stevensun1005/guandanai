@@ -21,9 +21,13 @@ import {
   REASON_PANELS,
   MIXED_PANEL,
   MIXED_PAIRS,
+  CHAMPION_REASON_PANEL,
+  CHAMPION_REASON_PAIRS,
+  suiteOpponents,
   suiteReasonProtocol,
 } from './opponents.mjs';
 import { freezeClint } from './evaluate-clint.mjs';
+import { effectiveOpponents } from './opponent-retirement.mjs';
 import { freezeChampion, championDefinition } from './champion.mjs';
 import { ROOT, paths, readJSON, writeJSON, option, sha256, evalSeed } from './lib.mjs';
 export const SUITE_PAIRS = 250;
@@ -86,7 +90,10 @@ export async function addSuite(
       ).freezeClint;
   }
   const reason = await freeze(folder, champion.metadata, championRoot);
-  const opponentPanel = reasonPanel(reason, reasonRuntime ?? { opponentPanel: MIXED_PANEL });
+  const opponentPanel = reasonPanel(
+    reason,
+    reasonRuntime ?? { opponentPanel: CHAMPION_REASON_PANEL },
+  );
   const clint = opponentPanel === MIXED_PANEL ? freezeBrain() : null;
   const index = (manifest.seedIndexBase ?? SUITE_SEED_INDEX) + manifest.suites.length,
     start = evalSeed(index, SUITE_PAIRS);
@@ -102,7 +109,8 @@ export async function addSuite(
     seedStart: start,
     seedEnd: start + SUITE_PAIRS - 1,
     opponentPanel,
-    opponents: [...DEFAULT_OPPONENTS],
+    opponents: [...suiteOpponents({ opponentPanel })],
+    ...(opponentPanel === CHAMPION_REASON_PANEL && { opponentPairs: { ...CHAMPION_REASON_PAIRS } }),
     ...(clint && { opponentPairs: { ...MIXED_PAIRS }, clint }),
     champion: champion.metadata,
     reason,
@@ -189,7 +197,12 @@ export async function runDevelopmentSuites({
         if (existsSync(join(directory, plan.id, 'cancelled.json'))) continue;
         const folder = join(directory, plan.id),
           champion = { file: join(folder, 'champion.onnx'), metadata: plan.champion };
-        const pending = plan.opponents.filter(
+        const required = effectiveOpponents(
+          plan,
+          readJSON(join(folder, 'opponent-retirement.json'), null),
+          sha256(join(folder, 'plan.json')),
+        );
+        const pending = required.filter(
           (op) => !validSuiteReport(readJSON(join(folder, op, 'report.json'), null), plan, op),
         );
         // Workers refuse a plan pinned to another evaluator checkout; say so before forking.
@@ -199,7 +212,7 @@ export async function runDevelopmentSuites({
           );
         state.suite = plan.id;
         state.targetMatchesByOpponent = Object.fromEntries(
-          plan.opponents.map((op) => [op, 2 * (plan.opponentPairs?.[op] ?? plan.pairs)]),
+          required.map((op) => [op, 2 * (plan.opponentPairs?.[op] ?? plan.pairs)]),
         );
         state.phase = 'evaluating';
         save();
@@ -236,7 +249,7 @@ export async function runDevelopmentSuites({
         if (failure) throw failure.reason;
         save();
         if (
-          !plan.opponents.every((op) =>
+          !required.every((op) =>
             validSuiteReport(readJSON(join(folder, op, 'report.json'), null), plan, op),
           )
         )

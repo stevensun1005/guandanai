@@ -5026,6 +5026,110 @@
           ]
         }
       }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-468071-development-mixed-champion.json",
+      "opponent": "champion",
+      "reportSHA256": "0d97de396fd68f74c24139ef1436967718245c4fd33ff0c88adae0530a9de4dd",
+      "protocolSHA256": "11b707f00d82ffddc69ec00539bcb177ddb6c476e68792a69c51c3300028cb7d",
+      "completedAt": "2026-11-10T13:26:49.774Z",
+      "pairs": 250,
+      "matches": 500,
+      "seedStart": 4213200000,
+      "seedEnd": 4213200249,
+      "modelSHA256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+      "opponentPanel": "clint-brain-champion-reason-v3",
+      "metrics": {
+        "matches": 500,
+        "wins": 205,
+        "losses": 247,
+        "draws": 48,
+        "matchWinRate": 0.41,
+        "matchScore": 0.458,
+        "rounds": 5523,
+        "roundWins": 2513,
+        "roundWinRate": 0.4550063371356147,
+        "averageUpgradePoints": -0.10592069527430745,
+        "confidence95": {
+          "matchWinRate": [
+            0.368,
+            0.452
+          ],
+          "matchScore": [
+            0.418,
+            0.497
+          ],
+          "roundWinRate": [
+            0.4401607893294354,
+            0.4704496011602611
+          ],
+          "averageUpgradePoints": [
+            -0.17404831625183015,
+            -0.03326704031820647
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-468071-development-mixed-reason.json",
+      "opponent": "reason",
+      "reportSHA256": "975b9725d92ee7aef4fb133f59e9859d862f2f2fc9ae1c067c92497f2ab47c7b",
+      "protocolSHA256": "42648fb533ffe5a0b09e546f753854ba1105a2efc8f95a127b63779a7f8f929b",
+      "completedAt": "2026-11-10T13:38:35.382Z",
+      "pairs": 25,
+      "matches": 50,
+      "seedStart": 4213200000,
+      "seedEnd": 4213200024,
+      "modelSHA256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+      "opponentPanel": "clint-brain-champion-reason-v3",
+      "metrics": {
+        "matches": 50,
+        "wins": 22,
+        "losses": 25,
+        "draws": 3,
+        "matchWinRate": 0.44,
+        "matchScore": 0.47,
+        "rounds": 530,
+        "roundWins": 264,
+        "roundWinRate": 0.4981132075471698,
+        "averageUpgradePoints": -0.026415094339622643,
+        "confidence95": {
+          "matchWinRate": [
+            0.34,
+            0.54
+          ],
+          "matchScore": [
+            0.39,
+            0.56
+          ],
+          "roundWinRate": [
+            0.46421267893660534,
+            0.5294117647058824
+          ],
+          "averageUpgradePoints": [
+            -0.19611650485436893,
+            0.13303769401330376
+          ]
+        }
+      },
+      "searchStats": {
+        "decisions": 21223,
+        "forced": 6404,
+        "baseOnly": 10811,
+        "midgame": 2679,
+        "endgame": 1329,
+        "minWorldsFallback": 4,
+        "budgetFallback": 2,
+        "knownCardsFallback": 0,
+        "changedFromChampion": 685,
+        "inferences": 1167169,
+        "searchMs": 1795717.3247999924,
+        "solverDeadlineCapped": 2,
+        "maxSearchMs": 50005.043699999806,
+        "searchesOver3s": 79,
+        "searchesOver10s": 26,
+        "searchesOver30s": 6
+      }
     }
   ],
   "guanzeroDevelopmentPlanArchives": [
@@ -5066,6 +5170,16 @@
         }
       ],
       "classification": "original-frozen-plan-not-strength-acceptance"
+    },
+    {
+      "observedAt": "2026-11-10T14:10:19.547Z",
+      "files": [
+        {
+          "file": "ai/research/evaluation/guanzero-468071-plan.json",
+          "sha256": "0601ef5ba3bcd11eff2da6ed05b8079e9f533774b605343f2a69a81f6d15ca5b"
+        }
+      ],
+      "classification": "original-frozen-mixed-plan-not-strength-acceptance"
     }
   ],
   "specialistExperiments": [
@@ -5209,6 +5323,15 @@
         }
       ],
       "publishable": false
+    }
+  ],
+  "guanzeroOpponentRetirements": [
+    {
+      "file": "ai/research/evaluation/guanzero-468071-opponent-retirement.json",
+      "sha256": "be938cdfe7f3f9ff1e346f581964734330c7d75eb9787f41a112778ca2be0d7b",
+      "partialClint": "ai/research/evaluation/guanzero-468071-clint-stopped-progress.json",
+      "partialClintSHA256": "bbdf4b5c7f3005923cb1399893d43a334d50de30ba57a19b01365b8359252700",
+      "classification": "owner-authorized-retirement-preserves-original-plan-and-reports"
     }
   ]
 }

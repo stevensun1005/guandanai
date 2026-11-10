@@ -1,0 +1,32 @@
+{
+  "schema": "guanzero-clint-retirement-v1",
+  "authority": "owner-request-2026-11-10",
+  "requestedAt": "2026-11-10T14:08:46.242885+00:00",
+  "reason": "Owner stopped current Clint evaluation and removed Clint from all future scheduled evaluations; retain already-completed champion500/reason50 and publish their identical tested model.",
+  "originalPlanSHA256": "0601ef5ba3bcd11eff2da6ed05b8079e9f533774b605343f2a69a81f6d15ca5b",
+  "modelSHA256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+  "removedOpponents": [
+    "clint"
+  ],
+  "retainedOpponents": [
+    "champion",
+    "reason"
+  ],
+  "retainedReportSHA256": {
+    "champion": "0d97de396fd68f74c24139ef1436967718245c4fd33ff0c88adae0530a9de4dd",
+    "reason": "975b9725d92ee7aef4fb133f59e9859d862f2f2fc9ae1c067c92497f2ab47c7b"
+  },
+  "clintStoppedProgressSHA256": "bbdf4b5c7f3005923cb1399893d43a334d50de30ba57a19b01365b8359252700",
+  "clintPartialMetrics": {
+    "matches": 8,
+    "wins": 6,
+    "losses": 1,
+    "draws": 1,
+    "matchWinRate": 0.75,
+    "matchScore": 0.8125,
+    "rounds": 89,
+    "roundWins": 51,
+    "roundWinRate": 0.5730337078651685,
+    "averageUpgradePoints": 0.6404494382022472
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-11-10T14:16:28.805065+00:00",
+  "authority": "owner2026-11-10",
+  "newPanel": "champion-reason-v4",
+  "newPairs": {
+    "champion": 250,
+    "reason": 100
+  },
+  "newMatches": {
+    "champion": 500,
+    "reason": 200
+  },
+  "clintRetired": true,
+  "currentSuite": "model-000000468071",
+  "currentAmendment": "ai/research/evaluation/guanzero-468071-opponent-retirement.json",
+  "currentReason200Scope": "awaiting-owner-reply; original50-match report retained",
+  "validation": {
+    "node": {
+      "total": 473,
+      "passed": 448,
+      "failed": 0,
+      "skipped": 25
+    },
+    "format": "passed",
+    "guanzeroPythonUnchanged": 9,
+    "currentFrozenReports": "verified500/50 against exact immutable plan and fullSHAs; no report rewriting"
+  }
+}

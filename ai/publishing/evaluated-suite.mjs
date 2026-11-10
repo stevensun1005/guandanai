@@ -5,6 +5,7 @@ import { basename, dirname, join, resolve } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { verifyFrozenReason, reasonProtocol } from '../guanzero/training/reason.mjs';
 import { validSuiteReport } from '../guanzero/training/suite-reports.mjs';
+import { effectiveOpponents } from '../guanzero/training/opponent-retirement.mjs';
 import {
   DEFAULT_OPPONENTS,
   LEGACY_FIVE_OPPONENTS,
@@ -32,6 +33,26 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
     if (e.code !== 'ENOENT') throw e;
   }
   const plan = await read(join(suite, 'plan.json'));
+  let retirement = null,
+    retirementSHA256 = null;
+  try {
+    const b = await readFile(join(suite, 'opponent-retirement.json'));
+    retirement = JSON.parse(b);
+    retirementSHA256 = sha256(b);
+  } catch (e) {
+    if (e.code !== 'ENOENT') throw e;
+  }
+  const required = effectiveOpponents(
+    plan,
+    retirement,
+    sha256(await readFile(join(suite, 'plan.json'))),
+  );
+  if (
+    retirement &&
+    sha256(await readFile(join(suite, 'clint/clint-progress.json'))) !==
+      retirement.clintStoppedProgressSHA256
+  )
+    throw Error('Retired Clint progress changed');
   const manifest = await read(join(parent, 'manifest.json'));
   // Unmarked historical plans always require all five reports. A missing report
   // cannot turn an old batch into a newer smaller batch.
@@ -82,8 +103,10 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
     throw Error('Frozen champion gate mismatch');
 
   const opponents = {};
-  for (const op of panel) {
+  for (const op of required) {
     const bytes = await readFile(join(suite, op, 'report.json'));
+    if (retirement && retirement.retainedReportSHA256[op] !== sha256(bytes))
+      throw Error('Retained report changed after owner amendment');
     const report = JSON.parse(bytes);
     if (
       !validSuiteReport(report, plan, op) ||
@@ -119,7 +142,7 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
       draws,
       confidence95,
       reportSHA256: sha256(bytes),
-      ...(plan.opponentPanel === MIXED_PANEL
+      ...(plan.opponentPairs
         ? {
             pairs: suitePairs(plan, op),
             matches: 2 * suitePairs(plan, op),
@@ -137,6 +160,8 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
     championSHA256: plan.champion.modelSHA256,
     ...(plan.reason && { reason: plan.reason }),
     ...(plan.clint && { clint: plan.clint, opponentPairs: plan.opponentPairs }),
+    ...(plan.opponentPairs && { opponentPairs: plan.opponentPairs }),
+    ...(retirement && { opponentRetirement: { ...retirement, sha256: retirementSHA256 } }),
     opponents,
   };
 }

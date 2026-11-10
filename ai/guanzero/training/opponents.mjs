@@ -10,31 +10,43 @@ export const REASON_V1_PANEL = 'clint-champion-reason-v1';
 export const REASON_V2_PANEL = 'clint-champion-reason-v2';
 /** Owner: brain-enabled Clint 50, champion 500, reason 50; old panels stay immutable. */
 export const MIXED_PANEL = 'clint-brain-champion-reason-v3';
+export const CHAMPION_REASON_PANEL = 'champion-reason-v4';
+export const CHAMPION_REASON_PAIRS = Object.freeze({ champion: 250, reason: 100 });
+export const CHAMPION_REASON_OPPONENTS = Object.freeze(['champion', 'reason']);
 export const MIXED_PAIRS = Object.freeze({ clint: 25, champion: 250, reason: 25 });
 export const suiteReasonProtocol = (plan) =>
-  plan.opponentPanel === MIXED_PANEL ? REASON_V2_PANEL : plan.opponentPanel;
+  [MIXED_PANEL, CHAMPION_REASON_PANEL].includes(plan.opponentPanel)
+    ? REASON_V2_PANEL
+    : plan.opponentPanel;
 export function suitePairs(plan, opponent) {
-  if (plan.opponentPanel === MIXED_PANEL) {
+  if ([MIXED_PANEL, CHAMPION_REASON_PANEL].includes(plan.opponentPanel)) {
+    const expected = plan.opponentPanel === MIXED_PANEL ? MIXED_PAIRS : CHAMPION_REASON_PAIRS;
     if (
       plan.pairs !== 250 ||
       !plan.opponentPairs ||
-      Object.keys(plan.opponentPairs).length !== 3 ||
-      Object.entries(MIXED_PAIRS).some(([op, n]) => plan.opponentPairs[op] !== n)
+      Object.keys(plan.opponentPairs).length !== Object.keys(expected).length ||
+      Object.entries(expected).some(([op, n]) => plan.opponentPairs[op] !== n)
     )
       throw Error('Invalid mixed opponent pair counts');
-    if (!Object.hasOwn(MIXED_PAIRS, opponent)) throw Error('Unknown mixed opponent');
-    return MIXED_PAIRS[opponent];
+    if (!Object.hasOwn(expected, opponent)) throw Error('Unknown mixed opponent');
+    return expected[opponent];
   }
   if (plan.opponentPairs !== undefined) throw Error('Historical batch cannot change pair counts');
   return plan.pairs;
 }
 /** Both reason panels evaluate the same three opponents; only the reason budget differs. */
-export const REASON_PANELS = Object.freeze([REASON_V1_PANEL, REASON_V2_PANEL, MIXED_PANEL]);
+export const REASON_PANELS = Object.freeze([
+  REASON_V1_PANEL,
+  REASON_V2_PANEL,
+  MIXED_PANEL,
+  CHAMPION_REASON_PANEL,
+]);
 /** Panel of newly registered batches (the frozen companion's freezeReason decides it). */
 export const REASON_OPPONENT_PANEL = REASON_V2_PANEL;
 export const THREE_OPPONENT_PANEL = 'random-clint-champion-v1';
 export const TWO_OPPONENT_PANEL = 'clint-champion-v1';
 export function suiteOpponents(plan) {
+  if (plan.opponentPanel === CHAMPION_REASON_PANEL) return CHAMPION_REASON_OPPONENTS;
   if (plan.opponentPanel === undefined) return LEGACY_FIVE_OPPONENTS;
   if (plan.opponentPanel === THREE_OPPONENT_PANEL) return LEGACY_THREE_OPPONENTS;
   if (plan.opponentPanel === TWO_OPPONENT_PANEL) return LEGACY_TWO_OPPONENTS;

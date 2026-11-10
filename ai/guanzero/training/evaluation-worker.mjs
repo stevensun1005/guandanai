@@ -11,6 +11,7 @@ import { evaluateReason } from './evaluate-reason.mjs';
 import { evaluateClint } from './evaluate-clint.mjs';
 import { evaluate } from './evaluate.mjs';
 import { suiteOpponents, suitePairs, MIXED_PANEL } from './opponents.mjs';
+import { effectiveOpponents } from './opponent-retirement.mjs';
 setPriority(process.pid, constants.priority.PRIORITY_BELOW_NORMAL);
 const run = resolve(option('run')),
   id = option('suite'),
@@ -20,6 +21,14 @@ const folder = join(run, 'eval/development-500', id),
   plan = readJSON(join(folder, 'plan.json'));
 assert.deepEqual(plan.opponents, suiteOpponents(plan));
 assert.ok(plan.opponents.includes(op));
+assert.ok(
+  effectiveOpponents(
+    plan,
+    readJSON(join(folder, 'opponent-retirement.json'), null),
+    sha256(join(folder, 'plan.json')),
+  ).includes(op),
+  'Owner retired this opponent',
+);
 assert.equal(plan.pairs, 250);
 assert.equal(plan.seedStart, evalSeed(plan.index, plan.pairs));
 assert.equal(plan.seedEnd, plan.seedStart + 249);

@@ -68,6 +68,11 @@ export function suiteRows(
         continue;
       }
       const cancelled = read(join(folder, 'cancelled.json'));
+      const retirement = read(join(folder, 'opponent-retirement.json'));
+      const retired =
+        retirement?.removedOpponents?.includes(opponent) &&
+        retirement?.schema === 'guanzero-clint-retirement-v1' &&
+        retirement.modelSHA256 === plan.modelSHA256;
       const report = read(join(folder, opponent, 'report.json'));
       const complete = validSuiteReport(report, plan, opponent);
       const progress = read(join(folder, opponent, `${opponent}-progress.json`));
@@ -117,12 +122,12 @@ export function suiteRows(
         plannedMatches: 2 * pairs,
         status: complete
           ? 'complete'
-          : cancelled
+          : cancelled || retired
             ? 'cancelled'
             : validProgress
               ? 'running'
               : 'queued',
-        cancelledAt: cancelled?.cancelledAt,
+        cancelledAt: cancelled?.cancelledAt ?? (retired ? retirement.requestedAt : null),
         matches: 0,
         completedAt: complete ? report.completedAt : null,
         ...m,

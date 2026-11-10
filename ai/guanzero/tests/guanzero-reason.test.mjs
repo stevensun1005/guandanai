@@ -39,6 +39,8 @@ import { reasonPanel, runDevelopmentSuites } from '../training/development-suite
 import { suiteOpponents, REASON_V1_PANEL, REASON_V2_PANEL } from '../training/opponents.mjs';
 import { validSuiteReport } from '../training/suite-reports.mjs';
 import { MIXED_PANEL, MIXED_PAIRS, suitePairs } from '../training/opponents.mjs';
+import { CHAMPION_REASON_PANEL, CHAMPION_REASON_PAIRS } from '../training/opponents.mjs';
+import { effectiveOpponents } from '../training/opponent-retirement.mjs';
 import { freezeClint, clintProtocolDigest } from '../training/evaluate-clint.mjs';
 import { verifyEvaluatedSuite } from '../../publishing/evaluated-suite.mjs';
 import { guanzeroCards } from '../../research/tools/guanzero-stages.mjs';
@@ -441,8 +443,9 @@ async function publisherRoundTrip(protocol) {
     const root = join(temp, 'repo'),
       folder = join(temp, 'guanzero-adp-io48/eval/development-500/model-000001');
     mkdirSync(folder, { recursive: true });
-    const mixed = protocol === MIXED_PANEL;
-    const { champion, reason } = identities(mixed ? REASON_V2_PANEL : protocol);
+    const mixed = protocol === MIXED_PANEL,
+      two = protocol === CHAMPION_REASON_PANEL;
+    const { champion, reason } = identities(mixed || two ? REASON_V2_PANEL : protocol);
     const write = (p, d) => {
       mkdirSync(join(p, '..'), { recursive: true });
       writeFileSync(p, JSON.stringify(d, null, 2) + '\n');
@@ -465,7 +468,7 @@ async function publisherRoundTrip(protocol) {
       id: 'model-000001',
       protocol: 'development-500-v1',
       opponentPanel: protocol,
-      opponents: ['clint', 'champion', 'reason'],
+      opponents: [...suiteOpponents({ opponentPanel: protocol })],
       modelVersion: 'model-000001',
       modelSHA256: hash('model'),
       index: 5131,
@@ -475,6 +478,7 @@ async function publisherRoundTrip(protocol) {
       champion,
       reason,
       ...(mixed ? { opponentPairs: { ...MIXED_PAIRS }, clint: freezeClint() } : {}),
+      ...(two ? { opponentPairs: { ...CHAMPION_REASON_PAIRS } } : {}),
     };
     const savePlan = () => {
       write(join(folder, 'plan.json'), plan);
@@ -533,7 +537,7 @@ async function publisherRoundTrip(protocol) {
         root,
       );
     await assert.rejects(verify(), /ENOENT/);
-    if (!mixed) {
+    if (!mixed && !two) {
       plan.opponentPanel = 'clint-champion-v1';
       plan.opponents = ['clint', 'champion'];
       delete plan.reason;
@@ -546,7 +550,7 @@ async function publisherRoundTrip(protocol) {
     savePlan();
     write(join(folder, 'reason/report.json'), reports.reason);
     const verified = await verify();
-    assert.equal(Object.keys(verified.opponents).length, 3);
+    assert.equal(Object.keys(verified.opponents).length, two ? 2 : 3);
     assert.equal(verified.opponentPanel, protocol);
     assert.equal(verified.reason.budget.midgameMs, protocol === REASON_V1_PANEL ? 3000 : 50_000);
     // the panel must name the protocol its frozen reason identity was registered with
@@ -562,7 +566,7 @@ async function publisherRoundTrip(protocol) {
     await assert.rejects(verify(), /mismatched report/);
     write(join(folder, 'reason/report.json'), reports.reason);
     const cards = guanzeroCards(join(temp, 'guanzero-adp-io48'), Date.now());
-    assert.equal(cards.length, 3);
+    assert.equal(cards.length, two ? 2 : 3);
     assert.ok(cards.every((c) => c.state === 'done'));
     assert.ok(cards.some((c) => c.title.includes('danMCai-reason-v000001')));
     if (mixed) {
@@ -596,6 +600,34 @@ test('publisher verifies protocol v2 batches the same way and binds panel to rea
   publisherRoundTrip(REASON_V2_PANEL));
 test('mixed protocol requires brain-enabled Clint 50, champion 500, reason 50 and rejects cancellation', () =>
   publisherRoundTrip(MIXED_PANEL));
+test('future v4 needs only champion500 and reason200, with the unchanged reason v2 policy', () =>
+  publisherRoundTrip(CHAMPION_REASON_PANEL));
+test('owner retirement applies only to the exact current suite and preserves both completed groups', () => {
+  const plan = {
+    id: 'model-000000468071',
+    index: 5132,
+    opponentPanel: MIXED_PANEL,
+    opponents: ['clint', 'champion', 'reason'],
+    modelSHA256: '1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143',
+  };
+  const amendment = {
+    schema: 'guanzero-clint-retirement-v1',
+    authority: 'owner-request-2026-11-10',
+    originalPlanSHA256: 'plan',
+    modelSHA256: plan.modelSHA256,
+    removedOpponents: ['clint'],
+    retainedOpponents: ['champion', 'reason'],
+    requestedAt: '2026-11-10T14:04:00Z',
+    retainedReportSHA256: { champion: 'a'.repeat(64), reason: 'b'.repeat(64) },
+    clintStoppedProgressSHA256: 'c'.repeat(64),
+  };
+  assert.deepEqual(effectiveOpponents(plan, amendment, 'plan'), ['champion', 'reason']);
+  assert.throws(() => effectiveOpponents({ ...plan, index: 5133 }, amendment, 'plan'));
+  assert.throws(() => effectiveOpponents(plan, amendment, 'changed-plan'));
+  assert.throws(() =>
+    effectiveOpponents(plan, { ...amendment, removedOpponents: ['champion'] }, 'plan'),
+  );
+});
 test('legacy protocols cannot be downsized by adding per-opponent counts', () => {
   assert.throws(
     () =>

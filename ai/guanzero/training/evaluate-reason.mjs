@@ -14,7 +14,13 @@ import {
   reasonProtocol,
   REASON_V2_MOVE,
 } from './reason.mjs';
-import { REASON_PANELS, REASON_V1_PANEL, suiteReasonProtocol, suitePairs } from './opponents.mjs';
+import {
+  REASON_PANELS,
+  REASON_V1_PANEL,
+  suiteReasonProtocol,
+  suitePairs,
+  suiteOpponents,
+} from './opponents.mjs';
 import { readJSON, writeJSON, sha256, createInference } from './lib.mjs';
 
 export function reasonProtocolDigest(report) {
@@ -43,8 +49,8 @@ export async function reasonMatch({ seed, team, inference, engine, play = playMa
   });
 }
 export async function evaluateReason({ run, folder, plan, stop = () => {} }) {
-  assert.deepEqual(plan.opponents, ['clint', 'champion', 'reason']);
   assert.ok(REASON_PANELS.includes(plan.opponentPanel), 'Not a reason panel');
+  assert.deepEqual(plan.opponents, suiteOpponents(plan));
   assert.equal(
     reasonProtocol(plan.reason),
     suiteReasonProtocol(plan),

@@ -1,0 +1,2038 @@
+{
+  "protocolSHA256": "d4a68795ca076d4c0f5e83eb14aa11cd9168ee7368f7fc443e0f06a7ee1c4b9a",
+  "evaluationSHA256": "5a67d43dfe1c08ff84315ce959d15064c33517236ec7d08fecd78d43c0f3e2f4",
+  "opponent": "clint",
+  "completedPairs": 4,
+  "pairs": 25,
+  "modelSHA256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+  "opponentSHA256": "5a67d43dfe1c08ff84315ce959d15064c33517236ec7d08fecd78d43c0f3e2f4",
+  "seedStart": 4213200000,
+  "updatedAt": "2026-11-10T13:59:04.444Z",
+  "metrics": {
+    "matches": 8,
+    "wins": 6,
+    "losses": 1,
+    "draws": 1,
+    "matchWinRate": 0.75,
+    "matchScore": 0.8125,
+    "rounds": 89,
+    "roundWins": 51,
+    "roundWinRate": 0.5730337078651685,
+    "averageUpgradePoints": 0.6404494382022472
+  },
+  "brainStats": {
+    "decisions": 3816,
+    "maxDecisionMs": 30031.511100000003,
+    "calls": 394,
+    "used": 291,
+    "fallback": 103,
+    "changed": 52,
+    "ms": 3125333.8625999964
+  },
+  "clusters": [
+    [
+      {
+        "seed": 4213200000,
+        "neuralTeam": 0,
+        "opponent": "self",
+        "winner": 0,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              3,
+              2,
+              0,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 2,
+            "after": 3,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 3,
+            "order": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "team": 0,
+            "up": 2,
+            "before": 2,
+            "after": 4,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 3
+          },
+          {
+            "round": 3,
+            "level": 4,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 3,
+            "after": 4,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 4
+          },
+          {
+            "round": 4,
+            "level": 4,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 4,
+            "after": 7,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 4
+          },
+          {
+            "round": 5,
+            "level": 7,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 7,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 7
+          },
+          {
+            "round": 6,
+            "level": 10,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 10,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 10
+          },
+          {
+            "round": 7,
+            "level": 13,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 13
+          },
+          {
+            "round": 8,
+            "level": 14,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 8,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 5,
+          "doubleLosses": 0,
+          "isolatedFirsts": 0
+        },
+        "clintStats": {
+          "decisions": 352,
+          "maxDecisionMs": 30002.9351,
+          "calls": 26,
+          "used": 22,
+          "fallback": 4,
+          "changed": 5,
+          "ms": 168807.17260000002
+        }
+      },
+      {
+        "seed": 4213200000,
+        "neuralTeam": 1,
+        "opponent": "self",
+        "winner": 1,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 5,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 5,
+            "after": 8,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 5
+          },
+          {
+            "round": 3,
+            "level": 8,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 8
+          },
+          {
+            "round": 4,
+            "level": 5,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 5,
+            "after": 8,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 5
+          },
+          {
+            "round": 5,
+            "level": 8,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 8,
+            "after": 11,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 8
+          },
+          {
+            "round": 6,
+            "level": 11,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 8,
+            "after": 11,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 11
+          },
+          {
+            "round": 7,
+            "level": 11,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 11,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 11
+          },
+          {
+            "round": 8,
+            "level": 14,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 11,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 1,
+            "playedLevel": 14
+          },
+          {
+            "round": 9,
+            "level": 14,
+            "order": [
+              1,
+              0,
+              3,
+              2
+            ],
+            "team": 1,
+            "up": 2,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 0,
+            "playedLevel": 14
+          },
+          {
+            "round": 10,
+            "level": 14,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 10,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 5,
+          "doubleLosses": 4,
+          "isolatedFirsts": 0
+        },
+        "clintStats": {
+          "decisions": 377,
+          "maxDecisionMs": 30001.38090000002,
+          "calls": 9,
+          "used": 5,
+          "fallback": 4,
+          "changed": 0,
+          "ms": 73910.25639999995
+        }
+      }
+    ],
+    [
+      {
+        "seed": 4213200001,
+        "neuralTeam": 0,
+        "opponent": "self",
+        "winner": null,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 5,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 2,
+            "after": 3,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 5
+          },
+          {
+            "round": 3,
+            "level": 3,
+            "order": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "team": 0,
+            "up": 2,
+            "before": 5,
+            "after": 7,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 3
+          },
+          {
+            "round": 4,
+            "level": 7,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 7,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 7
+          },
+          {
+            "round": 5,
+            "level": 10,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 3,
+            "after": 6,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 10
+          },
+          {
+            "round": 6,
+            "level": 6,
+            "order": [
+              1,
+              2,
+              0,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 6,
+            "after": 7,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 6
+          },
+          {
+            "round": 7,
+            "level": 7,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 10,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 7
+          },
+          {
+            "round": 8,
+            "level": 13,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 7,
+            "after": 8,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 13
+          },
+          {
+            "round": 9,
+            "level": 8,
+            "order": [
+              1,
+              2,
+              3,
+              0
+            ],
+            "team": 1,
+            "up": 2,
+            "before": 8,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 8
+          },
+          {
+            "round": 10,
+            "level": 10,
+            "order": [
+              1,
+              0,
+              2,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 10,
+            "after": 11,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 10
+          },
+          {
+            "round": 11,
+            "level": 11,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 11,
+            "after": 12,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 11
+          },
+          {
+            "round": 12,
+            "level": 12,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 12,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 12
+          },
+          {
+            "round": 13,
+            "level": 14,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 1,
+            "playedLevel": 14
+          },
+          {
+            "round": 14,
+            "level": 14,
+            "order": [
+              3,
+              2,
+              0,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 2,
+            "aTeam": 1,
+            "playedLevel": 14
+          },
+          {
+            "round": 15,
+            "level": 14,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": true,
+            "reset": false,
+            "aTry": 3,
+            "aTeam": 1,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 15,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 4,
+          "doubleLosses": 2,
+          "isolatedFirsts": 0
+        },
+        "clintStats": {
+          "decisions": 651,
+          "maxDecisionMs": 30031.511100000003,
+          "calls": 82,
+          "used": 54,
+          "fallback": 28,
+          "changed": 8,
+          "ms": 723727.1080999998
+        }
+      },
+      {
+        "seed": 4213200001,
+        "neuralTeam": 1,
+        "opponent": "self",
+        "winner": 1,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              2,
+              1,
+              3,
+              0
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 2,
+            "after": 3,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 3,
+            "order": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 3,
+            "after": 4,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 3
+          },
+          {
+            "round": 3,
+            "level": 4,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 4
+          },
+          {
+            "round": 4,
+            "level": 5,
+            "order": [
+              2,
+              1,
+              3,
+              0
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 4,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 5
+          },
+          {
+            "round": 5,
+            "level": 5,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 5,
+            "after": 8,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 5
+          },
+          {
+            "round": 6,
+            "level": 8,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 8,
+            "after": 11,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 8
+          },
+          {
+            "round": 7,
+            "level": 11,
+            "order": [
+              1,
+              2,
+              3,
+              0
+            ],
+            "team": 1,
+            "up": 2,
+            "before": 11,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 11
+          },
+          {
+            "round": 8,
+            "level": 13,
+            "order": [
+              3,
+              2,
+              0,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 13
+          },
+          {
+            "round": 9,
+            "level": 14,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 9,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 4,
+          "doubleLosses": 0,
+          "isolatedFirsts": 1
+        },
+        "clintStats": {
+          "decisions": 396,
+          "maxDecisionMs": 30002.87770000007,
+          "calls": 34,
+          "used": 29,
+          "fallback": 5,
+          "changed": 6,
+          "ms": 426779.2172000003
+        }
+      }
+    ],
+    [
+      {
+        "seed": 4213200002,
+        "neuralTeam": 0,
+        "opponent": "self",
+        "winner": 0,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 5,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 5,
+            "after": 8,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 5
+          },
+          {
+            "round": 3,
+            "level": 8,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 8,
+            "after": 11,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 8
+          },
+          {
+            "round": 4,
+            "level": 11,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 11,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 11
+          },
+          {
+            "round": 5,
+            "level": 14,
+            "order": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 0,
+            "playedLevel": 14
+          },
+          {
+            "round": 6,
+            "level": 14,
+            "order": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 2,
+            "aTeam": 0,
+            "playedLevel": 14
+          },
+          {
+            "round": 7,
+            "level": 14,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 7,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 5,
+          "doubleLosses": 0,
+          "isolatedFirsts": 2
+        },
+        "clintStats": {
+          "decisions": 286,
+          "maxDecisionMs": 30021.247800000012,
+          "calls": 37,
+          "used": 32,
+          "fallback": 5,
+          "changed": 2,
+          "ms": 273361.8806000005
+        }
+      },
+      {
+        "seed": 4213200002,
+        "neuralTeam": 1,
+        "opponent": "self",
+        "winner": 1,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              1,
+              2,
+              0,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 2,
+            "after": 3,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 3,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 3,
+            "after": 4,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 3
+          },
+          {
+            "round": 3,
+            "level": 4,
+            "order": [
+              1,
+              2,
+              3,
+              0
+            ],
+            "team": 1,
+            "up": 2,
+            "before": 4,
+            "after": 6,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 4
+          },
+          {
+            "round": 4,
+            "level": 6,
+            "order": [
+              3,
+              2,
+              0,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 6,
+            "after": 7,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 6
+          },
+          {
+            "round": 5,
+            "level": 7,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 7,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 7
+          },
+          {
+            "round": 6,
+            "level": 10,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 10,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 10
+          },
+          {
+            "round": 7,
+            "level": 13,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 13
+          },
+          {
+            "round": 8,
+            "level": 5,
+            "order": [
+              2,
+              3,
+              1,
+              0
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 5,
+            "after": 6,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 5
+          },
+          {
+            "round": 9,
+            "level": 6,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 6,
+            "after": 9,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 6
+          },
+          {
+            "round": 10,
+            "level": 9,
+            "order": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 9,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 9
+          },
+          {
+            "round": 11,
+            "level": 10,
+            "order": [
+              3,
+              0,
+              2,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 10
+          },
+          {
+            "round": 12,
+            "level": 14,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 12,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 3,
+          "doubleLosses": 2,
+          "isolatedFirsts": 4
+        },
+        "clintStats": {
+          "decisions": 522,
+          "maxDecisionMs": 30001.87999999989,
+          "calls": 81,
+          "used": 55,
+          "fallback": 26,
+          "changed": 13,
+          "ms": 586950.8774999992
+        }
+      }
+    ],
+    [
+      {
+        "seed": 4213200003,
+        "neuralTeam": 0,
+        "opponent": "self",
+        "winner": 1,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              3,
+              0,
+              1,
+              2
+            ],
+            "team": 1,
+            "up": 2,
+            "before": 2,
+            "after": 4,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 4,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 2,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 4
+          },
+          {
+            "round": 3,
+            "level": 5,
+            "order": [
+              3,
+              2,
+              0,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 4,
+            "after": 5,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 5
+          },
+          {
+            "round": 4,
+            "level": 5,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 5,
+            "after": 8,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 5
+          },
+          {
+            "round": 5,
+            "level": 8,
+            "order": [
+              3,
+              2,
+              0,
+              1
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 5,
+            "after": 6,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 8
+          },
+          {
+            "round": 6,
+            "level": 6,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 6,
+            "after": 9,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 6
+          },
+          {
+            "round": 7,
+            "level": 9,
+            "order": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "team": 0,
+            "up": 2,
+            "before": 8,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 9
+          },
+          {
+            "round": 8,
+            "level": 10,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 10,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 10
+          },
+          {
+            "round": 9,
+            "level": 13,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 13
+          },
+          {
+            "round": 10,
+            "level": 14,
+            "order": [
+              1,
+              0,
+              2,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 9,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 0,
+            "playedLevel": 14
+          },
+          {
+            "round": 11,
+            "level": 10,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 10,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 10
+          },
+          {
+            "round": 12,
+            "level": 13,
+            "order": [
+              1,
+              0,
+              2,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 13
+          },
+          {
+            "round": 13,
+            "level": 14,
+            "order": [
+              1,
+              0,
+              2,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 1,
+            "playedLevel": 14
+          },
+          {
+            "round": 14,
+            "level": 14,
+            "order": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 2,
+            "aTeam": 1,
+            "playedLevel": 14
+          },
+          {
+            "round": 15,
+            "level": 14,
+            "order": [
+              1,
+              2,
+              0,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 14,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 2,
+            "aTeam": 0,
+            "playedLevel": 14
+          },
+          {
+            "round": 16,
+            "level": 14,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 16,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 4,
+          "doubleLosses": 3,
+          "isolatedFirsts": 1
+        },
+        "clintStats": {
+          "decisions": 688,
+          "maxDecisionMs": 30002.92379999999,
+          "calls": 86,
+          "used": 59,
+          "fallback": 27,
+          "changed": 9,
+          "ms": 648876.5037999991
+        }
+      },
+      {
+        "seed": 4213200003,
+        "neuralTeam": 1,
+        "opponent": "self",
+        "winner": 1,
+        "history": [
+          {
+            "round": 1,
+            "level": 2,
+            "order": [
+              1,
+              0,
+              2,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 2,
+            "after": 3,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 2
+          },
+          {
+            "round": 2,
+            "level": 3,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 3,
+            "after": 6,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 3
+          },
+          {
+            "round": 3,
+            "level": 6,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 6,
+            "after": 9,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 6
+          },
+          {
+            "round": 4,
+            "level": 9,
+            "order": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "team": 0,
+            "up": 1,
+            "before": 2,
+            "after": 3,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 9
+          },
+          {
+            "round": 5,
+            "level": 3,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 3,
+            "after": 6,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 3
+          },
+          {
+            "round": 6,
+            "level": 6,
+            "order": [
+              2,
+              0,
+              1,
+              3
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 6,
+            "after": 9,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 6
+          },
+          {
+            "round": 7,
+            "level": 9,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 9,
+            "after": 12,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 9
+          },
+          {
+            "round": 8,
+            "level": 12,
+            "order": [
+              0,
+              2,
+              3,
+              1
+            ],
+            "team": 0,
+            "up": 3,
+            "before": 12,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 0,
+            "playedLevel": 12
+          },
+          {
+            "round": 9,
+            "level": 14,
+            "order": [
+              1,
+              0,
+              2,
+              3
+            ],
+            "team": 1,
+            "up": 1,
+            "before": 9,
+            "after": 10,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 1,
+            "aTeam": 0,
+            "playedLevel": 14
+          },
+          {
+            "round": 10,
+            "level": 10,
+            "order": [
+              3,
+              1,
+              2,
+              0
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 10,
+            "after": 13,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 10
+          },
+          {
+            "round": 11,
+            "level": 13,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 13,
+            "after": 14,
+            "win": false,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 13
+          },
+          {
+            "round": 12,
+            "level": 14,
+            "order": [
+              1,
+              3,
+              0,
+              2
+            ],
+            "team": 1,
+            "up": 3,
+            "before": 14,
+            "after": 14,
+            "win": true,
+            "draw": false,
+            "reset": false,
+            "aTry": 0,
+            "aTeam": 1,
+            "playedLevel": 14
+          }
+        ],
+        "stats": {
+          "rounds": 12,
+          "decisions": 0,
+          "afterFirstOutDecisions": 0,
+          "finishingChoices": 0,
+          "currentModelSeats": [],
+          "doubleWins": 5,
+          "doubleLosses": 4,
+          "isolatedFirsts": 2
+        },
+        "clintStats": {
+          "decisions": 544,
+          "maxDecisionMs": 30002.54930000007,
+          "calls": 39,
+          "used": 35,
+          "fallback": 4,
+          "changed": 9,
+          "ms": 222920.84639999736
+        }
+      }
+    ]
+  ]
+}

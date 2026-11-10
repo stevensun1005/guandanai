@@ -47,7 +47,7 @@
 
 ## GuanZero 每十二小时评测并发布
 
-本机 io48 每天 America/Toronto 08:00、20:00 取一次快照（自2026-11-09起，旧10:12／22:12取消）。周三10:00固定截止另取最终完整导出，具体日历槽见训练指南。按所有者2026-11-09晚最新要求，Clint（含残局大脑）50场、danMCai冠军500场、danMCai-reason 50场全部完成后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前按冻结批次名单核对全部报告：新v3三组共600场（25/250/25对），旧v1/v2各500场仍按原计划；历史两组仍两份、138506五份、186280三份、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席菜单默认由 `selection.defaultChoice` 决定（现为 9001，未设置时为 danMCai 现任冠军），GuanZero 发布不改变它。[本机运行与时间表](../../ai/guanzero/README.md#每十二小时评测)。
+本机 io48 每天 America/Toronto 08:00、20:00 取一次快照（自2026-11-09起，旧10:12／22:12取消）。周三10:00固定截止另取最终完整导出，具体日历槽见训练指南。按所有者2026-11-10最新要求，danMCai冠军500场、danMCai-reason200场全部完成后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前按冻结批次名单核对全部报告：新v4两组共700场（250/100对），旧v3和v1/v2仍按原计划及明确修订；历史两组仍两份、138506五份、186280三份、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席菜单默认由 `selection.defaultChoice` 决定（现为 9001，未设置时为 danMCai 现任冠军），GuanZero 发布不改变它。[本机运行与时间表](../../ai/guanzero/README.md#每十二小时评测)。
 
 ## danMCai 冠军定期同步
 
@@ -106,7 +106,7 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 
 2026-11-09 起出牌评价默认使用菜单中的 danMCai-reason（底座为 `selection.danMCaiChampions[0]` 的搜索机器人，现为 9001）：牌桌剩 21–40 张显示其推断世界推演值、≤20 张显示精确求解值，其余或未完成时显示冠军 `selection.danMCaiChampions[0]` 的网络动作值；与座位选择的托管／电脑模型无关。冠军或推理机器人经现有流程正式发布后，刷新网页即可同步评价身份，页面显示真实名称；不使用普通最新导出冒充冠军。评分只做候选范围内的相对换算，不更改默认模型、性格或机器人动作。[来源、预算与房主许可](MOVE_COACH.md)。
 
-开发评测当前为Clint（含残局大脑）50场、真实danMCai冠军500场、danMCai-reason 50场，共600场；逐组核对25/250/25对、完整SHA、门控、种子和源码指纹。被所有者取消的批次不可发布；历史500场、rules-only Clint与原版机器人保留原标签。详见[GuanZero](../../ai/guanzero/README.md#开发评测对手)。
+开发评测当前只保留danMCai冠军500场、reason200场（250/100对）；Clint退出评测，网页四项菜单仍按清单维护。468071/index5132有一次性Clint退休修订，绑定原计划、模型和两份完整报告SHA，原v3报告身份不改；旧取消427033不可发布。详见[GuanZero](../../ai/guanzero/README.md#开发评测对手)。
 
 ## 进还贡专项组件（开发中）
 

@@ -153,4 +153,4 @@ PR 会执行测试、格式、构建和真实浏览器出牌／牌谱导入检�
 | 了解电脑和复现训练 | [机器人](./web/docs/BOTS.md) · [电脑选择与发布](./web/docs/WEB_MODELS.md) · [训练入口](./ai/research/MODEL_TRAINING.md) · [历史训练记录](./ai/research/TRAINING_RUN.md)                      |
 | 核对模型成绩及计划 | [研究主报告](./ai/research/MODEL_STUDY.md) · [研究进展日志](./ai/research/PROGRESS_LOG.md) · [改进建议及实施状态](./ai/research/IMPROVEMENT_PROPOSAL.md) · [迭代路线](./web/docs/ROADMAP.md) |
 
-GuanZero定时开发评测最新安排：Clint（含网页同款残局大脑）50场、danMCai现任门控冠军500场、danMCai-reason 50场，共600场；分别为25／250／25对交换阵营种子。全部完成后发布同一冻结模型；旧批次保留原协议。[运行协议](ai/guanzero/README.md#danmcai-reason评测协议)。
+GuanZero定时开发评测最新安排：danMCai现任门控冠军500场、danMCai-reason200场（250/100对交换阵营，共700场）；Clint不再参与评测。完成后发布同一冻结模型，历史记录保留原协议。[运行协议](ai/guanzero/README.md#danmcai-reason评测协议)。
