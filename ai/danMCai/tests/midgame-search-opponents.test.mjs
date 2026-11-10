@@ -87,7 +87,8 @@ async function configOf(args, overrides = {}) {
 }
 
 test('opponents option: default champion, recorded in the protocol, validated', () => {
-  assert.deepEqual(OPPONENTS, ['champion', 'search']);
+  // 'guanzero' (B3) is tested in midgame-search-guanzero.test.mjs.
+  assert.deepEqual(OPPONENTS, ['champion', 'search', 'guanzero']);
   const dir = mkdtempSync(join(tmpdir(), 'midgame-opponents-'));
   try {
     const champion = join(dir, 'champion.onnx');

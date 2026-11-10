@@ -93,6 +93,7 @@ node ai/danMCai/belief/metrics.mjs --belief=<模型目录>/belief.onnx --seeds=<
 - `--opponents=champion|search`（默认 `champion`，行为与记录不变）：`search` 时对手队也用同一套机器决策（`lo`–`hi` 张推断世界搜索、`endgameHi` 以下精确 PIMC），每个座位只看自己的遮蔽视角，世界按同一 `worldSeed(发牌种子, 步数)` 规则生成；`hi` 张以上对手始终是冠军 017 贪心（即现网 9001），从不使用 `--focal-raw-model`。只有 `search` 时每行新增 `opp` 计数（`bandDecisions`、`searched`、`differs`、`endgame*`、`searchMs`、`endgameMs`），`run.json` 记录 `opponents`；`--compare` 把旧运行视为 `champion`。`--opponents=search` 与 `--mode=raw`、或非 `search` 模式带 `--focal-raw-model` 的组合会被拒绝。
 - `--deadline=<ISO>`、`--stop-file=<路径,…>`：每副开始前检查，到时或出现 STOP 文件即停，已完成的牌副保留。
 - 测试 `ai/danMCai/tests/midgame-search-opponents.test.mjs`：默认路径逐字段复现第三窗口 S1 A 臂 20 副（求解器按墙钟预算，`endgameWorldsUsed` 允许每个残局决策差一个世界）；换位恒等；拒绝组合。用途是第四窗口 S6b（对手也推理的验收）。
+- `--opponents=guanzero --opponent-model=<onnx> [--opponent-sha256=<hex>]`（第四窗口 B3，GuanZero 只作评测对手）：对手队座位用 GuanZero 导出模型出牌，打分用网页同一个 `web/src/ai/policy-inference.mjs` `inferPolicy`（`guanzero-v1` 二十步公开历史），各座位只看遮蔽视角。规则同 GuanZero 自己的评测工具 `ai/guanzero/training/evaluate.mjs`：只要有两个以上候选就在全部候选里取最大值（同值取第一个），不先走一手出完、不搜索、不探索；**网页里的 GuanZero 另有一手出完优先和公开残局求解**，所以这里量的是评测口径下的 GuanZero 网络，不是网页机器人。焦点方不变（任一 `--mode`、`--endgame`、`--focal-raw-model`）。`run.json` 记录 `opponentModelSHA256`，每行 `opp` 为 `gzDecisions`、`gzMs`、`gzFinishingAvailable`、`gzFinishingDeclined`。单局、不进贡、双方同级，与 GuanZero 的整场成绩不可比。测试 `midgame-search-guanzero.test.mjs`：前 50 个有选择的存档局面（`ai/shared/fixtures/positions.json`）上与 `createInference` 选择和数值完全一致，并逐一核对一副牌里 GuanZero 的全部实战决策。
 
 ## 交接点上界诊断（handover-oracle.mjs，第三窗口 S1）
 

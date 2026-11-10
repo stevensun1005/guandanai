@@ -71,6 +71,18 @@
  * the same policy, so both rounds of a deal are the same game and every pair scores 0 (up to the
  * solver's wall-clock budget with --endgame=pimc).
  *
+ * GuanZero opponents (--opponents=guanzero --opponent-model=<onnx>, window 4, plan section 8 item 7;
+ * evaluation-only, owner decision 2026-11-10 08:10): the other team's seats play a GuanZero export
+ * (513-feature state + guanzero-v1 20-action public history) scored by
+ * web/src/ai/policy-inference.mjs inferPolicy, the browser's scorer, on the seat's masked view.
+ * Like ai/guanzero/training/evaluate.mjs (playMatch with evaluate), every decision with more than
+ * one candidate is GuanZero's argmax over ALL candidates (first maximum; no finishing-move shortcut,
+ * no search, no exploration); a single candidate is automatic. The focal team is unchanged (any
+ * --mode, --endgame, --focal-raw-model). The model's SHA-256 is in run.json
+ * (`opponentModelSHA256`; --opponent-sha256=<hex> refuses any other file); round rows gain `opp`
+ * {gzDecisions, gzMs, gzFinishingAvailable, gzFinishingDeclined}. Single rounds without tribute and
+ * with equal levels, so a reading is not comparable with GuanZero's whole-match metric.
+ *
  * Metric: focal mean signed round points per deal pair, 95% deal-cluster normal interval; workers
  * take seeds start+part, start+part+parts, ...; the summary uses the contiguous completed prefix.
  * Per-pair rows (part-*.jsonl) allow a PAIRED comparison of two runs on the same seeds:
@@ -80,7 +92,8 @@
  *        [--lo=21] [--hi=40] [--worlds=8] [--k=6] [--net=2] [--mode=search|champion|raw]
  *        [--champion=<onnx>] [--allow-champion=1] [--belief-train-report=<json>|none]
  *        [--endgame=none|pimc] [--endgame-hi=20] [--endgame-worlds=uniform|belief]
- *        [--focal-raw-model=<onnx> --belief=<onnx>] [--held-out=1] [--opponents=champion|search]
+ *        [--focal-raw-model=<onnx> --belief=<onnx>] [--held-out=1]
+ *        [--opponents=champion|search|guanzero] [--opponent-model=<onnx>] [--opponent-sha256=<hex>]
  *        [--deadline=<ISO>] [--stop-file=<path>[,<path>]]     (checked before every pair)
  *   node ai/danMCai/belief/midgame-search.mjs --summarize=1 --out=<dir>
  *   node ai/danMCai/belief/midgame-search.mjs --compare=<dirA>,<dirB>     (reports B minus A)
@@ -96,6 +109,7 @@ import { searchObservation } from '../../shared/search/pimc.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { cardsArray, encode } from '../../../web/src/ai/encoding.mjs';
 import { policyState } from '../../../web/src/ai/observation.js';
+import { inferPolicy } from '../../../web/src/ai/policy-inference.mjs';
 import {
   POLICY_EXTRA_FEATURES,
   encodePolicyExtrasBatch,
@@ -128,8 +142,17 @@ export const DEFAULTS = Object.freeze({
   endgameWorlds: 'uniform',
   opponents: 'champion',
 });
-/** Who plays the other team's seats: champion 017 greedy everywhere, or the same search machinery. */
-export const OPPONENTS = Object.freeze(['champion', 'search']);
+/**
+ * Who plays the other team's seats: champion 017 greedy everywhere, the same search machinery, or a
+ * GuanZero export (evaluation-only).
+ */
+export const OPPONENTS = Object.freeze(['champion', 'search', 'guanzero']);
+/** The web catalog's GuanZero config (model-catalog.json entries with history guanzero-v1). */
+export const GUANZERO_CONFIG = Object.freeze({
+  stateFeatures: 513,
+  actionFeatures: 54,
+  history: 'guanzero-v1',
+});
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
 
 /** World seed of a search decision: depends only on the deal seed and the public ply. */
@@ -490,6 +513,44 @@ export async function focalRawDecision(trueGame, cfg) {
   };
 }
 
+/**
+ * GuanZero scorer for an opponent seat: the browser's inferPolicy with the guanzero-v1 history
+ * (state [1, 513], history [1, 5, 216], actions [n, 54]; output values [n]).
+ */
+export async function createGuanzeroScorer(ort, file, { threads = 1 } = {}) {
+  const session = await ort.InferenceSession.create(file, {
+    intraOpNumThreads: threads,
+    interOpNumThreads: 1,
+    graphOptimizationLevel: 'all',
+  });
+  if (!session.inputNames.includes('history') || session.inputNames.includes('extras')) {
+    await session.release();
+    throw Error(`${file} is not a GuanZero export (needs a history input and no extras)`);
+  }
+  return {
+    async values(state) {
+      return (await inferPolicy(ort, session, state, GUANZERO_CONFIG)).values;
+    },
+    async close() {
+      await session.release();
+    },
+  };
+}
+
+/**
+ * One GuanZero decision for the seat to move (more than one candidate): its argmax over all
+ * candidates (first maximum, as evaluate.mjs) on the seat's masked policy state.
+ */
+export async function guanzeroDecision(trueGame, plays, cfg) {
+  const t0 = performance.now();
+  const player = trueGame.turn;
+  const game = maskHidden(trueGame, player);
+  const values = await cfg.opponentNet.values(policyState(game, player, 0, plays));
+  if (values.length !== plays.length || !Array.from(values).every(Number.isFinite))
+    throw Error('Invalid GuanZero values');
+  return { index: argmax(values), values, ms: performance.now() - t0 };
+}
+
 /** Midgame search counters of one team in one round (focal team, or `opp` with --opponents=search). */
 const searchStats = () => ({
   bandDecisions: 0,
@@ -528,6 +589,8 @@ export async function playRound(seed, focalTeam, cfg) {
   const opponents = cfg.opponents ?? DEFAULTS.opponents;
   if (!OPPONENTS.includes(opponents)) throw Error(`Unknown opponents ${opponents}`);
   const oppSearch = opponents === 'search';
+  const oppGuanzero = opponents === 'guanzero';
+  if (oppGuanzero && !cfg.opponentNet) throw Error('--opponents=guanzero needs --opponent-model');
   if (oppSearch && cfg.mode === 'raw')
     throw Error('--opponents=search is not used with --mode=raw');
   const game = createRound(seed);
@@ -554,11 +617,38 @@ export async function playRound(seed, focalTeam, cfg) {
     });
   } else if (cfg.mode === 'raw') throw Error('--mode=raw needs --focal-raw-model');
   if (oppSearch) stats.opp = { ...searchStats(), ...(endgameOn ? endgameStats() : {}) };
+  if (oppGuanzero)
+    stats.opp = { gzDecisions: 0, gzMs: 0, gzFinishingAvailable: 0, gzFinishingDeclined: 0 };
   for (let ply = 0; ply < 1000; ply++) {
     if (ply !== game.log.length) throw Error('Ply must equal the public log length');
     const player = game.turn;
     const plays = candidates(game.hands[player], game.L, game.trick?.play);
-    let index = plays.findIndex((play) => play && play.cards.length === game.hands[player].length);
+    const finishing = plays.findIndex(
+      (play) => play && play.cards.length === game.hands[player].length,
+    );
+    if (oppGuanzero && player % 2 !== focalTeam) {
+      // GuanZero seat: evaluate.mjs rule, argmax over all candidates whenever there is a choice.
+      let gz = 0;
+      if (plays.length > 1) {
+        const d = await guanzeroDecision(game, plays, cfg);
+        gz = d.index;
+        stats.opp.gzDecisions++;
+        stats.opp.gzMs += d.ms;
+        if (finishing >= 0) {
+          stats.opp.gzFinishingAvailable++;
+          stats.opp.gzFinishingDeclined += Number(gz !== finishing);
+        }
+      }
+      const result = advanceRound(game, plays[gz]);
+      if (result) {
+        const points = result.winner === focalTeam ? result.points : -result.points;
+        const row = { points, order: result.order, plies: ply + 1, ...stats };
+        if (cfg.keepLog) Object.defineProperty(row, 'log', { value: game.log, enumerable: false });
+        return row;
+      }
+      continue;
+    }
+    let index = finishing;
     if (index < 0 && plays.length === 1) index = 0;
     if (index < 0) {
       const cards = remaining(game);
@@ -698,8 +788,19 @@ export function summarize(rows, { heldOut = false } = {}) {
   };
 }
 
-/** Other-team search totals (only for runs with --opponents=search). */
+/** Other-team search totals (runs with --opponents=search) or GuanZero totals (guanzero). */
 function opponentSummary(rounds) {
+  if (rounds.some((r) => r.opp && 'gzDecisions' in r.opp)) {
+    const total = (key) => rounds.reduce((s, r) => s + (r.opp?.[key] || 0), 0);
+    const decisions = total('gzDecisions');
+    return {
+      gzDecisions: decisions,
+      secondsPerGzDecision: decisions ? total('gzMs') / 1000 / decisions : null,
+      gzFinishingAvailable: total('gzFinishingAvailable'),
+      gzFinishingDeclined: total('gzFinishingDeclined'),
+      note: 'other team = GuanZero export (evaluation-only) by the browser scorer, argmax over all candidates as evaluate.mjs; single rounds, not comparable with whole-match results',
+    };
+  }
   const sum = (key) => rounds.reduce((s, r) => s + (r.opp?.[key] || 0), 0);
   const searched = sum('searched'),
     endgame = sum('endgameSearched');
@@ -786,6 +887,7 @@ const COMPARED_SETTINGS = [
   'focalRawModelSHA256',
   'heldOut',
   'opponents',
+  'opponentModelSHA256',
 ];
 /** Values of settings that runs from before the endgame / focal raw / opponents options did not record. */
 const LEGACY_SETTINGS = { endgame: 'none', heldOut: false, opponents: 'champion' };
@@ -927,7 +1029,26 @@ export function buildProtocol(args) {
   };
   if (!['search', 'champion', 'raw'].includes(protocol.mode))
     throw Error('--mode=search|champion|raw');
-  if (!OPPONENTS.includes(protocol.opponents)) throw Error('--opponents=champion|search');
+  if (!OPPONENTS.includes(protocol.opponents)) throw Error('--opponents=champion|search|guanzero');
+  if (protocol.opponents === 'guanzero') {
+    if (!args['opponent-model']) throw Error('--opponents=guanzero needs --opponent-model=<onnx>');
+    protocol.opponentModel = resolve(args['opponent-model']);
+    protocol.opponentModelSHA256 = sha256(protocol.opponentModel);
+    if (
+      args['opponent-sha256'] !== undefined &&
+      args['opponent-sha256'] !== protocol.opponentModelSHA256
+    )
+      throw Error(
+        `Opponent model SHA-256 ${protocol.opponentModelSHA256} is not --opponent-sha256=${args['opponent-sha256']}`,
+      );
+    protocol.opponentConfig = { ...GUANZERO_CONFIG };
+    protocol.opponentsRule =
+      'other team = GuanZero export (evaluation-only) scored by web/src/ai/policy-inference.mjs ' +
+      'inferPolicy with the guanzero-v1 history on each seat masked view; argmax over all ' +
+      'candidates whenever there is more than one (first maximum, as ai/guanzero/training/' +
+      'evaluate.mjs); no search, no exploration';
+  } else if (args['opponent-model'] !== undefined || args['opponent-sha256'] !== undefined)
+    throw Error('--opponent-model/--opponent-sha256 are only used with --opponents=guanzero');
   if (protocol.opponents === 'search') {
     // The other team is the deployed 9001: never the focal raw network (017w), never --mode=raw.
     if (args['focal-raw-model'] !== undefined && protocol.mode !== 'search')
@@ -1047,6 +1168,8 @@ export function buildProtocol(args) {
       'champion greedy above hi (never the focal raw network)';
     protocol.purpose += '; the other team searches as well (opponents = deployed 9001 seats)';
   }
+  if (protocol.opponents === 'guanzero')
+    protocol.purpose += '; the other team is a GuanZero export (evaluation-only opponent)';
   return protocol;
 }
 
@@ -1062,16 +1185,22 @@ export async function createConfig(protocol, ort, { threads = 1 } = {}) {
   const focalRaw = protocol.focalRawModel
     ? await createFocalRawScorer(ort, protocol.focalRawModel, { threads })
     : null;
+  const opponentNet =
+    protocol.opponents === 'guanzero'
+      ? await createGuanzeroScorer(ort, protocol.opponentModel, { threads })
+      : null;
   return {
     ...protocol,
     values: (file, state) => pool.values(file, state),
     belief,
     focalRaw,
+    ...(opponentNet ? { opponentNet } : {}),
     solver: protocol.endgame === 'pimc' ? createSearchSolver() : null,
     async close() {
       await pool.close();
       if (belief) await belief.close();
       if (focalRaw) await focalRaw.close();
+      if (opponentNet) await opponentNet.close();
     },
   };
 }
