@@ -260,11 +260,95 @@ function block(heading, rows, rule, ci, extra = {}) {
   };
 }
 
+/** Rows of a whole-match evaluation (reason-match-eval.mjs pairs.jsonl): only complete pair lines. */
+export function matchEvalTally(dir) {
+  const text = readText(join(dir, 'pairs.jsonl'));
+  const matches = [];
+  for (const line of text.split('\n')) {
+    if (!line.trim()) continue;
+    try {
+      const row = JSON.parse(line);
+      if (Array.isArray(row.matches)) matches.push(...row.matches);
+    } catch {}
+  }
+  const count = (pred) => matches.filter(pred).length;
+  const wins = count((m) => m.focalResult === 'win'),
+    losses = count((m) => m.focalResult === 'loss'),
+    draws = count((m) => m.focalResult === 'draw');
+  const rounds = matches.flatMap((m) =>
+    (m.history || []).map((h) => ({ win: h.team === m.focalTeam })),
+  );
+  const side = (t) => {
+    const ms = matches.filter((m) => m.focalTeam === t);
+    return { n: ms.length, wins: ms.filter((m) => m.focalResult === 'win').length };
+  };
+  return {
+    matches: matches.length,
+    wins,
+    losses,
+    draws,
+    matchWinRate: matches.length ? wins / matches.length : null,
+    matchScore: matches.length ? (wins + draws / 2) / matches.length : null,
+    rounds: rounds.length,
+    roundWinRate: rounds.length ? rounds.filter((r) => r.win).length / rounds.length : null,
+    side0: side(0),
+    side1: side(1),
+  };
+}
+
 function resultsFor(stage, run, state) {
   const p = (rel) => (rel ? join(run, rel) : null);
   const paths = stage.paths || {};
   const out = [];
   switch (stage.kind) {
+    case 'match-eval': {
+      const dir = p(paths.out);
+      const report = readJSON(join(dir, 'report.json'));
+      const pct = (x) => (x == null ? '—' : `${(x * 100).toFixed(1)}%`);
+      if (report) {
+        const ci = report.confidence95?.matchScore;
+        const shifted = Array.isArray(ci) ? ci.map((x) => x - 0.5) : null;
+        out.push(
+          block(
+            '最终结果',
+            [
+              ['场数', `${num(report.matches)} / 计划 ${num(stage.total)}`],
+              [
+                '推理队 胜／负／平',
+                `${num(report.wins)} / ${num(report.losses)} / ${num(report.draws)}`,
+              ],
+              [
+                '每场得分（胜 1、平 0.5）',
+                `${pct(report.matchScore)} ${Array.isArray(ci) ? `[${pct(ci[0])}, ${pct(ci[1])}]` : ''}`,
+              ],
+              ['整场胜率', pct(report.matchWinRate)],
+              ['单局胜率', pct(report.roundWinRate)],
+            ],
+            stage.rule,
+            shifted,
+            { pairs: report.pairs, planned: stage.total ? stage.total / 2 : null },
+          ),
+        );
+      } else {
+        const t = matchEvalTally(dir);
+        if (t.matches)
+          out.push({
+            heading: '实时（进行中，500 场完成后才算区间和结论）',
+            rows: [
+              ['已完成场数', `${num(t.matches)} / ${num(stage.total || 500)}`],
+              ['推理队 胜／负／平', `${num(t.wins)} / ${num(t.losses)} / ${num(t.draws)}`],
+              ['整场胜率（实时）', pct(t.matchWinRate)],
+              ['每场得分（实时，胜 1、平 0.5）', pct(t.matchScore)],
+              ['单局胜率（实时）', `${pct(t.roundWinRate)}（${num(t.rounds)} 局）`],
+              ['推理队坐 0／2 号位 胜／场', `${num(t.side0.wins)} / ${num(t.side0.n)}`],
+              ['推理队坐 1／3 号位 胜／场', `${num(t.side1.wins)} / ${num(t.side1.n)}`],
+            ],
+            rule: '中途数字不作结论',
+            verdict: { text: '进行中', tone: 'mute' },
+          });
+      }
+      break;
+    }
     case 'evaluate':
     case 'midgame': {
       const s = readJSON(join(p(paths.out), 'summary.json'));
@@ -504,6 +588,16 @@ function progressFor(stage, run, state, startMs, now) {
       // Both sides must finish: the estimate follows the slowest side, not the pooled count.
       if (sideFractions.length) res.slowest = Math.min(...sideFractions);
       res.text = parts.join(' · ');
+      break;
+    }
+    case 'match-eval': {
+      const pr = readJSON(join(p(paths.out), 'progress.json'));
+      const totalPairs = Number(pr?.totalPairs) || (stage.total ? stage.total / 2 : 0);
+      const donePairs = Number(pr?.completedPairs) || 0;
+      res.fraction = totalPairs ? Math.min(1, donePairs / totalPairs) : null;
+      res.text = `${num(donePairs * 2)} / ${num(totalPairs * 2)} 场（${num(donePairs)} / ${num(totalPairs)} 对）${
+        pr?.focalWins != null ? ` · 推理队已胜 ${num(pr.focalWins)} 场` : ''
+      }`;
       break;
     }
     case 'generate': {

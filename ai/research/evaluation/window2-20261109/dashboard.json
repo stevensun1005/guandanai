@@ -421,16 +421,19 @@
       "ids": [
         "T-eval-run"
       ],
-      "title": "对战：danMCai-reason vs 最新 Clint（500 场）",
-      "desc": "同步完成、评测程序通过检查后，预登记并在新审计的种子上跑 500 场整场比赛，报告胜负平与区间。",
-      "kind": "audit",
+      "title": "对战：danMCai-reason vs 最新 Clint（500 场整场）",
+      "desc": "网页同款推理机器人（每手推理 ≤50 秒）对同步到上游 30a8067 的 Clint（规则＋残局大脑），250 对审计种子交换座位，500 场完整比赛（升级、进还贡、打 A）。实时显示已完成场数、胜负平和胜率；500 场完成后才算区间和结论。",
+      "kind": "match-eval",
       "queue": "owner-tasks (手动推进，Claude 记录进度)",
       "after": "同步与评测程序都完成后",
-      "paths": {},
+      "paths": {
+        "out": "../reason-vs-clint-20261109/eval"
+      },
       "rule": {
-        "type": "descriptive",
-        "text": "结果出来后按预登记规则另记"
-      }
+        "type": "heldout",
+        "text": "预登记主指标：每场得分（胜 1、平 0.5）的 95% 种子对区间下界 >50% 为赢过 Clint；上界 <50% 为输"
+      },
+      "total": 500
     },
     {
       "key": "T-budget50",

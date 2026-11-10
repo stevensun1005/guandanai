@@ -417,3 +417,30 @@ test('stages logged with free-text markers (backfill loops) show running, then d
     rmSync(run, { recursive: true, force: true });
   }
 });
+
+test('whole-match evaluation tally counts complete pair lines only', async () => {
+  const { matchEvalTally } = await import('../../research/tools/window-dashboard.mjs');
+  const dir = mkdtempSync(join(tmpdir(), 'window-dashboard-match-'));
+  try {
+    const m = (focalTeam, focalResult) => ({
+      focalTeam,
+      focalResult,
+      history: [{ team: focalTeam }, { team: 1 - focalTeam }],
+    });
+    writeFileSync(
+      join(dir, 'pairs.jsonl'),
+      JSON.stringify({ matches: [m(0, 'win'), m(1, 'loss')] }) +
+        '\n' +
+        JSON.stringify({ matches: [m(0, 'draw'), m(1, 'win')] }) +
+        '\n{"matches":[{"focalTe',
+    );
+    const t = matchEvalTally(dir);
+    assert.equal(t.matches, 4);
+    assert.deepEqual([t.wins, t.losses, t.draws], [2, 1, 1]);
+    assert.equal(t.matchScore, 2.5 / 4);
+    assert.equal(t.roundWinRate, 0.5);
+    assert.deepEqual(t.side1, { n: 2, wins: 1 });
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
