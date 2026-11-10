@@ -1,0 +1,43 @@
+{
+  "classification": "owner-authorized-v2-activation-not-strength-acceptance",
+  "activatedAt": "2026-11-10T01:02:03.774926+00:00",
+  "oldLauncherSHA256": "7b5402c190c255903a19e511e39da936904f54b99f9e668856fc4d1b65f970ca",
+  "newLauncherSHA256": "8b1fff79cdbfc1c5cf805e1cc81a923cecf950d3ec64f6af52516c5c3d70790f",
+  "runtime": {
+    "sourceRoot": "C:/guandan-sampler/work/guanzero-reason-v2-eval-runtime",
+    "commit": "3b3ab8e7ed283ecc72bfbfb0c1788244e0024f03",
+    "baselineRoot": "C:/guandan-sampler/work/guanzero-io48-runtime",
+    "baselineCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "opponentPanel": "clint-champion-reason-v2",
+    "effectiveFrom": "2026-11-09T20:00:00-05:00",
+    "opponents": [
+      "clint",
+      "champion",
+      "reason"
+    ],
+    "matchesPerOpponent": 500
+  },
+  "tests": {
+    "reasonTests": 16,
+    "passed": 16,
+    "failed": 0
+  },
+  "dependencyReuse": "Existing node_modules junction; no software installed; package changes checked by npm ls.",
+  "firstSuite": {
+    "id": "model-000000427033",
+    "modelSHA256": "76fe6c930545752f1a75dc43bcb3077e10935f513f6303c6e7bf9f39d0c00821",
+    "index": 5131,
+    "protocol": "clint-champion-reason-v2",
+    "budget": {
+      "midgameMs": 50000,
+      "endgameMs": 50000,
+      "solverMs": 3000,
+      "solverTable": 300000
+    },
+    "planSHA256": "e0bef04aabcda76e19028c46889e279e4a4e431ca3729e98c58f35482b2ca20f"
+  },
+  "trainingSHA256": {
+    "config": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "window": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6"
+  }
+}
