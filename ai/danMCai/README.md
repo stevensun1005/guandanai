@@ -29,6 +29,8 @@ Mac 收尾后的独立整局比较与 Windows 返回包见 [Windows 交接](../r
 | 手牌推断网络（推断对手手牌）     | [belief](belief/README.md)                                               |
 | 复盘工具（明牌事后最优）         | [review](review/README.md)                                               |
 
+2026-11-09 第三窗口新增 215 维 extras 训练入口（`extrasMode: "public-belief"`、`extrasLearningRate`、`trunkFrozen`、`researchSnapshots`、`wrap_initial.py`），参数见[持续训练指南](../research/CONTINUOUS_TRAINING.md#215-维额外输入public-belief第三窗口新增)；评测工具选项见[推断网络说明](belief/README.md)。只是工具，不是结果。
+
 本机生成目录：`runs/` 存运行数据与实时面板记录，`checkpoints/` 存保留的检查点，`data/generated/` 存采集数据，`environment/` 存本机环境，`workspace/` 存开发工作树与临时实验。它们均不提交 Git。
 
 根目录常用命令仍为 `npm run train:status`、`npm run train:dashboard`。正在运行的 `gpu-main` 继续使用原冻结运行环境，先读[迁移说明](../research/STRUCTURE_MIGRATION.md)，不要用新布局源码直接覆盖旧运行。

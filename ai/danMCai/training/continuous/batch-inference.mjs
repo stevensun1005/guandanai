@@ -10,7 +10,7 @@
 import { Worker } from 'node:worker_threads';
 import { encode, cardsArray } from '../../../../web/src/ai/encoding.mjs';
 import { encodePolicyExtrasBatch } from '../../../../web/src/ai/policy-features.mjs';
-import { ACTION, STATE } from './lib.mjs';
+import { ACTION, BELIEF_MARGINALS, STATE, extrasWidth } from './lib.mjs';
 
 export async function createBatchedPool(
   _ort,
@@ -70,11 +70,24 @@ export async function createBatchedPool(
     const rows = items.reduce((n, item) => n + item.state.actions.length, 0);
     const states = new Float32Array(rows * STATE);
     const actions = new Float32Array(rows * ACTION);
-    const extras = items.some((x) => x.extrasMode) ? new Float32Array(rows * 53) : null;
+    // One extras width per batch; every item of a model file shares the run's extras mode.
+    const width = Math.max(...items.map((x) => extrasWidth(x.extrasMode)));
+    if (items.some((x) => x.extrasMode && extrasWidth(x.extrasMode) !== width))
+      throw Error('Mixed extras widths in one batch');
+    const extras = width ? new Float32Array(rows * width) : null;
     let row = 0;
     for (const item of items) {
       const encoded = encode(item.state);
       if (item.extrasMode === 'public') extras.set(encodePolicyExtrasBatch(item.state), row * 53);
+      else if (item.extrasMode === 'public-belief') {
+        // Per candidate row: its 53 public extras, then the decision's 162 belief marginals.
+        if (item.marginals?.length !== BELIEF_MARGINALS) throw Error('Missing belief marginals');
+        const publicExtras = encodePolicyExtrasBatch(item.state);
+        for (let i = 0; i < item.state.actions.length; i++) {
+          extras.set(publicExtras.subarray(i * 53, (i + 1) * 53), (row + i) * width);
+          extras.set(item.marginals, (row + i) * width + 53);
+        }
+      }
       for (const ids of item.state.actions) {
         states.set(encoded, row * STATE);
         actions.set(cardsArray(ids), row * ACTION);
@@ -89,7 +102,15 @@ export async function createBatchedPool(
     stats.decisions += items.length;
     stats.rows += rows;
     worker.postMessage(
-      { id, file, rows, states: states.buffer, actions: actions.buffer, extras: extras?.buffer },
+      {
+        id,
+        file,
+        rows,
+        states: states.buffer,
+        actions: actions.buffer,
+        extras: extras?.buffer,
+        extrasWidth: width || null,
+      },
       [states.buffer, actions.buffer, ...(extras ? [extras.buffer] : [])],
     );
   }
@@ -115,11 +136,11 @@ export async function createBatchedPool(
 
   return {
     stats,
-    values(file, state, extrasMode = null) {
+    values(file, state, extrasMode = null, marginals = null) {
       return new Promise((resolve, reject) => {
         if (failure) return reject(failure);
         if (!queues.has(file)) queues.set(file, []);
-        queues.get(file).push({ state, resolve, reject, extrasMode });
+        queues.get(file).push({ state, resolve, reject, extrasMode, marginals });
         if (!scheduled) {
           scheduled = true;
           setImmediate(flush);

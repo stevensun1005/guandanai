@@ -89,11 +89,23 @@ class ValueNet(torch.nn.Module):
         return self.layers[-1](hidden).squeeze(-1)
 
 
+# Registered widths of the per-action extras input: 53 public policy extras (policy-features.mjs),
+# or those 53 followed by 162 belief-v1 marginals (3 hidden seats x 54 faces, sampler.mjs).
+EXTRA_WIDTHS = (53, 215)
+
+
+def check_extra_width(width):
+    if width not in EXTRA_WIDTHS:
+        raise ValueError(f"Unsupported extras width {width}")
+    return width
+
+
 class ValueNetExtras(ValueNet):
     """Equivalent champion student at initialization; opt-in extras learner uses public features."""
-    def __init__(self, weights=None):
+    def __init__(self, weights=None, extra_width=53):
         super().__init__(weights)
-        self.extra_weight = torch.nn.Parameter(torch.zeros(53, WIDTH))
+        self.extra_width = check_extra_width(extra_width)
+        self.extra_weight = torch.nn.Parameter(torch.zeros(extra_width, WIDTH))
 
     def forward(self, features, extras):
         hidden = torch.tanh(self.layers[0](features) + extras @ self.extra_weight)
@@ -150,11 +162,18 @@ def export_onnx(weights, path):
     return sha256(path)
 
 
-def export_onnx_extras(weights, path, extra_weight=None):
-    """Add a zero (or explicitly supplied) per-action public-feature projection, keeping values."""
+def export_onnx_extras(weights, path, extra_weight=None, extra_width=None):
+    """Add a zero (or explicitly supplied) per-action extras projection, keeping values.
+
+    The width defaults to the supplied projection's rows, else 53; it must be a registered width.
+    """
     import tempfile
-    extra = np.zeros((53, WIDTH), dtype=np.float32) if extra_weight is None else np.asarray(extra_weight, dtype=np.float32)
-    if extra.shape != (53, WIDTH) or not np.isfinite(extra).all():
+    if extra_width is None:
+        extra_width = 53 if extra_weight is None else np.shape(extra_weight)[0]
+    if extra_width not in EXTRA_WIDTHS:
+        raise ValueError('Invalid extras projection')
+    extra = np.zeros((extra_width, WIDTH), dtype=np.float32) if extra_weight is None else np.asarray(extra_weight, dtype=np.float32)
+    if extra.shape != (extra_width, WIDTH) or not np.isfinite(extra).all():
         raise ValueError('Invalid extras projection')
     path = Path(path)
     with tempfile.TemporaryDirectory(dir=path.parent) as directory:
@@ -162,7 +181,7 @@ def export_onnx_extras(weights, path, extra_weight=None):
         export_onnx(weights, base)
         model = onnx.load(base)
     graph = model.graph
-    graph.input.append(helper.make_tensor_value_info('extras', TensorProto.FLOAT, ['batch', 53]))
+    graph.input.append(helper.make_tensor_value_info('extras', TensorProto.FLOAT, ['batch', extra_width]))
     graph.initializer.append(numpy_helper.from_array(extra.copy(), 'extra_weight'))
     nodes = list(graph.node)
     # Preserve the existing state/action summation, then add the independent public projection.

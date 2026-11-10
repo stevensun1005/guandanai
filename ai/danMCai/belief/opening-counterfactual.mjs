@@ -24,11 +24,29 @@
  *       coincide (common random numbers).
  * Outcome = signed round points of the acting seat's team (+1/+2/+3 win, negative loss).
  *
+ * P4 (--continuation=clint, window 3 S5; development, descriptive; Clint is evaluation only and
+ * nothing here feeds training): the STORED positions of a P1/P2 run (--positions=<rows.jsonl>) are
+ * rebuilt from the deal seed by the same 017 greedy replay and checked against the stored row (ply,
+ * seat, level, table cards, own hand, trick, bomb ids, move-B ids, blind follow); a mismatch stops
+ * the run. --select=blind-first:N keeps every blind-follow row and then visible-trick rows, each in
+ * stored file order, up to N. After the forced move the ACTING team (the position seat and its
+ * partner) is the deployed 9001 machinery exactly as in P2 (same createReasonBot, desktop budget,
+ * seatSeed search seeds), the other team is the deployed web Clint seat exactly as
+ * reason-match-eval.mjs --clint=web: createWebClint(seed ^ 0x6a09e667) = decideClintRule(
+ * ruleObservation(game, p), WEB_BRAIN), one fresh seeded stream and one fresh view token per arm (the
+ * same stream in arms A and B). Clint joins mid-round: the prefix was played by 017, so Clint's
+ * per-round memory starts at the position (its public inference reads the whole log). Per arm the
+ * Clint 残局大脑 counters (BRAIN_STAT deltas) are stored; the timeout share is fallback / calls.
+ *
  *   node ai/danMCai/belief/opening-counterfactual.mjs --out=<dir> [--target=800] [--workers=4]
  *        [--start=4300000000] [--deadline=<ISO>] [--nice=10]
+ *   node ai/danMCai/belief/opening-counterfactual.mjs --continuation=clint --out=<dir>
+ *        --positions=<rows.jsonl> --select=blind-first:400 [--workers=3] [--deadline=<ISO>]
+ *        [--stop-file=<path>[,<path>]] [--nice=10]
  *   node ai/danMCai/belief/opening-counterfactual.mjs --summarize --out=<dir>
- * Resume-safe (rows.jsonl + scanned.jsonl of deals without a position); <out>/STOP or the deadline
- * stops dispatch and aborts unfinished deals; progress.json is rewritten at least every 20 s.
+ * Resume-safe (rows.jsonl + scanned.jsonl of deals without a position); <out>/STOP, any
+ * --stop-file or the deadline stops dispatch and aborts unfinished deals; progress.json is
+ * rewritten at least every 20 s.
  */
 import { fork } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -43,16 +61,23 @@ import { isBomb } from '../../../web/src/core/combinations.js';
 import { cardText } from '../../../web/src/core/cards.js';
 import { championValues } from '../../../web/src/ai/search/inference.mjs';
 import { SEARCH_BUDGETS } from '../../../web/src/ai/search/constants.mjs';
+import { WEB_BRAIN } from '../../../web/src/rule-bot/runtime.mjs';
+import { BRAIN_STAT } from '../../../web/src/rule-bot/endgame-brain.mjs';
 import {
   DEFAULT_BELIEF,
   DEFAULT_CHAMPION,
+  clintFingerprint,
   closeTally,
   createReasonBot,
+  createWebClint,
   emptyTally,
 } from './reason-match-eval.mjs';
 
 const SELF = fileURLToPath(import.meta.url);
 export const PROTOCOL = 'opening-bomb-counterfactual-v1';
+export const CLINT_PROTOCOL = 'opening-bomb-counterfactual-clint-v1';
+/** Above this Clint brain timeout share the P4 reading is reported as unreliable (plan S5). */
+export const CLINT_TIMEOUT_UNRELIABLE = 0.3;
 export const START_SEED = 4_300_000_000;
 export const MIN_TABLE = 61;
 export const CHAMPION_SHA256 = '462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7';
@@ -166,10 +191,12 @@ export async function findPosition(seed, values) {
 
 /**
  * Plays one arm: forced move `index` at the position, then `decide(game, p)` for every seat to the
- * end. Returns {outcome, order, decisions, prefixLog}.
+ * end. `prepare(game)` (optional) may tag the arm's own copy before the forced move (P4 sets the
+ * per-arm Clint view token). Returns {outcome, order, decisions, prefixLog}.
  */
-export async function playArm(position, index, decide) {
+export async function playArm(position, index, decide, prepare = null) {
   const game = cloneGame(position.game);
+  if (prepare) prepare(game);
   const seat = game.turn;
   const prefixLog = game.log.length;
   let result = advanceRound(game, position.plays[index]);
@@ -283,6 +310,192 @@ export function positionRow(position, evaluation) {
     fallbacks: evaluation.fallbacks,
     armMs: evaluation.times,
     wallMs: evaluation.ms,
+  };
+}
+
+/* ----------------------------- P4: Clint continuations ----------------------------- */
+
+/**
+ * Fixed selection rule `blind-first:N`: every blind-follow row, then the visible-trick rows, each in
+ * stored file order, up to N. Returns [{rank, storedIndex, row}] in dispatch order.
+ */
+export function selectRows(rows, spec) {
+  const m = /^blind-first:(\d+)$/.exec(String(spec || ''));
+  if (!m) throw Error('--select must be blind-first:<N>');
+  const limit = Number(m[1]);
+  const indexed = rows.map((row, storedIndex) => ({ storedIndex, row }));
+  const ordered = [
+    ...indexed.filter((x) => x.row.blindFollow === true),
+    ...indexed.filter((x) => x.row.blindFollow !== true),
+  ].slice(0, limit);
+  const seeds = new Set(ordered.map((x) => x.row.seed));
+  if (seeds.size !== ordered.length) throw Error('Duplicate deal seeds among selected positions');
+  return ordered.map((x, rank) => ({ rank, ...x }));
+}
+
+const idKey = (ids) =>
+  ids
+    .slice()
+    .sort((a, b) => a - b)
+    .join(',');
+
+/**
+ * Rebuilds a stored position from its deal seed (017 greedy replay, findPosition) and asserts that
+ * it is the stored one. Throws on any mismatch.
+ */
+export async function rebuildPosition(stored, values) {
+  const position = await findPosition(stored.seed, values);
+  const fail = (what, got, want) => {
+    throw Error(
+      `Position ${stored.seed}: ${what} ${JSON.stringify(got)} != stored ${JSON.stringify(want)}`,
+    );
+  };
+  if (!position) fail('no position', null, stored.ply);
+  const { game, plays, bombIndex, altIndex } = position;
+  const p = game.turn;
+  const checks = [
+    ['ply', game.log.length, stored.ply],
+    ['seat', p, stored.seat],
+    ['level', game.L, stored.level],
+    ['table cards', tableCards(game), stored.tableCards],
+    ['own cards', text(game.hands[p]), stored.ownCards],
+    ['trick holder', game.trick.player, stored.trick.holder],
+    ['trick', text(game.trick.play.cards), stored.trick.cards],
+    ['blind follow', blindFollow(game, p), stored.blindFollow],
+    ['bomb ids', idKey(plays[bombIndex].cards.map((c) => c.id)), idKey(stored.bomb.ids)],
+    ['bomb type', plays[bombIndex].type, stored.bomb.type],
+    [
+      'move B',
+      plays[altIndex] ? idKey(plays[altIndex].cards.map((c) => c.id)) : 'pass',
+      stored.moveB === 'pass' ? 'pass' : idKey(stored.moveB.ids),
+    ],
+  ];
+  for (const [what, got, want] of checks) if (got !== want) fail(what, got, want);
+  if (!isBomb(plays[bombIndex])) fail('bomb is not a bomb', plays[bombIndex].type, 'bomb');
+  return position;
+}
+
+const brainSnapshot = () => ({ ...BRAIN_STAT });
+const brainDelta = (before) => ({
+  calls: BRAIN_STAT.calls - before.calls,
+  used: BRAIN_STAT.used - before.used,
+  fallback: BRAIN_STAT.fallback - before.fallback,
+  changed: BRAIN_STAT.changed - before.changed,
+  ms: Math.round(BRAIN_STAT.ms - before.ms),
+});
+
+/** Clint random stream of a P4 position (arm-independent, the reason-match-eval convention). */
+export const clintSeed = (dealSeed) => (dealSeed ^ 0x6a09e667) >>> 0;
+
+/**
+ * Both P4 rounds of a position: acting team = `bot` (the 9001 machinery, P2's seeds), other team =
+ * `clintFactory(clintSeed(seed))` (default the web Clint seat). Each arm gets a fresh Clint stream
+ * (the same seed in A and B) and its own view token.
+ */
+export async function evaluateClintPosition(
+  position,
+  { bot, clintFactory = (seed) => createWebClint(seed, WEB_BRAIN) },
+) {
+  const t0 = performance.now();
+  const team = position.game.turn % 2;
+  const arms = {},
+    fallbacks = {},
+    times = {},
+    clintBrain = {},
+    clintTime = {};
+  for (const [name, index] of [
+    ['A', position.bombIndex],
+    ['B', position.altIndex],
+  ]) {
+    const key = `${name}_P4`;
+    const clint = clintFactory(clintSeed(position.seed));
+    const tally = emptyTally();
+    const ct = { ms: 0, decisions: 0 };
+    const before = brainSnapshot();
+    const t = performance.now();
+    arms[key] = await playArm(
+      position,
+      index,
+      async (game, p) => {
+        if (p % 2 === team)
+          return bot.decide(game, p, { searchSeed: seatSeed(position.seed, p) }, tally);
+        const c0 = performance.now();
+        const play = clint(game, p);
+        ct.ms += performance.now() - c0;
+        ct.decisions++;
+        return play;
+      },
+      (game) => {
+        game.tok = `opening-cf-clint:${position.seed}:${name}`;
+      },
+    );
+    times[key] = Math.round(performance.now() - t);
+    clintBrain[key] = brainDelta(before);
+    clintTime[key] = { ms: Math.round(ct.ms), decisions: ct.decisions };
+    const closed = closeTally(tally);
+    fallbacks[key] = {
+      decisions: closed.decisions,
+      champion017: closed.champion,
+      midgame: {
+        requests: closed.midgame.requests,
+        completed: closed.midgame.completed,
+        deviated: closed.midgame.deviated,
+        minWorlds: closed.midgame.minWorlds,
+        fallbacks: closed.midgame.fallbacks,
+      },
+      endgame: {
+        requests: closed.endgame.requests,
+        completed: closed.endgame.completed,
+        deviated: closed.endgame.deviated,
+        minWorlds: closed.endgame.minWorlds,
+        fallbacks: closed.endgame.fallbacks,
+      },
+    };
+  }
+  return { arms, fallbacks, times, clintBrain, clintTime, ms: Math.round(performance.now() - t0) };
+}
+
+/** The JSON row of a finished P4 position (stored P1/P2 values copied for pairing). */
+export function clintRow(selection, position, evaluation, rebuildMs) {
+  const stored = selection.row;
+  const outcomes = {},
+    orders = {};
+  for (const [k, v] of Object.entries(evaluation.arms)) {
+    outcomes[k] = v.outcome;
+    orders[k] = v.order;
+  }
+  return {
+    protocol: CLINT_PROTOCOL,
+    seed: stored.seed,
+    rank: selection.rank,
+    storedIndex: selection.storedIndex,
+    level: stored.level,
+    seat: stored.seat,
+    ply: stored.ply,
+    tableCards: stored.tableCards,
+    band: stored.band,
+    trickClass: stored.trickClass,
+    blindFollow: stored.blindFollow,
+    moveBIsPass: stored.moveBIsPass,
+    bomb: { type: stored.bomb.type, cards: stored.bomb.cards, size: stored.bomb.size },
+    moveB:
+      stored.moveB === 'pass' ? 'pass' : { type: stored.moveB.type, cards: stored.moveB.cards },
+    qA: stored.qA,
+    qB: stored.qB,
+    rebuilt: true,
+    outcomes: { ...stored.outcomes, ...outcomes },
+    d: {
+      P4: outcomes.B_P4 - outcomes.A_P4,
+      P1: stored.d.P1,
+      ...(stored.d.P2 !== undefined ? { P2: stored.d.P2 } : {}),
+    },
+    orders,
+    fallbacks: evaluation.fallbacks,
+    clintBrain: evaluation.clintBrain,
+    clintTime: evaluation.clintTime,
+    armMs: evaluation.times,
+    rebuildMs: Math.round(rebuildMs),
+    wallMs: evaluation.ms + Math.round(rebuildMs),
   };
 }
 
@@ -440,6 +653,188 @@ export function reportMarkdown(summary, meta) {
   return lines.join('\n');
 }
 
+/** Pre-fixed P4 reading (plan S5) on the primary interval; a timeout share above 30 % voids it. */
+export function clintReadingRule(primary, timeoutShare) {
+  if (timeoutShare !== null && timeoutShare > CLINT_TIMEOUT_UNRELIABLE)
+    return {
+      verdict: 'unreliable',
+      text: `Clint brain timeout share ${(100 * timeoutShare).toFixed(1)}% is above ${100 * CLINT_TIMEOUT_UNRELIABLE}%: reported as unreliable, no claim`,
+    };
+  if (!primary.ci95) return { verdict: 'c', text: 'inconclusive (too few positions)' };
+  if (primary.mean > 0 && primary.ci95[0] > 0)
+    return {
+      verdict: 'a',
+      text: 'the early bomb loses against an opponent that is not 017 (opponent-dependent waste)',
+    };
+  if (primary.ci95[1] < 0) return { verdict: 'b', text: 'not reproduced against Clint either' };
+  return {
+    verdict: 'c',
+    text: `inconclusive; interval half-width ${((primary.ci95[1] - primary.ci95[0]) / 2).toFixed(3)}`,
+  };
+}
+
+/** Clint 残局大脑 counters over rounds (each arm is one round). */
+export function clintBrainSummary(rows) {
+  const rounds = rows.flatMap((r) => Object.values(r.clintBrain || {}));
+  const total = { calls: 0, used: 0, fallback: 0, changed: 0, ms: 0 };
+  for (const x of rounds) for (const k of Object.keys(total)) total[k] += x[k];
+  const perRound = rounds.filter((x) => x.calls > 0).map((x) => x.fallback / x.calls);
+  const sorted = perRound.slice().sort((a, b) => a - b);
+  return {
+    rounds: rounds.length,
+    roundsWithBrainCalls: perRound.length,
+    ...total,
+    timeoutShare: total.calls ? total.fallback / total.calls : null,
+    perRoundTimeoutShare: {
+      mean: mean(perRound),
+      median: sorted.length ? sorted[Math.floor(sorted.length / 2)] : null,
+      roundsWithAnyTimeout: perRound.filter((x) => x > 0).length,
+      roundsAbove30pct: perRound.filter((x) => x > CLINT_TIMEOUT_UNRELIABLE).length,
+    },
+    note: 'BRAIN_STAT deltas per round: calls (brain searches started), fallback (fewer than minWorlds deals solved within WEB_BRAIN.ms: rules play kept = timeout), used, changed (rules play replaced), ms',
+  };
+}
+
+/**
+ * P4 summary on the contiguous completed prefix of the selection order (rank 0, 1, ...). Primary:
+ * d_P4 on blind follows; secondary: all positions and paired d_P4 - d_P2 on the same positions.
+ */
+export function summarizeClint(
+  rows,
+  { selected = null, selectedBlind = null } = {},
+  iterations = 10_000,
+) {
+  const byRank = new Map(rows.map((r) => [r.rank, r]));
+  const prefix = [];
+  while (byRank.has(prefix.length)) prefix.push(byRank.get(prefix.length));
+  const blind = prefix.filter((r) => r.blindFollow === true);
+  const paired = prefix.filter((r) => r.d.P2 !== undefined);
+  const split = (key, list) => {
+    const groups = {};
+    for (const r of list) (groups[r[key]] ||= []).push(r.d.P4);
+    return Object.fromEntries(
+      Object.entries(groups).map(([k, xs]) => [k, describeD(xs, iterations)]),
+    );
+  };
+  const brain = clintBrainSummary(prefix);
+  const primary = describeD(
+    blind.map((r) => r.d.P4),
+    iterations,
+  );
+  const out = {
+    completedRows: rows.length,
+    prefixPositions: prefix.length,
+    selected,
+    selectedBlind,
+    primaryBlindFollowD_P4: primary,
+    secondaryAllD_P4: describeD(
+      prefix.map((r) => r.d.P4),
+      iterations,
+    ),
+    secondaryPairedD_P4minusD_P2: describeD(
+      paired.map((r) => r.d.P4 - r.d.P2),
+      iterations,
+    ),
+    pairedBlindD_P4minusD_P2: describeD(
+      blind.filter((r) => r.d.P2 !== undefined).map((r) => r.d.P4 - r.d.P2),
+      iterations,
+    ),
+    referenceSamePositions: {
+      d_P2_all: describeD(
+        paired.map((r) => r.d.P2),
+        iterations,
+      ),
+      d_P2_blind: describeD(
+        blind.filter((r) => r.d.P2 !== undefined).map((r) => r.d.P2),
+        iterations,
+      ),
+      d_P1_all: describeD(
+        prefix.map((r) => r.d.P1),
+        iterations,
+      ),
+    },
+    meanOutcomeA_P4: mean(prefix.map((r) => r.outcomes.A_P4)),
+    meanOutcomeB_P4: mean(prefix.map((r) => r.outcomes.B_P4)),
+    byBand: split('band', prefix),
+    byTrickClass: split('trickClass', prefix),
+    moveBPassShare: prefix.length
+      ? prefix.filter((r) => r.moveBIsPass).length / prefix.length
+      : null,
+    clintBrain: brain,
+    clintMsPerDecision: (() => {
+      const xs = prefix.flatMap((r) => Object.values(r.clintTime || {}));
+      const d = xs.reduce((s, x) => s + x.decisions, 0);
+      return d ? xs.reduce((s, x) => s + x.ms, 0) / d : null;
+    })(),
+    meanWallSecondsPerPosition: mean(prefix.map((r) => r.wallMs / 1000)),
+  };
+  const fb = {
+    midgameRequests: 0,
+    midgameFallbacks: 0,
+    endgameRequests: 0,
+    endgameFallbacks: 0,
+    reasons: {},
+  };
+  for (const r of prefix)
+    for (const arm of Object.values(r.fallbacks || {}))
+      for (const band of ['midgame', 'endgame']) {
+        fb[`${band}Requests`] += arm[band].requests;
+        for (const [reason, n] of Object.entries(arm[band].fallbacks)) {
+          fb[`${band}Fallbacks`] += n;
+          fb.reasons[`${band}:${reason}`] = (fb.reasons[`${band}:${reason}`] || 0) + n;
+        }
+      }
+  out.searchFallbacks9001 = fb;
+  out.reading = clintReadingRule(primary, brain.timeoutShare);
+  out.incomplete =
+    selectedBlind !== null && blind.length < selectedBlind
+      ? `primary on ${blind.length} of ${selectedBlind} preregistered blind follows (completed prefix only)`
+      : null;
+  out.note =
+    'development check, descriptive; Clint is evaluation only; not an acceptance result, a win rate or a strength claim';
+  return out;
+}
+
+export function clintReportMarkdown(summary, meta) {
+  const head =
+    '| Group | n | mean d | 95% bootstrap | d > 0 | d = 0 | d < 0 |\n|---|---|---|---|---|---|---|';
+  const b = summary.clintBrain;
+  const fb = summary.searchFallbacks9001;
+  const lines = [
+    '# Opening bomb counterfactual with Clint continuations (P4, development check)',
+    '',
+    `Descriptive development check; not an acceptance result, a win rate or a strength claim. Clint is evaluation only. Protocol ${CLINT_PROTOCOL}; champion 017 (SHA-256 ${CHAMPION_SHA256}); belief ${meta.beliefSHA256}; positions ${meta.positions} (SHA-256 ${meta.positionsSHA256}), selection ${meta.select} (${meta.selected} positions, ${meta.selectedBlind} blind follows). Completed contiguous prefix: ${summary.prefixPositions} positions (${summary.completedRows} rows written; status ${meta.status}).`,
+    '',
+    'd = acting team round points with move B (highest-Q non-bomb) minus move A (champion bomb). P4 = after the forced move the acting team is the deployed reasoning bot (9001, desktop budget, P2 search seeds), the other team the web Clint seat (rules-v2 + 残局大脑, WEB_BRAIN). d_P2 / d_P1 are the stored values of the same positions. 95% percentile bootstrap over positions, 10,000 resamples.',
+    '',
+    `**Reading (rule fixed in the plan, primary = blind follows): (${summary.reading.verdict}) ${summary.reading.text}.**${summary.incomplete ? ` Note: ${summary.incomplete}.` : ''}`,
+    '',
+    head,
+    dLine('primary: d_P4 blind follows', summary.primaryBlindFollowD_P4),
+    dLine('secondary: d_P4 all', summary.secondaryAllD_P4),
+    dLine('secondary: d_P4 - d_P2 all', summary.secondaryPairedD_P4minusD_P2),
+    dLine('d_P4 - d_P2 blind follows', summary.pairedBlindD_P4minusD_P2),
+    dLine('reference: d_P2 same positions', summary.referenceSamePositions.d_P2_all),
+    dLine('reference: d_P2 blind, same positions', summary.referenceSamePositions.d_P2_blind),
+    dLine('reference: d_P1 same positions', summary.referenceSamePositions.d_P1_all),
+  ];
+  for (const [k, v] of Object.entries(summary.byBand))
+    lines.push(dLine(`d_P4 table cards ${k}`, v));
+  for (const [k, v] of Object.entries(summary.byTrickClass))
+    lines.push(dLine(`d_P4 trick ${k}`, v));
+  lines.push(
+    '',
+    '## Other',
+    '',
+    `- Mean outcome P4 arm A (bomb) ${f3(summary.meanOutcomeA_P4)}, arm B (no bomb) ${f3(summary.meanOutcomeB_P4)}; move B is a pass in ${pct(summary.moveBPassShare)}.`,
+    `- Clint 残局大脑: ${b.calls} searches in ${b.rounds} rounds, ${b.fallback} timeouts (share ${pct(b.timeoutShare)}; per round mean ${pct(b.perRoundTimeoutShare.mean)}, ${b.perRoundTimeoutShare.roundsAbove30pct} of ${b.roundsWithBrainCalls} rounds above 30%), ${b.changed} rules plays replaced. Above 30% the stage is reported as unreliable.`,
+    `- Clint mean ms per decision ${f3(summary.clintMsPerDecision)}; 9001 search fallbacks to 017: midgame ${fb.midgameFallbacks} of ${fb.midgameRequests}, endgame ${fb.endgameFallbacks} of ${fb.endgameRequests} (${JSON.stringify(fb.reasons)}).`,
+    `- Mean wall time per position (rebuild + 2 rounds): ${f3(summary.meanWallSecondsPerPosition)} s.`,
+    '',
+  );
+  return lines.join('\n');
+}
+
 /* ----------------------------- processes ----------------------------- */
 
 const sha256File = (file) => createHash('sha256').update(readFileSync(file)).digest('hex');
@@ -499,6 +894,17 @@ async function worker() {
         const evaluation = await evaluatePosition(position, { values, bot });
         process.send({ type: 'deal', seed: msg.seed, row: positionRow(position, evaluation) });
       }
+      if (msg.type === 'position') {
+        const t0 = performance.now();
+        const position = await rebuildPosition(msg.selection.row, values);
+        const rebuildMs = performance.now() - t0;
+        const evaluation = await evaluateClintPosition(position, { bot });
+        process.send({
+          type: 'deal',
+          seed: msg.seed,
+          row: clintRow(msg.selection, position, evaluation, rebuildMs),
+        });
+      }
     } catch (error) {
       process.send({ type: 'error', seed: msg.seed, message: String(error?.stack || error) });
     }
@@ -519,8 +925,12 @@ async function main(args) {
   };
   if (args.summarize) {
     const saved = JSON.parse(readFileSync(join(out, 'meta.json'), 'utf8'));
-    return writeReport(out, readJsonl(rowsFile), { ...saved, status: args.status || 'summarized' });
+    const write = saved.protocol === CLINT_PROTOCOL ? writeClintReport : writeReport;
+    return write(out, readJsonl(rowsFile), { ...saved, status: args.status || 'summarized' });
   }
+  if (args.continuation === 'clint') return mainClint(args, out, meta);
+  if (args.continuation && args.continuation !== 'p1p2')
+    throw Error('--continuation must be p1p2 (default) or clint');
   meta.championSHA256 = sha256File(meta.champion);
   meta.beliefSHA256 = sha256File(meta.belief);
   if (meta.championSHA256 !== CHAMPION_SHA256) throw Error('Champion is not 017');
@@ -550,7 +960,9 @@ async function main(args) {
     failure = null,
     nextSeed = meta.start,
     scanned = done.size;
-  const stopNow = () => existsSync(join(out, 'STOP')) || Date.now() >= deadline;
+  const stopFiles = stopFilesOf(args, out);
+  const stopped = () => stopFiles.some((file) => existsSync(file));
+  const stopNow = () => stopped() || Date.now() >= deadline;
   const progress = () =>
     writeFileSync(
       join(out, 'progress.json'),
@@ -579,7 +991,7 @@ async function main(args) {
       }
     };
     const timer = setInterval(() => {
-      if (stopNow()) stopAll(existsSync(join(out, 'STOP')) ? 'stopped' : 'deadline');
+      if (stopNow()) stopAll(stopped() ? 'stopped' : 'deadline');
       progress();
     }, 2000);
     const next = (child) => {
@@ -637,6 +1049,202 @@ async function main(args) {
     console.error(failure);
     process.exitCode = 1;
   }
+}
+
+/** <out>/STOP plus every --stop-file (comma-separated). */
+function stopFilesOf(args, out) {
+  const extra = typeof args['stop-file'] === 'string' ? args['stop-file'].split(',') : [];
+  return [join(out, 'STOP'), ...extra.filter(Boolean).map((f) => resolve(f))];
+}
+
+/** P4: stored positions, rebuilt and continued with 9001 (acting team) vs the web Clint seat. */
+async function mainClint(args, out, base) {
+  if (!args.positions)
+    throw Error('--positions=<rows.jsonl> is required with --continuation=clint');
+  if (!args.select) throw Error('--select=blind-first:<N> is required with --continuation=clint');
+  const positionsFile = resolve(args.positions);
+  const rowsFile = join(out, 'rows.jsonl');
+  if (positionsFile === rowsFile) throw Error('--out must not hold the stored positions');
+  const stored = readJsonl(positionsFile);
+  for (const r of stored)
+    if (r.protocol !== PROTOCOL) throw Error(`Stored row ${r.seed} is not ${PROTOCOL}`);
+  const selection = selectRows(stored, args.select);
+  const meta = {
+    protocol: CLINT_PROTOCOL,
+    continuation: 'clint',
+    positions: positionsFile,
+    positionsSHA256: sha256File(positionsFile),
+    storedRows: stored.length,
+    select: String(args.select),
+    selected: selection.length,
+    selectedBlind: selection.filter((s) => s.row.blindFollow === true).length,
+    champion: base.champion,
+    belief: base.belief,
+    championSHA256: sha256File(base.champion),
+    beliefSHA256: sha256File(base.belief),
+    budget: { name: 'desktop', ...SEARCH_BUDGETS.desktop },
+    clintBrainSettings: WEB_BRAIN,
+    opponent: clintFingerprint('web'),
+    clintRandomSeed: 'seededRandom(dealSeed ^ 0x6a09e667), fresh per arm (same in A and B)',
+    focalSearchSeed: 'seatSeed(dealSeed, seat) as in P2',
+    toolSHA256: sha256File(SELF),
+    deadline: args.deadline || null,
+    stopFiles: stopFilesOf(args, out),
+    use: 'development, descriptive; Clint evaluation only; nothing feeds training',
+  };
+  if (meta.championSHA256 !== CHAMPION_SHA256) throw Error('Champion is not 017');
+  if (!meta.beliefSHA256.startsWith(BELIEF_SHA256_PREFIX)) throw Error('Belief is not v1 16d76783');
+  mkdirSync(out, { recursive: true });
+  const metaFile = join(out, 'meta.json');
+  if (existsSync(metaFile)) {
+    const saved = JSON.parse(readFileSync(metaFile, 'utf8'));
+    for (const k of ['protocol', 'positionsSHA256', 'select', 'championSHA256', 'beliefSHA256'])
+      if (saved[k] !== meta[k]) throw Error(`Output holds a different ${k}`);
+  } else {
+    writeFileSync(
+      metaFile,
+      JSON.stringify({ ...meta, createdAt: new Date().toISOString() }, null, 2) + '\n',
+    );
+    writeFileSync(
+      join(out, 'selection.json'),
+      JSON.stringify(
+        selection.map((s) => ({
+          rank: s.rank,
+          storedIndex: s.storedIndex,
+          seed: s.row.seed,
+          blindFollow: s.row.blindFollow,
+        })),
+      ) + '\n',
+    );
+  }
+  const nice = Number(args.nice ?? 10);
+  try {
+    setPriority(nice);
+  } catch {
+    /* best effort */
+  }
+  const rows = readJsonl(rowsFile);
+  const done = new Set(rows.map((r) => r.seed));
+  const queue = selection.filter((s) => !done.has(s.row.seed));
+  const workers = Math.max(1, Math.min(Number(args.workers ?? 3), queue.length || 1));
+  const deadline = args.deadline ? Date.parse(args.deadline) : Infinity;
+  if (args.deadline && !Number.isFinite(deadline)) throw Error('Bad --deadline');
+  const stopFiles = meta.stopFiles;
+  const stopped = () => stopFiles.some((file) => existsSync(file));
+  const stopNow = () => stopped() || Date.now() >= deadline;
+  let status = 'running',
+    failure = null;
+  const progress = () => {
+    const brain = clintBrainSummary(rows);
+    writeFileSync(
+      join(out, 'progress.json'),
+      JSON.stringify(
+        {
+          status,
+          positions: rows.length,
+          target: meta.selected,
+          blindDone: rows.filter((r) => r.blindFollow === true).length,
+          blindTarget: meta.selectedBlind,
+          clintBrainCalls: brain.calls,
+          clintTimeoutShare: brain.timeoutShare,
+          meanWallSecondsPerPosition: mean(rows.map((r) => r.wallMs / 1000)),
+          deadline: meta.deadline,
+          updatedAt: new Date().toISOString(),
+        },
+        null,
+        2,
+      ) + '\n',
+    );
+  };
+  progress();
+  if (queue.length) {
+    const children = [];
+    await new Promise((finish) => {
+      let live = 0;
+      const stopAll = (why) => {
+        if (status !== 'running') return;
+        status = why;
+        for (const child of children) {
+          child.stopping = true;
+          child.kill('SIGTERM');
+        }
+      };
+      const timer = setInterval(() => {
+        if (stopNow()) stopAll(stopped() ? 'stopped' : 'deadline');
+        progress();
+      }, 2000);
+      const next = (child) => {
+        if (status !== 'running' || stopNow() || !queue.length) {
+          child.stopping = true;
+          child.kill('SIGTERM');
+          return;
+        }
+        const selection = queue.shift();
+        child.current = selection.row.seed;
+        child.send({ type: 'position', seed: selection.row.seed, selection });
+      };
+      for (let w = 0; w < workers; w++) {
+        const child = fork(SELF, ['--worker'], { stdio: ['ignore', 'inherit', 'inherit', 'ipc'] });
+        try {
+          setPriority(child.pid, nice);
+        } catch {
+          /* inherited */
+        }
+        children.push(child);
+        live++;
+        child.on('message', (msg) => {
+          if (msg.type === 'ready') return next(child);
+          if (msg.type === 'error') {
+            failure = msg.message;
+            return stopAll('error');
+          }
+          if (msg.type !== 'deal' || status !== 'running') return;
+          appendFileSync(rowsFile, JSON.stringify(msg.row) + '\n');
+          rows.push(msg.row);
+          progress();
+          next(child);
+        });
+        child.on('exit', (code, signal) => {
+          if (status === 'running' && (code || (signal && !child.stopping))) {
+            failure = `worker exited (${code ?? signal}) during position ${child.current}`;
+            stopAll('error');
+          }
+          if (--live === 0) {
+            clearInterval(timer);
+            finish();
+          }
+        });
+        child.send({ type: 'init', champion: meta.champion, belief: meta.belief });
+      }
+    });
+  }
+  if (status === 'running') status = rows.length >= meta.selected ? 'complete' : 'incomplete';
+  progress();
+  writeClintReport(out, rows, { ...meta, status, error: failure });
+  if (failure) {
+    console.error(failure);
+    process.exitCode = 1;
+  }
+}
+
+function writeClintReport(out, rows, meta) {
+  const summary = summarizeClint(rows, {
+    selected: meta.selected,
+    selectedBlind: meta.selectedBlind,
+  });
+  writeFileSync(
+    join(out, 'report.json'),
+    JSON.stringify({ ...meta, finishedAt: new Date().toISOString(), summary }, null, 2) + '\n',
+  );
+  writeFileSync(join(out, 'REPORT.md'), clintReportMarkdown(summary, meta));
+  console.log(
+    JSON.stringify({
+      status: meta.status,
+      positions: summary.prefixPositions,
+      timeoutShare: summary.clintBrain.timeoutShare,
+      reading: summary.reading,
+    }),
+  );
 }
 
 function writeReport(out, rows, meta) {

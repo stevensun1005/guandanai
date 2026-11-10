@@ -120,6 +120,11 @@ function initialize() {
     config = merge(DEFAULT_CONFIG, override);
     const initial = resolve(config.initial);
     config.initialSHA256 = sha256(initial);
+    if (config.extrasMode === 'public-belief') {
+      if (!config.beliefModel || !existsSync(resolve(config.beliefModel)))
+        throw Error('extrasMode public-belief requires an existing config.beliefModel');
+      config.beliefSHA256 = sha256(resolve(config.beliefModel));
+    }
     config.createdAt = new Date().toISOString();
     config.sourceSHA256 = sourcesAtStart;
     config.sourceHashConvention = 'UTF-8 text with CRLF normalized to LF';
@@ -223,14 +228,20 @@ function initialize() {
 }
 
 const config = initialize();
+// Extras runs: fast actors only (they build the extras), no champion gates or anchor checks
+// (gate.mjs scores without extras), single-round targets, no anchor loss. Rule-bot opponents are
+// allowed; 'public-belief' also needs the frozen belief network.
 if (
   config.extrasMode &&
-  (!['public', 'zero'].includes(config.extrasMode) ||
+  (!['public', 'zero', 'public-belief'].includes(config.extrasMode) ||
     !config.researchNoGate ||
     config.actorImplementation !== 'fast' ||
-    config.actorMix.rule !== 0 ||
     config.learner.targetMatchWeight !== 0 ||
-    config.learner.anchorWeight !== 0)
+    config.learner.anchorWeight !== 0 ||
+    (config.extrasMode === 'public-belief' &&
+      (!config.beliefModel ||
+        !config.beliefSHA256 ||
+        sha256(resolve(config.beliefModel)) !== config.beliefSHA256)))
 )
   throw Error('Extras training requires the registered single-round neural-only ablation');
 const state = readJSON(paths.status, {}) || {};
@@ -665,7 +676,11 @@ function tick() {
     return shutdown(0, 'time-limit');
   }
   const totals = updateLeague();
-  if (!config.researchNoGate && Date.now() - state.lastSnapshotAt >= config.snapshotMinutes * 60000)
+  // researchSnapshots keeps hourly league snapshots (PFSP) in a run without gates.
+  if (
+    (!config.researchNoGate || config.researchSnapshots) &&
+    Date.now() - state.lastSnapshotAt >= config.snapshotMinutes * 60000
+  )
     snapshot();
   if (!config.researchNoGate && !children.has('gate') && !children.has('anchor')) {
     if (Date.now() - state.lastAnchorAt >= anchorSettings.intervalHours * 3600000) startAnchor();

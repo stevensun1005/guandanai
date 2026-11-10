@@ -188,6 +188,62 @@ export function beliefLogScore(view, probs, hands) {
 }
 
 /**
+ * Belief marginals as 162 network inputs (index face * 3 + r - 1, r = 1 next, 2 partner, 3
+ * previous): the expected number of unseen copies of each face held by seat r. The network's
+ * per-face seat probabilities are raked with one positive scale per seat until every face sums to
+ * its unseen copies (0..2) and every seat sums to its public hand count, so the values are on a card
+ * scale and consistent with the counts; a seat with no cards gets zeros. Public view only.
+ * `views` may be one view or an array (one batched network call); the result matches its shape.
+ */
+export async function beliefMarginals(model, views) {
+  const list = Array.isArray(views) ? views : [views];
+  if (!list.length) return [];
+  const probs = await model.probabilities(list);
+  const rows = list.map((view, i) => rakeMarginals(view, probs[i]));
+  return Array.isArray(views) ? rows : rows[0];
+}
+
+function rakeMarginals(view, probs) {
+  if (!view || 'hands' in view) throw Error('Belief marginals accept only a public view');
+  if (probs.length !== TARGETS) throw Error('Belief probabilities must have 162 entries');
+  const unseen = new Float64Array(FACES).fill(2);
+  for (const id of view.hand) unseen[cardIndex(id)]--;
+  for (const entry of view.log) for (const id of entry.cards || []) unseen[cardIndex(id)]--;
+  if (unseen.some((u) => u < 0)) throw Error('More than two copies of a face seen');
+  const counts = [1, 2, 3].map((r) => view.counts[(view.p + r) % 4]);
+  const hidden = unseen.reduce((a, b) => a + b, 0);
+  if (hidden !== counts[0] + counts[1] + counts[2]) throw Error('Belief count mismatch');
+  const out = new Float32Array(TARGETS);
+  if (!hidden) return out;
+  const p = Float64Array.from(probs, (v) => {
+    if (!(v >= 0) || !Number.isFinite(v)) throw Error('Invalid belief probability');
+    return Math.max(v, FLOOR);
+  });
+  const scale = counts.map((c) => (c > 0 ? 1 : 0)),
+    m = new Float64Array(TARGETS);
+  for (let iteration = 0; iteration < 500; iteration++) {
+    const columns = [0, 0, 0];
+    for (let f = 0; f < FACES; f++) {
+      if (!unseen[f]) continue;
+      let total = 0;
+      for (let r = 0; r < SEATS; r++) total += p[f * SEATS + r] * scale[r];
+      for (let r = 0; r < SEATS; r++) {
+        m[f * SEATS + r] = (unseen[f] * p[f * SEATS + r] * scale[r]) / total;
+        columns[r] += m[f * SEATS + r];
+      }
+    }
+    let error = 0;
+    for (let r = 0; r < SEATS; r++) {
+      error = Math.max(error, Math.abs(columns[r] - counts[r]));
+      if (counts[r] > 0) scale[r] *= counts[r] / columns[r];
+    }
+    if (error < 1e-7) break;
+  }
+  out.set(m);
+  return out;
+}
+
+/**
  * Feature version of a belief network: the explicit `featureVersion` option, else the
  * `featureVersion` of its training report (`report` object, `reportFile`, or train-report.json next
  * to the ONNX), else belief-v1 (window-1 models and every model trained before v3). When the ONNX

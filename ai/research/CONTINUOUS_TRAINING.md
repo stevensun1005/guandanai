@@ -229,6 +229,20 @@ $w$ 即 `targetMatchWeight`，默认 0，即延续 P0 原有的单局升级分�
 node ai/danMCai/training/continuous/explore-cost.mjs --pairs=150 --exploration='{"type":"softmax","temperature":0.02}'
 ```
 
+## 215 维额外输入（`public-belief`，第三窗口新增）
+
+2026-11-09 第三窗口为 017w 实验新增（[计划与修订](evaluation/window3-20261109/)）。这是训练入口，不是结果；网页冠军 017、默认 9001 不变。
+
+- `extrasMode`：`public`（53 维公开 extras，`web/src/ai/policy-features.mjs`）、`zero`（53 维置零）、新增 `public-belief`（53 维公开 extras 后接 162 维推断边缘）。162 维是推断网络 v1 在**行动者公开视角**上给出的、三家隐藏手牌各自持有每种牌面的期望张数（按每种牌面的未见张数与每家手牌数归一），每个决策调用一次推断网络，同一决策的全部候选共享。只读本人手牌、各家张数、级牌和公开记录，`rakeMarginals` 拒绝含 `hands` 的输入。
+- `beliefModel`：`public-belief` 必填，**写绝对路径**（采样进程以自身工作目录解析相对路径）；监督器把其 SHA-256 冻结为 `config.json` 的 `beliefSHA256`，分片清单记录 `extrasMode` 与 `beliefSHA256`，之后校验不符即拒绝启动。
+- `learner.extrasLearningRate`（默认 1e-4）：零初始化 extras 投影的独立 Adam 组；主干仍用 `learningRate`（1e-5）。注意：新的 `public` 运行也因此有两组参数；已有冻结运行的 `config.json` 不变。
+- `learner.trunkFrozen`：冻结主干，只训练投影（第三窗口回退 F）。换回退须用新运行目录，否则恢复的优化器状态会带回旧学习率。
+- `researchSnapshots: true`：在 `researchNoGate` 运行中照常每小时加入联赛快照（PFSP）。extras 运行仍须 `researchNoGate`，因为 `gate.mjs` 不能给 extras 模型评分；联赛对手座位也拿到同样的 extras，没有 extras 输入的模型忽略它。
+- extras 运行不再要求规则对手比例为 0（规则座位仍是历史 original 规则机器人，不是 Clint）。
+- 初始模型：`python ai/danMCai/training/continuous/wrap_initial.py --champion=<017.onnx> --out=<run-init>/v000000000.onnx --width=215` 给冠军加一个全零的 215×512 投影，对任意 extras 输出与冠军完全相同，打印两者 SHA-256。
+- `sources.mjs` 现在也对 `belief/sampler.mjs`、`belief/features.mjs` 和 `web/src/analysis/concepts.mjs` 取指纹。
+- 测试：`ai/danMCai/tests/continuous-extras215.test.mjs`（包装初值与 017 逐值相同、215 维分片往返、边缘的形状与守恒；包装模型测试需 `W3_WRAPPED_MODEL=<onnx>` 或 `DANMCAI_PYTHON=<带 torch 的 python>`，否则跳过）与 `extras215_learner_test.py`（单步、恢复、冻结主干）。
+
 ## 种子与数据用途
 
 研究报告迄今使用的开发与留出种子都小于 1e9。持续训练的采样种子从 1,000,000,000 起，每个采样进程独占 5,000 万个；探索测量从 3,400,000,000 起；门控种子从 3,500,000,000 起，每次门控独占 10 万个。门控和监控对局都属于开发用途，不能当作留出验收。

@@ -11,10 +11,11 @@
  * manifests and the status file record actorImplementation "fast" and the inference provider.
  */
 import { appendFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import * as ort from 'onnxruntime-node';
 import { seededRandom } from '../../../shared/simulation/simulation.mjs';
 import { encodePolicyExtras } from '../../../../web/src/ai/policy-features.mjs';
+import { beliefMarginals, createBeliefModel } from '../../belief/sampler.mjs';
 import { createBatchedPool } from './batch-inference.mjs';
 import { createCandidateCache } from './fast-candidates.mjs';
 import { playMatchWith } from './fast-rollout.mjs';
@@ -25,12 +26,14 @@ import {
   TRAIN_SEED_SPAN,
   encodeSample,
   explore,
+  extrasWidth,
   labelMatch,
   option,
   pfspWeights,
   readJSON,
   runPaths,
   sample,
+  sha256,
   writeJSON,
 } from './lib.mjs';
 
@@ -72,7 +75,62 @@ const writer = new ShardWriter(
   paths.shards,
   `a${String(slot).padStart(2, '0')}`,
   status.shardSequence,
+  extrasWidth(config.extrasMode) || 53,
 );
+// 'public-belief': one belief-network call per decision (batched across this process's games),
+// raked to 162 card-scale marginals that every candidate row of the decision shares.
+let belief = null;
+const beliefStats = { calls: 0, views: 0, ms: 0 };
+if (config.extrasMode === 'public-belief') {
+  if (!config.beliefModel) throw Error('extrasMode public-belief requires config.beliefModel');
+  const file = resolve(config.beliefModel);
+  const digest = sha256(file);
+  if (config.beliefSHA256 && digest !== config.beliefSHA256)
+    throw Error('Belief model changed since the run was frozen');
+  belief = {
+    model: await createBeliefModel(ort, file),
+    sha256: digest,
+    queue: [],
+    scheduled: false,
+  };
+}
+/** The mover's public view (belief/features.mjs publicView layout) from a policy state. */
+const viewOf = (state) => ({
+  p: state.p,
+  hand: state.hand,
+  counts: state.counts,
+  level: state.level,
+  log: state.context.log.map((e) =>
+    e.cards?.length
+      ? { p: e.p, cards: e.cards.map((card) => card.id), type: e.type, value: e.value, n: e.n }
+      : { p: e.p, cards: null },
+  ),
+});
+function marginalsOf(state) {
+  if (!belief) return Promise.resolve(null);
+  return new Promise((resolve, reject) => {
+    belief.queue.push({ view: viewOf(state), resolve, reject });
+    if (belief.scheduled) return;
+    belief.scheduled = true;
+    setImmediate(async () => {
+      const jobs = belief.queue.splice(0);
+      belief.scheduled = false;
+      const t = performance.now();
+      try {
+        const rows = await beliefMarginals(
+          belief.model,
+          jobs.map((job) => job.view),
+        );
+        jobs.forEach((job, i) => job.resolve(rows[i]));
+      } catch (error) {
+        jobs.forEach((job) => job.reject(error));
+      }
+      beliefStats.calls++;
+      beliefStats.views += jobs.length;
+      beliefStats.ms += performance.now() - t;
+    });
+  });
+}
 const pool = await createBatchedPool(ort, { provider, sessionLimit });
 const cache = createCandidateCache({ limit: 512 });
 const random = seededRandom((config.learner.seed ^ (slot * 0x9e3779b1)) >>> 0);
@@ -97,6 +155,7 @@ function saveStatus() {
   writeJSON(statusFile, {
     ...status,
     inference: { ...pool.stats },
+    ...(belief ? { belief: { sha256: belief.sha256, ...beliefStats } } : {}),
     candidateCache: { ...cache.stats },
     memory: process.memoryUsage(),
     updatedAt: new Date().toISOString(),
@@ -104,7 +163,13 @@ function saveStatus() {
 }
 
 function flush() {
-  writer.flush({ actor: slot, actorImplementation: 'fast', provider: pool.stats.provider });
+  writer.flush({
+    actor: slot,
+    actorImplementation: 'fast',
+    provider: pool.stats.provider,
+    ...(config.extrasMode ? { extrasMode: config.extrasMode } : {}),
+    ...(belief ? { beliefSHA256: belief.sha256 } : {}),
+  });
   status.shardSequence = writer.sequence;
   saveStatus();
 }
@@ -139,20 +204,28 @@ async function lane() {
         team,
         mode: lineup.mode,
         candidates: cache.candidates,
-        snapshotInfer: lineup.file ? (state) => pool.values(lineup.file, state) : null,
+        // Snapshot opponents get the same extras as the learner seats (ignored by models
+        // without an extras input).
+        snapshotInfer: lineup.file
+          ? config.extrasMode
+            ? async (state) =>
+                pool.values(lineup.file, state, config.extrasMode, await marginalsOf(state))
+            : (state) => pool.values(lineup.file, state)
+          : null,
         decide: async (state) => {
-          const values = await pool.values(model, state, config.extrasMode);
+          const marginals = await marginalsOf(state);
+          const values = await pool.values(model, state, config.extrasMode, marginals);
           const { index } = explore(values, config.exploration, random);
+          let extras = null;
+          if (config.extrasMode === 'public') extras = encodePolicyExtras(state, index);
+          else if (config.extrasMode === 'public-belief') {
+            extras = new Float32Array(extrasWidth('public-belief'));
+            extras.set(encodePolicyExtras(state, index));
+            extras.set(marginals, 53);
+          } else if (config.extrasMode) extras = new Float32Array(53);
           rows.push({
             features: encodeSample(state, state.actions[index]),
-            ...(config.extrasMode
-              ? {
-                  extras:
-                    config.extrasMode === 'public'
-                      ? encodePolicyExtras(state, index)
-                      : new Float32Array(53),
-                }
-              : {}),
+            ...(extras ? { extras } : {}),
             team: state.p % 2,
             round: state.match.round,
           });
@@ -198,3 +271,4 @@ async function lane() {
 await Promise.all(Array.from({ length: games }, () => lane()));
 flush();
 await pool.close();
+if (belief) await belief.model.close();

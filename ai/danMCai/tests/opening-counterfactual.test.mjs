@@ -3,17 +3,26 @@ import assert from 'node:assert/strict';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { makeDeck } from '../../../web/src/core/cards.js';
 import { isBomb } from '../../../web/src/core/combinations.js';
-import { emptyTally } from '../belief/reason-match-eval.mjs';
+import { RULES_ONLY } from '../../../web/src/rule-bot/runtime.mjs';
+import { createWebClint, emptyTally } from '../belief/reason-match-eval.mjs';
 import {
   blindFollow,
   bootstrapMean,
+  clintReadingRule,
+  clintRow,
+  clintSeed,
+  evaluateClintPosition,
   evaluatePosition,
   findPosition,
   playArm,
   positionFilter,
+  positionRow,
   readingRule,
+  rebuildPosition,
   seatSeed,
+  selectRows,
   summarize,
+  summarizeClint,
   tableCards,
   teamOutcome,
 } from '../belief/opening-counterfactual.mjs';
@@ -248,4 +257,193 @@ test('reading rule', () => {
     'iii',
   );
   assert.equal(readingRule({ mean: 0.1, ci95: [-0.1, 0.3] }, { ci95: [-1, 1] }).verdict, 'iii');
+});
+
+/* ----------------------------- P4: Clint continuations ----------------------------- */
+
+const storedOf = (position) =>
+  JSON.parse(
+    JSON.stringify(
+      positionRow(position, {
+        arms: {
+          A_P1: { outcome: -1, order: [] },
+          B_P1: { outcome: 1, order: [] },
+          A_P2: { outcome: -2, order: [] },
+          B_P2: { outcome: 1, order: [] },
+        },
+        fallbacks: {},
+        times: {},
+        ms: 0,
+      }),
+    ),
+  );
+
+async function firstFakePosition() {
+  for (let seed = 4_300_000_000; seed < 4_300_000_200; seed++) {
+    const position = await findPosition(seed, fakeValues);
+    if (position) return position;
+  }
+  throw Error('no position among the first 200 deals');
+}
+
+test('blind-first selection: every blind follow, then visible tricks, stored order, capped', () => {
+  const rows = [
+    { seed: 10, blindFollow: false },
+    { seed: 11, blindFollow: true },
+    { seed: 12, blindFollow: false },
+    { seed: 13, blindFollow: true },
+    { seed: 14, blindFollow: false },
+  ];
+  const s = selectRows(rows, 'blind-first:4');
+  assert.deepEqual(
+    s.map((x) => [x.rank, x.storedIndex, x.row.seed]),
+    [
+      [0, 1, 11],
+      [1, 3, 13],
+      [2, 0, 10],
+      [3, 2, 12],
+    ],
+  );
+  assert.equal(selectRows(rows, 'blind-first:1').length, 1);
+  assert.equal(selectRows(rows, 'blind-first:400').length, 5);
+  assert.throws(() => selectRows(rows, 'first:4'));
+  assert.throws(() => selectRows([...rows, { seed: 11, blindFollow: true }], 'blind-first:9'));
+});
+
+test('stored positions are rebuilt from the deal seed and checked against the row', async () => {
+  const position = await firstFakePosition();
+  const stored = storedOf(position);
+  const rebuilt = await rebuildPosition(stored, fakeValues);
+  assert.equal(rebuilt.game.log.length, stored.ply);
+  assert.equal(rebuilt.game.turn, stored.seat);
+  assert.equal(rebuilt.bombIndex, position.bombIndex);
+  assert.equal(rebuilt.altIndex, position.altIndex);
+  const bad = (edit) => {
+    const row = structuredClone(stored);
+    edit(row);
+    return rebuildPosition(row, fakeValues);
+  };
+  await assert.rejects(
+    bad((r) => (r.ply += 1)),
+    /ply/,
+  );
+  await assert.rejects(
+    bad((r) => (r.bomb.ids = r.bomb.ids.slice(1))),
+    /bomb ids/,
+  );
+  await assert.rejects(
+    bad((r) => (r.moveB = r.moveB === 'pass' ? { ids: [0] } : 'pass')),
+    /move B/,
+  );
+  await assert.rejects(
+    bad((r) => (r.blindFollow = !r.blindFollow)),
+    /blind follow/,
+  );
+});
+
+test('P4: acting team = bot with P2 seeds, other team = Clint, fresh stream and token per arm', async () => {
+  const position = await firstFakePosition();
+  const team = position.game.turn % 2;
+  const botCalls = [],
+    clintCalls = [],
+    factories = [];
+  const bot = {
+    decide: async (game, p, info, tally) => {
+      assert.ok(tally);
+      assert.equal(p % 2, team);
+      assert.equal(info.searchSeed, seatSeed(position.seed, p));
+      botCalls.push(game.tok);
+      return fakeDecide(game, p);
+    },
+  };
+  const clintFactory = (seed) => {
+    factories.push(seed);
+    return (game, p) => {
+      assert.notEqual(p % 2, team);
+      clintCalls.push(game.tok);
+      const plays = candidates(game.hands[p], game.L, game.trick?.play);
+      return plays[0] ?? plays[plays.length - 1];
+    };
+  };
+  const evaluation = await evaluateClintPosition(position, { bot, clintFactory });
+  assert.deepEqual(factories, [clintSeed(position.seed), clintSeed(position.seed)]);
+  assert.equal(new Set([...botCalls, ...clintCalls]).size, 2); // one token per arm
+  assert.ok(clintCalls.length > 0 && botCalls.length > 0);
+  assert.equal(position.game.tok, undefined); // the stored position is not tagged
+  assert.deepEqual(Object.keys(evaluation.arms).sort(), ['A_P4', 'B_P4']);
+  assert.deepEqual(Object.keys(evaluation.clintBrain.A_P4).sort(), [
+    'calls',
+    'changed',
+    'fallback',
+    'ms',
+    'used',
+  ]);
+  const stored = storedOf(position);
+  const row = clintRow({ rank: 0, storedIndex: 7, row: stored }, position, evaluation, 12);
+  assert.equal(row.d.P4, row.outcomes.B_P4 - row.outcomes.A_P4);
+  assert.equal(row.d.P2, 3);
+  assert.equal(row.d.P1, 2);
+  assert.equal(row.storedIndex, 7);
+  assert.equal(row.blindFollow, stored.blindFollow);
+});
+
+test('P4 with the real web Clint seat (rules only) plays both arms legally', async () => {
+  const position = await firstFakePosition();
+  const bot = { decide: async (game, p) => fakeDecide(game, p) };
+  const evaluation = await evaluateClintPosition(position, {
+    bot,
+    clintFactory: (seed) => createWebClint(seed, RULES_ONLY),
+  });
+  for (const arm of Object.values(evaluation.arms)) {
+    assert.ok([1, 2, 3, -1, -2, -3].includes(arm.outcome));
+    assert.equal(arm.game.hands.filter((h) => h.length === 0).length >= 2, true);
+  }
+  assert.ok(evaluation.clintTime.A_P4.decisions > 0);
+  assert.equal(evaluation.clintBrain.A_P4.calls, 0); // brain off with RULES_ONLY
+});
+
+test('P4 summary: contiguous prefix, primary blind follows, pairing, timeout share and reading', () => {
+  const row = (rank, blind, A4, B4, dP2, calls, fallback) => ({
+    rank,
+    seed: 100 + rank,
+    blindFollow: blind,
+    band: '>80',
+    trickClass: 'single',
+    moveBIsPass: false,
+    outcomes: { A_P4: A4, B_P4: B4 },
+    d: { P4: B4 - A4, P2: dP2, P1: 0 },
+    clintBrain: {
+      A_P4: { calls, used: calls - fallback, fallback, changed: 0, ms: 10 },
+      B_P4: { calls: 0, used: 0, fallback: 0, changed: 0, ms: 0 },
+    },
+    clintTime: { A_P4: { ms: 100, decisions: 10 }, B_P4: { ms: 100, decisions: 10 } },
+    fallbacks: {},
+    wallMs: 4000,
+  });
+  const rows = [
+    row(0, true, -1, 1, 0, 4, 1), // d4 2
+    row(1, true, 1, 2, 2, 4, 0), // d4 1
+    row(2, false, 1, -1, -1, 2, 1), // d4 -2
+    row(4, false, 3, 3, 0, 10, 10), // outside the contiguous prefix (rank 3 missing)
+  ];
+  const s = summarizeClint(rows, { selected: 5, selectedBlind: 3 }, 500);
+  assert.equal(s.prefixPositions, 3);
+  assert.equal(s.completedRows, 4);
+  assert.equal(s.primaryBlindFollowD_P4.n, 2);
+  assert.equal(s.primaryBlindFollowD_P4.mean, 1.5);
+  assert.equal(s.secondaryAllD_P4.mean, (2 + 1 - 2) / 3);
+  assert.equal(s.secondaryPairedD_P4minusD_P2.mean, (2 - 1 - 1) / 3);
+  assert.equal(s.pairedBlindD_P4minusD_P2.mean, (2 - 1) / 2);
+  assert.equal(s.clintBrain.calls, 10);
+  assert.equal(s.clintBrain.fallback, 2);
+  assert.equal(s.clintBrain.timeoutShare, 0.2);
+  assert.equal(s.clintBrain.roundsWithBrainCalls, 3);
+  assert.equal(s.clintBrain.perRoundTimeoutShare.roundsAbove30pct, 1);
+  assert.equal(s.clintMsPerDecision, 10);
+  assert.match(s.incomplete, /2 of 3/);
+  assert.equal(clintReadingRule({ mean: 0.2, ci95: [0.05, 0.4] }, 0.2).verdict, 'a');
+  assert.equal(clintReadingRule({ mean: -0.2, ci95: [-0.4, -0.05] }, 0.2).verdict, 'b');
+  assert.equal(clintReadingRule({ mean: 0.1, ci95: [-0.1, 0.3] }, 0.2).verdict, 'c');
+  assert.equal(clintReadingRule({ mean: 0.2, ci95: [0.05, 0.4] }, 0.31).verdict, 'unreliable');
+  assert.equal(clintReadingRule({ mean: 0.2, ci95: null }, null).verdict, 'c');
 });

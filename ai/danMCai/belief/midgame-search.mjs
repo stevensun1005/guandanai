@@ -45,15 +45,29 @@
  * The midgame band keeps its rollout net-d search with --worlds-source. The endgame search also
  * runs on the masked game; the true deal never decides anything.
  *
+ * Optional focal raw network (--focal-raw-model=<onnx>, window 3, plan section 8 item 7): the
+ * focal team's RAW decisions (not a finishing move, more than one candidate) with MORE than `hi`
+ * cards on the table are taken by argmax of this model instead of the champion. The model has an
+ * `extras` input of width 215 per candidate row: the 53 public extras of
+ * web/src/ai/policy-features.mjs encodePolicyExtrasBatch followed by the 162 belief marginals
+ * beliefMarginals(--belief, publicView(masked game, mover)) of ai/danMCai/belief/sampler.mjs, the
+ * same function the trainer's fast actor uses (one belief inference per decision, shared by every
+ * candidate). Everything else keeps --champion: the other team, the candidate set and Q of the
+ * search band, the rollouts, the endgame solver and its worlds. --mode=raw: no search at all, the
+ * focal team plays the focal raw network at every raw decision (damage-stop checks). The model's
+ * SHA-256 is in run.json and in every per-pair row; round rows gain raw* fields only when the
+ * option is on, so default rows are unchanged. web/src/ai/search/core.mjs is not involved.
+ *
  * Metric: focal mean signed round points per deal pair, 95% deal-cluster normal interval; workers
  * take seeds start+part, start+part+parts, ...; the summary uses the contiguous completed prefix.
  * Per-pair rows (part-*.jsonl) allow a PAIRED comparison of two runs on the same seeds:
  *
  *   node ai/danMCai/belief/midgame-search.mjs --worlds-source=uniform|belief [--belief=<onnx>]
  *        --start=<seed> --pairs=<n> --out=<dir> [--workers=4] [--minutes=40]
- *        [--lo=21] [--hi=40] [--worlds=8] [--k=6] [--net=2] [--mode=search|champion]
+ *        [--lo=21] [--hi=40] [--worlds=8] [--k=6] [--net=2] [--mode=search|champion|raw]
  *        [--champion=<onnx>] [--allow-champion=1] [--belief-train-report=<json>|none]
  *        [--endgame=none|pimc] [--endgame-hi=20] [--endgame-worlds=uniform|belief]
+ *        [--focal-raw-model=<onnx> --belief=<onnx>] [--held-out=1]
  *   node ai/danMCai/belief/midgame-search.mjs --summarize=1 --out=<dir>
  *   node ai/danMCai/belief/midgame-search.mjs --compare=<dirA>,<dirB>     (reports B minus A)
  */
@@ -66,11 +80,16 @@ import { advanceRound, createRound } from '../../shared/simulation/simulation.mj
 import { sampleWorlds } from '../../shared/search/belief.mjs';
 import { searchObservation } from '../../shared/search/pimc.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
+import { cardsArray, encode } from '../../../web/src/ai/encoding.mjs';
 import { policyState } from '../../../web/src/ai/observation.js';
+import {
+  POLICY_EXTRA_FEATURES,
+  encodePolicyExtrasBatch,
+} from '../../../web/src/ai/policy-features.mjs';
 import { makeDeck } from '../../../web/src/core/cards.js';
 import { argmax, createModelPool, sha256 } from '../training/continuous/lib.mjs';
 import { publicView } from './features.mjs';
-import { createBeliefModel, sampleBeliefWorlds } from './sampler.mjs';
+import { beliefMarginals, createBeliefModel, sampleBeliefWorlds } from './sampler.mjs';
 import { assertHeldOut, trainingSeedRanges } from './metrics.mjs';
 import { SEARCH, createSearchSolver, searchChoice } from '../endgame/evaluate.mjs';
 import { SolverBudget } from '../endgame/solver.mjs';
@@ -333,6 +352,127 @@ export async function searchDecision(trueGame, seed, cfg) {
   };
 }
 
+/** Belief marginals per decision (3 hidden seats x 54 cards) and the focal raw extras width. */
+export const BELIEF_MARGINALS = 162;
+export const FOCAL_RAW_EXTRAS = POLICY_EXTRA_FEATURES + BELIEF_MARGINALS;
+
+/**
+ * policyState plus the public trick and one shape per action, built exactly as the trainer's fast
+ * rollout (ai/danMCai/training/continuous/fast-rollout.mjs) builds the state its actor scores.
+ */
+export function rawPolicyState(game, player, plays) {
+  const state = policyState(game, player, 0, plays);
+  const play = game.trick?.play;
+  state.trick = game.trick
+    ? { player: game.trick.player, play: { type: play.type, value: play.value, n: play.n } }
+    : null;
+  state.actionShapes = plays.map((x) => x && { type: x.type, value: x.value, n: x.n });
+  return state;
+}
+
+/** Row-major [actions, 215]: the 53 public extras of each row, then the decision's 162 marginals. */
+export function focalRawExtras(state, marginals) {
+  if (marginals?.length !== BELIEF_MARGINALS || !Array.from(marginals).every(Number.isFinite))
+    throw Error(`Belief marginals must be ${BELIEF_MARGINALS} finite numbers`);
+  const pub = encodePolicyExtrasBatch(state);
+  const n = state.actions.length;
+  const extras = new Float32Array(n * FOCAL_RAW_EXTRAS);
+  for (let i = 0; i < n; i++) {
+    extras.set(
+      pub.subarray(i * POLICY_EXTRA_FEATURES, (i + 1) * POLICY_EXTRA_FEATURES),
+      i * FOCAL_RAW_EXTRAS,
+    );
+    extras.set(marginals, i * FOCAL_RAW_EXTRAS + POLICY_EXTRA_FEATURES);
+  }
+  return extras;
+}
+
+/**
+ * Scorer for a 215-extras action-value ONNX (inputs state [1, 513], actions [n, 54], extras
+ * [n, 215]; output values [n]). The tensors are built as web/src/ai/policy-inference.mjs
+ * inferPolicy builds them (encode, cardsArray, chunks of 128 candidates); inferPolicy itself only
+ * accepts the 53/61-wide layouts, so the 215-wide extras are assembled here.
+ */
+export async function createFocalRawScorer(ort, file, { threads = 1 } = {}) {
+  const session = await ort.InferenceSession.create(file, {
+    intraOpNumThreads: threads,
+    interOpNumThreads: 1,
+    graphOptimizationLevel: 'all',
+  });
+  const metadata = session.inputMetadata;
+  const list = Array.isArray(metadata) ? metadata : Object.values(metadata ?? {});
+  const width = list.find((m) => m?.name === 'extras')?.shape?.[1];
+  if (
+    !session.inputNames.includes('extras') ||
+    (typeof width === 'number' && width !== FOCAL_RAW_EXTRAS)
+  ) {
+    await session.release();
+    throw Error(`${file} has no ${FOCAL_RAW_EXTRAS}-wide extras input (width ${width})`);
+  }
+  return {
+    async values(state, marginals) {
+      if (!state.actions?.length) throw Error('No actions');
+      const extras = focalRawExtras(state, marginals);
+      const values = [];
+      const stateTensor = new ort.Tensor('float32', encode(state), [1, 513]);
+      try {
+        for (let first = 0; first < state.actions.length; first += 128) {
+          const chunk = state.actions.slice(first, first + 128);
+          const batch = new Float32Array(chunk.length * 54);
+          chunk.forEach((cards, i) => batch.set(cardsArray(cards), i * 54));
+          const output = await session.run({
+            state: stateTensor,
+            actions: new ort.Tensor('float32', batch, [chunk.length, 54]),
+            extras: new ort.Tensor(
+              'float32',
+              extras.slice(first * FOCAL_RAW_EXTRAS, (first + chunk.length) * FOCAL_RAW_EXTRAS),
+              [chunk.length, FOCAL_RAW_EXTRAS],
+            ),
+          });
+          const data = output.values?.data;
+          const ok = data?.length === chunk.length && data.every(Number.isFinite);
+          if (ok) values.push(...data);
+          for (const tensor of Object.values(output)) tensor.dispose?.();
+          if (!ok) throw Error('Invalid focal raw model output');
+        }
+      } finally {
+        stateTensor.dispose?.();
+      }
+      return values;
+    },
+    async close() {
+      await session.release();
+    },
+  };
+}
+
+/**
+ * One raw decision of the focal raw network for the seat to move, on the masked game: belief
+ * marginals from the mover's public view, 215 extras per candidate, argmax (first maximum, as
+ * lib.mjs argmax). `championIndex` is the champion's greedy choice at the same state (recorded only).
+ */
+export async function focalRawDecision(trueGame, cfg) {
+  const t0 = performance.now();
+  const player = trueGame.turn;
+  const game = maskHidden(trueGame, player);
+  const plays = candidates(game.hands[player], game.L, game.trick?.play);
+  const championIndex = argmax(await cfg.values(cfg.champion, policyState(game, player, 0, plays)));
+  const tb = performance.now();
+  const marginals = await beliefMarginals(cfg.belief, publicView(game, player));
+  const beliefMs = performance.now() - tb;
+  const values = await cfg.focalRaw.values(rawPolicyState(game, player, plays), marginals);
+  if (values.length !== plays.length) throw Error('Focal raw values do not match the candidates');
+  return {
+    index: argmax(values),
+    championIndex,
+    plays,
+    values,
+    marginals,
+    beliefMs,
+    ms: performance.now() - t0,
+  };
+}
+
 /** One round of a deal with `focalTeam` searching; result from the focal team's view. */
 export async function playRound(seed, focalTeam, cfg) {
   const game = createRound(seed);
@@ -366,6 +506,20 @@ export async function playRound(seed, focalTeam, cfg) {
       endgameDifferPlies: [],
     });
   }
+  // Focal raw network fields only with --focal-raw-model, so default rows are unchanged.
+  const rawOn = !!cfg.focalRaw;
+  if (rawOn) {
+    if (!['search', 'raw'].includes(cfg.mode))
+      throw Error('--focal-raw-model needs mode search|raw');
+    if (!cfg.belief) throw Error('--focal-raw-model needs the belief network for its marginals');
+    Object.assign(stats, {
+      rawDecisions: 0,
+      rawDiffers: 0, // focal raw choice != champion greedy choice at the same state
+      rawMs: 0,
+      rawBeliefMs: 0,
+      rawDifferPlies: [],
+    });
+  } else if (cfg.mode === 'raw') throw Error('--mode=raw needs --focal-raw-model');
   for (let ply = 0; ply < 1000; ply++) {
     if (ply !== game.log.length) throw Error('Ply must equal the public log length');
     const player = game.turn;
@@ -399,6 +553,21 @@ export async function playRound(seed, focalTeam, cfg) {
         stats.inferences += d.inferences;
         stats.candidatesSearched += d.roots.length;
         stats.gainEstimate += d.gain;
+      } else if (
+        rawOn &&
+        player % 2 === focalTeam &&
+        (cfg.mode === 'raw' || (cfg.mode === 'search' && cards > cfg.hi))
+      ) {
+        const d = await focalRawDecision(game, cfg);
+        index = d.index;
+        championIndex = d.championIndex;
+        stats.rawDecisions++;
+        stats.rawMs += d.ms;
+        stats.rawBeliefMs += d.beliefMs;
+        if (index !== championIndex) {
+          stats.rawDiffers++;
+          stats.rawDifferPlies.push(ply);
+        }
       } else {
         championIndex = argmax(await cfg.values(cfg.champion, policyState(game, player, 0, plays)));
         index = championIndex;
@@ -432,8 +601,16 @@ export async function playPair(seed, cfg) {
   const t0 = performance.now();
   const a = await playRound(seed, 0, cfg);
   const b = await playRound(seed, 1, cfg);
-  return { seed, a, b, mean: (a.points + b.points) / 2, ms: performance.now() - t0 };
+  const row = { seed, a, b, mean: (a.points + b.points) / 2, ms: performance.now() - t0 };
+  return cfg.focalRaw ? { ...row, focalRawModelSHA256: cfg.focalRawModelSHA256 } : row;
 }
+
+const HELD_OUT_NOTE = 'held-out seeds; the decision rule is in the preregistered window protocol';
+const intervalNote = (heldOut, paired) =>
+  (paired
+    ? 'paired deal-cluster normal approximation; '
+    : 'deal-pair cluster, normal approximation; ') +
+  (heldOut ? HELD_OUT_NOTE : 'development seeds, not held-out');
 
 /** Mean with a 95% normal interval over clusters (one value per deal pair). */
 export function clusterInterval(values) {
@@ -445,7 +622,7 @@ export function clusterInterval(values) {
   return { n, mean, sd, ci95: [mean - half, mean + half] };
 }
 
-export function summarize(rows) {
+export function summarize(rows, { heldOut = false } = {}) {
   const means = rows.map((r) => r.mean);
   const { n, mean, sd, ci95 } = clusterInterval(means);
   const rounds = rows.flatMap((r) => [r.a, r.b]);
@@ -462,7 +639,7 @@ export function summarize(rows) {
     meanSignedPoints: mean,
     sd,
     ci95,
-    interval: 'deal-pair cluster, normal approximation; development seeds, not held-out',
+    interval: intervalNote(heldOut, false),
     focalBandDecisions: sum('bandDecisions'),
     searchedDecisions: searched,
     decisionsDifferentFromChampion: sum('differs'),
@@ -475,6 +652,22 @@ export function summarize(rows) {
     meanInSearchGainEstimate: searched ? sum('gainEstimate') / searched : null,
     meanPairSeconds: n ? rows.reduce((s, r) => s + r.ms, 0) / 1000 / n : null,
     ...(rounds.some((r) => 'endgameSearched' in r) ? { endgame: endgameSummary(sum, rounds) } : {}),
+    ...(rounds.some((r) => 'rawDecisions' in r) ? { focalRaw: focalRawSummary(sum, rows) } : {}),
+  };
+}
+
+/** Focal raw network totals (only for runs with --focal-raw-model). */
+function focalRawSummary(sum, rows) {
+  const decisions = sum('rawDecisions');
+  const per = (key, scale = 1) => (decisions ? sum(key) / scale / decisions : null);
+  return {
+    modelSHA256: [...new Set(rows.map((r) => r.focalRawModelSHA256 ?? null))],
+    rawDecisions: decisions,
+    decisionsDifferentFromChampion: sum('rawDiffers'),
+    fractionDiffering: per('rawDiffers'),
+    secondsPerRawDecision: per('rawMs', 1000),
+    beliefSecondsPerRawDecision: per('rawBeliefMs', 1000),
+    note: 'differing = the focal raw network argmax differs from the champion greedy choice at the same state; seconds include one champion and one belief inference per decision',
   };
 }
 
@@ -525,15 +718,17 @@ const COMPARED_SETTINGS = [
   'endgame',
   'endgameHi',
   'endgameWorlds',
+  'focalRawModelSHA256',
+  'heldOut',
 ];
-/** Values of settings that runs from before the endgame option did not record. */
-const LEGACY_SETTINGS = { endgame: 'none' };
+/** Values of settings that runs from before the endgame / focal raw options did not record. */
+const LEGACY_SETTINGS = { endgame: 'none', heldOut: false };
 
 /**
  * Paired comparison of two runs on their common contiguous-prefix seeds: per deal the difference
  * d = mean_B - mean_A (each already a pair mean), with a deal-cluster 95% normal interval.
  */
-export function compareRows(rowsA, rowsB) {
+export function compareRows(rowsA, rowsB, { heldOut = false } = {}) {
   const byA = new Map(rowsA.map((r) => [r.seed, r]));
   const common = rowsB.filter((r) => byA.has(r.seed)).sort((x, y) => x.seed - y.seed);
   const diffs = common.map((r) => r.mean - byA.get(r.seed).mean);
@@ -549,7 +744,7 @@ export function compareRows(rowsA, rowsB) {
     meanDifference: d.mean,
     sdDifference: d.sd,
     ci95: d.ci95,
-    interval: 'paired deal-cluster normal approximation; development seeds, not held-out',
+    interval: intervalNote(heldOut, true),
     pairsIdentical: diffs.filter((x) => x === 0).length,
     pairsBBetter: diffs.filter((x) => x > 0).length,
     pairsABetter: diffs.filter((x) => x < 0).length,
@@ -576,7 +771,7 @@ export function compareRuns(dirA, dirB) {
     championSHA256: A.run.championSHA256,
     settingDifferences,
     prefixPairs: [A.rows.length, B.rows.length],
-    ...compareRows(A.rows, B.rows),
+    ...compareRows(A.rows, B.rows, { heldOut: !!(A.run.heldOut && B.run.heldOut) }),
   };
 }
 
@@ -659,8 +854,16 @@ export function buildProtocol(args) {
     endgame: args.endgame ?? DEFAULTS.endgame,
     endgameHi: null,
     endgameWorlds: null,
+    focalRawModel: null,
+    focalRawModelSHA256: null,
+    heldOut: args['held-out'] === '1',
   };
-  if (!['search', 'champion'].includes(protocol.mode)) throw Error('--mode=search|champion');
+  if (!['search', 'champion', 'raw'].includes(protocol.mode))
+    throw Error('--mode=search|champion|raw');
+  if (protocol.heldOut)
+    protocol.purpose =
+      'held-out run of the configuration below; seeds and the decision rule are fixed in the ' +
+      'preregistered window protocol';
   if (!['uniform', 'belief'].includes(protocol.worldsSource))
     throw Error('--worlds-source=uniform|belief');
   for (const key of ['start', 'pairs', 'lo', 'hi', 'worlds', 'k', 'net'])
@@ -695,10 +898,44 @@ export function buildProtocol(args) {
   } else if (protocol.endgame !== 'none') throw Error('--endgame=none|pimc');
   else if (args['endgame-hi'] !== undefined || args['endgame-worlds'] !== undefined)
     throw Error('--endgame-hi/--endgame-worlds are only used with --endgame=pimc');
-  const needsBelief = protocol.worldsSource === 'belief' || protocol.endgameWorlds === 'belief';
+  if (args['focal-raw-model'] !== undefined) {
+    if (!['search', 'raw'].includes(protocol.mode))
+      throw Error('--focal-raw-model is only used with --mode=search|raw');
+    protocol.focalRawModel = resolve(args['focal-raw-model']);
+    protocol.focalRawModelSHA256 = sha256(protocol.focalRawModel);
+    if (protocol.focalRawModelSHA256 === protocol.championSHA256)
+      throw Error('--focal-raw-model is the champion file itself (it needs a 215-extras input)');
+    protocol.focalRawExtras = {
+      width: FOCAL_RAW_EXTRAS,
+      layout:
+        `${POLICY_EXTRA_FEATURES} public extras (web/src/ai/policy-features.mjs ` +
+        `encodePolicyExtrasBatch) then ${BELIEF_MARGINALS} belief marginals ` +
+        '(ai/danMCai/belief/sampler.mjs beliefMarginals(--belief, publicView(masked game, mover))), ' +
+        'one belief inference per decision shared by every candidate row',
+      appliesTo:
+        protocol.mode === 'raw'
+          ? 'every focal raw decision (no search, no endgame search)'
+          : 'focal raw decisions with more than hi cards on the table; band search, endgame ' +
+            'search, rollouts, candidates and the other team keep the champion',
+    };
+    protocol.purpose +=
+      protocol.mode === 'raw'
+        ? '; focal team plays the focal raw network greedily at every raw decision, no search'
+        : '; focal raw decisions above hi cards by the focal raw network';
+  } else if (protocol.mode === 'raw') throw Error('--mode=raw needs --focal-raw-model=<onnx>');
+  if (protocol.mode === 'raw') {
+    if (protocol.endgame !== 'none') throw Error('--mode=raw plays no endgame search');
+    if (protocol.worldsSource !== 'uniform') throw Error('--mode=raw samples no search worlds');
+  }
+  const needsBelief =
+    protocol.worldsSource === 'belief' ||
+    protocol.endgameWorlds === 'belief' ||
+    !!protocol.focalRawModel;
   if (needsBelief) {
     if (!args.belief)
-      throw Error('--worlds-source=belief or --endgame-worlds=belief needs --belief=<onnx>');
+      throw Error(
+        '--worlds-source=belief, --endgame-worlds=belief or --focal-raw-model needs --belief=<onnx>',
+      );
     protocol.belief = resolve(args.belief);
     protocol.beliefSHA256 = sha256(protocol.belief);
     const reportFile =
@@ -723,7 +960,9 @@ export function buildProtocol(args) {
         `${JSON.stringify(protocol.beliefTrainingBands ?? 'not checked')}), so these positions are ` +
         'outside its training band';
   } else if (args.belief)
-    throw Error('--belief is only used with --worlds-source=belief or --endgame-worlds=belief');
+    throw Error(
+      '--belief is only used with --worlds-source=belief, --endgame-worlds=belief or --focal-raw-model',
+    );
   return protocol;
 }
 
@@ -731,17 +970,24 @@ export function buildProtocol(args) {
 export async function createConfig(protocol, ort, { threads = 1 } = {}) {
   const pool = await createModelPool(ort, { threads, limit: 2 });
   const belief =
-    protocol.worldsSource === 'belief' || protocol.endgameWorlds === 'belief'
+    protocol.worldsSource === 'belief' ||
+    protocol.endgameWorlds === 'belief' ||
+    protocol.focalRawModel
       ? await createBeliefModel(ort, protocol.belief, { threads })
       : null;
+  const focalRaw = protocol.focalRawModel
+    ? await createFocalRawScorer(ort, protocol.focalRawModel, { threads })
+    : null;
   return {
     ...protocol,
     values: (file, state) => pool.values(file, state),
     belief,
+    focalRaw,
     solver: protocol.endgame === 'pimc' ? createSearchSolver() : null,
     async close() {
       await pool.close();
       if (belief) await belief.close();
+      if (focalRaw) await focalRaw.close();
     },
   };
 }
@@ -788,7 +1034,7 @@ async function main(args) {
     const { all, rows, last } = collect(out, run.workers, run.start);
     console.log(
       JSON.stringify(
-        { completedPairsTotal: all.length, seedRange: [run.start, last], ...summarize(rows) },
+        { completedPairsTotal: all.length, seedRange: [run.start, last], ...summarize(rows, run) },
         null,
         2,
       ),
@@ -853,7 +1099,7 @@ async function main(args) {
     completedPairsTotal: all.length,
     seedRange: [run.start, last],
     droppedBeyondPrefix: all.length - rows.length,
-    ...(rows.length ? summarize(rows) : { pairs: 0 }),
+    ...(rows.length ? summarize(rows, run) : { pairs: 0 }),
   };
   writeFileSync(join(out, 'summary.json'), JSON.stringify(summary, null, 2));
   const { sources: _, ...printed } = summary;

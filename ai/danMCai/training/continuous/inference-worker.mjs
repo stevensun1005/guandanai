@@ -62,7 +62,7 @@ async function session(file) {
   return promise;
 }
 
-async function score({ id, file, rows, states, actions, extras }) {
+async function score({ id, file, rows, states, actions, extras, extrasWidth = 53 }) {
   try {
     const engine = await session(file);
     const started = performance.now();
@@ -84,10 +84,13 @@ async function score({ id, file, rows, states, actions, extras }) {
       };
       if (engine.inputNames.includes('extras')) {
         if (!extras) throw Error('Missing registered extras input');
+        const width = extrasInputWidth(engine);
+        if (width !== null && width !== extrasWidth)
+          throw Error(`Model extras width ${width} does not match the sent ${extrasWidth}`);
         inputs.extras = new ort.Tensor(
           'float32',
-          new Float32Array(extras).subarray(first * 53, (first + count) * 53),
-          [count, 53],
+          new Float32Array(extras).subarray(first * extrasWidth, (first + count) * extrasWidth),
+          [count, extrasWidth],
         );
       }
       let output;
@@ -114,6 +117,15 @@ async function score({ id, file, rows, states, actions, extras }) {
     parentPort.postMessage({ id, error: String(error?.message || error) });
   }
 }
+/** Fixed second dimension of the session's `extras` input, when the metadata states it. */
+function extrasInputWidth(engine) {
+  const meta = Array.isArray(engine.inputMetadata)
+    ? engine.inputMetadata.find((m) => m?.name === 'extras')
+    : engine.inputMetadata?.extras;
+  const width = meta?.shape?.[1];
+  return typeof width === 'number' ? width : null;
+}
+
 let queue = Promise.resolve();
 parentPort.on('message', (message) => {
   queue = queue.then(() => score(message));

@@ -12,6 +12,20 @@ export const FEATURES = STATE + ACTION;
 export const TARGETS = 4;
 
 /**
+ * Per-action extras width of each registered extras mode: the 53 public policy extras
+ * (web/src/ai/policy-features.mjs), or those followed by the 162 belief-v1 marginals of the
+ * mover's three hidden seats (ai/danMCai/belief/sampler.mjs beliefMarginals). 0 = no extras input.
+ */
+export const BELIEF_MARGINALS = 162;
+export const EXTRA_WIDTHS = Object.freeze({ public: 53, zero: 53, 'public-belief': 53 + 162 });
+export function extrasWidth(mode) {
+  if (mode === null || mode === undefined) return 0;
+  const width = EXTRA_WIDTHS[mode];
+  if (!width) throw Error(`Unknown extras mode ${mode}`);
+  return width;
+}
+
+/**
  * Seed ranges. Every development / held-out seed used by the study so far is below 1e9, so
  * continuous training never draws a match seed from that range. Each actor slot owns a block.
  */
@@ -41,6 +55,8 @@ export const DEFAULT_CONFIG = Object.freeze({
     threads: 4,
     batch: 2048,
     learningRate: 1e-5,
+    // Step size of the zero-initialised extras projection (extras modes only).
+    extrasLearningRate: 1e-4,
     gradClip: 1.0,
     capacity: 2_000_000,
     minSamples: 100_000,
@@ -57,6 +73,8 @@ export const DEFAULT_CONFIG = Object.freeze({
   anchor: { intervalHours: 3, pairs: 150, regressionLimit: 2 },
   restarts: { limit: 5, windowMinutes: 10 },
   diskLimitGB: 20,
+  // ONNX belief network for extrasMode 'public-belief' (its SHA-256 is frozen into config.json).
+  beliefModel: null,
 });
 
 export const option = (name, fallback) =>
@@ -228,10 +246,12 @@ export function labelMatch(rows, result) {
 
 /** Rows become visible to the learner only after the .json manifest is renamed into place. */
 export class ShardWriter {
-  constructor(directory, prefix, sequence = 0) {
+  constructor(directory, prefix, sequence = 0, extrasWidth = 53) {
+    if (![53, 215].includes(extrasWidth)) throw Error('Invalid extras width');
     this.directory = directory;
     this.prefix = prefix;
     this.sequence = sequence;
+    this.extrasWidth = extrasWidth;
     this.reset();
   }
   reset() {
@@ -264,18 +284,19 @@ export class ShardWriter {
     writeFileSync(join(this.directory, `${name}.x.i8`), features);
     writeFileSync(join(this.directory, `${name}.y.f32`), targets);
     const withExtras = this.extras.some(Boolean);
+    const width = this.extrasWidth;
     if (withExtras) {
-      if (this.extras.some((x) => !x || x.length !== 53 || !x.every(Number.isFinite)))
+      if (this.extras.some((x) => !x || x.length !== width || !x.every(Number.isFinite)))
         throw Error('Invalid extras shard');
-      const data = new Float32Array(this.rows * 53);
-      this.extras.forEach((x, i) => data.set(x, i * 53));
+      const data = new Float32Array(this.rows * width);
+      this.extras.forEach((x, i) => data.set(x, i * width));
       writeFileSync(join(this.directory, `${name}.e.f32`), data);
     }
     const manifest = {
       schema: 1,
       rows: this.rows,
       features: FEATURES,
-      ...(withExtras ? { extraFeatures: 53 } : {}),
+      ...(withExtras ? { extraFeatures: width } : {}),
       targets: ['roundPoints', 'matchResult', 'roundIndex', 'matchRounds'],
       matches: this.matches,
       models: [...this.models],

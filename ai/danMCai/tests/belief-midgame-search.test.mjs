@@ -9,25 +9,31 @@ import { sampleWorlds } from '../../shared/search/belief.mjs';
 import { searchObservation } from '../../shared/search/pimc.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { features, publicView } from '../belief/features.mjs';
-import { sampleBeliefWorlds } from '../belief/sampler.mjs';
+import { beliefMarginals, createBeliefModel, sampleBeliefWorlds } from '../belief/sampler.mjs';
 import { labelDecision } from '../endgame/pimc-actor.mjs';
 import { SEARCH, createSearchSolver, playPaired, searchChoice } from '../endgame/evaluate.mjs';
 import { argmax } from '../training/continuous/lib.mjs';
-import { policyState } from '../../../web/src/ai/observation.js';
+import { decisionContext, policyState } from '../../../web/src/ai/observation.js';
+import { encodePolicyExtrasBatch } from '../../../web/src/ai/policy-features.mjs';
 import {
+  BELIEF_MARGINALS,
   CHAMPION_SHA256,
   DEFAULT_CHAMPION,
+  FOCAL_RAW_EXTRAS,
   buildProtocol,
   compareRows,
   compareRuns,
   createConfig,
   endgameDecision,
+  focalRawDecision,
+  focalRawExtras,
   maskHidden,
   netChoice,
   pimcLabelFromWorlds,
   pimcPick,
   playPair,
   playRound,
+  rawPolicyState,
   sampleSearchWorlds,
   searchDecision,
   searchRootsOf,
@@ -745,6 +751,229 @@ test(
       assert.equal(c.meanDifference, 0);
     } finally {
       rmSync(dir, { recursive: true, force: true });
+    }
+  },
+);
+
+/* ---- Focal raw network (--focal-raw-model, --mode=raw; window 3 plan section 8 item 7) ---- */
+
+const W3_INIT =
+  '/Users/stevensun/guandan-runtime.noindex/window3-20261109/train-init/v000000000.onnx';
+const BELIEF_V1 = '/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx';
+const marginalBelief = existsSync(BELIEF_V1) ? BELIEF_V1 : SMOKE_BELIEF;
+const haveInit = existsSync(W3_INIT) && existsSync(marginalBelief);
+
+test('buildProtocol: focal raw model and raw mode requirements, SHA and held-out wording', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'midgame-focal-raw-'));
+  try {
+    const champion = join(dir, 'champion.onnx');
+    writeFileSync(champion, 'champion bytes');
+    const model = join(dir, 'v000000000.onnx');
+    writeFileSync(model, 'wrapped bytes');
+    const belief = join(dir, 'belief.onnx');
+    writeFileSync(belief, 'belief bytes');
+    writeFileSync(
+      join(dir, 'train-report.json'),
+      JSON.stringify({ dataProtocols: [{ seeds: [100, 199], band: [21, 80] }] }),
+    );
+    const base = { start: '200', pairs: '10', champion, 'allow-champion': '1' };
+    const plain = buildProtocol(base);
+    assert.deepEqual(
+      [plain.focalRawModel, plain.focalRawModelSHA256, plain.heldOut],
+      [null, null, false],
+    );
+    assert.throws(() => buildProtocol({ ...base, mode: 'raw' }), /needs --focal-raw-model/);
+    const raw = { ...base, mode: 'raw', 'focal-raw-model': model };
+    assert.throws(() => buildProtocol(raw), /needs --belief/);
+    const p = buildProtocol({ ...raw, belief });
+    assert.equal(p.focalRawModel, model);
+    assert.match(p.focalRawModelSHA256, /^[0-9a-f]{64}$/);
+    assert.equal(p.focalRawExtras.width, 215);
+    assert.match(p.purpose, /no search/);
+    assert.deepEqual(p.beliefTrainingSeeds, [[100, 199]]);
+    assert.throws(() => buildProtocol({ ...raw, belief, start: '150' }), /overlap/);
+    assert.throws(
+      () => buildProtocol({ ...raw, belief, endgame: 'pimc', 'endgame-worlds': 'belief' }),
+      /no endgame/,
+    );
+    assert.throws(
+      () => buildProtocol({ ...raw, belief, 'worlds-source': 'belief' }),
+      /no search worlds/,
+    );
+    assert.throws(
+      () => buildProtocol({ ...base, mode: 'champion', 'focal-raw-model': model, belief }),
+      /only used with --mode=search\|raw/,
+    );
+    assert.throws(
+      () => buildProtocol({ ...base, 'focal-raw-model': champion, belief }),
+      /champion file itself/,
+    );
+    const s = buildProtocol({
+      ...base,
+      'focal-raw-model': model,
+      belief,
+      'worlds-source': 'belief',
+      endgame: 'pimc',
+      'endgame-worlds': 'belief',
+      'held-out': '1',
+    });
+    assert.equal(s.mode, 'search');
+    assert.equal(s.heldOut, true);
+    assert.match(s.purpose, /^held-out run/);
+    assert.match(s.focalRawExtras.appliesTo, /more than hi cards/);
+    assert.throws(() => buildProtocol({ ...base, mode: 'greedy' }), /search\|champion\|raw/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+  const row = (seed, mean) => ({ seed, mean, a: { points: 0 }, b: { points: 0 }, ms: 1 });
+  assert.match(summarize([row(1, 1)]).interval, /development seeds, not held-out/);
+  assert.match(summarize([row(1, 1)], { heldOut: true }).interval, /held-out seeds/);
+  assert.match(compareRows([row(1, 1)], [row(1, 0)], { heldOut: true }).interval, /^paired/);
+});
+
+test('focal raw extras: per row the 53 public extras of the trainer state, then the 162 marginals', () => {
+  const { game } = position(3_838_129_420, 60);
+  const player = game.turn;
+  const plays = candidates(game.hands[player], game.L, game.trick?.play);
+  const state = rawPolicyState(game, player, plays);
+  // The fast rollout's state: policyState + decisionContext trick + action shapes.
+  const context = decisionContext(game, player);
+  assert.deepEqual(state.trick, context.trick);
+  assert.deepEqual(state, {
+    ...policyState(game, player, 0, plays),
+    trick: context.trick,
+    actionShapes: plays.map((x) => x && { type: x.type, value: x.value, n: x.n }),
+  });
+  const marginals = Float32Array.from({ length: BELIEF_MARGINALS }, (_, i) => i / 100);
+  const extras = focalRawExtras(state, marginals);
+  assert.equal(FOCAL_RAW_EXTRAS, 215);
+  assert.equal(extras.length, plays.length * 215);
+  const pub = encodePolicyExtrasBatch(state);
+  for (let i = 0; i < plays.length; i++) {
+    assert.deepEqual(extras.slice(i * 215, i * 215 + 53), pub.slice(i * 53, (i + 1) * 53));
+    assert.deepEqual(extras.slice(i * 215 + 53, (i + 1) * 215), marginals);
+  }
+  assert.throws(() => focalRawExtras(state, marginals.slice(1)), /162/);
+  assert.throws(() => focalRawExtras(state, Array(162).fill(NaN)), /finite/);
+});
+
+test(
+  'focal raw belief marginals: public view only, same as from the trainer state, hidden-permutation invariant',
+  { skip: !(haveInit && haveChampion) && 'window-3 initial model, belief or champion missing' },
+  async () => {
+    const ort = await import('onnxruntime-node');
+    const model = await createBeliefModel(ort, marginalBelief);
+    const cfg = await championConfig({
+      mode: 'raw',
+      focalRawModel: W3_INIT,
+      focalRawModelSHA256: 'test',
+      belief: marginalBelief,
+    });
+    try {
+      for (const [start, hi] of [
+        [3_838_129_430, 100],
+        [3_838_129_440, 70],
+        [3_838_129_450, 40],
+      ]) {
+        const { game } = position(start, hi);
+        const player = game.turn;
+        const masked = maskHidden(game, player);
+        const plays = candidates(game.hands[player], game.L, game.trick?.play);
+        const fromView = await beliefMarginals(model, publicView(masked, player));
+        const fromState = await beliefMarginals(model, rawPolicyState(masked, player, plays));
+        assert.equal(fromView.length, BELIEF_MARGINALS);
+        assert.deepEqual(fromState, fromView);
+        const d = await focalRawDecision(game, cfg);
+        const e = await focalRawDecision(permuteHidden(game, start), cfg);
+        assert.deepEqual(d.marginals, fromView);
+        assert.deepEqual(e.marginals, d.marginals);
+        assert.deepEqual(e.values, d.values);
+        assert.equal(e.index, d.index);
+        // Wrapped 017 (zero extras projection): values equal the champion's to 1e-5.
+        const champion = await cfg.values(cfg.champion, policyState(game, player, 0, plays));
+        for (let i = 0; i < plays.length; i++)
+          assert.ok(Math.abs(d.values[i] - champion[i]) < 1e-5, `candidate ${i}`);
+        assert.equal(d.index, d.championIndex);
+      }
+    } finally {
+      await model.close();
+      await cfg.close();
+    }
+  },
+);
+
+/** Development seeds already used by the tests above (outside every window-3 reserved range). */
+const FOCAL_RAW_SEEDS = [
+  3_838_129_380, 3_838_129_381, 3_838_129_385, 3_838_129_390, 3_838_129_395, 3_838_129_900,
+  3_838_129_901, 3_838_129_950,
+];
+
+test(
+  'test 9e: --mode=raw with --focal-raw-model = wrapped 017 reproduces the champion arm pair for pair',
+  { skip: !(haveInit && haveChampion) && 'window-3 initial model, belief or champion missing' },
+  async () => {
+    const champion = await championConfig({ mode: 'champion' });
+    const raw = await championConfig({
+      mode: 'raw',
+      focalRawModel: W3_INIT,
+      focalRawModelSHA256: 'sha-of-init',
+      belief: marginalBelief,
+    });
+    try {
+      for (const seed of FOCAL_RAW_SEEDS) {
+        const c = await playPair(seed, champion);
+        const r = await playPair(seed, raw);
+        assert.equal(r.focalRawModelSHA256, 'sha-of-init');
+        assert.equal(c.focalRawModelSHA256, undefined);
+        assert.equal(r.mean, c.mean, `seed ${seed}`);
+        for (const side of ['a', 'b']) {
+          for (const key of ['points', 'order', 'plies', 'bandDecisions', 'differs', 'searched'])
+            assert.deepEqual(r[side][key], c[side][key], `seed ${seed} ${side} ${key}`);
+          assert.ok(r[side].rawDecisions > 0);
+          assert.equal(r[side].rawDiffers, 0, `seed ${seed} ${side}`);
+          assert.deepEqual(r[side].rawDifferPlies, []);
+        }
+      }
+      const s = summarize([await playPair(FOCAL_RAW_SEEDS[0], raw)]);
+      assert.deepEqual(s.focalRaw.modelSHA256, ['sha-of-init']);
+      assert.equal(s.focalRaw.decisionsDifferentFromChampion, 0);
+      assert.ok(s.focalRaw.secondsPerRawDecision > 0);
+    } finally {
+      await champion.close();
+      await raw.close();
+    }
+  },
+);
+
+test(
+  'search mode with --focal-raw-model = wrapped 017 above hi plays the same rounds as without it',
+  { skip: !(haveInit && haveChampion) && 'window-3 initial model, belief or champion missing' },
+  async () => {
+    const small = { worlds: 2, k: 2, lo: 21, hi: 30 };
+    const plain = await championConfig(small);
+    const focal = await championConfig({
+      ...small,
+      focalRawModel: W3_INIT,
+      focalRawModelSHA256: 'sha-of-init',
+      belief: marginalBelief,
+    });
+    try {
+      for (const seed of FOCAL_RAW_SEEDS.slice(0, 2)) {
+        const x = untimed(await playPair(seed, plain));
+        const { focalRawModelSHA256, ...y } = untimed(await playPair(seed, focal));
+        assert.equal(focalRawModelSHA256, 'sha-of-init');
+        for (const side of ['a', 'b']) {
+          const { rawDecisions, rawDiffers, rawMs, rawBeliefMs, rawDifferPlies, ...rest } = y[side];
+          assert.ok(rawDecisions > 0 && rawMs > 0 && rawBeliefMs > 0);
+          assert.equal(rawDiffers, 0);
+          assert.deepEqual(rawDifferPlies, []);
+          y[side] = rest;
+        }
+        assert.deepEqual(y, x);
+      }
+    } finally {
+      await plain.close();
+      await focal.close();
     }
   },
 );

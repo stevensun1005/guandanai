@@ -82,6 +82,20 @@ node ai/danMCai/belief/metrics.mjs --belief=<模型目录>/belief.onnx --seeds=<
 
 `midgame-search.mjs`：中盘（默认 21–40 张）一步模拟搜索，候选为冠军前 6 名（可过牌时加过牌），每个候选在 8 个世界里由冠军打到底；只有某候选比冠军出法多赢至少 2 个世界且平均更高时才偏离冠军。`--worlds-source=uniform` 与均匀抽样完全一致，`--worlds-source=belief --belief=<onnx>` 改用推断网络抽样；隐藏手牌在搜索中被屏蔽，真实发牌从不参与决策。`--compare=<A>,<B>` 给出同一批牌的配对差和牌副簇 95% 区间。这是开发工具，正式结论需另行预登记。
 
+第三窗口（2026-11-09）新增，均为开发／验收工具，不是结果：
+
+- `--focal-raw-model=<onnx>`：焦点方在 `hi` 张以上的直接决策改用这个 215 维 extras 模型（53 维公开 extras＋`beliefMarginals` 的 162 维，须同时给 `--belief`）；候选、推演、残局求解、世界抽样和对手仍用 `--champion`。拒绝冠军文件本身或 extras 宽度不是 215 的模型；`run.json` 和每行记录模型 SHA-256，每局记录 `rawDecisions`／`rawDiffers`。
+- `--mode=raw`：不搜索，焦点方每个直接决策都用该模型（止损检查用）；不能与 `--endgame=pimc` 或 `--worlds-source=belief` 同用。
+- `--held-out=1`：只改写报告里“开发种子”的说明并记录 `heldOut`，用于预登记的留出验收。
+
+## 交接点上界诊断（handover-oracle.mjs，第三窗口 S1）
+
+`handover-oracle.mjs` 估计 40 张交接点以上、以下各丢多少分：A＝现网 9001（直接调用本目录 `midgame-search.mjs` 的决策函数），B＝40 张以上用“看真实发牌”的推演、40 张及以下照常 9001，C＝全程看真实发牌。真实发牌推演读取隐藏手牌，只是上界，不是玩家，也不作训练数据。对手为冠军 017 贪心，单局、不进贡、换位配对；支持 `--deadline`／`--stop-file`，`--summarize=1` 给出 B−A、C−B、A−C 配对差。测试 `ai/danMCai/tests/handover-oracle.test.mjs`（A 臂逐局复现 `midgame-search` 的 `playRound`）。
+
+## 炸弹反事实的 Clint 续打（opening-counterfactual.mjs，未使用）
+
+`opening-counterfactual.mjs --continuation=clint --positions=<rows.jsonl> --select=blind-first:N [--stop-file=…]`：从已存局面重建（不符即停），强制走炸弹或最佳非炸弹后，行动方为 9001、对方为带网页大脑的 Clint，记录每局大脑超时比例（超过 30% 报告为不可靠）。第三窗口 S5 由所有者 23:05 决定不跑（判断 Clint 比 017 弱），代码已测试但未用于任何结果；Clint 仍只作评测。
+
 源码闭包指纹的键统一使用仓库相对路径和正斜杠，Windows与POSIX保持同一字段格式；已冻结实验仍使用原记录与原源码。
 
 ## 特征版本 v3

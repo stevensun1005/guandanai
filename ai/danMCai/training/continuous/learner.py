@@ -19,6 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from value_net import FEATURES, ValueNet, ValueNetExtras, export_onnx, export_onnx_extras, load_onnx_weights  # noqa: E402
 
 TARGETS = 4
+# Extras width per registered mode: 53 public policy extras, plus 162 belief-v1 marginals.
+EXTRA_WIDTH = {"public": 53, "zero": 53, "public-belief": 215}
 
 
 def read_json(path, fallback=None):
@@ -65,7 +67,7 @@ class Replay:
             xs, ys = x[start : start + self.capacity], y[start : start + self.capacity]
             n = len(xs)
             if self.e is not None:
-                if e is None or e.shape != (len(x), 53) or not np.isfinite(e).all():
+                if e is None or e.shape != (len(x), self.e.shape[1]) or not np.isfinite(e).all():
                     raise ValueError("Invalid extras replay rows")
                 positions = (self.cursor + np.arange(n)) % self.capacity
                 self.e[positions] = e[start:start+n]
@@ -111,9 +113,10 @@ class Learner:
         self.state_dir.mkdir(parents=True, exist_ok=True)
         self.checkpoint = self.state_dir / "checkpoint.pt"
         self.extras_mode = self.config.get("extrasMode")
-        if self.extras_mode not in (None, "public", "zero"):
+        if self.extras_mode is not None and self.extras_mode not in EXTRA_WIDTH:
             raise ValueError("Unknown extras mode")
-        self.replay = Replay(int(self.settings["capacity"]), int(self.settings["seed"]), 53 if self.extras_mode else 0)
+        self.extra_width = EXTRA_WIDTH.get(self.extras_mode, 0)
+        self.replay = Replay(int(self.settings["capacity"]), int(self.settings["seed"]), self.extra_width)
         self.ingested = set()
         self.counted = set()
         self.ingested_rows = 0
@@ -123,16 +126,36 @@ class Learner:
         self.started = time.time()
         latest = read_json(self.models / "latest.json")
         initial = self.models / latest["file"]
-        self.net = (ValueNetExtras if self.extras_mode else ValueNet)(load_onnx_weights(initial)).to(self.device)
         if self.extras_mode:
+            self.net = ValueNetExtras(load_onnx_weights(initial), self.extra_width).to(self.device)
             import onnx
             from onnx import numpy_helper
             arrays = {v.name: numpy_helper.to_array(v) for v in onnx.load(str(initial)).graph.initializer}
+            if arrays["extra_weight"].shape != (self.extra_width, self.net.extra_weight.shape[1]):
+                raise ValueError("Initial model extras width does not match extrasMode")
             with torch.no_grad():
                 self.net.extra_weight.copy_(torch.from_numpy(arrays["extra_weight"].copy()).to(self.device))
-        self.optimizer = torch.optim.Adam(
-            self.net.parameters(), lr=float(self.settings["learningRate"])
-        )
+        else:
+            self.net = ValueNet(load_onnx_weights(initial)).to(self.device)
+        self.trunk_frozen = bool(self.settings.get("trunkFrozen", False))
+        if self.trunk_frozen and not self.extras_mode:
+            raise ValueError("trunkFrozen requires an extras mode")
+        if self.extras_mode and (self.extras_mode == "public-belief" or "extrasLearningRate" in self.settings or self.trunk_frozen):
+            # Separate step sizes: the zero-initialised projection must move at all while the
+            # champion trunk moves slowly (or not at all with trunkFrozen).
+            if self.trunk_frozen:
+                self.net.layers.requires_grad_(False)
+            extras_lr = float(self.settings.get("extrasLearningRate", self.settings["learningRate"]))
+            self.optimizer = torch.optim.Adam(
+                [
+                    {"params": list(self.net.layers.parameters()), "lr": float(self.settings["learningRate"])},
+                    {"params": [self.net.extra_weight], "lr": extras_lr},
+                ]
+            )
+        else:
+            self.optimizer = torch.optim.Adam(
+                self.net.parameters(), lr=float(self.settings["learningRate"])
+            )
         self.anchor = None
         if self.extras_mode and float(self.settings["anchorWeight"]) != 0:
             raise ValueError("Extras experiment requires the registered zero anchor loss")
@@ -158,6 +181,10 @@ class Learner:
                 "device": str(self.device),
                 "torch": torch.__version__,
                 "hip": torch.version.hip,
+                **({"extrasMode": self.extras_mode, "extrasWidth": self.extra_width,
+                    "trunkFrozen": self.trunk_frozen,
+                    "learningRates": [g["lr"] for g in self.optimizer.param_groups]}
+                   if self.extras_mode else {}),
             }
         )
 
@@ -186,8 +213,11 @@ class Learner:
                 self.ingested.add(manifest.name)
                 continue
             if self.extras_mode:
-                e = np.fromfile(f"{stem}.e.f32", np.float32).reshape(rows, 53)
-                if meta.get("extraFeatures") != 53 or not np.isfinite(e).all():
+                e = np.fromfile(f"{stem}.e.f32", np.float32)
+                if meta.get("extraFeatures") != self.extra_width or e.size != rows * self.extra_width:
+                    raise ValueError("Invalid extras manifest")
+                e = e.reshape(rows, self.extra_width)
+                if not np.isfinite(e).all():
                     raise ValueError("Invalid extras manifest")
                 if self.extras_mode == "zero" and np.any(e):
                     raise ValueError("Control arm received nonzero extras")
@@ -241,7 +271,7 @@ class Learner:
     def publish(self):
         version = f"v{self.step:09d}"
         file = f"{version}.onnx"
-        digest = export_onnx_extras(self.net.weights(), self.models / file, self.net.extra_weight.detach().cpu().numpy()) if self.extras_mode else export_onnx(self.net.weights(), self.models / file)
+        digest = export_onnx_extras(self.net.weights(), self.models / file, self.net.extra_weight.detach().cpu().numpy(), self.extra_width) if self.extras_mode else export_onnx(self.net.weights(), self.models / file)
         torch.save(
             {
                 "model": self.net.state_dict(),

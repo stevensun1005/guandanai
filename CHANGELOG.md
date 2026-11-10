@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2026-11-09 · 第三窗口训练与评测工具：215 维 extras（含推断边缘）
+
+- 持续训练器新增 `extrasMode: "public-belief"`（53 维公开 extras＋推断网络 v1 从行动者公开视角给出的 162 维边缘，`beliefModel` 的 SHA-256 冻结进配置）、`learner.extrasLearningRate`（零初始化投影单独的 Adam 组，默认 1e-4）、`learner.trunkFrozen`、`researchSnapshots`，以及给冠军加零投影的 `wrap_initial.py`。extras 运行允许原规则对手，仍须 `researchNoGate`；源码指纹加入推断采样与特征文件。见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#215-维额外输入public-belief第三窗口新增)。
+- `midgame-search.mjs` 新增 `--focal-raw-model`、`--mode=raw`、`--held-out=1`；新工具 `handover-oracle.mjs`（交接点明牌上界诊断）；`opening-counterfactual.mjs` 新增 `--continuation=clint`、`--positions`、`--select`、`--stop-file`（S5 已由所有者取消，未使用）。见[推断网络说明](ai/danMCai/belief/README.md)。
+- 只是工具与测试，没有新的训练结果或验收；网页冠军 017、默认 9001、菜单与出牌评价不变。
+
 ## 2026-11-09 · GuanZero评测缩短与Clint残局大脑
 
 - 新批次Clint含网页同款残局大脑50场、冠军500场、reason 50场（25/250/25对，共600场）；08:00/20:00不变，reason仍50秒规则。
