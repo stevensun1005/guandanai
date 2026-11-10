@@ -95,8 +95,18 @@ function ruleReply(worker, message) {
   worker.later(message.id, decideClintRule(observation, clintBrainSettings(brainMs)));
 }
 
-test('Clint: brain overrun or a hung rule worker plays the rules-only move; the next move asks for the brain again', async (t) => {
+function mockMoveClock(t) {
+  let now = 0;
+  t.mock.method(performance, 'now', () => now);
   t.mock.timers.enable({ apis: ['setTimeout'] });
+  return (ms) => {
+    now += ms;
+    t.mock.timers.tick(ms);
+  };
+}
+
+test('Clint: brain overrun or a hung rule worker plays the rules-only move; the next move asks for the brain again', async (t) => {
+  const tick = mockMoveClock(t);
   const game = position(731901001, 'any', 501);
   seat(game, CLINT_RULE_ID);
   const p = game.turn;
@@ -108,10 +118,10 @@ test('Clint: brain overrun or a hung rule worker plays the rules-only move; the 
   await flush();
   const asked = lastPost('ai', 'rule');
   assert.ok(asked.state.brainMs > CLINT_BRAIN_MS - 1000 && asked.state.brainMs <= CLINT_BRAIN_MS);
-  t.mock.timers.tick(HARD_MS - 1500);
+  tick(HARD_MS - 1500);
   await flush();
   assert.equal(settled, undefined, 'the brain may run until 52 s from the turn start');
-  t.mock.timers.tick(1500);
+  tick(1500);
   await flush();
   await decision;
   assert.equal(lastPost('ai', 'rule'), asked, 'the rules-only move needs no worker request');
@@ -136,7 +146,7 @@ test('Clint: brain overrun or a hung rule worker plays the rules-only move; the 
 });
 
 test('danMCai-reason: 017 is computed alongside the search; a failed or hung search never sticks', async (t) => {
-  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const tick = mockMoveClock(t);
   const first = position(731901002, 'midgame', 502);
   seat(first, '9001');
   const p = first.turn;
@@ -181,10 +191,10 @@ test('danMCai-reason: 017 is computed alongside the search; a failed or hung sea
   let settled;
   const hung = bot.decide(p, { startedAt: performance.now() }).then((play) => (settled = { play }));
   await flush(10);
-  t.mock.timers.tick(HARD_MS - 1);
+  tick(HARD_MS - 1);
   await flush();
   assert.equal(settled, undefined);
-  t.mock.timers.tick(1);
+  tick(1);
   await flush(10);
   await hung;
   assert.deepEqual(ids(settled.play), ids(plays[1]), '017 after the hung search');
@@ -213,7 +223,7 @@ test('danMCai-reason: 017 is computed alongside the search; a failed or hung sea
 
 /** Several consecutive failures of every kind, then a healthy move: nothing is sticky. */
 test('Clint: consecutive failures (error reply, crash, hang, unusable reply) never stick and never fail the table', async (t) => {
-  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const tick = mockMoveClock(t);
   const game = position(731901003, 'any', 506);
   seat(game, CLINT_RULE_ID);
   const p = game.turn;
@@ -233,16 +243,16 @@ test('Clint: consecutive failures (error reply, crash, hang, unusable reply) nev
   let settled;
   const hung = bot.decide(p, { startedAt: performance.now() }).then((play) => (settled = { play }));
   await flush();
-  t.mock.timers.tick(HARD_MS - 1);
+  tick(HARD_MS - 1);
   await flush();
   assert.equal(settled, undefined);
-  t.mock.timers.tick(1);
+  tick(1);
   await flush(10);
   await hung;
   same(settled.play);
   // 4. an unusable reply (cards not in the hand)
   behaviour = { 'ai:rule': (worker, message) => worker.later(message.id, { cards: [9999] }) };
-  t.mock.timers.tick(60_000); // the hung init request times out and the worker is replaced
+  tick(60_000); // the hung init request times out and the worker is replaced
   await flush();
   same(await bot.decide(p, { startedAt: performance.now() }));
   // 5. healthy again: the brain budget is sent and the worker's answer is played
@@ -263,7 +273,7 @@ test('Clint: consecutive failures (error reply, crash, hang, unusable reply) nev
 });
 
 test('danMCai-reason: hang, failed load, worker crash and error reply in a row, then the next move searches', async (t) => {
-  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const tick = mockMoveClock(t);
   const game = position(731901004, 'midgame', 507);
   const p = game.turn;
   const plays = candidates(game.hands[p], game.L, game.trick?.play);
@@ -294,7 +304,7 @@ test('danMCai-reason: hang, failed load, worker crash and error reply in a row, 
   let settled;
   const hung = turn(() => {}).then((play) => (settled = { play }));
   await flush(10);
-  t.mock.timers.tick(HARD_MS);
+  tick(HARD_MS);
   await flush(10);
   await hung;
   assert.deepEqual(ids(settled.play), ids(plays[1]));
