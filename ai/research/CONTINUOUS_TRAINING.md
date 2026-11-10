@@ -243,6 +243,15 @@ node ai/danMCai/training/continuous/explore-cost.mjs --pairs=150 --exploration='
 - `sources.mjs` 现在也对 `belief/sampler.mjs`、`belief/features.mjs` 和 `web/src/analysis/concepts.mjs` 取指纹。
 - 测试：`ai/danMCai/tests/continuous-extras215.test.mjs`（包装初值与 017 逐值相同、215 维分片往返、边缘的形状与守恒；包装模型测试需 `W3_WRAPPED_MODEL=<onnx>` 或 `DANMCAI_PYTHON=<带 torch 的 python>`，否则跳过）与 `extras215_learner_test.py`（单步、恢复、冻结主干）。
 
+## 推理采样进程（`search-actor.mjs`，第四窗口新增）
+
+2026-11-10 第四窗口 B4 新增，给第五窗口"推理参与训练"准备采样器、吞吐数字和小批语料。这是数据生成工具，不是评测或训练结果；不进入当前任何运行，网页冠军 017、默认 9001 不变。
+
+- 四个座位都用已部署 9001 的推理：21–40 张推断世界搜索（8 世界、k 6、net 2）、≤ 20 张 8 世界精确 PIMC，决策函数直接从 `ai/danMCai/belief/midgame-search.mjs` 导入（`searchDecision`、`endgameDecision`、`maskHidden`），各座位只看自己的遮蔽视角，世界种子同 `worldSeed(牌局种子, ply)`。40 张以上由行动网络（默认冠军 017，可用 `--actor-model` 换）出牌，按 softmax 温度 0.02 探索（`--temperature=0` 为贪心）。
+- 一个牌局种子只打一副单局（`createRound`：随机级牌、不进贡），不换位。默认只写 40 张以上的真实决策（`--rows=all` 另写搜索决策），格式与快速采样进程 `extrasMode: "public-belief"` 完全相同：567 维 int8 特征、215 维 extras（53 公开＋162 推断边缘）、整局标签 `[本队本局升级分, 其符号, 0, 1]`。与快速采样进程的差别：单局而非整场；能一手出完时直接出、不记行。
+- 输出按块：`--block-rounds`（默认 100）副为一块，整块完成后才从 `.tmp-` 改名为 `blocks/bNNNNNN/`（一个训练分片），并写 `bNNNNNN.done.json`（种子、行数、每个文件 SHA-256、耗时、峰值内存）；`STOP` 文件、信号、`--deadline`/`--minutes` 或 `--max-gb` 时在下一副前停止，只丢弃未完成的块。`--summarize=1` 重写 `manifest.json`（各块、总量、每进程每小时副数与行数）。`--policy=raw` 关闭搜索，作为同一批牌局的无推理吞吐对照。
+- 测试 `ai/danMCai/tests/search-actor.test.mjs`：关闭探索时一副牌的全部决策与 `midgame-search --mode=search --opponents=search` 相同；同一决策的行与快速采样进程逐字节相同；块写入、停止与命令行（需冠军 017 与推断网络 v1，缺失则跳过）。
+
 ## 种子与数据用途
 
 研究报告迄今使用的开发与留出种子都小于 1e9。持续训练的采样种子从 1,000,000,000 起，每个采样进程独占 5,000 万个；探索测量从 3,400,000,000 起；门控种子从 3,500,000,000 起，每次门控独占 10 万个。门控和监控对局都属于开发用途，不能当作留出验收。

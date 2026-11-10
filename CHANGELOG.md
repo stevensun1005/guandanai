@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2026-11-10 · 第四窗口推理采样进程与 GuanZero 对手座位
+
+- 新增 `ai/danMCai/training/continuous/search-actor.mjs`：四个座位都按已部署 9001 推理（21–40 张推断世界搜索、≤ 20 张精确残局，决策函数从 `midgame-search.mjs` 导入），40 张以上冠军 017 按温度 0.02 探索；以快速采样进程的 215 维 `public-belief` 分片格式和整局标签写出，每 100 副一块，`STOP` 时保留已完成的块。测试 `search-actor.test.mjs` 核对与 `midgame-search` 的决策一致和与快速采样进程的行格式一致。说明见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#推理采样进程search-actormjs第四窗口新增)。
+- `midgame-search.mjs` 新增 `--opponents=guanzero --opponent-model=<onnx>`：对手队用 GuanZero 导出模型（网页同一打分代码、`guanzero-v1` 历史），按 GuanZero 评测工具的规则取最大值，只作评测对手。测试 `midgame-search-guanzero.test.mjs` 在 50 个存档局面上与 GuanZero 评测会话逐一一致。说明见 `ai/danMCai/belief/README.md`。
+- 只是工具与测试，没有新的训练结果或验收；网页冠军 017、默认 danMCai-reason、菜单与出牌评价不变。
+
 ## 2026-11-10 · 第四窗口评测工具：对手也推理
 
 - `ai/danMCai/belief/midgame-search.mjs` 新增 `--opponents=champion|search`（默认不变）：`search` 时对手队同样用推断世界搜索与精确残局，各自只看遮蔽视角，40 张以上仍为冠军 017 贪心，从不使用被测的 215 维模型；行记录新增 `opp` 计数。另加 `--deadline`、`--stop-file`。测试 `midgame-search-opponents.test.mjs` 核对默认路径复现第三窗口 S1 记录、换位恒等和拒绝组合。说明见 `ai/danMCai/belief/README.md`。

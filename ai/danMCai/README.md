@@ -12,22 +12,23 @@ Windows 双臂已恢复相同最终学习器／Adam 并再次通过真实 ROCm �
 
 Mac 收尾后的独立整局比较与 Windows 返回包见 [Windows 交接](../research/WINDOWS_RETURN_20261106.md)：同副牌交换位置，冠军与最终学习器尚无可辨别差距，网页保留冠军；恢复工具仅准备新目录，不启动训练。
 
-| 找什么                           | 位置                                                                     |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| 持续训练调度                     | [training/continuous/supervisor.mjs](training/continuous/supervisor.mjs) |
-| 网络结构与 ONNX 导出             | [training/continuous/value_net.py](training/continuous/value_net.py)     |
-| 优化器、重放缓冲与学习器         | [training/continuous/learner.py](training/continuous/learner.py)         |
-| 自对弈采样、GPU 推理、内存预算   | [training/continuous](training/continuous)                               |
-| 历史 PPO、完整网络、辅助任务实验 | [training](training)                                                     |
-| 数据采集工具                     | [data/tools](data/tools)                                                 |
-| 完整比赛、规则对手与策略评测     | [evaluation](evaluation)                                                 |
-| 原始模型与参考权重               | [models/baseline](models/baseline)                                       |
-| 已有历史实验检查点               | [models/experiments](models/experiments)                                 |
-| 独立 NumPy 编码与数值参考        | [reference](reference)                                                   |
-| 本路线测试                       | [tests](tests)                                                           |
-| 尾盘明牌引导训练（Mac 实验）     | [endgame](endgame/README.md)                                             |
-| 手牌推断网络（推断对手手牌）     | [belief](belief/README.md)                                               |
-| 复盘工具（明牌事后最优）         | [review](review/README.md)                                               |
+| 找什么                           | 位置                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------- |
+| 持续训练调度                     | [training/continuous/supervisor.mjs](training/continuous/supervisor.mjs)     |
+| 网络结构与 ONNX 导出             | [training/continuous/value_net.py](training/continuous/value_net.py)         |
+| 优化器、重放缓冲与学习器         | [training/continuous/learner.py](training/continuous/learner.py)             |
+| 自对弈采样、GPU 推理、内存预算   | [training/continuous](training/continuous)                                   |
+| 推理采样进程（四座位推理写分片） | [training/continuous/search-actor.mjs](training/continuous/search-actor.mjs) |
+| 历史 PPO、完整网络、辅助任务实验 | [training](training)                                                         |
+| 数据采集工具                     | [data/tools](data/tools)                                                     |
+| 完整比赛、规则对手与策略评测     | [evaluation](evaluation)                                                     |
+| 原始模型与参考权重               | [models/baseline](models/baseline)                                           |
+| 已有历史实验检查点               | [models/experiments](models/experiments)                                     |
+| 独立 NumPy 编码与数值参考        | [reference](reference)                                                       |
+| 本路线测试                       | [tests](tests)                                                               |
+| 尾盘明牌引导训练（Mac 实验）     | [endgame](endgame/README.md)                                                 |
+| 手牌推断网络（推断对手手牌）     | [belief](belief/README.md)                                                   |
+| 复盘工具（明牌事后最优）         | [review](review/README.md)                                                   |
 
 2026-11-09 第三窗口新增 215 维 extras 训练入口（`extrasMode: "public-belief"`、`extrasLearningRate`、`trunkFrozen`、`researchSnapshots`、`wrap_initial.py`），参数见[持续训练指南](../research/CONTINUOUS_TRAINING.md#215-维额外输入public-belief第三窗口新增)；评测工具选项见[推断网络说明](belief/README.md)。只是工具，不是结果。
 
