@@ -58,6 +58,19 @@
  * SHA-256 is in run.json and in every per-pair row; round rows gain raw* fields only when the
  * option is on, so default rows are unchanged. web/src/ai/search/core.mjs is not involved.
  *
+ * Opponents (--opponents=champion|search, window 4, plan section 8 item 1). champion (default) is
+ * the behaviour above, rows byte-for-byte unchanged. search: the other team's real decisions use
+ * the same machinery as the focal team: midgame search in lo..hi (same --worlds-source, worlds, k,
+ * net, champion) and, with --endgame=pimc, the endgame search at <= endgameHi; each seat decides on
+ * its own masked view (maskHidden) with worlds seeded by the same worldSeed(deal seed, ply) rule.
+ * Above `hi` the other team plays champion greedy in every arm: it is the deployed 9001, never the
+ * focal raw network (--focal-raw-model only changes focal seats; --mode=champion|raw with
+ * --opponents=search and a focal raw model is refused). Round rows gain `opp` (the same search and
+ * endgame counters for the other team) only with --opponents=search; run.json records
+ * `opponents`. With --mode=search --opponents=search and no focal raw model all four seats play
+ * the same policy, so both rounds of a deal are the same game and every pair scores 0 (up to the
+ * solver's wall-clock budget with --endgame=pimc).
+ *
  * Metric: focal mean signed round points per deal pair, 95% deal-cluster normal interval; workers
  * take seeds start+part, start+part+parts, ...; the summary uses the contiguous completed prefix.
  * Per-pair rows (part-*.jsonl) allow a PAIRED comparison of two runs on the same seeds:
@@ -67,7 +80,8 @@
  *        [--lo=21] [--hi=40] [--worlds=8] [--k=6] [--net=2] [--mode=search|champion|raw]
  *        [--champion=<onnx>] [--allow-champion=1] [--belief-train-report=<json>|none]
  *        [--endgame=none|pimc] [--endgame-hi=20] [--endgame-worlds=uniform|belief]
- *        [--focal-raw-model=<onnx> --belief=<onnx>] [--held-out=1]
+ *        [--focal-raw-model=<onnx> --belief=<onnx>] [--held-out=1] [--opponents=champion|search]
+ *        [--deadline=<ISO>] [--stop-file=<path>[,<path>]]     (checked before every pair)
  *   node ai/danMCai/belief/midgame-search.mjs --summarize=1 --out=<dir>
  *   node ai/danMCai/belief/midgame-search.mjs --compare=<dirA>,<dirB>     (reports B minus A)
  */
@@ -112,7 +126,10 @@ export const DEFAULTS = Object.freeze({
   endgame: 'none',
   endgameHi: 20,
   endgameWorlds: 'uniform',
+  opponents: 'champion',
 });
+/** Who plays the other team's seats: champion 017 greedy everywhere, or the same search machinery. */
+export const OPPONENTS = Object.freeze(['champion', 'search']);
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
 
 /** World seed of a search decision: depends only on the deal seed and the public ply. */
@@ -473,38 +490,54 @@ export async function focalRawDecision(trueGame, cfg) {
   };
 }
 
-/** One round of a deal with `focalTeam` searching; result from the focal team's view. */
+/** Midgame search counters of one team in one round (focal team, or `opp` with --opponents=search). */
+const searchStats = () => ({
+  bandDecisions: 0,
+  searched: 0,
+  differs: 0,
+  ties: 0,
+  searchMs: 0,
+  beliefMs: 0,
+  inferences: 0,
+  candidatesSearched: 0,
+  gainEstimate: 0, // mean(chosen) - mean(champion move), in-search estimate only
+  differPlies: [],
+});
+/** Endgame search counters (only with --endgame=pimc). */
+const endgameStats = () => ({
+  endgameDecisions: 0,
+  endgameSearched: 0,
+  endgameFallbacks: 0,
+  endgameDiffers: 0,
+  endgameTies: 0,
+  endgameWorldsUsed: 0,
+  endgameMs: 0,
+  endgameMaxMs: 0,
+  endgameBeliefMs: 0,
+  endgameDifferPlies: [],
+});
+
+/**
+ * One round of a deal with `focalTeam` searching; result from the focal team's view. With
+ * cfg.opponents === 'search' the other team's real decisions in the band and the endgame use the
+ * same machinery (each seat on its own masked view, worlds seeded by worldSeed(seed, ply)); above
+ * `hi` the other team always plays champion greedy (the focal raw network is focal-only). Their
+ * counters go to `opp` (present only with --opponents=search, so default rows are unchanged).
+ */
 export async function playRound(seed, focalTeam, cfg) {
+  const opponents = cfg.opponents ?? DEFAULTS.opponents;
+  if (!OPPONENTS.includes(opponents)) throw Error(`Unknown opponents ${opponents}`);
+  const oppSearch = opponents === 'search';
+  if (oppSearch && cfg.mode === 'raw')
+    throw Error('--opponents=search is not used with --mode=raw');
   const game = createRound(seed);
-  const stats = {
-    bandDecisions: 0,
-    searched: 0,
-    differs: 0,
-    ties: 0,
-    searchMs: 0,
-    beliefMs: 0,
-    inferences: 0,
-    candidatesSearched: 0,
-    gainEstimate: 0, // mean(chosen) - mean(champion move), in-search estimate only
-    differPlies: [],
-  };
+  const stats = searchStats();
   // Endgame fields only with --endgame=pimc, so default rows are unchanged.
   const endgameOn = (cfg.endgame ?? 'none') === 'pimc';
   if (endgameOn) {
     if (!(cfg.endgameHi < cfg.lo)) throw Error('Endgame and midgame bands overlap');
     if (!cfg.solver) throw Error('--endgame=pimc needs a solver');
-    Object.assign(stats, {
-      endgameDecisions: 0,
-      endgameSearched: 0,
-      endgameFallbacks: 0,
-      endgameDiffers: 0,
-      endgameTies: 0,
-      endgameWorldsUsed: 0,
-      endgameMs: 0,
-      endgameMaxMs: 0,
-      endgameBeliefMs: 0,
-      endgameDifferPlies: [],
-    });
+    Object.assign(stats, endgameStats());
   }
   // Focal raw network fields only with --focal-raw-model, so default rows are unchanged.
   const rawOn = !!cfg.focalRaw;
@@ -520,6 +553,7 @@ export async function playRound(seed, focalTeam, cfg) {
       rawDifferPlies: [],
     });
   } else if (cfg.mode === 'raw') throw Error('--mode=raw needs --focal-raw-model');
+  if (oppSearch) stats.opp = { ...searchStats(), ...(endgameOn ? endgameStats() : {}) };
   for (let ply = 0; ply < 1000; ply++) {
     if (ply !== game.log.length) throw Error('Ply must equal the public log length');
     const player = game.turn;
@@ -528,34 +562,38 @@ export async function playRound(seed, focalTeam, cfg) {
     if (index < 0 && plays.length === 1) index = 0;
     if (index < 0) {
       const cards = remaining(game);
-      const inBand = player % 2 === focalTeam && cards >= cfg.lo && cards <= cfg.hi;
-      const inEndgame = endgameOn && player % 2 === focalTeam && cards <= cfg.endgameHi;
+      const focal = player % 2 === focalTeam;
+      // Counters of the mover's team (null: other team with --opponents=champion, not counted).
+      const s = focal ? stats : oppSearch ? stats.opp : null;
+      const searching = focal ? cfg.mode === 'search' : oppSearch;
+      const inBand = !!s && cards >= cfg.lo && cards <= cfg.hi;
+      const inEndgame = !!s && endgameOn && cards <= cfg.endgameHi;
       let championIndex;
-      if (inEndgame && cfg.mode === 'search') {
+      if (inEndgame && searching) {
         const d = await endgameDecision(game, seed, cfg);
         index = d.index;
         championIndex = d.championIndex;
-        stats.endgameSearched++;
-        stats.endgameFallbacks += Number(d.fallback);
-        stats.endgameTies += Number(d.tied > 1);
-        stats.endgameWorldsUsed += d.used;
-        stats.endgameMs += d.ms;
-        stats.endgameMaxMs = Math.max(stats.endgameMaxMs, d.ms);
-        stats.endgameBeliefMs += d.beliefMs;
-      } else if (inBand && cfg.mode === 'search') {
+        s.endgameSearched++;
+        s.endgameFallbacks += Number(d.fallback);
+        s.endgameTies += Number(d.tied > 1);
+        s.endgameWorldsUsed += d.used;
+        s.endgameMs += d.ms;
+        s.endgameMaxMs = Math.max(s.endgameMaxMs, d.ms);
+        s.endgameBeliefMs += d.beliefMs;
+      } else if (inBand && searching) {
         const d = await searchDecision(game, seed, cfg);
         index = d.index;
         championIndex = d.championIndex;
-        if (d.tied.length > 1) stats.ties++;
-        stats.searched++;
-        stats.searchMs += d.ms;
-        stats.beliefMs += d.beliefMs;
-        stats.inferences += d.inferences;
-        stats.candidatesSearched += d.roots.length;
-        stats.gainEstimate += d.gain;
+        if (d.tied.length > 1) s.ties++;
+        s.searched++;
+        s.searchMs += d.ms;
+        s.beliefMs += d.beliefMs;
+        s.inferences += d.inferences;
+        s.candidatesSearched += d.roots.length;
+        s.gainEstimate += d.gain;
       } else if (
         rawOn &&
-        player % 2 === focalTeam &&
+        focal &&
         (cfg.mode === 'raw' || (cfg.mode === 'search' && cards > cfg.hi))
       ) {
         const d = await focalRawDecision(game, cfg);
@@ -573,24 +611,27 @@ export async function playRound(seed, focalTeam, cfg) {
         index = championIndex;
       }
       if (inBand) {
-        stats.bandDecisions++;
+        s.bandDecisions++;
         if (index !== championIndex) {
-          stats.differs++;
-          stats.differPlies.push(ply);
+          s.differs++;
+          s.differPlies.push(ply);
         }
       }
       if (inEndgame) {
-        stats.endgameDecisions++;
+        s.endgameDecisions++;
         if (index !== championIndex) {
-          stats.endgameDiffers++;
-          stats.endgameDifferPlies.push(ply);
+          s.endgameDiffers++;
+          s.endgameDifferPlies.push(ply);
         }
       }
     }
     const result = advanceRound(game, plays[index]);
     if (result) {
       const points = result.winner === focalTeam ? result.points : -result.points;
-      return { points, order: result.order, plies: ply + 1, ...stats };
+      const row = { points, order: result.order, plies: ply + 1, ...stats };
+      // Tests only (cfg.keepLog): the played public log, non-enumerable so rows never carry it.
+      if (cfg.keepLog) Object.defineProperty(row, 'log', { value: game.log, enumerable: false });
+      return row;
     }
   }
   throw Error('Round did not terminate');
@@ -653,6 +694,30 @@ export function summarize(rows, { heldOut = false } = {}) {
     meanPairSeconds: n ? rows.reduce((s, r) => s + r.ms, 0) / 1000 / n : null,
     ...(rounds.some((r) => 'endgameSearched' in r) ? { endgame: endgameSummary(sum, rounds) } : {}),
     ...(rounds.some((r) => 'rawDecisions' in r) ? { focalRaw: focalRawSummary(sum, rows) } : {}),
+    ...(rounds.some((r) => r.opp) ? { opponents: opponentSummary(rounds) } : {}),
+  };
+}
+
+/** Other-team search totals (only for runs with --opponents=search). */
+function opponentSummary(rounds) {
+  const sum = (key) => rounds.reduce((s, r) => s + (r.opp?.[key] || 0), 0);
+  const searched = sum('searched'),
+    endgame = sum('endgameSearched');
+  return {
+    bandDecisions: sum('bandDecisions'),
+    searchedDecisions: searched,
+    decisionsDifferentFromChampion: sum('differs'),
+    secondsPerSearchedDecision: searched ? sum('searchMs') / 1000 / searched : null,
+    ...(rounds.some((r) => r.opp && 'endgameSearched' in r.opp)
+      ? {
+          endgameDecisions: sum('endgameDecisions'),
+          endgameSearchedDecisions: endgame,
+          endgameFallbacksToChampion: sum('endgameFallbacks'),
+          endgameDecisionsDifferentFromChampion: sum('endgameDiffers'),
+          endgameSecondsPerSearchedDecision: endgame ? sum('endgameMs') / 1000 / endgame : null,
+        }
+      : {}),
+    note: 'other team searching with the same machinery as the focal team (deployed 9001 seats); above hi it plays champion greedy',
   };
 }
 
@@ -720,9 +785,10 @@ const COMPARED_SETTINGS = [
   'endgameWorlds',
   'focalRawModelSHA256',
   'heldOut',
+  'opponents',
 ];
-/** Values of settings that runs from before the endgame / focal raw options did not record. */
-const LEGACY_SETTINGS = { endgame: 'none', heldOut: false };
+/** Values of settings that runs from before the endgame / focal raw / opponents options did not record. */
+const LEGACY_SETTINGS = { endgame: 'none', heldOut: false, opponents: 'champion' };
 
 /**
  * Paired comparison of two runs on their common contiguous-prefix seeds: per deal the difference
@@ -857,9 +923,19 @@ export function buildProtocol(args) {
     focalRawModel: null,
     focalRawModelSHA256: null,
     heldOut: args['held-out'] === '1',
+    opponents: args.opponents ?? DEFAULTS.opponents,
   };
   if (!['search', 'champion', 'raw'].includes(protocol.mode))
     throw Error('--mode=search|champion|raw');
+  if (!OPPONENTS.includes(protocol.opponents)) throw Error('--opponents=champion|search');
+  if (protocol.opponents === 'search') {
+    // The other team is the deployed 9001: never the focal raw network (017w), never --mode=raw.
+    if (args['focal-raw-model'] !== undefined && protocol.mode !== 'search')
+      throw Error(
+        '--opponents=search with --focal-raw-model needs --mode=search: the opponents never take the focal raw model',
+      );
+    if (protocol.mode === 'raw') throw Error('--opponents=search is not used with --mode=raw');
+  }
   if (protocol.heldOut)
     protocol.purpose =
       'held-out run of the configuration below; seeds and the decision rule are fixed in the ' +
@@ -963,6 +1039,14 @@ export function buildProtocol(args) {
     throw Error(
       '--belief is only used with --worlds-source=belief, --endgame-worlds=belief or --focal-raw-model',
     );
+  if (protocol.opponents === 'search') {
+    protocol.opponentsRule =
+      'other team at its real decisions: midgame search in lo..hi and (with --endgame=pimc) the ' +
+      'endgame search at <= endgameHi, the same settings, worlds source and champion as the focal ' +
+      'team, each seat on its own masked view with worlds seeded by worldSeed(deal seed, ply); ' +
+      'champion greedy above hi (never the focal raw network)';
+    protocol.purpose += '; the other team searches as well (opponents = deployed 9001 seats)';
+  }
   return protocol;
 }
 
@@ -1004,6 +1088,7 @@ async function worker(args) {
   let done = 0;
   for (let k = part; k < run.pairs; k += parts) {
     if (Date.now() >= run.deadline) break;
+    if ((run.stopFiles ?? []).some((f) => existsSync(f))) break;
     appendFileSync(file, JSON.stringify(await playPair(run.start + k, cfg)) + '\n');
     done++;
     if (done % 5 === 0)
@@ -1048,11 +1133,20 @@ async function main(args) {
     throw Error('--workers/--minutes');
   const protocol = buildProtocol(args);
   const sources = sourceClosure();
+  let deadline = Date.now() + minutes * 60_000;
+  if (args.deadline !== undefined) {
+    const hard = Date.parse(args.deadline);
+    if (!Number.isFinite(hard)) throw Error('--deadline=<ISO time>');
+    deadline = Math.min(deadline, hard);
+  }
+  const stopFiles = args['stop-file'] ? args['stop-file'].split(',').map((f) => resolve(f)) : null;
   const run = {
     ...protocol,
     workers,
     minutes,
-    deadline: Date.now() + minutes * 60_000,
+    deadline,
+    ...(args.deadline !== undefined ? { deadlineISO: new Date(deadline).toISOString() } : {}),
+    ...(stopFiles ? { stopFiles } : {}),
     out,
     sources,
     git: gitState(Object.keys(sources)),
