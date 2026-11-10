@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "window": "window3-20261109",
+  "writtenAt": "2026-11-09 23:24 Toronto",
+  "purpose": "M3: the held-out human evaluation panel, fixed before any 017w exists. S7 reports 017w on exactly these files. Descriptive only, never a gate. Private records are read only; no nickname, room number, record id or raw row appears here or in any output.",
+  "trust": "unverified_browser (self-reported browser records, legal replay is not identity verification)",
+  "files": {
+    "auditRows": {
+      "path": "/private/tmp/claude-501/-Users-stevensun-Desktop-guandanai--claude-worktrees-pull-latest-version-59e42e/e9af2e2c-19a3-5afc-a05f-d6672622d541/scratchpad/w3design/audit-rows.json",
+      "sha256": "29bddf765ecca4126ea4acfb787e4d05383cab4871df603033cc24f305ee8d28",
+      "rounds": 31,
+      "rowsAll": 2636,
+      "registeredCounts": {
+        "unassistedHumanDecisions": 1458,
+        "bombLegalFollows": 1022,
+        "jokerOnKOrLowerOpportunities": 88
+      },
+      "note": "counts as reported in w3design/audit.md; rowsAll includes bot and assisted rows"
+    },
+    "leadAuditHumanRows": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/../window3-prep-20261109/lead-audit/rows-human.jsonl",
+      "sha256": "d7e95f36e7a3b15b1937da19bb97f8d8c004cc0693fc7dd249d570734a454c13",
+      "rows": 371,
+      "byGroup": {
+        "H-as": 93,
+        "H-un": 269,
+        "BOT-other": 9
+      },
+      "panel": "H-un (269 unassisted human lead positions)"
+    },
+    "section67HumanEndgames": {
+      "path": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/human-endgame-optimality-20261108/summary.json",
+      "sha256": "670c9615559a05d26fc1671e2e657385c6121fae8a0570e893cf60cc2efcd2b3",
+      "criticalDecisions": 115,
+      "reported": "optimal-move rate 017 0.730 vs humans 0.852 (MODEL_STUDY section 67)"
+    },
+    "rawRecords": {
+      "count": 31,
+      "sha256OfFiles": [
+        "008b71c7e8b6b542aadc035fd9b600bcf34844aea6770679f291849e95a9a353",
+        "009e787b67ba68b4cb43ae6c5209fc1abfca87b045f812b80dcf346bcaa7f2df",
+        "0253e2af01dfe55cac02c71cc357bd37f63051b997c7ac6eb677266ad960caec",
+        "0c9923c108360d358e9920a4263d22d559775a888d6ddc32fd7c835a8a32f7a1",
+        "0d4b178447d968b0d437b343bfb52a5689feb93c95023def1a4affa23b1935c6",
+        "1349a1e77629112440843154022481488216f7003453dfa5e2611419ecd11c46",
+        "142d20ad5e6fcc1d6727e86f1c71be3a03bfd11e3a707d32e6d443e6d81892b6",
+        "1a18c9180a77b7ff5ba768746f08b7ef108838161cdc2c93854c29796e71696d",
+        "1d717e7a2fd84137bf31143e2df9da8413ee35ac56e6cdf0bee334ed1b34b033",
+        "1f8728b58b4aa18375ddd35b5391d1b20d3917a4813b9cc4bc88acb12defda31",
+        "21a038fc66b7ded09c97bfa97a26381bf9ed78958d74c5c915034a31f0546df3",
+        "22943b70a63ebdd555a907543a214064582a536f9018a0391c141518c960c509",
+        "2e32ab4c8aa11f930c8829dcc197d48ce68e29d266b5f46894f1914d81ce838d",
+        "515494faeb72b9a436dc6fa6c7da179b85e6aea77a8cabb89185493aa603c626",
+        "5cff55d204006648296a88748be02e3ad89a5bc83ae0dc3baee74cdfa3c869b9",
+        "6939d23fd68a634b74367afc26edd090d285b8eea41021dd01e450a05be505a3",
+        "72db72034c0864c0aa8001862a01b2403ed8e3107bcfb3b929f973db9ada22e4",
+        "7e6f9eb1eaac809470a2b973f211f649e27acff802a4821a55f93a6bf60df08c",
+        "7f17b086cd079539d5089626495161755391ecddb4cc20079357bdade1089a5d",
+        "85d4f2a35b436d1387a1234d9ce0f47432dc1359c44d3f1f1497a25ad09f5f42",
+        "8635d4d9bfd97a9cb779f2f708fe95c48f9d990271049802c87304a1984064b8",
+        "88f46133477bd075e7f6d007486d8cb6de454b77437c615dbf1caaa205f18b87",
+        "8a986c31c13dc4ecd674d0822b82bdc5a1c5732ea8206d6bd95cca581aa2d59e",
+        "b9d983f51a794f436dd47e73f77a60495bb735cbd2167663cfb70ad576b5aa30",
+        "c6ab31529f682bcf70498b293cabbcf0f7bbb5629dacf8d822f7d01647c0d947",
+        "cdfab0c8e73fa28b70d8f1626a51f61821eb917d705c7c5014d8316c307d529b",
+        "e10b7d8d7b5ac476ab50428eb3424eeb598af526dfb8991ad8e0c5f014532540",
+        "e66ea1f7e577f8206a13e0747d57bf56a2568fe74dd3b08755a978efc03a949e",
+        "f1bc254620bb2b0276fe24a8a587f6b8ce52e6c83bf4cfbc4208175d9594ced9",
+        "f37a140831c8eab4d2ba1d4fafed137ef589e925b1d8836ef003d6c1908c91e2",
+        "f9870d5d5d5890451d7a829558f49dfe7472b5a58056996c2575b3814ae4dea5"
+      ],
+      "note": "hashes of the private round files only (31 = 26 + 5; de-duplicated by record id in the audit)"
+    }
+  },
+  "addenda": [
+    {
+      "at": "2026-11-10T04:50Z",
+      "what": "durable copy of the audit rows (the scratchpad may be cleaned); byte-identical",
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/inputs/w3design/audit-rows.json",
+      "sha256": "29bddf765ecca4126ea4acfb787e4d05383cab4871df603033cc24f305ee8d28"
+    }
+  ]
+}

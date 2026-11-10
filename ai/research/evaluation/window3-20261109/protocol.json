@@ -1,0 +1,446 @@
+{
+  "schema": 2,
+  "window": "window3-20261109",
+  "status": "v2 final, written by the launch agent at 2026-11-09 23:24 Toronto before S3 started and before any window-3 result existed (S1 and S4a were running; no S1 summary had been computed). Draft v1 kept as protocol-v1.json (sha256 603a0cde581f104116cd535d3217d122942ced97b5e914b5d34ec98943639a42).",
+  "plan": {
+    "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/PLAN.md",
+    "sha256": "e2abb2a6a61bd715db80aea6089f079ffd89c47f661d349f0e3c237863efbfab",
+    "committedCopy": "ai/research/evaluation/window3-20261109/PLAN.md in commit c10112c3e5bd80cd2baaea400914e1e65830e26e"
+  },
+  "objective": "whole-round result only (single-round signed points); no hand-written tactics; hand inference kept; Clint evaluation only (S5 skipped this window by owner decision); human records private, read-only for S7 diagnostics, never in training, never committed",
+  "frozenCheckouts": {
+    "src-a": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/src-a",
+      "commit": "c10112c3e5bd80cd2baaea400914e1e65830e26e",
+      "how": "git worktree add --detach of origin/main at S0 time (22:42 Toronto); node_modules symlinked to /Users/stevensun/Desktop/guandanai/node_modules",
+      "usedBy": [
+        "S4a generate.mjs",
+        "dashboard 8769"
+      ]
+    },
+    "src-s1": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/src-s1",
+      "commit": "c10112c3e5bd80cd2baaea400914e1e65830e26e",
+      "untrackedFiles": [
+        "?? ai/danMCai/belief/handover-oracle.mjs",
+        "?? ai/danMCai/tests/handover-oracle.test.mjs"
+      ],
+      "extraFiles": {
+        "ai/danMCai/belief/handover-oracle.mjs": "f7f342a5c776a0efe46d9bb0ffc5aabb9a0e2a1f4e316f684e21d995116dd35b",
+        "ai/danMCai/tests/handover-oracle.test.mjs": "8ffe025c08e9e21d3beaf80cc1f13543310b4340be40ef2ca83b45d34623b9a6"
+      },
+      "archivedCopy": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/s1-tool/",
+      "honestState": "S1 runs from src-s1 (c10112c + handover-oracle.mjs untracked); the same file (sha256 f7f342a5c776a0efe46d9bb0ffc5aabb9a0e2a1f4e316f684e21d995116dd35b) is now in commit 752a487e3bf7a6af5682fc5ec95172c712438470 after review (GREEN). M13: cite S1 numbers only with this note.",
+      "usedBy": [
+        "S1"
+      ]
+    },
+    "note": "src-b replaces the plan's RT/window3-20261109/src/ name.",
+    "src-b": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/src-b",
+      "commit": "752a487e3bf7a6af5682fc5ec95172c712438470",
+      "how": "git worktree add --detach of the pushed main commit; node_modules symlinked to /Users/stevensun/Desktop/guandanai/node_modules",
+      "contains": "reviewed window-3 code: 215-wide extras trainer (public-belief, extrasLearningRate, trunkFrozen, researchSnapshots, wrap_initial.py), midgame-search --focal-raw-model/--mode=raw/--held-out, handover-oracle.mjs (byte-identical to the src-s1 copy, sha256 f7f342a5...), opening-counterfactual --continuation=clint (unused), sources.mjs fingerprint fix",
+      "tests": "after rebase onto origin/main: npm test 463 pass 0 fail (W3_WRAPPED_MODEL and DANMCAI_PYTHON set); npm run format:check clean; python extras215_learner_test + continuous_learner_test 14 OK (1 skip, CUDA)",
+      "usedBy": [
+        "S3",
+        "S3 damage stops",
+        "S4b",
+        "S4c",
+        "S4d",
+        "S6",
+        "S7a",
+        "S7",
+        "queue.sh"
+      ]
+    }
+  },
+  "models": {
+    "champion017": {
+      "id": "017",
+      "version": "v000855042",
+      "path": "/Users/stevensun/guandan-runtime.noindex/endgame-oracle-20261108-r2/models/champion.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+    },
+    "beliefV1": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "trainReportSha256": "7f022c7640e0102dd25bfe497b6c0bc2dc1e3480dc1dfcf5144fa73ab6c95f0d",
+      "trainingSeeds": [
+        [
+          4255121000,
+          4255160999
+        ]
+      ],
+      "trainingBand": [
+        21,
+        80
+      ],
+      "trainingRangeNote": "belief v1 was trained on single level-2 rounds without tribute at 21-80 cards (champion self-play); in S3 whole matches at other levels, tribute rounds and above 80 cards its marginals are outside that range (not a leak; reported in S7)"
+    },
+    "web": "unchanged: web champion 017 (v000855042), web default 9001 danMCai-reason-v000855042, menu and move coach are not touched by this window",
+    "wrappedInitial": {
+      "path": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train-init/v000000000.onnx",
+      "sha256": "73893a261b862d7648d5028070d3e658b69b355f54591b3ea95643a2487d6f32",
+      "what": "017 + zero 215x512 extras projection (wrap_initial.py); values equal 017 exactly (Node parity 200/200, max diff 0)"
+    }
+  },
+  "ownerDecisions": {
+    "A1": "Owner authorised (22:28 Toronto, 2026-11-09) starting this window automatically once the plan is final. Not authorisation to change web champion 017, web default 9001, the menu or any running/frozen run.",
+    "A2": "Owner added a fourth pattern: leading combinations the bot cannot win back (e.g. a sudden full house with no bigger full house when singles keep control). Descriptive audit in /Users/stevensun/guandan-runtime.noindex/window3-prep-20261109/lead-audit/; S7 reports it for 017w vs 017 at the same human lead positions, descriptively, never as a gate.",
+    "A3": "Window-3 dashboard RT/window3-20261109/dashboard.json in the window-dashboard format, served on port 8769 --host=0.0.0.0 by launchd com.guandanai.dashboard8769.",
+    "A4": "Hard times 2026-11-10 Toronto: no new compute after 10:55 (15:55Z); every window-3 process ended by 11:15 (16:15Z). No heavy window-3 compute before window 2 (com.guandanai.window2e/window2f, ending 23:00 Toronto) has exited; window 2 is never touched.",
+    "A5": "If a stage start slips, shorten it; never move end deadlines. Sacrifice order: S5, then S4d, then S1 C arm, never S6.",
+    "laterDecisions": {
+      "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/OWNER_DECISIONS.md",
+      "sha256AtS0": "2d59a21941ed28d78deeb841ba49a8981c374b41537e6820f5c06ab6a68f0342",
+      "summary": [
+        "keep the new-input direction even if S6 is zero (S6 still reported strictly under its rule)",
+        "S5 skipped this window (owner judges Clint weaker than 017); its cores go to S1/S4d"
+      ]
+    }
+  },
+  "seeds": {
+    "audit": {
+      "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/seed-audit.json",
+      "verdict": "clean"
+    },
+    "deviationFromPlan": "Plan section 6 ranges (4310000000.. to 4320002999) all exceed 2^32 - 1 = 4,294,967,295. generate.mjs refuses them (uint32 shard metadata), midgame-search.mjs buildProtocol throws \"Seeds must stay below 2^32\", and createRound/seededRandom (`seed |= 0`) would deal seed s >= 2^32 as s - 2^32. Each range is replaced one for one by a 429x range of the same size (audited clean, no literal or structured use found).",
+    "ranges": [
+      {
+        "use": "S1 oracle deals",
+        "range": [
+          4291000000,
+          4291000399
+        ],
+        "planned": [
+          4310000000,
+          4310000399
+        ]
+      },
+      {
+        "use": "S4a belief v1b data (validation by --val-mod=10 inside the range)",
+        "range": [
+          4292000000,
+          4292039999
+        ],
+        "planned": [
+          4312000000,
+          4312039999
+        ]
+      },
+      {
+        "use": "S3 damage stop 04:30",
+        "range": [
+          4293000000,
+          4293000599
+        ],
+        "planned": [
+          4313000000,
+          4313000599
+        ]
+      },
+      {
+        "use": "S3 damage stop 09:00",
+        "range": [
+          4293001000,
+          4293001599
+        ],
+        "planned": [
+          4313001000,
+          4313001599
+        ]
+      },
+      {
+        "use": "S4d optional dev play check",
+        "range": [
+          4294000000,
+          4294000399
+        ],
+        "planned": [
+          4314000000,
+          4314000399
+        ]
+      },
+      {
+        "use": "S6 acceptance (held out: never used for any development check)",
+        "range": [
+          4294500000,
+          4294502999
+        ],
+        "planned": [
+          4320000000,
+          4320002999
+        ]
+      }
+    ],
+    "S5": "skipped; would have reused the stored counterfactual positions (seeds 4300000000-4300000837; note these are also above 2^32 and were dealt as seed - 2^32 = 5032704..5033541 by createRound)",
+    "learnerSeed": 20261110,
+    "actorSeedOffset": 40000000,
+    "actorSeedEnd": 45000000,
+    "actorSeedRule": "continuous-trainer namespace (TRAIN_SEED_BASE 1e9 + slot*50,000,000 + nextSeed). Mac continuous window (runs/mac-20261105) final nextSeed max 3,090,288; highest nextSeed or configured actorSeedOffset/actorSeedEnd below the span found on this Mac 31,999,134; 40,000,000 is above all of them.",
+    "bombCounterfactualNote": "the stored bomb-counterfactual positions (seeds 4300000000-4300000837) were dealt as 5032704-5033541 by createRound (seed |= 0); no overlap with any 429x range.",
+    "newRangesIfNeeded": "4290100000-4290199999 only after scripts/seed_audit.py is run on it (none needed tonight)",
+    "trainingDealNote": "training deal seeds are imul(seed,1009)+r and can land anywhere in 32 bits, so about one S6 deal may also be dealt in training; earlier windows had the same exposure (reviewer note)."
+  },
+  "deadlines": {
+    "S1": {
+      "toronto": "2026-11-10 02:30",
+      "utc": "2026-11-10T07:30:00Z"
+    },
+    "S4a": {
+      "toronto": "2026-11-10 03:20 (before S4b at 03:30)",
+      "utc": "2026-11-10T08:20:00Z"
+    },
+    "S4b": {
+      "toronto": "2026-11-10 03:30-04:10 (35 min)",
+      "utc": "2026-11-10T08:30:00Z/09:10:00Z"
+    },
+    "S4c": {
+      "toronto": "2026-11-10 04:15-05:15",
+      "utc": "2026-11-10T09:15:00Z/10:15:00Z"
+    },
+    "S4d": {
+      "toronto": "2026-11-10 09:00",
+      "utc": "2026-11-10T14:00:00Z"
+    },
+    "S3": {
+      "toronto": "start about 23:55 2026-11-09 (earlier than the plan's 01:30, same end); samplers stop 2026-11-10 09:00; damage stops 04:30 and 09:00",
+      "utc": "2026-11-10T14:00:00Z"
+    },
+    "S6": {
+      "toronto": "2026-11-10 09:15-10:15 hard",
+      "utc": "2026-11-10T14:15:00Z/15:15:00Z"
+    },
+    "S7": {
+      "toronto": "2026-11-10 10:55",
+      "utc": "2026-11-10T15:55:00Z"
+    },
+    "noNewCompute": {
+      "toronto": "2026-11-10 10:55",
+      "utc": "2026-11-10T15:55:00Z"
+    },
+    "allProcessesEnded": {
+      "toronto": "2026-11-10 11:15",
+      "utc": "2026-11-10T16:15:00Z"
+    },
+    "writeUp": {
+      "toronto": "2026-11-10 11:30",
+      "utc": "2026-11-10T16:30:00Z"
+    },
+    "S7a": {
+      "toronto": "2026-11-10 02:30-05:00",
+      "utc": "2026-11-10T07:30:00Z/10:00:00Z"
+    },
+    "S7scorer": {
+      "toronto": "2026-11-10 07:00 check, ready by 08:00",
+      "utc": "2026-11-10T12:00:00Z/13:00:00Z"
+    }
+  },
+  "stop": {
+    "global": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/STOP",
+    "perStage": {
+      "S1": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S1-STOP (also --stop-file)",
+      "S4a": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S4/STOP-S4a (script-level; generate.mjs has no STOP option, the wrapper terminates it, finished seed blocks are kept)",
+      "S3": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S3-STOP (s3.sh turns it, the global STOP and 09:00 into train/STOP)",
+      "S3-F": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S3F-STOP",
+      "queue": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/QUEUE-STOP (queue.sh stops launching; running steps get their own stop files)",
+      "note": "midgame-search.mjs and human-endgames.mjs have no STOP option; queue.sh kills their processes on the global STOP or at their deadline (reviewer note 1)"
+    },
+    "rule": "every tool runs with a deadline; no extension; a restart after a crash uses the remaining time only",
+    "memory": "stages wait to start while vm_stat free+inactive+speculative+purgeable < 6 GiB; trainer keeps its 4 GiB guard"
+  },
+  "stages": {
+    "S0": {
+      "kind": "setup",
+      "rule": "none"
+    },
+    "S1": {
+      "kind": "development diagnostic, reported, never a gate",
+      "tool": "src-s1 ai/danMCai/belief/handover-oracle.mjs",
+      "pairs": 400,
+      "workers": 3,
+      "arms": {
+        "A": "deployed 9001 (belief v1 worlds 8, top-6+pass, net 2 at 21-40; 8-world belief PIMC endgame at <=20; champion above 40)",
+        "B": "true-deal oracle above 40, deployed 9001 at <=40",
+        "C": "true-deal oracle at every focal real decision"
+      },
+      "oracle": "MODEL_STUDY 69 / rollout2.mjs --truth=1: champion top-6 + pass, one true-deal champion rollout per candidate to round end, argmax, champion-Q tie-break; reads hidden cards: an upper bound, not a player",
+      "opponents": "raw champion 017 greedy",
+      "outputs": [
+        "B-A (above-40 headroom with perfect information, upper bound)",
+        "C-B (remaining at <= 40)",
+        "A mean vs raw 017 as pairing check against +0.237",
+        "corr(champion Q at first focal <=40 decision, round result) per arm"
+      ],
+      "summary": "contiguous completed prefix; if fewer than 250 pairs by 02:30 the prefix is reported",
+      "interval": "deal-pair cluster normal 95%"
+    },
+    "S2": {
+      "kind": "build",
+      "owner": "S2 agent"
+    },
+    "S3": {
+      "kind": "training 017w (development); only S6 can accept it",
+      "extrasMode": "public-belief",
+      "extrasModeDecision": "public-belief chosen over B53: smoke at 23:00 gave about 3.1 learner updates/s steady state (1,585 sampler decisions/s on 4 actors, belief 6.6% of actor time, 18% throughput cost vs 53-wide); from about 23:55 to 09:00 (about 9 h) that is about 100k updates, above the plan's 40k floor. Plan section 9 rule kept: if at 04:30 the run is below the pace for 40k updates by 09:00, switch to public for the remaining time and say so.",
+      "config": {
+        "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S3-config.json",
+        "sha256": "1f0457673767f3928d5e26d63d13328f600f34560d6c85aa8cbc22c5fa50a0bb",
+        "content": {
+          "initial": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train-init/v000000000.onnx",
+          "actors": 4,
+          "actorImplementation": "fast",
+          "fastActor": {
+            "games": 8,
+            "provider": "cpu"
+          },
+          "actorSeedOffset": 40000000,
+          "actorSeedEnd": 45000000,
+          "actorMix": {
+            "self": 0.6,
+            "league": 0.3,
+            "rule": 0.1
+          },
+          "exploration": {
+            "type": "softmax",
+            "temperature": 0.02
+          },
+          "extrasMode": "public-belief",
+          "researchNoGate": true,
+          "researchSnapshots": true,
+          "beliefModel": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx",
+          "resourceBudget": {
+            "reserveGB": 4,
+            "resumeGB": 5
+          },
+          "snapshotMinutes": 60,
+          "leagueSize": 24,
+          "learner": {
+            "device": "mps",
+            "threads": 1,
+            "batch": 2048,
+            "learningRate": 1e-05,
+            "extrasLearningRate": 0.0001,
+            "gradClip": 1.0,
+            "capacity": 2000000,
+            "minSamples": 100000,
+            "replayRatio": 4,
+            "exportSeconds": 600,
+            "targetMatchWeight": 0,
+            "anchorWeight": 0,
+            "seed": 20261110
+          }
+        }
+      },
+      "fallbackFConfig": {
+        "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/S3F-config.json",
+        "sha256": "8052224b15586a8849dd907a81789ed1d8f8d53e2074cfa3ddceea414eca5598",
+        "differs": "learner.trunkFrozen true, actorSeedOffset 45,000,000 / actorSeedEnd 49,000,000, new run folder train-F/ (fresh optimizer)"
+      },
+      "runFolder": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/train/",
+      "launcher": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/scripts/s3.sh (launchd com.guandanai.w3-s3; global STOP / S3-STOP / 09:00 -> writes train/STOP; learner publishes final export)",
+      "objective": "MSE on final single-round signed points (targetMatchWeight 0, anchorWeight 0); exploration softmax(Q/0.02) everywhere; belief marginals are inputs only",
+      "pool": "M9: self 0.6 / league 0.3 / historical original rule bot 0.1. League = anchor (wrapped 017, pinned) + hourly snapshots (researchSnapshots, PFSP). DEVIATION: P0 is NOT pre-pinned (plan said \"if the pinned-member file format is confirmed\": league.json is created by the supervisor at first start and rewritten every tick, so pre-seeding it would race; and P0 playing as a league seat in the fast actor was not tested). No 9001 seats, no Clint, no human positions. Pool is 017-lineage; stronger seats are window 4 (M11).",
+      "learnerSeed": 20261110,
+      "actorSeedOffset": 40000000,
+      "actorSeedEnd": 45000000,
+      "projectionLearningRate": "kept at 1e-4 as planned (reviewer note: top choice moved at 45/200 positions after 456 smoke updates; the 04:30 damage stop is the guard). Trunk 1e-5.",
+      "gates": "the trainer's SPRT gates cannot score extras models (gate.mjs), so researchNoGate is required; the damage stops are the only in-run checks (plan said gates would run as development; they do not).",
+      "expectedVolume": "60-85k updates in the plan; about 100k at the smoke rate if it holds",
+      "damageStops": {
+        "rule": "M8, unchanged: 600 pairs, greedy raw 017w (latest export) vs raw 017, single round, no tribute, focal seats 0/2 both orders, midgame-search.mjs --mode=raw --focal-raw-model --belief=v1 --worlds-source=uniform; estimate = focal mean signed round points per deal pair, deal-cluster 95% interval. 04:30 (seeds 4293000000-4293000599): estimate <= -0.10 AND interval upper bound < 0 -> stop the main run, restart fallback F from v000000000 (trunk frozen, projection lr 1e-4) in train-F/ for the remaining time; otherwise continue. 09:00 (seeds 4293001000-4293001599, on the final export): estimate <= -0.10 AND interval upper bound < 0 -> S6 cancelled, window reported negative; any other reading -> S6 runs. A 600-pair estimate is never reported as a gain.",
+        "incomplete": "if fewer than 600 pairs complete by the stop time the rule is applied to the completed contiguous prefix and the count is reported"
+      },
+      "final": "09:00 samplers stop; final export v<step>.onnx; SHA-256 recorded; Node parity of the export (finite values, 215-wide extras) checked by the queue; research name 017w-v<step> (not web, not champion, not default)."
+    },
+    "S4a": {
+      "kind": "data generation (descriptive)",
+      "command": "src-a: node ai/danMCai/belief/generate.mjs --seeds=4292000000..4292039999 --band=41-108 --every=2 --workers=3 --block=250 --out=RT/window3-20261109/S4/data-v1b (features v1, champion 017 greedy self-play, all four seats)",
+      "flagsVerified": "--seeds a..b, --band lo-hi, --every, --workers, --block, --features (default v1) exist in generate.mjs at c10112c; generate.mjs has no deadline/STOP option (wrapper stops it); seeds must be < 2^32 (hence the 429x remap)"
+    },
+    "S4b": {
+      "kind": "train belief v1b (dev)",
+      "recipe": "belief/train.py --device=mps --minutes=35, v1 recipe (hidden 512, lr 1e-3, batch 1024), --val-mod=10",
+      "schedule": "queue.sh: starts when S4a has finished (END S4a in stages.log and no generate.mjs process), not before 00:00; 35 min on MPS; at the latest by 04:10 Toronto, otherwise skipped"
+    },
+    "S4c": {
+      "kind": "development gate (eligibility only, no play claim)",
+      "rule": "copied from plan S4c: on the stored 320 calibration positions, 64 belief-v1b worlds with the same common random numbers, every alternative scored on the true deal, joint regression (true-deal difference on rollout estimate and champion Q gap, position bootstrap). PASS requires all of: (1) at 41-60 the rollout coefficient 95% lower bound >= 0.5 and the intercept interval covers 0; (2) log loss per unseen copy at 41-80 not worse than v1 by more than 0.01 (v1: 0.774 / 0.913); (3) 81-108 log loss better than uniform by >= 0.05. Descriptive extra: opponents' natural four-or-more-of-a-kind ranks in sampled worlds (v1 1.41 vs truth 1.79). Outcome: eligible / not eligible for a paired play test; no play claim either way.",
+      "schedule": "queue.sh 04:15-05:15 Toronto, 2 workers; skipped (not eligible, reason logged) if S4b produced no model or a step's tool is missing"
+    },
+    "S4d": {
+      "kind": "development check only, cannot qualify as acceptance",
+      "rule": "M7: only if S4c eligible; 400 pairs vs deployed 9001, search at 41-60 with 64 v1b worlds, deviation at paired z >= 2; seeds 4294000000-4294000399; 3 workers (4 if S7a finished before 05:00, number fixed in stages.log at START); start >= 05:15, stop 09:00 whatever the prefix. SE about 0.04.",
+      "note": "needs a z>=2 deviation rule in the search tool, which midgame-search.mjs does not have (it has net-d); if no such tool exists at 05:15 S4d is SKIPPED with that reason (sacrifice order M1: S4d first)."
+    },
+    "S5": {
+      "kind": "SKIPPED (owner, ~23:05; M1). No com.guandanai.w3-s5 job, no queue entry. Clint-continuation code committed in 752a487e3bf7a6af5682fc5ec95172c712438470, tested, unused.",
+      "readingsAsPlanned": "(a) d_P4 > 0 with interval above 0 -> early bomb loses against a non-017 opponent; (b) interval below 0 -> not reproduced against Clint; (c) covers 0 -> inconclusive. Kept for the record only."
+    },
+    "S6": {
+      "kind": "acceptance (the only one); M10: unchanged and single",
+      "rule": "A = deployed 9001 (017 base, belief v1 worlds, 8 worlds, top-6 + pass, net 2 at 21-40, 8-world belief PIMC endgame at <= 20). B = the same machinery with --focal-raw-model=017w-v<step> for the focal seats' raw decisions above 40 cards; candidates, rollouts, endgame solver and belief worlds unchanged. Opponents raw 017 seats; single rounds; no tribute; 3,000 paired deals, seeds 4294500000-4294502999 (held out), focal seats 0/2 both orders; B minus A in signed round points per deal pair, 95% deal-cluster interval. Interval above 0 -> 017w-v<step> registered as a research candidate with a new id (not web, not champion, not default); covers 0 -> zero result; below 0 -> negative. If fallback F or B53 was used, the report says which network was tested.",
+      "schedule": "09:15-10:15 Toronto hard, 7 workers split 4 (B) + 3 (A) running in parallel; summary on the completed common contiguous prefix if the hard stop arrives first (count reported). Cancelled if the 09:00 damage stop reads <= -0.10 with interval below 0.",
+      "tool": "src-b midgame-search.mjs with --held-out=1",
+      "M2": "A zero or negative S6 is a statement about 017 seats only; the input direction continues in window 4 against stronger seats (M11); S6's rule (interval above 0 / covers 0 / below 0) is unchanged and is reported as such."
+    },
+    "S7": {
+      "kind": "descriptive diagnostics, never gates (M5)",
+      "scorer": "M5 (i): 017w scorer feeding 215 extras exactly as midgame-search.mjs focalRawDecision (53 public via encodePolicyExtrasBatch + 162 beliefMarginals); acceptance of the scorer = it reproduces 017's choices exactly on the 1,458 positions with train-init/v000000000.onnx. Written and parity-tested by 08:00 (queue stage S7-scorer-check at 07:00 runs the parity test; if the scorer is missing or fails, S7 human-position metrics are reported as not computed).",
+      "includes": [
+        "bomb rate at the 1,022 bomb-legal follows (017 36.0%, humans 11.2%)",
+        "joker on K-or-lower singles/pairs (88; 017 25.0%, humans 13.6%)",
+        "structure cost per play (017 0.493, humans 0.321)",
+        "agreement with the human move (017 44.7%)",
+        "A2 / M5 (ii): uncovered multi-card leads at the 269 unassisted human lead positions for 017w vs 017 (017 14.9% vs humans 7.4%; with a controlling single/pair available 8.9% vs 5.6%)",
+        "M5 (iii): belief v1 log loss per unseen copy on the 1,458 human positions vs uniform (self-play reference 0.793 vs 0.976)",
+        "S6 arm-B round-end structure vs SIM9001 baselines (singles left 1.60, joker held at first-out 20.8%, bomb held 30.5%, first-bomb table-card median 76)",
+        "hand-over corr(017w Q, result) at the first <= 40 decision vs 0.58 for 017",
+        "belief v1 training-range note (models.beliefV1.trainingRangeNote)"
+      ],
+      "schedule": "10:15-10:55 Toronto, 1 core; no new compute after 10:55"
+    },
+    "S7a": {
+      "kind": "M4: descriptive solver panel, fixed before any 017w exists",
+      "what": "ai/danMCai/endgame/human-endgames.mjs on all 31 recorded rounds (26 + 5 snapshots), --max-nodes=50000000 --max-ms=300000 --max-cards=40, champion 017, student e00061050 and --keep-assisted=5f687c12 as in section 67, 3 lanes (one round per invocation so completed rounds survive the 05:00 stop), from src-b, 02:30-05:00 Toronto hard, STOP honoured. Output S7a/summary.json; its SHA-256 appended to human-panel.json and stages.log at completion.",
+      "caveat": "the panel is <= 40 cards by construction (9001 overrides the raw net there), so for 017w it measures endgame drift, not opening gain; n about 115-200, SE about 0.04, descriptive only. Per-position cost at 10x budget unmeasured (M13); the 05:00 deadline caps it."
+    }
+  },
+  "commitPolicy": "nothing is committed during the window except, after the lead review, protocol, dashboard config and evidence files under ai/research/evaluation/window3-20261109/",
+  "amendments": {
+    "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/PLAN_AMENDMENTS.md",
+    "sha256": "a4a919ac56c593ff4dd3a4194918e3bac5821dd47bd11472e4d1413008eca060",
+    "applied": {
+      "M1": "S5 removed everywhere (no job, no queue entry, dashboard card 所有者决定跳过（23:05）). Sacrifice order: S4d, then S1 arm C, never S6.",
+      "M2": "Decisions 1 and 3 recorded (stages.S6.M2; humanData below).",
+      "M3": "human-panel.json written with hashes and counts only.",
+      "M4": "S7a queued 02:30-05:00, 3 lanes, src-b.",
+      "M5": "S7 additions; scorer parity check queued at 07:00 (see stages.S7.scorer).",
+      "M6": "S6 descriptive subgroups dropped tonight.",
+      "M7": "S4d: 400 pairs vs deployed 9001, 3 workers (4 if S7a finished), >= 05:15 to 09:00.",
+      "M8": "damage stops unchanged (stages.S3.damageStops).",
+      "M9": "pool unchanged and 017-lineage (stages.S3.pool).",
+      "M10": "S6 unchanged and single.",
+      "M11": "window-4 decision point: continue the input track if any of: S6 interval above 0; enlarged-panel optimal rate of 017w rises >= 0.05 over 017 with style rates moving toward humans; a window-4 S6b (9001 seats, 3,000 pairs) interval above 0. Stop only if S6 is negative and S6b <= 0.",
+      "M12": "human-like opponent model deferred; the 23:10 authorisation is recorded, not exercised.",
+      "M13": "real-play arithmetic: SD of signed round points about 2.37 unpaired; belief-v1 marginals learned on 017 self-play may misread human play; the S1 tool was commit-less when S1 started (now in 752a487e3bf7a6af5682fc5ec95172c712438470, same SHA); S7a per-position cost at 10x budget unmeasured (05:00 caps it); about 980 rounds per arm would be needed for +0.3/round at 80% power in real play."
+    },
+    "fixedBeforeResults": "all of the above were fixed and logged in stages.log before any window-3 result existed"
+  },
+  "humanData": "Private human records enter this window only as a held-out evaluation panel (S7, S7a, M3-M5); none enters S3, the league, replay or seeding. The owner's 23:10 authorisation to use them for training/modelling is recorded, not exercised (M12). No nickname, room number or raw record in any output or commit.",
+  "humanPanel": {
+    "file": "/Users/stevensun/guandan-runtime.noindex/window3-20261109/human-panel.json",
+    "sha256": "a9eae28cf72db4fcd30516663f36e1632c8516a3e91c6f50dfdf070095316de5"
+  },
+  "reviewerLaunchNotes": [
+    "global STOP wrappers for S3, damage stops, S4d, S6 and S7a: s3.sh and queue.sh",
+    "beliefModel given as an absolute path in S3-config.json",
+    "projection lr 1e-4 kept as planned",
+    "belief v1 training range noted for S7 (models.beliefV1.trainingRangeNote)"
+  ],
+  "owner": {
+    "A1": "automatic start authorised 22:28 Toronto; exercised by this launch. Not authorisation to change web champion 017, web default 9001, the menu, the move coach or any running/frozen run."
+  },
+  "addenda": []
+}

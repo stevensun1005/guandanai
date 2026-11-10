@@ -1,0 +1,595 @@
+{
+  "schema": 1,
+  "observedAtUTC": "2026-11-10T03:49:22.848854+00:00",
+  "observedAtToronto": "2026-11-09 22:49 EST",
+  "purpose": "Window-3 (2026-11-09/10) seed audit for plan section 6; read-only; development record",
+  "reserved": [
+    {
+      "use": "S1 oracle deals",
+      "range": [
+        4291000000,
+        4291000399
+      ]
+    },
+    {
+      "use": "S4a belief v1b data",
+      "range": [
+        4292000000,
+        4292039999
+      ]
+    },
+    {
+      "use": "S3 damage stop 04:30",
+      "range": [
+        4293000000,
+        4293000599
+      ]
+    },
+    {
+      "use": "S3 damage stop 09:00",
+      "range": [
+        4293001000,
+        4293001599
+      ]
+    },
+    {
+      "use": "S4d optional dev play check",
+      "range": [
+        4294000000,
+        4294000399
+      ]
+    },
+    {
+      "use": "S6 acceptance (held out)",
+      "range": [
+        4294500000,
+        4294502999
+      ]
+    }
+  ],
+  "planRangesAsWritten": [
+    {
+      "use": "S1 oracle deals",
+      "range": [
+        4310000000,
+        4310000399
+      ],
+      "aliasesTo32bitSeeds": [
+        15032704,
+        15033103
+      ]
+    },
+    {
+      "use": "S4a belief v1b data",
+      "range": [
+        4312000000,
+        4312039999
+      ],
+      "aliasesTo32bitSeeds": [
+        17032704,
+        17072703
+      ]
+    },
+    {
+      "use": "S3 damage stop 04:30",
+      "range": [
+        4313000000,
+        4313000599
+      ],
+      "aliasesTo32bitSeeds": [
+        18032704,
+        18033303
+      ]
+    },
+    {
+      "use": "S3 damage stop 09:00",
+      "range": [
+        4313001000,
+        4313001599
+      ],
+      "aliasesTo32bitSeeds": [
+        18033704,
+        18034303
+      ]
+    },
+    {
+      "use": "S4d optional dev play check",
+      "range": [
+        4314000000,
+        4314000399
+      ],
+      "aliasesTo32bitSeeds": [
+        19032704,
+        19033103
+      ]
+    },
+    {
+      "use": "S6 acceptance (held out)",
+      "range": [
+        4320000000,
+        4320002999
+      ],
+      "aliasesTo32bitSeeds": [
+        25032704,
+        25035703
+      ]
+    }
+  ],
+  "planRangeProblem": "every plan section 6 range is above 2^32 - 1 = 4,294,967,295: ai/danMCai/belief/generate.mjs refuses seeds >= 2^32 (uint32 shard metadata), midgame-search.mjs buildProtocol throws \"Seeds must stay below 2^32\", and createRound/seededRandom use `seed |= 0`, so seed s >= 2^32 deals the same cards as s - 2^32. Replaced one for one by the 429x ranges in `reserved`; both sets (and the 32-bit aliases of the plan ranges) are audited below.",
+  "scanned": {
+    "repositoryRoots": [
+      "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai",
+      "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/web/src"
+    ],
+    "evaluationFolders": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation (inside ai/)",
+    "runtimeMetadataFiles": 970,
+    "textFilesScanned": 2517,
+    "skippedLargeFiles": [],
+    "excluded": "the window-3 reservation files themselves (ai/research/evaluation/window3-20261109/PLAN.md and RT/window3-20261109), node_modules, .git, __pycache__, generated, checkpoints, dashboard-runtime-* checkouts (copies of this repository), window3-20261109 itself"
+  },
+  "literal43xxReferences": [
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/belief/opening-counterfactual.mjs",
+      "values43xx": [
+        4300000000
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/s5-smoke-clint-2246/rows.jsonl",
+      "values43xx": [
+        4300000001
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/s5-smoke-clint-2246/selection.json",
+      "values43xx": [
+        4300000001,
+        4300000004,
+        4300000009
+      ],
+      "count": 3,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/verify-opening-cf/out1.jsonl",
+      "values43xx": [
+        4300000000,
+        4300000001,
+        4300000003,
+        4300000010,
+        4300000042
+      ],
+      "count": 5,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/danMCai/workspace/verify-opening-cf/out2.jsonl",
+      "values43xx": [
+        4300000002,
+        4300000020,
+        4300000021,
+        4300000058,
+        4300000198
+      ],
+      "count": 5,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/clint-sync-20261106-latest.json",
+      "values43xx": [
+        4328982958
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-p0.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-random.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-138506-development-500-rule.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-186280-development-500-random.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-223067-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-223067-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-229609-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-229609-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-270292-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-270292-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-303975-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-303975-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-310956-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-310956-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-352359-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-352359-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-385979-development-500-champion.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/guanzero-385979-development-500-clint.json",
+      "values43xx": [
+        4320291721
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/opening-bomb-counterfactual-20261109/REPORT.md",
+      "values43xx": [
+        4300000000
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/opening-bomb-counterfactual-20261109/meta.json",
+      "values43xx": [
+        4300000000
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/Desktop/guandanai/.claude/worktrees/pull-latest-version-59e42e/ai/research/evaluation/opening-bomb-counterfactual-20261109/report.json",
+      "values43xx": [
+        4300000000
+      ],
+      "count": 1,
+      "insideReserved": []
+    },
+    {
+      "file": "/Users/stevensun/guandan-runtime.noindex/window3-prep-20261109/bomb-counterfactual/meta.json",
+      "values43xx": [
+        4300000000
+      ],
+      "count": 1,
+      "insideReserved": []
+    }
+  ],
+  "literalInsideReserved": [],
+  "structuredRanges43xx": [],
+  "structuredRanges429x": [],
+  "structuredRangesTotal": 149,
+  "structuredOverlapsReserved": [],
+  "beliefAssertHeldOut": [
+    {
+      "trainReport": "/Users/stevensun/guandan-runtime.noindex/beliefv3-smoke-20261109/model-v3/train-report.json",
+      "trainingRanges": [
+        [
+          3838129700,
+          3838129999
+        ]
+      ],
+      "assertHeldOut": "pass",
+      "overlaps": []
+    },
+    {
+      "trainReport": "/Users/stevensun/guandan-runtime.noindex/beliefv3-smoke-20261109/model-v1/train-report.json",
+      "trainingRanges": [
+        [
+          3838129700,
+          3838129999
+        ]
+      ],
+      "assertHeldOut": "pass",
+      "overlaps": []
+    },
+    {
+      "trainReport": "/Users/stevensun/guandan-runtime.noindex/window2-20261109/H/model-v3/train-report.json",
+      "trainingRanges": [
+        [
+          4255121000,
+          4255160999
+        ]
+      ],
+      "assertHeldOut": "pass",
+      "overlaps": []
+    },
+    {
+      "trainReport": "/Users/stevensun/guandan-runtime.noindex/window2-20261109/H/model-div/train-report.json",
+      "trainingRanges": [
+        [
+          4255121000,
+          4255160999
+        ],
+        [
+          3718348000,
+          3718387999
+        ]
+      ],
+      "assertHeldOut": "pass",
+      "overlaps": []
+    },
+    {
+      "trainReport": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model-v2/train-report.json",
+      "trainingRanges": [
+        [
+          4255121000,
+          4255160999
+        ],
+        [
+          4255161000,
+          4255220999
+        ]
+      ],
+      "assertHeldOut": "pass",
+      "overlaps": []
+    },
+    {
+      "trainReport": "/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/train-report.json",
+      "trainingRanges": [
+        [
+          4255121000,
+          4255160999
+        ]
+      ],
+      "assertHeldOut": "pass",
+      "overlaps": []
+    }
+  ],
+  "actorNamespace": {
+    "note": "continuous-trainer actor seeds are TRAIN_SEED_BASE + slot*TRAIN_SEED_SPAN + nextSeed (lib.mjs; span 50,000,000), a separate namespace from the 43xx evaluation seeds",
+    "macContinuousWindowActors": [
+      {
+        "file": "/Users/stevensun/Desktop/guandanai/ai/danMCai/runs/mac-20261105/actors/actor-3.json",
+        "nextSeed": 3088017
+      },
+      {
+        "file": "/Users/stevensun/Desktop/guandanai/ai/danMCai/runs/mac-20261105/actors/actor-2.json",
+        "nextSeed": 3088077
+      },
+      {
+        "file": "/Users/stevensun/Desktop/guandanai/ai/danMCai/runs/mac-20261105/actors/actor-1.json",
+        "nextSeed": 3090219
+      },
+      {
+        "file": "/Users/stevensun/Desktop/guandanai/ai/danMCai/runs/mac-20261105/actors/actor-0.json",
+        "nextSeed": 3090288
+      }
+    ],
+    "macContinuousWindowFinalNextSeedMax": 3090288,
+    "configuredOffsetsAndEnds": [
+      [
+        "actorSeedEnd",
+        8100000
+      ],
+      [
+        "actorSeedEnd",
+        12100000
+      ],
+      [
+        "actorSeedEnd",
+        24600000
+      ],
+      [
+        "actorSeedEnd",
+        24970000
+      ],
+      [
+        "actorSeedEnd",
+        24980000
+      ],
+      [
+        "actorSeedEnd",
+        24990000
+      ],
+      [
+        "actorSeedEnd",
+        25030000
+      ],
+      [
+        "actorSeedEnd",
+        25559076
+      ],
+      [
+        "actorSeedEnd",
+        31999134
+      ],
+      [
+        "actorSeedOffset",
+        1000000
+      ],
+      [
+        "actorSeedOffset",
+        3000000
+      ],
+      [
+        "actorSeedOffset",
+        6000000
+      ],
+      [
+        "actorSeedOffset",
+        8000000
+      ],
+      [
+        "actorSeedOffset",
+        12000000
+      ],
+      [
+        "actorSeedOffset",
+        24550000
+      ],
+      [
+        "actorSeedOffset",
+        24960000
+      ],
+      [
+        "actorSeedOffset",
+        24970000
+      ],
+      [
+        "actorSeedOffset",
+        24980000
+      ],
+      [
+        "actorSeedOffset",
+        25020000
+      ],
+      [
+        "actorSeedOffset",
+        25509076
+      ],
+      [
+        "actorSeedOffset",
+        31949134
+      ]
+    ],
+    "maxUsedWithinSpan": 31999134,
+    "chosenActorSeedOffset": 40000000,
+    "chosenRule": "fresh block above every nextSeed and every configured actorSeedOffset/actorSeedEnd below the 50,000,000 span found on this Mac; suggested actorSeedEnd 45,000,000"
+  },
+  "verdict": "clean",
+  "couldNotCheck": [
+    "seed histories on the Windows machine and other Macs",
+    "git history of the repository (only the current tree and this Mac's runtime folders were scanned)"
+  ]
+}
