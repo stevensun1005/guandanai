@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import {
   PAGE,
   compareRows,
+  displayOrder,
   loadConfig,
   parseStagesLog,
   pathInCommands,
@@ -514,4 +515,32 @@ test('a stopped whole-match evaluation shows its partial result and says it is s
   } finally {
     rmSync(run, { recursive: true, force: true });
   }
+});
+
+test('cards: running (latest start first), then queued in run order, then ended (latest end first), then never ran', () => {
+  const st = (key, state, start = null, end = null) => ({ key, state, start, end });
+  const order = displayOrder([
+    st('done-early', 'done', 1, 10),
+    st('queued-1', 'queued'),
+    st('run-old', 'running', 5),
+    st('failed-mid', 'failed', 2, 20),
+    st('never', 'skipped'),
+    st('queued-2', 'queued'),
+    st('done-late', 'done', 3, 30),
+    st('stopped', 'skipped', 4, 25),
+    st('run-new', 'running', 8),
+    st('never-later', 'skipped'),
+  ]).map((s) => s.key);
+  assert.deepEqual(order, [
+    'run-new',
+    'run-old',
+    'queued-1',
+    'queued-2',
+    'done-late',
+    'stopped',
+    'failed-mid',
+    'done-early',
+    'never-later',
+    'never',
+  ]);
 });

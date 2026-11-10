@@ -820,6 +820,31 @@ function stageState(stage, log, ctx) {
 }
 
 /**
+ * Card order on the page (owner 2026-11-09): running stages first, the most recently started on
+ * top; then queued stages in the order they will run; then every stage that has ended (done,
+ * failed, stopped) with the latest end on top and the earliest at the bottom; stages that never
+ * ran come last. Ties go to the stage added to the config later. The config order is only the
+ * tie-break, so a new card can be appended to the config and still lands in the right place.
+ */
+export function displayOrder(stages) {
+  const group = (s) =>
+    s.state === 'running' ? 0 : s.state === 'queued' ? 1 : s.end != null ? 2 : 3;
+  return stages
+    .map((s, index) => ({ s, index }))
+    .sort((a, b) => {
+      const ga = group(a.s),
+        gb = group(b.s);
+      if (ga !== gb) return ga - gb;
+      if (ga === 0 && (a.s.start ?? 0) !== (b.s.start ?? 0))
+        return (b.s.start ?? 0) - (a.s.start ?? 0);
+      if (ga === 1) return a.index - b.index;
+      if (ga === 2 && a.s.end !== b.s.end) return b.s.end - a.s.end;
+      return b.index - a.index;
+    })
+    .map((x) => x.s);
+}
+
+/**
  * Whole-window status from real files only. `options.now` and `options.psText` make it testable;
  * `options.machine === false` skips the vm_stat / statfs probe.
  */
@@ -891,6 +916,7 @@ export function snapshot(run, config, options = {}) {
         },
       });
   }
+  stages.splice(0, stages.length, ...displayOrder(stages));
   const running = stages.filter((s) => s.state === 'running');
   const queued = stages.filter((s) => s.state === 'queued');
   const orchestrators = (config.orchestrators || []).map((o) => ({
