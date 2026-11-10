@@ -3,9 +3,10 @@ import { guanzeroCards } from './guanzero-stages.mjs';
  * Read-only live dashboard for a research window run by stage scripts (window1.sh and friends).
  * It reads stages.log ("<ISO> START <id>[ ...]", "<ISO> END <id> rc=<n>", "<ISO> SKIP <id> (why)"
  * and free-text marker lines), the per-stage logs and the result files named in a config JSON.
- * Listens on 127.0.0.1 only and never writes, signals or controls anything.
+ * Listens on 127.0.0.1 by default (--host to widen) and never writes, signals or controls anything.
  *
- *   node ai/research/tools/window-dashboard.mjs --run=<run dir> --config=<json> [--port=8768]
+ *   node ai/research/tools/window-dashboard.mjs --run=<run dir> --config=<json> [--port=8768] [--host=127.0.0.1]
+ *   --host=0.0.0.0 also serves the page to phones on the same Wi-Fi (read-only GET routes only).
  *
  * Verdicts come only from the preregistered rule type in the config: heldout (lower bound > 0 is
  * positive evidence), gate (lower bound > 0 passes a development gate), dev (always 开发检查) or
@@ -1043,10 +1044,12 @@ tick();setInterval(tick,3000);
 function main() {
   const runOption = option('run'),
     configOption = option('config');
-  if (!runOption || !configOption) throw Error('Usage: --run=<dir> --config=<json> [--port=8768]');
+  if (!runOption || !configOption)
+    throw Error('Usage: --run=<dir> --config=<json> [--port=8768] [--host=127.0.0.1]');
   const run = resolve(runOption);
   const configFile = isAbsolute(configOption) ? configOption : resolve(configOption);
   const port = Number(option('port', 8768));
+  const host = option('host', '127.0.0.1');
   createServer((request, response) => {
     if (request.method !== 'GET') {
       response.writeHead(405).end();
@@ -1072,7 +1075,7 @@ function main() {
       return;
     }
     response.writeHead(404).end();
-  }).listen(port, '127.0.0.1', () => console.log(`Window dashboard: http://127.0.0.1:${port}/`));
+  }).listen(port, host, () => console.log(`Window dashboard: http://${host}:${port}/`));
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();
