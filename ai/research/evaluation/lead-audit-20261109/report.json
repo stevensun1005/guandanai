@@ -1,0 +1,884 @@
+{
+ "inventory": {
+  "humanRecordRounds": 31,
+  "humanMatches": 4,
+  "leadPositionsByGroup": {
+   "H-as": 93,
+   "H-un": 269,
+   "BOT-other": 9
+  },
+  "unassistedHumanLeadPositions": 269,
+  "unassistedHumanRounds": 31,
+  "unassistedHumanMatches": 4,
+  "selfPlayRounds": 2000,
+  "selfPlayLeadPositions": 24881,
+  "selfPlaySeedRange": [
+   4300200000,
+   4300201999
+  ]
+ },
+ "table1a_typeDistribution": {
+  "single": {
+   "human": 109,
+   "champion": 74,
+   "championSameAsHuman": 28
+  },
+  "pair": {
+   "human": 61,
+   "champion": 37,
+   "championSameAsHuman": 10
+  },
+  "triple": {
+   "human": 12,
+   "champion": 13,
+   "championSameAsHuman": 2
+  },
+  "full": {
+   "human": 31,
+   "champion": 38,
+   "championSameAsHuman": 9
+  },
+  "straight": {
+   "human": 30,
+   "champion": 62,
+   "championSameAsHuman": 10
+  },
+  "pairs3": {
+   "human": 17,
+   "champion": 28,
+   "championSameAsHuman": 6
+  },
+  "trip2": {
+   "human": 9,
+   "champion": 5,
+   "championSameAsHuman": 2
+  },
+  "bombish": {
+   "human": 0,
+   "champion": 12,
+   "championSameAsHuman": 0
+  }
+ },
+ "table1c_coverLevels": {
+  "full/actual": {
+   "w1": 16,
+   "w2": 5,
+   "bomb": 24,
+   "uncovered": 5,
+   "uncoveredBeatable": 2,
+   "n": 31
+  },
+  "full/champ": {
+   "w1": 21,
+   "w2": 6,
+   "bomb": 25,
+   "uncovered": 10,
+   "uncoveredBeatable": 7,
+   "n": 38
+  },
+  "straight/actual": {
+   "w1": 11,
+   "w2": 12,
+   "bomb": 20,
+   "uncovered": 9,
+   "uncoveredBeatable": 6,
+   "n": 30
+  },
+  "straight/champ": {
+   "w1": 20,
+   "w2": 20,
+   "bomb": 35,
+   "uncovered": 21,
+   "uncoveredBeatable": 14,
+   "n": 62
+  },
+  "pairs3/actual": {
+   "w1": 8,
+   "w2": 4,
+   "bomb": 14,
+   "uncovered": 3,
+   "uncoveredBeatable": 1,
+   "n": 17
+  },
+  "pairs3/champ": {
+   "w1": 12,
+   "w2": 1,
+   "bomb": 21,
+   "uncovered": 5,
+   "uncoveredBeatable": 4,
+   "n": 28
+  },
+  "trip2/actual": {
+   "w1": 3,
+   "w2": 2,
+   "bomb": 4,
+   "uncovered": 3,
+   "uncoveredBeatable": 2,
+   "n": 9
+  },
+  "trip2/champ": {
+   "w1": 1,
+   "w2": 0,
+   "bomb": 0,
+   "uncovered": 4,
+   "uncoveredBeatable": 4,
+   "n": 5
+  },
+  "triple/actual": {
+   "w1": 8,
+   "w2": 4,
+   "bomb": 7,
+   "uncovered": 3,
+   "uncoveredBeatable": 0,
+   "n": 12
+  },
+  "triple/champ": {
+   "w1": 10,
+   "w2": 5,
+   "bomb": 6,
+   "uncovered": 2,
+   "uncoveredBeatable": 0,
+   "n": 13
+  },
+  "pair/actual": {
+   "w1": 52,
+   "w2": 28,
+   "bomb": 38,
+   "uncovered": 6,
+   "uncoveredBeatable": 3,
+   "n": 61
+  },
+  "pair/champ": {
+   "w1": 24,
+   "w2": 21,
+   "bomb": 13,
+   "uncovered": 10,
+   "uncoveredBeatable": 5,
+   "n": 37
+  },
+  "single/actual": {
+   "w1": 97,
+   "w2": 66,
+   "bomb": 75,
+   "uncovered": 7,
+   "uncoveredBeatable": 2,
+   "n": 109
+  },
+  "single/champ": {
+   "w1": 67,
+   "w2": 34,
+   "bomb": 48,
+   "uncovered": 3,
+   "uncoveredBeatable": 1,
+   "n": 74
+  }
+ },
+ "table1b": {
+  "multi-card leads, uncovered (share of multi-card leads)": {
+   "human": [
+    20,
+    87
+   ],
+   "champion": [
+    40,
+    133
+   ],
+   "diff": {
+    "point": 0.07086682222798374,
+    "lo": 0.002710908696595099,
+    "hi": 0.14092664092664092,
+    "draws": 2000,
+    "clusters": 31
+   }
+  },
+  "multi-card leads, uncovered and beatable (share of multi-card leads)": {
+   "human": [
+    11,
+    87
+   ],
+   "champion": [
+    29,
+    133
+   ],
+   "diff": {
+    "point": 0.09160833117275946,
+    "lo": 0.026089417091114883,
+    "hi": 0.16269565217391305,
+    "draws": 2000,
+    "clusters": 31
+   }
+  },
+  "uncovered multi-card lead (share of ALL lead positions)": {
+   "human": [
+    20,
+    269
+   ],
+   "champion": [
+    40,
+    269
+   ],
+   "diff": {
+    "point": 0.07434944237918216,
+    "lo": 0.03731343283582089,
+    "hi": 0.11355311355311355,
+    "draws": 2000,
+    "clusters": 31
+   }
+  },
+  "uncovered, beatable multi-card lead (share of ALL lead positions)": {
+   "human": [
+    11,
+    269
+   ],
+   "champion": [
+    29,
+    269
+   ],
+   "diff": {
+    "point": 0.06691449814126393,
+    "lo": 0.03378378378378378,
+    "hi": 0.10104529616724738,
+    "draws": 2000,
+    "clusters": 31
+   }
+  },
+  "controlling single/pair available AND uncovered multi-card lead chosen (share of ALL positions)": {
+   "human": [
+    15,
+    269
+   ],
+   "champion": [
+    24,
+    269
+   ],
+   "diff": {
+    "point": 0.03345724907063197,
+    "lo": 0.0037878787878787845,
+    "hi": 0.0647482014388489,
+    "draws": 2000,
+    "clusters": 31
+   }
+  },
+  "controlling single/pair available AND uncovered, beatable multi-card lead chosen": {
+   "human": [
+    8,
+    269
+   ],
+   "champion": [
+    18,
+    269
+   ],
+   "diff": {
+    "point": 0.03717472118959107,
+    "lo": 0.007042253521126762,
+    "hi": 0.06995884773662552,
+    "draws": 2000,
+    "clusters": 31
+   }
+  },
+  "among positions with a controlling single/pair available: uncovered multi-card lead": {
+   "human": [
+    15,
+    148
+   ],
+   "champion": [
+    24,
+    148
+   ],
+   "diff": {
+    "point": 0.060810810810810814,
+    "lo": 0.007299270072992706,
+    "hi": 0.11612903225806452,
+    "draws": 2000,
+    "clusters": 29
+   }
+  }
+ },
+ "table1d_byBand": {
+  ">80": {
+   "n": 80,
+   "humanUnc": 2,
+   "champUnc": 2,
+   "diff": {
+    "point": 0.0,
+    "lo": -0.03571428571428571,
+    "hi": 0.038461538461538464,
+    "draws": 2000,
+    "clusters": 29
+   },
+   "humanCtlUnc": 1,
+   "champCtlUnc": 2
+  },
+  "61-80": {
+   "n": 52,
+   "humanUnc": 1,
+   "champUnc": 4,
+   "diff": {
+    "point": 0.057692307692307696,
+    "lo": 0.0,
+    "hi": 0.13725490196078433,
+    "draws": 2000,
+    "clusters": 27
+   },
+   "humanCtlUnc": 0,
+   "champCtlUnc": 1
+  },
+  "41-60": {
+   "n": 43,
+   "humanUnc": 6,
+   "champUnc": 12,
+   "diff": {
+    "point": 0.13953488372093023,
+    "lo": 0.0,
+    "hi": 0.3023255813953488,
+    "draws": 2000,
+    "clusters": 24
+   },
+   "humanCtlUnc": 5,
+   "champCtlUnc": 7
+  },
+  "<=40": {
+   "n": 94,
+   "humanUnc": 11,
+   "champUnc": 22,
+   "diff": {
+    "point": 0.11702127659574468,
+    "lo": 0.011494252873563232,
+    "hi": 0.22680412371134023,
+    "draws": 2000,
+    "clusters": 25
+   },
+   "humanCtlUnc": 9,
+   "champCtlUnc": 14
+  },
+  ">40 (all above 40)": {
+   "n": 175,
+   "humanUnc": 9,
+   "champUnc": 18,
+   "diff": {
+    "point": 0.05142857142857143,
+    "lo": 0.013071895424836596,
+    "hi": 0.09395973154362416,
+    "draws": 2000,
+    "clusters": 31
+   },
+   "humanCtlUnc": 6,
+   "champCtlUnc": 10
+  },
+  "all": {
+   "n": 269,
+   "humanUnc": 20,
+   "champUnc": 40,
+   "diff": {
+    "point": 0.07434944237918216,
+    "lo": 0.03731343283582089,
+    "hi": 0.11355311355311355,
+    "draws": 2000,
+    "clusters": 31
+   },
+   "humanCtlUnc": 15,
+   "champCtlUnc": 24
+  }
+ },
+ "champUncoveredQGap": {
+  "n": 40,
+  "median": 0.0286,
+  "share_lt_0.02": 0.45
+ },
+ "assistedReference": {
+  "n": 93,
+  "humanUnc": 7,
+  "champUnc": 16
+ },
+ "table2_humanTrickOutcome": {
+  "multi-card, uncovered & beatable": {
+   "n": 11,
+   "leader": 6,
+   "opponent": 3,
+   "partner": 2
+  },
+  "multi-card, uncovered but unbeatable": {
+   "n": 9,
+   "opponent": 2,
+   "leader": 6,
+   "partner": 1
+  },
+  "multi-card, covered (W1 or bomb)": {
+   "n": 67,
+   "opponent": 23,
+   "leader": 32,
+   "partner": 12
+  },
+  "single/pair, W2 (controlling)": {
+   "n": 94,
+   "partner": 18,
+   "leader": 50,
+   "opponent": 26
+  },
+  "single/pair, not W2": {
+   "n": 76,
+   "opponent": 40,
+   "leader": 21,
+   "partner": 15
+  },
+  "triple": {
+   "n": 12,
+   "partner": 1,
+   "leader": 7,
+   "opponent": 4
+  }
+ },
+ "table3a_selfPlayPerType": {
+  "single": {
+   "n": 9535,
+   "uncovered": 713,
+   "uncoveredBeatable": 197,
+   "trick": {
+    "leader": 4111,
+    "partner": 1557,
+    "opponent": 3867
+   },
+   "points": {
+    "mean": 0.303093864708967,
+    "lo": 0.2486628211851075,
+    "hi": 0.35756280064136825,
+    "n": 9535,
+    "clusters": 1997
+   }
+  },
+  "pair": {
+   "n": 4451,
+   "uncovered": 953,
+   "uncoveredBeatable": 530,
+   "trick": {
+    "opponent": 1800,
+    "partner": 683,
+    "leader": 1968
+   },
+   "points": {
+    "mean": 0.17389350707706133,
+    "lo": 0.09971001561454383,
+    "hi": 0.24709103353867215,
+    "n": 4451,
+    "clusters": 1789
+   }
+  },
+  "triple": {
+   "n": 1392,
+   "uncovered": 471,
+   "uncoveredBeatable": 241,
+   "trick": {
+    "leader": 673,
+    "opponent": 543,
+    "partner": 176
+   },
+   "points": {
+    "mean": 0.2708333333333333,
+    "lo": 0.14163090128755365,
+    "hi": 0.4034833091436865,
+    "n": 1392,
+    "clusters": 997
+   }
+  },
+  "full": {
+   "n": 4103,
+   "uncovered": 1086,
+   "uncoveredBeatable": 734,
+   "trick": {
+    "opponent": 1940,
+    "leader": 1556,
+    "partner": 607
+   },
+   "points": {
+    "mean": 0.17255666585425297,
+    "lo": 0.10609697551608258,
+    "hi": 0.23575873623743418,
+    "n": 4103,
+    "clusters": 1867
+   }
+  },
+  "straight": {
+   "n": 3140,
+   "uncovered": 955,
+   "uncoveredBeatable": 566,
+   "trick": {
+    "leader": 1372,
+    "opponent": 1372,
+    "partner": 396
+   },
+   "points": {
+    "mean": 0.10509554140127389,
+    "lo": 0.024466750313676285,
+    "hi": 0.18384663733500942,
+    "n": 3140,
+    "clusters": 1750
+   }
+  },
+  "pairs3": {
+   "n": 1773,
+   "uncovered": 677,
+   "uncoveredBeatable": 464,
+   "trick": {
+    "leader": 810,
+    "opponent": 779,
+    "partner": 184
+   },
+   "points": {
+    "mean": 0.1895093062605753,
+    "lo": 0.08934517203107659,
+    "hi": 0.2865990990990991,
+    "n": 1773,
+    "clusters": 1272
+   }
+  },
+  "trip2": {
+   "n": 393,
+   "uncovered": 186,
+   "uncoveredBeatable": 131,
+   "trick": {
+    "leader": 228,
+    "partner": 25,
+    "opponent": 140
+   },
+   "points": {
+    "mean": 0.31297709923664124,
+    "lo": 0.10152284263959391,
+    "hi": 0.5240506329113924,
+    "n": 393,
+    "clusters": 372
+   }
+  },
+  "bombish": {
+   "n": 94,
+   "uncovered": 0,
+   "uncoveredBeatable": 0,
+   "trick": {
+    "leader": 85,
+    "opponent": 9
+   },
+   "points": {
+    "mean": 0.8085106382978723,
+    "lo": 0.41836734693877553,
+    "hi": 1.2043010752688172,
+    "n": 94,
+    "clusters": 90
+   }
+  }
+ },
+ "table3b_selfPlayClasses": {
+  "multi-card, uncovered & beatable": {
+   "n": 1895,
+   "trick": {
+    "leader": 552,
+    "opponent": 1103,
+    "partner": 240
+   },
+   "points": {
+    "mean": -0.49287598944591027,
+    "lo": -0.5884533898305084,
+    "hi": -0.4002106371774618,
+    "n": 1895,
+    "clusters": 1203
+   }
+  },
+  "multi-card, uncovered but unbeatable": {
+   "n": 1009,
+   "trick": {
+    "leader": 810,
+    "opponent": 186,
+    "partner": 13
+   },
+   "points": {
+    "mean": -0.12586719524281467,
+    "lo": -0.25793650793650796,
+    "hi": 0.003861003861003861,
+    "n": 1009,
+    "clusters": 784
+   }
+  },
+  "multi-card, covered (W1 or bomb)": {
+   "n": 6505,
+   "trick": {
+    "opponent": 2942,
+    "leader": 2604,
+    "partner": 959
+   },
+   "points": {
+    "mean": 0.3932359723289777,
+    "lo": 0.348120764017252,
+    "hi": 0.4380101647928538,
+    "n": 6505,
+    "clusters": 1993
+   }
+  },
+  "single/pair, W2 (controlling)": {
+   "n": 6742,
+   "trick": {
+    "opponent": 1933,
+    "leader": 4032,
+    "partner": 777
+   },
+   "points": {
+    "mean": 0.39365173539009196,
+    "lo": 0.31647419967840956,
+    "hi": 0.47342709104367137,
+    "n": 6742,
+    "clusters": 1906
+   }
+  },
+  "single/pair, not W2": {
+   "n": 7244,
+   "trick": {
+    "partner": 1463,
+    "opponent": 3734,
+    "leader": 2047
+   },
+   "points": {
+    "mean": 0.1394257316399779,
+    "lo": 0.0784789644012945,
+    "hi": 0.19754601226993865,
+    "n": 7244,
+    "clusters": 1966
+   }
+  },
+  "triple": {
+   "n": 1392,
+   "trick": {
+    "leader": 673,
+    "opponent": 543,
+    "partner": 176
+   },
+   "points": {
+    "mean": 0.2708333333333333,
+    "lo": 0.14163090128755365,
+    "hi": 0.4034833091436865,
+    "n": 1392,
+    "clusters": 997
+   }
+  },
+  "bomb-type lead": {
+   "n": 94,
+   "trick": {
+    "leader": 85,
+    "opponent": 9
+   },
+   "points": {
+    "mean": 0.8085106382978723,
+    "lo": 0.41836734693877553,
+    "hi": 1.2043010752688172,
+    "n": 94,
+    "clusters": 90
+   }
+  }
+ },
+ "table3c_selfPlayCtl": {
+  ">80": {
+   "n": 5769,
+   "ctl": 2661,
+   "ctlUnc": 148,
+   "ctlUncBeatable": 144,
+   "pointsCtlUnc": {
+    "mean": -0.25675675675675674,
+    "lo": -0.6081081081081081,
+    "hi": 0.1,
+    "n": 148,
+    "clusters": 141
+   },
+   "pointsCtlSP": {
+    "mean": 0.4835262689225289,
+    "lo": 0.3427272727272727,
+    "hi": 0.6267985611510791,
+    "n": 1123,
+    "clusters": 840
+   }
+  },
+  "61-80": {
+   "n": 4198,
+   "ctl": 1958,
+   "ctlUnc": 232,
+   "ctlUncBeatable": 219,
+   "pointsCtlUnc": {
+    "mean": -0.2413793103448276,
+    "lo": -0.543859649122807,
+    "hi": 0.07234042553191489,
+    "n": 232,
+    "clusters": 214
+   },
+   "pointsCtlSP": {
+    "mean": 0.5657764589515332,
+    "lo": 0.4032882011605416,
+    "hi": 0.7263056092843327,
+    "n": 1011,
+    "clusters": 764
+   }
+  },
+  "41-60": {
+   "n": 4811,
+   "ctl": 2414,
+   "ctlUnc": 379,
+   "ctlUncBeatable": 313,
+   "pointsCtlUnc": {
+    "mean": -0.16358839050131926,
+    "lo": -0.40512820512820513,
+    "hi": 0.08776595744680851,
+    "n": 379,
+    "clusters": 347
+   },
+   "pointsCtlSP": {
+    "mean": 0.615,
+    "lo": 0.4797687861271676,
+    "hi": 0.7462365591397849,
+    "n": 1400,
+    "clusters": 969
+   }
+  },
+  "<=40": {
+   "n": 10103,
+   "ctl": 6472,
+   "ctlUnc": 868,
+   "ctlUncBeatable": 298,
+   "pointsCtlUnc": {
+    "mean": -0.1935483870967742,
+    "lo": -0.3368298368298368,
+    "hi": -0.04931192660550459,
+    "n": 868,
+    "clusters": 706
+   },
+   "pointsCtlSP": {
+    "mean": 0.2129032258064516,
+    "lo": 0.12975529508533826,
+    "hi": 0.2950584375640763,
+    "n": 4805,
+    "clusters": 1696
+   }
+  },
+  ">40 (all above 40)": {
+   "n": 14778,
+   "ctl": 7033,
+   "ctlUnc": 759,
+   "ctlUncBeatable": 676,
+   "pointsCtlUnc": {
+    "mean": -0.20553359683794467,
+    "lo": -0.3817701453104359,
+    "hi": -0.03942181340341656,
+    "n": 759,
+    "clusters": 621
+   },
+   "pointsCtlSP": {
+    "mean": 0.5591397849462365,
+    "lo": 0.4630911188004614,
+    "hi": 0.6522358302477926,
+    "n": 3534,
+    "clusters": 1605
+   }
+  },
+  "all": {
+   "n": 24881,
+   "ctl": 13505,
+   "ctlUnc": 1627,
+   "ctlUncBeatable": 974,
+   "pointsCtlUnc": {
+    "mean": -0.19913952059004303,
+    "lo": -0.31211750305997554,
+    "hi": -0.0932674490426189,
+    "n": 1627,
+    "clusters": 1088
+   },
+   "pointsCtlSP": {
+    "mean": 0.3596354478954311,
+    "lo": 0.29224843524313915,
+    "hi": 0.4263157894736842,
+    "n": 8339,
+    "clusters": 1953
+   }
+  }
+ },
+ "table3d_selfPlayFullHouse": {
+  ">80": {
+   "n": 5769,
+   "fh": 1082,
+   "fhUncBeatable": 31,
+   "fhUncBeatableCtlSingle": 11,
+   "points": {
+    "mean": -0.9090909090909091,
+    "lo": -2.090909090909091,
+    "hi": 0.36363636363636365,
+    "n": 11,
+    "clusters": 11
+   },
+   "trickOpponent": 9
+  },
+  "61-80": {
+   "n": 4198,
+   "fh": 792,
+   "fhUncBeatable": 96,
+   "fhUncBeatableCtlSingle": 36,
+   "points": {
+    "mean": -0.25,
+    "lo": -0.9722222222222222,
+    "hi": 0.4722222222222222,
+    "n": 36,
+    "clusters": 36
+   },
+   "trickOpponent": 22
+  },
+  "41-60": {
+   "n": 4811,
+   "fh": 915,
+   "fhUncBeatable": 218,
+   "fhUncBeatableCtlSingle": 83,
+   "points": {
+    "mean": -0.1566265060240964,
+    "lo": -0.6829268292682927,
+    "hi": 0.36046511627906974,
+    "n": 83,
+    "clusters": 81
+   },
+   "trickOpponent": 52
+  },
+  "<=40": {
+   "n": 10103,
+   "fh": 1314,
+   "fhUncBeatable": 389,
+   "fhUncBeatableCtlSingle": 154,
+   "points": {
+    "mean": -0.24675324675324675,
+    "lo": -0.6013071895424836,
+    "hi": 0.09615384615384616,
+    "n": 154,
+    "clusters": 153
+   },
+   "trickOpponent": 98
+  },
+  ">40 (all above 40)": {
+   "n": 14778,
+   "fh": 2789,
+   "fhUncBeatable": 345,
+   "fhUncBeatableCtlSingle": 130,
+   "points": {
+    "mean": -0.24615384615384617,
+    "lo": -0.6615384615384615,
+    "hi": 0.1889763779527559,
+    "n": 130,
+    "clusters": 125
+   },
+   "trickOpponent": 83
+  },
+  "all": {
+   "n": 24881,
+   "fh": 4103,
+   "fhUncBeatable": 734,
+   "fhUncBeatableCtlSingle": 284,
+   "points": {
+    "mean": -0.24647887323943662,
+    "lo": -0.5319148936170213,
+    "hi": 0.0313588850174216,
+    "n": 284,
+    "clusters": 267
+   },
+   "trickOpponent": 181
+  }
+ },
+ "selfPlayUncoveredShareAllLeads": 0.11671556609461034,
+ "note": "Example positions (Table 4/4b) are derived from private human records and are kept only in the local run folder, not committed."
+}
