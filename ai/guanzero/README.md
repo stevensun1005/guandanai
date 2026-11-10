@@ -31,6 +31,7 @@
 直接 `evaluate.mjs` 仅用于普通两组/单组基线；新的三组定时批次必须先登记，再运行本页后述的独立伴随。
 
 ```powershell
+# 历史rules-only Clint基线，不含残局大脑；当前周期必须用独立伴随
 node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --opponents=clint,champion
 # 仅运行实际门控冠军；权重与 accept 门控证据自动核对
 node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --opponents=champion
@@ -46,7 +47,7 @@ node ai/guanzero/training/evaluate.mjs --run=<运行目录> --pairs=250 --oppone
 node ai/guanzero/training/development-suite.mjs --run=<冻结运行目录> --from-block=3 --guardian-state=<守护状态文件>
 ```
 
-首次启动冻结当时最新完整导出；之后跟随后续原批次的冻结模型与最终评测。新报告单独写在 `eval/development-500/<快照或批次>/<对手>/`，旧 200 场及旧 `clint/report.json` 保留为历史，不能拼入新样本。新开发种子从 4,200,000,000 起，每批独占 100,000 个种子区间，使用前 250 个；与旧批次种子分开，不能作为未用留出集。每批各对手使用相同种子和同一模型，按种子交换阵营。
+首次启动冻结当时最新完整导出；之后跟随后续原批次的冻结模型与最终评测。新报告单独写在 `eval/development-500/<快照或批次>/<对手>/`，旧 200 场及旧 `clint/report.json` 保留为历史，不能拼入新样本。新开发种子从 4,200,000,000 起，每批独占 100,000 个种子区间，使用前 250 个；与旧批次种子分开，不能作为未用留出集。每批各对手使用同一模型；当前Clint/reason取同批冠军种子的前25个，冠军用全部250个，逐种子交换阵营。
 
 三组在同一批次分别启动BelowNormal独立进程、CPU单线程ONNX会话。普通冠军继续从原af2a683冻结评测器调用；含残局大脑的Clint与reason从独立新版冻结伴随运行，不使用训练GPU。统一只读面板按计划分别显示Clint/50、冠军/500、reason/50、排队／进行中／完成、具体对手版本及实际胜负平；置信区间仅在该对手预登记场数完成后计算。指纹、种子和冻结权重完全一致时可从已完成的配对断点续跑，变更或损坏则停止并保留现场。`.lock` 防止重复进程；`status.json` 保存错误与状态。仅停止补充进程可创建 `eval/development-500/STOP`，不要误写训练根目录的 STOP。旧的 Clint-only 补评入口保留用于历史协议复现。
 
