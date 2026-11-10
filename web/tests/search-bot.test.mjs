@@ -529,9 +529,15 @@ test('a fresh profile defaults every seat to 9001; saved choices survive only wh
     W: '9001',
   });
   // v2 entries pointing to retired menu entries (P0, previous champion, older GuanZero)
+  const currentGuanZero = BOT_CHOICES.find((m) => m.config?.history === 'guanzero-v1').id;
+  const retiredGuanZero = catalog.models
+    .filter((m) => m.config.history === 'guanzero-v1' && m.id !== currentGuanZero)
+    .at(-1).id;
   assert.deepEqual(
-    normalizeBotPreferences(storedBotPreferences({ S: '001', E: '012', N: '025', W: '026' })),
-    { S: '9001', E: '9001', N: '9001', W: '026' },
+    normalizeBotPreferences(
+      storedBotPreferences({ S: '001', E: '012', N: retiredGuanZero, W: currentGuanZero }),
+    ),
+    { S: '9001', E: '9001', N: '9001', W: currentGuanZero },
   );
   const value = structuredClone(catalog);
   delete value.selection.defaultChoice;

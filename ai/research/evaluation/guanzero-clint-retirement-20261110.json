@@ -13,7 +13,7 @@
   "clintRetired": true,
   "currentSuite": "model-000000468071",
   "currentAmendment": "ai/research/evaluation/guanzero-468071-opponent-retirement.json",
-  "currentReason200Scope": "awaiting-owner-reply; original50-match report retained",
+  "currentReason200Scope": "owner confirmed next-batch-only; current468071 retains original50-match report",
   "validation": {
     "node": {
       "total": 473,
@@ -24,5 +24,34 @@
     "format": "passed",
     "guanzeroPythonUnchanged": 9,
     "currentFrozenReports": "verified500/50 against exact immutable plan and fullSHAs; no report rewriting"
+  },
+  "activation": {
+    "commit": "2090bff4bf62de80f5ee3688924873b588e8516c",
+    "frozenTestsPassed": 22,
+    "preview": {
+      "previewOnly": true,
+      "formalMatches": 0,
+      "opponentPanel": "champion-reason-v4",
+      "opponents": [
+        "champion",
+        "reason"
+      ],
+      "opponentPairs": {
+        "champion": 250,
+        "reason": 100
+      },
+      "evaluationRuntime": {
+        "commit": "2090bff4bf62de80f5ee3688924873b588e8516c",
+        "baselineCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52"
+      },
+      "reasonProtocol": "clint-champion-reason-v2"
+    },
+    "dashboardBrowser": {
+      "retiredClintVisible": true,
+      "actualStoppedMatches": 8,
+      "plannedHistoricalMatches": 50
+    },
+    "sourceRoot": "C:/guandan-sampler/work/guanzero-champion-reason200-runtime",
+    "nextSlot": "2026-11-10T20:00:00-05:00"
   }
 }

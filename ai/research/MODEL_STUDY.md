@@ -2978,6 +2978,44 @@ reason组实际调用网页桌面策略的公开信息推断和搜索，冻结�
 
 所有者要求当前停止Clint、以后不再评测它，随后将reason提高到200场。当前468071的Clint实际8场6胜/1负/1平，原始进度保存；原v3计划与冠军500场205胜/247负/48平、reason50场22胜/25负/3平报告保留原字节。[退休修订](evaluation/guanzero-468071-opponent-retirement.json)绑定原计划、模型及两份报告完整SHA，一次性允许按保留组发布，不能把部分Clint当成完成或普遍跳过必要报告。原427033整批取消仍不可发布。
 
-后续新面板`champion-reason-v4`只登记冠军500场、reason200场（250/100对，共700场），reason仍v2的50秒策略，普通冠军仍af2a683基线。日历、四项网页菜单、reason默认与训练截止均不变。当前批是否补测另依所有者范围确认，原50场不改成200场。
+后续新面板`champion-reason-v4`只登记冠军500场、reason200场（250/100对，共700场），reason仍v2的50秒策略，普通冠军仍af2a683基线。日历、四项网页菜单、reason默认与训练截止均不变。所有者已确认从下一批起200场，本批保留原50场并发布。
 
 移除Clint/v4工程验证：Node473项（448通过、25跳过）、格式通过，原Python9项仍适用未变的导出实现。真实468071报告500/50已按原SHA和明确退休修订核验，未将旧50场改为200场。[工程证据](evaluation/guanzero-clint-retirement-20261110.json)。
+
+### 网页模型 model-000000468071（归档 027） · 2026-11-10T14:21:25.781Z
+
+归档完整导出 `guanzero-adp-io48/model-000000468071`，SHA-256 为 `1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143`。网页默认编号为 **017**；启用冠军菜单时，归档新检查点不会自动替换冠军。本发布未新增独立评测比赛，不代表棋力验收或胜率提高。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-027.json)。
+
+### Toronto11月10日08点模型发布：guanzero-adp-io48-468071
+
+所有者明确确认“从下一批开始200场，本批按已完成的50场发布”。当前仍按原v3报告的冠军250对/500场、reason25对/50场核验；Clint退出要求由[退休修订](evaluation/guanzero-468071-opponent-retirement.json)绑定原计划和全部SHA，实际仅8场6胜/1负/1平，作为部分记录保留，不算完成。
+
+| 对手     | 场数 |  胜 |  负 |  平 | 每场得分95%区间 |
+| -------- | ---: | --: | --: | --: | --------------- |
+| champion |  500 | 205 | 247 |  48 | [0.418, 0.497]  |
+| reason   |   50 |  22 |  25 |   3 | [0.390, 0.560]  |
+
+冠军开发种子4213200000–4213200249，reason使用前25个至4213200024；区间按种子对簇自助重算，未拼接或截取报告。[原计划](evaluation/guanzero-468071-plan.json)、[冠军完整报告](evaluation/guanzero-468071-development-mixed-champion.json)、[reason完整报告](evaluation/guanzero-468071-development-mixed-reason.json)、[Clint停止进度](evaluation/guanzero-468071-clint-stopped-progress.json)保留原字节。冠军为017/accept330/af2a683纯网络，reason为96a2aa4冻结伴随的真实v2/50秒推断搜索；这是开发评测，不是独立验收或平板性能证据。实际reason统计：
+
+```json
+{
+  "decisions": 21223,
+  "forced": 6404,
+  "baseOnly": 10811,
+  "midgame": 2679,
+  "endgame": 1329,
+  "minWorldsFallback": 4,
+  "budgetFallback": 2,
+  "knownCardsFallback": 0,
+  "changedFromChampion": 685,
+  "inferences": 1167169,
+  "searchMs": 1795717.3247999924,
+  "solverDeadlineCapped": 2,
+  "maxSearchMs": 50005.043699999806,
+  "searchesOver3s": 79,
+  "searchesOver10s": 26,
+  "searchesOver30s": 6
+}
+```
+
+同一完整ONNX SHA `1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143`贯通计划、两份完成报告、Release归档027和准备/发布；未重新读取latest换权重。Chrome WASM16局面49数值最大绝对误差7.152557373046875e-7、动作不一致0；Node448通过/25跳过、相关Python9项、构建和本地四项菜单/四席9001默认通过。网页实际部署以[证据](evaluation/web-model-027.json)为准；下一20点批次起reason100对/200场，训练原配置与周三10点截止不变。

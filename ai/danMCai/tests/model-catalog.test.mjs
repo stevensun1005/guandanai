@@ -76,7 +76,7 @@ test('the menu offers exactly Clint, the newest GuanZero, the current champion a
   assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
   assert.equal(botModelName('017'), 'danMCai-v000855042');
   assert.equal(botModelName('9001'), 'danMCai-reason-v000855042');
-  assert.equal(botModelName(generations[0]), 'guanzero-adp-io48-385979');
+  assert.match(botModelName(generations[0]), /^guanzero-[a-z0-9-]+-\d+$/);
   assert.equal(botChoiceId('006'), '9001');
   assert.equal(botModelId('006'), '006');
   assert.equal(botChoiceId(CLINT_RULE_ID), CLINT_RULE_ID);

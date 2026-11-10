@@ -113,7 +113,7 @@ node ai/guanzero/training/development-suite.mjs --run=C:/guandan-sampler/work/gu
 
 **最新v4：`champion-reason-v4`。** 原槽与`plan.pairs=250`不变，`opponents=["champion","reason"]`，`opponentPairs={champion:250,reason:100}`；reason自己的报告是100对/200场及前100个种子，冠军250对/500场。reason策略仍`clint-champion-reason-v2`、50秒推理/60秒出牌/10秒回退预留。新批不冻结或执行Clint。运行外launcher必须指向新独立冻结检出与v4；训练/旧评测源码不更新。
 
-**468071本批退休修订。** 所有者叫停Clint时已有8场，保留其6胜/1负/1平部分进度。原v3计划、冠军500场与reason50场报告不改写；单独`opponent-retirement.json`绑定原计划SHA、模型SHA和两组原始报告SHA，明确只移除Clint要求。该一次性修订只适用于468071/index5132，不是任意批次缺报告都能发布；被整批取消的427033仍不可发布。reason扩为200场适用于新的v4批次；当前批若另获补测指令，应另行登记并保留原50场证据，不能把50场标成200场。
+**468071本批退休修订。** 所有者叫停Clint时已有8场，保留其6胜/1负/1平部分进度。原v3计划、冠军500场与reason50场报告不改写；单独`opponent-retirement.json`绑定原计划SHA、模型SHA和两组原始报告SHA，明确只移除Clint要求。该一次性修订只适用于468071/index5132，不是任意批次缺报告都能发布；被整批取消的427033仍不可发布。reason扩为200场适用于新的v4批次；所有者随后明确确认从下一批起200场，本批保留原50场发布，不能把50场标成200场。
 
 **以下v3与v1/v2均为历史协议**，其Clint策略、场数和原始身份按登记时保留。
 

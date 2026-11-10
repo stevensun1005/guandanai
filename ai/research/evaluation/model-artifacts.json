@@ -3920,6 +3920,18 @@
           "step": 385979,
           "registeredAt": "2026-11-09T13:29:15.336Z"
         }
+      },
+      {
+        "id": "027",
+        "sha256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-027/bot-027.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000468071",
+          "status": "experimental-not-heldout-accepted",
+          "step": 468071,
+          "registeredAt": "2026-11-10T14:21:25.781Z"
+        }
       }
     ]
   },
