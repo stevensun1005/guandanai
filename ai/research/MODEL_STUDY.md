@@ -3019,3 +3019,5 @@ reason组实际调用网页桌面策略的公开信息推断和搜索，冻结�
 ```
 
 同一完整ONNX SHA `1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143`贯通计划、两份完成报告、Release归档027和准备/发布；未重新读取latest换权重。Chrome WASM16局面49数值最大绝对误差7.152557373046875e-7、动作不一致0；Node448通过/25跳过、相关Python9项、构建和本地四项菜单/四席9001默认通过。网页实际部署以[证据](evaluation/web-model-027.json)为准；下一20点批次起reason100对/200场，训练原配置与周三10点截止不变。
+
+468071实际部署确认：完整[构建、浏览器检查与Pages部署](https://github.com/stevensun1005/guandanai/actions/runs/42835193170)成功；线上Chrome实见 `guanzero-adp-io48-468071`、四项菜单和四席9001默认。公网bot-027.onnx为6,346,014字节，完整SHA `1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143` 与评测冻结模型一致；Git中的原计划、两份完整报告、Clint部分进度和退休修订逐字节SHA复核一致。原配置/截止SHA未变。下一批20点开始冠军500/reason200，无Clint评测；原50场成绩不重命名成200场。

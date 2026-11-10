@@ -553,5 +553,51 @@
   "reportArchives": [
     "ai/research/evaluation/guanzero-468071-development-mixed-champion.json",
     "ai/research/evaluation/guanzero-468071-development-mixed-reason.json"
-  ]
+  ],
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/42835193170",
+    "commit": "93811b537b7f7115af113adc4485b7b552edb343",
+    "verifiedAt": "2026-11-10T14:44:08.989Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-027.onnx",
+    "publicSHA256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+    "bytes": 6346014,
+    "model": "027",
+    "version": "model-000000468071",
+    "step": 468071,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "027",
+          "guanzero-adp-io48-468071"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "9001",
+          "danMCai-reason-v000855042"
+        ]
+      ],
+      "defaults": [
+        "9001",
+        "9001",
+        "9001",
+        "9001"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-468071-plan.json",
+      "ai/research/evaluation/guanzero-468071-development-mixed-champion.json",
+      "ai/research/evaluation/guanzero-468071-development-mixed-reason.json",
+      "ai/research/evaluation/guanzero-468071-clint-stopped-progress.json",
+      "ai/research/evaluation/guanzero-468071-opponent-retirement.json"
+    ],
+    "trainingConfigAndWindowUnchanged": true
+  }
 }

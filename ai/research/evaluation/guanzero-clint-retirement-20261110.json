@@ -53,5 +53,11 @@
     },
     "sourceRoot": "C:/guandan-sampler/work/guanzero-champion-reason200-runtime",
     "nextSlot": "2026-11-10T20:00:00-05:00"
+  },
+  "delivery": {
+    "currentScopeOwnerConfirmed": "next-batch-only reason200; current500/50",
+    "model027Deployment": "ai/research/evaluation/web-model-027.json",
+    "protocolWorkflow": "https://github.com/stevensun1005/guandanai/actions/runs/42832449125",
+    "status": "success"
   }
 }
