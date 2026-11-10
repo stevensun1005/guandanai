@@ -306,8 +306,11 @@ function resultsFor(stage, run, state) {
       const file = readJSON(join(dir, 'report.json'));
       // reason-match-eval.mjs keeps the numbers under `summary`; a run ended by its STOP file has
       // status "stopped" and is a partial result, short of the preregistered size.
-      const report = file?.summary || file;
       const stopped = file?.status === 'stopped';
+      // A resumed run keeps the earlier stop's report.json until it finishes; while progress.json
+      // says it is running, that report is stale and the live tally is shown instead.
+      const resumed = readJSON(join(dir, 'progress.json'))?.status === 'running';
+      const report = resumed ? null : file?.summary || file;
       const pct = (x) => (x == null ? '—' : `${(x * 100).toFixed(1)}%`);
       if (report) {
         const ci = report.confidence95?.matchScore;

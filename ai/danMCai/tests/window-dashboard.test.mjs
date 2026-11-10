@@ -500,6 +500,17 @@ test('a stopped whole-match evaluation shows its partial result and says it is s
     assert.match(r.rows[2][1], /79\.2% \[72\.1%, 85\.4%\]/);
     assert.match(r.verdict.text, /仅 60 \/ 预登记 250 副/);
     assert.equal(r.verdict.tone, 'warn');
+    // Resumed: the stale stopped report gives way to the live tally from pairs.jsonl.
+    writeFileSync(join(run, 'eval', 'progress.json'), JSON.stringify({ status: 'running' }));
+    const match = { focalTeam: 0, focalResult: 'win', history: [{ team: 0 }] };
+    writeFileSync(join(run, 'eval', 'pairs.jsonl'), JSON.stringify({ matches: [match] }) + '\n');
+    const live = snapshot(run, config, {
+      now: Date.parse('2029-01-01T02:00:00Z'),
+      psText: '',
+      machine: false,
+    }).stages[0].results[0];
+    assert.match(live.heading, /实时/);
+    assert.deepEqual(live.rows[0], ['已完成场数', '1 / 500']);
   } finally {
     rmSync(run, { recursive: true, force: true });
   }
