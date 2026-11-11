@@ -5488,6 +5488,12 @@
       "originalStatus": "blocked-no-training-mutation",
       "recoveryEvidence": "ai/research/evaluation/guanzero-recovery-20261110.json",
       "resolvedAt": "2026-11-11T01:56:23.334747+00:00"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-interruption-20261111.json",
+      "observedAt": "2026-11-11T23:21:24.993Z",
+      "sha256": "e5eee75207a9341cc4d5db46a62a5499e6b9f5fb8b05da7a8be7b771edc26e19",
+      "classification": "interrupted-before-authorized-deadline;not-normal-final;no-retroactive-slot"
     }
   ],
   "guanzeroRecoveries": [

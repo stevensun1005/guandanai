@@ -1,0 +1,289 @@
+{
+  "observedAt": "2026-11-11T23:21:24.993Z",
+  "classification": "interrupted-before-authorized-deadline;not-normal-final;no-retroactive-slot",
+  "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+  "trainingCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "plannedEnd": "2026-11-11T15:00:00.000Z",
+  "lastRecordedLearner": {
+    "step": 491454,
+    "usedSamples": 1572652800,
+    "loss": 3.267821018695831,
+    "updatesPerSecond": 0.9259706753542705,
+    "device": "cuda",
+    "deviceName": "NVIDIA GeForce RTX 4070",
+    "torch": "2.11.0+cu128",
+    "precision": "FP32",
+    "objective": "adp",
+    "updatedAt": 1794382150.692566,
+    "error": null,
+    "pid": 85000,
+    "indexedShards": 3,
+    "pauseSampling": false
+  },
+  "lastWatchdog": {
+    "pid": 85780,
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+    "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+    "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "plannedEnd": "2026-11-11T15:00:00.000Z",
+    "restarts": 1,
+    "phase": "healthy",
+    "step": 491453,
+    "supervisorPid": 44232,
+    "updatedAt": "2026-11-11T07:29:08.862Z",
+    "error": null,
+    "resumedFromStep": 472527,
+    "lastRestartAt": "2026-11-11T01:48:23.257Z"
+  },
+  "checkpoint": {
+    "step": 491454,
+    "usedSamples": 1572652800,
+    "modelTensors": 16,
+    "optimizerStateEntries": 16,
+    "consumedCursorEntries": 6
+  },
+  "snapshots": [
+    {
+      "source": "learner/state.pt",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/state.pt",
+      "sha256": "d8149203103fd88780780320425cdca8bad3b93c950ed811137168c8c16e7828",
+      "bytes": 12692508,
+      "modifiedAt": "2026-11-11T07:29:10.395Z"
+    },
+    {
+      "source": "learner/status.json",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/learner-status.json",
+      "sha256": "39a433b56d9d7c7c3dd654c79aa5d954d68e49b969a64ee663872063b7eff83b",
+      "bytes": 385,
+      "modifiedAt": "2026-11-11T07:29:10.692Z"
+    },
+    {
+      "source": "models/latest.json",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/latest.json",
+      "sha256": "79754b87b02f5f3e74f093dd571fe1af5e091f01a1ae352dd692c1ddaacebbc7",
+      "bytes": 98,
+      "modifiedAt": "2026-11-11T07:28:21.831Z"
+    },
+    {
+      "source": "models/model-000000491408.onnx",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/model-000000491408.onnx",
+      "sha256": "4f52ee5e530dd5be74e09091b49ade3d0474995a3d9724e876a1a86ec16fabee",
+      "bytes": 6346014,
+      "modifiedAt": "2026-11-11T07:28:21.806Z"
+    },
+    {
+      "source": "config.json",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/config.json",
+      "sha256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "bytes": 13625,
+      "modifiedAt": "2026-11-06T03:11:40.255Z"
+    },
+    {
+      "source": "window.json",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/window.json",
+      "sha256": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6",
+      "bytes": 493,
+      "modifiedAt": "2026-11-07T13:59:51.643Z"
+    },
+    {
+      "source": "supervisor.lock",
+      "snapshot": "C:/guandan-sampler/work/guanzero/incidents/20261111-reboot-interruption/supervisor.lock",
+      "sha256": "7b4dd4169bf9365a3124ede765d756e1120b8ccb754be033405730c2f66b87c5",
+      "bytes": 13,
+      "modifiedAt": "2026-11-11T01:48:23.316Z"
+    }
+  ],
+  "windowsEvents": [
+    {
+      "timeUTC": "2026-11-11T07:32:38.7786767Z",
+      "Id": 6005,
+      "ProviderName": "EventLog"
+    },
+    {
+      "timeUTC": "2026-11-11T07:32:05.3307875Z",
+      "Id": 1074,
+      "ProviderName": "User32"
+    },
+    {
+      "timeUTC": "2026-11-11T07:32:05.4632373Z",
+      "Id": 6006,
+      "ProviderName": "EventLog"
+    },
+    {
+      "timeUTC": "2026-11-11T07:32:02.2921755Z",
+      "Id": 6005,
+      "ProviderName": "EventLog"
+    },
+    {
+      "timeUTC": "2026-11-11T07:31:21.8219936Z",
+      "Id": 1074,
+      "ProviderName": "User32"
+    },
+    {
+      "timeUTC": "2026-11-11T07:31:22.0572786Z",
+      "Id": 6006,
+      "ProviderName": "EventLog"
+    },
+    {
+      "timeUTC": "2026-11-11T07:31:00.6661406Z",
+      "Id": 6005,
+      "ProviderName": "EventLog"
+    },
+    {
+      "timeUTC": "2026-11-11T07:30:17.5219821Z",
+      "Id": 6006,
+      "ProviderName": "EventLog"
+    }
+  ],
+  "observedLiveTrainingProcesses": 0,
+  "missedSlots": [
+    {
+      "index": 5133,
+      "reason": "previous Nov10 stop; historical"
+    },
+    {
+      "index": 5134,
+      "due": "2026-11-11T13:00:00Z",
+      "registered": false
+    },
+    {
+      "index": 5150,
+      "due": "2026-11-11T15:00:00Z",
+      "registered": false
+    }
+  ],
+  "registrationGuard": "Missed freeze window; do not backfill with a newer export",
+  "finalExportAvailable": false,
+  "lastAvailableExport": {
+    "file": "model-000000491408.onnx",
+    "step": 491408,
+    "sha256": "4f52ee5e530dd5be74e09091b49ade3d0474995a3d9724e876a1a86ec16fabee",
+    "status": "complete-file-but-not-normal-window-final-and-not-evaluated"
+  },
+  "website": {
+    "archiveId": "028",
+    "model": "guanzero-adp-io48-475588",
+    "sha256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+    "evidence": "ai/research/evaluation/web-model-028.json",
+    "unchanged": true,
+    "currentPublicVerification": {
+      "verifiedAt": "2026-11-11T23:24:49.708Z",
+      "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-028.onnx",
+      "publicSHA256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+      "bytes": 6346014,
+      "model": "028",
+      "version": "model-000000475588",
+      "step": 475588
+    },
+    "currentLiveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "028",
+          "guanzero-adp-io48-475588"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "9001",
+          "danMCai-reason-v000855042"
+        ]
+      ],
+      "defaults": [
+        "9001",
+        "9001",
+        "9001",
+        "9001"
+      ]
+    }
+  },
+  "actions": {
+    "trainingRestarted": false,
+    "configWindowOptimizerCursorsSTOPChanged": false,
+    "staleLocksRemoved": false,
+    "newSuitesRegistered": false,
+    "newReleaseUploaded": false
+  },
+  "nextAction": "Owner decision required for a separately registered post-window evaluation of last available491408; no automatic continuation or backfill",
+  "windowsPlannedUpdateRestart": {
+    "process": "C:/WINDOWS/servicing/TrustedInstaller.exe",
+    "reasonCode": "0x80020003",
+    "observedUTC": [
+      "2026-11-11T07:31:21.8219936Z",
+      "2026-11-11T07:32:05.3307875Z"
+    ],
+    "interpretation": "Training exit and planned OS-update reboots are adjacent observations; no new learner error or STOP is recorded, exact initial shutdown cause not proven."
+  },
+  "dashboard": {
+    "pid": 30468,
+    "sourceCommit": "1221dea2a94c9ff74790c36c6d705d5e2ce6ba30",
+    "url": "http://127.0.0.1:8770",
+    "restartedPresentationOnly": true,
+    "api": {
+      "counts": {
+        "queued": 1,
+        "running": 0,
+        "done": 14,
+        "failed": 2,
+        "skipped": 0,
+        "stopped": 2
+      },
+      "incident": {
+        "key": "reboot-interruption-20261111",
+        "ids": [
+          "reboot-interruption-20261111"
+        ],
+        "title": "系统重启中断与最终取样漏测核查",
+        "desc": "02:29记录停止，Windows更新重启；当前无训练进程，最后检查点491454/导出491408。已过10点，5134/5150未登记，不回填。028仍为已验证网页版本。",
+        "kind": "engineering",
+        "after": null,
+        "rule": "异常记录，不作棋力结果",
+        "dev": true,
+        "ruleLabel": "开发检查",
+        "state": "failed",
+        "stateText": "失败",
+        "reason": "退出码 1",
+        "start": 1794439284995,
+        "end": 1794439284995,
+        "rc": 1,
+        "warning": null,
+        "startText": "18:21 美东",
+        "endText": "18:21 美东",
+        "seconds": 0,
+        "durationText": "0 分 0 秒",
+        "progress": {
+          "fraction": null,
+          "text": null,
+          "eta": null,
+          "cap": null,
+          "etaText": null
+        },
+        "processAlive": null,
+        "results": [
+          {
+            "heading": "结果",
+            "rows": [
+              [
+                "结果文件",
+                "未找到（—）"
+              ]
+            ],
+            "rule": "异常记录，不作棋力结果"
+          }
+        ]
+      },
+      "trainer": []
+    }
+  },
+  "automation": {
+    "id": "guanzero-8",
+    "status": "ACTIVE",
+    "promptUpdated": true,
+    "phase": "await-owner-decision;no-automatic-training-evaluation-publication"
+  }
+}
