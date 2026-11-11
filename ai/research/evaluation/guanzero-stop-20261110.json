@@ -58,5 +58,15 @@
     "defaultChoice": "9001"
   },
   "correction": "Earlier Nov10 delivery said training continued without a fresh process check; logs now establish it had already stopped09:31. Original model027 evaluation/deployment evidence remains valid.",
-  "proposedRecovery": "Preserve incident/STOP/status evidence, verify no duplicate processes and checkpoint/optimizer/cursors, diagnose Windows atomic-write access, then resume same checkpoint/runtime only within original deadline if explicit exception to no-STOP-mutation instruction is authorized; no deadline extension."
+  "proposedRecovery": "Preserve incident/STOP/status evidence, verify no duplicate processes and checkpoint/optimizer/cursors, diagnose Windows atomic-write access, then resume same checkpoint/runtime only within original deadline if explicit exception to no-STOP-mutation instruction is authorized; no deadline extension.",
+  "dashboardCorrection": {
+    "historicalStatusLabel": "last record, not live",
+    "targetedTests": {
+      "total": 35,
+      "passed": 34,
+      "skipped": 1,
+      "failed": 0
+    },
+    "trainingOrEvaluationSourceChanged": false
+  }
 }

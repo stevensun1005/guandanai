@@ -791,3 +791,36 @@ test('unified dashboard reads actual learner progress and the training STOP with
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('failed learner status is historical even if its old PID is still alive', () => {
+  const run = mkdtempSync(join(tmpdir(), 'guanzero-stale-rate-'));
+  try {
+    mkdirSync(join(run, 'learner'), { recursive: true });
+    writeFileSync(
+      join(run, 'window.json'),
+      JSON.stringify({
+        startedAt: new Date(Date.now() - 1000).toISOString(),
+        plannedEnd: new Date(Date.now() + 3600000).toISOString(),
+      }),
+    );
+    writeFileSync(
+      join(run, 'learner/status.json'),
+      JSON.stringify({
+        pid: process.pid,
+        step: 472527,
+        usedSamples: 1,
+        indexedShards: 4,
+        pauseSampling: false,
+        updatesPerSecond: 0.95,
+        updatedAt: Date.now() / 1000,
+        error: 'WinError5',
+      }),
+    );
+    const [card] = guanzeroCards(run, Date.now());
+    assert.equal(card.state, 'failed');
+    assert.match(card.progress.text, /最后记录（非实时）/);
+    assert.match(card.results[0].rows.find((r) => r[0] === '学习速度')[1], /当前未运行/);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});

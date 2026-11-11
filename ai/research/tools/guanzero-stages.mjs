@@ -27,6 +27,7 @@ export function guanzeroCards(root, now) {
     const start = Date.parse(window.startedAt),
       end = Date.parse(window.plannedEnd);
     const running = alive(status.pid),
+      active = running && !status.error,
       done = now >= end && !running && !existsSync(join(root, 'supervisor.lock'));
     cards.push({
       key: 'guanzero-learning',
@@ -42,14 +43,19 @@ export function guanzeroCards(root, now) {
       processAlive: running,
       progress: {
         fraction: Math.max(0, Math.min(1, (now - start) / (end - start))),
-        text: `已更新 ${status.step} 次；${status.usedSamples} 行；索引分片 ${status.indexedShards}；采样${status.pauseSampling ? '暂停' : '运行'}`,
+        text: `${active ? '' : '最后记录（非实时）：'}已更新 ${status.step} 次；${status.usedSamples} 行；索引分片 ${status.indexedShards}；${active ? '采样' : '当时采样'}${status.pauseSampling ? '暂停' : '运行'}`,
         eta: end,
         etaText: null,
       },
       results: block([
         ['训练版本', String(status.step)],
         ['设备', status.deviceName || status.device],
-        ['学习速度', `${status.updatesPerSecond ?? '—'} 次更新/秒`],
+        [
+          '学习速度',
+          active
+            ? `${status.updatesPerSecond ?? '—'} 次更新/秒`
+            : `当前未运行（最后记录 ${status.updatesPerSecond ?? '—'} 次更新/秒）`,
+        ],
         ['ADP损失（诊断）', String(status.loss ?? '—')],
         ['最后状态', new Date(status.updatedAt * 1000).toISOString()],
       ]),

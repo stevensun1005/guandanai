@@ -158,3 +158,5 @@ v2只能通过新的冻结伴随检出启用；不向ce55b74、af2a683、28b1317
 5. **下一槽登记**照旧在发布检出运行 `register-window-suite.mjs`。核对新 `plan.json`：`opponentPanel` 为 `clint-champion-reason-v2`、`reason.protocol` 相同、`reason.budget` 为 `{midgameMs:50000,endgameMs:50000,solverMs:3000,solverTable:300000}`、`reason.move` 存在、`evaluationRuntime.commit` = `<X>`、`baselineCommit` = af2a683。不符就停下保留现场，不改计划补救。
 6. **启动评测**：确认没有存活的旧伴随PID后，在新伴随目录运行 `node ai/guanzero/training/development-suite.mjs --run=<活动运行> --champion-root=<发布检出> --baseline-root=<af2a683冻结检出> --once`。Clint与普通冠军两组仍由af2a683计算，只有reason组按v2运行。
 7. **记录**：新增接入证据（旧／新launcher SHA-256、`<X>`、首个v2批次ID与时间、新伴随测试结果）；v1批次报告、计划和已发布记录保持原样，表格按协议分别标注。以后再改预算须登记v3，不就地修改v2。
+
+运行状态读数：学习器退出或状态包含错误时，面板将计数、采样标签及速度标为“最后记录（非实时）”，学习速度显示“当前未运行”。最后上报值不是当前训练吞吐；不得仅据配置/窗口SHA未变就认定进程存活。
