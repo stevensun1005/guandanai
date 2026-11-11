@@ -1,0 +1,137 @@
+{
+  "observedAt": "2026-11-11T01:56:23.334747+00:00",
+  "authority": "Owner explicit instruction: 现在启动",
+  "originalIncident": "ai/research/evaluation/guanzero-stop-20261110.json",
+  "recoveryPlan": {
+    "authorizedAt": "2026-11-11T01:47:42.281226+00:00",
+    "authority": "owner explicit instruction: 现在启动",
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+    "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+    "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "checkpointStep": 472527,
+    "usedSamples": 1512086400,
+    "optimizerStateCount": 16,
+    "consumedCount": 5,
+    "preservedFilesSHA256": {
+      "STOP": "0f8dac00c2ba80704154c7d279d12ee8ed94df067b0deda540ca7f33917b3270",
+      "learner-status.json": "fe3ff968a672e9205af7a273b1d9585b11f321f54e963cb4b35ff1ac6b100a48",
+      "inference-status.json": "c6223782e6a91ae7f245d4cfd96664c64761b6455356661ec75daf24332076bc",
+      "state.pt": "f79aaa1bfd37d63108211658a8c606fd9adf69cd05204e68709d652fc76c7da6",
+      "config.json": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "window.json": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6",
+      "watchdog-status.json": "aa0f5dd260ec5014c4e622a67b6a21391d6642b194a33f0a6dea1c0ba89fe64e"
+    },
+    "backupDirectory": "C:\\guandan-sampler\\work\\guanzero\\recovery-io48\\20261111T014742Z",
+    "atomicRenameProbe": {
+      "replacements": 200,
+      "passed": true
+    },
+    "plannedEnd": "2026-11-11T15:00:00.000Z",
+    "changesAuthorized": [
+      "archive and clear automatic STOP",
+      "archive and clear learner error state for existing watchdog"
+    ],
+    "configWindowUnchanged": {
+      "config.json": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "window.json": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6"
+    }
+  },
+  "guardReset": {
+    "guardsClearedAt": "2026-11-11T01:48:19.802478+00:00",
+    "originalStopSHA256": "0f8dac00c2ba80704154c7d279d12ee8ed94df067b0deda540ca7f33917b3270",
+    "originalErrorStatusSHA256": "fe3ff968a672e9205af7a273b1d9585b11f321f54e963cb4b35ff1ac6b100a48",
+    "checkpointUnchanged": true,
+    "deadlineUnchanged": "2026-11-11T15:00:00.000Z"
+  },
+  "method": "existing single-instance GuanZero-io48-Recovery scheduled task; no new duplicate trainer",
+  "processTopology": {
+    "supervisor": 1,
+    "samplingActors": 32,
+    "learner": 1,
+    "inferenceServer": 1,
+    "pythonVenvRedirectors": 2
+  },
+  "proofA": {
+    "observedAt": "2026-11-11T01:51:45.748Z",
+    "STOP": false,
+    "watchdog": {
+      "pid": 85780,
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+      "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+      "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+      "plannedEnd": "2026-11-11T15:00:00.000Z",
+      "restarts": 1,
+      "phase": "healthy",
+      "step": 472697,
+      "supervisorPid": 44232,
+      "updatedAt": "2026-11-11T01:51:33.941Z",
+      "error": null,
+      "resumedFromStep": 472527,
+      "lastRestartAt": "2026-11-11T01:48:23.257Z"
+    },
+    "learner": {
+      "step": 472707,
+      "pid": 85000,
+      "error": null,
+      "updatedAt": 1794361905.268985,
+      "updatesPerSecond": 0.9235414848084076,
+      "usedSamples": 1512662400,
+      "indexedShards": 2,
+      "pauseSampling": false
+    },
+    "inference": {
+      "pid": 83960,
+      "error": null,
+      "updatedAt": 1794361905.2794197,
+      "requests": 580747
+    }
+  },
+  "proofB": {
+    "observedAt": "2026-11-11T01:53:09.180Z",
+    "STOP": false,
+    "watchdog": {
+      "pid": 85780,
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+      "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+      "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+      "plannedEnd": "2026-11-11T15:00:00.000Z",
+      "restarts": 1,
+      "phase": "healthy",
+      "step": 472771,
+      "supervisorPid": 44232,
+      "updatedAt": "2026-11-11T01:52:53.406Z",
+      "error": null,
+      "resumedFromStep": 472527,
+      "lastRestartAt": "2026-11-11T01:48:23.257Z"
+    },
+    "learner": {
+      "step": 472787,
+      "pid": 85000,
+      "error": null,
+      "updatedAt": 1794361989.1335797,
+      "updatesPerSecond": 0.9326824519876401,
+      "usedSamples": 1512918400,
+      "indexedShards": 1,
+      "pauseSampling": false
+    },
+    "inference": {
+      "pid": 83960,
+      "error": null,
+      "updatedAt": 1794361988.833383,
+      "requests": 833853
+    }
+  },
+  "measuredProgress": {
+    "seconds": 83.86459469795227,
+    "updates": 80,
+    "updatesPerSecond": 0.95391863858794
+  },
+  "trackedTrainingSourceUnchanged": true,
+  "originalCheckpointPreserved": true,
+  "liveCheckpointWriteObserved": "2026-11-10T20:51:45.193-05:00",
+  "newEvaluationStarted": false,
+  "missedSlot5133Backfilled": false,
+  "deadlineExtended": false,
+  "originalWindowsWriteLockCause": "not established; atomic rename preflight200 succeeded and sustained real training now observed",
+  "permanentRootCauseFixClaimed": false
+}

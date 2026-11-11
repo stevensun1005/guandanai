@@ -5352,7 +5352,20 @@
       "incident": "guanzero-unplanned-stop-20261110",
       "observedAt": "2026-11-11T01:09:39.270402+00:00",
       "slot": 5133,
-      "status": "blocked-no-training-mutation"
+      "status": "recovered-owner-authorized",
+      "originalStatus": "blocked-no-training-mutation",
+      "recoveryEvidence": "ai/research/evaluation/guanzero-recovery-20261110.json",
+      "resolvedAt": "2026-11-11T01:56:23.334747+00:00"
+    }
+  ],
+  "guanzeroRecoveries": [
+    {
+      "file": "ai/research/evaluation/guanzero-recovery-20261110.json",
+      "observedAt": "2026-11-11T01:56:23.334747+00:00",
+      "restoredStep": 472527,
+      "verifiedStep": 472787,
+      "status": "owner-authorized-healthy",
+      "deadline": "2026-11-11T15:00:00.000Z"
     }
   ]
 }
