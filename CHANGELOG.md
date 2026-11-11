@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2026-11-10 · 第五窗口 1,295 维学习器与多槽喂料
+
+- 持续训练器新增 `extrasMode: "public-belief-history"`（215 维 `public-belief` extras＋1,080 维 GuanZero `history()` 计数编码出牌记录，只借编码；只收 schema 2 分片，回放分存 float32／int8、取批拼成 1,295 维），`value_net.EXTRA_WIDTHS` 登记 1,295；已消费分片的删除列表加 `.h.i8`、`.m.u8`。53／215 维与无 extras 路径不变。
+- `wrap_initial.py` 新增 `--width=1295`、`--expect-sha` 与 `--check-rows` 数值一致检查（torch 与 onnxruntime）。新增 `corpus-feed.py`：多个独立推理采样槽的已完成块按 `s{槽}-{分片}` 硬链接喂给学习器，块号 mod 10 = 9 留出，`feed.jsonl` 记录每块。测试 `history1295_learner_test.py`、`corpus_feed_test.py`。说明见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#1295-维额外输入public-belief-history与多槽喂料第五窗口新增)。
+- 只是工具与测试，没有新的训练结果或验收；网页冠军 017、默认 danMCai-reason、菜单与出牌评价不变。
+
 ## 2026-11-10 · GuanZero按授权从472527恢复
 
 - 所有者明确要求启动后，保全STOP/错误/完整检查点，原配置与窗口SHA不变，由既有单实例计划任务恢复。

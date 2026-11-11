@@ -90,8 +90,12 @@ class ValueNet(torch.nn.Module):
 
 
 # Registered widths of the per-action extras input: 53 public policy extras (policy-features.mjs),
-# or those 53 followed by 162 belief-v1 marginals (3 hidden seats x 54 faces, sampler.mjs).
-EXTRA_WIDTHS = (53, 215)
+# or those 53 followed by 162 belief-v1 marginals (3 hidden seats x 54 faces, sampler.mjs), or
+# those 215 followed by 1,080 history inputs (GuanZero's history(): the last 20 public plays x 54
+# faces, count-encoded 0..2 per face with the pass marker -1; ai/guanzero/training/history.mjs).
+BELIEF_EXTRAS = 215
+HISTORY_FEATURES = 1080
+EXTRA_WIDTHS = (53, BELIEF_EXTRAS, BELIEF_EXTRAS + HISTORY_FEATURES)
 
 
 def check_extra_width(width):

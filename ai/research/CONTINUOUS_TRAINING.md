@@ -252,6 +252,15 @@ node ai/danMCai/training/continuous/explore-cost.mjs --pairs=150 --exploration='
 - 输出按块：`--block-rounds`（默认 100）副为一块，整块完成后才从 `.tmp-` 改名为 `blocks/bNNNNNN/`（一个训练分片），并写 `bNNNNNN.done.json`（种子、行数、每个文件 SHA-256、耗时、峰值内存）；`STOP` 文件、信号、`--deadline`/`--minutes` 或 `--max-gb` 时在下一副前停止，只丢弃未完成的块。`--summarize=1` 重写 `manifest.json`（各块、总量、每进程每小时副数与行数）。`--policy=raw` 关闭搜索，作为同一批牌局的无推理吞吐对照。
 - 测试 `ai/danMCai/tests/search-actor.test.mjs`：关闭探索时一副牌的全部决策与 `midgame-search --mode=search --opponents=search` 相同；同一决策的行与快速采样进程逐字节相同；块写入、停止与命令行（需冠军 017 与推断网络 v1，缺失则跳过）。
 
+## 1,295 维额外输入（`public-belief-history`）与多槽喂料（第五窗口新增）
+
+2026-11-10 为第五窗口 L1（研究运行名 017h）新增，只是工具与测试，不是训练结果或验收；网页冠军 017、默认 9001、菜单与出牌评价不变。
+
+- `extrasMode: "public-belief-history"`：网络 extras 输入 1,295 维 = 215 维 `public-belief`（53 公开＋162 推断边缘）＋ 1,080 维出牌记录（GuanZero `history()` 编码：最近 20 手公开出牌 × 54 张，每张计数 0–2，过牌为 −1；只借编码，不用 GuanZero 的模型、数据或对局）。只接受 `schema: 2`、`extraFeatures: 215`、`historyFeatures: 1080` 的分片（`search-actor.mjs --history=1`）；schema 1 或缺出牌记录的分片直接报错，从不补零。回放区分别存 215 维 float32 与 1,080 维 int8（每行约 2.53 KB），取批时拼成 1,295 维 float32。与 `public-belief` 一样使用 `extrasLearningRate` 独立 Adam 组，可配 `trunkFrozen`；导出仍为 `export_onnx_extras`（`extras` 输入宽 1,295）。已消费分片删除时同时删 `.h.i8`、`.m.u8`。53 维、215 维与无 extras 的路径不变（同配置同种子训练结果逐位相同）。
+- `wrap_initial.py --width=1295`（另有 53、215）给冠军加零投影；`--expect-sha` 核对冠军指纹，`--check-rows=<分片.json>[,...] --check-n=1000` 在真实分片行（出牌记录列随机或取自 schema 2 分片）上比较包装前后的数值（torch 与 onnxruntime，最大差 ≤ `--tolerance`，默认 1e-6，超出则退出码 1），结果写入 `--check-out`。
+- `ai/danMCai/training/continuous/corpus-feed.py`：把多个独立 `search-actor` 槽（`--slots-root` 下的 `slot-<n>/`，或 `--slot=<n>=<目录>`）已完成的块喂给一个学习器运行。只处理有 `done.json` 且每个文件 SHA-256 与按清单推算的字节数都对的块；块号 mod 10 ≠ 9 时把数据文件**硬链接**为 `<run>/shards/s{槽}-{分片}.*`，最后原子写入改写过的 `s{槽}-{分片}.json`（槽号前缀避免各槽同名 `b000000` 冲突）；mod 10 = 9 的块只列入 `heldout.json`，不链接。每块在 `feed.jsonl` 记一行（也是重启状态，已记的块不再喂）；`--history=1` 时拒收 schema 1 块。从不写、改名或删除槽目录中的文件，学习器删除已消费的链接不影响原块。`--interval`（默认 60 秒）、`--stop-file`、`--deadline`、`--max-seconds`、`--once`。
+- 测试 `ai/danMCai/tests/history1295_learner_test.py`（包装数值一致、schema 2 接受与 schema 1 拒收、冻结主干 20 步只改 `extra_weight`、删除列表、53/215 回放布局；设 `DANMCAI_PARITY_CHAMPION`、`DANMCAI_PARITY_ROWS` 时另在真实冠军与分片上做 1,000 行一致检查）与 `corpus_feed_test.py`（两槽同名块全部到达、留出块、未完成块等待、学习器删除后原块 SHA 不变、重启不重复喂、STOP）。
+
 ## 种子与数据用途
 
 研究报告迄今使用的开发与留出种子都小于 1e9。持续训练的采样种子从 1,000,000,000 起，每个采样进程独占 5,000 万个；探索测量从 3,400,000,000 起；门控种子从 3,500,000,000 起，每次门控独占 10 万个。门控和监控对局都属于开发用途，不能当作留出验收。

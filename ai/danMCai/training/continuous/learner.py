@@ -16,11 +16,20 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from value_net import FEATURES, ValueNet, ValueNetExtras, export_onnx, export_onnx_extras, load_onnx_weights  # noqa: E402
+from value_net import (  # noqa: E402
+    BELIEF_EXTRAS, FEATURES, HISTORY_FEATURES, ValueNet, ValueNetExtras, export_onnx,
+    export_onnx_extras, load_onnx_weights,
+)
 
 TARGETS = 4
-# Extras width per registered mode: 53 public policy extras, plus 162 belief-v1 marginals.
-EXTRA_WIDTH = {"public": 53, "zero": 53, "public-belief": 215}
+# Extras width per registered mode: 53 public policy extras, plus 162 belief-v1 marginals, plus
+# (public-belief-history) the 1,080 count-encoded history inputs of schema-2 shards (.h.i8).
+EXTRA_WIDTH = {"public": 53, "zero": 53, "public-belief": BELIEF_EXTRAS,
+               "public-belief-history": BELIEF_EXTRAS + HISTORY_FEATURES}
+# Modes whose net input is the stored float32 extras followed by the int8 history (as float32).
+HISTORY_MODES = {"public-belief-history": HISTORY_FEATURES}
+# Every data file a shard may have; consumed shards lose all of them (with their .json last).
+SHARD_SUFFIXES = (".x.i8", ".y.f32", ".e.f32", ".h.i8", ".m.u8", ".json")
 
 
 def read_json(path, fallback=None):
@@ -51,26 +60,37 @@ def target(raw, match_weight):
 
 
 class Replay:
-    """Fixed-capacity ring of int8 features and float32 target components."""
+    """Fixed-capacity ring of int8 features and float32 target components.
 
-    def __init__(self, capacity, seed, extra_features=0):
+    Optional per-row extras: float32 ``e`` (extra_features wide) and int8 history ``h``
+    (history_features wide), stored separately; a batch returns their float32 concatenation.
+    """
+
+    def __init__(self, capacity, seed, extra_features=0, history_features=0):
+        if history_features and not extra_features:
+            raise ValueError("History replay rows need extras rows")
         self.capacity = capacity
         self.x = np.zeros((capacity, FEATURES), np.int8)
         self.y = np.zeros((capacity, TARGETS), np.float32)
         self.e = np.zeros((capacity, extra_features), np.float32) if extra_features else None
+        self.h = np.zeros((capacity, history_features), np.int8) if history_features else None
         self.size = 0
         self.cursor = 0
         self.random = np.random.default_rng(seed)
 
-    def add(self, x, y, e=None):
+    def add(self, x, y, e=None, h=None):
+        if self.e is not None and (e is None or e.shape != (len(x), self.e.shape[1]) or not np.isfinite(e).all()):
+            raise ValueError("Invalid extras replay rows")
+        if self.h is not None and (h is None or h.dtype != np.int8 or h.shape != (len(x), self.h.shape[1])):
+            raise ValueError("Invalid history replay rows")
         for start in range(0, len(x), self.capacity):
             xs, ys = x[start : start + self.capacity], y[start : start + self.capacity]
             n = len(xs)
             if self.e is not None:
-                if e is None or e.shape != (len(x), self.e.shape[1]) or not np.isfinite(e).all():
-                    raise ValueError("Invalid extras replay rows")
                 positions = (self.cursor + np.arange(n)) % self.capacity
                 self.e[positions] = e[start:start+n]
+                if self.h is not None:
+                    self.h[positions] = h[start:start+n]
             end = self.cursor + n
             if end <= self.capacity:
                 self.x[self.cursor : end], self.y[self.cursor : end] = xs, ys
@@ -83,7 +103,11 @@ class Replay:
 
     def batch(self, n):
         index = self.random.integers(0, self.size, n)
-        return (self.x[index], self.y[index], self.e[index]) if self.e is not None else (self.x[index], self.y[index])
+        if self.e is None:
+            return self.x[index], self.y[index]
+        if self.h is None:
+            return self.x[index], self.y[index], self.e[index]
+        return self.x[index], self.y[index], np.concatenate((self.e[index], self.h[index].astype(np.float32)), axis=1)
 
 
 def learner_device(name):
@@ -116,7 +140,11 @@ class Learner:
         if self.extras_mode is not None and self.extras_mode not in EXTRA_WIDTH:
             raise ValueError("Unknown extras mode")
         self.extra_width = EXTRA_WIDTH.get(self.extras_mode, 0)
-        self.replay = Replay(int(self.settings["capacity"]), int(self.settings["seed"]), self.extra_width)
+        self.history_width = HISTORY_MODES.get(self.extras_mode, 0)
+        # The stored float32 extras width (the net's extras input minus the int8 history columns).
+        self.stored_extra_width = self.extra_width - self.history_width
+        self.replay = Replay(int(self.settings["capacity"]), int(self.settings["seed"]),
+                             self.stored_extra_width, self.history_width)
         self.ingested = set()
         self.counted = set()
         self.ingested_rows = 0
@@ -140,7 +168,8 @@ class Learner:
         self.trunk_frozen = bool(self.settings.get("trunkFrozen", False))
         if self.trunk_frozen and not self.extras_mode:
             raise ValueError("trunkFrozen requires an extras mode")
-        if self.extras_mode and (self.extras_mode == "public-belief" or "extrasLearningRate" in self.settings or self.trunk_frozen):
+        if self.extras_mode and (self.extras_mode in ("public-belief", "public-belief-history")
+                                 or "extrasLearningRate" in self.settings or self.trunk_frozen):
             # Separate step sizes: the zero-initialised projection must move at all while the
             # champion trunk moves slowly (or not at all with trunkFrozen).
             if self.trunk_frozen:
@@ -185,6 +214,7 @@ class Learner:
                     "trunkFrozen": self.trunk_frozen,
                     "learningRates": [g["lr"] for g in self.optimizer.param_groups]}
                    if self.extras_mode else {}),
+                **({"historyWidth": self.history_width} if self.history_width else {}),
             }
         )
 
@@ -213,15 +243,26 @@ class Learner:
                 self.ingested.add(manifest.name)
                 continue
             if self.extras_mode:
+                width = self.stored_extra_width
+                if self.history_width and (meta.get("schema") != 2
+                                           or meta.get("historyFeatures") != self.history_width):
+                    # Never zero-fill history: a schema-1 (history-free) shard is refused.
+                    raise ValueError("History mode needs schema-2 shards with historyFeatures 1080")
                 e = np.fromfile(f"{stem}.e.f32", np.float32)
-                if meta.get("extraFeatures") != self.extra_width or e.size != rows * self.extra_width:
+                if meta.get("extraFeatures") != width or e.size != rows * width:
                     raise ValueError("Invalid extras manifest")
-                e = e.reshape(rows, self.extra_width)
+                e = e.reshape(rows, width)
                 if not np.isfinite(e).all():
                     raise ValueError("Invalid extras manifest")
                 if self.extras_mode == "zero" and np.any(e):
                     raise ValueError("Control arm received nonzero extras")
-                self.replay.add(x.reshape(rows, FEATURES), y.reshape(rows, TARGETS), e)
+                h = None
+                if self.history_width:
+                    h = np.fromfile(f"{stem}.h.i8", np.int8)
+                    if h.size != rows * self.history_width or (h.size and (h.min() < -1 or h.max() > 2)):
+                        raise ValueError("Invalid history manifest")
+                    h = h.reshape(rows, self.history_width)
+                self.replay.add(x.reshape(rows, FEATURES), y.reshape(rows, TARGETS), e, h)
             else:
                 self.replay.add(x.reshape(rows, FEATURES), y.reshape(rows, TARGETS))
             self.ingested.add(manifest.name)
@@ -237,7 +278,7 @@ class Learner:
             kept += int(meta["rows"])
             if kept > self.replay.capacity:
                 stem = manifest.with_suffix("")
-                for suffix in (".x.i8", ".y.f32", ".e.f32", ".json"):
+                for suffix in SHARD_SUFFIXES:
                     Path(f"{stem}{suffix}").unlink(missing_ok=True)
                 self.ingested.discard(manifest.name)
                 self.counted.discard(manifest.name)
