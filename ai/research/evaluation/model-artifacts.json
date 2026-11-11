@@ -5345,5 +5345,14 @@
       "partialClintSHA256": "bbdf4b5c7f3005923cb1399893d43a334d50de30ba57a19b01365b8359252700",
       "classification": "owner-authorized-retirement-preserves-original-plan-and-reports"
     }
+  ],
+  "guanzeroOperationalIncidents": [
+    {
+      "file": "ai/research/evaluation/guanzero-stop-20261110.json",
+      "incident": "guanzero-unplanned-stop-20261110",
+      "observedAt": "2026-11-11T01:09:39.270402+00:00",
+      "slot": 5133,
+      "status": "blocked-no-training-mutation"
+    }
   ]
 }

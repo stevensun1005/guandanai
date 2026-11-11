@@ -1,0 +1,62 @@
+{
+  "observedAt": "2026-11-11T01:09:39.270402+00:00",
+  "incident": "guanzero-unplanned-stop-20261110",
+  "slot": {
+    "index": 5133,
+    "dueAt": "2026-11-11T01:00:00Z",
+    "result": "registration-blocked-training-stopped-early",
+    "newEvaluationStarted": false,
+    "newReleaseCreated": false
+  },
+  "stoppedAt": "2026-11-10T14:31:05.660Z",
+  "localStoppedAt": "2026-11-10T09:31:05.660-05:00",
+  "evidence": {
+    "learnerStep": 472527,
+    "learnerUpdatedAt": 1794321058.9597304,
+    "learnerError": "[WinError 5] 拒绝访问。: 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\learner\\\\status.json.36344.tmp' -> 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\learner\\\\status.json'",
+    "supervisorEvent": "learner exited code1; shutdown wrote GuanZero local shutdown STOP; actors stopped; inference exited code1",
+    "inferenceError": "WinError5 PermissionError replacing inference/status.json",
+    "STOPText": "GuanZero local shutdown\n",
+    "STOPSHA256": "0f8dac00c2ba80704154c7d279d12ee8ed94df067b0deda540ca7f33917b3270",
+    "learnerStatusSHA256": "fe3ff968a672e9205af7a273b1d9585b11f321f54e963cb4b35ff1ac6b100a48",
+    "supervisorStdoutSHA256": "ba0d19ee80204b6cf82ec53917aa4dd6979e120fa05b952d21ed12be8c32950f",
+    "supervisorStderrSHA256": "ea16074d3295b895f15f9f7201e06e6796b5b1598926d5b35acb2dcf50d90493",
+    "fileReadOnly": false,
+    "aclObservation": "inherited permissions allow Modify; no ACL changes performed",
+    "exactLockOrACLCause": "not established"
+  },
+  "checkpoint": {
+    "step": 472527,
+    "used": 1512086400,
+    "consumedCount": 5,
+    "modelTensorCount": 16,
+    "optimizerStateCount": 16,
+    "sha256": "f79aaa1bfd37d63108211658a8c606fd9adf69cd05204e68709d652fc76c7da6"
+  },
+  "lastCompleteExport": {
+    "file": "model-000000472482.onnx",
+    "version": 472482,
+    "updatedAt": 1794321005.929892,
+    "sha256": "a5471ed9cd77ae0a0ea835b392fe8399f3ff31d012140d64aef70e0fb8f6907c"
+  },
+  "recovery": {
+    "phase": "stopped",
+    "restarts": 0,
+    "guard": "STOP and learner error prevent automatic restart",
+    "plannedEnd": "2026-11-11T15:00:00.000Z",
+    "sourceCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "6f24d319478e1acd67e848afb73f82ff98bfa1cfb62f199428f267e26c7d9bf6",
+    "trainingMutated": false,
+    "STOPRemoved": false,
+    "restarted": false
+  },
+  "webPreserved": {
+    "archive": "027",
+    "name": "guanzero-adp-io48-468071",
+    "sha256": "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143",
+    "defaultChoice": "9001"
+  },
+  "correction": "Earlier Nov10 delivery said training continued without a fresh process check; logs now establish it had already stopped09:31. Original model027 evaluation/deployment evidence remains valid.",
+  "proposedRecovery": "Preserve incident/STOP/status evidence, verify no duplicate processes and checkpoint/optimizer/cursors, diagnose Windows atomic-write access, then resume same checkpoint/runtime only within original deadline if explicit exception to no-STOP-mutation instruction is authorized; no deadline extension."
+}

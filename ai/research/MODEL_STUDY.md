@@ -3131,3 +3131,11 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 第三窗口的配方（017 近贪心快速采样、几乎全是 017 系对手）在 9.6 小时内让 017w 对 017 逐步变差，S6 在 017 席位上为负，所以第四窗口不再续训这份权重，冻结权重只在 9001 席位上接受 S6b 检验；补输入方向的重启改为从 017 加零初始化输入开始，数据和对手换成推理机器人搜索产生的语料与只针对冻结 017、只用整局得分训练的剥削者 E1。v1b 不具资格主要是同一配方在约 100 万行上过拟合，“更早推理”须先让推断网络通过真实牌局回归关，才能把推理提前到 40 张以上。
 
 **文件。**[S6 对比](evaluation/window3-20261109/results/s6-compare.json)（`a750d9d8…c614`）、[A 汇总](evaluation/window3-20261109/results/s6-A-summary.json)、[B 汇总](evaluation/window3-20261109/results/s6-B-summary.json)；[S3 退步检查 04:30](evaluation/window3-20261109/results/s3-ds-0430-summary.json)、[09:00](evaluation/window3-20261109/results/s3-ds-0900-summary.json)；[S1 汇总](evaluation/window3-20261109/results/s1-summary.json)；[S4a 数据](evaluation/window3-20261109/results/s4a-generate.json)、[S4b 训练报告](evaluation/window3-20261109/results/s4b-train-report.json)、[S4c 判定](evaluation/window3-20261109/results/s4c-gate-v1b.json)（`03c521da…a021`）；[S7 报告](evaluation/window3-20261109/results/s7-report.json)（`0c43ef0f…68f0`）与[说明](evaluation/window3-20261109/results/s7-REPORT.md)；[阶段日志](evaluation/window3-20261109/results/stages.log)；更新后的[真人面板登记](evaluation/window3-20261109/human-panel.json)（追加 S7a 修复条目，只有哈希与计数）与[所有者决定](evaluation/window3-20261109/OWNER_DECISIONS.md)；全部 SHA-256 见 [sha256.txt](evaluation/window3-20261109/sha256.txt)。提交前已用隐私检查脚本核对这些文件，没有记录号、房间号或昵称；S7a 的逐局汇总含对局号前缀，只留在本机运行目录。逐副记录、权重与私有牌谱均不提交。
+
+### GuanZero提前停止：11月10日20点槽被拦下（运行故障，不是新棋力结果）
+
+20:05检查发现本机训练已在Toronto11月10日09:31:05停止：学习器在472527更新时替换status.json遇到Windows WinError5，监督器记录learner退出1并写入“GuanZero local shutdown”STOP，随后所有采样器退出、推理服务也记录同类状态替换错误。恢复器依冻结保护停在stopped/restarts0，当前无训练或评测进程。状态文件不是只读、继承ACL允许Modify，但无法据此确定当时具体占用/权限来源，不推断是模型或硬件故障。
+
+检查点472527可读取，模型16个张量、优化器16项、5个消费游标均在，完整SHA `f79aaa1bfd37d63108211658a8c606fd9adf69cd05204e68709d652fc76c7da6`；最后完整ONNX是472482，不能冒充472527或正常窗口最终导出。本轮5133登记器因“Training stopped early”拒绝，未创建批次、未开700场、未上传权重，不用停训前导出回填20点槽。网站仍是027/468071，reason默认保持。[故障与检查点证据](evaluation/guanzero-stop-20261110.json)。
+
+**状态更正：**上午发布结果中“训练继续”的表述没有再次核验进程，实际日志表明09:31已停止；此处按实际事件更正，不影响468071原冻结评测与部署SHA。当前STOP、错误状态、配置/窗口/优化器/游标均保持原样，截止仍Nov11 10:00。周期任务明确禁止修改STOP，恢复需明确例外授权；不能把现有守护器“stopped”说成已自动恢复。

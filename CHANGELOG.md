@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2026-11-10 · GuanZero停训故障记录
+
+- 20点评测检查发现09:31因Windows状态替换WinError5停训；STOP及错误保护使恢复器未重启，5133未登记/未发布。
+- 只读核验472527检查点与最后472482导出，保全现场和原截止；更正此前“训练继续”的陈述，027网页部署与既有成绩保持有效。
+
 ## 2026-11-10 · 第四窗口推理采样进程与 GuanZero 对手座位
 
 - 新增 `ai/danMCai/training/continuous/search-actor.mjs`：四个座位都按已部署 9001 推理（21–40 张推断世界搜索、≤ 20 张精确残局，决策函数从 `midgame-search.mjs` 导入），40 张以上冠军 017 按温度 0.02 探索；以快速采样进程的 215 维 `public-belief` 分片格式和整局标签写出，每 100 副一块，`STOP` 时保留已完成的块。测试 `search-actor.test.mjs` 核对与 `midgame-search` 的决策一致和与快速采样进程的行格式一致。说明见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#推理采样进程search-actormjs第四窗口新增)。
