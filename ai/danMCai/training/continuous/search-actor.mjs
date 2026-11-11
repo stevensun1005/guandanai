@@ -36,6 +36,19 @@
  * searched (band and endgame) decisions with the search's chosen action. Differences from the fast
  * actor, stated: single rounds instead of matches; a finishing move is played without a row.
  *
+ * History (--history=1, window 5 plan section 8 item 1; default 0 writes schema-1 shards byte for
+ * byte as before): every row also gets two sidecars of the same shard, and the shard json says
+ * schema 2, historyFeatures 1080, metaFeatures 3:
+ *   bNNNNNN-000000000.h.i8  int8 [1080]: GuanZero's count-encoded history(state)
+ *                           (ai/guanzero/training/history.mjs: the last 20 public plays x 54, 0-2
+ *                           per card, -1 marker for a finished seat's turn), computed on the mover's
+ *                           public state before the action (the same state as x and e). Only the
+ *                           encoding is borrowed; no GuanZero model, data or game is used.
+ *   bNNNNNN-000000000.m.u8  uint8 [3]: round index within the block (0..blockRounds-1), band code
+ *                           (0 = cards > hi, actor network; 1 = lo..hi band search; 2 = cards <=
+ *                           endgameHi exact PIMC), cards still in the four hands at the decision.
+ * x, e and y are unchanged by --history (tested).
+ *
  * Output: deal seeds start, start+1, ... in blocks of --block-rounds (default 100). Worker w of W
  * plays blocks w, w+W, ...; a block is written to blocks/.tmp-bNNNNNN/ and renamed to
  * blocks/bNNNNNN/ (one trainer shard: bNNNNNN-000000000.{x.i8,y.f32,e.f32,json}) only when all its
@@ -50,6 +63,7 @@
  *        [--lo=21] [--hi=40] [--worlds=8] [--k=6] [--net=2] [--endgame=pimc|none] [--endgame-hi=20]
  *        [--endgame-worlds=belief|uniform] [--block-rounds=100] [--workers=1] [--max-gb=3]
  *        [--minutes=60] [--deadline=<ISO>] [--stop-file=<path>[,<path>]] [--resume=1]
+ *        [--history=0|1]
  *   node ai/danMCai/training/continuous/search-actor.mjs --summarize=1 --out=<dir>
  */
 import { spawn } from 'node:child_process';
@@ -70,6 +84,7 @@ import { candidates } from '../../../../web/src/ai/candidates.js';
 import { encodePolicyExtras } from '../../../../web/src/ai/policy-features.mjs';
 import { publicView } from '../../belief/features.mjs';
 import { beliefMarginals } from '../../belief/sampler.mjs';
+import { history as publicHistory } from '../../../guanzero/training/history.mjs';
 import {
   FOCAL_RAW_EXTRAS,
   buildProtocol,
@@ -112,6 +127,10 @@ export const ACTOR_DEFAULTS = Object.freeze({
 });
 export const POLICIES = Object.freeze(['search', 'raw']);
 export const ROWS = Object.freeze(['above', 'all']);
+/** --history=1 sidecars (window 5): GuanZero history() width and the meta bytes per row. */
+export const HISTORY_FEATURES = 1080;
+export const META_FEATURES = 3;
+export const BAND = Object.freeze({ above: 0, band: 1, endgame: 2 });
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
 
 /** Seed of the exploration stream of one round (independent of the world seeds). */
@@ -132,6 +151,9 @@ export function buildActorProtocol(args) {
   if (!(temperature >= 0) || !Number.isFinite(temperature)) throw Error('--temperature');
   if (!Number.isInteger(blockRounds) || blockRounds < 1) throw Error('--block-rounds');
   if (!(maxGB > 0)) throw Error('--max-gb');
+  const history = Number(args.history ?? 0);
+  if (![0, 1].includes(history)) throw Error('--history=0|1');
+  if (history && blockRounds > 256) throw Error('--history=1 needs --block-rounds <= 256 (uint8)');
   if (!args.belief)
     throw Error('--belief=<onnx> is required (belief worlds and the 162 marginals)');
   for (const key of ['mode', 'opponents', 'focal-raw-model', 'pairs', 'held-out'])
@@ -180,6 +202,20 @@ export function buildActorProtocol(args) {
       rows === 'above'
         ? 'one row per real decision with more than hi cards in hands, all four seats, chosen action'
         : 'one row per real decision (raw above hi, searched in the band and the endgame), chosen action',
+    ...(history
+      ? {
+          history: 1,
+          historyFeatures: HISTORY_FEATURES,
+          metaFeatures: META_FEATURES,
+          historyEncoding:
+            'ai/guanzero/training/history.mjs history(state) on the mover public state before the ' +
+            'action: last 20 public plays x 54, count-encoded (0-2 per card, -1 marker), int8; ' +
+            'encoding only, no GuanZero model, data or game',
+          metaLayout:
+            'uint8 [round index within the block, band (0 above hi, 1 band search, 2 endgame), ' +
+            'cards in the four hands]',
+        }
+      : {}),
   };
 }
 
@@ -218,18 +254,21 @@ export async function createActorConfig(protocol, ort, options = {}) {
 /**
  * One trainer row of a decision, as the fast actor builds it for extrasMode 'public-belief'.
  * `game` is the mover's masked game; `marginals` the 162 belief marginals of the mover's view.
+ * With `withHistory` the row also carries GuanZero's history(state) of the same state (int8 [1080]).
  */
-export function decisionRow(game, player, plays, index, marginals) {
+export function decisionRow(game, player, plays, index, marginals, withHistory = false) {
   const state = rawPolicyState(game, player, plays);
   const extras = new Float32Array(EXTRAS);
   extras.set(encodePolicyExtras(state, index));
   extras.set(marginals, 53);
-  return {
+  const row = {
     features: encodeSample(state, state.actions[index]),
     extras,
     team: player % 2,
     round: 1,
   };
+  if (withHistory) row.history = publicHistory(state);
+  return row;
 }
 
 /** Whole-round label through lib.mjs labelMatch (the single round is the whole "match"). */
@@ -271,6 +310,7 @@ export async function playActorRound(seed, cfg) {
   const random = seededRandom(explorationSeed(seed));
   const searchOn = cfg.policy === 'search';
   const endgameOn = searchOn && cfg.endgame === 'pimc';
+  const withHistory = cfg.history === 1;
   const stats = roundStats();
   const rows = [];
   for (let ply = 0; ply < 1000; ply++) {
@@ -283,11 +323,13 @@ export async function playActorRound(seed, cfg) {
       stats.decisions++;
       const cards = remaining(game);
       const masked = maskHidden(game, player);
-      let searched = false;
+      let searched = false,
+        band = BAND.above;
       if (endgameOn && cards <= cfg.endgameHi) {
         const d = await endgameDecision(game, seed, cfg);
         index = d.index;
         searched = true;
+        band = BAND.endgame;
         stats.endgameDecisions++;
         stats.endgameSearched++;
         stats.endgameFallbacks += Number(d.fallback);
@@ -300,6 +342,7 @@ export async function playActorRound(seed, cfg) {
         const d = await searchDecision(game, seed, cfg);
         index = d.index;
         searched = true;
+        band = BAND.band;
         stats.bandDecisions++;
         stats.searched++;
         stats.searchMs += d.ms;
@@ -326,7 +369,9 @@ export async function playActorRound(seed, cfg) {
           const choice = explore(values, cfg.exploration, random);
           index = choice.index;
           stats.explored += Number(choice.explored);
-          rows.push(decisionRow(masked, player, plays, index, marginals));
+          const row = decisionRow(masked, player, plays, index, marginals, withHistory);
+          if (withHistory) Object.assign(row, { ply, band, cards });
+          rows.push(row);
         } else index = argmax(values);
         stats.rawMs += performance.now() - t0;
       }
@@ -334,7 +379,9 @@ export async function playActorRound(seed, cfg) {
         const tb = performance.now();
         const marginals = await beliefMarginals(cfg.belief, publicView(masked, player));
         stats.rowBeliefMs += performance.now() - tb;
-        rows.push(decisionRow(masked, player, plays, index, marginals));
+        const row = decisionRow(masked, player, plays, index, marginals, withHistory);
+        if (withHistory) Object.assign(row, { ply, band, cards });
+        rows.push(row);
       }
     }
     const result = advanceRound(game, plays[index]);
@@ -394,7 +441,7 @@ export function manifestOf(out, run) {
   const seconds = blocks.reduce((s, b) => s + b.seconds, 0);
   const hours = seconds / 3600;
   return {
-    schema: 1,
+    schema: run.history ? 2 : 1,
     actor: 'search-actor',
     out,
     policy: run.policy,
@@ -402,6 +449,15 @@ export function manifestOf(out, run) {
     extrasMode: EXTRAS_MODE,
     extraFeatures: EXTRAS,
     features: FEATURES,
+    ...(run.history
+      ? {
+          historyFeatures: HISTORY_FEATURES,
+          metaFeatures: META_FEATURES,
+          rowsByBand: [0, 1, 2].map((band) =>
+            blocks.reduce((s, b) => s + (b.rowsByBand?.[band] || 0), 0),
+          ),
+        }
+      : {}),
     championSHA256: run.championSHA256,
     actorModelSHA256: run.actorModelSHA256,
     beliefSHA256: run.beliefSHA256,
@@ -451,8 +507,11 @@ function directoryBytes(out) {
   return finishedBlocks(out).reduce((s, b) => s + b.bytes, 0);
 }
 
-/** Plays and writes one block; returns null (and leaves nothing) if stopped before it finished. */
-export async function runBlock(out, run, cfg, block, shouldStop) {
+/**
+ * Plays and writes one block; returns null (and leaves nothing) if stopped before it finished.
+ * `onRound` (tests) receives each played round, in block order.
+ */
+export async function runBlock(out, run, cfg, block, shouldStop, onRound = null) {
   const name = blockName(block);
   const dir = join(out, 'blocks');
   const tmp = join(dir, `.tmp-${name}`);
@@ -463,6 +522,9 @@ export async function runBlock(out, run, cfg, block, shouldStop) {
   const last = Math.min(first + run.blockRounds, run.start + run.rounds) - 1;
   const totals = Object.fromEntries(SUM_KEYS.map((key) => [key, 0]));
   const results = [];
+  const withHistory = run.history === 1;
+  const history = [],
+    meta = [];
   const t0 = Date.now();
   for (let seed = first; seed <= last; seed++) {
     if (shouldStop()) {
@@ -470,7 +532,14 @@ export async function runBlock(out, run, cfg, block, shouldStop) {
       return null;
     }
     const round = await playActorRound(seed, cfg);
+    onRound?.(round);
     writer.add(round.labelled, run.actorModelSHA256.slice(0, 16));
+    if (withHistory)
+      for (const row of round.rows) {
+        if (row.history?.length !== HISTORY_FEATURES) throw Error('Missing history row');
+        history.push(row.history);
+        meta.push([seed - first, row.band, row.cards]);
+      }
     for (const key of SUM_KEYS) totals[key] += round.stats[key];
     results.push({
       seed,
@@ -490,7 +559,28 @@ export async function runBlock(out, run, cfg, block, shouldStop) {
     championSHA256: run.championSHA256,
     actorModelSHA256: run.actorModelSHA256,
     seeds: [first, last],
+    ...(withHistory
+      ? {
+          schema: 2,
+          historyFeatures: HISTORY_FEATURES,
+          metaFeatures: META_FEATURES,
+          historyEncoding: run.historyEncoding,
+          metaLayout: run.metaLayout,
+        }
+      : {}),
   });
+  if (withHistory && shard) {
+    if (history.length !== totals.rows) throw Error('History rows differ from shard rows');
+    const h = new Int8Array(history.length * HISTORY_FEATURES);
+    history.forEach((row, i) => h.set(row, i * HISTORY_FEATURES));
+    const m = new Uint8Array(meta.length * META_FEATURES);
+    meta.forEach((row, i) => {
+      if (!row.every((v) => Number.isInteger(v) && v >= 0 && v <= 255)) throw Error('Meta range');
+      m.set(row, i * META_FEATURES);
+    });
+    writeFileSync(join(tmp, `${shard}.h.i8`), h);
+    writeFileSync(join(tmp, `${shard}.m.u8`), m);
+  }
   const final = join(dir, name);
   rmSync(final, { recursive: true, force: true });
   renameSync(tmp, final);
@@ -507,6 +597,12 @@ export async function runBlock(out, run, cfg, block, shouldStop) {
     seeds: [first, last],
     rounds: results.length,
     rowsWritten: totals.rows,
+    ...(withHistory
+      ? {
+          schema: 2,
+          rowsByBand: [0, 1, 2].map((band) => meta.filter((row) => row[1] === band).length),
+        }
+      : {}),
     bytes,
     files,
     totals,
