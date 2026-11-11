@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2026-11-10 · 第五窗口推理采样出牌记录与启动登记
+
+- `ai/danMCai/training/continuous/search-actor.mjs` 新增 `--history=1`（默认 0，输出不变）：每行另写 GuanZero `history()` 计数编码的最近 20 手公开出牌（`.h.i8`，1,080 维，只借编码）与块内序号／分段／剩余牌数（`.m.u8`），分片为 schema 2，`done.json` 列出新文件 SHA 与分段行数。测试 `search-actor-history.test.mjs`。说明见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#推理采样进程search-actormjs第四窗口新增)。
+- 第五窗口（多伦多 11-10 23:50 → 11-11 09:00，08:40 后不再新开计算）的面板配置与运行脚本快照登记在 `ai/research/evaluation/window5-20261111/`（`dashboard.json`、`scripts/` 与 `scripts-sha256.txt`），按 [PLAN](ai/research/evaluation/window5-20261111/PLAN.md) 的源码冻结 src-e 启动；面板端口 8771。预登记 `protocol.json` 与结果在 W5-0 及窗口结束后补入。
+- 只是工具与登记，没有新的训练结果或验收；网页冠军 017、默认 danMCai-reason、菜单与出牌评价不变。
+
 ## 2026-11-10 · 第五窗口 1,295 维学习器与多槽喂料
 
 - 持续训练器新增 `extrasMode: "public-belief-history"`（215 维 `public-belief` extras＋1,080 维 GuanZero `history()` 计数编码出牌记录，只借编码；只收 schema 2 分片，回放分存 float32／int8、取批拼成 1,295 维），`value_net.EXTRA_WIDTHS` 登记 1,295；已消费分片的删除列表加 `.h.i8`、`.m.u8`。53／215 维与无 extras 路径不变。

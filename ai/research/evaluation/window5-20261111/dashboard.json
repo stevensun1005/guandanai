@@ -1,0 +1,681 @@
+{
+ "title": "第五窗口研究面板（11-10 23:50 – 11-11 09:00 美东）",
+ "deadline": "2026-11-11T14:00:00Z",
+ "note": "第五窗口（PLAN.md＋protocol.json）。四家都推理的对局产出数据（C2），从 017 出发训练新网络 017h（L1，额外输入：公开信息、手牌推断、借自 GuanZero 编码的最近 20 手出牌）；v2a 训练成功时，用整局对局检验把推理提前到 41–60 张（D5 故障检查、ACC5 唯一验收）。40 张以上仍由 017 出牌。08:40 以后不开新计算，09:00 截止；多天续训需要所有者另行授权。网页冠军 017、默认 9001、菜单都不动。所有数字只按预登记规则判定，不是胜率或棋力宣称。",
+ "orchestrators": [
+  {
+   "name": "scripts/queue.sh",
+   "startMarker": "queue start",
+   "endMarker": "queue end"
+  }
+ ],
+ "stages": [
+  {
+   "ids": [
+    "T-window5-plan"
+   ],
+   "key": "T-window5-plan",
+   "title": "设计并启动第五窗口（到 11-11 09:00 美东）",
+   "desc": "所有者 18:55 同意改方向：推理优先、网络学推理机器人的对局（四家推理数据）、借鉴 GuanZero 的历史输入结构；不再做 12 小时短微调加对 017 验收。第五窗口只跑到明早 9:00。Fable 设计，Opus 实施，启动前后台预检。",
+   "kind": "audit",
+   "queue": "owner-tasks",
+   "after": "第四窗口 23:45 结束后启动",
+   "paths": {},
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-review"
+   ],
+   "key": "T-review",
+   "title": "第五窗口计划三方审查并修订",
+   "desc": "可行性、规则／目标、完整性三方审查；所有缺陷逐条处理（计划第 3 节），21:18 定稿 PLAN.md。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "T-window5-plan 之后",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-build"
+   ],
+   "key": "T-build",
+   "title": "第五窗口代码与脚本（冻结 src-e 23:35、src-e2 01:45）",
+   "desc": "计划第 8 节：推理采样器 --history、1,295 宽学习器、corpus-feed.py、RT5 脚本（事件驱动队列、预检、种子审计、协议与冠军核验、V2a、G1、H1、C2、L1、W5-0b、收尾）与本面板；之后 --belief-upper、heldout-mse.py、1,295 宽推理路径与文档。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "T-review 之后（21:15 起）",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-launch"
+   ],
+   "key": "T-launch",
+   "title": "启动第五窗口：提交、冻结 src-e、协议、面板、队列",
+   "desc": "把审查后的代码与文档提交到 main（CHANGELOG、README、面板配置与脚本快照），按该提交冻结 src-e（node_modules 链接同第四窗口），定稿 protocol.json 草稿，把 8771 面板改为从 src-e 运行；等第四窗口计算退出且到 23:50 后跑 launchd 自测，再提交 com.guandanai.w5-queue，由队列按事件依次启动 W5-0、W5-0b、V2a、C2 各槽，之后 L1、H1、G1。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "T-build 与 src-e 审查之后（22:10 起）",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-smoke"
+   ],
+   "key": "T-smoke",
+   "title": "src-e 各阶段 launchd 自测（23:50 后、第四窗口计算退出后）",
+   "desc": "V2a、W5-0b、C2、L1、G1、H1 各在自己的 launchd 任务里跑一次完整单元，写 smoke.json 和 SMOKE 行；每项 ≤ 1 核，一项接一项。按启动指示改在第四窗口计算进程全部退出且不早于 23:50 后运行（计划第 5 节原允许 23:00–23:45 在第四窗口旁边跑），不碰第四窗口任何任务。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "src-e 冻结且第四窗口计算退出、23:50 之后",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-smoke-e2"
+   ],
+   "key": "T-smoke-e2",
+   "title": "src-e2 各阶段 launchd 自测（01:45–02:15）",
+   "desc": "D5、ACC5、L1-mse、DEV-1 中已冻结的脚本各跑一次自测；缺的阶段在各自事件时干净跳过并写明原因。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "src-e2 冻结后",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-docs"
+   ],
+   "key": "T-docs",
+   "title": "文档同步（CHANGELOG、README）",
+   "desc": "随代码同次更新 CHANGELOG 及 danMCai continuous／belief README 的 --history、public-belief-history、corpus-feed.py、heldout-mse.py、--belief-upper 说明。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "src-e2 冻结前（01:45）",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "T-dashboard8771"
+   ],
+   "key": "T-dashboard8771",
+   "title": "第五窗口面板（端口 8771）",
+   "desc": "统一格式面板，每个阶段和所有者任务一张卡片；launchd com.guandanai.dashboard8771，--host=0.0.0.0，同一 Wi-Fi 的手机也能看。只读。先从 origin/main 的临时检出启动，开跑时改指向冻结检出 src-e。8770 继续显示第四窗口。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "立即",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  },
+  {
+   "ids": [
+    "W5-0"
+   ],
+   "key": "W5-0",
+   "title": "W5-0 开跑前登记：进程检查、冠军核验、协议、种子审计",
+   "desc": "只查第四窗口的计算进程（8770 面板和它的 queue.sh 除外）；从冻结源码核验冠军 017（目录 defaultId、冠军清单、门控 330 接受记录与证据 SHA、权重 462afc99）；把第四窗口 GZ、S8、C1 最终数字和 SHA 写进 protocol.json；种子审计必须 clean；检查真人研究副本（无房间号、昵称、座位标签）。任何一项不过就什么都不启动。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "第四窗口 23:45 结束 → 23:50",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "paths": {
+    "result": "protocol.json"
+   }
+  },
+  {
+   "ids": [
+    "W5-0b"
+   ],
+   "key": "W5-0b",
+   "title": "W5-0b 先登记 017 的 40 张以上预测误差（20 个 C1 块）",
+   "desc": "在第四窗口 C1 的 20 个块上（种子 20261114 抽取）算 017 对整局得分的均方误差和按局的标准差，以及评分速度（行／秒）；据此在 L1 有数据之前登记 L1-mse 可检出的差和最终评分的耗时。只描述。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "与 V2a 同时（1 核）",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "paths": {
+    "result": "L1/baseline-c1.json"
+   }
+  },
+  {
+   "ids": [
+    "V2a"
+   ],
+   "key": "V2a",
+   "title": "V2a 用 v1 配方重训手牌推断网络（单独先跑）",
+   "desc": "v1 配方原样（隐层 512、批 1024、学习率 3e-4、权重衰减 0.01、dropout 0.3／0.1、花色增强、按种子 10 取 1 验证、种子 20261112），最多 4 万步、55 分钟；数据先放第三窗口 S4a（41–108 张），再放第一窗口 H，最多 400 万行。内存只够 < 200 万行就不训练（D5、ACC5、G1、H1 跳过，C2 多开一槽）。训练成功则在附录登记 SHA。进度＝训练日志步数。",
+   "kind": "train",
+   "queue": "scripts/queue.sh",
+   "after": "23:50（W5-0 之后），约 00:30 结束",
+   "total": 40000,
+   "rule": {
+    "type": "dev",
+    "text": "开发检查，不作验收"
+   },
+   "paths": {
+    "log": "V2a/train.log",
+    "result": "V2a/train.json"
+   }
+  },
+  {
+   "ids": [
+    "C2-0"
+   ],
+   "key": "C2-0",
+   "title": "C2 推理语料 第 0 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290400000–4290409999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。V2a 开始训练或结束时（最晚 00:00）开跑。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 开始训练／结束，最晚 00:00",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-0",
+    "result": "C2/slot-0/manifest.json",
+    "log": "logs/C2-slot-0.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-1"
+   ],
+   "key": "C2-1",
+   "title": "C2 推理语料 第 1 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290410000–4290419999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。V2a 开始训练或结束时（最晚 00:00）开跑。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 开始训练／结束，最晚 00:00",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-1",
+    "result": "C2/slot-1/manifest.json",
+    "log": "logs/C2-slot-1.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-2"
+   ],
+   "key": "C2-2",
+   "title": "C2 推理语料 第 2 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290420000–4290429999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-2",
+    "result": "C2/slot-2/manifest.json",
+    "log": "logs/C2-slot-2.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-3"
+   ],
+   "key": "C2-3",
+   "title": "C2 推理语料 第 3 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290430000–4290439999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-3",
+    "result": "C2/slot-3/manifest.json",
+    "log": "logs/C2-slot-3.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-4"
+   ],
+   "key": "C2-4",
+   "title": "C2 推理语料 第 4 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290440000–4290449999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-4",
+    "result": "C2/slot-4/manifest.json",
+    "log": "logs/C2-slot-4.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-5"
+   ],
+   "key": "C2-5",
+   "title": "C2 推理语料 第 5 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290450000–4290459999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-5",
+    "result": "C2/slot-5/manifest.json",
+    "log": "logs/C2-slot-5.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-6"
+   ],
+   "key": "C2-6",
+   "title": "C2 推理语料 第 6 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290460000–4290469999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-6",
+    "result": "C2/slot-6/manifest.json",
+    "log": "logs/C2-slot-6.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-7"
+   ],
+   "key": "C2-7",
+   "title": "C2 推理语料 第 7 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290470000–4290479999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-7",
+    "result": "C2/slot-7/manifest.json",
+    "log": "logs/C2-slot-7.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-8"
+   ],
+   "key": "C2-8",
+   "title": "C2 推理语料 第 8 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290480000–4290489999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。（只有前面的槽中途退出、需要补槽时才会开）",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-8",
+    "result": "C2/slot-8/manifest.json",
+    "log": "logs/C2-slot-8.log"
+   }
+  },
+  {
+   "ids": [
+    "C2-9"
+   ],
+   "key": "C2-9",
+   "title": "C2 推理语料 第 9 槽",
+   "desc": "四家都推理的单局（21–40 张推断世界推理，≤ 20 张精确残局，40 张以上裸 017 带 0.02 探索），全部决策都写行，并写 GuanZero 编码的最近 20 手出牌（计数编码）和分段信息；牌种子 4290490000–4290499999 按顺序，每 100 局一块，≤ 1.6 GB。整块完成才保留；停时丢弃的未完成块记 PARTIAL。块号尾数 9 的块留出给 L1-mse。按事件和内存规则加开。08:35 停。（只有前面的槽中途退出、需要补槽时才会开）",
+   "kind": "actor",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束后按空闲核与内存加开",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "untilDeadline": true,
+   "paths": {
+    "out": "C2/slot-9",
+    "result": "C2/slot-9/manifest.json",
+    "log": "logs/C2-slot-9.log"
+   }
+  },
+  {
+   "ids": [
+    "C2"
+   ],
+   "key": "C2",
+   "title": "C2 槽位管理（按事件加槽）",
+   "desc": "V2a 训练期间 2 槽；V2a 结束后目标 = min(6, 8 − 其他重计算占用核数)，每开一槽都按实时内存规则（max(自测, 登记峰值 2.3 GB) + 4 GiB 余量）检查；08:05 后不再开新槽。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "与 C2-0 同时",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   }
+  },
+  {
+   "ids": [
+    "L1"
+   ],
+   "key": "L1",
+   "title": "L1 训练 017h：从 017 出发学推理对局的整局结果",
+   "desc": "017 加 1,295 维从零开始的额外输入（215 公开＋推断，1,080 GuanZero 编码的出牌记录）；主干冻结、额外输入学习率 1e-4、批 2,048、回放 8、容量 160 万、种子 20261113；只用整局得分。每小时导出，08:30 停并保存最终导出与优化器状态。今晚不验收，只看留出误差。缺代码时降级为 L1-215 并写明。进度＝学习器实际步数（预计约 5 千步）。",
+   "kind": "train",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束（MPS 空出）→ 08:30",
+   "total": 5000,
+   "rule": {
+    "type": "dev",
+    "text": "开发检查，不作验收"
+   },
+   "paths": {
+    "log": "L1/run/learner/log.jsonl"
+   }
+  },
+  {
+   "ids": [
+    "L1-feed"
+   ],
+   "key": "L1-feed",
+   "title": "L1 喂数据：C2 完成块 → 学习器",
+   "desc": "corpus-feed.py 每 60 秒检查各槽已完成的块：块号尾数不是 9 的硬链接进学习器（槽号前缀避免重名），尾数 9 的列入留出集；从不改动原始块。与 L1 同起同停。",
+   "kind": "other",
+   "after": "与 L1 同时",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "markers": {
+    "start": "NOTE L1 017h",
+    "end": "NOTE L1 stopped"
+   },
+   "paths": {
+    "result": "L1/heldout.json"
+   }
+  },
+  {
+   "ids": [
+    "H1"
+   ],
+   "key": "H1",
+   "title": "H1 推断网络在真人局面上的校准（v1 与 v2a）",
+   "desc": "1,458 个未辅助真人局面上每张未见牌的对数损失，对比均匀猜测，另给 v2a−v1 配对差。只读去掉房间号、昵称和座位标签的副本；只输出汇总，不出本机。只描述。",
+   "kind": "metrics",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束且 v2a 已登记",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "paths": {
+    "result": "H1/human-calibration.json",
+    "reference": "H1/reference-v1.json",
+    "log": "logs/H1.log"
+   }
+  },
+  {
+   "ids": [
+    "G1"
+   ],
+   "key": "G1",
+   "title": "G1 41–60 张真实发牌回归（只描述）",
+   "desc": "存档的 160 个 41–60 张局面、每个 64 个世界（v2a 与 v1 同一批世界种子）；另报对数损失（种子 3990000000–299，第三次使用）、抽样里对手炸弹点数（真实 1.79）和最长顺子类型。只描述，不决定 D5／ACC5 是否运行。",
+   "kind": "compare",
+   "queue": "scripts/queue.sh",
+   "after": "V2a 结束且 v2a 已登记（约 00:30–01:45）",
+   "total": 160,
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "compareRule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "paths": {
+    "result": "G1/gate-v2a.json",
+    "log": "logs/G1.log"
+   },
+   "sides": [
+    {
+     "label": "v2a",
+     "out": "G1/v2a"
+    },
+    {
+     "label": "v1 对照",
+     "out": "G1/v1"
+    }
+   ]
+  },
+  {
+   "ids": [
+    "D5"
+   ],
+   "key": "D5",
+   "title": "D5 故障检查：推理提前到 41–60 张（400 副）",
+   "desc": "A＝现网 9001（21–40 张推理，v1）；B＝9001 推理到 60 张（21–40 用 v1，41–60 用 v2a；代码来不及则两段都用 v2a 并标成“两项改动合并”）。对手为裸 017 席位，种子 4290500000–399。≥ 200 副且 B−A ≥ −0.20 才允许 ACC5。",
+   "kind": "compare",
+   "queue": "scripts/queue.sh",
+   "after": "H1 结束、v2a 已登记、src-e2 冻结（约 00:50–01:50 开始）",
+   "total": 400,
+   "rule": {
+    "type": "dev",
+    "text": "开发检查，不作验收"
+   },
+   "compareRule": {
+    "type": "dev",
+    "text": "开发检查，不作验收"
+   },
+   "paths": {
+    "compare": "D5/compare.json",
+    "log": "logs/D5.log"
+   },
+   "sides": [
+    {
+     "label": "A 现网9001",
+     "out": "D5/A"
+    },
+    {
+     "label": "B 推理到60张",
+     "out": "D5/B"
+    }
+   ]
+  },
+  {
+   "ids": [
+    "M5"
+   ],
+   "key": "M5",
+   "title": "M5 决定：ACC5 跑多少副",
+   "desc": "N = min(2000, floor(0.85 × 08:25 前 ACC5 可用核秒 / (cA + cB)))，两组按 cA:cB 分配进程；N < 600 就不跑 ACC5，核给 C2。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "D5 结束",
+   "rule": {
+    "type": "descriptive",
+    "text": "预登记决定点"
+   },
+   "paths": {
+    "result": "M5/decision.json"
+   }
+  },
+  {
+   "ids": [
+    "ACC5"
+   ],
+   "key": "ACC5",
+   "title": "ACC5 唯一验收（有条件）：推理提前到 41–60 张",
+   "desc": "与 D5 相同两组，留出种子 4290510000 起，副数由 M5 定；按两组共同连续前缀评估并写明副数。区间高于 0 → 登记为研究用搜索候选（新编号，不改网页、默认、菜单或冠军）；含 0 → 零结果；低于 0 → 负。",
+   "kind": "compare",
+   "queue": "scripts/queue.sh",
+   "after": "M5 之后 → 08:25",
+   "total": 2000,
+   "rule": {
+    "type": "heldout",
+    "text": "预登记留出验收：配对差 95% 区间下界 >0 为正向证据"
+   },
+   "paths": {
+    "compare": "ACC5/compare.json",
+    "log": "logs/ACC5.log"
+   },
+   "sides": [
+    {
+     "label": "A 现网9001",
+     "out": "ACC5/A",
+     "primary": false
+    },
+    {
+     "label": "B 推理到60张",
+     "out": "ACC5/B",
+     "primary": false
+    }
+   ]
+  },
+  {
+   "ids": [
+    "L1-mse"
+   ],
+   "key": "L1-mse",
+   "title": "L1-mse 每小时留出误差（描述）",
+   "desc": "每次 L1 导出后，在当时的留出块上按段（> 40／21–40／≤ 20）比较 017、分段校准后的 017 与该导出的均方误差。中途数字只描述。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "每次导出后（src-e2 冻结后）",
+   "rule": {
+    "type": "descriptive",
+    "text": "描述性，不作结论"
+   },
+   "paths": {
+    "result": "L1/mse.jsonl"
+   }
+  },
+  {
+   "ids": [
+    "L1-mse-final"
+   ],
+   "key": "L1-mse-final",
+   "title": "L1-mse 最终读数（08:30–08:39）",
+   "desc": "在 08:30 冻结的留出集上重算 017、校准 017、每个导出，以及最终导出打乱出牌记录／打乱推断列的两个消融。只读 > 40 张段对校准 017 的差：区间低于 0 →“有信号”；含 0 →“暂无信号”；高于 0 →“配方故障”。不是棋力。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "L1 停止后 → 08:40",
+   "rule": {
+    "type": "dev",
+    "text": "开发读数（预登记规则），不作验收"
+   },
+   "paths": {
+    "result": "L1/mse-final.json"
+   }
+  },
+  {
+   "ids": [
+    "DEV-1"
+   ],
+   "key": "DEV-1",
+   "title": "DEV-1 1,295 宽推理路径一致性（故障检查）",
+   "desc": "200 个存档局面：零初始化的 1,295 宽 017 必须与裸 017 数值一致、决策相同；再报最终导出与 017 不同决策的比例和数值漂移。不报正负、不作收益。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "08:31–08:38",
+   "rule": {
+    "type": "dev",
+    "text": "故障检查，不作结论"
+   },
+   "paths": {
+    "result": "DEV1/parity.json"
+   }
+  },
+  {
+   "ids": [
+    "T-close"
+   ],
+   "key": "T-close",
+   "title": "收尾：08:40 停止、保存、清点",
+   "desc": "放 STOP；保存 L1 最终导出和优化器状态；各槽清单与每块 SHA、附录、close.json；08:55 前第五窗口计算进程全部退出，09:00 截止。",
+   "kind": "other",
+   "queue": "scripts/queue.sh",
+   "after": "08:40–09:00",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   },
+   "paths": {
+    "result": "close.json"
+   }
+  },
+  {
+   "ids": [
+    "T-writeup"
+   ],
+   "key": "T-writeup",
+   "title": "所有者：写主报告第 78、79 节并推送",
+   "desc": "09:00 以后不再计算：MODEL_STUDY 第 78 节（第四窗口）和第 79 节（第五窗口）、evaluation JSON、CHANGELOG；干净工作树，跑 npm test、format:check 和相关 Python 测试后推送 main。",
+   "kind": "other",
+   "queue": "owner-tasks",
+   "after": "09:00 之后",
+   "rule": {
+    "type": "descriptive",
+    "text": "所有者交代的任务，不是实验结论"
+   }
+  }
+ ]
+}

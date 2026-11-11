@@ -30,6 +30,8 @@ Mac 收尾后的独立整局比较与 Windows 返回包见 [Windows 交接](../r
 | 手牌推断网络（推断对手手牌）     | [belief](belief/README.md)                                                   |
 | 复盘工具（明牌事后最优）         | [review](review/README.md)                                                   |
 
+2026-11-10 第五窗口新增 `search-actor.mjs --history=1`（schema 2 分片另写 GuanZero 编码的出牌记录 `.h.i8` 与分段 `.m.u8`）、1,295 维 `extrasMode: "public-belief-history"` 与多槽喂料 `training/continuous/corpus-feed.py`，见[持续训练指南](../research/CONTINUOUS_TRAINING.md#1295-维额外输入public-belief-history与多槽喂料第五窗口新增)。只是工具，不是结果；GuanZero 只借编码。
+
 2026-11-09 第三窗口新增 215 维 extras 训练入口（`extrasMode: "public-belief"`、`extrasLearningRate`、`trunkFrozen`、`researchSnapshots`、`wrap_initial.py`），参数见[持续训练指南](../research/CONTINUOUS_TRAINING.md#215-维额外输入public-belief第三窗口新增)；评测工具选项见[推断网络说明](belief/README.md)。只是工具，不是结果。
 
 本机生成目录：`runs/` 存运行数据与实时面板记录，`checkpoints/` 存保留的检查点，`data/generated/` 存采集数据，`environment/` 存本机环境，`workspace/` 存开发工作树与临时实验。它们均不提交 Git。

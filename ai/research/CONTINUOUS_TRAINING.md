@@ -251,6 +251,7 @@ node ai/danMCai/training/continuous/explore-cost.mjs --pairs=150 --exploration='
 - 一个牌局种子只打一副单局（`createRound`：随机级牌、不进贡），不换位。默认只写 40 张以上的真实决策（`--rows=all` 另写搜索决策），格式与快速采样进程 `extrasMode: "public-belief"` 完全相同：567 维 int8 特征、215 维 extras（53 公开＋162 推断边缘）、整局标签 `[本队本局升级分, 其符号, 0, 1]`。与快速采样进程的差别：单局而非整场；能一手出完时直接出、不记行。
 - 输出按块：`--block-rounds`（默认 100）副为一块，整块完成后才从 `.tmp-` 改名为 `blocks/bNNNNNN/`（一个训练分片），并写 `bNNNNNN.done.json`（种子、行数、每个文件 SHA-256、耗时、峰值内存）；`STOP` 文件、信号、`--deadline`/`--minutes` 或 `--max-gb` 时在下一副前停止，只丢弃未完成的块。`--summarize=1` 重写 `manifest.json`（各块、总量、每进程每小时副数与行数）。`--policy=raw` 关闭搜索，作为同一批牌局的无推理吞吐对照。
 - 测试 `ai/danMCai/tests/search-actor.test.mjs`：关闭探索时一副牌的全部决策与 `midgame-search --mode=search --opponents=search` 相同；同一决策的行与快速采样进程逐字节相同；块写入、停止与命令行（需冠军 017 与推断网络 v1，缺失则跳过）。
+- `--history=1`（第五窗口新增，默认 0 时输出与原 schema 1 逐字节相同）：每行另写 `<分片>.h.i8`（1,080 个 int8，GuanZero `ai/guanzero/training/history.mjs` 的 `history()` 计数编码：最近 20 手公开出牌 × 54 张，每张 0–2，过牌 −1；在行动者的公开视角、出牌**之前**计算，只借编码）与 `<分片>.m.u8`（3 字节：块内牌局序号、分段码 0 = 40 张以上／1 = 推断搜索段／2 = 残局精确求解、四家剩余牌数）。分片清单写 `schema: 2`、`historyFeatures: 1080`、`metaFeatures: 3`，`done.json` 列出两个新文件的 SHA-256 与按分段的行数 `rowsByBand`；需要 `--block-rounds ≤ 256`。供 `public-belief-history` 学习器（下一节）使用。测试 `ai/danMCai/tests/search-actor-history.test.mjs`：x/y/e 与 `--history=0` 相同、每行出牌记录等于按该步重算的 `history()`、分段码与牌数一致、推断搜索段与残局行的标签等于本队本局升级分、三行与 `history_reference.py` 一致。
 
 ## 1,295 维额外输入（`public-belief-history`）与多槽喂料（第五窗口新增）
 
