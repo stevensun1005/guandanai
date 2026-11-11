@@ -67,6 +67,11 @@
       "skipped": 1,
       "failed": 0
     },
-    "trainingOrEvaluationSourceChanged": false
+    "trainingOrEvaluationSourceChanged": false,
+    "runtimeCommit": "1221dea2a94c9ff74790c36c6d705d5e2ce6ba30",
+    "sourceRoot": "C:/guandan-sampler/work/guanzero-stop-status-dashboard-runtime",
+    "liveState": "failed",
+    "liveRateLabel": "当前未运行（最后记录0.9471242986078199次更新/秒）",
+    "trainingRestarted": false
   }
 }
