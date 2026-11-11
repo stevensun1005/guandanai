@@ -1,0 +1,10 @@
+{
+  "authority": "owner immediate request: 评测一下",
+  "requestedAt": "2026-11-11T02:42:13.736Z",
+  "kind": "manual-development-not-heldout",
+  "index": 5140,
+  "scheduledSlot5133Backfilled": false,
+  "modelVersion": "model-000000475588",
+  "modelSHA256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+  "planSHA256": "d356e6e38b7ccdf35aef469b027ddc6f7cac2477ac0d12416c5384a114c0aecc"
+}

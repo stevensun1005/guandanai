@@ -5192,6 +5192,20 @@
         }
       ],
       "classification": "original-frozen-mixed-plan-not-strength-acceptance"
+    },
+    {
+      "observedAt": "2026-11-11T02:52:44.716Z",
+      "files": [
+        {
+          "file": "ai/research/evaluation/guanzero-475588-plan.json",
+          "sha256": "d356e6e38b7ccdf35aef469b027ddc6f7cac2477ac0d12416c5384a114c0aecc"
+        },
+        {
+          "file": "ai/research/evaluation/guanzero-475588-manual-registration.json",
+          "sha256": "1a51f51903e361dc8ce10e7e9a47e9859f455c1ac3c1b0b95143b77e6f551d5c"
+        }
+      ],
+      "classification": "owner-requested-manual-v4-development-not-heldout;not-backfill5133"
     }
   ],
   "specialistExperiments": [
