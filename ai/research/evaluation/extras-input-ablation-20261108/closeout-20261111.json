@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "kind": "completed-training-not-independently-evaluated",
+  "observedAtUTC": "2026-11-11T23:27:41.581927Z",
+  "sourceMain": "eae86d4e8a924b8e70d52b43cb1e85eded0f276b",
+  "scope": "Only Windows extras-input-ablation-20261108 v2 queue; not other machines or window1/window2/window3 research.",
+  "arms": [
+    {
+      "id": "extras-public-s1-v2-20261108",
+      "window": {
+        "startUTC": "2026-11-08T13:36:24.535Z",
+        "deadlineUTC": "2026-11-08T17:36:24.535Z",
+        "requestedHours": 4,
+        "restartExtendsDeadline": false
+      },
+      "stoppedAtUTC": "2026-11-08T17:36:28.481Z",
+      "latest": {
+        "version": "v000116049",
+        "file": "v000116049.onnx",
+        "sha256": "dc59e6311ae2749c57e7dfe53ba98133f3222d60a379b1717d3944aa8bd83102",
+        "step": 116049,
+        "trainedRows": 237668352,
+        "ingestedRows": 59417592,
+        "publishedAt": "2026-11-08T17:36:26Z"
+      },
+      "checkpointSHA256": "dc8185ef742fc86800fd85ebb1c770c06030323c019642b8f3c43c5b105206c3",
+      "matchingNetworkAndAdam": true,
+      "adamStates": 13,
+      "sourceCommit": "c506a03",
+      "sourceFiles": 215,
+      "protocolSHA256": "b1e8257de1be17d672be3f76458563d79f8d3a5af49ce6b5a4bb6792cabbb48b",
+      "seedAuditSHA256": "3b64c81d87cd21158e49a45d1de3b78778843b7b524d1dd453b15ea7ae86fa59",
+      "actorSeedOffset": 25509076,
+      "totals": {
+        "matches": 94616,
+        "decisions": 59457288,
+        "rows": 59457288
+      },
+      "retainedReplayRows": 2033192,
+      "pendingRows": 39696,
+      "originalStopAuditSHA256": "bb2c58e3389b44482ee3db616a2030a9a64f3e0c07e8d1a9633af2d715d33f3f",
+      "closeoutStopAuditSHA256": "191087a79d3e61b6a645e700a2d9bf8666bd7ed7f935f034cc0d5bab833a9ac4",
+      "closeoutAuditObservedAtUTC": "2026-11-11T23:25:51.213073+00:00",
+      "allRecordedChildrenExited": true
+    },
+    {
+      "id": "extras-zero-s1-v2-20261108",
+      "window": {
+        "startUTC": "2026-11-08T17:36:41.896Z",
+        "deadlineUTC": "2026-11-08T21:36:41.896Z",
+        "requestedHours": 4,
+        "restartExtendsDeadline": false
+      },
+      "stoppedAtUTC": "2026-11-08T21:36:45.585Z",
+      "latest": {
+        "version": "v000126471",
+        "file": "v000126471.onnx",
+        "sha256": "56666a42e3350602ae42480e3ebd4a89b5e2c141cc314920559fc4261c26c80f",
+        "step": 126471,
+        "trainedRows": 259012608,
+        "ingestedRows": 64753450,
+        "publishedAt": "2026-11-08T21:36:42Z"
+      },
+      "checkpointSHA256": "13362febdb5793e10f85eb1b2b5c9ae4a118a255483ba7f7413fd3378056231f",
+      "matchingNetworkAndAdam": true,
+      "adamStates": 13,
+      "sourceCommit": "c506a03",
+      "sourceFiles": 215,
+      "protocolSHA256": "064e15b2e6f6f5469441b90e15580b65aa97b959d68144c997f2c305a38c25e8",
+      "seedAuditSHA256": "3b64c81d87cd21158e49a45d1de3b78778843b7b524d1dd453b15ea7ae86fa59",
+      "actorSeedOffset": 25509076,
+      "totals": {
+        "matches": 101075,
+        "decisions": 64812122,
+        "rows": 64812122
+      },
+      "retainedReplayRows": 2046388,
+      "pendingRows": 58672,
+      "originalStopAuditSHA256": "1c5a7a96b0c796e9aaa9f8010f9370059d8552dec50d2e88007752110b476bb5",
+      "closeoutStopAuditSHA256": "05155c3924d147505e4eef93b5bd14acedcff23d2cff502da143addd32404055",
+      "closeoutAuditObservedAtUTC": "2026-11-11T23:26:09.144601+00:00",
+      "allRecordedChildrenExited": true
+    },
+    {
+      "id": "extras-zero-s2-v2-20261108",
+      "window": {
+        "startUTC": "2026-11-08T21:36:57.111Z",
+        "deadlineUTC": "2026-11-09T01:36:57.111Z",
+        "requestedHours": 4,
+        "restartExtendsDeadline": false
+      },
+      "stoppedAtUTC": "2026-11-09T01:37:01.185Z",
+      "latest": {
+        "version": "v000122413",
+        "file": "v000122413.onnx",
+        "sha256": "21cddb4aa4cfdb7d26e9fbcdacaed7f3ccf9684401d8e4e0640df61725ee4d81",
+        "step": 122413,
+        "trainedRows": 250701824,
+        "ingestedRows": 62675921,
+        "publishedAt": "2026-11-09T01:36:58Z"
+      },
+      "checkpointSHA256": "3ad8e0619893f03b114bb125b8e3b746c664003cf0ce6f75863371c466b4ea44",
+      "matchingNetworkAndAdam": true,
+      "adamStates": 13,
+      "sourceCommit": "c506a03",
+      "sourceFiles": 215,
+      "protocolSHA256": "5df09ac2e5ace3445443568f6254a63425d8ae9e8d3f7d2c22a90275c362f62e",
+      "seedAuditSHA256": "3b64c81d87cd21158e49a45d1de3b78778843b7b524d1dd453b15ea7ae86fa59",
+      "actorSeedOffset": 31949134,
+      "totals": {
+        "matches": 98497,
+        "decisions": 62716735,
+        "rows": 62716735
+      },
+      "retainedReplayRows": 2030626,
+      "pendingRows": 40814,
+      "originalStopAuditSHA256": "95edd15e190cdf6bf5edb1632dd1f998826820a45483141dc1b3065da0205f63",
+      "closeoutStopAuditSHA256": "721553fcf538894d00b6c20af45d0549f4926d6595300f21b20506fbab58e725",
+      "closeoutAuditObservedAtUTC": "2026-11-11T23:26:28.134643+00:00",
+      "allRecordedChildrenExited": true
+    },
+    {
+      "id": "extras-public-s2-v2-20261108",
+      "window": {
+        "startUTC": "2026-11-09T01:37:14.299Z",
+        "deadlineUTC": "2026-11-09T05:37:14.299Z",
+        "requestedHours": 4,
+        "restartExtendsDeadline": false
+      },
+      "stoppedAtUTC": "2026-11-09T05:37:18.462Z",
+      "latest": {
+        "version": "v000107528",
+        "file": "v000107528.onnx",
+        "sha256": "e02776f002e3c372dccf4ab0dcf5fcca5e2de6bf5668f01abeb609db70a06c50",
+        "step": 107528,
+        "trainedRows": 220217344,
+        "ingestedRows": 55054620,
+        "publishedAt": "2026-11-09T05:37:15Z"
+      },
+      "checkpointSHA256": "c33858847a7ec3611b89ed5a5c54ca1e1407c7299cb9b4bee371787a086697b7",
+      "matchingNetworkAndAdam": true,
+      "adamStates": 13,
+      "sourceCommit": "c506a03",
+      "sourceFiles": 215,
+      "protocolSHA256": "33a3a1c2e8b0f2269d1f8aaccfe8258b35a573d902615a094d5fc244d7609ff2",
+      "seedAuditSHA256": "3b64c81d87cd21158e49a45d1de3b78778843b7b524d1dd453b15ea7ae86fa59",
+      "actorSeedOffset": 31949134,
+      "totals": {
+        "matches": 87551,
+        "decisions": 55095293,
+        "rows": 55095293
+      },
+      "retainedReplayRows": 2025743,
+      "pendingRows": 40673,
+      "originalStopAuditSHA256": "e381ff4ecf9d8d2be20f49fa038c61216566fa6351a5e2e6c05591c1b67d9922",
+      "closeoutStopAuditSHA256": "066ff12a92226e27107ebbe2179a0feb40783e1226805f85d7acc3695183b81c",
+      "closeoutAuditObservedAtUTC": "2026-11-11T23:26:48.371615+00:00",
+      "allRecordedChildrenExited": true
+    }
+  ],
+  "totalRegisteredTrainingHours": 16,
+  "totalOptimizerUpdates": 472461,
+  "totalSampledMatches": 381739,
+  "totalDecisionRows": 242081438,
+  "totalIngestedRows": 241901583,
+  "totalPendingRows": 179855,
+  "independentHeldoutRoundsCompleted": 0,
+  "plannedHeldoutRounds": 40000,
+  "heldoutStatus": "not-started-no-strength-conclusion",
+  "researchChampionPromoted": false,
+  "continuousTrainingUntilDeadlineFulfilled": false,
+  "queueFinishedAtUTC": "2026-11-09T05:37:29.758Z",
+  "gapDisclosure": "The four-arm queue ended on Nov9; independent evaluation and subsequent autonomous training were not started before the Nov11 cutoff. No completed continuation or strength gain is claimed.",
+  "reasonForGap": "No successfully executed continuation is present; no single verified root cause is established. Prior WinError10055 observations are not proof of the entire gap cause.",
+  "cutoff": {
+    "computeDeadlineUTC": "2026-11-11T14:45:00Z",
+    "deadlineUTC": "2026-11-11T15:00:00Z",
+    "campaignSTOPPresent": true,
+    "authorizationSHA256": "f09d1aa1ecc745926efef45c99ad4c01e04e62e191b19c62e64889a28468564e",
+    "originalCampaignSHA256": "49243f1d42da858649f992dc93d13773c4f5bd13cb679f924d042b56b1427df6",
+    "earlyCutoffStatus": {
+      "pid": 55540,
+      "updatedAtUTC": "2026-11-11T15:00:01.876Z",
+      "deadlineUTC": "2026-11-11T15:00:00.000Z",
+      "computeDeadlineUTC": "2026-11-11T14:45:00.000Z",
+      "authorizationSHA256": "f09d1aa1ecc745926efef45c99ad4c01e04e62e191b19c62e64889a28468564e",
+      "failure": null
+    },
+    "awakeStatus": {
+      "displayRequired": false,
+      "pid": 49636,
+      "deadlineUTC": "2026-11-11T15:00:00.000Z",
+      "phase": "released-by-owner-cutoff",
+      "powerPlanChanged": false,
+      "updatedAtUTC": "2026-11-11T15:00:02.557Z"
+    },
+    "helperPIDsVerifiedExited": [
+      5536,
+      49636,
+      55540,
+      3964,
+      9696
+    ],
+    "probe": "Node process.kill(pid,0), all ESRCH; no processes killed during closeout",
+    "postDeadlineTrainingOrEvaluationStarted": false,
+    "campaignSTOP": {
+      "reason": "owner-earlier-cutoff",
+      "atUTC": "2026-11-11T14:45:02.831Z"
+    }
+  },
+  "sourceIntegrity": {
+    "frozenCommit": "c506a039cc4cc1cf739cbd34c36007e705c7ac7d",
+    "protocolSourceFiles": 215,
+    "all215NormalizedSHA256Match": true
+  },
+  "automation": {
+    "deleted": "windows-a-b",
+    "preserved": [
+      "ai",
+      "clint-ui"
+    ],
+    "remainingAutomationFilesVerified": true
+  },
+  "web": {
+    "catalogModified": false,
+    "champion": "017/v000855042",
+    "note": "Latest main independently authorizes reason9001 as default; it remains based on017 and is not a new weight champion."
+  },
+  "limitations": [
+    "Paired public/zero arms share training roots within each optimizer seed; do not call four independent training replicates.",
+    "Training sampled matches and row counts are not independent strength evaluation games.",
+    "Retained replay only; evicted rows and original in-memory ring/RNG are not claimed restored.",
+    "No post-deadline heldout evaluation, candidate selection, publication or new training."
+  ],
+  "optimizerUpdatesDuringCloseout": 0,
+  "evaluationGamesDuringCloseout": 0,
+  "validation": {
+    "formatCheck": "passed",
+    "diffCheck": "passed",
+    "fourReadOnlyStopAudits": "passed",
+    "modelAndProtocolSHA256": "passed",
+    "all215FrozenSourceSHA256": "passed",
+    "countersAndDocumentationLinks": "passed",
+    "dashboardConfigurationLoadAndSnapshot": "passed",
+    "nodePythonTrainingTestsAndBuild": "not-rerun: documentation/evidence only; no source or website change",
+    "originalProgressPreservedLocally": true
+  }
+}

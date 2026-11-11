@@ -157,3 +157,7 @@ For a useful [issue](https://github.com/stevensun1005/guandanai/issues), include
 | Review evidence and planned work      | [Research report](./ai/research/MODEL_STUDY.md) · [Research progress log](./ai/research/PROGRESS_LOG.md) · [Improvement proposals and implementation status](./ai/research/IMPROVEMENT_PROPOSAL.md) · [Roadmap](./web/docs/ROADMAP.md) |
 
 Scheduled GuanZero development evaluation now uses the accepted danMCai champion (500 complete matches) and danMCai-reason (200): 250/100 swapped-team pairs,700 matches total. Clint is retired from evaluation. Historical reports retain their registered protocols; publish the identical evaluated weights only after required reports finish. See the [protocol](ai/guanzero/README.md#danmcai-reason评测协议).
+
+### Windows extras window closeout (2026-11-11)
+
+Four four-hour training arms finished with 472,461 new optimizer updates. Independent heldout evaluation completed zero rounds, and subsequent training was not started: no new research champion was established, and continuous training through Wednesday was not fulfilled. Read-only final-network/13-state Adam/replay/215-source audits passed again. The 14:45Z STOP and 15:00Z temporary-awake release were verified; only the expired windows-a-b follow-up was deleted, preserving ai/clint-ui. No deadline extension or website catalog change. Full hashes, counts and limitations: [closeout evidence](ai/research/evaluation/extras-input-ablation-20261108/closeout-20261111.json); study66.5 preserves the original plan and missing work.

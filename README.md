@@ -154,3 +154,7 @@ PR 会执行测试、格式、构建和真实浏览器出牌／牌谱导入检�
 | 核对模型成绩及计划 | [研究主报告](./ai/research/MODEL_STUDY.md) · [研究进展日志](./ai/research/PROGRESS_LOG.md) · [改进建议及实施状态](./ai/research/IMPROVEMENT_PROPOSAL.md) · [迭代路线](./web/docs/ROADMAP.md) |
 
 GuanZero定时开发评测最新安排：danMCai现任门控冠军500场、danMCai-reason200场（250/100对交换阵营，共700场）；Clint不再参与评测。完成后发布同一冻结模型，历史记录保留原协议。[运行协议](ai/guanzero/README.md#danmcai-reason评测协议)。
+
+### Windows extras窗口截止归档（2026-11-11）
+
+四臂各4小时训练已完成，共472,461次新增更新；独立留出0局，后续训练没有接续，未产生新研究冠军，连续训练至周三的要求没有兑现。四份最终权重／13组Adam／回放／215源码的只读停止审计重新通过；14:45Z STOP与15:00Z临时防睡眠释放已核对，windows-a-b到期跟进已删除，ai/clint-ui保留。不延期补跑、不改网页清单。完整SHA、计数与限制见 [归档证据](ai/research/evaluation/extras-input-ablation-20261108/closeout-20261111.json)；主报告66.5保留原计划与未完成事实。

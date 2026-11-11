@@ -5499,5 +5499,34 @@
       "status": "owner-authorized-healthy",
       "deadline": "2026-11-11T15:00:00.000Z"
     }
+  ],
+  "windowsExtrasCloseouts": [
+    {
+      "file": "ai/research/evaluation/extras-input-ablation-20261108/closeout-20261111.json",
+      "classification": "completed-training-without-heldout-no-new-champion",
+      "deadlineUTC": "2026-11-11T15:00:00Z",
+      "models": [
+        {
+          "id": "extras-public-s1-v2-20261108",
+          "version": "v000116049",
+          "sha256": "dc59e6311ae2749c57e7dfe53ba98133f3222d60a379b1717d3944aa8bd83102"
+        },
+        {
+          "id": "extras-zero-s1-v2-20261108",
+          "version": "v000126471",
+          "sha256": "56666a42e3350602ae42480e3ebd4a89b5e2c141cc314920559fc4261c26c80f"
+        },
+        {
+          "id": "extras-zero-s2-v2-20261108",
+          "version": "v000122413",
+          "sha256": "21cddb4aa4cfdb7d26e9fbcdacaed7f3ccf9684401d8e4e0640df61725ee4d81"
+        },
+        {
+          "id": "extras-public-s2-v2-20261108",
+          "version": "v000107528",
+          "sha256": "e02776f002e3c372dccf4ab0dcf5fcca5e2de6bf5668f01abeb609db70a06c50"
+        }
+      ]
+    }
   ]
 }
