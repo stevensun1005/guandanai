@@ -1,0 +1,371 @@
+{
+  "observedAt": "2026-11-11T04:45:02.555Z",
+  "defaultId": "017",
+  "model": {
+    "id": "028",
+    "file": "bot-028.onnx",
+    "sha256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+    "bytes": 6346014,
+    "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-028/bot-028.onnx",
+    "config": {
+      "stateFeatures": 513,
+      "actionFeatures": 54,
+      "history": "guanzero-v1"
+    },
+    "source": {
+      "run": "guanzero-adp-io48",
+      "version": "model-000000475588",
+      "status": "experimental-not-heldout-accepted",
+      "step": 475588,
+      "registeredAt": "2026-11-11T04:44:58.105Z"
+    }
+  },
+  "classification": "Owner-authorized browser deployment; not independent performance acceptance",
+  "strengthEvaluation": null,
+  "developmentEvaluation": {
+    "protocol": "development-500-v1",
+    "opponentPanel": "champion-reason-v4",
+    "modelSHA256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+    "seedStart": 4214000000,
+    "seedEnd": 4214000249,
+    "championSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "reason": {
+      "id": "reason",
+      "name": "danMCai-reason-v000855042",
+      "version": "v000855042-bsearch1-16d76783",
+      "archiveId": "9001",
+      "mode": "self",
+      "modelSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "manifest": {
+        "schema": "danMCai-search-bot-v1",
+        "id": "9001",
+        "kind": "belief-search",
+        "base": {
+          "id": "017",
+          "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+          "version": "v000855042"
+        },
+        "belief": {
+          "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+          "featureVersion": "belief-v1"
+        },
+        "search": {
+          "lo": 21,
+          "hi": 40,
+          "worlds": 8,
+          "k": 6,
+          "net": 2,
+          "endgameHi": 20,
+          "endgameWorlds": 8,
+          "minWorlds": 4,
+          "tieTolerance": 1e-9,
+          "solverMaxNodes": 1500000,
+          "worldSeed": "(seed*1009 + ply*7919)>>>0"
+        },
+        "core": "search-v1"
+      },
+      "gate": {
+        "gate": 330,
+        "acceptedAt": "2026-11-06T10:59:34.199Z",
+        "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+        "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+        "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+      },
+      "budget": {
+        "midgameMs": 50000,
+        "endgameMs": 50000,
+        "solverMs": 3000,
+        "solverTable": 300000
+      },
+      "execution": "move-deadline-50s-native-onnx-v2",
+      "protocol": "clint-champion-reason-v2",
+      "move": {
+        "moveLimitMs": 60000,
+        "reasoningDeadlineMs": 50000,
+        "fallbackReserveMs": 10000,
+        "clockStart": "decision-start",
+        "solverCallMs": "min(solverMs, deadline - now)",
+        "fallback": "frozen-champion-argmax",
+        "failuresSticky": false,
+        "statistics": [
+          "budgetFallback",
+          "knownCardsFallback",
+          "minWorldsFallback",
+          "solverDeadlineCapped",
+          "maxSearchMs",
+          "searchesOver3s",
+          "searchesOver10s",
+          "searchesOver30s"
+        ]
+      },
+      "sourceSHA256": {
+        "ai/danMCai/belief/features.mjs": "de146a33e7bc3b6b0fa3c041ae966f1dd5ca078f8a4f9b66be0da52ef4cfcf29",
+        "ai/danMCai/belief/sampler.mjs": "7523c6018f0dc04a6053c587a65487d8028beae5f1c49299678c27b67493d4cd",
+        "ai/danMCai/endgame/solver.mjs": "2fb05704ebced6fee92259fd53a2ccede55dfc6c1db201bf8fb2ccb3ecbfc9e6",
+        "ai/danMCai/training/continuous/lib.mjs": "32816b7ca1a080ee25dceea4fbbee5bfc1243e4ddfc767a26bba3e178585929a",
+        "ai/guanzero/training/champion.mjs": "5730507eb73972bc4d8c4b365a594fef6250bdb53bf08282fdb398fabdc9e08e",
+        "ai/guanzero/training/evaluate-clint.mjs": "ac3f52f84bf9fac5669cbb74accd2d27b00d72f1d7eec26cc3cc7e7c95726319",
+        "ai/guanzero/training/evaluate-reason.mjs": "31b4af6a1732c54756cdd6db4203e9778981da7762965fcbc2314d7e72aee49e",
+        "ai/guanzero/training/evaluate.mjs": "efb58dd45cc0415a5675bbef5e6d1c59cd54b167299965302cb1d6720fd68c38",
+        "ai/guanzero/training/evaluation-worker.mjs": "7323dcabd4df1718b57852222c075104386c481e2cf7eb084c1d44da5a79a01d",
+        "ai/guanzero/training/history.mjs": "db726f04aec61bbdf4a945a21b03bf015248a441798cbefe8fbabc53635ca58a",
+        "ai/guanzero/training/inference-client.mjs": "4c44216a70dfd4a5d27237a476c6b7de88a7f7bb890a3f0137f199a4eb6a91f4",
+        "ai/guanzero/training/lib.mjs": "202073783ad50aa65ede40a89d06745ab26803a45a331f979687d5c65c21cd25",
+        "ai/guanzero/training/opponent-retirement.mjs": "07d47105dc0de061472bbbe2e5e8843cc7721dccbc8cc8acd47e4104c4d6f083",
+        "ai/guanzero/training/opponents.mjs": "065babaf64a02f69c6ef588ce20a54f3f563339d863acd949ae2eaf1412db834",
+        "ai/guanzero/training/reason.mjs": "7ebd6106393ab6a86c8cc67efd4d8c0af0d202740a71e70c3d02e1894e8b098b",
+        "ai/guanzero/training/source-closure.mjs": "76694042bf89e2b935b2d5aca31c296752d3e5fc0d00242dcd6183ee07d8cbaf",
+        "ai/guanzero/training/worker-lock.mjs": "df35b8884f4bf229860f7d75dd83c7216d1050f17ef7b76b49dee50e3fe4ee40",
+        "ai/publishing/artifacts.mjs": "7b1a9622af6741473b62d6f0ff0dd7c44465ea42bd46e6e1c0ef826c5369f1d9",
+        "ai/shared/search/belief.mjs": "a106d051abe8b488ee0fbeea163b54c891036245132800172ac76e810d702f86",
+        "ai/shared/search/pimc.mjs": "94374899cb13d175d08d7e58d8deb6f16bc97427858a4a77a58cdceafc7bc5a5",
+        "ai/shared/simulation/match-rollout.mjs": "558a8a54daff502980c4521d70b7b17b078464a7452d8fd164c099622e79404a",
+        "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+        "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+        "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+        "ai/shared/simulation/web-clint.mjs": "598a1342b42ad88d5bad8ef603bcb2ef35267050159e5e744a1b519ed916a798",
+        "ai/shared/tribute/encoding.mjs": "9d101d6dc9333a265fe9e02278c7e40e24f9ce3eb0dc413b4491a00f0ce94310",
+        "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+        "web/src/ai/controller.js": "51efd3cff4d6615383927bc67ca023e9d80f9b4e9a8a3bdca6031f642f6db0be",
+        "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+        "web/src/ai/endgame.js": "8fb1a682b9d068f0db754e48d7bafeb888aecf20eaf5188ba9cf2188e338b9bd",
+        "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+        "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+        "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+        "web/src/ai/match-features.mjs": "0c85f03b80fdfc49391bd3290a7357a4ddc5174c1ce41fe0dd0a80f5197aac2f",
+        "web/src/ai/model-catalog.mjs": "c45666b99ede39859f328614f8ebbd0fe2f7fc97b909bba019f11ef0f569c240",
+        "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+        "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+        "web/src/ai/policy-inference.mjs": "87a05913ec0cf30339369ba3f45d8bb478446dcb04bd602f0757920e1c6db79c",
+        "web/src/ai/profiles.js": "ab66a9f9ca49c97726db7b2bb761e713e78bb0251b0fca4eb20ceccdff6a1105",
+        "web/src/ai/response-features.mjs": "babaebdc8d8819da82495138dc7f9d48287903ade4a513ce27f2e780c2125bf3",
+        "web/src/ai/response.mjs": "7cbb946a1f84b5404c7c943be22b91cda420dcf86d2b3f3376db3e198d30ad5f",
+        "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+        "web/src/ai/search/client.js": "f7822a40a28e53f3b2d3a7f75980ec7d25744c99d0d31f03032332cd21bfa4a4",
+        "web/src/ai/search/constants.mjs": "8c97a9dcdbc031de48e9cf844922bd5aa0295c0e26403a81f183c5d62892b4a1",
+        "web/src/ai/search/core.mjs": "54025c92905b27623bfdd98479d3ba5f3aff0e4c5a45074cc56b2c5c4b429c2e",
+        "web/src/ai/search/inference.mjs": "ee4a70f5c663e0acc97353ded566c8f0299ef04aec136668ebbc7c2edd004cda",
+        "web/src/ai/search/known-cards.mjs": "62d7006416a279781e486950f02f1277dd9a7872e8f42689e07f7ab8cb6db895",
+        "web/src/ai/search/payload.mjs": "5a2b7bc192a24bd0bfaed270c86ff3f1fcece381890bfd6fb275621520cbc920",
+        "web/src/ai/table-policy.mjs": "a2e9d7190e0e7fc65d1f393e95a8f8d37b2039e638639da4c648948f21abbc32",
+        "web/src/ai/tribute-observation.mjs": "003e540856a8f7cd5e3f5bce44a592b7e2e5089fb3ded60cd9c2bca3ec7c3285",
+        "web/src/ai/tribute-specialist.mjs": "e5439246020316b80b6522cab4edf644bf9a768cfb13e08fb34ab070fb2bd83b",
+        "web/src/ai/turn-timing.mjs": "ef953e6e812e3b6762628ac6dc42922b395f5913708e71b1166419fb394c4109",
+        "web/src/analysis/concepts.mjs": "826b897540c2784d546109f31cb5e25bd798041f6ace74fb9a42002ee96ce41f",
+        "web/src/app/runtime.js": "9ef24c96ac25bf87592a45c10df90ea904a138f3412f407409d7d7da163687d0",
+        "web/src/audio/sound.js": "0f087259d922696abbac8d5bd9a146a6b3129616763bff8ac51f10f08be6a8e0",
+        "web/src/coach/controller.js": "e3370a9d1bc94bbf325fa9086e0003a3dc1d3abb5ef983fb7a6cd6e1465f2b4c",
+        "web/src/coach/evaluation.mjs": "24d30a2d017500a605c76a5eec496c474f21b38a289c4a27a47ad49e22f93e1b",
+        "web/src/coach/oracle.mjs": "eedbd6aa19e9f12de6f81e424365929e64e83c07823427cd304e2be2ab9c816e",
+        "web/src/collection/client.js": "9ad01216c3c94b0944679517e8c6ad1eac0a4045f5dd559c2482a826c8e6fe51",
+        "web/src/collection/match-link.mjs": "eacaabca67802f329c6aad9bc43326384c7c34b422cb73fab6a4a80b91639887",
+        "web/src/collection/outbox.mjs": "7c83a7715c4b0ee3894006455b03ef3507911959e39c9e7f937f97facf77dfa5",
+        "web/src/collection/record.mjs": "bd980cd4be9ac9b2b2ca7f7e7ca9fd121e6cc154ed1a385b8cac344e9dcac0ac",
+        "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+        "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+        "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+        "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+        "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+        "web/src/core/validation.js": "f12723cca66b153086ef7ea9be668e69ac6638ee1378b2e2990c4431f8de6abb",
+        "web/src/effects/celebrations.js": "e16c646ea96616e7df712060bf0d36f45b82c502303845a06e60e7fabf39d61d",
+        "web/src/effects/dealing.js": "bd950d7f799e263d20f324236480c6851325f01d1da05c70479d8173b36031e4",
+        "web/src/effects/deck.js": "fb7817ecbf8d02f41df6a1bfb29080e9287dd868d76349275923b1143c123f60",
+        "web/src/game/clock.js": "56d0dc32607e6946321c94f3812954e47270d6a17ec3ec48ede349a52aa07c2c",
+        "web/src/game/dealing.js": "77a80be0250975f7dc67e4014f0f3afd79334a52ee7776fbb793ab75357d4b95",
+        "web/src/game/events.js": "7bf3078d7486ff5daced71bf57ba5401e856a4502de8dd50f11d96e7aafd1f5c",
+        "web/src/game/round.js": "54d82e01e9fc2c2ea4496939425d8bd34a38e939bce6c2d40f4efe917e2f4740",
+        "web/src/game/session.js": "afbba604f26a77c91aab859129c882c3bdffa04cb796e1a7f05ed57bf2f5193f",
+        "web/src/game/tribute.js": "33ee306f4e97b90c708248a8f0ce97e5e6b499b642a447f65edf8019d3142fdb",
+        "web/src/game/turns.js": "dd8e41260204b7c760c288207e46da1e97a84cad96e751c0b7ebcbabed675168",
+        "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+        "web/src/hand/follow-hints.js": "574fc03fdb1a859573f077828d8eb3fcf3963ac64da895b59402d14e0fb14a3c",
+        "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+        "web/src/hand/layout.js": "e69d572b6edadf7141f6fcafb9251f8ce017ddc178ce6239c86475207e7d2200",
+        "web/src/hand/ordering.js": "807d4381110a3d2c645856d7e9771837f98c5623895ff3748b921646635b4b99",
+        "web/src/hand/selection-feedback.js": "48062b5f4427f15093c542e94e2e9b5f3edd4accf2f68c26ea4175d7bea883e9",
+        "web/src/hand/straight-flushes.mjs": "7c816d4546342e3442d4628ffaff1f433cd2978efaa8767c937196e88c2bcff7",
+        "web/src/hand/tools.js": "bebdd14217e9dd3113fa964886a2f49b20f30e9b7050455f6c2c29f475b99a10",
+        "web/src/hand/view.js": "cf5660b34e5711703218c5e7f0a24d41a7c278bea3be5b8b7e4bd69d09781e65",
+        "web/src/input/actions.js": "cee7536eef33fb251484c6fa91d2feb33ac860790f840ca7271eff8586198095",
+        "web/src/input/controls.js": "251b474eeab08a44050cc9b0b0f4bb8c037cc7f85b20fd3b478f146ae96bd8d0",
+        "web/src/input/pointer.js": "f9713c7baeda49e285d370e6bd6e5f3132680c6ad97e7cdeb8acacb934321a3a",
+        "web/src/lobby/bot-setup.js": "893830c11c811e1bb4ef3640cc7bc3bca7ef975d39e772023b9bec465a33863d",
+        "web/src/lobby/continue-match.js": "7334c94b9f2d22bd4274f5e677cecd51454eb36d2355304f296f7bf9fab43bd3",
+        "web/src/lobby/level.js": "e364e378474977809f42c6f6cbbfc49589d2b41ab05bf4c5a7769884880d72ce",
+        "web/src/lobby/lobby.js": "dacae810d0028e132d3784d40f1965f9dd56f2ad1a3fb0da7778abc86013413a",
+        "web/src/lobby/start-state.mjs": "37bd804603e536a396c5bafcf9fef936f4ed68d21954c55a6572c17bdfced342",
+        "web/src/network/host-restore.js": "6fecf6123a1921917e2a264d7b85c734be844a50902ca1b07a6447f14a8837d5",
+        "web/src/network/host-storage.mjs": "a08aafd402198103f30c0833c40b87a73f391dd1cdc64114af4ac8fad7bb3878",
+        "web/src/network/protocol.js": "b6f5bf5c57c3ead3034a04e0887952f979ecf0074ff5038fb5d44c97fa5341bf",
+        "web/src/network/public-table.mjs": "1881f1ab55bb7643cb7beec3d810e39b89616ee994a767a2cfdf94072592313c",
+        "web/src/network/recovery.js": "6abe9e8cd3b271058a452526b1ff299926e3d658f375648fc6588d05f9234e7d",
+        "web/src/network/rejoin-storage.js": "bc20290ca07c26873aa19f53cb2b4a1ec6aef7e594d13bc266f8410fba84628e",
+        "web/src/network/rooms.js": "4e5595d8db4fc5a1e513abcd7586d2be4fc02129430103b1a929bee90a116f9c",
+        "web/src/network/snapshot.js": "e288fd4f9fd6cee5d8c97258ffe9291193debda3f3f7a9dd44c9253be1a2e5f8",
+        "web/src/network/spectators.js": "31d6fc99e392359a876ca3dd9bdca2d6761013834f0a9568bd8a1957de2d41cb",
+        "web/src/network/voice.js": "332c68645a7fb5e06a709467f21703807d7e24fafa79e82613fef2c605ea3688",
+        "web/src/private-table/controller.js": "e4233bf1d4db39204265aa34830524bd8c8c44bed297c92f70bf17f36ba682bb",
+        "web/src/private-table/state.mjs": "16f2c2035d01e39c450caea5214d3b56aa77c4a44b8a22b79f9fba6c7101da80",
+        "web/src/replay/history.js": "f40047f3c32a877fcd231c7283c5984a4c535fd1972d4d415307c84adcbacfd8",
+        "web/src/replay/import-export.js": "c80fc01bba480c1d1022a38086c12dfd80c402255c2c326e551438d909325a4d",
+        "web/src/replay/inspector.js": "57b5f0c75986b0f30f391cc0adbffc99f77fcb0ba66cb2914579258fc504b32d",
+        "web/src/replay/match-record.js": "34d415b2ed7697663c54e83cd61af86dcdf7bdbf28a059913958f4ef3667a7fe",
+        "web/src/replay/public-log.js": "7e92d3c267cc400e15e40f2c4099fbd2e6f254f0708c7dd73e4f54e1c3463ce4",
+        "web/src/replay/record-schema.js": "0913ccbfa71ccb007e49d9ac4bcf71a39eeb5acf7aa5e9357b3909a378ffc6dc",
+        "web/src/replay/session.js": "4abc0494eff37469b57c8eae6aa4074e66a58aa78a5fadba0463891af9075b10",
+        "web/src/replay/storage.js": "9a62d39c6cf2e197f2736073f612c522cb1f9bd5f27f83382be1de5f46c64c1d",
+        "web/src/replay/viewer.js": "6fc2c36c82f9cf6cdc77056dc6083e9aa90955af7c0d0f0ccfcaef45dcab50ac",
+        "web/src/rule-bot/arrangement.js": "bcb215cbbc5d3d5dbe86101c305cbf68ee8fda558529d180cfad6657e18685e2",
+        "web/src/rule-bot/endgame-brain.mjs": "b9bf399d04e8cb1a483f573666b920714d1ae211457030acfbe310655f10e3eb",
+        "web/src/rule-bot/runtime.mjs": "0b372ee9863190419edb41af08fec01d9f6435cc255e99960511275dbb713ad5",
+        "web/src/rule-bot/settings.js": "a40327a848ca663484661af40249bde6bff7b526203505fc0676874c766c99cd",
+        "web/src/rule-bot/strategy.js": "67a4d0542f8a01a55c58d0ef8a51075a1c55026fe362683d12e63ce70b879c98",
+        "web/src/rule-bot/timeout.js": "1d505635c26511f2d43e91ab50597f4b08a7aa2c37bca34b7f4daf737542f63b",
+        "web/src/social/controller.js": "a9fafc31f548a4e9b8f3e3c75f55cd6b95414f1e626103f4a6a8c36c15fd3b99",
+        "web/src/social/emotes.mjs": "dc47ee2aa84e50da2f84f19167bcda0b3aa1d49ccbf520aff5aff7c04c11edc4",
+        "web/src/ui/cards.js": "7d24cbd5c1decac38a38b9b0628ad3d168a624c79828c511604e2b853eb7b6d6",
+        "web/src/ui/clocks.js": "65cd7e8a871a49fb6a1fb181262dbe72cda69262aed004913e2d7cc70c11a8d9",
+        "web/src/ui/fullscreen.js": "e4e5a139dbee951d95bde287e941691452394180de23ecde5486a2cc59361c8a",
+        "web/src/ui/history-dialog.js": "3a1793dd11c6f535c8e3854b6cb9b06165e26fd5fcbb0a1b4ef01c6c8c89a098",
+        "web/src/ui/level-display.mjs": "24938fa765fb3e45e94521f77c32cbec169101a4c24480dda5f25627616d9788",
+        "web/src/ui/match-summary.js": "b6c3b64b74a4d1e92a3266b49f8591d61b2e73e14f9c2274bf97edfcda5d7a1b",
+        "web/src/ui/overlays.js": "cd9c748f392eda06fdad7a9882834f8f5c6cf6f9c4831cb053bb93fc127e8862",
+        "web/src/ui/rules-book.mjs": "e9371638eed77657fcab7fa41b90e2182e4e7ea92b3d8defc44148c9c3f136c9",
+        "web/src/ui/rules-dialog.js": "0466d5d55d0a98eb140c4e161e13890c6987ad9ad8d987e3d55f848bc098d098",
+        "web/src/ui/selection-status.js": "7cee62905130422d653f0045dc3782beb3e8767e0f68f9daf5f6dc06f248ec9d",
+        "web/src/ui/table-pile.js": "d8a38af31a93ece24343cbca2e98d2680c03a61fe13b6abc14a37f83c74465d7",
+        "web/src/ui/table.js": "e962a9e0290445aee93242550596d696e29a88ecc75f25aa476c77563853eca9",
+        "web/src/ui/viewport.js": "038a54e0fcc2ac8842022b287c2ec8094fa63e1a1b30c1a867530616ea7bfbc1"
+      },
+      "evaluationSHA256": "71cefe3064913067c737f9e63d7388eb348bb034ac738176d1d7eff030f80686"
+    },
+    "opponentPairs": {
+      "champion": 250,
+      "reason": 100
+    },
+    "opponents": {
+      "champion": {
+        "wins": 210,
+        "losses": 230,
+        "draws": 60,
+        "confidence95": {
+          "matchWinRate": [
+            0.378,
+            0.462
+          ],
+          "matchScore": [
+            0.442,
+            0.518
+          ],
+          "roundWinRate": [
+            0.4515062454077884,
+            0.48314404182440956
+          ],
+          "averageUpgradePoints": [
+            -0.15047548014171172,
+            -0.010843594927403052
+          ]
+        },
+        "reportSHA256": "aeb47b0ce3b6d5347e169ac4d1ad538d7f7486adc75774b9e1a2febbc1c5e25d",
+        "pairs": 250,
+        "matches": 500,
+        "seedEnd": 4214000249
+      },
+      "reason": {
+        "wins": 67,
+        "losses": 113,
+        "draws": 20,
+        "confidence95": {
+          "matchWinRate": [
+            0.27,
+            0.4
+          ],
+          "matchScore": [
+            0.325,
+            0.4475
+          ],
+          "roundWinRate": [
+            0.4491931966855648,
+            0.4964788732394366
+          ],
+          "averageUpgradePoints": [
+            -0.2818057455540356,
+            -0.07467248908296943
+          ]
+        },
+        "reportSHA256": "e8b65f8e0a31fe7877f0fd8aeb9d964a8ae90e1fc2b63659af4282641de857d9",
+        "pairs": 100,
+        "matches": 200,
+        "seedEnd": 4214000099
+      }
+    }
+  },
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "validation": {
+    "nodeTests": {
+      "total": 492,
+      "passed": 456,
+      "failed": 0,
+      "skipped": 36
+    },
+    "guanzeroPythonTests": 9,
+    "format": "passed",
+    "browserWasm": {
+      "status": "PASSED",
+      "backend": "browser-wasm",
+      "positions": 16,
+      "totalValues": 49,
+      "maxError": 5.960464477539062e-7,
+      "actionMismatches": 0
+    },
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "028",
+          "guanzero-adp-io48-475588"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "9001",
+          "danMCai-reason-v000855042"
+        ]
+      ],
+      "defaults": [
+        "9001",
+        "9001",
+        "9001",
+        "9001"
+      ]
+    },
+    "build": "78b1b67720",
+    "outcomesAndIntervals": "recomputed from250/100 swapped-team clusters",
+    "frozenSourceSHA256": "verified2090bff reason and af2a683 champion",
+    "currentWebEncoding": "state and history source bytes match frozen evaluator"
+  },
+  "manualRegistration": {
+    "authority": "owner immediate request: 评测一下",
+    "requestedAt": "2026-11-11T02:42:13.736Z",
+    "kind": "manual-development-not-heldout",
+    "index": 5140,
+    "scheduledSlot5133Backfilled": false,
+    "modelVersion": "model-000000475588",
+    "modelSHA256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+    "planSHA256": "d356e6e38b7ccdf35aef469b027ddc6f7cac2477ac0d12416c5384a114c0aecc"
+  },
+  "defaultChoice": "9001",
+  "requiredMatches": {
+    "champion": 500,
+    "reason": 200
+  },
+  "reportArchives": [
+    "ai/research/evaluation/guanzero-475588-development-v4-champion.json",
+    "ai/research/evaluation/guanzero-475588-development-v4-reason.json"
+  ]
+}

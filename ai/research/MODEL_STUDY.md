@@ -3155,3 +3155,43 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 ### 所有者即时评测登记：guanzero-adp-io48-475588（2026-11-10晚）
 
 所有者在训练恢复后要求“评测一下”，于2026-11-11T02:42:13.720Z冻结当时完整导出，SHA `c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb`；新独立手动槽5140，冠军250对/500场（4214000000–4214000249）、reason100对/200场（前100个种子至4214000099），不测Clint、不回填已错过的5133。冠军017/accept330、reason v2/50秒及冻结伴随2090bff、原冠军基线af2a683均绑定；两组同批独立低优先级CPU工作器运行。训练源码/配置与原截止未变，网站仍027。当前仅登记正在进行的开发评测，不是完成成绩或独立验收。[原始计划](evaluation/guanzero-475588-plan.json)／[即时登记](evaluation/guanzero-475588-manual-registration.json)。
+
+### 网页模型 model-000000475588（归档 028） · 2026-11-11T04:44:58.105Z
+
+归档完整导出 `guanzero-adp-io48/model-000000475588`，SHA-256 为 `c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb`。清单底座 `defaultId` 仍为017，实际新玩家默认 `defaultChoice` 仍为reason9001。本批已完成下方700场开发评测；这不代表独立验收或新冠军，GuanZero轮换不改变默认。[发布证据](evaluation/web-model-028.json)。
+
+### 即时开发评测完成与同权重发布：guanzero-adp-io48-475588
+
+所有者要求即时评测后，新手动槽5140按champion-reason-v4完成冠军250对/500场和reason100对/200场，共700场，不测Clint。此批不是错过的5133回填，也不是周三最终检查点；[即时登记](evaluation/guanzero-475588-manual-registration.json)和[原计划](evaluation/guanzero-475588-plan.json)保持原字节。
+
+| 对手     | 场数 |  胜 |  负 |  平 | 每场得分 | 种子对簇95%区间 |
+| -------- | ---: | --: | --: | --: | -------: | --------------- |
+| champion |  500 | 210 | 230 |  60 |    0.480 | [0.442, 0.518]  |
+| reason   |  200 |  67 | 113 |  20 |    0.385 | [0.325, 0.448]  |
+
+冠军每场得分0.480的95%区间[0.442,0.518]跨0.5，尚无本批开发证据证明超过冠军；对reason为0.385 [0.325,0.4475]，本批仍明显落后。此前批次使用其他种子，不能把跨批胜率差直接当作显著提升。
+
+冠军种子4214000000–4214000249，reason使用前100个至4214000099；对内交换阵营，区间按种子对簇重算。胜=1、平=0.5、负=0的每场得分不是单纯胜率。双方完整SHA、冠军017/accept330、reason底座/推断网络/预算/源闭包均核验，原始[冠军报告](evaluation/guanzero-475588-development-v4-champion.json)和[reason报告](evaluation/guanzero-475588-development-v4-reason.json)保留逐场结果。普通冠军评测仍af2a683，reason冻结2090bff，真实推断/搜索，50秒推理、60秒行动、10秒回落预留。实际统计（ms为毫秒，CPU墙钟受机器负载影响）：
+
+```json
+{
+  "decisions": 90263,
+  "forced": 27109,
+  "baseOnly": 45817,
+  "midgame": 11601,
+  "endgame": 5736,
+  "minWorldsFallback": 9,
+  "budgetFallback": 9,
+  "knownCardsFallback": 0,
+  "changedFromChampion": 3083,
+  "inferences": 5086349,
+  "searchMs": 6869006.394899948,
+  "solverDeadlineCapped": 37,
+  "maxSearchMs": 50006.424599999984,
+  "searchesOver3s": 288,
+  "searchesOver10s": 83,
+  "searchesOver30s": 25
+}
+```
+
+这是开发证据，不是独立棋力验收、平板性能测试或新冠军。未按结果挑权重，也无胜率发布门槛。同一完整ONNX SHA `c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb`贯通计划、两份报告和归档028；Chrome WASM 16局面/49数值最大绝对误差5.960464477539062e-7、动作不一致0。Node456通过/36跳过，相关Python9项、格式、构建和本地四项菜单/四席9001默认通过。[发布证据](evaluation/web-model-028.json)继续记录实际线上部署，不能以本地验证冒充生效。原训练配置/固定截止不变，下一08:00/5134和10:00最终5150仍独立登记，不补回停机时间。

@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2026-11-10 · GuanZero475588即时评测与同权重发布
+
+- 独立手动槽5140完成冠军500场210胜/230负/60平、reason200场67胜/113负/20平；逐场报告、种子对区间、搜索统计与完整SHA归档。
+- 网页GuanZero轮换为guanzero-adp-io48-475588（归档028），四项菜单、reason默认及历史权重保留。开发结果不是独立验收，不回填错过的定时槽，不延长训练窗口。详见[发布证据](ai/research/evaluation/web-model-028.json)。
+
 ## 2026-11-10 · 第五窗口推理采样出牌记录与启动登记
 
 - `ai/danMCai/training/continuous/search-actor.mjs` 新增 `--history=1`（默认 0，输出不变）：每行另写 GuanZero `history()` 计数编码的最近 20 手公开出牌（`.h.i8`，1,080 维，只借编码）与块内序号／分段／剩余牌数（`.m.u8`），分片为 schema 2，`done.json` 列出新文件 SHA 与分段行数。测试 `search-actor-history.test.mjs`。说明见[持续训练指南](ai/research/CONTINUOUS_TRAINING.md#推理采样进程search-actormjs第四窗口新增)。

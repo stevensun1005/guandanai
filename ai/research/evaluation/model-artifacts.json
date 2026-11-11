@@ -3932,6 +3932,18 @@
           "step": 468071,
           "registeredAt": "2026-11-10T14:21:25.781Z"
         }
+      },
+      {
+        "id": "028",
+        "sha256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-028/bot-028.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000475588",
+          "status": "experimental-not-heldout-accepted",
+          "step": 475588,
+          "registeredAt": "2026-11-11T04:44:58.105Z"
+        }
       }
     ]
   },
@@ -5141,6 +5153,112 @@
         "searchesOver3s": 79,
         "searchesOver10s": 26,
         "searchesOver30s": 6
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-475588-development-v4-champion.json",
+      "opponent": "champion",
+      "reportSHA256": "aeb47b0ce3b6d5347e169ac4d1ad538d7f7486adc75774b9e1a2febbc1c5e25d",
+      "protocolSHA256": "251e01c116f69ce8f677a58b70e68a8c35057e2133a9d2f06c3231b0c4fc08fc",
+      "completedAt": "2026-11-11T03:00:01.344Z",
+      "opponentPanel": "champion-reason-v4",
+      "manual": true,
+      "pairs": 250,
+      "matches": 500,
+      "seedStart": 4214000000,
+      "seedEnd": 4214000249,
+      "modelSHA256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+      "metrics": {
+        "matches": 500,
+        "wins": 210,
+        "losses": 230,
+        "draws": 60,
+        "matchWinRate": 0.42,
+        "matchScore": 0.48,
+        "rounds": 5452,
+        "roundWins": 2547,
+        "roundWinRate": 0.46716801173881145,
+        "averageUpgradePoints": -0.08088774761555392,
+        "confidence95": {
+          "matchWinRate": [
+            0.378,
+            0.462
+          ],
+          "matchScore": [
+            0.442,
+            0.518
+          ],
+          "roundWinRate": [
+            0.4515062454077884,
+            0.48314404182440956
+          ],
+          "averageUpgradePoints": [
+            -0.15047548014171172,
+            -0.010843594927403052
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-475588-development-v4-reason.json",
+      "opponent": "reason",
+      "reportSHA256": "e8b65f8e0a31fe7877f0fd8aeb9d964a8ae90e1fc2b63659af4282641de857d9",
+      "protocolSHA256": "2d89634bd1a060ba9527848f6472eb0a5a55fcabd4f8da2811ad619c578e5963",
+      "completedAt": "2026-11-11T04:43:44.379Z",
+      "opponentPanel": "champion-reason-v4",
+      "manual": true,
+      "pairs": 100,
+      "matches": 200,
+      "seedStart": 4214000000,
+      "seedEnd": 4214000099,
+      "modelSHA256": "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb",
+      "metrics": {
+        "matches": 200,
+        "wins": 67,
+        "losses": 113,
+        "draws": 20,
+        "matchWinRate": 0.335,
+        "matchScore": 0.385,
+        "rounds": 2247,
+        "roundWins": 1063,
+        "roundWinRate": 0.4730752113929684,
+        "averageUpgradePoints": -0.17445482866043613,
+        "confidence95": {
+          "matchWinRate": [
+            0.27,
+            0.4
+          ],
+          "matchScore": [
+            0.325,
+            0.4475
+          ],
+          "roundWinRate": [
+            0.4491931966855648,
+            0.4964788732394366
+          ],
+          "averageUpgradePoints": [
+            -0.2818057455540356,
+            -0.07467248908296943
+          ]
+        }
+      },
+      "searchStats": {
+        "decisions": 90263,
+        "forced": 27109,
+        "baseOnly": 45817,
+        "midgame": 11601,
+        "endgame": 5736,
+        "minWorldsFallback": 9,
+        "budgetFallback": 9,
+        "knownCardsFallback": 0,
+        "changedFromChampion": 3083,
+        "inferences": 5086349,
+        "searchMs": 6869006.394899948,
+        "solverDeadlineCapped": 37,
+        "maxSearchMs": 50006.424599999984,
+        "searchesOver3s": 288,
+        "searchesOver10s": 83,
+        "searchesOver30s": 25
       }
     }
   ],
