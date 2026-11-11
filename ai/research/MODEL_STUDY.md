@@ -3195,3 +3195,5 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 ```
 
 这是开发证据，不是独立棋力验收、平板性能测试或新冠军。未按结果挑权重，也无胜率发布门槛。同一完整ONNX SHA `c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb`贯通计划、两份报告和归档028；Chrome WASM 16局面/49数值最大绝对误差5.960464477539062e-7、动作不一致0。Node456通过/36跳过，相关Python9项、格式、构建和本地四项菜单/四席9001默认通过。[发布证据](evaluation/web-model-028.json)继续记录实际线上部署，不能以本地验证冒充生效。原训练配置/固定截止不变，下一08:00/5134和10:00最终5150仍独立登记，不补回停机时间。
+
+475588实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/42961573970)成功，线上Chrome实见 `guanzero-adp-io48-475588`、四项菜单和四席9001默认。公网bot-028.onnx为6346014字节，完整SHA `c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。四份Git原始证据逐字节SHA核验通过；原配置与周三10:00固定截止SHA未变。
