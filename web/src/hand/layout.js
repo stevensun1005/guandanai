@@ -143,10 +143,11 @@ export function handGeo(n, keys) {
         ch * 0.3,
         Math.min(gap, (Math.max(base, ch * 2.4) - lift - ch - pad) / (rows.length - 1)),
       );
+    const tagX = Math.max(0, ...rows.map((r) => r.w)) + 5;
     rows.forEach((r, i) => {
       const y = lift + i * gap;
       r.gr.forEach((id, j) => g.fix.set(id, { x: j * r.off, y, rot: 0 }));
-      g.fixTags.push({ x: r.w + 5, y: y + ch - 26, gr: r.gr });
+      g.fixTags.push({ x: tagX, y, gr: r.gr });
     });
     need = lift + ch + (rows.length - 1) * gap + 6;
   }

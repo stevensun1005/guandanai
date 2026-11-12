@@ -1,3 +1,4 @@
+import { clockShown } from '../core/table-timing.mjs';
 import { runtime } from '../app/runtime.js';
 import { HURRY_MS } from '../game/clock.js';
 import { startTurn } from '../game/turns.js';
@@ -68,12 +69,20 @@ export function renderClocks() {
       (c.who === p ||
         (c.who === 'deck' && c.seat === p) ||
         ((c.who === 'tribute' || c.who === 'return') && c.seats.includes(p)));
-    const n = on ? String(Math.max(0, Math.ceil(c.left / 1000))) : '';
+    const over = on && c.left <= 0 && c.res > 0,
+      shown = on ? clockShown(c) : 0;
+    const n = on
+      ? (over ? '+' : '') +
+        Math.max(0, Math.ceil(shown / 1000)) +
+        (!over && c.res > 0 ? '|' + Math.ceil(c.res / 1000) : '')
+      : '';
     if (el.dataset.n !== n) {
       el.dataset.n = n;
-      el.innerHTML = n ? `<b>${n}</b>` : '';
+      const [big, reserve] = n.split('|');
+      el.innerHTML = n ? `<b>${big}${reserve ? `<i>+${reserve}</i>` : ''}</b>` : '';
     }
-    el.classList.toggle('hurry', on && c.left <= HURRY_MS);
+    el.classList.toggle('hurry', on && shown <= HURRY_MS);
+    el.classList.toggle('over', !!over);
   }
   const prep = !!c && c.who === 'prep';
   $('#prep').hidden = !prep;

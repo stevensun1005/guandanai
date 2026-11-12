@@ -1,3 +1,4 @@
+import { playMs } from '../core/table-timing.mjs';
 import { runtime } from '../app/runtime.js';
 import { analyze, beats, strength } from '../core/combinations.js';
 import { TYPE_NAME, BASE_NAMES, makeDeck, cardText } from '../core/cards.js';
@@ -287,7 +288,9 @@ function startSnapshot(game) {
           s.searching = true;
           renderCoach();
           searchClient ||= sharedSearchClient(VERSION);
-          result = await searchClient.evaluate(COACH_SEARCH_BOT_ID, s.payload);
+          result = await searchClient.evaluate(COACH_SEARCH_BOT_ID, s.payload, {
+            turnMs: playMs(runtime.rules),
+          });
         }
         if (!enabled) return;
         applyValues(s, result);

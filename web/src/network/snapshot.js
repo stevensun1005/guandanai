@@ -12,7 +12,7 @@ export function rotateSnapshot(source, offset) {
         fields.filter((field) => value[field] != null).map((field) => [field, seat(value[field])]),
       ),
     }));
-  for (const field of ['hands', 'last', 'pw'])
+  for (const field of ['hands', 'last', 'pw', 'res'])
     if (game[field]?.length === 4)
       game[field] = Array.from({ length: 4 }, (_, local) => game[field][(local + offset) % 4]);
   for (const field of [

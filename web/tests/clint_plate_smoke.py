@@ -53,7 +53,7 @@ with sync_playwright() as p:
             page.evaluate("()=>{G.fixed=[[0,13],[1,14]];render()}")
             page.wait_for_timeout(100)
             grouping = page.evaluate("""()=>{const tag=document.querySelector('#fixTags .fzt').getBoundingClientRect(),card=document.querySelector('#hand [data-id="0"]').getBoundingClientRect();return{tag:tag.toJSON(),card:card.toJSON()}}""")
-            assert 10 <= grouping['card']['bottom'] - grouping['tag']['top'] <= 32, grouping
+            assert abs(grouping['card']['top'] - grouping['tag']['top']) <= 4, grouping
         badge = page.evaluate("""()=>{const e=document.querySelector('#myVc');e.className='vc mute';return{display:getComputedStyle(e).display,pseudo:getComputedStyle(e,'::after').content}}""")
         assert badge['display'] == 'none' and badge['pseudo'] in ['none', 'normal', '""'], badge
         assert page.locator('#micBtn').count() == 1

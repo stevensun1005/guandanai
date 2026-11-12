@@ -1,3 +1,4 @@
+import { prepMs } from '../core/table-timing.mjs';
 import { cardHTML } from './cards.js';
 // Adapted from Clint e7538a18; examples only, never a policy or training input.
 const RULES_L = 2;
@@ -252,7 +253,7 @@ export function rulesPages(rules, modelDescription, timing) {
           items: [
             ruleItem(
               '一局的流程',
-              '洗牌、切牌（上一局头游的上家洗、头游切，第一局随机）→ 发牌 → 进贡 → 90 秒理牌（理好点「理牌结束」）→ 还贡 → 出牌。',
+              `洗牌、切牌（上一局头游的上家洗、头游切，第一局随机）→ 发牌 → 进贡 → ${prepMs(rules) / 1000} 秒理牌（理好点「理牌结束」）→ 还贡 → 出牌。`,
               { tag: '每局开始' },
             ),
             ruleItem('限时', timing),

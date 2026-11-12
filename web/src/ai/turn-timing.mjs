@@ -24,8 +24,9 @@ export const FALLBACK_RETRY_MS = 5_000;
 /** Milliseconds of reasoning left for a turn that started at `startedAt` (same clock as `now`). */
 export const reasonLeft = (startedAt, now) => startedAt + REASON_MS - now;
 /** Milliseconds until the hard limit (worker replacement) of that turn. */
-export const hardLeft = (startedAt, now) => startedAt + HARD_MS - now;
+export const hardLeft = (startedAt, now, turnMs = TURN_MS) =>
+  startedAt + Math.min(HARD_MS, turnMs - 8000) - now;
 
 /** Clint's brain budget for a request posted `elapsed` ms after its turn started (0 = rules only). */
-export const clintBrainMs = (elapsed) =>
-  Math.max(0, Math.min(CLINT_BRAIN_MS, REASON_MS - Math.max(0, elapsed)));
+export const clintBrainMs = (elapsed, turnMs = TURN_MS) =>
+  Math.max(0, Math.min(CLINT_BRAIN_MS, Math.min(REASON_MS, turnMs - 10000) - Math.max(0, elapsed)));

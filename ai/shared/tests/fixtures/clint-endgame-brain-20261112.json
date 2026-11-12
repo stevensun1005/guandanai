@@ -1,0 +1,50 @@
+{
+  "upstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+  "inputFixture": "clint-endgame-brain-20261109.json",
+  "inputFixtureSHA256": "a93528dbfa5ff28236effa5fd2c42a2852ed9bc43615120ced3da99113baf13f",
+  "kind": "upstream-replies-on-existing-synthetic-regression-positions",
+  "positions": [
+    {
+      "seed": 781067,
+      "upstreamRules": [
+        49,
+        64
+      ],
+      "upstreamBrain": [
+        49,
+        64,
+        77,
+        103
+      ]
+    },
+    {
+      "seed": 804079,
+      "upstreamRules": [
+        19,
+        86
+      ],
+      "upstreamBrain": [
+        50
+      ]
+    },
+    {
+      "seed": 817115,
+      "upstreamRules": [
+        26
+      ],
+      "upstreamBrain": [
+        27,
+        40
+      ]
+    },
+    {
+      "seed": 822063,
+      "upstreamRules": [
+        76
+      ],
+      "upstreamBrain": [
+        76
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { coachAssisted, restoreCoachExposure } from '../coach/controller.js';
 import { runtime } from '../app/runtime.js';
 import { $ } from '../ui/cards.js';
-import { VERSION, ROOM_PREFIX, peerReady } from './protocol.js';
+import { VERSION, ROOM_PREFIX, peerReady, keepSignal } from './protocol.js';
 import { readHost, writeHost, clearHost } from './host-storage.mjs';
 import { leaveNet, listenHost, enterOnline } from './rooms.js';
 import { snapshotReservations, restoreReservations } from './recovery.js';
@@ -141,9 +141,10 @@ export function restoreHost() {
   const open = () => {
     const peer = new Peer(ROOM_PREFIX + saved.code);
     runtime.network.peer = peer;
+    keepSignal(peer);
     lobbyStatus(`正在恢复房间 ${saved.code}…`, true);
     peer.on('open', () => {
-      if (runtime.network.peer !== peer) return;
+      if (runtime.network.peer !== peer || runtime.network.peerOpen) return;
       const latest = readHost(localStorage, VERSION);
       if (!latest || latest.code !== saved.code) {
         peer.destroy();

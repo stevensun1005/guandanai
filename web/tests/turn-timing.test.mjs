@@ -329,3 +329,35 @@ test('danMCai-reason: hang, failed load, worker crash and error reply in a row, 
   assert.equal(bot.searchStats.searched, searchedBefore + 1);
   assert.equal(live('search').length, 1);
 });
+
+test('a20-second room gives a hung reason search12seconds including replacement and then plays017', async (t) => {
+  const tick = mockMoveClock(t),
+    game = position(731901002, 'midgame', 9901);
+  seat(game, '9001');
+  runtime.rules = { playMode: '20+60' };
+  t.after(() => {
+    runtime.rules = {};
+  });
+  const p = game.turn,
+    plays = candidates(game.hands[p], game.L, game.trick?.play);
+  let remaining;
+  behaviour = {
+    'ai:decide': (worker, message) => worker.later(message.id, { index: 1 }),
+    'search:search': (_worker, message) => {
+      remaining = message.remainingMs;
+    },
+  };
+  let settled;
+  const promise = bot
+    .decide(p, { startedAt: performance.now() })
+    .then((play) => (settled = { play }));
+  await flush(10);
+  assert.ok(remaining > 0 && remaining <= 10000);
+  tick(11999);
+  await flush();
+  assert.equal(settled, undefined);
+  tick(1);
+  await flush(10);
+  await promise;
+  assert.deepEqual(ids(settled.play), ids(plays[1]));
+});

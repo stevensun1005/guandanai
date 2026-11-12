@@ -5534,5 +5534,12 @@
         }
       ]
     }
+  ],
+  "clintFunctionalSyncs": [
+    {
+      "file": "ai/research/evaluation/clint-sync-20261112-0320.json",
+      "upstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+      "classification": "functional-and-rule-sync-no-independent-strength-games"
+    }
   ]
 }

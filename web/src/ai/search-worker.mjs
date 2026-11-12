@@ -157,7 +157,7 @@ const nextTask = () =>
   });
 
 /** Coach values for the human player's turn; yields every ~50 ms so a table search can cut in. */
-async function coach(payload, job) {
+async function coach(payload, job, remainingMs) {
   const started = performance.now();
   let game;
   try {
@@ -197,7 +197,7 @@ async function coach(payload, job) {
       if (job.cancelled) throw new SearchBudgetError('cancelled');
       return performance.now();
     },
-    deadline: deadlineOf(started, band),
+    deadline: deadlineOf(started, band, remainingMs),
     counter: { inferences: 0 },
   };
   let result;
@@ -250,7 +250,7 @@ self.onmessage = ({ data }) => {
         id,
         result:
           type === 'coach'
-            ? await coach(data.payload, job)
+            ? await coach(data.payload, job, data.remainingMs)
             : await search(data.payload, data.remainingMs),
       });
     } catch (error) {

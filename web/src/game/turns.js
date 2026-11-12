@@ -1,9 +1,10 @@
+import { prepMs, turnClock } from '../core/table-timing.mjs';
 import { runtime } from '../app/runtime.js';
 import { tributeDecision } from '../ai/tribute-specialist.mjs';
 import { Sound } from '../audio/sound.js';
 import { beats } from '../core/combinations.js';
 import { genPlays } from '../core/moves.js';
-import { AI_THINK_MAX, AI_THINK_MIN, PLAY_MS, PREP_MS } from './clock.js';
+import { AI_THINK_MAX, AI_THINK_MIN } from './clock.js';
 import { isHost, isHumanSeat, toAbs } from './session.js';
 import { act } from './events.js';
 import { processReturns } from './tribute.js';
@@ -26,8 +27,8 @@ export function startPrep(leader) {
   // the practice table gives ten minutes, to sort the computer's hands too
   runtime.game.clock = {
     who: 'prep',
-    left: runtime.reviewMode ? 600000 : PREP_MS,
-    total: runtime.reviewMode ? 600000 : PREP_MS,
+    left: runtime.reviewMode ? 600000 : prepMs(runtime.rules),
+    total: runtime.reviewMode ? 600000 : prepMs(runtime.rules),
   };
   render();
   // the computer players return their card early in the sorting minute, one after the other
@@ -120,6 +121,37 @@ export function later(fn, ms) {
   }, ms);
 }
 
+// A short hand may still hold a bomb. Pass only after the actual legal-action check.
+export function autoPassShort() {
+  const game = runtime.game,
+    cur = game.trick?.play;
+  if (
+    runtime.reviewMode ||
+    runtime.network.watching ||
+    !cur ||
+    game.hands[0].length >= cur.n ||
+    runtime.hints.length
+  )
+    return;
+  const count = game.log.length;
+  const go = () => {
+    if (
+      runtime.game !== game ||
+      game.log.length !== count ||
+      game.phase !== 'play' ||
+      game.turn !== 0 ||
+      runtime.network.pending
+    )
+      return;
+    if (game.paused) {
+      setTimeout(go, 500);
+      return;
+    }
+    act({ k: 'pass', p: toAbs(0), automatic: true });
+  };
+  setTimeout(go, 900);
+}
+
 export function startTurn() {
   runtime.hints = [];
   runtime.hintIdx = 0;
@@ -149,13 +181,14 @@ export function startTurn() {
       genPlays(runtime.game.hands[0], runtime.game.L).filter((pl) => beats(pl, cur)),
     );
     Sound.play('turn');
-    runtime.game.clock = { who: 0, left: PLAY_MS, total: PLAY_MS };
+    runtime.game.clock = turnClock(runtime.game, 0, true, runtime.rules);
     render();
+    autoPassShort();
     return;
   }
   // a friend's turn: their clock runs here too, and their move arrives as an event
   if (isHumanSeat(p)) {
-    runtime.game.clock = { who: p, left: PLAY_MS, total: PLAY_MS };
+    runtime.game.clock = turnClock(runtime.game, p, true, runtime.rules);
     renderClocks();
     return;
   }
@@ -166,12 +199,9 @@ export function startTurn() {
     : active(0)
       ? AI_THINK_MIN + Math.random() * (AI_THINK_MAX - AI_THINK_MIN)
       : 400 + Math.random() * 300;
-  runtime.game.clock = {
-    who: p,
-    left: PLAY_MS,
-    total: PLAY_MS,
+  runtime.game.clock = turnClock(runtime.game, p, false, runtime.rules, {
     think: isHost() ? think : undefined,
-  };
+  });
   renderClocks();
   // only the deciding device searches; a research-bot search overlaps the think delay
   if (isHost()) TableBot?.prefetch(p);

@@ -80,7 +80,7 @@ function armRest(by, jk, wild, L) {
   return units;
 }
 
-function armWilds(units) {
+function armWilds(units, L) {
   for (;;) {
     const wi = units.findIndex((u) => u.wu && u.n === 1);
     if (wi < 0) return units;
@@ -89,6 +89,18 @@ function armWilds(units) {
     let best = null,
       bs = armScore(units, 1);
     rest.forEach((u, i) => {
+      if (AIP.rWildTrip && u.type === 'full' && u.value < 16 && !u.wu) {
+        const triple = u.cards.slice(0, 3),
+          pair = u.cards.slice(3),
+          candidate = rest.slice();
+        candidate[i] = armUnit('bomb', u.value, triple.concat(w.cards), 1);
+        candidate.push(armUnit('pair', val(pair[0], L), pair));
+        const score = armScore(candidate, 1) + AIP.wildTripBonus;
+        if (score > bs) {
+          bs = score;
+          best = candidate;
+        }
+      }
       if (u.value >= 16 || !['single', 'pair', 'triple', 'bomb'].includes(u.type)) return;
       const n = u.n + 1,
         cand = rest.slice();
@@ -162,7 +174,7 @@ function arrange(hand, L) {
       for (const c of cards) by[c.r].push(c);
     }
   })(0, wild.length);
-  return armWilds(best);
+  return armWilds(best, L);
 }
 
 let armCache = new WeakMap();

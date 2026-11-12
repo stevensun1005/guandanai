@@ -1,0 +1,970 @@
+{
+  "schema": 1,
+  "kind": "clint-functional-sync-not-strength-evaluation",
+  "observedAtUTC": "2026-11-12T03:44:20.484051+00:00",
+  "baseMain": "2eeb38a1ba255bb27db48a0c88347f64c0c70f14",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "15868750340355261529bd372dfde4c4a782705d",
+    "previousChecked": "30a8067ec901cda4109507ac0ef26c455444f846",
+    "checkedSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+    "commits": [
+      {
+        "sha": "fb83ae990fabf5162d4450df3955593223e89bed",
+        "subject": "成组提示字按最长一组对齐；暂停时暂停窗口里能开关麦、房主能取消别人的暂停",
+        "paths": [
+          "index.html",
+          "web/src/game/events.js",
+          "web/src/hand/layout.js",
+          "web/src/network/voice.js",
+          "web/src/ui/overlays.js"
+        ]
+      },
+      {
+        "sha": "6460e6857feffeab5584725eaec28f47cc9484b6",
+        "subject": "残局大脑：默认电脑在四家都只剩 6 张以内时，抽样没见过的牌（按出牌过牌加权）并用精确求解器算，明显更好才改规则的出法",
+        "paths": [
+          "README.md",
+          "bot/README.md",
+          "bot/clint/endgame-brain.js",
+          "index.html",
+          "web/src/game/computer-players.js",
+          "web/src/index.html",
+          "web/src/training/steps.js"
+        ]
+      },
+      {
+        "sha": "6b8a7eb5354c07c48630577e3804d201a0866ee2",
+        "subject": "残局大脑放宽到每家 ≤10 张：设置改成对象，每种牌分布轮流用三种搜索顺序并限时，太难的牌分布放弃，来不及就用规则的出法",
+        "paths": [
+          "README.md",
+          "bot/clint/endgame-brain.js",
+          "index.html"
+        ]
+      },
+      {
+        "sha": "7fd07fdf3ae0e6a0157b99d89ccf09bfa789e98d",
+        "subject": "Give [upstream viewer]'s computer partner full hand knowledge",
+        "paths": [
+          "bot/clint/clint-bot.js",
+          "bot/clint/endgame-brain.js",
+          "index.html",
+          "tests/ai-hand-knowledge.cjs",
+          "web/src/game/computer-players.js",
+          "web/src/game/state.js"
+        ]
+      },
+      {
+        "sha": "220f2459a4a62423532cfad503ffcc3a5022670c",
+        "subject": "残局大脑：计算时间上限提到 10 秒（一种牌分布最多 4 秒，第一种就算不完当场放弃），抽样数加到 40 种",
+        "paths": [
+          "README.md",
+          "bot/clint/endgame-brain.js",
+          "index.html",
+          "web/src/game/computer-players.js"
+        ]
+      },
+      {
+        "sha": "f03dc3c853d81bdd3730fb40ed4788e85b73e91a",
+        "subject": "残局大脑：每家 ≤12 张启用，计算时间上限 30 秒（一种牌分布最多 10 秒），抽到 8 种后能判断就提前停",
+        "paths": [
+          "README.md",
+          "bot/clint/endgame-brain.js",
+          "index.html",
+          "web/src/game/computer-players.js"
+        ]
+      },
+      {
+        "sha": "2d91ecca950e6617f80e500cd205450112bb40d4",
+        "subject": "电脑后期出炸弹：选出的最小炸弹若是同点数更大一组的一部分（5张A里的4张），整组一起出，不拆成4张加一张单牌",
+        "paths": [
+          "bot/clint/clint-bot.js",
+          "index.html"
+        ]
+      },
+      {
+        "sha": "60d81efc29068d84d7b677a2cd442ec1b6928700",
+        "subject": "Remove [upstream viewer]'s all-hands computer partner (reverts 7fd07fd)",
+        "paths": [
+          "bot/clint/clint-bot.js",
+          "bot/clint/endgame-brain.js",
+          "index.html",
+          "tests/ai-hand-knowledge.cjs",
+          "web/src/game/computer-players.js",
+          "web/src/game/state.js"
+        ]
+      },
+      {
+        "sha": "46f5e768c5d7d5c95715425d085d5be10c83b494",
+        "subject": "danMCai 换成 guandanai 的搜索版（9001）：底座 017，推断暗牌后搜索；页面上仍叫 danMCai",
+        "paths": [
+          "README.md",
+          "bot/README.md",
+          "bot/models.json",
+          "bot/reason/README.md",
+          "bot/reason/assets/reason-client.mjs",
+          "bot/reason/assets/search-worker.mjs",
+          "bot/reason/assets/vendor/ort-wasm-simd-threaded.mjs",
+          "bot/reason/assets/vendor/ort-wasm-simd-threaded.wasm",
+          "bot/reason/assets/vendor/ort.wasm.min.mjs",
+          "bot/reason/models/belief-v1-16d76783.onnx",
+          "bot/reason/models/bot-017.onnx",
+          "bot/reason/reason-latency.json",
+          "index.html",
+          "web/README.md",
+          "web/__pycache__/build.cpython-312.pyc",
+          "web/build.py",
+          "web/src/coach/coach.js",
+          "web/src/collection/record.js",
+          "web/src/game/computer-players.js",
+          "web/src/game/reason-bot.js",
+          "web/src/index.html",
+          "web/src/lobby/rules.js"
+        ]
+      },
+      {
+        "sha": "30a8067ec901cda4109507ac0ef26c455444f846",
+        "subject": "Drop an accidentally committed Python cache file; ignore __pycache__",
+        "paths": [
+          ".gitignore",
+          "web/__pycache__/build.cpython-312.pyc"
+        ]
+      },
+      {
+        "sha": "a2db8eaa30c8daf340a3779a3235ef0eaa234e0e",
+        "subject": "第31局评语：早期不用王压、百搭拆三带二成炸弹、两手走完时压对家的最大牌、有最大单张时先走别的牌；残局大脑首个局面最多算3秒",
+        "paths": [
+          "bot/clint/clint-bot.js",
+          "bot/clint/endgame-brain.js",
+          "index.html"
+        ]
+      },
+      {
+        "sha": "6c068fde96346157a27e7948dc35cad92d3f5a23",
+        "subject": "danMCai 跟进 guandanai 的出牌时间规则「60 秒出牌、50 秒推理、10 秒回落」",
+        "paths": [
+          "README.md",
+          "bot/models.json",
+          "bot/reason/README.md",
+          "bot/reason/assets/reason-client.mjs",
+          "bot/reason/assets/search-worker.mjs",
+          "bot/reason/reason-latency.json",
+          "index.html",
+          "web/build.py",
+          "web/src/game/computer-players.js",
+          "web/src/game/reason-bot.js"
+        ]
+      },
+      {
+        "sha": "bc922b096679553f3fd69e1a840e986486e8c00c",
+        "subject": "更新推理bot的bug",
+        "paths": [
+          "bot/clint/clint-bot.js",
+          "bot/clint/endgame-brain.js",
+          "index.html",
+          "tests/ai-hand-knowledge.cjs",
+          "web/src/game/computer-players.js",
+          "web/src/game/state.js"
+        ]
+      },
+      {
+        "sha": "bbc0823681c7e538280e2aac62569fc7c800d9d3",
+        "subject": "修复bot bug",
+        "paths": [
+          "bot/reason/README.md",
+          "bot/reason/assets/open-coach-worker.mjs",
+          "bot/reason/open-coach-extension.js",
+          "index.html",
+          "tests/open-coach.cjs",
+          "web/build.py",
+          "web/src/coach/coach.js",
+          "web/src/game/reason-bot.js"
+        ]
+      },
+      {
+        "sha": "74abfd42c4a05bab127c6c9c1e4c8de32a18bb1f",
+        "subject": "updating ui",
+        "paths": [
+          "index.html",
+          "tests/seat-powers.cjs",
+          "web/src/index.html",
+          "web/src/styles/table.css",
+          "web/src/ui/render.js",
+          "web/src/ui/seat-powers.js"
+        ]
+      },
+      {
+        "sha": "b8bc828474a3cccb844e95ef626fd335a82fa8e8",
+        "subject": "Remove all-hands inference and restore selected AI models",
+        "paths": [
+          "bot/clint/clint-bot.js",
+          "bot/clint/endgame-brain.js",
+          "bot/reason/README.md",
+          "bot/reason/assets/open-coach-worker.mjs",
+          "bot/reason/open-coach-extension.js",
+          "index.html",
+          "tests/ai-hand-knowledge.cjs",
+          "tests/ai-public-information.cjs",
+          "tests/open-coach.cjs",
+          "web/build.py",
+          "web/src/coach/coach.js",
+          "web/src/game/computer-players.js",
+          "web/src/game/reason-bot.js",
+          "web/src/game/state.js"
+        ]
+      },
+      {
+        "sha": "331ea50057a0c000033962b4cd6bba6201939403",
+        "subject": "署名去掉 [upstream contributor]；房主刷新或关网页后不再自动回到牌局",
+        "paths": [
+          "README.md",
+          "index.html",
+          "web/README.md",
+          "web/src/app/boot.js",
+          "web/src/game/events.js",
+          "web/src/index.html",
+          "web/src/network/guest.js",
+          "web/src/network/host-restore.js",
+          "web/src/network/host.js",
+          "web/src/ui/overlays.js"
+        ]
+      },
+      {
+        "sha": "9f6ad8acc3c70d96a1276a52e59ab70651c5c0c6",
+        "subject": "成组区的牌型提示字放回每组牌的右上方（仍按最长一组对齐）",
+        "paths": [
+          "index.html",
+          "web/src/hand/layout.js"
+        ]
+      },
+      {
+        "sha": "eca09ab355e2e70bd36243d1e2006994327f91c4",
+        "subject": "修复昵称 clint 开的 8888 房间别人进不去",
+        "paths": [
+          "README.md",
+          "index.html",
+          "web/src/lobby/lobby.js",
+          "web/src/network/connection.js",
+          "web/src/network/guest.js",
+          "web/src/network/host.js",
+          "web/src/ui/options.js"
+        ]
+      },
+      {
+        "sha": "22df1f81cf39c58a86c3e14f74b59543d2666f15",
+        "subject": "README 加上 iPad 使用说明（带截图）",
+        "paths": [
+          "README.md",
+          "docs/ipad-guide/02-seated.jpg",
+          "docs/ipad-guide/03-shuffle.jpg",
+          "docs/ipad-guide/05-table.jpg",
+          "docs/ipad-guide/06-selected.jpg",
+          "docs/ipad-guide/07-grouped.jpg",
+          "docs/ipad-guide/08-table.jpg",
+          "docs/ipad-guide/09-hint.jpg",
+          "docs/ipad-guide/10-played.jpg",
+          "docs/ipad-guide/12-options.jpg",
+          "docs/ipad-guide/13-emote.jpg",
+          "docs/ipad-guide/15-result.jpg",
+          "docs/ipad-guide/19-portrait.jpg",
+          "docs/ipad-guide/20-rules.jpg",
+          "docs/ipad-guide/21-join.jpg",
+          "docs/ipad-guide/22-host.jpg"
+        ]
+      },
+      {
+        "sha": "179c32391d16abac3848fa5ef78fcb850e5e7e8f",
+        "subject": "观战不再要求和房主同一版本",
+        "paths": [
+          "README.md",
+          "index.html",
+          "web/src/network/guest.js",
+          "web/src/network/host.js"
+        ]
+      },
+      {
+        "sha": "ee3f0c2d6d62d52864dd67017b3c91b109b8208c",
+        "subject": "手牌少于桌上牌数时自动过；大厅新增理牌时间、出牌时间（房主选，电脑思考上限随之缩短）",
+        "paths": [
+          "index.html",
+          "web/src/game/clock.js",
+          "web/src/game/computer-players.js",
+          "web/src/game/events.js",
+          "web/src/game/reason-bot.js",
+          "web/src/game/state.js",
+          "web/src/game/tribute.js",
+          "web/src/game/turns.js",
+          "web/src/index.html",
+          "web/src/lobby/rules.js",
+          "web/src/network/guest.js",
+          "web/src/ui/rules.js"
+        ]
+      },
+      {
+        "sha": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+        "subject": "大厅新布局（照片在底部、名字和模式按钮对齐、同排等宽）；理牌时间30/60/90；出牌时间20+60、30+60、60（每步限时+每局超时余额）",
+        "paths": [
+          "index.html",
+          "web/src/game/clock.js",
+          "web/src/game/events.js",
+          "web/src/game/play.js",
+          "web/src/game/round.js",
+          "web/src/game/state.js",
+          "web/src/game/ticker.js",
+          "web/src/game/turns.js",
+          "web/src/index.html",
+          "web/src/lobby/rules.js",
+          "web/src/styles/lobby.css",
+          "web/src/styles/table.css",
+          "web/src/ui/rules.js"
+        ]
+      }
+    ],
+    "paths": [
+      {
+        "status": "A",
+        "path": ".gitignore",
+        "disposition": "Python caches and generated outputs already ignored locally.",
+        "upstreamSHA256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+      },
+      {
+        "status": "M",
+        "path": "README.md",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "2cfb706747f006811c0504068cf6f23f35bd207a575053a5922d4dbf79b777e2"
+      },
+      {
+        "status": "M",
+        "path": "bot/README.md",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "3cd69e883cbf0c03b977cdf871320ea0d34185ff821dcf439ae231d11cd5e357"
+      },
+      {
+        "status": "M",
+        "path": "bot/clint/clint-bot.js",
+        "disposition": "Ported to independent rules-v2: wild/full-house arrangement, top single retention, two-play partner overtake, early joker retention, first-world3s cap.",
+        "upstreamSHA256": "05e7ebd8fd34454bbdfad2645937a7bd8c168198e3a0c204bb376ac6479a933a"
+      },
+      {
+        "status": "A",
+        "path": "bot/clint/endgame-brain.js",
+        "disposition": "Ported to independent rules-v2: wild/full-house arrangement, top single retention, two-play partner overtake, early joker retention, first-world3s cap.",
+        "upstreamSHA256": "a6a0049e7b1068bc191e00f58dca4e52c07f7ab1410420537a7e19c646e41705"
+      },
+      {
+        "status": "M",
+        "path": "bot/models.json",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "531e30c0d401fd042f9aa7f41587ff49cbcae9c9b41b4a115eaa4ebaf89fee20"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/README.md",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "82595b0e204af2b2002bd7ddd1156c16544e0a3eaa41dbe46785f89f37707438"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/assets/reason-client.mjs",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "869ab81e3975e82bb21b8c2e49d73b4a6e57f3d24fce5d8f1493678002e27f0f"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/assets/search-worker.mjs",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "10079e4bddc771241cdb617ce7dab799a08870b9aca87cb97e77b6d993ba27a4"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/assets/vendor/ort-wasm-simd-threaded.mjs",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "30ed0b5cd1182ede931fea448afb567d4dc705ec957af09f108a2be5f770dac3"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/assets/vendor/ort-wasm-simd-threaded.wasm",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "4b884c203b0fa48d057be3332c65513ff85aa3c5bddd6946acc0fab7ecda001d"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/assets/vendor/ort.wasm.min.mjs",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "c21d9c326d453a4a61398270c804d5979e118540597cb0c07f7b3d64e6098234"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/models/belief-v1-16d76783.onnx",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/models/bot-017.onnx",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+      },
+      {
+        "status": "A",
+        "path": "bot/reason/reason-latency.json",
+        "disposition": "Do not copy redistributed017/belief9001 weights, generated search bundles or vendor files; canonical local modules/catalog/Releases retained.",
+        "upstreamSHA256": "143f784c460a4c87a39ed3212a44b46f6ae12dad85a93ad5dc709adabd0d84e2"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/02-seated.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "af624feb7c811fd3e2f66f6328af8323ea5ce7b92920cd06b60a86b4b4c83c9e"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/03-shuffle.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "c93ef484aab662a313b0ff8b4e9550fa8c8e6cd1b701e161b6de071e018eab95"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/05-table.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "7f817c3495dcb71e0d39ebdf32ada48606faa9620135687151d83c2bd8b50f0b"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/06-selected.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "3521219edc08899973c1fdd46c16f8e92d9515701d6f6b673523c1ed6e130ae1"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/07-grouped.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "4d2f6fe5088781a67749359062ee558a55e25af3744e73518b58a58a50e9db4a"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/08-table.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "9ef094680863cb119eacc2e744ce3a0c54afd3136825af8be7f7a0f4c8cdc05e"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/09-hint.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "7760af267f0d6a2dde76ad2f186791a0aa2fc1ad07d1a152661b68757bb5f1a1"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/10-played.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "b0e92f940ab71a3c4c01f560034b14c9c75301bc2240b08b036e80dc3ec67411"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/12-options.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "7df870988c92b352cc9eeb9d3290751038a3a3133b7292826ba078f172c8faff"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/13-emote.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "b716dd61d8f70924779290e646c0caf90d5bd25c45134b0c1f988c5f7cef3470"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/15-result.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "4440e2fabb18128247bcc86b4103d910562447112a1b9d85cb0d04a6ca396c34"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/19-portrait.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "489ced0e2a2670521dbe3e2908dff30ef350aa4623c326a3a8e712aefb3241b4"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/20-rules.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "8f173e32bd3ccb56f4ec409da91cf463ae9d8a151fa5b41a9926e50931b95dff"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/21-join.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "ae2bbaf061326a41f7cacd53e48dd27c8f20f36e27357659cc8649033337f67e"
+      },
+      {
+        "status": "A",
+        "path": "docs/ipad-guide/22-host.jpg",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "358a01ddcd5a67db782eb66e61ceb292587b361f674dfc184b5cb7e6d8347df3"
+      },
+      {
+        "status": "M",
+        "path": "index.html",
+        "disposition": "Generated single-file/include build not copied; source adapted to local ES modules.",
+        "upstreamSHA256": "9b4da506acf9d4abdd0b239a8eee98396a733fd06700302be87f4938288a03c8"
+      },
+      {
+        "status": "A",
+        "path": "tests/ai-public-information.cjs",
+        "disposition": "Use local public-information/rule/privacy/browser regressions; do not copy source-specific VM harness.",
+        "upstreamSHA256": "c31a09df462fb8356b374fa9a82abc71c85545e771199ecdee26108431a18172"
+      },
+      {
+        "status": "A",
+        "path": "tests/seat-powers.cjs",
+        "disposition": "Use local public-information/rule/privacy/browser regressions; do not copy source-specific VM harness.",
+        "upstreamSHA256": "98af1a2402df6223a13593e67ec59527cc883369abba93e8d13453eaf873167d"
+      },
+      {
+        "status": "M",
+        "path": "web/README.md",
+        "disposition": "Adapt local iPad/operation guidance with local URL/menu/coach/recovery semantics; upstream screenshot set not copied.",
+        "upstreamSHA256": "1d322baa99ad011d28ed3f070926b77e232f79bd70d358904871007555d24a3e"
+      },
+      {
+        "status": "M",
+        "path": "web/build.py",
+        "disposition": "Generated single-file/include build not copied; source adapted to local ES modules.",
+        "upstreamSHA256": "1f2fd04cfd2d00fe812c02a5e1c705563b737ab3c420ea2cb0f342b4fd9bd888"
+      },
+      {
+        "status": "M",
+        "path": "web/src/app/boot.js",
+        "disposition": "Do not remove protected host restoration.",
+        "upstreamSHA256": "c5e56be30eab7e684d582dbb95db9594b143402fe6c7d583cb8aadd7d4c56afe"
+      },
+      {
+        "status": "M",
+        "path": "web/src/coach/coach.js",
+        "disposition": "Canonical local reason9001 coach already integrated; room budget cap only, host/personal/assisted/private gates retained.",
+        "upstreamSHA256": "f42f092e2f73fd79d4ed464ce408773a632bda787b55001c2f556f14548c7695"
+      },
+      {
+        "status": "M",
+        "path": "web/src/collection/record.js",
+        "disposition": "Existing local raw-only room/name capture and9001 collection identity retained; no new collector fields.",
+        "upstreamSHA256": "49da12c9a87b57e612a01d8299393f88406b04877a6a17aa31afb5fa02cbde5b"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/clock.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "8947dcd10c7880111cf020c710a45ac2daba611bf7a2ca95e730845ae6791ee2"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/computer-players.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "4786598da3ce7038dc78d23620f09583b36f10d7092e2781d945618bd9a04f42"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/events.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "07038b4c67a1405a590654aa6f56ca29f81f6a04bf0b91bd657c558e72d14273"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/play.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "0856e2108f4980bfef33714a54819767335f331f281f4862e61c77800c28474f"
+      },
+      {
+        "status": "A",
+        "path": "web/src/game/reason-bot.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "cea485fd5e029a6d4e149513edd84f096d9dd29ae103dcf4c64fff1093c7267f"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/round.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "b74c3c15615399c5d43d1ff9f6ae3320a175c918342485b74fd4b2c3e494066c"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/state.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "c29a70e03626fc990a2af0dcd477eb63e140725824aab359225619cd2f3decb8"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/ticker.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "4cf2520f2b1fbcd442d7de2ebe6292f89d31d587e91c2f6ba5f9fcdd03374802"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/tribute.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "dc8167b119101d7e3f4e3828b785309e9e58b5e35e4ccfca3ad708665908b3f1"
+      },
+      {
+        "status": "M",
+        "path": "web/src/game/turns.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "a4cebe22a5615b2c48586b007816dffbb14952000186b12e9ee8098dc12afe95"
+      },
+      {
+        "status": "M",
+        "path": "web/src/hand/layout.js",
+        "disposition": "Horizontal tags align with longest group at upper right; phone columns unchanged.",
+        "upstreamSHA256": "6736cee01bea1987c2cd447ebd0f26c05b58595cfe7016dcb52019f3a2a672c0"
+      },
+      {
+        "status": "M",
+        "path": "web/src/index.html",
+        "disposition": "Adapt lobby header/grid/footer photo, pause microphone/host-only cancel, clock badge, dynamic help and visibility reconnect; retain local menu, ownership switches, attribution and recovery. All-hand labels excluded.",
+        "upstreamSHA256": "60475223062c7f37fb4280430a89bb47409f3f95ae721729458150f1f53c71bb"
+      },
+      {
+        "status": "M",
+        "path": "web/src/lobby/lobby.js",
+        "disposition": "Existing local8-character phone names cover upstream nickname fix; no fixed8888 room feature added.",
+        "upstreamSHA256": "955ee8cf68a4d15b572d3b0786143a6b2407a3a2a3d9e6492bf703f9725185ef"
+      },
+      {
+        "status": "M",
+        "path": "web/src/lobby/rules.js",
+        "disposition": "Adapt room timing30/60/90 and20+60/30+60/60, per-seat per-round reserve, host-authoritative balances and rotated recovery; shorter inference budgets only. Auto-pass checks all legal replies including bombs and marks automatic. No neural rule fallback or strategy change.",
+        "upstreamSHA256": "dba86b5a67837185dfd2eebf9ef59c0bdde7efc1cf3e411b341d325264284f10"
+      },
+      {
+        "status": "M",
+        "path": "web/src/network/connection.js",
+        "disposition": "Adapt signaling reconnect, first-open guard,15s unanswered join/watch, pause mic and public cross-version spectators. Player authorization/version checks and host recovery retained; no nickname-fixed8888 path added.",
+        "upstreamSHA256": "6867df5fa98b097d856ecbfc35e266d35b06166559b3ac391b0d57d3f40c2917"
+      },
+      {
+        "status": "M",
+        "path": "web/src/network/guest.js",
+        "disposition": "Adapt signaling reconnect, first-open guard,15s unanswered join/watch, pause mic and public cross-version spectators. Player authorization/version checks and host recovery retained; no nickname-fixed8888 path added.",
+        "upstreamSHA256": "23dbae7a9b80bbea0f8701dd14fccadca4eb935adaa9dadf3f5a3453702e9191"
+      },
+      {
+        "status": "D",
+        "path": "web/src/network/host-restore.js",
+        "disposition": "Keep host refresh/closed-tab recovery; add signaling reconnect with first-open guard."
+      },
+      {
+        "status": "M",
+        "path": "web/src/network/host.js",
+        "disposition": "Adapt signaling reconnect, first-open guard,15s unanswered join/watch, pause mic and public cross-version spectators. Player authorization/version checks and host recovery retained; no nickname-fixed8888 path added.",
+        "upstreamSHA256": "c7030cc266f3949b21fb5ea65caf1fe6c610296c9c6983d93be5e5f088737f9e"
+      },
+      {
+        "status": "M",
+        "path": "web/src/network/voice.js",
+        "disposition": "Adapt signaling reconnect, first-open guard,15s unanswered join/watch, pause mic and public cross-version spectators. Player authorization/version checks and host recovery retained; no nickname-fixed8888 path added.",
+        "upstreamSHA256": "7e0544e2d555eb29580419d3d069c8269c0ccb5ba54bd382491bb70443ab3e4e"
+      },
+      {
+        "status": "M",
+        "path": "web/src/styles/lobby.css",
+        "disposition": "Adapt lobby header/grid/footer photo, pause microphone/host-only cancel, clock badge, dynamic help and visibility reconnect; retain local menu, ownership switches, attribution and recovery. All-hand labels excluded.",
+        "upstreamSHA256": "6a38844166b8a713835e83fdffd425516dd9bfa8b37859c66cf21ee24ed211d4"
+      },
+      {
+        "status": "M",
+        "path": "web/src/styles/table.css",
+        "disposition": "Adapt lobby header/grid/footer photo, pause microphone/host-only cancel, clock badge, dynamic help and visibility reconnect; retain local menu, ownership switches, attribution and recovery. All-hand labels excluded.",
+        "upstreamSHA256": "eac3331d15c573c8f019bb100b2f9605cf4ae5989369ba5617f720ea58c93e53"
+      },
+      {
+        "status": "M",
+        "path": "web/src/training/steps.js",
+        "disposition": "Keep isolated local practice/exact-solver wiring; no frozen training modification.",
+        "upstreamSHA256": "3bb12b9225ca4d4c8c8b4de6296e33b500ca54259b547bbcb0d9eb1f0ebd18fa"
+      },
+      {
+        "status": "M",
+        "path": "web/src/ui/options.js",
+        "disposition": "Adapt lobby header/grid/footer photo, pause microphone/host-only cancel, clock badge, dynamic help and visibility reconnect; retain local menu, ownership switches, attribution and recovery. All-hand labels excluded.",
+        "upstreamSHA256": "696f7e2393a7e45e7f03ebfe85770d55458196a8c3a4c9c034737d629465e947"
+      },
+      {
+        "status": "M",
+        "path": "web/src/ui/overlays.js",
+        "disposition": "Adapt lobby header/grid/footer photo, pause microphone/host-only cancel, clock badge, dynamic help and visibility reconnect; retain local menu, ownership switches, attribution and recovery. All-hand labels excluded.",
+        "upstreamSHA256": "52c86f7f5cf5808c04df48e75c617d93b7f734af1a2c5d8dd700c94c65a6ee5e"
+      },
+      {
+        "status": "M",
+        "path": "web/src/ui/render.js",
+        "disposition": "All-hand strength labels not adopted; existing private-table tool retained.",
+        "upstreamSHA256": "45ec055d6c9131b84c0453bebfbe4707554f29aba8d708256889b9a28b765aea"
+      },
+      {
+        "status": "M",
+        "path": "web/src/ui/rules.js",
+        "disposition": "Adapt lobby header/grid/footer photo, pause microphone/host-only cancel, clock badge, dynamic help and visibility reconnect; retain local menu, ownership switches, attribution and recovery. All-hand labels excluded.",
+        "upstreamSHA256": "c2d87467a3771ad6c213bded693f29657ef503b5bc6d37dd5c072c97103c3a1b"
+      },
+      {
+        "status": "A",
+        "path": "web/src/ui/seat-powers.js",
+        "disposition": "Do not add viewer-specific labels reading all hands outside the explicit host private tool.",
+        "upstreamSHA256": "894ac7bcd439d028f1e1bdf7b8a8eaa35ac025851b0c62bfda334e01c200df16"
+      }
+    ]
+  },
+  "strategyChanged": true,
+  "ruleSourceSHA256": {
+    "web/src/rule-bot/settings.js": "4d470aed77611c1dfc1452b29bfa94455365e1ea466eeb6269746f4ef8ff3526",
+    "web/src/rule-bot/arrangement.js": "b1f2c3a85d62f529d824eea0d25ab68b72ceb0b54bcba7466aa129f364085cb6",
+    "web/src/rule-bot/strategy.js": "3a19c5f18c56e24233c3130c56eba43f3eff9ac0277b7d4fe65c03599199b136",
+    "web/src/rule-bot/endgame-brain.mjs": "c15874b8138c7b9241ec7cb283502f6cd80877bb91cc7c3329151544bdd365e9",
+    "web/src/rule-bot/runtime.mjs": "0b372ee9863190419edb41af08fec01d9f6435cc255e99960511275dbb713ad5"
+  },
+  "protectedUnchangedSourceSHA256": {
+    "web/src/ai/model-catalog.json": "2f1b7d95550058c442a0d2bf3c34a23fc4ff602d1d8c1549ab601799982fea1b",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/collection/record.mjs": "bd980cd4be9ac9b2b2ca7f7e7ca9fd121e6cc154ed1a385b8cac344e9dcac0ac",
+    "web/src/collection/client.js": "9ad01216c3c94b0944679517e8c6ad1eac0a4045f5dd559c2482a826c8e6fe51",
+    "web/src/collection/validate.mjs": "dafe1c869d73ae1d944f2589f82075a3495d8518ae07956dbe3425c9638dc929",
+    "web/src/private-table/state.mjs": "16f2c2035d01e39c450caea5214d3b56aa77c4a44b8a22b79f9fba6c7101da80",
+    "web/src/private-table/controller.js": "e4233bf1d4db39204265aa34830524bd8c8c44bed297c92f70bf17f36ba682bb",
+    "web/src/ai/search/constants.mjs": "8c97a9dcdbc031de48e9cf844922bd5aa0295c0e26403a81f183c5d62892b4a1",
+    "web/src/ai/search/core.mjs": "54025c92905b27623bfdd98479d3ba5f3aff0e4c5a45074cc56b2c5c4b429c2e",
+    "web/src/ai/search/coach.mjs": "02a7b572f0bd6cff0c4a04d272c680376732d5bd75e945ba24b7b0c3662875e6"
+  },
+  "frozenTraining": {
+    "commit": "c506a039cc4cc1cf739cbd34c36007e705c7ac7d",
+    "all215SourcesUnchanged": true,
+    "trainingStartedOrMutated": false
+  },
+  "regressionFixtureUpdate": {
+    "historicalFixturePreserved": true,
+    "expectedReplies": "ai/shared/tests/fixtures/clint-endgame-brain-20261112.json",
+    "expectedSource": "Fixed upstream VM, seeded RNG, same four synthetic positions; unlimited wall budget. Old inputs/replies retained. Zero new games.",
+    "reviewTestSeed": "NewClint trajectory9301002 no longer has<=16-card tail;9301004 keeps independent exact solver comparison and flagged-move coverage. Test data only, not research samples."
+  },
+  "validation": {
+    "status": "passed",
+    "node": {
+      "total": 497,
+      "passed": 461,
+      "skipped": 36,
+      "failed": 0
+    },
+    "researchPython": {
+      "passed": 40
+    },
+    "sharedPython": {
+      "passed": 3,
+      "skipped": 1
+    },
+    "format": "passed",
+    "build": "passed",
+    "localBuildVersion": "1d775d6165",
+    "plate": {
+      "viewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1024,
+          768
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          844,
+          390
+        ]
+      ],
+      "errors": []
+    },
+    "phone": {
+      "cases": 4,
+      "errors": []
+    },
+    "roomOptions": {
+      "layout": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "modeWidths": [
+            83.328125,
+            83.328125,
+            83.34375
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "modeWidths": [
+            86,
+            86,
+            86
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "modeWidths": [
+            102.65625,
+            102.671875,
+            102.65625
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "modeWidths": [
+            86,
+            86,
+            86
+          ],
+          "savedClockOptions": true
+        }
+      ],
+      "bombNotAutoPassed": true,
+      "forcedPassMarkedAutomatic": true,
+      "pageErrors": [],
+      "strengthGames": 0
+    },
+    "spectators": {
+      "roomCodeShown": true,
+      "twoHumansRemainTwo": true,
+      "spectatorCannotActSitRecoverOrSync": true,
+      "unseatedReceivesNoGameBroadcast": true,
+      "crossVersionPublicSpectatorAccepted": true,
+      "playerVersionGuardRetained": true,
+      "spectatorNeuralDownloads": 0,
+      "publicSnapshotsOnly": true,
+      "guestRecoveryWhileWatching": true,
+      "twoPlayerAudioLines": true,
+      "hostVoiceLockAndUnlock": true,
+      "nextRoundFreshState": true,
+      "nicknamesAndBlackNames": true,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "hostExitEndsSpectating": true,
+      "pageErrors": [],
+      "purpose": "Browser interaction/security regression, no strength evaluation or real human training data"
+    },
+    "hostRestore": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff": true,
+      "roomAndHumanNamesRestored": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "wasmAndRules": {
+      "actualRuleReplies": 6,
+      "allRuleGameNeuralDownloads": 0,
+      "wasmModels": [
+        "028",
+        "017"
+      ],
+      "strategyFixtures": {
+        "singleAlong": {
+          "type": "single",
+          "value": 14
+        },
+        "levelFirst": {
+          "type": "single",
+          "value": 15
+        },
+        "firstJoker": null,
+        "tributeException": {
+          "type": "single",
+          "value": 17
+        }
+      },
+      "fixtureScope": "Eight real opening actions; selectable neural compatibility decisions and four rule strategy fixtures, no strength estimates",
+      "pageErrors": []
+    },
+    "privateTool": {
+      "strengthMatches": 0,
+      "completedRounds": 0,
+      "trainingUpdates": 0,
+      "realPeerJS": true,
+      "hostOnlyNicknameGate": true,
+      "guestSameNameDenied": true,
+      "noPrivateRuleFlagBroadcast": true,
+      "partnerUsesOracle": true,
+      "opponentStaysRules": true,
+      "neuralOpponentUsesOnlyPublicObservation": true,
+      "manualOutsideBeamRated": false,
+      "offRestoresPartnerRules": true,
+      "privateHandsMatchHeldCounts": true,
+      "constructedCompletionExcluded": true,
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "coach": {
+      "strengthMatches": 0,
+      "trainingUpdates": 0,
+      "hostDeniedEnforced": true,
+      "postMoveRetained": true,
+      "independentPlayerPreferences": true,
+      "assistedEventMarked": true,
+      "realPeerJSDataChannel": true,
+      "hostWGuestS": true,
+      "rejoinRestoresPermissionAndPreference": true,
+      "pageErrors": []
+    },
+    "shortClockTest": "20s room, hung reason replaced at12s and017 returned; next-turn retry coverage retained",
+    "sourceBoundaryChecks": "catalog/candidates/encoding/observation/original-rules/hand-value/collection/private-table/search constants+core unchanged; frozen215 sources unchanged",
+    "scope": "Synthetic UI/Worker/network compatibility; no independent strength games or real human records"
+  },
+  "deployment": {
+    "status": "pending",
+    "successCursorAdvanced": false
+  },
+  "strengthEvaluation": {
+    "newIndependentGames": 0,
+    "claims": "No strength or win-rate claim. HistoricalClint results remain bound to old hashes."
+  },
+  "boundaries": [
+    "Clint heuristics only rules-v2; neural candidates/values/rewards/training unchanged.",
+    "Ordinary own-hand/public observations retained, no new full-hand disclosure; explicit host private tool protected.",
+    "Room/name raw capture, assisted flags, recovery,017 champion and9001 default retained. Impossible-follow passes marked automatic."
+  ]
+}

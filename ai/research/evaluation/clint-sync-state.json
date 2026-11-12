@@ -2,28 +2,18 @@
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
   "lastSuccessfulUpstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
-  "evidence": "clint-sync-20261109-2155.json",
+  "evidence": "clint-sync-20261112-0320.json",
   "pending": [
     {
-      "upstreamCommit": "fb83ae990fabf5162d4450df3955593223e89bed",
-      "kind": "ui",
+      "upstreamCommit": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+      "kind": "deployment-verification",
       "items": [
-        "grouped-hand tags aligned at the longest group (web/src/hand/layout.js)",
-        "pause panel microphone toggle (web/src/ui/overlays.js, web/src/network/voice.js)",
-        "host can cancel another player's pause (web/src/ui/overlays.js, web/src/game/events.js)"
+        "Pages build/deploy success and live four-item menu/default check"
       ],
-      "reason": "owner request 2026-11-09 covered the Clint bot only"
-    },
-    {
-      "upstreamCommit": "f03dc3c853d81bdd3730fb40ed4788e85b73e91a",
-      "kind": "rule-wiring",
-      "items": [
-        "browser 残局大脑 budget 10 s instead of 30 s until web/src/ai/controller.js rule-request timeout (15 s) is raised"
-      ],
-      "reason": "controller outside the rule-bot scope"
+      "reason": "Functional adaptation and local checks passed; successful cursors wait for actual deployment."
     }
   ],
-  "lastCheckedUpstreamSHA": "30a8067ec901cda4109507ac0ef26c455444f846",
+  "lastCheckedUpstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",
@@ -31,5 +21,5 @@
   },
   "previousSuccessfulEvidence": "clint-sync-20261108-1635.json",
   "lastSuccessfulRuleStrategySHA": "30a8067ec901cda4109507ac0ef26c455444f846",
-  "note": "lastSuccessfulUpstreamSHA stays at 15868750 because the UI items of fb83ae9 are pending; rule strategy is synced through lastSuccessfulRuleStrategySHA (30a8067: 60d81ef/46f5e76/30a8067 contain no Clint rule-strategy change)."
+  "note": "Full UI/rule adaptation through6e57485 tested locally; prior successful cursors retained until Pages and live verification complete. Protected differences are documented dispositions, not missing patches."
 }

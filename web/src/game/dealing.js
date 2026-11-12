@@ -43,6 +43,7 @@ export function startRound(e) {
   runtime.game.gives = [];
   runtime.game.afterTrib = false;
   runtime.game.clock = null;
+  runtime.game.res = null;
   runtime.game.stepWait = null;
   runtime.game.busy = false;
   runtime.game.reveal = 0;

@@ -1,3 +1,4 @@
+import { clockShown, commitReserve } from '../core/table-timing.mjs';
 import { runtime } from '../app/runtime.js';
 import { TableBot } from '../ai/controller.js';
 import { aiReturnCard, tributeCard } from '../ai/rule-policy.js';
@@ -86,9 +87,9 @@ export function initialize() {
     c.left -= dt;
     if (
       c.think == null &&
-      c.left > 0 &&
-      c.left <= HURRY_MS &&
-      Math.ceil(before / 1000) !== Math.ceil(c.left / 1000)
+      clockShown(c) > 0 &&
+      (c.left <= 0 || clockShown(c) <= HURRY_MS) &&
+      Math.ceil(clockShown({ ...c, left: before }) / 1000) !== Math.ceil(clockShown(c) / 1000)
     )
       Sound.play('tick');
     if (c.think != null && c.total - c.left >= c.think) {
@@ -96,11 +97,13 @@ export function initialize() {
       void TableBot.playTurn(c);
       return;
     }
-    if (c.left <= 0) {
+    if (c.left <= -(c.res || 0)) {
       if (isHost()) {
+        c.left = -(c.res || 0);
+        commitReserve(runtime.game, c);
         runtime.game.clock = null;
         timeUp(c);
-      } else c.left = 0;
+      } else c.left = -(c.res || 0);
       return;
     }
     renderClocks();

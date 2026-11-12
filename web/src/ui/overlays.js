@@ -1,4 +1,5 @@
 import { forgetHost } from '../network/host-restore.js';
+import { VC } from '../network/voice.js';
 import { runtime } from '../app/runtime.js';
 import { rankName } from '../core/cards.js';
 import { aStayReason } from '../core/match.js';
@@ -117,14 +118,22 @@ export function setPaused(on, by) {
   runtime.game.pausedBy = on ? by : null;
   syncPauseBtn();
   if (on) {
-    const mine = by === 0;
-    showPanel(`<h2>暂停中</h2><p class="muted">${mine ? '你暂停了游戏，大家休息一下。' : `${runtime.names[by]}暂停了游戏，只有暂停的人能继续。你可以等一等，也可以退出游戏。`}</p>
-      <div class="btns">${mine ? '<button class="btn primary" id="resumeBtn">继续游戏</button>' : '<button class="btn" id="pauseQuit">退出游戏</button>'}</div>`);
+    const mine = by === 0,
+      host = runtime.network.mode === 'host';
+    const mic = VC.info().active ? '<button class="btn" id="pauseMic"></button>' : '';
+    showPanel(`<h2>暂停中</h2><p class="muted">${mine ? '你暂停了游戏，大家休息一下。' : host ? `${runtime.names[by]}暂停了游戏。你是房主，可以取消暂停。` : `${runtime.names[by]}暂停了游戏，暂停者或房主可以继续。`}</p>
+      <div class="btns">${mic}${mine ? '<button class="btn primary" id="resumeBtn">继续游戏</button>' : `${host ? '<button class="btn primary" id="pauseCancel">取消暂停</button>' : ''}<button class="btn" id="pauseQuit">退出游戏</button>`}</div>`);
     $('#panel').dataset.kind = 'pause';
+    syncPauseMic();
+    if (mic) $('#pauseMic').onclick = () => VC.toggle();
     if (mine) {
       $('#resumeBtn').onclick = () => act({ k: 'pause', on: false, p: toAbs(0) });
       $('#resumeBtn').focus();
-    } else $('#pauseQuit').onclick = askQuit;
+    } else {
+      $('#pauseQuit').onclick = askQuit;
+      if (host)
+        $('#pauseCancel').onclick = () => act({ k: 'pause', on: false, p: toAbs(0), force: true });
+    }
   } else if (!$('#overlay').hidden && $('#panel').dataset.kind === 'pause') {
     hideOverlay();
     if (runtime.game.phase === 'roundEnd' || runtime.game.phase === 'over') showResult();
@@ -132,6 +141,16 @@ export function setPaused(on, by) {
 }
 
 // 暂停 / 继续: while someone else has paused, the button only says so and cannot be pressed
+export function syncPauseMic() {
+  const button = $('#pauseMic');
+  if (!button) return;
+  const info = VC.info();
+  button.textContent = info.locked ? '语音已关' : info.on ? '麦克风：开' : '麦克风：关';
+  button.disabled = !!info.locked;
+  button.setAttribute('aria-pressed', String(info.on));
+  button.classList.toggle('primary', !!info.on && !info.locked);
+}
+
 export function syncPauseBtn() {
   const b = $('#pauseBtn'),
     other = !!runtime.game && !!runtime.game.paused && runtime.game.pausedBy !== 0;

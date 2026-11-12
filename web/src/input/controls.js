@@ -1,4 +1,5 @@
 import { uniqueStraightFlushes } from '../hand/straight-flushes.mjs';
+import { signalBack } from '../network/protocol.js';
 import { runtime } from '../app/runtime.js';
 import { syncRoomOptions } from '../network/spectators.js';
 import { Sound, syncAudioBtns } from '../audio/sound.js';
@@ -280,6 +281,7 @@ export function initialize() {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) return;
     Sound.wake();
+    signalBack();
     // a page that was out of sight may not have heard the others' hellos meanwhile: it gives them a fresh 20 seconds
     // rather than taking the silence for their leaving
     if (runtime.network.hostSeen) runtime.network.hostSeen = Date.now();

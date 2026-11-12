@@ -1,3 +1,4 @@
+import { runtime } from '../app/runtime.js';
 import { lobbyStatus } from '../lobby/lobby.js';
 import { $ } from '../ui/cards.js';
 
@@ -21,4 +22,22 @@ export function initialize() {
     lobbyStatus('联机请通过发布后的网页网址打开');
     return false;
   };
+}
+
+export function signalBack(peer = runtime.network.peer) {
+  if (!peer || peer !== runtime.network.peer || peer.destroyed || !peer.disconnected) return;
+  try {
+    peer.reconnect();
+  } catch {}
+}
+export function keepSignal(peer) {
+  let tries = 0,
+    timer;
+  peer.on('open', () => {
+    tries = 0;
+  });
+  peer.on('disconnected', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => signalBack(peer), Math.min(30000, 1000 * 2 ** tries++));
+  });
 }

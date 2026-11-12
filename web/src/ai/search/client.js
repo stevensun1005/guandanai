@@ -24,7 +24,7 @@
  *     one to stop: with 50 s budgets an old turn's coach search must not delay the newest turn.
  */
 import { FIRST_LOAD_WAIT_MS, SEARCH_BUDGETS, hardTimeoutMs } from './constants.mjs';
-import { REASON_MS } from '../turn-timing.mjs';
+import { REASON_MS, TURN_MS } from '../turn-timing.mjs';
 
 const PREEMPT_MS = 500;
 
@@ -244,11 +244,11 @@ export function createSearchClient({
      * One table decision. `startedAt` (same clock as `now`) is when the seat's turn started on
      * the host; the search ends by startedAt + 50 s and the reply is given up at startedAt + 52 s.
      */
-    async decide(bot, payload, { startedAt = now() } = {}) {
+    async decide(bot, payload, { startedAt = now(), turnMs = TURN_MS } = {}) {
       stats.requests++;
       yieldToTable();
-      const deadline = startedAt + reasonMs,
-        expires = startedAt + hardTimeoutMs(budget);
+      const deadline = startedAt + Math.min(reasonMs, Math.max(0, turnMs - 10000)),
+        expires = startedAt + Math.min(hardTimeoutMs(budget), Math.max(0, turnMs - 8000));
       let result;
       try {
         // A table never waits for a slow first load longer than FIRST_LOAD_WAIT_MS (10 s, not
@@ -269,7 +269,7 @@ export function createSearchClient({
      * Move-coach values for the human player's own turn (same worlds, settings and budgets as
      * the table bot). Resolves to {ok, kind, plays, base, values, ...} or {fallback, reason}.
      */
-    async evaluate(bot, payload) {
+    async evaluate(bot, payload, { turnMs = TURN_MS } = {}) {
       const bucket = stats.coach;
       bucket.requests++;
       // only the newest turn: drop queued coach jobs and stop a running one
@@ -278,8 +278,13 @@ export function createSearchClient({
       cancelActiveCoach();
       let result;
       try {
+        const cap = Math.min(reasonMs, Math.max(0, turnMs - 10000));
         await ready(bot);
-        result = await call({ type: 'coach', payload }, hardTimeoutMs(budget), 'coach');
+        result = await call(
+          { type: 'coach', payload, remainingMs: cap },
+          Math.min(hardTimeoutMs(budget), Math.max(0, turnMs - 8000)),
+          'coach',
+        );
       } catch (error) {
         return fallback(reasonOf(error), { message: error.message }, bucket);
       }

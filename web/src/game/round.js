@@ -1,4 +1,5 @@
 import { roundOutcome } from '../core/match.js';
+import { commitReserve } from '../core/table-timing.mjs';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { isBomb } from '../core/combinations.js';
@@ -24,6 +25,7 @@ export function doPlay(p, play, automatic = false, assisted = false) {
   rememberCoachMove(p, play, automatic);
   collectAction(p, play, automatic, assisted);
   // the clock goes at once, before the cards are laid out, so the plate is back to its own size for them
+  commitReserve(runtime.game, runtime.game.clock);
   runtime.game.clock = null;
   renderClocks();
   if (runtime.game.notice && (play || runtime.game.trick)) runtime.game.notice = '';

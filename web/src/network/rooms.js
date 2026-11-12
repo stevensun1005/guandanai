@@ -2,7 +2,8 @@ import { clearHost } from './host-storage.mjs';
 import { runtime } from '../app/runtime.js';
 import { readPlay, canPass, isReturnCard } from '../core/validation.js';
 import { aiReturnCard, tributeCard } from '../ai/rule-policy.js';
-import { PREP_MS, timeUp } from '../game/clock.js';
+import { prepMs } from '../core/table-timing.mjs';
+import { timeUp } from '../game/clock.js';
 import { startCut, startShuffle } from '../game/dealing.js';
 import { act, setHumans } from '../game/events.js';
 import { isHumanSeat, newGame, resetGame, toLocal } from '../game/session.js';
@@ -12,7 +13,14 @@ import { DIRS, absOf, lobbyStatus, nickNow, renderLobby } from '../lobby/lobby.j
 import { guestEmote, hostEmote } from '../social/controller.js';
 import { normalizeBotPreferences, prepareBotModels } from '../lobby/bot-setup.js';
 import { botModelId } from '../ai/model-catalog.mjs';
-import { OLD_PAGE, ROOM_PREFIX, VERSION, peerReady, versionsMatch } from './protocol.js';
+import {
+  OLD_PAGE,
+  ROOM_PREFIX,
+  VERSION,
+  peerReady,
+  versionsMatch,
+  keepSignal,
+} from './protocol.js';
 import { VC } from './voice.js';
 import { forgetSeat, savedSeat } from './rejoin-storage.js';
 import {
@@ -66,9 +74,10 @@ export function openRoom() {
   const code = String(1000 + ((Math.random() * 9000) | 0));
   const peer = new Peer(ROOM_PREFIX + code);
   runtime.network.peer = peer;
+  keepSignal(peer);
   lobbyStatus('正在开房间…');
   peer.on('open', () => {
-    if (runtime.network.peer !== peer) return;
+    if (runtime.network.peer !== peer || runtime.network.peerOpen) return;
     runtime.network.peerOpen = true;
     runtime.network.code = code;
     $('#roomCodeShow').textContent = code;
@@ -351,11 +360,25 @@ export function joinRoom(code, watching = false) {
   lobbyStatus('正在连接…');
   const peer = new Peer();
   runtime.network.peer = peer;
+  keepSignal(peer);
   peer.on('call', (c) => VC.incoming(c));
   peer.on('open', () => {
-    if (runtime.network.peer !== peer) return;
+    if (runtime.network.peer !== peer || runtime.network.hostConn) return;
     const conn = peer.connect(ROOM_PREFIX + code, { reliable: true });
     runtime.network.hostConn = conn;
+    setTimeout(() => {
+      if (
+        runtime.network.peer !== peer ||
+        runtime.network.hostConn !== conn ||
+        conn.open ||
+        ['guest', 'spectator'].includes(runtime.network.mode)
+      )
+        return;
+      leaveNet();
+      lobbyStatus('房间没有回应，房主可能刚刷新或离线，请稍后重试');
+      $('#joinBtn').disabled = false;
+      $('#spectatorGo').disabled = false;
+    }, 15000);
     conn.on('open', () => {
       runtime.network.hostSeen = Date.now();
       if (watching) {
@@ -376,7 +399,7 @@ export function joinRoom(code, watching = false) {
     });
   });
   peer.on('error', (err) => {
-    if (runtime.network.peer !== peer) return;
+    if (runtime.network.peer !== peer || runtime.network.hostConn?.open) return;
     if (watching) {
       spectatorGone(
         err.type === 'peer-unavailable' ? '没有这个房间，请核对房间号' : '观战连接失败，请重试',
@@ -554,7 +577,9 @@ export function goSolo() {
     if (runtime.game.ready.includes(0)) beginPlay();
     else {
       runtime.game.clock =
-        c && c.who === 'prep' ? c : { who: 'prep', left: PREP_MS, total: PREP_MS };
+        c && c.who === 'prep'
+          ? c
+          : { who: 'prep', left: prepMs(runtime.rules), total: prepMs(runtime.rules) };
       render();
     }
   } else if (runtime.game.phase === 'play' && runtime.game.turn >= 0) startTurn();

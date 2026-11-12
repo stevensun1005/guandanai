@@ -44,7 +44,13 @@ export function act(e) {
     }
     return;
   }
+  if (runtime.network.mode === 'host' && ['play', 'pass'].includes(e.k)) {
+    e = { ...e };
+    delete e.reserveLeft;
+  }
   if (applyEvt(e) && runtime.network.mode === 'host') {
+    if (['play', 'pass'].includes(e.k) && runtime.game.res?.[toLocal(e.p)] != null)
+      e.reserveLeft = runtime.game.res[toLocal(e.p)];
     broadcast({ t: 'evt', e });
     saveHost();
   }
@@ -129,7 +135,8 @@ function applyEvt(e) {
     }
     case 'pause':
       // only the player who paused can resume, and a game already paused is not paused again by someone else
-      if (runtime.game.paused && runtime.game.pausedBy !== p) return true;
+      if (runtime.game.paused && runtime.game.pausedBy !== p && !(e.force && !e.on && e.p === 0))
+        return true;
       setPaused(!!e.on, p);
       return true;
     case 'humans':
@@ -152,15 +159,29 @@ function applyEvt(e) {
       if (e.k === 'pass') {
         if (!canPass(runtime.game.trick)) return false;
         doPlay(p, null, !!e.automatic, e.assisted === true);
+        acceptReserve(e, p);
         return true;
       }
       const play = readPlay(runtime.game.hands[p], e, runtime.game.trick?.play, runtime.game.L);
       if (!play) return false;
       doPlay(p, play, !!e.automatic, e.assisted === true);
+      acceptReserve(e, p);
       return true;
     }
   }
   return true;
+}
+
+function acceptReserve(event, player) {
+  if (
+    runtime.network.mode !== 'guest' ||
+    !Number.isFinite(event.reserveLeft) ||
+    event.reserveLeft < 0 ||
+    event.reserveLeft > 60000
+  )
+    return;
+  runtime.game.res ||= [null, null, null, null];
+  runtime.game.res[player] = event.reserveLeft;
 }
 
 // who is a person (local seats) and what their seats are called

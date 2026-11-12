@@ -1,4 +1,4 @@
-"""Actual Clint turns without neural downloads, then all five selectable WASM models."""
+"""Actual Clint turns without neural downloads, then all selectable WASM models."""
 from pathlib import Path
 import json, sys
 from playwright.sync_api import sync_playwright
@@ -42,7 +42,7 @@ with sync_playwright() as p:
     assert not page.evaluate("calls.some(x=>x.type==='decide')")
     assert not downloads,downloads
     page.screenshot(path=str(OUT/'rules-table.png'))
-    # Real controller + Worker + five actual ONNX files on a controlled, conserved deal.
+    # Real controller + Worker + actual selectable ONNX files on a controlled, conserved deal.
     # These are compatibility decisions, not strength matches.
     catalog=page.request.get(URL.split('?')[0].rstrip('/')+'/models/catalog.json').json()
     selected=[m['id'] for m in catalog['choices'] if m['kind']=='neural']
@@ -75,7 +75,7 @@ with sync_playwright() as p:
     }""")
     assert strategy == {'singleAlong':{'type':'single','value':14},'levelFirst':{'type':'single','value':15},'firstJoker':None,'tributeException':{'type':'single','value':17}},strategy
     assert not errors,errors
-    report={'actualRuleReplies':rule_turns,'allRuleGameNeuralDownloads':0,'wasmModels':neural,'strategyFixtures':strategy,'fixtureScope':'Eight real opening actions; five neural compatibility decisions and four rule strategy fixtures, no strength estimates','pageErrors':errors}
+    report={'actualRuleReplies':rule_turns,'allRuleGameNeuralDownloads':0,'wasmModels':neural,'strategyFixtures':strategy,'fixtureScope':'Eight real opening actions; selectable neural compatibility decisions and four rule strategy fixtures, no strength estimates','pageErrors':errors}
     (OUT/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print(json.dumps(report))
     browser.close()

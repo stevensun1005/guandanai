@@ -22,7 +22,7 @@ initializeHints();
 const deck = makeDeck();
 const byId = new Map(deck.map((c) => [c.id, c]));
 const ids = (pl) => (pl ? pl.cards.map((c) => c.id).sort((a, b) => a - b) : null);
-const UNLIMITED = { ms: 1e9, worldMs: 1e9 };
+const UNLIMITED = { ms: 1e9, worldMs: 1e9, firstMs: 1e9 };
 
 function withRandom(seed, fn) {
   const previous = Math.random;
@@ -78,13 +78,20 @@ test('upstream 2d91ecc: a late bomb takes the whole five-ace group, not four plu
   }
 });
 
-test('残局大脑 matches upstream endgame-brain.js on fixed positions where it overrides the rules', () => {
+test('残局大脑 matches fixed current upstream on the original regression positions', () => {
   const fixture = JSON.parse(
     readFileSync(new URL('./fixtures/clint-endgame-brain-20261109.json', import.meta.url), 'utf8'),
   );
   assert.equal(fixture.upstreamSHA, '2d91ecca950e6617f80e500cd205450112bb40d4');
   assert.ok(fixture.positions.length >= 4);
-  for (const pos of fixture.positions) {
+  const expected = JSON.parse(
+    readFileSync(new URL('./fixtures/clint-endgame-brain-20261112.json', import.meta.url), 'utf8'),
+  );
+  assert.equal(expected.upstreamSHA, '6e574851b73f167c831ba395c5a74aa6f1fe7809');
+  for (const historical of fixture.positions) {
+    const current = expected.positions.find((p) => p.seed === historical.seed);
+    assert.ok(current);
+    const pos = { ...historical, ...current };
     const cards = (list) => list.map((id) => byId.get(id));
     const game = {
       L: pos.L,

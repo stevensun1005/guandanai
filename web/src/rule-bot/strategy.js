@@ -92,6 +92,30 @@ function oppBeatChance(p, cur) {
   return k / N;
 }
 
+function oppBeatPlain(p, cur) {
+  const gone = new Set((runtime.game.seen || []).concat(runtime.game.hands[p]).map((c) => c.id));
+  const pool = makeDeck().filter((c) => !gone.has(c.id));
+  const ns = [(p + 1) % 4, (p + 2) % 4, (p + 3) % 4].map((i) => runtime.game.hands[i].length),
+    need = ns[0] + ns[1] + ns[2];
+  if (pool.length < need) return 1;
+  const N = AIP.mateSamples * 2;
+  let k = 0;
+  for (let t = 0; t < N; t++) {
+    for (let i = 0; i < need; i++) {
+      const j = i + Math.floor(Math.random() * (pool.length - i));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    const a = pool.slice(0, ns[0]),
+      b = pool.slice(ns[0] + ns[1], need);
+    if (
+      genPlays(a, runtime.game.L).some((x) => !isBomb(x) && beats(x, cur)) ||
+      genPlays(b, runtime.game.L).some((x) => !isBomb(x) && beats(x, cur))
+    )
+      k++;
+  }
+  return k / N;
+}
+
 function tricksWon(q) {
   const n = [0, 0, 0, 0];
   let last = -1;
@@ -522,7 +546,21 @@ function aiLead(p, units, plays, ph) {
     ...[(p + 1) % 4, (p + 3) % 4].map((i) => runtime.game.hands[i].length || 99),
   );
 
-  if (AIP.rNoFive && [(p + 1) % 4, (p + 3) % 4].some((i) => runtime.game.hands[i].length === 5)) {
+  let keepTop = false;
+  if (AIP.rTopLast && pool.length > 1) {
+    const unseen = outside(p),
+      tops = pool.filter((u) => u.type === 'single' && isTop(u, unseen));
+    const other = pool.filter((u) => !tops.includes(u));
+    if (tops.length && other.length) {
+      pool = other;
+      keepTop = true;
+    }
+  }
+  if (
+    !keepTop &&
+    AIP.rNoFive &&
+    [(p + 1) % 4, (p + 3) % 4].some((i) => runtime.game.hands[i].length === 5)
+  ) {
     const q = pool.filter((u) => u.type !== 'full' && u.type !== 'straight');
     if (q.length) pool = q;
   }
@@ -801,6 +839,26 @@ function aiChoose(p) {
   if (winner % 2 === p % 2) {
     const nx = (p + 1) % 4;
     if (
+      AIP.rTopOver &&
+      hand.length <= AIP.topOverMax &&
+      runtime.game.hands[(p + 2) % 4].length >= 3
+    ) {
+      const finish = plays
+        .filter(
+          (x) =>
+            !isBomb(x) &&
+            x.type === cur.type &&
+            x.n === cur.n &&
+            analyze(
+              hand.filter((c) => !x.cards.includes(c)),
+              L,
+            ).length &&
+            oppBeatPlain(p, x) <= AIP.topOverBeat,
+        )
+        .sort((a, b) => a.value - b.value)[0];
+      if (finish) return finish;
+    }
+    if (
       AIP.rTopMate &&
       (cur.type === 'single' || cur.type === 'pair') &&
       cur.value <= AIP.smallMax &&
@@ -986,7 +1044,6 @@ function aiChoose(p) {
         fit.type === 'single' &&
         fit.value >= 16 &&
         cur.value < 14 &&
-        mateYet() &&
         !units.some((u) => u.type === 'single' && u.value < 16 && beats(u, cur))
       )
         ok = false;

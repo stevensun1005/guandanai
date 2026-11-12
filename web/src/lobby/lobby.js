@@ -1,3 +1,4 @@
+import { PREP_CHOICES, PLAY_MODES, prepMs, playMode } from '../core/table-timing.mjs';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { setHumans } from '../game/events.js';
@@ -54,9 +55,13 @@ function loadRules() {
     startLevel: 2,
     startSide: '',
     coachAllowed: false,
+    prepSec: 90,
+    playMode: '60',
   });
   try {
     const saved = JSON.parse(localStorage.getItem('guandan-rules') || '{}');
+    if (PREP_CHOICES.includes(saved.prepSec)) runtime.rules.prepSec = saved.prepSec;
+    if (Object.hasOwn(PLAY_MODES, saved.playMode)) runtime.rules.playMode = saved.playMode;
     if (typeof saved.trib === 'boolean') runtime.rules.trib = saved.trib;
     if (['draw', 'reset', 'once', 'keep'].includes(saved.aFail))
       runtime.rules.aFail = saved.aFail === 'keep' ? 'once' : saved.aFail;
@@ -68,7 +73,15 @@ function renderRules() {
   for (const b of ruleBtns) {
     const selected =
       b.dataset.val ===
-      (b.dataset.rule === 'trib' ? (runtime.rules.trib ? '1' : '0') : runtime.rules.aFail);
+      (b.dataset.rule === 'trib'
+        ? runtime.rules.trib
+          ? '1'
+          : '0'
+        : b.dataset.rule === 'prepSec'
+          ? String(prepMs(runtime.rules) / 1000)
+          : b.dataset.rule === 'playMode'
+            ? playMode(runtime.rules)
+            : runtime.rules.aFail);
     b.classList.toggle('on', selected);
     b.setAttribute('aria-pressed', String(selected));
     b.disabled = !mine;
@@ -207,11 +220,18 @@ export function initialize() {
     b.addEventListener('click', () => {
       if (runtime.lobbyMode === 'join') return;
       if (b.dataset.rule === 'trib') runtime.rules.trib = b.dataset.val === '1';
+      else if (b.dataset.rule === 'prepSec') runtime.rules.prepSec = Number(b.dataset.val);
+      else if (b.dataset.rule === 'playMode') runtime.rules.playMode = b.dataset.val;
       else runtime.rules.aFail = b.dataset.val;
       try {
         localStorage.setItem(
           'guandan-rules',
-          JSON.stringify({ trib: runtime.rules.trib, aFail: runtime.rules.aFail }),
+          JSON.stringify({
+            trib: runtime.rules.trib,
+            aFail: runtime.rules.aFail,
+            prepSec: runtime.rules.prepSec,
+            playMode: runtime.rules.playMode,
+          }),
         );
       } catch (_) {}
       Sound.unlock();

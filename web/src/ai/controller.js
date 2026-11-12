@@ -8,6 +8,7 @@ import { sharedSearchClient } from './search/client.js';
 import { searchPayload } from './search/payload.mjs';
 import { searchBand } from './search/constants.mjs';
 import { decideClintRule, ruleObservation, RULES_ONLY } from '../rule-bot/runtime.mjs';
+import { playMs } from '../core/table-timing.mjs';
 import { FALLBACK_RETRY_MS, clintBrainMs, hardLeft } from './turn-timing.mjs';
 import { act, playEvt } from '../game/events.js';
 import { isHost, isHumanSeat } from '../game/session.js';
@@ -124,7 +125,10 @@ export function initialize() {
         searchSeeds.set(game, crypto.getRandomValues(new Uint32Array(1))[0]);
       searchClient ||= sharedSearchClient(VERSION);
       const payload = searchPayload(game, p, runtime.network.off, searchSeeds.get(game));
-      const promise = searchClient.decide(bot.id, payload, { startedAt });
+      const promise = searchClient.decide(bot.id, payload, {
+        startedAt,
+        turnMs: playMs(runtime.rules),
+      });
       prefetched = { game, key, promise };
       return promise;
     }
@@ -222,6 +226,8 @@ export function initialize() {
       const prepared = prepareTableDecision(game, p, runtime.network.off, model.config);
       const { plays, state: input } = prepared;
       if (prepared.index != null) return plays[prepared.index];
+      const moveRemaining = () =>
+        timeout ? 15000 : Math.max(0, startedAt + playMs(runtime.rules) - performance.now());
       let search = null;
       try {
         // a human seat's timeout autoplay plays the champion at once: no extra wait after its clock
@@ -244,17 +250,20 @@ export function initialize() {
         if (result?.ok)
           searchClient.stats.fallbacks.mismatch = (searchClient.stats.fallbacks.mismatch || 0) + 1;
       } else {
-        await check();
+        await within(check(), moveRemaining());
         if (!current()) return null;
       }
       let result;
       try {
-        result = await (champion || request('decide', input));
+        result = await within(
+          champion || request('decide', input, Math.min(15000, moveRemaining())),
+          moveRemaining(),
+        );
       } catch (error) {
         if (!champion) throw error;
         // the early request failed (a replaced worker): ask once more, still before 60 s
         if (!current()) return null;
-        result = await request('decide', input, FALLBACK_RETRY_MS);
+        result = await request('decide', input, Math.min(FALLBACK_RETRY_MS, moveRemaining()));
       }
       if (!current()) return null;
       if (!Number.isInteger(result.index) || result.index < 0 || result.index >= plays.length)
@@ -296,12 +305,15 @@ export function initialize() {
     async function clintDecide(game, p, startedAt, current) {
       const observation = ruleObservation(game, p);
       try {
-        await within(check(), hardLeft(startedAt, performance.now()));
+        await within(check(), hardLeft(startedAt, performance.now(), playMs(runtime.rules)));
         if (!current()) return null;
         const result = await request(
           'rule',
-          { ...observation, brainMs: clintBrainMs(performance.now() - startedAt) },
-          Math.max(1000, hardLeft(startedAt, performance.now())),
+          {
+            ...observation,
+            brainMs: clintBrainMs(performance.now() - startedAt, playMs(runtime.rules)),
+          },
+          Math.max(1000, hardLeft(startedAt, performance.now(), playMs(runtime.rules))),
         );
         if (!current()) return null;
         const play = rulePlay(game, p, result);

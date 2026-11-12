@@ -39,7 +39,8 @@ import {
 // Fixture deals (the collectedRound test fixture's own seeds, as in human-endgames.test.mjs). The
 // fixtures are rules-v2 self-play: after the Clint 2d91ecc sync (a late bomb takes the whole same-rank
 // group) 9301001-3 no longer hold a losing move, so 9301009 (one flagged move) keeps that case covered.
-const SEEDS = [9301001, 9301002, 9301003, 9301009];
+// Current Clint changed the deterministic trajectory of9301002;9301004 retains an exactly solvable tail.
+const SEEDS = [9301001, 9301004, 9301003, 9301009];
 const MAX_CARDS = 16;
 const reviews = new Map();
 const reviewed = (seed, options = {}) => {

@@ -3,7 +3,7 @@ import { cardHTML, $ } from '../ui/cards.js';
 import { setMsg } from '../ui/table.js';
 import { rankName } from '../core/cards.js';
 import { lobbyStatus, nickNow } from '../lobby/lobby.js';
-import { VERSION, OLD_PAGE } from './protocol.js';
+import { VERSION } from './protocol.js';
 import { joinRoom, leaveNet, broadcast } from './rooms.js';
 import { VC } from './voice.js';
 import { publicTable, validPublicTable } from './public-table.mjs';
@@ -40,15 +40,10 @@ export function relaySpectators(message) {
 }
 
 export function acceptSpectator(conn, info, message) {
-  if (info.dir || message.ver !== VERSION || viewers().size >= 6) {
+  if (info.dir || viewers().size >= 6) {
     conn.send({
       t: 'watch-error',
-      message:
-        message.ver !== VERSION
-          ? OLD_PAGE
-          : info.dir
-            ? '已入座的玩家不能同时作为观众'
-            : '观战人数已满，请稍后再试',
+      message: info.dir ? '已入座的玩家不能同时作为观众' : '观战人数已满，请稍后再试',
     });
     if (!info.dir) {
       runtime.network.conns.delete(conn.peer);
@@ -68,6 +63,7 @@ export function acceptSpectator(conn, info, message) {
   else lobbyStatus(notice);
   conn.send({
     t: 'watch-open',
+    ver: VERSION,
     sid,
     code: runtime.network.code,
     peers: voicePeers(),
@@ -190,7 +186,9 @@ export function spectatorMessage(message) {
     $('#lobby').hidden = true;
     $('#spectatorView').hidden = false;
     $('#spectatorRoom').textContent = message.code;
-    $('#spectatorStatus').textContent = '已连接，等待房主开始牌局…';
+    $('#spectatorStatus').textContent =
+      '已连接，等待房主开始牌局…' +
+      (message.ver && message.ver !== VERSION ? '（和房主版本不同，画面可能有小出入）' : '');
     VC.start(message.peers);
     VC.setMuted(message.muted || []);
   }

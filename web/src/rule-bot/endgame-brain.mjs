@@ -1,6 +1,7 @@
 /*
  * Clint 残局大脑 (rules-v2 only): a port of upstream clintsun1977/guandan bot/clint/endgame-brain.js at
  * 2d91ecca950e6617f80e500cd205450112bb40d4 (introduced by 6460e68, widened by 6b8a7eb, 220f245, f03dc3c).
+ * Later a2db8ea/6e57485 adds a3-second first-world cap; other historical defaults remain.
  *
  * When every hand holds at most BRAIN.max cards, the cards this seat has not seen (not played, not in its
  * own hand) are dealt at random to the other three seats, each deal weighted by the same public pass/play
@@ -33,6 +34,7 @@ export const BRAIN = Object.freeze({
   ms: 30000,
   minWorlds: 3,
   worldMs: 10000,
+  firstMs: 3000,
   minStop: 8,
   stopZ: 2.5,
 });
@@ -404,7 +406,7 @@ function* brainCore(p, rulesPl, settings) {
         const vals = yield* esWorld(
           W,
           legal,
-          Math.min(t0 + settings.ms, mcNow() + settings.worldMs),
+          Math.min(t0 + settings.ms, mcNow() + (worlds ? settings.worldMs : settings.firstMs)),
         );
         if (!vals) {
           if (!worlds) break;

@@ -1,3 +1,4 @@
+import { syncPauseMic } from '../ui/overlays.js';
 import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { isHost, isHumanSeat, toAbs, toLocal } from '../game/session.js';
@@ -239,6 +240,7 @@ export function initialize() {
       if (changed) paint();
     }
     function paint() {
+      syncPauseMic();
       const b = $('#micBtn');
       b.hidden = !active;
       b.classList.toggle('on', on);
@@ -278,6 +280,17 @@ export function initialize() {
       }
       paint();
     }
-    return { start, stop, prune, incoming, toggle, wake, paint, setMuted, lock };
+    return {
+      start,
+      stop,
+      prune,
+      incoming,
+      toggle,
+      wake,
+      paint,
+      setMuted,
+      lock,
+      info: () => ({ active, on, locked }),
+    };
   })();
 }

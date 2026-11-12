@@ -292,3 +292,9 @@ GuanZero混合评测回归：`guanzero-clint.test.mjs`在真实合法残局调�
 GuanZero v4回归要求冠军500/reason200两份报告、250/100配对子范围和原reason v2策略。468071单独退休Clint的修订绑定准确模型/槽/原计划及原报告SHA，不能应用到其他批次或移除冠军；旧整批取消仍拒绝发布。
 
 模型发布后的菜单与保存偏好回归从清单选取当前GuanZero和已归档上一代，不把026或具体训练版本写成固定的“最新”；新一代可选、已退出菜单的选择回到reason默认。Windows全量测试可用 `npm test -- --test-concurrency=4 --test-timeout=300000` 限制并发，测试范围不变。
+
+## Clint房间选项与新上游回归
+
+`node --test web/tests/table-timing.test.mjs web/tests/turn-timing.test.mjs`检查旧默认、非法字段、每人每局超时余额、电脑零余额、快照座位旋转与短时钟推理／回落限时。`python web/tests/clint_room_options_smoke.py <URL>`检查四尺寸大厅、同排按钮、选项存储／加入者锁定、合法炸弹不误过和自动动作标记；云端请求拦截，不产生棋力成绩。
+
+`python web/tests/spectators_smoke.py <URL>`另用真实PeerJS验证客人伪造force不能取消房主暂停、房主可取消客人暂停、暂停面板真实麦克风、信令断开后不重开牌局、跨版本公开观战及旁观者不能入座／行动／恢复凭据。`host_restore_smoke.py`继续核对刷新／关闭标签后实体手牌、房间号、原始采集标识、昵称与assisted恢复。`clint_plate_smoke.py`现在检查成组右上对齐；历史右下布局为旧版本。独立规则预期来自固定上游VM在原四个合成局面的回复；旧fixture保留，不改历史比赛成绩。

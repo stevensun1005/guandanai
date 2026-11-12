@@ -23,6 +23,8 @@ with sync_playwright() as p:
     host.wait_for_function('()=>NET.peerOpen')
     code=host.evaluate('NET.code')
     host.locator('[data-seat="S"]').click()
+    host.locator('[data-rule=prepSec][data-val="30"]').click()
+    host.locator('[data-rule=playMode][data-val="20+60"]').click()
     host.locator('#botStyleBox summary').click()
     for seat in ['E','N','W']:
         host.locator(f'[data-bot-seat="{seat}"]').select_option('clint-rule')
@@ -44,6 +46,27 @@ with sync_playwright() as p:
                 deck.click()
         host.wait_for_timeout(100)
     assert host.evaluate("G.phase==='prep'")
+    assert guest.evaluate("RULES.prepSec===30 && RULES.playMode==='20+60'")
+    # A forged force flag from a guest cannot resume a host pause.
+    host.evaluate("act({k:'pause',on:true,p:0})")
+    guest.wait_for_function("()=>G.paused")
+    guest.evaluate("NET.hostConn.send({t:'act',e:{k:'pause',on:false,p:toAbs(0),force:true}})")
+    host.wait_for_timeout(200)
+    assert host.evaluate('G.paused && G.pausedBy===0')
+    host.locator('#resumeBtn').click()
+    guest.wait_for_function('()=>!G.paused')
+    guest.evaluate("act({k:'pause',on:true,p:toAbs(0)})")
+    host.locator('#pauseCancel').wait_for(state='visible')
+    host.locator('#pauseMic').click()
+    host.wait_for_function("()=>document.querySelector('#pauseMic').getAttribute('aria-pressed')==='true'")
+    host.locator('#pauseMic').click()
+    host.locator('#pauseCancel').click()
+    guest.wait_for_function('()=>!G.paused')
+    # Reopening only the signaling connection must not reset the game or room.
+    host.evaluate('NET.peer.disconnect()')
+    host.wait_for_function('()=>NET.peer.disconnected===false',timeout=15000)
+    assert host.evaluate("G.phase==='prep'")
+
     host.evaluate("""()=>{
       G.clock=null;window.watchPackets=[];
       NET.peer.on('connection',conn=>{const send=conn.send.bind(conn);conn.send=d=>{watchPackets.push({peer:conn.peer,...structuredClone(d)});send(d)}});
@@ -75,8 +98,10 @@ with sync_playwright() as p:
     watcher.wait_for_timeout(200)
     assert watcher.evaluate("!probePackets.some(d=>d.t==='unseated-role-probe')")
     watcher.evaluate("probeConn.send({t:'watch',name:'version-test',ver:'incompatible-version'})")
-    watcher.wait_for_function("()=>probePackets.some(d=>d.t==='watch-error')")
+    watcher.wait_for_function("()=>probePackets.some(d=>d.t==='watch-open')")
+    assert watcher.evaluate("!probePackets.some(d=>d.t==='watch-error')")
     watcher.evaluate('probePeer.destroy()')
+    host.wait_for_function('()=>NET.spectators.size===1')
     before=host.evaluate('JSON.stringify({hands:G.hands.map(h=>h.map(c=>c.id)),log:G.log,humans:[...NET.humans]})')
     watcher.evaluate("""()=>{
       NET.hostConn.send({t:'act',e:{k:'begin'}});
@@ -124,7 +149,7 @@ with sync_playwright() as p:
     host.evaluate('leaveNet()')
     watcher.wait_for_function("()=>document.querySelector('#spectatorStatus').textContent.includes('观战') && document.querySelector('#spectatorStatus').classList.contains('ended')")
     assert not errors,errors
-    report={'roomCodeShown':True,'twoHumansRemainTwo':True,'spectatorCannotActSitRecoverOrSync':True,'unseatedReceivesNoGameBroadcast':True,'incompatibleVersionRejected':True,'spectatorNeuralDownloads':len(models),'publicSnapshotsOnly':True,'guestRecoveryWhileWatching':True,'twoPlayerAudioLines':True,'hostVoiceLockAndUnlock':True,'nextRoundFreshState':True,'nicknamesAndBlackNames':True,'viewports':[1440,1024,390],'hostExitEndsSpectating':True,'pageErrors':errors,'purpose':'Browser interaction/security regression, no strength evaluation or real human training data'}
+    report={'roomCodeShown':True,'twoHumansRemainTwo':True,'spectatorCannotActSitRecoverOrSync':True,'unseatedReceivesNoGameBroadcast':True,'crossVersionPublicSpectatorAccepted':True,'playerVersionGuardRetained':True,'spectatorNeuralDownloads':len(models),'publicSnapshotsOnly':True,'guestRecoveryWhileWatching':True,'twoPlayerAudioLines':True,'hostVoiceLockAndUnlock':True,'nextRoundFreshState':True,'nicknamesAndBlackNames':True,'viewports':[1440,1024,390],'hostExitEndsSpectating':True,'pageErrors':errors,'purpose':'Browser interaction/security regression, no strength evaluation or real human training data'}
     (OUT/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')
     print(json.dumps(report))
     browser.close()
