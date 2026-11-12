@@ -10,7 +10,25 @@
   "format": "passed",
   "build": "passed",
   "PowerShellSyntax": "passed",
-  "GPUPreflight": "not yet run",
+  "GPUPreflight": {
+    "passed": true,
+    "device": "cuda",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
+    "syntheticUpdates": 2,
+    "cudaGradientGroups": 13,
+    "nonzeroTrunkGradientGroups": 12,
+    "oracleGradientNonzero": 0,
+    "adamStates": 13,
+    "temporaryRestoreExact": true,
+    "newGames": 0,
+    "formalRunUpdates": 0,
+    "loss": 5.531460237503052
+  },
   "formalTrainingStarted": false,
-  "initializationOnlyNoStrengthClaim": true
+  "initializationOnlyNoStrengthClaim": true,
+  "actorSmokeAllProcessesExited": true,
+  "sourceFilesVerified": 142
 }

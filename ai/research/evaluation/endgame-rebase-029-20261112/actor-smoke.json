@@ -1,0 +1,81 @@
+{
+  "stopAudit": {
+    "checkpointSHA256": "8b5d25d69d072dd70a4e05c1cbee1d1b76e1c6ab24a7f89b25da0c6f0356b414",
+    "latest": {
+      "file": "e00061050.onnx",
+      "version": "e00061050",
+      "step": 61050,
+      "sha256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71"
+    },
+    "networkExactlyMatchesCheckpoint": true,
+    "adamStates": 0,
+    "adamMatchesNewUpdates": true,
+    "newUpdates": 0,
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "shards": 72,
+    "cumulativeRows": 2741,
+    "retainedRows": 2741,
+    "ingestedRows": 2741,
+    "pendingRows": 0,
+    "trainedRows": 0,
+    "replayRNGRestored": false,
+    "scope": "Retained shards checked; evicted replay and RNG are not saved/restored"
+  },
+  "status": {
+    "pid": 46700,
+    "startedAt": "2026-11-12T16:57:10.784Z",
+    "deadline": "2026-11-12T16:59:46.694Z",
+    "restarts": {},
+    "children": [],
+    "updatedAt": "2026-11-12T16:57:38.426Z",
+    "stopReason": "stop-file",
+    "endedAt": "2026-11-12T16:57:41.430Z"
+  },
+  "learner": {
+    "pid": 50480,
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "state": "stopped",
+    "step": 61050,
+    "trainedRows": 0,
+    "ingestedRows": 2741,
+    "replayRows": 128,
+    "oracleKeep": null,
+    "prunedRows": 0,
+    "lossEma": null,
+    "device": "cuda",
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "updatedAt": "2026-11-12T16:57:39Z"
+  },
+  "teacher": {
+    "id": "029",
+    "version": "v000061013",
+    "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\preflight\\actor\\models\\champion.onnx"
+  },
+  "processes": {
+    "pids": [
+      46700,
+      50480,
+      23732,
+      39704
+    ]
+  },
+  "allObservedProcessesExited": true,
+  "scope": "Registered development firstshard/STOP engineering check, not strength. Formal run never inherits these data or updates."
+}
