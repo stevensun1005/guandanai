@@ -18,6 +18,37 @@ import {
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 
+test('endgame progress subtracts inherited updates and reports real rows without a guessed step target', () => {
+  const run = mkdtempSync(join(tmpdir(), 'endgame-panel-'));
+  try {
+    writeFileSync(join(run, 'stages.log'), '2029-01-01T00:00:00Z START train\n');
+    writeJSON(join(run, 'train/config.json'), { deadline: '2029-01-01T16:00:00Z' });
+    writeJSON(join(run, 'train/learner/status.json'), {
+      step: 61060,
+      inherited: { step: 61050 },
+      ingestedRows: 1234,
+      trainedRows: 20480,
+      device: 'cuda',
+      state: 'training',
+    });
+    const config = {
+      deadline: '2029-01-01T19:15:00Z',
+      stages: [{ key: 'train', kind: 'endgame-train', title: '尾盘', paths: { out: 'train' } }],
+    };
+    const s = snapshot(run, config, {
+      now: Date.parse('2029-01-01T01:00:00Z'),
+      psText: '',
+      machine: false,
+    }).stages[0];
+    assert.match(s.progress.text, /新增 10 更新/);
+    assert.match(s.progress.text, /1,234 行/);
+    assert.equal(s.progress.fraction, null);
+    assert.equal(s.progress.cap, Date.parse('2029-01-01T16:00:00Z'));
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
+
 test('window dashboard page script parses (a syntax error leaves the page stuck on 读取中)', () => {
   const scripts = [...PAGE.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
   assert.equal(scripts.length, 1);

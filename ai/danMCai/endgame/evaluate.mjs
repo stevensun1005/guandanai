@@ -43,6 +43,7 @@ const option = (name, fallback) =>
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
 
 export const POLICIES = ['student', 'pimc-search', 'champion-check'];
+export class EvaluationStopped extends Error {}
 /** Fixed runtime-search settings of --policy=pimc-search (section-68 actor labels). */
 export const SEARCH = Object.freeze({
   worlds: 8,
@@ -88,7 +89,16 @@ export function searchChoice(game, plays, base, { solver, seed, ply }) {
 export async function playPaired(
   seed,
   focalTeam,
-  { values, champion, student, threshold, solverCards, policy = 'student', solver = null },
+  {
+    values,
+    champion,
+    student,
+    threshold,
+    solverCards,
+    policy = 'student',
+    solver = null,
+    checkpoint = () => {},
+  },
 ) {
   if (!POLICIES.includes(policy)) throw Error(`Unknown policy ${policy}`);
   const game = createRound(seed);
@@ -112,6 +122,7 @@ export async function playPaired(
     });
   }
   for (let ply = 0; ply < 1000; ply++) {
+    checkpoint();
     const player = game.turn;
     const plays = candidates(game.hands[player], game.L, game.trick?.play);
     let index = plays.findIndex((play) => play && play.cards.length === game.hands[player].length);
@@ -187,16 +198,37 @@ async function worker() {
     solverCards: Number(option('solver-cards')),
     policy,
     solver: policy === 'pimc-search' ? createSearchSolver() : null,
+    checkpoint: () => {
+      if (
+        (option('stop-file') && existsSync(option('stop-file'))) ||
+        (option('deadline') && Date.now() >= Date.parse(option('deadline')))
+      )
+        throw new EvaluationStopped('Evaluation STOP or fixed deadline');
+    },
   };
   const rows = [];
   for (let i = part; i < seeds.length; i += parts) {
     const seed = seeds[i];
     const started = performance.now();
-    const a = await playPaired(seed, 0, config);
-    const b = await playPaired(seed, 1, config);
+    let a, b;
+    try {
+      a = await playPaired(seed, 0, config);
+      b = await playPaired(seed, 1, config);
+    } catch (error) {
+      if (error instanceof EvaluationStopped) break;
+      throw error;
+    }
     const row = { seed, a, b, mean: (a.points + b.points) / 2 };
     if (policy !== 'student') row.seconds = (performance.now() - started) / 1000;
     rows.push(row);
+    writeFileSync(
+      join(option('out'), `progress-${part}.json`),
+      JSON.stringify({
+        pid: process.pid,
+        completedPairs: rows.length,
+        updatedAt: new Date().toISOString(),
+      }),
+    );
   }
   writeFileSync(join(option('out'), `part-${part}.json`), JSON.stringify(rows));
   await pool.close();
@@ -276,6 +308,8 @@ async function main() {
     threshold: option('threshold', 32),
     'solver-cards': option('solver-cards', 18),
     out,
+    ...(option('deadline') ? { deadline: option('deadline') } : {}),
+    ...(option('stop-file') ? { 'stop-file': resolve(option('stop-file')) } : {}),
     ...(withStudent ? {} : { policy }),
   };
   const self = fileURLToPath(import.meta.url);

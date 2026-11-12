@@ -1,5 +1,7 @@
 # 模型研究与证据
 
+[029尾盘迁移](evaluation/endgame-rebase-029-20261112/protocol.design.json)：所有者明确选择r2−017主干增量迁到新冠军、新Adam；原Mac种子在Windows被拒，使用按实际literal单局语义新审计的2M训练副/3000留出。准备与实际启动分开，不冒称新尾盘棋力结果。
+
 2026-11-12新冠军与reason对照已完整结束：1000独立副/2000单局，新raw视角−.195、95%[−.27035,−.11965]，reason在此条件更强。v1的212局不合并。所有者随后授权029网页发布与r2尾盘增量迁移，部署与训练结论分开。[完整对照](evaluation/champion-vs-reason-20261112/v2/summary.json)／[网页冠军](evaluation/web-champion-029-20261112/champion.json)。
 
 [冠军起点微调的 10,000 局留出](evaluation/champion-restart-20261107/heldout-results.json)已全部完成：直接对原冠军的升级分 +0.0875 [0.0121,0.1629]；共同 Clint 对手和混合队友的差异仍不明确。网页冠军未变；完整分组、原始证据和限制见主报告第 46.7 节及[原始索引](evaluation/champion-restart-20261107/heldout-manifest.json)。

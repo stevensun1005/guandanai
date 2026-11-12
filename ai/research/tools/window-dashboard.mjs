@@ -306,6 +306,25 @@ function resultsFor(stage, run, state) {
   const paths = stage.paths || {};
   const out = [];
   switch (stage.kind) {
+    case 'endgame-train': {
+      const dir = p(paths.out),
+        learner = readJSON(join(dir, 'learner/status.json'));
+      if (learner)
+        out.push(
+          block(
+            '尾盘训练实际结果',
+            [
+              ['新增更新', num(learner.step - (learner.inherited?.step || 0))],
+              ['本窗口摄入 / 训练行', `${num(learner.ingestedRows)} / ${num(learner.trainedRows)}`],
+              ['设备', learner.device],
+              ['状态', learner.state],
+            ],
+            stage.rule,
+            null,
+          ),
+        );
+      break;
+    }
     case 'match-eval': {
       const dir = p(paths.out);
       const file = readJSON(join(dir, 'report.json'));
@@ -611,6 +630,21 @@ function progressFor(stage, run, state, startMs, now) {
   const res = { fraction: null, text: null, eta: null, cap: null };
   if (state === 'queued' || state === 'skipped') return res;
   switch (stage.kind) {
+    case 'endgame-train': {
+      const dir = p(paths.out),
+        learner = readJSON(join(dir, 'learner/status.json'));
+      const config = readJSON(join(dir, 'config.json'));
+      const actors = listDir(join(dir, 'actors'))
+        .filter((f) => f.endsWith('.json'))
+        .map((f) => readJSON(join(dir, 'actors', f)))
+        .filter(Boolean);
+      const rounds = actors.reduce((n, a) => n + (a.rounds || 0), 0);
+      res.text = learner
+        ? `新增 ${num(learner.step - (learner.inherited?.step || 0))} 更新 · 摄入 ${num(learner.ingestedRows)} 行 · ${num(rounds)} 单局 · ${learner.device} · ${learner.state}`
+        : '等待实际学习器状态';
+      if (config) res.cap = Date.parse(config.deadline);
+      break;
+    }
     case 'compare':
     case 'midgame': {
       const sides = stage.kind === 'compare' ? stage.sides || [] : [{ label: '', out: paths.out }];
@@ -692,6 +726,16 @@ function progressFor(stage, run, state, startMs, now) {
       const r = readJSON(join(p(paths.out), 'run.json'));
       const workers = Number(r?.workers) || 0;
       const parts = listDir(p(paths.out)).filter((f) => /^part-\d+\.json$/.test(f)).length;
+      const progress = listDir(p(paths.out))
+        .filter((f) => /^progress-\d+\.json$/.test(f))
+        .map((f) => readJSON(join(p(paths.out), f)))
+        .filter(Boolean);
+      if (state === 'running' && progress.length) {
+        const completed = progress.reduce((n, p) => n + p.completedPairs, 0);
+        res.text = `${num(completed)} / ${num(stage.total)} 副 · ${num(completed * 2)} 完整单局`;
+        res.fraction = stage.total ? completed / stage.total : null;
+        break;
+      }
       if (state === 'running')
         res.text = `已运行 ${duration(elapsed)}；分片 ${parts}/${workers || '—'}（分片只在结束时写出，中途无更细进度）`;
       break;

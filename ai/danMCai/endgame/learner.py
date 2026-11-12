@@ -276,6 +276,8 @@ class Learner:
         write_json(
             self.state_dir / "status.json",
             {
+                "pid": os.getpid(),
+                "deviceName": torch.cuda.get_device_name(0) if self.device.type == "cuda" else str(self.device),
                 "state": state,
                 "step": self.step,
                 "trainedRows": self.trained_rows,

@@ -1,0 +1,14 @@
+{
+  "method": "new_champion + (r2_trunk - old017_trunk), float64 arithmetic then float32",
+  "checkpointSHA256": "d42fb0206d3d9005fc72ae891fe23f2defd0ed1f48b2876c39afd20903d4650d",
+  "oldBaseSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "newBaseSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "sourceStep": 61050,
+  "trunkParameters": 12,
+  "oracleProjection": "copied unchanged",
+  "optimizer": "fresh Adam; zero state entries",
+  "replay": "empty; old shards/RNG not restored",
+  "validation": "Initialization only; no forward passes or optimizer updates; no strength claim",
+  "transferredCheckpointSHA256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+  "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71"
+}

@@ -67,5 +67,21 @@
   "defaultId": "029",
   "defaultChoice": "029",
   "oldSearchBot9001": "Archived unchanged on017; not automatically rebased",
-  "deployment": "awaiting push/Pages"
+  "deployment": {
+    "atUTC": "2026-11-12T16:46:08.424987+00:00",
+    "url": "https://stevensun1005.github.io/guandanai/",
+    "pagesRun": 43260685904,
+    "pagesCommit": "c4c1a5fba94ad2c6ff359afafa3c042c3258dc27",
+    "pages": "success",
+    "version": "396f87f442",
+    "onlineWeightSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "menu": [
+      "clint-rule",
+      "028",
+      "029"
+    ],
+    "defaultId": "029",
+    "defaultChoice": "029",
+    "weightsDownloadedAndSHA256Verified": true
+  }
 }

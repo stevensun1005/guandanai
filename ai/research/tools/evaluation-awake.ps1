@@ -2,7 +2,7 @@ param([Parameter(Mandatory = $true)][string]$Run)
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $Run).Path
 $manifest = Get-Content -LiteralPath "$root/registration.json" -Raw | ConvertFrom-Json -DateKind String
-if ($manifest.durationHours -ne 3 -or $manifest.restartExtendsDeadline -ne $false) { throw 'Expected one bounded three-hour evaluation' }
+if ($manifest.durationHours -le 0 -or $manifest.durationHours -gt 24 -or $manifest.restartExtendsDeadline -ne $false) { throw 'Expected one bounded owner-authorized window of at most24 hours' }
 $end = [DateTimeOffset]::Parse($manifest.deadlineUTC)
 if ([DateTimeOffset]::UtcNow -ge $end) { throw 'Evaluation expired' }
 Add-Type @'

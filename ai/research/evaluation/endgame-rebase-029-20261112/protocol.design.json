@@ -1,0 +1,136 @@
+{
+  "schema": "danmcai-endgame-transfer-v1",
+  "id": "endgame-rebase-029-20261112",
+  "purpose": "Experimentally transfer the r2 learned trunk delta onto accepted/published029, then train endgame decisions from final signed single-round upgrade labels. Not exactresume and no automatic webintegration.",
+  "authorization": "ai/research/evaluation/endgame-rebase-029-20261112/authorization.json",
+  "teacher": {
+    "id": "029",
+    "version": "v000061013",
+    "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "role": "greedy teacher before32remainingcards, independent rawopponent in evaluation; fixed for entire newbatch"
+  },
+  "transfer": {
+    "method": "new_champion + (r2_trunk - old017_trunk), float64 arithmetic then float32",
+    "checkpointSHA256": "d42fb0206d3d9005fc72ae891fe23f2defd0ed1f48b2876c39afd20903d4650d",
+    "oldBaseSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "newBaseSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "sourceStep": 61050,
+    "trunkParameters": 12,
+    "oracleProjection": "copied unchanged",
+    "optimizer": "fresh Adam; zero state entries",
+    "replay": "empty; old shards/RNG not restored",
+    "validation": "Initialization only; no forward passes or optimizer updates; no strength claim",
+    "transferredCheckpointSHA256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+    "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
+    "r2StudentSHA256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef"
+  },
+  "run": {
+    "hours": 16,
+    "actors": 4
+  },
+  "resources": {
+    "reserveGiB": 4,
+    "resumeGiB": 5,
+    "policy": "Wait for5GiB beforestart. Shedownedactor processes below4GiB; resumeabove5GiB. Unflushedactor rows discarded/replayed from lastflushedcursor, not exact RNG replay. No changes to other applications or power plans."
+  },
+  "priority": {
+    "learnerNice": 0,
+    "actorNice": 5
+  },
+  "actor": {
+    "count": 4,
+    "threshold": 32,
+    "temperature": 0.02,
+    "shardRows": 4096,
+    "slotSeeds": [
+      [
+        [
+          2700000000,
+          2700500000
+        ]
+      ],
+      [
+        [
+          2700500000,
+          2701000000
+        ]
+      ],
+      [
+        [
+          2701000000,
+          2701500000
+        ]
+      ],
+      [
+        [
+          2701500000,
+          2702000000
+        ]
+      ]
+    ]
+  },
+  "learner": {
+    "device": "cuda",
+    "threads": 1,
+    "seed": 2026111209,
+    "learningRate": 1e-05,
+    "batch": 2048,
+    "capacity": 750000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "oracleDecaySteps": 29000,
+    "keepShardRows": 2000000,
+    "exportSeconds": 600,
+    "init": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "sourceRun": "r2-delta-on029",
+      "sourceStep": 61050,
+      "expectedStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71"
+    }
+  },
+  "labels": "Only deciderteam finalsignedsingle-round upgradepoints ±1/2/3, MSE. No tactic proxy, Clint, humans, D1 or fullmatch training. Oraclekeep0 throughout; network execution ownhand/public only.",
+  "seeds": {
+    "audit": "ai/research/evaluation/endgame-rebase-029-20261112/seed-audit.json",
+    "trainingBlocks": [
+      [
+        2700000000,
+        2700500000
+      ],
+      [
+        2700500000,
+        2701000000
+      ],
+      [
+        2701000000,
+        2701500000
+      ],
+      [
+        2701500000,
+        2702000000
+      ]
+    ],
+    "trainingLiteralDeals": 2000000,
+    "heldoutDeals": 3000,
+    "semantics": "Training seeds are literal single-round deals: exclude known literal seeds and all up to200 derived deals of known historical match roots; distinct newliteral seeds mutually unique. No fictional200 games per newliteral seed. Historical unused reservations excluded as literal roots only."
+  },
+  "evaluation": {
+    "workers": 2,
+    "pairs": 3000,
+    "threshold": 32,
+    "solverCards": 18,
+    "groups": {
+      "A": "finalwindowstudent vs029",
+      "B": "transferredinitial4083 vs029",
+      "C": "originalr2student3820 vs029"
+    },
+    "pairing": "same3000literal108carddeals,level,leader,team0then1. No tribute/fullmatch. Eachgroup6000fullrounds; no incompletepair scored.",
+    "primary": "Amean signedroundpoints,95%independentdealcluster normalCI; lower>0positive, upper<0negative, crossing0uncertain.",
+    "secondary": "pairedA−B isolatesnewtraining from initialization; pairedA−C andB−C descriptive with95%nominal intervals, not a familywise or universal strengthclaim.",
+    "finalOnly": "Window-final exportedstudent/checkpoint; no peak selection or outcome-based seed/size changes.",
+    "stopping": "Fixed16h training, then up to3h evaluation plus15minsave. Partialgroups labelledpartial; no deadlineextension or replay. No automaticdeployment."
+  },
+  "preflight": {
+    "purpose": "Engineeringonly, not strength; oncebounded3min CUDA2syntheticupdates/Adamrestore and1actorfirstshard STOPsmoke, independent devseed3838000000..3838000999, never inherited by formalrun"
+  },
+  "execution": "NOT STARTED: exact UTC lease/source frozen separately before launch"
+}

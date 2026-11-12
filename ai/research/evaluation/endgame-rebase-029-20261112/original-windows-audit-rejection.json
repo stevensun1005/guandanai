@@ -1,0 +1,242 @@
+{
+  "originalMethodNotStarted": true,
+  "result": "rejected",
+  "conflicts": [
+    {
+      "range": 0,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3590000000,
+      "roundDifference": -11
+    },
+    {
+      "range": 0,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 1,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3590100000,
+      "roundDifference": -11
+    },
+    {
+      "range": 1,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 2,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3680000000,
+      "roundDifference": -40
+    },
+    {
+      "range": 3,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3680100000,
+      "roundDifference": -40
+    },
+    {
+      "range": 5,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1101000000,
+      "roundDifference": -68
+    },
+    {
+      "range": 7,
+      "kind": "historical-match-derived",
+      "historicalRoot": 2000660892,
+      "roundDifference": 25
+    },
+    {
+      "range": 8,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3580200000,
+      "roundDifference": -151
+    },
+    {
+      "range": 9,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3670000000,
+      "roundDifference": -180
+    },
+    {
+      "range": 10,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 11,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1051065778,
+      "roundDifference": -2
+    },
+    {
+      "range": 12,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 13,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1012000000,
+      "roundDifference": -179
+    },
+    {
+      "range": 14,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1025509076,
+      "roundDifference": -39
+    },
+    {
+      "range": 16,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3510900000,
+      "roundDifference": -122
+    },
+    {
+      "range": 17,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3511300000,
+      "roundDifference": -122
+    },
+    {
+      "range": 19,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1701000000,
+      "roundDifference": 38
+    },
+    {
+      "range": 20,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1050000000,
+      "roundDifference": -39
+    },
+    {
+      "range": 21,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 22,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 23,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1174960000,
+      "roundDifference": 72
+    },
+    {
+      "range": 25,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3610100000,
+      "roundDifference": 55
+    },
+    {
+      "range": 27,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1125509076,
+      "roundDifference": -2
+    },
+    {
+      "range": 27,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 28,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1003000000,
+      "roundDifference": -10
+    },
+    {
+      "range": 29,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1181949134,
+      "roundDifference": -68
+    },
+    {
+      "range": 30,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 31,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1601000000,
+      "roundDifference": 96
+    },
+    {
+      "range": 32,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1150000000,
+      "roundDifference": -179
+    },
+    {
+      "range": 33,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1031949134,
+      "roundDifference": -18
+    },
+    {
+      "range": 34,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 35,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1360000000,
+      "roundDifference": -113
+    },
+    {
+      "range": 36,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1058000000,
+      "roundDifference": -63
+    },
+    {
+      "range": 37,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1172000000,
+      "roundDifference": -92
+    },
+    {
+      "range": 37,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 38,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1351000000,
+      "roundDifference": -150
+    },
+    {
+      "range": 38,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 39,
+      "kind": "historical-match-derived",
+      "historicalRoot": 1074550000,
+      "roundDifference": 180
+    },
+    {
+      "range": 39,
+      "kind": "historical-literal-deal",
+      "round": 0
+    },
+    {
+      "range": 40,
+      "kind": "historical-match-derived",
+      "historicalRoot": 3512300000,
+      "roundDifference": -99
+    }
+  ],
+  "logSHA256": "bd471afb2600170cd9cf9660864a7ec18358c62a91a3443dd6675331e4039cce",
+  "purpose": "ActualWindowsrejection of unstarted old017 Mac seedplan; not strength evidence"
+}

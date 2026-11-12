@@ -3,7 +3,25 @@ import assert from 'node:assert/strict';
 import { createRound } from '../../shared/simulation/simulation.mjs';
 import { cardIndex } from '../../../web/src/ai/encoding.mjs';
 import { oracleFeatures, playRound, ORACLE } from '../endgame/actor.mjs';
-import { summarize } from '../endgame/evaluate.mjs';
+import { summarize, playPaired, EvaluationStopped } from '../endgame/evaluate.mjs';
+
+test('bounded evaluation discards an interrupted round instead of scoring it as a draw', async () => {
+  await assert.rejects(
+    playPaired(424242, 0, {
+      values: async () => {
+        throw Error('No inference should run');
+      },
+      champion: 'base',
+      student: 'new',
+      threshold: 32,
+      solverCards: 18,
+      checkpoint: () => {
+        throw new EvaluationStopped('STOP');
+      },
+    }),
+    EvaluationStopped,
+  );
+});
 
 // Deterministic stand-in for a network: prefer larger plays, pass last.
 const decide = async (file, state) =>

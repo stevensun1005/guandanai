@@ -49,4 +49,6 @@ test('init checkpoint is frozen only when preregistered and SHA-matching', () =>
 
 test('platform helper is part of the frozen source list', () => {
   assert.ok(SOURCES.includes('ai/danMCai/endgame/platform.mjs'));
+  assert.ok(SOURCES.includes('ai/danMCai/endgame/rebase.py'));
+  assert.ok(SOURCES.includes('ai/danMCai/training/continuous/resources.mjs'));
 });

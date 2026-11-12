@@ -13,11 +13,40 @@ sys.path.insert(0, str(ROOT / "training" / "continuous"))
 sys.path.insert(0, str(ROOT / "endgame"))
 from learner import ORACLE, Learner, OracleValueNet, keep_probability, labels_valid  # noqa: E402
 from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
+from rebase import transferred_state  # noqa: E402
+from stop_audit import audit as audit_endgame  # noqa: E402
 
 BASELINE = ROOT / "models" / "baseline" / "policy.onnx"
 
 
 class EndgameLearnerTest(unittest.TestCase):
+    def test_stop_audit_checks_export_against_saved_network_and_new_adam_steps(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory)
+            self.make_run(run)
+            learner = Learner(run)
+            learner.replay.add(np.zeros((8, FEATURES), np.int8), np.zeros((8, ORACLE), np.int8), np.ones(8, np.float32))
+            learner.train_step()
+            learner.save()
+            learner.publish()
+            result = audit_endgame(run)
+            self.assertTrue(result["networkExactlyMatchesCheckpoint"])
+            self.assertTrue(result["adamMatchesNewUpdates"])
+            self.assertEqual(result["newUpdates"], 1)
+            self.assertEqual(result["adamStates"], 13)
+
+    def test_transfer_adds_the_learned_delta_and_keeps_oracle_without_mutating_inputs(self):
+        old = {"layers.0.bias": torch.tensor([1., 2.])}
+        new = {"layers.0.bias": torch.tensor([3., 5.])}
+        trained = {"layers.0.bias": torch.tensor([1.5, 1.]), "oracle_weight": torch.tensor([7.])}
+        result = transferred_state(trained, old, new)
+        self.assertTrue(torch.equal(result["layers.0.bias"], torch.tensor([3.5, 4.])))
+        self.assertTrue(torch.equal(result["oracle_weight"], trained["oracle_weight"]))
+        self.assertTrue(torch.equal(transferred_state(trained, old, old)["layers.0.bias"], trained["layers.0.bias"]))
+        self.assertTrue(torch.equal(trained["layers.0.bias"], torch.tensor([1.5, 1.])))
+        with self.assertRaises(ValueError):
+            transferred_state(trained, old, {})
+
     def test_keep_schedule(self):
         self.assertEqual(keep_probability(0, 100), 1.0)
         self.assertAlmostEqual(keep_probability(50, 100), 0.5)

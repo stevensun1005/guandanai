@@ -12,16 +12,18 @@
  * with --init-checkpoint=<checkpoint.pt>. The file is SHA-checked and copied to learner/init.pt.
  * On Windows pass --python=<venv>\Scripts\python.exe; priorities use os.setPriority there.
  */
-import { existsSync, mkdirSync, copyFileSync } from 'node:fs';
+import { existsSync, mkdirSync, copyFileSync, openSync, closeSync, unlinkSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readJSON, writeJSON, sha256 } from '../training/continuous/lib.mjs';
 import { isMain, spawnNice } from './platform.mjs';
+import { memoryAction, memoryAvailability } from '../training/continuous/resources.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '../../..');
 const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
+let ownedLock;
 
 export const SOURCES = [
   'ai/danMCai/endgame/actor.mjs',
@@ -32,6 +34,8 @@ export const SOURCES = [
   'ai/danMCai/endgame/learner.py',
   'ai/danMCai/endgame/run.mjs',
   'ai/danMCai/endgame/platform.mjs',
+  'ai/danMCai/endgame/rebase.py',
+  'ai/danMCai/training/continuous/resources.mjs',
   'ai/danMCai/training/continuous/lib.mjs',
   'ai/danMCai/training/continuous/value_net.py',
   'ai/shared/simulation/simulation.mjs',
@@ -100,6 +104,10 @@ async function main() {
   const run = resolve(option('run', ''));
   if (!option('run')) throw Error('Missing --run');
   mkdirSync(join(run, 'models'), { recursive: true });
+  const lock = join(run, 'supervisor.lock');
+  closeSync(openSync(lock, 'wx'));
+  ownedLock = lock;
+  writeJSON(lock, { pid: process.pid });
   let config = readJSON(join(run, 'config.json'));
   if (!config) {
     const file = resolve(option('champion', join(root, 'web/dist/models/bot-017.onnx')));
@@ -132,6 +140,12 @@ async function main() {
       Object.assign(config.actor, protocol.actor || {});
       Object.assign(config.learner, protocol.learner || {});
       config.priority = protocol.priority || config.priority;
+      if (protocol.teacher) {
+        if (protocol.teacher.sha256 !== expected) throw Error('Protocol teacher SHA mismatch');
+        config.champion.id = protocol.teacher.id;
+        config.champion.version = protocol.teacher.version;
+      }
+      if (protocol.resources) config.resources = protocol.resources;
     } else if (!option('seed-base')) throw Error('Missing --seed-base or --protocol');
     if (!['actor.mjs', 'pimc-actor.mjs'].includes(config.actor.script || 'actor.mjs'))
       throw Error(`Unknown actor script ${config.actor.script}`);
@@ -151,6 +165,8 @@ async function main() {
   const deadline = Date.parse(config.deadline);
   if (Date.now() >= deadline) throw Error('Fixed deadline already passed; not extending');
   const children = new Map();
+  const pausedActors = new Set();
+  let lastMemoryActionAt = 0;
   const restarts = {};
   const status = {
     pid: process.pid,
@@ -167,7 +183,7 @@ async function main() {
     child.on('exit', (code) => {
       children.delete(name);
       // A clean exit means the child finished its own work (seeds used up or STOP/deadline seen).
-      if (stopping || code === 0) return;
+      if (stopping || code === 0 || pausedActors.has(name)) return;
       restarts[name] = (restarts[name] || 0) + 1;
       if (restarts[name] > 5) {
         console.error(`${name} failed repeatedly (${code}); stopping run`);
@@ -185,23 +201,65 @@ async function main() {
   }
   // Learner first: it publishes the initial student (an exact champion copy) before actors read it.
   const { learnerNice = 0, actorNice = 5 } = config.priority || {};
+  while (
+    config.resources &&
+    memoryAvailability().availableBytes < config.resources.resumeGiB * 2 ** 30
+  ) {
+    if (existsSync(join(run, 'STOP')) || Date.now() >= deadline) return;
+    writeJSON(join(run, 'status.json'), {
+      ...status,
+      state: 'waiting-for-memory',
+      updatedAt: new Date().toISOString(),
+    });
+    await new Promise((r) => setTimeout(r, 1000));
+  }
   start('learner', learnerNice, python, [join(here, 'learner.py'), `--run=${run}`]);
   while (!existsSync(join(run, 'models', 'latest.json'))) {
+    if (existsSync(join(run, 'STOP')) || Date.now() >= deadline) stop('initialization-stopped');
     if (stopping) throw Error(`Learner did not publish the initial student: ${status.stopReason}`);
     await new Promise((r) => setTimeout(r, 500));
   }
-  for (let slot = 0; slot < config.actor.count; slot++)
+  if (
+    config.learner.init?.expectedStudentSHA256 &&
+    readJSON(join(run, 'models/latest.json')).sha256 !== config.learner.init.expectedStudentSHA256
+  ) {
+    stop('initial-student-SHA-mismatch');
+    throw Error('Initial student differs from preregistered transfer');
+  }
+  const startActor = (slot) =>
     start(`actor-${slot}`, actorNice, process.execPath, [
-      // The protocol may select another actor (for example pimc-actor.mjs); default unchanged.
       join(here, config.actor.script || 'actor.mjs'),
       `--run=${run}`,
       `--slot=${slot}`,
     ]);
+  for (let slot = 0; slot < config.actor.count; slot++) startActor(slot);
   process.on('SIGINT', () => stop('operator-interrupt'));
   process.on('SIGTERM', () => stop('operator-terminate'));
   while (children.size) {
     if (existsSync(join(run, 'STOP'))) stop('stop-file');
     if (Date.now() >= deadline) stop('fixed-deadline');
+    if (!stopping && config.resources) {
+      const available = memoryAvailability().availableBytes;
+      const action = memoryAction({
+        freeBytes: available,
+        reserveGB: config.resources.reserveGiB,
+        resumeGB: config.resources.resumeGiB,
+        running: [...children.keys()].filter((n) => n.startsWith('actor-')),
+        paused: [...pausedActors],
+        lastActionAt: lastMemoryActionAt,
+      });
+      if (action) {
+        lastMemoryActionAt = Date.now();
+        if (action.type === 'pause') {
+          pausedActors.add(action.actor);
+          children.get(action.actor)?.kill();
+        } else {
+          pausedActors.delete(action.actor);
+          startActor(Number(action.actor.slice(6)));
+        }
+      }
+      status.resources = { availableGiB: available / 2 ** 30, pausedActors: [...pausedActors] };
+    }
     status.children = [...children].map(([name, child]) => ({ name, pid: child.pid }));
     status.updatedAt = new Date().toISOString();
     writeJSON(join(run, 'status.json'), status);
@@ -221,8 +279,12 @@ async function main() {
 }
 
 if (isMain(import.meta.url)) {
-  main().catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+  main()
+    .catch((error) => {
+      console.error(error);
+      process.exitCode = 1;
+    })
+    .finally(() => {
+      if (ownedLock) unlinkSync(ownedLock);
+    });
 }

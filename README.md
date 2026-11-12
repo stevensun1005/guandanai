@@ -1,5 +1,7 @@
 <div align="center">
 
+新的[029底座尾盘迁移实验](ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json)采用r2相对017的权重增量和全新Adam，原文件保留；准备、GPU预检、实际训练及独立评测分别记录。网页029已上线，权重SHA和三项菜单/默认实测通过。
+
 2026-11-12：新纯网络冠军 **danMCai-v000061013（029）** 已获所有者网页发布授权；菜单按现有规则暂为Clint、最新GuanZero、029，默认/评价使用029。旧017与9001保持归档身份；新底座reason须单独训练、验收。新冠军对旧017纯网络门控通过，但2000局直接对旧reason平均升级分−.195、95%[−.27035,−.11965]，不宣称普遍更强。见[发布记录](ai/research/evaluation/web-champion-029-20261112/champion.json)。
 
 # GuandanAI

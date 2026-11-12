@@ -1,0 +1,16 @@
+{
+  "node": {
+    "total": 511,
+    "pass": 475,
+    "skip": 36,
+    "fail": 0
+  },
+  "endgamePython": 9,
+  "researchPython": 41,
+  "format": "passed",
+  "build": "passed",
+  "PowerShellSyntax": "passed",
+  "GPUPreflight": "not yet run",
+  "formalTrainingStarted": false,
+  "initializationOnlyNoStrengthClaim": true
+}

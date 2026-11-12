@@ -1,0 +1,19 @@
+{
+  "supersedesUnstarted": "ai/research/evaluation/endgame-continue-20261112/protocol.json",
+  "originalProtocolSHA256": "427d268ccbc77d997acc3e96f5674cb981038c3576194f998b86e52e63984b39",
+  "oldWindowStarted": false,
+  "reason": "Owner explicitly chose newchampion delta transfer/freshAdam. Windows audit of oldMac41ranges found historical collisions; original proposal not launched or edited. New method gets fresh literal single-round deals.",
+  "originalWindowsAuditOutcome": "rejected: historical-match-derived and historical-literal-deal overlaps",
+  "failureLogSHA256": "bd471afb2600170cd9cf9660864a7ec18358c62a91a3443dd6675331e4039cce",
+  "changes": {
+    "teacher": "017→029",
+    "initialization": "new029+(r2−017) trunk; oldoracle projection copied",
+    "optimizer": "freshAdam, empty replay, inheritedcounter61050",
+    "actors": "10→4 maximum, memoryshedding4GiB/resume5GiB",
+    "replayCapacity": "1500000→750000, to preserve everydayWindows memory",
+    "threads": "2→1",
+    "trainingSeeds": "2million new literal single-round seeds, not match roots",
+    "heldout": "3000 new literal deals; same acrossA/B/C",
+    "evaluation": "Afinal,Brebasedinitial,Coriginalr2 allon029 positions vs029. A−B isolates training from migration; A−C includes both."
+  }
+}

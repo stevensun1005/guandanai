@@ -1,5 +1,7 @@
 # danMCai 尾盘明牌引导训练
 
+2026-11-12所有者选择新的029底座增量迁移：[预登记](../../research/evaluation/endgame-rebase-029-20261112/protocol.design.json)。`rebase.py` 对12组主干做029+(r2−017)，保留162×512 oracle投影、新Adam/空回放；继承步数61050只是历史计数，oraclekeep为0。初始导出4083bc39…不是原r2或029的逐位副本，不沿用其成绩。新16小时/4演员上限、4/5GiB资源保护、750k回放容量；结束后同3000副对照最终/迁移初始/原r2，不自动上网页。`stop_audit.py`只读核对最终网络/13组Adam/分片行数，`evaluate.mjs --deadline --stop-file`保留完整对、丢弃中断对。原017续训预登记不启动、不覆盖。
+
 所有者 2026-11-07 授权：保留另一台电脑的 danMCai 训练不动，在本 MacBook 上单独训练一个尾盘模型，之后再接入 danMCai；方法按 PerfectDou／Suphx 的"训练时看明牌、执行时只看自己的牌"来做，训练期间开启面板。
 
 本目录是一条**独立实验**，不修改网页冠军、清单、奖励定义或任何正在运行的冻结训练。结果与协议见[研究主报告](../../research/MODEL_STUDY.md)和 [evaluation/endgame-oracle-20261107](../../research/evaluation/endgame-oracle-20261107/)。

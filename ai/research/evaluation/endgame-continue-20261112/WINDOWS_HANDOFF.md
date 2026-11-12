@@ -1,5 +1,7 @@
 # 尾盘模型 Windows 续训：交接与执行步骤
 
+2026-11-12所有者最新追加：新冠军029已上线，所有者选择“r2−017权重增量迁到029、新Adam”。本文件下方017/原Adam/旧种子方案仍未启动并按原口径保留；Windows种子审计发现重叠，不能直接执行。新的独立协议与种子见[迁移实验](../endgame-rebase-029-20261112/protocol.design.json)和[修订记录](../endgame-rebase-029-20261112/protocol-amendment-1.json)，实际启动另记。
+
 所有者 2026-11-11／12 要求把 Mac 上的尾盘明牌引导训练结果（r2，最终学生 `e00061050`）拷到 Windows 继续训练（原话见 [authorization.json](authorization.json)）。本目录是这次续训的预登记：[protocol.json](protocol.json)（16 小时、10 个采样进程、CUDA、从 r2 检查点起步）和 [seed-audit.json](seed-audit.json)（41 个训练种子块共 590 万副，3,000 副留出评测牌）。方法与续训机制见[尾盘 README](../../../danMCai/endgame/README.md#从已有检查点开新运行例如拷到-windows-续训)，r2 结果见主报告第 57 节。
 
 教师与评测对手固定为冠军 017：夜间研究冠军 v000061013 存在，但本次是 r2 的延续，B 对比也需要同样设置；换教师属于另一个实验，须另行预登记。

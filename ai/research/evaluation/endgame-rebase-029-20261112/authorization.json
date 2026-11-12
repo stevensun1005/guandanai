@@ -1,0 +1,6 @@
+{
+  "atUTC": "2026-11-12T16:49:49.772791+00:00",
+  "ownerRequest": "尾盘reason模型接着训练，但是是在新的冠军模型基础上训练；打包好的文件在Downloads",
+  "ownerSelectedTransfer": "将r2相对017的权重增量迁到新冠军，再用新Adam训练（实验性迁移）",
+  "scope": "New Windows endgame transfer16h window plus bounded final/initial/r2 heldout evaluation. Original r2 and original017 continuation proposal unchanged. This does not authorize deploying the new endgame student before independent acceptance."
+}
