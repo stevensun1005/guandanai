@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "5baaf926cb6f8fe4252ff3a55ecd5d73f682ab88",
+  "sourceFiles": 184,
+  "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\champion-vs-reason-v2-20261112",
+  "workers": 2,
+  "originalStartUTC": "2026-11-12T14:30:48.120Z",
+  "deadlineUTC": "2026-11-12T17:30:48.120Z",
+  "optimizerUpdates": 0,
+  "formalGamesStarted": 0
+}

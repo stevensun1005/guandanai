@@ -1,0 +1,9 @@
+{
+  "startUTC": "2026-11-12T14:30:48.120Z",
+  "deadlineUTC": "2026-11-12T17:30:48.120Z",
+  "durationHours": 3,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+  "purpose": "New memoryv2 independent evaluation, ONLY remaining originalauthorization window; no clockreset",
+  "originalRegistrationSHA256": "f7a0aa63a4e99df858d40cfa1d0299f9e303b77fe765b2472559b6d66372362a"
+}
