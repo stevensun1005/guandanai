@@ -213,6 +213,7 @@ async function main() {
     });
     await new Promise((r) => setTimeout(r, 1000));
   }
+  const resuming = existsSync(join(run, 'learner/checkpoint.pt'));
   start('learner', learnerNice, python, [join(here, 'learner.py'), `--run=${run}`]);
   while (!existsSync(join(run, 'models', 'latest.json'))) {
     if (existsSync(join(run, 'STOP')) || Date.now() >= deadline) stop('initialization-stopped');
@@ -220,6 +221,7 @@ async function main() {
     await new Promise((r) => setTimeout(r, 500));
   }
   if (
+    !resuming &&
     config.learner.init?.expectedStudentSHA256 &&
     readJSON(join(run, 'models/latest.json')).sha256 !== config.learner.init.expectedStudentSHA256
   ) {

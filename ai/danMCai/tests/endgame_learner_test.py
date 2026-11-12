@@ -3,6 +3,7 @@
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import numpy as np
@@ -11,7 +12,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "training" / "continuous"))
 sys.path.insert(0, str(ROOT / "endgame"))
-from learner import ORACLE, Learner, OracleValueNet, keep_probability, labels_valid  # noqa: E402
+from learner import ORACLE, Learner, OracleValueNet, keep_probability, labels_valid, write_json  # noqa: E402
 from value_net import FEATURES, ValueNet, export_onnx, load_onnx_weights  # noqa: E402
 from rebase import transferred_state  # noqa: E402
 from stop_audit import audit as audit_endgame  # noqa: E402
@@ -20,6 +21,30 @@ BASELINE = ROOT / "models" / "baseline" / "policy.onnx"
 
 
 class EndgameLearnerTest(unittest.TestCase):
+    def test_atomic_metadata_write_retries_sharing_errors_and_keeps_old_file_on_failure(self):
+        import os
+        import json
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "status.json"
+            write_json(target, {"step": 7})
+            original = os.replace
+            attempts = []
+            def flaky(a, b):
+                attempts.append(1)
+                if len(attempts) <= 2:
+                    self.assertEqual(json.loads(target.read_text())["step"], 7)
+                    raise PermissionError("sharing violation")
+                return original(a, b)
+            with patch("learner.os.replace", side_effect=flaky), patch("learner.time.sleep"):
+                write_json(target, {"step": 8})
+            self.assertEqual(len(attempts), 3)
+            self.assertEqual(json.loads(target.read_text())["step"], 8)
+            with patch("learner.os.replace", side_effect=PermissionError("still locked")) as replace, patch("learner.time.sleep"):
+                with self.assertRaises(PermissionError):
+                    write_json(target, {"step": 9})
+                self.assertEqual(replace.call_count, 40)
+            self.assertEqual(json.loads(target.read_text())["step"], 8)
+
     def test_stop_audit_checks_export_against_saved_network_and_new_adam_steps(self):
         with tempfile.TemporaryDirectory() as directory:
             run = Path(directory)

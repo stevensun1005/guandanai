@@ -40,11 +40,23 @@ def read_json(path, fallback=None):
         return fallback
 
 
+def replace_file(temporary, path):
+    """Windows readers can briefly deny replacement; retry without exposing a partial file."""
+    for attempt in range(40):
+        try:
+            os.replace(temporary, path)
+            return
+        except PermissionError:
+            if attempt == 39:
+                raise
+            time.sleep(0.05)
+
+
 def write_json(path, value):
     temporary = f"{path}.{os.getpid()}.tmp"
     with open(temporary, "w", encoding="utf-8") as stream:
         json.dump(value, stream, indent=2)
-    os.replace(temporary, path)
+    replace_file(temporary, path)
 
 
 def labels_valid(y, kind="signed-points"):
@@ -270,7 +282,7 @@ class Learner:
             },
             temporary,
         )
-        os.replace(temporary, self.checkpoint)
+        replace_file(temporary, self.checkpoint)
 
     def status(self, state, keep=None):
         write_json(

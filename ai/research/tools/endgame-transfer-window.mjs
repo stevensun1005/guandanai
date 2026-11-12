@@ -120,6 +120,11 @@ async function main(root) {
     validateWindow(plan, reg);
     if (sha256(join(root, 'protocol.json')) !== reg.protocolSHA256)
       throw Error('Protocol registration SHA mismatch');
+    if (plan.recovery) {
+      for (const [file, digest] of Object.entries(plan.recovery.files))
+        if (sha256(join(root, file)) !== digest)
+          throw Error('Recovery checkpoint/data manifest mismatch: ' + file);
+    }
     for (const [file, digest] of [
       [plan.local.champion, plan.teacher.sha256],
       [plan.local.checkpoint, plan.learner.init.sha256],
