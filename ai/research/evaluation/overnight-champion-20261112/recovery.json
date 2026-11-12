@@ -1,0 +1,117 @@
+{
+  "observedAtUTC": "2026-11-12T11:53:10.386065+00:00",
+  "status": "recovered-with-zero-new-games",
+  "failure": "Windows Python312 defaultGBK could not decode UTF8 Chinese protocol in frozen summarizer. Four workers had all completed before failure.",
+  "originalControllerStatus": {
+    "pid": 5080,
+    "phase": "failed",
+    "deadlineUTC": "2026-11-12T14:00:00.000Z",
+    "computeDeadlineUTC": "2026-11-12T13:45:00.000Z",
+    "childPID": 28084,
+    "error": "Error: Worker exited 1\n    at ChildProcess.<anonymous> (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/overnight-runtime-20261112/ai/research/tools/run-round-evaluation.mjs:62:64)\n    at Object.onceWrapper (node:events:631:26)\n    at ChildProcess.emit (node:events:509:28)\n    at ChildProcess._handle.onexit (node:internal/child_process:295:12)",
+    "updatedAtUTC": "2026-11-12T11:33:32.846Z"
+  },
+  "originalEvaluationStatus": {
+    "pid": 5080,
+    "phase": "needs-attention",
+    "updatedAt": "2026-11-12T11:33:32.844Z",
+    "displayName": "017混合续训最终模型 · 10000局独立门控",
+    "completedRounds": 10000,
+    "plannedRounds": 10000,
+    "optimizerUpdates": 0,
+    "strengthGames": 10000,
+    "workers": [
+      {
+        "shard": 0,
+        "pid": 23020,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-vs-p0",
+        "completedPairs": 1250,
+        "protocolSHA256": "6bab0c67ca44d1872b3153d150d33b128c5c6cd442dcd1d39251a3cd8c176c9f",
+        "updatedAtUTC": "2026-11-12T11:33:32.682Z",
+        "rssBytes": 366510080
+      },
+      {
+        "shard": 1,
+        "pid": 31928,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-vs-p0",
+        "completedPairs": 1250,
+        "protocolSHA256": "6bab0c67ca44d1872b3153d150d33b128c5c6cd442dcd1d39251a3cd8c176c9f",
+        "updatedAtUTC": "2026-11-12T11:33:30.876Z",
+        "rssBytes": 360230912
+      },
+      {
+        "shard": 2,
+        "pid": 32852,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-vs-p0",
+        "completedPairs": 1250,
+        "protocolSHA256": "6bab0c67ca44d1872b3153d150d33b128c5c6cd442dcd1d39251a3cd8c176c9f",
+        "updatedAtUTC": "2026-11-12T11:33:29.046Z",
+        "rssBytes": 370085888
+      },
+      {
+        "shard": 3,
+        "pid": 45076,
+        "phase": "complete",
+        "failure": null,
+        "currentTask": "champion-vs-p0",
+        "completedPairs": 1250,
+        "protocolSHA256": "6bab0c67ca44d1872b3153d150d33b128c5c6cd442dcd1d39251a3cd8c176c9f",
+        "updatedAtUTC": "2026-11-12T11:33:27.858Z",
+        "rssBytes": 356528128
+      }
+    ],
+    "failure": "Error: Worker exited 1\n    at ChildProcess.<anonymous> (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/overnight-runtime-20261112/ai/research/tools/run-round-evaluation.mjs:62:64)\n    at Object.onceWrapper (node:events:631:26)\n    at ChildProcess.emit (node:events:509:28)\n    at ChildProcess._handle.onexit (node:internal/child_process:295:12)",
+    "stoppedAt": "2026-11-12T11:33:32.842Z"
+  },
+  "originalSummaryError": "Traceback (most recent call last):\n  File \"D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\overnight-runtime-20261112\\ai\\danMCai\\evaluation\\summarize-round-pairs.py\", line 188, in <module>\n    result = summarize(args.protocol, args.results)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\overnight-runtime-20261112\\ai\\danMCai\\evaluation\\summarize-round-pairs.py\", line 74, in summarize\n    plan = json.loads(protocol.read_text())\n                      ^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\pathlib.py\", line 1028, in read_text\n    return f.read()\n           ^^^^^^^^\nUnicodeDecodeError: 'gbk' codec can't decode byte 0xad in position 2782: illegal multibyte sequence\n",
+  "recoveryCommand": "original frozen summarize-round-pairs.py -B -X utf8 --protocol=<original> --results=<original> --output=<summary>",
+  "trainingSourceCommit": "61bfd646ae3a336d3c7d57056b59b7c39a4eee3e",
+  "sourceFilesVerifiedUnchanged": 170,
+  "newGamesDuringRecovery": 0,
+  "optimizerUpdatesDuringRecovery": 0,
+  "seedOrProtocolChanges": false,
+  "checkpointSelection": "only final fully stopped learnerv000061013",
+  "gateSHA256": "88e6256ea7b4e7bd6278c6dee6e2fc2f1ac1c21367d8eaac47c2097bb398fc3e",
+  "localChampionManifestSHA256": "b21df149bd5a452dc8c5193b5b28b150be9a2a2354b8fa831f985e982d515d0a",
+  "workers": [
+    {
+      "file": "heldout-worker-0.jsonl.gz",
+      "compressedSHA256": "3bcc3aa3b882f9bb5acccc36f3f3eb67a024bcaa598b978d1a87cb093fff7ed8",
+      "rawSHA256": "9989f4a608585b39e89004a949006d4cfce684ae08b6044bd67e4f3c4f402438",
+      "pairs": 1250,
+      "rounds": 2500,
+      "containsMovesOrHands": false
+    },
+    {
+      "file": "heldout-worker-1.jsonl.gz",
+      "compressedSHA256": "30f5f3f5c6a8a1217292858d2f957a287fbc0db0f1845ed28acc14108bdbf1d6",
+      "rawSHA256": "2d7481226a3762b67be7b14cea8fe095093b35b60825ad49ad0600a92c3d3704",
+      "pairs": 1250,
+      "rounds": 2500,
+      "containsMovesOrHands": false
+    },
+    {
+      "file": "heldout-worker-2.jsonl.gz",
+      "compressedSHA256": "116691020829308a62bf9abc2a7746ab9bf185ec6794a17c67433c77d9c5a294",
+      "rawSHA256": "5adfea1bbe4652b26181da6878a4ae5f74c17d0893d64b36affb0017db43aea9",
+      "pairs": 1250,
+      "rounds": 2500,
+      "containsMovesOrHands": false
+    },
+    {
+      "file": "heldout-worker-3.jsonl.gz",
+      "compressedSHA256": "8cafa67d3fe73d392d28d1185ad3ba96da1d3334aef0ad908d4fdf5436e072a0",
+      "rawSHA256": "a55d4955132b0c7290de43204dbb2798905f81584f52e239ebfca7b01af28d84",
+      "pairs": 1250,
+      "rounds": 2500,
+      "containsMovesOrHands": false
+    }
+  ],
+  "scope": "Only independent single-round research champion; webpage remains017/reason9001"
+}

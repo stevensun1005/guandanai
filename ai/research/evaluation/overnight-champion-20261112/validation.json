@@ -35,5 +35,17 @@
     "format": "passed",
     "build": "passed",
     "scope": "Separate Windows CIM/path dashboard companion; original170 frozen training source files unchanged"
+  },
+  "summaryRecoveryFix": {
+    "nodeTests": 506,
+    "passed": 470,
+    "skipped": 36,
+    "researchPythonPassed": 41,
+    "format": "passed",
+    "build": "passed",
+    "GBKDefaultChineseProtocolRegression": "passed",
+    "scientificOutputUnchangedFromOriginalFrozenScript": true,
+    "rawPairedRoundsVerified": 10000,
+    "scope": "Only developer summarizer reads changed to explicit UTF8; original frozen170source files unchanged"
   }
 }

@@ -1,0 +1,701 @@
+{
+  "schema": 1,
+  "kind": "stopped-campaign-integrity-not-strength",
+  "passed": true,
+  "observedAtUTC": "2026-11-12T11:29:27.470967+00:00",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\overnight-champion-20261112\\experiments\\train",
+  "earlyStoppedPilot": false,
+  "fullWindowCompleted": true,
+  "task": {
+    "id": "overnight017-mixed-lowLR-train",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\overnight-champion-20261112\\experiments\\train",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\local\\runs\\overnight-champion-20261112\\experiments\\train\\protocol.json",
+    "protocolSHA256": "03d08f1c51dcec448d7f85fb08d5b1762865b2ef0b7a6fec98cc53d9a90d0528",
+    "window": {
+      "startUTC": "2026-11-12T04:29:15.412Z",
+      "deadlineUTC": "2026-11-12T11:29:15.412Z",
+      "requestedHours": 7,
+      "restartExtendsDeadline": false
+    }
+  },
+  "stoppedAtUTC": "2026-11-12T11:29:20.272Z",
+  "exitDelaySeconds": 4.86,
+  "latest": {
+    "version": "v000061013",
+    "file": "v000061013.onnx",
+    "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "step": 61013,
+    "trainedRows": 124954624,
+    "ingestedRows": 31238812,
+    "publishedAt": "2026-11-12T11:29:17Z"
+  },
+  "checkpointSHA256": "7ef303f0930b7c58b10b0aa25537c4071943e56700e96f54c9ccc797eb23d39a",
+  "matchingNetworkAndAdam": true,
+  "adamStates": 12,
+  "adamStep": 61013,
+  "parent": {
+    "kind": "verified017-full12parameters-newAdam-emptyReplay",
+    "network": {
+      "id": "017",
+      "file": "bot-017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-017/bot-017.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "mac-20261105",
+        "version": "v000855042",
+        "status": "experimental-not-heldout-accepted",
+        "step": 855042,
+        "registeredAt": "2026-11-06T15:28:31.478Z",
+        "champion": {
+          "gate": 330,
+          "acceptedAt": "2026-11-06T10:59:34.199Z",
+          "evidence": "ai/research/evaluation/champion-selection-mac-20261106/gate-00330.json",
+          "evidenceSHA256": "c151c57b37f905084c8374ae8868bbfd3eb90763b60aed7eb4f0b640bb561f3e",
+          "manifest": "ai/research/evaluation/champion-selection-mac-20261106/champion.json"
+        },
+        "trainingDevice": "mps"
+      }
+    },
+    "predecessorNetworkStep": 855042,
+    "startingStep": 0,
+    "checkpointInherited": false,
+    "adamInherited": false,
+    "replayInherited": false
+  },
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "2f3ebc7e3bffb9bfbd9f67149814eeae54d2e2c0e91e399bff2124b31c0ac7cd",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "b517eb120422e534b82f9cba894c6e018b1d916662c298346256ec818a065c91",
+    "ai/danMCai/training/continuous/actor-seeds.mjs": "5083815688c8cd23406bd6418487135626a1681bfee21443754365b51e3c4d0d",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "32816b7ca1a080ee25dceea4fbbee5bfc1243e4ddfc767a26bba3e178585929a",
+    "ai/danMCai/training/continuous/learner.py": "524b8641fb9b33900321bc26165f25241850fcf5fd04ed6ed5a3d1f7fde17be5",
+    "ai/danMCai/training/continuous/value_net.py": "1e9c63e5d3bf25edf9c506265cd71b4170d0a8634a56456bbadce3ad5529052c",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "59628f82b1034a91a35e1639221e9953713ad4e30c7164e5d03ca164b521082b",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "293001a3a28fc4b542cc499c8860229859df0521b96edcd5028f63c0ecde6afc",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "7514d0e9b1212b34f498e81a93a8756970e6620eb3dd0e4588462d2aec199393",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "d48d06e817269e30bb1d17f6951dc10131a2f91dcb27c78003dfb5cb096d9592",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "558a8a54daff502980c4521d70b7b17b078464a7452d8fd164c099622e79404a",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "ai/danMCai/belief/sampler.mjs": "7523c6018f0dc04a6053c587a65487d8028beae5f1c49299678c27b67493d4cd",
+    "ai/danMCai/belief/features.mjs": "de146a33e7bc3b6b0fa3c041ae966f1dd5ca078f8a4f9b66be0da52ef4cfcf29",
+    "web/src/analysis/concepts.mjs": "826b897540c2784d546109f31cb5e25bd798041f6ace74fb9a42002ee96ce41f",
+    "package-lock.json": "42bbd0f86c05c51b5cd72fb02c036c10db40be4ae70bba30053b530c08ca231b",
+    "ai/danMCai/training/continuous/sources.mjs": "d62a0b897c40b40a8fc159a8ec000fa8ce2131cef2a9f71bd435f00dc6e95cdf",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 37540,
+      "matches": 38530,
+      "decisions": 18531500,
+      "failures": 0,
+      "nextSeed": 38530,
+      "shardSequence": 1116,
+      "uniqueLoggedSeeds": 38530,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 1,
+      "pid": 17916,
+      "matches": 9035,
+      "decisions": 4309754,
+      "failures": 0,
+      "nextSeed": 9035,
+      "shardSequence": 270,
+      "uniqueLoggedSeeds": 9035,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 2,
+      "pid": 9268,
+      "matches": 7876,
+      "decisions": 3811662,
+      "failures": 0,
+      "nextSeed": 7876,
+      "shardSequence": 244,
+      "uniqueLoggedSeeds": 7876,
+      "allocatedSeedsWithoutResult": 0
+    },
+    {
+      "slot": 3,
+      "pid": 54228,
+      "matches": 9607,
+      "decisions": 4632528,
+      "failures": 0,
+      "nextSeed": 9607,
+      "shardSequence": 289,
+      "uniqueLoggedSeeds": 9607,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "replay": {
+    "manifests": {
+      "a00-000001107.json": {
+        "rows": 17012,
+        "matches": 34
+      },
+      "a00-000001108.json": {
+        "rows": 16707,
+        "matches": 34
+      },
+      "a00-000001109.json": {
+        "rows": 16760,
+        "matches": 31
+      },
+      "a00-000001110.json": {
+        "rows": 953,
+        "matches": 2
+      },
+      "a00-000001111.json": {
+        "rows": 16807,
+        "matches": 33
+      },
+      "a00-000001112.json": {
+        "rows": 16486,
+        "matches": 36
+      },
+      "a00-000001113.json": {
+        "rows": 16427,
+        "matches": 34
+      },
+      "a00-000001114.json": {
+        "rows": 16536,
+        "matches": 31
+      },
+      "a00-000001115.json": {
+        "rows": 15854,
+        "matches": 34
+      },
+      "a01-000000230.json": {
+        "rows": 16729,
+        "matches": 36
+      },
+      "a01-000000231.json": {
+        "rows": 17134,
+        "matches": 30
+      },
+      "a01-000000232.json": {
+        "rows": 16690,
+        "matches": 35
+      },
+      "a01-000000233.json": {
+        "rows": 1273,
+        "matches": 2
+      },
+      "a01-000000234.json": {
+        "rows": 16764,
+        "matches": 36
+      },
+      "a01-000000235.json": {
+        "rows": 16676,
+        "matches": 35
+      },
+      "a01-000000236.json": {
+        "rows": 16457,
+        "matches": 33
+      },
+      "a01-000000237.json": {
+        "rows": 16650,
+        "matches": 29
+      },
+      "a01-000000238.json": {
+        "rows": 13490,
+        "matches": 29
+      },
+      "a01-000000239.json": {
+        "rows": 16385,
+        "matches": 34
+      },
+      "a01-000000240.json": {
+        "rows": 16389,
+        "matches": 33
+      },
+      "a01-000000241.json": {
+        "rows": 16555,
+        "matches": 34
+      },
+      "a01-000000242.json": {
+        "rows": 16713,
+        "matches": 33
+      },
+      "a01-000000243.json": {
+        "rows": 16589,
+        "matches": 34
+      },
+      "a01-000000244.json": {
+        "rows": 16650,
+        "matches": 35
+      },
+      "a01-000000245.json": {
+        "rows": 16491,
+        "matches": 36
+      },
+      "a01-000000246.json": {
+        "rows": 16446,
+        "matches": 33
+      },
+      "a01-000000247.json": {
+        "rows": 16587,
+        "matches": 36
+      },
+      "a01-000000248.json": {
+        "rows": 16503,
+        "matches": 30
+      },
+      "a01-000000249.json": {
+        "rows": 16676,
+        "matches": 34
+      },
+      "a01-000000250.json": {
+        "rows": 16484,
+        "matches": 32
+      },
+      "a01-000000251.json": {
+        "rows": 16544,
+        "matches": 35
+      },
+      "a01-000000252.json": {
+        "rows": 16553,
+        "matches": 36
+      },
+      "a01-000000253.json": {
+        "rows": 16729,
+        "matches": 29
+      },
+      "a01-000000254.json": {
+        "rows": 16646,
+        "matches": 35
+      },
+      "a01-000000255.json": {
+        "rows": 16728,
+        "matches": 33
+      },
+      "a01-000000256.json": {
+        "rows": 16631,
+        "matches": 37
+      },
+      "a01-000000257.json": {
+        "rows": 16405,
+        "matches": 37
+      },
+      "a01-000000258.json": {
+        "rows": 16533,
+        "matches": 37
+      },
+      "a01-000000259.json": {
+        "rows": 16892,
+        "matches": 32
+      },
+      "a01-000000260.json": {
+        "rows": 16464,
+        "matches": 31
+      },
+      "a01-000000261.json": {
+        "rows": 16489,
+        "matches": 37
+      },
+      "a01-000000262.json": {
+        "rows": 16703,
+        "matches": 36
+      },
+      "a01-000000263.json": {
+        "rows": 16586,
+        "matches": 36
+      },
+      "a01-000000264.json": {
+        "rows": 16697,
+        "matches": 34
+      },
+      "a01-000000265.json": {
+        "rows": 16506,
+        "matches": 34
+      },
+      "a01-000000266.json": {
+        "rows": 16702,
+        "matches": 33
+      },
+      "a01-000000267.json": {
+        "rows": 16567,
+        "matches": 30
+      },
+      "a01-000000268.json": {
+        "rows": 16725,
+        "matches": 34
+      },
+      "a01-000000269.json": {
+        "rows": 6505,
+        "matches": 14
+      },
+      "a02-000000214.json": {
+        "rows": 16477,
+        "matches": 32
+      },
+      "a02-000000215.json": {
+        "rows": 16509,
+        "matches": 34
+      },
+      "a02-000000216.json": {
+        "rows": 16932,
+        "matches": 38
+      },
+      "a02-000000217.json": {
+        "rows": 6726,
+        "matches": 13
+      },
+      "a02-000000218.json": {
+        "rows": 16762,
+        "matches": 29
+      },
+      "a02-000000219.json": {
+        "rows": 16603,
+        "matches": 31
+      },
+      "a02-000000220.json": {
+        "rows": 16506,
+        "matches": 34
+      },
+      "a02-000000221.json": {
+        "rows": 5368,
+        "matches": 9
+      },
+      "a02-000000222.json": {
+        "rows": 16632,
+        "matches": 37
+      },
+      "a02-000000223.json": {
+        "rows": 16542,
+        "matches": 35
+      },
+      "a02-000000224.json": {
+        "rows": 16420,
+        "matches": 33
+      },
+      "a02-000000225.json": {
+        "rows": 16960,
+        "matches": 30
+      },
+      "a02-000000226.json": {
+        "rows": 16489,
+        "matches": 30
+      },
+      "a02-000000227.json": {
+        "rows": 17091,
+        "matches": 32
+      },
+      "a02-000000228.json": {
+        "rows": 16700,
+        "matches": 35
+      },
+      "a02-000000229.json": {
+        "rows": 16932,
+        "matches": 39
+      },
+      "a02-000000230.json": {
+        "rows": 16708,
+        "matches": 36
+      },
+      "a02-000000231.json": {
+        "rows": 16698,
+        "matches": 35
+      },
+      "a02-000000232.json": {
+        "rows": 16955,
+        "matches": 31
+      },
+      "a02-000000233.json": {
+        "rows": 16616,
+        "matches": 34
+      },
+      "a02-000000234.json": {
+        "rows": 16736,
+        "matches": 35
+      },
+      "a02-000000235.json": {
+        "rows": 17110,
+        "matches": 32
+      },
+      "a02-000000236.json": {
+        "rows": 16794,
+        "matches": 34
+      },
+      "a02-000000237.json": {
+        "rows": 16966,
+        "matches": 36
+      },
+      "a02-000000238.json": {
+        "rows": 16694,
+        "matches": 33
+      },
+      "a02-000000239.json": {
+        "rows": 7423,
+        "matches": 14
+      },
+      "a02-000000240.json": {
+        "rows": 16761,
+        "matches": 31
+      },
+      "a02-000000241.json": {
+        "rows": 16844,
+        "matches": 34
+      },
+      "a02-000000242.json": {
+        "rows": 16821,
+        "matches": 36
+      },
+      "a02-000000243.json": {
+        "rows": 6581,
+        "matches": 14
+      },
+      "a03-000000239.json": {
+        "rows": 16449,
+        "matches": 38
+      },
+      "a03-000000240.json": {
+        "rows": 16819,
+        "matches": 36
+      },
+      "a03-000000241.json": {
+        "rows": 16678,
+        "matches": 33
+      },
+      "a03-000000242.json": {
+        "rows": 16596,
+        "matches": 34
+      },
+      "a03-000000243.json": {
+        "rows": 16704,
+        "matches": 35
+      },
+      "a03-000000244.json": {
+        "rows": 16564,
+        "matches": 41
+      },
+      "a03-000000245.json": {
+        "rows": 16503,
+        "matches": 35
+      },
+      "a03-000000246.json": {
+        "rows": 16536,
+        "matches": 36
+      },
+      "a03-000000247.json": {
+        "rows": 16450,
+        "matches": 35
+      },
+      "a03-000000248.json": {
+        "rows": 16858,
+        "matches": 32
+      },
+      "a03-000000249.json": {
+        "rows": 16481,
+        "matches": 37
+      },
+      "a03-000000250.json": {
+        "rows": 16641,
+        "matches": 33
+      },
+      "a03-000000251.json": {
+        "rows": 16398,
+        "matches": 32
+      },
+      "a03-000000252.json": {
+        "rows": 16542,
+        "matches": 31
+      },
+      "a03-000000253.json": {
+        "rows": 16687,
+        "matches": 31
+      },
+      "a03-000000254.json": {
+        "rows": 16681,
+        "matches": 34
+      },
+      "a03-000000255.json": {
+        "rows": 16661,
+        "matches": 35
+      },
+      "a03-000000256.json": {
+        "rows": 17006,
+        "matches": 35
+      },
+      "a03-000000257.json": {
+        "rows": 16880,
+        "matches": 37
+      },
+      "a03-000000258.json": {
+        "rows": 17334,
+        "matches": 32
+      },
+      "a03-000000259.json": {
+        "rows": 16448,
+        "matches": 39
+      },
+      "a03-000000260.json": {
+        "rows": 16898,
+        "matches": 36
+      },
+      "a03-000000261.json": {
+        "rows": 16532,
+        "matches": 39
+      },
+      "a03-000000262.json": {
+        "rows": 16507,
+        "matches": 39
+      },
+      "a03-000000263.json": {
+        "rows": 16559,
+        "matches": 32
+      },
+      "a03-000000264.json": {
+        "rows": 16433,
+        "matches": 34
+      },
+      "a03-000000265.json": {
+        "rows": 16641,
+        "matches": 34
+      },
+      "a03-000000266.json": {
+        "rows": 16731,
+        "matches": 29
+      },
+      "a03-000000267.json": {
+        "rows": 17014,
+        "matches": 33
+      },
+      "a03-000000268.json": {
+        "rows": 16449,
+        "matches": 35
+      },
+      "a03-000000269.json": {
+        "rows": 16693,
+        "matches": 34
+      },
+      "a03-000000270.json": {
+        "rows": 17120,
+        "matches": 37
+      },
+      "a03-000000271.json": {
+        "rows": 16464,
+        "matches": 33
+      },
+      "a03-000000272.json": {
+        "rows": 16444,
+        "matches": 37
+      },
+      "a03-000000273.json": {
+        "rows": 16770,
+        "matches": 37
+      },
+      "a03-000000274.json": {
+        "rows": 16541,
+        "matches": 30
+      },
+      "a03-000000275.json": {
+        "rows": 17079,
+        "matches": 38
+      },
+      "a03-000000276.json": {
+        "rows": 16451,
+        "matches": 34
+      },
+      "a03-000000277.json": {
+        "rows": 16389,
+        "matches": 34
+      },
+      "a03-000000278.json": {
+        "rows": 16845,
+        "matches": 34
+      },
+      "a03-000000279.json": {
+        "rows": 16885,
+        "matches": 32
+      },
+      "a03-000000280.json": {
+        "rows": 16664,
+        "matches": 32
+      },
+      "a03-000000281.json": {
+        "rows": 16587,
+        "matches": 32
+      },
+      "a03-000000282.json": {
+        "rows": 16483,
+        "matches": 30
+      },
+      "a03-000000283.json": {
+        "rows": 16633,
+        "matches": 37
+      },
+      "a03-000000284.json": {
+        "rows": 8896,
+        "matches": 19
+      },
+      "a03-000000285.json": {
+        "rows": 16750,
+        "matches": 39
+      },
+      "a03-000000286.json": {
+        "rows": 16881,
+        "matches": 35
+      },
+      "a03-000000287.json": {
+        "rows": 17070,
+        "matches": 30
+      },
+      "a03-000000288.json": {
+        "rows": 1590,
+        "matches": 3
+      }
+    },
+    "shards": 129,
+    "retainedRows": 2041749,
+    "pendingShards": [
+      "a01-000000268.json",
+      "a01-000000269.json",
+      "a02-000000242.json",
+      "a02-000000243.json"
+    ],
+    "pendingRows": 46632,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": []
+  },
+  "totals": {
+    "matches": 65048,
+    "decisions": 31285444,
+    "rows": 31285444
+  },
+  "tailRowsNotInCheckpoint": 46632,
+  "optimizerUpdatesDuringAudit": 0,
+  "preservedHistory": true,
+  "webChampionChanged": false,
+  "limitations": "Retained replay only; evicted samples, original in-memory ring/RNG not recovered."
+}

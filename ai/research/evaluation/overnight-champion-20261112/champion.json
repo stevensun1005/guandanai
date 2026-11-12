@@ -1,0 +1,18 @@
+{
+  "file": "champion.onnx",
+  "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "version": "v000061013",
+  "step": 61013,
+  "config": {
+    "stateFeatures": 513,
+    "actionFeatures": 54
+  },
+  "id": "overnight017-v000061013",
+  "gate": "gate.json",
+  "gateSHA256": "88e6256ea7b4e7bd6278c6dee6e2fc2f1ac1c21367d8eaac47c2097bb398fc3e",
+  "acceptedAtUTC": "2026-11-12T11:50:07.553Z",
+  "researchOnly": true,
+  "weightLocation": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\overnight-champion-20261112\\champion\\champion.onnx",
+  "weightPubliclyReleased": false,
+  "localManifestSHA256": "b21df149bd5a452dc8c5193b5b28b150be9a2a2354b8fa831f985e982d515d0a"
+}

@@ -5546,7 +5546,19 @@
     {
       "id": "overnight-champion-20261112",
       "file": "ai/research/evaluation/overnight-champion-20261112/protocol.design.json",
-      "classification": "preregistered-new-training-window-not-accepted-champion"
+      "classification": "complete-independent-round-gate-research-champion-accepted",
+      "results": "ai/research/evaluation/overnight-champion-20261112/heldout-results.json",
+      "gate": "ai/research/evaluation/overnight-champion-20261112/gate.json"
+    }
+  ],
+  "researchChampions": [
+    {
+      "id": "overnight017-v000061013",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "manifest": "ai/research/evaluation/overnight-champion-20261112/champion.json",
+      "gate": "ai/research/evaluation/overnight-champion-20261112/gate.json",
+      "webPublished": false,
+      "scope": "complete independent single-round preregistered gate; not whole-match/human strength"
     }
   ]
 }

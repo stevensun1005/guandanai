@@ -71,15 +71,15 @@ def cooperation_interactions(data, specifications):
 
 def summarize(protocol, results):
     protocol, results = Path(protocol), Path(results)
-    plan = json.loads(protocol.read_text())
+    plan = json.loads(protocol.read_text(encoding="utf-8"))
     protocol_sha = hashlib.sha256(protocol.read_bytes()).hexdigest()
     tasks = {t["id"]: t for t in plan["tasks"]}
     data = {id: {} for id in tasks}
     for slot in range(plan["workers"]):
-        status = json.loads((results / f"worker-{slot}.json").read_text())
+        status = json.loads((results / f"worker-{slot}.json").read_text(encoding="utf-8"))
         if status["phase"] != "complete" or status["protocolSHA256"] != protocol_sha:
             raise ValueError("Incomplete or mismatched worker")
-        for line in (results / f"worker-{slot}.jsonl").read_text().splitlines():
+        for line in (results / f"worker-{slot}.jsonl").read_text(encoding="utf-8").splitlines():
             row = json.loads(line)
             id, seed = row["task"], row["seed"]
             if row["protocolSHA256"] != protocol_sha or seed in data[id] or seed not in tasks[id]["seeds"]:

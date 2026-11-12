@@ -25,7 +25,7 @@ class WindowsABTests(unittest.TestCase):
                      {'id': 'B-clint', 'model': 'B', 'opponent': 'clint', 'mixed': False, 'seeds': [102,103]}]
             plan = {'tasks': tasks, 'workers': 1, 'primaryModel': 'A', 'primaryOpponent': 'B',
                     'contrasts': [{'id':'clint', 'left':'B-clint', 'right':'A-clint', 'z':2.575829303549, 'confidenceLevel':0.99, 'direction':'A minus B'}],
-                    'id':'synthetic-test', 'purpose':'unit fixture, not actual games', 'models':{}, 'rules':{}, 'pipeline':'fixture', 'pairing':'fixture', 'analysis':{}, 'plannedPairs':6}
+                    'id':'synthetic-test', 'purpose':'中文协议：仅合成回归，不是实际比赛', 'models':{}, 'rules':{}, 'pipeline':'fixture', 'pairing':'fixture', 'analysis':{}, 'plannedPairs':6}
             AB.write(root/'protocol.json', plan)
             sha = hashlib.sha256((root/'protocol.json').read_bytes()).hexdigest()
             AB.write(root/'worker-0.json', {'phase':'complete', 'protocolSHA256':sha})
@@ -39,7 +39,18 @@ class WindowsABTests(unittest.TestCase):
                                       'level':2, 'leader':0, 'dealSHA256':str(seed), 'turns':1})
                     rows.append({'task':task['id'], 'seed':seed, 'protocolSHA256':sha, 'games':games})
             (root/'worker-0.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in rows))
-            report=summary.summarize(root/'protocol.json', root)
+            # Force a GBK default even on UTF-8 hosts; the report must specify UTF-8 itself.
+            (root/'protocol.json').write_text(json.dumps(plan,ensure_ascii=False),encoding='utf-8')
+            sha = hashlib.sha256((root/'protocol.json').read_bytes()).hexdigest()
+            AB.write(root/'worker-0.json', {'phase':'complete', 'protocolSHA256':sha})
+            for row in rows: row['protocolSHA256']=sha
+            (root/'worker-0.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in rows),encoding='utf-8')
+            original_read = Path.read_text
+            def gbk_default(path, *args, **kwargs):
+                kwargs.setdefault('encoding','gbk')
+                return original_read(path,*args,**kwargs)
+            with patch.object(Path,'read_text',gbk_default):
+                report=summary.summarize(root/'protocol.json', root)
             self.assertEqual(report['completedRounds'],12)
             self.assertEqual(report['primaryWinner'],'inconclusive')
             self.assertEqual(report['secondaryContrasts']['clint']['confidenceLevel'],0.99)
