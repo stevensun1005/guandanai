@@ -35,6 +35,13 @@ import {
 } from '../training/continuous/search-actor.mjs';
 import { FEATURES, TARGETS, encodeSample, sha256 } from '../training/continuous/lib.mjs';
 
+// Small reads come from Node's shared Buffer pool: copy exactly this file's bytes (byteOffset
+// may be non-zero), not the whole pool.
+const fileBytes = (path) => {
+  const b = readFileSync(path);
+  return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength);
+};
+
 const BELIEF_V1 = '/Users/stevensun/guandan-runtime.noindex/window1-20261109/H/model/belief.onnx';
 const SEED = 4_291_000_000;
 const ACTOR = fileURLToPath(new URL('../training/continuous/search-actor.mjs', import.meta.url));
@@ -251,13 +258,9 @@ test(
       ]);
       // Byte layout: the first round's rows come first and equal a replay of that round.
       const again = await playActorRound(SEED + 3, cfg);
-      const x = new Int8Array(readFileSync(join(block, 'b000000-000000000.x.i8')).buffer.slice(0));
-      const y = new Float32Array(
-        readFileSync(join(block, 'b000000-000000000.y.f32')).buffer.slice(0),
-      );
-      const e = new Float32Array(
-        readFileSync(join(block, 'b000000-000000000.e.f32')).buffer.slice(0),
-      );
+      const x = new Int8Array(fileBytes(join(block, 'b000000-000000000.x.i8')));
+      const y = new Float32Array(fileBytes(join(block, 'b000000-000000000.y.f32')));
+      const e = new Float32Array(fileBytes(join(block, 'b000000-000000000.e.f32')));
       assert.equal(x.length, manifest.rows * FEATURES);
       assert.equal(e.length, manifest.rows * EXTRAS);
       again.labelled.forEach((row, i) => {

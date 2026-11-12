@@ -40,6 +40,7 @@ import {
 } from '../training/continuous/lib.mjs';
 import { ORACLE } from './actor.mjs';
 import { createSolver, SolverBudget } from './solver.mjs';
+import { isMain } from './platform.mjs';
 
 const deck = makeDeck();
 const remaining = (game) => game.hands.reduce((sum, hand) => sum + hand.length, 0);
@@ -278,7 +279,7 @@ async function main() {
   await pool.close();
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   main().catch((error) => {
     console.error(error);
     process.exit(1);

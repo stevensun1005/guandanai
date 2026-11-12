@@ -26,7 +26,6 @@
  *        --out=<dir> [--pairs=3000] [--threshold=32] [--workers=4] [--solver-cards=18]
  *        [--policy=student|pimc-search|champion-check]   (--student is not used by the other two)
  */
-import { spawn } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -37,6 +36,7 @@ import { policyState } from '../../../web/src/ai/observation.js';
 import { argmax, createModelPool, sha256 } from '../training/continuous/lib.mjs';
 import { labelDecision } from './pimc-actor.mjs';
 import { createSolver, positionFromGame, solveEndgame, SolverBudget } from './solver.mjs';
+import { isMain, spawnNice } from './platform.mjs';
 
 const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
@@ -308,12 +308,10 @@ async function main() {
       { length: workers },
       (_, part) =>
         new Promise((done, fail) => {
-          const child = spawn(
-            'nice',
+          const child = spawnNice(
+            10,
+            process.execPath,
             [
-              '-n',
-              '10',
-              process.execPath,
               self,
               '--worker',
               `--part=${part}`,
@@ -340,7 +338,7 @@ async function main() {
   console.log(JSON.stringify(summary, null, 2));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   (process.argv.includes('--worker') ? worker() : main()).catch((error) => {
     console.error(error);
     process.exit(1);

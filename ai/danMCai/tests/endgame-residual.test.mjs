@@ -29,6 +29,13 @@ import {
   encodeSample,
 } from '../training/continuous/lib.mjs';
 
+// Small reads come from Node's shared Buffer pool: copy exactly this file's bytes (byteOffset
+// may be non-zero), not the whole pool.
+const fileBytes = (path) => {
+  const b = readFileSync(path);
+  return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength);
+};
+
 const REPO = fileURLToPath(new URL('../../..', import.meta.url));
 const EXPORT = join(REPO, 'ai/danMCai/training/continuous/residual_export.py');
 const CHAMPION_017 =
@@ -175,7 +182,7 @@ test('fused champion + residual ONNX matches PyTorch and a zero residual is the 
       '--out',
       file('ref.f32'),
     ]);
-    const reference = new Float32Array(readFileSync(file('ref.f32')).buffer.slice(0));
+    const reference = new Float32Array(fileBytes(file('ref.f32')));
     assert.equal(reference.length, allRows.length);
 
     let at = 0,

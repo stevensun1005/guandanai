@@ -91,6 +91,92 @@ class EndgameLearnerTest(unittest.TestCase):
             resumed = Learner(run)  # refill must skip pruned shards without failing
             self.assertEqual(resumed.replay.size, 20)
 
+    def make_run(self, run, learning_rate=1e-5, init=None, decay=10):
+        import json
+        import os
+
+        (run / "shards").mkdir(parents=True)
+        (run / "models").mkdir()
+        config = {
+            "deadline": "2099-01-01T00:00:00Z",
+            "champion": {"file": str(BASELINE)},
+            "learner": {"device": "cpu", "threads": 1, "seed": 1, "learningRate": learning_rate,
+                        "batch": 8, "capacity": 100, "minSamples": 1, "replayRatio": 4,
+                        "oracleDecaySteps": decay, "exportSeconds": 600, "keepShardRows": 1000},
+        }
+        if init:
+            config["learner"]["init"] = init
+        (run / "config.json").write_text(json.dumps(config))
+        rng = np.random.default_rng(7)
+        for i in range(2):
+            base = run / "shards" / f"s0-{i:06d}"
+            rng.integers(-1, 3, (10, FEATURES)).astype(np.int8).tofile(f"{base}.x.i8")
+            rng.integers(0, 3, (10, ORACLE)).astype(np.int8).tofile(f"{base}.o.i8")
+            rng.choice(np.array([-2, -1, 1, 2], np.float32), 10).tofile(f"{base}.y.f32")
+            Path(f"{base}.json").write_text(json.dumps({"rows": 10}))
+            os.utime(f"{base}.json", (1000 + i, 1000 + i))
+
+    def test_new_run_starts_from_checkpoint_with_fresh_shard_bookkeeping(self):
+        import json
+        import shutil
+
+        from value_net import sha256
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source"
+            self.make_run(source)
+            old = Learner(source)
+            old.ingest()
+            for _ in range(12):
+                old.train_step()
+            old.save()
+            old.publish()
+            checkpoint = source / "learner" / "checkpoint.pt"
+            digest = sha256(checkpoint)
+            student = json.loads((source / "models" / "latest.json").read_text())
+
+            target = Path(directory) / "target"
+            init = {"sha256": digest, "file": "learner/init.pt"}
+            self.make_run(target, learning_rate=3e-6, init=init)
+            (target / "learner").mkdir()
+            shutil.copyfile(checkpoint, target / "learner" / "init.pt")
+            new = Learner(target)
+
+            self.assertEqual(new.step, 12)
+            for a, b in zip(new.net.state_dict().values(), old.net.state_dict().values()):
+                self.assertTrue(torch.equal(a, b))
+            self.assertEqual(new.optimizer.param_groups[0]["lr"], 3e-6)
+            self.assertEqual(len(new.optimizer.state), len(old.optimizer.state))
+            self.assertEqual(keep_probability(new.step, 10), 0.0)
+            # The first export is the inherited student itself, byte for byte.
+            self.assertEqual(json.loads((target / "models" / "latest.json").read_text()), student)
+            # Same shard names as the source run, but nothing counts as already ingested.
+            self.assertEqual((new.trained_rows, new.ingested_rows, len(new.ingested)), (0, 0, 0))
+            self.assertEqual(new.ingest(), 20)
+            self.assertEqual(new.inherited["step"], 12)
+            self.assertEqual(new.inherited["trainedRows"], 96)
+            self.assertEqual(new.inherited["ingestedRows"], 20)
+            self.assertEqual(new.inherited["chain"], [digest])
+
+            new.train_step()
+            new.save()
+            resumed = Learner(target)  # restarts resume the new run, not the init file
+            self.assertEqual(resumed.step, 13)
+            self.assertEqual(resumed.inherited, new.inherited)
+            self.assertEqual(resumed.optimizer.param_groups[0]["lr"], 3e-6)
+
+    def test_init_checkpoint_sha_mismatch_refuses(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source"
+            self.make_run(source)
+            Learner(source).save()
+            target = Path(directory) / "target"
+            self.make_run(target, init={"sha256": "0" * 64, "file": "learner/init.pt"})
+            (target / "learner").mkdir()
+            (target / "learner" / "init.pt").write_bytes((source / "learner" / "checkpoint.pt").read_bytes())
+            with self.assertRaises(RuntimeError):
+                Learner(target)
+
 
 if __name__ == "__main__":
     unittest.main()

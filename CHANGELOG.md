@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2026-11-11美东 · 尾盘模型可从检查点开新运行（含 Windows）
+
+- `ai/danMCai/endgame/` 学习器新增 `learner.init`：新运行从旧运行的 `checkpoint.pt` 起步，继承网络、明牌投影、Adam 与步数，分片记账重置（新分片名不再被误当已读），学习率以新配置为准，旧累计数记入 `inherited`。须在预登记写检查点 SHA，并用 `run.mjs --init-checkpoint` 传入、核对后复制到 `learner/init.pt`。
+- Windows 支持：新增 `platform.mjs`（无 `nice` 时用 `os.setPriority`，入口判断兼容 `C:\` 路径），学习器支持 `cuda` 且不可用时报错。用 r2 检查点在本机试启动，首个导出与 `e00061050`（`382085ee…`）逐字节相同；测试 `endgame-platform.test.mjs` 与 `endgame_learner_test.py`；`search-actor`／`endgame-residual` 测试改为按 `byteOffset` 读小文件（原写法读到 Node 共享缓冲池，加一个导入就会读错）。说明见[尾盘 README](ai/danMCai/endgame/README.md#从已有检查点开新运行例如拷到-windows-续训)。
+- 只是工具，没有新训练或验收；网页冠军 017、默认 danMCai-reason 与菜单不变。
+
 ## 2026-11-11美东 · Clint大厅、房间计时与独立规则增量
 
 - 对齐大厅昵称／模式／规则并增加底部照片；成组提示在最长组右上对齐。房主可选理牌时间与20+60／30+60／60出牌时间，每人每局余额随恢复保留，短时钟收紧推理预算。
