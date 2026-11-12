@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "defaultId": "017",
+  "defaultId": "029",
   "models": [
     {
       "id": "001",
@@ -554,15 +554,42 @@
         "step": 475588,
         "registeredAt": "2026-11-11T04:44:58.105Z"
       }
+    },
+    {
+      "id": "029",
+      "file": "bot-029.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "bytes": 5368650,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-029/bot-029.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "overnight017-20261112",
+        "version": "v000061013",
+        "status": "independent-raw017-gate-accepted-not-universal-strength",
+        "step": 61013,
+        "registeredAt": "2026-11-12T16:19:43.483Z",
+        "champion": {
+          "gate": 1,
+          "kind": "independent-final-only",
+          "acceptedAt": "2026-11-12T11:50:07.553Z",
+          "evidence": "ai/research/evaluation/web-champion-029-20261112/gate.json",
+          "evidenceSHA256": "ac93f363f70ce3a44836ed0cc3ccfcc9be9b4f3f0acf94b0eb705c19fc430296",
+          "manifest": "ai/research/evaluation/web-champion-029-20261112/champion.json"
+        },
+        "trainingDevice": "rocm-cuda-api"
+      }
     }
   ],
   "selection": {
     "mode": "latest-v2",
     "danMCaiChampions": [
-      "017",
-      "012"
+      "029",
+      "017"
     ],
-    "defaultChoice": "9001"
+    "defaultChoice": "029"
   },
   "searchBots": [
     {
@@ -594,7 +621,7 @@
         "endgameHi": 20,
         "endgameWorlds": 8,
         "minWorlds": 4,
-        "tieTolerance": 1e-9,
+        "tieTolerance": 1e-09,
         "solverMaxNodes": 1500000,
         "worldSeed": "(seed*1009 + ply*7919)>>>0"
       },

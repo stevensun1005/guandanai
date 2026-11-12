@@ -1,0 +1,44 @@
+{
+  "completedAtUTC": "2026-11-12T15:50:54.007161+00:00",
+  "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+  "sourceCommit": "5baaf926cb6f8fe4252ff3a55ecd5d73f682ab88",
+  "sourceFilesVerified": 184,
+  "completedPairs": 1000,
+  "completedRounds": 2000,
+  "duplicateSeeds": 0,
+  "registeredSeedsAllMatched": true,
+  "optimizerUpdates": 0,
+  "v1Merged": false,
+  "status": {
+    "pid": 50664,
+    "phase": "complete",
+    "plannedRounds": 2000,
+    "completedRounds": 2000,
+    "workers": [
+      {
+        "pid": 20032,
+        "phase": "complete",
+        "completedPairs": 500,
+        "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+        "updatedAtUTC": "2026-11-12T15:50:53.427Z"
+      },
+      {
+        "pid": 22056,
+        "phase": "complete",
+        "completedPairs": 500,
+        "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+        "updatedAtUTC": "2026-11-12T15:29:28.225Z"
+      }
+    ],
+    "deadlineUTC": "2026-11-12T17:30:48.120Z",
+    "updatedAtUTC": "2026-11-12T15:50:54.029Z"
+  },
+  "awake": {
+    "phase": "released",
+    "updatedAtUTC": "2026-11-12T15:50:57.5628543+00:00",
+    "deadlineUTC": "2026-11-12T17:30:48.120Z",
+    "powerPlanChanged": false,
+    "pid": 19984
+  },
+  "sourceAndModelsUnchanged": true
+}

@@ -1,5 +1,7 @@
 <div align="center">
 
+2026-11-12: the owner authorized publishing **danMCai-v000061013 (029)** as the neural champion/default. Until a search bot on this base is independently validated, the existing menu rule offers Clint, the latest GuanZero and029. Old017/9001 remain archived. The raw017 gate passed, but a separate2,000-round comparison against old017-basedreason gave−.195 signed points per pair (95%CI−.27035 to−.11965); this is not universal superiority. [Release evidence](ai/research/evaluation/web-champion-029-20261112/champion.json).
+
 # GuandanAI
 
 [简体中文](./README.md) · English

@@ -1,5 +1,7 @@
 # 从仓库到朋友的一张链接
 
+2026-11-12冠军发布：029不可变Release、完整SHA及原独立门控已绑定。旧reason9001不换底座；暂无新reason时菜单三项、默认029。必须核验新权重WASM、混合队伍/房间恢复、Pages与线上菜单。[发布清单](../../ai/research/evaluation/web-champion-029-20261112/champion.json)。
+
 主站：[stevensun1005.github.io/guandanai](https://stevensun1005.github.io/guandanai/)。网站由 GitHub Pages 托管，发布流程在 `.github/workflows/pages.yml`。
 
 ## 检查与发布触发

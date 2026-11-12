@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "id": "champion-vs-reason-v2-20261112",
+  "completedAtUTC": "2026-11-12T15:50:54.007161+00:00",
+  "purpose": "Independent raw newresearchchampion versus frozen deployed017-basedreason. No training, no promotion or deployment implied.",
+  "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+  "models": {
+    "challenger": {
+      "file": "models/challenger.onnx",
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\champion-vs-reason-v2-20261112\\models\\challenger.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "version": "v000061013",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "kind": "raw-full-network researchchampion",
+      "gateSHA256": "88e6256ea7b4e7bd6278c6dee6e2fc2f1ac1c21367d8eaac47c2097bb398fc3e"
+    },
+    "reason": {
+      "file": "models/reason017.onnx",
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\champion-vs-reason-v2-20261112\\models\\reason017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "version": "v000855042-bsearch1-16d76783",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "kind": "deployed9001 belief-search,notjustthisbasefile",
+      "manifestSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "search": {
+        "lo": 21,
+        "hi": 40,
+        "worlds": 8,
+        "k": 6,
+        "net": 2,
+        "endgameHi": 20,
+        "endgameWorlds": 8,
+        "minWorlds": 4,
+        "tieTolerance": 1e-09,
+        "solverMaxNodes": 1500000,
+        "worldSeed": "(seed*1009 + ply*7919)>>>0"
+      },
+      "featureVersion": "belief-v1"
+    },
+    "belief": {
+      "file": "models/belief-v1.onnx",
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\champion-vs-reason-v2-20261112\\models\\belief-v1.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "kind": "fixedhandinferencev1",
+      "featureVersion": "belief-v1"
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "one complete single round",
+    "cards": 108,
+    "level": "seeded uniform2..A",
+    "leader": "seeded seat",
+    "tribute": false,
+    "maxTurns": 1000,
+    "truncation": "error not draw"
+  },
+  "pipeline": "challenger rawargmax over all canonicalcandidates vs reason9001 current deployed algorithms; nativeCPU1thread/session,2processes; preloaded localweights, no UI animation/pause/download delay. Reason only own hand/public info;50s reasoning,3s solver,300kTT,fallsback017; fixed3h remaining-window cap. Memoryv2: CPUarena/memorypatternoff,1GiBheap,perroundcoldsolver/GC. Originalharddeadline unchanged.",
+  "pairing": "Identical physical108cardIDs/level/leader; challenger team0 then team1, both games complete or no pair.",
+  "statistics": {
+    "primary": "Mean over independentdeal-pair averages of signed final upgrade; sampleSD/sqrt(N) normal95%CI. lower>0 challengerbetter; upper<0 reasonbetter; otherwise inconclusive.",
+    "secondary": "Per-side W/L/D, ranks,doubleup/down. Reason band requests/completed/deviated/minworlds/fallbackreason/timing; rawandreason observeddecisioncost. No pooledcross-study winrate.",
+    "stopping": "Fixed1000 audited pairs or once-registered3h deadline/STOP. Incompletepairedsample ispartial only; no selection/expansion/replay/extension.",
+    "limits": "single round without tribute; twohomogeneousAI teams, no human/mixed/fullmatch/mobile validation. Timebudgets and machine load affectpolicy. Not an ablation isolatingsearch on thesamebase. Cache reset at round boundary can change timebudget fallbacks. v1partial is separate, never merged."
+  },
+  "plannedPairs": 1000,
+  "completedPairs": 1000,
+  "completedRounds": 2000,
+  "reports": {
+    "head-to-head": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 973,
+      "losses": 1027,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": -0.195,
+        "standardError": 0.03844415369016404,
+        "ci": [
+          -0.2703505412327215,
+          -0.11964945876727849
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.4865,
+        "standardError": 0.008952535836169432,
+        "ci": [
+          0.4689530297611079,
+          0.5040469702388921
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 397,
+        "13": 151,
+        "14": 425,
+        "23": 253,
+        "24": 267,
+        "34": 507
+      },
+      "doubleDowns": 507,
+      "doubleUps": 397,
+      "meanTurns": 81.578
+    }
+  },
+  "secondaryContrasts": {},
+  "primaryWinner": "reason",
+  "primaryInterpretation": "newraw researchchampion perspective;95% deal-pair clusterCI signed single-round upgrade",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

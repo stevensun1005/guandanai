@@ -1,5 +1,7 @@
 # 网页电脑：Clint、GuanZero、danMCai 与 danMCai-reason
 
+2026-11-12最新发布：所有者明确授权新纯网络冠军029/v000061013。当前selection.danMCaiChampions=[029,017]，defaultId/defaultChoice=029；无新底座搜索验收时菜单暂三项Clint/最新GuanZero/029，评价回落029网络值。旧9001/017及历史推理证据保留归档，不能把旧9001静默改底座。门控格式桥接保留原固定样本gate完整指标/规则/原始SHA，不冒称SPRT。见[冠军清单](../../ai/research/evaluation/web-champion-029-20261112/champion.json)。下方旧017/9001当前值描述按日期保留为历史。
+
 **2026-11-09 起菜单只有四项**（所有者明确要求），内部编号只用于归档与房间同步。GuanZero 名称统一使用 `训练任务名-训练版本数值`，例如 `guanzero-adp-gpubatch-44752`，不使用“步”字或中间圆点。
 
 | 顺序 | 当前选项                      | 来源                                                                           |

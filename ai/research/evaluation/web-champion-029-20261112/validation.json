@@ -1,0 +1,71 @@
+{
+  "atUTC": "2026-11-12T16:27:56.622928+00:00",
+  "neuralModelSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "package": {
+    "localFile": "C:\\Users\\Admin\\Downloads\\danMCai-v000061013-web-model.zip",
+    "bytes": 5008865,
+    "sha256": "186685ad5ab1262fedc034b88bef0df9f827fe0def2260a393e0507cc263d991",
+    "allFileHashesVerified": true
+  },
+  "node": {
+    "tests": 508,
+    "passed": 472,
+    "skipped": 36,
+    "failed": 0
+  },
+  "researchPython": {
+    "passed": 41,
+    "failed": 0
+  },
+  "format": "passed",
+  "build": "passed",
+  "wasm": [
+    {
+      "candidateCount": 1,
+      "maxAbsDifference": 2.384185791015625e-07
+    },
+    {
+      "candidateCount": 3,
+      "maxAbsDifference": 2.384185791015625e-07
+    },
+    {
+      "candidateCount": 129,
+      "maxAbsDifference": 3.337860107421875e-06
+    }
+  ],
+  "browser": {
+    "production": "Production real model replies028and029, no errors",
+    "rejoin": {
+      "hostDirection": "W",
+      "guestDirection": "S",
+      "refreshDuringPrep": true,
+      "manualRoomCodeRecovery": true,
+      "selectedLevelAndOnceRuleSync": true,
+      "refreshDuringInFlightPolicy": true,
+      "stalePolicyCancelled": true,
+      "realGuestActionAfterReturn": true,
+      "dataChannelAutomaticRecovery": true,
+      "unknownSeatRejected": true,
+      "sameCredential": true,
+      "guestAvoidsModelDownload": true,
+      "hostExitOffersSoloContinuation": true,
+      "soloContinuationLoadsLearnedPolicy": true,
+      "pageErrors": []
+    },
+    "coach": {
+      "modelId": "029",
+      "viewports": 10,
+      "permissionAndAssistedTests": "passed",
+      "pageErrors": []
+    }
+  },
+  "expectedMenu": [
+    "clint-rule",
+    "028",
+    "029"
+  ],
+  "defaultId": "029",
+  "defaultChoice": "029",
+  "oldSearchBot9001": "Archived unchanged on017; not automatically rebased",
+  "deployment": "awaiting push/Pages"
+}

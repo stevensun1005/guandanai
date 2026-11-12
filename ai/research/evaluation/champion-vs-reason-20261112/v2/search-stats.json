@@ -1,0 +1,33 @@
+{
+  "bands": {
+    "midgame": {
+      "requests": 10260,
+      "completed": 10260,
+      "deviated": 1989,
+      "fallbackCount": 0,
+      "minWorldsFallbacks": 0,
+      "fallbackReasons": {},
+      "timedSearches": 10260,
+      "totalMs": 1637718,
+      "maxMs": 1549
+    },
+    "endgame": {
+      "requests": 5535,
+      "completed": 5527,
+      "deviated": 719,
+      "fallbackCount": 8,
+      "minWorldsFallbacks": 9,
+      "fallbackReasons": {
+        "budget": 7,
+        "timeout": 1
+      },
+      "timedSearches": 5535,
+      "totalMs": 3403142,
+      "maxMs": 52282
+    }
+  },
+  "rawMs": 114193.97750002072,
+  "reasonMs": 5146634.288599972,
+  "pairedGames": 2000,
+  "optimizerUpdates": 0
+}

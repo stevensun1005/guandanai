@@ -22,7 +22,7 @@ import { validateRecord } from '../src/collection/validate.mjs';
 import { humanExamples } from '../../ai/shared/data/tools/human-examples.mjs';
 import { collectedRound } from './fixtures/collected-round.mjs';
 
-test('online evaluation requires explicit host permission; it defaults to the reasoning bot over the current champion', () => {
+test('online evaluation requires explicit host permission and never uses a retired reasoning base', () => {
   for (const mode of ['host', 'guest']) {
     for (const value of [undefined, false, 'true', 1])
       assert.equal(coachAllowed(mode, { coachAllowed: value }), false);
@@ -32,11 +32,11 @@ test('online evaluation requires explicit host permission; it defaults to the re
   // champion weights: fallback values, single extra moves and the private table
   assert.equal(COACH_MODEL_ID, catalog.selection.danMCaiChampions[0]);
   assert.equal(COACH_MODEL_ID, catalog.defaultId);
-  // owner 2026-11-09: the coach uses the menu's reasoning bot (danMCai-reason) by default
-  assert.equal(COACH_SEARCH_BOT_ID, '9001');
-  assert.equal(searchBot(COACH_SEARCH_BOT_ID).base, COACH_MODEL_ID);
-  assert.ok(BOT_CHOICES.some((choice) => choice.id === COACH_SEARCH_BOT_ID));
-  assert.equal(COACH_NAME, 'danMCai-reason-v000855042');
+  // The new champion has no separately validated search bot yet. Historical 9001 stays on017.
+  assert.equal(COACH_SEARCH_BOT_ID, null);
+  assert.equal(searchBot('9001').base, '017');
+  assert.ok(!BOT_CHOICES.some((choice) => choice.id === '9001'));
+  assert.equal(COACH_NAME, 'danMCai-v000061013');
 });
 
 test('search values replace the champion values only for the moves the search evaluated', () => {

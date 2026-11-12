@@ -1,0 +1,5 @@
+{
+  "atUTC": "2026-11-12T16:20:46.054919+00:00",
+  "ownerMessage": "先把最新的冠军模型打包好传到页面版去 然后ai/research/evaluation/endgame-continue-20261112/WINDOWS_HANDOFF.md 交接文档 这是我之前训练的尾盘reason模型 我要我之后的reason模型接着训练 但是是在新的冠军模型基础上训练 打包好的文件在我download里",
+  "scope": "Publish verified new neuralchampion029, superseding old017 webfreeze. Existing menu rule uses newchampion as default until a new-base searchbot has separate evidence; old017 and9001 remain archived and old rooms resolve unchanged. Tail continuation separate."
+}

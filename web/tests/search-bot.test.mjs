@@ -455,16 +455,16 @@ test('public tribute and return cards fix consistent worlds or fall back', () =>
   assert.throws(() => publicKnownCards(view, three), KnownCardsError);
 });
 
-test('the research bot is the menu default over champion 017, which backs its fallbacks', () => {
+test('archived reason9001 keeps its old017 identity when the neural champion changes', () => {
   const bot = searchBot('9001');
   assert.equal(SEARCH_BOTS.length, 1);
-  // Owner deployment decision 2026-11-09, not an acceptance: new seats default to 9001.
-  assert.equal(DEFAULT_BOT_MODEL, '9001');
-  assert.equal(NEURAL_DEFAULT_MODEL, '017');
-  assert.equal(catalog.defaultId, '017');
-  assert.equal(COACH_MODEL_ID, '017');
-  assert.equal(COACH_SEARCH_BOT_ID, '9001');
-  assert.equal(BOT_CHOICES.at(-1).id, '9001');
+  assert.equal(DEFAULT_BOT_MODEL, '029');
+  assert.equal(NEURAL_DEFAULT_MODEL, '029');
+  assert.equal(catalog.defaultId, '029');
+  assert.equal(COACH_MODEL_ID, '029');
+  assert.equal(COACH_SEARCH_BOT_ID, null);
+  assert.equal(BOT_CHOICES.at(-1).id, '029');
+  assert.ok(!BOT_CHOICES.some((choice) => choice.id === '9001'));
   assert.equal(botModelId('9001'), '9001');
   assert.equal(botModel('9001').id, '017');
   assert.equal(botModelName('9001'), 'danMCai-reason-v000855042');
@@ -505,28 +505,28 @@ test('the research bot is the menu default over champion 017, which backs its fa
   }
 });
 
-test('a fresh profile defaults every seat to 9001; saved choices survive only while offered', () => {
+test('new seats default to029 and retired017/9001 preferences migrate without changing old identities', () => {
   assert.deepEqual(normalizeBotPreferences(storedBotPreferences(null, null)), {
-    S: '9001',
-    E: '9001',
-    N: '9001',
-    W: '9001',
+    S: '029',
+    E: '029',
+    N: '029',
+    W: '029',
   });
   // v1 stored all four seats on any change, so its '017' is the old implicit default
   const legacy = { S: '017', E: 'clint-rule', N: '012', W: '017' };
   // 012 (previous champion) left the menu on 2026-11-09: it falls back to the default
   assert.deepEqual(normalizeBotPreferences(storedBotPreferences(null, legacy)), {
-    S: '9001',
+    S: '029',
     E: 'clint-rule',
-    N: '9001',
-    W: '9001',
+    N: '029',
+    W: '029',
   });
   // v2 stores only explicit non-default seats, including a deliberate 017
   assert.deepEqual(normalizeBotPreferences(storedBotPreferences({ E: '017' }, legacy)), {
-    S: '9001',
-    E: '017',
-    N: '9001',
-    W: '9001',
+    S: '029',
+    E: '029',
+    N: '029',
+    W: '029',
   });
   // v2 entries pointing to retired menu entries (P0, previous champion, older GuanZero)
   const currentGuanZero = BOT_CHOICES.find((m) => m.config?.history === 'guanzero-v1').id;
@@ -537,11 +537,13 @@ test('a fresh profile defaults every seat to 9001; saved choices survive only wh
     normalizeBotPreferences(
       storedBotPreferences({ S: '001', E: '012', N: retiredGuanZero, W: currentGuanZero }),
     ),
-    { S: '9001', E: '9001', N: '9001', W: currentGuanZero },
+    { S: '029', E: '029', N: '029', W: currentGuanZero },
   );
   const value = structuredClone(catalog);
   delete value.selection.defaultChoice;
-  assert.equal(validateCatalog(value).defaultId, '017');
+  assert.equal(validateCatalog(value).defaultId, '029');
+  value.selection.defaultChoice = '9001';
+  assert.throws(() => validateCatalog(value), /menu default/);
 });
 
 test('collection records accept the research bot identity without a collector change', () => {

@@ -1,5 +1,7 @@
 # danMCai 模型
 
+2026-11-12：新冠军029/v000061013获所有者网页发布授权；旧reason9001保留017底座归档，新reason待独立验证。Downloads的r2尾盘包将按所有者选择迁移“r2−017”的主干增量到029并新建Adam；这不是原检查点逐位续训，也不移用r2成绩。[网页清单](../research/evaluation/web-champion-029-20261112/champion.json)。
+
 当前 A/B 之后的自主实验获准至 Toronto 11 月 11 日周三中午 12:00，先分析完整结果再决定下一项短测／长训。新任务目录、截止及资源边界见 [自主研究窗口](../research/AUTONOMOUS_RESEARCH_20261107.md)，不延长旧窗口或自动更换网页冠军。
 
 Windows 双臂已恢复相同最终学习器／Adam 并再次通过真实 ROCm 核验；现获准按 A→B 各四小时，保留 4／5 GiB 内存暂停／恢复预算，随后做独立评测。单变量、实时面板、固定截止及路径见 [Windows 交接](../research/WINDOWS_RETURN_20261106.md)；旧运行、Mac 快照和网页冠军保留。
