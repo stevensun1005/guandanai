@@ -6,6 +6,12 @@ projection zero). Training regresses Q(o, a) on the decider team's final round p
 Carlo targets, while each sample's oracle features are kept with probability p(step) that decays
 from 1 to 0. After decay the oracle input is always zero, so the exported student, which drops the
 oracle projection, is exactly the network that was trained: the same ONNX contract as the web.
+
+A new run may start from an earlier run's checkpoint (config learner.init, SHA-checked by run.mjs and
+again here): network, oracle projection and Adam state are inherited and the step count continues,
+so the oracle schedule and export names carry on. Shard bookkeeping (ingested names, row counters
+for the replay ratio, pruning) starts fresh, because the new run's shard names restart at s0-000000.
+The inherited counters are kept separately under `inherited`.
 """
 
 import argparse
@@ -97,6 +103,8 @@ def device_of(name):
     device = torch.device(name)
     if device.type == "mps" and not torch.backends.mps.is_available():
         raise RuntimeError("Apple MPS requested but unavailable; refusing silent CPU fallback")
+    if device.type == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("CUDA requested but unavailable; refusing silent CPU fallback")
     return device
 
 
@@ -122,19 +130,48 @@ class Learner:
         self.ingested = set()
         self.pruned_rows = 0
         self.loss_ema = None
+        self.inherited = None
         self.started = time.time()
         if self.checkpoint.exists():
             state = torch.load(self.checkpoint, map_location=self.device, weights_only=False)
             self.net.load_state_dict(state["net"])
             self.optimizer.load_state_dict(state["optimizer"])
+            self.set_learning_rate()
             self.step, self.trained_rows = state["step"], state["trainedRows"]
             self.ingested_rows, self.ingested = state["ingestedRows"], set(state["ingested"])
             self.loss_ema = state.get("lossEma")
             self.pruned_rows = state.get("prunedRows", 0)
+            self.inherited = state.get("inherited")
             # Replay is not checkpointed: refill it from the newest shards still on disk.
             self.refill()
         else:
+            if self.s.get("init"):
+                self.start_from(self.s["init"])
             self.publish()
+
+    def set_learning_rate(self):
+        # A loaded Adam state carries the old run's learning rate; the frozen config decides.
+        for group in self.optimizer.param_groups:
+            group["lr"] = float(self.s["learningRate"])
+
+    def start_from(self, init):
+        """Inherit network, oracle projection, Adam state and step from a preregistered checkpoint."""
+        path = self.run / init["file"]
+        if sha256(path) != init["sha256"]:
+            raise RuntimeError(f"Init checkpoint SHA mismatch: {path}")
+        state = torch.load(path, map_location=self.device, weights_only=False)
+        self.net.load_state_dict(state["net"])
+        self.optimizer.load_state_dict(state["optimizer"])
+        self.set_learning_rate()
+        self.step = int(state["step"])
+        previous = state.get("inherited") or {}
+        self.inherited = {
+            "sha256": init["sha256"],
+            "step": self.step,
+            "trainedRows": int(state["trainedRows"]) + int(previous.get("trainedRows", 0)),
+            "ingestedRows": int(state["ingestedRows"]) + int(previous.get("ingestedRows", 0)),
+            "chain": previous.get("chain", []) + [init["sha256"]],
+        }
 
     def refill(self):
         names = sorted(p.name[:-5] for p in self.shards.glob("*.json"))
@@ -229,6 +266,7 @@ class Learner:
                 "ingested": sorted(self.ingested),
                 "lossEma": self.loss_ema,
                 "prunedRows": self.pruned_rows,
+                "inherited": self.inherited,
             },
             temporary,
         )
@@ -247,6 +285,7 @@ class Learner:
                 "prunedRows": self.pruned_rows,
                 "lossEma": self.loss_ema,
                 "device": str(self.device),
+                "inherited": self.inherited,
                 "updatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             },
         )

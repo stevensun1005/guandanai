@@ -21,6 +21,7 @@
 | `learner.py`                        | 学习器：Apple MPS，明牌保留率衰减，定时导出学生 ONNX                                                         |
 | `dashboard.mjs`                     | 只读本机面板，默认 <http://127.0.0.1:8768/>；顶部“现在在做什么”按真实进程与文件显示阶段                      |
 | `evaluate.mjs`                      | 留出评测：同副牌交换阵营，学生接管尾盘 vs 纯冠军                                                             |
+| `platform.mjs`                      | Mac／Windows 通用：降低子进程优先级（Unix 用 `nice`，Windows 用 `os.setPriority`）与入口判断                 |
 | `solver.mjs`                        | 明牌精确求解器（评测诊断用）                                                                                 |
 | `human-endgames.mjs`                | 真人牌局尾盘精确最优审计：逐手对比真人／冠军／学生与明牌最优，模型接管一家 vs 明牌最优对手（只诊断，不训练） |
 | `pimc-actor.mjs`                    | 求解器标注采样：冠军打到 ≤20 张，每个尾盘决策的每个候选用 8 个公开信息抽样世界的精确值平均作标签（第 68 节） |
@@ -40,4 +41,22 @@ node ai/danMCai/endgame/dashboard.mjs --run=ai/danMCai/runs/<运行名>
 
 首次启动冻结 `config.json`（冠军 SHA、种子块、阈值、学习率、固定截止、源码 SHA）；重启只用原截止前的剩余时间，源码变化则拒绝启动。运行目录下新建 `STOP` 文件即可让所有进程保存后退出。运行数据、模型和样本都在忽略的 `ai/danMCai/runs/`。
 
-测试：`node --test ai/danMCai/tests/endgame-*.test.mjs`、`ai/danMCai/environment/mac/bin/python ai/danMCai/tests/endgame_learner_test.py`。
+## 从已有检查点开新运行（例如拷到 Windows 续训）
+
+旧运行过了固定截止就不能再延长；要接着练，开一个**新运行**，从旧运行的学习器检查点起步：
+
+- **继承**：网络（含明牌投影）、Adam 状态和步数（r2 为 61050）。所以明牌保留率按原进度继续（已为 0），导出名接着编号；新运行第一个导出就是旧学生本身，SHA 应与旧 `latest.json` 一致（r2：`e00061050`，`382085ee…`），可当拷贝核对。
+- **重置**：分片记账（已读分片名、用于回放比例的行数、清理计数）。新运行的分片名重新从 `s0-000000` 开始，若沿用旧记账会被当成已读而跳过。旧运行的累计数另记在 `learner/status.json` 与检查点的 `inherited`（含来源 SHA 链）。
+- **学习率**以新配置为准，不沿用检查点里 Adam 的设置。
+
+需要拷的只有 `learner/checkpoint.pt`（约 17 MB）；建议一并拷 `models/e00061050.onnx`、`models/latest.json`、`config.json` 与 `eval-final/summary.json` 作来源记录。`shards/` 只是回放缓存，不用拷，新运行先采够 `minSamples` 再开始训练。冠军 017 用目标机 `web/dist/models/bot-017.onnx`（`npm run build` 生成），启动时核对 SHA。
+
+新运行的预登记（`--protocol`）须写明 `learner.init.sha256`（检查点 SHA）、新的未用过的种子块（先跑种子审计）、新截止与设备；启动时用 `--init-checkpoint` 给出本机路径，SHA 不符或协议没登记就拒绝启动，文件复制到新运行的 `learner/init.pt`：
+
+```bash
+node ai/danMCai/endgame/run.mjs --run=<新运行目录> --protocol=<预登记.json> --init-checkpoint=<checkpoint.pt> --python=<venv>\Scripts\python.exe
+```
+
+Windows 上：`learner.device` 写 `cuda`（CUDA 不可用时报错，不悄悄改用 CPU），`--python` 必须给出；子进程优先级用 `os.setPriority`。面板的可用内存读系统 `freemem`；按进程判断评测阶段依赖 `pgrep`，Windows 上这部分显示为未运行，训练进度仍按文件显示。这只是续训工具，继承后的结果仍须按新预登记独立评测，不能把 r2 的 +0.0292 移用到新模型。
+
+测试：`node --test ai/danMCai/tests/endgame-*.test.mjs`（含 `endgame-platform.test.mjs`）、`ai/danMCai/environment/mac/bin/python ai/danMCai/tests/endgame_learner_test.py`。

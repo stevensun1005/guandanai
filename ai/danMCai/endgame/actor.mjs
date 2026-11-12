@@ -24,6 +24,7 @@ import {
   readJSON,
   writeJSON,
 } from '../training/continuous/lib.mjs';
+import { isMain } from './platform.mjs';
 
 export const ORACLE = 162;
 
@@ -171,7 +172,7 @@ async function main() {
   await pool.close();
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   main().catch((error) => {
     console.error(error);
     process.exit(1);

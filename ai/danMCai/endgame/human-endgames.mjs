@@ -26,7 +26,6 @@
  *        [--max-nodes=5000000] [--max-ms=30000] [--workers=8] [--keep-assisted=<prefix,...>]
  *   node ai/danMCai/endgame/human-endgames.mjs --summarize=<out> [--student-cards=32]
  */
-import { spawn } from 'node:child_process';
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -39,6 +38,7 @@ import { makeDeck } from '../../../web/src/core/cards.js';
 import { analyze, beats } from '../../../web/src/core/combinations.js';
 import { argmax, createModelPool, sha256 } from '../training/continuous/lib.mjs';
 import { createSolver, positionFromGame, SolverBudget } from './solver.mjs';
+import { isMain, spawnNice } from './platform.mjs';
 
 const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
@@ -337,12 +337,10 @@ async function main() {
     parts.map(
       (part, i) =>
         new Promise((done, fail) => {
-          const child = spawn(
-            'nice',
+          const child = spawnNice(
+            10,
+            process.execPath,
             [
-              '-n',
-              '10',
-              process.execPath,
               self,
               '--worker',
               `--files=${JSON.stringify(part)}`,
@@ -508,7 +506,7 @@ export function summarize(rounds, { studentCards = 32 } = {}) {
   };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   const summaryOnly = option('summarize');
   (process.argv.includes('--worker')
     ? worker()

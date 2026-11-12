@@ -10,6 +10,7 @@ import { existsSync, readdirSync, readFileSync, statSync, statfsSync } from 'nod
 import { cpus, freemem, loadavg, totalmem } from 'node:os';
 import { basename, join, resolve } from 'node:path';
 import { readJSON } from '../training/continuous/lib.mjs';
+import { isMain } from './platform.mjs';
 
 const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
@@ -396,4 +397,4 @@ function main() {
   }).listen(port, '127.0.0.1', () => console.log(`Endgame dashboard: http://127.0.0.1:${port}/`));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (isMain(import.meta.url)) main();

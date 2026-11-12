@@ -6,12 +6,17 @@
  * deadline. Actors run at low CPU priority; STOP in the run directory stops everything cleanly.
  *
  *   node ai/danMCai/endgame/run.mjs --run=<dir> [--hours=8] [--actors=3] [--python=<venv python>]
+ *
+ * Continuing from an earlier run's learner checkpoint (a new run, never an extension of the old
+ * one): the protocol names it under learner.init.sha256 and the operator passes its local path
+ * with --init-checkpoint=<checkpoint.pt>. The file is SHA-checked and copied to learner/init.pt.
+ * On Windows pass --python=<venv>\Scripts\python.exe; priorities use os.setPriority there.
  */
-import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, copyFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readJSON, writeJSON, sha256 } from '../training/continuous/lib.mjs';
+import { isMain, spawnNice } from './platform.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '../../..');
@@ -26,6 +31,7 @@ export const SOURCES = [
   'ai/shared/search/pimc.mjs',
   'ai/danMCai/endgame/learner.py',
   'ai/danMCai/endgame/run.mjs',
+  'ai/danMCai/endgame/platform.mjs',
   'ai/danMCai/training/continuous/lib.mjs',
   'ai/danMCai/training/continuous/value_net.py',
   'ai/shared/simulation/simulation.mjs',
@@ -73,6 +79,23 @@ export function defaultConfig({ hours, actors, champion, seedBase, now = new Dat
   };
 }
 
+/**
+ * Freeze an inherited learner checkpoint into the new run. The protocol fixes the expected SHA, so
+ * a checkpoint can only be used when it was preregistered; the local path comes from the operator.
+ */
+export function freezeInit(config, run, checkpoint) {
+  const expected = config.learner.init?.sha256;
+  if (!expected && !checkpoint) return;
+  if (!expected) throw Error('--init-checkpoint needs learner.init.sha256 in the protocol');
+  if (!checkpoint)
+    throw Error('Protocol sets learner.init; pass --init-checkpoint=<checkpoint.pt>');
+  const source = resolve(checkpoint);
+  if (sha256(source) !== expected) throw Error('Init checkpoint SHA mismatch; refusing to start');
+  mkdirSync(join(run, 'learner'), { recursive: true });
+  copyFileSync(source, join(run, 'learner', 'init.pt'));
+  config.learner.init = { ...config.learner.init, source, file: 'learner/init.pt' };
+}
+
 async function main() {
   const run = resolve(option('run', ''));
   if (!option('run')) throw Error('Missing --run');
@@ -114,6 +137,7 @@ async function main() {
       throw Error(`Unknown actor script ${config.actor.script}`);
     if (config.actor.slotSeeds.length !== config.actor.count)
       throw Error('Seed blocks must match the actor count');
+    freezeInit(config, run, option('init-checkpoint'));
     writeJSON(join(run, 'config.json'), config);
   }
   for (const [file, digest] of Object.entries(config.sources))
@@ -134,8 +158,11 @@ async function main() {
     deadline: config.deadline,
     restarts,
   };
-  function start(name, command, args) {
-    const child = spawn(command, args, { cwd: root, stdio: ['ignore', 'inherit', 'inherit'] });
+  function start(name, nice, command, args) {
+    const child = spawnNice(nice, command, args, {
+      cwd: root,
+      stdio: ['ignore', 'inherit', 'inherit'],
+    });
     children.set(name, child);
     child.on('exit', (code) => {
       children.delete(name);
@@ -145,7 +172,7 @@ async function main() {
       if (restarts[name] > 5) {
         console.error(`${name} failed repeatedly (${code}); stopping run`);
         stop('child-failure');
-      } else setTimeout(() => !stopping && start(name, command, args), 5000);
+      } else setTimeout(() => !stopping && start(name, nice, command, args), 5000);
     });
   }
   let stopping = false;
@@ -158,22 +185,13 @@ async function main() {
   }
   // Learner first: it publishes the initial student (an exact champion copy) before actors read it.
   const { learnerNice = 0, actorNice = 5 } = config.priority || {};
-  start('learner', 'nice', [
-    '-n',
-    String(learnerNice),
-    python,
-    join(here, 'learner.py'),
-    `--run=${run}`,
-  ]);
+  start('learner', learnerNice, python, [join(here, 'learner.py'), `--run=${run}`]);
   while (!existsSync(join(run, 'models', 'latest.json'))) {
     if (stopping) throw Error(`Learner did not publish the initial student: ${status.stopReason}`);
     await new Promise((r) => setTimeout(r, 500));
   }
   for (let slot = 0; slot < config.actor.count; slot++)
-    start(`actor-${slot}`, 'nice', [
-      '-n',
-      String(actorNice),
-      process.execPath,
+    start(`actor-${slot}`, actorNice, process.execPath, [
       // The protocol may select another actor (for example pimc-actor.mjs); default unchanged.
       join(here, config.actor.script || 'actor.mjs'),
       `--run=${run}`,
@@ -202,7 +220,7 @@ async function main() {
   writeJSON(join(run, 'status.json'), status);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   main().catch((error) => {
     console.error(error);
     process.exit(1);
