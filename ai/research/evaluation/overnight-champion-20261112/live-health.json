@@ -1,0 +1,50 @@
+{
+  "observedAtUTC": "2026-11-12T04:35:03.193889+00:00",
+  "dashboard": {
+    "pageErrors": [],
+    "windowsProcessDetected": true,
+    "live": true,
+    "bodyExcerpt": "danMCai新冠军训练窗口\n剩 9 小时 25 分  截止 11/12 09:00 美东 · 读取于 23:34:49 美东\n现在在做什么\n正在跑 1 项\n017全主干训练：半自对弈、半固定冠军\n第 1,400 / — 步（上限 420 分钟）\n预计 06:29 美东\n\n接下来：最终网络、优化器、回放与进程停止审计；10000完整单局独立门控\n\n固定窗口\n9 小时 25 分\n开始\n—\n截止\n11/12 09:00 美东\nSTOP 文件\n没有\n多伦多11月12日09:00结束，08:45停止新计算。所有计数来自实际日志；训练中不是新冠军，网页保持原样。\n阶段\n已完成 2\n运行中 1\n排队 2\n失败 0\n未运行 0\n本机\n负载（1 分钟，全机）\n— / 16 核\n可用内存（含可回收）\n4.4 / 31 GiB\n磁盘剩余\n661 GiB\nstages.log 最近标记\n—\n运行中\n017全主干训练：半自对弈、半固定冠军\ntrain\n开发检查\n017全主干训练：半自对弈、半固定冠军\n开始 23:29 美东\n结束 —\n用时 5 分 34 秒\n进度\n第 1,400 / — 步（上限 420 分钟"
+  },
+  "companion": {
+    "sourceCommit": "24cbbc4",
+    "pid": 2360,
+    "sourceRoot": "D:/vibecoding/guandan/ai/local/workspace/worktrees/overnight-dashboard-20261112",
+    "trainingSourceUnchanged": true,
+    "atUTC": "2026-11-12T04:34:44.9979729Z"
+  },
+  "learner": {
+    "pid": 40196,
+    "device": "cuda:0",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gpuAllocatedBytes": 168534016,
+    "state": "waiting-for-data",
+    "step": 1498,
+    "version": "v000000000",
+    "buffer": 767101,
+    "ingestedRows": 767101,
+    "trainedRows": 3067904,
+    "lossEMA": 3.266304048108285,
+    "replayRatio": 3.9993481953484613,
+    "stepsPerSecond": 4.347858295344563,
+    "updatedAt": "2026-11-12T04:35:02Z"
+  },
+  "guardian": {
+    "pid": 32088,
+    "updatedAtUTC": "2026-11-12T04:35:02.918Z",
+    "deadlineUTC": "2026-11-12T14:00:00.000Z",
+    "computeDeadlineUTC": "2026-11-12T13:45:00.000Z",
+    "stopped": false
+  },
+  "awake": {
+    "phase": "awake",
+    "displayRequired": false,
+    "updatedAtUTC": "2026-11-12T04:34:53.9620714+00:00",
+    "pid": 14828,
+    "powerPlanChanged": false,
+    "deadlineUTC": "2026-11-12T14:00:00.000Z"
+  },
+  "scope": "Live startup health only; not independent acceptance or a new champion"
+}
