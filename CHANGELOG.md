@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-12 · 新冠军对reason独立评测v2实际启动
+
+- 14:46:43Z以新1000副、两CPU工作器启动内存修正版；冻结5baaf92/184源码SHA，零训练更新，原17:30:48Z截止不延长。v1工程停机212局单独保留，当前不作棋力结论。见[实际启动证据](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json)。
+
 ## 2026-11-11美东 · 尾盘模型可从检查点开新运行（含 Windows）
 
 - `ai/danMCai/endgame/` 学习器新增 `learner.init`：新运行从旧运行的 `checkpoint.pt` 起步，继承网络、明牌投影、Adam 与步数，分片记账重置（新分片名不再被误当已读），学习率以新配置为准，旧累计数记入 `inherited`。须在预登记写检查点 SHA，并用 `run.mjs --init-checkpoint` 传入、核对后复制到 `learner/init.pt`。

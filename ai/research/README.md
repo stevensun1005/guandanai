@@ -167,3 +167,5 @@ self-only离线拟合已完成（1,906展示层样本／3,393字节，零网络�
 [新冠军与reason评测](evaluation/champion-vs-reason-20261112/protocol.design.json)：新冠军raw对reason：1000副交换对/2000单局，最多3小时；目标/预算/范围已冻结，尚未启动。
 
 reason比较v2新独立牌副、两CPU在原截止内评测；原212局内存停机证据独立保留。 [v2](evaluation/champion-vs-reason-20261112/v2/protocol.design.json)。
+
+reason对照v2已真实启动，两CPU/独立新牌副，原17:30:48Z截止不延长。[启动与源码核验](evaluation/champion-vs-reason-20261112/v2/startup.json)。

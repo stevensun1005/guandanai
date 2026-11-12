@@ -3282,3 +3282,5 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 [设计](evaluation/champion-vs-reason-20261112/protocol.design.json)／[独立种子](evaluation/champion-vs-reason-20261112/seed-audit.json)。当前仅准备，实际冻结/启动另记；零梯度更新，不改网页或其他机器。
 
 内存工程修正：v1四工作器在4GiB暂停后保留求解/合法招法缓存，无法及时回到5GiB恢复线，按内存状态主动STOP；最终212单局/106对的部分输出及原协议/权重/种子/源码全部保留，不作1000对结论，也未据比分选择模型。v2改为两CPU工作器、关闭ORT内存池/模式缓存、每工作器1GiB堆、每个独立单局新建求解器并在局末释放其缓存/GC；原8世界/候选/50秒推理/3秒求解不变。内存分配选项的293候选值逐项相同，零更新/新比赛。跨局冷缓存会影响时限回落，必须报告；不是浏览器缓存历史的逐位复现。新1000副完全排除v1整段预留，只使用原2026-11-12 17:30:48.120Z剩余预算，不重置起点或延长窗口。见[memory-pilot-stop](evaluation/champion-vs-reason-20261112/memory-pilot-stop.json)与[v2协议](evaluation/champion-vs-reason-20261112/v2/protocol.design.json)。
+
+内存修正版v2已于2026-11-12 14:46:43Z实际启动，冻结5baaf92、184源码SHA核验通过，两工作器在新独立牌副上推进；仍按原17:30:48Z（Toronto12:30）截止，零训练更新。当前进度不代表完成结果。[启动证据](evaluation/champion-vs-reason-20261112/v2/startup.json)。设计说明budget字符串遗留v1的4processes，正式workers=2、resourcePolicy和实际进程均为2，原件保留并在startup作勘误。

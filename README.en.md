@@ -173,3 +173,5 @@ Research champion v000061013 passed its preregistered10000-round gate: +.0990 up
 [新冠军与reason评测](ai/research/evaluation/champion-vs-reason-20261112/protocol.design.json)：Preregistered2000-round comparison: newrawresearchchampion versus deployed017-basedreason. Evaluation only; no results or website changes yet.
 
 Evaluation v2 uses fresh1000 deals,twoCPUworkers and coldper-roundsolver caches within the original12:30Toronto cutoff. The212-roundv1memorypilot is preserved as partial engineering evidence. [v2](ai/research/evaluation/champion-vs-reason-20261112/v2/protocol.design.json)。
+
+The memory-bounded reason comparison v2 started at 14:46:43Z with two workers and fresh deals, within the original 17:30:48Z cutoff. This is evaluation only; no final conclusion yet. [Startup evidence](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json).

@@ -1,0 +1,52 @@
+{
+  "atUTC": "2026-11-12T14:48:02.301720+00:00",
+  "launch": {
+    "actualLaunchUTC": "2026-11-12T14:46:43.2181783Z",
+    "controllerPid": 50664,
+    "awakePid": 19984,
+    "dashboardPid": 46232,
+    "sourceCommit": "5baaf926cb6f8fe4252ff3a55ecd5d73f682ab88",
+    "originalDeadlineUTC": "2026-11-12T17:30:48.12Z",
+    "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+    "noTrainingRestarted": true
+  },
+  "status": {
+    "pid": 50664,
+    "phase": "evaluation",
+    "plannedRounds": 2000,
+    "completedRounds": 44,
+    "workers": [
+      {
+        "pid": 20032,
+        "phase": "running",
+        "completedPairs": 8,
+        "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+        "updatedAtUTC": "2026-11-12T14:47:46.982Z"
+      },
+      {
+        "pid": 22056,
+        "phase": "running",
+        "completedPairs": 14,
+        "protocolSHA256": "bf42474fffcaf587a55e14be6854a79f48a6ae80582bcdec6b2d6ae91ac8bcbc",
+        "updatedAtUTC": "2026-11-12T14:47:35.089Z"
+      }
+    ],
+    "deadlineUTC": "2026-11-12T17:30:48.120Z",
+    "updatedAtUTC": "2026-11-12T14:48:01.603Z"
+  },
+  "guardian": {
+    "pid": 8948
+  },
+  "awake": {
+    "updatedAtUTC": "2026-11-12T14:47:54.0390891+00:00",
+    "powerPlanChanged": false,
+    "pid": 19984,
+    "displayRequired": false,
+    "phase": "awake",
+    "deadlineUTC": "2026-11-12T17:30:48.120Z"
+  },
+  "frozenSourceFilesVerified": 184,
+  "optimizerUpdates": 0,
+  "errata": "protocol.design budget text retains 4processes from v1; workers=2 and resourcePolicy explicitly specify and actually launch 2 processes. Frozen original not edited.",
+  "resultStatus": "in_progress; no outcome-based decisions"
+}
