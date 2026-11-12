@@ -5593,9 +5593,11 @@
     {
       "id": "endgame-rebase-029-20261112",
       "protocol": "ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json",
-      "status": "preregistered-not-started",
+      "status": "training-started-no-heldout-conclusion-yet",
       "baseSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
-      "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71"
+      "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
+      "startup": "ai/research/evaluation/endgame-rebase-029-20261112/startup.json",
+      "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z"
     }
   ]
 }

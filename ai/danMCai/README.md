@@ -1,5 +1,7 @@
 # danMCai 模型
 
+[029尾盘迁移已真实运行](../research/evaluation/endgame-rebase-029-20261112/startup.json)，正式GPU新增更新与4路采样已核验；训练截止11月13日03:58:54美东。不是尚未启动的准备，也不是新学生棋力已通过。
+
 新的029尾盘增量迁移已完成代码与预登记准备：[新协议](../research/evaluation/endgame-rebase-029-20261112/protocol.design.json)。16小时固定训练、随后最多3小时三组独立配对评测和15分钟保存；GPU预检、实际冻结/启动另记。旧r2、原017方案及其他运行保留。
 
 2026-11-12：新冠军029/v000061013获所有者网页发布授权；旧reason9001保留017底座归档，新reason待独立验证。Downloads的r2尾盘包将按所有者选择迁移“r2−017”的主干增量到029并新建Adam；这不是原检查点逐位续训，也不移用r2成绩。[网页清单](../research/evaluation/web-champion-029-20261112/champion.json)。

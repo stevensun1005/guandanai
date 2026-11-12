@@ -18,6 +18,47 @@ import {
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 
+test('completed publication cards render machine-recorded facts without game scores or acceptance', () => {
+  const run = mkdtempSync(join(tmpdir(), 'publication-panel-'));
+  try {
+    writeFileSync(
+      join(run, 'stages.log'),
+      '2029-01-01T00:00:00Z START publish\n2029-01-01T00:01:00Z END publish rc=0\n',
+    );
+    writeJSON(join(run, 'published.json'), {
+      title: '网页发布',
+      rows: [
+        ['Pages', 'success'],
+        ['冠军', '029'],
+      ],
+    });
+    const config = {
+      deadline: '2029-01-02T00:00:00Z',
+      stages: [
+        {
+          key: 'publish',
+          kind: 'descriptive',
+          title: '发布',
+          paths: { result: 'published.json' },
+          rule: { type: 'descriptive', text: '部署不是棋力验收' },
+        },
+      ],
+    };
+    const card = snapshot(run, config, {
+      now: Date.parse('2029-01-01T01:00:00Z'),
+      psText: '',
+      machine: false,
+    }).stages[0];
+    assert.deepEqual(card.results[0].rows, [
+      ['Pages', 'success'],
+      ['冠军', '029'],
+    ]);
+    assert.equal(card.results[0].verdict.text, '描述性（不判定）');
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
+
 test('endgame progress subtracts inherited updates and reports real rows without a guessed step target', () => {
   const run = mkdtempSync(join(tmpdir(), 'endgame-panel-'));
   try {

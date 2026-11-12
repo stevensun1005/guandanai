@@ -1,5 +1,7 @@
 # 模型研究与证据
 
+[029尾盘迁移实际启动](evaluation/endgame-rebase-029-20261112/startup.json)：已观察真实新GPU更新，142冻结源码不变；正式数据/Adam不继承预检，当前没有新学生独立棋力结论。
+
 [029尾盘迁移](evaluation/endgame-rebase-029-20261112/protocol.design.json)：所有者明确选择r2−017主干增量迁到新冠军、新Adam；原Mac种子在Windows被拒，使用按实际literal单局语义新审计的2M训练副/3000留出。准备与实际启动分开，不冒称新尾盘棋力结果。
 
 2026-11-12新冠军与reason对照已完整结束：1000独立副/2000单局，新raw视角−.195、95%[−.27035,−.11965]，reason在此条件更强。v1的212局不合并。所有者随后授权029网页发布与r2尾盘增量迁移，部署与训练结论分开。[完整对照](evaluation/champion-vs-reason-20261112/v2/summary.json)／[网页冠军](evaluation/web-champion-029-20261112/champion.json)。

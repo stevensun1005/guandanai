@@ -1,0 +1,159 @@
+{
+  "observedAtUTC": "2026-11-12T17:07:42.331800+00:00",
+  "launch": {
+    "actualLaunchUTC": "2026-11-12T16:59:24.2451217Z",
+    "protocolCommit": "2fadfb7",
+    "controllerPid": 17460,
+    "protocolSHA256": "cba01e353c4d94f7194479580eb410c0dd3f7e9ec43026a2ecf4ca21d687919a",
+    "awakePid": 5208,
+    "sourceCommit": "1415fac1bfa65abe050c4750e69215a77764d474"
+  },
+  "registration": {
+    "id": "endgame-rebase-029-20261112",
+    "purpose": "Experimentally transfer the r2 learned trunk delta onto accepted/published029, then train endgame decisions from final signed single-round upgrade labels. Not exactresume and no automatic webintegration.",
+    "startUTC": "2026-11-12T16:58:54.268Z",
+    "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+    "evaluationDeadlineUTC": "2026-11-13T11:58:54.268Z",
+    "deadlineUTC": "2026-11-13T12:13:54.268Z",
+    "durationHours": 19.25,
+    "restartExtendsDeadline": false,
+    "protocolSHA256": "cba01e353c4d94f7194479580eb410c0dd3f7e9ec43026a2ecf4ca21d687919a"
+  },
+  "configSHA256": "ebea7967915d8383819e7fc505aa6190d22cb55bd644c5b2366d3b88e821e8df",
+  "sourceCommit": "1415fac1bfa65abe050c4750e69215a77764d474",
+  "sourceFilesUnchanged": 142,
+  "protocolSHA256": "cba01e353c4d94f7194479580eb410c0dd3f7e9ec43026a2ecf4ca21d687919a",
+  "teacher": {
+    "id": "029",
+    "version": "v000061013",
+    "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\train\\models\\champion.onnx"
+  },
+  "learner": {
+    "pid": 57520,
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "state": "waiting-for-data",
+    "step": 61400,
+    "trainedRows": 716800,
+    "ingestedRows": 155901,
+    "replayRows": 155901,
+    "oracleKeep": 0.0,
+    "prunedRows": 0,
+    "lossEma": 1.5893581136809118,
+    "device": "cuda",
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "updatedAt": "2026-11-12T17:07:41Z"
+  },
+  "newUpdates": 350,
+  "firstExport": {
+    "file": "e00061050.onnx",
+    "version": "e00061050",
+    "step": 61050,
+    "sha256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71"
+  },
+  "supervisor": {
+    "pid": 39832,
+    "startedAt": "2026-11-12T16:59:24.607Z",
+    "deadline": "2026-11-13T08:58:54.268Z",
+    "restarts": {},
+    "resources": {
+      "availableGiB": 5.095977783203125,
+      "pausedActors": []
+    },
+    "children": [
+      {
+        "name": "learner",
+        "pid": 40328
+      },
+      {
+        "name": "actor-0",
+        "pid": 12808
+      },
+      {
+        "name": "actor-1",
+        "pid": 57016
+      },
+      {
+        "name": "actor-2",
+        "pid": 43468
+      },
+      {
+        "name": "actor-3",
+        "pid": 9248
+      }
+    ],
+    "updatedAt": "2026-11-12T17:07:41.759Z"
+  },
+  "actors": [
+    {
+      "nextSeed": 2700003779,
+      "shards": 10,
+      "rounds": 3779,
+      "rows": 41028,
+      "updatedAt": "2026-11-12T17:07:25.874Z"
+    },
+    {
+      "nextSeed": 2700503795,
+      "shards": 10,
+      "rounds": 3795,
+      "rows": 41036,
+      "updatedAt": "2026-11-12T17:07:25.780Z"
+    },
+    {
+      "nextSeed": 2701003759,
+      "shards": 10,
+      "rounds": 3759,
+      "rows": 41005,
+      "updatedAt": "2026-11-12T17:07:22.937Z"
+    },
+    {
+      "nextSeed": 2701503019,
+      "shards": 8,
+      "rounds": 3019,
+      "rows": 32832,
+      "updatedAt": "2026-11-12T17:07:01.335Z"
+    }
+  ],
+  "guardian": {
+    "pid": 13212,
+    "id": "endgame-rebase-029-20261112",
+    "purpose": "Experimentally transfer the r2 learned trunk delta onto accepted/published029, then train endgame decisions from final signed single-round upgrade labels. Not exactresume and no automatic webintegration.",
+    "startUTC": "2026-11-12T16:58:54.268Z",
+    "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+    "evaluationDeadlineUTC": "2026-11-13T11:58:54.268Z",
+    "deadlineUTC": "2026-11-13T12:13:54.268Z",
+    "durationHours": 19.25,
+    "restartExtendsDeadline": false,
+    "protocolSHA256": "cba01e353c4d94f7194479580eb410c0dd3f7e9ec43026a2ecf4ca21d687919a",
+    "updatedAtUTC": "2026-11-12T17:07:41.174Z"
+  },
+  "awake": {
+    "pid": 5208,
+    "deadlineUTC": "2026-11-13T12:13:54.268Z",
+    "powerPlanChanged": false,
+    "phase": "awake",
+    "displayRequired": false,
+    "updatedAtUTC": "2026-11-12T17:07:35.7758792+00:00"
+  },
+  "dashboard": {
+    "url": "http://127.0.0.1:8767/",
+    "pid": 50336,
+    "sourceRoot": "separate readonly development UI companion, not trainingruntime",
+    "fileSHA256": "4c1517949a6958e6972541fef434b246dab68b6cb359c2f4022645d3bd68cbf0",
+    "sourcePolicy": "Existing readonly companion retained; real liveconfig/data updated without stopping training or other applications",
+    "liveBrowserVerified": true,
+    "pageErrors": [],
+    "browserObservedAtUTC": "2026-11-12T17:15:30.685853+00:00"
+  },
+  "preflightUpdatesInherited": false,
+  "strengthEvidence": "None yet; final-only A/B/C heldout queued",
+  "replayRatioNote": "Configured4, inherited r2 implementation checks ratio between50-updateblocks; transient overshoot up to102400 trainedrows. Rawcounters not adjusted."
+}

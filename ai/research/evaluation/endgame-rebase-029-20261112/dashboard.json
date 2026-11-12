@@ -1,0 +1,119 @@
+{
+  "title": "029底座尾盘迁移 · 固定16小时训练",
+  "deadline": "2026-11-13T12:13:54.268Z",
+  "note": "训练截止11/13 03:58:54美东；评测截止06:58:54，07:13:54保存结束。029+(r2−017)、新Adam/空回放；61050为历史计数，不计新增训练。最终/迁移初始/原r2同3000副对029，不自动发布新尾盘模型。",
+  "stages": [
+    {
+      "key": "web-champion",
+      "title": "新冠军网页与打包发布",
+      "kind": "descriptive",
+      "desc": "真实线上029默认、三项菜单、全SHA已核验",
+      "paths": {
+        "result": "web-record.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "发布不是reason或整体棋力验收"
+      }
+    },
+    {
+      "key": "endgame-prepare",
+      "title": "Downloads包、迁移、种子与GPU预检",
+      "kind": "descriptive",
+      "paths": {
+        "result": "preparation-record.json"
+      },
+      "desc": "原r2保留；合成2次更新和采样STOP只作工程检查，正式不继承",
+      "rule": {
+        "type": "dev",
+        "text": "GPU和兼容性不是棋力证据"
+      }
+    },
+    {
+      "key": "endgame-train",
+      "title": "029底座尾盘模型固定16小时训练",
+      "kind": "endgame-train",
+      "paths": {
+        "out": "train"
+      },
+      "desc": "4演员上限，4GiB暂停/5GiB恢复，750k回放；只学单局最终升级分",
+      "rule": {
+        "type": "dev",
+        "text": "新增更新扣除历史61050；训练损失不是独立棋力验收"
+      }
+    },
+    {
+      "key": "endgame-audit",
+      "title": "最终网络、Adam、回放及进程停机审计",
+      "kind": "descriptive",
+      "paths": {
+        "result": "audit-record.json"
+      },
+      "after": "endgame-train",
+      "desc": "只取最终窗口导出，逐项核对，不挑峰值",
+      "rule": {
+        "type": "dev",
+        "text": "保存审计，不是棋力证据"
+      }
+    },
+    {
+      "key": "endgame-eval-A",
+      "title": "A 最终尾盘学生对029",
+      "kind": "evaluate",
+      "paths": {
+        "out": "eval-A"
+      },
+      "total": 3000,
+      "after": "endgame-audit",
+      "desc": "3000独立新牌副，交换阵营=6000完整单局，最终±1/2/3升级分",
+      "rule": {
+        "type": "heldout",
+        "text": "95%独立牌副簇区间；未完成全量必须标部分结果"
+      }
+    },
+    {
+      "key": "endgame-eval-B",
+      "title": "B 迁移初始学生对029",
+      "kind": "evaluate",
+      "paths": {
+        "out": "eval-B"
+      },
+      "total": 3000,
+      "after": "endgame-eval-A",
+      "desc": "3000独立新牌副，交换阵营=6000完整单局，最终±1/2/3升级分",
+      "rule": {
+        "type": "heldout",
+        "text": "95%独立牌副簇区间；未完成全量必须标部分结果"
+      }
+    },
+    {
+      "key": "endgame-eval-C",
+      "title": "C 原r2学生在029局面对029",
+      "kind": "evaluate",
+      "paths": {
+        "out": "eval-C"
+      },
+      "total": 3000,
+      "after": "endgame-eval-B",
+      "desc": "3000独立新牌副，交换阵营=6000完整单局，最终±1/2/3升级分",
+      "rule": {
+        "type": "heldout",
+        "text": "95%独立牌副簇区间；未完成全量必须标部分结果"
+      }
+    },
+    {
+      "key": "endgame-summary",
+      "title": "配对差、报告与最终保存",
+      "kind": "descriptive",
+      "paths": {
+        "result": "results-record.json"
+      },
+      "after": "endgame-eval-C",
+      "desc": "A−B区分训练效应，A−C/B−C区分迁移；保留负结果",
+      "rule": {
+        "type": "descriptive",
+        "text": "不把旧r2成绩移用新模型，不自动部署"
+      }
+    }
+  ]
+}

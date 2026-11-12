@@ -1,0 +1,41 @@
+{
+  "observedAtUTC": "2026-11-12T17:17:08.986175+00:00",
+  "learner": {
+    "pid": 16740,
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "state": "waiting-for-data",
+    "step": 61700,
+    "trainedRows": 1331200,
+    "ingestedRows": 332294,
+    "replayRows": 352796,
+    "oracleKeep": null,
+    "prunedRows": 0,
+    "lossEma": 1.5869080008609884,
+    "device": "cuda",
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "updatedAt": "2026-11-12T17:17:05Z"
+  },
+  "newUpdates": 650,
+  "latestExport": {
+    "file": "e00061500.onnx",
+    "version": "e00061500",
+    "step": 61500,
+    "sha256": "af237178099c3d8860dcfb526b2756a9bfeeeca4060af28cece00bf88f24592a"
+  },
+  "resources": {
+    "availableGiB": 5.031932830810547,
+    "pausedActors": []
+  },
+  "restarts": {
+    "learner": 1
+  },
+  "strengthAcceptance": "No new final student conclusion yet; final-only heldout queued"
+}

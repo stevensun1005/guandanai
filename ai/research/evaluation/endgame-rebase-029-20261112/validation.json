@@ -27,8 +27,17 @@
     "formalRunUpdates": 0,
     "loss": 5.531460237503052
   },
-  "formalTrainingStarted": false,
+  "formalTrainingStarted": true,
   "initializationOnlyNoStrengthClaim": true,
   "actorSmokeAllProcessesExited": true,
-  "sourceFilesVerified": 142
+  "sourceFilesVerified": 142,
+  "firstRealNewUpdatesObserved": 350,
+  "readOnlyDashboardNode": {
+    "total": 512,
+    "pass": 476,
+    "skip": 36,
+    "fail": 0
+  },
+  "readOnlyDashboardFormat": "passed",
+  "readOnlyDashboardBuild": "passed"
 }

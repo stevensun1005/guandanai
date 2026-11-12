@@ -1,5 +1,7 @@
 <div align="center">
 
+The029-based endgame delta-transfer run is now active on Windows with actual new GPU updates, separate from its two synthetic checks. Training stops Nov13 at03:58Toronto; final/initial/r2 paired evaluation follows without automatic student deployment. [Actual startup](ai/research/evaluation/endgame-rebase-029-20261112/startup.json).
+
 The [029-based endgame transfer experiment](ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json) adds the r2-minus017 trunk delta to029 with fresh Adam. This is an experimental initialization, not exact optimizer resumption or evidence of improved play. Preparation, GPU checks, actual training and held-out evaluation are recorded separately. Web029 is live with verified SHA and menu/default.
 
 2026-11-12: the owner authorized publishing **danMCai-v000061013 (029)** as the neural champion/default. Until a search bot on this base is independently validated, the existing menu rule offers Clint, the latest GuanZero and029. Old017/9001 remain archived. The raw017 gate passed, but a separate2,000-round comparison against old017-basedreason gave−.195 signed points per pair (95%CI−.27035 to−.11965); this is not universal superiority. [Release evidence](ai/research/evaluation/web-champion-029-20261112/champion.json).

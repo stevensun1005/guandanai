@@ -306,6 +306,12 @@ function resultsFor(stage, run, state) {
   const paths = stage.paths || {};
   const out = [];
   switch (stage.kind) {
+    case 'descriptive': {
+      const record = readJSON(p(paths.result));
+      if (Array.isArray(record?.rows))
+        out.push(block(record.title || '实际记录', record.rows, stage.rule, null));
+      break;
+    }
     case 'endgame-train': {
       const dir = p(paths.out),
         learner = readJSON(join(dir, 'learner/status.json'));
