@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "sourceRoot": "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\overnight-runtime-20261112",
+  "sourceCommit": "61bfd646ae3a336d3c7d57056b59b7c39a4eee3e",
+  "python": "D:/vibecoding/guandan/ai/danMCai/environment/gpu-runtime/Scripts/python.exe",
+  "teacher": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\overnight-champion-20261112\\experiments\\train\\initial.onnx",
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "authorizationSHA256": "53d174f0f49fa5a94b39f6069bf41fb1f7892648a0c72d0805c9f5cf8ea489b3",
+  "configSHA256": "8eeaeeaf9406ffc10f9b3361b51b8530a50ced4ba017bf9ce6ffe8ecd5c3f19b",
+  "pendingSHA256": "ebcd73cc5b054203cdc34ad98a8876a83a291840f22c7f5d3dfd7fc5477f3d69",
+  "sourceFiles": 170,
+  "trainingRootCount": 240000,
+  "heldoutDeals": 3000,
+  "started": false
+}

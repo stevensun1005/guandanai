@@ -1,0 +1,30 @@
+{
+  "node": {
+    "tests": 505,
+    "passed": 469,
+    "skipped": 36,
+    "failed": 0
+  },
+  "researchPython": {
+    "passed": 41
+  },
+  "continuousLearnerPython": {
+    "tests": 10,
+    "skipped": 2,
+    "passed": 8
+  },
+  "independentSummaryPython": {
+    "passed": 2
+  },
+  "concurrentEndgamePython": {
+    "passed": 7
+  },
+  "sharedPython": {
+    "passed": 3,
+    "skipped": 1
+  },
+  "format": "passed",
+  "build": "passed",
+  "sourceCommit": "61bfd646ae3a336d3c7d57056b59b7c39a4eee3e",
+  "scope": "Development checks only; GPU preflight and actual training start recorded separately. Concurrent1d5cdf9 preserved and merged before final checks."
+}

@@ -33,5 +33,5 @@
     "4GiB reserve,5GiB start/resume. Temporary system-only awake; release by09:00 Toronto."
   ],
   "seedDesign": "Sparse explicit audited roots,4slots×60000; each slot consumes a disjoint list index. Legacy samplers retain original formula without actorSeedList. All200 possible derived rounds audited; bounding contiguous old namespaces had no adequate gap, not reused.",
-  "seedAuditSHA256": "de463d2b461f2fa5bb17ac84ad0b028fb48eee384c209f65d737872ad40b72a3"
+  "seedAuditSHA256": "5c988b3744ffa3849240e7699dcca5205434700dac0fbe699c8bdb0b911c06e2"
 }
