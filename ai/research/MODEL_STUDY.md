@@ -3322,3 +3322,5 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 新部署策略须与实际评测一致：32张以上029、≤32张greedy学生，只用本人手牌与公开信息，先打完手牌的合法出法优先。不把新学生插入未测的9001多世界搜索后沿用成绩，也不把它登记为全程raw冠军；029/017/9001原始身份均保留。独立发布树先完成Node/相关Python/格式/build与Chrome WASM、评价/恢复检查，再走现有权重Release工具和新reason编号、Downloads包、main与Pages核验。失败或部分/不确定保留现站。
 
 以初始化学生4083做隔离工程预览，16个旧公开位置/开局夹具在Chrome WASM中argmax全同，最大原值差1.4901161e-6、零页面异常；此项不是最终学生验收或棋力证据，最终权重须重验。当前清单尚未加入学生。见[条件发布授权](evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
+
+条件发布伴随进程已于2026-11-12T18:31:39Z实际启动，冻结ed36254，当前等待原训练/独立评测；142训练源码仍逐字节匹配d965701，零新学生已发布，清单仍029。[实际启动](evaluation/endgame-rebase-029-20261112/conditional-release/startup.json)。

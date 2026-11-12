@@ -1,0 +1,18 @@
+{
+  "pid": 54504,
+  "actualLaunchUTC": "2026-11-12T18:31:39.287Z",
+  "sourceCommit": "ed36254c60c889708d19483b5755315aa80dfe4d",
+  "mode": "bounded-local-companion-not-app-automation",
+  "trainingRuntimeUnchanged": true,
+  "observedAtUTC": "2026-11-12T18:32:50.174Z",
+  "status": {
+    "pid": 54504,
+    "phase": "waiting-for-training-and-independent-evaluation",
+    "updatedAtUTC": "2026-11-12T18:32:39.509Z"
+  },
+  "trainingSourceCommit": "d965701acfd6d8b5534280045a0d1bacd3975646",
+  "trainingSourcesVerified": 142,
+  "heldoutStarted": false,
+  "currentCatalogDefault": "029",
+  "newStudentPublished": false
+}
