@@ -1,0 +1,58 @@
+{
+  "kind": "stopped-engineering-IO-source-amendment",
+  "observedAtUTC": "2026-11-12T18:00:49.508Z",
+  "reason": "Two transient Windows PermissionError failures replacing learner/status.json; bounded atomic replacement retry only",
+  "originalSourceCommit": "1415fac1bfa65abe050c4750e69215a77764d474",
+  "originalProtocolSHA256": "cba01e353c4d94f7194479580eb410c0dd3f7e9ec43026a2ecf4ca21d687919a",
+  "originalRegistrationSHA256": "c8bbab35547bddb9d20d70c3635b565cf404c5ddca62f0a8aa9daf1197906f5e",
+  "archive": "engineering-segments/io-v1",
+  "files": {
+    "train/learner/checkpoint.pt": "02e08334062a219361ea36d1716d5648be647ebe89748225465801467580c80b",
+    "train/models/latest.json": "3ebc3cf667fb21b1bf5eb3de4253567c6118794e7733a29f09bb35a26af4dc97",
+    "train/models/e00063600.onnx": "d88f9cd4fa92cd3f3753db279bfca2378d73a3d1e9a0a4ba468bbf26bd0745af",
+    "engineering-segments/io-v1/retained-shards.sha256.json": "9c3ae817737e04c1a6032ac3961d820a9034ded372f8a5683188484f45847601"
+  },
+  "checkpointStep": 63600,
+  "newUpdates": 2550,
+  "adamStates": 13,
+  "ingestedRows": 1304631,
+  "trainedRows": 5222400,
+  "retainedRows": 1304631,
+  "pendingRows": 0,
+  "retainedShardFiles": 1272,
+  "replayRNGRestored": false,
+  "semantics": "Resume saved network and matching Adam/counters plus retained shards and flushed actor cursors. No reset, new labels, changed seeds, new optimizer or extended deadline; unsaved RNG and exact replay sampling state not restored.",
+  "sourceCommit": "d965701acfd6d8b5534280045a0d1bacd3975646",
+  "protocolSHA256": "6dedab28af4062f986f63aa5c926459555ea49009df7ecc5dc45be757f126709",
+  "originalTimeFieldsUnchanged": true,
+  "registration": {
+    "id": "endgame-rebase-029-20261112",
+    "purpose": "Experimentally transfer the r2 learned trunk delta onto accepted/published029, then train endgame decisions from final signed single-round upgrade labels. Not exactresume and no automatic webintegration.",
+    "startUTC": "2026-11-12T16:58:54.268Z",
+    "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+    "evaluationDeadlineUTC": "2026-11-13T11:58:54.268Z",
+    "deadlineUTC": "2026-11-13T12:13:54.268Z",
+    "durationHours": 19.25,
+    "restartExtendsDeadline": false,
+    "protocolSHA256": "6dedab28af4062f986f63aa5c926459555ea49009df7ecc5dc45be757f126709",
+    "engineeringAmendment": 2,
+    "originalRegistrationSHA256": "c8bbab35547bddb9d20d70c3635b565cf404c5ddca62f0a8aa9daf1197906f5e"
+  },
+  "originalLearnerRestarts": 2,
+  "heldoutCompletedPairs": {
+    "A": 0,
+    "B": 0,
+    "C": 0
+  },
+  "validation": {
+    "nodePassed": 476,
+    "nodeSkipped": 36,
+    "researchPythonPassed": 41,
+    "endgameLearnerPythonPassed": 10,
+    "format": true,
+    "build": true
+  },
+  "archiveManifestSHA256": "b7c7683efd128bbb01b85075f6c1e311d57fae8d81dcc1e72f4232a82c4161ba",
+  "oldRuntimeUntouched": true,
+  "newRuntimeLaunchPending": true
+}

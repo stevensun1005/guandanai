@@ -1,0 +1,13 @@
+{
+  "id": "endgame-rebase-029-20261112",
+  "purpose": "Experimentally transfer the r2 learned trunk delta onto accepted/published029, then train endgame decisions from final signed single-round upgrade labels. Not exactresume and no automatic webintegration.",
+  "startUTC": "2026-11-12T16:58:54.268Z",
+  "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+  "evaluationDeadlineUTC": "2026-11-13T11:58:54.268Z",
+  "deadlineUTC": "2026-11-13T12:13:54.268Z",
+  "durationHours": 19.25,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "6dedab28af4062f986f63aa5c926459555ea49009df7ecc5dc45be757f126709",
+  "engineeringAmendment": 2,
+  "originalRegistrationSHA256": "c8bbab35547bddb9d20d70c3635b565cf404c5ddca62f0a8aa9daf1197906f5e"
+}
