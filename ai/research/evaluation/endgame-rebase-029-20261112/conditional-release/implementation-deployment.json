@@ -1,0 +1,18 @@
+{
+  "observedAtUTC": "2026-11-12T18:39:38.663Z",
+  "implementationCommit": "ed36254c60c889708d19483b5755315aa80dfe4d",
+  "pagesRun": 43280625683,
+  "pagesConclusion": "success",
+  "version": "10d0e4cd91",
+  "defaultId": "029",
+  "neuralDefaultId": "029",
+  "choices": [
+    "clint-rule",
+    "028",
+    "029"
+  ],
+  "raw029SHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "raw029SHAVerified": true,
+  "newStudentPublished": false,
+  "scope": "Conditional release capability deployed; no improvement conclusion and no trained student release yet"
+}
