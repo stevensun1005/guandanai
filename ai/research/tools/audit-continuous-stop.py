@@ -76,10 +76,13 @@ def audit_shards(directory, counted, inherited_absent=()):
     }
 
 
-def audit_actor_logs(directory, seed_offset):
+def audit_actor_logs(directory, seed_offset, seed_list=None):
+    if seed_list: require(sha(seed_list["file"]) == seed_list["sha256"], "Seed list changed")
+    reserved = read(seed_list["file"])["seeds"] if seed_list else None
     actors = []
     for path in sorted(Path(directory).glob("actor-*.json")):
         actor = read(path)
+        allowed = set(reserved[actor["slot"]*seed_list["perSlot"]:actor["slot"]*seed_list["perSlot"]+actor["nextSeed"]]) if reserved else None
         seen = set()
         matches = decisions = failures = 0
         results = Path(directory) / f"results-{actor['slot']}.jsonl"
@@ -89,7 +92,7 @@ def audit_actor_logs(directory, seed_offset):
                 record = json.loads(line)
                 base = 1_000_000_000 + actor["slot"] * 50_000_000
                 require(isinstance(record["seed"], int) and
-                        base + seed_offset <= record["seed"] < base + actor["nextSeed"],
+                        (record["seed"] in allowed if allowed is not None else base + seed_offset <= record["seed"] < base + actor["nextSeed"]),
                         f"Seed outside reserved actor block: {results.name}")
                 require(record["seed"] not in seen, f"Repeated seed: {results.name}")
                 seen.add(record["seed"])
@@ -168,7 +171,7 @@ def audit(run, frozen_source, inherited_run=None):
         inherited = torch.load(inherited_run / "learner/checkpoint.pt", weights_only=True, map_location="cpu")
         inherited_absent = set(inherited["countedShards"]) - {p.name for p in (inherited_run / "shards").glob("*.json")}
     shards = audit_shards(run / "shards", checkpoint["countedShards"], inherited_absent)
-    actors = audit_actor_logs(run / "actors", config["actorSeedOffset"])
+    actors = audit_actor_logs(run / "actors", config["actorSeedOffset"], config.get("actorSeedList"))
     pids = [status["pid"], learner["pid"], *[a["pid"] for a in actors]]
     alive = []
     for pid in pids:

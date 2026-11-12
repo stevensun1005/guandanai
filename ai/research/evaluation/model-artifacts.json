@@ -5541,5 +5541,12 @@
       "upstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
       "classification": "functional-and-rule-sync-no-independent-strength-games"
     }
+  ],
+  "researchWindows": [
+    {
+      "id": "overnight-champion-20261112",
+      "file": "ai/research/evaluation/overnight-champion-20261112/protocol.design.json",
+      "classification": "preregistered-new-training-window-not-accepted-champion"
+    }
   ]
 }

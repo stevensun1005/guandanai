@@ -3,11 +3,11 @@ import { appendFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import * as ort from 'onnxruntime-node';
 import { playMatch } from '../../../shared/simulation/match-rollout.mjs';
+import { actorSeedReader } from './actor-seeds.mjs';
 import { seededRandom } from '../../../shared/simulation/simulation.mjs';
 import {
   MAX_ACTORS,
   ShardWriter,
-  TRAIN_SEED_BASE,
   TRAIN_SEED_SPAN,
   createModelPool,
   encodeSample,
@@ -26,6 +26,7 @@ const slot = Number(option('slot', '0'));
 const matchLimit = Number(option('matches', '0'));
 if (!Number.isInteger(slot) || slot < 0 || slot >= MAX_ACTORS) throw Error('Invalid actor slot');
 const config = readJSON(paths.config);
+const nextRoot = actorSeedReader(config, slot);
 if (!config) throw Error(`Missing ${paths.config}; start the run with supervisor.mjs`);
 
 const statusFile = join(paths.actors, `actor-${slot}.json`);
@@ -92,7 +93,7 @@ while (
   const model = join(paths.models, latest.file);
   const lineup = chooseLineup();
   const team = random() < 0.5 ? 0 : 1;
-  const seed = TRAIN_SEED_BASE + slot * TRAIN_SEED_SPAN + status.nextSeed++;
+  const seed = nextRoot(status.nextSeed++);
   const rows = [];
   let decisions = 0;
   try {

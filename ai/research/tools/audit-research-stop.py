@@ -67,7 +67,7 @@ def audit(run, frozen, allow_early_stop=False):
     spec=importlib.util.spec_from_file_location('stop_audit',ROOT/'ai/research/tools/audit-continuous-stop.py')
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     shards=module.audit_shards(run/'shards',saved['countedShards'])
-    actors=module.audit_actor_logs(run/'actors',config['actorSeedOffset'])
+    actors=module.audit_actor_logs(run/'actors',config['actorSeedOffset'],config.get('actorSeedList'))
     assert not any(alive(a['pid']) for a in actors)
     assert sum(a['matches'] for a in actors)==state['totals']['matches']
     assert sum(a['decisions'] for a in actors)==state['totals']['decisions']==state['totals']['rows']

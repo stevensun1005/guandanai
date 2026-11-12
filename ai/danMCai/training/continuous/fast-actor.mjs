@@ -13,6 +13,7 @@
 import { appendFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import * as ort from 'onnxruntime-node';
+import { actorSeedReader } from './actor-seeds.mjs';
 import { seededRandom } from '../../../shared/simulation/simulation.mjs';
 import { encodePolicyExtras } from '../../../../web/src/ai/policy-features.mjs';
 import { beliefMarginals, createBeliefModel } from '../../belief/sampler.mjs';
@@ -22,7 +23,6 @@ import { playMatchWith } from './fast-rollout.mjs';
 import {
   MAX_ACTORS,
   ShardWriter,
-  TRAIN_SEED_BASE,
   TRAIN_SEED_SPAN,
   encodeSample,
   explore,
@@ -48,6 +48,7 @@ if (!Number.isInteger(slot) || slot < 0 || slot >= MAX_ACTORS) throw Error('Inva
 if (!Number.isInteger(games) || games < 1 || games > 512) throw Error('Invalid concurrent games');
 if (!['dml', 'cpu'].includes(provider)) throw Error('Provider must be dml or cpu');
 const config = readJSON(paths.config);
+const nextRoot = actorSeedReader(config, slot);
 if (!config) throw Error(`Missing ${paths.config}; start the run with supervisor.mjs`);
 const sessionLimit = Number(option('session-limit', config.fastActor?.sessionLimit ?? '6'));
 
@@ -194,7 +195,7 @@ async function lane() {
     const model = join(paths.models, latest.file);
     const lineup = chooseLineup();
     const team = random() < 0.5 ? 0 : 1;
-    const seed = TRAIN_SEED_BASE + slot * TRAIN_SEED_SPAN + status.nextSeed++;
+    const seed = nextRoot(status.nextSeed++);
     if (status.nextSeed >= TRAIN_SEED_SPAN) throw Error('Actor seed block exhausted');
     const rows = [];
     let decisions = 0;

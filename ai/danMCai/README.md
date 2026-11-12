@@ -93,3 +93,5 @@ self-only离线拟合已完成（1,906展示层样本／3,393字节，零网络�
 ### Windows extras窗口截止归档（2026-11-11）
 
 四臂各4小时训练已完成，共472,461次新增更新；独立留出0局，后续训练没有接续，未产生新研究冠军，连续训练至周三的要求没有兑现。四份最终权重／13组Adam／回放／215源码的只读停止审计重新通过；14:45Z STOP与15:00Z临时防睡眠释放已核对，windows-a-b到期跟进已删除，ai/clint-ui保留。不延期补跑、不改网页清单。完整SHA、计数与限制见 [归档证据](../research/evaluation/extras-input-ablation-20261108/closeout-20261111.json)；主报告66.5保留原计划与未完成事实。
+
+[夜间新冠军训练窗口](../research/evaluation/overnight-champion-20261112/protocol.design.json)：所有者新授权：Windows danMCai至11月12日09:00美东，08:45停计算；7小时训练后自动接停止审计与独立门控。旧窗口不重开；当前不是新冠军或网页发布。

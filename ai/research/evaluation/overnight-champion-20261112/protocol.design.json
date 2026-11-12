@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "overnight-champion-20261112",
+  "purpose": "Fresh017 full-trunk low-learning-rate mixed self/fixed-champion training, followed automatically by final-only independent acceptance. Seek a new research champion, not guaranteed success.",
+  "status": "preregistered-design-not-started",
+  "deadlineUTC": "2026-11-12T14:00:00.000Z",
+  "computeDeadlineUTC": "2026-11-12T13:45:00.000Z",
+  "trainingHours": 7,
+  "evaluationMaxHours": 2,
+  "optimizer": "new Adam, empty replay; all12 parameters; inherited network step855042 separately, local updates0",
+  "actorMix": {
+    "self": 0.5,
+    "league": 0.5,
+    "rule": 0
+  },
+  "learningRate": 3e-06,
+  "teacher": "verified actual champion017/v000855042, SHA462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "pool": "one pinned017 only, no new snapshots/gates while training",
+  "reward": "signed final single-round team upgrade points only; match and anchor loss weights0; no tactical reward",
+  "gate": {
+    "games": 10000,
+    "primary": "1000 swapped-seat pairs final vs017; signed upgrade points95% deal-cluster CI lower>0 AND mean>+.05",
+    "secondary": "final and017 each vsClint on same1000 newdeals; each vsP0 on another1000. Common-opponent final-minus017 paired99% CI lower>-.10 for BOTH",
+    "selection": "one final export after full stop audit, never peaks or development winners",
+    "incomplete": "no acceptance, no sample expansion or extension; preserve partial results",
+    "scope": "single round, no tribute; not full-match/human or universal strength"
+  },
+  "boundaries": [
+    "New campaign only. Archived Nov7–11 campaigns, source, seeds and results unchanged.",
+    "WindowsdanMCai only; no human/D1 data, Clint/GuanZero in training or labels.",
+    "Clint independent rules-v2 rules-only eval adapter; no endgame brain, exact frozen fingerprints required.",
+    "No web publication; current menu and default retained.",
+    "4GiB reserve,5GiB start/resume. Temporary system-only awake; release by09:00 Toronto."
+  ],
+  "seedDesign": "Sparse explicit audited roots,4slots×60000; each slot consumes a disjoint list index. Legacy samplers retain original formula without actorSeedList. All200 possible derived rounds audited; bounding contiguous old namespaces had no adequate gap, not reused.",
+  "seedAuditSHA256": "de463d2b461f2fa5bb17ac84ad0b028fb48eee384c209f65d737872ad40b72a3"
+}

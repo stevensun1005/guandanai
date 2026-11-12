@@ -5,6 +5,7 @@ export const sourceFiles = [
     'supervisor.mjs',
     'gate-schedule.mjs',
     'actor.mjs',
+    'actor-seeds.mjs',
     'gate.mjs',
     'lib.mjs',
     'learner.py',

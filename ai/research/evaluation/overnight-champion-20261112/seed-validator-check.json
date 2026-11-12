@@ -1,0 +1,15 @@
+{
+  "originalRangeValidatorRoots": [
+    2004885626,
+    2009162286,
+    2004905629,
+    2000668975,
+    2009182290,
+    2004945700,
+    2000689043,
+    2000709141
+  ],
+  "conflicts": 0,
+  "historicalRoots": 1808713,
+  "scope": "Boundary spot-check of original independent range validator; full240000 vector no-overlap audit recorded separately"
+}
