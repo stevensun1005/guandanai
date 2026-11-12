@@ -721,6 +721,16 @@ function progressFor(stage, run, state, startMs, now) {
 /** Every process command line (ps); empty on failure. */
 function processList() {
   try {
+    if (process.platform === 'win32')
+      return execFileSync(
+        'powershell.exe',
+        [
+          '-NoProfile',
+          '-Command',
+          'Get-CimInstance Win32_Process | ForEach-Object { $_.CommandLine }',
+        ],
+        { encoding: 'utf8', maxBuffer: 16 << 20, windowsHide: true },
+      );
     return execFileSync('ps', ['-axo', 'command'], { encoding: 'utf8', maxBuffer: 16 << 20 });
   } catch {
     return '';
@@ -730,12 +740,19 @@ function processList() {
 /** True when some command line names `path` as a whole argument (after "=" or a space). */
 export function pathInCommands(psText, path) {
   if (!path) return false;
+  if (/^[a-z]:[\\/]/i.test(path)) {
+    psText = psText.replaceAll('\\', '/').toLowerCase();
+    path = path.replaceAll('\\', '/').toLowerCase();
+  }
   for (const line of psText.split('\n')) {
     let at = line.indexOf(path);
     while (at >= 0) {
       const before = line[at - 1],
         after = line[at + path.length];
-      if ((before === '=' || before === ' ') && (after === undefined || /[\s,]/.test(after)))
+      if (
+        (before === '=' || before === ' ' || before === '"') &&
+        (after === undefined || /[\s,"]/.test(after))
+      )
         return true;
       at = line.indexOf(path, at + 1);
     }
@@ -745,6 +762,7 @@ export function pathInCommands(psText, path) {
 
 /** macOS keeps most memory as reclaimable cache; os.freemem() alone looks near zero. */
 function availableMemoryGiB() {
+  if (process.platform === 'win32') return freemem() / 2 ** 30;
   try {
     const text = execFileSync('vm_stat', { encoding: 'utf8' });
     const page = Number(/page size of (\d+)/.exec(text)?.[1] || 16384);
@@ -765,7 +783,7 @@ function availableMemoryGiB() {
 function machine(run) {
   return {
     cpus: cpus().length,
-    load1: loadavg()[0],
+    load1: process.platform === 'win32' ? null : loadavg()[0],
     freeMemoryGiB: availableMemoryGiB(),
     totalMemoryGiB: totalmem() / 2 ** 30,
     diskFreeGiB: (() => {

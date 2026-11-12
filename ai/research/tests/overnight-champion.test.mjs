@@ -52,3 +52,10 @@ test('sparse reservations use indices, cannot exhaust or change silently; legacy
     rmSync(folder, { recursive: true, force: true });
   }
 });
+
+import { pathInCommands } from '../tools/window-dashboard.mjs';
+test('Windows dashboard recognizes real quoted/backslash process paths without prefix matches', () => {
+  const commands = 'node supervisor.mjs --run="D:\\Work\\Train" --hours=7';
+  assert.equal(pathInCommands(commands, 'd:/work/train'), true);
+  assert.equal(pathInCommands(commands, 'D:/Work/Tra'), false);
+});

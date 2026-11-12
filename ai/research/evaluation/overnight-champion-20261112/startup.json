@@ -1,0 +1,130 @@
+{
+  "observedAtUTC": "2026-11-12T04:32:45.793594+00:00",
+  "phase": "training-not-a-new-champion",
+  "sourceCommit": "61bfd646ae3a336d3c7d57056b59b7c39a4eee3e",
+  "protocolCommit": "5a05b926d22d76736343729d50bd1ced277109cf",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\overnight-champion-20261112",
+  "registration": {
+    "id": "overnight017-mixed-lowLR-train",
+    "run": "D:\\vibecoding\\guandan\\ai\\local\\runs\\overnight-champion-20261112\\experiments\\train",
+    "protocol": "D:\\vibecoding\\guandan\\ai\\local\\runs\\overnight-champion-20261112\\experiments\\train\\protocol.json",
+    "protocolSHA256": "03d08f1c51dcec448d7f85fb08d5b1762865b2ef0b7a6fec98cc53d9a90d0528",
+    "window": {
+      "startUTC": "2026-11-12T04:29:15.412Z",
+      "deadlineUTC": "2026-11-12T11:29:15.412Z",
+      "requestedHours": 7,
+      "restartExtendsDeadline": false
+    }
+  },
+  "launch": {
+    "guardian": 32088,
+    "dashboard": 45608,
+    "controller": 5080,
+    "atUTC": "2026-11-12T04:29:07.6218697Z",
+    "awake": 14828
+  },
+  "preflight": {
+    "passed": true,
+    "device": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gradientParameterGroups": 12,
+    "adamStates": 12,
+    "syntheticOptimizerUpdates": 1,
+    "realRunUpdates": 0,
+    "strengthGames": 0,
+    "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "loss": 9.921966552734375,
+    "atUTC": "2026-11-12T04:29:15.075953+00:00"
+  },
+  "learner": {
+    "pid": 40196,
+    "device": "cuda:0",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gpuAllocatedBytes": 168534016,
+    "state": "waiting-for-data",
+    "step": 869,
+    "version": "v000000000",
+    "buffer": 444971,
+    "ingestedRows": 444971,
+    "trainedRows": 1779712,
+    "lossEMA": 3.260087426566635,
+    "replayRatio": 3.999613457955687,
+    "stepsPerSecond": 4.184715598229535,
+    "updatedAt": "2026-11-12T04:32:45Z"
+  },
+  "totals": {
+    "matches": 974,
+    "decisions": 467658,
+    "rows": 467658
+  },
+  "actors": [
+    {
+      "pid": 3820,
+      "slot": 0,
+      "matches": 316,
+      "decisions": 153502,
+      "nextSeedIndex": 323,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "pid": 39400,
+      "slot": 1,
+      "matches": 312,
+      "decisions": 143806,
+      "nextSeedIndex": 319,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "pid": 50212,
+      "slot": 2,
+      "matches": 138,
+      "decisions": 69338,
+      "nextSeedIndex": 138,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "pid": 17232,
+      "slot": 3,
+      "matches": 208,
+      "decisions": 101012,
+      "nextSeedIndex": 215,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    }
+  ],
+  "guardian": {
+    "pid": 32088,
+    "updatedAtUTC": "2026-11-12T04:32:45.576Z",
+    "deadlineUTC": "2026-11-12T14:00:00.000Z",
+    "computeDeadlineUTC": "2026-11-12T13:45:00.000Z",
+    "stopped": false
+  },
+  "awake": {
+    "phase": "awake",
+    "displayRequired": false,
+    "updatedAtUTC": "2026-11-12T04:32:38.8904433+00:00",
+    "pid": 14828,
+    "powerPlanChanged": false,
+    "deadlineUTC": "2026-11-12T14:00:00.000Z"
+  },
+  "deadlineUTC": "2026-11-12T14:00:00.000Z",
+  "computeDeadlineUTC": "2026-11-12T13:45:00.000Z",
+  "independentAcceptanceGamesCompleted": 0,
+  "webChanged": false,
+  "notes": [
+    "Actual GPU optimizer updates observed, not just preflight or queued launch",
+    "Snapshot counters only; live runtime is authoritative",
+    "Final-only gate will run automatically after exact7h training and complete stop audit; success not guaranteed",
+    "Old frozen sources/runs not reopened. Standalone UI dashboard companion may update separately; training source remains frozen."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "device": "AMD Radeon RX 7800 XT",
+  "torch": "2.9.1+rocmsdk20260116",
+  "hip": "7.2.26024-f6f897bd3d",
+  "gradientParameterGroups": 12,
+  "adamStates": 12,
+  "syntheticOptimizerUpdates": 1,
+  "realRunUpdates": 0,
+  "strengthGames": 0,
+  "teacherSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+  "loss": 9.921966552734375,
+  "atUTC": "2026-11-12T04:29:15.075953+00:00"
+}

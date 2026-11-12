@@ -26,5 +26,14 @@
   "format": "passed",
   "build": "passed",
   "sourceCommit": "61bfd646ae3a336d3c7d57056b59b7c39a4eee3e",
-  "scope": "Development checks only; GPU preflight and actual training start recorded separately. Concurrent1d5cdf9 preserved and merged before final checks."
+  "scope": "Development checks only; GPU preflight and actual training start recorded separately. Concurrent1d5cdf9 preserved and merged before final checks.",
+  "dashboardCompanion": {
+    "nodeTests": 506,
+    "passed": 470,
+    "skipped": 36,
+    "researchPythonPassed": 41,
+    "format": "passed",
+    "build": "passed",
+    "scope": "Separate Windows CIM/path dashboard companion; original170 frozen training source files unchanged"
+  }
 }
