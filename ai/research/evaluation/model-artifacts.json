@@ -5599,7 +5599,8 @@
       "startup": "ai/research/evaluation/endgame-rebase-029-20261112/startup.json",
       "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
       "engineeringRecovery": "ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json",
-      "recoveryProtocol": "ai/research/evaluation/endgame-rebase-029-20261112/protocol-io-recovery.json"
+      "recoveryProtocol": "ai/research/evaluation/endgame-rebase-029-20261112/protocol-io-recovery.json",
+      "recoveryStartup": "ai/research/evaluation/endgame-rebase-029-20261112/recovery-startup.json"
     }
   ]
 }

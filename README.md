@@ -1,5 +1,7 @@
 <div align="center">
 
+Windows状态文件冲突已通过停机存档和新冻结源码修复，续用匹配检查点/Adam与原截止；这是工程恢复，不是提升结论。见[修订2](ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json)。
+
 029尾盘增量迁移已在Windows真实启动，预检2次更新不继承，正式GPU新增更新已观察。固定11月13日03:58美东停训练，随后A/B/C独立评测，不自动发布学生。[实际启动](ai/research/evaluation/endgame-rebase-029-20261112/startup.json)。
 
 新的[029底座尾盘迁移实验](ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json)采用r2相对017的权重增量和全新Adam，原文件保留；准备、GPU预检、实际训练及独立评测分别记录。网页029已上线，权重SHA和三项菜单/默认实测通过。

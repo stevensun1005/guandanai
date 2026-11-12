@@ -1,5 +1,7 @@
 <div align="center">
 
+Windows metadata locks were addressed with an archived stop and a new frozen runtime. Recovery keeps the matched checkpoint/Adam and original deadlines; it is not evidence of stronger play. [Recovery amendment2](ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json).
+
 The029-based endgame delta-transfer run is now active on Windows with actual new GPU updates, separate from its two synthetic checks. Training stops Nov13 at03:58Toronto; final/initial/r2 paired evaluation follows without automatic student deployment. [Actual startup](ai/research/evaluation/endgame-rebase-029-20261112/startup.json).
 
 The [029-based endgame transfer experiment](ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json) adds the r2-minus017 trunk delta to029 with fresh Adam. This is an experimental initialization, not exact optimizer resumption or evidence of improved play. Preparation, GPU checks, actual training and held-out evaluation are recorded separately. Web029 is live with verified SHA and menu/default.

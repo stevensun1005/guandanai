@@ -1,5 +1,7 @@
 # danMCai 模型
 
+Windows状态替换故障通过先停机归档、冻结修复源码后在原窗口恢复，见[工程修订2](../research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json)；学习目标、种子和截止不变。
+
 [029尾盘迁移已真实运行](../research/evaluation/endgame-rebase-029-20261112/startup.json)，正式GPU新增更新与4路采样已核验；训练截止11月13日03:58:54美东。不是尚未启动的准备，也不是新学生棋力已通过。
 
 新的029尾盘增量迁移已完成代码与预登记准备：[新协议](../research/evaluation/endgame-rebase-029-20261112/protocol.design.json)。16小时固定训练、随后最多3小时三组独立配对评测和15分钟保存；GPU预检、实际冻结/启动另记。旧r2、原017方案及其他运行保留。

@@ -1,5 +1,7 @@
 # 模型研究与证据
 
+029尾盘迁移的Windows状态替换故障已完成停止审计与新冻结源码恢复；原窗口、检查点/13组Adam和计数保留，未运行留出，不宣称提升。见[修订2](evaluation/endgame-rebase-029-20261112/runtime-note-2.json)。
+
 [029尾盘迁移实际启动](evaluation/endgame-rebase-029-20261112/startup.json)：已观察真实新GPU更新，142冻结源码不变；正式数据/Adam不继承预检，当前没有新学生独立棋力结论。
 
 [029尾盘迁移](evaluation/endgame-rebase-029-20261112/protocol.design.json)：所有者明确选择r2−017主干增量迁到新冠军、新Adam；原Mac种子在Windows被拒，使用按实际literal单局语义新审计的2M训练副/3000留出。准备与实际启动分开，不冒称新尾盘棋力结果。

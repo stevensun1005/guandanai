@@ -114,6 +114,19 @@
         "type": "descriptive",
         "text": "不把旧r2成绩移用新模型，不自动部署"
       }
+    },
+    {
+      "key": "metadata-recovery",
+      "title": "Windows文件替换故障修复与原窗口恢复",
+      "kind": "descriptive",
+      "desc": "保留旧源码和原件、核验13组Adam，冻结有限重试修复；不延长截止",
+      "paths": {
+        "result": "metadata-recovery-record.json"
+      },
+      "rule": {
+        "type": "dev",
+        "text": "工程恢复，不是棋力证据"
+      }
     }
   ]
 }

@@ -1,0 +1,91 @@
+{
+  "kind": "engineering-recovery-not-strength",
+  "actualLaunchUTC": "2026-11-12T18:02:06.459Z",
+  "controllerPid": 59112,
+  "awakePid": 48992,
+  "protocolCommit": "5d44495",
+  "sourceCommit": "d965701acfd6d8b5534280045a0d1bacd3975646",
+  "sameOriginalWindow": true,
+  "newWindowRegistered": false,
+  "observedAtUTC": "2026-11-12T18:03:52.421Z",
+  "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+  "evaluationDeadlineUTC": "2026-11-13T11:58:54.268Z",
+  "deadlineUTC": "2026-11-13T12:13:54.268Z",
+  "sourceFilesVerified": 142,
+  "originalTimeFieldsUnchanged": true,
+  "checkpointAndAdamStepAtPause": 63600,
+  "checkpointSHA256": "02e08334062a219361ea36d1716d5648be647ebe89748225465801467580c80b",
+  "adamStatesVerifiedAtPause": 13,
+  "learner": {
+    "pid": 49292,
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "state": "waiting-for-data",
+    "step": 63700,
+    "trainedRows": 5427200,
+    "ingestedRows": 1337465,
+    "replayRows": 750000,
+    "oracleKeep": 0,
+    "prunedRows": 0,
+    "lossEma": 1.592877785671958,
+    "device": "cuda",
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "updatedAt": "2026-11-12T18:03:50Z"
+  },
+  "supervisor": {
+    "pid": 37016,
+    "startedAt": "2026-11-12T18:02:06.792Z",
+    "deadline": "2026-11-13T08:58:54.268Z",
+    "restarts": {},
+    "resources": {
+      "availableGiB": 5.346370697021484,
+      "pausedActors": []
+    },
+    "children": [
+      {
+        "name": "learner",
+        "pid": 54820
+      },
+      {
+        "name": "actor-0",
+        "pid": 52400
+      },
+      {
+        "name": "actor-1",
+        "pid": 59828
+      },
+      {
+        "name": "actor-2",
+        "pid": 37876
+      },
+      {
+        "name": "actor-3",
+        "pid": 53924
+      }
+    ],
+    "updatedAt": "2026-11-12T18:03:52.107Z"
+  },
+  "guardianPid": 56688,
+  "awake": {
+    "phase": "awake",
+    "pid": 48992,
+    "updatedAtUTC": "2026-11-12T18:03:47.5134532+00:00",
+    "powerPlanChanged": false,
+    "displayRequired": false,
+    "deadlineUTC": "2026-11-13T12:13:54.268Z"
+  },
+  "heldoutCompletedPairs": {
+    "A": 0,
+    "B": 0,
+    "C": 0
+  },
+  "newTrainingLogBytes": 0,
+  "strengthConclusion": null
+}

@@ -3312,3 +3312,5 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 运行中第二次出现Windows状态JSON原子替换PermissionError，先前更换读取方式未消除故障，锁持有者仍未核实。正常停止保存，旧冻结源码1415fac及原协议/注册/故障日志逐字节归档；检查点02e08334…与导出d88f9cd4…主干完全一致，13组Adam匹配新增2550更新，累计摄入1304631行、训练5222400行、318分片，未摄入0行。零留出比赛完成。
 
 修复有限重试原子替换、已有检查点恢复不误检为初始导出，并绑定恢复文件SHA。新冻结d965701、142源码文件；仅停止后修订运行协议/配置来源，原训练种子、目标、参数和所有截止不变，恢复匹配网络/Adam/计数及保留分片。未保存RNG与精确回放采样状态仍未恢复。此项为工程准备，不是新模型提升证据，实际重新启动另记。[修订协议](evaluation/endgame-rebase-029-20261112/protocol-io-recovery.json)／[注册](evaluation/endgame-rebase-029-20261112/registration-io-recovery.json)／[停机审计](evaluation/endgame-rebase-029-20261112/recovery-stop-audit.json)／[恢复注记](evaluation/endgame-rebase-029-20261112/runtime-note-2.json)。476 Node通过/36跳过、10尾盘学习器及41研究Python通过，格式与build通过。
+
+修订2已在2026-11-12T18:02:06Z实际恢复，当前观察GPU更新与摄入行继续增长，继承61050不重计；142新冻结源码核验、原全部时间字段相同、守护/临时awake/四演员存活，未出现新的训练错误日志。已保存匹配检查点/Adam而非重置优化器，恢复后原截止不变。完整快照见[recovery-startup](evaluation/endgame-rebase-029-20261112/recovery-startup.json)。这只是工程恢复与实际训练进度，尚无新学生独立棋力结论。
