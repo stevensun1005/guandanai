@@ -1,0 +1,25 @@
+{
+  "observedAtUTC": "2026-11-12T17:22:17.693Z",
+  "kind": "engineering-runtime-note-not-strength",
+  "event": "One learner restart after PermissionError WinError5 while replacing learner/status.json",
+  "lockingProcess": "unverified; no attribution to a specific reader",
+  "restarts": {
+    "learner": 1
+  },
+  "checkpointRecovery": "Saved network and matchingAdam; not unsavedRNG or full replay restoration",
+  "sourceChanged": false,
+  "windowExtended": false,
+  "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+  "mitigation": "Live monitoring now uses Node statusAPI; existing supervisor recovered within original fixed lease. Failurelog retained.",
+  "failureLogPrefix": {
+    "bytes": 1188,
+    "sha256": "056c6d397c3c1b72c835f681a0816ecb70f6037e0e822605f3509148bc98279a"
+  },
+  "current": {
+    "pid": 16740,
+    "device": "cuda",
+    "newUpdates": 900,
+    "ingestedRows": 438956
+  },
+  "scope": "Counters are raw current-checkpoint lineage; uncheckpointed work is not reconstructed or added back"
+}
