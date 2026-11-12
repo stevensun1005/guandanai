@@ -1,0 +1,16 @@
+{
+  "node": {
+    "tests": 508,
+    "passed": 472,
+    "skipped": 36,
+    "failed": 0,
+    "command": "npm test -- --test-concurrency=4"
+  },
+  "researchPython": {
+    "passed": 41
+  },
+  "format": "passed",
+  "build": "passed",
+  "scope": "Synthetic pairing/STOP regression and inherited reason-path consistency; no formal comparison games started yet",
+  "testRunnerNote": "One default-concurrency final runner held a stale terminated-child handle; stopped only its verified parent and reran full suite with four-way concurrency. All tests passed."
+}

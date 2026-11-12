@@ -97,3 +97,5 @@ self-only离线拟合已完成（1,906展示层样本／3,393字节，零网络�
 [夜间新冠军训练窗口](../research/evaluation/overnight-champion-20261112/protocol.design.json)：所有者新授权：Windows danMCai至11月12日09:00美东，08:45停计算；7小时训练后自动接停止审计与独立门控。旧窗口不重开；当前不是新冠军或网页发布。
 
 新研究冠军v000061013通过原门控；新批若继续须明确冻结其SHA，旧批与网页不能热替。 [结果与范围](../research/evaluation/overnight-champion-20261112/champion.json)。
+
+[新冠军与reason评测](../research/evaluation/champion-vs-reason-20261112/protocol.design.json)：新冠军与当前reason比较只作独立评测，不能从对017的成绩推断结果；不更新权重。

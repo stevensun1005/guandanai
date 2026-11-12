@@ -5549,6 +5549,11 @@
       "classification": "complete-independent-round-gate-research-champion-accepted",
       "results": "ai/research/evaluation/overnight-champion-20261112/heldout-results.json",
       "gate": "ai/research/evaluation/overnight-champion-20261112/gate.json"
+    },
+    {
+      "id": "champion-vs-reason-20261112",
+      "file": "ai/research/evaluation/champion-vs-reason-20261112/protocol.design.json",
+      "classification": "preregistered-independent-evaluation-no-training"
     }
   ],
   "researchChampions": [

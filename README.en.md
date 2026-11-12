@@ -169,3 +169,5 @@ The lobby aligns the nickname, mode and rule controls and adds a footer photo; h
 [Overnight research-champion window](ai/research/evaluation/overnight-champion-20261112/protocol.design.json)：New owner authorization: Windows danMCai only, until Nov12 09:00 Toronto (08:45 compute cutoff),7h training then automatic final-only independent gate. Archived windows stay closed; no new champion or website publication claimed.
 
 Research champion v000061013 passed its preregistered10000-round gate: +.0990 upgrade points against017,95%CI[.0250,.1730]. Website remains017/reason9001; no full-match or human claim. [结果与范围](ai/research/evaluation/overnight-champion-20261112/heldout-results.json)。
+
+[新冠军与reason评测](ai/research/evaluation/champion-vs-reason-20261112/protocol.design.json)：Preregistered2000-round comparison: newrawresearchchampion versus deployed017-basedreason. Evaluation only; no results or website changes yet.

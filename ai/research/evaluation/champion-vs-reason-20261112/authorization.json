@@ -1,0 +1,9 @@
+{
+  "ownerInstruction": "和reason评测一下 然后这个学习和reason有相通之处吗",
+  "purpose": "New explicit evaluation authorization after old training cutoff; no training restarted, no deployment",
+  "requestedAtUTC": "2026-11-12T14:08:07Z",
+  "maxHours": 3,
+  "pairs": 1000,
+  "singleRounds": 2000,
+  "restartExtendsDeadline": false
+}

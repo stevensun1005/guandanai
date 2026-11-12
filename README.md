@@ -166,3 +166,5 @@ GuanZero定时开发评测最新安排：danMCai现任门控冠军500场、danMC
 [夜间新冠军训练窗口](ai/research/evaluation/overnight-champion-20261112/protocol.design.json)：所有者新授权：Windows danMCai至11月12日09:00美东，08:45停计算；7小时训练后自动接停止审计与独立门控。旧窗口不重开；当前不是新冠军或网页发布。
 
 新研究冠军v000061013已通过10000单局独立门控；对017升级分+.0990，95%[.0250,.1730]。网页仍017/reason9001。 [结果与范围](ai/research/evaluation/overnight-champion-20261112/heldout-results.json)。
+
+[新冠军与reason评测](ai/research/evaluation/champion-vs-reason-20261112/protocol.design.json)：新冠军raw与当前reason的2000单局独立评测已预登记，尚无结果；训练不重开，网页不变。
