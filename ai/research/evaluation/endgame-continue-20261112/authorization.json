@@ -1,0 +1,24 @@
+{
+  "schema": "danmcai-authorization-v1",
+  "registeredAt": "2026-11-12",
+  "owner": "repository owner (chat with Claude Code on the Mac)",
+  "messages": [
+    {
+      "at": "2026-11-11 (Toronto)",
+      "text": "我要把这个训练结果拷到我的windows电脑上继续训练 我要拷哪些文件",
+      "context": "the Mac endgame oracle-guiding run endgame-oracle-20261108-r2 (final student e00061050)"
+    },
+    {
+      "at": "2026-11-11 (Toronto)",
+      "text": "Yes, add it",
+      "context": "add support for starting a new run from the r2 checkpoint (main 1d5cdf9)"
+    },
+    {
+      "at": "2026-11-12 (Toronto)",
+      "text": "给我Windows那边的预登记和提示词",
+      "context": "preregistration and handover prompt for the Windows continuation"
+    }
+  ],
+  "scope": "One new endgame run on the owner's Windows danMCai machine, started from the r2 learner checkpoint, for the fixed window in protocol.json, followed by the preregistered held-out evaluation. Not a web release, not a champion change, no change to other runs, the reward definition, GuanZero or the web default.",
+  "notAuthorized": "Extending or restarting the window beyond its fixed deadline; changing seeds, learner settings or the evaluation after launch without a written amendment; using the result as a teacher, web model or champion."
+}

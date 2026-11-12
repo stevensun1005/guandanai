@@ -691,6 +691,21 @@
         "type": "descriptive",
         "text": "所有者交代的任务，不是实验结论"
       }
+    },
+    {
+      "ids": [
+        "T-endgame-winprereg"
+      ],
+      "key": "T-endgame-winprereg",
+      "title": "所有者：尾盘模型 Windows 续训预登记与交接提示词",
+      "desc": "为 r2 尾盘学生在 Windows 续训写预登记：16 小时、10 个采样进程、CUDA、从 r2 检查点起步；种子审计选出 41 个训练块（590 万副）和 3,000 副新留出牌；评测 A＝续训后学生对 017，A−B＝对比 r2 学生的配对差。附 Windows 执行步骤与提示词。Mac 上用同一协议试启动，首个导出与 e00061050 相同。",
+      "kind": "other",
+      "queue": "owner-tasks",
+      "after": "T-endgame-init 之后（11-12 美东）",
+      "rule": {
+        "type": "descriptive",
+        "text": "所有者交代的任务，不是实验结论"
+      }
     }
   ]
 }

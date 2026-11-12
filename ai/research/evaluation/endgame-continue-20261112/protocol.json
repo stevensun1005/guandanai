@@ -1,0 +1,433 @@
+{
+  "schema": "danmcai-endgame-oracle-protocol-v1",
+  "registeredAt": "2026-11-12",
+  "purpose": "Windows continuation of the Mac endgame oracle-guiding run (section 57): a new run that starts from the r2 learner checkpoint (step 61,050, oracle keep already 0) and keeps training the endgame student on fresh deals with its own hand only. Research experiment; not a web release.",
+  "authorization": "evaluation/endgame-continue-20261112/authorization.json",
+  "teacher": {
+    "id": "017",
+    "version": "v000855042",
+    "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "champion": "ai/research/evaluation/champion-selection-mac-20261106/champion.json",
+    "gate": 330,
+    "role": "Plays every decision before the endgame threshold and all opponents in evaluation; unchanged from r2.",
+    "choice": "Kept 017 on purpose. The research-only champion overnight017-v000061013 (accepted 2026-11-12, +0.0990 [0.0250, 0.1730] vs 017, evaluation/overnight-champion-20261112/champion.json, SHA 4f5d8ef4...) exists but is not the web champion (danMCaiChampions [017, 012]). This run continues r2, whose student was trained on 017 positions, and comparison B must use the same setup; a teacher swap to v000061013 would be a separate preregistered experiment with its own control."
+  },
+  "start": "learner.init: the r2 learner checkpoint (network incl. 162x512 oracle projection, Adam state, step 61,050). Shard bookkeeping starts fresh; the first export of the new run must be byte-identical to r2's e00061050 (SHA-256 382085ee...) and is checked before actors start using it. Learning rate from this protocol.",
+  "source": {
+    "run": "endgame-oracle-20261108-r2 (Mac)",
+    "checkpoint": "learner/checkpoint.pt",
+    "checkpointSHA256": "d42fb0206d3d9005fc72ae891fe23f2defd0ed1f48b2876c39afd20903d4650d",
+    "student": "e00061050",
+    "studentSHA256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef",
+    "studentResult": "MODEL_STUDY section 57: +0.0292 [+0.0106, +0.0478] vs champion 017, 3,000 held-out deal pairs (seeds 985,009,200..). Not transferable to the new student."
+  },
+  "target": "Decider team's final signed single-round upgrade points (+-1/+-2/+-3), Monte Carlo, MSE. No tempo, trick-control, bomb or partner proxy in reward, loss, gate or acceptance.",
+  "rules": "Single fresh deals from createRound (random level and leader, no tribute, no cross-round match state), same as r2.",
+  "run": {
+    "hours": 16,
+    "actors": 10
+  },
+  "priority": {
+    "learnerNice": 0,
+    "actorNice": 5,
+    "windows": "nice 0 = normal, 5 = below normal (platform.mjs)"
+  },
+  "actor": {
+    "count": 10,
+    "threshold": 32,
+    "temperature": 0.02,
+    "shardRows": 4096,
+    "slotSeeds": [
+      [
+        [
+          1470912,
+          1670912
+        ],
+        [
+          1670912,
+          1770912
+        ],
+        [
+          40576018,
+          40676018
+        ],
+        [
+          63887622,
+          64087622
+        ]
+      ],
+      [
+        [
+          2081272,
+          2281272
+        ],
+        [
+          2281272,
+          2381272
+        ],
+        [
+          60653663,
+          60753663
+        ],
+        [
+          82458616,
+          82658616
+        ]
+      ],
+      [
+        [
+          2548225,
+          2748225
+        ],
+        [
+          2748225,
+          2848225
+        ],
+        [
+          76974525,
+          77074525
+        ],
+        [
+          83383423,
+          83583423
+        ]
+      ],
+      [
+        [
+          4288581,
+          4388581
+        ],
+        [
+          4893687,
+          5093687
+        ],
+        [
+          82347402,
+          82447402
+        ],
+        [
+          119526249,
+          119726249
+        ]
+      ],
+      [
+        [
+          4522759,
+          4622759
+        ],
+        [
+          8184720,
+          8384720
+        ],
+        [
+          83696768,
+          83796768
+        ],
+        [
+          153826383,
+          154026383
+        ]
+      ],
+      [
+        [
+          5522759,
+          5622759
+        ],
+        [
+          15906046,
+          16106046
+        ],
+        [
+          235900182,
+          236000182
+        ],
+        [
+          363662170,
+          363862170
+        ]
+      ],
+      [
+        [
+          14044780,
+          14144780
+        ],
+        [
+          16573880,
+          16773880
+        ],
+        [
+          419233695,
+          419433695
+        ],
+        [
+          419433695,
+          419533695
+        ]
+      ],
+      [
+        [
+          3055489,
+          3105489
+        ],
+        [
+          16816881,
+          16916881
+        ],
+        [
+          40816849,
+          41016849
+        ],
+        [
+          444109524,
+          444309524
+        ],
+        [
+          1281802582,
+          1281852582
+        ]
+      ],
+      [
+        [
+          24616265,
+          24716265
+        ],
+        [
+          41016849,
+          41216849
+        ],
+        [
+          76895397,
+          76945397
+        ],
+        [
+          444309524,
+          444509524
+        ]
+      ],
+      [
+        [
+          25087238,
+          25187238
+        ],
+        [
+          52031331,
+          52231331
+        ],
+        [
+          94624870,
+          94674870
+        ],
+        [
+          444509524,
+          444709524
+        ]
+      ]
+    ],
+    "note": "Same policy as r2: champion greedy until total cards <= 32, then the latest exported student with softmax(Q/0.02); finishing move and single candidate automatic. When a slot uses up its blocks it exits cleanly; the learner keeps training under the replay-ratio cap until the deadline."
+  },
+  "learner": {
+    "device": "cuda",
+    "threads": 2,
+    "seed": 20261112,
+    "learningRate": 1e-05,
+    "batch": 2048,
+    "capacity": 1500000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "oracleDecaySteps": 29000,
+    "keepShardRows": 2000000,
+    "exportSeconds": 600,
+    "init": {
+      "sha256": "d42fb0206d3d9005fc72ae891fe23f2defd0ed1f48b2876c39afd20903d4650d",
+      "sourceRun": "endgame-oracle-20261108-r2",
+      "sourceStep": 61050
+    },
+    "oracle": "Unchanged schedule p=max(0,1-step/29000); with the inherited step 61,050 it is 0 throughout, so oracle input is always zero in this run."
+  },
+  "seeds": {
+    "audit": "ai/research/evaluation/endgame-continue-20261112/seed-audit.json",
+    "auditSHA256": "6c7e2af6227f599a5fdcbfcfb53982fab010f35380b10fbe250b704fe71cc924",
+    "trainingBlocks": [
+      [
+        1470912,
+        1670912
+      ],
+      [
+        1670912,
+        1770912
+      ],
+      [
+        2081272,
+        2281272
+      ],
+      [
+        2281272,
+        2381272
+      ],
+      [
+        2548225,
+        2748225
+      ],
+      [
+        2748225,
+        2848225
+      ],
+      [
+        3055489,
+        3105489
+      ],
+      [
+        4288581,
+        4388581
+      ],
+      [
+        4522759,
+        4622759
+      ],
+      [
+        4893687,
+        5093687
+      ],
+      [
+        5522759,
+        5622759
+      ],
+      [
+        8184720,
+        8384720
+      ],
+      [
+        14044780,
+        14144780
+      ],
+      [
+        15906046,
+        16106046
+      ],
+      [
+        16573880,
+        16773880
+      ],
+      [
+        16816881,
+        16916881
+      ],
+      [
+        24616265,
+        24716265
+      ],
+      [
+        25087238,
+        25187238
+      ],
+      [
+        40576018,
+        40676018
+      ],
+      [
+        40816849,
+        41016849
+      ],
+      [
+        41016849,
+        41216849
+      ],
+      [
+        52031331,
+        52231331
+      ],
+      [
+        60653663,
+        60753663
+      ],
+      [
+        63887622,
+        64087622
+      ],
+      [
+        76895397,
+        76945397
+      ],
+      [
+        76974525,
+        77074525
+      ],
+      [
+        82347402,
+        82447402
+      ],
+      [
+        82458616,
+        82658616
+      ],
+      [
+        83383423,
+        83583423
+      ],
+      [
+        83696768,
+        83796768
+      ],
+      [
+        94624870,
+        94674870
+      ],
+      [
+        119526249,
+        119726249
+      ],
+      [
+        153826383,
+        154026383
+      ],
+      [
+        235900182,
+        236000182
+      ],
+      [
+        363662170,
+        363862170
+      ],
+      [
+        419233695,
+        419433695
+      ],
+      [
+        419433695,
+        419533695
+      ],
+      [
+        444109524,
+        444309524
+      ],
+      [
+        444309524,
+        444509524
+      ],
+      [
+        444509524,
+        444709524
+      ],
+      [
+        1281802582,
+        1281852582
+      ]
+    ],
+    "trainingSeeds": 5900000,
+    "heldout": "First 3,000 seeds of the audit's reserved list (2950000423..2950010572)",
+    "scope": "Audit on the Mac read 642 evidence files (153115 known roots) plus every seed interval found in public evidence and local run configs; training blocks are mutually clean under the 200-round derived-deal rule. Windows-only logs were not readable from the Mac: the Windows operator re-runs the same audit command before launch and stops if it reports any conflict or different held-out seeds."
+  },
+  "stop": "Fixed 16-hour window from first start (deadline frozen in config.json); restarts only use the remaining time; STOP file or deadline stops all processes; no extension, no peak picking.",
+  "evaluation": {
+    "object": "The final exported student after the window (models/latest.json at stop), not an intermediate or best-looking export.",
+    "design": "3,000 held-out deals, each played twice with sides swapped (6,000 single rounds), evaluate.mjs --pairs=3000 --threshold=32 --solver-cards=18. Focal team plays champion until total cards <= 32 then the student, greedy; the other team plays champion 017 throughout.",
+    "runs": {
+      "A": "final student vs champion 017",
+      "B": "r2 student e00061050 vs champion 017 on the same 3,000 deals"
+    },
+    "primary": "A: focal team's mean signed round points per deal pair, 95% deal-cluster normal interval. Positive evidence only if the lower bound > 0; zero result if the interval contains 0; negative if the upper bound < 0.",
+    "secondary": "Continued-training effect: per-deal paired difference A minus B (each deal's mean of its two swapped rounds), 95% deal-cluster normal interval; same three-way reading. Also wins/losses, decisions differing from champion and descriptive exact regret on <= 18-card disagreements (not acceptance).",
+    "notCovered": "Clint or other opponents, human teammates, tribute and whole-match (pass-A) effects, web integration. Any web use requires a separate preregistered acceptance."
+  },
+  "unchanged": "Web champion 017, default danMCai-reason and menu; all other runs, reward definition, GuanZero; r2's own result."
+}

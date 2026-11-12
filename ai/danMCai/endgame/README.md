@@ -57,6 +57,6 @@ node ai/danMCai/endgame/dashboard.mjs --run=ai/danMCai/runs/<运行名>
 node ai/danMCai/endgame/run.mjs --run=<新运行目录> --protocol=<预登记.json> --init-checkpoint=<checkpoint.pt> --python=<venv>\Scripts\python.exe
 ```
 
-Windows 上：`learner.device` 写 `cuda`（CUDA 不可用时报错，不悄悄改用 CPU），`--python` 必须给出；子进程优先级用 `os.setPriority`。面板的可用内存读系统 `freemem`；按进程判断评测阶段依赖 `pgrep`，Windows 上这部分显示为未运行，训练进度仍按文件显示。这只是续训工具，继承后的结果仍须按新预登记独立评测，不能把 r2 的 +0.0292 移用到新模型。
+Windows 上：`learner.device` 写 `cuda`（CUDA 不可用时报错，不悄悄改用 CPU），`--python` 必须给出；子进程优先级用 `os.setPriority`。面板的可用内存读系统 `freemem`；按进程判断评测阶段依赖 `pgrep`，Windows 上这部分显示为未运行，训练进度仍按文件显示。r2 的 Windows 续训预登记与执行步骤见 [endgame-continue-20261112](../../research/evaluation/endgame-continue-20261112/WINDOWS_HANDOFF.md)。这只是续训工具，继承后的结果仍须按新预登记独立评测，不能把 r2 的 +0.0292 移用到新模型。
 
 测试：`node --test ai/danMCai/tests/endgame-*.test.mjs`（含 `endgame-platform.test.mjs`）、`ai/danMCai/environment/mac/bin/python ai/danMCai/tests/endgame_learner_test.py`。

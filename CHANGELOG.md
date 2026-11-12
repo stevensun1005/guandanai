@@ -4,6 +4,13 @@
 
 - 14:46:43Z以新1000副、两CPU工作器启动内存修正版；冻结5baaf92/184源码SHA，零训练更新，原17:30:48Z截止不延长。v1工程停机212局单独保留，当前不作棋力结论。见[实际启动证据](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json)。
 
+## 2026-11-12美东 · 尾盘模型 Windows 续训预登记
+
+- 新增 [endgame-continue-20261112](ai/research/evaluation/endgame-continue-20261112/)：从 r2 检查点（`d42fb020…`，步数 61050）起步的新运行，16 小时、10 个采样进程、CUDA，学习设置同 r2；种子审计选出 41 个互不冲突的训练块（590 万副）与 3,000 副新留出牌。
+- 预登记评测：A＝续训后最终学生对冠军 017（3,000 副交换座位），A − B＝与 r2 学生 `e00061050` 在同一批牌上的配对差；只按区间判"正向证据／零结果／负"。[Windows 交接步骤](ai/research/evaluation/endgame-continue-20261112/WINDOWS_HANDOFF.md)要求在 Windows 重跑种子审计、试启动核对首个导出 SHA 后再正式启动。
+- 教师与对手仍用 017（与 r2 可比）；夜间研究冠军 v000061013 只是研究冠军，换它当教师须另行预登记。
+- 只是登记，尚未在 Windows 运行，没有新结果；网页冠军 017、默认 danMCai-reason 与菜单不变。
+
 ## 2026-11-11美东 · 尾盘模型可从检查点开新运行（含 Windows）
 
 - `ai/danMCai/endgame/` 学习器新增 `learner.init`：新运行从旧运行的 `checkpoint.pt` 起步，继承网络、明牌投影、Adam 与步数，分片记账重置（新分片名不再被误当已读），学习率以新配置为准，旧累计数记入 `inherited`。须在预登记写检查点 SHA，并用 `run.mjs --init-checkpoint` 传入、核对后复制到 `learner/init.pt`。
