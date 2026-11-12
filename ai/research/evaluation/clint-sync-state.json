@@ -1,18 +1,9 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "15868750340355261529bd372dfde4c4a782705d",
+  "lastSuccessfulUpstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
   "evidence": "clint-sync-20261112-0320.json",
-  "pending": [
-    {
-      "upstreamCommit": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
-      "kind": "deployment-verification",
-      "items": [
-        "Pages build/deploy success and live four-item menu/default check"
-      ],
-      "reason": "Functional adaptation and local checks passed; successful cursors wait for actual deployment."
-    }
-  ],
+  "pending": [],
   "lastCheckedUpstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
@@ -20,6 +11,6 @@
     "deployedCodeCommit": "19fb94e447e8799e93400a983875312ee47f1234"
   },
   "previousSuccessfulEvidence": "clint-sync-20261108-1635.json",
-  "lastSuccessfulRuleStrategySHA": "30a8067ec901cda4109507ac0ef26c455444f846",
-  "note": "Full UI/rule adaptation through6e57485 tested locally; prior successful cursors retained until Pages and live verification complete. Protected differences are documented dispositions, not missing patches."
+  "lastSuccessfulRuleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+  "note": "Complete UI/rule adaptation through6e57485 deployed by fee7f1b; Pages43151200099 succeeded and public1d775d6165 passed four-menu/default, room options and overtime checks. Protected differences remain documented dispositions; no strength claim."
 }

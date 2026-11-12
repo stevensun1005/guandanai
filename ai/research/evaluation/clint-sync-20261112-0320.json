@@ -955,8 +955,109 @@
     "scope": "Synthetic UI/Worker/network compatibility; no independent strength games or real human records"
   },
   "deployment": {
-    "status": "pending",
-    "successCursorAdvanced": false
+    "status": "success",
+    "successCursorAdvanced": true,
+    "codeCommit": "fee7f1b293543452988e88473cdcb500a3af738f",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/43151200099",
+    "expectedBuildVersion": "1d775d6165",
+    "actualBuildVersion": "1d775d6165",
+    "verifiedAtUTC": "2026-11-12T04:01:34.128129+00:00",
+    "ciBuild": "success",
+    "ciDeploy": "success",
+    "liveURL": "https://stevensun1005.github.io/guandanai/",
+    "liveBrowser": {
+      "verifiedAtUTC": "2026-11-12T04:01:34.128129+00:00",
+      "version": "1d775d6165",
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "028",
+          "guanzero-adp-io48-475588"
+        ],
+        [
+          "017",
+          "danMCai-v000855042"
+        ],
+        [
+          "9001",
+          "danMCai-reason-v000855042"
+        ]
+      ],
+      "defaults": [
+        "9001",
+        "9001",
+        "9001",
+        "9001"
+      ],
+      "overtime": {
+        "baseSeconds": 20,
+        "reserveSeconds": 60,
+        "elapsedOvertimeSeconds": 5,
+        "display": "+55",
+        "overClass": true
+      },
+      "pageErrors": [],
+      "scope": "Synthetic display only, no completed game or human record"
+    },
+    "liveRoomOptions": {
+      "layout": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "modeWidths": [
+            83.328125,
+            83.328125,
+            83.34375
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "modeWidths": [
+            86,
+            86,
+            86
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "modeWidths": [
+            102.65625,
+            102.671875,
+            102.65625
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "modeWidths": [
+            86,
+            86,
+            86
+          ],
+          "savedClockOptions": true
+        }
+      ],
+      "bombNotAutoPassed": true,
+      "forcedPassMarkedAutomatic": true,
+      "pageErrors": [],
+      "strengthGames": 0
+    }
   },
   "strengthEvaluation": {
     "newIndependentGames": 0,
