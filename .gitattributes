@@ -3,3 +3,6 @@
 *.ckpt binary
 *.onnx binary
 *.npz binary
+# Frozen Windows report bytes are SHA-bound by the gate and final protocol.
+ai/research/evaluation/overnight-champion-20261112/heldout-results.json -text
+ai/research/evaluation/overnight-champion-20261112/stop-audit.json -text
