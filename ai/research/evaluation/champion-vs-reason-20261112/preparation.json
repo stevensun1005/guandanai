@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "5b6dbfe4fefa85527d3efed6ff8a375561892bb7",
+  "sourceFiles": 184,
+  "protocolSHA256": "f9722f0f2a0a64a7e34d064df6877c0fb74dfb9f70137261cea027cea3fcbcd7",
+  "weights": {
+    "challenger": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "reason": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "belief": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+  },
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\champion-vs-reason-20261112",
+  "trainingUpdates": 0,
+  "formalGamesStarted": 0
+}
