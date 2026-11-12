@@ -1,0 +1,109 @@
+{
+  "purpose": "Engineering resource stop before outcome analysis; not original full1000-pair conclusion",
+  "completedRounds": 212,
+  "reason": "Allfour workers entered4GiB pause but retained solver legality/transposition caches; available memory around4.34GiB below5GiB resume caused stalled progress. Large workers had1.1/1.38GiB private memory.",
+  "originalDeadline": "2026-11-12T17:30:48.120Z",
+  "sourceCommit": "5b6dbfe4fefa85527d3efed6ff8a375561892bb7",
+  "originalProtocolSHA256": "f9722f0f2a0a64a7e34d064df6877c0fb74dfb9f70137261cea027cea3fcbcd7",
+  "status": {
+    "pid": 47600,
+    "phase": "stopped",
+    "plannedRounds": 2000,
+    "completedRounds": 212,
+    "workers": [
+      {
+        "pid": 47552,
+        "phase": "stopped",
+        "completedPairs": 20,
+        "protocolSHA256": "f9722f0f2a0a64a7e34d064df6877c0fb74dfb9f70137261cea027cea3fcbcd7",
+        "error": "Error: STOP\n    at checkpoint (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:172:30)\n    at async check (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:200:7)\n    at async comparisonRound (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:79:5)\n    at async worker (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:213:20)\n    at async file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:423:41",
+        "updatedAtUTC": "2026-11-12T14:35:31.472Z"
+      },
+      {
+        "pid": 47996,
+        "phase": "stopped",
+        "completedPairs": 19,
+        "protocolSHA256": "f9722f0f2a0a64a7e34d064df6877c0fb74dfb9f70137261cea027cea3fcbcd7",
+        "error": "Error: STOP\n    at checkpoint (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:172:30)\n    at async check (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:200:7)\n    at async comparisonRound (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:79:5)\n    at async worker (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:213:20)\n    at async file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:423:41",
+        "updatedAtUTC": "2026-11-12T14:35:31.457Z"
+      },
+      {
+        "pid": 22544,
+        "phase": "stopped",
+        "completedPairs": 39,
+        "protocolSHA256": "f9722f0f2a0a64a7e34d064df6877c0fb74dfb9f70137261cea027cea3fcbcd7",
+        "error": "Error: STOP\n    at checkpoint (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:172:30)\n    at check (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:200:13)\n    at comparisonRound (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:79:11)\n    at async worker (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:213:20)\n    at async file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:423:41",
+        "updatedAtUTC": "2026-11-12T14:35:41.833Z"
+      },
+      {
+        "pid": 54264,
+        "phase": "stopped",
+        "completedPairs": 28,
+        "protocolSHA256": "f9722f0f2a0a64a7e34d064df6877c0fb74dfb9f70137261cea027cea3fcbcd7",
+        "error": "Error: STOP\n    at checkpoint (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:172:30)\n    at async check (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:200:7)\n    at async comparisonRound (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:79:5)\n    at async worker (file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:213:20)\n    at async file:///D:/vibecoding/guandan/ai/local/workspace/worktrees/champion-reason-runtime-20261112/ai/research/tools/compare-champion-reason.mjs:423:41",
+        "updatedAtUTC": "2026-11-12T14:35:30.957Z"
+      }
+    ],
+    "deadlineUTC": "2026-11-12T17:30:48.120Z",
+    "updatedAtUTC": "2026-11-12T14:35:41.939Z"
+  },
+  "guardian": {
+    "pid": 39172,
+    "updatedAtUTC": "2026-11-12T14:35:30.816Z",
+    "deadlineUTC": "2026-11-12T17:30:48.120Z",
+    "stopped": true
+  },
+  "awake": {
+    "deadlineUTC": "2026-11-12T17:30:48.120Z",
+    "phase": "released",
+    "powerPlanChanged": false,
+    "updatedAtUTC": "2026-11-12T14:35:49.4418278+00:00",
+    "pid": 22132
+  },
+  "outputs": [
+    {
+      "slot": 0,
+      "pairs": 20,
+      "rawSHA256": "fa0263211588d9b45c91b7a43a283d76aecd125c2022489ee9f1cf67897b4095",
+      "file": "memory-pilot-worker-0.jsonl.gz",
+      "compressedSHA256": "5ab55763c5280c013503646247a6b76bab83e168b470ea0f3b50764c174a1c14"
+    },
+    {
+      "slot": 1,
+      "pairs": 19,
+      "rawSHA256": "c3ebfcba9e808427e0dadaa846449f78597e0fdb6d44d29e622dbf4d72580233",
+      "file": "memory-pilot-worker-1.jsonl.gz",
+      "compressedSHA256": "f70d258060f9d34554d56e9c35f936908a13d0ce77b4e07f6db1088d7489a056"
+    },
+    {
+      "slot": 2,
+      "pairs": 39,
+      "rawSHA256": "fcdcbf433085971535428ed9145a7afda5a886f43193429d23c96553f7364eb7",
+      "file": "memory-pilot-worker-2.jsonl.gz",
+      "compressedSHA256": "7de30a74381f5a54311a4a685c88f2f67a319073f9499d299cd23d147e3df9bf"
+    },
+    {
+      "slot": 3,
+      "pairs": 28,
+      "rawSHA256": "dc6644dd1591e4f92a4f26e8ed2b9a7034eb2088f3b03c0d2a3477d0fac0b2dd",
+      "file": "memory-pilot-worker-3.jsonl.gz",
+      "compressedSHA256": "02a090f692e6e7d7b62b7ac757fc669345d99f69758319b322023c54cf06ff8e"
+    }
+  ],
+  "partialReport": {
+    "complete": false,
+    "plannedPairs": 1000,
+    "completedPairs": 106,
+    "interval": {
+      "n": 106,
+      "mean": 0.09433962264150944,
+      "sd": 1.1362285307252857,
+      "ci95": [
+        -0.12196650818537605,
+        0.31064575346839496
+      ]
+    },
+    "scope": "Partial timed sample; not the full preregistered conclusion. Runtime may depend on game difficulty."
+  },
+  "disposition": "Preserve originalprotocol/seeds/weights/source/output. Freshindependentv2 will use2workers,perroundcoldsolvercache,CPUarenaoff,maxheap1GiB, andONLYoriginalremainingdeadline. Do not reuse pilot or its unusedreserved roots."
+}

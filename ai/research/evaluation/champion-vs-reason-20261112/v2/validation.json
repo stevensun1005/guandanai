@@ -1,0 +1,20 @@
+{
+  "node": {
+    "tests": 508,
+    "passed": 472,
+    "skipped": 36,
+    "failed": 0,
+    "command": "npm test -- --test-concurrency=4"
+  },
+  "researchPythonPassed": 41,
+  "format": "passed",
+  "build": "passed",
+  "memoryOptionsValueCheck": {
+    "candidateValues": 293,
+    "maxAbsDifference": 0,
+    "newGames": 0,
+    "optimizerUpdates": 0
+  },
+  "v1FrozenSourceFilesUnchanged": 184,
+  "scope": "Engineering compatibility, no v2 strength games yet"
+}

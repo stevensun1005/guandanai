@@ -179,6 +179,8 @@ async function worker(root, slot) {
           executionProviders: ['cpu'],
           intraOpNumThreads: 1,
           interOpNumThreads: 1,
+          enableCpuMemArena: false,
+          enableMemPattern: false,
         }),
       );
     const values = championValues(ort, sessions[0]);
@@ -190,12 +192,6 @@ async function worker(root, slot) {
       return plays[argmax(q)];
     };
     const budget = { ...SEARCH_BUDGETS.desktop };
-    const reason = createReasonBot({
-      ort,
-      championSession: sessions[1],
-      beliefSession: sessions[2],
-      budget,
-    });
     const check = async () => {
       await checkpoint();
       budget.midgameMs = budget.endgameMs = Math.min(
@@ -209,8 +205,18 @@ async function worker(root, slot) {
       save();
       const seed = plan.tasks[0].seeds[i],
         games = [];
-      for (const team of [0, 1])
+      for (const team of [0, 1]) {
+        const reason = createReasonBot({
+          ort,
+          championSession: sessions[1],
+          beliefSession: sessions[2],
+          budget,
+        });
         games.push(await comparisonRound({ seed, team, raw, reason, checkpoint: check }));
+        // Each independent round starts cold. Drop solver/legality caches before the next deal.
+        reason.engine.solver = null;
+        global.gc?.();
+      }
       const row = { task: 'head-to-head', seed, protocolSHA256: reg.protocolSHA256, games };
       pairedRows([row], reg.protocolSHA256, [seed]);
       appendFileSync(output, JSON.stringify(row) + '\n');
@@ -296,6 +302,7 @@ async function main(root) {
         (_, i) =>
           new Promise((ok, fail) => {
             const child = fork(SELF, [`--run=${root}`, `--worker=${i}`], {
+              execArgv: ['--expose-gc', '--max-old-space-size=1024'],
               windowsHide: true,
               stdio: ['ignore', fd, fd, 'ipc'],
             });

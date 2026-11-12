@@ -5553,7 +5553,8 @@
     {
       "id": "champion-vs-reason-20261112",
       "file": "ai/research/evaluation/champion-vs-reason-20261112/protocol.design.json",
-      "classification": "preregistered-independent-evaluation-no-training"
+      "classification": "v1memorypilot-preserved-v2fresh-independent-evaluation-not-started",
+      "activeProtocol": "ai/research/evaluation/champion-vs-reason-20261112/v2/protocol.design.json"
     }
   ],
   "researchChampions": [

@@ -1,0 +1,30 @@
+{
+  "id": "champion-vs-reason-v2-20261112",
+  "purpose": "Compare independentlyaccepted researchchampionv000061013 rawargmax against currentlydeployed9001 reason onold017. Evaluation only, not a new learning experiment.",
+  "primary": "Newrawmodel perspective: per-deal mean of two swapped-team signed single-round upgrade points;95% independent-deal sampleSD normalCI. Lower>0 newraw better onthissetting; upper<0 reasonbetter; crossing0 inconclusive.",
+  "plannedPairs": 1000,
+  "plannedRounds": 2000,
+  "workers": 2,
+  "budgetHours": "ONLY remaining original3h; originalstartUTC=2026-11-12T14:30:48.120Z",
+  "resume": "Originaldeadline only; completed results never replayed. Interruptedfullsize result stayspartial.",
+  "rules": "108physicalcards, seededlevel/leader, no tribute, play tofinalorder;1000turn truncationerror notdraw. Same physicaldeal/level/leader with bothteamallocations.",
+  "raw": "Final7h researchchampion4f5d8ef4...6768,allcanonicalcandidates,rawargmax,notsearch",
+  "reason": "Current9001:017462afc99...b3f7+beliefv1 16d76783...65e9,21–40cards8worlds top6+pass net2;<=20cards8worlds exactPIMC;else/fallback017 deployedtablepolicy.",
+  "budget": "NativeCPU1thread/session,4processes;50s reasoning/3s solvercall/300kTT,52s late-reply fallback,remainingwindow cap. DeterministicsearchSeedOf(dealseed), walltime/loaddependent.",
+  "metrics": [
+    "per-side W/L/D",
+    "finishingrankpairs/doubleups/down",
+    "reason requests/completions/deviations/fallbacktypes/minworlds/searchtime",
+    "raw/reason totalwalltime"
+  ],
+  "limits": [
+    "one matchup, two homogeneousAI teams; no tribute/fullmatch/humans/mobile inference",
+    "Rawnetwork vs deployedreason includes search/tablepolicy differences; not same-base search ablation",
+    "No weights updated, no newreasonbase, no webpage/default changes",
+    "All results includinglosses preserved; no sampleexpansion or posthoc checkpoint selection"
+  ],
+  "sourceSupersedes": "v1engineeringmemorypause only; no outcome-drivenmodelselection",
+  "resourcePolicy": "CPUarenas/memorypattern disabled;2workers,1GiBV8heap each;newsolverperindependentround,dropfullsolver+legalcache andGCafterround. Withinround30万TT/50sreason/3ssolver andsame8worlds/top6/net2 unchanged.",
+  "cacheCaveat": "Cold perroundcache preserves solvedvalues but can affect time-budget fallbacks; reportthem. This is native desktop-equivalentsearch with explicitallocationpolicy, not browserlatency or bitwisecachehistory reproduction.",
+  "deadlineUTC": "2026-11-12T17:30:48.120Z"
+}
