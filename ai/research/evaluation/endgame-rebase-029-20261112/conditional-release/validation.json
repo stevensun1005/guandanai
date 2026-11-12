@@ -1,0 +1,27 @@
+{
+  "observedAtUTC": "2026-11-12T18:30:54.348Z",
+  "scope": "Conditional publication implementation and engineering preview only; not strength",
+  "node": {
+    "passed": 479,
+    "skipped": 36,
+    "failed": 0
+  },
+  "learnerPython": 10,
+  "researchPython": 41,
+  "format": true,
+  "build": true,
+  "preview": {
+    "studentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
+    "chromeWasmPositions": 16,
+    "argmaxAllEqual": true,
+    "maxAbsDifference": 0.0000014901161193847656,
+    "pageErrors": [],
+    "production": true,
+    "coachLayouts": 9,
+    "replaySecurity": true,
+    "matchingReasonCatalogRegression": 34
+  },
+  "heldoutCompletedPairs": 0,
+  "finalStudentCompatibilityStillRequired": true,
+  "webCatalogChanged": false
+}

@@ -1,5 +1,7 @@
 <div align="center">
 
+所有者已授权本批训练后自动评测，三项独立提升门槛与兼容检查通过后自动打包发布新reason；当前仍在训练，尚无新学生提升结论。[条件发布](ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
+
 Windows状态文件冲突已通过停机存档和新冻结源码修复，续用匹配检查点/Adam与原截止；这是工程恢复，不是提升结论。见[修订2](ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json)。
 
 029尾盘增量迁移已在Windows真实启动，预检2次更新不继承，正式GPU新增更新已观察。固定11月13日03:58美东停训练，随后A/B/C独立评测，不自动发布学生。[实际启动](ai/research/evaluation/endgame-rebase-029-20261112/startup.json)。

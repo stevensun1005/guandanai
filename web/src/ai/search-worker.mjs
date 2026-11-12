@@ -34,6 +34,7 @@ import { createRound } from '../../../ai/shared/simulation/simulation.mjs';
 import { publicView } from '../../../ai/danMCai/belief/features.mjs';
 import { candidates } from './candidates.js';
 import { policyState } from './observation.js';
+import { studentDecision, STUDENT_THRESHOLD } from './search/student.mjs';
 
 ort.env.wasm.numThreads = 1;
 ort.env.wasm.proxy = false;
@@ -53,6 +54,20 @@ async function load(id, budget) {
       graphOptimizationLevel: 'all',
     });
   };
+  if (bot.kind === 'endgame-student') {
+    const [baseSession, studentSession] = await Promise.all([
+      open(base.file, 'bot:' + base.id),
+      open(botModel(bot.student.id).file, 'bot:' + bot.student.id),
+    ]);
+    const values = championValues(ort, baseSession),
+      studentValues = championValues(ort, studentSession);
+    const opening = createRound(1),
+      plays = candidates(opening.hands[opening.turn], opening.L, null);
+    const state = policyState(opening, opening.turn, 0, plays);
+    await values(state);
+    await studentValues(state);
+    return { id, budget, kind: bot.kind, values, studentValues };
+  }
   const [champion, belief] = await Promise.all([
     open(base.file, 'bot:' + base.id),
     open(bot.belief.file, 'belief:' + bot.id),
@@ -101,6 +116,28 @@ async function search(payload, remainingMs) {
     throw error;
   }
   const band = searchBand(remainingCards(game));
+  if (engine.kind === 'endgame-student') {
+    if (remainingMs <= 0) return { fallback: true, reason: 'budget' };
+    const decision = await studentDecision(
+      game,
+      engine.values,
+      engine.studentValues,
+      payload.offset,
+    );
+    const play = decision.plays[decision.index];
+    return {
+      ok: true,
+      kind: decision.kind,
+      index: decision.index,
+      championIndex: decision.championIndex,
+      candidates: decision.plays.length,
+      ids: play ? play.cards.map((c) => c.id) : [],
+      shape: play ? { type: play.type, value: play.value, n: play.n } : null,
+      worldsUsed: 0,
+      inferences: decision.kind === 'champion' ? 1 : 2,
+      ms: performance.now() - started,
+    };
+  }
   if (!band) return { fallback: true, reason: 'out-of-band' };
   const counter = { inferences: 0 };
   const ctx = {
@@ -165,6 +202,21 @@ async function coach(payload, job, remainingMs) {
   } catch (error) {
     if (error instanceof KnownCardsError) return { fallback: true, reason: 'known-cards' };
     throw error;
+  }
+  if (engine.kind === 'endgame-student') {
+    if (remainingCards(game) > STUDENT_THRESHOLD) return { fallback: true, reason: 'out-of-band' };
+    const r = await studentDecision(game, engine.values, engine.studentValues, payload.offset);
+    return {
+      ok: true,
+      kind: r.kind,
+      plays: r.plays.map((play) => (play ? play.cards.map((c) => c.id) : [])),
+      base: Array.from(r.base),
+      values: r.values,
+      worlds: 0,
+      used: 0,
+      evaluated: r.plays.length,
+      ms: performance.now() - started,
+    };
   }
   const band = searchBand(remainingCards(game));
   if (!band) return { fallback: true, reason: 'out-of-band' };

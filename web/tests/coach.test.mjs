@@ -12,7 +12,7 @@ import {
   mergeSearchValues,
   rankedCoachActions,
 } from '../src/coach/evaluation.mjs';
-import { BOT_CHOICES, searchBot } from '../src/ai/model-catalog.mjs';
+import { BOT_CHOICES, searchBot, botModelName } from '../src/ai/model-catalog.mjs';
 import catalog from '../src/ai/model-catalog.json' with { type: 'json' };
 import { makeDeck } from '../src/core/cards.js';
 import { rotateSnapshot } from '../src/network/snapshot.js';
@@ -32,11 +32,12 @@ test('online evaluation requires explicit host permission and never uses a retir
   // champion weights: fallback values, single extra moves and the private table
   assert.equal(COACH_MODEL_ID, catalog.selection.danMCaiChampions[0]);
   assert.equal(COACH_MODEL_ID, catalog.defaultId);
-  // The new champion has no separately validated search bot yet. Historical 9001 stays on017.
-  assert.equal(COACH_SEARCH_BOT_ID, null);
+  // A later accepted reason may be added on029; historical9001 must stay on017.
+  const currentReason = BOT_CHOICES.find((choice) => searchBot(choice.id));
+  assert.equal(COACH_SEARCH_BOT_ID, currentReason?.id ?? null);
   assert.equal(searchBot('9001').base, '017');
   assert.ok(!BOT_CHOICES.some((choice) => choice.id === '9001'));
-  assert.equal(COACH_NAME, 'danMCai-v000061013');
+  assert.equal(COACH_NAME, botModelName(currentReason?.id ?? COACH_MODEL_ID));
 });
 
 test('search values replace the champion values only for the moves the search evaluated', () => {

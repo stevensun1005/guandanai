@@ -1,5 +1,7 @@
 # 模型研究与证据
 
+本批最终A/B/C完整且三项95%下界正后可自动发布训练尾盘reason，见[条件授权](evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)；当前没有新学生棋力结论。
+
 029尾盘迁移的Windows状态替换故障已完成停止审计与新冻结源码恢复；原窗口、检查点/13组Adam和计数保留，未运行留出，不宣称提升。见[修订2](evaluation/endgame-rebase-029-20261112/runtime-note-2.json)。
 
 [029尾盘迁移实际启动](evaluation/endgame-rebase-029-20261112/startup.json)：已观察真实新GPU更新，142冻结源码不变；正式数据/Adam不继承预检，当前没有新学生独立棋力结论。

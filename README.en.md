@@ -1,5 +1,7 @@
 <div align="center">
 
+The owner authorized automatic packaging and web release only after complete independent improvement gates and compatibility checks. Training is still active; no new student improvement is established. [Conditional release](ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json).
+
 Windows metadata locks were addressed with an archived stop and a new frozen runtime. Recovery keeps the matched checkpoint/Adam and original deadlines; it is not evidence of stronger play. [Recovery amendment2](ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json).
 
 The029-based endgame delta-transfer run is now active on Windows with actual new GPU updates, separate from its two synthetic checks. Training stops Nov13 at03:58Toronto; final/initial/r2 paired evaluation follows without automatic student deployment. [Actual startup](ai/research/evaluation/endgame-rebase-029-20261112/startup.json).

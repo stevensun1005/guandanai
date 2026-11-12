@@ -1,3 +1,7 @@
+# 2026-11-12 尾盘reason条件发布（尚未发布）
+
+所有者已授权本批尾盘学生在完整独立门槛通过后自动发布。被测策略为029开局、剩余32张以内用训练学生的原网络值greedy出牌，不是旧9001的多世界搜索，也不把原Q当作校准升级分/胜率。通过时新建独立reason编号、保留029纯网络冠军，菜单默认和普通评价使用新reason（32张外或失败时用029）。未达标不改现网站。固定规则及证据见[条件发布协议](../../ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)；下面旧发布状态保留历史口径。
+
 # 网页电脑：Clint、GuanZero、danMCai 与 danMCai-reason
 
 2026-11-12最新发布：所有者明确授权新纯网络冠军029/v000061013。当前selection.danMCaiChampions=[029,017]，defaultId/defaultChoice=029；无新底座搜索验收时菜单暂三项Clint/最新GuanZero/029，评价回落029网络值。旧9001/017及历史推理证据保留归档，不能把旧9001静默改底座。门控格式桥接保留原固定样本gate完整指标/规则/原始SHA，不冒称SPRT。见[冠军清单](../../ai/research/evaluation/web-champion-029-20261112/champion.json)。下方旧017/9001当前值描述按日期保留为历史。

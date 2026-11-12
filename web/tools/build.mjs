@@ -87,6 +87,7 @@ for (const model of BOT_MODELS) {
 for (const bot of SEARCH_BOTS) {
   const base = searchBot(bot.id) && BOT_MODELS.find((model) => model.id === bot.base);
   if (!base) throw Error(`Search bot ${bot.id} has no base model`);
+  if (bot.kind === 'endgame-student') continue; // student is an archived BOT_MODEL, already copied
   const bytes = await modelBytes(root, { id: 'belief:' + bot.id, ...bot.belief });
   botBytes.set(bot.belief.file, bytes);
   modelVersions['belief:' + bot.id] = bot.belief.sha256.slice(0, 16);

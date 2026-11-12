@@ -1,0 +1,73 @@
+{
+  "schema": "danmcai-conditional-endgame-release-v1",
+  "ownerInstruction": "训练完自动评测，有提升就把新的reason模型打包发布到网页上",
+  "recordedAtUTC": "2026-11-12T18:27:54.059Z",
+  "heldoutStartedWhenRegistered": false,
+  "trainingWindowUnchanged": true,
+  "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+  "evaluationDeadlineUTC": "2026-11-13T11:58:54.268Z",
+  "publicationDeadlineUTC": "2026-11-13T14:00:00.000Z",
+  "publicationDeadlineScope": "Postprocessing/deployment only. No extension of training or heldout games.",
+  "base": "029",
+  "baseSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "initialSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
+  "r2SHA256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef",
+  "seedAuditSHA256": "7e661d8f3575092a7fbceca0573fe68a041a01b8f13d076067861494697af6a9",
+  "gate": {
+    "pairsEach": 3000,
+    "groups": [
+      "A-final",
+      "B-transferred-initial",
+      "C-original-r2"
+    ],
+    "allStrictLowerBoundsAboveZero": [
+      "A vs029",
+      "paired A-B",
+      "paired A-C"
+    ],
+    "confidence": 0.95,
+    "incomplete": "do-not-publish",
+    "uncertain": "do-not-publish",
+    "peakSelection": false,
+    "resampling": false
+  },
+  "policy": {
+    "kind": "endgame-student",
+    "threshold": 32,
+    "aboveThreshold": "029 greedy",
+    "belowThreshold": "final student greedy",
+    "finishingMoveFirst": true,
+    "hiddenInformation": false,
+    "mixOldBeliefSearch": false,
+    "rawChampionRemains": "029"
+  },
+  "publication": {
+    "newReasonId": true,
+    "defaultReasonOnAccept": true,
+    "compatibility": "Native/ChromeWASM argmax equal, maxabs2e-4; production/coach/replay security and Pages success",
+    "immutableWeightsTool": "ai/publishing/publish-web-model.mjs",
+    "packageDownloads": true,
+    "packageRelease": true,
+    "protected": [
+      "root drafts",
+      "other machine/route/frozen runs",
+      "017",
+      "old reason9001",
+      "raw champion029",
+      "human data"
+    ],
+    "noStrengthGuarantee": true
+  },
+  "repository": "D:/vibecoding/guandan",
+  "deliveryRoot": "D:/vibecoding/guandan/ai/local/workspace/worktrees/endgame-release-delivery-20261113",
+  "releaseToolSHA256": "909ea6a8ab37b1b0224820f0287895d78904c1d973a5a8fa74675f61e78a87bd",
+  "publicationSourceSHA256": {
+    "ai/publishing/student-browser-reference.mjs": "a380494b5548d874e09d0a51e9da0b7c4337febfcab6057f43959dad9b225138",
+    "web/src/ai/search/student.mjs": "cbcbf41ac4c7d0bcb471094f5c9231745c979b7c4f60ea26241ced68ea42b3d6",
+    "web/src/ai/search-worker.mjs": "fe229a7a5a71c44db46f2815c6793ba5347b44e9c06d646508ba374edc01ceb0"
+  },
+  "gpuPython": "D:/vibecoding/guandan/ai/danMCai/environment/gpu-runtime/Scripts/python.exe",
+  "browserPython": "C:/Users/Admin/AppData/Local/Programs/Python/Python313/python.exe",
+  "powershell": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1111-574-0_26.1111.574.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+  "downloads": "C:/Users/Admin/Downloads"
+}

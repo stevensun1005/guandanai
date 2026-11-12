@@ -127,6 +127,20 @@
         "type": "dev",
         "text": "工程恢复，不是棋力证据"
       }
+    },
+    {
+      "key": "conditional-release",
+      "title": "独立评测有提升后打包发布新reason",
+      "kind": "descriptive",
+      "after": "endgame-summary",
+      "desc": "三组完整及A/A-B/A-C区间下界全正；Chrome WASM/联机恢复等检查后发布，否则保留现站",
+      "paths": {
+        "result": "conditional-release/dashboard-record.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "条件发布授权，不等于已通过或已发布"
+      }
     }
   ]
 }

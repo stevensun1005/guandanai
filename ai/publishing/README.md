@@ -27,3 +27,5 @@ Mac 续训与 Windows 原运行按相同冠军证据发布；`--source` 写实�
 本机 io48 从已完成的十二小时批次发布，准备与正式发布都须提供 `--evaluated-suite` 和该目录的 `model.onnx`。详见[同批发布](../../web/docs/WEB_MODELS.md#guanzero-每十二小时评测并发布)。
 
 GuanZero从2026-11-09晚批起按三对手计划发布：Clint、普通冠军、danMCai-reason各500场全部完成且身份一致才可登记同一冻结权重。历史批次保留原名单；reason的底座/推断网络/搜索预算也参与校验，见[GuanZero协议](../guanzero/README.md#danmcai-reason评测协议)。
+
+- [endgame-release.mjs](endgame-release.mjs)：所有者授权的有界条件发布伴随进程，等待原冻结训练自动完成A/B/C，重新从逐副结果核对完整性与SHA。仅当A/A−B/A−C的95%下界均正才在新detached发布树中做兼容/UI/测试并调用既有权重发布器，打包Downloads/Release、推main并核验Pages。训练文件只读，研究冠军029不变；失败、竞争、部分或不确定均关闭发布，保留原因。见[本批协议](../research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。

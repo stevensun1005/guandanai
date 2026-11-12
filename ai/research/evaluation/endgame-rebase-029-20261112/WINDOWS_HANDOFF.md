@@ -1,5 +1,7 @@
 # 029底座尾盘迁移：Windows实际运行交接
 
+**条件发布新授权**：所有者已要求训练结束自动评测，有提升则打包新reason发布。原“不自动部署”是此前协议的历史边界，现由[独立条件发布授权](conditional-release/authorization.json)补充，不热改原训练。冻结伴随进程只读等待FINISHED及完整A/B/C，三项95%下界严格为正才走新发布树/Chrome WASM/测试/Release/main/Pages。旧029纯网络冠军不动；新reason部署实际被测的32张尾盘学生策略，与旧9001多世界搜索分开。未通过或不完整不发；运行状态在 `conditional-release/status.json`，失败保留原因，不凭旧PID重启。
+
 **工程恢复修订2**：两次Windows状态JSON替换PermissionError后，已正常停机并核验最终检查点/13组Adam，2550新更新、1304631摄入行。原1415fac源码、协议、注册和数据原件保留；修复源码冻结d965701，在同一运行恢复匹配网络/Adam与原计数，不重开16小时。新源码位置为 `ai/local/workspace/worktrees/endgame-rebase-029-io-runtime-20261112`，实际恢复协议见[完整修订](protocol-io-recovery.json)、[原截止注册](registration-io-recovery.json)、[停机审计](recovery-stop-audit.json)、[注记](runtime-note-2.json)。下方原启动描述为历史；已于18:02:06Z实际恢复GPU/四演员，并观察新增更新与摄入增长，见[恢复启动](recovery-startup.json)；当前计数须读实时状态。独立留出尚未执行，不宣称提升。
 
 2026-11-12所有者已选择“r2相对017的权重增量迁到新冠军、新Adam”。本批已经启动，当前读实时文件；原017续训协议未启动并按历史保留。本文件不要求重新启动窗口。

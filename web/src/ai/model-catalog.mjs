@@ -1,5 +1,6 @@
 import catalog from './model-catalog.json' with { type: 'json' };
 import { SEARCH_BOT_V1, SEARCH_CORE_VERSION } from './search/constants.mjs';
+import { STUDENT_CORE_VERSION, STUDENT_THRESHOLD } from './search/student.mjs';
 
 /**
  * Menu policy (owner 2026-11-09): exactly four entries, see selectableModels. The former
@@ -21,6 +22,16 @@ const sameParams = (a, b) =>
  * never pass search decisions off as pure champion decisions.
  */
 export function searchBotManifest(bot, base) {
+  if (bot.kind === 'endgame-student')
+    return {
+      schema: 'danMCai-endgame-student-v1',
+      id: bot.id,
+      kind: bot.kind,
+      base: { id: base.id, sha256: base.sha256, version: base.source.version },
+      student: { ...bot.student },
+      threshold: bot.threshold,
+      core: STUDENT_CORE_VERSION,
+    };
   return {
     schema: 'danMCai-search-bot-v1',
     id: bot.id,
@@ -40,6 +51,31 @@ function validateSearchBots(value) {
     files = new Set(value.models.map((m) => m.file));
   for (const bot of bots) {
     const base = value.models.find((m) => m.id === bot.base);
+    if (bot.kind === 'endgame-student') {
+      const student = value.models.find((m) => m.id === bot.student?.id);
+      if (
+        !/^\d{3,}$/.test(bot.id) ||
+        ids.has(bot.id) ||
+        !base ||
+        base.config.history ||
+        base.config.extraFeatures ||
+        !Number.isInteger(base.source?.champion?.gate) ||
+        !student ||
+        student.id === base.id ||
+        student.config.history ||
+        student.config.extraFeatures ||
+        student.sha256 !== bot.student.sha256 ||
+        bot.threshold !== STUDENT_THRESHOLD ||
+        !/^[a-f0-9]{64}$/.test(bot.sha256) ||
+        !/^[\w.-]{1,80}$/.test(bot.version) ||
+        value.defaultId === bot.id ||
+        bot.belief ||
+        bot.search
+      )
+        throw Error('Invalid endgame student bot');
+      ids.add(bot.id);
+      continue;
+    }
     if (
       !/^\d{3,}$/.test(bot.id) ||
       ids.has(bot.id) ||

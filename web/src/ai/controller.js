@@ -115,7 +115,7 @@ export function initialize() {
       const bot = searchBot(seatModel(p));
       if (!bot || game.turn !== p || privateSeat(runtime, p)) return null;
       const cards = game.hands.reduce((sum, hand) => sum + hand.length, 0);
-      if (!searchBand(cards)) return null;
+      if (bot.kind !== 'endgame-student' && !searchBand(cards)) return null;
       const plays = candidates(game.hands[p], game.L, game.trick?.play);
       if (plays.length === 1 || plays.some((play) => play?.cards.length === game.hands[p].length))
         return null;

@@ -346,7 +346,7 @@ function grade(s, action) {
   const value = s.scores.get(key);
   if (value === null) return '未进入推理搜索，不评分';
   const score = relativeRating(s.values, value);
-  return `合理性 ${score.percent}%${score.flat ? ' · 候选无明显分差' : ''}${s.source === 'champion' ? '' : ' · 推理'}`;
+  return `合理性 ${score.percent}%${score.flat ? ' · 候选无明显分差' : ''}${s.source === 'endgame-student' ? ' · 尾盘网络' : s.source === 'champion' ? '' : ' · 推理'}`;
 }
 
 /** True only when a percentage preview was actually displayed before this move. */
@@ -453,9 +453,11 @@ function renderTop5(s, game) {
       : `明牌推演 ${s.search.horizon} 步 · 已评估 ${s.search.evaluated} 种出法`
     : s.source === 'midgame'
       ? `推理搜索 · ${s.reasoning.worlds} 个推断世界打完本局 · 评估 ${s.reasoning.evaluated}/${s.actions.length} 种`
-      : s.source === 'endgame'
-        ? `残局推理 · ${s.reasoning.worlds} 个推断世界精确求解 · ${s.actions.length} 种出法`
-        : `${s.fallback ? '推理未完成，用冠军估值 · ' : ''}已比较 ${s.actions.length} 个候选 · 点击选牌，不会自动打出`;
+      : s.source === 'endgame-student'
+        ? `尾盘网络估值 · ${s.actions.length} 种出法 · 非校准概率`
+        : s.source === 'endgame'
+          ? `残局推理 · ${s.reasoning.worlds} 个推断世界精确求解 · ${s.actions.length} 种出法`
+          : `${s.fallback ? '推理未完成，用冠军估值 · ' : ''}已比较 ${s.actions.length} 个候选 · 点击选牌，不会自动打出`;
   list.replaceChildren(
     ...top.map((row, index) => {
       const item = document.createElement('li'),
@@ -483,9 +485,11 @@ function renderTop5(s, game) {
           gap.className = 'coach-gap';
           gap.textContent = `差 ${(row.value - top[0].value).toFixed(2)}`;
           gap.title =
-            s.source === 'champion'
-              ? '与第一名的平均结果差（单位约等于本局升级分），越接近 0 差别越小'
-              : '与第一名的推断世界平均本局得分差（升级分），越接近 0 差别越小';
+            s.source === 'endgame-student'
+              ? '尾盘网络原值之差，未校准为升级分或胜率'
+              : s.source === 'champion'
+                ? '与第一名的平均结果差（单位约等于本局升级分），越接近 0 差别越小'
+                : '与第一名的推断世界平均本局得分差（升级分），越接近 0 差别越小';
           score.append(' ', gap);
         }
       }

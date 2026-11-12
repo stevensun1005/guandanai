@@ -1,5 +1,7 @@
 # danMCai 模型
 
+本批已获训练结束后条件发布reason授权；原计算窗口/源码不变，发布伴随进程独立有界，见[条件授权](../research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
+
 Windows状态替换故障通过先停机归档、冻结修复源码后在原窗口恢复，见[工程修订2](../research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json)；学习目标、种子和截止不变。
 
 [029尾盘迁移已真实运行](../research/evaluation/endgame-rebase-029-20261112/startup.json)，正式GPU新增更新与4路采样已核验；训练截止11月13日03:58:54美东。不是尚未启动的准备，也不是新学生棋力已通过。

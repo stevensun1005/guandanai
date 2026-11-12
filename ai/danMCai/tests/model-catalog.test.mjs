@@ -61,23 +61,24 @@ test('the menu offers Clint, newest GuanZero and new champion until a matching r
   assert.ok(generations.length >= 2);
   // Owner 2026-11-09: four entries; P0 001, the previous champion 012 and older GuanZero
   // generations stay archived in `models` but are no longer offered.
-  assert.deepEqual(choices, [CLINT_RULE_ID, generations[0], '029']);
+  const reason = BOT_CHOICES.find((b) => b.base === '029');
+  assert.deepEqual(choices, [CLINT_RULE_ID, generations[0], '029', ...(reason ? [reason.id] : [])]);
   for (const retired of ['001', '012', '017', generations[1]]) {
     assert.ok(
       BOT_MODELS.some((m) => m.id === retired),
       `${retired} stays archived`,
     );
-    assert.equal(botChoiceId(retired), '029', `${retired} falls back to the default`);
+    assert.equal(botChoiceId(retired), DEFAULT_BOT_MODEL, `${retired} falls back to the default`);
     assert.equal(botModelId(retired), retired, 'old rooms and records still resolve it');
   }
   // Owner decision 2026-11-09: new players default to the reasoning bot over champion 017.
-  assert.equal(DEFAULT_BOT_MODEL, '029');
+  assert.equal(DEFAULT_BOT_MODEL, reason?.id ?? '029');
   assert.equal(NEURAL_DEFAULT_MODEL, '029');
   assert.equal(botModelName(CLINT_RULE_ID), 'Clint规则机器人');
   assert.equal(botModelName('017'), 'danMCai-v000855042');
   assert.equal(botModelName('9001'), 'danMCai-reason-v000855042');
   assert.match(botModelName(generations[0]), /^guanzero-[a-z0-9-]+-\d+$/);
-  assert.equal(botChoiceId('006'), '029');
+  assert.equal(botChoiceId('006'), DEFAULT_BOT_MODEL);
   assert.equal(botModelId('006'), '006');
   assert.equal(botChoiceId(CLINT_RULE_ID), CLINT_RULE_ID);
   const catalog = {
