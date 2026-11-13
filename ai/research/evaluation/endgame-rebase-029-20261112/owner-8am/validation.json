@@ -1,0 +1,24 @@
+{
+  "observedAtUTC": "2026-11-13T05:07:11.446Z",
+  "sourceCommit": "2b47277386eb40d7dc2e232004e42d15f5bc061f",
+  "node": {
+    "tests": 517,
+    "passed": 481,
+    "skipped": 36,
+    "failed": 0
+  },
+  "learnerPythonPassed": 10,
+  "researchPythonPassed": 41,
+  "format": true,
+  "build": true,
+  "pages": {
+    "run": 43368135784,
+    "conclusion": "success"
+  },
+  "scope": "Engineering/deadline/summary/GPU routing checks, not strength. Final heldout still required.",
+  "trainingDeadlineUTC": "2026-11-13T10:00:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-13T13:00:00.000Z",
+  "reserveGiB": 4,
+  "resumeGiB": 5,
+  "actorCap": 8
+}
