@@ -10,6 +10,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 source = json.loads((OUT.parents[3] / 'web/src/ai/model-catalog.json').read_text(encoding='utf8'))
 guanzero = [m['id'] for m in source['models'] if m['config'].get('history') == 'guanzero-v1']
 champion = source['selection']['danMCaiChampions'][0]
+champion_version = next(model['source']['version'] for model in source['models'] if model['id'] == champion)
 reason = [b['id'] for b in source.get('searchBots', []) if b['base'] == champion][-1:]
 # four entries since 2026-11-09: Clint, the newest GuanZero, the current champion, danMCai-reason
 expected_choices = ['clint-rule', guanzero[-1], champion, *reason]
@@ -34,7 +35,7 @@ with sync_playwright() as p:
         assert [c['id'] for c in catalog['choices']] == expected_choices
         assert catalog['neuralDefaultId'] == source['defaultId'] == source['selection']['danMCaiChampions'][0]
         assert catalog['defaultId'] == source['selection'].get('defaultChoice', source['defaultId'])
-        assert [c['name'] for c in catalog['choices']][-1] == 'danMCai-reason-v000855042'
+        assert labels[-1] == ('danMCai-reason-' if reason else 'danMCai-') + champion_version
         assert all(page.locator(f'[data-bot-seat={s}]').input_value()==catalog['defaultId'] for s in ['S','E','N'])
         assert page.locator('[data-bot-seat=W]').input_value() == 'clint-rule'
         assert page.evaluate("typeof G") == "undefined"

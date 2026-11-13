@@ -260,11 +260,92 @@
     },
     "productionSmoke": "Globals hidden, three policy turns, model028/029 loaded, zero page errors",
     "seatCredentials": "Actual PeerJS previous holders and departed credentials refused; passed",
-    "screenshots": "Five actual Chrome viewports inspected locally; no iPad Safari device claim"
+    "screenshots": "Five actual Chrome viewports inspected locally; no iPad Safari device claim",
+    "privateTableSmoke": {
+      "kind": "test",
+      "strengthMatches": 0,
+      "completedRounds": 0,
+      "trainingUpdates": 0,
+      "realPeerJS": true,
+      "hostOnlyNicknameGate": true,
+      "guestSameNameDenied": true,
+      "noPrivateRuleFlagBroadcast": true,
+      "privateCoach": {
+        "modelId": "029",
+        "search": {
+          "candidates": 2,
+          "evaluated": 2,
+          "mode": "round",
+          "horizon": 4,
+          "maxPlies": 12,
+          "leafSeat": "advising player, or partner after finishing",
+          "mismatchedLeaves": 0,
+          "fullRollouts": 24,
+          "minRollouts": 12,
+          "truncatedRollouts": 0,
+          "maxSamples": 12,
+          "priorWeight": 4,
+          "temperature": 0.03,
+          "elapsedMs": 1541,
+          "fullInformation": true
+        }
+      },
+      "partnerUsesOracle": true,
+      "opponentStaysRules": true,
+      "neuralOpponentUsesOnlyPublicObservation": true,
+      "manualOutsideBeamRated": false,
+      "offRestoresPartnerRules": true,
+      "privateHandsMatchHeldCounts": true,
+      "constructedCompletionExcluded": true,
+      "uploads": 0,
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "topFiveInViewport": true
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "topFiveInViewport": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "botSetupSmoke": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "seatRotations": 4,
+        "modelsPersisted": true,
+        "pageErrors": []
+      }
+    ],
+    "finalChecks": "After fixture update:518Node/482pass/36skip, research41pass, shared3pass/1skip, format/build pass; browser bundle unchanged23b4ed9604"
   },
   "deployment": {
     "status": "pending",
-    "site": "https://stevensun1005.github.io/guandanai/"
+    "site": "https://stevensun1005.github.io/guandanai/",
+    "sourceCodeCommit": "19d513d359a411e9a4353af661394d8bf302f392"
   },
   "strengthEvaluation": {
     "newGames": 0,
@@ -277,5 +358,11 @@
     "newTrainingStarted": false,
     "ownerHold": "029-reason and new training remain not started"
   },
-  "rootDraftsPreserved": 10
+  "rootDraftsPreserved": 10,
+  "regressionFixtureUpdate": {
+    "file": "web/tests/bot_setup_smoke.py",
+    "previousAssumption": "Last menu label hard-coded to danMCai-reason-v000855042",
+    "reason": "029 was already published with no029-search entry; test must check current champion source.version and whether a same-base reason entry exists",
+    "result": "Dynamic exact label assertion passed; does not change menu or champion"
+  }
 }
