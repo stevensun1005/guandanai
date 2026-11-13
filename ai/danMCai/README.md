@@ -115,3 +115,5 @@ self-only离线拟合已完成（1,906展示层样本／3,393字节，零网络�
 reason比较当前使用内存修正版v2，原数学搜索参数与网络不变；冷缓存的限时回落须单报。 [v2](../research/evaluation/champion-vs-reason-20261112/v2/protocol.design.json)。
 
 reason对照v2已按原剩余窗口启动，两工作器使用独立新牌副。[实际启动](../research/evaluation/champion-vs-reason-20261112/v2/startup.json)；训练不重开，网页不更换。
+
+[08:00尾盘最终结果](../research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)已记录；是否成为网页reason另看条件发布结果。

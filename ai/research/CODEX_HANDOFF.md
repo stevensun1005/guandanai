@@ -490,3 +490,5 @@ Clint UI同步1586875已完成并线上核验：代码01799f6，Pages42501549267
 所有者追加尾盘reason条件发布授权：原训练完成自动A/B/C，三组各3000副且A/A−B/A−C的95%下界全正后，新独立伴随进程打包/验证/Release/main/Pages；当前清单不变，原训练不热改，见[协议与状态](evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
 
 最新所有者澄清为05:00停训练、08:00评测截止，随后总结/打包；8演员与宽候选DML、4CPU评测，旧时间均为历史。[本批修订与恢复](evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)，旧冻结检出不改；完整/部分和正负结果均总结推main，研究包不当成网页验收。
+
+08:00尾盘窗口已结束并记录所有结果（包括部分/负/失败），见[最终总结](evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)。是否发布须另读release证据，不以步数或训练损失宣称提升。

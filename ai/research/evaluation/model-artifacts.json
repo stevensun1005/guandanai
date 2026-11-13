@@ -5593,7 +5593,7 @@
     {
       "id": "endgame-rebase-029-20261112",
       "protocol": "ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json",
-      "status": "training-resumed-owner5AM8AM-GPU-amendment",
+      "status": "complete",
       "baseSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
       "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
       "startup": "ai/research/evaluation/endgame-rebase-029-20261112/startup.json",
@@ -5604,7 +5604,14 @@
       "conditionalReleaseAuthorization": "ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json",
       "evaluationDeadlineUTC": "2026-11-13T13:00:00.000Z",
       "ownerAmendment": "ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json",
-      "ownerAmendmentStartup": "ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/startup.json"
+      "ownerAmendmentStartup": "ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/startup.json",
+      "finalCloseout": "ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json",
+      "heldoutCompletedPairs": {
+        "A": 3000,
+        "B": 3000,
+        "C": 3000
+      },
+      "conditionalPublicationAccepted": false
     }
   ]
 }

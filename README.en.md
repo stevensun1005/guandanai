@@ -187,3 +187,5 @@ Research champion v000061013 passed its preregistered10000-round gate: +.0990 up
 Evaluation v2 uses fresh1000 deals,twoCPUworkers and coldper-roundsolver caches within the original12:30Toronto cutoff. The212-roundv1memorypilot is preserved as partial engineering evidence. [v2](ai/research/evaluation/champion-vs-reason-20261112/v2/protocol.design.json)。
 
 The memory-bounded reason comparison v2 started at 14:46:43Z with two workers and fresh deals, within the original 17:30:48Z cutoff. This is evaluation only; no final conclusion yet. [Startup evidence](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json).
+
+The08:00 endgame window ended (complete); complete, partial and negative evidence is preserved. Conditional release is not accepted; current model retained. [Closeout](ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json).

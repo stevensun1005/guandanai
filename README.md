@@ -184,3 +184,5 @@ GuanZero定时开发评测最新安排：danMCai现任门控冠军500场、danMC
 评测内存修正版v2：新1000副、两CPU、每局冷求解缓存；原12:30美东截止不延长。v1的212局工程部分记录保留，不作全量结论。 [v2](ai/research/evaluation/champion-vs-reason-20261112/v2/protocol.design.json)。
 
 reason对照v2已实际启动，当前只按实际完成数计进度，原12:30 Toronto截止不延长。[启动证据](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json)。
+
+尾盘08:00窗口已保存最终结果，状态complete；条件发布未通过或不完整，保持现模型。[实际总结](ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)。

@@ -1,0 +1,293 @@
+{
+  "observedAtUTC": "2026-11-13T10:46:50.386Z",
+  "scope": "Final-window factual summary; partial/integrity failures never accepted",
+  "finished": {
+    "phase": "complete",
+    "atUTC": "2026-11-13T10:11:46.868Z"
+  },
+  "results": {
+    "complete": true,
+    "completedPairs": {
+      "A": 3000,
+      "B": 3000,
+      "C": 3000
+    },
+    "A": {
+      "student": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\train\\models\\e00110950.onnx",
+      "champion": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\models\\champion.onnx",
+      "seeds": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\seed-audit.json",
+      "pairs": 3000,
+      "threshold": "32",
+      "solver-cards": "18",
+      "out": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\eval-A",
+      "deadline": "2026-11-13T13:00:00.000Z",
+      "stop-file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\STOP",
+      "studentSHA256": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7",
+      "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "seedsSHA256": "7e661d8f3575092a7fbceca0573fe68a041a01b8f13d076067861494697af6a9",
+      "workers": 4,
+      "startedAt": "2026-11-13T10:00:20.746Z",
+      "finishedAt": "2026-11-13T10:04:09.092Z",
+      "rounds": 6000,
+      "focalWins": 2997,
+      "focalLosses": 3003,
+      "meanSignedPoints": 0.011,
+      "ci95": [
+        -0.007575893250932192,
+        0.02957589325093219
+      ],
+      "interval": "deal-pair cluster, normal approximation; evaluation deals only, not training reruns",
+      "studentEndgameDecisions": 33151,
+      "decisionsDifferentFromChampion": 7402,
+      "descriptiveExactRegret": {
+        "checked": 2875,
+        "studentMean": 0.12173913043478261,
+        "championMean": 0.1356521739130435,
+        "note": "Perfect-information minimax regret on disagreements with <= solver-cards cards; descriptive only."
+      }
+    },
+    "B": {
+      "student": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\initial\\initial.onnx",
+      "champion": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\models\\champion.onnx",
+      "seeds": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\seed-audit.json",
+      "pairs": 3000,
+      "threshold": "32",
+      "solver-cards": "18",
+      "out": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\eval-B",
+      "deadline": "2026-11-13T13:00:00.000Z",
+      "stop-file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\STOP",
+      "studentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
+      "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "seedsSHA256": "7e661d8f3575092a7fbceca0573fe68a041a01b8f13d076067861494697af6a9",
+      "workers": 4,
+      "startedAt": "2026-11-13T10:04:09.204Z",
+      "finishedAt": "2026-11-13T10:07:55.128Z",
+      "rounds": 6000,
+      "focalWins": 3002,
+      "focalLosses": 2998,
+      "meanSignedPoints": 0.013833333333333333,
+      "ci95": [
+        -0.004977133322919658,
+        0.032643799989586324
+      ],
+      "interval": "deal-pair cluster, normal approximation; evaluation deals only, not training reruns",
+      "studentEndgameDecisions": 32401,
+      "decisionsDifferentFromChampion": 6689,
+      "descriptiveExactRegret": {
+        "checked": 2545,
+        "studentMean": 0.12455795677799607,
+        "championMean": 0.14263261296660118,
+        "note": "Perfect-information minimax regret on disagreements with <= solver-cards cards; descriptive only."
+      }
+    },
+    "C": {
+      "student": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\models\\r2-e00061050.onnx",
+      "champion": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\models\\champion.onnx",
+      "seeds": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\seed-audit.json",
+      "pairs": 3000,
+      "threshold": "32",
+      "solver-cards": "18",
+      "out": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\eval-C",
+      "deadline": "2026-11-13T13:00:00.000Z",
+      "stop-file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\endgame-rebase-029-20261112\\STOP",
+      "studentSHA256": "382085eebe6dcfa579d57bc6f639fd4e72e30509a5c32c02128df2e84709dcef",
+      "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "seedsSHA256": "7e661d8f3575092a7fbceca0573fe68a041a01b8f13d076067861494697af6a9",
+      "workers": 4,
+      "startedAt": "2026-11-13T10:07:55.240Z",
+      "finishedAt": "2026-11-13T10:11:46.830Z",
+      "rounds": 6000,
+      "focalWins": 3012,
+      "focalLosses": 2988,
+      "meanSignedPoints": 0.01633333333333333,
+      "ci95": [
+        -0.002139557262009713,
+        0.034806223928676376
+      ],
+      "interval": "deal-pair cluster, normal approximation; evaluation deals only, not training reruns",
+      "studentEndgameDecisions": 33052,
+      "decisionsDifferentFromChampion": 6582,
+      "descriptiveExactRegret": {
+        "checked": 2522,
+        "studentMean": 0.12291831879460745,
+        "championMean": 0.15741475019825535,
+        "note": "Perfect-information minimax regret on disagreements with <= solver-cards cards; descriptive only."
+      }
+    },
+    "finalMinusRebasedInitial": {
+      "n": 3000,
+      "mean": -0.0028333333333333335,
+      "sd": 0.5893706458092343,
+      "ci95": [
+        -0.023923691032818873,
+        0.018257024366152206
+      ]
+    },
+    "finalMinusOriginalR2": {
+      "n": 3000,
+      "mean": -0.005333333333333333,
+      "sd": 0.5596808344354477,
+      "ci95": [
+        -0.025361254777542443,
+        0.014694588110875779
+      ]
+    },
+    "rebasedInitialMinusOriginalR2": {
+      "n": 3000,
+      "mean": -0.0025,
+      "sd": 0.49915943015456654,
+      "ci95": [
+        -0.02036219080622259,
+        0.015362190806222592
+      ]
+    },
+    "scope": "A final vs029; B transferred initialization vs029; C originalr2 vs029. Same3000 heldout deals, paired seat swap. Incomplete samples are partial, not the full preregistered conclusion. No automatic web deployment.",
+    "completedAtUTC": "2026-11-13T10:11:46.865Z"
+  },
+  "gate": {
+    "accepted": false,
+    "A": {
+      "n": 3000,
+      "mean": 0.011,
+      "sd": 0.5191038652726293,
+      "ci95": [
+        -0.007575893250932192,
+        0.02957589325093219
+      ]
+    },
+    "finalMinusRebasedInitial": {
+      "n": 3000,
+      "mean": -0.0028333333333333335,
+      "sd": 0.5893706458092343,
+      "ci95": [
+        -0.023923691032818873,
+        0.018257024366152206
+      ]
+    },
+    "finalMinusOriginalR2": {
+      "n": 3000,
+      "mean": -0.005333333333333333,
+      "sd": 0.5596808344354477,
+      "ci95": [
+        -0.025361254777542443,
+        0.014694588110875779
+      ]
+    },
+    "rule": "All three groups3000 complete paired deals; A vs029 and paired A-B/A-C 95% lower bounds strictly>0. No rounding, outcome-based resizing or model selection.",
+    "model": {
+      "file": "e00110950.onnx",
+      "version": "e00110950",
+      "step": 110950,
+      "sha256": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7"
+    },
+    "checkpointSHA256": "6699fee5a61449f4cfd4d3ba14bf87cda7c9c6300ffcdff691c81fe328870448",
+    "evidence": {
+      "A": {
+        "runSHA256": "8769f69efc6925c41d60ac95cfefadc7414be0d8de0b73f91f2e46673a5fbb3a",
+        "parts": {
+          "part-0.json": "f845fd70fd84a8a564c59321fa92c32cc1369071dd450d83579000f0d6e23dd8",
+          "part-1.json": "ca1fc920df319e3f8bee5c8b52fcd2ba96360d7d30f2e8f52273b61ccd8330df",
+          "part-2.json": "d009a8f40fe1c37fdf67391ec8bc53c86d9c6af1f649d1aa93ad5445b66cf6ba",
+          "part-3.json": "3c0256202b5d434fbc3e089732d6d0ab3ba56e6f2cb9b2007d0b41d795193980"
+        }
+      },
+      "B": {
+        "runSHA256": "592e2f50ebcd20587b337731aa1acee981ca542ae2c25556f3b8ef61d2308a2d",
+        "parts": {
+          "part-0.json": "5a82e1d19a9f2f0ee61923a154b2499ffa2a3bdfbf2ec4cbdc7bfce94e97cd10",
+          "part-1.json": "e168d4a01d3631d96cf0d6b7f21f8e87fd41b9f40982a88651049d2e58d8a3c3",
+          "part-2.json": "bc529828b01874326c3f26cdcd66e98f40254ac23e5e375e5883ed7afa716e51",
+          "part-3.json": "b76616cacef9f3e8af99f66b568647420050c8d670fd03a282d29a3627e657e2"
+        }
+      },
+      "C": {
+        "runSHA256": "c40f78c5f114b83966653d5841922273c1517a96ea0b4632a60704c5dc594a40",
+        "parts": {
+          "part-0.json": "99cffacfd2a78c571775045549c6399180139c01311b39fe6a7f5434d2baba4e",
+          "part-1.json": "e3225211d7cfc7042989ea1e43e3a800bafd5e49c16e7b8e6ac5af545f1988b7",
+          "part-2.json": "32cf322cc938cbd149c6755bc3790713f1f56ffa22e879bc16869b9c684e17b0",
+          "part-3.json": "1986b757fe99ae102f5351e4f194580c829d837e8d320af29a79413c1f24ed62"
+        }
+      }
+    },
+    "protocolSHA256": "d31dc5104624bd21ae8a76a193d8b10c553472cb25031e5e26b8963fdfaf37c3",
+    "sourceCommit": "2b47277386eb40d7dc2e232004e42d15f5bc061f",
+    "seedAuditSHA256": "7e661d8f3575092a7fbceca0573fe68a041a01b8f13d076067861494697af6a9",
+    "completedAtUTC": "2026-11-13T10:46:50.385Z",
+    "scope": "Only final-window hybrid029/32-card student vs029 single rounds without tribute. Not old belief-search, human or match-level acceptance."
+  },
+  "gateError": null,
+  "stopAudit": {
+    "checkpointSHA256": "6699fee5a61449f4cfd4d3ba14bf87cda7c9c6300ffcdff691c81fe328870448",
+    "latest": {
+      "file": "e00110950.onnx",
+      "version": "e00110950",
+      "step": 110950,
+      "sha256": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7"
+    },
+    "networkExactlyMatchesCheckpoint": true,
+    "adamStates": 13,
+    "adamMatchesNewUpdates": true,
+    "newUpdates": 49900,
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "shards": 6223,
+    "cumulativeRows": 25529377,
+    "retainedRows": 2022413,
+    "ingestedRows": 25529377,
+    "pendingRows": 0,
+    "trainedRows": 102195200,
+    "replayRNGRestored": false,
+    "scope": "Retained shards checked; evicted replay and RNG are not saved/restored"
+  },
+  "finalModel": {
+    "file": "e00110950.onnx",
+    "version": "e00110950",
+    "step": 110950,
+    "sha256": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7"
+  },
+  "processExitAudit": {
+    "observedPids": [
+      49292,
+      14112,
+      4440,
+      47016,
+      39232,
+      31360,
+      59504,
+      56292,
+      29128,
+      45028,
+      20032,
+      53780,
+      56444,
+      47776,
+      7696,
+      48232,
+      18060,
+      22396,
+      32652,
+      3128
+    ],
+    "relatedStillAlive": [],
+    "method": "Node process.kill(pid,0); Windows alivePID command scope rechecked for PID reuse"
+  },
+  "failure": null,
+  "trainingDeadlineUTC": "2026-11-13T10:00:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-13T13:00:00.000Z",
+  "acceptedForConditionalPublication": false,
+  "rawChampionUnchanged": "029",
+  "privateHandsOrReplayIncluded": false,
+  "localResearchPackage": {
+    "file": "C:\\Users\\Admin\\Downloads\\endgame-final-e00110950-2c9f2d1c-research.zip",
+    "sha256": "ff2045fc4a65b4bbf42acefbd725eae1d68416198c1a2be48ec9f3d8f61a006d",
+    "scope": "Saved network and matching Adam; no private replay; not evidence of acceptance/deployment"
+  }
+}
