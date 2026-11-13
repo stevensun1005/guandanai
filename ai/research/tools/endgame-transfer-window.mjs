@@ -28,6 +28,25 @@ const stop = (root, reason) => {
 
 export function validateWindow(plan, reg, now = Date.now()) {
   const start = Date.parse(reg.startUTC);
+  if (plan.ownerDeadlineAmendment) {
+    const amendment = plan.ownerDeadlineAmendment,
+      end = Date.parse(reg.trainingDeadlineUTC);
+    if (
+      amendment.kind !== 'owner-explicit-deadline-revision' ||
+      amendment.trainingDeadlineUTC !== '2026-11-13T10:00:00.000Z' ||
+      end !== Date.parse(amendment.trainingDeadlineUTC) ||
+      reg.startUTC !== amendment.originalStartUTC ||
+      Math.abs(plan.run.hours - (end - start) / 3600000) > 1e-9 ||
+      Math.abs(reg.durationHours - (end - start) / 3600000 - 3.25) > 1e-9 ||
+      Date.parse(reg.evaluationDeadlineUTC) !== end + 3 * 3600000 ||
+      Date.parse(reg.deadlineUTC) !== end + 3.25 * 3600000 ||
+      reg.restartExtendsDeadline !== false ||
+      !Number.isFinite(start) ||
+      now >= end
+    )
+      throw Error('Invalid or expired explicit5AM training/8AM evaluation window');
+    return;
+  }
   if (
     plan.run.hours !== 16 ||
     reg.durationHours !== 19.25 ||
@@ -120,6 +139,12 @@ async function main(root) {
     validateWindow(plan, reg);
     if (sha256(join(root, 'protocol.json')) !== reg.protocolSHA256)
       throw Error('Protocol registration SHA mismatch');
+    if (
+      plan.ownerDeadlineAmendment &&
+      sha256(join(root, plan.ownerDeadlineAmendment.authorizationFile)) !==
+        plan.ownerDeadlineAmendment.authorizationSHA256
+    )
+      throw Error('Owner deadline authorization SHA mismatch');
     if (plan.recovery) {
       for (const [file, digest] of Object.entries(plan.recovery.files))
         if (sha256(join(root, file)) !== digest)

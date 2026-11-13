@@ -515,12 +515,117 @@ async function publish(run, companion, plan) {
   });
 }
 
+/** Persist every outcome, including partial/negative/failed windows; no private pair rows. */
+export function closeoutSnapshot(run, plan) {
+  const optional = (n) => (existsSync(join(run, n)) ? read(join(run, n)) : null);
+  const finished = optional('FINISHED'),
+    results = optional('results.json');
+  if (!finished) throw Error('Cannot summarize an unfinished window');
+  let gate = null,
+    gateError = null;
+  try {
+    gate = auditRelease(run, plan);
+  } catch (e) {
+    gateError = String(e.message || e);
+  }
+  return {
+    observedAtUTC: new Date().toISOString(),
+    scope: 'Final-window factual summary; partial/integrity failures never accepted',
+    finished,
+    results,
+    gate,
+    gateError,
+    stopAudit: optional('stop-audit.json'),
+    finalModel: optional('final-model.json'),
+    processExitAudit: optional('process-exit-audit.json'),
+    failure: optional('failure.json'),
+    trainingDeadlineUTC: plan.trainingDeadlineUTC,
+    evaluationDeadlineUTC: plan.evaluationDeadlineUTC,
+    acceptedForConditionalPublication: gate?.accepted === true,
+    rawChampionUnchanged: '029',
+    privateHandsOrReplayIncluded: false,
+  };
+}
+
+async function finishAndPublish(run, companion, plan) {
+  const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+  const execute = (exe, args) => {
+    if (
+      existsSync(join(companion, 'STOP')) ||
+      Date.now() >= Date.parse(plan.publicationDeadlineUTC)
+    )
+      throw Error('Summary STOP/deadline');
+    return execFileSync(exe, args, {
+      cwd: root,
+      encoding: 'utf8',
+      windowsHide: true,
+      maxBuffer: 32 << 20,
+      timeout: Math.max(1, Math.min(120000, Date.parse(plan.publicationDeadlineUTC) - Date.now())),
+    });
+  };
+  const git = (args) => execute('git', args).trim();
+  if (git(['status', '--porcelain'])) throw Error('Summary checkout not clean');
+  const snapshot = closeoutSnapshot(run, plan);
+  const folder = 'ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am';
+  mkdirSync(join(root, folder), { recursive: true });
+  write(join(root, folder, 'results.json'), snapshot);
+  const rows = snapshot.results?.completedPairs || {};
+  const audit = snapshot.stopAudit;
+  const text = `\n### 11月13日08:00尾盘窗口最终总结\n\n实际结束状态 ${snapshot.finished.phase}，A/B/C完成对数 ${JSON.stringify(rows)}；新增更新 ${audit?.newUpdates ?? '未核实'}，摄入行 ${audit?.ingestedRows ?? '未核实'}。条件发布门槛 ${snapshot.gate?.accepted === true ? '通过，仍须网页兼容/部署核验' : '未通过或不完整，不发布'}；A对029及配对差均见完整结果，原有正负证据保留，部分数据不当作全量结论。[最终小证据](${folder.replace('ai/research/', '')}/results.json)。\n`;
+  const docs = {
+    'ai/research/MODEL_STUDY.md': text,
+    'ai/research/CODEX_HANDOFF.md': `\n08:00尾盘窗口已结束并记录所有结果（包括部分/负/失败），见[最终总结](evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)。是否发布须另读release证据，不以步数或训练损失宣称提升。\n`,
+    'README.md': `\n尾盘08:00窗口已保存最终结果，状态${snapshot.finished.phase}；条件发布${snapshot.gate?.accepted ? '待兼容/部署核验' : '未通过或不完整，保持现模型'}。[实际总结](${folder}/results.json)。\n`,
+    'README.en.md': `\nThe08:00 endgame window ended (${snapshot.finished.phase}); complete, partial and negative evidence is preserved. Conditional release is ${snapshot.gate?.accepted ? 'pending browser/deployment checks' : 'not accepted; current model retained'}. [Closeout](${folder}/results.json).\n`,
+    'ai/research/README.md': `\n[08:00尾盘窗口最终结果](evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)：正负/部分和停止审计均保留，不用训练更新数代替棋力。\n`,
+    'ai/danMCai/README.md': `\n[08:00尾盘最终结果](../research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)已记录；是否成为网页reason另看条件发布结果。\n`,
+    'CHANGELOG.md': `\n## 2026-11-13 · 08:00尾盘窗口实际收尾\n\n状态${snapshot.finished.phase}，保存最终模型/匹配Adam审计及实际A/B/C，所有结论含负结果均记录推送；未完整通过不发布。\n`,
+  };
+  for (const [name, content] of Object.entries(docs)) appendFileSync(join(root, name), content);
+  const indexFile = 'ai/research/evaluation/model-artifacts.json',
+    index = read(join(root, indexFile));
+  Object.assign(
+    index.endgameTransferWindows.find((x) => x.id === 'endgame-rebase-029-20261112'),
+    {
+      finalCloseout: folder + '/results.json',
+      status: snapshot.finished.phase,
+      heldoutCompletedPairs: rows,
+      conditionalPublicationAccepted: snapshot.gate?.accepted === true,
+    },
+  );
+  write(join(root, indexFile), index);
+  execute(process.execPath, [
+    'node_modules/prettier/bin/prettier.cjs',
+    '--write',
+    ...Object.keys(docs),
+  ]);
+  git(['add', '--', folder + '/results.json', indexFile, ...Object.keys(docs)]);
+  git(['diff', '--cached', '--check']);
+  git([
+    'commit',
+    '-m',
+    'Record final8AM endgame results including negative partial and failure evidence',
+  ]);
+  git(['fetch', 'origin', 'main']);
+  if (git(['rev-parse', 'origin/main']) !== git(['rev-parse', 'HEAD^']))
+    throw Error('Concurrent summary main update; preserve checkout and resync/revalidate');
+  git(['push', 'origin', 'HEAD:main']);
+  const record = {
+    summaryCommit: git(['rev-parse', 'HEAD']),
+    accepted: snapshot.gate?.accepted === true,
+    published: false,
+  };
+  write(join(companion, 'closeout.json'), record);
+  if (!record.accepted) return;
+  await publish(run, companion, plan);
+}
+
 async function main() {
   const arg = (n) => process.argv.find((a) => a.startsWith('--' + n + '='))?.slice(n.length + 3);
   const run = resolve(arg('run')),
     companion = resolve(arg('companion')),
     plan = read(join(companion, 'authorization.json'));
-  if (process.argv.includes('--deliver')) return publish(run, companion, plan);
+  if (process.argv.includes('--deliver')) return finishAndPublish(run, companion, plan);
   if (hash(fileURLToPath(import.meta.url)) !== plan.releaseToolSHA256)
     throw Error('Frozen release companion changed');
   const lock = join(companion, 'companion.lock');
@@ -537,7 +642,7 @@ async function main() {
       rows: [
         ['状态', phase],
         ['当前网页', '029；门槛/发布验证完成前不变'],
-        ['停止训练', '11月13日03:58:54美东，原截止不变'],
+        ['停止训练', plan.trainingDeadlineUTC],
         ['验收条件', '完整三组3000副，A/A-B/A-C的95%下界均>0'],
         ...(extra.error ? [['失败原因', extra.error]] : []),
       ],
@@ -560,13 +665,9 @@ async function main() {
       new Date().toISOString() + ' START conditional-release\n',
     );
     started = true;
-    const gate = auditRelease(run, plan);
-    write(join(companion, 'gate.json'), gate);
-    if (!gate.accepted) {
-      stage('not-published-no-confirmed-improvement', { gate });
-      return;
-    }
-    stage('validating-and-publishing');
+    const summary = closeoutSnapshot(run, plan);
+    if (summary.gate) write(join(companion, 'gate.json'), summary.gate);
+    stage('summarizing-all-results-then-conditionally-publishing');
     const reg = {
       startUTC: new Date().toISOString(),
       deadlineUTC: plan.publicationDeadlineUTC,
@@ -587,7 +688,9 @@ async function main() {
     );
     write(join(companion, 'awake-launch.json'), { pid: awake.pid, deadlineUTC: reg.deadlineUTC });
     await deliver(run, companion, plan);
-    stage('published', read(join(companion, 'published.json')));
+    if (existsSync(join(companion, 'published.json')))
+      stage('published', read(join(companion, 'published.json')));
+    else stage('summary-pushed-not-published', read(join(companion, 'closeout.json')));
   } catch (error) {
     stage('failed', { error: String(error.stack || error) });
     write(join(companion, 'failure.json'), { error: String(error.stack || error) });
