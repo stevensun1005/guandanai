@@ -1,0 +1,65 @@
+{
+  "atUTC": "2026-11-13T13:06:53.333Z",
+  "launch": {
+    "actualLaunchUTC": "2026-11-13T13:06:04.2267016+00:00",
+    "sourceCommit": "13a052e7f2f59212938ef74454cc44d57599bd3a",
+    "protocolCommit": "4b6ea23",
+    "dashboardPid": 17340,
+    "optimizerUpdates": 0,
+    "deadlineUTC": "2026-11-13T16:05:40.164Z",
+    "controllerPid": 22344,
+    "awakePid": 40832
+  },
+  "status": {
+    "pid": 22344,
+    "phase": "evaluation",
+    "plannedRounds": 2000,
+    "completedRounds": 62,
+    "workers": [
+      {
+        "pid": 45720,
+        "phase": "running",
+        "completedPairs": 16,
+        "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+        "updatedAtUTC": "2026-11-13T13:06:47.999Z"
+      },
+      {
+        "pid": 60968,
+        "phase": "running",
+        "completedPairs": 15,
+        "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+        "updatedAtUTC": "2026-11-13T13:06:46.242Z"
+      }
+    ],
+    "deadlineUTC": "2026-11-13T16:05:40.164Z",
+    "updatedAtUTC": "2026-11-13T13:06:52.587Z"
+  },
+  "guardian": {
+    "pid": 49412,
+    "updatedAtUTC": "2026-11-13T13:06:53.107Z",
+    "deadlineUTC": "2026-11-13T16:05:40.164Z",
+    "stopped": false
+  },
+  "awake": {
+    "powerPlanChanged": false,
+    "deadlineUTC": "2026-11-13T16:05:40.164Z",
+    "pid": 40832,
+    "phase": "awake",
+    "displayRequired": false,
+    "updatedAtUTC": "2026-11-13T13:06:45.0338905+00:00"
+  },
+  "livePids": [
+    22344,
+    49412,
+    40832,
+    45720,
+    60968
+  ],
+  "method": "Node process.kill(pid,0)",
+  "sourceFilesVerified": 185,
+  "modelSHAVerified": 4,
+  "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+  "optimizerUpdates": 0,
+  "noOtherRunRestarted": true,
+  "scope": "Actual paired evaluation in progress; no outcome claim or webpage change"
+}
