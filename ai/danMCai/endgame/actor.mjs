@@ -120,8 +120,23 @@ async function main() {
   mkdirSync(join(run, 'shards'), { recursive: true });
   const saved = readJSON(statePath, { nextSeed: seedStart, shards: 0, rounds: 0, rows: 0 });
   if (saved.nextSeed === null) saved.nextSeed = Infinity;
-  const pool = await createModelPool(ort, { threads: 1, limit: 4 });
-  const decide = (file, state) => pool.values(file, state);
+  const provider = config.actor.provider || 'cpu';
+  if (!['cpu', 'dml', 'hybrid-dml'].includes(provider))
+    throw Error('Unknown actor inference provider');
+  const inferenceThreshold = config.actor.dmlMinActions ?? 128;
+  if (!Number.isInteger(inferenceThreshold) || inferenceThreshold < 1)
+    throw Error('Invalid DML routing threshold');
+  const pool = await createModelPool(ort, {
+    threads: 1,
+    limit: 4,
+    provider: provider === 'dml' ? 'dml' : 'cpu',
+  });
+  const gpuPool =
+    provider === 'hybrid-dml'
+      ? await createModelPool(ort, { threads: 1, limit: 4, provider: 'dml' })
+      : null;
+  const decide = (file, state) =>
+    (gpuPool && state.actions.length >= inferenceThreshold ? gpuPool : pool).values(file, state);
   const deadline = Date.parse(config.deadline);
   let buffer = [],
     seeds = [];
@@ -170,6 +185,7 @@ async function main() {
   saved.stopped = true;
   writeJSON(statePath, saved);
   await pool.close();
+  if (gpuPool) await gpuPool.close();
 }
 
 if (isMain(import.meta.url)) {

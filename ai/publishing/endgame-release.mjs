@@ -566,6 +566,48 @@ async function finishAndPublish(run, companion, plan) {
   const git = (args) => execute('git', args).trim();
   if (git(['status', '--porcelain'])) throw Error('Summary checkout not clean');
   const snapshot = closeoutSnapshot(run, plan);
+  // A rejected/partial student still gets a local research package; never a web deployment.
+  if (
+    snapshot.finalModel &&
+    snapshot.stopAudit?.networkExactlyMatchesCheckpoint &&
+    snapshot.stopAudit?.adamMatchesNewUpdates
+  ) {
+    try {
+      const m = snapshot.finalModel;
+      if (
+        hash(join(run, 'train/models', m.file)) !== m.sha256 ||
+        hash(join(run, 'train/learner/checkpoint.pt')) !== snapshot.stopAudit.checkpointSHA256
+      )
+        throw Error('Research package checkpoint/model mismatch');
+      const packagePath = join(
+        plan.downloads,
+        `endgame-final-${m.version}-${m.sha256.slice(0, 8)}-research.zip`,
+      );
+      const script =
+        'from pathlib import Path; import sys,zipfile; r=Path(sys.argv[1]); dst=Path(sys.argv[2]); names=["train/learner/checkpoint.pt","train/models/"+sys.argv[3],"train/models/latest.json","train/config.json","protocol.json","registration.json","results.json","stop-audit.json"]; z=zipfile.ZipFile(dst,"x",zipfile.ZIP_DEFLATED); [z.write(r/n,n) for n in names if (r/n).is_file()]; z.close(); z=zipfile.ZipFile(dst); assert z.testzip() is None; z.close()';
+      if (!existsSync(packagePath))
+        execute(plan.browserPython, ['-B', '-X', 'utf8', '-c', script, run, packagePath, m.file]);
+      execute(plan.browserPython, [
+        '-B',
+        '-X',
+        'utf8',
+        '-c',
+        'import sys,zipfile,hashlib; z=zipfile.ZipFile(sys.argv[1]); assert z.testzip() is None; assert hashlib.sha256(z.read("train/models/"+sys.argv[2])).hexdigest()==sys.argv[3]; assert hashlib.sha256(z.read("train/learner/checkpoint.pt")).hexdigest()==sys.argv[4]',
+        packagePath,
+        m.file,
+        m.sha256,
+        snapshot.stopAudit.checkpointSHA256,
+      ]);
+      snapshot.localResearchPackage = {
+        file: packagePath,
+        sha256: hash(packagePath),
+        scope:
+          'Saved network and matching Adam; no private replay; not evidence of acceptance/deployment',
+      };
+    } catch (error) {
+      snapshot.localResearchPackageError = String(error.message || error);
+    }
+  }
   const folder = 'ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am';
   mkdirSync(join(root, folder), { recursive: true });
   write(join(root, folder, 'results.json'), snapshot);
