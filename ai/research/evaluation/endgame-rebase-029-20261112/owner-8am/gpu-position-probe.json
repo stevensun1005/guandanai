@@ -1,0 +1,22 @@
+{
+  "observedAtUTC": "2026-11-13T04:43:38.365Z",
+  "purpose": "Engineering only, not strength",
+  "fixedPositions": 16,
+  "maxAbsDifference": 0.000002115964889526367,
+  "argmaxAllEqual": true,
+  "measured": {
+    "cpu": {
+      "calls": 160,
+      "meanMs": 1.160229375000003,
+      "p95Ms": 11.780099999999948
+    },
+    "dml": {
+      "calls": 160,
+      "meanMs": 1.2454600000000169,
+      "p95Ms": 1.6785999999999603
+    }
+  },
+  "speedup": 0.931566951166627,
+  "games": 0,
+  "optimizerUpdates": 0
+}

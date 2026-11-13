@@ -1,5 +1,7 @@
 <div align="center">
 
+本批截止已按所有者澄清改为：11月13日05:00停训练、08:00停止新增评测，随后总结/打包。8采样器及大候选DML提速；全部结果均总结推送，发布仍需完整提升门槛。[修订协议](ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)。
+
 所有者已授权本批训练后自动评测，三项独立提升门槛与兼容检查通过后自动打包发布新reason；当前仍在训练，尚无新学生提升结论。[条件发布](ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
 
 Windows状态文件冲突已通过停机存档和新冻结源码修复，续用匹配检查点/Adam与原截止；这是工程恢复，不是提升结论。见[修订2](ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json)。

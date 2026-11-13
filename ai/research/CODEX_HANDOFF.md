@@ -488,3 +488,5 @@ Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手�
 Clint UI同步1586875已完成并线上核验：代码01799f6，Pages42501549267成功，版本0bafe9ce07，五尺寸0页面异常；六项菜单与四席默认017不变。成功游标及逐路径证据见clint-sync-state.json／clint-sync-20261108-1635.json。
 
 所有者追加尾盘reason条件发布授权：原训练完成自动A/B/C，三组各3000副且A/A−B/A−C的95%下界全正后，新独立伴随进程打包/验证/Release/main/Pages；当前清单不变，原训练不热改，见[协议与状态](evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
+
+最新所有者澄清为05:00停训练、08:00评测截止，随后总结/打包；8演员与宽候选DML、4CPU评测，旧时间均为历史。[本批修订与恢复](evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)，旧冻结检出不改；完整/部分和正负结果均总结推main，研究包不当成网页验收。

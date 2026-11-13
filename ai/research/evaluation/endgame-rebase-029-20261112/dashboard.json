@@ -1,7 +1,7 @@
 {
-  "title": "029底座尾盘迁移 · 固定16小时训练",
-  "deadline": "2026-11-13T12:13:54.268Z",
-  "note": "训练截止11/13 03:58:54美东；评测截止06:58:54，07:13:54保存结束。029+(r2−017)、新Adam/空回放；61050为历史计数，不计新增训练。最终/迁移初始/原r2同3000副对029，不自动发布新尾盘模型。",
+  "title": "029尾盘GPU提速 · 05:00停训练/08:00评测截止",
+  "deadline": "2026-11-13T13:15:00.000Z",
+  "note": "所有者明确修订：05:00停止训练、08:00停止新增评测，随后总结/打包。8采样器；≥128候选DML、少量CPU；ROCm学习器原batch2048/replayRatio4，4GiB暂停/5GiB恢复。全部结果总结推main，只有三项提升门槛及兼容检查通过才发布reason。",
   "stages": [
     {
       "key": "web-champion",
@@ -31,12 +31,12 @@
     },
     {
       "key": "endgame-train",
-      "title": "029底座尾盘模型固定16小时训练",
+      "title": "029尾盘模型训练 · 8演员与GPU混合推理",
       "kind": "endgame-train",
       "paths": {
         "out": "train"
       },
-      "desc": "4演员上限，4GiB暂停/5GiB恢复，750k回放；只学单局最终升级分",
+      "desc": "大候选DML/少量CPU，ROCm学习器；只学单局最终升级分，原Adam和计数继续",
       "rule": {
         "type": "dev",
         "text": "新增更新扣除历史61050；训练损失不是独立棋力验收"
@@ -130,16 +130,68 @@
     },
     {
       "key": "conditional-release",
-      "title": "独立评测有提升后打包发布新reason",
+      "title": "08:00前评测结束后的总结、打包与条件发布",
       "kind": "descriptive",
       "after": "endgame-summary",
       "desc": "三组完整及A/A-B/A-C区间下界全正；Chrome WASM/联机恢复等检查后发布，否则保留现站",
       "paths": {
-        "result": "conditional-release/dashboard-record.json"
+        "result": "conditional-release-8am/dashboard-record.json"
       },
       "rule": {
         "type": "descriptive",
         "text": "条件发布授权，不等于已通过或已发布"
+      }
+    },
+    {
+      "key": "clint-check-20261112-1925",
+      "title": "Clint上游例行增量核对",
+      "kind": "descriptive",
+      "desc": "核验完整成功游标与远端main；无变化不提交、不影响冻结训练",
+      "paths": {
+        "result": "clint-check-20261112-1925.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "同步检查，不是棋力证据"
+      }
+    },
+    {
+      "key": "clint-check-20261112-2324",
+      "title": "Clint上游例行增量核对",
+      "kind": "descriptive",
+      "desc": "完整成功SHA与固定远端main核对；无增量不提交",
+      "paths": {
+        "result": "clint-check-20261112-2324.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "同步检查，不是棋力证据"
+      }
+    },
+    {
+      "key": "clint-check-20261113-0320",
+      "title": "Clint上游例行增量核对",
+      "kind": "descriptive",
+      "desc": "安全fetch与完整成功游标核验；无变化不提交",
+      "paths": {
+        "result": "clint-check-20261113-0320.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "同步检查，不是棋力证据"
+      }
+    },
+    {
+      "key": "owner-8am-reschedule",
+      "title": "所有者澄清截止与GPU吞吐优化",
+      "kind": "descriptive",
+      "paths": {
+        "result": "owner-8am-record.json"
+      },
+      "desc": "原件归档、13组Adam恢复、8采样器；05:00停训练/08:00评测截止",
+      "rule": {
+        "type": "dev",
+        "text": "工程提速不是棋力证据"
       }
     }
   ]

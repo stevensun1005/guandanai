@@ -1,0 +1,28 @@
+{
+  "schema": "owner-deadline-throughput-amendment-v1",
+  "originalRequest": "现在训练到哪了 然后把训练停止时间改为明天早上八点 然后做完总结把该push的push上去",
+  "clarification": "不是 我的意思是八点要做完评测 之后打包",
+  "throughputRequest": "训练要充分里用gpu 把速度提起来 尽可能地多训练",
+  "recordedAtUTC": "2026-11-13T04:52:10.925Z",
+  "originalStartUTC": "2026-11-12T16:58:54.268Z",
+  "previousRegistrationSHA256": "e3d88873de4d20164ee8fbca3e42bcf18aea68053871dc397cc1d384d919825d",
+  "previousProtocolSHA256": "6dedab28af4062f986f63aa5c926459555ea49009df7ecc5dc45be757f126709",
+  "trainingDeadlineUTC": "2026-11-13T10:00:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-13T13:00:00.000Z",
+  "saveDeadlineUTC": "2026-11-13T13:15:00.000Z",
+  "publicationDeadlineUTC": "2026-11-13T15:00:00.000Z",
+  "actorCount": 8,
+  "inference": {
+    "kind": "hybrid-dml",
+    "dmlMinActions": 128,
+    "cpuBelowThreshold": true
+  },
+  "learningHyperparametersUnchanged": true,
+  "heldoutAndGateUnchanged": true,
+  "originalSlotsPreserved": true,
+  "additionalNewSlotLiteralDeals": 1000000,
+  "seedAuditSHA256": "13cb9309c3b183f3c9c995d1faa5494761157825a27e54ecb1324c91a06e4e46",
+  "summaryAllOutcomes": true,
+  "noPrivateReplayInGit": true,
+  "evaluationWorkers": 4
+}

@@ -1,0 +1,30 @@
+{
+  "checkpointSHA256": "78770db34ffd51c4799daf25a108411cd503826ce81835eae0fb5a1a89800827",
+  "latest": {
+    "file": "e00088250.onnx",
+    "version": "e00088250",
+    "step": 88250,
+    "sha256": "75f7339fb03c6de5fc6aaa934392de3fda981bbd19341923a65efaf18261da04"
+  },
+  "networkExactlyMatchesCheckpoint": true,
+  "adamStates": 13,
+  "adamMatchesNewUpdates": true,
+  "newUpdates": 27200,
+  "inherited": {
+    "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+    "step": 61050,
+    "trainedRows": 125030400,
+    "ingestedRows": 31234673,
+    "chain": [
+      "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+    ]
+  },
+  "shards": 3389,
+  "cumulativeRows": 13903294,
+  "retainedRows": 2022417,
+  "ingestedRows": 13903294,
+  "pendingRows": 0,
+  "trainedRows": 55705600,
+  "replayRNGRestored": false,
+  "scope": "Retained shards checked; evicted replay and RNG are not saved/restored"
+}

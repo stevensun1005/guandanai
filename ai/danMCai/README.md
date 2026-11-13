@@ -1,5 +1,7 @@
 # danMCai 模型
 
+[截止/GPU修订](../research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)：05:00停训练、08:00评测截止；8演员、≥128候选DML、少量CPU，原ROCm学习器和Adam继续。
+
 本批已获训练结束后条件发布reason授权；原计算窗口/源码不变，发布伴随进程独立有界，见[条件授权](../research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。
 
 Windows状态替换故障通过先停机归档、冻结修复源码后在原窗口恢复，见[工程修订2](../research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json)；学习目标、种子和截止不变。

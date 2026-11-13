@@ -1,0 +1,82 @@
+{
+  "purpose": "Engineering only, not strength",
+  "observedAtUTC": "2026-11-13T04:45:27.776Z",
+  "positions": 1,
+  "syntheticCandidateWidths": true,
+  "results": [
+    {
+      "candidates": 1,
+      "meanMs": {
+        "cpu": 0.2274208333333334,
+        "dml": 0.32999583333333504
+      },
+      "speedup": 0.6891627419538092,
+      "maxAbsDifference": 8.344650268554688e-7
+    },
+    {
+      "candidates": 8,
+      "meanMs": {
+        "cpu": 0.29227083333333326,
+        "dml": 1.2492958333333348
+      },
+      "speedup": 0.23394845763113187,
+      "maxAbsDifference": 0.0000010728836059570312
+    },
+    {
+      "candidates": 32,
+      "meanMs": {
+        "cpu": 0.746570833333332,
+        "dml": 1.246416666666666
+      },
+      "speedup": 0.5989737246774077,
+      "maxAbsDifference": 0.0000010728836059570312
+    },
+    {
+      "candidates": 64,
+      "meanMs": {
+        "cpu": 1.211162499999998,
+        "dml": 1.2693916666666638
+      },
+      "speedup": 0.954128289797607,
+      "maxAbsDifference": 0.0000011920928955078125
+    },
+    {
+      "candidates": 128,
+      "meanMs": {
+        "cpu": 2.2112750000000005,
+        "dml": 1.3163833333333343
+      },
+      "speedup": 1.679810845371788,
+      "maxAbsDifference": 0.000001430511474609375
+    },
+    {
+      "candidates": 256,
+      "meanMs": {
+        "cpu": 4.2188625,
+        "dml": 1.3643416666666706
+      },
+      "speedup": 3.0922331283097377,
+      "maxAbsDifference": 0.0000015497207641601562
+    },
+    {
+      "candidates": 512,
+      "meanMs": {
+        "cpu": 8.723483333333334,
+        "dml": 1.5728916666666635
+      },
+      "speedup": 5.5461437797686965,
+      "maxAbsDifference": 0.0000019669532775878906
+    },
+    {
+      "candidates": 698,
+      "meanMs": {
+        "cpu": 11.916120833333329,
+        "dml": 1.8367125000000044
+      },
+      "speedup": 6.487744180612535,
+      "maxAbsDifference": 0.0000013113021850585938
+    }
+  ],
+  "games": 0,
+  "optimizerUpdates": 0
+}

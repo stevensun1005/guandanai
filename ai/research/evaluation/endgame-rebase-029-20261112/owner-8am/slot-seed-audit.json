@@ -1,0 +1,63 @@
+{
+  "kind": "new-literal-training-reservation-not-completed-games",
+  "historicalFiles": 1187,
+  "historicalUniqueRoots": 2059716,
+  "additionalLiteralDeals": 1000000,
+  "perSlot": 250000,
+  "supplementalSlotBlocks": [
+    [
+      [
+        3000000000,
+        3000250000
+      ]
+    ],
+    [
+      [
+        3000250000,
+        3000500000
+      ]
+    ],
+    [
+      [
+        3000500000,
+        3000750000
+      ]
+    ],
+    [
+      [
+        3000750000,
+        3001000000
+      ]
+    ]
+  ],
+  "oldSlotBlocks": [
+    [
+      [
+        2700000000,
+        2700500000
+      ]
+    ],
+    [
+      [
+        2700500000,
+        2701000000
+      ]
+    ],
+    [
+      [
+        2701000000,
+        2701500000
+      ]
+    ],
+    [
+      [
+        2701500000,
+        2702000000
+      ]
+    ]
+  ],
+  "heldoutUnchanged": true,
+  "heldoutSHA256": "7e661d8f3575092a7fbceca0573fe68a041a01b8f13d076067861494697af6a9",
+  "semantics": "New seeds are literal createRound(seed). Exclude historical literal equality and up to200 derived deals per known historical match root, unused reservations literally, old training blocks and frozen heldout. New literal seeds unique, not expanded into fictional200 games.",
+  "fullAuditSHA256": "8cf8e0af9b22313f66aa9a363533e62abdd59e0bee00c7a5879d8b94cbb36d89"
+}

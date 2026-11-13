@@ -46,3 +46,5 @@
 故障时保留 `failure.json`、STOP、原注册、权重/优化器/数据和日志；不要删除锁或注册后盲目重开。恢复只使用原截止的剩余时长，源码/协议修订另记，其他机器和旧冻结运行不动。权重/完整回放不进Git；有结论时将小证据与正负结果更新主报告并按仓库检查流程推main。
 
 运行注记：曾发生一次Windows状态JSON原子替换读锁冲突（WinError5），原监督器在原截止内从已保存网络/Adam恢复，冻结源码不变；具体锁持有者未核实。实时监看使用现有Node API或Node fs读取，避免长时间占用活动JSON文件。旧失败日志保留，未保存的RNG/完整回放不算已恢复；见[runtime-note-1](runtime-note-1.json)。
+
+最新澄清与GPU追加优先：05:00停止训练、08:00停止新增评测，随后保存/总结/打包；8演员/宽候选DML/少量CPU，4CPU评测工作器，原起点/Adam/计数/3000留出/门槛不变。旧conditional-release已按所有者改期受控停止，非实验失败；新伴随目录conditional-release-8am。全部原件在engineering-segments/pre-owner-8am。新源码冻结2b47277；[新协议](owner-8am/protocol.json)与[条件收尾授权](owner-8am/conditional-release-authorization.json)。实际是否恢复须读实时PID/状态，不凭此准备记录盲目重复启动。

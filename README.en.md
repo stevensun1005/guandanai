@@ -1,5 +1,7 @@
 <div align="center">
 
+Owner-clarified cutoff: Nov13 05:00Toronto training stop, 08:00 evaluation cutoff, then summary/packaging. Eight actors use DML for large candidate batches; all outcomes are reported, while deployment remains conditional. [Amendment](ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json).
+
 The owner authorized automatic packaging and web release only after complete independent improvement gates and compatibility checks. Training is still active; no new student improvement is established. [Conditional release](ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json).
 
 Windows metadata locks were addressed with an archived stop and a new frozen runtime. Recovery keeps the matched checkpoint/Adam and original deadlines; it is not evidence of stronger play. [Recovery amendment2](ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json).
