@@ -1,0 +1,106 @@
+{
+  "observedAtUTC": "2026-11-13T14:10:15.596Z",
+  "id": "endgame-final-vs-reason-20261113",
+  "complete": true,
+  "plannedPairs": 1000,
+  "completedPairs": 1000,
+  "completedRounds": 2000,
+  "finalStudent": {
+    "file": "models/student.onnx",
+    "localFile": "D:/vibecoding/guandan/ai/danMCai/runs/endgame-final-vs-reason-20261113/models/student.onnx",
+    "sha256": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7",
+    "version": "e00110950",
+    "kind": "final-window public-input student at<=32totalcards"
+  },
+  "challenger": "029 greedy above32 total cards / final e00110950 greedy at<=32, finishing-first",
+  "opponent": "archived reason9001:017+belief-v1 multiworld search, generous native reference time budgets",
+  "report": {
+    "model": "challenger",
+    "opponent": "reason",
+    "mixed": false,
+    "teammate": "challenger",
+    "pairs": 1000,
+    "rounds": 2000,
+    "wins": 1024,
+    "losses": 976,
+    "draws": 0,
+    "signedUpgradePoints": {
+      "clusters": 1000,
+      "mean": -0.097,
+      "standardError": 0.0364886615597561,
+      "ci": [
+        -0.16851777665712198,
+        -0.025482223342878044
+      ],
+      "z": 1.96,
+      "method": "Normal approximation using independent seed-pair sample SD"
+    },
+    "roundWinScore": {
+      "clusters": 1000,
+      "mean": 0.512,
+      "standardError": 0.00856909735208029,
+      "ci": [
+        0.4952045691899226,
+        0.5287954308100774
+      ],
+      "z": 1.96,
+      "method": "Normal approximation using independent seed-pair sample SD"
+    },
+    "finishingRankPairs": {
+      "12": 435,
+      "13": 144,
+      "14": 445,
+      "23": 235,
+      "24": 226,
+      "34": 515
+    },
+    "doubleDowns": 515,
+    "doubleUps": 435,
+    "meanTurns": 81.182
+  },
+  "partial": null,
+  "search": {
+    "bands": {
+      "midgame": {
+        "requests": 10332,
+        "completed": 10332,
+        "deviated": 2016,
+        "fallbackCount": 0,
+        "minWorldsFallbacks": 0,
+        "fallbackReasons": {},
+        "timedSearches": 10332,
+        "totalMs": 1645537,
+        "maxMs": 1134
+      },
+      "endgame": {
+        "requests": 5366,
+        "completed": 5353,
+        "deviated": 738,
+        "fallbackCount": 13,
+        "minWorldsFallbacks": 4,
+        "fallbackReasons": {
+          "budget": 13
+        },
+        "timedSearches": 5366,
+        "totalMs": 3562079,
+        "maxMs": 51907
+      }
+    },
+    "rawMs": 115329.50520000464,
+    "reasonMs": 5315657.283199975,
+    "pairedGames": 2000,
+    "optimizerUpdates": 0
+  },
+  "sourceCommit": "13a052e7f2f59212938ef74454cc44d57599bd3a",
+  "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+  "primaryConclusion": "reason-positive",
+  "publication": false,
+  "originalABCGate": "failed, unchanged",
+  "optimizerUpdates": 0,
+  "limits": [
+    "Two homogeneousAI teams in one matchup, no humans/mixed teams/tribute/whole matches.",
+    "Different bases and policies; not a same-base search ablation. Timing and cold-cache allocation affect fallbacks.",
+    "Independent new deals exclude prior training/heldout reservations; unavailable remote history remains unverified.",
+    "No optimizer updates, data collection for training, webpage publication or automatic promotion. No expansion after seeing results."
+  ]
+}

@@ -24,3 +24,5 @@ M1 Pro 真机已完成迁移和 MPS／Adam／ONNX 预检并恢复续训；本次
 GuanZero 当前开发评测只保留danMCai冠军500场和reason200场（250/100对），Clint不再参与；历史报告原样保留。详见[GuanZero](guanzero/README.md)。真人联机数据经独立云端服务采集，下载与预处理入口在 [共享数据](shared/data/README.md)，不自动接入活跃训练。
 
 [新评测入口](research/evaluation/endgame-final-vs-reason-20261113/protocol.design.json)：最终尾盘学生对旧reason；原未通过发布门槛与029网页保留。
+
+最终对reason直接评测结果（2026-11-13）：1000新副/2000交换阵营完整单局全部完成：训练后组合策略1024胜/976负/0平，平均签名升级分-0.09700，95%牌副簇区间[-0.16852,-0.02548]；旧reason在本项条件下优于训练后组合策略。 零优化器更新，185冻结源码/四权重/原始逐副完整性及全部评测/守护/awake退出已审计。原A/B/C发布门槛未通过的事实保留，网页029不变。本项为无进贡单局、同质两队，不是整场/真人验收。 [完整小证据](research/evaluation/endgame-final-vs-reason-20261113/results.json)。

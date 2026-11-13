@@ -302,3 +302,5 @@ GuanZero v4回归要求冠军500/reason200两份报告、250/100配对子范围�
 ### 尾盘学生与reason策略对照
 
 评测器的可选学生模式必须与原A评测一致：029负责>32张、最终学生≤32张，完成手牌优先。`node --test ai/research/tests/champion-reason.test.mjs`逐局核对该策略、交换阵营与STOP中断；实际棋力仅来自独立冻结协议，不能用替身网络测试或预检冒充。见[新评测](../../ai/research/evaluation/endgame-final-vs-reason-20261113/protocol.design.json)。
+
+最终对reason直接评测结果（2026-11-13）：1000新副/2000交换阵营完整单局全部完成：训练后组合策略1024胜/976负/0平，平均签名升级分-0.09700，95%牌副簇区间[-0.16852,-0.02548]；旧reason在本项条件下优于训练后组合策略。 零优化器更新，185冻结源码/四权重/原始逐副完整性及全部评测/守护/awake退出已审计。原A/B/C发布门槛未通过的事实保留，网页029不变。本项为无进贡单局、同质两队，不是整场/真人验收。 [完整小证据](../../ai/research/evaluation/endgame-final-vs-reason-20261113/results.json)。

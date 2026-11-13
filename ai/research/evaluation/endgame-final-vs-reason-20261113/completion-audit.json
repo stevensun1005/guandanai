@@ -1,0 +1,61 @@
+{
+  "atUTC": "2026-11-13T14:10:15.590Z",
+  "finished": {
+    "phase": "complete",
+    "atUTC": "2026-11-13T13:53:52.253Z"
+  },
+  "processIds": [
+    22344,
+    49412,
+    40832,
+    45720,
+    60968
+  ],
+  "relatedStillAlive": [],
+  "processMethod": "Node process.kill(pid,0); no Python os.kill",
+  "locksRemoved": true,
+  "sourceCommit": "13a052e7f2f59212938ef74454cc44d57599bd3a",
+  "sourceFiles": 185,
+  "sourceFilesVerified": true,
+  "weightsVerified": {
+    "challenger": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "reason": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "belief": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "student": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7"
+  },
+  "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+  "seedAuditSHA256": "9a3392006e02924bea8755ad2e55797b803a355136afd9eb15c9d04db50d2f9e",
+  "registration": {
+    "startUTC": "2026-11-13T13:05:40.164Z",
+    "deadlineUTC": "2026-11-13T16:05:40.164Z",
+    "durationHours": 3,
+    "restartExtendsDeadline": false,
+    "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+    "purpose": "Explicit new owner request, evaluation only; previous expired training remains closed",
+    "authorization": "训练后模型对reason来个评测"
+  },
+  "rawFiles": [
+    {
+      "file": "worker-0.jsonl",
+      "sha256": "32145d2f1d585a55f8f56db8a690b44160d08130c28e45709e2db7ad411da93f",
+      "completePairLines": 500
+    },
+    {
+      "file": "worker-1.jsonl",
+      "sha256": "1148aac58254cdce7a520583244471a88ca6b66bd8eb3ff4848fa3404fd0b80d",
+      "completePairLines": 500
+    }
+  ],
+  "summaryRecomputedFromOriginalRows": true,
+  "optimizerUpdates": 0,
+  "awake": {
+    "powerPlanChanged": false,
+    "deadlineUTC": "2026-11-13T16:05:40.164Z",
+    "pid": 40832,
+    "phase": "released",
+    "updatedAtUTC": "2026-11-13T13:53:57.6761586+00:00"
+  },
+  "webCatalogSHA256": "340a30c1bfca87d0f9191e9cc9aeecaf65b384dafb9f770dd27f522151d53996",
+  "noWebsiteChange": true,
+  "scope": "Original private/local rows remain ignored; this audit publishes no hands, replay or weights. New evaluation does not reopen expired training or replace the failed original gate."
+}
