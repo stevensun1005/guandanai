@@ -1,0 +1,18 @@
+{
+  "observedAtUTC": "2026-11-13T05:05:39.238Z",
+  "secondsSinceResume": 653.696,
+  "newUpdatesSinceResume": 850,
+  "newIngestedRowsSinceResume": 447140,
+  "updatesPerSecond": 1.3002986097513216,
+  "rowsPerSecond": 684.018259252007,
+  "actorCap": 8,
+  "currentRunningActors": 5,
+  "pausedActors": [
+    "actor-6",
+    "actor-5",
+    "actor-7"
+  ],
+  "reserveGiB": 4,
+  "availableGiB": 4.546318054199219,
+  "scope": "Short descriptive live window including startup/memory shedding; not controlled speed or strength evidence"
+}

@@ -5593,15 +5593,18 @@
     {
       "id": "endgame-rebase-029-20261112",
       "protocol": "ai/research/evaluation/endgame-rebase-029-20261112/protocol.design.json",
-      "status": "training-started-no-heldout-conclusion-yet",
+      "status": "training-resumed-owner5AM8AM-GPU-amendment",
       "baseSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
       "initialStudentSHA256": "4083bc3943280472bc766f5d48d7801a46aa703966dccf4dd1a848f3adfa8b71",
       "startup": "ai/research/evaluation/endgame-rebase-029-20261112/startup.json",
-      "trainingDeadlineUTC": "2026-11-13T08:58:54.268Z",
+      "trainingDeadlineUTC": "2026-11-13T10:00:00.000Z",
       "engineeringRecovery": "ai/research/evaluation/endgame-rebase-029-20261112/runtime-note-2.json",
       "recoveryProtocol": "ai/research/evaluation/endgame-rebase-029-20261112/protocol-io-recovery.json",
       "recoveryStartup": "ai/research/evaluation/endgame-rebase-029-20261112/recovery-startup.json",
-      "conditionalReleaseAuthorization": "ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json"
+      "conditionalReleaseAuthorization": "ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json",
+      "evaluationDeadlineUTC": "2026-11-13T13:00:00.000Z",
+      "ownerAmendment": "ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json",
+      "ownerAmendmentStartup": "ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/startup.json"
     }
   ]
 }

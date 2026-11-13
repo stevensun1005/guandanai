@@ -1,0 +1,108 @@
+{
+  "actualLaunchUTC": "2026-11-13T04:54:45.542Z",
+  "controllerPid": 59620,
+  "awakePid": 32988,
+  "companionPid": 29892,
+  "sourceCommit": "2b47277386eb40d7dc2e232004e42d15f5bc061f",
+  "protocolCommit": "3bccda0",
+  "inheritedStep": 61050,
+  "resumedCheckpointStep": 88250,
+  "ownerClarifiedTrainStopUTC": "2026-11-13T10:00:00.000Z",
+  "ownerClarifiedEvalCutoffUTC": "2026-11-13T13:00:00.000Z",
+  "actors": 8,
+  "provider": "hybrid-dml",
+  "dmlMinActions": 128,
+  "observedAtUTC": "2026-11-13T05:05:39.238Z",
+  "learner": {
+    "pid": 53780,
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "state": "waiting-for-data",
+    "step": 89100,
+    "trainedRows": 57446400,
+    "ingestedRows": 14350434,
+    "replayRows": 750000,
+    "oracleKeep": 0,
+    "prunedRows": 12262397,
+    "lossEma": 1.571861446830025,
+    "device": "cuda",
+    "inherited": {
+      "sha256": "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646",
+      "step": 61050,
+      "trainedRows": 125030400,
+      "ingestedRows": 31234673,
+      "chain": [
+        "b58d916882b7b5582bbe3c1191c2df83e9e0eb1d4acd82cb5830e977a2c23646"
+      ]
+    },
+    "updatedAt": "2026-11-13T05:05:37Z"
+  },
+  "supervisor": {
+    "pid": 14112,
+    "startedAt": "2026-11-13T04:54:45.965Z",
+    "deadline": "2026-11-13T10:00:00.000Z",
+    "restarts": {},
+    "resources": {
+      "availableGiB": 4.546318054199219,
+      "pausedActors": [
+        "actor-6",
+        "actor-5",
+        "actor-7"
+      ]
+    },
+    "children": [
+      {
+        "name": "learner",
+        "pid": 4440
+      },
+      {
+        "name": "actor-0",
+        "pid": 47016
+      },
+      {
+        "name": "actor-1",
+        "pid": 39232
+      },
+      {
+        "name": "actor-2",
+        "pid": 31360
+      },
+      {
+        "name": "actor-3",
+        "pid": 59504
+      },
+      {
+        "name": "actor-4",
+        "pid": 56292
+      }
+    ],
+    "updatedAt": "2026-11-13T05:05:36.190Z"
+  },
+  "companion": {
+    "pid": 29892,
+    "phase": "waiting-for-training-and-independent-evaluation",
+    "updatedAtUTC": "2026-11-13T05:05:31.062Z"
+  },
+  "registration": {
+    "id": "endgame-rebase-029-20261112",
+    "purpose": "Experimentally transfer the r2 learned trunk delta onto accepted/published029, then train endgame decisions from final signed single-round upgrade labels. Not exactresume and no automatic webintegration.",
+    "startUTC": "2026-11-12T16:58:54.268Z",
+    "trainingDeadlineUTC": "2026-11-13T10:00:00.000Z",
+    "evaluationDeadlineUTC": "2026-11-13T13:00:00.000Z",
+    "deadlineUTC": "2026-11-13T13:15:00.000Z",
+    "durationHours": 20.268258888888887,
+    "restartExtendsDeadline": false,
+    "protocolSHA256": "d31dc5104624bd21ae8a76a193d8b10c553472cb25031e5e26b8963fdfaf37c3",
+    "engineeringAmendment": 2,
+    "originalRegistrationSHA256": "c8bbab35547bddb9d20d70c3635b565cf404c5ddca62f0a8aa9daf1197906f5e",
+    "ownerAmendment": 3,
+    "previousRegistrationSHA256": "e3d88873de4d20164ee8fbca3e42bcf18aea68053871dc397cc1d384d919825d"
+  },
+  "sourceFilesVerified": 142,
+  "heldoutCompletedPairs": {
+    "A": 0,
+    "B": 0,
+    "C": 0
+  },
+  "teacherSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "sourceUnchangedSinceLaunch": true
+}

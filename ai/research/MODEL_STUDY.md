@@ -3332,3 +3332,5 @@ S4c 在已存的 160 个 41–60 张校准局面上各用 64 个 v1b 世界，�
 新8演员保持原四槽进度，新增四槽各25万新literal种子；1187历史文件/2059716已知根审计通过，原3000留出及其SHA不变。≥128候选走DML，少量CPU；ROCm学习器batch2048/replayRatio4/lr1e-5与奖励目标不变。独立评测由2增至4CPU工作器以留足08:00前预算，仍同3000副、完整终局及相同三组/门槛，描述性限时精确求解不作验收。
 
 16个固定公开位置CPU/DMLargmax全同，最大差2.11596e-6；合成批宽探针128/256/512/698候选的GPU前向分别约1.68/3.09/5.55/6.49倍，少量候选反而较慢。两项工程检查均0新局/0优化器更新，不是端到端吞吐或棋力证据。新冻结恢复和真实吞吐另记，不热改旧源码。所有正负/部分/失败结果都要先总结推main，研究包本地保存；仅完整正门槛及网页检查通过才发布新reason。[授权](evaluation/endgame-rebase-029-20261112/owner-8am/authorization.json)／[完整协议](evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)／[停止审计](evaluation/endgame-rebase-029-20261112/owner-8am/pause-stop-audit.json)。
+
+修订已经于2026-11-13T04:54:45Z真实恢复，源2b47277、协议3bccda0，仍从原88250步检查点/13组Adam继续，已观察CUDA新更新和新行；8采样器上限，内存保护当时保留6路、暂停2路，未违反4GiB底线。DML演员和ROCm学习器在Windows GPU进程内存计数中属于同一适配器，确认不是仅写配置；瞬时利用率不是棋力。全量切DML的16位置混合平均仅0.93倍，因此采用候选≥128才GPU的路由，保留负性能结果。短时数据/更新吞吐约为此前平均2倍，仅作不同时间/负载下描述，非受控A/B。[实际启动](evaluation/endgame-rebase-029-20261112/owner-8am/startup.json)／[短窗口吞吐](evaluation/endgame-rebase-029-20261112/owner-8am/throughput.json)。
