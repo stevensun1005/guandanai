@@ -65,21 +65,27 @@ function save() {
 }
 
 export function renderBotSetup() {
-  const joining = runtime.lobbyMode === 'join';
+  const joining = runtime.lobbyMode === 'join',
+    random = runtime.rules.seatMode === 'random';
   for (const select of document.querySelectorAll('[data-bot-seat]')) {
     const direction = select.dataset.botSeat;
     const human =
-      direction === runtime.direction ||
-      (runtime.lobbyMode !== 'solo' && runtime.network.lobby[direction]);
+      !random &&
+      (direction === runtime.direction ||
+        (runtime.lobbyMode !== 'solo' && runtime.network.lobby[direction]));
     select.value = botChoiceId(runtime.botPreferences?.[direction]);
     select.disabled = joining || !!human;
     select.closest('label').classList.toggle('human-seat', !!human);
-    select.closest('label').querySelector('small').textContent = human ? '玩家座位' : '电脑空位';
+    select.closest('label').querySelector('small').textContent = human
+      ? '玩家座位'
+      : random
+        ? '抽签后电脑空位'
+        : '电脑空位';
   }
   $('#mixedBotsBtn').disabled = joining;
   $('#botSetupNote').textContent = joining
     ? '由房主设置；玩家离开后的空位沿用对应模型。'
-    : defaultNote();
+    : (random ? '开始时随机安排真人座位，电脑空位沿用对应方位的模型。' : '') + defaultNote();
 }
 
 function defaultNote() {

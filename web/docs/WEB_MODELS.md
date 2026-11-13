@@ -131,3 +131,5 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 ## 研究用零 extras 导出
 
 阶段 0.6 可在忽略目录准备保留冠军主干、53×512 全零投影的双输入 ONNX，仅运行发布工具的准备流程，**不传 `--publish`**。它不是新冠军、已训练模型或已发布归档；网页清单与 baseline 均须 SHA 不变。普通 oracle 的 extras 上下文未补齐，进还贡续打明确拒绝此模型。方法与实测分开记录于[分析指南](../../ai/research/ANALYSIS.md)。
+
+随机选座只改变真人的最终方位；随机模式可为四个方位预设备用电脑，抽签后空位按对应方位使用模型。选择范围、冠军身份和默认模型没有因此改变，随机换座不是新的机器人策略或门控。

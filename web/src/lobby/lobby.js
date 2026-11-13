@@ -57,11 +57,13 @@ function loadRules() {
     coachAllowed: false,
     prepSec: 90,
     playMode: '60',
+    seatMode: 'pick',
   });
   try {
     const saved = JSON.parse(localStorage.getItem('guandan-rules') || '{}');
     if (PREP_CHOICES.includes(saved.prepSec)) runtime.rules.prepSec = saved.prepSec;
     if (Object.hasOwn(PLAY_MODES, saved.playMode)) runtime.rules.playMode = saved.playMode;
+    if (saved.seatMode === 'random') runtime.rules.seatMode = 'random';
     if (typeof saved.trib === 'boolean') runtime.rules.trib = saved.trib;
     if (['draw', 'reset', 'once', 'keep'].includes(saved.aFail))
       runtime.rules.aFail = saved.aFail === 'keep' ? 'once' : saved.aFail;
@@ -81,12 +83,19 @@ function renderRules() {
           ? String(prepMs(runtime.rules) / 1000)
           : b.dataset.rule === 'playMode'
             ? playMode(runtime.rules)
-            : runtime.rules.aFail);
+            : b.dataset.rule === 'seatMode'
+              ? runtime.rules.seatMode
+              : runtime.rules.aFail);
     b.classList.toggle('on', selected);
     b.setAttribute('aria-pressed', String(selected));
     b.disabled = !mine;
   }
-  $('#rulesNote').textContent = mine ? '' : '规则由房主选定';
+  $('#rulesNote').textContent = [
+    mine ? '' : '规则由房主选定',
+    runtime.rules.seatMode === 'random' ? '座位在开始时由系统随机安排' : '',
+  ]
+    .filter(Boolean)
+    .join('；');
   $('#coachRoomBox').hidden = runtime.lobbyMode === 'solo';
   $('#coachRoomAllowed').checked = runtime.rules.coachAllowed === true;
   $('#coachRoomAllowed').disabled = !mine;
@@ -113,6 +122,7 @@ function renderRules() {
 
 export function setMode(m) {
   leaveNet();
+  runtime.network.started = false;
   loadRules();
   runtime.privateTable = false;
   runtime.privateEpoch = (runtime.privateEpoch || 0) + 1;
@@ -137,11 +147,29 @@ export function setMode(m) {
   renderLobby();
 }
 
+function autoSeatHost() {
+  if (
+    runtime.lobbyMode !== 'host' ||
+    runtime.rules.seatMode !== 'random' ||
+    runtime.direction ||
+    !runtime.network.peerOpen ||
+    runtime.network.started
+  )
+    return;
+  const direction = DIRS.find((d) => !runtime.network.lobby[d]);
+  if (!direction) return;
+  runtime.direction = direction;
+  runtime.network.lobby[direction] = nickNow() || '房主';
+  broadcastLobby();
+}
+
 export function renderLobby() {
+  autoSeatHost();
   renderContinueMatch();
   $('#shareRoomBtn').hidden = runtime.lobbyMode !== 'host' || !runtime.network.peerOpen;
   const nick = nickNow(),
-    solo = runtime.lobbyMode === 'solo';
+    solo = runtime.lobbyMode === 'solo',
+    random = runtime.rules.seatMode === 'random';
   for (const b of seatBtns) {
     const d = b.dataset.seat,
       me = d === runtime.direction,
@@ -152,6 +180,7 @@ export function renderLobby() {
     b.classList.toggle('bot', solo && !!runtime.direction && !me);
     b.classList.toggle('taken', taken);
     b.disabled =
+      random ||
       taken ||
       (runtime.lobbyMode === 'join' &&
         !(runtime.network.hostConn && runtime.network.hostConn.open)) ||
@@ -162,7 +191,9 @@ export function renderLobby() {
         ? who
         : solo && runtime.direction
           ? '电脑'
-          : '空位';
+          : random
+            ? '随机'
+            : '空位';
   }
   renderRules();
   renderBotSetup();
@@ -171,7 +202,7 @@ export function renderLobby() {
   go.textContent = runtime.lobbyMode === 'host' ? '开始' : '坐下开始';
   go.disabled =
     !nick ||
-    !runtime.direction ||
+    (!runtime.direction && !(solo && random)) ||
     (runtime.lobbyMode === 'host' &&
       (!runtime.network.peerOpen || !versionsMatch(runtime.network.conns.values(), VERSION)));
 }
@@ -222,6 +253,7 @@ export function initialize() {
       if (b.dataset.rule === 'trib') runtime.rules.trib = b.dataset.val === '1';
       else if (b.dataset.rule === 'prepSec') runtime.rules.prepSec = Number(b.dataset.val);
       else if (b.dataset.rule === 'playMode') runtime.rules.playMode = b.dataset.val;
+      else if (b.dataset.rule === 'seatMode') runtime.rules.seatMode = b.dataset.val;
       else runtime.rules.aFail = b.dataset.val;
       try {
         localStorage.setItem(
@@ -231,12 +263,13 @@ export function initialize() {
             aFail: runtime.rules.aFail,
             prepSec: runtime.rules.prepSec,
             playMode: runtime.rules.playMode,
+            seatMode: runtime.rules.seatMode,
           }),
         );
       } catch (_) {}
       Sound.unlock();
       Sound.play('select');
-      renderRules();
+      renderLobby();
       if (runtime.lobbyMode === 'host') broadcastLobby();
     }),
   );
@@ -261,6 +294,7 @@ export function initialize() {
   });
   seatBtns.forEach((b) =>
     b.addEventListener('click', () => {
+      if (runtime.rules.seatMode === 'random') return;
       if (!nickNow()) {
         lobbyStatus('先输入昵称');
         $('#nick').focus();
@@ -284,6 +318,8 @@ export function initialize() {
   );
   $('#sitBtn').onclick = () => {
     runtime.nickname = nickNow();
+    if (runtime.lobbyMode === 'solo' && runtime.rules.seatMode === 'random')
+      runtime.direction = DIRS[(Math.random() * DIRS.length) | 0];
     if (!runtime.nickname || !runtime.direction) return;
     try {
       localStorage.setItem('guandan-nick', runtime.nickname);

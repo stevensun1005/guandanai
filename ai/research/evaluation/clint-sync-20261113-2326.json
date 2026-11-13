@@ -1,0 +1,281 @@
+{
+  "schema": 1,
+  "kind": "clint-ui-network-sync-not-strategy",
+  "phase": "validated-awaiting-pages",
+  "observedAtUTC": "2026-11-13T23:44:06.977Z",
+  "baseMain": "79921dae1361993089cbfa689e7e6958a8921c7d",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+    "checkedSHA": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+    "commits": [
+      {
+        "sha": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+        "subject": "大厅新增选座方式：自选/随机（房主选，开始时系统随机抽座）"
+      }
+    ],
+    "paths": [
+      "index.html",
+      "web/src/game/state.js",
+      "web/src/index.html",
+      "web/src/lobby/modes.js",
+      "web/src/lobby/rules.js",
+      "web/src/network/guest.js",
+      "web/src/network/host.js"
+    ],
+    "pathSHA256": {
+      "index.html": "4069c9fe486121ad8baef0870d5beadda9a5413ccf16dd0abefc66a81426fd3d",
+      "web/src/game/state.js": "2c43dd0437151ec20f0d4de1a7911fcd5dd4b6dc436b560fa0be477cc3b6f455",
+      "web/src/index.html": "5af7fe179bc205e7030d9c02c7db45f4a97247a87a5246443a6ba58308f4a296",
+      "web/src/lobby/modes.js": "da0278c0e35dbb05f8ba010940ddaa6869b729f99266c49d7e4089b13f68a7da",
+      "web/src/lobby/rules.js": "92830abe865334391b6d75e2fc7035179c4b803cf2a5f91bc3a79e51f9f77873",
+      "web/src/network/guest.js": "c5694c3b453383f719688fc4969ec3f914db015404f5539bdb8f0905dc419c82",
+      "web/src/network/host.js": "2b9a7da5a15bfd52d5048b27cdb2901c5bd3fb96e84b7ecc260dfff1ae62755e"
+    },
+    "patchSHA256": "2c43f1a6d6b0965e5d233b678459862f77bb112f3f103ea6dce1d8e3ac316836"
+  },
+  "applied": [
+    {
+      "upstream": [
+        "web/src/game/state.js"
+      ],
+      "target": [
+        "web/src/game/session.js"
+      ],
+      "scope": "seatMode defaults to pick"
+    },
+    {
+      "upstream": [
+        "web/src/index.html"
+      ],
+      "target": [
+        "web/src/index.html"
+      ],
+      "scope": "Pick/Random row, existing model/coach controls kept"
+    },
+    {
+      "upstream": [
+        "web/src/lobby/modes.js",
+        "web/src/lobby/rules.js"
+      ],
+      "target": [
+        "web/src/lobby/lobby.js"
+      ],
+      "scope": "Host temporary place, solo random direction, disabled choices, persistence, host-owned option, fresh-lobby started reset"
+    },
+    {
+      "upstream": [
+        "web/src/network/host.js",
+        "web/src/network/guest.js"
+      ],
+      "target": [
+        "web/src/network/rooms.js"
+      ],
+      "scope": "Automatic temporary guest place, one start-time draw including host, final direction broadcast; preserve opaque tokens through reserveSeat, version and capacity checks"
+    },
+    {
+      "upstream": [
+        "index.html"
+      ],
+      "target": [
+        "web/tools/build.mjs"
+      ],
+      "scope": "Duplicated bundled behavior adapted through source; no whole-page replacement"
+    }
+  ],
+  "localCompatibility": [
+    {
+      "target": "web/src/lobby/bot-setup.js",
+      "scope": "All four physical directions configurable before random draw; bot identities/default and final rotation unchanged"
+    }
+  ],
+  "notApplied": [
+    {
+      "item": "Upstream generated VERSION,APP_HASH and room namespace",
+      "reason": "Our build stamps source version; retain own PeerJS namespace, model menu, permissions and collection paths"
+    },
+    {
+      "item": "Context-only nickname-based upstream restore flow (not changed by this commit)",
+      "reason": "Keep our existing opaque credential restoration; never replace the whole upstream file"
+    }
+  ],
+  "pending": [],
+  "strategyChanged": false,
+  "protectedSourcePathsVerifiedUnchanged": [
+    "web/src/ai",
+    "web/src/rule-bot",
+    "web/src/private-table",
+    "web/src/collection",
+    "web/src/core",
+    "ai/danMCai",
+    "ai/guanzero",
+    "ai/shared"
+  ],
+  "catalogSHA256": "13568576afe03d6b7d80eb5233e8a9f95cedbc8a1aeaefd6284f8a4e9c00f6f8",
+  "menu": [
+    "clint-rule",
+    "028",
+    "029"
+  ],
+  "defaultChoice": "029",
+  "validation": {
+    "node": {
+      "tests": 518,
+      "pass": 482,
+      "skip": 36,
+      "fail": 0
+    },
+    "format": "passed",
+    "build": {
+      "passed": true,
+      "version": "23b4ed9604"
+    },
+    "researchPython": {
+      "pass": 41
+    },
+    "sharedPython": {
+      "pass": 3,
+      "skip": 1
+    },
+    "browserPreviewURL": "http://127.0.0.1:8789/",
+    "newSeatingSmoke": {
+      "upstream": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+      "viewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          1024,
+          768
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          844,
+          390
+        ],
+        [
+          320,
+          640
+        ]
+      ],
+      "savedDefaultAndSoloRandom": true,
+      "fourRealPeersRandomized": true,
+      "hostDirectionChanged": true,
+      "partnershipChanged": true,
+      "opaqueTokensPreservedAndRebound": true,
+      "fullRoomCannotChooseSeat": true,
+      "serverIgnoresRequestedRandomSeat": true,
+      "versionMismatchBlocksStart": true,
+      "freshLobbyResetsStartedFlag": true,
+      "guestAndHostReloadKeepDrawAndCards": true,
+      "hostCoachPermissionPreserved": true,
+      "roomAndHumanNameCollectionMapping": true,
+      "mixedBotPhysicalDirectionsPreserved": true,
+      "default029Unchanged": true,
+      "pageErrors": [],
+      "strengthGames": 0,
+      "cloudUploadsBlocked": true
+    },
+    "roomOptions": {
+      "layout": [
+        {
+          "viewport": [
+            1440,
+            1000
+          ],
+          "modeWidths": [
+            83.328125,
+            83.328125,
+            83.34375
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            1024,
+            768
+          ],
+          "modeWidths": [
+            86,
+            86,
+            86
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            390,
+            844
+          ],
+          "modeWidths": [
+            102.65625,
+            102.671875,
+            102.65625
+          ],
+          "savedClockOptions": true
+        },
+        {
+          "viewport": [
+            844,
+            390
+          ],
+          "modeWidths": [
+            86,
+            86,
+            86
+          ],
+          "savedClockOptions": true
+        }
+      ],
+      "bombNotAutoPassed": true,
+      "forcedPassMarkedAutomatic": true,
+      "pageErrors": [],
+      "strengthGames": 0
+    },
+    "hostRestore": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff": true,
+      "roomAndHumanNamesRestored": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "productionSmoke": "Globals hidden, three policy turns, model028/029 loaded, zero page errors",
+    "seatCredentials": "Actual PeerJS previous holders and departed credentials refused; passed",
+    "screenshots": "Five actual Chrome viewports inspected locally; no iPad Safari device claim"
+  },
+  "deployment": {
+    "status": "pending",
+    "site": "https://stevensun1005.github.io/guandanai/"
+  },
+  "strengthEvaluation": {
+    "newGames": 0,
+    "newOptimizerUpdates": 0,
+    "previousOpponentFingerprintsAndResultsRetained": true,
+    "noStrengthClaim": true
+  },
+  "frozenTraining": {
+    "modified": false,
+    "newTrainingStarted": false,
+    "ownerHold": "029-reason and new training remain not started"
+  },
+  "rootDraftsPreserved": 10
+}

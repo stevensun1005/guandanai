@@ -3,6 +3,7 @@ import { runtime } from '../app/runtime.js';
 import { readPlay, canPass, isReturnCard } from '../core/validation.js';
 import { aiReturnCard, tributeCard } from '../ai/rule-policy.js';
 import { prepMs } from '../core/table-timing.mjs';
+import { shuffle } from '../core/cards.js';
 import { timeUp } from '../game/clock.js';
 import { startCut, startShuffle } from '../game/dealing.js';
 import { act, setHumans } from '../game/events.js';
@@ -82,7 +83,11 @@ export function openRoom() {
     runtime.network.code = code;
     $('#roomCodeShow').textContent = code;
     $('#roomInfo').hidden = false;
-    lobbyStatus('把房间号告诉朋友，再选你的座位');
+    lobbyStatus(
+      runtime.rules.seatMode === 'random'
+        ? '把房间号告诉朋友，开始时随机安排座位'
+        : '把房间号告诉朋友，再选你的座位',
+    );
     renderLobby();
   });
   peer.on('error', (err) => {
@@ -179,15 +184,20 @@ function hostOnData(conn, d) {
     return;
   }
   if (d.t === 'sit' && !runtime.network.started) {
-    if (!DIRS.includes(d.dir) || (runtime.network.lobby[d.dir] && info.dir !== d.dir)) return;
+    const direction =
+      runtime.rules.seatMode === 'random'
+        ? info.dir || DIRS.find((seat) => !runtime.network.lobby[seat])
+        : d.dir;
+    if (!DIRS.includes(direction) || (runtime.network.lobby[direction] && info.dir !== direction))
+      return;
     if (info.dir) runtime.network.lobby[info.dir] = null;
-    info.dir = d.dir;
+    info.dir = direction;
     info.version = d.ver;
     info.name =
       String(d.name || '')
         .replace(/[<>&"']/g, '')
         .slice(0, 8) || '玩家';
-    runtime.network.lobby[d.dir] = info.name;
+    runtime.network.lobby[direction] = info.name;
     reserveSeat(info);
     broadcastLobby();
     renderLobby();
@@ -310,13 +320,34 @@ function hostOnClose(conn, how = 'drop') {
 }
 
 // the host starts: everyone learns where everyone sits, then the first deal goes out
+function randomizeSeats() {
+  const guests = [...runtime.network.conns.values()].filter((info) => info.dir && info.conn.open);
+  const members = [
+    { name: nickNow() || '房主' },
+    ...guests.map((info) => ({ info, name: info.name })),
+  ];
+  const directions = shuffle(DIRS.slice());
+  runtime.network.lobby = { S: null, E: null, N: null, W: null };
+  members.forEach(({ info, name }, index) => {
+    const direction = directions[index];
+    runtime.network.lobby[direction] = name;
+    if (info) {
+      info.dir = direction;
+      reserveSeat(info); // Update the existing opaque credential before any start/recovery message.
+    } else runtime.direction = direction;
+  });
+  broadcastLobby();
+}
+
 export function startOnline() {
+  if (runtime.network.started) return;
   clearHost(localStorage);
   if (!versionsMatch(runtime.network.conns.values(), VERSION)) {
     lobbyStatus('大家的页面版本需要一致，请刷新后重新入座。');
     return;
   }
   confirmReservations();
+  if (runtime.rules.seatMode === 'random') randomizeSeats();
   prepareBotModels();
   runtime.network.started = true;
   runtime.network.hostDir = runtime.direction;
@@ -487,7 +518,18 @@ function guestOnData(d) {
     if (d.rules) Object.assign(runtime.rules, d.rules);
     runtime.botPreferences = normalizeBotPreferences(d.botPreferences);
     if (d.ver && d.ver !== VERSION) lobbyStatus(OLD_PAGE);
-    else
+    else if (runtime.rules.seatMode === 'random') {
+      const free = DIRS.some((direction) => !d.seats[direction]);
+      lobbyStatus(
+        runtime.direction
+          ? '已进入房间，座位开始时随机安排'
+          : free
+            ? '座位由系统随机安排，等待房主开始'
+            : '房间已坐满，等待空位',
+        !!runtime.direction,
+      );
+      if (!runtime.direction && free) sendSit('S');
+    } else
       lobbyStatus(runtime.direction ? '已坐下，等待房主开始' : '选一个空座位', !!runtime.direction);
     renderLobby();
   } else if (d.t === 'full') {
