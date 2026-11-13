@@ -22,3 +22,5 @@ M1 Pro 真机已完成迁移和 MPS／Adam／ONNX 预检并恢复续训；本次
 网页菜单 2026-11-09 起只有四项：Clint 纯规则、最新一代 GuanZero、danMCai 现任门控冠军和默认的 danMCai-reason（冠军加推断网络搜索，出牌评价也默认用它）；普通新导出不自动成为默认。[菜单与发布](../web/docs/WEB_MODELS.md) 统一维护名称和选择范围。
 
 GuanZero 当前开发评测只保留danMCai冠军500场和reason200场（250/100对），Clint不再参与；历史报告原样保留。详见[GuanZero](guanzero/README.md)。真人联机数据经独立云端服务采集，下载与预处理入口在 [共享数据](shared/data/README.md)，不自动接入活跃训练。
+
+[新评测入口](research/evaluation/endgame-final-vs-reason-20261113/protocol.design.json)：最终尾盘学生对旧reason；原未通过发布门槛与029网页保留。

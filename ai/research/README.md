@@ -183,3 +183,5 @@ reason比较v2新独立牌副、两CPU在原截止内评测；原212局内存停
 reason对照v2已真实启动，两CPU/独立新牌副，原17:30:48Z截止不延长。[启动与源码核验](evaluation/champion-vs-reason-20261112/v2/startup.json)。
 
 [08:00尾盘窗口最终结果](evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)：正负/部分和停止审计均保留，不用训练更新数代替棋力。
+
+[尾盘最终模型对reason](evaluation/endgame-final-vs-reason-20261113/protocol.design.json)：所有者新要求直接比较最终e00110950（029开局、≤32张尾盘学生）与旧017底座reason9001。预登记1000新副/2000交换阵营单局、两CPU、一次3小时截止、95%牌副簇区间，零训练更新；旧A/B/C负结果保留，不据此改原发布门槛或网页。当前为准备，真实启动/结果另记。

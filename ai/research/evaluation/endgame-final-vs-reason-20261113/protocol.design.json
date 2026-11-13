@@ -1,0 +1,36 @@
+{
+  "id": "endgame-final-vs-reason-20261113",
+  "purpose": "Owner-requested direct evaluation of the already final e00110950 hybrid029/32-card student against archived reason9001. New evaluation only; expired training stays closed.",
+  "authorization": "2026-11-13 owner: 训练后模型对reason来个评测",
+  "challenger": {
+    "policy": "Identical to completed A evaluation: finishing move first, otherwise greedy029 above32 total remaining cards and final student at or below32; own hand and public state only.",
+    "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "studentVersion": "e00110950",
+    "studentSHA256": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7",
+    "selection": "Final window output fixed before this request; no peak/checkpoint selection. Original failed A/B/C gate remains failed."
+  },
+  "opponent": {
+    "id": "9001",
+    "base": "017",
+    "baseSHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "beliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "manifestSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+    "policy": "Archived9001 algorithms: 21..40cards8 inferred worlds top6+pass net2; <=20cards8world exact search, minimum4; other/fallback017 table policy. No rebase to029."
+  },
+  "plannedPairs": 1000,
+  "plannedRounds": 2000,
+  "workers": 2,
+  "durationHours": 3,
+  "registration": "Save registration.json exactly once before launch; original fixed deadline on restart, actual STOP/deadline checked at every decision; no replay of output or extension.",
+  "rules": "108 physicalcards; same level/leader/deal then challenger teams0/1; no tribute, complete single rounds, 1000turn truncation error, no fabricated draw, incomplete pair excluded.",
+  "inferenceBudget": "Same generous native reference budget as the earlier029-vs9001 comparison:50s per reason decision,3s per solvercall,300kTT,52s late reply fallback. Deterministic searchSeedOf(dealseed). Not browser desktop latency acceptance.",
+  "resources": "TwoCPUworkers,1thread/session,CPUarena and memorypattern disabled,1GiBV8heap, cold solver/GC each single round;4GiB reserve/5GiB resume. Existing other-machine/frozen runs untouched.",
+  "primary": "Per independent new deal, mean challenger signed final upgrade points across two swapped-team complete rounds. SampleSD/sqrt(N) normal95%CI; lower>0 favors challenger, upper<0 favors reason, otherwise inconclusive. Interpret only full1000pairs as complete preregistered result.",
+  "secondary": "W/L/D, finishingrankpairs, doubleups/down, turns; search requests/completions/deviations/fallbacks/minworlds and elapsed time. No tactical proxy reward or combined cross-study win rate.",
+  "limits": [
+    "Two homogeneousAI teams in one matchup, no humans/mixed teams/tribute/whole matches.",
+    "Different bases and policies; not a same-base search ablation. Timing and cold-cache allocation affect fallbacks.",
+    "Independent new deals exclude prior training/heldout reservations; unavailable remote history remains unverified.",
+    "No optimizer updates, data collection for training, webpage publication or automatic promotion. No expansion after seeing results."
+  ]
+}

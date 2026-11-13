@@ -1,7 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { comparisonRound, pairedRows } from '../tools/compare-champion-reason.mjs';
+import {
+  comparisonRound,
+  pairedRows,
+  studentChallenger,
+} from '../tools/compare-champion-reason.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
+import { createRound } from '../../shared/simulation/simulation.mjs';
+import { playPaired } from '../../danMCai/endgame/evaluate.mjs';
 
 const first = async (g, p) => candidates(g.hands[p], g.L, g.trick?.play)[0];
 const reason = { decide: first };
@@ -38,4 +44,50 @@ test('STOP discards unfinished games; no fabricated draws or results', async () 
     }),
     /STOP/,
   );
+});
+
+test('student challenger matches the previously evaluated hybrid policy for whole rounds', async () => {
+  const calls = { champion: 0, student: 0 };
+  const values = (file, state) => {
+    calls[file]++;
+    return Float32Array.from(state.actions, (_, i) => (file === 'student' ? i : -i));
+  };
+  const hybrid = studentChallenger(
+    (s) => values('champion', s),
+    (s) => values('student', s),
+  );
+  const opponent = studentChallenger(
+    (s) => values('champion', s),
+    (s) => values('champion', s),
+  );
+  for (const team of [0, 1]) {
+    const observed = await comparisonRound({
+      seed: 73,
+      team,
+      raw: hybrid,
+      reason: { decide: opponent },
+    });
+    const expected = await playPaired(73, team, {
+      values,
+      champion: 'champion',
+      student: 'student',
+      threshold: 32,
+      solverCards: 0,
+    });
+    assert.deepEqual(observed.order, expected.order);
+    assert.equal(observed.signedPoints, expected.points);
+  }
+  assert.ok(calls.champion > 0 && calls.student > 0);
+  assert.throws(() => studentChallenger(values, values, 40), /32-card/);
+  const game = createRound(74);
+  game.hands = game.hands.map((h) => h.slice(0, 1));
+  const noInference = studentChallenger(
+    () => {
+      throw Error('Unexpected inference');
+    },
+    () => {
+      throw Error('Unexpected inference');
+    },
+  );
+  assert.equal((await noInference(game, game.turn)).cards.length, 1);
 });

@@ -1,4 +1,4 @@
-/** Evaluation only: final research champion raw policy versus frozen deployed reason9001. */
+/** Evaluation only: frozen raw or champion/endgame-student policy versus reason9001. */
 import { fork, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
@@ -46,6 +46,21 @@ const stop = (root, reason) => {
 };
 const log = (root, text) =>
   appendFileSync(join(root, 'stages.log'), `${new Date().toISOString()} ${text}\n`);
+
+/** Matches endgame/evaluate.mjs student mode; scorers see only the public policy state. */
+export function studentChallenger(champion, student, threshold = 32) {
+  if (threshold !== 32) throw Error('This comparison freezes the trained32-card policy');
+  return async (game, p) => {
+    const plays = candidates(game.hands[p], game.L, game.trick?.play);
+    if (!plays.length) throw Error('No candidates');
+    const finish = plays.find((play) => play && play.cards.length === game.hands[p].length);
+    if (finish) return finish;
+    if (plays.length === 1) return plays[0];
+    const state = policyState(game, p, 0, plays);
+    const scorer = game.hands.reduce((n, h) => n + h.length, 0) <= threshold ? student : champion;
+    return plays[argmax(await scorer(state))];
+  };
+}
 
 export async function comparisonRound({ seed, team, raw, reason, checkpoint = async () => {} }) {
   if (![0, 1].includes(team)) throw Error('Invalid team');
@@ -173,7 +188,9 @@ async function worker(root, slot) {
   };
   try {
     save();
-    for (const key of ['challenger', 'reason', 'belief'])
+    const hybrid = plan.challengerPolicy?.kind === 'endgame-student';
+    if (plan.challengerPolicy && !hybrid) throw Error('Unknown challenger policy');
+    for (const key of ['challenger', 'reason', 'belief', ...(hybrid ? ['student'] : [])])
       sessions.push(
         await ort.InferenceSession.create(plan.models[key].localFile, {
           executionProviders: ['cpu'],
@@ -184,13 +201,15 @@ async function worker(root, slot) {
         }),
       );
     const values = championValues(ort, sessions[0]);
-    const raw = async (game, p) => {
-      const plays = candidates(game.hands[p], game.L, game.trick?.play);
-      if (!plays.length) throw Error('No candidates');
-      if (plays.length === 1) return plays[0];
-      const q = await values(policyState(game, p, 0, plays));
-      return plays[argmax(q)];
-    };
+    const raw = hybrid
+      ? studentChallenger(values, championValues(ort, sessions[3]), plan.challengerPolicy.threshold)
+      : async (game, p) => {
+          const plays = candidates(game.hands[p], game.L, game.trick?.play);
+          if (!plays.length) throw Error('No candidates');
+          if (plays.length === 1) return plays[0];
+          const q = await values(policyState(game, p, 0, plays));
+          return plays[argmax(q)];
+        };
     const budget = { ...SEARCH_BUDGETS.desktop };
     const check = async () => {
       await checkpoint();
@@ -269,7 +288,7 @@ async function main(root) {
     writeJSON(join(root, 'status.json'), { ...state, updatedAtUTC: new Date().toISOString() });
     writeJSON(join(root, 'progress.json'), {
       phase: state.phase,
-      displayName: '新研究冠军 vs 当前reason',
+      displayName: plan.displayName || '新研究冠军 vs 当前reason',
       currentTask: '独立交换阵营单局评测',
       analysis: `实际完成${state.completedRounds}/${plan.plannedRounds}局；未完成不下全量结论`,
       nextTask: '汇总升级分、95%牌副簇区间与reason回退/耗时',
@@ -375,7 +394,7 @@ async function main(root) {
           : null;
       writeJSON(join(root, 'partial-summary.json'), {
         complete: false,
-        plannedPairs: 1000,
+        plannedPairs: plan.tasks[0].seeds.length,
         completedPairs: rows.length,
         interval,
         scope:

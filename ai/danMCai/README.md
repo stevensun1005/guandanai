@@ -117,3 +117,5 @@ reason比较当前使用内存修正版v2，原数学搜索参数与网络不变
 reason对照v2已按原剩余窗口启动，两工作器使用独立新牌副。[实际启动](../research/evaluation/champion-vs-reason-20261112/v2/startup.json)；训练不重开，网页不更换。
 
 [08:00尾盘最终结果](../research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)已记录；是否成为网页reason另看条件发布结果。
+
+[最终尾盘学生对旧reason](../research/evaluation/endgame-final-vs-reason-20261113/protocol.design.json)：所有者新要求直接比较最终e00110950（029开局、≤32张尾盘学生）与旧017底座reason9001。预登记1000新副/2000交换阵营单局、两CPU、一次3小时截止、95%牌副簇区间，零训练更新；旧A/B/C负结果保留，不据此改原发布门槛或网页。当前为准备，真实启动/结果另记。

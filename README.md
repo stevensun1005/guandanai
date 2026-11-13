@@ -186,3 +186,5 @@ GuanZero定时开发评测最新安排：danMCai现任门控冠军500场、danMC
 reason对照v2已实际启动，当前只按实际完成数计进度，原12:30 Toronto截止不延长。[启动证据](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json)。
 
 尾盘08:00窗口已保存最终结果，状态complete；条件发布未通过或不完整，保持现模型。[实际总结](ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)。
+
+[尾盘最终模型对reason新评测](ai/research/evaluation/endgame-final-vs-reason-20261113/protocol.design.json)：所有者新要求直接比较最终e00110950（029开局、≤32张尾盘学生）与旧017底座reason9001。预登记1000新副/2000交换阵营单局、两CPU、一次3小时截止、95%牌副簇区间，零训练更新；旧A/B/C负结果保留，不据此改原发布门槛或网页。当前为准备，真实启动/结果另记。

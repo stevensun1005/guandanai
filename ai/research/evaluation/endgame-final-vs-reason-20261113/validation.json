@@ -1,0 +1,18 @@
+{
+  "atUTC": "2026-11-13T13:04:23.523Z",
+  "node": {
+    "tests": 518,
+    "passed": 482,
+    "skipped": 36,
+    "failed": 0
+  },
+  "researchPython": {
+    "passed": 41
+  },
+  "formatCheck": "passed",
+  "build": "passed",
+  "policyCheck": "Whole-round mockscorer parity with originalendgame evaluate.mjs for both teams; finishing move bypass and STOP discards covered",
+  "optimizerUpdates": 0,
+  "independentRoundsExecuted": 0,
+  "scope": "Engineering validation, not strength evidence"
+}

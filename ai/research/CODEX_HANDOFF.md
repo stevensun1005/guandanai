@@ -492,3 +492,7 @@ Clint UI同步1586875已完成并线上核验：代码01799f6，Pages42501549267
 最新所有者澄清为05:00停训练、08:00评测截止，随后总结/打包；8演员与宽候选DML、4CPU评测，旧时间均为历史。[本批修订与恢复](evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)，旧冻结检出不改；完整/部分和正负结果均总结推main，研究包不当成网页验收。
 
 08:00尾盘窗口已结束并记录所有结果（包括部分/负/失败），见[最终总结](evaluation/endgame-rebase-029-20261112/closeout-8am/results.json)。是否发布须另读release证据，不以步数或训练损失宣称提升。
+
+## 2026-11-13 最终尾盘对reason新请求
+
+所有者新要求直接比较最终e00110950（029开局、≤32张尾盘学生）与旧017底座reason9001。预登记1000新副/2000交换阵营单局、两CPU、一次3小时截止、95%牌副簇区间，零训练更新；旧A/B/C负结果保留，不据此改原发布门槛或网页。当前为准备，真实启动/结果另记。 新运行目录`ai/danMCai/runs/endgame-final-vs-reason-20261113`；先检查STOP/FINISHED/锁和Node实际PID，禁止重复启动或改冻结协议。上一个训练窗口已结束，不重开。协议入口[设计](evaluation/endgame-final-vs-reason-20261113/protocol.design.json)，源码SHA/一次截止与实际启动另记。

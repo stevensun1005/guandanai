@@ -189,3 +189,5 @@ Evaluation v2 uses fresh1000 deals,twoCPUworkers and coldper-roundsolver caches 
 The memory-bounded reason comparison v2 started at 14:46:43Z with two workers and fresh deals, within the original 17:30:48Z cutoff. This is evaluation only; no final conclusion yet. [Startup evidence](ai/research/evaluation/champion-vs-reason-20261112/v2/startup.json).
 
 The08:00 endgame window ended (complete); complete, partial and negative evidence is preserved. Conditional release is not accepted; current model retained. [Closeout](ai/research/evaluation/endgame-rebase-029-20261112/closeout-8am/results.json).
+
+[Final endgame model versus reason](ai/research/evaluation/endgame-final-vs-reason-20261113/protocol.design.json): Owner requested a direct comparison of final e00110950 (029 above32 cards, student at/below32) with archived017-based reason9001:1000 fresh deals/2000 swapped-team single rounds, twoCPUworkers, one3-hour deadline and95% deal-clusterCI. Evaluation only; prior failed A/B/C gate stays failed and website029 is unchanged. Prepared, not yet a result.
