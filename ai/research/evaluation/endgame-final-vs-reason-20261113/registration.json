@@ -1,0 +1,9 @@
+{
+  "startUTC": "2026-11-13T13:05:40.164Z",
+  "deadlineUTC": "2026-11-13T16:05:40.164Z",
+  "durationHours": 3,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "823192d9c6ecdbc5f2b44d2b2578d75c88b62d91607f15acb8d257c168789d1e",
+  "purpose": "Explicit new owner request, evaluation only; previous expired training remains closed",
+  "authorization": "训练后模型对reason来个评测"
+}

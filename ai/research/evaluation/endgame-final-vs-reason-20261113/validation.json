@@ -14,5 +14,49 @@
   "policyCheck": "Whole-round mockscorer parity with originalendgame evaluate.mjs for both teams; finishing move bypass and STOP discards covered",
   "optimizerUpdates": 0,
   "independentRoundsExecuted": 0,
-  "scope": "Engineering validation, not strength evidence"
+  "scope": "Engineering validation, not strength evidence; native model load and two-inputstudent graph verified, no new game or optimizer update",
+  "modelMetadata": {
+    "challenger": {
+      "inputs": [
+        "state",
+        "actions"
+      ],
+      "outputs": [
+        "values"
+      ]
+    },
+    "reason": {
+      "inputs": [
+        "state",
+        "actions"
+      ],
+      "outputs": [
+        "values"
+      ]
+    },
+    "belief": {
+      "inputs": [
+        "features"
+      ],
+      "outputs": [
+        "probs"
+      ]
+    },
+    "student": {
+      "inputs": [
+        "state",
+        "actions"
+      ],
+      "outputs": [
+        "values"
+      ]
+    }
+  },
+  "frozenSourceFiles": 185,
+  "modelSHA256": {
+    "challenger": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "reason": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "belief": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "student": "2c9f2d1c8e54defe0d8dcbb5b71acfba66dacab8c315170f2489a45385d453f7"
+  }
 }
