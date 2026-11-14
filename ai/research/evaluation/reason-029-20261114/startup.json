@@ -1,0 +1,43 @@
+{
+  "phase": "running",
+  "run": "D:/vibecoding/guandan/ai/danMCai/runs/reason-029-v3-20261114",
+  "sourceCommit": "b292056b370ec220ad1f44dc556dd4ca063dba82",
+  "frozenSourceFiles": 189,
+  "protocolSHA256": "9520d1456178e5c87c18c7195dd6989559482654cb20d74ce9fb7ccce072dce4",
+  "originalWindowStartUTC": "2026-11-14T05:00:12.127Z",
+  "actualLaunchRequestedUTC": "2026-11-14T05:09:42.4909428Z",
+  "observedAtUTC": "2026-11-14T05:11:50.596Z",
+  "trainingDeadlineUTC": "2026-11-14T15:00:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-14T17:45:00.000Z",
+  "deadlineUTC": "2026-11-14T18:00:00.000Z",
+  "restartExtendsDeadline": false,
+  "controllerPID": 44644,
+  "dashboardPID": 39608,
+  "guardianPID": 45140,
+  "awakePID": 39384,
+  "liveness": {
+    "2988": true,
+    "4920": true,
+    "37572": true,
+    "38656": true,
+    "39384": true,
+    "39608": true,
+    "44644": true,
+    "45140": true
+  },
+  "actualFirstSegment": {
+    "greedy": {
+      "rounds": 1575,
+      "rows": 49062
+    },
+    "reason": {
+      "rounds": 20,
+      "rows": 658
+    },
+    "completedBaselinePairs": 46
+  },
+  "formalGPUOptimizerUpdates": 0,
+  "GPUState": "Preflight passed; formal GPU learner queued until current fresh-data segment completes",
+  "strengthConclusion": null,
+  "menuUnchanged": true
+}
