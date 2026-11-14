@@ -1,0 +1,33 @@
+{
+  "purpose": "Engineering validation of v2 source before freezing; not model strength",
+  "node": {
+    "complete": true,
+    "modules": 114,
+    "tests": 516,
+    "passed": 480,
+    "skipped": 36,
+    "failed": 0,
+    "command": "Expanded actual test file paths, node --test --test-isolation=none --test-concurrency=1 --test-timeout=180000",
+    "logSHA256": "55c6b35ca57c08731a77b42256ebf4cf0060b261e90e46cb82987beaa09b1943",
+    "note": "Default npm test passed519/483/36 at9049b76. Later standard concurrent invocations stalled after an exited PIMC test child; logs retained, owned wrappers stopped. Appending flags to npm script did not configure runner; NODE_OPTIONS none plus literal wildcard argv caused existing CLI realpath guards to fail. Explicit actual paths and single process passed all unique test names; shared imported solver tests deduplicated. No test assertions disabled."
+  },
+  "python": {
+    "danMCaiModules": 19,
+    "allModulesPassed": true,
+    "researchTests": 41,
+    "sharedTests": 4,
+    "sharedSkipped": 0,
+    "logSHA256": "5fbbb09e3b9dcb86109a3e8484fe54faec364a3e059146a4255f8079cfb9dd4b"
+  },
+  "formatCheck": {
+    "passed": true,
+    "logSHA256": "188d607ebfd578a7e695e7ddf319c0e438d00d16133c9711d0602e899d433d71"
+  },
+  "build": {
+    "passed": true,
+    "webVersion": "23b4ed9604",
+    "logSHA256": "3888b3a35c0733a19b310a2641868ef789fe024c4fc21ab40d2eb79b60f5e3f7"
+  },
+  "GPUPreflight": "pending frozen-source actual test",
+  "optimizerUpdatesInFormalRun": 0
+}

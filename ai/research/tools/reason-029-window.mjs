@@ -3,6 +3,7 @@ import { fork, spawn } from 'node:child_process';
 import {
   appendFileSync,
   closeSync,
+  copyFileSync,
   existsSync,
   mkdirSync,
   openSync,
@@ -53,7 +54,8 @@ export function validateRegistration(plan, reg, now = Date.now()) {
   if (
     plan.id !== 'reason-029-20261114' ||
     reg.deadlineUTC !== '2026-11-14T18:00:00.000Z' ||
-    reg.trainingDeadlineUTC !== '2026-11-14T11:00:00.000Z' ||
+    reg.trainingDeadlineUTC !== '2026-11-14T15:00:00.000Z' ||
+    reg.generationDeadlineUTC !== '2026-11-14T14:45:00.000Z' ||
     reg.evaluationDeadlineUTC !== '2026-11-14T17:45:00.000Z' ||
     reg.restartExtendsDeadline !== false ||
     now >= Date.parse(reg.evaluationDeadlineUTC)
@@ -93,15 +95,27 @@ export const playKey = (p) =>
         .join(',')}`
     : 'pass';
 
-async function generate(root, kind) {
+async function generate(root, kind, segment) {
   const { plan, reg } = verify(root),
-    out = join(root, 'data-' + kind),
+    out = join(root, 'segments', String(segment), 'data-' + kind),
     spec = featureSpec('v1');
   mkdirSync(out, { recursive: true });
   if (existsSync(join(out, 'run.json')))
     throw Error('Data already started; do not replay its seeds');
-  const seeds = plan.data[kind],
+  const size = plan.segmentSizes[kind];
+  const seeds = plan.data[kind].slice(segment * size, (segment + 1) * size),
     blockSize = kind === 'greedy' ? 25 : 5;
+  if (!Number.isInteger(segment) || segment < 0 || !seeds.length)
+    throw Error('Invalid fresh-data segment');
+  const previousReport = segment
+    ? readJSON(join(root, 'segments', String(segment - 1), 'model/train-report.json'))
+    : null;
+  const beliefFile = segment
+    ? join(root, 'segments', String(segment - 1), 'model/belief.onnx')
+    : plan.models.belief.localFile;
+  const beliefSHA256 = segment ? previousReport?.onnxSHA256 : plan.models.belief.sha256;
+  if (!beliefSHA256 || sha256(beliefFile) !== beliefSHA256)
+    throw Error('Segment teacher not frozen');
   const run = {
     featureVersion: spec.version,
     features: spec.features,
@@ -112,7 +126,7 @@ async function generate(root, kind) {
     every: 2,
     temperature: 0,
     championSHA256: plan.models.champion.sha256,
-    beliefSHA256: kind === 'reason' ? plan.models.belief.sha256 : null,
+    beliefSHA256: kind === 'reason' ? beliefSHA256 : null,
     policy:
       kind === 'reason'
         ? '029 + frozen v1 belief + desktop search, all four seats; no true hands in decision'
@@ -131,10 +145,10 @@ async function generate(root, kind) {
       choose = championChooser((s) => pool.values(plan.models.champion.localFile, s));
     } else {
       champion = await session(plan.models.champion.localFile);
-      belief = await session(plan.models.belief.localFile);
+      belief = await session(beliefFile);
       const budget = { ...SEARCH_BUDGETS.desktop };
       choose = async (game, plays) => {
-        await checkpoint(root, reg.trainingDeadlineUTC, status);
+        await checkpoint(root, reg.generationDeadlineUTC, status);
         const play = await bot.decide(
           game,
           game.turn,
@@ -154,7 +168,7 @@ async function generate(root, kind) {
       };
     }
     for (let i = 0; i < seeds.length; i += blockSize) {
-      await checkpoint(root, reg.trainingDeadlineUTC, status);
+      await checkpoint(root, reg.generationDeadlineUTC, status);
       const blockSeeds = seeds.slice(i, i + blockSize);
       const block = await generateBlock(blockSeeds, {
         choose,
@@ -162,7 +176,7 @@ async function generate(root, kind) {
         every: 2,
         version: 'v1',
       });
-      await checkpoint(root, reg.trainingDeadlineUTC, status);
+      await checkpoint(root, reg.generationDeadlineUTC, status);
       writeBlock(out, blockSeeds[0], blockSeeds.at(-1), block, {
         literalSeeds: blockSeeds,
         dataUse: 'belief training/seed-mod10 validation only',
@@ -174,7 +188,7 @@ async function generate(root, kind) {
     }
     status.phase = 'complete';
   } catch (e) {
-    status.phase = stopped(root, reg.trainingDeadlineUTC) ? 'stopped' : 'failed';
+    status.phase = stopped(root, reg.generationDeadlineUTC) ? 'stopped' : 'failed';
     status.error = String(e.stack || e);
     if (status.phase === 'failed') throw e;
   } finally {
@@ -323,6 +337,7 @@ async function main(root) {
     children = [],
     history = [];
   let phase = 'prepare',
+    activeSegment = 0,
     guardian,
     timer;
   const tick = () => {
@@ -332,18 +347,25 @@ async function main(root) {
       displayName: '029-reason：029底座＋推断网络适配',
       currentTask: phase,
       analysis: '仅真实分片、GPU更新和逐副结果；未完整验收不称提升',
-      nextTask:
-        phase === 'data-and-baseline'
-          ? 'GPU适配推断v1，再独立比较两版reason'
-          : '最终独立评测、停止审计与打包',
+      nextTask: phase.startsWith('data-')
+        ? 'GPU适配推断v1，再独立比较两版reason'
+        : '最终独立评测、停止审计与打包',
       deadlineUTC: reg.deadlineUTC,
       children: history,
     });
-    const g = readJSON(join(root, 'data-greedy/summary.json')),
-      r = readJSON(join(root, 'data-reason/summary.json')),
-      m = readJSON(join(root, 'model/status.json'));
+    const segmentRoot = join(root, 'segments', String(activeSegment));
+    const g = readJSON(join(segmentRoot, 'data-greedy/summary.json')),
+      r = readJSON(join(segmentRoot, 'data-reason/summary.json')),
+      m = readJSON(join(segmentRoot, 'model/status.json'));
+    if (m?.pid && !history.some((p) => p.pid === m.pid))
+      history.push({
+        pid: m.pid,
+        role: 'actual GPU learner reported by status',
+        segment: activeSegment,
+      });
     writeJSON(join(root, 'data-panel.json'), {
       rows: [
+        ['当前新样本段', activeSegment + 1],
         ['029贪心完整单局 / 样本行', `${g?.rounds || 0} / ${g?.rows || 0}`],
         ['029-reason完整单局 / 样本行', `${r?.rounds || 0} / ${r?.rows || 0}`],
         ['数据生成状态', `${g?.phase || '未开始'} / ${r?.phase || '未开始'}`],
@@ -357,7 +379,7 @@ async function main(root) {
       ],
     });
     const memoryPause = join(root, 'model/MEMORY_PAUSE');
-    if (phase === 'belief-train' && freemem() < 4 * 1024 ** 3 && !existsSync(memoryPause))
+    if (phase.startsWith('train-') && freemem() < 4 * 1024 ** 3 && !existsSync(memoryPause))
       writeJSON(memoryPause, { reason: 'four-GiB-memory-reserve' });
     if (freemem() >= 5 * 1024 ** 3 && existsSync(memoryPause)) unlinkSync(memoryPause);
   };
@@ -421,54 +443,91 @@ async function main(root) {
     );
     // Attach immediately so a concurrent baseline failure cannot become an unhandled rejection.
     baseline.catch(() => stopFile(root, 'baseline-failed'));
-    await stage('data-and-baseline', () =>
-      Promise.all(['greedy', 'reason'].map((kind) => node(`--generate=${kind}`))),
-    );
-    const totalRows = ['greedy', 'reason'].reduce(
-      (n, k) => n + (readJSON(join(root, `data-${k}/summary.json`))?.rows || 0),
-      0,
-    );
-    if (totalRows < 50000 || stopped(root, reg.trainingDeadlineUTC))
-      throw Error('Insufficient data or training time; no substitute samples');
-    await stage('belief-train', async () => {
-      // Allow the eager dataset + GPU minibatches to load without consuming the four-GiB reserve.
-      while (freemem() < 7 * 1024 ** 3 && !stopped(root, reg.trainingDeadlineUTC)) await pause();
-      if (stopped(root, reg.trainingDeadlineUTC)) throw Error('Training cutoff');
-      await run(plan.python, [
-        '-B',
-        '-X',
-        'utf8',
-        join(plan.sourceRoot, 'ai/danMCai/belief/train.py'),
-        `--data=${join(root, 'data-greedy')},${join(root, 'data-reason')}`,
-        `--out=${join(root, 'model')}`,
-        `--initial-onnx=${plan.models.belief.localFile}`,
-        '--device=cuda:0',
-        '--threads=1',
-        '--batch=4096',
-        '--lr=0.00003',
-        '--weight-decay=0.01',
-        '--dropout=0.2',
-        '--input-dropout=0.1',
-        '--epochs=12',
-        '--minutes=240',
-        '--seed=2026111429',
-        '--eval-every=100',
-        `--deadline=${reg.trainingDeadlineUTC}`,
-        `--stop-file=${join(root, 'STOP')},${join(root, 'model/STOP')}`,
-        `--pause-file=${join(root, 'model/MEMORY_PAUSE')}`,
-      ]);
-      const report = readJSON(join(root, 'model/train-report.json'));
-      if (!report?.steps || report.stopReason !== 'fixed-epochs-or-steps')
-        throw Error('Training not fully completed; no final acceptance');
-      writeJSON(join(root, 'final-model.json'), {
-        championSHA256: plan.models.champion.sha256,
-        beliefSHA256: report.onnxSHA256,
-        checkpointSHA256: sha256(join(root, 'model/checkpoint.pt')),
-        steps: report.steps,
-        initialBeliefSHA256: report.initialONNXSHA256,
-        selection: 'Final fixed12-epoch network, never a validation peak',
-        createdAtUTC: new Date().toISOString(),
+    let latestModel = null;
+    for (
+      activeSegment = 0;
+      activeSegment < plan.maxSegments && !stopped(root, reg.generationDeadlineUTC);
+      activeSegment++
+    ) {
+      const segmentRoot = join(root, 'segments', String(activeSegment)),
+        modelRoot = join(segmentRoot, 'model');
+      mkdirSync(modelRoot, { recursive: true });
+      await stage(`data-${activeSegment}`, () =>
+        Promise.all(
+          ['greedy', 'reason'].map((kind) =>
+            node(`--generate=${kind}`, `--segment=${activeSegment}`),
+          ),
+        ),
+      );
+      const totalRows = ['greedy', 'reason'].reduce(
+        (n, k) => n + (readJSON(join(segmentRoot, `data-${k}/summary.json`))?.rows || 0),
+        0,
+      );
+      if (totalRows < 10000 || stopped(root, reg.trainingDeadlineUTC)) break;
+      if (existsSync(join(root, 'STOP'))) throw Error('Window stopped');
+      await stage(`train-${activeSegment}`, async () => {
+        // Allow the eager dataset + GPU minibatches to load without consuming the four-GiB reserve.
+        while (freemem() < 7 * 1024 ** 3 && !stopped(root, reg.trainingDeadlineUTC)) await pause();
+        if (stopped(root, reg.trainingDeadlineUTC)) throw Error('Training cutoff');
+        await run(plan.python, [
+          '-B',
+          '-X',
+          'utf8',
+          join(plan.sourceRoot, 'ai/danMCai/belief/train.py'),
+          `--data=${join(segmentRoot, 'data-greedy')},${join(segmentRoot, 'data-reason')}`,
+          `--out=${modelRoot}`,
+          latestModel
+            ? `--initial-checkpoint=${join(latestModel, 'checkpoint.pt')}`
+            : `--initial-onnx=${plan.models.belief.localFile}`,
+          '--device=cuda:0',
+          '--threads=1',
+          '--batch=4096',
+          '--lr=0.00003',
+          '--weight-decay=0.01',
+          '--dropout=0.2',
+          '--input-dropout=0.1',
+          '--epochs=12',
+          '--minutes=240',
+          `--seed=${2026111429 + activeSegment}`,
+          '--eval-every=100',
+          `--deadline=${reg.trainingDeadlineUTC}`,
+          `--stop-file=${join(root, 'STOP')},${join(root, 'model/STOP')}`,
+          `--pause-file=${join(root, 'model/MEMORY_PAUSE')}`,
+        ]);
+        const report = readJSON(join(modelRoot, 'train-report.json'));
+        if (!report?.steps) throw Error('No real optimizer updates');
+        latestModel = modelRoot;
+        writeJSON(join(segmentRoot, 'completed-model.json'), {
+          beliefSHA256: report.onnxSHA256,
+          checkpointSHA256: sha256(join(modelRoot, 'checkpoint.pt')),
+          cumulativeUpdates: report.steps,
+          newUpdates: report.newUpdates,
+          stopReason: report.stopReason,
+        });
       });
+    }
+    if (!latestModel) throw Error('No trained final model before cutoff');
+    activeSegment = Number(latestModel.replaceAll('\\', '/').split('/').at(-2));
+    // The last chronological learner is frozen, including a time-limited final segment.
+    for (const file of ['belief.onnx', 'checkpoint.pt', 'train-report.json', 'status.json'])
+      copyFileSync(join(latestModel, file), join(root, 'model', file));
+    const report = readJSON(join(root, 'model/train-report.json'));
+    writeJSON(join(root, 'final-model.json'), {
+      championSHA256: plan.models.champion.sha256,
+      beliefSHA256: report.onnxSHA256,
+      checkpointSHA256: sha256(join(root, 'model/checkpoint.pt')),
+      steps: report.steps,
+      initialBeliefSHA256: report.initialONNXSHA256,
+      selection:
+        'Last chronological learner across fresh segments before10AM; never a validation peak',
+      lastSegmentModel: latestModel,
+      dataSegments: Array.from({ length: activeSegment + 1 }, (_, i) => ({
+        segment: i,
+        greedy: readJSON(join(root, 'segments', String(i), 'data-greedy/summary.json')),
+        reason: readJSON(join(root, 'segments', String(i), 'data-reason/summary.json')),
+        model: readJSON(join(root, 'segments', String(i), 'completed-model.json')),
+      })),
+      createdAtUTC: new Date().toISOString(),
     });
     await baseline;
     await stage('final-evaluation', () =>
@@ -598,7 +657,8 @@ async function main(root) {
 if (process.argv[1] && resolve(process.argv[1]) === SELF) {
   const root = resolve(option('run', ''));
   if (process.argv.includes('--watch')) await watch(root);
-  else if (option('generate', '')) await generate(root, option('generate'));
+  else if (option('generate', ''))
+    await generate(root, option('generate'), Number(option('segment', '0')));
   else if (option('evaluate', '')) await evaluate(root, option('evaluate'), Number(option('slot')));
   else await main(root);
 }

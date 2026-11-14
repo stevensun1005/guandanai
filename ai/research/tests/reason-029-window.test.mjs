@@ -5,7 +5,8 @@ test('029-reason fixed owner cutoff cannot be extended or restarted after expiry
   const plan = { id: 'reason-029-20261114' },
     reg = {
       deadlineUTC: '2026-11-14T18:00:00.000Z',
-      trainingDeadlineUTC: '2026-11-14T11:00:00.000Z',
+      trainingDeadlineUTC: '2026-11-14T15:00:00.000Z',
+      generationDeadlineUTC: '2026-11-14T14:45:00.000Z',
       evaluationDeadlineUTC: '2026-11-14T17:45:00.000Z',
       restartExtendsDeadline: false,
     };

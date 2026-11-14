@@ -151,3 +151,5 @@ node ai/danMCai/belief/reason-match-eval.mjs --summarize --out=<目录>
 ## 029-reason推断适配新窗口（2026-11-13晚）
 
 `train.py --initial-onnx`可完整复制v1权重与输入归一化，用新AdamW适配（不是匹配Adam续训）；`--epochs`固定数据遍数，`--deadline`/`--stop-file`/`--pause-file`支持新窗口截止与内存保护；最终checkpoint含匹配优化器。旧参数默认行为保持。新029贪心/搜索样本、GPU预检及三组独立整局比较见[协议](../../research/evaluation/reason-029-20261114/README.md)，准备/推断误差/棋力分别记录。网页和旧冻结检出不变。
+
+同轮v2改为10:00美东训练停止。后续新数据段用`--initial-checkpoint`恢复匹配网络/Adam与累计step（不得同时传`--initial-onnx`），保存旧段原件；没有恢复未保存的RNG或数据采样状态。新一段使用新的已审计牌副与随机种子，只取时间顺序最后模型。[v2设计](../../research/evaluation/reason-029-20261114/protocol.design-v2.json)。

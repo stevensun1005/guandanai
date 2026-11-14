@@ -155,6 +155,18 @@ def load_initial_onnx(net, file):
     return sha256(file)
 
 
+def load_initial_checkpoint(net, optimizer, file, device):
+    """Resume a trusted local segment's matching weights/Adam, not its unsaved RNG or data."""
+    saved = torch.load(file, map_location=device, weights_only=True)
+    if saved["counts_offset"] != net.counts_offset or saved["hidden"] != net.l1.out_features:
+        raise ValueError("Checkpoint architecture/prior differs")
+    net.load_state_dict(saved["state"], strict=True)
+    optimizer.load_state_dict(saved["optimizer"])
+    if len(optimizer.state) != 6 or any(int(s["step"]) != saved["step"] for s in optimizer.state.values()):
+        raise ValueError("Adam does not match saved cumulative step")
+    return saved
+
+
 def copy_loss(log_probs, y):
     """Per-copy cross-entropy; faces without unseen copies are masked by y = 0."""
     y = y.view(-1, FACES, SEATS)
@@ -346,6 +358,13 @@ def train(args):
     initial_sha = load_initial_onnx(net, args.initial_onnx) if args.initial_onnx else None
     net.train()
     optimizer = torch.optim.AdamW(net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    inherited_step = 0
+    if args.initial_checkpoint:
+        if args.initial_onnx:
+            raise ValueError("Choose ONNX/new Adam or matching checkpoint, not both")
+        saved = load_initial_checkpoint(net, optimizer, args.initial_checkpoint, device)
+        inherited_step = int(saved["step"])
+        initial_sha = saved.get("initialONNXSHA256")
     xv, yv = x[val_idx], y[val_idx]
     initial = evaluate(net, xv, yv, counts_offset, device)
     history = [{"step": 0, "seconds": 0.0, **initial}]
@@ -360,8 +379,8 @@ def train(args):
         epoch_steps = int(np.ceil(args.epochs * len(train_idx) / min(args.batch, len(train_idx))))
         max_steps = min(max_steps, epoch_steps) if max_steps > 0 else epoch_steps
     def status(phase):
-        value = {"pid": os.getpid(), "phase": phase, "step": step, "device": str(device),
-                 "rowsSeen": rows_seen, "trainRows": len(train_idx), "maxSteps": max_steps,
+        value = {"pid": os.getpid(), "phase": phase, "step": inherited_step + step, "newUpdates": step, "inheritedStep": inherited_step, "device": str(device),
+                 "rowsSeen": rows_seen, "trainRows": len(train_idx), "maxSteps": inherited_step + max_steps,
                  "initialONNXSHA256": initial_sha, "trainLossEMA": ema,
                  "updatedAtUTC": datetime.now().astimezone().isoformat()}
         temporary = out / "status.json.tmp"
@@ -406,7 +425,7 @@ def train(args):
             status("training")
     seconds = time.time() - start
     final = evaluate(net, xv, yv, counts_offset, device)
-    torch.save({"state": net.state_dict(), "optimizer": optimizer.state_dict(), "step": step,
+    torch.save({"state": net.state_dict(), "optimizer": optimizer.state_dict(), "step": inherited_step + step,
                 "counts_offset": counts_offset, "hidden": args.hidden,
                 "initialONNXSHA256": initial_sha}, out / "checkpoint.pt")
     net.eval()
@@ -437,9 +456,12 @@ def train(args):
             "seed": args.seed,
             "device": str(device),
         },
-        "steps": step,
+        "steps": inherited_step + step,
+        "newUpdates": step,
+        "inheritedStep": inherited_step,
+        "initialCheckpointSHA256": sha256(args.initial_checkpoint) if args.initial_checkpoint else None,
         "initialONNXSHA256": initial_sha,
-        "newAdam": bool(initial_sha),
+        "newAdam": bool(initial_sha) and not bool(args.initial_checkpoint),
         "effectiveMaxSteps": max_steps,
         "stopReason": "stop-file" if any(p.exists() for p in stop_files) else "deadline" if time.time() >= deadline else "fixed-epochs-or-steps",
         "trainSeconds": seconds,
@@ -477,6 +499,7 @@ def parse(argv=None):
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--device", default="mps")
     p.add_argument("--initial-onnx")
+    p.add_argument("--initial-checkpoint")
     p.add_argument("--epochs", type=float, default=0)
     p.add_argument("--threads", type=int, default=0)
     p.add_argument("--deadline")

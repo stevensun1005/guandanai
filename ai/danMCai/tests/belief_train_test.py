@@ -71,6 +71,18 @@ class BeliefTrainTest(unittest.TestCase):
             torch.testing.assert_close(original(xt), student(xt), atol=0, rtol=0)
             optimizer = torch.optim.AdamW(student.parameters())
             self.assertEqual(len(optimizer.state), 0)
+            optimizer.zero_grad()
+            student(xt).mean().backward()
+            optimizer.step()
+            checkpoint = Path(directory) / "checkpoint.pt"
+            torch.save({"state":student.state_dict(),"optimizer":optimizer.state_dict(),
+                        "step":1,"counts_offset":C0,"hidden":32},checkpoint)
+            restored = BeliefNet(F,C0,np.zeros(F),np.ones(F),hidden=32).eval()
+            adam = torch.optim.AdamW(restored.parameters())
+            saved = belief_train.load_initial_checkpoint(restored,adam,checkpoint,"cpu")
+            self.assertEqual(saved["step"],1)
+            self.assertEqual(len(adam.state),6)
+            torch.testing.assert_close(student(xt),restored(xt),atol=0,rtol=0)
 
     def test_loss_is_per_copy_and_masks_faces_without_unseen_copies(self):
         torch.manual_seed(0)

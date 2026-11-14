@@ -1,0 +1,125 @@
+{
+  "id": "reason-029-20261114",
+  "purpose": "Build actual029-base search and test whether hand-inference v1 adaptation to029 greedy/search self-play improves final round points. No oldr2 weight-delta transplant.",
+  "ownerAuthorization": {
+    "quote": "做029-reason 到明天下午一点停止",
+    "localDate": "2026-11-13",
+    "timezone": "America/Toronto",
+    "deadlineUTC": "2026-11-14T18:00:00.000Z",
+    "trainingDeadlineUTC": "2026-11-14T15:00:00.000Z",
+    "evaluationDeadlineUTC": "2026-11-14T17:45:00.000Z",
+    "restartExtendsDeadline": false,
+    "purpose": "Owner authorized 029-reason until tomorrow 13:00 Toronto",
+    "requestedLocalDate": "2026-11-13",
+    "ownerQuote": "可以再多训练一点 训练到明天中午10点结束 然后评测保存 大概在1.左右结束就好了",
+    "createdAtUTC": "2026-11-14T04:23:38.0309975Z",
+    "webDeployment": false,
+    "originalOwnerQuote": "做029-reason 到明天下午一点停止",
+    "generationDeadlineUTC": "2026-11-14T14:45:00.000Z",
+    "revisedAtUTC": "2026-11-14T04:45:17.911Z",
+    "note": "Explicit owner amendment BEFORE formal registration or any gameplay/training; v1 remains unstarted.10AM Toronto train stop; approx1PM all done."
+  },
+  "models": {
+    "champion": {
+      "version": "029/v000061013",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "frozen": true
+    },
+    "old": {
+      "version": "017/v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "frozen": true
+    },
+    "belief": {
+      "featureVersion": "belief-v1",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "warmStart": true,
+      "newAdam": true
+    }
+  },
+  "data": {
+    "greedyRounds": 30000,
+    "reasonRounds": 8000,
+    "band": [
+      1,
+      80
+    ],
+    "every": 2,
+    "validation": "Whole literal seed mod10=0; both sources. Never tuning on heldout games.",
+    "inputs": "Own hand and public information only; simulated hidden locations are supervised targets only. No D1/human/Clint/GuanZero data or teachers.",
+    "scope": "Upper caps across at most10 sequential fresh segments; stop generation09:45Toronto, training10:00. Only fully written single rounds enter training. No extra roots on exhaustion.",
+    "segmentSizes": {
+      "greedy": 3000,
+      "reason": 800
+    },
+    "teacher": "Frozen029 main MLP; segment0 oldbelief-v1; later segments use preceding chronological segment belief with exact ONNX SHA before generation. No heldout feedback or model selection."
+  },
+  "training": {
+    "device": "Existing ROCm cuda:0 only, actual preflight required",
+    "parameters": "Only belief v1 six weight/bias tensors; original normalization and029 main MLP frozen",
+    "batch": 4096,
+    "lr": 0.00003,
+    "weightDecay": 0.01,
+    "dropout": 0.2,
+    "inputDropout": 0.1,
+    "augmentSuits": true,
+    "epochs": "At most12 per fresh segment; up to10 segments, absolute10AM stop wins. Not12 repeatedly on an unchanged dataset.",
+    "seed": 2026111429,
+    "threads": 1,
+    "select": "Last chronological trained learner before10AM, including a time-limited final saved segment; no validation peak.",
+    "optimizer": "Segment0 newAdamW from exact originalONNX+normalization; subsequent segments restore matching6 tensor Adam states and cumulative updates. Fresh dataset/dropout seed per segment. No exact RNG/replay resumption claim."
+  },
+  "search": {
+    "lo": 21,
+    "hi": 40,
+    "worlds": 8,
+    "k": 6,
+    "net": 2,
+    "endgameHi": 20,
+    "endgameWorlds": 8,
+    "minWorlds": 4,
+    "midgameMs": 50000,
+    "endgameMs": 50000,
+    "solverMs": 3000,
+    "solverTable": 300000,
+    "solverMaxNodes": 1500000,
+    "worldSeed": "(seed*1009+ply*7919)>>>0",
+    "roundSearchSeed": "searchSeedOf(seed)",
+    "coldSolverPerRound": true,
+    "scope": "Same desktop search logic/budgets both sides; timing/load fallbacks reported separately. Search does not train a policy network."
+  },
+  "evaluation": {
+    "baselineVsOld": {
+      "pairs": 1000
+    },
+    "finalVsOld": {
+      "pairs": 1000,
+      "sameDealsAsBaseline": true
+    },
+    "finalVsBaseline": {
+      "pairs": 1000,
+      "separateDealBlock": true
+    },
+    "totalCompleteRounds": 6000,
+    "workers": "2 baseline, plus2 generation; after data/GPU and baseline finish,2+2 final evaluators",
+    "unit": "Single fresh round/no tribute; same108 physical cards,level,leader then swap teams",
+    "primary": "Final029-reason vs old9001 signed terminal upgrade points",
+    "secondary": "Final029-reason vs baseline029-reason isolates belief adaptation; paired final-minus-baseline against commonold is descriptive",
+    "accept": "Both direct final-old and final-baseline97.5% seed-pair cluster intervals strictly above0 (Bonferroni familywise95% for two gates). Complete1000 pairs each required. No promotion on partial/time-selected samples.",
+    "report": "W/L/D,finishing-rank pairs,double-ups/double-downs,search timing/fallbacks separately. No merged overall win rate or whole-match/human claim."
+  },
+  "boundaries": {
+    "webDefault": "029 unchanged; new request does not authorize web publication",
+    "Clint": "Evaluation only under separate protocol; not used here",
+    "otherRuns": "Read only; do not restart or extend",
+    "ram": "Pause below4GiB, resume5GiB; preload training at7GiB",
+    "oldEvidence": "All old negative outcomes/r2/raw029-vs-reason retained"
+  },
+  "status": "V2_DESIGN_NOT_STARTED",
+  "revision": 2,
+  "supersedes": {
+    "file": "protocol.design.json",
+    "status": "Never registered/started; explicit owner10AM amendment before new computation",
+    "unusedFrozenSource": "9049b76"
+  }
+}

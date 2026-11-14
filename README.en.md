@@ -1,6 +1,6 @@
 <div align="center">
 
-New owner-authorized029-reason window: freeze029, adapt belief-v1 on fresh029 self-play, then compare baseline/final search against oldreason. Hard stop Nov14 13:00Toronto; training06:00/evaluation12:45 cutoffs. Old runs stay closed, web029 unchanged. [Protocol](ai/research/evaluation/reason-029-20261114/README.md). Older window statuses below are historical.
+New owner-authorized029-reason window: freeze029, adapt belief-v1 on fresh029 self-play, then compare baseline/final search against oldreason. Hard stop Nov14 13:00Toronto; training10:00/evaluation12:45 cutoffs, per subsequent owner amendment. Old runs stay closed, web029 unchanged. [Protocol](ai/research/evaluation/reason-029-20261114/README.md). Older window statuses below are historical.
 
 Owner-clarified cutoff: Nov13 05:00Toronto training stop, 08:00 evaluation cutoff, then summary/packaging. Eight actors use DML for large candidate batches; all outcomes are reported, while deployment remains conditional. [Amendment](ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json).
 
