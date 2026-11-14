@@ -1,16 +1,16 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
-  "evidence": "clint-sync-20261113-2326.json",
+  "lastSuccessfulUpstreamSHA": "e17f3adb17d89b665445d39524f383e97cecd3c5",
+  "evidence": "clint-sync-20261114-1548.json",
   "pending": [],
-  "lastCheckedUpstreamSHA": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+  "lastCheckedUpstreamSHA": "e17f3adb17d89b665445d39524f383e97cecd3c5",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",
     "deployedCodeCommit": "19fb94e447e8799e93400a983875312ee47f1234"
   },
-  "previousSuccessfulEvidence": "clint-sync-20261112-0320.json",
+  "previousSuccessfulEvidence": "clint-sync-20261113-2326.json",
   "lastSuccessfulRuleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
-  "note": "Full UI/network adaptation throughf97f0fe, Pages43529371683/43530095467 successful; public23b4ed9604 fiveviewports/fourpeers/token rebind/host+guest restore/mixedmodels verified. Rule strategy fingerprint remains6e57485; no training or strength change."
+  "note": "Full UI/network/browser tribute adaptation through e17f3ad; Pages43614454344 and publicbc7a2d065d five viewports/realPeerJS changed-ID/live-tab replacement/audio/keypad/equaltribute verified. Rule strategy remains6e57485;029 menu/default and frozen training preserved."
 }

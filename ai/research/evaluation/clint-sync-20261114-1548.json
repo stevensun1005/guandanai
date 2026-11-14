@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "clint-ui-network-and-browser-tribute-rules-not-bot-strategy",
-  "phase": "local-validation-passed-deployment-pending",
+  "phase": "complete",
   "observedAtUTC": "2026-11-14T16:08:42.744965+00:00",
   "baseMain": "e6b6bc1",
   "upstream": {
@@ -480,12 +480,26 @@
       "keypad-390x844.png",
       "table-1024x768.png"
     ],
-    "noStrategyOrModelDiff": true
+    "noStrategyOrModelDiff": true,
+    "tributeConservation": {
+      "normalLowReturn": true,
+      "noLowCardFallback": true,
+      "readyDuringAnimation": true,
+      "physicalCards": 108,
+      "pageErrors": []
+    }
   },
   "deployment": {
-    "phase": "pending"
+    "phase": "success",
+    "sourceCommit": "2ee4dd09ee95de106a60f659c8199c146436572c",
+    "version": "bc7a2d065d",
+    "pagesRun": 43614454344,
+    "pagesURL": "https://github.com/stevensun1005/guandanai/actions/runs/43614454344",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicEvidence": "clint-sync-20261114-1548-public.json",
+    "liveKeypadVoiceAndTributeVerified": true,
+    "liveMenuAndDefaultVerified": true
   },
-  "pending": [
-    "Push source, verify Pages and live same-version UI, then advance full-success cursor"
-  ]
+  "pending": [],
+  "completedAtUTC": "2026-11-14T16:22:06.251759+00:00"
 }

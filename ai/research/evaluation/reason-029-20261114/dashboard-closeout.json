@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "readOnlyDisplayCorrection": true,
+  "frozenTrainingModified": false,
+  "sourceRecords": "final-model.json, per-segment train-report.json, results.json, stop-audit.json",
+  "corrections": [
+    "Each historical data/train card now points to its own actual segment snapshot instead of the mutable latest panel.",
+    "Final gate card explicitly shows two97.5% intervals and accept=false; no generic single95% verdict.",
+    "Summary and closeout rows populated using existing descriptive renderer; no dashboard code change."
+  ],
+  "atUTC": "2026-11-14T16:18:58.163Z"
+}

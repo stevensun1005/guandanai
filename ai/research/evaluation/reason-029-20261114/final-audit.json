@@ -433,5 +433,10 @@
   },
   "epochRounding": "Frozen trainer uses ceil(12*trainRows/batch); actual epochs slightly exceed12 by less than one batch. Original protocol and counters retained; no exact12-epoch claim.",
   "privateDataPublished": false,
-  "pairScoresSHA256": "f9ac25a5ca7ca78eb348b57a013a1b242b8e792e59cae50e81f38eada3923af5"
+  "pairScoresSHA256": "f9ac25a5ca7ca78eb348b57a013a1b242b8e792e59cae50e81f38eada3923af5",
+  "protocolConformance": {
+    "strict12EpochUpperBoundSatisfied": false,
+    "deviation": "Frozen trainer uses ceil rather than floor for12*trainRows/batch; each segment exceeds12 by less than one batch, actual epochs retained in segment reports. This deviation is not rewritten as protocol compliance.",
+    "acceptance": "Dual performance gate false independently; no deployment or accepted champion claim."
+  }
 }
