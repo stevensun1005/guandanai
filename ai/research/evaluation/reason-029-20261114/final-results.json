@@ -1,0 +1,549 @@
+{
+  "complete": true,
+  "summary": {
+    "schema": 1,
+    "id": "reason-029-20261114",
+    "completedAtUTC": "2026-11-14T15:27:28.240242+00:00",
+    "purpose": "Build actual029-base search and test whether hand-inference v1 adaptation to029 greedy/search self-play improves final round points. No oldr2 weight-delta transplant.",
+    "protocolSHA256": "9520d1456178e5c87c18c7195dd6989559482654cb20d74ce9fb7ccce072dce4",
+    "models": {
+      "champion": {
+        "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\champion.onnx",
+        "file": "models/champion.onnx",
+        "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+        "version": "v000061013",
+        "kind": "Frozen029 raw neural base"
+      },
+      "old": {
+        "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\old.onnx",
+        "file": "models/old.onnx",
+        "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+        "version": "v000855042-bsearch1-16d76783",
+        "kind": "Frozen017 base of archived9001"
+      },
+      "belief": {
+        "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\belief.onnx",
+        "file": "models/belief.onnx",
+        "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+        "version": "belief-v1",
+        "kind": "Original inference-v1 warm start, not a policy MLP"
+      }
+    },
+    "unit": "complete single round",
+    "protocol": {
+      "unit": "complete single round",
+      "tribute": false,
+      "cards": 108,
+      "terminalPoints": "signed team upgrade +/-1,+/-2,+/-3"
+    },
+    "pipeline": {
+      "training": {
+        "device": "Existing ROCm cuda:0 only, actual preflight required",
+        "parameters": "Only belief v1 six weight/bias tensors; original normalization and029 main MLP frozen",
+        "batch": 4096,
+        "lr": 0.00003,
+        "weightDecay": 0.01,
+        "dropout": 0.2,
+        "inputDropout": 0.1,
+        "augmentSuits": true,
+        "epochs": "At most12 per fresh segment; up to10 segments, absolute10AM stop wins. Not12 repeatedly on an unchanged dataset.",
+        "seed": 2026111429,
+        "threads": 1,
+        "select": "Last chronological trained learner before10AM, including a time-limited final saved segment; no validation peak.",
+        "optimizer": "Segment0 newAdamW from exact originalONNX+normalization; subsequent segments restore matching6 tensor Adam states and cumulative updates. Fresh dataset/dropout seed per segment. No exact RNG/replay resumption claim."
+      },
+      "data": {
+        "greedyRounds": 30000,
+        "reasonRounds": 8000,
+        "band": [
+          1,
+          80
+        ],
+        "every": 2,
+        "validation": "Whole literal seed mod10=0; both sources. Never tuning on heldout games.",
+        "inputs": "Own hand and public information only; simulated hidden locations are supervised targets only. No D1/human/Clint/GuanZero data or teachers.",
+        "scope": "Upper caps across at most10 sequential fresh segments; stop generation09:45Toronto, training10:00. Only fully written single rounds enter training. No extra roots on exhaustion.",
+        "segmentSizes": {
+          "greedy": 3000,
+          "reason": 800
+        },
+        "teacher": "Frozen029 main MLP; segment0 oldbelief-v1; later segments use preceding chronological segment belief with exact ONNX SHA before generation. No heldout feedback or model selection."
+      },
+      "baseline": "029+originalbeliefv1+desktopsearch",
+      "final": "029+last chronological trainedbelief+same desktopsearch",
+      "old": "017+originalbeliefv1+same desktopsearch",
+      "searchIsInferenceOnly": true
+    },
+    "pairing": "Single fresh round/no tribute; same108 physical cards,level,leader then swap teams",
+    "statistics": {
+      "baselineVsOld": {
+        "pairs": 1000
+      },
+      "finalVsOld": {
+        "pairs": 1000,
+        "sameDealsAsBaseline": true
+      },
+      "finalVsBaseline": {
+        "pairs": 1000,
+        "separateDealBlock": true
+      },
+      "totalCompleteRounds": 6000,
+      "workers": "2 baseline, plus2 generation; after data/GPU and baseline finish,2+2 final evaluators",
+      "unit": "Single fresh round/no tribute; same108 physical cards,level,leader then swap teams",
+      "primary": "Final029-reason vs old9001 signed terminal upgrade points",
+      "secondary": "Final029-reason vs baseline029-reason isolates belief adaptation; paired final-minus-baseline against commonold is descriptive",
+      "accept": "Both direct final-old and final-baseline97.5% seed-pair cluster intervals strictly above0 (Bonferroni familywise95% for two gates). Complete1000 pairs each required. No promotion on partial/time-selected samples.",
+      "report": "W/L/D,finishing-rank pairs,double-ups/double-downs,search timing/fallbacks separately. No merged overall win rate or whole-match/human claim."
+    },
+    "plannedPairs": 3000,
+    "completedPairs": 3000,
+    "completedRounds": 6000,
+    "reports": {
+      "baseline-vs-old": {
+        "model": "baseline-029-reason",
+        "opponent": "old-017-reason9001",
+        "mixed": false,
+        "teammate": "baseline-029-reason",
+        "pairs": 1000,
+        "rounds": 2000,
+        "wins": 1053,
+        "losses": 947,
+        "draws": 0,
+        "signedUpgradePoints": {
+          "clusters": 1000,
+          "mean": 0.1085,
+          "standardError": 0.03678084529453586,
+          "ci": [
+            0.036409543222709714,
+            0.1805904567772903
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "roundWinScore": {
+          "clusters": 1000,
+          "mean": 0.5265,
+          "standardError": 0.008638424183401298,
+          "ci": [
+            0.5095686886005334,
+            0.5434313113994665
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "finishingRankPairs": {
+          "12": 464,
+          "13": 238,
+          "14": 351,
+          "23": 323,
+          "24": 193,
+          "34": 431
+        },
+        "doubleDowns": 431,
+        "doubleUps": 464,
+        "meanTurns": 81.6825
+      },
+      "final-vs-old": {
+        "model": "final-029-reason",
+        "opponent": "old-017-reason9001",
+        "mixed": false,
+        "teammate": "final-029-reason",
+        "pairs": 1000,
+        "rounds": 2000,
+        "wins": 1045,
+        "losses": 955,
+        "draws": 0,
+        "signedUpgradePoints": {
+          "clusters": 1000,
+          "mean": 0.091,
+          "standardError": 0.03653154189948124,
+          "ci": [
+            0.019398177877016767,
+            0.16260182212298324
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "roundWinScore": {
+          "clusters": 1000,
+          "mean": 0.5225,
+          "standardError": 0.008678655948306113,
+          "ci": [
+            0.50548983434132,
+            0.5395101656586799
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "finishingRankPairs": {
+          "12": 474,
+          "13": 223,
+          "14": 348,
+          "23": 314,
+          "24": 203,
+          "34": 438
+        },
+        "doubleDowns": 438,
+        "doubleUps": 474,
+        "meanTurns": 81.6455
+      },
+      "final-vs-baseline": {
+        "model": "final-029-reason",
+        "opponent": "baseline-029-reason",
+        "mixed": false,
+        "teammate": "final-029-reason",
+        "pairs": 1000,
+        "rounds": 2000,
+        "wins": 1014,
+        "losses": 986,
+        "draws": 0,
+        "signedUpgradePoints": {
+          "clusters": 1000,
+          "mean": 0.0355,
+          "standardError": 0.021873916389577298,
+          "ci": [
+            -0.007372876123571508,
+            0.0783728761235715
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "roundWinScore": {
+          "clusters": 1000,
+          "mean": 0.507,
+          "standardError": 0.005241991842656613,
+          "ci": [
+            0.49672569598839306,
+            0.517274304011607
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "finishingRankPairs": {
+          "12": 449,
+          "13": 219,
+          "14": 346,
+          "23": 343,
+          "24": 212,
+          "34": 431
+        },
+        "doubleDowns": 431,
+        "doubleUps": 449,
+        "meanTurns": 81.695
+      }
+    },
+    "secondaryContrasts": {
+      "paired-training-effect-vs-common-old": {
+        "clusters": 1000,
+        "mean": -0.0175,
+        "standardError": 0.025857539758499113,
+        "ci": [
+          -0.06818077792665826,
+          0.03318077792665826
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD",
+        "confidenceLevel": 0.95,
+        "direction": "Final minus baseline against commonold; descriptive paired contrast"
+      }
+    },
+    "primaryWinner": "final029-reason",
+    "primaryInterpretation": "Latest perspective; 95% seed-cluster CI for signed upgrade points",
+    "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+    "optimizerUpdatesExecuted": 0
+  },
+  "finalModel": {
+    "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "beliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea",
+    "checkpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+    "steps": 3126,
+    "initialBeliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "selection": "Last chronological learner across fresh segments before10AM; never a validation peak",
+    "lastSegmentModel": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\segments\\9\\model",
+    "dataSegments": [
+      {
+        "segment": 0,
+        "greedy": {
+          "pid": 38656,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93016,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T05:13:41.530Z"
+        },
+        "reason": {
+          "pid": 37572,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25427,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T06:00:41.715Z"
+        },
+        "model": {
+          "beliefSHA256": "8b0555e16cc06058401765a952512b458867506d80dd020b64d551bc8029e10d",
+          "checkpointSHA256": "cf9b44b433b6924ec69ff06bdc0c2a7e4cdd024584941ee5accdc16acb19e014",
+          "cumulativeUpdates": 313,
+          "newUpdates": 313,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 1,
+        "greedy": {
+          "pid": 16372,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93152,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T06:05:00.683Z"
+        },
+        "reason": {
+          "pid": 46692,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25322,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T06:54:44.992Z"
+        },
+        "model": {
+          "beliefSHA256": "caa8f9eb3498f8aa3df668bc605966d02c9f783a8734a4afe602834e6624f704",
+          "checkpointSHA256": "31cae3a8bdc247ea559b766f14a3eaaed2c638e2fe1558420db40eed523150b6",
+          "cumulativeUpdates": 625,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 2,
+        "greedy": {
+          "pid": 38904,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93152,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T06:58:59.666Z"
+        },
+        "reason": {
+          "pid": 29460,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25025,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T07:43:29.807Z"
+        },
+        "model": {
+          "beliefSHA256": "5ad156d25873fa82453cea7b215875c15f9f4f3b341c469b0d00736d3f18a71e",
+          "checkpointSHA256": "b4ee697fdce9a4cb76525498e2b9dcf18e94213ebaceebb7a7152aea1bd5ab9c",
+          "cumulativeUpdates": 937,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 3,
+        "greedy": {
+          "pid": 41836,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 92998,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T07:47:45.145Z"
+        },
+        "reason": {
+          "pid": 46912,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25240,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T08:37:51.461Z"
+        },
+        "model": {
+          "beliefSHA256": "6f57c2316e8ed3e8ae3d7cbf7037adac8b254b88eab207fd4a032d20bf2f20ec",
+          "checkpointSHA256": "4fe0a105d10ddfbbde0dd70e8a154b17d9d04869615c576e9be8b6eb416a1e34",
+          "cumulativeUpdates": 1249,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 4,
+        "greedy": {
+          "pid": 32960,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93546,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T08:42:06.620Z"
+        },
+        "reason": {
+          "pid": 9508,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25484,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T09:23:30.297Z"
+        },
+        "model": {
+          "beliefSHA256": "1ffbda4f9795a7322cc5f285a5b723309cfd3f0bb922bab1db909c3b3ff83ea4",
+          "checkpointSHA256": "336e8f23502fd71b8030cacfda2ef7a3bb3dff1c5c6d4195a74286c5abc3d90e",
+          "cumulativeUpdates": 1563,
+          "newUpdates": 314,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 5,
+        "greedy": {
+          "pid": 42840,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93439,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T09:27:43.958Z"
+        },
+        "reason": {
+          "pid": 38548,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25137,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T10:16:48.440Z"
+        },
+        "model": {
+          "beliefSHA256": "235c29a19181ca6131e9519afd781b636b85c2a96d6d64f0341c94751041d936",
+          "checkpointSHA256": "10f5ee195751133013b00ab47ceeb4aebfac5abb73c7e4fdb053687253aafffa",
+          "cumulativeUpdates": 1876,
+          "newUpdates": 313,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 6,
+        "greedy": {
+          "pid": 12844,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93344,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T10:21:00.210Z"
+        },
+        "reason": {
+          "pid": 39924,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25023,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T11:16:36.382Z"
+        },
+        "model": {
+          "beliefSHA256": "d7db267bd8e53c8012ad6ac36e98e5eaf949ab7d738078f85417e9e38c0bfa33",
+          "checkpointSHA256": "11c3453cf7d577f46c757e995798a1d2fa535bd6f706f92301ebaf9a555a29ea",
+          "cumulativeUpdates": 2188,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 7,
+        "greedy": {
+          "pid": 46856,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93382,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T11:21:17.849Z"
+        },
+        "reason": {
+          "pid": 33864,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25409,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T12:12:29.665Z"
+        },
+        "model": {
+          "beliefSHA256": "2e49b2ea1f9840c7c18a2b48286683b9eed09686ee013c067917a1eaf61fcde4",
+          "checkpointSHA256": "95c8d5cd42211fd4da39b5c5e8181ccaa360b49590bc3f66cbb49959f4a3059e",
+          "cumulativeUpdates": 2502,
+          "newUpdates": 314,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 8,
+        "greedy": {
+          "pid": 44856,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93363,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T12:16:42.029Z"
+        },
+        "reason": {
+          "pid": 40992,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25179,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T13:04:28.982Z"
+        },
+        "model": {
+          "beliefSHA256": "6d381a82fe42c502c8790649b670aaece8633989daab01d84b703b3536791cbb",
+          "checkpointSHA256": "00ce0a52bf954d2ddf6d566dbdcdcd1299648c1183ba16a1264b5e02354a5fbe",
+          "cumulativeUpdates": 2815,
+          "newUpdates": 313,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 9,
+        "greedy": {
+          "pid": 21340,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 92576,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T13:08:43.471Z"
+        },
+        "reason": {
+          "pid": 13208,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25113,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T13:56:04.986Z"
+        },
+        "model": {
+          "beliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea",
+          "checkpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+          "cumulativeUpdates": 3126,
+          "newUpdates": 311,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      }
+    ],
+    "createdAtUTC": "2026-11-14T13:56:30.803Z"
+  },
+  "gates": [
+    {
+      "task": "final-vs-old",
+      "mean": 0.091,
+      "ci97_5": [
+        0.009118102343069062,
+        0.17288189765693093
+      ]
+    },
+    {
+      "task": "final-vs-baseline",
+      "mean": 0.0355,
+      "ci97_5": [
+        -0.013528255858892904,
+        0.0845282558588929
+      ]
+    }
+  ],
+  "accept": false,
+  "scope": "Single rounds/no tribute/homogeneous teams; two simultaneous positive97.5% intervals required. No global/raw champion or automatic website claim.",
+  "webPublished": false,
+  "atUTC": "2026-11-14T15:27:28.254Z"
+}

@@ -1,0 +1,252 @@
+{
+  "schema": 1,
+  "id": "reason-029-20261114",
+  "completedAtUTC": "2026-11-14T15:27:28.240242+00:00",
+  "purpose": "Build actual029-base search and test whether hand-inference v1 adaptation to029 greedy/search self-play improves final round points. No oldr2 weight-delta transplant.",
+  "protocolSHA256": "9520d1456178e5c87c18c7195dd6989559482654cb20d74ce9fb7ccce072dce4",
+  "models": {
+    "champion": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\champion.onnx",
+      "file": "models/champion.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "version": "v000061013",
+      "kind": "Frozen029 raw neural base"
+    },
+    "old": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\old.onnx",
+      "file": "models/old.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "version": "v000855042-bsearch1-16d76783",
+      "kind": "Frozen017 base of archived9001"
+    },
+    "belief": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\belief.onnx",
+      "file": "models/belief.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "version": "belief-v1",
+      "kind": "Original inference-v1 warm start, not a policy MLP"
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "complete single round",
+    "tribute": false,
+    "cards": 108,
+    "terminalPoints": "signed team upgrade +/-1,+/-2,+/-3"
+  },
+  "pipeline": {
+    "training": {
+      "device": "Existing ROCm cuda:0 only, actual preflight required",
+      "parameters": "Only belief v1 six weight/bias tensors; original normalization and029 main MLP frozen",
+      "batch": 4096,
+      "lr": 0.00003,
+      "weightDecay": 0.01,
+      "dropout": 0.2,
+      "inputDropout": 0.1,
+      "augmentSuits": true,
+      "epochs": "At most12 per fresh segment; up to10 segments, absolute10AM stop wins. Not12 repeatedly on an unchanged dataset.",
+      "seed": 2026111429,
+      "threads": 1,
+      "select": "Last chronological trained learner before10AM, including a time-limited final saved segment; no validation peak.",
+      "optimizer": "Segment0 newAdamW from exact originalONNX+normalization; subsequent segments restore matching6 tensor Adam states and cumulative updates. Fresh dataset/dropout seed per segment. No exact RNG/replay resumption claim."
+    },
+    "data": {
+      "greedyRounds": 30000,
+      "reasonRounds": 8000,
+      "band": [
+        1,
+        80
+      ],
+      "every": 2,
+      "validation": "Whole literal seed mod10=0; both sources. Never tuning on heldout games.",
+      "inputs": "Own hand and public information only; simulated hidden locations are supervised targets only. No D1/human/Clint/GuanZero data or teachers.",
+      "scope": "Upper caps across at most10 sequential fresh segments; stop generation09:45Toronto, training10:00. Only fully written single rounds enter training. No extra roots on exhaustion.",
+      "segmentSizes": {
+        "greedy": 3000,
+        "reason": 800
+      },
+      "teacher": "Frozen029 main MLP; segment0 oldbelief-v1; later segments use preceding chronological segment belief with exact ONNX SHA before generation. No heldout feedback or model selection."
+    },
+    "baseline": "029+originalbeliefv1+desktopsearch",
+    "final": "029+last chronological trainedbelief+same desktopsearch",
+    "old": "017+originalbeliefv1+same desktopsearch",
+    "searchIsInferenceOnly": true
+  },
+  "pairing": "Single fresh round/no tribute; same108 physical cards,level,leader then swap teams",
+  "statistics": {
+    "baselineVsOld": {
+      "pairs": 1000
+    },
+    "finalVsOld": {
+      "pairs": 1000,
+      "sameDealsAsBaseline": true
+    },
+    "finalVsBaseline": {
+      "pairs": 1000,
+      "separateDealBlock": true
+    },
+    "totalCompleteRounds": 6000,
+    "workers": "2 baseline, plus2 generation; after data/GPU and baseline finish,2+2 final evaluators",
+    "unit": "Single fresh round/no tribute; same108 physical cards,level,leader then swap teams",
+    "primary": "Final029-reason vs old9001 signed terminal upgrade points",
+    "secondary": "Final029-reason vs baseline029-reason isolates belief adaptation; paired final-minus-baseline against commonold is descriptive",
+    "accept": "Both direct final-old and final-baseline97.5% seed-pair cluster intervals strictly above0 (Bonferroni familywise95% for two gates). Complete1000 pairs each required. No promotion on partial/time-selected samples.",
+    "report": "W/L/D,finishing-rank pairs,double-ups/double-downs,search timing/fallbacks separately. No merged overall win rate or whole-match/human claim."
+  },
+  "plannedPairs": 3000,
+  "completedPairs": 3000,
+  "completedRounds": 6000,
+  "reports": {
+    "baseline-vs-old": {
+      "model": "baseline-029-reason",
+      "opponent": "old-017-reason9001",
+      "mixed": false,
+      "teammate": "baseline-029-reason",
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1053,
+      "losses": 947,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.1085,
+        "standardError": 0.03678084529453586,
+        "ci": [
+          0.036409543222709714,
+          0.1805904567772903
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.5265,
+        "standardError": 0.008638424183401298,
+        "ci": [
+          0.5095686886005334,
+          0.5434313113994665
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 464,
+        "13": 238,
+        "14": 351,
+        "23": 323,
+        "24": 193,
+        "34": 431
+      },
+      "doubleDowns": 431,
+      "doubleUps": 464,
+      "meanTurns": 81.6825
+    },
+    "final-vs-old": {
+      "model": "final-029-reason",
+      "opponent": "old-017-reason9001",
+      "mixed": false,
+      "teammate": "final-029-reason",
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1045,
+      "losses": 955,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.091,
+        "standardError": 0.03653154189948124,
+        "ci": [
+          0.019398177877016767,
+          0.16260182212298324
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.5225,
+        "standardError": 0.008678655948306113,
+        "ci": [
+          0.50548983434132,
+          0.5395101656586799
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 474,
+        "13": 223,
+        "14": 348,
+        "23": 314,
+        "24": 203,
+        "34": 438
+      },
+      "doubleDowns": 438,
+      "doubleUps": 474,
+      "meanTurns": 81.6455
+    },
+    "final-vs-baseline": {
+      "model": "final-029-reason",
+      "opponent": "baseline-029-reason",
+      "mixed": false,
+      "teammate": "final-029-reason",
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1014,
+      "losses": 986,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 1000,
+        "mean": 0.0355,
+        "standardError": 0.021873916389577298,
+        "ci": [
+          -0.007372876123571508,
+          0.0783728761235715
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 1000,
+        "mean": 0.507,
+        "standardError": 0.005241991842656613,
+        "ci": [
+          0.49672569598839306,
+          0.517274304011607
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 449,
+        "13": 219,
+        "14": 346,
+        "23": 343,
+        "24": 212,
+        "34": 431
+      },
+      "doubleDowns": 431,
+      "doubleUps": 449,
+      "meanTurns": 81.695
+    }
+  },
+  "secondaryContrasts": {
+    "paired-training-effect-vs-common-old": {
+      "clusters": 1000,
+      "mean": -0.0175,
+      "standardError": 0.025857539758499113,
+      "ci": [
+        -0.06818077792665826,
+        0.03318077792665826
+      ],
+      "z": 1.96,
+      "method": "Normal approximation using independent seed-pair sample SD",
+      "confidenceLevel": 0.95,
+      "direction": "Final minus baseline against commonold; descriptive paired contrast"
+    }
+  },
+  "primaryWinner": "final029-reason",
+  "primaryInterpretation": "Latest perspective; 95% seed-cluster CI for signed upgrade points",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

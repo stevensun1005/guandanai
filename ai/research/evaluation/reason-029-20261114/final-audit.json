@@ -1,0 +1,437 @@
+{
+  "passed": true,
+  "atUTC": "2026-11-14T15:57:34.823Z",
+  "protocolSHA256": "9520d1456178e5c87c18c7195dd6989559482654cb20d74ce9fb7ccce072dce4",
+  "sourceCommit": "b292056b370ec220ad1f44dc556dd4ca063dba82",
+  "sourceFilesVerified": 189,
+  "rawFiles": [
+    {
+      "file": "worker-0.jsonl",
+      "sha256": "217d0b8eaf45d13e632be1a19b37637258ed7e91c9e7ef571fe0f57525fd91bf"
+    },
+    {
+      "file": "worker-1.jsonl",
+      "sha256": "5595d4e30030adbb02a1cbe710aae8747024ceb3116ef7e97ed54f2a33ba8c7f"
+    },
+    {
+      "file": "worker-2.jsonl",
+      "sha256": "e826df398f90ab27162235c6cfb4d097b27acf44d6079c55567b8d584fafafd5"
+    },
+    {
+      "file": "worker-3.jsonl",
+      "sha256": "ec10baad3c59a8f1ebf889901a22f858bf97b197f64e89e70fb5bfa2080a28f8"
+    }
+  ],
+  "independentArithmetic": {
+    "baseline-vs-old": {
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1053,
+      "losses": 947,
+      "draws": 0,
+      "mean": 0.1085,
+      "se": 0.036780845294535854,
+      "ci95": [
+        0.03640954322270973,
+        0.18059045677729027
+      ],
+      "ci97_5": [
+        0.026059313033211767,
+        0.19094068696678823
+      ]
+    },
+    "final-vs-old": {
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1045,
+      "losses": 955,
+      "draws": 0,
+      "mean": 0.091,
+      "se": 0.03653154189948123,
+      "ci95": [
+        0.01939817787701678,
+        0.16260182212298321
+      ],
+      "ci97_5": [
+        0.00911810234288836,
+        0.17288189765711165
+      ]
+    },
+    "final-vs-baseline": {
+      "pairs": 1000,
+      "rounds": 2000,
+      "wins": 1014,
+      "losses": 986,
+      "draws": 0,
+      "mean": 0.0355,
+      "se": 0.02187391638957714,
+      "ci95": [
+        -0.007372876123571202,
+        0.07837287612357119
+      ],
+      "ci97_5": [
+        -0.013528255859000762,
+        0.08452825585900076
+      ]
+    }
+  },
+  "processes": [
+    {
+      "pid": 39384,
+      "alive": false
+    },
+    {
+      "pid": 4920,
+      "alive": false
+    },
+    {
+      "pid": 2988,
+      "alive": false
+    },
+    {
+      "pid": 38656,
+      "alive": false
+    },
+    {
+      "pid": 37572,
+      "alive": false
+    },
+    {
+      "pid": 2308,
+      "alive": false
+    },
+    {
+      "pid": 44932,
+      "alive": false
+    },
+    {
+      "pid": 16372,
+      "alive": false
+    },
+    {
+      "pid": 46692,
+      "alive": false
+    },
+    {
+      "pid": 7252,
+      "alive": false
+    },
+    {
+      "pid": 6888,
+      "alive": false
+    },
+    {
+      "pid": 38904,
+      "alive": false
+    },
+    {
+      "pid": 29460,
+      "alive": false
+    },
+    {
+      "pid": 42144,
+      "alive": false
+    },
+    {
+      "pid": 45088,
+      "alive": false
+    },
+    {
+      "pid": 41836,
+      "alive": false
+    },
+    {
+      "pid": 46912,
+      "alive": false
+    },
+    {
+      "pid": 31908,
+      "alive": false
+    },
+    {
+      "pid": 37880,
+      "alive": false
+    },
+    {
+      "pid": 32960,
+      "alive": false
+    },
+    {
+      "pid": 9508,
+      "alive": false
+    },
+    {
+      "pid": 12764,
+      "alive": false
+    },
+    {
+      "pid": 43476,
+      "alive": false
+    },
+    {
+      "pid": 42840,
+      "alive": false
+    },
+    {
+      "pid": 38548,
+      "alive": false
+    },
+    {
+      "pid": 19892,
+      "alive": false
+    },
+    {
+      "pid": 400,
+      "alive": false
+    },
+    {
+      "pid": 12844,
+      "alive": false
+    },
+    {
+      "pid": 39924,
+      "alive": false
+    },
+    {
+      "pid": 16936,
+      "alive": false
+    },
+    {
+      "pid": 3168,
+      "alive": false
+    },
+    {
+      "pid": 46856,
+      "alive": false
+    },
+    {
+      "pid": 33864,
+      "alive": false
+    },
+    {
+      "pid": 6916,
+      "alive": false
+    },
+    {
+      "pid": 38504,
+      "alive": false
+    },
+    {
+      "pid": 44856,
+      "alive": false
+    },
+    {
+      "pid": 40992,
+      "alive": false
+    },
+    {
+      "pid": 25772,
+      "alive": false
+    },
+    {
+      "pid": 34080,
+      "alive": false
+    },
+    {
+      "pid": 21340,
+      "alive": false
+    },
+    {
+      "pid": 13208,
+      "alive": false
+    },
+    {
+      "pid": 448,
+      "alive": false
+    },
+    {
+      "pid": 32604,
+      "alive": false
+    },
+    {
+      "pid": 34160,
+      "alive": false
+    },
+    {
+      "pid": 41396,
+      "alive": false
+    },
+    {
+      "pid": 480,
+      "alive": false
+    },
+    {
+      "pid": 11384,
+      "alive": false
+    },
+    {
+      "pid": 46076,
+      "alive": false
+    },
+    {
+      "pid": 27324,
+      "alive": false
+    },
+    {
+      "pid": 44644,
+      "alive": false
+    },
+    {
+      "pid": 45140,
+      "alive": false
+    }
+  ],
+  "awake": {
+    "phase": "released",
+    "updatedAtUTC": "2026-11-14T15:27:34.7196543+00:00",
+    "pid": 39384,
+    "powerPlanChanged": false
+  },
+  "stop": {
+    "passed": true,
+    "networkMatchesCheckpoint": true,
+    "matchingAdamStates": 6,
+    "step": 3126,
+    "checkpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+    "RNGorReplayExactResumptionClaimed": false
+  },
+  "totals": {
+    "rounds": 38000,
+    "rows": 1184327,
+    "trainRows": 1065594,
+    "validationRows": 118733,
+    "newUpdates": 3126
+  },
+  "segments": [
+    {
+      "segment": 0,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118443,
+      "trainRows": 106572,
+      "validationRows": 11871,
+      "newUpdates": 313,
+      "cumulativeUpdates": 313,
+      "epochs": 12.029876515407425,
+      "beliefSHA256": "8b0555e16cc06058401765a952512b458867506d80dd020b64d551bc8029e10d"
+    },
+    {
+      "segment": 1,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118474,
+      "trainRows": 106438,
+      "validationRows": 12036,
+      "newUpdates": 312,
+      "cumulativeUpdates": 625,
+      "epochs": 12.00653901801988,
+      "beliefSHA256": "caa8f9eb3498f8aa3df668bc605966d02c9f783a8734a4afe602834e6624f704"
+    },
+    {
+      "segment": 2,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118177,
+      "trainRows": 106441,
+      "validationRows": 11736,
+      "newUpdates": 312,
+      "cumulativeUpdates": 937,
+      "epochs": 12.006200618182843,
+      "beliefSHA256": "5ad156d25873fa82453cea7b215875c15f9f4f3b341c469b0d00736d3f18a71e"
+    },
+    {
+      "segment": 3,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118238,
+      "trainRows": 106411,
+      "validationRows": 11827,
+      "newUpdates": 312,
+      "cumulativeUpdates": 1249,
+      "epochs": 12.009585475185837,
+      "beliefSHA256": "6f57c2316e8ed3e8ae3d7cbf7037adac8b254b88eab207fd4a032d20bf2f20ec"
+    },
+    {
+      "segment": 4,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 119030,
+      "trainRows": 107110,
+      "validationRows": 11920,
+      "newUpdates": 314,
+      "cumulativeUpdates": 1563,
+      "epochs": 12.007693025861265,
+      "beliefSHA256": "1ffbda4f9795a7322cc5f285a5b723309cfd3f0bb922bab1db909c3b3ff83ea4"
+    },
+    {
+      "segment": 5,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118576,
+      "trainRows": 106632,
+      "validationRows": 11944,
+      "newUpdates": 313,
+      "cumulativeUpdates": 1876,
+      "epochs": 12.023107509940731,
+      "beliefSHA256": "235c29a19181ca6131e9519afd781b636b85c2a96d6d64f0341c94751041d936"
+    },
+    {
+      "segment": 6,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118367,
+      "trainRows": 106486,
+      "validationRows": 11881,
+      "newUpdates": 312,
+      "cumulativeUpdates": 2188,
+      "epochs": 12.001126908701613,
+      "beliefSHA256": "d7db267bd8e53c8012ad6ac36e98e5eaf949ab7d738078f85417e9e38c0bfa33"
+    },
+    {
+      "segment": 7,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118791,
+      "trainRows": 106946,
+      "validationRows": 11845,
+      "newUpdates": 314,
+      "cumulativeUpdates": 2502,
+      "epochs": 12.026106633254166,
+      "beliefSHA256": "2e49b2ea1f9840c7c18a2b48286683b9eed09686ee013c067917a1eaf61fcde4"
+    },
+    {
+      "segment": 8,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 118542,
+      "trainRows": 106709,
+      "validationRows": 11833,
+      "newUpdates": 313,
+      "cumulativeUpdates": 2815,
+      "epochs": 12.014431772390333,
+      "beliefSHA256": "6d381a82fe42c502c8790649b670aaece8633989daab01d84b703b3536791cbb"
+    },
+    {
+      "segment": 9,
+      "greedyRounds": 3000,
+      "reasonRounds": 800,
+      "rows": 117689,
+      "trainRows": 105849,
+      "validationRows": 11840,
+      "newUpdates": 311,
+      "cumulativeUpdates": 3126,
+      "epochs": 12.03465313796068,
+      "beliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea"
+    }
+  ],
+  "package": {
+    "file": "reason-029-research.zip",
+    "bytes": 8781717,
+    "sha256": "8b69fce5904debe234a79ae8e71fb0922fad55e44c8502f69776129af144637f",
+    "researchOnly": true,
+    "published": false
+  },
+  "epochRounding": "Frozen trainer uses ceil(12*trainRows/batch); actual epochs slightly exceed12 by less than one batch. Original protocol and counters retained; no exact12-epoch claim.",
+  "privateDataPublished": false,
+  "pairScoresSHA256": "f9ac25a5ca7ca78eb348b57a013a1b242b8e792e59cae50e81f38eada3923af5"
+}

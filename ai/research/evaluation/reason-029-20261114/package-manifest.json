@@ -1,0 +1,299 @@
+{
+  "kind": "029-reason research composition",
+  "models": {
+    "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "beliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea",
+    "checkpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+    "steps": 3126,
+    "initialBeliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "selection": "Last chronological learner across fresh segments before10AM; never a validation peak",
+    "lastSegmentModel": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\segments\\9\\model",
+    "dataSegments": [
+      {
+        "segment": 0,
+        "greedy": {
+          "pid": 38656,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93016,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T05:13:41.530Z"
+        },
+        "reason": {
+          "pid": 37572,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25427,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T06:00:41.715Z"
+        },
+        "model": {
+          "beliefSHA256": "8b0555e16cc06058401765a952512b458867506d80dd020b64d551bc8029e10d",
+          "checkpointSHA256": "cf9b44b433b6924ec69ff06bdc0c2a7e4cdd024584941ee5accdc16acb19e014",
+          "cumulativeUpdates": 313,
+          "newUpdates": 313,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 1,
+        "greedy": {
+          "pid": 16372,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93152,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T06:05:00.683Z"
+        },
+        "reason": {
+          "pid": 46692,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25322,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T06:54:44.992Z"
+        },
+        "model": {
+          "beliefSHA256": "caa8f9eb3498f8aa3df668bc605966d02c9f783a8734a4afe602834e6624f704",
+          "checkpointSHA256": "31cae3a8bdc247ea559b766f14a3eaaed2c638e2fe1558420db40eed523150b6",
+          "cumulativeUpdates": 625,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 2,
+        "greedy": {
+          "pid": 38904,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93152,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T06:58:59.666Z"
+        },
+        "reason": {
+          "pid": 29460,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25025,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T07:43:29.807Z"
+        },
+        "model": {
+          "beliefSHA256": "5ad156d25873fa82453cea7b215875c15f9f4f3b341c469b0d00736d3f18a71e",
+          "checkpointSHA256": "b4ee697fdce9a4cb76525498e2b9dcf18e94213ebaceebb7a7152aea1bd5ab9c",
+          "cumulativeUpdates": 937,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 3,
+        "greedy": {
+          "pid": 41836,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 92998,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T07:47:45.145Z"
+        },
+        "reason": {
+          "pid": 46912,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25240,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T08:37:51.461Z"
+        },
+        "model": {
+          "beliefSHA256": "6f57c2316e8ed3e8ae3d7cbf7037adac8b254b88eab207fd4a032d20bf2f20ec",
+          "checkpointSHA256": "4fe0a105d10ddfbbde0dd70e8a154b17d9d04869615c576e9be8b6eb416a1e34",
+          "cumulativeUpdates": 1249,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 4,
+        "greedy": {
+          "pid": 32960,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93546,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T08:42:06.620Z"
+        },
+        "reason": {
+          "pid": 9508,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25484,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T09:23:30.297Z"
+        },
+        "model": {
+          "beliefSHA256": "1ffbda4f9795a7322cc5f285a5b723309cfd3f0bb922bab1db909c3b3ff83ea4",
+          "checkpointSHA256": "336e8f23502fd71b8030cacfda2ef7a3bb3dff1c5c6d4195a74286c5abc3d90e",
+          "cumulativeUpdates": 1563,
+          "newUpdates": 314,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 5,
+        "greedy": {
+          "pid": 42840,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93439,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T09:27:43.958Z"
+        },
+        "reason": {
+          "pid": 38548,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25137,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T10:16:48.440Z"
+        },
+        "model": {
+          "beliefSHA256": "235c29a19181ca6131e9519afd781b636b85c2a96d6d64f0341c94751041d936",
+          "checkpointSHA256": "10f5ee195751133013b00ab47ceeb4aebfac5abb73c7e4fdb053687253aafffa",
+          "cumulativeUpdates": 1876,
+          "newUpdates": 313,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 6,
+        "greedy": {
+          "pid": 12844,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93344,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T10:21:00.210Z"
+        },
+        "reason": {
+          "pid": 39924,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25023,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T11:16:36.382Z"
+        },
+        "model": {
+          "beliefSHA256": "d7db267bd8e53c8012ad6ac36e98e5eaf949ab7d738078f85417e9e38c0bfa33",
+          "checkpointSHA256": "11c3453cf7d577f46c757e995798a1d2fa535bd6f706f92301ebaf9a555a29ea",
+          "cumulativeUpdates": 2188,
+          "newUpdates": 312,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 7,
+        "greedy": {
+          "pid": 46856,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93382,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T11:21:17.849Z"
+        },
+        "reason": {
+          "pid": 33864,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25409,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T12:12:29.665Z"
+        },
+        "model": {
+          "beliefSHA256": "2e49b2ea1f9840c7c18a2b48286683b9eed09686ee013c067917a1eaf61fcde4",
+          "checkpointSHA256": "95c8d5cd42211fd4da39b5c5e8181ccaa360b49590bc3f66cbb49959f4a3059e",
+          "cumulativeUpdates": 2502,
+          "newUpdates": 314,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 8,
+        "greedy": {
+          "pid": 44856,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 93363,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T12:16:42.029Z"
+        },
+        "reason": {
+          "pid": 40992,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25179,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T13:04:28.982Z"
+        },
+        "model": {
+          "beliefSHA256": "6d381a82fe42c502c8790649b670aaece8633989daab01d84b703b3536791cbb",
+          "checkpointSHA256": "00ce0a52bf954d2ddf6d566dbdcdcd1299648c1183ba16a1264b5e02354a5fbe",
+          "cumulativeUpdates": 2815,
+          "newUpdates": 313,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      },
+      {
+        "segment": 9,
+        "greedy": {
+          "pid": 21340,
+          "phase": "complete",
+          "rounds": 3000,
+          "rows": 92576,
+          "total": 3000,
+          "updatedAtUTC": "2026-11-14T13:08:43.471Z"
+        },
+        "reason": {
+          "pid": 13208,
+          "phase": "complete",
+          "rounds": 800,
+          "rows": 25113,
+          "total": 800,
+          "updatedAtUTC": "2026-11-14T13:56:04.986Z"
+        },
+        "model": {
+          "beliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea",
+          "checkpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+          "cumulativeUpdates": 3126,
+          "newUpdates": 311,
+          "stopReason": "fixed-epochs-or-steps"
+        }
+      }
+    ],
+    "createdAtUTC": "2026-11-14T13:56:30.803Z"
+  },
+  "search": {
+    "lo": 21,
+    "hi": 40,
+    "worlds": 8,
+    "k": 6,
+    "net": 2,
+    "endgameHi": 20,
+    "endgameWorlds": 8,
+    "minWorlds": 4,
+    "midgameMs": 50000,
+    "endgameMs": 50000,
+    "solverMs": 3000,
+    "solverTable": 300000,
+    "solverMaxNodes": 1500000,
+    "worldSeed": "(seed*1009+ply*7919)>>>0",
+    "roundSearchSeed": "searchSeedOf(seed)",
+    "coldSolverPerRound": true,
+    "scope": "Same desktop search logic/budgets both sides; timing/load fallbacks reported separately. Search does not train a policy network."
+  },
+  "accepted": false,
+  "deploymentAuthorized": false,
+  "sourceCommit": "b292056b370ec220ad1f44dc556dd4ca063dba82",
+  "protocolSHA256": "9520d1456178e5c87c18c7195dd6989559482654cb20d74ce9fb7ccce072dce4",
+  "note": "Both ONNX files plus the pinned repository search engine are required. Not a standalone fused policy."
+}
