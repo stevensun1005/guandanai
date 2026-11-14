@@ -35,10 +35,26 @@
     "webVersion": "23b4ed9604",
     "logSHA256": "3888b3a35c0733a19b310a2641868ef789fe024c4fc21ab40d2eb79b60f5e3f7"
   },
-  "GPUPreflight": "Fixed development preflight passed; frozen-source recheck required before formal launch",
+  "GPUPreflight": "Frozen b292056 actual GPU preflight passed; zero formal updates from synthetic checks",
   "optimizerUpdatesInFormalRun": 0,
   "revision": 3,
   "developmentGPUPreflight": {
+    "passed": true,
+    "backendActuallyTested": "cuda:0",
+    "device": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "initialBeliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "warmStartProbabilityMaxDifference": 8.940696716308594e-8,
+    "syntheticOptimizerSteps": 4,
+    "checkpointStep": 2,
+    "reproducedContinuationStep": 3,
+    "matchingAdamStates": 6,
+    "newGames": 0,
+    "strengthEvidence": false,
+    "syntheticSeed": 2026111429
+  },
+  "frozenGPUPreflight": {
     "passed": true,
     "backendActuallyTested": "cuda:0",
     "device": "AMD Radeon RX 7800 XT",

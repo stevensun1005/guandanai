@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "backendActuallyTested": "cuda:0",
+  "device": "AMD Radeon RX 7800 XT",
+  "torch": "2.9.1+rocmsdk20260116",
+  "hip": "7.2.26024-f6f897bd3d",
+  "initialBeliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+  "warmStartProbabilityMaxDifference": 8.940696716308594e-08,
+  "syntheticOptimizerSteps": 4,
+  "checkpointStep": 2,
+  "reproducedContinuationStep": 3,
+  "matchingAdamStates": 6,
+  "newGames": 0,
+  "strengthEvidence": false,
+  "syntheticSeed": 2026111429
+}
