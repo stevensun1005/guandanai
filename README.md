@@ -1,5 +1,7 @@
 <div align="center">
 
+2026-11-13晚新授权：正在准备029-reason新窗口；固定029主干，训练适配029对局的手牌推断v1，独立比较训练前后与旧reason。11月14日13:00美东总停止（06:00训练截止、12:45评测截止）；旧批次已结束，网页029保持不变。[新协议](ai/research/evaluation/reason-029-20261114/README.md)。以下旧窗口状态按历史理解。
+
 本批截止已按所有者澄清改为：11月13日05:00停训练、08:00停止新增评测，随后总结/打包。8采样器及大候选DML提速；全部结果均总结推送，发布仍需完整提升门槛。[修订协议](ai/research/evaluation/endgame-rebase-029-20261112/owner-8am/protocol.json)。
 
 所有者已授权本批训练后自动评测，三项独立提升门槛与兼容检查通过后自动打包发布新reason；当前仍在训练，尚无新学生提升结论。[条件发布](ai/research/evaluation/endgame-rebase-029-20261112/conditional-release/authorization.json)。

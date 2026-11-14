@@ -56,6 +56,22 @@ def synthetic(n, seed=0):
 
 
 class BeliefTrainTest(unittest.TestCase):
+    def test_warm_start_preserves_probabilities_and_normalization(self):
+        torch.manual_seed(29)
+        x, _ = synthetic(6)
+        original = BeliefNet(F, C0, np.arange(F, dtype=np.float32) / F,
+                             np.full(F, .5, np.float32), hidden=32).eval()
+        torch.nn.init.normal_(original.l3.weight, std=.02)
+        with tempfile.TemporaryDirectory() as directory:
+            file = Path(directory) / "base.onnx"
+            export_onnx(original, file)
+            student = BeliefNet(F, C0, np.zeros(F), np.ones(F), hidden=32).eval()
+            belief_train.load_initial_onnx(student, file)
+            xt = torch.tensor(x, dtype=torch.float32)
+            torch.testing.assert_close(original(xt), student(xt), atol=0, rtol=0)
+            optimizer = torch.optim.AdamW(student.parameters())
+            self.assertEqual(len(optimizer.state), 0)
+
     def test_loss_is_per_copy_and_masks_faces_without_unseen_copies(self):
         torch.manual_seed(0)
         lp = torch.log_softmax(torch.randn(2, FACES, SEATS), dim=2)

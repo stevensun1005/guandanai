@@ -147,3 +147,7 @@ node ai/danMCai/belief/reason-match-eval.mjs --summarize --out=<目录>
 ## 真人面板评分（panel-scorer.mjs、arm-replay.mjs，第三窗口 S7）
 
 `panel-scorer.mjs` 在固定的真人留出面板上给模型打分（只作描述，不作门控）：1,458 个未辅助真人决策、269 个领出局面和可精确求解的关键局面（§67 的 115 个及 S7a 扩充部分）。输出早炸率、小牌上压王、拆牌代价、与真人一致率、领出接不回来的组合牌比例、精确求解正确率，以及手牌推断 v1 在真人局面上的对数损失，并给出两个模型的配对差。215 维模型的输入与 `midgame-search.mjs --focal-raw-model` 完全一致，只从出牌方自己的手牌和公开信息计算（遮蔽他人手牌，读取即报错）；只有推断对数损失的真值读取四家手牌，不进入任何模型。`--parity=1` 检查包装初始模型与 017 在全部面板局面选牌一致。私有牌谱只读，输出不含记录号、房间号和昵称。`arm-replay.mjs` 按各臂设置重放 S6 的牌局，用于统计残局手牌结构。测试 `ai/danMCai/tests/panel-scorer.test.mjs`（无私有牌谱时跳过对齐测试）。
+
+## 029-reason推断适配新窗口（2026-11-13晚）
+
+`train.py --initial-onnx`可完整复制v1权重与输入归一化，用新AdamW适配（不是匹配Adam续训）；`--epochs`固定数据遍数，`--deadline`/`--stop-file`/`--pause-file`支持新窗口截止与内存保护；最终checkpoint含匹配优化器。旧参数默认行为保持。新029贪心/搜索样本、GPU预检及三组独立整局比较见[协议](../../research/evaluation/reason-029-20261114/README.md)，准备/推断误差/棋力分别记录。网页和旧冻结检出不变。

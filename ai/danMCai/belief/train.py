@@ -34,6 +34,7 @@ import json
 import os
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -136,6 +137,22 @@ def uniform_log_probs(x, counts_offset):
     counts = x[:, counts_offset + 1 : counts_offset + 4]
     p = counts / counts.sum(dim=1, keepdim=True).clamp_min(1)
     return torch.log(p + EPS).unsqueeze(1).expand(-1, FACES, SEATS)
+
+
+def load_initial_onnx(net, file):
+    """Warm start every learned tensor AND its original input normalization; Adam stays new."""
+    model = onnx.load(file)
+    arrays = {t.name: numpy_helper.to_array(t).copy() for t in model.graph.initializer}
+    metadata = {p.key: p.value for p in model.metadata_props}
+    if metadata.get("featureVersion", "belief-v1") != "belief-v1" or net.l1.in_features != 1238:
+        raise ValueError("Warm start currently requires the unchanged belief-v1 interface")
+    state = {"mean": "mean", "scale": "scale", "l1.weight": "w1", "l1.bias": "b1",
+             "l2.weight": "w2", "l2.bias": "b2", "l3.weight": "w3", "l3.bias": "b3"}
+    tensors = {key: torch.from_numpy(arrays[name]) for key, name in state.items()}
+    if arrays["count_start"].item() != net.counts_offset + 1:
+        raise ValueError("Warm-start hand-count prior differs")
+    net.load_state_dict(tensors, strict=True)
+    return sha256(file)
 
 
 def copy_loss(log_probs, y):
@@ -299,6 +316,8 @@ def standardization(x, rows=None, chunk=65536):
 
 
 def train(args):
+    if args.threads:
+        torch.set_num_threads(args.threads)
     torch.manual_seed(args.seed)
     rng = np.random.default_rng(args.seed)
     directories = [d for d in args.data.split(",") if d]
@@ -324,14 +343,45 @@ def train(args):
     if x_maps is not None:  # symmetrize so every relabelled deal is standardized alike
         mean, scale = mean[x_maps].mean(axis=0), scale[x_maps].mean(axis=0)
     net = BeliefNet(x.shape[1], counts_offset, mean, scale, args.hidden, args.dropout, args.input_dropout).to(device)
+    initial_sha = load_initial_onnx(net, args.initial_onnx) if args.initial_onnx else None
     net.train()
     optimizer = torch.optim.AdamW(net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     xv, yv = x[val_idx], y[val_idx]
     initial = evaluate(net, xv, yv, counts_offset, device)
     history = [{"step": 0, "seconds": 0.0, **initial}]
     deadline = time.time() + args.minutes * 60
+    if args.deadline:
+        deadline = min(deadline, datetime.fromisoformat(args.deadline.replace("Z", "+00:00")).timestamp())
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    stop_files = [Path(p) for p in args.stop_file.split(",") if p]
+    max_steps = args.max_steps
+    if args.epochs > 0:
+        epoch_steps = int(np.ceil(args.epochs * len(train_idx) / min(args.batch, len(train_idx))))
+        max_steps = min(max_steps, epoch_steps) if max_steps > 0 else epoch_steps
+    def status(phase):
+        value = {"pid": os.getpid(), "phase": phase, "step": step, "device": str(device),
+                 "rowsSeen": rows_seen, "trainRows": len(train_idx), "maxSteps": max_steps,
+                 "initialONNXSHA256": initial_sha, "trainLossEMA": ema,
+                 "updatedAtUTC": datetime.now().astimezone().isoformat()}
+        temporary = out / "status.json.tmp"
+        temporary.write_text(json.dumps(value), encoding="utf-8")
+        for attempt in range(20):
+            try:
+                os.replace(temporary, out / "status.json")
+                break
+            except PermissionError:
+                if attempt == 19:
+                    raise
+                time.sleep(0.025)
     start, step, rows_seen, ema = time.time(), 0, 0, None
-    while time.time() < deadline and (args.max_steps <= 0 or step < args.max_steps):
+    status("training")
+    while time.time() < deadline and (max_steps <= 0 or step < max_steps) and not any(p.exists() for p in stop_files):
+        while args.pause_file and Path(args.pause_file).exists() and time.time() < deadline and not any(p.exists() for p in stop_files):
+            status("memory-paused")
+            time.sleep(1)
+        if time.time() >= deadline or any(p.exists() for p in stop_files):
+            break
         batch = rng.choice(train_idx, size=min(args.batch, len(train_idx)), replace=False)
         xn, yn = x[batch], y[batch]
         if x_maps is not None:
@@ -352,10 +402,13 @@ def train(args):
             entry.update(evaluate(net, xv, yv, counts_offset, device))
             history.append(entry)
             print(json.dumps(entry), flush=True)
+        if step % 25 == 0:
+            status("training")
     seconds = time.time() - start
     final = evaluate(net, xv, yv, counts_offset, device)
-    out = Path(args.out)
-    out.mkdir(parents=True, exist_ok=True)
+    torch.save({"state": net.state_dict(), "optimizer": optimizer.state_dict(), "step": step,
+                "counts_offset": counts_offset, "hidden": args.hidden,
+                "initialONNXSHA256": initial_sha}, out / "checkpoint.pt")
     net.eval()
     torch.save({"state": net.state_dict(), "counts_offset": counts_offset, "hidden": args.hidden}, out / "belief.pt")
     onnx_sha = export_onnx(net, out / "belief.onnx", feature_version)
@@ -385,6 +438,10 @@ def train(args):
             "device": str(device),
         },
         "steps": step,
+        "initialONNXSHA256": initial_sha,
+        "newAdam": bool(initial_sha),
+        "effectiveMaxSteps": max_steps,
+        "stopReason": "stop-file" if any(p.exists() for p in stop_files) else "deadline" if time.time() >= deadline else "fixed-epochs-or-steps",
         "trainSeconds": seconds,
         "rowsPerSecond": rows_seen / seconds if seconds else None,
         "epochs": rows_seen / len(train_idx),
@@ -396,6 +453,7 @@ def train(args):
         "note": "Validation rows are whole held-out seeds of the same generation run; final network only.",
     }
     (out / "train-report.json").write_text(json.dumps(report, indent=2))
+    status("complete")
     print(json.dumps({k: report[k] for k in ("steps", "trainSeconds", "rowsPerSecond", "epochs", "finalValidation", "onnxSHA256")}, indent=2))
     return report
 
@@ -418,6 +476,12 @@ def parse(argv=None):
     p.add_argument("--eval-every", type=int, default=500)
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--device", default="mps")
+    p.add_argument("--initial-onnx")
+    p.add_argument("--epochs", type=float, default=0)
+    p.add_argument("--threads", type=int, default=0)
+    p.add_argument("--deadline")
+    p.add_argument("--stop-file", default="")
+    p.add_argument("--pause-file", default="")
     return p.parse_args(argv)
 
 
