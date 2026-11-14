@@ -128,7 +128,9 @@ function payTribute() {
     card: runtime.game.hands[g].find((c) => c.id === runtime.game.tribPick[g]),
   }));
   if (dbl) tribs.sort((a, b) => val(b.card, L) - val(a.card, L));
-  const recv = dbl ? [o[0], o[1]] : [o[0]];
+  // Equal double tribute follows physical seat order: pay the previous seat, receive its return.
+  const same = dbl && val(tribs[0].card, L) === val(tribs[1].card, L);
+  const recv = same ? tribs.map((t) => (t.g + 3) % 4) : dbl ? [o[0], o[1]] : [o[0]];
   runtime.game.gives = tribs.map((t, i) => ({
     from: t.g,
     to: recv[i],
@@ -136,7 +138,7 @@ function payTribute() {
     label: '进贡',
   }));
   runtime.game.trib = [];
-  runtime.game.leader = tribs[0].g;
+  runtime.game.leader = same ? (o[0] + 1) % 4 : tribs[0].g;
   runtime.game.returns = tribs.map((t, i) => ({ from: recv[i], to: t.g }));
   runtime.game.notice = '';
   runtime.game.afterTrib = true;

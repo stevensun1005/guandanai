@@ -24,7 +24,7 @@ with sync_playwright() as p:
     host.locator("[data-seat=W]").click()
     guest.goto(URL + "&room=" + code, wait_until="networkidle")
     guest.locator("#nick").fill("朋友")
-    guest.locator("#joinBtn").click()
+    guest.locator("#joinPad [data-k=go]").click()
     guest.wait_for_function('() => (NET.hostConn?.open)', timeout=30000)
     guest.locator("[data-seat=S]").click()
     host.wait_for_function("() => (NET.lobby.S==='朋友')")

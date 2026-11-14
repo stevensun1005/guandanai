@@ -140,7 +140,7 @@ with sync_playwright() as p:
             host.locator('#botStyleBox summary').click()
             for direction in ['S','E','N']:host.locator(f'[data-bot-seat={direction}]').select_option('clint-rule')
             code=host.locator('#roomCodeShow').inner_text()
-            guest.goto(URL+'?test=1&room='+code,wait_until='networkidle');guest.locator('#nick').fill('CoachG');guest.locator('#joinBtn').click()
+            guest.goto(URL+'?test=1&room='+code,wait_until='networkidle');guest.locator('#nick').fill('CoachG');guest.locator('#joinPad [data-k=go]').click()
             guest.wait_for_function('() => NET.hostConn?.open',timeout=30000);guest.locator('[data-seat=S]').click()
             host.wait_for_function("() => NET.lobby.S==='CoachG'")
             assert guest.locator('#coachRoomAllowed').is_disabled()

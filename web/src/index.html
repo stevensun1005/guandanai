@@ -367,6 +367,32 @@
             <button class="mode-btn" data-mode="join">进房间</button>
           </div>
         </div>
+        <div class="lobby-join" id="joinRow" hidden>
+          <input
+            class="lobby-nick"
+            id="roomCode"
+            inputmode="none"
+            aria-label="四位房间号"
+            maxlength="4"
+            autocomplete="off"
+            placeholder="请输入房间号"
+          />
+          <button class="btn primary" id="joinBtn">进入</button>
+        </div>
+        <div class="lobby-pad" id="joinPad" role="group" aria-label="房间号数字键盘" hidden>
+          <button type="button" class="pad-btn" data-k="1">1</button>
+          <button type="button" class="pad-btn" data-k="2">2</button>
+          <button type="button" class="pad-btn" data-k="3">3</button>
+          <button type="button" class="pad-btn" data-k="4">4</button>
+          <button type="button" class="pad-btn" data-k="5">5</button>
+          <button type="button" class="pad-btn" data-k="6">6</button>
+          <button type="button" class="pad-btn" data-k="7">7</button>
+          <button type="button" class="pad-btn" data-k="8">8</button>
+          <button type="button" class="pad-btn" data-k="9">9</button>
+          <button type="button" class="pad-btn" data-k="del" aria-label="删除末位">⌫</button>
+          <button type="button" class="pad-btn" data-k="0">0</button>
+          <button type="button" class="pad-btn" data-k="go">进入</button>
+        </div>
         <div class="lobby-rules" id="rulesBox">
           <div class="rule-row">
             <span class="rule-k">进贡</span
@@ -409,17 +435,6 @@
         <div class="coach-room" id="privateTableBox" hidden>
           <label><input type="checkbox" id="privateTableAllowed" />明牌工具（本机）</label>
           <small>本队电脑与出牌评价可使用完整牌面，对手电脑保持普通视角。</small>
-        </div>
-        <div class="lobby-join" id="joinRow" hidden>
-          <input
-            class="lobby-nick"
-            id="roomCode"
-            inputmode="numeric"
-            maxlength="4"
-            autocomplete="off"
-            placeholder="请输入房间号"
-          />
-          <button class="btn primary" id="joinBtn">进入</button>
         </div>
         <div class="lobby-room" id="roomInfo" hidden>
           <span>房间号</span><b id="roomCodeShow">----</b

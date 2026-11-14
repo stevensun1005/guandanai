@@ -728,6 +728,75 @@ export function placeActionBtns() {
   }
 }
 
+function placeSideTools() {
+  const mic = $('#micBtn'),
+    emote = $('#emoteBtn'),
+    buttons = $('#btns'),
+    tools = $('.handwrap .handtools');
+  if (!mic || !emote || !buttons || !tools) return;
+  if (
+    isPhone() ||
+    !sideBtns() ||
+    runtime.reviewMode ||
+    runtime.game?.phase === 'start' ||
+    runtime.network.mode === 'spectator'
+  ) {
+    for (const element of [mic, emote])
+      if (element.dataset.side) {
+        element.style.position = element.style.left = element.style.top = element.style.zIndex = '';
+        delete element.dataset.side;
+      }
+    tools.classList.remove('sidetools');
+    tools.style.paddingLeft = '';
+    return;
+  }
+  const visible = (id) => {
+    const element = $(id);
+    return element && !element.hidden && element.offsetHeight ? element : null;
+  };
+  let micRow, emoteRow;
+  if (!buttons.hidden && buttons.offsetHeight) {
+    const first = visible('#passBtn') || visible('#returnBtn') || visible('#hintBtn');
+    if (!first) return;
+    micRow = first.getBoundingClientRect();
+    emoteRow = (visible('#clearBtn') || first).getBoundingClientRect();
+  } else {
+    const hand = $('#hand').getBoundingClientRect(),
+      size = 68,
+      cx = hand.right - actionInset(hand.width);
+    const top = hand.bottom - SPOT_UP - size / 2;
+    micRow = { right: cx + size / 2, top: top + 76, height: size };
+    emoteRow = {
+      left: cx - size / 2,
+      right: cx + size / 2,
+      width: size,
+      top: top + 152,
+      height: size,
+    };
+  }
+  for (const [element, row] of [
+    [mic, micRow],
+    [emote, emoteRow],
+  ]) {
+    element.dataset.side = '1';
+    element.style.position = 'fixed';
+    element.style.zIndex = '8';
+    element.style.left = Math.min(innerWidth - 42, Math.round(row.right + 8)) + 'px';
+    element.style.top =
+      Math.min(
+        innerHeight - 42,
+        Math.round(row.top + (row.height - (element.offsetHeight || 34)) / 2),
+      ) + 'px';
+  }
+  tools.classList.add('sidetools');
+  tools.style.paddingLeft =
+    Math.max(
+      0,
+      Math.round(emoteRow.left + emoteRow.width / 2 - tools.getBoundingClientRect().left - 20),
+    ) + 'px';
+  tools.style.setProperty('--side-tool-start', tools.style.paddingLeft);
+}
+
 export function initialize() {
   sideBtns = () => matchMedia('(min-width:561px)').matches && !stackedControls();
   BTN_GAP = 18;
@@ -773,4 +842,6 @@ export function initialize() {
   addEventListener('orientationchange', phoneSwitch);
   PHONE_MQ.addEventListener('change', phoneSwitch);
   handKeys = (ids) => ids.map(cardKey);
+  setInterval(placeSideTools, 200);
+  addEventListener('resize', placeSideTools);
 }

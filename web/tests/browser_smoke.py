@@ -101,7 +101,7 @@ def main():
         ).get_attribute("content"), "preview was rebuilt during the test"
         assert guest.locator("#roomCode").input_value() == code
         guest.locator("#nick").fill("朋友")
-        guest.locator("#joinBtn").click()
+        guest.locator("#joinPad [data-k=go]").click()
         guest.wait_for_function('() => (NET.hostConn&&NET.hostConn.open)', timeout=25000)
         guest.wait_for_function("id => (document.querySelector('[data-bot-seat=E]').value===id)", arg=CHAMPION)
         assert guest.locator('[data-bot-seat="E"]').is_disabled()

@@ -231,7 +231,8 @@ export function renderControls() {
   }
   // 同花顺 beside your name while you sort your cards and while you play them
   $('#sfBtn').hidden =
-    !['prep', 'play'].includes(runtime.game.phase) || !runtime.game.hands[0].length;
+    !['tribPick', 'return', 'prep', 'play'].includes(runtime.game.phase) ||
+    !runtime.game.hands[0].length;
   const fb = $('#fixBtn'),
     fixedNow = new Set((runtime.game.fixed || []).flat());
   $('#sortBtn').textContent = runtime.reviewMode ? '复原' : '理牌';

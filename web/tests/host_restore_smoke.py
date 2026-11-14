@@ -18,7 +18,7 @@ with sync_playwright() as p:
  host,guest=page(hc),page(gc)
  for value in [host,guest]:value.goto(URL,wait_until='networkidle')
  host.locator('#nick').fill('hosttest');host.locator('[data-mode="host"]').click();host.wait_for_function('()=>NET.peerOpen',timeout=30000);code=host.evaluate('()=>NET.code')
- guest.locator('#nick').fill('guest');guest.locator('[data-mode="join"]').click();guest.locator('#roomCode').fill(code);guest.locator('#joinBtn').click();guest.locator('[data-seat="E"]').click();guest.wait_for_function('()=>myDir==="E"')
+ guest.locator('#nick').fill('guest');guest.locator('[data-mode="join"]').click();guest.locator('#roomCode').fill(code);guest.locator('#joinPad [data-k=go]').click();guest.locator('[data-seat="E"]').click();guest.wait_for_function('()=>myDir==="E"')
  host.locator('[data-seat="S"]').click();expect(host.locator('#sitBtn')).to_be_enabled();host.locator('#sitBtn').click();guest.wait_for_function('()=>G!==null')
  host.evaluate(SETUP);before=host.evaluate(SNAP);cases=[]
  for action in ['refresh','closed-tab']:

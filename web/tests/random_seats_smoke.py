@@ -70,7 +70,7 @@ with sync_playwright() as p:
         v.locator('#nick').fill('guest'+str(i))
         v.locator('[data-mode=join]').click()
         v.locator('#roomCode').fill(code)
-        v.locator('#joinBtn').click()
+        v.locator('#joinPad [data-k=go]').click()
         v.wait_for_function('(d)=>myDir===d',arg=direction,timeout=30000)
         expect(v.locator('#coachRoomAllowed')).to_be_disabled()
         expect(v.locator('#coachRoomAllowed')).to_be_checked()
@@ -86,7 +86,7 @@ with sync_playwright() as p:
     full.locator('#nick').fill('waiting')
     full.locator('[data-mode=join]').click()
     full.locator('#roomCode').fill(code)
-    full.locator('#joinBtn').click()
+    full.locator('#joinPad [data-k=go]').click()
     full.wait_for_function("()=>document.querySelector('#lobbyStatus').textContent.includes('坐满')",timeout=30000)
     assert full.evaluate("myDir===''")
     # Draw N,W,E,S, changing both the host's physical direction and the original partnerships.

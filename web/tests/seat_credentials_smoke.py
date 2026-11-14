@@ -25,7 +25,7 @@ with sync_playwright() as p:
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(URL + "&room=" + code, wait_until="networkidle")
         page.locator("#nick").fill(name)
-        page.locator("#joinBtn").click()
+        page.locator("#joinPad [data-k=go]").click()
         page.wait_for_function('() => (NET.hostConn?.open)', timeout=30000)
         page.locator(f"[data-seat={direction}]").click()
         host.wait_for_function(

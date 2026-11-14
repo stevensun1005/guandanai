@@ -774,3 +774,41 @@
     background: none;
   }
 }
+
+/* the room number: its box under the name (above the rules), with a keypad of its own below it, so no keyboard is needed on a tablet */
+.lobby-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: min(300px, 100%);
+  margin: 0 auto;
+}
+.pad-btn {
+  font: inherit;
+  font-size: 22px;
+  padding: 7px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--shade);
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+}
+.pad-btn:active {
+  background: var(--gold);
+  color: var(--on-gold);
+  border-color: var(--gold);
+}
+.pad-btn[data-k='go'] {
+  background: var(--gold);
+  color: var(--on-gold);
+  border-color: var(--gold);
+  font-weight: 700;
+  font-size: 19px;
+}
+.lobby-pad[hidden] {
+  display: none;
+}
+/* the keypad has its own 进入: the one beside the box is not needed (the Enter key of a keyboard still works) */
+#joinRow #joinBtn {
+  display: none;
+}

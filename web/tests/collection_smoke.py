@@ -40,7 +40,7 @@ with sync_playwright() as p:
     host.locator('#botStyleBox summary').click()
     for seat in ['E','N','W']:host.locator(f'[data-bot-seat={seat}]').select_option('clint-rule')
     guest.goto(BASE+'?test=1&room='+code,wait_until='networkidle')
-    guest.locator('#nick').fill('CollectG');guest.locator('#joinBtn').click()
+    guest.locator('#nick').fill('CollectG');guest.locator('#joinPad [data-k=go]').click()
     guest.wait_for_function('() => NET.hostConn?.open',timeout=30000);guest.locator('[data-seat=E]').click()
     host.wait_for_function("() => NET.lobby.E==='CollectG'")
     host.locator('#sitBtn').click()

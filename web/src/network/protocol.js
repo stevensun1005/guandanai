@@ -2,6 +2,18 @@ import { runtime } from '../app/runtime.js';
 import { lobbyStatus } from '../lobby/lobby.js';
 import { $ } from '../ui/cards.js';
 
+// Multiple STUN candidates; this does not guarantee reachability on every network.
+export const PEER_OPTS = {
+  config: {
+    iceServers: [
+      'stun:stun.miwifi.com:3478',
+      'stun:stun.qq.com:3478',
+      'stun:stun.cloudflare.com:3478',
+      'stun:stun.l.google.com:19302',
+      'stun:global.stun.twilio.com:3478',
+    ].map((urls) => ({ urls })),
+  },
+};
 export let ROOM_PREFIX;
 export let VERSION;
 export let OLD_PAGE;

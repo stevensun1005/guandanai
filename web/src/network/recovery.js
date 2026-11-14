@@ -157,6 +157,9 @@ export function receiveHello(conn, message) {
     runtime.network.lobby[info.dir] = info.name;
     const seat = absOf(info.dir, runtime.network.hostDir);
     const humans = [...new Set([...runtime.network.humans, seat])];
+    // A replacement tab can arrive before the old connection closes; its microphone starts off.
+    delete runtime.network.mics[seat];
+    broadcast({ t: 'mics', m: runtime.network.mics });
     act({ k: 'humans', list: humans, names: runtime.network.names, joined: seat });
     reserveSeat(info);
     const peers = peerList();

@@ -129,7 +129,7 @@ def main():
             guest.goto(url + "?test=1&room=" + code, wait_until="networkidle")
             guest.wait_for_function("()=>typeof window.resetGame==='function'")
             guest.locator("#nick").fill("Guest")
-            guest.locator("#joinBtn").click()
+            guest.locator("#joinPad [data-k=go]").click()
             guest.wait_for_function("()=>NET.hostConn?.open", timeout=30000)
             guest.locator("[data-seat=S]").click()
             host.wait_for_function("()=>NET.lobby.S==='Guest'")

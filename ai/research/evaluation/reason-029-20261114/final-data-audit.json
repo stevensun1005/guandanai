@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "atUTC": "2026-11-14T16:12:43.533Z",
+  "readOnly": true,
+  "newGames": 0,
+  "newOptimizerUpdates": 0,
+  "blocks": 2800,
+  "rows": 1184327,
+  "trainRows": 1065594,
+  "valRows": 118733,
+  "uniqueTrainingLiteralSeeds": 38000,
+  "heldoutLiteralSeeds": 2000,
+  "trainHeldoutOverlap": 0,
+  "rowSeedOutsideDeclaredBlock": 0,
+  "allFeatureTargetMetadataSizesCorrect": true,
+  "metadataAndRowKeysSHA256": "42caa397e8406519d13f5e82ab0ca749a547df46812b4bdf1d3d2742db5cb4e4",
+  "scope": "Read-only physical shard shape, declared literal seeds and every row seed; raw features/targets/private hands remain local"
+}

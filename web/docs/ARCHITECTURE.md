@@ -163,3 +163,5 @@ Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手�
 `lobby/lobby.js`维护seatMode、自选默认与存储、随机模式的临时入座和单人方位；`network/rooms.js`在版本核对／清理过期预留后、准备电脑模型／开始广播前，复用牌堆Fisher–Yates洗牌给当前真人分配不同物理方位。房主仍是自己的本地0号位，客人由最终hostDir旋转。每个客人的同一个token通过`reserveSeat`更新服务端预留和客户端sessionStorage，再广播最终大厅和start。恢复逻辑继续按token找到最终方位，不能只凭昵称认领座位。
 
 随机模式下`lobby/bot-setup.js`允许房主预设四个方位的备用电脑；最终`prepareBotModels`按抽签后的方向旋转选择。此UI字段不进入训练数据、网络特征、模型奖励或搜索策略；采集仍在发牌/开打时读取最终真人座位。
+
+2026-11-14：`network/protocol.js`统一PEER_OPTS的五个STUN候选，rooms/host-restore共用，命名空间仍guandanai-room-。恢复层已有peer广播和VC.start按新peerID清线；断线时先清mic状态再广播。语音标记只表示真人麦克风/本机测得的说话状态，不采集语音。`hand/layout.js`复用现有避让布局摆放桌面工具，保留本项目额外理牌菜单；`game/tribute.js`修同值双贡，仅普通网页，不热改冻结模拟器。

@@ -389,3 +389,48 @@
 body:not(.practice) .handtools.empty .link {
   display: none;
 }
+
+/* a computer: 闭麦 as big as 表情 (a round 34px), and 手持 / 两排 / 复原 squares */
+#micBtn[data-side] {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+#micBtn[data-side]::before {
+  display: none;
+}
+.handtools.sidetools {
+  justify-content: flex-start;
+  gap: 6px;
+}
+.handtools.sidetools .toolgap {
+  display: none;
+}
+.handtools.sidetools #sortBtn {
+  position: absolute;
+  left: calc(var(--side-tool-start) - 46px);
+}
+.handtools.sidetools #fanBtn,
+.handtools.sidetools #rowsBtn,
+.handtools.sidetools #restoreHandBtn,
+.handtools.sidetools #sortBtn {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+  box-sizing: border-box;
+  border-radius: 8px;
+  white-space: nowrap;
+}

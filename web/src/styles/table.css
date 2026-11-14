@@ -1463,3 +1463,40 @@ body:not(.practice) .selection-bar {
   color: #ff6b5f;
   border-color: #ff6b5f;
 }
+
+/* the mark in every name plate: it floats at the plate's right end and takes no room, so no plate changes size and no name moves */
+.meinfo,
+.seat .who {
+  position: relative;
+}
+.vc.show {
+  display: inline-flex;
+}
+.vc.show svg {
+  display: block;
+  fill: #9fb0a8;
+  opacity: 0.4;
+}
+.vc.show.on svg {
+  fill: var(--gold);
+  opacity: 1;
+  filter: drop-shadow(0 0 3px rgba(221, 176, 80, 0.7));
+}
+.vc.talk.show svg {
+  animation: vcTalk 0.45s ease-in-out infinite alternate;
+}
+.meinfo .vc,
+html:not(.phone) body:not(.test) #mebar .meinfo .vc,
+html:not(.phone) body:not(.test) #mebar .meinfo span.vc#myVc {
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  right: 5px;
+  translate: 0 -50%;
+  z-index: 6;
+  pointer-events: none;
+}
+.meinfo .vc svg {
+  width: 1.1em;
+  height: 1.1em;
+}

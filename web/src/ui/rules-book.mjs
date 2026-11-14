@@ -174,7 +174,7 @@ export function rulesPages(rules, modelDescription, timing) {
                 ),
                 ruleItem(
                   '双下',
-                  '上一局一方是三游和末游（双下）时，两人都要进贡，分别给头游和二游。',
+                  '上一局一方是三游和末游（双下）时，两人都要进贡：较大的给头游、另一张给二游，由贡较大者先出。两张同大时各贡给自己的上家，再由该上家还回；头游的下家先出。',
                 ),
                 ruleItem(
                   '抗贡',

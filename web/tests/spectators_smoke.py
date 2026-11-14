@@ -31,7 +31,7 @@ with sync_playwright() as p:
     guest.locator('#nick').fill('牌友')
     guest.locator('[data-mode="join"]').click()
     guest.locator('#roomCode').fill(code)
-    guest.locator('#joinBtn').click()
+    guest.locator('#joinPad [data-k=go]').click()
     guest.locator('[data-seat="N"]').wait_for(state='visible')
     guest.wait_for_function("()=>NET.hostConn?.open && document.querySelector('[data-seat=N]').disabled===false")
     guest.locator('[data-seat="N"]').click()

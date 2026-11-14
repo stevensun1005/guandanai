@@ -72,7 +72,7 @@ with sync_playwright() as p:
     code = host.locator('#roomCodeShow').inner_text()
     guest.goto(URL + '?test=1&room=' + code, wait_until='networkidle')
     guest.locator('#nick').fill('客人')
-    guest.locator('#joinBtn').click()
+    guest.locator('#joinPad [data-k=go]').click()
     guest.wait_for_function('()=>NET.hostConn?.open', timeout=30000)
     guest.locator('[data-seat=E]').click()
     host.wait_for_function("()=>NET.lobby.E==='客人'")

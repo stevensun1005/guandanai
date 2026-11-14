@@ -255,7 +255,14 @@ export function initialize() {
         const el = $(q ? `#seat${q} .vc` : '#myVc');
         if (!el) continue;
         const a = toAbs(q);
-        el.className = 'vc' + (active && isHumanSeat(q) && talking.has(a) ? ' talk' : '');
+        const human = active && isHumanSeat(q);
+        const enabled =
+          q === 0 && runtime.network.mode !== 'spectator' ? on : !!runtime.network.mics[a];
+        el.className =
+          'vc' +
+          (human ? ' show' : '') +
+          (human && enabled ? ' on' : '') +
+          (human && talking.has(a) ? ' talk' : '');
       }
     }
     // browsers hold sound back until the page is touched: every tap wakes the listening and the lines up again

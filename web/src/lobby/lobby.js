@@ -138,6 +138,7 @@ export function setMode(m) {
     b.setAttribute('aria-pressed', String(selected));
   });
   $('#joinRow').hidden = m !== 'join';
+  $('#joinPad').hidden = m !== 'join';
   $('#roomCode').classList.toggle('call', m === 'join');
   $('#joinBtn').disabled = false;
   $('#roomInfo').hidden = true;
@@ -164,6 +165,7 @@ function autoSeatHost() {
 }
 
 export function renderLobby() {
+  $('#joinPad').hidden = runtime.lobbyMode !== 'join' || !!runtime.network.hostConn?.open;
   autoSeatHost();
   renderContinueMatch();
   $('#shareRoomBtn').hidden = runtime.lobbyMode !== 'host' || !runtime.network.peerOpen;
@@ -356,6 +358,20 @@ export function initialize() {
     runtime.network.rejoinTries = 0;
     joinRoom(code);
   };
+  $('#joinPad').addEventListener('click', (e) => {
+    const button = e.target.closest('.pad-btn');
+    if (!button || $('#joinBtn').disabled) return;
+    const key = button.dataset.k,
+      box = $('#roomCode');
+    Sound.unlock();
+    Sound.play('select');
+    if (key === 'go') {
+      $('#joinBtn').click();
+      return;
+    }
+    box.value = key === 'del' ? box.value.slice(0, -1) : (box.value + key).slice(0, 4);
+    box.dispatchEvent(new Event('input', { bubbles: true }));
+  });
   $('#roomCode').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') $('#joinBtn').click();
   });

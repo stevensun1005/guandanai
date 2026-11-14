@@ -1,0 +1,491 @@
+{
+  "schema": 1,
+  "kind": "clint-ui-network-and-browser-tribute-rules-not-bot-strategy",
+  "phase": "local-validation-passed-deployment-pending",
+  "observedAtUTC": "2026-11-14T16:08:42.744965+00:00",
+  "baseMain": "e6b6bc1",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+    "checkedSHA": "e17f3adb17d89b665445d39524f383e97cecd3c5",
+    "commits": [
+      {
+        "sha": "e17f3adb17d89b665445d39524f383e97cecd3c5",
+        "subject": "闭麦从开局起就在过的右边并和表情同大；手持/两排/复原改成正方形，手持与重选中心对齐"
+      },
+      {
+        "sha": "148625ff87ff86e531ae5327648dc353b6e7ecae",
+        "subject": "掉线重进后语音恢复；表情按钮移到重选右边、闭麦移到过右边、手持/两排/复原右移；每个玩家名字框显示开麦标志（亮/暗）"
+      },
+      {
+        "sha": "5efafcab3aa2a7e120d2d8ba4a1d9442fde9aca8",
+        "subject": "房间号输入框移到标题下并配数字键盘；两家贡一样大时贡左还右、头游下家先出；挑花色进贡和等待还贡时同花顺可用；联机加多个 STUN"
+      }
+    ],
+    "paths": [
+      "index.html",
+      "web/src/game/tribute.js",
+      "web/src/index.html",
+      "web/src/lobby/modes.js",
+      "web/src/network/connection.js",
+      "web/src/network/guest.js",
+      "web/src/network/host.js",
+      "web/src/network/resume.js",
+      "web/src/network/voice.js",
+      "web/src/styles/hand.css",
+      "web/src/styles/header.css",
+      "web/src/styles/lobby.css",
+      "web/src/ui/action-buttons.js",
+      "web/src/ui/render.js"
+    ],
+    "pathSHA256": {
+      "index.html": "93762348748dd007b168734543d36afb081aa385aab9a7ca4e469eb264ba9af5",
+      "web/src/game/tribute.js": "0be4157fe5b359131b93d828ee4e352dde2418804d1664daab6b12960d23026b",
+      "web/src/index.html": "6ff10e3ac9f5328695b9dd96852d6b203acdc22581e98e0cad046639385d191e",
+      "web/src/lobby/modes.js": "a4cc25cffc9d2ce89956e3a87bbd1ec7156b35572197232dd6707df11061ea20",
+      "web/src/network/connection.js": "98fbe3233fb578464742d76ab5db3fdfdb7fc55a41e28dcf95c3f4ec7e65905d",
+      "web/src/network/guest.js": "957af71bb56f8b94f40564fb5c568f87f904cdd89bd5318c98db09f75d39fc95",
+      "web/src/network/host.js": "2a4ea99b91e28517c5ea75b4c0f8e7f6893ffbcbdcf9347884ec90779a6753d7",
+      "web/src/network/resume.js": "362228f7ef35d66ff81e64e22d4b87dfe7e887a17bd5276dece6fae380ec6770",
+      "web/src/network/voice.js": "553462c210a0b5a372484d8c09ac8f8c9cfa915b88c7af2eedc1289db607a5c1",
+      "web/src/styles/hand.css": "495d34d4a1987e366d895566d2c8cc31be1111f80455cf6562370156becd2b7e",
+      "web/src/styles/header.css": "cbb4cfae4960f0eb0c98872dcd60ae491ed094d2563f58e618121d597ed007fa",
+      "web/src/styles/lobby.css": "c8246803fce795eea6ded49d57a16f7c51fc55eb556dc067db94623736774d19",
+      "web/src/ui/action-buttons.js": "c0c3242ce36c6a56e2aead768eb99ac9b50a8bf586a0908e0ebafa3d788adb5c",
+      "web/src/ui/render.js": "b8dd47b32a7adbcf12384ee950862912daa66999fa1266f6f8e3f939345e5141"
+    },
+    "patchSHA256": "12c2b987d80d217d417f666f3468079735a19af704d6f41a35b3bff670f8f104"
+  },
+  "applied": [
+    {
+      "upstream": [
+        "web/src/index.html",
+        "web/src/lobby/modes.js"
+      ],
+      "target": [
+        "web/src/index.html",
+        "web/src/lobby/lobby.js",
+        "web/src/styles/lobby.css"
+      ],
+      "scope": "Room code above rules, accessible12-key keypad, delete/max4/Enter and actual join; avoid iPad native keyboard."
+    },
+    {
+      "upstream": [
+        "web/src/network/connection.js",
+        "web/src/network/host.js",
+        "web/src/network/guest.js"
+      ],
+      "target": [
+        "web/src/network/protocol.js",
+        "web/src/network/rooms.js",
+        "web/src/network/host-restore.js"
+      ],
+      "scope": "Five upstream STUN endpoints consistently used for host, guest, spectator viajoinRoom and restored host; own namespace/version retained. No guarantee of China reachability or TURN relay."
+    },
+    {
+      "upstream": [
+        "web/src/network/resume.js",
+        "web/src/network/voice.js"
+      ],
+      "target": [
+        "web/src/network/rooms.js",
+        "web/src/network/voice.js",
+        "web/src/styles/table.css",
+        "web/src/network/recovery.js"
+      ],
+      "scope": "Clear dropped player mic state, dim/lit/talking human mic markers. Existing recovery rebroadcast/VC.start changed-peer cleanup retained. Explicitly clear microphone on live-tab credential replacement before the old close callback can be skipped."
+    },
+    {
+      "upstream": [
+        "web/src/ui/action-buttons.js",
+        "web/src/styles/hand.css"
+      ],
+      "target": [
+        "web/src/hand/layout.js",
+        "web/src/styles/hand.css"
+      ],
+      "scope": "Desktop mic/emote by pass/reselect including deal;40px hand/rows/restore squares; local extra arrange menu retained to left to prevent1024 overflow. Phone, short-height natural scroll, practice and spectator layouts retained."
+    },
+    {
+      "upstream": [
+        "web/src/game/tribute.js",
+        "web/src/ui/render.js"
+      ],
+      "target": [
+        "web/src/game/tribute.js",
+        "web/src/ui/table.js",
+        "web/src/ui/rules-book.mjs"
+      ],
+      "scope": "Equal double tribute physical mapping(previous seat) and leader(first finisher next seat); straight flush arrangement during tribute pick/return. Ordinary browser rules only; frozen historical simulators untouched."
+    }
+  ],
+  "notApplied": [
+    {
+      "path": "index.html",
+      "reason": "Generated upstream artifact; build own modular source."
+    },
+    {
+      "path": "web/src/network/resume.js/voice.js",
+      "reason": "Equivalent rejoin peer rebroadcast and changed-ID cleanup already present in local recovery.js/VC.start. Verified existing logic instead of replacing credential-aware recovery."
+    },
+    {
+      "path": "web/src/styles/header.css/hand.css",
+      "reason": "Use local table.css and collision-aware layout; retain additional arrange menu and low-height natural scrolling instead of absolute upstream layout."
+    }
+  ],
+  "ruleStrategy": {
+    "changed": false,
+    "lastSuccessfulRuleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+    "strengthGamesExecuted": 0,
+    "oldResultsRemainBoundToOldRulesAndFingerprints": true
+  },
+  "protected": {
+    "webMenu": [
+      "clint-rule",
+      "028",
+      "029"
+    ],
+    "defaultId": "029",
+    "version": "v000061013",
+    "privateHostTool": true,
+    "hostAndPersonalCoachSwitches": true,
+    "roomHumanNameCollection": true,
+    "opaqueSeatRecovery": true,
+    "rootDrafts": 10,
+    "frozenTrainingModified": false,
+    "neuralPolicyOrCandidatePathModified": false
+  },
+  "validation": {
+    "npmTest": {
+      "tests": 519,
+      "passed": 483,
+      "skipped": 36,
+      "failed": 0,
+      "command": "npm test"
+    },
+    "python": {
+      "researchPassed": 41,
+      "sharedPassed": 4
+    },
+    "formatCheck": "passed",
+    "build": {
+      "passed": true,
+      "version": "bc7a2d065d"
+    },
+    "voiceKeypadTributeBrowser": {
+      "version": "bc7a2d065d",
+      "layouts": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "controls": {
+            "fanBtn": {
+              "x": 1136,
+              "y": 952,
+              "width": 40,
+              "height": 40,
+              "visible": true
+            },
+            "rowsBtn": {
+              "x": 1182,
+              "y": 952,
+              "width": 40,
+              "height": 40,
+              "visible": true
+            },
+            "sortBtn": {
+              "x": 1090,
+              "y": 952,
+              "width": 40,
+              "height": 40,
+              "visible": true
+            },
+            "emoteBtn": {
+              "x": 1200,
+              "y": 857,
+              "width": 34,
+              "height": 34,
+              "visible": true
+            },
+            "clearBtn": {
+              "x": 1122.234375,
+              "y": 840,
+              "width": 68,
+              "height": 68,
+              "visible": true
+            },
+            "passBtn": {
+              "x": 1122.234375,
+              "y": 764,
+              "width": 68,
+              "height": 68,
+              "visible": true
+            }
+          }
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "controls": {
+            "fanBtn": {
+              "x": 869,
+              "y": 720,
+              "width": 40,
+              "height": 40,
+              "visible": true
+            },
+            "rowsBtn": {
+              "x": 915,
+              "y": 720,
+              "width": 40,
+              "height": 40,
+              "visible": true
+            },
+            "sortBtn": {
+              "x": 823,
+              "y": 720,
+              "width": 40,
+              "height": 40,
+              "visible": true
+            },
+            "emoteBtn": {
+              "x": 933,
+              "y": 625,
+              "width": 34,
+              "height": 34,
+              "visible": true
+            },
+            "clearBtn": {
+              "x": 854.953125,
+              "y": 608,
+              "width": 68,
+              "height": 68,
+              "visible": true
+            },
+            "passBtn": {
+              "x": 854.953125,
+              "y": 532,
+              "width": 68,
+              "height": 68,
+              "visible": true
+            }
+          }
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "controls": {
+            "fanBtn": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "visible": false
+            },
+            "rowsBtn": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "visible": false
+            },
+            "sortBtn": {
+              "x": 278,
+              "y": 806,
+              "width": 58,
+              "height": 30,
+              "visible": true
+            },
+            "emoteBtn": {
+              "x": 344,
+              "y": 806,
+              "width": 30,
+              "height": 30,
+              "visible": true
+            },
+            "clearBtn": {
+              "x": 326,
+              "y": 752,
+              "width": 48,
+              "height": 48,
+              "visible": true
+            },
+            "passBtn": {
+              "x": 326,
+              "y": 698,
+              "width": 48,
+              "height": 48,
+              "visible": true
+            }
+          }
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "controls": {
+            "fanBtn": {
+              "x": 536,
+              "y": 495.125,
+              "width": 58,
+              "height": 34,
+              "visible": true
+            },
+            "rowsBtn": {
+              "x": 600,
+              "y": 495.125,
+              "width": 58,
+              "height": 34,
+              "visible": true
+            },
+            "sortBtn": {
+              "x": 728,
+              "y": 495.125,
+              "width": 58,
+              "height": 34,
+              "visible": true
+            },
+            "emoteBtn": {
+              "x": 794,
+              "y": 495.125,
+              "width": 34,
+              "height": 34,
+              "visible": true
+            },
+            "clearBtn": {
+              "x": 482,
+              "y": 270.1875,
+              "width": 48,
+              "height": 48,
+              "visible": true
+            },
+            "passBtn": {
+              "x": 426,
+              "y": 270.1875,
+              "width": 48,
+              "height": 48,
+              "visible": true
+            }
+          }
+        },
+        {
+          "width": 320,
+          "height": 640,
+          "controls": {
+            "fanBtn": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "visible": false
+            },
+            "rowsBtn": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "visible": false
+            },
+            "sortBtn": {
+              "x": 208,
+              "y": 549,
+              "width": 58,
+              "height": 30,
+              "visible": true
+            },
+            "emoteBtn": {
+              "x": 274,
+              "y": 549,
+              "width": 30,
+              "height": 30,
+              "visible": true
+            },
+            "clearBtn": {
+              "x": 217,
+              "y": 361,
+              "width": 48,
+              "height": 48,
+              "visible": true
+            },
+            "passBtn": {
+              "x": 163,
+              "y": 361,
+              "width": 48,
+              "height": 48,
+              "visible": true
+            }
+          }
+        }
+      ],
+      "equalDoubleTributeRotations": 4,
+      "straightFlushDuringTributeAndReturn": true,
+      "realPeerJSChangedIdReconnected": true,
+      "audioStreamsBeforeAndAfter": true,
+      "staleMicCleared": true,
+      "liveTabCredentialReplacementClearsMic": true,
+      "micRetoggleAfterRefresh": true,
+      "pageErrors": [],
+      "cloudUploads": 0,
+      "scope": "Synthetic Chrome/WebRTC correctness; fake microphone, no physical audio or network reachability guarantee"
+    },
+    "controlLayout": {
+      "states": 521,
+      "failures": 0,
+      "pageErrors": [],
+      "scope": "CI targeted subset, high/low desktop and phone; low height uses natural scroll"
+    },
+    "randomSeats": {
+      "viewports": 5,
+      "fourRealPeers": true,
+      "credentialRebinding": true,
+      "hostGuestRefresh": true,
+      "mixedModelsAndCoach": true,
+      "pageErrors": []
+    },
+    "productionWASM": {
+      "successfulModelIds": [
+        "028",
+        "029"
+      ],
+      "productionGlobalsHidden": true,
+      "pageErrors": []
+    },
+    "privateTool": {
+      "hostOnly": true,
+      "guestDenied": true,
+      "opponentPublicOnly": true,
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "hostRestore": {
+      "refresh": true,
+      "closedTab": true,
+      "recordIdentityAndNames": true,
+      "actualAssistedExposureRetained": true,
+      "explicitForget": true,
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "logSHA256": {
+      "final-node": "7ce094e231ced5a1c7974b2b862d8a8afca4258f447cdbc5d8aa444dfe360e9e",
+      "format": "188d607ebfd578a7e695e7ddf319c0e438d00d16133c9711d0602e899d433d71",
+      "python": "be25ab6318d2c1b1908dc2206f270608bd1ddb0e09c4d3d9c873830798f7b4c7",
+      "layout": "576409183644d1b2e408c9336c1c96ee097754da41486ac03a5a0f51358a2fcc",
+      "seats": "7a9284aaafe0867b4d5f270bce118008f49628e02c4d5ed4e9da89ba61c23e66",
+      "production": "2c30b03efa74bdbc0f16350d37f6a0137b06363e3ce25a6012291a2269bb5752",
+      "private": "000c76aedba92e89c57f843ea70c81a0359bab6d4b8c1377a0edd8bd8f9f6c71",
+      "host": "2ac28a0447ce762f0049a2c6777c341eaef7387f14aac51e4afc0e395531667c",
+      "smoke": "069db23a29511df879836690ca8c40554d6af64b67a239168f63c0c8d248fbbf"
+    },
+    "imagesInspected": [
+      "keypad-390x844.png",
+      "table-1024x768.png"
+    ],
+    "noStrategyOrModelDiff": true
+  },
+  "deployment": {
+    "phase": "pending"
+  },
+  "pending": [
+    "Push source, verify Pages and live same-version UI, then advance full-success cursor"
+  ]
+}

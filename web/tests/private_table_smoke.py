@@ -30,7 +30,7 @@ with sync_playwright() as p:
  host.locator('#botStyleBox summary').click()
  for d in ['E','N','W']:host.locator(f'[data-bot-seat={d}]').select_option('clint-rule')
  code=host.locator('#roomCodeShow').inner_text()
- guest.goto(URL+'?test=1&room='+code,wait_until='networkidle');guest.locator('#nick').fill('stezer0');guest.locator('#joinBtn').click()
+ guest.goto(URL+'?test=1&room='+code,wait_until='networkidle');guest.locator('#nick').fill('stezer0');guest.locator('#joinPad [data-k=go]').click()
  guest.wait_for_function('()=>NET.hostConn?.open',timeout=30000);guest.locator('[data-seat=E]').click()
  host.wait_for_function("()=>NET.lobby.E==='stezer0'")
  assert guest.locator('#privateTableBox').is_hidden()

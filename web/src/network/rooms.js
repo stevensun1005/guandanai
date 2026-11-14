@@ -17,6 +17,7 @@ import { botModelId } from '../ai/model-catalog.mjs';
 import {
   OLD_PAGE,
   ROOM_PREFIX,
+  PEER_OPTS,
   VERSION,
   peerReady,
   versionsMatch,
@@ -73,7 +74,7 @@ export function openRoom() {
   if (!peerReady()) return;
   resetReservations();
   const code = String(1000 + ((Math.random() * 9000) | 0));
-  const peer = new Peer(ROOM_PREFIX + code);
+  const peer = new Peer(ROOM_PREFIX + code, PEER_OPTS);
   runtime.network.peer = peer;
   keepSignal(peer);
   lobbyStatus('正在开房间…');
@@ -298,6 +299,7 @@ function hostOnClose(conn, how = 'drop') {
   const seat = absOf(info.dir, runtime.network.hostDir);
   const list = [...runtime.network.humans].filter((h) => h !== seat);
   act({ k: 'humans', list, names: runtime.network.names, left: info.name, how });
+  delete runtime.network.mics[seat];
   updateSpectatorVoice();
   const c = runtime.game.clock;
   if (c && (c.who === seat || c.seat === seat)) {
@@ -389,7 +391,7 @@ export function joinRoom(code, watching = false) {
   runtime.network.watching = watching;
   runtime.network.lastCode = code;
   lobbyStatus('正在连接…');
-  const peer = new Peer();
+  const peer = new Peer(PEER_OPTS);
   runtime.network.peer = peer;
   keepSignal(peer);
   peer.on('call', (c) => VC.incoming(c));
