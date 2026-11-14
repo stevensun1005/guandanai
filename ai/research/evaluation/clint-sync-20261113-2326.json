@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "clint-ui-network-sync-not-strategy",
-  "phase": "validated-awaiting-pages",
+  "phase": "complete",
   "observedAtUTC": "2026-11-13T23:44:06.977Z",
   "baseMain": "79921dae1361993089cbfa689e7e6958a8921c7d",
   "upstream": {
@@ -343,9 +343,72 @@
     "finalChecks": "After fixture update:518Node/482pass/36skip, research41pass, shared3pass/1skip, format/build pass; browser bundle unchanged23b4ed9604"
   },
   "deployment": {
-    "status": "pending",
+    "status": "success",
     "site": "https://stevensun1005.github.io/guandanai/",
-    "sourceCodeCommit": "19d513d359a411e9a4353af661394d8bf302f392"
+    "version": "23b4ed9604",
+    "codeCommit": "19d513d359a411e9a4353af661394d8bf302f392",
+    "regressionFixtureCommit": "58ad43e70544bb66389351e7880d906d9aab1b3d",
+    "pages": [
+      {
+        "id": 43529371683,
+        "url": "https://github.com/stevensun1005/guandanai/actions/runs/43529371683",
+        "headSha": "19d513d359a411e9a4353af661394d8bf302f392",
+        "conclusion": "success"
+      },
+      {
+        "id": 43530095467,
+        "url": "https://github.com/stevensun1005/guandanai/actions/runs/43530095467",
+        "headSha": "58ad43e70544bb66389351e7880d906d9aab1b3d",
+        "conclusion": "success"
+      }
+    ],
+    "publicVersionVerified": true,
+    "publicBrowserSmoke": {
+      "url": "https://stevensun1005.github.io/guandanai/?test=1",
+      "report": {
+        "upstream": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+        "viewports": [
+          [
+            1440,
+            1000
+          ],
+          [
+            1024,
+            768
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            844,
+            390
+          ],
+          [
+            320,
+            640
+          ]
+        ],
+        "savedDefaultAndSoloRandom": true,
+        "fourRealPeersRandomized": true,
+        "hostDirectionChanged": true,
+        "partnershipChanged": true,
+        "opaqueTokensPreservedAndRebound": true,
+        "fullRoomCannotChooseSeat": true,
+        "serverIgnoresRequestedRandomSeat": true,
+        "versionMismatchBlocksStart": true,
+        "freshLobbyResetsStartedFlag": true,
+        "guestAndHostReloadKeepDrawAndCards": true,
+        "hostCoachPermissionPreserved": true,
+        "roomAndHumanNameCollectionMapping": true,
+        "mixedBotPhysicalDirectionsPreserved": true,
+        "default029Unchanged": true,
+        "pageErrors": [],
+        "strengthGames": 0,
+        "cloudUploadsBlocked": true
+      },
+      "scope": "Actual public Chrome/PeerJS, cloud endpoint blocked, synthetic fixture and names, not human or strength validation"
+    }
   },
   "strengthEvaluation": {
     "newGames": 0,
@@ -364,5 +427,6 @@
     "previousAssumption": "Last menu label hard-coded to danMCai-reason-v000855042",
     "reason": "029 was already published with no029-search entry; test must check current champion source.version and whether a same-base reason entry exists",
     "result": "Dynamic exact label assertion passed; does not change menu or champion"
-  }
+  },
+  "completedAtUTC": "2026-11-14T00:00:06.288Z"
 }

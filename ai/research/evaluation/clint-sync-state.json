@@ -1,23 +1,16 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
-  "evidence": "clint-sync-20261112-0320.json",
-  "pending": [
-    {
-      "upstreamSHA": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
-      "kind": "validated-awaiting-deployment",
-      "evidence": "clint-sync-20261113-2326.json",
-      "reason": "Source adaptation and local regression passed; retain last full success until Pages and public behavior are verified"
-    }
-  ],
+  "lastSuccessfulUpstreamSHA": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
+  "evidence": "clint-sync-20261113-2326.json",
+  "pending": [],
   "lastCheckedUpstreamSHA": "f97f0fe9051131f32cc142d1b9079c183ea1776b",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",
     "deployedCodeCommit": "19fb94e447e8799e93400a983875312ee47f1234"
   },
-  "previousSuccessfulEvidence": "clint-sync-20261108-1635.json",
+  "previousSuccessfulEvidence": "clint-sync-20261112-0320.json",
   "lastSuccessfulRuleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
-  "note": "Complete UI/rule adaptation through6e57485 deployed by fee7f1b; Pages43151200099 succeeded and public1d775d6165 passed four-menu/default, room options and overtime checks. Protected differences remain documented dispositions; no strength claim."
+  "note": "Full UI/network adaptation throughf97f0fe, Pages43529371683/43530095467 successful; public23b4ed9604 fiveviewports/fourpeers/token rebind/host+guest restore/mixedmodels verified. Rule strategy fingerprint remains6e57485; no training or strength change."
 }
