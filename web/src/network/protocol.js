@@ -28,6 +28,9 @@ export function initialize() {
   ROOM_PREFIX = 'guandanai-room-';
   VERSION = __BUILD_VERSION__;
   $('#verTag').textContent = VERSION === 'dev' ? '' : '版本 ' + VERSION;
+  document.querySelectorAll('.lobby-ver2').forEach((element) => {
+    element.textContent = $('#verTag').textContent;
+  });
   OLD_PAGE = '页面版本和房主不同，请刷新页面（电脑按 Ctrl+F5）后重新加入';
   peerReady = () => {
     if (window.Peer && /^https?:$/.test(location.protocol)) return true;

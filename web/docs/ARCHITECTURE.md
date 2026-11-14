@@ -165,3 +165,5 @@ Clint增量e7538a1→2b2a824已逐项适配：手机姓名栏居中、局内手�
 随机模式下`lobby/bot-setup.js`允许房主预设四个方位的备用电脑；最终`prepareBotModels`按抽签后的方向旋转选择。此UI字段不进入训练数据、网络特征、模型奖励或搜索策略；采集仍在发牌/开打时读取最终真人座位。
 
 2026-11-14：`network/protocol.js`统一PEER_OPTS的五个STUN候选，rooms/host-restore共用，命名空间仍guandanai-room-。恢复层已有peer广播和VC.start按新peerID清线；断线时先清mic状态再广播。语音标记只表示真人麦克风/本机测得的说话状态，不采集语音。`hand/layout.js`复用现有避让布局摆放桌面工具，保留本项目额外理牌菜单；`game/tribute.js`修同值双贡，仅普通网页，不热改冻结模拟器。
+
+双栏大厅使用lobby-main/left/right容器，手机以display:contents和显式顺序维持原流程；电脑2:3 minmax网格，牌桌自身aspect-ratio:1并均分三行三列。排除本地选级弹层参与格子约束，以更明确的.lobby .lobby-box覆盖后加载的旧500px宽度。断点变化只重绘大厅文案，不动选座、模型、权限、恢复或训练。

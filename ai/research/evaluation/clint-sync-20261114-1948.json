@@ -1,0 +1,1974 @@
+{
+  "schema": 1,
+  "kind": "clint-lobby-layout-only",
+  "phase": "local-validation-passed-deployment-pending",
+  "baseMain": "b479cce2f5d09e3a524f4bd4cfc7fb6c5b6d0b6e",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "e17f3adb17d89b665445d39524f383e97cecd3c5",
+    "checkedSHA": "66d63b81bb0dad2b68312f00c5b62d5262a7a2c0",
+    "commits": [
+      {
+        "sha": "66d63b81bb0dad2b68312f00c5b62d5262a7a2c0",
+        "subject": "iPad 上座位大小不一的修复：牌桌整体做成正方形均分九格，左右两栏锁死 2:3"
+      },
+      {
+        "sha": "042b8beb3a7c21b75161080145e913202ce6eefb",
+        "subject": "电脑版大厅改成左右两栏：牌桌（方形座位、开始游戏）在左，昵称和所有选项在右，照片在底部，版本号在右上角；手机版保持原样"
+      }
+    ],
+    "paths": [
+      "index.html",
+      "web/src/index.html",
+      "web/src/lobby/modes.js",
+      "web/src/network/connection.js",
+      "web/src/styles/lobby.css"
+    ],
+    "pathSHA256": {
+      "index.html": "a47d1f6f75cf25b0c2ef32d7822fed507ef7a5127606fe874030b4f0f29541e0",
+      "web/src/index.html": "32c9ddd9baf4cd39e0edfe12fe03cd5609887adf883bf8b4e9807d4b5cffc38a",
+      "web/src/lobby/modes.js": "fb9b9782a3bb9eb086c331d4e8bed8e27cdb69a7246a5568e439792cc847f1c8",
+      "web/src/network/connection.js": "a6282cc98b65ea97f671afd185817d07b7382c7c2e723597190614d4c3961910",
+      "web/src/styles/lobby.css": "1af06e90b800861586879d32455d2d80f8c83966ea1e4779ab31ce163f9e9a0b"
+    },
+    "patchSHA256": "f6a49eef2f91872098481cae10d65fcaca8f79c8c9d0239881b8c88151215aba"
+  },
+  "applied": [
+    {
+      "upstream": "web/src/index.html",
+      "target": "web/src/index.html",
+      "scope": "Desktop2:3 lobby: brand/square table/start on left; name/mode/keypad/rules/coach/private/model choices on right; local practice, spectator, help and photo preserved. Phone display-contents ordering matches original flow."
+    },
+    {
+      "upstream": "web/src/styles/lobby.css",
+      "target": "web/src/styles/lobby.css",
+      "scope": "Whole table square,3x3 minmax(0,1fr) rows/columns, no child aspect-ratio dependency; equal seat dimensions across Chrome/WebKit. Own level-picker overlay excluded from cell sizing. Scoped card width overrides later local500px skin, narrow601-760 type adaptation."
+    },
+    {
+      "upstream": "web/src/lobby/modes.js",
+      "target": "web/src/lobby/lobby.js",
+      "scope": "Desktop start label and live601px breakpoint resize update; existing seating/version/permission guards untouched."
+    },
+    {
+      "upstream": "web/src/network/connection.js",
+      "target": "web/src/network/protocol.js",
+      "scope": "Duplicate own build version in desktop upper-right; mobile retains original version label."
+    }
+  ],
+  "notApplied": [
+    {
+      "path": "index.html",
+      "reason": "Generated artifact; build own modular source."
+    },
+    {
+      "path": "web/src/index.html test-password entry",
+      "reason": "No new password/private entry adopted: local practice/spectator/help feature paths retained; only changed version label adapted to own upper-right card."
+    },
+    {
+      "path": "web/src/styles/lobby.css layered fixed288px widths",
+      "reason": "Use final2:3 minmax columns, preserve additional local controls/mobile order and low-height scrolling instead of importing superseded intermediate CSS."
+    }
+  ],
+  "protected": {
+    "menu": [
+      "clint-rule",
+      "028",
+      "029"
+    ],
+    "defaultId": "029",
+    "danMCaiChampions": [
+      "029",
+      "017"
+    ],
+    "hostAndPersonalCoach": true,
+    "hostOnlyPrivateTool": true,
+    "roomHumanNameCollection": true,
+    "opaqueRecovery": true,
+    "rootDrafts": 10,
+    "neuralRuleOrTrainingFilesChanged": false
+  },
+  "ruleStrategy": {
+    "changed": false,
+    "sourceSHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+    "newStrengthGames": 0
+  },
+  "validation": {
+    "npmTest": {
+      "passed": 483,
+      "skipped": 36,
+      "failed": 0,
+      "tests": 519,
+      "firstCompleteRun": true
+    },
+    "repeatedNpmTest": {
+      "completed": false,
+      "reason": "Known Windows child exit wait: repeated default wrapper remained alive after endgame-search-arm child had exited; original log retained.",
+      "ownedTestParent": 9420,
+      "child": 42904,
+      "childNodeProbe": "ESRCH",
+      "cleanup": "Only command/parent-identity-verified own test parent9420 terminated; no training or app process touched."
+    },
+    "explicitFileSerialVerification": {
+      "tests": 516,
+      "passed": 480,
+      "skipped": 36,
+      "failed": 0,
+      "command": "node --test --test-isolation=none --test-concurrency=1 --test-timeout=180000 <expanded actual test paths>",
+      "note": "Same test files; imported shared solver cases deduplicated under one-process execution."
+    },
+    "python": {
+      "researchPassed": 41,
+      "sharedPassed": 4
+    },
+    "formatCheck": "passed",
+    "build": {
+      "passed": true,
+      "version": "d567b97606"
+    },
+    "layoutBrowsers": {
+      "chromium": {
+        "engine": "chromium",
+        "version": "d567b97606",
+        "cases": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "geometry": {
+              "left": {
+                "left": 311,
+                "top": 37,
+                "width": 315.1875,
+                "height": 487.1875,
+                "bottom": 524.1875,
+                "right": 626.1875
+              },
+              "right": {
+                "left": 656.1875,
+                "top": 37,
+                "width": 472.8125,
+                "height": 487.1875,
+                "bottom": 524.1875,
+                "right": 1129
+              },
+              "table": {
+                "left": 311,
+                "top": 147,
+                "width": 315.1875,
+                "height": 315.1875,
+                "bottom": 462.1875,
+                "right": 626.1875
+              },
+              "seats": [
+                {
+                  "left": 418.71875,
+                  "top": 147,
+                  "width": 99.734375,
+                  "height": 99.71875,
+                  "bottom": 246.71875,
+                  "right": 518.453125
+                },
+                {
+                  "left": 311,
+                  "top": 254.71875,
+                  "width": 99.71875,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 410.71875
+                },
+                {
+                  "left": 526.453125,
+                  "top": 254.71875,
+                  "width": 99.71875,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 626.171875
+                },
+                {
+                  "left": 418.71875,
+                  "top": 362.453125,
+                  "width": 99.734375,
+                  "height": 99.71875,
+                  "bottom": 462.171875,
+                  "right": 518.453125
+                }
+              ],
+              "nick": {
+                "left": 656.1875,
+                "top": 37,
+                "width": 472.8125,
+                "height": 44,
+                "bottom": 81,
+                "right": 1129
+              },
+              "modes": {
+                "left": 786.1875,
+                "top": 95.546875,
+                "width": 342.8125,
+                "height": 44,
+                "bottom": 139.546875,
+                "right": 1129
+              },
+              "rules": {
+                "left": 656.1875,
+                "top": 154.09375,
+                "width": 472.8125,
+                "height": 257,
+                "bottom": 411.09375,
+                "right": 1129
+              },
+              "go": {
+                "left": 383.59375,
+                "top": 476.1875,
+                "width": 170,
+                "height": 48,
+                "bottom": 524.1875,
+                "right": 553.59375
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 1024,
+            "height": 768,
+            "geometry": {
+              "left": {
+                "left": 103,
+                "top": 37,
+                "width": 315.1875,
+                "height": 487.1875,
+                "bottom": 524.1875,
+                "right": 418.1875
+              },
+              "right": {
+                "left": 448.1875,
+                "top": 37,
+                "width": 472.8125,
+                "height": 487.1875,
+                "bottom": 524.1875,
+                "right": 921
+              },
+              "table": {
+                "left": 103,
+                "top": 147,
+                "width": 315.1875,
+                "height": 315.1875,
+                "bottom": 462.1875,
+                "right": 418.1875
+              },
+              "seats": [
+                {
+                  "left": 210.71875,
+                  "top": 147,
+                  "width": 99.734375,
+                  "height": 99.71875,
+                  "bottom": 246.71875,
+                  "right": 310.453125
+                },
+                {
+                  "left": 103,
+                  "top": 254.71875,
+                  "width": 99.71875,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 202.71875
+                },
+                {
+                  "left": 318.453125,
+                  "top": 254.71875,
+                  "width": 99.71875,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 418.171875
+                },
+                {
+                  "left": 210.71875,
+                  "top": 362.453125,
+                  "width": 99.734375,
+                  "height": 99.71875,
+                  "bottom": 462.171875,
+                  "right": 310.453125
+                }
+              ],
+              "nick": {
+                "left": 448.1875,
+                "top": 37,
+                "width": 472.8125,
+                "height": 44,
+                "bottom": 81,
+                "right": 921
+              },
+              "modes": {
+                "left": 578.1875,
+                "top": 95.546875,
+                "width": 342.8125,
+                "height": 44,
+                "bottom": 139.546875,
+                "right": 921
+              },
+              "rules": {
+                "left": 448.1875,
+                "top": 154.09375,
+                "width": 472.8125,
+                "height": 257,
+                "bottom": 411.09375,
+                "right": 921
+              },
+              "go": {
+                "left": 175.59375,
+                "top": 476.1875,
+                "width": 170,
+                "height": 48,
+                "bottom": 524.1875,
+                "right": 345.59375
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 768,
+            "height": 1024,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 50.453125,
+                "width": 257.59375,
+                "height": 469,
+                "bottom": 519.453125,
+                "right": 304.59375
+              },
+              "right": {
+                "left": 334.59375,
+                "top": 50.453125,
+                "width": 386.40625,
+                "height": 469,
+                "bottom": 519.453125,
+                "right": 721
+              },
+              "table": {
+                "left": 47,
+                "top": 160.453125,
+                "width": 257.59375,
+                "height": 257.59375,
+                "bottom": 418.046875,
+                "right": 304.59375
+              },
+              "seats": [
+                {
+                  "left": 135.53125,
+                  "top": 160.453125,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 240.984375,
+                  "right": 216.0625
+                },
+                {
+                  "left": 47,
+                  "top": 248.984375,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 329.515625,
+                  "right": 127.53125
+                },
+                {
+                  "left": 224.0625,
+                  "top": 248.984375,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 329.515625,
+                  "right": 304.59375
+                },
+                {
+                  "left": 135.53125,
+                  "top": 337.515625,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 418.046875,
+                  "right": 216.0625
+                }
+              ],
+              "nick": {
+                "left": 334.59375,
+                "top": 50.453125,
+                "width": 386.40625,
+                "height": 44,
+                "bottom": 94.453125,
+                "right": 721
+              },
+              "modes": {
+                "left": 464.59375,
+                "top": 104.453125,
+                "width": 256.40625,
+                "height": 44,
+                "bottom": 148.453125,
+                "right": 721
+              },
+              "rules": {
+                "left": 334.59375,
+                "top": 158.453125,
+                "width": 386.40625,
+                "height": 257,
+                "bottom": 415.453125,
+                "right": 721
+              },
+              "go": {
+                "left": 90.796875,
+                "top": 471.453125,
+                "width": 170,
+                "height": 48,
+                "bottom": 519.453125,
+                "right": 260.796875
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 820,
+            "height": 1180,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 128.453125,
+                "width": 278.390625,
+                "height": 469,
+                "bottom": 597.453125,
+                "right": 325.390625
+              },
+              "right": {
+                "left": 355.390625,
+                "top": 128.453125,
+                "width": 417.59375,
+                "height": 469,
+                "bottom": 597.453125,
+                "right": 772.984375
+              },
+              "table": {
+                "left": 47,
+                "top": 238.453125,
+                "width": 278.390625,
+                "height": 278.390625,
+                "bottom": 516.84375,
+                "right": 325.390625
+              },
+              "seats": [
+                {
+                  "left": 142.453125,
+                  "top": 238.453125,
+                  "width": 87.46875,
+                  "height": 87.453125,
+                  "bottom": 325.90625,
+                  "right": 229.921875
+                },
+                {
+                  "left": 47,
+                  "top": 333.90625,
+                  "width": 87.453125,
+                  "height": 87.46875,
+                  "bottom": 421.375,
+                  "right": 134.453125
+                },
+                {
+                  "left": 237.921875,
+                  "top": 333.90625,
+                  "width": 87.453125,
+                  "height": 87.46875,
+                  "bottom": 421.375,
+                  "right": 325.375
+                },
+                {
+                  "left": 142.453125,
+                  "top": 429.375,
+                  "width": 87.46875,
+                  "height": 87.453125,
+                  "bottom": 516.828125,
+                  "right": 229.921875
+                }
+              ],
+              "nick": {
+                "left": 355.390625,
+                "top": 128.453125,
+                "width": 417.59375,
+                "height": 44,
+                "bottom": 172.453125,
+                "right": 772.984375
+              },
+              "modes": {
+                "left": 485.390625,
+                "top": 182.453125,
+                "width": 287.59375,
+                "height": 44,
+                "bottom": 226.453125,
+                "right": 772.984375
+              },
+              "rules": {
+                "left": 355.390625,
+                "top": 236.453125,
+                "width": 417.59375,
+                "height": 257,
+                "bottom": 493.453125,
+                "right": 772.984375
+              },
+              "go": {
+                "left": 101.1875,
+                "top": 549.453125,
+                "width": 170,
+                "height": 48,
+                "bottom": 597.453125,
+                "right": 271.1875
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 601,
+            "height": 900,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 37,
+                "width": 190.796875,
+                "height": 496,
+                "bottom": 533,
+                "right": 237.796875
+              },
+              "right": {
+                "left": 267.796875,
+                "top": 37,
+                "width": 286.203125,
+                "height": 496,
+                "bottom": 533,
+                "right": 554
+              },
+              "table": {
+                "left": 47,
+                "top": 145,
+                "width": 190.796875,
+                "height": 190.796875,
+                "bottom": 335.796875,
+                "right": 237.796875
+              },
+              "seats": [
+                {
+                  "left": 113.265625,
+                  "top": 145,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 203.265625,
+                  "right": 171.53125
+                },
+                {
+                  "left": 47,
+                  "top": 211.265625,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 269.53125,
+                  "right": 105.265625
+                },
+                {
+                  "left": 179.53125,
+                  "top": 211.265625,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 269.53125,
+                  "right": 237.796875
+                },
+                {
+                  "left": 113.265625,
+                  "top": 277.53125,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 335.796875,
+                  "right": 171.53125
+                }
+              ],
+              "nick": {
+                "left": 267.796875,
+                "top": 37,
+                "width": 286.203125,
+                "height": 44,
+                "bottom": 81,
+                "right": 554
+              },
+              "modes": {
+                "left": 373.796875,
+                "top": 94,
+                "width": 180.203125,
+                "height": 38,
+                "bottom": 132,
+                "right": 554
+              },
+              "rules": {
+                "left": 267.796875,
+                "top": 145,
+                "width": 286.203125,
+                "height": 269,
+                "bottom": 414,
+                "right": 554
+              },
+              "go": {
+                "left": 57.390625,
+                "top": 485,
+                "width": 170,
+                "height": 48,
+                "bottom": 533,
+                "right": 227.390625
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 600,
+            "height": 900,
+            "geometry": {
+              "left": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "right": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "table": {
+                "left": 79,
+                "top": 563.09375,
+                "width": 442,
+                "height": 165,
+                "bottom": 728.09375,
+                "right": 521
+              },
+              "seats": [
+                {
+                  "left": 228.328125,
+                  "top": 563.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 614.09375,
+                  "right": 371.65625
+                },
+                {
+                  "left": 79,
+                  "top": 620.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 671.09375,
+                  "right": 222.328125
+                },
+                {
+                  "left": 377.65625,
+                  "top": 620.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 671.09375,
+                  "right": 520.984375
+                },
+                {
+                  "left": 228.328125,
+                  "top": 677.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 728.09375,
+                  "right": 371.65625
+                }
+              ],
+              "nick": {
+                "left": 79,
+                "top": 135,
+                "width": 442,
+                "height": 44,
+                "bottom": 179,
+                "right": 521
+              },
+              "modes": {
+                "left": 79,
+                "top": 193,
+                "width": 442,
+                "height": 40,
+                "bottom": 233,
+                "right": 521
+              },
+              "rules": {
+                "left": 79,
+                "top": 245,
+                "width": 442,
+                "height": 217,
+                "bottom": 462,
+                "right": 521
+              },
+              "go": {
+                "left": 79,
+                "top": 740.09375,
+                "width": 442,
+                "height": 51,
+                "bottom": 791.09375,
+                "right": 521
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "geometry": {
+              "left": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "right": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "table": {
+                "left": 33,
+                "top": 549.09375,
+                "width": 324,
+                "height": 165,
+                "bottom": 714.09375,
+                "right": 357
+              },
+              "seats": [
+                {
+                  "left": 143,
+                  "top": 549.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 600.09375,
+                  "right": 247
+                },
+                {
+                  "left": 33,
+                  "top": 606.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 657.09375,
+                  "right": 137
+                },
+                {
+                  "left": 253,
+                  "top": 606.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 657.09375,
+                  "right": 357
+                },
+                {
+                  "left": 143,
+                  "top": 663.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 714.09375,
+                  "right": 247
+                }
+              ],
+              "nick": {
+                "left": 33,
+                "top": 146,
+                "width": 324,
+                "height": 44,
+                "bottom": 190,
+                "right": 357
+              },
+              "modes": {
+                "left": 33,
+                "top": 201,
+                "width": 324,
+                "height": 40,
+                "bottom": 241,
+                "right": 357
+              },
+              "rules": {
+                "left": 33,
+                "top": 250,
+                "width": 324,
+                "height": 207,
+                "bottom": 457,
+                "right": 357
+              },
+              "go": {
+                "left": 33,
+                "top": 723.09375,
+                "width": 324,
+                "height": 47,
+                "bottom": 770.09375,
+                "right": 357
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 37,
+                "width": 288,
+                "height": 469,
+                "bottom": 506,
+                "right": 335
+              },
+              "right": {
+                "left": 365,
+                "top": 37,
+                "width": 432,
+                "height": 469,
+                "bottom": 506,
+                "right": 797
+              },
+              "table": {
+                "left": 47,
+                "top": 147,
+                "width": 288,
+                "height": 288,
+                "bottom": 435,
+                "right": 335
+              },
+              "seats": [
+                {
+                  "left": 145.65625,
+                  "top": 147,
+                  "width": 90.671875,
+                  "height": 90.65625,
+                  "bottom": 237.65625,
+                  "right": 236.328125
+                },
+                {
+                  "left": 47,
+                  "top": 245.65625,
+                  "width": 90.65625,
+                  "height": 90.671875,
+                  "bottom": 336.328125,
+                  "right": 137.65625
+                },
+                {
+                  "left": 244.328125,
+                  "top": 245.65625,
+                  "width": 90.65625,
+                  "height": 90.671875,
+                  "bottom": 336.328125,
+                  "right": 334.984375
+                },
+                {
+                  "left": 145.65625,
+                  "top": 344.328125,
+                  "width": 90.671875,
+                  "height": 90.65625,
+                  "bottom": 434.984375,
+                  "right": 236.328125
+                }
+              ],
+              "nick": {
+                "left": 365,
+                "top": 37,
+                "width": 432,
+                "height": 44,
+                "bottom": 81,
+                "right": 797
+              },
+              "modes": {
+                "left": 495,
+                "top": 91,
+                "width": 302,
+                "height": 44,
+                "bottom": 135,
+                "right": 797
+              },
+              "rules": {
+                "left": 365,
+                "top": 145,
+                "width": 432,
+                "height": 257,
+                "bottom": 402,
+                "right": 797
+              },
+              "go": {
+                "left": 106,
+                "top": 458,
+                "width": 170,
+                "height": 48,
+                "bottom": 506,
+                "right": 276
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 320,
+            "height": 640,
+            "geometry": {
+              "left": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "right": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "table": {
+                "left": 33,
+                "top": 564.09375,
+                "width": 254,
+                "height": 165,
+                "bottom": 729.09375,
+                "right": 287
+              },
+              "seats": [
+                {
+                  "left": 119.65625,
+                  "top": 564.09375,
+                  "width": 80.671875,
+                  "height": 51,
+                  "bottom": 615.09375,
+                  "right": 200.328125
+                },
+                {
+                  "left": 33,
+                  "top": 621.09375,
+                  "width": 80.65625,
+                  "height": 51,
+                  "bottom": 672.09375,
+                  "right": 113.65625
+                },
+                {
+                  "left": 206.328125,
+                  "top": 621.09375,
+                  "width": 80.65625,
+                  "height": 51,
+                  "bottom": 672.09375,
+                  "right": 286.984375
+                },
+                {
+                  "left": 119.65625,
+                  "top": 678.09375,
+                  "width": 80.671875,
+                  "height": 51,
+                  "bottom": 729.09375,
+                  "right": 200.328125
+                }
+              ],
+              "nick": {
+                "left": 33,
+                "top": 146,
+                "width": 254,
+                "height": 44,
+                "bottom": 190,
+                "right": 287
+              },
+              "modes": {
+                "left": 33,
+                "top": 201,
+                "width": 254,
+                "height": 40,
+                "bottom": 241,
+                "right": 287
+              },
+              "rules": {
+                "left": 33,
+                "top": 250,
+                "width": 254,
+                "height": 207,
+                "bottom": 457,
+                "right": 287
+              },
+              "go": {
+                "left": 33,
+                "top": 738.09375,
+                "width": 254,
+                "height": 47,
+                "bottom": 785.09375,
+                "right": 287
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          }
+        ],
+        "pageErrors": [],
+        "uploads": 0,
+        "scope": "Synthetic browser layout/controls; WebKit engine is not physical iPad acceptance; no training or strength games"
+      },
+      "webkit": {
+        "engine": "webkit",
+        "version": "d567b97606",
+        "cases": [
+          {
+            "width": 1440,
+            "height": 1000,
+            "geometry": {
+              "left": {
+                "left": 311,
+                "top": 37,
+                "width": 315.1875,
+                "height": 488.1875,
+                "bottom": 525.1875,
+                "right": 626.1875
+              },
+              "right": {
+                "left": 656.1875,
+                "top": 37,
+                "width": 472.796875,
+                "height": 488.1875,
+                "bottom": 525.1875,
+                "right": 1128.984375
+              },
+              "table": {
+                "left": 311,
+                "top": 147,
+                "width": 315.1875,
+                "height": 315.1875,
+                "bottom": 462.1875,
+                "right": 626.1875
+              },
+              "seats": [
+                {
+                  "left": 418.71875,
+                  "top": 147,
+                  "width": 99.734375,
+                  "height": 99.71875,
+                  "bottom": 246.71875,
+                  "right": 518.453125
+                },
+                {
+                  "left": 311,
+                  "top": 254.71875,
+                  "width": 99.71875,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 410.71875
+                },
+                {
+                  "left": 526.453125,
+                  "top": 254.71875,
+                  "width": 99.734375,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 626.1875
+                },
+                {
+                  "left": 418.71875,
+                  "top": 362.453125,
+                  "width": 99.734375,
+                  "height": 99.734375,
+                  "bottom": 462.1875,
+                  "right": 518.453125
+                }
+              ],
+              "nick": {
+                "left": 656.1875,
+                "top": 37,
+                "width": 472.796875,
+                "height": 44,
+                "bottom": 81,
+                "right": 1128.984375
+              },
+              "modes": {
+                "left": 786.1875,
+                "top": 95.046875,
+                "width": 342.796875,
+                "height": 45,
+                "bottom": 140.046875,
+                "right": 1128.984375
+              },
+              "rules": {
+                "left": 656.1875,
+                "top": 154.09375,
+                "width": 472.796875,
+                "height": 257,
+                "bottom": 411.09375,
+                "right": 1128.984375
+              },
+              "go": {
+                "left": 383.59375,
+                "top": 476.1875,
+                "width": 170,
+                "height": 49,
+                "bottom": 525.1875,
+                "right": 553.59375
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 1024,
+            "height": 768,
+            "geometry": {
+              "left": {
+                "left": 103,
+                "top": 37,
+                "width": 315.1875,
+                "height": 488.1875,
+                "bottom": 525.1875,
+                "right": 418.1875
+              },
+              "right": {
+                "left": 448.1875,
+                "top": 37,
+                "width": 472.796875,
+                "height": 488.1875,
+                "bottom": 525.1875,
+                "right": 920.984375
+              },
+              "table": {
+                "left": 103,
+                "top": 147,
+                "width": 315.1875,
+                "height": 315.1875,
+                "bottom": 462.1875,
+                "right": 418.1875
+              },
+              "seats": [
+                {
+                  "left": 210.71875,
+                  "top": 147,
+                  "width": 99.734375,
+                  "height": 99.71875,
+                  "bottom": 246.71875,
+                  "right": 310.453125
+                },
+                {
+                  "left": 103,
+                  "top": 254.71875,
+                  "width": 99.71875,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 202.71875
+                },
+                {
+                  "left": 318.453125,
+                  "top": 254.71875,
+                  "width": 99.734375,
+                  "height": 99.734375,
+                  "bottom": 354.453125,
+                  "right": 418.1875
+                },
+                {
+                  "left": 210.71875,
+                  "top": 362.453125,
+                  "width": 99.734375,
+                  "height": 99.734375,
+                  "bottom": 462.1875,
+                  "right": 310.453125
+                }
+              ],
+              "nick": {
+                "left": 448.1875,
+                "top": 37,
+                "width": 472.796875,
+                "height": 44,
+                "bottom": 81,
+                "right": 920.984375
+              },
+              "modes": {
+                "left": 578.1875,
+                "top": 95.046875,
+                "width": 342.796875,
+                "height": 45,
+                "bottom": 140.046875,
+                "right": 920.984375
+              },
+              "rules": {
+                "left": 448.1875,
+                "top": 154.09375,
+                "width": 472.796875,
+                "height": 257,
+                "bottom": 411.09375,
+                "right": 920.984375
+              },
+              "go": {
+                "left": 175.59375,
+                "top": 476.1875,
+                "width": 170,
+                "height": 49,
+                "bottom": 525.1875,
+                "right": 345.59375
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 768,
+            "height": 1024,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 47.453125,
+                "width": 257.59375,
+                "height": 472,
+                "bottom": 519.453125,
+                "right": 304.59375
+              },
+              "right": {
+                "left": 334.59375,
+                "top": 47.453125,
+                "width": 386.40625,
+                "height": 472,
+                "bottom": 519.453125,
+                "right": 721
+              },
+              "table": {
+                "left": 47,
+                "top": 157.453125,
+                "width": 257.59375,
+                "height": 257.59375,
+                "bottom": 415.046875,
+                "right": 304.59375
+              },
+              "seats": [
+                {
+                  "left": 135.53125,
+                  "top": 157.453125,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 237.984375,
+                  "right": 216.0625
+                },
+                {
+                  "left": 47,
+                  "top": 245.984375,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 326.515625,
+                  "right": 127.53125
+                },
+                {
+                  "left": 224.0625,
+                  "top": 245.984375,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 326.515625,
+                  "right": 304.59375
+                },
+                {
+                  "left": 135.53125,
+                  "top": 334.515625,
+                  "width": 80.53125,
+                  "height": 80.53125,
+                  "bottom": 415.046875,
+                  "right": 216.0625
+                }
+              ],
+              "nick": {
+                "left": 334.59375,
+                "top": 47.453125,
+                "width": 386.40625,
+                "height": 44,
+                "bottom": 91.453125,
+                "right": 721
+              },
+              "modes": {
+                "left": 464.59375,
+                "top": 101.453125,
+                "width": 256.40625,
+                "height": 45,
+                "bottom": 146.453125,
+                "right": 721
+              },
+              "rules": {
+                "left": 334.59375,
+                "top": 156.453125,
+                "width": 386.40625,
+                "height": 257,
+                "bottom": 413.453125,
+                "right": 721
+              },
+              "go": {
+                "left": 90.796875,
+                "top": 470.453125,
+                "width": 170,
+                "height": 49,
+                "bottom": 519.453125,
+                "right": 260.796875
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 820,
+            "height": 1180,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 125.453125,
+                "width": 278.390625,
+                "height": 472,
+                "bottom": 597.453125,
+                "right": 325.390625
+              },
+              "right": {
+                "left": 355.390625,
+                "top": 125.453125,
+                "width": 417.59375,
+                "height": 472,
+                "bottom": 597.453125,
+                "right": 772.984375
+              },
+              "table": {
+                "left": 47,
+                "top": 235.453125,
+                "width": 278.390625,
+                "height": 278.390625,
+                "bottom": 513.84375,
+                "right": 325.390625
+              },
+              "seats": [
+                {
+                  "left": 142.453125,
+                  "top": 235.453125,
+                  "width": 87.46875,
+                  "height": 87.453125,
+                  "bottom": 322.90625,
+                  "right": 229.921875
+                },
+                {
+                  "left": 47,
+                  "top": 330.90625,
+                  "width": 87.453125,
+                  "height": 87.46875,
+                  "bottom": 418.375,
+                  "right": 134.453125
+                },
+                {
+                  "left": 237.921875,
+                  "top": 330.90625,
+                  "width": 87.46875,
+                  "height": 87.46875,
+                  "bottom": 418.375,
+                  "right": 325.390625
+                },
+                {
+                  "left": 142.453125,
+                  "top": 426.375,
+                  "width": 87.46875,
+                  "height": 87.46875,
+                  "bottom": 513.84375,
+                  "right": 229.921875
+                }
+              ],
+              "nick": {
+                "left": 355.390625,
+                "top": 125.453125,
+                "width": 417.59375,
+                "height": 44,
+                "bottom": 169.453125,
+                "right": 772.984375
+              },
+              "modes": {
+                "left": 485.390625,
+                "top": 179.453125,
+                "width": 287.59375,
+                "height": 45,
+                "bottom": 224.453125,
+                "right": 772.984375
+              },
+              "rules": {
+                "left": 355.390625,
+                "top": 234.453125,
+                "width": 417.59375,
+                "height": 257,
+                "bottom": 491.453125,
+                "right": 772.984375
+              },
+              "go": {
+                "left": 101.1875,
+                "top": 548.453125,
+                "width": 170,
+                "height": 49,
+                "bottom": 597.453125,
+                "right": 271.1875
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 601,
+            "height": 900,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 37,
+                "width": 190.796875,
+                "height": 501,
+                "bottom": 538,
+                "right": 237.796875
+              },
+              "right": {
+                "left": 267.796875,
+                "top": 37,
+                "width": 286.203125,
+                "height": 501,
+                "bottom": 538,
+                "right": 554
+              },
+              "table": {
+                "left": 47,
+                "top": 145,
+                "width": 190.796875,
+                "height": 190.796875,
+                "bottom": 335.796875,
+                "right": 237.796875
+              },
+              "seats": [
+                {
+                  "left": 113.265625,
+                  "top": 145,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 203.265625,
+                  "right": 171.53125
+                },
+                {
+                  "left": 47,
+                  "top": 211.265625,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 269.53125,
+                  "right": 105.265625
+                },
+                {
+                  "left": 179.53125,
+                  "top": 211.265625,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 269.53125,
+                  "right": 237.796875
+                },
+                {
+                  "left": 113.265625,
+                  "top": 277.53125,
+                  "width": 58.265625,
+                  "height": 58.265625,
+                  "bottom": 335.796875,
+                  "right": 171.53125
+                }
+              ],
+              "nick": {
+                "left": 267.796875,
+                "top": 37,
+                "width": 286.203125,
+                "height": 44,
+                "bottom": 81,
+                "right": 554
+              },
+              "modes": {
+                "left": 373.796875,
+                "top": 93.5,
+                "width": 180.203125,
+                "height": 39,
+                "bottom": 132.5,
+                "right": 554
+              },
+              "rules": {
+                "left": 267.796875,
+                "top": 145,
+                "width": 286.203125,
+                "height": 271,
+                "bottom": 416,
+                "right": 554
+              },
+              "go": {
+                "left": 57.390625,
+                "top": 489,
+                "width": 170,
+                "height": 49,
+                "bottom": 538,
+                "right": 227.390625
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 600,
+            "height": 900,
+            "geometry": {
+              "left": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "right": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "table": {
+                "left": 79,
+                "top": 571.09375,
+                "width": 442,
+                "height": 165,
+                "bottom": 736.09375,
+                "right": 521
+              },
+              "seats": [
+                {
+                  "left": 228.328125,
+                  "top": 571.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 622.09375,
+                  "right": 371.65625
+                },
+                {
+                  "left": 79,
+                  "top": 628.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 679.09375,
+                  "right": 222.328125
+                },
+                {
+                  "left": 377.65625,
+                  "top": 628.09375,
+                  "width": 143.34375,
+                  "height": 51,
+                  "bottom": 679.09375,
+                  "right": 521
+                },
+                {
+                  "left": 228.328125,
+                  "top": 685.09375,
+                  "width": 143.328125,
+                  "height": 51,
+                  "bottom": 736.09375,
+                  "right": 371.65625
+                }
+              ],
+              "nick": {
+                "left": 79,
+                "top": 135,
+                "width": 442,
+                "height": 45,
+                "bottom": 180,
+                "right": 521
+              },
+              "modes": {
+                "left": 79,
+                "top": 194,
+                "width": 442,
+                "height": 41,
+                "bottom": 235,
+                "right": 521
+              },
+              "rules": {
+                "left": 79,
+                "top": 247,
+                "width": 442,
+                "height": 222,
+                "bottom": 469,
+                "right": 521
+              },
+              "go": {
+                "left": 79,
+                "top": 748.09375,
+                "width": 442,
+                "height": 52,
+                "bottom": 800.09375,
+                "right": 521
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "geometry": {
+              "left": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "right": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "table": {
+                "left": 33,
+                "top": 557.09375,
+                "width": 324,
+                "height": 165,
+                "bottom": 722.09375,
+                "right": 357
+              },
+              "seats": [
+                {
+                  "left": 143,
+                  "top": 557.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 608.09375,
+                  "right": 247
+                },
+                {
+                  "left": 33,
+                  "top": 614.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 665.09375,
+                  "right": 137
+                },
+                {
+                  "left": 253,
+                  "top": 614.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 665.09375,
+                  "right": 357
+                },
+                {
+                  "left": 143,
+                  "top": 671.09375,
+                  "width": 104,
+                  "height": 51,
+                  "bottom": 722.09375,
+                  "right": 247
+                }
+              ],
+              "nick": {
+                "left": 33,
+                "top": 146,
+                "width": 324,
+                "height": 45,
+                "bottom": 191,
+                "right": 357
+              },
+              "modes": {
+                "left": 33,
+                "top": 202,
+                "width": 324,
+                "height": 41,
+                "bottom": 243,
+                "right": 357
+              },
+              "rules": {
+                "left": 33,
+                "top": 252,
+                "width": 324,
+                "height": 212,
+                "bottom": 464,
+                "right": 357
+              },
+              "go": {
+                "left": 33,
+                "top": 731.09375,
+                "width": 324,
+                "height": 48,
+                "bottom": 779.09375,
+                "right": 357
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 844,
+            "height": 390,
+            "geometry": {
+              "left": {
+                "left": 47,
+                "top": 37,
+                "width": 288,
+                "height": 472,
+                "bottom": 509,
+                "right": 335
+              },
+              "right": {
+                "left": 365,
+                "top": 37,
+                "width": 432,
+                "height": 472,
+                "bottom": 509,
+                "right": 797
+              },
+              "table": {
+                "left": 47,
+                "top": 147,
+                "width": 288,
+                "height": 288,
+                "bottom": 435,
+                "right": 335
+              },
+              "seats": [
+                {
+                  "left": 145.65625,
+                  "top": 147,
+                  "width": 90.671875,
+                  "height": 90.65625,
+                  "bottom": 237.65625,
+                  "right": 236.328125
+                },
+                {
+                  "left": 47,
+                  "top": 245.65625,
+                  "width": 90.65625,
+                  "height": 90.671875,
+                  "bottom": 336.328125,
+                  "right": 137.65625
+                },
+                {
+                  "left": 244.328125,
+                  "top": 245.65625,
+                  "width": 90.671875,
+                  "height": 90.671875,
+                  "bottom": 336.328125,
+                  "right": 335
+                },
+                {
+                  "left": 145.65625,
+                  "top": 344.328125,
+                  "width": 90.671875,
+                  "height": 90.671875,
+                  "bottom": 435,
+                  "right": 236.328125
+                }
+              ],
+              "nick": {
+                "left": 365,
+                "top": 37,
+                "width": 432,
+                "height": 44,
+                "bottom": 81,
+                "right": 797
+              },
+              "modes": {
+                "left": 495,
+                "top": 91,
+                "width": 302,
+                "height": 45,
+                "bottom": 136,
+                "right": 797
+              },
+              "rules": {
+                "left": 365,
+                "top": 146,
+                "width": 432,
+                "height": 257,
+                "bottom": 403,
+                "right": 797
+              },
+              "go": {
+                "left": 106,
+                "top": 460,
+                "width": 170,
+                "height": 49,
+                "bottom": 509,
+                "right": 276
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          },
+          {
+            "width": 320,
+            "height": 640,
+            "geometry": {
+              "left": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "right": {
+                "left": 0,
+                "top": 0,
+                "width": 0,
+                "height": 0,
+                "bottom": 0,
+                "right": 0
+              },
+              "table": {
+                "left": 33,
+                "top": 573.09375,
+                "width": 254,
+                "height": 165,
+                "bottom": 738.09375,
+                "right": 287
+              },
+              "seats": [
+                {
+                  "left": 119.65625,
+                  "top": 573.09375,
+                  "width": 80.671875,
+                  "height": 51,
+                  "bottom": 624.09375,
+                  "right": 200.328125
+                },
+                {
+                  "left": 33,
+                  "top": 630.09375,
+                  "width": 80.65625,
+                  "height": 51,
+                  "bottom": 681.09375,
+                  "right": 113.65625
+                },
+                {
+                  "left": 206.328125,
+                  "top": 630.09375,
+                  "width": 80.671875,
+                  "height": 51,
+                  "bottom": 681.09375,
+                  "right": 287
+                },
+                {
+                  "left": 119.65625,
+                  "top": 687.09375,
+                  "width": 80.671875,
+                  "height": 51,
+                  "bottom": 738.09375,
+                  "right": 200.328125
+                }
+              ],
+              "nick": {
+                "left": 33,
+                "top": 146,
+                "width": 254,
+                "height": 45,
+                "bottom": 191,
+                "right": 287
+              },
+              "modes": {
+                "left": 33,
+                "top": 202,
+                "width": 254,
+                "height": 41,
+                "bottom": 243,
+                "right": 287
+              },
+              "rules": {
+                "left": 33,
+                "top": 252,
+                "width": 254,
+                "height": 212,
+                "bottom": 464,
+                "right": 287
+              },
+              "go": {
+                "left": 33,
+                "top": 747.09375,
+                "width": 254,
+                "height": 48,
+                "bottom": 795.09375,
+                "right": 287
+              }
+            },
+            "soloJoinResize": true,
+            "sameChoicesAndDefault029": true,
+            "levelPicker": true
+          }
+        ],
+        "pageErrors": [],
+        "uploads": 0,
+        "scope": "Synthetic browser layout/controls; WebKit engine is not physical iPad acceptance; no training or strength games"
+      }
+    },
+    "realPeerJSRegression": {
+      "randomSeatsFourClients": true,
+      "hostGuestReloadAndOpaqueTokens": true,
+      "hostCoachPermissionAndCollectionNames": true,
+      "hostClosedTabRestoreAndAssistedExposure": true,
+      "privateHostOnlyGuestDenied": true,
+      "opponentPublicObservationOnly": true,
+      "cloudUploads": 0
+    },
+    "productionWASM": {
+      "successfulModels": [
+        "028",
+        "029"
+      ],
+      "productionGlobalsHidden": true,
+      "pageErrors": []
+    },
+    "imagesInspected": [
+      "chromium/solo-1024x768.png",
+      "webkit/solo-768x1024.png",
+      "chromium/solo-390x844.png"
+    ],
+    "logSHA256": {
+      "node": "5c01fb3504ae22300f03ca13c43eed4f540aa981bb4b08983b809481ef347d54",
+      "final-node": "e448b76afc993576a64bdd8a223476b7fadb09bd936c0edd331e58223e39130d",
+      "expanded-node": "d871142d4aa08646359754798a57b193de9cf96ed705fc0fec3005eece671837",
+      "browser": "1fa9fe4dc9e0d6e50a1d1afe4a9d0868247540fbde9e912319ffd12860afd3a4",
+      "webkit": "c0060a085c626c67e2b8f8f002065a6417f2f4c39065c32b1b72400d42b297ed",
+      "python": "a058860a6b3f1209cc8e12e67d5f8f833c982b7141b0a40e6d31b071df599dff",
+      "seats": "7a9284aaafe0867b4d5f270bce118008f49628e02c4d5ed4e9da89ba61c23e66",
+      "private": "0e81ab690fc861c7079e79de81a4acb23f07d81598d50f04ed49ad62f3c7ff02",
+      "production": "2c30b03efa74bdbc0f16350d37f6a0137b06363e3ce25a6012291a2269bb5752",
+      "host": "2ac28a0447ce762f0049a2c6777c341eaef7387f14aac51e4afc0e395531667c",
+      "format": "188d607ebfd578a7e695e7ddf319c0e438d00d16133c9711d0602e899d433d71",
+      "build": "bb06a2ef0c0826fa606c58a955d4549828cc3f8dab4c2cf7a941df15ebdfde47"
+    }
+  },
+  "deployment": {
+    "phase": "pending"
+  },
+  "pending": [
+    "Push source, confirm Pages and public same-version layout before advancing full-success cursor"
+  ],
+  "atUTC": "2026-11-14T19:57:37.778573+00:00"
+}

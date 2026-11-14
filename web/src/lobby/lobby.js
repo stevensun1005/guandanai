@@ -201,7 +201,11 @@ export function renderLobby() {
   renderBotSetup();
   const go = $('#sitBtn');
   go.hidden = runtime.lobbyMode === 'join';
-  go.textContent = runtime.lobbyMode === 'host' ? '开始' : '坐下开始';
+  go.textContent = matchMedia('(min-width:601px)').matches
+    ? '开始游戏'
+    : runtime.lobbyMode === 'host'
+      ? '开始'
+      : '坐下开始';
   go.disabled =
     !nick ||
     (!runtime.direction && !(solo && random)) ||
@@ -210,6 +214,7 @@ export function renderLobby() {
 }
 
 export function initialize() {
+  matchMedia('(min-width:601px)').addEventListener('change', renderLobby);
   initializeLevelPicker();
   initializeContinueMatch();
   $('#coachStartEnabled').onchange = () => setCoachEnabled($('#coachStartEnabled').checked);

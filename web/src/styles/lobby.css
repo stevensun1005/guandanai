@@ -812,3 +812,288 @@
 #joinRow #joinBtn {
   display: none;
 }
+
+/* Desktop lobby follows Clint's2:3 card; contents wrappers keep the phone's original sequence. */
+.lobby-main,
+.lobby-left,
+.lobby-right,
+.lobby-moderow {
+  display: contents;
+}
+.lobby-left > .lobby-brand {
+  order: 1;
+}
+.lobby-right > .lobby-name {
+  order: 2;
+}
+.lobby-right > .lobby-moderow {
+  order: 3;
+}
+.lobby-moderow > .lobby-modes {
+  order: 3;
+}
+.lobby-right > #joinRow {
+  order: 4;
+}
+.lobby-right > #joinPad {
+  order: 5;
+}
+.lobby-right > #rulesBox {
+  order: 6;
+}
+.lobby-right > #coachRoomBox {
+  order: 7;
+}
+.lobby-right > #coachStartBox {
+  order: 8;
+}
+.lobby-right > #privateTableBox {
+  order: 9;
+}
+.lobby-box > #roomInfo {
+  order: 10;
+}
+.lobby-box > #lobbyStatus {
+  order: 11;
+}
+.lobby-left > #lobbyTable {
+  order: 12;
+}
+.lobby-left > #sitBtn {
+  order: 13;
+}
+.lobby-right > #botStyleBox {
+  order: 14;
+}
+.lobby-box > #practiceBtn {
+  order: 15;
+}
+.lobby-box > #spectatorBtn {
+  order: 16;
+}
+.lobby-box > #spectatorRow {
+  order: 17;
+}
+.lobby-box > #lobbyHelpBtn {
+  order: 18;
+}
+.lobby-box > #verTag {
+  order: 19;
+}
+.lobby-box > .lobby-photo {
+  order: 20;
+}
+.lobby-modek,
+.lobby-ver2 {
+  display: none;
+}
+@media (min-width: 601px) {
+  .lobby .lobby-box {
+    position: relative;
+    box-sizing: border-box;
+    width: min(880px, 100%);
+    padding: 24px 30px 26px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, rgba(9, 32, 24, 0.62), rgba(7, 26, 19, 0.5));
+    border: 1px solid rgba(221, 176, 80, 0.38);
+    box-shadow:
+      0 22px 60px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 235, 170, 0.12);
+  }
+  .lobby-main {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 30px;
+    align-items: stretch;
+  }
+  .lobby-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    min-width: 0;
+  }
+  .lobby-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    min-width: 0;
+  }
+  .lobby-left > *,
+  .lobby-right > * {
+    order: 0;
+  }
+  .lobby-left > .lobby-brand {
+    width: 100%;
+  }
+  .lobby-brand .lobby-title {
+    font-size: 78px;
+    letter-spacing: 0.08em;
+    padding-left: 0.08em;
+  }
+  .lobby-left > .lobby-table {
+    width: 100%;
+    aspect-ratio: 1;
+    min-height: 0;
+    gap: 8px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
+  .lobby-table > :not(.level-pick) {
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    border-radius: 14px;
+  }
+  .lobby-table .seat-btn {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px;
+    white-space: normal;
+    align-self: stretch;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.14)), var(--shade);
+  }
+  .lobby-table .seat-btn b {
+    font-size: 30px;
+    line-height: 1;
+  }
+  .lobby-table .seat-btn span {
+    font-size: 16px;
+    line-height: 1.15;
+    text-align: center;
+    word-break: break-all;
+  }
+  .lobby-table .lobby-felt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lobby-left > .lobby-go {
+    margin-top: auto;
+    width: 170px;
+    font-size: 21px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #ecc563, var(--gold) 55%, #c99a34);
+    color: var(--on-gold);
+    border-color: #c99a34;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.35),
+      0 0 18px rgba(221, 176, 80, 0.28);
+  }
+  .lobby-left > .lobby-go:disabled {
+    background: rgba(221, 176, 80, 0.28);
+    box-shadow: none;
+    border-color: transparent;
+  }
+  .lobby-right > .lobby-name,
+  .lobby-moderow {
+    display: grid;
+    grid-template-columns: 122px minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+    min-height: 44px;
+  }
+  .lobby-right .lobby-label,
+  .lobby-right .lobby-modek {
+    display: block;
+    grid-column: 1;
+    grid-row: auto;
+    text-align: left;
+    font-size: 17px;
+  }
+  .lobby-right .lobby-name .lobby-nick {
+    grid-column: 2;
+    grid-row: auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 19px;
+    padding: 8px 10px;
+    border-radius: 11px;
+    text-align: center;
+  }
+  .lobby-right .lobby-modes {
+    order: 0;
+    display: grid;
+    grid-column: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .lobby-right .mode-btn {
+    grid-column: auto !important;
+    grid-row: auto;
+    white-space: nowrap;
+  }
+  .lobby-right .rule-row {
+    grid-template-columns: 122px;
+    min-height: 44px;
+  }
+  .lobby-right .rule-btn,
+  .lobby-right .mode-btn {
+    padding: 9px 4px;
+    border-radius: 11px;
+  }
+  .lobby-right > .lobby-rules {
+    padding: 8px 0 0;
+    border-width: 1px 0 0;
+    gap: 7px;
+  }
+  .lobby-right > .lobby-pad {
+    width: min(300px, 100%);
+    align-self: center;
+  }
+  .lobby-right > .coach-room {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .lobby-box > .lobby-ver2 {
+    display: block;
+    position: absolute;
+    top: 3px;
+    right: 20px;
+    margin: 0;
+    font-size: 12px;
+    pointer-events: none;
+  }
+  .lobby-box > #verTag {
+    display: none;
+  }
+  .lobby-box > .lobby-photo {
+    margin-top: 18px;
+    border-radius: 16px;
+    max-height: min(28vh, 250px);
+  }
+}
+@media (min-width: 601px) and (max-width: 760px) {
+  .lobby-right > .lobby-name,
+  .lobby-right .lobby-moderow {
+    grid-template-columns: 98px minmax(0, 1fr);
+  }
+  .lobby-right .rule-row {
+    grid-template-columns: 98px;
+  }
+  .lobby-right .lobby-label,
+  .lobby-right .lobby-modek {
+    font-size: 15px;
+  }
+  .lobby-right .mode-btn,
+  .lobby-right .rule-btn {
+    font-size: 14px;
+  }
+  .lobby-brand .lobby-title {
+    font-size: 60px;
+  }
+}
+@media (max-width: 600px) {
+  .lobby-right > .lobby-name,
+  .lobby-moderow > .lobby-modes {
+    margin-top: 2px;
+  }
+}

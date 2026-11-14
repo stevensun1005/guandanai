@@ -346,141 +346,150 @@
 
     <div class="lobby" id="lobby" hidden>
       <div class="lobby-box">
-        <div class="lobby-head">
-          <div class="lobby-brand">
-            <h1 class="lobby-title">掼蛋</h1>
-            <div class="lobby-by">made by Clint &amp; SteZero</div>
+        <div class="lobby-ver lobby-ver2" aria-hidden="true"></div>
+        <div class="lobby-main">
+          <div class="lobby-left">
+            <div class="lobby-brand">
+              <h1 class="lobby-title">掼蛋</h1>
+              <div class="lobby-by">made by Clint &amp; SteZero</div>
+            </div>
+            <div class="lobby-table" id="lobbyTable">
+              <button class="seat-btn t-red" data-seat="N" style="grid-area: n">
+                <b>北</b><span>空位</span>
+              </button>
+              <button class="seat-btn t-blue" data-seat="W" style="grid-area: w">
+                <b>西</b><span>空位</span>
+              </button>
+              <div class="lobby-felt" style="grid-area: c">
+                <button
+                  class="level-btn"
+                  id="levelBtn"
+                  type="button"
+                  aria-controls="levelPick"
+                  aria-expanded="false"
+                >
+                  选级
+                </button>
+              </div>
+              <div
+                class="level-pick"
+                id="levelPick"
+                role="group"
+                aria-label="开局级数与方位"
+                hidden
+              ></div>
+              <button class="seat-btn t-blue" data-seat="E" style="grid-area: e">
+                <b>东</b><span>空位</span>
+              </button>
+              <button class="seat-btn t-red" data-seat="S" style="grid-area: s">
+                <b>南</b><span>空位</span>
+              </button>
+            </div>
+            <button class="btn primary lobby-go" id="sitBtn" disabled>坐下开始</button>
           </div>
-          <div class="lobby-name">
-            <label class="lobby-label" for="nick">玩家昵称</label
-            ><input
-              class="lobby-nick"
-              id="nick"
-              maxlength="8"
-              autocomplete="off"
-              placeholder="输入你的昵称"
-            />
+          <div class="lobby-right">
+            <div class="lobby-name">
+              <label class="lobby-label" for="nick">玩家昵称</label
+              ><input
+                class="lobby-nick"
+                id="nick"
+                maxlength="8"
+                autocomplete="off"
+                placeholder="输入你的昵称"
+              />
+            </div>
+            <div class="lobby-moderow">
+              <span class="lobby-label lobby-modek">游戏模式</span>
+              <div class="lobby-modes">
+                <button class="mode-btn on" data-mode="solo">单人</button>
+                <button class="mode-btn" data-mode="host">开房间</button>
+                <button class="mode-btn" data-mode="join">进房间</button>
+              </div>
+            </div>
+            <div class="lobby-join" id="joinRow" hidden>
+              <input
+                class="lobby-nick"
+                id="roomCode"
+                inputmode="none"
+                aria-label="四位房间号"
+                maxlength="4"
+                autocomplete="off"
+                placeholder="请输入房间号"
+              />
+              <button class="btn primary" id="joinBtn">进入</button>
+            </div>
+            <div class="lobby-pad" id="joinPad" role="group" aria-label="房间号数字键盘" hidden>
+              <button type="button" class="pad-btn" data-k="1">1</button>
+              <button type="button" class="pad-btn" data-k="2">2</button>
+              <button type="button" class="pad-btn" data-k="3">3</button>
+              <button type="button" class="pad-btn" data-k="4">4</button>
+              <button type="button" class="pad-btn" data-k="5">5</button>
+              <button type="button" class="pad-btn" data-k="6">6</button>
+              <button type="button" class="pad-btn" data-k="7">7</button>
+              <button type="button" class="pad-btn" data-k="8">8</button>
+              <button type="button" class="pad-btn" data-k="9">9</button>
+              <button type="button" class="pad-btn" data-k="del" aria-label="删除末位">⌫</button>
+              <button type="button" class="pad-btn" data-k="0">0</button>
+              <button type="button" class="pad-btn" data-k="go">进入</button>
+            </div>
+            <div class="lobby-rules" id="rulesBox">
+              <div class="rule-row">
+                <span class="rule-k">进贡</span
+                ><button class="rule-btn" data-rule="trib" data-val="1">进贡</button
+                ><button class="rule-btn" data-rule="trib" data-val="0">不进贡</button>
+              </div>
+              <div class="rule-row">
+                <span class="rule-k">三次打A不过</span
+                ><button class="rule-btn" data-rule="aFail" data-val="draw">平局</button
+                ><button class="rule-btn" data-rule="aFail" data-val="reset">从2打</button
+                ><button class="rule-btn" data-rule="aFail" data-val="once">一次机会</button>
+              </div>
+              <div class="rule-row">
+                <span class="rule-k">选座方式</span
+                ><button class="rule-btn" data-rule="seatMode" data-val="pick">自选</button
+                ><button class="rule-btn" data-rule="seatMode" data-val="random">随机</button>
+              </div>
+              <div class="rule-row">
+                <span class="rule-k">理牌时间（秒）</span
+                ><button class="rule-btn" data-rule="prepSec" data-val="30">30</button
+                ><button class="rule-btn" data-rule="prepSec" data-val="60">60</button
+                ><button class="rule-btn" data-rule="prepSec" data-val="90">90</button>
+              </div>
+              <div class="rule-row">
+                <span class="rule-k">出牌时间（秒）</span
+                ><button class="rule-btn" data-rule="playMode" data-val="20+60">20+60</button
+                ><button class="rule-btn" data-rule="playMode" data-val="30+60">30+60</button
+                ><button class="rule-btn" data-rule="playMode" data-val="60">60</button>
+              </div>
+              <div class="rule-note" id="rulesNote"></div>
+            </div>
+            <div class="coach-room" id="coachRoomBox" hidden>
+              <label><input type="checkbox" id="coachRoomAllowed" />允许玩家使用出牌评价</label>
+              <small id="coachRoomNote"></small>
+            </div>
+            <div class="coach-room" id="coachStartBox">
+              <label
+                ><input type="checkbox" id="coachStartEnabled" />启用我的出牌评价与 Top 5</label
+              >
+              <small id="coachStartNote"></small>
+            </div>
+            <div class="coach-room" id="privateTableBox" hidden>
+              <label><input type="checkbox" id="privateTableAllowed" />明牌工具（本机）</label>
+              <small>本队电脑与出牌评价可使用完整牌面，对手电脑保持普通视角。</small>
+            </div>
+            <details class="bot-setup" id="botStyleBox">
+              <summary>电脑模型 <span>为每个空位选择版本</span></summary>
+              <div id="botSetupRows"></div>
+              <button class="link" id="mixedBotsBtn" type="button">全部恢复默认</button>
+              <p id="botSetupNote"></p>
+            </details>
           </div>
-          <div class="lobby-modes">
-            <button class="mode-btn on" data-mode="solo">单人</button>
-            <button class="mode-btn" data-mode="host">开房间</button>
-            <button class="mode-btn" data-mode="join">进房间</button>
-          </div>
-        </div>
-        <div class="lobby-join" id="joinRow" hidden>
-          <input
-            class="lobby-nick"
-            id="roomCode"
-            inputmode="none"
-            aria-label="四位房间号"
-            maxlength="4"
-            autocomplete="off"
-            placeholder="请输入房间号"
-          />
-          <button class="btn primary" id="joinBtn">进入</button>
-        </div>
-        <div class="lobby-pad" id="joinPad" role="group" aria-label="房间号数字键盘" hidden>
-          <button type="button" class="pad-btn" data-k="1">1</button>
-          <button type="button" class="pad-btn" data-k="2">2</button>
-          <button type="button" class="pad-btn" data-k="3">3</button>
-          <button type="button" class="pad-btn" data-k="4">4</button>
-          <button type="button" class="pad-btn" data-k="5">5</button>
-          <button type="button" class="pad-btn" data-k="6">6</button>
-          <button type="button" class="pad-btn" data-k="7">7</button>
-          <button type="button" class="pad-btn" data-k="8">8</button>
-          <button type="button" class="pad-btn" data-k="9">9</button>
-          <button type="button" class="pad-btn" data-k="del" aria-label="删除末位">⌫</button>
-          <button type="button" class="pad-btn" data-k="0">0</button>
-          <button type="button" class="pad-btn" data-k="go">进入</button>
-        </div>
-        <div class="lobby-rules" id="rulesBox">
-          <div class="rule-row">
-            <span class="rule-k">进贡</span
-            ><button class="rule-btn" data-rule="trib" data-val="1">进贡</button
-            ><button class="rule-btn" data-rule="trib" data-val="0">不进贡</button>
-          </div>
-          <div class="rule-row">
-            <span class="rule-k">三次打A不过</span
-            ><button class="rule-btn" data-rule="aFail" data-val="draw">平局</button
-            ><button class="rule-btn" data-rule="aFail" data-val="reset">从2打</button
-            ><button class="rule-btn" data-rule="aFail" data-val="once">一次机会</button>
-          </div>
-          <div class="rule-row">
-            <span class="rule-k">选座方式</span
-            ><button class="rule-btn" data-rule="seatMode" data-val="pick">自选</button
-            ><button class="rule-btn" data-rule="seatMode" data-val="random">随机</button>
-          </div>
-          <div class="rule-row">
-            <span class="rule-k">理牌时间（秒）</span
-            ><button class="rule-btn" data-rule="prepSec" data-val="30">30</button
-            ><button class="rule-btn" data-rule="prepSec" data-val="60">60</button
-            ><button class="rule-btn" data-rule="prepSec" data-val="90">90</button>
-          </div>
-          <div class="rule-row">
-            <span class="rule-k">出牌时间（秒）</span
-            ><button class="rule-btn" data-rule="playMode" data-val="20+60">20+60</button
-            ><button class="rule-btn" data-rule="playMode" data-val="30+60">30+60</button
-            ><button class="rule-btn" data-rule="playMode" data-val="60">60</button>
-          </div>
-          <div class="rule-note" id="rulesNote"></div>
-        </div>
-        <div class="coach-room" id="coachRoomBox" hidden>
-          <label><input type="checkbox" id="coachRoomAllowed" />允许玩家使用出牌评价</label>
-          <small id="coachRoomNote"></small>
-        </div>
-        <div class="coach-room" id="coachStartBox">
-          <label><input type="checkbox" id="coachStartEnabled" />启用我的出牌评价与 Top 5</label>
-          <small id="coachStartNote"></small>
-        </div>
-        <div class="coach-room" id="privateTableBox" hidden>
-          <label><input type="checkbox" id="privateTableAllowed" />明牌工具（本机）</label>
-          <small>本队电脑与出牌评价可使用完整牌面，对手电脑保持普通视角。</small>
         </div>
         <div class="lobby-room" id="roomInfo" hidden>
           <span>房间号</span><b id="roomCodeShow">----</b
           ><button class="link" id="shareRoomBtn" type="button">复制邀请链接</button>
         </div>
         <div class="lobby-status" id="lobbyStatus" role="status" aria-atomic="true"></div>
-        <div class="lobby-table" id="lobbyTable">
-          <button class="seat-btn t-red" data-seat="N" style="grid-area: n">
-            <b>北</b><span>空位</span>
-          </button>
-          <button class="seat-btn t-blue" data-seat="W" style="grid-area: w">
-            <b>西</b><span>空位</span>
-          </button>
-          <div class="lobby-felt" style="grid-area: c">
-            <button
-              class="level-btn"
-              id="levelBtn"
-              type="button"
-              aria-controls="levelPick"
-              aria-expanded="false"
-            >
-              选级
-            </button>
-          </div>
-          <div
-            class="level-pick"
-            id="levelPick"
-            role="group"
-            aria-label="开局级数与方位"
-            hidden
-          ></div>
-          <button class="seat-btn t-blue" data-seat="E" style="grid-area: e">
-            <b>东</b><span>空位</span>
-          </button>
-          <button class="seat-btn t-red" data-seat="S" style="grid-area: s">
-            <b>南</b><span>空位</span>
-          </button>
-        </div>
-        <button class="btn primary lobby-go" id="sitBtn" disabled>坐下开始</button>
-        <details class="bot-setup" id="botStyleBox">
-          <summary>电脑模型 <span>为每个空位选择版本</span></summary>
-          <div id="botSetupRows"></div>
-          <button class="link" id="mixedBotsBtn" type="button">全部恢复默认</button>
-          <p id="botSetupNote"></p>
-        </details>
-
         <button class="link practice-entry" type="button" id="practiceBtn">
           训练 · 配牌、牌局与残局复盘
         </button>
