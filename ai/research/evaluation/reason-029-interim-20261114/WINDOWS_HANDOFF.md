@@ -9,3 +9,8 @@
 [完整协议](protocol.json) · [快照](final-model.json) · [新牌副](seed-audit.json) · [注册](registration.json)。
 
 运行`ai/danMCai/runs/reason-029-interim-20261114`。先检查STOP/FINISHED/controller.lock、实际PID，不重复启动。源b292056保持冻结，原训练目录只读；当前快照固定1876，不追逐新段导出。完成后看summary.json和process-exit-audit，完整500对才下本项结论，未满量保留部分/失败。
+
+
+**实际完成：500新副/1000完整单局**。1876更新快照537胜/463负/0平，平均签名升级分+0.1440，95%牌副簇区间[+0.0446,+0.2434]；双上242、双下217。本项快照对旧reason有正向单局升级分证据。四个工作器/独立guardian原句柄退出、189源码/基准及快照SHA/逐副完整性通过，评测0梯度更新。
+
+这比较同时更换017→029底座及推断权重，不能把差值单独归因为这6轮推断训练；原最终对初始029-reason控制组仍保留。原训练仍在data-7，10:00训练/13:00总截止、超参数与2000副最终留出不变；不据此选峰、补样、停训练或发布。结果是Node CPU/桌面搜索/无进贡单局，非真人、整场或浏览器验收。[完整结果](results.json) · [逐副分数](pair-scores.jsonl) · [退出/完整性审计](completion-audit.json)。

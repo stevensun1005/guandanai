@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "id": "reason-029-interim-20261114",
+  "completedAtUTC": "2026-11-14T11:38:20.769401+00:00",
+  "purpose": "Owner-requested exploratory snapshot comparison,1876-update029-reason versus archived017-based9001;1000 complete single rounds, not a final gate or a checkpoint selection search",
+  "protocolSHA256": "24d0138cc1f8bd8c2f2304aedea9dfa0a3feaa91e78e62083ade4a03595e7c8e",
+  "models": {
+    "champion": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\champion.onnx",
+      "file": "models/champion.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "version": "v000061013",
+      "kind": "Frozen029 raw neural base"
+    },
+    "old": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\old.onnx",
+      "file": "models/old.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "version": "v000855042-bsearch1-16d76783",
+      "kind": "Frozen017 base of archived9001"
+    },
+    "belief": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\belief.onnx",
+      "file": "models/belief.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "version": "belief-v1",
+      "kind": "Original inference-v1 warm start, not a policy MLP"
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "complete single round",
+    "tribute": false,
+    "cards": 108,
+    "terminalPoints": "signed team upgrade +/-1,+/-2,+/-3"
+  },
+  "pipeline": {
+    "challenger": "Frozen029 main MLP + sixth-segment belief after1876 updates + desktop search",
+    "opponent": "Frozen017 main MLP + original16d76783 belief-v1 + same desktop search",
+    "optimizerUpdates": 0,
+    "trainingContinuesUnchanged": true
+  },
+  "pairing": "Single fresh round/no tribute; same108 physical cards,level,leader then swap teams",
+  "statistics": {
+    "unit": "500 independent deal-pair clusters, two side-swapped rounds each",
+    "primary": "Mean signed terminal upgrade +/-1,+/-2,+/-3 with95% normal seed-cluster CI",
+    "secondary": "W/L/D,finishing rank pairs,double-ups/double-downs,timing and fallback counts",
+    "limit": "User-requested interim snapshot; no promotion, web release, early stopping, checkpoint replacement or hyperparameter changes. Existing final two97.5% gates and withheld2000 deals remain unchanged."
+  },
+  "plannedPairs": 500,
+  "completedPairs": 500,
+  "completedRounds": 1000,
+  "reports": {
+    "final-vs-old": {
+      "model": "snapshot029-reason-1876",
+      "opponent": "old017-reason9001",
+      "mixed": false,
+      "teammate": "snapshot029-reason-1876",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 537,
+      "losses": 463,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": 0.144,
+        "standardError": 0.05069188628044274,
+        "ci": [
+          0.044643902890332224,
+          0.24335609710966777
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.537,
+        "standardError": 0.012022940663764784,
+        "ci": [
+          0.5134350362990211,
+          0.560564963700979
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 242,
+        "13": 106,
+        "14": 189,
+        "23": 160,
+        "24": 86,
+        "34": 217
+      },
+      "doubleDowns": 217,
+      "doubleUps": 242,
+      "meanTurns": 81.424
+    }
+  },
+  "secondaryContrasts": {},
+  "primaryWinner": "snapshot029-reason-1876",
+  "primaryInterpretation": "Exploratory interim snapshot perspective, terminal signed round upgrade; not the final preregistered acceptance",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

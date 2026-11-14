@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "id": "reason-029-interim-20261114",
+  "complete": true,
+  "unit": "complete single round/no tribute/homogeneous teams",
+  "kind": "Owner-requested exploratory interim snapshot, not final-window acceptance",
+  "snapshot": {
+    "beliefSHA256": "235c29a19181ca6131e9519afd781b636b85c2a96d6d64f0341c94751041d936",
+    "checkpointSHA256": "10f5ee195751133013b00ab47ceeb4aebfac5abb73c7e4fdb053687253aafffa",
+    "steps": 1876,
+    "segment": 5,
+    "selection": "Latest fully completed sixth segment at owner request11:06UTC, chosen before this evaluation; not the final-window model and not a peak",
+    "source": "D:/vibecoding/guandan/ai/danMCai/runs/reason-029-v3-20261114/segments/5/model"
+  },
+  "models": {
+    "champion": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\champion.onnx",
+      "file": "models/champion.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "version": "v000061013",
+      "kind": "Frozen029 raw neural base"
+    },
+    "old": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\old.onnx",
+      "file": "models/old.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "version": "v000855042-bsearch1-16d76783",
+      "kind": "Frozen017 base of archived9001"
+    },
+    "belief": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\reason-029-v3-20261114\\models\\belief.onnx",
+      "file": "models/belief.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "version": "belief-v1",
+      "kind": "Original inference-v1 warm start, not a policy MLP"
+    }
+  },
+  "sourceCommit": "b292056b370ec220ad1f44dc556dd4ca063dba82",
+  "protocolSHA256": "24d0138cc1f8bd8c2f2304aedea9dfa0a3feaa91e78e62083ade4a03595e7c8e",
+  "pairs": 500,
+  "rounds": 1000,
+  "wins": 537,
+  "losses": 463,
+  "draws": 0,
+  "signedUpgradePoints": {
+    "clusters": 500,
+    "mean": 0.144,
+    "standardError": 0.05069188628044274,
+    "ci": [
+      0.044643902890332224,
+      0.24335609710966777
+    ],
+    "z": 1.96,
+    "method": "Normal approximation using independent seed-pair sample SD"
+  },
+  "roundWinScore": {
+    "clusters": 500,
+    "mean": 0.537,
+    "standardError": 0.012022940663764784,
+    "ci": [
+      0.5134350362990211,
+      0.560564963700979
+    ],
+    "z": 1.96,
+    "method": "Normal approximation using independent seed-pair sample SD"
+  },
+  "finishingRankPairs": {
+    "12": 242,
+    "13": 106,
+    "14": 189,
+    "23": 160,
+    "24": 86,
+    "34": 217
+  },
+  "doubleUps": 242,
+  "doubleDowns": 217,
+  "verdict": "positive-against-oldreason",
+  "optimizerUpdatesDuringEvaluation": 0,
+  "rawFileFingerprints": [
+    {
+      "file": "worker-0.jsonl",
+      "sha256": "6e28d0b088df7317de4c8b0ac9cf6c928147fae851d003e495816c656748056c",
+      "completedPairs": 125
+    },
+    {
+      "file": "worker-1.jsonl",
+      "sha256": "935ab4acdc7dfc04e2705ad3428df72e1749da443f02c777b8ce8113ec1f6245",
+      "completedPairs": 125
+    },
+    {
+      "file": "worker-2.jsonl",
+      "sha256": "882cf5f9a37eb07a666a632f9c94a33fe9c0e683bba56e10ca722e5bbcc89d75",
+      "completedPairs": 125
+    },
+    {
+      "file": "worker-3.jsonl",
+      "sha256": "4790bf77f40b07f0e15b270062eca163bdf601bce39511ac23ab9afe17030832",
+      "completedPairs": 125
+    }
+  ],
+  "pairScoresSHA256": "c7cb9b77a12ce2090201ee02259cff975e115e7b43f88920f34ca63b5c85bc36",
+  "search": {
+    "challenger": {
+      "midgame": {
+        "requests": 5116,
+        "completed": 5116,
+        "deviated": 1087,
+        "minWorlds": 0,
+        "fallbackReasons": {},
+        "recordedTimedSearches": 5116,
+        "meanSearchMs": 120.57293033620017,
+        "maxSearchMs": 976.3379999999888
+      },
+      "endgame": {
+        "requests": 2614,
+        "completed": 2610,
+        "deviated": 336,
+        "minWorlds": 5,
+        "fallbackReasons": {
+          "timeout": 1,
+          "budget": 3
+        },
+        "recordedTimedSearches": 2614,
+        "meanSearchMs": 591.0142801836269,
+        "maxSearchMs": 52249.27630000003
+      }
+    },
+    "oldReason": {
+      "midgame": {
+        "requests": 5106,
+        "completed": 5106,
+        "deviated": 1021,
+        "minWorlds": 0,
+        "fallbackReasons": {},
+        "recordedTimedSearches": 5106,
+        "meanSearchMs": 120.84136310223266,
+        "maxSearchMs": 851
+      },
+      "endgame": {
+        "requests": 2720,
+        "completed": 2712,
+        "deviated": 351,
+        "minWorlds": 1,
+        "fallbackReasons": {
+          "budget": 8
+        },
+        "recordedTimedSearches": 2720,
+        "meanSearchMs": 669.5716911764706,
+        "maxSearchMs": 50927
+      }
+    }
+  },
+  "processExitAudit": {
+    "atUTC": "2026-11-14T11:38:21.7179143+00:00",
+    "guardianHandleExited": true,
+    "sharedTrainingAwakeRequestNotReleased": true,
+    "controllerPID": 37640,
+    "workerPIDs": [
+      29500,
+      42884,
+      45768,
+      16928
+    ],
+    "allWorkerHandlesExited": true
+  },
+  "training": {
+    "stillRunning": true,
+    "phaseAtAudit": "data-7",
+    "protocolUnchanged": true,
+    "sourceFilesVerified": 189,
+    "trainingDeadlineUTC": "2026-11-14T15:00:00.000Z",
+    "overallDeadlineUTC": "2026-11-14T18:00:00.000Z",
+    "finalHoldoutUsed": false,
+    "hyperparametersChangedFromInterim": false
+  },
+  "limits": [
+    "Contrast changes both base017->029 and the inference model; it does not isolate the causal training gain. Final versus initial029-reason remains required.",
+    "No repeated looks, extra samples, replacement snapshot, early stop or deployment decision.",
+    "Node CPU desktop search budgets, concurrent ongoing sampling; not browser/human/whole-match validation."
+  ],
+  "completedAtUTC": "2026-11-14T11:38:49.860Z"
+}

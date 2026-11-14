@@ -197,3 +197,5 @@ reason对照v2已真实启动，两CPU/独立新牌副，原17:30:48Z截止不�
 029-reason同轮修订为10:00美东停训练、约13:00全部结束；多段新样本＋匹配Adam续接，原06:00初稿未启动。[当前v2](evaluation/reason-029-20261114/protocol.design-v2.json)。
 
 [029-reason中途1000局](evaluation/reason-029-interim-20261114/README.md)：所有者新要求，固定1876更新快照，不停训练、不使用最终留出、不当最终验收。
+
+029-reason中途1000局已完成：1876快照537/463/0，签名升级分+0.1440、95%[+0.0446,+0.2434]；本项快照对旧reason有正向单局升级分证据。训练照常、不是最终验收。[证据](evaluation/reason-029-interim-20261114/results.json)。

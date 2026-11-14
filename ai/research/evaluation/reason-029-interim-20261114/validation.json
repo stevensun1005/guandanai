@@ -1,0 +1,64 @@
+{
+  "purpose": "Completion integrity, independent arithmetic and unchanged frozen-core validation; no new model training",
+  "completedRounds": 1000,
+  "completedPairs": 500,
+  "independentArithmetic": {
+    "passed": true,
+    "uniqueDealHashes": 500,
+    "wins": 537,
+    "losses": 463,
+    "draws": 0,
+    "signedPointSum": 144,
+    "mean": 0.144,
+    "ci95": [
+      0.044643902890332224,
+      0.24335609710966777
+    ]
+  },
+  "frozenSource": {
+    "commit": "b292056b370ec220ad1f44dc556dd4ca063dba82",
+    "files": 189,
+    "actualRunBytesVerified": true,
+    "developmentEquivalentAfterLFNormalization": true,
+    "checkoutLineEndingDifferences": [
+      "ai/research/tools/fit-coach-calibration.py",
+      "ai/research/tools/summarize-deviation-pairs.py",
+      "web/src/ai/model-catalog.json"
+    ],
+    "note": "Read-only comparison only; never normalized or rewrote frozen evidence."
+  },
+  "launcher": {
+    "archivedFile": "launcher.ps1",
+    "sha256": "2ba4bdc99835660b59758ef4a2a4946b8a0d955cdf41d272d116e5b9024d158c",
+    "matchesExecutedScript": true,
+    "syntaxParsed": true,
+    "liveIntegrationComplete": true
+  },
+  "node": {
+    "modules": 114,
+    "tests": 516,
+    "passed": 480,
+    "skipped": 36,
+    "failed": 0,
+    "command": "Expanded actual paths; node --test --test-isolation=none --test-concurrency=1 --test-timeout=180000",
+    "note": "Documented Windows runner workaround; shared imported solver cases deduplicate, no assertions disabled.",
+    "logSHA256": "77d6ecd7635913815a060ded018e21545ec733e338a791535991afcf11873562"
+  },
+  "python": {
+    "researchTests": 41,
+    "sharedTests": 4,
+    "passed": true,
+    "logSHA256": "000f95376d1413bdda1c343cdabf0648b79fdcbc2cb656b531b261e66e567c33"
+  },
+  "format": {
+    "passed": true,
+    "logSHA256": "188d607ebfd578a7e695e7ddf319c0e438d00d16133c9711d0602e899d433d71"
+  },
+  "build": {
+    "passed": true,
+    "unchangedWebVersion": "23b4ed9604",
+    "logSHA256": "3888b3a35c0733a19b310a2641868ef789fe024c4fc21ab40d2eb79b60f5e3f7"
+  },
+  "webDeployed": false,
+  "formalTrainingChanged": false
+}

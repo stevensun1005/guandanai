@@ -1,0 +1,51 @@
+{
+  "challenger": {
+    "midgame": {
+      "requests": 5116,
+      "completed": 5116,
+      "deviated": 1087,
+      "minWorlds": 0,
+      "fallbackReasons": {},
+      "recordedTimedSearches": 5116,
+      "meanSearchMs": 120.57293033620017,
+      "maxSearchMs": 976.3379999999888
+    },
+    "endgame": {
+      "requests": 2614,
+      "completed": 2610,
+      "deviated": 336,
+      "minWorlds": 5,
+      "fallbackReasons": {
+        "timeout": 1,
+        "budget": 3
+      },
+      "recordedTimedSearches": 2614,
+      "meanSearchMs": 591.0142801836269,
+      "maxSearchMs": 52249.27630000003
+    }
+  },
+  "oldReason": {
+    "midgame": {
+      "requests": 5106,
+      "completed": 5106,
+      "deviated": 1021,
+      "minWorlds": 0,
+      "fallbackReasons": {},
+      "recordedTimedSearches": 5106,
+      "meanSearchMs": 120.84136310223266,
+      "maxSearchMs": 851
+    },
+    "endgame": {
+      "requests": 2720,
+      "completed": 2712,
+      "deviated": 351,
+      "minWorlds": 1,
+      "fallbackReasons": {
+        "budget": 8
+      },
+      "recordedTimedSearches": 2720,
+      "meanSearchMs": 669.5716911764706,
+      "maxSearchMs": 50927
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "completedPairs": 500,
+  "completedRounds": 1000,
+  "uniqueDeals": 500,
+  "sourceFilesVerified": 189,
+  "baseAndSnapshotSHAVerified": true,
+  "originalTrainingProtocolAndSourcesUnchanged": true,
+  "originalFinalHoldoutUntouched": true,
+  "allOriginalWorkerAndGuardianHandlesExited": true,
+  "rawFiles": [
+    {
+      "file": "worker-0.jsonl",
+      "sha256": "6e28d0b088df7317de4c8b0ac9cf6c928147fae851d003e495816c656748056c",
+      "completedPairs": 125
+    },
+    {
+      "file": "worker-1.jsonl",
+      "sha256": "935ab4acdc7dfc04e2705ad3428df72e1749da443f02c777b8ce8113ec1f6245",
+      "completedPairs": 125
+    },
+    {
+      "file": "worker-2.jsonl",
+      "sha256": "882cf5f9a37eb07a666a632f9c94a33fe9c0e683bba56e10ca722e5bbcc89d75",
+      "completedPairs": 125
+    },
+    {
+      "file": "worker-3.jsonl",
+      "sha256": "4790bf77f40b07f0e15b270062eca163bdf601bce39511ac23ab9afe17030832",
+      "completedPairs": 125
+    }
+  ],
+  "pairScoresSHA256": "c7cb9b77a12ce2090201ee02259cff975e115e7b43f88920f34ca63b5c85bc36",
+  "protocolSHA256": "24d0138cc1f8bd8c2f2304aedea9dfa0a3feaa91e78e62083ade4a03595e7c8e",
+  "atUTC": "2026-11-14T11:38:49.860Z"
+}

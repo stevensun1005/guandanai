@@ -155,3 +155,5 @@ node ai/danMCai/belief/reason-match-eval.mjs --summarize --out=<目录>
 同轮v2改为10:00美东训练停止。后续新数据段用`--initial-checkpoint`恢复匹配网络/Adam与累计step（不得同时传`--initial-onnx`），保存旧段原件；没有恢复未保存的RNG或数据采样状态。新一段使用新的已审计牌副与随机种子，只取时间顺序最后模型。[v2设计](../../research/evaluation/reason-029-20261114/protocol.design-v2.json)。
 
 ROCm匹配Adam恢复：非capturable的step标量保持CPU，梯度矩保持参数设备；不能只比较载入张量，预检还验证恢复后的下一步GPU参数更新。原设备断言失败和修订单独保留，不算棋力。
+
+029-reason1876更新中途快照已完成1000单局：对旧reason升级分+0.1440、95%[+0.0446,+0.2434]；本项快照对旧reason有正向单局升级分证据。两端还改变主干底座，不能单独归因推断训练，原最终控制组不变。[结果](../../research/evaluation/reason-029-interim-20261114/results.json)。

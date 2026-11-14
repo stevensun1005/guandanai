@@ -201,3 +201,5 @@ Round wins and upgrade points differ: the final hybrid won51.2% of rounds (descr
 ### Random seating (2026-11-13)
 
 The lobby adds Pick/Random seating (Pick by default, remembered locally; guests follow the host). Random rooms auto-assign temporary places and draw everyone, including the host, when starting. Empty seats keep the bot model configured for the final physical direction; solo play can draw its own direction too. Existing opaque credentials are rebound before starting, so guest/host refresh restores the drawn seat without another draw. Host/personal coach permissions, room/name raw collection, current menu/default029, bot strategies and frozen training remain unchanged. [Guide](web/docs/PLAYING.md#随机选座2026-11-13) / [Evidence](ai/research/evaluation/clint-sync-20261113-2326.json).
+
+The1876-update029-reason interim snapshot completed1,000 single rounds against oldreason: 537W/463L/0D, signed upgrade +0.1440,95% deal-cluster CI[+0.0446,+0.2434]. This joint base/inference contrast does not isolate the training effect or replace the final gate. Original training continues. [Evidence](ai/research/evaluation/reason-029-interim-20261114/results.json).

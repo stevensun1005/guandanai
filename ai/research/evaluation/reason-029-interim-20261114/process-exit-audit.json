@@ -1,0 +1,13 @@
+{
+  "atUTC": "2026-11-14T11:38:21.7179143+00:00",
+  "guardianHandleExited": true,
+  "sharedTrainingAwakeRequestNotReleased": true,
+  "controllerPID": 37640,
+  "workerPIDs": [
+    29500,
+    42884,
+    45768,
+    16928
+  ],
+  "allWorkerHandlesExited": true
+}
