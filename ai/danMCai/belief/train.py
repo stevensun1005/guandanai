@@ -161,6 +161,9 @@ def load_initial_checkpoint(net, optimizer, file, device):
     if saved["counts_offset"] != net.counts_offset or saved["hidden"] != net.l1.out_features:
         raise ValueError("Checkpoint architecture/prior differs")
     net.load_state_dict(saved["state"], strict=True)
+    # Non-capturable Adam keeps its scalar step on the host, even when moments live on ROCm.
+    for state in saved["optimizer"]["state"].values():
+        state["step"] = state["step"].cpu()
     optimizer.load_state_dict(saved["optimizer"])
     if len(optimizer.state) != 6 or any(int(s["step"]) != saved["step"] for s in optimizer.state.values()):
         raise ValueError("Adam does not match saved cumulative step")

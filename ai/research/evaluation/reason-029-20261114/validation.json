@@ -8,7 +8,7 @@
     "skipped": 36,
     "failed": 0,
     "command": "Expanded actual test file paths, node --test --test-isolation=none --test-concurrency=1 --test-timeout=180000",
-    "logSHA256": "55c6b35ca57c08731a77b42256ebf4cf0060b261e90e46cb82987beaa09b1943",
+    "logSHA256": "23d8dd2f490076962ec61c744b80422e4814434f961e568fa60aa7cb9f383afc",
     "note": "Default npm test passed519/483/36 at9049b76. Later standard concurrent invocations stalled after an exited PIMC test child; logs retained, owned wrappers stopped. Appending flags to npm script did not configure runner; NODE_OPTIONS none plus literal wildcard argv caused existing CLI realpath guards to fail. Explicit actual paths and single process passed all unique test names; shared imported solver tests deduplicated. No test assertions disabled."
   },
   "python": {
@@ -17,7 +17,14 @@
     "researchTests": 41,
     "sharedTests": 4,
     "sharedSkipped": 0,
-    "logSHA256": "5fbbb09e3b9dcb86109a3e8484fe54faec364a3e059146a4255f8079cfb9dd4b"
+    "logSHA256": "5fbbb09e3b9dcb86109a3e8484fe54faec364a3e059146a4255f8079cfb9dd4b",
+    "latestRelevantRun": {
+      "beliefTests": 8,
+      "researchTests": 41,
+      "sharedTests": 4,
+      "passed": true,
+      "logSHA256": "f9ad5fc741124f16568e04d5830e8dd442f1e65ee58aa9647597a33742740cf9"
+    }
   },
   "formatCheck": {
     "passed": true,
@@ -28,6 +35,23 @@
     "webVersion": "23b4ed9604",
     "logSHA256": "3888b3a35c0733a19b310a2641868ef789fe024c4fc21ab40d2eb79b60f5e3f7"
   },
-  "GPUPreflight": "pending frozen-source actual test",
-  "optimizerUpdatesInFormalRun": 0
+  "GPUPreflight": "Fixed development preflight passed; frozen-source recheck required before formal launch",
+  "optimizerUpdatesInFormalRun": 0,
+  "revision": 3,
+  "developmentGPUPreflight": {
+    "passed": true,
+    "backendActuallyTested": "cuda:0",
+    "device": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "initialBeliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "warmStartProbabilityMaxDifference": 8.940696716308594e-8,
+    "syntheticOptimizerSteps": 4,
+    "checkpointStep": 2,
+    "reproducedContinuationStep": 3,
+    "matchingAdamStates": 6,
+    "newGames": 0,
+    "strengthEvidence": false,
+    "syntheticSeed": 2026111429
+  }
 }

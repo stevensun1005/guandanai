@@ -1,0 +1,31 @@
+{
+  "phase": "preflight-failed-formal-not-started",
+  "sourceCommit": "80ebd737f7dbae3c9e9e5685f8657503e00f20cc",
+  "originalWindowStartUTC": "2026-11-14T05:00:12.127Z",
+  "deadlineUTC": "2026-11-14T18:00:00.000Z",
+  "trainingDeadlineUTC": "2026-11-14T15:00:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-14T17:45:00.000Z",
+  "newGames": 0,
+  "formalOptimizerUpdates": 0,
+  "failedSyntheticUpdates": 2,
+  "reason": "Restored Adam scalar step mapped to CUDA whereas original non-capturable Adam step was CPU; device equality assertion failed. Normalize host scalar and verify the next update exactly too.",
+  "fixedDevelopmentReport": {
+    "passed": true,
+    "backendActuallyTested": "cuda:0",
+    "device": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "initialBeliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "warmStartProbabilityMaxDifference": 8.940696716308594e-8,
+    "syntheticOptimizerSteps": 4,
+    "checkpointStep": 2,
+    "reproducedContinuationStep": 3,
+    "matchingAdamStates": 6,
+    "newGames": 0,
+    "strengthEvidence": false,
+    "syntheticSeed": 2026111429
+  },
+  "oldFrozenTreeUntouched": true,
+  "restartExtendsDeadline": false,
+  "atUTC": "2026-11-14T05:03:20.938Z"
+}

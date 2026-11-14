@@ -1,0 +1,13 @@
+{
+  "id": "reason-029-20261114",
+  "startUTC": "2026-11-14T05:00:12.127Z",
+  "deadlineUTC": "2026-11-14T18:00:00.000Z",
+  "trainingDeadlineUTC": "2026-11-14T15:00:00.000Z",
+  "generationDeadlineUTC": "2026-11-14T14:45:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-14T17:45:00.000Z",
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "6546d96fcf2d283bf49a10e76e5deb6682c0d866589fd6de124842fd90ae741a",
+  "authorizationSHA256": "97fa8c6d1e14ca0024d9e2b2cdd163563eee30db79e162cb2ed0c12bc8e9ff2b",
+  "sourceCommit": "80ebd737f7dbae3c9e9e5685f8657503e00f20cc",
+  "purpose": "New explicit owner029-reason window; expired windows remain closed"
+}

@@ -13,3 +13,6 @@
 运行目录`ai/danMCai/runs/reason-029-20261114`，统一面板<http://127.0.0.1:8767/>。固定源/权重/协议/截止注册、GPU合成预检及真实PID启动后另记。网页029默认保持，不自动发布；旧训练/评测及负结果原件保留。
 
 [设计](protocol.design.json) · [种子审计](seed-audit.json)。
+
+
+GPU预检修订3：原80ebd73冻结树不改，2次临时合成更新后的Adam计数器设备检查未过，正式对局/训练均为0。修复将非capturable Adam的step保持CPU，且验证恢复后的下一步GPU更新逐位相同。新运行`ai/danMCai/runs/reason-029-v3-20261114`沿用原05:00:12.127Z窗口起点与10:00/13:00截止，不重置时钟；原种子均未消费、明确继承，不冒充新的独立重复。当前协议/注册指向修订3，原件见protocol-v2-preflight-failed.json及preflight-recovery.json。

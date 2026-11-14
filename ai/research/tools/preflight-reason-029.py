@@ -46,14 +46,22 @@ with tempfile.TemporaryDirectory(dir=args.out.parent) as temporary:
     restored = train.BeliefNet(1238,270,np.zeros(1238),np.ones(1238)).to(device)
     restored.load_state_dict(saved['state'])
     adam = torch.optim.AdamW(restored.parameters(),lr=3e-5,weight_decay=.01)
+    for state in saved['optimizer']['state'].values(): state['step'] = state['step'].cpu()
     adam.load_state_dict(saved['optimizer'])
     assert len(adam.state)==6
     for a,b in zip(net.parameters(),restored.parameters()): torch.testing.assert_close(a,b,atol=0,rtol=0)
     for a,b in zip(optimizer.state.values(),adam.state.values()):
-        for key in ['exp_avg','exp_avg_sq','step']: torch.testing.assert_close(a[key],b[key],atol=0,rtol=0)
+        for key in ['exp_avg','exp_avg_sq','step']: torch.testing.assert_close(a[key].cpu(),b[key].cpu(),atol=0,rtol=0)
+    # A successful load alone is insufficient: require the following GPU update to reproduce too.
+    for network, opt in [(net, optimizer), (restored, adam)]:
+        opt.zero_grad(set_to_none=True)
+        train.copy_loss(network(tensor), y).backward()
+        opt.step()
+    for a,b in zip(net.parameters(),restored.parameters()): torch.testing.assert_close(a,b,atol=0,rtol=0)
+    assert all(s['step'].device.type == 'cpu' and int(s['step']) == 3 for s in adam.state.values())
 result = {'passed':True,'backendActuallyTested':'cuda:0','device':torch.cuda.get_device_name(0),
           'torch':torch.__version__,'hip':torch.version.hip,'initialBeliefSHA256':initial_sha,
-          'warmStartProbabilityMaxDifference':delta,'syntheticOptimizerSteps':2,'matchingAdamStates':6,
+          'warmStartProbabilityMaxDifference':delta,'syntheticOptimizerSteps':4,'checkpointStep':2,'reproducedContinuationStep':3,'matchingAdamStates':6,
           'newGames':0,'strengthEvidence':False,'syntheticSeed':2026111429}
 args.out.write_text(json.dumps(result,indent=2),encoding='utf-8')
 print(json.dumps(result))
