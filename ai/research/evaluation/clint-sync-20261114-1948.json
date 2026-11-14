@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "clint-lobby-layout-only",
-  "phase": "local-validation-passed-deployment-pending",
+  "phase": "complete",
   "baseMain": "b479cce2f5d09e3a524f4bd4cfc7fb6c5b6d0b6e",
   "upstream": {
     "repository": "https://github.com/clintsun1977/guandan",
@@ -1965,10 +1965,14 @@
     }
   },
   "deployment": {
-    "phase": "pending"
+    "phase": "success",
+    "sourceCommit": "a30f70ae6df43ebced3d219d109b7ba535f4cd64",
+    "version": "d567b97606",
+    "pagesRun": 43635316324,
+    "pagesURL": "https://github.com/stevensun1005/guandanai/actions/runs/43635316324",
+    "publicEvidence": "clint-sync-20261114-1948-public.json"
   },
-  "pending": [
-    "Push source, confirm Pages and public same-version layout before advancing full-success cursor"
-  ],
-  "atUTC": "2026-11-14T19:57:37.778573+00:00"
+  "pending": [],
+  "atUTC": "2026-11-14T19:57:37.778573+00:00",
+  "completedAtUTC": "2026-11-14T20:10:16.983355+00:00"
 }

@@ -947,3 +947,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 本次只同步布局/显示：模型菜单Clint、028、029及默认029、房主许可/个人评价开关、房主明牌、房间号/昵称采集、不透明凭据恢复均保留；无Clint策略、神经网络、候选或冻结训练改动，没有新棋力比赛。WebKit引擎与iPad尺寸检查不等于真机Safari验收。完整成功游标仅在Pages与公网验证后推进。
 
 [逐项范围与机器证据](ai/research/evaluation/clint-sync-20261114-1948.json)。
+
+双栏大厅上线复核完成：Pages43635316324成功，公网d567b97606经Chrome/WebKit共18组尺寸检查通过，默认029与原功能保留，完整同步游标66d63b8。[证据](ai/research/evaluation/clint-sync-20261114-1948-public.json)。

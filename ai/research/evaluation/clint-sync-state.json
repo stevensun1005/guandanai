@@ -1,16 +1,16 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "e17f3adb17d89b665445d39524f383e97cecd3c5",
-  "evidence": "clint-sync-20261114-1548.json",
+  "lastSuccessfulUpstreamSHA": "66d63b81bb0dad2b68312f00c5b62d5262a7a2c0",
+  "evidence": "clint-sync-20261114-1948.json",
   "pending": [],
-  "lastCheckedUpstreamSHA": "e17f3adb17d89b665445d39524f383e97cecd3c5",
+  "lastCheckedUpstreamSHA": "66d63b81bb0dad2b68312f00c5b62d5262a7a2c0",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",
     "deployedCodeCommit": "19fb94e447e8799e93400a983875312ee47f1234"
   },
-  "previousSuccessfulEvidence": "clint-sync-20261113-2326.json",
+  "previousSuccessfulEvidence": "clint-sync-20261114-1548.json",
   "lastSuccessfulRuleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
-  "note": "Full UI/network/browser tribute adaptation through e17f3ad; Pages43614454344 and publicbc7a2d065d five viewports/realPeerJS changed-ID/live-tab replacement/audio/keypad/equaltribute verified. Rule strategy remains6e57485;029 menu/default and frozen training preserved."
+  "note": "Full UI-only lobby adaptation through66d63b8; Pages43635316324 and live d567b97606 Chrome/WebKit18 viewport checks passed. Private/coach/models/collection/opaque recovery retained; strategy remains6e57485, default029. Physical iPad not verified."
 }
