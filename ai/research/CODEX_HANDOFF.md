@@ -512,3 +512,5 @@ Clint UI同步1586875已完成并线上核验：代码01799f6，Pages42501549267
 029-reason GPU预检修订3：原正式运行未启动（0对局/0正式更新），80ebd73树不改；host Adam step修复和下一更新复现后，用独立reason-029-v3-20261114、原05:00:12.127Z起点及10:00/13:00截止继续。不要启动原目录或重置窗口；看preflight-recovery与当前protocol/registration。
 
 029-reason修订3已实际启动；控制器/guardian/awake与初始生成/基线均存活，10:00训练/13:00总截止不变。详细运行、PID核验及真实样本计数见[启动证据](evaluation/reason-029-20261114/startup.json)。新模型棋力尚未验收，不重复启动或同步b292056冻结树。
+
+所有者追加中途1000局：独立reason-029-interim-20261114，新500副交换对，固定请求时最新完整1876更新推断快照对旧reason；四CPU复用b292056评测与独立STOP/guardian，原训练时钟和最终协议不动。不得盲目重复启动或拿中途快照取代最终模型。见[预登记](evaluation/reason-029-interim-20261114/README.md)。

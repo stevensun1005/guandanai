@@ -1,0 +1,12 @@
+{
+  "id": "reason-029-interim-20261114",
+  "startUTC": "2026-11-14T11:13:32.190Z",
+  "trainingDeadlineUTC": "2026-11-14T12:43:32.190Z",
+  "evaluationDeadlineUTC": "2026-11-14T12:43:32.190Z",
+  "deadlineUTC": "2026-11-14T12:53:32.190Z",
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "24d0138cc1f8bd8c2f2304aedea9dfa0a3feaa91e78e62083ade4a03595e7c8e",
+  "authorizationSHA256": "b4f5568fb08582ce3a757ccdd4554017f4d1a53467a0067d59e357ebfa029ad9",
+  "sourceCommit": "b292056b370ec220ad1f44dc556dd4ca063dba82",
+  "purpose": "Owner-requested interim1000-round snapshot versus oldreason"
+}

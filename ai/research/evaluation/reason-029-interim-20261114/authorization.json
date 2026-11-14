@@ -1,0 +1,14 @@
+{
+  "purpose": "Owner-requested interim1000-round snapshot versus oldreason",
+  "ownerQuote": "可以先来1000局测一下",
+  "requestedAtUTC": "2026-11-14T11:06:00.000Z",
+  "registeredAtUTC": "2026-11-14T11:13:32.190Z",
+  "plannedRounds": 1000,
+  "evaluationDeadlineUTC": "2026-11-14T12:43:32.190Z",
+  "deadlineUTC": "2026-11-14T12:53:32.190Z",
+  "restartExtendsDeadline": false,
+  "keepOriginalTraining": true,
+  "trainingProtocolSHA256": "9520d1456178e5c87c18c7195dd6989559482654cb20d74ce9fb7ccce072dce4",
+  "originalTrainingDeadlineUTC": "2026-11-14T15:00:00.000Z",
+  "originalOverallDeadlineUTC": "2026-11-14T18:00:00.000Z"
+}
