@@ -1,0 +1,111 @@
+{
+  "atUTC": "2026-11-15T15:14:49.903Z",
+  "dashboardURL": "http://127.0.0.1:8767/",
+  "dashboardSourceCommit": "faad246",
+  "dashboardPID": 46888,
+  "frozenTrainingSourceCommit": "bad2731db449af82608400e4b347be62eb2aae80",
+  "frozenTrainingFilesVerified": 189,
+  "phase": "正在跑 1 项",
+  "live": [
+    {
+      "id": "baseline-vs-old",
+      "label": "续训起点3126 对旧reason",
+      "pairs": 444,
+      "plannedPairs": 1000,
+      "rounds": 888,
+      "wins": 474,
+      "losses": 414,
+      "draws": 0,
+      "winRate": 0.5337837837837838,
+      "meanUpgradePoints": 0.12274774774774774,
+      "state": "进行中",
+      "verdict": "尚无最终判定；实时胜率不作为提升结论"
+    },
+    {
+      "id": "final-vs-old",
+      "label": "本轮最终7449 对旧reason",
+      "pairs": 500,
+      "plannedPairs": 1000,
+      "rounds": 1000,
+      "wins": 505,
+      "losses": 495,
+      "draws": 0,
+      "winRate": 0.505,
+      "meanUpgradePoints": 0.01,
+      "state": "进行中",
+      "verdict": "尚无最终判定；实时胜率不作为提升结论"
+    },
+    {
+      "id": "final-vs-baseline",
+      "label": "本轮最终7449 对续训起点3126",
+      "pairs": 0,
+      "plannedPairs": 1000,
+      "rounds": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "winRate": null,
+      "meanUpgradePoints": null,
+      "state": "尚未开始",
+      "verdict": "尚无最终判定；实时胜率不作为提升结论"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "browser": {
+    "url": "http://127.0.0.1:8767/",
+    "liveCards": 3,
+    "viewports": [
+      1280,
+      390
+    ],
+    "pollResponses": 2,
+    "errors": [],
+    "tasks": [
+      {
+        "id": "baseline-vs-old",
+        "label": "续训起点3126 对旧reason",
+        "pairs": 444,
+        "plannedPairs": 1000,
+        "rounds": 888,
+        "wins": 474,
+        "losses": 414,
+        "draws": 0,
+        "winRate": 0.5337837837837838,
+        "meanUpgradePoints": 0.12274774774774774,
+        "state": "进行中",
+        "verdict": "尚无最终判定；实时胜率不作为提升结论"
+      },
+      {
+        "id": "final-vs-old",
+        "label": "本轮最终7449 对旧reason",
+        "pairs": 499,
+        "plannedPairs": 1000,
+        "rounds": 998,
+        "wins": 504,
+        "losses": 494,
+        "draws": 0,
+        "winRate": 0.5050100200400801,
+        "meanUpgradePoints": 0.009018036072144289,
+        "state": "进行中",
+        "verdict": "尚无最终判定；实时胜率不作为提升结论"
+      },
+      {
+        "id": "final-vs-baseline",
+        "label": "本轮最终7449 对续训起点3126",
+        "pairs": 0,
+        "plannedPairs": 1000,
+        "rounds": 0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "winRate": null,
+        "meanUpgradePoints": null,
+        "state": "尚未开始",
+        "verdict": "尚无最终判定；实时胜率不作为提升结论"
+      }
+    ],
+    "scope": "Read-only complete-pair live rates, no final strength claim"
+  },
+  "scope": "Actual read-only dashboard activation, evaluation incomplete; not final strength evidence"
+}
