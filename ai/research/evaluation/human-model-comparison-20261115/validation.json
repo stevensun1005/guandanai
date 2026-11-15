@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "observedAtUTC": "2026-11-15T17:01:53.908Z",
+  "node": {
+    "command": "npm test -- --test-isolation=none --test-concurrency=1 --test-timeout=180000",
+    "tests": 522,
+    "passed": 486,
+    "skipped": 36,
+    "failed": 0
+  },
+  "python": {
+    "researchPassed": 42,
+    "sharedPassed": 3,
+    "sharedSkipped": 1
+  },
+  "format": "passed",
+  "build": "passed",
+  "unchangedWebVersion": "d567b97606",
+  "independent": {
+    "passed": true,
+    "method": "Independent Python recomputation of all selected numerators/denominators from local per-action rows plus raw census reconciliation",
+    "rawRecords": 124,
+    "humanRows": 9125,
+    "primaryUnflaggedHumanRows": 8335,
+    "models": {
+      "029": {
+        "decisionOpportunities": 6549,
+        "samePlan": 2929,
+        "denominators": {
+          "follow": 5399,
+          "partner": 1367,
+          "bomb": 5655
+        }
+      },
+      "017": {
+        "decisionOpportunities": 6549,
+        "samePlan": 2866,
+        "denominators": {
+          "follow": 5399,
+          "partner": 1367,
+          "bomb": 5655
+        }
+      }
+    },
+    "inferenceRepeatClaimed": false,
+    "privacy": "Only aggregates returned, no rooms/names/IDs/private hands"
+  },
+  "independentCheckSourceSHA256": "8f26e3147978259811bd573a05cfc45d4bbb613a5ce433bf76e2e5a25f4a4a64",
+  "inputManifestSHA256": "561b35e6ffe11879de6a735e6ec15f33eabb7d4375564871d6d4d345b47ca884",
+  "aggregateSHA256": "9a0e2c88cb0a770e8bc0ada5f4d43d5eaea4ddab6237f8dfd8bfe5289d2c9433",
+  "logs": {
+    "node": "ead8e4d523497c5d3dd46974070d534208036a98e34e27fcdd4faa383564dd11",
+    "python": "8871871239f43ccbb1d240c6737e8a80835116f5d65739891fd1c2f6fcca962c",
+    "format": "188d607ebfd578a7e695e7ddf319c0e438d00d16133c9711d0602e899d433d71",
+    "build": "bb06a2ef0c0826fa606c58a955d4549828cc3f8dab4c2cf7a941df15ebdfde47"
+  },
+  "privacy": {
+    "rawRecordsCommitted": false,
+    "perActionRowsCommitted": false,
+    "namesOrRoomsInAggregate": false,
+    "humanDataTrained": false
+  },
+  "actualNewTrainingUpdates": 0,
+  "actualNewGames": 0,
+  "postAnalysisModelSHAUnchanged": true,
+  "finalExportCursor": 124,
+  "finalDeltaExportRows": 0
+}

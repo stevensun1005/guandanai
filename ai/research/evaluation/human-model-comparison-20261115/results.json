@@ -1,0 +1,798 @@
+{
+  "schema": 1,
+  "complete": true,
+  "census": {
+    "downloadedRecords": 124,
+    "kinds": {
+      "test": 15,
+      "game": 109
+    },
+    "validRecords": 124,
+    "invalid": {},
+    "duplicates": 0,
+    "officialRounds": 109,
+    "sources": {
+      "Clint": 109
+    },
+    "humanCounts": {
+      "3": 5,
+      "4": 104
+    },
+    "actionCohorts": {
+      "human-assisted": 790,
+      "human-assistance-unknown": 8335,
+      "bot": 111,
+      "timeout": 1
+    },
+    "matches": 12,
+    "modelActions": {
+      "9001": 15,
+      "clint-rule": 97
+    },
+    "firstStartedAt": "2026-11-07T18:49:00.328Z",
+    "lastEndedAt": "2026-11-15T03:14:27.247Z",
+    "matchRoundCoverage": [
+      {
+        "rounds": 15,
+        "min": 1,
+        "max": 16,
+        "missingInsideRange": 1
+      },
+      {
+        "rounds": 15,
+        "min": 1,
+        "max": 15,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 13,
+        "min": 1,
+        "max": 13,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 13,
+        "min": 1,
+        "max": 13,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 13,
+        "min": 1,
+        "max": 13,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 11,
+        "min": 1,
+        "max": 12,
+        "missingInsideRange": 1
+      },
+      {
+        "rounds": 9,
+        "min": 1,
+        "max": 9,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 8,
+        "min": 1,
+        "max": 9,
+        "missingInsideRange": 1
+      },
+      {
+        "rounds": 6,
+        "min": 1,
+        "max": 6,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 4,
+        "min": 1,
+        "max": 5,
+        "missingInsideRange": 1
+      },
+      {
+        "rounds": 1,
+        "min": 1,
+        "max": 1,
+        "missingInsideRange": 0
+      },
+      {
+        "rounds": 1,
+        "min": 1,
+        "max": 1,
+        "missingInsideRange": 0
+      }
+    ]
+  },
+  "models": [
+    {
+      "id": "029",
+      "version": "v000061013",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768"
+    },
+    {
+      "id": "017",
+      "version": "v000855042",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7"
+    }
+  ],
+  "summaries": {
+    "029": {
+      "observedActions": 8335,
+      "decisionOpportunities": 6549,
+      "forcedOrAutoFinishExcluded": 1786,
+      "actualPlansMissingFromGenerator": 0,
+      "samePlan": {
+        "numerator": 2929,
+        "denominator": 6549,
+        "rate": 0.447243854023515
+      },
+      "lead": {
+        "n": 1150,
+        "types": {
+          "full": {
+            "human": 130,
+            "model": 168
+          },
+          "single": {
+            "human": 432,
+            "model": 310
+          },
+          "pairs3": {
+            "human": 75,
+            "model": 101
+          },
+          "triple": {
+            "human": 66,
+            "model": 71
+          },
+          "straight": {
+            "human": 125,
+            "model": 273
+          },
+          "pair": {
+            "human": 286,
+            "model": 136
+          },
+          "trip2": {
+            "human": 34,
+            "model": 21
+          },
+          "sflush": {
+            "human": 0,
+            "model": 54
+          },
+          "bomb": {
+            "human": 2,
+            "model": 16
+          }
+        },
+        "wild": {
+          "human": {
+            "numerator": 10,
+            "denominator": 1150,
+            "rate": 0.008695652173913044
+          },
+          "model": {
+            "numerator": 166,
+            "denominator": 1150,
+            "rate": 0.1443478260869565
+          }
+        },
+        "meanCards": {
+          "human": 2.7304347826086954,
+          "model": 3.5356521739130433
+        }
+      },
+      "follow": {
+        "n": 5399,
+        "pass": {
+          "human": {
+            "numerator": 3054,
+            "denominator": 5399,
+            "rate": 0.5656603074643453
+          },
+          "model": {
+            "numerator": 1983,
+            "denominator": 5399,
+            "rate": 0.3672902389331358
+          }
+        },
+        "humanPassModelPlays": 1433,
+        "humanPlaysModelPasses": 362
+      },
+      "partner": {
+        "n": 1367,
+        "play": {
+          "human": {
+            "numerator": 172,
+            "denominator": 1367,
+            "rate": 0.1258229700073153
+          },
+          "model": {
+            "numerator": 399,
+            "denominator": 1367,
+            "rate": 0.2918800292611558
+          }
+        }
+      },
+      "bomb": {
+        "n": 5655,
+        "play": {
+          "human": {
+            "numerator": 598,
+            "denominator": 5655,
+            "rate": 0.10574712643678161
+          },
+          "model": {
+            "numerator": 1928,
+            "denominator": 5655,
+            "rate": 0.3409372236958444
+          }
+        }
+      },
+      "phases": {
+        "hand20plus": {
+          "numerator": 1319,
+          "denominator": 2956,
+          "rate": 0.4462110960757781
+        },
+        "hand10to19": {
+          "numerator": 1091,
+          "denominator": 2627,
+          "rate": 0.4153026265702322
+        },
+        "hand1to9": {
+          "numerator": 519,
+          "denominator": 966,
+          "rate": 0.5372670807453416
+        }
+      }
+    },
+    "017": {
+      "observedActions": 8335,
+      "decisionOpportunities": 6549,
+      "forcedOrAutoFinishExcluded": 1786,
+      "actualPlansMissingFromGenerator": 0,
+      "samePlan": {
+        "numerator": 2866,
+        "denominator": 6549,
+        "rate": 0.4376240647427088
+      },
+      "lead": {
+        "n": 1150,
+        "types": {
+          "full": {
+            "human": 130,
+            "model": 167
+          },
+          "single": {
+            "human": 432,
+            "model": 301
+          },
+          "pairs3": {
+            "human": 75,
+            "model": 110
+          },
+          "triple": {
+            "human": 66,
+            "model": 66
+          },
+          "straight": {
+            "human": 125,
+            "model": 275
+          },
+          "pair": {
+            "human": 286,
+            "model": 143
+          },
+          "trip2": {
+            "human": 34,
+            "model": 24
+          },
+          "sflush": {
+            "human": 0,
+            "model": 48
+          },
+          "bomb": {
+            "human": 2,
+            "model": 16
+          }
+        },
+        "wild": {
+          "human": {
+            "numerator": 10,
+            "denominator": 1150,
+            "rate": 0.008695652173913044
+          },
+          "model": {
+            "numerator": 154,
+            "denominator": 1150,
+            "rate": 0.13391304347826086
+          }
+        },
+        "meanCards": {
+          "human": 2.7304347826086954,
+          "model": 3.5678260869565217
+        }
+      },
+      "follow": {
+        "n": 5399,
+        "pass": {
+          "human": {
+            "numerator": 3054,
+            "denominator": 5399,
+            "rate": 0.5656603074643453
+          },
+          "model": {
+            "numerator": 1923,
+            "denominator": 5399,
+            "rate": 0.3561770698277459
+          }
+        },
+        "humanPassModelPlays": 1469,
+        "humanPlaysModelPasses": 338
+      },
+      "partner": {
+        "n": 1367,
+        "play": {
+          "human": {
+            "numerator": 172,
+            "denominator": 1367,
+            "rate": 0.1258229700073153
+          },
+          "model": {
+            "numerator": 409,
+            "denominator": 1367,
+            "rate": 0.2991953182150695
+          }
+        }
+      },
+      "bomb": {
+        "n": 5655,
+        "play": {
+          "human": {
+            "numerator": 598,
+            "denominator": 5655,
+            "rate": 0.10574712643678161
+          },
+          "model": {
+            "numerator": 1954,
+            "denominator": 5655,
+            "rate": 0.34553492484526965
+          }
+        }
+      },
+      "phases": {
+        "hand20plus": {
+          "numerator": 1265,
+          "denominator": 2956,
+          "rate": 0.42794316644113667
+        },
+        "hand10to19": {
+          "numerator": 1081,
+          "denominator": 2627,
+          "rate": 0.4114960030452988
+        },
+        "hand1to9": {
+          "numerator": 520,
+          "denominator": 966,
+          "rate": 0.5383022774327122
+        }
+      }
+    }
+  },
+  "assistance": {
+    "human-assisted": {
+      "observedActions": 790,
+      "decisionOpportunities": 623,
+      "forcedOrAutoFinishExcluded": 167,
+      "actualPlansMissingFromGenerator": 0,
+      "samePlan": {
+        "numerator": 295,
+        "denominator": 623,
+        "rate": 0.47351524879614765
+      },
+      "lead": {
+        "n": 93,
+        "types": {
+          "single": {
+            "human": 33,
+            "model": 24
+          },
+          "trip2": {
+            "human": 6,
+            "model": 4
+          },
+          "full": {
+            "human": 13,
+            "model": 13
+          },
+          "pair": {
+            "human": 16,
+            "model": 13
+          },
+          "pairs3": {
+            "human": 12,
+            "model": 21
+          },
+          "straight": {
+            "human": 2,
+            "model": 8
+          },
+          "triple": {
+            "human": 9,
+            "model": 6
+          },
+          "sflush": {
+            "human": 0,
+            "model": 1
+          },
+          "bomb": {
+            "human": 2,
+            "model": 3
+          }
+        },
+        "wild": {
+          "human": {
+            "numerator": 0,
+            "denominator": 93,
+            "rate": 0
+          },
+          "model": {
+            "numerator": 18,
+            "denominator": 93,
+            "rate": 0.1935483870967742
+          }
+        },
+        "meanCards": {
+          "human": 3.053763440860215,
+          "model": 3.6666666666666665
+        }
+      },
+      "follow": {
+        "n": 530,
+        "pass": {
+          "human": {
+            "numerator": 310,
+            "denominator": 530,
+            "rate": 0.5849056603773585
+          },
+          "model": {
+            "numerator": 197,
+            "denominator": 530,
+            "rate": 0.37169811320754714
+          }
+        },
+        "humanPassModelPlays": 141,
+        "humanPlaysModelPasses": 28
+      },
+      "partner": {
+        "n": 134,
+        "play": {
+          "human": {
+            "numerator": 25,
+            "denominator": 134,
+            "rate": 0.1865671641791045
+          },
+          "model": {
+            "numerator": 41,
+            "denominator": 134,
+            "rate": 0.30597014925373134
+          }
+        }
+      },
+      "bomb": {
+        "n": 520,
+        "play": {
+          "human": {
+            "numerator": 47,
+            "denominator": 520,
+            "rate": 0.09038461538461538
+          },
+          "model": {
+            "numerator": 163,
+            "denominator": 520,
+            "rate": 0.31346153846153846
+          }
+        }
+      },
+      "phases": {
+        "hand20plus": {
+          "numerator": 158,
+          "denominator": 319,
+          "rate": 0.4952978056426332
+        },
+        "hand10to19": {
+          "numerator": 86,
+          "denominator": 207,
+          "rate": 0.41545893719806765
+        },
+        "hand1to9": {
+          "numerator": 51,
+          "denominator": 97,
+          "rate": 0.5257731958762887
+        }
+      }
+    },
+    "human-assistance-unknown": {
+      "observedActions": 8335,
+      "decisionOpportunities": 6549,
+      "forcedOrAutoFinishExcluded": 1786,
+      "actualPlansMissingFromGenerator": 0,
+      "samePlan": {
+        "numerator": 2929,
+        "denominator": 6549,
+        "rate": 0.447243854023515
+      },
+      "lead": {
+        "n": 1150,
+        "types": {
+          "full": {
+            "human": 130,
+            "model": 168
+          },
+          "single": {
+            "human": 432,
+            "model": 310
+          },
+          "pairs3": {
+            "human": 75,
+            "model": 101
+          },
+          "triple": {
+            "human": 66,
+            "model": 71
+          },
+          "straight": {
+            "human": 125,
+            "model": 273
+          },
+          "pair": {
+            "human": 286,
+            "model": 136
+          },
+          "trip2": {
+            "human": 34,
+            "model": 21
+          },
+          "sflush": {
+            "human": 0,
+            "model": 54
+          },
+          "bomb": {
+            "human": 2,
+            "model": 16
+          }
+        },
+        "wild": {
+          "human": {
+            "numerator": 10,
+            "denominator": 1150,
+            "rate": 0.008695652173913044
+          },
+          "model": {
+            "numerator": 166,
+            "denominator": 1150,
+            "rate": 0.1443478260869565
+          }
+        },
+        "meanCards": {
+          "human": 2.7304347826086954,
+          "model": 3.5356521739130433
+        }
+      },
+      "follow": {
+        "n": 5399,
+        "pass": {
+          "human": {
+            "numerator": 3054,
+            "denominator": 5399,
+            "rate": 0.5656603074643453
+          },
+          "model": {
+            "numerator": 1983,
+            "denominator": 5399,
+            "rate": 0.3672902389331358
+          }
+        },
+        "humanPassModelPlays": 1433,
+        "humanPlaysModelPasses": 362
+      },
+      "partner": {
+        "n": 1367,
+        "play": {
+          "human": {
+            "numerator": 172,
+            "denominator": 1367,
+            "rate": 0.1258229700073153
+          },
+          "model": {
+            "numerator": 399,
+            "denominator": 1367,
+            "rate": 0.2918800292611558
+          }
+        }
+      },
+      "bomb": {
+        "n": 5655,
+        "play": {
+          "human": {
+            "numerator": 598,
+            "denominator": 5655,
+            "rate": 0.10574712643678161
+          },
+          "model": {
+            "numerator": 1928,
+            "denominator": 5655,
+            "rate": 0.3409372236958444
+          }
+        }
+      },
+      "phases": {
+        "hand20plus": {
+          "numerator": 1319,
+          "denominator": 2956,
+          "rate": 0.4462110960757781
+        },
+        "hand10to19": {
+          "numerator": 1091,
+          "denominator": 2627,
+          "rate": 0.4153026265702322
+        },
+        "hand1to9": {
+          "numerator": 519,
+          "denominator": 966,
+          "rate": 0.5372670807453416
+        }
+      }
+    },
+    "human-explicit-unassisted": {
+      "observedActions": 0,
+      "decisionOpportunities": 0,
+      "forcedOrAutoFinishExcluded": 0,
+      "actualPlansMissingFromGenerator": 0,
+      "samePlan": {
+        "numerator": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "lead": {
+        "n": 0,
+        "types": {},
+        "wild": {
+          "human": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          },
+          "model": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          }
+        },
+        "meanCards": {
+          "human": null,
+          "model": null
+        }
+      },
+      "follow": {
+        "n": 0,
+        "pass": {
+          "human": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          },
+          "model": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          }
+        },
+        "humanPassModelPlays": 0,
+        "humanPlaysModelPasses": 0
+      },
+      "partner": {
+        "n": 0,
+        "play": {
+          "human": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          },
+          "model": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          }
+        }
+      },
+      "bomb": {
+        "n": 0,
+        "play": {
+          "human": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          },
+          "model": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          }
+        }
+      },
+      "phases": {
+        "hand20plus": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "hand10to19": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "hand1to9": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        }
+      }
+    }
+  },
+  "intervals": {
+    "samePlan": {
+      "matches": 12,
+      "bootstrapReplicates": 2000,
+      "ci95": [
+        0.4275813044250933,
+        0.47580522057701113
+      ]
+    },
+    "followPassHumanMinusModel": {
+      "matches": 12,
+      "bootstrapReplicates": 2000,
+      "ci95": [
+        0.1769276748356246,
+        0.21444661360564649
+      ]
+    },
+    "partnerPlayHumanMinusModel": {
+      "matches": 12,
+      "bootstrapReplicates": 2000,
+      "ci95": [
+        -0.19543773119605423,
+        -0.12997347480106103
+      ]
+    },
+    "bombPlayHumanMinusModel": {
+      "matches": 12,
+      "bootstrapReplicates": 2000,
+      "ci95": [
+        -0.25925925925925924,
+        -0.20410094637223974
+      ]
+    }
+  },
+  "protocolSHA256": "d4d6f9bc52a3f45b12495b04c71b86a2c4dd1b0ff0bc85c8dacb10dc4b9952b2",
+  "inputManifestSHA256": "561b35e6ffe11879de6a735e6ec15f33eabb7d4375564871d6d4d345b47ca884",
+  "formalTrainingUpdates": 0,
+  "newSimulatedGames": 0,
+  "counterfactualContinuations": 0,
+  "completedAtUTC": "2026-11-15T16:54:33.060Z",
+  "limits": [
+    "109 completed game records across12 recorded match sessions, all current game records from Clint; not all human games played in the world or unuploaded/incomplete games",
+    "Absent assistance flag means unknown, not proven unassisted;790 assisted actions separated",
+    "Self-reported unverified_browser identity; no nickname-based identity claim",
+    "Raw029 and017 greedy policies including web finish/single conventions; not reason search or GuanZero",
+    "Plan keys group rank/shape, not physical copies; legal candidate coverage reported separately",
+    "No causal win-rate, action-quality or improvement claim from descriptive tactical choices",
+    "Only own hand/public history sent to network; no private-information solver, training or counterfactual continuation",
+    "Per-match bootstrap is conditional on12 recorded sessions; repeated players and incomplete match coverage limit population inference"
+  ]
+}

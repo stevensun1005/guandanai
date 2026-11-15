@@ -217,3 +217,5 @@ The fresh continuation window started at00:28Toronto on Nov15; training stops at
 The local029-reason dashboard now shows per-opponent live round win rates, W/L/D, completed rounds and terminal upgrade points. Only complete, deduplicated registered side-swapped pairs count. Live rates are descriptive; the final dual97.5% upgrade-point gates and frozen training remain unchanged.
 
 Human/model observational comparison: audit all current private cloud records and compare029 choices on the same public observations, separating assistance and automated actions. No human data enters training; no names, rooms or private deals are published. [Design](ai/research/evaluation/human-model-comparison-20261115/protocol.design.json).
+
+The full collected-human comparison is complete:109 game records across12 sessions,6549 decision opportunities. Human and029 choices differ most in passing, playing over a partner and bomb use; these are paired observational differences, not strength or training results. [Report](ai/research/evaluation/human-model-comparison-20261115/README.md).

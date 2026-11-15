@@ -1,0 +1,133 @@
+{
+  "atUTC": "2026-11-15T16:59:06.792Z",
+  "training": {
+    "finalStep": 7449,
+    "inherited": 3126,
+    "newUpdates": 4323,
+    "rounds": 52675,
+    "rows": 1642430,
+    "beliefSHA256": "bf318417bfc9922796f44467ccd1e690b3f4347b54bd017abea449f08668d36c",
+    "checkpointSHA256": "c2de4afd206714a7538c8008bfba783e30e058b96aef026533517ecf1a0e0aca"
+  },
+  "finished": {
+    "phase": "stopped",
+    "atUTC": "2026-11-15T16:45:00.564Z"
+  },
+  "evaluation": {
+    "complete": false,
+    "plannedRounds": 6000,
+    "completedRounds": 4548,
+    "tasks": {
+      "baseline-vs-old": {
+        "completedPairs": 1000,
+        "completedRounds": 2000,
+        "wins": 1042,
+        "losses": 958,
+        "draws": 0,
+        "meanUpgradePoints": 0.084
+      },
+      "final-vs-baseline": {
+        "completedPairs": 274,
+        "completedRounds": 548,
+        "wins": 260,
+        "losses": 288,
+        "draws": 0,
+        "meanUpgradePoints": -0.12408759124087591
+      },
+      "final-vs-old": {
+        "completedPairs": 1000,
+        "completedRounds": 2000,
+        "wins": 1006,
+        "losses": 994,
+        "draws": 0,
+        "meanUpgradePoints": 0.0165
+      }
+    },
+    "accept": false,
+    "reason": "Fixed11:45 cutoff; final-vs-start274/1000 pairs; no expansion or promotion"
+  },
+  "partialSummary": {
+    "complete": false,
+    "tasks": {
+      "baseline-vs-old": {
+        "plannedPairs": 1000,
+        "completedPairs": 1000,
+        "rounds": 2000,
+        "interval": {
+          "n": 1000,
+          "mean": 0.084,
+          "sd": 1.237123467756744,
+          "ci95": [
+            0.007322293062839116,
+            0.16067770693716088
+          ]
+        }
+      },
+      "final-vs-old": {
+        "plannedPairs": 1000,
+        "completedPairs": 1000,
+        "rounds": 2000,
+        "interval": {
+          "n": 1000,
+          "mean": 0.0165,
+          "sd": 1.2338963693318243,
+          "ci95": [
+            -0.059977689304537646,
+            0.09297768930453765
+          ]
+        }
+      },
+      "final-vs-baseline": {
+        "plannedPairs": 1000,
+        "completedPairs": 274,
+        "rounds": 548,
+        "interval": {
+          "n": 274,
+          "mean": -0.12408759124087591,
+          "sd": 0.6719961568271904,
+          "ci95": [
+            -0.20365726533544204,
+            -0.04451791714630979
+          ]
+        }
+      }
+    },
+    "accept": false,
+    "note": "Fixed-time partial sample; no full-strength or promotion conclusion",
+    "atUTC": "2026-11-15T16:45:00.563Z"
+  },
+  "processSupplement": {
+    "ownedComputeAlive": false,
+    "note": "Original Node PID-only completion audit saw reused console PIDs; verified current image, creation time and command. No unrelated process terminated.",
+    "observedAtUTC": "2026-11-15T16:56:47.3696462Z",
+    "ownedCompute": [],
+    "reusedPIDs": [
+      {
+        "pid": 35016,
+        "sameProcess": false,
+        "formerImage": "python.exe",
+        "currentImage": "conhost.exe"
+      },
+      {
+        "pid": 41840,
+        "sameProcess": false,
+        "formerImage": "python.exe",
+        "currentImage": "conhost.exe"
+      }
+    ]
+  },
+  "archive": {
+    "file": "reason-029-continuation-partial-research.zip",
+    "sha256": "0ab4253d43fdbe5e3438372d58b5d2b3a15da1b763de571694b110384349bd4c",
+    "bytes": 19630515,
+    "completeEvaluation": false,
+    "accepted": false,
+    "savedAtUTC": "2026-11-15T16:58:03.484128+00:00"
+  },
+  "matchingAdam": {
+    "states": 6,
+    "step": 7449,
+    "networkMatchesCheckpoint": true
+  },
+  "webPublished": false
+}
