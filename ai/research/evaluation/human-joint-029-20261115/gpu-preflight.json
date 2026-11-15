@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "device": "AMD Radeon RX 7800 XT",
+  "backend": "cuda:0",
+  "temporarySyntheticUpdates": 4,
+  "matchingAdamStates": 12,
+  "restoreNextUpdateEqual": true,
+  "gradientMaxPerTensor": [
+    0.2856192886829376,
+    0.14354635775089264,
+    0.1676996946334839,
+    0.13006584346294403,
+    0.1487109661102295,
+    0.05028701573610306,
+    0.08450298756361008,
+    0.038162991404533386,
+    0.09706652909517288,
+    0.04501824826002121,
+    1.718433141708374,
+    0.1973976343870163
+  ],
+  "onnxTorchMaxDifference": 5.900859832763672e-06,
+  "formalUpdates": 0,
+  "humanRowsUsed": 0,
+  "strengthEvidence": false
+}

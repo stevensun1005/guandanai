@@ -1,0 +1,86 @@
+{
+  "observedAtUTC": "2026-11-15T19:36:11.195575+00:00",
+  "sourceCommit": "463b2d7252d59875a891e6ad97ab90c1388fc2d7",
+  "sourceFiles": 380,
+  "protocolSHA256": "1b01018eb6e0fba9bbe3673343ab553ab11a40a2dea25570b662dea744359b1c",
+  "controllerPID": 53404,
+  "dashboardPID": 56784,
+  "supervisorPID": 2192,
+  "actualLearnerPID": 53988,
+  "actualGPU": "AMD Radeon RX 7800 XT",
+  "learner": {
+    "step": 1345,
+    "state": "waiting-for-data",
+    "ingestedRows": 688927,
+    "trainedRows": 2754560,
+    "humanRowsUsed": 676,
+    "humanLoss": {
+      "choiceNLL": 2.366947889328003,
+      "humanCandidateAnchorMSE": 0.007135005667805672,
+      "lastHumanBatch": 4
+    },
+    "gpuAllocatedBytes": 907645440,
+    "updatedAt": "2026-11-15T19:36:10Z"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 38008,
+      "matches": 402,
+      "decisions": 197229,
+      "nextSeedIndex": 409,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "slot": 1,
+      "pid": 33660,
+      "matches": 397,
+      "decisions": 195810,
+      "nextSeedIndex": 404,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "slot": 2,
+      "pid": 53092,
+      "matches": 375,
+      "decisions": 175713,
+      "nextSeedIndex": 382,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    },
+    {
+      "slot": 3,
+      "pid": 51040,
+      "matches": 326,
+      "decisions": 155774,
+      "nextSeedIndex": 326,
+      "failures": 0,
+      "provider": "dml",
+      "fallbackReason": null
+    }
+  ],
+  "latestCompleteExport": {
+    "version": "v000001135",
+    "file": "v000001135.onnx",
+    "sha256": "0763a0e93c0e0d0923cd44f06a13d12ff6e9a57678e9dbc23ceb3d1072e9fdfe",
+    "step": 1135,
+    "trainedRows": 2324480,
+    "ingestedRows": 631284,
+    "publishedAt": "2026-11-15T19:35:38Z"
+  },
+  "frozenLeague": {
+    "members": 1,
+    "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768"
+  },
+  "initialModelSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "trainingDeadlineUTC": "2026-11-15T23:30:47.966Z",
+  "deadlineUTC": "2026-11-16T02:30:47.966Z",
+  "evaluationRoundsSoFar": 0,
+  "webDefaultUnchanged": "029",
+  "resumeClaims": "Fresh run, not inheritedAdam/replay; live checkpoint not opened during Windows publication. Final matchingAdam/replay/exit audit will run after cutoff."
+}

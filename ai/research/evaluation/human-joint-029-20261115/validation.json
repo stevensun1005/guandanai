@@ -23,5 +23,9 @@
   "logSHA256": {
     "node": "b78cf5f25e1c1e5b04d4e498a9d526dbb43d3997a3f214f3427702009d2faa1b",
     "python": "3dc77772050b2032d1368029c07b3762c102c83b555d7acf7578008e2d48afdc"
-  }
+  },
+  "registeredGPUPreflight": "passed: synthetic joint loss,12Adam restore,next update equality,nativeONNX parity",
+  "actualTrainingStarted": true,
+  "firstObservedFormalUpdates": 1345,
+  "formalStrengthEvidence": false
 }
