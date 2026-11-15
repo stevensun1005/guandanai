@@ -694,6 +694,21 @@ function progressFor(stage, run, state, startMs, now) {
   if (stage.liveStatus) {
     const live = readJSON(p(stage.liveStatus));
     if (live) {
+      if (stage.liveFormat === 'updates') {
+        res.fraction = live.phase === 'complete' ? 1 : (live.elapsedFraction ?? null);
+        const phase =
+          {
+            training: '训练中',
+            'waiting-for-data': '等待完整终局样本',
+            stopped: '已停训',
+            complete: '已完成',
+            prepare: '准备中',
+            gpu: 'GPU预检',
+            train: '采样启动',
+          }[live.phase] || live.phase;
+        res.text = `${num(live.step)} 次GPU更新 · ${num(live.ingestedRows)} 终局样本行 · ${num(live.humanRowsUsed)} 真人动作曝光 · ${phase}`;
+        return res;
+      }
       res.fraction =
         live.phase === 'complete'
           ? 1

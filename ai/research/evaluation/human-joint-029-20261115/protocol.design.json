@@ -1,0 +1,69 @@
+{
+  "id": "human-joint-029-20261115",
+  "status": "design; no formal optimizer updates yet",
+  "initial029SHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "method": "Same full12-tensor567feature network, newAdam and emptyMC replay; single-round terminal return remains primary, teacher029regularization prevents rapid drift; human action preference added sparsely, not pureCE",
+  "objective": {
+    "everyUpdate": "MSE(Q, signed final round upgrade points) +0.1*MSE(Q,Q029) onMC replay actions",
+    "every8Updates": "Additionally0.2*mean legal-face human-choice CE +0.1*mean candidateQ anchor MSE;4 train-only human decisions, deterministic step-indexed subsampling",
+    "humanExposureCap": "40*5217 train decisions=208680 exposures, not guaranteed complete epochs",
+    "forbidden": "No tactical tag loss/reward, hand-prediction target, human outcomes, private opponent cards, names, rooms, validation/test labels or Clint strategy"
+  },
+  "learner": {
+    "device": "ROCm cuda:0",
+    "batch": 2048,
+    "learningRate": 1e-06,
+    "capacity": 2000000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "threads": 1,
+    "seed": 2026111507,
+    "gradClip": 1,
+    "targetMatchWeight": 0,
+    "anchorWeight": 0.1,
+    "newAdam": true
+  },
+  "sampling": {
+    "actors": 4,
+    "DMLGamesPerActor": 8,
+    "cacheLimit": 12,
+    "self": 0.5,
+    "leagueFixed029": 0.5,
+    "rule": 0,
+    "noGate": true,
+    "noSnapshots": true,
+    "maximumRoundsPerRoot": 200,
+    "rootListSHA256": "7c1824344877e031f9682468c8f93d8ca202fc76548e0b6c1683b3a626afa600",
+    "rootsPerSlot": 60000
+  },
+  "humanData": {
+    "trainSessions": 10,
+    "validationSessions": 1,
+    "testSessions": 1,
+    "trainDecisions": 5217,
+    "validationDecisions": 632,
+    "testDecisions": 700,
+    "unknownAssistanceNotCalledUnassisted": true,
+    "retrospectivePreviouslyInspected": true,
+    "noPopulationOrProspectiveClaim": true
+  },
+  "stopping": "New once-only4h training plus3h evaluation/save; final window learner, no peak selection, no retry extension; original closed studies untouched",
+  "evaluation": {
+    "groups": [
+      "final vs029",
+      "final vs oldreason9001",
+      "initial029 vs oldreason9001 on same500deals as final-old"
+    ],
+    "roundsEach": 1000,
+    "pairsEach": 500,
+    "uniqueHeldoutDeals": 1000,
+    "totalRounds": 3000,
+    "oldReasonPolicy": "Original017 plus initialbelief-v1 search;50s native reason/3s solver; cold each round; fallbacks recorded, not browser-latency acceptance",
+    "humanReview": "Final versus029 on existing validation632/test700; no selection/optimization using them",
+    "statistics": "Each opponent W/L/D and signed upgrade95% deal-pair clusterCI; common-oldreason paired differences retain covariance, no pooled winrate",
+    "exploratoryPointGoal": "Retrospective test human accuracy delta>=5pp and NLLlower; final-vs029 upgrade95% lower>0; paired final-minus029 versusoldreason95%lower>0. Report each condition separately; not independent human acceptance or automatic promotion",
+    "noDeployment": true
+  },
+  "dashboard": "127.0.0.1:8767; actual GPU updates, MC rows, human exposures/loss, then per-opponent live complete-pair results",
+  "seedAuditSHA256": "2f55145b6e192975c2be4338a92f6341a403aa0b49f2927f041f082f3918369f"
+}

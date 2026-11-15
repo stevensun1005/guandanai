@@ -804,3 +804,40 @@ test('actor stage (search-actor.mjs): finished blocks only, deadline cap, manife
     rmSync(run, { recursive: true, force: true });
   }
 });
+
+test('continuous joint progress shows actual rows and updates, with no invented epoch counter', () => {
+  const run = mkdtempSync(join(tmpdir(), 'joint-progress-'));
+  try {
+    writeFileSync(join(run, 'stages.log'), '2029-01-01T00:00:00Z START train\n');
+    writeJSON(join(run, 'live.json'), {
+      step: 17,
+      ingestedRows: 150000,
+      humanRowsUsed: 12,
+      elapsedFraction: 0.1,
+      phase: 'training',
+    });
+    const s = snapshot(
+      run,
+      {
+        deadline: '2029-01-02T00:00:00Z',
+        stages: [
+          {
+            key: 'train',
+            kind: 'descriptive',
+            liveStatus: 'live.json',
+            liveFormat: 'updates',
+            rule: { type: 'descriptive' },
+          },
+        ],
+      },
+      { machine: false, psText: '' },
+    );
+    assert.match(s.stages[0].progress.text, /17 次GPU更新/);
+    assert.match(s.stages[0].progress.text, /150,000 终局样本行/);
+    assert.match(s.stages[0].progress.text, /12 真人动作曝光/);
+    assert.doesNotMatch(s.stages[0].progress.text, /轮上限/);
+    assert.equal(s.stages[0].progress.fraction, 0.1);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});

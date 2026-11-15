@@ -1,0 +1,88 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { validateJointProtocol, evaluationPlans } from '../tools/run-human-joint.mjs';
+import { windowPlan } from '../../danMCai/training/continuous/windows-window.mjs';
+const start = Date.parse('2030-01-01T00:00:00Z');
+function plan() {
+  return {
+    id: 'human-joint-029-20261115',
+    humanTrainingAuthorized: true,
+    webDeploymentAuthorized: false,
+    restartExtendsDeadline: false,
+    startedAtUTC: new Date(start).toISOString(),
+    trainingDeadlineUTC: new Date(start + 4 * 3600000).toISOString(),
+    deadlineUTC: new Date(start + 7 * 3600000).toISOString(),
+    initialModel: '/029.onnx',
+    initialModelSHA256: '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768',
+    sourceRoot: '/frozen',
+    sourceCommit: 'frozen',
+    sourceSHA256: {},
+    python: 'python',
+    initialConfig: {
+      initial: '/029.onnx',
+      learner: { targetMatchWeight: 0, anchorWeight: 0.1, learningRate: 1e-6 },
+      actorMix: { self: 0.5, league: 0.5, rule: 0 },
+      researchNoGate: true,
+      humanImitation: {
+        choiceWeight: 0.2,
+        candidateAnchorWeight: 0.1,
+        everyUpdates: 8,
+        batchDecisions: 4,
+        maxPasses: 40,
+      },
+    },
+    heldout: {
+      vs029: Array.from({ length: 500 }, (_, i) => i),
+      vsreason: Array.from({ length: 500 }, (_, i) => i + 500),
+    },
+    evaluationTemplate: { plannedRounds: 1000, plannedPairs: 500 },
+    evaluationModels: {
+      raw029: { sha256: 'raw' },
+      old017: { sha256: 'old' },
+      belief: { sha256: 'belief' },
+    },
+  };
+}
+
+test('joint registration freezes objective, independent blocks and4h+3h nonrenewable bounds', () => {
+  const p = plan();
+  assert.doesNotThrow(() => validateJointProtocol(p, start + 1000));
+  for (const mutate of [
+    (q) => (q.initialConfig.actorMix.rule = 0.1),
+    (q) => (q.initialConfig.learner.targetMatchWeight = 0.2),
+    (q) => (q.webDeploymentAuthorized = true),
+    (q) => (q.initialConfig.humanImitation.choiceWeight = 2),
+    (q) => (q.deadlineUTC = new Date(start + 8 * 3600000).toISOString()),
+    (q) => (q.heldout.vsreason[0] = 0),
+  ]) {
+    const q = plan();
+    mutate(q);
+    assert.throws(() => validateJointProtocol(q, start + 1000));
+  }
+  assert.throws(() => validateJointProtocol(p, start + 4 * 3600000));
+});
+
+test('automatic evaluation fixes final-only model and common-opponent covariance without a new clock', () => {
+  const p = plan();
+  const groups = evaluationPlans(p, '/new-run', { sha256: 'final' });
+  assert.deepEqual(
+    groups.map((g) => g.name),
+    ['vs029', 'vsreason', '029vsreason'],
+  );
+  assert.equal(groups[0].plan.models.challenger.sha256, 'final');
+  assert.equal(groups[1].plan.models.reason.sha256, 'old');
+  assert.equal(groups[2].plan.models.challenger.sha256, 'raw');
+  assert.equal(groups[2].plan.models.belief.sha256, 'belief');
+  assert.deepEqual(groups[1].plan.tasks[0].seeds, groups[2].plan.tasks[0].seeds);
+  assert.deepEqual(groups[0].plan.opponentPolicy, { kind: 'raw' });
+  assert.equal(groups[1].plan.opponentPolicy, undefined);
+  const reg = {
+    startUTC: p.trainingDeadlineUTC,
+    deadlineUTC: p.deadlineUTC,
+    durationHours: 3,
+    restartExtendsDeadline: false,
+  };
+  const recovered = windowPlan(reg, 3, start + 5 * 3600000);
+  assert.equal(recovered.remainingHours, 2);
+  assert.equal(recovered.schedule.deadlineUTC, p.deadlineUTC);
+});

@@ -199,6 +199,12 @@ class Learner:
             self.trained_rows = saved["trainedRows"]
             self.ingested_rows = saved["ingestedRows"]
             self.counted = set(saved.get("countedShards", []))
+        self.human = None
+        if self.config.get("humanImitation"):
+            if self.extras_mode or float(self.settings["targetMatchWeight"]) != 0 or self.anchor is None:
+                raise ValueError("Human joint loss requires plain terminal-round Q and a frozen anchor")
+            from human_joint import HumanRegularizer
+            self.human = HumanRegularizer(self.config["humanImitation"], self.device)
         self.version = latest["version"]
         self.last_export = time.time()
         self.log(
@@ -297,6 +303,10 @@ class Learner:
             loss = loss + float(self.settings["anchorWeight"]) * torch.mean(
                 (prediction - reference) ** 2
             )
+        if self.human is not None:
+            extra = self.human.loss(self.net, self.anchor, self.step)
+            if extra is not None:
+                loss = loss + extra
         if not torch.isfinite(loss):
             self.log({"event": "non-finite-loss", "step": self.step})
             raise SystemExit(3)
@@ -370,6 +380,9 @@ class Learner:
                 "ingestedRows": self.ingested_rows,
                 "trainedRows": self.trained_rows,
                 "lossEMA": self.loss_ema,
+                **({"humanRowsUsed": self.human.rows_used(self.step),
+                    "humanTrainingDecisions": len(self.human.ids), "humanExposureCap": self.human.cap,
+                    "humanLoss": self.human.last} if self.human is not None else {}),
                 "replayRatio": self.trained_rows / max(1, self.ingested_rows),
                 "stepsPerSecond": self.step_count / elapsed,
                 "updatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),

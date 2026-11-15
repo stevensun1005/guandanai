@@ -1,0 +1,13 @@
+{
+  "ownerRequest": "那就按你说的从029重新开始训练，既要像真人也要能赢，进度放dashboard上，训练完自动评测",
+  "durationDelegatedEarlier": "训练到啥时候都可以，dashboard上也显示训练进度。",
+  "scope": "New local Windows danMCai run only; exact existing authorized human snapshot, fresh simulated terminal-round returns, frozen029prior; do not modify closed runs or website",
+  "humanTrainingAuthorized": true,
+  "webDeploymentAuthorized": false,
+  "newAdam": true,
+  "emptyReplay": true,
+  "existingNegativeResultsPreserved": true,
+  "fixedTrainingHours": 4,
+  "evaluationAndSaveHours": 3,
+  "restartExtendsDeadline": false
+}

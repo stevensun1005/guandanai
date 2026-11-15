@@ -1,0 +1,27 @@
+{
+  "node": {
+    "tests": 529,
+    "passed": 493,
+    "skipped": 36,
+    "failed": 0,
+    "durationMs": 61963.6266
+  },
+  "python": {
+    "danMCaiModulesRunSeparately": 21,
+    "researchTests": 43,
+    "sharedTests": 4,
+    "moduleProcesses": 23,
+    "totalTests": 154,
+    "skipped": 1,
+    "failed": 0
+  },
+  "format": "passed",
+  "build": "passed",
+  "webVersionUnchanged": "d567b97606",
+  "formalUpdates": 0,
+  "GPUPreflight": "Pending registered frozen-source execution",
+  "logSHA256": {
+    "node": "b78cf5f25e1c1e5b04d4e498a9d526dbb43d3997a3f214f3427702009d2faa1b",
+    "python": "3dc77772050b2032d1368029c07b3762c102c83b555d7acf7578008e2d48afdc"
+  }
+}
