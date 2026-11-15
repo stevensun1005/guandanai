@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "human-model-comparison-20261115",
+  "authorization": "Owner requested research on all currently collected human games and differences from model play",
+  "scope": "Read-only observational D1 census; no human training, no full-information scoring or counterfactual continuations",
+  "snapshot": {
+    "downloadedRows": 124,
+    "cursor": 124,
+    "gameRows": 109,
+    "testRows": 15,
+    "validReplay": 124,
+    "matchSessions": 12,
+    "source": "Shared private D1 export for this site and Clint; present game rows all Clint"
+  },
+  "models": [
+    "029/v000061013",
+    "017/v000855042"
+  ],
+  "primary": "029 same-public-observation action comparison on unflagged human decisions, assistance status unknown when absent",
+  "filters": "Exclude test, bot, timeout and assisted=true from primary. Report assistance groups separately, no override. Exclude single-plan/automatic-finishing choices from decision-opportunity comparisons.",
+  "metrics": [
+    "Equivalent rank/shape plan agreement",
+    "Lead card types and count",
+    "Pass rate where a legal reply exists",
+    "Overtaking partner where legal reply exists",
+    "Bomb choice where legal bomb exists"
+  ],
+  "inference": "CPU single-thread; own hand/public history/counts only; all other hidden cards and final result excluded from network inputs",
+  "uncertainty": "2000 whole-match bootstrap replicates seed2026111507; 12 sessions are not 12 authenticated independent people; descriptive, no causal strength claim",
+  "privacy": "No names, rooms, raw hands, trajectories, keys or raw match IDs in public summaries; raw snapshot and per-action diagnostics stay ignored",
+  "existingRunProtection": "No changes to active frozen reason training/evaluation, models, cutoff or webpage default",
+  "plannedExecutionMinutes": 20
+}
