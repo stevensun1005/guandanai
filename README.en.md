@@ -213,3 +213,5 @@ The desktop lobby now uses Clint’s2:3 layout: square equal-cell table/start on
 New029-reason continuation is being prepared from the3126-update belief and matchingAdam, with fresh simulated data and heldout deals. Training stops Nov15 09:00Toronto, evaluation11:45 and saving12:00; crossing midnight does not extend it. Old results/runs and web029 remain. Actual start is recorded separately. [Protocol](ai/research/evaluation/reason-029-continue-20261115/README.md).
 
 The fresh continuation window started at00:28Toronto on Nov15; training stops at09:00, followed by evaluation and local packaging. [Startup evidence](ai/research/evaluation/reason-029-continue-20261115/startup.json).
+
+The local029-reason dashboard now shows per-opponent live round win rates, W/L/D, completed rounds and terminal upgrade points. Only complete, deduplicated registered side-swapped pairs count. Live rates are descriptive; the final dual97.5% upgrade-point gates and frozen training remain unchanged.

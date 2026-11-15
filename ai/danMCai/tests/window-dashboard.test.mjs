@@ -11,12 +11,69 @@ import {
   loadConfig,
   parseStagesLog,
   pathInCommands,
+  roundPairTally,
   shortOfPlan,
   snapshot,
   verdict,
 } from '../../research/tools/window-dashboard.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
+
+test('live round win rates count only complete registered pairs, separated by task', () => {
+  const run = mkdtempSync(join(tmpdir(), 'round-win-rates-'));
+  try {
+    const task = { id: 'final', seeds: [11, 12, 13] };
+    const row = (seed, points, id = 'final', hash = 'registered') => ({
+      task: id,
+      seed,
+      protocolSHA256: hash,
+      games: points.map((signedPoints, team) => ({ team, signedPoints, order: [0, 1, 2, 3] })),
+    });
+    const json = (r) => JSON.stringify(r) + '\n';
+    writeFileSync(
+      join(run, 'worker-0.jsonl'),
+      json(row(11, [3, -1])) +
+        json(row(12, [2])) +
+        json(row(12, [1, 1], 'other')) +
+        json(row(13, [1, 1], 'final', 'foreign')) +
+        JSON.stringify(row(13, [1, 1])),
+    );
+    writeFileSync(
+      join(run, 'worker-1.jsonl'),
+      json(row(11, [3, -1])) + json(row(12, [0, -2])) + json(row(99, [1, 1])),
+    );
+    const tally = roundPairTally(run, task, 'registered');
+    assert.deepEqual(tally, {
+      pairs: 2,
+      plannedPairs: 3,
+      rounds: 4,
+      wins: 1,
+      losses: 2,
+      draws: 1,
+      winRate: 0.25,
+      meanUpgradePoints: 0,
+    });
+    writeJSON(join(run, 'protocol.json'), { tasks: [task, { id: 'waiting', seeds: [14] }] });
+    writeJSON(join(run, 'registration.json'), { protocolSHA256: 'registered' });
+    const config = {
+      deadline: '2029-01-01T00:00:00Z',
+      stages: [],
+      roundPairTasks: [
+        { id: 'final', label: '最终对旧reason' },
+        { id: 'waiting', label: '尚未开始' },
+      ],
+    };
+    const live = snapshot(run, config, { machine: false, psText: '' }).roundPairTasks;
+    assert.equal(live[0].winRate, 0.25);
+    assert.equal(live[0].state, '进行中');
+    assert.match(live[0].verdict, /尚无最终判定/);
+    assert.equal(live[1].winRate, null);
+    assert.equal(live[1].state, '尚未开始');
+    assert.match(PAGE, /单局胜率（实时）/);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
 
 test('completed publication cards render machine-recorded facts without game scores or acceptance', () => {
   const run = mkdtempSync(join(tmpdir(), 'publication-panel-'));

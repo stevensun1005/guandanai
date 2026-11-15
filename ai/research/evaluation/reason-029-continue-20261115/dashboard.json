@@ -932,6 +932,9 @@
       "rule": {
         "type": "descriptive",
         "text": "完整1000交换对每组；最终判定见双97.5%门槛"
+      },
+      "paths": {
+        "result": "."
       }
     },
     {
@@ -940,7 +943,8 @@
       "kind": "midgame",
       "total": 1000,
       "paths": {
-        "out": "panel/final-vs-baseline"
+        "out": "panel/final-vs-baseline",
+        "result": "."
       },
       "rule": {
         "type": "descriptive",
@@ -958,6 +962,20 @@
         "type": "descriptive",
         "text": "旧不确定结果保留；不发布未通过模型"
       }
+    }
+  ],
+  "roundPairTasks": [
+    {
+      "id": "baseline-vs-old",
+      "label": "续训起点3126 对旧reason"
+    },
+    {
+      "id": "final-vs-old",
+      "label": "本轮最终7449 对旧reason"
+    },
+    {
+      "id": "final-vs-baseline",
+      "label": "本轮最终7449 对续训起点3126"
     }
   ]
 }

@@ -10,7 +10,7 @@ import { guanzeroCards } from './guanzero-stages.mjs';
  *
  * Verdicts come only from the preregistered rule type in the config: heldout (lower bound > 0 is
  * positive evidence), gate (lower bound > 0 passes a development gate), dev (always 开发检查) or
- * descriptive. Nothing here is a win rate or a strength claim.
+ * descriptive. Live win rates are descriptive complete-round counts, never a strength verdict.
  */
 import { createServer } from 'node:http';
 import { execFileSync } from 'node:child_process';
@@ -298,6 +298,62 @@ export function matchEvalTally(dir) {
     roundWinRate: rounds.length ? rounds.filter((r) => r.win).length / rounds.length : null,
     side0: side(0),
     side1: side(1),
+  };
+}
+
+/** Only committed complete side-swapped pairs from the registered task; never in-flight games. */
+export function roundPairTally(dir, task, protocolSHA256) {
+  const seeds = new Set(task.seeds),
+    seen = new Set();
+  let wins = 0,
+    losses = 0,
+    draws = 0,
+    points = 0;
+  for (const file of listDir(dir).filter((f) => /^worker-\d+\.jsonl$/.test(f))) {
+    for (const line of readText(join(dir, file)).split('\n').slice(0, -1)) {
+      let row;
+      try {
+        row = JSON.parse(line);
+      } catch {
+        continue;
+      }
+      if (
+        row?.task !== task.id ||
+        row.protocolSHA256 !== protocolSHA256 ||
+        !seeds.has(row.seed) ||
+        seen.has(row.seed) ||
+        !Array.isArray(row.games) ||
+        row.games.length !== 2 ||
+        !row.games.every(
+          (g, i) =>
+            g.team === i &&
+            Array.isArray(g.order) &&
+            new Set(g.order).size === 4 &&
+            g.order.every((p) => [0, 1, 2, 3].includes(p)) &&
+            Number.isInteger(g.signedPoints) &&
+            Math.abs(g.signedPoints) <= 3,
+        )
+      )
+        continue;
+      seen.add(row.seed);
+      for (const game of row.games) {
+        wins += game.signedPoints > 0;
+        losses += game.signedPoints < 0;
+        draws += game.signedPoints === 0;
+        points += game.signedPoints;
+      }
+    }
+  }
+  const rounds = wins + losses + draws;
+  return {
+    pairs: seen.size,
+    plannedPairs: seeds.size,
+    rounds,
+    wins,
+    losses,
+    draws,
+    winRate: rounds ? wins / rounds : null,
+    meanUpgradePoints: rounds ? points / rounds : null,
   };
 }
 
@@ -981,6 +1037,31 @@ export function snapshot(run, config, options = {}) {
   const psText = options.psText ?? processList();
   const deadline = Date.parse(config.deadline);
   const log = parseStagesLog(readText(join(run, 'stages.log')));
+  const plan = config.roundPairTasks ? readJSON(join(run, 'protocol.json')) : null;
+  const registration = plan ? readJSON(join(run, 'registration.json')) : null;
+  const finalResults = plan ? readJSON(join(run, 'results.json')) : null;
+  const roundPairTasks = (config.roundPairTasks || []).map((label) => {
+    const task = plan?.tasks?.find((t) => t.id === label.id);
+    if (!task || !registration?.protocolSHA256) return { ...label, unavailable: true };
+    const tally = roundPairTally(run, task, registration.protocolSHA256);
+    return {
+      ...label,
+      ...tally,
+      state:
+        tally.pairs === tally.plannedPairs
+          ? '已完成'
+          : existsSync(join(run, 'FINISHED'))
+            ? '已停止，未完成'
+            : tally.pairs
+              ? '进行中'
+              : '尚未开始',
+      verdict: finalResults
+        ? finalResults.accept
+          ? '完整评测双门槛通过'
+          : '完整评测双门槛未通过'
+        : '尚无最终判定；实时胜率不作为提升结论',
+    };
+  });
   const stop =
     existsSync(join(run, 'STOP')) ||
     (!!config.guanzeroRun && existsSync(join(config.guanzeroRun, 'STOP')));
@@ -1092,6 +1173,7 @@ export function snapshot(run, config, options = {}) {
     ),
     stages,
     orchestrators,
+    roundPairTasks,
     markers: log.markers.slice(-6).map((m) => ({ at: eastern(m.at), text: m.text })),
     machine: options.machine === false ? null : machine(run),
     readAt: new Date(now).toISOString(),
@@ -1135,9 +1217,10 @@ main{max-width:1080px;margin:0 auto;padding:20px 16px}h1{font-size:20px;margin:0
 </style></head><body><main>
 <h1 id="title">研究窗口面板</h1><div class="sub" id="sub">读取中…</div>
 <div class="card now" id="now"></div>
+<div class="grid" id="live-rounds"></div>
 <div class="grid" id="grid"></div>
 <div class="stages" id="stages"></div>
-<p class="note">只读面板：每 3 秒读取运行目录里的 stages.log、各阶段日志和结果文件，不控制任何进程。所有时间为美东（多伦多）。“开发检查”只是开发牌局上的诊断，不是验收；只有预登记的留出评测按“95% 区间下界 &gt;0 为正向证据”判定。面板上的分数是每副焦点队平均升级分、配对差或推断质量，不是胜率，也不代表整体棋力。</p>
+<p class="note">只读面板：每 3 秒读取运行目录里的真实文件，不控制任何进程。所有时间为美东（多伦多）。实时单局胜率＝胜局／已完成单局，只纳入两局均完成的交换对，各对手分别显示，不合并。中途胜率不作提升判定；最终结论按本批预登记的升级分、置信水平与完整门槛判定。“开发检查”不是独立验收，升级分和推断质量也不是胜率。</p>
 </main><script>
 const f=(n,d=0)=>n==null||!isFinite(n)?'—':Number(n).toLocaleString('zh-CN',{maximumFractionDigits:d,minimumFractionDigits:d});
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1157,6 +1240,7 @@ return h+'</div>'}
 async function tick(){let s;try{s=await (await fetch('api/status',{cache:'no-store'})).json()}catch(e){document.getElementById('sub').innerHTML=pill('面板连接中断','bad');return}
 if(s.error){document.getElementById('sub').textContent=s.error;return}
 const W=s.window,N=s.now,M=s.machine||{};document.getElementById('title').textContent=W.title;document.title=W.title;
+document.getElementById('live-rounds').innerHTML=(s.roundPairTasks||[]).map(t=>'<div class="card live-round"><h2>'+esc(t.label)+'</h2>'+pill(t.state||'读取中',t.state==='已完成'?'ok':'mute')+'<div class="big">'+(t.winRate==null?'—':f(t.winRate*100,2)+'%')+'</div><div class="note">单局胜率（实时）</div>'+bar(t.plannedPairs?t.pairs/t.plannedPairs:null)+'<div class="row"><span>已完成单局</span><span>'+f(t.rounds)+' / '+f(t.plannedPairs*2)+'</span></div><div class="row"><span>胜／负／平</span><span>'+f(t.wins)+' / '+f(t.losses)+' / '+f(t.draws)+'</span></div><div class="row"><span>每局平均升级分</span><span>'+f(t.meanUpgradePoints,4)+'</span></div><p class="note">'+esc(t.verdict||'尚无可读结果')+'</p></div>').join('');
 document.getElementById('sub').innerHTML=(W.stop?pill('已放 STOP','bad'):pill('剩 '+W.remainingText,'ok'))+' &nbsp;截止 '+esc(W.deadlineText)+' · 读取于 '+new Date(s.readAt).toLocaleTimeString('zh-CN',{timeZone:'America/Toronto',hour12:false})+' 美东';
 document.getElementById('now').innerHTML='<h2>现在在做什么</h2>'+pill(N.headline,N.tone)+(N.running.length?N.running.map(r=>'<div class="item"><b>'+esc(r.title)+'</b>'+bar(r.fraction)+'<div class="row"><span class="num">'+esc(r.text)+'</span><span>'+(r.etaText?'预计 '+esc(r.etaText):'')+'</span></div>'+(r.warning?'<div class="warnline">'+esc(r.warning)+'</div>':'')+'</div>').join(''):'<p>没有阶段在运行。</p>')+'<p><span style="color:var(--muted)">接下来：</span>'+(N.next.length?N.next.map(x=>esc(x.title)+(x.after?'（'+esc(x.after)+'）':'')).join('；'):'—')+'</p>';
 const c=s.counts||{};
