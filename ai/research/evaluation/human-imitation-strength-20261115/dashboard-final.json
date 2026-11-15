@@ -1,0 +1,66 @@
+{
+  "title": "真人模仿模型：两组各1000局已完成",
+  "deadline": "2026-11-15T20:54:37.061Z",
+  "note": "已完成2000局，无训练或评测继续运行。对029/旧reason各308胜692负，升级分分别−1.001/−1.056；窗口倒计时仅为原登记上限。模仿一致率提高不等于棋力提高，不晋升或发布；保留此前训练历史。",
+  "roundPairTasks": [
+    {
+      "id": "head-to-head",
+      "run": "vs029",
+      "label": "真人模仿模型 vs029（1000局）"
+    },
+    {
+      "id": "head-to-head",
+      "run": "vsreason",
+      "label": "真人模仿模型 vs旧reason9001（1000局）"
+    }
+  ],
+  "stages": [
+    {
+      "key": "vs029",
+      "title": "对029最终胜率/升级分区间",
+      "kind": "descriptive",
+      "doneWhen": [
+        "vs029/summary.json"
+      ],
+      "paths": {
+        "out": "vs029",
+        "result": "vs029/final-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "独立500牌副簇区间；不自动晋升或发布"
+      }
+    },
+    {
+      "key": "vsreason",
+      "title": "对旧reason最终胜率/升级分区间",
+      "kind": "descriptive",
+      "doneWhen": [
+        "vsreason/summary.json"
+      ],
+      "paths": {
+        "out": "vsreason",
+        "result": "vsreason/final-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "独立500牌副簇区间；不自动晋升或发布"
+      }
+    },
+    {
+      "key": "history",
+      "title": "此前真实GPU训练/验证逐轮记录",
+      "kind": "descriptive",
+      "doneWhen": [
+        "../human-imitation-overall-20261115/results.json"
+      ],
+      "paths": {
+        "result": "../human-imitation-overall-20261115/history-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "此前21轮早停，按验证选第17轮；本项评测零训练"
+      }
+    }
+  ]
+}

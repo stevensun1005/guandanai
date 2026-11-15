@@ -1,0 +1,21 @@
+{
+  "url": "http://127.0.0.1:8767/",
+  "viewports": [
+    1280,
+    390
+  ],
+  "completedOpponentCards": 2,
+  "roundsPerOpponent": 1000,
+  "winsPerOpponent": 308,
+  "lossesPerOpponent": 692,
+  "separatePoints": [
+    -1.001,
+    -1.056
+  ],
+  "ci95And975Displayed": true,
+  "trainingHistoryPreserved": true,
+  "allThreeStagesComplete": true,
+  "pollResponses": 2,
+  "pageErrors": [],
+  "horizontalOverflow": false
+}

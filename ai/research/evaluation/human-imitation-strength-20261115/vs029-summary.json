@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "id": "human-imitation-vs029-20261115-schema-v2",
+  "completedAtUTC": "2026-11-15T18:00:15.776725+00:00",
+  "purpose": "Frozen post-human-imitation greedy policy versus raw029; no training, no selection, no deployment",
+  "protocolSHA256": "eec7d8912bd27d26b96c682e7462ce2830b9a1548e43d2bfaf92e91b3a5ffea6",
+  "models": {
+    "challenger": {
+      "file": "models/challenger.onnx",
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vs029\\models\\challenger.onnx",
+      "sha256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "kind": "human-action preference logits; selectedepoch17; greedy only"
+    },
+    "reason": {
+      "file": "models/reason.onnx",
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vs029\\models\\reason.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "kind": "raw029"
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "one complete single round",
+    "cards": 108,
+    "level": "seeded uniform2..A",
+    "leader": "seeded seat",
+    "tribute": false,
+    "maxTurns": 1000,
+    "truncation": "error not draw"
+  },
+  "pipeline": "Native CPU1thread per session; imitation logits only argmax, never search leaf values. Identical canonical candidates and immediate finish/forced shortcut for raw029 and imitation. Oldreason uses017/initialbelief search with50s native budget and3s solver, cold per round; no UI latency claim.",
+  "pairing": "Identical physical108cardIDs/level/leader; challenger team0 then team1, both games complete or no pair.",
+  "statistics": {
+    "primary": "Each opponent separately: W/L/D and winrate95% deal-pair clusterCI; final signed upgrade mean95%CI; parallel97.5%CI for each of two comparisons in closeout. No pooled overall rate.",
+    "secondary": "Finishing ranks, doubleup/down, search requests/fallback/timing. Outcome is complete final single-round result only.",
+    "stopping": "Exactly500 new side-swapped pairs per group or common once-registered3hour deadline/STOP; no outcome-driven stop, expansion, reselection or restart extension.",
+    "limits": "Homogeneous AI teammates, no tribute; no fullmatch/human/browser claim. Against029 directly compares initialization; oldreason historical baseline has different deals, so no causal gain claim from rate subtraction."
+  },
+  "plannedPairs": 500,
+  "completedPairs": 500,
+  "completedRounds": 1000,
+  "reports": {
+    "head-to-head": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 308,
+      "losses": 692,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -1.001,
+        "standardError": 0.053222770753252845,
+        "ci": [
+          -1.1053166306763755,
+          -0.8966833693236244
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.308,
+        "standardError": 0.012433067293497984,
+        "ci": [
+          0.28363118810474397,
+          0.332368811895256
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 84,
+        "13": 86,
+        "14": 138,
+        "23": 188,
+        "24": 137,
+        "34": 367
+      },
+      "doubleDowns": 367,
+      "doubleUps": 84,
+      "meanTurns": 85.303
+    }
+  },
+  "secondaryContrasts": {},
+  "primaryWinner": "029",
+  "primaryInterpretation": "newraw researchchampion perspective;95% deal-pair clusterCI signed single-round upgrade",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

@@ -17,5 +17,20 @@
   "format": "passed",
   "build": "passed",
   "webVersionUnchanged": "d567b97606",
-  "formalGamesStarted": 0
+  "formalGamesStarted": 0,
+  "finalFormat": "passed",
+  "independentlyVerifiedRounds": 2000,
+  "frozenSourceFiles": 376,
+  "allComputeExited": true,
+  "temporaryAwakeReleased": true,
+  "noMatchingComputeProcess": true,
+  "originalProtocolsArchivedForCRLF_SHA": true,
+  "webDefaultUnchanged": "029",
+  "browserFinal": {
+    "desktopWidth": 1280,
+    "mobileWidth": 390,
+    "completedCards": 2,
+    "errors": 0,
+    "pollResponses": 2
+  }
 }

@@ -1,0 +1,279 @@
+{
+  "complete": true,
+  "completedAtUTC": "2026-11-15T18:11:36.498240+00:00",
+  "optimizerUpdates": 0,
+  "frozenSourceFilesVerified": 376,
+  "reports": {
+    "vs029": {
+      "complete": true,
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 308,
+      "losses": 692,
+      "draws": 0,
+      "winRate": {
+        "clusters": 500,
+        "mean": 0.308,
+        "standardError": 0.012433067293497984,
+        "ci95": [
+          0.28363118810474397,
+          0.332368811895256
+        ],
+        "ci975": [
+          0.28013248905585775,
+          0.33586751094414224
+        ],
+        "method": "Normal approximation to independent deal-pair averages; within-pair dependence preserved"
+      },
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -1.001,
+        "standardError": 0.053222770753252845,
+        "ci95": [
+          -1.1053166306763755,
+          -0.8966833693236244
+        ],
+        "ci975": [
+          -1.1202936635370335,
+          -0.8817063364629663
+        ],
+        "method": "Normal approximation to independent deal-pair averages; within-pair dependence preserved"
+      },
+      "rankPairs": {
+        "12": 84,
+        "13": 86,
+        "14": 138,
+        "23": 188,
+        "24": 137,
+        "34": 367
+      },
+      "doubleUps": 84,
+      "doubleDowns": 367,
+      "models": {
+        "challenger": {
+          "file": "models/challenger.onnx",
+          "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vs029\\models\\challenger.onnx",
+          "sha256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+          "config": {
+            "stateFeatures": 513,
+            "actionFeatures": 54
+          },
+          "kind": "human-action preference logits; selectedepoch17; greedy only"
+        },
+        "reason": {
+          "file": "models/reason.onnx",
+          "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vs029\\models\\reason.onnx",
+          "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+          "config": {
+            "stateFeatures": 513,
+            "actionFeatures": 54
+          },
+          "kind": "raw029"
+        }
+      },
+      "protocolSHA256": "eec7d8912bd27d26b96c682e7462ce2830b9a1548e43d2bfaf92e91b3a5ffea6",
+      "workerFilesSHA256": {
+        "worker-0.jsonl": "487239fd5877a67316e80728ed84bbfa020644c089f8e2097b711abc3f373cbf"
+      },
+      "nativeSummaryIndependentlyReproduced": true,
+      "searchStats": {
+        "bands": {
+          "midgame": {
+            "requests": 0,
+            "completed": 0,
+            "deviated": 0,
+            "fallbackCount": 0,
+            "minWorldsFallbacks": 0,
+            "fallbackReasons": {},
+            "timedSearches": 0,
+            "totalMs": 0,
+            "maxMs": 0
+          },
+          "endgame": {
+            "requests": 0,
+            "completed": 0,
+            "deviated": 0,
+            "fallbackCount": 0,
+            "minWorldsFallbacks": 0,
+            "fallbackReasons": {},
+            "timedSearches": 0,
+            "totalMs": 0,
+            "maxMs": 0
+          }
+        },
+        "rawMs": 96703.85400000047,
+        "reasonMs": 69704.81939999887,
+        "pairedGames": 1000,
+        "optimizerUpdates": 0
+      }
+    },
+    "vsreason": {
+      "complete": true,
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 308,
+      "losses": 692,
+      "draws": 0,
+      "winRate": {
+        "clusters": 500,
+        "mean": 0.308,
+        "standardError": 0.012829700012268784,
+        "ci95": [
+          0.2828537879759532,
+          0.3331462120240468
+        ],
+        "ci975": [
+          0.27924347539814753,
+          0.33675652460185246
+        ],
+        "method": "Normal approximation to independent deal-pair averages; within-pair dependence preserved"
+      },
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -1.056,
+        "standardError": 0.05395879077781866,
+        "ci95": [
+          -1.1617592299245247,
+          -0.9502407700754755
+        ],
+        "ci975": [
+          -1.1769433808276675,
+          -0.9350566191723326
+        ],
+        "method": "Normal approximation to independent deal-pair averages; within-pair dependence preserved"
+      },
+      "rankPairs": {
+        "12": 81,
+        "13": 90,
+        "14": 137,
+        "23": 154,
+        "24": 152,
+        "34": 386
+      },
+      "doubleUps": 81,
+      "doubleDowns": 386,
+      "models": {
+        "challenger": {
+          "file": "models/challenger.onnx",
+          "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vsreason\\models\\challenger.onnx",
+          "sha256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+          "config": {
+            "stateFeatures": 513,
+            "actionFeatures": 54
+          },
+          "kind": "human-action preference logits; selectedepoch17; greedy only"
+        },
+        "reason": {
+          "file": "models/reason.onnx",
+          "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vsreason\\models\\reason.onnx",
+          "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+          "config": {
+            "stateFeatures": 513,
+            "actionFeatures": 54
+          },
+          "kind": "old017-based9001 full belief search, not raw017",
+          "search": {
+            "lo": 21,
+            "hi": 40,
+            "worlds": 8,
+            "k": 6,
+            "net": 2,
+            "endgameHi": 20,
+            "endgameWorlds": 8,
+            "minWorlds": 4,
+            "tieTolerance": 1e-09,
+            "solverMaxNodes": 1500000,
+            "worldSeed": "(seed*1009 + ply*7919)>>>0"
+          }
+        },
+        "belief": {
+          "file": "models/belief.onnx",
+          "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115\\vsreason\\models\\belief.onnx",
+          "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+          "featureVersion": "belief-v1"
+        }
+      },
+      "protocolSHA256": "5de3585e2a7066c4f039753e47eff4fe09d78a392f25963e0509b2da554d00dc",
+      "workerFilesSHA256": {
+        "worker-0.jsonl": "715acaa2427c596a803ebff0db78e3ccbd4c804db73346331e0e8e328fed9b6b",
+        "worker-1.jsonl": "027c7f634122ce6fda36163d8204b04b714127a0ad3d582ed0fa9b17e9188525"
+      },
+      "nativeSummaryIndependentlyReproduced": true,
+      "searchStats": {
+        "bands": {
+          "midgame": {
+            "requests": 4228,
+            "completed": 4228,
+            "deviated": 752,
+            "fallbackCount": 0,
+            "minWorldsFallbacks": 0,
+            "fallbackReasons": {},
+            "timedSearches": 4228,
+            "totalMs": 767197,
+            "maxMs": 1888
+          },
+          "endgame": {
+            "requests": 1275,
+            "completed": 1273,
+            "deviated": 147,
+            "fallbackCount": 2,
+            "minWorldsFallbacks": 2,
+            "fallbackReasons": {
+              "budget": 2
+            },
+            "timedSearches": 1275,
+            "totalMs": 740956,
+            "maxMs": 50878
+          }
+        },
+        "rawMs": 87658.38199998785,
+        "reasonMs": 1568353.25069999,
+        "pairedGames": 1000,
+        "optimizerUpdates": 0
+      }
+    }
+  },
+  "uniqueFreshDeals": 1000,
+  "pairingVerified": true,
+  "crossGroupDuplicateDealFingerprints": 0,
+  "noAutomaticPromotionOrDeployment": true,
+  "humanActionAccuracyIsNotWinrate": true,
+  "scope": "Two homogeneous AI teams, complete no-tribute single rounds. Raw network challenger and raw029 use forced/immediate-finish shortcut; oldreason9001 fullsearch017/initialbelief. Oldreason historical different-deal baseline is not a paired training effect. No human or fullmatch strength acceptance.",
+  "processCloseout": {
+    "complete": true,
+    "children": [
+      {
+        "name": "awake",
+        "pid": 58524,
+        "startedAtUTC": "2026-11-15T17:56:48.288Z",
+        "exitCode": 0,
+        "signal": null,
+        "exitedAtUTC": "2026-11-15T18:11:09.832Z"
+      },
+      {
+        "name": "vs029",
+        "pid": 57592,
+        "startedAtUTC": "2026-11-15T17:56:48.296Z",
+        "exitCode": 0,
+        "signal": null,
+        "exitedAtUTC": "2026-11-15T18:00:16.663Z"
+      },
+      {
+        "name": "vsreason",
+        "pid": 40440,
+        "startedAtUTC": "2026-11-15T17:56:48.302Z",
+        "exitCode": 0,
+        "signal": null,
+        "exitedAtUTC": "2026-11-15T18:11:09.593Z"
+      }
+    ],
+    "awake": {
+      "powerPlanChanged": false,
+      "phase": "released",
+      "deadlineUTC": "2026-11-15T20:54:37.061Z",
+      "pid": 58524,
+      "updatedAtUTC": "2026-11-15T18:11:09.8056608+00:00"
+    }
+  },
+  "pairScoresGzipSHA256": "dc5904fc14ceedfa5f99be3e050c38e962aade18f026f983fdbb83d3969784e1"
+}

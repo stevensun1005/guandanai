@@ -1,0 +1,34 @@
+{
+  "reason": "Windows original protocol usesCRLF; Git normalizes readable JSON toLF. Original compressed bytes are preserved without changing frozen run or registration. Use decompressed original for exact protocolSHA verification.",
+  "groups": {
+    "vs029": {
+      "originalByteSHA256": "eec7d8912bd27d26b96c682e7462ce2830b9a1548e43d2bfaf92e91b3a5ffea6",
+      "compressedArchiveSHA256": "2d79ac910797234c0d6b3b73e6a5fd9f0049830651e3456883d281529ad6deb7",
+      "humanReadableMainLF_SHA256": "74b7168204c23c519980fc0e4039d48e8c7e80649c3474a8fbf41a958c212fc1",
+      "lineEndingOnlyDifference": true,
+      "decompressedArchiveMatchesRegistrationAndWorkerProtocolSHA": true
+    },
+    "vsreason": {
+      "originalByteSHA256": "5de3585e2a7066c4f039753e47eff4fe09d78a392f25963e0509b2da554d00dc",
+      "compressedArchiveSHA256": "8af90d7a15d67aac0ad0ded69bfdef1c387a60067309fc8c371d4e7290ec124c",
+      "humanReadableMainLF_SHA256": "4a21a15303a8e3fbfa3ba8be980d280b70fd5076e7d541e73e423c91370ad7cd",
+      "lineEndingOnlyDifference": true,
+      "decompressedArchiveMatchesRegistrationAndWorkerProtocolSHA": true
+    },
+    "original-failed-vs029": {
+      "originalByteSHA256": "4b305a9d7c705a4b17dafa01d0893cd316bf3e4fbadbb5ce43ac1ef3bc68d90e",
+      "compressedArchiveSHA256": "730be41c9f631ba1b639006c0a9fa5b6a3da6171336f3fca0b81c64bf5a78f0d",
+      "formalGames": 0
+    },
+    "original-failed-vsreason": {
+      "originalByteSHA256": "836afec22ca2f1cedb59083f062a0b122ebad9a1c5adfe6e172435a228044840",
+      "compressedArchiveSHA256": "6fb140a9a2cfb2d7f3e89f7dbe33332b51498e6b951030f29993052a9db61cdd",
+      "formalGames": 0
+    }
+  },
+  "seedAuditOriginalBytes": {
+    "originalSHA256": "b6f2ed0490ec5021d315d48c7e119fbc11d5b0d651484cc5d754c34b6305c0b6",
+    "compressedArchiveSHA256": "bcdb7bc1d65608bdcb9bb01750afa4645b9aeca31a002d733e294e3f0d2ec8cf",
+    "matchesBothProtocolSeedAuditSHA256": true
+  }
+}
