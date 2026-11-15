@@ -1,0 +1,65 @@
+{
+  "title": "真人整体行为模仿 · GPU训练进度",
+  "deadline": "2026-11-15T19:01:50.319Z",
+  "note": "从029训练出牌选择；最多40轮，验证连续4轮无改善即停。模仿分不是升级分/胜率；仅1个回顾性留出会话。网页仍029。",
+  "stages": [
+    {
+      "key": "data",
+      "title": "全量真人快照/合法动作编码/整场隔离",
+      "kind": "descriptive",
+      "paths": {
+        "out": ".",
+        "result": "data-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "测试/托管/已标辅助排除；名字和其他私牌不入输入"
+      }
+    },
+    {
+      "key": "gpu",
+      "title": "真实GPU与12组Adam恢复/ONNX预检",
+      "kind": "descriptive",
+      "after": "data",
+      "paths": {
+        "out": ".",
+        "result": "preflight-panel.json"
+      },
+      "rule": {
+        "type": "dev",
+        "text": "临时合成克隆更新，不是模仿或棋力成绩"
+      }
+    },
+    {
+      "key": "fit",
+      "title": "GPU行为模仿训练/验证早停/一次留出/保存",
+      "kind": "descriptive",
+      "after": "gpu",
+      "liveStatus": "learner-status.json",
+      "paths": {
+        "out": ".",
+        "result": "train-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "只用真实人类动作标签；验证选模型，测试不回流训练"
+      }
+    },
+    {
+      "key": "results",
+      "title": "模仿留出结果（不是胜率或新冠军）",
+      "kind": "descriptive",
+      "doneWhen": [
+        "results.json"
+      ],
+      "paths": {
+        "out": ".",
+        "result": "results-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "单会话回顾性测试，保留局限和负结果"
+      }
+    }
+  ]
+}

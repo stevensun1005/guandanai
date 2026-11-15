@@ -1,0 +1,10 @@
+{
+  "id": "human-imitation-overall-20261115",
+  "startedAtUTC": "2026-11-15T17:31:50.319Z",
+  "trainingDeadlineUTC": "2026-11-15T18:31:50.319Z",
+  "deadlineUTC": "2026-11-15T19:01:50.319Z",
+  "durationHours": 1.5,
+  "restartExtendsDeadline": false,
+  "sourceCommit": "3396ac62967832cb812c9a8c28caa7c4b3405816",
+  "protocolSHA256": "8714703964ff362f63c6b584aa2e60be0185156e5d65f9d154af31eaf859848d"
+}
