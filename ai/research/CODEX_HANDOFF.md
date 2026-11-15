@@ -540,3 +540,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 [逐项范围与机器证据](evaluation/clint-sync-20261114-1948.json)。
 
 Clint双栏大厅完整成功游标已到66d63b81bb0dad2b68312f00c5b62d5262a7a2c0。代码a30f70a、Pages43635316324成功，公网d567b97606已通过Chrome/WebKit各九尺寸、601px断点、四座位等大与手机原顺序验证。菜单[clint-rule,028,029]与默认029不变，无待办；不是物理iPad或新棋力验收。[公网证据](evaluation/clint-sync-20261114-1948-public.json)。
+
+新授权继续029-reason至11月15日09:00美东，随后评测/保存；08:55停数据、11:45评测截止、12:00保存截止，旧窗口不得重开。从3126网络/匹配6Adam继续，新种子、新冻结检出/注册/STOP/GPU真实恢复预检。网页029不变，原不确定结论与ceil偏差保留。当前尚未正式启动。[完整交接](evaluation/reason-029-continue-20261115/WINDOWS_HANDOFF.md)。

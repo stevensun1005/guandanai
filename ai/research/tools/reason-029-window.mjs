@@ -50,17 +50,76 @@ const session = (file) =>
     enableMemPattern: false,
   });
 
+export const OWNER_WINDOWS = {
+  'reason-029-20261114': {
+    deadlineUTC: '2026-11-14T18:00:00.000Z',
+    trainingDeadlineUTC: '2026-11-14T15:00:00.000Z',
+    generationDeadlineUTC: '2026-11-14T14:45:00.000Z',
+    evaluationDeadlineUTC: '2026-11-14T17:45:00.000Z',
+  },
+  'reason-029-continue-20261115': {
+    deadlineUTC: '2026-11-15T17:00:00.000Z',
+    trainingDeadlineUTC: '2026-11-15T14:00:00.000Z',
+    generationDeadlineUTC: '2026-11-15T13:55:00.000Z',
+    evaluationDeadlineUTC: '2026-11-15T16:45:00.000Z',
+  },
+};
 export function validateRegistration(plan, reg, now = Date.now()) {
+  const window = OWNER_WINDOWS[plan.id];
   if (
-    plan.id !== 'reason-029-20261114' ||
-    reg.deadlineUTC !== '2026-11-14T18:00:00.000Z' ||
-    reg.trainingDeadlineUTC !== '2026-11-14T15:00:00.000Z' ||
-    reg.generationDeadlineUTC !== '2026-11-14T14:45:00.000Z' ||
-    reg.evaluationDeadlineUTC !== '2026-11-14T17:45:00.000Z' ||
+    !window ||
+    Object.entries(window).some(([key, value]) => reg[key] !== value) ||
     reg.restartExtendsDeadline !== false ||
     now >= Date.parse(reg.evaluationDeadlineUTC)
   )
     throw Error('Invalid or expired fixed owner window');
+}
+
+export function segmentSeeds(plan, kind, segment, slot = 0) {
+  const slots = plan.generationSlots?.[kind] || 1;
+  if (!Number.isInteger(slot) || slot < 0 || slot >= slots) throw Error('Invalid generation slot');
+  let all = plan.data[kind];
+  if (!Array.isArray(all)) {
+    if (sha256(all.localFile) !== all.sha256) throw Error('Frozen data seed file changed');
+    all = readJSON(all.localFile)[kind];
+  }
+  const size = plan.segmentSizes[kind],
+    block = kind === 'greedy' ? 25 : 5;
+  return all
+    .slice(segment * size, (segment + 1) * size)
+    .filter((_, i) => Math.floor(i / block) % slots === slot);
+}
+const dataDirs = (root, plan, kind, segment) =>
+  Array.from({ length: plan.generationSlots?.[kind] || 1 }, (_, slot) =>
+    join(
+      root,
+      'segments',
+      String(segment),
+      'data-' + kind,
+      ...((plan.generationSlots?.[kind] || 1) > 1 ? ['part-' + slot] : []),
+    ),
+  );
+function dataSummary(root, plan, kind, segment) {
+  const parts = dataDirs(root, plan, kind, segment).map((dir) =>
+    readJSON(join(dir, 'summary.json')),
+  );
+  const record = {
+    phase: parts.every((p) => p?.phase === 'complete')
+      ? 'complete'
+      : parts.some((p) => p?.phase === 'failed')
+        ? 'failed'
+        : parts.some((p) => p?.phase === 'stopped')
+          ? 'stopped'
+          : 'running',
+    rounds: parts.reduce((n, p) => n + (p?.rounds || 0), 0),
+    rows: parts.reduce((n, p) => n + (p?.rows || 0), 0),
+    parts,
+  };
+  if (parts.length > 1) {
+    mkdirSync(join(root, 'segments', String(segment), 'data-' + kind), { recursive: true });
+    writeJSON(join(root, 'segments', String(segment), 'data-' + kind, 'summary.json'), record);
+  }
+  return parts.length > 1 ? record : parts[0];
 }
 
 function verify(root) {
@@ -73,6 +132,11 @@ function verify(root) {
     throw Error('Registered protocol/authorization changed');
   for (const [file, hash] of Object.entries(plan.sourceSHA256))
     if (sha256(join(plan.sourceRoot, file)) !== hash) throw Error('Frozen source changed: ' + file);
+  if (
+    plan.initialCheckpoint &&
+    sha256(plan.initialCheckpoint.localFile) !== plan.initialCheckpoint.sha256
+  )
+    throw Error('Initial checkpoint changed');
   for (const model of Object.values(plan.models))
     if (sha256(model.localFile) !== model.sha256) throw Error('Frozen weights changed');
   return { plan, reg };
@@ -95,15 +159,14 @@ export const playKey = (p) =>
         .join(',')}`
     : 'pass';
 
-async function generate(root, kind, segment) {
+async function generate(root, kind, segment, slot = 0) {
   const { plan, reg } = verify(root),
-    out = join(root, 'segments', String(segment), 'data-' + kind),
+    out = dataDirs(root, plan, kind, segment)[slot],
     spec = featureSpec('v1');
   mkdirSync(out, { recursive: true });
   if (existsSync(join(out, 'run.json')))
     throw Error('Data already started; do not replay its seeds');
-  const size = plan.segmentSizes[kind];
-  const seeds = plan.data[kind].slice(segment * size, (segment + 1) * size),
+  const seeds = segmentSeeds(plan, kind, segment, slot),
     blockSize = kind === 'greedy' ? 25 : 5;
   if (!Number.isInteger(segment) || segment < 0 || !seeds.length)
     throw Error('Invalid fresh-data segment');
@@ -235,6 +298,8 @@ async function evaluate(root, taskID, slot) {
     const c = await session(plan.models.champion.localFile),
       old = await session(plan.models.old.localFile),
       b = await session(plan.models.belief.localFile);
+    const oldBelief = plan.models.oldBelief ? await session(plan.models.oldBelief.localFile) : b;
+    if (oldBelief !== b) sessions.push(oldBelief);
     sessions.push(c, old, b);
     const f = final ? await session(join(root, 'model/belief.onnx')) : b;
     if (final) sessions.push(f);
@@ -258,7 +323,7 @@ async function evaluate(root, taskID, slot) {
         const opponent = createReasonBot({
           ort,
           championSession: taskID === 'final-vs-baseline' ? c : old,
-          beliefSession: b,
+          beliefSession: taskID === 'final-vs-baseline' ? b : oldBelief,
           budget,
         });
         const tally = emptyTally();
@@ -328,6 +393,8 @@ async function watch(root) {
 async function main(root) {
   const { plan, reg } = verify(root);
   validateRegistration(plan, reg);
+  if (!readJSON(join(root, 'gpu-preflight.json'))?.passed)
+    throw Error('Actual GPU preflight required');
   if (existsSync(join(root, 'STOP')) || existsSync(join(root, 'FINISHED')))
     throw Error('Closed window; no restart');
   const lock = join(root, 'controller.lock');
@@ -354,8 +421,8 @@ async function main(root) {
       children: history,
     });
     const segmentRoot = join(root, 'segments', String(activeSegment));
-    const g = readJSON(join(segmentRoot, 'data-greedy/summary.json')),
-      r = readJSON(join(segmentRoot, 'data-reason/summary.json')),
+    const g = dataSummary(root, plan, 'greedy', activeSegment),
+      r = dataSummary(root, plan, 'reason', activeSegment),
       m = readJSON(join(segmentRoot, 'model/status.json'));
     if (m?.pid && !history.some((p) => p.pid === m.pid))
       history.push({
@@ -374,10 +441,16 @@ async function main(root) {
     writeJSON(join(root, 'train-panel.json'), {
       rows: [
         ['GPU实际设备', m?.device || '等待GPU阶段'],
-        ['新增优化器更新', `${m?.step || 0} / ${m?.maxSteps || '待数据完成确定'}`],
+        ['本段新增优化器更新', m?.newUpdates || 0],
+        ['累计更新（含继承）', m?.step || plan.initialCheckpoint?.step || 0],
         ['训练状态', m?.phase || '排队中'],
       ],
     });
+    copyFileSync(join(root, 'data-panel.json'), join(root, 'panel', `data-${activeSegment}.json`));
+    copyFileSync(
+      join(root, 'train-panel.json'),
+      join(root, 'panel', `train-${activeSegment}.json`),
+    );
     const memoryPause = join(root, 'model/MEMORY_PAUSE');
     if (phase.startsWith('train-') && freemem() < 4 * 1024 ** 3 && !existsSync(memoryPause))
       writeJSON(memoryPause, { reason: 'four-GiB-memory-reserve' });
@@ -411,6 +484,7 @@ async function main(root) {
     log(root, 'START ' + key);
     try {
       await fn();
+      tick();
       log(root, 'END ' + key + ' rc=0');
     } catch (e) {
       log(root, 'END ' + key + ' rc=1');
@@ -438,11 +512,16 @@ async function main(root) {
       stopFile(root, 'awake-helper-failed');
       writeJSON(join(root, 'awake-failure.json'), { error: String(e) });
     });
-    const baseline = stage('baseline-vs-old', () =>
-      Promise.all([0, 1].map((slot) => node('--evaluate=baseline-vs-old', `--slot=${slot}`))),
-    );
-    // Attach immediately so a concurrent baseline failure cannot become an unhandled rejection.
-    baseline.catch(() => stopFile(root, 'baseline-failed'));
+    const baseline = plan.evaluateAfterTraining
+      ? null
+      : stage('baseline-vs-old', () =>
+          Promise.all(
+            plan.tasks
+              .find((t) => t.id === 'baseline-vs-old')
+              .slots.map((slot) => node('--evaluate=baseline-vs-old', `--slot=${slot}`)),
+          ),
+        );
+    baseline?.catch(() => stopFile(root, 'baseline-failed'));
     let latestModel = null;
     for (
       activeSegment = 0;
@@ -454,31 +533,50 @@ async function main(root) {
       mkdirSync(modelRoot, { recursive: true });
       await stage(`data-${activeSegment}`, () =>
         Promise.all(
-          ['greedy', 'reason'].map((kind) =>
-            node(`--generate=${kind}`, `--segment=${activeSegment}`),
+          ['greedy', 'reason'].flatMap((kind) =>
+            Array.from({ length: plan.generationSlots?.[kind] || 1 }, (_, slot) =>
+              node(`--generate=${kind}`, `--segment=${activeSegment}`, `--generation-slot=${slot}`),
+            ),
           ),
         ),
       );
       const totalRows = ['greedy', 'reason'].reduce(
-        (n, k) => n + (readJSON(join(segmentRoot, `data-${k}/summary.json`))?.rows || 0),
+        (n, k) => n + (dataSummary(root, plan, k, activeSegment)?.rows || 0),
         0,
       );
       if (totalRows < 10000 || stopped(root, reg.trainingDeadlineUTC)) break;
       if (existsSync(join(root, 'STOP'))) throw Error('Window stopped');
       await stage(`train-${activeSegment}`, async () => {
         // Allow the eager dataset + GPU minibatches to load without consuming the four-GiB reserve.
-        while (freemem() < 7 * 1024 ** 3 && !stopped(root, reg.trainingDeadlineUTC)) await pause();
-        if (stopped(root, reg.trainingDeadlineUTC)) throw Error('Training cutoff');
+        while (
+          freemem() < (plan.learnerStartGiB || 7) * 1024 ** 3 &&
+          !stopped(root, reg.trainingDeadlineUTC)
+        )
+          await pause();
+        if (stopped(root, reg.trainingDeadlineUTC)) {
+          writeJSON(join(modelRoot, 'status.json'), {
+            phase: 'stopped',
+            newUpdates: 0,
+            step:
+              readJSON(join(latestModel || root, 'train-report.json'))?.steps ||
+              plan.initialCheckpoint?.step ||
+              0,
+            note: 'Training deadline reached while waiting for memory; retain previous learner',
+          });
+          return;
+        }
         await run(plan.python, [
           '-B',
           '-X',
           'utf8',
           join(plan.sourceRoot, 'ai/danMCai/belief/train.py'),
-          `--data=${join(segmentRoot, 'data-greedy')},${join(segmentRoot, 'data-reason')}`,
+          `--data=${['greedy', 'reason'].flatMap((k) => dataDirs(root, plan, k, activeSegment)).join(',')}`,
           `--out=${modelRoot}`,
           latestModel
             ? `--initial-checkpoint=${join(latestModel, 'checkpoint.pt')}`
-            : `--initial-onnx=${plan.models.belief.localFile}`,
+            : plan.initialCheckpoint
+              ? `--initial-checkpoint=${plan.initialCheckpoint.localFile}`
+              : `--initial-onnx=${plan.models.belief.localFile}`,
           '--device=cuda:0',
           '--threads=1',
           '--batch=4096',
@@ -488,7 +586,7 @@ async function main(root) {
           '--input-dropout=0.1',
           '--epochs=12',
           '--minutes=240',
-          `--seed=${2026111429 + activeSegment}`,
+          `--seed=${(plan.optimizerSeed || 2026111429) + activeSegment}`,
           '--eval-every=100',
           `--deadline=${reg.trainingDeadlineUTC}`,
           `--stop-file=${join(root, 'STOP')},${join(root, 'model/STOP')}`,
@@ -507,7 +605,16 @@ async function main(root) {
       });
     }
     if (!latestModel) throw Error('No trained final model before cutoff');
+    const generatedThroughSegment = existsSync(
+      join(dataDirs(root, plan, 'greedy', activeSegment)[0], 'run.json'),
+    )
+      ? activeSegment
+      : activeSegment - 1;
     activeSegment = Number(latestModel.replaceAll('\\', '/').split('/').at(-2));
+    for (let i = activeSegment + 1; i < plan.maxSegments; i++) {
+      if (i > generatedThroughSegment) log(root, `SKIP data-${i} generation cutoff; not run`);
+      log(root, `SKIP train-${i} training cutoff; no updates`);
+    }
     // The last chronological learner is frozen, including a time-limited final segment.
     for (const file of ['belief.onnx', 'checkpoint.pt', 'train-report.json', 'status.json'])
       copyFileSync(join(latestModel, file), join(root, 'model', file));
@@ -517,23 +624,46 @@ async function main(root) {
       beliefSHA256: report.onnxSHA256,
       checkpointSHA256: sha256(join(root, 'model/checkpoint.pt')),
       steps: report.steps,
-      initialBeliefSHA256: report.initialONNXSHA256,
+      initialBeliefSHA256: plan.models.belief.sha256,
+      inheritedStep: plan.initialCheckpoint?.step || 0,
+      newUpdates: report.steps - (plan.initialCheckpoint?.step || 0),
+      untrainedDataSegments: Array.from(
+        { length: Math.min(generatedThroughSegment + 1, plan.maxSegments) },
+        (_, i) => i,
+      )
+        .filter((i) => i > activeSegment)
+        .map((i) => ({
+          segment: i,
+          greedy: dataSummary(root, plan, 'greedy', i),
+          reason: dataSummary(root, plan, 'reason', i),
+          ingestedByLearner: false,
+        })),
       selection:
-        'Last chronological learner across fresh segments before10AM; never a validation peak',
+        'Last chronological learner before registered training cutoff; never a validation peak',
       lastSegmentModel: latestModel,
       dataSegments: Array.from({ length: activeSegment + 1 }, (_, i) => ({
         segment: i,
-        greedy: readJSON(join(root, 'segments', String(i), 'data-greedy/summary.json')),
-        reason: readJSON(join(root, 'segments', String(i), 'data-reason/summary.json')),
+        greedy: dataSummary(root, plan, 'greedy', i),
+        reason: dataSummary(root, plan, 'reason', i),
         model: readJSON(join(root, 'segments', String(i), 'completed-model.json')),
       })),
       createdAtUTC: new Date().toISOString(),
     });
-    await baseline;
+    if (plan.evaluateAfterTraining)
+      await stage('baseline-and-final-old', () =>
+        Promise.all(
+          plan.tasks
+            .filter((t) => t.id !== 'final-vs-baseline')
+            .flatMap((t) => t.slots.map((slot) => node(`--evaluate=${t.id}`, `--slot=${slot}`))),
+        ),
+      );
+    else await baseline;
     await stage('final-evaluation', () =>
       Promise.all(
         plan.tasks
-          .filter((t) => t.id !== 'baseline-vs-old')
+          .filter((t) =>
+            plan.evaluateAfterTraining ? t.id === 'final-vs-baseline' : t.id !== 'baseline-vs-old',
+          )
           .flatMap((t) => t.slots.map((slot) => node(`--evaluate=${t.id}`, `--slot=${slot}`))),
       ),
     );
@@ -570,6 +700,13 @@ async function main(root) {
           'Single rounds/no tribute/homogeneous teams; two simultaneous positive97.5% intervals required. No global/raw champion or automatic website claim.',
         webPublished: false,
         atUTC: new Date().toISOString(),
+      });
+      writeJSON(join(root, 'results-panel.json'), {
+        rows: [
+          ['实际完成', `${summary.completedPairs}交换对 / ${summary.completedRounds}单局`],
+          ...gates.map((g) => [g.task, `${g.mean}，97.5%[${g.ci97_5.join(',')}]`]),
+          ['双门槛', gates.every((g) => g.ci97_5[0] > 0) ? '两项均正' : '未通过；不称提升或发布'],
+        ],
       });
       // Small reproducible research package; no deals, trajectories or credentials.
       await run(plan.python, [
@@ -658,7 +795,12 @@ if (process.argv[1] && resolve(process.argv[1]) === SELF) {
   const root = resolve(option('run', ''));
   if (process.argv.includes('--watch')) await watch(root);
   else if (option('generate', ''))
-    await generate(root, option('generate'), Number(option('segment', '0')));
+    await generate(
+      root,
+      option('generate'),
+      Number(option('segment', '0')),
+      Number(option('generation-slot', '0')),
+    );
   else if (option('evaluate', '')) await evaluate(root, option('evaluate'), Number(option('slot')));
   else await main(root);
 }

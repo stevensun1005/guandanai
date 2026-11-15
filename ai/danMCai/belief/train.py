@@ -170,6 +170,14 @@ def load_initial_checkpoint(net, optimizer, file, device):
     return saved
 
 
+def epoch_update_cap(epochs, train_rows, batch):
+    """Whole minibatches that do not exceed the preregistered epoch upper bound."""
+    steps = int(np.floor(epochs * train_rows / min(batch, train_rows)))
+    if steps < 1:
+        raise ValueError("Epoch cap is smaller than one minibatch; reduce batch size")
+    return steps
+
+
 def copy_loss(log_probs, y):
     """Per-copy cross-entropy; faces without unseen copies are masked by y = 0."""
     y = y.view(-1, FACES, SEATS)
@@ -379,7 +387,7 @@ def train(args):
     stop_files = [Path(p) for p in args.stop_file.split(",") if p]
     max_steps = args.max_steps
     if args.epochs > 0:
-        epoch_steps = int(np.ceil(args.epochs * len(train_idx) / min(args.batch, len(train_idx))))
+        epoch_steps = epoch_update_cap(args.epochs, len(train_idx), args.batch)
         max_steps = min(max_steps, epoch_steps) if max_steps > 0 else epoch_steps
     def status(phase):
         value = {"pid": os.getpid(), "phase": phase, "step": inherited_step + step, "newUpdates": step, "inheritedStep": inherited_step, "device": str(device),

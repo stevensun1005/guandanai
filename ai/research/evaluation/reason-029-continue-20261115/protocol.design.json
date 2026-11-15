@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "reason-029-continue-20261115",
+  "purpose": "Continue029 hand-inference adaptation with fresh chronological self-play; test additional training against the exact3126-update starting composition and old017reason, without rewriting the prior uncertain result.",
+  "ownerAuthorization": {
+    "id": "reason-029-continue-20261115",
+    "quote": "继续训练到明天早上酒店",
+    "clarification": "09:00停止训练，随后评测和保存",
+    "timezone": "America/Toronto",
+    "confirmedTrainingDeadlineLocal": "2026-11-15T09:00:00-05:00",
+    "trainingDeadlineUTC": "2026-11-15T14:00:00.000Z",
+    "generationDeadlineUTC": "2026-11-15T13:55:00.000Z",
+    "evaluationDeadlineUTC": "2026-11-15T16:45:00.000Z",
+    "deadlineUTC": "2026-11-15T17:00:00.000Z",
+    "restartExtendsDeadline": false,
+    "scope": "New continuation window, old closed runs remain immutable; no roll-forward toNov16 after midnight",
+    "webDeploymentAuthorized": false,
+    "recordedAtUTC": "2026-11-15T05:12:40.639Z"
+  },
+  "initial": {
+    "championSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "beliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea",
+    "checkpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+    "inheritedUpdates": 3126,
+    "matchingAdamStates": 6,
+    "RNGorReplayExactResumptionClaimed": false
+  },
+  "training": {
+    "parameters": "Only belief-v1 six tensors;029 policy and normalization frozen",
+    "device": "ExistingROCm cuda:0, actual checkpoint continuation preflight required",
+    "batch": 4096,
+    "lr": 0.00003,
+    "weightDecay": 0.01,
+    "dropout": 0.2,
+    "inputDropout": 0.1,
+    "augmentSuits": true,
+    "epochs": "Strict at-most12 per fresh segment, floor complete minibatches; old ceil deviation retained as history",
+    "optimizerSeed": 2026111501,
+    "maxSegments": 32,
+    "segmentSizes": {
+      "greedy": 3000,
+      "reason": 800
+    },
+    "generationSlots": {
+      "greedy": 1,
+      "reason": 2
+    },
+    "dataCaps": {
+      "greedyRounds": 96000,
+      "reasonRounds": 25600
+    },
+    "partialLastSegment": "Only fully written blocks before08:55; train until09:00. Keep any generated but untrained rows separately.",
+    "memory": "4GiB reserve/5GiB resume; wait6GiB before eager GPU dataset load. No concurrent baseline evaluation during training.",
+    "selection": "Last chronological learner before09:00; no development peak or interim selection"
+  },
+  "evaluation": {
+    "unit": "Complete single round/no tribute; same108 physical cards,level,leader then exchange teams",
+    "groups": [
+      {
+        "id": "baseline-vs-old",
+        "model": "Starting029+belief3126+desktopsearch",
+        "opponent": "Old017+originalbeliefv1+same search",
+        "pairs": 1000,
+        "block": "A"
+      },
+      {
+        "id": "final-vs-old",
+        "model": "Final029+finalbelief+desktopsearch",
+        "opponent": "Old017+originalbeliefv1+same search",
+        "pairs": 1000,
+        "block": "A"
+      },
+      {
+        "id": "final-vs-baseline",
+        "model": "Final029+finalbelief+desktopsearch",
+        "opponent": "Starting029+belief3126+same search",
+        "pairs": 1000,
+        "block": "B"
+      }
+    ],
+    "uniqueDeals": 2000,
+    "rounds": 6000,
+    "runAfterTraining": true,
+    "scheduling": "Baseline/old and final/old4workers, then final/starting2workers; all after frozen final learner",
+    "primary": "Signed final team upgrade +/-1/2/3; rank pairs/WLD/double-up/down separately",
+    "accept": "Complete1000 pairs per group and both final-old and final-starting97.5% cluster interval lower bounds strictly>0; Bonferroni familywise95%. SharedA contrast preserves paired covariance. Partial/inconclusive/negative retained; no extra samples.",
+    "limits": "Not a raw neural champion, whole-match, human, browser or automatic website acceptance"
+  },
+  "dataUse": "Fresh literal simulated deals only; own/public features, hidden positions supervised target only; no human/D1/Clint/GuanZero teachers or data. Original38k and heldout are not reused.",
+  "seedAudit": "New readable local history audit includes every literalSeed in completed belief blocks and worker jsonl; unused new candidate pool reserved only literally, not200 imaginary completed rounds",
+  "status": "Prepared, not started; actual source/registration/GPU/process evidence required"
+}

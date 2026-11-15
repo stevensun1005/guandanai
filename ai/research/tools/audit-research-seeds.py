@@ -22,7 +22,7 @@ def seeds_in(value):
         for key, item in value.items():
             if key == 'seed' and isinstance(item, int):
                 yield item
-            elif key in ['seeds', 'heldoutSeeds'] and isinstance(item, list):
+            elif key in ['seeds', 'heldoutSeeds', 'literalSeeds', 'greedy', 'reason', 'heldoutOld', 'heldoutBaseline'] and isinstance(item, list):
                 yield from (n for n in item if isinstance(n, int))
             else:
                 yield from seeds_in(item)
@@ -84,6 +84,7 @@ def audit(workspace, start, count, training_ranges=None):
     public = ROOT / 'ai/research/evaluation'
     files = set(public.rglob('*.json')) | set(public.rglob('*.jsonl.gz'))
     ranges = []
+    literal_ranges = []
     # Existing audits identify the read-only Mac snapshot and old Windows log locations.
     for p in public.rglob('seed-audit.json'):
         d = json.loads(p.read_text(encoding='utf-8'))
@@ -91,6 +92,7 @@ def audit(workspace, start, count, training_ranges=None):
             path = Path(item['path'])
             if path.is_file():
                 files.add(path)
+        literal_ranges.extend(d.get('literalSeedRanges', []))
         reservation = d.get('reservations', {})
         if isinstance(reservation, dict) and 'halfOpenRootRanges' in reservation:
             ranges.extend(reservation['halfOpenRootRanges'])
@@ -102,6 +104,8 @@ def audit(workspace, start, count, training_ranges=None):
     runs = workspace / 'ai/danMCai/runs'
     files.update(runs.rglob('results-*.jsonl'))
     files.update(runs.rglob('protocol.json'))
+    files.update(runs.rglob('worker-*.jsonl'))
+    files.update(p for p in runs.rglob('b*.json') if re.fullmatch(r'b[0-9]+\.json',p.name) and p.stat().st_size < 1_000_000)
     files.update(runs.rglob('gate-*.json'))
     files.update(runs.rglob('anchor-*.json'))
     # Current champion-restart future roots, not just its observed prefix.
@@ -136,7 +140,7 @@ def audit(workspace, start, count, training_ranges=None):
     inverse = pow(1009, -1, 2**32)
     chosen = []
     for seed in candidate_seeds(start):
-        if seed in known:
+        if seed in known or any(lo <= seed < hi for lo,hi in literal_ranges):
             continue
         i = np.searchsorted(derived, seed - 199)
         if i < len(derived) and derived[i] <= seed:
@@ -154,7 +158,7 @@ def audit(workspace, start, count, training_ranges=None):
     return {'schema': 1, 'observedAtUTC': datetime.now(timezone.utc).isoformat(),
             'purpose': 'Development validation; exclude from future independent acceptance',
             'files': inspected, 'knownUniqueRootSeeds': len(known), 'seeds': chosen,
-            'futureRootRanges': ranges, 'rootOverlap': 0, 'derivedRoundOverlap': 0,
+            'literalSeedRangesExcluded': literal_ranges, 'futureRootRanges': ranges, 'rootOverlap': 0, 'derivedRoundOverlap': 0,
             'newTrainingRootRanges': training_ranges or [],
             'trainingAudit': 'For each proposed root interval, exclude up to 200 derived deals against historical seeds interpreted both as literal deals and match roots; new intervals also mutually disjoint. Historical unused reservations exclude literal roots, not imaginary completed rounds.',
             'scope': 'Readable local evidence and old audit paths only; unavailable remote machine history is unverified. Excludes 200 possible round deals per known or reserved root.'}

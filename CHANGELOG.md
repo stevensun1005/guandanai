@@ -949,3 +949,7 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 [逐项范围与机器证据](ai/research/evaluation/clint-sync-20261114-1948.json)。
 
 双栏大厅上线复核完成：Pages43635316324成功，公网d567b97606经Chrome/WebKit共18组尺寸检查通过，默认029与原功能保留，完整同步游标66d63b8。[证据](ai/research/evaluation/clint-sync-20261114-1948-public.json)。
+
+## 2026-11-15 · 029-reason续训预登记
+
+- 明确09:00美东停训后评测/保存；3126检查点匹配Adam续接、新数据/新冻结窗口，双推理采样、独立旧reason推断权重、严格epoch上限与真实分段面板。旧结果和冻结运行保留，当前准备不是新棋力或发布。[设计](ai/research/evaluation/reason-029-continue-20261115/README.md)。

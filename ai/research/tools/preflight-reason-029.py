@@ -10,6 +10,7 @@ import torch
 
 parser = argparse.ArgumentParser(__doc__)
 parser.add_argument('--belief', required=True)
+parser.add_argument('--checkpoint')
 parser.add_argument('--out', type=Path, required=True)
 args = parser.parse_args()
 spec = importlib.util.spec_from_file_location('belief_preflight', Path(__file__).resolve().parents[2]/'danMCai/belief/train.py')
@@ -32,6 +33,14 @@ with torch.no_grad(): actual = net(tensor).exp().cpu().numpy()
 delta = float(np.abs(expected-actual).max())
 assert delta < 1e-5, delta
 optimizer = torch.optim.AdamW(net.parameters(),lr=3e-5,weight_decay=.01)
+initial_step=0
+if args.checkpoint:
+    saved_initial=train.load_initial_checkpoint(net,optimizer,args.checkpoint,device)
+    initial_step=int(saved_initial['step'])
+    net.eval()
+    with torch.no_grad(): resumed_delta=float(np.abs(net(tensor).exp().cpu().numpy()-expected).max())
+    assert resumed_delta < 1e-5,resumed_delta
+
 y = torch.ones((32,162),device=device)
 for _ in range(2):
     loss = train.copy_loss(net(tensor),y)
@@ -58,10 +67,10 @@ with tempfile.TemporaryDirectory(dir=args.out.parent) as temporary:
         train.copy_loss(network(tensor), y).backward()
         opt.step()
     for a,b in zip(net.parameters(),restored.parameters()): torch.testing.assert_close(a,b,atol=0,rtol=0)
-    assert all(s['step'].device.type == 'cpu' and int(s['step']) == 3 for s in adam.state.values())
+    assert all(s['step'].device.type == 'cpu' and int(s['step']) == initial_step+3 for s in adam.state.values())
 result = {'passed':True,'backendActuallyTested':'cuda:0','device':torch.cuda.get_device_name(0),
           'torch':torch.__version__,'hip':torch.version.hip,'initialBeliefSHA256':initial_sha,
-          'warmStartProbabilityMaxDifference':delta,'syntheticOptimizerSteps':4,'checkpointStep':2,'reproducedContinuationStep':3,'matchingAdamStates':6,
+          'warmStartProbabilityMaxDifference':delta,'syntheticOptimizerSteps':4,'checkpointStep':initial_step+2,'reproducedContinuationStep':initial_step+3,'inheritedStep':initial_step,'matchingAdamStates':6,
           'newGames':0,'strengthEvidence':False,'syntheticSeed':2026111429}
 args.out.write_text(json.dumps(result,indent=2),encoding='utf-8')
 print(json.dumps(result))

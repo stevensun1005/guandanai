@@ -1,0 +1,15 @@
+{
+  "id": "reason-029-continue-20261115",
+  "quote": "继续训练到明天早上酒店",
+  "clarification": "09:00停止训练，随后评测和保存",
+  "timezone": "America/Toronto",
+  "confirmedTrainingDeadlineLocal": "2026-11-15T09:00:00-05:00",
+  "trainingDeadlineUTC": "2026-11-15T14:00:00.000Z",
+  "generationDeadlineUTC": "2026-11-15T13:55:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-15T16:45:00.000Z",
+  "deadlineUTC": "2026-11-15T17:00:00.000Z",
+  "restartExtendsDeadline": false,
+  "scope": "New continuation window, old closed runs remain immutable; no roll-forward toNov16 after midnight",
+  "webDeploymentAuthorized": false,
+  "recordedAtUTC": "2026-11-15T05:12:40.639Z"
+}

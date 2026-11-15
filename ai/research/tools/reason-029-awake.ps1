@@ -2,7 +2,7 @@ param([Parameter(Mandatory=$true)][string]$Run)
 $ErrorActionPreference='Stop'
 $taskRoot=(Resolve-Path -LiteralPath $Run).Path
 $taskReg=Get-Content -LiteralPath "$taskRoot/registration.json" -Raw | ConvertFrom-Json
-if($taskReg.deadlineUTC -ne '2026-11-14T18:00:00.000Z'){throw 'Unexpected owner cutoff'}
+if($taskReg.deadlineUTC -notin @('2026-11-14T18:00:00.000Z','2026-11-15T17:00:00.000Z')){throw 'Unexpected owner cutoff'}
 Add-Type @'
 using System.Runtime.InteropServices;
 public static class ReasonPower {

@@ -56,6 +56,14 @@ def synthetic(n, seed=0):
 
 
 class BeliefTrainTest(unittest.TestCase):
+    def test_epoch_upper_bound_never_adds_a_rounding_batch(self):
+        for rows in [105849, 106572, 100001]:
+            steps = belief_train.epoch_update_cap(12, rows, 4096)
+            self.assertLessEqual(steps * 4096 / rows, 12)
+            self.assertGreater((steps + 1) * 4096 / rows, 12)
+        with self.assertRaises(ValueError):
+            belief_train.epoch_update_cap(.01, 10, 10)
+
     def test_warm_start_preserves_probabilities_and_normalization(self):
         torch.manual_seed(29)
         x, _ = synthetic(6)

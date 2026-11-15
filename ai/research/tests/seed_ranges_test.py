@@ -6,6 +6,9 @@ spec=importlib.util.spec_from_file_location('audit',Path(__file__).parents[1]/'t
 audit=importlib.util.module_from_spec(spec);spec.loader.exec_module(audit)
 
 class RangeAudit(unittest.TestCase):
+    def test_literal_block_and_explicit_training_roles_are_excluded(self):
+        self.assertEqual(set(audit.seeds_in({'literalSeeds':[101,102], 'data':{'greedy':[103], 'reason':[104]}})),{101,102,103,104})
+
     def test_probe_seed_domain_above_billion_and_uint32_boundary(self):
         self.assertEqual(audit.candidate_seeds(1_800_000_000).start,1_800_000_000)
         self.assertEqual(list(audit.candidate_seeds(2**32-2)),[2**32-2,2**32-1])
