@@ -1,0 +1,9 @@
+{
+  "purpose": "Synthetic real-GPU exact checkpoint/6Adam restore and next-update equality; no formal updates or gameplay",
+  "sourceCommit": "bad2731db449af82608400e4b347be62eb2aae80",
+  "initialBeliefSHA256": "406681f0292f905fccf5468596c71eae53c38200ac4f59246a114b1c358efeea",
+  "initialCheckpointSHA256": "229edebfc92885af2a518c2f0e11979f452df57db2d7fc9c0e8d6d55f6e78869",
+  "inheritedStep": 3126,
+  "deadlineUTC": "2026-11-15T14:00:00.000Z",
+  "registeredProtocolSHA256": "be25f9e7c1630e8551db2880f1ccb691411c71e6a6a56c1da08dd3f5b2a33300"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "reason-029-continue-20261115",
+  "startUTC": "2026-11-15T05:27:34.687Z",
+  "registeredAtUTC": "2026-11-15T05:27:34.687Z",
+  "deadlineUTC": "2026-11-15T17:00:00.000Z",
+  "trainingDeadlineUTC": "2026-11-15T14:00:00.000Z",
+  "generationDeadlineUTC": "2026-11-15T13:55:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-15T16:45:00.000Z",
+  "restartExtendsDeadline": false,
+  "authorizationSHA256": "90354ee6099f77d30de77527bffe7f625850ca9c4f75951b0a8a20585f498f6a",
+  "sourceCommit": "bad2731db449af82608400e4b347be62eb2aae80",
+  "purpose": "New explicit Nov15 9AM continuation, not extension or restart of the closed Nov14 window",
+  "protocolSHA256": "be25f9e7c1630e8551db2880f1ccb691411c71e6a6a56c1da08dd3f5b2a33300"
+}

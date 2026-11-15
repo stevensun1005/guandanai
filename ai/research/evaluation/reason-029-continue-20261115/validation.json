@@ -18,12 +18,13 @@
   "format": "passed",
   "build": "passed",
   "unchangedWebVersion": "d567b97606",
-  "gpuRestore": "Pending actual frozen-source checkpoint preflight",
+  "gpuRestore": "Passed real frozen-source RX7800XT/ROCm checkpoint restore, 6 matching Adam states, next update equality",
   "formalNewUpdates": 0,
   "logs": {
     "format": "188d607ebfd578a7e695e7ddf319c0e438d00d16133c9711d0602e899d433d71",
     "python": "97cedc6c22a7bb47b2ff80471f5a4fdfe5da2e651ff5ea4c7f54ae41247cb0c8",
     "final-node": "488ee835465809d1fe094d5922cd57e7921e87d9ed645157bc1f4444fd79f424",
     "build": "bb06a2ef0c0826fa606c58a955d4549828cc3f8dab4c2cf7a941df15ebdfde47"
-  }
+  },
+  "gpuPreflightSHA256": "7924ea57709a9b68b57ddddee6fc55e7086d36dfabec92c2e123e2273f477189"
 }

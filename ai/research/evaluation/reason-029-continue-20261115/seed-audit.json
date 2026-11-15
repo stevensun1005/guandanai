@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "purpose": "Fresh literal simulated round reservation; counts are not completed games",
+  "sourceAuditSHA256": "25b28cac686ea7cfdf16492b543f0d16265fd775a2f3569ba9947996219a48ff",
+  "inspectedFiles": 4102,
+  "knownUniqueRootSeeds": 2115217,
+  "scope": "Readable local public evidence/protocols/worker complete-line prefixes/completed belief literal blocks. Known count includes declared historical reservations, not completed-game counts. Remote unavailable histories unverified.",
+  "roles": {
+    "greedy": {
+      "count": 96000,
+      "first": 1530000277,
+      "last": 1530391932
+    },
+    "reason": {
+      "count": 25600,
+      "first": 1530391933,
+      "last": 1530496780
+    },
+    "heldoutOld": {
+      "count": 1000,
+      "first": 1530496781,
+      "last": 1530500828
+    },
+    "heldoutBaseline": {
+      "count": 1000,
+      "first": 1530500829,
+      "last": 1530504876
+    }
+  },
+  "roleFileSHA256": "e9ff7a42130f5ac7c85557c8d78eaf05da98aacc4b58efadac2c77514f843f64",
+  "literalSeedRanges": [
+    [
+      1530000000,
+      1531000000
+    ]
+  ],
+  "reservationScope": "Conservative whole candidate pool reserved only literally for future tasks; unused roots do not imply200 completed games",
+  "historicalRootAndUpTo200DerivedRoundOverlap": 0,
+  "newRoleOverlap": 0,
+  "sourceAuditFilesManifest": "Local seed-audit.full.json only; no private trajectories committed"
+}
