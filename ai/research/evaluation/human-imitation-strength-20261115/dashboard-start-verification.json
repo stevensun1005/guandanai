@@ -1,0 +1,17 @@
+{
+  "url": "http://127.0.0.1:8767/",
+  "viewports": [
+    1280,
+    390
+  ],
+  "liveOpponentCards": 2,
+  "plannedPerOpponent": 1000,
+  "actualRoundsAtCheck": [
+    172,
+    36
+  ],
+  "trainingEpochHistoryPreserved": true,
+  "pollResponses": 2,
+  "pageErrors": [],
+  "horizontalOverflow": false
+}

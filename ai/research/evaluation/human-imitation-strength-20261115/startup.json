@@ -1,0 +1,66 @@
+{
+  "driverPID": 41552,
+  "children": [
+    {
+      "name": "awake",
+      "pid": 58524,
+      "startedAtUTC": "2026-11-15T17:56:48.288Z"
+    },
+    {
+      "name": "vs029",
+      "pid": 57592,
+      "startedAtUTC": "2026-11-15T17:56:48.296Z"
+    },
+    {
+      "name": "vsreason",
+      "pid": 40440,
+      "startedAtUTC": "2026-11-15T17:56:48.302Z"
+    }
+  ],
+  "sourceCommit": "738ec793a2215842fa22f93e97b2909557dd3f22",
+  "startedAtUTC": "2026-11-15T17:56:48.302Z",
+  "driverSHA256": "da60bf5ada3d4d8fdbd74a94481b7027738d8411bc3d02198b7282ee993c0ab3",
+  "optimizerUpdates": 0,
+  "observedAtUTC": "2026-11-15T17:58:35.350438+00:00",
+  "realGroupsAtObservation": {
+    "vs029": {
+      "phase": "evaluation",
+      "completedRounds": 498,
+      "workers": [
+        {
+          "pid": 44012,
+          "phase": "running",
+          "completedPairs": 249,
+          "protocolSHA256": "eec7d8912bd27d26b96c682e7462ce2830b9a1548e43d2bfaf92e91b3a5ffea6",
+          "updatedAtUTC": "2026-11-15T17:58:30.674Z"
+        }
+      ]
+    },
+    "vsreason": {
+      "phase": "evaluation",
+      "completedRounds": 122,
+      "workers": [
+        {
+          "pid": 57004,
+          "phase": "running",
+          "completedPairs": 25,
+          "protocolSHA256": "5de3585e2a7066c4f039753e47eff4fe09d78a392f25963e0509b2da554d00dc",
+          "updatedAtUTC": "2026-11-15T17:58:29.583Z"
+        },
+        {
+          "pid": 42152,
+          "phase": "running",
+          "completedPairs": 36,
+          "protocolSHA256": "5de3585e2a7066c4f039753e47eff4fe09d78a392f25963e0509b2da554d00dc",
+          "updatedAtUTC": "2026-11-15T17:58:28.246Z"
+        }
+      ]
+    }
+  },
+  "noSTOPorDuplicateController": true,
+  "deadlineUTC": "2026-11-15T20:54:37.061Z",
+  "sourceFiles": 376,
+  "dashboardPIDReference": 49104,
+  "normalMemoryReserveGiB": 4,
+  "resumeGiB": 5
+}
