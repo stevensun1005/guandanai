@@ -1,0 +1,11 @@
+{
+  "startedAtUTC": "2026-11-15T17:54:37.061Z",
+  "deadlineUTC": "2026-11-15T20:54:37.061Z",
+  "durationHours": 3,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "eec7d8912bd27d26b96c682e7462ce2830b9a1548e43d2bfaf92e91b3a5ffea6",
+  "sourceCommit": "738ec793a2215842fa22f93e97b2909557dd3f22",
+  "purpose": "Frozen post-human-imitation greedy policy versus raw029; no training, no selection, no deployment",
+  "startUTC": "2026-11-15T17:54:37.061Z",
+  "schemaRecovery": "Add required startUTC alias; original clocks unchanged;0 formal games in original run"
+}

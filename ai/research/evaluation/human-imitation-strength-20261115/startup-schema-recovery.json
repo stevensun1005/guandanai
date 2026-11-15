@@ -1,0 +1,48 @@
+{
+  "originalRun": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-20261115",
+  "newRun": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-strength-v2-20261115",
+  "failure": "windowPlan requires startUTC; original had startedAtUTC only",
+  "originalStartUTC": "2026-11-15T17:54:37.061Z",
+  "originalDeadlineUTC": "2026-11-15T20:54:37.061Z",
+  "newClock": false,
+  "formalGamesBeforeRecovery": 0,
+  "optimizerUpdates": 0,
+  "oldDriver": {
+    "complete": false,
+    "children": [
+      {
+        "name": "awake",
+        "pid": 36872,
+        "startedAtUTC": "2026-11-15T17:55:37.161Z",
+        "exitCode": 0,
+        "signal": null,
+        "exitedAtUTC": "2026-11-15T17:55:37.964Z"
+      },
+      {
+        "name": "vs029",
+        "pid": 15828,
+        "startedAtUTC": "2026-11-15T17:55:37.168Z",
+        "exitCode": 1,
+        "signal": null,
+        "exitedAtUTC": "2026-11-15T17:55:37.404Z"
+      },
+      {
+        "name": "vsreason",
+        "pid": 59420,
+        "startedAtUTC": "2026-11-15T17:55:37.174Z",
+        "exitCode": 1,
+        "signal": null,
+        "exitedAtUTC": "2026-11-15T17:55:37.404Z"
+      }
+    ],
+    "awake": {
+      "powerPlanChanged": false,
+      "phase": "released",
+      "pid": 36872,
+      "deadlineUTC": "2026-11-15T20:54:37.061Z",
+      "updatedAtUTC": "2026-11-15T17:55:37.8666124+00:00"
+    }
+  },
+  "frozenRuntimeChanged": false,
+  "sameWeightsAndSeedBlocks": true
+}
