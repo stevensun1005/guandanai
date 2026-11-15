@@ -207,3 +207,5 @@ Clint同步f97f0fe→e17f3ad：键盘/语音/桌面工具及网页同值双贡�
 Clint双栏大厅/平板方位等大更新e17f3ad→66d63b8，只有网页布局/文案/版本标签；0训练更新/0棋力比赛，Clint策略仍6e57485、默认029不变。[证据](evaluation/clint-sync-20261114-1948.json)。
 
 [029-reason续训新窗口](evaluation/reason-029-continue-20261115/README.md)：3126网络/匹配Adam＋新模拟数据，11月15日09:00美东停训后6000局独立比较；准备与实际启动分开，不覆盖旧结论。
+
+新029-reason窗口已实际启动，停训09:00后自动留出评测/本地保存；[启动证据](evaluation/reason-029-continue-20261115/startup.json)。

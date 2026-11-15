@@ -1,0 +1,963 @@
+{
+  "title": "029-reason续训：11月15日09:00美东停训",
+  "note": "从3126匹配Adam继续；采样08:55停、09:00停训，随后评测，11:45评测截止/12:00保存；网页029不变",
+  "deadline": "2026-11-15T17:00:00.000Z",
+  "stages": [
+    {
+      "key": "prepare",
+      "title": "3126检查点/种子/冻结源码/GPU恢复预检",
+      "kind": "descriptive",
+      "paths": {
+        "result": "preflight-panel.json"
+      },
+      "rule": {
+        "type": "dev",
+        "text": "临时合成恢复验证不是新棋力"
+      },
+      "doneWhen": [
+        "gpu-preflight.json"
+      ]
+    },
+    {
+      "key": "data-0",
+      "title": "第1段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-0.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "prepare"
+    },
+    {
+      "key": "train-0",
+      "title": "第1段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-0.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-0"
+    },
+    {
+      "key": "data-1",
+      "title": "第2段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-1.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-0"
+    },
+    {
+      "key": "train-1",
+      "title": "第2段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-1.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-1"
+    },
+    {
+      "key": "data-2",
+      "title": "第3段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-2.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-1"
+    },
+    {
+      "key": "train-2",
+      "title": "第3段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-2.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-2"
+    },
+    {
+      "key": "data-3",
+      "title": "第4段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-3.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-2"
+    },
+    {
+      "key": "train-3",
+      "title": "第4段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-3.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-3"
+    },
+    {
+      "key": "data-4",
+      "title": "第5段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-4.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-3"
+    },
+    {
+      "key": "train-4",
+      "title": "第5段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-4.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-4"
+    },
+    {
+      "key": "data-5",
+      "title": "第6段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-5.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-4"
+    },
+    {
+      "key": "train-5",
+      "title": "第6段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-5.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-5"
+    },
+    {
+      "key": "data-6",
+      "title": "第7段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-6.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-5"
+    },
+    {
+      "key": "train-6",
+      "title": "第7段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-6.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-6"
+    },
+    {
+      "key": "data-7",
+      "title": "第8段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-7.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-6"
+    },
+    {
+      "key": "train-7",
+      "title": "第8段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-7.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-7"
+    },
+    {
+      "key": "data-8",
+      "title": "第9段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-8.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-7"
+    },
+    {
+      "key": "train-8",
+      "title": "第9段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-8.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-8"
+    },
+    {
+      "key": "data-9",
+      "title": "第10段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-9.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-8"
+    },
+    {
+      "key": "train-9",
+      "title": "第10段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-9.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-9"
+    },
+    {
+      "key": "data-10",
+      "title": "第11段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-10.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-9"
+    },
+    {
+      "key": "train-10",
+      "title": "第11段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-10.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-10"
+    },
+    {
+      "key": "data-11",
+      "title": "第12段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-11.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-10"
+    },
+    {
+      "key": "train-11",
+      "title": "第12段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-11.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-11"
+    },
+    {
+      "key": "data-12",
+      "title": "第13段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-12.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-11"
+    },
+    {
+      "key": "train-12",
+      "title": "第13段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-12.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-12"
+    },
+    {
+      "key": "data-13",
+      "title": "第14段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-13.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-12"
+    },
+    {
+      "key": "train-13",
+      "title": "第14段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-13.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-13"
+    },
+    {
+      "key": "data-14",
+      "title": "第15段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-14.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-13"
+    },
+    {
+      "key": "train-14",
+      "title": "第15段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-14.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-14"
+    },
+    {
+      "key": "data-15",
+      "title": "第16段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-15.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-14"
+    },
+    {
+      "key": "train-15",
+      "title": "第16段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-15.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-15"
+    },
+    {
+      "key": "data-16",
+      "title": "第17段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-16.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-15"
+    },
+    {
+      "key": "train-16",
+      "title": "第17段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-16.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-16"
+    },
+    {
+      "key": "data-17",
+      "title": "第18段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-17.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-16"
+    },
+    {
+      "key": "train-17",
+      "title": "第18段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-17.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-17"
+    },
+    {
+      "key": "data-18",
+      "title": "第19段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-18.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-17"
+    },
+    {
+      "key": "train-18",
+      "title": "第19段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-18.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-18"
+    },
+    {
+      "key": "data-19",
+      "title": "第20段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-19.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-18"
+    },
+    {
+      "key": "train-19",
+      "title": "第20段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-19.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-19"
+    },
+    {
+      "key": "data-20",
+      "title": "第21段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-20.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-19"
+    },
+    {
+      "key": "train-20",
+      "title": "第21段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-20.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-20"
+    },
+    {
+      "key": "data-21",
+      "title": "第22段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-21.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-20"
+    },
+    {
+      "key": "train-21",
+      "title": "第22段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-21.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-21"
+    },
+    {
+      "key": "data-22",
+      "title": "第23段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-22.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-21"
+    },
+    {
+      "key": "train-22",
+      "title": "第23段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-22.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-22"
+    },
+    {
+      "key": "data-23",
+      "title": "第24段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-23.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-22"
+    },
+    {
+      "key": "train-23",
+      "title": "第24段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-23.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-23"
+    },
+    {
+      "key": "data-24",
+      "title": "第25段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-24.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-23"
+    },
+    {
+      "key": "train-24",
+      "title": "第25段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-24.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-24"
+    },
+    {
+      "key": "data-25",
+      "title": "第26段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-25.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-24"
+    },
+    {
+      "key": "train-25",
+      "title": "第26段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-25.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-25"
+    },
+    {
+      "key": "data-26",
+      "title": "第27段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-26.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-25"
+    },
+    {
+      "key": "train-26",
+      "title": "第27段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-26.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-26"
+    },
+    {
+      "key": "data-27",
+      "title": "第28段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-27.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-26"
+    },
+    {
+      "key": "train-27",
+      "title": "第28段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-27.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-27"
+    },
+    {
+      "key": "data-28",
+      "title": "第29段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-28.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-27"
+    },
+    {
+      "key": "train-28",
+      "title": "第29段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-28.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-28"
+    },
+    {
+      "key": "data-29",
+      "title": "第30段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-29.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-28"
+    },
+    {
+      "key": "train-29",
+      "title": "第30段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-29.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-29"
+    },
+    {
+      "key": "data-30",
+      "title": "第31段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-30.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-29"
+    },
+    {
+      "key": "train-30",
+      "title": "第31段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-30.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-30"
+    },
+    {
+      "key": "data-31",
+      "title": "第32段新贪心/双进程推理样本",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/data-31.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "3000/800只是上限；只统计完整落盘局"
+      },
+      "after": "train-30"
+    },
+    {
+      "key": "train-31",
+      "title": "第32段GPU匹配Adam续训",
+      "kind": "descriptive",
+      "paths": {
+        "result": "panel/train-31.json",
+        "out": "."
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "继承3126，严格至多12epoch；09:00停，新增与累计分开"
+      },
+      "after": "data-31"
+    },
+    {
+      "key": "baseline-and-final-old",
+      "title": "起点/最终分别对旧reason · 共享1000新副",
+      "kind": "compare",
+      "sides": [
+        {
+          "label": "起点3126 vs旧reason",
+          "out": "panel/baseline-vs-old"
+        },
+        {
+          "label": "最终 vs旧reason",
+          "out": "panel/final-vs-old"
+        }
+      ],
+      "total": 1000,
+      "rule": {
+        "type": "descriptive",
+        "text": "完整1000交换对每组；最终判定见双97.5%门槛"
+      }
+    },
+    {
+      "key": "final-evaluation",
+      "title": "最终对精确3126起点 · 独立1000新副",
+      "kind": "midgame",
+      "total": 1000,
+      "paths": {
+        "out": "panel/final-vs-baseline"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "09:00后自动评测；最终判定以双97.5%门槛为准"
+      }
+    },
+    {
+      "key": "summarize",
+      "title": "最终双门槛/停止审计/本地研究包",
+      "kind": "descriptive",
+      "paths": {
+        "result": "results-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "旧不确定结果保留；不发布未通过模型"
+      }
+    }
+  ]
+}

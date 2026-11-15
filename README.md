@@ -218,3 +218,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 [逐项范围与机器证据](ai/research/evaluation/clint-sync-20261114-1948.json)。
 
 最新029-reason续训准备：所有者确认11月15日09:00美东停训，随后评测保存。从3126更新和匹配Adam续接，新模拟数据/独立留出；网页029与旧结论保留，实际启动另记。[协议](ai/research/evaluation/reason-029-continue-20261115/README.md)。
+
+续训新窗口已于11月15日00:28美东实际启动，09:00停训后自动评测保存；[启动证据](ai/research/evaluation/reason-029-continue-20261115/startup.json)。

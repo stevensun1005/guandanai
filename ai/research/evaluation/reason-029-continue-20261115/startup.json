@@ -1,0 +1,89 @@
+{
+  "id": "reason-029-continue-20261115",
+  "actualControllerStartedAtUTC": "2026-11-15T05:28:16.3872107Z",
+  "observedAtUTC": "2026-11-15T05:30:00.067Z",
+  "sourceCommit": "bad2731db449af82608400e4b347be62eb2aae80",
+  "frozenSourceFilesVerified": 189,
+  "protocolSHA256": "be25f9e7c1630e8551db2880f1ccb691411c71e6a6a56c1da08dd3f5b2a33300",
+  "phase": "data-0",
+  "formalNewUpdates": 0,
+  "inheritedStep": 3126,
+  "greedy": {
+    "pid": 18524,
+    "phase": "running",
+    "rounds": 975,
+    "rows": 30281,
+    "total": 3000,
+    "updatedAtUTC": "2026-11-15T05:29:59.005Z"
+  },
+  "reason": {
+    "phase": "running",
+    "rounds": 60,
+    "rows": 1802,
+    "parts": [
+      {
+        "pid": 58160,
+        "phase": "running",
+        "rounds": 25,
+        "rows": 742,
+        "total": 400,
+        "updatedAtUTC": "2026-11-15T05:29:46.641Z"
+      },
+      {
+        "pid": 16928,
+        "phase": "running",
+        "rounds": 35,
+        "rows": 1060,
+        "total": 400,
+        "updatedAtUTC": "2026-11-15T05:29:54.779Z"
+      }
+    ]
+  },
+  "processes": [
+    {
+      "role": "controller",
+      "pid": 59108,
+      "alive": true
+    },
+    {
+      "role": "powershell.exe",
+      "pid": 38820,
+      "alive": true
+    },
+    {
+      "role": "--generate=greedy",
+      "pid": 18524,
+      "alive": true
+    },
+    {
+      "role": "--generate=reason",
+      "pid": 58160,
+      "alive": true
+    },
+    {
+      "role": "--generate=reason",
+      "pid": 16928,
+      "alive": true
+    },
+    {
+      "role": "guardian",
+      "pid": 39264,
+      "alive": true
+    }
+  ],
+  "awake": {
+    "updatedAtUTC": "2026-11-15T05:29:59.4822441+00:00",
+    "displayRequired": false,
+    "pid": 38820,
+    "powerPlanChanged": false,
+    "phase": "awake",
+    "deadlineUTC": "2026-11-15T17:00:00.000Z"
+  },
+  "trainingDeadlineUTC": "2026-11-15T14:00:00.000Z",
+  "evaluationDeadlineUTC": "2026-11-15T16:45:00.000Z",
+  "saveDeadlineUTC": "2026-11-15T17:00:00.000Z",
+  "webDeployment": false,
+  "webDefault": "029",
+  "dashboard": "http://127.0.0.1:8767/",
+  "note": "Actual fresh samples, no completed new formal GPU segment or strength conclusion at this snapshot"
+}

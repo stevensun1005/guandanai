@@ -211,3 +211,5 @@ Clint updates through e17f3ad add a room-number keypad above the rules, multiple
 The desktop lobby now uses Clint’s2:3 layout: square equal-cell table/start on the left, nickname/mode/options on the right; photo below and build version above. Local model/coach/private controls, practice/spectating, collection and recovery remain. Phones keep the original single-column order. Chrome/WebKit layout tests do not establish physical iPad acceptance; no neural/rule policy or training changes. [Evidence](ai/research/evaluation/clint-sync-20261114-1948.json).
 
 New029-reason continuation is being prepared from the3126-update belief and matchingAdam, with fresh simulated data and heldout deals. Training stops Nov15 09:00Toronto, evaluation11:45 and saving12:00; crossing midnight does not extend it. Old results/runs and web029 remain. Actual start is recorded separately. [Protocol](ai/research/evaluation/reason-029-continue-20261115/README.md).
+
+The fresh continuation window started at00:28Toronto on Nov15; training stops at09:00, followed by evaluation and local packaging. [Startup evidence](ai/research/evaluation/reason-029-continue-20261115/startup.json).
