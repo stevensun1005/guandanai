@@ -1,0 +1,57 @@
+{
+  "complete": true,
+  "opponent": "raw029",
+  "rounds": 1000,
+  "pairs": 500,
+  "wins": 308,
+  "losses": 692,
+  "draws": 0,
+  "winRate": {
+    "clusters": 500,
+    "mean": 0.308,
+    "standardError": 0.012433067293497984,
+    "ci": [
+      0.28363118810474397,
+      0.332368811895256
+    ],
+    "z": 1.96,
+    "method": "Normal approximation using independent seed-pair sample SD"
+  },
+  "signedUpgradePoints": {
+    "clusters": 500,
+    "mean": -1.001,
+    "standardError": 0.053222770753252845,
+    "ci": [
+      -1.1053166306763755,
+      -0.8966833693236244
+    ],
+    "z": 1.96,
+    "method": "Normal approximation using independent seed-pair sample SD"
+  },
+  "finishingRankPairs": {
+    "12": 84,
+    "13": 86,
+    "14": 138,
+    "23": 188,
+    "24": 137,
+    "34": 367
+  },
+  "doubleUps": 84,
+  "doubleDowns": 367,
+  "independentRecomputation": {
+    "pairsVerified": 500,
+    "roundsVerified": 1000,
+    "winsRecomputed": 308,
+    "pointsRecomputed": -1.001,
+    "winRateRecomputed": 0.308,
+    "summaryMatches": true,
+    "workerSHA256": "487239fd5877a67316e80728ed84bbfa020644c089f8e2097b711abc3f373cbf",
+    "sameDealLevelLeader": true,
+    "otherGroupStillRunning": true
+  },
+  "protocolSHA256": "eec7d8912bd27d26b96c682e7462ce2830b9a1548e43d2bfaf92e91b3a5ffea6",
+  "modelSHA256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+  "opponentSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "noPromotion": true,
+  "otherOpponentStillRunning": true
+}

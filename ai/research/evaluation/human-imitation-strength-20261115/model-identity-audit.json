@@ -1,0 +1,30 @@
+{
+  "webCatalogSHA256": "340a30c1bfca87d0f9191e9cc9aeecaf65b384dafb9f770dd27f522151d53996",
+  "oldReasonIdentity": {
+    "id": "9001",
+    "base": "017",
+    "version": "v000855042-bsearch1-16d76783",
+    "manifestSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+    "beliefSHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "search": {
+      "lo": 21,
+      "hi": 40,
+      "worlds": 8,
+      "k": 6,
+      "net": 2,
+      "endgameHi": 20,
+      "endgameWorlds": 8,
+      "minWorlds": 4,
+      "tieTolerance": 1e-09,
+      "solverMaxNodes": 1500000,
+      "worldSeed": "(seed*1009 + ply*7919)>>>0"
+    }
+  },
+  "runtimeMatchesArchivedIdentity": true,
+  "runtimeBudget": "Native generous50s reasoning/3s solver; cold solver each round. Report fallback/timing; not browser-latency acceptance.",
+  "challengerSHA256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+  "raw029SHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "noHumanInputDuringEvaluation": true,
+  "imitationScoresOnlyUsedForArgmax": true,
+  "webDefaultUnchanged": "029"
+}
