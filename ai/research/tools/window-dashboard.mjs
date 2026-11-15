@@ -691,6 +691,27 @@ function progressFor(stage, run, state, startMs, now) {
   const elapsed = startMs ? (now - startMs) / 1000 : null;
   const res = { fraction: null, text: null, eta: null, cap: null };
   if (state === 'queued' || state === 'skipped') return res;
+  if (stage.liveStatus) {
+    const live = readJSON(p(stage.liveStatus));
+    if (live) {
+      res.fraction =
+        live.phase === 'complete'
+          ? 1
+          : live.maxEpochs
+            ? Math.min(1, live.epoch / live.maxEpochs)
+            : null;
+      const label =
+        {
+          training: '训练中',
+          'baseline-validation': '测量验证基线',
+          'epoch-complete': '本轮验证完成',
+          'retrospective-test': '回顾性留出评测',
+          complete: '已完成',
+        }[live.phase] || live.phase;
+      res.text = `${num(live.step)} 次GPU更新 · ${num(live.epoch)} / ${num(live.maxEpochs)}轮上限（可早停） · ${label}`;
+      return res;
+    }
+  }
   switch (stage.kind) {
     case 'endgame-train': {
       const dir = p(paths.out),

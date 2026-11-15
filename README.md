@@ -228,3 +228,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 真人与029的全量只读比较已完成，主要区别在过牌、队友接管与用炸倾向；不是棋力验收或真人训练。[研究报告](ai/research/evaluation/human-model-comparison-20261115/README.md)。
 
 所有者已明确授权新建真人整体行为模仿批次；已按整场准备8335个人工动作，训练停止时间待确认，尚无优化器更新或网页替换。[授权与准备](ai/research/evaluation/human-imitation-overall-20261115/authorization.json)。
+
+真人整体模仿批已获自主时长及面板授权：从029训练出牌选择，按验证早停，最多40轮；模仿logits与棋力分开，原网页029保持。[训练设计](ai/research/evaluation/human-imitation-overall-20261115/protocol-training.design.json)。

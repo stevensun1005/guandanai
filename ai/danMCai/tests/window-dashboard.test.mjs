@@ -19,6 +19,48 @@ import {
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 
+test('imitation live status shows actual GPU updates and completed early stop', () => {
+  const run = mkdtempSync(join(tmpdir(), 'imitation-progress-'));
+  try {
+    writeFileSync(join(run, 'stages.log'), '2029-01-01T00:00:00Z START fit\n');
+    writeJSON(join(run, 'learner-status.json'), {
+      step: 70,
+      epoch: 4,
+      maxEpochs: 40,
+      phase: 'training',
+    });
+    const config = {
+      deadline: '2029-01-02T00:00:00Z',
+      stages: [
+        {
+          key: 'fit',
+          kind: 'descriptive',
+          liveStatus: 'learner-status.json',
+          paths: { result: 'none.json' },
+        },
+      ],
+    };
+    const one = snapshot(run, config, {
+      now: Date.parse('2029-01-01T00:01:00Z'),
+      psText: '',
+      machine: false,
+    }).stages[0];
+    assert.match(one.progress.text, /70 次GPU更新/);
+    assert.equal(one.progress.fraction, 0.1);
+    writeJSON(join(run, 'learner-status.json'), {
+      step: 70,
+      epoch: 4,
+      maxEpochs: 40,
+      phase: 'complete',
+    });
+    const done = snapshot(run, config, { psText: '', machine: false }).stages[0];
+    assert.equal(done.progress.fraction, 1);
+    assert.match(done.progress.text, /可早停/);
+  } finally {
+    rmSync(run, { recursive: true, force: true });
+  }
+});
+
 test('live round win rates count only complete registered pairs, separated by task', () => {
   const run = mkdtempSync(join(tmpdir(), 'round-win-rates-'));
   try {

@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "human-imitation-overall-20261115",
+  "objective": "Behavioral cloning of actual human legal face-vector choices. No hand prediction or tactical heuristic reward; not a win-rate optimizer.",
+  "initialModel": "Verified raw029/v000061013, full12 parameter tensors trainable, fresh AdamW/new optimizer step0",
+  "inputs": "Same567 encoded own-hand/public state+action features as raw029; no names/rooms/identities/opponent private hands/outcomes as inputs",
+  "labels": "Only actual human legal action; deduplicate identical54-face action vectors. Exclude test/bot/timeout/assisted=true and forced/auto-finish decisions. Missing assistance flag remains unknown; no assisted override.",
+  "data": "Existing private snapshot124records/109games/12sessions; fixed guandan-human-v1 whole-match10/1/1 split; exact compiler counts separately saved",
+  "optimizer": {
+    "device": "Existing realROCm cuda:0",
+    "threads": 1,
+    "learningRate": 0.00001,
+    "weightDecay": 0.0001,
+    "batchDecisions": 32,
+    "candidateRowsCap": 8192,
+    "gradClip": 1,
+    "seed": 2026111503,
+    "loss": "Mean per-decision cross entropy over distinct legal face vectors; descriptive action tags never enter loss/selection"
+  },
+  "stopping": {
+    "maxEpochs": 40,
+    "patience": 4,
+    "minDelta": 0.0001,
+    "trainingMinutesCap": 60,
+    "totalMinutesCap": 90,
+    "restartsExtend": false
+  },
+  "selection": "Lowest validation NLL with fixed minDelta; preserve best matching network/Adam and last checkpoint; evaluate selected and original029 on retrospective test after selection once",
+  "acceptance": "Report heldout face-vector agreement/NLL and descriptive style. Sample-level imitation improvement requires test NLL lower and agreement higher than raw029; never claim strength or a neural champion; no automatic publication.",
+  "limits": [
+    "Only1validation and1test session; all records were already descriptively inspected; split prevents gradient leakage but is not prospective independent human acceptance",
+    "This first batch uses current data only, not future D1 data by default",
+    "Output values are imitation logits, not expected upgrade points or calibrated win probabilities",
+    "Only native CPU ONNX/GPU parity is checked here; no browser deployment or strength acceptance"
+  ],
+  "dashboard": "127.0.0.1:8767, actual data/updates/epoch/validation/early-stop/test/save states every3seconds, read-only"
+}

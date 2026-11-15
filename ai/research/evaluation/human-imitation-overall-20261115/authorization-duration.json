@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "ownerQuote": "训练到啥时候都可以，dashboard上也显示训练进度。",
+  "scope": "Owner delegates duration of the new overall-human imitation batch and requests local live training dashboard",
+  "chosenTrainingPolicy": "At most40epochs, validation NLL early stopping patience4/minDelta0.0001; at most1hour training window and1.5hours including preparation/evaluation/save; may finish earlier",
+  "supersedes": "Pending cutoff requirement in authorization.json only; old closed reason windows remain closed",
+  "humanTrainingAuthorized": true,
+  "webDeploymentAuthorized": false,
+  "recordedAtUTC": "2026-11-15T17:28:10.146Z"
+}
