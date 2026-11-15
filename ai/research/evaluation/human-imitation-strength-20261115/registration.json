@@ -1,0 +1,8 @@
+{
+  "id": "human-imitation-strength-20261115",
+  "startedAtUTC": "2026-11-15T17:54:37.061Z",
+  "deadlineUTC": "2026-11-15T20:54:37.061Z",
+  "durationHours": 3,
+  "restartExtendsDeadline": false,
+  "purpose": "New owner-authorized evaluation only, no training"
+}

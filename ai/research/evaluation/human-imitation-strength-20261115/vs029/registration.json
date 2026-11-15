@@ -1,0 +1,9 @@
+{
+  "startedAtUTC": "2026-11-15T17:54:37.061Z",
+  "deadlineUTC": "2026-11-15T20:54:37.061Z",
+  "durationHours": 3,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "4b305a9d7c705a4b17dafa01d0893cd316bf3e4fbadbb5ce43ac1ef3bc68d90e",
+  "sourceCommit": "738ec793a2215842fa22f93e97b2909557dd3f22",
+  "purpose": "Frozen post-human-imitation greedy policy versus raw029; no training, no selection, no deployment"
+}
