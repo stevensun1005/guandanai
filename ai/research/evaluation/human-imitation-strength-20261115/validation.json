@@ -1,0 +1,21 @@
+{
+  "node": {
+    "tests": 526,
+    "passed": 490,
+    "skipped": 36,
+    "failed": 0
+  },
+  "researchPython": {
+    "tests": 42,
+    "passed": 42
+  },
+  "focusedNode": {
+    "tests": 20,
+    "passed": 19,
+    "skipped": 1
+  },
+  "format": "passed",
+  "build": "passed",
+  "webVersionUnchanged": "d567b97606",
+  "formalGamesStarted": 0
+}

@@ -91,3 +91,22 @@ test('student challenger matches the previously evaluated hybrid policy for whol
   );
   assert.equal((await noInference(game, game.turn)).cards.length, 1);
 });
+
+test('raw opponent uses the same complete policy and has exact side-swap symmetry', async () => {
+  const values = (state) => Float32Array.from(state.actions, (_, i) => -i);
+  const policy = studentChallenger(values, values);
+  const games = [];
+  for (const team of [0, 1])
+    games.push(
+      await comparisonRound({
+        seed: 75,
+        team,
+        raw: policy,
+        reason: { decide: policy, engine: {} },
+      }),
+    );
+  assert.equal(games[0].signedPoints + games[1].signedPoints, 0);
+  assert.deepEqual(games[0].order, games[1].order);
+  assert.equal(games[0].reason.midgame.requests, 0);
+  assert.equal(games[1].reason.endgame.requests, 0);
+});

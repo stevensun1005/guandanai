@@ -1,0 +1,32 @@
+{
+  "id": "human-imitation-strength-20261115",
+  "ownerRequest": "把这个模仿真人训练后的模型和029、旧reason各评测1000局，看看胜率有没有提高，结果也放到dashboard上",
+  "optimizerUpdates": 0,
+  "challengerSHA256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+  "raw029SHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "oldReason": {
+    "base017SHA256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "beliefV1SHA256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+    "search": "9001 8worlds,6candidates,2networkrollouts; <=20exact solver;50s native reasoning/3s solver; cold each round"
+  },
+  "games": {
+    "vs029": {
+      "pairs": 500,
+      "rounds": 1000,
+      "workers": 1
+    },
+    "vsOldReason": {
+      "pairs": 500,
+      "rounds": 1000,
+      "workers": 2
+    }
+  },
+  "rules": "108 physical cards, single complete round, seeded uniform level2..A and leader; no tribute; same deal/level/leader then swap both teams; max1000turns truncation error not draw",
+  "policy": "Raw029 and imitation both greedy over identical canonical candidates, with immediate legal finish and forced-action shortcut. Imitation logits never used as upgrade values or search leaf values. Old reason is full search plus017 fallback, not its rawbase.",
+  "timeBudget": "Once-registered3hours each including summary; STOP/deadline checked before and after every action; no extension, reselection or extra games on outcomes.",
+  "metrics": "Separate W/L/D, winrate and95% deal-pair clusterCI, signed final upgrade mean and95%CI, ranks/doubleup/down; simultaneous97.5%CI for two opponent comparisons. No pooling.",
+  "strengthInterpretation": "Versus029 directly tests post-training vs initialization. Old-reason result describes this fixed opponent; historical raw029/oldreason rates are different deals and cannot prove causal training gain. No new-champion or website publish authorization.",
+  "humanData": "None used during evaluation; frozen trained model only. No raw human cards,names,rooms or secrets published.",
+  "seedAuditSHA256": "b6f2ed0490ec5021d315d48c7e119fbc11d5b0d651484cc5d754c34b6305c0b6",
+  "pipeline": "Reuse compare-champion-reason registered controller; add frozen raw-opponent mode; dashboard reads both separate roots; sources and weights frozen before start."
+}

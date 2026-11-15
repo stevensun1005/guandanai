@@ -190,7 +190,14 @@ async function worker(root, slot) {
     save();
     const hybrid = plan.challengerPolicy?.kind === 'endgame-student';
     if (plan.challengerPolicy && !hybrid) throw Error('Unknown challenger policy');
-    for (const key of ['challenger', 'reason', 'belief', ...(hybrid ? ['student'] : [])])
+    const rawOpponent = plan.opponentPolicy?.kind === 'raw';
+    if (plan.opponentPolicy && !rawOpponent) throw Error('Unknown opponent policy');
+    for (const key of [
+      'challenger',
+      'reason',
+      ...(rawOpponent ? [] : ['belief']),
+      ...(hybrid ? ['student'] : []),
+    ])
       sessions.push(
         await ort.InferenceSession.create(plan.models[key].localFile, {
           executionProviders: ['cpu'],
@@ -203,13 +210,17 @@ async function worker(root, slot) {
     const values = championValues(ort, sessions[0]);
     const raw = hybrid
       ? studentChallenger(values, championValues(ort, sessions[3]), plan.challengerPolicy.threshold)
-      : async (game, p) => {
-          const plays = candidates(game.hands[p], game.L, game.trick?.play);
-          if (!plays.length) throw Error('No candidates');
-          if (plays.length === 1) return plays[0];
-          const q = await values(policyState(game, p, 0, plays));
-          return plays[argmax(q)];
-        };
+      : plan.finishShortcut
+        ? studentChallenger(values, values)
+        : async (game, p) => {
+            const plays = candidates(game.hands[p], game.L, game.trick?.play);
+            if (!plays.length) throw Error('No candidates');
+            if (plays.length === 1) return plays[0];
+            const q = await values(policyState(game, p, 0, plays));
+            return plays[argmax(q)];
+          };
+    const opponentValues = rawOpponent ? championValues(ort, sessions[1]) : null;
+    const rawPolicy = rawOpponent ? studentChallenger(opponentValues, opponentValues) : null;
     const budget = { ...SEARCH_BUDGETS.desktop };
     const check = async () => {
       await checkpoint();
@@ -225,12 +236,14 @@ async function worker(root, slot) {
       const seed = plan.tasks[0].seeds[i],
         games = [];
       for (const team of [0, 1]) {
-        const reason = createReasonBot({
-          ort,
-          championSession: sessions[1],
-          beliefSession: sessions[2],
-          budget,
-        });
+        const reason = rawOpponent
+          ? { decide: rawPolicy, engine: {} }
+          : createReasonBot({
+              ort,
+              championSession: sessions[1],
+              beliefSession: sessions[2],
+              budget,
+            });
         games.push(await comparisonRound({ seed, team, raw, reason, checkpoint: check }));
         // Each independent round starts cold. Drop solver/legality caches before the next deal.
         reason.engine.solver = null;

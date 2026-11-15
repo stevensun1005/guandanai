@@ -1058,20 +1058,21 @@ export function snapshot(run, config, options = {}) {
   const psText = options.psText ?? processList();
   const deadline = Date.parse(config.deadline);
   const log = parseStagesLog(readText(join(run, 'stages.log')));
-  const plan = config.roundPairTasks ? readJSON(join(run, 'protocol.json')) : null;
-  const registration = plan ? readJSON(join(run, 'registration.json')) : null;
-  const finalResults = plan ? readJSON(join(run, 'results.json')) : null;
   const roundPairTasks = (config.roundPairTasks || []).map((label) => {
+    const taskRun = label.run ? resolve(run, label.run) : run;
+    const plan = readJSON(join(taskRun, 'protocol.json'));
+    const registration = plan ? readJSON(join(taskRun, 'registration.json')) : null;
+    const finalResults = plan ? readJSON(join(taskRun, 'results.json')) : null;
     const task = plan?.tasks?.find((t) => t.id === label.id);
     if (!task || !registration?.protocolSHA256) return { ...label, unavailable: true };
-    const tally = roundPairTally(run, task, registration.protocolSHA256);
+    const tally = roundPairTally(taskRun, task, registration.protocolSHA256);
     return {
       ...label,
       ...tally,
       state:
         tally.pairs === tally.plannedPairs
           ? '已完成'
-          : existsSync(join(run, 'FINISHED'))
+          : existsSync(join(taskRun, 'FINISHED'))
             ? '已停止，未完成'
             : tally.pairs
               ? '进行中'
@@ -1080,7 +1081,9 @@ export function snapshot(run, config, options = {}) {
         ? finalResults.accept
           ? '完整评测双门槛通过'
           : '完整评测双门槛未通过'
-        : '尚无最终判定；实时胜率不作为提升结论',
+        : tally.pairs === tally.plannedPairs
+          ? '全部预登记单局完成；区间见结果卡，不自动晋升'
+          : '尚无最终判定；实时胜率不作为提升结论',
     };
   });
   const stop =

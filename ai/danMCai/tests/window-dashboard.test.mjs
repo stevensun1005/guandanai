@@ -111,6 +111,17 @@ test('live round win rates count only complete registered pairs, separated by ta
     assert.match(live[0].verdict, /尚无最终判定/);
     assert.equal(live[1].winRate, null);
     assert.equal(live[1].state, '尚未开始');
+    const nested = join(run, 'opponent-b');
+    writeJSON(join(nested, 'protocol.json'), { tasks: [{ id: 'final', seeds: [55] }] });
+    writeJSON(join(nested, 'registration.json'), { protocolSHA256: 'second' });
+    writeFileSync(join(nested, 'worker-0.jsonl'), json(row(55, [1, 3], 'final', 'second')));
+    config.roundPairTasks.push({ id: 'final', run: nested, label: '另一独立评测' });
+    const separate = snapshot(run, config, { machine: false, psText: '' }).roundPairTasks;
+    assert.equal(separate[0].winRate, 0.25);
+    assert.equal(separate[2].winRate, 1);
+    assert.equal(separate[2].rounds, 2);
+    assert.equal(separate[2].state, '已完成');
+    assert.match(separate[2].verdict, /不自动晋升/);
     assert.match(PAGE, /单局胜率（实时）/);
   } finally {
     rmSync(run, { recursive: true, force: true });
