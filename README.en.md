@@ -219,3 +219,5 @@ The local029-reason dashboard now shows per-opponent live round win rates, W/L/D
 Human/model observational comparison: audit all current private cloud records and compare029 choices on the same public observations, separating assistance and automated actions. No human data enters training; no names, rooms or private deals are published. [Design](ai/research/evaluation/human-model-comparison-20261115/protocol.design.json).
 
 The full collected-human comparison is complete:109 game records across12 sessions,6549 decision opportunities. Human and029 choices differ most in passing, playing over a partner and bomb use; these are paired observational differences, not strength or training results. [Report](ai/research/evaluation/human-model-comparison-20261115/README.md).
+
+The owner explicitly authorized a new overall-human behavioral imitation batch.8335 eligible human actions are prepared with match-isolated splits; the training cutoff is pending, with zero optimizer updates and no website replacement. [Authorization](ai/research/evaluation/human-imitation-overall-20261115/authorization.json).

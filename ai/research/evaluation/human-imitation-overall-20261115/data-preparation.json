@@ -1,0 +1,36 @@
+{
+  "preparedAtUTC": "2026-11-15T17:11:24.477Z",
+  "sourceSnapshot": "research-20261115/raw, export cursor124",
+  "sourceGameRounds": 109,
+  "sourceSessions": 12,
+  "eligibleHumanActions": 8335,
+  "excludedAssistedActions": 790,
+  "excludedTests": 15,
+  "botAndTimeoutExcluded": true,
+  "overrideAssisted": false,
+  "splits": {
+    "train": {
+      "actions": 6666,
+      "matches": 10,
+      "rounds": 89
+    },
+    "validation": {
+      "actions": 801,
+      "matches": 1,
+      "rounds": 9
+    },
+    "test": {
+      "actions": 868,
+      "matches": 1,
+      "rounds": 11
+    }
+  },
+  "splitRule": "Existing guandan-human-v1 SHA256(matchId) byte<205 train,<230 validation,else test",
+  "matchSplitOverlap": 0,
+  "preparedFileSHA256": "b7ff9f61ecb87c7acea04f004733de00da381235be16e82cac9404060a05d0e7",
+  "formalOptimizerUpdates": 0,
+  "trainingStarted": false,
+  "trainingDeadline": null,
+  "privacy": "No room/name/other-player private hands in prepared examples; match ID only for private grouping, never network input or public values",
+  "limits": "All12 sessions already inspected in prior descriptive study; heldout prevents gradient leakage but is not an untouched prospective human acceptance set; only1 validation and1 test session; missing assisted flag means unknown"
+}

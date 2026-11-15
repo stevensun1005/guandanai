@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "status": "Awaiting owner answer to pending training-stop time question; data preparation only, zero optimizer updates",
+  "objective": "Imitate actual human legal action choices, not hand prediction, terminal-point optimization or handcrafted tactical preferences",
+  "initial": "Verified raw029/v000061013; old belief/reason runs immutable",
+  "data": "Fixed current D1 snapshot;8335 unflagged human actions with assistance unknown,10/1/1 match-isolated split; filter forced/auto-finish actions in classifier dataset",
+  "loss": "Behavioral cloning over legal actions, treating equivalent actions consistently; never add pass/bomb/partner heuristic loss",
+  "acceptance": "Heldout human-action agreement and likelihood, plus descriptive style distribution; no strength or champion claim from imitation accuracy; one validation and one test session are limited and already descriptively inspected",
+  "optimizerAndWindow": "Exact schedule, frozen execution SHA and STOP registration to be completed before first optimizer update once owner deadline is received",
+  "web": "No deployment or default replacement authorized by this training request"
+}

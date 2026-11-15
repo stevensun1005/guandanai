@@ -226,3 +226,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 真人/模型比较研究已获明确授权：只读全量云端牌谱，按测试/托管/辅助状态审计，比较同一公开观察下029与人工选择；昵称房间号不进公开分析、不接训练。现有快照124条、109正式局/12场会话，仅为数据范围，模型差异结果另记。[设计](ai/research/evaluation/human-model-comparison-20261115/protocol.design.json)。
 
 真人与029的全量只读比较已完成，主要区别在过牌、队友接管与用炸倾向；不是棋力验收或真人训练。[研究报告](ai/research/evaluation/human-model-comparison-20261115/README.md)。
+
+所有者已明确授权新建真人整体行为模仿批次；已按整场准备8335个人工动作，训练停止时间待确认，尚无优化器更新或网页替换。[授权与准备](ai/research/evaluation/human-imitation-overall-20261115/authorization.json)。

@@ -22,3 +22,5 @@ node ai/shared/data/tools/prepare-human-games.mjs --keep-assisted=5f687c12
 所有者追加要求：本站新联机记录也保存room与开打时真人seats[].name（电脑null），与Clint清理／长度规则一致。旧牌谱不回填，研究样本去除明文标签，单人／练习／明牌／测试与assisted边界不变；不新增训练或换冠军。实现与验证见`ai/research/evaluation/collection-labels-20261108.json`。
 
 当前云端真人快照的合法重放、辅助状态与029同局面选择比较见[全量研究](../../research/evaluation/human-model-comparison-20261115/README.md)。原始记录和逐动作诊断仍只在忽略目录，研究汇总不含昵称房间号；不接训练。
+
+2026-11-15所有者明确改为真人整体行为模仿：“我要你训练成模型能和真人打的一样”，并选择“现有真人样本的整体出牌习惯”。仅新建专用批次获准用现有真人动作训练出牌策略；此前只读/真人不接训练限制在该批次被此明确授权取代，旧冻结运行和原结论不改。保留测试/电脑/托管/已标辅助排除与隐私边界，不使用昵称房间号或他人私牌作输入，不自动部署。截止时间问题仍待回复，目前仅完成8335动作的按整场10/1/1隔离准备，正式优化器更新0。[授权与准备](../../research/evaluation/human-imitation-overall-20261115/authorization.json)。

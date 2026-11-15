@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "recordedAtUTC": "2026-11-15T17:12:40.387Z",
+  "ownerQuote": "那我明确告诉你 我要你训练成模型能和真人打的一样",
+  "scopeClarification": "现有真人样本的整体出牌习惯",
+  "humanDataTrainingAuthorized": true,
+  "scope": "New dedicated overall-human behavioral imitation batch only; supersedes previous read-only/no-human-training boundary for this batch",
+  "trainingDeadline": null,
+  "status": "Awaiting owner answer to pending training-stop time question; data preparation only, zero optimizer updates",
+  "oldClosedRunsRemainClosed": true,
+  "webDeploymentAuthorized": false,
+  "privacy": "No names/rooms/hidden opponent hands as inputs; no raw trajectories/keys committed; exclude test/bot/timeout/assisted=true, no assisted override"
+}
