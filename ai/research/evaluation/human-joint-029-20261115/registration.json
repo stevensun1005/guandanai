@@ -1,0 +1,11 @@
+{
+  "id": "human-joint-029-20261115",
+  "startUTC": "2026-11-15T19:30:47.966Z",
+  "startedAtUTC": "2026-11-15T19:30:47.966Z",
+  "deadlineUTC": "2026-11-16T02:30:47.966Z",
+  "trainingDeadlineUTC": "2026-11-15T23:30:47.966Z",
+  "durationHours": 7,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "1b01018eb6e0fba9bbe3673343ab553ab11a40a2dea25570b662dea744359b1c",
+  "sourceCommit": "463b2d7252d59875a891e6ad97ab90c1388fc2d7"
+}
