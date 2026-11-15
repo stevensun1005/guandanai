@@ -1,0 +1,15 @@
+{
+  "url": "http://127.0.0.1:8767/",
+  "viewports": [
+    1280,
+    390
+  ],
+  "completedStages": 5,
+  "actualUpdates": 3444,
+  "selectedEpoch": 17,
+  "stoppedEpoch": 21,
+  "heldoutDisplayed": "39.14% ->53.57%",
+  "pollResponses": 2,
+  "errors": [],
+  "scope": "Read-only actual human-imitation results and epoch history; not win-rate display"
+}

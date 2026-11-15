@@ -197,7 +197,7 @@ def train(plan, root):
             optimizer.step()
             step += 1
             observed += len(ids_batch)
-            total_loss += float(loss) * len(ids_batch)
+            total_loss += float(loss.detach()) * len(ids_batch)
             if step % 10 == 0:
                 progress('training', epochDecisions=observed, epochPlanned=len(partitions['train']),
                          trainingMeanNLL=total_loss / observed, bestValidationNLL=best, patienceUsed=stale)

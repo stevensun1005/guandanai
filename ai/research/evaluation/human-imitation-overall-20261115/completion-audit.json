@@ -1,0 +1,70 @@
+{
+  "phase": "complete",
+  "children": [
+    {
+      "pid": 38788,
+      "command": "pwsh.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\human-imitation-runtime-20261115\\ai\\research\\tools\\evaluation-awake.ps1",
+        "-Run",
+        "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-overall-20261115"
+      ],
+      "startedAtUTC": "2026-11-15T17:32:28.125Z",
+      "exitCode": 0,
+      "signal": null,
+      "exitedAtUTC": "2026-11-15T17:33:39.356Z"
+    },
+    {
+      "pid": 58788,
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\human-imitation-runtime-20261115\\ai\\research\\tools\\prepare-human-imitation.mjs",
+        "--protocol=D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-overall-20261115\\protocol.json"
+      ],
+      "startedAtUTC": "2026-11-15T17:32:28.134Z",
+      "exitCode": 0,
+      "signal": null,
+      "exitedAtUTC": "2026-11-15T17:32:39.027Z"
+    },
+    {
+      "pid": 45856,
+      "command": "D:/vibecoding/guandan/ai/danMCai/environment/gpu-runtime/Scripts/python.exe",
+      "args": [
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\human-imitation-runtime-20261115\\ai\\danMCai\\training\\human_imitation.py",
+        "--protocol",
+        "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-overall-20261115\\protocol.json",
+        "--preflight"
+      ],
+      "startedAtUTC": "2026-11-15T17:32:39.038Z",
+      "exitCode": 0,
+      "signal": null,
+      "exitedAtUTC": "2026-11-15T17:32:44.146Z"
+    },
+    {
+      "pid": 48752,
+      "command": "D:/vibecoding/guandan/ai/danMCai/environment/gpu-runtime/Scripts/python.exe",
+      "args": [
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\vibecoding\\guandan\\ai\\local\\workspace\\worktrees\\human-imitation-runtime-20261115\\ai\\danMCai\\training\\human_imitation.py",
+        "--protocol",
+        "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-imitation-overall-20261115\\protocol.json"
+      ],
+      "startedAtUTC": "2026-11-15T17:32:44.155Z",
+      "exitCode": 0,
+      "signal": null,
+      "exitedAtUTC": "2026-11-15T17:33:29.348Z"
+    }
+  ],
+  "verifiedProtocolSHA256": "8714703964ff362f63c6b584aa2e60be0185156e5d65f9d154af31eaf859848d",
+  "sourceCommit": "3396ac62967832cb812c9a8c28caa7c4b3405816",
+  "atUTC": "2026-11-15T17:33:39.358Z"
+}

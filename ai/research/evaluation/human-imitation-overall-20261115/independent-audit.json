@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checkpointNetworkSHAReproduced": true,
+  "matchingAdamStates": 12,
+  "selectedStep": 2788,
+  "allActualUpdates": 3444,
+  "selectedEpoch": 17,
+  "earlyStopEpoch": 21,
+  "splitOverlap": 0,
+  "trainingSessions": 10,
+  "validationSessions": 1,
+  "testSessions": 1,
+  "privateRowsOrNamesCommitted": false,
+  "noStrengthAcceptance": true,
+  "modelSHA256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+  "archiveSHA256": "2fa1a06cad1ba7629b2df9cc5f1609d40eb1e8388ebcfcaff18589f58e2ca50d",
+  "rawDealDuplicatesAcrossSessions": 0,
+  "observationDuplicatesAcrossSplits": 0,
+  "frozenSourceFilesVerified": 177
+}

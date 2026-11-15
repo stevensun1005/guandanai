@@ -230,3 +230,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 所有者已明确授权新建真人整体行为模仿批次；已按整场准备8335个人工动作，训练停止时间待确认，尚无优化器更新或网页替换。[授权与准备](ai/research/evaluation/human-imitation-overall-20261115/authorization.json)。
 
 真人整体模仿批已获自主时长及面板授权：从029训练出牌选择，按验证早停，最多40轮；模仿logits与棋力分开，原网页029保持。[训练设计](ai/research/evaluation/human-imitation-overall-20261115/protocol-training.design.json)。
+
+真人整体模仿首批已完成：3444次GPU更新、21轮早停选17轮；700个回顾性留出决策与真人选择一致率39.14%→53.57%。只有一个测试会话，不能当作棋力/总体真人验收。面板显示逐轮进度，研究包本地保存，网页029不变。[完成证据](ai/research/evaluation/human-imitation-overall-20261115/README.md)。

@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "backend": "Native ONNX Runtime CPU threads1",
+  "sameExistingHeldoutDecisions": true,
+  "notIndependentNewData": true,
+  "reselectionPerformed": false,
+  "reports": {
+    "baseline": {
+      "decisions": 700,
+      "correct": 274,
+      "accuracy": 0.3914285714285714,
+      "nll": 2.231424551494847,
+      "predictionsSameAsGPU": 700
+    },
+    "candidate": {
+      "decisions": 700,
+      "correct": 375,
+      "accuracy": 0.5357142857142857,
+      "nll": 1.5087074937237113,
+      "predictionsSameAsGPU": 700
+    }
+  }
+}

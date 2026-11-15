@@ -1,0 +1,366 @@
+{
+  "complete": true,
+  "formalUpdates": 3444,
+  "selectedStep": 2788,
+  "selectedEpoch": 17,
+  "stopReason": "validation-early-stop",
+  "baselineValidation": {
+    "decisions": 632,
+    "correct": 337,
+    "accuracy": 0.5332278481012658,
+    "nll": 2.115261853495731
+  },
+  "selectedValidation": {
+    "decisions": 632,
+    "correct": 384,
+    "accuracy": 0.6075949367088608,
+    "nll": 1.3241583667223966
+  },
+  "baselineTest": {
+    "decisions": 700,
+    "correct": 274,
+    "accuracy": 0.3914285714285714,
+    "nll": 2.2314244501931326
+  },
+  "candidateTest": {
+    "decisions": 700,
+    "correct": 375,
+    "accuracy": 0.5357142857142857,
+    "nll": 1.5087074245725358
+  },
+  "retrospectiveImitationImproved": true,
+  "onnxSHA256": "c1788577ac9c93567a4004ce19c982a5ac9e907b440a7453dab83af63538a871",
+  "lastOnnxSHA256": "382356b5345459a85ac0b8109c38073027528206ea55b73306a4bdc7c486d71f",
+  "checkpointSHA256": "22a2993a6c59d4216b08bee962870de96d1d262082a69766343835169428dee9",
+  "matchingAdamStates": 12,
+  "device": "AMD Radeon RX 7800 XT",
+  "onnxParity": {
+    "positions": 16,
+    "argmaxSame": 16,
+    "maxDifference": 8.58306884765625e-06,
+    "scope": "Native CPU ONNX versus actual GPU; existing training positions, not browser or strength evidence"
+  },
+  "descriptiveTestStyle": {
+    "baseline": {
+      "followPass": {
+        "opportunities": 591,
+        "human": 315,
+        "model": 192
+      },
+      "partnerPlay": {
+        "opportunities": 132,
+        "human": 13,
+        "model": 41
+      },
+      "bombPlay": {
+        "opportunities": 630,
+        "human": 73,
+        "model": 229
+      }
+    },
+    "candidate": {
+      "followPass": {
+        "opportunities": 591,
+        "human": 315,
+        "model": 346
+      },
+      "partnerPlay": {
+        "opportunities": 132,
+        "human": 13,
+        "model": 11
+      },
+      "bombPlay": {
+        "opportunities": 630,
+        "human": 73,
+        "model": 100
+      }
+    },
+    "usedInLossOrSelection": false
+  },
+  "outputMeaning": "human action preference logits, not terminal upgrade value or win probability",
+  "selection": "Minimum validation NLL with preregistered minDelta; test read after selection, not used for fit or selection",
+  "strengthAccepted": false,
+  "webPublished": false,
+  "limits": [
+    "12self-reported sessions,109games from Clint,8335 unflagged actions; assistance missing means unknown",
+    "Whole-match10/1/1 split; only one validation and one test session, already inspected descriptively; retrospective only",
+    "Human labels only; historical public bot actions may appear as observation context, but no rule strategy is executed or used as labels",
+    "No identities/rooms/opponent private hands/outcomes in network input; context pass/bomb/partner tags descriptive only",
+    "No automatic deployment, new simulated games, winner optimization or strength claim"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "step": 164,
+      "trainingNLL": 2.0277772060362844,
+      "validation": {
+        "decisions": 632,
+        "correct": 377,
+        "accuracy": 0.5965189873417721,
+        "nll": 1.7919404627401618
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 2,
+      "step": 328,
+      "trainingNLL": 1.7368128220194574,
+      "validation": {
+        "decisions": 632,
+        "correct": 364,
+        "accuracy": 0.5759493670886076,
+        "nll": 1.596470165856277
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 3,
+      "step": 492,
+      "trainingNLL": 1.5833886732697737,
+      "validation": {
+        "decisions": 632,
+        "correct": 364,
+        "accuracy": 0.5759493670886076,
+        "nll": 1.5190384795394125
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 4,
+      "step": 656,
+      "trainingNLL": 1.50697903823231,
+      "validation": {
+        "decisions": 632,
+        "correct": 368,
+        "accuracy": 0.5822784810126582,
+        "nll": 1.4775519793546652
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 5,
+      "step": 820,
+      "trainingNLL": 1.449399711666652,
+      "validation": {
+        "decisions": 632,
+        "correct": 380,
+        "accuracy": 0.6012658227848101,
+        "nll": 1.4451523249662375
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 6,
+      "step": 984,
+      "trainingNLL": 1.397852476058574,
+      "validation": {
+        "decisions": 632,
+        "correct": 376,
+        "accuracy": 0.5949367088607594,
+        "nll": 1.4188059764572336
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 7,
+      "step": 1148,
+      "trainingNLL": 1.3509052429067603,
+      "validation": {
+        "decisions": 632,
+        "correct": 377,
+        "accuracy": 0.5965189873417721,
+        "nll": 1.3965472118763984
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 8,
+      "step": 1312,
+      "trainingNLL": 1.306705126617063,
+      "validation": {
+        "decisions": 632,
+        "correct": 380,
+        "accuracy": 0.6012658227848101,
+        "nll": 1.3792207950278172
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 9,
+      "step": 1476,
+      "trainingNLL": 1.265303031544085,
+      "validation": {
+        "decisions": 632,
+        "correct": 381,
+        "accuracy": 0.6028481012658228,
+        "nll": 1.3649536657936965
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 10,
+      "step": 1640,
+      "trainingNLL": 1.225194085117316,
+      "validation": {
+        "decisions": 632,
+        "correct": 381,
+        "accuracy": 0.6028481012658228,
+        "nll": 1.3536964488934866
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 11,
+      "step": 1804,
+      "trainingNLL": 1.1866194273700243,
+      "validation": {
+        "decisions": 632,
+        "correct": 385,
+        "accuracy": 0.6091772151898734,
+        "nll": 1.3445246445981762
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 12,
+      "step": 1968,
+      "trainingNLL": 1.1486743781126525,
+      "validation": {
+        "decisions": 632,
+        "correct": 386,
+        "accuracy": 0.6107594936708861,
+        "nll": 1.3373789319509193
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 13,
+      "step": 2132,
+      "trainingNLL": 1.1122341498986774,
+      "validation": {
+        "decisions": 632,
+        "correct": 384,
+        "accuracy": 0.6075949367088608,
+        "nll": 1.3321764755852614
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 14,
+      "step": 2296,
+      "trainingNLL": 1.075825628659404,
+      "validation": {
+        "decisions": 632,
+        "correct": 381,
+        "accuracy": 0.6028481012658228,
+        "nll": 1.3290799961814397
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 15,
+      "step": 2460,
+      "trainingNLL": 1.0409889916521804,
+      "validation": {
+        "decisions": 632,
+        "correct": 383,
+        "accuracy": 0.6060126582278481,
+        "nll": 1.3262631123579
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 16,
+      "step": 2624,
+      "trainingNLL": 1.0060095502106834,
+      "validation": {
+        "decisions": 632,
+        "correct": 384,
+        "accuracy": 0.6075949367088608,
+        "nll": 1.3247316185432145
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 17,
+      "step": 2788,
+      "trainingNLL": 0.9717035881627993,
+      "validation": {
+        "decisions": 632,
+        "correct": 384,
+        "accuracy": 0.6075949367088608,
+        "nll": 1.3241583667223966
+      },
+      "selectedNewBest": true,
+      "patienceUsed": 0
+    },
+    {
+      "epoch": 18,
+      "step": 2952,
+      "trainingNLL": 0.9380162913428657,
+      "validation": {
+        "decisions": 632,
+        "correct": 384,
+        "accuracy": 0.6075949367088608,
+        "nll": 1.3260103026522865
+      },
+      "selectedNewBest": false,
+      "patienceUsed": 1
+    },
+    {
+      "epoch": 19,
+      "step": 3116,
+      "trainingNLL": 0.9051727794334993,
+      "validation": {
+        "decisions": 632,
+        "correct": 381,
+        "accuracy": 0.6028481012658228,
+        "nll": 1.3294092250775686
+      },
+      "selectedNewBest": false,
+      "patienceUsed": 2
+    },
+    {
+      "epoch": 20,
+      "step": 3280,
+      "trainingNLL": 0.873169226735082,
+      "validation": {
+        "decisions": 632,
+        "correct": 378,
+        "accuracy": 0.5981012658227848,
+        "nll": 1.3328346798691568
+      },
+      "selectedNewBest": false,
+      "patienceUsed": 3
+    },
+    {
+      "epoch": 21,
+      "step": 3444,
+      "trainingNLL": 0.8413911005169673,
+      "validation": {
+        "decisions": 632,
+        "correct": 382,
+        "accuracy": 0.6044303797468354,
+        "nll": 1.337911445883256
+      },
+      "selectedNewBest": false,
+      "patienceUsed": 4
+    }
+  ]
+}

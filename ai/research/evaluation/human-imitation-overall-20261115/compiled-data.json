@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "eligibleActions": 8335,
+  "decisions": 6549,
+  "excludedForcedOrFinish": 1786,
+  "candidateRows": 323459,
+  "features": 567,
+  "distinctFaceVectors": true,
+  "sourceHumanChoiceOnly": true,
+  "splits": {
+    "train": {
+      "decisions": 5217,
+      "candidateRows": 255466,
+      "matches": 10
+    },
+    "validation": {
+      "decisions": 632,
+      "candidateRows": 33166,
+      "matches": 1
+    },
+    "test": {
+      "decisions": 700,
+      "candidateRows": 34827,
+      "matches": 1
+    }
+  },
+  "featureSHA256": "ebdd2fe9f5812b8ed0471c36ec024d5b58c206e08b9eb4c012e415187b60b5fb",
+  "decisionSHA256": "062888d0c726c68936f5a7c0ff6e0466abf38bfa37c6b6bae30f0fb3b9c8058f",
+  "labels": "Local legal face-vector choice, cross entropy; context type tags are descriptive only, not loss inputs",
+  "noNamesRoomsOrOpponentHands": true,
+  "optimizerUpdates": 0
+}

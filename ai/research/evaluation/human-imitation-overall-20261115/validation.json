@@ -1,0 +1,38 @@
+{
+  "initialFullNode": {
+    "tests": 525,
+    "passed": 489,
+    "skipped": 36,
+    "failed": 0
+  },
+  "postLoggingFixExplicitSerialNode": {
+    "tests": 522,
+    "passed": 486,
+    "skipped": 36,
+    "failed": 0,
+    "durationMs": 95821.7913
+  },
+  "postFixPython": {
+    "tests": 2,
+    "passed": 2
+  },
+  "initialPython": {
+    "tests": 58,
+    "passed": 56,
+    "skipped": 2
+  },
+  "nodeRepeatNote": "Default-discovery repeat stalled after a child exit on Windows, stopped only its verified own test-runner PID; full explicit-path serial fallback passed. Initial full-discovery run also passed. No training rerun.",
+  "frozenRuntimeChanged": false,
+  "noAdditionalSGDOrReselection": true,
+  "format": "passed",
+  "build": {
+    "passed": true,
+    "webVersion": "d567b97606",
+    "webUnchanged": true
+  },
+  "runtime": {
+    "computeChildrenExited": true,
+    "awakeReleased": true,
+    "dashboardOnly": true
+  }
+}
