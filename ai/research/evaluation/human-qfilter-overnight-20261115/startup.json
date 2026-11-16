@@ -1,0 +1,159 @@
+{
+  "status": "real training active; no new strength evidence",
+  "observedAtUTC": "2026-11-16T03:58:02.501144+00:00",
+  "id": "human-qfilter-overnight-20261115",
+  "sourceCommit": "fc8ee6ec7b74f3d43669bb91c4254f27e3a0a1b3",
+  "sourceFilesVerified": 380,
+  "protocolSHA256": "c66a939b32adfd787604960eceb9c3959490624914ee2ed653c84966a4f3a535",
+  "registrationUTC": "2026-11-16T03:55:36.277Z",
+  "formalSupervisorStartUTC": "2026-11-16T03:56:07.980Z",
+  "trainingDeadlineUTC": "2026-11-16T14:00:00.000Z",
+  "humanWarmupUTC": "2026-11-16T08:00:00.000Z",
+  "evaluationSaveDeadlineUTC": "2026-11-16T17:00:00.000Z",
+  "controllerPID": 50000,
+  "supervisorPID": 46384,
+  "learner": {
+    "pid": 58512,
+    "device": "cuda:0",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gpuAllocatedBytes": 173642240,
+    "state": "waiting-for-data",
+    "step": 521,
+    "version": "v000000000",
+    "buffer": 267221,
+    "ingestedRows": 267221,
+    "trainedRows": 1067008,
+    "lossEMA": 3.261413545403261,
+    "humanRowsUsed": 0,
+    "humanTrainingDecisions": 5217,
+    "humanExposureCap": 208680,
+    "humanLoss": {
+      "phase": "terminal-only-warmup",
+      "enableAfterUTC": "2026-11-16T08:00:00.000Z"
+    },
+    "replayRatio": 3.9929795936696593,
+    "stepsPerSecond": 4.662293176745871,
+    "updatedAt": "2026-11-16T03:58:01Z"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 5764,
+      "concurrentGames": 16,
+      "sessionLimit": 3,
+      "matches": 298,
+      "rows": 152640,
+      "failures": 0,
+      "inference": {
+        "batches": 40357,
+        "decisions": 202230,
+        "rows": 9168763,
+        "runMs": 73524.7387999995,
+        "prepareMs": 7995.560300001914,
+        "inFlightMax": 11,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 2,
+        "sessionsCreated": 2,
+        "sessionsReleased": 0,
+        "peakSessions": 2
+      }
+    },
+    {
+      "slot": 1,
+      "pid": 59808,
+      "concurrentGames": 16,
+      "sessionLimit": 3,
+      "matches": 309,
+      "rows": 148439,
+      "failures": 0,
+      "inference": {
+        "batches": 42560,
+        "decisions": 200624,
+        "rows": 8897778,
+        "runMs": 77292.79330000114,
+        "prepareMs": 7744.752399998251,
+        "inFlightMax": 12,
+        "provider": "dml",
+        "fallbackReason": null,
+        "sessionCount": 2,
+        "sessionsCreated": 2,
+        "sessionsReleased": 0,
+        "peakSessions": 2
+      }
+    }
+  ],
+  "awake": {
+    "phase": "awake",
+    "pid": 2696,
+    "powerPlanChanged": false,
+    "deadlineUTC": "2026-11-16T17:00:00.000Z",
+    "displayRequired": false,
+    "updatedAtUTC": "2026-11-16T03:57:52.9345589+00:00"
+  },
+  "dashboardPID": 4540,
+  "dashboard": {
+    "url": "http://127.0.0.1:8767/",
+    "viewports": [
+      1280,
+      390
+    ],
+    "actualTrainingProgress": "196 次GPU更新 · 100,658 终局样本行 · 0 真人动作曝光 · 等待完整终局样本",
+    "separateFutureEvaluationCards": 3,
+    "plannedRoundsEach": 1000,
+    "actualEvaluationRounds": 0,
+    "pageErrors": [],
+    "horizontalOverflow": false,
+    "pollResponses": 2,
+    "formalStrengthEvidence": false
+  },
+  "resourceSnapshot": {
+    "reserveGB": 4,
+    "resumeGB": 5,
+    "freeGB": 4.673454284667969,
+    "rawFreeGB": 4.673454284667969,
+    "measurement": "os.freemem",
+    "measurementError": null,
+    "pausedActors": [],
+    "updatedAt": "2026-11-16T03:57:58.165Z"
+  },
+  "plannedEvaluationRounds": 3000,
+  "actualEvaluationRounds": 0,
+  "webDeploymentAuthorized": false,
+  "oldRunsChanged": false,
+  "freshAdamEmptyReplay": true,
+  "initial029SHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "restartExtendsDeadline": false,
+  "nodeLiveness": [
+    {
+      "pid": 50000,
+      "alive": true
+    },
+    {
+      "pid": 46384,
+      "alive": true
+    },
+    {
+      "pid": 58512,
+      "alive": true
+    },
+    {
+      "pid": 2696,
+      "alive": true
+    },
+    {
+      "pid": 4540,
+      "alive": true
+    },
+    {
+      "pid": 5764,
+      "alive": true
+    },
+    {
+      "pid": 59808,
+      "alive": true
+    }
+  ]
+}
