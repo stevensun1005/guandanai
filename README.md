@@ -246,3 +246,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 隔夜新029训练预登记：03:00前只练终局收益，之后过滤到价值排名前2的真人选择才加模仿梯度。11月16日09:00多伦多时间硬停训练，随后自动评测；旧负结果与网页029保留，实际启动另记。[协议](ai/research/evaluation/human-qfilter-overnight-20261115/README.md)。
 
 隔夜训练已于11月15日22:56多伦多时间真实启动；GPU更新及面板核验见[启动证据](ai/research/evaluation/human-qfilter-overnight-20261115/startup.json)，09:00停训后自动评测。
+
+隔夜029已09:00停训；对029的1000局与真人回顾性检查未显示提升，旧reason评测受内存保护暂停，完整结论待其余组完成。[阶段证据](ai/research/evaluation/human-qfilter-overnight-20261115/interim-20261116-0917.json)。
