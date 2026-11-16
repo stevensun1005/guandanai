@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "initial": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-overnight-20261115\\initial029.onnx",
+  "actors": 2,
+  "actorImplementation": "fast",
+  "fastActor": {
+    "games": 16,
+    "provider": "dml",
+    "sessionLimit": 3
+  },
+  "actorMix": {
+    "self": 0.5,
+    "league": 0.5,
+    "rule": 0
+  },
+  "exploration": {
+    "type": "softmax",
+    "temperature": 0.02
+  },
+  "shardRows": 16384,
+  "shardSeconds": 120,
+  "actorSeedOffset": 0,
+  "actorSeedEnd": 120000,
+  "actorSeedList": {
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-overnight-20261115\\experiments\\seed-reservation\\protocol.json",
+    "sha256": "a1d306003380c8cdb7f4229bb76ebd06763fe24be5f7c3a486252fe55ab71072",
+    "perSlot": 120000
+  },
+  "evaluationBlockOffset": 998,
+  "evaluationBlockEnd": 999,
+  "learner": {
+    "device": "cuda:0",
+    "threads": 1,
+    "batch": 2048,
+    "learningRate": 3e-06,
+    "gradClip": 1,
+    "capacity": 2000000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "exportSeconds": 120,
+    "targetMatchWeight": 0,
+    "anchorWeight": 0.05,
+    "keepVersions": 6,
+    "seed": 2026111601
+  },
+  "humanImitation": {
+    "data": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-overnight-20261115\\human-data",
+    "dataSHA256": {
+      "features.i8": "ebdd2fe9f5812b8ed0471c36ec024d5b58c206e08b9eb4c012e415187b60b5fb",
+      "decisions.json": "062888d0c726c68936f5a7c0ff6e0466abf38bfa37c6b6bae30f0fb3b9c8058f",
+      "manifest.json": "f0ab5845bac248a90373cf3bd3d88eca026189838e09adab870aa0d58893af01"
+    },
+    "everyUpdates": 8,
+    "batchDecisions": 4,
+    "choiceWeight": 0.1,
+    "candidateAnchorWeight": 0.1,
+    "maxPasses": 40,
+    "seed": 2026111602,
+    "gateTopK": 2,
+    "enableAfterUTC": "2026-11-16T08:00:00.000Z"
+  },
+  "snapshotMinutes": 1440,
+  "leagueSize": 1,
+  "anchor": {
+    "intervalHours": 1000,
+    "pairs": 150,
+    "regressionLimit": 2
+  },
+  "restarts": {
+    "limit": 0,
+    "windowMinutes": 10
+  },
+  "diskLimitGB": 20,
+  "resourceBudget": {
+    "reserveGB": 4,
+    "resumeGB": 5
+  },
+  "researchNoGate": true,
+  "researchSnapshots": false,
+  "parent": {
+    "kind": "029-fresh-terminal-first-delayed-value-rank-human-filter",
+    "startingStep": 0,
+    "predecessorNetworkStep": 61013,
+    "networkSHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "checkpointInherited": false,
+    "adamInherited": false,
+    "replayInherited": false
+  }
+}

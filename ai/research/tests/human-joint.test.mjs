@@ -86,3 +86,32 @@ test('automatic evaluation fixes final-only model and common-opponent covariance
   assert.equal(recovered.remainingHours, 2);
   assert.equal(recovered.schedule.deadlineUTC, p.deadlineUTC);
 });
+
+test('overnight filter keeps the owner09:00Toronto deadline and delayed imitation fixed', () => {
+  const p = plan();
+  p.id = 'human-qfilter-overnight-20261115';
+  p.startedAtUTC = '2026-11-16T04:00:00.000Z';
+  p.trainingDeadlineUTC = '2026-11-16T14:00:00.000Z';
+  p.deadlineUTC = '2026-11-16T17:00:00.000Z';
+  p.humanWarmupUTC = '2026-11-16T08:00:00.000Z';
+  p.initialConfig.learner.learningRate = 3e-6;
+  p.initialConfig.learner.anchorWeight = 0.05;
+  p.initialConfig.actors = 2;
+  p.initialConfig.fastActor = { games: 16, sessionLimit: 3 };
+  Object.assign(p.initialConfig.humanImitation, {
+    choiceWeight: 0.1,
+    gateTopK: 2,
+    enableAfterUTC: p.humanWarmupUTC,
+  });
+  const now = Date.parse(p.startedAtUTC) + 1000;
+  assert.doesNotThrow(() => validateJointProtocol(p, now));
+  for (const change of [
+    (q) => (q.trainingDeadlineUTC = '2026-11-16T15:00:00.000Z'),
+    (q) => (q.initialConfig.humanImitation.gateTopK = 3),
+    (q) => (q.initialConfig.humanImitation.enableAfterUTC = q.startedAtUTC),
+  ]) {
+    const q = structuredClone(p);
+    change(q);
+    assert.throws(() => validateJointProtocol(q, now));
+  }
+});

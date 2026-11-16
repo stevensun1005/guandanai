@@ -1,0 +1,34 @@
+{
+  "node": {
+    "tests": 530,
+    "passed": 494,
+    "skipped": 36,
+    "failed": 0,
+    "durationMs": 44968.8239
+  },
+  "python": {
+    "danMCaiModulesSeparately": 21,
+    "researchTests": 43,
+    "sharedTests": 4,
+    "moduleProcesses": 23,
+    "totalTests": 156,
+    "skipped": 1,
+    "failed": 0
+  },
+  "format": "passed",
+  "build": "passed",
+  "webVersionUnchanged": "d567b97606",
+  "formalUpdates": 0,
+  "realGPUPreflight": "Pending frozen-source registered execution",
+  "checks": [
+    "warmup produces zero human gradient",
+    "rejected label group has zero imitation gradient",
+    "fixed original-batch denominators",
+    "accepted/rejected accounting restoration",
+    "owner09:00Toronto cutoff cannot extend"
+  ],
+  "logSHA256": {
+    "node": "ddfa245d25a4e550d6c2f2ed72f9107edf17ee3d9f42ad8bac530c7a6fed428e",
+    "python": "f54d9e86123ac3e9557c4c0aeceb51e17d4b382e1fd7bb1013f0db3b98c8db5a"
+  }
+}

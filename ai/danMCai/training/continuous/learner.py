@@ -205,6 +205,8 @@ class Learner:
                 raise ValueError("Human joint loss requires plain terminal-round Q and a frozen anchor")
             from human_joint import HumanRegularizer
             self.human = HumanRegularizer(self.config["humanImitation"], self.device)
+            if self.checkpoint.exists():
+                self.human.load_state_dict(saved.get("humanState"))
         self.version = latest["version"]
         self.last_export = time.time()
         self.log(
@@ -331,6 +333,7 @@ class Learner:
                 "trainedRows": self.trained_rows,
                 "ingestedRows": self.ingested_rows,
                 "countedShards": sorted(self.counted),
+                "humanState": self.human.state_dict() if self.human is not None else None,
                 "torchRNG": torch.get_rng_state(),
                 "cudaRNG": torch.cuda.get_rng_state_all() if self.device.type == "cuda" else [],
                 "replayRNGJSON": json.dumps(self.replay.random.bit_generator.state),

@@ -316,3 +316,5 @@ GuanZero v4回归要求冠军500/reason200两份报告、250/100配对子范围�
 `python web/tests/clint_lobby_columns_smoke.py <URL> [webkit]`检查九尺寸、2:3双栏/四座位等大、文字不裁切、手机顺序、选级、键盘、全部三模型/默认029、评价开关和跨601px旋转；Chrome与WebKit分别跑。真机iPad/Safari未验证。继续使用random_seats、private_table与production烟测检查实际PeerJS恢复、权限和WASM路径。
 
 029联合训练新增隔离/损失测试：`python -B -m unittest discover -s ai/danMCai/tests -p human_joint_test.py`；Node `ai/research/tests/human-joint.test.mjs` 检查4h＋3h边界/固定最终模型/共同对手配对控制，研究Python `human_joint_review_test.py` 用纯合成结果验证配对协方差和发牌错配拒绝。真实GPU合成联合损失/12组Adam恢复/ONNX预检在新登记窗口运行，不当棋力证据。相关入口见[联合协议](../../ai/research/evaluation/human-joint-029-20261115/README.md)。
+
+隔夜过滤模仿新增测试：`human_joint_test.py`检查预热零模仿梯度、拒绝组零梯度、固定分母及真实接受/拒绝计数恢复；`human-joint.test.mjs`检查11月16日09:00硬截止/03:00启用不能延长或替换。真实GPU预检按已登记配置验证过滤联合损失和12组Adam下一步恢复，不是棋力证据。

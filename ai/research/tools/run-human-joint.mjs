@@ -18,40 +18,69 @@ import { readJSON, writeJSON, sha256 } from '../../danMCai/training/continuous/l
 
 export function validateJointProtocol(p, now = Date.now()) {
   const t = [p.startedAtUTC, p.trainingDeadlineUTC, p.deadlineUTC].map(Date.parse);
+  const overnight = p.id === 'human-qfilter-overnight-20261115';
+  const legacy = p.id === 'human-joint-029-20261115';
+  const c = p.initialConfig,
+    h = c?.humanImitation;
   if (
-    p.id !== 'human-joint-029-20261115' ||
+    (!legacy && !overnight) ||
     p.initialModelSHA256 !== '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768' ||
     !p.humanTrainingAuthorized ||
     p.webDeploymentAuthorized !== false ||
     p.restartExtendsDeadline !== false ||
     !t.every(Number.isFinite) ||
     t[0] > now ||
-    t[1] - t[0] !== 4 * 3600000 ||
-    t[2] - t[1] !== 3 * 3600000 ||
-    now >= t[1]
+    now >= t[1] ||
+    t[2] - t[1] !== 3 * 3600000
   )
-    throw Error('Invalid new4h+3h joint window');
-  const c = p.initialConfig,
-    h = c?.humanImitation;
+    throw Error('Invalid registered joint window');
+  if (legacy && t[1] - t[0] !== 4 * 3600000) throw Error('Legacy4h window changed');
   if (
+    overnight &&
+    (p.trainingDeadlineUTC !== '2026-11-16T14:00:00.000Z' ||
+      p.deadlineUTC !== '2026-11-16T17:00:00.000Z' ||
+      p.humanWarmupUTC !== '2026-11-16T08:00:00.000Z' ||
+      t[0] >= Date.parse(p.humanWarmupUTC) ||
+      t[1] - t[0] > 12 * 3600000)
+  )
+    throw Error('Tomorrow09:00Toronto cutoff or03:00warmup changed');
+  if (
+    !c ||
+    !h ||
     c.extrasMode ||
     c.initial !== p.initialModel ||
     c.learner.targetMatchWeight !== 0 ||
-    c.learner.anchorWeight !== 0.1 ||
-    c.learner.learningRate !== 1e-6 ||
     c.actorMix.self !== 0.5 ||
     c.actorMix.league !== 0.5 ||
     c.actorMix.rule !== 0 ||
     !c.researchNoGate ||
     c.researchSnapshots ||
-    !h ||
-    h.choiceWeight !== 0.2 ||
     h.candidateAnchorWeight !== 0.1 ||
     h.everyUpdates !== 8 ||
     h.batchDecisions !== 4 ||
     h.maxPasses !== 40
   )
-    throw Error('Changed joint objective or frozen neural pool');
+    throw Error('Changed objective or frozen neural pool');
+  if (
+    legacy &&
+    (c.learner.anchorWeight !== 0.1 ||
+      c.learner.learningRate !== 1e-6 ||
+      h.choiceWeight !== 0.2 ||
+      h.gateTopK != null)
+  )
+    throw Error('Legacy objective changed');
+  if (
+    overnight &&
+    (c.learner.anchorWeight !== 0.05 ||
+      c.learner.learningRate !== 3e-6 ||
+      h.choiceWeight !== 0.1 ||
+      h.gateTopK !== 2 ||
+      h.enableAfterUTC !== p.humanWarmupUTC ||
+      c.actors !== 2 ||
+      c.fastActor.games !== 16 ||
+      c.fastActor.sessionLimit !== 3)
+  )
+    throw Error('Overnight phased objective/resources changed');
   if (
     p.evaluationTemplate.plannedRounds !== 1000 ||
     p.evaluationTemplate.plannedPairs !== 500 ||
@@ -134,6 +163,8 @@ async function main(root) {
     if (sha256(m.localFile) !== m.sha256) throw Error('Frozen evaluation model changed');
   if (sha256(join(root, 'heldout-protocol.pending.json')) !== p.heldoutPendingSHA256)
     throw Error('Pending evaluation plan changed');
+  if (p.initialConfigSHA256 && sha256(join(root, 'initial-config.json')) !== p.initialConfigSHA256)
+    throw Error('Initial config changed');
   const lock = join(root, 'controller.lock');
   closeSync(openSync(lock, 'wx'));
   const train = join(root, 'training');
@@ -190,7 +221,7 @@ async function main(root) {
     if (sha256(file) !== reg.protocolSHA256)
       writeJSON(join(root, 'STOP'), { reason: 'protocol-changed' });
     if (Date.now() >= Date.parse(p.trainingDeadlineUTC) && !existsSync(join(train, 'STOP')))
-      writeJSON(join(train, 'STOP'), { reason: 'fixed4h-training-cutoff' });
+      writeJSON(join(train, 'STOP'), { reason: 'fixed-training-cutoff' });
     if (Date.now() >= Date.parse(p.deadlineUTC) && !existsSync(join(root, 'STOP')))
       writeJSON(join(root, 'STOP'), { reason: 'fixed7h-overall-cutoff' });
     if (stopped())
@@ -212,7 +243,11 @@ async function main(root) {
       humanRowsUsed: learner?.humanRowsUsed || 0,
       elapsedFraction: Math.max(
         0,
-        Math.min(1, (Date.now() - Date.parse(p.startedAtUTC)) / (4 * 3600000)),
+        Math.min(
+          1,
+          (Date.now() - Date.parse(p.startedAtUTC)) /
+            (Date.parse(p.trainingDeadlineUTC) - Date.parse(p.startedAtUTC)),
+        ),
       ),
     };
     writeJSON(join(root, 'joint-live.json'), live);
@@ -224,7 +259,12 @@ async function main(root) {
         ['实际设备', learner?.deviceName || '等待学习器'],
         ['已摄入终局样本行', live.ingestedRows],
         ['训练抽样行', live.trainedRows],
-        ['真人动作曝光', live.humanRowsUsed],
+        ['真人模仿梯度标签', live.humanRowsUsed],
+        ['真人阶段', learner?.humanLoss?.phase || '等待学习器'],
+        [
+          '筛选候选/接受/拒绝',
+          `${learner?.humanLoss?.attempted || 0} / ${learner?.humanLoss?.accepted || 0} / ${learner?.humanLoss?.rejected || 0}`,
+        ],
         ['最近真人训练NLL', learner?.humanLoss?.choiceNLL ?? '—'],
         ['采样整场（仅用各单局终局分）', status?.totals?.matches || 0],
         ['目标', '终局MSE为主＋029锚定＋低频小权重真人选择损失'],
@@ -232,7 +272,7 @@ async function main(root) {
     });
     writeJSON(join(root, 'progress.json'), {
       phase,
-      displayName: '029重新开始：真人模仿＋终局收益联合训练',
+      displayName: p.displayName || '029重新开始：真人模仿＋终局收益联合训练',
       analysis: '新Adam/空回放；终局升级分主目标，真人仅训练分组动作；不以战术标签作奖励',
       currentTask: phase === 'train' ? live.phase : phase,
       nextTask: '固定最终模型→真人留出→029/旧reason及起点配对控制→保存',
@@ -276,6 +316,8 @@ async function main(root) {
           'utf8',
           join(p.sourceRoot, 'ai/danMCai/training/continuous/human_joint.py'),
           '--preflight',
+          '--settings',
+          join(root, 'initial-config.json'),
           '--initial',
           p.initialModel,
           '--output',
@@ -307,7 +349,8 @@ async function main(root) {
         window: {
           startUTC: p.startedAtUTC,
           deadlineUTC: p.trainingDeadlineUTC,
-          requestedHours: 4,
+          requestedHours:
+            (Date.parse(p.trainingDeadlineUTC) - Date.parse(p.startedAtUTC)) / 3600000,
           restartExtendsDeadline: false,
         },
       });

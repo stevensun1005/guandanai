@@ -1,0 +1,10 @@
+{
+  "ownerRequest": "那你觉得下一步该怎么训练，才能既像真人又真正提高胜率？训练到明天早上九点",
+  "dateInterpretation": "Tomorrow=2026-11-16, America/Toronto;09:00 stop optimizer/actors, then evaluation and saving",
+  "trainingDeadlineUTC": "2026-11-16T14:00:00.000Z",
+  "evaluationSaveDeadlineUTC": "2026-11-16T17:00:00.000Z",
+  "humanTrainingAuthorized": true,
+  "webDeploymentAuthorized": false,
+  "scope": "New dedicated Windows danMCai experiment; old runs/results/default029 retained",
+  "restartExtendsDeadline": false
+}

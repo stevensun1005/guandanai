@@ -1,0 +1,70 @@
+{
+  "id": "human-qfilter-overnight-20261115",
+  "status": "preregistered design; formal updates0",
+  "initial029SHA256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+  "hypothesis": "Terminal-only warmup plus conservative detached value-rank gating may reduce conflict between return learning and human imitation. It is unproven; top2 is a neural-ranking approximation, not equal expected terminal return.",
+  "phases": {
+    "A": "From actual registered start until2026-11-16T08:00Z/03:00Toronto: only signed terminal-round MC MSE +0.05 fixed029Q anchor; zero human gradient",
+    "B": "03:00 through09:00Toronto: same MC/anchor; every8updates sample4 train-only human decisions; apply0.1choiceCE and0.1candidate-anchor only if the actual human choice is in current Q top2. Original-batch denominators, rejected labels have zero gradient.",
+    "cutoff": "09:00Toronto=14:00Z hard training stop; no renewal; up to3h automatic review/evaluation/save"
+  },
+  "selection": "Final stopped-window learner and matching12Adam only, not a peak or developmental champion",
+  "learner": {
+    "device": "cuda:0",
+    "threads": 1,
+    "batch": 2048,
+    "learningRate": 3e-06,
+    "gradClip": 1,
+    "capacity": 2000000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "exportSeconds": 120,
+    "targetMatchWeight": 0,
+    "anchorWeight": 0.05,
+    "keepVersions": 6,
+    "seed": 2026111601
+  },
+  "sampling": {
+    "actors": 2,
+    "concurrentGamesEach": 16,
+    "cacheLimit": 3,
+    "self": 0.5,
+    "leagueFixed029": 0.5,
+    "rule": 0,
+    "newAdam": true,
+    "emptyReplay": true,
+    "noSnapshotsOrInternalGates": true,
+    "memoryReserveGiB": 4,
+    "resumeGiB": 5
+  },
+  "human": {
+    "dataFingerprint": {
+      "features.i8": "ebdd2fe9f5812b8ed0471c36ec024d5b58c206e08b9eb4c012e415187b60b5fb",
+      "decisions.json": "062888d0c726c68936f5a7c0ff6e0466abf38bfa37c6b6bae30f0fb3b9c8058f",
+      "manifest.json": "f0ab5845bac248a90373cf3bd3d88eca026189838e09adab870aa0d58893af01"
+    },
+    "trainDecisions": 5217,
+    "validationDecisions": 632,
+    "testDecisions": 700,
+    "wholeMatchSplit": "10/1/1",
+    "labels": "Actual authorized human legal54face choices only; no tactical labels, human final results, hidden rival cards, names or room IDs",
+    "exposureAccounting": "At most40xtrain decisions attempted; actual accepted/rejected counts checkpointed, no invented warmup exposures",
+    "limits": "Same previously inspected single validation/test session; missing assistance flag remains unknown; retrospective only, not new independent human acceptance"
+  },
+  "evaluation": {
+    "groups": [
+      "final-vs029",
+      "final-vs-oldreason9001",
+      "029-vs-oldreason9001 same block as final-old"
+    ],
+    "roundsEach": 1000,
+    "uniqueFreshDeals": 1000,
+    "totalRounds": 3000,
+    "unit": "No-tribute complete single round,108physical cards, identical level/leader then swap teams; truncation error not draw",
+    "statistics": "Separate W/L/D,95%seed-pair clustered winrate/signedupgrade intervals; oldreason paired training difference preserves covariance. No pooled overall winrate.",
+    "goals": "Same exploratory point targets as previous joint run: retrospective accuracy+5pp/NLLlower; final-vs029 positive upgrade95%lower; shared-oldreason paired upgrade gain95%lower>0. Report each, not automatic champion/deployment.",
+    "scope": "Oldreason is017+initialbelief-v1 full search,50s native/3s solver, cold per round; fixed algorithm budgets/fallbacks reported; not browser/human/fullmatch validation"
+  },
+  "forbidden": "No Clint in training, no hand-prediction/tactical shaping, no heldout labels in loss, no weight/seed/threshold changes after start, no expansion/peak-picking or web replacement",
+  "seedAuditSHA256": "06293276abb0e33af37341dda832973568a938b5a9b159b456065cc171a136f8"
+}
