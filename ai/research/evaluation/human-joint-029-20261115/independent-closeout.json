@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "verifiedRounds": 3000,
+  "uniqueLiteralDeals": 1000,
+  "sharedOldReasonBlockIntentional": true,
+  "sourceFilesVerified": 380,
+  "allGroupCountsAnd95IntervalsIndependentlyReproduced": true,
+  "pairedUpgradeDifferenceReproduced": true,
+  "modelSHA256": "ba2a86b33b8961860c3add97dee240b075ed0a8449bb634b289688a7f21dd3fb",
+  "matchingAdamStates": 12,
+  "step": 28568,
+  "actualHumanExposures": 14284,
+  "sampledRows": 14670018,
+  "ingestedRows": 14627206,
+  "pendingRows": 42812,
+  "retainedRows": 2033088,
+  "allControllerChildrenExitedZero": true,
+  "temporaryAwakeReleased": true,
+  "observedAtUTC": "2026-11-16T01:49:16.618616+00:00",
+  "noNewGamesOrUpdatesDuringAudit": true
+}

@@ -1,0 +1,22 @@
+{
+  "url": "http://127.0.0.1:8767/",
+  "viewports": [
+    1280,
+    390
+  ],
+  "completedStages": 8,
+  "completedRounds": 3000,
+  "perOpponentWins": [
+    502,
+    519,
+    532
+  ],
+  "humanAccuracyDisplayed": [
+    39.14,
+    41.71
+  ],
+  "jointGoalNotMetDisplayed": true,
+  "pollResponses": 2,
+  "pageErrors": [],
+  "horizontalOverflow": false
+}

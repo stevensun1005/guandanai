@@ -1,0 +1,30 @@
+{
+  "bands": {
+    "midgame": {
+      "requests": 0,
+      "completed": 0,
+      "deviated": 0,
+      "fallbackCount": 0,
+      "minWorldsFallbacks": 0,
+      "fallbackReasons": {},
+      "timedSearches": 0,
+      "totalMs": 0,
+      "maxMs": 0
+    },
+    "endgame": {
+      "requests": 0,
+      "completed": 0,
+      "deviated": 0,
+      "fallbackCount": 0,
+      "minWorldsFallbacks": 0,
+      "fallbackReasons": {},
+      "timedSearches": 0,
+      "totalMs": 0,
+      "maxMs": 0
+    }
+  },
+  "rawMs": 56691.038899999825,
+  "reasonMs": 54949.14380000223,
+  "pairedGames": 1000,
+  "optimizerUpdates": 0
+}

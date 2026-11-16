@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "stoppedAtUTC": "2026-11-15T23:30:54.690Z",
+  "latest": {
+    "version": "v000028568",
+    "file": "v000028568.onnx",
+    "sha256": "ba2a86b33b8961860c3add97dee240b075ed0a8449bb634b289688a7f21dd3fb",
+    "step": 28568,
+    "trainedRows": 58507264,
+    "ingestedRows": 14627206,
+    "publishedAt": "2026-11-15T23:30:51Z"
+  },
+  "checkpointSHA256": "86febc7fb08a9f258b16dff6b544a1ed2f00ff78f25c52eaa4e092a0c7b5a0b6",
+  "matchingNetworkAndAdam": true,
+  "adamStates": 12,
+  "adamStep": 28568,
+  "totals": {
+    "matches": 29218,
+    "decisions": 14670018,
+    "rows": 14670018
+  },
+  "tailRowsNotInCheckpoint": 42812,
+  "limitations": "Retained replay only; evicted samples, original in-memory ring/RNG not recovered.",
+  "retainedRows": 2033088
+}

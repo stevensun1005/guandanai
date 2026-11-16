@@ -1,0 +1,148 @@
+{
+  "title": "029联合训练已完成：双目标未达标",
+  "deadline": "2026-11-16T02:30:47.966Z",
+  "note": "多伦多11月15日18:30停训、19:19完成全部3000局及保存；没有新训练或评测在运行。真人一致率39.14%→41.71%，对029与共同旧reason的训练增量均未确认。原21:30只是预算上限，网页029保持。",
+  "roundPairTasks": [
+    {
+      "id": "head-to-head",
+      "run": "vs029",
+      "label": "最终联合模型 vs029",
+      "plannedPairs": 500,
+      "rounds": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "state": "等待训练结束"
+    },
+    {
+      "id": "head-to-head",
+      "run": "vsreason",
+      "label": "最终联合模型 vs旧reason",
+      "plannedPairs": 500,
+      "rounds": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "state": "等待训练结束"
+    },
+    {
+      "id": "head-to-head",
+      "run": "029vsreason",
+      "label": "029起点 vs旧reason（配对控制）",
+      "plannedPairs": 500,
+      "rounds": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "state": "等待训练结束"
+    }
+  ],
+  "stages": [
+    {
+      "key": "gpu",
+      "title": "真实GPU联合损失/Adam恢复预检",
+      "kind": "descriptive",
+      "paths": {
+        "out": ".",
+        "result": "preflight-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    },
+    {
+      "key": "train",
+      "title": "正式GPU联合训练（4小时上限）",
+      "kind": "descriptive",
+      "paths": {
+        "out": "training",
+        "result": "train-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      },
+      "liveStatus": "joint-live.json",
+      "liveFormat": "updates"
+    },
+    {
+      "key": "audit",
+      "title": "最终网络/Adam/回放/种子/退出审计",
+      "kind": "descriptive",
+      "paths": {
+        "out": ".",
+        "result": "stop-audit.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    },
+    {
+      "key": "human",
+      "title": "真人动作回顾性留出（不是胜率）",
+      "kind": "descriptive",
+      "paths": {
+        "out": ".",
+        "result": "human-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    },
+    {
+      "key": "vs029",
+      "title": "最终模型对029：1000完整单局",
+      "kind": "descriptive",
+      "paths": {
+        "out": "vs029",
+        "result": "vs029/final-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    },
+    {
+      "key": "vsreason",
+      "title": "最终模型对旧reason：1000完整单局",
+      "kind": "descriptive",
+      "paths": {
+        "out": "vsreason",
+        "result": "vsreason/final-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    },
+    {
+      "key": "029vsreason",
+      "title": "029起点对同一旧reason块：1000单局",
+      "kind": "descriptive",
+      "paths": {
+        "out": "029vsreason",
+        "result": "029vsreason/final-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    },
+    {
+      "key": "summary",
+      "title": "配对训练增量/双目标检查/保存",
+      "kind": "descriptive",
+      "paths": {
+        "out": ".",
+        "result": "results-panel.json"
+      },
+      "rule": {
+        "type": "descriptive",
+        "text": "真实计数和完整终局指标；不自动晋升/发布"
+      }
+    }
+  ]
+}

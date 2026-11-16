@@ -27,5 +27,20 @@
   "registeredGPUPreflight": "passed: synthetic joint loss,12Adam restore,next update equality,nativeONNX parity",
   "actualTrainingStarted": true,
   "firstObservedFormalUpdates": 1345,
-  "formalStrengthEvidence": false
+  "formalStrengthEvidence": false,
+  "finalCloseoutIndependentlyVerified": true,
+  "finalRounds": 3000,
+  "finalSourceFiles": 380,
+  "finalFormat": "passed",
+  "finalDashboard": {
+    "completedStages": 8,
+    "completedOpponentCards": 3,
+    "errors": 0,
+    "widths": [
+      1280,
+      390
+    ]
+  },
+  "temporaryAwakeReleased": true,
+  "noNewGamesOrUpdatesDuringCloseout": true
 }
