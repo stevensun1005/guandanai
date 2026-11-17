@@ -382,5 +382,66 @@
     "ai/research/evaluation/guanzero-491912-development-v4-reason.json"
   ],
   "planArchive": "ai/research/evaluation/guanzero-resume-20261117/first-scheduled-plan.json",
-  "defaultChoice": "029"
+  "defaultChoice": "029",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44120166647",
+    "commit": "30eca5af6b20d5b91d53f36c7fdb49994dcf6926",
+    "verifiedAt": "2026-11-17T16:05:49.148Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-030.onnx",
+    "publicSHA256": "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94",
+    "bytes": 6346014,
+    "model": "030",
+    "version": "model-000000491912",
+    "step": 491912,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "030",
+          "guanzero-adp-io48-491912"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-resume-20261117/first-scheduled-plan.json",
+      "ai/research/evaluation/guanzero-491912-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-491912-development-v4-reason.json"
+    ],
+    "trainingConfigAndWindowUnchanged": true
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-17T16:05:07.840Z",
+    "step": 501104,
+    "learnerUpdatedAt": "2026-11-17T16:05:07.179Z",
+    "statusAgeSeconds": 0.660153865814209,
+    "error": null,
+    "STOP": false,
+    "plannedEnd": "2026-11-20T17:00:00.000Z",
+    "actualProcesses": {
+      "supervisor": 12724,
+      "watchdog": 12828,
+      "actorCount": 32,
+      "learner": 34968,
+      "inference": 2680
+    },
+    "pythonLauncherParents": {
+      "learner": 10112,
+      "inference": 26156
+    },
+    "note": "CIM parent-chain checked: each venv python.exe is a launcher for one actual Python worker, not a second learner/inference instance."
+  }
 }
