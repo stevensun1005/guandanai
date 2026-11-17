@@ -1,0 +1,11 @@
+{
+  "observedAtUTC": "2026-11-17T13:29:47.405481+00:00",
+  "packageManifestAndEveryEntrySHA256Verified": true,
+  "containsRawHumanDataOrReplay": false,
+  "trainingOrEvaluationStillRunning": false,
+  "temporaryAwakeReleased": true,
+  "remainingReadOnlyDashboardPID": 21552,
+  "scopedProcessIdentityCheck": "CIM node/python command lines for exact run; only window-dashboard remains. No process terminated.",
+  "newGamesOrOptimizerUpdatesDuringCloseout": 0,
+  "validation": "Independent1500pair/ranks/points/CI/shared covariance/model/source SHA recheck and desktop/mobile3s dashboard poll passed; format passed; no code change"
+}

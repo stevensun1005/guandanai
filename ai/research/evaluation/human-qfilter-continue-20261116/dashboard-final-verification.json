@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "observedAtUTC": "2026-11-17T13:29:25.382338+00:00",
+  "url": "http://127.0.0.1:8767/",
+  "viewports": [
+    1280,
+    390
+  ],
+  "counts": {
+    "queued": 0,
+    "running": 0,
+    "done": 8,
+    "failed": 0,
+    "skipped": 0,
+    "stopped": 0
+  },
+  "roundPairTasks": [
+    {
+      "id": "head-to-head",
+      "run": "vs029",
+      "label": "最终联合模型 vs029",
+      "plannedPairs": 500,
+      "rounds": 1000,
+      "wins": 506,
+      "losses": 494,
+      "draws": 0,
+      "state": "已完成",
+      "pairs": 500,
+      "winRate": 0.506,
+      "meanUpgradePoints": 0.006,
+      "verdict": "全部预登记单局完成；区间见结果卡，不自动晋升"
+    },
+    {
+      "id": "head-to-head",
+      "run": "vsreason",
+      "label": "最终联合模型 vs旧reason",
+      "plannedPairs": 500,
+      "rounds": 1000,
+      "wins": 499,
+      "losses": 501,
+      "draws": 0,
+      "state": "已完成",
+      "pairs": 500,
+      "winRate": 0.499,
+      "meanUpgradePoints": -0.16,
+      "verdict": "全部预登记单局完成；区间见结果卡，不自动晋升"
+    },
+    {
+      "id": "head-to-head",
+      "run": "029vsreason",
+      "label": "029起点 vs旧reason（配对控制）",
+      "plannedPairs": 500,
+      "rounds": 1000,
+      "wins": 533,
+      "losses": 467,
+      "draws": 0,
+      "state": "已完成",
+      "pairs": 500,
+      "winRate": 0.533,
+      "meanUpgradePoints": -0.046,
+      "verdict": "全部预登记单局完成；区间见结果卡，不自动晋升"
+    }
+  ],
+  "pageErrors": [],
+  "horizontalOverflow": false,
+  "pollResponses": 2,
+  "newChampion": false
+}

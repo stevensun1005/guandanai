@@ -245,3 +245,5 @@ New memory-conservative continuation is preregistered through Nov17 07:00Toronto
 The continued run actually started Nov16 at23:03Toronto. New GPU updates, matchingAdam restoration, DML sampling and desktop/mobile live progress were verified. Nov17 07:00training stop and10:00evaluation/save deadline remain fixed. [Startup evidence](ai/research/evaluation/human-qfilter-continue-20261116/startup.json).
 
 GuanZero resumed under the Nov17 owner authorization through Nov20 12:00 Toronto. The [GuanZero guide](ai/guanzero/README.md) records the fixed deadline and separately frozen029/legacy-reason evaluation identities; the website champion default is unchanged.
+
+The Nov17 continuation and all3000evaluation rounds are complete. Memory pauses were eliminated, but neither goal passed: final-vs02950.6%, final-vslegacyreason49.9%, original029-vssamelegacyreason53.3%; paired terminal gain−.114with95%CI[−.24634,.01834]. Retrospective human agreement improved by only1/700decision. Final weights/matchedAdam are preserved locally; no promotion or web deployment. [Full results](ai/research/evaluation/human-qfilter-continue-20261116/README.md).

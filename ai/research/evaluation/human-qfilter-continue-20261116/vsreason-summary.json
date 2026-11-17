@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "id": "human-qfilter-continue-20261116-vsreason",
+  "completedAtUTC": "2026-11-17T12:41:32.690596+00:00",
+  "purpose": "New final-only complete-round evaluation; no optimization, selection, expansion or deployment",
+  "protocolSHA256": "240ceb23bc97ec8de23e1118ca406a4e6af5c2a24eb150d22a38fbc0c93634fe",
+  "models": {
+    "challenger": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\final.onnx",
+      "sha256": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa",
+      "kind": "Final-window joint terminalQ with human regularization; greedy only",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "reason": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\old017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "kind": "old017",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "search": {
+        "lo": 21,
+        "hi": 40,
+        "worlds": 8,
+        "k": 6,
+        "net": 2,
+        "endgameHi": 20,
+        "endgameWorlds": 8,
+        "minWorlds": 4,
+        "tieTolerance": 1e-09,
+        "solverMaxNodes": 1500000,
+        "worldSeed": "(seed*1009 + ply*7919)>>>0"
+      },
+      "manifestSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "version": "v000855042-bsearch1-16d76783"
+    },
+    "belief": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\belief-v1.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "kind": "belief",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "featureVersion": "belief-v1"
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "one complete single round",
+    "cards": 108,
+    "level": "seeded uniform2..A",
+    "leader": "seeded seat",
+    "tribute": false,
+    "maxTurns": 1000,
+    "truncation": "error not draw"
+  },
+  "pipeline": "Plain567feature neuralargmax with forced/immediatefinish shortcut. Final is continued21833 matchedAdam terminalQ+top2-filtered human fullnetwork; oldreason is017+initialbelief search. NativeCPU1thread/session,50s reason/3s solver, cold solver each round; fallbacks reported; not browser-latency acceptance.",
+  "pairing": "Identical physical108cardIDs/level/leader; challenger team0 then team1, both games complete or no pair.",
+  "statistics": {
+    "primary": "Separate W/L/D and winrate95% deal-pair cluster intervals; final signed upgrade95%CI; final-old minus029-old paired by shared deal in closeout. No pooled rate.",
+    "stopping": "Fixed500pairs/group sequentially after07Toronto, by10Toronto hard cap. STOP, no expansion/clock extension or peak selection.",
+    "limits": "Homogeneous neural teams, no tribute, complete single rounds; no human/fullmatch/browser acceptance. Search timings depend on machine load. Control is original029, not parent21833; no isolated continuation-increment claim."
+  },
+  "plannedPairs": 500,
+  "completedPairs": 500,
+  "completedRounds": 1000,
+  "reports": {
+    "head-to-head": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 499,
+      "losses": 501,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.16,
+        "standardError": 0.051323173482088424,
+        "ci": [
+          -0.26059342002489333,
+          -0.05940657997510669
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.499,
+        "standardError": 0.011970153262940143,
+        "ci": [
+          0.47553849960463734,
+          0.5224615003953627
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 209,
+        "13": 81,
+        "14": 209,
+        "23": 115,
+        "24": 115,
+        "34": 271
+      },
+      "doubleDowns": 271,
+      "doubleUps": 209,
+      "meanTurns": 80.848
+    }
+  },
+  "secondaryContrasts": {},
+  "primaryWinner": "oldreason9001",
+  "primaryInterpretation": "Final-only3000round total with shared-deal raw029-oldreason control",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

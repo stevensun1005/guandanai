@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "id": "human-qfilter-continue-20261116-vs029",
+  "completedAtUTC": "2026-11-17T12:03:29.509025+00:00",
+  "purpose": "New final-only complete-round evaluation; no optimization, selection, expansion or deployment",
+  "protocolSHA256": "02d620a20efffc939218ae75bd60f7b28a750d69cdc8c5a76c3c4e7ecc981619",
+  "models": {
+    "challenger": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\final.onnx",
+      "sha256": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa",
+      "kind": "Final-window joint terminalQ with human regularization; greedy only",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "reason": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\raw029.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "kind": "raw029",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "overnight017-20261112",
+        "version": "v000061013",
+        "status": "independent-raw017-gate-accepted-not-universal-strength",
+        "step": 61013,
+        "registeredAt": "2026-11-12T16:19:43.483Z",
+        "champion": {
+          "gate": 1,
+          "kind": "independent-final-only",
+          "acceptedAt": "2026-11-12T11:50:07.553Z",
+          "evidence": "ai/research/evaluation/web-champion-029-20261112/gate.json",
+          "evidenceSHA256": "ac93f363f70ce3a44836ed0cc3ccfcc9be9b4f3f0acf94b0eb705c19fc430296",
+          "manifest": "ai/research/evaluation/web-champion-029-20261112/champion.json"
+        },
+        "trainingDevice": "rocm-cuda-api"
+      }
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "one complete single round",
+    "cards": 108,
+    "level": "seeded uniform2..A",
+    "leader": "seeded seat",
+    "tribute": false,
+    "maxTurns": 1000,
+    "truncation": "error not draw"
+  },
+  "pipeline": "Plain567feature neuralargmax with forced/immediatefinish shortcut. Final is continued21833 matchedAdam terminalQ+top2-filtered human fullnetwork; oldreason is017+initialbelief search. NativeCPU1thread/session,50s reason/3s solver, cold solver each round; fallbacks reported; not browser-latency acceptance.",
+  "pairing": "Identical physical108cardIDs/level/leader; challenger team0 then team1, both games complete or no pair.",
+  "statistics": {
+    "primary": "Separate W/L/D and winrate95% deal-pair cluster intervals; final signed upgrade95%CI; final-old minus029-old paired by shared deal in closeout. No pooled rate.",
+    "stopping": "Fixed500pairs/group sequentially after07Toronto, by10Toronto hard cap. STOP, no expansion/clock extension or peak selection.",
+    "limits": "Homogeneous neural teams, no tribute, complete single rounds; no human/fullmatch/browser acceptance. Search timings depend on machine load. Control is original029, not parent21833; no isolated continuation-increment claim."
+  },
+  "plannedPairs": 500,
+  "completedPairs": 500,
+  "completedRounds": 1000,
+  "reports": {
+    "head-to-head": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 506,
+      "losses": 494,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": 0.006,
+        "standardError": 0.051935754979499246,
+        "ci": [
+          -0.09579407975981852,
+          0.10779407975981853
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.506,
+        "standardError": 0.012579526580040915,
+        "ci": [
+          0.4813441279031198,
+          0.5306558720968801
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 209,
+        "13": 108,
+        "14": 189,
+        "23": 178,
+        "24": 100,
+        "34": 216
+      },
+      "doubleDowns": 216,
+      "doubleUps": 209,
+      "meanTurns": 80.907
+    }
+  },
+  "secondaryContrasts": {},
+  "primaryWinner": "inconclusive",
+  "primaryInterpretation": "Final-only3000round total with shared-deal raw029-oldreason control",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

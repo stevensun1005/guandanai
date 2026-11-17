@@ -5594,6 +5594,17 @@
       "file": "ai/research/evaluation/champion-vs-reason-20261112/protocol.design.json",
       "classification": "v1memorypilot-preserved-v2fresh-independent-evaluation-not-started",
       "activeProtocol": "ai/research/evaluation/champion-vs-reason-20261112/v2/protocol.design.json"
+    },
+    {
+      "id": "human-qfilter-continue-20261116",
+      "classification": "complete-training-and3000round-evaluation-dual-goal-not-met-no-promotion",
+      "results": "ai/research/evaluation/human-qfilter-continue-20261116/results.json",
+      "independentRecheck": "ai/research/evaluation/human-qfilter-continue-20261116/independent-recheck.json",
+      "finalModelSHA256": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa",
+      "newUpdates": 28591,
+      "cumulativeUpdates": 50424,
+      "localResearchPackage": "ai/research/evaluation/human-qfilter-continue-20261116/package.json",
+      "webPublished": false
     }
   ],
   "researchChampions": [

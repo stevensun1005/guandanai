@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "observedAtUTC": "2026-11-17T13:27:34.686780+00:00",
+  "newOptimizerUpdates": 0,
+  "newGames": 0,
+  "sourceFilesVerified": 380,
+  "pairsVerified": 1500,
+  "uniqueDeals": 1000,
+  "ranksDetermineWinnerAndTerminalPoints": true,
+  "sharedReasonDealsVerified": true,
+  "outputsSHA256": {
+    "vs029-pair-results.json": "e392a12114e85896df822a973ae2feab97d2335e30e976615d9644cacf7d6224",
+    "vsreason-pair-results.json": "c52e4e6c369ed2036dae3ea50f436fe55602236996665cd2798a75412201141a",
+    "029vsreason-pair-results.json": "978f26c4abe4f3257165cef8bdad949b8f1e6a131a950804b5becd49e9de7a83"
+  },
+  "reports": {
+    "vs029": {
+      "completedRounds": 1000,
+      "protocolSHA256": "02d620a20efffc939218ae75bd60f7b28a750d69cdc8c5a76c3c4e7ecc981619",
+      "winrate": {
+        "mean": 0.506,
+        "ci": [
+          0.4813441279031198,
+          0.5306558720968801
+        ]
+      },
+      "points": {
+        "mean": 0.006,
+        "ci": [
+          -0.09579407975981852,
+          0.10779407975981853
+        ]
+      },
+      "wins": 506,
+      "losses": 494
+    },
+    "vsreason": {
+      "completedRounds": 1000,
+      "protocolSHA256": "240ceb23bc97ec8de23e1118ca406a4e6af5c2a24eb150d22a38fbc0c93634fe",
+      "winrate": {
+        "mean": 0.499,
+        "ci": [
+          0.47553849960463734,
+          0.5224615003953627
+        ]
+      },
+      "points": {
+        "mean": -0.16,
+        "ci": [
+          -0.26059342002489333,
+          -0.05940657997510669
+        ]
+      },
+      "wins": 499,
+      "losses": 501
+    },
+    "029vsreason": {
+      "completedRounds": 1000,
+      "protocolSHA256": "bab3062aa427e001080009dca7bad3cab7fdb0416f137e7723f8b4129b15d757",
+      "winrate": {
+        "mean": 0.533,
+        "ci": [
+          0.5085877877402554,
+          0.5574122122597447
+        ]
+      },
+      "points": {
+        "mean": -0.046,
+        "ci": [
+          -0.14775323183652872,
+          0.05575323183652871
+        ]
+      },
+      "wins": 533,
+      "losses": 467
+    }
+  },
+  "pairedUpgrade": {
+    "mean": -0.114,
+    "ci": [
+      -0.24634175233698263,
+      0.01834175233698261
+    ]
+  },
+  "pairedWinrate": {
+    "mean": -0.034,
+    "ci": [
+      -0.06475266612421587,
+      -0.003247333875784124
+    ]
+  },
+  "bounds": "Native timed-search evaluation, no tribute/human/mixed/fullmatch acceptance. The control is original029, not21833parent.",
+  "frozenOpponentModelSHA256": {
+    "raw029": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+    "old017": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+    "belief": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+  }
+}

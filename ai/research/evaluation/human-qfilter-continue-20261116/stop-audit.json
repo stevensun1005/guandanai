@@ -1,0 +1,402 @@
+{
+  "schema": 1,
+  "kind": "stopped-campaign-integrity-not-strength",
+  "passed": true,
+  "observedAtUTC": "2026-11-17T12:00:15.127849+00:00",
+  "run": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\training",
+  "earlyStoppedPilot": false,
+  "fullWindowCompleted": true,
+  "task": {
+    "protocol": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\training\\protocol.json",
+    "protocolSHA256": "1e121e01afb9907db4af181a112e2ca44624069e298ec3c004d37959712308fd",
+    "window": {
+      "startUTC": "2026-11-17T04:03:02.906Z",
+      "deadlineUTC": "2026-11-17T12:00:00.000Z",
+      "requestedHours": 7.949192777777778,
+      "restartExtendsDeadline": false
+    }
+  },
+  "stoppedAtUTC": "2026-11-17T12:00:08.985Z",
+  "exitDelaySeconds": 8.985,
+  "latest": {
+    "version": "v000050424",
+    "file": "v000050424.onnx",
+    "sha256": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa",
+    "step": 50424,
+    "trainedRows": 103268352,
+    "ingestedRows": 25817322,
+    "publishedAt": "2026-11-17T12:00:02Z"
+  },
+  "checkpointSHA256": "4cc627c702813c6d32f571207a8b6ec69f8e4bf01671fb49c0b6448d569135aa",
+  "matchingNetworkAndAdam": true,
+  "adamStates": 12,
+  "adamStep": 50424,
+  "parent": {
+    "kind": "continued-final21833-network-and-matchingAdam-newRNG-emptyReplay",
+    "startingStep": 21833,
+    "ingestedRows": 11178913,
+    "trainedRows": 44713984,
+    "humanRowsUsed": 227,
+    "networkSHA256": "9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03",
+    "checkpointSHA256": "815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516",
+    "checkpointInherited": true,
+    "adamInherited": true,
+    "replayInherited": false,
+    "rngRestored": false,
+    "referenceAndLeague": "Frozen21833 student; explicit continuation object, not a newly accepted champion",
+    "inheritedHumanAttempted": 360,
+    "inheritedHumanRejected": 133
+  },
+  "sourceSHA256": {
+    "ai/danMCai/training/continuous/supervisor.mjs": "2f3ebc7e3bffb9bfbd9f67149814eeae54d2e2c0e91e399bff2124b31c0ac7cd",
+    "ai/danMCai/training/continuous/gate-schedule.mjs": "fbe3537c3e05392a3f52de8c54459211db19b2ac643a8ab3cc498bf945af6c66",
+    "ai/danMCai/training/continuous/actor.mjs": "b517eb120422e534b82f9cba894c6e018b1d916662c298346256ec818a065c91",
+    "ai/danMCai/training/continuous/actor-seeds.mjs": "5083815688c8cd23406bd6418487135626a1681bfee21443754365b51e3c4d0d",
+    "ai/danMCai/training/continuous/gate.mjs": "d8a587016aa3e090bb42d25b930102ac1ac37de81e92e1721d6dcf1347d60413",
+    "ai/danMCai/training/continuous/lib.mjs": "32816b7ca1a080ee25dceea4fbbee5bfc1243e4ddfc767a26bba3e178585929a",
+    "ai/danMCai/training/continuous/learner.py": "ed32d4c800c302112e6f85fece8abf82d4ef63b72466b956f1d56661c1c28f99",
+    "ai/danMCai/training/continuous/human_joint.py": "cde737d0bbe920af12615a51243e0c95888f716554b36120a0e1601d4aa128cc",
+    "ai/danMCai/training/continuous/value_net.py": "1e9c63e5d3bf25edf9c506265cd71b4170d0a8634a56456bbadce3ad5529052c",
+    "ai/danMCai/training/continuous/fast-actor.mjs": "59628f82b1034a91a35e1639221e9953713ad4e30c7164e5d03ca164b521082b",
+    "ai/danMCai/training/continuous/batch-inference.mjs": "293001a3a28fc4b542cc499c8860229859df0521b96edcd5028f63c0ecde6afc",
+    "ai/danMCai/training/continuous/inference-worker.mjs": "7514d0e9b1212b34f498e81a93a8756970e6620eb3dd0e4588462d2aec199393",
+    "ai/danMCai/training/continuous/fast-candidates.mjs": "05b7c5c29ee18e0b80eed5b2164d04aa93de57e3e8c70f0897e8e75c58a6b89d",
+    "ai/danMCai/training/continuous/fast-rollout.mjs": "1611779ed44922457b872b92b872dd67110142c708633e2974e7e209eae69d43",
+    "ai/danMCai/training/continuous/onnx-rows.mjs": "d48d06e817269e30bb1d17f6951dc10131a2f91dcb27c78003dfb5cb096d9592",
+    "ai/danMCai/training/continuous/resources.mjs": "c6660ddd9b3435b68bd3214c8af2b5cdb0af52af41f06434b5340bcf27d5e35a",
+    "ai/danMCai/training/continuous/remote.mjs": "7bc9fd70fa7e5e8269db906cfb542e768e7ba49908b7e9cf28c356c1117bc358",
+    "ai/danMCai/training/continuous/windows-window.mjs": "ce045db1fe9058544f9f7bd5f7a75b69ea208bed207ce91141cf6d10f00a63be",
+    "ai/shared/simulation/match-rollout.mjs": "558a8a54daff502980c4521d70b7b17b078464a7452d8fd164c099622e79404a",
+    "ai/shared/simulation/match-simulation.mjs": "16b28e893a397f0754ac774cc017c68ab0323e78182ee956931368e77876e25f",
+    "ai/shared/simulation/simulation.mjs": "6d2883dcb5bd6b39974883a02c3869196488e67fa0249a0ec3cbcbe2683bcbd2",
+    "ai/shared/simulation/rule-baseline.mjs": "6c639446edd6b864704d3a8b32f4e0e56fe9ac09cb59921587081d5c08c66339",
+    "web/src/core/cards.js": "075af4a68926226887bada3fb242a4ddb7614c19850733c10dc4919b240af78f",
+    "web/src/core/combinations.js": "06eea3536a51df0d7ec81d69bae71a5b72703b691d26aca198bcd363e57ed60d",
+    "web/src/core/moves.js": "e77fb6d740df1d81dae9663a0e03943cf7bb6a880f75e6af37979da772658d8a",
+    "web/src/core/match.js": "33d71188191737b1f141725aeef842982937ec76481247432450aac2dc075fd2",
+    "web/src/core/tribute.js": "fa3230df67667dca4983b38a76cfa408fee514a9c90a4c776720ae679a4a1d63",
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/rule-policy.js": "41a5602ffbadcf83a5985524c177578185d916be5a78810557c4b2b9952b0fae",
+    "web/src/ai/hand-value.js": "c6f96566329ff59c8fb6aa1154889ddd99ee527d4949b87e1b0a563757205117",
+    "web/src/ai/habits.js": "a955093fe6b53358700993c987a8f64771725d8cae55af1d13df3770e1065579",
+    "web/src/hand/arrangement.js": "61b4a87efaa05db1038166a0950d8c17211ab83e3736cbe97e85218445e4f011",
+    "web/src/hand/hints.js": "89453b59d274ef44e5bf5c7f76e4cb5cfc37effc1840858533abdc8d25036d5b",
+    "web/src/ai/policy-features.mjs": "076b97c6f153e76fb5b7d03a08fa9d6675cc7b5cb31377f857c816f27115b6f8",
+    "ai/danMCai/belief/sampler.mjs": "7523c6018f0dc04a6053c587a65487d8028beae5f1c49299678c27b67493d4cd",
+    "ai/danMCai/belief/features.mjs": "de146a33e7bc3b6b0fa3c041ae966f1dd5ca078f8a4f9b66be0da52ef4cfcf29",
+    "web/src/analysis/concepts.mjs": "826b897540c2784d546109f31cb5e25bd798041f6ace74fb9a42002ee96ce41f",
+    "ai/danMCai/training/human_imitation.py": "df4aad77cc566bb76f5d89c59e1080041b127ad6d9798df50f8bb17222f954e5",
+    "package-lock.json": "42bbd0f86c05c51b5cd72fb02c036c10db40be4ae70bba30053b530c08ca231b",
+    "ai/danMCai/training/continuous/sources.mjs": "f6fab7d5db224a8f15b4f2088e1ffb95abb5c7534c4230e60a300b4b76a658d1",
+    "ai/danMCai/training/continuous/mac-24h.mjs": "750db0e8f0dec982b953de9c53e2637596da8d64be0aed9fb07be7c58cdba3f3"
+  },
+  "actors": [
+    {
+      "slot": 0,
+      "pid": 21052,
+      "matches": 29739,
+      "decisions": 14657512,
+      "failures": 0,
+      "nextSeed": 29739,
+      "shardSequence": 100882,
+      "uniqueLoggedSeeds": 29739,
+      "allocatedSeedsWithoutResult": 0
+    }
+  ],
+  "replay": {
+    "manifests": {
+      "a00-000100850.json": {
+        "rows": 14418,
+        "matches": 29
+      },
+      "a00-000100851.json": {
+        "rows": 16799,
+        "matches": 33
+      },
+      "a00-000100852.json": {
+        "rows": 16722,
+        "matches": 35
+      },
+      "a00-000100853.json": {
+        "rows": 15407,
+        "matches": 33
+      },
+      "a00-000100854.json": {
+        "rows": 16590,
+        "matches": 31
+      },
+      "a00-000100855.json": {
+        "rows": 16759,
+        "matches": 38
+      },
+      "a00-000100856.json": {
+        "rows": 17049,
+        "matches": 33
+      },
+      "a00-000100857.json": {
+        "rows": 16489,
+        "matches": 33
+      },
+      "a00-000100858.json": {
+        "rows": 17189,
+        "matches": 31
+      },
+      "a00-000100859.json": {
+        "rows": 16830,
+        "matches": 36
+      },
+      "a00-000100860.json": {
+        "rows": 16455,
+        "matches": 34
+      },
+      "a00-000100861.json": {
+        "rows": 16491,
+        "matches": 32
+      },
+      "a00-000100862.json": {
+        "rows": 16532,
+        "matches": 29
+      },
+      "a00-000100863.json": {
+        "rows": 16780,
+        "matches": 35
+      },
+      "a00-000100864.json": {
+        "rows": 16582,
+        "matches": 37
+      },
+      "a00-000100865.json": {
+        "rows": 16606,
+        "matches": 35
+      },
+      "a00-000100866.json": {
+        "rows": 16512,
+        "matches": 30
+      },
+      "a00-000100867.json": {
+        "rows": 16483,
+        "matches": 34
+      },
+      "a00-000100868.json": {
+        "rows": 16576,
+        "matches": 36
+      },
+      "a00-000100869.json": {
+        "rows": 16703,
+        "matches": 34
+      },
+      "a00-000100870.json": {
+        "rows": 12568,
+        "matches": 29
+      },
+      "a00-000100871.json": {
+        "rows": 17172,
+        "matches": 30
+      },
+      "a00-000100872.json": {
+        "rows": 16588,
+        "matches": 31
+      },
+      "a00-000100873.json": {
+        "rows": 16483,
+        "matches": 34
+      },
+      "a00-000100874.json": {
+        "rows": 16679,
+        "matches": 36
+      },
+      "a00-000100875.json": {
+        "rows": 16437,
+        "matches": 34
+      },
+      "a00-000100876.json": {
+        "rows": 16489,
+        "matches": 37
+      },
+      "a00-000100877.json": {
+        "rows": 16463,
+        "matches": 36
+      },
+      "a00-000100878.json": {
+        "rows": 16501,
+        "matches": 34
+      },
+      "a00-000100879.json": {
+        "rows": 16558,
+        "matches": 38
+      },
+      "a00-000100880.json": {
+        "rows": 16730,
+        "matches": 35
+      },
+      "a00-000100881.json": {
+        "rows": 2373,
+        "matches": 4
+      }
+    },
+    "shards": 32,
+    "retainedRows": 511013,
+    "pendingShards": [
+      "a00-000100880.json",
+      "a00-000100881.json"
+    ],
+    "pendingRows": 19103,
+    "allCompanionsAndLengthsValid": true,
+    "allTargetsFiniteAndWithinProtocol": true,
+    "inheritedCountedNamesAlreadyAbsentAtHandoff": [
+      "a01-000000518.json",
+      "a01-000000519.json",
+      "a01-000000520.json",
+      "a01-000000521.json",
+      "a01-000000522.json",
+      "a01-000000523.json",
+      "a01-000000524.json",
+      "a01-000000525.json",
+      "a01-000000526.json",
+      "a01-000000527.json",
+      "a01-000000528.json",
+      "a01-000000529.json",
+      "a01-000000530.json",
+      "a01-000000531.json",
+      "a01-000000532.json",
+      "a01-000000533.json",
+      "a01-000000534.json",
+      "a01-000000535.json",
+      "a01-000000536.json",
+      "a01-000000537.json",
+      "a01-000000538.json",
+      "a01-000000539.json",
+      "a01-000000540.json",
+      "a01-000000541.json",
+      "a01-000000542.json",
+      "a01-000000543.json",
+      "a01-000000544.json",
+      "a01-000000545.json",
+      "a01-000000546.json",
+      "a01-000000547.json",
+      "a01-000000548.json",
+      "a01-000000549.json",
+      "a01-000000550.json",
+      "a01-000000551.json",
+      "a01-000000552.json",
+      "a01-000000553.json",
+      "a01-000000554.json",
+      "a01-000000555.json",
+      "a01-000000556.json",
+      "a01-000000557.json",
+      "a01-000000558.json",
+      "a01-000000559.json",
+      "a01-000000560.json",
+      "a01-000000561.json",
+      "a01-000000562.json",
+      "a01-000000563.json",
+      "a01-000000564.json",
+      "a01-000000565.json",
+      "a01-000000566.json",
+      "a01-000000567.json",
+      "a01-000000568.json",
+      "a01-000000569.json",
+      "a01-000000570.json",
+      "a01-000000571.json",
+      "a01-000000572.json",
+      "a01-000000573.json",
+      "a01-000000574.json",
+      "a01-000000575.json",
+      "a01-000000576.json",
+      "a01-000000577.json",
+      "a01-000000578.json",
+      "a01-000000579.json",
+      "a01-000000580.json",
+      "a01-000000581.json",
+      "a01-000000582.json",
+      "a01-000000583.json",
+      "a01-000000584.json",
+      "a01-000000585.json",
+      "a01-000000586.json",
+      "a01-000000587.json",
+      "a01-000000588.json",
+      "a01-000000589.json",
+      "a01-000000590.json",
+      "a01-000000591.json",
+      "a01-000000592.json",
+      "a01-000000593.json",
+      "a01-000000594.json",
+      "a01-000000595.json",
+      "a01-000000596.json",
+      "a01-000000597.json",
+      "a01-000000598.json",
+      "a01-000000599.json",
+      "a01-000000600.json",
+      "a01-000000601.json",
+      "a01-000000602.json",
+      "a01-000000603.json",
+      "a01-000000604.json",
+      "a01-000000605.json",
+      "a01-000000606.json",
+      "a01-000000607.json",
+      "a01-000000608.json",
+      "a01-000000609.json",
+      "a01-000000610.json",
+      "a01-000000611.json",
+      "a01-000000612.json",
+      "a01-000000613.json",
+      "a01-000000614.json",
+      "a01-000000615.json",
+      "a01-000000616.json",
+      "a01-000000617.json",
+      "a01-000000618.json",
+      "a01-000000619.json",
+      "a01-000000620.json",
+      "a01-000000621.json",
+      "a01-000000622.json",
+      "a01-000000623.json",
+      "a01-000000624.json",
+      "a01-000000625.json",
+      "a01-000000626.json",
+      "a01-000000627.json",
+      "a01-000000628.json",
+      "a01-000000629.json",
+      "a01-000000630.json",
+      "a01-000000631.json",
+      "a01-000000632.json",
+      "a01-000000633.json",
+      "a01-000000634.json",
+      "a01-000000635.json",
+      "a01-000000636.json",
+      "a01-000000637.json",
+      "a01-000000638.json",
+      "a01-000000639.json",
+      "a01-000000640.json",
+      "a01-000000641.json",
+      "a01-000000642.json",
+      "a01-000000643.json",
+      "a01-000000644.json",
+      "a01-000000645.json",
+      "a01-000000646.json",
+      "a01-000000647.json",
+      "a01-000000648.json",
+      "a01-000000649.json",
+      "a01-000000650.json",
+      "a01-000000651.json",
+      "a01-000000652.json",
+      "a01-000000653.json",
+      "a01-000000654.json",
+      "a01-000000655.json",
+      "a01-000000656.json",
+      "a01-000000657.json",
+      "a01-000000658.json"
+    ]
+  },
+  "totals": {
+    "matches": 29739,
+    "decisions": 14657512,
+    "rows": 14657512
+  },
+  "tailRowsNotInCheckpoint": 19103,
+  "optimizerUpdatesDuringAudit": 0,
+  "preservedHistory": true,
+  "webChampionChanged": false,
+  "limitations": "Retained replay only; evicted samples, original in-memory ring/RNG not recovered."
+}

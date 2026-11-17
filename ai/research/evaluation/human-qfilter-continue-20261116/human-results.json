@@ -1,0 +1,38 @@
+{
+  "reports": {
+    "029": {
+      "validation": {
+        "decisions": 632,
+        "correct": 337,
+        "accuracy": 0.5332278481012658,
+        "nll": 2.115261912534329
+      },
+      "test": {
+        "decisions": 700,
+        "correct": 274,
+        "accuracy": 0.3914285714285714,
+        "nll": 2.231424551494847
+      }
+    },
+    "final": {
+      "validation": {
+        "decisions": 632,
+        "correct": 340,
+        "accuracy": 0.5379746835443038,
+        "nll": 2.107543968689597
+      },
+      "test": {
+        "decisions": 700,
+        "correct": 275,
+        "accuracy": 0.39285714285714285,
+        "nll": 2.2243648302433745
+      }
+    }
+  },
+  "selection": "Final-window learner only, no validation/test model selection",
+  "retrospectiveOnly": true,
+  "oneValidationAndOneTestSession": true,
+  "previouslyInspectedData": true,
+  "notWinProbability": true,
+  "optimizerUpdatesDuringReview": 0
+}

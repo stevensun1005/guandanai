@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "id": "human-qfilter-continue-20261116-029vsreason",
+  "completedAtUTC": "2026-11-17T13:13:14.038865+00:00",
+  "purpose": "New final-only complete-round evaluation; no optimization, selection, expansion or deployment",
+  "protocolSHA256": "bab3062aa427e001080009dca7bad3cab7fdb0416f137e7723f8b4129b15d757",
+  "models": {
+    "challenger": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\raw029.onnx",
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "kind": "raw029",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "source": {
+        "run": "overnight017-20261112",
+        "version": "v000061013",
+        "status": "independent-raw017-gate-accepted-not-universal-strength",
+        "step": 61013,
+        "registeredAt": "2026-11-12T16:19:43.483Z",
+        "champion": {
+          "gate": 1,
+          "kind": "independent-final-only",
+          "acceptedAt": "2026-11-12T11:50:07.553Z",
+          "evidence": "ai/research/evaluation/web-champion-029-20261112/gate.json",
+          "evidenceSHA256": "ac93f363f70ce3a44836ed0cc3ccfcc9be9b4f3f0acf94b0eb705c19fc430296",
+          "manifest": "ai/research/evaluation/web-champion-029-20261112/champion.json"
+        },
+        "trainingDevice": "rocm-cuda-api"
+      }
+    },
+    "reason": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\old017.onnx",
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "kind": "old017",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "search": {
+        "lo": 21,
+        "hi": 40,
+        "worlds": 8,
+        "k": 6,
+        "net": 2,
+        "endgameHi": 20,
+        "endgameWorlds": 8,
+        "minWorlds": 4,
+        "tieTolerance": 1e-09,
+        "solverMaxNodes": 1500000,
+        "worldSeed": "(seed*1009 + ply*7919)>>>0"
+      },
+      "manifestSHA256": "442d888ada3b59c56cb1e809bb24a97268f00c3daaa6345c6b53f2f84aca6a24",
+      "version": "v000855042-bsearch1-16d76783"
+    },
+    "belief": {
+      "localFile": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\belief-v1.onnx",
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "kind": "belief",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      },
+      "featureVersion": "belief-v1"
+    }
+  },
+  "unit": "complete single round",
+  "protocol": {
+    "unit": "one complete single round",
+    "cards": 108,
+    "level": "seeded uniform2..A",
+    "leader": "seeded seat",
+    "tribute": false,
+    "maxTurns": 1000,
+    "truncation": "error not draw"
+  },
+  "pipeline": "Plain567feature neuralargmax with forced/immediatefinish shortcut. Final is continued21833 matchedAdam terminalQ+top2-filtered human fullnetwork; oldreason is017+initialbelief search. NativeCPU1thread/session,50s reason/3s solver, cold solver each round; fallbacks reported; not browser-latency acceptance.",
+  "pairing": "Identical physical108cardIDs/level/leader; challenger team0 then team1, both games complete or no pair.",
+  "statistics": {
+    "primary": "Separate W/L/D and winrate95% deal-pair cluster intervals; final signed upgrade95%CI; final-old minus029-old paired by shared deal in closeout. No pooled rate.",
+    "stopping": "Fixed500pairs/group sequentially after07Toronto, by10Toronto hard cap. STOP, no expansion/clock extension or peak selection.",
+    "limits": "Homogeneous neural teams, no tribute, complete single rounds; no human/fullmatch/browser acceptance. Search timings depend on machine load. Control is original029, not parent21833; no isolated continuation-increment claim."
+  },
+  "plannedPairs": 500,
+  "completedPairs": 500,
+  "completedRounds": 1000,
+  "reports": {
+    "head-to-head": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 533,
+      "losses": 467,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.046,
+        "standardError": 0.051914914202310564,
+        "ci": [
+          -0.14775323183652872,
+          0.05575323183652871
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.533,
+        "standardError": 0.012455210336604442,
+        "ci": [
+          0.5085877877402554,
+          0.5574122122597447
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 201,
+        "13": 101,
+        "14": 231,
+        "23": 103,
+        "24": 113,
+        "34": 251
+      },
+      "doubleDowns": 251,
+      "doubleUps": 201,
+      "meanTurns": 81.261
+    }
+  },
+  "secondaryContrasts": {},
+  "primaryWinner": "inconclusive",
+  "primaryInterpretation": "Final-only3000round total with shared-deal raw029-oldreason control",
+  "scope": "Fixed models and observed lineups only; not whole-match strength, human coaching efficacy, or automatic champion promotion",
+  "optimizerUpdatesExecuted": 0
+}

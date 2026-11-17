@@ -1,0 +1,10 @@
+{
+  "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\human-qfilter-continue-final-research.zip",
+  "sha256": "fda1cdb112814d6c392a4c15d2658a742485ba43ae7d81b44bb4bfa71ff0ddb5",
+  "bytes": 19865303,
+  "sourceCommit": "9b7d723e3e4daef03ec58184adfda0cd7705395f",
+  "modelSHA256": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa",
+  "checkpointSHA256": "4cc627c702813c6d32f571207a8b6ec69f8e4bf01671fb49c0b6448d569135aa",
+  "publicWeightsUploaded": false,
+  "scope": "Local research backup, not champion/deployment; no private raw data or replay"
+}
