@@ -1,7 +1,7 @@
 """Opt-in human choice regularizer for terminal-round Monte Carlo learning.
 
 No tactical tags, private opponent hands, validation or test labels enter this loss.
-The reference is fixed029; this module does not select a model or publish a website.
+The reference is fixed by the registered batch; this module does not select a model or publish a website.
 """
 import argparse
 import copy
@@ -73,7 +73,7 @@ class HumanRegularizer:
         self.enable_after = datetime.fromisoformat(settings['enableAfterUTC'].replace('Z', '+00:00')).timestamp() if self.top_k is not None else None
         if self.top_k is not None and (not isinstance(self.top_k, int) or self.top_k < 1):
             raise ValueError('Invalid human value-rank filter')
-        self.features = None if self.top_k is not None else torch.as_tensor(np.fromfile(self.feature_file, dtype=np.int8).reshape(self.feature_rows, 567), dtype=torch.float32, device=device)
+        self.features = None if self.top_k is not None else torch.as_tensor(np.fromfile(self.feature_file, dtype=np.int8).reshape(self.feature_rows, 567), dtype=torch.int8 if settings.get('compactFeatures') else torch.float32, device=device)
         self.attempted = self.accepted = self.rejected = 0
         self.cap = len(self.ids) * int(settings['maxPasses'])
         if self.cap < self.batch:
@@ -110,8 +110,9 @@ class HumanRegularizer:
         if self.features is None:
             if digest(self.feature_file) != self.settings['dataSHA256']['features.i8']:
                 raise ValueError('Human features changed during warmup')
-            self.features = torch.as_tensor(np.fromfile(self.feature_file, dtype=np.int8).reshape(self.feature_rows, 567), dtype=torch.float32, device=self.device)
+            self.features = torch.as_tensor(np.fromfile(self.feature_file, dtype=np.int8).reshape(self.feature_rows, 567), dtype=torch.int8 if self.settings.get('compactFeatures') else torch.float32, device=self.device)
         x, groups, targets, _ = pack(ids, self.decisions, self.features, self.device)
+        x = x.float()
         scores = net(x)
         with torch.no_grad():
             prior = reference(x)
@@ -140,6 +141,15 @@ def preflight(initial, output, settings=None):
     learning_rate = settings['learner']['learningRate']
     hs = settings['humanImitation']
     optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
+    base_step = 0
+    continuation = settings.get('continuation')
+    if continuation:
+        assert digest(continuation['file']) == continuation['sha256']
+        parent = torch.load(continuation['file'],weights_only=True,map_location='cpu')
+        assert all(torch.equal(v.cpu(),parent['model'][k]) for k,v in net.state_dict().items())
+        optimizer.load_state_dict(parent['optimizer']);base_step = parent['step']
+        assert base_step == settings['parent']['startingStep'] and len(optimizer.state) == 12
+        assert all(int(v['step']) == base_step for v in optimizer.state.values())
     x = torch.randint(-1, 3, (64, 567), device=device).float()
     y = torch.tensor([-3., -2., -1., 1., 2., 3., 1., -1.], device=device).repeat(8)
     groups = torch.arange(4, device=device).repeat_interleave(16)
@@ -165,7 +175,7 @@ def preflight(initial, output, settings=None):
     for model, opt in [(net, optimizer), (clone, restored)]:
         opt.zero_grad(set_to_none=True);loss(model).backward();torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0);opt.step()
     assert all(torch.equal(a, b) for a, b in zip(net.parameters(), clone.parameters()))
-    assert len(restored.state) == 12 and all(int(s['step']) == 3 for s in restored.state.values())
+    assert len(restored.state) == 12 and all(int(s['step']) == base_step+3 for s in restored.state.values())
     with tempfile.TemporaryDirectory(dir=Path(output).parent) as temp:
         file = Path(temp)/'joint.onnx';export_onnx(net.weights(), file)
         session = ort.InferenceSession(str(file), providers=['CPUExecutionProvider'])
@@ -174,7 +184,7 @@ def preflight(initial, output, settings=None):
         gpu = net(packed).detach().cpu().numpy();delta = float(np.max(np.abs(cpu-gpu)))
         assert delta < 1e-4 and int(np.argmax(cpu)) == int(np.argmax(gpu))
     report = {'passed': True, 'device': torch.cuda.get_device_name(0), 'backend': str(device),
-              'temporarySyntheticUpdates': 4, 'matchingAdamStates': 12, 'restoreNextUpdateEqual': True,
+              'temporarySyntheticUpdates': 4, 'inheritedStep': base_step, 'actualParentCheckpointVerified': bool(continuation), 'matchingAdamStates': 12, 'restoreNextUpdateEqual': True,
               'gradientMaxPerTensor': gradients, 'onnxTorchMaxDifference': delta,
               'formalUpdates': 0, 'humanRowsUsed': 0, 'strengthEvidence': False, 'gateTopK': hs.get('gateTopK'), 'learningRate': learning_rate}
     Path(output).write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')

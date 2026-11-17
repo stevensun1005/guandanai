@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "initial": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\initial.onnx",
+  "actors": 1,
+  "actorImplementation": "fast",
+  "fastActor": {
+    "games": 16,
+    "provider": "dml",
+    "sessionLimit": 2
+  },
+  "actorMix": {
+    "self": 0.5,
+    "league": 0.5,
+    "rule": 0
+  },
+  "exploration": {
+    "type": "softmax",
+    "temperature": 0.02
+  },
+  "shardRows": 16384,
+  "shardSeconds": 120,
+  "actorSeedOffset": 0,
+  "actorSeedEnd": 100000,
+  "actorSeedList": {
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\experiments\\seed-reservation\\protocol.json",
+    "sha256": "facee3a9fe9fa8e4db83779ae6f70d38702b541b43e9d7e9dc786f1ae66c4dc6",
+    "perSlot": 100000
+  },
+  "evaluationBlockOffset": 998,
+  "evaluationBlockEnd": 999,
+  "learner": {
+    "device": "cuda:0",
+    "threads": 1,
+    "batch": 2048,
+    "learningRate": 3e-06,
+    "gradClip": 1,
+    "capacity": 500000,
+    "minSamples": 100000,
+    "replayRatio": 4,
+    "exportSeconds": 120,
+    "targetMatchWeight": 0,
+    "anchorWeight": 0.05,
+    "keepVersions": 6,
+    "seed": 2026111701
+  },
+  "humanImitation": {
+    "data": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\human-data",
+    "dataSHA256": {
+      "features.i8": "ebdd2fe9f5812b8ed0471c36ec024d5b58c206e08b9eb4c012e415187b60b5fb",
+      "decisions.json": "062888d0c726c68936f5a7c0ff6e0466abf38bfa37c6b6bae30f0fb3b9c8058f",
+      "manifest.json": "f0ab5845bac248a90373cf3bd3d88eca026189838e09adab870aa0d58893af01"
+    },
+    "everyUpdates": 8,
+    "batchDecisions": 4,
+    "choiceWeight": 0.1,
+    "candidateAnchorWeight": 0.1,
+    "maxPasses": 40,
+    "seed": 2026111702,
+    "gateTopK": 2,
+    "enableAfterUTC": "2026-11-17T00:00:00.000Z",
+    "compactFeatures": true
+  },
+  "snapshotMinutes": 1440,
+  "leagueSize": 1,
+  "anchor": {
+    "intervalHours": 1000,
+    "pairs": 150,
+    "regressionLimit": 2
+  },
+  "restarts": {
+    "limit": 0,
+    "windowMinutes": 10
+  },
+  "diskLimitGB": 20,
+  "resourceBudget": {
+    "reserveGB": 4,
+    "resumeGB": 5
+  },
+  "researchNoGate": true,
+  "researchSnapshots": false,
+  "parent": {
+    "kind": "continued-final21833-network-and-matchingAdam-newRNG-emptyReplay",
+    "startingStep": 21833,
+    "ingestedRows": 11178913,
+    "trainedRows": 44713984,
+    "humanRowsUsed": 227,
+    "networkSHA256": "9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03",
+    "checkpointSHA256": "815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516",
+    "checkpointInherited": true,
+    "adamInherited": true,
+    "replayInherited": false,
+    "rngRestored": false,
+    "referenceAndLeague": "Frozen21833 student; explicit continuation object, not a newly accepted champion",
+    "inheritedHumanAttempted": 360,
+    "inheritedHumanRejected": 133
+  },
+  "continuation": {
+    "file": "D:\\vibecoding\\guandan\\ai\\danMCai\\runs\\human-qfilter-continue-20261116\\parent-checkpoint.pt",
+    "sha256": "815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516",
+    "shardSequenceStart": 100000
+  }
+}

@@ -115,3 +115,50 @@ test('overnight filter keeps the owner09:00Toronto deadline and delayed imitatio
     assert.throws(() => validateJointProtocol(q, now));
   }
 });
+
+test('continued window binds matching checkpoint, memory footprint, original029 comparison and07Toronto cutoff', () => {
+  const p = plan();
+  p.id = 'human-qfilter-continue-20261116';
+  Object.assign(p, {
+    startedAtUTC: '2026-11-17T04:00:00.000Z',
+    trainingDeadlineUTC: '2026-11-17T12:00:00.000Z',
+    deadlineUTC: '2026-11-17T15:00:00.000Z',
+    humanWarmupUTC: '2026-11-17T00:00:00.000Z',
+    evaluationWorkers: 1,
+    initialModelSHA256: '9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03',
+  });
+  Object.assign(p.initialConfig, {
+    actors: 1,
+    fastActor: { games: 16, sessionLimit: 2 },
+    parent: { startingStep: 21833 },
+    continuation: {
+      sha256: '815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516',
+      shardSequenceStart: 100000,
+    },
+  });
+  Object.assign(p.initialConfig.learner, {
+    capacity: 500000,
+    learningRate: 3e-6,
+    anchorWeight: 0.05,
+  });
+  Object.assign(p.initialConfig.humanImitation, {
+    choiceWeight: 0.1,
+    gateTopK: 2,
+    enableAfterUTC: p.humanWarmupUTC,
+    compactFeatures: true,
+  });
+  const now = Date.parse(p.startedAtUTC) + 1000;
+  assert.doesNotThrow(() => validateJointProtocol(p, now));
+  for (const mutate of [
+    (q) => (q.initialConfig.continuation.sha256 = 'bad'),
+    (q) => (q.initialConfig.parent.startingStep = 0),
+    (q) => (q.trainingDeadlineUTC = '2026-11-17T13:00:00.000Z'),
+    (q) => (q.initialConfig.actors = 2),
+    (q) => (q.initialConfig.continuation.shardSequenceStart = 0),
+  ]) {
+    const q = structuredClone(p);
+    mutate(q);
+    assert.throws(() => validateJointProtocol(q, now));
+  }
+  assert.ok(evaluationPlans(p, '/new', { sha256: 'final' }).every((g) => g.plan.workers === 1));
+});

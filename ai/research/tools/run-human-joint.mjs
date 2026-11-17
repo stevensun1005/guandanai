@@ -20,11 +20,15 @@ export function validateJointProtocol(p, now = Date.now()) {
   const t = [p.startedAtUTC, p.trainingDeadlineUTC, p.deadlineUTC].map(Date.parse);
   const overnight = p.id === 'human-qfilter-overnight-20261115';
   const legacy = p.id === 'human-joint-029-20261115';
+  const continuation = p.id === 'human-qfilter-continue-20261116';
   const c = p.initialConfig,
     h = c?.humanImitation;
   if (
-    (!legacy && !overnight) ||
-    p.initialModelSHA256 !== '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768' ||
+    (!legacy && !overnight && !continuation) ||
+    p.initialModelSHA256 !==
+      (continuation
+        ? '9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03'
+        : '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768') ||
     !p.humanTrainingAuthorized ||
     p.webDeploymentAuthorized !== false ||
     p.restartExtendsDeadline !== false ||
@@ -34,6 +38,29 @@ export function validateJointProtocol(p, now = Date.now()) {
     t[2] - t[1] !== 3 * 3600000
   )
     throw Error('Invalid registered joint window');
+  if (
+    continuation &&
+    (p.trainingDeadlineUTC !== '2026-11-17T12:00:00.000Z' ||
+      p.deadlineUTC !== '2026-11-17T15:00:00.000Z' ||
+      t[1] - t[0] > 12 * 3600000 ||
+      p.humanWarmupUTC !== '2026-11-17T00:00:00.000Z' ||
+      c?.actors !== 1 ||
+      c?.fastActor?.games !== 16 ||
+      c?.fastActor?.sessionLimit !== 2 ||
+      c?.learner?.capacity !== 500000 ||
+      c?.learner?.learningRate !== 3e-6 ||
+      c?.learner?.anchorWeight !== 0.05 ||
+      h?.choiceWeight !== 0.1 ||
+      h?.gateTopK !== 2 ||
+      h?.enableAfterUTC !== p.humanWarmupUTC ||
+      !h?.compactFeatures ||
+      c?.continuation?.sha256 !==
+        '815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516' ||
+      c?.continuation?.shardSequenceStart !== 100000 ||
+      c?.parent?.startingStep !== 21833 ||
+      p.evaluationWorkers !== 1)
+  )
+    throw Error('Continuation checkpoint/resources/07Toronto cutoff changed');
   if (legacy && t[1] - t[0] !== 4 * 3600000) throw Error('Legacy4h window changed');
   if (
     overnight &&
@@ -119,8 +146,11 @@ export function evaluationPlans(p, root, final) {
         sourceRoot: p.sourceRoot,
         sourceCommit: p.sourceCommit,
         sourceSHA256: p.sourceSHA256,
-        workers: raw ? 1 : 2,
-        resourcePolicy: { ...p.evaluationTemplate.resourcePolicy, workers: raw ? 1 : 2 },
+        workers: p.evaluationWorkers || (raw ? 1 : 2),
+        resourcePolicy: {
+          ...p.evaluationTemplate.resourcePolicy,
+          workers: p.evaluationWorkers || (raw ? 1 : 2),
+        },
         models: { challenger, reason: opponent, ...(raw ? {} : { belief: models.belief }) },
         ...(raw ? { opponentPolicy: { kind: 'raw' } } : {}),
         finishShortcut: true,
@@ -165,6 +195,11 @@ async function main(root) {
     throw Error('Pending evaluation plan changed');
   if (p.initialConfigSHA256 && sha256(join(root, 'initial-config.json')) !== p.initialConfigSHA256)
     throw Error('Initial config changed');
+  if (
+    p.initialConfig.continuation &&
+    sha256(p.initialConfig.continuation.file) !== p.initialConfig.continuation.sha256
+  )
+    throw Error('Continuation checkpoint changed');
   const lock = join(root, 'controller.lock');
   closeSync(openSync(lock, 'wx'));
   const train = join(root, 'training');
@@ -235,12 +270,14 @@ async function main(root) {
       }
     const learner = readJSON(join(train, 'learner/status.json')),
       status = readJSON(join(train, 'status.json'));
+    const inherited = p.initialConfig.parent || {};
     const live = {
       phase: learner?.state || phase,
-      step: learner?.step || 0,
-      ingestedRows: learner?.ingestedRows || 0,
-      trainedRows: learner?.trainedRows || 0,
-      humanRowsUsed: learner?.humanRowsUsed || 0,
+      step: Math.max(0, (learner?.step || 0) - (inherited.startingStep || 0)),
+      cumulativeStep: learner?.step || inherited.startingStep || 0,
+      ingestedRows: Math.max(0, (learner?.ingestedRows || 0) - (inherited.ingestedRows || 0)),
+      trainedRows: Math.max(0, (learner?.trainedRows || 0) - (inherited.trainedRows || 0)),
+      humanRowsUsed: Math.max(0, (learner?.humanRowsUsed || 0) - (inherited.humanRowsUsed || 0)),
       elapsedFraction: Math.max(
         0,
         Math.min(
@@ -255,7 +292,8 @@ async function main(root) {
       title: '实际GPU联合训练',
       rows: [
         ['状态', live.phase],
-        ['GPU更新', live.step],
+        ['本窗新增GPU更新', live.step],
+        ['累计GPU更新', live.cumulativeStep],
         ['实际设备', learner?.deviceName || '等待学习器'],
         ['已摄入终局样本行', live.ingestedRows],
         ['训练抽样行', live.trainedRows],
@@ -267,13 +305,15 @@ async function main(root) {
         ],
         ['最近真人训练NLL', learner?.humanLoss?.choiceNLL ?? '—'],
         ['采样整场（仅用各单局终局分）', status?.totals?.matches || 0],
-        ['目标', '终局MSE为主＋029锚定＋低频小权重真人选择损失'],
+        ['目标', '终局MSE为主＋固定起点锚定＋低频小权重真人选择损失'],
       ],
     });
     writeJSON(join(root, 'progress.json'), {
       phase,
       displayName: p.displayName || '029重新开始：真人模仿＋终局收益联合训练',
-      analysis: '新Adam/空回放；终局升级分主目标，真人仅训练分组动作；不以战术标签作奖励',
+      analysis: p.initialConfig.continuation
+        ? '匹配网络/Adam与累计计数续接；新RNG/空回放；固定起点参考，不声称精确回放恢复'
+        : '新Adam/空回放；终局升级分主目标，真人仅训练分组动作；不以战术标签作奖励',
       currentTask: phase === 'train' ? live.phase : phase,
       nextTask: '固定最终模型→真人留出→029/旧reason及起点配对控制→保存',
       trainingDeadlineUTC: p.trainingDeadlineUTC,
@@ -342,6 +382,14 @@ async function main(root) {
         await new Promise((r) => setTimeout(r, 1000));
       if (stopped() || Date.now() >= Date.parse(p.trainingDeadlineUTC))
         throw Error('No remaining training window');
+      if (p.initialConfig.continuation) {
+        mkdirSync(join(train, 'learner'), { recursive: true });
+        copyFileSync(p.initialConfig.continuation.file, join(train, 'learner/checkpoint.pt'));
+        mkdirSync(join(train, 'actors'), { recursive: true });
+        writeJSON(join(train, 'actors/actor-0.json'), {
+          shardSequence: p.initialConfig.continuation.shardSequenceStart,
+        });
+      }
       copyFileSync(file, join(train, 'protocol.json'));
       writeJSON(join(train, 'campaign-task.json'), {
         protocol: join(train, 'protocol.json'),
@@ -438,7 +486,10 @@ async function main(root) {
         if (readJSON(join(root, name, 'status.json'))?.phase !== 'complete')
           throw Error('Incomplete evaluation group: ' + name);
       });
-    await Promise.all([evaluate('vs029'), evaluate('vsreason')]);
+    if (p.evaluationWorkers === 1) {
+      await evaluate('vs029');
+      await evaluate('vsreason');
+    } else await Promise.all([evaluate('vs029'), evaluate('vsreason')]);
     // Keep memory headroom: use the same reason worker count sequentially for the shared-deal control.
     await evaluate('029vsreason');
     await stage('summary', () =>

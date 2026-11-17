@@ -318,3 +318,5 @@ GuanZero v4回归要求冠军500/reason200两份报告、250/100配对子范围�
 029联合训练新增隔离/损失测试：`python -B -m unittest discover -s ai/danMCai/tests -p human_joint_test.py`；Node `ai/research/tests/human-joint.test.mjs` 检查4h＋3h边界/固定最终模型/共同对手配对控制，研究Python `human_joint_review_test.py` 用纯合成结果验证配对协方差和发牌错配拒绝。真实GPU合成联合损失/12组Adam恢复/ONNX预检在新登记窗口运行，不当棋力证据。相关入口见[联合协议](../../ai/research/evaluation/human-joint-029-20261115/README.md)。
 
 隔夜过滤模仿新增测试：`human_joint_test.py`检查预热零模仿梯度、拒绝组零梯度、固定分母及真实接受/拒绝计数恢复；`human-joint.test.mjs`检查11月16日09:00硬截止/03:00启用不能延长或替换。真实GPU预检按已登记配置验证过滤联合损失和12组Adam下一步恢复，不是棋力证据。
+
+新真人/终局续训的紧凑int8特征必须与float32常驻方式损失/梯度一致；匹配checkpoint/累计计数/独立分片命名/07:00Toronto不可延后及单工作器顺序评测绑定检查见`human_joint_test.py`与`human-joint.test.mjs`。正式GPU恢复与棋力证据分开记录。

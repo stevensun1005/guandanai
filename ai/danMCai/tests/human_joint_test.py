@@ -97,4 +97,16 @@ class FilteredJointTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'accounting'):other.load_state_dict({'attempted':1,'accepted':2,'rejected':0})
 
 
+    def test_compact_int8_storage_has_identical_loss_and_gradients(self):
+        with tempfile.TemporaryDirectory()as d:
+            cfg=fixture(Path(d));cfg.update(gateTopK=2,enableAfterUTC='2020-01-01T00:00:00Z')
+            a=HumanRegularizer(cfg,torch.device('cpu'));b=HumanRegularizer(dict(cfg,compactFeatures=True),torch.device('cpu'))
+            net=torch.nn.Linear(567,1);ref=torch.nn.Linear(567,1);ref.load_state_dict(net.state_dict());ref.requires_grad_(False)
+            f=lambda model:lambda x:model(x).flatten()
+            x=a.loss(f(net),f(ref),0);y=b.loss(f(net),f(ref),0)
+            self.assertTrue(torch.equal(x,y));self.assertEqual(b.features.dtype,torch.int8)
+            self.assertTrue(torch.equal(torch.autograd.grad(x,net.weight)[0],torch.autograd.grad(y,net.weight)[0]))
+            self.assertEqual(a.state_dict(),b.state_dict())
+
+
 if __name__=='__main__':unittest.main()

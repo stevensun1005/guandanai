@@ -248,3 +248,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 隔夜训练已于11月15日22:56多伦多时间真实启动；GPU更新及面板核验见[启动证据](ai/research/evaluation/human-qfilter-overnight-20261115/startup.json)，09:00停训后自动评测。
 
 隔夜029已09:00停训；对029的1000局与真人回顾性检查未显示提升，旧reason评测受内存保护暂停，完整结论待其余组完成。[阶段证据](ai/research/evaluation/human-qfilter-overnight-20261115/interim-20261116-0917.json)。
+
+新独立低内存续训预登记：21833网络/Adam继续、新RNG与空回放，11月17日07:00Toronto停止训练后自动评测保存；不是旧窗口续约，不自动发布。[协议](ai/research/evaluation/human-qfilter-continue-20261116/README.md)。

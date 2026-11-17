@@ -28,7 +28,7 @@ def human(root):
         assert hashlib.sha256((data/f).read_bytes()).hexdigest()==h
     rows=read(data/'decisions.json');features=np.memmap(data/'features.i8',dtype=np.int8,mode='r',shape=(manifest['candidateRows'],567))
     reports={}
-    for name,file in [('029',plan['initialModel']),('final',str(root/'final.onnx'))]:
+    for name,file in [('029',plan['evaluationModels']['raw029']['localFile']),('final',str(root/'final.onnx'))]:
         options=ort.SessionOptions();options.intra_op_num_threads=1;options.inter_op_num_threads=1
         session=ort.InferenceSession(file,sess_options=options,providers=['CPUExecutionProvider'])
         report={}

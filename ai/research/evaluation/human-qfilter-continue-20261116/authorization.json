@@ -1,0 +1,10 @@
+{
+  "ownerRequest": "继续训练 明天早上七点停止训练",
+  "interpretation": "Toronto2026-11-17 07:00 stops actors/optimizer; automatic evaluation/save by10:00",
+  "trainingDeadlineUTC": "2026-11-17T12:00:00.000Z",
+  "evaluationSaveDeadlineUTC": "2026-11-17T15:00:00.000Z",
+  "humanTrainingAuthorized": true,
+  "webDeploymentAuthorized": false,
+  "restartExtendsDeadline": false,
+  "scope": "New dedicated continued human/terminal batch; old run not reopened"
+}

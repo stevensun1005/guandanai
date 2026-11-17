@@ -1,0 +1,32 @@
+{
+  "node": {
+    "total": 531,
+    "passed": 495,
+    "skipped": 36,
+    "failed": 0
+  },
+  "python": {
+    "danMCaiModulesSeparately": 21,
+    "totalTests": 157,
+    "researchTests": 43,
+    "sharedTests": 4,
+    "skipped": 1,
+    "failed": 0
+  },
+  "format": "passed",
+  "build": "passed",
+  "webUnchangedVersion": "d567b97606",
+  "formalNewUpdates": 0,
+  "actualMatchingGPUCheckpointPreflight": "Pending frozen registered execution",
+  "checks": [
+    "int8 storage exact loss/gradient equivalence",
+    "checkpoint/cumulative step and07Toronto deadline guard",
+    "distinct shard sequence namespace",
+    "singleworker sequential evaluation keeps fixed shared deals"
+  ],
+  "logSHA256": {
+    "node": "bb2f26125a19dbb6ae3c10180a6b8f8f6265fd490eb97117833134d0b856c081",
+    "python": "9710a118e2de4148aee16de964795b0e9ce2e6e3f5ab6b3070b776f04c8deec5",
+    "build": "bb06a2ef0c0826fa606c58a955d4549828cc3f8dab4c2cf7a941df15ebdfde47"
+  }
+}

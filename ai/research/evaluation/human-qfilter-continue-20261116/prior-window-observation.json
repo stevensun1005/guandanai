@@ -1,0 +1,121 @@
+{
+  "observedAtUTC": "2026-11-17T03:58:59.096223+00:00",
+  "priorRun": "human-qfilter-overnight-20261115",
+  "trainingStopAuditPassed": true,
+  "networkSHA256": "9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03",
+  "checkpointSHA256": "815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516",
+  "missingCleanControllerCompletion": true,
+  "deadlineExpired": true,
+  "vs029": {
+    "head-to-head": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 494,
+      "losses": 506,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.043,
+        "standardError": 0.05087709659479235,
+        "ci": [
+          -0.14271910932579301,
+          0.05671910932579301
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.494,
+        "standardError": 0.01175603712216133,
+        "ci": [
+          0.4709581672405638,
+          0.5170418327594362
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 212,
+        "13": 95,
+        "14": 187,
+        "23": 182,
+        "24": 98,
+        "34": 226
+      },
+      "doubleDowns": 226,
+      "doubleUps": 212,
+      "meanTurns": 80.863
+    }
+  },
+  "human": {
+    "reports": {
+      "029": {
+        "validation": {
+          "decisions": 632,
+          "correct": 337,
+          "accuracy": 0.5332278481012658,
+          "nll": 2.115261912534329
+        },
+        "test": {
+          "decisions": 700,
+          "correct": 274,
+          "accuracy": 0.3914285714285714,
+          "nll": 2.231424551494847
+        }
+      },
+      "final": {
+        "validation": {
+          "decisions": 632,
+          "correct": 339,
+          "accuracy": 0.5363924050632911,
+          "nll": 2.121678749426482
+        },
+        "test": {
+          "decisions": 700,
+          "correct": 274,
+          "accuracy": 0.3914285714285714,
+          "nll": 2.231851272165141
+        }
+      }
+    },
+    "selection": "Final-window learner only, no validation/test model selection",
+    "retrospectiveOnly": true,
+    "oneValidationAndOneTestSession": true,
+    "previouslyInspectedData": true,
+    "notWinProbability": true,
+    "optimizerUpdatesDuringReview": 0
+  },
+  "reasonStatus": {
+    "pid": 48580,
+    "phase": "evaluation",
+    "plannedRounds": 1000,
+    "completedRounds": 752,
+    "workers": [
+      {
+        "pid": 44108,
+        "phase": "memory-paused",
+        "completedPairs": 209,
+        "protocolSHA256": "8b97e2f7977212d55426003c9bb34aa33551848905c0e4cd589a0380e311e1d0",
+        "updatedAtUTC": "2026-11-16T14:23:53.971Z"
+      },
+      {
+        "pid": 50288,
+        "phase": "memory-paused",
+        "completedPairs": 167,
+        "protocolSHA256": "8b97e2f7977212d55426003c9bb34aa33551848905c0e4cd589a0380e311e1d0",
+        "updatedAtUTC": "2026-11-16T14:23:53.985Z"
+      }
+    ],
+    "deadlineUTC": "2026-11-16T17:00:00.000Z",
+    "updatedAtUTC": "2026-11-16T14:23:54.848Z"
+  },
+  "reasonControlResultsPresent": false,
+  "noReasonConclusion": "Partial logs remain; no completed paired strength result is claimed. No old run restart or clock extension.",
+  "reasonControlProtocolFrozen": true,
+  "reasonControlActuallyStarted": false
+}

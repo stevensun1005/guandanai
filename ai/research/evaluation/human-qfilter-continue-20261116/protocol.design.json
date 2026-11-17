@@ -1,0 +1,48 @@
+{
+  "id": "human-qfilter-continue-20261116",
+  "status": "design; formal new updates0",
+  "initial": {
+    "kind": "continued-final21833-network-and-matchingAdam-newRNG-emptyReplay",
+    "startingStep": 21833,
+    "ingestedRows": 11178913,
+    "trainedRows": 44713984,
+    "humanRowsUsed": 227,
+    "networkSHA256": "9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03",
+    "checkpointSHA256": "815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516",
+    "checkpointInherited": true,
+    "adamInherited": true,
+    "replayInherited": false,
+    "rngRestored": false,
+    "referenceAndLeague": "Frozen21833 student; explicit continuation object, not a newly accepted champion",
+    "inheritedHumanAttempted": 360,
+    "inheritedHumanRejected": 133
+  },
+  "hypothesis": "Memory-conservative continuation with immediately active top2-filtered human loss may achieve more effective updates/exposures. Top2 remains a detached value-ranking approximation, not proof of equal terminal outcomes.",
+  "objective": "MC MSE of complete single-round signed upgrade points +.05 fixed21833Q anchor; every8updates4train human choices, .1CE/.1candidate anchor if currentQtop2; original batch denominators. No tactical shaping/Clint/human final outcomes/private rival cards in loss.",
+  "resources": {
+    "actors": 1,
+    "lanes": 16,
+    "cache": 2,
+    "capacity": 500000,
+    "batch": 2048,
+    "learningRate": 3e-06,
+    "replayRatio": 4,
+    "reserveGiB": 4,
+    "resumeGiB": 5,
+    "humanFeatureStorage": "int8 exact stored values; cast only selected batch tofloat32; loss/gradient equality tested"
+  },
+  "protocolChanges": "New matching-Adam continuation from prior final, new RNG/empty replay, original cumulative counts preserved. Fixed anchor/league now priorfinal21833 by explicit continuation, not raw029. Old source/negative/partial evidence unchanged.",
+  "human": "Same train5217/val632/test700;10/1/1whole-match split; previously inspected single-session retrospective review only; attempted cap208680 cumulative including360prior attempts. No new general human acceptance.",
+  "evaluation": "Final-window only; three sequential single-worker groups of500pairs/1000complete rounds each: final-raw029, final-oldreason, raw029-oldreason on shared secondblock. Report terminal95%CI/WLD/winrate/doubleups/downs/paired common-opponent gain; same exploratory goals, no pooled rate/peak selection/deployment. Measures final vsoriginal029, not isolated gain vs21833 parent.",
+  "cutoffs": {
+    "ownerRequest": "继续训练 明天早上七点停止训练",
+    "interpretation": "Toronto2026-11-17 07:00 stops actors/optimizer; automatic evaluation/save by10:00",
+    "trainingDeadlineUTC": "2026-11-17T12:00:00.000Z",
+    "evaluationSaveDeadlineUTC": "2026-11-17T15:00:00.000Z",
+    "humanTrainingAuthorized": true,
+    "webDeploymentAuthorized": false,
+    "restartExtendsDeadline": false,
+    "scope": "New dedicated continued human/terminal batch; old run not reopened"
+  },
+  "sampling": "New100000reserved roots in one slot; max200derived deals audited against historical root/literal interpretations. New1000literal heldout split500/500, second block shared by common-opponent control; no heldout training."
+}
