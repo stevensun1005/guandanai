@@ -1,0 +1,147 @@
+{
+  "status": "Actual continued training active; strength evidence0",
+  "observedAtUTC": "2026-11-17T04:06:23.981697+00:00",
+  "sourceCommit": "9b7d723e3e4daef03ec58184adfda0cd7705395f",
+  "sourceFilesVerified": 380,
+  "protocolSHA256": "1e121e01afb9907db4af181a112e2ca44624069e298ec3c004d37959712308fd",
+  "registeredStartUTC": "2026-11-17T04:03:02.906Z",
+  "actualSupervisorStartUTC": "2026-11-17T04:03:23.961Z",
+  "trainingDeadlineUTC": "2026-11-17T12:00:00.000Z",
+  "evaluationSaveDeadlineUTC": "2026-11-17T15:00:00.000Z",
+  "controllerPID": 45740,
+  "dashboardPID": 21552,
+  "nodeLiveness": [
+    {
+      "pid": 45740,
+      "alive": true
+    },
+    {
+      "pid": 21552,
+      "alive": true
+    },
+    {
+      "pid": 48188,
+      "alive": true
+    },
+    {
+      "pid": 58308,
+      "alive": true
+    },
+    {
+      "pid": 21052,
+      "alive": true
+    },
+    {
+      "pid": 48036,
+      "alive": true
+    }
+  ],
+  "learner": {
+    "pid": 48188,
+    "device": "cuda:0",
+    "deviceName": "AMD Radeon RX 7800 XT",
+    "torch": "2.9.1+rocmsdk20260116",
+    "hip": "7.2.26024-f6f897bd3d",
+    "gpuAllocatedBytes": 357043712,
+    "state": "waiting-for-data",
+    "step": 22096,
+    "version": "v000022064",
+    "buffer": 134246,
+    "ingestedRows": 11313159,
+    "trainedRows": 45252608,
+    "lossEMA": 3.190247037349669,
+    "humanRowsUsed": 303,
+    "humanTrainingDecisions": 5217,
+    "humanExposureCap": 208680,
+    "humanLoss": {
+      "choiceNLL": 0.0,
+      "humanCandidateAnchorMSE": 0.0,
+      "lastHumanBatch": 4,
+      "eligibleLabels": 0,
+      "phase": "value-rank-filtered",
+      "attempted": 488,
+      "accepted": 303,
+      "rejected": 185
+    },
+    "replayRatio": 3.9999975250060573,
+    "stepsPerSecond": 1.5215125507846157,
+    "updatedAt": "2026-11-17T04:06:22Z"
+  },
+  "newUpdates": 263,
+  "newIngestedRows": 134246,
+  "newTrainedRows": 538624,
+  "newAcceptedHumanLabels": 76,
+  "inheritedStep": 21833,
+  "matchingAdamInherited": true,
+  "newRNG": true,
+  "emptyReplayAtStart": true,
+  "originalReplayOrRNGRestored": false,
+  "referenceAndLeague": "Frozen21833student, not champion; raw029 used separately in evaluation",
+  "actor": {
+    "slot": 0,
+    "pid": 21052,
+    "actorImplementation": "fast",
+    "concurrentGames": 16,
+    "sessionLimit": 2,
+    "startedAt": "2026-11-17T04:03:26.179Z",
+    "matches": 301,
+    "decisions": 141031,
+    "rows": 141031,
+    "shardSequence": 100008,
+    "nextSeed": 316,
+    "failures": 0,
+    "recent": {
+      "since": 1794888206179,
+      "decisions": 141031,
+      "matches": 301
+    },
+    "inference": {
+      "batches": 40831,
+      "decisions": 196380,
+      "rows": 8830731,
+      "runMs": 91191.36879999907,
+      "prepareMs": 9479.33169999984,
+      "inFlightMax": 14,
+      "provider": "dml",
+      "fallbackReason": null,
+      "sessionCount": 2,
+      "sessionsCreated": 1221,
+      "sessionsReleased": 1219,
+      "peakSessions": 2
+    },
+    "candidateCache": {
+      "hits": 143329,
+      "misses": 123778
+    },
+    "memory": {
+      "rss": 1499127808,
+      "heapTotal": 184557568,
+      "heapUsed": 64606104,
+      "external": 9461177,
+      "arrayBuffers": 8207367
+    },
+    "updatedAt": "2026-11-17T04:06:21.473Z"
+  },
+  "resources": {
+    "reserveGB": 4,
+    "resumeGB": 5,
+    "freeGB": 8.461368560791016,
+    "rawFreeGB": 8.461368560791016,
+    "measurement": "os.freemem",
+    "measurementError": null,
+    "pausedActors": [],
+    "updatedAt": "2026-11-17T04:06:21.260Z"
+  },
+  "awake": {
+    "updatedAtUTC": "2026-11-17T04:06:17.0935872+00:00",
+    "deadlineUTC": "2026-11-17T15:00:00.000Z",
+    "pid": 48036,
+    "phase": "awake",
+    "powerPlanChanged": false,
+    "displayRequired": false
+  },
+  "newEvaluationRounds": 0,
+  "plannedEvaluationRounds": 3000,
+  "webPublished": false,
+  "limitations": "Resource snapshot is not a whole-night throughput guarantee. Exact storage/gradient and GPU restore tests are not strength evidence; old reason evaluation incomplete. Human test is retrospective."
+}

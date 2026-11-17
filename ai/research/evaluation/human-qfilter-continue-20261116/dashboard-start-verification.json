@@ -1,0 +1,15 @@
+{
+  "url": "http://127.0.0.1:8767/",
+  "viewports": [
+    1280,
+    390
+  ],
+  "actualTrainingProgress": "263 次GPU更新 · 134,246 终局样本行 · 76 真人动作曝光 · 等待完整终局样本",
+  "separateFutureEvaluationCards": 3,
+  "plannedRoundsEach": 1000,
+  "actualEvaluationRounds": 0,
+  "pageErrors": [],
+  "horizontalOverflow": false,
+  "pollResponses": 2,
+  "formalStrengthEvidence": false
+}
