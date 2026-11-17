@@ -3,11 +3,16 @@ import { dirname, join, resolve, sep } from 'node:path';
 import { writeFileSync, existsSync } from 'node:fs';
 import { modelBytes } from '../../publishing/artifacts.mjs';
 import { ROOT, readJSON, sha256 } from './lib.mjs';
-export function championDefinition(root = ROOT) {
+export function championDefinition(root = ROOT, archivedId = null) {
   const catalog = readJSON(join(root, 'web/src/ai/model-catalog.json'));
-  const id = catalog.selection?.danMCaiChampions?.[0];
+  const id = archivedId ?? catalog.selection?.danMCaiChampions?.[0];
   const model = catalog.models.find((m) => m.id === id);
-  if (!model || catalog.defaultId !== id || !model.source?.champion)
+  if (
+    !model ||
+    (!archivedId && catalog.defaultId !== id) ||
+    !model.source?.champion ||
+    (archivedId && !catalog.selection?.danMCaiChampions?.includes(id))
+  )
     throw Error('Missing accepted danMCai champion');
   const evidence = resolve(root, model.source.champion.evidence);
   if (!evidence.startsWith(resolve(root) + sep)) throw Error('Invalid champion evidence path');

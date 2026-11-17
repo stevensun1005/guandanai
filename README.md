@@ -252,3 +252,5 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 新独立低内存续训预登记：21833网络/Adam继续、新RNG与空回放，11月17日07:00Toronto停止训练后自动评测保存；不是旧窗口续约，不自动发布。[协议](ai/research/evaluation/human-qfilter-continue-20261116/README.md)。
 
 低内存续训已Toronto11月16日23:03真实启动，GPU新增计数/匹配Adam与面板通过核验；11月17日07:00停训，随后自动评测保存。[启动证据](ai/research/evaluation/human-qfilter-continue-20261116/startup.json)。
+
+GuanZero已按11月17日新授权恢复至周五11月20日12:00美东，固定截止及029／旧reason分别冻结的开发评测见[GuanZero指南](ai/guanzero/README.md)；不改变网页冠军默认。

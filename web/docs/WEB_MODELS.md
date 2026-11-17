@@ -133,3 +133,5 @@ node ai/publishing/publish-web-model.mjs --model=D:/your-run/model.onnx --source
 阶段 0.6 可在忽略目录准备保留冠军主干、53×512 全零投影的双输入 ONNX，仅运行发布工具的准备流程，**不传 `--publish`**。它不是新冠军、已训练模型或已发布归档；网页清单与 baseline 均须 SHA 不变。普通 oracle 的 extras 上下文未补齐，进还贡续打明确拒绝此模型。方法与实测分开记录于[分析指南](../../ai/research/ANALYSIS.md)。
 
 随机选座只改变真人的最终方位；随机模式可为四个方位预设备用电脑，抽签后空位按对应方位使用模型。选择范围、冠军身份和默认模型没有因此改变，随机换座不是新的机器人策略或门控。
+
+2026-11-17 GuanZero续训评测可分别冻结029冠军与归档9001的017底座：`reason.baseChampion`及 `reason-base.onnx` 必须与旧reason清单和accept证据完全匹配；发布器同时核验029和017的门控及完整SHA。旧9001不因此回到菜单或改为029底座。每批依计划500／200场全完成后仍只发布同一GuanZero快照；新reason正式发布后再依实际策略登记下一批。

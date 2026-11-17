@@ -1,5 +1,9 @@
 # GuanZero 模型
 
+2026-11-17所有者明确授权GuanZero从原491454检查点继续至Toronto **11月20日周五12:00（17:00Z）**。只延长本运行固定截止，原af2a683训练参数、匹配Adam与消费游标保留。08:00／20:00开发评测按新独立5142起日历，冠军029各500场、旧reason9001各200场；旧reason底座仍017，新reason实际发布后再切换，不把旧成绩改名。历史5133／5134漏测和11月11日中断保留，不回填。见[续训证据](../research/evaluation/guanzero-resume-20261117/authorization-and-startup.json)。
+
+**独立底座评测**：新伴随允许通过明确授权的 `reason-evaluation-launcher.allowArchivedReasonBase=true` 冻结归档9001；`reason.baseChampion`记录其017 accept和完整SHA，权重单列为 `reason-base.onnx`。纯冠军对手仍独立 `champion.onnx`／029；原历史同底座报告保持原文件和校验方式。发布前同时核验两份底座门控，不用029替换9001的网络。
+
 **2026-11-11窗口状态**：凌晨02:29训练记录停止，随后系统更新重启；当前无训练进程。最后检查点491454／完整导出491408已保全，但08点5134与10点最终5150均漏登记，不能事后回填或称正常最终模型。固定截止已过，不自动续训；网站仍为已评测上线的028／475588。见[异常与收尾证据](../research/evaluation/guanzero-interruption-20261111.json)。
 
 与danMCai 模型分开的训练路线。网络接收当前观察、候选动作和公开出牌历史，方法与实测以[研究报告第 13 节](../research/MODEL_STUDY.md#13-guanzero从随机初始化开始的-dmc-对照实验)为准。

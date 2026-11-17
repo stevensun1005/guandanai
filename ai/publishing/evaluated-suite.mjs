@@ -88,19 +88,24 @@ export async function verifyEvaluatedSuite(directory, input, digest, source, roo
   )
     throw Error('Frozen evaluation identity mismatch');
 
-  const gateFile = plan.champion.gate.evidence;
-  if (!/^ai\/research\/evaluation\/[\w-]+\/gate-\d+\.json$/.test(gateFile))
-    throw Error('Invalid champion evidence');
-  const gateBytes = await readFile(join(root, gateFile)),
-    gate = JSON.parse(gateBytes);
-  if (
-    sha256(gateBytes) !== plan.champion.gate.evidenceSHA256 ||
-    gate.decision !== 'accept' ||
-    gate.challenger.version !== plan.champion.version ||
-    gate.challenger.sha256 !== plan.champion.modelSHA256 ||
-    sha256(await readFile(join(suite, 'champion.onnx'))) !== plan.champion.modelSHA256
-  )
-    throw Error('Frozen champion gate mismatch');
+  async function verifyAcceptedSnapshot(metadata, file) {
+    const gateFile = metadata.gate.evidence;
+    if (!/^ai\/research\/evaluation\/[\w-]+\/gate(?:-\d+)?\.json$/.test(gateFile))
+      throw Error('Invalid champion evidence');
+    const gateBytes = await readFile(join(root, gateFile)),
+      gate = JSON.parse(gateBytes);
+    if (
+      sha256(gateBytes) !== metadata.gate.evidenceSHA256 ||
+      gate.decision !== 'accept' ||
+      gate.challenger.version !== metadata.version ||
+      gate.challenger.sha256 !== metadata.modelSHA256 ||
+      sha256(await readFile(join(suite, file))) !== metadata.modelSHA256
+    )
+      throw Error('Frozen champion gate mismatch');
+  }
+  await verifyAcceptedSnapshot(plan.champion, 'champion.onnx');
+  if (plan.reason?.baseChampion)
+    await verifyAcceptedSnapshot(plan.reason.baseChampion, 'reason-base.onnx');
 
   const opponents = {};
   for (const op of required) {

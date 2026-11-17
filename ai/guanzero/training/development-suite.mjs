@@ -89,7 +89,9 @@ export async function addSuite(
         )
       ).freezeClint;
   }
-  const reason = await freeze(folder, champion.metadata, championRoot);
+  const reason = await freeze(folder, champion.metadata, championRoot, undefined, {
+    allowArchivedBase: reasonRuntime?.allowArchivedReasonBase === true,
+  });
   const opponentPanel = reasonPanel(
     reason,
     reasonRuntime ?? { opponentPanel: CHAMPION_REASON_PANEL },

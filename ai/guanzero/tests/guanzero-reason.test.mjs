@@ -16,6 +16,7 @@ import {
   REASON_V2_MOVE,
   REASON_PROTOCOLS,
   verifyReasonMetadata,
+  verifyFrozenReason,
   reasonPayload,
   reasonContext,
   reasonProtocol,
@@ -822,5 +823,32 @@ test('failed learner status is historical even if its old PID is still alive', (
     assert.match(card.results[0].rows.find((r) => r[0] === '学习速度')[1], /当前未运行/);
   } finally {
     rmSync(run, { recursive: true, force: true });
+  }
+});
+
+test('independent reason retains its old accepted base instead of silently using the new opponent', () => {
+  const { champion: old, reason } = identities(REASON_V2_PANEL);
+  old.archiveId = reason.manifest.base.id;
+  const current = {
+    ...old,
+    archiveId: '029',
+    version: 'v000002',
+    modelSHA256: hash('new champion'),
+  };
+  assert.throws(() => verifyReasonMetadata(reason, current));
+  const { evaluationSHA256, ...identity } = reason;
+  identity.baseChampion = old;
+  const bound = { ...identity, evaluationSHA256: hash(JSON.stringify(identity)) };
+  verifyReasonMetadata(bound, current);
+  const folder = mkdtempSync(join(tmpdir(), 'guanzero-reason-base-'));
+  try {
+    writeFileSync(join(folder, 'champion.onnx'), 'new champion');
+    writeFileSync(join(folder, 'reason-base.onnx'), 'champion');
+    writeFileSync(join(folder, 'reason-belief.onnx'), 'belief');
+    verifyFrozenReason(folder, bound, current);
+    writeFileSync(join(folder, 'reason-base.onnx'), 'new champion');
+    assert.throws(() => verifyFrozenReason(folder, bound, current));
+  } finally {
+    rmSync(folder, { recursive: true, force: true });
   }
 });

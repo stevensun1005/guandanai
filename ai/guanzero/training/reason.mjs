@@ -28,6 +28,7 @@ import { policyState } from '../../../web/src/ai/observation.js';
 import { createRound } from '../../shared/simulation/simulation.mjs';
 import { publicView } from '../../danMCai/belief/features.mjs';
 import { readJSON, sha256, ROOT } from './lib.mjs';
+import { championDefinition } from './champion.mjs';
 
 /**
  * Desktop budget registered with protocol clint-champion-reason-v1 (the web desktop budget until
@@ -99,6 +100,12 @@ export function reasonSources() {
   );
 }
 export function verifyReasonMetadata(reason, champion) {
+  const baseChampion = reason.baseChampion ?? champion;
+  if (reason.baseChampion) {
+    assert.equal(baseChampion.archiveId, reason.manifest.base.id);
+    assert.equal(baseChampion.id, 'champion');
+    assert.equal(baseChampion.mode, 'snapshot');
+  }
   const { evaluationSHA256, ...identity } = reason;
   assert.equal(
     digest(Buffer.from(JSON.stringify(identity))),
@@ -114,11 +121,11 @@ export function verifyReasonMetadata(reason, champion) {
   );
   assert.equal(
     reason.manifest.base.sha256,
-    champion.modelSHA256,
-    'Reason base must be frozen champion',
+    baseChampion.modelSHA256,
+    'Reason base must match its own frozen accepted champion',
   );
-  assert.equal(reason.manifest.base.version, champion.version);
-  assert.deepEqual(reason.gate, champion.gate);
+  assert.equal(reason.manifest.base.version, baseChampion.version);
+  assert.deepEqual(reason.gate, baseChampion.gate);
   assert.deepEqual(reason.manifest.search, SEARCH_BOT_V1);
   // v1 identities never carried `protocol`; an explicit v1 field would be a different identity.
   assert.notEqual(reason.protocol, REASON_V1_PANEL, 'v1 reason identity has no protocol field');
@@ -134,15 +141,24 @@ export async function freezeReason(
   champion,
   root = ROOT,
   protocolId = REASON_OPPONENT_PANEL,
+  { allowArchivedBase = false } = {},
 ) {
   const protocol = REASON_PROTOCOLS[protocolId];
   assert.ok(protocol, 'Unknown reason protocol');
   const catalog = validateCatalog(readJSON(join(root, 'web/src/ai/model-catalog.json')));
-  const bot = catalog.searchBots
-    .filter((b) => b.base === catalog.selection.danMCaiChampions[0])
-    .at(-1);
+  const bot =
+    catalog.searchBots.filter((b) => b.base === catalog.selection.danMCaiChampions[0]).at(-1) ??
+    (allowArchivedBase ? catalog.searchBots.at(-1) : null);
   assert.ok(bot, 'Missing current champion reasoning bot');
   const base = catalog.models.find((m) => m.id === bot.base);
+  const { artifact: baseArtifact, ...baseChampion } = championDefinition(root, bot.base);
+  const independentBase = baseChampion.modelSHA256 !== champion.modelSHA256;
+  if (independentBase) {
+    assert.ok(allowArchivedBase, 'Archived reason base needs explicit owner-authorized launcher');
+    writeFileSync(join(folder, 'reason-base.onnx'), await modelBytes(root, baseArtifact), {
+      flag: 'wx',
+    });
+  }
   const manifest = searchBotManifest(bot, base);
   assert.equal(bot.sha256, digest(Buffer.from(JSON.stringify(manifest))));
   const bytes = await modelBytes(root, { ...bot.belief, id: bot.id });
@@ -154,7 +170,8 @@ export async function freezeReason(
     mode: 'self',
     modelSHA256: bot.sha256,
     manifest,
-    gate: champion.gate,
+    gate: baseChampion.gate,
+    ...(independentBase ? { baseChampion } : {}),
     budget: { ...protocol.budget },
     execution: protocol.execution,
     ...(protocolId !== REASON_V1_PANEL && {
@@ -168,9 +185,12 @@ export async function freezeReason(
   writeFileSync(join(folder, 'reason-belief.onnx'), bytes, { flag: 'wx' });
   return reason;
 }
+export function reasonBaseFile(folder, reason) {
+  return join(folder, reason.baseChampion ? 'reason-base.onnx' : 'champion.onnx');
+}
 export function verifyFrozenReason(folder, reason, champion, { sources = false } = {}) {
   verifyReasonMetadata(reason, champion);
-  assert.equal(sha256(join(folder, 'champion.onnx')), reason.manifest.base.sha256);
+  assert.equal(sha256(reasonBaseFile(folder, reason)), reason.manifest.base.sha256);
   assert.equal(sha256(join(folder, 'reason-belief.onnx')), reason.manifest.belief.sha256);
   if (sources) assert.deepEqual(reasonSources(), reason.sourceSHA256, 'Reason source changed');
 }
@@ -303,7 +323,7 @@ export async function createReasonEngine(folder, reason, champion) {
   verifyFrozenReason(folder, reason, champion, { sources: true });
   const options = { intraOpNumThreads: 1, interOpNumThreads: 1, executionProviders: ['cpu'] };
   const base = await ort.InferenceSession.create(
-    readFileSync(join(folder, 'champion.onnx')),
+    readFileSync(reasonBaseFile(folder, reason)),
     options,
   );
   let belief;
