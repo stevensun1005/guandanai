@@ -1,0 +1,11 @@
+{
+  "id": "human-qfilter-continue-20261116",
+  "startUTC": "2026-11-17T04:03:02.906Z",
+  "startedAtUTC": "2026-11-17T04:03:02.906Z",
+  "deadlineUTC": "2026-11-17T15:00:00.000Z",
+  "trainingDeadlineUTC": "2026-11-17T12:00:00.000Z",
+  "durationHours": 10.949192777777776,
+  "restartExtendsDeadline": false,
+  "protocolSHA256": "1e121e01afb9907db4af181a112e2ca44624069e298ec3c004d37959712308fd",
+  "sourceCommit": "9b7d723e3e4daef03ec58184adfda0cd7705395f"
+}
