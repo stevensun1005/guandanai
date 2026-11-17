@@ -581,6 +581,25 @@
         },
         "trainingDevice": "rocm-cuda-api"
       }
+    },
+    {
+      "id": "030",
+      "file": "bot-030.onnx",
+      "sha256": "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-030/bot-030.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-io48",
+        "version": "model-000000491912",
+        "status": "experimental-not-heldout-accepted",
+        "step": 491912,
+        "registeredAt": "2026-11-17T15:54:13.172Z"
+      }
     }
   ],
   "selection": {
@@ -621,7 +640,7 @@
         "endgameHi": 20,
         "endgameWorlds": 8,
         "minWorlds": 4,
-        "tieTolerance": 1e-09,
+        "tieTolerance": 1e-9,
         "solverMaxNodes": 1500000,
         "worldSeed": "(seed*1009 + ply*7919)>>>0"
       },

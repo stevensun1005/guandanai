@@ -3578,7 +3578,6 @@
   "webModels": {
     "catalog": "web/src/ai/model-catalog.json",
     "defaultId": "029",
-    "defaultChoice": "029",
     "models": [
       {
         "id": "001",
@@ -3965,6 +3964,18 @@
             "manifest": "ai/research/evaluation/web-champion-029-20261112/champion.json"
           },
           "trainingDevice": "rocm-cuda-api"
+        }
+      },
+      {
+        "id": "030",
+        "sha256": "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-030/bot-030.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000000491912",
+          "status": "experimental-not-heldout-accepted",
+          "step": 491912,
+          "registeredAt": "2026-11-17T15:54:13.172Z"
         }
       }
     ]
@@ -5281,6 +5292,110 @@
         "searchesOver3s": 288,
         "searchesOver10s": 83,
         "searchesOver30s": 25
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-491912-development-v4-champion.json",
+      "opponent": "champion",
+      "reportSHA256": "54bbaab326a5b44aec2346618c9965d2cbd9e899417df0c95d426c95739c6757",
+      "protocolSHA256": "ea34ff53cc6f4f9eeaeebf18d3ca559325a229a9a21f5a8ec2ce527cc85c1a57",
+      "completedAt": "2026-11-17T13:23:19.800Z",
+      "opponentPanel": "champion-reason-v4",
+      "pairs": 250,
+      "matches": 500,
+      "seedStart": 4214200000,
+      "seedEnd": 4214200249,
+      "modelSHA256": "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94",
+      "metrics": {
+        "matches": 500,
+        "wins": 178,
+        "losses": 283,
+        "draws": 39,
+        "matchWinRate": 0.356,
+        "matchScore": 0.395,
+        "rounds": 5442,
+        "roundWins": 2341,
+        "roundWinRate": 0.43017273061374495,
+        "averageUpgradePoints": -0.23281881661153989,
+        "confidence95": {
+          "matchWinRate": [
+            0.318,
+            0.394
+          ],
+          "matchScore": [
+            0.357,
+            0.431
+          ],
+          "roundWinRate": [
+            0.4150356685567953,
+            0.4435439307423098
+          ],
+          "averageUpgradePoints": [
+            -0.30257270693512306,
+            -0.16974574721053595
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-491912-development-v4-reason.json",
+      "opponent": "reason",
+      "reportSHA256": "0034e0c1b26edbf4350264b285e37726e282232330b8b37d8dd47ff3288ead44",
+      "protocolSHA256": "0fa4eb1cc432503a894b65c400be85bcff0b21d7c0e527f5a5c24115800ca04a",
+      "completedAt": "2026-11-17T15:50:14.118Z",
+      "opponentPanel": "champion-reason-v4",
+      "pairs": 100,
+      "matches": 200,
+      "seedStart": 4214200000,
+      "seedEnd": 4214200099,
+      "modelSHA256": "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94",
+      "metrics": {
+        "matches": 200,
+        "wins": 67,
+        "losses": 118,
+        "draws": 15,
+        "matchWinRate": 0.335,
+        "matchScore": 0.3725,
+        "rounds": 2144,
+        "roundWins": 974,
+        "roundWinRate": 0.4542910447761194,
+        "averageUpgradePoints": -0.27658582089552236,
+        "confidence95": {
+          "matchWinRate": [
+            0.27,
+            0.4
+          ],
+          "matchScore": [
+            0.3125,
+            0.44
+          ],
+          "roundWinRate": [
+            0.42706838833094213,
+            0.48233695652173914
+          ],
+          "averageUpgradePoints": [
+            -0.40037505860290673,
+            -0.1478530323151837
+          ]
+        }
+      },
+      "searchStats": {
+        "decisions": 85971,
+        "forced": 25580,
+        "baseOnly": 43718,
+        "midgame": 11170,
+        "endgame": 5503,
+        "minWorldsFallback": 9,
+        "budgetFallback": 18,
+        "knownCardsFallback": 0,
+        "changedFromChampion": 2864,
+        "inferences": 4928467,
+        "searchMs": 9570772.704899952,
+        "solverDeadlineCapped": 58,
+        "maxSearchMs": 50009.71210000012,
+        "searchesOver3s": 359,
+        "searchesOver10s": 120,
+        "searchesOver30s": 33
       }
     }
   ],
