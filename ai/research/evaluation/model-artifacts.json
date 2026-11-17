@@ -5346,6 +5346,16 @@
         }
       ],
       "classification": "owner-requested-manual-v4-development-not-heldout;not-backfill5133"
+    },
+    {
+      "observedAt": "2026-11-17T13:05:05.432Z",
+      "files": [
+        {
+          "file": "ai/research/evaluation/guanzero-resume-20261117/first-scheduled-plan.json",
+          "sha256": "7c9ef1aaa9793805c0a85f0202375f06d1a95a02daf5aa662db6545a4c9c83c3"
+        }
+      ],
+      "classification": "renewed-owner-window:029champion-and-independent017reason;in-progress-not-results"
     }
   ],
   "specialistExperiments": [

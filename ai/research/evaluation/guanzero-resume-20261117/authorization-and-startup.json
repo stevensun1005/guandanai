@@ -658,5 +658,1154 @@
     5134
   ],
   "oldFinal5150": "not backfilled;new final deadline Nov20",
-  "noTrainingHyperparameterChanges": true
+  "noTrainingHyperparameterChanges": true,
+  "activation": {
+    "evaluationRuntime": {
+      "sourceRoot": "C:/guandan-sampler/work/guanzero-independent-base-eval-runtime",
+      "commit": "b60766fdd5dffe6e87cdb8bf4b88ec6fa2a6bcf6",
+      "baselineRoot": "C:/guandan-sampler/work/guanzero-io48-runtime",
+      "baselineCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+      "opponentPanel": "champion-reason-v4",
+      "effectiveFrom": "2026-11-17T12:59:29.341Z",
+      "opponents": [
+        "champion",
+        "reason"
+      ],
+      "opponentPairs": {
+        "champion": 250,
+        "reason": 100
+      },
+      "matchesByOpponent": {
+        "champion": 500,
+        "reason": 200
+      },
+      "allowArchivedReasonBase": true,
+      "authority": "owner Nov17:029和旧reason 等之后新reason推上去了再测新的"
+    },
+    "dashboard": {
+      "window": {
+        "title": "GuanZero本地训练与两对手开发评测",
+        "deadline": "2026-11-20T17:00:00.000Z",
+        "deadlineText": "11/20 12:00 美东",
+        "remainingSeconds": 273447.217,
+        "remainingText": "75 小时 57 分",
+        "startedText": "—",
+        "timeProgress": null,
+        "stop": false,
+        "note": "11月17日所有者授权从491454继续至11月20日周五12:00美东；原模型/Adam/游标和af2a683配方保留，现已验证持续CUDA更新、单监督器32采样器。每天08/20按029500场＋旧017底座reason200场冻结，实际进度见各卡片；新reason正式上线后再切换。历史中断/漏测保留。"
+      },
+      "now": {
+        "headline": "正在跑 3 项",
+        "tone": "ok",
+        "running": [
+          {
+            "title": "guanzero-adp-io48-491912 / danMCai-v000061013",
+            "text": "已完成 26/500 场",
+            "fraction": 0.052,
+            "etaText": null
+          },
+          {
+            "title": "从491454续训至周五12点",
+            "text": "已运行 19 分 44 秒（没有中间进度信号）",
+            "fraction": null,
+            "etaText": null,
+            "warning": "未在进程列表里找到对应的输出路径"
+          },
+          {
+            "title": "guanzero-adp-io48 / 学习器",
+            "text": "已更新 492081 次；1574659200 行；索引分片 2；采样运行",
+            "fraction": 0.7828577204888243,
+            "etaText": "12:00 美东"
+          }
+        ],
+        "next": [
+          {
+            "title": "guanzero-adp-io48-491912 / danMCai-reason-v000855042"
+          }
+        ]
+      },
+      "counts": {
+        "queued": 1,
+        "running": 3,
+        "done": 12,
+        "failed": 2,
+        "skipped": 0,
+        "stopped": 2
+      },
+      "stages": [
+        {
+          "key": "model-000000491912-champion",
+          "title": "guanzero-adp-io48-491912 / danMCai-v000061013",
+          "desc": "冻结同一模型；500场完整比赛，交换阵营。种子 4214200000–4214200249。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "running",
+          "start": 1794920401135,
+          "end": null,
+          "processAlive": true,
+          "progress": {
+            "fraction": 0.052,
+            "text": "已完成 26/500 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "26/500"
+                ],
+                [
+                  "胜／负／平",
+                  "8／17／1"
+                ],
+                [
+                  "模型SHA",
+                  "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94"
+                ],
+                [
+                  "对手版本",
+                  "v000061013"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000491912-champion"
+          ],
+          "stateText": "运行中",
+          "startText": "08:00 美东",
+          "endText": "—",
+          "durationText": "2 分 32 秒"
+        },
+        {
+          "key": "resume-491454-nov20",
+          "ids": [
+            "resume-491454-nov20"
+          ],
+          "title": "从491454续训至周五12点",
+          "desc": "按11月17日所有者新授权延长固定截止，保留原模型/Adam/游标，验证真实CUDA更新及单实例恢复。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "续训启动验证，不作棋力结论",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "running",
+          "stateText": "运行中",
+          "reason": null,
+          "start": 1794919368930,
+          "end": null,
+          "rc": null,
+          "warning": "未在进程列表里找到对应的输出路径",
+          "startText": "07:42 美东",
+          "endText": "—",
+          "seconds": 1183.853,
+          "durationText": "19 分 44 秒",
+          "progress": {
+            "fraction": null,
+            "text": "已运行 19 分 44 秒（没有中间进度信号）",
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": false,
+          "results": []
+        },
+        {
+          "key": "guanzero-learning",
+          "title": "guanzero-adp-io48 / 学习器",
+          "desc": "既有冻结训练窗口，读取真实学习器状态；时间进度不是棋力进度。",
+          "kind": "guanzero",
+          "rule": "运行状态，描述性",
+          "dev": true,
+          "ruleLabel": "描述性",
+          "state": "running",
+          "start": 1793934700256,
+          "end": null,
+          "processAlive": true,
+          "progress": {
+            "fraction": 0.7828577204888243,
+            "text": "已更新 492081 次；1574659200 行；索引分片 2；采样运行",
+            "eta": 1795194000000,
+            "etaText": "12:00 美东"
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "训练版本",
+                  "492081"
+                ],
+                [
+                  "设备",
+                  "NVIDIA GeForce RTX 4070"
+                ],
+                [
+                  "学习速度",
+                  "0.8416924633193618 次更新/秒"
+                ],
+                [
+                  "ADP损失（诊断）",
+                  "3.1531858921051024"
+                ],
+                [
+                  "最后状态",
+                  "2026-11-17T13:02:32.011Z"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "guanzero-learning"
+          ],
+          "stateText": "运行中",
+          "startText": "22:11 美东",
+          "endText": "—",
+          "durationText": "273 小时 50 分"
+        },
+        {
+          "key": "model-000000491912-reason",
+          "title": "guanzero-adp-io48-491912 / danMCai-reason-v000855042",
+          "desc": "冻结同一模型；200场完整比赛，交换阵营。种子 4214200000–4214200099。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "queued",
+          "start": null,
+          "end": null,
+          "processAlive": true,
+          "progress": {
+            "fraction": 0,
+            "text": "已完成 0/200 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "0/200"
+                ],
+                [
+                  "胜／负／平",
+                  "0／0／0"
+                ],
+                [
+                  "模型SHA",
+                  "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94"
+                ],
+                [
+                  "对手版本",
+                  "v000855042-bsearch1-16d76783"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000491912-reason"
+          ],
+          "stateText": "排队中",
+          "startText": "—",
+          "endText": "—",
+          "durationText": "—"
+        },
+        {
+          "key": "reboot-interruption-20261111",
+          "ids": [
+            "reboot-interruption-20261111"
+          ],
+          "title": "系统重启中断与最终取样漏测核查",
+          "desc": "02:29记录停止，Windows更新重启；当前无训练进程，最后检查点491454/导出491408。已过10点，5134/5150未登记，不回填。028仍为已验证网页版本。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "异常记录，不作棋力结果",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "failed",
+          "stateText": "失败",
+          "reason": "退出码 1",
+          "start": 1794439105522,
+          "end": 1794439523383,
+          "rc": 1,
+          "warning": null,
+          "startText": "18:18 美东",
+          "endText": "18:25 美东",
+          "seconds": 417.861,
+          "durationText": "6 分 58 秒",
+          "progress": {
+            "fraction": null,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "异常记录，不作棋力结果"
+            }
+          ]
+        },
+        {
+          "key": "manual-eval-5140",
+          "ids": [
+            "manual-eval-5140"
+          ],
+          "title": "即时评测 guanzero-adp-io48-475588",
+          "desc": "475588手动开发评测完成：冠军500场210/230/60，reason200场67/113/20；同SHA网页归档028已公网核对，非独立验收。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "开发评测与发布，不作独立验收",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "done",
+          "stateText": "已完成",
+          "reason": null,
+          "start": 1794365078076,
+          "end": 1794372968591,
+          "rc": null,
+          "warning": null,
+          "startText": "21:44 美东",
+          "endText": "23:56 美东",
+          "seconds": 7890.515,
+          "durationText": "2 小时 11 分",
+          "progress": {
+            "fraction": 1,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "开发评测与发布，不作独立验收"
+            }
+          ]
+        },
+        {
+          "key": "model-000000475588-reason",
+          "title": "guanzero-adp-io48-475588 / danMCai-reason-v000855042",
+          "desc": "冻结同一模型；200场完整比赛，交换阵营。种子 4214000000–4214000099。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "done",
+          "start": 1794364933720,
+          "end": 1794372224379,
+          "processAlive": null,
+          "progress": {
+            "fraction": 1,
+            "text": "已完成 200/200 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "200/200"
+                ],
+                [
+                  "胜／负／平",
+                  "67／113／20"
+                ],
+                [
+                  "模型SHA",
+                  "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb"
+                ],
+                [
+                  "对手版本",
+                  "v000855042-bsearch1-16d76783"
+                ],
+                [
+                  "搜索与回落",
+                  "{\"decisions\":90263,\"forced\":27109,\"baseOnly\":45817,\"midgame\":11601,\"endgame\":5736,\"minWorldsFallback\":9,\"budgetFallback\":9,\"knownCardsFallback\":0,\"changedFromChampion\":3083,\"inferences\":5086349,\"searchMs\":6869006.394899948,\"solverDeadlineCapped\":37,\"maxSearchMs\":50006.424599999984,\"searchesOver3s\":288,\"searchesOver10s\":83,\"searchesOver30s\":25}"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000475588-reason"
+          ],
+          "stateText": "已完成",
+          "startText": "21:42 美东",
+          "endText": "23:43 美东",
+          "durationText": "2 小时 1 分"
+        },
+        {
+          "key": "model-000000475588-champion",
+          "title": "guanzero-adp-io48-475588 / danMCai-v000855042",
+          "desc": "冻结同一模型；500场完整比赛，交换阵营。种子 4214000000–4214000249。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "done",
+          "start": 1794364933720,
+          "end": 1794366001344,
+          "processAlive": null,
+          "progress": {
+            "fraction": 1,
+            "text": "已完成 500/500 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "500/500"
+                ],
+                [
+                  "胜／负／平",
+                  "210／230／60"
+                ],
+                [
+                  "模型SHA",
+                  "c6825ecf0ced8207edd20d51e44cab81a585bd7aaffdd9ff853b5b7dbdb20bbb"
+                ],
+                [
+                  "对手版本",
+                  "v000855042"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000475588-champion"
+          ],
+          "stateText": "已完成",
+          "startText": "21:42 美东",
+          "endText": "22:00 美东",
+          "durationText": "17 分 48 秒"
+        },
+        {
+          "key": "recovery-472527-owner",
+          "ids": [
+            "recovery-472527-owner"
+          ],
+          "title": "按所有者授权从472527恢复训练",
+          "desc": "已从472527恢复并实测持续推进；1监督器、32采样器、守护器健康，原截止不延长。完整证据与文档已推送。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "运行恢复，不作棋力结论",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "done",
+          "stateText": "已完成",
+          "reason": null,
+          "start": 1794361662281,
+          "end": 1794362309935,
+          "rc": null,
+          "warning": null,
+          "startText": "20:47 美东",
+          "endText": "20:58 美东",
+          "seconds": 647.654,
+          "durationText": "10 分 48 秒",
+          "progress": {
+            "fraction": 1,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "运行恢复，不作棋力结论"
+            }
+          ]
+        },
+        {
+          "key": "incident-5133-stop",
+          "ids": [
+            "incident-5133-stop"
+          ],
+          "title": "20点槽受阻：训练09:31异常停止",
+          "desc": "WinError5触发STOP；核对检查点、保全现场，不回填或冒充新评测。恢复待明确授权。 已于20:48经所有者授权恢复，见恢复卡与证据。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "运行故障，不是棋力结论",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "failed",
+          "stateText": "失败",
+          "reason": "退出码 1",
+          "start": 1794359379270,
+          "end": 1794359379270,
+          "rc": 1,
+          "warning": null,
+          "startText": "20:09 美东",
+          "endText": "20:09 美东",
+          "seconds": 0,
+          "durationText": "0 分 0 秒",
+          "progress": {
+            "fraction": null,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "运行故障，不是棋力结论"
+            }
+          ]
+        },
+        {
+          "key": "retire-clint",
+          "ids": [
+            "retire-clint"
+          ],
+          "title": "Clint退休，后续冠军500/reason200",
+          "desc": "Clint已停止于8场；027同权重完成原冠军500/reason50发布。下一20点开始冠军500/reason200，原训练窗口不变。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "工程与开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "done",
+          "stateText": "已完成",
+          "reason": null,
+          "start": 1794319726242,
+          "end": 1794321910757,
+          "rc": null,
+          "warning": null,
+          "startText": "09:08 美东",
+          "endText": "09:45 美东",
+          "seconds": 2184.515,
+          "durationText": "36 分 25 秒",
+          "progress": {
+            "fraction": 1,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "工程与开发检查，不作验收"
+            }
+          ]
+        },
+        {
+          "key": "model-000000468071-clint",
+          "title": "guanzero-adp-io48-468071 / Clint规则机器人（含残局大脑）",
+          "desc": "冻结同一模型；50场完整比赛，交换阵营。种子 4213200000–4213200024。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "stopped",
+          "start": 1794315960294,
+          "end": 1794319726242,
+          "processAlive": null,
+          "progress": {
+            "fraction": 0.16,
+            "text": "已按要求停止；已完成 8/50 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "8/50"
+                ],
+                [
+                  "胜／负／平",
+                  "6／1／1"
+                ],
+                [
+                  "模型SHA",
+                  "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143"
+                ],
+                [
+                  "对手版本",
+                  "rules-v2-brain-v1"
+                ],
+                [
+                  "Clint残局大脑",
+                  "{\"decisions\":3816,\"maxDecisionMs\":30031.511100000003,\"calls\":394,\"used\":291,\"fallback\":103,\"changed\":52,\"ms\":3125333.8625999964}"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000468071-clint"
+          ],
+          "stateText": "已停止",
+          "startText": "08:06 美东",
+          "endText": "09:08 美东",
+          "durationText": "1 小时 2 分"
+        },
+        {
+          "key": "model-000000468071-reason",
+          "title": "guanzero-adp-io48-468071 / danMCai-reason-v000855042",
+          "desc": "冻结同一模型；50场完整比赛，交换阵营。种子 4213200000–4213200024。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "done",
+          "start": 1794315960294,
+          "end": 1794317915382,
+          "processAlive": null,
+          "progress": {
+            "fraction": 1,
+            "text": "已完成 50/50 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "50/50"
+                ],
+                [
+                  "胜／负／平",
+                  "22／25／3"
+                ],
+                [
+                  "模型SHA",
+                  "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143"
+                ],
+                [
+                  "对手版本",
+                  "v000855042-bsearch1-16d76783"
+                ],
+                [
+                  "搜索与回落",
+                  "{\"decisions\":21223,\"forced\":6404,\"baseOnly\":10811,\"midgame\":2679,\"endgame\":1329,\"minWorldsFallback\":4,\"budgetFallback\":2,\"knownCardsFallback\":0,\"changedFromChampion\":685,\"inferences\":1167169,\"searchMs\":1795717.3247999924,\"solverDeadlineCapped\":2,\"maxSearchMs\":50005.043699999806,\"searchesOver3s\":79,\"searchesOver10s\":26,\"searchesOver30s\":6}"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000468071-reason"
+          ],
+          "stateText": "已完成",
+          "startText": "08:06 美东",
+          "endText": "08:38 美东",
+          "durationText": "32 分 35 秒"
+        },
+        {
+          "key": "model-000000468071-champion",
+          "title": "guanzero-adp-io48-468071 / danMCai-v000855042",
+          "desc": "冻结同一模型；500场完整比赛，交换阵营。种子 4213200000–4213200249。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "done",
+          "start": 1794315960294,
+          "end": 1794317209774,
+          "processAlive": null,
+          "progress": {
+            "fraction": 1,
+            "text": "已完成 500/500 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "500/500"
+                ],
+                [
+                  "胜／负／平",
+                  "205／247／48"
+                ],
+                [
+                  "模型SHA",
+                  "1573232742934a24adca67e3ebbe0e9f66ea38d0d8e0e535ba56a3488dd52143"
+                ],
+                [
+                  "对手版本",
+                  "v000855042"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000468071-champion"
+          ],
+          "stateText": "已完成",
+          "startText": "08:06 美东",
+          "endText": "08:26 美东",
+          "durationText": "20 分 49 秒"
+        },
+        {
+          "key": "mixed-clint-brain",
+          "ids": [
+            "mixed-clint-brain"
+          ],
+          "title": "Clint残局大脑与50/500/50评测协议",
+          "desc": "按所有者最新要求接入真实残局大脑、逐组计数与取消保护；训练只读。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "工程验证，不作棋力验收",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "done",
+          "stateText": "已完成",
+          "reason": null,
+          "start": 1794282289737,
+          "end": 1794282902848,
+          "rc": null,
+          "warning": null,
+          "startText": "22:44 美东",
+          "endText": "22:55 美东",
+          "seconds": 613.111,
+          "durationText": "10 分 13 秒",
+          "progress": {
+            "fraction": 1,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "工程验证，不作棋力验收"
+            }
+          ]
+        },
+        {
+          "key": "model-000000427033-reason",
+          "title": "guanzero-adp-io48-427033 / danMCai-reason-v000855042",
+          "desc": "冻结同一模型；500场完整比赛，交换阵营。种子 4213100000–4213100249。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "stopped",
+          "start": 1794272418247,
+          "end": 1794281817093,
+          "processAlive": null,
+          "progress": {
+            "fraction": 0.528,
+            "text": "已按要求停止；已完成 264/500 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "264/500"
+                ],
+                [
+                  "胜／负／平",
+                  "75／166／23"
+                ],
+                [
+                  "模型SHA",
+                  "76fe6c930545752f1a75dc43bcb3077e10935f513f6303c6e7bf9f39d0c00821"
+                ],
+                [
+                  "对手版本",
+                  "v000855042-bsearch1-16d76783"
+                ],
+                [
+                  "搜索与回落",
+                  "{\"decisions\":115913,\"forced\":34300,\"baseOnly\":59240,\"midgame\":15174,\"endgame\":7199,\"minWorldsFallback\":9,\"budgetFallback\":9,\"knownCardsFallback\":0,\"changedFromChampion\":3888,\"inferences\":6698536,\"searchMs\":8640616.845000053,\"solverDeadlineCapped\":24,\"maxSearchMs\":50007.303199999966,\"searchesOver3s\":359,\"searchesOver10s\":130,\"searchesOver30s\":24}"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000427033-reason"
+          ],
+          "stateText": "已停止",
+          "startText": "20:00 美东",
+          "endText": "22:36 美东",
+          "durationText": "2 小时 36 分"
+        },
+        {
+          "key": "model-000000427033-champion",
+          "title": "guanzero-adp-io48-427033 / danMCai-v000855042",
+          "desc": "冻结同一模型；500场完整比赛，交换阵营。种子 4213100000–4213100249。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "done",
+          "start": 1794272418247,
+          "end": 1794273661271,
+          "processAlive": null,
+          "progress": {
+            "fraction": 1,
+            "text": "已完成 500/500 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "500/500"
+                ],
+                [
+                  "胜／负／平",
+                  "176／263／61"
+                ],
+                [
+                  "模型SHA",
+                  "76fe6c930545752f1a75dc43bcb3077e10935f513f6303c6e7bf9f39d0c00821"
+                ],
+                [
+                  "对手版本",
+                  "v000855042"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000427033-champion"
+          ],
+          "stateText": "已完成",
+          "startText": "20:00 美东",
+          "endText": "20:21 美东",
+          "durationText": "20 分 43 秒"
+        },
+        {
+          "key": "model-000000427033-clint",
+          "title": "guanzero-adp-io48-427033 / Clint规则机器人",
+          "desc": "冻结同一模型；500场完整比赛，交换阵营。种子 4213100000–4213100249。",
+          "kind": "guanzero",
+          "rule": "开发检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查，不作验收",
+          "state": "done",
+          "start": 1794272418247,
+          "end": 1794273306386,
+          "processAlive": null,
+          "progress": {
+            "fraction": 1,
+            "text": "已完成 500/500 场",
+            "eta": null,
+            "etaText": null
+          },
+          "results": [
+            {
+              "heading": "实际记录",
+              "rows": [
+                [
+                  "完成场数",
+                  "500/500"
+                ],
+                [
+                  "胜／负／平",
+                  "347／114／39"
+                ],
+                [
+                  "模型SHA",
+                  "76fe6c930545752f1a75dc43bcb3077e10935f513f6303c6e7bf9f39d0c00821"
+                ],
+                [
+                  "对手版本",
+                  "rules-v2"
+                ]
+              ],
+              "rule": "开发检查，不作验收",
+              "verdict": null
+            }
+          ],
+          "ids": [
+            "model-000000427033-clint"
+          ],
+          "stateText": "已完成",
+          "startText": "20:00 美东",
+          "endText": "20:15 美东",
+          "durationText": "14 分 48 秒"
+        },
+        {
+          "key": "reason-v2-activation",
+          "ids": [
+            "reason-v2-activation"
+          ],
+          "title": "按授权切换reason组50秒v2协议",
+          "desc": "独立新冻结检出、16项测试通过；原配置与已登记历史报告保留。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "工程检查，不作验收",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "done",
+          "stateText": "已完成",
+          "reason": null,
+          "start": 1794272523812,
+          "end": 1794272523812,
+          "rc": null,
+          "warning": null,
+          "startText": "20:02 美东",
+          "endText": "20:02 美东",
+          "seconds": 0,
+          "durationText": "0 分 0 秒",
+          "progress": {
+            "fraction": 1,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "工程检查，不作验收"
+            }
+          ]
+        },
+        {
+          "key": "reason-integration",
+          "ids": [
+            "reason-integration"
+          ],
+          "title": "接入第三个对手 danMCai-reason",
+          "desc": "冻结推断网络和搜索策略，完成测试、协议与调度接入。",
+          "kind": "engineering",
+          "after": null,
+          "rule": "工程验证，不作棋力验收",
+          "dev": true,
+          "ruleLabel": "开发检查",
+          "state": "done",
+          "stateText": "已完成",
+          "reason": null,
+          "start": 1794260973749,
+          "end": 1794263958120,
+          "rc": null,
+          "warning": null,
+          "startText": "16:49 美东",
+          "endText": "17:39 美东",
+          "seconds": 2984.371,
+          "durationText": "49 分 44 秒",
+          "progress": {
+            "fraction": 1,
+            "text": null,
+            "eta": null,
+            "cap": null,
+            "etaText": null
+          },
+          "processAlive": null,
+          "results": [
+            {
+              "heading": "结果",
+              "rows": [
+                [
+                  "结果文件",
+                  "未找到（—）"
+                ]
+              ],
+              "rule": "工程验证，不作棋力验收"
+            }
+          ]
+        }
+      ],
+      "orchestrators": [],
+      "markers": [],
+      "machine": {
+        "cpus": 20,
+        "load1": 0,
+        "freeMemoryGiB": 14.652957916259766,
+        "totalMemoryGiB": 31.781307220458984,
+        "diskFreeGiB": 132.59399032592773
+      },
+      "readAt": "2026-11-17T13:02:32.783Z"
+    },
+    "localBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "028",
+          "guanzero-adp-io48-475588"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "firstSuite": {
+      "id": "model-000000491912",
+      "index": 5142,
+      "sha256": "8c595f2c8b2947c09d309cf987fc9a8169f076e00ab58edc7663a6a40b400a94",
+      "planSHA256": "7c9ef1aaa9793805c0a85f0202375f06d1a95a02daf5aa662db6545a4c9c83c3",
+      "status": "registered-and-running-not-results",
+      "archive": "ai/research/evaluation/guanzero-resume-20261117/first-scheduled-plan.json"
+    },
+    "currentLearner": {
+      "step": 492202,
+      "usedSamples": 1575046400,
+      "loss": 3.2234275126457215,
+      "updatesPerSecond": 0.8328157541362784,
+      "device": "cuda",
+      "deviceName": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "precision": "FP32",
+      "objective": "adp",
+      "updatedAt": 1794920705.2287219,
+      "error": null,
+      "pid": 34968,
+      "indexedShards": 3,
+      "pauseSampling": false
+    },
+    "currentWatchdog": {
+      "pid": 12828,
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+      "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+      "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+      "plannedEnd": "2026-11-20T17:00:00.000Z",
+      "restarts": 1,
+      "phase": "healthy",
+      "step": 492198,
+      "supervisorPid": 12724,
+      "updatedAt": "2026-11-17T13:05:00.664Z",
+      "error": null,
+      "resumedFromStep": 491455,
+      "lastRestartAt": "2026-11-17T12:50:01.108Z"
+    },
+    "scheduledTask": "GuanZero-io48-Recovery",
+    "automation": {
+      "id": "guanzero-8",
+      "status": "ACTIVE",
+      "schedule": "08:00 and20:00 Toronto",
+      "finalDeadline": "2026-11-20T17:00:00Z"
+    },
+    "deployment": {
+      "status": "success",
+      "commit": "b60766fdd5dffe6e87cdb8bf4b88ec6fa2a6bcf6",
+      "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44088197679",
+      "liveBrowser": {
+        "menu": [
+          [
+            "clint-rule",
+            "Clint规则机器人"
+          ],
+          [
+            "028",
+            "guanzero-adp-io48-475588"
+          ],
+          [
+            "029",
+            "danMCai-v000061013"
+          ]
+        ],
+        "defaults": [
+          "029",
+          "029",
+          "029",
+          "029"
+        ]
+      },
+      "noNewWeightPublished": true
+    }
+  }
 }
