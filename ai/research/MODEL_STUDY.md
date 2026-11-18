@@ -3569,3 +3569,7 @@ Toronto11月17日20:00/index5143按新续训日历冻结，此后只使用同一
 ```
 
 发布归档031无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差9.5367431640625e-7、动作不一致0；Node496通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。原训练af2a683配置/窗口SHA未变，仍到周五11月20日12:00美东。实际部署另见[发布回执](evaluation/web-model-031.json)。
+
+529759实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/44231109668)成功，线上Chrome实见 `guanzero-adp-io48-529759`、3项菜单和四席029默认。公网bot-031.onnx为6346014字节，完整SHA `0c892ac5d9c3c3f2408c6b08b98fa86ac13a11a969f82ec943a2924cbe70c3e7` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。3份Git原始证据逐字节SHA核验通过；原配置与续训窗口SHA未变，固定截止仍为Toronto11月20日周五12:00。
+
+本次Pages首轮在 `npm ci` 安装ONNX依赖时出现运行器网络超时（ETIMEDOUT/ENETUNREACH），尚未上线；同一提交原样重试第2次，全部构建/浏览器检查及部署成功后才核对公网。保留原031不可变Release，没有换权重、重复上传或降低验证要求。失败与重试信息保存在同一发布回执中。

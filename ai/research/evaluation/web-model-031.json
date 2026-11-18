@@ -383,5 +383,101 @@
   ],
   "planArchive": "ai/research/evaluation/guanzero-529759-development-v4-plan.json",
   "defaultChoice": "029",
-  "planSHA256": "bca76dcd2a44089ba0d4f543e07b76324e4bb4dfdce2c3a09bc940f896b76f62"
+  "planSHA256": "bca76dcd2a44089ba0d4f543e07b76324e4bb4dfdce2c3a09bc940f896b76f62",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44231109668",
+    "commit": "88b414b38df141684c7c28fffb68b67c24bf9af6",
+    "verifiedAt": "2026-11-18T03:42:04.146Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-031.onnx",
+    "publicSHA256": "0c892ac5d9c3c3f2408c6b08b98fa86ac13a11a969f82ec943a2924cbe70c3e7",
+    "bytes": 6346014,
+    "model": "031",
+    "version": "model-000000529759",
+    "step": 529759,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "031",
+          "guanzero-adp-io48-529759"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-529759-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-529759-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-529759-development-v4-reason.json"
+    ],
+    "trainingConfigAndWindowUnchanged": true,
+    "attempt": 2,
+    "previousAttempts": [
+      {
+        "attempt": 1,
+        "conclusion": "failure",
+        "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44231109668",
+        "step": "npm ci / onnxruntime-node install",
+        "errorCodes": [
+          "ETIMEDOUT",
+          "ENETUNREACH"
+        ],
+        "classification": "runner dependency download failure; no tests/model changes",
+        "recovery": "Reran failed job on identical commit; original immutable Release reused. No model, protocol, source or validation requirements changed."
+      }
+    ]
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-18T03:42:48.245Z",
+    "step": 537996,
+    "learnerUpdatedAt": "2026-11-18T03:42:47.905Z",
+    "statusAgeSeconds": 0.3390495777130127,
+    "error": null,
+    "STOP": false,
+    "plannedEnd": "2026-11-20T17:00:00.000Z",
+    "watchdog": {
+      "phase": "healthy",
+      "updatedAt": "2026-11-18T03:42:37.386Z",
+      "restarts": 1,
+      "error": null
+    },
+    "actualProcesses": {
+      "learner": 34968,
+      "inference": 2680,
+      "supervisor": 12724,
+      "watchdog": 12828,
+      "actorCount": 32
+    },
+    "pythonLauncherParents": [
+      {
+        "pid": 10112,
+        "parent": 12724
+      },
+      {
+        "pid": 26156,
+        "parent": 12724
+      },
+      {
+        "pid": 34968,
+        "parent": 10112
+      },
+      {
+        "pid": 2680,
+        "parent": 26156
+      }
+    ],
+    "note": "CIM parent chains checked: venv launchers and actual Python workers are counted separately."
+  }
 }
