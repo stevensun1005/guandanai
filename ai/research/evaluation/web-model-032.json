@@ -383,5 +383,68 @@
   ],
   "planArchive": "ai/research/evaluation/guanzero-568242-development-v4-plan.json",
   "defaultChoice": "029",
-  "planSHA256": "210654aa12e29f38b679ca418c0cf6363824d61f003efdb541c7e4c7cf5a37f9"
+  "planSHA256": "210654aa12e29f38b679ca418c0cf6363824d61f003efdb541c7e4c7cf5a37f9",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44334642500",
+    "commit": "b2f7f8014cbb6d845e3b6e9ff7533265b4999301",
+    "verifiedAt": "2026-11-18T15:29:00.427Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-032.onnx",
+    "publicSHA256": "b6f747c1fbb6cc571dd3e46bfdba0b16d4c55060c43a8d98c65816752a305f4b",
+    "bytes": 6346014,
+    "model": "032",
+    "version": "model-000000568242",
+    "step": 568242,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "032",
+          "guanzero-adp-io48-568242"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-568242-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-568242-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-568242-development-v4-reason.json"
+    ],
+    "trainingConfigAndWindowUnchanged": true,
+    "attempt": 1
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-18T15:29:37.758Z",
+    "step": 575808,
+    "learnerUpdatedAt": "2026-11-18T15:29:37.506Z",
+    "statusAgeSeconds": 0.25226736068725586,
+    "error": null,
+    "STOP": false,
+    "plannedEnd": "2026-11-20T17:00:00.000Z",
+    "watchdog": {
+      "phase": "healthy",
+      "updatedAt": "2026-11-18T15:29:28.151Z",
+      "restarts": 1,
+      "error": null
+    },
+    "actualProcesses": {
+      "learner": 34968,
+      "inference": 2680,
+      "supervisor": 12724,
+      "watchdog": 12828,
+      "actorCount": 32
+    }
+  }
 }
