@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "clint-tribute-and-spectator-ui",
-  "phase": "pending-deployment",
+  "phase": "complete",
   "baseMain": "b1fdbc9271a1bda7630118d708db5d98f36ff88d",
   "upstream": {
     "repository": "https://github.com/clintsun1977/guandan",
@@ -125,8 +125,66 @@
         "skipped": 36,
         "failed": 0
       }
+    },
+    "hostRestore": {
+      "refreshAndClosedTab": true,
+      "samePhysicalHandsAndOpaqueGuestSeat": true,
+      "recordIdentityAndHumanNames": true,
+      "assistedPreviewPreserved": true,
+      "pageErrors": 0,
+      "uploads": 0
+    },
+    "productionBrowser": {
+      "productionGlobalsHidden": true,
+      "successfulModelIds": [
+        "029",
+        "032"
+      ],
+      "pageErrors": 0
     }
   },
   "strengthEvaluationGames": 0,
-  "optimizerUpdates": 0
+  "optimizerUpdates": 0,
+  "deployment": {
+    "phase": "success",
+    "sourceCommit": "aedc4647bedfaf5fe7592dcea0fcd916514a4609",
+    "version": "4d540150f1",
+    "pagesRun": 44412593741,
+    "pagesURL": "https://github.com/stevensun1005/guandanai/actions/runs/44412593741",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicValidation": {
+      "status": 200,
+      "menu": [
+        "clint-rule",
+        "032",
+        "029"
+      ],
+      "default": "029",
+      "productionModelsWithSuccessfulMoves": [
+        "029",
+        "032"
+      ],
+      "peerJsSeatSwapAndRefresh": true,
+      "publicOnlyBeforeNextDeal": true,
+      "confirmedPayAndReturn": true,
+      "payViewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "autoPassThreeButNotFour": true,
+      "pageErrors": 0
+    }
+  },
+  "pending": [],
+  "completedAtUTC": "2026-11-18T22:40:13+00:00"
 }
