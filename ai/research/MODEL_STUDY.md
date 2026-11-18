@@ -3573,3 +3573,43 @@ Toronto11月17日20:00/index5143按新续训日历冻结，此后只使用同一
 529759实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/44231109668)成功，线上Chrome实见 `guanzero-adp-io48-529759`、3项菜单和四席029默认。公网bot-031.onnx为6346014字节，完整SHA `0c892ac5d9c3c3f2408c6b08b98fa86ac13a11a969f82ec943a2924cbe70c3e7` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。3份Git原始证据逐字节SHA核验通过；原配置与续训窗口SHA未变，固定截止仍为Toronto11月20日周五12:00。
 
 本次Pages首轮在 `npm ci` 安装ONNX依赖时出现运行器网络超时（ETIMEDOUT/ENETUNREACH），尚未上线；同一提交原样重试第2次，全部构建/浏览器检查及部署成功后才核对公网。保留原031不可变Release，没有换权重、重复上传或降低验证要求。失败与重试信息保存在同一发布回执中。
+
+### 网页模型 model-000000568242（归档 032） · 2026-11-18T15:19:54.259Z
+
+归档完整导出 `guanzero-adp-io48/model-000000568242`，SHA-256 为 `b6f747c1fbb6cc571dd3e46bfdba0b16d4c55060c43a8d98c65816752a305f4b`。网页默认编号为 **029**；启用冠军菜单时，归档新检查点不会自动替换冠军。本批完成029冠军500场和旧9001 / 017底座 reason 200场开发评测，按完整报告对应的冻结SHA发布。开发评测与独立验收采用不同协议。网页默认由029冠军担任。[发布证据](evaluation/web-model-032.json)。
+
+### 续训后08点开发评测与同权重发布：guanzero-adp-io48-568242
+
+Toronto11月18日08:00/index5144按新续训日历冻结，此后只使用同一完整ONNX SHA `b6f747c1fbb6cc571dd3e46bfdba0b16d4c55060c43a8d98c65816752a305f4b`。冠军029原网络与旧reason9001分开：reason仍用017/accept330＋原推断v1＋50秒搜索，纯网络对手为029/gate1，独立 `reason-base.onnx` 和各自的真实accept/完整SHA均核验。没有把9001改底座、把旧成绩转给029，也没有采用更新的latest。新源指纹b60766f仅用于本批reason；普通029评分沿用af2a683评测基线。
+
+| 对手              | 完整场 |  胜 |  负 |  平 | 每场得分 | 种子对簇95%区间 |
+| ----------------- | -----: | --: | --: | --: | -------: | --------------- |
+| 029原网络冠军     |    500 | 216 | 235 |  49 |    0.481 | [0.445, 0.517]  |
+| 旧9001（017底座） |    200 |  97 |  83 |  20 |    0.535 | [0.477, 0.595]  |
+
+本批冠军每场得分48.1%，旧reason 53.5%，均较11月17日20点批的42.6%和42.25%高。两组本批95%区间都包含50%，尚不能确认对任一对手占优。两批使用不同种子，未对训练增量进行同副检验。
+
+冠军种子4214400000–4214400249，reason为前100个至4214400099；对内交换阵营，胜1/平0.5/负0每场得分与置信区间按独立种子对簇重算。与旧017对手的历史胜率不直接比较，也不把本批开发结果称为独立棋力验收。原始[冻结计划](evaluation/guanzero-568242-development-v4-plan.json)、[029完整报告](evaluation/guanzero-568242-development-v4-champion.json)、[旧reason完整报告](evaluation/guanzero-568242-development-v4-reason.json)保留原始字节和逐场结果。实际reason统计（ms为毫秒，CPU墙钟受全机负载影响，不是平板性能测试）：
+
+```json
+{
+  "decisions": 90600,
+  "forced": 27057,
+  "baseOnly": 47092,
+  "midgame": 11139,
+  "endgame": 5312,
+  "minWorldsFallback": 8,
+  "budgetFallback": 9,
+  "knownCardsFallback": 0,
+  "changedFromChampion": 2850,
+  "inferences": 4814995,
+  "searchMs": 7652576.001399998,
+  "solverDeadlineCapped": 18,
+  "maxSearchMs": 50318.90769999998,
+  "searchesOver3s": 266,
+  "searchesOver10s": 91,
+  "searchesOver30s": 21
+}
+```
+
+发布归档032无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差4.76837158203125e-7、动作不一致0；Node496通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。原训练af2a683配置/窗口SHA未变，仍到周五11月20日12:00美东。实际部署另见[发布回执](evaluation/web-model-032.json)。
