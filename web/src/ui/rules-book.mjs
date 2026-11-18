@@ -164,7 +164,7 @@ export function rulesPages(rules, modelDescription, timing) {
             ? [
                 ruleItem(
                   '进贡',
-                  '从第二局起，上一局的末游把自己最大的一张牌（百搭除外）进贡给头游；最大的牌有几种花色时，自己选进贡哪一张，限时 30 秒。',
+                  '从第二局起，上一局的末游把自己最大的一张牌（百搭除外）进贡给头游；最大的牌有几种花色时，自己选进贡哪一张，限时 60 秒。',
                   { cards: 'SA', tag: '末游 → 头游' },
                 ),
                 ruleItem(

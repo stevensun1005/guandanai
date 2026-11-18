@@ -121,7 +121,7 @@ export function later(fn, ms) {
   }, ms);
 }
 
-// A short hand may still hold a bomb. Pass only after the actual legal-action check.
+// Automatically pass only with at most three cards and no legal response.
 export function autoPassShort() {
   const game = runtime.game,
     cur = game.trick?.play;
@@ -129,6 +129,7 @@ export function autoPassShort() {
     runtime.reviewMode ||
     runtime.network.watching ||
     !cur ||
+    game.hands[0].length > 3 ||
     game.hands[0].length >= cur.n ||
     runtime.hints.length
   )

@@ -184,3 +184,60 @@ body.spectating #coachSuggestions {
     white-space: nowrap;
   }
 }
+
+.observer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#observerBar,
+.seat-swap {
+  position: fixed;
+  z-index: 24;
+  max-width: min(90vw, 24rem);
+}
+#observerBar {
+  right: max(10px, env(safe-area-inset-right));
+  top: max(64px, calc(env(safe-area-inset-top) + 56px));
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.observer-badge,
+.seat-swap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 9px;
+  background: var(--felt-deep);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+}
+.seat-swap {
+  left: 50%;
+  transform: translateX(-50%);
+  top: max(96px, calc(env(safe-area-inset-top) + 88px));
+  width: max-content;
+}
+.observer-badge small {
+  color: var(--muted);
+}
+.observer-badge small.on {
+  color: var(--gold);
+}
+.observer-badge small.talk {
+  font-weight: 700;
+}
+.observer-bar[hidden],
+.seat-swap[hidden] {
+  display: none;
+}
+@media (max-width: 600px) {
+  .watch-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #observerBar {
+    font-size: 12px;
+    max-width: 55vw;
+  }
+}

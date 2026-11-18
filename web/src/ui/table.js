@@ -3,7 +3,6 @@ import { runtime } from '../app/runtime.js';
 import { Sound } from '../audio/sound.js';
 import { cardText, rankName } from '../core/cards.js';
 import { levelDisplayLabel } from './level-display.mjs';
-import { returnInstruction } from '../core/tribute.js';
 import { analyze, beats } from '../core/combinations.js';
 import { showCount } from '../effects/dealing.js';
 import { isHumanSeat } from '../game/session.js';
@@ -11,7 +10,13 @@ import { owesReturn, tribOptions } from '../game/tribute.js';
 import { active } from '../game/turns.js';
 import { isPhone, placeActionBtns, sideBtns } from '../hand/layout.js';
 import { renderHand } from '../hand/view.js';
-import { selKey, selectedCards, syncCfmShow, syncMini } from '../input/actions.js';
+import {
+  selKey,
+  selectedCards,
+  syncCfmShow,
+  syncMini,
+  tributeConfirmKey,
+} from '../input/actions.js';
 import { DIRS } from '../lobby/lobby.js';
 import { practiceMidHalf, practicePlays, practiceRender } from '../replay/inspector.js';
 import { practiceGrouped } from '../replay/session.js';
@@ -112,14 +117,7 @@ export function render() {
 
 // the line under the disc: the play now on the table and who made it, or who leads when the table is clear
 function renderLastPlay() {
-  let t = '';
-  if (runtime.game.phase === 'play' && !runtime.game.trick && runtime.game.turn >= 0)
-    t = `${runtime.game.turn === 0 ? '你' : runtime.names[runtime.game.turn]} 先出`;
-  const el = $('#lastPlay');
-  if (el.dataset.t !== t) {
-    el.dataset.t = t;
-    el.innerHTML = t;
-  }
+  $('#lastPlay').textContent = '';
   placeLastPlay();
 }
 
@@ -219,8 +217,14 @@ export function renderControls() {
     passBtn: my && !!runtime.game.trick,
     clearBtn: picked,
   };
-  if (runtime.confirmation && (!playable || runtime.confirmation !== selKey()))
+  const tributeConfirmation = ret && runtime.confirmation === tributeConfirmKey();
+  if (
+    runtime.confirmation &&
+    !tributeConfirmation &&
+    (!playable || runtime.confirmation !== selKey())
+  )
     runtime.confirmation = null;
+  $('#returnBtn').disabled = tributeConfirmation;
   $('#playBtn').textContent = runtime.confirmation ? '确认' : '出牌';
   $('#playBtn').classList.toggle('cfm', !!runtime.confirmation);
   syncCfmShow();
@@ -288,10 +292,7 @@ function renderMsg() {
   m.classList.remove('err');
   let t = '';
   if (runtime.game.phase === 'return') {
-    const mine = runtime.game.returns.find((x) => x.from === 0);
-    t = tribHtml();
-    if (owesReturn(0))
-      t += `<div>${returnInstruction(runtime.game.hands[0], runtime.game.L)}给${runtime.names[mine.to]}</div>`;
+    t = owesReturn(0) ? '' : tribHtml();
     const wait = runtime.game.returns.filter(
       (x) => x.from !== 0 && runtime.game.retPick[x.from] == null,
     );
@@ -304,9 +305,6 @@ function renderMsg() {
     if (wait.length) t += `<div>等待${wait.map((g) => runtime.names[g]).join('、')}进贡</div>`;
   } else if (runtime.game.phase === 'tribute' || runtime.game.phase === 'prep') {
     t = runtime.game.notice ? `<div>${runtime.game.notice}</div>` : '';
-    // done sorting and owing a return: it can go now, without waiting for the others to finish sorting
-    if (owesReturn(0))
-      t += `<div class="trib">${returnInstruction(runtime.game.hands[0], runtime.game.L)}给${runtime.names[runtime.game.returns.find((x) => x.from === 0).to]}</div>`;
   } else if (runtime.game.phase === 'play') {
     t = runtime.game.notice ? `<div>${runtime.game.notice}</div>` : '';
   }
@@ -364,7 +362,8 @@ export function syncTribBox() {
     (runtime.game.phase === 'tribute' ||
       runtime.game.phase === 'prep' ||
       (runtime.game.phase === 'play' && runtime.game.tribHold)) &&
-    ((runtime.game.trib && runtime.game.trib.length) || !!runtime.game.kang);
+    ((runtime.game.trib && runtime.game.trib.length) || !!runtime.game.kang) &&
+    !(runtime.game.returns || []).some((x) => x.from === 0 && runtime.game.retPick?.[0] == null);
   b.hidden = !on;
   if (!on) return;
   const html = tribHtml() + kangHtml();

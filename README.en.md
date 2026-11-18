@@ -50,7 +50,7 @@ Empty seats are filled by bots. Play alone or with up to three friends. The host
 
 Use the lobby’s start-settings dialog to set each team’s level, the active team, the previous finishing order and failed A attempts. Desktop/tablet name plates are symmetric, card backs can be hidden, and rotation/fullscreen changes reflow without rewriting the viewport. The final-chance option gives the other team one A attempt after a team has exhausted three; the table shows A1/A2/A3 or A末. Straight-flush selection counts combinations and clears the selection after a full cycle. See the [playing guide](./web/docs/PLAYING.md).
 
-Spectate a room from the lobby using its four-digit code. Spectators receive public plays and hand counts, take no seat and cannot act; the host can manage spectator voice from Options. [Spectator guide](web/docs/PLAYING.md#观战朋友的牌桌)
+Spectate a room from the lobby using its four-digit code. Spectators see public plays and hand counts. A spectator can request a seat for the next round if a non-host player agrees to step out. The host can manage spectator voice from Options. Tribute and return cards are shown in a preview before confirmation. [Spectator guide](web/docs/PLAYING.md#观战朋友的牌桌)
 
 ## What is included
 

@@ -434,3 +434,14 @@ body:not(.practice) .handtools.empty .link {
   border-radius: 8px;
   white-space: nowrap;
 }
+
+#cfmAct {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+  pointer-events: auto;
+}

@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "kind": "clint-tribute-and-spectator-ui",
+  "phase": "pending-deployment",
+  "baseMain": "b1fdbc9271a1bda7630118d708db5d98f36ff88d",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "66d63b81bb0dad2b68312f00c5b62d5262a7a2c0",
+    "checkedSHA": "996ce578b989f1fe5546224fb6f785b49d06b707",
+    "commits": [
+      {
+        "sha": "7c07eadfb684eeb74a631df364e4b4e2b9c0cbef",
+        "scope": "Short-hand automatic passing, 60-second tribute selection, explicit tribute confirmations, observer list, seat requests and replacement."
+      },
+      {
+        "sha": "387745b2600df0d1b7b467a5eca4552b59d4c632",
+        "scope": "Remove redundant return copy and defer central tribute detail until the player returns a card."
+      },
+      {
+        "sha": "996ce578b989f1fe5546224fb6f785b49d06b707",
+        "scope": "Remove repeated sorting and leading-seat copy."
+      }
+    ]
+  },
+  "applied": [
+    "Manual tribute selection lasts 60 seconds. Paying and returning show the selected card with separate confirm and cancel controls. The existing card legality checks stay in use.",
+    "Automatic local pass requires one to three cards, too few cards to follow and no legal response. It retains the automatic event attribution.",
+    "Show observer names and microphones. A player other than the host can let an eligible observer take their seat. After the current players are ready for the next round, switch both live connections, issue a fresh token, and rotate the incoming seat. Before the next deal, the incoming connection receives only public match state.",
+    "Remove duplicate lead and return prompts. Keep input validation and selection feedback."
+  ],
+  "notApplied": [
+    {
+      "path": "index.html",
+      "reason": "Upstream generated mirror. Use this repository's modular sources and build."
+    },
+    {
+      "path": "web/src/app/boot.js, web/src/network/guest.js, web/src/network/host.js, web/src/network/resume.js",
+      "reason": "The upstream reload and sessionStorage role bootstrap was replaced by a boundary transition on existing PeerJS connections and this repository's opaque recovery tokens."
+    }
+  ],
+  "protected": {
+    "ruleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+    "menu": [
+      "clint-rule",
+      "032",
+      "029"
+    ],
+    "defaultChampion": "029",
+    "championHistory": [
+      "029",
+      "017"
+    ],
+    "touchedRulePolicy": false,
+    "touchedModelCatalog": false,
+    "touchedCollection": false,
+    "touchedTraining": false
+  },
+  "localValidation": {
+    "buildVersion": "4d540150f1",
+    "sharedPython": {
+      "passed": 3,
+      "skipped": 1
+    },
+    "tributeSmoke": {
+      "payViewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "returnCases": 2,
+      "physicalCards": 108,
+      "autoPassThreeButNotFour": true,
+      "tributeClockMs": 60000,
+      "pageErrors": 0
+    },
+    "spectatorSmoke": {
+      "browser": "Chrome",
+      "transport": "PeerJS",
+      "isolatedContexts": 3,
+      "widths": [
+        1440,
+        1024,
+        390
+      ],
+      "seatSwapAndRefresh": true,
+      "preDealSnapshotWithoutHandsDeckOrLog": true,
+      "voiceAndVersionGuards": true,
+      "pageErrors": 0
+    },
+    "clintWorkerSmoke": {
+      "widths": [
+        1440,
+        900,
+        844,
+        390
+      ],
+      "legalReplayMoves": 14,
+      "neuralDownloads": 0,
+      "uploads": 0,
+      "pageErrors": 0,
+      "tenCardBoundedSolve": true
+    },
+    "researchPython": {
+      "passed": 43
+    },
+    "formatCheck": true,
+    "build": true,
+    "node": {
+      "npmTestBeforeObserverResetFix": {
+        "passed": 496,
+        "skipped": 36,
+        "failed": 0
+      },
+      "finalSourceExplicitFileListSingleProcess": {
+        "passed": 493,
+        "skipped": 36,
+        "failed": 0
+      }
+    }
+  },
+  "strengthEvaluationGames": 0,
+  "optimizerUpdates": 0
+}

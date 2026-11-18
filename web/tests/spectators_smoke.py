@@ -12,10 +12,12 @@ URL = (sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8765/')+'?test=1'
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, channel='chrome', args=['--use-fake-ui-for-media-stream','--use-fake-device-for-media-stream'])
     contexts = [browser.new_context(viewport={'width':1440,'height':1000}, permissions=['microphone']) for _ in range(3)]
+    for context in contexts:
+        context.route('https://guandan-human-games-collector.couple-ledger-service.workers.dev/**', lambda route: route.abort())
     host,guest,watcher = [ctx.new_page() for ctx in contexts]
     errors,models = [],[]
     for page in [host,guest,watcher]:
-        page.on('pageerror',lambda error:errors.append(str(error)))
+        page.on('pageerror',lambda error:errors.append(error.stack or str(error)))
         page.goto(URL, wait_until='networkidle')
     watcher.on('request',lambda request:models.append(request.url) if '.onnx' in request.url else None)
     host.locator('#nick').fill('房主')
@@ -146,10 +148,52 @@ with sync_playwright() as p:
         watcher.wait_for_timeout(150)
         assert not watcher.evaluate('document.documentElement.scrollWidth>innerWidth')
         watcher.screenshot(path=str(OUT/f'watch-{width}.png'),full_page=True)
+    # Seat change uses the existing connections, a new token, and a fresh round.
+    watcher_peer = watcher.evaluate('NET.peer.id')
+    guest_peer = guest.evaluate('NET.peer.id')
+    assert host.locator('#observerBar').inner_text().find('旁观者') >= 0
+    watcher.locator('#spectatorWant').click()
+    guest.locator('#seatSwapText').wait_for(state='visible')
+    assert '请战' in guest.locator('#seatSwapText').inner_text()
+    guest.locator('#seatSwapRest').click()
+    host.wait_for_function("()=>NET.seatSwap?.viewer.name==='旁观者'")
+    assert guest.evaluate("NET.mode==='guest'") and watcher.evaluate("NET.mode==='spectator'")
+    assert host.locator('#seatSwapRest').is_hidden()
+    # Complete a synthetic round without uploads or waiting for its full animation.
+    for page in [host, guest]:
+        page.evaluate("""()=>{G.tok++;Object.assign(G,{phase:'roundEnd',round:2,prevOut:[0,2,1,3],
+          reveal:4,nextReady:[],paused:false,clock:null,gives:[]});}""")
+    host.evaluate("act({k:'next',p:0})")
+    assert watcher.evaluate("NET.mode==='spectator'")
+    guest.evaluate("act({k:'next',p:toAbs(0)})")
+    watcher.wait_for_function("()=>NET.mode==='guest' && G.round===3")
+    guest.wait_for_function("()=>NET.mode==='spectator' && G.hands.every(hand=>!hand.length)")
+    assert guest.evaluate('NET.peer.id')==guest_peer
+    assert watcher.evaluate('NET.peer.id')==watcher_peer
+    assert guest.evaluate("sessionStorage.getItem('guandan-rejoin-seat')===null")
+    new_token = watcher.evaluate("JSON.parse(sessionStorage.getItem('guandan-rejoin-seat')).token")
+    assert new_token and new_token != token
+    assert host.evaluate("NET.names[2]==='旁观者' && NET.humans.size===2 && NET.spectators.size===1")
+    assert watcher.evaluate("RULES.prepSec===30 && RULES.playMode==='20+60'")
+    packets = host.evaluate('peer=>watchPackets.filter(row=>row.peer===peer)', watcher_peer)
+    entry = next(row for row in packets if row['t']=='resume')
+    assert entry['joinNext'] and not any(k in entry['game'] for k in ['hands','deck','log'])
+    for _ in range(250):
+        if host.evaluate("G?.phase==='prep'"):
+            break
+        for page in [host, watcher]:
+            button = page.locator('#deckBtn')
+            if button.is_visible() and button.is_enabled():
+                button.click()
+        host.wait_for_timeout(100)
+    assert host.evaluate("G.phase==='prep'")
+    watcher.reload(wait_until='networkidle')
+    watcher.wait_for_function("()=>NET.mode==='guest' && G.phase==='prep' && G.round===3",timeout=30000)
+    assert watcher.evaluate("JSON.parse(sessionStorage.getItem('guandan-rejoin-seat')).token")==new_token
     host.evaluate('leaveNet()')
-    watcher.wait_for_function("()=>document.querySelector('#spectatorStatus').textContent.includes('观战') && document.querySelector('#spectatorStatus').classList.contains('ended')")
+    guest.wait_for_function("()=>document.querySelector('#spectatorStatus').textContent.includes('观战') && document.querySelector('#spectatorStatus').classList.contains('ended')")
     assert not errors,errors
-    report={'roomCodeShown':True,'twoHumansRemainTwo':True,'spectatorCannotActSitRecoverOrSync':True,'unseatedReceivesNoGameBroadcast':True,'crossVersionPublicSpectatorAccepted':True,'playerVersionGuardRetained':True,'spectatorNeuralDownloads':len(models),'publicSnapshotsOnly':True,'guestRecoveryWhileWatching':True,'twoPlayerAudioLines':True,'hostVoiceLockAndUnlock':True,'nextRoundFreshState':True,'nicknamesAndBlackNames':True,'viewports':[1440,1024,390],'hostExitEndsSpectating':True,'pageErrors':errors,'purpose':'Browser interaction/security regression, no strength evaluation or real human training data'}
+    report={'roomCodeShown':True,'twoHumansRemainTwo':True,'spectatorCannotActSitRecoverOrSync':True,'unseatedReceivesNoGameBroadcast':True,'crossVersionPublicSpectatorAccepted':True,'playerVersionGuardRetained':True,'spectatorNeuralDownloads':len(models),'publicSnapshotsOnly':True,'guestRecoveryWhileWatching':True,'twoPlayerAudioLines':True,'hostVoiceLockAndUnlock':True,'nextRoundFreshState':True,'nicknamesAndBlackNames':True,'viewports':[1440,1024,390],'hostExitEndsSpectating':True,'boundarySeatSwapAndRefresh':True,'joiningSnapshotNoHands':True,'pageErrors':errors,'purpose':'Browser interaction/security regression, no strength evaluation or real human training data'}
     (OUT/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')
     print(json.dumps(report))
     browser.close()

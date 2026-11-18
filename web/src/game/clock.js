@@ -62,7 +62,7 @@ export function timeUp(c) {
 export function initialize() {
   /* ---------- clocks: one ticker drives turn limits, computer thinking and the pre-play countdown ---------- */
   PLAY_MS = 60000;
-  TRIB_MS = 30000;
+  TRIB_MS = 60000;
   RET_MS = 60000;
   PREP_MS = 90000;
   HURRY_MS = 10000;

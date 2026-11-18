@@ -32,6 +32,8 @@
 
 当前菜单和命名以 [WEB_MODELS.md](WEB_MODELS.md) 为准：2026-11-09 起只有 Clint、最新一代 GuanZero、danMCai 现任冠军与 danMCai-reason 四项。下文带版本号的历史浏览器和风格结果保留原条件，不代表当前菜单或最新检查点成绩。
 
+本轮的观战烟测增加了请战、同意让座、局间换座和新座位刷新恢复，检查接替前的数据仍无手牌、牌堆或未公开动作日志。贡牌烟测覆盖进贡预览和计时、还贡取消、动画中准备和 108 张实体牌完整性。见[本轮同步证据](../../ai/research/evaluation/clint-sync-20261118-2216.json)。
+
 ## PR 自动检查与网页流程评测
 
 PR 自动执行 `npm test`、格式检查、构建、`production_smoke.py` 与 `replay_security_smoke.py`。浏览器在实际产物上加载模型并出牌，另从文件导入恶意结果文本，验证列表、重打原结果和回放只显示文字。PR 不发布网站；主分支推送或手动运行通过检查后才部署 GitHub Pages。CI 使用安装的 Chromium，本地默认使用 Chrome，可通过 `BROWSER_CHANNEL` 更换。

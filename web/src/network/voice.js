@@ -251,6 +251,13 @@ export function initialize() {
       watch.disabled = locked;
       watch.textContent = locked ? '语音已关闭' : on ? '开麦' : '闭麦';
       watch.setAttribute('aria-pressed', String(on));
+      for (const mark of document.querySelectorAll('[data-observer-mic]')) {
+        const id = Number(mark.dataset.observerMic);
+        const enabled = id === me() ? on : !!runtime.network.mics[id];
+        mark.textContent = enabled ? '开麦' : '闭麦';
+        mark.classList.toggle('on', enabled);
+        mark.classList.toggle('talk', talking.has(id));
+      }
       for (let q = 0; q < 4; q++) {
         const el = $(q ? `#seat${q} .vc` : '#myVc');
         if (!el) continue;

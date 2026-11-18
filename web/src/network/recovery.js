@@ -1,6 +1,6 @@
 import { runtime } from '../app/runtime.js';
 import { act, setHumans } from '../game/events.js';
-import { toLocal } from '../game/session.js';
+import { resetGame, toLocal } from '../game/session.js';
 import { startTurn } from '../game/turns.js';
 import { absOf, lobbyStatus, renderLobby } from '../lobby/lobby.js';
 import { botModelId } from '../ai/model-catalog.mjs';
@@ -59,11 +59,27 @@ export function peerList() {
   return voicePeers();
 }
 
-function sendSnapshot(info, sync = false) {
+function sendSnapshot(info, sync = false, joinNext = false) {
+  const game = runtime.game;
+  // A new player only needs the completed round's public match state before the next deal.
+  const state = joinNext
+    ? {
+        phase: game.phase,
+        round: game.round,
+        levels: game.levels,
+        lvlTeam: game.lvlTeam,
+        aFails: game.aFails,
+        aOut: game.aOut,
+        prevOut: game.prevOut,
+        roundHistory: game.roundHistory,
+      }
+    : structuredClone(game);
+
   info.conn.send({
     t: 'resume',
     sync,
-    game: structuredClone(runtime.game),
+    joinNext,
+    game: state,
     humans: [...runtime.network.humans],
     names: runtime.network.names,
     hostDir: runtime.network.hostDir,
@@ -73,6 +89,11 @@ function sendSnapshot(info, sync = false) {
     botModels: runtime.botModels,
     peers: peerList(),
   });
+}
+
+export function sendNewSeat(info) {
+  reserveSeat(info);
+  sendSnapshot(info, false, true);
 }
 
 export function receiveSync(conn, message) {
@@ -222,6 +243,18 @@ export function receiveRecovery(message) {
     botModelId(message.botModels?.[index]),
   );
   enterOnline('guest', message.hostDir, message.names);
+  if (message.joinNext) {
+    resetGame();
+    Object.assign(runtime.game, rotateSnapshot(message.game, runtime.network.off), { tok });
+    runtime.network.inbox = [];
+    runtime.network.pending = false;
+    runtime.network.startSettingsUsed = true;
+    runtime.selection = new Set();
+    runtime.confirmation = null;
+    hideOverlay();
+    VC.start(message.peers);
+    return true;
+  }
   runtime.game = rotateSnapshot(message.game, runtime.network.off);
   runtime.network.startSettingsUsed = true;
   Object.assign(runtime.game, {

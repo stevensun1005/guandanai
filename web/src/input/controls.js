@@ -1,7 +1,7 @@
 import { uniqueStraightFlushes } from '../hand/straight-flushes.mjs';
 import { signalBack } from '../network/protocol.js';
 import { runtime } from '../app/runtime.js';
-import { syncRoomOptions } from '../network/spectators.js';
+import { applySeatSwap, syncRoomOptions } from '../network/spectators.js';
 import { Sound, syncAudioBtns } from '../audio/sound.js';
 import { cardText } from '../core/cards.js';
 import { analyze } from '../core/combinations.js';
@@ -75,9 +75,15 @@ export function startNextIfReady() {
   if (
     !isHost() ||
     !runtime.game ||
+    !['roundEnd', 'over'].includes(runtime.game.phase) ||
     ![...runtime.network.humans].every((h) => (runtime.game.nextReady || []).includes(h))
   )
     return;
+  if (runtime.network.seatSwap && runtime.game.reveal < 4) {
+    setTimeout(startNextIfReady, 100);
+    return;
+  }
+  applySeatSwap();
   if (runtime.game.phase === 'roundEnd') act(roundEvt(false));
   else if (runtime.game.phase === 'over') newGame();
 }
@@ -310,11 +316,13 @@ export function initialize() {
     });
   document.addEventListener('keydown', (e) => {
     if (
+      !runtime.game ||
+      runtime.network.watching ||
       runtime.replayView.open ||
       runtime.replayView.edit ||
       !$('#overlay').hidden ||
       !$('#lobby').hidden ||
-      e.target.closest('dialog,input,textarea,select,[contenteditable="true"]')
+      e.target.closest('dialog,input,textarea,select,#cfmAct,[contenteditable="true"]')
     )
       return;
     if (

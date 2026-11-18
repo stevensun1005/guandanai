@@ -91,9 +91,6 @@ export function renderClocks() {
     $('#prepBigNum').textContent = Math.max(0, Math.ceil(c.left / 1000));
     $('#prepR').classList.toggle('hurry', c.left <= HURRY_MS);
     placePrepBig();
-    $('#prepText').textContent =
-      (runtime.game.returns && runtime.game.returns.length ? '理牌后还贡，' : '') +
-      `${runtime.game.turn === 0 ? '你' : runtime.names[runtime.game.turn]}先出`;
     $('#readyBtn').hidden = (runtime.game.ready || []).includes(0);
   }
 }

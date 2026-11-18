@@ -241,6 +241,9 @@ window.Worker=class extends BaseWorker {
                       if(cards.length){sel=new Set([cards[0].id]);renderHand();}
                     }""")
                     returning.click()
+                    confirm = page.locator("#cfmGo")
+                    if confirm.is_visible():
+                        confirm.click()
                 ready = page.locator("#readyBtn")
                 if ready.is_visible() and ready.is_enabled():
                     ready.click()

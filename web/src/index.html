@@ -146,6 +146,11 @@
         ></span>
       </header>
 
+      <div class="observer-bar" id="observerBar" hidden></div>
+      <div class="seat-swap" id="seatSwap" hidden>
+        <span id="seatSwapText" role="status"></span>
+        <button class="btn" id="seatSwapRest" type="button" hidden>我要休息</button>
+      </div>
       <main class="table" id="table">
         <section class="seat" id="seat2">
           <div class="whorow">
@@ -188,8 +193,7 @@
         <section class="seat" id="seat0">
           <span class="place" id="myPlace"></span>
           <div class="prep" id="prep" hidden>
-            <span class="pt" id="prepText">你先出</span
-            ><button class="btn primary round" id="readyBtn">理牌<br />结束</button>
+            <button class="btn primary round" id="readyBtn">理牌<br />结束</button>
           </div>
           <button class="btn primary round" id="deckBtn" hidden>洗牌</button>
           <div class="msg" id="msg"></div>
@@ -606,10 +610,12 @@
         <button class="link" type="button" id="spectatorMic" aria-pressed="false" hidden>
           闭麦
         </button>
+        <button class="link" type="button" id="spectatorWant" hidden>请战</button>
         <button class="link" type="button" id="spectatorBack">退出观战</button>
       </header>
       <p id="spectatorStatus" role="status">正在连接…</p>
       <p id="spectatorScore"></p>
+      <div class="observer-bar" id="watchObserverBar" hidden></div>
       <p class="watch-note">只读公开牌面，不占座位；手牌仅显示张数。</p>
       <div class="watch-layout">
         <div id="spectatorSeats"></div>

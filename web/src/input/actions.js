@@ -79,6 +79,9 @@ function askConfirm() {
 
 // the cards waiting for 确认, in the order the play reads, 1.8 times the size of the hand's cards and side by side in the
 // middle of the table; a long play keeps every card's corner in view by overlapping, and shrinks only if it must
+export const tributeConfirmKey = () =>
+  `tribute:${runtime.game.tok}:${runtime.game.phase}:${selKey()}`;
+
 export function syncCfmShow() {
   let box = $('#cfmShow');
   if (!runtime.confirmation) {
@@ -90,6 +93,7 @@ export function syncCfmShow() {
     box.id = 'cfmShow';
     document.body.appendChild(box);
   }
+  const tribute = runtime.confirmation === tributeConfirmKey();
   const cards = selectedCards(),
     current =
       runtime.game.turn === -1 && runtime.game.nextLeader === 0 ? null : runtime.game.trick?.play,
@@ -102,7 +106,7 @@ export function syncCfmShow() {
     hc = $('#hand .card'),
     maxW = t.width * 0.9;
   const cw = Math.min(
-    (hc ? hc.offsetWidth : 60) * 1.8,
+    (hc ? hc.offsetWidth : 60) * (tribute ? 2 : 1.8),
     (t.height * 0.5) / 1.4,
     maxW / (1 + 0.45 * (n - 1)),
   );
@@ -113,6 +117,20 @@ export function syncCfmShow() {
   box.style.left = t.left + t.width / 2 + 'px';
   box.style.top = t.top + t.height / 2 + 'px';
   box.hidden = false;
+  if (tribute) {
+    const actions = document.createElement('div');
+    actions.id = 'cfmAct';
+    actions.innerHTML =
+      '<button type="button" class="btn primary" id="cfmGo"></button><button type="button" class="btn" id="cfmNo">取消</button>';
+    box.append(actions);
+    $('#cfmGo').textContent = runtime.game.phase === 'tribPick' ? '确认进贡' : '确认还贡';
+    $('#cfmGo').onclick = () => submitTribute(true);
+    $('#cfmNo').onclick = () => {
+      runtime.confirmation = null;
+      renderControls();
+      $('#returnBtn').focus();
+    };
+  }
 }
 
 export function onPass() {
@@ -140,30 +158,40 @@ export function onHint() {
 }
 
 export function onReturn() {
+  submitTribute(false);
+}
+
+function submitTribute(confirmed) {
   if (waitingHost()) return;
-  if (runtime.game.phase === 'tribPick') {
+  const pay = runtime.game.phase === 'tribPick';
+  const cards = selectedCards();
+  if (pay) {
     if (!runtime.game.tribGivers.includes(0) || runtime.game.tribPick[0] != null) return;
-    const cards = selectedCards(),
-      ok = tribOptions(0);
+    const ok = tribOptions(0);
     if (cards.length !== 1 || !ok.includes(cards[0])) {
       setMsg('要进贡手里最大的一张牌（百搭除外）', true);
       return;
     }
-    act({ k: 'tribute', p: toAbs(0), id: cards[0].id });
+  } else {
+    if (!owesReturn(0)) return;
+    if (cards.length !== 1 || !isReturnCard(cards[0], runtime.game.L, runtime.game.hands[0])) {
+      setMsg(returnInstruction(runtime.game.hands[0], runtime.game.L), true);
+      return;
+    }
+  }
+  const key = tributeConfirmKey();
+  if (!confirmed) {
+    if (runtime.confirmation !== key) {
+      runtime.confirmation = key;
+      renderControls();
+      $('#cfmNo')?.focus();
+    }
     return;
   }
-  if (!owesReturn(0)) return;
-  const cards = selectedCards();
-  if (cards.length !== 1) {
-    setMsg(returnInstruction(runtime.game.hands[0], runtime.game.L), true);
-    return;
-  }
-  const c = cards[0];
-  if (!isReturnCard(c, runtime.game.L, runtime.game.hands[0])) {
-    setMsg(returnInstruction(runtime.game.hands[0], runtime.game.L), true);
-    return;
-  }
-  act({ k: 'return', p: toAbs(0), id: c.id });
+  if (runtime.confirmation !== key) return;
+  runtime.confirmation = null;
+  renderControls();
+  act({ k: pay ? 'tribute' : 'return', p: toAbs(0), id: cards[0].id });
 }
 
 export function initialize() {

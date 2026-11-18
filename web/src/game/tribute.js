@@ -261,7 +261,7 @@ export function returnNow(p, id) {
 
 export function initialize() {
   // the largest card goes at once, for the computer and for a player who has only one kind of it; a player whose
-  // largest card comes in several suits gets 30 seconds to choose, after which one goes for them
+  // largest card comes in several suits gets 60 seconds to choose, after which one goes for them
   tribChoice = (g) => new Set(tribOptions(g).map((c) => c.s)).size > 1;
   owesReturn = (p) =>
     (runtime.game.phase === 'return' || runtime.game.phase === 'prep') &&

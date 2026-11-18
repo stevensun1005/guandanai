@@ -42,6 +42,8 @@ import { hideOverlay, showResult } from '../ui/overlays.js';
 import { render, setMsg } from '../ui/table.js';
 import {
   acceptSpectator,
+  receiveObservers,
+  requestSeatSwap,
   closeSpectator,
   relaySpectators,
   resetSpectators,
@@ -170,6 +172,10 @@ function hostOnData(conn, d) {
     } catch (_) {}
     return;
   }
+  if (d.t === 'rest-seat') {
+    requestSeatSwap(info);
+    return;
+  }
   if (d.t === 'mic') {
     if (runtime.network.started && info.dir) {
       runtime.network.mics[absOf(info.dir, runtime.network.hostDir)] = !!d.on;
@@ -287,6 +293,7 @@ function hostOnClose(conn, how = 'drop') {
   const info = runtime.network.conns.get(conn.peer);
   if (!info) return;
   runtime.network.conns.delete(conn.peer);
+  if (runtime.network.seatSwap?.player === info) runtime.network.seatSwap = null;
   if (how === 'quit') releaseSeat(info);
   if (!runtime.network.started) {
     if (info.dir) runtime.network.lobby[info.dir] = null;
@@ -369,7 +376,7 @@ export function startOnline() {
   });
   enterOnline('host', runtime.direction, names);
   newGame();
-  VC.start(peers);
+  updateSpectatorVoice();
 }
 
 export function enterOnline(mode, hostDir, names) {
@@ -462,12 +469,29 @@ export function sendSit(d) {
 
 function guestOnData(d) {
   if (!d) return;
+  if (d.t === 'watch-open' && runtime.network.mode === 'guest') {
+    spectatorMessage(d);
+    return;
+  }
+  if (runtime.network.mode === 'spectator' && d.t === 'seat-session') {
+    receiveRecovery(d);
+    return;
+  }
+  if (runtime.network.mode === 'spectator' && d.t === 'resume' && d.joinNext === true) {
+    VC.stop();
+    runtime.network.watching = false;
+    runtime.network.spectatorId = null;
+    document.body.classList.remove('spectating');
+    $('#spectatorView').hidden = true;
+    receiveRecovery(d);
+    return;
+  }
   if (runtime.network.watching || runtime.network.mode === 'spectator') {
     spectatorMessage(d);
     return;
   }
   runtime.network.hostSeen = Date.now();
-  if (receiveRecovery(d)) return;
+  if (receiveObservers(d) || receiveRecovery(d)) return;
   if (d.t === 'ping') {
     runtime.network.hostConn &&
       runtime.network.hostConn.open &&
