@@ -3655,3 +3655,5 @@ Toronto11月18日20:00/index5145按新续训日历冻结，此后只使用同一
 ```
 
 发布归档033无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差2.980232238769531e-7、动作不一致0；Node496通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。原训练af2a683配置/窗口SHA未变，仍到周五11月20日12:00美东。实际部署另见[发布回执](evaluation/web-model-033.json)。
+
+606228实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/44451407946)成功，线上Chrome实见 `guanzero-adp-io48-606228`、3项菜单和四席029默认。公网bot-033.onnx为6346014字节，完整SHA `caaa1319d0f87a007c5b44de822f1d0aafe0f32fe00c2f38e1f4cb26f34f7312` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。3份Git原始证据逐字节SHA核验通过；原配置与续训窗口SHA未变，固定截止仍为Toronto11月20日周五12:00。
