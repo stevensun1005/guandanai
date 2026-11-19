@@ -1,0 +1,97 @@
+{
+  "sourceCommit": "1c3d3870929ff83b3ee36ff362854817cb4bdc44",
+  "sourceFiles": 380,
+  "protocolSHA256": "09ea8b01271192236b5e75df7db6b3c4a207d87b01abab5873eb4e43ade3a3f2",
+  "startingStep": 50424,
+  "startingNetworkSHA256": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa",
+  "startingCheckpointSHA256": "4cc627c702813c6d32f571207a8b6ec69f8e4bf01671fb49c0b6448d569135aa",
+  "studentReference": true,
+  "emptyReplay": true,
+  "trainingDeadlineUTC": "2026-11-19T07:01:39.627Z",
+  "evaluationSaveDeadlineUTC": "2026-11-19T10:01:39.627Z",
+  "reservedTrainingRoots": 50000,
+  "independentHeldoutDeals": 1500,
+  "heldoutPlannedRounds": 4000,
+  "seedAuditEvidenceFiles": 8563,
+  "knownHistoricalRoots": 2804899,
+  "heldoutRanges": {
+    "vsParent": [
+      1750000730,
+      1750003848
+    ],
+    "vs029": [
+      1750003849,
+      1750007840
+    ],
+    "vsreason": [
+      1750007841,
+      1750011832
+    ]
+  },
+  "seedAuditSHA256": "f8f9e1274c2005f43bd4a042e3a3fd9ef5bc881d4f95ab58fc31049c87f89778",
+  "trainingSeedListSHA256": "63c26346fadb4719ee057764b0b59e056a824a2f5bdeb538c4a54b2442fecadc",
+  "observedAtUTC": "2026-11-19T05:03:48+00:00",
+  "state": "active-confirmed-gpu-updates",
+  "inheritedStep": 50424,
+  "cumulativeUpdates": 50717,
+  "newUpdates": 293,
+  "newIngestedRows": 149950,
+  "newHumanRowsUsed": 87,
+  "actualDevice": "AMD Radeon RX 7800 XT",
+  "actor": {
+    "matches": 325,
+    "nextSeed": 340,
+    "shardSequence": 200009,
+    "failures": 0,
+    "provider": "dml",
+    "fallback": false
+  },
+  "gpuRestorePreflight": {
+    "passed": true,
+    "device": "AMD Radeon RX 7800 XT",
+    "backend": "cuda:0",
+    "inheritedStep": 50424,
+    "actualParentCheckpointVerified": true,
+    "matchingAdamStates": 12,
+    "restoreNextUpdateEqual": true
+  },
+  "processesAlive": true,
+  "trainingPID": 22840,
+  "learnerPID": 27636,
+  "dashboard": {
+    "url": "http://127.0.0.1:8767/",
+    "viewports": [
+      1280,
+      390
+    ],
+    "actualTrainingProgress": "195 次GPU更新 · 100,015 终局样本行 · 56 真人动作曝光 · 等待完整终局样本",
+    "evaluationCards": [
+      "vsParent",
+      "vs029",
+      "vsreason",
+      "029vsreason"
+    ],
+    "plannedRoundsEach": 1000,
+    "actualEvaluationRounds": 0,
+    "pageErrors": [],
+    "horizontalOverflow": false,
+    "pollResponses": 10
+  },
+  "temporaryAwake": true,
+  "actualEvaluationRounds": 0,
+  "provisionalStrengthEvidence": false,
+  "published": false,
+  "tests": {
+    "npmTest": {
+      "passed": 496,
+      "skipped": 37,
+      "failed": 0
+    },
+    "researchPython": 43,
+    "humanJointPython": 5,
+    "formatCheck": true,
+    "build": true
+  },
+  "registeredStartUTC": "2026-11-19T05:01:39.627Z",
+  "actualTrainingStageStartUTC": "2026-11-19T05:01:46.871Z"
+}
