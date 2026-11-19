@@ -6128,6 +6128,14 @@
       "resumedFromStep": 491454,
       "plannedEnd": "2026-11-20T17:00:00.000Z",
       "classification": "owner-authorized training continuation;not-strength-evidence"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-recovery-20261119.json",
+      "sha256": "4174dd22b71ea354d429bd16adb55184111b32756bcfac9333a0aae6388371cb",
+      "authorizedAt": "2026-11-19T16:51:34.219Z",
+      "resumedFromStep": 652860,
+      "plannedEnd": "2026-11-20T17:00:00.000Z",
+      "classification": "owner-authorized recovery from status write failure"
     }
   ],
   "windowsExtrasCloseouts": [
