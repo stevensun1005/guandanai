@@ -1,0 +1,212 @@
+{
+  "complete": true,
+  "reports": {
+    "vsParent": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 498,
+      "losses": 502,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.013,
+        "standardError": 0.05043559753783032,
+        "ci": [
+          -0.11185377117414742,
+          0.08585377117414743
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.498,
+        "standardError": 0.01209481579596302,
+        "ci": [
+          0.4742941610399125,
+          0.5217058389600875
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 219,
+        "13": 106,
+        "14": 173,
+        "23": 164,
+        "24": 123,
+        "34": 215
+      },
+      "doubleDowns": 215,
+      "doubleUps": 219,
+      "meanTurns": 80.747
+    },
+    "vs029": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 496,
+      "losses": 504,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.026,
+        "standardError": 0.05289843560047835,
+        "ci": [
+          -0.12968093377693757,
+          0.07768093377693756
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.496,
+        "standardError": 0.012339876218592323,
+        "ci": [
+          0.47181384261155906,
+          0.520186157388441
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 223,
+        "13": 106,
+        "14": 167,
+        "23": 168,
+        "24": 102,
+        "34": 234
+      },
+      "doubleDowns": 234,
+      "doubleUps": 223,
+      "meanTurns": 80.441
+    },
+    "vsreason": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 533,
+      "losses": 467,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.051,
+        "standardError": 0.055098727203801705,
+        "ci": [
+          -0.15899350531945133,
+          0.05699350531945135
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.533,
+        "standardError": 0.012928894485811634,
+        "ci": [
+          0.5076593668078092,
+          0.5583406331921908
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 215,
+        "13": 83,
+        "14": 235,
+        "23": 106,
+        "24": 92,
+        "34": 269
+      },
+      "doubleDowns": 269,
+      "doubleUps": 215,
+      "meanTurns": 80.991
+    },
+    "029vsreason": {
+      "model": "challenger",
+      "opponent": "reason",
+      "mixed": false,
+      "teammate": "challenger",
+      "pairs": 500,
+      "rounds": 1000,
+      "wins": 521,
+      "losses": 479,
+      "draws": 0,
+      "signedUpgradePoints": {
+        "clusters": 500,
+        "mean": -0.074,
+        "standardError": 0.05465365535888863,
+        "ci": [
+          -0.1811211645034217,
+          0.033121164503421716
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "roundWinScore": {
+        "clusters": 500,
+        "mean": 0.521,
+        "standardError": 0.013055991645052141,
+        "ci": [
+          0.4954102563756978,
+          0.5465897436243022
+        ],
+        "z": 1.96,
+        "method": "Normal approximation using independent seed-pair sample SD"
+      },
+      "finishingRankPairs": {
+        "12": 203,
+        "13": 84,
+        "14": 234,
+        "23": 118,
+        "24": 116,
+        "34": 245
+      },
+      "doubleDowns": 245,
+      "doubleUps": 203,
+      "meanTurns": 81.557
+    }
+  },
+  "pairedUpgradeGainVsOldReason": {
+    "pairs": 500,
+    "mean": 0.023,
+    "standardError": 0.07327127239728701,
+    "ci": [
+      -0.12061169389868254,
+      0.16661169389868252
+    ],
+    "z": 1.96
+  },
+  "pairedWinRateGainVsOldReason": {
+    "pairs": 500,
+    "mean": 0.012,
+    "standardError": 0.016801087854844767,
+    "ci": [
+      -0.020930132195495745,
+      0.04493013219549574
+    ],
+    "z": 1.96
+  },
+  "retrospectiveHumanAccuracyDelta": 0.005714285714285727,
+  "retrospectiveHumanPointGoal": false,
+  "beats029Upgrade95": false,
+  "beatsOldReasonUpgrade95": false,
+  "bothExploratoryGoalsMet": false,
+  "humanGeneralizationAccepted": false,
+  "webPublished": false,
+  "optimizerUpdatesDuringEvaluation": 0,
+  "limits": "Same fixed retrospective human split; not new prospective acceptance. Two old-reason groups share a deal block, with distinct 029 and parent blocks; no pooled overall winrate. Native timed search depends on machine load; report fallbacks. No automatic model promotion or website deployment.",
+  "beatsParentUpgrade95": false,
+  "retrospectiveHumanAccuracyDeltaVsParent": 0.004285714285714282
+}

@@ -1,0 +1,140 @@
+{
+  "phase": "complete",
+  "sourceCommit": "1c3d3870929ff83b3ee36ff362854817cb4bdc44",
+  "protocolSHA256": "09ea8b01271192236b5e75df7db6b3c4a207d87b01abab5873eb4e43ade3a3f2",
+  "machineStopAuditSHA256": "f769157b556b31289360437f7d65001d4f6703fa299da41811d008500bd8060c",
+  "stoppedAtUTC": "2026-11-19T07:01:46.477Z",
+  "completedAtUTC": "2026-11-19T08:15:41.137Z",
+  "temporaryAwakeReleased": true,
+  "allControllerStagesExitedZero": true,
+  "cumulativeUpdates": 58132,
+  "newUpdates": 7708,
+  "newIngestedRows": 3946547,
+  "newTrainingHumanLabelExposures": 2516,
+  "finalModel": {
+    "version": "v000058132",
+    "file": "v000058132.onnx",
+    "sha256": "1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2",
+    "step": 58132,
+    "trainedRows": 119054336,
+    "ingestedRows": 29763869,
+    "publishedAt": "2026-11-19T07:01:44Z"
+  },
+  "checkpointSHA256": "05e6099f51f2bf74c36ee82a8757628f5ba26f5c58e56074319be9c520a8f517",
+  "matchingAdamStates": 12,
+  "encodingSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "evaluationGroups": {
+    "vsParent": {
+      "protocolSHA256": "f37cac478c3848bee21ddecf88a9dd77edae7eb6ee3a2d0ec386ac0077b55312",
+      "pairRowsSHA256": "16ec2ed613d2f707b249bf7f9a5340218b5b5455a01d0ace34e1f9a8d7c9de52",
+      "models": {
+        "challenger": "1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2",
+        "reason": "71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa"
+      },
+      "completedPairs": 500,
+      "completedRounds": 1000
+    },
+    "vs029": {
+      "protocolSHA256": "b39fe0a9cf13c3f08b437d560849aae9c3bcac0eb17e0b94debadb7a96353bd5",
+      "pairRowsSHA256": "8bbfe3b872556517d3d2935b40c9d091dd6b766546ec35abcad151699bf3ea95",
+      "models": {
+        "challenger": "1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2",
+        "reason": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768"
+      },
+      "completedPairs": 500,
+      "completedRounds": 1000
+    },
+    "vsreason": {
+      "protocolSHA256": "65020574e781f0606d012a11ec14f037adcac2592cc2c0cf11e6cd54ae29aefc",
+      "pairRowsSHA256": "1cc4934d05a842436e09190f6c387e38d15e2f31ecfb0f8d58b84e6d83a8e132",
+      "models": {
+        "challenger": "1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2",
+        "reason": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+        "belief": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+      },
+      "completedPairs": 500,
+      "completedRounds": 1000
+    },
+    "029vsreason": {
+      "protocolSHA256": "cec01c500d7b773f15c0b93930e12d36ca0c79376c94e92d0f7533a73e9ff74b",
+      "pairRowsSHA256": "7b6a718cb92789a33434b3518261e07a05120276053c693fd770659128d15cb9",
+      "models": {
+        "challenger": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+        "reason": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+        "belief": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9"
+      },
+      "completedPairs": 500,
+      "completedRounds": 1000
+    }
+  },
+  "completeRounds": 4000,
+  "physicalDeals": 1500,
+  "independentPairRecheck": "Recomputed W/L, mean, grouped 95% interval and matched reason contrasts from local complete pair rows. Verified final weights and checkpoint digests.",
+  "nativeReasonSearch": {
+    "final": {
+      "bands": {
+        "midgame": {
+          "requests": 4986,
+          "completed": 4986,
+          "deviated": 993,
+          "fallbackCount": 0,
+          "minWorldsFallbacks": 0,
+          "fallbackReasons": {},
+          "timedSearches": 4986,
+          "totalMs": 599212,
+          "maxMs": 985
+        },
+        "endgame": {
+          "requests": 2644,
+          "completed": 2643,
+          "deviated": 348,
+          "fallbackCount": 1,
+          "minWorldsFallbacks": 1,
+          "fallbackReasons": {
+            "budget": 1
+          },
+          "timedSearches": 2644,
+          "totalMs": 1191449,
+          "maxMs": 51821
+        }
+      },
+      "rawMs": 42647.27930000066,
+      "reasonMs": 1830138.365999966,
+      "pairedGames": 1000,
+      "optimizerUpdates": 0
+    },
+    "control029": {
+      "bands": {
+        "midgame": {
+          "requests": 5069,
+          "completed": 5069,
+          "deviated": 1018,
+          "fallbackCount": 0,
+          "minWorldsFallbacks": 0,
+          "fallbackReasons": {},
+          "timedSearches": 5069,
+          "totalMs": 610190,
+          "maxMs": 1934
+        },
+        "endgame": {
+          "requests": 2707,
+          "completed": 2703,
+          "deviated": 351,
+          "fallbackCount": 4,
+          "minWorldsFallbacks": 2,
+          "fallbackReasons": {
+            "budget": 4
+          },
+          "timedSearches": 2707,
+          "totalMs": 1381314,
+          "maxMs": 51342
+        }
+      },
+      "rawMs": 42275.45860001316,
+      "reasonMs": 2030995.3624000282,
+      "pairedGames": 1000,
+      "optimizerUpdates": 0
+    }
+  },
+  "webChanged": false
+}
