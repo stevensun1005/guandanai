@@ -20,15 +20,18 @@ export function validateJointProtocol(p, now = Date.now()) {
   const t = [p.startedAtUTC, p.trainingDeadlineUTC, p.deadlineUTC].map(Date.parse);
   const overnight = p.id === 'human-qfilter-overnight-20261115';
   const legacy = p.id === 'human-joint-029-20261115';
+  const followup = p.id === 'human-qfilter-followup-20261118';
   const continuation = p.id === 'human-qfilter-continue-20261116';
   const c = p.initialConfig,
     h = c?.humanImitation;
   if (
-    (!legacy && !overnight && !continuation) ||
+    (!legacy && !overnight && !continuation && !followup) ||
     p.initialModelSHA256 !==
-      (continuation
-        ? '9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03'
-        : '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768') ||
+      (followup
+        ? '71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa'
+        : continuation
+          ? '9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03'
+          : '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768') ||
     !p.humanTrainingAuthorized ||
     p.webDeploymentAuthorized !== false ||
     p.restartExtendsDeadline !== false ||
@@ -44,7 +47,28 @@ export function validateJointProtocol(p, now = Date.now()) {
       p.deadlineUTC !== '2026-11-17T15:00:00.000Z' ||
       t[1] - t[0] > 12 * 3600000 ||
       p.humanWarmupUTC !== '2026-11-17T00:00:00.000Z' ||
-      c?.actors !== 1 ||
+      c?.continuation?.sha256 !==
+        '815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516' ||
+      c?.continuation?.shardSequenceStart !== 100000 ||
+      c?.parent?.startingStep !== 21833)
+  )
+    throw Error('Continuation checkpoint or 07Toronto cutoff changed');
+  if (
+    followup &&
+    (t[1] - t[0] !== 2 * 3600000 ||
+      p.humanWarmupUTC !== p.startedAtUTC ||
+      c?.continuation?.sha256 !==
+        '4cc627c702813c6d32f571207a8b6ec69f8e4bf01671fb49c0b6448d569135aa' ||
+      c?.continuation?.shardSequenceStart !== 200000 ||
+      c?.parent?.startingStep !== 50424 ||
+      p.evaluationModels?.parent?.localFile !== p.initialModel ||
+      p.evaluationModels?.parent?.sha256 !== p.initialModelSHA256 ||
+      p.heldout?.vsParent?.length !== 500)
+  )
+    throw Error('Follow-up checkpoint, parent evaluation or two-hour cutoff changed');
+  if (
+    (continuation || followup) &&
+    (c?.actors !== 1 ||
       c?.fastActor?.games !== 16 ||
       c?.fastActor?.sessionLimit !== 2 ||
       c?.learner?.capacity !== 500000 ||
@@ -54,13 +78,9 @@ export function validateJointProtocol(p, now = Date.now()) {
       h?.gateTopK !== 2 ||
       h?.enableAfterUTC !== p.humanWarmupUTC ||
       !h?.compactFeatures ||
-      c?.continuation?.sha256 !==
-        '815cf52f9aa7319a3d8d1b9e21bc879fd1cb46fa872394f259cd286f6f93c516' ||
-      c?.continuation?.shardSequenceStart !== 100000 ||
-      c?.parent?.startingStep !== 21833 ||
       p.evaluationWorkers !== 1)
   )
-    throw Error('Continuation checkpoint/resources/07Toronto cutoff changed');
+    throw Error('Continuation objective or resources changed');
   if (legacy && t[1] - t[0] !== 4 * 3600000) throw Error('Legacy4h window changed');
   if (
     overnight &&
@@ -113,7 +133,8 @@ export function validateJointProtocol(p, now = Date.now()) {
     p.evaluationTemplate.plannedPairs !== 500 ||
     p.heldout.vs029.length !== 500 ||
     p.heldout.vsreason.length !== 500 ||
-    new Set([...p.heldout.vs029, ...p.heldout.vsreason]).size !== 1000
+    new Set([...p.heldout.vs029, ...p.heldout.vsreason, ...(p.heldout.vsParent || [])]).size !==
+      (followup ? 1500 : 1000)
   )
     throw Error('Invalid heldout blocks');
 }
@@ -128,11 +149,14 @@ export function evaluationPlans(p, root, final) {
       config: { stateFeatures: 513, actionFeatures: 54 },
     },
   };
-  return ['vs029', 'vsreason', '029vsreason'].map((name) => {
-    const raw = name === 'vs029',
+  const groups = ['vs029', 'vsreason', '029vsreason'];
+  if (p.heldout.vsParent) groups.unshift('vsParent');
+  return groups.map((name) => {
+    const parent = name === 'vsParent';
+    const raw = parent || name === 'vs029',
       baseline = name === '029vsreason';
     const challenger = baseline ? models.raw029 : models.final,
-      opponent = raw ? models.raw029 : models.old017;
+      opponent = parent ? models.parent : raw ? models.raw029 : models.old017;
     return {
       name,
       plan: {
@@ -140,7 +164,7 @@ export function evaluationPlans(p, root, final) {
         id: p.id + '-' + name,
         displayName: baseline
           ? '029起点 vs旧reason（配对控制）'
-          : '最终联合模型 vs' + (raw ? '029' : '旧reason'),
+          : '最终联合模型 vs' + (parent ? '本轮起点50424' : raw ? '029' : '旧reason'),
         purpose:
           'New final-only complete-round evaluation; no optimization, selection, expansion or deployment',
         sourceRoot: p.sourceRoot,
@@ -161,13 +185,13 @@ export function evaluationPlans(p, root, final) {
             model: 'challenger',
             opponent: 'reason',
             mixed: false,
-            seeds: raw ? p.heldout.vs029 : p.heldout.vsreason,
+            seeds: parent ? p.heldout.vsParent : raw ? p.heldout.vs029 : p.heldout.vsreason,
           },
         ],
         contrasts: [],
         primaryTask: 'head-to-head',
         primaryModel: baseline ? '029' : 'joint-final',
-        primaryOpponent: raw ? '029' : 'oldreason9001',
+        primaryOpponent: parent ? 'parent50424' : raw ? '029' : 'oldreason9001',
       },
     };
   });
@@ -262,7 +286,9 @@ async function main(root) {
     if (stopped())
       for (const dir of [
         train,
-        ...['vs029', 'vsreason', '029vsreason'].map((n) => join(root, n)),
+        ...['vsParent', 'vs029', 'vsreason', '029vsreason']
+          .filter((n) => n !== 'vsParent' || p.heldout.vsParent)
+          .map((n) => join(root, n)),
       ]) {
         mkdirSync(dir, { recursive: true });
         if (!existsSync(join(dir, 'STOP')))
@@ -315,7 +341,7 @@ async function main(root) {
         ? '匹配网络/Adam与累计计数续接；新RNG/空回放；固定起点参考，不声称精确回放恢复'
         : '新Adam/空回放；终局升级分主目标，真人仅训练分组动作；不以战术标签作奖励',
       currentTask: phase === 'train' ? live.phase : phase,
-      nextTask: '固定最终模型→真人留出→029/旧reason及起点配对控制→保存',
+      nextTask: '固定最终模型→真人回顾与对照评测→保存',
       trainingDeadlineUTC: p.trainingDeadlineUTC,
       deadlineUTC: p.deadlineUTC,
       learner: live,
@@ -486,6 +512,7 @@ async function main(root) {
         if (readJSON(join(root, name, 'status.json'))?.phase !== 'complete')
           throw Error('Incomplete evaluation group: ' + name);
       });
+    if (p.heldout.vsParent) await evaluate('vsParent');
     if (p.evaluationWorkers === 1) {
       await evaluate('vs029');
       await evaluate('vsreason');

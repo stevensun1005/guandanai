@@ -28,7 +28,10 @@ def human(root):
         assert hashlib.sha256((data/f).read_bytes()).hexdigest()==h
     rows=read(data/'decisions.json');features=np.memmap(data/'features.i8',dtype=np.int8,mode='r',shape=(manifest['candidateRows'],567))
     reports={}
-    for name,file in [('029',plan['evaluationModels']['raw029']['localFile']),('final',str(root/'final.onnx'))]:
+    models=[('029',plan['evaluationModels']['raw029']['localFile']),('final',str(root/'final.onnx'))]
+    if plan['heldout'].get('vsParent'):
+        models.append(('parent',plan['initialModel']))
+    for name,file in models:
         options=ort.SessionOptions();options.intra_op_num_threads=1;options.inter_op_num_threads=1
         session=ort.InferenceSession(file,sess_options=options,providers=['CPUExecutionProvider'])
         report={}
@@ -50,6 +53,7 @@ def human(root):
     write(root/'human-panel.json',{'title':'真人动作回顾性留出（非胜率）','rows':[
         ['测试029/最终一致率',f"{reports['029']['test']['accuracy']:.2%} / {reports['final']['test']['accuracy']:.2%}"],
         ['测试029/最终NLL',f"{reports['029']['test']['nll']:.5f} / {reports['final']['test']['nll']:.5f}"],
+        *([['测试50424起点一致率/NLL',f"{reports['parent']['test']['accuracy']:.2%} / {reports['parent']['test']['nll']:.5f}"]] if 'parent' in reports else []),
         ['验证029/最终一致率',f"{reports['029']['validation']['accuracy']:.2%} / {reports['final']['validation']['accuracy']:.2%}"],
         ['边界','原10/1/1分组、单个测试会话且已看过；不作新的独立真人验收']]})
 
@@ -66,7 +70,10 @@ def pairs(root, protocol):
 
 
 def closeout(root):
+    plan=read(root/'protocol.json')
     names=['vs029','vsreason','029vsreason'];data={};reports={}
+    if plan['heldout'].get('vsParent'):
+        names.insert(0,'vsParent')
     fmt=lambda e:f"{e['mean']:.5f} [{e['ci'][0]:.5f}, {e['ci'][1]:.5f}]"
     for name in names:
         group=root/name;protocol=read(group/'protocol.json');summary=read(group/'summary.json')
@@ -80,6 +87,8 @@ def closeout(root):
             ['双上/双下',f"{r['doubleUps']}/{r['doubleDowns']}"]]})
     assert set(data['vsreason'])==set(data['029vsreason'])
     assert not set(data['vs029'])&set(data['vsreason'])
+    if 'vsParent' in data:
+        assert not set(data['vsParent'])&(set(data['vs029'])|set(data['vsreason']))
     differences=[];win_differences=[]
     for seed,a in data['vsreason'].items():
         b=data['029vsreason'][seed]
@@ -97,10 +106,15 @@ def closeout(root):
             'bothExploratoryGoalsMet':behavior and reports['vs029']['signedUpgradePoints']['ci'][0]>0 and contrast['ci'][0]>0,
             'humanGeneralizationAccepted':False,'webPublished':False,'optimizerUpdatesDuringEvaluation':0,
             'limits':'Same fixed retrospective human split; not new prospective acceptance. Three groups share oldreason deal block by design; no pooled overall winrate. Native timed search depends on machine load; report fallbacks. No automatic model promotion or website deployment.'}
+    if 'vsParent' in reports:
+        result['beatsParentUpgrade95']=reports['vsParent']['signedUpgradePoints']['ci'][0]>0
+        result['retrospectiveHumanAccuracyDeltaVsParent']=h['final']['test']['accuracy']-h['parent']['test']['accuracy']
+        result['limits']=result['limits'].replace('Three groups share oldreason deal block by design', 'Two old-reason groups share a deal block, with distinct 029 and parent blocks')
     write(root/'results.json',result)
     write(root/'results-panel.json',{'title':'最终双目标检查（不自动发布）','rows':[
         ['真人测试一致率增量',f'{delta:+.2%}（同一回顾性会话）'],
         ['对029升级分95%下界',reports['vs029']['signedUpgradePoints']['ci'][0]],
+        *([['对50424起点升级分',fmt(reports['vsParent']['signedUpgradePoints'])]] if 'vsParent' in reports else []),
         ['共同旧reason配对升级分增量',fmt(contrast)],
         ['探索性双目标点条件',str(result['bothExploratoryGoalsMet'])],
         ['网站','029保持；没有自动晋升/发布授权']]})

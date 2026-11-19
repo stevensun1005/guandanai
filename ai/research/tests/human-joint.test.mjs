@@ -162,3 +162,18 @@ test('continued window binds matching checkpoint, memory footprint, original029 
   }
   assert.ok(evaluationPlans(p, '/new', { sha256: 'final' }).every((g) => g.plan.workers === 1));
 });
+
+test('new continuation evaluates the final model against its exact training parent on a separate block', () => {
+  const p = plan();
+  p.evaluationModels.parent = { sha256: 'parent50424' };
+  p.heldout.vsParent = Array.from({ length: 500 }, (_, i) => 1000 + i);
+  const [{ name, plan: parent }, , reason, control] = evaluationPlans(p, '/new', {
+    sha256: 'final',
+  });
+  assert.equal(name, 'vsParent');
+  assert.equal(parent.models.challenger.sha256, 'final');
+  assert.equal(parent.models.reason.sha256, 'parent50424');
+  assert.deepEqual(parent.opponentPolicy, { kind: 'raw' });
+  assert.deepEqual(parent.tasks[0].seeds, p.heldout.vsParent);
+  assert.deepEqual(reason.plan.tasks[0].seeds, control.plan.tasks[0].seeds);
+});
