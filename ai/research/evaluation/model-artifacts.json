@@ -6104,5 +6104,14 @@
       },
       "conditionalPublicationAccepted": false
     }
+  ],
+  "guanzeroSamplerProfiles": [
+    {
+      "file": "ai/research/evaluation/guanzero-sampler-profile-20261119.json",
+      "reportSHA256": "697ed07b48b1ea1cd5f5b6d3a2ea2d7a3dc677802c7598cd079c7c732a3455ed",
+      "modelVersion": 618608,
+      "modelSHA256": "767ab57365f8c6aecf8c6a970d7cceed97ebf5a79e8119f0dde6e2f659d0377b",
+      "classification": "paired fixed-model sampler timing under live training load"
+    }
   ]
 }

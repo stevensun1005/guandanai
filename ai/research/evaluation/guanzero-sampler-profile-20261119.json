@@ -1,0 +1,515 @@
+{
+  "schema": 1,
+  "purpose": "GuanZero development sampler wall-clock profile under existing training load",
+  "startedAt": "2026-11-19T05:01:05.955Z",
+  "completedAt": "2026-11-19T05:01:35.617Z",
+  "sourceCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "probeSHA256": "fbc0ba9468f528852ca5bff31b3934de640881cfaafa98f9d6d741fff8b0859d",
+  "rolloutSHA256": "009244a5d61ecb7fc23e7c298923bcd5f0bcbb488959417efe4bb0aaa1b48c1f",
+  "modelVersion": 618608,
+  "modelSHA256": "767ab57365f8c6aecf8c6a970d7cceed97ebf5a79e8119f0dde6e2f659d0377b",
+  "weightsSHA256": "59cff5a3c7ffb72f3c2d71e80ef57b1ad1bbba5dc1004da7f5bd90f0b3423b7e",
+  "seeds": [
+    3600919000,
+    3600919001,
+    3600919002,
+    3600919003,
+    3600919004,
+    3600919005,
+    3600919006,
+    3600919007
+  ],
+  "concurrency": 8,
+  "batchLimit": 32,
+  "batchWaitMs": 2,
+  "sameReplayByMatchFeatureAndLabelSHA256": true,
+  "training": {
+    "before": {
+      "at": "2026-11-19T05:01:05.955Z",
+      "step": 618619,
+      "samples": 1979580800,
+      "pid": 34968,
+      "indexedShards": 4,
+      "actors": 32,
+      "actorRows": 1979590145,
+      "actorMatches": 3171743
+    },
+    "after": {
+      "at": "2026-11-19T05:01:35.616Z",
+      "step": 618644,
+      "samples": 1979660800,
+      "pid": 34968,
+      "indexedShards": 2,
+      "actors": 32,
+      "actorRows": 1979662236,
+      "actorMatches": 3171853
+    },
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad"
+  },
+  "phases": [
+    {
+      "phase": "repeat1",
+      "wallMs": 7843.321,
+      "actorWallMs": 48743.28250000001,
+      "rows": 5254,
+      "server": {
+        "requests": 5254,
+        "batches": 1025,
+        "computeMilliseconds": 3555.3110998880584,
+        "batchWaitMilliseconds": 2763.8860995939467
+      },
+      "totals": {
+        "candidates": 7998.5454999999765,
+        "inference": 38573.65630000002,
+        "shard": 61.810800000006566,
+        "actorStatusAndLog": 128.95629999999983,
+        "encodeRow": 951.0252000000455,
+        "labels": 5.227499999995416
+      },
+      "residualMs": 1024.0608999999677,
+      "reports": [
+        {
+          "seed": 3600919000,
+          "turns": 850,
+          "rows": 638,
+          "options": 29073,
+          "rounds": 10,
+          "winner": 0,
+          "times": {
+            "candidates": 952.7749000000222,
+            "inference": 4665.245199999974,
+            "shard": 9.210900000001857,
+            "actorStatusAndLog": 14.474900000004709,
+            "encodeRow": 122.6631999999936,
+            "labels": 0.9979999999995925
+          },
+          "wallMs": 5890.009399999999,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 638,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "daf5b0d1118b24b7011e991d2e3b34e9462f45eb307f8740906d685f24a951c6",
+          "labelsSHA256": "8a70c158b06408085532e60ad31cf7643786eac2f3000ded5bcf18ecfa0f9bde",
+          "matchSHA256": "22a70260973ad7d179b20f91269e61d77e97ac63c9c86876a6a115b9a19dac04"
+        },
+        {
+          "seed": 3600919001,
+          "turns": 984,
+          "rows": 707,
+          "options": 34344,
+          "rounds": 12,
+          "winner": 1,
+          "times": {
+            "candidates": 1055.8316999999952,
+            "inference": 5109.95729999998,
+            "shard": 9.248700000000099,
+            "actorStatusAndLog": 17.634900000002744,
+            "encodeRow": 128.64420000002792,
+            "labels": 0.4651999999987311
+          },
+          "wallMs": 6458.554800000002,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 707,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "7c0593a240225c265f3f36a2b2bd395cd9155c7b4224241bf7e96ec802e5b52f",
+          "labelsSHA256": "e4d800f7f0ca966836168d46c3bc4684b7d1120f8962179bb6ff92b14e269bfb",
+          "matchSHA256": "0ddcfbb3a51f00f01bafc240640b02b49468635734cacccbde47204476f1fb98"
+        },
+        {
+          "seed": 3600919002,
+          "turns": 951,
+          "rows": 716,
+          "options": 41864,
+          "rounds": 11,
+          "winner": 0,
+          "times": {
+            "candidates": 1154.4094000000005,
+            "inference": 5202.849100000016,
+            "shard": 3.8291000000026543,
+            "actorStatusAndLog": 18.280399999999645,
+            "encodeRow": 124.38369999997303,
+            "labels": 0.46459999999933643
+          },
+          "wallMs": 6635.772000000001,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 716,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "9dd223f5af065cf388f29c4d2ae47e8582c8011d20050b57640c97ab3758c656",
+          "labelsSHA256": "7930eac9233fe49aaa1835d257957dd85235c976c9ce246a353b06e99bc1d195",
+          "matchSHA256": "f2f6f63554bb166a1784aa9de9b0b52b7932e4cf982f49b018b8441c5a696ebd"
+        },
+        {
+          "seed": 3600919003,
+          "turns": 670,
+          "rows": 531,
+          "options": 30393,
+          "rounds": 8,
+          "winner": 1,
+          "times": {
+            "candidates": 868.0088999999862,
+            "inference": 3959.8348000000024,
+            "shard": 7.040899999999965,
+            "actorStatusAndLog": 14.672199999999066,
+            "encodeRow": 94.68929999999455,
+            "labels": 0.6747999999988679
+          },
+          "wallMs": 5050.1985,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 531,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "b17a166ddf94e7af494f7bb46ca6110df2c4170425095aa01b857de364eed684",
+          "labelsSHA256": "51c06cc21424d3ce94199afdf8c538f955f303b77f85d0d28596c3ba67391143",
+          "matchSHA256": "3881c31579f61360652cfa9868eeef4387fed3935ad9a62ccbd99db7d520487b"
+        },
+        {
+          "seed": 3600919004,
+          "turns": 824,
+          "rows": 624,
+          "options": 28988,
+          "rounds": 10,
+          "winner": 0,
+          "times": {
+            "candidates": 969.6838000000225,
+            "inference": 4731.057100000022,
+            "shard": 8.333200000000943,
+            "actorStatusAndLog": 15.440199999995457,
+            "encodeRow": 112.40460000003804,
+            "labels": 0.9222999999983585
+          },
+          "wallMs": 5961.555400000001,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 624,
+            "fallbacks": 0,
+            "tieRescores": 1
+          },
+          "featuresSHA256": "a3ebfcb7f9486f3c17ab2b16a821857e94c6ad6b61bba60d39087a4eb2091e1d",
+          "labelsSHA256": "b90a06958f20c5d94334d442931cfe76ba847185653f97855edb92277fe852ca",
+          "matchSHA256": "c4a86790a6ffbebb52c27c3c743bbd405de3832b97b8e968fd51d96556eb0a15"
+        },
+        {
+          "seed": 3600919005,
+          "turns": 1079,
+          "rows": 839,
+          "options": 43722,
+          "rounds": 13,
+          "winner": 0,
+          "times": {
+            "candidates": 1150.6897999999455,
+            "inference": 6049.225500000011,
+            "shard": 6.158699999999953,
+            "actorStatusAndLog": 18.7029999999977,
+            "encodeRow": 145.7900000000045,
+            "labels": 0.3852000000006228
+          },
+          "wallMs": 7526.468999999999,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 839,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "8673d37593f8d65e3067d5b55f3164116efa957298ceb4d425ec11cb244bc7b3",
+          "labelsSHA256": "d11dd4db44848607645a5ceb6124c876dd156a43ef4f292ee3362e2c84774898",
+          "matchSHA256": "c7ebf4df560c0bc6210be2bfe61a36ef7823201b428a0bc8d1ca17c1ccd3b050"
+        },
+        {
+          "seed": 3600919006,
+          "turns": 899,
+          "rows": 671,
+          "options": 33024,
+          "rounds": 10,
+          "winner": 0,
+          "times": {
+            "candidates": 1061.19069999999,
+            "inference": 4915.021900000003,
+            "shard": 8.063500000000204,
+            "actorStatusAndLog": 14.60989999999947,
+            "encodeRow": 119.95350000003236,
+            "labels": 0.46370000000024447
+          },
+          "wallMs": 6255.0808,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 671,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "20d1520810539ca5652411ffae357c8b90d9eefbeda2da7d8fa7b6115a7f56bf",
+          "labelsSHA256": "a41c80d09264541e8f25c91f27e0d9b15db4095c4f976a53f1b870f34d8c6455",
+          "matchSHA256": "865f9b0f52a962ac19d58b977f75eed7a984e34c32e336b7c6198b388c9dfee3"
+        },
+        {
+          "seed": 3600919007,
+          "turns": 699,
+          "rows": 528,
+          "options": 25230,
+          "rounds": 9,
+          "winner": 1,
+          "times": {
+            "candidates": 785.9563000000144,
+            "inference": 3940.4654000000064,
+            "shard": 9.92580000000089,
+            "actorStatusAndLog": 15.140800000001036,
+            "encodeRow": 102.4966999999815,
+            "labels": 0.8536999999996624
+          },
+          "wallMs": 4965.642600000001,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 528,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "b5ccaddec39b9ec652dac5340364dee98154e3951fc1a0fe1b3c9c1671648b5a",
+          "labelsSHA256": "89ba61ec0929f719a14f911f19b5ebccbeb410b39144df2a0a2f2b05427b2aca",
+          "matchSHA256": "301c10d511f33d51eaeaca3bd836a3a88b98c45097d6abaed5759b322df24ba3"
+        }
+      ]
+    },
+    {
+      "phase": "repeat2",
+      "wallMs": 8165.782500000001,
+      "actorWallMs": 49969.2753,
+      "rows": 5254,
+      "server": {
+        "requests": 5254,
+        "batches": 1052,
+        "computeMilliseconds": 3642.724799719872,
+        "batchWaitMilliseconds": 2876.0075999889523
+      },
+      "totals": {
+        "candidates": 8998.784900000053,
+        "inference": 38599.587700000055,
+        "shard": 55.931400000001304,
+        "actorStatusAndLog": 128.0448999999826,
+        "encodeRow": 1125.5782999999174,
+        "labels": 5.384500000000116
+      },
+      "residualMs": 1055.9635999999955,
+      "reports": [
+        {
+          "seed": 3600919000,
+          "turns": 850,
+          "rows": 638,
+          "options": 29073,
+          "rounds": 10,
+          "winner": 0,
+          "times": {
+            "candidates": 1058.8095000000576,
+            "inference": 4672.054899999999,
+            "shard": 6.792700000001787,
+            "actorStatusAndLog": 14.855699999992794,
+            "encodeRow": 144.3868999999504,
+            "labels": 0.4830000000001746
+          },
+          "wallMs": 6024.487000000001,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 638,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "daf5b0d1118b24b7011e991d2e3b34e9462f45eb307f8740906d685f24a951c6",
+          "labelsSHA256": "8a70c158b06408085532e60ad31cf7643786eac2f3000ded5bcf18ecfa0f9bde",
+          "matchSHA256": "22a70260973ad7d179b20f91269e61d77e97ac63c9c86876a6a115b9a19dac04"
+        },
+        {
+          "seed": 3600919001,
+          "turns": 984,
+          "rows": 707,
+          "options": 34344,
+          "rounds": 12,
+          "winner": 1,
+          "times": {
+            "candidates": 1195.7917999999845,
+            "inference": 5133.495500000059,
+            "shard": 3.5534000000006927,
+            "actorStatusAndLog": 15.198300000000017,
+            "encodeRow": 154.33190000002287,
+            "labels": 0.33629999999902793
+          },
+          "wallMs": 6644.700800000002,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 707,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "7c0593a240225c265f3f36a2b2bd395cd9155c7b4224241bf7e96ec802e5b52f",
+          "labelsSHA256": "e4d800f7f0ca966836168d46c3bc4684b7d1120f8962179bb6ff92b14e269bfb",
+          "matchSHA256": "0ddcfbb3a51f00f01bafc240640b02b49468635734cacccbde47204476f1fb98"
+        },
+        {
+          "seed": 3600919002,
+          "turns": 951,
+          "rows": 716,
+          "options": 41864,
+          "rounds": 11,
+          "winner": 0,
+          "times": {
+            "candidates": 1260.523099999973,
+            "inference": 5203.0203000000365,
+            "shard": 4.213599999999133,
+            "actorStatusAndLog": 19.054299999999785,
+            "encodeRow": 146.17199999996592,
+            "labels": 0.3885000000009313
+          },
+          "wallMs": 6770.934699999998,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 716,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "9dd223f5af065cf388f29c4d2ae47e8582c8011d20050b57640c97ab3758c656",
+          "labelsSHA256": "7930eac9233fe49aaa1835d257957dd85235c976c9ce246a353b06e99bc1d195",
+          "matchSHA256": "f2f6f63554bb166a1784aa9de9b0b52b7932e4cf982f49b018b8441c5a696ebd"
+        },
+        {
+          "seed": 3600919003,
+          "turns": 670,
+          "rows": 531,
+          "options": 30393,
+          "rounds": 8,
+          "winner": 1,
+          "times": {
+            "candidates": 1008.8223999999682,
+            "inference": 4023.616799999978,
+            "shard": 8.530699999999342,
+            "actorStatusAndLog": 14.188699999991513,
+            "encodeRow": 113.23510000001988,
+            "labels": 0.9504999999990105
+          },
+          "wallMs": 5273.852800000001,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 531,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "b17a166ddf94e7af494f7bb46ca6110df2c4170425095aa01b857de364eed684",
+          "labelsSHA256": "51c06cc21424d3ce94199afdf8c538f955f303b77f85d0d28596c3ba67391143",
+          "matchSHA256": "3881c31579f61360652cfa9868eeef4387fed3935ad9a62ccbd99db7d520487b"
+        },
+        {
+          "seed": 3600919004,
+          "turns": 824,
+          "rows": 624,
+          "options": 28988,
+          "rounds": 10,
+          "winner": 0,
+          "times": {
+            "candidates": 1096.719000000001,
+            "inference": 4623.799300000013,
+            "shard": 9.28979999999865,
+            "actorStatusAndLog": 15.403999999994994,
+            "encodeRow": 133.0649999999623,
+            "labels": 0.42190000000118744
+          },
+          "wallMs": 6011.6903999999995,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 624,
+            "fallbacks": 0,
+            "tieRescores": 1
+          },
+          "featuresSHA256": "a3ebfcb7f9486f3c17ab2b16a821857e94c6ad6b61bba60d39087a4eb2091e1d",
+          "labelsSHA256": "b90a06958f20c5d94334d442931cfe76ba847185653f97855edb92277fe852ca",
+          "matchSHA256": "c4a86790a6ffbebb52c27c3c743bbd405de3832b97b8e968fd51d96556eb0a15"
+        },
+        {
+          "seed": 3600919005,
+          "turns": 1079,
+          "rows": 839,
+          "options": 43722,
+          "rounds": 13,
+          "winner": 0,
+          "times": {
+            "candidates": 1319.1367000000428,
+            "inference": 6160.107799999998,
+            "shard": 6.264699999999721,
+            "actorStatusAndLog": 21.88799999999901,
+            "encodeRow": 168.98150000005626,
+            "labels": 1.3140999999995984
+          },
+          "wallMs": 7838.625,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 839,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "8673d37593f8d65e3067d5b55f3164116efa957298ceb4d425ec11cb244bc7b3",
+          "labelsSHA256": "d11dd4db44848607645a5ceb6124c876dd156a43ef4f292ee3362e2c84774898",
+          "matchSHA256": "c7ebf4df560c0bc6210be2bfe61a36ef7823201b428a0bc8d1ca17c1ccd3b050"
+        },
+        {
+          "seed": 3600919006,
+          "turns": 899,
+          "rows": 671,
+          "options": 33024,
+          "rounds": 10,
+          "winner": 0,
+          "times": {
+            "candidates": 1190.4893999999476,
+            "inference": 4881.843299999979,
+            "shard": 7.774900000000343,
+            "actorStatusAndLog": 15.726400000003196,
+            "encodeRow": 144.35949999995137,
+            "labels": 0.44610000000102445
+          },
+          "wallMs": 6378.012300000002,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 671,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "20d1520810539ca5652411ffae357c8b90d9eefbeda2da7d8fa7b6115a7f56bf",
+          "labelsSHA256": "a41c80d09264541e8f25c91f27e0d9b15db4095c4f976a53f1b870f34d8c6455",
+          "matchSHA256": "865f9b0f52a962ac19d58b977f75eed7a984e34c32e336b7c6198b388c9dfee3"
+        },
+        {
+          "seed": 3600919007,
+          "turns": 699,
+          "rows": 528,
+          "options": 25230,
+          "rounds": 9,
+          "winner": 1,
+          "times": {
+            "candidates": 868.4930000000786,
+            "inference": 3901.649799999992,
+            "shard": 9.511600000001636,
+            "actorStatusAndLog": 11.72950000000128,
+            "encodeRow": 121.04639999998835,
+            "labels": 1.0440999999991618
+          },
+          "wallMs": 5026.972300000001,
+          "inference": {
+            "backend": "gpu-batch",
+            "requests": 528,
+            "fallbacks": 0,
+            "tieRescores": 0
+          },
+          "featuresSHA256": "b5ccaddec39b9ec652dac5340364dee98154e3951fc1a0fe1b3c9c1671648b5a",
+          "labelsSHA256": "89ba61ec0929f719a14f911f19b5ebccbeb410b39144df2a0a2f2b05427b2aca",
+          "matchSHA256": "301c10d511f33d51eaeaca3bd836a3a88b98c45097d6abaed5759b322df24ba3"
+        }
+      ]
+    }
+  ],
+  "probeServerExit": 0
+}
