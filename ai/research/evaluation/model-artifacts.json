@@ -6105,6 +6105,12 @@
       "observedAt": "2026-11-11T23:21:24.993Z",
       "sha256": "e5eee75207a9341cc4d5db46a62a5499e6b9f5fb8b05da7a8be7b771edc26e19",
       "classification": "interrupted-before-authorized-deadline;not-normal-final;no-retroactive-slot"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-interruption-20261119.json",
+      "sha256": "4c837375621a11998a05e19b7bf463fb55dd8fcc9b27d3f6e6ae13a192bacd8b",
+      "step": 652860,
+      "classification": "status-file-replacement-failure"
     }
   ],
   "guanzeroRecoveries": [

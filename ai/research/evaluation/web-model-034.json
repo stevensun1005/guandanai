@@ -397,5 +397,54 @@
   ],
   "planArchive": "ai/research/evaluation/guanzero-644271-development-v4-plan.json",
   "defaultChoice": "029",
-  "planSHA256": "17cefbaa78dd48c102fb11ceec4596d15510f177a25cdb74b0ae13dcf69778c5"
+  "planSHA256": "17cefbaa78dd48c102fb11ceec4596d15510f177a25cdb74b0ae13dcf69778c5",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44562993729",
+    "commit": "f0f6f15e56870257f15bc20bf31c723ba61907c8",
+    "verifiedAt": "2026-11-19T16:17:40.542Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-034.onnx",
+    "publicSHA256": "08dafc3a91d9b918795f8dcc3d905dd6b7a05c7abeab2f84c7c03333e3a17d3e",
+    "bytes": 6346014,
+    "model": "034",
+    "version": "model-000000644271",
+    "step": 644271,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "034",
+          "guanzero-adp-io48-644271"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-644271-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-644271-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-644271-development-v4-reason.json"
+    ],
+    "trainingConfigAndWindowUnchanged": true,
+    "attempt": 1
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-19T16:20:49.763Z",
+    "step": 652860,
+    "activeTrainingProcesses": 0,
+    "STOP": true,
+    "plannedEnd": "2026-11-20T17:00:00.000Z",
+    "incident": "ai/research/evaluation/guanzero-interruption-20261119.json"
+  }
 }

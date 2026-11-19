@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "observedAt": "2026-11-19T16:20:49.763Z",
+  "run": "guanzero-adp-io48",
+  "sourceCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "windowEnd": "2026-11-20T17:00:00.000Z",
+  "classification": "learner status atomic replace failure; supervisor stopped training before authorized deadline",
+  "learnerFault": {
+    "step": 652860,
+    "usedSamples": 2089152000,
+    "loss": 3.245687549114227,
+    "updatesPerSecond": 0.8750825827731037,
+    "device": "cuda",
+    "deviceName": "NVIDIA GeForce RTX 4070",
+    "torch": "2.11.0+cu128",
+    "precision": "FP32",
+    "objective": "adp",
+    "updatedAt": 1795104253.918521,
+    "error": "[WinError 5] 拒绝访问。: 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\learner\\\\status.json.34968.tmp' -> 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\learner\\\\status.json'",
+    "pid": 34968,
+    "indexedShards": 1,
+    "pauseSampling": false
+  },
+  "firstWatchdogFault": {
+    "pid": 12828,
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+    "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+    "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "plannedEnd": "2026-11-20T17:00:00.000Z",
+    "restarts": 1,
+    "phase": "learner-error",
+    "step": 652860,
+    "supervisorPid": 12724,
+    "updatedAt": "2026-11-19T16:04:30.879Z",
+    "error": "[WinError 5] 拒绝访问。: 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\learner\\\\status.json.34968.tmp' -> 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\learner\\\\status.json'",
+    "resumedFromStep": 491455,
+    "lastRestartAt": "2026-11-17T12:50:01.108Z"
+  },
+  "supervisorEvents": [
+    {
+      "t": "2026-11-19T16:04:31.688Z",
+      "kind": "process-exit",
+      "key": "learner",
+      "code": 1
+    },
+    {
+      "t": "2026-11-19T16:04:31.751Z",
+      "kind": "stopping",
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+    },
+    {
+      "t": "2026-11-19T16:04:35.630Z",
+      "kind": "process-exit",
+      "key": "inference",
+      "code": 1
+    },
+    {
+      "t": "2026-11-19T16:04:35.847Z",
+      "kind": "stopped",
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+    }
+  ],
+  "stopMarkerText": "GuanZero local shutdown",
+  "stopMarkerWrittenAt": "2026-11-19T16:04:31.727Z",
+  "activeTrainingProcesses": 0,
+  "locks": {
+    "supervisor": false,
+    "evaluation": false
+  },
+  "originals": {
+    "STOP": {
+      "sha256": "0f8dac00c2ba80704154c7d279d12ee8ed94df067b0deda540ca7f33917b3270",
+      "bytes": 24,
+      "modifiedAt": "2026-11-19T16:04:31.727Z"
+    },
+    "config.json": {
+      "sha256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "bytes": 13625,
+      "modifiedAt": "2026-11-06T03:11:40.255Z"
+    },
+    "window.json": {
+      "sha256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad",
+      "bytes": 1152,
+      "modifiedAt": "2026-11-17T12:43:59.914Z"
+    },
+    "learner/status.json": {
+      "sha256": "67ae3317d98f25363ded55201d908fc5cd2d169ebdc53f95871c9029984e714a",
+      "bytes": 622,
+      "modifiedAt": "2026-11-19T16:04:13.937Z"
+    },
+    "learner/state.pt": {
+      "sha256": "464b58b7e7a6f91b45bf3df0397c71cb88ecff04006355dd7c06cf0cbc81ac5d",
+      "bytes": 12692508,
+      "modifiedAt": "2026-11-19T16:04:09.822Z"
+    },
+    "inference/status.json": {
+      "sha256": "c39664f7efb4f48aa6f96b2dd4ff940067d1be6570c3e248dcc888748cea9837",
+      "bytes": 358,
+      "modifiedAt": "2026-11-19T16:04:33.509Z"
+    },
+    "models/latest.json": {
+      "sha256": "f179fbb1d7305a9523a6ffb530ce8cd4c67d322971b240d03aca6b41ff51ae8c",
+      "bytes": 98,
+      "modifiedAt": "2026-11-19T16:03:49.329Z"
+    },
+    "models/model-000000652842.onnx": {
+      "sha256": "19b20486dec374f43044337b1c7d9451bde68dcda084ad16b3eb17bbb84c8266",
+      "bytes": 6346014,
+      "modifiedAt": "2026-11-19T16:03:49.304Z"
+    },
+    "models/model-000000652842.weights.pt": {
+      "sha256": "f5557e92198689c5bf56d18fe01a07831b18a44ef0cd911fa11032571a66e982",
+      "bytes": 6343539,
+      "modifiedAt": "2026-11-19T16:03:49.323Z"
+    }
+  },
+  "latestExport": {
+    "file": "model-000000652842.onnx",
+    "version": 652842,
+    "updatedAt": 1795104229.329466
+  },
+  "backupFolder": "work/guanzero/recovery-io48/20261119-status-write-failure",
+  "checkpointVerification": {
+    "step": 652860,
+    "used": 2089152000,
+    "modelTensors": 16,
+    "optimizerStates": 16,
+    "optimizerStateKeys": [
+      "square_avg",
+      "step"
+    ],
+    "consumedCursors": 6,
+    "finite": true
+  },
+  "cause": "Confirmed learner status.json atomic replacement failed with WinError 5; the underlying Denied Access source has not been identified.",
+  "recovery": {
+    "status": "awaiting-incident-specific-owner-authorization",
+    "stopAndErrorStatusPreserved": true,
+    "checkpointVerified": true,
+    "fixedDeadlineUnchanged": true
+  },
+  "relatedWebModel": "034"
+}
