@@ -416,3 +416,12 @@ self-only离线拟合已完成（1,906展示层样本／3,393字节，零网络�
 ## 58132 联合策略续训
 
 [本轮](evaluation/human-qfilter-anchor-20261119/README.md)设置为 11 月 20 日多伦多时间 08:00 停训，随后最多三小时评测和保存。固定起点 Q 约束为 0.10，面板显示继承和新增更新。
+
+## 后续战力对照
+
+11 月 20 日起，下一次 danMCai 续训只登记三组常规对局。所有组使用同一个最新完整终窗模型，分别对 reason、最新已核验的 GuanZero 和 danMCai 029。锁定实际使用的 reason 搜索版本、底座、推断网络与预算，以及 GuanZero 导出版本和 029 归档权重。每组使用独立预留的牌副和交换阵营，逐组给出胜负平、平均终局升级分及 95% 牌副簇区间。
+
+- **对 reason**：沿用 [真实搜索对局入口](tools/compare-champion-reason.mjs)，登记 reason 对手的底座与推断网络。完整跑其冻结的搜索策略，报告实际回退和耗时。
+- **对 GuanZero、对 029**：沿用 [注册评测控制器](tools/run-round-evaluation.mjs) 与 [完整单局评测器](../danMCai/evaluation/evaluate-round-pairs.mjs)。GuanZero 使用 `stateFeatures: 513`、`actionFeatures: 54`、`history: "guanzero-v1"`，029 用原 567 维网络编码。新协议应统一三组的挑战者决策策略。纯网络 argmax 场景下，reason 入口的 `finishShortcut` 设为 `false`，与完整单局评测器一致。
+
+三组均登记实有的局数、种子与截止，取消原 029 对 reason 及训练起点组，历史固定窗口按原协议归档。旧版日期绑定的联合训练控制器及其测试仍用于核对旧批次。新的三组成绩分别解释，GuanZero 发布批次的独立整场评测按自身协议执行。
