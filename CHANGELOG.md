@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2026-11-20 · GuanZero712420同评测权重发布
+
+- 08点冻结：029冠军500场240/198/62，旧017底座reason200场100/78/22，逐场证据与种子对区间完整保留。
+- 同一SHA归档036，名称guanzero-adp-io48-712420，遵循当前已授权菜单/默认；训练继续至周五12点。开发结果不作独立验收。见[发布证据](ai/research/evaluation/web-model-036.json)。
+
 ## 2026-11-20 · 后续 danMCai 棋力评测
 
 - 每批的最新完整终窗模型只对 reason、最新已核验的 GuanZero 和 029，共三组。取消 029 对 reason 和训练起点加测。[评测流程](ai/research/CONTINUOUS_TRAINING.md#后续战力对照)。

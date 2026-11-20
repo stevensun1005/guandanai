@@ -695,14 +695,30 @@
         "step": 678214,
         "registeredAt": "2026-11-20T03:24:17.055Z"
       }
+    },
+    {
+      "id": "036",
+      "file": "bot-036.onnx",
+      "sha256": "20080eddfea0adb2f84db3e8eb21b1c8337fd00dc1aab99a4a6b61c86ee03c09",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-036/bot-036.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-io48",
+        "version": "model-000000712420",
+        "status": "experimental-not-heldout-accepted",
+        "step": 712420,
+        "registeredAt": "2026-11-20T15:38:47.108Z"
+      }
     }
   ],
   "selection": {
     "mode": "latest-v2",
-    "danMCaiChampions": [
-      "029",
-      "017"
-    ],
+    "danMCaiChampions": ["029", "017"],
     "defaultChoice": "029"
   },
   "searchBots": [
@@ -717,14 +733,8 @@
         "url": "https://github.com/stevensun1005/guandanai/releases/download/web-belief-v1-16d76783/belief-v1-16d76783.onnx",
         "featureVersion": "belief-v1",
         "trainReportSHA256": "7f022c7640e0102dd25bfe497b6c0bc2dc1e3480dc1dfcf5144fa73ab6c95f0d",
-        "trainingSeeds": [
-          4255121000,
-          4255160999
-        ],
-        "trainingBand": [
-          21,
-          80
-        ]
+        "trainingSeeds": [4255121000, 4255160999],
+        "trainingBand": [21, 80]
       },
       "search": {
         "lo": 21,
