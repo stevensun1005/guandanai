@@ -388,5 +388,99 @@
   ],
   "planArchive": "ai/research/evaluation/guanzero-712420-development-v4-plan.json",
   "defaultChoice": "029",
-  "planSHA256": "1d20218f43a95fcbbb7a5235ea279915ad3000f6445b3ca7b3443cc5e3315ef5"
+  "planSHA256": "1d20218f43a95fcbbb7a5235ea279915ad3000f6445b3ca7b3443cc5e3315ef5",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44765591217",
+    "commit": "70f3090b8c3d709567a30cd3ee2d95a14e5bcd5f",
+    "verifiedAt": "2026-11-20T15:47:09.660Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-036.onnx",
+    "publicSHA256": "20080eddfea0adb2f84db3e8eb21b1c8337fd00dc1aab99a4a6b61c86ee03c09",
+    "bytes": 6346014,
+    "model": "036",
+    "version": "model-000000712420",
+    "step": 712420,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "036",
+          "guanzero-adp-io48-712420"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-712420-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-712420-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-712420-development-v4-reason.json"
+    ],
+    "trainingConfigAndWindowUnchanged": true,
+    "attempt": 1
+  },
+  "trainingObservation": {
+    "at": "2026-11-20T15:47:31.915Z",
+    "intent": "2026-11-20T04:20:11.812Z",
+    "deadline": "2026-11-20T17:00:00.000Z",
+    "stop": false,
+    "errorFile": false,
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad",
+    "learner": {
+      "step": 720815,
+      "pid": 64220,
+      "error": null,
+      "used": 2306608000,
+      "age": 0.2520480155944824,
+      "ups": 0.8698206206513062,
+      "pause": false,
+      "device": "cuda"
+    },
+    "inference": {
+      "pid": 87804,
+      "ready": true,
+      "requests": 114754217,
+      "age": 0.20877599716186523,
+      "error": null,
+      "device": "cuda"
+    },
+    "latest": {
+      "file": "model-000000720768.onnx",
+      "version": 720768,
+      "updatedAt": 1795189600.6734931
+    },
+    "actors": {
+      "count": 32,
+      "matches": 3652462,
+      "rows": 2306609622,
+      "fresh": 32
+    },
+    "watchdog": {
+      "pid": 86496,
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+      "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+      "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+      "plannedEnd": "2026-11-20T17:00:00.000Z",
+      "restarts": 1,
+      "phase": "healthy",
+      "step": 720808,
+      "supervisorPid": 65424,
+      "updatedAt": "2026-11-20T15:47:22.768Z",
+      "error": null,
+      "resumedFromStep": 684957,
+      "lastRestartAt": "2026-11-20T04:20:20.234Z"
+    }
+  }
 }
