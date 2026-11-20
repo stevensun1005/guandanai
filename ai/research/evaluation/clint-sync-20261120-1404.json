@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "clint-observer-layout-and-guest-public-progress",
-  "phase": "local-validation-complete",
+  "phase": "complete",
   "baseMain": "7d9ec15d710cc8d644ecfedcfbe9f95f637b6da4",
   "upstream": {
     "repository": "https://github.com/clintsun1977/guandan",
@@ -36,7 +36,11 @@
   "strategy": {
     "changed": false,
     "lastSuccessfulUpstreamStrategySHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
-    "strengthGames": 0
+    "strengthGames": 0,
+    "sourceSHA256": {
+      "web/src/rule-bot/runtime.mjs": "01cfd65f358e651d6f48dca7773d1d64185e4300df50c2df6792c59eac6f864f",
+      "web/src/rule-bot/endgame-brain.mjs": "ec82ecb07a7d02027999d7ce8c132a902f44635620c8fad529253dfb55ccf718"
+    }
   },
   "localValidation": {
     "version": "87b4c40e76",
@@ -141,7 +145,59 @@
     "default": "029"
   },
   "deployment": {
-    "phase": "pending"
+    "phase": "success",
+    "sourceCommit": "fe18e43c599108b54e5a997c06d1ff84b7c422f7",
+    "version": "87b4c40e76",
+    "pagesRun": 44751043369,
+    "pagesURL": "https://github.com/stevensun1005/guandanai/actions/runs/44751043369",
+    "completedAtUTC": "2026-11-20T14:18:35Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicValidation": {
+      "httpStatus": 200,
+      "menu": [
+        "clint-rule",
+        "035",
+        "029"
+      ],
+      "default": "029",
+      "productionModelsExecuted": [
+        "029",
+        "035"
+      ],
+      "peerJSSpectator": {
+        "roomCodeShown": true,
+        "twoHumansRemainTwo": true,
+        "spectatorCannotActSitRecoverOrSync": true,
+        "unseatedReceivesNoGameBroadcast": true,
+        "crossVersionPublicSpectatorAccepted": true,
+        "playerVersionGuardRetained": true,
+        "spectatorNeuralDownloads": 0,
+        "publicSnapshotsOnly": true,
+        "guestRecoveryWhileWatching": true,
+        "twoPlayerAudioLines": true,
+        "hostVoiceLockAndUnlock": true,
+        "nextRoundFreshState": true,
+        "nicknamesAndBlackNames": true,
+        "viewports": [
+          1440,
+          1024,
+          390
+        ],
+        "hostExitEndsSpectating": true,
+        "boundarySeatSwapAndRefresh": true,
+        "joiningSnapshotNoHands": true,
+        "observerLayoutViewports": [
+          1440,
+          844,
+          390
+        ],
+        "guestPublicProgressRestored": true,
+        "pageErrors": [],
+        "purpose": "Browser interaction/security regression, no strength evaluation or real human training data"
+      }
+    }
   },
-  "checkedAtUTC": "2026-11-20T14:11:16+00:00"
+  "checkedAtUTC": "2026-11-20T14:11:16+00:00",
+  "completedAtUTC": "2026-11-20T14:19:52+00:00",
+  "pending": []
 }
