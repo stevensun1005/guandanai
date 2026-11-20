@@ -142,15 +142,21 @@
           ><button class="link" id="tsBtn">出牌记录</button
           ><button class="link" id="fsBtn">全屏</button
           ><button class="link" id="quitBtn">退出</button>
-          <small class="muted" id="collectionStatus" role="status" aria-live="polite" hidden></small
-        ></span>
+          <small
+            class="muted"
+            id="collectionStatus"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></small>
+          <span class="observer-bar" id="observerBar" hidden></span>
+        </span>
+        <div class="seat-swap" id="seatSwap" hidden>
+          <span id="seatSwapText" role="status"></span>
+          <button class="btn" id="seatSwapRest" type="button" hidden>我要休息</button>
+        </div>
       </header>
 
-      <div class="observer-bar" id="observerBar" hidden></div>
-      <div class="seat-swap" id="seatSwap" hidden>
-        <span id="seatSwapText" role="status"></span>
-        <button class="btn" id="seatSwapRest" type="button" hidden>我要休息</button>
-      </div>
       <main class="table" id="table">
         <section class="seat" id="seat2">
           <div class="whorow">
@@ -613,9 +619,9 @@
         <button class="link" type="button" id="spectatorWant" hidden>请战</button>
         <button class="link" type="button" id="spectatorBack">退出观战</button>
       </header>
+      <div class="observer-bar" id="watchObserverBar" hidden></div>
       <p id="spectatorStatus" role="status">正在连接…</p>
       <p id="spectatorScore"></p>
-      <div class="observer-bar" id="watchObserverBar" hidden></div>
       <p class="watch-note">只读公开牌面，不占座位；手牌仅显示张数。</p>
       <div class="watch-layout">
         <div id="spectatorSeats"></div>

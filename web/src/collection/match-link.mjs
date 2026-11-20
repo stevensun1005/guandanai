@@ -1,18 +1,22 @@
 /** Between-round continuity: no hands, names, room credentials or training data. */
 import { startOptions, START_DIRS } from '../lobby/start-state.mjs';
 export const MATCH_KEY = 'guandan-match-continuity-v1';
+const GUEST_PROGRESS_KEY = 'guandan-guest-progress-v1';
 const identities = new WeakMap();
 export const matchExcluded = (game) => identities.get(game)?.excluded === true;
 const uuid = (x) => typeof x === 'string' && /^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(x);
-export function readMatch(storage, now = Date.now()) {
+function readProgress(storage, key, now) {
+  const owned = key === MATCH_KEY;
   try {
-    const v = JSON.parse(storage.getItem(MATCH_KEY) || 'null');
+    const v = JSON.parse(storage.getItem(key) || 'null');
     if (
       !v ||
-      !uuid(v.id) ||
-      v.players?.length !== 4 ||
-      !v.players.every(uuid) ||
-      new Set(v.players).size !== 4 ||
+      (owned &&
+        (!uuid(v.id) ||
+          !Array.isArray(v.players) ||
+          v.players.length !== 4 ||
+          !v.players.every(uuid) ||
+          new Set(v.players).size !== 4)) ||
       !Number.isSafeInteger(v.nextRound) ||
       v.nextRound < 2 ||
       v.nextRound > 200 ||
@@ -31,18 +35,20 @@ export function readMatch(storage, now = Date.now()) {
     )
       return null;
     return {
-      id: v.id,
-      players: v.players,
+      ...(owned && { id: v.id, players: v.players, excluded: v.excluded === true }),
       nextRound: v.nextRound,
       state,
-      rules: v.rules,
-      excluded: v.excluded === true,
+      rules: { trib: v.rules.trib, aFail: v.rules.aFail },
       savedAt: v.savedAt,
     };
   } catch {
     return null;
   }
 }
+export const readMatch = (storage, now = Date.now()) => readProgress(storage, MATCH_KEY, now);
+export const readGuestProgress = (storage, now = Date.now()) =>
+  readProgress(storage, GUEST_PROGRESS_KEY, now);
+
 export function sameMatchStart(saved, rules) {
   return (
     !!saved &&
@@ -55,7 +61,8 @@ export function matchIdentity(game, context, resume = null) {
   if (context.practice || !['solo', 'host'].includes(context.mode)) return null;
   let identity = identities.get(game);
   if (!identity) {
-    const old = game.round === 1 && sameMatchStart(resume, context.rules) ? resume : null;
+    const old =
+      game.round === 1 && uuid(resume?.id) && sameMatchStart(resume, context.rules) ? resume : null;
     const players = old?.players || Array.from({ length: 4 }, () => crypto.randomUUID()),
       own = Math.max(0, START_DIRS.indexOf(context.direction));
     identity = {
@@ -71,7 +78,10 @@ export function matchIdentity(game, context, resume = null) {
   return identity;
 }
 export function rememberMatch(game, context, storage) {
-  if (context.practice || !['solo', 'host'].includes(context.mode) || !game.result) return false;
+  if (context.practice || !['solo', 'host', 'guest'].includes(context.mode) || !game.result)
+    return false;
+  const guest = context.mode === 'guest';
+  const key = guest ? GUEST_PROGRESS_KEY : MATCH_KEY;
   if (
     ![0, 1].includes(game.result.team) ||
     game.result.order?.length !== 4 ||
@@ -82,7 +92,7 @@ export function rememberMatch(game, context, storage) {
   const identity = matchIdentity(game, context);
   try {
     if (game.result.win || game.result.draw) {
-      storage.removeItem(MATCH_KEY);
+      storage.removeItem(key);
       return true;
     }
     const own = Math.max(0, START_DIRS.indexOf(context.direction)),
@@ -100,14 +110,16 @@ export function rememberMatch(game, context, storage) {
       state.aFails[side(team)] = game.aFails[team];
     }
     storage.setItem(
-      MATCH_KEY,
+      key,
       JSON.stringify({
-        id: identity.id,
-        players: identity.absolutePlayers,
-        nextRound: identity.base + game.round + 1,
+        ...(identity && {
+          id: identity.id,
+          players: identity.absolutePlayers,
+          excluded: identity.excluded,
+        }),
+        nextRound: (identity?.base || 0) + game.round + 1,
         state,
         rules: { trib: !!context.rules.trib, aFail: context.rules.aFail },
-        excluded: identity.excluded,
         savedAt: Date.now(),
       }),
     );

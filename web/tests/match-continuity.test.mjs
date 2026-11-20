@@ -5,6 +5,7 @@ import {
   matchIdentity,
   rememberMatch,
   readMatch,
+  readGuestProgress,
   sameMatchStart,
   excludeMatch,
 } from '../src/collection/match-link.mjs';
@@ -71,7 +72,7 @@ test('resume rotates direction IDs, levels, failed A and tribute order; collecti
     ),
   );
 });
-test('private exclusion survives resumed game objects; guests/practice cannot save and over/draw clears', () => {
+test('private exclusion survives resumed game objects and public guest progress stays separate', () => {
   const storage = store(),
     ctx = {
       mode: 'host',
@@ -93,9 +94,24 @@ test('private exclusion survives resumed game objects; guests/practice cannot sa
   const resume = { round: 1 },
     c = { ...ctx, excluded: false, rules: { ...ctx.rules, startState: saved.state } };
   assert(matchIdentity(resume, c, saved).excluded);
-  for (const extra of [{ mode: 'guest' }, { practice: true }])
+  for (const extra of [{ mode: 'spectator' }, { practice: true }])
     assert.equal(rememberMatch(g, { ...ctx, ...extra }, storage), false);
+  const guest = { ...ctx, mode: 'guest', direction: 'E' };
+  assert.equal(matchIdentity(g, guest), null);
+  assert(rememberMatch(g, guest, storage));
+  const progress = readGuestProgress(storage);
+  assert.deepEqual(Object.keys(progress), ['nextRound', 'state', 'rules', 'savedAt']);
+  assert.deepEqual(progress.state.levels, { SN: 2, EW: 3 });
+  assert.deepEqual(progress.state.order, ['E', 'W', 'N', 'S']);
+  assert.equal(readMatch(storage).id, saved.id);
+  const guestRules = { ...guest.rules, startState: progress.state };
+  const fresh = matchIdentity({ round: 1 }, { ...ctx, rules: guestRules }, progress);
+  assert.equal(fresh.base, 0);
+  assert(fresh.id && fresh.id !== saved.id);
   g.result.win = true;
+  assert(rememberMatch(g, guest, storage));
+  assert.equal(readGuestProgress(storage), null);
+  assert.equal(readMatch(storage).id, saved.id);
   assert(rememberMatch(g, ctx, storage));
   assert.equal(readMatch(storage), null);
   storage.setItem(MATCH_KEY, '{"id":"forged"}');

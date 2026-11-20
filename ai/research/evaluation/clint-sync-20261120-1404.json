@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "kind": "clint-observer-layout-and-guest-public-progress",
+  "phase": "local-validation-complete",
+  "baseMain": "7d9ec15d710cc8d644ecfedcfbe9f95f637b6da4",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+    "checkedSHA": "786ebccbec33406863c8eacca5ff01b679def4e0",
+    "paths": [
+      "index.html",
+      "web/src/collection/match-link.js",
+      "web/src/styles/header.css",
+      "web/src/ui/options.js"
+    ],
+    "patchSHA256": "08c176e95a652ff89268bd73e7a7bd01a07dbc4eb4bd973728f7d15b677957f2"
+  },
+  "applied": [
+    "Place the observer badges below the visible toolbar, move the seat request to the left, and make room for player names and microphone marks in the read-only view.",
+    "Save completed guest rounds' public levels, finishing order, A attempts and rules under a separate local key. Offer a distinct level-picker action for a table the guest starts."
+  ],
+  "notApplied": [
+    {
+      "path": "index.html",
+      "reason": "Generated mirror and upstream version stamp. Build this project with its own version protocol."
+    },
+    {
+      "path": "web/src/ui/options.js timer",
+      "reason": "The existing CSS toolbar owns observer placement and responds to wrapping without a timer."
+    },
+    {
+      "path": "web/src/collection/match-link.js identity",
+      "reason": "The guest copy records only public round progress. Starting a different table uses a new collection identity. Host and guest opaque credentials still govern original-room recovery."
+    }
+  ],
+  "strategy": {
+    "changed": false,
+    "lastSuccessfulUpstreamStrategySHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+    "strengthGames": 0
+  },
+  "localValidation": {
+    "version": "87b4c40e76",
+    "node": {
+      "passed": 498,
+      "skipped": 37,
+      "failed": 0
+    },
+    "python": {
+      "researchPassed": 43,
+      "sharedPassed": 3,
+      "sharedSkipped": 1
+    },
+    "format": true,
+    "build": true,
+    "peerJSSpectator": {
+      "roomCodeShown": true,
+      "twoHumansRemainTwo": true,
+      "spectatorCannotActSitRecoverOrSync": true,
+      "unseatedReceivesNoGameBroadcast": true,
+      "crossVersionPublicSpectatorAccepted": true,
+      "playerVersionGuardRetained": true,
+      "spectatorNeuralDownloads": 0,
+      "publicSnapshotsOnly": true,
+      "guestRecoveryWhileWatching": true,
+      "twoPlayerAudioLines": true,
+      "hostVoiceLockAndUnlock": true,
+      "nextRoundFreshState": true,
+      "nicknamesAndBlackNames": true,
+      "viewports": [
+        1440,
+        1024,
+        390
+      ],
+      "hostExitEndsSpectating": true,
+      "boundarySeatSwapAndRefresh": true,
+      "joiningSnapshotNoHands": true,
+      "observerLayoutViewports": [
+        1440,
+        844,
+        390
+      ],
+      "guestPublicProgressRestored": true,
+      "pageErrors": [],
+      "purpose": "Browser interaction/security regression, no strength evaluation or real human training data"
+    },
+    "roomRecovery": {
+      "cases": [
+        {
+          "action": "refresh",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        },
+        {
+          "action": "closed-tab",
+          "sameRoomAndPhysicalHands": true,
+          "anonymousRecordIdentity": true,
+          "opaqueGuestSeatRecovered": true
+        }
+      ],
+      "explicitForgetDoesNotRestore": true,
+      "actualPreviewBeforeRefreshPreservedWithPersonalSwitchNowOff": true,
+      "roomAndHumanNamesRestored": true,
+      "pageErrors": [],
+      "uploads": 0,
+      "scope": "Synthetic UI/network correctness, no strength games or real human records"
+    },
+    "hostSoloContinuity": {
+      "restoredRule": "once",
+      "rotatedSeat": "E",
+      "levels": [
+        8,
+        14
+      ],
+      "aOut": 1,
+      "previousOrder": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "roundIdentityAndPrivateExclusion": "covered by executable Node restart/collection tests",
+      "uploads": 0,
+      "pageErrors": []
+    },
+    "clintWorker": {
+      "validReplayMoves": 2,
+      "usedIndependentWorker": true,
+      "uploads": 0,
+      "neuralDownloads": 0
+    },
+    "productionModelsExecuted": [
+      "029",
+      "035"
+    ],
+    "menu": [
+      "clint-rule",
+      "035",
+      "029"
+    ],
+    "default": "029"
+  },
+  "deployment": {
+    "phase": "pending"
+  },
+  "checkedAtUTC": "2026-11-20T14:11:16+00:00"
+}

@@ -155,6 +155,27 @@ with sync_playwright() as p:
     watcher.locator('#spectatorWant').click()
     guest.locator('#seatSwapText').wait_for(state='visible')
     assert '请战' in guest.locator('#seatSwapText').inner_text()
+    for width, height in [(1440, 1000), (844, 390), (390, 844)]:
+        guest.set_viewport_size({'width': width, 'height': height})
+        watcher.set_viewport_size({'width': width, 'height': height})
+        assert guest.evaluate('''() => {
+            const box = id => document.getElementById(id).getBoundingClientRect();
+            const badges = box('observerBar'), notice = box('seatSwap'), rest = box('seatSwapRest');
+            return badges.top > box('optBtn').bottom && notice.left >= 0 &&
+              notice.right <= innerWidth && (innerWidth < 700 || notice.left < innerWidth / 3) &&
+              document.elementFromPoint(rest.x + rest.width / 2, rest.y + rest.height / 2)?.closest('#seatSwapRest');
+        }''')
+        assert watcher.evaluate('''() => {
+            const badges = document.querySelector('#watchObserverBar').getBoundingClientRect();
+            const toolbar = document.querySelector('.watch-header').getBoundingClientRect();
+            const player = document.querySelector('[data-watch-seat="0"]');
+            const name = player.querySelector('strong').getBoundingClientRect();
+            const mic = player.querySelector('.watch-player-mic').getBoundingClientRect();
+            return badges.top >= toolbar.bottom && (name.right <= mic.left || name.bottom <= mic.top) &&
+              mic.width > 0 && document.documentElement.scrollWidth <= innerWidth;
+        }''')
+    guest.set_viewport_size({'width': 1440, 'height': 1000})
+    watcher.set_viewport_size({'width': 1440, 'height': 1000})
     guest.locator('#seatSwapRest').click()
     host.wait_for_function("()=>NET.seatSwap?.viewer.name==='旁观者'")
     assert guest.evaluate("NET.mode==='guest'") and watcher.evaluate("NET.mode==='spectator'")
@@ -190,10 +211,33 @@ with sync_playwright() as p:
     watcher.reload(wait_until='networkidle')
     watcher.wait_for_function("()=>NET.mode==='guest' && G.phase==='prep' && G.round===3",timeout=30000)
     assert watcher.evaluate("JSON.parse(sessionStorage.getItem('guandan-rejoin-seat')).token")==new_token
+    # End an isolated two-card position on both seated clients. The ordinary round path saves
+    # the guest's public progress without giving it the host's match or seat identity.
+    for page in [host, watcher]:
+        page.evaluate('''() => {
+            const cards = makeDeck().filter(c => c.r === 3).slice(0, 2);
+            const hands = [[], [], [], []];
+            hands[toLocal(0)] = [cards[0]];
+            hands[toLocal(1)] = [cards[1]];
+            Object.assign(G, {phase: 'play', hands, out: [toLocal(2), toLocal(3)],
+              turn: toLocal(0), trick: null, trickPlays: [], last: [null,null,null,null],
+              log: [], seen: [], clock: null, paused: false});
+        }''')
+    host.evaluate("act({k:'play',p:0,ids:[G.hands[0][0].id]})")
+    watcher.wait_for_function("() => G.phase === 'roundEnd' && !!localStorage.getItem('guandan-guest-progress-v1')")
+    saved = watcher.evaluate("JSON.parse(localStorage.getItem('guandan-guest-progress-v1'))")
+    assert set(saved) == {'state', 'rules', 'nextRound', 'savedAt'} and saved['nextRound'] == 4
+    assert watcher.evaluate("localStorage.getItem('guandan-match-continuity-v1') === null")
     host.evaluate('leaveNet()')
     guest.wait_for_function("()=>document.querySelector('#spectatorStatus').textContent.includes('观战') && document.querySelector('#spectatorStatus').classList.contains('ended')")
+    watcher.locator('#backBtn').click()
+    watcher.locator('#levelBtn').click()
+    watcher.locator('#continueGuestMatch').click()
+    assert watcher.evaluate("state => JSON.stringify(RULES.startState) === JSON.stringify(state)", saved['state'])
+    assert watcher.locator('#continueMatch').is_hidden()
+    assert watcher.evaluate("sessionStorage.getItem('guandan-rejoin-seat') === null")
     assert not errors,errors
-    report={'roomCodeShown':True,'twoHumansRemainTwo':True,'spectatorCannotActSitRecoverOrSync':True,'unseatedReceivesNoGameBroadcast':True,'crossVersionPublicSpectatorAccepted':True,'playerVersionGuardRetained':True,'spectatorNeuralDownloads':len(models),'publicSnapshotsOnly':True,'guestRecoveryWhileWatching':True,'twoPlayerAudioLines':True,'hostVoiceLockAndUnlock':True,'nextRoundFreshState':True,'nicknamesAndBlackNames':True,'viewports':[1440,1024,390],'hostExitEndsSpectating':True,'boundarySeatSwapAndRefresh':True,'joiningSnapshotNoHands':True,'pageErrors':errors,'purpose':'Browser interaction/security regression, no strength evaluation or real human training data'}
+    report={'roomCodeShown':True,'twoHumansRemainTwo':True,'spectatorCannotActSitRecoverOrSync':True,'unseatedReceivesNoGameBroadcast':True,'crossVersionPublicSpectatorAccepted':True,'playerVersionGuardRetained':True,'spectatorNeuralDownloads':len(models),'publicSnapshotsOnly':True,'guestRecoveryWhileWatching':True,'twoPlayerAudioLines':True,'hostVoiceLockAndUnlock':True,'nextRoundFreshState':True,'nicknamesAndBlackNames':True,'viewports':[1440,1024,390],'hostExitEndsSpectating':True,'boundarySeatSwapAndRefresh':True,'joiningSnapshotNoHands':True,'observerLayoutViewports':[1440,844,390],'guestPublicProgressRestored':True,'pageErrors':errors,'purpose':'Browser interaction/security regression, no strength evaluation or real human training data'}
     (OUT/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')
     print(json.dumps(report))
     browser.close()

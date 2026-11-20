@@ -52,6 +52,8 @@ Use the lobby’s start-settings dialog to set each team’s level, the active t
 
 Spectate a room from the lobby using its four-digit code. Spectators see public plays and hand counts. A spectator can request a seat for the next round if a non-host player agrees to step out. The host can manage spectator voice from Options. Tribute and return cards are shown in a preview before confirmation. [Spectator guide](web/docs/PLAYING.md#观战朋友的牌桌)
 
+Seat requests appear at the upper left, and the observer list follows the toolbar. After a friend’s round has finished, use the level picker in the lobby to load its public levels and finishing order into a table you start. [Room guide](web/docs/ROOMS.md#刷新与短暂断线)
+
 ## What is included
 
 | Feature             | In the game                                                                                                                                                                                                                                            |

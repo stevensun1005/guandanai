@@ -266,12 +266,16 @@ function renderPublicTable(table) {
       panel = document.createElement('section');
       panel.dataset.watchSeat = player.seat;
       panel.innerHTML =
-        '<header><strong></strong><span></span></header><div class="watch-last"></div>';
+        '<header><strong></strong><small class="watch-player-mic" hidden></small><span></span></header><div class="watch-last"></div>';
       seats.append(panel);
     }
     panel.classList.toggle('turn', table.phase === 'play' && table.turn === player.seat);
     panel.querySelector('strong').textContent = `${player.seat + 1}号 ${player.name}`;
     panel.querySelector('strong').title = `${player.seat + 1}号 ${player.name}`;
+    const mic = panel.querySelector('.watch-player-mic');
+    mic.hidden = !player.human;
+    if (player.human) mic.dataset.observerMic = player.seat;
+    else delete mic.dataset.observerMic;
     const place = table.out.indexOf(player.seat);
     panel.querySelector('header span').textContent =
       place >= 0 ? `第 ${place + 1} 名` : `剩 ${player.count} 张`;
@@ -280,6 +284,7 @@ function renderPublicTable(table) {
         ? '<span class="watch-pass">过</span>'
         : player.last?.cards.map((c) => cardHTML(c, table.level)).join('') || '';
   }
+  VC.paint();
   const log = $('#spectatorLog'),
     signature = `${table.round}:${table.log.length}`;
   if (log.dataset.signature !== signature) {
