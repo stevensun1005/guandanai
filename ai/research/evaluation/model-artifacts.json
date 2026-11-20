@@ -6227,6 +6227,12 @@
       "sha256": "4c837375621a11998a05e19b7bf463fb55dd8fcc9b27d3f6e6ae13a192bacd8b",
       "step": 652860,
       "classification": "status-file-replacement-failure"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-model-index-interruption-20261119.json",
+      "sha256": "f9309157e4a56b285716e8ea6de7a977924313a1dd77d03fa5f7590140978d4e",
+      "step": 684957,
+      "classification": "model-index-replacement-failure"
     }
   ],
   "guanzeroRecoveries": [
