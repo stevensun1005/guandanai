@@ -1,0 +1,205 @@
+{
+  "schema": 1,
+  "verifiedAt": "2026-11-20T04:22:23.268Z",
+  "authorization": {
+    "requestedAt": "2026-11-20T04:20:11.812Z",
+    "authority": "Owner authorized this incident recovery: 恢复训练至原截止时间",
+    "resumedFromStep": 684957,
+    "checkpointSHA256": "720ae531bf992f3419c951809e46ad14880a3996a3ab1df16032dbe3b3799763",
+    "deadline": "2026-11-20T17:00:00.000Z",
+    "renameProbes": {
+      "models": {
+        "replacements": 100,
+        "elapsedSeconds": 0.06129199999850243
+      },
+      "learner": {
+        "replacements": 100,
+        "elapsedSeconds": 0.06305200001224875
+      },
+      "inference": {
+        "replacements": 100,
+        "elapsedSeconds": 0.063455099996645
+      }
+    },
+    "matchesBefore": 3484584,
+    "rowsBefore": 2191871871
+  },
+  "incident": {
+    "file": "ai/research/evaluation/guanzero-model-index-interruption-20261119.json",
+    "sha256": "f9309157e4a56b285716e8ea6de7a977924313a1dd77d03fa5f7590140978d4e"
+  },
+  "checkpoint": {
+    "step": 684957,
+    "sha256": "720ae531bf992f3419c951809e46ad14880a3996a3ab1df16032dbe3b3799763",
+    "rows": 2191862400,
+    "modelTensors": 16,
+    "optimizer": "RMSprop",
+    "optimizerStates": 16,
+    "consumedCursors": 6
+  },
+  "sourceCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+  "windowSHA256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad",
+  "initialization": {
+    "at": "2026-11-20T04:20:15.495Z",
+    "status": {
+      "step": 684957,
+      "usedSamples": 2191862400,
+      "loss": 3.1753178000450135,
+      "updatesPerSecond": 0,
+      "device": "cuda",
+      "deviceName": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "precision": "FP32",
+      "objective": "adp",
+      "updatedAt": 1795148414.9080522,
+      "error": null,
+      "pid": 91732,
+      "indexedShards": 14,
+      "pauseSampling": false
+    },
+    "model": {
+      "file": "model-000000684957.onnx",
+      "version": 684957,
+      "updatedAt": 1795148414.9065337
+    },
+    "modelSHA256": "6c0907a694d2c4edfa5de41d06f74f193c0aa1375d48f9232d436d48916cc0fb",
+    "checkpointUnchanged": true,
+    "preparationUpdates": 0,
+    "originalIndexAndFailureStatusPreservedInBackup": true
+  },
+  "osFailure": {
+    "confirmed": "WinError 5 replacing models/latest.json",
+    "underlyingOSDenialSource": "unconfirmed"
+  },
+  "snapshots": [
+    {
+      "at": "2026-11-20T04:20:49.709Z",
+      "intent": "2026-11-20T04:20:11.812Z",
+      "deadline": "2026-11-20T17:00:00.000Z",
+      "stop": false,
+      "errorFile": false,
+      "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "windowSHA256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad",
+      "learner": {
+        "step": 684975,
+        "pid": 64220,
+        "error": null,
+        "used": 2191920000,
+        "age": 0.20145225524902344,
+        "ups": 0.7906248617504122,
+        "pause": false,
+        "device": "cuda"
+      },
+      "inference": {
+        "pid": 87804,
+        "ready": true,
+        "requests": 62134,
+        "age": 0.33998680114746094,
+        "error": null,
+        "device": "cuda"
+      },
+      "latest": {
+        "file": "model-000000684957.onnx",
+        "version": 684957,
+        "updatedAt": 1795148427.3030806
+      },
+      "actors": {
+        "count": 32,
+        "matches": 3484663,
+        "rows": 2191922459,
+        "fresh": 32
+      },
+      "watchdog": {
+        "pid": 86496,
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+        "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+        "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+        "plannedEnd": "2026-11-20T17:00:00.000Z",
+        "restarts": 1,
+        "phase": "healthy",
+        "step": 684966,
+        "supervisorPid": 65424,
+        "updatedAt": "2026-11-20T04:20:36.643Z",
+        "error": null,
+        "resumedFromStep": 684957,
+        "lastRestartAt": "2026-11-20T04:20:20.234Z"
+      }
+    },
+    {
+      "at": "2026-11-20T04:21:23.578Z",
+      "intent": "2026-11-20T04:20:11.812Z",
+      "deadline": "2026-11-20T17:00:00.000Z",
+      "stop": false,
+      "errorFile": false,
+      "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "windowSHA256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad",
+      "learner": {
+        "step": 685002,
+        "pid": 64220,
+        "error": null,
+        "used": 2192006400,
+        "age": 0.8978931903839111,
+        "ups": 0.8044921295890471,
+        "pause": false,
+        "device": "cuda"
+      },
+      "inference": {
+        "pid": 87804,
+        "ready": true,
+        "requests": 148847,
+        "age": 0.9748256206512451,
+        "error": null,
+        "device": "cuda"
+      },
+      "latest": {
+        "file": "model-000000684957.onnx",
+        "version": 684957,
+        "updatedAt": 1795148427.3030806
+      },
+      "actors": {
+        "count": 32,
+        "matches": 3484794,
+        "rows": 2192009695,
+        "fresh": 32
+      },
+      "watchdog": {
+        "pid": 86496,
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+        "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+        "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+        "plannedEnd": "2026-11-20T17:00:00.000Z",
+        "restarts": 1,
+        "phase": "healthy",
+        "step": 684991,
+        "supervisorPid": 65424,
+        "updatedAt": "2026-11-20T04:21:08.933Z",
+        "error": null,
+        "resumedFromStep": 684957,
+        "lastRestartAt": "2026-11-20T04:20:20.234Z"
+      }
+    }
+  ],
+  "postRestartExport": {
+    "observedAt": "2026-11-20T04:21:32.042Z",
+    "index": {
+      "file": "model-000000685007.onnx",
+      "version": 685007,
+      "updatedAt": 1795148487.5373082
+    },
+    "sha256": "ef3b229251f8372d7a95a59c3aa2495b791d56b4fc5cef794aab597b16050cc1",
+    "learnerStep": 685010,
+    "learnerPid": 64220
+  },
+  "processes": {
+    "watchdog": 86496,
+    "supervisor": 65424,
+    "learner": 64220,
+    "inference": 87804,
+    "temporaryAwake": 60892,
+    "actorCount": 32
+  },
+  "latestStepAtRecording": 685051,
+  "plannedEnd": "2026-11-20T17:00:00.000Z",
+  "dashboardStatus": 200
+}

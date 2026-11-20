@@ -6258,6 +6258,14 @@
       "resumedFromStep": 652860,
       "plannedEnd": "2026-11-20T17:00:00.000Z",
       "classification": "owner-authorized recovery from status write failure"
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-model-index-recovery-20261119.json",
+      "sha256": "5b8382045dc4989d0eb046f552ddc8a55628bb981195232fc37b9bc5a7b244ce",
+      "authorizedAt": "2026-11-20T04:20:11.812Z",
+      "resumedFromStep": 684957,
+      "plannedEnd": "2026-11-20T17:00:00.000Z",
+      "classification": "owner-authorized recovery from model-index replacement failure"
     }
   ],
   "windowsExtrasCloseouts": [
