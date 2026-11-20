@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "id": "human-qfilter-anchor-20261119-0800",
+  "observedAtUTC": "2026-11-20T04:53:38.246+00:00",
+  "sourceCommit": "2c642443564fb62386df0482b11493d19a337bd6",
+  "sourceFiles": 380,
+  "protocolSHA256": "2cec3a96e2debecc754ca07ee1a60cb6156770c8440c5bbc1c3949531cd18477",
+  "startingStep": 58132,
+  "startingNetworkSHA256": "1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2",
+  "startingCheckpointSHA256": "05e6099f51f2bf74c36ee82a8757628f5ba26f5c58e56074319be9c520a8f517",
+  "studentReference": true,
+  "emptyReplay": true,
+  "fixedStartQAnchorWeight": 0.1,
+  "trainingStartUTC": "2026-11-20T04:50:47.696Z",
+  "trainingDeadlineUTC": "2026-11-20T13:00:00.000Z",
+  "evaluationSaveDeadlineUTC": "2026-11-20T16:00:00.000Z",
+  "reservedTrainingRoots": 100000,
+  "independentHeldoutDeals": 1500,
+  "heldoutPlannedRounds": 4000,
+  "seedAuditEvidenceFiles": 8597,
+  "knownHistoricalRoots": 2956911,
+  "heldoutRanges": {
+    "vsParent": [
+      1935000000,
+      1935003991
+    ],
+    "vs029": [
+      1935003992,
+      1935007983
+    ],
+    "vsreason": [
+      1935007984,
+      1935011102
+    ]
+  },
+  "seedAuditSHA256": "a1c373cf6927a7a06f312d4ed204064f5a642281a506d357cb0a8220aaf75d47",
+  "trainingSeedListSHA256": "71288c5ffc9a74432ea696e65fda1292c55ecfcba16acfaab6c809f59019f25c",
+  "state": "gpu-training-verified",
+  "observedPIDs": {
+    "controller": 49380,
+    "supervisor": 47136,
+    "gpuLearner": 20268,
+    "actor": 49976,
+    "awake": 54468,
+    "dashboard": 5184
+  },
+  "supervisorStartedAt": "2026-11-20T04:50:54.208Z",
+  "gpuDevice": "AMD Radeon RX 7800 XT",
+  "gpuBackend": "cuda:0",
+  "matchingAdamStates": 12,
+  "restoreNextUpdateEqual": true,
+  "cumulativeUpdates": 58457,
+  "newUpdates": 325,
+  "newTerminalRowsIngested": 166527,
+  "newOptimizationRows": 665600,
+  "newHumanActionExposures": 93,
+  "actorProvider": "dml",
+  "actorFallbackReason": null,
+  "actorMatches": 353,
+  "actualEvaluationRoundsAtObservation": 0,
+  "dashboard": {
+    "url": "http://127.0.0.1:8774/",
+    "viewports": [
+      1280,
+      390
+    ],
+    "actualTrainingProgress": "1 次GPU更新 · 100,086 终局样本行 · 0 真人动作曝光 · 训练中",
+    "evaluationCards": [
+      "vsParent",
+      "vs029",
+      "vsreason",
+      "029vsreason"
+    ],
+    "plannedRoundsEach": 1000,
+    "actualEvaluationRounds": 0,
+    "pageErrors": [],
+    "horizontalOverflow": false,
+    "pollResponses": 10
+  },
+  "temporaryAwakeVerified": true,
+  "postDeadlineCloseoutFollowup": true
+}
