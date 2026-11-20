@@ -16,6 +16,13 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readJSON, writeJSON, sha256 } from '../../danMCai/training/continuous/lib.mjs';
 
+const ANCHOR_58132 = {
+  step: 58132,
+  network: '1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2',
+  checkpoint: '05e6099f51f2bf74c36ee82a8757628f5ba26f5c58e56074319be9c520a8f517',
+  firstShard: 300000,
+  anchorWeight: 0.1,
+};
 const FOLLOWUPS = {
   'human-qfilter-followup-20261118': {
     step: 50424,
@@ -24,12 +31,10 @@ const FOLLOWUPS = {
     firstShard: 200000,
     anchorWeight: 0.05,
   },
-  'human-qfilter-anchor-20261119': {
-    step: 58132,
-    network: '1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2',
-    checkpoint: '05e6099f51f2bf74c36ee82a8757628f5ba26f5c58e56074319be9c520a8f517',
-    firstShard: 300000,
-    anchorWeight: 0.1,
+  'human-qfilter-anchor-20261119': ANCHOR_58132,
+  'human-qfilter-anchor-20261119-0800': {
+    ...ANCHOR_58132,
+    trainingDeadlineUTC: '2026-11-20T13:00:00.000Z',
   },
 };
 
@@ -71,7 +76,9 @@ export function validateJointProtocol(p, now = Date.now()) {
     throw Error('Continuation checkpoint or 07Toronto cutoff changed');
   if (
     followup &&
-    (t[1] - t[0] !== 2 * 3600000 ||
+    ((followup.trainingDeadlineUTC
+      ? p.trainingDeadlineUTC !== followup.trainingDeadlineUTC || t[1] - t[0] > 12 * 3600000
+      : t[1] - t[0] !== 2 * 3600000) ||
       p.humanWarmupUTC !== p.startedAtUTC ||
       c?.continuation?.sha256 !== followup.checkpoint ||
       c?.continuation?.shardSequenceStart !== followup.firstShard ||
@@ -80,7 +87,12 @@ export function validateJointProtocol(p, now = Date.now()) {
       p.evaluationModels?.parent?.sha256 !== p.initialModelSHA256 ||
       p.heldout?.vsParent?.length !== 500)
   )
-    throw Error('Follow-up checkpoint, parent evaluation or two-hour cutoff changed');
+    throw Error('Follow-up checkpoint, parent evaluation or fixed cutoff changed');
+  if (
+    followup?.trainingDeadlineUTC &&
+    (c.evaluationBlockOffset !== 999 || c.evaluationBlockEnd !== 1000)
+  )
+    throw Error('Expected the valid inactive internal gate block [999, 1000)');
   if (
     (continuation || followup) &&
     (c?.actors !== 1 ||

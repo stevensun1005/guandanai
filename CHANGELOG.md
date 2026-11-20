@@ -1064,4 +1064,4 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 
 ## 2026-11-19 · danMCai 58132 续训
 
-增加提高起点 Q 约束系数的固定续训窗口及起点对照。[预登记](ai/research/evaluation/human-qfilter-anchor-20261119/README.md)。
+使用提高起点 Q 约束系数的续训窗口，按所有者修订于 11 月 20 日 08:00 多伦多时间停训，随后自动评测。原启动错误归档。[预登记](ai/research/evaluation/human-qfilter-anchor-20261119/README.md)。

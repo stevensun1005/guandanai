@@ -178,19 +178,23 @@ test('new continuation evaluates the final model against its exact training pare
   assert.deepEqual(reason.plan.tasks[0].seeds, control.plan.tasks[0].seeds);
 });
 
-test('58132 continuation locks the stronger anchor and its exact matching Adam', () => {
+test('58132 continuation locks the 08:00 cutoff, valid inactive seed block, stronger anchor and matching Adam', () => {
   const p = plan();
   const network = '1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2';
+  const registered = Date.parse('2026-11-20T04:55:00.000Z');
   Object.assign(p, {
-    id: 'human-qfilter-anchor-20261119',
+    id: 'human-qfilter-anchor-20261119-0800',
     initialModelSHA256: network,
-    trainingDeadlineUTC: new Date(start + 2 * 3600000).toISOString(),
-    deadlineUTC: new Date(start + 5 * 3600000).toISOString(),
-    humanWarmupUTC: p.startedAtUTC,
+    startedAtUTC: new Date(registered).toISOString(),
+    trainingDeadlineUTC: '2026-11-20T13:00:00.000Z',
+    deadlineUTC: '2026-11-20T16:00:00.000Z',
+    humanWarmupUTC: new Date(registered).toISOString(),
     evaluationWorkers: 1,
   });
   Object.assign(p.initialConfig, {
     actors: 1,
+    evaluationBlockOffset: 999,
+    evaluationBlockEnd: 1000,
     fastActor: { games: 16, sessionLimit: 2 },
     parent: { startingStep: 58132 },
     continuation: {
@@ -211,15 +215,25 @@ test('58132 continuation locks the stronger anchor and its exact matching Adam',
   });
   p.heldout.vsParent = Array.from({ length: 500 }, (_, i) => i + 1000);
   p.evaluationModels.parent = { localFile: p.initialModel, sha256: network };
-  assert.doesNotThrow(() => validateJointProtocol(p, start + 1000));
+  assert.doesNotThrow(() => validateJointProtocol(p, registered + 1000));
   assert.equal(
     evaluationPlans(p, '/new', { sha256: 'final' })[0].plan.primaryOpponent,
     'parent58132',
   );
+  const shifted = structuredClone(p);
+  shifted.trainingDeadlineUTC = '2026-11-20T14:00:00.000Z';
+  shifted.deadlineUTC = '2026-11-20T17:00:00.000Z';
+  assert.throws(() => validateJointProtocol(shifted, registered + 1000), /fixed cutoff/);
+  const invalidBlock = structuredClone(p);
+  invalidBlock.initialConfig.evaluationBlockOffset = 1000;
+  assert.throws(
+    () => validateJointProtocol(invalidBlock, registered + 1000),
+    /inactive internal gate/,
+  );
   const weaker = structuredClone(p);
   weaker.initialConfig.learner.anchorWeight = 0.05;
-  assert.throws(() => validateJointProtocol(weaker, start + 1000), /objective/);
+  assert.throws(() => validateJointProtocol(weaker, registered + 1000), /objective/);
   const otherAdam = structuredClone(p);
   otherAdam.initialConfig.continuation.sha256 = 'changed';
-  assert.throws(() => validateJointProtocol(otherAdam, start + 1000), /checkpoint/);
+  assert.throws(() => validateJointProtocol(otherAdam, registered + 1000), /checkpoint/);
 });
