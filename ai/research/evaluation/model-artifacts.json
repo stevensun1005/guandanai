@@ -6444,6 +6444,16 @@
       "cumulativeUpdates": 50424,
       "localResearchPackage": "ai/research/evaluation/human-qfilter-continue-20261116/package.json",
       "webPublished": false
+    },
+    {
+      "id": "guanzero-io48-extension-20261120",
+      "file": "ai/research/evaluation/guanzero-extension-20261120.json",
+      "classification": "owner-authorized continuation from verified scheduled shutdown",
+      "activeProtocol": "champion-reason-v4",
+      "sourceStep": 724901,
+      "plannedEnd": "2026-11-23T17:00:00.000Z",
+      "finalIndex": 5160,
+      "sha256": "acb73ebcc1dd4a00e2aa6fb05f6780b168b5fa8a19f7a57935546f38f04b0ebc"
     }
   ],
   "researchChampions": [

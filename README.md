@@ -255,7 +255,7 @@ Clint增量e17f3ad→66d63b8适配为：601像素起，左侧标题、方形牌�
 
 低内存续训已Toronto11月16日23:03真实启动，GPU新增计数/匹配Adam与面板通过核验；11月17日07:00停训，随后自动评测保存。[启动证据](ai/research/evaluation/human-qfilter-continue-20261116/startup.json)。
 
-GuanZero已按11月17日新授权恢复至周五11月20日12:00美东，固定截止及029／旧reason分别冻结的开发评测见[GuanZero指南](ai/guanzero/README.md)；不改变网页冠军默认。
+多伦多时间 2026 年 11 月 20 日，io48 在原定 12:00 正常停训并保存了第 724,901 步。所有者随后把训练延长至 **11 月 23 日周一 12:00（17:00 UTC）**。已从该检查点恢复，保留匹配的 RMSprop 状态、样本游标和原训练配方。 评测与同权重发布安排见 [GuanZero 指南](ai/guanzero/README.md)。
 
 11月17日低内存续训/3000局评测已完成，工程暂停消除但真人一致率仅+1动作、棋力双目标未达；不晋升、不发布。[完整结果](ai/research/evaluation/human-qfilter-continue-20261116/README.md)。
 

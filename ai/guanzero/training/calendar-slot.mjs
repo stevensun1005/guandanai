@@ -17,7 +17,9 @@ export function calendarSlot(window, now, schedule) {
     !Number.isFinite(now) ||
     !Number.isSafeInteger(schedule.seedIndexBase) ||
     schedule.seedIndexBase < 5130 ||
-    schedule.finalIndex !== 5150
+    !Number.isSafeInteger(schedule.finalIndex) ||
+    schedule.finalIndex < 5150 ||
+    schedule.finalIndex > 5949
   )
     throw Error('Invalid evaluation calendar');
   const interval = 12 * 3600000;
@@ -32,8 +34,10 @@ export function calendarSlot(window, now, schedule) {
     second: '2-digit',
     hourCycle: 'h23',
   });
+  const localHours =
+    clock.format(first) === '08:00:00' ? ['08:00:00', '20:00:00'] : ['20:00:00', '08:00:00'];
   for (let n = 0; n < count; n++) {
-    if (clock.format(first + n * interval) !== (n % 2 ? '20:00:00' : '08:00:00'))
+    if (clock.format(first + n * interval) !== localHours[n % 2])
       throw Error('Evaluation slots must stay at Toronto 08:00 and 20:00');
   }
   if (now >= end) return { slot: 100 + count, index: schedule.finalIndex, final: true, due: end };

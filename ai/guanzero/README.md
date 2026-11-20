@@ -1,8 +1,12 @@
 # GuanZero 模型
 
-2026-11-17所有者明确授权GuanZero从原491454检查点继续至Toronto **11月20日周五12:00（17:00Z）**。只延长本运行固定截止，原af2a683训练参数、匹配Adam与消费游标保留。08:00／20:00开发评测按新独立5142起日历，冠军029各500场、旧reason9001各200场；旧reason底座仍017，新reason实际发布后再切换，不把旧成绩改名。历史5133／5134漏测和11月11日中断保留，不回填。见[续训证据](../research/evaluation/guanzero-resume-20261117/authorization-and-startup.json)。
+多伦多时间 2026 年 11 月 20 日，io48 在原定 12:00 正常停训并保存了第 724,901 步。所有者随后把训练延长至 **11 月 23 日周一 12:00（17:00 UTC）**。已从该检查点恢复，保留匹配的 RMSprop 状态、样本游标和原训练配方。
 
-**独立底座评测**：新伴随允许通过明确授权的 `reason-evaluation-launcher.allowArchivedReasonBase=true` 冻结归档9001；`reason.baseChampion`记录其017 accept和完整SHA，权重单列为 `reason-base.onnx`。纯冠军对手仍独立 `champion.onnx`／029；原历史同底座报告保持原文件和校验方式。发布前同时核验两份底座门控，不用029替换9001的网络。 新批伴随源码冻结在 `guanzero-independent-base-eval-runtime`／b60766f，普通冠军仍用af2a683 baseline；从实际launcher读取路径，不在训练或任何冻结检出拉取代码。当前08／20日历为5142–5148，周五12点正常停训后立即冻结最终5150；历史5133／5134及11月11日最终槽不回填。
+普通评测和同权重发布继续按多伦多 08:00、20:00 调度，使用新槽 5151–5156。周一 12:00 正常停训后立即冻结独立最终槽 5160。周五已冻结的 5150 保留原模型、种子和报告。对手仍按已授权协议各跑 danMCai 029 冠军 500 场、017 底座的旧 reason 200 场。 [续训核验](../research/evaluation/guanzero-extension-20261120.json)。
+
+2026-11-17所有者明确授权GuanZero从原491454检查点继续至Toronto **11月20日周五12:00（17:00Z）**。只延长本运行固定截止，原 af2a683 训练参数、匹配的 RMSprop 优化器状态及消费游标保留。08:00／20:00开发评测按新独立5142起日历，冠军029各500场、旧reason9001各200场；旧reason底座仍017，新reason实际发布后再切换，不把旧成绩改名。历史5133／5134漏测和11月11日中断保留，不回填。见[续训证据](../research/evaluation/guanzero-resume-20261117/authorization-and-startup.json)。
+
+**独立底座评测**：新伴随允许通过明确授权的 `reason-evaluation-launcher.allowArchivedReasonBase=true` 冻结归档9001；`reason.baseChampion`记录其017 accept和完整SHA，权重单列为 `reason-base.onnx`。纯冠军对手仍独立 `champion.onnx`／029；原历史同底座报告保持原文件和校验方式。发布前同时核验两份底座门控，不用029替换9001的网络。 新批伴随源码冻结在 `guanzero-independent-base-eval-runtime`／b60766f，普通冠军仍用af2a683 baseline；从实际launcher读取路径，不在训练或任何冻结检出拉取代码。11 月 17–20 日当时的日历为 5142–5148，周五 12:00 正常停训后已冻结 5150；历史5133／5134及11月11日最终槽不回填。
 
 **历史中断（2026-11-11，当前状态以顶部11月17日新授权为准）**：凌晨02:29训练记录停止，随后系统更新重启；当时无训练进程。最后检查点491454／完整导出491408已保全，但08点5134与10点最终5150均漏登记，不能事后回填或称正常最终模型。原固定截止已过，当时不自动续训；当时网站为已评测上线的028／475588。见[异常与收尾证据](../research/evaluation/guanzero-interruption-20261111.json)。
 

@@ -1,0 +1,415 @@
+{
+  "schema": 1,
+  "authorizedAt": "2026-11-20T17:22:32.730Z",
+  "ownerInstruction": "延长训练至周一中午12点",
+  "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+  "previousDeadline": "2026-11-20T17:00:00.000Z",
+  "deadline": "2026-11-23T17:00:00.000Z",
+  "localTimezone": "America/Toronto",
+  "requestedDeadlineLocal": "2026-11-23T12:00:00-05:00",
+  "startingCheckpoint": {
+    "step": 724901,
+    "sha256": "e0656247e9704b03cc3aaf67d4da2510353b7698c9543d9a128c7eada0f3ad9f",
+    "usedSamples": 2319683200,
+    "used": 2319683200,
+    "optimizer": "RMSprop",
+    "optimizerStates": 16,
+    "consumedCursors": 5,
+    "matchingInferenceWeights": true,
+    "onnxChecker": "passed",
+    "onnxSHA256": "7f0b06f38002f31bd927ffc3958db930021f1d2a7ea3fd99434ed31b597d2791"
+  },
+  "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+  "previousWindowSHA256": "0a742b376238f7d6c9a22bab31fa1f0d9995d48eb09bd22d094776daf0bca8ad",
+  "newWindowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+  "previousEvaluation": {
+    "index": 5150,
+    "modelVersion": "model-000000724901",
+    "planSHA256": "5387d295aed500ac989bec1278c39ecd89c227e2e4234625fa8e0b75b32680e2",
+    "modelSHA256": "7f0b06f38002f31bd927ffc3958db930021f1d2a7ea3fd99434ed31b597d2791",
+    "frozenAt": "2026-11-20T17:00:05.761Z",
+    "shutdownAt": "2026-11-20T17:00:00.597Z"
+  },
+  "newCalendar": {
+    "firstAt": "2026-11-21T01:00:00.000Z",
+    "seedIndexBase": 5151,
+    "finalIndex": 5160
+  },
+  "trainingCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "evaluationCommit": "b60766fdd5dffe6e87cdb8bf4b88ec6fa2a6bcf6",
+  "verifiedAt": "2026-11-20T17:25:10.433Z",
+  "calendar": {
+    "verifiedAt": "2026-11-20T17:24:13.111Z",
+    "ordinary": [
+      {
+        "index": 5151,
+        "due": "2026-11-21T01:00:00.000Z"
+      },
+      {
+        "index": 5152,
+        "due": "2026-11-21T13:00:00.000Z"
+      },
+      {
+        "index": 5153,
+        "due": "2026-11-22T01:00:00.000Z"
+      },
+      {
+        "index": 5154,
+        "due": "2026-11-22T13:00:00.000Z"
+      },
+      {
+        "index": 5155,
+        "due": "2026-11-23T01:00:00.000Z"
+      },
+      {
+        "index": 5156,
+        "due": "2026-11-23T13:00:00.000Z"
+      }
+    ],
+    "final": {
+      "index": 5160,
+      "due": "2026-11-23T17:00:00.000Z"
+    },
+    "scheduleSHA256": "7e8e55369f0bdf1c4a156ccd587e697941b55cd0da6e547dc58128c052f79f9e",
+    "automationId": "guanzero-8"
+  },
+  "system": {
+    "automationId": "guanzero-8",
+    "recoveryTask": "GuanZero-io48-Recovery",
+    "taskState": "Running",
+    "singleInstance": "IgnoreNew",
+    "dashboardHttp": 200,
+    "processes": [
+      {
+        "pid": 54148,
+        "parent": 70848,
+        "role": "hold-awake"
+      },
+      {
+        "pid": 92992,
+        "parent": 54148,
+        "role": "hold-awake"
+      },
+      {
+        "pid": 94668,
+        "parent": 93636,
+        "role": "watchdog"
+      },
+      {
+        "pid": 90944,
+        "parent": 94668,
+        "role": "run"
+      },
+      {
+        "pid": 90060,
+        "parent": 90944,
+        "role": "learner"
+      },
+      {
+        "pid": 95160,
+        "parent": 90944,
+        "role": "inference"
+      },
+      {
+        "pid": 24920,
+        "parent": 90060,
+        "role": "learner"
+      },
+      {
+        "pid": 95884,
+        "parent": 95160,
+        "role": "inference"
+      },
+      {
+        "pid": 87424,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 94304,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 31896,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 86484,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 94164,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 93028,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 96328,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 79912,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 85468,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 88296,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 11272,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 92920,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 83868,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 76816,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 70860,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 88912,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 57764,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 89512,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 74244,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 94912,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 96500,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 35816,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 83128,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 96540,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 66256,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 65772,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 93628,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 85936,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 7216,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 93520,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 95600,
+        "parent": 90944,
+        "role": "actor"
+      },
+      {
+        "pid": 17980,
+        "parent": 90944,
+        "role": "actor"
+      }
+    ]
+  },
+  "progress": [
+    {
+      "at": "2026-11-20T17:24:29.514Z",
+      "intent": "2026-11-20T04:20:11.812Z",
+      "deadline": "2026-11-23T17:00:00.000Z",
+      "stop": false,
+      "errorFile": false,
+      "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "windowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+      "learner": {
+        "step": 724991,
+        "pid": 24920,
+        "error": null,
+        "used": 2319971200,
+        "age": 0.24756550788879395,
+        "ups": 0.8450364481026312,
+        "pause": false,
+        "device": "cuda"
+      },
+      "inference": {
+        "pid": 95884,
+        "ready": true,
+        "requests": 298187,
+        "age": 0.5751340389251709,
+        "error": null,
+        "device": "cuda"
+      },
+      "latest": {
+        "file": "model-000000724954.onnx",
+        "version": 724954,
+        "updatedAt": 1795195424.5612586
+      },
+      "actors": {
+        "count": 32,
+        "matches": 3672036,
+        "rows": 2319975374,
+        "fresh": 32
+      },
+      "watchdog": {
+        "pid": 94668,
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+        "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+        "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+        "plannedEnd": "2026-11-23T17:00:00.000Z",
+        "restarts": 1,
+        "phase": "healthy",
+        "step": 724978,
+        "supervisorPid": 90944,
+        "updatedAt": "2026-11-20T17:24:13.746Z",
+        "error": null,
+        "resumedFromStep": 724901,
+        "lastRestartAt": "2026-11-20T17:22:36.396Z"
+      }
+    },
+    {
+      "at": "2026-11-20T17:25:10.433Z",
+      "intent": "2026-11-20T04:20:11.812Z",
+      "deadline": "2026-11-23T17:00:00.000Z",
+      "stop": false,
+      "errorFile": false,
+      "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "windowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+      "learner": {
+        "step": 725012,
+        "pid": 24920,
+        "error": null,
+        "used": 2320038400,
+        "age": 1.3176631927490234,
+        "ups": 0.7584353300395846,
+        "pause": false,
+        "device": "cuda"
+      },
+      "inference": {
+        "pid": 95884,
+        "ready": true,
+        "requests": 367275,
+        "age": 0.09061288833618164,
+        "error": null,
+        "device": "cuda"
+      },
+      "latest": {
+        "file": "model-000000725003.onnx",
+        "version": 725003,
+        "updatedAt": 1795195486.0966346
+      },
+      "actors": {
+        "count": 32,
+        "matches": 3672132,
+        "rows": 2320043155,
+        "fresh": 32
+      },
+      "watchdog": {
+        "pid": 94668,
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+        "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+        "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+        "plannedEnd": "2026-11-23T17:00:00.000Z",
+        "restarts": 1,
+        "phase": "healthy",
+        "step": 725003,
+        "supervisorPid": 90944,
+        "updatedAt": "2026-11-20T17:24:54.213Z",
+        "error": null,
+        "resumedFromStep": 724901,
+        "lastRestartAt": "2026-11-20T17:22:36.396Z"
+      }
+    }
+  ],
+  "previousStop": {
+    "events": [
+      {
+        "t": "2026-11-20T17:00:00.603Z",
+        "kind": "stopping",
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+      },
+      {
+        "t": "2026-11-20T17:00:02.557Z",
+        "kind": "process-exit",
+        "key": "learner",
+        "code": 0
+      },
+      {
+        "t": "2026-11-20T17:00:02.636Z",
+        "kind": "stopped",
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+      }
+    ],
+    "trainingProcessCount": 0,
+    "localBackup": "C:/guandan-sampler/work/guanzero/recovery-io48/20261120-normal-final"
+  }
+}

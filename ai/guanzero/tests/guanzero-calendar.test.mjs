@@ -69,3 +69,31 @@ test('reject off-clock anchors, malformed calendars and final seed collisions', 
   ])
     assert.throws(() => slot('2026-11-09T13:00:00Z', changes));
 });
+
+test('an extended window can begin at 20:00 and reserve a new final slot', () => {
+  const extendedEnd = Date.parse('2026-11-23T17:00:00Z');
+  const continued = {
+    ...window,
+    plannedEnd: new Date(extendedEnd).toISOString(),
+    hours: (extendedEnd - start) / 3600000,
+  };
+  const renewed = {
+    ...schedule,
+    firstAt: '2026-11-21T01:00:00.000Z',
+    seedIndexBase: 5151,
+    finalIndex: 5160,
+  };
+  const first = Date.parse(renewed.firstAt);
+  assert.throws(() => calendarSlot(continued, first - 1, renewed), /No evaluation due/);
+  assert.equal(calendarSlot(continued, first, renewed).index, 5151);
+  assert.equal(calendarSlot(continued, first + 12 * 3600000, renewed).index, 5152);
+  assert.equal(calendarSlot(continued, extendedEnd - 1, renewed).index, 5156);
+  assert.deepEqual(calendarSlot(continued, extendedEnd, renewed), {
+    slot: 106,
+    index: 5160,
+    final: true,
+    due: extendedEnd,
+  });
+  assert.throws(() => calendarSlot(continued, first, { ...renewed, finalIndex: 5156 }), /overlap/);
+  assert.throws(() => calendarSlot(continued, first, { ...renewed, finalIndex: 5950 }));
+});
