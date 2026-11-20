@@ -385,5 +385,59 @@
   "planArchive": "ai/research/evaluation/guanzero-724901-development-v4-plan.json",
   "defaultChoice": "029",
   "previousWindowEvidence": "ai/research/evaluation/guanzero-extension-20261120.json",
-  "planSHA256": "5387d295aed500ac989bec1278c39ecd89c227e2e4234625fa8e0b75b32680e2"
+  "planSHA256": "5387d295aed500ac989bec1278c39ecd89c227e2e4234625fa8e0b75b32680e2",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44795783823",
+    "commit": "dda541f40371aa5ff1e85b5ae24d3ab47f0466f5",
+    "verifiedAt": "2026-11-20T18:53:41.964Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-037.onnx",
+    "publicSHA256": "7f0b06f38002f31bd927ffc3958db930021f1d2a7ea3fd99434ed31b597d2791",
+    "bytes": 6346014,
+    "model": "037",
+    "version": "model-000000724901",
+    "step": 724901,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "037",
+          "guanzero-adp-io48-724901"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-724901-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-724901-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-724901-development-v4-reason.json"
+    ],
+    "trainingConfigUnchanged": true,
+    "archivedFridayWindowVerified": true,
+    "attempt": 1
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-20T18:53:50.742Z",
+    "plannedEnd": "2026-11-23T17:00:00.000Z",
+    "step": 729712,
+    "activeActors": 32,
+    "watchdogPhase": "healthy",
+    "STOP": false,
+    "learnerError": null,
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+    "continuedFromStep": 724901
+  }
 }
