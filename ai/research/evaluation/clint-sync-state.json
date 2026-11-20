@@ -1,16 +1,16 @@
 {
   "schema": 1,
   "upstreamRepository": "https://github.com/clintsun1977/guandan",
-  "lastSuccessfulUpstreamSHA": "996ce578b989f1fe5546224fb6f785b49d06b707",
-  "evidence": "clint-sync-20261118-2216.json",
+  "lastSuccessfulUpstreamSHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+  "evidence": "clint-sync-20261119-2104.json",
   "pending": [],
-  "lastCheckedUpstreamSHA": "996ce578b989f1fe5546224fb6f785b49d06b707",
+  "lastCheckedUpstreamSHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
   "ownerFollowUp": {
     "scope": "Owner subsequently requested local room/human-name capture too; supersedes the earlier local collection skip.",
     "evidence": "collection-labels-20261108.json",
     "deployedCodeCommit": "19fb94e447e8799e93400a983875312ee47f1234"
   },
-  "previousSuccessfulEvidence": "clint-sync-20261114-1948.json",
-  "lastSuccessfulRuleStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
-  "note": "Tribute and observer UI through 996ce57. Pages 44412593741 and live Chrome/PeerJS checks passed for version 4d540150f1."
+  "previousSuccessfulEvidence": "clint-sync-20261118-2216.json",
+  "lastSuccessfulRuleStrategySHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+  "note": "Independent tribute and play confirmation through cf4f14c. Live Clint rules only. Pages 44659583646 and Chrome/PeerJS checks passed for 9a3c581a68."
 }

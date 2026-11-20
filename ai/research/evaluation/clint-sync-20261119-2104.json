@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "clint-independent-tribute-confirmation-and-live-rules-only",
-  "phase": "pending-deployment",
+  "phase": "complete",
   "baseMain": "c76e382771fc9b7cbed57bcf2ca99a9170c0a328",
   "upstream": {
     "repository": "https://github.com/clintsun1977/guandan",
@@ -137,6 +137,72 @@
       "034",
       "029"
     ],
-    "default": "029"
-  }
+    "default": "029",
+    "hostReloadMidPayment": {
+      "preservedCommittedPaymentWithoutReplayingIt": true,
+      "physicalCards": 108,
+      "pageErrors": 0
+    },
+    "fourSeatPeerJS": {
+      "completeRounds": 2,
+      "moves": [
+        80,
+        90
+      ],
+      "allClientsEqual": true,
+      "automaticResyncs": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "physicalCards": 108,
+      "learnedHostTimeoutUsed": true,
+      "guestsAvoidedModelDownloads": true,
+      "pageErrors": 0
+    }
+  },
+  "deployment": {
+    "phase": "success",
+    "sourceCommit": "56a4e81a1a8b205e853b4ab8c256568c05b55179",
+    "version": "9a3c581a68",
+    "pagesRun": 44659583646,
+    "pagesURL": "https://github.com/stevensun1005/guandanai/actions/runs/44659583646",
+    "publicURL": "https://stevensun1005.github.io/guandanai/",
+    "publicValidation": {
+      "httpStatus": 200,
+      "menu": [
+        "clint-rule",
+        "034",
+        "029"
+      ],
+      "default": "029",
+      "successfulNeuralMovesFrom": [
+        "029",
+        "034"
+      ],
+      "chromePeerJSIndependentTributeAndEarlyReturn": true,
+      "guestRecoveryAndSortingClock": true,
+      "physicalCards": 108,
+      "collectorRequests": 0,
+      "playConfirmationAndFinishExemption": true,
+      "viewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "pageErrors": 0
+    }
+  },
+  "completedAtUTC": "2026-11-20T02:24:46+00:00",
+  "pending": []
 }
