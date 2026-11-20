@@ -268,3 +268,7 @@ Clint双栏大厅/平板方位等大更新e17f3ad→66d63b8，只有网页布局
 [Clint 贡牌与观战同步](evaluation/clint-sync-20261118-2216.json)记录 66d63b8 至 996ce57 的界面和房间适配、兼容性测试与部署。策略指纹仍为 6e57485。
 
 [029 联合策略续训](evaluation/human-qfilter-followup-20261118/README.md) 记录从 50424 续接与训练后独立起点对照。
+
+## 58132 起点约束续训
+
+[预登记与结果入口](evaluation/human-qfilter-anchor-20261119/README.md)。

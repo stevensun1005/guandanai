@@ -16,22 +16,38 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readJSON, writeJSON, sha256 } from '../../danMCai/training/continuous/lib.mjs';
 
+const FOLLOWUPS = {
+  'human-qfilter-followup-20261118': {
+    step: 50424,
+    network: '71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa',
+    checkpoint: '4cc627c702813c6d32f571207a8b6ec69f8e4bf01671fb49c0b6448d569135aa',
+    firstShard: 200000,
+    anchorWeight: 0.05,
+  },
+  'human-qfilter-anchor-20261119': {
+    step: 58132,
+    network: '1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2',
+    checkpoint: '05e6099f51f2bf74c36ee82a8757628f5ba26f5c58e56074319be9c520a8f517',
+    firstShard: 300000,
+    anchorWeight: 0.1,
+  },
+};
+
 export function validateJointProtocol(p, now = Date.now()) {
   const t = [p.startedAtUTC, p.trainingDeadlineUTC, p.deadlineUTC].map(Date.parse);
   const overnight = p.id === 'human-qfilter-overnight-20261115';
   const legacy = p.id === 'human-joint-029-20261115';
-  const followup = p.id === 'human-qfilter-followup-20261118';
+  const followup = Object.hasOwn(FOLLOWUPS, p.id) ? FOLLOWUPS[p.id] : null;
   const continuation = p.id === 'human-qfilter-continue-20261116';
   const c = p.initialConfig,
     h = c?.humanImitation;
   if (
     (!legacy && !overnight && !continuation && !followup) ||
     p.initialModelSHA256 !==
-      (followup
-        ? '71b9161b5502a81995edc26c9352a6ec02b34b82d00cdcc9417a3ee9c1e22ffa'
-        : continuation
+      (followup?.network ??
+        (continuation
           ? '9e6b98aa1ab6693247903d9d06aab34d435e96ab5e0d0535a6b603061d30bf03'
-          : '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768') ||
+          : '4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768')) ||
     !p.humanTrainingAuthorized ||
     p.webDeploymentAuthorized !== false ||
     p.restartExtendsDeadline !== false ||
@@ -57,10 +73,9 @@ export function validateJointProtocol(p, now = Date.now()) {
     followup &&
     (t[1] - t[0] !== 2 * 3600000 ||
       p.humanWarmupUTC !== p.startedAtUTC ||
-      c?.continuation?.sha256 !==
-        '4cc627c702813c6d32f571207a8b6ec69f8e4bf01671fb49c0b6448d569135aa' ||
-      c?.continuation?.shardSequenceStart !== 200000 ||
-      c?.parent?.startingStep !== 50424 ||
+      c?.continuation?.sha256 !== followup.checkpoint ||
+      c?.continuation?.shardSequenceStart !== followup.firstShard ||
+      c?.parent?.startingStep !== followup.step ||
       p.evaluationModels?.parent?.localFile !== p.initialModel ||
       p.evaluationModels?.parent?.sha256 !== p.initialModelSHA256 ||
       p.heldout?.vsParent?.length !== 500)
@@ -73,7 +88,7 @@ export function validateJointProtocol(p, now = Date.now()) {
       c?.fastActor?.sessionLimit !== 2 ||
       c?.learner?.capacity !== 500000 ||
       c?.learner?.learningRate !== 3e-6 ||
-      c?.learner?.anchorWeight !== 0.05 ||
+      c?.learner?.anchorWeight !== (followup?.anchorWeight ?? 0.05) ||
       h?.choiceWeight !== 0.1 ||
       h?.gateTopK !== 2 ||
       h?.enableAfterUTC !== p.humanWarmupUTC ||
@@ -149,6 +164,7 @@ export function evaluationPlans(p, root, final) {
       config: { stateFeatures: 513, actionFeatures: 54 },
     },
   };
+  const parentStep = p.initialConfig?.parent?.startingStep ?? '';
   const groups = ['vs029', 'vsreason', '029vsreason'];
   if (p.heldout.vsParent) groups.unshift('vsParent');
   return groups.map((name) => {
@@ -164,7 +180,7 @@ export function evaluationPlans(p, root, final) {
         id: p.id + '-' + name,
         displayName: baseline
           ? '029起点 vs旧reason（配对控制）'
-          : '最终联合模型 vs' + (parent ? '本轮起点50424' : raw ? '029' : '旧reason'),
+          : '最终联合模型 vs' + (parent ? '本轮起点' + parentStep : raw ? '029' : '旧reason'),
         purpose:
           'New final-only complete-round evaluation; no optimization, selection, expansion or deployment',
         sourceRoot: p.sourceRoot,
@@ -191,7 +207,7 @@ export function evaluationPlans(p, root, final) {
         contrasts: [],
         primaryTask: 'head-to-head',
         primaryModel: baseline ? '029' : 'joint-final',
-        primaryOpponent: parent ? 'parent50424' : raw ? '029' : 'oldreason9001',
+        primaryOpponent: parent ? 'parent' + parentStep : raw ? '029' : 'oldreason9001',
       },
     };
   });
@@ -331,6 +347,7 @@ async function main(root) {
         ],
         ['最近真人训练NLL', learner?.humanLoss?.choiceNLL ?? '—'],
         ['采样整场（仅用各单局终局分）', status?.totals?.matches || 0],
+        ['起点价值约束系数', p.initialConfig.learner.anchorWeight],
         ['目标', '终局MSE为主＋固定起点锚定＋低频小权重真人选择损失'],
       ],
     });

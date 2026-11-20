@@ -177,3 +177,49 @@ test('new continuation evaluates the final model against its exact training pare
   assert.deepEqual(parent.tasks[0].seeds, p.heldout.vsParent);
   assert.deepEqual(reason.plan.tasks[0].seeds, control.plan.tasks[0].seeds);
 });
+
+test('58132 continuation locks the stronger anchor and its exact matching Adam', () => {
+  const p = plan();
+  const network = '1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2';
+  Object.assign(p, {
+    id: 'human-qfilter-anchor-20261119',
+    initialModelSHA256: network,
+    trainingDeadlineUTC: new Date(start + 2 * 3600000).toISOString(),
+    deadlineUTC: new Date(start + 5 * 3600000).toISOString(),
+    humanWarmupUTC: p.startedAtUTC,
+    evaluationWorkers: 1,
+  });
+  Object.assign(p.initialConfig, {
+    actors: 1,
+    fastActor: { games: 16, sessionLimit: 2 },
+    parent: { startingStep: 58132 },
+    continuation: {
+      sha256: '05e6099f51f2bf74c36ee82a8757628f5ba26f5c58e56074319be9c520a8f517',
+      shardSequenceStart: 300000,
+    },
+  });
+  Object.assign(p.initialConfig.learner, {
+    capacity: 500000,
+    learningRate: 3e-6,
+    anchorWeight: 0.1,
+  });
+  Object.assign(p.initialConfig.humanImitation, {
+    choiceWeight: 0.1,
+    gateTopK: 2,
+    enableAfterUTC: p.startedAtUTC,
+    compactFeatures: true,
+  });
+  p.heldout.vsParent = Array.from({ length: 500 }, (_, i) => i + 1000);
+  p.evaluationModels.parent = { localFile: p.initialModel, sha256: network };
+  assert.doesNotThrow(() => validateJointProtocol(p, start + 1000));
+  assert.equal(
+    evaluationPlans(p, '/new', { sha256: 'final' })[0].plan.primaryOpponent,
+    'parent58132',
+  );
+  const weaker = structuredClone(p);
+  weaker.initialConfig.learner.anchorWeight = 0.05;
+  assert.throws(() => validateJointProtocol(weaker, start + 1000), /objective/);
+  const otherAdam = structuredClone(p);
+  otherAdam.initialConfig.continuation.sha256 = 'changed';
+  assert.throws(() => validateJointProtocol(otherAdam, start + 1000), /checkpoint/);
+});
