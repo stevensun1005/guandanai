@@ -3734,3 +3734,43 @@ Toronto11月19日08:00/index5146按新续训日历冻结，此后只使用同一
 ## Clint 网页对手暂停残局搜索
 
 上游 cf4f14c 暂停普通 Clint 网页出牌的残局大脑。同步仅作用于 Clint 规则 Worker 的实时决策设置。以往启用残局搜索的评测及其冻结指纹照原协议归档，新网页策略的验证为决策合法性和浏览器兼容性。本次没有棋力对局。[机器证据](evaluation/clint-sync-20261119-2104.json)。
+
+### 网页模型 model-000000678214（归档 035） · 2026-11-20T03:24:17.055Z
+
+归档完整导出 `guanzero-adp-io48/model-000000678214`，SHA-256 为 `41b0a1df4743be97e5559371d70b285fe82fc538ad89481f057030735a1636f9`。网页默认编号为 **029**；启用冠军菜单时，归档新检查点不会自动替换冠军。本批完成029冠军500场和旧9001 / 017底座 reason 200场开发评测。网页发布使用这两份报告共同对应的冻结权重，029继续担任网页默认。[发布证据](evaluation/web-model-035.json)。
+
+### 续训后20点开发评测与同权重发布：guanzero-adp-io48-678214
+
+Toronto11月19日20:00/index5147按新续训日历冻结，此后只使用同一完整ONNX SHA `41b0a1df4743be97e5559371d70b285fe82fc538ad89481f057030735a1636f9`。冠军029原网络与旧reason9001分开：reason仍用017/accept330＋原推断v1＋50秒搜索，纯网络对手为029/gate1，独立 `reason-base.onnx` 和各自的真实accept/完整SHA均核验。没有把9001改底座、把旧成绩转给029，也没有采用更新的latest。新源指纹b60766f仅用于本批reason；普通029评分沿用af2a683评测基线。
+
+| 对手              | 完整场 |  胜 |  负 |  平 | 每场得分 | 种子对簇95%区间 |
+| ----------------- | -----: | --: | --: | --: | -------: | --------------- |
+| 029原网络冠军     |    500 | 232 | 220 |  48 |    0.512 | [0.472, 0.549]  |
+| 旧9001（017底座） |    200 |  91 |  90 |  19 |    0.502 | [0.440, 0.563]  |
+
+本批对029每场得分51.2%，对旧reason每场得分50.25%，胜计1分、平计半分。两组95%区间分别为47.2%–54.9%和44.0%–56.25%，均覆盖50%。
+
+冠军种子4214700000–4214700249，reason为前100个至4214700099；对内交换阵营，胜1/平0.5/负0每场得分与置信区间按独立种子对簇重算。与旧017对手的历史胜率不直接比较，也不把本批开发结果称为独立棋力验收。原始[冻结计划](evaluation/guanzero-678214-development-v4-plan.json)、[029完整报告](evaluation/guanzero-678214-development-v4-champion.json)、[旧reason完整报告](evaluation/guanzero-678214-development-v4-reason.json)保留原始字节和逐场结果。实际reason统计（ms为毫秒，CPU墙钟受全机负载影响，不是平板性能测试）：
+
+```json
+{
+  "decisions": 88357,
+  "forced": 26912,
+  "baseOnly": 44950,
+  "midgame": 11248,
+  "endgame": 5247,
+  "minWorldsFallback": 9,
+  "budgetFallback": 6,
+  "knownCardsFallback": 0,
+  "changedFromChampion": 2972,
+  "inferences": 4908593,
+  "searchMs": 7892097.870499976,
+  "solverDeadlineCapped": 15,
+  "maxSearchMs": 50004.657,
+  "searchesOver3s": 281,
+  "searchesOver10s": 91,
+  "searchesOver30s": 21
+}
+```
+
+发布归档035无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差0.0000013113021850585938、动作不一致0；Node498通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。原训练af2a683配置/窗口SHA未变，仍到周五11月20日12:00美东。实际部署另见[发布回执](evaluation/web-model-035.json)。
