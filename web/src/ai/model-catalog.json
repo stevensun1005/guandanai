@@ -714,6 +714,25 @@
         "step": 712420,
         "registeredAt": "2026-11-20T15:38:47.108Z"
       }
+    },
+    {
+      "id": "037",
+      "file": "bot-037.onnx",
+      "sha256": "7f0b06f38002f31bd927ffc3958db930021f1d2a7ea3fd99434ed31b597d2791",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-037/bot-037.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-io48",
+        "version": "model-000000724901",
+        "status": "experimental-not-heldout-accepted",
+        "step": 724901,
+        "registeredAt": "2026-11-20T18:44:22.579Z"
+      }
     }
   ],
   "selection": {
