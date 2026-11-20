@@ -235,7 +235,7 @@ window.Worker=class extends BaseWorker {
                 if returning.is_visible() and returning.is_enabled():
                     page.evaluate("""()=>{
                       let cards;
-                      if(G.phase==='tribPick')cards=tribOptions(0);
+                      if(owesTribute(0))cards=tribOptions(0);
                       else {cards=G.hands[0].filter(card=>card.r<=10&&!isWild(card,G.L));
                         if(!cards.length){const pool=G.hands[0].filter(card=>!isWild(card,G.L));const low=Math.min(...pool.map(card=>val(card,G.L)));cards=pool.filter(card=>val(card,G.L)===low);}}
                       if(cards.length){sel=new Set([cards[0].id]);renderHand();}
@@ -263,6 +263,9 @@ window.Worker=class extends BaseWorker {
                         page.locator("#hintBtn").click()
                     if page.locator("#playBtn").is_enabled():
                         page.locator("#playBtn").click()
+                        confirm = page.locator("#cfmGo")
+                        if confirm.is_visible():
+                            confirm.click()
                     elif page.locator("#passBtn").is_enabled():
                         page.locator("#passBtn").click()
         if time.monotonic() - last_progress > 30:

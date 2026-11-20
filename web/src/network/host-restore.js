@@ -99,8 +99,12 @@ function resume(saved) {
       game.hands[(game.dealIdx + n) % 4].push(game.deck.pop());
     finishDeal();
   } else if (game.phase === 'tribute') void runGives();
-  else if (game.phase === 'tribPick') tribWait();
-  else if (game.phase === 'return') retWait();
+  else if (game.phase === 'tribPick') {
+    // A saved payment has already moved the physical card. Skip its old animation after reload.
+    for (const entry of game.returns) entry.ready = true;
+    game.clock = clock;
+    tribWait();
+  } else if (game.phase === 'return') retWait();
   else if (game.phase === 'prep') game.clock = clock;
   else if (game.phase === 'play') {
     if (game.turn === -1) {

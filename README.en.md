@@ -247,3 +247,7 @@ The continued run actually started Nov16 at23:03Toronto. New GPU updates, matchi
 GuanZero resumed under the Nov17 owner authorization through Nov20 12:00 Toronto. The [GuanZero guide](ai/guanzero/README.md) records the fixed deadline and separately frozen029/legacy-reason evaluation identities; the website champion default is unchanged.
 
 The Nov17 continuation and all3000evaluation rounds are complete. Memory pauses were eliminated, but neither goal passed: final-vs02950.6%, final-vslegacyreason49.9%, original029-vssamelegacyreason53.3%; paired terminal gain−.114with95%CI[−.24634,.01834]. Retrospective human agreement improved by only1/700decision. Final weights/matchedAdam are preserved locally; no promotion or web deployment. [Full results](ai/research/evaluation/human-qfilter-continue-20261116/README.md).
+
+## Tribute and play confirmation
+
+In double tribute, each payer can confirm independently. A player can return a tribute card as soon as it arrives, and the sorting clock starts after both tribute cards arrive. Leading a bomb, straight flush, or four jokers requires confirmation beneath the preview if the player will still hold cards. See the [playing guide](web/docs/PLAYING.md#贡牌与出牌确认).

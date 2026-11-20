@@ -74,7 +74,10 @@ function applyEvt(e) {
       doCut();
       return true;
     case 'return': {
-      if (runtime.game.phase !== 'return' && runtime.game.phase !== 'prep') return false;
+      if (!['return', 'prep', 'tribPick'].includes(runtime.game.phase)) return false;
+      // A guest may still be watching the payment that the host has already received.
+      if (runtime.network.mode === 'guest' && runtime.game.phase === 'tribPick' && !owesReturn(p))
+        return false;
       if (!owesReturn(p) || !runtime.game.hands[p].some((c) => c.id === e.id)) return true;
       if (
         !isReturnCard(
@@ -89,7 +92,7 @@ function applyEvt(e) {
         runtime.selection = new Set();
         runtime.network.pending = false;
       }
-      if (runtime.game.phase === 'prep') {
+      if (runtime.game.phase !== 'return') {
         returnNow(p, e.id);
         return true;
       }

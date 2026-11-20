@@ -322,3 +322,7 @@ GuanZero v4回归要求冠军500/reason200两份报告、250/100配对子范围�
 隔夜过滤模仿新增测试：`human_joint_test.py`检查预热零模仿梯度、拒绝组零梯度、固定分母及真实接受/拒绝计数恢复；`human-joint.test.mjs`检查11月16日09:00硬截止/03:00启用不能延长或替换。真实GPU预检按已登记配置验证过滤联合损失和12组Adam下一步恢复，不是棋力证据。
 
 新真人/终局续训的紧凑int8特征必须与float32常驻方式损失/梯度一致；匹配checkpoint/累计计数/独立分片命名/07:00Toronto不可延后及单工作器顺序评测绑定检查见`human_joint_test.py`与`human-joint.test.mjs`。正式GPU恢复与棋力证据分开记录。
+
+## 独立双贡与确认回归
+
+双贡烟测文件 web/tests/tribute_network_smoke.py 使用三个 Chrome 上下文和真实 PeerJS 验证先送、先还、另一家仍在选牌、客人刷新、同一组 108 张实体牌及理牌计时。贡牌烟测文件 web/tests/tribute_smoke.py 覆盖桌面、手机横竖屏的确认、取消和末手例外。两者均传入预览根 URL 并使用合成局面。

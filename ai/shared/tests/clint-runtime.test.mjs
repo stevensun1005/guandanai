@@ -2,7 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { runtime } from '../../../web/src/app/runtime.js';
 import { analyze, beats } from '../../../web/src/core/combinations.js';
-import { ruleObservation, decideClintRule } from '../../../web/src/rule-bot/runtime.mjs';
+import {
+  ruleObservation,
+  decideClintRule,
+  RULES_ONLY,
+  clintBrainSettings,
+} from '../../../web/src/rule-bot/runtime.mjs';
 import { createRound, advanceRound } from '../simulation/simulation.mjs';
 
 test('Clint Worker observations read only own physical hand and public counts', () => {
@@ -57,5 +62,18 @@ test('Clint Worker route completes four full rounds with legal physical actions'
       }
     }
     assert.ok(finished);
+  }
+});
+
+test('deployed Clint keeps the rules-only decision while upstream pauses the brain', () => {
+  const game = createRound(9201011);
+  game.hands = game.hands.map((hand) => hand.slice(0, 5));
+  Object.assign(game, { turn: 0, phase: 'play', tok: 9201011 });
+  const obs = ruleObservation(game, 0);
+  const expected = decideClintRule(obs, RULES_ONLY);
+  assert.equal(clintBrainSettings(0), RULES_ONLY);
+  for (const budget of [undefined, 1, 30000]) {
+    assert.equal(clintBrainSettings(budget).on, false);
+    assert.deepEqual(decideClintRule(obs, clintBrainSettings(budget)), expected);
   }
 });

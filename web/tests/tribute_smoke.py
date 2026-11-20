@@ -45,13 +45,15 @@ with sync_playwright() as p:
             assert page.evaluate("G.returns.length") == 1
         page.evaluate("id=>{sel=new Set([id]);renderHand()}", legal[0])
         assert "可以还贡" in page.locator("#selectionStatus").inner_text()
-        expect(page.locator("#tribBox")).to_be_hidden()
+        expect(page.locator("#tribBox")).to_be_visible()
         page.locator("#returnBtn").click()
+        expect(page.locator("#tribBox")).to_be_hidden()
         expect(page.locator("#cfmGo")).to_be_visible()
         expect(page.locator("#returnBtn")).to_be_disabled()
         assert page.evaluate("G.returns.length") == 1
         page.locator("#cfmNo").click()
         expect(page.locator("#cfmGo")).to_be_hidden()
+        expect(page.locator("#tribBox")).to_be_visible()
         page.locator("#returnBtn").click()
         page.locator("#cfmGo").click()
         assert page.evaluate("G.hands.map(hand=>hand.length)") == [27, 27, 27, 27]
@@ -78,8 +80,8 @@ with sync_playwright() as p:
           const deck=makeDeck(), own=deck.filter(card=>card.r>=11&&card.r<=14).slice(0,27);
           const held=new Set(own.map(card=>card.id)), rest=deck.filter(card=>!held.has(card.id));
           G.hands=[own,rest.slice(0,27),rest.slice(27,54),rest.slice(54)];
-          G.round=2;G.L=2;G.prevOut=[1,2,3,0];G.tribGivers=[0];G.tribPick={};G.gives=[];G.returns=[];
-          tribWait();
+          G.round=2;G.L=2;G.prevOut=[1,2,3,0];G.gives=[];G.returns=[];
+          doTribute();
           const choice=tribOptions(0)[0].id;
           sel=new Set([choice]);renderHand();
           return choice;
@@ -94,6 +96,37 @@ with sync_playwright() as p:
         page.locator("#cfmGo").click()
         assert page.evaluate("G.tribPick[0]") == selected
         assert page.evaluate("new Set(G.hands.flat().map(card=>card.id)).size") == 108
+
+    for width, height in payment_viewports:
+        page.set_viewport_size({"width": width, "height": height})
+        for last_hand, option, shape, needs_confirmation in [
+            (False, False, "bomb", True), (False, False, "straight-flush", True),
+            (True, False, "bomb", False), (False, True, "single", True),
+        ]:
+            page.evaluate("""([last,option,shape])=>{
+              resetGame();const deck=makeDeck();
+              const cards=shape==='bomb' ? deck.filter(c=>c.r===3).slice(0,4)
+                : shape==='straight-flush' ? [3,4,5,6,7].map(r=>deck.find(c=>c.r===r&&c.s==='S'))
+                : [deck.find(c=>c.r===3)];
+              G.hands=[last ? cards : [...cards,deck.find(c=>c.r===14)],deck.slice(40,52),
+                       deck.slice(55,66),deck.slice(68,76)];
+              Object.assign(G,{phase:'play',turn:0,leader:0,round:2,L:2,log:[],seen:[],rest:[],pw:[]});
+              confirmPlay=option;cfm=null;
+              sel=new Set(cards.map(card=>card.id));render();
+            }""", [last_hand, option, shape])
+            page.locator("#playBtn").click()
+            if needs_confirmation:
+                expect(page.locator("#cfmGo")).to_have_text("确认出牌")
+                expect(page.locator("#playBtn")).to_be_disabled()
+                page.evaluate("onPlay();onPlay()")
+                assert page.evaluate("G.log.length") == 0
+                expect(page.locator("#cfmGo")).to_be_in_viewport()
+                page.locator("#cfmNo").click()
+                expect(page.locator("#playBtn")).to_be_enabled()
+                page.locator("#playBtn").click()
+                page.locator("#cfmGo").click()
+            assert page.evaluate("G.log.length") == 1
+            expect(page.locator("#cfmGo")).to_be_hidden()
 
     for count in (3, 4):
         page.evaluate("""count=>{
@@ -114,6 +147,8 @@ with sync_playwright() as p:
         "paymentPreviewViewports": payment_viewports,
         "tributeClockMs": 60000,
         "autoPassThreeButNotFour": True,
+        "leadBombAndStraightFlushConfirmation": True,
+        "lastHandExemptsMandatoryConfirmation": True,
         "pageErrors": errors,
     }))
     browser.close()

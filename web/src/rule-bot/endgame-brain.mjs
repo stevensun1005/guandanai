@@ -322,7 +322,7 @@ function esValue(sv, T) {
 /** Upstream brainOn: own turn in the play phase and every hand at most `max` cards. */
 export function brainOn(p, settings = BRAIN) {
   const g = G();
-  if (!g || g.phase !== 'play' || g.turn !== p) return false;
+  if (settings.on === false || !g || g.phase !== 'play' || g.turn !== p) return false;
   for (let i = 0; i < 4; i++) if (g.hands[i].length > settings.max) return false;
   return g.hands[p].length > 0;
 }

@@ -82,9 +82,16 @@ export function doTribute() {
     });
     return;
   }
-  runtime.game.tribGivers = givers;
-  runtime.game.tribPick = {};
-  runtime.game.clock = null;
+  const game = runtime.game;
+  const rank = (p) => val(tribOptions(p)[0], L);
+  const ordered = givers.slice().sort((a, b) => rank(b) - rank(a));
+  const same = dbl && rank(ordered[0]) === rank(ordered[1]);
+  game.tribGivers = givers;
+  game.tributeRoutes = ordered.map((from, i) => ({ from, to: same ? (from + 3) % 4 : o[i] }));
+  game.leader = same ? (o[0] + 1) % 4 : ordered[0];
+  game.tribPick = {};
+  game.retPick = {};
+  game.clock = null;
   if (givers.includes(0)) runtime.selection = new Set();
   tribWait();
 }
@@ -94,21 +101,31 @@ export function tribOptions(p) {
   return tributeOptions(runtime.game.hands[p], runtime.game.L);
 }
 
+export function owesTribute(p) {
+  const game = runtime.game;
+  return game.phase === 'tribPick' && game.tribGivers.includes(p) && game.tribPick[p] == null;
+}
+
 export function tribWait() {
-  for (const g of runtime.game.tribGivers)
+  const game = runtime.game;
+  game.phase = 'tribPick';
+  for (const g of game.tribGivers)
     if (runtime.game.tribPick[g] == null && (!isHumanSeat(g) || !tribChoice(g))) {
       const id = isHumanSeat(g)
         ? tributeCard(runtime.game.hands[g], runtime.game.L).id
         : botPick('tribute', g);
       if (id != null) runtime.game.tribPick[g] = id;
     }
-  const left = runtime.game.tribGivers.filter((g) => runtime.game.tribPick[g] == null);
+  for (const route of game.tributeRoutes)
+    if (game.tribPick[route.from] != null && !game.trib.some((t) => t.g === route.from))
+      payTribute(route);
+  const left = game.tribGivers.filter((g) => game.tribPick[g] == null);
   if (!left.length) {
-    runtime.game.clock = null;
-    payTribute();
+    game.clock = null;
+    finishTribute(game);
+    render();
     return;
   }
-  runtime.game.phase = 'tribPick';
   if (runtime.game.clock && runtime.game.clock.who === 'tribute') runtime.game.clock.seats = left;
   else runtime.game.clock = { who: 'tribute', seats: left, left: TRIB_MS, total: TRIB_MS };
   if (left.includes(0) && !runtime.selection.size) {
@@ -119,36 +136,33 @@ export function tribWait() {
   render();
 }
 
-function payTribute() {
-  const o = runtime.game.prevOut,
-    L = runtime.game.L,
-    dbl = o[1] % 2 === o[0] % 2;
-  let tribs = runtime.game.tribGivers.map((g) => ({
-    g,
-    card: runtime.game.hands[g].find((c) => c.id === runtime.game.tribPick[g]),
-  }));
-  if (dbl) tribs.sort((a, b) => val(b.card, L) - val(a.card, L));
-  // Equal double tribute follows physical seat order: pay the previous seat, receive its return.
-  const same = dbl && val(tribs[0].card, L) === val(tribs[1].card, L);
-  const recv = same ? tribs.map((t) => (t.g + 3) % 4) : dbl ? [o[0], o[1]] : [o[0]];
-  runtime.game.gives = tribs.map((t, i) => ({
-    from: t.g,
-    to: recv[i],
-    id: t.card.id,
-    label: '进贡',
-  }));
-  runtime.game.trib = [];
-  runtime.game.leader = same ? (o[0] + 1) % 4 : tribs[0].g;
-  runtime.game.returns = tribs.map((t, i) => ({ from: recv[i], to: t.g }));
-  runtime.game.notice = '';
-  runtime.game.afterTrib = true;
-  runGives();
+function payTribute({ from, to }) {
+  const game = runtime.game;
+  const obligation = { from: to, to: from, ready: false };
+  game.returns.push(obligation);
+  game.notice = '';
+  void handOver({ from, to, id: game.tribPick[from], label: '进贡' }, game.tok).then((ok) => {
+    if (!ok) return;
+    obligation.ready = true;
+    finishTribute(game);
+    render();
+  });
+}
+
+function finishTribute(game) {
+  if (
+    game.phase === 'tribPick' &&
+    game.trib.length === game.tribGivers.length &&
+    game.returns.every((entry) => entry.ready !== false)
+  )
+    startPrep(game.leader);
 }
 
 // one card changes hands: it leaves the giver's hand as it sets off and joins the receiver's on arrival;
 // false if a new round started meanwhile
 async function handOver(x, tok) {
-  const card = runtime.game.hands[x.from].find((c) => c.id === x.id);
+  const game = runtime.game;
+  const card = game.hands[x.from].find((c) => c.id === x.id);
   if (!card) return true;
   let start = null;
   if (x.from === 0) {
@@ -170,7 +184,7 @@ async function handOver(x, tok) {
   runtime.selection.delete(card.id);
   render();
   await giveAnim(x.from, x.to, card, x.label, start);
-  if (runtime.game.tok !== tok) return false;
+  if (runtime.game !== game || game.tok !== tok) return false;
   if (x.to === 0 && runtime.game.hands[0].some((held) => held.id === card.id)) {
     runtime.game.fresh.push(card.id);
     arrivals.set(card.id, performance.now());
@@ -248,7 +262,7 @@ export function retWait() {
   render();
 }
 
-// a return made during the sorting minute goes across at once, while the others are still sorting
+// A return can travel while others are choosing their tribute or sorting their hands.
 export function returnNow(p, id) {
   const x = runtime.game.returns.find((r) => r.from === p);
   if (!x) return;
@@ -264,7 +278,7 @@ export function initialize() {
   // largest card comes in several suits gets 60 seconds to choose, after which one goes for them
   tribChoice = (g) => new Set(tribOptions(g).map((c) => c.s)).size > 1;
   owesReturn = (p) =>
-    (runtime.game.phase === 'return' || runtime.game.phase === 'prep') &&
-    (runtime.game.returns || []).some((x) => x.from === p) &&
+    ['return', 'prep', 'tribPick'].includes(runtime.game.phase) &&
+    (runtime.game.returns || []).some((x) => x.from === p && x.ready !== false) &&
     (runtime.game.retPick || {})[p] == null;
 }

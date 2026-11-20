@@ -49,6 +49,9 @@ with sync_playwright() as p:
             page.locator("#hintBtn").click()
             if page.locator("#playBtn").is_enabled():
                 page.locator("#playBtn").click()
+                confirm = page.locator("#cfmGo")
+                if confirm.is_visible():
+                    confirm.click()
             elif page.locator("#passBtn").is_enabled():
                 page.locator("#passBtn").click()
         page.wait_for_timeout(100)

@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "kind": "clint-independent-tribute-confirmation-and-live-rules-only",
+  "phase": "pending-deployment",
+  "baseMain": "c76e382771fc9b7cbed57bcf2ca99a9170c0a328",
+  "upstream": {
+    "repository": "https://github.com/clintsun1977/guandan",
+    "fromLastFullSuccess": "996ce578b989f1fe5546224fb6f785b49d06b707",
+    "checkedSHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+    "paths": [
+      "README.md",
+      "bot/clint/endgame-brain.js",
+      "index.html",
+      "web/src/game/events.js",
+      "web/src/game/tribute.js",
+      "web/src/input/actions.js",
+      "web/src/network/resume.js",
+      "web/src/ui/render.js",
+      "web/src/ui/tribute-info.js"
+    ],
+    "patchSHA256": "b96883172f14a87e008aeff5c381d1d01a7a730625893d0761d86555a7d3303f",
+    "commits": [
+      {
+        "sha": "f8aaa18958a040d68eaf1c9068870750448f6933",
+        "scope": "Independent double tribute, early return, separate play confirmation and lead-bomb confirmation."
+      },
+      {
+        "sha": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+        "scope": "Immediate tribute summary, local hide during return confirmation, pause the live Clint endgame brain."
+      }
+    ]
+  },
+  "applied": [
+    "Rank/suit-aware tribute recipients and leader are determined before either payment. Each confirmed card moves independently; the receiving player may return it after arrival. Sorting starts once all offers arrive.",
+    "Show already-sent offers to the table and temporarily hide the local box during a return confirmation. Keep one legal, dedicated confirm/cancel action under the preview and require it for non-finishing bomb, straight flush or four-joker leads.",
+    "Rotate tribute routes for opaque seat recovery. A guest waits for in-flight payment to become stable; restoring the host's saved table skips only already committed payment animations.",
+    "Ordinary rules-v2 Worker seats select rules only. Retain solver and existing explicit brain-enabled evaluation parameters in their separate paths."
+  ],
+  "notApplied": [
+    {
+      "path": "index.html",
+      "reason": "Generated mirror of upstream modules and version metadata. Build this site's own HTML with its established room/version protocol."
+    },
+    {
+      "path": "README.md upstream model catalogue",
+      "reason": "Document only the Clint variant here. The current site model catalogue is managed separately."
+    },
+    {
+      "path": "web/src/game/tribute.js upstream bot early-return scheduling",
+      "reason": "Human recipients can confirm immediately. Computer returns keep this site's established sorting-time scheduler and specialist observation to avoid altering neural scoring inputs."
+    }
+  ],
+  "strategy": {
+    "previousUpstreamStrategySHA": "6e574851b73f167c831ba395c5a74aa6f1fe7809",
+    "upstreamStrategySHA": "cf4f14c39db6f4b3d8461a8be5277bd197198ad9",
+    "browserRulesOnly": true,
+    "explicitBrainEvaluationsRetained": true,
+    "sourceSHA256": {
+      "web/src/rule-bot/runtime.mjs": "01cfd65f358e651d6f48dca7773d1d64185e4300df50c2df6792c59eac6f864f",
+      "web/src/rule-bot/endgame-brain.mjs": "ec82ecb07a7d02027999d7ce8c132a902f44635620c8fad529253dfb55ccf718"
+    },
+    "hashConvention": "UTF-8 source bytes with CRLF normalized to LF",
+    "strengthGames": 0,
+    "historicalScoresReusedForThisVersion": false
+  },
+  "localValidation": {
+    "version": "9a3c581a68",
+    "node": {
+      "passed": 498,
+      "skipped": 36,
+      "failed": 0
+    },
+    "python": {
+      "sharedPassed": 3,
+      "sharedSkipped": 1,
+      "researchPassed": 43
+    },
+    "format": true,
+    "build": true,
+    "tributePreview": {
+      "viewports": [
+        [
+          1440,
+          1000
+        ],
+        [
+          844,
+          390
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "returnCases": 2,
+      "tributeClockMs": 60000,
+      "leadBombAndStraightFlushConfirmation": true,
+      "finishException": true,
+      "pageErrors": 0
+    },
+    "tributePeerJS": {
+      "contexts": 3,
+      "earlierReturnWhileSecondPaymentPending": true,
+      "returnPreviewHidesOnlyLocalSummary": true,
+      "guestRefreshedWhileSecondPaymentPending": true,
+      "sortingClockWaitedForBoth": true,
+      "physicalCards": 108,
+      "collectorRequests": 0
+    },
+    "roomRestore": {
+      "refreshAndClosedTab": true,
+      "samePrivateHandsAndGuestSeat": true,
+      "coachExposurePreserved": true,
+      "uploads": 0,
+      "pageErrors": 0
+    },
+    "spectatorSwapAndRecovery": true,
+    "clintIndependentSolver": {
+      "actualWorker": true,
+      "viewports": [
+        1440,
+        900,
+        844,
+        390
+      ],
+      "legalReplayMoves": 4,
+      "uploads": 0,
+      "neuralDownloads": 0,
+      "pageErrors": 0
+    },
+    "neuralBrowserMoves": [
+      "029",
+      "034"
+    ],
+    "menu": [
+      "clint-rule",
+      "034",
+      "029"
+    ],
+    "default": "029"
+  }
+}

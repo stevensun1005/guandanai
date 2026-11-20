@@ -36,6 +36,7 @@ export function rotateSnapshot(source, offset) {
       );
   for (const [field, keys] of [
     ['returns', ['from', 'to']],
+    ['tributeRoutes', ['from', 'to']],
     ['gives', ['from', 'to']],
     ['trib', ['g', 'r']],
     ['log', ['p']],
@@ -95,5 +96,6 @@ export function canResume(game) {
   if (!game || game.busy || game.gives?.length) return false;
   if (game.phase === 'play') return game.turn >= 0;
   if (game.phase === 'roundEnd' || game.phase === 'over') return game.reveal === 4;
-  return ['prep', 'return', 'tribPick'].includes(game.phase);
+  if (game.phase === 'tribPick') return !game.returns?.some((entry) => entry.ready === false);
+  return ['prep', 'return'].includes(game.phase);
 }

@@ -38,20 +38,18 @@ export function ruleObservation(game, player) {
  * Upstream allows 30 s (BRAIN.ms) per brain decision, and so does the page (owner rule 2026-11-09,
  * web/src/ai/turn-timing.mjs): the controller sends `brainMs`, the time left to the turn's 50 s
  * reasoning mark capped at 30 s, the rule-worker request waits until 52 s, and an overrun or a failed
- * worker plays the rules-only move. Not sticky: every move asks for the brain again.
+ * worker plays the rules-only move. This budget applies when the brain is enabled.
  */
+// Explicit brain-enabled evaluation protocols keep their historical settings.
 export const WEB_BRAIN = Object.freeze({ ms: CLINT_BRAIN_MS });
-/** No hand is ever above -1 cards, so brainOn is false: the Clint rules alone (practice generation). */
 export const RULES_ONLY = Object.freeze({ max: -1 });
+// Upstream cf4f14c pauses search in live Clint play.
+const LIVE_CLINT = Object.freeze({ ...WEB_BRAIN, on: false });
 
-/**
- * Brain settings for a request with `brainMs` left (undefined: the full WEB_BRAIN). Less than one
- * millisecond left plays the rules only.
- */
 export function clintBrainSettings(brainMs) {
-  if (brainMs === undefined || brainMs === null) return WEB_BRAIN;
+  if (brainMs === undefined || brainMs === null) return LIVE_CLINT;
   if (!(brainMs >= 1)) return RULES_ONLY;
-  return Object.freeze({ ms: Math.min(CLINT_BRAIN_MS, brainMs) });
+  return Object.freeze({ ...LIVE_CLINT, ms: Math.min(CLINT_BRAIN_MS, brainMs) });
 }
 
 let initialized = false;

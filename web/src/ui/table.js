@@ -6,12 +6,12 @@ import { levelDisplayLabel } from './level-display.mjs';
 import { analyze, beats } from '../core/combinations.js';
 import { showCount } from '../effects/dealing.js';
 import { isHumanSeat } from '../game/session.js';
-import { owesReturn, tribOptions } from '../game/tribute.js';
+import { owesReturn, owesTribute, tribOptions } from '../game/tribute.js';
 import { active } from '../game/turns.js';
 import { isPhone, placeActionBtns, sideBtns } from '../hand/layout.js';
 import { renderHand } from '../hand/view.js';
 import {
-  selKey,
+  playConfirmKey,
   selectedCards,
   syncCfmShow,
   syncMini,
@@ -182,10 +182,7 @@ export function renderControls() {
     runtime.game.turn === -1 &&
     runtime.game.nextLeader === 0 &&
     runtime.game.hands[0].length > 0;
-  const pay =
-    runtime.game.phase === 'tribPick' &&
-    runtime.game.tribGivers.includes(0) &&
-    runtime.game.tribPick[0] == null;
+  const pay = owesTribute(0);
   const ret = owesReturn(0) || pay;
   $('#playBtn').hidden = ret;
   $('#passBtn').hidden = ret;
@@ -221,13 +218,13 @@ export function renderControls() {
   if (
     runtime.confirmation &&
     !tributeConfirmation &&
-    (!playable || runtime.confirmation !== selKey())
+    (!playable || runtime.confirmation !== playConfirmKey())
   )
     runtime.confirmation = null;
   $('#returnBtn').disabled = tributeConfirmation;
-  $('#playBtn').textContent = runtime.confirmation ? '确认' : '出牌';
-  $('#playBtn').classList.toggle('cfm', !!runtime.confirmation);
+  if (runtime.confirmation && my) can.playBtn = false;
   syncCfmShow();
+  syncTribBox();
   for (const id in can) {
     const b = $('#' + id);
     b.disabled = !can[id];
@@ -292,14 +289,14 @@ function renderMsg() {
   m.classList.remove('err');
   let t = '';
   if (runtime.game.phase === 'return') {
-    t = owesReturn(0) ? '' : tribHtml();
+    t = returningConfirmation() ? '' : tribHtml();
     const wait = runtime.game.returns.filter(
       (x) => x.from !== 0 && runtime.game.retPick[x.from] == null,
     );
     if (wait.length) t += `<div>等待${wait.map((x) => runtime.names[x.from]).join('、')}还贡</div>`;
   } else if (runtime.game.phase === 'tribPick') {
     const opts = [...new Map(tribOptions(0).map((c) => [cardText(c), c])).values()];
-    if (runtime.game.tribGivers.includes(0) && runtime.game.tribPick[0] == null)
+    if (owesTribute(0))
       t = `<div class="trib">进贡最大的牌：${opts.map(cardTag).join(' ')}${opts.length > 1 ? '，选一张' : ''}</div>`;
     const wait = runtime.game.tribGivers.filter((g) => g !== 0 && runtime.game.tribPick[g] == null);
     if (wait.length) t += `<div>等待${wait.map((g) => runtime.names[g]).join('、')}进贡</div>`;
@@ -350,6 +347,10 @@ export function kangHtml(short) {
 
 // who paid whom (or whose big jokers refused it), in a box in the middle of the table, just under the sorting sign:
 // while the tribute is given and the hands are sorted, and for the three seconds before the first play
+function returningConfirmation() {
+  return owesReturn(0) && runtime.confirmation === tributeConfirmKey();
+}
+
 export function syncTribBox() {
   let b = $('#tribBox');
   if (!b) {
@@ -359,11 +360,10 @@ export function syncTribBox() {
   }
   const on =
     !!runtime.game &&
-    (runtime.game.phase === 'tribute' ||
-      runtime.game.phase === 'prep' ||
+    (['tribute', 'tribPick', 'prep'].includes(runtime.game.phase) ||
       (runtime.game.phase === 'play' && runtime.game.tribHold)) &&
     ((runtime.game.trib && runtime.game.trib.length) || !!runtime.game.kang) &&
-    !(runtime.game.returns || []).some((x) => x.from === 0 && runtime.game.retPick?.[0] == null);
+    !returningConfirmation();
   b.hidden = !on;
   if (!on) return;
   const html = tribHtml() + kangHtml();

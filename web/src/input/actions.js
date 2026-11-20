@@ -2,10 +2,10 @@ import { runtime } from '../app/runtime.js';
 import { TYPE_NAME } from '../core/cards.js';
 import { isReturnCard } from '../core/validation.js';
 import { returnInstruction } from '../core/tribute.js';
-import { analyze, beats, strength } from '../core/combinations.js';
+import { analyze, beats, isBomb, strength } from '../core/combinations.js';
 import { act, playEvt } from '../game/events.js';
 import { toAbs } from '../game/session.js';
-import { owesReturn, tribOptions } from '../game/tribute.js';
+import { owesReturn, owesTribute, tribOptions } from '../game/tribute.js';
 import { isPhone } from '../hand/layout.js';
 import { renderHand } from '../hand/view.js';
 import { $, cardHTML, displayOrder } from '../ui/cards.js';
@@ -19,7 +19,7 @@ export function selectedCards() {
   return runtime.game.hands[0].filter((c) => runtime.selection.has(c.id));
 }
 
-export function onPlay() {
+export function onPlay(confirmed = false) {
   // A selection may be prepared during the sweep, but submission waits for the real turn.
   if (runtime.game.phase === 'play' && runtime.game.turn === -1 && runtime.game.nextLeader === 0) {
     setMsg('这一轮的牌还在收，收完再出', true);
@@ -47,7 +47,13 @@ export function onPlay() {
     return;
   }
   if (waitingHost()) return;
-  if (askConfirm()) return;
+  const key = playConfirmKey();
+  const leadBomb = !cur && isBomb(ok[0]) && cards.length < runtime.game.hands[0].length;
+  if (
+    (confirmed === true || runtime.confirmPlay || leadBomb) &&
+    !confirmSelection(key, confirmed === true)
+  )
+    return;
   act(playEvt(0, { ...ok[0], cards }));
 }
 
@@ -70,17 +76,27 @@ export function syncMini() {
   }
 }
 
-function askConfirm() {
-  if (!runtime.confirmPlay || runtime.confirmation === selKey()) return false;
-  runtime.confirmation = selKey();
-  renderControls();
-  return true;
+function confirmSelection(key, confirmed) {
+  if (confirmed) {
+    if (runtime.confirmation !== key) return false;
+    runtime.confirmation = null;
+    renderControls();
+    return true;
+  }
+  if (runtime.confirmation !== key) {
+    runtime.confirmation = key;
+    renderControls();
+    $('#cfmNo')?.focus();
+  }
+  return false;
 }
 
 // the cards waiting for 确认, in the order the play reads, 1.8 times the size of the hand's cards and side by side in the
 // middle of the table; a long play keeps every card's corner in view by overlapping, and shrinks only if it must
 export const tributeConfirmKey = () =>
-  `tribute:${runtime.game.tok}:${runtime.game.phase}:${selKey()}`;
+  'tribute:' + runtime.game.tok + ':' + (owesTribute(0) ? 'pay:' : 'return:') + selKey();
+export const playConfirmKey = () =>
+  'play:' + runtime.game.tok + ':' + runtime.game.log.length + ':' + selKey();
 
 export function syncCfmShow() {
   let box = $('#cfmShow');
@@ -117,20 +133,18 @@ export function syncCfmShow() {
   box.style.left = t.left + t.width / 2 + 'px';
   box.style.top = t.top + t.height / 2 + 'px';
   box.hidden = false;
-  if (tribute) {
-    const actions = document.createElement('div');
-    actions.id = 'cfmAct';
-    actions.innerHTML =
-      '<button type="button" class="btn primary" id="cfmGo"></button><button type="button" class="btn" id="cfmNo">取消</button>';
-    box.append(actions);
-    $('#cfmGo').textContent = runtime.game.phase === 'tribPick' ? '确认进贡' : '确认还贡';
-    $('#cfmGo').onclick = () => submitTribute(true);
-    $('#cfmNo').onclick = () => {
-      runtime.confirmation = null;
-      renderControls();
-      $('#returnBtn').focus();
-    };
-  }
+  const actions = document.createElement('div');
+  actions.id = 'cfmAct';
+  actions.innerHTML =
+    '<button type="button" class="btn primary" id="cfmGo"></button><button type="button" class="btn" id="cfmNo">取消</button>';
+  box.append(actions);
+  $('#cfmGo').textContent = tribute ? (owesTribute(0) ? '确认进贡' : '确认还贡') : '确认出牌';
+  $('#cfmGo').onclick = () => (tribute ? submitTribute(true) : onPlay(true));
+  $('#cfmNo').onclick = () => {
+    runtime.confirmation = null;
+    renderControls();
+    $(tribute ? '#returnBtn' : '#playBtn').focus();
+  };
 }
 
 export function onPass() {
@@ -163,10 +177,9 @@ export function onReturn() {
 
 function submitTribute(confirmed) {
   if (waitingHost()) return;
-  const pay = runtime.game.phase === 'tribPick';
+  const pay = owesTribute(0);
   const cards = selectedCards();
   if (pay) {
-    if (!runtime.game.tribGivers.includes(0) || runtime.game.tribPick[0] != null) return;
     const ok = tribOptions(0);
     if (cards.length !== 1 || !ok.includes(cards[0])) {
       setMsg('要进贡手里最大的一张牌（百搭除外）', true);
@@ -179,18 +192,7 @@ function submitTribute(confirmed) {
       return;
     }
   }
-  const key = tributeConfirmKey();
-  if (!confirmed) {
-    if (runtime.confirmation !== key) {
-      runtime.confirmation = key;
-      renderControls();
-      $('#cfmNo')?.focus();
-    }
-    return;
-  }
-  if (runtime.confirmation !== key) return;
-  runtime.confirmation = null;
-  renderControls();
+  if (!confirmSelection(tributeConfirmKey(), confirmed)) return;
   act({ k: pay ? 'tribute' : 'return', p: toAbs(0), id: cards[0].id });
 }
 
