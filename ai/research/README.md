@@ -271,4 +271,4 @@ Clint双栏大厅/平板方位等大更新e17f3ad→66d63b8，只有网页布局
 
 ## 58132 起点约束续训
 
-[预登记与结果入口](evaluation/human-qfilter-anchor-20261119/README.md)。
+最终 v000090232，新增 32,100 次更新。4,000 完整单局已复算，对实际起点的升级分 +0.070（95% 区间跨零），未确认棋力提升。 [完整结果](evaluation/human-qfilter-anchor-20261119/README.md#完整结果)。

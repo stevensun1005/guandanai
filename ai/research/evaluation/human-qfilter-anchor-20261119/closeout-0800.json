@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "id": "human-qfilter-anchor-20261119-0800",
+  "sourceCommit": "2c642443564fb62386df0482b11493d19a337bd6",
+  "sourceFilesVerified": 380,
+  "final": {
+    "version": "v000090232",
+    "sha256": "34e8717c7a2dc1d1338d2a34c10a216fa23663d1ca64269800d85073d78f4439",
+    "checkpointSHA256": "8513a95a9a9d37d648b475431b5bb8209accae1f4033900aa86ede0e8bf3181d",
+    "matchingAdamStates": 12,
+    "step": 90232
+  },
+  "frozenEncoding": {
+    "stateFeatures": 513,
+    "actionFeatures": 54
+  },
+  "modelFingerprints": {
+    "raw029": {
+      "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+      "kind": "raw029",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "old017": {
+      "sha256": "462afc99ee6bcfb788871d7a8f84d4298c008d57465c62d48ca1792cdb11b3f7",
+      "kind": "old017",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "belief": {
+      "sha256": "16d767830e4536180fac56d744e95934b7525ab67b18d27df4f33066033d65e9",
+      "kind": "belief",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    },
+    "parent": {
+      "sha256": "1464c45f0617cd0776c861895a366d26f3c30908d4242cd15989d4911df221f2",
+      "kind": "prior-final58132-greedy",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54
+      }
+    }
+  },
+  "registrationSHA256": "c74e578adcb497258b196d509e93aaa613a6de1595d8856f2ea5e02d251e8419",
+  "trainingProtocolSHA256": "2cec3a96e2debecc754ca07ee1a60cb6156770c8440c5bbc1c3949531cd18477",
+  "candidateSourceSHA256": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+  "observationSourceSHA256": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+  "encodingSourceSHA256": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+  "stopAuditSHA256": "23888e23cf0073139b230bfd511ee2d91876d14ffc14616e7bbb1148dd5bcf80",
+  "seedAuditSHA256": "a1c373cf6927a7a06f312d4ed204064f5a642281a506d357cb0a8220aaf75d47",
+  "heldoutPendingSHA256": "aa2266f298933cba335623de61b1a9fc643af4c724e20f2511a15ae1523f8fe7",
+  "resultsSHA256": "6fb13826e107ecd0c85c1b8ca57c29920100826d53ccd575ee4c47929e5c5ea6",
+  "humanResultsSHA256": "4074f97036b2cf40056951aa39cfa0734ea91d4ce34aca646fd4127e3738465d",
+  "trainingStartUTC": "2026-11-20T04:50:47.696Z",
+  "trainingStopUTC": "2026-11-20T13:00:00.341Z",
+  "supervisorExitedUTC": "2026-11-20T13:00:03.900Z",
+  "completionUTC": "2026-11-20T14:07:18.440Z",
+  "deadlineUTC": "2026-11-20T16:00:00.000Z",
+  "stopAuditRepeatedReadOnly": true,
+  "startingStep": 58132,
+  "fixedStartQAnchorWeight": 0.1,
+  "newOptimizerUpdates": 32100,
+  "actorMatches": 33094,
+  "newIngestedTerminalRows": 16434999,
+  "actorRowsGenerated": 16464038,
+  "pendingActorRows": 29039,
+  "retainedReplayRows": 512662,
+  "newOptimizationRows": 65740800,
+  "newHumanLabelsAccepted": 10584,
+  "verifiedExitedProcessCount": 21,
+  "temporaryAwakeReleased": true,
+  "newEvaluatorGames": 0,
+  "evaluationRules": {
+    "unit": "one complete single round",
+    "cards": 108,
+    "level": "seeded uniform2..A",
+    "leader": "seeded seat",
+    "tribute": false,
+    "maxTurns": 1000,
+    "truncation": "error not draw"
+  },
+  "searchRandomness": "Same public searchSeedOf(dealSeed) for both side-swaps. Web uses crypto seeds; no bitwise browserworld claim. No hidden cards enter reason payload.",
+  "independentHeldoutDeals": 1500,
+  "actualCompleteRounds": 4000,
+  "recomputedFromPairRecords": true,
+  "groups": {
+    "vsParent": {
+      "challenger": "final",
+      "opponent": "parent",
+      "protocolSHA256": "f21e624250543abebde06fe81911a8a52e51c813c5cf0bb36db48f3e8982c7a2",
+      "rowsSHA256": "7876985e0dea72e66b26dcfdb2ac8cbcf128a7bdaa1d53da6a37a944a20b0d4d",
+      "completedRounds": 1000,
+      "reasonSearch": null
+    },
+    "vs029": {
+      "challenger": "final",
+      "opponent": "raw029",
+      "protocolSHA256": "0cf0fa683b53b2f7f366c27d3da36ce0f8303b78ffb1a9cc37379c825bb85a48",
+      "rowsSHA256": "0e871967c01f8aa01a28006e69838eb656492347c61034d58cb728cffb2684a0",
+      "completedRounds": 1000,
+      "reasonSearch": null
+    },
+    "vsreason": {
+      "challenger": "final",
+      "opponent": "old017",
+      "protocolSHA256": "3a44350157e81129a417cc73800b0ff3a72f95051b6d79e84ef82eb9a5d3061b",
+      "rowsSHA256": "90a9097ee86b40f63d3b70372bcf37f38fd3dfb1269f38f1b617e9b2dc7feac5",
+      "completedRounds": 1000,
+      "reasonSearch": {
+        "midgame": {
+          "requests": 4997,
+          "completed": 4997,
+          "totalSearchMs": 587381,
+          "maxSearchMs": 939,
+          "fallbacks": {}
+        },
+        "endgame": {
+          "requests": 2503,
+          "completed": 2502,
+          "totalSearchMs": 1063824,
+          "maxSearchMs": 50910,
+          "fallbacks": {
+            "budget": 1
+          }
+        }
+      }
+    },
+    "029vsreason": {
+      "challenger": "raw029",
+      "opponent": "old017",
+      "protocolSHA256": "3074b4bcaf6bed4292afbbd62efd2131fbc3ff714080bb764d93b0407cd8af8b",
+      "rowsSHA256": "225fd3628dd8221963e7390a90c26383b8c89f93637caef50ecaebd62083038a",
+      "completedRounds": 1000,
+      "reasonSearch": {
+        "midgame": {
+          "requests": 5007,
+          "completed": 5007,
+          "totalSearchMs": 605189,
+          "maxSearchMs": 629,
+          "fallbacks": {}
+        },
+        "endgame": {
+          "requests": 2624,
+          "completed": 2623,
+          "totalSearchMs": 1113244,
+          "maxSearchMs": 50932,
+          "fallbacks": {
+            "budget": 1
+          }
+        }
+      }
+    }
+  },
+  "humanCorrectCountsRechecked": true,
+  "researchWeightsPublished": false,
+  "observedAtUTC": "2026-11-20T16:08:27+00:00"
+}

@@ -5,6 +5,10 @@
 - 08点冻结：029冠军500场240/198/62，旧017底座reason200场100/78/22，逐场证据与种子对区间完整保留。
 - 同一SHA归档036，名称guanzero-adp-io48-712420，遵循当前已授权菜单/默认；训练继续至周五12点。开发结果不作独立验收。见[发布证据](ai/research/evaluation/web-model-036.json)。
 
+## 2026-11-20 · 58132 联合策略续训完成
+
+- 08:00 停训，最终 v000090232。4,000 单局评测已核验，主升级分暂未确认提升。[完整结果](ai/research/evaluation/human-qfilter-anchor-20261119/README.md#完整结果)。
+
 ## 2026-11-20 · 后续 danMCai 棋力评测
 
 - 每批的最新完整终窗模型只对 reason、最新已核验的 GuanZero 和 029，共三组。取消 029 对 reason 和训练起点加测。[评测流程](ai/research/CONTINUOUS_TRAINING.md#后续战力对照)。
