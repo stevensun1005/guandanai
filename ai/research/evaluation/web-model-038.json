@@ -385,5 +385,65 @@
   "planArchive": "ai/research/evaluation/guanzero-749529-development-v4-plan.json",
   "defaultChoice": "029",
   "trainingWindowEvidence": "ai/research/evaluation/guanzero-extension-20261120.json",
-  "planSHA256": "191610b96d01279bec67282f9c2f6d678cccb9df6fab914d4301fad29a193e9a"
+  "planSHA256": "191610b96d01279bec67282f9c2f6d678cccb9df6fab914d4301fad29a193e9a",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44863504669",
+    "commit": "bad0d4b9d91ad539941b2a6902df4f208e958ad2",
+    "verifiedAt": "2026-11-21T04:02:30.184Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-038.onnx",
+    "publicSHA256": "7a59ede246288ecfa59bb5d92d5abbd7fb51bb0b55f310f361cc660bc608f14b",
+    "bytes": 6346014,
+    "model": "038",
+    "version": "model-000000749529",
+    "step": 749529,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "038",
+          "guanzero-adp-io48-749529"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-749529-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-749529-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-749529-development-v4-reason.json"
+    ],
+    "trainingConfigUnchanged": true,
+    "trainingWindowUnchanged": true,
+    "attempt": 1,
+    "publicRelease": {
+      "verifiedAt": "2026-11-21T04:00:16.880Z",
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-038/bot-038.onnx",
+      "sha256": "7a59ede246288ecfa59bb5d92d5abbd7fb51bb0b55f310f361cc660bc608f14b",
+      "bytes": 6346014
+    }
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-21T04:03:19.562Z",
+    "plannedEnd": "2026-11-23T17:00:00.000Z",
+    "step": 758376,
+    "activeActors": 32,
+    "watchdogPhase": "healthy",
+    "STOP": false,
+    "learnerError": null,
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+    "continuedFromStep": 724901
+  }
 }
