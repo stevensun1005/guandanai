@@ -385,5 +385,137 @@
   "planArchive": "ai/research/evaluation/guanzero-786489-development-v4-plan.json",
   "defaultChoice": "029",
   "trainingWindowEvidence": "ai/research/evaluation/guanzero-extension-20261120.json",
-  "planSHA256": "16d8b531d4ae3b5743cae288f535db3ee26d66850978674befb28a353cdf54c2"
+  "planSHA256": "16d8b531d4ae3b5743cae288f535db3ee26d66850978674befb28a353cdf54c2",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44920168254",
+    "commit": "fccdac31e84dc2a544b14a16eb520cb11a84d792",
+    "verifiedAt": "2026-11-21T15:44:42.570Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-039.onnx",
+    "publicSHA256": "c4d8de7108f8e8286b88c2272b0f66869b6693d7f0553c0b95d1af0f58f30740",
+    "bytes": 6346014,
+    "model": "039",
+    "version": "model-000000786489",
+    "step": 786489,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "039",
+          "guanzero-adp-io48-786489"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-786489-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-786489-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-786489-development-v4-reason.json"
+    ],
+    "trainingConfigUnchanged": true,
+    "trainingWindowUnchanged": true,
+    "attempt": 1,
+    "publicRelease": {
+      "verifiedAt": "2026-11-21T15:36:33.923Z",
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-039/bot-039.onnx",
+      "sha256": "c4d8de7108f8e8286b88c2272b0f66869b6693d7f0553c0b95d1af0f58f30740",
+      "bytes": 6346014
+    }
+  },
+  "trainingInferenceObservation": {
+    "beforeFreeze": {
+      "samples": [
+        {
+          "at": "2026-11-21T12:58:39.7938801+00:00",
+          "pid": 95884,
+          "processParent": 95160,
+          "gpuStatusUpdatedAtUnix": 1795222839.7616863,
+          "gpuStatusReportedRequests": 78981750,
+          "listenerCount": 0,
+          "establishedCount": 32,
+          "actors": 32,
+          "successfulActorRemoteRequests": 197001014,
+          "actorFallbacks": 0,
+          "learnerStep": 786461,
+          "learnerError": null,
+          "stop": false
+        },
+        {
+          "at": "2026-11-21T12:58:47.6444696+00:00",
+          "pid": 95884,
+          "processParent": 95160,
+          "gpuStatusUpdatedAtUnix": 1795222839.7616863,
+          "gpuStatusReportedRequests": 78981750,
+          "listenerCount": 0,
+          "establishedCount": 32,
+          "actors": 32,
+          "successfulActorRemoteRequests": 197021783,
+          "actorFallbacks": 0,
+          "learnerStep": 786468,
+          "learnerError": null,
+          "stop": false
+        }
+      ],
+      "note": "Process and TCP state observed; no root cause ascribed by inference telemetry check."
+    },
+    "followUp": {
+      "samples": [
+        {
+          "at": "2026-11-21T15:33:30.2211084+00:00",
+          "pid": 95884,
+          "processParent": 95160,
+          "gpuStatusUpdatedAtUnix": 1795222839.7616863,
+          "gpuStatusReportedRequests": 78981750,
+          "listenerCount": 0,
+          "establishedCount": 32,
+          "actors": 32,
+          "successfulActorRemoteRequests": 220733973,
+          "actorFallbacks": 0,
+          "learnerStep": 793877,
+          "learnerError": null,
+          "stop": false
+        },
+        {
+          "at": "2026-11-21T15:33:38.3336433+00:00",
+          "pid": 95884,
+          "processParent": 95160,
+          "gpuStatusUpdatedAtUnix": 1795222839.7616863,
+          "gpuStatusReportedRequests": 78981750,
+          "listenerCount": 0,
+          "establishedCount": 32,
+          "actors": 32,
+          "successfulActorRemoteRequests": 220753763,
+          "actorFallbacks": 0,
+          "learnerStep": 793883,
+          "learnerError": null,
+          "stop": false
+        }
+      ],
+      "note": "Process and TCP state observed; no root cause ascribed by inference telemetry check."
+    }
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-21T15:44:54.399Z",
+    "plannedEnd": "2026-11-23T17:00:00.000Z",
+    "step": 794460,
+    "activeActors": 32,
+    "watchdogPhase": "healthy",
+    "STOP": false,
+    "learnerError": null,
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+    "continuedFromStep": 724901
+  }
 }
