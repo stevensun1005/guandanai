@@ -385,5 +385,65 @@
   "defaultChoice": "029",
   "trainingWindowEvidence": "ai/research/evaluation/guanzero-extension-20261120.json",
   "planSHA256": "af288c745af600f763c08238cea54ad8317a12d8a168d8fdea3043826ad6dd3d",
-  "trainingInterruptionEvidence": "ai/research/evaluation/guanzero-shard-read-interruption-20261121.json"
+  "trainingInterruptionEvidence": "ai/research/evaluation/guanzero-shard-read-interruption-20261121.json",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/44973565271",
+    "commit": "d49a4d362297c621bdd81ff1a73b2cabbe503e4d",
+    "verifiedAt": "2026-11-22T02:01:26.765Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-040.onnx",
+    "publicSHA256": "068ab31d43e5291ef1075a184b4b04dc593a4af3793b4b50dba2b617a22327e6",
+    "bytes": 6346014,
+    "model": "040",
+    "version": "model-000000820592",
+    "step": 820592,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "040",
+          "guanzero-adp-io48-820592"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-820592-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-820592-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-820592-development-v4-reason.json"
+    ],
+    "trainingConfigUnchanged": true,
+    "trainingWindowUnchanged": true,
+    "attempt": 1,
+    "publicRelease": {
+      "verifiedAt": "2026-11-22T01:53:04.925Z",
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-040/bot-040.onnx",
+      "sha256": "068ab31d43e5291ef1075a184b4b04dc593a4af3793b4b50dba2b617a22327e6",
+      "bytes": 6346014
+    }
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-22T02:01:37.550Z",
+    "plannedEnd": "2026-11-23T17:00:00.000Z",
+    "step": 820642,
+    "activeActors": 0,
+    "watchdogPhase": "stopped",
+    "STOP": true,
+    "learnerError": "[Errno 13] Permission denied: 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\shards\\\\a03-1795305796861-ac33771c-fa0e-49ac-bb3f-22327a919120.json'",
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+    "continuedFromStep": 724901
+  }
 }

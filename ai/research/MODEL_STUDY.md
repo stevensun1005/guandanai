@@ -4018,3 +4018,5 @@ GPU 推理状态文件停更，8771 端口未见新连接监听。评测前和�
 发布归档040无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差5.960464477539062e-7、动作不一致0；Node500通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。本批为训练意外停下前的最后一份完整导出。实际部署另见[发布回执](evaluation/web-model-040.json)。
 
 多伦多时间 11 月 21 日 19:03，学习器在第 820,642 步读取样本分片元数据时收到 Windows 访问拒绝，随后监督器停止训练。该检查点含 16 组 RMSprop 状态和 5 个样本游标，已保存并验证。最新完整网页导出为第 820,592 步。本次按用户要求使用独立槽 5161，保留当时的 STOP 和训练截止。 [故障与封存证据](evaluation/guanzero-shard-read-interruption-20261121.json)。
+
+820592实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/44973565271)成功，线上Chrome实见 `guanzero-adp-io48-820592`、3项菜单和四席029默认。公网bot-040.onnx为6346014字节，完整SHA `068ab31d43e5291ef1075a184b4b04dc593a4af3793b4b50dba2b617a22327e6` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。3份Git原始证据逐字节SHA核验通过；已核对续训配置及周一固定截止文件的完整SHA。
