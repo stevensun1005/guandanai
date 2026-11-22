@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "observedAt": "2026-11-22T00:44:46.151Z",
+  "stopAt": "2026-11-22T00:03:19.431Z",
+  "trainingPhase": "stopped-abnormally",
+  "plannedEnd": "2026-11-23T17:00:00.000Z",
+  "backup": "C:\\guandan-sampler\\work\\guanzero\\recovery-io48\\20261121-shard-read-interruption",
+  "recoveryAuthorized": false,
+  "trainerCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+  "failure": {
+    "type": "PermissionError",
+    "errno": 13,
+    "operation": "read sample-shard JSON metadata",
+    "source": "ai/guanzero/training/learner.py:24",
+    "file": "a03-1795305796861-ac33771c-fa0e-49ac-bb3f-22327a919120.json",
+    "systemCause": "unconfirmed",
+    "stderrExcerptSHA256": "d9b2cf24e45b8c10d8f6ac9347f2aa75dc4f3cdcab5c4274a7d1f36ab3862880"
+  },
+  "supervisorEvents": [
+    {
+      "t": "2026-11-22T00:03:19.418Z",
+      "kind": "process-exit",
+      "key": "learner",
+      "code": 1
+    },
+    {
+      "t": "2026-11-22T00:03:19.431Z",
+      "kind": "stopping",
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+    },
+    {
+      "t": "2026-11-22T00:03:21.509Z",
+      "kind": "stopped",
+      "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+    }
+  ],
+  "affectedShardFiles": [
+    {
+      "file": "a03-1795305796861-ac33771c-fa0e-49ac-bb3f-22327a919120.json",
+      "bytes": 216,
+      "sha256": "d2d7fc05af373c080e0a5230031e487c86755898feaa1aa85ee303e9c6963bcf"
+    },
+    {
+      "file": "a03-1795305796861-ac33771c-fa0e-49ac-bb3f-22327a919120.x.i8",
+      "bytes": 1304424,
+      "sha256": "e4cd4191eeb55d9fc54975eda40a2f67b3c993c65952b95316ef47e578b7aa76"
+    },
+    {
+      "file": "a03-1795305796861-ac33771c-fa0e-49ac-bb3f-22327a919120.y.f32",
+      "bytes": 6336,
+      "sha256": "35d6b05ad378522610c2894242cc68d49ad142d52b76f61804df76a96e97d0e4"
+    }
+  ],
+  "savedFileSHA256": {
+    "STOP": "0f8dac00c2ba80704154c7d279d12ee8ed94df067b0deda540ca7f33917b3270",
+    "config.json": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "window.json": "75c407a1951195c38b100753b6d6e9567bffb92a2fca9c9017f7f5ca45cdd415",
+    "learner/status.json": "208b399cbe050024dd977d30b667d735ae0a4836b9acaa6da7598fd3c285d272",
+    "learner/state.pt": "99dfcc28653ca1302ce28f8cc87356a59ea80c2770744adde38b8ef1850b34d2",
+    "inference/status.json": "b1784f9bc6cd56b5e72dbe66f24c84eaa4b4cdec698ae51fd1ad825ad8376cf0",
+    "models/latest.json": "25d009babed787d206fc822024c2d391deb0bebc4924a77e6cfcc2e8b46878c6",
+    "models/model-000000820592.onnx": "068ab31d43e5291ef1075a184b4b04dc593a4af3793b4b50dba2b617a22327e6",
+    "models/model-000000820592.weights.pt": "4d7fc2960ceed05aebf6a3d7399e298c5443530f932f41c78380610d5cc719f3"
+  },
+  "checkpoint": {
+    "verified": true,
+    "checkpointStep": 820642,
+    "usedSamples": 2626054400,
+    "optimizerStates": 16,
+    "sampleCursors": 5,
+    "modelTensors": 16,
+    "exportStep": 820592,
+    "onnxChecker": "passed"
+  },
+  "lastCompleteExport": {
+    "step": 820592,
+    "file": "model-000000820592.onnx",
+    "sha256": "068ab31d43e5291ef1075a184b4b04dc593a4af3793b4b50dba2b617a22327e6"
+  },
+  "authorizedPublication": {
+    "request": "把最新的上传上去",
+    "manualIndex": 5161,
+    "modelStep": 820592
+  }
+}
