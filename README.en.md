@@ -246,7 +246,7 @@ New memory-conservative continuation is preregistered through Nov17 07:00Toronto
 
 The continued run actually started Nov16 at23:03Toronto. New GPU updates, matchingAdam restoration, DML sampling and desktop/mobile live progress were verified. Nov17 07:00training stop and10:00evaluation/save deadline remain fixed. [Startup evidence](ai/research/evaluation/human-qfilter-continue-20261116/startup.json).
 
-GuanZero saved its step 724,901 checkpoint at the scheduled Friday stop. Under a new owner authorization, it resumed with the same RMSprop state and sample cursors through Monday, November 23, 2026 at 12:00 Toronto time. See the [GuanZero guide](ai/guanzero/README.md) for the evaluation and same-weight release schedule.
+GuanZero io48 resumed from step 820,642 with the original training code, RMSprop state and sample cursors. The window ends Tuesday, November 24, 2026 at noon Toronto time. See the [GuanZero guide](ai/guanzero/README.md) for the evaluation and release schedule.
 
 The Nov17 continuation and all3000evaluation rounds are complete. Memory pauses were eliminated, but neither goal passed: final-vs02950.6%, final-vslegacyreason49.9%, original029-vssamelegacyreason53.3%; paired terminal gain−.114with95%CI[−.24634,.01834]. Retrospective human agreement improved by only1/700decision. Final weights/matchedAdam are preserved locally; no promotion or web deployment. [Full results](ai/research/evaluation/human-qfilter-continue-20261116/README.md).
 

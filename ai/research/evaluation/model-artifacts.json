@@ -6924,6 +6924,16 @@
       "plannedEnd": "2026-11-23T17:00:00.000Z",
       "finalIndex": 5160,
       "sha256": "acb73ebcc1dd4a00e2aa6fb05f6780b168b5fa8a19f7a57935546f38f04b0ebc"
+    },
+    {
+      "id": "guanzero-io48-extension-20261122",
+      "file": "ai/research/evaluation/guanzero-extension-20261122.json",
+      "classification": "owner-authorized resumption after sample-shard read interruption",
+      "activeProtocol": "champion-reason-v4",
+      "sourceStep": 820642,
+      "plannedEnd": "2026-11-24T17:00:00.000Z",
+      "finalIndex": 5160,
+      "sha256": "97cea3db39a8aee870c7415cf018536ce69ec0e0c892c6a18579e49f2e891d88"
     }
   ],
   "researchChampions": [

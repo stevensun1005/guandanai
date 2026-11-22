@@ -54,7 +54,7 @@
 
 ## GuanZero 每十二小时评测并发布
 
-本机 io48 每天 America/Toronto 08:00、20:00 取一次快照（自2026-11-09起，旧10:12／22:12取消）。11 月 20 日周五原截止时已冻结 5150。新授权的训练截止为多伦多时间 11 月 23 日周一 12:00，08:00／20:00 的普通槽为 5151–5156，正常停训后登记最终 5160。 [续训与日历证据](../../ai/research/evaluation/guanzero-extension-20261120.json)。旧11月11日漏测记录不回填。按所有者2026-11-10最新要求，danMCai冠军500场、danMCai-reason200场全部完成后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前按冻结批次名单核对全部报告：新v4两组共700场（250/100对），旧v3和v1/v2仍按原计划及明确修订；历史两组仍两份、138506五份、186280三份、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席菜单默认由 `selection.defaultChoice` 决定（当前为029；未设置时为danMCai现任冠军），GuanZero 发布不改变它。[本机运行与时间表](../../ai/guanzero/README.md#每十二小时评测)。
+本机 io48 每天 America/Toronto 08:00、20:00 取一次快照（自2026-11-09起，旧10:12／22:12取消）。11 月 20 日周五原截止时已冻结 5150。最新授权的训练截止为多伦多时间 11 月 24 日周二 12:00，后续 08:00／20:00 普通槽为 5154–5158，正常停训后登记最终 5160。停训时错过的 5153 保留为漏测，手动评测槽 5161 已发布为 040。 [续训与日历证据](../../ai/research/evaluation/guanzero-extension-20261122.json)。旧11月11日漏测记录不回填。按所有者2026-11-10最新要求，danMCai冠军500场、danMCai-reason200场全部完成后，无论输赢，都发布本批实际对战的权重。使用评测目录 `model.onnx` 和 `plan.json` 的版本、步数，在准备和发布两次命令中传入相同的 `--evaluated-suite=<批次目录> --model=<批次目录/model.onnx> --source=guanzero-adp-io48 --version=<plan.modelVersion> --step=<对应步数> --config=<GuanZero配置>`。发布器在创建 Release 前按冻结批次名单核对全部报告：新v4两组共700场（250/100对），旧v3和v1/v2仍按原计划及明确修订；历史两组仍两份、138506五份、186280三份、双方权重、冠军 accept 依据和实际胜负平。机器发布证据保存各对手报告的 SHA-256。上网后的文件再次核对同一个完整 SHA。四席菜单默认由 `selection.defaultChoice` 决定（当前为029；未设置时为danMCai现任冠军），GuanZero 发布不改变它。[本机运行与时间表](../../ai/guanzero/README.md#每十二小时评测)。
 
 ## danMCai 冠军定期同步
 
