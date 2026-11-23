@@ -809,6 +809,25 @@
         "step": 846337,
         "registeredAt": "2026-11-22T15:39:55.225Z"
       }
+    },
+    {
+      "id": "042",
+      "file": "bot-042.onnx",
+      "sha256": "80319f31f96af8765c6f6141ed3b419d5dcde1c09032a3731b9a167b51bb0968",
+      "bytes": 6346014,
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-042/bot-042.onnx",
+      "config": {
+        "stateFeatures": 513,
+        "actionFeatures": 54,
+        "history": "guanzero-v1"
+      },
+      "source": {
+        "run": "guanzero-adp-io48",
+        "version": "model-000000882727",
+        "status": "experimental-not-heldout-accepted",
+        "step": 882727,
+        "registeredAt": "2026-11-23T03:55:29.245Z"
+      }
     }
   ],
   "selection": {
