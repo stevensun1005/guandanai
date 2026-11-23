@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "reason": "Owner requested immediate stop and evaluation on November 23",
+  "originalControllerUsedFixedCutoff": true,
+  "originalControllerEarlyStopAuditRejectedBeforeEvaluation": true,
+  "earlyStopIntegrityAuditSHA256": "f46444343b330e925bf7bc463f0d436b01f1a838d99c1f273d19dae1f585a90f",
+  "sourceCommit": "97a5687e06623b6d11e37801456af7d598ea2562",
+  "sourceFileSHA256": {
+    "web/src/ai/candidates.js": "8fc1385a7a6828f4afbc200f4ee17973b99c9ab3263bd0270dfcef00aba3fe2c",
+    "web/src/ai/observation.js": "7dfc0288ac85441c42a489f4a5dcff037ea2bbe4fc72a3fb6945348c7a52f6e9",
+    "web/src/ai/encoding.mjs": "ac5660f5b41c09a72dfe78dc6b335984fdd1caeeb940eb9070272ebde40fc155",
+    "web/src/ai/history.mjs": "64d17cbb8921291a1dfc182190ea2df003e97a0ccb70a9a7643fc53338b4cbd4",
+    "web/src/ai/search/constants.mjs": "8c97a9dcdbc031de48e9cf844922bd5aa0295c0e26403a81f183c5d62892b4a1",
+    "ai/research/tools/compare-champion-reason.mjs": "3adfcfb9d4754ef5a56eb0ec35323504fabe6a43a734829a1e5c436c0dfc7b77"
+  },
+  "originalTrainingProtocolSHA256": "014a3906edd0493a9c08e6a5c8d50e8b82c049f443fc8b850d77e16c4ceffd2b",
+  "originalTrainingDeadlineUTC": "2026-11-24T12:00:00.000Z",
+  "actualTrainingStoppedUTC": "2026-11-23T14:18:58.649Z",
+  "evaluationStartedUTC": "2026-11-23T14:20:04.000Z",
+  "evaluationDeadlineUTC": "2026-11-23T17:20:04.000Z",
+  "evaluationCompletedUTC": null,
+  "observedAtUTC": "2026-11-23T14:33:49.834488+00:00",
+  "evaluationRegistrationSHA256": "fc29ba4aa6fd3d5031fb4d68517435a070318f0b335a673ebf60350f8501d5fc",
+  "seedListSHA256": "884d644aeba92f19bbe70b7a10ff4d855d4043100e4b6c727d0fc33f96ec0a0e",
+  "final": {
+    "version": "v000120682",
+    "file": "v000120682.onnx",
+    "sha256": "dc5c76cc19019028ec1eae20761c15d0eb055904590c239c0edf00996160a0ad",
+    "step": 120682,
+    "trainedRows": 247156736,
+    "ingestedRows": 61789569,
+    "publishedAt": "2026-11-23T14:18:57Z",
+    "checkpointSHA256": "576c579120c6ec3c780b52d0deeaa3ed56a109df0ba3fb9b3e78105955603075",
+    "adamStates": 12
+  },
+  "newUpdates": 30450,
+  "newIngestedRows": 15590701,
+  "newHumanExposure": 10245,
+  "reasonReplay": {
+    "phase": "complete",
+    "completeRounds": 2000,
+    "publishedRows": 30159,
+    "ingestedRows": 30159
+  },
+  "trainingTailRowsNotInCheckpoint": 19100,
+  "rules": {
+    "unit": "complete single round",
+    "tribute": false,
+    "seatsSwappedOnSameDeal": true,
+    "finishShortcut": false,
+    "confidence": "95% independent deal-pair clusters"
+  },
+  "fullyVerifiedGroupRounds": 1000,
+  "allGroupsComplete": false,
+  "observedProgress": {
+    "vs029": {
+      "phase": "complete",
+      "workers": [
+        "complete"
+      ],
+      "completedRounds": 1000
+    },
+    "vsreason": {
+      "phase": "not-started",
+      "workers": [],
+      "completedRounds": 0
+    },
+    "vsGuanZero": {
+      "phase": "evaluation",
+      "workers": [
+        "memory-paused"
+      ],
+      "completedRounds": 734
+    }
+  },
+  "groups": {
+    "vs029": {
+      "recordSHA256": "3623843e19f3272f98d7a99655b67c33368885be30dfce78779338e5dbeb9ab1",
+      "summarySHA256": "6a3e52ccd804aa320cb4500ec9005087ebdd732dd3f1d2e92e419d19399e22be",
+      "protocolSHA256": "ff1ad2119c56ad3dcd30ff656138ec3d9a012b2918a1c2c2b96450f998588705",
+      "models": {
+        "challenger": {
+          "sha256": "dc5c76cc19019028ec1eae20761c15d0eb055904590c239c0edf00996160a0ad",
+          "kind": "Final-window joint terminalQ with human regularization; greedy only",
+          "config": {
+            "stateFeatures": 513,
+            "actionFeatures": 54
+          }
+        },
+        "reason": {
+          "sha256": "4f5d8ef453f9627d73130ffccf320b49fff0a77dbed1bf390032a5e66f849768",
+          "kind": "raw029",
+          "config": {
+            "stateFeatures": 513,
+            "actionFeatures": 54
+          }
+        }
+      },
+      "opponentPolicy": {
+        "kind": "raw"
+      },
+      "report": {
+        "model": "challenger",
+        "opponent": "reason",
+        "mixed": false,
+        "teammate": "challenger",
+        "pairs": 500,
+        "rounds": 1000,
+        "wins": 501,
+        "losses": 499,
+        "draws": 0,
+        "signedUpgradePoints": {
+          "clusters": 500,
+          "mean": 0.038,
+          "standardError": 0.05132621904565975,
+          "ci": [
+            -0.0625993893294931,
+            0.13859938932949312
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "roundWinScore": {
+          "clusters": 500,
+          "mean": 0.501,
+          "standardError": 0.01213641566403939,
+          "ci": [
+            0.4772126252984828,
+            0.5247873747015173
+          ],
+          "z": 1.96,
+          "method": "Normal approximation using independent seed-pair sample SD"
+        },
+        "finishingRankPairs": {
+          "12": 251,
+          "13": 85,
+          "14": 165,
+          "23": 166,
+          "24": 115,
+          "34": 218
+        },
+        "doubleDowns": 218,
+        "doubleUps": 251,
+        "meanTurns": 80.888
+      }
+    }
+  },
+  "humanReview": {
+    "reports": {
+      "029": {
+        "validation": {
+          "decisions": 632,
+          "correct": 337,
+          "accuracy": 0.5332278481012658,
+          "nll": 2.115261912534329
+        },
+        "test": {
+          "decisions": 700,
+          "correct": 274,
+          "accuracy": 0.3914285714285714,
+          "nll": 2.231424551494847
+        }
+      },
+      "final": {
+        "validation": {
+          "decisions": 632,
+          "correct": 358,
+          "accuracy": 0.5664556962025317,
+          "nll": 2.0724774656931215
+        },
+        "test": {
+          "decisions": 700,
+          "correct": 299,
+          "accuracy": 0.42714285714285716,
+          "nll": 2.1880968238989964
+        }
+      },
+      "parent": {
+        "validation": {
+          "decisions": 632,
+          "correct": 342,
+          "accuracy": 0.5411392405063291,
+          "nll": 2.0879960939306024
+        },
+        "test": {
+          "decisions": 700,
+          "correct": 293,
+          "accuracy": 0.4185714285714286,
+          "nll": 2.1935707446698385
+        }
+      }
+    },
+    "selection": "Final-window learner only, no validation/test model selection",
+    "retrospectiveOnly": true,
+    "oneValidationAndOneTestSession": true,
+    "previouslyInspectedData": true,
+    "notWinProbability": true,
+    "optimizerUpdatesDuringReview": 0
+  },
+  "optimizerUpdatesDuringEvaluation": 0,
+  "publishedModel": false
+}

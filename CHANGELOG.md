@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-23 · 真人与推理续训按要求停机
+
+- 保存 danMCai v000120682 和匹配的 Adam，使用原三组留出牌副开始独立评测。对 029 已完成 1,000 局，真人回顾与其余两组进度见[停训证据](ai/research/evaluation/human-qfilter-reason-20261123/README.md#11-月-23-日实际停训)。
+
 ## 2026-11-23 · 真人动作与推理续训登记
 
 - 从 danMCai v000090232 匹配续训，独立记录真人梯度曝光、搜索自对弈样本和 GPU 更新。终窗模型按同一策略分别对旧 reason、GuanZero 882727 和 029 自动评测。 [研究协议](ai/research/evaluation/human-qfilter-reason-20261123/README.md)。
