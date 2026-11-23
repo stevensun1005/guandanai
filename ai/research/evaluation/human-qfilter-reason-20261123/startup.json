@@ -1,0 +1,75 @@
+{
+  "run": "human-qfilter-reason-20261123-0700-v2",
+  "observedAtUTC": "2026-11-23T05:33:31.1741123+00:00",
+  "phase": "training",
+  "registration": {
+    "sourceCommit": "97a5687e06623b6d11e37801456af7d598ea2562",
+    "sourceFiles": 381,
+    "protocolSHA256": "014a3906edd0493a9c08e6a5c8d50e8b82c049f443fc8b850d77e16c4ceffd2b",
+    "startingStep": 90232,
+    "startingNetworkSHA256": "34e8717c7a2dc1d1338d2a34c10a216fa23663d1ca64269800d85073d78f4439",
+    "startingCheckpointSHA256": "8513a95a9a9d37d648b475431b5bb8209accae1f4033900aa86ede0e8bf3181d",
+    "fixedStartQAnchorWeight": 0.1,
+    "humanChoiceWeight": 0.15,
+    "trainingStartUTC": "2026-11-23T05:31:40.017Z",
+    "trainingDeadlineUTC": "2026-11-24T12:00:00Z",
+    "evaluationSaveDeadlineUTC": "2026-11-24T15:00:00Z",
+    "reservedTrainingRoots": 200000,
+    "reservedReasonDeals": 2000,
+    "independentHeldoutDeals": 1500,
+    "heldoutPlannedRounds": 3000,
+    "seedAuditEvidenceFiles": 8647,
+    "knownHistoricalRoots": 3160163,
+    "seedAuditSHA256": "596850173feec5f3fe24fdffaa2f9e1a7495332c45115516b57b80e64b875c04",
+    "trainingSeedListSHA256": "09d137b9137dbfd5737c76b0b32ad98af40834bcd06eae1e6211f4b59745d16a",
+    "reasonReplayAuditSHA256": "c4ad35d87e4eacfc79f78eef972c07e4f273016df31829a3bbe3f510389b86c1",
+    "reasonReplayRange": [
+      1940200257,
+      1940214478
+    ],
+    "heldoutRanges": {
+      "vs029": [
+        1940000475,
+        1940003593
+      ],
+      "vsreason": [
+        1940003594,
+        1940007585
+      ],
+      "vsGuanZero": [
+        1940007586,
+        1940011577
+      ]
+    },
+    "plannedOnly": true
+  },
+  "actualStart": {
+    "backend": "cuda:0",
+    "device": "AMD Radeon RX 7800 XT",
+    "rocm": "7.2.26024-f6f897bd3d",
+    "actorProvider": "dml",
+    "matchingAdamStates": 12,
+    "restoreNextUpdateEqual": true,
+    "newOptimizerUpdates": 263,
+    "cumulativeOptimizerUpdates": 90495,
+    "newTerminalRowsIngested": 134637,
+    "newHumanExposures": 98,
+    "reasonReplayRowsIngested": 466,
+    "reasonCompleteSimulatedRounds": 33,
+    "reasonRowsPublished": 466
+  },
+  "startupEngineeringChecks": {
+    "nodePassed": 501,
+    "nodeSkipped": 36,
+    "pythonPassed": 57,
+    "pythonSkipped": 1,
+    "formatPassed": true,
+    "buildPassed": true,
+    "guanZeroSmokeCompletedSingleRounds": 4,
+    "usesHeldoutDeals": false,
+    "browserStrengthEvidence": false
+  },
+  "actualHeadToHeadRounds": 0,
+  "firstAttemptRejectedBeforeGPU": true,
+  "websiteDeploymentAuthorized": false
+}
