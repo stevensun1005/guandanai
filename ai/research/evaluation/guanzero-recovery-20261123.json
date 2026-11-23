@@ -1,0 +1,202 @@
+{
+  "observedAt": "2026-11-23T14:08:59.944Z",
+  "timezone": "America/Toronto",
+  "failure": "Windows denied reading a published sampling shard manifest; the supervisor wrote STOP.",
+  "recurrence": "The same class of shard manifest read failure occurred on 2026-11-21. The process holding or denying access was not identified.",
+  "localBackup": "C:/guandan-sampler/work/guanzero/recovery-io48/20261123-shard-read-922792",
+  "preflight": {
+    "checkedAt": "2026-11-23T14:18:50.7620213+00:00",
+    "ownerInstruction": "为什么停了 继续",
+    "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+    "trainingCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "deadline": "2026-11-24T17:00:00.000Z",
+    "originalStatus": {
+      "step": 922792,
+      "usedSamples": 2952934400,
+      "loss": 3.101326196193695,
+      "updatesPerSecond": 0.8575671979378489,
+      "device": "cuda",
+      "deviceName": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "precision": "FP32",
+      "objective": "adp",
+      "updatedAt": 1795442939.9447682,
+      "error": "[Errno 13] Permission denied: 'C:\\\\guandan-sampler\\\\work\\\\guanzero\\\\guanzero-adp-io48\\\\shards\\\\a16-1795442939933-aef1f7f9-0590-4755-94cb-8c3673bf6f72.json'",
+      "pid": 11640,
+      "indexedShards": 1,
+      "pauseSampling": false
+    },
+    "fileSHA256": {
+      "config.json": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+      "STOP": "0f8dac00c2ba80704154c7d279d12ee8ed94df067b0deda540ca7f33917b3270",
+      "learner/state.pt": "97f904cba3d198f772878636a685e5d5ab3e94e9d202c5ebdd59f85aeaaa9f9b",
+      "window.json": "8bd6da19a2eaccbd4e28f65872b53027d0263c81bfb692230932ef09396fec4c",
+      "learner/status.json": "d283e1b4c52c9ccea5ea971c3d1f054b9789495a65749b406fcdf7b67be25112",
+      "models/latest.json": "13b3070698b453d579a123968823f52c1f8321f967d6863670a9e93bd7af144e"
+    },
+    "inspected": {
+      "step": 922792,
+      "used": 2952934400,
+      "modelTensors": 16,
+      "optimizerStates": 16,
+      "cursors": 5,
+      "manifests": 15,
+      "shardRows": 759,
+      "repeatedAffectedReads": 40,
+      "device": "NVIDIA GeForce RTX 4070"
+    }
+  },
+  "initialization": {
+    "status": {
+      "step": 922792,
+      "usedSamples": 2952934400,
+      "loss": 3.101326196193695,
+      "updatesPerSecond": 0,
+      "device": "cuda",
+      "deviceName": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "precision": "FP32",
+      "objective": "adp",
+      "updatedAt": 1795443534.349697,
+      "error": null,
+      "pid": 78356,
+      "indexedShards": 15,
+      "pauseSampling": false
+    },
+    "latest": {
+      "file": "model-000000922792.onnx",
+      "version": 922792,
+      "updatedAt": 1795443534.3481188
+    },
+    "modelSHA256": "125440df83f5885f43064e6a1438047fcc19d341a1528c9e53ed28b394679d78",
+    "zeroOptimizerUpdates": true
+  },
+  "live": {
+    "samples": [
+      {
+        "at": "2026-11-23T14:20:18.1408244+00:00",
+        "learner": {
+          "step": 922848,
+          "usedSamples": 2953113600,
+          "loss": 3.0713853859901428,
+          "updatesPerSecond": 0.7918593879787702,
+          "device": "cuda",
+          "deviceName": "NVIDIA GeForce RTX 4070",
+          "torch": "2.11.0+cu128",
+          "precision": "FP32",
+          "objective": "adp",
+          "updatedAt": 1795443617.2955859,
+          "error": null,
+          "pid": 27132,
+          "indexedShards": 4,
+          "pauseSampling": false
+        },
+        "inference": {
+          "pid": 9772,
+          "device": "cuda",
+          "requests": 181291,
+          "batches": 7494,
+          "maxBatch": 32,
+          "error": null,
+          "batchWaitMilliseconds": 22351.303800212918,
+          "computeMilliseconds": 30230.152400719817,
+          "ready": true,
+          "updatedAt": 1795443617.334016,
+          "averageBatch": 24.191486522551376,
+          "requestsPerSecond": 2399.27551781344
+        },
+        "watchdog": {
+          "pid": 77932,
+          "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+          "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+          "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+          "plannedEnd": "2026-11-24T17:00:00Z",
+          "restarts": 1,
+          "phase": "healthy",
+          "step": 922839,
+          "supervisorPid": 15868,
+          "updatedAt": "2026-11-23T14:20:05.706Z",
+          "error": null,
+          "resumedFromStep": 922792,
+          "lastRestartAt": "2026-11-23T14:18:59.816Z"
+        },
+        "freshActorFiles": 32,
+        "actorProcesses": 32,
+        "supervisors": 1,
+        "supervisorPid": 15868,
+        "learnerAlive": true,
+        "inferenceAlive": true,
+        "stop": false
+      },
+      {
+        "at": "2026-11-23T14:20:28.8832215+00:00",
+        "learner": {
+          "step": 922854,
+          "usedSamples": 2953132800,
+          "loss": 3.06857097864151,
+          "updatesPerSecond": 0.7690860140750198,
+          "device": "cuda",
+          "deviceName": "NVIDIA GeForce RTX 4070",
+          "torch": "2.11.0+cu128",
+          "precision": "FP32",
+          "objective": "adp",
+          "updatedAt": 1795443627.191326,
+          "error": null,
+          "pid": 27132,
+          "indexedShards": 6,
+          "pauseSampling": false
+        },
+        "inference": {
+          "pid": 9772,
+          "device": "cuda",
+          "requests": 204539,
+          "batches": 8462,
+          "maxBatch": 32,
+          "error": null,
+          "batchWaitMilliseconds": 25303.40750043979,
+          "computeMilliseconds": 34411.93060098158,
+          "ready": true,
+          "updatedAt": 1795443627.4071617,
+          "averageBatch": 24.171472465138265,
+          "requestsPerSecond": 2388.5333369154273
+        },
+        "watchdog": {
+          "pid": 77932,
+          "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+          "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+          "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+          "plannedEnd": "2026-11-24T17:00:00Z",
+          "restarts": 1,
+          "phase": "healthy",
+          "step": 922850,
+          "supervisorPid": 15868,
+          "updatedAt": "2026-11-23T14:20:22.486Z",
+          "error": null,
+          "resumedFromStep": 922792,
+          "lastRestartAt": "2026-11-23T14:18:59.816Z"
+        },
+        "freshActorFiles": 32,
+        "actorProcesses": 32,
+        "supervisors": 1,
+        "supervisorPid": 15868,
+        "learnerAlive": true,
+        "inferenceAlive": true,
+        "stop": false
+      }
+    ],
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "8bd6da19a2eaccbd4e28f65872b53027d0263c81bfb692230932ef09396fec4c",
+    "taskState": "Running"
+  },
+  "evaluation": {
+    "pid": 78164,
+    "runtime": "C:\\guandan-sampler\\work\\guanzero-independent-base-eval-runtime",
+    "commit": "b60766fdd5dffe6e87cdb8bf4b88ec6fa2a6bcf6",
+    "suite": "model-000000919229",
+    "index": 5156,
+    "targetMatchesByOpponent": {
+      "champion": 500,
+      "reason": 200
+    }
+  }
+}
