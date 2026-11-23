@@ -237,3 +237,59 @@ test('58132 continuation locks the 08:00 cutoff, valid inactive seed block, stro
   otherAdam.initialConfig.continuation.sha256 = 'changed';
   assert.throws(() => validateJointProtocol(otherAdam, registered + 1000), /checkpoint/);
 });
+
+test('reason replay uses disjoint training seeds and exactly three final-only pure argmax comparisons', () => {
+  const p = plan();
+  const network = '34e8717c7a2dc1d1338d2a34c10a216fa23663d1ca64269800d85073d78f4439';
+  const registered = Date.parse('2026-11-23T05:25:00.000Z');
+  Object.assign(p, {
+    id: 'human-qfilter-reason-20261123-0700',
+    startedAtUTC: new Date(registered).toISOString(),
+    humanWarmupUTC: new Date(registered).toISOString(),
+    trainingDeadlineUTC: '2026-11-24T12:00:00.000Z',
+    deadlineUTC: '2026-11-24T15:00:00.000Z',
+    initialModelSHA256: network,
+    evaluationWorkers: 1,
+    reasonReplay: { seeds: Array.from({ length: 2000 }, (_, i) => 3000 + i) },
+    sourceSHA256: { 'ai/research/tools/human-reason-replay.mjs': 'freeze' },
+  });
+  const c = p.initialConfig;
+  Object.assign(c, {
+    actors: 1,
+    fastActor: { games: 16, sessionLimit: 2 },
+    actorSeedList: { perSlot: 200000 },
+    evaluationBlockOffset: 999,
+    evaluationBlockEnd: 1000,
+    continuation: {
+      sha256: '8513a95a9a9d37d648b475431b5bb8209accae1f4033900aa86ede0e8bf3181d',
+      shardSequenceStart: 400000,
+    },
+    parent: { startingStep: 90232 },
+  });
+  Object.assign(c.learner, { learningRate: 3e-6, capacity: 500000 });
+  Object.assign(c.humanImitation, {
+    choiceWeight: 0.15,
+    gateTopK: 2,
+    enableAfterUTC: p.humanWarmupUTC,
+    compactFeatures: true,
+  });
+  p.evaluationModels.parent = { localFile: p.initialModel, sha256: network };
+  p.evaluationModels.guanzero = {
+    sha256: '80319f31f96af8765c6f6141ed3b419d5dcde1c09032a3731b9a167b51bb0968',
+    config: { history: 'guanzero-v1' },
+  };
+  p.heldout.vsGuanZero = Array.from({ length: 500 }, (_, i) => 1000 + i);
+  assert.doesNotThrow(() => validateJointProtocol(p, registered + 1000));
+  const groups = evaluationPlans(p, '/new', { sha256: 'final' });
+  assert.deepEqual(
+    groups.map((g) => g.name),
+    ['vs029', 'vsreason', 'vsGuanZero'],
+  );
+  assert.ok(
+    groups.every((g) => g.plan.models.challenger.sha256 === 'final' && !g.plan.finishShortcut),
+  );
+  assert.deepEqual(groups[2].plan.opponentPolicy, { kind: 'guanzero' });
+  assert.deepEqual(groups[2].plan.tasks[0].seeds, p.heldout.vsGuanZero);
+  p.reasonReplay.seeds[0] = p.heldout.vsGuanZero[0];
+  assert.throws(() => validateJointProtocol(p, registered + 1000), /replay reservation/);
+});

@@ -425,3 +425,5 @@ self-only离线拟合已完成（1,906展示层样本／3,393字节，零网络�
 - **对 GuanZero、对 029**：沿用 [注册评测控制器](tools/run-round-evaluation.mjs) 与 [完整单局评测器](../danMCai/evaluation/evaluate-round-pairs.mjs)。GuanZero 使用 `stateFeatures: 513`、`actionFeatures: 54`、`history: "guanzero-v1"`，029 用原 567 维网络编码。新协议应统一三组的挑战者决策策略。纯网络 argmax 场景下，reason 入口的 `finishShortcut` 设为 `false`，与完整单局评测器一致。
 
 三组均登记实有的局数、种子与截止，取消原 029 对 reason 及训练起点组，历史固定窗口按原协议归档。旧版日期绑定的联合训练控制器及其测试仍用于核对旧批次。新的三组成绩分别解释，GuanZero 发布批次的独立整场评测按自身协议执行。
+
+11 月 23 日的[真人动作与公开信息推理续训协议](evaluation/human-qfilter-reason-20261123/README.md)冻结了上述三组对手。此次推理自对弈只把完整单局的搜索阶段决策及终局标签送入回放，评测时继续用同一个纯网络挑战者。

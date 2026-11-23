@@ -36,6 +36,17 @@ const FOLLOWUPS = {
     ...ANCHOR_58132,
     trainingDeadlineUTC: '2026-11-20T13:00:00.000Z',
   },
+  'human-qfilter-reason-20261123-0700': {
+    step: 90232,
+    network: '34e8717c7a2dc1d1338d2a34c10a216fa23663d1ca64269800d85073d78f4439',
+    checkpoint: '8513a95a9a9d37d648b475431b5bb8209accae1f4033900aa86ede0e8bf3181d',
+    firstShard: 400000,
+    anchorWeight: 0.1,
+    trainingDeadlineUTC: '2026-11-24T12:00:00.000Z',
+    maxHours: 32,
+    choiceWeight: 0.15,
+    threeOpponents: true,
+  },
 };
 
 export function validateJointProtocol(p, now = Date.now()) {
@@ -77,7 +88,8 @@ export function validateJointProtocol(p, now = Date.now()) {
   if (
     followup &&
     ((followup.trainingDeadlineUTC
-      ? p.trainingDeadlineUTC !== followup.trainingDeadlineUTC || t[1] - t[0] > 12 * 3600000
+      ? p.trainingDeadlineUTC !== followup.trainingDeadlineUTC ||
+        t[1] - t[0] > (followup.maxHours ?? 12) * 3600000
       : t[1] - t[0] !== 2 * 3600000) ||
       p.humanWarmupUTC !== p.startedAtUTC ||
       c?.continuation?.sha256 !== followup.checkpoint ||
@@ -85,7 +97,13 @@ export function validateJointProtocol(p, now = Date.now()) {
       c?.parent?.startingStep !== followup.step ||
       p.evaluationModels?.parent?.localFile !== p.initialModel ||
       p.evaluationModels?.parent?.sha256 !== p.initialModelSHA256 ||
-      p.heldout?.vsParent?.length !== 500)
+      (followup.threeOpponents
+        ? p.heldout?.vsGuanZero?.length !== 500 ||
+          Object.keys(p.heldout).length !== 3 ||
+          p.evaluationModels?.guanzero?.config?.history !== 'guanzero-v1' ||
+          p.evaluationModels.guanzero.sha256 !==
+            '80319f31f96af8765c6f6141ed3b419d5dcde1c09032a3731b9a167b51bb0968'
+        : p.heldout?.vsParent?.length !== 500))
   )
     throw Error('Follow-up checkpoint, parent evaluation or fixed cutoff changed');
   if (
@@ -101,7 +119,7 @@ export function validateJointProtocol(p, now = Date.now()) {
       c?.learner?.capacity !== 500000 ||
       c?.learner?.learningRate !== 3e-6 ||
       c?.learner?.anchorWeight !== (followup?.anchorWeight ?? 0.05) ||
-      h?.choiceWeight !== 0.1 ||
+      h?.choiceWeight !== (followup?.choiceWeight ?? 0.1) ||
       h?.gateTopK !== 2 ||
       h?.enableAfterUTC !== p.humanWarmupUTC ||
       !h?.compactFeatures ||
@@ -160,10 +178,21 @@ export function validateJointProtocol(p, now = Date.now()) {
     p.evaluationTemplate.plannedPairs !== 500 ||
     p.heldout.vs029.length !== 500 ||
     p.heldout.vsreason.length !== 500 ||
-    new Set([...p.heldout.vs029, ...p.heldout.vsreason, ...(p.heldout.vsParent || [])]).size !==
-      (followup ? 1500 : 1000)
+    new Set(Object.values(p.heldout).flat()).size !== (followup ? 1500 : 1000)
   )
     throw Error('Invalid heldout blocks');
+  if (followup?.threeOpponents) {
+    const reason = p.reasonReplay?.seeds;
+    const heldout = new Set(Object.values(p.heldout).flat());
+    if (
+      reason?.length !== 2000 ||
+      new Set(reason).size !== reason.length ||
+      reason.some((seed) => !Number.isInteger(seed) || heldout.has(seed)) ||
+      p.initialConfig.actorSeedList?.perSlot !== 200000 ||
+      !p.sourceSHA256?.['ai/research/tools/human-reason-replay.mjs']
+    )
+      throw Error('Reason replay reservation changed');
+  }
 }
 
 export function evaluationPlans(p, root, final) {
@@ -177,22 +206,35 @@ export function evaluationPlans(p, root, final) {
     },
   };
   const parentStep = p.initialConfig?.parent?.startingStep ?? '';
-  const groups = ['vs029', 'vsreason', '029vsreason'];
+  const threeOpponents = Boolean(p.heldout.vsGuanZero);
+  const groups = ['vs029', 'vsreason', threeOpponents ? 'vsGuanZero' : '029vsreason'];
   if (p.heldout.vsParent) groups.unshift('vsParent');
   return groups.map((name) => {
     const parent = name === 'vsParent';
     const raw = parent || name === 'vs029',
-      baseline = name === '029vsreason';
+      baseline = name === '029vsreason',
+      guanzero = name === 'vsGuanZero';
     const challenger = baseline ? models.raw029 : models.final,
-      opponent = parent ? models.parent : raw ? models.raw029 : models.old017;
+      opponent = parent
+        ? models.parent
+        : raw
+          ? models.raw029
+          : guanzero
+            ? models.guanzero
+            : models.old017;
+    const opponentId = parent
+      ? 'parent' + parentStep
+      : raw
+        ? '029'
+        : guanzero
+          ? 'GuanZero-882727'
+          : 'oldreason9001';
     return {
       name,
       plan: {
         ...p.evaluationTemplate,
         id: p.id + '-' + name,
-        displayName: baseline
-          ? '029起点 vs旧reason（配对控制）'
-          : '最终联合模型 vs' + (parent ? '本轮起点' + parentStep : raw ? '029' : '旧reason'),
+        displayName: baseline ? '029起点 vs旧reason（配对控制）' : '最终联合模型 vs ' + opponentId,
         purpose:
           'New final-only complete-round evaluation; no optimization, selection, expansion or deployment',
         sourceRoot: p.sourceRoot,
@@ -203,9 +245,13 @@ export function evaluationPlans(p, root, final) {
           ...p.evaluationTemplate.resourcePolicy,
           workers: p.evaluationWorkers || (raw ? 1 : 2),
         },
-        models: { challenger, reason: opponent, ...(raw ? {} : { belief: models.belief }) },
-        ...(raw ? { opponentPolicy: { kind: 'raw' } } : {}),
-        finishShortcut: true,
+        models: {
+          challenger,
+          reason: opponent,
+          ...(raw || guanzero ? {} : { belief: models.belief }),
+        },
+        ...(raw || guanzero ? { opponentPolicy: { kind: guanzero ? 'guanzero' : 'raw' } } : {}),
+        finishShortcut: !threeOpponents,
         python: p.python,
         tasks: [
           {
@@ -213,13 +259,13 @@ export function evaluationPlans(p, root, final) {
             model: 'challenger',
             opponent: 'reason',
             mixed: false,
-            seeds: parent ? p.heldout.vsParent : raw ? p.heldout.vs029 : p.heldout.vsreason,
+            seeds: p.heldout[baseline ? 'vsreason' : name],
           },
         ],
         contrasts: [],
         primaryTask: 'head-to-head',
         primaryModel: baseline ? '029' : 'joint-final',
-        primaryOpponent: parent ? 'parent' + parentStep : raw ? '029' : 'oldreason9001',
+        primaryOpponent: opponentId,
       },
     };
   });
@@ -245,6 +291,13 @@ async function main(root) {
     if (sha256(m.localFile) !== m.sha256) throw Error('Frozen evaluation model changed');
   if (sha256(join(root, 'heldout-protocol.pending.json')) !== p.heldoutPendingSHA256)
     throw Error('Pending evaluation plan changed');
+  if (
+    p.reasonReplay &&
+    (sha256(join(root, 'reason-replay-audit.full.json')) !== p.reasonReplay.auditSHA256 ||
+      JSON.stringify(readJSON(join(root, 'reason-replay-audit.full.json')).seeds) !==
+        JSON.stringify(p.reasonReplay.seeds))
+  )
+    throw Error('Reason replay seed audit changed');
   if (p.initialConfigSHA256 && sha256(join(root, 'initial-config.json')) !== p.initialConfigSHA256)
     throw Error('Initial config changed');
   if (
@@ -314,9 +367,9 @@ async function main(root) {
     if (stopped())
       for (const dir of [
         train,
-        ...['vsParent', 'vs029', 'vsreason', '029vsreason']
-          .filter((n) => n !== 'vsParent' || p.heldout.vsParent)
-          .map((n) => join(root, n)),
+        ...[...Object.keys(p.heldout), ...(p.heldout.vsGuanZero ? [] : ['029vsreason'])].map((n) =>
+          join(root, n),
+        ),
       ]) {
         mkdirSync(dir, { recursive: true });
         if (!existsSync(join(dir, 'STOP')))
@@ -324,6 +377,7 @@ async function main(root) {
       }
     const learner = readJSON(join(train, 'learner/status.json')),
       status = readJSON(join(train, 'status.json'));
+    const reason = p.reasonReplay && readJSON(join(root, 'reason-replay-status.json'));
     const inherited = p.initialConfig.parent || {};
     const live = {
       phase: learner?.state || phase,
@@ -352,6 +406,18 @@ async function main(root) {
         ['已摄入终局样本行', live.ingestedRows],
         ['训练抽样行', live.trainedRows],
         ['真人模仿梯度标签', live.humanRowsUsed],
+        ...(p.reasonReplay
+          ? [
+              [
+                '推理采样状态/完整单局',
+                `${reason?.phase || 'waiting'} / ${reason?.completedRounds || 0}`,
+              ],
+              [
+                '推理行发布/摄入',
+                `${reason?.publishedRows || 0} / ${learner?.reasonReplayRows || 0}`,
+              ],
+            ]
+          : []),
         ['真人阶段', learner?.humanLoss?.phase || '等待学习器'],
         [
           '筛选候选/接受/拒绝',
@@ -462,7 +528,7 @@ async function main(root) {
         lastAnchorAt: Date.parse(p.startedAtUTC),
       });
       const hours = (Date.parse(p.trainingDeadlineUTC) - Date.now()) / 3600000;
-      await spawnOne(
+      const training = spawnOne(
         process.execPath,
         [
           join(p.sourceRoot, 'ai/danMCai/training/continuous/supervisor.mjs'),
@@ -473,6 +539,22 @@ async function main(root) {
         ],
         'supervisor',
       );
+      const reasoning = p.reasonReplay
+        ? spawnOne(
+            process.execPath,
+            [
+              '--expose-gc',
+              '--max-old-space-size=1024',
+              join(p.sourceRoot, 'ai/research/tools/human-reason-replay.mjs'),
+              '--run=' + root,
+            ],
+            'reason-replay',
+          ).catch((error) => {
+            appendFileSync(join(root, 'stages.log'), `Reason replay failed: ${error}\n`);
+          })
+        : null;
+      await training;
+      await reasoning;
     });
     await stage('audit', () =>
       spawnOne(
@@ -547,7 +629,7 @@ async function main(root) {
       await evaluate('vsreason');
     } else await Promise.all([evaluate('vs029'), evaluate('vsreason')]);
     // Keep memory headroom: use the same reason worker count sequentially for the shared-deal control.
-    await evaluate('029vsreason');
+    await evaluate(p.heldout.vsGuanZero ? 'vsGuanZero' : '029vsreason');
     await stage('summary', () =>
       spawnOne(
         p.python,

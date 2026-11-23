@@ -147,6 +147,7 @@ class Learner:
                              self.stored_extra_width, self.history_width)
         self.ingested = set()
         self.counted = set()
+        self.reason_rows = 0
         self.ingested_rows = 0
         self.step = 0
         self.trained_rows = 0
@@ -277,6 +278,8 @@ class Learner:
             if manifest.name not in self.counted:
                 self.counted.add(manifest.name)
                 self.ingested_rows += rows
+                if meta.get("actorImplementation") == "reason-replay":
+                    self.reason_rows += rows
                 added += rows
         kept = 0
         for manifest in reversed(manifests):
@@ -332,6 +335,7 @@ class Learner:
                 "step": self.step,
                 "trainedRows": self.trained_rows,
                 "ingestedRows": self.ingested_rows,
+                "reasonReplayRows": self.reason_rows,
                 "countedShards": sorted(self.counted),
                 "humanState": self.human.state_dict() if self.human is not None else None,
                 "torchRNG": torch.get_rng_state(),
@@ -381,6 +385,7 @@ class Learner:
                 "version": self.version,
                 "buffer": self.replay.size,
                 "ingestedRows": self.ingested_rows,
+                "reasonReplayRows": self.reason_rows,
                 "trainedRows": self.trained_rows,
                 "lossEMA": self.loss_ema,
                 **({"humanRowsUsed": self.human.rows_used(self.step),

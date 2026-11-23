@@ -52,6 +52,19 @@ def audit(run, frozen, allow_early_stop=False):
     assert saved['step']==learner['step']==latest['step']
     for field in ['trainedRows','ingestedRows']:
         assert saved[field]==learner[field]==latest[field]
+    reason_replay_rows = saved.get('reasonReplayRows', 0)
+    assert reason_replay_rows == learner.get('reasonReplayRows', 0)
+    reason_summary = None
+    if plan.get('reasonReplay'):
+        status_path = run.parent/'reason-replay-status.json'
+        log_path = run.parent/'results-reason-replay.jsonl'
+        records = [json.loads(line) for line in log_path.read_text(encoding='utf-8').splitlines()] if log_path.exists() else []
+        published_rows = sum(record['rows'] for record in records)
+        assert [record['seed'] for record in records] == plan['reasonReplay']['seeds'][:len(records)]
+        assert 0 <= reason_replay_rows <= published_rows
+        reason_summary = {'phase': read(status_path)['phase'] if status_path.exists() else 'missing',
+                          'completeRounds': len(records), 'publishedRows': published_rows,
+                          'ingestedRows': reason_replay_rows}
     net=(ValueNetExtras if config.get('extrasMode') else ValueNet)(load_onnx_weights(run/'models'/latest['file']))
     if config.get('extrasMode'):
         import onnx
@@ -87,6 +100,8 @@ def audit(run, frozen, allow_early_stop=False):
        'parent':config['parent'],'sourceSHA256':config['sourceSHA256'],
        'actors':actors,'replay':shards,'totals':state['totals'],
        'tailRowsNotInCheckpoint':shards['pendingRows'],'optimizerUpdatesDuringAudit':0,
+       'reasonReplayRowsIngested':reason_replay_rows,
+       'reasonReplay':reason_summary,
        'preservedHistory':True,'webChampionChanged':False,
        'limitations':'Retained replay only; evicted samples, original in-memory ring/RNG not recovered.'}
 

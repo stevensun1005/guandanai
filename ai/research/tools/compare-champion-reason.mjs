@@ -26,6 +26,7 @@ import { championValues } from '../../../web/src/ai/search/inference.mjs';
 import { SEARCH_BUDGETS } from '../../../web/src/ai/search/constants.mjs';
 import { candidates } from '../../../web/src/ai/candidates.js';
 import { policyState } from '../../../web/src/ai/observation.js';
+import { inferPolicy } from '../../../web/src/ai/policy-inference.mjs';
 import {
   argmax,
   option,
@@ -191,11 +192,14 @@ async function worker(root, slot) {
     const hybrid = plan.challengerPolicy?.kind === 'endgame-student';
     if (plan.challengerPolicy && !hybrid) throw Error('Unknown challenger policy');
     const rawOpponent = plan.opponentPolicy?.kind === 'raw';
-    if (plan.opponentPolicy && !rawOpponent) throw Error('Unknown opponent policy');
+    const guanzero = plan.opponentPolicy?.kind === 'guanzero';
+    if (plan.opponentPolicy && !rawOpponent && !guanzero) throw Error('Unknown opponent policy');
+    if (guanzero && plan.models.reason.config?.history !== 'guanzero-v1')
+      throw Error('Missing GuanZero history configuration');
     for (const key of [
       'challenger',
       'reason',
-      ...(rawOpponent ? [] : ['belief']),
+      ...(rawOpponent || guanzero ? [] : ['belief']),
       ...(hybrid ? ['student'] : []),
     ])
       sessions.push(
@@ -209,7 +213,11 @@ async function worker(root, slot) {
       );
     const values = championValues(ort, sessions[0]);
     const raw = hybrid
-      ? studentChallenger(values, championValues(ort, sessions[3]), plan.challengerPolicy.threshold)
+      ? studentChallenger(
+          values,
+          championValues(ort, sessions.at(-1)),
+          plan.challengerPolicy.threshold,
+        )
       : plan.finishShortcut
         ? studentChallenger(values, values)
         : async (game, p) => {
@@ -220,7 +228,28 @@ async function worker(root, slot) {
             return plays[argmax(q)];
           };
     const opponentValues = rawOpponent ? championValues(ort, sessions[1]) : null;
-    const rawPolicy = rawOpponent ? studentChallenger(opponentValues, opponentValues) : null;
+    const rawPolicy = rawOpponent
+      ? plan.finishShortcut
+        ? studentChallenger(opponentValues, opponentValues)
+        : async (game, p) => {
+            const plays = candidates(game.hands[p], game.L, game.trick?.play);
+            return plays.length === 1
+              ? plays[0]
+              : plays[argmax(await opponentValues(policyState(game, p, 0, plays)))];
+          }
+      : guanzero
+        ? async (game, p) => {
+            const plays = candidates(game.hands[p], game.L, game.trick?.play);
+            if (plays.length === 1) return plays[0];
+            const { index } = await inferPolicy(
+              ort,
+              sessions[1],
+              policyState(game, p, 0, plays),
+              plan.models.reason.config,
+            );
+            return plays[index];
+          }
+        : null;
     const budget = { ...SEARCH_BUDGETS.desktop };
     const check = async () => {
       await checkpoint();
@@ -236,7 +265,7 @@ async function worker(root, slot) {
       const seed = plan.tasks[0].seeds[i],
         games = [];
       for (const team of [0, 1]) {
-        const reason = rawOpponent
+        const reason = rawPolicy
           ? { decide: rawPolicy, engine: {} }
           : createReasonBot({
               ort,

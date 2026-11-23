@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+from itertools import combinations
 import math
 from pathlib import Path
 import statistics
@@ -29,7 +30,7 @@ def human(root):
     rows=read(data/'decisions.json');features=np.memmap(data/'features.i8',dtype=np.int8,mode='r',shape=(manifest['candidateRows'],567))
     reports={}
     models=[('029',plan['evaluationModels']['raw029']['localFile']),('final',str(root/'final.onnx'))]
-    if plan['heldout'].get('vsParent'):
+    if 'parent' in plan['evaluationModels']:
         models.append(('parent',plan['initialModel']))
     for name,file in models:
         options=ort.SessionOptions();options.intra_op_num_threads=1;options.inter_op_num_threads=1
@@ -71,7 +72,8 @@ def pairs(root, protocol):
 
 def closeout(root):
     plan=read(root/'protocol.json')
-    names=['vs029','vsreason','029vsreason'];data={};reports={}
+    three_opponents = 'vsGuanZero' in plan['heldout']
+    names=['vs029','vsreason','vsGuanZero' if three_opponents else '029vsreason'];data={};reports={}
     if plan['heldout'].get('vsParent'):
         names.insert(0,'vsParent')
     fmt=lambda e:f"{e['mean']:.5f} [{e['ci'][0]:.5f}, {e['ci'][1]:.5f}]"
@@ -85,6 +87,33 @@ def closeout(root):
             ['胜率与95%牌副簇区间',fmt(r['roundWinScore'])],
             ['终局升级分与95%牌副簇区间',fmt(r['signedUpgradePoints'])],
             ['双上/双下',f"{r['doubleUps']}/{r['doubleDowns']}"]]})
+    h=read(root/'human-results.json')['reports'];delta=h['final']['test']['accuracy']-h['029']['test']['accuracy']
+    behavior=delta>=.05 and h['final']['test']['nll']<h['029']['test']['nll']
+    if three_opponents:
+        assert all(not (left.keys() & right.keys()) for left, right in combinations(data.values(), 2))
+        lower = {name: reports[name]['signedUpgradePoints']['ci'][0] for name in names}
+        result = {
+            'complete': True,
+            'reports': reports,
+            'retrospectiveHumanAccuracyDelta': delta,
+            'retrospectiveHumanAccuracyDeltaVsParent': h['final']['test']['accuracy'] - h['parent']['test']['accuracy'],
+            'retrospectiveHumanPointGoal': behavior,
+            'positiveUpgrade95ByOpponent': {name: bound > 0 for name, bound in lower.items()},
+            'humanGeneralizationAccepted': False,
+            'webPublished': False,
+            'optimizerUpdatesDuringEvaluation': 0,
+            'limits': 'Disjoint final-only opponent blocks. No shared-opponent estimate of improvement over the parent. Human split is retrospective and already inspected. Native reason search may time out.',
+        }
+        write(root/'results.json', result)
+        write(root/'results-panel.json', {
+            'title': '最终三组棋力与真人动作回顾',
+            'rows': [
+                ['真人测试一致率增量（相对029）', f'{delta:+.2%}'],
+                ['真人测试一致率增量（相对续训起点）', f"{result['retrospectiveHumanAccuracyDeltaVsParent']:+.2%}"],
+                *[[f'{name} 升级分与95%牌副簇区间', fmt(reports[name]['signedUpgradePoints'])] for name in names],
+            ],
+        })
+        return
     assert set(data['vsreason'])==set(data['029vsreason'])
     assert not set(data['vs029'])&set(data['vsreason'])
     if 'vsParent' in data:
@@ -97,8 +126,6 @@ def closeout(root):
         differences.append(statistics.mean(g['signedPoints']for g in a['games'])-statistics.mean(g['signedPoints']for g in b['games']))
         win_differences.append(statistics.mean(g['winner']==g['team']for g in a['games'])-statistics.mean(g['winner']==g['team']for g in b['games']))
     contrast=interval(differences);win_contrast=interval(win_differences)
-    h=read(root/'human-results.json')['reports'];delta=h['final']['test']['accuracy']-h['029']['test']['accuracy']
-    behavior=delta>=.05 and h['final']['test']['nll']<h['029']['test']['nll']
     result={'complete':True,'reports':reports,'pairedUpgradeGainVsOldReason':contrast,'pairedWinRateGainVsOldReason':win_contrast,
             'retrospectiveHumanAccuracyDelta':delta,'retrospectiveHumanPointGoal':behavior,
             'beats029Upgrade95':reports['vs029']['signedUpgradePoints']['ci'][0]>0,
