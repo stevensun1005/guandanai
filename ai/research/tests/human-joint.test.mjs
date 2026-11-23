@@ -243,7 +243,7 @@ test('reason replay uses disjoint training seeds and exactly three final-only pu
   const network = '34e8717c7a2dc1d1338d2a34c10a216fa23663d1ca64269800d85073d78f4439';
   const registered = Date.parse('2026-11-23T05:25:00.000Z');
   Object.assign(p, {
-    id: 'human-qfilter-reason-20261123-0700',
+    id: 'human-qfilter-reason-20261123-0700-v2',
     startedAtUTC: new Date(registered).toISOString(),
     humanWarmupUTC: new Date(registered).toISOString(),
     trainingDeadlineUTC: '2026-11-24T12:00:00.000Z',

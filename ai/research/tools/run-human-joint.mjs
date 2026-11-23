@@ -36,7 +36,7 @@ const FOLLOWUPS = {
     ...ANCHOR_58132,
     trainingDeadlineUTC: '2026-11-20T13:00:00.000Z',
   },
-  'human-qfilter-reason-20261123-0700': {
+  'human-qfilter-reason-20261123-0700-v2': {
     step: 90232,
     network: '34e8717c7a2dc1d1338d2a34c10a216fa23663d1ca64269800d85073d78f4439',
     checkpoint: '8513a95a9a9d37d648b475431b5bb8209accae1f4033900aa86ede0e8bf3181d',
