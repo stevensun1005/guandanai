@@ -384,5 +384,65 @@
   "planArchive": "ai/research/evaluation/guanzero-919229-development-v4-plan.json",
   "defaultChoice": "029",
   "trainingWindowEvidence": "ai/research/evaluation/guanzero-extension-20261122.json",
-  "planSHA256": "58807156a16c9f7826ebb8b26787beb78d8ef2be52d55a78d4dffd33b756ef19"
+  "planSHA256": "58807156a16c9f7826ebb8b26787beb78d8ef2be52d55a78d4dffd33b756ef19",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/45301574981",
+    "commit": "6a2a7118efc6dc6a48ee92f93d15482f8b224824",
+    "verifiedAt": "2026-11-24T01:06:46.742Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-043.onnx",
+    "publicSHA256": "7025b5ba4baebaa117422aeb3110e4eb8e1182138b0f02277d7c1d272effd079",
+    "bytes": 6346014,
+    "model": "043",
+    "version": "model-000000919229",
+    "step": 919229,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "043",
+          "guanzero-adp-io48-919229"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-919229-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-919229-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-919229-development-v4-reason.json"
+    ],
+    "trainingConfigUnchanged": true,
+    "trainingWindowUnchanged": true,
+    "publicRelease": {
+      "verifiedAt": "2026-11-24T00:58:40.006Z",
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-043/bot-043.onnx",
+      "sha256": "7025b5ba4baebaa117422aeb3110e4eb8e1182138b0f02277d7c1d272effd079",
+      "bytes": 6346014
+    },
+    "attempt": 1
+  },
+  "trainingObservation": {
+    "observedAt": "2026-11-24T01:06:59.272Z",
+    "step": 956525,
+    "learnerError": null,
+    "learnerAgeSeconds": 0.028888940811157227,
+    "gpuStatusAgeSeconds": 0.4152383804321289,
+    "gpuRequests": 107946738,
+    "watchdogPhase": "healthy",
+    "stop": false,
+    "plannedEnd": "2026-11-24T17:00:00.000Z",
+    "continuedFromStep": 922792
+  }
 }
