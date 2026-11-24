@@ -11,7 +11,7 @@
 | 顺序 | 当前选项                 | 来源                                                |
 | ---- | ------------------------ | --------------------------------------------------- |
 | 1    | Clint规则机器人          | 独立 rules-v2，不使用神经网络                       |
-| 2    | guanzero-adp-io48-882727 | GuanZero 最新一代（最近注册的一代），归档 042       |
+| 2    | guanzero-adp-io48-919229 | GuanZero 最新一代（最近注册的一代），归档 043       |
 | 3    | **danMCai-v000061013**   | danMCai 现任实际门控冠军029；当前默认与出牌评价来源 |
 
 顺序沿用此前菜单的约定（Clint → GuanZero → danMCai → 研究机器人），也就是所有者列举四项的顺序；默认项与位置无关，由 `selection.defaultChoice` 决定，新座位跟随清单当前默认029。`selectableModels` 按此顺序生成可用选项：Clint、`models` 中最后注册的 GuanZero、`selection.danMCaiChampions[0]`、`searchBots` 中底座为现任冠军的最后一项；没有这样的搜索机器人时只剩三项。清单 `selection.mode` 为 `latest-v2`（原七项菜单 `champions-v1` 只作历史）。
