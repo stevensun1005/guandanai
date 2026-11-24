@@ -1,0 +1,255 @@
+{
+  "schema": 1,
+  "authorization": {
+    "authorizedAt": "2026-11-24T17:00:07.849Z",
+    "requestedDeadlineLocal": "2026-11-27T12:00:00-05:00",
+    "authority": "owner-request",
+    "ownerInstruction": "继续训练 延长时间到周五中午12点",
+    "ownerConfirmation": "确认",
+    "originalPlannedEnd": "2026-11-08T03:11:40.256Z",
+    "previousPlannedEnd": "2026-11-24T17:00:00.000Z",
+    "resumedFromStep": 1004397,
+    "supersededFinalIndex": 5160
+  },
+  "timezone": "America/Toronto",
+  "before": {
+    "at": "2026-11-24T16:44:49.7077204+00:00",
+    "originalDeadline": "2026-11-24T17:00:00.000Z",
+    "deadline": "2026-11-27T17:00:00.0000000+00:00",
+    "learner": {
+      "step": 1003639,
+      "usedSamples": 3211644800,
+      "loss": 3.119076099395752,
+      "updatesPerSecond": 0.8497507654753577,
+      "device": "cuda",
+      "deviceName": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "precision": "FP32",
+      "objective": "adp",
+      "updatedAt": 1795538689.2960804,
+      "error": null,
+      "pid": 27132,
+      "indexedShards": 5,
+      "pauseSampling": false
+    },
+    "actorCount": 32,
+    "originalSupervisor": 15868,
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "8bd6da19a2eaccbd4e28f65872b53027d0263c81bfb692230932ef09396fec4c",
+    "scheduleSHA256": "7e8e55369f0bdf1c4a156ccd587e697941b55cd0da6e547dc58128c052f79f9e",
+    "cancelledOldCloseoutPids": [
+      101572,
+      97368
+    ]
+  },
+  "checkpoint": {
+    "stoppedAt": "2026-11-24T17:00:00.4177414Z",
+    "events": [
+      {
+        "t": "2026-11-24T17:00:00.421Z",
+        "kind": "stopping",
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+      },
+      {
+        "t": "2026-11-24T17:00:03.038Z",
+        "kind": "process-exit",
+        "key": "learner",
+        "code": 0
+      },
+      {
+        "t": "2026-11-24T17:00:03.039Z",
+        "kind": "stopped",
+        "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48"
+      }
+    ],
+    "checkpoint": {
+      "step": 1004397,
+      "usedSamples": 3214070400,
+      "stateSHA256": "1ff47a85e34afa29180b57003162e05e69e8cb98ee95e28126f0229b89d7e9bd",
+      "modelSHA256": "76a9e635cc69ce2bfab23baaf88da188b97c0246216c13eaa3fd1558c8b212c3",
+      "weightsSHA256": "fabb9aa2a51a89e9a58f200b29a5d3816982ed8f92fd4aa8015d096d4c87a336",
+      "optimizer": "RMSprop",
+      "optimizerStates": 16,
+      "consumedCursors": 5,
+      "matchingInferenceWeights": true
+    }
+  },
+  "launch": {
+    "restartTriggeredAt": "2026-11-24T17:00:09.4555597+00:00",
+    "resumeStep": 1004397,
+    "sourceCommit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+    "configurationSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "newWindowSHA256": "5773f6fff0a9192d2ac2dd5d9b42fc5bdbecb63940f3247f07df0cb50bc505db",
+    "newCalendarSHA256": "881655cd6abbc930806965fe3950a84809f1268f5822cf62ef464177c7e29bd3",
+    "deadline": "2026-11-27T17:00:00.0000000+00:00",
+    "backup": "C:\\guandan-sampler\\work\\guanzero\\recovery-io48\\20261124-owner-extension"
+  },
+  "verifiedLive": {
+    "samples": [
+      {
+        "observedAt": "2026-11-24T17:00:33.6061341+00:00",
+        "learner": {
+          "step": 1004405,
+          "usedSamples": 3214096000,
+          "loss": 3.026074368953705,
+          "updatesPerSecond": 0.6968590914419163,
+          "device": "cuda",
+          "deviceName": "NVIDIA GeForce RTX 4070",
+          "torch": "2.11.0+cu128",
+          "precision": "FP32",
+          "objective": "adp",
+          "updatedAt": 1795539631.011641,
+          "error": null,
+          "pid": 104776,
+          "indexedShards": 4,
+          "pauseSampling": false
+        },
+        "inference": {
+          "pid": 105320,
+          "device": "cuda",
+          "requests": 35590,
+          "batches": 1537,
+          "maxBatch": 32,
+          "error": null,
+          "batchWaitMilliseconds": 4805.404199694749,
+          "computeMilliseconds": 6558.854599890765,
+          "ready": true,
+          "updatedAt": 1795539631.8270743,
+          "averageBatch": 23.155497722836696,
+          "requestsPerSecond": 2077.035865446069
+        },
+        "watchdog": {
+          "pid": 99784,
+          "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+          "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+          "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+          "plannedEnd": "2026-11-27T17:00:00.000Z",
+          "restarts": 1,
+          "phase": "healthy",
+          "step": 1004402,
+          "supervisorPid": 103080,
+          "updatedAt": "2026-11-24T17:00:29.130Z",
+          "error": null,
+          "resumedFromStep": 1004397,
+          "lastRestartAt": "2026-11-24T17:00:12.779Z"
+        },
+        "supervisorPid": 103080,
+        "actorCount": 32,
+        "freshNewActorCount": 32,
+        "taskState": "Running"
+      },
+      {
+        "observedAt": "2026-11-24T17:00:43.0992125+00:00",
+        "learner": {
+          "step": 1004413,
+          "usedSamples": 3214121600,
+          "loss": 3.0242478394508363,
+          "updatesPerSecond": 0.7129827701032111,
+          "device": "cuda",
+          "deviceName": "NVIDIA GeForce RTX 4070",
+          "torch": "2.11.0+cu128",
+          "precision": "FP32",
+          "objective": "adp",
+          "updatedAt": 1795539641.9725733,
+          "error": null,
+          "pid": 104776,
+          "indexedShards": 3,
+          "pauseSampling": false
+        },
+        "inference": {
+          "pid": 105320,
+          "device": "cuda",
+          "requests": 60430,
+          "batches": 2547,
+          "maxBatch": 32,
+          "error": null,
+          "batchWaitMilliseconds": 7829.559499776224,
+          "computeMilliseconds": 10626.302900665905,
+          "ready": true,
+          "updatedAt": 1795539641.891981,
+          "averageBatch": 23.725952100510405,
+          "requestsPerSecond": 2221.7044740257684
+        },
+        "watchdog": {
+          "pid": 99784,
+          "run": "C:\\guandan-sampler\\work\\guanzero\\guanzero-adp-io48",
+          "runtime": "C:\\guandan-sampler\\work\\guanzero-io48-runtime",
+          "commit": "af2a6835f9dde38c16a8465eb53cbfacfa9e1f52",
+          "plannedEnd": "2026-11-27T17:00:00.000Z",
+          "restarts": 1,
+          "phase": "healthy",
+          "step": 1004402,
+          "supervisorPid": 103080,
+          "updatedAt": "2026-11-24T17:00:29.130Z",
+          "error": null,
+          "resumedFromStep": 1004397,
+          "lastRestartAt": "2026-11-24T17:00:12.779Z"
+        },
+        "supervisorPid": 103080,
+        "actorCount": 32,
+        "freshNewActorCount": 32,
+        "taskState": "Running"
+      }
+    ],
+    "deadline": "2026-11-27T17:00:00.000Z",
+    "configSHA256": "913cbc1bd45c8cdd5c9b334bd6d5f9c4c272a6bdf86ffcfd01b4932e0e46b089",
+    "windowSHA256": "5773f6fff0a9192d2ac2dd5d9b42fc5bdbecb63940f3247f07df0cb50bc505db",
+    "scheduleSHA256": "881655cd6abbc930806965fe3950a84809f1268f5822cf62ef464177c7e29bd3",
+    "awakeHelperPids": [
+      92128,
+      97732
+    ]
+  },
+  "slots": [
+    {
+      "slot": 100,
+      "index": 5162,
+      "final": false,
+      "due": "2026-11-25T01:00:00.000Z"
+    },
+    {
+      "slot": 101,
+      "index": 5163,
+      "final": false,
+      "due": "2026-11-25T13:00:00.000Z"
+    },
+    {
+      "slot": 102,
+      "index": 5164,
+      "final": false,
+      "due": "2026-11-26T01:00:00.000Z"
+    },
+    {
+      "slot": 103,
+      "index": 5165,
+      "final": false,
+      "due": "2026-11-26T13:00:00.000Z"
+    },
+    {
+      "slot": 104,
+      "index": 5166,
+      "final": false,
+      "due": "2026-11-27T01:00:00.000Z"
+    },
+    {
+      "slot": 105,
+      "index": 5167,
+      "final": false,
+      "due": "2026-11-27T13:00:00.000Z"
+    },
+    {
+      "slot": 106,
+      "index": 5170,
+      "final": true,
+      "due": "2026-11-27T17:00:00.000Z"
+    }
+  ],
+  "latestVerifiedWebModel": {
+    "id": "045",
+    "step": 993002,
+    "sha256": "b1af58c0873af9a4e6ff6f3eb48f08ed0b694e9ff7bc28085e935da7af873290",
+    "record": "ai/research/evaluation/web-model-045.json",
+    "deployment": "https://github.com/stevensun1005/guandanai/actions/runs/45429254731"
+  },
+  "reports": "The Tuesday morning evaluation remains registered and publicly verified. Superseded final slot 5160 was not registered."
+}
