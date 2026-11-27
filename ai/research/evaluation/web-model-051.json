@@ -378,5 +378,53 @@
     "ai/research/evaluation/guanzero-1212517-development-v4-reason.json"
   ],
   "planArchive": "ai/research/evaluation/guanzero-1212517-development-v4-plan.json",
-  "defaultChoice": "029"
+  "defaultChoice": "029",
+  "deployment": {
+    "status": "success",
+    "workflow": "https://github.com/stevensun1005/guandanai/actions/runs/46028675214",
+    "commit": "29cd5346430bf6731ac6c576838ab89b2d2d5fbe",
+    "verifiedAt": "2026-11-27T15:58:48.453Z",
+    "publicURL": "https://stevensun1005.github.io/guandanai/models/bot-051.onnx",
+    "publicSHA256": "2f361bbd54045ad68901cc06e6b688afa8eb34ff4461cea1b4e019a4e223bbb8",
+    "bytes": 6346014,
+    "model": "051",
+    "version": "model-000001212517",
+    "step": 1212517,
+    "liveBrowser": {
+      "menu": [
+        [
+          "clint-rule",
+          "Clint规则机器人"
+        ],
+        [
+          "051",
+          "guanzero-adp-io48-1212517"
+        ],
+        [
+          "029",
+          "danMCai-v000061013"
+        ]
+      ],
+      "defaults": [
+        "029",
+        "029",
+        "029",
+        "029"
+      ]
+    },
+    "archivedGitBytesVerified": [
+      "ai/research/evaluation/guanzero-1212517-development-v4-plan.json",
+      "ai/research/evaluation/guanzero-1212517-development-v4-champion.json",
+      "ai/research/evaluation/guanzero-1212517-development-v4-reason.json"
+    ],
+    "trainingConfigUnchanged": true,
+    "trainingWindowUnchanged": true,
+    "publicRelease": {
+      "url": "https://github.com/stevensun1005/guandanai/releases/download/web-model-051/bot-051.onnx",
+      "sha256": "2f361bbd54045ad68901cc06e6b688afa8eb34ff4461cea1b4e019a4e223bbb8",
+      "bytes": 6346014,
+      "verifiedAt": "2026-11-27T15:51:46.773Z"
+    },
+    "attempt": 1
+  }
 }
