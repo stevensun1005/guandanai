@@ -4538,3 +4538,5 @@ Toronto11月27日12:00/index5170按新续训日历冻结，此后只使用同一
 ## 2026-11-27 GuanZero io48 收尾
 
 GuanZero io48 于多伦多时间 2026 年 11 月 27 日 12:00 按期停训。最终检查点为 1,224,281 步，本轮续训增加 219,884 步。完整模型、RMSprop、样本游标与最终 ONNX 对齐。最终评测使用 5170 槽和同一权重，网页证据记录在归档 052。 [停训证据](evaluation/guanzero-window-closeout-20261127.json)。
+
+1224281实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/46048235006)成功，线上Chrome实见 `guanzero-adp-io48-1224281`、3项菜单和四席029默认。公网bot-052.onnx为6346014字节，完整SHA `85dfb9593286624736f546db1576bfe989c0af3b828884866839a505e47e57fc` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。3份Git原始证据逐字节SHA核验通过；已核对续训配置及周五固定截止文件的完整SHA。
