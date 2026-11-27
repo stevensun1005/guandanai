@@ -4376,3 +4376,41 @@ Toronto11月25日20:00/index5164按新续训日历冻结，此后只使用同一
 发布归档048无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差0.0000019073486328125、动作不一致0；Node501通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。本批冻结时训练处于原配方续训中，截止为周五12:00。实际部署另见[发布回执](evaluation/web-model-048.json)。
 
 1102665实际部署确认：[Pages工作流](https://github.com/stevensun1005/guandanai/actions/runs/45825094483)成功，线上Chrome实见 `guanzero-adp-io48-1102665`、3项菜单和四席029默认。公网bot-048.onnx为6346014字节，完整SHA `904235d8fa1f0762873c00872d81cfdd300cc0ac8f63c38d0295e5c1309dd189` 与本批冻结计划、两组完整报告、原生/WASM及不可变Release一致。3份Git原始证据逐字节SHA核验通过；已核对续训配置及周五固定截止文件的完整SHA。
+
+### 网页模型 model-000001138986（归档 049） · 2026-11-27T01:03:59.631Z
+
+归档完整导出 `guanzero-adp-io48/model-000001138986`，SHA-256 为 `9cb9f86f0eec5bbfefef09df3ce23ff97ac47274eb9382e67b3575aa08228f42`。网页默认编号为 **029**；启用冠军菜单时，归档新检查点不会自动替换冠军。本发布未新增独立评测比赛，不代表棋力验收或胜率提高。既有开发评测仍按第 11 节保留。[发布证据](evaluation/web-model-049.json)。
+
+### 周四08:00开发评测与同权重发布：guanzero-adp-io48-1138986
+
+Toronto11月26日08:00/index5165按新续训日历冻结，此后只使用同一完整ONNX SHA `9cb9f86f0eec5bbfefef09df3ce23ff97ac47274eb9382e67b3575aa08228f42`。冠军029原网络与旧reason9001分开：reason仍用017/accept330＋原推断v1＋50秒搜索，纯网络对手为029/gate1，独立 `reason-base.onnx` 和各自的真实accept/完整SHA均核验。没有把9001改底座、把旧成绩转给029，也没有采用更新的latest。新源指纹b60766f仅用于本批reason；普通029评分沿用af2a683评测基线。
+
+| 对手              | 完整场 |  胜 |  负 |  平 | 每场得分 | 种子对簇95%区间 |
+| ----------------- | -----: | --: | --: | --: | -------: | --------------- |
+| 029原网络冠军     |    500 | 319 | 129 |  52 |    0.690 | [0.656, 0.726]  |
+| 旧9001（017底座） |    200 | 117 |  59 |  24 |    0.645 | [0.588, 0.703]  |
+
+冠军种子4216500000–4216500249，reason为前100个至4216500099；对内交换阵营，胜1/平0.5/负0每场得分与置信区间按独立种子对簇重算。与旧017对手的历史胜率不直接比较，也不把本批开发结果称为独立棋力验收。原始[冻结计划](evaluation/guanzero-1138986-development-v4-plan.json)、[029完整报告](evaluation/guanzero-1138986-development-v4-champion.json)、[旧reason完整报告](evaluation/guanzero-1138986-development-v4-reason.json)保留原始字节和逐场结果。实际reason统计（ms为毫秒，CPU墙钟受全机负载影响，不是平板性能测试）：
+
+```json
+{
+  "decisions": 86228,
+  "forced": 25908,
+  "baseOnly": 45269,
+  "midgame": 10402,
+  "endgame": 4649,
+  "minWorldsFallback": 14,
+  "budgetFallback": 10,
+  "knownCardsFallback": 0,
+  "changedFromChampion": 2737,
+  "inferences": 4455402,
+  "searchMs": 8136926.780000052,
+  "solverDeadlineCapped": 28,
+  "maxSearchMs": 50080.00150000118,
+  "searchesOver3s": 293,
+  "searchesOver10s": 106,
+  "searchesOver30s": 25
+}
+```
+
+发布归档049无胜率门槛，计划、两份报告、原生/WASM、Release贯通同一SHA。Chrome WASM16局面/49数值最大绝对误差0.0000010132789611816406、动作不一致0；Node501通过/36跳过、相关Python9项、格式/构建及本地真实菜单默认通过。当前底座defaultId=029、实际defaultChoice=029，GuanZero只轮换其自身菜单项。本批冻结时训练处于原配方续训中，截止为周五12:00。实际部署另见[发布回执](evaluation/web-model-049.json)。

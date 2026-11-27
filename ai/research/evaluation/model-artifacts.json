@@ -4193,6 +4193,18 @@
           "step": 1102665,
           "registeredAt": "2026-11-26T13:00:42.692Z"
         }
+      },
+      {
+        "id": "049",
+        "sha256": "9cb9f86f0eec5bbfefef09df3ce23ff97ac47274eb9382e67b3575aa08228f42",
+        "download": "https://github.com/stevensun1005/guandanai/releases/download/web-model-049/bot-049.onnx",
+        "source": {
+          "run": "guanzero-adp-io48",
+          "version": "model-000001138986",
+          "status": "experimental-not-heldout-accepted",
+          "step": 1138986,
+          "registeredAt": "2026-11-27T01:03:59.631Z"
+        }
       }
     ]
   },
@@ -7484,6 +7496,110 @@
         "searchesOver3s": 332,
         "searchesOver10s": 116,
         "searchesOver30s": 32
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-1138986-development-v4-champion.json",
+      "opponent": "champion",
+      "reportSHA256": "77a7b44d829acfac3d595a0e945a80c91213cb9430588a310ca945f72b99d2b0",
+      "protocolSHA256": "64a290d261568505cacaa6c32cd55a2cf0396f802b8f4790310e12a028f88dfd",
+      "completedAt": "2026-11-26T13:25:27.509Z",
+      "opponentPanel": "champion-reason-v4",
+      "pairs": 250,
+      "matches": 500,
+      "seedStart": 4216500000,
+      "seedEnd": 4216500249,
+      "modelSHA256": "9cb9f86f0eec5bbfefef09df3ce23ff97ac47274eb9382e67b3575aa08228f42",
+      "metrics": {
+        "matches": 500,
+        "wins": 319,
+        "losses": 129,
+        "draws": 52,
+        "matchWinRate": 0.638,
+        "matchScore": 0.69,
+        "rounds": 5352,
+        "roundWins": 2854,
+        "roundWinRate": 0.5332585949177877,
+        "averageUpgradePoints": 0.34641255605381166,
+        "confidence95": {
+          "matchWinRate": [
+            0.6,
+            0.678
+          ],
+          "matchScore": [
+            0.656,
+            0.726
+          ],
+          "roundWinRate": [
+            0.5200074446305603,
+            0.5471380471380471
+          ],
+          "averageUpgradePoints": [
+            0.28713968957871394,
+            0.40914158305462656
+          ]
+        }
+      }
+    },
+    {
+      "file": "ai/research/evaluation/guanzero-1138986-development-v4-reason.json",
+      "opponent": "reason",
+      "reportSHA256": "397ddc14386c5fe91da20eb5323dd0fdc3f575069b6af4dfb03fe7317d718fdd",
+      "protocolSHA256": "7c733adcec74cea6a82c7b53f0118d11592df51962172a30b8f79799f6cc4326",
+      "completedAt": "2026-11-26T15:25:30.366Z",
+      "opponentPanel": "champion-reason-v4",
+      "pairs": 100,
+      "matches": 200,
+      "seedStart": 4216500000,
+      "seedEnd": 4216500099,
+      "modelSHA256": "9cb9f86f0eec5bbfefef09df3ce23ff97ac47274eb9382e67b3575aa08228f42",
+      "metrics": {
+        "matches": 200,
+        "wins": 117,
+        "losses": 59,
+        "draws": 24,
+        "matchWinRate": 0.585,
+        "matchScore": 0.645,
+        "rounds": 2138,
+        "roundWins": 1178,
+        "roundWinRate": 0.5509822263797942,
+        "averageUpgradePoints": 0.32273152478952294,
+        "confidence95": {
+          "matchWinRate": [
+            0.52,
+            0.65
+          ],
+          "matchScore": [
+            0.5875,
+            0.7025
+          ],
+          "roundWinRate": [
+            0.5274988043998087,
+            0.5753616425571628
+          ],
+          "averageUpgradePoints": [
+            0.2137511693171188,
+            0.43908153701968133
+          ]
+        }
+      },
+      "searchStats": {
+        "decisions": 86228,
+        "forced": 25908,
+        "baseOnly": 45269,
+        "midgame": 10402,
+        "endgame": 4649,
+        "minWorldsFallback": 14,
+        "budgetFallback": 10,
+        "knownCardsFallback": 0,
+        "changedFromChampion": 2737,
+        "inferences": 4455402,
+        "searchMs": 8136926.780000052,
+        "solverDeadlineCapped": 28,
+        "maxSearchMs": 50080.00150000118,
+        "searchesOver3s": 293,
+        "searchesOver10s": 106,
+        "searchesOver30s": 25
       }
     }
   ],
